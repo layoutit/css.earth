@@ -31,8 +31,6 @@
     {
       "id": "shape-parameters",
       "path": "shape/model.json",
-      "expectedSha256": "509cd2c2cb337c878d899863649c084c1f41a48452208f85de03e0f6daac12cf",
-      "expectedBytes": 997,
       "origin": "https://doi.org/10.1051/0004-6361/202243090",
       "credit": "Lellouch et al. (2022), A&A 659, L1",
       "license": "Factual measurement transcribed from the cited publication; no text or figures reproduced",
@@ -51,8 +49,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 13236,
-      "expectedSha256": "cef29089ca7d761981778f44ebd022c2bc693bb04ee152b3f7d8d643724949b8",
       "origin": "https://doi.org/10.1051/0004-6361/202243090",
       "credit": "Lellouch et al. (2022), A&A 659, L1",
       "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
@@ -79,62 +75,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3347,
-      "expectedSha256": "90263daf70d78eaca13c59ef3829e6a56185d8ce8301b845c44017bb16f0140f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 454,
-      "expectedSha256": "6331f0005c02ec618d0599301d5807cc109d429321e1a3698e872a6dd07d5663"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 336,
-      "expectedSha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2778,
-      "expectedSha256": "fe0f85f7e192965bff1c7a06d54c6d4e7952a52184209fae9dfd3a825f1b0767"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 10784,
-      "expectedSha256": "ecacb19e898788b19099b05347889bf4c8e32a56953a76aee24f9d3e156dfc95"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7304,
-      "expectedSha256": "30f3104da9f1eb7e09ebf36164212f5dc7a5dd7f0117cf0de8a5e3cc635f132d"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6594,
-      "expectedSha256": "c112e2e2ef71513fd056d730ad0f1194247447d89dce9a0f8402f998ec059360"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/source-record.json",
-      "expectedBytes": 2789,
-      "expectedSha256": "e6a69b17ba74a40f4ec8bc2c6c77b3b6bb1f4c3fdaf921fe01ba1684c0063f31"
+      "path": "reference/source-record.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 2414,
-      "expectedSha256": "820e3a1b3fab1d5316d88189b62c003c91117913247d0473f56ed7170d72f8de",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

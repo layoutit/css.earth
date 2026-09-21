@@ -535,8 +535,6 @@
     {
       "id": "iapetus-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1010,
-      "expectedSha256": "8fccfe65cfd4bf0d3abe455f0efac04e5d59e0a7087225afb3ab095c09c1a49d",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -553,8 +551,6 @@
     {
       "id": "iapetus-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1155,
-      "expectedSha256": "953dd51ca0337a6f079478442274d3c37c3a4ae98368ddab9bad7f6c97814866",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -571,8 +567,6 @@
     {
       "id": "iapetus-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "7e60c18d01a9cbd70ec8e3be34b0453228f1da56c78029cf8f63c0401ecd993c",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -616,8 +610,6 @@
     {
       "id": "iapetus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 208,
-      "expectedSha256": "596dbeb6e3adb2d200b0ed818dc57a58465506f0d1730920560b961cd27eb256",
       "origin": "Repository-authored Iapetus solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -637,8 +629,6 @@
     {
       "id": "iapetus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 5646,
-      "expectedSha256": "eadf0f987f777fd7599092cf79a660eaaacac3e690500b299b2352ed53fb4aef",
       "origin": "Repository-authored Iapetus raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -656,8 +646,6 @@
     {
       "id": "iapetus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1427,
-      "expectedSha256": "009f286058b6b90b89d913b4a6fbcb6f02f0ce3cc7697775f59cd484f69a625f",
       "origin": "Repository-authored Iapetus geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -675,8 +663,6 @@
     {
       "id": "iapetus-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Iapetus celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -695,8 +681,6 @@
     {
       "id": "iapetus-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 362,
-      "expectedSha256": "05951987fa610bae8610360ba5054d84ce6b02b56864413630378d3876eee18c",
       "origin": "Repository-authored Iapetus presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -713,8 +697,6 @@
     {
       "id": "iapetus-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 678,
-      "expectedSha256": "05f1753e68b326eaffab453c5e1186985249cdfcceb801f54ddd971b48340c66",
       "origin": "Repository-authored Iapetus navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -731,8 +713,6 @@
     {
       "id": "iapetus-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2894,
-      "expectedSha256": "6a98a17c0b400ce592c4bb8bdfcb2ac2585e0437371ce0b0cbb0a6a9a94a2e7e",
       "origin": "Repository-authored Iapetus acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -750,8 +730,6 @@
     {
       "id": "iapetus-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12906,
-      "expectedSha256": "525a8be1ad12fb0efcd7ca2ac9ef4444de4b710ae53411a9f6efaab3cd9a4173",
       "origin": "Repository-authored Iapetus object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -769,76 +747,52 @@
   ],
   "documents": [
     {
-      "path": "observations/catalog.json",
-      "expectedBytes": 3235,
-      "expectedSha256": "bc3651d0d1c8c190d9fcb8e8956eab383d47666b6d8fced2fb3e362c0412852b"
+      "path": "observations/catalog.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2352,
-      "expectedSha256": "27adfdd57ef9603fd69b32d32a05d744dab63b7bd384dbe512077a33f312be18"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "cassini-ice/evidence/download-receipts.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 2833,
-      "expectedSha256": "db4b3366691ddc46df557bdea79a31f86a384652db8809b2216e9029c17ad266"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/evidence/registration.md",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 922,
-      "expectedSha256": "6754186ab44f6f4a3c68ed1bf5eca50578c2921410dd47e0f9934131bda7f800"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/iapetus-ice-absorption-observation.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 12145,
-      "expectedSha256": "0f3a78923380a4679f25c541e9ec64ef5b70783558e1b7a4f76220babaa01a9c"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/iapetus-ice-absorption-source-pixel.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 28195,
-      "expectedSha256": "3cf921d6f8440a8055c88512f5c5b0c00b23de4df3a2636f686234dda3fa29a8"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/iapetus-infrared-if-observation.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 12145,
-      "expectedSha256": "0f3a78923380a4679f25c541e9ec64ef5b70783558e1b7a4f76220babaa01a9c"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/iapetus-infrared-if-source-pixel.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 28195,
-      "expectedSha256": "3cf921d6f8440a8055c88512f5c5b0c00b23de4df3a2636f686234dda3fa29a8"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/iapetus-infrared-if.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 254889,
-      "expectedSha256": "9439aeb2324a1eac7d4d10536f9114754836351077c025572b3d4f379e650c89"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/preparation-receipt.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 34991,
-      "expectedSha256": "caae9516fbbc05d0ea7af45b5b8f96ab2577e8af3686367d9aca612863faec86"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/prepare.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 3838,
-      "expectedSha256": "9071d13e1ab44cba23ecaa06e6ef28620e319b129f72d9e11468a105cbd9654d"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "id": "iapetus-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 5210,
-      "expectedSha256": "2c2fdb2d4756abfe823d99f6a167b0c17ed17cfaf1f2f17fc368e7ec5b7be420",
       "origin": "Repository-pinned English Wikipedia lead summaries for 11 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

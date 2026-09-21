@@ -1520,8 +1520,6 @@
     {
       "id": "europa-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "d5e5e253118f000c810d782345862097e9614d5cad1a93cf7115c1617fa0b5f5",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -1830,8 +1828,6 @@
     {
       "id": "europa-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1005,
-      "expectedSha256": "b48ce7e198ad858dbc6ee2c2f8b26de2943c45cbfa06bdaad7491ad61094e698",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -1848,8 +1844,6 @@
     {
       "id": "europa-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1158,
-      "expectedSha256": "4e2a03705b9fa117bd9daa9fc5fda9563e4a1d40a757343f641c6fac6bce219e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1893,8 +1887,6 @@
     {
       "id": "europa-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 207,
-      "expectedSha256": "3c142523d6d66e4da6a3361fb8ec4ff98062f30fc38f295c2aaef1fa49e8db9a",
       "origin": "Repository-authored Europa solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1914,8 +1906,6 @@
     {
       "id": "europa-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 10414,
-      "expectedSha256": "b75399611c1d2059194904191e0e704af58f7ad80f10aae5f035c4975f6c0824",
       "origin": "Repository-authored Europa raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1933,8 +1923,6 @@
     {
       "id": "europa-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1599,
-      "expectedSha256": "4f1777df630ee20c73507fbd3f7be61f302421a46fcb7755841904193bde4812",
       "origin": "Repository-authored Europa geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1952,8 +1940,6 @@
     {
       "id": "europa-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Europa celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1972,8 +1958,6 @@
     {
       "id": "europa-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 330,
-      "expectedSha256": "e688a2fc4afd8b205a34e7769384b9d56c4c7ad13e33befc1384119321d42c41",
       "origin": "Repository-authored Europa presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1990,8 +1974,6 @@
     {
       "id": "europa-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 403,
-      "expectedSha256": "52e1b280781ced6b9d63834b36b796779d8e74536443a63afc3754502e7bc9a2",
       "origin": "Repository-authored Europa navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2008,8 +1990,6 @@
     {
       "id": "europa-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 120078,
-      "expectedSha256": "a1dc25de8986538341918c4358c6d570947b37f320b6df3eb486696e416cd151",
       "origin": "Repository-authored Europa acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -2027,8 +2007,6 @@
     {
       "id": "europa-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14877,
-      "expectedSha256": "3a1b5253bc33b4062974f7dbf69233992277ee2dcdc9f314aa2bb2ed39699eec",
       "origin": "Repository-authored Europa object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -20528,20 +20506,14 @@
   "documents": [
     {
       "path": "wms-capabilities.xml",
-      "expectedBytes": 6425,
-      "expectedSha256": "31ef39932ea82df444f3a42e69842b438ce51f0226ff4298655d970a37607247",
       "purpose": "USGS Europa WMS metadata captured 2026-09-06."
     },
     {
       "path": "color/collection.json",
-      "expectedBytes": 3087,
-      "expectedSha256": "a281b3c60701b472dd24f49c2d6380a2270a2c74c50cd7ffcd73d3cb9912cd70",
       "purpose": "USGS STAC collection metadata, CC0 license, and provenance captured 2026-09-06."
     },
     {
       "path": "photometry/horizons-sun.json",
-      "expectedBytes": 9158,
-      "expectedSha256": "0af0a446aa73341e382d3d006a8c9c1a0e6de8c1b2f0f81d33c2dd69bbac7cf1",
       "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
       "kind": "source-document",
       "title": "JPL Horizons Sun vectors relative to Europa",
@@ -20561,8 +20533,6 @@
     },
     {
       "path": "photometry/horizons-galileo.json",
-      "expectedBytes": 9721,
-      "expectedSha256": "0a4ca5c56c9a50be0a206701773b2b35715d4aad3120f587b3dffabf5d710113",
       "purpose": "JPL Horizons geometric ICRF position vectors relative to Europa at the controlled image capture times. Full request and response captured 2026-09-06; units km, epochs JDTDB.",
       "kind": "source-document",
       "title": "JPL Horizons Galileo vectors relative to Europa",
@@ -20583,9 +20553,7 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2811,
-      "expectedSha256": "e2d4bebd12079767fccaf60c513db25cd705cc8236048947e13034fdb333e206"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "usgs-europa-yelland-ridges-yelland-ridges-tif",
@@ -20716,8 +20684,6 @@
     {
       "id": "europa-dtm-controlled-dtms-stac-items-json",
       "path": "science/controlled-dtms/stac-items.json",
-      "expectedBytes": 62800,
-      "expectedSha256": "c310d5c7266dd8b329e4eddfe201e60bb23a0eacb3eadb71288e5b839fc0a702",
       "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
       "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
       "license": "CC0-1.0 source and repository-authored validation metadata",
@@ -20730,8 +20696,6 @@
     {
       "id": "europa-dtm-controlled-dtms-intake-downloads-json",
       "path": "science/controlled-dtms/intake-downloads.json",
-      "expectedBytes": 2777,
-      "expectedSha256": "9c08ca79c6a88fc7dd40483b39114b131592153eedef010f9f5e0029b7e999f9",
       "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
       "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
       "license": "CC0-1.0 source and repository-authored validation metadata",
@@ -20744,8 +20708,6 @@
     {
       "id": "europa-dtm-Agenor-stac-item-json",
       "path": "science/controlled-dtms/Agenor/stac-item.json",
-      "expectedBytes": 24543,
-      "expectedSha256": "9068d301438798ba37b621856b6f3a63366053865ae4a0d3540e2cbc437afc89",
       "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
       "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
       "license": "CC0-1.0 source and repository-authored validation metadata",
@@ -20758,8 +20720,6 @@
     {
       "id": "europa-dtm-Yelland_Ridges-stac-item-json",
       "path": "science/controlled-dtms/Yelland_Ridges/stac-item.json",
-      "expectedBytes": 17931,
-      "expectedSha256": "d81288e39040220c52958dc6d5a99e5322e899c104174e5d0e120961ec6deec8",
       "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
       "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
       "license": "CC0-1.0 source and repository-authored validation metadata",
@@ -20772,8 +20732,6 @@
     {
       "id": "europa-dtm-Agenor-value-anchors-json",
       "path": "science/controlled-dtms/Agenor/value-anchors.json",
-      "expectedBytes": 2003,
-      "expectedSha256": "4602a9b33a153269eb819e826c2b5ef7ad3bd662c9e0f47514a3c05f0843c3a4",
       "origin": "https://stac.astrogeology.usgs.gov/docs/data/jupiter/europa/europa_controlled_usgs_dtms/",
       "credit": "USGS Astrogeology source metadata; cssEarth intake/validation",
       "license": "CC0-1.0 source and repository-authored validation metadata",
@@ -20809,42 +20767,28 @@
       "expectedSha256": "2b6f1a8884cb805c142e45731788b7bfe13629169bc8bfff832f09d619269be8"
     },
     {
-      "path": "geology/prepare-grid.json",
-      "expectedBytes": 1900,
-      "expectedSha256": "3eebb49ba3b25c1875dbc0c24c283c52216cb22e7245cd19feceb64fdac4dd1a"
+      "path": "geology/prepare-grid.json"
     },
     {
-      "path": "geology/europa-geologic-units.json",
-      "expectedBytes": 1694,
-      "expectedSha256": "b7bb810a05ffc19300285566ebfdd864cbfeba8880d34aecfe1ce9a3bbfd250f"
+      "path": "geology/europa-geologic-units.json"
     },
     {
-      "path": "nims/europa-nims-composite.json",
-      "expectedBytes": 1271,
-      "expectedSha256": "9e434736752ce6f3ca081350fd3c6c0fde65dd044c1f28f987f7af86aa14f3ab"
+      "path": "nims/europa-nims-composite.json"
     },
     {
-      "path": "nims/prepare-composite.json",
-      "expectedBytes": 3480,
-      "expectedSha256": "ba7361a82e896d038f287b19ece6ec805bf5d931437466aea63a37d6d0f6eecd"
+      "path": "nims/prepare-composite.json"
     },
     {
       "path": "geology/GeoUnits_FINAL.shp.xml",
-      "purpose": "Published B6 GIS metadata or original map symbols.",
-      "expectedBytes": 18442,
-      "expectedSha256": "ed5cf0b58d3ec29d5920964eac64a1c90b8f99d867c703ac53f2a88d29ae954b"
+      "purpose": "Published B6 GIS metadata or original map symbols."
     },
     {
       "path": "geology/GeoUnits_FINAL.lyrx",
-      "purpose": "Published B6 GIS metadata or original map symbols.",
-      "expectedBytes": 34411,
-      "expectedSha256": "dd3b5237948c13a7c635af1220811e2a7fd4c70ede54edf9d8ce8b9662ed95fd"
+      "purpose": "Published B6 GIS metadata or original map symbols."
     },
     {
       "id": "europa-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 5228,
-      "expectedSha256": "0ef4c7c2a3671e2fd7508ed2037d46b730e075080b8c40d851aa875bacb0e325",
       "origin": "Repository-pinned English Wikipedia lead summaries for 12 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -20874,8 +20818,6 @@
     },
     {
       "path": "composition/model-recipe.json",
-      "expectedBytes": 952,
-      "expectedSha256": "ac4f528953750429a1a78d19040e765fbb75a9a68341ba670369af199049fb21",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
@@ -20892,8 +20834,6 @@
     },
     {
       "path": "composition/reflectance-recipe.json",
-      "expectedBytes": 452,
-      "expectedSha256": "351d7cd6018fd6200e1e0beff607ec668105acc6e8a6fbf97d9d4dbf809717ce",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."

@@ -41,8 +41,6 @@
       }
     },
     {
-      "expectedBytes": 65105,
-      "expectedSha256": "938ad59f72c9a5570ead358b70a086458c8a829d0594ab08fd23b27ea1e4d10d",
       "id": "uniform-disc-sphere",
       "path": "shape/uniform-disc.tab",
       "origin": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=pi1+Gru",
@@ -143,8 +141,6 @@
       }
     },
     {
-      "expectedBytes": 6418,
-      "expectedSha256": "2d5f202433a2200dc4b1696d1d0e501b52d88be60ab02156ad644371ea936326",
       "id": "pi1-gruis-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the PIONIER reconstruction cast onto the reference sphere by the surface-observation route, polar bands, off-limb plate",
@@ -162,8 +158,6 @@
       ]
     },
     {
-      "expectedBytes": 1874,
-      "expectedSha256": "660c775f6d8540d690d5b8397018927523761f93f7b3489cfd3ae699b67d9b48",
       "id": "pi1-gruis-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -181,8 +175,6 @@
       ]
     },
     {
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "id": "pi1-gruis-preparation-celestial",
       "path": "preparation/celestial.json",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
@@ -199,8 +191,6 @@
       ]
     },
     {
-      "expectedBytes": 104,
-      "expectedSha256": "0723132d8aa3aa40dc916f96b30445a8fa8ef4c3a1b5ef832a0df3f273be5496",
       "id": "pi1-gruis-preparation-presentation",
       "path": "preparation/presentation.json",
       "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
@@ -217,8 +207,6 @@
       ]
     },
     {
-      "expectedBytes": 221,
-      "expectedSha256": "8d8aeb3635bf0f5456ee8dd36ff48c551170f766145591219ff83d5eb1782cd5",
       "id": "pi1-gruis-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "origin": "Repository-authored scene recipe: fitted radius 219,710,723 km, camera plan so the photographed hemisphere faces the camera",
@@ -323,8 +311,6 @@
   ],
   "generatedIntermediates": [
     {
-      "expectedBytes": 84260,
-      "expectedSha256": "86a78e46a1d1704e87c7b2578678342536f62321196b2db47139f1a7e2b62af7",
       "id": "reconstruction-context-marker",
       "path": "presentation/context.png",
       "origin": "https://oidb.jmmc.fr/",
@@ -348,8 +334,6 @@
   ],
   "documents": [
     {
-      "expectedBytes": 6489,
-      "expectedSha256": "53374eabc116c5e78e02a7be7432775a079052a71ed9cd7d95f4d045879696c4",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -357,8 +341,6 @@
       }
     },
     {
-      "expectedBytes": 1691,
-      "expectedSha256": "c192c41f3bba636858ad612ba3dcb384577a8198c1571efc25fd4c32fee22c68",
       "path": "measurements.json",
       "sourceBinding": {
         "kind": "local",
@@ -366,33 +348,21 @@
       }
     },
     {
-      "expectedBytes": 915,
-      "expectedSha256": "bd2975fc582cda33687560dc2d301f1acd80c8e43b39a16cc169dbcb762d4d90",
       "path": "preparation/acquisition.json"
     },
     {
-      "expectedBytes": 446,
-      "expectedSha256": "156de2fdcb050d44a0bcaa203239892036baf7546d59c956b1c8fa838f30b3c4",
       "path": "preparation/navigation.json"
     },
     {
-      "expectedBytes": 1091,
-      "expectedSha256": "22f0ef21ecbf57cf63585daf3e88afa53ec1832e23237cb06e4a4a7c5bd2c86a",
       "path": "preparation/rotation.json"
     },
     {
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
       "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "expectedBytes": 3266,
-      "expectedSha256": "6f88d7baf9dddaa893578a967f0023de1c260b488b74d3e1e4aa2dcdc4bdb2e0",
       "path": "presentation/title-mark.json"
     },
     {
-      "expectedBytes": 2006,
-      "expectedSha256": "5ce1392ccdafc80ea6041589fa40d5a7076b4772bb47b5ea3c61d26df72af629",
       "path": "reference/squeeze-command.txt",
       "sourceBinding": {
         "kind": "local",
@@ -400,8 +370,6 @@
       }
     },
     {
-      "expectedBytes": 141120,
-      "expectedSha256": "ca8a3d83680141311274c16e3a52ae2b4bc5493d4551555ddd3b99f6db55a84a",
       "path": "observations/pi1-gruis-pionier-2014-09-squeeze.fits",
       "sourceBinding": {
         "kind": "local",
@@ -410,8 +378,6 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 291968,
-      "expectedSha256": "c7371d00b29e5087dd9445e7d9cd7f8618f5163acb3783a54652fcd4d3f69473",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /pi1-gruis/ with the default camera, Chrome via Playwright at 1200 by 800, taken 2026-09-16 after preparation."

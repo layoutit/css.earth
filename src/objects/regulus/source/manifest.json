@@ -4,8 +4,6 @@
     {
       "id": "regulus-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1484,
-      "expectedSha256": "10774d6f4c6bb6a29c95bc26918b359d095d893e82f148954d7d4910d78366bc",
       "origin": "https://arxiv.org/abs/1105.0740",
       "credit": "Che et al. (2011), ApJ 732, 68",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "regulus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2953,
-      "expectedSha256": "44f4001cb538ffcbf0170ab4ae43733fdfccb50c1bef8bfe2806eb92c450773e",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "regulus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1695,
-      "expectedSha256": "86971936352be158c0ef04c07fa0c382b149cb733984d7e110108d858ac3b221",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "regulus-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "regulus-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 102,
-      "expectedSha256": "8f301f52dd4c47910f1588a34dadbe6782309be451f8a79d88ebbbfe12aeb520",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "regulus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 214,
-      "expectedSha256": "be93c19707eb933c06f72e4b9eb240daf66c4d777c7b683d91d6deae863a06bf",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -255,8 +243,6 @@
     {
       "id": "regulus-roche-von-zeipel",
       "path": "photometry/gravity-darkening.json",
-      "expectedBytes": 1563,
-      "expectedSha256": "0a326009466a54d9a5ca70fed7ee33fb7d21d0720d4a7d32bed72d3cbb308459",
       "origin": "https://arxiv.org/abs/1105.0740",
       "credit": "Che et al. (2011), Colder and Hotter: Interferometric imaging of beta Cassiopeiae and alpha Leonis",
       "license": "Factual numerical measurements; source attribution retained",
@@ -305,8 +291,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 32927,
-      "expectedSha256": "97ba107204eea5a7d15a9cff9e73a22a8e9fa7ee923e4365493de126d4d81cbb",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -333,37 +317,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3064,
-      "expectedSha256": "f586d6bd21a440dd358c2b0725e79993720ecbf68d9a1de1022b9902a1e60f8e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1608,
-      "expectedSha256": "104f93cb73cd7a72f1032ca73a369cb789a86751b9e77dbb000a48e3272951ed"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "57520548e85e868051286eaa978c9074d4d71e67b52d9551891bd1219cfa04e6"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1041,
-      "expectedSha256": "6c20fd5f8ec7266c013434b6aa5b906a97a63c24b857901124d0c6cb5a922b45"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4029,
-      "expectedSha256": "26bee1a9fa063ca7fcf9563056f917956d6cb446a50eb2c696ba7a5d68780994"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

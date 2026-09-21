@@ -59,8 +59,6 @@
         "referenceRadiusMeters": 531514800000
       },
       "coverage": "A sphere of the published radius: the reference surface the interferometric image is cast onto, not a measured shape. The photosphere of a red supergiant has no sharp limb.",
-      "expectedBytes": 65105,
-      "expectedSha256": "943a0a8e6d43c6fffe522995a13e6dfaefc4ad1b246a0dd7ac1fd6cc81bbad58",
       "recipe": {
         "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
@@ -1124,8 +1122,6 @@
     {
       "id": "betelgeuse-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 14951,
-      "expectedSha256": "ac8355b6b9c1ce085dbaba654aa75d5e9a760f76e8d2ee91f4d7cb349c82e4b8",
       "origin": "Repository-authored raster recipe: the MATISSE reconstruction cast onto the reference sphere by the surface-observation route, polar bands, transparent off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1143,8 +1139,6 @@
     {
       "id": "betelgeuse-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1840,
-      "expectedSha256": "2ba61f394c3860f8ebc7ee7ac2d08f90c516b238acd45ff9ffdaf6f080778d2c",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -1162,8 +1156,6 @@
     {
       "id": "betelgeuse-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -1180,8 +1172,6 @@
     {
       "id": "betelgeuse-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 105,
-      "expectedSha256": "8aa13c75fa69035e0b2e5ba0de9b42b65ac02abac2f4d9a6ca89c692a083d874",
       "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
       "sourceBinding": {
         "kind": "local",
@@ -1198,8 +1188,6 @@
     {
       "id": "betelgeuse-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 222,
-      "expectedSha256": "fdf5c196325567f49fd6a0b8b37b7e307178f43a8514a0a3b037ebc4f383f251",
       "origin": "Repository-authored scene recipe: Joyce et al. (2020) radius 531,514,800 km, camera plan (defaultZoom 1.25, initial pitch 10, yaw 180 so the photographed hemisphere faces the camera)",
       "sourceBinding": {
         "kind": "local",
@@ -6982,8 +6970,6 @@
         "reconstruction-input",
         "reconstruction-check"
       ],
-      "expectedBytes": 135360,
-      "expectedSha256": "e4f41d2aba17736ff1fca5e819d60eaf3d38a8e784f6fc2998d587b0c682bcbd",
       "recipe": {
         "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
@@ -7047,8 +7033,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 131002,
-      "expectedSha256": "a46a8b17d4bf4e766206f90d9178213cb5be9bdc39ce152a645c62481296502f",
       "recipe": {
         "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
@@ -7071,8 +7055,6 @@
         "reconstruction-input",
         "reconstruction-check"
       ],
-      "expectedBytes": 446400,
-      "expectedSha256": "51603fd0bc07483ceb473934f3ae197b7b90e084acd185ec7c724a428eeb0c3f",
       "recipe": {
         "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
@@ -7219,8 +7201,6 @@
         "reconstruction-input",
         "reconstruction-check"
       ],
-      "expectedBytes": 195840,
-      "expectedSha256": "f3ff166d8b1d41e326e50daf5216963d01b08e03cb9d5726ef6a7c133328c7f7",
       "recipe": {
         "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
         "inputs": [
@@ -7298,8 +7278,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 18006,
-      "expectedSha256": "4f6e473ada134d72bd818a5b58f72dc3900acea8379fb63e4bef82914019d054",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -7307,42 +7285,28 @@
     },
     {
       "path": "measurements.json",
-      "expectedBytes": 1432,
-      "expectedSha256": "356ddf7ba328309109ad6021d267f315cc1f4eab72c5475df751f5b04b64da8a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Adopted angular diameter, distance and radius with their sources."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 83255,
-      "expectedSha256": "b5ab212bf2744d8f98fcfdfc240cd3195501610f20d34d6e42d64949d651b0c2"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "7e27347fe41c619cdb9a815b6840436d9a5bbdb422c6fb6369a09f192f3d1bdc"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1270,
-      "expectedSha256": "3ecf68dfdf2cc53d127efc09ba334ebad164c526a6955173c9ca4de725ef4828"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 6362,
-      "expectedSha256": "0ff55e886df1994f9b979602f87ed3a0018213eabe3ca7d652150a7d618eb342"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/squeeze-command.txt",
-      "expectedBytes": 1875,
-      "expectedSha256": "5a878a0041232e07801206384e1505424774912fc3f25f11d43f14a680630439",
       "sourceBinding": {
         "kind": "local",
         "reason": "The exact reconstruction build and command."
@@ -7350,8 +7314,6 @@
     },
     {
       "path": "reference/reconstruction-comparison.png",
-      "expectedBytes": 171021,
-      "expectedSha256": "80733d086c39ebf2c2e6eac67530f81a00ab161da32fccbfb47b1d965feaea6a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence figure: the published February 2020 image beside three SQUEEZE reconstructions of the pinned visibilities (entropy 10, entropy 1, total variation 1), all convolved to the 4 mas beam."
@@ -7359,8 +7321,6 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 1138575,
-      "expectedSha256": "c2e63094ece46c91ec19db42c216f9b40159f38f1a022f816d5233f528a211bd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /betelgeuse/ with the default camera, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after preparation."
@@ -7368,8 +7328,6 @@
     },
     {
       "path": "reference/stellar-locators.png",
-      "expectedBytes": 285580,
-      "expectedSha256": "179fa2b048a95d87c4fae2c0ee4b85e15823eab0d04e0cc28389b5951dc15d3a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /sun/ with the world camera 300 pc above the Sun-Betelgeuse midpoint, Chrome via Playwright at 1440 by 1000, taken 2026-09-16 after the locator change."
@@ -7377,8 +7335,6 @@
     },
     {
       "path": "observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
-      "expectedBytes": 141120,
-      "expectedSha256": "372ed3278212fc3a51788e2c695b58d35108d91e3fcda80213b8d440af581dd6",
       "sourceBinding": {
         "kind": "local",
         "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels, the input to the beam convolution and the image the reconstruction test fits to the visibilities; not displayed."
@@ -7386,8 +7342,6 @@
     },
     {
       "path": "observations/betelgeuse-matisse-2018-12-continuum-squeeze.fits",
-      "expectedBytes": 141120,
-      "expectedSha256": "85d316de2730316a2fc3452b1f085aaaae6ac76f9aba73ce2fb93751f403c1ee",
       "sourceBinding": {
         "kind": "local",
         "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels from image-star.mts with the season betelgeuse-matisse-2018-12, the input to the beam convolution; not displayed."
@@ -7395,8 +7349,6 @@
     },
     {
       "path": "observations/betelgeuse-matisse-2020-12-continuum-squeeze.fits",
-      "expectedBytes": 141120,
-      "expectedSha256": "55fb16b0fd81fdd0cc356657fe3b201405bb8265888b947a9b5cf122ddb3b880",
       "sourceBinding": {
         "kind": "local",
         "reason": "SQUEEZE's raw posterior mean at 0.78 mas pixels from image-star.mts with the season betelgeuse-matisse-2020-12, the input to the beam convolution; not displayed."

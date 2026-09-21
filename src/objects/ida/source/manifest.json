@@ -512,8 +512,6 @@
     {
       "id": "ida-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 990,
-      "expectedSha256": "d96ef7584c4b486ea702c078aa810d462de615c754769927bc5f88907f928783",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -530,8 +528,6 @@
     {
       "id": "ida-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1079,
-      "expectedSha256": "49f85bf7b98243420426344c3d13dc2db8fec7e406e9ba2337b23e5adf9a8179",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -548,8 +544,6 @@
     {
       "id": "ida-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 182,
-      "expectedSha256": "bad74d5f1ea1789831d76107434625983cb04cc584916c402cdd56d43140749c",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -767,8 +761,6 @@
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/ast-sat.thomas.shape-models_V1_0/data/243idam.fit",
       "credit": "NASA/JPL/Galileo SSI; P. C. Thomas and colleagues",
       "license": "Public mission scientific data; retain attribution and source notices.",
-      "expectedBytes": 81982,
-      "expectedSha256": "80f7026d8a229c3dd26719ab0fc7ff926276959deea98c4edcbe1e7f9fc570d5",
       "consumers": [
         "navigation"
       ],
@@ -791,109 +783,71 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9079,
-      "expectedSha256": "52ed5367323148669abbe43ffb19f449ae75c67dcc29deaba8a20fb9869dfd49",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 8369,
-      "expectedSha256": "6c5d6337b561e4df484aebc28abd1ad97b141bdb10dda8e5e082616f23dcaf9b"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 440,
-      "expectedSha256": "71617b488cd7122b11a5b0fc18dd5cdb8aa8e8ae09393fb9ba60888004af2fb3"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 412,
-      "expectedSha256": "e9f1952a6c593ecbad2d0a8a544307ac64f75334db061d56ea72d77a31945ba5"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 12707,
-      "expectedSha256": "c2fef198513f3b9ee08d6ef564d0cb87ac82f85d36918d737fee14a6e8ed35d8"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2284,
-      "expectedSha256": "9d069652a17dc41f374dce86b05979f8b4914c343742dee33bc3e0cdf370faa9"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/243ida.xml",
-      "expectedBytes": 5886,
-      "expectedSha256": "6cf24f749a791938b7d634dfc1554cc13f1ff3ce4b2b8b93f2174bdd51eeecd0"
+      "path": "reference/243ida.xml"
     },
     {
-      "path": "reference/243idam.xml",
-      "expectedBytes": 7458,
-      "expectedSha256": "917dabc37a1a6c3809e063b32fcedc5674b33c6a86a58ef8f49fd5a8d1a24318"
+      "path": "reference/243idam.xml"
     },
     {
-      "path": "reference/calibrated-ssi-bundle-description.txt",
-      "expectedBytes": 7968,
-      "expectedSha256": "d8ab98d85239f906579328bed59af4f5179754f85e0cc3fa9a1606d00c5520bf"
+      "path": "reference/calibrated-ssi-bundle-description.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1285,
-      "expectedSha256": "f4b5b683d611db68de29f4bfbecb4577e29bc29c8ae82b81850f3d9fd1ce7439"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/pck00007.tpc",
-      "expectedBytes": 90332,
-      "expectedSha256": "ab7fd4ce7d34fe2c90217cb838b1f471f88d08308a521c86deefe271586ae6a0"
+      "path": "reference/pck00007.tpc"
     },
     {
       "path": "reference/calibrated-registration.json",
-      "purpose": "Registration check profile for the archived camera and source mosaic.",
-      "expectedBytes": 634,
-      "expectedSha256": "0dcdb41d248be6b4f35e6b8985e7965792f19b2c23af0606a06e7f430707c7f0"
+      "purpose": "Registration check profile for the archived camera and source mosaic."
     },
     {
       "path": "reference/calibrated-registration-results.json",
-      "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit.",
-      "expectedBytes": 3900,
-      "expectedSha256": "4f36176a42f00e89addec3a68f92a0bf411f776297dfbd7144849f68eb13a444"
+      "purpose": "Reproducible checks of the archived camera against the pinned Thomas mosaic; no local fit."
     },
     {
       "path": "reference/registration-202560500.json",
-      "purpose": "Independent checks of the archived image-to-shape registration.",
-      "expectedBytes": 611,
-      "expectedSha256": "8fe19fc97c0a2677ddaea051f6ed4cdd174097f9724b789cf7085062f239f4d4"
+      "purpose": "Independent checks of the archived image-to-shape registration."
     },
     {
       "path": "reference/mosaic-registration-results.json",
-      "purpose": "Measured, unfitted registration checks for the added Galileo observation.",
-      "expectedBytes": 3879,
-      "expectedSha256": "bbabb5e40ea58c5c74cb85ed1d8138b4d2b381425756cb9a312b5289ab581b6c"
+      "purpose": "Measured, unfitted registration checks for the added Galileo observation."
     },
     {
       "path": "preparation/photometry.json",
-      "expectedBytes": 521,
-      "expectedSha256": "2fd6c1c3ecb63954fbcba458ef260e0c1d5fbe7b8f029f4c85474dc810188666",
       "purpose": "Ida parent point photometry and the original JPL SBDB response."
     },
     {
       "path": "preparation/sbdb-photometry.json",
-      "expectedBytes": 5362,
-      "expectedSha256": "1639b5b74d5b4f66ffcf5d8b0ce8c3bb249bc1bd6f27b69cc747f662f38a69ed",
       "purpose": "Ida parent point photometry and the original JPL SBDB response."
     },
     {
       "id": "ida-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1458,
-      "expectedSha256": "5e082892cc749c1ed62f02f8982494cdc78926ed5b19aa4db2256dc787dcdcca",
       "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -914,8 +868,6 @@
     },
     {
       "path": "photometry/helfenstein-1996-hapke.json",
-      "expectedBytes": 589,
-      "expectedSha256": "99f9e82b31e460a3f94f445a20d08a71bcae183cfa2d8d1b8210b54afc17c722",
       "purpose": "Published Hapke photometric model of Ida at 0.55 um, used to normalize the Galileo photograph mosaic.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -934,8 +886,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5569,
-      "expectedSha256": "865d4e33528a1cd321ee472a87244c87b076d47cb1e0d680366b87dc8730561f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

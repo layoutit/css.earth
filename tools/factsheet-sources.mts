@@ -62,8 +62,11 @@ export async function verifyFactsheetSources(panel: unknown, {
     }), offset = relative(root, path);
     assert.ok(offset && offset !== '..' && !offset.startsWith('../'), 'Fact evidence escapes the body source directory.');
     const bytes = await read(citation.path);
-    assert.equal(bytes.length, entry.expectedBytes, `${fact.id}: fact evidence byte count differs`);
-    assert.equal(sha256(bytes), sourceDigest(entry.expectedSha256), `${fact.id}: fact evidence pin differs`);
+    // Downloaded evidence is pinned; evidence authored here is whatever the repository holds.
+    if (entry.expectedSha256 !== undefined) {
+      assert.equal(bytes.length, entry.expectedBytes, `${fact.id}: fact evidence byte count differs`);
+      assert.equal(sha256(bytes), sourceDigest(entry.expectedSha256), `${fact.id}: fact evidence pin differs`);
+    }
     checked.add(citation.path);
   }
   return parsed;

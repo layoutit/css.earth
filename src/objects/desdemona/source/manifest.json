@@ -103,47 +103,31 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3022,
-      "expectedSha256": "73923f7928a9b25a8578e060a58dd872af7a1400fcf1146e6e2756b66c32afdc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1430,
-      "expectedSha256": "0ad6b38500494625cff640cda81f2ca69d6dd9e81f2c710ae21514d16f1a33cf"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 507,
-      "expectedSha256": "ff6ff9cdd9fc09e349bd461ff993bfa719ff7d7163fc1365d1f3b92da3b2abe4"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "e875c020afe4a14c5a8aa2f94571a56db5025fbbb37592fac482fd9da5004e01"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 796,
-      "expectedSha256": "4e39f441c146a6d78b573ab2966785acb53bb265d70131390f6385f44f5965f8"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2236,
-      "expectedSha256": "e19362438145a602ac3f431beea645b7196e8d71233459d6db4515c73d74db12"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 6444,
-      "expectedSha256": "ba4fffcb73ad9fc38e58406c77d31e8720eda4c3391a7cb7ba79144b1954f9cb"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "shape/pck00011.tpc",
@@ -151,39 +135,25 @@
       "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
-      "path": "survey/best-files.json",
-      "expectedBytes": 13409,
-      "expectedSha256": "bb54eac6a26a5f08bcef16a6498bacea92df6bdf05f15d59869e74cb4419fc28"
+      "path": "survey/best-files.json"
     },
     {
-      "path": "survey/best-image.lbl",
-      "expectedBytes": 3352,
-      "expectedSha256": "2550b5a41da6003e99fecb1239443d4ac8eb09981987977d482ab83491fb0fee"
+      "path": "survey/best-image.lbl"
     },
     {
-      "path": "survey/best-metadata.json",
-      "expectedBytes": 11718,
-      "expectedSha256": "6e895751892c92b91a843a37fb2e520b627ee5100dbf51ea42a4aa8b08171aff"
+      "path": "survey/best-metadata.json"
     },
     {
-      "path": "survey/native-inspection.json",
-      "expectedBytes": 856,
-      "expectedSha256": "b712749beb539b0f0669cc5df73534499755ee0b9fe21db14596076dd9e33ba3"
+      "path": "survey/native-inspection.json"
     },
     {
-      "path": "survey/opus-finest.json",
-      "expectedBytes": 654,
-      "expectedSha256": "4eab864e47de7759ed048d5504cc7f55b213c56575f4f95fee1eab17bf13b956"
+      "path": "survey/opus-finest.json"
     },
     {
-      "path": "survey/surface-intersections.json",
-      "expectedBytes": 660,
-      "expectedSha256": "f36c8aef3d3fe1748918237d0fff6f60411e154b05322c2c39e55b6461d090da"
+      "path": "survey/surface-intersections.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1397,
-      "expectedSha256": "e9c54f86eb093be575948dfb9e402876ccb80979089c051d76dcc7a2c986a43b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -213,9 +183,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 63954,
-      "expectedSha256": "bb90952b56a69224d44926e65fe526d8dc22377d7fa28ef80429ba212f87e584"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

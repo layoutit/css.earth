@@ -983,82 +983,54 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 83396,
-      "expectedSha256": "34e0b7589b0ffc55349fbde4949f1bc658bd109a3b46a6a1330c5c5cf9483ddb"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5529,
-      "expectedSha256": "731eaae6339ec14a6757675b452cb675c05bab98917a8dfee6225b13313fb4dc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "observations/cas_iss_v10.ti",
-      "expectedBytes": 31060,
-      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
+      "path": "observations/cas_iss_v10.ti"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 6654,
-      "expectedSha256": "364e0823bbd5b58b7a552bfbfab24edd64b10cac2728db14b0395b0214700ce4"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 440,
-      "expectedSha256": "75f821f43cd4c9f52e7afdaeb233bf5d97a09153bdbe7a8522175e0f5e9e581b"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 630,
-      "expectedSha256": "ab12e80c7384fd986d1784dfad63942dac750aa27200c0d878825005628808a3"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 12188,
-      "expectedSha256": "77ab45a5eb36d6353403b387babcdc2ef4f0febef3201a053275a8d62fb02f5c"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2296,
-      "expectedSha256": "fd72bf3e88bc576f3cdd0625888e70e1ea151da306964fa23f98f4fa880a720e"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/pan_30k_plt.xml",
-      "expectedBytes": 12447,
-      "expectedSha256": "876033f4c442afa14c07b5bbcb9e7bb26452af73bd50d4419966441571f31f26"
+      "path": "shape/pan_30k_plt.xml"
     },
     {
-      "path": "shape/pan_document.pdf",
-      "expectedBytes": 65659,
-      "expectedSha256": "df1c6b96a42db01ec7383464d829ee9ad8fd265028ab8ad71fcdcb3127f5b299"
+      "path": "shape/pan_document.pdf"
     },
     {
-      "path": "shape/pan_document.txt",
-      "expectedBytes": 6138,
-      "expectedSha256": "824affb1055ad891c9ae969f0421676c25902a37e48c7b5c4a38ef989c8fbb2d"
+      "path": "shape/pan_document.txt"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2332,
-      "expectedSha256": "32115dbf10ce5321c2ab9d00cd5856a6b1736a9a64136780c769eee511b36d57"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     }
   ]
 }

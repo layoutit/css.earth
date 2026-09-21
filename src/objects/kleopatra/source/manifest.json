@@ -2368,8 +2368,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 25203,
-      "expectedSha256": "218e079d8afefaa88441e1bb1ae4751c031a39c2b652bd27c17017de24d434c8",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -2388,62 +2386,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9620,
-      "expectedSha256": "f79c7401f6c6bc409eaa34b65b0eeff33f75d31d4b91541f243d76e766bc7206",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 28611,
-      "expectedSha256": "84b76004b10181a947274d17ab053e5e2bf7a574e6f39c5b0046e43c1bba31a5"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "b59b192d1e5eb24585d99f921864600a18a48ae4101feec6fb6791d90bbb1ff9"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 686,
-      "expectedSha256": "7eee4eba99c688a82e4e6d0238941790c667af952262d4a3890dffe1a4723179"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 37694,
-      "expectedSha256": "09ee9f069d3605ff306e36859afd1293201c39d5b2856be040a269f41b8aadc2"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5515,
-      "expectedSha256": "fe0391e22c18294dc13a2af6d6467c18e475fcb945271bef8d99dcfc60039278"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/216_Kleopatra_param.txt",
-      "expectedBytes": 43,
-      "expectedSha256": "add702142ce1207ae9723f5b07c37459ab6482ec2b5fa845b0c721a49cf0bb0f"
+      "path": "reference/216_Kleopatra_param.txt"
     },
     {
-      "path": "reference/cds-images-readme.txt",
-      "expectedBytes": 5572,
-      "expectedSha256": "b9ade700fe514eb9cb245c5255dd79dc4e4d0f12af2df944b9684df8899808d0"
+      "path": "reference/cds-images-readme.txt"
     },
     {
-      "path": "reference/sphere-example-header.txt",
-      "expectedBytes": 66339,
-      "expectedSha256": "48edf4dc904eb68d599dff0ad515588fdd565002f7ffe6b0ca5056dbcf47809a"
+      "path": "reference/sphere-example-header.txt"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 7470,
-      "expectedSha256": "10eff8d9c42ac86c478de5549e3ff1d21cf8ed86f7841a9356f308d62825285d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2456,14 +2432,10 @@
       }
     },
     {
-      "path": "preparation/observer-cameras.json",
-      "expectedBytes": 709,
-      "expectedSha256": "6f74f489852164c0f3ea00e46d57b0cf7c95e5b396d3939f8099c7a14c3b8b29"
+      "path": "preparation/observer-cameras.json"
     },
     {
-      "path": "preparation/published-comparison.json",
-      "expectedBytes": 1653,
-      "expectedSha256": "6bff02b4ada8ae01e9795eedfdfe98fabb67c7dc829bdab64ed90d3c3205852d"
+      "path": "preparation/published-comparison.json"
     }
   ]
 }

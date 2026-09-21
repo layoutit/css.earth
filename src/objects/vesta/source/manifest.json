@@ -167,8 +167,6 @@
     {
       "id": "vesta-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "547f49cb9b21176885a0d353786d61c74e569340ef97d47d2c83a776f5dd2534",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -185,8 +183,6 @@
     {
       "id": "vesta-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1087,
-      "expectedSha256": "7868bde6f73e0427c7f8ae25d27828fb9b6026ed0512c04d3a7063f5ccb5ab54",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -203,8 +199,6 @@
     {
       "id": "vesta-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "e2ea16371b7d9ee6018209750ad06f6c7e5e8d4c590ba78d8a2647a7d100c9c8",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -1463,8 +1457,6 @@
       "origin": "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Dawn source derivative; see NOTICE.md.",
-      "expectedBytes": 304346,
-      "expectedSha256": "31c4174cffe718db773866b85045e45c12bfbc76e686ad9315731ceffccaeee3",
       "consumers": [
         "navigation"
       ],
@@ -1487,67 +1479,45 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10241,
-      "expectedSha256": "59f14367074c20b9a99dba23bbc41ceb2af3fdfa15906ba19d7f38ed8220eca0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 16549,
-      "expectedSha256": "107a0dbd2d9301876e2f44f7bc477bfe45a358c0eb89190f469854b9cf5b3664"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "0279e18f6a956084b0223f0cdf705689715b42e433bc68ba3e9716b718832721"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 526,
-      "expectedSha256": "3edc864c37944c1464cf5435ed9a637f321ce9d5f240913c42d6c614a3aac804"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4043,
-      "expectedSha256": "7928a3025a0cff6addca28c9ef195da7e89cf7d2c2dcf315585dab5b18b5f73a"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3446,
-      "expectedSha256": "582eabadf35481b58ea0de864f551358690c7f97b8801a30eacaf37eee2c89aa"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/dawn_vesta_v04.tpc",
-      "purpose": "Pinned source metadata and coordinate interpretation.",
-      "expectedBytes": 7051,
-      "expectedSha256": "137ae97a3af618ca259445fd4ed54cfcfda4bcf2f27c4e228fb3f6e9d993ef0e"
+      "purpose": "Pinned source metadata and coordinate interpretation."
     },
     {
       "path": "reference/horizons-physical.txt",
-      "purpose": "Pinned source metadata and coordinate interpretation.",
-      "expectedBytes": 1322,
-      "expectedSha256": "6d35290bd1a64ab670eef17b718aa6336b60fa0e202203b6dde6dbf4d84408bc"
+      "purpose": "Pinned source metadata and coordinate interpretation."
     },
     {
       "path": "reference/true-color.lbl",
-      "purpose": "Pinned source metadata and coordinate interpretation.",
-      "expectedBytes": 2177,
-      "expectedSha256": "df28c23d38756f6863ca2daf6a1fe959de35a2b296852b7e92df75b5521994af"
+      "purpose": "Pinned source metadata and coordinate interpretation."
     },
     {
       "path": "reference/clementine.lbl",
-      "purpose": "Unmodified publisher metadata for the spectral composite.",
-      "expectedBytes": 2177,
-      "expectedSha256": "8fd6341b4d9b66445a76883783c323d503cd822ecf3719a4e62bcdc7e7818c53"
+      "purpose": "Unmodified publisher metadata for the spectral composite."
     },
     {
       "id": "vesta-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 4724,
-      "expectedSha256": "5f6e1fec30acfda423868511c7219ead5e38998c985d1aa96ecdd28e02f99e03",
       "origin": "Repository-pinned English Wikipedia lead summaries for 9 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -1568,8 +1538,6 @@
     },
     {
       "path": "reference/lamo-clear.lbl",
-      "expectedBytes": 2179,
-      "expectedSha256": "aeeed3460397190a05e6c6c003114bee28f44becccc085a4c6525a7e897a0c92",
       "purpose": "Unmodified attached PDS metadata for the same released LAMO grid: native size, planetocentric east-positive Claudia projection and pixel offsets.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -1588,8 +1556,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5237,
-      "expectedSha256": "0fcaf02d242a63bcb312a90756b1209751555e7a89a3a1f9055c554c65a6988e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -75,8 +75,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 29935,
-      "expectedSha256": "dbfbe5d1fd623cc88f7a2c45705f3e9a6c54cb981c8bfa8d3947873811a2a6ea",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -95,8 +93,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8066,
-      "expectedSha256": "994be86cb97d3366ac88bde9f16e42f4c6e8908ad0be68934a647eef6c3e5025",
       "sha256": "4fdb0d3278d1a385b32e7ba38c485a276c12c8014be18576a1f37c7e0f98869a",
       "sourceBinding": {
         "kind": "local",
@@ -104,63 +100,41 @@
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 745,
-      "expectedSha256": "0df59e9b9a17fe5a0153a4e305137665ee20eb49c50fd2d4a487d610bbd15a83"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "b3b5ae27b33960b40cccdd9f4bb386b9acf68568c5d701444905c240ae312648"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 646,
-      "expectedSha256": "8e47b6c0c78eab6a33991b8667d7bfe8eb55e1be27f9aacf5ec8bf32dda6046c"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2920,
-      "expectedSha256": "b9e7e0ab24d6bfe795aa5e67563fade273da65c7d3c59629780919df503b89d2"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2180,
-      "expectedSha256": "8ba89b352586091a054c33cc94241832dad1fc94f831bd679fcf246152c71e88"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 3995,
-      "expectedSha256": "ebba56f63789cc18d4e185091ecf989fcd4f828ebe4abe6202434655aa45faa6"
+      "path": "reference/calibration.json"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 1507,
-      "expectedSha256": "6219c91657a8b339fbb2d174827051863b2bf6101819a34b9e270f9516ada5f7",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/10234",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7354,
-      "expectedSha256": "5ddd3fb7a98b62e75f15c9f435a0e099a30aea2677cf1c07ce515c54b3a6d810"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1391,
-      "expectedSha256": "b195dc993721c32f10879ff575dd4e753c8e86974cdd929357317961dc4fe2b5"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6644,
-      "expectedSha256": "76cb4c1cb081230eb410a39830417a9be4ace65f188c7d4330d7c50d56088c39"
+      "path": "reference/horizons-vectors.txt"
     },
     {
       "path": "reference/masiero-2014.pdf",
@@ -168,24 +142,16 @@
       "expectedSha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 6062,
-      "expectedSha256": "48a423f231751f537418727d8bcd4dcc7d45cccfd44edb4e82205857fc294fcb"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/neowise.csv",
-      "expectedBytes": 595,
-      "expectedSha256": "67a8ce556363d5c74f5c9638f180d4785e78d6921af32c3598dea36d7fb97ad8"
+      "path": "reference/neowise.csv"
     },
     {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 2685,
-      "expectedSha256": "e38045c95eab5f30937efb27922434a5c6980e3dbafa2b8eac05052e1f275520"
+      "path": "reference/sbdb.json"
     },
     {
-      "path": "reference/spin.txt",
-      "expectedBytes": 44,
-      "expectedSha256": "fe2645390e59a6f9f9d36d99f0550f76bca622753f3cd47c7be0e7ddd23a72a2"
+      "path": "reference/spin.txt"
     }
   ]
 }

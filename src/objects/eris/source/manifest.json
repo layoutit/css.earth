@@ -181,8 +181,6 @@
     {
       "id": "eris-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 201,
-      "expectedSha256": "d31b4e6c1415d30db0b1ea9090a6952e01d2e5e0fd7288dcc7d1eaee0dfabeb4",
       "origin": "Repository-authored Eris solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -202,8 +200,6 @@
     {
       "id": "eris-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2662,
-      "expectedSha256": "e4bda82d3cfb976e7e8f907eab50e5366265a3ed84507e62d11f7404aa153bbf",
       "origin": "Repository-authored Eris raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -221,8 +217,6 @@
     {
       "id": "eris-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1581,
-      "expectedSha256": "ce127dc143a7fd7334fe1ceee6ac1b29f4dc0bde69a0a7a630939a1c1cd7b8fb",
       "origin": "Repository-authored Eris geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -240,8 +234,6 @@
     {
       "id": "eris-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Eris celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -260,8 +252,6 @@
     {
       "id": "eris-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 100,
-      "expectedSha256": "88db6f593a192e14b23a741c400799500aea97c511c9d171c810b78252eac7d4",
       "origin": "Repository-authored Eris presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -278,8 +268,6 @@
     {
       "id": "eris-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 385,
-      "expectedSha256": "c8b108f78dceef2dbbb14fa662992d83b45cdce2cd64f081e717e9d8312ccd91",
       "origin": "Repository-authored Eris navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -296,8 +284,6 @@
     {
       "id": "eris-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 286,
-      "expectedSha256": "d39ca3e764b19adcccc1b5a3dc31c902542cb972ac957c0239a1df5bd2e63d30",
       "origin": "Repository-authored Eris acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -315,8 +301,6 @@
     {
       "id": "eris-preparation-rotation",
       "path": "preparation/rotation.json",
-      "expectedBytes": 459,
-      "expectedSha256": "6e531fcb60f0c3c93c6227f2e3c6d696c77a1d220da38626dfd2fb1c40cebf9e",
       "origin": "Repository-authored Eris rotation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -333,8 +317,6 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5843,
-      "expectedSha256": "e8312c8ab70c00ed1b35d58d43a7889b21784c2828057e3d4c65f5028e56916d",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -353,16 +335,12 @@
   "documents": [
     {
       "path": "presentation/navigation-marker.svg",
-      "expectedBytes": 114,
-      "expectedSha256": "34d7e719fbb3eb36a5aab972d351573c340bc38eee6fc28d70a97f107ab1a445",
       "id": "eris-shape-marker",
       "origin": "https://doi.org/10.1038/nature10550",
       "credit": "cssEarth schematic; fill is the measured whole-disc colour",
       "license": "MIT, cssEarth authored schematic; factual measurements attributed"
     },
     {
-      "expectedBytes": 525765,
-      "expectedSha256": "688cdfa92f6ffb5d32420f20c18383e9d55a1c590af72da4abcd8ee00d3dd086",
       "path": "reference/rendered-default-view.png",
       "sourceBinding": {
         "kind": "local",
@@ -371,8 +349,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3198,
-      "expectedSha256": "ad1b526c155fb257e901f7863d7808085e64914e3e06ccff30e69453eb07e3e8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

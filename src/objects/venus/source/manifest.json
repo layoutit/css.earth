@@ -4,8 +4,6 @@
     {
       "id": "venus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "1832ed1c9ea6867070cb5d38bdf94ae9817c3d70b3e5b57e0455f1900b8435b0",
-      "expectedBytes": 206,
       "origin": "Repository-authored physical scene recipe; radius from IAU/NASA and checked astronomy body data, pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
@@ -76,8 +74,6 @@
     {
       "id": "venus-venera-surface-gallery-metadata",
       "path": "venera/gallery.json",
-      "expectedSha256": "98c0effd7c1a5be686361424e80d69a5c09b04cea9e16a97e65beb5fa4ba1d3e",
-      "expectedBytes": 2622,
       "origin": "NASA PDS Geosciences Node Venera image index and NASA Science Venera 9 caption",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Repository-authored factual metadata",
@@ -349,8 +345,6 @@
     {
       "id": "venus-atmosphere-model",
       "path": "atmosphere/model.json",
-      "expectedSha256": "7ad11c7d6c8ba5b733373ce061043313434c36541d95f9b7e470c642eac0a30b",
-      "expectedBytes": 1632,
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
       "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
       "license": "Repository-authored record; adapted values credited inside the file",
@@ -416,8 +410,6 @@
     {
       "id": "venus-object-content",
       "path": "content/object.json",
-      "expectedSha256": "402317e1c1a6db45acea375770e2bd17f0e7140e77d0e40bee90199997034770",
-      "expectedBytes": 19316,
       "origin": "Repository-authored Venus panel, lens, gallery, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -437,8 +429,6 @@
     {
       "id": "venus-chart-assets",
       "path": "content/charts.json",
-      "expectedSha256": "0b6e77d1c02d6d6a5406c934df69decfa81a59374a7aac1273d1d6c03a3f195a",
-      "expectedBytes": 3939,
       "origin": "Repository-authored Venus chart and gallery asset recipe bound to scientific source records.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -456,8 +446,6 @@
     {
       "id": "venus-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "07c7e7a2419ef36c8d51796c603b033f82228fcae6517ec8e486604446f6e114",
-      "expectedBytes": 3537,
       "origin": "Repository-authored Venus acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -477,8 +465,6 @@
     {
       "id": "venus-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "993fc048a5f9714c49087d332d30960790eecb8829321d506d6a7789f81b70d2",
-      "expectedBytes": 494,
       "origin": "Repository-authored Venus navigation asset recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -495,8 +481,6 @@
     {
       "id": "venus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "965a54601917719876db314898ceed67707c84f03c5e1ceec57caf2e0adbf624",
-      "expectedBytes": 1588,
       "origin": "Repository-authored Venus CSS geometry recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -514,8 +498,6 @@
     {
       "id": "venus-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
-      "expectedBytes": 108,
       "origin": "Repository-authored Venus sky, sun, and marker recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -534,8 +516,6 @@
     {
       "id": "venus-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedSha256": "a7ed54590c63bdd26dab7fb47fd52d46ad5fc372855fc930b9619fce23399e82",
-      "expectedBytes": 101,
       "origin": "Repository-authored Venus presentation capability recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -552,8 +532,6 @@
     {
       "id": "venus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "4ec4acbd7df9f5b922c326d27d65a03c45748c2821fa7ac6ae060ffa3761ead8",
-      "expectedBytes": 2730,
       "origin": "Repository-authored Venus raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -571,8 +549,6 @@
     {
       "id": "venus-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 186,
-      "expectedSha256": "3e8d5ea12eedad07105131d73237cdf8a57358181065269b3b6be3219ce28530",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -621,8 +597,6 @@
     {
       "id": "venus-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1001,
-      "expectedSha256": "235d59a23134f7717dcb4ea21f6c6d11746980cc1df0e53b3acc588b3f094856",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -639,8 +613,6 @@
     {
       "id": "venus-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1182,
-      "expectedSha256": "253cf9591af1f89d3ad7c8fb5924dfc1f92547b68afe0189e22569ebdb45a239",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -659,22 +631,16 @@
   "documents": [
     {
       "path": "venera/RIGHTS.md",
-      "expectedSha256": "8f37dddd6ad631aad027079eecc40b390323dbb2ce99302e6829797646c26f66",
-      "expectedBytes": 1570,
       "purpose": "Venera institutional provenance, automatic-camera public-domain basis, and restoration exclusion"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1577,
-      "expectedSha256": "6080b84e15ae5664a08680f4bf68fa82a1ec7fbfd21be78c5adfc9745806dcdf"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "venus-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 14490,
-      "expectedSha256": "9636d709bdaff36759618a0e6d66daf515ac66bb2f096a161543d8ad5ade9c5e",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -694,8 +660,6 @@
     {
       "id": "venus-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 44881,
-      "expectedSha256": "178fc3594826922982cd7211a40df10a6bb4c9b690bfa0926771b87a16399bf6",
       "origin": "Repository-pinned English Wikipedia lead summaries for 112 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -719,9 +683,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /venus/ in headless Chrome, left to right the default Clouds lens, the Ultraviolet lens facing the observed hemisphere, and the Ultraviolet lens turned to show the coverage edge; taken 2026-09-19 after preparation at commit 694a126585."
-      },
-      "expectedBytes": 27497,
-      "expectedSha256": "462e118d15213707e5c7ff0b60fb028424382bdef4999422d7eb6157625b36b2"
+      }
     }
   ]
 }

@@ -4,8 +4,6 @@
     {
       "id": "hd-189733-companion-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1611,
-      "expectedSha256": "2348e0b8207536070e7a8e72cda186bc18973e12ade39f9ac1a3a869764189bd",
       "origin": "https://doi.org/10.3847/1538-3881/ab3467",
       "credit": "TESS Input Catalog v8.2 (Stassun et al. 2019); Gaia DR3",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "hd-189733-companion-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2168,
-      "expectedSha256": "b6c2ac9048bfb02dd2aa629e9eb9d9a3871d753a96dbd5fb7562712947ea854c",
       "origin": "Repository-authored raster recipe: the star's measured colour on the reference sphere, transparent off-limb plate",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "hd-189733-companion-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1774,
-      "expectedSha256": "558d4a46eb3760a5ab46bcc0b26df8ffa5a3fe55cab5bdc0fca62cd368d26d80",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "hd-189733-companion-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "hd-189733-companion-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 114,
-      "expectedSha256": "f66624c6a99f31c0ff4e436abc3ff9df072fc1e3cf54e3c35277fd79089b0fa5",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "hd-189733-companion-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 300,
-      "expectedSha256": "2a418eab04f15ad06d028fa06f6dd9e3c985fcb7e86d8e79aa77c342252517db",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -283,8 +271,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6349,
-      "expectedSha256": "14a64c0993dc43dc6bceae110e85be46caa40594732cdb7d30bc2fc19941b421",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "Photosphere colour from the Gaia DR3 XP spectrum as a uniform disc; rendered by tools/objects/source-authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative.",
@@ -310,42 +296,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3452,
-      "expectedSha256": "8b3a404b483906e9018a2f5c3b25398017828a00c517504646d72c821a2add70",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1934,
-      "expectedSha256": "24bac643e1ffeda538b734945a69efdfac7152b1bf6f2575aa70e95f6a6e47f9"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 456,
-      "expectedSha256": "386327f4f7988a1b4a758a7acdfdbbe53d5f6956c6a90a9a5542c43a344f6404"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 956,
-      "expectedSha256": "a3098f645b4a80a09529098fb822d983114e06a6d62ac8a75f22f5ff90437a9f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 6004,
-      "expectedSha256": "b7c67f14cd2a0a7829a2ce71e94cc7da33df4388909753a6fec11b9ea6be6f6d"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 371167,
-      "expectedSha256": "b815032288d3dd0c6655295f0537cc213805471bbaddfb07ca77563517f6916d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733-companion/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
@@ -353,8 +325,6 @@
     },
     {
       "path": "reference/lofti-candidate-orbits.txt",
-      "expectedBytes": 80746,
-      "expectedSha256": "6b35021bc1776890778a85bcf212cc13adef66abe9d21d8eb7f32d94c2daf18d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence: 300 orbits of HD 189733 B around A accepted by LOFTI (Pearce et al. 2020, lofti_gaia 2.0.8) from both stars' Gaia DR3 astrometry, written by tools/objects/binary-orbits/lofti-fit.py. Kept as the record of how little the orbit is constrained; no orbit is drawn."

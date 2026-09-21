@@ -895,8 +895,6 @@
     {
       "id": "dione-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "77348111da79c07a2c685672a33a578e7e464cf4f84d3ec4bc10f0004570b82a",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -913,8 +911,6 @@
     {
       "id": "dione-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1194,
-      "expectedSha256": "87d4bf361acc1d49ead05d9629c4ea1b58d079fa260760511af0443063f1f0af",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -931,8 +927,6 @@
     {
       "id": "dione-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "aaa0e36549e2bc732aece2b631c93b92f37864a1eb50624157d9bf27c86fc20c",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -949,65 +943,43 @@
   ],
   "documents": [
     {
-      "path": "observations/catalog.json",
-      "expectedBytes": 2333,
-      "expectedSha256": "0d5fec841a6bb7032121de1762fd50b323cff19292212f85d3646e03510bc56e"
+      "path": "observations/catalog.json"
     },
     {
-      "path": "observations/productdescription.pdf",
-      "expectedBytes": 50640,
-      "expectedSha256": "bf336ad869c7a0ddf06b400adf7839bba3738db6c5dcbc8da6cead7566e6252e"
+      "path": "observations/productdescription.pdf"
     },
     {
-      "path": "observations/dione_eqradius_g.xml",
-      "expectedBytes": 9188,
-      "expectedSha256": "39be0e45a5d4f22b117b2707bf75e28b77bfac87170cae64af236876855953c2"
+      "path": "observations/dione_eqradius_g.xml"
     },
     {
-      "path": "observations/dione_npradius_g.xml",
-      "expectedBytes": 9228,
-      "expectedSha256": "4883fbacbbddbbf1a5ebab3e8c0a1531aded58599dda3b21bf2210f8c1cc733c"
+      "path": "observations/dione_npradius_g.xml"
     },
     {
-      "path": "observations/dione_spradius_g.xml",
-      "expectedBytes": 9231,
-      "expectedSha256": "6c0126745b21f8ffb94c6dffc6a6df51c3a7eb7e0dc0561de52989ea135789fe"
+      "path": "observations/dione_spradius_g.xml"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 10688,
-      "expectedSha256": "0b94f9661ade83283462d548991792ad1e1b9260399932526086f547600903c2"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 709,
-      "expectedSha256": "ab8c0da3a6ff4b1cb481f45840d3bfb57d2943c4db671c5752103426abd5451e"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 11413,
-      "expectedSha256": "685a78b7b32e513262348b5e016d1620648624ab6d1b37d709126cadea9a55b7"
+      "path": "preparation/acquisition.json"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 14065,
-      "expectedSha256": "9f29ac3431d84e07783849655680f79dda5b0d9b3827684e804eae033f7bd883",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2803,
-      "expectedSha256": "d6cf4475be0dc37fa0d3827fa762a87b9c408c8c3eff244716b51c2c0cf573c9"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2332,
-      "expectedSha256": "b409457e3f73a32aa71e3847944d33b3b5e98b31bb9a4b5d3eb8f2deee6e51d2"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "science/b2-intake/dione_128_o.xml",
@@ -1102,33 +1074,23 @@
     },
     {
       "path": "validation/b2-scalar-anchors.json",
-      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
-      "expectedBytes": 3159,
-      "expectedSha256": "56229a4ac1aedb0cbe929f2daebf6887ae5503ee7ab8f1079a496ae760068006"
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending."
     },
     {
       "path": "vims/prepare-maps.json",
-      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 2594,
-      "expectedSha256": "110495fa28aca3d2520759c4790f5a18c689df0765732bd082639e3a29bef7da"
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt."
     },
     {
       "path": "vims/conversion-receipt.json",
-      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 4914,
-      "expectedSha256": "abdf538a454094c2cbe9653673c3fe2a4ee8297cc1a1592f5bd2d62482aa659f"
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt."
     },
     {
       "path": "vims/INTERPRETATION.md",
-      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 11294,
-      "expectedSha256": "a64f9aa64816043325a0eedaf20bbb8c5ec640f1feab0212e9d4ec41ace479fc"
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt."
     },
     {
       "id": "dione-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1412,
-      "expectedSha256": "b0ec3b6f42390fd3745894d0c75a1d62f46a31674f379ff896aacb89dd685591",
       "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

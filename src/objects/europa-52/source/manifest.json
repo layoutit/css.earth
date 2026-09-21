@@ -2745,8 +2745,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 34118,
-      "expectedSha256": "8a6677395c7211a33e9d1aeba519112042a58f78f438360c242c8d39fb98625c",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -2765,72 +2763,46 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10529,
-      "expectedSha256": "0f1e73a9f4f4138aa412f0f3f62a7c2b7818bf8c13018dab53527661212a7eca",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 32356,
-      "expectedSha256": "388d78e6def660dfc7f045020629656371594d734b8242602079794df1196662"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "d784a9e42112ee51b774cb2cc8eebb9e79ad06e512af1c586776897cca8c363f"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 673,
-      "expectedSha256": "f6b0eee3b4e25ef730060acda9857462e0c59f9a494bd2f7d25cf702f449e64f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 44292,
-      "expectedSha256": "dbe45ba19b9f054c60e85e314a2a96669cf1c98360c228285a8db2bf4ac29c7b"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4886,
-      "expectedSha256": "0b8f33386a33b9a26d87554009eb7446a1db9abb88a18d704782bd30b69d6e93"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7353,
-      "expectedSha256": "eba9436961062c6edd1e213ec6373e2fa2a31119ed3b77c5cffe38028b3f46bc"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1390,
-      "expectedSha256": "78f63875e2a84b7637b3fce129fe68cae5a00e4c12316db2899e79e9d12cdda7"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6643,
-      "expectedSha256": "c133b8d9829c335dabf199a842fb8e7ca60cd52975d9644a3e003d181144b649"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 1839,
-      "expectedSha256": "8adc83c4825757d68951d0bc63b812305050d5c94c72528e9f35fefcf93cd72d"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/release-parameters.txt",
-      "expectedBytes": 40,
-      "expectedSha256": "f4a879b5b7e77a69ab3c68fb2ddc14801148585aeb93239178a278a1d9b6d61d"
+      "path": "reference/release-parameters.txt"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5387,
-      "expectedSha256": "719d7667b2e8d61c715550ef133b4b7f7e9de75b26f120dab5856929618aa0d7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2843,14 +2815,10 @@
       }
     },
     {
-      "path": "preparation/observer-cameras.json",
-      "expectedBytes": 524,
-      "expectedSha256": "b3de344740a9dd1de2d9cfd0cdd171e96bd54c5a9f1cf39e8de263d691ca3a80"
+      "path": "preparation/observer-cameras.json"
     },
     {
-      "path": "preparation/published-comparison.json",
-      "expectedBytes": 1761,
-      "expectedSha256": "0781bd9b92095a6c77506db27effb015f95c6f9313620b240285e1bb86377149"
+      "path": "preparation/published-comparison.json"
     }
   ]
 }

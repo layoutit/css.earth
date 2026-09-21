@@ -4,8 +4,6 @@
     {
       "id": "kepler-186-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1535,
-      "expectedSha256": "2c7c4d337a30c9642636bda292a208627eebff954d28408473cfe0523150a7ad",
       "origin": "https://arxiv.org/abs/1501.01101",
       "credit": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "kepler-186-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2716,
-      "expectedSha256": "60eb7f1f2c846e51a42d667724b0b33cfebc4b833a00882df5ce31e28121288c",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "kepler-186-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1711,
-      "expectedSha256": "1d481bc5de7c74c355a869c8b2745fc4cccc018010a94855182262d945ad39c0",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "kepler-186-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "kepler-186-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 105,
-      "expectedSha256": "92cb6fbc2ec86e32ce76727fed8ab06c878e61382686748f63723c158b47183f",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "kepler-186-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 219,
-      "expectedSha256": "54a101b31a6c7df8bfa37b6375fc81c5d701158513ed25249c8885f6a2689496",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -257,8 +245,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 44838,
-      "expectedSha256": "fe78adb627e5e3a72616275195fde7da55c68f0893821acdc8ecba8fb99e3c49",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -285,37 +271,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2964,
-      "expectedSha256": "9780c0be5e2d93f10613f955d019f3678ff62d42c4a31c94f72c19347f42dcd1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1463,
-      "expectedSha256": "aba765f707c61111df16748cf30d30c77109844afdf16c89e7288a9ef5d4ee58"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "df84c61283dfee587badaf4e73b90a653936b52e1256ad1fe1ecb623d8181ee1"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1067,
-      "expectedSha256": "71a2a67005fc39a952f5961f5fcd952b223395dec9b9176c13cd592d0c63fe46"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5559,
-      "expectedSha256": "ad85b53bc6fbfbb30f30d336825b043dd01269e8d981a9a7973041151b22aa2c"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

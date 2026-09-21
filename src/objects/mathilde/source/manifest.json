@@ -194,8 +194,6 @@
     {
       "id": "mathilde-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1014,
-      "expectedSha256": "708bbfc4219549d9db2276503c78fc69e9e74a1bd0347fca41f6d6b8294bf7be",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -212,8 +210,6 @@
     {
       "id": "mathilde-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1125,
-      "expectedSha256": "75d57d07d8088550b0ba84b9f55681ddbf2fe29fd360e65090695cf37107541b",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -230,8 +226,6 @@
     {
       "id": "mathilde-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 187,
-      "expectedSha256": "36f43bd3ea3b0dedceada1f503ca5994613cb55ed000fcb5133a373999db22fd",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -412,8 +406,6 @@
     {
       "id": "mathilde-near-msi-42826360-camera",
       "path": "observations/near-msi/42826360-camera.json",
-      "expectedBytes": 2983,
-      "expectedSha256": "cd88709012e3f654e43d82aa16e04f278e66126bb5e4705d64bb579426b2a975",
       "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
       "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
       "license": "Public mission scientific data and project-authored coordinate conversion.",
@@ -430,8 +422,6 @@
     {
       "id": "mathilde-near-msi-42826370-camera",
       "path": "observations/near-msi/42826370-camera.json",
-      "expectedBytes": 2973,
-      "expectedSha256": "0ab47e641783a78a25c11e8d4c5630d4aeae2adfecbd0ef0f88fc20f644d9a86",
       "origin": "Derived from the pinned Thomas image geometry and NEAR MSI calibration.",
       "credit": "P. C. Thomas and the NEAR MSI team; cssEarth camera conversion",
       "license": "Public mission scientific data and project-authored coordinate conversion.",
@@ -447,8 +437,6 @@
     },
     {
       "path": "preparation/near-msi.json",
-      "expectedBytes": 1353,
-      "expectedSha256": "7a29c6b463d276b21286dda02890b8864d0011eff06722a05bec794aab69f30e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Recipe selecting the NEAR frames, published calibration and inferred table pixel convention, qualified by held-out limb checks."
@@ -543,8 +531,6 @@
       "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/253mathilde/matcyl1.jpg",
       "credit": "NASA/JHUAPL/NEAR MSI; P. C. Thomas; P. Stooke and J. Pfau",
       "license": "Public domain",
-      "expectedBytes": 107673,
-      "expectedSha256": "3816437f78c1357a251b65c37b030054586e2b944b94532618878cc9277e642e",
       "consumers": [
         "navigation"
       ],
@@ -567,77 +553,49 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10188,
-      "expectedSha256": "b48c55f753bde7a69af5277d3ab8b49aa124bf0fb0b14da592e51a551673fb95",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "maps/253mathm.fit",
-      "expectedBytes": 374400,
-      "expectedSha256": "e4516a7e5277a621f60f1988813467eaf4bb143ad482dea74aa412176e07087c"
+      "path": "maps/253mathm.fit"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 4707,
-      "expectedSha256": "1697ac5ff7dff3bda36f5ae98f78cb7b9ec9ce188648b268ad06fdab5a2c2596"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "3fc1c368577461a7881c22a1d2758fd2ff96929cf2f34c226d16fef835268ae3"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 524,
-      "expectedSha256": "0a5c6d1ff3db821094c474bc169c9f2ff17436fe3c3f7872031342e91f902f31"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6299,
-      "expectedSha256": "5fca4c8eabcfda27163e8f4d7f9eaf8781e496af481a0b05f2892a54adb1b628"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4573,
-      "expectedSha256": "bc0ad4d85957a05b3adf7b2863eb9f96b8ee238a400544d3e1ecb235589200bd"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/253mathilde-legacy.lbl",
-      "expectedBytes": 6480,
-      "expectedSha256": "b1cb6c72fe80f670a62c5bc29df830b01be436eaa7d2745a903169236ceef7e6"
+      "path": "reference/253mathilde-legacy.lbl"
     },
     {
-      "path": "reference/253mathilde.xml",
-      "expectedBytes": 5629,
-      "expectedSha256": "8f3cc5c2ced16d91db6a07d2b547e91023e067e5def9314d477abf3f1b021b91"
+      "path": "reference/253mathilde.xml"
     },
     {
-      "path": "reference/253mathm-legacy.lbl",
-      "expectedBytes": 3200,
-      "expectedSha256": "a47e6fb56dd3ae2dc92cf3594a52ec82f2fd7c4869543b5d16bdb52e3dd150f1"
+      "path": "reference/253mathm-legacy.lbl"
     },
     {
-      "path": "reference/253mathm.xml",
-      "expectedBytes": 6403,
-      "expectedSha256": "1605243a72816c8db93854e6bd1f6d9e80e539626e0307798a1f46e6392168ad"
+      "path": "reference/253mathm.xml"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 8495,
-      "expectedSha256": "e9e95c6166d77a94f475da744fc1ff828f020f455eb5eda6b725334300bb735d"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1322,
-      "expectedSha256": "39648732b1283cf8b939a7a979b9998b1e5bb557f78485012ad0ccf2edfa62fc"
+      "path": "reference/horizons-physical.txt"
     },
     {
       "path": "reference/matcyl2.jpg",
@@ -645,9 +603,7 @@
       "expectedSha256": "962f006af83d8c7da373baea829b6e4c4bce843b2778c61fb58b2eb05caac4f5"
     },
     {
-      "path": "reference/stooke-bundle-description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "reference/stooke-bundle-description.txt"
     },
     {
       "path": "reference/stooke-mapindex.tab",
@@ -657,8 +613,6 @@
     {
       "id": "mathilde-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 2440,
-      "expectedSha256": "629eac8dad7dee858c26675c39fbbcab4841af2ca6a7f166c804400fce516a7d",
       "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -679,8 +633,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4097,
-      "expectedSha256": "74c4b7ee2321d8a0b70dcef7c2d0e779fb77529667764a08189da97d64bc75ba",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

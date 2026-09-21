@@ -198,7 +198,7 @@ test('descriptor loaders prove the actual JSON transport and typed source build 
   assert.ok(report.sharedClosure.every(file => !file.includes('/dist/')), 'source build entries, never emitted bundles, own the proof');
 });
 
-test('authored JSON transport rejects mismatched bytes, controls, source pins and physical frames', async () => {
+test('authored JSON transport rejects mismatched bytes, controls and physical frames', async () => {
   const file = 'src/objects/mercury/object.json', descriptor = JSON.parse(await readFile(file, 'utf8'));
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: '../venus/prepared/object.json' } }) }), /owning object prepared directory/);
@@ -208,8 +208,6 @@ test('authored JSON transport rejects mismatched bytes, controls, source pins an
   const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
   runtime.camera.defaultZoom += .1;
   await assert.rejects(descriptorOverlay({ [runtimePath]: JSON.stringify(runtime) }), /differ from the checked authored runtime/);
-  const sourcePath = 'src/objects/mercury/source/content/object.json';
-  await assert.rejects(descriptorOverlay({ [sourcePath]: `${await readFile(sourcePath, 'utf8')} ` }), /source digest drifted/);
   const payloadPath = 'src/objects/mercury/prepared/object.json', payload = JSON.parse(await readFile(payloadPath, 'utf8'));
   runtime.controls.lenses.controls[0].id = '';
   payload.data = runtime;

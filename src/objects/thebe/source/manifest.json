@@ -424,8 +424,6 @@
     {
       "id": "thebe-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 999,
-      "expectedSha256": "914f7a272375052ca88437344aaae184f5581776d2ab9db4bf5921a18847638d",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -442,8 +440,6 @@
     {
       "id": "thebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1104,
-      "expectedSha256": "ef0697f4c13f8206ee0c1bc46e51dd079c3a7ddfa00b6f8235272aa0c70e4103",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -460,8 +456,6 @@
     {
       "id": "thebe-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "a062860fed2e6369a6a179fddad5b6ce3a0b55d5eb4885433fd32350e7f2fd26",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -502,93 +496,61 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 79917,
-      "expectedSha256": "06029dae70f7d11e84db779355a4a4971a21583ca71e661191db7d4d233a5c19"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4578,
-      "expectedSha256": "86cca89b59dacd91b323c6b06939645fe7ff922dfa35a7cdd9e1c852af613d67",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "geometry/c0401759200-opus.json",
-      "expectedBytes": 11445,
-      "expectedSha256": "e4e538cc7238192a059ddfbcec021f2678fd2d76c3badc613b343c4106296729"
+      "path": "geometry/c0401759200-opus.json"
     },
     {
-      "path": "geometry/c0401787200-opus.json",
-      "expectedBytes": 11699,
-      "expectedSha256": "aac7e038ceda237cbcbc145f82d2d4b0153c9fd2fea1c350997c4078bd370462"
+      "path": "geometry/c0401787200-opus.json"
     },
     {
-      "path": "geometry/c0420691700-opus.json",
-      "expectedBytes": 11467,
-      "expectedSha256": "2475fdb65ed4e14f4ff568795140dc6ef5c168596eea0a6fa2e11bf6010f4e8c"
+      "path": "geometry/c0420691700-opus.json"
     },
     {
-      "path": "geometry/c0532888400-opus.json",
-      "expectedBytes": 11715,
-      "expectedSha256": "530fafa1f77e81d7c437d897ee7594c6b74c64712f539fcb386cacdb4e3e4918"
+      "path": "geometry/c0532888400-opus.json"
     },
     {
-      "path": "geometry/registration.json",
-      "expectedBytes": 5009,
-      "expectedSha256": "9efba0f9398944e897c63b6c752b6aaa08c26aca3cd29eec4c04d6cbc40950f2"
+      "path": "geometry/registration.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2710,
-      "expectedSha256": "0e0fec6eff2ba1f55e40606a867c103a3929483d3a53b2bc4d41946cc19ff340"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "99eb5bd67221e027acea116dd922ffaa4bd14bb0a024a43fbcdec9fdf81d68ce"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6889,
-      "expectedSha256": "df9b680e54b1cf996cf796897e5cb5c7dcfe83288e5d167f29a1266346e90d03"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3026,
-      "expectedSha256": "4d38ac6f1a67c93960693d8e3ebbe2b6ea349ccbaa362372793c71aaf9bccc9f"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/bundle_description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "shape/bundle_description.txt"
     },
     {
-      "path": "shape/j14thebe.xml",
-      "expectedBytes": 6474,
-      "expectedSha256": "5286b58e23f61dbf3da4ec5ffb531b13bb46eca67382665fdb465201843a15b2"
+      "path": "shape/j14thebe.xml"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2349,
-      "expectedSha256": "a898ee9aaa7cc68f62569be7114663d48c09159473d1ff1675a0e995233c9c87"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "thebe-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

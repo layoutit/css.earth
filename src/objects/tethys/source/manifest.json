@@ -1362,8 +1362,6 @@
     {
       "id": "tethys-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1005,
-      "expectedSha256": "00870b543185b5e886cc0e1737d6eebfa786378dc2e434392ba7fe9fd1b99957",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -1380,8 +1378,6 @@
     {
       "id": "tethys-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1201,
-      "expectedSha256": "14ad07600992274c8d7dbab8b7d7d67944dd31095064feeb19f32eb9569d8c2c",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1398,8 +1394,6 @@
     {
       "id": "tethys-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "0539ae434a135593cf9583e8eaaa85c4b5d8025fd5ae3b5574aa96d5e362157d",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -1494,65 +1488,43 @@
   ],
   "documents": [
     {
-      "path": "observations/catalog.json",
-      "expectedBytes": 2201,
-      "expectedSha256": "0caaf402d15849efeefc86e07ffea4030eec4997034b5ed1e0b24099dc3d74c0"
+      "path": "observations/catalog.json"
     },
     {
-      "path": "observations/productdescription.pdf",
-      "expectedBytes": 52481,
-      "expectedSha256": "218932f056d4a1ee3efcd772b8076fe9a09b4af4e68f13bdbf538c83f2da0c7f"
+      "path": "observations/productdescription.pdf"
     },
     {
-      "path": "observations/tethys_eqradius_g.xml",
-      "expectedBytes": 9211,
-      "expectedSha256": "c21944d7875a9f7d15082ab6505ff55b796e9a34924f8ae4232e7d945913c6f2"
+      "path": "observations/tethys_eqradius_g.xml"
     },
     {
-      "path": "observations/tethys_npradius_g.xml",
-      "expectedBytes": 9251,
-      "expectedSha256": "df9904a94d69c2804322227f32d66fbc28dff0a6936c6a6e6769c3c1212c1cba"
+      "path": "observations/tethys_npradius_g.xml"
     },
     {
-      "path": "observations/tethys_spradius_g.xml",
-      "expectedBytes": 9254,
-      "expectedSha256": "b858898852e1e9bdcef72a310e5c0cfb135355e94b05fe784e17dcbf758ea588"
+      "path": "observations/tethys_spradius_g.xml"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 14791,
-      "expectedSha256": "08ed578a4a4e7ce914735cfe0ae711c9d94d45a669e6da4fb1f5f22131084cb0"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 702,
-      "expectedSha256": "acc42c9ace72dee1841a63b1659f0101e8f1ff6cce946bf8641b8cc005eb44a1"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 14471,
-      "expectedSha256": "d9a897b944f81a2189dc3f8e6ac862864d75eaa64660615f2c910efc8b613797"
+      "path": "preparation/acquisition.json"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16597,
-      "expectedSha256": "a3a02e069edf40770ba89ec9d552c72d75dfb97fadafdb898b62f3134ab60fb3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3090,
-      "expectedSha256": "ea44513853afbd33861f7cbda1c4e01d01f0ed5a14dbd4e782b4641f644de2c4"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2336,
-      "expectedSha256": "b6350609c6f29713bf205f1868110019ada855a3ee4ba6b4efd695ee653e7c48"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "science/b2-intake/tethys_128_o.xml",
@@ -1647,69 +1619,47 @@
     },
     {
       "path": "validation/b2-scalar-anchors.json",
-      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
-      "expectedBytes": 3160,
-      "expectedSha256": "539a080366a26bba704c14b305a889dcf4dbc90c853bbf9ba34fb6187e33aa02"
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending."
     },
     {
       "path": "cassini-ice/evidence/download-receipts.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 8556,
-      "expectedSha256": "f2af477511b404a8c3448fe068979fffe5146cc51fee39d7eb3a2307469d7449"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/evidence/registration.md",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 971,
-      "expectedSha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/preparation-receipt.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 100999,
-      "expectedSha256": "215b540b5660bd30501659d4c6a9aca0978dc3e5f2643565a0d2b8410d30f48a"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/prepare.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 7768,
-      "expectedSha256": "946b2641db5a3dee9508d6c0273e6dadb910498a02ff48af10fe6ea3677e44e1"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/tethys-ice-absorption-observation.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 17720,
-      "expectedSha256": "3d90aec662312d48ea563efbe9768d15736740606c82da2f5930b4a9fc7a40da"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/tethys-ice-absorption-source-pixel.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 33870,
-      "expectedSha256": "b48993134b1d17199d344188747f769c2eb59f4cd947cdf78e4a5243339083ed"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/tethys-infrared-if-observation.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 13081,
-      "expectedSha256": "1cc530c1f92226156ab280a24082385732291001fb166e94a2bfef7802f449b6"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/tethys-infrared-if-source-pixel.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 22505,
-      "expectedSha256": "9efeb7b820abed78404ecc4cdbdcfe53448fb6203af3974b7355a3550493caf8"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/tethys-infrared-if.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 216690,
-      "expectedSha256": "b18ecacb19d5c3d873f59bbfee385e609a94746fdddb93aeb5c601ea2df1cce6"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "id": "tethys-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 3263,
-      "expectedSha256": "c4d4c76caec33ebcbfedf4c5f93aff7b16596b22d2cc0cc5d43cc6bfd4f22ff0",
       "origin": "Repository-pinned English Wikipedia lead summaries for 6 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

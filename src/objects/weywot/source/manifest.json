@@ -68,8 +68,6 @@
         "kind": "local",
         "reason": "Project-authored grid marking unavailable surface imagery."
       },
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,67 +92,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2639,
-      "expectedSha256": "a51947edacc099fa60f34895adb0badc1498604da492be8da47e2d277cb4e062",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1962,
-      "expectedSha256": "73b7ea86b368f58cd6c2c56f7cbc35cb3162f83878acb7c9ffa4aeb105a29dd8"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/quaoar-epoch.txt",
-      "expectedBytes": 6769,
-      "expectedSha256": "2fe5f1bb661817293c23d7800d3c233d3bf5360dfaf5c903a367a576af97c91b"
+      "path": "orbit/quaoar-epoch.txt"
     },
     {
-      "path": "orbit/weywot-epoch.txt",
-      "expectedBytes": 6942,
-      "expectedSha256": "66344f75556ee978d274837e75249a4f0f80e78c95089f48e9a8bc020552d1f0"
+      "path": "orbit/weywot-epoch.txt"
     },
     {
-      "path": "orbit/weywot-heliocentric-check.txt",
-      "expectedBytes": 6921,
-      "expectedSha256": "965acc380a9be3d6c0f7030d13bc93acd7659cf9913fdd620bdc45175419c032"
+      "path": "orbit/weywot-heliocentric-check.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "63acff8ed494a56de0a4302e90848754a55ac05f1e5f618f37509bbe4712a3ca"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 352,
-      "expectedSha256": "9cb6567d73269408ecc2201b25b2cd77c22323dd20c087b8063905778a7a81ca"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2284,
-      "expectedSha256": "c692722399c91228d70c26129a8dec26a4519310b054e0a293120ad61834a144"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3603,
-      "expectedSha256": "ad920effa04c388c3b3583aeb60f419b32b52647b8de4bb63dff2b044f7b1797"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 3463,
-      "expectedSha256": "4afc3cd295c9f17d0321ffec910f40797af0392300f017461b99e2e4e9e9c7a7"
+      "path": "validation/epoch-state.json"
     }
   ],
   "generatedIntermediates": [
@@ -167,8 +141,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 91995,
-      "expectedSha256": "49ea39a90dbb1a5a454d2d98885ad05ab3bdb7f20e6d8c10f55f6a9433efd8c2",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
         "inputs": [

@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,57 +92,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3523,
-      "expectedSha256": "7805138f5236c85b7159951e8d8b8de6e392a8b6cde60eb55496dc3075e9ab5e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2558,
-      "expectedSha256": "e39ac8d308d5b3ca2d8f342124235e459b59fad4308414b9e9ab87bbdf7f4c87"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 522,
-      "expectedSha256": "4aedc9a680eee183b0d0352537216937d51b83bded171ed68dfd2a09cf49dd58"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "2a838f58fbe603681fe93af75e21c5ab5c3868d1cf4e9d46cf9b74c66680fd88"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 462,
-      "expectedSha256": "6b8d6beaa02997afe13c67406d37223e23acd5ec8aa265f980d0513c9d471698"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2712,
-      "expectedSha256": "211e9807083ade7602194065ac8746b159ac898ee593a813441c3d9e12c955c8"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2484,
-      "expectedSha256": "585cd8872fd005db5d232a9afd61b9dcb6d05ed2c57c51ef9c7b040fb22e52d3"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "91136d6bf75aa2200478c1264257810644871981d185105d3ce0ee0d1696192e"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "54def6e863de046eae1d126259669665ff6fdb4f30e1f40f39db161aec512815"
+      "path": "reference/horizons-vectors.txt"
     },
     {
       "path": "reference/huya-rommel-2025.pdf",
@@ -153,8 +131,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3024,
-      "expectedSha256": "66453ee70bfa429eb6d93310706810f75870ea056c76892272044a526824a678",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -190,9 +166,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 84434,
-      "expectedSha256": "79b718308f6782aa611d0a86511e3c907758ad770a18132f5e9869bf910620ef"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

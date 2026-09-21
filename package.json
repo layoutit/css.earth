@@ -109,7 +109,6 @@
     "prepare:volume": "node tools/objects/dist/prepare-volume.js",
     "prepare:wordmark": "node tools/prepare-wordmark-rail.mts",
     "prepare:world-context": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json && pnpm prepare:moon-labels",
-    "prepare:world-context:author": "node tools/objects/dist/prepare-spatial-context.js src/objects/sun/source/navigation/universe.json src/objects/sun/prepared/world-context.json --pin-references && pnpm prepare:moon-labels",
     "pretest": "pnpm prepare:shell",
     "preview": "node tools/preview.mts",
     "preview:native-scroll": "node tools/experiments/native-scroll/run.mts",

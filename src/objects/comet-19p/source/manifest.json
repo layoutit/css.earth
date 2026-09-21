@@ -211,8 +211,6 @@
     {
       "id": "usgs-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 137,
-      "expectedSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth neutral terrain material",
       "license": "MIT",
@@ -243,8 +241,6 @@
     {
       "id": "dlr-surface",
       "path": "material/dlr-neutral.png",
-      "expectedBytes": 137,
-      "expectedSha256": "fef43d98cf8e791827f3cca246444699804157bd60bae2405ead501bb9339eba",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth neutral terrain material",
       "license": "MIT",
@@ -275,8 +271,6 @@
     {
       "id": "comet-19p-features-landmarks",
       "path": "features/landmarks.json",
-      "expectedBytes": 3503,
-      "expectedSha256": "c2a22b9e5cbd60d5d8b0332c92d4e6b56d06a71f7292d733e47ae72e2960246a",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -293,8 +287,6 @@
     {
       "id": "comet-19p-features-manifest",
       "path": "features/manifest.json",
-      "expectedBytes": 1847,
-      "expectedSha256": "92187753ce01452ad567972ae483c20143f01f532999fe4d4d35a2772ca75876",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -311,8 +303,6 @@
     {
       "id": "comet-19p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1030,
-      "expectedSha256": "1be3a0174b6625ccf6c7ee618873bf8a1a437faee931da5f5365f447a24a73cc",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -329,8 +319,6 @@
     {
       "id": "comet-19p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "9c4601492154e811207a667619c3e455249e62e6a9bf0db49c79a58db7d93918",
       "origin": "Authored terrain-place records and source-frame display attachment.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -347,8 +335,6 @@
     {
       "id": "comet-19p-features-image-registration-json",
       "path": "features/image-registration.json",
-      "expectedBytes": 56879,
-      "expectedSha256": "5308b6cbff25b419b9dc89cf8d22e0d3b620da513377863bc35b21b48c8f3c1c",
       "origin": "Project registration recipe, exact XYZ cube identities, source-image anchor pixels and captions.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -365,8 +351,6 @@
     {
       "id": "comet-19p-features-control-measurements-json",
       "path": "features/control-measurements.json",
-      "expectedBytes": 56004,
-      "expectedSha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635",
       "origin": "Project measurements of the published terrain-map and photograph correspondences, with preassigned fit and holdout partitions.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -383,8 +367,6 @@
     {
       "id": "comet-19p-features-evidence-image-landmarks-json",
       "path": "features/evidence/image-landmarks.json",
-      "expectedBytes": 80209,
-      "expectedSha256": "872724f5243c30c4e64fc1df8e4e55f899440e60d8282ec6ea35f4b991e95ba3",
       "origin": "Generated fit residuals and native XYZ samples supporting the displayed landmark coordinates.",
       "credit": "cssEarth contributors; Britt et al. (2004); NASA/JPL/MICAS; USGS",
       "license": "MIT (project measurements and factual compilation)",
@@ -403,8 +385,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 56604,
-      "expectedSha256": "81fece820ed4800d8ed02d5c4cc2f3109e2ea90c5468aa504d01dd9b32523821",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub",
       "credit": "NASA/JPL/MICAS; USGS; cssEarth preparation",
       "license": "Source-credited prepared visualization",
@@ -439,97 +419,61 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7663,
-      "expectedSha256": "5e4352e5083cb07169646e8472ab20d0ff6431a62f2b85e89f135b74dc752ae6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1790,
-      "expectedSha256": "745cd10bff81d79e5b55e4b7e795728e79734ca58754d5362fda9a8b08671098"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "27b7c0cdfd888ae990051fc02afdaefaaf15c5034e3c751554026c526ca68be7"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 406,
-      "expectedSha256": "e09bf4cea77b4c1f18ab48677999bc113db54f08c91eec0d615d7c3f7ebefe82"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 9487,
-      "expectedSha256": "b8ac69a62c0ebe3ea503277c342e726f8083fa71c410788b666446d520976db8"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 96,
-      "expectedSha256": "0fbb1439975415737998003dd16df7fd1cd5bf2cd5ba6c0feb629f397843ec65"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3519,
-      "expectedSha256": "82c7edeecf35e49f13897925a908014d7f5a93905d0425604773044ffdee11c3"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/completion.json",
-      "expectedBytes": 1787,
-      "expectedSha256": "c9ffbf810924055b739d5590b529b8436490e2f1b0d252150191851e73ece194"
+      "path": "reference/completion.json"
     },
     {
-      "path": "reference/coords.txt",
-      "expectedBytes": 3440,
-      "expectedSha256": "7e280ddaebb0acaa1e554b858c4fd572ccff048ccb56d26ecefb567a64103c98"
+      "path": "reference/coords.txt"
     },
     {
-      "path": "reference/dem-dataset.cat",
-      "expectedBytes": 15840,
-      "expectedSha256": "97f561e75de298b11f10d06142ade73ac5a9d76f1b9aa1c318105b828752d723"
+      "path": "reference/dem-dataset.cat"
     },
     {
-      "path": "reference/dlrdem.lbl",
-      "expectedBytes": 6880,
-      "expectedSha256": "25227b4b7ac184e420369c430a561789fdf101f603901f37fc5b0374821de2dd"
+      "path": "reference/dlrdem.lbl"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7689,
-      "expectedSha256": "d75585d846f298f83421ad68d1052f9ee7a95f85402e32497fd74d6d306ce1de"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6979,
-      "expectedSha256": "cc1b2ea7a37f9321d40f0406b94a4c5877fef2e68c83c6b1e9e516342e242264"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/readmeTopoModel.txt",
-      "expectedBytes": 1645,
-      "expectedSha256": "9b25a97ec342dfcbbac01de6726773e8bc7914ec396416aa5923fabd0445bd68"
+      "path": "reference/readmeTopoModel.txt"
     },
     {
-      "path": "reference/registration.json",
-      "expectedBytes": 9125,
-      "expectedSha256": "585be2ad4d22faea279f031f5bcff367b80aedcefa468ccd9c5c406e2cc24c96"
+      "path": "reference/registration.json"
     },
     {
-      "path": "reference/rescued-dataset.cat",
-      "expectedBytes": 5200,
-      "expectedSha256": "d3ddc5974007e75754e5049e0a62d685139d861dc278baf4e74afbe2c8b0adf8"
+      "path": "reference/rescued-dataset.cat"
     },
     {
-      "path": "reference/usgsdem.lbl",
-      "expectedBytes": 10640,
-      "expectedSha256": "ca91ad8342a3de5b90139a4c8896cb0706ceae3e36faffd5f9b3a1ff2b0d81fd"
+      "path": "reference/usgsdem.lbl"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3953,
-      "expectedSha256": "b8ff56a5e4769be9b1f9ae130c23e3dbf8e72a0ba03ef24e4819e5559098f2fb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

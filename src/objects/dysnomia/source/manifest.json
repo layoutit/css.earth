@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "consumers": [
         "surfaces"
       ],
@@ -94,67 +92,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3197,
-      "expectedSha256": "d8388c32e3f28854d51326b3847ad7d69a78891d4fbd0147faf53d0137321637",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 3353,
-      "expectedSha256": "9e1e1ab1e008ec703705be7b152c66182d5d0e27f07a64fb2a78f5dd05ac3445"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/dysnomia-epoch.txt",
-      "expectedBytes": 6833,
-      "expectedSha256": "8ccf871c0b53cdae17b51d2eb459998cc8be76fc206335feb0fbafefa6516941"
+      "path": "orbit/dysnomia-epoch.txt"
     },
     {
-      "path": "orbit/dysnomia-heliocentric-check.txt",
-      "expectedBytes": 6814,
-      "expectedSha256": "eeed16021c50c402d03c1c4cecc850a86cf1fd437abf13ccd7e61a329e68900b"
+      "path": "orbit/dysnomia-heliocentric-check.txt"
     },
     {
-      "path": "orbit/eris-epoch.txt",
-      "expectedBytes": 6756,
-      "expectedSha256": "6bc7dd7b63f721b641b5006fedaa3126a846f69e025fe15bff90ee3ec0c2e41d"
+      "path": "orbit/eris-epoch.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "ee21ef53523a963aa8cb9fb4efd6edff4261fc0d06d4da586dc7813c7d6a29e6"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 688,
-      "expectedSha256": "2dcab7c06cec08d18a677ddb04d459bb3a671abfdb6b3f82fb7829d0360c0952"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3526,
-      "expectedSha256": "d8813696498b17423ee7c504e2d10944c6b1f42c9198c9a0fe4a215a6f5a4785"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5025,
-      "expectedSha256": "926180603a0e66e8fc384afe29d6229fab5c2320ebef8b6e464a9c4254ef633a"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 4739,
-      "expectedSha256": "2a798f189b2107b7152e18851acc8155c5edb5465a394849fcebfffd2bc365d8"
+      "path": "validation/epoch-state.json"
     }
   ],
   "generatedIntermediates": [
@@ -167,8 +141,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 92417,
-      "expectedSha256": "e3d3213412d3205eb59e06490273cb2bb7221688b83b37136882fbb10c9428ba",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
         "inputs": [

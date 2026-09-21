@@ -705,8 +705,6 @@
     {
       "id": "rhea-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 995,
-      "expectedSha256": "3e3dee1d341968b2aba0e30ffbc2759e9d4e25f72277fa7ce2b6ca483ee12db3",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -723,8 +721,6 @@
     {
       "id": "rhea-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1187,
-      "expectedSha256": "0fdb122c1ef06d10cfeacc6cbe23d55bc5e9da378cc9fccb9401f58c6e881e8e",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -741,8 +737,6 @@
     {
       "id": "rhea-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 183,
-      "expectedSha256": "6536518f815c0ad2e2881eb1a9b8692470cdaf3c90a581227a935fa85e32c450",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -759,60 +753,40 @@
   ],
   "documents": [
     {
-      "path": "observations/catalog.json",
-      "expectedBytes": 2633,
-      "expectedSha256": "7d050b13233f5cc86b0893e2b92d38aeded8dc7a7d573d1fcc0d01d10b982e80"
+      "path": "observations/catalog.json"
     },
     {
-      "path": "observations/productdescription.pdf",
-      "expectedBytes": 37018,
-      "expectedSha256": "c1bebf3b34b893f16c3da8d4db8cf39825f1611f7c1957fb5caf6a4307b61fde"
+      "path": "observations/productdescription.pdf"
     },
     {
-      "path": "observations/rheashapeassessment.pdf",
-      "expectedBytes": 179526,
-      "expectedSha256": "765eb535685ff615c5e70a0f798429597c6fe05e6100bc845ead716ba9c8f087"
+      "path": "observations/rheashapeassessment.pdf"
     },
     {
-      "path": "observations/rhea_radius_g.xml",
-      "expectedBytes": 8710,
-      "expectedSha256": "723180b17c4d6950ac54d32535ee17da8135d003f5edff2b0225a7ffd6b43875"
+      "path": "observations/rhea_radius_g.xml"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 7509,
-      "expectedSha256": "dd56ae0b0076432dddccd54570aa61ff3489d6ffa924d1e26c810141240db5d9"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 706,
-      "expectedSha256": "0ff6e06bc635c8cfb23d0ab6ac5776f1816d3d3ffdc6502b5e9d06e712405ba9"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 9125,
-      "expectedSha256": "25a555e1c2aa6ff3e61fa9004c93757e99a5dd0ec141b7d48892dcd6016e4cb6"
+      "path": "preparation/acquisition.json"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 14823,
-      "expectedSha256": "7c248cdf0ca61dc556b539ed517aeba0342458470cc762106bbc3abf4815ef0d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3016,
-      "expectedSha256": "4c3947c71005a0a0122167ac13cefa48d0c03556e4100e38e95eb3c68b667394"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2329,
-      "expectedSha256": "47782075506fe0a16eaca0ba0d71f4536e2bc4909b6e8b9d4292fe43e95a8df9"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "science/b2-intake/rhea_128_o.xml",
@@ -893,33 +867,23 @@
     },
     {
       "path": "validation/b2-scalar-anchors.json",
-      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending.",
-      "expectedBytes": 1355,
-      "expectedSha256": "5b1ebdd2def147d55dc71a25691f0080fd2661f7abf92fadf05c934732bde52e"
+      "purpose": "Independent raw source numeric values and coordinate anchors; preparation/display qualification remains pending."
     },
     {
       "path": "vims/prepare-maps.json",
-      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 2571,
-      "expectedSha256": "fb12b66906d104e0debc4cd5c5917565db04185a1d7709df67368fad51ec3e03"
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt."
     },
     {
       "path": "vims/conversion-receipt.json",
-      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 4900,
-      "expectedSha256": "1cc983ca0b83760e27ea574408d1498e24348b007378eba52ae3dd4c76ed00db"
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt."
     },
     {
       "path": "vims/INTERPRETATION.md",
-      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 11294,
-      "expectedSha256": "a64f9aa64816043325a0eedaf20bbb8c5ec640f1feab0212e9d4ec41ace479fc"
+      "purpose": "Cassini atlas preparation recipe, source review or conversion receipt."
     },
     {
       "id": "rhea-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 2096,
-      "expectedSha256": "572d392dec7cc44cb7ff4239bdee0dc84271c43610c5213b8f20568e644609dd",
       "origin": "Repository-pinned English Wikipedia lead summaries for 4 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

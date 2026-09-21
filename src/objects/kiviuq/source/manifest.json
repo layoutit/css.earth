@@ -105,57 +105,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2608,
-      "expectedSha256": "81e75f183b90817dd7af583df6c0694ffccbe410a3c978477c77daea9628cf73",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1905,
-      "expectedSha256": "7f91923824bd56698852107e938c765afd8102c2ffd74bed452a49aab9ac0a65"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "fb876af843ec2c4a8e65c9b83487f3cec7793468ad82cd93aa38df97d87f0103"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 469,
-      "expectedSha256": "abaa8be5e4f09207c5df6fa5815d3aaee72ea54815ab1616f27639ace8390da7"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2175,
-      "expectedSha256": "dad0ca73f17a36f091a01a3feea3c4cea1c128326bfee6e90bc121b0631c5431"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2476,
-      "expectedSha256": "cb379fc206a3f8fa800a38428d1e8ea11455c12b0efbe8d52fd175e2f7600b56"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/orbit-checks.json",
-      "expectedBytes": 38800,
-      "expectedSha256": "5b2c20f298353f124b650069e9f23a1b9c46f4fed337874c197de23cd5b697cb"
+      "path": "validation/orbit-checks.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1469,
-      "expectedSha256": "f15feca6418fcc9d5b68e6ba99c0854d3827ca2ee7a18d4dd876970054808fa1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -185,9 +165,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 50221,
-      "expectedSha256": "2ee96f5be6c456955e68e89f281b9ce2286c43f45d1c7e358d0a718b321ef1b2"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

@@ -1166,8 +1166,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 33051,
-      "expectedSha256": "abd880a436ee51e16a0f85f59995bcd63c8cd352a40c4b04dfe140b342e3339f",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -1186,42 +1184,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12045,
-      "expectedSha256": "9496dd68740c28fc94134ad890e7445a1b3ec881542d3e72178325ce34c4681d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 15022,
-      "expectedSha256": "7f632841fde97ec7287b387b8c2e93a6afcef0bd92258566822c6b2dc88cf909"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "436016430019a9c2b8b536a91d79a919974a92b33579b4412653a5c6dc427052"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 596,
-      "expectedSha256": "3c4248475e9076aac69bfd376e669b227836407fb8c837c0458f7e244cd00594"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 20652,
-      "expectedSha256": "27325b3398b4392f69a3fec6f6277fa7215502ccf9ec011026e6290c22effe51"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5328,
-      "expectedSha256": "cf87b6daf2c95596ced1c0a96cf786acae2ab767efbb02c93d3ef2e929d020e2"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/5914-IAUspin.txt",
@@ -1239,33 +1223,23 @@
       "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 1581,
-      "expectedSha256": "1314df9fa1592c0905698098c5e494748bb572f29ce1e8b9b4d7dc5065f39d21"
+      "path": "reference/calibration.json"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 12849,
-      "expectedSha256": "6435cb4ab42a06c9cfa35975f48da43165d8a5d4e6e2c59536ecbe9f761a910b",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/5914",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7354,
-      "expectedSha256": "9450877664a2797e8b5c57b6170c9907aa12c5c7cbaa9c478c68dcc0acd9e76a"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6644,
-      "expectedSha256": "88b993d30eccb5c9029796d0571351a1143a382978552eadaa46a5de15b6ab56"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 4135,
-      "expectedSha256": "e5802f3e4feec7f3273d37d997f9074601edf1c10e22d790bddcbd8e9be11bb1"
+      "path": "reference/model-properties.json"
     },
     {
       "path": "reference/vernazza-2021-eso.pdf",
@@ -1273,19 +1247,13 @@
       "expectedSha256": "454f807c2219854391621e868b3c7d8f934be2ad412371b40af77d04a5896954"
     },
     {
-      "path": "preparation/observer-cameras.json",
-      "expectedBytes": 710,
-      "expectedSha256": "84a715da7387738b6ec4c8acc4ce515519143c8b5fc0d600f27187f2a09af95b"
+      "path": "preparation/observer-cameras.json"
     },
     {
-      "path": "preparation/published-comparison.json",
-      "expectedBytes": 1004,
-      "expectedSha256": "2971070b1b363668a63148f6174556d3f913e02fc036c000bbf5a8cf226c809d"
+      "path": "preparation/published-comparison.json"
     },
     {
-      "path": "reference/release-parameters.txt",
-      "expectedBytes": 42,
-      "expectedSha256": "81bc8de6a2abd481704b85be764e2d767d83054d65709fa0cb8244e787dc0a43"
+      "path": "reference/release-parameters.txt"
     }
   ]
 }

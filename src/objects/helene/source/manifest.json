@@ -1855,95 +1855,65 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
-      "expectedBytes": 111770,
-      "expectedSha256": "edbc35bcc9e58aae63272448003a6bef802715dbef5b67b2b33f03a2cb401ebe"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6774,
-      "expectedSha256": "f8288372112673114f736bbd2417a531585e9f10ce27a9066ac98a1298d1dada",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 12220,
-      "expectedSha256": "4d416abbea4f26682cf38b296096a98c5706cb30987a6458c84f2ae71e6ce251"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "a4fa8477c01653347229c18cdf1729f4a9634720d1df68b3bfaedc556355cea1"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 580,
-      "expectedSha256": "7b9917ef09b2e3619a8994a3ed9b74483f3cf53099b18f1f6e5cdccd2a12dc55"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 19518,
-      "expectedSha256": "ac72797e04549cecbf017ec13e7572c2647568b62d5870580289614751d920e0"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3123,
-      "expectedSha256": "48a6ef1679e09019a418985383089ae4b2f4af00fee1e749febce3803124a68a"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/helene_30k_plt.xml",
-      "expectedBytes": 12509,
-      "expectedSha256": "8f8428ceec2bafad83c6519fe7e64c59d7e05768ad6e9d96f18f86f9f34b7a37"
+      "path": "shape/helene_30k_plt.xml"
     },
     {
-      "path": "shape/helene_document.pdf",
-      "expectedBytes": 69780,
-      "expectedSha256": "87b5af238d1e6a333bd1b33cc0cb46d5a1ef096b88c1ec2439070772dc5166d2"
+      "path": "shape/helene_document.pdf"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2360,
-      "expectedSha256": "e20474d830aeedbd2ce36fe407c5cc373c9d21ad3ed65a55f4fc56089456006b"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "preparation/close-encounters-reference.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Source-camera feature registration job; fits detector translation and roll against pinned reference images on the unchanged published shape with disjoint held-out patches."
-      },
-      "expectedBytes": 2379,
-      "expectedSha256": "0a5c0021e0ebea6151071e4233de08cd804d25b08150a49d63283e6ff86b88d1"
+      }
     },
     {
       "path": "preparation/close-encounters-filters.json",
       "sourceBinding": {
         "kind": "local",
         "reason": "Source-camera feature registration job; fits detector translation and roll against pinned reference images on the unchanged published shape with disjoint held-out patches."
-      },
-      "expectedBytes": 3427,
-      "expectedSha256": "3382868b0ce4f24008db1f18f3f632f969c7780b004c47a8c4b8bf3f725c56eb"
+      }
     },
     {
       "path": "validation/close-encounters-reference.json",
-      "expectedBytes": 28670,
-      "expectedSha256": "1667e1fc7e938e057b04e5a286529d9147e0f9ed25a4a955fd548d72d2d3cb36",
       "sourceBinding": {
         "kind": "local",
         "reason": "Measured detector translation and roll against pinned Cassini reference imagery on the published shape, with disjoint held-out image features; original controls and residuals retained."
@@ -1951,8 +1921,6 @@
     },
     {
       "path": "validation/close-encounters-filters.json",
-      "expectedBytes": 77818,
-      "expectedSha256": "a1982c9432d720ff45b01baa6a05c3adf95e0eb8f663c610d0b47c206e6426e5",
       "sourceBinding": {
         "kind": "local",
         "reason": "Measured detector translation and roll against pinned Cassini reference imagery on the published shape, with disjoint held-out image features; original controls and residuals retained."

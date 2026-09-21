@@ -576,8 +576,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 33490,
-      "expectedSha256": "2b6c2b2328d0ad3baf6638595e09b236497a8512dcb3554ca6f215c579028311",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
       "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
       "license": "PDS public scientific archive; credit Stooke and Abergel",
@@ -607,109 +605,71 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3988,
-      "expectedSha256": "0663e022c6786d986e3d4aff62bdddfb494dbc47e936f38966a60443f5f1278b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 4120,
-      "expectedSha256": "467c0e47bc9a06de31194aab11da3570afb86ac893b560e22ebcfc75fde85827"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "0aace71e7221b06b47081813da4b15ac94213b68e39bb4b29cee5a5be0dbd4df"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 510,
-      "expectedSha256": "ad4337fd3508766b58ea05e6463979c6b065cff03b0bea015e53fbdca8afab25"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3389,
-      "expectedSha256": "d48e2570b6da75e7c0f891fbe1ecafdab02a121c90d9fd558b6aca908bb4aff2"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2905,
-      "expectedSha256": "3d4d26b465fa2c05130181729b11e9b10c7838883df409b5f16be702dd7cec6d"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7684,
-      "expectedSha256": "30defa966ef82dc8323b6940a27ec03c629a995fe0d85e7a89d557a0ac05b348"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6974,
-      "expectedSha256": "c1a497618a2dced30ee92508e95ba0264426005c98a0529251aefdb84c861c49"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "shape/1682q1halley.xml",
-      "expectedBytes": 9520,
-      "expectedSha256": "3f8d349a7328bb6683d94ddc6d0df80c798bae89b8d009797c1fb83c60bca9a7"
+      "path": "shape/1682q1halley.xml"
     },
     {
       "path": "reference/giotto-hmc-intake.json",
-      "expectedBytes": 8776,
-      "expectedSha256": "9aa7e995011774208c6b4ab492e91bdc535c1870915180f365893157c3a4c36d",
       "purpose": "Preserved Giotto intake and retrieval pins; this unqualified survey is not a runtime input."
     },
     {
       "path": "reference/giotto-registration.json",
-      "expectedBytes": 12852,
-      "expectedSha256": "30ee84f7ead2cf627d26c1fc4b6ac88b2c7b5972c23cb9ad4d94e3fbe9a73fb6",
       "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
     },
     {
       "path": "reference/giotto-projection-report.json",
-      "expectedBytes": 4160,
-      "expectedSha256": "88009a6a8132e1df690b182a21379f72c440bc677514d677b2388cfbb0787ebd",
       "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
     },
     {
       "path": "reference/giotto-validity.bin",
-      "expectedBytes": 131072,
-      "expectedSha256": "816281ded6c5ad23a5daf851dc14b6dc12cfd58d2b5b4d70d856f4fe98292673",
       "purpose": "Giotto source registration, sampled coverage, or lossless observation/gap provenance."
     },
     {
       "path": "reference/encounter-registration.json",
-      "expectedBytes": 8899,
-      "expectedSha256": "f7d99dc745d4a265c916fc5a0fe410caaac69b5e1abea5329cb3f0a0ce421678",
       "purpose": "Halley encounter camera controls, sampled common-area comparison, or lossless source attribution."
     },
     {
       "path": "reference/encounter-attribution.bin",
-      "expectedBytes": 131072,
-      "expectedSha256": "9260d89e0ef378e8f32b83b4b050c0522ddfd1544268a694bfdf5ae2c9ba429f",
       "purpose": "Halley encounter camera controls, sampled common-area comparison, or lossless source attribution."
     },
     {
       "path": "reference/encounter-projection-report.json",
-      "expectedBytes": 10475,
-      "expectedSha256": "b3a527b9d38ad25d8118f2ba6c572c3316625ae2fbaac1f28f14fe6800b18172",
       "purpose": "Halley encounter camera controls, sampled common-area comparison, or lossless source attribution."
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4295,
-      "expectedSha256": "82a576137c7f0f760437d693f3d49cd2093288c47822e56eb70666e7e922d1d9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

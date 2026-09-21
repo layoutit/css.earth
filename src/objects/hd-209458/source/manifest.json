@@ -4,8 +4,6 @@
     {
       "id": "hd-209458-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1359,
-      "expectedSha256": "461206c2ae0853401942b21df92794b40b7247896969c54a2a21a79412b59edd",
       "origin": "https://arxiv.org/abs/0801.1841",
       "credit": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "hd-209458-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2350,
-      "expectedSha256": "f99ea64580a9e065ce3e1e024d5f165fe8869f2d31f42cd5dba800a4e0dd294d",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "hd-209458-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1704,
-      "expectedSha256": "59adce5227a6ed82473004c9946e14284d7eec6f9fbee184efac3b6841c8c201",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "hd-209458-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "hd-209458-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 104,
-      "expectedSha256": "28fee5fa85990027d67f4e6f280048a94b580638251cf58b01602cda0e6ab1c9",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "hd-209458-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 217,
-      "expectedSha256": "ceb6a86c7d93e885669304a0a426def390ee3774c68c1b5ae63d0617660a81b6",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -227,8 +215,6 @@
     {
       "id": "hd-209458-published-limb-darkening",
       "path": "photometry/brown-2001-limb-darkening.json",
-      "expectedBytes": 1219,
-      "expectedSha256": "6aa06ac6203aa1fd97ecd1391d438ed84d00171036f724b566f30a3bdccf61cb",
       "origin": "https://arxiv.org/abs/astro-ph/0101336",
       "credit": "Brown et al. (2001), Hubble Space Telescope Time-Series Photometry of the Transiting Planet of HD 209458, ApJ 552, 699",
       "license": "Factual numerical measurements; source attribution retained",
@@ -276,8 +262,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 45456,
-      "expectedSha256": "bdb2a4b59d71cd41495869b58b2995677195c8421502ea9206abd52fb837379c",
       "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -304,42 +288,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3155,
-      "expectedSha256": "1df6cfc0c1a2e6c6668127d1082d60aa385353d6d8ad78bfc7660031579841e4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 922,
-      "expectedSha256": "dcb617377866cdb4d8bb98bd08ba40bf583cbe1663ce2a1ece71e9d5ffcc8b41"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "fd57d9b5693a5580edead60233cc9da99b85d602ff4a75e400166ea21b8318d0"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 940,
-      "expectedSha256": "8e009679ab15cc51f0502966d19f09f21ab58b9c620608441c9cb5b1100e238c"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5267,
-      "expectedSha256": "ccdf086fabd90d1c9ae5491e0fe735cce63c3e2935f7c5dace33491aea0b64ca"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 529003,
-      "expectedSha256": "861e633a3fa755a7b1f78be9ff5af7845fc66b7ee3e22dc03eaac02f7147aeff",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture of the default view, cited by the README; declared now that the reference folder holds a pinned input."
@@ -347,8 +317,6 @@
     },
     {
       "path": "reference/rendered-system.png",
-      "expectedBytes": 694034,
-      "expectedSha256": "f2a0121c23ccc48a3639057ecbaad27c8f9828d3340cecccda3d6cf03cec9763",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture of the opened planetary system, cited by the README; declared now that the reference folder holds a pinned input."

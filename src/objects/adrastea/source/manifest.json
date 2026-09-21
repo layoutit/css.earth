@@ -103,84 +103,54 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4209,
-      "expectedSha256": "ead9aa9dcfd5b62bff6f81b2607250cb2241026178a00a406c2f78dc668015a2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 786,
-      "expectedSha256": "201c306457328fb99682a10be10648b8b74f13987713b70884ebe7921780492f"
+      "path": "measurements.json"
     },
     {
-      "path": "physical.txt",
-      "expectedBytes": 727,
-      "expectedSha256": "4ef65b8d3c2c3ef6f6ddd5dd98e681e41734ed62f6681f1cec56bbaf7e04a96a"
+      "path": "physical.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "d31287f8d61b5db98e0b31307cfba0c1c6b6d70d015bb4a61c04b1ee955ddaa6"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2047,
-      "expectedSha256": "51f9406ce43b90327726ca4be5420f129a6602d0d3075ad9e0da8a0ea4d72780"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5549,
-      "expectedSha256": "d13ff84d19d6e34b6c91e430866f4e923a1848f0ab7381261f8ac1fe8494fd60"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
-      "path": "survey/0374674100-metadata.json",
-      "expectedBytes": 11739,
-      "expectedSha256": "961d0687ea1bbf043e969744658b45d68b6e913b727d50cd71b868a249f5f77b"
+      "path": "survey/0374674100-metadata.json"
     },
     {
-      "path": "survey/0401718000-metadata.json",
-      "expectedBytes": 11743,
-      "expectedSha256": "30c5e62efcd9775d1621102e5b361c8ceb722812634121524ae412e85730e23b"
+      "path": "survey/0401718000-metadata.json"
     },
     {
-      "path": "survey/0401749000-metadata.json",
-      "expectedBytes": 11725,
-      "expectedSha256": "d27ad0c489dc403c77ddfe33b7df3ee530eb57fa333e3164f90f08241c9e7028"
+      "path": "survey/0401749000-metadata.json"
     },
     {
-      "path": "survey/0401764300-metadata.json",
-      "expectedBytes": 11730,
-      "expectedSha256": "815939c2f02e5cdb93be51e53c93f4ce5fb156ccbb17ade17975a5c4366ad843"
+      "path": "survey/0401764300-metadata.json"
     },
     {
-      "path": "survey/0401776900-metadata.json",
-      "expectedBytes": 11743,
-      "expectedSha256": "01c9a260b546d78b4fbe0ff1d02aad2c8437584ceaa06ef49d0627499fd5e6c8"
+      "path": "survey/0401776900-metadata.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1988,
-      "expectedSha256": "e2469217b77231a82ac9c7d4c9ac7d60aa4b6c7db2caa1da790a8505d001e755"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     }
   ],
   "generatedIntermediates": [
@@ -206,9 +176,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 68244,
-      "expectedSha256": "5406542347b5d552dede364653221ddc57be8684ff982756221226ee05b004a2"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

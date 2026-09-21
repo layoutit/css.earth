@@ -90,8 +90,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 34402,
-      "expectedSha256": "010a2ccde353a6a89da016ab9917f6bc4c5d018499a1a6347364698269429f12",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -110,70 +108,46 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8724,
-      "expectedSha256": "3fb61a0c4129a033dd0612041dafab6ef559b4582c376a6528cb8e38ff5df39d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 579,
-      "expectedSha256": "83538265c8bc450d3783fc160f904cd63ddd2d499937de3e6ca92ba5219fcf27"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "c22225fd6540e9323dec5e71921286e86a93e404f8a202c2f08d240883a9618a"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 649,
-      "expectedSha256": "28664341ad43161a298fb3e744f63f4e35ea2969f53ddc8670fc9a32d20dcf7a"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2917,
-      "expectedSha256": "ebdf705e3116157bf9dc1192ffe8f9b2ec3742d20bd0f96c4b19aa3473e31074"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4151,
-      "expectedSha256": "54ac8059ddde7d6b39941074a330e117cc2bacc0529a8483a6de638d242bea1c"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/4179toutatis2.xml",
-      "expectedBytes": 13953,
-      "expectedSha256": "eb873a7279ab7dde9211fec46235d1a3523501fb78ed7550892b11cb181e8ce3"
+      "path": "reference/4179toutatis2.xml"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 2315,
-      "expectedSha256": "6630280401c8236fe149529ee19fadb12d43e45dfef4a21824dbf9a0b0494f6c"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1587,
-      "expectedSha256": "6e14de8de1fdab168eb57b08a1a8f898c89941a78d5469ec85bf2c9019ee2087"
+      "path": "reference/horizons-physical.txt"
     },
     {
       "id": "sbdb-physical",
       "path": "reference/sbdb-physical.json",
       "origin": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=Toutatis&phys-par=1",
-      "expectedBytes": 5876,
-      "expectedSha256": "280a10bae7683be9dd246ccc3bbf70bae3bbc0087c5d2ed9cfe11ab24a260951",
       "purpose": "Pinned JPL SBDB physical record retaining the NEOWISE geometric albedo value, uncertainty and reference for factsheet interpretation."
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4980,
-      "expectedSha256": "718b10f70459e4f1c3149ad7c001440113992f7b67b956b4c1b99adf51f45fa8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -4,8 +4,6 @@
     {
       "id": "hd-189733-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1356,
-      "expectedSha256": "2cb34733b8527b8a37d10f647afc7ef84c9889e0000e700ba2eb88135424ab3f",
       "origin": "https://arxiv.org/abs/2503.20895",
       "credit": "Lally et al. (2025), arXiv:2503.20895; Gaia DR3; Boyajian et al. (2015)",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +47,6 @@
     {
       "id": "hd-189733-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2602,
-      "expectedSha256": "d5e706d1e357cb9a06d0d814197f172573c34bd866f091ca2b9642d36d7f52ee",
       "origin": "Repository-authored raster recipe: the star's measured colour on the reference sphere, transparent off-limb plate, limb plate from its fitted limb darkening",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "hd-189733-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1704,
-      "expectedSha256": "979ba57f593c4cb49605e887b5820d73a7cdbe5f31beaf5c842b2828dcf9bd4f",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "hd-189733-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "hd-189733-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 104,
-      "expectedSha256": "101d660e03d3f234967c9d04ed7668ef5275a62db45e42e8f64d617766be204e",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "hd-189733-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 290,
-      "expectedSha256": "cf2603d1e1040e1cc06333f04310b89ccdceb7a293ffa4e5510e4d0a6c395b3b",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -352,8 +340,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 43408,
-      "expectedSha256": "3cc2b4e9831b3a3e61a22f3a14c454d49f037150303ebb37fa5c9e138274be44",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "Photosphere colour from the Gaia DR3 XP spectrum, dimmed toward the limb by the law fitted to TESS transits of HD 189733b; rendered by tools/objects/source-authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative.",
@@ -382,42 +368,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3793,
-      "expectedSha256": "43fdcc61dc88080e6143ba51d2eee23b2eef48926a408948e0fae24b390cf956",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2237,
-      "expectedSha256": "1ab80eb510b20f5b1bda9b361583e02bb77bbd62ad6a3d63e57858bd41fbeb41"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "7b3aa00690a624ca13895a51e156998854bf8bc60656f89fcfa77565d2bf3925"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 2510,
-      "expectedSha256": "97968f96008ffa24a8c22a18d6e4f141b5310f92eb723bd852fe60cb4c84fe94"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5569,
-      "expectedSha256": "d41ec0ee494cdad389244bf1503326644be7dd10b47518ea4b7e76ccbb2dc2b4"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 440026,
-      "expectedSha256": "1c912b46575f9e964f59719bf0d324f3e56200e0b158ab812e775e6c1cb9358d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."
@@ -425,8 +397,6 @@
     },
     {
       "path": "reference/rendered-system-view.png",
-      "expectedBytes": 450019,
-      "expectedSha256": "e41172f0f513c60411d951852dc713c838ec6caec0eb955f2d5b5ab8d6187cc0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733/?overview=system, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation."

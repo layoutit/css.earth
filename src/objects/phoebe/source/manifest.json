@@ -591,8 +591,6 @@
     {
       "id": "phoebe-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1005,
-      "expectedSha256": "a59fac018757fc0cf8c4a6a792b6f0a1363eee128294f3fac9431fc8b563da26",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -609,8 +607,6 @@
     {
       "id": "phoebe-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1193,
-      "expectedSha256": "efb67d63b431d74e49b4aed9cc7e5b64e689aa6421b163ec623b550a9de76134",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -627,8 +623,6 @@
     {
       "id": "phoebe-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "cac9def5bc8cae522a9269550e49f9b5783570bf3579c51cde53bbdf9e7dc7dc",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -747,256 +741,170 @@
         "lensId": "normal",
         "displaySampling": "nearest"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 115290,
-      "expectedSha256": "4a2a1a9cb3c5b5b6b91663897ed302bd78bbed6b09df19fe72f8698af7c275d1"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 12266,
-      "expectedSha256": "a9e85d2501a17786d9f2d73dbe35df207429809619ef6162071896e63540a501",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "observations/datainfo.txt",
-      "expectedBytes": 2879,
-      "expectedSha256": "e624ef80aadb786289ced6c7e7fb687ed43bf2a43681615ba2d3490346e90aa9"
+      "path": "observations/datainfo.txt"
     },
     {
-      "path": "observations/regional-color-example-label.txt",
-      "expectedBytes": 13093,
-      "expectedSha256": "383d1877fa726030589d125c57c46dc2432376408f44875527b0c3ccec2e8707"
+      "path": "observations/regional-color-example-label.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3360,
-      "expectedSha256": "d69e6e388e1bade53d7fbb9c60120473e0898c44ff5eec7ba1306f53485a932c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "1193fa9c7efda817d249748559a5dca42e875817b19b77604cefce8387fa70a4"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 668,
-      "expectedSha256": "5dba43a0956e9dd4b84819ea83d253431569afb4b5126661ef5a9c28c2a39713"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 15139,
-      "expectedSha256": "39e326e4fa7487fc57b8c1d21c0c89a4f7b7a40f92617187925c97037f94a270"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3892,
-      "expectedSha256": "24ac25702c2b96ae23274cca88949210c6bb96f42afd4eeff450c7d9bb5f438a"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/README.txt",
-      "expectedBytes": 5911,
-      "expectedSha256": "c950ffefbadd767e022a772724ff5b5170134fa98d650c11559752b20fa3d7c2"
+      "path": "shape/README.txt"
     },
     {
-      "path": "shape/icqmodel.asc",
-      "expectedBytes": 7297,
-      "expectedSha256": "1e4f9ac874076e5f02c15efb0cc803ff6d3c6d707f2f88edb1ec0ff1b75f8415"
+      "path": "shape/icqmodel.asc"
     },
     {
-      "path": "shape/phoebe_ver128q.xml",
-      "expectedBytes": 13891,
-      "expectedSha256": "502d5119f3de1e7770594683e672e49c586ac9e0ad5b9cab85a109ee1537038e"
+      "path": "shape/phoebe_ver128q.xml"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2350,
-      "expectedSha256": "dbbf783cd5ec7ea1bee8776fe41cbd386c8a778c6af7ef297becba4967319b37"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "shape/2023/phoebe_128_o.xml",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 8362,
-      "expectedSha256": "ba1b4e2b48c1ddf3e4ba0f02d9a8f70f24fb0dfbd1ce29b41329cd3df3da08b7"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebe_albedo_c.xml",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 7182,
-      "expectedSha256": "d2edeca7fc28031ef0b1d980d4cedb9a1479a4d5fa9fe5fb68e2bdad04fb0253"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebe_radius_c.xml",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 7137,
-      "expectedSha256": "82159c91ae1218cd0d92c5147f871974f3645085b6f5b3227c5e62e367168ad3"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebe_bestmap_c.xml",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 7108,
-      "expectedSha256": "91cd4e7be8c9fd1ddf51950c125f3f4e307ad77ae2aa4f0c8198fa4d0b7d1c81"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebe_numimg_c.xml",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 7110,
-      "expectedSha256": "7b5056187db70dd6859872225de6fffd2988c354d3284849b59280a1fb951111"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/productdescription.txt",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 16534,
-      "expectedSha256": "b8a24258e4a2f97de3158453a01262571a0061ddfa00c3581b8aad4356b0a3a7"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebekernellist.txt",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 8233,
-      "expectedSha256": "8bcffafa72f3d7d4f2c9711a9478a6ded84b1e48f15e33e1d890c3954ec964f3"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebeimglist.txt",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 3952,
-      "expectedSha256": "d70688edd7b16c7baa6dbe1809be702ef95d3b69a13c3220d7f690368f859ac0"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "science/2023/phoebeshapeassessment.pdf",
-      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations.",
-      "expectedBytes": 395600,
-      "expectedSha256": "c84bc74796fa2bd29f9b631ffbfe8c5147cd5af3945e71d25c8453e263bf3c02"
+      "purpose": "Original 2023 PDS4 label or product documentation; paired frame, units, coverage and source limitations."
     },
     {
       "path": "validation/2023-geometry-initial-trial.json",
-      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
-      "expectedBytes": 4524,
-      "expectedSha256": "922b9cd4c4d2d0dea007e5d4f9f1fc999881d86da8d342a505e79aec3013850d"
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification."
     },
     {
       "path": "validation/2023-geometry-qualification.json",
-      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
-      "expectedBytes": 29982,
-      "expectedSha256": "22b7e0291f5cc826250ec335e9b26270549846ab9d289a580ad4b79e6cb85565"
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification."
     },
     {
       "path": "validation/2023-geometry-regularized-trial.json",
-      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
-      "expectedBytes": 4401,
-      "expectedSha256": "e5d7548e98a6f01027fadee7970968813f59dab10d05ef5a8ec386f1bb33f93e"
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification."
     },
     {
       "path": "validation/2023-independent-geometry.json",
-      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
-      "expectedBytes": 1549,
-      "expectedSha256": "496106c374ccebee5ad373898d9f4af9f932c3173fa87aadc16add2a99c342cd"
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification."
     },
     {
       "path": "validation/2023-mask-source-check.json",
-      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
-      "expectedBytes": 608,
-      "expectedSha256": "829386da334c8d6b492d66ebc7cd6f97ec124f6b24d0fe2bc68148f74b5d10b7"
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification."
     },
     {
       "path": "validation/2023-source-statistics.json",
-      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification.",
-      "expectedBytes": 9783,
-      "expectedSha256": "d148c26d174e7defaceb2d795f746069e2595f8227aa1fd01478136cf834c031"
+      "purpose": "Independent native-source statistics, geographic fixtures or source-preserving geometry qualification."
     },
     {
       "path": "validation/2023-context-generation.json",
-      "purpose": "Pinned paired-source context generation and bit-identical repeat receipt.",
-      "expectedBytes": 2239,
-      "expectedSha256": "6a8ab7858925801e7b75e7b43bb7e793d5f1e948d23a76cac07d4e1802b7812a"
+      "purpose": "Pinned paired-source context generation and bit-identical repeat receipt."
     },
     {
       "path": "cassini-ice/evidence/download-receipts.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 946,
-      "expectedSha256": "41944b166965998dff08963811ebc9bd83f637215ab3a8e1f8411e81f6cacce0"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/evidence/native-registration-fit.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 19553,
-      "expectedSha256": "e7e8d9b030135adc5e802c28daa9092bc77e37246bb2d50b59d36bdbb8d9b26a"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/evidence/regional-mask.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 77024,
-      "expectedSha256": "545127b529e97e3d0cd296cca6d826166ddc7fd0f025045f2550ed09a7d045fb"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/evidence/registration.md",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 1173,
-      "expectedSha256": "9e4897df64a6eb8cfc335083fd8c4d253fdac67e6ad7a6968544d0f9f89c028c"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/evidence/source-model-comparison.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 59202,
-      "expectedSha256": "d8ec9e389a1dd49bdeea35f739ed38312632d427f992f5dcd60b7c775469358d"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/phoebe-ice-absorption-observation.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 16591,
-      "expectedSha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/phoebe-ice-absorption-source-pixel.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 18611,
-      "expectedSha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/phoebe-infrared-if-observation.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 16591,
-      "expectedSha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/phoebe-infrared-if-source-pixel.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 18611,
-      "expectedSha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/phoebe-infrared-if.tif",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 90215,
-      "expectedSha256": "83d7e9574e3a52eda73590dbf0359b587003623140e2b2570528c3ecad0a7500"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/preparation-receipt.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 10611,
-      "expectedSha256": "82b121ab41e63420200fdcceb08311c155c62e743833fb60000f55fd155be4b6"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "path": "cassini-ice/prepare.json",
-      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence.",
-      "expectedBytes": 3417,
-      "expectedSha256": "68162ebf0bc13325bf7d9ae295cf34903c1f100f3b13a7d35bd5d7db11689647"
+      "purpose": "Pinned Cassini source mapping recipe, lossless spectral values, exact observation ownership, detector support or source registration and license evidence."
     },
     {
       "id": "phoebe-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 780,
-      "expectedSha256": "1a3e6466a0d402adbbc1dc0cdddd215ae471d9ec82599d8deb7afad8912f4419",
       "origin": "Repository-pinned English Wikipedia lead summaries for 1 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

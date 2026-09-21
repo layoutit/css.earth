@@ -136,8 +136,6 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         if (process.env.CSSEARTH_PREPARATION_TRACE) throw new Error(`${id}: legend labels differ from the prepared stretch: ${legend.summary}.`);
         await writeFile(legend.contentPath, `${JSON.stringify(legend.refreshed, null, 2)}\n`);
         console.log(`refreshed legend labels ${legend.summary}`);
-        const { pinObjectDocuments } = await import(pathToFileURL(resolve(projectRoot, 'tools/pin-object-documents.mts')).href) as typeof import('../pin-object-documents.mts');
-        await pinObjectDocuments(objectDirectory);
         return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, presentationOnly });
       }
       const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
@@ -297,11 +295,6 @@ if (direct) {
   if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || flags.some(flag => flag !== '--write' && flag !== '--presentation-only') || new Set(flags).size !== flags.length ||
       (flags.includes('--presentation-only') && !flags.includes('--write'))) throw new TypeError('Usage: prepare-authored <object-id> [--write [--presentation-only]].');
   const root = process.cwd(), write = flags.includes('--write'), presentationOnly = flags.includes('--presentation-only');
-  // A traced run's pins were refreshed by its runner; rewriting recipe pins mid-run would change its own inputs.
-  if (write && !process.env.CSSEARTH_PREPARATION_TRACE) {
-    const { pinObjectDocuments } = await import(pathToFileURL(resolve(root, 'tools/pin-object-documents.mts')).href) as typeof import('../pin-object-documents.mts');
-    for (const change of await pinObjectDocuments(resolve(root, 'src/objects', id))) console.log(`pinned ${change.file} ${change.path} (${change.expectedBytes} bytes)`);
-  }
   const result = await prepareAuthoredObject({ objectDirectory: resolve(root, 'src/objects', id), publicDirectory: write ? resolve(root, 'public/scenes', id) : resolve(root, '.local/full-json-migration/staged-public', id), outputDirectory: write ? resolve(root, 'src/objects', id, 'prepared') : resolve(root, '.local/full-json-migration/staged', id), write, presentationOnly });
   if (!write) {
     // A check run refuses labels its own report contradicts; write mode rewrites them.

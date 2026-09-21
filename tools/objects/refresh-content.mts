@@ -9,7 +9,6 @@ import { spawnSync } from 'node:child_process';
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { pinObjectDocuments } from '../pin-object-documents.mts';
 import { readAuthoredSources } from './authored-sources.ts';
 
 /** Prepared files the content stage writes that depend on lens images in the public folder, which the scratch run omits. */
@@ -17,7 +16,6 @@ const IMAGE_DERIVED = new Set(['lenses.json']);
 
 export async function refreshContent(id: string, root = process.cwd()) {
   const objectDirectory = resolve(root, 'src/objects', id), sourceDirectory = resolve(objectDirectory, 'source'), preparedDirectory = resolve(objectDirectory, 'prepared');
-  await pinObjectDocuments(objectDirectory);
   const { descriptor } = await readAuthoredSources(objectDirectory);
   const content = descriptor.recipe.sources.find(source => source.id === 'content');
   if (!content) throw new TypeError(`${id} has no content source.`);

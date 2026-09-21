@@ -103,52 +103,34 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3132,
-      "expectedSha256": "35a34b36f10a3a3bfedbef5dfabaa9c5e854ca935775de71569be9ded308df15",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2571,
-      "expectedSha256": "cc9b2d82132cd0f2e71828e55f0f6347cd2ca7d8db37c8e649b327cb2bd88c24"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "fa4a616e4a22244d57f7bedd171c2554f02e7c65a1beda71e7cccd0ba77daea3"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 565,
-      "expectedSha256": "597be537800ad7078d04dc98a2b9ae4dfe095cab7cf942f14a6ec665f30382bb"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2496,
-      "expectedSha256": "9822a6dbccf5d1e3c8c68b8565ff6fc2c39e2a1da780f17f6a36fde328360703"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4052,
-      "expectedSha256": "198a8bf6b679f8044da6075d6321275b663355a7594b0040379f3897dd74c626"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3551,
-      "expectedSha256": "12410a0c1c98ad8bcf7b19d357a35686caa8c473cd1c5985a38fc56aac23f996",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -184,9 +166,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 52094,
-      "expectedSha256": "c30960f6ea02300ffca025159880f2a7cb0d80be3774273a86a5616829c56004"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

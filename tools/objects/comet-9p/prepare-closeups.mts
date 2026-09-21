@@ -14,7 +14,7 @@ import {matchImageFeatures} from '../terrestrial-layers/image-feature-matching.m
 
 const matching=shape({patchRadius:number,searchRadius:number,gridStride:number,gridOrigin:number,targetSmoothingSigma:number,minimumCorrelation:number,minimumPeakMargin:number,minimumJointValidFraction:number});
 const parseRecipe=shape({schema:text,shapeSha256:text,margin:number,matching,maximumRmsPixels:number,maximumResidualPixels:number,frames:array(shape({id:text,referenceId:text,observation:parseEncounterPolicy}))});
-const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
+const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:optional(number),expectedSha256:optional(text)}))});
 const parseGeometry=shape({geometry:shape({radialTerrain:shape({path:text,grid:parseMeshProfile})})});
 
 const json=async(p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8'));
@@ -28,7 +28,7 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
   assert.ok(recipe.maximumRmsPixels>0&&recipe.maximumRmsPixels<=1&&recipe.maximumResidualPixels>=recipe.maximumRmsPixels&&recipe.maximumResidualPixels<=2);
   const pinned=async(path:string)=>{
     const pin=manifest.inputs.find(e=>e.path===path);assert.ok(pin,`Missing source pin: ${path}`);
-    const bytes=await readFile(resolve(source,path));assert.equal(bytes.length,pin.expectedBytes);assert.equal(sha256(bytes),pin.expectedSha256);return bytes;
+    const bytes=await readFile(resolve(source,path));if(pin.expectedSha256!==undefined){assert.equal(bytes.length,pin.expectedBytes);assert.equal(sha256(bytes),pin.expectedSha256);}return bytes;
   };
   await pinned('preparation/closeups.json');
   assert.equal(sha256(await pinned(geometry.path)),recipe.shapeSha256);
@@ -57,7 +57,7 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
     const control={schema:'cssearth-encounter-control@1',observation:entry.observation,camera:{...seed,offsetPixels:match.offsetPixels},registration:{method:'registered-image-feature-translation',sourceShapeSha256:recipe.shapeSha256,reference:{id:entry.referenceId.replaceAll('_','-'),imageSha256:sha256(refBytes),controlSha256:sha256(refControlBytes)},nominalPixelScaleMeters:camera.report.nominalPixelScaleMeters,maximumRmsMeters:Math.min(100,recipe.maximumRmsPixels*camera.report.nominalPixelScaleMeters),maximumResidualMeters:Math.min(200,recipe.maximumResidualPixels*camera.report.nominalPixelScaleMeters),limitations:'Relative overlap registration inherits the reference photograph and 2012 shape placement uncertainty. Subpixel relative residuals do not establish subpixel absolute surface coordinates.',controls},matching:{...recipe.matching,excluded:match.excluded},frameBinding:refControl.camera.bodyToJ2000};
     const registered=encounterCamera(target.header,control.camera),report=validateEncounterControls(registered,control.registration,recipe.shapeSha256);
     const path=`${directory}/${entry.id}.json`,bytes=Buffer.from(JSON.stringify(control,null,2)+'\n');
-    if(write){await writeFile(resolve(source,path),bytes);const pin=manifest.inputs.find(p=>p.path===path);assert.ok(pin);pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);}
+    if(write){await writeFile(resolve(source,path),bytes);const pin=manifest.inputs.find(p=>p.path===path);assert.ok(pin);if(pin.expectedSha256!==undefined){pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);}
     else assert.equal((await pinned(path)).toString('utf8'),bytes.toString('utf8'),`Registration is not reproducible: ${entry.id}`);
     reports.push({id:entry.id,...report});
   }

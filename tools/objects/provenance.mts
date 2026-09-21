@@ -54,9 +54,10 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     // The descriptor names its recipes; the manifest pins them.
     const path = text(input.path), pin = manifestPins.get(path);
     if (!pin) throw new Error(`Provenance recipe is not in the source manifest: ${id}/${path}.`);
-    const reference = { id: text(input.id), path, sha256: text(pin.expectedSha256) };
-    const bytes = await readFile(contained(objectDirectory, reference.path));
-    if (sha256(bytes) !== reference.sha256) throw new Error(`Provenance recipe changed: ${reference.path}.`);
+    const bytes = await readFile(contained(objectDirectory, path));
+    // A recipe is authored here, so its identity is its bytes; a pinned one must still match its pin.
+    const reference = { id: text(input.id), path, sha256: sha256(bytes) };
+    if (pin.expectedSha256 !== undefined && pin.expectedSha256 !== reference.sha256) throw new Error(`Provenance recipe changed: ${reference.path}.`);
     recipes.set(reference.id, { ...reference, parameters: record(JSON.parse(bytes.toString('utf8'))) });
   }
   const contentPath = recipes.get('content')?.path.replace(/^source\//u, '');
@@ -101,6 +102,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       if (prepared.sourceSha256 !== pin.decodedSha256) throw new Error('Geographic provenance uses a different decoded source.');
       const sourcePin = byPath.get(`${directory}/${pin.file}`);
       if (!sourcePin) throw new Error('Geographic provenance source is undeclared.');
+      if (sourcePin.expectedSha256 === undefined || sourcePin.expectedBytes === undefined) throw new Error('Geographic provenance source is a download and must be pinned.');
       assertIdentity(identity(pin), { sha256: sourcePin.expectedSha256, bytes: sourcePin.expectedBytes }, text(pin.file));
       geographic.noise = { pin, prepared, directory };
       for (const page of records(prepared.roots)) {
@@ -119,8 +121,11 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     if (visiting.has(path)) throw new Error(`Cyclic acquisition dependency: ${path}.`);
     if (sources.has(entry.id)) return entry.id;
     const { expectedSha256, expectedBytes, consumers, ...record } = entry;
-    const pin = { sha256: expectedSha256, bytes: expectedBytes };
-    if (verify) assertIdentity(await fileIdentity(contained(sourceDirectory, path)), pin, path);
+    // Downloads carry a manifest pin. A file authored here is identified from the repository's own bytes.
+    const pinned = expectedSha256 !== undefined && expectedBytes !== undefined;
+    const measured = pinned ? null : await fileIdentity(contained(sourceDirectory, path));
+    const pin = measured ? { sha256: measured.sha256, bytes: measured.bytes } : { sha256: expectedSha256!, bytes: expectedBytes! };
+    if (verify && pinned) assertIdentity(await fileIdentity(contained(sourceDirectory, path)), pin, path);
     const acquisitionOperation = acquisitionOperations.find(operation => operation.path === path) ?? null;
     const verificationOperations = acquisitionOperations.filter(operation => operation.expectedPath === path) ?? [];
     const dependencies = acquisitionOperation?.fileSource
@@ -129,9 +134,9 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       const recipePath = text(acquisitionOperation.recipePath), recipeEntry = byPath.get(recipePath);
       if (!recipeEntry) throw new Error(`Unbound composition recipe: ${recipePath}.`);
       const bytes = await readFile(contained(sourceDirectory, recipePath));
-      // Recovery reads this recipe to discover dependencies, so its bytes must
-      // match even when the original downloaded archive is not installed.
-      assertIdentity({sha256: sha256(bytes), bytes: bytes.length}, {sha256: recipeEntry.expectedSha256, bytes: recipeEntry.expectedBytes}, recipePath);
+      // Recovery reads this recipe to discover dependencies. A pinned recipe must match its pin
+      // even when the original downloaded archive is not installed.
+      if (recipeEntry.expectedSha256 !== undefined && recipeEntry.expectedBytes !== undefined) assertIdentity({sha256: sha256(bytes), bytes: bytes.length}, {sha256: recipeEntry.expectedSha256, bytes: recipeEntry.expectedBytes}, recipePath);
       const {parseMappedCompositionRecipe} = await import('./acquisition/mapped-composition.mts');
       const plan = parseMappedCompositionRecipe(JSON.parse(bytes.toString('utf8')));
       if (byPath.get(plan.input)?.expectedSha256 !== plan.sha256) throw new Error(`Composition input pin disagrees: ${plan.input}.`);
@@ -139,7 +144,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       dependencies.push(await bindSource(recipePath, ancestors), await bindSource(plan.input, ancestors));
     }
     sources.set(entry.id, { ...record, ...pin, dependencies,
-      verification: verify ? 'bytes-verified' : 'manifest-pin', acquisitionOperation, verificationOperations });
+      verification: verify || !pinned ? 'bytes-verified' : 'manifest-pin', acquisitionOperation, verificationOperations });
     return entry.id;
   };
   for (const binding of bindings) {

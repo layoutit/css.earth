@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,57 +92,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2959,
-      "expectedSha256": "677d8501a52cb41bacb9c86c82c92d1ee4e654d57bede554364ac76bc119e5a7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2279,
-      "expectedSha256": "b63c4dc62cb0eae278a4faba3bc8a173ab7f0ad54b742815b6dd22bdcb4a0e73"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "cfb85aef812e7303ec03e592a25336da9069f9a496bbd646bf360bc170ae2251"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 395,
-      "expectedSha256": "53525af1eb4012149cd288bec87647e5506c620a1572e6cf6b2639bfbc5b7266"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2552,
-      "expectedSha256": "21e8b0da9277c5d12e5da2f083b4ed69bd38fee16d270a779fd2976c3d4267ba"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5823,
-      "expectedSha256": "bfb2d5a3a5eb358a271c78a1f3652eeaff3bfcf771ae03b1354ccd4741f21c85"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7752,
-      "expectedSha256": "baaf026d91ea00766f3511d6140eacf5596f93ecebdd95c9b78d2389c027aa0b"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 7042,
-      "expectedSha256": "58a0a35bb7e699885be81b80afb31ad0def8abec21282a994036d740c2e88e28"
+      "path": "reference/horizons-vectors.txt"
     }
   ],
   "generatedIntermediates": [
@@ -170,9 +148,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 37448,
-      "expectedSha256": "c87888e54a3bebd8027e12251bb6296f85fc0bed3a5fe933816493d1c581a381"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }
