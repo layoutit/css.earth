@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { CAPTION_LIMIT, abstractText, extractCaptions, isChallenge, mentions, openAlexQuery, parseOpenAlexResponse, rankWorks, relevantCaptions } from './papers.mts';
+import { CAPTION_LIMIT, abstractText, evidenceScore, extractCaptions, isChallenge, mentions, openAlexQuery, parseOpenAlexResponse, rankWorks, relevantCaptions } from './papers.mts';
 import { parseCli } from './cli.mts';
 
 const fixtures = resolve(import.meta.dirname, '../../../tests/fixtures/telescope-papers');
@@ -63,10 +63,24 @@ test('browser challenges are recognised from headers or page', () => {
   assert.equal(isChallenge(headers({}), '<html><head><title>Client Challenge</title>'), true);
   assert.equal(isChallenge(headers({}), '<html><head><title>Radware Bot Manager Captcha</title>'), true);
   assert.equal(isChallenge(headers({}), '<html><head><title>The temporal variability of Io’s hotspots</title>'), false);
+  // A full article that embeds Cloudflare's bot-management script (Nature does) is not a challenge page.
+  const article = `<html><head><title>Ammonium-rich bright areas on Ceres</title><script src="/cdn-cgi/challenge-platform/scripts/jsd/main.js"></script></head><body>${'<p>text</p>'.repeat(5000)}</body></html>`;
+  assert.equal(isChallenge(headers({}), article), false);
+  assert.equal(isChallenge(headers({}), '<html><body><div id="cf-chl-widget"></div></body></html>'), true);
 });
 
 test('the papers command takes one target and optional instrument, JSON and output directory', () => {
   assert.deepEqual(parseCli(['papers', 'io', '--instrument', 'JIRAM', '--json']), { command: 'papers', target: 'io', instrument: 'JIRAM', json: true, verbose: false });
   assert.throws(() => parseCli(['papers']), /telescope papers OBJECT/u);
   assert.throws(() => parseCli(['papers', 'io', '--kind', 'cube']), /Unknown or repeated papers option/u);
+});
+
+test('papers that made the map outrank papers that only mention the target', () => {
+  const made = { title: 'The temporal variability of Io’s hotspots', captions: [
+    { kind: 'table' as const, label: 'Table 1', text: 'List of observations of the M and L band used for this study. Distance, Sub-Spacecraft Point (SSP) longitude…' },
+    { kind: 'figure' as const, label: 'Figure 2', text: '(A) Cylindrical equirectangular maps of the band radiance in the M filter for the orbits 41, 43, 47, and 49.' }] };
+  const cites = { title: 'JIRAM observations of Io’s volcanoes', captions: [{ kind: 'figure' as const, label: 'Figure 1', text: 'Spectra of three hot spots.' }] };
+  assert.equal(evidenceScore(made, 'Io', 'JIRAM'), 3 + 2 + 1);
+  assert.equal(evidenceScore(cites, 'Io', 'JIRAM'), 2 + 1);
+  assert.ok(evidenceScore(made, 'Io', 'JIRAM') > evidenceScore(cites, 'Io', 'JIRAM'));
 });
