@@ -379,7 +379,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         // the prepared system handoff—not a literal 50 AU camera distance—owns
         // this lifetime. The annotation stands alone once its orbit is subpixel.
         const referenceAnnotationOnly = focusDistanceM <= plan.system.fadeOutStartDistanceM &&
-          (annotationPriorities[body.id] ?? 0) >= 4 && !targeted && !resolvedDisc &&
+          (annotationPriorities[body.id] ?? 0) >= 4 && !resolvedDisc &&
           labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
         // The retained DOM leaf shares this opacity between its sprite and both
         // annotation pseudos. A reference whose physical marker has faded must

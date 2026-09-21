@@ -376,6 +376,20 @@ test('Earth remains a circle-and-label reference through the framed outer Solar 
     expect(earth.labelShown).toBe(true);
     expect(earth.indicatorShown).toBe(false);
     expect(earth.segments).toHaveLength(0);
+    if (distanceAu === 233.27) {
+      Object.assign(input.bodies[earth.index], {
+        labelShown: earth.labelShown,
+        labelPlacement: earth.labelPlacement,
+        indicatorShown: earth.indicatorShown,
+        hovered: true,
+      });
+      const hovered = calculate(input).projectedBodies.find(body => body.index === earth.index)!;
+      expect(hovered.labelShown).toBe(true);
+      expect(hovered.indicatorShown).toBe(false);
+      expect(hovered.segments).toHaveLength(0);
+      expect(hovered.labelPosition).toEqual(earth.labelPosition);
+      input.bodies[earth.index]!.hovered = false;
+    }
   }
   input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
   const beyond = calculate(input).projectedBodies.find(body => points[body.index].id === 'earth')!;
