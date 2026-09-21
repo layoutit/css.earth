@@ -490,6 +490,8 @@
   height: 48px;
 }
 #object-category-results .planet-observation-control.planet-thumbnail-leading::after { display: none; }
+/* A flat result list: no tree connector running down beside the previews. */
+#object-category-results .planet-object-list::before { content: none; }
 /* The results fill the drawer's width with the card's inline padding; a phone's column drawer otherwise shrinks them to
    their content. */
 [data-search-results] #object-category-results {
