@@ -76,6 +76,16 @@
       "title": "Photosphere colour",
       "detail": "From its spectrum",
       "summary": "The colour of a measured spectrum of the star. No surface picture or edge darkening is measured."
+    },
+    "matisse-2018-12": {
+      "title": "Photosphere at 4 µm",
+      "detail": "Dec. 2018, before dimming",
+      "summary": "Rebuilt from four telescopes' fringes before the Great Dimming. Patches unconfirmed."
+    },
+    "matisse-2020-12": {
+      "title": "Photosphere at 4 µm",
+      "detail": "Dec. 2020, after dimming",
+      "summary": "Rebuilt from four telescopes' fringes after the Great Dimming. Patches unconfirmed."
     }
   }
 }

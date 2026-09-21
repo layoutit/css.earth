@@ -33,6 +33,16 @@
               "material": "emission"
             },
             {
+              "id": "matisse-2018-12",
+              "source": "content",
+              "material": "emission"
+            },
+            {
+              "id": "matisse-2020-12",
+              "source": "content",
+              "material": "emission"
+            },
+            {
               "id": "color",
               "source": "content",
               "material": "emission"
@@ -105,7 +115,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ab518de5fcd8594d52af3d4dade4ec7a1a31aed04c9927462b62661f040729ad"
+        "sha256": "e4f897df6263299e4010e38100fe266d54482a24cfa1c8aea92e483a2899c7cb"
       }
     },
     "catalog": {
@@ -151,6 +161,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "31352fa41ba1dbca0217f3539fdd3ef845f9fdc487861c42b946e03e7304e7ad"
+    "sha256": "555ec19e941cc8ba1679dfd804bd078c9a13732ddfaa7f0a18f1ddfab4a81879"
   }
 }

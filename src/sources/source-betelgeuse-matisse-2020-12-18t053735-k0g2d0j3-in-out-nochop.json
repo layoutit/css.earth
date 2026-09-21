@@ -1,0 +1,37 @@
+{
+  "id": "source-betelgeuse-matisse-2020-12-18t053735-k0g2d0j3-in-out-nochop",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Betelgeuse · matisse 2020 12 18t053735 k0g2d0j3 in out nochop",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-12-18T053735_alf_Ori_K0G2D0J3_IR-LM_MED_IN_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/betelgeuse/source/manifest.json",
+      "revision": "7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696",
+      "sha256": "e3759a9d508ff44377003c72cde90678c574014adc8e666d94d8f469ae3e0cdd",
+      "locator": "/inputs/178"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO/VLTI/MATISSE, programme 106.21L4.002 as calibrated by the MATISSE consortium (Drevon et al. 2024); distributed by the JMMC OiDB",
+      "scope": "The matisse 2020 12 18t053735 k0g2d0j3 in out nochop input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public calibrated data (OiDB calibration level 3); ESO data policy asks for the programme and instrument to be acknowledged.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

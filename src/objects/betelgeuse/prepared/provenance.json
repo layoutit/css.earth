@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "48e0fea22571b319ce4f2045230ef64ea7ea1d1c8767814781f96adae6bb8506"
+    "sha256": "d1c7f5b1476e4da0707451ec2aa8defe78d3d06a7d01345bdf9942ec32f5535e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "95db5198f23dce6163b53065615a8bb2d6c7ea803d869194543377288ea321c7"
+    "bindingsSha256": "92b8220a3ea1a1ab25002d74726a9e8a0fa1c9cd27ad00367ce1c5d307925f72"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "8795abb3695afd458fc9adae65fbd31f9224efe87752c6bf15449b7268039e89",
+      "sha256": "ac8355b6b9c1ce085dbaba654aa75d5e9a760f76e8d2ee91f4d7cb349c82e4b8",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/betelgeuse/",
@@ -127,6 +127,180 @@
             }
           },
           {
+            "id": "matisse-2018-12",
+            "source": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
+            "falseColor": true,
+            "output": "betelgeuse-surface-{id}{suffix}.webp",
+            "thumbnail": "betelgeuse-lens-{id}.webp",
+            "science": {
+              "kind": "surface-observation",
+              "shape": {
+                "path": "shape/uniform-disc.tab",
+                "format": "pds-radius-table",
+                "grid": {
+                  "metersPerUnit": 1000,
+                  "expectedVertices": 2522,
+                  "expectedFaces": 5040,
+                  "stepDegrees": 5,
+                  "longitudeDirection": "east-positive"
+                },
+                "radiusKm": 531514800,
+                "rows": 36,
+                "columns": 72,
+                "flatFaceErrorMeters": 1020000000
+              },
+              "lens": {
+                "format": "controlled-shape-camera",
+                "metadata": {
+                  "label": "MATISSE December 2018",
+                  "falseColor": true,
+                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 3240 squared visibilities and 2160 closure phases measured by VLT/MATISSE on eight nights from 3 to 15 December 2018 in the 3.94-4.00 micrometre pseudo-continuum, with the February 2020 recipe unchanged, convolved to the 3 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius. The camera is computed as for February 2020. The reconstruction does not reach the check: it fits the closure phases at reduced chi-squared 3.03 against a limit of 3, and a spotless disc from the same coverage leaves patches as strong (ratio 1.04, limit 2). The bright and dark patches are therefore not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale, not colour or temperature. The far hemisphere is unobserved."
+                },
+                "frames": [
+                  {
+                    "id": "matisse-2018-12-continuum",
+                    "path": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
+                    "encoding": "fits-oi-reconstruction",
+                    "backgroundMaximum": 0.00001,
+                    "observerLatitude": 0,
+                    "observerWestLongitude": 0,
+                    "sunLatitude": 0,
+                    "sunWestLongitude": 0,
+                    "rangeKm": 5183938336905497,
+                    "northAzimuthDegrees": 312,
+                    "pixelAngleMicroradians": 0.003781546712654381,
+                    "center": [
+                      63.519,
+                      63.374
+                    ],
+                    "reconstruction": {
+                      "startTime": "2018-12-03T06:36:48",
+                      "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+                      "visibilitiesPath": "observations/betelgeuse-matisse-2018-12-continuum.oifits"
+                    }
+                  }
+                ],
+                "transfer": {
+                  "maximumSeparationFootprints": 2,
+                  "visibilityToleranceMeters": 1,
+                  "maximumEmissionDegrees": 70,
+                  "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+                },
+                "photometry": {
+                  "model": "retained-observation",
+                  "referenceIncidenceDegrees": 0,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "maximumGain": 1
+                },
+                "display": {
+                  "basis": "authored",
+                  "percentiles": [
+                    1,
+                    99.5
+                  ],
+                  "palette": [
+                    "#3b0500",
+                    "#9a1e00",
+                    "#e0641a",
+                    "#ffb340",
+                    "#ffe9a0",
+                    "#fffbf0"
+                  ]
+                },
+                "consumer": "sphere-photograph-2018-12"
+              }
+            }
+          },
+          {
+            "id": "matisse-2020-12",
+            "source": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
+            "falseColor": true,
+            "output": "betelgeuse-surface-{id}{suffix}.webp",
+            "thumbnail": "betelgeuse-lens-{id}.webp",
+            "science": {
+              "kind": "surface-observation",
+              "shape": {
+                "path": "shape/uniform-disc.tab",
+                "format": "pds-radius-table",
+                "grid": {
+                  "metersPerUnit": 1000,
+                  "expectedVertices": 2522,
+                  "expectedFaces": 5040,
+                  "stepDegrees": 5,
+                  "longitudeDirection": "east-positive"
+                },
+                "radiusKm": 531514800,
+                "rows": 36,
+                "columns": 72,
+                "flatFaceErrorMeters": 1020000000
+              },
+              "lens": {
+                "format": "controlled-shape-camera",
+                "metadata": {
+                  "label": "MATISSE December 2020",
+                  "falseColor": true,
+                  "coverage": "One image of the photosphere reconstructed with the public SQUEEZE code from 1248 squared visibilities and 832 closure phases measured by VLT/MATISSE on three nights on 14, 18 and 27 December 2020 in the 3.94-4.00 micrometre pseudo-continuum, with the February 2020 recipe unchanged, convolved to the 3.1 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius. The camera is computed as for February 2020. The reconstruction fits its data (reduced chi-squared 0.53 and 1.77), but a spotless disc from the same coverage leaves patches as strong (ratio 0.87, limit 2), and the two halves of the data agree only at 0.45 (limit 0.5). The bright and dark patches are therefore not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale, not colour or temperature. The far hemisphere is unobserved."
+                },
+                "frames": [
+                  {
+                    "id": "matisse-2020-12-continuum",
+                    "path": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
+                    "encoding": "fits-oi-reconstruction",
+                    "backgroundMaximum": 0.00001,
+                    "observerLatitude": 0,
+                    "observerWestLongitude": 0,
+                    "sunLatitude": 0,
+                    "sunWestLongitude": 0,
+                    "rangeKm": 5183938336905497,
+                    "northAzimuthDegrees": 312,
+                    "pixelAngleMicroradians": 0.003781546712654381,
+                    "center": [
+                      63.918,
+                      63.112
+                    ],
+                    "reconstruction": {
+                      "startTime": "2020-12-14T06:26:42",
+                      "filter": "L-band pseudo-continuum 3.942-3.974 and 3.992-3.998 um",
+                      "visibilitiesPath": "observations/betelgeuse-matisse-2020-12-continuum.oifits"
+                    }
+                  }
+                ],
+                "transfer": {
+                  "maximumSeparationFootprints": 2,
+                  "visibilityToleranceMeters": 1,
+                  "maximumEmissionDegrees": 70,
+                  "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+                },
+                "photometry": {
+                  "model": "retained-observation",
+                  "referenceIncidenceDegrees": 0,
+                  "referenceEmissionDegrees": 0,
+                  "maximumIncidenceDegrees": 70,
+                  "maximumEmissionDegrees": 70,
+                  "maximumGain": 1
+                },
+                "display": {
+                  "basis": "authored",
+                  "percentiles": [
+                    1,
+                    99.5
+                  ],
+                  "palette": [
+                    "#3b0500",
+                    "#9a1e00",
+                    "#e0641a",
+                    "#ffb340",
+                    "#ffe9a0",
+                    "#fffbf0"
+                  ]
+                },
+                "consumer": "sphere-photograph-2020-12"
+              }
+            }
+          },
+          {
             "id": "color",
             "output": "betelgeuse-surface-{id}{suffix}.webp",
             "thumbnail": "betelgeuse-lens-{id}.webp",
@@ -171,7 +345,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7c6fbe7d2985c83a9b7c122c7cc45f482e2adf6717a2e2d5b4ed7456540279c4",
+      "sha256": "4f6e473ada134d72bd818a5b58f72dc3900acea8379fb63e4bef82914019d054",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -292,6 +466,134 @@
                 "objectId": "betelgeuse-shell",
                 "lensId": "emission-2020",
                 "surface": "matisse"
+              }
+            },
+            {
+              "id": "matisse-2018-12",
+              "label": "MATISSE December 2018",
+              "thumbnail": "betelgeuse-lens-matisse-2018-12.webp",
+              "surface": "betelgeuse-surface-matisse-2018-12@2x.webp",
+              "poles": "betelgeuse-poles-matisse-2018-12@2x.webp",
+              "source": {
+                "id": "betelgeuse-matisse-2018-12-continuum",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 3 to 15 December 2018, in the 3.94-4.00 micrometre continuum, with the February 2020 recipe unchanged, convolved to the 3 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius, so nothing finer than the beam is shown. The reconstruction does not reach the check: it fits the closure phases at reduced chi-squared 3.03 against a limit of 3, and a spotless disc from the same coverage leaves patches as strong (ratio 1.04, limit 2). So its bright and dark patches are not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+              "noData": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity at 4 µm",
+                "labels": [
+                  "0.74",
+                  "0.87",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.74",
+                    "0.87",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://arxiv.org/abs/2401.12404"
+              }
+            },
+            {
+              "id": "matisse-2020-12",
+              "label": "MATISSE December 2020",
+              "thumbnail": "betelgeuse-lens-matisse-2020-12.webp",
+              "surface": "betelgeuse-surface-matisse-2020-12@2x.webp",
+              "poles": "betelgeuse-poles-matisse-2020-12@2x.webp",
+              "source": {
+                "id": "betelgeuse-matisse-2020-12-continuum",
+                "path": "../manifest.json"
+              },
+              "falseColor": true,
+              "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 14, 18 and 27 December 2020, in the 3.94-4.00 micrometre continuum, with the February 2020 recipe unchanged, convolved to the 3.1 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius, so nothing finer than the beam is shown. The reconstruction fits its data (reduced chi-squared 0.53 and 1.77), but a spotless disc from the same coverage leaves patches as strong (ratio 0.87, limit 2), and the two halves of the data agree only at 0.45 (limit 0.5). So its bright and dark patches are not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+              "noData": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Relative intensity at 4 µm",
+                "labels": [
+                  "0.62",
+                  "0.81",
+                  "1.00"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      59,
+                      5,
+                      0
+                    ],
+                    [
+                      154,
+                      30,
+                      0
+                    ],
+                    [
+                      224,
+                      100,
+                      26
+                    ],
+                    [
+                      255,
+                      179,
+                      64
+                    ],
+                    [
+                      255,
+                      233,
+                      160
+                    ],
+                    [
+                      255,
+                      251,
+                      240
+                    ]
+                  ],
+                  "labels": [
+                    "0.62",
+                    "0.81",
+                    "1.00"
+                  ]
+                },
+                "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+                "sourceUrl": "https://arxiv.org/abs/2401.12404"
               }
             },
             {
@@ -649,6 +951,329 @@
     },
     {
       "kind": "source-input",
+      "id": "betelgeuse-matisse-2018-12-continuum",
+      "path": "observations/betelgeuse-matisse-2018-12-continuum-3mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlti",
+            "evidence": "The image is reconstructed from the 111 calibrated MATISSE files pinned in this manifest by tools/objects/interferometry/image-star.mts with the season tools/objects/interferometry/seasons/betelgeuse-matisse-2018-12.",
+            "missionId": "eso-vlti-matisse-betelgeuse"
+          }
+        ]
+      },
+      "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
+      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in observations/betelgeuse-matisse-2018-12-continuum-squeeze.fits convolved with a 3 mas Gaussian beam; `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Posterior-mean maximum-entropy image convolved to the 3 mas beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 3 to 15 December 2018. Reduced chi-squared 1.62 on squared visibilities and 3.03 on closure phases.",
+      "width": 128,
+      "height": 128,
+      "lensId": "matisse-2018-12",
+      "label": "MATISSE December 2018",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-betelgeuse-matisse-2018-12-continuum",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696#/inputs/200"
+          }
+        ]
+      },
+      "sha256": "f73dccadbb00fd4909915ab544f675edd4f22dd45fb6b8a28a4fba5d0055cee6",
+      "bytes": 135360,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "continuum-visibilities-merged-2018-12",
+      "path": "observations/betelgeuse-matisse-2018-12-continuum.oifits",
+      "origin": "https://oidb.jmmc.fr/",
+      "credit": "ESO/VLTI/MATISSE programmes 60.A-9257(E) as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "license": "Derived from public calibrated data.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "inputs": [
+          "matisse-2018-12-03t063648-a0b2j2c1-in-in-chop",
+          "matisse-2018-12-03t063648-a0b2j2c1-in-in-nochop",
+          "matisse-2018-12-03t063648-a0b2j2c1-in-out-nochop",
+          "matisse-2018-12-03t063648-a0b2j2c1-out-in-nochop",
+          "matisse-2018-12-03t063648-a0b2j2c1-out-out-chop",
+          "matisse-2018-12-03t063648-a0b2j2c1-out-out-nochop",
+          "matisse-2018-12-03t072818-a0b2j2c1-in-in-chop",
+          "matisse-2018-12-03t072818-a0b2j2c1-in-in-nochop",
+          "matisse-2018-12-03t072818-a0b2j2c1-in-out-nochop",
+          "matisse-2018-12-03t072818-a0b2j2c1-out-in-nochop",
+          "matisse-2018-12-03t072818-a0b2j2c1-out-out-chop",
+          "matisse-2018-12-03t072818-a0b2j2c1-out-out-nochop",
+          "matisse-2018-12-05t041457-a0b2j2c1-in-in-chop",
+          "matisse-2018-12-05t041457-a0b2j2c1-in-in-nochop",
+          "matisse-2018-12-05t041457-a0b2j2c1-in-out-nochop",
+          "matisse-2018-12-05t041457-a0b2j2c1-out-in-nochop",
+          "matisse-2018-12-05t041457-a0b2j2c1-out-out-chop",
+          "matisse-2018-12-05t041457-a0b2j2c1-out-out-nochop",
+          "matisse-2018-12-08t020746-a0b2d0c1-in-in-chop",
+          "matisse-2018-12-08t020746-a0b2d0c1-in-in-nochop",
+          "matisse-2018-12-08t020746-a0b2d0c1-in-out-nochop",
+          "matisse-2018-12-08t020746-a0b2d0c1-out-in-nochop",
+          "matisse-2018-12-08t020746-a0b2d0c1-out-out-chop",
+          "matisse-2018-12-08t020746-a0b2d0c1-out-out-nochop",
+          "matisse-2018-12-08t030127-a0b2d0c1-in-in-chop",
+          "matisse-2018-12-08t030127-a0b2d0c1-in-in-nochop",
+          "matisse-2018-12-08t030127-a0b2d0c1-in-out-nochop",
+          "matisse-2018-12-08t030127-a0b2d0c1-out-in-nochop",
+          "matisse-2018-12-08t030127-a0b2d0c1-out-out-chop",
+          "matisse-2018-12-08t030127-a0b2d0c1-out-out-nochop",
+          "matisse-2018-12-08t053711-a0b2d0c1-in-in-chop",
+          "matisse-2018-12-08t053711-a0b2d0c1-in-in-nochop",
+          "matisse-2018-12-08t053711-a0b2d0c1-in-out-nochop",
+          "matisse-2018-12-08t053711-a0b2d0c1-out-in-nochop",
+          "matisse-2018-12-08t053711-a0b2d0c1-out-out-chop",
+          "matisse-2018-12-08t053711-a0b2d0c1-out-out-nochop",
+          "matisse-2018-12-08t062719-a0b2d0c1-in-in-chop",
+          "matisse-2018-12-08t062719-a0b2d0c1-in-in-nochop",
+          "matisse-2018-12-08t062719-a0b2d0c1-in-out-nochop",
+          "matisse-2018-12-08t062719-a0b2d0c1-out-in-nochop",
+          "matisse-2018-12-08t062719-a0b2d0c1-out-out-chop",
+          "matisse-2018-12-08t062719-a0b2d0c1-out-out-nochop",
+          "matisse-2018-12-09t053818-k0b2d0j3-in-in-chop",
+          "matisse-2018-12-09t053818-k0b2d0j3-in-in-nochop",
+          "matisse-2018-12-09t053818-k0b2d0j3-in-out-nochop",
+          "matisse-2018-12-09t053818-k0b2d0j3-out-in-nochop",
+          "matisse-2018-12-09t053818-k0b2d0j3-out-out-chop",
+          "matisse-2018-12-09t053818-k0b2d0j3-out-out-nochop",
+          "matisse-2018-12-09t065440-k0b2d0j3-in-in-chop",
+          "matisse-2018-12-09t065440-k0b2d0j3-in-in-nochop",
+          "matisse-2018-12-09t065440-k0b2d0j3-in-out-nochop",
+          "matisse-2018-12-09t065440-k0b2d0j3-out-in-nochop",
+          "matisse-2018-12-09t065440-k0b2d0j3-out-out-nochop",
+          "matisse-2018-12-09t070732-k0b2d0j3-in-in-chop",
+          "matisse-2018-12-09t070732-k0b2d0j3-in-in-nochop",
+          "matisse-2018-12-09t070732-k0b2d0j3-in-out-nochop",
+          "matisse-2018-12-09t070732-k0b2d0j3-out-in-nochop",
+          "matisse-2018-12-09t070732-k0b2d0j3-out-out-chop",
+          "matisse-2018-12-09t070732-k0b2d0j3-out-out-nochop",
+          "matisse-2018-12-11t043020-k0g2d0j3-in-in-chop",
+          "matisse-2018-12-11t043020-k0g2d0j3-in-in-nochop",
+          "matisse-2018-12-11t043020-k0g2d0j3-in-out-nochop",
+          "matisse-2018-12-11t043020-k0g2d0j3-out-in-nochop",
+          "matisse-2018-12-11t043020-k0g2d0j3-out-out-chop",
+          "matisse-2018-12-11t043020-k0g2d0j3-out-out-nochop",
+          "matisse-2018-12-11t051859-k0g2d0j3-in-in-chop",
+          "matisse-2018-12-11t051859-k0g2d0j3-in-in-nochop",
+          "matisse-2018-12-11t051859-k0g2d0j3-in-out-nochop",
+          "matisse-2018-12-11t051859-k0g2d0j3-out-in-nochop",
+          "matisse-2018-12-11t051859-k0g2d0j3-out-out-chop",
+          "matisse-2018-12-11t051859-k0g2d0j3-out-out-nochop",
+          "matisse-2018-12-11t060826-k0g2d0j3-in-in-chop",
+          "matisse-2018-12-11t060826-k0g2d0j3-in-in-nochop",
+          "matisse-2018-12-11t060826-k0g2d0j3-in-out-nochop",
+          "matisse-2018-12-11t060826-k0g2d0j3-out-in-nochop",
+          "matisse-2018-12-11t060826-k0g2d0j3-out-out-chop",
+          "matisse-2018-12-11t060826-k0g2d0j3-out-out-nochop",
+          "matisse-2018-12-11t063312-k0g2d0j3-in-in-chop",
+          "matisse-2018-12-11t063312-k0g2d0j3-in-in-nochop",
+          "matisse-2018-12-11t063312-k0g2d0j3-in-out-nochop",
+          "matisse-2018-12-11t063312-k0g2d0j3-out-in-nochop",
+          "matisse-2018-12-11t063312-k0g2d0j3-out-out-chop",
+          "matisse-2018-12-11t063312-k0g2d0j3-out-out-nochop",
+          "matisse-2018-12-12t043055-a0g1d0j3-in-in-nochop",
+          "matisse-2018-12-12t043055-a0g1d0j3-in-out-nochop",
+          "matisse-2018-12-12t043055-a0g1d0j3-out-in-nochop",
+          "matisse-2018-12-12t043055-a0g1d0j3-out-out-nochop",
+          "matisse-2018-12-12t061658-a0g1d0j3-in-in-nochop",
+          "matisse-2018-12-12t061658-a0g1d0j3-in-out-nochop",
+          "matisse-2018-12-12t061658-a0g1d0j3-out-in-nochop",
+          "matisse-2018-12-12t061658-a0g1d0j3-out-out-nochop",
+          "matisse-2018-12-14t054836-a0g1j2j3-in-in-nochop",
+          "matisse-2018-12-14t054836-a0g1j2j3-in-out-nochop",
+          "matisse-2018-12-14t054836-a0g1j2j3-out-in-nochop",
+          "matisse-2018-12-14t054836-a0g1j2j3-out-out-nochop",
+          "matisse-2018-12-14t072315-a0g1j2j3-in-in-nochop",
+          "matisse-2018-12-14t072315-a0g1j2j3-in-out-nochop",
+          "matisse-2018-12-14t072315-a0g1j2j3-out-in-nochop",
+          "matisse-2018-12-14t072315-a0g1j2j3-out-out-nochop",
+          "matisse-2018-12-15t041713-a0g1j2k0-in-in-chop",
+          "matisse-2018-12-15t041713-a0g1j2k0-in-in-nochop",
+          "matisse-2018-12-15t041713-a0g1j2k0-in-out-nochop",
+          "matisse-2018-12-15t041713-a0g1j2k0-out-in-nochop",
+          "matisse-2018-12-15t041713-a0g1j2k0-out-out-chop",
+          "matisse-2018-12-15t041713-a0g1j2k0-out-out-nochop",
+          "matisse-2018-12-15t055049-a0g1j2k0-in-in-chop",
+          "matisse-2018-12-15t055049-a0g1j2k0-in-in-nochop",
+          "matisse-2018-12-15t055049-a0g1j2k0-in-out-nochop",
+          "matisse-2018-12-15t055049-a0g1j2k0-out-in-nochop",
+          "matisse-2018-12-15t055049-a0g1j2k0-out-out-chop",
+          "matisse-2018-12-15t055049-a0g1j2k0-out-out-nochop"
+        ],
+        "nights": [
+          "2020-02-08",
+          "2020-02-19"
+        ],
+        "windowsMicrometres": [
+          [
+            3.942,
+            3.974
+          ],
+          [
+            3.992,
+            3.998
+          ]
+        ]
+      },
+      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Produced in this repository from the pinned inputs by the named generator."
+      },
+      "kind": "generated-intermediate",
+      "title": "observations/betelgeuse-matisse-2018-12-continuum.oifits",
+      "acquisition": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "upstreamLineage": "not-recorded",
+      "sha256": "51603fd0bc07483ceb473934f3ae197b7b90e084acd185ec7c724a428eeb0c3f",
+      "bytes": 446400,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "betelgeuse-matisse-2020-12-continuum",
+      "path": "observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits",
+      "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
+      "credit": "Reconstruction by this repository with SQUEEZE 3.0 (F. Baron, GPL-3.0) from ESO/VLTI/MATISSE calibrated visibilities via the JMMC OiDB; observations from Drevon et al. (2024)",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "vlti",
+            "evidence": "The image is reconstructed from the 48 calibrated MATISSE files pinned in this manifest by tools/objects/interferometry/image-star.mts with the season tools/objects/interferometry/seasons/betelgeuse-matisse-2020-12.",
+            "missionId": "eso-vlti-matisse-betelgeuse"
+          }
+        ]
+      },
+      "license": "Derived in this repository from public calibrated data; SQUEEZE is GPL-3.0 and is not redistributed here. Retain the data credit and the paper citation.",
+      "acquisition": "Written by tools/objects/source-authoring/betelgeuse/author.mts: the SQUEEZE posterior mean in observations/betelgeuse-matisse-2020-12-continuum-squeeze.fits convolved with a 3.1 mas Gaussian beam; `--check` recomputes it.",
+      "redistribution": "Attributed scientific display derivatives; see NOTICE.md.",
+      "coverage": "Posterior-mean maximum-entropy image convolved to the 3.1 mas beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 14, 18 and 27 December 2020. Reduced chi-squared 0.53 on squared visibilities and 1.77 on closure phases.",
+      "width": 128,
+      "height": 128,
+      "lensId": "matisse-2020-12",
+      "label": "MATISSE December 2020",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-betelgeuse-betelgeuse-matisse-2020-12-continuum",
+            "role": "material",
+            "evidence": "src/objects/betelgeuse/source/manifest.json@7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696#/inputs/201"
+          }
+        ]
+      },
+      "sha256": "b618a537c1380c9f0cc856a4bbf8b57fbb9c847f4eb5c4b6d91ba0836a6a8f15",
+      "bytes": 135360,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "continuum-visibilities-merged-2020-12",
+      "path": "observations/betelgeuse-matisse-2020-12-continuum.oifits",
+      "origin": "https://oidb.jmmc.fr/",
+      "credit": "ESO/VLTI/MATISSE programmes 106.21L4.001, 106.21L4.002, 106.21L4.003 as calibrated by the MATISSE consortium; distributed by the JMMC OiDB",
+      "license": "Derived from public calibrated data.",
+      "recipe": {
+        "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+        "inputs": [
+          "matisse-2020-12-14t062642-a0g1j2j3-in-in-chop",
+          "matisse-2020-12-14t062642-a0g1j2j3-in-in-nochop",
+          "matisse-2020-12-14t062642-a0g1j2j3-in-out-nochop",
+          "matisse-2020-12-14t062642-a0g1j2j3-out-in-nochop",
+          "matisse-2020-12-14t062642-a0g1j2j3-out-out-chop",
+          "matisse-2020-12-14t062642-a0g1j2j3-out-out-nochop",
+          "matisse-2020-12-14t072146-a0g1j2j3-in-in-chop",
+          "matisse-2020-12-14t072146-a0g1j2j3-in-in-nochop",
+          "matisse-2020-12-14t072146-a0g1j2j3-in-out-nochop",
+          "matisse-2020-12-14t072146-a0g1j2j3-out-in-nochop",
+          "matisse-2020-12-14t072146-a0g1j2j3-out-out-chop",
+          "matisse-2020-12-14t072146-a0g1j2j3-out-out-nochop",
+          "matisse-2020-12-18t042644-k0g2d0j3-in-in-chop",
+          "matisse-2020-12-18t042644-k0g2d0j3-in-in-nochop",
+          "matisse-2020-12-18t042644-k0g2d0j3-in-out-nochop",
+          "matisse-2020-12-18t042644-k0g2d0j3-out-in-nochop",
+          "matisse-2020-12-18t042644-k0g2d0j3-out-out-chop",
+          "matisse-2020-12-18t042644-k0g2d0j3-out-out-nochop",
+          "matisse-2020-12-18t051714-k0g2d0j3-in-in-chop",
+          "matisse-2020-12-18t051714-k0g2d0j3-in-in-nochop",
+          "matisse-2020-12-18t051714-k0g2d0j3-in-out-nochop",
+          "matisse-2020-12-18t051714-k0g2d0j3-out-in-nochop",
+          "matisse-2020-12-18t051714-k0g2d0j3-out-out-chop",
+          "matisse-2020-12-18t051714-k0g2d0j3-out-out-nochop",
+          "matisse-2020-12-18t053735-k0g2d0j3-in-in-chop",
+          "matisse-2020-12-18t053735-k0g2d0j3-in-in-nochop",
+          "matisse-2020-12-18t053735-k0g2d0j3-in-out-nochop",
+          "matisse-2020-12-18t053735-k0g2d0j3-out-in-nochop",
+          "matisse-2020-12-18t053735-k0g2d0j3-out-out-chop",
+          "matisse-2020-12-18t053735-k0g2d0j3-out-out-nochop",
+          "matisse-2020-12-27t015650-a0b2d0c1-in-in-chop",
+          "matisse-2020-12-27t015650-a0b2d0c1-in-in-nochop",
+          "matisse-2020-12-27t015650-a0b2d0c1-in-out-nochop",
+          "matisse-2020-12-27t015650-a0b2d0c1-out-in-nochop",
+          "matisse-2020-12-27t015650-a0b2d0c1-out-out-chop",
+          "matisse-2020-12-27t015650-a0b2d0c1-out-out-nochop",
+          "matisse-2020-12-27t024353-a0b2d0c1-in-in-chop",
+          "matisse-2020-12-27t024353-a0b2d0c1-in-in-nochop",
+          "matisse-2020-12-27t024353-a0b2d0c1-in-out-nochop",
+          "matisse-2020-12-27t024353-a0b2d0c1-out-in-nochop",
+          "matisse-2020-12-27t024353-a0b2d0c1-out-out-chop",
+          "matisse-2020-12-27t024353-a0b2d0c1-out-out-nochop",
+          "matisse-2020-12-27t033110-a0b2d0c1-in-in-chop",
+          "matisse-2020-12-27t033110-a0b2d0c1-in-in-nochop",
+          "matisse-2020-12-27t033110-a0b2d0c1-in-out-nochop",
+          "matisse-2020-12-27t033110-a0b2d0c1-out-in-nochop",
+          "matisse-2020-12-27t033110-a0b2d0c1-out-out-chop",
+          "matisse-2020-12-27t033110-a0b2d0c1-out-out-nochop"
+        ],
+        "nights": [
+          "2020-02-08",
+          "2020-02-19"
+        ],
+        "windowsMicrometres": [
+          [
+            3.942,
+            3.974
+          ],
+          [
+            3.992,
+            3.998
+          ]
+        ]
+      },
+      "generator": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Produced in this repository from the pinned inputs by the named generator."
+      },
+      "kind": "generated-intermediate",
+      "title": "observations/betelgeuse-matisse-2020-12-continuum.oifits",
+      "acquisition": "tools/objects/source-authoring/betelgeuse/author.mts",
+      "upstreamLineage": "not-recorded",
+      "sha256": "f3ff166d8b1d41e326e50daf5216963d01b08e03cb9d5726ef6a7c133328c7f7",
+      "bytes": 195840,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
       "id": "betelgeuse-stellar-color",
       "path": "photometry/stellar-color.json",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
@@ -720,8 +1345,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "7c6fbe7d2985c83a9b7c122c7cc45f482e2adf6717a2e2d5b4ed7456540279c4",
-      "bytes": 13129,
+      "sha256": "4f6e473ada134d72bd818a5b58f72dc3900acea8379fb63e4bef82914019d054",
+      "bytes": 18006,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -842,10 +1467,234 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "matisse-2018-12",
+      "label": "MATISSE December 2018",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "matisse-2018-12"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true,
+        "surfaceObservation": {
+          "format": "controlled-shape-camera",
+          "shape": {
+            "path": "shape/uniform-disc.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "radiusKm": 531514800,
+            "rows": 36,
+            "columns": 72,
+            "flatFaceErrorMeters": 1020000000
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "basis": "authored",
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "originalIllumination": true
+        }
+      },
+      "inputs": [
+        "betelgeuse-matisse-2018-12-continuum",
+        "uniform-disc-sphere",
+        "continuum-visibilities-merged-2018-12"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-surface-matisse-2018-12@2x.webp",
+          "bytes": 103070,
+          "sha256": "5c992ab26bc6c3ca5f8639a550363113ce5bb4a0c06a1f42523e3391cbb3acd4",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse-2018-12.webp",
+          "bytes": 1382,
+          "sha256": "821dd63832848b9599f24c285ae9f782811cd5ae35e48aea3b73b9b5e592704f",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-poles-matisse-2018-12@2x.webp",
+          "bytes": 42818,
+          "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-context-matisse-2018-12@2x.webp",
+          "bytes": 270,
+          "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-limb-matisse-2018-12@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "betelgeuse-matisse-2018-12-continuum",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/1/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "matisse-2020-12",
+      "label": "MATISSE December 2020",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "matisse-2020-12"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true,
+        "surfaceObservation": {
+          "format": "controlled-shape-camera",
+          "shape": {
+            "path": "shape/uniform-disc.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "radiusKm": 531514800,
+            "rows": 36,
+            "columns": 72,
+            "flatFaceErrorMeters": 1020000000
+          },
+          "transfer": {
+            "maximumSeparationFootprints": 2,
+            "visibilityToleranceMeters": 1,
+            "maximumEmissionDegrees": 70,
+            "interpretation": "Trial acceptance bounds, not estimates of source accuracy. A footprint is the pixel's range times its angular size, 19.6 million kilometres at the disc centre from 168 parsecs, so a contributor lies within two of those of the closest sphere point; the one-metre visibility tolerance is numerically zero on a body this size, and the sphere is convex, so no point occludes another."
+          },
+          "photometry": {
+            "model": "retained-observation",
+            "referenceIncidenceDegrees": 0,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 70,
+            "maximumEmissionDegrees": 70,
+            "maximumGain": 1
+          },
+          "display": {
+            "basis": "authored",
+            "percentiles": [
+              1,
+              99.5
+            ],
+            "palette": [
+              "#3b0500",
+              "#9a1e00",
+              "#e0641a",
+              "#ffb340",
+              "#ffe9a0",
+              "#fffbf0"
+            ]
+          },
+          "originalIllumination": true
+        }
+      },
+      "inputs": [
+        "betelgeuse-matisse-2020-12-continuum",
+        "uniform-disc-sphere",
+        "continuum-visibilities-merged-2020-12"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-surface-matisse-2020-12@2x.webp",
+          "bytes": 98890,
+          "sha256": "a7d8eb7bcd743599f1a982cd80e9f4acccc244aa534c2a0e11d4fd884e0d521c",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-lens-matisse-2020-12.webp",
+          "bytes": 1256,
+          "sha256": "cc31b27efc029454857bda5cf3a10805032c7b7acfece8cfc6576cfc3f903aab",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-poles-matisse-2020-12@2x.webp",
+          "bytes": 42818,
+          "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-context-matisse-2020-12@2x.webp",
+          "bytes": 270,
+          "sha256": "53d6c7b278aef94232785f0472ea9a1c7182c6e74b78ecf54f17e7b7df4e21a8",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/betelgeuse/betelgeuse-limb-matisse-2020-12@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "betelgeuse-matisse-2020-12-continuum",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "color",
       "label": "Color",
       "recipe": "raster",
-      "selector": "/surfaces/1",
+      "selector": "/surfaces/3",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
@@ -901,7 +1750,7 @@
         {
           "sourceId": "betelgeuse-stellar-color",
           "role": "appearance",
-          "evidence": "Raster source at /surfaces/1/source."
+          "evidence": "Raster source at /surfaces/3/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -1060,10 +1909,60 @@
       ]
     },
     {
+      "id": "preview:matisse-2018-12",
+      "label": "MATISSE December 2018 preview",
+      "recipe": "raster",
+      "selector": "/surfaces/1",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "matisse-2018-12"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/matisse-2018-12.webp",
+          "bytes": 18736,
+          "sha256": "e8c950266fe248e37cad20b28661994304457be1beea7e90ae0fdb649cea5375",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
+      "id": "preview:matisse-2020-12",
+      "label": "MATISSE December 2020 preview",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "matisse-2020-12"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/matisse-2020-12.webp",
+          "bytes": 18000,
+          "sha256": "dd2a09e94f8eca8b8ea534d01f51b6a4f7dbf5fd0b8c385fa8786455fb4c61a1",
+          "verification": "bytes-verified"
+        }
+      ]
+    },
+    {
       "id": "preview:color",
       "label": "Color preview",
       "recipe": "raster",
-      "selector": "/surfaces/1",
+      "selector": "/surfaces/3",
       "recipeDependencies": [
         "raster"
       ],
@@ -1091,11 +1990,11 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "25f43b7a29f74603626554cf69284bded38a14201b442d622cc56bd43f0f8f83",
+    "materialSha256": "a632cb3d19051c17955a6889143e9de9bd768ec5a354756d3256246a4db1a0e4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "95db5198f23dce6163b53065615a8bb2d6c7ea803d869194543377288ea321c7"
+      "bindingsSha256": "92b8220a3ea1a1ab25002d74726a9e8a0fa1c9cd27ad00367ce1c5d307925f72"
     }
   }
 }

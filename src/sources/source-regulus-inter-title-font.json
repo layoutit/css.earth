@@ -1,0 +1,37 @@
+{
+  "id": "source-regulus-inter-title-font",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Regulus · inter title font",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/regulus/source/manifest.json",
+      "revision": "7060c0ee3451d1e61c8db9a88fe71ef5d1d2e696",
+      "sha256": "22773bfa93308c6dec08f5f2bfb0ba58d5b75834c0e91e7216072692deba0063",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Inter Project Authors / Rasmus Andersson",
+      "scope": "The inter title font input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "SIL Open Font License 1.1",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

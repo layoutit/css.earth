@@ -38,9 +38,9 @@
       },
       "gaps": [
         {
-          "fromNm": 750,
+          "fromNm": 755,
           "toNm": 780,
-          "reason": "the scan ends near 755 nm; the last value is held to 780 nm, where the observer adds little"
+          "reason": "the scan ends at 755.0 nm; the last value is held to 780 nm, where the observer adds little"
         }
       ]
     }
