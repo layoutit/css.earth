@@ -4,8 +4,8 @@
     {
       "id": "trappist-1c-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1484,
-      "expectedSha256": "02de5a2070f2449b4dfbc0205b8beb8f198a76c3e27de74f94d4d3255d75d8f3",
+      "expectedBytes": 1490,
+      "expectedSha256": "06061867de7770d343265b68f57d4a32b24fee979c780c892e068ebccd943ca1",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "trappist-1c-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2390,
-      "expectedSha256": "64a45ae107c9a9b6cd9837a1d0eb2cc0599a8cd63e30218236e8a5ca6103f98c",
+      "expectedBytes": 3131,
+      "expectedSha256": "48cd56e48b86dbb08a7052e870a663b42b5d950aabc41d41b4985603a3050d0d",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +68,8 @@
     {
       "id": "trappist-1c-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1665,
-      "expectedSha256": "1a76c3eeb48f0a4e4f1fc8a8f1796735ec9e0dabd0bc342cd8b5577c21d4ab59",
+      "expectedBytes": 1810,
+      "expectedSha256": "1db8ee1f612f18d409f5f8dbdc57e3f6e88b48929d94be7a50c147dcb674dad7",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +87,8 @@
     {
       "id": "trappist-1c-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +106,8 @@
     {
       "id": "trappist-1c-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 107,
-      "expectedSha256": "260e73b0a9553b3ae7b656d17543148f4517fd0805b6c4434aed64c17649d43e",
+      "expectedBytes": 106,
+      "expectedSha256": "c2a29bfccdac2f00af36c415c8d396fb36f42aee8f6e77eb66098d1f773d39c7",
       "origin": "Repository-authored presentation profile: composite mode",
       "sourceBinding": {
         "kind": "local",
@@ -138,6 +138,76 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "trappist-1c-miri-dayside",
+      "path": "science/jwst-trappist-1/c-dayside-15um.json",
+      "expectedBytes": 764,
+      "expectedSha256": "77278cfd1bfb3a191fcc0bca0b8436d21b28370a165b467c89411eda0b81ec48",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304",
+      "credit": "JWST programs 3077 (PI Gillon), 1177 and 2304; reduced and jointly fitted in this project with Eureka! 1.4 on Bell's settings (Gillon, Ducrot et al. 2025)",
+      "license": "JWST data are public; the derived depths are this project's measurement",
+      "acquisition": "Recorded from this project's joint fit of the ten visits (see the record's source); the per-shape fit outputs were not kept.",
+      "redistribution": "A two-number measurement record authored in this repository",
+      "consumers": [
+        "trappist-1c-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurement record authored in this package from this project's own joint fit; repinned when edited."
+      }
+    },
+    {
+      "id": "jwst-miri-f1500w-filter",
+      "path": "science/svo/JWST_MIRI.F1500W.xml",
+      "expectedBytes": 77631,
+      "expectedSha256": "cabdc5d635e5515842e25d2fc26fda27c315c2c98d36e2729bb5a4c93109dca6",
+      "origin": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W",
+      "productId": "JWST/MIRI.F1500W",
+      "version": "SVO Filter Profile Service",
+      "title": "JWST MIRI F1500W filter response, electrons per photon",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/fps/index.php?id=JWST/MIRI.F1500W",
+      "credit": "Spanish Virtual Observatory Filter Profile Service (Rodrigo & Solano 2020); JWST MIRI filter data from STScI",
+      "displayCredit": "SVO Filter Profile Service",
+      "license": "Filter profiles served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/fps/index.php?mode=use"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service VOTable for JWST/MIRI.F1500W, unchanged; photon-counting detector (DetectorType 1), for the MIRI lens's temperature conversion.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "trappist-1c-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO filter profile; the service has no catalogue record in this repository yet."
+      }
+    },
+    {
+      "id": "trappist-1-bt-settl-cifist-2600",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml",
+      "expectedBytes": 64359008,
+      "expectedSha256": "a889b5ab4f06694e6d0e12ee9b382594b99e0bae864873b2d0d7daa08f17225f",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=137",
+      "productId": "bt-settl-cifist fid 137",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 2600 K, log g 5.0, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 2600 K, log g 5.0, [M/H] 0, the grid point nearest TRAPPIST-1 (Agol et al. 2021: 2566 K, log g 5.24), for the MIRI lens's temperature conversion, unchanged VOTable.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "consumers": [
+        "trappist-1c-bare-rock-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
+      }
     }
   ],
   "generatedIntermediates": [
@@ -168,8 +238,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3811,
-      "expectedSha256": "6d2a85e0a3bab075d55396d48a2477c320f09314c6db65c497fa5770f66b9f26",
+      "expectedBytes": 4836,
+      "expectedSha256": "ae59ea6a59d45038debd7a571ef35993607a1bdaa0b6044836db7e9a6336e14c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -177,8 +247,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 835,
+      "expectedSha256": "13bf0b815da895cdc90121738d7635d415394ba543ac743b08910308e6187664"
     },
     {
       "path": "preparation/navigation.json",
@@ -199,6 +269,24 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 4020,
       "expectedSha256": "7199870fc4b049e3b0dd0af95e1fa5fa4224c657ad90b4c3686ff2cfee64598e"
+    },
+    {
+      "path": "reference/rendered-model-day.png",
+      "expectedBytes": 333282,
+      "expectedSha256": "ff2f9619b1d177fe1c1e01849ff9e05c996c99f60e0facacf570ebcc3910d62b",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /trappist-1c/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: the default camera on the day side: the bare-rock model at 407 K under the star, with the lens panel labelled a model."
+      }
+    },
+    {
+      "path": "reference/rendered-model-terminator.png",
+      "expectedBytes": 331193,
+      "expectedSha256": "c88e6aae7c8b461056f9e9a6731ad042de323e8d2f6270e6ea06a1992b1d3f19",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture: the branch's dev server at /trappist-1c/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: after dragging the camera a quarter turn: the model's terminator edge on and its dark night side."
+      }
     }
   ]
 }

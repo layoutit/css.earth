@@ -31,32 +31,13 @@ export interface FitRecipe {
 /** Fits the map, choosing the model by BIC. Linear systematics are columns; an exponential ramp's time constant is profiled by
  * chi-squared on the most flexible candidate (highest degree, most eigencurves), over its grid and then refined, and held for every
  * candidate while the model is chosen; the chosen model's own time constant is then refined the same way. Profiling uses the
- * unconstrained fit; the candidates and the final map keep positivity. Time-like columns start at the first sample; other columns are centred on their median over the fitted
- * samples. Models within 2 of the lowest BIC are not distinguished by the data, so the one with fewest parameters, then the
- * lowest degree, is taken. */
+ * unconstrained fit; the candidates and the final map keep positivity. Samples and columns come from `lightCurveSamples`. Models
+ * within 2 of the lowest BIC are not distinguished by the data, so the one with fewest parameters, then the lowest degree, is
+ * taken. */
 export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number },
   planetRadiusStellarRadii: number, lightTravel: LightTravel = {}) {
-  const n = curve.time.length;
-  if (![curve.flux, curve.error].every(values => values.length === n) || [...curve.columns.values()].some(values => values.length !== n)) throw new RangeError('Light-curve columns must share one length.');
   if (!recipe.degrees.length || !recipe.eigencurves.length || [...recipe.degrees, ...recipe.eigencurves].some(v => !Number.isSafeInteger(v) || v < 1)) throw new RangeError('Candidate degrees and eigencurve counts must be positive whole numbers.');
-  const keep: number[] = [];
-  for (let i = 0; i < n; i++) {
-    const phase = (((curve.time[i]! - orbit.transitTimeBmjdTdb) / orbit.periodDays) % 1 + 1) % 1;
-    if (Math.min(phase, 1 - phase) >= recipe.transitExclusionPhase && [curve.time[i], curve.flux[i], curve.error[i]].every(Number.isFinite) && curve.error[i]! > 0) keep.push(i);
-  }
-  const pick = (values: Float64Array) => Float64Array.from(keep, i => values[i]!);
-  const time = pick(curve.time), flux = pick(curve.flux), error = pick(curve.error), start = curve.time[0]!;
-  const median = (values: Float64Array) => { const sorted = Float64Array.from(values).sort(); return sorted[Math.floor(sorted.length / 2)]!; };
-  const ramps = recipe.systematics.filter(s => s.kind === 'exponential-ramp');
-  if (ramps.length > 1) throw new TypeError('A fit takes at most one exponential ramp.');
-  const columns = (tau: number | null) => recipe.systematics.map(s => {
-    if (s.kind === 'time') return Float64Array.from(time, t => t - start);
-    if (s.kind === 'exponential-ramp') return Float64Array.from(time, t => Math.exp(-(t - start) / tau!));
-    const values = curve.columns.get(s.column);
-    if (!values) throw new TypeError(`The light curve has no ${s.column} column.`);
-    const picked = pick(values), centre = median(picked);
-    return picked.map(v => v - centre);
-  });
+  const { time, flux, error, samples, columns, ramps } = lightCurveSamples(curve, recipe, orbit);
   const taus = ramps.length ? ramps[0]!.timeConstantsDays : [null];
   const degrees = [...recipe.degrees].sort((a, b) => a - b), counts = [...recipe.eigencurves].sort((a, b) => a - b);
   const bases = new Map(degrees.map(degree => [degree, eigenBasis(degree, equalAngleGrid(recipe.gridHeight, 2 * recipe.gridHeight), orbit, host, planetRadiusStellarRadii, time, lightTravel, { longitudeSymmetric: recipe.longitudeSymmetric ?? false })]));
@@ -106,8 +87,35 @@ export function fitLightCurveMap(curve: LightCurve, recipe: FitRecipe, orbit: Ho
   const ownTau = selected.tau === null ? null : refine(selected.basis, selected.fit.ncurves, nearest);
   const ownFit = ownTau === null ? selected.fit : fitWith(selected.basis, selected.fit.ncurves, ownTau);
   const chosen = ownFit.chiSquared <= selected.fit.chiSquared && (!recipe.positive || ownFit.positive) ? { ...selected, fit: ownFit, tau: ownTau } : selected;
-  return { basis: chosen.basis, fit: chosen.fit, rampTimeConstantDays: chosen.tau, samples: keep.length, hotspot: continuousHotspot(chosen.basis, chosen.fit, 0.05),
+  return { basis: chosen.basis, fit: chosen.fit, rampTimeConstantDays: chosen.tau, samples, hotspot: continuousHotspot(chosen.basis, chosen.fit, 0.05),
     candidates: candidates.map(c => ({ degree: c.basis.lmax, eigencurves: c.fit.ncurves, chiSquared: c.fit.chiSquared, bic: c.fit.bic, rampTimeConstantDays: c.tau })) };
+}
+
+/** The samples a fit uses and its systematics columns: samples within `transitExclusionPhase` of mid-transit are dropped (the
+ * transit measures the star, not the map). Time-like columns start at the first sample; other columns are centred on their median
+ * over the fitted samples; an exponential ramp takes its time constant per call. */
+export function lightCurveSamples(curve: LightCurve, recipe: Pick<FitRecipe, 'transitExclusionPhase' | 'systematics'>, orbit: HostedOrbit) {
+  const n = curve.time.length;
+  if (![curve.flux, curve.error].every(values => values.length === n) || [...curve.columns.values()].some(values => values.length !== n)) throw new RangeError('Light-curve columns must share one length.');
+  const keep: number[] = [];
+  for (let i = 0; i < n; i++) {
+    const phase = (((curve.time[i]! - orbit.transitTimeBmjdTdb) / orbit.periodDays) % 1 + 1) % 1;
+    if (Math.min(phase, 1 - phase) >= recipe.transitExclusionPhase && [curve.time[i], curve.flux[i], curve.error[i]].every(Number.isFinite) && curve.error[i]! > 0) keep.push(i);
+  }
+  const pick = (values: Float64Array) => Float64Array.from(keep, i => values[i]!);
+  const time = pick(curve.time), flux = pick(curve.flux), error = pick(curve.error), start = curve.time[0]!;
+  const median = (values: Float64Array) => { const sorted = Float64Array.from(values).sort(); return sorted[Math.floor(sorted.length / 2)]!; };
+  const ramps = recipe.systematics.filter(s => s.kind === 'exponential-ramp');
+  if (ramps.length > 1) throw new TypeError('A fit takes at most one exponential ramp.');
+  const columns = (tau: number | null) => recipe.systematics.map(s => {
+    if (s.kind === 'time') return Float64Array.from(time, t => t - start);
+    if (s.kind === 'exponential-ramp') return Float64Array.from(time, t => Math.exp(-(t - start) / tau!));
+    const values = curve.columns.get(s.column);
+    if (!values) throw new TypeError(`The light curve has no ${s.column} column.`);
+    const picked = pick(values), centre = median(picked);
+    return picked.map(v => v - centre);
+  });
+  return { time, flux, error, samples: keep.length, columns, ramps };
 }
 
 export interface BandSamples { readonly wavelengthMicrons: Float64Array; readonly counts: Float64Array; readonly stellarIntensity: Float64Array }
