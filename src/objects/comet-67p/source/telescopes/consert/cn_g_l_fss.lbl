@@ -1,0 +1,236 @@
+PDS_VERSION_ID        = PDS3 
+LABEL_REVISION_NOTE   = "2018-11-22, IPAG, version 1.0"
+
+/* FILE CHARACTERISTIC */
+RECORD_TYPE           = FIXED_LENGTH
+RECORD_BYTES          = 301
+FILE_RECORDS          = 15468
+FILE_NAME             = "CN_G_L_FSS.TAB"
+
+/* DATA OBJECT POINTERS  */
+^GEOMETRY_TABLE            = ("CN_G_L_FSS.TAB",1 <BYTES>)
+
+/* IDENTIFICATION KEYWORDS */
+DATA_SET_ID    = "RO/RL-C-CONSERT-4-FSS-V1.0"
+DATA_SET_NAME  = "ROSETTA-ORBITER/ROSETTA-LANDER 67P CONSERT 4 FSS V1.0"
+
+PRODUCT_ID            = "CN_G_L_FSS"
+PRODUCT_CREATION_TIME = 2018-11-22T08:56:46
+PRODUCT_TYPE          = REFDR
+PROCESSING_LEVEL_ID   = "4"
+
+MISSION_ID            = ROSETTA
+MISSION_NAME          = "INTERNATIONAL ROSETTA MISSION"
+MISSION_PHASE_NAME    = "FIRST SCIENCE SEQUENCE"
+
+INSTRUMENT_HOST_ID    = "RL"
+INSTRUMENT_HOST_NAME  = "ROSETTA-LANDER"
+INSTRUMENT_ID         = CONSERT
+INSTRUMENT_NAME       = "COMET NUCLEUS SOUNDING EXPERIMENT BY RADIOWAVE
+                        TRANSMISSION"
+INSTRUMENT_TYPE       = "RADAR"
+INSTRUMENT_MODE_ID    = "PINGPONG"
+INSTRUMENT_MODE_DESC  = "CONSERT PERFORMS SOUNDING MEASUREMENTS AS A
+  TRANSPONDER. CONSERT ORBITER AND CONSERT LANDER UNITS ARE SYNCHRONIZED."
+
+TARGET_NAME           = "67P/CHURYUMOV-GERASIMENKO 1 (1969 R1)"
+TARGET_TYPE           = "COMET"
+
+START_TIME            = 2014-11-12T18:56:40
+STOP_TIME             = 2014-11-13T05:41:10
+
+PRODUCER_ID                  = "CONSERT TEAM"
+PRODUCER_FULL_NAME           = "INSTITUT DE PLANETOLOGIE
+                               ET D ASTROPHYSIQUE DE GRENOBLE"
+PRODUCER_INSTITUTION_NAME    = "IPAG/OSUG/UGA/CNRS"
+
+DATA_QUALITY_ID              = "N/A"
+DATA_QUALITY_DESC            = "N/A"
+
+SPACECRAFT_CLOCK_START_COUNT = "3/0374439329.06202"
+SPACECRAFT_CLOCK_STOP_COUNT  = "3/0374477999.43577"
+
+/* GEOMETRY PARAMETERS */
+/* SPACECRAFT LOCATION: Position <km> */
+SC_SUN_POSITION_VECTOR    = (1.21576e+008,-3.34809e+008,2.70345e+008)
+
+/* TARGET PARAMETERS: Position <km>, Velocity <km/s> */
+SC_TARGET_POSITION_VECTOR = (-0.127698,-17.3664,5.93005)
+SC_TARGET_VELOCITY_VECTOR = (-0.00198751,-0.00018678,-0.000122654)
+
+/* SPACECRAFT POSITION WITH RESPECT TO CENTRAL BODY */
+SPACECRAFT_ALTITUDE       = 18.3514
+SUB_SPACECRAFT_LATITUDE   = 18.8529
+SUB_SPACECRAFT_LONGITUDE  = -90.4213
+SPICE_FILE_NAME           = {"ROS_RO_RL_162909_STEP.TSC",
+                             "ROS_V27.TF",
+                             "ROS_STRUCT_V5.BSP",
+                             "ROS_CONSERT_V11.TI",
+                             "LORB_DV_145_01___T19_00216.BSP",
+                             "LORB_DV_223_01___T19_00302.BSP",
+                             "LORB_DV_236_01___T19_00318.BSP",
+                             "LATT_ROS2LDR_SDL_V1_0_ROMAP.BC",
+                             "ORHR___________T19_00122.BSP",
+                             "RORB_DV_145_01___T19_00216.BSP",
+                             "RORB_DV_223_01___T19_00302.BSP",
+                             "RORB_DV_257_02___T19_00344.BSP",
+                             "ROS_ORBITER_EXTENSION_V1.BSP",
+                             "RATT_DV_145_01_01_T6_00216.BC",
+                             "RATT_DV_223_01_01_T6_00302.BC",
+                             "RATT_DV_257_02_01_T6_00344.BC",
+                             "ROS_ORBITER_EXTENSION_V1.BC",
+                             "ROS_SA_2004_V0001.BC",
+                             "ROS_SA_2005_V0001.BC",
+                             "ROS_SA_2006_V0001.BC",
+                             "ROS_SA_2007_V0001.BC",
+                             "ROS_SA_2008_V0038.BC",
+                             "ROS_SA_2009_V0054.BC",
+                             "ROS_SA_2010_V0052.BC",
+                             "ROS_SA_2011_V0020.BC",
+                             "ROS_SA_2014_V0047.BC",
+                             "ROS_SA_2015_V0042.BC",
+                             "ROS_SA_2016_V0041.BC",
+                             "ROS_HGA_2004_V0001.BC",
+                             "ROS_HGA_2005_V0001.BC",
+                             "ROS_HGA_2006_V0001.BC",
+                             "ROS_HGA_2007_V0001.BC",
+                             "ROS_HGA_2008_V0019.BC",
+                             "ROS_HGA_2009_V0052.BC",
+                             "ROS_HGA_2010_V0046.BC",
+                             "ROS_HGA_2011_V0018.BC",
+                             "ROS_HGA_2014_V0044.BC",
+                             "ROS_HGA_2015_V0053.BC",
+                             "ROS_HGA_2016_V0042.BC"}
+
+/* DATA OBJECT DEFINITIONS  */
+OBJECT               = GEOMETRY_TABLE
+  ROWS               = 15468
+  COLUMNS            = 13
+  ROW_BYTES          = 301
+  INTERCHANGE_FORMAT = ASCII
+  DESCRIPTION        = "THIS TABLE CONTAINS THE GEOMETRY DATA"
+  OBJECT      = COLUMN
+    NAME             = "UTC"
+    COLUMN_NUMBER    = 1
+    DATA_TYPE        = TIME
+    START_BYTE       = 1
+    BYTES            = 23
+    DESCRIPTION      = "START TIME"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SC_POS_X"
+    COLUMN_NUMBER    = 2
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 24
+    BYTES            = 23
+    DESCRIPTION      = "S/C POSITION X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SC_POS_Y"
+    COLUMN_NUMBER    = 3
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 47
+    BYTES            = 23
+    DESCRIPTION      = "S/C POSITION Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SC_POS_Z"
+    COLUMN_NUMBER    = 4
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 70
+    BYTES            = 23
+    DESCRIPTION      = "S/C POSITION Z"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SUN_POS_X"
+    COLUMN_NUMBER    = 5
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 93
+    BYTES            = 23
+    DESCRIPTION      = "SUN POSITION X"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SUN_POS_Y"
+    COLUMN_NUMBER    = 6
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 116
+    BYTES            = 23
+    DESCRIPTION      = "SUN POSITION Y"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "SUN_POS_Z"
+    COLUMN_NUMBER    = 7
+    DATA_TYPE        = ASCII_REAL
+    UNIT             = "KILOMETER"
+    START_BYTE       = 139
+    BYTES            = 23
+    DESCRIPTION      = "SUN POSITION Z"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "Z_FRAME_X"
+    COLUMN_NUMBER    = 8
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 162
+    BYTES            = 23
+    DESCRIPTION      = "PHILAE LOCAL FRAME Z VECTOR (X)"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "Z_FRAME_Y"
+    COLUMN_NUMBER    = 9
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 185
+    BYTES            = 23
+    DESCRIPTION      = "PHILAE LOCAL FRAME Z VECTOR(Y)"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "Z_FRAME_Z"
+    COLUMN_NUMBER    = 10
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 208
+    BYTES            = 23
+    DESCRIPTION      = "PHILAE LOCAL FRAME Z VECTOR (Z)"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "X_FRAME_X"
+    COLUMN_NUMBER    = 11
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 231
+    BYTES            = 23
+    DESCRIPTION      = "PHILAE LOCAL FRAME X VECTOR (X)"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "X_FRAME_Y"
+    COLUMN_NUMBER    = 12
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 254
+    BYTES            = 23
+    DESCRIPTION      = "PHILAE LOCAL FRAME X VECTOR (Y)"
+  END_OBJECT  = COLUMN
+
+  OBJECT      = COLUMN
+    NAME             = "X_FRAME_Z"
+    COLUMN_NUMBER    = 13
+    DATA_TYPE        = ASCII_REAL
+    START_BYTE       = 277
+    BYTES            = 23
+    DESCRIPTION      = "PHILAE LOCAL FRAME X VECTOR (Z)"
+  END_OBJECT  = COLUMN
+
+END_OBJECT           = GEOMETRY_TABLE
+END

@@ -2,7 +2,9 @@ import { sha256 } from './sha256.mts';
 import { isArray } from './is-array.mts';
 import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
-export interface SourceEntry { path: string; expectedBytes: number; expectedSha256: string; sourceBinding?: SourceBinding; }
+/** One byte range of a remote member, for archive files too large to keep whole. The pin covers exactly the kept bytes. */
+export interface SourceRange { offset: number; length: number; }
+export interface SourceEntry { path: string; expectedBytes: number; expectedSha256: string; range?: SourceRange; sourceBinding?: SourceBinding; }
 export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; sourceBinding: SourceBinding; }
 export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose?: string })[]; }
 export interface SourceManifestLocation { planetId: string; planetName: string; sourceRoot: string; }
@@ -188,6 +190,31 @@ function assertSourceDigest({ entry, size, actual, planetName }: { entry: Source
 
 export const isPlaceholderDigest = (digest: string) => /^0{64}$/u.test(digest);
 
+/** A ranged input asks for exactly its pinned bytes. Acquisition owns the request; this owns what the request must say. */
+export const rangeRequestHeader = (range: SourceRange) => `bytes=${range.offset}-${range.offset + range.length - 1}`;
+/**
+ * A ranged member is far too large to fetch whole, so a full-body answer is refused rather than consumed: the server
+ * must honour the request as 206 Partial Content over exactly the pinned offset and length.
+ */
+export function assertRangeResponse(
+  response: { status: number; headers: { get(name: string): string | null } },
+  range: SourceRange,
+  url: string,
+) {
+  if (response.status !== 206) {
+    throw new Error(`Ranged source request answered ${response.status} instead of 206 Partial Content: ${url}.`);
+  }
+  const expected = `bytes ${range.offset}-${range.offset + range.length - 1}/`;
+  const actual = (response.headers.get("content-range") ?? "").trim();
+  if (!actual.startsWith(expected)) {
+    throw new Error(`Ranged source request returned content range ${actual || "(none)"} instead of ${expected}*: ${url}.`);
+  }
+  const length = response.headers.get("content-length");
+  if (length !== null && Number(length) !== range.length) {
+    throw new Error(`Ranged source request returned ${length} bytes instead of ${range.length}: ${url}.`);
+  }
+}
+
 async function validateSourceEntry({ entry, planetName, sourceRoot }: SourceVerification) {
   // Original scientific rasters can be hundreds of MB. Verification requires
   // their bytes and digest, not a resident copy of every source file.
@@ -210,7 +237,28 @@ function validateEntryBase(planetId: string, entry: SourceEntry, kind: string, p
   if (paths.has(entry.path)) {
     throw new TypeError(`Planet ${planetId} repeats source path ${entry.path}.`);
   }
+  assertSourceRange(entry, `Planet ${planetId} source ${kind} ${entry.path}`);
   paths.add(entry.path);
+}
+
+/**
+ * An input may pin one byte range of a remote member instead of the whole file: acquisition asks for exactly those
+ * bytes and the pin covers exactly those bytes, so local verification keeps streaming the local file unchanged.
+ */
+export function assertSourceRange(entry: { path: string; expectedBytes: number; range?: SourceRange; origin?: string }, label: string) {
+  const range = entry.range;
+  if (range === undefined) return;
+  if (!range || typeof range !== "object" || isArray(range) ||
+      Object.keys(range).some((key) => !["offset", "length"].includes(key)) ||
+      !Number.isSafeInteger(range.offset) || range.offset < 0 ||
+      !Number.isSafeInteger(range.length) || range.length <= 0 ||
+      !Number.isSafeInteger(range.offset + range.length) ||
+      range.length !== entry.expectedBytes) {
+    throw new TypeError(`${label} has an invalid byte range.`);
+  }
+  if (!nonEmpty(entry.origin) || !/^https?:\/\//u.test(entry.origin)) {
+    throw new TypeError(`${label} ranges a member with no remote origin.`);
+  }
 }
 
 function safeRelativePath(value: unknown) {

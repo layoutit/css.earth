@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<?xml-model href="https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1M00.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/mission/mro/v1/PDS4_MRO_1M00_1330.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+<?xml-model href="https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1M00_1970.sch" schematypens="http://purl.oclc.org/dsdl/schematron"?>
+
+<Product_Observational xmlns="http://pds.nasa.gov/pds4/pds/v1"
+    xmlns:mro="http://pds.nasa.gov/pds4/mission/mro/v1"
+    xmlns:cart="http://pds.nasa.gov/pds4/cart/v1"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://pds.nasa.gov/pds4/pds/v1  https://pds.nasa.gov/pds4/pds/v1/PDS4_PDS_1M00.xsd
+                        http://pds.nasa.gov/pds4/mission/mro/v1 https://pds.nasa.gov/pds4/mission/mro/v1/PDS4_MRO_1M00_1330.xsd
+                        http://pds.nasa.gov/pds4/cart/v1 https://pds.nasa.gov/pds4/cart/v1/PDS4_CART_1M00_1970.xsd">
+  <Identification_Area>
+    <logical_identifier>urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time</logical_identifier>
+    <version_id>1.0</version_id>
+    <title>EAST_DEUTERONILUS_MENSAE_3D_V2_TIME</title>
+    <information_model_version>1.22.0.0</information_model_version>
+    <product_class>Product_Observational</product_class>
+    <Modification_History>
+      <Modification_Detail>
+        <modification_date>2025-10-09</modification_date>
+        <version_id>1.0</version_id>
+        <description>Migration to PDS4</description>
+      </Modification_Detail>
+    </Modification_History>
+  </Identification_Area>
+  <Observation_Area>
+    <Time_Coordinates>
+      <start_date_time>2007-03-24T13:17:45.086Z</start_date_time>
+      <stop_date_time>2020-05-23T05:08:23.939Z</stop_date_time>
+    </Time_Coordinates>
+    <Investigation_Area>
+      <name>Mars Reconnaissance Orbiter</name>
+      <type>Mission</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:investigation:mission.mars_reconnaissance_orbiter</lid_reference>
+        <reference_type>data_to_investigation</reference_type>
+      </Internal_Reference>
+    </Investigation_Area>
+    <Observing_System>
+      <name>SHARAD</name>
+      <Observing_System_Component>
+        <name>The Mars Reconnaissance Orbiter</name>
+        <type>Host</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument_host:spacecraft.mro</lid_reference>
+          <reference_type>is_instrument_host</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+      <Observing_System_Component>
+        <name>Mars Reconnaissance Orbiter Shallow Radar</name>
+        <type>Instrument</type>
+        <Internal_Reference>
+          <lid_reference>urn:nasa:pds:context:instrument:sharad.mro</lid_reference>
+          <reference_type>is_instrument</reference_type>
+        </Internal_Reference>
+      </Observing_System_Component>
+    </Observing_System>
+    <Target_Identification>
+      <name>Mars</name>
+      <type>Planet</type>
+      <Internal_Reference>
+        <lid_reference>urn:nasa:pds:context:target:planet.mars</lid_reference>
+        <reference_type>data_to_target</reference_type>
+      </Internal_Reference>
+    </Target_Identification>
+    <Mission_Area>
+      <mro:MRO_Parameters>
+        <mro:product_version_id>1</mro:product_version_id>
+        <mro:spacecraft_clock_start_count>2/859209465:05644</mro:spacecraft_clock_start_count>
+        <mro:spacecraft_clock_stop_count>17/1274677755:094</mro:spacecraft_clock_stop_count>
+        <mro:producer_institution_name>PLANETARY SCIENCE INSTITUTE</mro:producer_institution_name>
+        <mro:SHARAD_Parameters>
+          <mro:Array_Sampled>
+            <mro:name>X</mro:name>
+            <mro:array_interval>475</mro:array_interval>
+            <mro:array_unit>METER</mro:array_unit>
+            <mro:array_first_value>-303762.5</mro:array_first_value>
+            <mro:array_scale>Linear</mro:array_scale>
+          </mro:Array_Sampled>
+          <mro:Array_Sampled>
+            <mro:name>Y</mro:name>
+            <mro:array_interval>475</mro:array_interval>
+            <mro:array_unit>METER</mro:array_unit>
+            <mro:array_first_value>-337012.5</mro:array_first_value>
+            <mro:array_scale>Linear</mro:array_scale>
+          </mro:Array_Sampled>
+          <mro:Array_Sampled>
+            <mro:name>DELAY_TIME</mro:name>
+            <mro:array_interval>0.0375</mro:array_interval>
+            <mro:array_unit>MICROSECOND</mro:array_unit>
+            <mro:array_first_value>0.0</mro:array_first_value>
+            <mro:array_scale>Linear</mro:array_scale>
+          </mro:Array_Sampled>
+        </mro:SHARAD_Parameters>
+      </mro:MRO_Parameters>
+    </Mission_Area>
+    <Discipline_Area>
+      <cart:Cartography>
+        <Local_Internal_Reference>
+          <local_identifier_reference>array</local_identifier_reference>
+          <local_reference_type>cartography_parameters_to_image_object</local_reference_type>
+        </Local_Internal_Reference>
+        <cart:Spatial_Domain>
+          <cart:Bounding_Coordinates>
+            <cart:west_bounding_coordinate unit="deg">35.0</cart:west_bounding_coordinate>
+            <cart:east_bounding_coordinate unit="deg">45.0</cart:east_bounding_coordinate>
+            <cart:north_bounding_coordinate unit="deg">47.0</cart:north_bounding_coordinate>
+            <cart:south_bounding_coordinate unit="deg">37.0</cart:south_bounding_coordinate>
+          </cart:Bounding_Coordinates>
+        </cart:Spatial_Domain>
+        <cart:Spatial_Reference_Information>
+          <cart:Horizontal_Coordinate_System_Definition>
+            <cart:Planar>
+              <cart:Map_Projection>
+                <cart:map_projection_name>Transverse Mercator</cart:map_projection_name>
+                <cart:Transverse_Mercator>
+                  <cart:scale_factor_at_central_meridian>1</cart:scale_factor_at_central_meridian>
+                  <cart:longitude_of_central_meridian unit="deg">30.0</cart:longitude_of_central_meridian>
+                  <cart:latitude_of_projection_origin unit="deg">42.0</cart:latitude_of_projection_origin>
+                </cart:Transverse_Mercator>
+              </cart:Map_Projection>
+              <cart:Planar_Coordinate_Information>
+                <cart:planar_coordinate_encoding_method>Coordinate Pair</cart:planar_coordinate_encoding_method>
+                <cart:Coordinate_Representation>
+                  <cart:pixel_resolution_x unit="m/pixel">475.0</cart:pixel_resolution_x>
+                  <cart:pixel_resolution_y unit="m/pixel">475.0</cart:pixel_resolution_y>
+                  <cart:pixel_scale_x unit="pixel/deg">125.0</cart:pixel_scale_x>
+                  <cart:pixel_scale_y unit="pixel/deg">125.0</cart:pixel_scale_y>
+                </cart:Coordinate_Representation>
+              </cart:Planar_Coordinate_Information>
+              <cart:Geo_Transformation>
+                <cart:upperleft_corner_x unit="m">-337012.5</cart:upperleft_corner_x>
+                <cart:upperleft_corner_y unit="m">303762.5</cart:upperleft_corner_y>
+              </cart:Geo_Transformation>
+            </cart:Planar>
+            <cart:Geodetic_Model>
+              <cart:latitude_type>Planetocentric</cart:latitude_type>
+              <cart:spheroid_name>Mars</cart:spheroid_name>
+              <cart:a_axis_radius unit="km">3396.0</cart:a_axis_radius>
+              <cart:b_axis_radius unit="km">3396.0</cart:b_axis_radius>
+              <cart:c_axis_radius unit="km">3376.0</cart:c_axis_radius>
+              <cart:longitude_direction>Positive East</cart:longitude_direction>
+            </cart:Geodetic_Model>
+          </cart:Horizontal_Coordinate_System_Definition>
+        </cart:Spatial_Reference_Information>
+      </cart:Cartography>
+    </Discipline_Area>
+  </Observation_Area>
+  <Reference_List>
+  <External_Reference>
+    <doi>10.1016/j.icarus.2023.115716</doi>
+    <reference_text>M. R. Perry, A. T. Russell, M. B. Russell, F. J. Foss, F. C. Chuang,
+                     G. A. Morgan, Z. M. Bain, B. A. Campbell, and N.E. Putzig,
+                     "Three-dimensional imaging of martian glaciated terrain using Mars
+                      Reconnaissance Orbiter Shallow Radar (SHARAD) observations,"
+                     in Icarus, vol. 419, Nr. 115716, Sept. 2024
+                     doi: 10.1016/j.icarus.2023.115716
+    </reference_text>
+    <description>Paper describing initial science results from the 3D radargrams in this archive.</description>
+  </External_Reference>
+  <External_Reference>
+    <doi>10.1016/j.icarus.2023.115793</doi>
+    <reference_text>F. J. Foss, N. E. Putzig, B. A. Cambell, S. A. Levin, M. R. Perry,
+                    J. W. Holt, M. S., Christoffsersen, I. B. Smith, G. A. Morgan, and
+                    A. T. Russell, "Producing 3D radargrams from orbital radar sounding
+                    data at Mars: History, results, methods, lessons and plans,"
+                    in Icarus, vol. 419, Number 115793, Sept. 2024,
+                    doi: 10.1016/j.icarus.2023.115793
+    </reference_text>
+    <description>Paper describing 3D imaging methodology used to create the 3D radargrams.</description>
+  </External_Reference>
+</Reference_List>
+  <File_Area_Observational>
+    <File>
+      <file_name>east_deuteronilus_mensae_3d_v2_time.dat</file_name>
+      <local_identifier>array</local_identifier>
+    </File>
+    <Array_3D>
+      <name>3D RADAR VOLUME</name>
+      <offset unit="byte">0</offset>
+      <axes>3</axes>
+      <axis_index_order>Last Index Fastest</axis_index_order>
+      <description>
+        The first and second (X and Y) axes are projected distances corresponding
+	to LINE and SAMPLE pixel directions. The third axis, DELAY_TIME, is
+	referenced to the areoid + 10.125 km. A FRAME consists of all values
+	along the third axis for a given X and Y location.
+	BACKSCATTER STRENGTH is the square root of backscatter power.
+      </description>
+      <Element_Array>
+        <data_type>IEEE754LSBSingle</data_type>
+      </Element_Array>
+      <Axis_Array>
+        <axis_name>X</axis_name>
+        <elements>1280</elements>
+        <sequence_number>1</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>Y</axis_name>
+        <elements>1420</elements>
+        <sequence_number>2</sequence_number>
+      </Axis_Array>
+      <Axis_Array>
+        <axis_name>DELAY_TIME</axis_name>
+        <elements>3600</elements>
+        <sequence_number>3</sequence_number>
+      </Axis_Array>
+      <Object_Statistics>
+        <maximum>0.218038</maximum>
+        <minimum>-0.097937</minimum>
+        <description>BACKSCATTER STRENGTH RELATIVE TO FRAME MEAN</description>
+      </Object_Statistics>
+    </Array_3D>
+  </File_Area_Observational>
+  <File_Area_Observational_Supplemental>
+    <File>
+      <file_name>east_deuteronilus_mensae_3d_v2_time.lbl</file_name>
+    </File>
+    <Stream_Text>
+      <offset unit="byte">0</offset>
+      <parsing_standard_id>PDS3</parsing_standard_id>
+      <description>PDS3 label</description>
+      <record_delimiter>Carriage-Return Line-Feed</record_delimiter>
+    </Stream_Text>
+  </File_Area_Observational_Supplemental>
+</Product_Observational>

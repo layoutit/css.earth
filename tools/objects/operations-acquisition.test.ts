@@ -252,3 +252,36 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     }
   } finally { if(cache) await rm(cache,{force:true}); await rm(directory,{recursive:true,force:true}); }
 });
+
+// A pinned slice of an archive member too large to keep whole: the request must be honoured as 206 Partial Content,
+// and a server that answers with the whole body is refused instead of downloaded.
+const slice=Buffer.from('exactly the pinned slice of a very large archive member');
+const rangedManifest=(range={offset:13096944000,length:slice.length}): SourceManifest=>({schema:'cssearth-authoritative-sources@2',
+  inputs:[{...rawSource(slice),range}],generatedIntermediates:[],documents:[]});
+const rangedResponse=(body:Uint8Array<ArrayBuffer>,{status=206,contentRange=`bytes 13096944000-${13096944000+slice.length-1}/26173440000`,contentLength=String(body.length)}={})=>
+  new Response(body,{status,headers:{'content-range':contentRange,'content-length':contentLength}});
+
+test('a ranged input asks for exactly its pinned bytes and accepts only a matching 206 answer',()=>temporary(async directory=>{
+  const asked:(string|undefined)[]=[];
+  const transport={fetch:async(url:string,init?:RequestInit)=>{
+    if(url!==rawSource(slice).origin)throw new Error(`Unexpected request in a network-free test: ${url}`);
+    asked.push(new Headers(init?.headers).get('range')??undefined);
+    return rangedResponse(slice);
+  }};
+  await executeAcquisition({sourceRoot:directory,manifest:rangedManifest(),plan:rawPlan,mirrorOrigin:null,transport});
+  assert.deepEqual(asked,[`bytes=13096944000-${13096944000+slice.length-1}`]);
+  assert.deepEqual(await readFile(join(directory,'source.img')),slice);
+}));
+
+test('a ranged input refuses a full-body answer, a short body and a mismatched content range',()=>temporary(async directory=>{
+  const attempt=(response:Response)=>executeAcquisition({sourceRoot:directory,manifest:rangedManifest(),plan:rawPlan,mirrorOrigin:null,
+    transport:{fetch:async()=>response}});
+  // 200 means the server ignored the range and is about to hand over the whole member.
+  await assert.rejects(attempt(new Response(slice,{status:200})),/answered 200 instead of 206 Partial Content/);
+  await assert.rejects(attempt(rangedResponse(slice,{contentRange:'bytes 0-53/26173440000'})),/content range bytes 0-53/);
+  await assert.rejects(attempt(rangedResponse(slice,{contentRange:''})),/content range \(none\)/);
+  await assert.rejects(attempt(rangedResponse(Buffer.from(slice.subarray(0,10)),{contentLength:'10'})),/returned 10 bytes instead of 55/);
+  // Headers that claim the whole slice but deliver less are still caught by the pin itself.
+  await assert.rejects(attempt(rangedResponse(Buffer.from(slice.subarray(0,10)),{contentLength:String(slice.length)})),/size drifted/);
+  assert.deepEqual(await readdir(directory),[]);
+}));

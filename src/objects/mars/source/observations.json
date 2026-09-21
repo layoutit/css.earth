@@ -1,0 +1,101 @@
+{
+  "schema": "cssearth-source-observations@1",
+  "target": "mars",
+  "observations": [
+    {
+      "id": "mro-sharad-3d-east-deuteronilus-frame-x0640-y0710",
+      "telescope": "Mars Reconnaissance Orbiter",
+      "mode": "SHARAD/3-D delay-time radargram",
+      "kind": "table",
+      "archiveProductId": "urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0#bytes=13096944000-13096958399",
+      "decoder": "pds-product",
+      "familyProfile": "mro-sharad-3d-array@2025-10-22",
+      "labelPath": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.xml",
+      "inputs": [
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-frame-x0640-y0710", "role": "science" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-label", "role": "label" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-pds3-label", "role": "label" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-observations", "role": "response" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-observations-label", "role": "label" },
+        { "input": "pds-mro-sharad-3d-bundle-readme", "role": "provenance" },
+        { "input": "pds-mro-sharad-3d-release-notes", "role": "provenance" }
+      ],
+      "identity": {
+        "LIDVID": "urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0",
+        "DATA_SET_ID": "MRO-M-SHARAD-5-3D-V1.0",
+        "PRODUCT_ID": "EAST_DEUTERONILUS_MENSAE_3D_V2_TIME",
+        "TARGET_NAME": "MARS",
+        "INSTRUMENT_ID": "SHARAD",
+        "SLICE_KIND": "delay-frame",
+        "X_INDEX": 640,
+        "Y_INDEX": 710,
+        "BYTE_OFFSET": 13096944000,
+        "BYTE_LENGTH": 14400
+      },
+      "startIso": "2007-03-24T13:17:45.086Z",
+      "endIso": "2020-05-23T05:08:23.939Z",
+      "units": "dimensionless; the label states no unit and names the samples a strength relative to the frame mean",
+      "meaning": "One delay frame of the archive-published SHARAD three-dimensional radargram of eastern Deuteronilus Mensae: every delay sample at projected X index 640 and Y index 710. The bundle readme calls the .dat member a table of binary data and the PDS3 label counts it in 14,400-byte fixed-length records, so this frame is record 909,511 of 1,817,600. The pinned PDS4 label owns the grid, sampling, scalar type, projection and statistics.",
+      "citation": "Putzig, N., F. Foss, M. Perry, G. Morgan, and P. Sava (2025). Mars Reconnaissance Orbiter SHARAD 3D Radargram Bundle. PDS Geosciences (GEO) Node. https://doi.org/10.17189/a5av-yc11",
+      "limitations": [
+        "This is one pinned byte range of a 26,173,440,000-byte archive member, not the whole volume. The range is the one the label's axis arithmetic places at these indices, and the reader refuses a read outside it.",
+        "Delay time is the archive's vertical coordinate, referenced to the areoid plus 10.125 km. The bundle supplies no dielectric model or datum for a metric depth, so no depth conversion is qualified.",
+        "The samples are backscatter strength, the square root of backscatter power, relative to the frame mean. They are not ice fraction, density, composition, or a material boundary, and brightness alone does not establish a geologic reflector.",
+        "The volume is an archive-published reconstruction from 466 SHARAD observations over MRO orbits 3081 through 64793, not a direct measurement at each cell, so return localization depends on that reconstruction.",
+        "The observation interval is the whole product's, spanning every contributing track; it is not the time of this frame.",
+        "The label's 475 m grid spacing and 0.0375 microsecond delay interval are sampling intervals. Achieved resolution is not supplied here; the bundle's 3d_processing_v2.0.pdf user guide documents the processing parameters.",
+        "The archive publishes no checksum for the whole member. The pin covers exactly these bytes, and the acquisition accepts only a 206 Partial Content answer over exactly this range.",
+        "The release notes' known imaging artifacts are ground tracks in the Planum Australe version 1 volume, not in this product.",
+        "In this label the PDS4 cartography and the array axes are transposed: the upper-left corner x of -337012.5 m equals the array Y start and the upper-left corner y of 303762.5 m is the negated array X start. The reader uses the array axes only, and no geographic position is derived from the cartography here.",
+        "No product descriptor is published for this slice yet: the shared F16 descriptor route inspects a FITS array through Astropy, which this native PDS4 member is not."
+      ]
+    },
+    {
+      "id": "mro-sharad-3d-east-deuteronilus-plane-x0640",
+      "telescope": "Mars Reconnaissance Orbiter",
+      "mode": "SHARAD/3-D delay-time radargram",
+      "kind": "table",
+      "archiveProductId": "urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0#bytes=13086720000-13107167999",
+      "decoder": "pds-product",
+      "familyProfile": "mro-sharad-3d-array@2025-10-22",
+      "labelPath": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.xml",
+      "inputs": [
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-plane-x0640", "role": "science" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-label", "role": "label" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-pds3-label", "role": "label" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-observations", "role": "response" },
+        { "input": "pds-mro-sharad-3d-east-deuteronilus-observations-label", "role": "label" },
+        { "input": "pds-mro-sharad-3d-bundle-readme", "role": "provenance" },
+        { "input": "pds-mro-sharad-3d-release-notes", "role": "provenance" }
+      ],
+      "identity": {
+        "LIDVID": "urn:nasa:pds:mro_sharad_3d:data:east_deuteronilus_mensae_3d_v2_time::1.0",
+        "DATA_SET_ID": "MRO-M-SHARAD-5-3D-V1.0",
+        "PRODUCT_ID": "EAST_DEUTERONILUS_MENSAE_3D_V2_TIME",
+        "TARGET_NAME": "MARS",
+        "INSTRUMENT_ID": "SHARAD",
+        "SLICE_KIND": "x-plane",
+        "X_INDEX": 640,
+        "BYTE_OFFSET": 13086720000,
+        "BYTE_LENGTH": 20448000
+      },
+      "startIso": "2007-03-24T13:17:45.086Z",
+      "endIso": "2020-05-23T05:08:23.939Z",
+      "units": "dimensionless; the label states no unit and names the samples a strength relative to the frame mean",
+      "meaning": "The constant-X radargram plane at projected X index 640 of the same volume: the 1,420 consecutive delay frames that the label's last-index-fastest order makes one contiguous byte range, 20,448,000 bytes covering every Y and delay sample at that X. The delay frame pinned beside it is the sub-range of this plane at Y index 710.",
+      "citation": "Putzig, N., F. Foss, M. Perry, G. Morgan, and P. Sava (2025). Mars Reconnaissance Orbiter SHARAD 3D Radargram Bundle. PDS Geosciences (GEO) Node. https://doi.org/10.17189/a5av-yc11",
+      "limitations": [
+        "This is one pinned byte range of a 26,173,440,000-byte archive member, not the whole volume. The range is the one the label's axis arithmetic places at this X index, and the reader refuses a read outside it.",
+        "Delay time is the archive's vertical coordinate, referenced to the areoid plus 10.125 km. The bundle supplies no dielectric model or datum for a metric depth, so no depth conversion is qualified.",
+        "The samples are backscatter strength, the square root of backscatter power, relative to the frame mean. They are not ice fraction, density, composition, or a material boundary, and brightness alone does not establish a geologic reflector.",
+        "The volume is an archive-published reconstruction from 466 SHARAD observations over MRO orbits 3081 through 64793, not a direct measurement at each cell, so return localization depends on that reconstruction.",
+        "The observation interval is the whole product's, spanning every contributing track; it is not the time of this plane.",
+        "The label's 475 m grid spacing and 0.0375 microsecond delay interval are sampling intervals. Achieved resolution is not supplied here; the bundle's 3d_processing_v2.0.pdf user guide documents the processing parameters.",
+        "The archive publishes no checksum for the whole member. The pin covers exactly these bytes, and the acquisition accepts only a 206 Partial Content answer over exactly this range.",
+        "The release notes' known imaging artifacts are ground tracks in the Planum Australe version 1 volume, not in this product.",
+        "In this label the PDS4 cartography and the array axes are transposed: the upper-left corner x of -337012.5 m equals the array Y start and the upper-left corner y of 303762.5 m is the negated array X start. The reader uses the array axes only, and no geographic position is derived from the cartography here.",
+        "No product descriptor is published for this slice yet: the shared F16 descriptor route inspects a FITS array through Astropy, which this native PDS4 member is not."
+      ]
+    }
+  ]
+}

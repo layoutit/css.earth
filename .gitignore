@@ -107,6 +107,10 @@ src/objects/*/source/**/*.tab
 src/objects/*/source/**/*.obj
 src/objects/*/source/**/*.bds
 
+# Radar volume slices restored by range request. The small delay frame stays tracked as reader evidence.
+src/objects/*/source/telescopes/**/slices/*.dat
+!src/objects/mars/source/telescopes/mro-sharad-3d/slices/frame-x0640-y0710.dat
+
 # Reacquirable released STL shape models.
 src/objects/*/source/**/*.stl.gz
 

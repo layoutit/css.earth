@@ -1,0 +1,91 @@
+{
+  "id": "pds-mro-sharad-3d-radargram-bundle",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Mars Reconnaissance Orbiter SHARAD 3D Radargram Bundle",
+  "version": "Release 2, 2025-10-22",
+  "publisher": "NASA Planetary Data System Geosciences Node",
+  "publicationDate": "2025",
+  "creators": [
+    "N. Putzig",
+    "F. Foss",
+    "M. Perry",
+    "G. Morgan",
+    "P. Sava"
+  ],
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.17189/a5av-yc11"
+    },
+    {
+      "type": "PDS4 LID",
+      "value": "urn:nasa:pds:mro_sharad_3d"
+    },
+    {
+      "type": "pds3-product-id",
+      "value": "MRO-M-SHARAD-5-3D-V1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://pds-geosciences.wustl.edu/missions/mro/sharad_3d_pds4.htm",
+      "label": "PDS Geosciences Node SHARAD 3-D radargram holdings"
+    },
+    {
+      "role": "archive",
+      "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/",
+      "label": "Bundle root"
+    },
+    {
+      "role": "original",
+      "url": "https://doi.org/10.17189/a5av-yc11",
+      "label": "Bundle DOI"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt",
+      "checkedOn": "2026-09-21",
+      "locator": "Citation; sections 1 and 4, file formats of the .dat radargram volumes"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/document/release_notes.txt",
+      "checkedOn": "2026-09-21",
+      "locator": "Section 2.0, release of 2025-10-22"
+    },
+    {
+      "url": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.xml",
+      "checkedOn": "2026-09-21",
+      "locator": "/Product_Observational/File_Area_Observational/Array_3D"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Produced by the Planetary Science Institute from Mars Reconnaissance Orbiter SHARAD observations and archived by the NASA Planetary Data System Geosciences Node.",
+      "scope": "Every member of this bundle",
+      "evidence": "PDS4 label mro:producer_institution_name is PLANETARY SCIENCE INSTITUTE; readme.txt names the bundle citation."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA scientific data; the bundle asks that its published citation be used.",
+      "scope": "Every member of this bundle",
+      "evidence": "readme.txt, Citation line naming Putzig et al. (2025) and doi:10.17189/a5av-yc11."
+    },
+    {
+      "kind": "limitation",
+      "text": "The volumes are published three-dimensional reconstructions on a delay-time vertical axis referenced to the areoid plus 10.125 km, not measured depths, and the bundle supplies no dielectric conversion.",
+      "scope": "The 3-D radargram data collection",
+      "evidence": "Array_3D description in each data label; 3d_processing_v2.0.pdf user guide."
+    },
+    {
+      "kind": "limitation",
+      "text": "Release notes record imaging artifacts along three mispositioned input tracks in the Planum Australe version 1 volume.",
+      "scope": "planum_australe_3d_v1_time",
+      "evidence": "release_notes.txt, section 1.0, entry of 2023-06-30."
+    }
+  ]
+}

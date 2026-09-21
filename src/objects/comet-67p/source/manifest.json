@@ -1301,6 +1301,158 @@
         "kind": "local",
         "reason": "Prepared radial mesh mapping from native XYZ to CSS axes."
       }
+    },
+    {
+      "id": "consert-fss-orbiter-geometry-label",
+      "path": "telescopes/consert/cn_g_o_fss.lbl",
+      "expectedBytes": 8916,
+      "expectedSha256": "2eff1c053f736199499938bb4f0f2f8d9a883c90176286ca55917cd2f0702f4d",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.lbl",
+      "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
+      "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Archive-native PDS3 detached label retained with team and archive credit.",
+      "consumers": [
+        "telescope-api"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-consert-4-fss-v1-0",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "consert-fss-orbiter-geometry-table",
+      "path": "telescopes/consert/cn_g_o_fss.tab",
+      "expectedBytes": 5723160,
+      "expectedSha256": "d9b69d7ff8cd17f56363684b10d1d0727b6c642185c32389f4860944931d359d",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.tab",
+      "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
+      "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Archive-native PDS3 fixed-length ASCII table retained with team and archive credit.",
+      "consumers": [
+        "telescope-api"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-consert-4-fss-v1-0",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.tab"
+          }
+        ]
+      }
+    },
+    {
+      "id": "consert-fss-lander-geometry-label",
+      "path": "telescopes/consert/cn_g_l_fss.lbl",
+      "expectedBytes": 8299,
+      "expectedSha256": "fa533dd396bc7b9a786739bb29023116b4752d1ab6d6e66743b363c3b87fceda",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.lbl",
+      "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
+      "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Archive-native PDS3 detached label retained with team and archive credit.",
+      "consumers": [
+        "telescope-api"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.lbl"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-consert-4-fss-v1-0",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.lbl"
+          }
+        ]
+      }
+    },
+    {
+      "id": "consert-fss-lander-geometry-table",
+      "path": "telescopes/consert/cn_g_l_fss.tab",
+      "expectedBytes": 4655868,
+      "expectedSha256": "0a29c1b563d17196b4d9824e6d5b1d8c2be2bd130e17c10441c24f3ad7a013b4",
+      "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.tab",
+      "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
+      "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/psa/psa-acknowledgement",
+        "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/catalog/dataset.cat"
+      ],
+      "acquisition": "Restore the original archive bytes through the acquisition recipe; verify size and SHA-256.",
+      "redistribution": "Archive-native PDS3 fixed-length ASCII table retained with team and archive credit.",
+      "consumers": [
+        "telescope-api"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "rosetta",
+            "missionId": "rosetta",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.tab"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-consert-4-fss-v1-0",
+            "role": "material",
+            "evidence": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.tab"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
