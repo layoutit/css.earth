@@ -101,7 +101,13 @@ function budgetPayload(slabCount: number, starCount: number): PreparedVolumeLens
 test.each([[151, 0], [150, 3]])('the compiler DOM quota includes every retained XYZ copy, star and impostor (%i slabs, %i stars)', (slabCount, starCount) => {
   const f = dom(), data = budgetPayload(slabCount, starCount);
   const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
-  const root = runtime.root as unknown as FakeElement, initial = descendants(root);
+  const root = runtime.root as unknown as FakeElement;
+  // Mounted distant, the bank holds its impostors and stars only; the slice leaves wait for the first close publication.
+  const mounted = descendants(root);
+  expect(mounted.filter(node => node.parentNode?.className === 'css-volume-mesh')).toHaveLength(0);
+  expect(mounted.filter(node => node.dataset.volumeImpostor !== undefined).length).toBe(26);
+  runtime.setStarsVisible(true); runtime.publish(publication(4));
+  const initial = descendants(root);
   const predicted = createRenderElementBudget(CSS_COMPILER_RENDER_BUDGET, starCount, slabCount).totalElements;
   expect(data.lenses[0]!.volume.stacks.map(stack => stack.leaves.length).reduce((a, b) => a + b, 0)).toBe(slabCount);
   expect(initial.filter(node => node.parentNode?.className === 'css-volume-mesh').length).toBe(slabCount * 3);
@@ -200,6 +206,7 @@ test('a distinct topology is allocated only on first selection and then retained
   const data = { ...base, lenses: [base.lenses[0]!, { ...second, volume: volume(second.id, -1, 1) }, base.lenses[2]!] };
   const f = dom(), runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
   const root = runtime.root as unknown as FakeElement;
+  runtime.publish(publication());
   expect(root.children.filter(node => node.className === 'prepared-volume-lens-cloud')).toHaveLength(1);
   expect(root.dataset).toMatchObject({ volumeTopologyCount: '2', volumeResidentTopologyCount: '1' });
   expect(descendants(root)).toHaveLength(29); // Three shared stars and one three-slab topology, all optical copies retained.
@@ -220,6 +227,8 @@ test('axis brightness matches the lab completed-image oracle through handoffs an
   const f = dom(), data = payload(), runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` }).mount(f.options);
   const root = runtime.root as unknown as FakeElement;
   const surface = root.children.find(node => node.dataset.volumeLens === 'first')!;
+  expect(surface.children.filter(node => node.className === 'css-volume-projection')).toHaveLength(0);
+  runtime.publish(publication(4));
   const axes = surface.children.filter(node => node.className === 'css-volume-projection');
   for (let degrees = 0; degrees <= 180; degrees += 3) {
     const angle = degrees * Math.PI / 180;
@@ -234,8 +243,9 @@ test('axis brightness matches the lab completed-image oracle through handoffs an
 
 test('unresolved catalogue points fade away without changing prepared resolved size or exposure', () => {
   const f = dom(), runtime = createPreparedVolumeLenses({ payload: payload(), resolveResource: path => `/prepared/${path}` }).mount(f.options);
-  const root = runtime.root as unknown as FakeElement, stars = root.children.find(node => node.className === 'prepared-catalogue-points')!;
+  const root = runtime.root as unknown as FakeElement;
   runtime.publish(publication(4)); // 25 px radius: fully resolved using default policy.
+  const stars = root.children.find(node => node.className === 'prepared-catalogue-points')!;
   expect(stars.style.opacity).toBe('1'); expect(stars.style.display).toBe('block');
   const material = stars.children.map(node => [node.style.width, node.style.opacity]);
   runtime.publish(publication(10)); // 10 px: smooth transition.
@@ -264,16 +274,19 @@ test('distant prepared images suspend the retained slice renderer and hand off b
   const root = runtime.root as unknown as FakeElement, initial = descendants(root);
   const detail = initial.find(node => node.className === 'css-volume-detail')!;
   const distant = initial.find(node => node.className === 'css-volume-impostors')!;
-  const scenes = initial.filter(node => node.className === 'css-volume-scene');
+  const sceneNodes = () => descendants(root).filter(node => node.className === 'css-volume-scene');
   expect(descendants(root).filter(node => node.style.backgroundImage)).toHaveLength(0);
+  // While only impostors contribute, the slice renderer is not built at all.
+  expect(sceneNodes()).toHaveLength(0);
   runtime.publish(publication(100));
   expect(descendants(root).filter(node => node.style.backgroundImage && !node.dataset.volumeImpostor)).toHaveLength(0);
   expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block');
   expect(distant.dataset.activeViews).toBe('1');
-  const inactiveTransforms = scenes.map(scene => scene.style.transform);
   runtime.publish(publication(50));
-  expect(scenes.map(scene => scene.style.transform)).toEqual(inactiveTransforms);
+  expect(sceneNodes()).toHaveLength(0);
   runtime.publish(publication(200 / 24));
+  const scenes = sceneNodes(), built = descendants(root);
+  expect(scenes).toHaveLength(3);
   expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('block');
   expect(Number(distant.style.opacity)).toBeCloseTo(.5);
   expect(Number(detail.style.opacity)).toBeCloseTo(.5 * .8 * .9);
@@ -282,19 +295,23 @@ test('distant prepared images suspend the retained slice renderer and hand off b
   const visibleTransforms = scenes.map(scene => scene.style.transform);
   runtime.publish(publication(100));
   expect(scenes.map(scene => scene.style.transform)).toEqual(visibleTransforms);
-  expect(descendants(root)).toEqual(initial);
+  // Once built, the slice renderer stays retained when the cloud recedes.
+  expect(descendants(root)).toEqual(built);
   runtime.destroy(); expect(f.host.children).toEqual([f.before]);
 });
 
 test('saved star visibility stays toggleable with retained points and committed lens subscriptions', () => {
   const f = dom(), prepared = createPreparedVolumeLenses({ payload: { ...payload(), starsEnabled: false }, resolveResource: path => `/prepared/${path}` });
   const runtime = prepared.mount(f.options), root = runtime.root as unknown as FakeElement;
-  const stars = root.children.find(node => node.className === 'prepared-catalogue-points')!, nodes = [...stars.children];
+  const findStars = () => root.children.find(node => node.className === 'prepared-catalogue-points');
   const notify = vi.fn(), unsubscribe = runtime.subscribe(notify);
   expect(runtime.state().defaultLens).toBe('first');
-  runtime.publish(publication(4)); expect(stars.style.display).toBe('none'); expect(runtime.state().starsVisible).toBe(false);
-  runtime.setStarsVisible(true); expect(stars.style.display).toBe('block'); expect(runtime.state().starsVisible).toBe(true);
-  expect(stars.children).toEqual(nodes); expect(nodes[0].style.opacity).toBe('0.7');
+  // Disabled points are not built at all; enabling them builds them once and they are retained from then on.
+  runtime.publish(publication(4)); expect(findStars()).toBeUndefined(); expect(runtime.state().starsVisible).toBe(false);
+  runtime.setStarsVisible(true);
+  const stars = findStars()!, nodes = [...stars.children];
+  expect(stars.style.display).toBe('block'); expect(runtime.state().starsVisible).toBe(true);
+  expect(nodes[0].style.opacity).toBe('0.7');
   runtime.selectLens('second');
   expect(notify.mock.calls.map(([state]) => [state.selectedLens, state.starsVisible])).toEqual([['first', true], ['second', true]]);
   expect(runtime.state().lenses.map(lens => lens.label)).toEqual(['first', 'second', 'third']);
@@ -368,4 +385,16 @@ test('nearby volume visibility is explicit and rejects unknown policies', () => 
   expect(validatePreparedVolumeLenses({ ...payload(), contextVisibility: 'independent' }).contextVisibility).toBe('independent');
   expect(validatePreparedVolumeLenses(payload()).contextVisibility).toBe('galactic');
   expect(() => validatePreparedVolumeLenses({ ...payload(), contextVisibility: 'maybe' })).toThrow();
+});
+
+test('native mounts build every node at mount, as the server-rendered DOM they adopt was built', () => {
+  const lazy = dom(), eager = dom(), data = { ...budgetPayload(30, 3), starsEnabled: true };
+  const bank = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` });
+  const lazyRoot = bank.mount(lazy.options).root as unknown as FakeElement;
+  const eagerRoot = bank.mount({ ...eager.options, nativeFocalCss: '1000px' }).root as unknown as FakeElement;
+  const count = (root: FakeElement, test: (node: FakeElement) => boolean) => descendants(root).filter(test).length;
+  const leaves = (node: FakeElement) => node.parentNode?.className === 'css-volume-mesh', points = (node: FakeElement) => node.dataset.catalogueSource !== undefined;
+  expect([count(lazyRoot, leaves), count(lazyRoot, points)]).toEqual([0, 0]);
+  expect([count(eagerRoot, leaves), count(eagerRoot, points)]).toEqual([90, 3]);
+  expect(count(eagerRoot, node => node.dataset.volumeImpostor !== undefined)).toBe(26);
 });

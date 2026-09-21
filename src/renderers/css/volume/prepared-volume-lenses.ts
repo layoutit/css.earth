@@ -167,6 +167,8 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       const document = host.ownerDocument;
       const existing = [...document.querySelectorAll<HTMLElement>('.prepared-volume-lenses[data-prepared-volume-node="0"]')].find(root => root.dataset.volumeLensObject === data.id) ?? null;
       const dom = preparedDomAdoption(document, existing, nativeFocalCss !== undefined), create = dom.create;
+      // Hidden detail and points are built on first use, except where server-rendered DOM is adopted node for node.
+      const lazy = existing === null && nativeFocalCss === undefined;
       const selectedNative = existing?.dataset.selectedLens;
       const root = create('div');
       root.className = 'prepared-volume-lenses'; root.dataset.volumeLensObject = data.id;
@@ -189,6 +191,10 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
       const families: { lenses: readonly PreparedVolumeLens[]; active: { lens: PreparedVolumeLens }; surface: HTMLElement;
         runtime: ReturnType<typeof mountPreparedVolumeLod> }[] = [];
       let stars: ReturnType<typeof mountPreparedCataloguePoints> | null = null;
+      const mountStars = () => {
+        stars = mountPreparedCataloguePoints({ host: root, before: end, payload: lensById.get(selected)!.stars, createElement: create, nativeFocalCss });
+        stars.root.style.display = starsVisible ? 'block' : 'none';
+      };
       const state = (): PreparedVolumeLensState => Object.freeze({ id: selected, defaultLens: data.defaultLens, selectedLens: selected,
         objectId: data.id, starsVisible, lenses: lensContent });
       const notify = () => { const next = state(); for (const listener of listeners) listener(next); };
@@ -214,7 +220,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         Object.assign(surface.style, { position: 'absolute', inset: '0', pointerEvents: 'none', display: 'none' });
         const marker = create('span'); marker.hidden = true; surface.append(marker); root.insertBefore(surface, end);
         const active = { lens };
-        const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss },
+        const runtime = mountPreparedVolumeLod({ host: surface, before: marker, payload: lens.volume, resolveResource: resolvePrepared, createElement: create, nativeFocalCss, lazyDetail: lazy },
           detail => volumeLensCompositeOpacity(detail.roots.map((axisRoot, index) => ({
             axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
           })), active.lens.brightness));
@@ -245,7 +251,13 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
           }
           if (bank.surface.parentNode !== target) target.insertBefore(bank.surface, marker);
         }
+        const builtRoots = bank.runtime.roots.length;
         bank.runtime.publish(publication);
+        // The slice renderer is built on the first close publication; the bank's resident count follows it.
+        if (bank.runtime.roots.length !== builtRoots) {
+          for (const axisRoot of bank.runtime.roots.slice(builtRoots)) axisRoot.style.background = 'transparent';
+          updateResidencyMetadata();
+        }
         const opacity = volumeLensCompositeOpacity(bank.runtime.roots.map((axisRoot, index) => ({
           axis: (['x', 'y', 'z'] as const)[index], opacity: Number(axisRoot.style.opacity), visible: axisRoot.style.visibility !== 'hidden',
         })), lens.brightness);
@@ -253,21 +265,27 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
         bank.surface.style.opacity = lens.volume.impostors ? '1' : String(opacity);
         const pointOpacity = projectedVolumeOpacity(publication.world, publication.viewport, lens.volume.frame,
           data.framingRadiusUnits, data.pointVisibility!);
-        stars!.root.style.opacity = nativeFocalCss === undefined ? String(pointOpacity)
-          : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, lens.volume.frame, data.framingRadiusUnits),
-            publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels);
         const showPoints = starsVisible && (nativeFocalCss !== undefined || pointOpacity > 0);
-        stars!.root.style.display = showPoints ? 'block' : 'none';
-        // Hidden points leave layout; projecting them only wrote styles nobody draws.
-        if (showPoints) stars!.publish(publication);
-        root.dataset.pointOpacity = String(pointOpacity); root.dataset.cloudOpacity = String(opacity);
+        // Points are built the first time they show: a distant or disabled cluster keeps no hidden star nodes.
+        if (showPoints && !stars) { mountStars(); updateResidencyMetadata(); }
+        if (stars) {
+          stars.root.style.opacity = nativeFocalCss === undefined ? String(pointOpacity)
+            : nativeProjectedFade(projectedVolumeRadiusPixels(publication.world, publication.viewport, lens.volume.frame, data.framingRadiusUnits),
+              publication.viewport.focalPixels, nativeFocalCss, data.pointVisibility!.hiddenBelowRadiusPixels, data.pointVisibility!.fullAboveRadiusPixels);
+          stars.root.style.display = showPoints ? 'block' : 'none';
+          // Hidden points leave layout; projecting them only wrote styles nobody draws.
+          if (showPoints) stars.publish(publication);
+        }
+        // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
+        const pointHook = String(Math.round(pointOpacity * 1000) / 1000), cloudHook = String(Math.round(opacity * 1000) / 1000);
+        if (root.dataset.pointOpacity !== pointHook) root.dataset.pointOpacity = pointHook;
+        if (root.dataset.cloudOpacity !== cloudHook) root.dataset.cloudOpacity = cloudHook;
       };
       try {
         const selectedLens = lensById.get(selected)!;
         const selectedFamily = ensureFamily(selectedLens);
         selectedFamily.surface.style.display = 'block';
-        stars = mountPreparedCataloguePoints({ host: root, before: end, payload: selectedLens.stars, createElement: create, nativeFocalCss });
-        stars.root.style.display = starsVisible ? 'block' : 'none';
+        if (!lazy) mountStars();
         root.dataset.selectedLens = selected; host.insertBefore(root, before);
         if (frontRoot) frontHost!.insertBefore(frontRoot, frontBefore!);
         updateResidencyMetadata();
@@ -284,7 +302,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
             if (typeof visible !== 'boolean') throw new TypeError('Catalogue point visibility must be a boolean.');
             if (visible === starsVisible) return;
             starsVisible = visible;
-            stars!.root.style.display = visible ? 'block' : 'none';
+            if (stars) stars.root.style.display = visible ? 'block' : 'none';
             if (latest) publish(latest);
             notify();
           },
@@ -293,7 +311,7 @@ export function createPreparedVolumeLenses({ payload, resolveResource }: {
             const next = lensById.get(id);
             if (!next) throw new TypeError(`Unknown prepared volume lens: ${id}.`);
             if (id === selected) return;
-            stars!.setPresentation(next.stars);
+            stars?.setPresentation(next.stars);
             const family = ensureFamily(next);
             family.active.lens = next;
             family.runtime.setPresentation(next.volume);

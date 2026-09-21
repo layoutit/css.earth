@@ -97,7 +97,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d25a345fac34129f50c9e3feb2981404242eeeac75382df2185bb064d9782f58"
+        "sha256": "fd98477422a71f05eb576b5bb0a7fe544da6f5c89fbbf4f48a682272b0d930e2"
       }
     },
     "catalog": {
@@ -105,7 +105,7 @@
       "classification": "exoplanet",
       "color": "#9a9a9a",
       "distanceAu": 36612974.4,
-      "description": "Earth-sized planet in the temperate zone of a red dwarf, 178 parsecs away.",
+      "description": "Earth-sized planet around the red dwarf Kepler-186, one year every 130 days.",
       "systemName": "Kepler-186 system",
       "order": 1100,
       "context": {
@@ -121,15 +121,15 @@
         3801701494835227000
       ],
       "presentationToReference": [
-        0.34579732063332924,
+        0.3457973206333274,
         -0.8773009183940921,
-        -0.33281723457130796,
-        -0.6313949010713865,
+        -0.3328172345713098,
+        -0.6313949010713833,
         -0.4799404794120506,
-        0.6090957355972746,
-        0.6940927113461607,
+        0.609095735597278,
+        0.6940927113461646,
         0.0004845684817208576,
-        0.7198854584234371
+        0.7198854584234332
       ],
       "orbitUpReference": [
         0.8773009183940921,
@@ -143,6 +143,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "e227ed3b4bfee94080595fd775dce9da0c3184c149ac48ba5583b26cea6449e9"
+    "sha256": "8c0bd7f9e50985885553efc2e2f31b44faa1c318b108884a2ce2297292a4f5cb"
   }
 }

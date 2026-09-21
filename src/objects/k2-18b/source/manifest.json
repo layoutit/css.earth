@@ -4,8 +4,8 @@
     {
       "id": "k2-18b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 669,
-      "expectedSha256": "493cabf51392594108f14a6a0e00f5f0190d21d25b44a823ea5098a1e4d913de",
+      "expectedBytes": 815,
+      "expectedSha256": "12e73dcfbdac7b4937337fd2b086936ed07dc5e9e36f8aa6f20d9887a8e4d23b",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -168,8 +168,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2898,
-      "expectedSha256": "868adead1c64c81b94099e79039dde5058ecc6b6700fa20cb38c6b568e6252eb",
+      "expectedBytes": 2924,
+      "expectedSha256": "60b150c38e122559960ab1f3543580dcd83b5ebb7092a06076e4726a7c4a2875",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."

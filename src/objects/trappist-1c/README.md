@@ -10,9 +10,12 @@ planets perturb each other enough for their masses to be read from the timing of
 surface gravity of 1.086 Earth's. The radius comes from the transit depth against the star's own radius; the mass from the
 transit-timing variations, scaled by the stellar mass Mann et al. (2019) give.
 
-**Orbit.** 2.421937 days at 0.01580 au, 2.214 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
+**Orbit.** 2.4218 days at 0.01580 au, 2.214 times the starlight Earth receives (Agol et al. (2021, PSJ 2, 1), Tables 2, 5 and 6). The
 scene draws a circle: the paper's eccentricity for this planet is under 0.01, which moves it by less than its own radius. The
-transit time is the paper's, and transit-timing variations of up to about half an hour are not modelled. The orbit's position
+period and transit time are the ones the Agol et al. (2024, arXiv:2409.11620) forecast gives around the scene epoch
+(2026-09-03), which adds JWST timings to the Agol et al. (2021) model; their Table 2 period, 2.421937 d, is an osculating value at
+the start of their simulation and drifts hours off by 2026. Transit-timing variations of -0.9 to +1.2 minutes about that
+line are not modelled. The orbit's position
 angle on the sky is not measured, so the ascending node is drawn at celestial north, a stated convention.
 
 **Rotation.** Assumed synchronous: this close to its star the planet is expected to be tidally locked, and no rotation period of

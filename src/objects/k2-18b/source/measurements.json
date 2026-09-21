@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-hosted-planet@1",
   "id": "k2-18b",
-  "radiusKm": 15116.2,
-  "radiusSource": "Radius 2.37 +/- 0.22 Earth radii from Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
-  "orbitalPeriodDays": 32.939614,
-  "orbitalPeriodSource": "Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830), Table 2: 32.939614 d",
+  "radiusKm": 16646.9,
+  "radiusSource": "Radius 2.610 +/- 0.087 Earth radii from Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1, at 6378.137 km per Earth radius. GM from the mass 8.63 +/- 1.35 Earth masses Benneke et al. list from Cloutier et al. (2019, A&A 621, A49), times Earth's GM 398600.4418 km^3/s^2. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 32.940045,
+  "orbitalPeriodSource": "Benneke et al. (2019, ApJL 887, L14; arXiv:1909.04642), Table 1: 32.940045 +/- 0.000010 d",
   "shape": {
     "kind": "sphere",
-    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-18 b is measured; only its size, mass and orbit are."
+    "qualification": "A sphere at the published radius in the shared neutral gray. No image, colour, map or oblateness of K2-18 b is measured; its size, mass, orbit and transmission spectrum are."
   }
 }

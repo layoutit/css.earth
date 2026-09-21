@@ -16,6 +16,8 @@ No dated test report exists for this body yet.
 
 ## Known problems
 
+**Is it a planet?** Disputed. Jenkins et al. (2015) validated the signal statistically. Mullally et al. (2018, arXiv:1803.11307) showed that Kepler's instrumental false alarms mean it "can not be confirmed using a purely statistical validation approach" and must still be considered a candidate, and Burke et al. (2019, arXiv:1901.00506) agree it is not statistically validated. Robnik & Seljak (2025, arXiv:2509.07409) find a star-specific false-alarm probability below 1% and support its validation. The package draws it as the discovery paper describes it.
+
 The scaled distance is derived here from the paper’s semimajor axis (1.046 AU) and stellar radius (1.11 solar radii), not quoted from it. This planet is often described as potentially habitable; nothing here supports or shows that. The package draws a neutral gray sphere of the measured radius.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

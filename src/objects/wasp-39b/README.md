@@ -6,9 +6,9 @@ WASP-39 b is a puffy gas giant 1.28 times as wide as Jupiter, circling a Sun-lik
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Measured, from Mancini et al. 2018, A&A 613, A41 (2018), arXiv:1802.03859: radius 1.279 ± 0.037 ± 0.014 Jupiter radii (at 71492 km per Jupiter radius), period 4.0552941 days, inclination 87.32 degrees, transit time (T0 = BJD 2455342.96913). Scaled distance a/R* = 11.07. The orbit is drawn circular. The position angle of the orbit on the sky is not measured; the ascending node at celestial north is a display convention.
+Measured, from Mancini et al. 2018, A&A 613, A41 (2018), arXiv:1802.03859: radius 1.279 ± 0.037 ± 0.014 Jupiter radii (at 71492 km per Jupiter radius), inclination 87.32 degrees. The period and transit time are this project's: a straight line through six JWST transits of 2022 to 2026 ([`transit-times.csv`](source/science/jwst-transits/transit-times.csv), fitted with [`fit-transit-time.mts`](../../../tools/objects/jwst/fit-transit-time.mts)) gives 4.0552802 days and puts every transit within 0.2 minutes of it; Mancini et al.'s 4.0552941 days (T0 = BJD 2455342.96913) runs 21 to 28 minutes late over the same transits. Scaled distance a/R* = 11.07. The orbit is drawn circular. The position angle of the orbit on the sky is not measured; the ascending node at celestial north is a display convention.
 
-Not measured and not shown: mass, colour, albedo, surface, atmosphere, rotation. The rotation is assumed synchronous.
+Measured and not shown: mass, 0.281 ± 0.031 ± 0.006 Jupiter masses (Mancini et al. 2018, appendix table of WASP-39's physical parameters), and a transmission spectrum. Not measured and not shown: colour, albedo, surface, rotation. The rotation is assumed synchronous.
 
 ## Evidence
 

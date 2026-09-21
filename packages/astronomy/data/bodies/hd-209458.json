@@ -19,11 +19,12 @@
   "properMotionDecMasPerYear": -17.976,
   "radialVelocityKmPerS": -14.743,
   "sources": {
-   "position": "SIMBAD basic record for HD 209458, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21",
+   "position": "SIMBAD basic record for HD 209458, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21; cross-identification HIP 108859: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%20108859",
    "distance": "Gaia EDR3 parallax 20.7694 +/- 0.0266 mas via SIMBAD (2020yCat.1350....0G): 48.15 pc, no zero-point correction",
    "properMotion": "SIMBAD: 29.766, -17.976 mas/yr, reference 2020yCat.1350....0G",
    "radialVelocity": "SIMBAD: -14.743 km/s, reference 2018A&A...616A...7S"
   },
-  "presentationUp": "display-axis"
+  "presentationUp": "display-axis",
+  "hipparcosId": 108859
  }
 }
