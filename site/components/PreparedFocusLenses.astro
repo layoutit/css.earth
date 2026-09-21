@@ -8,6 +8,8 @@ import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prep
 import { CONTEXT_OBJECT_DESCRIPTORS, CONTEXT_OBJECT_PREPARED_JSON, CONTEXT_OBJECT_ASSET_URLS } from '../prepared-context-objects.mts';
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import { resolveSceneAddressesDeep } from '../asset-origin.mts';
+import { datasetSourceDetail } from '../dataset-context.mts';
+import { EXPLORATION } from '../exploration-catalog.mts';
 interface Props { objectId: string; factsOnly?: boolean }
 const { objectId, factsOnly = false } = Astro.props;
 
@@ -24,26 +26,32 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
   const provenance = validateObjectProvenance(provenanceDocuments[path.replace(/object\.json$/u, 'prepared/provenance.json')], bank.id);
   // presentation.json (a context object's own prepared JSON, not a Vite asset import) can carry
   // bare `/scenes/<id>/datasets/<sha>.webp` dataset-preview addresses that Vite never rewrites.
-  const presentation = await resolveSceneAddressesDeep(parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance));
+  const parsedPresentation = await resolveSceneAddressesDeep(parsePreparedVolumePresentation(presentations[path.replace(/object\.json$/u, 'prepared/presentation.json')], bank, provenance));
+  const presentation = { ...parsedPresentation, controls: parsedPresentation.controls.map(lens => {
+    const { detail: _preparedDetail, ...control } = lens;
+    const detail = datasetSourceDetail(lens.id, provenance, EXPLORATION.catalog);
+    return { ...control, ...(detail ? { detail } : {}) };
+  }) };
+  const directSourceIdsByLens = Object.fromEntries(presentation.controls.map(lens => [lens.id,
+    provenance.sources.filter(source => source.lensId === lens.id).map(source => source.id)]));
   const prefix = path.replace(/object\.json$/u, '');
   const resources = Object.fromEntries(Object.entries(CONTEXT_OBJECT_ASSET_URLS).filter(([path]) => path.startsWith(prefix)).map(([path, url]) => [path.slice(prefix.length), url]));
-  return { bank, presentation, descriptor, resources };
+  return { bank, presentation, directSourceIdsByLens, descriptor, resources };
 }));
 ---
-{banks.map(({ bank, presentation, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
+{banks.map(({ bank, presentation, directSourceIdsByLens, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
   {presentation.controls.map(lens => <div data-focus-lens-details={lens.id} hidden={lens.id !== presentation.defaultLens}>
-    <h3 class="planet-lens-details-title">{lens.label}</h3>
-    <PlanetFactsheet id={`focus-${bank.id}-${lens.id}`} facts={lens.facts} embedded />
+    <PlanetFactsheet id={`focus-${bank.id}-${lens.id}`} facts={[
+      { id: 'dataset', label: 'Dataset', value: lens.label },
+      ...(lens.facts ?? []),
+    ]} embedded />
   </div>)}
 </div> : <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
   <DatasetLenses objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={`/${objectId}/`} lenses={presentation} controlName="focusLens" />
-    {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
-      <input type="checkbox" data-focus-stars name="focusStars" form={`focus-${bank.id}-datasets`} checked />
-      <span class="planet-setting-text">Catalogue stars</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>}
-  <DatasetContextPanels objectId={bank.id} lenses={presentation} />
-  {/* Follow the shell's direct children so each moving catalogue does not search all sidebar descendants. */}
-  <style is:inline set:html={`.planet-ui-layer:has(> .planet-sidebar-frame > .planet-sidebar > .planet-drawer-content > .planet-object-browser > [data-prepared-focus-card] > #prepared-focus-dataset-content > [data-focus-lens-bank="${bank.id}"] > .planet-setting-control > [data-focus-stars]:not(:checked)) ~ .planet-viewport .prepared-volume-lenses[data-volume-lens-object="${bank.id}"] .prepared-catalogue-points { display:none !important; }`}></style>
+  <DatasetContextPanels objectId={bank.id} lenses={presentation} {directSourceIdsByLens} />
 </div>)}
+{/* The one shell-level 3D-stars setting owns every 3D point layer, including catalogue points inside prepared volumes. */}
+<style is:inline>
+  .planet-ui-layer:has(.planet-three-d-stars-setting:not(:checked)) ~ .planet-viewport .prepared-catalogue-points { display: none !important; }
+</style>

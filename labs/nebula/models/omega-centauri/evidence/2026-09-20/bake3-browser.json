@@ -1,0 +1,236 @@
+{
+  "id": "5d934218dcc59475e632d503bea59dfeb3bb156431d8d88d3616830808b23df9",
+  "url": "http://127.0.0.1:4339/reconstruction?subject=omega-centauri&inspection=compiler",
+  "captures": [
+    {
+      "name": "vst-front",
+      "pose": "0,0",
+      "lens": "eso1119b",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "vst-oblique",
+      "pose": "44.99999389648437,25.000006103515624",
+      "lens": "eso1119b",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "0.5",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "vst-x-positive",
+      "pose": "90.00000915527343,0",
+      "lens": "eso1119b",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "vst-x-negative",
+      "pose": "-89.99999847412109,0",
+      "lens": "eso1119b",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "vst-y-positive",
+      "pose": "0,88.99999694824218",
+      "lens": "eso1119b",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "vst-y-negative",
+      "pose": "0,-88.99999694824218",
+      "lens": "eso1119b",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "wfi-front",
+      "pose": "0,0",
+      "lens": "eso0844a",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "wfi-oblique",
+      "pose": "44.99999389648437,25.000006103515624",
+      "lens": "eso0844a",
+      "mode": "textured",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "0.5",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    },
+    {
+      "name": "neutral-oblique",
+      "pose": "44.99999389648437,25.000006103515624",
+      "lens": "eso0844a",
+      "mode": "neutral",
+      "original": "false",
+      "bankStates": [
+        {
+          "visibility": "visible",
+          "opacity": "1",
+          "leaves": 615
+        },
+        {
+          "visibility": "hidden",
+          "opacity": "0",
+          "leaves": 615
+        },
+        {
+          "visibility": "visible",
+          "opacity": "0.5",
+          "leaves": 1107
+        }
+      ],
+      "retained": true
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "posts": [],
+  "refreshVerified": true,
+  "status": "inspection verified; visual handoff UNACCEPTED"
+}

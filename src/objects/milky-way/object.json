@@ -33,12 +33,12 @@
     },
     "preparation": {
       "source": "source/volume.json",
-      "sha256": "a562468712debc051149e9ac067c130130c0d49733ef6b784b061d12dae9065d"
+      "sha256": "d08292afca05cffd880b2ec50637e74293f4f7b8d9824885f776197025a70269"
     }
   },
   "prepared": {
     "format": "cssearth-density-volume@1",
     "url": "prepared/volume.json",
-    "sha256": "e9f25b1b181a3a4a6270b0aabe92af5d9586a5f55fc00b079728554bb9ecdd28"
+    "sha256": "fa09628f1c3e3a79a065f762137a3b54197a34cf86248653193054fda0416f09"
   }
 }

@@ -1,0 +1,12 @@
+batman-package 2.5.3
+Copyright Laura Kreidberg and contributors
+
+Source: https://github.com/lkreidberg/batman/tree/v2.5.3
+Pinned commit: 6fc570e209fa2e3dadd2ffa4c535f528a7bef495
+License: GNU General Public License, version 3
+License text: https://github.com/lkreidberg/batman/blob/v2.5.3/LICENSE.txt
+
+css.earth installs the unmodified source release as a separate Python package.
+The package owns transit light-curve evaluation; its output is scientific data,
+not copied source code. The css.earth adapter and its contracts remain MIT
+licensed.

@@ -1,0 +1,33 @@
+{
+  "id": "artwork-photo-gaia",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "Gaia spacecraft artwork",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso1908d/",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/eso1908d.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso1908d/",
+      "checkedOn": "2026-09-21",
+      "locator": "Artwork credit, CC BY 4.0 usage terms and original file"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "European Southern Observatory",
+  "creators": [
+    "ESA/ATG medialab",
+    "ESO/S. Brunier"
+  ]
+}

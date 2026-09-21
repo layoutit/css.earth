@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "stellar-neighbourhood",
+    "target": "stellar-neighbourhood",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "src/objects/stellar-neighbourhood/object.json"
+    },
+    "producingRecord": "src/objects/stellar-neighbourhood/object.json",
+    "sourceClassifications": [
+      {
+        "term": "physical point field",
+        "vocabulary": "cssearth-object@1",
+        "version": "1",
+        "status": "source"
+      }
+    ],
+    "families": [
+      "F16"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f16-spatial-physical",
+        "profileId": "existing-physical-object@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "object",
+      "path": "../../../../src/objects/stellar-neighbourhood/object.json",
+      "role": "science",
+      "bytes": 906,
+      "sha256": "8234b27bdc8ebe458af8dc29ea8dbbf4fdfabc925497c78068eeb9c421ddcd7e",
+      "mediaType": "application/json"
+    }
+  ],
+  "components": [
+    {
+      "id": "points",
+      "name": "stellar-neighbourhood points",
+      "families": [
+        "F16"
+      ],
+      "locations": [
+        {
+          "memberId": "object",
+          "path": "object.json"
+        }
+      ],
+      "representation": {
+        "kind": "physical-field",
+        "topology": "points",
+        "samples": null
+      },
+      "axes": [],
+      "columns": [],
+      "quantity": {
+        "name": "physical point samples",
+        "semantics": "Existing prepared physical object; no depth is inferred from an angular or spectral observation."
+      },
+      "calibration": {
+        "state": "model-derived",
+        "basis": [
+          "Validated by the existing points loader across 7 pinned inputs.",
+          "{\"source\":{\"schema\":\"cssearth-source-provenance@1\",\"sources\":[{\"id\":\"catalogue\",\"path\":\"stars-hyg.gxct\",\"sha256\":\"d1574537361ac78d67f32ddf30ac0122e9d52115851f1519cb91bed26dcf8e74\",\"bytes\":4818664,\"key\":\"catalogs/stars-hyg\",\"source\":\"HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)\",\"license\":\"CC-BY-SA-4.0\",\"url\":\"https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE\",\"epoch\":\"ICRS/J2000.0 equinox and coordinate epoch; HYG has already propagated Hipparcos source positions to J2000.0.\",\"built\":\"2026-09-02\",\"extra\":{\"count\":109389,\"columns\":[\"posPc\",\"absMag\",\"teffK\",\"radiusSolar\",\"colorIndexBv\",\"hip\",\"name\",\"pmRaMasPerYr\",\"pmDecMasPerYr\"],\"droppedSun\":1,\"droppedNonPositiveDist\":0,\"droppedSentinelDist\":10224,\"totalSourceRows\":119614},\"credit\":\"HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.\",\"modifications\":\"Complete row set reordered into a spatial hierarchy; exact HIP matches adopt existing detailed body astrometry at the fixed scene epoch, preserving HYG apparent magnitude at the Sun. Other coordinates are unchanged. Luminosity-weighted proxies and 32-color display quantization.\"}],\"qualification\":\"Local generated assets; no network publication. HYG astrometry is a local stellar neighbourhood, not a full Milky Way stellar census.\",\"sourceBinding\":{\"kind\":\"catalogued\",\"references\":[{\"catalogueId\":\"hyg-v44\",\"role\":\"material\",\"evidence\":\"src/objects/stellar-neighbourhood/source/provenance.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/sources/0\"}]},\"catalogueDisplay\":{\"feature\":\"stars\",\"label\":\"HYG\",\"credit\":\"Star catalogue · David Nash / Astronexus · CC BY-SA 4.0.\",\"description\":\"HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.\",\"footerAliases\":[\"https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE\"]}},\"catalogueMetadata\":{\"source\":\"HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)\",\"epoch\":\"ICRS/J2000.0 equinox and coordinate epoch\",\"built\":\"2026-09-02\",\"sentinelDistPc\":100000,\"sentinelDistDoc\":\"dist == 100000.0 marks an unmeasurable/negative Hipparcos parallax; rows with it are dropped, not shipped.\",\"hipSentinel\":0,\"hipSentinelDoc\":\"hip == 0 means the row has no Hipparcos catalogue number.\",\"teffCalibration\":\"Ballesteros (2012) eq. 14, B-V -> Teff\",\"totalSourceRows\":119614,\"droppedSun\":1,\"droppedNonPositiveDist\":0,\"droppedSentinelDist\":10224,\"survivingRows\":109389},\"reconciliation\":{\"sourceEpochDescription\":\"ICRS/J2000 equinox; source astrometry primarily Hipparcos-2007 reduction, epoch J1991.25\",\"epochJdTt\":2461286.5,\"records\":[{\"bodyId\":\"polaris\",\"hipparcosId\":11767,\"sourceRow\":10818,\"originalPositionPc\":[1.3430999517440796,1.0476289987564087,132.6149139404297],\"positionPc\":[1.386060118675232,1.0821382999420166,136.8882598876953],\"originalAbsoluteMagnitude\":-3.6429998874664307,\"absoluteMagnitude\":-3.71186900138855,\"astrometry\":{\"hipparcosId\":11767,\"rightAscensionDegrees\":37.954560670189856,\"declinationDegrees\":89.26410896994187,\"positionEpochJulianYear\":2000,\"distanceParsecs\":136.9,\"properMotionRaMasPerYear\":44.48,\"properMotionDecMasPerYear\":-11.85,\"radialVelocityKmPerS\":-16.42,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"SIMBAD basic record for * alf UMi (HD 8890, HIP 11767), ICRS J2000 position from the Hipparcos new reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16; cross-identification HIP 11767: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2011767\",\"distance\":\"136.90 +/- 0.34 pc, the distance Evans et al. (2024, ApJ 971, 190) adopt: the Gaia DR3 parallax of the wide companion Polaris B (7.2869 +/- 0.0178 mas via SIMBAD) with the Lindegren zero-point offset. Polaris Aa itself is too bright for a reliable Gaia parallax; Hipparcos gives 7.54 mas (133 pc).\",\"properMotion\":\"Hipparcos new reduction (van Leeuwen 2007) via SIMBAD: 44.48, -11.85 mas/yr\",\"radialVelocity\":\"-16.42 km/s, the systemic velocity of the spectroscopic binary in the SB9 catalogue (Pourbaix et al. 2004, A&A 424, 727) via SIMBAD\"}}},{\"bodyId\":\"r-doradus\",\"hipparcosId\":21479,\"sourceRow\":19852,\"originalPositionPc\":[9.086167335510254,23.906892776489258,-48.25687026977539],\"positionPc\":[9.086528778076172,23.906461715698242,-48.25751876831055],\"originalAbsoluteMagnitude\":1.902999997138977,\"absoluteMagnitude\":1.9029823541641235,\"astrometry\":{\"hipparcosId\":21479,\"rightAscensionDegrees\":69.18996363611527,\"declinationDegrees\":-62.077165937032035,\"positionEpochJulianYear\":2000,\"distanceParsecs\":54.61496450027307,\"properMotionRaMasPerYear\":-69.36,\"properMotionDecMasPerYear\":-75.78,\"radialVelocityKmPerS\":26.1,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"SIMBAD basic record for V* R Dor (HD 29712, HIP 21479), ICRS J2000 position from the revised Hipparcos reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-17; cross-identification HIP 21479: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2021479\",\"distance\":\"Hipparcos parallax 18.31 +/- 0.99 mas (van Leeuwen 2007) via SIMBAD: 54.615 pc. Vlemmings et al. (2024, Nature 633, 323) adopt the same measurement as 55 +/- 3 pc and state that there is no useable Gaia parallax for this star.\",\"properMotion\":\"van Leeuwen (2007) via SIMBAD: -69.36, -75.78 mas/yr. The ALMA image confirms it: the star sits 1.63 arcsec west and 1.78 arcsec south of this J2000 position, which is 23.5 years of this proper motion.\",\"radialVelocity\":\"General Catalogue of Stellar Radial Velocities (Wilson 1953, bibcode 1953GCRV..C......0W) via SIMBAD: 26.1 +/- 2.0 km/s.\"}}},{\"bodyId\":\"ce-tauri\",\"hipparcosId\":25945,\"sourceRow\":23960,\"originalPositionPc\":[62.98653030395508,516.946533203125,175.20001220703125],\"positionPc\":[75.38333129882812,618.6912231445312,209.68223571777344],\"originalAbsoluteMagnitude\":-4.380000114440918,\"absoluteMagnitude\":-4.770141124725342,\"astrometry\":{\"hipparcosId\":25945,\"rightAscensionDegrees\":83.05313179526708,\"declinationDegrees\":18.59423660180722,\"positionEpochJulianYear\":2000,\"distanceParsecs\":657.5919969093286,\"properMotionRaMasPerYear\":0.957,\"properMotionDecMasPerYear\":-4.511,\"radialVelocityKmPerS\":23.75,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"SIMBAD basic record for * 119 Tau (CE Tau, HD 36389, HIP 25945), ICRS J2000 position from Gaia EDR3/DR3 (Gaia Collaboration 2020, yCat I/350; bibcode 2020yCat.1350....0G), retrieved 2026-09-16; cross-identification HIP 25945: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2025945\",\"distance\":\"Gaia DR3 parallax 1.5207 +/- 0.2661 mas via SIMBAD: 658 pc. Hipparcos (van Leeuwen 2007) gives 1.82 +/- 0.26 mas, the 549 pc Montargès et al. (2018) adopt.\",\"properMotion\":\"Gaia DR3 via SIMBAD: 0.957, -4.511 mas/yr\",\"radialVelocity\":\"Famaey et al. (2005, A&A 430, 165; bibcode 2005A&A...430..165F) via SIMBAD: 23.75 +/- 0.44 km/s\"}}},{\"bodyId\":\"betelgeuse\",\"hipparcosId\":27989,\"sourceRow\":25822,\"originalPositionPc\":[3.189296007156372,151.3643798828125,19.68214225769043],\"positionPc\":[3.5089073181152344,166.5616912841797,21.65852165222168],\"originalAbsoluteMagnitude\":-5.468999862670898,\"absoluteMagnitude\":-5.676757335662842,\"astrometry\":{\"hipparcosId\":27989,\"rightAscensionDegrees\":88.79293899077537,\"declinationDegrees\":7.407063995272694,\"positionEpochJulianYear\":2000,\"distanceParsecs\":168,\"properMotionRaMasPerYear\":27.54,\"properMotionDecMasPerYear\":11.3,\"radialVelocityKmPerS\":21.91,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"SIMBAD basic record for * alf Ori, ICRS J2000 position from van Leeuwen (2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16; cross-identification HIP 27989: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2027989\",\"distance\":\"Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837): 168 (+27/-15) pc, parallax 5.95 (+0.58/-0.85) mas. Hipparcos (van Leeuwen 2007) gives 6.55 +/- 0.83 mas (153 pc); Harper et al. (2017, AJ 154, 11) give 4.51 +/- 0.80 mas (222 pc).\",\"properMotion\":\"van Leeuwen (2007, A&A 474, 653) via SIMBAD: 27.54, 11.30 mas/yr, error 1.03 mas/yr\",\"radialVelocity\":\"Famaey et al. (2005, A&A 430, 165; bibcode 2005A&A...430..165F) via SIMBAD: 21.91 +/- 0.51 km/s\"}}},{\"bodyId\":\"antares\",\"hipparcosId\":80763,\"sourceRow\":73646,\"originalPositionPc\":[-58.5426025390625,-140.30758666992188,-75.57476806640625],\"positionPc\":[-58.54274368286133,-140.3072052001953,-75.57518768310547],\"originalAbsoluteMagnitude\":-5.089000225067139,\"absoluteMagnitude\":-5.088999271392822,\"astrometry\":{\"hipparcosId\":80763,\"rightAscensionDegrees\":247.3519154198264,\"declinationDegrees\":-26.432002611950832,\"positionEpochJulianYear\":2000,\"distanceParsecs\":169.77928692699493,\"properMotionRaMasPerYear\":-12.11,\"properMotionDecMasPerYear\":-23.3,\"radialVelocityKmPerS\":-3.5,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"SIMBAD basic record for * alf Sco (HD 148478, HIP 80763), ICRS J2000 position from the Hipparcos re-reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16; cross-identification HIP 80763: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2080763\",\"distance\":\"Hipparcos parallax 5.89 +/- 1.00 mas (van Leeuwen 2007) via SIMBAD: 170 pc. The star is too bright for a Gaia parallax.\",\"properMotion\":\"van Leeuwen (2007) via SIMBAD: -12.11, -23.30 mas/yr\",\"radialVelocity\":\"Gontcharov (2006, AstL 32, 759; bibcode 2006AstL...32..759G) via SIMBAD: -3.5 +/- 0.8 km/s\"}}},{\"bodyId\":\"hd-181327\",\"hipparcosId\":95270,\"sourceRow\":86757,\"originalPositionPc\":[10.647910118103027,-28.111202239990234,-42.202144622802734],\"positionPc\":[9.818360328674316,-25.920703887939453,-38.91460037231445],\"originalAbsoluteMagnitude\":3.4679999351501465,\"absoluteMagnitude\":3.6441261768341064,\"astrometry\":{\"hipparcosId\":95270,\"rightAscensionDegrees\":290.745785785032,\"declinationDegrees\":-54.538414066989446,\"positionEpochJulianYear\":2016,\"distanceParsecs\":47.776868212690886,\"properMotionRaMasPerYear\":24.402797199941578,\"properMotionDecMasPerYear\":-82.18575722363535,\"radialVelocityKmPerS\":0.07390876,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"Gaia DR3 source 6643589352010758400 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-181327/source/photometry/gaia-dr3-source.csv; cross-identification HIP 95270: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2095270\",\"distance\":\"Gaia DR3 parallax 20.931 +/- 0.029 mas (same row): 1000/20.930631 = 47.777 pc, no zero-point correction\",\"properMotion\":\"Gaia DR3 (same row): 24.403, -82.186 mas/yr\",\"radialVelocity\":\"Gaia DR3 (same row): 0.07 +/- 0.13 km/s\"}}},{\"bodyId\":\"hd-189733\",\"hipparcosId\":98505,\"sourceRow\":89652,\"originalPositionPc\":[9.021016120910645,-15.51077938079834,7.509850025177002],\"positionPc\":[9.17152214050293,-15.769575119018555,7.634456157684326],\"originalAbsoluteMagnitude\":6.224999904632568,\"absoluteMagnitude\":6.189097881317139,\"astrometry\":{\"hipparcosId\":98505,\"rightAscensionDegrees\":300.1821218062407,\"declinationDegrees\":22.709741105168273,\"positionEpochJulianYear\":2016,\"distanceParsecs\":19.775801965002984,\"properMotionRaMasPerYear\":-3.208339784864691,\"properMotionDecMasPerYear\":-250.32333085817578,\"radialVelocityKmPerS\":-2.531722,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"Gaia DR3 source 1827242816201846144 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/hd-189733/source/photometry/gaia-dr3-source.csv; cross-identification HIP 98505: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2098505\",\"distance\":\"Gaia DR3 parallax 50.567 +/- 0.016 mas (same row): 1000/50.567 = 19.776 pc, no zero-point correction\",\"properMotion\":\"Gaia DR3 (same row): -3.208, -250.323 mas/yr\",\"radialVelocity\":\"Gaia DR3 (same row): -2.53 +/- 0.12 km/s\"}}},{\"bodyId\":\"pi1-gruis\",\"hipparcosId\":110478,\"sourceRow\":100558,\"originalPositionPc\":[103.3653335571289,-46.70558166503906,-117.24427795410156],\"positionPc\":[102.43231964111328,-46.283260345458984,-116.18620300292969],\"originalAbsoluteMagnitude\":0.3569999933242798,\"absoluteMagnitude\":0.3766902685165405,\"astrometry\":{\"hipparcosId\":110478,\"rightAscensionDegrees\":335.68420162374997,\"declinationDegrees\":-45.94799754471,\"positionEpochJulianYear\":2000,\"distanceParsecs\":161.65938025034984,\"properMotionRaMasPerYear\":31.106,\"properMotionDecMasPerYear\":-10.338,\"radialVelocityKmPerS\":0,\"presentationUp\":\"display-axis\",\"sources\":{\"position\":\"SIMBAD basic record for * pi.01 Gru (HD 212087, HIP 110478), ICRS J2000 position from Gaia EDR3/DR3 (Gaia Collaboration 2020, yCat I/350; bibcode 2020yCat.1350....0G), retrieved 2026-09-16; cross-identification HIP 110478: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%20110478\",\"distance\":\"Gaia DR3 parallax 6.1858 +/- 0.4466 mas (RUWE 2.9; the star is a wide binary) via SIMBAD: 161.7 pc. Hipparcos (van Leeuwen 2007, A&A 474, 653) gives 6.13 +/- 0.76 mas, the 163 pc Paladini et al. (2018, Nature 553, 310) adopt.\",\"properMotion\":\"Gaia DR3 via SIMBAD: 31.106, -10.338 mas/yr\",\"radialVelocity\":\"No catalogued radial velocity: SIMBAD lists none, and the Pulkovo (III/252), GCRV (III/21) and Kharchenko (III/254) compilations have no entry for HIP 110478 (checked 2026-09-16). Zero is assumed; a 30 km/s error moves the scene position by one part in a million of the distance over the 26 years since J2000.\"}}}],\"policy\":\"Exact HIP identity join to detailed body astrometry; float32 parsec positions; preserve HYG apparent magnitude at the Sun. Unmatched rows remain at their catalogue epoch. The retained GXCT epoch description is legacy: HYG coordinates are J2000.0, not J1991.25.\"},\"qualification\":\"All catalogue rows retained; explicitly cross-identified detailed stars use body astrometry at the navigation epoch, with HYG apparent brightness preserved. Remaining rows retain HYG J2000.0 positions. Internal nodes approximate unresolved luminosity and position; no fixed pixel-error guarantee when the point pool is saturated.\"}"
+        ]
+      },
+      "flags": [],
+      "frame": {
+        "kind": "physical",
+        "name": "sun-icrf",
+        "epoch": "JD_TT 2461286.5"
+      },
+      "dependencyIds": []
+    }
+  ],
+  "dependencies": [],
+  "issues": [
+    {
+      "scope": "component",
+      "identity": "points",
+      "state": "unknown",
+      "reason": "Portable export retains prepared resources and source recipe; raw source datasets are referenced rather than bundled. Bounds: {\"min\":[-1024,-1024,-1024],\"max\":[1024,1024,1024]}."
+    }
+  ]
+}

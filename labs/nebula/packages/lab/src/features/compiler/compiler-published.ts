@@ -8,8 +8,8 @@ interface Published { recipePath: string; result: Pin; inputs: Pin[] }
 /** Producer identities are historical metadata; scientific recipes/outputs never match this policy. */
 function producerPath(path: string): boolean {
   return /^labs\/nebula\/(?:src\/.+\.[cm]?tsx?|packages\/(?:lab|volume-core|volume-bake|reconstruction)\/(?:src\/.+\.[cm]?tsx?|package\.json))$/.test(path) ||
-    /^src\/(?:preparation|renderers)\/.+\.[cm]?ts$/.test(path) ||
-    /^tools\/(?:fits\.mts|nebula\/application\/.+\.[cm]?ts)$/.test(path);
+    /^src\/(?:preparation|renderers|platform)\/.+\.[cm]?ts$/.test(path) ||
+    /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path);
 }
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {
@@ -47,7 +47,8 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const recipeBytes = inputs.find(([path]) => path === recipePath)![1];
   const recipe = readCompilerRecipe(JSON.parse(new TextDecoder().decode(recipeBytes)));
   const required = [recipe.observationRecipe, recipe.observationCatalogue, recipe.structureRecipe, recipe.structureCatalogue,
-    ...(recipe.observedStars ? [recipe.observedStars.path] : []), ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : []), ...(recipe.sampledRecipe ? [recipe.sampledRecipe] : [])];
+    ...(recipe.observedStars ? [recipe.observedStars.path] : []), ...(recipe.jointRecipe ? [recipe.jointRecipe] : []), ...(recipe.depthRecipe ? [recipe.depthRecipe] : []), ...(recipe.sampledRecipe ? [recipe.sampledRecipe] : []),
+    ...(recipe.photometricPriorRecipe ? [recipe.photometricPriorRecipe] : [])];
   if (required.some(path => !inputs.some(([candidate]) => candidate === path))) throw new Error('Prepared nebula receipt does not pin every configured source.');
   let depthInputs: { recipe: Pin; evidence: Pin } | undefined;
   if (recipe.depthRecipe) {
@@ -69,6 +70,18 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const method: unknown = JSON.parse(new TextDecoder().decode(await checkedBytes(result.method, fetchLocal)));
   if (!record(method) || method.recipeSha256 !== publication.inputs.find(source => source.path === recipePath)!.sha256 || !Array.isArray(method.implementation))
     throw new Error('Prepared nebula method does not match its current recipe.');
+  if (recipe.photometricPriorRecipe) {
+    const model: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.photometricPriorRecipe)![1]));
+    if (!record(model) || model.schema !== 'cssearth-photometric-mge@1' || model.id !== recipe.id || !record(method.photometricPrior))
+      throw new Error('Prepared nebula omits its configured photometric model.');
+    const evidence = pin(model.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
+    if (!evidence.path.startsWith('labs/nebula/models/') ||
+        !publication.inputs.some(input => input.path === evidence.path && input.sha256 === evidence.sha256) ||
+        snapshot.sha256 !== publication.inputs.find(input => input.path === recipe.photometricPriorRecipe)!.sha256 ||
+        evidenceSnapshot.sha256 !== evidence.sha256)
+      throw new Error('Prepared photometric model differs from its configured evidence.');
+    await Promise.all([checkedBytes(snapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
+  }
   if (recipe.observedStars && (!record(method.observedStars) || !record(method.observedStars.source) ||
       method.observedStars.source.path !== recipe.observedStars.path || method.observedStars.source.sha256 !== recipe.observedStars.sha256 ||
       !publication.inputs.some(input => input.path === recipe.observedStars!.path && input.sha256 === recipe.observedStars!.sha256)))

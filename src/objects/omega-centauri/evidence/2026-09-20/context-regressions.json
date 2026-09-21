@@ -1,0 +1,43 @@
+{
+  "baseRevision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
+  "status": "Uncommitted shared working tree, implementation round 1; final independent review owned by pr380",
+  "sourcePins": [
+    {
+      "path": "site/prepared-context-navigation.mts",
+      "bytes": 13264,
+      "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36"
+    },
+    {
+      "path": "site/test/prepared-context-navigation.test.mts",
+      "bytes": 23828,
+      "sha256": "bc80889dedb3c2b7906dd4792c7be68119442856bae95e4562bbf83c2c2713ba"
+    },
+    {
+      "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
+      "bytes": 48720,
+      "sha256": "fd0d735b8f44cd639e3c9cf5333a4f4fbef1a2c9dbbbf8d288cf59a4441dae2f"
+    },
+    {
+      "path": "src/renderers/css/universe/detailed-focus-context.ts",
+      "bytes": 873,
+      "sha256": "12a727775a8277fede7cd743642b960a30c10a7334f2e47186d97b6e8d5413f4"
+    },
+    {
+      "path": "src/renderers/css/universe/detailed-focus-context.test.ts",
+      "bytes": 1302,
+      "sha256": "11a9abf0d929d27d84c698e3a1e9684778d65eafe7eb29b39a747e834b999beb"
+    },
+    {
+      "path": "src/renderers/css/sky/prepared-sky-runtime.test.ts",
+      "bytes": 52229,
+      "sha256": "3652d5086c4422b64ee66347d6909617693f443e1c7e577452796d5d4a5805e1"
+    }
+  ],
+  "tests": {
+    "runtimeAndPolicy": 16,
+    "navigationAndRouter": 71,
+    "mutations": 4
+  },
+  "scientificAssetsChanged": false,
+  "cameraAndLimitsChanged": false
+}

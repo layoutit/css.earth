@@ -502,6 +502,13 @@
   padding: 0;
   list-style: none;
 }
+.planet-sidebar .planet-object-results-scroll .planet-object-list[data-catalogue-window] {
+  position: relative;
+  display: block;
+}
+.planet-sidebar .planet-object-results-scroll .planet-object-list[data-catalogue-window] > .planet-object-item {
+  width: 100%;
+}
 .planet-object-results-scroll .planet-observation-control { text-decoration: none; }
 .planet-information-panel [data-information-panel="moons"] .planet-object-list {
   width: 100%;
@@ -569,11 +576,21 @@
   display: var(--information-panel-display, block);
   padding: 8px var(--explorer-card-padding-inline-end) 20px var(--explorer-card-padding-inline-start);
 }
+.planet-card-tabpanel .planet-surface-minimap {
+  aspect-ratio: 2 / 1;
+  background: #000;
+}
+.planet-card-tabpanel .planet-lens-texture {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
 .planet-card-tabpanel .planet-facts { margin-top: 0; }
 :is(.planet-card-tabpanel, .planet-object-results-scroll) :is(.planet-observation-control, .planet-lens-label, .planet-facts, .planet-lens-details-title, .planet-lens-details-copy) {
   font: var(--shell-font-content);
 }
-.planet-card-tabpanel :is(.planet-lens-source, .planet-lens-legend-labels, .planet-lens-legend-categories) {
+.planet-card-tabpanel :is(.planet-lens-legend-labels, .planet-lens-legend-categories) {
   font: var(--shell-font-caption);
 }
 .planet-card-tabpanel > .planet-factsheet-section,

@@ -1,0 +1,165 @@
+{
+  "extname": "LIGHTCURVE",
+  "rows": 19149,
+  "rowBytes": 100,
+  "columns": [
+    {
+      "name": "TIME",
+      "datatype": "float64",
+      "repeat": 1,
+      "unit": "BJD - 2457000, days",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "TIMECORR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "d",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "CADENCENO",
+      "datatype": "int32",
+      "repeat": 1,
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "SAP_FLUX",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "e-/s",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "SAP_FLUX_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "e-/s",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "SAP_BKG",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "e-/s",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "SAP_BKG_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "e-/s",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "PDCSAP_FLUX",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "e-/s",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "PDCSAP_FLUX_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "e-/s",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "QUALITY",
+      "datatype": "int32",
+      "repeat": 1,
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "PSF_CENTR1",
+      "datatype": "float64",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "PSF_CENTR1_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "PSF_CENTR2",
+      "datatype": "float64",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "PSF_CENTR2_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "MOM_CENTR1",
+      "datatype": "float64",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "MOM_CENTR1_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "MOM_CENTR2",
+      "datatype": "float64",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "MOM_CENTR2_ERR",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "pixel",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "POS_CORR1",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "pixels",
+      "nullable": false,
+      "scaled": false
+    },
+    {
+      "name": "POS_CORR2",
+      "datatype": "float32",
+      "repeat": 1,
+      "unit": "pixels",
+      "nullable": false,
+      "scaled": false
+    }
+  ]
+}

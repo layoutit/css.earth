@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import type { BrowserWindow } from '../browser-types.mts';
-import { loadCatalogueFragment, scheduleWhenIdle } from '../catalogue-fragment-loader.mts';
-import type { CatalogueFragmentPin } from '../catalogue-fragment-pin.mts';
+import { loadCatalogueFragment, loadCatalogueIndex, scheduleWhenIdle } from '../catalogue-fragment-loader.mts';
+import type { CatalogueFragmentPin, CatalogueIndexPin } from '../catalogue-fragment-pin.mts';
 
 class FakeUListElement { html: string; constructor(html: string) { this.html = html; } }
 class FakeDocument {
@@ -29,6 +29,13 @@ function fixtureWindow(fetchImpl: typeof fetch, { requestIdleCallback = false }:
 }
 
 const rowsHtml = '<ul class="planet-object-list"><li class="planet-object-item">Saturn</li></ul>';
+const indexJson = JSON.stringify({ schema: 'cssearth-catalogue-index@1', entries: [{
+  kind: 'scene', id: 'saturn', name: 'Saturn', searchNames: [], classification: 'planet',
+  classificationName: 'planet', systemName: 'solar system', route: '/saturn/', illustration: false,
+  distanceMeters: 1, detail: { text: '1 au', title: 'from Earth', ariaLabel: '1 au. from Earth', value: '1', unit: 'au' },
+  source: { subject: 'object:Saturn', document: '/sources/saturn/', label: 'Sources for Saturn' },
+  marker: { kind: 'scene', id: 'saturn', color: '#fff' },
+}] });
 const bytesOf = (text: string) => new TextEncoder().encode(text).byteLength;
 async function shaOf(text: string) {
   return [...new Uint8Array(await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text)))]
@@ -73,6 +80,24 @@ test('loadCatalogueFragment rejects content missing the list', async () => {
   const pin: CatalogueFragmentPin = { url: '/catalogue/x.html', sha256: await shaOf(body), bytes: bytesOf(body) };
   const { windowTarget } = fixtureWindow(async () => new Response(body));
   await assert.rejects(loadCatalogueFragment(pin, { windowTarget }), /missing its list/u);
+});
+
+test('loadCatalogueIndex fetches, verifies and validates compact catalogue data', async () => {
+  const pin: CatalogueIndexPin = { url: '/catalogue/index.json', sha256: await shaOf(indexJson), bytes: bytesOf(indexJson) };
+  const { windowTarget } = fixtureWindow(async () => new Response(indexJson));
+  const index = await loadCatalogueIndex(pin, { windowTarget });
+  assert.equal(index.schema, 'cssearth-catalogue-index@1');
+  assert.equal(index.entries[0]?.name, 'Saturn');
+  assert.ok(Object.isFrozen(index.entries));
+});
+
+test('loadCatalogueIndex rejects transport or schema drift', async () => {
+  const pin: CatalogueIndexPin = { url: '/catalogue/index.json', sha256: await shaOf(indexJson), bytes: bytesOf(indexJson) };
+  const badHash = fixtureWindow(async () => new Response(indexJson));
+  await assert.rejects(loadCatalogueIndex({ ...pin, sha256: 'f'.repeat(64) }, badHash), /identity drifted/u);
+  const invalid = JSON.stringify({ schema: 'wrong', entries: [] });
+  const badSchema = fixtureWindow(async () => new Response(invalid));
+  await assert.rejects(loadCatalogueIndex({ ...pin, sha256: await shaOf(invalid), bytes: bytesOf(invalid) }, badSchema), /Invalid object catalogue index/u);
 });
 
 test('scheduleWhenIdle prefers requestIdleCallback and falls back to a timer', () => {

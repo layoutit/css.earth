@@ -17,6 +17,38 @@ test('native AVM reference pixel, not raster centre, anchors the sky coordinates
   assert.ok(Math.hypot(recovered[0] - 100, recovered[1] - 200) < 1e-8);
 });
 
+test('Omega Centauri native stars reject the former centred AVM reference pixels', async () => {
+  const recipe = readObservationRecipe(JSON.parse(await readFile('labs/nebula/models/omega-centauri/observations.json', 'utf8')));
+  const value: unknown = JSON.parse(await readFile('labs/nebula/packages/lab/src/server/workflows/observations/fixtures/omega-centauri-native-stars.json', 'utf8'));
+  assert.ok(value && typeof value === 'object' && 'stars' in value && Array.isArray(value.stars));
+  const reference = recipe.images.find(image => image.id === 'eso1119b')!, source = recipe.images.find(image => image.id === 'eso0844a')!;
+  assert.ok('source' in value && 'reference' in value);
+  assert.deepEqual(value.source, { id: source.id, sha256: source.sha256 });
+  assert.deepEqual(value.reference, { id: reference.id, sha256: reference.sha256 });
+  const point = (input: unknown): [number, number] => {
+    assert.ok(Array.isArray(input) && input.length === 2 && input.every(n => typeof n === 'number' && Number.isFinite(n)));
+    return [input[0], input[1]];
+  };
+  const referenceMatrix = publisherTransform(reference, recipe.frame);
+  const pairs: Pair[] = value.stars.map((row: unknown, index: number) => {
+    assert.ok(row && typeof row === 'object' && 'source' in row && 'reference' in row);
+    return { source: point(row.source), frame: applyAffine(referenceMatrix, point(row.reference)), sourceIndex: index, referenceIndex: index };
+  });
+  const footprint = { width: reference.width, height: reference.height, imageToFrame: referenceMatrix };
+  const verified = verifyRegistration(pairs, source, recipe.frame, publisherTransform(source, recipe.frame), footprint);
+  assert.equal(verified.pass, true);
+  assert.ok(verified.evidence.residualArcseconds < .2);
+  const centred = structuredClone(source);
+  assert.ok(centred.wcs);
+  centred.wcs.referencePixel = [centred.wcs.referenceDimension[0] / 2, centred.wcs.referenceDimension[1] / 2];
+  assert.equal(verifyRegistration(pairs, centred, recipe.frame, publisherTransform(centred, recipe.frame), footprint).pass, false,
+    'Replacing the publisher reference pixel with the raster centre destroys the qualified native alignment.');
+  const corrupted = structuredClone(pairs);
+  const heldOut = verified.evidence.matches.find(match => match.heldOut)!;
+  corrupted.find(pair => pair.source[0] === heldOut.source[0] && pair.source[1] === heldOut.source[1])!.frame[0] += 3;
+  assert.equal(verifyRegistration(corrupted, source, recipe.frame, publisherTransform(source, recipe.frame), footprint).pass, false);
+});
+
 test('Gaussian high-pass keeps channels aligned and finds actual compact sources', async () => {
   const width = 128, height = 96, raster = Buffer.alloc(width * height * 3);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {

@@ -1,0 +1,843 @@
+{
+  "schema": "cssearth-jwst-band-maps-evidence@1",
+  "maps": [
+    {
+      "id": "carbon-dioxide",
+      "cubes": [
+        {
+          "observation": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "program": "europa-1250",
+          "cube": "jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2022-11-23T08:18:02.305",
+            "end": "2022-11-23T08:31:49.687"
+          },
+          "disc": {
+            "diameterPixels": 9.75,
+            "centrePixels": [
+              24.71,
+              26.86
+            ],
+            "blurPixels": 1,
+            "fitResidualOverPeak": 0.0255
+          },
+          "camera": {
+            "observerLatitude": 2.6916,
+            "observerWestLongitude": 93.7325,
+            "sunLatitude": 2.8984,
+            "sunWestLongitude": 83.4295,
+            "northAzimuthDegrees": 25.5436,
+            "rangeKm": 660327692
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0409,
+              "median": 0.0889,
+              "maximum": 0.1728
+            }
+          }
+        },
+        {
+          "observation": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "program": "europa-4023-o001",
+          "cube": "jw04023-o001_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2024-01-10T05:49:41.890",
+            "end": "2024-01-10T06:19:15.640"
+          },
+          "disc": {
+            "diameterPixels": 9.33,
+            "centrePixels": [
+              23.86,
+              27.83
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.025
+          },
+          "camera": {
+            "observerLatitude": 3.2911,
+            "observerWestLongitude": 154.5177,
+            "sunLatitude": 3.3623,
+            "sunWestLongitude": 143.4619,
+            "northAzimuthDegrees": 20.2438,
+            "rangeKm": 689881567
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.038,
+              "median": 0.0939,
+              "maximum": 0.1797
+            }
+          }
+        },
+        {
+          "observation": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "program": "europa-4023-o002",
+          "cube": "jw04023-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2024-09-23T08:36:38.748",
+            "end": "2024-09-23T09:06:14.290"
+          },
+          "disc": {
+            "diameterPixels": 9.01,
+            "centrePixels": [
+              26.03,
+              25.71
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.0312
+          },
+          "camera": {
+            "observerLatitude": 2.8077,
+            "observerWestLongitude": 254.13,
+            "sunLatitude": 2.8905,
+            "sunWestLongitude": 265.5217,
+            "northAzimuthDegrees": 3.0765,
+            "rangeKm": 714828968
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0142,
+              "median": 0.0399,
+              "maximum": 0.0718
+            }
+          }
+        },
+        {
+          "observation": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "program": "europa-4023-o003",
+          "cube": "jw04023-o003_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2024-09-27T16:47:46.002",
+            "end": "2024-09-27T17:17:17.767"
+          },
+          "disc": {
+            "diameterPixels": 9.12,
+            "centrePixels": [
+              26.31,
+              25.71
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.0326
+          },
+          "camera": {
+            "observerLatitude": 2.803,
+            "observerWestLongitude": 334.0185,
+            "sunLatitude": 2.8756,
+            "sunWestLongitude": 345.2105,
+            "northAzimuthDegrees": 2.9765,
+            "rangeKm": 705741807
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0286,
+              "median": 0.07,
+              "maximum": 0.1861
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o001",
+          "cube": "jw09230-o001_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-02-10T17:26:26.345",
+            "end": "2025-02-10T17:56:08.670"
+          },
+          "disc": {
+            "diameterPixels": 9.2,
+            "centrePixels": [
+              27.65,
+              28.79
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.023
+          },
+          "camera": {
+            "observerLatitude": 2.6187,
+            "observerWestLongitude": 93.6104,
+            "sunLatitude": 2.4411,
+            "sunWestLongitude": 82.9836,
+            "northAzimuthDegrees": 7.4392,
+            "rangeKm": 700014166
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0402,
+              "median": 0.0911,
+              "maximum": 0.1757
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o002",
+          "cube": "jw09230-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-02-11T08:24:53.684",
+            "end": "2025-02-11T08:54:25.514"
+          },
+          "disc": {
+            "diameterPixels": 9.19,
+            "centrePixels": [
+              26.57,
+              29.04
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.0246
+          },
+          "camera": {
+            "observerLatitude": 2.6191,
+            "observerWestLongitude": 156.8687,
+            "sunLatitude": 2.4409,
+            "sunWestLongitude": 146.1899,
+            "northAzimuthDegrees": 7.4468,
+            "rangeKm": 700868109
+          },
+          "map": {
+            "areaShare": 0.2886,
+            "depth": {
+              "minimum": 0.0346,
+              "median": 0.0919,
+              "maximum": 0.1798
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o003",
+          "cube": "jw09230-o003_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-02-10T04:28:36.906",
+            "end": "2025-02-10T04:58:22.816"
+          },
+          "disc": {
+            "diameterPixels": 9.21,
+            "centrePixels": [
+              26.33,
+              28.77
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.0267
+          },
+          "camera": {
+            "observerLatitude": 2.6183,
+            "observerWestLongitude": 38.8901,
+            "sunLatitude": 2.4414,
+            "sunWestLongitude": 28.3049,
+            "northAzimuthDegrees": 7.4537,
+            "rangeKm": 699311288
+          },
+          "map": {
+            "areaShare": 0.2886,
+            "depth": {
+              "minimum": 0.0331,
+              "median": 0.0933,
+              "maximum": 0.1751
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o004",
+          "cube": "jw09230-o004_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-01-29T05:35:28.399",
+            "end": "2025-01-29T06:05:10.724"
+          },
+          "disc": {
+            "diameterPixels": 9.58,
+            "centrePixels": [
+              26.18,
+              28.48
+            ],
+            "blurPixels": 1.1,
+            "fitResidualOverPeak": 0.0333
+          },
+          "camera": {
+            "observerLatitude": 2.6544,
+            "observerWestLongitude": 267.2732,
+            "sunLatitude": 2.4863,
+            "sunWestLongitude": 257.724,
+            "northAzimuthDegrees": 7.4821,
+            "rangeKm": 672343547
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0097,
+              "median": 0.0416,
+              "maximum": 0.0726
+            }
+          }
+        }
+      ],
+      "overlaps": [
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "cells": 6538,
+          "rmsDifference": 0.0114,
+          "correlation": 0.949
+        },
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "cells": 14244,
+          "rmsDifference": 0.0036,
+          "correlation": 0.996
+        },
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 6245,
+          "rmsDifference": 0.0116,
+          "correlation": 0.949
+        },
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 7252,
+          "rmsDifference": 0.0096,
+          "correlation": 0.974
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "cells": 2194,
+          "rmsDifference": 0.0458,
+          "correlation": 0.911
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "cells": 6522,
+          "rmsDifference": 0.0119,
+          "correlation": 0.94
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 13946,
+          "rmsDifference": 0.0027,
+          "correlation": 0.997
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 775,
+          "rmsDifference": 0.0289,
+          "correlation": 0.997
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 1006,
+          "rmsDifference": 0.0355,
+          "correlation": 0.875
+        },
+        {
+          "first": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "cells": 4284,
+          "rmsDifference": 0.0141,
+          "correlation": 0.768
+        },
+        {
+          "first": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 2420,
+          "rmsDifference": 0.0425,
+          "correlation": 0.892
+        },
+        {
+          "first": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 12556,
+          "rmsDifference": 0.0048,
+          "correlation": 0.95
+        },
+        {
+          "first": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 6033,
+          "rmsDifference": 0.0107,
+          "correlation": 0.967
+        },
+        {
+          "first": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 5812,
+          "rmsDifference": 0.0228,
+          "correlation": 0.866
+        },
+        {
+          "first": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 6229,
+          "rmsDifference": 0.0121,
+          "correlation": 0.939
+        },
+        {
+          "first": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 7265,
+          "rmsDifference": 0.0101,
+          "correlation": 0.97
+        },
+        {
+          "first": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 594,
+          "rmsDifference": 0.0309,
+          "correlation": 0.991
+        },
+        {
+          "first": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 1194,
+          "rmsDifference": 0.0315,
+          "correlation": 0.865
+        }
+      ],
+      "map": {
+        "cells": 45312,
+        "areaShare": 0.8883,
+        "depth": {
+          "minimum": 0.0102,
+          "median": 0.0648,
+          "maximum": 0.1813
+        },
+        "medianError": 0.0007,
+        "peak": {
+          "latitude": -1.5,
+          "westLongitude": 350.5
+        }
+      }
+    },
+    {
+      "id": "hydrogen-peroxide",
+      "cubes": [
+        {
+          "observation": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "program": "europa-1250",
+          "cube": "jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2022-11-23T08:18:02.305",
+            "end": "2022-11-23T08:31:49.687"
+          },
+          "disc": {
+            "diameterPixels": 9.75,
+            "centrePixels": [
+              24.72,
+              26.73
+            ],
+            "blurPixels": 0.9,
+            "fitResidualOverPeak": 0.0151
+          },
+          "camera": {
+            "observerLatitude": 2.6916,
+            "observerWestLongitude": 93.7325,
+            "sunLatitude": 2.8984,
+            "sunWestLongitude": 83.4295,
+            "northAzimuthDegrees": 25.5436,
+            "rangeKm": 660327692
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": -0.0087,
+              "median": 0.0451,
+              "maximum": 0.0811
+            }
+          }
+        },
+        {
+          "observation": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "program": "europa-4023-o001",
+          "cube": "jw04023-o001_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2024-01-10T05:49:41.890",
+            "end": "2024-01-10T06:19:15.640"
+          },
+          "disc": {
+            "diameterPixels": 9.33,
+            "centrePixels": [
+              24.18,
+              27.82
+            ],
+            "blurPixels": 0.9,
+            "fitResidualOverPeak": 0.0241
+          },
+          "camera": {
+            "observerLatitude": 3.2911,
+            "observerWestLongitude": 154.5177,
+            "sunLatitude": 3.3623,
+            "sunWestLongitude": 143.4619,
+            "northAzimuthDegrees": 20.2438,
+            "rangeKm": 689881567
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0043,
+              "median": 0.0321,
+              "maximum": 0.0829
+            }
+          }
+        },
+        {
+          "observation": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "program": "europa-4023-o002",
+          "cube": "jw04023-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2024-09-23T08:36:38.748",
+            "end": "2024-09-23T09:06:14.290"
+          },
+          "disc": {
+            "diameterPixels": 9.01,
+            "centrePixels": [
+              26.14,
+              25.78
+            ],
+            "blurPixels": 1,
+            "fitResidualOverPeak": 0.0255
+          },
+          "camera": {
+            "observerLatitude": 2.8077,
+            "observerWestLongitude": 254.13,
+            "sunLatitude": 2.8905,
+            "sunWestLongitude": 265.5217,
+            "northAzimuthDegrees": 3.0765,
+            "rangeKm": 714828968
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": -0.0155,
+              "median": 0.0138,
+              "maximum": 0.0509
+            }
+          }
+        },
+        {
+          "observation": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "program": "europa-4023-o003",
+          "cube": "jw04023-o003_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2024-09-27T16:47:46.002",
+            "end": "2024-09-27T17:17:17.767"
+          },
+          "disc": {
+            "diameterPixels": 9.12,
+            "centrePixels": [
+              26.08,
+              25.78
+            ],
+            "blurPixels": 1,
+            "fitResidualOverPeak": 0.0247
+          },
+          "camera": {
+            "observerLatitude": 2.803,
+            "observerWestLongitude": 334.0185,
+            "sunLatitude": 2.8756,
+            "sunWestLongitude": 345.2105,
+            "northAzimuthDegrees": 2.9765,
+            "rangeKm": 705741807
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": 0.0003,
+              "median": 0.0161,
+              "maximum": 0.0662
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o001",
+          "cube": "jw09230-o001_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-02-10T17:26:26.345",
+            "end": "2025-02-10T17:56:08.670"
+          },
+          "disc": {
+            "diameterPixels": 9.2,
+            "centrePixels": [
+              27.59,
+              28.66
+            ],
+            "blurPixels": 1,
+            "fitResidualOverPeak": 0.0139
+          },
+          "camera": {
+            "observerLatitude": 2.6187,
+            "observerWestLongitude": 93.6104,
+            "sunLatitude": 2.4411,
+            "sunWestLongitude": 82.9836,
+            "northAzimuthDegrees": 7.4392,
+            "rangeKm": 700014166
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": -0.0261,
+              "median": 0.0411,
+              "maximum": 0.0917
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o002",
+          "cube": "jw09230-o002_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-02-11T08:24:53.684",
+            "end": "2025-02-11T08:54:25.514"
+          },
+          "disc": {
+            "diameterPixels": 9.19,
+            "centrePixels": [
+              26.91,
+              28.97
+            ],
+            "blurPixels": 0.9,
+            "fitResidualOverPeak": 0.0231
+          },
+          "camera": {
+            "observerLatitude": 2.6191,
+            "observerWestLongitude": 156.8687,
+            "sunLatitude": 2.4409,
+            "sunWestLongitude": 146.1899,
+            "northAzimuthDegrees": 7.4468,
+            "rangeKm": 700868109
+          },
+          "map": {
+            "areaShare": 0.2886,
+            "depth": {
+              "minimum": 0.0006,
+              "median": 0.0326,
+              "maximum": 0.0702
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o003",
+          "cube": "jw09230-o003_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-02-10T04:28:36.906",
+            "end": "2025-02-10T04:58:22.816"
+          },
+          "disc": {
+            "diameterPixels": 9.21,
+            "centrePixels": [
+              25.96,
+              28.64
+            ],
+            "blurPixels": 1,
+            "fitResidualOverPeak": 0.0152
+          },
+          "camera": {
+            "observerLatitude": 2.6183,
+            "observerWestLongitude": 38.8901,
+            "sunLatitude": 2.4414,
+            "sunWestLongitude": 28.3049,
+            "northAzimuthDegrees": 7.4537,
+            "rangeKm": 699311288
+          },
+          "map": {
+            "areaShare": 0.2886,
+            "depth": {
+              "minimum": -0.011,
+              "median": 0.0307,
+              "maximum": 0.1007
+            }
+          }
+        },
+        {
+          "observation": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "program": "europa-9230-o004",
+          "cube": "jw09230-o004_t001_nirspec_g395h-f290lp_s3d.fits",
+          "exposure": {
+            "start": "2025-01-29T05:35:28.399",
+            "end": "2025-01-29T06:05:10.724"
+          },
+          "disc": {
+            "diameterPixels": 9.58,
+            "centrePixels": [
+              26.26,
+              28.45
+            ],
+            "blurPixels": 1,
+            "fitResidualOverPeak": 0.0255
+          },
+          "camera": {
+            "observerLatitude": 2.6544,
+            "observerWestLongitude": 267.2732,
+            "sunLatitude": 2.4863,
+            "sunWestLongitude": 257.724,
+            "northAzimuthDegrees": 7.4821,
+            "rangeKm": 672343547
+          },
+          "map": {
+            "areaShare": 0.2887,
+            "depth": {
+              "minimum": -0.0039,
+              "median": 0.0139,
+              "maximum": 0.026
+            }
+          }
+        }
+      ],
+      "overlaps": [
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "cells": 6538,
+          "rmsDifference": 0.0101,
+          "correlation": 0.816
+        },
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "cells": 14244,
+          "rmsDifference": 0.0099,
+          "correlation": 0.769
+        },
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 6245,
+          "rmsDifference": 0.0094,
+          "correlation": 0.828
+        },
+        {
+          "first": "jw01250-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 7252,
+          "rmsDifference": 0.0119,
+          "correlation": 0.616
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "cells": 2194,
+          "rmsDifference": 0.0085,
+          "correlation": 0.175
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "cells": 6522,
+          "rmsDifference": 0.0104,
+          "correlation": 0.793
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 13946,
+          "rmsDifference": 0.0065,
+          "correlation": 0.869
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 775,
+          "rmsDifference": 0.0246,
+          "correlation": -0.183
+        },
+        {
+          "first": "jw04023-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 1006,
+          "rmsDifference": 0.0076,
+          "correlation": 0.309
+        },
+        {
+          "first": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "cells": 4284,
+          "rmsDifference": 0.0087,
+          "correlation": -0.144
+        },
+        {
+          "first": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 2420,
+          "rmsDifference": 0.011,
+          "correlation": 0.035
+        },
+        {
+          "first": "jw04023-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 12556,
+          "rmsDifference": 0.0056,
+          "correlation": 0.164
+        },
+        {
+          "first": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 6033,
+          "rmsDifference": 0.0083,
+          "correlation": 0.578
+        },
+        {
+          "first": "jw04023-o003_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 5812,
+          "rmsDifference": 0.0039,
+          "correlation": 0.233
+        },
+        {
+          "first": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "cells": 6229,
+          "rmsDifference": 0.0097,
+          "correlation": 0.798
+        },
+        {
+          "first": "jw09230-o001_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 7265,
+          "rmsDifference": 0.0106,
+          "correlation": 0.72
+        },
+        {
+          "first": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o003_t001_nirspec_g395h-f290lp",
+          "cells": 594,
+          "rmsDifference": 0.0193,
+          "correlation": 0.111
+        },
+        {
+          "first": "jw09230-o002_t001_nirspec_g395h-f290lp",
+          "second": "jw09230-o004_t001_nirspec_g395h-f290lp",
+          "cells": 1194,
+          "rmsDifference": 0.0086,
+          "correlation": 0.519
+        }
+      ],
+      "map": {
+        "cells": 45312,
+        "areaShare": 0.8883,
+        "depth": {
+          "minimum": -0.011,
+          "median": 0.0234,
+          "maximum": 0.0638
+        },
+        "medianError": 0.0005,
+        "peak": {
+          "latitude": -7.5,
+          "westLongitude": 77.5
+        }
+      }
+    }
+  ]
+}

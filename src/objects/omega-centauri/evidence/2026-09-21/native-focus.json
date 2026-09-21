@@ -1,0 +1,286 @@
+{
+  "base": "http://127.0.0.1:4219",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "browser": "148.0.7778.96",
+  "inputPins": [
+    {
+      "path": "src/objects/sun/prepared/world-context.json",
+      "bytes": 7536975,
+      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/nebula.json",
+      "bytes": 2633,
+      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/lenses.json",
+      "bytes": 1202415,
+      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+    }
+  ],
+  "errors": [],
+  "failed": [],
+  "cold": {
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          -105140426158691240000,
+          -41833991150782185000,
+          -115235646545839930000
+        ],
+        "orientationXyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "distanceM": 8165459600736780000,
+    "distanceRadii": 6.096653162046748,
+    "projectedRadiusPixels": 204.55157392967627
+  },
+  "coldContext": {
+    "volumes": [
+      {
+        "id": "omega-centauri",
+        "display": "block",
+        "opacity": 1
+      }
+    ],
+    "overview": [
+      {
+        "display": "none",
+        "opacity": 0
+      }
+    ]
+  },
+  "warm": {
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          -105140426158691240000,
+          -41833991150782185000,
+          -115235646545839930000
+        ],
+        "orientationXyzw": [
+          0,
+          0,
+          0,
+          1
+        ]
+      }
+    },
+    "distanceM": 8165459600736780000,
+    "distanceRadii": 6.096653162046748,
+    "projectedRadiusPixels": 204.55157392967627
+  },
+  "dragged": {
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          -107690829656048200000,
+          -41068870101575090000,
+          -115681989469650910000
+        ],
+        "orientationXyzw": [
+          -0.04750474789854394,
+          -0.158349159661813,
+          -4.3973168737309055e-19,
+          0.9862397490273314
+        ]
+      }
+    },
+    "distanceM": 8165459600736778000,
+    "distanceRadii": 6.096653162046747,
+    "projectedRadiusPixels": 204.55157392967632
+  },
+  "zoomed": {
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          -105161342581436300000,
+          -41827716223958670000,
+          -123337799964711390000
+        ],
+        "orientationXyzw": [
+          -0.04750474789854394,
+          -0.158349159661813,
+          -4.3973168737309055e-19,
+          0.9862397490273314
+        ]
+      }
+    },
+    "distanceM": 66966738829483176,
+    "distanceRadii": 0.049999999999986326,
+    "projectedRadiusPixels": 24941.60000000682
+  },
+  "reselected": {
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          -107690829656048270000,
+          -41068870101575070000,
+          -115681989469650940000
+        ],
+        "orientationXyzw": [
+          -0.04750474789854394,
+          -0.158349159661813,
+          0,
+          0.9862397490273314
+        ]
+      }
+    },
+    "distanceM": 8165459600736769000,
+    "distanceRadii": 6.0966531620467395,
+    "projectedRadiusPixels": 204.55157392967655
+  },
+  "reselectedContext": {
+    "volumes": [
+      {
+        "id": "omega-centauri",
+        "display": "block",
+        "opacity": 1
+      }
+    ],
+    "overview": [
+      {
+        "display": "none",
+        "opacity": 0
+      }
+    ]
+  },
+  "zoomedOut": {
+    "world": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "pose": {
+        "positionM": [
+          -146973272045458080000,
+          -29284137384752270000,
+          3211258784085824000
+        ],
+        "orientationXyzw": [
+          -0.04750474789854394,
+          -0.158349159661813,
+          0,
+          0.9862397490273314
+        ]
+      }
+    },
+    "distanceM": 133933478928421720000,
+    "distanceRadii": 100.00000094779793,
+    "projectedRadiusPixels": 12.470799881802016
+  },
+  "farContext": {
+    "volumes": [
+      {
+        "id": "omega-centauri",
+        "display": "block",
+        "opacity": 0.464877
+      },
+      {
+        "id": "lmc",
+        "display": "block",
+        "opacity": 0.999838
+      },
+      {
+        "id": "m8",
+        "display": "block",
+        "opacity": 0.0740891
+      },
+      {
+        "id": "m42",
+        "display": "none",
+        "opacity": 0
+      },
+      {
+        "id": "smc",
+        "display": "block",
+        "opacity": 0.999838
+      }
+    ],
+    "overview": [
+      {
+        "display": "block",
+        "opacity": 0.534735
+      }
+    ]
+  },
+  "returnedContext": {
+    "volumes": [
+      {
+        "id": "omega-centauri",
+        "display": "block",
+        "opacity": 1
+      },
+      {
+        "id": "m8",
+        "display": "none",
+        "opacity": 0
+      },
+      {
+        "id": "smc",
+        "display": "none",
+        "opacity": 0
+      }
+    ],
+    "overview": [
+      {
+        "display": "none",
+        "opacity": 0
+      }
+    ]
+  },
+  "rendering": {
+    "totalElements": 23210,
+    "volumes": [
+      {
+        "id": "omega-centauri",
+        "display": "block",
+        "opacity": "1",
+        "elements": 1422,
+        "planes": 1377,
+        "stars": 0
+      },
+      {
+        "id": "m8",
+        "display": "none",
+        "opacity": "0",
+        "elements": 2290,
+        "planes": 2019,
+        "stars": 226
+      },
+      {
+        "id": "smc",
+        "display": "none",
+        "opacity": "0",
+        "elements": 2635,
+        "planes": 816,
+        "stars": 1803
+      }
+    ],
+    "galaxyOverview": [
+      {
+        "opacity": "1",
+        "display": "none",
+        "elements": 1382
+      }
+    ]
+  },
+  "result": "passed"
+}

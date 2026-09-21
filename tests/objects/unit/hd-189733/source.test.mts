@@ -42,10 +42,13 @@ test('the limb darkening fitted to TESS transits of HD 189733b', async () => {
   assert.deepEqual(color.srgb, [255, 226, 207]);
   assert.ok(limbDarkening && 'fit' in limbDarkening && limbDarkening.fit);
   const { coefficients, fit } = limbDarkening;
-  // Measured 2026-09-17: 30 transits, u1 0.2356, u2 0.4169; sectors one by one u1 0.155-0.297, u2 0.346-0.511.
+  // Recomputed with the products' 118.8-second integration: 30 transits, u1 0.2160, u2 0.4401.
   assert.equal(fit.all.transits, 30);
   assert.deepEqual(fit.sectors.map(sector => [sector.sector, sector.transits]), [[41, 10], [54, 10], [81, 10]]);
-  assert.ok(Math.abs(coefficients.u1 - 0.2356) < 0.001 && Math.abs(coefficients.u2 - 0.4169) < 0.001, `u1 ${coefficients.u1}, u2 ${coefficients.u2}`);
+  assert.ok(Math.abs(coefficients.u1 - 0.2160) < 0.001 && Math.abs(coefficients.u2 - 0.4401) < 0.001, `u1 ${coefficients.u1}, u2 ${coefficients.u2}`);
+  assert.equal(fit.all.exposureSeconds, 118.8);
+  assert.ok(fit.all.shiftUncertaintySeconds > 0 && fit.all.shiftUncertaintySeconds < 2);
+  assert.deepEqual(fit.all.software, { 'batman-package': '2.5.3', scipy: '1.18.1', numpy: '2.5.3' });
   assert.ok(fit.sectors.every(sector => Math.abs(sector.u1 + sector.u2 - 0.655) < 0.02), 'every sector gives nearly the same limb brightness');
   assert.ok(Math.abs(fit.all.radiusRatio - BODIES['hd-189733b'].meanRadiusKm / BODIES['hd-189733'].meanRadiusKm) < 0.001, `radius ratio ${fit.all.radiusRatio}`);
 });

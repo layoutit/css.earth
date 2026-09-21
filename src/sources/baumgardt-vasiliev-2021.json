@@ -1,0 +1,52 @@
+{
+  "id": "baumgardt-vasiliev-2021",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1093/mnras/stab1474"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1093/mnras/stab1474",
+      "label": "Published paper"
+    },
+    {
+      "role": "original",
+      "url": "https://arxiv.org/pdf/2105.09526",
+      "label": "Inspected full-paper copy"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/pdf/2105.09526",
+      "checkedOn": "2026-09-20",
+      "locator": "Table 2, NGC 5139, combined distance 5.426 +/- 0.047 kpc; full paper downloaded and inspected"
+    }
+  ],
+  "creators": [
+    "Holger Baumgardt",
+    "Eugene Vasiliev"
+  ],
+  "publisher": "Monthly Notices of the Royal Astronomical Society",
+  "publicationDate": "2021",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Holger Baumgardt; Eugene Vasiliev",
+      "scope": "Published scientific method and measurements",
+      "evidence": "https://doi.org/10.1093/mnras/stab1474"
+    },
+    {
+      "kind": "limitation",
+      "text": "The adopted combined distance locates the cluster as a whole; it does not determine each image feature’s or star’s line-of-sight position.",
+      "scope": "Adopted interpretation",
+      "evidence": "https://doi.org/10.1093/mnras/stab1474"
+    }
+  ]
+}

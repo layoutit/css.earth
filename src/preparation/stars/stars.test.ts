@@ -4,6 +4,7 @@ import { readFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve, join } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astronomy';
 import { readCatalog } from '@cssearth/catalog';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
 import sharp from 'sharp';
@@ -72,27 +73,60 @@ test('enclosing radii are recomputed from the rounded centre and retain exact so
   assert(node.radiusUnits > 0, 'retaining the pre-rounding zero radius would wrongly cull this source row');
 });
 
-test('full source catalogue survives at exact Cartesian positions in a bounded-leaf partition', async () => {
+test('all source rows survive, with exact HIP matches reconciled to the detailed bodies', async () => {
   const data = await payload();
   const recipe = parseStarsRecipe(JSON.parse(await readFile(`${sourceDirectory}/stars.json`,'utf8')) as unknown);
   const catalogue = readCatalog(Uint8Array.from(await verifiedBytes(sourceDirectory,recipe.catalogue)).buffer);
   const p = catalogue.numeric('posPc'), mag = catalogue.numeric('absMag'); assert(p instanceof Float32Array && mag instanceof Float32Array);
   assert.equal(data.stars.length,109389); assert.equal(data.stars.length,catalogue.count);
+  const hip = catalogue.numeric('hip');
+  const matches = new Map(STAR_IDS.flatMap(id => starAstrometry(id).hipparcosId === undefined ? [] : [[starAstrometry(id).hipparcosId!, id] as const]));
+  const expectedMagnitude = new Float32Array(mag), expectedPosition = new Float32Array(p);
+  let reconciled = 0;
+  for (let row = 0; row < catalogue.count; row++) {
+    const id = matches.get(hip[row]!);
+    if (!id) continue;
+    const state = starStateKm(id, data.frame.epochJdTt).positionKm;
+    const oldDistance = Math.hypot(...p.slice(row * 3, row * 3 + 3));
+    const position = state.map(value => Math.fround(value / PARSEC_KM));
+    expectedPosition.set(position, row * 3);
+    expectedMagnitude[row] = mag[row]! + 5 * Math.log10(oldDistance / Math.hypot(...position));
+    reconciled++;
+  }
+  assert.equal(reconciled, 8, 'only independently cross-identified primary stars are replaced');
   const ids = new Set<string>();
   for (const star of data.stars) {
     assert(!ids.has(star.id)); ids.add(star.id);
     const sourceIndex = Number(star.id.split(':').at(-1)); assert(Number.isSafeInteger(sourceIndex) && sourceIndex >= 0 && sourceIndex < catalogue.count);
-    assert.deepEqual(star.positionUnits,[p[sourceIndex*3],p[sourceIndex*3+1],p[sourceIndex*3+2]]);
+    assert.deepEqual(star.positionUnits,[expectedPosition[sourceIndex*3],expectedPosition[sourceIndex*3+1],expectedPosition[sourceIndex*3+2]]);
     // Transport quantization: int16 millimagnitudes on the float32 source grid, within the declared bound.
-    assert(Math.abs(star.absoluteMagnitude-mag[sourceIndex]!) <= POINT_FIELD_MAGNITUDE_BOUND); assert(star.colorIndex>=0 && star.colorIndex<32); assert.equal(typeof star.coverageAnchor,'boolean');
+    assert(Math.abs(star.absoluteMagnitude-expectedMagnitude[sourceIndex]!) <= POINT_FIELD_MAGNITUDE_BOUND); assert(star.colorIndex>=0 && star.colorIndex<32); assert.equal(typeof star.coverageAnchor,'boolean');
   }
-  assert.equal(data.stars.filter(star=>star.absoluteMagnitude!==mag[Number(star.id.split(':').at(-1))]).length,2,'only off-grid source magnitudes move');
-  const sourceMagnitude = (star: PreparedCssPointField['stars'][number]) => mag[Number(star.id.split(':').at(-1))]!;
+  for (const star of data.stars) {
+    const index = Number(star.id.split(':').at(-1));
+    if (!matches.has(hip[index]!)) continue;
+    const original: number = mag[index]! + 5 * Math.log10(Math.hypot(...p.slice(index * 3, index * 3 + 3))) - 5;
+    const prepared = star.absoluteMagnitude + 5 * Math.log10(Math.hypot(...star.positionUnits)) - 5;
+    assert.ok(Math.abs(prepared - original) < 0.00051, 'distance correction must preserve apparent photometry');
+  }
+  const sourceMagnitude = (star: PreparedCssPointField['stars'][number]) => expectedMagnitude[Number(star.id.split(':').at(-1))]!;
   const anchors = data.stars.filter(star=>star.coverageAnchor);
   assert.equal(anchors.length,6*recipe.coverage.faceDivisions**2,'one real apparent-magnitude anchor per all-sky cube cell');
   const best = Array.from({length:6*recipe.coverage.faceDivisions**2},()=>({index:-1,magnitude:Infinity}));
-  for(let index=0;index<catalogue.count;index++){const x=p[index*3]!,y=p[index*3+1]!,z=p[index*3+2]!,cell=coverageCell(x,y,z,recipe.coverage.faceDivisions), apparent=mag[index]!+5*Math.log10(Math.hypot(x,y,z))-5; if(apparent<best[cell]!.magnitude)best[cell]={index,magnitude:apparent};}
+  for(let index=0;index<catalogue.count;index++){const x=expectedPosition[index*3]!,y=expectedPosition[index*3+1]!,z=expectedPosition[index*3+2]!,cell=coverageCell(x,y,z,recipe.coverage.faceDivisions), apparent=expectedMagnitude[index]!+5*Math.log10(Math.hypot(x,y,z))-5; if(apparent<best[cell]!.magnitude)best[cell]={index,magnitude:apparent};}
   assert.deepEqual(new Set(anchors.map(star=>star.id)),new Set(best.map(entry=>`${recipe.catalogue.idPrefix}:${entry.index}`)),'anchors retain the real brightest apparent row for every cube cell');
+  assert(data.directPoints); assert.equal(data.directPoints.catalogueCount,catalogue.count); assert.equal(data.directPoints.points.length,data.policy.activeSlots);
+  const directRows=new Set(data.directPoints.points.map(point=>point.sourceRow)); assert.equal(directRows.size,data.policy.activeSlots);
+  const anchorRows=new Set(anchors.map(star=>Number(star.id.split(':').at(-1))));
+  assert([...anchorRows].every(row=>directRows.has(row)),'the bounded direct field must retain every all-sky coverage anchor');
+  const expectedRows=Array.from({length:catalogue.count},(_,index)=>({index,anchor:anchorRows.has(index),
+    apparent:expectedMagnitude[index]!+5*Math.log10(Math.hypot(expectedPosition[index*3]!,expectedPosition[index*3+1]!,expectedPosition[index*3+2]!))-5}))
+    .sort((left,right)=>Number(right.anchor)-Number(left.anchor)||left.apparent-right.apparent||left.index-right.index)
+    .slice(0,data.policy.activeSlots).map(entry=>entry.index);
+  assert.deepEqual([...directRows].sort((a,b)=>a-b),expectedRows.sort((a,b)=>a-b),'direct stars are the reproducible coverage plus apparent-brightness sample');
+  // Direct display rows retain source magnitudes; the binary bank has millimagnitude quantization.
+  const decodedByRow=new Map(data.stars.map(star=>[Number(star.id.split(':').at(-1)),star]));
+  for(const point of data.directPoints.points){const star=decodedByRow.get(point.sourceRow);assert(star);assert.deepEqual(point.positionUnits,star.positionUnits);assert.equal(point.absoluteMagnitude,expectedMagnitude[point.sourceRow]);assert(Math.abs(point.absoluteMagnitude-star.absoluteMagnitude)<=POINT_FIELD_MAGNITUDE_BOUND);assert.equal(point.colorIndex,star.colorIndex);assert.equal(point.coverageAnchor,star.coverageAnchor);}
   assertTree(data,sourceMagnitude);
   assert.throws(()=>assertTree({...data,stars:data.stars.slice(1)},sourceMagnitude));
   const firstChild = data.nodes[0]!.children[0]!;
@@ -104,6 +138,9 @@ test('prepared point-field closes every source and image digest and samples the 
   const recipeBytes = await verifiedBytes(objectDirectory,{path:descriptor.properties.preparation.source,sha256:descriptor.properties.preparation.sha256});
   const recipe = parseStarsRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   const data = await payload();
+  const manifest = JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8'));
+  assert.equal(manifest.data.provenance.catalogueMetadata.epoch, 'ICRS/J2000.0 equinox and coordinate epoch');
+  assert.match(manifest.data.provenance.reconciliation.sourceEpochDescription, /J1991.25/);
   await verifiedBytes(objectDirectory,{path:descriptor.prepared.url,sha256:descriptor.prepared.sha256});
   for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await verifiedBytes(sourceDirectory,reference);
   assert.deepEqual(data.resources.map(resource=>resource.path),['point-atlas.png']); assert.equal(data.diffuseSky,undefined);

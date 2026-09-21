@@ -20,7 +20,7 @@ const row = (name: string, classification: string, aliases: string[] = []) => `<
 const html = `<!doctype html><html><head><style>u { color: red }</style></head><body data-object-shell="saturn"><!--search-shell:start-->
   <form class="planet-sidebar-search-card" data-search-object="saturn"><input class="planet-sidebar-search" name="q">
     <input type="hidden" name="v" data-search-context disabled></form><input class="planet-sheet-handle" type="checkbox">
-  <nav class="planet-object-browser" hidden>
+  <div class="planet-drawer-content"><nav class="planet-object-browser" hidden>
     <div data-galactic-overview hidden>Milky Way</div><div data-system-results><section class="planet-selected-panel">Solar System introduction</section>
     <div data-object-navigation-tree></div>
     <div class="planet-object-tabs">${['all', 'planet', 'satellite', 'nebula'].map(category => `<button data-object-tab="${category}"><span class="planet-object-tab-count"></span></button>`).join('')}</div>
@@ -29,7 +29,7 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
     </ul></li></ul><p class="planet-object-empty" hidden>No matching results</p>
     <details class="planet-feature-results" data-feature-index='${JSON.stringify(pin)}' hidden><summary>Named features <span class="planet-panel-heading-count"></span></summary><p class="planet-destination-hint"></p>
       <ul><li hidden><a class="planet-destination-result"><span class="planet-destination-result-name"></span><span class="planet-destination-result-context"></span></a></li></ul></details></div></div>
-  </nav><section class="planet-information-panel">Saturn</section><!--search-shell:end-->
+  </nav><div class="planet-selected-content"><section class="planet-information-panel">Saturn</section></div></div><!--search-shell:end-->
   <main class="planet-stage"><u style='color: red;' data-prepared-node="0"></u></main><script type="module" src="/app.js"></script></body></html>`;
 // The one shared, content-addressed catalogue fragment (`dist/catalogue/<sha>.html`):
 // the same rows a page used to inline, minus the div they lived in.
@@ -91,13 +91,13 @@ test('a page that already inlines its catalogue never fetches the fragment', asy
   assert.deepEqual(seen, [`${origin}/features/index.json`]);
 });
 
-test('native search uses shared matching, retains every row, and preserves the scene/head bytes', async () => {
+test('native search replaces the selected card, retains every row, and preserves the scene/head bytes', async () => {
   for (const [query, names] of [['saturn', ['Saturn']], ['orion', ['M42']], ['planets', ['Saturn']], ['unknown', []]] as const) {
     const response = await renderSearchResponse(html, new URL(`/?q=${query}`, origin), fetchIndex);
     const { document } = parseHTML(response);
     assert.deepEqual(visibleNames(document), names);
     assert.equal(document.querySelectorAll('.planet-object-item').length, 3);
-    assert.equal(document.querySelector<HTMLElement>('.planet-information-panel')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('.planet-selected-content')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.planet-object-browser')?.hidden, false);
     assert.equal(response.slice(0, response.indexOf('<!--search-shell:start-->')), html.slice(0, html.indexOf('<!--search-shell:start-->')));
     assert.equal(response.slice(response.indexOf('<!--search-shell:end-->')), html.slice(html.indexOf('<!--search-shell:end-->')));
@@ -130,13 +130,13 @@ test('features are pinned, rendered into existing rows and have ordinary destina
   assert.equal(failure.querySelector('.planet-destination-result')?.hasAttribute('href'), false);
 });
 
-test('search is a flat list across categories, including queries that name an overview', async () => {
+test('search keeps the shared navigation tree alongside matches, including queries that name an overview', async () => {
   for (const query of ['t', 'Milky Way']) {
     const document = parseHTML(await renderSearchResponse(html, new URL(`/saturn/?q=${encodeURIComponent(query)}`, origin), fetchIndex)).document;
     assert.equal(document.querySelector<HTMLElement>('[data-galactic-overview]')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('[data-system-results] > .planet-selected-panel')?.hidden, true);
     assert.equal(document.querySelector<HTMLElement>('.planet-object-tabs')?.hidden, true);
-    assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, true);
+    assert.equal(document.querySelector<HTMLElement>('[data-object-navigation-tree]')?.hidden, false);
     assert.equal(document.querySelector('.planet-object-browser')?.getAttribute('aria-label'), 'Search results');
     assert.equal(document.querySelector('#object-category-results')?.getAttribute('aria-labelledby'), null);
     if (query === 't') assert.deepEqual(visibleNames(document), ['Saturn', 'Titan']);

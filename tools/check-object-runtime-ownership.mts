@@ -185,7 +185,7 @@ export function inspectObjectRuntimeModule(source: string, file: string, { share
   if ((!shared || shellContent) && preparedData(source)) return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
   let ast: unknown;
   try {
-    if (shellContent && file.endsWith('.json')) {
+    if (file.endsWith('.json')) {
       JSON.parse(source);
       return { imports: [], violations: [], factoryCalls: 0, cameraFactories: [], dataOnly: true };
     }
@@ -389,6 +389,8 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   const definitions = namedImport(entryAst, './object-schema.mts', 'defineObject');
   if (entry.length !== 1 || definitions.length !== 1 || ![2, 3, 4].includes(entry[0].params.length)) fail('catalogue helper must bind its own actual JSON descriptor');
   const input = kind(entry[0].params[0], 'Identifier').name, loadScene = kind(entry[0].params[1], 'Identifier').name;
+  const distance = entry[0].params[2] === undefined ? undefined : kind(entry[0].params[2], 'Identifier').name;
+  const discovery = entry[0].params[3] === undefined ? undefined : kind(entry[0].params[3], 'Identifier').name;
   const objectCalls: CallExpression[] = [];
   walkRuntimeAst(entry[0], node => {
     if (node.type === 'AssignmentExpression' || node.type === 'UpdateExpression') {
@@ -403,12 +405,15 @@ async function catalogRegistryLoaders(ast: Program, mapping: CallExpression, roo
   if (new Set(properties.map(field => propertyKey(field.key))).size !== properties.length ||
       memberPath(property(fields, 'id')?.value)?.join('.') !== `${input}.id` ||
       memberPath(property(fields, 'worldFrame')?.value)?.join('.') !== `${input}.properties.worldFrame` ||
-      nameOf(property(fields, 'loadScene')?.value) !== loadScene) fail('catalogue helper cannot replace the object id, loader or world frame');
+      nameOf(property(fields, 'loadScene')?.value) !== loadScene ||
+      distance !== undefined && nameOf(property(fields, 'distance')?.value) !== distance ||
+      discovery !== undefined && nameOf(property(fields, 'discovery')?.value) !== discovery) fail('catalogue helper cannot replace the object id, loader or world frame');
   const result = kind(kind(entry[0].body.body.at(-1), 'ReturnStatement').argument, 'ObjectExpression');
-  if (result.properties.length !== 3 || result.properties[0].type !== 'SpreadElement' || result.properties[0].argument !== objectCalls[0] ||
-      result.properties[1].type !== 'Property' || result.properties[1].computed || propertyKey(result.properties[1].key) !== 'order' ||
-      result.properties[2].type !== 'SpreadElement' || result.properties[2].argument.type !== 'ConditionalExpression') fail('catalogue helper must return the declared object unchanged');
-  const conditional = result.properties[2].argument;
+  if (result.properties.length !== 4 || result.properties[0].type !== 'SpreadElement' || result.properties[0].argument !== objectCalls[0] ||
+      result.properties[1].type !== 'Property' || result.properties[1].computed || propertyKey(result.properties[1].key) !== 'aliases' ||
+      result.properties[2].type !== 'Property' || result.properties[2].computed || propertyKey(result.properties[2].key) !== 'order' ||
+      result.properties[3].type !== 'SpreadElement' || result.properties[3].argument.type !== 'ConditionalExpression') fail('catalogue helper must return the declared object unchanged');
+  const conditional = result.properties[3].argument;
   if (nameOf(conditional.test) !== 'context' || conditional.consequent.type !== 'ObjectExpression' || conditional.consequent.properties.length !== 1 ||
       nameOf(property(conditional.consequent, 'context')?.value) !== 'context' || conditional.alternate.type !== 'ObjectExpression' || conditional.alternate.properties.length) fail('catalogue helper cannot overwrite its declared object');
 
@@ -518,18 +523,45 @@ function requireApplicationWorldContextSource(source: string) {
 function requireContextObjectModuleSource(source: string, contexts: readonly { id: string; type: string }[]) {
   function fail(): never { throw new TypeError('Application world context must use the shared prepared-universe inventory and pinned context.'); }
   const globs = new Map<string, unknown[]>();
+  const records = new Map<string, ObjectExpression>();
   for (const statement of parseRuntimeSource(source, "source.mts").body) {
     if (statement.type !== 'ExportNamedDeclaration' || statement.declaration?.type !== 'VariableDeclaration') continue;
     for (const declaration of statement.declaration.declarations) {
       const call = astKind(declaration.init, 'CallExpression'), callee = astKind(call?.callee, 'MemberExpression');
       if (callee && nameOf(callee.property) === 'glob' && callee.object.type === 'MetaProperty')
         globs.set(nameOf(declaration.id), astKind(call?.arguments[0], 'ArrayExpression')?.elements.map(element => astKind(element, 'Literal')?.value) ?? []);
+      const value = astKind(declaration.init, 'ObjectExpression');
+      if (value) records.set(nameOf(declaration.id), value);
     }
   }
-  const descriptors = globs.get('CONTEXT_OBJECT_DESCRIPTORS'), assets = globs.get('CONTEXT_OBJECT_ASSET_URLS');
-  if (!descriptors || !assets || !contexts.length) fail();
-  for (const { id, type } of contexts) if (!descriptors.includes(`../src/objects/${id}/object.json`) ||
-    !assets.includes(`../src/objects/${id}/prepared/**/*.{json,png,webp,bin}`) || assets.includes(`!../src/objects/${id}/prepared/*.bin`) !== (type === 'point-field')) fail();
+  const descriptors = globs.get('CONTEXT_OBJECT_DESCRIPTORS'), preparedJson = globs.get('CONTEXT_OBJECT_PREPARED_JSON');
+  const localAssets = globs.get('CONTEXT_OBJECT_ASSET_URLS'), remoteAssets = records.get('CONTEXT_OBJECT_ASSET_URLS');
+  if (!descriptors || !preparedJson || !contexts.length || !localAssets && !remoteAssets || localAssets && remoteAssets) fail();
+  const exact = (actual: readonly unknown[], expected: readonly string[]) => actual.length === expected.length &&
+    new Set(actual).size === actual.length && expected.every(value => actual.includes(value));
+  if (!exact(descriptors, contexts.map(({ id }) => `../src/objects/${id}/object.json`)) ||
+      !exact(preparedJson, contexts.map(({ id }) => `../src/objects/${id}/prepared/*.json`))) fail();
+  if (localAssets) {
+    const expected = [...contexts.map(({ id }) => `../src/objects/${id}/prepared/**/*.{json,png,webp,bin}`),
+      ...contexts.filter(({ type }) => type === 'point-field').map(({ id }) => `!../src/objects/${id}/prepared/*.bin`)];
+    if (!exact(localAssets, expected)) fail();
+  } else {
+    const ids = new Set(contexts.map(({ id }) => id)), origins = new Set<string>();
+    const properties = staticObjectProperties(remoteAssets!);
+    if (!properties.length || properties.length !== remoteAssets!.properties.length) fail();
+    for (const property of properties) {
+      const key = propertyKey(property.key), value = astKind(property.value, 'Literal')?.value;
+      if (typeof key !== 'string' || typeof value !== 'string') fail();
+      const match = key.match(/^\.\.\/src\/objects\/([a-z][a-z0-9-]*)\/prepared\/(.+)$/u);
+      if (!match || !ids.has(match[1]!)) fail();
+      let url: URL;
+      try { url = new URL(value); } catch { fail(); }
+      const remote = url.pathname.match(/^\/runtime-assets\/([a-f0-9]{64})\/(.+)$/u);
+      if (url.protocol !== 'https:' || !remote || remote[2] !== match[2]) fail();
+      origins.add(url.origin);
+    }
+    if (origins.size !== 1) fail();
+  }
 }
 
 function requireContextFrame(value: unknown, objectId: string) {

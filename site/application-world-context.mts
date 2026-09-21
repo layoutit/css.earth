@@ -3,7 +3,6 @@ import galaxyFieldDescriptor from '../src/objects/nearby-universe/object.json' w
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../src/renderers/css/navigation/world-camera.js';
 import type { PreparedAssets } from '../src/renderers/css/rendering/prepared-residency.js';
-import type { OrbitRenderer } from '../src/renderers/css/solar-system/prepared-orbit-lines.js';
 import { loadFocusCatalogs } from './focus-catalog.mts';
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
@@ -14,7 +13,7 @@ import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
 import { SCENE_OBJECTS } from './objects.mts';
-import { discoveryVisibility } from './object-discovery.mts';
+import { discoveryVisibility, isDefaultContextFeature, showsDefaultContextOrbit } from './object-discovery.mts';
 import { labelImportance } from '../src/renderers/css/labels/universe-label-policy.ts';
 
 import galaxyPresentation from '../src/objects/local-group/source/presentation.json' with { type: 'json' };
@@ -28,13 +27,15 @@ import { createInFlightLoader } from './in-flight-loader.mts';
 
 const annotationOpacities = Object.fromEntries(SCENE_OBJECTS.map(object => [object.id, contextAnnotationOpacity(object.classification)]));
 const asteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid').map(object => object.id);
+const ordinaryAsteroidIds = SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id);
+const ASTRONOMICAL_UNIT_M = 149_597_870_700;
 const minorMoonIds = minorMoonOrbitIds(applicationContext.bodies);
 const hiddenOrbitIds = [
-  ...SCENE_OBJECTS.filter(object => ['comet', 'trans-neptunian', 'interstellar'].includes(object.classification)).map(object => object.id),
+  ...SCENE_OBJECTS.filter(object => !showsDefaultContextOrbit(object)).map(object => object.id),
   ...minorMoonIds,
 ];
 const annotationPriorities = Object.fromEntries(SCENE_OBJECTS.map(object =>
-  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, object.discovery.featured || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]));
+  [object.id, object.discovery.illustration ? 0 : labelImportance(object.classification, isDefaultContextFeature(object) || object.classification === 'satellite' && !minorMoonIds.includes(object.id), object.discovery.orientationReference ?? 0)]));
 
 // Inventory of prepared resources, not navigation entries or runtime generators.
 type ApplicationUniverse = ReturnType<typeof createPreparedUniverse> & {
@@ -65,6 +66,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
         } } };
     };
     const volumeSet = resourceSet(applicationContext.volume.objectId), starSet = resourceSet(applicationContext.stars.objectId);
+    const backgroundPointSet = resourceSet('nearby-universe');
     const [volume, pointAppearance] = await Promise.all([
       loadPreparedCssVolume(volumeSet.descriptor, volumeSet.transport),
       loadPreparedPointAppearance(starSet.descriptor, starSet.transport),
@@ -105,11 +107,13 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       const set = resourceSet(id), payload = await loadPreparedVolumeLenses(set.descriptor, set.transport);
       return { payload, resolveResource: (path: string) => set.resolve(`prepared/${path}`) };
     });
-    // The world worker reads its own prepared context; background stars are already baked.
+    // The worker reads its own prepared context. The bounded spatial-star sample is
+    // already inside pointAppearance; the complete binary catalogue stays out of the app.
     const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
     const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
       clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
-    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: new URL('../src/objects/nearby-universe/prepared/points.json', import.meta.url).href, backgroundPointCloud: new URL('../src/objects/nearby-universe/prepared/cloud.webp', import.meta.url).href, annotationPriorities, annotationOpacities, plannerSource, catalogBank,
+    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,
+      distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
         return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,
@@ -161,7 +165,6 @@ export function createApplicationWorldContext() {
         contextNavigation = createPreparedContextNavigation({ layer, presentation: galaxyPresentation,
           unavailableObjectIds: Object.entries(CONTEXT_AVAILABILITY).filter(([, state]) => !state.available).map(([id]) => id),
           sources: prepared.catalogSources, windowTarget });
-        layer.setHiddenOrbits(hiddenOrbitIds);
         const restoreMoonOrbitPaint = suppressMinorMoonOrbitPaint(presentationHost, minorMoonIds);
         const framePlanner = prepared.createFramePlanner();
         pendingPlanner = framePlanner;
@@ -169,20 +172,17 @@ export function createApplicationWorldContext() {
         const minimap = createSpaceMinimapSetting(stage.ownerDocument, error => target.reportError(error));
         const moonLabels = mountCatalogueMoonLabels(presentationHost, applicationContext.bodies, applicationContext.focus, layer.opacityClock);
         let heliosphereEnabled = false, shellsMounted = false, destroyed = false;
-        let selectedObjectId = applicationContext.focus.id, asteroidOrbitsEnabled = false;
-        let illustrationModelsEnabled = false, asteroidBodiesEnabled = false, asteroidLabelsEnabled = false;
+        let illustrationModelsEnabled = false;
         let highlightedClassification: string | null = null;
         const updateDiscoveryVisibility = () => {
           const { hiddenBodies, hiddenLabels, highlightedBodies } = discoveryVisibility(SCENE_OBJECTS, { illustrations: illustrationModelsEnabled,
-            asteroids: asteroidBodiesEnabled, asteroidLabels: asteroidLabelsEnabled, highlighted: highlightedClassification });
+            highlighted: highlightedClassification });
           layer.setHiddenBodies(hiddenBodies);
           layer.setHiddenLabels(hiddenLabels);
           layer.setHighlighted(highlightedBodies);
           minimap.setHiddenBodies(hiddenBodies);
           if (publication) minimap.publish(publication.world, publication.viewport);
         };
-        const updateOrbitVisibility = () => layer.setHiddenOrbits(asteroidOrbitsEnabled ? hiddenOrbitIds
-          : [...hiddenOrbitIds, ...asteroidIds.filter(id => id !== selectedObjectId)]);
         let publication: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
         let stagedFrame: {world: WorldCameraPose; viewport: WorldCameraViewport; frame: Awaited<ReturnType<typeof framePlanner.plan>>; snapshot: ReturnType<typeof layer.captureFrame>; consumed: boolean} | null = null;
         const publish = (world: WorldCameraPose, viewport: WorldCameraViewport) => {
@@ -231,10 +231,11 @@ export function createApplicationWorldContext() {
           if (!active && publication) minimap.publish(publication.world, publication.viewport);
         };
         inputSurface?.addEventListener('objectrotationchange', rotationChanged);
-        // Featured asteroids keep circles. Other asteroid markers retain their
-        // pick target when enabled, with the circle revealed on hover.
-        layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !object.discovery.featured).map(object => object.id));
+        // JPL mission-target asteroids keep circles. Other asteroid markers retain their
+        // pick target, with the circle revealed on hover.
+        layer.setHiddenIndicators(SCENE_OBJECTS.filter(object => object.classification === 'asteroid' && !isDefaultContextFeature(object)).map(object => object.id));
         updateDiscoveryVisibility();
+        layer.setHiddenOrbits(hiddenOrbitIds);
         const diagnostics = DIAGNOSTICS_ENABLED ? createWorldContextDiagnostics(layer, frameQueue, presentationHost !== stage) : null;
         if (diagnostics) Reflect.set(target, '__cssEarthUniverse', diagnostics);
         return { ...layer, viewport, publish,
@@ -279,8 +280,6 @@ export function createApplicationWorldContext() {
           },
           selectObject(id: string, frame: PreparedWorldCameraFrame) {
             layer.selectObject(id, frame);
-            selectedObjectId = id;
-            updateOrbitVisibility();
             minimap.selectObject(frame);
             moonLabels.selectObject(id);
           },
@@ -289,26 +288,11 @@ export function createApplicationWorldContext() {
             illustrationModelsEnabled = enabled === true;
             updateDiscoveryVisibility();
           },
-          setAsteroidBodiesEnabled(enabled: boolean) {
-            if (destroyed) return;
-            asteroidBodiesEnabled = enabled === true;
-            updateDiscoveryVisibility();
-          },
-          setAsteroidOrbitsEnabled(enabled: boolean) {
-            if (destroyed) return;
-            asteroidOrbitsEnabled = enabled === true;
-            updateOrbitVisibility();
-          },
-          setOrbitRenderer(renderer: OrbitRenderer) {
-            if (!destroyed) layer.setOrbitRenderer(renderer);
-          },
-          setAsteroidLabelsEnabled(enabled: boolean) {
-            if (destroyed) return;
-            asteroidLabelsEnabled = enabled === true;
-            updateDiscoveryVisibility();
-          },
           setMinimapEnabled(enabled: boolean) {
             if (!destroyed) minimap.setEnabled(enabled);
+          },
+          setThreeDStarsEnabled(enabled: boolean) {
+            if (!destroyed) layer.setStellarPointsEnabled(enabled);
           },
           setHighlightedClassification(classification: string | null) {
             if (destroyed) return;

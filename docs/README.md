@@ -9,6 +9,7 @@ For a body's sources, processing, evidence and known problems, read its
 
 | Topic | Guide |
 | --- | --- |
+| PR feedback budget, check selection, failure recovery and deployment | [CI/CD maintenance](ci-cd.md) |
 | Galaxies, LMC image lenses and extragalactic datasets | [Galaxies and the nearby universe](galaxies/README.md) |
 | Nebula reconstruction, spectral lenses and reproducible delivery | [Prepared nebulae](nebulae/README.md) |
 | Recording sources and evidence | [Provenance contract](provenance/CONTRACT.md) |
@@ -18,8 +19,10 @@ For a body's sources, processing, evidence and known problems, read its
 | What the open archives hold for our bodies, by name | [Archive screen](archive-screen.md) |
 | Drawing an opaque body inside a prepared volume: a proposal and its measurements | [A body inside a volume](mesh-in-volume.md) |
 | Pinning an observation, re-running the observatory's own software, and what each kind of check establishes | [Virtual telescopes](virtual-telescopes.md) |
+| Querying VO archives, selecting bounded science products and retaining acquisition evidence | [VO observation access](vo-observation-access.md) |
 | Which upstream packages own a mechanical boundary here, and which contracts stay ours | [Astronomy package ownership](astronomy-package-ownership.md) |
 | One example picture per telescope, each made from a product that telescope's toolkit produced here | [Telescope examples](telescope-examples.md) |
+| Pinned sources, public commands and retained outputs for the 18 telescope data families | [Telescope family examples](telescope-family-examples/README.md) |
 | Exoplanet light curves to maps: eigencurve fitting and its checks | [Eclipse mapping](eclipse-mapping.md) |
 | JWST images to sky band composites: MAST programs, the re-run level-3 stage, its oracle and depth from a model | [JWST imaging](jwst-imaging.md) |
 | What JWST's public archive holds by observing mode, what this project can already reduce, and which shipped objects JWST has observed | [JWST ledger](jwst-ledger.md) |
@@ -80,7 +83,7 @@ CI checks local Markdown, reference and HTML links, heading anchors, file placem
 and links from this index.
 It also rejects duplicate body `SOURCE.md`, `EVIDENCE.md` and `USAGE.md` accounts.
 Run the same check with
-`python3 tools/audits/check-documentation-links.py --all`.
+`node tools/audits/check-documentation-links.mts --all`.
 
 For a Git snapshot inventory of body records, retained HTML and duplicate bytes,
 run `python3 tools/audits/provenance-documentation-inventory.py --repo . --ref HEAD --output /tmp/provenance-inventory.json`.

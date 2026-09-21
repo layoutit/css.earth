@@ -1,0 +1,3845 @@
+TAP version 13
+# Subtest: an object without runtime-assets.json has an empty asset map
+ok 1 - an object without runtime-assets.json has an empty asset map
+  ---
+  duration_ms: 14.885042
+  type: 'test'
+  ...
+# Subtest: an unreadable runtime-assets.json still fails the build
+ok 2 - an unreadable runtime-assets.json still fails the build
+  ---
+  duration_ms: 4.092416
+  type: 'test'
+  ...
+# Subtest: Saturn lists every source moon and only links registered scene objects
+ok 3 - Saturn lists every source moon and only links registered scene objects
+  ---
+  duration_ms: 1.440209
+  type: 'test'
+  ...
+# Subtest: other planets retain their existing navigable moon entries
+ok 4 - other planets retain their existing navigable moon entries
+  ---
+  duration_ms: 0.53725
+  type: 'test'
+  ...
+# Subtest: moon catalogues reject mismatched totals and duplicate identities
+ok 5 - moon catalogues reject mismatched totals and duplicate identities
+  ---
+  duration_ms: 0.320791
+  type: 'test'
+  ...
+# Subtest: every planet uses the complete confirmed catalogue count
+ok 6 - every planet uses the complete confirmed catalogue count
+  ---
+  duration_ms: 1.049959
+  type: 'test'
+  ...
+# Subtest: childless moons offer their parent and other available moons
+ok 7 - childless moons offer their parent and other available moons
+  ---
+  duration_ms: 0.911125
+  type: 'test'
+  ...
+# Subtest: parents keep their complete moon catalogue and childless primary bodies omit the empty tab
+ok 8 - parents keep their complete moon catalogue and childless primary bodies omit the empty tab
+  ---
+  duration_ms: 0.692333
+  type: 'test'
+  ...
+# Subtest: overview charts retain every supplied spectrum sample across the registry
+ok 9 - overview charts retain every supplied spectrum sample across the registry
+  ---
+  duration_ms: 190.200583
+  type: 'test'
+  ...
+# Subtest: overview measurements use the body reference radius and catalogue distance
+ok 10 - overview measurements use the body reference radius and catalogue distance
+  ---
+  duration_ms: 0.439833
+  type: 'test'
+  ...
+# Subtest: compact spectra reject unordered or nonfinite samples
+ok 11 - compact spectra reject unordered or nonfinite samples
+  ---
+  duration_ms: 0.388959
+  type: 'test'
+  ...
+# Subtest: no module reachable from the browser entry points has a static node: import
+ok 12 - no module reachable from the browser entry points has a static node: import
+  ---
+  duration_ms: 1519.312375
+  type: 'test'
+  ...
+# Subtest: mutation check: a static node: import reachable from an entry is caught
+ok 13 - mutation check: a static node: import reachable from an entry is caught
+  ---
+  duration_ms: 6.235708
+  type: 'test'
+  ...
+# Subtest: mutation check: a node: import reached only through a dynamic import() is not flagged
+ok 14 - mutation check: a node: import reached only through a dynamic import() is not flagged
+  ---
+  duration_ms: 3.55475
+  type: 'test'
+  ...
+# Subtest: every object mounts one canonical high-density image bank
+not ok 15 - every object mounts one canonical high-density image bank
+  ---
+  duration_ms: 18857.998958
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/canonical-image-density.test.mts:12:1'
+  failureType: 'testCodeFailure'
+  error: 'haumea: high-density startup assets'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/canonical-image-density.test.mts:28:12)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: the shared shell does not choose image assets by device DPR
+ok 16 - the shared shell does not choose image assets by device DPR
+  ---
+  duration_ms: 3.419584
+  type: 'test'
+  ...
+# Subtest: loadCatalogueFragment fetches, verifies and returns the parsed list
+ok 17 - loadCatalogueFragment fetches, verifies and returns the parsed list
+  ---
+  duration_ms: 35.701708
+  type: 'test'
+  ...
+# Subtest: loadCatalogueFragment rejects a failed request
+ok 18 - loadCatalogueFragment rejects a failed request
+  ---
+  duration_ms: 0.392416
+  type: 'test'
+  ...
+# Subtest: loadCatalogueFragment rejects a network failure
+ok 19 - loadCatalogueFragment rejects a network failure
+  ---
+  duration_ms: 0.115959
+  type: 'test'
+  ...
+# Subtest: loadCatalogueFragment rejects a size drift
+ok 20 - loadCatalogueFragment rejects a size drift
+  ---
+  duration_ms: 2.1505
+  type: 'test'
+  ...
+# Subtest: loadCatalogueFragment rejects a hash mismatch
+ok 21 - loadCatalogueFragment rejects a hash mismatch
+  ---
+  duration_ms: 0.438375
+  type: 'test'
+  ...
+# Subtest: loadCatalogueFragment rejects content missing the list
+ok 22 - loadCatalogueFragment rejects content missing the list
+  ---
+  duration_ms: 1.0975
+  type: 'test'
+  ...
+# Subtest: scheduleWhenIdle prefers requestIdleCallback and falls back to a timer
+ok 23 - scheduleWhenIdle prefers requestIdleCallback and falls back to a timer
+  ---
+  duration_ms: 0.155791
+  type: 'test'
+  ...
+# Subtest: parseCatalogueFragmentPin accepts a well-formed pin and rejects everything else
+ok 24 - parseCatalogueFragmentPin accepts a well-formed pin and rejects everything else
+  ---
+  duration_ms: 1.120291
+  type: 'test'
+  ...
+# Subtest: readCatalogueFragmentPin reads a dataset host and never throws
+ok 25 - readCatalogueFragmentPin reads a dataset host and never throws
+  ---
+  duration_ms: 0.127833
+  type: 'test'
+  ...
+# Subtest: hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly
+ok 26 - hidden charts schedule no work; visible charts batch reads, retain corrections, and retire cleanly
+  ---
+  duration_ms: 3.071209
+  type: 'test'
+  ...
+# Subtest: the standard browser launch stays unchanged unless explicitly opted in
+ok 27 - the standard browser launch stays unchanged unless explicitly opted in
+  ---
+  duration_ms: 0.866542
+  type: 'test'
+  ...
+# Subtest: the Chrome wrapper retains logs and arguments while preserving both CDP pipes
+ok 28 - the Chrome wrapper retains logs and arguments while preserving both CDP pipes
+  ---
+  duration_ms: 540.719375
+  type: 'test'
+  ...
+# Subtest: every registered dataset has a specific published title, independent of category and source-link availability
+ok 29 - every registered dataset has a specific published title, independent of category and source-link availability
+  ---
+  duration_ms: 521.245459
+  type: 'test'
+  ...
+# Subtest: missing titles, category labels, repeated summaries and missing summaries are rejected
+ok 30 - missing titles, category labels, repeated summaries and missing summaries are rejected
+  ---
+  duration_ms: 0.346375
+  type: 'test'
+  ...
+# Subtest: Mars elevation and thermal infrared select their own missions
+ok 31 - Mars elevation and thermal infrared select their own missions
+  ---
+  duration_ms: 0.723958
+  type: 'test'
+  ...
+# Subtest: multi-input imagery lists its mission once and a cutaway does not invent one
+ok 32 - multi-input imagery lists its mission once and a cutaway does not invent one
+  ---
+  duration_ms: 0.0935
+  type: 'test'
+  ...
+# Subtest: unresolved capture attribution names the credited group without guessing a mission
+ok 33 - unresolved capture attribution names the credited group without guessing a mission
+  ---
+  duration_ms: 0.101875
+  type: 'test'
+  ...
+# Subtest: an unknown dataset does not inherit another dataset’s contributors
+ok 34 - an unknown dataset does not inherit another dataset’s contributors
+  ---
+  duration_ms: 0.094
+  type: 'test'
+  ...
+# Subtest: capture attribution follows the selected dataset, including derived maps
+ok 35 - capture attribution follows the selected dataset, including derived maps
+  ---
+  duration_ms: 23.490167
+  type: 'test'
+  ...
+# Subtest: Didymos LUKE frames keep their DART mission credit; stripping capture removes it
+ok 36 - Didymos LUKE frames keep their DART mission credit; stripping capture removes it
+  ---
+  duration_ms: 4.512
+  type: 'test'
+  ...
+# Subtest: multi-mission composites preserve every evidenced contributor without repeating dataset destinations
+ok 37 - multi-mission composites preserve every evidenced contributor without repeating dataset destinations
+  ---
+  duration_ms: 3.850667
+  type: 'test'
+  ...
+# Subtest: schematic and synthetic views do not inherit observations from their outer texture
+ok 38 - schematic and synthetic views do not inherit observations from their outer texture
+  ---
+  duration_ms: 120.438666
+  type: 'test'
+  ...
+# Subtest: every migrated capture stays bound to its source; the full prepared graph is deterministic
+ok 39 - every migrated capture stays bound to its source; the full prepared graph is deterministic
+  ---
+  duration_ms: 5613.996792
+  type: 'test'
+  ...
+# Subtest: OSIRIS-REx retains Bennu observations and successor participation creates no APEX observations
+ok 40 - OSIRIS-REx retains Bennu observations and successor participation creates no APEX observations
+  ---
+  duration_ms: 0.197125
+  type: 'test'
+  ...
+# Subtest: approved artwork and emblems retain source bytes, dimensions and transparency
+ok 41 - approved artwork and emblems retain source bytes, dimensions and transparency
+  ---
+  duration_ms: 78.616542
+  type: 'test'
+  ...
+# Subtest: unknown identities, impossible capture pairs, stale lenses and damaged indexes fail closed
+ok 42 - unknown identities, impossible capture pairs, stale lenses and damaged indexes fail closed
+  ---
+  duration_ms: 30.095166
+  type: 'test'
+  ...
+# Subtest: native selection replaces only the existing prepared presentation and selected controls
+ok 43 - native selection replaces only the existing prepared presentation and selected controls
+  ---
+  duration_ms: 279.372583
+  type: 'test'
+  ...
+# Subtest: invalid requests and corrupt prepared bytes cannot publish another dataset
+ok 44 - invalid requests and corrupt prepared bytes cannot publish another dataset
+  ---
+  duration_ms: 36.256542
+  type: 'test'
+  ...
+# Subtest: Netlify handles dataset and combined search queries without intercepting static assets
+ok 45 - Netlify handles dataset and combined search queries without intercepting static assets
+  ---
+  duration_ms: 0.703291
+  type: 'test'
+  ...
+# Subtest: a native search-only Earth selection fetches the base catalogue and exactly one detail bank
+ok 46 - a native search-only Earth selection fetches the base catalogue and exactly one detail bank
+  ---
+  duration_ms: 360.71975
+  type: 'test'
+  ...
+# Subtest: native query selections preserve view state and unrelated anchors; obsolete fragments do not select a dataset
+ok 47 - native query selections preserve view state and unrelated anchors; obsolete fragments do not select a dataset
+  ---
+  duration_ms: 1.099542
+  type: 'test'
+  ...
+# Subtest: ambiguous and malformed dataset selections are rejected before publication
+ok 48 - ambiguous and malformed dataset selections are rejected before publication
+  ---
+  duration_ms: 0.150833
+  type: 'test'
+  ...
+# Subtest: diagnostic lookup requires the current published identity and cleanup preserves a replacement owner
+ok 49 - diagnostic lookup requires the current published identity and cleanup preserves a replacement owner
+  ---
+  duration_ms: 0.662125
+  type: 'test'
+  ...
+# Subtest: records one correlated run, copies changing camera state, and is idle after stop
+ok 50 - records one correlated run, copies changing camera state, and is idle after stop
+  ---
+  duration_ms: 13.473042
+  type: 'test'
+  ...
+# Subtest: a failed diagnostic read is captured without interrupting the application
+ok 51 - a failed diagnostic read is captured without interrupting the application
+  ---
+  duration_ms: 0.561333
+  type: 'test'
+  ...
+# Subtest: rail switches the retained About panel without storing or mounting a scene
+ok 52 - rail switches the retained About panel without storing or mounting a scene
+  ---
+  duration_ms: 1.409083
+  type: 'test'
+  ...
+# Subtest: Escape restores a visible keyboard focus target
+ok 53 - Escape restores a visible keyboard focus target
+  ---
+  duration_ms: 0.3935
+  type: 'test'
+  ...
+# Subtest: search stays visible in About and Settings and typing returns to the results
+ok 54 - search stays visible in About and Settings and typing returns to the results
+  ---
+  duration_ms: 0.190375
+  type: 'test'
+  ...
+# Subtest: destroy resets retained markup and remount does not duplicate listeners
+ok 55 - destroy resets retained markup and remount does not duplicate listeners
+  ---
+  duration_ms: 0.222208
+  type: 'test'
+  ...
+# Subtest: an incomplete rail fails clearly
+ok 56 - an incomplete rail fails clearly
+  ---
+  duration_ms: 1.252708
+  type: 'test'
+  ...
+# Subtest: orders comparable facts before stable planet-specific facts
+ok 57 - orders comparable facts before stable planet-specific facts
+  ---
+  duration_ms: 0.833
+  type: 'test'
+  ...
+# Subtest: keeps unknown facts in their authored order
+ok 58 - keeps unknown facts in their authored order
+  ---
+  duration_ms: 0.084542
+  type: 'test'
+  ...
+# Subtest: prioritizes a satellite's own orbit over its parent's solar orbit
+ok 59 - prioritizes a satellite's own orbit over its parent's solar orbit
+  ---
+  duration_ms: 0.169375
+  type: 'test'
+  ...
+# Subtest: rejects facts without unique semantic ids
+ok 60 - rejects facts without unique semantic ids
+  ---
+  duration_ms: 0.206708
+  type: 'test'
+  ...
+# Subtest: an initial galaxy focus retains its transitive positioned and unpositioned physical hosts
+ok 61 - an initial galaxy focus retains its transitive positioned and unpositioned physical hosts
+  ---
+  duration_ms: 4.466708
+  type: 'test'
+  ...
+# Subtest: initial focus host closure fails on a missing host and a cycle
+ok 62 - initial focus host closure fails on a missing host and a cycle
+  ---
+  duration_ms: 1.569708
+  type: 'test'
+  ...
+# Subtest: initial focus requires an explicit selected identity present in the parsed fragment
+ok 63 - initial focus requires an explicit selected identity present in the parsed fragment
+  ---
+  duration_ms: 2.508166
+  type: 'test'
+  ...
+# Subtest: a source-owned globular cluster is discovered, classified and searched through the shared focus route
+ok 64 - a source-owned globular cluster is discovered, classified and searched through the shared focus route
+  ---
+  duration_ms: 6.299959
+  type: 'test'
+  ...
+# Subtest: analytics ignores local visits and loads on css.earth
+ok 65 - analytics ignores local visits and loads on css.earth
+  ---
+  duration_ms: 1.834875
+  type: 'test'
+  ...
+# Subtest: in-flight loader shares concurrent work but releases successful values
+ok 66 - in-flight loader shares concurrent work but releases successful values
+  ---
+  duration_ms: 1.727917
+  type: 'test'
+  ...
+# Subtest: in-flight loader releases failures so a later request can retry
+ok 67 - in-flight loader releases failures so a later request can retry
+  ---
+  duration_ms: 0.275166
+  type: 'test'
+  ...
+# Subtest: query-specific views withhold static object facts until the requested context is ready
+ok 68 - query-specific views withhold static object facts until the requested context is ready
+  ---
+  duration_ms: 2.020417
+  type: 'test'
+  ...
+# Subtest: the LMC bank regenerates from its compact finite-emission inputs exactly as the promotion baked it
+ok 69 - the LMC bank regenerates from its compact finite-emission inputs exactly as the promotion baked it
+  ---
+  duration_ms: 608.23675
+  type: 'test'
+  ...
+# Subtest: objects without lenses or extra settings retain mandatory browser proof
+ok 70 - objects without lenses or extra settings retain mandatory browser proof
+  ---
+  duration_ms: 6.43125
+  type: 'test'
+  ...
+# Subtest: declared content requires exact lens and setting DOM before optional checks
+ok 71 - declared content requires exact lens and setting DOM before optional checks
+  ---
+  duration_ms: 1.956958
+  type: 'test'
+  ...
+# Subtest: optional controls never excuse a missing shared panel or Motion
+ok 72 - optional controls never excuse a missing shared panel or Motion
+  ---
+  duration_ms: 0.358459
+  type: 'test'
+  ...
+# Subtest: declared lenses require matching race IDs, and complete retained coverage
+ok 73 - declared lenses require matching race IDs, and complete retained coverage
+  ---
+  duration_ms: 0.328792
+  type: 'test'
+  ...
+# Subtest: a single supplied lens keeps interaction proof without inventing a race
+ok 74 - a single supplied lens keeps interaction proof without inventing a race
+  ---
+  duration_ms: 0.119292
+  type: 'test'
+  ...
+# Subtest: all objects retain browser evidence for the controls they support
+not ok 75 - all objects retain browser evidence for the controls they support
+  ---
+  duration_ms: 713.144916
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/load-browser-profile.test.mts:101:1'
+  failureType: 'testCodeFailure'
+  error: 'ryugu: browser profile must declare retained interaction evidence'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    validatePlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:51:10)
+    loadPlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:19:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.test.mts:103:21)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: unsupported objects fail before legacy implementation paths are considered
+ok 76 - unsupported objects fail before legacy implementation paths are considered
+  ---
+  duration_ms: 0.602291
+  type: 'test'
+  ...
+# Subtest: only a later fully opaque marker covers a complete earlier marker
+ok 77 - only a later fully opaque marker covers a complete earlier marker
+  ---
+  duration_ms: 1.035333
+  type: 'test'
+  ...
+# Subtest: edge contact, motion out of coverage and responsive raster guards keep drawing
+ok 78 - edge contact, motion out of coverage and responsive raster guards keep drawing
+  ---
+  duration_ms: 0.142417
+  type: 'test'
+  ...
+# Subtest: prepared minimap index includes every source point once without changing DOM order
+ok 79 - prepared minimap index includes every source point once without changing DOM order
+  ---
+  duration_ms: 1.999459
+  type: 'test'
+  ...
+# Subtest: X range keeps inclusive duplicate boundaries and handles empty/disjoint ranges
+ok 80 - X range keeps inclusive duplicate boundaries and handles empty/disjoint ranges
+  ---
+  duration_ms: 0.249125
+  type: 'test'
+  ...
+# Subtest: indexed candidates preserve exact 3D visible points across physical scales and off-origin views
+ok 81 - indexed candidates preserve exact 3D visible points across physical scales and off-origin views
+  ---
+  duration_ms: 96.529708
+  type: 'test'
+  ...
+# Subtest: minimap retains the principal Local Group galaxies and published cluster positions
+ok 82 - minimap retains the principal Local Group galaxies and published cluster positions
+  ---
+  duration_ms: 9.617166
+  type: 'test'
+  ...
+# Subtest: the minimap is not downloaded, built or projected while its setting is off
+ok 83 - the minimap is not downloaded, built or projected while its setting is off
+  ---
+  duration_ms: 2.201
+  type: 'test'
+  ...
+# Subtest: turning the setting on builds the minimap once with the current focus, hidden bodies and camera
+ok 84 - turning the setting on builds the minimap once with the current focus, hidden bodies and camera
+  ---
+  duration_ms: 0.944125
+  type: 'test'
+  ...
+# Subtest: off stops projection and keeps the mounted minimap; on draws the latest camera without another download
+ok 85 - off stops projection and keeps the mounted minimap; on draws the latest camera without another download
+  ---
+  duration_ms: 1.082167
+  type: 'test'
+  ...
+# Subtest: a world destroyed during the download never builds the minimap
+ok 86 - a world destroyed during the download never builds the minimap
+  ---
+  duration_ms: 0.465875
+  type: 'test'
+  ...
+# Subtest: a failed download is reported and the next switch on tries again
+ok 87 - a failed download is reported and the next switch on tries again
+  ---
+  duration_ms: 1.71575
+  type: 'test'
+  ...
+# Subtest: prepared unavailable moon labels cover proper names and match pinned Horizons vectors
+ok 88 - prepared unavailable moon labels cover proper names and match pinned Horizons vectors
+  ---
+  duration_ms: 15.768375
+  type: 'test'
+  ...
+# Subtest: designation-only moons stay in the sidebar and do not become scene labels
+ok 89 - designation-only moons stay in the sidebar and do not become scene labels
+  ---
+  duration_ms: 0.934625
+  type: 'test'
+  ...
+# Subtest: disabled captions respect foreground labels, planet occlusion and overview scale
+ok 90 - disabled captions respect foreground labels, planet occlusion and overview scale
+  ---
+  duration_ms: 1.188459
+  type: 'test'
+  ...
+# Subtest: major moon orbits remain enabled and minor moon orbits are suppressed across planets
+ok 91 - major moon orbits remain enabled and minor moon orbits are suppressed across planets
+  ---
+  duration_ms: 0.186542
+  type: 'test'
+  ...
+# Subtest: disabled captions keep admission through small zoom reversals
+ok 92 - disabled captions keep admission through small zoom reversals
+  ---
+  duration_ms: 18.606542
+  type: 'test'
+  ...
+# Subtest: an intent-fetched fragment is requested once, shared by preview and content, and bounded
+ok 93 - an intent-fetched fragment is requested once, shared by preview and content, and bounded
+  ---
+  duration_ms: 18.070083
+  type: 'test'
+  ...
+# Subtest: every module copy in a window reaches the same fragment cache
+ok 94 - every module copy in a window reaches the same fragment cache
+  ---
+  duration_ms: 1.356625
+  type: 'test'
+  ...
+# Subtest: failed, mismatched and cancelled requests never poison the shared fragment
+ok 95 - failed, mismatched and cancelled requests never poison the shared fragment
+  ---
+  duration_ms: 0.7745
+  type: 'test'
+  ...
+# Subtest: hover, focus and world hover prefetch registry routes after a dwell; a press starts at once
+ok 96 - hover, focus and world hover prefetch registry routes after a dwell; a press starts at once
+  ---
+  duration_ms: 0.787167
+  type: 'test'
+  ...
+# Subtest: supersession revokes commit authority before abort and cleanup, including late resources
+ok 97 - supersession revokes commit authority before abort and cleanup, including late resources
+  ---
+  duration_ms: 0.856042
+  type: 'test'
+  ...
+# Subtest: arrival settles once without aborting the handed-off scene; failures abort
+ok 98 - arrival settles once without aborting the handed-off scene; failures abort
+  ---
+  duration_ms: 0.203375
+  type: 'test'
+  ...
+# Subtest: every prepared spatial subject and every scene has exactly one searchable destination
+ok 99 - every prepared spatial subject and every scene has exactly one searchable destination
+  ---
+  duration_ms: 284.529167
+  type: 'test'
+  ...
+# Subtest: distance display and order use the prepared position, never the legacy orbital reference
+ok 100 - distance display and order use the prepared position, never the legacy orbital reference
+  ---
+  duration_ms: 346.0285
+  type: 'test'
+  ...
+# Subtest: galaxy citations resolve across the full prepared catalogue, including the separate SMC paper
+ok 101 - galaxy citations resolve across the full prepared catalogue, including the separate SMC paper
+  ---
+  duration_ms: 11.171292
+  type: 'test'
+  ...
+# Subtest: physical hosts remain distinct from scene hosts and M45 retains its measured subject
+ok 102 - physical hosts remain distinct from scene hosts and M45 retains its measured subject
+  ---
+  duration_ms: 5.643125
+  type: 'test'
+  ...
+# Subtest: adding and reordering bodies preserves existing marker bytes
+not ok 103 - adding and reordering bodies preserves existing marker bytes
+  ---
+  duration_ms: 910.173
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:33:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/src/objects/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async validateMarkerSourceBytes (file:///private/tmp/cssearth-pr390/src/navigation/marker-recipe.mts:77:17)
+    async readMarkerImage (file:///private/tmp/cssearth-pr390/src/navigation/marker-recipe.mts:89:17)
+    async renderMarker (file:///private/tmp/cssearth-pr390/src/navigation/marker-recipe.mts:103:15)
+    async prepareBodyMarkers (file:///private/tmp/cssearth-pr390/tools/prepare-navigation.mts:290:20)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:39:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: metadata-only preparation does not replace or remove images
+ok 104 - metadata-only preparation does not replace or remove images
+  ---
+  duration_ms: 72.342791
+  type: 'test'
+  ...
+# Subtest: composes every orbiting-object marker descriptor in catalog order
+ok 105 - composes every orbiting-object marker descriptor in catalog order
+  ---
+  duration_ms: 649.774417
+  type: 'test'
+  ...
+# Subtest: body marker atlases preserve every visible prepared tile pixel exactly
+ok 106 - body marker atlases preserve every visible prepared tile pixel exactly
+  ---
+  duration_ms: 2714.397584
+  type: 'test'
+  ...
+# Subtest: reproduces the checked-in body images and utility markers
+not ok 107 - reproduces the checked-in body images and utility markers
+  ---
+  duration_ms: 286.432458
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:110:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/src/objects/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async validateMarkerSourceBytes (file:///private/tmp/cssearth-pr390/src/navigation/marker-recipe.mts:77:17)
+    async readMarkerImage (file:///private/tmp/cssearth-pr390/src/navigation/marker-recipe.mts:89:17)
+    async renderMarker (file:///private/tmp/cssearth-pr390/src/navigation/marker-recipe.mts:103:15)
+    async prepareBodyMarkers (file:///private/tmp/cssearth-pr390/tools/prepare-navigation.mts:290:20)
+    async renderNavigation (file:///private/tmp/cssearth-pr390/tools/prepare-navigation.mts:300:3)
+    async prepareNavigation (file:///private/tmp/cssearth-pr390/tools/prepare-navigation.mts:99:72)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:114:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+  ...
+# Subtest: failed object source preserves accepted files or recoverable backups outside public
+not ok 108 - failed object source preserves accepted files or recoverable backups outside public
+  ---
+  duration_ms: 271.276334
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:145:3'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, copyfile '/private/tmp/cssearth-pr390/src/objects/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-navigation-failure-3Xi7xT/src/objects/new-body/source/source.jpg'"
+  code: 'ENOENT'
+  stack: |-
+    async copyFile (node:internal/fs/promises:621:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:159:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: failed late utility source preserves accepted files or recoverable backups outside public
+not ok 109 - failed late utility source preserves accepted files or recoverable backups outside public
+  ---
+  duration_ms: 215.718792
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:145:3'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, copyfile '/private/tmp/cssearth-pr390/src/objects/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-navigation-failure-Jbvc3x/src/objects/new-body/source/source.jpg'"
+  code: 'ENOENT'
+  stack: |-
+    async copyFile (node:internal/fs/promises:621:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:159:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: failed publication preserves accepted files or recoverable backups outside public
+not ok 110 - failed publication preserves accepted files or recoverable backups outside public
+  ---
+  duration_ms: 197.857208
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:145:3'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, copyfile '/private/tmp/cssearth-pr390/src/objects/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-navigation-failure-mEvfO7/src/objects/new-body/source/source.jpg'"
+  code: 'ENOENT'
+  stack: |-
+    async copyFile (node:internal/fs/promises:621:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:159:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: failed rollback preserves accepted files or recoverable backups outside public
+not ok 111 - failed rollback preserves accepted files or recoverable backups outside public
+  ---
+  duration_ms: 183.2325
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:145:3'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, copyfile '/private/tmp/cssearth-pr390/src/objects/sun/source/sdo/continuum/CR2311/20260513_000000_1024_HMIIC.jpg' -> '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-navigation-failure-Ka77kn/src/objects/new-body/source/source.jpg'"
+  code: 'ENOENT'
+  stack: |-
+    async copyFile (node:internal/fs/promises:621:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/navigation-preparation.test.mts:159:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: cross-device moves copy and unlink safely for publication and rollback
+ok 112 - cross-device moves copy and unlink safely for publication and rollback
+  ---
+  duration_ms: 2.162709
+  type: 'test'
+  ...
+# file:///private/tmp/cssearth-pr390/site/prepared-context-objects.mts:2
+# export const CONTEXT_OBJECT_DESCRIPTORS                          = import.meta.glob(['../src/objects/betelgeuse-shell/object.json', '../src/objects/galaxy-clusters/object.json', '../src/objects/hd-181327-disc/object.json', '../src/objects/heliosphere/object.json', '../src/objects/helix/object.json', '../src/objects/lmc/object.json', '../src/objects/local-group/object.json', '../src/objects/m1/object.json', '../src/objects/m2-9/object.json', '../src/objects/m31/object.json', '../src/objects/m33/object.json', '../src/objects/m42/object.json', '../src/objects/m45/object.json', '../src/objects/m8/object.json', '../src/objects/milky-way/object.json', '../src/objects/nearby-universe/object.json', '../src/objects/omega-centauri/object.json', '../src/objects/smc/object.json', '../src/objects/stellar-neighbourhood/object.json'], { eager: true, import: 'default' });
+#                                                                                ^
+# TypeError: (intermediate value).glob is not a function
+#     at file:///private/tmp/cssearth-pr390/site/prepared-context-objects.mts:2:80
+#     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+#     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+# Node.js v22.23.2
+# Subtest: site/test/navigation-router.test.mts
+not ok 34 - site/test/navigation-router.test.mts
+  ---
+  duration_ms: 280.217
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/navigation-router.test.mts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: navigation timing records phases once and bounds retained entries without clearing unrelated timing
+ok 114 - navigation timing records phases once and bounds retained entries without clearing unrelated timing
+  ---
+  duration_ms: 0.930792
+  type: 'test'
+  ...
+# Subtest: a settled navigation records no later phase
+ok 115 - a settled navigation records no later phase
+  ---
+  duration_ms: 0.200708
+  type: 'test'
+  ...
+# Subtest: timing is optional in non-browser hosts
+ok 116 - timing is optional in non-browser hosts
+  ---
+  duration_ms: 0.088667
+  type: 'test'
+  ...
+# Subtest: deferred navigation materializes only the selected path from its verified payload
+ok 117 - deferred navigation materializes only the selected path from its verified payload
+  ---
+  duration_ms: 18.215041
+  type: 'test'
+  ...
+# Subtest: bundled navigation reads object packages and prepared context from the repository root
+ok 118 - bundled navigation reads object packages and prepared context from the repository root
+  ---
+  duration_ms: 65.219833
+  type: 'test'
+  ...
+# Subtest: rendered nebulae contribute common names and catalogue aliases to search
+ok 119 - rendered nebulae contribute common names and catalogue aliases to search
+  ---
+  duration_ms: 1.972083
+  type: 'test'
+  ...
+# Subtest: every actual profile reads its recorded coordinates from the shared camera endpoint
+not ok 120 - every actual profile reads its recorded coordinates from the shared camera endpoint
+  ---
+  duration_ms: 760.586041
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/object-browser-profile.test.mts:19:1'
+  failureType: 'testCodeFailure'
+  error: 'ryugu: browser profile must declare retained interaction evidence'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    validatePlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:51:10)
+    loadPlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:19:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/object-browser-profile.test.mts:21:21)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: coordinate field selection is immutable reporting data, with no private camera implementation
+ok 121 - coordinate field selection is immutable reporting data, with no private camera implementation
+  ---
+  duration_ms: 0.723209
+  type: 'test'
+  ...
+# Subtest: restoring a complete camera observation preserves yaw and the pitch alias
+ok 122 - restoring a complete camera observation preserves yaw and the pitch alias
+  ---
+  duration_ms: 1.17075
+  type: 'test'
+  ...
+# Subtest: camera reporting rejects missing, repeated and unsupported coordinates
+ok 123 - camera reporting rejects missing, repeated and unsupported coordinates
+  ---
+  duration_ms: 0.300541
+  type: 'test'
+  ...
+# Subtest: an already ready object does not depend on a redundant browser waiter
+not ok 124 - an already ready object does not depend on a redundant browser waiter
+  ---
+  duration_ms: 204.895083
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/object-browser-profile.test.mts:53:1'
+  failureType: 'testCodeFailure'
+  error: 'ryugu: browser profile must declare retained interaction evidence'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    validatePlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:51:10)
+    loadPlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:19:10)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/object-browser-profile.test.mts:55:21)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a missing or loading object still requires successful readiness before returning
+ok 125 - a missing or loading object still requires successful readiness before returning
+  ---
+  duration_ms: 2.240125
+  type: 'test'
+  ...
+# Subtest: the actual Saturn profile observes one exclusive lens and rejects the former dual selection
+ok 126 - the actual Saturn profile observes one exclusive lens and rejects the former dual selection
+  ---
+  duration_ms: 5.110875
+  type: 'test'
+  ...
+# Subtest: camera observations reject missing or non-finite required coordinates
+ok 127 - camera observations reject missing or non-finite required coordinates
+  ---
+  duration_ms: 1.073875
+  type: 'test'
+  ...
+# Subtest: all four type searches and scene highlights contain the same eligible registered objects
+ok 128 - all four type searches and scene highlights contain the same eligible registered objects
+  ---
+  duration_ms: 3.374667
+  type: 'test'
+  ...
+# Subtest: an authored orientation reference passes through discovery as a validated tier
+ok 129 - an authored orientation reference passes through discovery as a validated tier
+  ---
+  duration_ms: 0.429833
+  type: 'test'
+  ...
+# Subtest: only a prepared observation promotes an illustration, without a second flag change
+ok 130 - only a prepared observation promotes an illustration, without a second flag change
+  ---
+  duration_ms: 0.294916
+  type: 'test'
+  ...
+# Subtest: model textures, shape-derived elevation and featured overrides cannot promote an illustration
+ok 131 - model textures, shape-derived elevation and featured overrides cannot promote an illustration
+  ---
+  duration_ms: 0.110959
+  type: 'test'
+  ...
+# Subtest: partial photographic coverage still counts; source and lens counts do not
+ok 132 - partial photographic coverage still counts; source and lens counts do not
+  ---
+  duration_ms: 0.097125
+  type: 'test'
+  ...
+# Subtest: default discovery admits photographed asteroids and hides illustrations across classifications
+ok 133 - default discovery admits photographed asteroids and hides illustrations across classifications
+  ---
+  duration_ms: 0.575416
+  type: 'test'
+  ...
+# Subtest: a star with only its shape stays off the map, whatever the settings
+ok 134 - a star with only its shape stays off the map, whatever the settings
+  ---
+  duration_ms: 10.183333
+  type: 'test'
+  ...
+# Subtest: a shape-only star that a body with imagery orbits stays on the map with its planet
+ok 135 - a shape-only star that a body with imagery orbits stays on the map with its planet
+  ---
+  duration_ms: 0.29675
+  type: 'test'
+  ...
+# Subtest: a star whose colour comes from its own measurements stays on the map
+ok 136 - a star whose colour comes from its own measurements stays on the map
+  ---
+  duration_ms: 0.427167
+  type: 'test'
+  ...
+# Subtest: category browsing and asteroid settings cannot bypass Illustration models
+not ok 137 - category browsing and asteroid settings cannot bypass Illustration models
+  ---
+  duration_ms: 0.714209
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/object-discovery.test.mts:136:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    pallas
+
+    true !== false
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: false
+  actual: true
+  operator: 'strictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/object-discovery.test.mts:143:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: photographic arrivals use the prepared package camera, excluding modeled and unexposed datasets
+not ok 138 - photographic arrivals use the prepared package camera, excluding modeled and unexposed datasets
+  ---
+  duration_ms: 31.558708
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/object-discovery.test.mts:150:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    The expression evaluated to a falsy value:
+
+      assert.ok(Math.abs(rotation[index] - value) < 1e-12)
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    file:///private/tmp/cssearth-pr390/site/test/object-discovery.test.mts:159:57
+    Array.forEach (<anonymous>)
+    TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/object-discovery.test.mts:159:24)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: a package that was never prepared is discoverable as shape only instead of failing the catalogue
+ok 139 - a package that was never prepared is discoverable as shape only instead of failing the catalogue
+  ---
+  duration_ms: 12.366416
+  type: 'test'
+  ...
+# Subtest: search contains every object, including the Sun; only planets enter the scale
+ok 140 - search contains every object, including the Sun; only planets enter the scale
+  ---
+  duration_ms: 1.030042
+  type: 'test'
+  ...
+# Subtest: prepared marker atlases and presentation follow packages
+ok 141 - prepared marker atlases and presentation follow packages
+  ---
+  duration_ms: 887.737834
+  type: 'test'
+  ...
+# Subtest: an unknown object loads its own marker; missing packages fail without fallback
+ok 142 - an unknown object loads its own marker; missing packages fail without fallback
+  ---
+  duration_ms: 733.505166
+  type: 'test'
+  ...
+# Subtest: scale overrides must form a complete presentation after inheritance
+ok 143 - scale overrides must form a complete presentation after inheritance
+  ---
+  duration_ms: 0.488708
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared wheel retires once and disables retained callbacks
+ok 144 - mercury material failure through shared wheel retires once and disables retained callbacks
+  ---
+  duration_ms: 77.254583
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared drag retires once and disables retained callbacks
+ok 145 - mercury material failure through shared drag retires once and disables retained callbacks
+  ---
+  duration_ms: 26.878625
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared resize retires once and disables retained callbacks
+ok 146 - mercury material failure through shared resize retires once and disables retained callbacks
+  ---
+  duration_ms: 225.772708
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared invalidate retires once and disables retained callbacks
+ok 147 - mercury material failure through shared invalidate retires once and disables retained callbacks
+  ---
+  duration_ms: 55.430958
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared refresh retires once and disables retained callbacks
+ok 148 - mercury material failure through shared refresh retires once and disables retained callbacks
+  ---
+  duration_ms: 31.060709
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared setState retires once and disables retained callbacks
+ok 149 - mercury material failure through shared setState retires once and disables retained callbacks
+  ---
+  duration_ms: 42.2135
+  type: 'test'
+  ...
+# Subtest: mercury material failure through shared media-change retires once and disables retained callbacks
+ok 150 - mercury material failure through shared media-change retires once and disables retained callbacks
+  ---
+  duration_ms: 32.738042
+  type: 'test'
+  ...
+# Subtest: mercury initial material failure stops construction before live error reporting
+ok 151 - mercury initial material failure stops construction before live error reporting
+  ---
+  duration_ms: 45.892125
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared wheel retires once and disables retained callbacks
+ok 152 - venus material failure through shared wheel retires once and disables retained callbacks
+  ---
+  duration_ms: 19.854583
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared drag retires once and disables retained callbacks
+ok 153 - venus material failure through shared drag retires once and disables retained callbacks
+  ---
+  duration_ms: 31.423916
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared resize retires once and disables retained callbacks
+ok 154 - venus material failure through shared resize retires once and disables retained callbacks
+  ---
+  duration_ms: 20.789125
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared invalidate retires once and disables retained callbacks
+ok 155 - venus material failure through shared invalidate retires once and disables retained callbacks
+  ---
+  duration_ms: 10.31225
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared refresh retires once and disables retained callbacks
+ok 156 - venus material failure through shared refresh retires once and disables retained callbacks
+  ---
+  duration_ms: 11.345958
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared setState retires once and disables retained callbacks
+ok 157 - venus material failure through shared setState retires once and disables retained callbacks
+  ---
+  duration_ms: 21.690167
+  type: 'test'
+  ...
+# Subtest: venus material failure through shared media-change retires once and disables retained callbacks
+ok 158 - venus material failure through shared media-change retires once and disables retained callbacks
+  ---
+  duration_ms: 49.692291
+  type: 'test'
+  ...
+# Subtest: venus initial material failure stops construction before live error reporting
+ok 159 - venus initial material failure stops construction before live error reporting
+  ---
+  duration_ms: 13.313167
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared wheel retires once and disables retained callbacks
+ok 160 - mars material failure through shared wheel retires once and disables retained callbacks
+  ---
+  duration_ms: 13.28
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared drag retires once and disables retained callbacks
+ok 161 - mars material failure through shared drag retires once and disables retained callbacks
+  ---
+  duration_ms: 10.726875
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared resize retires once and disables retained callbacks
+ok 162 - mars material failure through shared resize retires once and disables retained callbacks
+  ---
+  duration_ms: 12.484625
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared invalidate retires once and disables retained callbacks
+ok 163 - mars material failure through shared invalidate retires once and disables retained callbacks
+  ---
+  duration_ms: 9.784708
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared refresh retires once and disables retained callbacks
+ok 164 - mars material failure through shared refresh retires once and disables retained callbacks
+  ---
+  duration_ms: 9.322583
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared setState retires once and disables retained callbacks
+ok 165 - mars material failure through shared setState retires once and disables retained callbacks
+  ---
+  duration_ms: 19.617291
+  type: 'test'
+  ...
+# Subtest: mars material failure through shared media-change retires once and disables retained callbacks
+ok 166 - mars material failure through shared media-change retires once and disables retained callbacks
+  ---
+  duration_ms: 30.514292
+  type: 'test'
+  ...
+# Subtest: mars initial material failure stops construction before live error reporting
+ok 167 - mars initial material failure stops construction before live error reporting
+  ---
+  duration_ms: 25.730834
+  type: 'test'
+  ...
+# Subtest: accepts a complete non-NASA package and still rejects corrupt or undeclared bytes
+ok 168 - accepts a complete non-NASA package and still rejects corrupt or undeclared bytes
+  ---
+  duration_ms: 61.114791
+  type: 'test'
+  ...
+# Subtest: derives the complete owned file contract from planet identity
+ok 169 - derives the complete owned file contract from planet identity
+  ---
+  duration_ms: 0.265791
+  type: 'test'
+  ...
+# Subtest: requires every registered object package file
+ok 170 - requires every registered object package file
+  ---
+  duration_ms: 1117.32
+  type: 'test'
+  ...
+# Subtest: validates local editorial identity and provenance
+ok 171 - validates local editorial identity and provenance
+  ---
+  duration_ms: 1.219333
+  type: 'test'
+  ...
+# Subtest: validates runtime asset manifest entries
+ok 172 - validates runtime asset manifest entries
+  ---
+  duration_ms: 0.1965
+  type: 'test'
+  ...
+# Subtest: page metadata stays hash-bound to its scene without needing scene bytes during page emission
+ok 173 - page metadata stays hash-bound to its scene without needing scene bytes during page emission
+  ---
+  duration_ms: 24.432875
+  type: 'test'
+  ...
+# Subtest: all registry objects own ordered CSS and scene-bound page metadata
+ok 174 - all registry objects own ordered CSS and scene-bound page metadata
+  ---
+  duration_ms: 3841.606834
+  type: 'test'
+  ...
+# Subtest: generic routes derive membership from SCENE_OBJECTS and never import scene transports
+ok 175 - generic routes derive membership from SCENE_OBJECTS and never import scene transports
+  ---
+  duration_ms: 2.19175
+  type: 'test'
+  ...
+# Subtest: defines one generic renderable-object contract
+ok 176 - defines one generic renderable-object contract
+  ---
+  duration_ms: 0.676583
+  type: 'test'
+  ...
+# Subtest: world-frame capability is validated and copied at the registry boundary
+ok 177 - world-frame capability is validated and copied at the registry boundary
+  ---
+  duration_ms: 4.593625
+  type: 'test'
+  ...
+# Subtest: rejects invalid object definitions and renderer-specific fields
+ok 178 - rejects invalid object definitions and renderer-specific fields
+  ---
+  duration_ms: 0.45975
+  type: 'test'
+  ...
+# Subtest: keeps one open-ended object registry with unique ids and routes
+ok 179 - keeps one open-ended object registry with unique ids and routes
+  ---
+  duration_ms: 1.069333
+  type: 'test'
+  ...
+# Subtest: derives deterministic test discovery from an authored object id
+not ok 180 - derives deterministic test discovery from an authored object id
+  ---
+  duration_ms: 9.428791
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/object-schema.test.mts:131:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    Expected values to be strictly equal:
+    + actual - expected
+
+    + '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-discovery-tcOXq1/tests/objects/unit'
+    - '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-discovery-tcOXq1/tests/objects/unit/fixture'
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-discovery-tcOXq1/tests/objects/unit/fixture'
+  actual: '/var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/cssearth-discovery-tcOXq1/tests/objects/unit'
+  operator: 'strictEqual'
+  stack: |-
+    readDirectory (file:///private/tmp/cssearth-pr390/site/test/object-schema.test.mts:138:16)
+    discoverPlanetTests (file:///private/tmp/cssearth-pr390/tools/run-implemented-planets.mts:47:26)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/object-schema.test.mts:135:5)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: derives shared preparation and external browser scripts from the descriptor
+ok 181 - derives shared preparation and external browser scripts from the descriptor
+  ---
+  duration_ms: 14.128208
+  type: 'test'
+  ...
+# Subtest: planetary systems follow prepared orbit chains to their stars
+ok 182 - planetary systems follow prepared orbit chains to their stars
+  ---
+  duration_ms: 1.439416
+  type: 'test'
+  ...
+# Subtest: a system's exit distance scales the Sun's 100 AU by the prepared framing radius
+ok 183 - a system's exit distance scales the Sun's 100 AU by the prepared framing radius
+  ---
+  duration_ms: 0.073083
+  type: 'test'
+  ...
+# Subtest: every member names its star’s system
+ok 184 - every member names its star’s system
+  ---
+  duration_ms: 0.535292
+  type: 'test'
+  ...
+# Subtest: publishable text covers every dataset, stays within budget and cites catalogued sources
+ok 185 - publishable text covers every dataset, stays within budget and cites catalogued sources
+  ---
+  duration_ms: 1.666333
+  type: 'test'
+  ...
+# Subtest: filler, display words and repeated titles are warnings for a reviewer, not errors
+ok 186 - filler, display words and repeated titles are warnings for a reviewer, not errors
+  ---
+  duration_ms: 3.259875
+  type: 'test'
+  ...
+# Subtest: text shown together may not repeat a sentence or a six-word phrase, including identical blocks
+ok 187 - text shown together may not repeat a sentence or a six-word phrase, including identical blocks
+  ---
+  duration_ms: 1.11475
+  type: 'test'
+  ...
+# Subtest: published text keeps the authored blocks and names the input it was checked from
+ok 188 - published text keeps the authored blocks and names the input it was checked from
+  ---
+  duration_ms: 0.233083
+  type: 'test'
+  ...
+# Subtest: body cards retain overview through small boundary reversals for bodies with and without moons
+ok 189 - body cards retain overview through small boundary reversals for bodies with and without moons
+  ---
+  duration_ms: 0.499917
+  type: 'test'
+  ...
+# Subtest: body cards switch at the shared camera detail threshold, independent of camera aim
+ok 190 - body cards switch at the shared camera detail threshold, independent of camera aim
+  ---
+  duration_ms: 0.520875
+  type: 'test'
+  ...
+# Subtest: overview follows the prepared galaxy fade and restores correctly at maximum zoom
+ok 191 - overview follows the prepared galaxy fade and restores correctly at maximum zoom
+  ---
+  duration_ms: 0.082583
+  type: 'test'
+  ...
+# Subtest: galactic distance is measured from the Sun, independent of selected body and surface radius
+ok 192 - galactic distance is measured from the Sun, independent of selected body and surface radius
+  ---
+  duration_ms: 0.07175
+  type: 'test'
+  ...
+# Subtest: prepared focus distance follows its catalogue position independently of the selected detail and overview scope
+ok 193 - prepared focus distance follows its catalogue position independently of the selected detail and overview scope
+  ---
+  duration_ms: 0.218583
+  type: 'test'
+  ...
+# Subtest: extragalactic overview cards follow zoom with hysteresis and preserve distance meaning
+ok 194 - extragalactic overview cards follow zoom with hysteresis and preserve distance meaning
+  ---
+  duration_ms: 0.1005
+  type: 'test'
+  ...
+# Subtest: every body switches to Solar System at 100 AU from the Sun
+ok 195 - every body switches to Solar System at 100 AU from the Sun
+  ---
+  duration_ms: 5.627333
+  type: 'test'
+  ...
+# Subtest: the threshold follows the Sun origin even in a translated world frame
+ok 196 - the threshold follows the Sun origin even in a translated world frame
+  ---
+  duration_ms: 0.483083
+  type: 'test'
+  ...
+# Subtest: another star's planetary system opens its own overview, scaled by the system's prepared size
+ok 197 - another star's planetary system opens its own overview, scaled by the system's prepared size
+  ---
+  duration_ms: 1.20275
+  type: 'test'
+  ...
+# Subtest: a star outside every system keeps its scene until the camera is as far from it as the Sun is
+ok 198 - a star outside every system keeps its scene until the camera is as far from it as the Sun is
+  ---
+  duration_ms: 0.411333
+  type: 'test'
+  ...
+# Subtest: only approaching the Sun opens a card, with separate entry and exit thresholds
+ok 199 - only approaching the Sun opens a card, with separate entry and exit thresholds
+  ---
+  duration_ms: 0.163709
+  type: 'test'
+  ...
+# Subtest: camera sampling settles before changing selection and releases timers and subscriptions
+ok 200 - camera sampling settles before changing selection and releases timers and subscriptions
+  ---
+  duration_ms: 0.261542
+  type: 'test'
+  ...
+# Subtest: continuous outward camera updates cannot postpone the Sun overview flip
+ok 201 - continuous outward camera updates cannot postpone the Sun overview flip
+  ---
+  duration_ms: 0.79
+  type: 'test'
+  ...
+# file:///private/tmp/cssearth-pr390/site/prepared-context-objects.mts:2
+# export const CONTEXT_OBJECT_DESCRIPTORS                          = import.meta.glob(['../src/objects/betelgeuse-shell/object.json', '../src/objects/galaxy-clusters/object.json', '../src/objects/hd-181327-disc/object.json', '../src/objects/heliosphere/object.json', '../src/objects/helix/object.json', '../src/objects/lmc/object.json', '../src/objects/local-group/object.json', '../src/objects/m1/object.json', '../src/objects/m2-9/object.json', '../src/objects/m31/object.json', '../src/objects/m33/object.json', '../src/objects/m42/object.json', '../src/objects/m45/object.json', '../src/objects/m8/object.json', '../src/objects/milky-way/object.json', '../src/objects/nearby-universe/object.json', '../src/objects/omega-centauri/object.json', '../src/objects/smc/object.json', '../src/objects/stellar-neighbourhood/object.json'], { eager: true, import: 'default' });
+#                                                                                ^
+# TypeError: (intermediate value).glob is not a function
+#     at file:///private/tmp/cssearth-pr390/site/prepared-context-objects.mts:2:80
+#     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+#     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+# Node.js v22.23.2
+# Subtest: site/test/planet-shell.test.mts
+not ok 50 - site/test/planet-shell.test.mts
+  ---
+  duration_ms: 367.977791
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/planet-shell.test.mts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: Node preparation has a closed prepared-data dependency graph
+ok 203 - Node preparation has a closed prepared-data dependency graph
+  ---
+  duration_ms: 200.963875
+  type: 'test'
+  ...
+# Subtest: a saved lens link to an unavailable package still opens its actual catalogue record
+ok 204 - a saved lens link to an unavailable package still opens its actual catalogue record
+  ---
+  duration_ms: 2.056667
+  type: 'test'
+  ...
+# Subtest: a direct focus link without a saved camera frames its target immediately
+ok 205 - a direct focus link without a saved camera frames its target immediately
+  ---
+  duration_ms: 0.31625
+  type: 'test'
+  ...
+# Subtest: a focus link with a saved camera restores selection without reframing
+ok 206 - a focus link with a saved camera restores selection without reframing
+  ---
+  duration_ms: 0.147875
+  type: 'test'
+  ...
+# Subtest: suspension isolates camera restore publications from incoming focus history and cancels an older selection flight
+ok 207 - suspension isolates camera restore publications from incoming focus history and cancels an older selection flight
+  ---
+  duration_ms: 0.390833
+  type: 'test'
+  ...
+# Subtest: an invalid incoming catalogue ID remains available for diagnosis after restoration publications
+ok 208 - an invalid incoming catalogue ID remains available for diagnosis after restoration publications
+  ---
+  duration_ms: 0.206291
+  type: 'test'
+  ...
+# Subtest: an authored framing radius takes precedence over an oversized transparent image frame
+ok 209 - an authored framing radius takes precedence over an oversized transparent image frame
+  ---
+  duration_ms: 0.351834
+  type: 'test'
+  ...
+# Subtest: a cluster focus uses its prepared aperture framing and source without pretending it has galaxy membership
+ok 210 - a cluster focus uses its prepared aperture framing and source without pretending it has galaxy membership
+  ---
+  duration_ms: 0.209667
+  type: 'test'
+  ...
+# Subtest: volume focus uses its authored framing radius before transparent bounds and retains an explicit catalogue override
+ok 211 - volume focus uses its authored framing radius before transparent bounds and retains an explicit catalogue override
+  ---
+  duration_ms: 0.444042
+  type: 'test'
+  ...
+# Subtest: focused lens selection and star visibility follow applied runtime state while URL restore keeps the same camera owner
+ok 212 - focused lens selection and star visibility follow applied runtime state while URL restore keeps the same camera owner
+  ---
+  duration_ms: 0.360667
+  type: 'test'
+  ...
+# Subtest: invalid focused lenses retain their diagnostic URL and never apply an arbitrary bank
+ok 213 - invalid focused lenses retain their diagnostic URL and never apply an arbitrary bank
+  ---
+  duration_ms: 0.367875
+  type: 'test'
+  ...
+# Subtest: a lens query without a focus is removed and focused bank subscriptions are released on destruction
+ok 214 - a lens query without a focus is removed and focused bank subscriptions are released on destruction
+  ---
+  duration_ms: 0.158458
+  type: 'test'
+  ...
+# Subtest: an image-layer focus exposes its single optical dataset without volume-only actions
+ok 215 - an image-layer focus exposes its single optical dataset without volume-only actions
+  ---
+  duration_ms: 0.090708
+  type: 'test'
+  ...
+# Subtest: cold native focus waits for the real bank framing before choosing a destination
+ok 216 - cold native focus waits for the real bank framing before choosing a destination
+  ---
+  duration_ms: 0.203334
+  type: 'test'
+  ...
+# Subtest: ordinary cold selection waits for the same authored framing and cancellation prevents stale focus
+ok 217 - ordinary cold selection waits for the same authored framing and cancellation prevents stale focus
+  ---
+  duration_ms: 4.117209
+  type: 'test'
+  ...
+# Subtest: cold saved camera keeps its pose while waiting for an explicitly selected lens
+ok 218 - cold saved camera keeps its pose while waiting for an explicitly selected lens
+  ---
+  duration_ms: 0.30025
+  type: 'test'
+  ...
+# Subtest: a failed bank load reports its actual error and never falls back to an inaccurate destination
+ok 219 - a failed bank load reports its actual error and never falls back to an inaccurate destination
+  ---
+  duration_ms: 0.110458
+  type: 'test'
+  ...
+# Subtest: a later saved restore supersedes a pending native focus without a delayed flight
+ok 220 - a later saved restore supersedes a pending native focus without a delayed flight
+  ---
+  duration_ms: 0.146292
+  type: 'test'
+  ...
+# Subtest: shared context receives the exact authoritative focus on restore, switch and clear
+ok 221 - shared context receives the exact authoritative focus on restore, switch and clear
+  ---
+  duration_ms: 0.212042
+  type: 'test'
+  ...
+# Subtest: reads the validated descriptor embedded in an object page
+ok 222 - reads the validated descriptor embedded in an object page
+  ---
+  duration_ms: 1.058917
+  type: 'test'
+  ...
+# Subtest: publishes the retained document descriptor after navigation
+ok 223 - publishes the retained document descriptor after navigation
+  ---
+  duration_ms: 0.176709
+  type: 'test'
+  ...
+# Subtest: allows descriptor-free unit documents but refuses to publish into one
+ok 224 - allows descriptor-free unit documents but refuses to publish into one
+  ---
+  duration_ms: 0.088
+  type: 'test'
+  ...
+# Subtest: keeps every planet factsheet comparable and concise
+not ok 225 - keeps every planet factsheet comparable and concise
+  ---
+  duration_ms: 1.675584
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/prepared-factsheet-model.test.mts:62:1'
+  failureType: 'testCodeFailure'
+  error: |-
+    mercury core facts
+    + actual - expected
+
+      [
+        'distance-from-sun',
+        'radius',
+        'orbital-period',
+        'rotation-period',
+        'axial-tilt',
+    -   'moon-count',
+    -   'ring-system'
+      ]
+
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected:
+    0: 'distance-from-sun'
+    1: 'radius'
+    2: 'orbital-period'
+    3: 'rotation-period'
+    4: 'axial-tilt'
+    5: 'moon-count'
+    6: 'ring-system'
+  actual:
+    0: 'distance-from-sun'
+    1: 'radius'
+    2: 'orbital-period'
+    3: 'rotation-period'
+    4: 'axial-tilt'
+  operator: 'deepStrictEqual'
+  stack: |-
+    TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/prepared-factsheet-model.test.mts:64:12)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: uses unique semantic ids without hidden title-only content
+ok 226 - uses unique semantic ids without hidden title-only content
+  ---
+  duration_ms: 0.378958
+  type: 'test'
+  ...
+# Subtest: keeps Pluto concise and removes lens-presentation rows
+ok 227 - keeps Pluto concise and removes lens-presentation rows
+  ---
+  duration_ms: 0.121
+  type: 'test'
+  ...
+# Subtest: keeps object-internal identifiers out of the Moon factsheet
+ok 228 - keeps object-internal identifiers out of the Moon factsheet
+  ---
+  duration_ms: 0.077125
+  type: 'test'
+  ...
+# Subtest: an unavailable volume keeps catalogue facts and a retained explanation, without stale dataset controls
+ok 229 - an unavailable volume keeps catalogue facts and a retained explanation, without stale dataset controls
+  ---
+  duration_ms: 1.450875
+  type: 'test'
+  ...
+# Subtest: prepared focus lenses retain controls and reflect only the applied runtime selection
+ok 230 - prepared focus lenses retain controls and reflect only the applied runtime selection
+  ---
+  duration_ms: 0.918625
+  type: 'test'
+  ...
+# Subtest: departed or unsupported galaxy focus hides its retained lens bank and disables stale actions
+ok 231 - departed or unsupported galaxy focus hides its retained lens bank and disables stale actions
+  ---
+  duration_ms: 0.91725
+  type: 'test'
+  ...
+# Subtest: a nebula focus displays its actual classification and preserves the shared lens controls
+ok 232 - a nebula focus displays its actual classification and preserves the shared lens controls
+  ---
+  duration_ms: 0.227625
+  type: 'test'
+  ...
+# Subtest: a globular-cluster focus keeps its stellar classification and the shared lens controls
+ok 233 - a globular-cluster focus keeps its stellar classification and the shared lens controls
+  ---
+  duration_ms: 0.187791
+  type: 'test'
+  ...
+# Subtest: focus uses shared dataset tabs only when a prepared presentation is available
+ok 234 - focus uses shared dataset tabs only when a prepared presentation is available
+  ---
+  duration_ms: 0.121875
+  type: 'test'
+  ...
+# Subtest: prepares one source-bound 20px SVG family for sidebar sections
+ok 235 - prepares one source-bound 20px SVG family for sidebar sections
+  ---
+  duration_ms: 23.744042
+  type: 'test'
+  ...
+# Subtest: authored lens facts survive preparation and runtime publication without mutating the source
+ok 236 - authored lens facts survive preparation and runtime publication without mutating the source
+  ---
+  duration_ms: 14.720333
+  type: 'test'
+  ...
+# Subtest: lens facts reject malformed rows and duplicate ids before publication
+ok 237 - lens facts reject malformed rows and duplicate ids before publication
+  ---
+  duration_ms: 12.532708
+  type: 'test'
+  ...
+# Subtest: lenses without facts publish none, and no lens carries reader text
+ok 238 - lenses without facts publish none, and no lens carries reader text
+  ---
+  duration_ms: 5.966041
+  type: 'test'
+  ...
+# Subtest: names arbitrary lens IDs without changing source data or assuming a fixed set of concepts
+ok 239 - names arbitrary lens IDs without changing source data or assuming a fixed set of concepts
+  ---
+  duration_ms: 1.388416
+  type: 'test'
+  ...
+# Subtest: prepares a frozen, smoothly sampled scale legend
+ok 240 - prepares a frozen, smoothly sampled scale legend
+  ---
+  duration_ms: 0.681042
+  type: 'test'
+  ...
+# Subtest: prepares source-backed category legends from hex and RGB colors
+ok 241 - prepares source-backed category legends from hex and RGB colors
+  ---
+  duration_ms: 0.454417
+  type: 'test'
+  ...
+# Subtest: rejects invalid scale palettes
+ok 242 - rejects invalid scale palettes
+  ---
+  duration_ms: 0.193208
+  type: 'test'
+  ...
+# Subtest: named categories can omit a redundant description while supplied descriptions stay validated
+ok 243 - named categories can omit a redundant description while supplied descriptions stay validated
+  ---
+  duration_ms: 0.176167
+  type: 'test'
+  ...
+# Subtest: every object forwards its object-owned legend through the shared shell
+not ok 244 - every object forwards its object-owned legend through the shared shell
+  ---
+  duration_ms: 96.342375
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/prepared-lens-legends.test.mts:72:1'
+  failureType: 'testCodeFailure'
+  error: "ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/src/objects/a0952p69/object.json'"
+  code: 'ENOENT'
+  stack: |-
+    async open (node:internal/fs/promises:639:25)
+    async readFile (node:internal/fs/promises:1252:14)
+    async readJson (file:///private/tmp/cssearth-pr390/site/test/load-object-content.mts:29:73)
+    async loadObjectContent (file:///private/tmp/cssearth-pr390/site/test/load-object-content.mts:30:40)
+    async file:///private/tmp/cssearth-pr390/site/test/prepared-lens-legends.test.mts:74:20
+    async Promise.all (index 496)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/prepared-lens-legends.test.mts:73:3)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# Subtest: every registered scene supplies typed shared panel content and controls
+ok 245 - every registered scene supplies typed shared panel content and controls
+  ---
+  duration_ms: 430.979709
+  type: 'test'
+  ...
+# Subtest: unknown panel values are rejected before they can claim rendered field types
+ok 246 - unknown panel values are rejected before they can claim rendered field types
+  ---
+  duration_ms: 1.618791
+  type: 'test'
+  ...
+# Subtest: generates all shared title assets once from checked source vectors
+ok 247 - generates all shared title assets once from checked source vectors
+  ---
+  duration_ms: 36.698584
+  type: 'test'
+  ...
+# Subtest: keeps planet title rendering facts object-owned and source-bound
+ok 248 - keeps planet title rendering facts object-owned and source-bound
+  ---
+  duration_ms: 3412.110917
+  type: 'test'
+  ...
+# Subtest: normalizes every implemented planet title to the complete Saturn standard
+ok 249 - normalizes every implemented planet title to the complete Saturn standard
+  ---
+  duration_ms: 1113.7985
+  type: 'test'
+  ...
+# Subtest: scene selection and cross-object flight use the prepared photographic face
+ok 250 - scene selection and cross-object flight use the prepared photographic face
+  ---
+  duration_ms: 79.852375
+  type: 'test'
+  ...
+# Subtest: saved views and explicit non-photographic datasets keep their requested direction
+ok 251 - saved views and explicit non-photographic datasets keep their requested direction
+  ---
+  duration_ms: 91.06975
+  type: 'test'
+  ...
+# Subtest: a prepared photographic angle never rotates a system overview or an explicit target
+ok 252 - a prepared photographic angle never rotates a system overview or an explicit target
+  ---
+  duration_ms: 50.269542
+  type: 'test'
+  ...
+# Subtest: a falsy camera publication failure rejects and releases native flight listeners
+ok 253 - a falsy camera publication failure rejects and releases native flight listeners
+  ---
+  duration_ms: 1.298333
+  type: 'test'
+  ...
+# Subtest: a terminal extreme-range pose finishes without a tail of identical publications
+ok 254 - a terminal extreme-range pose finishes without a tail of identical publications
+  ---
+  duration_ms: 59.371125
+  type: 'test'
+  ...
+# Subtest: a long fly-to ends once its remaining approach no longer moves the body on screen
+ok 255 - a long fly-to ends once its remaining approach no longer moves the body on screen
+  ---
+  duration_ms: 30.785541
+  type: 'test'
+  ...
+# Subtest: a short center selection slows into its target instead of stopping at full speed
+ok 256 - a short center selection slows into its target instead of stopping at full speed
+  ---
+  duration_ms: 46.463333
+  type: 'test'
+  ...
+# Subtest: small bodies and planets grow through a readable close-up at both 60 and 120 Hz
+ok 257 - small bodies and planets grow through a readable close-up at both 60 and 120 Hz
+  ---
+  duration_ms: 406.956625
+  type: 'test'
+  ...
+# Subtest: the exact final camera demand finishes before the old scene is handed off
+ok 258 - the exact final camera demand finishes before the old scene is handed off
+  ---
+  duration_ms: 2.650875
+  type: 'test'
+  ...
+# Subtest: an overview starts moving before factory and assets are ready, then holds before target detail
+ok 259 - an overview starts moving before factory and assets are ready, then holds before target detail
+  ---
+  duration_ms: 15.470209
+  type: 'test'
+  ...
+# Subtest: overview preserves the latest drawn camera through slow preparation, without a flight or input interception
+ok 260 - overview preserves the latest drawn camera through slow preparation, without a flight or input interception
+  ---
+  duration_ms: 0.555417
+  type: 'test'
+  ...
+# Subtest: a cancelled preserved-view handoff releases its unmounted resources
+ok 261 - a cancelled preserved-view handoff releases its unmounted resources
+  ---
+  duration_ms: 0.180583
+  type: 'test'
+  ...
+# Subtest: an animated handoff transfers prepared cleanup to the scene and detaches request ownership
+ok 262 - an animated handoff transfers prepared cleanup to the scene and detaches request ownership
+  ---
+  duration_ms: 20.796542
+  type: 'test'
+  ...
+# Subtest: overview handoff uses the requested distant camera instead of flying into the Sun
+ok 263 - overview handoff uses the requested distant camera instead of flying into the Sun
+  ---
+  duration_ms: 11.938625
+  type: 'test'
+  ...
+# Subtest: the same object can recenter at overview distance without resetting to its close-up
+ok 264 - the same object can recenter at overview distance without resetting to its close-up
+  ---
+  duration_ms: 21.898458
+  type: 'test'
+  ...
+# Subtest: ordinary planet selection clears a prepared catalogue pivot for both same-owner focus and detail handoff
+ok 265 - ordinary planet selection clears a prepared catalogue pivot for both same-owner focus and detail handoff
+  ---
+  duration_ms: 0.835375
+  type: 'test'
+  ...
+# Subtest: handoff precedes large destination approach and continues the same numeric flight from the exact drawn checkpoint
+ok 266 - handoff precedes large destination approach and continues the same numeric flight from the exact drawn checkpoint
+  ---
+  duration_ms: 39.254625
+  type: 'test'
+  ...
+# Subtest: slow asset preparation holds only the distant checkpoint and resumes after readiness
+ok 267 - slow asset preparation holds only the distant checkpoint and resumes after readiness
+  ---
+  duration_ms: 21.206542
+  type: 'test'
+  ...
+# Subtest: new selection cancellation stops painting and releases destination preparation
+ok 268 - new selection cancellation stops painting and releases destination preparation
+  ---
+  duration_ms: 0.721875
+  type: 'test'
+  ...
+# Subtest: cancellation between prepared handoff and mount releases resources and all interruption listeners
+ok 269 - cancellation between prepared handoff and mount releases resources and all interruption listeners
+  ---
+  duration_ms: 3.846834
+  type: 'test'
+  ...
+# Subtest: input between handoff and mount keeps the prepared lease for the mount to claim
+ok 270 - input between handoff and mount keeps the prepared lease for the mount to claim
+  ---
+  duration_ms: 3.998792
+  type: 'test'
+  ...
+# Subtest: an already cancelled request cannot start a frame or retain input listeners
+ok 271 - an already cancelled request cannot start a frame or retain input listeners
+  ---
+  duration_ms: 0.463625
+  type: 'test'
+  ...
+# Subtest: input during a delayed preparation interrupts at the last drawn checkpoint and releases late resources
+ok 272 - input during a delayed preparation interrupts at the last drawn checkpoint and releases late resources
+  ---
+  duration_ms: 15.029792
+  type: 'test'
+  ...
+# Subtest: input after the early handoff hurries between bodies, then preserves the drawn approach pose
+ok 273 - input after the early handoff hurries between bodies, then preserves the drawn approach pose
+  ---
+  duration_ms: 14.320542
+  type: 'test'
+  ...
+# Subtest: reduced motion waits for preparation, then mounts the exact arrival without enlarging a source proxy
+ok 274 - reduced motion waits for preparation, then mounts the exact arrival without enlarging a source proxy
+  ---
+  duration_ms: 0.299209
+  type: 'test'
+  ...
+# Subtest: saved camera endpoints survive the early owner handoff unchanged
+ok 275 - saved camera endpoints survive the early owner handoff unchanged
+  ---
+  duration_ms: 59.623208
+  type: 'test'
+  ...
+# Subtest: refocusing the selected object paints one existing owner without reloading its prepared bank
+ok 276 - refocusing the selected object paints one existing owner without reloading its prepared bank
+  ---
+  duration_ms: 11.392583
+  type: 'test'
+  ...
+# Subtest: the application keeps flying while destination groups activate, then transfers the live pose without a reset
+ok 277 - the application keeps flying while destination groups activate, then transfers the live pose without a reset
+  ---
+  duration_ms: 19.780291
+  type: 'test'
+  ...
+# Subtest: cancellation during connected activation stops the application flight and releases its resources
+ok 278 - cancellation during connected activation stops the application flight and releases its resources
+  ---
+  duration_ms: 2.427541
+  type: 'test'
+  ...
+# Subtest: an activating detail waits for its world publication and interruption preserves the last acknowledged pose
+ok 279 - an activating detail waits for its world publication and interruption preserves the last acknowledged pose
+  ---
+  duration_ms: 8.232667
+  type: 'test'
+  ...
+# Subtest: real input interrupts a same-object focus at the last painted camera
+ok 280 - real input interrupts a same-object focus at the last painted camera
+  ---
+  duration_ms: 0.280875
+  type: 'test'
+  ...
+# Subtest: replacement departure uses the retained world while its previous detail owner is retired
+ok 281 - replacement departure uses the retained world while its previous detail owner is retired
+  ---
+  duration_ms: 15.573542
+  type: 'test'
+  ...
+# Subtest: the current body accepts wide-view centering only while below its prepared detail threshold
+ok 282 - the current body accepts wide-view centering only while below its prepared detail threshold
+  ---
+  duration_ms: 0.2515
+  type: 'test'
+  ...
+# Subtest: centering changes the focus at the same range and orientation, then focus zooms in
+ok 283 - centering changes the focus at the same range and orientation, then focus zooms in
+  ---
+  duration_ms: 73.334833
+  type: 'test'
+  ...
+# Subtest: a wheel during a flight hurries the arrival instead of stopping it
+ok 284 - a wheel during a flight hurries the arrival instead of stopping it
+  ---
+  duration_ms: 24.544334
+  type: 'test'
+  ...
+# Subtest: a wheel, click or key between bodies hurries a prepared navigation to the destination instead of abandoning it
+ok 285 - a wheel, click or key between bodies hurries a prepared navigation to the destination instead of abandoning it
+  ---
+  duration_ms: 100.570958
+  type: 'test'
+  ...
+# Subtest: production runtime removes development observations from the executable closure
+ok 286 - production runtime removes development observations from the executable closure
+  ---
+  duration_ms: 1724.358292
+  type: 'test'
+  ...
+# node:internal/modules/run_main:123
+#     triggerUncaughtException(
+#     ^
+# AssertionError [ERR_ASSERTION]: jupiter: seam parameters must generate the actual leaves
+# + actual - expected
+# ... Skipped lines
+#   {
+#     leaves: [
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 0,
+# ...
+#     ],
+# -   worldFrame: {
+# -     bodyRadiusM: 71492000,
+# -     epochJdTt: 2461286.5,
+# -     metersPerUnit: 282577.07509881427,
+# -     orbitUpReference: [
+# -       0,
+# -       -0.39777715593191376,
+# -       0.9174820620691818
+# -     ],
+# -     originM: [
+# -       -497567591648.3631,
+# -       562510993077.0295,
+# -       253219020779.19708
+# -     ],
+# -     presentationToReference: [
+# -       0.8226442516224385,
+# -       0.5683180715506297,
+# -       0.016462224076079956,
+# -       0.5079295291100077,
+# -       -0.7216050113418623,
+# -       -0.47041875075765904,
+# -       0.25546825386071725,
+# -       -0.39534893088926354,
+# -       0.8822897449897467
+# -     ],
+# -     referenceFrame: 'sun-icrf'
+# -   }
+#   }
+#     at file:///private/tmp/cssearth-pr390/site/test/projective-surface-seam-contract.test.mts:46:12 {
+#   generatedMessage: false,
+#   code: 'ERR_ASSERTION',
+#   actual: {
+#     leaves: [
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 0,
+#         tag: 's',
+#         style: 'transform:matrix3d(12.593394,-1.240342,0,0,0.014782,0.15012,281.621272,-0.025628,0.019205,0.194991,-0.980617,0,-8.377689,1980.5914,-10593.282539,1);width:32px;height:11.3778px;background-position:-8px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.1483485,-0.3100855,0,0,-0.04998035342300001,12.7271790998,2.534156772626986,0,0.019205,0.194991,-0.980617,0,-8.377689,1980.5914,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 1,
+#         tag: 's',
+#         style: 'transform:matrix3d(12.109438,-3.673358,0,0,0.043784,0.144348,281.621272,-0.025628,0.056877,0.187498,-0.980617,0,378.1775,1944.169297,-10593.282539,1);width:32px;height:11.3778px;background-position:-40px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.0273595,-0.9183395,0,0,2.4339292425000005,12.492379685879,2.534156772626986,0,0.056877,0.187498,-0.980617,0,378.1775,1944.169297,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 2,
+#         tag: 's',
+#         style: 'transform:matrix3d(11.160122,-5.96521,0,0,0.071106,0.133032,281.621272,-0.025628,0.092363,0.172799,-0.980617,0,750.199539,1833.033859,-10593.282539,1);width:32px;height:11.3778px;background-position:-72px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.7900305,-1.4913025,0,0,4.824304946373,11.777505934613,2.534156772626986,0,0.092363,0.172799,-0.980617,0,750.199539,1833.033859,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 3,
+#         tag: 's',
+#         style: 'transform:matrix3d(9.781928,-8.02782,0,0,0.095692,0.116606,281.621272,-0.025628,0.1243,0.15146,-0.980617,0,1093.391831,1651.455958,-10593.282539,1);width:32px;height:11.3778px;background-position:-104px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.445482,-2.006955,0,0,7.029284461216999,10.610029822906,2.534156772626986,0,0.1243,0.15146,-0.980617,0,1093.391831,1651.455958,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 4,
+#         tag: 's',
+#         style: 'transform:matrix3d(8.02782,-9.781928,0,0,0.116606,0.095692,281.621272,-0.025628,0.15146,0.1243,-0.980617,0,1394.565689,1406.41353,-10593.282539,1);width:32px;height:11.3778px;background-position:-136px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.006955,-2.445482,0,0,8.964133869423,9.034814486710001,2.534156772626986,0,0.15146,0.1243,-0.980617,0,1394.565689,1406.41353,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 5,
+#         tag: 's',
+#         style: 'transform:matrix3d(5.96521,-11.160122,0,0,0.133032,0.071106,281.621272,-0.025628,0.172799,0.092363,-0.980617,0,1642.147169,1107.323419,-10593.282539,1);width:32px;height:11.3778px;background-position:-168px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '1.4913025,-2.7900305,0,0,10.554494911783001,7.112397645533001,2.534156772626986,0,0.172799,0.092363,-0.980617,0,1642.147169,1107.323419,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 6,
+#         tag: 's',
+#         style: 'transform:matrix3d(3.673358,-12.109438,0,0,0.144348,0.043784,281.621272,-0.025628,0.187498,0.056877,-0.980617,0,1826.621854,765.679491,-10593.282539,1);width:32px;height:11.3778px;background-position:-200px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.9183395,-3.0273595,0,0,11.739253218578002,4.916654498837,2.534156772626986,0,0.187498,0.056877,-0.980617,0,1826.621854,765.679491,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 7,
+#         tag: 's',
+#         style: 'transform:matrix3d(1.240342,-12.593394,0,0,0.15012,0.014782,281.621272,-0.025628,0.194991,0.019205,-0.980617,0,1940.900485,394.610928,-10593.282539,1);width:32px;height:11.3778px;background-position:-232px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.3100855,-3.1483485,0,0,12.472879407395,2.531967715696,2.534156772626986,0,0.194991,0.019205,-0.980617,0,1940.900485,394.610928,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 8,
+#         tag: 's',
+#         style: 'transform:matrix3d(-1.240342,-12.593394,0,0,0.15012,-0.014782,281.621272,-0.025628,0.194991,-0.019205,-0.980617,0,1980.5914,8.377689,-10593.282539,1);width:32px;height:11.3778px;background-position:-264px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.3100855,-3.1483485,0,0,12.7271790998,0.04998035342300001,2.534156772626986,0,0.194991,-0.019205,-0.980617,0,1980.5914,8.377689,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 9,
+#         tag: 's',
+#         style: 'transform:matrix3d(-3.673358,-12.109438,0,0,0.144348,-0.043784,281.621272,-0.025628,0.187498,-0.056877,-0.980617,0,1944.169297,-378.1775,-10593.282539,1);width:32px;height:11.3778px;background-position:-296px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.9183395,-3.0273595,0,0,12.492379685879,-2.4339292425000005,2.534156772626986,0,0.187498,-0.056877,-0.980617,0,1944.169297,-378.1775,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 10,
+#         tag: 's',
+#         style: 'transform:matrix3d(-5.96521,-11.160122,0,0,0.133032,-0.071106,281.621272,-0.025628,0.172799,-0.092363,-0.980617,0,1833.033859,-750.199539,-10593.282539,1);width:32px;height:11.3778px;background-position:-328px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-1.4913025,-2.7900305,0,0,11.777505934613,-4.824304946373,2.534156772626986,0,0.172799,-0.092363,-0.980617,0,1833.033859,-750.199539,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 11,
+#         tag: 's',
+#         style: 'transform:matrix3d(-8.02782,-9.781928,0,0,0.116606,-0.095692,281.621272,-0.025628,0.15146,-0.1243,-0.980617,0,1651.455958,-1093.391831,-10593.282539,1);width:32px;height:11.3778px;background-position:-360px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.006955,-2.445482,0,0,10.610029822906,-7.029284461216999,2.534156772626986,0,0.15146,-0.1243,-0.980617,0,1651.455958,-1093.391831,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 12,
+#         tag: 's',
+#         style: 'transform:matrix3d(-9.781928,-8.02782,0,0,0.095692,-0.116606,281.621272,-0.025628,0.1243,-0.15146,-0.980617,0,1406.41353,-1394.565689,-10593.282539,1);width:32px;height:11.3778px;background-position:-392px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.445482,-2.006955,0,0,9.034814486710001,-8.964133869423,2.534156772626986,0,0.1243,-0.15146,-0.980617,0,1406.41353,-1394.565689,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 13,
+#         tag: 's',
+#         style: 'transform:matrix3d(-11.160122,-5.96521,0,0,0.071106,-0.133032,281.621272,-0.025628,0.092363,-0.172799,-0.980617,0,1107.323419,-1642.147169,-10593.282539,1);width:32px;height:11.3778px;background-position:-424px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.7900305,-1.4913025,0,0,7.112397645533001,-10.554494911783001,2.534156772626986,0,0.092363,-0.172799,-0.980617,0,1107.323419,-1642.147169,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 14,
+#         tag: 's',
+#         style: 'transform:matrix3d(-12.109438,-3.673358,0,0,0.043784,-0.144348,281.621272,-0.025628,0.056877,-0.187498,-0.980617,0,765.679491,-1826.621854,-10593.282539,1);width:32px;height:11.3778px;background-position:-456px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.0273595,-0.9183395,0,0,4.916654498837,-11.739253218578002,2.534156772626986,0,0.056877,-0.187498,-0.980617,0,765.679491,-1826.621854,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 15,
+#         tag: 's',
+#         style: 'transform:matrix3d(-12.593394,-1.240342,0,0,0.014782,-0.15012,281.621272,-0.025628,0.019205,-0.194991,-0.980617,0,394.610928,-1940.900485,-10593.282539,1);width:32px;height:11.3778px;background-position:-488px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.1483485,-0.3100855,0,0,2.531967715696,-12.472879407395,2.534156772626986,0,0.019205,-0.194991,-0.980617,0,394.610928,-1940.900485,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 16,
+#         tag: 's',
+#         style: 'transform:matrix3d(-12.593394,1.240342,0,0,-0.014782,-0.15012,281.621272,-0.025628,-0.019205,-0.194991,-0.980617,0,8.377689,-1980.5914,-10593.282539,1);width:32px;height:11.3778px;background-position:-520px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.1483485,0.3100855,0,0,0.04998035342300001,-12.7271790998,2.534156772626986,0,-0.019205,-0.194991,-0.980617,0,8.377689,-1980.5914,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 17,
+#         tag: 's',
+#         style: 'transform:matrix3d(-12.109438,3.673358,0,0,-0.043784,-0.144348,281.621272,-0.025628,-0.056877,-0.187498,-0.980617,0,-378.1775,-1944.169297,-10593.282539,1);width:32px;height:11.3778px;background-position:-552px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.0273595,0.9183395,0,0,-2.4339292425000005,-12.492379685879,2.534156772626986,0,-0.056877,-0.187498,-0.980617,0,-378.1775,-1944.169297,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 18,
+#         tag: 's',
+#         style: 'transform:matrix3d(-11.160122,5.96521,0,0,-0.071106,-0.133032,281.621272,-0.025628,-0.092363,-0.172799,-0.980617,0,-750.199539,-1833.033859,-10593.282539,1);width:32px;height:11.3778px;background-position:-584px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.7900305,1.4913025,0,0,-4.824304946373,-11.777505934613,2.534156772626986,0,-0.092363,-0.172799,-0.980617,0,-750.199539,-1833.033859,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 19,
+#         tag: 's',
+#         style: 'transform:matrix3d(-9.781928,8.02782,0,0,-0.095692,-0.116606,281.621272,-0.025628,-0.1243,-0.15146,-0.980617,0,-1093.391831,-1651.455958,-10593.282539,1);width:32px;height:11.3778px;background-position:-616px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.445482,2.006955,0,0,-7.029284461216999,-10.610029822906,2.534156772626986,0,-0.1243,-0.15146,-0.980617,0,-1093.391831,-1651.455958,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 20,
+#         tag: 's',
+#         style: 'transform:matrix3d(-8.02782,9.781928,0,0,-0.116606,-0.095692,281.621272,-0.025628,-0.15146,-0.1243,-0.980617,0,-1394.565689,-1406.41353,-10593.282539,1);width:32px;height:11.3778px;background-position:-648px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.006955,2.445482,0,0,-8.964133869423,-9.034814486710001,2.534156772626986,0,-0.15146,-0.1243,-0.980617,0,-1394.565689,-1406.41353,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 21,
+#         tag: 's',
+#         style: 'transform:matrix3d(-5.96521,11.160122,0,0,-0.133032,-0.071106,281.621272,-0.025628,-0.172799,-0.092363,-0.980617,0,-1642.147169,-1107.323419,-10593.282539,1);width:32px;height:11.3778px;background-position:-680px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-1.4913025,2.7900305,0,0,-10.554494911783001,-7.112397645533001,2.534156772626986,0,-0.172799,-0.092363,-0.980617,0,-1642.147169,-1107.323419,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 22,
+#         tag: 's',
+#         style: 'transform:matrix3d(-3.673358,12.109438,0,0,-0.144348,-0.043784,281.621272,-0.025628,-0.187498,-0.056877,-0.980617,0,-1826.621854,-765.679491,-10593.282539,1);width:32px;height:11.3778px;background-position:-712px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.9183395,3.0273595,0,0,-11.739253218578002,-4.916654498837,2.534156772626986,0,-0.187498,-0.056877,-0.980617,0,-1826.621854,-765.679491,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 23,
+#         tag: 's',
+#         style: 'transform:matrix3d(-1.240342,12.593394,0,0,-0.15012,-0.014782,281.621272,-0.025628,-0.194991,-0.019205,-0.980617,0,-1940.900485,-394.610928,-10593.282539,1);width:32px;height:11.3778px;background-position:-744px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.3100855,3.1483485,0,0,-12.472879407395,-2.531967715696,2.534156772626986,0,-0.194991,-0.019205,-0.980617,0,-1940.900485,-394.610928,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 24,
+#         tag: 's',
+#         style: 'transform:matrix3d(1.240342,12.593394,0,0,-0.15012,0.014782,281.621272,-0.025628,-0.194991,0.019205,-0.980617,0,-1980.5914,-8.377689,-10593.282539,1);width:32px;height:11.3778px;background-position:-776px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.3100855,3.1483485,0,0,-12.7271790998,-0.04998035342300001,2.534156772626986,0,-0.194991,0.019205,-0.980617,0,-1980.5914,-8.377689,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 25,
+#         tag: 's',
+#         style: 'transform:matrix3d(3.673358,12.109438,0,0,-0.144348,0.043784,281.621272,-0.025628,-0.187498,0.056877,-0.980617,0,-1944.169297,378.1775,-10593.282539,1);width:32px;height:11.3778px;background-position:-808px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.9183395,3.0273595,0,0,-12.492379685879,2.4339292425000005,2.534156772626986,0,-0.187498,0.056877,-0.980617,0,-1944.169297,378.1775,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 26,
+#         tag: 's',
+#         style: 'transform:matrix3d(5.96521,11.160122,0,0,-0.133032,0.071106,281.621272,-0.025628,-0.172799,0.092363,-0.980617,0,-1833.033859,750.199539,-10593.282539,1);width:32px;height:11.3778px;background-position:-840px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '1.4913025,2.7900305,0,0,-11.777505934613,4.824304946373,2.534156772626986,0,-0.172799,0.092363,-0.980617,0,-1833.033859,750.199539,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 27,
+#         tag: 's',
+#         style: 'transform:matrix3d(8.02782,9.781928,0,0,-0.116606,0.095692,281.621272,-0.025628,-0.15146,0.1243,-0.980617,0,-1651.455958,1093.391831,-10593.282539,1);width:32px;height:11.3778px;background-position:-872px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.006955,2.445482,0,0,-10.610029822906,7.029284461216999,2.534156772626986,0,-0.15146,0.1243,-0.980617,0,-1651.455958,1093.391831,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 28,
+#         tag: 's',
+#         style: 'transform:matrix3d(9.781928,8.02782,0,0,-0.095692,0.116606,281.621272,-0.025628,-0.1243,0.15146,-0.980617,0,-1406.41353,1394.565689,-10593.282539,1);width:32px;height:11.3778px;background-position:-904px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.445482,2.006955,0,0,-9.034814486710001,8.964133869423,2.534156772626986,0,-0.1243,0.15146,-0.980617,0,-1406.41353,1394.565689,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 29,
+#         tag: 's',
+#         style: 'transform:matrix3d(11.160122,5.96521,0,0,-0.071106,0.133032,281.621272,-0.025628,-0.092363,0.172799,-0.980617,0,-1107.323419,1642.147169,-10593.282539,1);width:32px;height:11.3778px;background-position:-936px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.7900305,1.4913025,0,0,-7.112397645533001,10.554494911783001,2.534156772626986,0,-0.092363,0.172799,-0.980617,0,-1107.323419,1642.147169,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 30,
+#         tag: 's',
+#         style: 'transform:matrix3d(12.109438,3.673358,0,0,-0.043784,0.144348,281.621272,-0.025628,-0.056877,0.187498,-0.980617,0,-765.679491,1826.621854,-10593.282539,1);width:32px;height:11.3778px;background-position:-968px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.0273595,0.9183395,0,0,-4.916654498837,11.739253218578002,2.534156772626986,0,-0.056877,0.187498,-0.980617,0,-765.679491,1826.621854,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 1,
+#         longitudeIndex: 31,
+#         tag: 's',
+#         style: 'transform:matrix3d(12.593394,1.240342,0,0,-0.014782,0.15012,281.621272,-0.025628,-0.019205,0.194991,-0.980617,0,-394.610928,1940.900485,-10593.282539,1);width:32px;height:11.3778px;background-position:-1000px -8.1778px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.1483485,0.3100855,0,0,-2.531967715696,12.472879407395,2.534156772626986,0,-0.019205,0.194991,-0.980617,0,-394.610928,1940.900485,-10593.282539,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.006407,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 0,
+#         tag: 's',
+#         style: 'transform:matrix3d(17.572444,-1.730734,0,0,0.011396,0.115684,220.880172,-0.019756,0.02551,0.259005,-0.965539,0,-11.461806,2765.97444,-10438.284908,1);width:32px;height:11.3778px;background-position:-8px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '4.393111,-0.4326835,0,0,-0.053760859833999995,13.690068759159999,3.665353839388004,0,0.02551,0.259005,-0.965539,0,-11.461806,2765.97444,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 1,
+#         tag: 's',
+#         style: 'transform:matrix3d(16.897146,-5.125692,0,0,0.033744,0.11124,220.880172,-0.019756,0.075549,0.249051,-0.965539,0,528.373274,2715.063104,-10438.284908,1);width:32px;height:11.3778px;background-position:-40px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '4.2242865,-1.281423,0,0,2.618071600286,13.437506670656,3.665353839388004,0,0.075549,0.249051,-0.965539,0,528.373274,2715.063104,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 2,
+#         tag: 's',
+#         style: 'transform:matrix3d(15.572498,-8.323674,0,0,0.054798,0.102522,220.880172,-0.019756,0.122685,0.229527,-0.965539,0,1047.903265,2559.813415,-10438.284908,1);width:32px;height:11.3778px;background-position:-72px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.8931245,-2.0809185,0,0,5.189293725835,12.668548956685,3.665353839388004,0,0.122685,0.229527,-0.965539,0,1047.903265,2559.813415,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 3,
+#         tag: 's',
+#         style: 'transform:matrix3d(13.649408,-11.20178,0,0,0.073744,0.08986,220.880172,-0.019756,0.165106,0.201182,-0.965539,0,1527.162921,2306.191533,-10438.284908,1);width:32px;height:11.3778px;background-position:-104px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.412352,-2.800445,0,0,7.5610936668190005,11.412744981487,3.665353839388004,0,0.165106,0.201182,-0.965539,0,1527.162921,2306.191533,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 4,
+#         tag: 's',
+#         style: 'transform:matrix3d(11.20178,-13.649408,0,0,0.08986,0.073744,220.880172,-0.019756,0.201182,0.165106,-0.965539,0,1947.734563,1963.944003,-10438.284908,1);width:32px;height:11.3778px;background-position:-136px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.800445,-3.412352,0,0,9.642326006657,9.718355430816999,3.665353839388004,0,0.201182,0.165106,-0.965539,0,1947.734563,1963.944003,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 5,
+#         tag: 's',
+#         style: 'transform:matrix3d(8.323674,-15.572498,0,0,0.102522,0.054798,220.880172,-0.019756,0.229527,0.122685,-0.965539,0,2293.455857,1546.223207,-10438.284908,1);width:32px;height:11.3778px;background-position:-168px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.0809185,-3.8931245,0,0,11.353008977722999,7.650495919373,3.665353839388004,0,0.229527,0.122685,-0.965539,0,2293.455857,1546.223207,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 6,
+#         tag: 's',
+#         style: 'transform:matrix3d(5.125692,-16.897146,0,0,0.11124,0.033744,220.880172,-0.019756,0.249051,0.075549,-0.965539,0,2551.040929,1069.08192,-10438.284908,1);width:32px;height:11.3778px;background-position:-200px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '1.281423,-4.2242865,0,0,12.627401148331,5.28863160288,3.665353839388004,0,0.249051,0.075549,-0.965539,0,2551.040929,1069.08192,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 7,
+#         tag: 's',
+#         style: 'transform:matrix3d(1.730734,-17.572444,0,0,0.115684,0.011396,220.880172,-0.019756,0.259005,0.02551,-0.965539,0,2710.590929,550.856414,-10438.284908,1);width:32px;height:11.3778px;background-position:-232px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.4326835,-4.393111,0,0,13.416529598331,2.7235288287459998,3.665353839388004,0,0.259005,0.02551,-0.965539,0,2710.590929,550.856414,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 8,
+#         tag: 's',
+#         style: 'transform:matrix3d(-1.730734,-17.572444,0,0,0.115684,-0.011396,220.880172,-0.019756,0.259005,-0.02551,-0.965539,0,2765.97444,11.461806,-10438.284908,1);width:32px;height:11.3778px;background-position:-264px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.4326835,-4.393111,0,0,13.690068759159999,0.053760859833999995,3.665353839388004,0,0.259005,-0.02551,-0.965539,0,2765.97444,11.461806,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 9,
+#         tag: 's',
+#         style: 'transform:matrix3d(-5.125692,-16.897146,0,0,0.11124,-0.033744,220.880172,-0.019756,0.249051,-0.075549,-0.965539,0,2715.063104,-528.373274,-10438.284908,1);width:32px;height:11.3778px;background-position:-296px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-1.281423,-4.2242865,0,0,13.437506670656,-2.618071600286,3.665353839388004,0,0.249051,-0.075549,-0.965539,0,2715.063104,-528.373274,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 10,
+#         tag: 's',
+#         style: 'transform:matrix3d(-8.323674,-15.572498,0,0,0.102522,-0.054798,220.880172,-0.019756,0.229527,-0.122685,-0.965539,0,2559.813415,-1047.903265,-10438.284908,1);width:32px;height:11.3778px;background-position:-328px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.0809185,-3.8931245,0,0,12.668548956685,-5.189293725835,3.665353839388004,0,0.229527,-0.122685,-0.965539,0,2559.813415,-1047.903265,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 11,
+#         tag: 's',
+#         style: 'transform:matrix3d(-11.20178,-13.649408,0,0,0.08986,-0.073744,220.880172,-0.019756,0.201182,-0.165106,-0.965539,0,2306.191533,-1527.162921,-10438.284908,1);width:32px;height:11.3778px;background-position:-360px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.800445,-3.412352,0,0,11.412744981487,-7.5610936668190005,3.665353839388004,0,0.201182,-0.165106,-0.965539,0,2306.191533,-1527.162921,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 12,
+#         tag: 's',
+#         style: 'transform:matrix3d(-13.649408,-11.20178,0,0,0.073744,-0.08986,220.880172,-0.019756,0.165106,-0.201182,-0.965539,0,1963.944003,-1947.734563,-10438.284908,1);width:32px;height:11.3778px;background-position:-392px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.412352,-2.800445,0,0,9.718355430816999,-9.642326006657,3.665353839388004,0,0.165106,-0.201182,-0.965539,0,1963.944003,-1947.734563,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 13,
+#         tag: 's',
+#         style: 'transform:matrix3d(-15.572498,-8.323674,0,0,0.054798,-0.102522,220.880172,-0.019756,0.122685,-0.229527,-0.965539,0,1546.223207,-2293.455857,-10438.284908,1);width:32px;height:11.3778px;background-position:-424px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.8931245,-2.0809185,0,0,7.650495919373,-11.353008977722999,3.665353839388004,0,0.122685,-0.229527,-0.965539,0,1546.223207,-2293.455857,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 14,
+#         tag: 's',
+#         style: 'transform:matrix3d(-16.897146,-5.125692,0,0,0.033744,-0.11124,220.880172,-0.019756,0.075549,-0.249051,-0.965539,0,1069.08192,-2551.040929,-10438.284908,1);width:32px;height:11.3778px;background-position:-456px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.2242865,-1.281423,0,0,5.28863160288,-12.627401148331,3.665353839388004,0,0.075549,-0.249051,-0.965539,0,1069.08192,-2551.040929,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 15,
+#         tag: 's',
+#         style: 'transform:matrix3d(-17.572444,-1.730734,0,0,0.011396,-0.115684,220.880172,-0.019756,0.02551,-0.259005,-0.965539,0,550.856414,-2710.590929,-10438.284908,1);width:32px;height:11.3778px;background-position:-488px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.393111,-0.4326835,0,0,2.7235288287459998,-13.416529598331,3.665353839388004,0,0.02551,-0.259005,-0.965539,0,550.856414,-2710.590929,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 16,
+#         tag: 's',
+#         style: 'transform:matrix3d(-17.572444,1.730734,0,0,-0.011396,-0.115684,220.880172,-0.019756,-0.02551,-0.259005,-0.965539,0,11.461806,-2765.97444,-10438.284908,1);width:32px;height:11.3778px;background-position:-520px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.393111,0.4326835,0,0,0.053760859833999995,-13.690068759159999,3.665353839388004,0,-0.02551,-0.259005,-0.965539,0,11.461806,-2765.97444,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 17,
+#         tag: 's',
+#         style: 'transform:matrix3d(-16.897146,5.125692,0,0,-0.033744,-0.11124,220.880172,-0.019756,-0.075549,-0.249051,-0.965539,0,-528.373274,-2715.063104,-10438.284908,1);width:32px;height:11.3778px;background-position:-552px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.2242865,1.281423,0,0,-2.618071600286,-13.437506670656,3.665353839388004,0,-0.075549,-0.249051,-0.965539,0,-528.373274,-2715.063104,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 18,
+#         tag: 's',
+#         style: 'transform:matrix3d(-15.572498,8.323674,0,0,-0.054798,-0.102522,220.880172,-0.019756,-0.122685,-0.229527,-0.965539,0,-1047.903265,-2559.813415,-10438.284908,1);width:32px;height:11.3778px;background-position:-584px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.8931245,2.0809185,0,0,-5.189293725835,-12.668548956685,3.665353839388004,0,-0.122685,-0.229527,-0.965539,0,-1047.903265,-2559.813415,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 19,
+#         tag: 's',
+#         style: 'transform:matrix3d(-13.649408,11.20178,0,0,-0.073744,-0.08986,220.880172,-0.019756,-0.165106,-0.201182,-0.965539,0,-1527.162921,-2306.191533,-10438.284908,1);width:32px;height:11.3778px;background-position:-616px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.412352,2.800445,0,0,-7.5610936668190005,-11.412744981487,3.665353839388004,0,-0.165106,-0.201182,-0.965539,0,-1527.162921,-2306.191533,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 20,
+#         tag: 's',
+#         style: 'transform:matrix3d(-11.20178,13.649408,0,0,-0.08986,-0.073744,220.880172,-0.019756,-0.201182,-0.165106,-0.965539,0,-1947.734563,-1963.944003,-10438.284908,1);width:32px;height:11.3778px;background-position:-648px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.800445,3.412352,0,0,-9.642326006657,-9.718355430816999,3.665353839388004,0,-0.201182,-0.165106,-0.965539,0,-1947.734563,-1963.944003,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 21,
+#         tag: 's',
+#         style: 'transform:matrix3d(-8.323674,15.572498,0,0,-0.102522,-0.054798,220.880172,-0.019756,-0.229527,-0.122685,-0.965539,0,-2293.455857,-1546.223207,-10438.284908,1);width:32px;height:11.3778px;background-position:-680px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.0809185,3.8931245,0,0,-11.353008977722999,-7.650495919373,3.665353839388004,0,-0.229527,-0.122685,-0.965539,0,-2293.455857,-1546.223207,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 22,
+#         tag: 's',
+#         style: 'transform:matrix3d(-5.125692,16.897146,0,0,-0.11124,-0.033744,220.880172,-0.019756,-0.249051,-0.075549,-0.965539,0,-2551.040929,-1069.08192,-10438.284908,1);width:32px;height:11.3778px;background-position:-712px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-1.281423,4.2242865,0,0,-12.627401148331,-5.28863160288,3.665353839388004,0,-0.249051,-0.075549,-0.965539,0,-2551.040929,-1069.08192,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 23,
+#         tag: 's',
+#         style: 'transform:matrix3d(-1.730734,17.572444,0,0,-0.115684,-0.011396,220.880172,-0.019756,-0.259005,-0.02551,-0.965539,0,-2710.590929,-550.856414,-10438.284908,1);width:32px;height:11.3778px;background-position:-744px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.4326835,4.393111,0,0,-13.416529598331,-2.7235288287459998,3.665353839388004,0,-0.259005,-0.02551,-0.965539,0,-2710.590929,-550.856414,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 24,
+#         tag: 's',
+#         style: 'transform:matrix3d(1.730734,17.572444,0,0,-0.115684,0.011396,220.880172,-0.019756,-0.259005,0.02551,-0.965539,0,-2765.97444,-11.461806,-10438.284908,1);width:32px;height:11.3778px;background-position:-776px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.4326835,4.393111,0,0,-13.690068759159999,-0.053760859833999995,3.665353839388004,0,-0.259005,0.02551,-0.965539,0,-2765.97444,-11.461806,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 25,
+#         tag: 's',
+#         style: 'transform:matrix3d(5.125692,16.897146,0,0,-0.11124,0.033744,220.880172,-0.019756,-0.249051,0.075549,-0.965539,0,-2715.063104,528.373274,-10438.284908,1);width:32px;height:11.3778px;background-position:-808px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '1.281423,4.2242865,0,0,-13.437506670656,2.618071600286,3.665353839388004,0,-0.249051,0.075549,-0.965539,0,-2715.063104,528.373274,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 26,
+#         tag: 's',
+#         style: 'transform:matrix3d(8.323674,15.572498,0,0,-0.102522,0.054798,220.880172,-0.019756,-0.229527,0.122685,-0.965539,0,-2559.813415,1047.903265,-10438.284908,1);width:32px;height:11.3778px;background-position:-840px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.0809185,3.8931245,0,0,-12.668548956685,5.189293725835,3.665353839388004,0,-0.229527,0.122685,-0.965539,0,-2559.813415,1047.903265,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 27,
+#         tag: 's',
+#         style: 'transform:matrix3d(11.20178,13.649408,0,0,-0.08986,0.073744,220.880172,-0.019756,-0.201182,0.165106,-0.965539,0,-2306.191533,1527.162921,-10438.284908,1);width:32px;height:11.3778px;background-position:-872px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.800445,3.412352,0,0,-11.412744981487,7.5610936668190005,3.665353839388004,0,-0.201182,0.165106,-0.965539,0,-2306.191533,1527.162921,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 28,
+#         tag: 's',
+#         style: 'transform:matrix3d(13.649408,11.20178,0,0,-0.073744,0.08986,220.880172,-0.019756,-0.165106,0.201182,-0.965539,0,-1963.944003,1947.734563,-10438.284908,1);width:32px;height:11.3778px;background-position:-904px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.412352,2.800445,0,0,-9.718355430816999,9.642326006657,3.665353839388004,0,-0.165106,0.201182,-0.965539,0,-1963.944003,1947.734563,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 29,
+#         tag: 's',
+#         style: 'transform:matrix3d(15.572498,8.323674,0,0,-0.054798,0.102522,220.880172,-0.019756,-0.122685,0.229527,-0.965539,0,-1546.223207,2293.455857,-10438.284908,1);width:32px;height:11.3778px;background-position:-936px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.8931245,2.0809185,0,0,-7.650495919373,11.353008977722999,3.665353839388004,0,-0.122685,0.229527,-0.965539,0,-1546.223207,2293.455857,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 30,
+#         tag: 's',
+#         style: 'transform:matrix3d(16.897146,5.125692,0,0,-0.033744,0.11124,220.880172,-0.019756,-0.075549,0.249051,-0.965539,0,-1069.08192,2551.040929,-10438.284908,1);width:32px;height:11.3778px;background-position:-968px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '4.2242865,1.281423,0,0,-5.28863160288,12.627401148331,3.665353839388004,0,-0.075549,0.249051,-0.965539,0,-1069.08192,2551.040929,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 2,
+#         longitudeIndex: 31,
+#         tag: 's',
+#         style: 'transform:matrix3d(17.572444,1.730734,0,0,-0.011396,0.115684,220.880172,-0.019756,-0.02551,0.259005,-0.965539,0,-550.856414,2710.590929,-10438.284908,1);width:32px;height:11.3778px;background-position:-1000px -35.3px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '4.393111,0.4326835,0,0,-2.7235288287459998,13.416529598331,3.665353839388004,0,-0.02551,0.259005,-0.965539,0,-550.856414,2710.590929,-10438.284908,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.004939,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 0,
+#         tag: 's',
+#         style: 'transform:matrix3d(22.466062,-2.212714,0,0,0.009196,0.09338,182.424414,-0.015946,0.03173,0.322158,-0.946154,0,-14.492979,3537.881977,-10232.433244,1);width:32px;height:11.3778px;background-position:-8px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '5.6165155,-0.5531785,0,0,-0.055477260783499995,14.1271115013105,4.814508372794009,0,0.03173,0.322158,-0.946154,0,-14.492979,3537.881977,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 1,
+#         tag: 's',
+#         style: 'transform:matrix3d(21.602704,-6.553108,0,0,0.027236,0.089792,182.424414,-0.015946,0.09397,0.309778,-0.946154,0,675.992033,3472.730007,-10232.433244,1);width:32px;height:11.3778px;background-position:-40px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '5.400676,-1.638277,0,0,2.7016512395545,13.8664861729055,4.814508372794009,0,0.09397,0.309778,-0.946154,0,675.992033,3472.730007,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 2,
+#         tag: 's',
+#         style: 'transform:matrix3d(19.909166,-10.641672,0,0,0.04423,0.08275,182.424414,-0.015946,0.152599,0.285493,-0.946154,0,1340.499051,3274.12297,-10232.433244,1);width:32px;height:11.3778px;background-position:-72px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '4.9772915,-2.660418,0,0,5.354956966811499,13.072978719904997,4.814508372794009,0,0.152599,0.285493,-0.946154,0,1340.499051,3274.12297,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 3,
+#         tag: 's',
+#         style: 'transform:matrix3d(17.45053,-14.32128,0,0,0.059524,0.072534,182.424414,-0.015946,0.205364,0.250237,-0.946154,0,1953.491442,2949.693223,-10232.433244,1);width:32px;height:11.3778px;background-position:-104px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '4.3626325,-3.58032,0,0,7.8024746335329995,11.7770855334895,4.814508372794009,0,0.205364,0.250237,-0.946154,0,1953.491442,2949.693223,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 4,
+#         tag: 's',
+#         style: 'transform:matrix3d(14.32128,-17.45053,0,0,0.072534,0.059524,182.424414,-0.015946,0.250237,0.205364,-0.946154,0,2491.412253,2511.908421,-10232.433244,1);width:32px;height:11.3778px;background-position:-136px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '3.58032,-4.3626325,0,0,9.950148446584498,10.0286039203165,4.814508372794009,0,0.250237,0.205364,-0.946154,0,2491.412253,2511.908421,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 5,
+#         tag: 's',
+#         style: 'transform:matrix3d(10.641672,-19.909166,0,0,0.08275,0.04423,182.424414,-0.015946,0.285493,0.152599,-0.946154,0,2933.589488,1977.592386,-10232.433244,1);width:32px;height:11.3778px;background-position:-168px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '2.660418,-4.9772915,0,0,11.715441993911998,7.894729546788999,4.814508372794009,0,0.285493,0.152599,-0.946154,0,2933.589488,1977.592386,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 6,
+#         tag: 's',
+#         style: 'transform:matrix3d(6.553108,-21.602704,0,0,0.089792,0.027236,182.424414,-0.015946,0.309778,0.09397,-0.946154,0,3263.030524,1367.278585,-10232.433244,1);width:32px;height:11.3778px;background-position:-200px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '1.638277,-5.400676,0,0,13.030519183925998,5.457465079102499,4.814508372794009,0,0.309778,0.09397,-0.946154,0,3263.030524,1367.278585,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 7,
+#         tag: 's',
+#         style: 'transform:matrix3d(2.212714,-22.466062,0,0,0.09338,0.009196,182.424414,-0.015946,0.322158,0.03173,-0.946154,0,3467.075126,704.421035,-10232.433244,1);width:32px;height:11.3778px;background-position:-232px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '0.5531785,-5.6165155,0,0,13.844839989799,2.8104734560274993,4.814508372794009,0,0.322158,0.03173,-0.946154,0,3467.075126,704.421035,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 8,
+#         tag: 's',
+#         style: 'transform:matrix3d(-2.212714,-22.466062,0,0,0.09338,-0.009196,182.424414,-0.015946,0.322158,-0.03173,-0.946154,0,3537.881977,14.492979,-10232.433244,1);width:32px;height:11.3778px;background-position:-264px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.5531785,-5.6165155,0,0,14.1271115013105,0.055477260783499995,4.814508372794009,0,0.322158,-0.03173,-0.946154,0,3537.881977,14.492979,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 9,
+#         tag: 's',
+#         style: 'transform:matrix3d(-6.553108,-21.602704,0,0,0.089792,-0.027236,182.424414,-0.015946,0.309778,-0.09397,-0.946154,0,3472.730007,-675.992033,-10232.433244,1);width:32px;height:11.3778px;background-position:-296px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-1.638277,-5.400676,0,0,13.8664861729055,-2.7016512395545,4.814508372794009,0,0.309778,-0.09397,-0.946154,0,3472.730007,-675.992033,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 10,
+#         tag: 's',
+#         style: 'transform:matrix3d(-10.641672,-19.909166,0,0,0.08275,-0.04423,182.424414,-0.015946,0.285493,-0.152599,-0.946154,0,3274.12297,-1340.499051,-10232.433244,1);width:32px;height:11.3778px;background-position:-328px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.660418,-4.9772915,0,0,13.072978719904997,-5.354956966811499,4.814508372794009,0,0.285493,-0.152599,-0.946154,0,3274.12297,-1340.499051,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 11,
+#         tag: 's',
+#         style: 'transform:matrix3d(-14.32128,-17.45053,0,0,0.072534,-0.059524,182.424414,-0.015946,0.250237,-0.205364,-0.946154,0,2949.693223,-1953.491442,-10232.433244,1);width:32px;height:11.3778px;background-position:-360px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.58032,-4.3626325,0,0,11.7770855334895,-7.8024746335329995,4.814508372794009,0,0.250237,-0.205364,-0.946154,0,2949.693223,-1953.491442,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 12,
+#         tag: 's',
+#         style: 'transform:matrix3d(-17.45053,-14.32128,0,0,0.059524,-0.072534,182.424414,-0.015946,0.205364,-0.250237,-0.946154,0,2511.908421,-2491.412253,-10232.433244,1);width:32px;height:11.3778px;background-position:-392px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.3626325,-3.58032,0,0,10.0286039203165,-9.950148446584498,4.814508372794009,0,0.205364,-0.250237,-0.946154,0,2511.908421,-2491.412253,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 13,
+#         tag: 's',
+#         style: 'transform:matrix3d(-19.909166,-10.641672,0,0,0.04423,-0.08275,182.424414,-0.015946,0.152599,-0.285493,-0.946154,0,1977.592386,-2933.589488,-10232.433244,1);width:32px;height:11.3778px;background-position:-424px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.9772915,-2.660418,0,0,7.894729546788999,-11.715441993911998,4.814508372794009,0,0.152599,-0.285493,-0.946154,0,1977.592386,-2933.589488,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 14,
+#         tag: 's',
+#         style: 'transform:matrix3d(-21.602704,-6.553108,0,0,0.027236,-0.089792,182.424414,-0.015946,0.09397,-0.309778,-0.946154,0,1367.278585,-3263.030524,-10232.433244,1);width:32px;height:11.3778px;background-position:-456px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-5.400676,-1.638277,0,0,5.457465079102499,-13.030519183925998,4.814508372794009,0,0.09397,-0.309778,-0.946154,0,1367.278585,-3263.030524,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 15,
+#         tag: 's',
+#         style: 'transform:matrix3d(-22.466062,-2.212714,0,0,0.009196,-0.09338,182.424414,-0.015946,0.03173,-0.322158,-0.946154,0,704.421035,-3467.075126,-10232.433244,1);width:32px;height:11.3778px;background-position:-488px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-5.6165155,-0.5531785,0,0,2.8104734560274993,-13.844839989799,4.814508372794009,0,0.03173,-0.322158,-0.946154,0,704.421035,-3467.075126,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 16,
+#         tag: 's',
+#         style: 'transform:matrix3d(-22.466062,2.212714,0,0,-0.009196,-0.09338,182.424414,-0.015946,-0.03173,-0.322158,-0.946154,0,14.492979,-3537.881977,-10232.433244,1);width:32px;height:11.3778px;background-position:-520px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-5.6165155,0.5531785,0,0,0.055477260783499995,-14.1271115013105,4.814508372794009,0,-0.03173,-0.322158,-0.946154,0,14.492979,-3537.881977,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 17,
+#         tag: 's',
+#         style: 'transform:matrix3d(-21.602704,6.553108,0,0,-0.027236,-0.089792,182.424414,-0.015946,-0.09397,-0.309778,-0.946154,0,-675.992033,-3472.730007,-10232.433244,1);width:32px;height:11.3778px;background-position:-552px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-5.400676,1.638277,0,0,-2.7016512395545,-13.8664861729055,4.814508372794009,0,-0.09397,-0.309778,-0.946154,0,-675.992033,-3472.730007,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 18,
+#         tag: 's',
+#         style: 'transform:matrix3d(-19.909166,10.641672,0,0,-0.04423,-0.08275,182.424414,-0.015946,-0.152599,-0.285493,-0.946154,0,-1340.499051,-3274.12297,-10232.433244,1);width:32px;height:11.3778px;background-position:-584px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.9772915,2.660418,0,0,-5.354956966811499,-13.072978719904997,4.814508372794009,0,-0.152599,-0.285493,-0.946154,0,-1340.499051,-3274.12297,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 19,
+#         tag: 's',
+#         style: 'transform:matrix3d(-17.45053,14.32128,0,0,-0.059524,-0.072534,182.424414,-0.015946,-0.205364,-0.250237,-0.946154,0,-1953.491442,-2949.693223,-10232.433244,1);width:32px;height:11.3778px;background-position:-616px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-4.3626325,3.58032,0,0,-7.8024746335329995,-11.7770855334895,4.814508372794009,0,-0.205364,-0.250237,-0.946154,0,-1953.491442,-2949.693223,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 20,
+#         tag: 's',
+#         style: 'transform:matrix3d(-14.32128,17.45053,0,0,-0.072534,-0.059524,182.424414,-0.015946,-0.250237,-0.205364,-0.946154,0,-2491.412253,-2511.908421,-10232.433244,1);width:32px;height:11.3778px;background-position:-648px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-3.58032,4.3626325,0,0,-9.950148446584498,-10.0286039203165,4.814508372794009,0,-0.250237,-0.205364,-0.946154,0,-2491.412253,-2511.908421,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 21,
+#         tag: 's',
+#         style: 'transform:matrix3d(-10.641672,19.909166,0,0,-0.08275,-0.04423,182.424414,-0.015946,-0.285493,-0.152599,-0.946154,0,-2933.589488,-1977.592386,-10232.433244,1);width:32px;height:11.3778px;background-position:-680px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-2.660418,4.9772915,0,0,-11.715441993911998,-7.894729546788999,4.814508372794009,0,-0.285493,-0.152599,-0.946154,0,-2933.589488,-1977.592386,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 22,
+#         tag: 's',
+#         style: 'transform:matrix3d(-6.553108,21.602704,0,0,-0.089792,-0.027236,182.424414,-0.015946,-0.309778,-0.09397,-0.946154,0,-3263.030524,-1367.278585,-10232.433244,1);width:32px;height:11.3778px;background-position:-712px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-1.638277,5.400676,0,0,-13.030519183925998,-5.457465079102499,4.814508372794009,0,-0.309778,-0.09397,-0.946154,0,-3263.030524,-1367.278585,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865,0,0,1,0,0,0,0,1'
+#         }
+#       },
+#       {
+#         latitudeIndex: 3,
+#         longitudeIndex: 23,
+#         tag: 's',
+#         style: 'transform:matrix3d(-2.212714,22.466062,0,0,-0.09338,-0.009196,182.424414,-0.015946,-0.322158,-0.03173,-0.946154,0,-3467.075126,-704.421035,-10232.433244,1);width:32px;height:11.3778px;background-position:-744px -62.4222px;background-size:1040px 839px',
+#         projectiveTextureLayer: {
+#           schema: 'polycss-prepared-projective-texture-layer@1',
+#           rasterScale: 4,
+#           frameMatrix: '-0.5531785,5.6165155,0,0,-13.844839989799,-2.8104734560274993,4.814508372794009,0,-0.322158,-0.03173,-0.946154,0,-3467.075126,-704.421035,-10232.433244,1',
+#           textureMatrix: '1,0,0,0,0,1,0,-0.0039865
+# Subtest: site/test/projective-surface-seam-contract.test.mts
+not ok 64 - site/test/projective-surface-seam-contract.test.mts
+  ---
+  duration_ms: 178.902458
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/projective-surface-seam-contract.test.mts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: keeps reversal and every camera-advancing present in its recorded step
+ok 288 - keeps reversal and every camera-advancing present in its recorded step
+  ---
+  duration_ms: 1.158916
+  type: 'test'
+  ...
+# Subtest: advances uncaptured native frames instead of skipping their camera work
+ok 289 - advances uncaptured native frames instead of skipping their camera work
+  ---
+  duration_ms: 0.261209
+  type: 'test'
+  ...
+# Subtest: rejects missing frame clocks and an already moving start
+ok 290 - rejects missing frame clocks and an already moving start
+  ---
+  duration_ms: 0.491583
+  type: 'test'
+  ...
+# Subtest: does not replay a preceding gesture still retained before the new press
+ok 291 - does not replay a preceding gesture still retained before the new press
+  ---
+  duration_ms: 0.160333
+  type: 'test'
+  ...
+# Subtest: ignores a pointer point stored after a non-launching release
+ok 292 - ignores a pointer point stored after a non-launching release
+  ---
+  duration_ms: 0.078417
+  type: 'test'
+  ...
+# Subtest: pairs a fresh press during coast, held jitter and a second release independently
+ok 293 - pairs a fresh press during coast, held jitter and a second release independently
+  ---
+  duration_ms: 0.220541
+  type: 'test'
+  ...
+# Subtest: binds click-only receipts without fabricating a drag launch
+ok 294 - binds click-only receipts without fabricating a drag launch
+  ---
+  duration_ms: 0.719917
+  type: 'test'
+  ...
+# Subtest: advances an uncaptured receipt-only present
+ok 295 - advances an uncaptured receipt-only present
+  ---
+  duration_ms: 0.260375
+  type: 'test'
+  ...
+# Subtest: binds click receipts before a later drag without treating clicks as launches
+ok 296 - binds click receipts before a later drag without treating clicks as launches
+  ---
+  duration_ms: 0.29325
+  type: 'test'
+  ...
+# Subtest: pairs a source-consumed drag and following stop click
+ok 297 - pairs a source-consumed drag and following stop click
+  ---
+  duration_ms: 0.274792
+  type: 'test'
+  ...
+# Subtest: derives every root planet lane from the validated catalog
+ok 298 - derives every root planet lane from the validated catalog
+  ---
+  duration_ms: 1728.85325
+  type: 'test'
+  ...
+# Subtest: loads object-owned browser and audit expectations for every implementation
+not ok 299 - loads object-owned browser and audit expectations for every implementation
+  ---
+  duration_ms: 355.854167
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/root-orchestration.test.mts:36:1'
+  failureType: 'testCodeFailure'
+  error: 'ryugu: browser profile must declare retained interaction evidence'
+  code: 'ERR_ASSERTION'
+  name: 'AssertionError'
+  expected: true
+  actual: false
+  operator: '=='
+  stack: |-
+    validatePlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:51:10)
+    loadPlanetBrowserProfile (file:///private/tmp/cssearth-pr390/site/test/load-browser-profile.mts:19:10)
+    async Promise.all (index 122)
+    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/root-orchestration.test.mts:38:20)
+    async Test.run (node:internal/test_runner/test:1054:7)
+    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)
+  ...
+# file:///private/tmp/cssearth-pr390/site/prepared-context-objects.mts:2
+# export const CONTEXT_OBJECT_DESCRIPTORS                          = import.meta.glob(['../src/objects/betelgeuse-shell/object.json', '../src/objects/galaxy-clusters/object.json', '../src/objects/hd-181327-disc/object.json', '../src/objects/heliosphere/object.json', '../src/objects/helix/object.json', '../src/objects/lmc/object.json', '../src/objects/local-group/object.json', '../src/objects/m1/object.json', '../src/objects/m2-9/object.json', '../src/objects/m31/object.json', '../src/objects/m33/object.json', '../src/objects/m42/object.json', '../src/objects/m45/object.json', '../src/objects/m8/object.json', '../src/objects/milky-way/object.json', '../src/objects/nearby-universe/object.json', '../src/objects/omega-centauri/object.json', '../src/objects/smc/object.json', '../src/objects/stellar-neighbourhood/object.json'], { eager: true, import: 'default' });
+#                                                                                ^
+# TypeError: (intermediate value).glob is not a function
+#     at file:///private/tmp/cssearth-pr390/site/prepared-context-objects.mts:2:80
+#     at ModuleJob.run (node:internal/modules/esm/module_job:343:25)
+#     at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:681:26)
+#     at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+# Node.js v22.23.2
+# Subtest: site/test/router-runtime.test.mts
+not ok 67 - site/test/router-runtime.test.mts
+  ---
+  duration_ms: 273.245334
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/router-runtime.test.mts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# node:internal/modules/esm/resolve:275
+#     throw new ERR_MODULE_NOT_FOUND(
+#           ^
+# Error [ERR_MODULE_NOT_FOUND]: Cannot find module '/private/tmp/cssearth-pr390/src/renderers/css/stars/opacity-clock.js' imported from /private/tmp/cssearth-pr390/src/renderers/css/navigation/prepared-wheel-zoom.ts
+#     at finalizeResolution (node:internal/modules/esm/resolve:275:11)
+#     at moduleResolve (node:internal/modules/esm/resolve:861:10)
+#     at defaultResolve (node:internal/modules/esm/resolve:985:11)
+#     at \#cachedDefaultResolve (node:internal/modules/esm/loader:747:20)
+#     at ModuleLoader.resolve (node:internal/modules/esm/loader:724:38)
+#     at ModuleLoader.getModuleJobForImport (node:internal/modules/esm/loader:320:38)
+#     at ModuleJob._link (node:internal/modules/esm/module_job:182:49) {
+#   code: 'ERR_MODULE_NOT_FOUND',
+#   url: 'file:///private/tmp/cssearth-pr390/src/renderers/css/stars/opacity-clock.js'
+# }
+# Node.js v22.23.2
+# Subtest: site/test/runtime-policy.test.mts
+not ok 68 - site/test/runtime-policy.test.mts
+  ---
+  duration_ms: 66.326667
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/runtime-policy.test.mts:1:1'
+  failureType: 'testCodeFailure'
+  exitCode: 1
+  signal: ~
+  error: 'test failed'
+  code: 'ERR_TEST_FAILURE'
+  ...
+# Subtest: asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime
+ok 302 - asteroid, trans-Neptunian and comet Shadows default off in authored content and prepared runtime
+  ---
+  duration_ms: 2388.257
+  type: 'test'
+  ...
+# Subtest: publishes one off-by-default Shadows control for every planet
+ok 303 - publishes one off-by-default Shadows control for every planet
+  ---
+  duration_ms: 75.928084
+  type: 'test'
+  ...
+# Subtest: control content permits empty capabilities but rejects malformed or conflicting declarations
+ok 304 - control content permits empty capabilities but rejects malformed or conflicting declarations
+  ---
+  duration_ms: 0.336541
+  type: 'test'
+  ...
+# Subtest: readiness waits for native activation and restoration; one session commands playback and teardown
+ok 305 - readiness waits for native activation and restoration; one session commands playback and teardown
+  ---
+  duration_ms: 1.2325
+  type: 'test'
+  ...
+# Subtest: a late factory cannot mount or replace the next session after cancellation
+ok 306 - a late factory cannot mount or replace the next session after cancellation
+  ---
+  duration_ms: 0.188292
+  type: 'test'
+  ...
+# Subtest: a transferred prepared bank survives request completion and releases on scene teardown
+ok 307 - a transferred prepared bank survives request completion and releases on scene teardown
+  ---
+  duration_ms: 0.611
+  type: 'test'
+  ...
+# Subtest: failed activation releases transferred preparation even when the factory throws before returning a mount
+ok 308 - failed activation releases transferred preparation even when the factory throws before returning a mount
+  ---
+  duration_ms: 0.296458
+  type: 'test'
+  ...
+# Subtest: cancellation before handoff releases a late bank and forbids transfer
+ok 309 - cancellation before handoff releases a late bank and forbids transfer
+  ---
+  duration_ms: 0.213375
+  type: 'test'
+  ...
+# Subtest: URL replacement stays bounded and flush failures cannot skip native or binding cleanup
+ok 310 - URL replacement stays bounded and flush failures cannot skip native or binding cleanup
+  ---
+  duration_ms: 0.280416
+  type: 'test'
+  ...
+# Subtest: every scene links its own existing README at the build revision
+ok 311 - every scene links its own existing README at the build revision
+  ---
+  duration_ms: 131.9055
+  type: 'test'
+  ...
+# Subtest: overview and catalogue selections link their actual documentation owner
+ok 312 - overview and catalogue selections link their actual documentation owner
+  ---
+  duration_ms: 7.5835
+  type: 'test'
+  ...
+# Subtest: documentation preparation rejects missing owners and paths outside object packages
+ok 313 - documentation preparation rejects missing owners and paths outside object packages
+  ---
+  duration_ms: 0.27575
+  type: 'test'
+  ...
+# Subtest: the footer prepares compact provider credits without changing the README destination
+ok 314 - the footer prepares compact provider credits without changing the README destination
+  ---
+  duration_ms: 0.069791
+  type: 'test'
+  ...
+# Subtest: the Solar System overview credits its bodies rather than inheriting only the Sun’s maps
+ok 315 - the Solar System overview credits its bodies rather than inheriting only the Sun’s maps
+  ---
+  duration_ms: 0.233416
+  type: 'test'
+  ...
+# Subtest: publishes the canonical scientific chart order
+ok 316 - publishes the canonical scientific chart order
+  ---
+  duration_ms: 1.278792
+  type: 'test'
+  ...
+# Subtest: orders any applicable subset without inventing missing charts
+ok 317 - orders any applicable subset without inventing missing charts
+  ---
+  duration_ms: 0.160833
+  type: 'test'
+  ...
+# Subtest: keeps unknown future chart types after known charts in source order
+ok 318 - keeps unknown future chart types after known charts in source order
+  ---
+  duration_ms: 0.207208
+  type: 'test'
+  ...
+# Subtest: binds phase charts to explicit primary-source provenance
+ok 319 - binds phase charts to explicit primary-source provenance
+  ---
+  duration_ms: 3.77675
+  type: 'test'
+  ...
+# Subtest: a page that ships its catalogue empty has it fetched and merged before matching
+ok 320 - a page that ships its catalogue empty has it fetched and merged before matching
+  ---
+  duration_ms: 87.946958
+  type: 'test'
+  ...
+# Subtest: a merged catalogue fragment degrades to an empty list plus a message on a byte or hash drift, instead of failing the request
+ok 321 - a merged catalogue fragment degrades to an empty list plus a message on a byte or hash drift, instead of failing the request
+  ---
+  duration_ms: 5.845084
+  type: 'test'
+  ...
+# Subtest: a page that already inlines its catalogue never fetches the fragment
+ok 322 - a page that already inlines its catalogue never fetches the fragment
+  ---
+  duration_ms: 7.673875
+  type: 'test'
+  ...
+# Subtest: native search uses shared matching, retains every row, and preserves the scene/head bytes
+ok 323 - native search uses shared matching, retains every row, and preserves the scene/head bytes
+  ---
+  duration_ms: 30.078708
+  type: 'test'
+  ...
+# Subtest: empty submission browses all objects, categories retain the query, pills replace it
+ok 324 - empty submission browses all objects, categories retain the query, pills replace it
+  ---
+  duration_ms: 6.438875
+  type: 'test'
+  ...
+# Subtest: features are pinned, rendered into existing rows and have ordinary destination links
+ok 325 - features are pinned, rendered into existing rows and have ordinary destination links
+  ---
+  duration_ms: 6.619625
+  type: 'test'
+  ...
+# Subtest: search is a flat list across categories, including queries that name an overview
+ok 326 - search is a flat list across categories, including queries that name an overview
+  ---
+  duration_ms: 3.63
+  type: 'test'
+  ...
+# Subtest: named features share the results panel, start collapsed, and disappear when there are no matches
+ok 327 - named features share the results panel, start collapsed, and disappear when there are no matches
+  ---
+  duration_ms: 6.847959
+  type: 'test'
+  ...
+# Subtest: live feature results retain their rows and disclosure until the query changes
+ok 328 - live feature results retain their rows and disclosure until the query changes
+  ---
+  duration_ms: 2.354125
+  type: 'test'
+  ...
+# Subtest: queries stay text, are bounded, and cannot become executable attributes or scene markup
+ok 329 - queries stay text, are bounded, and cannot become executable attributes or scene markup
+  ---
+  duration_ms: 3.206875
+  type: 'test'
+  ...
+# Subtest: Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function
+ok 330 - Netlify routing keeps all query parameters, bypasses assets, and never recurses on its function
+  ---
+  duration_ms: 1.226666
+  type: 'test'
+  ...
+# Subtest: function fetches only the static page and pinned indexes; search responses are not shared-cacheable
+ok 331 - function fetches only the static page and pinned indexes; search responses are not shared-cacheable
+  ---
+  duration_ms: 2.391291
+  type: 'test'
+  ...
+# Subtest: discovers objects through multiple pages and resolves relative links at their source
+ok 332 - discovers objects through multiple pages and resolves relative links at their source
+  ---
+  duration_ms: 0.951167
+  type: 'test'
+  ...
+# Subtest: rejects the orphaned Sun even when its inspected page retains a self-link
+ok 333 - rejects the orphaned Sun even when its inspected page retains a self-link
+  ---
+  duration_ms: 0.350666
+  type: 'test'
+  ...
+# Subtest: rejects a disconnected cycle even when every object has a link from another page
+ok 334 - rejects a disconnected cycle even when every object has a link from another page
+  ---
+  duration_ms: 0.18125
+  type: 'test'
+  ...
+# Subtest: external links with a matching pathname do not discover a local object
+ok 335 - external links with a matching pathname do not discover a local object
+  ---
+  duration_ms: 0.170916
+  type: 'test'
+  ...
+# Subtest: retained catalogue groups follow filters and release their visibility observer
+ok 336 - retained catalogue groups follow filters and release their visibility observer
+  ---
+  duration_ms: 42.741875
+  type: 'test'
+  ...
+# Subtest: Illustration models starts off and retains its independent preference across body navigation
+ok 337 - Illustration models starts off and retains its independent preference across body navigation
+  ---
+  duration_ms: 1.986292
+  type: 'test'
+  ...
+# Subtest: Asteroids starts off and retains its independent preference across body navigation
+ok 338 - Asteroids starts off and retains its independent preference across body navigation
+  ---
+  duration_ms: 1.897542
+  type: 'test'
+  ...
+# Subtest: Asteroids Orbits starts off and retains its independent preference across body navigation
+ok 339 - Asteroids Orbits starts off and retains its independent preference across body navigation
+  ---
+  duration_ms: 1.317583
+  type: 'test'
+  ...
+# Subtest: Asteroid Labels starts off and retains its independent preference across body navigation
+ok 340 - Asteroid Labels starts off and retains its independent preference across body navigation
+  ---
+  duration_ms: 1.390667
+  type: 'test'
+  ...
+# Subtest: Minimap starts off, mirrors its state for the stylesheet and keeps the preference across body navigation
+ok 341 - Minimap starts off, mirrors its state for the stylesheet and keeps the preference across body navigation
+  ---
+  duration_ms: 1.089875
+  type: 'test'
+  ...
+# Subtest: shell with no optional controls keeps Motion/high contrast and accessible blocked intent
+ok 342 - shell with no optional controls keeps Motion/high contrast and accessible blocked intent
+  ---
+  duration_ms: 0.982125
+  type: 'test'
+  ...
+# Subtest: failed shell construction cleans earlier controllers and their scheduled work
+ok 343 - failed shell construction cleans earlier controllers and their scheduled work
+  ---
+  duration_ms: 8.871125
+  type: 'test'
+  ...
+# Subtest: object content replacement retains shell controls and input state without accumulating listeners
+ok 344 - object content replacement retains shell controls and input state without accumulating listeners
+  ---
+  duration_ms: 3.725625
+  type: 'test'
+  ...
+# Subtest: Motion cannot enable Speed before the shared runtime is ready or after it retires
+ok 345 - Motion cannot enable Speed before the shared runtime is ready or after it retires
+  ---
+  duration_ms: 14.218833
+  type: 'test'
+  ...
+# Subtest: camera zoom preserves native information selections and focus without installing tab listeners
+ok 346 - camera zoom preserves native information selections and focus without installing tab listeners
+  ---
+  duration_ms: 0.943209
+  type: 'test'
+  ...
+# Subtest: destination card stays fixed across flight poses and camera handoff, then follows manual zoom
+ok 347 - destination card stays fixed across flight poses and camera handoff, then follows manual zoom
+  ---
+  duration_ms: 1.103
+  type: 'test'
+  ...
+# Subtest: camera scale keeps the overview, while search hides and dismissal restores its Atlas navigation
+ok 348 - camera scale keeps the overview, while search hides and dismissal restores its Atlas navigation
+  ---
+  duration_ms: 2.887917
+  type: 'test'
+  ...
+# Subtest: the planet lens controller ignores an earlier retained galaxy bank and binds its own lens controls
+ok 349 - the planet lens controller ignores an earlier retained galaxy bank and binds its own lens controls
+  ---
+  duration_ms: 0.611333
+  type: 'test'
+  ...
+# Subtest: a prepared galaxy takes precedence over the retained Milky Way card and clears cleanly on planet return
+ok 350 - a prepared galaxy takes precedence over the retained Milky Way card and clears cleanly on planet return
+  ---
+  duration_ms: 4.049625
+  type: 'test'
+  ...
+# Subtest: clearing search keeps the current object or overview card and permits another search
+ok 351 - clearing search keeps the current object or overview card and permits another search
+  ---
+  duration_ms: 0.688125
+  type: 'test'
+  ...
+# Subtest: flight completion and overview handoff preserve a newer active search
+ok 352 - flight completion and overview handoff preserve a newer active search
+  ---
+  duration_ms: 0.903125
+  type: 'test'
+  ...
+# Subtest: category pills toggle shared results without camera navigation or opening the search sheet
+ok 353 - category pills toggle shared results without camera navigation or opening the search sheet
+  ---
+  duration_ms: 16.193875
+  type: 'test'
+  ...
+# Subtest: changing Illustration models refreshes an open category without erasing its query
+ok 354 - changing Illustration models refreshes an open category without erasing its query
+  ---
+  duration_ms: 0.791333
+  type: 'test'
+  ...
+# Subtest: the overview preview changes immediately and survives a same-scene commit
+ok 355 - the overview preview changes immediately and survives a same-scene commit
+  ---
+  duration_ms: 1.392
+  type: 'test'
+  ...
+# Subtest: an empty search survives dismissal, overview resets, and object commits
+ok 356 - an empty search survives dismissal, overview resets, and object commits
+  ---
+  duration_ms: 0.984
+  type: 'test'
+  ...
+# Subtest: choosing the current body from search shows its card without editing the query
+ok 357 - choosing the current body from search shows its card without editing the query
+  ---
+  duration_ms: 0.543834
+  type: 'test'
+  ...
+# Subtest: a Milky Way breadcrumb previews its own card and preserves the search query
+ok 358 - a Milky Way breadcrumb previews its own card and preserves the search query
+  ---
+  duration_ms: 0.496125
+  type: 'test'
+  ...
+# Subtest: camera handoffs retain filtered results and reset only a scrolled results panel
+ok 359 - camera handoffs retain filtered results and reset only a scrolled results panel
+  ---
+  duration_ms: 0.600416
+  type: 'test'
+  ...
+# Subtest: one source link follows selection, independent of search, dataset and accordion state
+ok 360 - one source link follows selection, independent of search, dataset and accordion state
+  ---
+  duration_ms: 5.029083
+  type: 'test'
+  ...
+# Subtest: a native body request retains its prepared default link
+ok 361 - a native body request retains its prepared default link
+  ---
+  duration_ms: 0.478125
+  type: 'test'
+  ...
+# Subtest: surface consumers use the published clipped viewport without measuring the scene
+ok 362 - surface consumers use the published clipped viewport without measuring the scene
+  ---
+  duration_ms: 0.577417
+  type: 'test'
+  ...
+# Subtest: vendored Cesium helpers reproduce the pinned upstream methods verbatim
+ok 363 - vendored Cesium helpers reproduce the pinned upstream methods verbatim
+  ---
+  duration_ms: 4.941083
+  type: 'test'
+  ...
+# Subtest: flat map cardinal landmarks retain east-west order and north-up orientation
+ok 364 - flat map cardinal landmarks retain east-west order and north-up orientation
+  ---
+  duration_ms: 0.489875
+  type: 'test'
+  ...
+# Subtest: map navigation rotates camera and eye together, retaining distance and roll
+ok 365 - map navigation rotates camera and eye together, retaining distance and roll
+  ---
+  duration_ms: 0.245166
+  type: 'test'
+  ...
+# Subtest: opposite-side clicks and seam crossings stay finite and reach the requested point
+ok 366 - opposite-side clicks and seam crossings stay finite and reach the requested point
+  ---
+  duration_ms: 0.184083
+  type: 'test'
+  ...
+# Subtest: minimap uses the upstream Cesium rectangle for zoom, roll, poles and horizon cases
+ok 367 - minimap uses the upstream Cesium rectangle for zoom, roll, poles and horizon cases
+  ---
+  duration_ms: 7.922792
+  type: 'test'
+  ...
+# Subtest: Cesium whole-globe fallback is retained and the rectangle shrinks with close zoom
+ok 368 - Cesium whole-globe fallback is retained and the rectangle shrinks with close zoom
+  ---
+  duration_ms: 0.366292
+  type: 'test'
+  ...
+# Subtest: out-of-view globe hides the rectangle and zero-longitude bounds wrap on the texture
+ok 369 - out-of-view globe hides the rectangle and zero-longitude bounds wrap on the texture
+  ---
+  duration_ms: 0.127792
+  type: 'test'
+  ...
+# Subtest: system flights keep the viewing angle and approach the center from QMbBW5Yy
+not ok 370 - system flights keep the viewing angle and approach the center from QMbBW5Yy
+  ---
+  duration_ms: 0.777583
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/system-framing.test.mts:31:4'
+  failureType: 'testCodeFailure'
+  error: 'This shared view link uses an unsupported version.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    parseSharedView (file:///private/tmp/cssearth-pr390/src/renderers/css/dist/chunk-HR5KZMFW.js:70:11)
+    TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/system-framing.test.mts:32:17)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.start (node:internal/test_runner/test:944:17)
+    startSubtestAfterBootstrap (node:internal/test_runner/harness:296:17)
+  ...
+# Subtest: system flights keep the viewing angle and approach the center from QIZBtofG
+not ok 371 - system flights keep the viewing angle and approach the center from QIZBtofG
+  ---
+  duration_ms: 0.129084
+  type: 'test'
+  location: '/private/tmp/cssearth-pr390/site/test/system-framing.test.mts:31:4'
+  failureType: 'testCodeFailure'
+  error: 'This shared view link uses an unsupported version.'
+  code: 'ERR_TEST_FAILURE'
+  stack: |-
+    parseSharedView (file:///private/tmp/cssearth-pr390/src/renderers/css/dist/chunk-HR5KZMFW.js:70:11)
+    TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/site/test/system-framing.test.mts:32:17)
+    Test.runInAsyncScope (node:async_hooks:214:14)
+    Test.run (node:internal/test_runner/test:1047:25)
+    Test.processPendingSubtests (node:internal/test_runner/test:744:18)
+    Test.postRun (node:internal/test_runner/test:1173:19)
+    Test.run (node:internal/test_runner/test:1101:12)
+    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)
+  ...
+# Subtest: fitting the current angle is independent of prepared box order and member names
+ok 372 - fitting the current angle is independent of prepared box order and member names
+  ---
+  duration_ms: 1.332833
+  type: 'test'
+  ...
+# Subtest: each system fits its complete primary orbits at 1524x1237, offset 0,0
+ok 373 - each system fits its complete primary orbits at 1524x1237, offset 0,0
+  ---
+  duration_ms: 94.4015
+  type: 'test'
+  ...
+# Subtest: each system fits its complete primary orbits at 1280x720, offset 0,0
+ok 374 - each system fits its complete primary orbits at 1280x720, offset 0,0
+  ---
+  duration_ms: 30.942708
+  type: 'test'
+  ...
+# Subtest: each system fits its complete primary orbits at 390x844, offset 0,0
+ok 375 - each system fits its complete primary orbits at 390x844, offset 0,0
+  ---
+  duration_ms: 86.346291
+  type: 'test'
+  ...
+# Subtest: each system fits its complete primary orbits at 1024x700, offset 40,-20
+ok 376 - each system fits its complete primary orbits at 1024x700, offset 40,-20
+  ---
+  duration_ms: 114.753125
+  type: 'test'
+  ...
+# Subtest: another star's system, reached edge-on from the Sun, opens to the shallowest prepared elevation
+ok 377 - another star's system, reached edge-on from the Sun, opens to the shallowest prepared elevation
+  ---
+  duration_ms: 6.2695
+  type: 'test'
+  ...
+# Subtest: selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat
+ok 378 - selecting the system root pulls back from a planet to all major planets, with a normal close-up on repeat
+  ---
+  duration_ms: 0.647959
+  type: 'test'
+  ...
+# Subtest: system fit leaves clearance for the visible sidebar, header and footer
+ok 379 - system fit leaves clearance for the visible sidebar, header and footer
+  ---
+  duration_ms: 0.383709
+  type: 'test'
+  ...
+# Subtest: adding a small distant moon does not pull the initial camera away from the larger moons
+ok 380 - adding a small distant moon does not pull the initial camera away from the larger moons
+  ---
+  duration_ms: 0.440334
+  type: 'test'
+  ...
+# Subtest: a body without moons uses its normal close-up target on first selection
+ok 381 - a body without moons uses its normal close-up target on first selection
+  ---
+  duration_ms: 0.289958
+  type: 'test'
+  ...
+# Subtest: clicking the already selected body in close-up does not zoom back out to its moons
+ok 382 - clicking the already selected body in close-up does not zoom back out to its moons
+  ---
+  duration_ms: 0.138708
+  type: 'test'
+  ...
+# Subtest: galactic breadcrumbs zoom straight out from the current view without panning or turning
+ok 383 - galactic breadcrumbs zoom straight out from the current view without panning or turning
+  ---
+  duration_ms: 16.247375
+  type: 'test'
+  ...
+# Subtest: a Solar System breadcrumb always restores the system framing from a Sun close-up
+ok 384 - a Solar System breadcrumb always restores the system framing from a Sun close-up
+  ---
+  duration_ms: 0.492333
+  type: 'test'
+  ...
+# Subtest: scene date includes the calendar time and TT scale across calendar days
+ok 385 - scene date includes the calendar time and TT scale across calendar days
+  ---
+  duration_ms: 20.312417
+  type: 'test'
+  ...
+# Subtest: coordinates carry rounded seconds and preserve hemispheres
+ok 386 - coordinates carry rounded seconds and preserve hemispheres
+  ---
+  duration_ms: 0.07675
+  type: 'test'
+  ...
+# Subtest: altitude and distance scale use physical units across camera ranges
+ok 387 - altitude and distance scale use physical units across camera ranges
+  ---
+  duration_ms: 0.495166
+  type: 'test'
+  ...
+# Subtest: surface ruler measures the front surface, not the center plane
+ok 388 - surface ruler measures the front surface, not the center plane
+  ---
+  duration_ms: 0.433959
+  type: 'test'
+  ...
+# Subtest: looking away supplies no invented surface coordinates or behind-camera ruler
+ok 389 - looking away supplies no invented surface coordinates or behind-camera ruler
+  ---
+  duration_ms: 0.11475
+  type: 'test'
+  ...
+# Subtest: objects without prepared geographic axes still have altitude and scale
+ok 390 - objects without prepared geographic axes still have altitude and scale
+  ---
+  duration_ms: 0.099416
+  type: 'test'
+  ...
+# Subtest: galaxy distances keep a finite ruler without a spurious surface hit
+ok 391 - galaxy distances keep a finite ruler without a spurious surface hit
+  ---
+  duration_ms: 0.118833
+  type: 'test'
+  ...
+# Subtest: prepared focus uses its own depth plane for scale and never supplies planetary coordinates
+ok 392 - prepared focus uses its own depth plane for scale and never supplies planetary coordinates
+  ---
+  duration_ms: 0.085417
+  type: 'test'
+  ...
+# Subtest: camera changes coalesce into replaceState while preserving the route, other queries, hash and history state
+ok 393 - camera changes coalesce into replaceState while preserving the route, other queries, hash and history state
+  ---
+  duration_ms: 1.796958
+  type: 'test'
+  ...
+# Subtest: incoming links restore before motion resumes without rewriting their saved playback position
+ok 394 - incoming links restore before motion resumes without rewriting their saved playback position
+  ---
+  duration_ms: 0.419709
+  type: 'test'
+  ...
+# Subtest: obsolete JSON links report an error without restoring or rewriting the current scene
+ok 395 - obsolete JSON links report an error without restoring or rewriting the current scene
+  ---
+  duration_ms: 0.185167
+  type: 'test'
+  ...
+# Subtest: invalid links leave the current scene usable and are replaced only after a camera change
+ok 396 - invalid links leave the current scene usable and are replaced only after a camera change
+  ---
+  duration_ms: 0.351958
+  type: 'test'
+  ...
+# Subtest: popstate restores the stored camera and disposal removes history listeners and scheduled work
+ok 397 - popstate restores the stored camera and disposal removes history listeners and scheduled work
+  ---
+  duration_ms: 0.389333
+  type: 'test'
+  ...
+# Subtest: volume dataset cards preserve all prepared lens previews and explicit attribution
+ok 398 - volume dataset cards preserve all prepared lens previews and explicit attribution
+  ---
+  duration_ms: 1.009667
+  type: 'test'
+  ...
+# Subtest: volume dataset presentation rejects wrong owners, missing lenses and unbound sources
+ok 399 - volume dataset presentation rejects wrong owners, missing lenses and unbound sources
+  ---
+  duration_ms: 0.490541
+  type: 'test'
+  ...
+1..399
+# tests 399
+# suites 0
+# pass 376
+# fail 23
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 19779.742542

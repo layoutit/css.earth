@@ -45,6 +45,19 @@
       "title": "AIA 171 Å synoptic map CR2311",
       "detail": "171 Å",
       "summary": "171 Å images of the corona from May–June 2026, with gaps filled from nearby latitudes."
+    },
+    "cor1-density": {
+      "title": "COR1-B density CR2053 · μ=10",
+      "detail": "Electron density · μ=10",
+      "summary": "STEREO-B reconstruction from 4–18 February 2007, using the archive μ=10 regularization and a display-only radial taper.",
+      "sources": [
+        {
+          "catalogueId": "nasa-stereo-cor1-tomography-2025",
+          "url": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml",
+          "label": "NASA STEREO Science Center · COR1 tomography release",
+          "checked": "2026-09-20"
+        }
+      ]
     }
   }
 }

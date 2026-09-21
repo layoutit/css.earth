@@ -1,5 +1,10 @@
 name: Object-scope gate
 
+# Part of the shared PR feedback budget: target 2 minutes, maximum 3 minutes
+# end to end across all merge-required checks, including queue/setup time.
+# Keep this gate lightweight; timeout-minutes is a safety limit, not the budget.
+# Maintenance rules and failure recovery: docs/ci-cd.md.
+
 on:
   pull_request:
     # Adding/removing the pipeline-change label (or pushing a new commit) must re-evaluate the gate against a
@@ -26,6 +31,10 @@ jobs:
           # touched, and `git diff --name-only` reads only commits and trees.
           fetch-depth: 0
           filter: blob:none
+          # The gate counts object paths in Git's complete diff; it never reads those objects' data.
+          sparse-checkout-cone-mode: false
+          sparse-checkout: |
+            /tools/*.mts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'

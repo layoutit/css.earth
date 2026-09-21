@@ -395,17 +395,22 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationOpacities = {}, opacityClock, orbitRenderer: initialOrbitRenderer = 'bars' }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationOpacities = {}, distantNavigation, opacityClock, orbitRenderer: initialOrbitRenderer = 'bars' }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
-  /** Which retained paint owner draws the planned orbit chords; switchable at runtime. */
-  orbitRenderer?: OrbitRenderer;
+  /** Which retained paint owner draws the prepared orbit lines. */
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
   annotationPriorities?: Readonly<Record<string, number>>;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
+  distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
   opacityClock?: OpacityClock;
+  orbitRenderer?: OrbitRenderer;
 }) {
+  if (distantNavigation && (!Number.isFinite(distantNavigation.afterDistanceM) || distantNavigation.afterDistanceM <= 0)) {
+    throw new TypeError('Distant navigation requires a positive finite distance.');
+  }
+  const distantNonNavigableIds = new Set(distantNavigation?.nonNavigableIds ?? []);
   const root = host.ownerDocument.createElement('div');
   root.className = 'prepared-world-context';
   root.style.cssText = 'position:absolute;inset:0;pointer-events:none';
@@ -413,12 +418,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   presentationHost.insertBefore(root, before);
   const picking = screenPicking(host);
   let presentationRevision = 0, policyRevision = 0, publishedPolicyRevision = -1;
+  let distantNavigationActive = false;
   const contextFrames = createWorldContextFrameReceiver();
   let previousHeader: { emphasizedId: string | null; selectionStrength: number; width: number; height: number } | null = null;
   let pickTargets: ScreenPickTarget[] = [];
   const points = new Map([plan.focus, ...plan.bodies].map(body => [body.id, body]));
   const selectionPolicy = createContextSelectionPolicy(plan);
-  let orbitRenderer: OrbitRenderer = initialOrbitRenderer, publishCount = 0;
+  const orbitRenderer: OrbitRenderer = initialOrbitRenderer;
+  let publishCount = 0;
   const bodies = [plan.focus, ...plan.bodies].map((body, index) => {
     const sprite = sprites[body.id];
     if (!sprite) { root.remove(); throw new TypeError(`Missing prepared navigation sprite ${body.id}.`); }
@@ -530,6 +537,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   let selectionPreview: string | null | undefined;
   let navigationInFlight = false;
   let rotationActive = false;
+  let preserveReleasedAnnotations = false;
   let labelBlockers: readonly LabelScreenRect[] = [];
   let hoverIntent = false;
   const animatedAnnotations = new Set<(typeof bodies)[number]>();
@@ -611,7 +619,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       return { world, viewport: { ...viewport,
         widthPixels: viewport.widthPixels ?? host.clientWidth, heightPixels: viewport.heightPixels ?? host.clientHeight },
         contextCommittedId: contextFrames.committedId,
-        selectedId, overview, selectionPreview, navigationInFlight, labelBlockers, anchorOnly: publishingBodies === anchorOnly,
+        selectedId, overview, selectionPreview, navigationInFlight, rotationActive,
+        preserveCommittedAnnotations: preserveReleasedAnnotations, labelBlockers, anchorOnly: publishingBodies === anchorOnly,
         orbitLodPixels: ORBIT_RENDERER_LOD_PIXELS[orbitRenderer],
         bodies: bodies.map(({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize, labelShown, labelPlacement,
           indicatorShown, indicatorRadius, orbitAppearance }) => ({ hovered, bodyHidden, orbitHidden, labelHidden, labelSuppressed, indicatorHidden, highlighted, labelSize,
@@ -667,18 +676,6 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         presentationRevision++; policyRevision++; refresh();
       }
     },
-    setOrbitRenderer(renderer: OrbitRenderer) {
-      if (destroyed || orbitRenderer === renderer) return;
-      orbitRenderer = renderer;
-      for (const entry of bodies) {
-        entry.piecePool.destroy();
-        entry.piecePool = mountPreparedOrbitLines(entry.orbitRoot, { renderer, dashed: entry.orbitRoot.dataset.contextPlacement === 'approximate',
-          capacity: orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0), id: entry.body.id });
-        entry.pieces = entry.piecePool.elements; entry.previousCount = 0;
-      }
-      // The next publication carries every chord again: retained deltas name leaves that no longer exist.
-      contextFrames.invalidate(); presentationRevision++; policyRevision++; refresh();
-    },
     setHiddenOrbits(ids: readonly string[]) {
       if (destroyed) return;
       const hidden = new Set(ids);
@@ -711,10 +708,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     },
     setRotationActive(active: boolean) {
       if (destroyed || rotationActive === active) return;
+      preserveReleasedAnnotations = rotationActive && !active;
       rotationActive = active;
       if (active) { hoverIntent = false; settleHover(); }
-      // Placement uses the same committed state during motion and at rest.
-      // Release only refreshes interaction targets that were suspended during drag.
+      // The first settled publication preserves the final moving frame. A later
+      // interaction may add newly available labels without a release-frame jump.
       presentationRevision++;
       if (!active) policyRevision++;
       refresh();
@@ -775,6 +773,13 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       if (destroyed) return;
       fader.batch(() => {
       const cameraChanged = !sameCamera(world, viewport);
+      const nextDistantNavigationActive = distantNavigation !== undefined && Math.hypot(
+        world.pose.positionM[0] - plan.focus.positionM[0],
+        world.pose.positionM[1] - plan.focus.positionM[1],
+        world.pose.positionM[2] - plan.focus.positionM[2],
+      ) >= distantNavigation.afterDistanceM;
+      const distantNavigationChanged = nextDistantNavigationActive !== distantNavigationActive;
+      distantNavigationActive = nextDistantNavigationActive;
       const interactiveHover = hoverIntent && !cameraChanged && !rotationActive && !navigationInFlight;
       if (cameraChanged || rotationActive || navigationInFlight) settleHover();
       const view = preparedFrame ? null : readView(world, viewport);
@@ -783,6 +788,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       const delta = preparedFrame && 'updates' in preparedFrame ? contextFrames.accept(preparedFrame) : null;
       if (!delta) contextFrames.invalidate();
       const frame = delta?.frame ?? (preparedFrame as Exclude<WorldContextPublication, { updates: unknown }> | undefined) ?? planWorld(view!);
+      if (!rotationActive) preserveReleasedAnnotations = false;
       latest = { world, viewport }; systemRetired = opacity === 0;
       presentationRevision++;
       let ranksChanged = false;
@@ -809,7 +815,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       cameraState[7] = viewport.focalPixels; cameraState[8] = width; cameraState[9] = height;
       cameraState.set(viewport.principalOffsetPixels, 10);
       const resized = previousHeader?.width !== width || previousHeader?.height !== height;
-      const policyChanged = !delta || resized || publishedPolicyRevision !== policyRevision || previousHeader?.emphasizedId !== emphasizedId ||
+      const policyChanged = !delta || resized || distantNavigationChanged || publishedPolicyRevision !== policyRevision || previousHeader?.emphasizedId !== emphasizedId ||
         previousHeader?.selectionStrength !== selectionStrength;
       publishedPolicyRevision = policyRevision;
       previousHeader = { emphasizedId, selectionStrength, width, height };
@@ -878,6 +884,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const { x, y, diameter, markerOpacity, visible, annotationVisible,
           lineWidth, orbitVisibility, segments, labelPosition, index } = projected;
         const { body, marker } = entry;
+        const navigationSuppressed = distantNavigationActive && distantNonNavigableIds.has(body.id);
         if (mask === 0) continue;
         const emphasis = selectionPolicy.opacity(body.id, emphasizedId, entry.hovered, selectionStrength) *
           (highlighting && !entry.highlighted && !entry.hovered ? .3 : 1);
@@ -946,7 +953,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           entry.center = [x, y];
         }
         entry.markerPick = null;
-        if (markerShown && markerOpacity > .1) {
+        if (!navigationSuppressed && markerShown && markerOpacity > .1) {
           const radius = entry.indicatorHidden
             ? Math.max(markerDiameter / 2, entry.indicatorRadius + 5) : markerDiameter / 2;
           const target = entry.markerPickTarget ??= { element: marker, rank, shape: { kind: 'circle', x, y, radius } };
@@ -956,7 +963,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const indicatorVisible = entry.indicatorShown;
         const indicatorState = String(indicatorVisible && !(navigationInFlight && body.id === emphasizedId));
         if (marker.dataset.contextIndicatorVisible !== indicatorState) marker.dataset.contextIndicatorVisible = indicatorState;
-        if (indicatorVisible && markerOpacity > .1) {
+        if (!navigationSuppressed && indicatorVisible && markerOpacity > .1) {
           const target = entry.indicatorPickTarget ??= { element: marker, rank: rank + 2, shape: { kind: 'circle', x, y, radius: entry.indicatorRadius + 5 } };
           target.rank = rank + 2; target.shape.x = x; target.shape.y = y; target.shape.radius = entry.indicatorRadius + 5;
           entry.indicatorPick = target;
@@ -981,7 +988,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           }
           entry.orbitBounds = systemFade.isSystemStar(entry.orbit.centerBodyId) && orbitVisibility > .1
             ? projected.orbitBounds : null;
-          const navigable = orbitVisibility > 0.1 && !entry.orbitHidden;
+          const navigable = !navigationSuppressed && orbitVisibility > 0.1 && !entry.orbitHidden;
           if (!navigationInFlight && !rotationActive && entry.orbitNavigable !== navigable) {
             entry.orbitNavigable = navigable;
             entry.orbitNavigation!.update(navigable ? body.id : null, body.name);
@@ -996,7 +1003,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.piecePool.publish(segments);
             entry.previousCount = segments.length;
           }
-          if (orbitVisibility > .1 && !entry.orbitHidden) {
+          if (!navigationSuppressed && orbitVisibility > .1 && !entry.orbitHidden) {
             const target = entry.orbitPickTarget ??= { element: entry.orbitRoot, rank, shape: { kind: 'segments', segments, bounds: projected.orbitBounds, halfWidth: lineWidth / 2 + 7 } };
             target.rank = rank; target.shape.segments = segments; target.shape.bounds = projected.orbitBounds; target.shape.halfWidth = lineWidth / 2 + 7;
             entry.orbitPick = target;
@@ -1022,7 +1029,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.labelRect = rect;
             const target = entry.labelPickTarget ??= { element: marker, rank: rank + 1, shape: { kind: 'rect', left: 0, top: 0, right: 0, bottom: 0 } };
             target.rank = rank + 1; target.shape.left = rect.left; target.shape.top = rect.top; target.shape.right = rect.right; target.shape.bottom = rect.bottom;
-            entry.labelPick = target;
+            entry.labelPick = navigationSuppressed ? null : target;
           }
         }
         // Flights and rotations keep keyboard/accessibility targets; they catch up after.

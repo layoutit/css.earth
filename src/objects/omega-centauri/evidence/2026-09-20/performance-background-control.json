@@ -1,0 +1,1023 @@
+{
+  "claim": "One controlled page-only background visibility pair; not a shipped fix or desktop FPS",
+  "base": "http://127.0.0.1:4219",
+  "measuredAt": "2026-09-20T21:25:36.898Z",
+  "revision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "browser": "148.0.7778.96",
+  "headless": true,
+  "hardware": {
+    "gpu": {
+      "devices": [
+        {
+          "vendorId": 65535,
+          "deviceId": 65535,
+          "vendorString": "Google Inc. (Google)",
+          "deviceString": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+          "driverVendor": "SwANGLE",
+          "driverVersion": "5.0.0"
+        }
+      ],
+      "auxAttributes": {
+        "amdSwitchable": false,
+        "canSupportThreadedTextureMailbox": false,
+        "directRenderingVersion": "",
+        "displayType": "ANGLE_SWIFTSHADER",
+        "glExtensions": "GL_AMD_performance_monitor GL_ANGLE_base_vertex_base_instance_shader_builtin GL_ANGLE_blob_cache GL_ANGLE_client_arrays GL_ANGLE_clip_cull_distance GL_ANGLE_compressed_texture_etc GL_ANGLE_copy_texture_3d GL_ANGLE_depth_texture GL_ANGLE_framebuffer_blit GL_ANGLE_framebuffer_multisample GL_ANGLE_get_image GL_ANGLE_get_serialized_context_string GL_ANGLE_get_tex_level_parameter GL_ANGLE_instanced_arrays GL_ANGLE_memory_object_flags GL_ANGLE_memory_size GL_ANGLE_multi_draw GL_ANGLE_pack_reverse_row_order GL_ANGLE_polygon_mode GL_ANGLE_program_binary_readiness_query GL_ANGLE_program_cache_control GL_ANGLE_read_only_depth_stencil_feedback_loops GL_ANGLE_relaxed_vertex_attribute_type GL_ANGLE_renderability_validation GL_ANGLE_request_extension GL_ANGLE_rgbx_internal_format GL_ANGLE_robust_client_memory GL_ANGLE_robust_fragment_shader_output GL_ANGLE_robust_resource_initialization GL_ANGLE_shader_pixel_local_storage GL_ANGLE_shader_pixel_local_storage_coherent GL_ANGLE_stencil_texturing GL_ANGLE_texture_compression_dxt3 GL_ANGLE_texture_compression_dxt5 GL_ANGLE_texture_multisample GL_ANGLE_texture_usage GL_ANGLE_translated_shader_source GL_ANGLE_vulkan_image GL_ANGLE_yuv_internal_format GL_APPLE_clip_distance GL_ARM_rgba8 GL_ARM_shader_framebuffer_fetch GL_ARM_shader_framebuffer_fetch_depth_stencil GL_CHROMIUM_bind_generates_resource GL_CHROMIUM_bind_uniform_location GL_CHROMIUM_copy_compressed_texture GL_CHROMIUM_copy_texture GL_CHROMIUM_lose_context GL_EXT_EGL_image_array GL_EXT_EGL_image_external_wrap_modes GL_EXT_EGL_image_storage GL_EXT_base_instance GL_EXT_blend_minmax GL_EXT_buffer_storage GL_EXT_clear_texture GL_EXT_clip_control GL_EXT_clip_cull_distance GL_EXT_color_buffer_float GL_EXT_color_buffer_half_float GL_EXT_compressed_ETC1_RGB8_sub_texture GL_EXT_conservative_depth GL_EXT_copy_image GL_EXT_debug_label GL_EXT_debug_marker GL_EXT_depth_clamp GL_EXT_discard_framebuffer GL_EXT_disjoint_timer_query GL_EXT_draw_buffers GL_EXT_draw_buffers_indexed GL_EXT_draw_elements_base_vertex GL_EXT_float_blend GL_EXT_frag_depth GL_EXT_instanced_arrays GL_EXT_map_buffer_range GL_EXT_memory_object GL_EXT_memory_object_fd GL_EXT_occlusion_query_boolean GL_EXT_polygon_offset_clamp GL_EXT_read_format_bgra GL_EXT_robustness GL_EXT_sRGB GL_EXT_sRGB_write_control GL_EXT_semaphore GL_EXT_separate_shader_objects GL_EXT_shader_framebuffer_fetch GL_EXT_shader_framebuffer_fetch_non_coherent GL_EXT_shader_non_constant_global_initializers GL_EXT_shader_texture_lod GL_EXT_shadow_samplers GL_EXT_texture_border_clamp GL_EXT_texture_compression_bptc GL_EXT_texture_compression_dxt1 GL_EXT_texture_compression_rgtc GL_EXT_texture_compression_s3tc_srgb GL_EXT_texture_cube_map_array GL_EXT_texture_filter_anisotropic GL_EXT_texture_format_BGRA8888 GL_EXT_texture_mirror_clamp_to_edge GL_EXT_texture_rg GL_EXT_texture_sRGB_R8 GL_EXT_texture_sRGB_RG8 GL_EXT_texture_sRGB_decode GL_EXT_texture_shadow_lod GL_EXT_texture_storage GL_EXT_texture_type_2_10_10_10_REV GL_EXT_unpack_subimage GL_KHR_blend_equation_advanced GL_KHR_debug GL_KHR_robust_buffer_access_behavior GL_KHR_robustness GL_KHR_texture_compression_astc_ldr GL_NV_depth_buffer_float2 GL_NV_fence GL_NV_framebuffer_blit GL_NV_pack_subimage GL_NV_pixel_buffer_object GL_NV_polygon_mode GL_NV_read_depth GL_NV_read_depth_stencil GL_NV_read_stencil GL_NV_shader_noperspective_interpolation GL_OES_EGL_image GL_OES_EGL_image_external GL_OES_EGL_image_external_essl3 GL_OES_EGL_sync GL_OES_compressed_EAC_R11_signed_texture GL_OES_compressed_EAC_R11_unsigned_texture GL_OES_compressed_EAC_RG11_signed_texture GL_OES_compressed_EAC_RG11_unsigned_texture GL_OES_compressed_ETC1_RGB8_texture GL_OES_compressed_ETC2_RGB8_texture GL_OES_compressed_ETC2_RGBA8_texture GL_OES_compressed_ETC2_punchthroughA_RGBA8_texture GL_OES_compressed_ETC2_punchthroughA_sRGB8_alpha_texture GL_OES_compressed_ETC2_sRGB8_alpha8_texture GL_OES_compressed_ETC2_sRGB8_texture GL_OES_compressed_paletted_texture GL_OES_copy_image GL_OES_depth24 GL_OES_depth32 GL_OES_depth_texture GL_OES_depth_texture_cube_map GL_OES_draw_buffers_indexed GL_OES_draw_elements_base_vertex GL_OES_element_index_uint GL_OES_fbo_render_mipmap GL_OES_get_program_binary GL_OES_mapbuffer GL_OES_packed_depth_stencil GL_OES_required_internalformat GL_OES_rgb8_rgba8 GL_OES_sample_shading GL_OES_sample_variables GL_OES_shader_multisample_interpolation GL_OES_standard_derivatives GL_OES_surfaceless_context GL_OES_texture_3D GL_OES_texture_border_clamp GL_OES_texture_cube_map_array GL_OES_texture_float GL_OES_texture_float_linear GL_OES_texture_half_float GL_OES_texture_half_float_linear GL_OES_texture_npot GL_OES_texture_stencil8 GL_OES_texture_storage_multisample_2d_array GL_OES_vertex_array_object GL_OES_vertex_half_float GL_OES_vertex_type_10_10_10_2 GL_OVR_multiview GL_OVR_multiview2 ",
+        "glImplementationParts": "(gl=egl-angle,angle=swiftshader)",
+        "glRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (LLVM 10.0.0) (0x0000C0DE)), SwiftShader driver-5.0.0)",
+        "glResetNotificationStrategy": 33362,
+        "glVendor": "Google Inc. (Google)",
+        "glVersion": "OpenGL ES 3.0 (ANGLE 2.1.27471 git hash: cc0e3572e878)",
+        "glWsExtensions": "",
+        "glWsVendor": "",
+        "glWsVersion": "",
+        "inProcessGpu": false,
+        "initializationTime": 0.025957,
+        "isAsan": false,
+        "isClangCoverage": false,
+        "jpegDecodeAcceleratorSupported": false,
+        "maxMsaaSamples": "4",
+        "optimus": false,
+        "passthroughCmdDecoder": true,
+        "pixelShaderVersion": "3.00",
+        "processCrashCount": 0,
+        "sandboxed": false,
+        "skiaBackendType": "GraphiteDawnVulkan",
+        "subpixelFontRendering": true,
+        "targetCpuBits": 64,
+        "vertexShaderVersion": "3.00",
+        "visibilityCallbackCallCount": 0
+      },
+      "featureStatus": {
+        "2d_canvas": "unavailable_software",
+        "direct_rendering_display_compositor": "disabled_off_ok",
+        "gpu_compositing": "disabled_software",
+        "multiple_raster_threads": "enabled_on",
+        "opengl": "disabled_off",
+        "rasterization": "disabled_software",
+        "raw_draw": "disabled_off_ok",
+        "skia_graphite": "disabled_off",
+        "trees_in_viz": "disabled_off",
+        "video_decode": "disabled_software",
+        "video_encode": "disabled_software",
+        "webgl": "unavailable_software",
+        "webgpu": "unavailable_software",
+        "webnn": "unavailable_software"
+      },
+      "driverBugWorkarounds": [],
+      "videoDecoding": [],
+      "videoEncoding": []
+    }
+  },
+  "node": "v22.23.2",
+  "platform": "darwin",
+  "arch": "arm64",
+  "protocol": {
+    "nativeUrl": "/sun/?focus=omega-centauri",
+    "warmup": "networkidle, then30 RAF",
+    "idleFrames": 30,
+    "drag": {
+      "from": [
+        720,
+        500
+      ],
+      "to": [
+        920,
+        560
+      ],
+      "steps": 40
+    },
+    "settleFrames": 30,
+    "noCameraOverride": true,
+    "noSourceChanges": true,
+    "hiddenSelector": "[data-volume-lens-object]:not([data-volume-lens-object=omega-centauri]),[data-volume-opacity]",
+    "scope": "Entire non-Omega volume model roots including their embedded catalogue star nodes; global ordinary stars, shell and markers retained; runtime publication JS unchanged"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/sun/prepared/world-context.json",
+      "bytes": 7536975,
+      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/nebula.json",
+      "bytes": 2633,
+      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/lenses.json",
+      "bytes": 1202415,
+      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+    },
+    {
+      "path": "site/prepared-context-navigation.mts",
+      "bytes": 13194,
+      "sha256": "39b882f2d0ddf921b50827ba267fe8b83ba61dd6dc27c0ff469115a077045aea"
+    },
+    {
+      "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
+      "bytes": 46748,
+      "sha256": "14f1953aa5ba1734b88532980cd2078044225c3b42d59b0cf67831c0dba1b3e0"
+    },
+    {
+      "path": "src/renderers/css/universe/prepared-world-context.ts",
+      "bytes": 75841,
+      "sha256": "00758c8d75054092c209c68b4e311605a4a886d59fda5b36cdf86bf5d41d9ab2"
+    },
+    {
+      "path": "src/renderers/css/dist/universe.js",
+      "bytes": 10185,
+      "sha256": "ce237fcd30c24ab63ed72016f0f8309de1fe0c2f0a6370649af54b1d8f3569a2"
+    }
+  ],
+  "reports": [
+    {
+      "repeat": 1,
+      "mode": "control",
+      "targetSelector": "[data-volume-lens-object]:not([data-volume-lens-object=\"omega-centauri\"]),[data-volume-opacity]",
+      "targetDisplays": [
+        {
+          "id": "milky-way-overview",
+          "display": "block"
+        },
+        {
+          "id": "lmc",
+          "display": "block"
+        },
+        {
+          "id": "m42",
+          "display": "none"
+        },
+        {
+          "id": "m8",
+          "display": "block"
+        },
+        {
+          "id": "smc",
+          "display": "block"
+        }
+      ],
+      "afterTargetDisplays": [
+        {
+          "id": "milky-way-overview",
+          "display": "block"
+        },
+        {
+          "id": "lmc",
+          "display": "block"
+        },
+        {
+          "id": "m42",
+          "display": "none"
+        },
+        {
+          "id": "m8",
+          "display": "block"
+        },
+        {
+          "id": "smc",
+          "display": "block"
+        }
+      ],
+      "beforePose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -105140426158691240000,
+              -41833991150782185000,
+              -115235646545839930000
+            ],
+            "orientationXyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "distanceM": 8165459600736780000,
+        "distanceRadii": 6.096653162046748,
+        "projectedRadiusPixels": 204.55157392967627
+      },
+      "afterPose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -109962411235333930000,
+              -40387395627789610000,
+              -116972221966195500000
+            ],
+            "orientationXyzw": [
+              -0.0937021412901332,
+              -0.3123404709671109,
+              -5.5050914713649234e-18,
+              0.9453376851229868
+            ]
+          }
+        },
+        "distanceM": 8165459600736674000,
+        "distanceRadii": 6.096653162046668,
+        "projectedRadiusPixels": 204.55157392967894
+      },
+      "beforeDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0810833,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.566307,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 79,
+        "eagerImagesPending": 0
+      },
+      "afterDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0739867,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.576726,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 79,
+        "eagerImagesPending": 0
+      },
+      "inputDurationMs": 33056.020625000005,
+      "idle": {
+        "durationMs": 248.80000019073486,
+        "raf": {
+          "frames": 30,
+          "medianGapMs": 8.300000000000182,
+          "p95GapMs": 8.599999999999454,
+          "maxGapMs": 8.700000000000728,
+          "gapsOver33ms": 0,
+          "gapsOver50ms": 0,
+          "gapsMs": [
+            8.334000000000742,
+            8.299999999999272,
+            8.400000000000546,
+            8.300000000000182,
+            8.299999999999272,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            8.199999999999818,
+            8.5,
+            8.400000000000546,
+            8.199999999999818,
+            8.399999999999636,
+            8.300000000000182,
+            8.300000000000182,
+            8.399999999999636,
+            8.400000000000546,
+            7.599999999999454,
+            8.700000000000728,
+            8.599999999999454,
+            8.300000000000182,
+            8.399999999999636,
+            8.400000000000546,
+            8.300000000000182,
+            8.299999999999272,
+            8.300000000000182,
+            8.300000000000182,
+            8.399999999999636,
+            8.400000000000546
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 0,
+          "RecalcStyleCount": 0,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0,
+          "DevToolsCommandDuration": 0.00007100000000000162,
+          "ScriptDuration": 0.0003110000000000057,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.005376000000000047,
+          "TaskOtherDuration": 0.004994000000000054
+        }
+      },
+      "interaction": {
+        "durationMs": 34942.700000047684,
+        "raf": {
+          "frames": 74,
+          "medianGapMs": 449.1000000000058,
+          "p95GapMs": 1283.300000000003,
+          "maxGapMs": 2308.2999999999993,
+          "gapsOver33ms": 41,
+          "gapsOver50ms": 41,
+          "gapsMs": [
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            25,
+            933.3000000000011,
+            8.399999999999636,
+            8.299999999999272,
+            958.3999999999996,
+            941.6000000000004,
+            940.8000000000011,
+            625.8999999999996,
+            1025,
+            1008.1000000000004,
+            1000.1999999999989,
+            841.6000000000004,
+            841.7999999999993,
+            866.2000000000007,
+            733.7000000000007,
+            1458.3999999999978,
+            16.700000000000728,
+            2308.2999999999993,
+            1141.7000000000007,
+            74.90000000000146,
+            8.399999999997817,
+            1108.300000000003,
+            1116.699999999997,
+            1283.300000000003,
+            1066.699999999997,
+            1058.300000000003,
+            16.69999999999709,
+            2100,
+            1050,
+            141.60000000000218,
+            1040.9999999999964,
+            1034,
+            1033.300000000003,
+            1025,
+            1000,
+            466.6999999999971,
+            449.1000000000058,
+            450.1999999999971,
+            450.6999999999971,
+            458.3000000000029,
+            450,
+            457.59999999999854,
+            450.8000000000029,
+            458.29999999999563,
+            166.70000000000437,
+            450,
+            7.900000000001455,
+            158.09999999999854,
+            9,
+            8,
+            8.69999999999709,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            7.80000000000291,
+            8.799999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 5,
+          "RecalcStyleCount": 49,
+          "LayoutDuration": 0.0009560000000000003,
+          "RecalcStyleDuration": 0.08825000000000001,
+          "DevToolsCommandDuration": 0.007258999999999998,
+          "ScriptDuration": 0.124651,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.5020550000000001,
+          "TaskOtherDuration": 0.28093899999999994
+        }
+      },
+      "cdpBefore": {
+        "Timestamp": 1844624.518927,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5259,
+        "LayoutObjects": 10202,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 38657,
+        "Resources": 938,
+        "ContextLifecycleStateObservers": 41,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 4,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 499,
+        "LayoutCount": 11,
+        "RecalcStyleCount": 24,
+        "LayoutDuration": 0.013167,
+        "RecalcStyleDuration": 0.055495,
+        "DevToolsCommandDuration": 0.026869,
+        "ScriptDuration": 0.07459,
+        "V8CompileDuration": 0.000056,
+        "TaskDuration": 1.107298,
+        "TaskOtherDuration": 0.937121,
+        "ThreadTime": 0.855672,
+        "ProcessTime": 3.490485,
+        "JSHeapUsedSize": 217481452,
+        "JSHeapTotalSize": 269746176,
+        "FirstMeaningfulPaint": 1844619.559197,
+        "DomContentLoaded": 1844616.945784,
+        "NavigationStart": 1844616.534674
+      },
+      "cdpAfter": {
+        "Timestamp": 1844659.460535,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5316,
+        "LayoutObjects": 9034,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 35745,
+        "Resources": 481,
+        "ContextLifecycleStateObservers": 40,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 43,
+        "LayoutCount": 16,
+        "RecalcStyleCount": 73,
+        "LayoutDuration": 0.014123,
+        "RecalcStyleDuration": 0.143745,
+        "DevToolsCommandDuration": 0.034128,
+        "ScriptDuration": 0.199241,
+        "V8CompileDuration": 0.000056,
+        "TaskDuration": 1.609353,
+        "TaskOtherDuration": 1.21806,
+        "ThreadTime": 1.312425,
+        "ProcessTime": 5.117526,
+        "JSHeapUsedSize": 203928852,
+        "JSHeapTotalSize": 208666624,
+        "FirstMeaningfulPaint": 1844619.559197,
+        "DomContentLoaded": 1844616.945784,
+        "NavigationStart": 1844616.534674
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "repeat": 2,
+      "mode": "background-hidden",
+      "targetSelector": "[data-volume-lens-object]:not([data-volume-lens-object=\"omega-centauri\"]),[data-volume-opacity]",
+      "targetDisplays": [
+        {
+          "id": "milky-way-overview",
+          "display": "none"
+        },
+        {
+          "id": "lmc",
+          "display": "none"
+        },
+        {
+          "id": "m8",
+          "display": "none"
+        },
+        {
+          "id": "m42",
+          "display": "none"
+        },
+        {
+          "id": "smc",
+          "display": "none"
+        }
+      ],
+      "afterTargetDisplays": [
+        {
+          "id": "milky-way-overview",
+          "display": "none"
+        },
+        {
+          "id": "lmc",
+          "display": "none"
+        },
+        {
+          "id": "m8",
+          "display": "none"
+        },
+        {
+          "id": "m42",
+          "display": "none"
+        },
+        {
+          "id": "smc",
+          "display": "none"
+        }
+      ],
+      "beforePose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -105140426158691240000,
+              -41833991150782185000,
+              -115235646545839930000
+            ],
+            "orientationXyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "distanceM": 8165459600736780000,
+        "distanceRadii": 6.096653162046748,
+        "projectedRadiusPixels": 204.55157392967627
+      },
+      "afterPose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -109962411235333930000,
+              -40387395627789610000,
+              -116972221966195500000
+            ],
+            "orientationXyzw": [
+              -0.0937021412901332,
+              -0.3123404709671109,
+              -5.5050914713649234e-18,
+              0.9453376851229868
+            ]
+          }
+        },
+        "distanceM": 8165459600736674000,
+        "distanceRadii": 6.096653162046668,
+        "projectedRadiusPixels": 204.55157392967894
+      },
+      "beforeDom": {
+        "totalElements": 29064,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "lmc",
+            "display": "none",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m8",
+            "display": "none",
+            "opacity": 0.0810833,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "smc",
+            "display": "none",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "none",
+            "opacity": 0.566307,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 78,
+        "eagerImagesPending": 0
+      },
+      "afterDom": {
+        "totalElements": 29064,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "lmc",
+            "display": "none",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m8",
+            "display": "none",
+            "opacity": 0.0739867,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "smc",
+            "display": "none",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "none",
+            "opacity": 0.576726,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 78,
+        "eagerImagesPending": 0
+      },
+      "inputDurationMs": 8381.190499999997,
+      "idle": {
+        "durationMs": 246.39999985694885,
+        "raf": {
+          "frames": 30,
+          "medianGapMs": 8.300000000000182,
+          "p95GapMs": 9,
+          "maxGapMs": 9.100000000000364,
+          "gapsOver33ms": 0,
+          "gapsOver50ms": 0,
+          "gapsMs": [
+            8.199999999999818,
+            7.699999999999818,
+            9.100000000000364,
+            8.199999999999818,
+            8.399999999999636,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            7.600000000000364,
+            8.899999999999636,
+            8.5,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            8.400000000000546,
+            8.099999999999454,
+            8.5,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            8.300000000000182,
+            7.800000000000182,
+            9,
+            8.300000000000182,
+            8.299999999999272,
+            8.400000000000546,
+            8.300000000000182,
+            8.299999999999272,
+            8.400000000000546
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 0,
+          "RecalcStyleCount": 0,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0,
+          "DevToolsCommandDuration": 0.00006899999999999962,
+          "ScriptDuration": 0.00022800000000000598,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.003882999999999859,
+          "TaskOtherDuration": 0.003585999999999978
+        }
+      },
+      "interaction": {
+        "durationMs": 9482.400000095367,
+        "raf": {
+          "frames": 69,
+          "medianGapMs": 191.59999999999854,
+          "p95GapMs": 308.40000000000055,
+          "maxGapMs": 325,
+          "gapsOver33ms": 42,
+          "gapsOver50ms": 42,
+          "gapsMs": [
+            8.400000000000546,
+            8.199999999999818,
+            25.100000000000364,
+            166.59999999999945,
+            308.40000000000055,
+            308.2999999999993,
+            308.3000000000011,
+            325,
+            308.39999999999964,
+            316.60000000000036,
+            308.2999999999993,
+            316.7000000000007,
+            308.39999999999964,
+            308.2999999999993,
+            183.3000000000011,
+            191.59999999999854,
+            182.8000000000011,
+            192.29999999999927,
+            183.39999999999964,
+            191.60000000000036,
+            191.70000000000073,
+            191.6999999999989,
+            191.60000000000036,
+            191.70000000000073,
+            191.60000000000036,
+            199.79999999999927,
+            200.20000000000073,
+            191.6999999999989,
+            200,
+            191.70000000000073,
+            200,
+            200,
+            191.6999999999989,
+            200,
+            200,
+            199.60000000000036,
+            200.39999999999964,
+            199.90000000000146,
+            191.6999999999989,
+            200,
+            200,
+            200,
+            158.3000000000011,
+            191.29999999999927,
+            150.40000000000146,
+            8.299999999999272,
+            8.299999999999272,
+            8.400000000001455,
+            8.299999999999272,
+            8.299999999999272,
+            8.400000000001455,
+            8.399999999997817,
+            8.299999999999272,
+            8.30000000000291,
+            8.299999999999272,
+            8.099999999998545,
+            8.700000000000728,
+            8.200000000000728,
+            8.299999999999272,
+            8.400000000001455,
+            7.599999999998545,
+            9.200000000000728,
+            8.200000000000728,
+            8.399999999997817,
+            8.299999999999272,
+            8.30000000000291,
+            8.299999999999272,
+            8.399999999997817,
+            8.30000000000291
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 1,
+          "RecalcStyleCount": 44,
+          "LayoutDuration": 0.00005800000000000076,
+          "RecalcStyleDuration": 0.012986000000000004,
+          "DevToolsCommandDuration": 0.006305000000000002,
+          "ScriptDuration": 0.11778100000000001,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.228005,
+          "TaskOtherDuration": 0.09087500000000004
+        }
+      },
+      "cdpBefore": {
+        "Timestamp": 1844667.054258,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5261,
+        "LayoutObjects": 10213,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 38660,
+        "Resources": 966,
+        "ContextLifecycleStateObservers": 41,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 4,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 504,
+        "LayoutCount": 14,
+        "RecalcStyleCount": 24,
+        "LayoutDuration": 0.012497,
+        "RecalcStyleDuration": 0.060965,
+        "DevToolsCommandDuration": 0.024578,
+        "ScriptDuration": 0.069118,
+        "V8CompileDuration": 0.000059,
+        "TaskDuration": 1.052571,
+        "TaskOtherDuration": 0.885354,
+        "ThreadTime": 0.817913,
+        "ProcessTime": 3.325807,
+        "JSHeapUsedSize": 218982068,
+        "JSHeapTotalSize": 268959744,
+        "FirstMeaningfulPaint": 1844662.444582,
+        "DomContentLoaded": 1844659.934278,
+        "NavigationStart": 1844659.537014
+      },
+      "cdpAfter": {
+        "Timestamp": 1844676.535466,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5374,
+        "LayoutObjects": 5214,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 35748,
+        "Resources": 468,
+        "ContextLifecycleStateObservers": 40,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 4,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 121,
+        "LayoutCount": 15,
+        "RecalcStyleCount": 68,
+        "LayoutDuration": 0.012555,
+        "RecalcStyleDuration": 0.073951,
+        "DevToolsCommandDuration": 0.030883,
+        "ScriptDuration": 0.186899,
+        "V8CompileDuration": 0.000059,
+        "TaskDuration": 1.280576,
+        "TaskOtherDuration": 0.976229,
+        "ThreadTime": 1.029277,
+        "ProcessTime": 3.814634,
+        "JSHeapUsedSize": 227496440,
+        "JSHeapTotalSize": 273940480,
+        "FirstMeaningfulPaint": 1844662.444582,
+        "DomContentLoaded": 1844659.934278,
+        "NavigationStart": 1844659.537014
+      },
+      "errors": [],
+      "failed": []
+    }
+  ]
+}

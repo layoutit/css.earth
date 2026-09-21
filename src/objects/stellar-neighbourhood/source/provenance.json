@@ -10,7 +10,7 @@
       "source": "HYG v4.4 (Hipparcos-Yale-Gliese Database, D. Nash / astronexus)",
       "license": "CC-BY-SA-4.0",
       "url": "https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE",
-      "epoch": "ICRS/J2000 equinox; source astrometry primarily Hipparcos-2007 reduction, epoch J1991.25",
+      "epoch": "ICRS/J2000.0 equinox and coordinate epoch; HYG has already propagated Hipparcos source positions to J2000.0.",
       "built": "2026-09-02",
       "extra": {
         "count": 109389,
@@ -31,7 +31,7 @@
         "totalSourceRows": 119614
       },
       "credit": "HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.",
-      "modifications": "Complete row set reordered into a spatial hierarchy; luminosity-weighted proxies and 32-color display quantization. No astrometry propagation."
+      "modifications": "Complete row set reordered into a spatial hierarchy; exact HIP matches adopt existing detailed body astrometry at the fixed scene epoch, preserving HYG apparent magnitude at the Sun. Other coordinates are unchanged. Luminosity-weighted proxies and 32-color display quantization."
     }
   ],
   "qualification": "Local generated assets; no network publication. HYG astrometry is a local stellar neighbourhood, not a full Milky Way stellar census.",
@@ -48,7 +48,7 @@
   "catalogueDisplay": {
     "feature": "stars",
     "label": "HYG",
-    "credit": "Star catalogue · David Nash / Astronexus · CC BY-SA 4.0.",
+    "credit": "Star catalogue \u00b7 David Nash / Astronexus \u00b7 CC BY-SA 4.0.",
     "description": "HYG Stellar Database by David Nash / Astronexus. Prepared derivatives licensed CC-BY-SA-4.0.",
     "footerAliases": [
       "https://codeberg.org/astronexus/hyg/raw/branch/main/data/hyg/CURRENT/LICENSE"

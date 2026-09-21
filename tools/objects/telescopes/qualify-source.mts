@@ -1,11 +1,13 @@
 /** Acquire and qualify one exact package observation. Decoding establishes readability, never calibration or map registration. */
-import { fitsMetadata, isisMetadata, pdsMetadata } from './native-metadata.mts';
+import { readProductScience } from './product-science.mts';
+import { parseProductFacts } from './qualified-observations.mts';
+import { verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 import { sourceHeaders } from './source-transfer.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import { requireArray, requireRecord } from '../../source-values.mts';
 import { mkdir, readFile, writeFile, rename, rm, open, realpath } from 'node:fs/promises';
-import { dirname, resolve, basename } from 'node:path';
+import { dirname, resolve, basename, relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { withIdleTimeout, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../source-mirror.mts';
 import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor } from '../../fits.mts';
@@ -15,6 +17,9 @@ import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
 import { inside, assertPinnedLabel, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
+import { STEREO_COR1_F16_PROFILE } from './observation-families.mts';
+import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16-spherical-grid.mts';
+import { member } from './families/common.mts';
 
 export async function acquireSourceFile(root: string, file: SourceFile): Promise<void> {
   const path = inside(root, file.path), existing = await pinFile(path).catch(() => null);
@@ -56,7 +61,7 @@ export function inspectFits(bytes: Buffer, identity: SourceProduct['identity'], 
   const arrays = rice ? [{ dimensions: [rice.width, rice.height], count: rice.values.length, at: (i: number) => rice.values[i]! }]
     : hdus.filter(hdu => hdu.count && hdu.header.XTENSION !== 'BINTABLE' && hdu.header.XTENSION !== 'TABLE').map(hdu => ({ dimensions: hdu.dimensions, count: hdu.count, at: fitsImageAccessor(bytes, hdu) }));
   if (!arrays.length) throw new Error('FITS product contains no supported image.');
-  if (!arrays.some(array => array.dimensions.length === (kind === 'cube' ? 3 : 2))) throw new Error(`FITS array dimensions do not establish the declared ${kind} product kind.`);
+  if (!arrays.some(array => (array.dimensions.length>3?2+array.dimensions.slice(2).filter(n=>n!==1).length:array.dimensions.length) === (kind === 'cube' ? 3 : 2))) throw new Error(`FITS array dimensions do not establish the declared ${kind} product kind.`);
   const structures = arrays.map(array => {
     let finite = 0, min = Infinity, max = -Infinity;
     for (let i = 0; i < array.count; i++) { const n = array.at(i); if (Number.isFinite(n)) { finite++; min = Math.min(min, n); max = Math.max(max, n); } }
@@ -68,16 +73,18 @@ export function inspectFits(bytes: Buffer, identity: SourceProduct['identity'], 
 export async function qualifySourceProduct(root: string, product: SourceProduct) {
   assertPinnedLabel(product);
   for (const file of product.files) await acquireSourceFile(root, file);
-  const run = await sourceRun(product), receipt = sourceReceipt(product);
-  await assertInputPins(run.inputs, new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
+  let run = await sourceRun(product); const receipt = sourceReceipt(product);
+  await assertInputPins(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
   const previous = await readProductRecord(resolve(root, receipt));
+  const oldFacts = await readFile(resolve(root, `${dirname(receipt)}/decoded.json`),'utf8').then(t=>parseProductFacts(requireRecord(JSON.parse(t)).facts),()=>undefined).catch(()=>undefined);
+  if(oldFacts && !await verifyCalibrationDependencies(root,oldFacts.calibrationDependencies??[]))throw new Error('Calibration dependency pin mismatch');
+  if(oldFacts)run=await sourceRun(product,oldFacts.calibrationDependencies);
   if (previous && sourceRecordComplete(previous, product) && await sameRun(previous, run, path => inside(root, path))) return { product: product.files.find(file => file.role === 'science')!.path, receipt, reused: true };
   let decoded: unknown;
   let metadata: Partial<ProductFacts> = {};
   if (product.decoder === 'fits-image') {
     const science = product.files.find(file => file.role === 'science')!, bytes = await readFile(inside(root, science.path));
     decoded = inspectFits(bytes, product.identity, product.kind);
-    metadata = fitsMetadata(bytes, { file: science.path, sha256: science.sha256 });
   }
   else if (product.decoder === 'isis3') {
     const bytes = await readFile(inside(root,product.files.find(f=>f.role==='science')!.path));
@@ -89,9 +96,9 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
     const validBands = new Array<boolean>(core.bands).fill(false);
     // ISIS Real special pixels lie below VALID_MIN4 (0xff7ffffa); retain valid zero/negative noise.
     const threshold=Buffer.from('faff7fff','hex').readFloatLE();
-    for(let i=0;i<core.data.length;i++) { const n=core.data[i]; if(Number.isFinite(n)&&n>=threshold){finite++;min=Math.min(min,n);max=Math.max(max,n);validBands[Math.floor(i/(core.width*core.height))]=true;} }
+    for(let i=0;i<core.data.length;i++) { const n=core.data[i]; if(Number.isFinite(n)&&n>=threshold){finite++;min=Math.min(min,n);max=Math.max(max,n);} }
     if(!finite) throw new Error('ISIS core contains no finite non-special samples.');
-    metadata = isisMetadata(label, core.bands, validBands);
+
     decoded={standard:'ISIS3',metadata:{identity:core.identity,scaling:{base:core.base,multiplier:core.multiplier}},structures:[{name:'Core',shape:core.bands===1?[core.height,core.width]:[core.bands,core.height,core.width],elements:core.data.length,finite,missing:core.data.length-finite,minimum:min,maximum:max}]};
   } else {
     const labelPath = inside(root, product.labelPath ?? product.files.find(file => file.role === 'label')!.path), label = (await readFile(labelPath)).subarray(0, 128 * 1024).toString('latin1').split(/^END\s*$/imu)[0]!;
@@ -99,19 +106,29 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
     for (const [key, expected] of Object.entries(product.identity)) if ((pds4 ? requireRecord(pds4ProductIdentity(label))[key] : pds3Keyword(label, key, [])) !== String(expected)) throw new Error(`PDS identity mismatch for ${key}.`);
     await assertPdsDependencies(root, product);
     decoded = (await pdsPackages({ operation: 'decode-product', labelPath })).decoded;
-    metadata = pdsMetadata(decoded);
+
     const structures = requireArray(requireRecord(decoded).structures).map(value => requireRecord(value));
     if (!structures.some(s => product.kind === 'table' ? s.kind === 'table' : requireArray(s.shape).length === (product.kind === 'cube' ? 3 : 2))) throw new Error('Decoded structures do not establish the declared product kind.');
   }
+  const scienceFile = product.files.find(f=>f.role==='science')!;
+  metadata = await readProductScience(root,{file:scienceFile.path,format:product.decoder==='fits-image'?'fits':product.decoder==='isis3'?'isis3':'pds',target:product.target,label:product.labelPath,decoded});
+  run=await sourceRun(product,metadata.calibrationDependencies);
   // Recheck after the decoder: the receipt may only attest the exact bytes it read.
-  await assertInputPins(run.inputs, new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
+  await assertInputPins(run.inputs.filter(p=>p.role!=='calibration dependency'), new Map(product.files.map(file => [file.origin, inside(root, file.path)])));
   const report = `${dirname(receipt)}/decoded.json`;
   await mkdir(resolve(root, dirname(receipt)), { recursive: true });
   await writeFile(resolve(root, report), `${JSON.stringify({ schema: 'cssearth-decoded-source@1', observation: product.id, archiveProductId: product.archiveProductId, decoded,
     facts: { target: product.target, verified: true, kind: product.kind, result: 'telescope-product', ...metadata },
     meaning: product.meaning, limitations: product.limitations, acceptance: 'Input pins and header identity agree; complete supported arrays decoded. Native metadata are validated only for supported product conventions. External calibration accuracy and scientific suitability are not independently established; measurement descriptions remain source declarations.' }, null, 2)}\n`);
   const science = product.files.find(file => file.role === 'science')!;
-  await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }],
+  const descriptorOutput: { path: string; file: string }[] = [];
+  if (product.familyEvidence?.profileId === STEREO_COR1_F16_PROFILE) {
+    const descriptorPath = `${dirname(receipt)}/descriptor.json`, context: SphericalGridContext = { profileId: STEREO_COR1_F16_PROFILE, frame: 'sun-carrington-cr2053', frameBasis: 'Sun-centred Cartesian axes derived from Carrington longitude, Carrington latitude and heliocentric radius for CR2053 P1.', sourceUrl: science.origin, citation: product.citation, license: 'NASA scientific data; the source manifest retains the archive credit, citation request and redistribution statement.', quantity: 'electron number density', unit: product.units, hdu: 0 };
+    const sciencePath = inside(root, science.path), bytes = await readFile(sciencePath), inspection = await inspectPhysicalSphericalGrid({ path: sciencePath, bytes: science.bytes, sha256: science.sha256 }, context);
+    const value = describePhysicalSphericalGrid({ id: product.id, target: product.target, member: member('electron-density-fits', relative(dirname(resolve(root, descriptorPath)), sciencePath), 'science', bytes, 'application/fits'), context, inspection, producingRecord: receipt });
+    await writeFile(resolve(root, descriptorPath), `${JSON.stringify(value, null, 2)}\n`); descriptorOutput.push({ path: descriptorPath, file: resolve(root, descriptorPath) });
+  }
+  await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }, ...descriptorOutput, ...(metadata.calibrationDependencies??[]).flatMap(d=>d.file?[{path:d.file,file:resolve(root,d.file)}]:[])],
     [{ kind: 'archive-origin', receipt, product: science.path, establishes: 'Manifest-pinned archive bytes, matching header identity and complete supported numeric structure decoding. No local recalibration, archive comparison or surface registration is claimed.' }]);
   return { product: science.path, receipt, reused: false };
 }

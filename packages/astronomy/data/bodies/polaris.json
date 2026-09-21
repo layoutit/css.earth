@@ -19,11 +19,12 @@
     "properMotionDecMasPerYear": -11.85,
     "radialVelocityKmPerS": -16.42,
     "sources": {
-      "position": "SIMBAD basic record for * alf UMi (HD 8890, HIP 11767), ICRS J2000 position from the Hipparcos new reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16",
+      "position": "SIMBAD basic record for * alf UMi (HD 8890, HIP 11767), ICRS J2000 position from the Hipparcos new reduction (van Leeuwen 2007, A&A 474, 653; bibcode 2007A&A...474..653V), retrieved 2026-09-16; cross-identification HIP 11767: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2011767",
       "distance": "136.90 +/- 0.34 pc, the distance Evans et al. (2024, ApJ 971, 190) adopt: the Gaia DR3 parallax of the wide companion Polaris B (7.2869 +/- 0.0178 mas via SIMBAD) with the Lindegren zero-point offset. Polaris Aa itself is too bright for a reliable Gaia parallax; Hipparcos gives 7.54 mas (133 pc).",
       "properMotion": "Hipparcos new reduction (van Leeuwen 2007) via SIMBAD: 44.48, -11.85 mas/yr",
       "radialVelocity": "-16.42 km/s, the systemic velocity of the spectroscopic binary in the SB9 catalogue (Pourbaix et al. 2004, A&A 424, 727) via SIMBAD"
     },
-    "presentationUp": "display-axis"
+    "presentationUp": "display-axis",
+    "hipparcosId": 11767
   }
 }

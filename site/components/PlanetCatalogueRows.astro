@@ -2,12 +2,6 @@
 import { PLANET_SEARCH_OBJECTS } from "../planet-search-objects.mts";
 import PlanetObjectResult from "./PlanetObjectResult.astro";
 import PreparedObjectResult from './PreparedObjectResult.astro';
-import ContextNavigationMarker from './ContextNavigationMarker.astro';
-import { OVERVIEW_TITLES, SYSTEM_TITLES } from '../prepared-overview-titles.mjs';
-import { SOLAR_SYSTEM_ID, allPlanetarySystems } from '../object-systems.mts';
-import PlanetNavigationMarker from './PlanetNavigationMarker.astro';
-import { SCENE_OBJECTS } from '../objects.mts';
-import { overviewSourceDocumentation, systemSourceDocumentation } from '../source-documentation.mts';
 import { matchesObjectCategory } from "../object-categories.mts";
 
 // This is the one shared, content-addressed catalogue fragment: every object
@@ -16,10 +10,6 @@ import { matchesObjectCategory } from "../object-categories.mts";
 // same way in-app navigation already marks it (see markSelection in
 // planet-shell-client.mts). Never pass an active object id here.
 const searchObjects = PLANET_SEARCH_OBJECTS;
-// The galactic scopes are measured from the Sun, so their overviews stay on its route.
-const galacticRoute = SCENE_OBJECTS.find(object => object.id === SOLAR_SYSTEM_ID)!.route;
-const systems = allPlanetarySystems(SCENE_OBJECTS).map(system => ({ system, star: SCENE_OBJECTS.find(object => object.id === system.id)!,
-  source: systemSourceDocumentation(system) }));
 const defaultCategory = 'planet';
 // Retain every source row. Small layout groups let the browser skip offscreen
 // descendants without removing them from search, accessibility or navigation.
@@ -32,21 +22,6 @@ const rows = Array.from({ length: Math.ceil(searchObjects.length / 16) },
 ---
 
 <ul class="planet-object-list">
-  {systems.map(({ system, star, source }) => <li data-search-overview={SYSTEM_TITLES[system.id]!.label.toLocaleLowerCase('en')} hidden>
-    <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${system.route}?overview=system`}
-      data-source-subject={`overview:system:${system.id}`} data-source-document={source.href} data-source-label={source.label}>
-      <span class="planet-lens-icon"><PlanetNavigationMarker planetId={star.id} color={star.color} /></span>
-      <span class="planet-object-name planet-lens-label">{system.name}</span>
-    </a>
-  </li>)}
-  {Object.entries(OVERVIEW_TITLES).map(([scope, title]) => <li data-search-overview={title.label.toLocaleLowerCase('en')} hidden>
-    <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={`${galacticRoute}?overview=${scope}`}
-      data-source-subject={`overview:${scope}`} data-source-document={overviewSourceDocumentation(scope, title.label).href}
-      data-source-label={overviewSourceDocumentation(scope, title.label).label}>
-      <span class="planet-lens-icon"><ContextNavigationMarker objectId={scope} /></span>
-      <span class="planet-object-name planet-lens-label">{title.label}</span>
-    </a>
-  </li>)}
   {rows.map(group => <li class="planet-object-chunk" role="presentation"
     hidden={!group.some(object => matchesObjectCategory(object.classification, defaultCategory))}
     style={`contain-intrinsic-block-size:${Math.max(0, group.filter(object => matchesObjectCategory(object.classification, defaultCategory)).length * 28 - 8)}px`}>

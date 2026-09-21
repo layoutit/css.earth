@@ -42,7 +42,7 @@
   },
   "provenance": {
     "path": "provenance.json",
-    "sha256": "cb5799b08a5cc9475c09ef39c408bea44c1fd3b38b3c0c1cd6cc5d0add812798"
+    "sha256": "811c97c633fda2f6e4ca7856d960d455544b293d480fef3c1cd5e0459c1b0496"
   },
   "parallax": {
     "originM": [
@@ -50,11 +50,11 @@
       0,
       0
     ],
-    "radiusM": 6.171355162982735e+20
+    "radiusM": 617135516298273500000
   },
   "stars": {
     "object": "stellar-neighbourhood",
-    "sha256": "fa4dbdb551af2ecfa85dc4964218f8708bbab60401f8d452a7a5230776c376e1",
+    "sha256": "8234b27bdc8ebe458af8dc29ea8dbbf4fdfabc925497c78068eeb9c421ddcd7e",
     "cssPixelsPerDegree": 43.6
   }
 }
