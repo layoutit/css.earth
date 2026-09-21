@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "laomedeia",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Laomedeia",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 21
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4493570347152.767,
+        231991359214.51178,
+        -30967898766.985813
+      ],
+      "presentationToReference": [
+        0.9990057496213615,
+        2.4356826039297786e-17,
+        0.04458152334164353,
+        0.040902747965676466,
+        0.3977771559319137,
+        -0.9165698551815754,
+        0.017733511561951187,
+        -0.9174820620691818,
+        -0.39738166584401463
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 91.30434782608695,
+      "bodyRadiusM": 21000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/laomedeia-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e6e71c7d2429bf524aef1a961b3383bef2bb40e260c587c584fa88884fc9e4b3"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Laomedeia",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.05,
+      "description": "A distant, irregular moon of Neptune.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "744b567d6ae735721bda2c61dddd3e35ac6a41a258e9076b0ba7762c875a1b06"
+  }
+}
