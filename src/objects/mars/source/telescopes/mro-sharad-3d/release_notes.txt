@@ -1,0 +1,86 @@
+Mars Reconnaissance Orbiter SHARAD 3D Radargram Bundle Release Notes
+
+This document, release_notes.txt, contains release notes and errata 
+concerning the MRO SHARAD 3D Radargram Bundle. It is updated with each 
+release of data.
+
+For releases prior to PDS3-to-PDS4 migration, the information here is a copy 
+of the PDS3 ERRATA.TXT file.
+
+----------------------------------------------------------------------------
+
+INTRODUCTION
+
+Users are encouraged to provide comments to the PDS Geosciences Node
+if errors are found either in data or in documentation in this archive.
+Please send comments by e-mail to the Geosciences Node:
+
+          Web:   http://pds-geosciences.wustl.edu
+          Email: geosci@wunder.wustl.edu
+
+This document is divided into sections based on the nature of the errata 
+comments: 1.0 Known Errors and Anomalies; 2.0 New File Additions; 
+3.0 Modifications to Existing Files. New comments are added at the end of 
+each section as appropriate.
+
+--------------------------------------------------------------------------
+1.0 KNOWN ERRORS AND ANOMALIES
+
+2023-06-30. During analysis of version 1 of the Planum Australe 3D 
+radargram, it was discovered that imaging artifacts were introduced into the 
+data volume due to the mispositioning of three input 2D radargrams 
+(Foss et al., 2023). These artifacts appear within the 3D radargram along 
+the ground tracks of the observations as follows:
+
+Obs. no.  3D Inline     3D Crossline  Latitude      Longitude       Time Delay 
+                                      (degS)        (degE)          (microseconds)
+----------------------------------------------------------------------------------
+1669401   1665 - 2253   2126 - 2282   80.2 - 84.4   228.9 - 239.0   18.0 - 26.2
+1670001   3077 - 3726   2996 - 3081   81.8 - 86.1   45.1 - 74.6     14.0 - 27.0
+1670201   2679 - 2867   3207 - 3449   84.3 - 86.0   -6.9 - 10.8     7.7 - 26.8
+
+Care should be taken so as to avoid misinterpretation of these artifacts.
+
+Foss II, F.J., Putzig, N.E., Campbell, B.A., Levin, S.A., Perry, M.R., 
+Holt, J.W., Christoffersen, M.S., Smith, I.B., Morgan, G.A., Russell, A.T., 
+2023 (submitted). Producing 3D radargrams from orbital radar sounding data 
+at Mars: history, methods, lessons and plans. Icarus, in review.
+    
+2.0 NEW FILE ADDITIONS
+
+2021-10-15. Release 1 of SHARAD 3D data includes the first 3D delay-time 
+volumes produced for Planum Boreum (PLANUM_BOREUM_3D_V1_TIME) using 2310 
+observations from MRO orbits 1727 through 36398 and for Planum Australe 
+(PLANUM_AUSTRALE_3D_V1_TIME) using 2069 observations from MRO orbits 
+1690 through 42763.
+
+2025-08-11. The MRO SHARAD 3D Radargram archive has been migrated to comply
+with PDS4 standards. See readme.txt in the root directory of this bundle for 
+details.              
+
+2025-10-22. Release 2 of SHARAD 3D data includes a second 3D delay-time 
+radargram produced for Planum Boreum (PLANUM_BOREUM_3D_V2_TIME) using 3399
+observations from MRO orbits 1691 through 61697 and a first 3D delay-time
+radargram produced for a eastern portion of Deuteronilus Mensae 
+(EAST_DEUTERONILUS_MENSAE_3D_V2_TIME) using 466 observations from MRO orbits
+3081 through 64793. The "V2" in the product names indicates the use of a
+revised 3D processing procedure. See 3d_processing_v2.0.pdf in the document
+directory.
+
+3.0 MODIFICATIONS TO EXISTING FILES
+
+2021-10-21. WESTERNMOST_LONGITUDE, EASTERNMOST_LONGITUDE, MAXIMUM_LATITUDE,
+and MINIMUM_LATITUDE replaced with correct values in 
+planum_australe_3d_v1_time.lbl and planum_boreum_3d_v1_time.lbl.
+
+2025-08-11. AXIS_START, LINE_PROJECTION_OFFSET, and SAMPLE_PROJECTION_OFFSET 
+are replaced with correct values in planum_australe_3d_v1_time.lbl and 
+planum_boreum_3d_v1_time.lbl.
+
+2025-10-22. 6 extras/surface files have been renamed:
+1. areoid_10125_delay_n.txt is now planum_boreum_3d_v1_time_areoid_10125_delay.txt
+2. areoid_10125_delay_s.txt is now planum_australe_3d_v1_time_areoid_10125_delay.txt
+3. mola_sharad_delay_n.png is now planum_boreum_3d_v1_time_mola_sharad_delay.png
+4. mola_sharad_delay_n.txt is now planum_boreum_3d_v1_time_mola_sharad_delay.txt
+5. mola_sharad_delay_s.png is now planum_australe_3d_v1_time_mola_sharad_delay.png
+6. mola_sharad_delay_s.txt is now planum_australe_3d_v1_time_mola_sharad_delay.txt
