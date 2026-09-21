@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "960ff8c59d178c4cf40227dc57b3029530aeac8e6e6105f9a763699ae728ba64"
+    "sha256": "6d3218e577d36ae9cc761b403232ee5fed3beac85a120de78a18c426aca6f8d2"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "23f7415b3490b47e495fe0ee19ee2337f2ab83413d50b81c98686c7b2c7fa146",
+      "sha256": "3f808a6f7ecc2edb4b296fa959fadebb4c680cf2a600fdbf8541d64018e91aed",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ceres/",
@@ -162,57 +162,12 @@
                   59.981887771699
                 ]
               },
-              "description": "Dawn VIR 2.7 µm band depth · Frigeri et al. 2019 scale",
-              "title": "Depth of the 2.7 µm absorption of OH in Mg-rich clays (phyllosilicates), from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run higher than the paper's (median 0.255 against its peak near 0.20), so most of Ceres falls in the red end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "description": "Dawn VIR 2.7 µm band depth · scale from its own range",
+              "title": "Depth of the 2.7 µm absorption of OH in Mg-rich clays (phyllosilicates), from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.229 to 0.283, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar (its colors between the dark blue and dark red ends). The archived values are deeper than that paper's (median 0.255 against its peak near 0.20): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
               "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
-              "minimum": 0.1,
-              "maximum": 0.3,
+              "minimum": 0.229,
+              "maximum": 0.283,
               "colors": [
-                "#000180",
-                "#010081",
-                "#000083",
-                "#000083",
-                "#000188",
-                "#00008a",
-                "#00008b",
-                "#00008d",
-                "#000190",
-                "#000192",
-                "#000093",
-                "#000096",
-                "#000098",
-                "#00019b",
-                "#00009d",
-                "#00009f",
-                "#0101a2",
-                "#0001a5",
-                "#0001a5",
-                "#0000a7",
-                "#0001ac",
-                "#0000ad",
-                "#0000af",
-                "#0000b1",
-                "#0001b4",
-                "#0001b5",
-                "#0000b7",
-                "#0000bb",
-                "#0100bd",
-                "#0001bf",
-                "#0000c1",
-                "#0000c3",
-                "#0001c6",
-                "#0000c7",
-                "#0001c9",
-                "#0000cd",
-                "#0001cf",
-                "#0000d1",
-                "#0000d3",
-                "#0000d5",
-                "#0001d7",
-                "#0001d9",
-                "#0000db",
-                "#0101df",
-                "#0100e1",
                 "#0001e3",
                 "#000ce9",
                 "#013ef8",
@@ -224,56 +179,12 @@
                 "#fd7a00",
                 "#f63400",
                 "#e50201",
-                "#e30001",
-                "#df0000",
-                "#de0100",
-                "#db0100",
-                "#d90000",
-                "#d80101",
-                "#d40100",
-                "#d10100",
-                "#cf0000",
-                "#ce0100",
-                "#cb0100",
-                "#c90000",
-                "#c70100",
-                "#c40101",
-                "#c10000",
-                "#c00100",
-                "#be0100",
-                "#bc0100",
-                "#ba0101",
-                "#b70000",
-                "#b40100",
-                "#b40001",
-                "#b00100",
-                "#ad0100",
-                "#ac0000",
-                "#aa0100",
-                "#a70000",
-                "#a40100",
-                "#a20100",
-                "#a00000",
-                "#9e0100",
-                "#9c0101",
-                "#990000",
-                "#970000",
-                "#960001",
-                "#920100",
-                "#8f0000",
-                "#8e0100",
-                "#8c0100",
-                "#890101",
-                "#880100",
-                "#850000",
-                "#830000",
-                "#800100",
-                "#7e0101"
+                "#e30001"
               ],
               "labels": [
-                "0.10",
-                "0.20",
-                "0.30"
+                "0.229",
+                "0.256",
+                "0.283"
               ],
               "units": "band depth",
               "consumer": "clay-band",
@@ -318,57 +229,12 @@
                   59.981887771699
                 ]
               },
-              "description": "Dawn VIR 3.1 µm band depth · Frigeri et al. 2019 scale",
-              "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run lower than the paper's (median 0.064 against its peak near 0.087), so most of Ceres falls in the blue end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "description": "Dawn VIR 3.1 µm band depth · scale from its own range",
+              "title": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.047 to 0.089, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar (its colors between the dark blue and dark red ends). The archived values are shallower than that paper's (median 0.064 against its peak near 0.09): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
               "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
-              "minimum": 0.05,
-              "maximum": 0.2,
+              "minimum": 0.047,
+              "maximum": 0.089,
               "colors": [
-                "#000182",
-                "#000284",
-                "#000188",
-                "#00008e",
-                "#000093",
-                "#000097",
-                "#00009d",
-                "#0000a2",
-                "#0000a7",
-                "#0001ac",
-                "#0000b1",
-                "#0001b6",
-                "#0000bc",
-                "#0000c1",
-                "#0001c6",
-                "#0000cb",
-                "#0000d1",
-                "#0100d7",
-                "#0001d9",
-                "#0101e0",
-                "#0006e7",
-                "#001ff0",
-                "#003bf8",
-                "#005cfd",
-                "#008cfe",
-                "#03b6fe",
-                "#11e1ef",
-                "#2effcf",
-                "#6cff93",
-                "#a8ff58",
-                "#e2ff1e",
-                "#f5d40c",
-                "#ffad01",
-                "#ff7e00",
-                "#ff4c02",
-                "#f43100",
-                "#ec1701",
-                "#e40000",
-                "#e30001",
-                "#e20101",
-                "#df0000",
-                "#de0100",
-                "#db0100",
-                "#d90000",
-                "#d90000",
                 "#d80101",
                 "#d50000",
                 "#d40100",
@@ -380,57 +246,12 @@
                 "#cb0001",
                 "#c90000",
                 "#c70100",
-                "#c50000",
-                "#c40101",
-                "#c10000",
-                "#c10000",
-                "#bf0000",
-                "#be0100",
-                "#bb0000",
-                "#ba0100",
-                "#b70000",
-                "#b70000",
-                "#b50000",
-                "#b40100",
-                "#b20101",
-                "#b00100",
-                "#b00100",
-                "#ad0001",
-                "#ab0000",
-                "#aa0100",
-                "#a80100",
-                "#a60100",
-                "#a60100",
-                "#a30000",
-                "#a10100",
-                "#a00000",
-                "#a00000",
-                "#9d0000",
-                "#9c0101",
-                "#990000",
-                "#980100",
-                "#960001",
-                "#960001",
-                "#930000",
-                "#920100",
-                "#8f0000",
-                "#8f0000",
-                "#8d0000",
-                "#8c0100",
-                "#890000",
-                "#880100",
-                "#850000",
-                "#840101",
-                "#830000",
-                "#820000",
-                "#7f0100",
-                "#7f0101"
+                "#c50000"
               ],
               "labels": [
-                "0.05",
-                "0.10",
-                "0.15",
-                "0.20"
+                "0.047",
+                "0.068",
+                "0.089"
               ],
               "units": "band depth",
               "consumer": "ammonium-band",
@@ -485,7 +306,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f5eacd3e0fab26e0f2d5cd377ff38769c43f3f437578c4e186855cbb8bd53d6e",
+      "sha256": "0682bda2874708829292da6fde8658ccad8c079dc9451d1a01c1eb8da47f2e50",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -691,797 +512,14 @@
                 "kind": "scale",
                 "title": "2.7 µm band depth",
                 "labels": [
-                  "0.10",
-                  "0.20",
-                  "0.30"
+                  "0.229",
+                  "0.256",
+                  "0.283"
                 ],
                 "meta": "band depth",
                 "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
                 "recipe": {
                   "palette": [
-                    [
-                      0,
-                      1,
-                      128
-                    ],
-                    [
-                      1,
-                      0,
-                      129
-                    ],
-                    [
-                      0,
-                      0,
-                      131
-                    ],
-                    [
-                      0,
-                      0,
-                      131
-                    ],
-                    [
-                      0,
-                      1,
-                      136
-                    ],
-                    [
-                      0,
-                      0,
-                      138
-                    ],
-                    [
-                      0,
-                      0,
-                      139
-                    ],
-                    [
-                      0,
-                      0,
-                      141
-                    ],
-                    [
-                      0,
-                      1,
-                      144
-                    ],
-                    [
-                      0,
-                      1,
-                      146
-                    ],
-                    [
-                      0,
-                      0,
-                      147
-                    ],
-                    [
-                      0,
-                      0,
-                      150
-                    ],
-                    [
-                      0,
-                      0,
-                      152
-                    ],
-                    [
-                      0,
-                      1,
-                      155
-                    ],
-                    [
-                      0,
-                      0,
-                      157
-                    ],
-                    [
-                      0,
-                      0,
-                      159
-                    ],
-                    [
-                      1,
-                      1,
-                      162
-                    ],
-                    [
-                      0,
-                      1,
-                      165
-                    ],
-                    [
-                      0,
-                      1,
-                      165
-                    ],
-                    [
-                      0,
-                      0,
-                      167
-                    ],
-                    [
-                      0,
-                      1,
-                      172
-                    ],
-                    [
-                      0,
-                      0,
-                      173
-                    ],
-                    [
-                      0,
-                      0,
-                      175
-                    ],
-                    [
-                      0,
-                      0,
-                      177
-                    ],
-                    [
-                      0,
-                      1,
-                      180
-                    ],
-                    [
-                      0,
-                      1,
-                      181
-                    ],
-                    [
-                      0,
-                      0,
-                      183
-                    ],
-                    [
-                      0,
-                      0,
-                      187
-                    ],
-                    [
-                      1,
-                      0,
-                      189
-                    ],
-                    [
-                      0,
-                      1,
-                      191
-                    ],
-                    [
-                      0,
-                      0,
-                      193
-                    ],
-                    [
-                      0,
-                      0,
-                      195
-                    ],
-                    [
-                      0,
-                      1,
-                      198
-                    ],
-                    [
-                      0,
-                      0,
-                      199
-                    ],
-                    [
-                      0,
-                      1,
-                      201
-                    ],
-                    [
-                      0,
-                      0,
-                      205
-                    ],
-                    [
-                      0,
-                      1,
-                      207
-                    ],
-                    [
-                      0,
-                      0,
-                      209
-                    ],
-                    [
-                      0,
-                      0,
-                      211
-                    ],
-                    [
-                      0,
-                      0,
-                      213
-                    ],
-                    [
-                      0,
-                      1,
-                      215
-                    ],
-                    [
-                      0,
-                      1,
-                      217
-                    ],
-                    [
-                      0,
-                      0,
-                      219
-                    ],
-                    [
-                      1,
-                      1,
-                      223
-                    ],
-                    [
-                      1,
-                      0,
-                      225
-                    ],
-                    [
-                      0,
-                      1,
-                      227
-                    ],
-                    [
-                      0,
-                      12,
-                      233
-                    ],
-                    [
-                      1,
-                      62,
-                      248
-                    ],
-                    [
-                      2,
-                      138,
-                      252
-                    ],
-                    [
-                      15,
-                      223,
-                      240
-                    ],
-                    [
-                      89,
-                      255,
-                      162
-                    ],
-                    [
-                      202,
-                      255,
-                      55
-                    ],
-                    [
-                      249,
-                      206,
-                      13
-                    ],
-                    [
-                      253,
-                      122,
-                      0
-                    ],
-                    [
-                      246,
-                      52,
-                      0
-                    ],
-                    [
-                      229,
-                      2,
-                      1
-                    ],
-                    [
-                      227,
-                      0,
-                      1
-                    ],
-                    [
-                      223,
-                      0,
-                      0
-                    ],
-                    [
-                      222,
-                      1,
-                      0
-                    ],
-                    [
-                      219,
-                      1,
-                      0
-                    ],
-                    [
-                      217,
-                      0,
-                      0
-                    ],
-                    [
-                      216,
-                      1,
-                      1
-                    ],
-                    [
-                      212,
-                      1,
-                      0
-                    ],
-                    [
-                      209,
-                      1,
-                      0
-                    ],
-                    [
-                      207,
-                      0,
-                      0
-                    ],
-                    [
-                      206,
-                      1,
-                      0
-                    ],
-                    [
-                      203,
-                      1,
-                      0
-                    ],
-                    [
-                      201,
-                      0,
-                      0
-                    ],
-                    [
-                      199,
-                      1,
-                      0
-                    ],
-                    [
-                      196,
-                      1,
-                      1
-                    ],
-                    [
-                      193,
-                      0,
-                      0
-                    ],
-                    [
-                      192,
-                      1,
-                      0
-                    ],
-                    [
-                      190,
-                      1,
-                      0
-                    ],
-                    [
-                      188,
-                      1,
-                      0
-                    ],
-                    [
-                      186,
-                      1,
-                      1
-                    ],
-                    [
-                      183,
-                      0,
-                      0
-                    ],
-                    [
-                      180,
-                      1,
-                      0
-                    ],
-                    [
-                      180,
-                      0,
-                      1
-                    ],
-                    [
-                      176,
-                      1,
-                      0
-                    ],
-                    [
-                      173,
-                      1,
-                      0
-                    ],
-                    [
-                      172,
-                      0,
-                      0
-                    ],
-                    [
-                      170,
-                      1,
-                      0
-                    ],
-                    [
-                      167,
-                      0,
-                      0
-                    ],
-                    [
-                      164,
-                      1,
-                      0
-                    ],
-                    [
-                      162,
-                      1,
-                      0
-                    ],
-                    [
-                      160,
-                      0,
-                      0
-                    ],
-                    [
-                      158,
-                      1,
-                      0
-                    ],
-                    [
-                      156,
-                      1,
-                      1
-                    ],
-                    [
-                      153,
-                      0,
-                      0
-                    ],
-                    [
-                      151,
-                      0,
-                      0
-                    ],
-                    [
-                      150,
-                      0,
-                      1
-                    ],
-                    [
-                      146,
-                      1,
-                      0
-                    ],
-                    [
-                      143,
-                      0,
-                      0
-                    ],
-                    [
-                      142,
-                      1,
-                      0
-                    ],
-                    [
-                      140,
-                      1,
-                      0
-                    ],
-                    [
-                      137,
-                      1,
-                      1
-                    ],
-                    [
-                      136,
-                      1,
-                      0
-                    ],
-                    [
-                      133,
-                      0,
-                      0
-                    ],
-                    [
-                      131,
-                      0,
-                      0
-                    ],
-                    [
-                      128,
-                      1,
-                      0
-                    ],
-                    [
-                      126,
-                      1,
-                      1
-                    ]
-                  ],
-                  "labels": [
-                    "0.10",
-                    "0.20",
-                    "0.30"
-                  ]
-                }
-              },
-              "source": {
-                "id": "dawn-vir-ceres-bi-depth-img",
-                "path": "../manifest.json",
-                "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
-              },
-              "facts": [
-                {
-                  "id": "classification",
-                  "label": "Quantity",
-                  "value": "Measured infrared band depth, 1 − Rc/Rb"
-                },
-                {
-                  "id": "coverage",
-                  "label": "Coverage",
-                  "value": "60°S to 60°N; poles unmeasured"
-                },
-                {
-                  "id": "scale",
-                  "label": "Color scale",
-                  "value": "Frigeri et al. (2019), Icarus 318, Fig. 7"
-                }
-              ],
-              "notes": "Depth of the 2.7 µm absorption of OH in Mg-rich clays (phyllosilicates), from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run higher than the paper's (median 0.255 against its peak near 0.20), so most of Ceres falls in the red end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
-              "noData": true
-            },
-            {
-              "id": "ammonium-band",
-              "label": "Ammonium band",
-              "thumbnail": "ceres-lens-ammonium-band.webp",
-              "surface": "ceres-ammonium-band@2x.webp",
-              "poles": "ceres-poles-ammonium-band@2x.webp",
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "3.1 µm band depth",
-                "labels": [
-                  "0.05",
-                  "0.10",
-                  "0.15",
-                  "0.20"
-                ],
-                "meta": "band depth",
-                "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
-                "recipe": {
-                  "palette": [
-                    [
-                      0,
-                      1,
-                      130
-                    ],
-                    [
-                      0,
-                      2,
-                      132
-                    ],
-                    [
-                      0,
-                      1,
-                      136
-                    ],
-                    [
-                      0,
-                      0,
-                      142
-                    ],
-                    [
-                      0,
-                      0,
-                      147
-                    ],
-                    [
-                      0,
-                      0,
-                      151
-                    ],
-                    [
-                      0,
-                      0,
-                      157
-                    ],
-                    [
-                      0,
-                      0,
-                      162
-                    ],
-                    [
-                      0,
-                      0,
-                      167
-                    ],
-                    [
-                      0,
-                      1,
-                      172
-                    ],
-                    [
-                      0,
-                      0,
-                      177
-                    ],
-                    [
-                      0,
-                      1,
-                      182
-                    ],
-                    [
-                      0,
-                      0,
-                      188
-                    ],
-                    [
-                      0,
-                      0,
-                      193
-                    ],
-                    [
-                      0,
-                      1,
-                      198
-                    ],
-                    [
-                      0,
-                      0,
-                      203
-                    ],
-                    [
-                      0,
-                      0,
-                      209
-                    ],
-                    [
-                      1,
-                      0,
-                      215
-                    ],
-                    [
-                      0,
-                      1,
-                      217
-                    ],
-                    [
-                      1,
-                      1,
-                      224
-                    ],
-                    [
-                      0,
-                      6,
-                      231
-                    ],
-                    [
-                      0,
-                      31,
-                      240
-                    ],
-                    [
-                      0,
-                      59,
-                      248
-                    ],
-                    [
-                      0,
-                      92,
-                      253
-                    ],
-                    [
-                      0,
-                      140,
-                      254
-                    ],
-                    [
-                      3,
-                      182,
-                      254
-                    ],
-                    [
-                      17,
-                      225,
-                      239
-                    ],
-                    [
-                      46,
-                      255,
-                      207
-                    ],
-                    [
-                      108,
-                      255,
-                      147
-                    ],
-                    [
-                      168,
-                      255,
-                      88
-                    ],
-                    [
-                      226,
-                      255,
-                      30
-                    ],
-                    [
-                      245,
-                      212,
-                      12
-                    ],
-                    [
-                      255,
-                      173,
-                      1
-                    ],
-                    [
-                      255,
-                      126,
-                      0
-                    ],
-                    [
-                      255,
-                      76,
-                      2
-                    ],
-                    [
-                      244,
-                      49,
-                      0
-                    ],
-                    [
-                      236,
-                      23,
-                      1
-                    ],
-                    [
-                      228,
-                      0,
-                      0
-                    ],
-                    [
-                      227,
-                      0,
-                      1
-                    ],
-                    [
-                      226,
-                      1,
-                      1
-                    ],
-                    [
-                      223,
-                      0,
-                      0
-                    ],
-                    [
-                      222,
-                      1,
-                      0
-                    ],
-                    [
-                      219,
-                      1,
-                      0
-                    ],
-                    [
-                      217,
-                      0,
-                      0
-                    ],
-                    [
-                      217,
-                      0,
-                      0
-                    ],
                     [
                       216,
                       1,
@@ -1541,233 +579,124 @@
                       197,
                       0,
                       0
-                    ],
-                    [
-                      196,
-                      1,
-                      1
-                    ],
-                    [
-                      193,
-                      0,
-                      0
-                    ],
-                    [
-                      193,
-                      0,
-                      0
-                    ],
-                    [
-                      191,
-                      0,
-                      0
-                    ],
-                    [
-                      190,
-                      1,
-                      0
-                    ],
-                    [
-                      187,
-                      0,
-                      0
-                    ],
-                    [
-                      186,
-                      1,
-                      0
-                    ],
-                    [
-                      183,
-                      0,
-                      0
-                    ],
-                    [
-                      183,
-                      0,
-                      0
-                    ],
-                    [
-                      181,
-                      0,
-                      0
-                    ],
-                    [
-                      180,
-                      1,
-                      0
-                    ],
-                    [
-                      178,
-                      1,
-                      1
-                    ],
-                    [
-                      176,
-                      1,
-                      0
-                    ],
-                    [
-                      176,
-                      1,
-                      0
-                    ],
-                    [
-                      173,
-                      0,
-                      1
-                    ],
-                    [
-                      171,
-                      0,
-                      0
-                    ],
-                    [
-                      170,
-                      1,
-                      0
-                    ],
-                    [
-                      168,
-                      1,
-                      0
-                    ],
-                    [
-                      166,
-                      1,
-                      0
-                    ],
-                    [
-                      166,
-                      1,
-                      0
-                    ],
-                    [
-                      163,
-                      0,
-                      0
-                    ],
-                    [
-                      161,
-                      1,
-                      0
-                    ],
-                    [
-                      160,
-                      0,
-                      0
-                    ],
-                    [
-                      160,
-                      0,
-                      0
-                    ],
-                    [
-                      157,
-                      0,
-                      0
-                    ],
-                    [
-                      156,
-                      1,
-                      1
-                    ],
-                    [
-                      153,
-                      0,
-                      0
-                    ],
-                    [
-                      152,
-                      1,
-                      0
-                    ],
-                    [
-                      150,
-                      0,
-                      1
-                    ],
-                    [
-                      150,
-                      0,
-                      1
-                    ],
-                    [
-                      147,
-                      0,
-                      0
-                    ],
-                    [
-                      146,
-                      1,
-                      0
-                    ],
-                    [
-                      143,
-                      0,
-                      0
-                    ],
-                    [
-                      143,
-                      0,
-                      0
-                    ],
-                    [
-                      141,
-                      0,
-                      0
-                    ],
-                    [
-                      140,
-                      1,
-                      0
-                    ],
-                    [
-                      137,
-                      0,
-                      0
-                    ],
-                    [
-                      136,
-                      1,
-                      0
-                    ],
-                    [
-                      133,
-                      0,
-                      0
-                    ],
-                    [
-                      132,
-                      1,
-                      1
-                    ],
-                    [
-                      131,
-                      0,
-                      0
-                    ],
-                    [
-                      130,
-                      0,
-                      0
-                    ],
-                    [
-                      127,
-                      1,
-                      0
-                    ],
-                    [
-                      127,
-                      1,
-                      1
                     ]
                   ],
                   "labels": [
-                    "0.05",
-                    "0.10",
-                    "0.15",
-                    "0.20"
+                    "0.229",
+                    "0.256",
+                    "0.283"
+                  ]
+                }
+              },
+              "source": {
+                "id": "dawn-vir-ceres-bi-depth-img",
+                "path": "../manifest.json",
+                "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Measured infrared band depth, 1 − Rc/Rb"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "60°S to 60°N; poles unmeasured"
+                },
+                {
+                  "id": "scale",
+                  "label": "Color scale",
+                  "value": "2nd to 98th percentile of this map; rainbow core of Frigeri et al. (2019), Fig. 7"
+                }
+              ],
+              "notes": "Depth of the 2.7 µm absorption of OH in Mg-rich clays (phyllosilicates), from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.229 to 0.283, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. The archived values are deeper than that paper's (median 0.255 against its peak near 0.20): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "noData": true
+            },
+            {
+              "id": "ammonium-band",
+              "label": "Ammonium band",
+              "thumbnail": "ceres-lens-ammonium-band.webp",
+              "surface": "ceres-ammonium-band@2x.webp",
+              "poles": "ceres-poles-ammonium-band@2x.webp",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "3.1 µm band depth",
+                "labels": [
+                  "0.047",
+                  "0.068",
+                  "0.089"
+                ],
+                "meta": "band depth",
+                "sourceUrl": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+                "recipe": {
+                  "palette": [
+                    [
+                      216,
+                      1,
+                      1
+                    ],
+                    [
+                      213,
+                      0,
+                      0
+                    ],
+                    [
+                      212,
+                      1,
+                      0
+                    ],
+                    [
+                      209,
+                      1,
+                      0
+                    ],
+                    [
+                      209,
+                      0,
+                      1
+                    ],
+                    [
+                      207,
+                      0,
+                      0
+                    ],
+                    [
+                      206,
+                      1,
+                      0
+                    ],
+                    [
+                      203,
+                      1,
+                      0
+                    ],
+                    [
+                      203,
+                      0,
+                      1
+                    ],
+                    [
+                      201,
+                      0,
+                      0
+                    ],
+                    [
+                      199,
+                      1,
+                      0
+                    ],
+                    [
+                      197,
+                      0,
+                      0
+                    ]
+                  ],
+                  "labels": [
+                    "0.047",
+                    "0.068",
+                    "0.089"
                   ]
                 }
               },
@@ -1790,10 +719,10 @@
                 {
                   "id": "scale",
                   "label": "Color scale",
-                  "value": "Frigeri et al. (2019), Icarus 318, Fig. 7"
+                  "value": "2nd to 98th percentile of this map; rainbow core of Frigeri et al. (2019), Fig. 7"
                 }
               ],
-              "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic, on the color scale of Frigeri et al. (2019), Figure 7. The archived values run lower than the paper's (median 0.064 against its peak near 0.087), so most of Ceres falls in the blue end. Scan stripes remain because the archive's artifact removal was not applied. Gray grid: beyond 60° latitude and other unmeasured pixels.",
+              "notes": "Depth of the 3.1 µm absorption of ammonium (NH4) in clays, from the archived Dawn VIR global mosaic (Survey phase, public V2 calibration). The color scale spans this map's own 2nd to 98th percentile, 0.047 to 0.089, with the rainbow core of the Frigeri et al. (2019), Figure 7 bar. The archived values are shallower than that paper's (median 0.064 against its peak near 0.09): the paper used an artifact correction and instrument response (Carrozzo et al. 2016) that were never released, and a different continuum. Scan stripes remain for the same reason. Gray grid: beyond 60° latitude and other unmeasured pixels.",
               "noData": true
             }
           ]
@@ -2319,8 +1248,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "f5eacd3e0fab26e0f2d5cd377ff38769c43f3f437578c4e186855cbb8bd53d6e",
-      "bytes": 32983,
+      "sha256": "0682bda2874708829292da6fde8658ccad8c079dc9451d1a01c1eb8da47f2e50",
+      "bytes": 17167,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2611,14 +1540,14 @@
       "outputs": [
         {
           "url": "/scenes/ceres/ceres-clay-band@2x.webp",
-          "bytes": 3462586,
-          "sha256": "5cd4ad5f82270f71ca716c1943e465b470956cc730589104a4d3e4cdeffed483",
+          "bytes": 3685694,
+          "sha256": "8aa1d1df2778a97031b1e699791e3cc07835d97764bc6e655321c5e475e1389d",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-lens-clay-band.webp",
-          "bytes": 2708,
-          "sha256": "449cce086cbebba9c671a6b8a897f14fa811e44abaca7332ed39a9aac84b873d",
+          "bytes": 3022,
+          "sha256": "25df0e3cac52de06c1e61a8ce8e7ab3da985b095d06880345c50a2e28240b682",
           "verification": "bytes-verified"
         },
         {
@@ -2662,14 +1591,14 @@
       "outputs": [
         {
           "url": "/scenes/ceres/ceres-ammonium-band@2x.webp",
-          "bytes": 3530718,
-          "sha256": "6f45272855f44c8e6525f83dc0c8257b1cc4b16b3312c1840ea05cea35425c3d",
+          "bytes": 2933488,
+          "sha256": "9b85965d4d614f05ee2701cb83b08b6acab092815a85c27723c365bf5d091c9b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-lens-ammonium-band.webp",
-          "bytes": 2892,
-          "sha256": "240bd51f8cb7658dfce108ec0f4a6bcfa9b785fe1ce3ae89101e7f584ddb12ef",
+          "bytes": 2218,
+          "sha256": "b5834f26ca16e553bf54489f6c36d6f0fc2ec1ffd1882d8e2086d68151a32b37",
           "verification": "bytes-verified"
         },
         {
@@ -3062,8 +1991,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/clay-band.webp",
-          "bytes": 84552,
-          "sha256": "9981e8e9822dd41a24eebac4e6ef81d6490bd1bebbff90e8d0409b69bd430dd0",
+          "bytes": 91714,
+          "sha256": "63294fc767cdcc7c7c75849ce7d90352a96319ecb0c7250512c5293b4876b857",
           "verification": "bytes-verified"
         }
       ]
@@ -3087,8 +2016,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/ammonium-band.webp",
-          "bytes": 87194,
-          "sha256": "ca253c0c67aacbfbf79f14a60535b399c46d6304d8bc4635f976d47eeb7d3e1f",
+          "bytes": 74058,
+          "sha256": "095c6388a47a792a1f8713c511a596c5ba592fa20b29dcab56fdc7a4c95ff5d5",
           "verification": "bytes-verified"
         }
       ]
@@ -3100,7 +2029,7 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "8068df2b786f6cee0b00db8017c61ad70aa1faeeccd52625b06b4ac746edf4c8",
+    "materialSha256": "0f7b400acc5b9d8a44cbac8e45ce41791e4af207c65baabe0741ced79f919aaa",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
