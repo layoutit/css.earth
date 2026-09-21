@@ -9,7 +9,7 @@
     "gravitationalParameterKm3PerS2": 0,
     "parent": "saturn"
   },
-  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "physicalNotes": "Radius 19.5 km: half the size of about 39 +/- 6 km given on the author page at https://tilmanndenk.de/outersaturnianmoons/siarnaq/, used as a display volume-equivalent radius. GM 0 means the mass is not modeled.",
   "satellite": {
     "parent": "saturn",
     "horizonsCode": "629",

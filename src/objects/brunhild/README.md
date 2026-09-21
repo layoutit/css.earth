@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Ďurech2020 TableA.1 reports401 cyan plus174 orange ATLAS observations and two poles. Sparse photometry constrains broad convex shape; fine relief and a unique pole are unsupported.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Ďurech 2020 TableA.1 reports 401 cyan plus 174 orange ATLAS observations and two poles. Sparse photometry constrains broad convex shape; fine relief and a unique pole are unsupported.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

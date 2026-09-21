@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-The 2017 ADAM study combines29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent147±14 km; the paper ensemble is142±14 km, spanning different raw/deconvolved image and shape supports.
+The 2017 ADAM study combines 29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent 147±14 km; the paper ensemble is 142±14 km, spanning different raw/deconvolved image and shape supports.
 
-The archived raw shape volume is explicitly reconciled to147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.
+The archived raw shape volume is explicitly reconciled to 147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

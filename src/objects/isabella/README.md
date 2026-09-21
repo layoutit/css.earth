@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2016 supplies an updated convex lightcurve-inversion model with two allowed poles; choose 987 as a reproducible representative. The archive provides no calibrated physical size. The paper does not support resolved terrain or a local relief accuracy claim.
+Hanuš 2016 supplies an updated convex lightcurve-inversion model with two allowed poles; choose 987 as a reproducible representative. The archive provides no calibrated physical size. The paper does not support resolved terrain or a local relief accuracy claim.
 
 The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 

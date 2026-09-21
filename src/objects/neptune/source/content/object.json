@@ -77,7 +77,7 @@
       {
         "id": "moon-count",
         "label": "Known moons",
-        "value": "16 \u00b7 Sep 2026",
+        "value": "16 · Sep 2026",
         "source": {
           "url": "https://science.nasa.gov/neptune/moons/",
           "label": "NASA/JPL reference",
@@ -92,7 +92,7 @@
       {
         "id": "mass",
         "label": "Mass",
-        "value": "1.024 \u00d7 10\u00b2\u2076 kg",
+        "value": "1.024 × 10²⁶ kg",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -105,7 +105,7 @@
       {
         "id": "density",
         "label": "Mean density",
-        "value": "1.638 g/cm\u00b3",
+        "value": "1.638 g/cm³",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -118,7 +118,7 @@
       {
         "id": "gravity",
         "label": "Equatorial gravity",
-        "value": "11.15 m/s\u00b2",
+        "value": "11.15 m/s²",
         "source": {
           "url": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
           "label": "NASA/JPL reference",
@@ -145,7 +145,7 @@
           "id": "normal",
           "url": "https://science.nasa.gov/neptune/"
         },
-        "notes": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 30\u00b0 N, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative."
+        "notes": "Color-adjusted Hubble OPAL composite from 2025, with approximate visible-color calibration. North of about 41° N, where the map is not fully observed, missing observations are continued from the boundary and faded to a uniform pole; that cap is illustrative."
       },
       {
         "id": "methane",
@@ -187,7 +187,7 @@
           "id": "methane",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
-        "notes": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 30\u00b0 N, boundary continuation supplies an illustrative cap, not measured spectral coverage."
+        "notes": "Hubble OPAL 619 nm reflectance from 2025, in false color. North of about 57° N, where the map is not fully observed, boundary continuation supplies an illustrative cap, not measured spectral coverage."
       },
       {
         "id": "near-infrared",
@@ -229,7 +229,7 @@
           "id": "near-infrared",
           "url": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/"
         },
-        "notes": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 30\u00b0 N, boundary continuation supplies an illustrative cap, not measured spectral coverage."
+        "notes": "Hubble OPAL 845 nm reflectance from 2025, in false color. North of about 57° N, where the map is not fully observed, boundary continuation supplies an illustrative cap, not measured spectral coverage."
       }
     ]
   },

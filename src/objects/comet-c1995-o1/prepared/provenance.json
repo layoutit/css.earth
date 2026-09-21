@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "648edf02c8634d9dfec1ce6eaf0cd1ab445c6ad5c6badb46fdc83e85d24984a6"
+    "sha256": "eee8da63b394c10d061b25a3fd9d7e52bb17b1a9d62d502674c94af0d75af9a0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -131,7 +131,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "739bba54588f22739a35fc415e8048029db9e3a619e5ef59cfa2b9aa387e2966",
+      "sha256": "850fd3876988791e914577272ce09d9c43893240138f403a2a9353adbf0fc81c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -155,12 +155,12 @@
             {
               "id": "perihelion",
               "label": "Closest to Sun",
-              "value": "0.925 AU",
+              "value": "0.914 AU",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1995+O1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
-                "label": "JPL Horizons, 2026-09-03 epoch",
-                "checked": "2026-09-16",
-                "path": "source/reference/horizons-elements.txt",
+                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1995+O1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2450539.5%27&STOP_TIME=%27JD2450540.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+                "label": "JPL Horizons, 1997-04-01 epoch (1997 perihelion passage)",
+                "checked": "2026-09-21",
+                "path": "source/reference/horizons-elements-1997.txt",
                 "catalogueId": "jpl-horizons",
                 "locator": "$$SOE first epoch; QR (km) / 149597870.7"
               }
@@ -195,7 +195,7 @@
                 {
                   "id": "perihelion",
                   "label": "Closest to Sun",
-                  "value": "0.925 AU"
+                  "value": "0.914 AU"
                 }
               ],
               "notes": "An ellipsoid at the published effective nucleus radius (Szabó et al. (2012), ApJ 761, 8). A sphere; Fernández (2002) gives 30 ± 10 km by another method. The 11.35 hour period is not displayed. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
@@ -285,8 +285,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "739bba54588f22739a35fc415e8048029db9e3a619e5ef59cfa2b9aa387e2966",
-      "bytes": 3755,
+      "sha256": "850fd3876988791e914577272ce09d9c43893240138f403a2a9353adbf0fc81c",
+      "bytes": 3786,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -357,8 +357,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6945,
-          "sha256": "3b14ec828513d503b67691ff3fd1036789a6e718f13b3a1cb58c432e98957d94",
+          "bytes": 6976,
+          "sha256": "d959adc5ea155b5a387e75bd845a6ce37129e6fee74736bb028ee12a9934fbad",
           "verification": "bytes-verified"
         }
       ],
@@ -371,7 +371,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1995-o1",
-    "materialSha256": "e6bb2cf28dbd87a44f41db6322a044b1aeb6a96aa940e47e413fc70409f95480",
+    "materialSha256": "0fc8f5313b6cbfaf5393492e03a3bb04c35620da91466405497e09cb3832bcc9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

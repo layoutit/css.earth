@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-measured-ellipsoid@1",
   "source": "https://arxiv.org/abs/2401.04634",
-  "citation": "French et al. (2024), Table3, reproducing Karkoschka (2001) Voyager paper TableV; adopted prolate axes also in Karkoschka HST paper TableIV.",
+  "citation": "French et al. (2024), Table 3, reproducing Karkoschka (2001) Voyager paper TableV; adopted prolate axes also in Karkoschka HST paper TableIV.",
   "semiAxesKm": [
     25,
     18,
@@ -32,14 +32,14 @@
     "height": 32,
     "noData": 160
   },
-  "qualification": "Published size and elongation fit, not a detailed terrain mesh. The third semi-axis18km is the prolate assumption, not an independent measurement. Reported uncertainties apply to projected radius sqrt(A*B) and ratioB/A; no separate-axis error bars are invented.",
+  "qualification": "Published size and elongation fit, not a detailed terrain mesh. The third semi-axis 18 km is the prolate assumption, not an independent measurement. Reported uncertainties apply to projected radius sqrt(A*B) and ratioB/A; no separate-axis error bars are invented.",
   "measuredGM": {
     "valueKm3PerS2": 0.00406,
     "uncertaintyKm3PerS2": 0.00038,
     "massKg": 6.08e+16,
     "massUncertaintyKg": 5700000000000000.0,
     "source": "https://arxiv.org/pdf/2401.04634",
-    "table": "3, footnote b, PDFpage10; Table19 and Section9.2",
+    "table": "3, footnote b, PDFpage10; Table 19 and Section 9.2",
     "method": "Inferred from amplitudes of forced ring normal modes, not from an assumed density."
   }
 }

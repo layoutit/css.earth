@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model.
+Marciniak 2019 Table 1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section 4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model.
 
 This published uncertainty supersedes the archive ±6 km simplification.
 

@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4bb9050cdfae02833f1f29bdb4fa028959d24b46c4555b413bcb590e6b665389"
+    "sha256": "d14d7cf59b27e7aca0575391fc0f334144ca609ac4c3bdabf72363de14a84f4f"
   },
   "id": "neptune",
   "properties": {
@@ -119,7 +119,7 @@
       "shape": {
         "kind": "ellipsoid",
         "radiusKm": 24764,
-        "polarRadiusKm": 24314
+        "polarRadiusKm": 24341
       },
       "surfaces": [
         {
@@ -189,7 +189,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2ecf94f83812e829955591b93e8664b8624f0d5649d7413b984442c139eed5dd"
+        "sha256": "2fa5efe88870e627136bab86a3567c01c3ecc6178c0499991af087724f33a837"
       }
     },
     "catalog": {

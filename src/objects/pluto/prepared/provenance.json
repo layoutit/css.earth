@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4cb263f1ee9ad48f570f69b370e4c46c07bdf935d186fd01d1bf4feb875dbeae"
+    "sha256": "be5d508c2f7d1af3fa422abec26a2814fa900cf601a617193219dfba031ef0aa"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "483594afeb4784ecdb18f739d618f5cc2547142fb909427e810dbe30cb4fc752"
+    "bindingsSha256": "e8de7e9a4cb4ccac33357c04c9d57ebea63c06368d8d15651a8d81ca4224fe32"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "26d513a6a1e78783eb3f8c5891f34f493ea4b735d3947464527b966d84b6d34f",
+      "sha256": "13e4cb36e7f93b98cd0f734012e0c77776fbb44e1d64bd836ac54cee361bbcf9",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/pluto/",
@@ -40,7 +40,7 @@
           {
             "id": "surface",
             "source": "surface/pluto-color-mosaic.jpg",
-            "falseColor": false,
+            "falseColor": true,
             "output": "pluto-{id}{suffix}.webp",
             "thumbnail": "pluto-lens-{id}.webp",
             "science": {
@@ -544,7 +544,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3185975cf2058f46d3407ddebece117d125f8cadd839cb051376d17c763aca9a",
+      "sha256": "c79481e15b286e098344f470cfbf26d6cf4e085dd959beaae45f5fc215117326",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -576,11 +576,11 @@
               "label": "Solar semimajor axis",
               "value": "39.482 AU",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-                "label": "NASA/JPL reference",
-                "checked": "2026-09-08",
+                "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
+                "label": "NASA/JPL reference (archived)",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-approximate-planetary-positions",
+                "catalogueId": "jpl-keplerian-elements-table-1-2019",
                 "locator": "/references/0; distance-from-sun"
               }
             },
@@ -679,7 +679,7 @@
           "controls": [
             {
               "id": "surface",
-              "label": "Visible color",
+              "label": "Enhanced color",
               "thumbnail": "pluto-lens-surface.webp",
               "surface": "pluto-surface@2x.webp",
               "poles": "pluto-poles-surface@2x.webp",
@@ -687,9 +687,9 @@
                 "id": "surface-pluto-color-mosaic-jpg",
                 "url": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926"
               },
-              "falseColor": false,
-              "qualification": "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
-              "notes": "Visible color: New Horizons MVIC color mosaic; gray grid: no imagery in this dataset",
+              "falseColor": true,
+              "qualification": "New Horizons MVIC three-filter color mosaic, not natural color; gray grid: no imagery in this dataset",
+              "notes": "Enhanced color: MVIC's color filters are blue, red and near-infrared (780 to 975 nm), so this is not what an eye would see. Gray grid: no imagery in this dataset",
               "noData": true
             },
             {
@@ -1333,8 +1333,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "3185975cf2058f46d3407ddebece117d125f8cadd839cb051376d17c763aca9a",
-      "bytes": 15343,
+      "sha256": "c79481e15b286e098344f470cfbf26d6cf4e085dd959beaae45f5fc215117326",
+      "bytes": 15500,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1444,14 +1444,14 @@
   "products": [
     {
       "id": "surface",
-      "label": "Visible color",
+      "label": "Enhanced color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [
-        "New Horizons MVIC color mosaic; gray grid: no imagery in this dataset"
+        "New Horizons MVIC three-filter color mosaic, not natural color; gray grid: no imagery in this dataset"
       ],
       "lensIds": [
         "surface"
@@ -1460,7 +1460,7 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false,
+        "falseColor": true,
         "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
@@ -1997,8 +1997,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5848,
-          "sha256": "5bd91a30b13872cc8727d2d17341a4fe0d7fdc4607529eb4760de45fc258ab7e",
+          "bytes": 5896,
+          "sha256": "245c07b00c603798bdc63e9e1197bf56b8243a6fe9f5b36d04a942fd8e112f93",
           "verification": "bytes-verified"
         }
       ],
@@ -2041,7 +2041,7 @@
     },
     {
       "id": "preview:surface",
-      "label": "Visible color preview",
+      "label": "Enhanced color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -2196,11 +2196,11 @@
   },
   "lastPreparation": {
     "objectId": "pluto",
-    "materialSha256": "628cb30289f355f84950a975add5592aee5264253f510d026ac63795ec6476cb",
+    "materialSha256": "07125bf985ea049fcfd8c6be2ca5c682fd79d67adec43b2b799d99eedd7ef35d",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "483594afeb4784ecdb18f739d618f5cc2547142fb909427e810dbe30cb4fc752"
+      "bindingsSha256": "e8de7e9a4cb4ccac33357c04c9d57ebea63c06368d8d15651a8d81ca4224fe32"
     }
   }
 }

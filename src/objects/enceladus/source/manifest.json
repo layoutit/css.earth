@@ -780,7 +780,7 @@
     {
       "path": "preparation/terrestrial.json",
       "expectedBytes": 6759,
-      "expectedSha256": "f234c2398fa159db29f7e38a3dd7fe3fa6861746cf3241b5bd5422cb4fb859f1"
+      "expectedSha256": "a883fa8f3596748d3cb14a188fc24271d727cb0666182457506ae7c57719bd7e"
     },
     {
       "path": "presentation/title-mark.json",
@@ -898,7 +898,7 @@
       "path": "vims-chemistry/INTERPRETATION.md",
       "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
       "expectedBytes": 4310,
-      "expectedSha256": "05062ac475198c354eff063186373e170bba1fc49fa55323355ca3dfb71d4514"
+      "expectedSha256": "d08473397305b0f9cd2fc70ee774c6b2ae6bc85894986fa39a009905075ef558"
     },
     {
       "path": "vims-chemistry/prepare.json",

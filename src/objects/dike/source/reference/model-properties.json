@@ -13,13 +13,13 @@
     "scaleKmPerSourceUnit": 53.59873207342996,
     "metersPerSourceUnit": 53598.73207342996,
     "sourceUrl": "https://arxiv.org/pdf/1803.06116",
-    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, Table A.3; doi:10.1016/j.icarus.2018.03.016",
+    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus 309,297–337, Table A.3; doi:10.1016/j.icarus.2018.03.016",
     "publishedPoleEclipticDegrees": [
       233,
       49
     ],
     "publishedPeriodHours": 18.1191,
-    "limitations": "The displayed nominal DAMIT2016 model has beta50°, while the varied-shape thermophysical table reports beta49° and rounded period18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
+    "limitations": "The displayed nominal DAMIT2016 model has beta 50°, while the varied-shape thermophysical table reports beta 49° and rounded period 18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
     "visibleDescription": "Convex light-curve shape with published thermophysical size calibration: 66.5 ± 0.9 km equivalent diameter. The nominal archived pole differs by 1° from the varied-model fit. Grid marks unavailable surface imagery; rotational phase is illustrative.",
     "sourceLabel": "Hanuš et al. (2018), Table A.3"
   },
@@ -28,7 +28,7 @@
     233,
     50
   ],
-  "modelLimitations": "The displayed nominal DAMIT2016 model has beta50°, while the varied-shape thermophysical table reports beta49° and rounded period18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
+  "modelLimitations": "The displayed nominal DAMIT2016 model has beta 50°, while the varied-shape thermophysical table reports beta 49° and rounded period 18.1191h. This transfer uses the same published shape/pole family, not identical thermophysical ensemble mesh bytes. Only a uniform physical scale is transferred; no thermal terrain or measured albedo map is added.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4173/shape.txt",
     "vertices": 1022,

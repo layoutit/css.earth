@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2017 ADAM uses13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter106.926418 km, matching its rounded archive107±3 km. The paper reports an ensemble106±3 km and pole(316,+58), within the stated model uncertainties.
+Hanuš 2017 ADAM uses 13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter 106.926418 km, matching its rounded archive 107±3 km. The paper reports an ensemble 106±3 km and pole(316,+58), within the stated model uncertainties.
 
-Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.
+Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly 107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

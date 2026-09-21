@@ -6,7 +6,7 @@
   "controls": [
     {
       "id": "normal",
-      "label": "Normal",
+      "label": "Visible color",
       "shortLabel": "RGB",
       "thumbnailUrl": "/scenes/earth/earth-lens-normal.webp",
       "surfaceUrl": "/scenes/earth/earth-surface.webp",
@@ -28,7 +28,7 @@
     },
     {
       "id": "topography",
-      "label": "Topography",
+      "label": "Elevation",
       "shortLabel": "TOPO",
       "thumbnailUrl": "/scenes/earth/earth-lens-topography.webp",
       "surfaceUrl": "/scenes/earth/earth-topography.webp",

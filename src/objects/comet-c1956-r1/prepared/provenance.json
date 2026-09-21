@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5d43fe6bb9fd2b0b5d6093f8246b93088f23e7a35b3def039668cde0745a326b"
+    "sha256": "7b55255e00400b3dcc34c489111cf118e06cdc0e01f493cb16202a268d07a992"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -131,7 +131,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "82992c48e2f99c178427fa5031177af057d48db16d6c3814b71b9664cf0273e8",
+      "sha256": "c850deb5f331739e8922500fc1c49ea361690d29f5e3cb18dc8b8489c159f4be",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -142,14 +142,14 @@
             {
               "id": "perihelion",
               "label": "Closest to Sun",
-              "value": "0.288 AU",
+              "value": "0.316 AU",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1956+R1%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
-                "label": "JPL Horizons, 2026-09-03 epoch",
-                "checked": "2026-09-16",
-                "path": "source/reference/horizons-elements.txt",
-                "catalogueId": "jpl-horizons",
-                "locator": "$$SOE first epoch; QR (km) / 149597870.7"
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1956%20R1",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-21",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.q (au)"
               }
             }
           ],
@@ -182,7 +182,7 @@
                 {
                   "id": "perihelion",
                   "label": "Closest to Sun",
-                  "value": "0.288 AU"
+                  "value": "0.316 AU"
                 }
               ],
               "notes": "A sphere at an assumed display radius; no published nucleus size exists. No published nucleus size exists; the displayed radius is an assumption carried from the earlier catalogue estimate and is not a measurement. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
@@ -272,8 +272,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "82992c48e2f99c178427fa5031177af057d48db16d6c3814b71b9664cf0273e8",
-      "bytes": 3331,
+      "sha256": "c850deb5f331739e8922500fc1c49ea361690d29f5e3cb18dc8b8489c159f4be",
+      "bytes": 3053,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -344,8 +344,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7603,
-          "sha256": "718c8709f46afa24407918457a7d8bc6576df07d5ae86d2ea2fc043ec336262f",
+          "bytes": 7325,
+          "sha256": "f464e0f29f608d41a06a2548cbc89ccc394ca75c4e4b4989de768726d6154a89",
           "verification": "bytes-verified"
         }
       ],
@@ -358,7 +358,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1956-r1",
-    "materialSha256": "1248c3ddbea7ed93d982da1391df2595fa8891febba00c1bf15f985e279dcd39",
+    "materialSha256": "907eb8803a7ed154dd83030d4a94d70309595e3ed5841c110f69c36b31ed3f2e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

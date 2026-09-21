@@ -105,7 +105,9 @@
   transform-style: preserve-3d;
 }
 
+/* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
 .mercury-cutaway {
+  display: none;
   visibility: hidden;
 }
 
@@ -229,6 +231,7 @@
 
 .planet-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
   .mercury-cutaway {
+  display: block;
   visibility: visible;
 }
 

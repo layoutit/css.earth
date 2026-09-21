@@ -25,7 +25,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral gray must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
 
-Select pole1 model175 (200,52). Hanuš et al. (2013), Tables2–3, reports this pole and its mirror (18,54), one Keck AO image, and volume-equivalent diameters93 ±9 and95 ±9 km; neither is marked rejected. The selected93-km archive calibration matches the paper.
+Select pole 1 model 175 (200,52). Hanuš et al. (2013), Tables 2–3, reports this pole and its mirror (18,54), one Keck AO image, and volume-equivalent diameters 93 ±9 and 95 ±9 km; neither is marked rejected. The selected 93-km archive calibration matches the paper.
 
 Convex geometry is still inferred from light curves; the AO silhouette calibrates size, not all local topography.
 

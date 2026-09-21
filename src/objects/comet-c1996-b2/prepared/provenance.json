@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "5f057d9d46a8477939958dfce9f49de03f68960d6a142c413cb934e07c1a3d45"
+    "sha256": "1065b9a71b2ca38095cd7c8062521e896f019fe9b9149e4b1678c66c454ef1b9"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -131,7 +131,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6dde11b5103236d4f2475a103c9409365187cf98010ee8f41ac817d26b7375be",
+      "sha256": "e1f862e8aae38c2007576ef21373a383a7914982c2931e41054292587095e82f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -155,14 +155,14 @@
             {
               "id": "perihelion",
               "label": "Closest to Sun",
-              "value": "0.24 AU",
+              "value": "0.23 AU",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27DES%3DC%2F1996+B2%3BCAP%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
-                "label": "JPL Horizons, 2026-09-03 epoch",
-                "checked": "2026-09-16",
-                "path": "source/reference/horizons-elements.txt",
-                "catalogueId": "jpl-horizons",
-                "locator": "$$SOE first epoch; QR (km) / 149597870.7"
+                "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=1996%20B2",
+                "label": "JPL Small-Body Database",
+                "checked": "2026-09-21",
+                "path": "source/reference/sbdb.json",
+                "catalogueId": "jpl-small-body-database",
+                "locator": "orbit.elements.q (au)"
               }
             }
           ],
@@ -189,16 +189,16 @@
               "facts": [
                 {
                   "id": "radius",
-                  "label": "Effective nucleus radius",
+                  "label": "Nucleus radius (midpoint of 2-3 km diameter)",
                   "value": "1.25 km"
                 },
                 {
                   "id": "perihelion",
                   "label": "Closest to Sun",
-                  "value": "0.24 AU"
+                  "value": "0.23 AU"
                 }
               ],
-              "notes": "An ellipsoid at the published effective nucleus radius (Harmon et al. (1997), Science 278, 1921). Unresolved; the midpoint of the radar diameter range is displayed as a sphere. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
+              "notes": "A sphere at the midpoint of Harmon et al.'s 2-3 km diameter range (Harmon et al. (1997), Science 278, 1921). Unresolved; the midpoint of the radar diameter range is displayed as a sphere. Neutral gray marks missing surface imagery; the attitude is an arbitrary display orientation.",
               "noData": true
             }
           ]
@@ -285,8 +285,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6dde11b5103236d4f2475a103c9409365187cf98010ee8f41ac817d26b7375be",
-      "bytes": 3717,
+      "sha256": "e1f862e8aae38c2007576ef21373a383a7914982c2931e41054292587095e82f",
+      "bytes": 3470,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -357,8 +357,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6673,
-          "sha256": "2fba875915fd203c00fa59e9fa1c54dd6034954ca0034d84f2c69b3af0930912",
+          "bytes": 6395,
+          "sha256": "57493f42461f5a073708f59259a9560027a84838c3a62c1dd31515928b05ee53",
           "verification": "bytes-verified"
         }
       ],
@@ -371,7 +371,7 @@
   },
   "lastPreparation": {
     "objectId": "comet-c1996-b2",
-    "materialSha256": "d4a96f908e508bdd58582af50ceaccc11479ded212e30ac278ff853176b0eaaf",
+    "materialSha256": "6eb2fb57b851cd06ab305cb1db15030b9d3d4c2be40fe064509036400b3a20a9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

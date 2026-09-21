@@ -5,7 +5,7 @@
   },
   "selected": {
     "identity": "JPL Small-Body Database designation and Horizons elements",
-    "size": "Published effective nucleus radius 1.25 km (Harmon et al. (1997), Science 278, 1921) as the volume-equivalent radius",
+    "size": "Radius 1.25 km, the midpoint of Harmon et al.'s 2-3 km diameter range (Harmon et al. (1997), Science 278, 1921), as the volume-equivalent radius",
     "position": "Independent JPL heliocentric elements and vectors at JD2461286.5",
     "shape": "Sphere; no measured shape",
     "texture": "Shared missing-imagery grid",
@@ -14,7 +14,7 @@
   "candidateSurvey": [
     {
       "url": "https://doi.org/10.1126/science.278.5345.1921",
-      "disposition": "Selected effective nucleus radius: Harmon et al. (1997), Science 278, 1921."
+      "disposition": "Selected nucleus size: the midpoint of Harmon et al.'s 2-3 km radar diameter range, Science 278, 1921."
     },
     {
       "url": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/",
@@ -30,8 +30,8 @@
     }
   ],
   "derivedFacts": {
-    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date",
-    "radius": "Published effective radius, Harmon et al. (1997), Science 278, 1921"
+    "perihelion": "Perihelion distance q of the 1996 apparition: JPL SBDB orbit.elements.q (solution JPL 73, epoch JD2450157.5 = 1996-03-15)",
+    "radius": "Midpoint of Harmon et al.'s 2-3 km diameter range, Harmon et al. (1997), Science 278, 1921"
   },
   "assumptions": [
     "No observed albedo, mass, density, pole or placeholder rotation is imported.",

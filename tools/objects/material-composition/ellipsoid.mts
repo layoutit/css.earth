@@ -228,3 +228,22 @@ export function prepareProjectedEllipsoidSilhouetteCoverage({
   }
   return coverage;
 }
+
+/** Resample an equirectangular map whose rows are evenly spaced in planetographic latitude (the angle of the surface normal, as
+ * Hubble OPAL and most giant-planet maps are published) onto rows evenly spaced in the mesh's own latitude, the parameter of
+ * `ellipsoidPoint` (x = a cos beta, z = b sin beta). The two agree only on a sphere: tan(planetographic) = (a / b) tan(beta), so on
+ * Saturn (a / b = 1.109) a map read row for row sits up to 2.95 degrees of latitude away from where it belongs. Rows are linearly
+ * interpolated; columns are unchanged. */
+export function planetographicRowsToMeshLatitude(data: Uint8Array, width: number, height: number, channels: number, axisRatio: number): Buffer {
+  if (!(axisRatio >= 1) || !Number.isFinite(axisRatio)) throw new RangeError('An axis ratio a / b must be finite and at least 1.');
+  if (data.length !== width * height * channels) throw new RangeError('Map bytes do not match its dimensions.');
+  const output = Buffer.alloc(data.length), rowBytes = width * channels;
+  for (let y = 0; y < height; y += 1) {
+    const beta = Math.PI / 2 - (y + 0.5) / height * Math.PI;
+    const planetographic = Math.atan2(axisRatio * Math.sin(beta), Math.cos(beta));
+    const source = Math.max(0, Math.min(height - 1, (Math.PI / 2 - planetographic) / Math.PI * height - 0.5));
+    const y0 = Math.floor(source), y1 = Math.min(height - 1, y0 + 1), fraction = source - y0;
+    for (let i = 0; i < rowBytes; i += 1) output[y * rowBytes + i] = Math.round(data[y0 * rowBytes + i]! * (1 - fraction) + data[y1 * rowBytes + i]! * fraction);
+  }
+  return output;
+}

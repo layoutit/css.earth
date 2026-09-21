@@ -156,8 +156,6 @@ uses to within 2e-6 degrees. The six that do not, and why:
 |---|---:|---:|---|
 | Earth | 0.002° | 0.26° | Horizons rotates Earth from UT1 with real precession-nutation; the IAU model is a linear approximation |
 | Moon | 0.002° | 0.003° | Horizons uses DE441's integrated libration angles |
-| Phobos | 0.31° | 10.4° | Horizons uses MAR097/MAR099, refit after the 2015 report |
-| Deimos | 0.07° | 0.82° | same |
 | Miranda | 3.5° | 2.6° | URA182 (2025) moved the Uranian satellite poles |
 | Triton | 4.2° | 3.7° | NEP097 likewise |
 | Umbriel | — | 0.13° | **unexplained**; see `rotation.test.ts` |

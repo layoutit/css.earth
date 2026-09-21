@@ -53,11 +53,11 @@ year, 243-Earth-day retrograde rotation, approximately 3-degree tilt, 467 °C
 surface temperature, 93-Earth-atmosphere surface pressure, and absence of moons
 and rings.
 
-The retained body uses the 6,051.9 km spherical radius stated in
-`source/atmosphere/model.json`. The body
+The retained body uses the 6,051.84 km spherical radius stated in
+`source/presentation/solar-system.json`. The body
 is represented by 448 prepared
 projective texture leaves and two prepared polar leaves. The latitude rows,
-polar projections, atlas addressing, source color, seam ownership, and DPR 1/2
+polar projections, atlas addressing, source color, seam ownership, and @2x
 rasters are all generated before runtime. The browser transports those values;
 it does not construct geometry or sample source maps.
 
@@ -238,7 +238,15 @@ view when a lens changes.
 
 USGS documents the source products as prepared global mosaics derived from
 Magellan radar and topography. The embedded colors are part of those USGS
-products; neither lens is a natural-color photograph. Preparation resizes,
+products; neither lens is a natural-color photograph. USGS describes the elevation
+product as a C3-MIDR radar mosaic "overlain with colorized topography", so its
+brightness is radar and its hue is height. The Elevation legend follows the
+USGS `venus_magellan_c3-mdir_clrtopo_legend.png`: −3 to 11 km, or a planet
+radius of 6,048 to 6,062 km. Its 29 color stops were read every 0.5 km along
+the middle rows of that image (fetched 2026-09-21, SHA-256
+`6761a432fb59ed6f8731670950be125c3bb63dfe1f32227fbf55588be06fc569`). The hue
+wraps: it runs purple, blue, green, orange, red and magenta, then returns to
+purple above about 8 km, so the highest terrain and the lowest share a color. Preparation resizes,
 sharpens, projects polar tiles, and orients the source for the retained grid. It
 does not synthesize surface measurements or recolor the sources.
 

@@ -13,7 +13,7 @@
     "sourceUrl": "https://arxiv.org/pdf/1104.4227",
     "sourceLabel": "Ďurech et al. (2011), Icarus 214, 652–670",
     "reference": "Ďurech et al. (2011), Icarus 214, 652–670",
-    "limitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+    "limitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the 2004 occultation negative chord. Delbo and Tanga 2009 obtain a volume-equivalent thermal size range 55–57 km, represented in DAMIT as 56±1 km. The later Ďurech 2011 Table 3 fits the same pole family to five occultation chords at 49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
     "visibleDescription": "Convex light-curve reconstruction, 49 ± 5 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.8750000078752326,
     "metersPerSourceUnit": 875.0000078752325
@@ -23,7 +23,7 @@
     79,
     -35
   ],
-  "modelLimitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the2004 occultation negative chord. Delbo and Tanga2009 obtain a volume-equivalent thermal size range55–57 km, represented in DAMIT as56±1 km. The later Ďurech2011 Table3 fits the same pole family to five occultation chords at49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
+  "modelLimitations": "The pole(79,−35) is preferred by both IRAS thermal fits and the 2004 occultation negative chord. Delbo and Tanga 2009 obtain a volume-equivalent thermal size range 55–57 km, represented in DAMIT as 56±1 km. The later Ďurech 2011 Table 3 fits the same pole family to five occultation chords at 49±5 km. This explicit occultation volume scale is transferred uniformly to the archived shape; the distinct thermal estimate is retained as a comparison rather than silently averaged.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/578/shape.txt",
     "vertices": 1022,

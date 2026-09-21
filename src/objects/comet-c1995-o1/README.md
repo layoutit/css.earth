@@ -12,6 +12,7 @@ One **Shape approximation** dataset shows an ellipsoid at the published effectiv
 | --- | --- |
 | [Shape parameters](source/shape/model.json) | Published effective nucleus radius and shape statement from [Szabó et al. (2012), ApJ 761, 8](https://doi.org/10.1088/0004-637X/761/1/8), tessellated as a smooth ellipsoid. |
 | [JPL elements](source/reference/horizons-elements.txt) and [independent vectors](source/reference/horizons-vectors.txt) | Heliocentric ICRF position at JD2461286.5, 3 September 2026 TT. |
+| [JPL elements at the 1997 perihelion](source/reference/horizons-elements-1997.txt) | Osculating elements on 1997 April 1 TDB (solution JPL 226). The "Closest to Sun" fact, 0.914 AU, is the QR of this passage. The 2026 osculating value (0.925 AU) describes the current orbit, not the passage Hale-Bopp is known for. |
 
 [Selection, alternatives and assumptions](source/reference/source-record.json) explain the sources and factsheet derivations. [Credits and reuse terms](NOTICE.md) accompany the pinned inputs.
 

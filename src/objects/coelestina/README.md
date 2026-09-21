@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2016 Table2 reports10 dense lightcurves from one apparition and366 sparse points. Two poles remain; model1218 is representative. Limited dense apparition coverage is a model limitation and no high-resolution terrain is claimed. The thermal scale is approximate.
+Hanuš 2016 Table 2 reports 10 dense lightcurves from one apparition and 366 sparse points. Two poles remain; model 1218 is representative. Limited dense apparition coverage is a model limitation and no high-resolution terrain is claimed. The thermal scale is approximate.
 
 Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 

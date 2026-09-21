@@ -63,7 +63,7 @@ The PNG follows the [ISIS display export convention](https://isis.astrogeology.u
 
 USGS already applied weighted mosaicking and a 31 × 31 high-pass filter. Its display levels and remaining haze, cloud features and patch boundaries are preserved. The 8,192 × 4,096 prepared map is about 1.98 km per equatorial texel; the 702 m source grid is not a claim of uniform native image resolution. Shared globe lighting is approximate and remains controlled by Shadows.
 
-The scene uses the vendored JPL/IAU Titan radius (2,575.5 km), rotation and Saturn-relative orbit. That physical radius and the source map's reference sphere are distinct. The small cartographic radius difference does not scale image features relative to the rendered globe.
+The recipe sphere and the astronomy package both use the [JPL satellite table](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) mean radius of 2,574.76 km (IAU 2015); the package also supplies Titan's rotation and Saturn-relative orbit. The physical radius and the source map's reference sphere are distinct. The small cartographic radius difference does not scale image features relative to the rendered globe.
 
 ## Radar
 
@@ -90,6 +90,6 @@ No readiness is claimed.
 <details>
 <summary>Shape, rotation and camera on the shared raster lane</summary>
 
-The recipe declares a sphere of 2575.5 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 15.9464-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
+The recipe declares a sphere of 2574.76 km. The retained mesh keeps its spin origin at 0°; the world frame, pole and prime meridian at the shared epoch come from `src/platform/solar-geometry.mts` as for every prepared body. The scene records a 15.9464-day prograde rotation (synchronous: the astronomy package's orbital mean motion) and 0° tilt to its orbit for the 84-second visual rotation; neither drives the physical frame. The camera is the shared solar-system camera (zoom 1.1, 40.00° initial pitch, 0.00° yaw, taken from the retired lane's camera).
 
 </details>

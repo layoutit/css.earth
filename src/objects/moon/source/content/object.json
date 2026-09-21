@@ -27,11 +27,11 @@
         "label": "Mean distance from Earth",
         "value": "384,400 km",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-          "label": "source-moon-prepared-moon-facts",
-          "checked": "2026-09-16",
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-21",
           "path": "source/orbit/moon.json",
-          "catalogueId": "source-moon-prepared-moon-facts",
+          "catalogueId": "jpl-satellite-mean-elements",
           "locator": "/meanOrbitRadiusKm"
         }
       },
@@ -66,12 +66,12 @@
         "label": "Rotation period",
         "value": "27.32 days · synchronous",
         "source": {
-          "url": "https://science.nasa.gov/moon/facts/",
-          "label": "NASA/JPL reference",
-          "checked": "2026-09-08",
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
-          "catalogueId": "nasa-moon-facts",
-          "locator": "/references/1; rotation-period"
+          "catalogueId": "jpl-satellite-mean-elements",
+          "locator": "/references/2; P (days)"
         }
       },
       {
@@ -79,11 +79,11 @@
         "label": "Inclination to ecliptic",
         "value": "5.16°",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-          "label": "source-moon-prepared-moon-facts",
-          "checked": "2026-09-16",
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-21",
           "path": "source/orbit/moon.json",
-          "catalogueId": "source-moon-prepared-moon-facts",
+          "catalogueId": "jpl-satellite-mean-elements",
           "locator": "/inclinationDegrees"
         }
       },
@@ -92,11 +92,11 @@
         "label": "Orbital eccentricity",
         "value": "0.0554",
         "source": {
-          "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-          "label": "source-moon-prepared-moon-facts",
-          "checked": "2026-09-16",
+          "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+          "label": "JPL Planetary Satellite Mean Orbital Parameters",
+          "checked": "2026-09-21",
           "path": "source/orbit/moon.json",
-          "catalogueId": "source-moon-prepared-moon-facts",
+          "catalogueId": "jpl-satellite-mean-elements",
           "locator": "/eccentricity"
         }
       },
@@ -1099,9 +1099,15 @@
       "href": "https://science.nasa.gov/moon/facts/"
     },
     {
-      "label": "NASA SVS",
+      "label": "LROC",
       "role": "surface",
-      "description": "LRO colour map",
+      "description": "WAC global mosaic, 643 nm",
+      "href": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
+    },
+    {
+      "label": "NASA SVS",
+      "role": "navigation",
+      "description": "CGI Moon Kit, navigation icon",
       "href": "https://svs.gsfc.nasa.gov/4720/"
     },
     {

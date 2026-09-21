@@ -60,7 +60,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral gray must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
 
-Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329.
+Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary 145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds 80%; the exact selected mesh has raw volume diameter 144.329.
 
 Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.
 

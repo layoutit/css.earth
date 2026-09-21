@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2016 Table2 reports 12 dense light curves across three apparitions plus 519 sparse measurements. Both low-latitude poles remain; no imagery or unique pole is inferred.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2016 Table 2 reports 12 dense light curves across three apparitions plus 519 sparse measurements. Both low-latitude poles remain; no imagery or unique pole is inferred.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

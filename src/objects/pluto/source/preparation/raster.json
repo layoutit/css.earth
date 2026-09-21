@@ -22,7 +22,7 @@
     {
       "id": "surface",
       "source": "surface/pluto-color-mosaic.jpg",
-      "falseColor": false,
+      "falseColor": true,
       "output": "pluto-{id}{suffix}.webp",
       "thumbnail": "pluto-lens-{id}.webp",
       "science": {

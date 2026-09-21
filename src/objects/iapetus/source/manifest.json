@@ -617,7 +617,7 @@
       "id": "iapetus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
       "expectedBytes": 208,
-      "expectedSha256": "1e74f217e5e69c6af5aaa70c4e60aa4ba5b20d420cb4151ea49c456f216b9795",
+      "expectedSha256": "596dbeb6e3adb2d200b0ed818dc57a58465506f0d1730920560b961cd27eb256",
       "origin": "Repository-authored Iapetus solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -771,7 +771,7 @@
     {
       "path": "observations/catalog.json",
       "expectedBytes": 3235,
-      "expectedSha256": "e6bb988a21f919d31f3b1bc5efffc92edc5a92d7002a9a52c549c3f262a5a51e"
+      "expectedSha256": "bc3651d0d1c8c190d9fcb8e8956eab383d47666b6d8fced2fb3e362c0412852b"
     },
     {
       "path": "editorial/factsheet-review.json",

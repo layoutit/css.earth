@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2016 Table2 reports24 dense lightcurves across four apparitions plus485 sparse points and one pole. This published shape is selected; no independent physical-volume calibration is in its archive record. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+Hanuš 2016 Table 2 reports 24 dense lightcurves across four apparitions plus 485 sparse points and one pole. This published shape is selected; no independent physical-volume calibration is in its archive record. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

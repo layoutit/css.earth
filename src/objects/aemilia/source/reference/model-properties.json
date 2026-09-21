@@ -1,7 +1,7 @@
 {
   "source": "http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102",
   "modelId": 102,
-  "modelVersion": "ISAM snapshot2026-09-09; source release date not declared",
+  "modelVersion": "ISAM snapshot 2026-09-09; source release date not declared",
   "diameterKm": 135,
   "diameterInterpretation": "Nonconvex SAGE light-curve reconstruction with a published occultation volume-equivalent diameter of 135 ±7 km. An alternative pole remains possible. The grid marks unavailable imagery; rotation phase is illustrative.",
   "calibration": {
@@ -9,7 +9,7 @@
     "diameterKm": 135,
     "uncertaintyKm": 7,
     "uncertaintyKind": "Reported occultation-fit diameter uncertainty, not a bound on local shape accuracy.",
-    "diameterSemantics": "Volume-equivalent diameter of SAGE pole 1 from the four-chord2009-05-02 occultation fit in Marciniak et al. (2018), Table 4.",
+    "diameterSemantics": "Volume-equivalent diameter of SAGE pole 1 from the four-chord 2009-05-02 occultation fit in Marciniak et al. (2018), Table 4.",
     "sourceUrl": "https://hebe.astro.amu.edu.pl/docs/5_models.pdf",
     "reference": "Marciniak et al. (2018), A&A610,A7, Table 4; SAGE pole 1.",
     "sourceLabel": "Marciniak et al. (2018), Table 4: SAGE pole 1",

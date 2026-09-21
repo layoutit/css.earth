@@ -18,10 +18,15 @@ near-infrared lens uses F845M. Their checked FITS and TIFF products, plus the
 OPAL readme, are in `source/opal/`. Preparation converts them to fixed runtime
 rasters; the browser does not parse FITS, TIFF, or the calibration reference.
 
-The prepared scene uses the 24,764 km equatorial and 24,314 km polar radii
-(IAU 2015 report values). JPL Solar System Dynamics discovery, mean-elements, and
+The prepared scene uses the 24,764 km equatorial and 24,341 km polar radii
+(IAU 2015 report values), the same radii the OPAL readme gives for its limb
+fits. JPL Solar System Dynamics discovery, mean-elements, and
 physical-parameter tables supply the prepared 16-moon catalog. The PDS Rings
-Node Neptune table supplies the prepared ring radii and widths.
+Node Neptune table supplies the prepared ring radii and widths, including the
+Adams ring at 62,933 km. The four Adams arcs are schematic: that table lists five
+arcs (Courage, Liberte, Egalite 1 and 2, Fraternite) but gives only relative
+spacings and no arc lengths or absolute longitudes, so the drawn arc centres and
+widths are not measured positions.
 
 Two panel charts are prepared from the committed NASA GSFC Planetary Spectrum
 Generator configuration and raw I/F response; the third uses the pinned
@@ -45,11 +50,17 @@ the committed NASA Science `Neptune: Facts` snapshot.
 
 ## Known problems
 
-The OPAL global maps contain no observed samples north of approximately +30
-degrees latitude for this observing geometry. Preparation extends the checked
-+30-degree boundary row toward that row's longitudinal mean at the pole. This
-source-derived coverage treatment supplies no new storm or cloud detail. It is
-recorded in `source/preparation/observations.json` and happens only during preparation.
+Neptune's north pole was tilted away from Hubble in 2025. Measured on the pinned
+OPAL maps, coverage ends near 71° N and the rows below it still carry dark swath
+edges. We take the first row whose darkest pixel is back in the normal range of the
+row median: at 619 and 845 nm that ratio climbs from 0.37 at 60° N to about 0.80 at
+57° N (row 67 of 361); in the colour map near-black pixels reach down to 42° N and the
+ratio settles at 0.87 from row 98 of 360 (41° N). Preparation starts the fill there,
+at 57° N for the two bands and 41° N for colour, keeps every row below it and extends that row toward its longitudinal mean at the
+pole, which supplies no storm or cloud detail. An earlier recipe continued from
+30° N, overwriting observed cloud bands between 30° and 60° N, and flipped the two
+narrow-band maps upside down; both are fixed. The treatment is recorded in
+`source/preparation/observations.json` and happens only during preparation.
 
 The normal OPAL map is a 720 × 360 global raster. Its declared high-latitude
 coverage continuation and colour calibration run before the normal pole atlas
@@ -57,7 +68,7 @@ samples that grid directly. The existing 2,880 × 1,440 same-aspect resize still
 serves the normal surface bands, but it is no longer an intermediate for the
 pole atlas. The fixed direct-segment, bilinear-wrapped projection remains four
 128-pixel pole tiles in a 512 × 128 file. This preserves the existing
-projection and retained 724-leaf scene; it does not establish a new geographic
+projection and retained 722-leaf scene; it does not establish a new geographic
 registration or recover unobserved polar features.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

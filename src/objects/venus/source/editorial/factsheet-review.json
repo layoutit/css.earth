@@ -42,9 +42,10 @@
       "massUnitKg": "1e24"
     },
     {
-      "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
-      "obliquityDegrees": 177.3,
-      "definition": "Angle between angular momentum and orbit normal; includes retrograde sense."
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
+      "obliquityDegrees": 177.36,
+      "definition": "Obliquity to orbit: tilt of the rotation axis from the orbit normal, north pole defined by the right hand rule, so retrograde Venus is near 180 degrees.",
+      "conversion": "177.36 degrees rounded to 177.4 degrees"
     }
   ]
 }

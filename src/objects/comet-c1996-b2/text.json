@@ -43,9 +43,9 @@
   },
   "datasets": {
     "model": {
-      "title": "Published nucleus radius",
-      "detail": "Effective radius 1.25 km",
-      "summary": "An ellipsoid at the published effective radius of 1.25 km. The real shape is unresolved."
+      "title": "Radar nucleus size",
+      "detail": "Radius 1.25 km",
+      "summary": "A sphere of radius 1.25 km, the midpoint of Harmon et al.'s 2-3 km diameter range. The real shape is unresolved."
     }
   }
 }
