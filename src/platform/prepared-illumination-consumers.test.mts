@@ -10,21 +10,27 @@ import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coor
 test("Earth starts directional atmosphere decoding without a stability wait", async () => {
   const f = await preparedSelectionFixture(earth);
   try {
-    const changedView = { ...f.view, skySunViewDirection: [1, 0, 0], sunViewDirection: viewSunDirectionToPreparedLightDirection([1, 0, 0]), revision: 2 };
+    // Only a directional light turns the atmosphere with the Sun; flood lighting holds its full-phase frame.
+    const shadows = f.selection.dispatch({ kind: "toggle", name: "shadows", value: true });
+    await f.settle(); assert.equal(await shadows, true);
+    const requested = f.jobs.length, direction = [0.6, 0, -0.8];
+    const changedView = { ...f.view, skySunViewDirection: direction, sunViewDirection: viewSunDirectionToPreparedLightDirection(direction), revision: 2 };
     f.selection.setView(changedView);
     await f.flush();
     // Do not advance the fixture clock: short-lived phase rows must already be
     // decoding while the camera is moving, not only once its direction settles.
-    assert.ok(f.jobs.some(job => !job.done && job.url.includes("earth-atmosphere-row-16")));
+    const started = f.jobs.slice(requested).map(job => job.url);
     await f.settle();
-    assert.equal(f.presentation.observe().materials.atmosphere.frame, 64);
+    const { frame, row } = f.presentation.observe().materials.atmosphere;
+    assert.notEqual(frame, 64);
+    assert.ok(started.some(url => url.includes(`earth-atmosphere-row-${row}@`)));
     assert.deepEqual(f.errors, []);
     assert.deepEqual(f.materialErrors, []);
   } finally { f.restore(); }
 });
 
 for (const definition of [mars, earth]) {
-  test(`${definition.id}: actual shared selection preserves directional atmosphere across shadow toggles`, async () => {
+  test(`${definition.id}: actual shared selection keeps the prepared atmosphere across shadow toggles`, async () => {
     const f = await preparedSelectionFixture(definition);
     try {
       const nodes = f.stage.querySelectorAll("*");
@@ -48,7 +54,9 @@ for (const definition of [mars, earth]) {
             assert.ok(pool.nativeSlots <= 3); assert.equal(pool.pending, 0);
           }
         }
-        assert.deepEqual(states[0], states[1]);
+        // Earth's flood lighting (shadows off, the second state) pins the atmosphere to its full-phase frame; Mars keeps its phase.
+        if (definition === earth) assert.equal(states[1].phase, 127);
+        else assert.deepEqual(states[0], states[1]);
       }
       assert.equal(phases.size, 3); assert.ok(rolls.size >= 3);
       assert.deepEqual(f.errors, []); assert.deepEqual(f.materialErrors, []);
