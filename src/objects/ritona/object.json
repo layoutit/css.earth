@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "ritona",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Ritona",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 339.5
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/ritona-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "225bc2598b71e8e98da93a5bc281e2404706f25dfacab7532260c984f6b5f47f"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        6030999159099.2,
+        -665569436118.5442,
+        193319673924.2781
+      ],
+      "presentationToReference": [
+        0.9961066364827852,
+        2.4356826039297786e-17,
+        -0.08815650148997609,
+        -0.08088200877182815,
+        0.3977771559319137,
+        -0.9139099708810227,
+        -0.0350666424395902,
+        -0.9174820620691818,
+        -0.39622846486502694
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1476.0869565217392,
+      "bodyRadiusM": 339500
+    },
+    "catalog": {
+      "name": "Ritona",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 41.5,
+      "description": "A large icy body in the Kuiper belt.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "7c314363c7329a5c5c22e49d5253b6750ad8f0d72df6256f0db936dfa02aa9c5"
+  }
+}
