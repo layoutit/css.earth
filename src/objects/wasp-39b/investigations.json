@@ -1,5 +1,25 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "wasp-39b",
-  "entries": []
+  "entries": [
+    {
+      "id": "jwst-archive-observations",
+      "subject": "JWST observations of WASP-39 (programmes 1366, 2783, 5634, 8017)",
+      "status": "unresolved",
+      "finding": "JWST observed WASP-39 in programmes 1366, 2783, 5634, 8017 (NIRCam grism, NIRISS SOSS, NIRSpec and MIRI slitless time series). These measure the planet's atmosphere in transmission against its star; the planet is never resolved, so they give no surface image, map or colour. Not reduced here.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=1366",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=2783",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=5634",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=8017"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ],
+      "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
+    }
+  ]
 }

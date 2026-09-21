@@ -1,0 +1,29 @@
+{
+ "id": "kepler-452",
+ "classification": "star",
+ "order": 1232,
+ "physical": {
+  "name": "Kepler-452",
+  "horizonsCode": null,
+  "meanRadiusKm": 772227,
+  "gravitationalParameterKm3PerS2": 137622800323.49112,
+  "parent": null
+ },
+ "physicalNotes": "Radius: 1.11 (+0.15) solar radii at 695700 km per solar radius, from Jenkins et al. 2015 (AJ 150, 56 (2015); arXiv:1507.06723). GM from their stellar mass 1.037 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+ "star": {
+  "rightAscensionDegrees": 296.00369196865,
+  "declinationDegrees": 44.27754762146999,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 553.9246,
+  "properMotionRaMasPerYear": 9.987,
+  "properMotionDecMasPerYear": 8.943,
+  "radialVelocityKmPerS": -42.49,
+  "sources": {
+   "position": "SIMBAD basic record for Kepler-452, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21",
+   "distance": "Gaia EDR3 parallax 1.8053 +/- 0.0103 mas via SIMBAD (2020yCat.1350....0G): 553.92 pc, no zero-point correction",
+   "properMotion": "SIMBAD: 9.987, 8.943 mas/yr, reference 2020yCat.1350....0G",
+   "radialVelocity": "SIMBAD: -42.49 km/s, reference 2022ApJS..261...26S"
+  },
+  "presentationUp": "display-axis"
+ }
+}

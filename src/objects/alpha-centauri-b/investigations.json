@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "alpha-centauri-b",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: Limb-darkened angular diameter 5.999 ± 0.025 mas measured with VLTI/PIONIER by Kervella et al. (2017), A&A 597, A137, who derive 0.8632 ± 0.0037 solar radii with the parallax 747.17 ± 0.61 mas. Adopted 600,528 km, 0.8632 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted. Placement: SIMBAD basic record for * alf Cen B (HIP 71681), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+B; Inverse of the parallax 747.17 ± 0.61 mas that Kervella et al. (2017) adopt from Kervella et al. (2016).",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+B",
+        "https://arxiv.org/abs/1610.06185"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

@@ -3,7 +3,7 @@ import { STAR_ASTROMETRY } from './data/starAstrometry.data.js'
 import { BODIES } from './body-data.js'
 import { directionFromRaDec, skyBasis } from './stars.js'
 import { RAD_PER_DEG } from './angles.js'
-import { solveKeplerEccentricAnomalyRad } from './kepler.js'
+import { keplerStateKm, type KeplerianElements } from './kepler.js'
 import type { Vec3 } from './vec3.js'
 
 /** A planet on a transit-fitted bound orbit around a placed star. */
@@ -90,45 +90,56 @@ export const hostedOrbitApoapsisKm = (orbit: HostedOrbit, stellarRadiusKm: numbe
 }
 
 /**
- * State relative to the host in ICRF km and km/day, evaluated in the published BMJD_TDB time scale.
+ * The published transit record as ordinary Keplerian elements about the host, in ICRF equatorial axes: the same element
+ * set asteroids, comets and dwarf planets carry, propagated by the same `keplerStateKm`. The measured period is kept as the
+ * mean motion (never re-derived from masses), and the epoch is the inferior conjunction, where f = pi/2 - omega.
+ * The orbit's plane comes from the host's sky frame: the ascending node lies on the sky at the recorded position angle,
+ * and the orbit is inclined by the recorded inclination toward the observer.
+ */
+export const hostedKeplerElements = (orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number }, stellarRadiusKm: number): KeplerianElements => {
+  const { eccentricity: e, argumentOfPeriapsisRad: periapsis } = validatedEccentricParameters(orbit)
+  if (!(Number.isFinite(stellarRadiusKm) && stellarRadiusKm > 0)) throw new TypeError('stellarRadiusKm must be finite and positive.')
+  if (!(Number.isFinite(host.rightAscensionDegrees) && Number.isFinite(host.declinationDegrees))) throw new TypeError('Host right ascension and declination must be finite.')
+  if (!(Number.isFinite(orbit.periodDays) && orbit.periodDays > 0)) throw new TypeError(`periodDays must be finite and positive; got ${orbit.periodDays}.`)
+  if (!Number.isFinite(orbit.transitTimeBmjdTdb)) throw new TypeError('Hosted-orbit BMJD_TDB epochs must be finite.')
+  const inclination = orbit.inclinationDegrees * RAD_PER_DEG
+  const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees)
+  const toIcrf = (v: readonly number[]) => [0, 1, 2].map(axis => v[0]! * x[axis]! + v[1]! * y[axis]! + v[2]! * z[axis]!) as unknown as Vec3
+  // In the sky frame the line of nodes is -X and the in-plane direction 90 degrees along the motion rises toward the observer.
+  const node = toIcrf([-1, 0, 0]), across = toIcrf([0, -Math.cos(inclination), Math.sin(inclination)])
+  const perifocal = [0, 1, 2].map(axis => Math.cos(periapsis) * node[axis]! + Math.sin(periapsis) * across[axis]!) as unknown as Vec3
+  const normal: Vec3 = [node[1] * across[2] - node[2] * across[1], node[2] * across[0] - node[0] * across[2], node[0] * across[1] - node[1] * across[0]]
+  const equatorialInclination = Math.acos(Math.max(-1, Math.min(1, normal[2])))
+  const ascendingNode = Math.hypot(normal[0], normal[1]) < 1e-15 ? 0 : Math.atan2(normal[0], -normal[1])
+  const equatorialNode: Vec3 = [Math.cos(ascendingNode), Math.sin(ascendingNode), 0]
+  const nodeNormal: Vec3 = [normal[1] * equatorialNode[2] - normal[2] * equatorialNode[1], normal[2] * equatorialNode[0] - normal[0] * equatorialNode[2], normal[0] * equatorialNode[1] - normal[1] * equatorialNode[0]]
+  const argument = Math.atan2(perifocal[0] * nodeNormal[0] + perifocal[1] * nodeNormal[1] + perifocal[2] * nodeNormal[2],
+    perifocal[0] * equatorialNode[0] + perifocal[1] * equatorialNode[1] + perifocal[2] * equatorialNode[2])
+  const conjunctionTrueAnomaly = Math.PI / 2 - periapsis
+  const conjunctionEccentricAnomaly = Math.atan2(Math.sqrt(1 - e * e) * Math.sin(conjunctionTrueAnomaly), e + Math.cos(conjunctionTrueAnomaly))
+  return {
+    epochJdTt: orbit.transitTimeBmjdTdb + MJD_OFFSET,
+    semiMajorAxisKm: orbit.semiMajorAxisStellarRadii * stellarRadiusKm,
+    eccentricity: e,
+    inclinationRad: equatorialInclination,
+    ascendingNodeRad: ascendingNode,
+    argumentOfPeriapsisRad: argument,
+    meanAnomalyAtEpochRad: conjunctionEccentricAnomaly - e * Math.sin(conjunctionEccentricAnomaly),
+    meanMotionRadPerDay: 2 * Math.PI / orbit.periodDays,
+  }
+}
+
+/**
+ * State relative to the host in ICRF km and km/day, evaluated in the published BMJD_TDB time scale: `keplerStateKm` on
+ * `hostedKeplerElements`, with the epoch kept in BMJD so no precision is spent on the Julian Date offset.
  * At the stated inferior-conjunction epoch, f = pi/2 - omega. For e > 0 and i != 90 degrees this convention is
  * generally near, but not exactly at, minimum projected separation; it must not be relabelled as exact mid-transit.
  */
 export const hostedOrbitStateRelativeBmjdTdb = (orbit: HostedOrbit, host: { rightAscensionDegrees: number; declinationDegrees: number }, stellarRadiusKm: number, epochBmjdTdb: number): { positionKm: Vec3; velocityKmPerDay: Vec3 } => {
-  const { eccentricity: e, argumentOfPeriapsisRad: periapsis } = validatedEccentricParameters(orbit)
-  if (!(Number.isFinite(stellarRadiusKm) && stellarRadiusKm > 0)) throw new TypeError('stellarRadiusKm must be finite and positive.')
-  if (!(Number.isFinite(host.rightAscensionDegrees) && Number.isFinite(host.declinationDegrees))) throw new TypeError('Host right ascension and declination must be finite.')
-  const a = orbit.semiMajorAxisStellarRadii * stellarRadiusKm
-  const inclination = orbit.inclinationDegrees * RAD_PER_DEG
-  const rate = 2 * Math.PI / orbit.periodDays
-  const { x, y, z } = hostSkyFrame(host, orbit.ascendingNodePositionAngleDegrees)
-  const toIcrf = (v: readonly number[]) => [0, 1, 2].map(axis => v[0]! * x[axis]! + v[1]! * y[axis]! + v[2]! * z[axis]!) as unknown as Vec3
-  // Preserve the original circular propagator exactly. Besides avoiding needless Kepler work, this keeps source-pinned
-  // prepared coordinates (including signed zero) stable when eccentric-orbit support is added.
-  if (e === 0) {
-    const phase = hostedOrbitPhaseBmjdTdb(orbit, epochBmjdTdb)
-    const local = [a * Math.sin(phase), -a * Math.cos(inclination) * Math.cos(phase), a * Math.sin(inclination) * Math.cos(phase)]
-    const localVelocity = [a * rate * Math.cos(phase), a * rate * Math.cos(inclination) * Math.sin(phase), -a * rate * Math.sin(inclination) * Math.sin(phase)]
-    return { positionKm: toIcrf(local), velocityKmPerDay: toIcrf(localVelocity) }
-  }
-  const beta = Math.sqrt(1 - e * e)
-  const conjunctionTrueAnomaly = Math.PI / 2 - periapsis
-  const conjunctionEccentricAnomaly = Math.atan2(beta * Math.sin(conjunctionTrueAnomaly), e + Math.cos(conjunctionTrueAnomaly))
-  const conjunctionMeanAnomaly = conjunctionEccentricAnomaly - e * Math.sin(conjunctionEccentricAnomaly)
-  const meanAnomaly = conjunctionMeanAnomaly + hostedOrbitPhaseBmjdTdb(orbit, epochBmjdTdb)
-  const eccentricAnomaly = solveKeplerEccentricAnomalyRad(meanAnomaly, e)
-  const cosE = Math.cos(eccentricAnomaly), sinE = Math.sin(eccentricAnomaly)
-  const xOrbital = a * (cosE - e), yOrbital = a * beta * sinE
-  const eccentricAnomalyRate = rate / (1 - e * cosE)
-  const vxOrbital = -a * sinE * eccentricAnomalyRate, vyOrbital = a * beta * cosE * eccentricAnomalyRate
-  const cosPeriapsis = Math.cos(periapsis), sinPeriapsis = Math.sin(periapsis)
-  const alongNode = xOrbital * cosPeriapsis - yOrbital * sinPeriapsis
-  const acrossNode = xOrbital * sinPeriapsis + yOrbital * cosPeriapsis
-  const alongNodeVelocity = vxOrbital * cosPeriapsis - vyOrbital * sinPeriapsis
-  const acrossNodeVelocity = vxOrbital * sinPeriapsis + vyOrbital * cosPeriapsis
-  const local = [-alongNode, -acrossNode * Math.cos(inclination), acrossNode * Math.sin(inclination)]
-  const localVelocity = [-alongNodeVelocity, -acrossNodeVelocity * Math.cos(inclination), acrossNodeVelocity * Math.sin(inclination)]
-  return { positionKm: toIcrf(local), velocityKmPerDay: toIcrf(localVelocity) }
+  if (!Number.isFinite(epochBmjdTdb)) throw new TypeError('Hosted-orbit BMJD_TDB epochs must be finite.')
+  const elements = hostedKeplerElements(orbit, host, stellarRadiusKm)
+  const state = keplerStateKm({ ...elements, epochJdTt: orbit.transitTimeBmjdTdb }, epochBmjdTdb)
+  return { positionKm: state.positionKm, velocityKmPerDay: state.velocityKmPerDay }
 }
 
 /** Display-time compatibility path; transit-science callers must use `hostedOrbitStateRelativeBmjdTdb`. */
