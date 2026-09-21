@@ -341,6 +341,18 @@ test('a later saved restore supersedes a pending native focus without a delayed 
 });
 
 
+test('selecting a catalogue focus replaces the overview it supersedes', async () => {
+  const f = fixture();
+  f.windowTarget.location = new URL('https://example.test/sun/?overview=system');
+  const flight = f.controller.select({ id: 'catalogue:b' });
+  assert.equal(f.windowTarget.location.searchParams.get('focus'), 'catalogue:b');
+  assert.equal(f.windowTarget.location.searchParams.has('overview'), false,
+    'a focus and an overview are one camera, so the URL may name only one');
+  f.controller.suspend(); await flight;
+  assert.deepEqual(f.errors, []);
+  f.controller.destroy();
+});
+
 test('shared context receives the exact authoritative focus on restore, switch and clear', async () => {
   const f = fixture({ object: { detailedObjectId: 'prepared-image' }, imageLayerFrames: { 'prepared-image': baseFrame } });
   f.controller.restore(f.windowTarget.location.href);

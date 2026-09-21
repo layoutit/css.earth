@@ -4,6 +4,7 @@ import type { createPreparedUniverse } from '../src/renderers/css/universe/prepa
 import type { ObjectWorldNavigation } from '../src/renderers/css/runtime/world-navigation-types.js';
 import type { PreparedNavigationFocus } from '../src/renderers/css/navigation/prepared-focus.js';
 import { record } from './browser-types.mts';
+import { withPreparedFocus } from './navigation-scope.mts';
 
 type PreparedContextLayer = ReturnType<ReturnType<typeof createPreparedUniverse>['mount']>;
 type VolumeLensState = NonNullable<ReturnType<PreparedContextLayer['volumeLensState']>>;
@@ -44,9 +45,7 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
       lenses: [{id:'optical', label:'Optical', title:'Visible-light observation', description:'Prepared image layers', sourceUrl:''}] } : null;
   };
   const writeSelectionUrl = (id: string | null) => {
-    const url = new URL(windowTarget.location.href), state = lensState(id);
-    if (id) url.searchParams.set('focus', id); else url.searchParams.delete('focus');
-    if (state) url.searchParams.set('focusLens', state.selectedLens); else url.searchParams.delete('focusLens');
+    const url = withPreparedFocus(new URL(windowTarget.location.href), id, lensState(id)?.selectedLens ?? null);
     if (url.href === windowTarget.location.href) return;
     windowTarget.history.replaceState(windowTarget.history.state, '', url.pathname + url.search + url.hash);
     notify(url.href);
