@@ -110,19 +110,6 @@
 .planet-surface-minimap[data-dragging="true"] { cursor: grabbing; }
 .planet-surface-minimap:focus { outline: none; }
 
-.planet-lens-source {
-  margin: 8px 4px 0 0;
-  color: var(--shell-text-muted);
-  font: 400 12px/16px var(--shell-ui-font);
-}
-.planet-lens-source a {
-  color: var(--shell-text-secondary);
-  text-decoration: underline;
-  text-decoration-color: var(--shell-text-muted);
-  text-underline-offset: 2px;
-}
-.planet-lens-source a:hover { color: var(--shell-text); }
-
 .planet-surface-minimap[data-ready="true"] > .planet-lens-texture { opacity: .35; }
 
 .planet-minimap-viewport {

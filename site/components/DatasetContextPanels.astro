@@ -3,15 +3,16 @@ import type { Props as ShellProps } from '../planet-shell-types';
 interface Props {
   objectId: string;
   lenses?: Pick<NonNullable<ShellProps['lenses']>, 'controls' | 'defaultLens'>;
+  directSourceIdsByLens?: Readonly<Record<string, readonly string[]>>;
 }
 import { datasetContributors } from '../dataset-context.mts';
 import { EXPLORATION } from '../exploration-catalog.mts';
 import PlanetCard from './PlanetCard.astro';
 import InformationTabs from './InformationTabs.astro';
 import SelectedContent from './SelectedContent.astro';
-const { objectId, lenses } = Astro.props;
+const { objectId, lenses, directSourceIdsByLens } = Astro.props;
 const contexts = (lenses?.controls ?? []).map(lens => ({ lens,
-  ...datasetContributors(objectId, lens.id, EXPLORATION.graph, EXPLORATION.catalog),
+  ...datasetContributors(objectId, lens.id, EXPLORATION.graph, EXPLORATION.catalog, directSourceIdsByLens?.[lens.id]),
 }));
 const span = (from?: { value: string }, to?: { value: string }) =>
   from ? `${from.value}${to ? `–${to.value}` : ''}` : null;
@@ -64,7 +65,9 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
         {tabbed && <InformationTabs idPrefix={`${objectId}-${context.lens.id}`}
           group={`context-${objectId}-${context.lens.id}`} label="Credited machines" panelSuffix="panel"
           tabs={group.map(entry => ({ id: entry.id, label: entry.band ?? entry.title }))} />}
-        {group.map(entry => <div class="planet-card-tabpanel"
+        {group.map(entry => {
+          const publishedBackdrop = entry.image?.kind.startsWith('published-') ?? false;
+          return <div class="planet-card-tabpanel"
           id={tabbed ? `${objectId}-${context.lens.id}-${entry.id}-panel` : undefined}
           data-information-group={tabbed ? `context-${objectId}-${context.lens.id}` : undefined}
           data-information-panel={tabbed ? entry.id : undefined}
@@ -74,8 +77,8 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
           <article class="planet-facility" {...entry.attribute}>
             <SelectedContent title={entry.title} lead={entry.lead} description={entry.description}>
               <div slot="header" class:list={{ 'planet-facility-preview': Boolean(entry.image || entry.emblem),
-                'planet-facility-preview-overlay': entry.image?.kind === 'published-photograph' }}>
-                <div class:list={['planet-facility-heading', entry.image?.kind === 'published-photograph' && 'planet-facility-heading-backdrop']}>
+                'planet-facility-preview-overlay': publishedBackdrop }}>
+                <div class:list={['planet-facility-heading', publishedBackdrop && 'planet-facility-heading-backdrop']}>
                   <h3 class="planet-lens-details-title">{entry.title}</h3>
                   {entry.dates && <span class="planet-selected-content-meta">{entry.dates}</span>}
                 </div>
@@ -90,7 +93,7 @@ const distinctBands = (credited: readonly { band?: string }[]) => {
               </div>
             </SelectedContent>
           </article>
-        </div>)}
+        </div>; })}
       </PlanetCard>)}
     </div>;
   })}

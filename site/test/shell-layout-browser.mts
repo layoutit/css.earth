@@ -114,7 +114,7 @@ try {
         near(result.stage.top, 0, "scene reaches the top of the window");
         near(result.stage.bottom, config.height, "scene reaches the bottom of the window");
         assert.equal(result.searchInHeader, true, `${config.name}: search belongs to the header`);
-        assert.equal(result.categoryCount, 4, `${config.name}: four category filters`);
+        assert.equal(result.categoryCount, 7, `${config.name}: seven category filters`);
         assert.ok(result.search.width > 120, `${config.name}: the search field keeps a usable width`);
         assert.equal(result.overflow, false, `${config.name}: no page overflow`);
         assert.equal(result.mountedLayers, 1, `${config.name}: exactly one camera remains mounted`);
@@ -220,8 +220,10 @@ try {
         `${config.name}: clear appears only with a query`);
       await search.fill('Neptune');
       assert.equal(await page.locator('.planet-object-browser').isVisible(), true);
-      assert.equal(await page.locator('.planet-information-panel').isVisible(), true,
-        `${config.name}: searching does not replace the selected object card`);
+      assert.equal(await page.locator('.planet-object-browser').evaluate(node => node.closest('.planet-sidebar') !== null), true,
+        `${config.name}: search results belong to the sidebar`);
+      assert.equal(await page.locator('.planet-information-panel').isVisible(), false,
+        `${config.name}: search results replace the selected object card`);
       assert.equal(await page.locator('.planet-sidebar-search-clear').isVisible(), true,
         `${config.name}: a query offers to clear itself`);
       if (sheetLayout) {

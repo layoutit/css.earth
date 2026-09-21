@@ -14,8 +14,9 @@ const words = (value: string) => value.replaceAll('-', ' ').replace(/^./u, lette
 /** One retained card transports the selected prepared record; no catalogue is imported here. */
 export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: string) => void = () => {}): PreparedFocusCard {
   if (!root) return { set() {}, destroy() {} };
-  const fields = Object.fromEntries(['name', 'aliases', 'status', 'distance', 'uncertainty', 'membership', 'association', 'basis', 'reference']
+  const fields = Object.fromEntries(['name', 'aliases', 'introduction', 'status', 'distance', 'uncertainty', 'membership', 'association']
     .map(name => [name, requiredElement(root, `[data-focus-${name}]`)]));
+  const aliasesRow = root.querySelector<HTMLElement>('[data-focus-aliases-row]');
   const links = [...root.querySelectorAll<HTMLAnchorElement>('[data-focus-source]')];
   const sourceRows = [...root.querySelectorAll<HTMLElement>('[data-focus-source-row]')];
   const breadcrumbs = [...root.querySelectorAll<HTMLElement>('[data-focus-breadcrumb-scope]')];
@@ -28,16 +29,12 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')].map(bank => ({ root: bank,
     buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
     details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
-    stars: bank.querySelector<HTMLInputElement>('[data-focus-stars]'),
   }));
   for (const bank of banks) {
     for (const button of bank.buttons) button.addEventListener('click', event => {
       if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
         event.preventDefault(); currentPresentation.selectLens(button.value);
       }
-    }, { signal: events.signal });
-    bank.stars?.addEventListener('change', () => {
-      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) currentPresentation.setStarsVisible?.(bank.stars!.checked);
     }, { signal: events.signal });
   }
   const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
@@ -58,10 +55,6 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
-      if (bank.stars) {
-        bank.stars.disabled = typeof currentPresentation.setStarsVisible !== 'function';
-        bank.stars.checked = currentPresentation.starsVisible;
-      }
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
@@ -75,13 +68,17 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (!record) { root.hidden = true; return; }
     root.dataset.preparedFocusId = record.id;
     for (const bank of root.querySelectorAll<HTMLElement>('[data-focus-record-bank]')) bank.hidden = bank.dataset.focusRecordBank !== record.id;
-    write('name', record.name);
-    write('aliases', record.aliases.length ? `Also known as ${record.aliases.join(', ')}` : '');
-    fields.aliases.hidden = record.aliases.length === 0;
     const cluster = isPreparedCluster(record), nebula = isPreparedNebula(record);
+    const aliases = record.aliases.join(', ');
+    write('name', record.name);
+    write('aliases', aliases);
+    write('introduction', nebula ? record.introduction.text : aliases ? `Also known as ${aliases}` : '');
+    fields.introduction.hidden = !nebula && !aliases;
+    if (aliasesRow) aliasesRow.hidden = !nebula || !aliases;
     const parentScope = cluster ? 'nearby-universe' : nebula ? 'milky-way' : 'local-group';
     for (const trail of breadcrumbs) trail.hidden = trail.dataset.focusBreadcrumbScope !== parentScope;
-    write('status', cluster || nebula ? record.classification.name : `${words(record.status)} galaxy`);
+    fields.status.hidden = nebula;
+    write('status', nebula ? '' : cluster ? record.classification.name : `${words(record.status)} galaxy`);
     const distanceScale = record.distance.valuePc >= 1e6 ? 1e6 : record.distance.valuePc >= 1e3 ? 1e3 : 1;
     write('distance', `${number.format(record.distance.valuePc / distanceScale)} ${distanceScale === 1e6 ? 'Mpc' : distanceScale === 1e3 ? 'kpc' : 'pc'}`);
     const associationLabel = root.querySelector<HTMLElement>('[data-focus-fact-label=association]');
@@ -95,8 +92,6 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (fields.membership.parentElement) fields.membership.parentElement.hidden = cluster;
     write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
     write('association', cluster ? `${record.redshift.value}` : nebula ? record.kind === 'globular-cluster' ? 'Galactic globular cluster' : 'Galactic nebula' : words(record.membership.subgroup));
-    write('basis', cluster || nebula ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
-    write('reference', `Distance reference: ${record.distance.sourceRef}`);
     for (const [index, link] of links.entries()) {
       const source = sources[index];
       link.hidden = !source;
