@@ -1650,6 +1650,16 @@
         "kind": "local",
         "reason": "Evidence figure: one 180 by 70 degree patch of the interpreted 720 by 360 maps: the browse-JPEG photosphere on main at 11ac994699 (top), this branch's JSOC photosphere (middle) and the unchanged HMI radial field (bottom)."
       }
+    },
+    {
+      "path": "observations.json",
+      "purpose": "Telescope API observation descriptors derived from the pinned Sun archive inputs and their native metadata; scientific limitations remain explicit per observation.",
+      "expectedBytes": 43130,
+      "expectedSha256": "1bf10409fd42c5e494858bc35a94b58e5d1fcbef60e82e2767f625db46f2469a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
+      }
     }
   ]
 }
