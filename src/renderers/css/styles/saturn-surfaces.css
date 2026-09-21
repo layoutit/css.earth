@@ -54,7 +54,9 @@
   transform-style: preserve-3d;
 }
 
+/* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
 :where(.planet-stage[data-object-id="saturn"]) .saturn-cutaway {
+  display: none;
   visibility: hidden;
 }
 
@@ -67,6 +69,7 @@
 }
 
 .planet-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-cutaway {
+  display: block;
   visibility: visible;
 }
 

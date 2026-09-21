@@ -35,8 +35,9 @@
   inset: 0 auto auto 0;
   transform-origin: 0 0;
   translate: 8px 8px;
-  /* Confined to this childless leaf. Camera scale never gets transitioned. */
-  scale: attr(data-context-inverse-scale type(<number>), 1);
+  /* Confined to this childless leaf. Camera scale never gets transitioned. Custom properties, not typed attr():
+     WebKit drops a typed attr() declaration entirely, which left iPhone markers at their camera scale. */
+  scale: var(--context-inverse-scale, 1);
   pointer-events: none;
   visibility: hidden;
 }
@@ -50,7 +51,7 @@
   width: 16px;
   height: 16px;
   transform: scale(1) translate(-50%, -50%);
-  opacity: attr(data-context-line-alpha type(<number>), .65);
+  opacity: var(--context-line-alpha, .65);
 }
 .prepared-world-context [data-context-annotations-animate="true"]::before {
   transition: transform 120ms ease, opacity 120ms ease;
@@ -81,8 +82,8 @@
 }
 .prepared-world-context [data-context-body]::after {
   content: attr(data-context-name);
-  transform: translate(attr(data-context-label-x type(<length>), 12px), attr(data-context-label-y type(<length>), -9px));
-  opacity: attr(data-context-label-alpha type(<number>), .65);
+  transform: translate(var(--context-label-x, 12px), var(--context-label-y, -9px));
+  opacity: var(--context-label-alpha, .65);
 }
 .prepared-world-context .context-flight-caption {
   position: absolute;
