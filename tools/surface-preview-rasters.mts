@@ -72,7 +72,10 @@ export async function* recipeSurfacePreviews({ objectDirectory, publicDirectory,
     for (const map of paged.surface.maps) {
       const lens = lenses.controls.find(l => l.thumbnailUrl === `${paged.publicBase}${map.thumbnail}`);
       if (!lens) throw new Error(`Surface preview has no dataset: ${map.name}`);
-      yield { id: lens.id, raster: await preparePagedSurfaceMap({ config: paged, sourceDirectory: resolve(objectDirectory, 'source'), map }) };
+      // A small preview wants the canonical adjusted map, the one the README
+      // says every Earth view shares, not the untouched source grid the page
+      // bake samples per output coordinate.
+      yield { id: lens.id, raster: await preparePagedSurfaceMap({ config: paged, sourceDirectory: resolve(objectDirectory, 'source'), map: { ...map, nativePhotographicSampling: false } }) };
     }
   }
   if (rawSpectral?.schema === 'cssearth-spectral-material-variants@1') {
