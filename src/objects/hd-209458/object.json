@@ -1,11 +1,11 @@
 {
   "schema": "cssearth-object@1",
-  "id": "wasp-39b",
+  "id": "hd-209458",
   "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-39 b",
+      "label": "HD 209458",
       "steps": [
         "verify-sources",
         "title",
@@ -13,8 +13,6 @@
         "panel-content",
         "lenses",
         "starfield",
-        "sky-sun",
-        "system-markers",
         "scene",
         "controls",
         "presentation",
@@ -32,20 +30,20 @@
             {
               "id": "shape",
               "source": "content",
-              "material": "lighting"
+              "material": "emission"
             }
           ]
         }
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 91462.5
+        "radiusKm": 803534
       },
       "materials": [
         {
-          "id": "lighting",
+          "id": "emission",
           "source": "raster",
-          "model": "lit"
+          "model": "emissive"
         }
       ],
       "sources": [
@@ -89,60 +87,65 @@
           "id": "acquisition",
           "path": "source/preparation/acquisition.json"
         }
-      ]
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
     },
     "page": {
       "stylesheets": [
-        "src/renderers/css/styles/planet-surfaces.css"
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/hd-209458-surfaces.css"
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c9b7b6bb8ff9ee0e9e0bc23c70f9047bd5e1df112e525aaaa7a7838e6068ba52"
+        "sha256": "2a4867fc3f25085e4caf43622eb6a7803e84341dbd8f061a80a37aff45735193"
       }
     },
     "catalog": {
-      "name": "WASP-39 b",
-      "classification": "exoplanet",
-      "color": "#9a9a9a",
-      "distanceAu": 44419786.7,
-      "description": "Hot Saturn-mass giant, 1.28 Jupiter radii, that circles its star every 4 days.",
-      "systemName": "WASP-39 system",
+      "name": "HD 209458",
+      "classification": "star",
+      "color": "#fff4e0",
+      "distanceAu": 9931113.7,
+      "description": "Sun-like star 48 parsecs away in Pegasus that hosts the first known transiting planet.",
+      "systemName": "HD 209458 system",
       "order": 1100,
       "context": {
-        "order": 1100
+        "order": 1097
       }
     },
     "worldFrame": {
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -5274589982503092000,
-        -4022030355882413600,
-        -399248744507063040
+        1227013974935572200,
+        -685892101985150700,
+        480847548815294500
       ],
       "presentationToReference": [
-        -0.7645339702795599,
-        -0.6428104141729212,
-        -0.04777635104746364,
-        -0.6417833735614322,
-        0.7660201559660381,
-        -0.03643105919231432,
-        -0.060015912129036175,
-        -0.00280928542590679,
-        0.9981934673232016
+        0.8258968277954436,
+        0.28251454027884954,
+        -0.4879343853106211,
+        -0.4616704640751361,
+        -0.15792513090276025,
+        -0.8728803100253748,
+        0.32365848117741614,
+        -0.9461739731996311,
+        0.0000012457232597006887
       ],
       "orbitUpReference": [
-        0.6428104141729212,
-        -0.7660201559660381,
-        0.00280928542590679
+        -0.28251454027884954,
+        0.15792513090276025,
+        0.9461739731996311
       ],
-      "metersPerUnit": 295040.32258064515,
-      "bodyRadiusM": 91462500
+      "metersPerUnit": 2592045.1612903224,
+      "bodyRadiusM": 803534000
     }
   },
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ea862098f6d3199874f6c8289ad9db86e7cae3c74cccd659a86a17eaef3c59bc"
+    "sha256": "2c22e2410afb6ff23a3faf23e1fbbf1de72083bce719b3e291752bddb353ba15"
   }
 }

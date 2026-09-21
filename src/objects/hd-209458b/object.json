@@ -1,11 +1,11 @@
 {
   "schema": "cssearth-object@1",
-  "id": "wasp-39b",
+  "id": "hd-209458b",
   "type": "layered-body",
   "properties": {
     "preparation": {
       "schema": "cssearth-object-preparation@1",
-      "label": "WASP-39 b",
+      "label": "HD 209458 b",
       "steps": [
         "verify-sources",
         "title",
@@ -39,7 +39,7 @@
       ],
       "shape": {
         "kind": "sphere",
-        "radiusKm": 91462.5
+        "radiusKm": 97139
       },
       "materials": [
         {
@@ -97,16 +97,16 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c9b7b6bb8ff9ee0e9e0bc23c70f9047bd5e1df112e525aaaa7a7838e6068ba52"
+        "sha256": "ddd2b8edf1095e06711bf94dbd079486f4b3cd2e7ea90f3353d8b973ed50a109"
       }
     },
     "catalog": {
-      "name": "WASP-39 b",
+      "name": "HD 209458 b",
       "classification": "exoplanet",
       "color": "#9a9a9a",
-      "distanceAu": 44419786.7,
-      "description": "Hot Saturn-mass giant, 1.28 Jupiter radii, that circles its star every 4 days.",
-      "systemName": "WASP-39 system",
+      "distanceAu": 9931113.7,
+      "description": "The first planet seen crossing its star: a hot giant 1.36 Jupiter radii wide on a 3.5-day orbit.",
+      "systemName": "HD 209458 system",
       "order": 1100,
       "context": {
         "order": 1100
@@ -116,33 +116,33 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        -5274589982503092000,
-        -4022030355882413600,
-        -399248744507063040
+        1227013969465693700,
+        -685892099234607500,
+        480847552288313700
       ],
       "presentationToReference": [
-        -0.7645339702795599,
-        -0.6428104141729212,
-        -0.04777635104746364,
-        -0.6417833735614322,
-        0.7660201559660381,
-        -0.03643105919231432,
-        -0.060015912129036175,
-        -0.00280928542590679,
-        0.9981934673232016
+        0.8525370370197846,
+        -0.4397354373339206,
+        -0.28251255841514733,
+        -0.4108189730543119,
+        -0.8979352571590721,
+        0.15792417588599852,
+        0.3231228433400012,
+        0.018574689860583388,
+        0.9461747243551035
       ],
       "orbitUpReference": [
-        0.6428104141729212,
-        -0.7660201559660381,
-        0.00280928542590679
+        0.4397354373339206,
+        0.8979352571590721,
+        -0.018574689860583388
       ],
-      "metersPerUnit": 295040.32258064515,
-      "bodyRadiusM": 91462500
+      "metersPerUnit": 313351.6129032258,
+      "bodyRadiusM": 97139000
     }
   },
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "ea862098f6d3199874f6c8289ad9db86e7cae3c74cccd659a86a17eaef3c59bc"
+    "sha256": "77b1142a2b60175632877f885b8bc037f580f4b6c3e61e5f9c00e2554c1b9516"
   }
 }
