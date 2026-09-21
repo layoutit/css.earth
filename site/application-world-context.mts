@@ -1,4 +1,4 @@
-import { LENS_VISIBILITY } from './runtime-policy.mts';
+import { LENS_VISIBILITY, MOBILE_VIEWPORT_QUERY } from './runtime-policy.mts';
 // Generated after the prepared lens payloads are restored, so typechecks never need it: text now, validated below.
 import lensBillboardText from './prepared-lens-billboards.json?raw';
 import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
@@ -131,6 +131,8 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       lensVisibility: LENS_VISIBILITY, lensBillboards,
+      // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.
+      sky: !globalThis.matchMedia?.(MOBILE_VIEWPORT_QUERY).matches,
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
         return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,

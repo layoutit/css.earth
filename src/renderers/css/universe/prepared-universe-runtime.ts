@@ -45,7 +45,7 @@ type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource
 type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards }: {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -71,6 +71,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   /** Prepared before any lens is fetched: each bank's context visibility and, where it has one, its Sun-facing
    * billboard in a shared atlas. A small or distant bank draws its billboard; its lenses load only once large. */
   lensBillboards?: { readonly plan: LensBillboards; readonly atlasUrl: string };
+  /** Mount the prepared celestial sky cube. Phones leave it out: its faces cost tens of megabytes of layers. */
+  sky?: boolean;
   loadVolumeLens?(id: string): Promise<Parameters<typeof createPreparedVolumeLenses>[0]>;
   /** Testable cap for hidden banks with no active navigation subscriber. */
   warmVolumeLensDomNodeBudget?: number;
@@ -411,7 +413,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         delete stage.dataset.contextScale;
       };
       try {
-        if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        if (sky && payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         stellarPoints = mountStellarPoints({ host: root, before: volumeHost, field: pointAppearance });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         for (const [index, bank] of declaredImageLayers.entries()) if (initialImageLayers.has(bank.id)) void ensureImageLayerLoaded(index);

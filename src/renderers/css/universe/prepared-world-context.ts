@@ -596,8 +596,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     marker.style.margin = '0';
     marker.style.marginLeft = marker.style.marginTop = '0';
     const baseAlpha = annotationOpacities[body.id] ?? { line: .65, label: .65 };
-    marker.dataset.contextLineAlpha = String(baseAlpha.line);
-    marker.dataset.contextLabelAlpha = String(baseAlpha.label);
+    marker.style.setProperty('--context-line-alpha', String(baseAlpha.line));
+    marker.style.setProperty('--context-label-alpha', String(baseAlpha.label));
     // A bare mover carries the per-frame transform and paint order. The marker,
     // with its ring and caption pseudo-elements and attribute rules, keeps a
     // stable style, so motion restyles one plain leaf instead of three nodes.
@@ -1100,7 +1100,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           }
           const inverseScale = BILLBOARD_SIZE / markerDiameter;
           if (entry.inverseScale !== inverseScale) {
-            marker.dataset.contextInverseScale = String(inverseScale);
+            marker.style.setProperty('--context-inverse-scale', String(inverseScale));
             entry.inverseScale = inverseScale;
           }
           entry.center = [x, y];
@@ -1172,8 +1172,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             const offset = `translate(${Math.round((labelPosition[0] - x) * 1e6) / 1e6}px,${Math.round((labelPosition[1] - y) * 1e6) / 1e6}px)`;
             if (entry.labelOffset !== offset) {
               const [labelX, labelY] = offset.match(/-?[\d.]+/g)!.map(Number);
-              marker.dataset.contextLabelX = `${labelX}px`;
-              marker.dataset.contextLabelY = `${labelY}px`;
+              marker.style.setProperty('--context-label-x', `${labelX}px`);
+              marker.style.setProperty('--context-label-y', `${labelY}px`);
               entry.labelOffset = offset;
             }
             const rect = entry.labelRectTarget ??= { left: 0, top: 0, right: 0, bottom: 0 };

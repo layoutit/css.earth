@@ -103,7 +103,7 @@ export function addNativeSolarContext(document: Document, frame: PreparedWorldCa
     marker.removeAttribute('role'); marker.removeAttribute('aria-disabled'); marker.removeAttribute('tabindex');
     marker.style.visibility = 'inherit'; marker.style.opacity = '1';
     marker.dataset.contextIndicatorVisible = 'true'; marker.dataset.contextLabelVisible = 'true';
-    marker.dataset.contextInverseScale = '1';
+    marker.style.setProperty('--context-inverse-scale', '1');
     marker.dataset.contextBodyVisible = 'false';
     marker.dataset.contextSelected = String(entry.id === selectedId);
     marker.style.inset = '14px';
