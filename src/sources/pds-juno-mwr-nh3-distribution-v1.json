@@ -1,0 +1,63 @@
+{
+  "id": "pds-juno-mwr-nh3-distribution-v1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Juno Jupiter MWR ammonia distribution V1.0",
+  "creators": [
+    "Levin, S. M."
+  ],
+  "publisher": "NASA Planetary Data System, Atmospheres Node",
+  "publicationDate": "2024",
+  "identifiers": [
+    {
+      "type": "PDS3 DATA_SET_ID",
+      "value": "JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/",
+      "label": "PDS Atmospheres Node volume JNOMWR_2100"
+    },
+    {
+      "role": "archive",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/DATA/NH3-DISTRIBUTION/",
+      "label": "NH3 abundance and uncertainty spreadsheets with their PDS3 labels"
+    },
+    {
+      "role": "original",
+      "url": "https://atmos.nmsu.edu/PDS/data/jnomwr_2100/CATALOG/DATASET_NH3_DISTRIBUTION.CAT",
+      "label": "Dataset catalogue: overview, citation, coordinate system and processing"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/jupiter/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0000000000000000000000000000000000000000000000000000000000000000",
+      "locator": "/inputs/26"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "LEVIN, S. M., JUNO JUPITER MWR AMMONIA DISTRIBUTION V1.0, JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0, NASA Planetary Data System, 2024.",
+      "scope": "The paired NH3 abundance and 1-sigma uncertainty spreadsheets, their PDS3 labels and their format files.",
+      "evidence": "CITATION_DESC of DATASET_NH3_DISTRIBUTION.CAT; PRODUCER_FULL_NAME is DR. STEVEN M. LEVIN."
+    },
+    {
+      "kind": "rights",
+      "text": "NASA scientific data. The archive asks for acknowledgement and the dataset citation; the bytes are redistributed unchanged with their labels.",
+      "scope": "Redistributed archive tables, labels and format files.",
+      "evidence": "NASA Planetary Data System data use policy for the JNOMWR_2100 volume."
+    },
+    {
+      "kind": "limitation",
+      "text": "The dataset is a published retrieval, not a direct measurement. The catalogue names the archived LI_ETAL_2017 document as the algorithm, leaves Parameters, Data Coverage and Quality and the Confidence Level Overview at TBD, and states no unit for the abundance columns.",
+      "scope": "Any use of the abundance or uncertainty values.",
+      "evidence": "DATA_SET_DESC Processing section and CONFIDENCE_LEVEL_NOTE of DATASET_NH3_DISTRIBUTION.CAT; MWR_J_NH3A_V01.FMT field descriptions."
+    }
+  ]
+}

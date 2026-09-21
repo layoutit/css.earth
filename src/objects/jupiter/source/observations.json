@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-source-observations@1",
+  "target": "jupiter",
+  "observations": [
+    {
+      "id": "juno-mwr-nh3-distribution-r00548-v01",
+      "telescope": "Juno",
+      "mode": "MWR/level-5 NH3 distribution",
+      "kind": "table",
+      "archiveProductId": "JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0:MWRNH3A2016240070004_R00548_V01.CSV",
+      "decoder": "pds-product",
+      "familyProfile": "juno-mwr-nh3-distribution@2024-10-22",
+      "labelPath": "telescopes/juno-mwr/MWRNH3A2016240070004_R00548_V01.LBL",
+      "inputs": [
+        { "input": "pds-juno-mwr-nh3-abundance-csv", "role": "science" },
+        { "input": "pds-juno-mwr-nh3-abundance-label", "role": "label" },
+        { "input": "pds-juno-mwr-nh3-abundance-format", "role": "structure" },
+        { "input": "pds-juno-mwr-nh3-uncertainty-csv", "role": "uncertainty" },
+        { "input": "pds-juno-mwr-nh3-uncertainty-label", "role": "label" },
+        { "input": "pds-juno-mwr-nh3-uncertainty-format", "role": "structure" }
+      ],
+      "identity": {
+        "DATA_SET_ID": "JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0",
+        "PRODUCT_ID": "MWRNH3A2016240070004_R00548_V01.CSV",
+        "PRODUCT_TYPE": "NH3A",
+        "TARGET_NAME": "JUPITER",
+        "INSTRUMENT_ID": "MWR",
+        "PROCESSING_LEVEL_ID": "5"
+      },
+      "startIso": "2016-08-27T07:00:04.844Z",
+      "endIso": "2018-04-01T13:59:59.299Z",
+      "units": "Pressure in bar, stated by format field 1. The abundance unit is not stated by the PDS3 label, by MWR_J_NH3A_V01.FMT, or by the dataset catalogue, whose Parameters section reads TBD. The archive names LI_ETAL_2017 as the retrieval algorithm and that document reports volume mixing ratios, so the values are carried as dimensionless. The retained abundance spans 3.2796e-08 to 4.2688e-04 and its 1-sigma uncertainty 3.0641e-09 to 3.9883e-05.",
+      "meaning": "Archive-published Juno MWR level-5 ammonia abundance on 548 pressure levels from 0.101395 to 198.082 bar by 37 planetocentric latitudes from -49.3 to +47.0 degrees, paired cell for cell with the archive 1-sigma uncertainty table. The dataset catalogue states that rows increase in pressure, that columns increase in planetocentric latitude, and that the recorded latitude is determined with SPICE.",
+      "citation": "LEVIN, S. M., JUNO JUPITER MWR AMMONIA DISTRIBUTION V1.0, JNO-J-MWR-5-NH3-DISTRIBUTION-V1.0, NASA Planetary Data System, 2024; https://atmos.nmsu.edu/PDS/data/jnomwr_2100/CATALOG/DATASET_NH3_DISTRIBUTION.CAT",
+      "limitations": [
+        "This is a published retrieval derived from calibrated MWR observations, not a direct measurement of ammonia at each pressure level. The dataset catalogue names the archived LI_ETAL_2017 document as the algorithm and supplies no numerical retrieval code.",
+        "Pressure is retained as pressure. The product supplies no altitude, radius, or hydrostatic model, so no depth conversion and no body attachment is published.",
+        "The product carries no longitude coordinate, no channel identity, and no brightness temperature. The antenna- and brightness-temperature datasets of the same volume hold those and are not part of this product.",
+        "The archive states no unit for the abundance columns. Dimensionless volume mixing ratio is inferred from the cited algorithm document, not read from the label.",
+        "The dataset catalogue leaves Parameters, Data Coverage and Quality, and the Confidence Level Overview at TBD and records no known limitations, so no per-cell quality flag, retrieval-support mask, or retrieval resolution is available. Pressure and latitude spacing is sampling only.",
+        "Fields 21 to 38 of MWR_J_NH3U_V01.FMT are named MH3U_PC_lat_* rather than NH3U_PC_lat_*. Columns are taken from FIELD_NUMBER and DESCRIPTION, which stay consistent with the spreadsheet header."
+      ]
+    }
+  ]
+}
