@@ -17,8 +17,9 @@ export function presentSearchResults(browser: HTMLElement, searching: boolean, c
   else browser.removeAttribute('data-search-results');
   // One header per planetary system; the shell marks the current one.
   for (const heading of browser.querySelectorAll<HTMLElement>('[data-system-results] > .planet-selected-panel')) heading.hidden = searching || category === 'nebula';
+  // Typed results are a flat list; the tree stays for browsing, opened from the button beside the field.
   const navigation = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
-  if (navigation) navigation.hidden = false;
+  if (navigation) navigation.hidden = searching;
   const tabs = browser.querySelector<HTMLElement>('[data-system-results] > .planet-object-tabs');
   if (tabs) tabs.hidden = true;
   const results = requiredElement(browser, '#object-category-results');

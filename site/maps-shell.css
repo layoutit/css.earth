@@ -478,6 +478,58 @@
 [data-search-results] #object-category-results { max-height: min(420px, 55dvh); }
 [data-search-results] #object-category-results .planet-object-link:not([aria-disabled="true"]) { color: var(--shell-text); }
 [data-search-results] #object-category-results .planet-object-distance { color: var(--shell-text-secondary); }
+/* Search results are big rows: a 40 px preview, the name, and a subtitle (what it is, how far). The catalogue window
+   positions rows on a 56 px pitch (48 px row, 8 px gap; `site/catalogue-window.mts`). */
+#object-category-results .planet-observation-control.planet-thumbnail-leading,
+#object-category-results .planet-observation-control.planet-thumbnail-leading:has(.planet-lens-detail) {
+  grid-template-columns: 40px minmax(0, 1fr);
+  grid-template-rows: auto auto;
+  align-content: center;
+  column-gap: 12px;
+  row-gap: 2px;
+  height: 48px;
+}
+#object-category-results .planet-observation-control.planet-thumbnail-leading::after { display: none; }
+/* The results fill the drawer's width with the card's inline padding; a phone's column drawer otherwise shrinks them to
+   their content. */
+[data-search-results] #object-category-results {
+  align-self: stretch;
+  box-sizing: border-box;
+  width: 100%;
+  padding-inline: var(--explorer-card-padding-inline-start, 16px) var(--explorer-card-padding-inline-end, 16px);
+}
+#object-category-results .planet-thumbnail-leading > .planet-lens-icon {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+}
+#object-category-results .planet-thumbnail-leading > .planet-lens-label {
+  grid-column: 2;
+  grid-row: 1;
+  overflow: hidden;
+  font-size: 15px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#object-category-results .planet-thumbnail-leading > .planet-lens-detail {
+  grid-column: 2;
+  grid-row: 2;
+  justify-self: start;
+  overflow: hidden;
+  font-size: 12px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#object-category-results .planet-search-preview,
+#object-category-results .context-navigation-thumbnail > img {
+  display: block;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
 #object-category-results:has(> .planet-object-list > :not([hidden])) > .planet-feature-results {
   margin-top: 8px;
   border-top: 1px solid var(--explorer-divider);
