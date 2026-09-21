@@ -15,6 +15,18 @@ import { createPreparedUniverse } from '../universe/prepared-universe-runtime.js
 import { logarithmicFade } from '../universe/prepared-world-context.js';
 import { STELLAR_POINTS_MAX_OPACITY } from '../universe/stellar-points.js';
 import { readCanonicalPointField } from '../preparation/stars/canonical-point-field-fixture.js';
+import { parseLensBillboards } from '../universe/lens-billboards.js';
+import type { DensityVolumeFrame } from '@cssearth/objects';
+
+const LENS_PIN = '0'.repeat(64);
+/** Declared lens banks with the prepared facts the universe reads before fetching any of them. These fixtures
+ * carry no billboard images, so a small bank draws nothing until its lenses load. */
+const lensBanks = (banks: readonly { id: string; frame: DensityVolumeFrame; contextVisibility?: string; attachedTo?: string }[]) => ({
+  volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.frame, sha256: LENS_PIN })),
+  lensBillboards: { atlasUrl: '/atlas.webp', plan: parseLensBillboards({ schema: 'cssearth-lens-billboards@1',
+    atlas: { columns: 1, rows: 1, cellPx: 256, sha256: LENS_PIN },
+    banks: banks.map(bank => ({ id: bank.id, payloadSha256: LENS_PIN, contextVisibility: bank.contextVisibility ?? 'galactic', attached: bank.attachedTo !== undefined })) }) },
+});
 
 const spatialPublish = vi.hoisted(() => vi.fn());
 const catalogMount = vi.hoisted(() => vi.fn());
@@ -285,7 +297,7 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    volumeLensBanks: banks.map(payload => ({ id: payload.id, frame: payload.lenses[0]!.volume.frame })), loadVolumeLens });
+    ...lensBanks(banks.map(payload => ({ id: payload.id, frame: payload.lenses[0]!.volume.frame, contextVisibility: payload.contextVisibility, attachedTo: payload.attachedTo }))), loadVolumeLens });
   // Declaring a bank must not fetch it: the whole point of deferring it is that the first frame never pays for it.
   expect(loadVolumeLens).not.toHaveBeenCalled();
   const mounted = universe.mount(stage as unknown as HTMLElement);
@@ -307,10 +319,10 @@ test('shared universe draws only resolved nebulae and never prefetches their len
         pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + distancePc * parsecM],
           orientationXyzw: [0, 0, 0, 1] } };
       mounted.publish(camera, viewport);
-      // The first crossing into view is what triggers the fetch for both banks (the fetch gate does not
-      // check contextVisibility); give their promises a turn to resolve and mount before reading the DOM.
+      // The first crossing into view fetches the independent bank; give its promise a turn to resolve and
+      // mount before reading the DOM. The galactic bank's prepared context visibility keeps it unfetched.
       if (visible && !findBank(bank.id)) {
-        await vi.waitFor(() => { expect(findBank(bank.id)).toBeDefined(); expect(findBank('galactic-default')).toBeDefined(); });
+        await vi.waitFor(() => { expect(findBank(bank.id)).toBeDefined(); });
         mounted.publish(camera, viewport);
       }
       expect(milkyWay.dataset.volumeOpacity).toBe('0');
@@ -321,11 +333,9 @@ test('shared universe draws only resolved nebulae and never prefetches their len
       expect(independent).toBeDefined();
       expect(independent!.style.opacity).toBe(visible ? '1' : '0');
       expect(independent!.style.display).toBe(visible ? 'block' : 'none');
-      // The always-galactic bank is fetched right alongside it (same silhouette) but stays invisible:
-      // rendering, unlike fetching, still waits on the general galactic fade, which is zero here.
-      expect(galactic).toBeDefined();
-      expect(galactic!.style.opacity).toBe('0');
-      expect(galactic!.style.display).toBe('none');
+      // The galactic bank has the same silhouette but fades with the galaxy, which is zero here: its lenses are
+      // neither drawn nor fetched.
+      expect(galactic).toBeUndefined();
       if (visible) {
         const cloud = independent!.children.find(node => node.className === 'prepared-volume-lens-cloud')!;
         const axes = cloud.children.filter(node => node.className === 'css-volume-projection');
@@ -333,12 +343,9 @@ test('shared universe draws only resolved nebulae and never prefetches their len
         expect(Number(independent!.dataset.cloudOpacity)).toBeGreaterThan(0);
         expect(axes.some(axis => axis.style.visibility === 'visible' && Number(axis.style.opacity) > 0)).toBe(true);
         expect([...new Set(images(independent!))]).toEqual(['url("/nebula/nearby-nebula/z.webp")']);
-        expect(images(galactic!)).toEqual([]);
       }
     }
-    expect(loadVolumeLens).toHaveBeenCalledTimes(2);
-    expect(loadVolumeLens).toHaveBeenCalledWith(bank.id);
-    expect(loadVolumeLens).toHaveBeenCalledWith('galactic-default');
+    expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
     // Trigger the actual universe warm-up: it must finish without any nebula
     // URL, even for legacy banks with no distant-image payload or leaf bounds.
     mounted.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
@@ -349,14 +356,14 @@ test('shared universe draws only resolved nebulae and never prefetches their len
     await vi.waitFor(() => expect(fetchResource).toHaveBeenCalledTimes(expected.length));
     expect(fetchResource.mock.calls.map(([url]) => url)).toEqual(expected);
     // The galaxy warm-up prefetches the Milky Way's own resources only; it must never load a lens bank
-    // beyond the two already fetched by proximity above.
-    expect(loadVolumeLens).toHaveBeenCalledTimes(2);
+    // beyond the one already fetched by proximity above.
+    expect(loadVolumeLens).toHaveBeenCalledTimes(1);
   } finally { mounted.destroy(); }
   expect(stage.children).toEqual([]);
   expect(document.defaultView.pending.size).toBe(0);
 });
 
-test('an unloaded bank is fetched by proximity even while the general galactic fade is still zero', async () => {
+test('an unloaded independent bank is fetched by proximity while the galactic fade is zero; a galactic one waits for the galaxy', async () => {
   vi.stubGlobal('HTMLElement', FakeElement); vi.stubGlobal('Element', FakeElement);
   const base = new URL('../../../', import.meta.url), parsecM = 3.085677581491367e16;
   const context = JSON.parse(readFileSync(new URL('objects/sun/prepared/world-context.json', base), 'utf8'));
@@ -373,7 +380,7 @@ test('an unloaded bank is fetched by proximity even while the general galactic f
     provenance: {}, approximation: {} };
   // Default contextVisibility ('galactic'): this bank's eventual render still waits on the general
   // fade, but its fetch must not, or a future bank baked this way would never load by proximity at all.
-  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'proximity-nebula', defaultLens: 'optical',
+  const bank: PreparedVolumeLenses = { schema: 'cssearth-volume-lenses@1', id: 'proximity-nebula', defaultLens: 'optical', contextVisibility: 'independent',
     framingRadiusUnits: 1, lenses: [{ id: 'optical', label: 'Optical', title: 'Optical emission',
       description: 'Prepared proximity nebula', sourceUrl: 'https://example.org/nebula', volume: nebula,
       brightness: { overall: 1, x: 1, y: 1, z: 1 }, stars: { frame, points: [] } }] };
@@ -381,7 +388,7 @@ test('an unloaded bank is fetched by proximity even while the general galactic f
   const loadVolumeLens = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    volumeLensBanks: [{ id: bank.id, frame }], loadVolumeLens });
+    ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens });
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const root = mounted.root as unknown as FakeElement;
@@ -394,6 +401,16 @@ test('an unloaded bank is fetched by proximity even while the general galactic f
     expect(milkyWay.dataset.volumeOpacity).toBe('0');
     expect(loadVolumeLens).toHaveBeenCalledExactlyOnceWith(bank.id);
   } finally { mounted.destroy(); }
+  // The same bank, prepared as fading with the galaxy, is not fetched while the galaxy is faded out.
+  const galacticLoad = vi.fn(loadVolumeLens);
+  const galactic = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
+    resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
+    ...lensBanks([{ id: bank.id, frame, contextVisibility: 'galactic' }]), loadVolumeLens: galacticLoad }).mount(document.createElement() as unknown as HTMLElement);
+  try {
+    galactic.publish({ referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
+      pose: { positionM: [context.focus.positionM[0], context.focus.positionM[1], context.focus.positionM[2] + 52 * parsecM], orientationXyzw: [0, 0, 0, 1] } }, viewport);
+    expect(galacticLoad).not.toHaveBeenCalled();
+  } finally { galactic.destroy(); }
 });
 
 test('selecting a nebula loads its bank on demand even while it is out of view', async () => {
@@ -419,7 +436,7 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
   const loadVolumeLens = vi.fn((id: string) => Promise.resolve({ payload: bank, resolveResource: (path: string) => `/nebula/${id}/${path}` }));
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    volumeLensBanks: [{ id: bank.id, frame }], loadVolumeLens });
+    ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens });
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     const far: WorldCameraPose = { referenceFrame: frame.referenceFrame, epochJdTt: frame.epochJdTt,
@@ -439,7 +456,7 @@ test('selecting a nebula loads its bank on demand even while it is out of view',
     const failure = new Error('Bank download failed');
     const failed = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
       resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-      volumeLensBanks: [{ id: bank.id, frame }], loadVolumeLens: () => Promise.reject(failure) }).mount(document.createElement() as unknown as HTMLElement);
+      ...lensBanks([{ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }]), loadVolumeLens: () => Promise.reject(failure) }).mount(document.createElement() as unknown as HTMLElement);
     try {
       await expect(failed.ensureVolumeLens(bank.id)).rejects.toBe(failure);
       expect(failed.volumeLensState(bank.id)).toBeNull();
@@ -475,7 +492,7 @@ test('hidden lens banks are bounded, active subscriptions pin them, and eviction
   const document = new FakeDocument(), stage = document.createElement();
   const universe = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    volumeLensBanks: banks.map(bank => ({ id: bank.id, frame: bank.lenses[0]!.volume.frame })), loadVolumeLens,
+    ...lensBanks(banks.map(bank => ({ id: bank.id, frame: bank.lenses[0]!.volume.frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeLens,
     warmVolumeLensDomNodeBudget: 0 });
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
@@ -586,7 +603,7 @@ test('authoritative detailed close-up gates background fetch, painting and publi
   Object.assign(document.defaultView, { fetch: fetchResource });
   const mounted = createPreparedUniverse({ context, volume, pointAppearance: readCanonicalPointField(), sprites: {},
     resolveResource: path => `/volume/${path}`, resolvePointResource: path => `/stars/${path}`,
-    volumeLensBanks: banks.map(bank => ({ id: bank.id, frame })), loadVolumeLens,
+    ...lensBanks(banks.map(bank => ({ id: bank.id, frame, contextVisibility: bank.contextVisibility, attachedTo: bank.attachedTo }))), loadVolumeLens,
     imageLayerBanks: [{ id: image.id, frame }], loadImageLayer, catalog: { payload: {}, fadeStartDistanceM: 10, fullDistanceM: 20 },
   }).mount(stage as unknown as HTMLElement);
   const root = mounted.root as unknown as FakeElement;

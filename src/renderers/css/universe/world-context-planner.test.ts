@@ -10,7 +10,8 @@ import { labelImportance } from '../labels/universe-label-policy.js';
 const plan = parsePreparedWorldContext(JSON.parse(await readFile(
   new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
 const freeze = <T>(value: T): T => {
-  if (value && typeof value === 'object') {
+  // Typed orbit arrays cannot be frozen; the test compares their contents instead.
+  if (value && typeof value === 'object' && !ArrayBuffer.isView(value)) {
     for (const child of Object.values(value)) freeze(child);
     Object.freeze(value);
   }
