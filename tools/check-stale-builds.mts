@@ -3,8 +3,11 @@
  * mismatch from an old objects package, a missing module after main moved). A build is stale when a source it compiles is
  * newer than its output, or its output is missing. Modification times are enough for a local preflight; CI builds fresh.
  *
- *   node tools/check-stale-builds.mts        exits 1 and prints the commands to run when any build is stale */
+ *   node tools/check-stale-builds.mts        exits 1 and prints the commands to run when any build is stale
+ *   node tools/check-stale-builds.mts --run  rebuilds only the stale ones, in rule order, and exits 0 when they pass */
+import { execFile } from 'node:child_process';
 import { readdir, stat } from 'node:fs/promises';
+import { promisify } from 'node:util';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 
@@ -47,9 +50,25 @@ export async function staleBuilds(root = process.cwd(), rules: readonly BuildRul
   return stale;
 }
 
+/** Rebuild only what is stale, in rule order, so a dependent build never runs before its dependency. */
+export async function rebuildStale(root = process.cwd(), rules: readonly BuildRule[] = BUILD_RULES,
+  run: (command: string) => Promise<void> = async command => { await promisify(execFile)(command, { cwd: root, shell: true }); }) {
+  const stale = await staleBuilds(root, rules);
+  for (const build of stale) {
+    console.log(`rebuilding ${build.name}: ${build.reason}`);
+    await run(build.command);
+  }
+  return stale;
+}
+
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const stale = await staleBuilds();
-  if (!stale.length) console.log('Builds are current.');
-  for (const build of stale) console.log(`stale ${build.name}: ${build.reason}\n  run: ${build.command}`);
-  if (stale.length) process.exitCode = 1;
+  if (process.argv.includes('--run')) {
+    const rebuilt = await rebuildStale();
+    console.log(rebuilt.length ? `Rebuilt ${rebuilt.length} stale build(s).` : 'Builds are current; nothing rebuilt.');
+  } else {
+    const stale = await staleBuilds();
+    if (!stale.length) console.log('Builds are current.');
+    for (const build of stale) console.log(`stale ${build.name}: ${build.reason}\n  run: ${build.command}`);
+    if (stale.length) process.exitCode = 1;
+  }
 }
