@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "pholus",
+  "name": "Pholus",
+  "titleLabel": "Pholus",
+  "horizons": "5145;",
+  "aliases": [
+    "5145 Pholus",
+    "1992 AD"
+  ],
+  "classification": "asteroid",
+  "population": "Centaur",
+  "fullAxesKm": [
+    190.0,
+    190.0,
+    190.0
+  ],
+  "radiusKm": 95.0,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 9.98,
+  "periodText": "9.98 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "credit": "JPL Small-Body Database, physical parameters for 5145 Pholus (1992 AD): diameter 190 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 190 km diameter the JPL Small-Body Database lists for Pholus. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Pholus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+  "card": "A centaur orbiting among the giant planets.",
+  "datasetSummary": "A sphere at the 190 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 20.3,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 5145 Pholus (1992 AD): orbit class and physical parameters"
+    }
+  ]
+}

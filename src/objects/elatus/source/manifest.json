@@ -1,0 +1,168 @@
+{
+  "schema": "csselatus-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "https://github.com/rsms/inter/blob/9221beed3/LICENSE.txt"
+      ],
+      "acquisition": "Restore using the pinned acquisition recipe.",
+      "redistribution": "Prepared title outlines under the font license.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "src/objects/elatus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      }
+    },
+    {
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "credit": "JPL Small-Body Database, physical parameters for 31824 Elatus (1999 UG5): diameter 57 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-small-body-database",
+            "role": "material",
+            "evidence": "src/objects/elatus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "expectedBytes": 62404,
+      "expectedSha256": "834890502c77d943a5bcad8a30ad06cbbd11a6ad8cd92b25fc3c875eca0e5449",
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+      ],
+      "consumers": [
+        "shape"
+      ],
+      "coverage": "Illustrative sphere at the 57 km diameter the JPL Small-Body Database lists for Elatus. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 28500
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    },
+    {
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "expectedBytes": 153,
+      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "consumers": [
+        "surfaces"
+      ],
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 28500
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/centaurs/batch.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed."
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 4209,
+      "expectedSha256": "0a9bbbd39b58e942fbe2702884a855cf9e67da7c5c5b614d4189ad3e5519ccf0",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "measurements.json",
+      "expectedBytes": 2016,
+      "expectedSha256": "1f658aeec95c95709cab4ffb3e020fe693842158df309fa2635d0a206a48ae19"
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 790,
+      "expectedSha256": "65fcc5a75b6c28bf48f77be1ead949cfa9fbb9aa50e9b90bea13cced8e93a715"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "d97fd098eef7b5d94a897ac7fa6d59bc84fbea5fb07ab0e552b8eca6907284be"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 354,
+      "expectedSha256": "b4a06bfcc7c7f7dbef7087a0ca11b562706a4a4639473a28d05741d2e9132045"
+    },
+    {
+      "path": "preparation/terrestrial.json",
+      "expectedBytes": 2235,
+      "expectedSha256": "fa4fb066d791a040654ceec433396260f4c9c3ef0ad03e61e70e4f9c6eca535b"
+    },
+    {
+      "path": "presentation/minimap.json",
+      "expectedBytes": 34,
+      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3120,
+      "expectedSha256": "1c658a96a2bb7a4a54e2b8410deea92ef38688b39fe17bd19ae18d92cb2a85ff"
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-source-context",
+      "path": "presentation/context.png",
+      "origin": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "credit": "JPL Small-Body Database, physical parameters for 31824 Elatus (1999 UG5): diameter 57 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+      "license": "Authored display of scientific model; source attribution retained.",
+      "consumers": [
+        "navigation"
+      ],
+      "expectedBytes": 91779,
+      "expectedSha256": "0ba9560e595602a1c65a954f044d9229d994bfa73b25e06c49c12ceaf882cac6",
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "published-shape",
+          "model-surface"
+        ],
+        "size": 512,
+        "longitudeDegrees": 55,
+        "latitudeDegrees": 20,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "model"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ]
+}

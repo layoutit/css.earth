@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "hylonome",
+  "card": {
+    "text": "A centaur orbiting among the giant planets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 10370 Hylonome (1995 DW2): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database, absolute magnitude H = 8.2 for 10370 Hylonome (1995 DW2); diameter estimated by cssEarth with an assumed albedo of 0.059",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Hylonome is a centaur, a small icy body orbiting the Sun among the giant planets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 10370 Hylonome (1995 DW2): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database, absolute magnitude H = 8.2 for 10370 Hylonome (1995 DW2); diameter estimated by cssEarth with an assumed albedo of 0.059",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at an assumed-albedo diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere at about 125.3 km, estimated from brightness with an assumed albedo.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Small-Body Database, absolute magnitude H = 8.2 for 10370 Hylonome (1995 DW2); diameter estimated by cssEarth with an assumed albedo of 0.059",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

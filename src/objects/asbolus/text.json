@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "asbolus",
+  "card": {
+    "text": "A centaur orbiting among the giant planets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 8405 Asbolus (1995 GO): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Asbolus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+    "sources": [
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database",
+        "checked": "2026-09-21",
+        "locator": "Record for 8405 Asbolus (1995 GO): orbit class and physical parameters"
+      },
+      {
+        "catalogueId": "jpl-small-body-database",
+        "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+        "label": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the JPL diameter",
+      "detail": "Inferred shape",
+      "summary": "A sphere at the 66 km diameter JPL lists. Its shape and pole are not measured.",
+      "sources": [
+        {
+          "catalogueId": "jpl-small-body-database",
+          "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+          "label": "JPL Small-Body Database, physical parameters for 8405 Asbolus (1995 GO): diameter 66 km; JPL's stated reference: Earth, Moon, and Planets, v. 89, Issue 1, p. 117-134 (2002)",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

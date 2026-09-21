@@ -1,0 +1,74 @@
+{
+  "id": "asbolus",
+  "classification": "asteroid",
+  "physical": {
+    "name": "Asbolus",
+    "horizonsCode": "8405;",
+    "meanRadiusKm": 33,
+    "gravitationalParameterKm3PerS2": 0,
+    "parent": "sun"
+  },
+  "acquisition": {
+    "heliocentric": {
+      "target": "8405;",
+      "model": "asteroid"
+    }
+  },
+  "asteroid": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278405%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
+    "elements": {
+      "epochJdTt": 2461286.5,
+      "semiMajorAxisKm": 2700519560.424357,
+      "eccentricity": 0.6174230290458904,
+      "inclinationRad": 0.7155516258216582,
+      "ascendingNodeRad": 0.04894152290941482,
+      "argumentOfPeriapsisRad": 5.133719624542816,
+      "meanAnomalyAtEpochRad": 1.9804009703375631,
+      "meanMotionRadPerDay": 0.0002242841423552917
+    }
+  },
+  "asteroidFixture": {
+    "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%278405%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
+    "rows": [
+      {
+        "jd": 2461256.5,
+        "position": [
+          -317530189.9820316,
+          2945777785.099721,
+          2570989951.994559
+        ],
+        "velocity": [
+          -340941.6787848017,
+          104582.3411864614,
+          105283.173158543
+        ]
+      },
+      {
+        "jd": 2461286.5,
+        "position": [
+          -327755789.0649236,
+          2948893074.205772,
+          2574129260.109272
+        ],
+        "velocity": [
+          -340764.2210782393,
+          103104.2379725843,
+          104004.5781486053
+        ]
+      },
+      {
+        "jd": 2461316.5,
+        "position": [
+          -337976030.4972805,
+          2951964070.719675,
+          2577230260.913793
+        ],
+        "velocity": [
+          -340584.925148696,
+          101628.8959359153,
+          102729.1461063792
+        ]
+      }
+    ]
+  }
+}
