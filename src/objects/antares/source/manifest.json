@@ -2,8 +2,8 @@
   "schema": "cssantares-authoritative-sources@2",
   "inputs": [
     {
-      "expectedBytes": 1329,
-      "expectedSha256": "7a4da76292257fb316333f2f4521f473df9b5e38b372c55f5aad5affaed65b3a",
+      "expectedBytes": 1609,
+      "expectedSha256": "e137b3d3707f8fa427aea36eda5fec8213bc7c93d2f1c13a75b074fb5624d1f8",
       "id": "antares-observational-measurements",
       "path": "measurements.json",
       "origin": "https://arxiv.org/abs/1304.4800",
@@ -73,7 +73,7 @@
     },
     {
       "expectedBytes": 1690,
-      "expectedSha256": "9d51dfbf09fe608e6409d07b47d23cdce965fbb3d349d31690027f267c43fbe8",
+      "expectedSha256": "c1da976c21cddeab934c1f2746bed7899ef6121de9aa818c71617d5acbba2c29",
       "id": "antares-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",

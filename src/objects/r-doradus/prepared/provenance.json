@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ce6800c59fbde59c73c6d36d32fd7d5d9c00be5259c8a67242f1af148c78eb15"
+    "sha256": "fc9cef1e47d62316de861eb876dbf20acd75ae78160eaa133439799b143fa50f"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -447,7 +447,7 @@
       "id": "r-doradus-observational-measurements",
       "path": "measurements.json",
       "origin": "https://doi.org/10.1038/s41586-024-07836-9",
-      "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
+      "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S; effective temperature: Ohnaka, Weigelt & Hofmann (2019), ApJ 883, 89",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -461,8 +461,8 @@
           }
         ]
       },
-      "sha256": "21cdbf09a05a185bfc5278ef838e85031a4be5c41309b4c1b60a236bf28549bb",
-      "bytes": 1693,
+      "sha256": "b248f723bb482c3d5a0a630d2e54325e6c677652c14f98b2be80a8000abd09e7",
+      "bytes": 2071,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -749,7 +749,7 @@
   },
   "lastPreparation": {
     "objectId": "r-doradus",
-    "materialSha256": "b0cc45c9271fdcf722729159a758e9e023be166f5c23c8deee004f10ba42e2ad",
+    "materialSha256": "6caf82e479f05d1a9743a28b7f37df715e3c71a90d16d4289f088c4f86116bb4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

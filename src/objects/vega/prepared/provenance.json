@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "155430890264c714e0a6676af7cecbfd1a604eec42a65d3b6f8e7696359b65ca"
+    "sha256": "a7975405b3a02479fa744cf72b833c1494b85c0e165c517779624faab81d71dc"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "6760c5a77ea82c9a50a1a7d908fd674eeaf134cd47cfef8c03f3d1d495429c3e",
-      "bytes": 1320,
+      "sha256": "bfa9a9b43f59e70b0d063e5abfac70ed3e728e72f62e69f3c564ebc2f64c86bf",
+      "bytes": 1696,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "vega",
-    "materialSha256": "ac5ae1277ddf981d9e43e014f2ec882ddc7f78f8ec22ef9bc4409e56a09db2e8",
+    "materialSha256": "da7ea4f8c3c50145e72f198c0473f1e3dcdf4d0873a9a1246a86b0ef6c8adfd1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

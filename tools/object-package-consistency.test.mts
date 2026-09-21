@@ -1,12 +1,14 @@
 /** Package facts that copying one object into another used to get wrong, checked across every object:
  * no scaffold placeholder is left, every content provenance path resolves, every editorial credit link is cited by its own
- * package, and every placed star's catalogue distance, colour and stylesheet follow from its own records. */
+ * package, and every placed star's catalogue distance, colour and stylesheet follow from its own records: its colour is its
+ * measured colour lens, or the star field's colour fit at the effective temperature its measurement record cites. */
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
-import { isRecord, requireFiniteNumber, requireRecord, requireString } from './source-values.mts';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from './source-values.mts';
 import { TODO, starStylesheet } from './objects/new-star.mts';
+import { readStarTemperature, temperatureCatalogueColor } from './objects/star-catalogue-color.mts';
 
 const root = resolve(import.meta.dirname, '..');
 const objectsDirectory = resolve(root, 'src/objects');
@@ -93,6 +95,15 @@ test('every placed star states its catalogue distance, colour and stylesheet fro
     const geometry = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/preparation/geometry.json'), 'utf8')) as unknown);
     assert.equal(requireRecord(geometry.surface).color, catalog.color, `${id}: the surface colour is the catalogue colour`);
     const raster = requireRecord(JSON.parse(await readFile(resolve(directory, 'source/preparation/raster.json'), 'utf8')) as unknown);
+    const measured = requireArray(raster.surfaces).map(surface => requireRecord(surface)).find(surface => isRecord(surface.science) && surface.science.kind === 'stellar-photometric-color');
+    if (measured) {
+      const lenses = requireRecord(JSON.parse(await readFile(resolve(directory, 'prepared/lenses.json'), 'utf8')) as unknown);
+      const control = requireArray(lenses.controls).map(value => requireRecord(value)).find(value => value.id === measured.id);
+      assert.equal(catalog.color, control?.billboardColor, `${id}: the catalogue colour is the prepared colour of its measured ${String(measured.id)} lens`);
+    } else {
+      const temperature = readStarTemperature(JSON.parse(await readFile(resolve(directory, 'source/measurements.json'), 'utf8')) as unknown);
+      assert.equal(catalog.color, temperatureCatalogueColor(temperature.kelvin), `${id}: the catalogue colour is the star field's colour at its cited ${temperature.kelvin} K`);
+    }
     const stylesheet = await readFile(resolve(root, 'src/renderers/css/styles', `${id}-surfaces.css`), 'utf8');
     const stripComments = (css: string) => css.replace(/\/\*[\s\S]*?\*\//gu, '').replace(/\n{2,}/gu, '\n');
     assert.equal(stripComments(stylesheet), stripComments(starStylesheet(id, id, requireFiniteNumber(requireRecord(raster.emission).offLimbSize), '')),

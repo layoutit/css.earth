@@ -7,6 +7,8 @@
   "distanceSource": "Inverse of the Hipparcos new-reduction parallax 2.31 ± 0.32 mas (van Leeuwen 2007) via SIMBAD",
   "radiusKm": 89370157,
   "radiusSource": "Radius: Limb-darkened angular diameter 2.76 ± 0.06 mas from Aufdenberg et al. (2002), ApJ 570, 344: the NPOI uniform-disc diameter 2.40 ± 0.06 mas times a model limb-darkening correction of 1.15 for a star with a wind. At the Hipparcos distance this is the record’s radius. Adopted 89,370,157 km, 128.4608 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+  "effectiveTemperatureK": 8600,
+  "effectiveTemperatureSource": "Effective temperature 8600 ± 500 K from Aufdenberg et al. 2002 (ApJ 570, 344; https://doi.org/10.1086/339740), abstract: the bolometric flux with the limb-darkening-corrected NPOI diameter, the radius source.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

@@ -34,6 +34,8 @@ the 25 × 25 pixel window around the star and resamples it eight times finer to 
 beam is 20.7 × 16.8 mas, four native pixels wide. The lens palette is the heat scale used for Betelgeuse and π¹ Gruis; the
 legend reads relative brightness at 338 GHz, not colour or temperature.
 
+**Catalogue colour.** #ffa758, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 2710 ± 70 K from Ohnaka, Weigelt & Hofmann 2019 (ApJ 883, 89; <https://doi.org/10.3847/1538-4357/ab3d2a>), Table 1 and Section 3: the AMBER limb-darkened diameter 51.18 mas with the bolometric flux compiled over several epochs. The radius source, Vlemmings et al. 2024, adopts this value. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
 **The disc agrees with the published fit.** Measured here on the archive image: half-power diameter 60 mas, against the
@@ -49,6 +51,7 @@ sub-pixel: rounding it to the 5 mas archive grid inflates the residual from 3.1%
 
 **Independent of ours,** the authors conclude the structures are intrinsic to the star from their correspondence across
 epochs, including band 6 observations at 225 GHz fifteen days later, and measure a typical lifetime of at least three weeks.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffa758 is the star field's colour at the cited 2710 K.
 
 ## Known problems
 

@@ -4,8 +4,8 @@
     {
       "id": "k2-18-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1121,
-      "expectedSha256": "6c9db22890adbdd37dcef78d8134b17edf38c49d698978fcf57ee1f29a5b7493",
+      "expectedBytes": 1367,
+      "expectedSha256": "b007e199d3994785c59344278cc9166345ac434d75564495d6b8435ce26de10d",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "k2-18-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1676,
-      "expectedSha256": "75cf072944b05b4833945e77d22fc62f5c04adae6740bcf2f37a1540284bb2ae",
+      "expectedSha256": "93971acd91bdf4d99ef95e6d61d9cf636e6a93af10f65ab920ee658fc77eb9da",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

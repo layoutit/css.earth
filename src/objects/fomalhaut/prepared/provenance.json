@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c5998997109d19a75f078817929e7c6091c1fb737844763136e3b941b5270deb"
+    "sha256": "119721fa7cee3394a35bc72bcb90ef65796b684a5d9666198a9b6724af5ee799"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "0f5b028fcc6fe3ef78965f09bca6cd1d770740fc491330204ebcb35a2cd7f4f5",
-      "bytes": 981,
+      "sha256": "18e3af5fca66c752650e8cb023614073f20035f7ee2728b3b4020884826fc81a",
+      "bytes": 1267,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "fomalhaut",
-    "materialSha256": "ebfee60d9ccf55e154122e51e1652a811a99b046fc33fe1478c6ac9301b41e2e",
+    "materialSha256": "c444e2e4e63cf4943913778b4b7a1ae212aad2f11b67d030573fa6f257fbcca7",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -4,8 +4,8 @@
     {
       "id": "kepler-186-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1078,
-      "expectedSha256": "6feb3d0639961f07343678b7cae0e8229197d69108a75a0cdf3a592e275a9801",
+      "expectedBytes": 1372,
+      "expectedSha256": "a718a9ce4d72b42205e32375868411d68eccbc08e86578897db1000c03ec6460",
       "origin": "https://arxiv.org/abs/1501.01101",
       "credit": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "kepler-186-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1711,
-      "expectedSha256": "892d96f68cd1485f9d55982db15cef8c695585f9345c64a01b2e0f8198d9f5b6",
+      "expectedSha256": "5dd62a0822178e4658d1a5dc9fdaadd1e74d3c854050aed0f5f21b780b2d21ba",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

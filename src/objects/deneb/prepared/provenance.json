@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e8def93c8c0f24597400b62bc1124d6b180f566a908ca89a20abc776c00863ec"
+    "sha256": "61ff34206094f0f6adf478bab4a03028a8fb57b66fe2f115a4835e882bb2fb3d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "687d6ebe71008f7385bee8f16eaa329fe2a062df281d3d98d7008f989c3d461e",
-      "bytes": 1251,
+      "sha256": "d59f86f1a7f7b9c03bc773546b78a09a40e8f81d1d1480464b4fce5ddeaf69d7",
+      "bytes": 1529,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "deneb",
-    "materialSha256": "25333dd5690387aa194bda97567b569d7eb1dcc06dcc908bacb7c812fe56979e",
+    "materialSha256": "b2d57f776fb04c58dbbc740e62470ea8364041389de0414bc96c5b004b2ef8bc",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

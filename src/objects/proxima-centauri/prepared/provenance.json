@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e05eb0f22587d50cc5de22181727c487ccb66af512a2b0867703574b3cf2f72f"
+    "sha256": "0069c01da3693fbbace04c895f2e7ce72acf8380b6c8eb19250f7409adcd0140"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "314a64b9a32983c39526b1976f466c1017ca7ff08ff967b6f36ed507d592403c",
-      "bytes": 1147,
+      "sha256": "1e99bdac138d876328048414dee1ef048f96ef2dda1635ac45fd590820086bcd",
+      "bytes": 1425,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "proxima-centauri",
-    "materialSha256": "0981ea895a849ce7d7c1f427b660270f3631c6ddc3f13de294196ed92dbd95c9",
+    "materialSha256": "aa763c8f07ef7be62809cb8dd6564d2bab369eab7aac1fa5b4c5444b74c2711f",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

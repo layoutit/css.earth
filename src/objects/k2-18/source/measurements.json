@@ -7,6 +7,8 @@
   "distanceSource": "Gaia EDR3 parallax 26.2469 +/- 0.0266 mas via SIMBAD (2020yCat.1350....0G): 1000/26.2469 = 38.10 pc, no zero-point correction",
   "radiusKm": 285933,
   "radiusSource": "Radius: 0.411 +/- 0.038 solar radii at 695700 km per solar radius, the stellar radius in Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2). GM from their stellar mass 0.359 +/- 0.047 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+  "effectiveTemperatureK": 3457,
+  "effectiveTemperatureSource": "Effective temperature 3457 ± 39 K from Sarkis et al. 2018 (AJ 155, 257; https://arxiv.org/abs/1805.00830), Table 2, the radius source, which adopts it from Benneke et al. 2017.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

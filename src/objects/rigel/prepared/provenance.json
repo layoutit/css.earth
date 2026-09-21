@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "372fabc83dc2e4c496ecab8957af59ad103f0a7a1b82d2846a0371b1b88b2568"
+    "sha256": "9a271147dcf96d18314b504378db9c6ff36d4e97f597619f2dd3b007b7c09882"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -175,7 +175,7 @@
       "id": "rigel-observational-measurements",
       "path": "measurements.json",
       "origin": "https://arxiv.org/abs/1201.0843",
-      "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843",
+      "credit": "Moravveji, Guinan, Shultz et al., \"Asteroseismology of the nearby SN-II progenitor Rigel. Part I\", ApJ 747, 108 (2012), arXiv:1201.0843; effective temperature: Przybilla et al. (2010), A&A 517, A38",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "63ad077f4b0fe0b5543d08a995118f848946509f6e1eedeee1df673dc86c0dc7",
-      "bytes": 1102,
+      "sha256": "3198b45153590b062e948c558490d2363d1dfeac7e20ebb04eaf32d0ee33883c",
+      "bytes": 1425,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "rigel",
-    "materialSha256": "249000b1ce6d4928e11bac054585c47aad0a1b7a35b3962a1871ab571c3c998c",
+    "materialSha256": "345fce0dfc80ccbbe1e699ee1a9ed2253a2b8012caba3316fceac76f4e8252e5",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

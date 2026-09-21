@@ -14,9 +14,13 @@ Rotation: no rotation axis or period is adopted here; see Known problems for wha
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #e2e9ff, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 7680 ± 90 K from van Belle et al. 2001 (ApJ 559, 1155; <https://doi.org/10.1086/322340>), Section 3.3: the PTI mean Rosseland diameter with the Alonso et al. 1994 bolometric flux. The authors call this single value a geometric construct: the rapidly rotating surface ranges from about 7100 to 9300 K. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #e2e9ff is the star field's colour at the cited 7680 K.
 
 ## Known problems
 

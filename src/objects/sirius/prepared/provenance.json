@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c13cb8cdc9f8f75b818398c78e9ea9b3cba3235ec730fe9329d65247517540ee"
+    "sha256": "11ea1fa21b5930865772eb36847f1ceac766080ac2b00e0003d96ac67b65080c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -175,7 +175,7 @@
       "id": "sirius-observational-measurements",
       "path": "measurements.json",
       "origin": "https://doi.org/10.1051/0004-6361:20030994",
-      "credit": "Kervella et al. (2003), Astronomy & Astrophysics 408, 681; VLTI/VINCI limb-darkened angular diameter of Sirius A",
+      "credit": "Kervella et al. (2003), Astronomy & Astrophysics 408, 681; VLTI/VINCI limb-darkened angular diameter of Sirius A; effective temperature: Davis et al. (2011), PASA 28, 58",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "ef5b55512a44c06f5adedb7b3d79d839968aefbb08b29e47683910fd22c9c915",
-      "bytes": 1179,
+      "sha256": "2b194ee0f2d92f3b8b0d4bdab4ae17ea642a87ad32283ab1bfdef7751811f258",
+      "bytes": 1538,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "sirius",
-    "materialSha256": "5882d91b0f1eced790cefd3887411d2efdf35baa42688688853b9a78bb1a2fa7",
+    "materialSha256": "500897473fb38055d9b8045158793726514851eefb575520852a7eb2e20ec1d8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

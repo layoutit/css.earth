@@ -14,9 +14,13 @@ Rotation: no rotation axis or period is adopted here; see Known problems for wha
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #ffcca3, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 3934 ± 41 K from Richichi & Roccatagliata 2005 (A&A 433, 305; <https://doi.org/10.1051/0004-6361:20041765>), Section 4: the lunar-occultation and VLTI/VINCI diameter with the bolometric flux. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffcca3 is the star field's colour at the cited 3934 K.
 
 ## Known problems
 

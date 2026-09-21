@@ -14,9 +14,13 @@ Rotation: no rotation axis or period is adopted for Sirius A in the sources used
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #cbdbff, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 9845 ± 64 K from Davis et al. 2011 (PASA 28, 58; <https://doi.org/10.1071/AS10010>), abstract: the SUSI and VLTI limb-darkened diameter 6.041 ± 0.017 mas with the bolometric flux. The radius source, Kervella et al. 2003, adopts a temperature rather than measuring one. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #cbdbff is the star field's colour at the cited 9845 K.
 
 ## Known problems
 

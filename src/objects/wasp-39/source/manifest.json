@@ -4,8 +4,8 @@
     {
       "id": "wasp-39-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1097,
-      "expectedSha256": "89cebab0b008a3a9231fa97795b4c030ba4a6e137ce6b58a8396c1b57b3dbdd0",
+      "expectedBytes": 1360,
+      "expectedSha256": "11c9305cb98cb83cd0c0787c85446fb0d883eab039693180552d73c0d122ca12",
       "origin": "https://arxiv.org/abs/1802.03859",
       "credit": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
       "license": "Factual numerical measurements; source attribution retained",
@@ -69,7 +69,7 @@
       "id": "wasp-39-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1690,
-      "expectedSha256": "54d21c0d06dc9bf8c60bcc488f462d11a182bee52fadc1f02c8c4152cd037eca",
+      "expectedSha256": "a64932266c7fcdb33c22c3a43b775b16797a81593c66652ad32109cee4d31a2e",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

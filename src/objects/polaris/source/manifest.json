@@ -4,10 +4,10 @@
     {
       "id": "polaris-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1315,
-      "expectedSha256": "3fbd45b669bfac6993a32a9ea852200ee787efa8861001806da5ed7d1b729544",
+      "expectedBytes": 1677,
+      "expectedSha256": "03c59c115497746f7fe5a503dc456656161f204d1d964b120c1edf9ad81f50f6",
       "origin": "https://arxiv.org/abs/2407.09641",
-      "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190",
+      "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190; effective temperature: Usenko et al. (2005), MNRAS 362, 1219",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -75,7 +75,7 @@
       "id": "polaris-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1690,
-      "expectedSha256": "ccac51c56187824f1d2e1e345bbf888fc8a582a9e81f88b10d832256db175cef",
+      "expectedSha256": "7c8e982ec411f4223660621df4caacd7da9f4e493a31a8595b5fea2edf09acd5",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",

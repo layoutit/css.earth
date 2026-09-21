@@ -6,7 +6,7 @@ Kepler-452 is a Sun-like star about 554 parsecs away, 1.11 times the Sun’s rad
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
-Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 1.8053 ± 0.0103 mas via SIMBAD. The package binds to the star the shared star field already draws through its Hipparcos number, so there is one Kepler-452, not two.
+Placement: the SIMBAD position, proper motion and radial velocity with the references SIMBAD gives, and the distance from the Gaia EDR3 parallax 1.8053 ± 0.0103 mas via SIMBAD. The star is too faint for the Hipparcos catalogue, so the shared star field (HYG) has no row for it and this package is its only point.
 
 Radius: Stellar radius 1.11 (+0.15) solar radii from Jenkins et al. 2015, AJ 150, 56 (2015). It is a radius from stellar characterisation, not an interferometric diameter; the angular diameter in the record is that radius at the Gaia distance.
 
@@ -14,9 +14,13 @@ Rotation: no spin axis or rotation period is adopted The display axis is celesti
 
 Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
 
+Catalogue colour: #fff2e6, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 5757 ± 85 K from Jenkins et al. 2015 (AJ 150, 56; <https://arxiv.org/abs/1507.06723>), Table 2, the radius source: high-resolution spectroscopy with SpecMatch. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
+
 ## Evidence
 
-No dated test report exists for this body yet.
+Run of 2026-09-21:
+
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #fff2e6 is the star field's colour at the cited 5757 K.
 
 ## Known problems
 

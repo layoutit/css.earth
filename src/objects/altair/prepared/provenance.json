@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6694530730d96a307bcd14abe46d3f2cbe192bbe2b41f8292cbfd535b709d140"
+    "sha256": "8807fac46a68aae20c1b375753fd7bdbe737ef690798bb5fb048eacc75dba4b8"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -175,7 +175,7 @@
       "id": "altair-observational-measurements",
       "path": "measurements.json",
       "origin": "https://arxiv.org/abs/0706.0867",
-      "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
+      "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867; effective temperature: van Belle et al. (2001), ApJ 559, 1155",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Transcribed published measurements with their sources",
       "redistribution": "Factual parameter transcription only; no paper figures",
@@ -183,8 +183,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "b3aa7ac94d1606a17cc7c18f1602139f31fd9f567c722d01a8f00e8215debdd9",
-      "bytes": 1296,
+      "sha256": "9aaffce8526bf4f3188f2b09eb4654c4e95ee5dccda7f787865127ef386e905c",
+      "bytes": 1686,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -334,7 +334,7 @@
   },
   "lastPreparation": {
     "objectId": "altair",
-    "materialSha256": "b3b99ffda4be59582b7de6ed972dc3327a7e70b603325ac56dbd613ea7603d98",
+    "materialSha256": "e2192d42704571580187b6013253f55e7ca06889260462dc2d4d3d2be3539263",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
