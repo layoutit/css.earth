@@ -81,7 +81,7 @@ run.mts                                      research CLI entrypoint
 
 Use `pnpm typecheck:nebula`, `pnpm check:nebula-boundaries`, targeted tests through `node labs/nebula/run.mts test <names>`, and the affected browser flow. The routine CI selection requires no native assets; the complete lab suite and saved-output browser gates have separate prerequisites in [internal packages](docs/internal-packages.md). Verify actual output hashes, source identity, full extent, geometry/handedness, all three slice axes, and source-switch/refresh behavior. Keep numerical convergence thresholds fixed; increase sampling at its owning layer when needed. Inspect front and oblique views before claiming visual quality.
 
-Do not infer completion from process launch or exit code alone. Do not run unrelated production suites during lab iteration. No review council or external-agent review is required for routine lab changes.
+Do not infer completion from process launch or exit code alone. Do not run unrelated production suites during lab iteration.
 
 ## Compact application bake inputs
 
