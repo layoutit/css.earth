@@ -1,6 +1,7 @@
 import { sha256 } from '../platform/sha256.mts';
 import { isArray } from '../platform/is-array.mts';
-export interface MarkerSource { path: string; expectedBytes: number; expectedSha256: string; origin: string; credit: string; license: string; raster?: { kind: string }; width?: number; height?: number; }
+/** A pin identifies bytes git does not hold; a marker image authored in this repository carries none. */
+export interface MarkerSource { path: string; expectedBytes?: number; expectedSha256?: string; origin: string; credit: string; license: string; raster?: { kind: string }; width?: number; height?: number; }
 /** Fields an object's marker recipe may add to its source: decoding hints its manifest record does not carry. */
 export const MARKER_SOURCE_HINTS = ['raster'] as const;
 export type MarkerOperation =
@@ -58,8 +59,9 @@ export function validateMarkerDescriptor(input: unknown): MarkerDescriptor {
 export function validateMarkerSource(source: MarkerSource) {
   if (!source || typeof source !== "object" || isArray(source) ||
       !safeRelativePath(source.path) ||
-      !Number.isSafeInteger(source.expectedBytes) || source.expectedBytes <= 0 ||
-      !SHA256.test(source.expectedSha256 ?? "") ||
+      (source.expectedBytes === undefined) !== (source.expectedSha256 === undefined) ||
+      source.expectedBytes !== undefined && (!Number.isSafeInteger(source.expectedBytes) || source.expectedBytes <= 0) ||
+      source.expectedSha256 !== undefined && !SHA256.test(source.expectedSha256) ||
       !nonEmpty(source.origin) || !nonEmpty(source.credit) ||
       !nonEmpty(source.license)) {
     throw new TypeError("Navigation marker source is invalid.");
@@ -75,6 +77,7 @@ function httpOrigin(value: string) {
 export async function validateMarkerSourceBytes(source: MarkerSource, sourcePath: string) {
   validateMarkerSource(source);
   const bytes = await readFile(sourcePath);
+  if (source.expectedSha256 === undefined) return bytes;
   if (bytes.byteLength !== source.expectedBytes) {
     throw new Error(`Navigation marker source size drifted: ${source.path}.`);
   }

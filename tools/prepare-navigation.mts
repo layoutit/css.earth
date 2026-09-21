@@ -546,16 +546,6 @@ export async function renderNavigation({ projectRoot, outputRoot, descriptors }:
   return Object.freeze({
     outputRoot,
     planetCount: descriptors.length,
-    sourceHashes: Object.freeze([
-      ...descriptors.map(({ source }) => source.expectedSha256),
-      NAVIGATION_SUN_SOURCE.expectedSha256,
-      NAVIGATION_BLACKHOLE_SOURCE.expectedSha256,
-      NAVIGATION_SUPERNOVA_SOURCE.expectedSha256,
-      NAVIGATION_GITHUB_SOURCE.expectedSha256,
-      NAVIGATION_SETTINGS_SOURCE.expectedSha256,
-      NAVIGATION_DOWNLOAD_SOURCE.expectedSha256,
-      NAVIGATION_SHARE_SOURCE.expectedSha256,
-    ]),
   });
 }
 
