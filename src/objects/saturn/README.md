@@ -105,6 +105,10 @@ The body map is the Hubble OPAL Cycle 32 rotation-A global map of
 1,800 x 900, NASA, ESA, STScI and the OPAL team). The map never observed three
 row ranges: rows 0-35 (north of 82.8 degrees), rows 431-444 (3.8 to 1.0
 degrees north, behind the rings) and rows 887-899 (south of 87.4 degrees).
+These latitudes are planetographic: the
+[OPAL Cycle 32 readme](https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025_all_v1_readme.txt)
+says the maps run "between -90 and +90 deg planetographic latitude" with the
+"left edge = 360 System III W. longitude, decreasing to the right".
 The geometry recipe names those rows and preparation fills them by linear
 interpolation in latitude between the nearest observed rows before resampling
 the map to the 2,880 x 1,440 grid; nothing is detected from pixel values.

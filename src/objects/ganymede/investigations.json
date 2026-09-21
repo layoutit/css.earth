@@ -85,7 +85,7 @@
       "id": "usgs-enhanced-color-mosaic",
       "subject": "USGS Voyager/Galileo 1.4 km color mosaic",
       "status": "included",
-      "finding": "Selected SSI 991/559/413 nm product provides Enhanced color, not natural color; missing color falls back to observed monochrome.",
+      "finding": "Selected SSI 991/559/413 nm product provides False color, not natural color; missing color falls back to observed monochrome.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/ganymede/source/manifest.json",

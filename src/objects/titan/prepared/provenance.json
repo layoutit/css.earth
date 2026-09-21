@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "180e2d27123e5992ebe2149912db899ac5ef26355e04d382e27467e01857f6d5"
+    "sha256": "f6940fbf0fc650e85f02f7cba1b8ab71114040651cdbda44aa36f585b3d60b02"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -2197,8 +2197,8 @@
       "outputs": [
         {
           "url": "/scenes/titan/titan-features.json",
-          "bytes": 2077938,
-          "sha256": "017db3cde5dd7212e66dcd33550ee4cd52fd510673f4137b9a6771992726f272",
+          "bytes": 2077925,
+          "sha256": "8b6fd87fb0d9875f89ae74605c78fbd79ba45a7ef44733cb9a34fc738fad5b91",
           "verification": "bytes-verified"
         }
       ],
@@ -2361,7 +2361,7 @@
   },
   "lastPreparation": {
     "objectId": "titan",
-    "materialSha256": "cfbd1b243e8b47cd5d11a434c6be17e5d00f01d491496a4a725240d6752e34b0",
+    "materialSha256": "fb1888bd504b4c7c548f592a4c60e7ba58dfe620df9570c13dadbc45c581b7e8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

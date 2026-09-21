@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2011 TableA.1 gives both poles(339,-67)/(181,-61), four dense curves over two apparitions and sparse data from three surveys. The selected solution retains the original source axes; the alternative remains possible.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2011 TableA.1 gives both poles(339,-67)/(181,-61), four dense curves over two apparitions and sparse data from three surveys. The selected solution retains the original source axes; the alternative remains possible.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

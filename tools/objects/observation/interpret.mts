@@ -105,7 +105,7 @@ const rgb3 = (rgb: Uint8Array, missing: Uint8Array | null, width: number, height
 /** Build the lane's `interpret` adapter once per prepared object. Decoded grids are cached per surface so the
  * two prepared densities decode each source once (the terrestrial lane painted a single @2x atlas). */
 const fits = object({ bitpix: number, width: number, height: number, latitude: literal('sine-latitude', 'equirectangular'),
-  reverseLongitude: optional((v): v is boolean => typeof v === 'boolean'), positiveOnly: optional((v): v is boolean => typeof v === 'boolean'), nearestLatitudeLimit: number,
+  positiveOnly: optional((v): v is boolean => typeof v === 'boolean'), nearestLatitudeLimit: number,
   color: union(object({ kind: literal('signed-asinh'), palette: array(array(number)), softening: number, maximum: number }),
     object({ kind: literal('positive-log'), palette: array(array(number)), range: tuple(number, number) })) });
 const record = object({ file: string, record: string });

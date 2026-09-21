@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1850",
     "sourceLabel": "DAMIT model 1850",
     "reference": "DAMIT model 1850",
-    "limitations": "The 2017 ADAM reconstruction combines optical light curves with one resolved adaptive-optics observation. With only one AO observation, jackknife image resampling is impossible; size uncertainty comes from different shape supports. The selected archive solution has volume-equivalent diameter110±5 km, while the paper ensemble reports109±5 km. Its source-scale adjustment preserves the archived surface and does not add image texture.",
+    "limitations": "The 2017 ADAM reconstruction combines optical light curves with one resolved adaptive-optics observation. With only one AO observation, jackknife image resampling is impossible; size uncertainty comes from different shape supports. The selected archive solution has volume-equivalent diameter 110±5 km, while the paper ensemble reports 109±5 km. Its source-scale adjustment preserves the archived surface and does not add image texture.",
     "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 110 ± 5 km volume-equivalent diameter. Only one resolved AO observation constrains this reconstruction. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.9991357383488412,
     "metersPerSourceUnit": 999.1357383488412
@@ -23,7 +23,7 @@
     99,
     10
   ],
-  "modelLimitations": "The 2017 ADAM reconstruction combines optical light curves with one resolved adaptive-optics observation. With only one AO observation, jackknife image resampling is impossible; size uncertainty comes from different shape supports. The selected archive solution has volume-equivalent diameter110±5 km, while the paper ensemble reports109±5 km. Its source-scale adjustment preserves the archived surface and does not add image texture.",
+  "modelLimitations": "The 2017 ADAM reconstruction combines optical light curves with one resolved adaptive-optics observation. With only one AO observation, jackknife image resampling is impossible; size uncertainty comes from different shape supports. The selected archive solution has volume-equivalent diameter 110±5 km, while the paper ensemble reports 109±5 km. Its source-scale adjustment preserves the archived surface and does not add image texture.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/528/shape.txt",
     "vertices": 402,

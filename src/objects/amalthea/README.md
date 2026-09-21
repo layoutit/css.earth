@@ -4,7 +4,7 @@
 
 - **Monochrome:** original Galileo SSI raw REDR images C0420626379 (1997-11-06, green), C0420652501 (1997-11-07, clear), C0512324200 (1999-08-12, clear), C0532888100 (2000-01-04, clear).
 
-- **Geometry / Elevation:** [Stooke Small Body Shape Models](https://sbn.psi.edu/pds/resource/stkshape.html), DOI 10.26033/yt84-5y91, `j5amalthea.tab`: west-positive, planetocentric 5°radius grid in kilometres. Original body origin is preserved.
+- **Geometry / Elevation:** [Stooke Small Body Shape Models](https://sbn.psi.edu/pds/resource/stkshape.html), DOI 10.26033/yt84-5y91, `j5amalthea.tab`: west-positive, planetocentric 5° radius grid in kilometres. Original body origin is preserved.
 
 Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
 
@@ -53,13 +53,13 @@ Amalthea is a standalone Jupiter moon using the generic object package, shared l
 
 - Detector pixels, not enlarged press crops, supply the imagery. Closest image is about 2.4km/pixel; complementary aspects range to 8.3km/pixel.
 
-- Meshoptimizer simplifies the 5040-triangle source to 800 native raster triangles with a 1500m library error setting. The source is Voyager-derived and corrects the historical 315°W bulge; it has no Galileo shape refinement. Elevation is radial distance minus 83.5km, displayed from −35 to +50km.
+- Meshoptimizer simplifies the 5040-triangle source to 800 native raster triangles with a 1500m library error setting. The source is Voyager-derived and corrects the historical 315°W bulge; it has no Galileo shape refinement. Elevation is radial distance minus 83.5 km, displayed from −35 to +50 km.
 
 ## Preparation
 
 `source/preparation/terrestrial.json` owns the shared recipe. Source observations are original unsigned 8-bit detector DN, decoded after VICAR telemetry headers and row prefixes. Recorded empty/low-signal sky subtraction, a bounded lunar-Lambert approximation(maximum 2× gain; incidence ≤72°, emission ≤75°) and overlap level matching fitted where both frames see the surface within 70° of incidence and emission (the widest gain, 8.6, reconciles raw exposures through different filters) reduce photographed shading. C0532888100 withholds pixels within 10 pixels of its background (sky and unlit surface), twice its 5-pixel limb residual. At its former 5-pixel inset, the next ring of pixels lay where the coarse shape predicts grazing light: normalized, it measured 2.1 times the overlapping C0512324200 at the same points and drew a bright stripe. The wider inset keeps 71.0% of the surface covered (71.1% before) and lowers the log spread between those two frames from 0.158 to 0.131. Cast shadows and absent/unreliable samples are never reconstructed. A neutral gray grid marks gaps.
 
-Some old archived raw labels have inconsistent Sun longitude/range. Conversely, OPUS image center and pole angles disagree with the original raw raster. Camera roll therefore uses the original PDS label NORTH_AZIMUTH+90°, following the [documented clockwise-from-image-right convention](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html); only center translation is fitted to illuminated source-shape boundaries. Typical residuals are 0.6–2.1pixels; the closest image is about 5pixels because the coarse Voyager shape differs from Galileo’s detailed limb.
+Some old archived raw labels have inconsistent Sun longitude/range. Conversely, OPUS image center and pole angles disagree with the original raw raster. Camera roll therefore uses the original PDS label NORTH_AZIMUTH+90°, following the [documented clockwise-from-image-right convention](https://pds.nasa.gov/datastandards/documents/dd/all/current/ch33s02.html); only center translation is fitted to illuminated source-shape boundaries. Typical residuals are 0.6–2.1 pixels; the closest image is about 5 pixels because the coarse Voyager shape differs from Galileo’s detailed limb.
 
 Surface/pole atlases, native triangle maps, shared flood/directional lighting, thumbnails, scientific legend, small minimap and complete-silhouette context portrait derive from these same prepared sources. Flood displays the normalized source material without added directional attenuation; Shadows supplies the prepared Sun direction. Context gray areas preserve the known shape without inventing texture.
 

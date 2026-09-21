@@ -1,0 +1,49 @@
+{
+  "id": "iau-wgccre-2015",
+  "title": "Report of the IAU Working Group on Cartographic Coordinates and Rotational Elements: 2015",
+  "kind": "publication",
+  "identityLevel": "work",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1007/s10569-017-9805-5"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1007/s10569-017-9805-5",
+      "label": "Celestial Mechanics and Dynamical Astronomy 130, article 22 (2018)"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
+      "checkedOn": "2026-09-21",
+      "locator": "Reference [1]; Satellites of Jupiter: BODY501_PM to BODY504_PM, each noted \"Values are unchanged in the 2015 IAU report.\""
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "creators": [
+    "B. A. Archinal",
+    "C. H. Acton",
+    "M. F. A'Hearn",
+    "A. Conrad",
+    "G. J. Consolmagno",
+    "T. Duxbury",
+    "D. Hestroffer",
+    "J. L. Hilton",
+    "R. L. Kirk",
+    "S. A. Klioner",
+    "D. McCarthy",
+    "K. Meech",
+    "J. Oberst",
+    "J. Ping",
+    "P. K. Seidelmann",
+    "D. J. Tholen",
+    "P. C. Thomas",
+    "I. P. Williams"
+  ],
+  "publicationDate": "2018"
+}

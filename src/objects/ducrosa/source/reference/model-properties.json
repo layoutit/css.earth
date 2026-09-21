@@ -12,16 +12,16 @@
     "uncertaintyKind": "Reported VS-TPM spread accounting for shape/pole variation; physical mesh realization remains a nominal archived solution, not exact ensemble geometry",
     "diameterSemantics": "Volume-equivalent diameter explicitly defined in Hanuš et al.2018TableA.3 using the same published convex shape/pole family.",
     "sourceUrl": "https://arxiv.org/pdf/1803.06116",
-    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
+    "reference": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus 309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
     "publishedPoleEclipticDegrees": [
       328,
       56
     ],
     "publishedPeriodHours": 6.86788,
-    "limitations": "Ducrosa nominal DAMIT352 pole328°,56°,period6.86788h matches the table. The mirrored model353 has a separately fitted35.2±1.1km; this alternative remains unresolved and is not mixed into model352.",
+    "limitations": "Ducrosa nominal DAMIT352 pole 328°,56°,period 6.86788h matches the table. The mirrored model 353 has a separately fitted 35.2±1.1 km; this alternative remains unresolved and is not mixed into model 352.",
     "scaleKmPerSourceUnit": 27.484465298016357,
     "metersPerSourceUnit": 27484.465298016356,
-    "sourceLabel": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
+    "sourceLabel": "Hanuš, Delbo, Ďurech and Alí-Lagoa (2018), Icarus 309,297–337, TableA.3; doi:10.1016/j.icarus.2018.03.016",
     "visibleDescription": "Convex light-curve shape with published thermophysical size calibration: 34.1 ± 0.5 km volume-equivalent diameter. Alternative mirror-pole fit remains unresolved. Grid marks unavailable imagery; rotational phase is illustrative."
   },
   "periodHours": 6.86788,

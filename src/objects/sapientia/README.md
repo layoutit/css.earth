@@ -13,7 +13,7 @@ Shape-only views use the shared neutral gray (#808080 sRGB). This is a display c
 
 Checked 2026-09-09. Selected DAMIT model **16284**, version **2023-10-03**. DAMIT, Astronomical Institute of Charles University; Marciniak et al. (2023); model 16284, version 2023-10-03.
 
-Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range96–109 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
+Convex light-curve reconstruction scaled by stellar occultations: 103 km volume-equivalent diameter (model range 96–109 km). Neutral gray marks unavailable imagery; rotational phase is illustrative.
 
 ## Evidence
 
@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-The selected convex pole2 is preferred by nine occultation epochs in Marciniak2023 §5.2. Table1 gives103 km with asymmetric size interval96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established.
+The selected convex pole 2 is preferred by nine occultation epochs in Marciniak 2023 §5.2. Table 1 gives 103 km with asymmetric size interval 96–109 km, accounting for acceptable vertical-shape variations. The archive latitude is −2°, differing by 1° from the paper value −1° (published latitude uncertainty ±20°); the cause of the difference is not established.
 
-The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole2 shape at100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved.
+The archive period 14.93046 h also differs slightly from the paper 14.93045 ± 0.00005 h; the archived spin is retained. The paper also reports a stronger nonconvex ADAM pole 2 shape at 100±1 km; DAMIT lists only the two convex solutions and the targeted ISAM release page returned no model rows, so that improved mesh remains unresolved.
 
 It is not substituted by an invented shape.
 

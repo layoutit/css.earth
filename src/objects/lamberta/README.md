@@ -60,7 +60,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral gray must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative.
 
-Select Vernazza et al. (2021) ADAM model5914 over older convex1086. The VLT/SPHERE imaging study reports volume-equivalent141 ±2 km, agreeing with the selected archive diameter and raw volume141.094. MPCD is a promising refinement documented in the paper; its linked LAM release could not be retrieved during this survey.
+Select Vernazza et al. (2021) ADAM model 5914 over older convex 1086. The VLT/SPHERE imaging study reports volume-equivalent 141 ±2 km, agreeing with the selected archive diameter and raw volume 141.094. MPCD is a promising refinement documented in the paper; its linked LAM release could not be retrieved during this survey.
 
 The mounted source is the pinned ADAM mesh, not an unverified MPCD or reflectance product.
 

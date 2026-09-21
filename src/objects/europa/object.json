@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d70b0645cf46c8af3a88f7358ed01c401b89b5ffb27a554dd9d850af6ba44d1c"
+    "sha256": "47450d0a4967d8fb73a7d60fb41759da39a0f99bf3b94dd7083a3565987da46d"
   },
   "id": "europa",
   "properties": {
@@ -83,21 +83,6 @@
               "id": "infrared",
               "source": "content",
               "material": "lighting"
-            },
-            {
-              "id": "ice-signature",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "fine-ice",
-              "source": "content",
-              "material": "lighting"
-            },
-            {
-              "id": "coarse-ice",
-              "source": "content",
-              "material": "lighting"
             }
           ]
         }
@@ -168,7 +153,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "c5dfaacca5a65f17c474377304a8dc5610b5c913a970e151e09c0e74da4d2d5a"
+        "sha256": "e1b37a1e7159526ec2bf2ef45dfb5e7f616b8d6d04e8c7f11b78f57aac640c83"
       }
     },
     "catalog": {

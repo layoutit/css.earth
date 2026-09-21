@@ -251,8 +251,8 @@
     {
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 3414,
-      "expectedSha256": "d801e17a7ba1da2bd1b10f04e100c1547000711357bd983e40c92f02b61793de",
+      "expectedBytes": 3750,
+      "expectedSha256": "579c953e09d74b799390f9b25ec7150af45c92a96073948be85084976482d1f7",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -287,8 +287,8 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14300,
-      "expectedSha256": "02915ac43bc41de32e92b279a275328de2d5487fde632d8ba71eba9b010b999e",
+      "expectedBytes": 14376,
+      "expectedSha256": "60a7ad73652c2636c65193e29903dd1ac5e070580143dfd8146a4a272e053b12",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -348,8 +348,8 @@
     {
       "id": "neptune-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 14390,
-      "expectedSha256": "07663ddafe19626090ff139ee2c0e49ef36eb8361b5eb8eb3861e6e3943e1798",
+      "expectedBytes": 14459,
+      "expectedSha256": "242cecc0bc8c07d5032204faaba3205008b41e4bda11013fe54dc2a304879304",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
@@ -366,8 +366,8 @@
     {
       "id": "neptune-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1528,
-      "expectedSha256": "50f0085758ba2d9eb3a1668ffcf50758b097b021d9d73a23c7cd51b87aedf3fe",
+      "expectedBytes": 1529,
+      "expectedSha256": "740f94552024b46374917bf014bbc6a364c7bf4b4a1966c8c528df9465630d93",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",

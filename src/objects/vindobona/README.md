@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Gaia DR2 plus Lowell inversion; publication table gives335 Lowell and15 Gaia points. One pole is released. The low-resolution convex mesh plus explicit AKARI scale replaces superseded Lacrimosa intake. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+Gaia DR2 plus Lowell inversion; publication table gives 335 Lowell and 15 Gaia points. One pole is released. The low-resolution convex mesh plus explicit AKARI scale replaces superseded Lacrimosa intake. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

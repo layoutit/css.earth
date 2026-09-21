@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Ďurech2011 describes this as a very elongated convex model. Both poles fit the2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second.
+Ďurech 2011 describes this as a very elongated convex model. Both poles fit the 2004 occultation; selected pole(28,−72) fits particularly well and is preferred in DAMIT, but its rival is not rejected. Three video chords have reported timing errors of tenths of a second.
 
-Table3 gives volume-equivalent43±4 km for this pole; local surface relief is unresolved.
+Table 3 gives volume-equivalent 43±4 km for this pole; local surface relief is unresolved.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

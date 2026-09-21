@@ -50,7 +50,7 @@
       "output": "ganymede-{id}{suffix}.webp",
       "thumbnail": "ganymede-lens-{id}.webp",
       "source": "ganymede-color.tif",
-      "falseColor": false,
+      "falseColor": true,
       "science": {
         "kind": "terrestrial-observation",
         "input": "usgs-voyager-galileo-color",
@@ -334,112 +334,6 @@
             }
           }
         ]
-      }
-    },
-    {
-      "id": "ice-fraction",
-      "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
-      "source": "composition/ice-fraction.tif",
-      "falseColor": true,
-      "resolutionScale": 0.125,
-      "science": {
-        "kind": "terrestrial-scientific",
-        "id": "ice-fraction",
-        "label": "Ice fraction",
-        "minimum": 0,
-        "maximum": 0.6,
-        "colors": [
-          "#081d58",
-          "#225ea8",
-          "#41b6c4",
-          "#a1dab4",
-          "#ffffcc"
-        ],
-        "labels": [
-          "0%",
-          "30%",
-          "60%"
-        ],
-        "units": "modeled fraction",
-        "title": "Ice fraction",
-        "description": "Published posterior median of total water-ice abundance; this is a spectral mixture estimate, not a direct measurement of ice purity.",
-        "format": "geotiff",
-        "path": "composition/ice-fraction.tif",
-        "consumer": "ice-fraction",
-        "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
-        "grid": {
-          "width": 361,
-          "height": 180,
-          "coordinates": "degrees",
-          "referenceRadiusMeters": 2631200,
-          "centerLongitude": 0,
-          "origin": [
-            -180.5,
-            89.5
-          ],
-          "resolution": [
-            1,
-            -1
-          ],
-          "wrapLongitude": true,
-          "noData": -99
-        }
-      }
-    },
-    {
-      "id": "dark-material",
-      "output": "ganymede-{id}{suffix}.webp",
-      "thumbnail": "ganymede-lens-{id}.webp",
-      "source": "composition/dark-material.tif",
-      "falseColor": true,
-      "resolutionScale": 0.125,
-      "science": {
-        "kind": "terrestrial-scientific",
-        "id": "dark-material",
-        "label": "Dark material",
-        "minimum": 0,
-        "maximum": 0.7,
-        "colors": [
-          "#081d58",
-          "#225ea8",
-          "#41b6c4",
-          "#a1dab4",
-          "#ffffcc"
-        ],
-        "labels": [
-          "0%",
-          "35%",
-          "70%"
-        ],
-        "units": "modeled fraction",
-        "title": "Dark material",
-        "description": "Published posterior median of the model’s combined synthetic darkening components. This is an unidentified spectral component, not a detected mineral.",
-        "format": "geotiff",
-        "path": "composition/dark-material.tif",
-        "consumer": "dark-material",
-        "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-        "sampling": "nearest",
-        "displaySampling": "nearest",
-        "grid": {
-          "width": 361,
-          "height": 180,
-          "coordinates": "degrees",
-          "referenceRadiusMeters": 2631200,
-          "centerLongitude": 0,
-          "origin": [
-            -180.5,
-            89.5
-          ],
-          "resolution": [
-            1,
-            -1
-          ],
-          "wrapLongitude": true,
-          "noData": -99
-        }
       }
     }
   ],

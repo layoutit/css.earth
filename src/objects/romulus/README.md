@@ -36,7 +36,7 @@ The selected 2014 projected ellipse is one admissible solution. Unseen depth is 
 
 **Selected geometry**
 
-Published 2013 projected area-equivalent diameter 23.1±0.7km and ellipse ratio 2.7±0.3.
+Published 2013 projected area-equivalent diameter 23.1±0.7 km and ellipse ratio 2.7±0.3.
 
 **Orbit and orientation**
 

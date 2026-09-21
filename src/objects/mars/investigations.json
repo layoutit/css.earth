@@ -76,7 +76,7 @@
       "id": "themis-coverage-fill",
       "subject": "Exact-zero fill in the THEMIS mosaic",
       "status": "unresolved",
-      "finding": "The pinned mosaic has exact-zero fill in rows 0-26, north of about 87.6 degrees north, and rows 1894-2047, south of about 76.5 degrees south, with 15.6 percent zero samples overall; the shared raster lane has no source-validity mask, so those bands render black under the shared lighting.",
+      "finding": "The pinned mosaic (sha256 1e9123a6...) has fully black rows 0-28, north of about 87.5 degrees north, and rows 2034-2047, south of about 88.8 degrees south, with 2.6 percent zero samples overall; the shared raster lane has no source-validity mask, so those bands render black under the shared lighting.",
       "revisitWhen": "A validity mask accompanies the mosaic, or a gap-free day-IR product is released.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/mars/README.md#L36"

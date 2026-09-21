@@ -83,7 +83,7 @@ Feature notes: 43 of the labelled names carry a caption note, the lead summary o
 
 <a id="enceladus-sources-and-preparation"></a>
 
-Enceladus (NAIF 602) is a standalone moon of Saturn. The physical reference radius is 252.3 km from the vendored JPL body record. The proposed corrected-v2 source mesh supplies shape geometry at finite display resolution. The older Schenk elevation datum uses semi-axes 256.2, 251.4 and 248.6 km; these are not full diameters or the new DSK mesh coordinates.
+Enceladus (NAIF 602) is a standalone moon of Saturn. The astronomy package carries the [JPL satellite table](https://ssd.jpl.nasa.gov/sats/phys_par/sep.html) mean radius of 252.10 km; the recipe reference sphere uses the same value. The proposed corrected-v2 source mesh supplies shape geometry at finite display resolution. The older Schenk elevation datum uses semi-axes 256.2, 251.4 and 248.6 km; these are not full diameters or the new DSK mesh coordinates.
 
 ## Schenk scientific surfaces
 

@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "elatus",
+  "entries": [
+    {
+      "id": "sbdb-diameter",
+      "subject": "Size: JPL Small-Body Database diameter",
+      "status": "included",
+      "finding": "31824 Elatus (1999 UG5) is drawn as a sphere at the 57 km diameter the JPL Small-Body Database lists, with JPL's stated reference urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs]. No shape model is published, so the sphere is illustrative.",
+      "evidence": [
+        "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=31824&phys-par=true",
+        "https://ui.adsabs.harvard.edu/abs/2013ApJ...773...22B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
+        }
+      ]
+    }
+  ]
+}

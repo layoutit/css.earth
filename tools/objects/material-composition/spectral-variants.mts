@@ -11,6 +11,7 @@ import {resolve} from 'node:path';
 import sharp from 'sharp';
 import {packProjectiveSurfaceRaster} from '../../../src/platform/projective-surface-raster.mts';
 import {readFitsPrimary} from '../observation/fits.mts';
+import {planetographicRowsToMeshLatitude} from './ellipsoid.mts';
 import {verifyObservationSources} from '../observed-surfaces/index.mts';
 import {validateMaterialRecipe,validateRelativePath} from './recipe.mts';
 /** Compose source-selected scalar/thermal surfaces and the corresponding material variants. */
@@ -53,6 +54,7 @@ const poleAtlasWidth = config.parameters.poleAtlasWidth;
 const poleAtlasHeight = config.parameters.poleAtlasHeight;
 const polarBoundaryLatitude = config.parameters.polarBoundaryLatitude;
 const materialModes = config.parameters.materialModes;
+const surfaceAxisRatio = config.parameters.objectEquatorialRadiusKm / config.parameters.objectPolarRadiusKm;
 const materialVariantId = (lensId: string, mode: string) =>
   mode === "full" ? lensId : `${lensId}-${mode}`;
 
@@ -256,9 +258,12 @@ async function prepareScalarSurface(plan: Extract<SpectralLens,{operation:'scala
     raw: { width: detailMap.width, height: detailMap.height, channels: 4 },
   }).resize(bodyWidth, bodyHeight, { kernel: sharp.kernel.lanczos3 })
     .raw().toBuffer({ resolveWithObject: true });
+  // OPAL maps index rows by planetographic latitude; the mesh texture rows follow parametric latitude.
+  const meshSurface = planetographicRowsToMeshLatitude(spectralSurface.data, spectralSurface.info.width,
+    spectralSurface.info.height, spectralSurface.info.channels, surfaceAxisRatio);
   const highResolutionDetail = await highResolutionDetailPromise;
   return Object.freeze({
-    data: applyHighResolutionDetail(spectralSurface.data, highResolutionDetail),
+    data: applyHighResolutionDetail(meshSurface, highResolutionDetail),
     info: spectralSurface.info,
   });
 }

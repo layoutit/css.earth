@@ -1299,7 +1299,7 @@
       "acquisition": "Exact pinned SDO AIA 304 browse JPEG within Carrington Rotation 2311",
       "redistribution": "Redistributed with NASA/SDO/AIA credit and no endorsement",
       "consumers": [
-        "corona"
+        "chromosphere"
       ],
       "expectedBytes": 206926,
       "expectedSha256": "8ae7e4557012f9d4840a2c326158fb9db338f8b5d8dcde3f390bab858456757e",
@@ -1467,8 +1467,8 @@
     {
       "id": "sun-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12085,
-      "expectedSha256": "2904dfb230976feb20f902ef8325c209011f622e5fa7ae92ee8f1b3f49ef99ff",
+      "expectedBytes": 11970,
+      "expectedSha256": "c2bd40a64526aeb97e984d72fc721ca0b5657a9133bf484d290f07adab339c65",
       "origin": "Repository-authored raster recipe: four CR2311 synoptic surfaces interpreted by the shared observation adapter (continuum mosaic, HMI and AIA FITS maps), polar bands, off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1562,8 +1562,8 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12845,
-      "expectedSha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
+      "expectedBytes": 14050,
+      "expectedSha256": "52ee4a51f0a6c185ada9a7948ce7eb5eee2e7fecdda4c3d8789e32f7c58bc67c",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",

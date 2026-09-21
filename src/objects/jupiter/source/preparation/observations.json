@@ -170,7 +170,8 @@
         "alphaOpaqueRadius": 0.43,
         "alphaTransparentRadius": 0.93,
         "edgeLatitudeDegrees": 64
-      }
+      },
+      "planetographicAxisRatio": 1.0693750560923803
     },
     {
       "id": "ultraviolet",
@@ -223,7 +224,8 @@
         "alphaOpaqueRadius": 0.43,
         "alphaTransparentRadius": 0.96,
         "boundaryLatitudeDegrees": 64
-      }
+      },
+      "planetographicAxisRatio": 1.0693750560923803
     },
     {
       "id": "methane",
@@ -276,7 +278,8 @@
         "alphaOpaqueRadius": 0.43,
         "alphaTransparentRadius": 0.96,
         "boundaryLatitudeDegrees": 64
-      }
+      },
+      "planetographicAxisRatio": 1.0693750560923803
     }
   ],
   "sourcePins": [

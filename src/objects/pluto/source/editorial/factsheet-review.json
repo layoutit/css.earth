@@ -1,12 +1,12 @@
 {
   "schema": "cssearth-factsheet-source-review@1",
   "objectId": "pluto",
-  "checked": "2026-09-08",
+  "checked": "2026-09-21",
   "references": [
     {
-      "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
+      "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
       "epoch": "J2000; Table 1, fitted elements valid 1800–2050",
-      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system.",
+      "note": "Semimajor axis describes orbit scale, not instantaneous or time-averaged distance. Satellite value belongs to the parent planetary system. JPL's current approximate-positions page has removed Pluto; the Pluto row is read from the 2019 archived Table 1 (a = 39.48211675 AU).",
       "values": {
         "distance-from-sun": "39.482 AU"
       }

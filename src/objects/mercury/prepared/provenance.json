@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "b1ffd8e9447aa425a18a0c47872a9b6bf128e9abdc5cd20b6768083159529938"
+    "sha256": "b91f6d0539ad3ac9bd8f44c64cd3b9183934994bd988adefb781e1ec45cf0ee3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -180,7 +180,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "a1d403cd1886ca547850cc7d8aedfebf4dedeb8148b80196fb9b8ecf33940669",
+      "sha256": "b52be920085f18d3e55ebb13ea1fe0754461ec7627816551b15dd64b2cdaed40",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -263,7 +263,7 @@
               "value": "0.034°",
               "source": {
                 "url": "https://pgda.gsfc.nasa.gov/products/105",
-                "label": "NASA/JPL reference",
+                "label": "NASA Goddard PGDA, Bertone et al. 2021",
                 "checked": "2026-09-08",
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "mercury-rotation-model-stark-2015",
@@ -376,7 +376,7 @@
               "surface": "mercury-surface-topography@2x.jpg",
               "source": {
                 "id": "messenger-topography",
-                "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
+                "url": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m"
               },
               "poles": "mercury-poles@2x.webp",
               "legend": {
@@ -409,10 +409,11 @@
                 ],
                 "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km"
               },
+              "legendNote": "Scale from the USGS legend for the older 2 km color shaded relief. It is not confirmed for the 665 m v2 DEM drawn here.",
               "falseColor": true,
-              "filter": "USGS MESSENGER global color shaded relief",
+              "filter": "NASA Trek color hillshade of the USGS MESSENGER global DEM 665 m v2",
               "view": "exterior",
-              "notes": "MESSENGER shaded relief"
+              "notes": "NASA Trek color hillshade of the USGS MESSENGER global DEM 665 m v2. The elevation legend comes from the older USGS 2 km color shaded relief product; its color bins are not confirmed for v2."
             },
             {
               "id": "interior",
@@ -879,9 +880,9 @@
       ],
       "acquisition": "NASA Trek WMTS tiles, zoom 3, assembled into one equirectangular mosaic",
       "redistribution": "Committed scientific source snapshot with credit and false-color qualification.",
-      "title": "MESSENGER global shaded relief",
+      "title": "MESSENGER global DEM 665 m v2 color hillshade",
       "displayCredit": "USGS · NASA/MESSENGER",
-      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
         "label": "MESSENGER MDIS global maps",
@@ -972,8 +973,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "a1d403cd1886ca547850cc7d8aedfebf4dedeb8148b80196fb9b8ecf33940669",
-      "bytes": 15468,
+      "sha256": "b52be920085f18d3e55ebb13ea1fe0754461ec7627816551b15dd64b2cdaed40",
+      "bytes": 15802,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1679,8 +1680,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9085,
-          "sha256": "69bd31922242f96cbd2cd48b6c95a6205d45f9df03a2c546df8d0a8801f1de14",
+          "bytes": 9105,
+          "sha256": "87fecd6961b6ccb4246673746c3c20815ac394844bf156c248e342e712c2fd5b",
           "verification": "bytes-verified"
         }
       ],
@@ -1863,7 +1864,7 @@
   },
   "lastPreparation": {
     "objectId": "mercury",
-    "materialSha256": "2280ae446a4d0b2a9cc0698ef4e1f2c23cb6d4cc789f148a60652fe0b4afd36c",
+    "materialSha256": "0eb1a3041c9757ff49260938e90e9755df11bd9063d8d67443cd90faa6259945",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

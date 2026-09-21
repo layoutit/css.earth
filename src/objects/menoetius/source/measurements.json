@@ -24,7 +24,7 @@
     ],
     "referenceRadiusKm": 52.19000997884097,
     "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
-    "scale": "Buie2015 mean-ellipsoidal full axes117×108×90km; not the observed projected117.2×93km limb.",
+    "scale": "Buie 2015 mean-ellipsoidal full axes 117×108×90 km; not the observed projected 117.2×93 km limb.",
     "qualification": "Published occultation/lightcurve approximate model; no artificial local void or random albedo.",
     "semiAxesUncertaintyKm": null,
     "uncertaintyNote": "No formal independent three-axis uncertainties quoted in checked source passage; local limb deviations and model uncertainty must not be replaced by fabricated ±values."
@@ -37,7 +37,7 @@
     ],
     "assumptions": [
       "Use published model full axes, halved exactly.",
-      "Adopt2024 orbital pole for a synchronous illustrative spin axis; no claim of current longitude."
+      "Adopt 2024 orbital pole for a synchronous illustrative spin axis; no claim of current longitude."
     ],
     "qualification": "Published occultation/lightcurve approximate model; no artificial local void or random albedo."
   },

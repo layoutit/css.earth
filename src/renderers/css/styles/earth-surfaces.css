@@ -66,7 +66,9 @@
   background-image: var(--earth-poles-texture);
 }
 
+/* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
 :where(.planet-stage[data-object-id="earth"]) .earth-cutaway {
+  display: none;
   visibility: hidden;
 }
 
@@ -79,6 +81,7 @@
 }
 
 .planet-stage:where([data-object-id="earth"])[data-view="interior"] .earth-cutaway {
+  display: block;
   visibility: visible;
 }
 

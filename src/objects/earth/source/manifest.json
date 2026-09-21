@@ -1642,8 +1642,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16431,
-      "expectedSha256": "86896f31c1a5c7bf77c2c4a973bda2cb31890dd3ae0235cad40c70386f7480c3",
+      "expectedBytes": 16588,
+      "expectedSha256": "2bad651780b1ecf521a53c733a4165f0b464479c5154cb49425ddaae1a50e69b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1651,8 +1651,8 @@
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 6102,
-      "expectedSha256": "ba3fd4eaed733d98e0a4b2c02f71135eca35c9dc295f3c9fb30e9845ec5f271f"
+      "expectedBytes": 6108,
+      "expectedSha256": "c2c8ee97c9edc1242bbd64d0d1fcf58f5360a9f25997dda9e8886154f6d8f7b0"
     },
     {
       "path": "content/charts.json",

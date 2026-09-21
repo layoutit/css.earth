@@ -2,13 +2,13 @@
   "id": "nasa-venus-factsheet",
   "kind": "reference-page",
   "identityLevel": "work",
-  "title": "NASA Venus factsheet",
+  "title": "NASA NSSDCA Venus Fact Sheet",
   "identifiers": [],
   "links": [
     {
       "role": "landing",
-      "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
-      "label": "NASA Venus factsheet"
+      "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
+      "label": "NASA NSSDCA Venus Fact Sheet"
     }
   ],
   "evidence": [
@@ -20,5 +20,12 @@
     }
   ],
   "relations": [],
-  "statements": []
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "David R. Williams, NSSDCA, NASA Goddard Space Flight Center",
+      "scope": "citation",
+      "evidence": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html"
+    }
+  ]
 }

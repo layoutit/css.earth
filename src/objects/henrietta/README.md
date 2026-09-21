@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-ATLAS2015–2018 photometry gives448 orange and151 cyan measurements; convex and ellipsoid period searches agree. The selected release supplies one pole and an uncalibrated convex shape. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+ATLAS2015–2018 photometry gives 448 orange and 151 cyan measurements; convex and ellipsoid period searches agree. The selected release supplies one pole and an uncalibrated convex shape. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

@@ -14,7 +14,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1823",
     "reference": "Hanuš et al. (2017), A&A 601, A114",
     "sourceLabel": "Hanuš et al. (2017), A&A 601, A114",
-    "limitations": "Hanuš2017 ADAM uses13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter106.926418 km, matching its rounded archive107±3 km. The paper reports an ensemble106±3 km and pole(316,+58), within the stated model uncertainties. Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.",
+    "limitations": "Hanuš 2017 ADAM uses 13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter 106.926418 km, matching its rounded archive 107±3 km. The paper reports an ensemble 106±3 km and pole(316,+58), within the stated model uncertainties. Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly 107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.",
     "visibleDescription": "Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 1.0006881550930256,
     "metersPerSourceUnit": 1000.6881550930256,
@@ -32,7 +32,7 @@
     318,
     61
   ],
-  "modelLimitations": "Hanuš2017 ADAM uses13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter106.926418 km, matching its rounded archive107±3 km. The paper reports an ensemble106±3 km and pole(316,+58), within the stated model uncertainties. Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.",
+  "modelLimitations": "Hanuš 2017 ADAM uses 13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter 106.926418 km, matching its rounded archive 107±3 km. The paper reports an ensemble 106±3 km and pole(316,+58), within the stated model uncertainties. Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly 107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4019/shape.txt",
     "vertices": 402,

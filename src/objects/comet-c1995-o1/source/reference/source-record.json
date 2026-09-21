@@ -30,7 +30,7 @@
     }
   ],
   "derivedFacts": {
-    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date",
+    "perihelion": "Perihelion distance of the 1997 passage: JPL Horizons osculating QR at 1997-04-01 TDB (solution JPL 226), reference/horizons-elements-1997.txt",
     "radius": "Published effective radius, Szabó et al. (2012), ApJ 761, 8"
   },
   "assumptions": [

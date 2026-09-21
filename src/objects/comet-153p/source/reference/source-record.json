@@ -30,7 +30,7 @@
     }
   ],
   "derivedFacts": {
-    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date",
+    "perihelion": "Perihelion distance q of the 2002 apparition: JPL SBDB orbit.elements.q (epoch JD2452402.5 = 2002-05-08)",
     "radius": "Assumed display radius; not a measurement"
   },
   "assumptions": [

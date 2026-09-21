@@ -21,6 +21,11 @@
             "catalogueId": "doi-10-1038-nature10550",
             "role": "method",
             "evidence": "src/planets/eris/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+          },
+          {
+            "catalogueId": "doi-10-3847-psj-acdd5f",
+            "role": "material",
+            "evidence": "src/objects/eris/source/measurements.json#/rotationPeriodDays"
           }
         ]
       }
@@ -328,8 +333,8 @@
     {
       "id": "eris-object-content",
       "path": "content/object.json",
-      "expectedBytes": 5855,
-      "expectedSha256": "b3c9673f4b8054affebed85e42ea78b1478b9be6fbc3eadf9026de3e627f31c3",
+      "expectedBytes": 5843,
+      "expectedSha256": "e8312c8ab70c00ed1b35d58d43a7889b21784c2828057e3d4c65f5028e56916d",
       "origin": "Repository-authored Eris object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

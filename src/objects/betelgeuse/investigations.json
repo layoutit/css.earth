@@ -57,35 +57,15 @@
     },
     {
       "id": "other-epochs",
-      "subject": "December 2018 and December 2020 MATISSE epochs",
+      "subject": "December 2018 and December 2020 MATISSE epochs; PIONIER 2014, GRAVITY 2019-2023, AMBER 2006-2018, ALMA 2015 and 2023",
       "status": "included",
-      "finding": "The December 2018 and December 2020 MATISSE epochs are cast as lenses matisse-2018-12 and matisse-2020-12 from the 111 and 48 calibrated OiDB files of Drevon et al.'s collection, with the February 2020 recipe; neither passes the reconstruction check (see the README), so their patches are labelled unconfirmed.",
-      "evidence": [
-        "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
-        "https://oidb.jmmc.fr/",
-        "https://arxiv.org/abs/2401.12404"
-      ],
-      "checked": [
-        {
-          "date": "2026-09-16",
-          "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
-        },
-        {
-          "date": "2026-09-21",
-          "commit": "cf0e44e4cf7c565d8144e290a7737ac3761f4cfa"
-        }
-      ]
-    },
-    {
-      "id": "other-instruments",
-      "subject": "PIONIER 2014, GRAVITY 2019-2023, AMBER 2006-2018, ALMA 2015 and 2023",
-      "status": "unresolved",
-      "finding": "The ESO archive also holds raw PIONIER, GRAVITY and AMBER frames and ALMA six public projects, which each need their pipeline run first.",
-      "revisitWhen": "A raw-pipeline epoch that passes the reconstruction check.",
+      "finding": "The December 2018 and December 2020 MATISSE epochs are cast as lenses matisse-2018-12 and matisse-2020-12 from the 111 and 48 calibrated OiDB files of Drevon et al.'s collection, with the February 2020 recipe; neither passes the reconstruction check (see the README), so their patches are labelled unconfirmed. The ESO archive also holds raw PIONIER, GRAVITY and AMBER frames and ALMA six public projects, which each need their pipeline run first. Revisit when: a raw-pipeline epoch that passes the reconstruction check.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
         "https://archive.eso.org/",
-        "https://almascience.org/"
+        "https://almascience.org/",
+        "https://oidb.jmmc.fr/",
+        "https://arxiv.org/abs/2401.12404"
       ],
       "checked": [
         {

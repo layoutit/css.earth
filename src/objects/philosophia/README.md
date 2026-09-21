@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Marciniak2018 section5.2 and Table7 select the convex pole(95,+19) as the best thermal fit (chi-square1.2). Table7 reports101±5 km equivalent-volume diameter, with errors spanning the full3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities.
+Marciniak 2018 section 5.2 and Table 7 select the convex pole(95,+19) as the best thermal fit (chi-square 1.2). Table 7 reports 101±5 km equivalent-volume diameter, with errors spanning the full 3-sigma range. This primary publication scale supersedes DAMIT’s107±5 km field. The paper also presents SAGE nonconvex alternatives, but the selected convex solution gives the best thermal fit; no multichord occultation supports those concavities.
 
 Shape and thermal fit are explicitly the least constrained of the five studied targets; neither is a resolved terrain map.
 

@@ -25,3 +25,5 @@ No dated test report exists for this body yet.
 The body is drawn as a sphere with the shared grid that marks unmapped terrain. Its true shape, pole, rotation period, colour and albedo pattern are not published, and none is shown. The pole and prime meridian are display conventions.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+The [investigation ledger](investigations.json) records the source survey and alternative models.
