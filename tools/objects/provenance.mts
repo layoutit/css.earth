@@ -212,11 +212,8 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     sources: [...sources.values()].filter(source => usedSources.has(source.id)), products,
     coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved },
   }, id);
-  const previousRaw = await optionalJson(resolve(outputDirectory, 'provenance.json'));
-  const previous = previousRaw?.schema === OBJECT_PROVENANCE_SCHEMA ? validateObjectProvenance(previousRaw, id) : undefined;
-  const lastPreparation = basis === 'prepared' ? recordPreparationEvidence(document)
-    : previous?.lastPreparation ?? (previous?.basis === 'prepared' ? recordPreparationEvidence(previous) : undefined);
-  if (lastPreparation) document = validateObjectProvenance({ ...document, lastPreparation }, id);
+  // The record is a function of the package's authored files alone; it never reads an earlier copy of itself.
+  if (basis === 'prepared') document = validateObjectProvenance({ ...document, lastPreparation: recordPreparationEvidence(document) }, id);
   if (write) {
     await mkdir(outputDirectory, { recursive: true });
     await writeFile(resolve(outputDirectory, 'provenance.json'), JSON.stringify(document, null, 2) + '\n');

@@ -19,8 +19,11 @@ import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import { explorationCompilerClosure } from './prepare-facilities.mts';
 import { refreshSourceRecord } from './source-authoring-templates.mts';
+import { objectProvenanceOutputs } from './prepare-provenance.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
+// A temporary root holds only the catalogue's own inputs, so each body's record is built once from the real packages.
+const { documents: provenance } = await objectProvenanceOutputs();
 const exploration = parsePreparedExploration(await read('site/prepared-facilities.json'),prepared.sources);
 // Preview originals are bounded pinned image inputs; the source graph never needs a baked volume bank.
 const volumePreviewInputs = async () => {
@@ -234,17 +237,17 @@ test('changed fact evidence and stale displayed facts leave both published catal
   const evidencePath = join(root, 'src/objects/abundantia/source/reference/calibration.json');
   const evidence = await readFile(evidencePath, 'utf8');
   await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
-  await assert.rejects(prepareFacilities({ root }), /fact evidence pin differs/);
+  await assert.rejects(prepareFacilities({ root, provenance }), /fact evidence pin differs/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(evidencePath, evidence);
   const contentPath = join(root, 'src/objects/abundantia/prepared/content.json');
   const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
   sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
   await writeFile(contentPath, JSON.stringify(content));
-  await assert.rejects(prepareFacilities({ root }), /Stale factsheet for abundantia/);
+  await assert.rejects(prepareFacilities({ root, provenance }), /Stale factsheet for abundantia/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(contentPath, originalContent);
-  const rebuilt = await prepareFacilities({ root });
+  const rebuilt = await prepareFacilities({ root, provenance });
   const focusDatasets = rebuilt.preparedSources.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus='));
   assert.ok(focusDatasets.length > 0, 'The fixture must exercise delivered volume datasets.');
   assert.deepEqual(focusDatasets, prepared.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')),
@@ -289,16 +292,16 @@ test('missing cited evidence restores without body assets and leaves catalogues 
     assert.equal(url, 'https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl');
     return new Response(bytes);
   };
-  await assert.rejects(prepareFacilities({ root,
+  await assert.rejects(prepareFacilities({ root, provenance,
     sourceTransport: { fetch: async () => new Response(Buffer.alloc(bytes.length, 0)) },
   }), /Source hash drifted/);
   await assert.rejects(readFile(join(root, paper)), { code: 'ENOENT' });
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
-  const result = await prepareFacilities({ root, sourceTransport: { fetch: fetchPaper } });
+  const result = await prepareFacilities({ root, provenance, sourceTransport: { fetch: fetchPaper } });
   assert.deepEqual(requests, ['https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl']);
   assert.deepEqual(await readFile(join(root, paper)), bytes);
   assert.equal(result.preparedSources.closure[paper], createHash('sha256').update(bytes).digest('hex'));
-  const offline = await prepareFacilities({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
+  const offline = await prepareFacilities({ root, provenance, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
   assert.deepEqual(offline.outputs, result.outputs, 'warm and cold preparation have identical closures');
 });
 

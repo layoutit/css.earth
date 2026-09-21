@@ -94,8 +94,8 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   await writePreparedText(descriptorPath, `${JSON.stringify({ ...originalDescriptor,
     properties: { ...originalProperties, ...properties,
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
-  // Only runtime.json/scene.json move to R2; every other prepared/* file (provenance.json, content.json,
-  // page.json, …) stays a tracked contract file, not part of this inventory.
+  // Only runtime.json/scene.json move to R2. provenance.json is generated on every checkout; every other
+  // prepared/* file (content.json, page.json, …) stays a tracked contract file. None are part of this inventory.
   const inventoried: string[] = [];
   for (const filename of ['runtime.json', 'scene.json']) {
     if (await access(resolve(preparedDirectory, filename)).then(() => true, () => false)) inventoried.push(filename);
