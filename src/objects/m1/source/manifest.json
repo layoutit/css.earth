@@ -457,8 +457,8 @@
     {
       "id": "document-2",
       "path": "src/objects/m1/source/nebula.json",
-      "expectedSha256": "9fa96e068213b0bdd6ae11403338fd9a6333b9c6910a3ab95a04ceb192034d3c",
-      "expectedBytes": 2137,
+      "expectedSha256": "928e6efda6f112b5c0fcc3f2933a3dae561fb773c9cd54e388eea13c06d27c75",
+      "expectedBytes": 2357,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
