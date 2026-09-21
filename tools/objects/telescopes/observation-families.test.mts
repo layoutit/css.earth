@@ -11,7 +11,7 @@ test('normalized archive kinds retain their mapping owner and vocabulary', () =>
 });
 
 test('the COR1 archive profile establishes F16 only from its physical axes and units', () => {
-  const identity = { NAXIS: 3, CTYPE1: 'CRLN', CTYPE2: 'CRLT', CTYPE3: 'HECR', CUNIT1: 'deg', CUNIT2: 'deg', CUNIT3: 'solRad', BUNIT: 'cm^-3', INSTRUME: 'SECCHI' };
+  const identity = { NAXIS: 3, NAXIS1: 361, NAXIS2: 181, NAXIS3: 51, CTYPE1: 'CRLN', CRPIX1: 1, CRVAL1: 0, CDELT1: 1, CUNIT1: 'deg', CTYPE2: 'CRLT', CRPIX2: 91, CRVAL2: 0, CDELT2: 1, CUNIT2: 'deg', CTYPE3: 'HECR', CRPIX3: 1, CRVAL3: 1.5, CDELT3: 0.05, CUNIT3: 'solRad', BUNIT: 'cm^-3', INSTRUME: 'SECCHI' };
   const evidence = archiveProfileFamilyEvidence('stereo-secchi-cor1-electron-density@2025-05-06', { kind: 'cube', decoder: 'fits-image', identity, owner });
   assert.deepEqual(evidence.families, ['F16']);
   assert.equal(evidence.status, 'source');

@@ -11,7 +11,7 @@ export interface ObservedStarCataloguePin { path: string; sha256: string }
 export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipePath: string; cataloguePath: string;
   imageToFrame: Record<string, Matrix>; evidence: { sensitivity: number; weights: number[] }; controls: CompilerControls }
 export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: string; label: string; observationRecipe: string;
-  observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string; sampledRecipe?: string;
+  observationCatalogue: string; structureRecipe: string; structureCatalogue: string; jointRecipe?: string; depthRecipe?: string; sampledRecipe?: string; photometricPriorRecipe?: string;
   defaultSourceId: string; maximumStars: number; interpretation: string;
   defaultControls?: CompilerControls; sourceWeights?: Record<string, number>; starCatalogue?: CompilerStarCatalogue; observedStars?: ObservedStarCataloguePin; targetControls?: CompilerTargetControls; emissionWindow?: CompilerEmissionWindow }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
@@ -33,11 +33,14 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
       !jointPath(v.observationRecipe) || !jointPath(v.observationCatalogue) || !jointPath(v.structureRecipe) || !jointPath(v.structureCatalogue) ||
       (v.jointRecipe !== undefined && !jointPath(v.jointRecipe)) || (v.depthRecipe !== undefined && (!jointPath(v.depthRecipe) || !v.depthRecipe.startsWith('labs/nebula/models/'))) ||
       (v.sampledRecipe !== undefined && (!jointPath(v.sampledRecipe) || !v.sampledRecipe.startsWith('labs/nebula/models/'))) ||
-      [v.jointRecipe, v.depthRecipe, v.sampledRecipe].filter(value => value !== undefined).length > 1 || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
+      (v.photometricPriorRecipe !== undefined && (!jointPath(v.photometricPriorRecipe) || !v.photometricPriorRecipe.startsWith('labs/nebula/models/'))) ||
+      [v.jointRecipe, v.depthRecipe, v.sampledRecipe, v.photometricPriorRecipe].filter(value => value !== undefined).length > 1 || typeof v.defaultSourceId !== 'string' || !range(v.maximumStars, 0, 2000) || !Number.isInteger(v.maximumStars) || typeof v.interpretation !== 'string') throw new TypeError('Invalid compiler recipe.');
   const targetControls = v.targetControls === undefined ? undefined : readCompilerTargetControls(v.targetControls);
   const emissionWindow = v.emissionWindow === undefined ? undefined : readCompilerEmissionWindow(v.emissionWindow);
   if (emissionWindow && v.sampledRecipe !== undefined) throw new TypeError('Image emission windows require the emission-field route.');
   const controls = v.defaultControls === undefined ? undefined : readCompilerControls(v.defaultControls);
+  if (v.photometricPriorRecipe && controls && controls.depth !== 1)
+    throw new TypeError('Photometric prior controls require depth=1.');
   const starCatalogue = v.starCatalogue === undefined ? undefined : readCompilerStarCatalogue(v.starCatalogue);
   const observedStars = v.observedStars === undefined ? undefined : readObservedStarCataloguePin(v.observedStars);
   if (observedStars && (starCatalogue || v.sampledRecipe)) throw new TypeError('Choose one supported stellar catalogue route.');
@@ -51,7 +54,8 @@ export function readCompilerRecipe(v: unknown): CompilerRecipe {
     sourceWeights = Object.fromEntries(Object.entries(v.sourceWeights).map(([id, weight]) => [id, Number(weight)]));
   }
   return { schema: v.schema, id: v.id, label: v.label, observationRecipe: v.observationRecipe, observationCatalogue: v.observationCatalogue,
-    structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), ...(v.sampledRecipe ? { sampledRecipe: v.sampledRecipe } : {}), defaultSourceId: v.defaultSourceId,
+    structureRecipe: v.structureRecipe, structureCatalogue: v.structureCatalogue, jointRecipe: v.jointRecipe, ...(v.depthRecipe ? { depthRecipe: v.depthRecipe } : {}), ...(v.sampledRecipe ? { sampledRecipe: v.sampledRecipe } : {}),
+    ...(v.photometricPriorRecipe ? { photometricPriorRecipe: v.photometricPriorRecipe } : {}), defaultSourceId: v.defaultSourceId,
     maximumStars: v.maximumStars, interpretation: v.interpretation,
     ...(controls ? { defaultControls: controls } : {}), ...(sourceWeights ? { sourceWeights } : {}), ...(starCatalogue ? { starCatalogue } : {}), ...(observedStars ? { observedStars } : {}), ...(targetControls ? { targetControls } : {}), ...(emissionWindow ? { emissionWindow } : {}) };
 }

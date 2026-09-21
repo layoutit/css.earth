@@ -1,9 +1,10 @@
-import { prepareContextProvenance } from './prepare-context-provenance.mts';
+import { sourceTestContexts as prepareContextProvenance, sourceTestVolumes as prepareVolumeProvenance,
+  prepareTestFacilities as prepareFacilities, sourceTestGeneratedPaths, sourceCheckMode } from './source-test-inputs.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join, relative } from 'node:path';
+import { join } from 'node:path';
 import { execFile } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { promisify } from 'node:util';
@@ -16,14 +17,14 @@ import { readSourceCatalog, checkSourceCatalog } from './read-source-catalogue.m
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
-import { prepareFacilities, explorationCompilerClosure } from './prepare-facilities.mts';
+import { explorationCompilerClosure } from './prepare-facilities.mts';
 import { refreshSourceRecord } from './source-authoring-templates.mts';
-import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
 const exploration = parsePreparedExploration(await read('site/prepared-facilities.json'),prepared.sources);
 // Preview originals are bounded pinned image inputs; the source graph never needs a baked volume bank.
 const volumePreviewInputs = async () => {
+  if (sourceCheckMode() === 'published') return [];
   const ids = new Set(prepared.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')).map(dataset => dataset.objectId));
   const paths = new Set<string>();
   for (const id of ids) {
@@ -170,7 +171,7 @@ test('refreshing document pins retains bindings and native source metadata', asy
   assert.equal(native.expectedBytes,10);
   assert.equal(refreshSourceRecord([],{path:'new.json',expectedBytes:1}).sourceBinding,undefined,'refresh must not invent a binding');
 });
-test('both catalogues prepare deterministically from the same input closure before publication', async () => {
+test(`both catalogues prepare deterministically from ${sourceCheckMode()} package inputs before publication`, async () => {
   const result=await prepareFacilities({publish:false});
   const facts = prepared.usage.edges.filter(edge => edge.consumerKind === 'object-fact');
   assert.equal(facts.length, result.factsheets.facts, 'every published fact is cited');
@@ -200,9 +201,9 @@ test('changed fact evidence and stale displayed facts leave both published catal
   const outputs = ['site/prepared-sources.json', 'site/prepared-facilities.json'];
   // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
-  const generated = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json', ...[...await prepareVolumeProvenance(), ...await prepareContextProvenance()].flatMap(volume => volume.outputs.map(output => relative(process.cwd(), output.path)))]);
+  const generated = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json', ...await sourceTestGeneratedPaths()]);
   assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !generated.has(path)), [],
-    'Sources may regenerate declared metadata outputs, but must not depend on ignored downloads or baked assets');
+    'Sources use tracked records plus declared generated or inventoried metadata, never undeclared downloads');
   for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {
     const target = join(root, path);
     await mkdir(join(target, '..'), { recursive: true });

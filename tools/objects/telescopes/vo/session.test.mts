@@ -88,7 +88,7 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     await writeFile(localLinksFile, originalLinks.replaceAll('https://dataportal.eso.org/dataPortal/soda/sync', endpoint).replace('ucd="meta.id;meta.dataset"', 'ucd="meta.ref.url;meta.curation"'));
     const localLinks = (await astroquery({ operation: 'vo-parse', file: localLinksFile, url: endpoint, byteLimit: 1e6 })).vo!;
     const plans = new Map<string, Awaited<ReturnType<typeof planAccess>>>();
-    const planFor = async (request: ReturnType<typeof sessionRequest>) => {
+    const planFor = async (request: Parameters<typeof planAccess>[3]) => {
       const key = JSON.stringify(request), existing = plans.get(key);
       if (existing) return existing;
       const plan = await planAccess(root, observation, { ...snapshot, request: jsonValue(request) }, request, async () => localLinks);
@@ -102,7 +102,9 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     const api: SessionServices = { load: async () => load(root, discoveredRequest), loadRequest: load, qualify: async (_root, qualification) => {
       const configuration = qualification.configuration;
       if (configuration.kind !== 'archive-acquisition') throw new Error('Expected an archive subset qualification.');
-      const spec = (await planFor(configuration.request)).products.find(product => product.key === configuration.key);
+      const request = configuration.request;
+      assert.ok(request.wavelengthMicrometres, 'This scientific subset fixture retains its requested wavelengths.');
+      const spec = (await planFor({ ...request, wavelengthMicrometres: request.wavelengthMicrometres })).products.find(product => product.key === configuration.key);
       if (!spec) throw new Error('Saved subset acquisition was not rediscovered.');
       return qualifyVoProduct(root, spec);
     } };

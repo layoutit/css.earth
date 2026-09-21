@@ -10,6 +10,7 @@ import { readCloudAppearance, saveCloudAppearance } from './cloud-appearance-sto
 import { CloudAppearanceControls } from './cloud-appearance-controls';
 import { LensLevelsPanel, LevelsIcon, LEVELS_TOOLTIP } from './lens-levels-panel';
 import { differenceTool } from './difference-map';
+import { LensRadialPanel, RadialIcon, RADIAL_TOOLTIP } from './lens-radial-panel';
 import type { DifferenceOverlayState } from '../legacy-viewer/difference-plane';
 import { saveLensSettings } from './lens-settings-export.ts';
 import { ImageCredit } from '../workspace/image-credit';
@@ -276,10 +277,12 @@ export function ReconstructionControls({ context, viewerBusy: busy, onSelect, ca
       {view.appearanceDirty && !view.running && !view.error && !view.processDisabled ? 'Changes ready · Preview to apply.' : view.text}</p>
     <progress id="reconstruction-progress" aria-label="Reconstruction progress" hidden={!view.running}
       max={total && Number.isFinite(current) ? total : undefined} value={total && Number.isFinite(current) ? current : undefined} />
-    {/* Levels and the difference map need a source image: no tools for the unpainted density or an unbaked lens. */}
+    {/* Levels, the difference map and the radial profile need a source image: no tools for the unpainted density or an unbaked lens. */}
     <WorkspaceTools tools={view.lensResultId ? [{ id: 'levels', label: 'Levels', tooltip: LEVELS_TOOLTIP, icon: <LevelsIcon />,
       panel: <LensLevelsPanel key={view.lensResultId} resultId={view.lensResultId} /> },
-      ...differenceTool(view.lensResultId, difference, onDifference)] : []} />
+      ...differenceTool(view.lensResultId, difference, onDifference),
+      { id: 'radial', label: 'Radial profile', tooltip: RADIAL_TOOLTIP, icon: <RadialIcon />,
+        panel: <LensRadialPanel key={view.lensResultId} resultId={view.lensResultId} /> }] : []} />
     <button id="save-lens-settings" type="button" className="text-button" disabled={view.selectDisabled || view.running}
       title="Save this browser’s lens, filter, brightness and star settings locally for the app handoff. Includes stored settings for all images; does not bake."
       onClick={() => actions.current.export?.()}>{exportLabel}</button>

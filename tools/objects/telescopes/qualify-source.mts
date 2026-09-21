@@ -7,7 +7,7 @@ import { sourceHeaders } from './source-transfer.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import { requireArray, requireRecord } from '../../source-values.mts';
 import { mkdir, readFile, writeFile, rename, rm, open, realpath } from 'node:fs/promises';
-import { dirname, resolve, basename } from 'node:path';
+import { dirname, resolve, basename, relative } from 'node:path';
 import { Readable } from 'node:stream';
 import { withIdleTimeout, sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../source-mirror.mts';
 import { readFitsHeader, readFitsHdu, readFitsHdus, fitsImageAccessor } from '../../fits.mts';
@@ -17,6 +17,9 @@ import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
 import { inside, assertPinnedLabel, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
+import { STEREO_COR1_F16_PROFILE } from './observation-families.mts';
+import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16-spherical-grid.mts';
+import { member } from './families/common.mts';
 
 export async function acquireSourceFile(root: string, file: SourceFile): Promise<void> {
   const path = inside(root, file.path), existing = await pinFile(path).catch(() => null);
@@ -118,7 +121,14 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
     facts: { target: product.target, verified: true, kind: product.kind, result: 'telescope-product', ...metadata },
     meaning: product.meaning, limitations: product.limitations, acceptance: 'Input pins and header identity agree; complete supported arrays decoded. Native metadata are validated only for supported product conventions. External calibration accuracy and scientific suitability are not independently established; measurement descriptions remain source declarations.' }, null, 2)}\n`);
   const science = product.files.find(file => file.role === 'science')!;
-  await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }, ...(metadata.calibrationDependencies??[]).flatMap(d=>d.file?[{path:d.file,file:resolve(root,d.file)}]:[])],
+  const descriptorOutput: { path: string; file: string }[] = [];
+  if (product.familyEvidence?.profileId === STEREO_COR1_F16_PROFILE) {
+    const descriptorPath = `${dirname(receipt)}/descriptor.json`, context: SphericalGridContext = { profileId: STEREO_COR1_F16_PROFILE, frame: 'sun-carrington-cr2053', frameBasis: 'Sun-centred Cartesian axes derived from Carrington longitude, Carrington latitude and heliocentric radius for CR2053 P1.', sourceUrl: science.origin, citation: product.citation, license: 'NASA scientific data; the source manifest retains the archive credit, citation request and redistribution statement.', quantity: 'electron number density', unit: product.units, hdu: 0 };
+    const sciencePath = inside(root, science.path), bytes = await readFile(sciencePath), inspection = await inspectPhysicalSphericalGrid({ path: sciencePath, bytes: science.bytes, sha256: science.sha256 }, context);
+    const value = describePhysicalSphericalGrid({ id: product.id, target: product.target, member: member('electron-density-fits', relative(dirname(resolve(root, descriptorPath)), sciencePath), 'science', bytes, 'application/fits'), context, inspection, producingRecord: receipt });
+    await writeFile(resolve(root, descriptorPath), `${JSON.stringify(value, null, 2)}\n`); descriptorOutput.push({ path: descriptorPath, file: resolve(root, descriptorPath) });
+  }
+  await writeProductRecord(resolve(root, receipt), run, [...product.files.map(file => ({ path: file.path, file: inside(root, file.path) })), { path: report, file: resolve(root, report) }, ...descriptorOutput, ...(metadata.calibrationDependencies??[]).flatMap(d=>d.file?[{path:d.file,file:resolve(root,d.file)}]:[])],
     [{ kind: 'archive-origin', receipt, product: science.path, establishes: 'Manifest-pinned archive bytes, matching header identity and complete supported numeric structure decoding. No local recalibration, archive comparison or surface registration is claimed.' }]);
   return { product: science.path, receipt, reused: false };
 }

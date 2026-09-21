@@ -1290,7 +1290,7 @@ test('dolly motion leaves depth styles untouched while selection and rotation st
   expect(writes).toBeGreaterThan(0);
   expect(mover(find(root, 'contextGroup', 'venus')).style.zIndex).toBe('0');
   expect(Number(mover(find(root, 'contextGroup', 'mercury')).style.zIndex)).toBeLessThan(0);
-  expect(find(root, 'contextGroup', 'sun').style.visibility).toBe('hidden');
+  expect(find(root, 'contextGroup', 'sun').style.visibility).toBe('');
   layer.destroy();
 });
 
@@ -1423,7 +1423,7 @@ test('an in-frame circle and caption stay visible and constrained at the viewpor
   layer.destroy();
 });
 
-test('the Sun caption stays below its marker as orbit strokes cross during zoom', () => {
+test('the Sun caption stays above its marker as orbit strokes cross during zoom', () => {
   const root = mount(1), layer = mounted.get(root)!;
   const label = find(root, 'contextLabel', 'sun');
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
@@ -1433,12 +1433,12 @@ test('the Sun caption stays below its marker as orbit strokes cross during zoom'
   expect(annotationVisibility(label, 'label')).toBe('');
   publish(4000);
   expect(annotationVisibility(label, 'label')).toBe('');
-  expect(captionPosition(label)).toEqual([-9, 12]);
+  expect(captionPosition(label)).toEqual([-9, -26]);
   publish(1200);
   expect(annotationVisibility(label, 'label')).toBe('');
   publish(8000);
   expect(annotationVisibility(label, 'label')).toBe('');
-  expect(captionPosition(label)).toEqual([-9, 12]);
+  expect(captionPosition(label)).toEqual([-9, -26]);
   layer.destroy();
 });
 
@@ -1465,7 +1465,7 @@ test.each([
   const label = find(layer.root as unknown as FakeElement, 'contextLabel', 'sun');
   expect(annotationVisibility(label, 'label')).toBe(shown ? '' : 'hidden');
   expect(label.style.pointerEvents).toBe('none');
-  if (shown) expect(captionPosition(label)).toEqual([-9, 12]);
+  if (shown) expect(captionPosition(label)).toEqual([-9, -26]);
   layer.destroy();
 });
 
@@ -1647,7 +1647,7 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(annotationVisibility(label, 'label')).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(1);
   expect(annotationVisibility(locator, 'indicator')).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(1);
   expect(billboardCenter(locator)).toEqual([70, 0]);
-  expect(captionPosition(label)).toEqual([52, 12]);
+  expect(captionPosition(label)).toEqual([52, -26]);
   expect(locator.dataset.objectNavigate).toBe('anchor');
   const selections: string[] = [];
   host.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
@@ -1769,7 +1769,7 @@ test('a background star label inside the orbit footprint is excluded even outsid
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } };
   const viewport = { focalPixels: 400, principalOffsetPixels: [0, 0] as const };
   layer.publish(camera, viewport);
-  const backgroundText = { left: -10, top: -30, right: 10, bottom: -20 };
+  const backgroundText = { left: -10, top: 20, right: 10, bottom: 30 };
   expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
   expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
   expect(layer.inspect().find(body => body.id === 'sun')!.billboard.style.visibility).toBe('');

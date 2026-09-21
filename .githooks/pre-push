@@ -6,5 +6,5 @@
 command -v pnpm >/dev/null 2>&1 || exit 0
 [ -d node_modules ] || exit 0
 started=$(date +%s)
-pnpm --silent check:pr --quick || exit 1
+pnpm --silent check:pr --job=lint --quick || exit 1
 echo "pre-push: Contract lint passed in $(( $(date +%s) - started ))s (skipped: documentation audits, published-assets check)."

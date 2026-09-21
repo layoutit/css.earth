@@ -1,3 +1,4 @@
+import type { RetainedPhotometricEnvelope } from '../fields/photometric-emission.ts';
 import type { JointParameters } from './joint-parameters.ts';
 import type { CompilerControls } from './compiler-controls.ts';
 import type { EmissionWindow } from '../fields/emission-window.ts';
@@ -38,6 +39,7 @@ export interface EmissionFieldModel {
   controls: CompilerControls; components: EmissionComponent[]; bounds: EmissionBounds;
   skyBounds: SkyBounds; scaffold: JointParameters | null;
   emissionWindow?: EmissionWindow;
+  photometricEnvelope?: RetainedPhotometricEnvelope;
   depthConstraints?: {
     recipeId: string; evidenceSha256: string; paperGuidedComponents: number; authoredComponents: number;
     assignments: { componentId: string; featureId: string; methodId: string; evidenceIds: string[]; support: string }[];

@@ -1,10 +1,12 @@
 # Geometric states at the prepared scene epoch
 
-These seven unedited NASA/JPL Horizons API responses supply six parent-centered
-moon states and the Earth-center offset from the Earth-Moon barycentre. The
-source snapshot corrects known phase errors in the compact mean-element fits
-for Phobos, Mimas, Janus, Epimetheus, Helene and Triton. Earth previously used
-the barycentre itself as its center in solar preparation.
+These nineteen unedited NASA/JPL Horizons API responses supply Sun-centered
+states for the eight planets and Pluto, and parent-centered states for the Moon,
+Io, Titan, Charon, Phobos, Mimas, Janus, Epimetheus, Helene and Triton. They replace
+compact-model offsets at the fixed scene date, including the roughly 537,000 km
+Pluto discrepancy. Earth is the Earth center, not the Earth-Moon barycentre.
+Other moons retain their existing relative models but inherit the corrected
+parent origin.
 
 The manifest binds the request URL, target and center NAIF IDs, reference frame,
 units, time convention, retrieval date and SHA-256 of every raw response. The
@@ -26,11 +28,11 @@ current rotational attitude or validate surface image registration. Daphnis is
 not supplied: Horizons' available solution ends in January 2018; its displayed
 2026 position remains an explicitly qualified extrapolation of the older fit.
 
-Normal preparation is offline. To deliberately refresh the same seven requests,
-run `node packages/astronomy/tools/acquire-scene-ephemeris.mjs`, review the changed
+Normal preparation is offline. To deliberately refresh the same nineteen requests,
+run `node packages/astronomy/tools/acquire-scene-ephemeris.mts`, review the changed
 raw responses and manifest, then run `pnpm prepare:solar-geometry` and regenerate
 the affected prepared world frames and world context with
-`node tools/refresh-scene-ephemeris.mjs`. This also updates the retained surface
+`node tools/refresh-scene-ephemeris.mts`. This also updates the retained surface
 carrier and sky/Sun registration using the same numeric preparation owner;
 surface geometry and image assets are reused unchanged. Changing the scene epoch
 requires a new source snapshot and review of the UTC offset, not extrapolation

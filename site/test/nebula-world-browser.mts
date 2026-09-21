@@ -313,7 +313,8 @@ try {
     await apply(frontDistance);
     assert.equal(await controls.locator('[data-focus-stars]').count(), 0, 'The selected-object card does not duplicate the shell-level 3D-stars setting.');
     const stars = page.locator('.planet-three-d-stars-setting');
-    if (count && !await stars.isChecked()) await page.locator('label:has(.planet-three-d-stars-setting)').click();
+    const starToggle = page.locator('label:has(.planet-three-d-stars-setting)');
+    if (count && !await stars.isChecked()) await starToggle.click();
     const pointRoot = bank.locator('.prepared-catalogue-points');
     assert.equal(await pointRoot.evaluate(element => getComputedStyle(element).display), 'block');
     const checkStars = async (distance: number) => {

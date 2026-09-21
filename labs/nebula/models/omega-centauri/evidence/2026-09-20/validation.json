@@ -1,0 +1,429 @@
+{
+  "testedBase": "ef1e8b067f8f7d23d4bf13ea065f02f1dec7f4ad",
+  "testedState": "Working tree with the source hashes below, not the base commit alone. Publication only updates documentation/evidence and excludes the unfinished app object and its source-catalogue entries.",
+  "reuse": "Published authored implementations exactly match the reviewed/tested source checkpoint. Documentation, images and retaining reports do not change their behavior. No native or compact Omega application delivery is claimed.",
+  "sourcePins": [
+    {
+      "path": ".github/workflows/universe.yml",
+      "bytes": 36908,
+      "sha256": "6fab0b9cb34fecf7056fb2626abff3df0644c7400f476a69bac08662791402a6"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/candidates.json",
+      "bytes": 170,
+      "sha256": "be78206e67c31d36698c69818a383e922c48603cb157bbd31e8bcf824bb24240"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/compiler.json",
+      "bytes": 1361,
+      "sha256": "37c12a3be28a8dfbebb8931cd5f528673b63018c34aea8a4a07b23b26b6a1f3f"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/native-registration.json",
+      "bytes": 3895,
+      "sha256": "ef6e7213e2e95bb6f5ab7f1c9e080dce8ebc0e0d65f9897b239541feefab0b96"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/observation-structures.json",
+      "bytes": 397,
+      "sha256": "dc8dd69f0a7f1c15d8b6376e43147e3e2cd2c52ab802d7fc5651d23c28ae8c0e"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/observations.json",
+      "bytes": 3842,
+      "sha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/photometric-mge.json",
+      "bytes": 2508,
+      "sha256": "4e28dac4271eeafd77f77582cfd69105ca02677e6bbe6c88e583f412c7b27914"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/physical-evidence.json",
+      "bytes": 36711,
+      "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+    },
+    {
+      "path": "labs/nebula/models/omega-centauri/verify-registration.mts",
+      "bytes": 6801,
+      "sha256": "1c3d9fd284944dedf2751204a193a5c05dc1cda00813e60a9e0c2ed1f0ded18b"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-compiler-export.ts",
+      "bytes": 4190,
+      "sha256": "842bbf1dca3107a790a792cd5f4a93713f7a739a80e522f58d976953b3082c1c"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-compiler.test.ts",
+      "bytes": 5215,
+      "sha256": "e68540664c6863bb72a0516c04ca78e1171357cb85320102c87c051f0e171859"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/compact-sampled.test.ts",
+      "bytes": 3549,
+      "sha256": "06bdb5db40ad175e8beda298d845460ff3a6bced3fccbfb6999cc1b1852b24f9"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/application/delivery/nebula-frame.test.ts",
+      "bytes": 6412,
+      "sha256": "1cc99841a584798d1cc860037211e99f4b05069abeda2806ad371dacc891be0e"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/viewer/compiler-renderer.ts",
+      "bytes": 1664,
+      "sha256": "a257b20d6272c9c1f7f6a4168e99cf97a74d18c4419c1e96babe93a5e238c852"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/viewer/shape-cloud-camera.test.ts",
+      "bytes": 9398,
+      "sha256": "f4fa9ada51112c39df61620d78250bd88ffee3ec87db789b1c3dadbfa54ab1ff"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/viewer/shape-cloud-renderer.ts",
+      "bytes": 1825,
+      "sha256": "a3d3d6397dcae176019c26a6ac81831ff981979b6f1dd54bfaa479191d73eb70"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/adapters/viewer/volume-renderer.ts",
+      "bytes": 4657,
+      "sha256": "1ea073d746c166a2ba288e70f9ed28ca2659568b141a4d915d9f896d274d8bfb"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/cli/commands/compile-candidates.ts",
+      "bytes": 9831,
+      "sha256": "5a17c30851c48282fa868a63103fd886dfe8c6e094055ccf11661371299269cb"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/compiler/compiler-panel.tsx",
+      "bytes": 16860,
+      "sha256": "46503a20b65c49d6b8e95d2d87108bef82c1f8193b1a744a920b7e88d0c99233"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/compiler/compiler-published.test.ts",
+      "bytes": 15744,
+      "sha256": "935df76c344d0ac162b8ebc09ccb628e6080ff515eab253ee24b6849d1c6acfc"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/compiler/compiler-published.ts",
+      "bytes": 11622,
+      "sha256": "a393451facf57d091604e7f257580a4d5a546af5f13b6417509814676cfccebd"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/compiler/model.ts",
+      "bytes": 9060,
+      "sha256": "53985ebe1a3ebe6e22a1044329dfac4f5c21515550b9b3332bc3dc899eb0fa40"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/shape-cloud/shape-cloud-photo-pose.test.ts",
+      "bytes": 3652,
+      "sha256": "22fde1c27c62a73c0a4ff5ab386911feab7537c92a335233f4760e27dc707aeb"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/shape-cloud/shape-cloud-photo-pose.ts",
+      "bytes": 2041,
+      "sha256": "18c23ab70cb082b88b7c17465c8c780be775df1cc44b7bf17d265b98f6f3a5a3"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/features/shape-cloud/shape-cloud.css",
+      "bytes": 6350,
+      "sha256": "54407d03391fcbc71cc5f98a3f09f741e1e76ee3518e4f7d96eae401adc51321"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/resources/model-catalogue.test.ts",
+      "bytes": 3569,
+      "sha256": "1966cacc164166ce3375713508ca08d2806712c0b5ae7b76b465966d0fd4bfb8"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/bake.test.ts",
+      "bytes": 5795,
+      "sha256": "78e91cab5b70cbfcea8a4bc3f49593436b653dad898710cc1f96c94358571e4b"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/compile.ts",
+      "bytes": 21267,
+      "sha256": "7b484fcb57e5752c91325d70fb2cb55e31419f8846345fad2289d646050b9fb9"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/compiler-defaults.test.ts",
+      "bytes": 3888,
+      "sha256": "f356421a5db71883e9e18fa2cd233752a69d3ad26211d64b1b2ecd9ec39afe00"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/photometric-prior.test.ts",
+      "bytes": 7965,
+      "sha256": "bfc52b540126d441e19db4c0f12f9fddbf0300f45b83ff32bd55357d6b394db1"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/photometric-prior.ts",
+      "bytes": 7847,
+      "sha256": "1c8fd7c75a48670a009553f84c7cedd167cf3f51d8119b688006d8e62ec03f46"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/refresh-stars.ts",
+      "bytes": 8252,
+      "sha256": "640c95efa09083f1a51f63afd4b938deec2663742f7ded90b42c8128421e3345"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/compiler/retained-material-bank.test.ts",
+      "bytes": 8530,
+      "sha256": "16c48b1151fdf6f69774cc3279c69dbd5afba08481bc122c1ef8b8be020cb4a0"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/observations/fixtures/omega-centauri-native-stars.json",
+      "bytes": 9021,
+      "sha256": "5c5e98214276619d95853fdead319f8eaec87b8cc086c24a3838818eec693037"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/observations/registration.test.ts",
+      "bytes": 7994,
+      "sha256": "252e8fb86c41007106abe9f1e3184d95f5291d7ce6f1d3dd84a08b5e9df06598"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/sampled-prior/compile.ts",
+      "bytes": 22136,
+      "sha256": "86279d10312c87d3368742a372125ee1131dc1b5b7e2a11318ce8a2f1d784fd7"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/sampled-prior/component-banks.test.ts",
+      "bytes": 6568,
+      "sha256": "304b44a663e059ac0bdff63148b96abb6a0db22f53702ea1435cf2deb0671d6c"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/server/workflows/sampled-prior/layout.test.ts",
+      "bytes": 6904,
+      "sha256": "fc96c9bcb2a2427c6166fb38566b8a1b197f431a9f674b8c173f49d4308d37dc"
+    },
+    {
+      "path": "labs/nebula/packages/lab/src/state/subjects.json",
+      "bytes": 22793,
+      "sha256": "2d6f6c42cafe75881a19f57fcdf24780495d12e2e68f881b2d26c797e7659284"
+    },
+    {
+      "path": "labs/nebula/packages/reconstruction/package.json",
+      "bytes": 6818,
+      "sha256": "5fa80cc19bd82e22d7499982ec8006e9d6696f2a618a398c6a60b00ee15af33d"
+    },
+    {
+      "path": "labs/nebula/packages/reconstruction/src/methods/inference/fit.ts",
+      "bytes": 19436,
+      "sha256": "67c2c671c6a3cc8f73f26ad99e142058f478477ed944e785fb68de0b6a4f6fb3"
+    },
+    {
+      "path": "labs/nebula/packages/reconstruction/src/methods/inference/photometric-mge.test.ts",
+      "bytes": 5573,
+      "sha256": "a5819a1149c665c94083b3155abafa6f9a9c1050cd2c03a5312241c59f2ea600"
+    },
+    {
+      "path": "labs/nebula/packages/reconstruction/src/methods/inference/photometric-mge.ts",
+      "bytes": 671,
+      "sha256": "13109dd3f1d28dd15c3d733f737753c15d0c85e3e2ae4e3e345226f6f9cfe430"
+    },
+    {
+      "path": "labs/nebula/packages/reconstruction/src/methods/inference/simulation-guided.ts",
+      "bytes": 11533,
+      "sha256": "e9d509a5a0fe46621ffd3bd98c0f50188eaa49c49657a444a5de5394d18ea955"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compact-inputs/compiler.ts",
+      "bytes": 8729,
+      "sha256": "a9c3ebe7c2e88a8b3c624be2c0fef4f00f0b3d6b011809646486e1a6f7c3085a"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compact-inputs/sampled.ts",
+      "bytes": 11992,
+      "sha256": "1fcd2d1db257d0f7d7e45e04c9660373f5f019e9329d62e8a6f27d6e6834ea73"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/bake.ts",
+      "bytes": 18347,
+      "sha256": "61419c3023157f4666cfd23a9edafbf749c84c79bfefdcd165506c55f224c719"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/compiler-sampling.test.ts",
+      "bytes": 5318,
+      "sha256": "85b518a3644ca5dbf7a49a70aef754e76949fce610ecfe7ff6c0a9753dc8afff"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/component-layout.ts",
+      "bytes": 16703,
+      "sha256": "7466f8813cf5a2684e9633624bd6d811bb6de9e49ba9a1a3921d4b6e6450512d"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/compiler/retained-material.ts",
+      "bytes": 10547,
+      "sha256": "59756ab35b9fcc3e249977a36521d99ee38c9020666b3866d40e6464d0d5852c"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/slices/emission-layout.test.ts",
+      "bytes": 6642,
+      "sha256": "e38597b85ea59a2fef154660f9df07dfcc755dc5d23d61d3633324b4497b0696"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/slices/emission.ts",
+      "bytes": 21178,
+      "sha256": "febe3fc0821a0ca82a4c04d19c0771744cec20fa078bb75a82de3fef043869d7"
+    },
+    {
+      "path": "labs/nebula/packages/volume-bake/src/slices/material.ts",
+      "bytes": 10360,
+      "sha256": "dcb0c1b4524eb77ed9547a369ce5a24ede9e298af1ed507e3cfb1e504f5aff96"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/package.json",
+      "bytes": 4015,
+      "sha256": "5c82ed209bf29c8f3eefe61dd8cb0244d57d647a67fb94db10249dc09090a94e"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/compiler-bake.ts",
+      "bytes": 12561,
+      "sha256": "2488b91bd967064028a552fd58593e3d26eddc77327e9377a4e0a0b5e1bdd3f6"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/emission.ts",
+      "bytes": 4057,
+      "sha256": "712c11507af42b9f111f17ec0ceee9023a8eed29fac1700577bb88fe5cc47140"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/contracts/volume-slices.ts",
+      "bytes": 6642,
+      "sha256": "5965a3ac2d6acef6d13ea625df2456960b9197fd4dcfccf7ea8b5b2ec452fda3"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/coordinates/compiler-frame-layers.test.ts",
+      "bytes": 3892,
+      "sha256": "ac57880e7491ae0441b3b0bc67fe1c0a013fbea1177270bb10fe8d10426f9e4d"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/coordinates/compiler-frame.ts",
+      "bytes": 3834,
+      "sha256": "e340a3eb8f6a374556aa4277cb3ee2064a1ebedd906a012e94f7921d2f4b4d3b"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/fields/photometric-emission.ts",
+      "bytes": 5761,
+      "sha256": "af6e9cab101e246f3f840a122a5e4d08a7fce0e49600881a9486db46720ff9fb"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/fields/photometric-mge.ts",
+      "bytes": 6744,
+      "sha256": "2865d5349871c0e9c3d18d677062e1c700afa55bc7b1b18ad385b4c748d02618"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/fields/retained-emission.ts",
+      "bytes": 2784,
+      "sha256": "0b621e41516dbeb8b37da031dd6f07251ff0bf3498233653cbee81dc491d4f84"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/fields/simulation-envelope.ts",
+      "bytes": 13256,
+      "sha256": "07c8b4c90ebc3cc46084cd607b2ea4ebfd95879cc2645ddc1988f85839a2733e"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/materials/material.test.ts",
+      "bytes": 13125,
+      "sha256": "5b188f9f8c2d55567261747e3b534521dcfb6997010fe78ef6533ad75fc5e525"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/materials/slab-material.ts",
+      "bytes": 13459,
+      "sha256": "f5aebe26a52df5e7fde3fbf404e2505d30f990cfaa4e0a2ecbfcdac0cdfbcda1"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/sampling/layer-optimization.test.ts",
+      "bytes": 5946,
+      "sha256": "53286e81a79a6e4fc6863ad33bfe172240260c72c691c786c7701643e4c926d1"
+    },
+    {
+      "path": "labs/nebula/packages/volume-core/src/sampling/layer-optimization.ts",
+      "bytes": 13031,
+      "sha256": "98c9ac63b39b4f1e8ff2fab6b3d6beb5423033fa4a5a9fe5048b54c862b4918b"
+    },
+    {
+      "path": "packages/catalog/src/nebulae.test.ts",
+      "bytes": 3486,
+      "sha256": "3a38bb21caaeda12ff487d77fc58e376e14439b9cc7ceaf33d6a39104aa314af"
+    },
+    {
+      "path": "packages/catalog/src/nebulae.ts",
+      "bytes": 4861,
+      "sha256": "5b6f5c2da9ba90a73a05e7080606d7ba213c9317976aa15043c00ec26ed70d99"
+    },
+    {
+      "path": "site/prepared-focus-card.mts",
+      "bytes": 7880,
+      "sha256": "2041c07acc18088cda61b68d5ae0e02f318a1f1a799a49fe0d1bb009c8b8570c"
+    },
+    {
+      "path": "site/prepared-focus-object.mts",
+      "bytes": 2334,
+      "sha256": "4ca6d397fe6bb700c6a221d059c72e5b03de30a5237debcbf51f3490a25ccfd0"
+    },
+    {
+      "path": "site/test/galactic-focus.test.mts",
+      "bytes": 2309,
+      "sha256": "cab90564f2ab50aa0b5f40a45573570c57d2220bfe930e0e2b73cdeaa351b184"
+    },
+    {
+      "path": "site/test/prepared-focus-card.test.mts",
+      "bytes": 9363,
+      "sha256": "8de40ffaa5d1dfb52287c551ab26e9db6a943cd04690321cc098976d5efbd3cd"
+    },
+    {
+      "path": "src/renderers/css/universe/catalog-marker.test.ts",
+      "bytes": 2488,
+      "sha256": "743539f43896c9c5737ca6fbb7b0db934da1cbc8f75375710f5ea1d8438ace91"
+    },
+    {
+      "path": "src/renderers/css/universe/catalog-marker.ts",
+      "bytes": 2390,
+      "sha256": "c2159ff0ed567d74ff614dd7e3b39b702af1c586a4ae73be73a18814846ff119"
+    },
+    {
+      "path": "tools/nebula/application/nebula-frame.ts",
+      "bytes": 5029,
+      "sha256": "382e115799a417d2e09d1b43067dd31fadf2a32dc643b0e840195f39b14d8528"
+    },
+    {
+      "path": "tools/nebula/application/objects.ts",
+      "bytes": 22751,
+      "sha256": "3f2b3939e80769a7285b8677271939954ecbeb36f689d5e08731100c8807796c"
+    },
+    {
+      "path": "tools/prepare-navigation-destinations.mts",
+      "bytes": 4439,
+      "sha256": "d406c51f5b761134b39446f0d1935a22e5c8829913d520132385465974777671"
+    }
+  ],
+  "fullLabSuite": {
+    "command": "node labs/nebula/run.mts test",
+    "tests": 681,
+    "passed": 659,
+    "skipped": 17,
+    "failed": 5,
+    "failures": [
+      "# Subtest: delivery restores missing impostors, rejects drift and rebuilds when their generator changes\nnot ok 32 - delivery restores missing impostors, rejects drift and rebuilds when their generator changes\n  ---\n  duration_ms: 289.361875\n  type: 'test'\n  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:14775:1'\n  failureType: 'testCodeFailure'\n  error: |-\n    Cannot find module '@cssearth/volume-bake/package.json'\n    Require stack:\n    - /var/folders/hr/wf3y2_yx3xxdgk_j_0lfgt6r0000gn/T/nebula-impostor-delivery-WCZmfC/package.json\n  code: 'MODULE_NOT_FOUND'\n  stack: |-\n    Function._resolveFilename (node:internal/modules/cjs/loader:1430:15)\n    Function.resolve (node:internal/modules/helpers:157:19)\n    packageImplementationPins (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:3862:35)\n    prepareNebulaObject (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:8461:29)\n    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/adapters/application/delivery/nebula-objects.test.mjs:14779:20)\n    async Test.run (node:internal/test_runner/test:1054:7)\n    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)\n  ...",
+      "# Subtest: the curated lab retains the selected LMC images, SMC comparisons and verified density banks\nnot ok 179 - the curated lab retains the selected LMC images, SMC comparisons and verified density banks\n  ---\n  duration_ms: 7.521917\n  type: 'test'\n  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/resources/model-catalogue.test.mjs:32:1'\n  failureType: 'testCodeFailure'\n  error: \"ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/labs/nebula/models/lmc/candidates/prepared/vista-infrared.webp'\"\n  code: 'ENOENT'\n  stack: |-\n    async open (node:internal/fs/promises:639:25)\n    async readFile (node:internal/fs/promises:1252:14)\n    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/resources/model-catalogue.test.mjs:54:19)\n    async Test.run (node:internal/test_runner/test:1054:7)\n    async startSubtestAfterBootstrap (node:internal/test_runner/harness:296:3)\n  ...",
+      "# Subtest: tiny offline bake uses shared density support and writes pinned XYZ resources and cloud inspection\nnot ok 248 - tiny offline bake uses shared density support and writes pinned XYZ resources and cloud inspection\n  ---\n  duration_ms: 1265.759375\n  type: 'test'\n  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:2743:1'\n  failureType: 'testCodeFailure'\n  error: \"ENOENT: no such file or directory, open '/private/tmp/cssearth-pr390/labs/nebula/models/lmc/full-density/prepared/slices/x/00.webp'\"\n  code: 'ENOENT'\n  stack: |-\n    async open (node:internal/fs/promises:639:25)\n    async readFile (node:internal/fs/promises:1252:14)\n    async recolorCloudSlices (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:725:31)\n    async prepareReconstruction (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:2537:19)\n    async TestContext.<anonymous> (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workers/density-reconstruction.test.mjs:2783:20)\n    async Test.run (node:internal/test_runner/test:1054:7)\n    async Test.processPendingSubtests (node:internal/test_runner/test:744:7)\n  ...",
+      "# Subtest: all 943 prepared stars come from pinned measured V rows and preserve independent sky rays and native footprint\nnot ok 523 - all 943 prepared stars come from pinned measured V rows and preserve independent sky rays and native footprint\n  ---\n  duration_ms: 12.315666\n  type: 'test'\n  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4766:1'\n  failureType: 'testCodeFailure'\n  error: \"ENOENT: no such file or directory, open 'labs/nebula/models/lmc/clouds-observation/source/target.png'\"\n  code: 'ENOENT'\n  stack: |-\n    async open (node:internal/fs/promises:639:25)\n    async readFile (node:internal/fs/promises:1252:14)\n    async pinned (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4570:17)\n    async file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:111\n    async Promise.all (index 7)\n    async loadStarCloudModel (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:38)\n  ...",
+      "# Subtest: joint CDF preserves solid-angle weighting and rejects missing cloud/density and true support gaps\nnot ok 524 - joint CDF preserves solid-angle weighting and rejects missing cloud/density and true support gaps\n  ---\n  duration_ms: 0.514292\n  type: 'test'\n  location: '/private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4830:1'\n  failureType: 'testCodeFailure'\n  error: \"ENOENT: no such file or directory, open 'labs/nebula/models/lmc/clouds-observation/source/target.png'\"\n  code: 'ENOENT'\n  stack: |-\n    async open (node:internal/fs/promises:639:25)\n    async readFile (node:internal/fs/promises:1252:14)\n    async pinned (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4570:17)\n    async file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:111\n    async Promise.all (index 7)\n    async loadStarCloudModel (file:///private/tmp/cssearth-pr390/.local/nebula-lab/compiled/labs/nebula/packages/lab/src/server/workflows/stars/lmc-stars.test.mjs:4587:38)\n  ...\n# (node:10482) PromiseRejectionHandledWarning: Promise rejection was handled asynchronously (rejection id: 3)\n# (Use `node --trace-warnings ...` to show where the warning was created)"
+    ],
+    "comparisonToMain": "Not independently reproduced on current main; not claimed identical to main."
+  },
+  "clean": [
+    "Core/bake/Lab typechecks and all 203 strict Lab test-source files",
+    "Nebula package boundaries",
+    "Nebula Lab Vite production build",
+    "52 focused planner/integration regressions and 17 component-registration regressions",
+    "Budget, default-planning, interval-reflection, material-offset, secondary-lens and empty-partition mutation checks fail as intended",
+    "Historical no-plan manifest and PNG golden digest unchanged"
+  ],
+  "independentReview": "Grok subscription review packets cover planner, integration, grouped sampling, component registration and final cleanup. All completed with sentinels and source snapshots; code findings closed, rendered-quality failures remain open.",
+  "visualQualification": "FAILED: Omega X/Z and Y/Z normalized-L1 handoffs exceed 0.04; no threshold was raised.",
+  "omitted": [
+    "Main-page Omega render and browser conformance",
+    "Cold Omega compact application replay",
+    "Omega R2 publication and clean asset restoration",
+    "Acceptance of the optimized Omega or Crab banks"
+  ],
+  "screenshots": "Four newly captured views illustrate the actual retained viewer. They are not before/after pixel comparisons; no Pixelmatch score is claimed."
+}

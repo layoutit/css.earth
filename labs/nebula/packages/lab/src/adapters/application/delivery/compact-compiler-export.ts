@@ -21,7 +21,7 @@ export async function exportCompactCompiler(root: string, objectId: string) {
     const material = receipts.find(m => record(m) && m.sourceId === lens.id);
     if (!record(material) || material.schema !== 'cssearth-component-bound-material@1' || material.fieldIdentity !== result.scene.fieldIdentity || !Array.isArray(material.components))
       throw new TypeError(`Missing accepted component colors for ${lens.id}.`);
-    return { sourceId: lens.id, components: material.components.map((color: unknown) => {
+    return { sourceId: lens.id, ...(material.envelopeColors === undefined ? {} : { envelopeColors: material.envelopeColors }), components: material.components.map((color: unknown) => {
       if (!record(color)) throw new TypeError('Invalid retained component.');
       return { id: color.id, rgb: color.rgb, covered: color.covered };
     }) };
@@ -36,7 +36,7 @@ export async function exportCompactCompiler(root: string, objectId: string) {
   }
   const input = { schema: 'cssearth-compact-compiler@1', objectId,
     provenance: { resultPath, resultSha256: hash(resultBytes), modelSha256: hash(modelBytes), methodSha256: hash(methodBytes),
-      interpretation: 'Accepted fitted emission components, per-component source chromaticity, stars and sampling. Derived field inputs, not measured volumetric gas density. Full source acquisition remains available in the research recipes.' },
+      interpretation: 'Accepted fitted emission components, any retained photometric envelope with coarse source chromaticity, per-component colors, stars and sampling. Derived field inputs, not measured volumetric gas density. Full source acquisition remains available in the research recipes.' },
     field: JSON.parse(modelBytes.toString()), scene: result.scene, materials,
     sources: result.scene.lenses.map(lens => { const source = result.sources.find(source => source.id === lens.id)!;
       return { id: lens.id, label: lens.label, credit: source.credit, page: source.page }; }),

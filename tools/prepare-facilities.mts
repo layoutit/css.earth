@@ -46,11 +46,16 @@ export const explorationCompilerClosure = [
 ] as const;
 
 interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
+  /** Catalogue consumers validate published package records; authoring explicitly reproduces them. */
+  packageMode?: 'author' | 'published';
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
-export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null }: Options = {}) {
+export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null,
+  packageMode = publish === 'catalogues' ? 'published' : 'author' }: Options = {}) {
+  if (!['author', 'published'].includes(packageMode) || publish === 'catalogues' && packageMode !== 'published')
+    throw new TypeError('Catalogue-only publication requires published package inputs.');
   const closure: Record<string, string> = {};
   const input = async (path: string) => {
     const bytes = await readFile(resolve(root, path)); closure[path] = sha256(bytes); return bytes;
@@ -142,7 +147,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   }
   // Deploys consume the exact prepared package restored from R2. Authoring preparation still rebuilds provenance
   // and previews from their sources, but catalog-only publication must never invent a second package identity.
-  const volumes = publish === 'catalogues'
+  const volumes = packageMode === 'published'
     ? [...await readPreparedVolumeProvenance({ root, input }),
       ...await readPreparedContextProvenance({ root, input })]
     : [...await prepareVolumeProvenance({ root, input, mirrorOrigin }), ...await prepareContextProvenance({ root, input })];

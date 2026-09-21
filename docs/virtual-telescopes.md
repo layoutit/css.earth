@@ -717,7 +717,43 @@ archive origin or scientific fitness.
 the target and selected family, delegates spectral-unit conversion to Astropy, and considers every
 eligible component. Requested observation bounds or measured-resolution thresholds remain
 unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
-selected family are not inherited from the legacy query shape.
+selected family are not inherited from the legacy query shape. Every requested scientific
+criterion must hold for one selected component; facts from different components cannot be
+assembled into a match without an explicit combining operation. A membership request may inspect
+an explicitly declared dependency bundle, such as the Stokes components retained from one FITS
+member. That bundle establishes which components are present; it does not lend one component the
+quantity, support, resolution or depth facts of another.
+
+Planetary depth products use the same F16 descriptor instead of a separate workflow. Their axes
+name delay, geometric depth, pressure, altitude, radius, projected coordinates, body-fixed
+coordinates or path distance. Every admitted component separately retains its supported domain,
+sampling, resolution evidence, uncertainty, measurement operator and inference method. A FITS
+interval is sampling only; it cannot satisfy a requested resolution maximum. Derived depth
+conversion requires a named method and explicit parameters. Published reconstructions and model
+ensembles require their inference evidence and source members.
+
+Axis roles also retain a qualified physical dimension. The F16 FITS owner asks Astropy WCS to
+normalize only separable linear coordinates into the descriptor's zero-based index convention and
+uses Astropy units to verify their dimensions. Coupled matrices, nonlinear WCS, and contradictory
+units are refused. Body attachment additionally requires an explicit Cartesian, spherical,
+projected-and-vertical, located-profile, or symmetry placement; a depth axis and named frame alone
+do not establish a location. Placement axes must be distinct and carry the required spatial roles
+and physical dimensions. A complete body-fixed Cartesian grid needs no separate scalar depth axis.
+Projected vertical and located-profile placements bind their qualified physical-depth coordinate;
+the located profile cannot leave additional planetary axes unmapped.
+Astropy validates Cartesian anchor units as lengths and longitude/latitude anchor units as
+angles before a source constructor can publish the placement.
+
+Output availability follows those retained facts. Native export preserves every qualified product.
+Slices require a fully supported grid whose validity is handled by the operation, profiles require
+an explicit depth-like axis, and coverage views require the exact tracks, rays, stations, channels
+or profiles. Unhandled masks and support geometry refuse extraction. Delay and pressure coordinates cannot be
+attached to a body as geometric depth. Sparse rays cannot become a measured volume. Gravity and
+magnetic fields retain non-unique localization; a posterior model may be rendered only with an
+inference label on every visual output. The generic FITS profile validates one- to three-dimensional linear grids through
+Astropy, but archive adapters must supply the source-backed semantic qualification. Local user
+declarations cannot admit a planetary product. This architecture change includes no planetary
+dataset.
 
 Archive product terms retain the source label and map against the dated IVOA product-type
 vocabulary. This proposes a family route; product bytes and metadata must still confirm the
@@ -732,6 +768,24 @@ such profile is the NASA STEREO/SECCHI COR1 electron-density reconstruction: its
 (`CRLN`, `CRLT`, `HECR`), units and instrument identity establish an F16 spherical physical grid.
 The profile classifies the observation; it does not certify the tomography or invent a rendering
 route.
+
+The qualified COR1 profile now also writes a pinned F16 descriptor. `telescope outputs` exposes
+`spherical-grid-inspect` and `spherical-grid-prepare-volume` from that delivered observation. The
+latter uses Astropy to validate the archive FITS and its default-UTC time convention, SciPy to
+resample the longitude/latitude/radius field into explicitly sized Cartesian voxels, and the
+existing cssEarth density-volume preparer and loader for the result. The transfer remains an
+explicit caller choice. The native source and resampled float FITS remain available beside the
+RGBA8/KTX2 display approximation; transparent voxels outside the measured 1.5–4.0 solar-radius
+shell do not become zero-density measurements.
+
+```sh
+pnpm telescope explore sun --family F16 --out work/sun-f16
+pnpm telescope get work/sun-f16 --pick 1
+pnpm telescope outputs work/sun-f16/pick-1/result.json
+pnpm telescope family-run work/sun-f16/pick-1/files/output/telescopes/sun/stereo-cor1a-n3d-cr2053p1-m1/descriptor.json \
+  spherical-grid-prepare-volume --params TRANSFER.json --out work/sun-cor1-volume
+pnpm telescope outputs work/sun-cor1-volume/physical-grid-volume.json
+```
 
 Family-operation receipts identify the complete local TypeScript module closure discovered by the
 build graph, plus the pinned scientific toolchain. Changing a helper imported by the selected

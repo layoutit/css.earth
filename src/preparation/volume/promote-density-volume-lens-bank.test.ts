@@ -5,11 +5,17 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 import { sha256 } from '../../platform/sha256.mts';
 import { loadPreparedVolumeLenses } from '../../renderers/css/volume/prepared-volume-lenses.js';
+import type { DensityVolumeFrame } from '@cssearth/objects';
 import { promoteDensityVolumeLensBank } from './promote-density-volume-lens-bank.ts';
 
-const frame = { referenceFrame: 'fixture-icrf', epochJdTt: 2461286.5, originM: [11, 22, 33], localToReferenceXyzw: [0, 0, 0, 1],
+const frame: DensityVolumeFrame = { referenceFrame: 'fixture-icrf', epochJdTt: 2461286.5, originM: [11, 22, 33], localToReferenceXyzw: [0, 0, 0, 1],
   metersPerUnit: 4, boundsUnits: { min: [-7, -3, -1], max: [5, 9, 11] } };
 const json = (value: unknown) => Buffer.from(`${JSON.stringify(value, null, 2)}\n`);
+const readArrayBuffer = async (path: string): Promise<ArrayBuffer> => Uint8Array.from(await readFile(path)).buffer;
+const record = (value: unknown): Record<string, unknown> => {
+  assert.ok(value && typeof value === 'object' && !Array.isArray(value));
+  return value as Record<string, unknown>;
+};
 
 async function fixture() {
   const root = await mkdtemp(resolve(tmpdir(), 'density-volume-bank-')), source = resolve(root, 'source'), destination = resolve(root, 'bank');
@@ -37,7 +43,7 @@ test('promotes an authenticated physical density volume into one exact selectabl
       framingRadiusUnits: 18, attachedTo: 'fixture-body' });
     assert.equal(result.resourceCount, 3);
     const descriptor = JSON.parse(await readFile(result.descriptorPath, 'utf8'));
-    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readFile(resolve(f.destination, path)) });
+    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readArrayBuffer(resolve(f.destination, path)) });
     assert.equal(payload.attachedTo, 'fixture-body');
     assert.equal(payload.defaultLens, 'mean');
     assert.deepEqual(payload.lenses[0]!.brightness, { overall: 1, x: 1, y: 1, z: 1 });
@@ -49,9 +55,10 @@ test('promotes an authenticated physical density volume into one exact selectabl
     assert.deepEqual(payload.lenses[0]!.volume.resources.map(item => item.path), ['mean/slices/x.bin', 'mean/slices/y.bin', 'mean/slices/z.bin']);
     for (const [path, bytes] of f.assets) assert.deepEqual(await readFile(resolve(f.destination, 'prepared/mean', path)), bytes);
     const receipt = JSON.parse(await readFile(result.deliveryPath, 'utf8'));
+    assert.equal(receipt.attachedTo, 'fixture-body');
     assert.deepEqual(receipt.source.frame, frame);
     assert.match(receipt.promotion.interpretation, /no depth inference/u);
-    assert.deepEqual(payload.provenance, { sourceDensityVolume: f.volume.provenance,
+    assert.deepEqual(payload.provenance, { sourceDensityVolume: f.volume.provenance, measurementFrame: frame, presentationFrame: frame,
       interpretation: 'Promoted prepared physical density volume. No depth was inferred or reconstructed.' });
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
@@ -64,4 +71,59 @@ test('refuses a source resource whose bytes no longer match the density-volume c
       label: 'Posterior mean', title: 'Dust density posterior mean', description: 'Native physical-grid density display.', sourceUrl: 'https://example.org/source', framingRadiusUnits: 18 }),
     /Source density-volume resource pin mismatch: slices\/x\.bin/u);
   } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('re-anchors only the scene presentation while retaining the measurement frame', async () => {
+  const f = await fixture();
+  const presentationFrame: DensityVolumeFrame = { ...frame, referenceFrame: 'sun-icrf', epochJdTt: 2461286.5,
+    originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1] };
+  try {
+    const result = await promoteDensityVolumeLensBank({ sourceDirectory: f.source, destinationDirectory: f.destination, id: 'corona-bank', lensId: 'density',
+      label: 'Electron density', title: 'Coronal electron density', description: 'Measured tomographic grid.', sourceUrl: 'https://example.org/source',
+      framingRadiusUnits: 4, attachedTo: 'sun', presentationFrame });
+    const descriptor = JSON.parse(await readFile(result.descriptorPath, 'utf8'));
+    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readArrayBuffer(resolve(f.destination, path)) });
+    assert.deepEqual(payload.lenses[0]!.volume.frame, presentationFrame);
+    assert.deepEqual(payload.lenses[0]!.stars.frame, presentationFrame);
+    const provenance = record(payload.provenance);
+    assert.deepEqual(provenance.measurementFrame, frame);
+    assert.deepEqual(provenance.presentationFrame, presentationFrame);
+    const receipt = JSON.parse(await readFile(result.deliveryPath, 'utf8'));
+    assert.deepEqual(receipt.source.frame, frame);
+    assert.deepEqual(receipt.promotion.presentationFrame, presentationFrame);
+    assert.match(receipt.promotion.interpretation, /source measurement frame is retained/u);
+    await assert.rejects(promoteDensityVolumeLensBank({ sourceDirectory: f.source, destinationDirectory: resolve(f.root, 'bad'), id: 'bad-bank', lensId: 'density',
+      label: 'Electron density', title: 'Coronal electron density', description: 'Measured tomographic grid.', sourceUrl: 'https://example.org/source',
+      framingRadiusUnits: 4, presentationFrame: { ...presentationFrame, metersPerUnit: 1 } }), /preserve source scale and bounds/u);
+  } finally { await rm(f.root, { recursive: true, force: true }); }
+});
+
+test('promotes independently authenticated density grids into selectable namespaced lenses', async () => {
+  const first = await fixture(), second = await fixture();
+  try {
+    const result = await promoteDensityVolumeLensBank({ destinationDirectory: first.destination, id: 'corona-bank', defaultLens: 'regularized',
+      framingRadiusUnits: 4, attachedTo: 'sun', presentationFrame: { ...frame, referenceFrame: 'sun-icrf', originM: [0, 0, 0] }, sources: [
+        { sourceDirectory: first.source, lensId: 'regularized', label: 'Regularized', title: 'Regularized density', description: 'Published regularized grid.', sourceUrl: 'https://example.org/regularized' },
+        { sourceDirectory: second.source, lensId: 'comparison', label: 'Comparison', title: 'Comparison density', description: 'Published comparison grid.', sourceUrl: 'https://example.org/comparison' },
+      ] });
+    assert.equal(result.resourceCount, 6);
+    const descriptor = JSON.parse(await readFile(result.descriptorPath, 'utf8'));
+    const payload = await loadPreparedVolumeLenses(descriptor, { read: path => readArrayBuffer(resolve(first.destination, path)) });
+    assert.equal(payload.defaultLens, 'regularized');
+    assert.deepEqual(payload.lenses.map(lens => lens.id), ['regularized', 'comparison']);
+    assert.deepEqual(payload.lenses.map(lens => lens.volume.resources.map(resource => resource.path)), [
+      ['regularized/slices/x.bin', 'regularized/slices/y.bin', 'regularized/slices/z.bin'],
+      ['comparison/slices/x.bin', 'comparison/slices/y.bin', 'comparison/slices/z.bin'],
+    ]);
+    assert.deepEqual(payload.provenance, { sources: [
+      { lensId: 'regularized', sourceDensityVolume: first.volume.provenance, measurementFrame: frame },
+      { lensId: 'comparison', sourceDensityVolume: second.volume.provenance, measurementFrame: frame },
+    ], presentationFrame: { ...frame, referenceFrame: 'sun-icrf', originM: [0, 0, 0] },
+    interpretation: 'Each selectable lens retains its authenticated physical source, measurement frame and resources. All lenses share the explicitly authored presentation scale and bounds; no depth was inferred or reconstructed.' });
+    const receipt = JSON.parse(await readFile(result.deliveryPath, 'utf8'));
+    assert.equal(receipt.source, undefined);
+    assert.deepEqual(receipt.sources.map((source: { lensId: string; resources: unknown[] }) => [source.lensId, source.resources.length]), [['regularized', 3], ['comparison', 3]]);
+    for (const [path, bytes] of first.assets) assert.deepEqual(await readFile(resolve(first.destination, 'prepared/regularized', path)), bytes);
+    for (const [path, bytes] of second.assets) assert.deepEqual(await readFile(resolve(first.destination, 'prepared/comparison', path)), bytes);
+  } finally { await rm(first.root, { recursive: true, force: true }); await rm(second.root, { recursive: true, force: true }); }
 });

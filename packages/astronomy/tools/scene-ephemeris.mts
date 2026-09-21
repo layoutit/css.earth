@@ -5,8 +5,12 @@ import { readFile } from 'node:fs/promises';
 
 import { parseSceneManifest } from './lib/ephemeris-records.mts';
 export const SCENE_EPHEMERIS_DIRECTORY = new URL('../source/scene-epoch/', import.meta.url);
-const REQUIRED: Readonly<Record<string, readonly [number, number, string]>> = Object.freeze({ phobos: [401, 499, 'mars'], mimas: [601, 699, 'saturn'], janus: [610, 699, 'saturn'],
-  epimetheus: [611, 699, 'saturn'], helene: [612, 699, 'saturn'], triton: [801, 899, 'neptune'], earth: [399, 3, 'earth-moon-barycentre'] });
+const REQUIRED: Readonly<Record<string, readonly [number, number, string]>> = Object.freeze({
+  mercury: [199, 10, 'sun'], venus: [299, 10, 'sun'], earth: [399, 10, 'sun'], mars: [499, 10, 'sun'],
+  jupiter: [599, 10, 'sun'], saturn: [699, 10, 'sun'], uranus: [799, 10, 'sun'], neptune: [899, 10, 'sun'], pluto: [999, 10, 'sun'],
+  moon: [301, 399, 'earth'], io: [501, 599, 'jupiter'], titan: [606, 699, 'saturn'], charon: [901, 999, 'pluto'],
+  phobos: [401, 499, 'mars'], mimas: [601, 699, 'saturn'], janus: [610, 699, 'saturn'],
+  epimetheus: [611, 699, 'saturn'], helene: [612, 699, 'saturn'], triton: [801, 899, 'neptune'] });
 
 /** Reject wrong-center, stale, unbound or incomplete data; never extrapolate a snapshot. */
 export async function loadSceneEpochEphemeris(epochJdTt: number, directory = SCENE_EPHEMERIS_DIRECTORY) {
@@ -17,7 +21,7 @@ export async function loadSceneEpochEphemeris(epochJdTt: number, directory = SCE
       Math.abs((manifest.requestEpochJdUtc + manifest.ttMinusUtcSeconds / 86400) - epochJdTt) > 1e-9) {
     throw new TypeError('Scene ephemeris epoch, time scale or reference convention differs; reacquire the snapshot.');
   }
-  type SceneState = { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; centerBodyId: string; provenance: { model: string; epochJdTt: number; referenceFrame: string; center: number; source: string; sourcePath: string; sha256: string; timeQualification: string } };
+  type SceneState = { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; centerBodyId: string; provenance: { model: string; epochJdTt: number; referenceFrame: string; target: number; center: number; source: string; sourcePath: string; sha256: string; timeQualification: string } };
   const states = new Map<string, SceneState>();
   for (const record of manifest.records) {
     const expected = REQUIRED[record.id];
@@ -58,7 +62,7 @@ export async function loadSceneEpochEphemeris(epochJdTt: number, directory = SCE
     states.set(record.id, Object.freeze({ positionKm: Object.freeze(values.slice(0, 3)),
       velocityKmPerDay: Object.freeze(values.slice(3, 6)), centerBodyId: record.centerBodyId,
       provenance: Object.freeze({ model: 'Horizons geometric state at prepared epoch', epochJdTt,
-        referenceFrame: 'ICRF', center: record.center, source: record.url,
+        referenceFrame: 'ICRF', target: record.target, center: record.center, source: record.url,
         sourcePath: `packages/astronomy/source/scene-epoch/${record.path}`, sha256: record.sha256,
         timeQualification: manifest.timeQualification }) }));
   }

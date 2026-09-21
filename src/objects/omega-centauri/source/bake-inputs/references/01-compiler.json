@@ -1,0 +1,15 @@
+{
+  "schema": "cssearth-nebula-compiler@1",
+  "id": "omega-centauri",
+  "label": "Omega Centauri",
+  "observationRecipe": "labs/nebula/models/omega-centauri/observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/omega-centauri/observations.json",
+  "structureRecipe": "labs/nebula/models/omega-centauri/observation-structures.json",
+  "structureCatalogue": ".local/nebula-lab/observations/omega-centauri/structures/catalogue.json",
+  "photometricPriorRecipe": "labs/nebula/models/omega-centauri/photometric-mge.json",
+  "defaultSourceId": "eso1119b",
+  "sourceWeights": { "eso1119b": 1, "eso0844a": 0 },
+  "defaultControls": { "detail": 1, "faint": 0.35, "depth": 1 },
+  "maximumStars": 0,
+  "interpretation": "The published oblate eight-Gaussian surface-brightness model supplies a conditional three-dimensional starlight prior at its selected inclination and position angle. Registered VST light fits finite emission components within that prior; the independent WFI image recolours the same geometry. Individual feature depths, finite supports and near/far tilt are conditional display choices, not measured stellar positions or membership. Integrated stellar light is preserved; no duplicate compact-star catalogue is added. This is relative display emission, not calibrated luminosity, gas density or a recovered dynamical model."
+}

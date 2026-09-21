@@ -10,10 +10,14 @@ import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';
 import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
+import { optimizeVolumeLayers, readLayerOptimizationReport } from '@cssearth/volume-core/sampling/layer-optimization';
+import { readVolumeLayerPlan } from '@cssearth/volume-core/contracts/volume-slices';
+import { createRenderElementBudget, maximumRenderSlabs, readRenderElementBudget, readRenderElementProfile, renderElementCount,
+  type RenderElementProfile } from '@cssearth/volume-core/contracts/render-element-budget';
 import { readCompilerBakeResult, validCompilerStarSize, validCompilerStarMaterials, type CompilerBakeResult, type CompilerPin, type PreparedCompilerStar, type CompilerStarMaterial, type CompilerStarSprites } from '@cssearth/volume-core/contracts/compiler-bake';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from '@cssearth/volume-core/contracts/emission';
 
-import { compilerFrame, compilerSliceCounts, validCompilerBounds } from '@cssearth/volume-core/coordinates/compiler-frame';
+import { compilerFrame, compilerPreparedPoint, compilerPreparedSlices, compilerSliceCounts, validCompilerBounds } from '@cssearth/volume-core/coordinates/compiler-frame';
 export { compilerFrame, compilerSliceCounts } from '@cssearth/volume-core/coordinates/compiler-frame';
 
 export type { CompilerBakeResult, CompilerLensVolume, CompilerPin, PreparedCompilerStar } from '@cssearth/volume-core/contracts/compiler-bake';
@@ -31,6 +35,8 @@ export interface CompiledVolumeArtifact {
   resources: readonly { path: string; sha256: string; bytes: number }[];
 }
 export interface CompilerBakeBackend {
+  /** Host-owned, tested cost of its retained geometry, points and delivery wrappers. */
+  renderBudget?: RenderElementProfile;
   compileVolume(input: { id: string; frame: DensityVolumeFrame; slices: VolumeSlices }): CompiledVolumeArtifact;
   prepareStarSprites(root: string, outputDirectory: string, stars: readonly PreparedCompilerStar[]): Promise<{ starSprites?: CompilerStarSprites }>;
 }
@@ -39,6 +45,16 @@ export interface BakeCompilerOptions {
   root: string; outputDirectory: string; id: string; fieldIdentity: string;
   boundsArcsec: EmissionBounds; skyBoundsArcsec: SkyBounds;
   sampleEmission(xWestArcsec: number, yNorthArcsec: number, zAwayArcsec: number, outRgb: Vector3): void;
+  /** Optional common support envelope for several component mixtures. Used only for offline allocation. */
+  samplePlanningEmission?: BakeCompilerOptions['sampleEmission'];
+  /** Exact saved sampling for compact replay or a shared component layout. Absence selects the automatic budget. */
+  sampling?: CompilerBakeResult['sampling'];
+  /** Internal verified compact replay only. Never a research recipe option. New budget receipts still validate. */
+  historicalReplay?: boolean;
+  /** Component unions may add their pinned stars only after individual material bakes. Never below stars.length. */
+  reservedStars?: number;
+  /** Historical compact receipts retain their original unreflected coordinate convention. */
+  preparedPhysical?: boolean;
   /** Smallest supported kernel scale; reduces slab spacing for thin, tilted structures. */
   minimumFeatureScaleArcsec?: number;
   lenses: CompilerLensInput[]; stars?: CompilerStarInput[]; signal?: AbortSignal;
@@ -48,6 +64,53 @@ export interface BakeCompilerOptions {
 const IMAGE_WIDTH = 512 as const, DEPTH_SAMPLES = 4 as const;
 const json = (value: unknown) => Buffer.from(JSON.stringify(value) + '\n');
 function cancel(signal?: AbortSignal) { if (signal?.aborted) throw new DOMException('Nebula compile cancelled.', 'AbortError'); }
+
+/** New authoring plans once; immutable compact replay uses its saved quadrature and partition. */
+export function compilerSampling(options: Pick<BakeCompilerOptions, 'boundsArcsec' | 'minimumFeatureScaleArcsec' | 'sampleEmission' | 'samplePlanningEmission' | 'sampling' | 'signal' | 'progress' | 'historicalReplay'> &
+  { renderProfile?: RenderElementProfile; starCount?: number }): CompilerBakeResult['sampling'] {
+  const starCount = options.starCount ?? 0, profile = options.renderProfile && readRenderElementProfile(options.renderProfile);
+  if (!Number.isSafeInteger(starCount) || starCount < 0 ||
+      (options.historicalReplay !== undefined && typeof options.historicalReplay !== 'boolean')) throw new TypeError('Invalid compiler star reservation or replay mode.');
+  if (options.historicalReplay && !options.sampling) throw new TypeError('Historical replay requires exact saved sampling.');
+  if (options.sampling !== undefined) {
+    const saved = options.sampling, counts = saved.sliceCounts;
+    if (!counts || saved.imageWidth !== IMAGE_WIDTH || saved.samplesPerSlab !== DEPTH_SAMPLES ||
+        [counts.x, counts.y, counts.z].some(n => !Number.isInteger(n) || n < 1 || n > 512)) throw new TypeError('Invalid saved compiler sampling.');
+    if (saved.layerPlan !== undefined) {
+      const plan = readVolumeLayerPlan(saved.layerPlan);
+      if (plan.referenceSamplesPerSlab !== DEPTH_SAMPLES || (['x', 'y', 'z'] as const).some(axis => plan.axes[axis].length !== counts[axis]))
+        throw new TypeError('Saved compiler sampling differs from its layer plan.');
+      if (saved.layerOptimization !== undefined) readLayerOptimizationReport(saved.layerOptimization, plan);
+    } else if (saved.layerOptimization !== undefined) throw new TypeError('Saved layer optimization requires a layer plan.');
+    const slabCount = counts.x + counts.y + counts.z;
+    if (saved.renderBudget !== undefined) {
+      if (!profile) throw new TypeError('A budgeted compiler scene requires its host render profile.');
+      readRenderElementBudget(saved.renderBudget, starCount, slabCount, profile);
+      return structuredClone(saved);
+    }
+    if (options.historicalReplay) {
+      if (profile) {
+        const elements = renderElementCount(profile, starCount, slabCount);
+        options.progress?.({ phase: 'volume', completed: 0, total: slabCount,
+          message: `Replaying pinned historical sampling unchanged: ${elements} reserved renderer elements (${elements > profile.maximumElements ? 'over budget' : 'within budget'}).` });
+      }
+      return structuredClone(saved);
+    }
+    if (!profile) throw new TypeError('New compiler sampling requires a host render-element profile.');
+    return { ...structuredClone(saved), renderBudget: createRenderElementBudget(profile, starCount, slabCount) };
+  }
+  if (!profile) throw new TypeError('New compiler sampling requires a host render-element profile.');
+  const maximumLayers = Math.min(500, maximumRenderSlabs(profile, starCount));
+  const { plan, report } = optimizeVolumeLayers({ bounds: options.boundsArcsec,
+    maximumLayers,
+    referenceSliceCounts: compilerSliceCounts(options.boundsArcsec, options.minimumFeatureScaleArcsec), referenceSamplesPerSlab: DEPTH_SAMPLES,
+    sampleEmission: options.samplePlanningEmission ?? options.sampleEmission, signal: options.signal,
+    onProgress: ({ completed, total }) => options.progress?.({ phase: 'volume', completed, total,
+      message: `Choosing at most ${maximumLayers} XYZ slabs within ${profile.maximumElements} retained renderer elements` }) });
+  return { sliceCounts: { x: plan.axes.x.length, y: plan.axes.y.length, z: plan.axes.z.length }, imageWidth: IMAGE_WIDTH,
+    samplesPerSlab: DEPTH_SAMPLES, layerPlan: plan, layerOptimization: report,
+    renderBudget: createRenderElementBudget(profile, starCount, plan.axes.x.length + plan.axes.y.length + plan.axes.z.length) };
+}
 function validSkyBounds(bounds: SkyBounds): boolean {
   return Array.isArray(bounds?.min) && Array.isArray(bounds?.max) && bounds.min.length === 2 && bounds.max.length === 2 &&
     bounds.min.every((n, i) => Number.isFinite(n) && Number.isFinite(bounds.max[i]) && n < bounds.max[i]!);
@@ -87,33 +150,44 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   const lensIds = new Set<string>();
   for (const lens of options.lenses) if (!/^[a-z0-9][a-z0-9-]{0,95}$/.test(lens.id) || lensIds.has(lens.id) || !lens.label.trim() || typeof lens.sampleMaterial !== 'function')
     throw new TypeError('Compiler lenses require unique safe identities and a 3D material sampler.'); else lensIds.add(lens.id);
-  const { origin, localBounds, frame } = compilerFrame(boundsArcsec);
+  const preparedPhysical = options.preparedPhysical ?? true;
+  if (typeof preparedPhysical !== 'boolean') throw new TypeError('Invalid compiler frame convention.');
+  const { origin, localBounds, frame } = compilerFrame(boundsArcsec, preparedPhysical);
   const starIds = new Set<string>(), stars: PreparedCompilerStar[] = [];
   for (const star of options.stars ?? []) {
     if (!star.id || star.id.length > 128 || starIds.has(star.id) || !Array.isArray(star.positionArcsec) || star.positionArcsec.length !== 3 || !star.positionArcsec.every(Number.isFinite) ||
         !Array.isArray(star.rgb) || star.rgb.length !== 3 || !star.rgb.every(n => Number.isInteger(n) && n >= 0 && n <= 255) ||
         !validCompilerStarSize(star) || !Number.isFinite(star.alpha) || star.alpha < 0 || star.alpha > 1 || !validCompilerStarMaterials(star.materials, lensIds))
       throw new TypeError('Invalid compiler star input.');
-    starIds.add(star.id); stars.push({ id: star.id, positionUnits: star.positionArcsec.map((n, i) => n - origin[i]!) as EmissionVector3,
+    const localPosition = star.positionArcsec.map((n, i) => n - origin[i]!) as EmissionVector3;
+    starIds.add(star.id); stars.push({ id: star.id, positionUnits: preparedPhysical ? compilerPreparedPoint(localPosition) : localPosition,
       rgb: [...star.rgb], ...(star.diameterUnits !== undefined ? { diameterUnits: star.diameterUnits } : { widthPx: star.widthPx }), alpha: star.alpha,
       ...(star.materials ? { materials: structuredClone(star.materials) } : {}) });
   }
   if (stars.length > 5000) throw new TypeError('Compiler star count exceeds the retained point budget.');
-  const sliceCounts = compilerSliceCounts(boundsArcsec, options.minimumFeatureScaleArcsec);
+  const reservedStars = options.reservedStars ?? options.sampling?.renderBudget?.starCount ?? stars.length;
+  if (!Number.isSafeInteger(reservedStars) || reservedStars < stars.length) throw new TypeError('Compiler star reservation cannot omit retained stars.');
+  const sampling = compilerSampling({ ...options, renderProfile: backend.renderBudget, starCount: reservedStars }), { sliceCounts, layerPlan } = sampling;
   const output = containedPath(root, outputDirectory), masterDirectory = containedPath(output, 'masters');
   const neutralDirectory = containedPath(output, 'neutral');
   await mkdir(output, { recursive: true }); cancel(signal);
   const provenance = { schema: 'cssearth-compiler-volume-provenance@1', fieldIdentity: options.fieldIdentity,
     coordinates: { axes: ['west', 'north', 'away'], units: 'arcsec', localOriginArcsec: origin,
-      mapping: 'absoluteArcsec = localUnits + localOriginArcsec', earthView: 'observer-at-negative-z-looking-away' },
+      ...(preparedPhysical ? { mapping: 'sourceArcsec = [preparedWest, preparedNorth, -preparedToward] + localOriginArcsec',
+        preparedAxes: ['west', 'north', 'toward'], earthView: 'source-observer-at-negative-z; prepared-observer-at-positive-z' }
+        : { mapping: 'absoluteArcsec = localUnits + localOriginArcsec', earthView: 'observer-at-negative-z-looking-away' }) },
     boundsArcsec, skyBoundsArcsec, minimumFeatureScaleArcsec: options.minimumFeatureScaleArcsec,
     interpretation: 'Neutral relative display emission from the supplied fitted field. Source RGB supplies material chromaticity only and cannot change support, opacity, or depth.',
     limitations: ['This prepared preview transports the caller-owned analytic field; it does not define or validate the scientific model.',
-      'Angular depth is an inferred display coordinate, not a measured line-of-sight distance.', 'Finite slabs, four depth samples per slab, and RGBA8 opacity approximate the continuous field.'] };
+      'Angular depth is an inferred display coordinate, not a measured line-of-sight distance.',
+      layerPlan ? 'Grouped finite slabs retain four depth samples per reference cell; RGBA8 opacity and plane collapse approximate the continuous field. The coarse optimization estimate is not visual acceptance.'
+        : 'Finite slabs, four depth samples per slab, and RGBA8 opacity approximate the continuous field.'],
+    ...(sampling.layerOptimization ? { layerOptimization: sampling.layerOptimization } : {}),
+    ...(sampling.renderBudget ? { renderBudget: sampling.renderBudget } : {}) };
   const totalSlices = sliceCounts.x + sliceCounts.y + sliceCounts.z;
   options.progress?.({ phase: 'volume', completed: 0, total: totalSlices * 2, message: 'Preparing shared neutral geometry' });
   let calls = 0;
-  const baked = await bakeMasterVolumeSlices({ boundsKpc: localBounds, sliceCounts, samplesPerSlab: DEPTH_SAMPLES,
+  const baked = await bakeMasterVolumeSlices({ boundsKpc: localBounds, sliceCounts, samplesPerSlab: DEPTH_SAMPLES, ...(layerPlan ? { layerPlan } : {}),
     exposureGain: 1, masterWidth: IMAGE_WIDTH, masterDirectory,
     deliveryBanks: [{ width: IMAGE_WIDTH, outputDirectory: neutralDirectory, imageEncoding: { format: 'png' } }], unitsPerSourceUnit: 1,
     provenance, cropTransparent: true, allowEmpty: false, sampleEmission(x, y, z, out) {
@@ -154,7 +228,9 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
   for (let index = 0; index < banks.length; index++) {
     cancel(signal); const bank = banks[index]!;
     options.progress?.({ phase: 'compile', completed: index, total: banks.length, message: 'Compiling retained volume materials' });
-    const volume = backend.compileVolume({ id: `compiler-${options.id}`, frame, slices: bank.slices });
+    // Keep the source sampling and pinned PNG bytes untouched. Cross the handedness boundary once,
+    // before the physical renderer sees coordinates, by reflecting prepared vertices and points.
+    const volume = backend.compileVolume({ id: `compiler-${options.id}`, frame, slices: preparedPhysical ? compilerPreparedSlices(bank.slices) : bank.slices });
     pins.set(bank.id, await pin(root, relative(root, containedPath(bank.directory, 'volume.json')), volume));
   }
   options.progress?.({ phase: 'compile', completed: banks.length, total: banks.length, message: 'Prepared final cloud and materials' });
@@ -165,5 +241,5 @@ export async function bakeCompiler(options: BakeCompilerOptions, backend: Compil
     sourceImage: { width: 512, height: 512 }, coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
       earthView: 'observer-at-negative-z-looking-away' }, neutral: pins.get('neutral'), alphaSha256: neutralAlpha,
     lenses: painted.map(item => ({ id: item.input.id, label: item.input.label, volume: pins.get(item.input.id), coverage: item.coverage })),
-    stars, ...starSprites, sampling: { sliceCounts, imageWidth: IMAGE_WIDTH, samplesPerSlab: DEPTH_SAMPLES } });
+    stars, ...starSprites, sampling });
 }

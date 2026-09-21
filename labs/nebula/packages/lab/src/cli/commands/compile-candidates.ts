@@ -8,6 +8,7 @@ import { compileNebula, validateCompilerResult } from '../../server/workflows/co
 import { jointRecord, jointPath } from '../../features/joint-fit/model.ts';
 import { loadDepthModel } from '../../server/workflows/compiler/depth-model.ts';
 import { sampledOwnerPins } from '../../features/sampled-prior/ownership.ts';
+import { loadPhotometricPrior } from '../../server/workflows/compiler/photometric-prior.ts';
 
 const [cataloguePath, ...args] = process.argv.slice(2);
 if (!cataloguePath || args.some(arg => arg !== '--alignment-only' && !/^--object=[a-z0-9-]+$/.test(arg))) {
@@ -70,6 +71,8 @@ for (const candidate of selected) {
       if (recipe.observedStars) inputPaths.push(recipe.observedStars.path);
       const depth = recipe.depthRecipe ? await loadDepthModel(root, recipe.depthRecipe, recipe.id) : undefined;
       if (depth) inputPaths.push(depth.recipePath, depth.recipe.evidence.path);
+      const photometric = recipe.photometricPriorRecipe ? await loadPhotometricPrior(root, recipe.photometricPriorRecipe, recipe.id) : undefined;
+      if (photometric && recipe.photometricPriorRecipe) inputPaths.push(recipe.photometricPriorRecipe, photometric.recipe.evidence.path);
       const method: unknown = JSON.parse(await readFile(result.method.path, 'utf8'));
       if (!jointRecord(method) || !Array.isArray(method.implementation)) throw new TypeError('Missing compiler implementation identity.');
       const sampledOwners = recipe.sampledRecipe ? sampledOwnerPins(method, recipe.sampledRecipe) : [];
@@ -77,6 +80,9 @@ for (const candidate of selected) {
       if (depth && (!jointRecord(method.physicalDepth) || !jointRecord(method.physicalDepth.recipe) || !jointRecord(method.physicalDepth.evidence) ||
           method.physicalDepth.recipe.sha256 !== depth.recipeSha256 || method.physicalDepth.evidence.sha256 !== depth.recipe.evidence.sha256))
         throw new TypeError('Compiled depth sources differ from the configured recipe or evidence.');
+      if (photometric && (!jointRecord(method.photometricPrior) || !jointRecord(method.photometricPrior.recipe) || !jointRecord(method.photometricPrior.evidence) ||
+          method.photometricPrior.recipe.sha256 !== photometric.recipeSha256 || method.photometricPrior.evidence.sha256 !== photometric.recipe.evidence.sha256))
+        throw new TypeError('Compiled photometric sources differ from the configured model or evidence.');
       for (const owner of method.implementation) {
         if (!jointRecord(owner) || !jointPath(owner.path) || typeof owner.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(owner.sha256))
           throw new TypeError('Invalid compiler implementation owner. Compile again with the current implementation.');
@@ -90,6 +96,9 @@ for (const candidate of selected) {
       if (depth && (inputs.find(source => source.path === depth.recipePath)?.sha256 !== depth.recipeSha256 ||
           inputs.find(source => source.path === depth.recipe.evidence.path)?.sha256 !== depth.recipe.evidence.sha256))
         throw new TypeError('Depth inputs changed during publication. Compile again.');
+      if (photometric && (inputs.find(source => source.path === recipe.photometricPriorRecipe)?.sha256 !== photometric.recipeSha256 ||
+          inputs.find(source => source.path === photometric.recipe.evidence.path)?.sha256 !== photometric.recipe.evidence.sha256))
+        throw new TypeError('Photometric inputs changed during publication. Compile again.');
       await save(resolve(published, `${candidate.id}.json`), { schema: 'cssearth-nebula-compiler-published@1', recipePath: candidate.compilerRecipe,
         result: resultPin, inputs });
       results.push({ id: candidate.id, status: 'complete', result: resultPin, metrics: result.metrics, seconds: (performance.now() - started) / 1000 });

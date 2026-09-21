@@ -1,0 +1,23 @@
+{
+  "purpose": "Actual existing-fixture import diagnostics; not a replacement test or mocked decoder.",
+  "results": [
+    {
+      "fixture": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
+      "family": "F02",
+      "descriptorPresent": false,
+      "issue": {
+        "state": "unsupported",
+        "reason": "The selected astropy-mixed-nd-fits@1 content validator refused the imported bytes: The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install"
+      }
+    },
+    {
+      "fixture": "tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz",
+      "family": "F14",
+      "descriptorPresent": false,
+      "issue": {
+        "state": "unsupported",
+        "reason": "The selected astropy-healpix-fits@1 content validator refused the imported bytes: The astronomy packages are not installed: node tools/objects/astronomy-packages/toolchain.mts install"
+      }
+    }
+  ]
+}

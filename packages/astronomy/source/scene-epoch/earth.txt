@@ -4,10 +4,10 @@ API SOURCE: NASA/JPL Horizons API
 
 
 *******************************************************************************
-Ephemeris / API_USER Tue Sep  8 03:34:44 2026 Pasadena, USA      / Horizons
+Ephemeris / API_USER Sun Sep 20 19:13:04 2026 Pasadena, USA      / Horizons
 *******************************************************************************
 Target body name: Earth (399)                     {source: DE441}
-Center body name: Earth-Moon Barycenter (3)       {source: DE441}
+Center body name: Sun (10)                        {source: DE441}
 Center-site name: BODY CENTER
 *******************************************************************************
 Start time      : A.D. 2026-Sep-02 23:58:50.8160 UT 
@@ -16,19 +16,19 @@ Step-size       : DISCRETE TIME-LIST
 *******************************************************************************
 Center geodetic : 0.0, 0.0, 0.0                   {E-lon(deg),Lat(deg),Alt(km)}
 Center cylindric: 0.0, 0.0, 0.0                   {E-lon(deg),Dxy(km),Dz(km)}
-Center radii    : (undefined)
+Center radii    : 695700.0, 695700.0, 695700.0 km {Equator_a, b, pole_c}
 Output units    : KM-D
 Calendar mode   : Mixed Julian/Gregorian
 Output type     : GEOMETRIC cartesian states
 Output format   : 2 (position and velocity)
-EOP file        : eop.260907.p261204
-EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-07. PREDICTS-> 2026-DEC-03
+EOP file        : eop.260918.p261215
+EOP coverage    : DATA-BASED 1962-JAN-20 TO 2026-SEP-18. PREDICTS-> 2026-DEC-14
 Reference frame : ICRF
 *******************************************************************************
             JDUT ,            Calendar Date (UT ),                      X,                      Y,                      Z,                     VX,                     VY,                     VZ,
 **************************************************************************************************************************************************************************************************
 $$SOE
-2461286.499199259, A.D. 2026-Sep-02 23:58:50.8160, -2.733179631353813E+03, -3.129369622703022E+03, -1.807081606177440E+03,  8.937061208767127E+02, -5.899347945433032E+02, -2.659723152615167E+02,
+2461286.499199259, A.D. 2026-Sep-02 23:58:50.8160,  1.419598293762084E+08, -4.699894462607852E+07, -2.037455741861388E+07,  8.326765485356208E+05,  2.211823321126896E+06,  9.587689764127650E+05,
 $$EOE
 **************************************************************************************************************************************************************************************************
  
