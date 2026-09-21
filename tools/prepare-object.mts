@@ -4,7 +4,8 @@
  *   node tools/prepare-object.mts <object-id> [--from <step>] [--presentation-only]
  *
  * --presentation-only reuses the object's published heavy outputs (imagery, pages, places, texture levels) and prepares the
- * presentation from them; the lane refuses when its recipe sources or recomputed plan differ from the published run.
+ * presentation from them, stopping after the prepare step; the lane refuses when its recipe sources or recomputed plan differ
+ * from the published run.
  *
  * Each step is an existing tool run for this object only. Nothing here decides science: it orders the tools, rebuilds what a
  * step would read stale, and never runs a repository-wide provenance pass (that one upgrades records of unrelated objects
@@ -46,7 +47,10 @@ export async function prepareObject(id: string, { from, presentationOnly = false
   if (!/^[a-z][a-z0-9-]*$/u.test(id) || !await exists(resolve('src/objects', id, 'object.json'))) throw new TypeError(`No object package: src/objects/${id}/object.json.`);
   const start = from === undefined ? 0 : PREPARATION_STEPS.findIndex(step => step.name === from);
   if (start < 0) throw new TypeError(`Unknown step ${from}; steps are ${PREPARATION_STEPS.map(step => step.name).join(', ')}.`);
-  for (const step of PREPARATION_STEPS.slice(start)) {
+  // A presentation-only run changes nothing the later steps read, and they read raw imagery a checkout may not have;
+  // its prepare step already pins the page data and publishes the set.
+  const steps = PREPARATION_STEPS.slice(start, presentationOnly ? PREPARATION_STEPS.findIndex(step => step.name === 'prepare') + 1 : undefined);
+  for (const step of steps) {
     const commands = await step.commands(id, { presentationOnly });
     console.log(`\n[${step.name}] ${step.purpose}${commands.length ? '' : ' (nothing to do)'}`);
     for (const [command, ...args] of commands) {
