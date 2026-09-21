@@ -18,7 +18,7 @@
         "surfaces"
       ],
       "lensId": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "falseColor": true,
       "width": 11445,
       "height": 5723,
@@ -982,8 +982,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 15304,
-      "expectedSha256": "e9191bef4e52b9e66726e5a8fb675a73c9bc43e9b020bde5f723808bd8bbe1a8",
+      "expectedBytes": 15303,
+      "expectedSha256": "c8cb672ee9273569da8721100cf7404eebf8ff22b07317aa056a28e0a2efb46b",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 19010,
-      "expectedSha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
+      "expectedBytes": 18920,
+      "expectedSha256": "d1ca5b545c97d55c37a301091e89e9ecce973d45f852325e0b4f453d39c78e60",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1230,8 +1230,8 @@
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
       "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2647,
-      "expectedSha256": "5a5b1dcfa47839aa23b400b18c77a709cb8bad4f3fc617bdd8affdc9a29437cc"
+      "expectedBytes": 2794,
+      "expectedSha256": "048d8bc71a3ca5a734b9de4d2a2a42e68c78eb9b48630da79a16e1201290b594"
     },
     {
       "id": "usgs-sim3168-io-geology-metadata-txt",

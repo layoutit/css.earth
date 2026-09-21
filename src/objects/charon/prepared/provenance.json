@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ca8d2b1c534d6c257ed5da4dccb2cc210a859d0fcd604d13d996cbf4ad2b88c5"
+    "sha256": "bf3f15665109503159aa4a9e6a5a062113890c64bff6a66c1ed8826016a88b5d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -362,7 +362,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "9cc8a4efc0f2a82b02031af680a473c4f4e42dfcaff223ef07c90045ab05c01f",
+      "sha256": "56fa9b0c1b1b6b0ff0950790eac4d314b38bcac81b4ba51b6bd8e8ce4d95d40a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -388,11 +388,11 @@
               "label": "System solar semimajor axis",
               "value": "39.482 AU",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-                "label": "NASA/JPL reference",
-                "checked": "2026-09-08",
+                "url": "https://web.archive.org/web/20190803153746/https://ssd.jpl.nasa.gov/txt/p_elem_t1.txt",
+                "label": "NASA/JPL reference (archived)",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-approximate-planetary-positions",
+                "catalogueId": "jpl-keplerian-elements-table-1-2019",
                 "locator": "/references/1; distance-from-sun"
               }
             },
@@ -440,14 +440,14 @@
             {
               "id": "density",
               "label": "Mean density",
-              "value": "1.853 ± 0.004 g/cm³",
+              "value": "1.705 g/cm³",
               "source": {
                 "url": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-                "label": "NASA/JPL reference",
-                "checked": "2026-09-08",
+                "label": "Derived from JPL GM 106.1 km³/s² and radius 606.0 km; the table's density cell repeats Pluto's 1.853",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
                 "catalogueId": "jpl-satellite-physical-parameters",
-                "locator": "/references/0; density"
+                "locator": "/references/0; GMKm3PerSec2, meanRadiusKm"
               }
             }
           ]
@@ -1243,8 +1243,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "9cc8a4efc0f2a82b02031af680a473c4f4e42dfcaff223ef07c90045ab05c01f",
-      "bytes": 16755,
+      "sha256": "56fa9b0c1b1b6b0ff0950790eac4d314b38bcac81b4ba51b6bd8e8ce4d95d40a",
+      "bytes": 16897,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1918,8 +1918,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 7145,
-          "sha256": "aa95c20f08668420b0e95c33ea57461c9bf7cffbaf2b09612ed42614bcbe702a",
+          "bytes": 7287,
+          "sha256": "855270743679e03c1b3b1d9dfc0b0143d1a7319c35fc033d9ebbef98cb25d601",
           "verification": "bytes-verified"
         }
       ],
@@ -2118,7 +2118,7 @@
   },
   "lastPreparation": {
     "objectId": "charon",
-    "materialSha256": "b303bacbc941eb6e7a084a428ffa737f122ced77886a09568a27a9c2cf004e56",
+    "materialSha256": "c93abb40b34caf355c1da03a4d9756a6f59c205fe9113698fa17f5dd508cfcb8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

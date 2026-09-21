@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "3e1bf59ff81f18b2eeb921f16df15df4b462c47bc521bf5d60274229ac11fc5c"
+    "sha256": "877f30ba37c6e1258d9be56468c35eca64ae521b98ef4f5afa86e43cf145fb39"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "fb9c40b619cf22e29e5f609e836827a1430950422f18edec145c37b1084d0725"
+    "bindingsSha256": "d8e9c8c1062148be75e8b76e012d54e166a5a64064fcec24ef2d034fbb3af883"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "6b235822fc48b512d45f3823e8beb239a8b5cbb5c4ee0e12ec6874f49b4d4618",
+      "sha256": "daf11e3a7c9b4a914ef347eecf580f352310870350afa6ab6d181171253f4245",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/arcturus/",
@@ -39,14 +39,34 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "arcturus-surface-{id}{suffix}.webp",
             "thumbnail": "arcturus-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's ground-based spectrophotometry (Pulkovo catalogue). The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "path": "photometry/claret-2011-v-quadratic.tsv",
+                "grid": {
+                  "teffK": 4295,
+                  "logg": 1.66,
+                  "models": {
+                    "Filt": "V",
+                    "Met": "L",
+                    "Mod": "A"
+                  }
+                },
+                "columns": {
+                  "teff": "Teff",
+                  "logg": "logg",
+                  "u1": "a",
+                  "u2": "b"
+                }
+              }
             }
           }
         ],
@@ -82,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "58afb76ca4dec748b12c3d98aea0d1ba4ae9f2938a790656c9d3bb29b42462da",
+      "sha256": "b4560308043fb36988412442a197b93b37bfe63acdc4a6d74304191e28497636",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +141,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "arcturus-lens-shape.webp",
-              "surface": "arcturus-surface-shape@2x.webp",
-              "poles": "arcturus-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+              "thumbnail": "arcturus-lens-color.webp",
+              "surface": "arcturus-surface-color@2x.webp",
+              "poles": "arcturus-poles-color@2x.webp",
               "source": {
-                "id": "arcturus-observational-measurements",
+                "id": "arcturus-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/0804.0192"
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of Arcturus's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +171,12 @@
             "role": "facts",
             "description": "Lacour, Meimon, Thiébaut et al., \"The limb-darkened Arcturus: imaging with the IOTA/IONIC interferometer\", A&A 485, 561 (2008), arXiv:0804.0192",
             "href": "https://arxiv.org/abs/0804.0192"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Pulkovo spectrophotometric catalogue, HR 5340 (VizieR III/201)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
           }
         ],
         "provenance": {
@@ -172,22 +198,126 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "arcturus-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/0804.0192",
-      "credit": "Lacour, Meimon, Thiébaut et al., \"The limb-darkened Arcturus: imaging with the IOTA/IONIC interferometer\", A&A 485, 561 (2008), arXiv:0804.0192",
+      "id": "arcturus-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/arcturus/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
       },
-      "sha256": "13e0ec659497b490a92ed49aaadb432f2c486ab575d4474ec4e02e6ae9a9154e",
-      "bytes": 1120,
+      "sha256": "a830f39badc943920396b740681272a21c4e91ebba2f4720ef8db4f62ac2e339",
+      "bytes": 1501,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "arcturus-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "arcturus-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/arcturus/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      },
+      "sha256": "636a0ecd96da7910e1515cb3e22f5f64d8b3ae7365dbed0d9d30357e7452a7ed",
+      "bytes": 844,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "photometry/claret-2011-v-quadratic.tsv",
+        "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "form": {
+          "-source": "J/A+A/529/A75/table-af",
+          "-out.max": "500",
+          "Teff": "4000..4750",
+          "logg": "1.5..2.0",
+          "Z": "=0",
+          "xi": "=2",
+          "Filt": "V",
+          "Met": "L",
+          "Mod": "A",
+          "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+        },
+        "requiredText": [
+          "logg\tTeff"
+        ],
+        "replacements": [
+          {
+            "pattern": "^#.*\\n",
+            "flags": "gm",
+            "replacement": ""
+          },
+          {
+            "pattern": "^\\s*\\n",
+            "flags": "gm",
+            "replacement": ""
+          }
+        ]
+      },
       "verificationOperations": []
     },
     {
@@ -203,8 +333,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "58afb76ca4dec748b12c3d98aea0d1ba4ae9f2938a790656c9d3bb29b42462da",
-      "bytes": 2891,
+      "sha256": "b4560308043fb36988412442a197b93b37bfe63acdc4a6d74304191e28497636",
+      "bytes": 3138,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +343,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from a measured spectrum of the star (Pulkovo catalogue). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +363,45 @@
         "falseColor": false
       },
       "inputs": [
-        "arcturus-observational-measurements"
+        "arcturus-stellar-color",
+        "arcturus-cie-1931-2deg-cmf",
+        "arcturus-claret-2011-v-quadratic"
       ],
       "outputs": [
         {
-          "url": "/scenes/arcturus/arcturus-surface-shape@2x.webp",
+          "url": "/scenes/arcturus/arcturus-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "0cacc0ca45a0203d3fcec0b847b93d14ca36e97fa4d42e63ce1ff88cc1d3ae6b",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/arcturus/arcturus-lens-shape.webp",
+          "url": "/scenes/arcturus/arcturus-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "c6416430ee4813245c354ce3a92bc9fc7171ce08a6ec05138c2221fef130981e",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/arcturus/arcturus-poles-shape@2x.webp",
+          "url": "/scenes/arcturus/arcturus-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "2b5ef9cb09928e55e1db0ab4b3ebc7043c07a2969e2e7cb4b10e57f5049d36ed",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/arcturus/arcturus-context-shape@2x.webp",
+          "url": "/scenes/arcturus/arcturus-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/arcturus/arcturus-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/arcturus/arcturus-limb-color@2x.webp",
+          "bytes": 102886,
+          "sha256": "7b5d2a70fd4a6859841bdefeaa0ba643da047a3dd4d9cfbbbc605c1b2aa01876",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "arcturus-observational-measurements",
+          "sourceId": "arcturus-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +427,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5232,
-          "sha256": "8b1774e6035fa45124e4cc099e84c4cb91f5a347aaa97dd8cc5ec076f77767aa",
+          "bytes": 5406,
+          "sha256": "7100b0e02e8e82c1b41c53641c16a7dbbe4bdbe16b094780ce7502dcf9b38aea",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +445,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 446,
+          "sha256": "cf4ef3a5fbd637d7ec916c2f8fe2bd30bc2f49849c32f2ffa04f22f593de7eba",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +466,11 @@
   },
   "lastPreparation": {
     "objectId": "arcturus",
-    "materialSha256": "ff237e3bc6c47fb01fd8a744a0f2d27a72da7a94f1fa361ad1cc42a1c8e0d1c0",
+    "materialSha256": "9f296d00cc8dd4e0a56e7790a32aa866996b86fdd8cf95ac217d2deba98f7f13",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "fb9c40b619cf22e29e5f609e836827a1430950422f18edec145c37b1084d0725"
+      "bindingsSha256": "d8e9c8c1062148be75e8b76e012d54e166a5a64064fcec24ef2d034fbb3af883"
     }
   }
 }

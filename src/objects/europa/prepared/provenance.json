@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "258a8c8d3d318eeb3a3612ce08059c6fef497eba78af53f8a895712ed74c6ede"
+    "sha256": "b616eb4b787d4cd9932c4ed94c17c46c2723923bf6652698a20f6f9439259f47"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c88b067c39b7c7c416af7bff036851be00df90d034e3c3881b3d96a96a362b34"
+    "bindingsSha256": "e7e0fcca490b3f389980657a67d3131cf4728aff21f0e0a73af4359218c8c6f1"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "6d992ff91e83327d1502c9344849b24e8cd447bbc9f0dbefbcd04ca5fe65eb67",
+      "sha256": "b75399611c1d2059194904191e0e704af58f7ad80f10aae5f035c4975f6c0824",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/europa/",
@@ -104,7 +104,7 @@
                 ]
               },
               "metadata": {
-                "label": "Enhanced color",
+                "label": "False color",
                 "falseColor": true,
                 "projection": {
                   "type": "equirectangular",
@@ -339,165 +339,6 @@
               },
               "textureScale": 0.5
             }
-          },
-          {
-            "id": "ice-signature",
-            "output": "europa-{id}{suffix}.webp",
-            "thumbnail": "europa-lens-{id}.webp",
-            "source": "composition/ice-signature.tif",
-            "falseColor": true,
-            "resolutionScale": 0.125,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "ice-signature",
-              "label": "Ice signature",
-              "minimum": 1.7,
-              "maximum": 3.2,
-              "colors": [
-                "#081d58",
-                "#225ea8",
-                "#41b6c4",
-                "#a1dab4",
-                "#ffffcc"
-              ],
-              "labels": [
-                "1.7",
-                "2.45",
-                "3.2"
-              ],
-              "units": "1.30000 / 1.50263 µm reflectance ratio",
-              "title": "Ice signature",
-              "description": "Ratio of photometrically corrected measured reflectances at the exact released wavelengths. A stronger ratio indicates deeper absorption near 1.5 µm, with composition and grain-size effects.",
-              "format": "geotiff",
-              "path": "composition/ice-signature.tif",
-              "consumer": "ice-signature",
-              "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-              "sampling": "nearest",
-              "displaySampling": "nearest",
-              "grid": {
-                "width": 361,
-                "height": 180,
-                "coordinates": "degrees",
-                "referenceRadiusMeters": 1560800,
-                "centerLongitude": 0,
-                "origin": [
-                  -180.5,
-                  89.5
-                ],
-                "resolution": [
-                  1,
-                  -1
-                ],
-                "wrapLongitude": true,
-                "noData": -99
-              }
-            }
-          },
-          {
-            "id": "fine-ice",
-            "output": "europa-{id}{suffix}.webp",
-            "thumbnail": "europa-lens-{id}.webp",
-            "source": "composition/fine-ice.tif",
-            "falseColor": true,
-            "resolutionScale": 0.125,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "fine-ice",
-              "label": "Fine ice",
-              "minimum": 0,
-              "maximum": 0.6,
-              "colors": [
-                "#081d58",
-                "#225ea8",
-                "#41b6c4",
-                "#a1dab4",
-                "#ffffcc"
-              ],
-              "labels": [
-                "0%",
-                "30%",
-                "60%"
-              ],
-              "units": "modeled fraction",
-              "title": "Fine ice",
-              "description": "Posterior median for the published 100–300 µm crystalline-ice endmember at 110 K. The laboratory temperature describes the reference spectrum, not a surface-temperature measurement.",
-              "format": "geotiff",
-              "path": "composition/fine-ice.tif",
-              "consumer": "fine-ice",
-              "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-              "sampling": "nearest",
-              "displaySampling": "nearest",
-              "grid": {
-                "width": 361,
-                "height": 180,
-                "coordinates": "degrees",
-                "referenceRadiusMeters": 1560800,
-                "centerLongitude": 0,
-                "origin": [
-                  -180.5,
-                  89.5
-                ],
-                "resolution": [
-                  1,
-                  -1
-                ],
-                "wrapLongitude": true,
-                "noData": -99
-              }
-            }
-          },
-          {
-            "id": "coarse-ice",
-            "output": "europa-{id}{suffix}.webp",
-            "thumbnail": "europa-lens-{id}.webp",
-            "source": "composition/coarse-ice.tif",
-            "falseColor": true,
-            "resolutionScale": 0.125,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "coarse-ice",
-              "label": "Coarse ice",
-              "minimum": 0,
-              "maximum": 0.6,
-              "colors": [
-                "#081d58",
-                "#225ea8",
-                "#41b6c4",
-                "#a1dab4",
-                "#ffffcc"
-              ],
-              "labels": [
-                "0%",
-                "30%",
-                "60%"
-              ],
-              "units": "modeled fraction",
-              "title": "Coarse ice",
-              "description": "Posterior median for the published 300 µm–1 mm crystalline-ice endmember at 110 K. The laboratory temperature describes the reference spectrum, not a surface-temperature measurement.",
-              "format": "geotiff",
-              "path": "composition/coarse-ice.tif",
-              "consumer": "coarse-ice",
-              "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-              "sampling": "nearest",
-              "displaySampling": "nearest",
-              "grid": {
-                "width": 361,
-                "height": 180,
-                "coordinates": "degrees",
-                "referenceRadiusMeters": 1560800,
-                "centerLongitude": 0,
-                "origin": [
-                  -180.5,
-                  89.5
-                ],
-                "resolution": [
-                  1,
-                  -1
-                ],
-                "wrapLongitude": true,
-                "noData": -99
-              }
-            }
           }
         ],
         "lighting": {
@@ -546,7 +387,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ac5fab975fe53569cd2f647746b4aafe4f945934eb59bdcf361a9b9410d9284f",
+      "sha256": "3a1b5253bc33b4062974f7dbf69233992277ee2dcdc9f314aa2bb2ed39699eec",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -602,11 +443,11 @@
               "label": "Orbit around Jupiter",
               "value": "3.55 days · sidereal",
               "source": {
-                "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
-                "label": "PDS/IAU sidereal rate",
-                "checked": "2026-09-08",
+                "url": "https://doi.org/10.1007/s10569-017-9805-5",
+                "label": "IAU WGCCRE 2015 sidereal rate",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+                "catalogueId": "iau-wgccre-2015",
                 "locator": "/references/2; orbital-period"
               }
             },
@@ -615,11 +456,11 @@
               "label": "Rotation period",
               "value": "3.55 days · synchronous",
               "source": {
-                "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
-                "label": "PDS/IAU sidereal rate",
-                "checked": "2026-09-08",
+                "url": "https://doi.org/10.1007/s10569-017-9805-5",
+                "label": "IAU WGCCRE 2015 sidereal rate",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
+                "catalogueId": "iau-wgccre-2015",
                 "locator": "/references/2; rotation-period"
               }
             }
@@ -838,186 +679,6 @@
               },
               "falseColor": true,
               "notes": "Galileo NIMS observations assign red, green and blue to 1.50, 1.34 and 0.73–0.74 µm, following the archive guide. This false-color view shows spectral differences, not natural color or mineral abundance. The observations have Minnaert photometric correction; resolution, residual brightness and seams vary. Fixed channel stretches clip extreme values. Gray grid marks areas lacking a valid sample in any selected band.",
-              "noData": true
-            },
-            {
-              "id": "ice-signature",
-              "label": "Ice signature",
-              "thumbnail": "europa-lens-ice-signature.webp",
-              "surface": "europa-ice-signature@2x.webp",
-              "poles": "europa-poles-ice-signature@2x.webp",
-              "source": {
-                "id": "europa-composition-ice-signature",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.5281/zenodo.6034904"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Ice signature",
-                "labels": [
-                  "1.7",
-                  "2.45",
-                  "3.2"
-                ],
-                "meta": "reflectance ratio",
-                "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-                "recipe": {
-                  "palette": [
-                    [
-                      8,
-                      29,
-                      88
-                    ],
-                    [
-                      34,
-                      94,
-                      168
-                    ],
-                    [
-                      65,
-                      182,
-                      196
-                    ],
-                    [
-                      161,
-                      218,
-                      180
-                    ],
-                    [
-                      255,
-                      255,
-                      204
-                    ]
-                  ],
-                  "labels": [
-                    "1.7",
-                    "2.45",
-                    "3.2"
-                  ]
-                }
-              },
-              "notes": "Ratio of photometrically corrected measured reflectances at the exact released wavelengths. A stronger ratio indicates deeper absorption near 1.5 µm, with composition and grain-size effects. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-              "noData": true
-            },
-            {
-              "id": "fine-ice",
-              "label": "Fine ice",
-              "thumbnail": "europa-lens-fine-ice.webp",
-              "surface": "europa-fine-ice@2x.webp",
-              "poles": "europa-poles-fine-ice@2x.webp",
-              "source": {
-                "id": "europa-composition-fine-ice",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.5281/zenodo.6034904"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Fine ice",
-                "labels": [
-                  "0%",
-                  "30%",
-                  "60%"
-                ],
-                "meta": "modeled fraction",
-                "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-                "recipe": {
-                  "palette": [
-                    [
-                      8,
-                      29,
-                      88
-                    ],
-                    [
-                      34,
-                      94,
-                      168
-                    ],
-                    [
-                      65,
-                      182,
-                      196
-                    ],
-                    [
-                      161,
-                      218,
-                      180
-                    ],
-                    [
-                      255,
-                      255,
-                      204
-                    ]
-                  ],
-                  "labels": [
-                    "0%",
-                    "30%",
-                    "60%"
-                  ]
-                }
-              },
-              "notes": "Posterior median for the published 100–300 µm crystalline-ice endmember at 110 K. The laboratory temperature describes the reference spectrum, not a surface-temperature measurement. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-              "noData": true
-            },
-            {
-              "id": "coarse-ice",
-              "label": "Coarse ice",
-              "thumbnail": "europa-lens-coarse-ice.webp",
-              "surface": "europa-coarse-ice@2x.webp",
-              "poles": "europa-poles-coarse-ice@2x.webp",
-              "source": {
-                "id": "europa-composition-coarse-ice",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.5281/zenodo.6034904"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Coarse ice",
-                "labels": [
-                  "0%",
-                  "30%",
-                  "60%"
-                ],
-                "meta": "modeled fraction",
-                "sourceUrl": "https://doi.org/10.5281/zenodo.6034904",
-                "recipe": {
-                  "palette": [
-                    [
-                      8,
-                      29,
-                      88
-                    ],
-                    [
-                      34,
-                      94,
-                      168
-                    ],
-                    [
-                      65,
-                      182,
-                      196
-                    ],
-                    [
-                      161,
-                      218,
-                      180
-                    ],
-                    [
-                      255,
-                      255,
-                      204
-                    ]
-                  ],
-                  "labels": [
-                    "0%",
-                    "30%",
-                    "60%"
-                  ]
-                }
-              },
-              "notes": "Posterior median for the published 300 µm–1 mm crystalline-ice endmember at 110 K. The laboratory temperature describes the reference spectrum, not a surface-temperature measurement. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
               "noData": true
             }
           ]
@@ -22759,247 +22420,6 @@
       "verificationOperations": []
     },
     {
-      "path": "composition/reflectance-recipe.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
-      },
-      "id": "source-document:composition/reflectance-recipe.json",
-      "kind": "source-document",
-      "origin": "object:source/composition/reflectance-recipe.json",
-      "title": "composition/reflectance-recipe.json",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "351d7cd6018fd6200e1e0beff607ec668105acc6e8a6fbf97d9d4dbf809717ce",
-      "bytes": 452,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "europa-composition-reflectance-SPHERE",
-      "path": "composition/reflectance_SPHERE.json.gz",
-      "origin": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/reflectance_SPHERE.json.gz",
-      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6034904"
-      ],
-      "acquisition": "Download the pinned native release member.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "europa-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6034904"
-          }
-        ]
-      },
-      "sha256": "e8d8f85e838180e1363aef0d57e9205ff476f6573fa0f44e588366d3728fa2c3",
-      "bytes": 2072834,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/reflectance_SPHERE.json.gz",
-        "url": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/reflectance_SPHERE.json.gz"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "europa-composition-ice-signature",
-      "path": "composition/ice-signature.tif",
-      "origin": "https://doi.org/10.5281/zenodo.6034904",
-      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6034904"
-      ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "lensId": "ice-signature",
-      "label": "Ice signature",
-      "falseColor": true,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "europa-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6034904"
-          }
-        ]
-      },
-      "sha256": "6d0eab3e645a2d81262818e7227ee37a4a3bf82718e55613cf2ac24c641a4f71",
-      "bytes": 260920,
-      "dependencies": [
-        "source-document:composition/reflectance-recipe.json",
-        "europa-composition-reflectance-SPHERE"
-      ],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "mapped-composition",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/ice-signature.tif",
-        "recipePath": "composition/reflectance-recipe.json",
-        "product": "ice-signature"
-      },
-      "verificationOperations": []
-    },
-    {
-      "path": "composition/model-recipe.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
-      },
-      "id": "source-document:composition/model-recipe.json",
-      "kind": "source-document",
-      "origin": "object:source/composition/model-recipe.json",
-      "title": "composition/model-recipe.json",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "ac4f528953750429a1a78d19040e765fbb75a9a68341ba670369af199049fb21",
-      "bytes": 952,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "europa-composition-fit-SPHERE",
-      "path": "composition/fit_SPHERE.json.gz",
-      "origin": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/fit_SPHERE.json.gz",
-      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6034904"
-      ],
-      "acquisition": "Download the pinned native release member.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "europa-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6034904"
-          }
-        ]
-      },
-      "sha256": "f991ea9cef84b48b09fe5dd0195d98b5962e505b98bf49f562b577f56c537199",
-      "bytes": 2700255,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/fit_SPHERE.json.gz",
-        "url": "https://raw.githubusercontent.com/ortk95/king-2022-compositional-mapping-europa/9dc54ad9984875f5766eb3d80d65eb66a74e10ce/fit_SPHERE.json.gz"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "europa-composition-fine-ice",
-      "path": "composition/fine-ice.tif",
-      "origin": "https://doi.org/10.5281/zenodo.6034904",
-      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6034904"
-      ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "lensId": "fine-ice",
-      "label": "Fine ice",
-      "falseColor": true,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "europa-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6034904"
-          }
-        ]
-      },
-      "sha256": "49d1e99a5ee82018cfebb27d7554a70eb845b83e1bef811400ac66aad8f2ceff",
-      "bytes": 260920,
-      "dependencies": [
-        "source-document:composition/model-recipe.json",
-        "europa-composition-fit-SPHERE"
-      ],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "mapped-composition",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/fine-ice.tif",
-        "recipePath": "composition/model-recipe.json",
-        "product": "fine-ice"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "europa-composition-coarse-ice",
-      "path": "composition/coarse-ice.tif",
-      "origin": "https://doi.org/10.5281/zenodo.6034904",
-      "credit": "Oliver King, Leigh N. Fletcher, Nicolas Ligier (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6034904"
-      ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "lensId": "coarse-ice",
-      "label": "Coarse ice",
-      "falseColor": true,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "europa-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6034904"
-          }
-        ]
-      },
-      "sha256": "ab127d09bb072a660e6893184bfa4f4e54fbe1095674f86e22dd1f749617b10e",
-      "bytes": 260920,
-      "dependencies": [
-        "source-document:composition/model-recipe.json",
-        "europa-composition-fit-SPHERE"
-      ],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "mapped-composition",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/coarse-ice.tif",
-        "recipePath": "composition/model-recipe.json",
-        "product": "coarse-ice"
-      },
-      "verificationOperations": []
-    },
-    {
       "kind": "authored-content",
       "id": "europa-object-content",
       "path": "content/object.json",
@@ -23012,8 +22432,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "ac5fab975fe53569cd2f647746b4aafe4f945934eb59bdcf361a9b9410d9284f",
-      "bytes": 20400,
+      "sha256": "3a1b5253bc33b4062974f7dbf69233992277ee2dcdc9f314aa2bb2ed39699eec",
+      "bytes": 14877,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -23731,156 +23151,6 @@
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "ice-signature",
-      "label": "Ice signature",
-      "recipe": "raster",
-      "selector": "/surfaces/5",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [],
-      "lensIds": [
-        "ice-signature"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "europa-composition-ice-signature"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-ice-signature@2x.webp",
-          "bytes": 38392,
-          "sha256": "1cb04424881acf1fe3b1bf442ad8fdcb13dedde0320ed372a2a56dba09b2e11e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lens-ice-signature.webp",
-          "bytes": 4320,
-          "sha256": "1d3747071e6b6dc8d776e686907651eb07c17c66322e899d3541488bef28be53",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-ice-signature@2x.webp",
-          "bytes": 8182,
-          "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "europa-composition-ice-signature",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/5/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "fine-ice",
-      "label": "Fine ice",
-      "recipe": "raster",
-      "selector": "/surfaces/6",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [],
-      "lensIds": [
-        "fine-ice"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "europa-composition-fine-ice"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-fine-ice@2x.webp",
-          "bytes": 37256,
-          "sha256": "8249b8c3fbcc7deec23cf39a11680b84d575abded14da051ca77c7d5670382b0",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lens-fine-ice.webp",
-          "bytes": 4488,
-          "sha256": "e98011c7da839a2ba0093aa5c7a9b2819624cebf513fbb17f0d1aa8e0af2c46b",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-fine-ice@2x.webp",
-          "bytes": 8182,
-          "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "europa-composition-fine-ice",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/6/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "coarse-ice",
-      "label": "Coarse ice",
-      "recipe": "raster",
-      "selector": "/surfaces/7",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [],
-      "lensIds": [
-        "coarse-ice"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "europa-composition-coarse-ice"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/europa/europa-coarse-ice@2x.webp",
-          "bytes": 40214,
-          "sha256": "3445290322e40e6b3f5bf745b69757e140bc89366377d989bf63137491a16e30",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-lens-coarse-ice.webp",
-          "bytes": 4454,
-          "sha256": "78eef448eb826f1a50fc56756ad375c28dcd0713a37e38f7f305a4f8cf5ddf8d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/europa/europa-poles-coarse-ice@2x.webp",
-          "bytes": 8182,
-          "sha256": "94184b9f3c806d6e2324de72cece42fb8bb18fdf88de8886b31077bc77dd701b",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "europa-composition-coarse-ice",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/7/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
       "id": "lighting",
       "label": "lighting",
       "recipe": "raster",
@@ -24118,8 +23388,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6472,
-          "sha256": "1798111a0963430979095e7ee374e294f7f90e6f47338ef81015b9967499b8db",
+          "bytes": 6360,
+          "sha256": "5bdebeab92d6bdffa764006c15e720b98356e3169be0f50b1043e2023dd052d2",
           "verification": "bytes-verified"
         }
       ],
@@ -24284,81 +23554,6 @@
           "verification": "bytes-verified"
         }
       ]
-    },
-    {
-      "id": "preview:ice-signature",
-      "label": "Ice signature preview",
-      "recipe": "raster",
-      "selector": "/surfaces/5",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "ice-signature"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/ice-signature.webp",
-          "bytes": 29750,
-          "sha256": "a9cdfe6f6d9110e15aa27e180a1ffd886ee038bf2ecc65ba5425b97666f97631",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:fine-ice",
-      "label": "Fine ice preview",
-      "recipe": "raster",
-      "selector": "/surfaces/6",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "fine-ice"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/fine-ice.webp",
-          "bytes": 30478,
-          "sha256": "56e40bbcea88a9add5e8e4e02620682cbbc76511450fe814c0dc4a9aeb535f4d",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:coarse-ice",
-      "label": "Coarse ice preview",
-      "recipe": "raster",
-      "selector": "/surfaces/7",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "coarse-ice"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/coarse-ice.webp",
-          "bytes": 29806,
-          "sha256": "82402910cfb9240ce3f2f586830e44d235e930e9b1e60000319b013a932444fd",
-          "verification": "bytes-verified"
-        }
-      ]
     }
   ],
   "coverage": {
@@ -24367,11 +23562,11 @@
   },
   "lastPreparation": {
     "objectId": "europa",
-    "materialSha256": "ed7b677817e6b483cefa276d836ddacd6117034bcd11065e30b1e6b1004aea0b",
+    "materialSha256": "93be00ae9bd2264eb402fa84060ffdb8368c8415ee54512f1e473919fdc32306",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c88b067c39b7c7c416af7bff036851be00df90d034e3c3881b3d96a96a362b34"
+      "bindingsSha256": "e7e0fcca490b3f389980657a67d3131cf4728aff21f0e0a73af4359218c8c6f1"
     }
   }
 }

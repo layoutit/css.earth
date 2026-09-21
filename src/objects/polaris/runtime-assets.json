@@ -2,29 +2,29 @@
   "schema": "csspolaris-runtime-assets@1",
   "assets": [
     {
-      "filename": "polaris-context-shape@2x.webp",
+      "filename": "polaris-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "polaris-lens-shape.webp",
+      "filename": "polaris-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "fb2fd3d3d023c702e42ca878a6f699691cbd995bae4302228ed9e605c4b59810"
     },
     {
-      "filename": "polaris-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "polaris-limb-color@2x.webp",
+      "bytes": 97562,
+      "sha256": "54676f06f0535293d5e4d678113ee1fe3e3bcf87ef1350e8427f347d749ffd35"
     },
     {
-      "filename": "polaris-poles-shape@2x.webp",
+      "filename": "polaris-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "09edef57f3ba449d161acbfa60f5e133b7e58a0fa2d2763549cc1e9ad0c288b4"
     },
     {
-      "filename": "polaris-surface-shape@2x.webp",
+      "filename": "polaris-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "530c0883272379988dc79222a182ed08e5463f3c5b7afc6257ce2d1591145f3f"
     }
   ]
 }

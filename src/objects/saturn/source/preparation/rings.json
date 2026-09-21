@@ -269,7 +269,7 @@
           }
         ]
       },
-      "qualification": "Pinned OpenSpace radial color/transparency profiles; authored D/F-ring optical models, named gap constraints, source-profile readability and prepared solar tint. The accepted field is preserved including transparent RGB.",
+      "qualification": "Alpha is the Cassini UVIS HSP alpha Virginis occultation of 2006 day 285 (PDS COUVIS_8001, 1 km bins) as transmission, exp(-tau); flagged-corrupted bins are interpolated. Colour is uniform white under the declared solar tint. Named gaps and hairlines keep a minimum pixel width, sampled from the same occultation.",
       "variants": [
         {
           "id": "ultraviolet",

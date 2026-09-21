@@ -3,7 +3,7 @@
   "modelId": 16312,
   "modelVersion": "2025-07-15",
   "diameterKm": 37,
-  "diameterInterpretation": "Convex CITPM shape; 37±2 km volume-equivalent thermal size. Occultations give46±1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
+  "diameterInterpretation": "Convex CITPM shape; 37±2 km volume-equivalent thermal size. Occultations give 46±1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
     "diameterKm": 37,
@@ -14,8 +14,8 @@
     "sourceUrl": "https://arxiv.org/pdf/2505.09437",
     "reference": "Choukroun et al. (2025), A&A 698, A298",
     "sourceLabel": "Choukroun et al. (2025), A&A 698, A298",
-    "limitations": "Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
-    "visibleDescription": "Convex CITPM shape; 37±2 km volume-equivalent thermal size. Occultations give46±1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
+    "limitations": "Choukroun 2025 Table 4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table 4 pole 1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section 4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model 16312 as pole 1 without rejecting 4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
+    "visibleDescription": "Convex CITPM shape; 37±2 km volume-equivalent thermal size. Occultations give 46±1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 1.0000000108130913,
     "metersPerSourceUnit": 1000.0000108130913,
     "sourceSignedVolume": 26521.847920031152,
@@ -32,7 +32,7 @@
     45,
     85
   ],
-  "modelLimitations": "Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
+  "modelLimitations": "Choukroun 2025 Table 4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table 4 pole 1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section 4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model 16312 as pole 1 without rejecting 4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/129887/shape.txt",
     "vertices": 574,

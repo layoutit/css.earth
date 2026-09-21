@@ -91,7 +91,7 @@
         "bytes": 969599
       }
     ],
-    "selectionReason": "Selected fully cryogenic W3/W4 observations with fitted beaming over the shorter-wavelength Masiero2012 fit; those short-wave fits carry larger systematic errors and stronger dependence on assumed optical H.",
+    "selectionReason": "Selected fully cryogenic W3/W4 observations with fitted beaming over the shorter-wavelength Masiero 2012 fit; those short-wave fits carry larger systematic errors and stronger dependence on assumed optical H.",
     "scaleKmPerSourceUnit": 21.272650950557715,
     "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
     "approximate": true,

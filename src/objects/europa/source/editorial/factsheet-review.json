@@ -43,11 +43,12 @@
       }
     },
     {
-      "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
+      "url": "https://doi.org/10.1007/s10569-017-9805-5",
       "quantity": "IAU mean sidereal rotation rate",
       "degreesPerDay": 101.3747235,
       "derivation": "360 / degreesPerDay; synchronous mean sidereal orbital period",
-      "siderealPeriodDays": 3.551181079177
+      "siderealPeriodDays": 3.551181079177,
+      "note": "Archinal et al. (2018), IAU WGCCRE 2015 report, prime meridian W secular rate; transcribed in NAIF pck00011.tpc, which notes the values are unchanged in the 2015 report."
     },
     {
       "url": "https://ssd.jpl.nasa.gov/sats/elem/",

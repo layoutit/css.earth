@@ -156,6 +156,40 @@ already MJy/sr, so the route applies no factor. [JWST imaging](jwst-imaging.md) 
 against MAST and what they cost. A recipe may set `pointSources: "mask"` to report stars found on each band as no coverage
 ([point-sources.mts](../tools/objects/observation/point-sources.mts)), which a lens that places the image in depth needs.
 
+## Star photospheres
+
+A star whose surface is not imaged still has a measured colour: its spectrum. The `stellar-photometric-color` kind
+([stellar-photometric-color.mts](../tools/objects/observation/stellar-photometric-color.mts)) reads one archived spectrum
+in its own layout, averages it into 1 nm bins from 380 to 780 nm, weights it by the CIE 1931 2° observer and converts it to
+sRGB with the D65 white, brightest channel full. It reads HST CALSPEC and the STIS libraries, Gaia DR3 XP, X-Shooter, UVES,
+LAMOST and the Pulkovo, Kiehling, Burnashev and Kharitonov spectrophotometric catalogues. A stretch with no data inside
+380-780 nm must be declared as a gap, with its reason. Checked against the Sun, the route turns CALSPEC's solar spectrum
+into #fff2ee, the colour the Sun's swatch takes from a different spectrum (ASTM E490) with Colour Science.
+
+The star's catalogue swatch, minimap dot and navigation marker take the same colour
+([stellar-spectra/author.mts](../tools/objects/source-authoring/stellar-spectra/author.mts)). A star with no usable
+spectrum keeps the star field's temperature fit at a cited effective temperature
+([star-catalogue-color.mts](../tools/objects/star-catalogue-color.mts)).
+
+**Cross-checks.** A colour record may name a second spectrum from a different instrument. Preparation records its colour
+beside the lens colour, and [object-package-consistency.test.mts](../tools/object-package-consistency.test.mts) fails when
+the two differ by more than 12 levels in any channel unless the record states the disagreement.
+
+**Limb darkening**, in this order of preference:
+
+1. Coefficients measured on the star, from transits of its planet or from interferometry, in or near the visible.
+2. The Claret & Bloemen (2011) V-band model grid at the star's cited temperature and gravity, labelled as a model.
+3. None, when the star lies outside the grid. The value is not extrapolated.
+
+The plate is a round overlay fitted to the sphere's outline at its drawn size, geometry scale included.
+
+**Gravity darkening.** A star that spins fast is flattened and hotter at its poles. Where a paper publishes a Roche-von Zeipel
+fit (ω, β, the polar temperature, the radii and the pole's orientation), [gravity-darkening.mts](../tools/objects/observation/gravity-darkening.mts)
+rebuilds the surface from those numbers and writes a temperature for each latitude row. Its tests require the paper's
+equatorial radius and temperature to come back within their errors. The measured flattening is drawn as an ellipsoid.
+
+![The placed stars' colour lenses, each from a measured spectrum](images/star-colours.png)
+
 ## Evidence must match the claim
 
 Check native band identities, units and registration separately from display

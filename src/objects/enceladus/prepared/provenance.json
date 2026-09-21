@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "99454142aef1dfdcb3ee99746083fd1d61bc4114cb36152fc07350fe02d7b3ed"
+    "sha256": "658fc2fd5fd570ee11995b67711d8611e7e949a0edb70eed72ec932723e92cb0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "f234c2398fa159db29f7e38a3dd7fe3fa6861746cf3241b5bd5422cb4fb859f1",
+      "sha256": "a883fa8f3596748d3cb14a188fc24271d727cb0666182457506ae7c57719bd7e",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -222,7 +222,7 @@
         },
         "geometry": {
           "radius": 230,
-          "radiusKm": 252.3,
+          "radiusKm": 252.1,
           "mapUrl": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
           "polesUrl": "/scenes/enceladus/enceladus-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1037,8 +1037,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-normal-surface@2x.webp",
-          "bytes": 8604612,
-          "sha256": "0610c3934f6c1edb228e0d5d7288505de143839da84b84f1e18852c5ffe794c1",
+          "bytes": 8603770,
+          "sha256": "0edb35e9d874d36e5dca4d3bdbaf4254dcccd0c5e05a60d6be6259ada35f4c95",
           "verification": "bytes-verified"
         }
       ],
@@ -1094,8 +1094,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-elevation-surface@2x.webp",
-          "bytes": 6216972,
-          "sha256": "08447f206d3e687ccb905bf6a5c191c3e648fcbe79a9bd0d59658d207e008add",
+          "bytes": 6218274,
+          "sha256": "7dc11d2117cd63d8ff391f5078aeecbc6d6857c888dbac276897b9330a7e3588",
           "verification": "bytes-verified"
         }
       ],
@@ -1147,7 +1147,7 @@
         {
           "url": "/scenes/enceladus/enceladus-ice-absorption-surface@2x.webp",
           "bytes": 56084,
-          "sha256": "6ac3c4041837b6b64004a112862ad3e10fb372cb80c3048f93e82775f8242f65",
+          "sha256": "36a47d016a61ff5e1352b5163772f8f72fc88fbd59e387dd88d7206620db2d03",
           "verification": "bytes-verified"
         }
       ],
@@ -1198,8 +1198,8 @@
         },
         {
           "url": "/scenes/enceladus/enceladus-infrared-ratio-surface@2x.webp",
-          "bytes": 56680,
-          "sha256": "ef440ca0bf6cd275034a3af790ead0afd8f9bcd10dcd38e5a23cbc9bd4dcfa11",
+          "bytes": 56922,
+          "sha256": "3161a66f24db324330b1a63ed06363c9eabb3251a6111f146c8bd675795f2984",
           "verification": "bytes-verified"
         }
       ],
@@ -1243,7 +1243,7 @@
         {
           "url": "/scenes/enceladus/enceladus-shape-surface@2x.webp",
           "bytes": 129790,
-          "sha256": "fd883cbf43b62fc79e35aeb58879400e129341d93881f08b12e51077cac5e6a1",
+          "sha256": "e8fbd637703c18c5882a7ff990c43e1eb8b1b65f70ddb09a68fcdd3cb4dc2993",
           "verification": "bytes-verified"
         }
       ],
@@ -1310,8 +1310,8 @@
       "outputs": [
         {
           "url": "/scenes/enceladus/enceladus-features.json",
-          "bytes": 317837,
-          "sha256": "e414a63ce1d78fcb751a9ab327609f50296e8ed25bdbb06a9648a877c31224ed",
+          "bytes": 318088,
+          "sha256": "4d7e508ea947c5fd5ef84bfdfac498b8926c98c3868c2d2afc22bd622f81c037",
           "verification": "bytes-verified"
         }
       ],
@@ -1449,7 +1449,7 @@
   },
   "lastPreparation": {
     "objectId": "enceladus",
-    "materialSha256": "41484c37ceb72caaf3beace8195ceedc0dd17fc9f7798586e95153f2ccba409e",
+    "materialSha256": "d6d79159d256edec3e62aaab9d6f93afe6228e3d0901472674ff9382654e9a8e",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Marciniak2019 section4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square1.1 versus2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is85 km with asymmetric3-sigma interval80–92 km; DAMIT rounds its equivalent-diameter error to6 km.
+Marciniak 2019 section 4.2 and TableB.2 prefer AM1 (77,-26), matching model3097: reduced chi-square 1.1 versus 2.0 for AM2/model3096. The latter is a bad thermal fit. The published diameter is 85 km with asymmetric 3-sigma interval 80–92 km; DAMIT rounds its equivalent-diameter error to 6 km.
 
 WISE W3/W4 residual offsets remain and roughness is unconstrained.
 
@@ -31,7 +31,7 @@ Absolute phase is arbitrary; accelerated display spin is illustrative.
 
 The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 3096, pole ['252', '-49'], [Model 3096](https://damit.cuni.cz/projects/damit/asteroid_models/view/3096)
 
-Marciniak2019 section4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.
+Marciniak 2019 section 4 calls D a scaling value for the published spin/shape solution and points to DAMIT for its release, but does not explicitly define volume-equivalent D. Equivalent-volume semantics here describe the selected DAMIT mesh and its declared size; they are not quoted as a separate physical-volume definition from that paper.
 
 [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
 

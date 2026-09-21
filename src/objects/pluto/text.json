@@ -27,14 +27,14 @@
   },
   "datasets": {
     "surface": {
-      "title": "MVIC color mosaic",
-      "detail": "Color mosaic",
-      "summary": "Color images cover part of the surface, with detail varying by region."
+      "title": "MVIC enhanced-color mosaic",
+      "detail": "Enhanced color",
+      "summary": "Blue, red and near-infrared images, not natural color; they cover part of the surface."
     },
     "topography": {
       "title": "Stereo elevation map",
       "detail": "Stereo relief",
-      "summary": "Heights from −8 to +8 km, with shading to show slopes."
+      "summary": "Heights from −4.1 to +6.5 km on a −8 to +8 km color scale, with shading to show slopes."
     },
     "monochrome": {
       "title": "LORRI/MVIC mosaic",

@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 1.5,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of the displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about10%in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
+    "additionalSystematics": "Usui 2011§2.3 explicitly omits unquantified shape/spin/thermal-model effects; rotation can add a few to about 10% in size, especially for fewdetections. No invented numerical confidence interval is assigned to these unquantified effects.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Its use as the volume-equivalent diameter of the separate convex DAMIT mesh is an explicit display-scale approximation, not a published physical-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -23,7 +23,7 @@
       "detections": 9,
       "originalRow": "105    Artemis                        8.57  0.10  9  123.53  1.50 0.043 0.001"
     },
-    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports 405 ASAS-SN V-band detections and this single archived pole. It is a coarse photometric inversion, not resolved imagery.",
+    "limitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš 2021 TableA.2 reports 405 ASAS-SN V-band detections and this single archived pole. It is a coarse photometric inversion, not resolved imagery.",
     "scaleKmPerSourceUnit": 99.56468478948827,
     "metersPerSourceUnit": 99564.68478948827,
     "sourceLabel": "Usui et al.(2011), PASJ63,1117–1138, AcuA v1.0; doi:10.1093/pasj/63.5.1117",
@@ -34,7 +34,7 @@
     47,
     24
   ],
-  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports 405 ASAS-SN V-band detections and this single archived pole. It is a coarse photometric inversion, not resolved imagery.",
+  "modelLimitations": "The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš 2021 TableA.2 reports 405 ASAS-SN V-band detections and this single archived pole. It is a coarse photometric inversion, not resolved imagery.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/65053/shape.txt",
     "vertices": 1021,

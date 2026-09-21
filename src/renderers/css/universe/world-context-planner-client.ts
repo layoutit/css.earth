@@ -13,7 +13,10 @@ export interface WorldPlannerWorker {
 
 /** Prepared files the planner worker loads and validates itself, off the main thread. */
 export interface WorldPlannerSource {
-  readonly contextUrl: string;
+  /** The same summary the main thread holds. */
+  readonly summaryUrl: string;
+  /** The binary orbit bank the summary pins: the only copy of the orbit paths in the browser. */
+  readonly orbitsUrl: string;
 }
 
 /** The publication queue owns admission; this transport owns one persistent prepared bank.

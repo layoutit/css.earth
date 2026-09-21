@@ -9,7 +9,7 @@
     "gravitationalParameterKm3PerS2": 0,
     "parent": "uranus"
   },
-  "physicalNotes": "Buie et al. (2015) primary axes; JPL primary GM. Physical primary, not binary barycenter.",
+  "physicalNotes": "Radius: volume-equivalent radius of the prolate semiaxes 45 x 27 x 27 km from Karkoschka (2001), HST study Table IV (https://doi.org/10.1006/icar.2001.6596), as reproduced in French et al. (2024). GM 0 means the mass is not modeled.",
   "satellite": {
     "parent": "uranus",
     "horizonsCode": "710",

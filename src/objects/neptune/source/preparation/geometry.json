@@ -3,7 +3,7 @@
   "namespace": "neptune",
   "surface": {
     "radius": 220,
-    "polarRadius": 216.0022613471168,
+    "polarRadius": 216.24212566628978,
     "latitudeSegments": 20,
     "longitudeSegments": 40,
     "surface": {
@@ -43,7 +43,7 @@
   "planes": [
     {
       "id": "rings",
-      "radius": 559.0881925375545,
+      "radius": 560.1098368599579,
       "url": "/scenes/neptune/neptune-rings-wedges@2x.webp",
       "size": 1024,
       "color": "#8caeca"

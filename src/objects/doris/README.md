@@ -103,7 +103,7 @@ The source ecliptic J2000 pole is converted with obliquity 23.439291111° for th
 
 Pinned JPL Horizons elements and independent vectors at JD 2461286.5 and ±30 days supply heliocentric ICRF context. The conic is a fixed-epoch display approximation, not a long-term perturbation ephemeris. TDB is approximated as TT within 2 ms.
 
-GM is the value in the pinned Horizons physical block, or zero for an unavailable GM; it is not inferred from an assumed density.
+GM is G times the measured mass in [Vernazza et al. (2021), Table 1](https://vizier.cds.unistra.fr/viz-bin/VizieR?-source=J/A%2BA/654/A56) (6.90 ± 2.90 × 10^18 kg), with G = 6.6743 × 10^-20 km³ kg⁻¹ s⁻²; it is not inferred from an assumed density.
 
 [source/manifest.json](source/manifest.json) pins every consumed file. The original mesh is checked in and also restorable through source/preparation/acquisition.json, along with the Inter font. Original model-record snapshots and supporting documents remain checked in because server-generated HTML contains changing timestamps.
 

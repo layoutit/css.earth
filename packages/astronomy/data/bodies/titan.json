@@ -5,11 +5,11 @@
   "physical": {
     "name": "Titan",
     "horizonsCode": "606",
-    "meanRadiusKm": 2575.5,
+    "meanRadiusKm": 2574.76,
     "gravitationalParameterKm3PerS2": 8978.14,
     "parent": "saturn"
   },
-  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "physicalNotes": "GM: JPL SAT441 (Jacobson 2022, AJ 164:199) via ssd.jpl.nasa.gov/sats/phys_par.\nRadii: IAU 2015 mean radii (Archinal et al. 2018) from the same JPL table.",
   "satellite": {
     "parent": "saturn",
     "horizonsCode": "606",

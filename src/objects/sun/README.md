@@ -38,15 +38,16 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   own `hmi.mrsynop_small_720s[2311]` magnetic map, against 76% before; the old
   map also showed doubled, half-strength spots where two frames blended
   ([before, after and the magnetic field](source/reference/photosphere-before-after.png)).
-- The Chromosphere and Corona FITS maps were mirrored east–west against the
-  magnetic map. JSOC's header for the magnetic map (CTYPE1 `CRLN-CEA`, CDELT1
-  −0.5, pixel 1 at Carrington longitude 0.3°) and the AIA maps both run
-  longitude up to the right; the magnetic lens reversed its axis and the AIA
-  lenses did not. The raster lane takes east-positive maps (Mars's Gazetteer
-  features, which are east-positive, sit on the Viking MDIM mosaic), and
-  Carrington longitude increases toward the west limb, so every Sun map must be
-  reversed. Before: |B| correlates with 304 Å at r = 0.44 as prepared and 0.57
-  mirrored; after: 0.57 as prepared (0.55 for 171 Å).
+- Longitude direction (Solar System audit, measured on `main` at 44bf8eac22):
+  every Sun map was mirrored east–west. JSOC's magnetic-map header (CTYPE1
+  `CRLN-CEA`, CDELT1 −0.5, pixel 1 at Carrington longitude 0.3°) and the AIA
+  synoptic maps run Carrington longitude up to the right. Carrington longitude
+  grows in the direction of rotation, which is the renderer's east-positive
+  sense (`tools/objects/interferometry/surface-lens.mts`: east longitude grows
+  from 0 at the left edge), so the maps are used as stored. The earlier review
+  reversed all of them and the HMI photosphere projection laid its columns out
+  from 360° down to 0°. Both are fixed; the runtime-contract test checks that
+  the magnetic lens colours negative field at the left of a test map.
 - The photosphere now reads 28 JSOC `hmi.Ic_noLimbDark_720s` frames (daily at
   00:00 TAI from 13 May to 9 June, plus 26 May 12:00 for the missing midnight,
   all QUALITY 0). Each frame is placed by its pinned DRMS record: CRPIX,
@@ -106,14 +107,14 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   table. Continuation beyond 80° latitude is a display approximation.
 - Magnetic field: JSOC `hmi.mrsynop_small_720s[2311]`, the 720 x 360 radial
   magnetic-field map for Carrington Rotation 2311. The FITS grid is equally
-  spaced in sine latitude. Preparation resamples it to equal latitude, reverses
-  its longitude axis to east-positive and uses a declared bipolar
+  spaced in sine latitude. Preparation resamples it to equal latitude, keeps
+  its east-positive longitude axis and uses a declared bipolar
   blue-to-amber false-colour scale.
 - Chromosphere: NASA SDO AIA 304 Å CR2311 FITS synoptic map, 3,600 × 1,080,
-  longitude reversed to east-positive, displayed in false color with a
+  east-positive longitude as stored, displayed in false color with a
   logarithmic intensity scale.
 - Corona: NASA SDO AIA 171 Å CR2311 FITS synoptic map, 3,600 × 1,080,
-  longitude reversed to east-positive, displayed in false color with a
+  east-positive longitude as stored, displayed in false color with a
   logarithmic intensity scale.
 
 CR2311 covers 2026-05-12 through 2026-06-09. A synoptic map combines central meridian

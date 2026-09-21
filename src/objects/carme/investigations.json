@@ -1,0 +1,21 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "carme",
+  "entries": [
+    {
+      "id": "horizons-radius",
+      "subject": "Size: JPL Horizons object data radius",
+      "status": "included",
+      "finding": "Carme is drawn at the radius of 15 km that JPL Horizons lists on its object data page for body 511 (revised 2025-May-12). Horizons gives no shape, albedo map or rotation state for it, so the sphere is illustrative.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27511%27&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
+        }
+      ]
+    }
+  ]
+}

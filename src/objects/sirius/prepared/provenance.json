@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c13cb8cdc9f8f75b818398c78e9ea9b3cba3235ec730fe9329d65247517540ee"
+    "sha256": "403e42f9aeed71b8099e946f74cfac2b065d97191e7e9d4e2811e02f12226aa4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "78cc845de605b7378e3bc12e8668b4d14894dc94755d93b44f31af856bd74f92"
+    "bindingsSha256": "45d8787b04f9c484919e02554aef988f87c419c651ddffab09b66c3b4eeabdb9"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "6687c646ebbc95d77971b3fcb9ecd033949690d80a921814187a32775e403cfc",
+      "sha256": "7e22c38c9a85a85a04127560bc32f04c07bcb86ca939930c735beba11bd22fbb",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/sirius/",
@@ -39,14 +39,34 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "sirius-surface-{id}{suffix}.webp",
             "thumbnail": "sirius-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (CALSPEC). The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "path": "photometry/claret-2011-v-quadratic.tsv",
+                "grid": {
+                  "teffK": 9845,
+                  "logg": 4.29,
+                  "models": {
+                    "Filt": "V",
+                    "Met": "L",
+                    "Mod": "A"
+                  }
+                },
+                "columns": {
+                  "teff": "Teff",
+                  "logg": "logg",
+                  "u1": "a",
+                  "u2": "b"
+                }
+              }
             }
           }
         ],
@@ -82,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ebcb8750b544d35c87c327ce4b56546094fac3cb863bb24c1473e554cb74aa06",
+      "sha256": "23a24b0258f3cce85505d012dde0332fe57a491dc43901598712a8d8a3b9703c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +141,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "sirius-lens-shape.webp",
-              "surface": "sirius-surface-shape@2x.webp",
-              "poles": "sirius-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+              "thumbnail": "sirius-lens-color.webp",
+              "surface": "sirius-surface-color@2x.webp",
+              "poles": "sirius-poles-color@2x.webp",
               "source": {
-                "id": "sirius-observational-measurements",
+                "id": "sirius-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://doi.org/10.1051/0004-6361:20030994"
+                "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of the Hubble Space Telescope's calibrated STIS spectrum of Sirius A, the CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +171,12 @@
             "role": "facts",
             "description": "Kervella et al. (2003), Astronomy & Astrophysics 408, 681; VLTI/VINCI limb-darkened angular diameter of Sirius A",
             "href": "https://doi.org/10.1051/0004-6361:20030994"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "HST CALSPEC sirius_stis_005 (Bohlin et al. 2020 flux scale)",
+            "href": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
           }
         ],
         "provenance": {
@@ -172,22 +198,126 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "sirius-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://doi.org/10.1051/0004-6361:20030994",
-      "credit": "Kervella et al. (2003), Astronomy & Astrophysics 408, 681; VLTI/VINCI limb-darkened angular diameter of Sirius A",
+      "id": "sirius-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "calspec-sirius-stis-005",
+            "role": "material",
+            "evidence": "src/objects/sirius/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
       },
-      "sha256": "ef5b55512a44c06f5adedb7b3d79d839968aefbb08b29e47683910fd22c9c915",
-      "bytes": 1179,
+      "sha256": "d2b9218b71acce1cb72e72df8e7073058cb95a25caa7aa34c54b4e5ec292201e",
+      "bytes": 1481,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "sirius-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "sirius-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/sirius/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      },
+      "sha256": "36d9249ba2b948c25225e75b2d2a0c9638b25c0c31381fe62746aed5a2bff443",
+      "bytes": 844,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "photometry/claret-2011-v-quadratic.tsv",
+        "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "form": {
+          "-source": "J/A+A/529/A75/table-af",
+          "-out.max": "500",
+          "Teff": "9500..10250",
+          "logg": "4.0..4.5",
+          "Z": "=0",
+          "xi": "=2",
+          "Filt": "V",
+          "Met": "L",
+          "Mod": "A",
+          "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+        },
+        "requiredText": [
+          "logg\tTeff"
+        ],
+        "replacements": [
+          {
+            "pattern": "^#.*\\n",
+            "flags": "gm",
+            "replacement": ""
+          },
+          {
+            "pattern": "^\\s*\\n",
+            "flags": "gm",
+            "replacement": ""
+          }
+        ]
+      },
       "verificationOperations": []
     },
     {
@@ -203,8 +333,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ebcb8750b544d35c87c327ce4b56546094fac3cb863bb24c1473e554cb74aa06",
-      "bytes": 2856,
+      "sha256": "23a24b0258f3cce85505d012dde0332fe57a491dc43901598712a8d8a3b9703c",
+      "bytes": 3161,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +343,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from Hubble's spectrum of the star. The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +363,45 @@
         "falseColor": false
       },
       "inputs": [
-        "sirius-observational-measurements"
+        "sirius-stellar-color",
+        "sirius-cie-1931-2deg-cmf",
+        "sirius-claret-2011-v-quadratic"
       ],
       "outputs": [
         {
-          "url": "/scenes/sirius/sirius-surface-shape@2x.webp",
+          "url": "/scenes/sirius/sirius-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "5f87784f54db9d5518f79a69e8ae4c1971ff1af1f40d8edce95f493ee5902705",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sirius/sirius-lens-shape.webp",
+          "url": "/scenes/sirius/sirius-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "58ee77cfff2db716403679f5f60043ec0a40eb50e3a02c38e963b591879c67ed",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sirius/sirius-poles-shape@2x.webp",
+          "url": "/scenes/sirius/sirius-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "6ea0e0a90553e1a1e6e9f39732d5c0155d23b78d943bc4d06cc49160715c5078",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sirius/sirius-context-shape@2x.webp",
+          "url": "/scenes/sirius/sirius-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/sirius/sirius-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/sirius/sirius-limb-color@2x.webp",
+          "bytes": 92760,
+          "sha256": "781d29f42ea1777544af41302751cf41655a309a04f8f71e1caa4f178484360c",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "sirius-observational-measurements",
+          "sourceId": "sirius-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +427,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4629,
-          "sha256": "5894ba872b640e918d6bca00b035d97bddba1f08b5b7f75eab68639072d4fbf9",
+          "bytes": 4863,
+          "sha256": "d3923b6823fe700c29194d4c1b55d9fb24c6999fdb6dca4100dc3f1c1eed34b4",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +445,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 444,
+          "sha256": "0879e945058bf455e1281e19896f34eda3ea8aac7618b6134593b10eb6b20a05",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +466,11 @@
   },
   "lastPreparation": {
     "objectId": "sirius",
-    "materialSha256": "5882d91b0f1eced790cefd3887411d2efdf35baa42688688853b9a78bb1a2fa7",
+    "materialSha256": "40a74093a70f96fc1ff6a356ffcb718c5807141f2eb786baca18afafca03ab10",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "78cc845de605b7378e3bc12e8668b4d14894dc94755d93b44f31af856bd74f92"
+      "bindingsSha256": "45d8787b04f9c484919e02554aef988f87c419c651ddffab09b66c3b4eeabdb9"
     }
   }
 }

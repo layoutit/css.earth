@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "caph",
+  "card": {
+    "text": "Yellow-white giant in Cassiopeia, seen nearly pole-on, spinning fast.",
+    "sources": [
+      {
+        "catalogueId": "simbad-bet-cas",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=bet+Cas",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "F2III"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Caph spins so fast that its equator swells to 3.79 solar radii while its poles sit at 3.06. We see it nearly pole-on, 16.8 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1105-0740",
+        "url": "https://arxiv.org/abs/1105.0740",
+        "label": "Che et al. 2011",
+        "checked": "2026-09-21",
+        "locator": "Table 3, modified von Zeipel model (beta free), row R_eq",
+        "quote": "3.79^{+0.10}_{-0.09}"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "Spectrum and spin",
+      "summary": "Measured colour, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model."
+    }
+  }
+}

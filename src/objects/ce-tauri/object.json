@@ -36,6 +36,11 @@
               "id": "pionier-2016-12",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -105,13 +110,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "05017016593777f4718cc09a01117f98a6552293fb256e2bf86a77e0cfc4f27b"
+        "sha256": "4b79586aa328023b6535a542253a743935a92f75d844a0f8cfafb4014dcd57ad"
       }
     },
     "catalog": {
       "name": "CE Tauri",
       "classification": "star",
-      "color": "#ffa060",
+      "color": "#ffa64f",
       "distanceAu": 135638219.5,
       "description": "Red supergiant in Taurus, its granulation imaged by the VLT interferometer at two epochs.",
       "systemName": "Taurus",
@@ -151,6 +156,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d5c114385d9aaac037dbc12a08c372080a26cde964fb1f6bf929bcb1b29c5ac3"
+    "sha256": "a2e83f043b51ff7411e1b8f73d956a2fdcaf474c826958b4205b8c23057fc470"
   }
 }

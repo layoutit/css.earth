@@ -1735,6 +1735,16 @@
           }
         ]
       }
+    },
+    {
+      "path": "observations.json",
+      "purpose": "Telescope API observation descriptors derived from the pinned comet 67P archive inputs and their native metadata; scientific limitations remain explicit per observation.",
+      "expectedBytes": 4868,
+      "expectedSha256": "83ba8b387db2040c9c3886fc9bb7287fe799f8b55a4e2d9a987d90b3f9fc6970",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."
+      }
     }
   ]
 }

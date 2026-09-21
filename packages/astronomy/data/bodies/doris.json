@@ -7,10 +7,10 @@
     "name": "Doris",
     "horizonsCode": "48;",
     "meanRadiusKm": 105,
-    "gravitationalParameterKm3PerS2": 0,
+    "gravitationalParameterKm3PerS2": 0.4605267,
     "parent": "sun"
   },
-  "physicalNotes": "DAMIT calibrated model radii; GM from the pinned Horizons physical blocks.",
+  "physicalNotes": "Radius 105 km: the volume-equivalent radius of the selected DAMIT mesh (Viikinkoski et al. 2017, measured 105.05 km, coordinates not rescaled); Vernazza et al. (2021) Table 1 gives D = 215 +/- 3 km, not adopted because the rendered mesh is the Viikinkoski model. GM = G * mass with Vernazza et al. (2021) Table 1 (VizieR J/A+A/654/A56) m = 6.90 +/- 2.90 x 10^18 kg and G = 6.6743e-20 km^3 kg^-1 s^-2.",
   "asteroid": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2748%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

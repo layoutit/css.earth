@@ -30,7 +30,7 @@
     }
   ],
   "derivedFacts": {
-    "perihelion": "JPL signed semimajor axis * (1 - eccentricity) / AU, at the shared epoch; osculating closest solar distance, not a predicted next-event date",
+    "perihelion": "Perihelion distance q of the 1973 apparition: JPL SBDB orbit.elements.q (solution JPL 2, epoch JD2442022.5 = 1973-12-06)",
     "radius": "Published effective radius, Rieke and Lee (1974), Nature 248, 737"
   },
   "assumptions": [

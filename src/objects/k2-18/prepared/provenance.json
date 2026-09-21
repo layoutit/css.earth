@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "31b99c3801f677ad93db98d6e3fdf18b0a8d0a152ae819786958158f76694db9"
+    "sha256": "3bede12078bedf4aa85360507df2a255b775ddfbec19ffcd0f7f6a7e0c01c970"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "c2c00f7dc3ed5e6f149aeff97a01501a425e294174a4e7ed17d12096b3c8e32e"
+    "bindingsSha256": "4eddfeae3def5aadc48ff35b321b92c0f8269037aecec1c74d8960b035b21838"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "d16b3c57a8e00dab7720c52192f396cb961a3af18dd0b097a20b24f0056882ac",
+      "sha256": "ff654210e1ef4279f653a407267d35f6ea8f4f64499ffe51e9e7415fb6e92fa0",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/k2-18/",
@@ -39,14 +39,34 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "k2-18-surface-{id}{suffix}.webp",
             "thumbnail": "k2-18-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's LAMOST spectrum. The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from PHOENIX model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "path": "photometry/claret-2011-v-quadratic.tsv",
+                "grid": {
+                  "teffK": 3457,
+                  "logg": 4.84,
+                  "models": {
+                    "Filt": "V",
+                    "Met": "L",
+                    "Mod": "P"
+                  }
+                },
+                "columns": {
+                  "teff": "Teff",
+                  "logg": "logg",
+                  "u1": "a",
+                  "u2": "b"
+                }
+              }
             }
           }
         ],
@@ -82,7 +102,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d0acbce6844c145bac0bc5fe1aac15c3a467dec5ab150d70703d76f3c124fd16",
+      "sha256": "433ee62175aad14fbccb7d209c4095985c84c19e528fd1aec348477ea2ffda30",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +141,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "k2-18-lens-shape.webp",
-              "surface": "k2-18-surface-shape@2x.webp",
-              "poles": "k2-18-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (LAMOST). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+              "thumbnail": "k2-18-lens-color.webp",
+              "surface": "k2-18-surface-color@2x.webp",
+              "poles": "k2-18-poles-color@2x.webp",
               "source": {
-                "id": "k2-18-observational-measurements",
+                "id": "k2-18-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/1805.00830"
+                "url": "https://www.lamost.org/dr11/v2.0/"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of K2-18's LAMOST spectrum. The LAMOST survey telescope observed it on 21 March 2014, with a relative flux calibration and a fibre warning in the file. No resolved image of the surface is cast here."
             }
           ]
         },
@@ -151,6 +171,12 @@
             "role": "facts",
             "description": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
             "href": "https://arxiv.org/abs/1805.00830"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "LAMOST DR11 v2.0 spectrum 227610116 (K2-18)",
+            "href": "https://www.lamost.org/dr11/v2.0/"
           }
         ],
         "provenance": {
@@ -172,22 +198,126 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "k2-18-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/1805.00830",
-      "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
+      "id": "k2-18-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://www.lamost.org/dr11/v2.0/",
+      "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lamost-dr11-227610116",
+            "role": "material",
+            "evidence": "src/objects/k2-18/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
       },
-      "sha256": "46492526431b50bafa517a16cfb20a8e3e94d9511b9c30df8ad54c124614072e",
-      "bytes": 1174,
+      "sha256": "d59c4e1eaa04798c6dc3f71111856f2c56b69ea2198e39b8d1bb839fccf711f4",
+      "bytes": 1399,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "k2-18-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "k2-18-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/k2-18/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      },
+      "sha256": "c7f80a7818b5feda7476a71146d0063874f857149024cc5a876a334237ec7f93",
+      "bytes": 844,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "photometry/claret-2011-v-quadratic.tsv",
+        "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "form": {
+          "-source": "J/A+A/529/A75/table-af",
+          "-out.max": "500",
+          "Teff": "3000..3750",
+          "logg": "4.5..5.0",
+          "Z": "=0",
+          "xi": "=2",
+          "Filt": "V",
+          "Met": "L",
+          "Mod": "P",
+          "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+        },
+        "requiredText": [
+          "logg\tTeff"
+        ],
+        "replacements": [
+          {
+            "pattern": "^#.*\\n",
+            "flags": "gm",
+            "replacement": ""
+          },
+          {
+            "pattern": "^\\s*\\n",
+            "flags": "gm",
+            "replacement": ""
+          }
+        ]
+      },
       "verificationOperations": []
     },
     {
@@ -203,8 +333,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d0acbce6844c145bac0bc5fe1aac15c3a467dec5ab150d70703d76f3c124fd16",
-      "bytes": 2951,
+      "sha256": "433ee62175aad14fbccb7d209c4095985c84c19e528fd1aec348477ea2ffda30",
+      "bytes": 3112,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +343,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from a measured spectrum of the star (LAMOST). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +363,45 @@
         "falseColor": false
       },
       "inputs": [
-        "k2-18-observational-measurements"
+        "k2-18-stellar-color",
+        "k2-18-cie-1931-2deg-cmf",
+        "k2-18-claret-2011-v-quadratic"
       ],
       "outputs": [
         {
-          "url": "/scenes/k2-18/k2-18-surface-shape@2x.webp",
+          "url": "/scenes/k2-18/k2-18-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "790ca62c963cddb4dbb40692f52708d8d9e86ec7d1a9058f7f29a994c756e8ab",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/k2-18/k2-18-lens-shape.webp",
+          "url": "/scenes/k2-18/k2-18-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "8d2ab2a9ddabf5ab5f6ab7c95c83befde37bb75e000616c51db48b6ed031f081",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/k2-18/k2-18-poles-shape@2x.webp",
+          "url": "/scenes/k2-18/k2-18-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "132d3848a787846d0f65b5d438f4bd5b2c37e212f88a57957730aac9ac06a884",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/k2-18/k2-18-context-shape@2x.webp",
+          "url": "/scenes/k2-18/k2-18-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/k2-18/k2-18-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/k2-18/k2-18-limb-color@2x.webp",
+          "bytes": 102250,
+          "sha256": "10fa1e4c81dacf8c61f30c1d95a57ad6a61477163d90066d895997862ce25c23",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "k2-18-observational-measurements",
+          "sourceId": "k2-18-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +427,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4093,
-          "sha256": "a6cd4c3b2b9143072a92b8f43e29f6f767974cc13241604ea8ed5b4637584c32",
+          "bytes": 4232,
+          "sha256": "135ec86720c6bb6e4e32b43bdf1957b10a37cf5a16d5706739c640675985b177",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +445,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 446,
+          "sha256": "0dcac5566e093c69b1c5e354ed7710e87ee147e324c6b73926e4c0784225d658",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +466,11 @@
   },
   "lastPreparation": {
     "objectId": "k2-18",
-    "materialSha256": "7fa93938d4756982f167b1fa19524509fbd3b25b30792faeb831f0c8ced5b499",
+    "materialSha256": "0de411d40821175615268148ce261ee596c2793e26a74108eb70ce46a0f063c2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "c2c00f7dc3ed5e6f149aeff97a01501a425e294174a4e7ed17d12096b3c8e32e"
+      "bindingsSha256": "4eddfeae3def5aadc48ff35b321b92c0f8269037aecec1c74d8960b035b21838"
     }
   }
 }

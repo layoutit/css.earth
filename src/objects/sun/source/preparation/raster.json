@@ -22,7 +22,7 @@
     {
       "id": "photosphere",
       "source": "hmi/continuum",
-      "falseColor": false,
+      "falseColor": true,
       "output": "sun-surface-{id}{suffix}.webp",
       "thumbnail": "sun-lens-{id}.webp",
       "science": {
@@ -230,7 +230,6 @@
             "width": 720,
             "height": 360,
             "latitude": "sine-latitude",
-            "reverseLongitude": true,
             "nearestLatitudeLimit": 64,
             "positiveOnly": false,
             "color": {
@@ -281,7 +280,6 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {
@@ -341,7 +339,6 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {

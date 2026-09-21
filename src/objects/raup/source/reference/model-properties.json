@@ -119,7 +119,7 @@
         "bytes": 371921
       }
     ],
-    "selectionReason": "No four-band cryogenic row is available in this catalog. Retained the Masiero2012 post-cryogenic fit also selected by SBDB, with its additional20% systematic uncertainty and short-wave model dependence.",
+    "selectionReason": "No four-band cryogenic row is available in this catalog. Retained the Masiero 2012 post-cryogenic fit also selected by SBDB, with its additional 20% systematic uncertainty and short-wave model dependence.",
     "scaleKmPerSourceUnit": 3.9002149058716022,
     "formula": "scaleKmPerSourceUnit = diameterKm / cbrt(6 * signedSourceVolume / pi); meterScale =1000*scaleKmPerSourceUnit. Original shape coordinates are preserved.",
     "approximate": true,

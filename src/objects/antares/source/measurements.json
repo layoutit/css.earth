@@ -7,6 +7,8 @@
   "distanceSource": "Hipparcos parallax 5.89 +/- 1.00 mas (van Leeuwen 2007, A&A 474, 653) via SIMBAD: 170 pc; the star is too bright for Gaia.",
   "radiusKm": 474700204,
   "radiusSource": "The Ohnaka et al. (2013) diameter at the Hipparcos distance: 37.38 mas at 169.8 pc is 474,700,204 km, 682 solar radii at 695700 km. Ohnaka et al. (2013) give 680 solar radii; the parallax uncertainty alone is 17 percent.",
+  "effectiveTemperatureK": 3660,
+  "effectiveTemperatureSource": "Effective temperature 3660 ± 120 K from Ohnaka et al. 2013 (A&A 555, A24; https://arxiv.org/abs/1304.4800), abstract: the bolometric flux with the VLTI/AMBER limb-darkened diameter 37.38 mas, the radius source.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius, shown in the shared neutral gray because no image of the photosphere is cast here (see investigations.json). The photosphere of a red supergiant is not a solid surface and its limb is not sharp."

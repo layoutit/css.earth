@@ -1,0 +1,33 @@
+{
+  "id": "arxiv-2509-05880",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Bamberger (2025): A preliminary orbit for the satellite of dwarf planet (136472) Makemake",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2509.05880"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2509.05880",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2509.05880",
+      "checkedOn": "2026-09-21",
+      "locator": "Abstract (P = 18.023 ± 0.017 d, a = 22250 ± 780 km); results: combined system mass (2.69 ± 0.20) × 10^21 kg"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv",
+  "creators": [
+    "D. Bamberger"
+  ],
+  "publicationDate": "2025"
+}

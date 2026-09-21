@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6f374ff93ab117d9810f22978827bb8473e2d105fd44fc84c5455ed7e43bf147"
+    "sha256": "0102c0f65071b251e23432e382dca77bc8673072365bdbeef9a6ffba50ff2f1d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b56e6cdecf4b8d156f6e3fd34ec2ba7af77ca8fef0ee2e7a5f5c48f41ea7e7c5"
+    "bindingsSha256": "f2cf2ae745aa36dec166af1679040fcb30a5db9e5b8a8fd0236647416776f731"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "2904dfb230976feb20f902ef8325c209011f622e5fa7ae92ee8f1b3f49ef99ff",
+      "sha256": "c2bd40a64526aeb97e984d72fc721ca0b5657a9133bf484d290f07adab339c65",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/sun/",
@@ -40,7 +40,7 @@
           {
             "id": "photosphere",
             "source": "hmi/continuum",
-            "falseColor": false,
+            "falseColor": true,
             "output": "sun-surface-{id}{suffix}.webp",
             "thumbnail": "sun-lens-{id}.webp",
             "science": {
@@ -248,7 +248,6 @@
                   "width": 720,
                   "height": 360,
                   "latitude": "sine-latitude",
-                  "reverseLongitude": true,
                   "nearestLatitudeLimit": 64,
                   "positiveOnly": false,
                   "color": {
@@ -299,7 +298,6 @@
                   "width": 3600,
                   "height": 1080,
                   "latitude": "equirectangular",
-                  "reverseLongitude": true,
                   "nearestLatitudeLimit": 128,
                   "positiveOnly": true,
                   "color": {
@@ -359,7 +357,6 @@
                   "width": 3600,
                   "height": 1080,
                   "latitude": "equirectangular",
-                  "reverseLongitude": true,
                   "nearestLatitudeLimit": 128,
                   "positiveOnly": true,
                   "color": {
@@ -438,7 +435,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
+      "sha256": "52ee4a51f0a6c185ada9a7948ce7eb5eee2e7fecdda4c3d8789e32f7c58bc67c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -521,8 +518,56 @@
                 "id": "jsoc-hmi-continuum-cr2311-keywords",
                 "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s"
               },
-              "falseColor": false,
-              "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation",
+              "falseColor": true,
+              "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation; single-band 617.3 nm intensity shown in SDO's orange colour table",
+              "legend": {
+                "kind": "scale",
+                "title": "Continuum intensity",
+                "labels": [
+                  "≤ 0.6",
+                  "1.08"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      254,
+                      91,
+                      1
+                    ],
+                    [
+                      254,
+                      111,
+                      1
+                    ],
+                    [
+                      254,
+                      133,
+                      1
+                    ],
+                    [
+                      253,
+                      155,
+                      2
+                    ],
+                    [
+                      253,
+                      172,
+                      24
+                    ],
+                    [
+                      255,
+                      178,
+                      37
+                    ]
+                  ],
+                  "labels": [
+                    "≤ 0.6",
+                    "1.08"
+                  ]
+                },
+                "meta": "× disc centre",
+                "sourceUrl": "https://jsoc.stanford.edu/HMI/"
+              },
               "notes": "HMI continuum intensity for Carrington Rotation 2311, 12 May–9 June 2026, with limb darkening removed by JSOC. It combines 28 observation dates. Colours follow SDO's own browse colour table, and the polar continuation is a prepared display adjustment."
             },
             {
@@ -687,9 +732,9 @@
                 "kind": "scale",
                 "title": "Electron number density",
                 "labels": [
-                  "10⁵",
+                  "≤ 10⁵",
                   "8.1 × 10⁵",
-                  "6.5 × 10⁶"
+                  "≥ 6.5 × 10⁶"
                 ],
                 "recipe": {
                   "palette": [
@@ -710,15 +755,15 @@
                     ]
                   ],
                   "labels": [
-                    "10⁵",
+                    "≤ 10⁵",
                     "8.1 × 10⁵",
-                    "6.5 × 10⁶"
+                    "≥ 6.5 × 10⁶"
                   ]
                 },
                 "meta": "electrons cm⁻³ · logarithmic display scale",
                 "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
               },
-              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled."
+              "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled. About 40% of the measured cells lie below 10⁵ electrons per cm³ and show at the dark end of the scale."
             }
           ]
         },
@@ -776,7 +821,7 @@
             "license": "NASA media usage guidelines and SDO data use policy"
           },
           "lenses": {
-            "photosphere": "NASA SDO/HMI daily continuum browse observations across Carrington Rotation 2311",
+            "photosphere": "NASA SDO/HMI continuum science frames (JSOC hmi.Ic_noLimbDark_720s, 28 records) across Carrington Rotation 2311",
             "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
             "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",
             "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311",
@@ -2461,8 +2506,8 @@
       "license": "Project-authored preparation record; referenced observations retain their source terms",
       "acquisition": "checked repository source",
       "redistribution": "checked authored source with embedded provenance",
-      "sha256": "7e7e81bf2f658187ba4c6db37f289bdfac1f6fbf01635b7a9ea52809252ec2ca",
-      "bytes": 12845,
+      "sha256": "52ee4a51f0a6c185ada9a7948ce7eb5eee2e7fecdda4c3d8789e32f7c58bc67c",
+      "bytes": 14050,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2479,7 +2524,7 @@
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation"
+        "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation; single-band 617.3 nm intensity shown in SDO's orange colour table"
       ],
       "lensIds": [
         "photosphere"
@@ -2488,7 +2533,7 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false,
+        "falseColor": true,
         "synoptic": {
           "kind": "hmi-continuum-mosaic",
           "continuum": {
@@ -2586,20 +2631,20 @@
       "outputs": [
         {
           "url": "/scenes/sun/sun-surface-photosphere@2x.webp",
-          "bytes": 24640,
-          "sha256": "2e714e910563c83d0f95277f3a2ec54fbb642cb89ec02a15dc410310b7bbffa5",
+          "bytes": 24444,
+          "sha256": "815e2f90a9e19b3dea684a1f074864810061eb276844702100fd5c6e9bba257a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-photosphere.webp",
-          "bytes": 140,
-          "sha256": "8660f3f71295fa67bed07b3ed12a2c5637f1d015ace4f5128e25975837b3a1e9",
+          "bytes": 146,
+          "sha256": "967c45ae8bfd17a478346536ba736f296af53e472fb25922facd59b97cc45d34",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-photosphere@2x.webp",
-          "bytes": 9694,
-          "sha256": "f1ac97ad2d17d0439c7520a5db568a271ebe3bce7bd642970a328ef326a92dcf",
+          "bytes": 9716,
+          "sha256": "354484c5da37b5bcd55320923f92511a73a44d2bd7dceab43dec5bf770a82279",
           "verification": "bytes-verified"
         },
         {
@@ -2643,7 +2688,6 @@
             "width": 720,
             "height": 360,
             "latitude": "sine-latitude",
-            "reverseLongitude": true,
             "nearestLatitudeLimit": 64,
             "positiveOnly": false,
             "color": {
@@ -2677,20 +2721,20 @@
       "outputs": [
         {
           "url": "/scenes/sun/sun-surface-magnetic@2x.webp",
-          "bytes": 771488,
-          "sha256": "2abdaa8759c7d504f440a8d2d1ad78e883c22dc396cb71b98ce8e0da7e22edb2",
+          "bytes": 769580,
+          "sha256": "2bff56495411dbe42f17bfe095d1ec5f143f457020f8a8abded3ae62586b7b7a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-magnetic.webp",
-          "bytes": 1594,
-          "sha256": "f0072abfab9cf70a4a2c46a215ef4a596248236d74919aa19238bdf56c150c85",
+          "bytes": 1526,
+          "sha256": "2e0f8a81190ffad3aed1665bbe36c9b8541660b2eaf891413a340e769e812de0",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-magnetic@2x.webp",
-          "bytes": 67324,
-          "sha256": "251e48c1e59620f903add6ea55ba78d288300b8cffa55a9d79ea5a8e27b16fad",
+          "bytes": 68290,
+          "sha256": "e3bc293ea7e6b71a0f9c98b48f1a7eeefc0608a4a5cff2414c1f7e5fc034e170",
           "verification": "bytes-verified"
         },
         {
@@ -2741,7 +2785,6 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {
@@ -2778,20 +2821,20 @@
       "outputs": [
         {
           "url": "/scenes/sun/sun-surface-chromosphere@2x.webp",
-          "bytes": 604992,
-          "sha256": "235f5d61aec47332e1b0a01579cbeb4998517b9e360f5dbbacec139c8451ff78",
+          "bytes": 614072,
+          "sha256": "8f2703f90baae009be9ba20ca3b2c956f202dbe560f1f33b44d18b4e892d9ca4",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-chromosphere.webp",
-          "bytes": 1980,
-          "sha256": "7ffbea22ed1f1374bf60d2d68d23c2326043c6f9bbf2f4d030e01535ab22947c",
+          "bytes": 1934,
+          "sha256": "5a7ed134f277de371a8fc517f53374322c44c1a29c91994f89857fee17605d24",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-chromosphere@2x.webp",
-          "bytes": 40608,
-          "sha256": "cafb78ec602652266b31eee594a6b7805f250c209d8dd70f792f5355d6af0c1a",
+          "bytes": 40676,
+          "sha256": "6cb2efd103a23f3b695c28e3a1c7e388293da91c7426ef9d2e3d3d47ae203560",
           "verification": "bytes-verified"
         },
         {
@@ -2803,7 +2846,7 @@
         {
           "url": "/scenes/sun/sun-limb-chromosphere@2x.webp",
           "bytes": 20528,
-          "sha256": "37b772d7e668fdd88875472e399b5dc381b14fc9a27de7509f0f0583ef7248fe",
+          "sha256": "6518de58c3e7cd37d2acc764a195d44391c73abe0f019f0274cdad8e193d3b0b",
           "verification": "bytes-verified"
         }
       ],
@@ -2842,7 +2885,6 @@
             "width": 3600,
             "height": 1080,
             "latitude": "equirectangular",
-            "reverseLongitude": true,
             "nearestLatitudeLimit": 128,
             "positiveOnly": true,
             "color": {
@@ -2879,20 +2921,20 @@
       "outputs": [
         {
           "url": "/scenes/sun/sun-surface-corona@2x.webp",
-          "bytes": 480796,
-          "sha256": "a57496133c83a6297a89add85b4378d1fd3d0cab97e5adb665f17ebc5d8ab4cf",
+          "bytes": 479798,
+          "sha256": "1a390b2da5bc3bf1c9e907ce83c1348c3284b6f78dce3d10c62539b6f6051c17",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-lens-corona.webp",
-          "bytes": 2226,
-          "sha256": "cc1c65146e61eb76f1daaadd6d3500bce510f97f465589e0130dbe5d9c316a2f",
+          "bytes": 2246,
+          "sha256": "bb5b79aa8be35b2018a34f5f4cb95d65edfb6ea0ac5e8f6e3299f1e84e15f7df",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/sun/sun-poles-corona@2x.webp",
-          "bytes": 64592,
-          "sha256": "52a84b44eb1e6bebec510a24017fc7c3828ac72b1ee794b04084fad80a725c54",
+          "bytes": 64316,
+          "sha256": "097975e26c585a22eb1c765303cff119e8e6c0f6d11af1ee45117bbfccff605e",
           "verification": "bytes-verified"
         },
         {
@@ -2904,7 +2946,7 @@
         {
           "url": "/scenes/sun/sun-limb-corona@2x.webp",
           "bytes": 20528,
-          "sha256": "6c833b312733974ee88227cc1e99ec81d5457f1c3a60d0d033242b3ede3056e7",
+          "sha256": "68e4589cdef690afe06366efc72e6d757729ff14d364ba48f2b2cb2d3d3eb745",
           "verification": "bytes-verified"
         }
       ],
@@ -2946,8 +2988,8 @@
       "outputs": [
         {
           "url": "/scenes/sun/sun-lens-corona.webp",
-          "bytes": 2226,
-          "sha256": "cc1c65146e61eb76f1daaadd6d3500bce510f97f465589e0130dbe5d9c316a2f",
+          "bytes": 2246,
+          "sha256": "bb5b79aa8be35b2018a34f5f4cb95d65edfb6ea0ac5e8f6e3299f1e84e15f7df",
           "verification": "bytes-verified"
         }
       ],
@@ -2972,8 +3014,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4672,
-          "sha256": "6f0d20b2bd6a73bfe150d5badd223e2c7a5172c4cdf022b39bb6ec947b4ba07c",
+          "bytes": 4703,
+          "sha256": "bb614a61a7fa85fe4d6284a70e57a795d2ec1d30ec7a824d045a1b69a83d333d",
           "verification": "bytes-verified"
         }
       ],
@@ -2998,8 +3040,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/photosphere.webp",
-          "bytes": 1824,
-          "sha256": "4983323a25e5e3e4880273352b7e00fe814a5e4c4152f321b96cf219dd42eb79",
+          "bytes": 1800,
+          "sha256": "66e909125b40767e0c0d22eb83cccbe21b7e760e23549a151a2c71bdb8af2f87",
           "verification": "bytes-verified"
         }
       ]
@@ -3023,8 +3065,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/magnetic.webp",
-          "bytes": 84624,
-          "sha256": "3a0dc52124cf25f5e47c614cca7aafcf6c1d6eb7bab4500052f6078254d05545",
+          "bytes": 84694,
+          "sha256": "d03ccef41ee78e35e18dd9f22087ebc2820eef37dfde87ea9441149a655fda22",
           "verification": "bytes-verified"
         }
       ]
@@ -3048,8 +3090,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/chromosphere.webp",
-          "bytes": 70466,
-          "sha256": "49878d8b60ecd961ad43768c22570b107a3419f898a08d5748622ef97e2e4a06",
+          "bytes": 70934,
+          "sha256": "cbebcaaa1303135654603d01158a30b3b986dac36ca9c72096644fb50f06af7e",
           "verification": "bytes-verified"
         }
       ]
@@ -3073,8 +3115,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/corona.webp",
-          "bytes": 64348,
-          "sha256": "882f6d485974ff9d757309eaefd3b55c13ccc6d9ea53f31ee62b33d66b473e11",
+          "bytes": 65110,
+          "sha256": "293457cd2d17ad21691edc7907ac7458bfc403e4a43c26f7845bcff82a3724fa",
           "verification": "bytes-verified"
         }
       ]
@@ -3086,11 +3128,11 @@
   },
   "lastPreparation": {
     "objectId": "sun",
-    "materialSha256": "4141937b3c93f00a65eb637321ecc08c742154d24163e9da33b174003f955650",
+    "materialSha256": "3cf325e00bb05e0a2c5a75f2cb298bc8461120b646c56d72b16ff2d4c5bac7b4",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b56e6cdecf4b8d156f6e3fd34ec2ba7af77ca8fef0ee2e7a5f5c48f41ea7e7c5"
+      "bindingsSha256": "f2cf2ae745aa36dec166af1679040fcb30a5db9e5b8a8fd0236647416776f731"
     }
   }
 }

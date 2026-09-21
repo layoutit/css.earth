@@ -31,6 +31,11 @@
               "id": "pionier",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -100,13 +105,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "b2a3cc9e57e118167d7cb4c94d2bc994d086e80f0a99c8ab28a8736625278d5d"
+        "sha256": "13f2c3a5b5aff70594d6bd1dc7a15dcd895a24d0143f9a9cefa1f8eaa7b8d9db"
       }
     },
     "catalog": {
       "name": "π¹ Gruis",
       "classification": "star",
-      "color": "#ffb070",
+      "color": "#ff9a41",
       "distanceAu": 33344640.7,
       "description": "Red giant in Grus, its granulation resolved by the VLT interferometer.",
       "systemName": "Grus",
@@ -146,6 +151,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "0bfebe9ec2b1c38a4e68e8c2f7e16cae5e925f8ea8e6ee768db9bfb8fc3ad7f5"
+    "sha256": "4166b12bc9208eaf7d3126ed3177e604736442ca4739e2a659c99046e038e5bf"
   }
 }

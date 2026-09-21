@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 0.33,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "additionalSystematics": "Usui 2011 section 2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about 10% in size, especially for few detections; no invented total error bar is assigned.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
@@ -24,7 +24,7 @@
       "detections": 13,
       "originalRow": "220    Stephania                     11.00  0.15 13   32.29  0.33 0.069 0.002"
     },
-    "limitations": "Hanuš2013 table reports nine dense lightcurves from two apparitions plus216 sparse points. Both poles remain; model588 is the representative first solution, with no resolved small-scale concavities. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "limitations": "Hanuš 2013 table reports nine dense lightcurves from two apparitions plus 216 sparse points. Both poles remain; model 588 is the representative first solution, with no resolved small-scale concavities. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
     "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 32.29 km effective diameter (catalog ±0.33 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 26.025609768977528,
     "metersPerSourceUnit": 26025.609768977527,
@@ -42,7 +42,7 @@
     26,
     -50
   ],
-  "modelLimitations": "Hanuš2013 table reports nine dense lightcurves from two apparitions plus216 sparse points. Both poles remain; model588 is the representative first solution, with no resolved small-scale concavities. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+  "modelLimitations": "Hanuš 2013 table reports nine dense lightcurves from two apparitions plus 216 sparse points. Both poles remain; model 588 is the representative first solution, with no resolved small-scale concavities. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/2320/shape.txt",
     "vertices": 1012,

@@ -1,10 +1,10 @@
 {
   "schema": "cssearth-display-orientation@1",
-  "rightAscensionDegrees": 99.23473478702499,
-  "declinationDegrees": 51.216311043756,
-  "displayMeridianDegrees": -90,
+  "rightAscensionDegrees": 105.6795523399478,
+  "declinationDegrees": -35.31742059873614,
+  "displayMeridianDegrees": -144.11248552861727,
   "phase": "arbitrary-display-phase",
-  "source": "No measured rotation axis or period (no rotation axis or period is adopted here; see Known problems for what the cited paper measures). The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
-  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
-  "qualification": "Display convention, not a measurement. The rotation axis, spin sense, period and prime meridian of Vega are unmeasured; the axis shown is where celestial north lies on the sky."
+  "source": "Measured axis: Monnier et al. (2012), ApJL 761, L3, inclination 6.2 ± 0.4 degrees from the line of sight and pole position angle -58 ± 6 degrees east of north (source/photometry/gravity-darkening.json), the pole tilted toward us; computed by inclinedPoleOrientation in tools/objects/observation/gravity-darkening.mts.",
+  "coordinateSystem": "ICRF/J2000. +Z is the measured rotation pole, the one tilted toward the Earth. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated: the surface has no longitude features to show it.",
+  "qualification": "The pole direction is measured by interferometric imaging (Monnier et al. (2012), ApJL 761, L3). The spin phase and prime meridian are a display convention; the rotation is not animated."
 }

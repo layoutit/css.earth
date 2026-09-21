@@ -8,8 +8,6 @@ JPL Horizons carries Praxidike as body 527; its identity and discovery are in JP
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
-
 Illustrative sphere at about 4.6 km, estimated from the apparent magnitude JPL Horizons gives for Praxidike (23.448 on 2026-Sep-03, H = 15.8 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. The estimate ignores the phase term, which slightly understates the size.
 
 The orbit is a precessing ellipse fitted to JPL Horizons osculating elements sampled every 5 days from 2020 to 2032, with a position correction series, by the same shared generator as Jupiter's other irregular moons.
@@ -26,3 +24,5 @@ No dated test report exists for this body yet.
 The body is drawn as a sphere with the shared grid that marks unmapped terrain. Its true shape, pole, rotation period, colour and albedo pattern are not published, and none is shown. The pole and prime meridian are display conventions.
 
 [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+
+The [investigation ledger](investigations.json) records the source survey and alternative models.

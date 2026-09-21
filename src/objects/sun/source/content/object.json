@@ -80,8 +80,56 @@
           "id": "jsoc-hmi-continuum-cr2311-keywords",
           "url": "http://jsoc.stanford.edu/ajax/lookdata.html?ds=hmi.Ic_noLimbDark_720s"
         },
-        "falseColor": false,
-        "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation",
+        "falseColor": true,
+        "qualification": "NASA SDO/HMI CR2311 continuum mosaic from 28 JSOC frames with limb darkening removed, placed by their recorded geometry, with qualified polar continuation; single-band 617.3 nm intensity shown in SDO's orange colour table",
+        "legend": {
+          "kind": "scale",
+          "title": "Continuum intensity",
+          "labels": [
+            "≤ 0.6",
+            "1.08"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                254,
+                91,
+                1
+              ],
+              [
+                254,
+                111,
+                1
+              ],
+              [
+                254,
+                133,
+                1
+              ],
+              [
+                253,
+                155,
+                2
+              ],
+              [
+                253,
+                172,
+                24
+              ],
+              [
+                255,
+                178,
+                37
+              ]
+            ],
+            "labels": [
+              "≤ 0.6",
+              "1.08"
+            ]
+          },
+          "meta": "× disc centre",
+          "sourceUrl": "https://jsoc.stanford.edu/HMI/"
+        },
         "notes": "HMI continuum intensity for Carrington Rotation 2311, 12 May–9 June 2026, with limb darkening removed by JSOC. It combines 28 observation dates. Colours follow SDO's own browse colour table, and the polar continuation is a prepared display adjustment."
       },
       {
@@ -246,9 +294,9 @@
           "kind": "scale",
           "title": "Electron number density",
           "labels": [
-            "10⁵",
+            "≤ 10⁵",
             "8.1 × 10⁵",
-            "6.5 × 10⁶"
+            "≥ 6.5 × 10⁶"
           ],
           "recipe": {
             "palette": [
@@ -269,15 +317,15 @@
               ]
             ],
             "labels": [
-              "10⁵",
+              "≤ 10⁵",
               "8.1 × 10⁵",
-              "6.5 × 10⁶"
+              "≥ 6.5 × 10⁶"
             ]
           },
           "meta": "electrons cm⁻³ · logarithmic display scale",
           "sourceUrl": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml"
         },
-        "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled."
+        "notes": "STEREO-B/SECCHI COR1 polarized-brightness observations reconstructed into electron number density for Carrington Rotation 2053 P1 with the archive μ=10 regularization. The logarithmic display preserves density structure across the measured shell. A recorded display-only bridge copies the nearest measured 1.5 R☉ shell through the coronagraph blind zone; the native float cube remains unfilled. About 40% of the measured cells lie below 10⁵ electrons per cm³ and show at the dark end of the scale."
       }
     ]
   },
@@ -335,7 +383,7 @@
       "license": "NASA media usage guidelines and SDO data use policy"
     },
     "lenses": {
-      "photosphere": "NASA SDO/HMI daily continuum browse observations across Carrington Rotation 2311",
+      "photosphere": "NASA SDO/HMI continuum science frames (JSOC hmi.Ic_noLimbDark_720s, 28 records) across Carrington Rotation 2311",
       "magnetic": "NASA SDO/HMI and JSOC hmi.mrsynop_small_720s Carrington Rotation 2311",
       "chromosphere": "NASA SDO AIA 304 angstrom Carrington Rotation 2311",
       "corona": "NASA SDO AIA 171 angstrom Carrington Rotation 2311",

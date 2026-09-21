@@ -178,6 +178,21 @@
           "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
           "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
         }
+      },
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (Crimean photoelectric). The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "ce-tauri-lens-color.webp",
+        "surface": "ce-tauri-surface-color@2x.webp",
+        "poles": "ce-tauri-poles-color@2x.webp",
+        "source": {
+          "id": "ce-tauri-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126"
+        },
+        "falseColor": false,
+        "notes": "The colour of CE Tauri's Crimean photoelectric spectrum. The scan is from 24 October 1982; a second scan in February 1983 is paler, and CE Tau varies. No resolved image of the surface is cast here."
       }
     ]
   },
@@ -210,6 +225,12 @@
       "role": "facts",
       "description": "SIMBAD record for 119 Tau: Gaia DR3 position, parallax and proper motion",
       "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Burnashev (1985) spectrophotometry, record 617: CE Tau (BS 1845)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126"
     }
   ],
   "provenance": {

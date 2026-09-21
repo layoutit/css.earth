@@ -1,9 +1,0 @@
----
-import MaterialSymbol from "./MaterialSymbol.astro";
-
-interface Props { kind: string; }
-const { kind } = Astro.props;
-const name = kind === "planet" ? "planet" : kind === "satellite" ? "moon_stars" : "asterisk";
----
-
-<MaterialSymbol name={name} />

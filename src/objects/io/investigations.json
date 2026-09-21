@@ -23,7 +23,7 @@
       "id": "voyager-galileo-enhanced-color",
       "subject": "USGS Voyager/Galileo 1 km false-color mosaic",
       "status": "included",
-      "finding": "The selected false-color GeoTIFF supplies Enhanced color; it combines Galileo ratios and Voyager/Galileo detail and is not a single-date natural-color observation.",
+      "finding": "The selected false-color GeoTIFF supplies False color; it combines Galileo ratios and Voyager/Galileo detail and is not a single-date natural-color observation.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/README.md",
         "https://github.com/layoutit/css.earth/blob/65b64105aefbc30658164868ba85e905f030950a/src/objects/io/source/manifest.json",
@@ -109,7 +109,7 @@
       "id": "jiram-m-night-mosaic",
       "subject": "Juno JIRAM M-band (4.8 µm) night-side hot-spot map, orbits 41, 43, 47 and 49",
       "status": "included",
-      "finding": "Our reduction of 59 JIRAM frames, following Mura et al. (2024), supplies the Volcanic heat lens. 34 frames register to the sunlit limb; integrated hot-spot output matches the paper's Table 3 (median ratio 1.06 per orbit, 0.83 in the merged map) and 22 of 24 bright peaks lie within 3 degrees of a Davies et al. (2024) source. Coverage is 22% of Io, north and night side only.",
+      "finding": "Our reduction of 59 JIRAM frames, following Mura et al. (2024), supplies the Volcanic heat lens. 34 frames register to the sunlit limb; integrated hot-spot output matches the paper's Table 3 (median ratio 1.06 per orbit, 0.83 in the merged map) and 22 of 24 bright peaks lie within 3 degrees of a Davies et al. (2024) source. Coverage is 22% of Io, north and night side only. Revisit when: orbits 51 to 60 are reduced, or Mura et al. or the JIRAM team publish radiance maps as data.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/README.md",
         "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/source/science/jiram/receipt.json",

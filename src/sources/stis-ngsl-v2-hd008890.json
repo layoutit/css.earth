@@ -1,0 +1,36 @@
+{
+  "id": "stis-ngsl-v2-hd008890",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "STIS Next Generation Spectral Library v2: HD 8890 (Polaris)",
+  "identifiers": [
+    {
+      "type": "NGSL file",
+      "value": "h_stis_ngsl_hd008890_v2.fits"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://archive.stsci.edu/prepds/stisngsl/",
+      "label": "NGSL at MAST"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd008890/h_stis_ngsl_hd008890_v2.fits",
+      "checkedOn": "2026-09-21",
+      "locator": "HDU 1 binary table: WAVELENGTH (Angstrom), FLUX (FLAM), STATERR; header DATAQUAL good, OFFSETPX 0.815"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST",
+      "scope": "citation",
+      "evidence": "https://archive.stsci.edu/publishing/data-use"
+    }
+  ],
+  "publisher": "Space Telescope Science Institute"
+}

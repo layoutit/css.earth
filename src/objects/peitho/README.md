@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Selected 2020 archive update 4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive.
 
-The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.
+The prior opposite pole 4474 remains listed as a comparison, not an equally supported orientation.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

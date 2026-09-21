@@ -2,13 +2,23 @@
   "id": "mercury-rotation-model-stark-2015",
   "kind": "data-product",
   "identityLevel": "work",
-  "title": "Mercury Rotation Model — Planetary Geodynamics Data Archive",
-  "identifiers": [],
+  "title": "Deriving Mercury Geodetic Parameters With Altimetric Crossovers From the Mercury Laser Altimeter (MLA), Planetary Geodynamics Data Archive",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1029/2020JE006683"
+    }
+  ],
   "links": [
     {
       "role": "landing",
       "url": "https://pgda.gsfc.nasa.gov/products/105",
-      "label": "Mercury Rotation Model — Planetary Geodynamics Data Archive"
+      "label": "NASA Goddard Planetary Geodynamics Data Archive, product 105"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1029/2020JE006683",
+      "label": "JGR Planets 126, e2020JE006683 (2021)"
     }
   ],
   "evidence": [
@@ -20,5 +30,12 @@
     }
   ],
   "relations": [],
-  "statements": []
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "S. Bertone, E. Mazarico, M. K. Barker, S. Goossens, T. J. Sabaka, G. A. Neumann, D. E. Smith",
+      "scope": "citation",
+      "evidence": "https://pgda.gsfc.nasa.gov/products/105"
+    }
+  ]
 }

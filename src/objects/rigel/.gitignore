@@ -1,1 +1,4 @@
-# No observation files: the sphere is the shared neutral gray.
+# The archived spectrum behind the colour lens is restored from its archive by pinned URL and digest
+# (source/preparation/acquisition.json), so it is not committed.
+/source/photometry/*.dat
+/source/photometry/*.gz

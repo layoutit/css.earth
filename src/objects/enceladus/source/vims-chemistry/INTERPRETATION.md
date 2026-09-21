@@ -50,7 +50,7 @@ identify the original owner of every mapped value and are not runtime views.
 The 1024×512 TIFF is a display grid. It does not claim that instrument resolution.
 Supported union area is estimated at 23.7741% of a reference sphere. The
 252.1 km projection radius normalizes angles; it adds no height to the existing
-252.3 km scene. The current shape/terrain, camera, retained tree and imagery stay
+252.1 km scene. The current shape/terrain, camera, retained tree and imagery stay
 fixed. Gray grid marks every unsupported sample. Missing ISIS specials and
 invalid denominators are withheld; finite zero or negative source noise is not
 silently treated as missing. Both published display ranges contain all retained

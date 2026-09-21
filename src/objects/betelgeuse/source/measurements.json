@@ -7,6 +7,8 @@
   "distanceSource": "Joyce et al. (2020, ApJ 902, 63; arXiv:2006.09837): 168 (+27/-15) pc.",
   "radiusKm": 531514800,
   "radiusSource": "Joyce et al. (2020): 764 (+116/-62) solar radii at 695700 km. The pinned angular diameter at the adopted distance gives 767 solar radii, 0.4 percent larger.",
+  "effectiveTemperatureK": 3600,
+  "effectiveTemperatureSource": "Effective temperature 3600 ± 25 K from Levesque & Massey 2020 (ApJL 891, L37; https://arxiv.org/abs/2002.10463), abstract and Section 3: MARCS model fits to optical spectrophotometry of 15 February 2020, during the Great Dimming. The radius source, Joyce et al. 2020, adopts this value in its Table 2.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "path": "shape/uniform-disc.tab",

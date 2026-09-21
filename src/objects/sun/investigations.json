@@ -58,7 +58,7 @@
       "id": "aia-304-synoptic-map",
       "subject": "SDO AIA 304 A CR2311 synoptic map",
       "status": "included",
-      "finding": "The Chromosphere lens uses the 3,600 by 1,080 AIA 304 synoptic FITS map in false colour on a logarithmic intensity scale, with its longitude axis reversed to east-positive like the HMI magnetic map. Without the reversal it was mirrored against the magnetic map: its correlation with |B| was 0.44 as prepared and 0.57 mirrored; after the reversal it is 0.57 as prepared.",
+      "finding": "The Chromosphere lens uses the 3,600 by 1,080 AIA 304 synoptic FITS map in false colour on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the lenses stay registered (correlation with |B| 0.57). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L12",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L96",
@@ -69,6 +69,10 @@
         {
           "date": "2026-09-18",
           "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
         }
       ]
     },
@@ -76,7 +80,7 @@
       "id": "aia-171-synoptic-map",
       "subject": "SDO AIA 171 A CR2311 synoptic map",
       "status": "included",
-      "finding": "The Corona lens uses the 3,600 by 1,080 AIA 171 synoptic FITS map in false colour on a logarithmic intensity scale, with its longitude axis reversed to east-positive like the HMI magnetic map. Without the reversal it was mirrored against the magnetic map: its correlation with |B| was 0.44 as prepared and 0.55 mirrored; after the reversal it is 0.55 as prepared.",
+      "finding": "The Corona lens uses the 3,600 by 1,080 AIA 171 synoptic FITS map in false colour on a logarithmic intensity scale, with longitude used as stored: Carrington longitude grows to the right, which is the renderer's east-positive direction. The magnetic map and the photosphere use the same direction, so the lenses stay registered (correlation with |B| 0.55). The 2026-09-18 review reversed every Sun map, which kept them registered with each other but mirrored all of them; the Solar System audit removed the reversal.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L13",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L98",
@@ -87,6 +91,10 @@
         {
           "date": "2026-09-18",
           "commit": "11ac994699be60f8de89ce3b07341e35d1ca17da"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
         }
       ]
     },
@@ -117,7 +125,8 @@
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L71",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L103",
-        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L135"
+        "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/sun/README.md#L135",
+        "https://sdo.gsfc.nasa.gov/assets/img/synoptic/AIA0304/CR2311.fits"
       ],
       "checked": [
         {

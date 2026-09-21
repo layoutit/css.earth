@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0d4e2791037df137ad16d287c94d2a55c36255cfe3bd21a5f0f72ad743237aeb"
+    "sha256": "6b31f61bc921f79e2cfccccd4d211530e53afff78906cae229eef5615f1d0c9d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -631,7 +631,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1a274ae4080acb0a1d7c3e9dc35233f40935c2955d3ff8d843931f3eb65b302d",
+      "sha256": "622754644b7f0533e235443bc46d5610b37b103195b07b012f34276e03089b2a",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -661,11 +661,11 @@
               "label": "Mean distance from Earth",
               "value": "384,400 km",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-                "label": "source-moon-prepared-moon-facts",
-                "checked": "2026-09-16",
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-21",
                 "path": "source/orbit/moon.json",
-                "catalogueId": "source-moon-prepared-moon-facts",
+                "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/meanOrbitRadiusKm"
               }
             },
@@ -700,12 +700,12 @@
               "label": "Rotation period",
               "value": "27.32 days · synchronous",
               "source": {
-                "url": "https://science.nasa.gov/moon/facts/",
-                "label": "NASA/JPL reference",
-                "checked": "2026-09-08",
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "nasa-moon-facts",
-                "locator": "/references/1; rotation-period"
+                "catalogueId": "jpl-satellite-mean-elements",
+                "locator": "/references/2; P (days)"
               }
             },
             {
@@ -713,11 +713,11 @@
               "label": "Inclination to ecliptic",
               "value": "5.16°",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-                "label": "source-moon-prepared-moon-facts",
-                "checked": "2026-09-16",
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-21",
                 "path": "source/orbit/moon.json",
-                "catalogueId": "source-moon-prepared-moon-facts",
+                "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/inclinationDegrees"
               }
             },
@@ -726,11 +726,11 @@
               "label": "Orbital eccentricity",
               "value": "0.0554",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-                "label": "source-moon-prepared-moon-facts",
-                "checked": "2026-09-16",
+                "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
+                "label": "JPL Planetary Satellite Mean Orbital Parameters",
+                "checked": "2026-09-21",
                 "path": "source/orbit/moon.json",
-                "catalogueId": "source-moon-prepared-moon-facts",
+                "catalogueId": "jpl-satellite-mean-elements",
                 "locator": "/eccentricity"
               }
             },
@@ -1733,9 +1733,15 @@
             "href": "https://science.nasa.gov/moon/facts/"
           },
           {
-            "label": "NASA SVS",
+            "label": "LROC",
             "role": "surface",
-            "description": "LRO colour map",
+            "description": "WAC global mosaic, 643 nm",
+            "href": "https://data.lroc.im-ldi.com/lroc/view_rdr_product/WAC_GLOBAL_E000N1800_032P"
+          },
+          {
+            "label": "NASA SVS",
+            "role": "navigation",
+            "description": "CGI Moon Kit, navigation icon",
             "href": "https://svs.gsfc.nasa.gov/4720/"
           },
           {
@@ -2210,8 +2216,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "1a274ae4080acb0a1d7c3e9dc35233f40935c2955d3ff8d843931f3eb65b302d",
-      "bytes": 35675,
+      "sha256": "622754644b7f0533e235443bc46d5610b37b103195b07b012f34276e03089b2a",
+      "bytes": 35962,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -3066,8 +3072,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6531,
-          "sha256": "be974fb224e3b3be3e0de7d8833f4344a2f40a14ae17d3776d48bba4f604df20",
+          "bytes": 6776,
+          "sha256": "8827e99c4affefd13acf9ca202d669005a867387bf5fd6726337abafa8bdac8f",
           "verification": "bytes-verified"
         }
       ],
@@ -3318,7 +3324,7 @@
   },
   "lastPreparation": {
     "objectId": "moon",
-    "materialSha256": "cbc46175f7eeda6d22c4df295fb073df3190cfad5106a8fa23542a96a2873920",
+    "materialSha256": "169e12cd8c04931d525a83a5c49c9a4aa9fb5288e962390df16330e752a84b20",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

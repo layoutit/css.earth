@@ -100,7 +100,7 @@
     },
     {
       "id": "sphere-cross-frame-registration",
-      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a photograph lens placed by the published comparison",
       "status": "included",
       "finding": "Decided 2026-09-18 by the published comparison instead: the lens is prepared from 30 camera-1 frames on the ADAM mesh with the rotation record read longitude-first, and ships on zimpol-published-comparison; the registration stage’s numbers are in the README. Earlier result, kept: Measured with the cross-frame registration test on 16 deconvolved ZIMPOL frames (camera 1), each held against a reference built from the body's frames more than an hour away, cast through the ADAM reconstruction with the survey's rotation record read longitude-first. Disc interior 547 pixels (median); peak correlation 0.24 (median) against a mirror margin of 0.56; 0 of 16 frames decisive by the stated rule (peak at least 0.15 and margin at least 1.5), of which 0 peak within 5 degrees of the model. The frames carry no markings the test can register, so nothing in them confirms or refutes the rotation record's phase, pole or handedness; the silhouette gate that qualified Kleopatra cannot judge a body this round either. A photograph lens for this body would rest on the survey's record read by the route proven on Vesta and on five elongated bodies, with no check on this body itself; it is not derived until one exists.",
       "evidence": [
@@ -121,7 +121,7 @@
     },
     {
       "id": "sphere-photograph-lens",
-      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a computed-camera photograph lens",
+      "subject": "VLT/SPHERE/ZIMPOL deconvolved frames as a photograph lens placed by the registration stage alone",
       "status": "unresolved",
       "finding": "Measured from the survey's 130Elektra release: 16 camera-1 frames (2019-07-30 to 2019-08-04), the ADAM reconstruction and its rotation record read longitude-first. Every camera is derived from those pinned inputs and the registration stage measured the lens: silhouette 16 scored, RMS 8.14°, floor 3.63°, systematic 7.29°; frames reference decisive on 0 of 16; relief decisive on 10 of 16 at -2°. The measurements that reached a verdict do not all place the lens within three degrees, so it is not shipped; the disagreement is the finding.",
       "revisitWhen": "Measurements that agree: a map, resolved markings, or a rotation record and mesh on which the silhouette and the relief place these frames within three degrees of each other.",

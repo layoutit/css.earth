@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Marciniak2012 linked archive models444/445 preserve two poles. A published occultation comparison reports approximate equivalent-sphere sizes116±14/108±10 km, but full primary PDF retrieval is blocked (A&A/DTU403); its exact size-to-mesh interpretation is left unresolved, so the pinned AKARI scale remains an explicit approximation.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Marciniak 2012 linked archive models444/445 preserve two poles. A published occultation comparison reports approximate equivalent-sphere sizes116±14/108±10 km, but full primary PDF retrieval is blocked (A&A/DTU403); its exact size-to-mesh interpretation is left unresolved, so the pinned AKARI scale remains an explicit approximation.
 
 ISAM is also currently unavailable. No claim that a better calibration does not exist is made.
 

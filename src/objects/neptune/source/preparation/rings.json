@@ -9,7 +9,7 @@
       "densities": [
         2
       ],
-      "outerRadius": 62933,
+      "outerRadius": 63048,
       "mapping": {
         "kind": "linear",
         "scale": 1
@@ -122,8 +122,8 @@
           "id": "annulus-5",
           "envelope": "constant",
           "bounds": [
-            62825,
-            62975
+            62858,
+            63008
           ],
           "inclusive": [
             false,
@@ -138,10 +138,11 @@
         },
         {
           "id": "arcs",
+          "note": "Schematic arcs. The PDS Rings Node table gives the 62,933 km radius and only relative spacings (Courage 7.3 deg ahead of Liberte, Liberte 12 deg ahead of Egalite 1, Egalite 2 10.7 deg ahead of Fraternite); it gives no arc lengths or absolute longitudes, so these four centres and widths are not measured positions.",
           "envelope": "constant",
           "bounds": [
-            62785,
-            63015
+            62818,
+            63048
           ],
           "inclusive": [
             false,

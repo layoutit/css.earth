@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6694530730d96a307bcd14abe46d3f2cbe192bbe2b41f8292cbfd535b709d140"
+    "sha256": "514926456808940e225e08a9e12f2633eac6ab504c339969d7fc573f9ba04e3b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "3ad6f44cefa9524639c1616690f145bfcdbc316fb1e87da70dbdca319d029f2d"
+    "bindingsSha256": "64a80c3d6f767df8f5f0ed7f904beebb6db62873c9f9b8c2d92e2f537a82a1e7"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "18c782fea3b01a38d6e423ebeb3210605d922ca842dd27d0bd1718f0816fcf08",
+      "sha256": "245b05b3774979af858fc77e36593870c8be6cdaa6fb91de50f478fc45e18235",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/altair/",
@@ -39,14 +39,35 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "altair-surface-{id}{suffix}.webp",
             "thumbnail": "altair-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's ground-based spectrophotometry (Pulkovo catalogue). The surface is darkened by latitude from the published Roche-von Zeipel fit of Monnier et al. (2007), Science 317, 342: the hot poles brighter and bluer, the cool equator dimmer and redder. The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "path": "photometry/claret-2011-v-quadratic.tsv",
+                "grid": {
+                  "teffK": 7680,
+                  "logg": 4.13,
+                  "models": {
+                    "Filt": "V",
+                    "Met": "L",
+                    "Mod": "A"
+                  }
+                },
+                "columns": {
+                  "teff": "Teff",
+                  "logg": "logg",
+                  "u1": "a",
+                  "u2": "b"
+                }
+              },
+              "gravityDarkening": "photometry/gravity-darkening.json"
             }
           }
         ],
@@ -82,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "612a411133ab7fbcbf637b8a397a794f75846de2a8f9e188766e4ae894127b73",
+      "sha256": "2fc56922e5b59d44d5cac1ce9027195264dfc95b8d59d2ef1eee7749b806ac14",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +142,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "altair-lens-shape.webp",
-              "surface": "altair-surface-shape@2x.webp",
-              "poles": "altair-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement.",
+              "thumbnail": "altair-lens-color.webp",
+              "surface": "altair-surface-color@2x.webp",
+              "poles": "altair-poles-color@2x.webp",
               "source": {
-                "id": "altair-observational-measurements",
+                "id": "altair-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/0706.0867"
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of Altair's spectrum as the Pulkovo spectrophotometric catalogue measured it from the ground, 320-1080 nm at 10 nm resolution. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +172,12 @@
             "role": "facts",
             "description": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
             "href": "https://arxiv.org/abs/0706.0867"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Pulkovo spectrophotometric catalogue, HR 7557 (VizieR III/201)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201"
           }
         ],
         "provenance": {
@@ -172,19 +199,143 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "altair-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/0706.0867",
-      "credit": "Monnier, Zhao, Pedretti et al., \"Imaging the Surface of Altair\", Science 317, 342 (2007), arXiv:0706.0867",
+      "id": "altair-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/altair/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "24e7fafdc73268b218460da72a85e454e4c3592e55f41181b3d903cc52a9e683",
+      "bytes": 1688,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "altair-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "altair-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/altair/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      },
+      "sha256": "3c625a2a7b9ee43a148522708944ec81dc52546f8f30fe396fba229fc64ed60a",
+      "bytes": 844,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "photometry/claret-2011-v-quadratic.tsv",
+        "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "form": {
+          "-source": "J/A+A/529/A75/table-af",
+          "-out.max": "500",
+          "Teff": "7250..8000",
+          "logg": "4.0..4.5",
+          "Z": "=0",
+          "xi": "=2",
+          "Filt": "V",
+          "Met": "L",
+          "Mod": "A",
+          "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+        },
+        "requiredText": [
+          "logg\tTeff"
+        ],
+        "replacements": [
+          {
+            "pattern": "^#.*\\n",
+            "flags": "gm",
+            "replacement": ""
+          },
+          {
+            "pattern": "^\\s*\\n",
+            "flags": "gm",
+            "replacement": ""
+          }
+        ]
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "altair-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "origin": "https://arxiv.org/abs/0706.0867",
+      "credit": "Monnier et al. (2007), Science 317, 342",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table in the authors' LaTeX source, with each cell quoted",
       "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
       },
-      "sha256": "b3aa7ac94d1606a17cc7c18f1602139f31fd9f567c722d01a8f00e8215debdd9",
-      "bytes": 1296,
+      "sha256": "b972b38b1ac0c2b5fd57e3143fc40883f96616488ce240d66ddea241337a4511",
+      "bytes": 1971,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -203,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "612a411133ab7fbcbf637b8a397a794f75846de2a8f9e188766e4ae894127b73",
-      "bytes": 2798,
+      "sha256": "2fc56922e5b59d44d5cac1ce9027195264dfc95b8d59d2ef1eee7749b806ac14",
+      "bytes": 3147,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +364,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from a measured spectrum of the star (Pulkovo catalogue). The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +384,46 @@
         "falseColor": false
       },
       "inputs": [
-        "altair-observational-measurements"
+        "altair-stellar-color",
+        "altair-cie-1931-2deg-cmf",
+        "altair-claret-2011-v-quadratic",
+        "altair-roche-von-zeipel"
       ],
       "outputs": [
         {
-          "url": "/scenes/altair/altair-surface-shape@2x.webp",
-          "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "url": "/scenes/altair/altair-surface-color@2x.webp",
+          "bytes": 2310,
+          "sha256": "dd226a648ca6b02e3f6a468b14e51d2b2a119c643d8834746a632c6535fa0c0a",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/altair/altair-lens-shape.webp",
-          "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "url": "/scenes/altair/altair-lens-color.webp",
+          "bytes": 172,
+          "sha256": "0eba2f5ed960706e0c83c4b6daa68dfc27916f7eee013008285c62c7f422b1e3",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/altair/altair-poles-shape@2x.webp",
-          "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "url": "/scenes/altair/altair-poles-color@2x.webp",
+          "bytes": 2876,
+          "sha256": "b7d1c6336f0e13f7e776fde2a145c8d30265a5306f87a1946b977f1ea6ec5607",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/altair/altair-context-shape@2x.webp",
+          "url": "/scenes/altair/altair-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/altair/altair-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/altair/altair-limb-color@2x.webp",
+          "bytes": 94728,
+          "sha256": "cbd79b06b6a360446094ef94724d101371b1ea85da74e6d1a9228cf0c25af860",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "altair-observational-measurements",
+          "sourceId": "altair-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +449,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4016,
-          "sha256": "f2a2e4042d98d415cebb55912b918bc4791f323a627cb99a3c62272057dda890",
+          "bytes": 4190,
+          "sha256": "667e11aa93e43c7e10eeac193804b7c69c8e68207d7b847e4ad9e7f174ca37f3",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +467,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 1720,
+          "sha256": "bfd7cd6505f577a94ce58be9d3392689a1f8cd6b5055466ffac8e2ccf4fc6f43",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +488,11 @@
   },
   "lastPreparation": {
     "objectId": "altair",
-    "materialSha256": "b3b99ffda4be59582b7de6ed972dc3327a7e70b603325ac56dbd613ea7603d98",
+    "materialSha256": "c1a4af1a5a9e2f885547b1feedfe1396798357371c2b6f6e8c374814997d21d9",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "3ad6f44cefa9524639c1616690f145bfcdbc316fb1e87da70dbdca319d029f2d"
+      "bindingsSha256": "64a80c3d6f767df8f5f0ed7f904beebb6db62873c9f9b8c2d92e2f537a82a1e7"
     }
   }
 }

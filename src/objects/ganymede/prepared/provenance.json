@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d64c92b0777e5282319bc377df274a6a25a634f05d5a3a696edfba5bf5ea6841"
+    "sha256": "660705edad2c02aa917289054b2fd6b896f2984a8c10b61488aa2f9b138295f3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b7fc3cc810608e93cf907828db113af306dc7b34eea49d02040ad2ffb8c2a6f8"
+    "bindingsSha256": "2ff923f73b6915e29605be1bc3f536f150265c1b44b3b3972df47f85cc75cfd1"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "078b431d900f4e56696bdef15001c93a96c8b35f5d5ff0faa38287c6c4195962",
+      "sha256": "e27869b3bb82ed1abe6b13f58cf11dd7d6308866130f072ddea21183bc2ced9d",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ganymede/",
@@ -68,7 +68,7 @@
             "output": "ganymede-{id}{suffix}.webp",
             "thumbnail": "ganymede-lens-{id}.webp",
             "source": "ganymede-color.tif",
-            "falseColor": false,
+            "falseColor": true,
             "science": {
               "kind": "terrestrial-observation",
               "input": "usgs-voyager-galileo-color",
@@ -353,112 +353,6 @@
                 }
               ]
             }
-          },
-          {
-            "id": "ice-fraction",
-            "output": "ganymede-{id}{suffix}.webp",
-            "thumbnail": "ganymede-lens-{id}.webp",
-            "source": "composition/ice-fraction.tif",
-            "falseColor": true,
-            "resolutionScale": 0.125,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "ice-fraction",
-              "label": "Ice fraction",
-              "minimum": 0,
-              "maximum": 0.6,
-              "colors": [
-                "#081d58",
-                "#225ea8",
-                "#41b6c4",
-                "#a1dab4",
-                "#ffffcc"
-              ],
-              "labels": [
-                "0%",
-                "30%",
-                "60%"
-              ],
-              "units": "modeled fraction",
-              "title": "Ice fraction",
-              "description": "Published posterior median of total water-ice abundance; this is a spectral mixture estimate, not a direct measurement of ice purity.",
-              "format": "geotiff",
-              "path": "composition/ice-fraction.tif",
-              "consumer": "ice-fraction",
-              "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-              "sampling": "nearest",
-              "displaySampling": "nearest",
-              "grid": {
-                "width": 361,
-                "height": 180,
-                "coordinates": "degrees",
-                "referenceRadiusMeters": 2631200,
-                "centerLongitude": 0,
-                "origin": [
-                  -180.5,
-                  89.5
-                ],
-                "resolution": [
-                  1,
-                  -1
-                ],
-                "wrapLongitude": true,
-                "noData": -99
-              }
-            }
-          },
-          {
-            "id": "dark-material",
-            "output": "ganymede-{id}{suffix}.webp",
-            "thumbnail": "ganymede-lens-{id}.webp",
-            "source": "composition/dark-material.tif",
-            "falseColor": true,
-            "resolutionScale": 0.125,
-            "science": {
-              "kind": "terrestrial-scientific",
-              "id": "dark-material",
-              "label": "Dark material",
-              "minimum": 0,
-              "maximum": 0.7,
-              "colors": [
-                "#081d58",
-                "#225ea8",
-                "#41b6c4",
-                "#a1dab4",
-                "#ffffcc"
-              ],
-              "labels": [
-                "0%",
-                "35%",
-                "70%"
-              ],
-              "units": "modeled fraction",
-              "title": "Dark material",
-              "description": "Published posterior median of the model’s combined synthetic darkening components. This is an unidentified spectral component, not a detected mineral.",
-              "format": "geotiff",
-              "path": "composition/dark-material.tif",
-              "consumer": "dark-material",
-              "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-              "sampling": "nearest",
-              "displaySampling": "nearest",
-              "grid": {
-                "width": 361,
-                "height": 180,
-                "coordinates": "degrees",
-                "referenceRadiusMeters": 2631200,
-                "centerLongitude": 0,
-                "origin": [
-                  -180.5,
-                  89.5
-                ],
-                "resolution": [
-                  1,
-                  -1
-                ],
-                "wrapLongitude": true,
-                "noData": -99
-              }
-            }
           }
         ],
         "lighting": {
@@ -507,7 +401,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "baf635c08383909e568fa7829ea06967b05300aed4a8755cd243c11f2afb63e8",
+      "sha256": "115e59f56a30b7a4947fc915d0db704046957ea24bd105531ebd06bdfe208880",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -561,14 +455,14 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "7.16 days",
+              "value": "7.15 days · sidereal",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
+                "url": "https://doi.org/10.1007/s10569-017-9805-5",
+                "label": "IAU WGCCRE 2015 sidereal rate",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
+                "catalogueId": "iau-wgccre-2015",
+                "locator": "/references/4; orbital-period"
               }
             }
           ],
@@ -607,7 +501,7 @@
             },
             {
               "id": "enhanced",
-              "label": "Enhanced color",
+              "label": "False color",
               "thumbnail": "ganymede-lens-enhanced.webp",
               "surface": "ganymede-enhanced@2x.webp",
               "poles": "ganymede-poles-enhanced@2x.webp",
@@ -615,7 +509,8 @@
                 "id": "usgs-voyager-galileo-color",
                 "path": "../manifest.json"
               },
-              "notes": "USGS color mosaic combines infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is enhanced color, not natural color; source resolution and seams vary."
+              "falseColor": true,
+              "notes": "USGS color mosaic combines near-infrared, green and violet observations with sharper monochrome detail. The source is photometrically normalized and brightness matched. Monochrome remains at the poles, in missing color coverage, and across the source's 210–250° west sector whose red channel was synthesized. This is false color, not natural color; source resolution and seams vary."
             },
             {
               "id": "geology",
@@ -836,126 +731,6 @@
               },
               "notes": "Published reflectance ratio sensitive to the 577.3 nm molecular-oxygen feature in surface ice. This is neither oxygen concentration nor atmospheric density. Spectral slope, the adjacent instrument gap and residual night-to-night differences affect contrasts. Values below one are retained. Two-degree samples and seams remain visible; gray grid marks missing or withheld edges. Absolute subpixel registration is unresolved.",
               "noData": true
-            },
-            {
-              "id": "ice-fraction",
-              "label": "Ice fraction",
-              "thumbnail": "ganymede-lens-ice-fraction.webp",
-              "surface": "ganymede-ice-fraction@2x.webp",
-              "poles": "ganymede-poles-ice-fraction@2x.webp",
-              "source": {
-                "id": "ganymede-composition-ice-fraction",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.5281/zenodo.6390469"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Ice fraction",
-                "labels": [
-                  "0%",
-                  "30%",
-                  "60%"
-                ],
-                "meta": "modeled fraction",
-                "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-                "recipe": {
-                  "palette": [
-                    [
-                      8,
-                      29,
-                      88
-                    ],
-                    [
-                      34,
-                      94,
-                      168
-                    ],
-                    [
-                      65,
-                      182,
-                      196
-                    ],
-                    [
-                      161,
-                      218,
-                      180
-                    ],
-                    [
-                      255,
-                      255,
-                      204
-                    ]
-                  ],
-                  "labels": [
-                    "0%",
-                    "30%",
-                    "60%"
-                  ]
-                }
-              },
-              "notes": "Published posterior median of total water-ice abundance; this is a spectral mixture estimate, not a direct measurement of ice purity. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-              "noData": true
-            },
-            {
-              "id": "dark-material",
-              "label": "Dark material",
-              "thumbnail": "ganymede-lens-dark-material.webp",
-              "surface": "ganymede-dark-material@2x.webp",
-              "poles": "ganymede-poles-dark-material@2x.webp",
-              "source": {
-                "id": "ganymede-composition-dark-material",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.5281/zenodo.6390469"
-              },
-              "falseColor": true,
-              "legend": {
-                "kind": "scale",
-                "title": "Dark material",
-                "labels": [
-                  "0%",
-                  "35%",
-                  "70%"
-                ],
-                "meta": "modeled fraction",
-                "sourceUrl": "https://doi.org/10.5281/zenodo.6390469",
-                "recipe": {
-                  "palette": [
-                    [
-                      8,
-                      29,
-                      88
-                    ],
-                    [
-                      34,
-                      94,
-                      168
-                    ],
-                    [
-                      65,
-                      182,
-                      196
-                    ],
-                    [
-                      161,
-                      218,
-                      180
-                    ],
-                    [
-                      255,
-                      255,
-                      204
-                    ]
-                  ],
-                  "labels": [
-                    "0%",
-                    "35%",
-                    "70%"
-                  ]
-                }
-              },
-              "notes": "Published posterior median of the model’s combined synthetic darkening components. This is an unidentified spectral component, not a detected mineral. Native one-degree nodes do not represent independent one-degree detail. Gray grid marks absent observations; the colors are a scientific display scale. Local preview: numerical-data reuse terms remain unresolved.",
-              "noData": true
             }
           ],
           "labels": {
@@ -1172,7 +947,7 @@
       "acquisition": "Download the published GeoTIFF and verify the pinned bytes before preparation.",
       "redistribution": "Reacquirable source TIFF excluded from Git; prepared textures retain credits.",
       "lensId": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "falseColor": true,
       "width": 11520,
       "height": 5760,
@@ -1525,148 +1300,6 @@
       "verificationOperations": []
     },
     {
-      "path": "composition/model-recipe.json",
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."
-      },
-      "id": "source-document:composition/model-recipe.json",
-      "kind": "source-document",
-      "origin": "object:source/composition/model-recipe.json",
-      "title": "composition/model-recipe.json",
-      "credit": "Credit not recorded in source manifest.",
-      "acquisition": "Acquisition not recorded in source manifest.",
-      "upstreamLineage": "not-recorded",
-      "sha256": "3484816c073e6addb01bb505b779bc3fb1034e3152318d1756bbfe36054d6afd",
-      "bytes": 880,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": null,
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "ganymede-composition-fit-SPHERE",
-      "path": "composition/fit_SPHERE.json.gz",
-      "origin": "https://raw.githubusercontent.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz",
-      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6390469"
-      ],
-      "acquisition": "Download the pinned native release member.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "ganymede-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6390469"
-          }
-        ]
-      },
-      "sha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4",
-      "bytes": 8845543,
-      "dependencies": [],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/fit_SPHERE.json.gz",
-        "url": "https://raw.githubusercontent.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "ganymede-composition-ice-fraction",
-      "path": "composition/ice-fraction.tif",
-      "origin": "https://doi.org/10.5281/zenodo.6390469",
-      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6390469"
-      ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "lensId": "ice-fraction",
-      "label": "Ice fraction",
-      "falseColor": true,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "ganymede-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6390469"
-          }
-        ]
-      },
-      "sha256": "b614ac1e22a9d2d4a3f87b3975718c2d988966eab1a807a2fb091b8aaa65b9d5",
-      "bytes": 260920,
-      "dependencies": [
-        "source-document:composition/model-recipe.json",
-        "ganymede-composition-fit-SPHERE"
-      ],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "mapped-composition",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/ice-fraction.tif",
-        "recipePath": "composition/model-recipe.json",
-        "product": "ice-fraction"
-      },
-      "verificationOperations": []
-    },
-    {
-      "kind": "source-input",
-      "id": "ganymede-composition-dark-material",
-      "path": "composition/dark-material.tif",
-      "origin": "https://doi.org/10.5281/zenodo.6390469",
-      "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
-      "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
-      "licenseEvidence": [
-        "https://doi.org/10.5281/zenodo.6390469"
-      ],
-      "acquisition": "Decode the pinned coordinate-bound JSON using tools/objects/acquisition/mapped-composition.mts.",
-      "redistribution": "Local scientific preview; explicit numerical-data reuse terms not established.",
-      "lensId": "dark-material",
-      "label": "Dark material",
-      "falseColor": true,
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "ganymede-sphere-composition-2022",
-            "role": "material",
-            "evidence": "https://doi.org/10.5281/zenodo.6390469"
-          }
-        ]
-      },
-      "sha256": "aaf6961e48c6125a804338b6930609ae834a586e7d1f05f1bc934cd094109d3a",
-      "bytes": 260920,
-      "dependencies": [
-        "source-document:composition/model-recipe.json",
-        "ganymede-composition-fit-SPHERE"
-      ],
-      "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "mapped-composition",
-        "groups": [
-          "composition"
-        ],
-        "path": "composition/dark-material.tif",
-        "recipePath": "composition/model-recipe.json",
-        "product": "dark-material"
-      },
-      "verificationOperations": []
-    },
-    {
       "kind": "authored-content",
       "id": "ganymede-object-content",
       "path": "content/object.json",
@@ -1679,8 +1312,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "baf635c08383909e568fa7829ea06967b05300aed4a8755cd243c11f2afb63e8",
-      "bytes": 21413,
+      "sha256": "115e59f56a30b7a4947fc915d0db704046957ea24bd105531ebd06bdfe208880",
+      "bytes": 17872,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1847,7 +1480,7 @@
     },
     {
       "id": "enhanced",
-      "label": "Enhanced color",
+      "label": "False color",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "observationAttribution": "source-lineage",
@@ -1861,7 +1494,7 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": false,
+        "falseColor": true,
         "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
@@ -1996,106 +1629,6 @@
           "sourceId": "ganymede-muse-oxygen-signature-night-1",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/3/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "ice-fraction",
-      "label": "Ice fraction",
-      "recipe": "raster",
-      "selector": "/surfaces/4",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [],
-      "lensIds": [
-        "ice-fraction"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "ganymede-composition-ice-fraction"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/ganymede/ganymede-ice-fraction@2x.webp",
-          "bytes": 86476,
-          "sha256": "45f9abceb97d0a2ad760b44c38b7ddb69dbe1f6834ee7abbc1d4f731ba2a1f76",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lens-ice-fraction.webp",
-          "bytes": 3868,
-          "sha256": "d236ee987c20f37d0325b8db9b8d9f768a4e1c1301531f31c7046480a822a81f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-poles-ice-fraction@2x.webp",
-          "bytes": 9526,
-          "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "ganymede-composition-ice-fraction",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/4/source."
-        }
-      ],
-      "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "dark-material",
-      "label": "Dark material",
-      "recipe": "raster",
-      "selector": "/surfaces/5",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
-      "limitations": [],
-      "lensIds": [
-        "dark-material"
-      ],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "falseColor": true
-      },
-      "inputs": [
-        "ganymede-composition-dark-material"
-      ],
-      "outputs": [
-        {
-          "url": "/scenes/ganymede/ganymede-dark-material@2x.webp",
-          "bytes": 89810,
-          "sha256": "e8d441e26b173f0f4583edfa4f27376089ccf6c2bb4c6171cd6e3364b3b09114",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-lens-dark-material.webp",
-          "bytes": 4194,
-          "sha256": "6ac505cb56fe32b6338799621ff6c9f7570166add5b7f6d7b29de03cdf6aa23c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/ganymede/ganymede-poles-dark-material@2x.webp",
-          "bytes": 9526,
-          "sha256": "fb030d1988a7bf90b0c96902da1c02be16d9808edc011cbf56fc9ec3770bad7b",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputEvidence": [
-        {
-          "sourceId": "ganymede-composition-dark-material",
-          "role": "appearance",
-          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2338,8 +1871,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 8458,
-          "sha256": "18757c4db9ef4154a7c650149c634c782613bce5fd96d521ce7a8364bcc7e659",
+          "bytes": 8452,
+          "sha256": "98d9379bd73db72247bdd6bb846151e9d07e85cc002804042350aff64bebb3f4",
           "verification": "bytes-verified"
         }
       ],
@@ -2407,7 +1940,7 @@
     },
     {
       "id": "preview:enhanced",
-      "label": "Enhanced color preview",
+      "label": "False color preview",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "recipeDependencies": [
@@ -2479,56 +2012,6 @@
           "verification": "bytes-verified"
         }
       ]
-    },
-    {
-      "id": "preview:ice-fraction",
-      "label": "Ice fraction preview",
-      "recipe": "raster",
-      "selector": "/surfaces/4",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "ice-fraction"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/ice-fraction.webp",
-          "bytes": 50070,
-          "sha256": "333494420bf251af98a83dcf2ee4beb2c285d6818b18418aaee8af633bd50554",
-          "verification": "bytes-verified"
-        }
-      ]
-    },
-    {
-      "id": "preview:dark-material",
-      "label": "Dark material preview",
-      "recipe": "raster",
-      "selector": "/surfaces/5",
-      "recipeDependencies": [
-        "raster"
-      ],
-      "observationAttribution": "source-lineage",
-      "inputs": [],
-      "parents": [
-        "dark-material"
-      ],
-      "lensIds": [],
-      "process": "Prepare a small surface preview from the same interpreted dataset.",
-      "limitations": [],
-      "outputs": [
-        {
-          "url": "object:prepared/minimaps/dark-material.webp",
-          "bytes": 52288,
-          "sha256": "85b90b87b6f640117ed4d448070dd26bf3bd47bbf98e4cdce6757f69d12e1511",
-          "verification": "bytes-verified"
-        }
-      ]
     }
   ],
   "coverage": {
@@ -2537,11 +2020,11 @@
   },
   "lastPreparation": {
     "objectId": "ganymede",
-    "materialSha256": "95b641966dc04e9c78de3f26233f47285d61650c70d9b73ebf356738b8bdd589",
+    "materialSha256": "c9a2e6a9a80401e011200f5e5eae3ce5df01743624063593c8d917934fdadfcf",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b7fc3cc810608e93cf907828db113af306dc7b34eea49d02040ad2ffb8c2a6f8"
+      "bindingsSha256": "2ff923f73b6915e29605be1bc3f536f150265c1b44b3b3972df47f85cc75cfd1"
     }
   }
 }

@@ -134,9 +134,9 @@
         "lenses",
         "scene"
       ],
-      "title": "MESSENGER global shaded relief",
+      "title": "MESSENGER global DEM 665 m v2 color hillshade",
       "displayCredit": "USGS · NASA/MESSENGER",
-      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_mdis_dem_global_color_shaded_relief_2km",
+      "sourceUrl": "https://astrogeology.usgs.gov/search/map/mercury_messenger_global_dem_665m",
       "attributionGroup": {
         "id": "messenger-mdis-global-maps",
         "label": "MESSENGER MDIS global maps",
@@ -379,8 +379,8 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "a1d403cd1886ca547850cc7d8aedfebf4dedeb8148b80196fb9b8ecf33940669",
-      "expectedBytes": 15468,
+      "expectedSha256": "b52be920085f18d3e55ebb13ea1fe0754461ec7627816551b15dd64b2cdaed40",
+      "expectedBytes": 15802,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",

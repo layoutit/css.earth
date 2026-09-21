@@ -234,7 +234,7 @@ ACCURACY_BY_FRAME.set(
     'sun',
     'Eight-planet mass-weighted barycentric correction',
     'fit-residual',
-    164.71062368999685,
+    164.62794594448746,
     VSOP87A_VALID_FROM_JD,
     VSOP87A_VALID_TO_JD,
     'JPL Horizons DE441 Sun-to-SSB vector fixtures',

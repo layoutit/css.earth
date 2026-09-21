@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2a4867fc3f25085e4caf43622eb6a7803e84341dbd8f061a80a37aff45735193"
+        "sha256": "946294a92c60f787b32f622b56d87b14e203ea45f50f062b51eee8579fa5381b"
       }
     },
     "catalog": {
       "name": "HD 209458",
       "classification": "star",
-      "color": "#fff4e0",
+      "color": "#fef9ff",
       "distanceAu": 9931113.7,
       "description": "Sun-like star 48 parsecs away in Pegasus that hosts the first known transiting planet.",
       "systemName": "HD 209458 system",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "2c22e2410afb6ff23a3faf23e1fbbf1de72083bce719b3e291752bddb353ba15"
+    "sha256": "3261186ff8cdc454beb0c05567ef27ae8ffc36d44787b64f19cfa60377d23345"
   }
 }

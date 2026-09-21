@@ -26,7 +26,7 @@
     ],
     "referenceRadiusKm": 183.4875470120756,
     "axisConvention": "a,b,c are semiaxes; full axes = 2a,2b,2c",
-    "scale": "Directly adopt published inferred semiaxes; do not renormalize to370km volume-equivalent diameter.",
+    "scale": "Directly adopt published inferred semiaxes; do not renormalize to 370 km volume-equivalent diameter.",
     "qualification": "Published occultation/photometric triaxial model; homogeneous surface-brightness assumption.",
     "semiAxesUncertaintyKm": [
       40,
@@ -72,7 +72,7 @@
   },
   "unresolved": [
     "Published marginal axes uncertainties are correlated; do not combine independent extrema as a fitted confidence region.",
-    "Workbook contains label saying2023-04-16 while event/year data say2021; do not use the label as epoch.",
+    "Workbook contains label saying 2023-04-16 while event/year data say 2021; do not use the label as epoch.",
     "Workbook article termsCC BY-NC-ND4.0 do not establish a freely redistributable adapted graphic."
   ],
   "orbitEvidence": "validation/epoch-state.json"

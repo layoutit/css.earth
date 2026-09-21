@@ -9,6 +9,60 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/alpha_lyr_stis_012.fits",
+      "path": "photometry/alpha_lyr_stis_012.fits"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/529/A75/table-af",
+        "-out.max": "500",
+        "Teff": "9000..9750",
+        "logg": "3.5..4.0",
+        "Z": "=0",
+        "xi": "=2",
+        "Filt": "V",
+        "Met": "L",
+        "Mod": "A",
+        "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-table5.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat"
     }
   ]
 }

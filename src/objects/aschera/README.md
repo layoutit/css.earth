@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Ďurech2016 table reports 386 Lowell sparse measurements and a period identified by the ellipsoid method before convex reconstruction. Two poles remain. Select1435 as a reproducible representative and label the shape as coarse lightcurve inversion. The thermal scale is approximate.
+Ďurech 2016 table reports 386 Lowell sparse measurements and a period identified by the ellipsoid method before convex reconstruction. Two poles remain. Select 1435 as a reproducible representative and label the shape as coarse lightcurve inversion. The thermal scale is approximate.
 
 Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 

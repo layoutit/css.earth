@@ -8,6 +8,7 @@ import { SOLAR_SYSTEM_ID, systemOfObject } from '../object-systems.mts';
 import { createPreparedWorldNavigation } from '../prepared-world-navigation.mts';
 import { createWorldSelectionTarget, presentWorldCamera, parseSharedView, savedWorldCamera, worldQuaternionFromRotation, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
 import { SYSTEM_FRAMING_ANGLES } from '../runtime-policy.mts';
+import { orbitVertices } from '../../src/renderers/css/dist/index.js';
 import { createSelectionFlight, sampleSelectionFlight } from '@cssearth/engine';
 
 import { required, position, quaternion, navigationFixture, unusedSharedView } from './navigation-test-values.mts';
@@ -87,7 +88,7 @@ test(`each system fits its complete primary orbits at ${width}x${height}, offset
       assert.ok(Math.hypot(...bound.centerM.map((value: number, axis: number): number => value - frame.originM[axis]))
         + bound.radiusM + moon.radiusM <= radiusM * (1 + 1e-10), `${id} includes ${moon.id}`);
       assert.ok(view.memberIds.includes(moon.id), `${id} frames ${moon.id}`);
-      for (const vertex of orbit.verticesM) {
+      for (const vertex of orbitVertices(orbit)) {
         const point = presentWorldCamera(target, { ...frame, originM: vertex, bodyRadiusM: moon.radiusM }, viewport);
         const [x, y] = required(point.centerPixels);
         assert.ok(x >= rect.left - .001 && x <= rect.right + .001 && y >= rect.top - .001 && y <= rect.bottom + .001,

@@ -43,7 +43,7 @@ import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepa
 import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
 import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';
-import { ellipsoidPoint, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, crossVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
+import { ellipsoidPoint, planetographicRowsToMeshLatitude, intersectViewRayWithEllipsoid, prepareProjectedEllipsoidSilhouetteCoverage, prepareObjectViewDirection as prepareViewDirection, prepareObjectSpaceDirection, normalizeVector, dotVector, subtractVector, crossVector, rotateX, rotateY, rotateZ } from './ellipsoid.mts';
 import { writeMaterialAtlasTile, sampleRgbaBilinear, sampleAlphaBilinear } from './raster.mts';
 import { validateMaterialRecipe } from './recipe.mts';
 
@@ -2730,10 +2730,12 @@ async function prepareSolarTintedSurface(channelFactors:readonly number[]) {
     .toBuffer({ resolveWithObject: true });
   fillUnobservedRows(source.data, source.info, config.surfaceUnobservedRows ?? []);
   // A source map smaller than the prepared grid is resampled once here, after its unobserved rows are filled.
-  const { data, info } = source.info.width === PLANET_SOURCE_TEXTURE_WIDTH && source.info.height === PLANET_SOURCE_TEXTURE_HEIGHT
+  const resized = source.info.width === PLANET_SOURCE_TEXTURE_WIDTH && source.info.height === PLANET_SOURCE_TEXTURE_HEIGHT
     ? source
     : await sharp(source.data, { raw: source.info }).resize(PLANET_SOURCE_TEXTURE_WIDTH, PLANET_SOURCE_TEXTURE_HEIGHT, { kernel: sharp.kernel.lanczos3, fit: "fill" })
       .raw().toBuffer({ resolveWithObject: true });
+  // The OPAL map's rows are planetographic latitude (its readme); the mesh's rows are the ellipsoid's own latitude.
+  const { info } = resized, data = planetographicRowsToMeshLatitude(resized.data, info.width, info.height, info.channels, EQUATORIAL_RADIUS / POLAR_RADIUS);
   for (let offset = 0; offset < data.length; offset += info.channels) {
     for (let channel = 0; channel < 3; channel += 1) {
       data[offset + channel] = applyLinearTint(

@@ -43,7 +43,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - The display uses that published `X=0.133` family. We normalize its volume to the existing JPL nominal 170 km radius, giving derived semiaxes **193.76 × 171.01 × 148.27 km**. The paper's thermal effective diameters of 335–345 km support a similar overall scale but are not silently treated as volume diameters.
 
-- The representative pole is the paper's Figure 8 model at ecliptic longitude 320°, latitude 32°. It is converted to equatorial coordinates using J2000 obliquity (RA312.4211°, Dec15.6260°); the zero meridian remains arbitrary.
+- The representative pole is the paper's Figure 8 model at ecliptic longitude 320°, latitude 32°. It is converted to equatorial coordinates using J2000 obliquity (RA312.4211°, Dec 15.6260°); the zero meridian remains arbitrary.
 
 - Figure 8's manuscript caption says `X=0.0133`, inconsistent with equation 4 and the repeated `X=0.133` discussion in sections 2.3, 3.4 and 4. The recipe uses the explicitly selected model in the text; this discrepancy is preserved in `source/survey/kiss2016-model.json`.
 

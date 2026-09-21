@@ -1,0 +1,62 @@
+{
+  "meta": { "count": 4, "page": 1, "per_page": 50 },
+  "results": [
+    {
+      "id": "https://openalex.org/W1",
+      "doi": "https://doi.org/10.1016/j.icarus.2019.113607",
+      "title": "Infrared observations of Io from Juno",
+      "publication_year": 2019,
+      "type": "article",
+      "authorships": [{ "author": { "display_name": "A. Mura" } }],
+      "open_access": { "is_oa": false, "oa_url": null },
+      "best_oa_location": null,
+      "primary_location": { "license": null },
+      "relevance_score": 101.3,
+      "abstract_inverted_index": { "JIRAM": [0], "imaged": [1], "Io": [2] }
+    },
+    {
+      "id": "https://openalex.org/W2",
+      "doi": "https://doi.org/10.3389/fspas.2024.1369472",
+      "title": "The temporal variability of Io’s hotspots",
+      "publication_year": 2024,
+      "type": "article",
+      "authorships": [
+        { "author": { "display_name": "A. Mura" } },
+        { "author": { "display_name": "F. Zambon" } },
+        { "author": { "display_name": "F. Tosi" } },
+        { "author": { "display_name": "A. Adriani" } }
+      ],
+      "open_access": { "is_oa": true, "oa_url": "https://doi.org/10.3389/fspas.2024.1369472" },
+      "best_oa_location": { "license": "cc-by", "landing_page_url": "https://doi.org/10.3389/fspas.2024.1369472", "pdf_url": null },
+      "primary_location": { "license": "cc-by" },
+      "relevance_score": 29.5,
+      "abstract_inverted_index": { "Juno/JIRAM": [0], "mapped": [1], "hotspots": [2] }
+    },
+    {
+      "id": "https://openalex.org/W3",
+      "doi": "https://doi.org/10.1029/2022gl100597",
+      "title": "Io Hot Spot Distribution Detected by Juno/JIRAM",
+      "publication_year": 2022,
+      "type": "article",
+      "authorships": [{ "author": { "display_name": "F. Zambon" } }, { "author": { "display_name": "A. Mura" } }],
+      "open_access": { "is_oa": true, "oa_url": "https://onlinelibrary.wiley.com/doi/pdfdirect/10.1029/2022GL100597" },
+      "best_oa_location": { "license": "cc-by-nc-nd", "landing_page_url": "https://doi.org/10.1029/2022gl100597", "pdf_url": null },
+      "primary_location": { "license": "cc-by-nc-nd" },
+      "relevance_score": 29.5,
+      "abstract_inverted_index": null
+    },
+    {
+      "id": "https://openalex.org/W4",
+      "doi": null,
+      "title": "Ionospheric scintillation at Jupiter",
+      "publication_year": 2025,
+      "type": "article",
+      "authorships": [],
+      "open_access": { "is_oa": true, "oa_url": "https://arxiv.org/pdf/0000.00000" },
+      "best_oa_location": { "license": "cc-by", "landing_page_url": null, "pdf_url": "https://arxiv.org/pdf/0000.00000" },
+      "primary_location": null,
+      "relevance_score": 90,
+      "abstract_inverted_index": { "Juno": [0], "radio": [1], "occultations": [2] }
+    }
+  ]
+}

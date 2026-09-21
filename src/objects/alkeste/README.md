@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Ďurech2020 TableA.2 reports203 cyan plus122 orange ATLAS observations and two poles. The table marks period recovery E (ellipsoid search); that is not evidence of high shape accuracy.
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Ďurech 2020 TableA.2 reports 203 cyan plus 122 orange ATLAS observations and two poles. The table marks period recovery E (ellipsoid search); that is not evidence of high shape accuracy.
 
 The archived convex mesh is retained only as a coarse inverse model.
 

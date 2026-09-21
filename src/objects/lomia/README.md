@@ -23,9 +23,9 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš2016 Table2 reports19 dense curves across four apparitions plus459 sparse measurements. The selected (117,-19) pole matches the published second family (117,-18).
+AKARI’s thermal diameter sets an approximate mesh volume scale. The inferred shape does not resolve craters or concavities. Hanuš 2016 Table 2 reports 19 dense curves across four apparitions plus 459 sparse measurements. The selected (117,-19) pole matches the published second family (117,-18).
 
-The other archive pole (323,-57) differs from the paper table (312,-40); it is retained as an archive alternative rather than substituted. Hanuš2021 sparse-only comparison shifts the pole latitude, so absolute attitude remains model-dependent.
+The other archive pole (323,-57) differs from the paper table (312,-40); it is retained as an archive alternative rather than substituted. Hanuš 2021 sparse-only comparison shifts the pole latitude, so absolute attitude remains model-dependent.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

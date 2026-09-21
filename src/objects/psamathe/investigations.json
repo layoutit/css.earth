@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "psamathe",
+  "entries": [
+    {
+      "id": "sheppard-radius-estimate",
+      "subject": "Size: Sheppard, Jewitt and Kleyna (2006) Table 3 radius",
+      "status": "included",
+      "finding": "Psamathe is drawn at the 20 km radius that Sheppard, Jewitt and Kleyna (2006), Table 3, estimate for S/2003 N1 from its R-band brightness with an assumed geometric albedo of 0.04; JPL's satellite discovery table identifies S/2003 N1 as Psamathe. The size rests on the assumed albedo and is not a measurement.",
+      "evidence": [
+        "https://doi.org/10.1086/504799",
+        "https://ssd.jpl.nasa.gov/sats/discovery.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "44bf8eac22a856a14d6ea0b3537a86ecaab33e78"
+        }
+      ]
+    }
+  ]
+}

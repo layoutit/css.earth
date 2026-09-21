@@ -48,7 +48,7 @@
       ],
       "shape": {
         "kind": "radial-terrain",
-        "radiusKm": 562.5
+        "radiusKm": 561.4
       },
       "surfaces": [
         {
@@ -130,8 +130,8 @@
         -0.3977771559319138,
         0.9174820620691819
       ],
-      "metersPerUnit": 2445.6521739130435,
-      "bodyRadiusM": 562500
+      "metersPerUnit": 2440.8695652173915,
+      "bodyRadiusM": 561400
     },
     "page": {
       "stylesheets": [
@@ -139,7 +139,7 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "aa8f19d3c6c2d887e569d504f9ceec700ff546edfe1422d1184db526c4321e9d"
+        "sha256": "ffbe1293d378381f5fdf31a8a8ad86536bee5ee18c835f0c56f7b04432cdbb93"
       }
     },
     "catalog": {
@@ -158,6 +158,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "d49762c43ee9add37bddcf0c0c7896ee7b740e143cf13f76815a1a19bcbb272d"
+    "sha256": "48e9f69867102e7934ebce84c85c4a3ccd1078f0ebb085a3e71798f1d8909679"
   }
 }

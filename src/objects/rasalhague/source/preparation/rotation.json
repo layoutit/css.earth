@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 161.65844626278533,
+  "declinationDegrees": 34.78856808653571,
+  "displayMeridianDegrees": -162.81998622690435,
+  "phase": "arbitrary-display-phase",
+  "source": "Measured axis: Monnier et al. (2010), inclination 87.5 ± 0.6 degrees from the line of sight and pole position angle -53.5 ± 1.7 degrees east of north (source/photometry/gravity-darkening.json), the pole tilted toward us; computed by inclinedPoleOrientation in tools/objects/observation/gravity-darkening.mts.",
+  "coordinateSystem": "ICRF/J2000. +Z is the measured rotation pole, the one tilted toward the Earth. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated: the surface has no longitude features to show it.",
+  "qualification": "The pole direction is measured by interferometric imaging (Monnier et al. (2010)). The spin phase and prime meridian are a display convention; the rotation is not animated."
+}

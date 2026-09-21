@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5d522f5a949fd9952b73ca1f456b6cee5b119be6f3e5b52c26372a55c01c44d6"
+        "sha256": "e4a9bd576b4a995bf6b4d46cf2519b7869a59df2c8ffc97b740541727c9c7a11"
       }
     },
     "catalog": {
       "name": "WASP-39",
       "classification": "star",
-      "color": "#ffe9c4",
+      "color": "#ffebdf",
       "distanceAu": 44419786.7,
       "description": "Sun-like star about 215 parsecs away that hosts the hot giant WASP-39 b.",
       "systemName": "WASP-39 system",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "1766cdb9a3b16c21d4f93a2f92f22548858397eb004934f2385d87bacc82825f"
+    "sha256": "dfc0c1676164313444418a8353287993e9502b625ee1cf7a2184291a97737638"
   }
 }

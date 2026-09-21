@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "4b4d13f6efd4b6c6f5a9e1ba27fe932f4920c444051153dd0e13fefbaa253517"
+    "sha256": "fbc8c0fe8c0340450134e0073291f9f785e835fa40a5939e409c6899d717228b"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "rings",
       "path": "source/preparation/rings.json",
-      "sha256": "3bcf4c15e41de801e4f7e24c7b95c2373bdd6d049199c2175ab1205ada3f8329",
+      "sha256": "6b965d6af892866e95867646fe95e531bdfe801137d969db1137848c4c1ea7da",
       "parameters": {
         "schema": "cssearth-radial-layer-recipe@1",
         "units": "kilometers",
@@ -287,7 +287,7 @@
                 }
               ]
             },
-            "qualification": "Pinned OpenSpace radial color/transparency profiles; authored D/F-ring optical models, named gap constraints, source-profile readability and prepared solar tint. The accepted field is preserved including transparent RGB.",
+            "qualification": "Alpha is the Cassini UVIS HSP alpha Virginis occultation of 2006 day 285 (PDS COUVIS_8001, 1 km bins) as transmission, exp(-tau); flagged-corrupted bins are interpolated. Colour is uniform white under the declared solar tint. Named gaps and hairlines keep a minimum pixel width, sampled from the same occultation.",
             "variants": [
               {
                 "id": "ultraviolet",
@@ -487,7 +487,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0f2a377ee017750153b34e11c673a0cb92de21700b206a783913d81a03351e72",
+      "sha256": "b7c6d3095961b13e21af3be948f4769012838aa1d87b506a70c2c42fdf7c80a0",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -567,7 +567,7 @@
             {
               "id": "moon-count",
               "label": "Known moons",
-              "value": "293 · Sep 2026",
+              "value": "293 · Aug 2026",
               "source": {
                 "url": "https://science.nasa.gov/saturn/moons/",
                 "label": "NASA/JPL reference",
@@ -897,7 +897,7 @@
             "label": "JPL",
             "role": "orbits",
             "description": "Moon orbits",
-            "href": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html"
+            "href": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
           },
           {
             "label": "OpenSpace",
@@ -1163,7 +1163,7 @@
     {
       "id": "surface",
       "path": "source/preparation/surface.json",
-      "sha256": "6e79578dc8aa6505826e634d387bffb27ca64a0dc1a815d2b9d48b87ff3b8091",
+      "sha256": "9c0b080a543fc951e563931749e4842ce92396f7c81c6574c2a81e63a876c318",
       "parameters": {
         "schema": "cssearth-spectral-material-variants@1",
         "namespace": "saturn",
@@ -1206,6 +1206,8 @@
           "poleAtlasWidth": 4096,
           "poleAtlasHeight": 512,
           "polarBoundaryLatitude": 1.3744467859455345,
+          "objectEquatorialRadiusKm": 60268,
+          "objectPolarRadiusKm": 54364,
           "materialModes": [
             "full",
             "no-shadows",
@@ -2069,8 +2071,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "0f2a377ee017750153b34e11c673a0cb92de21700b206a783913d81a03351e72",
-      "bytes": 17317,
+      "sha256": "b7c6d3095961b13e21af3be948f4769012838aa1d87b506a70c2c42fdf7c80a0",
+      "bytes": 17313,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2204,20 +2206,20 @@
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-ultraviolet.webp",
-          "bytes": 782,
-          "sha256": "271c11530335381d80f0ac0eb353c462aab7d0755a1dfd4685242e2073a09e9f",
+          "bytes": 768,
+          "sha256": "07a42170041a29b9c8b9e73965fe33ada04e428967bf31624ebf8e7d01279159",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-ultraviolet@2x.webp",
-          "bytes": 8426700,
-          "sha256": "e1c543f07fa7d1e99e202b19eaf49d4a5467cdbcbcc2f39813d5fe65ba6d35b8",
+          "bytes": 8350976,
+          "sha256": "5a920856ad1e61254178e185cb8ea94dea673343ce118179dd8a713b94a4cfed",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles-ultraviolet.webp",
-          "bytes": 539626,
-          "sha256": "7b32df4a2760125ce9e99b8f82cddc9ef2d1cf3789d13a61b6f1704de6904e19",
+          "bytes": 531486,
+          "sha256": "2bffa68ba90032094fafb745fde1449d6124748b0be23baa629e73fe6f2fb03f",
           "verification": "bytes-verified"
         }
       ],
@@ -2257,20 +2259,20 @@
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-methane.webp",
-          "bytes": 1114,
-          "sha256": "74a6abdee4817c635c128affc535a2ed31bc5cf8ab75aa6c1f7707913b17fe6c",
+          "bytes": 1074,
+          "sha256": "512c56063c830f8529bd3a63c77bc45eee1653fd18840e7b22097d2db05bb75a",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-methane@2x.webp",
-          "bytes": 6063528,
-          "sha256": "4961bf75a5895fcb67a076e250b5f6024f300c8830c130dca0ab93105997101e",
+          "bytes": 6023022,
+          "sha256": "798e9c9786f1e86b927e7796064ef49feeb94fceaf4279e4afdb1371e23a8bdb",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles-methane.webp",
-          "bytes": 499112,
-          "sha256": "28ecb7c44ff00522e81e8e04cae6ca7d9757c3777393b6c88f4e6bf00834c4d8",
+          "bytes": 452766,
+          "sha256": "f6369e6c4a5afd026b286712d1cbf585dc4b3a0971550c45144fe2d16b97eea2",
           "verification": "bytes-verified"
         }
       ],
@@ -2308,20 +2310,20 @@
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-thermal.webp",
-          "bytes": 508,
-          "sha256": "a6eeedfe9915977a16dd6995170713287f481bed7db19f5d156ad4e2d6c7b8ac",
+          "bytes": 526,
+          "sha256": "895033e9f51d77ab83d7f03f9ce9b4886bead180ed743df61711ba5148f3fc9b",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-thermal@2x.webp",
-          "bytes": 4899922,
-          "sha256": "687720e7007605071718443705710b2fc95e05912567126513de46520413165a",
+          "bytes": 4888624,
+          "sha256": "b676f1c1e3a8e8548383abe44edddf406e46509b178f71842fc381d9a9daa48c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles-thermal.webp",
-          "bytes": 502000,
-          "sha256": "668d7baad52459262ee94bd6756c4ff748e4768b52696155a6d872968f960a31",
+          "bytes": 495992,
+          "sha256": "05de4c1aa90995f575fe70dc60120522b79e271ac635e08a77ea8f49c9251139",
           "verification": "bytes-verified"
         }
       ],
@@ -2356,20 +2358,20 @@
       "outputs": [
         {
           "url": "/scenes/saturn/saturn-lens-normal.webp",
-          "bytes": 650,
-          "sha256": "e1f5dccaf44363086babbe9c041efdd4a2a01f365c8f498d22a9cab77dcae1a3",
+          "bytes": 632,
+          "sha256": "b53887d6f37d55425509e4da5c589d4539e3dc9bdb7d40e8bbd087d6e9876ef5",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-surface-body.jpg",
-          "bytes": 776260,
-          "sha256": "0041c81710edfad40984212c3ae42a15496ad8f299a58cc561a668193dfc470a",
+          "bytes": 774092,
+          "sha256": "172e83ad7ca0945d509259c97b2f3d24a955fa9235c01b6a8c8f5fe7a78b59f9",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/saturn/saturn-poles.webp",
-          "bytes": 38172,
-          "sha256": "d09b972b591f0e525848c5962b349be163f1d23b6a12698cf385a8804d9b8b89",
+          "bytes": 40304,
+          "sha256": "ccdf43cf96cb6e8bbbcd3ad97f411823b77ccbc9133882e00a07a23f5b764388",
           "verification": "bytes-verified"
         },
         {
@@ -2439,8 +2441,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9641,
-          "sha256": "831ed799cc76c0d6e820a7aa22df1d06c21d0e711a84dee5beb33417e53f072e",
+          "bytes": 9637,
+          "sha256": "b988647e47ecc909a60b8edab9d7ee95a2b9501a323d1228116e90134838eb4f",
           "verification": "bytes-verified"
         }
       ],
@@ -2553,8 +2555,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/normal.webp",
-          "bytes": 13738,
-          "sha256": "d1aa9f141fbeafb1cc5d86aefe0915b2487a30f6fb78a7de238f800e5bd6b2f9",
+          "bytes": 13702,
+          "sha256": "1e2faeaa03ece7a1d5d4eff257f1da4c6f91a368051d38799c84ab3e49cdaf57",
           "verification": "bytes-verified"
         }
       ]
@@ -2581,8 +2583,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/ultraviolet.webp",
-          "bytes": 18442,
-          "sha256": "f194b764af342617aa7c90fce6e3b73097aebcd40bb8e6abcc19b4e68a78c3aa",
+          "bytes": 17686,
+          "sha256": "869021ebd689eb1ca43d011e41ddc86f552fd4258562c44bbe6c39bb590af4a1",
           "verification": "bytes-verified"
         }
       ]
@@ -2609,8 +2611,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/methane.webp",
-          "bytes": 11648,
-          "sha256": "6c9dbbde0cd22d9d083894d08c4122591a045232c011e19ea132bbbbe2c95615",
+          "bytes": 11490,
+          "sha256": "4744f734b56c8d365c6ddfa61d9a97ac4e285eacd277c4d0f7feeadb54ae3462",
           "verification": "bytes-verified"
         }
       ]
@@ -2637,8 +2639,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/thermal.webp",
-          "bytes": 8470,
-          "sha256": "848616c559a6300c911289ec5e8331de0896a3ce3af6627f5478173da4946498",
+          "bytes": 8652,
+          "sha256": "8f0d5993f68cf79813d308d74cc58869a4491c1a611824504fa4cd67d29779d6",
           "verification": "bytes-verified"
         }
       ]
@@ -2650,7 +2652,7 @@
   },
   "lastPreparation": {
     "objectId": "saturn",
-    "materialSha256": "9349474b209075e14ca90c3e58b39a3a702b8824ccec27f5767ba9f7efc70987",
+    "materialSha256": "c4057dabb6f9118b5a536d59110f1eaa7b4778dca76c83fd17de3365f95c2d21",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

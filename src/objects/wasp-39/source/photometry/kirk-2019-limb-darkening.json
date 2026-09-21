@@ -1,0 +1,17 @@
+{
+  "schema": "cssearth-published-limb-darkening@1",
+  "objectId": "wasp-39",
+  "source": "Kirk et al. (2019), LRG-BEASTS: Transmission Spectroscopy and Retrieval Analysis of the Highly Inflated Saturn-mass Planet WASP-39b, AJ 158, 144 (https://arxiv.org/abs/1908.02358), Table 1, white light",
+  "band": "WHT/ACAM white light, 400-900 nm",
+  "law": "I(mu)/I(1) = 1 - u1 (1 - mu) - u2 (1 - mu)^2",
+  "u1": {
+    "value": 0.49,
+    "uncertainty": 0.06,
+    "cell": "0.49 ± 0.06"
+  },
+  "u2": {
+    "value": 0.08,
+    "fixed": "held at the LDTk PHOENIX model value in the fit"
+  },
+  "note": "Half measured: u1 is fitted to the transits, u2 is fixed to a model atmosphere value."
+}

@@ -7,10 +7,10 @@
     "name": "Ino",
     "horizonsCode": "173;",
     "meanRadiusKm": 72,
-    "gravitationalParameterKm3PerS2": 0,
+    "gravitationalParameterKm3PerS2": 0.1468346,
     "parent": "sun"
   },
-  "physicalNotes": "Published shape models with documented physical size calibration.",
+  "physicalNotes": "Radius 72 km: the selected DAMIT model 5913 diameter 144 km; Vernazza et al. (2021) Table 1 gives D = 145 +/- 3 km (see the README for the one-kilometre difference). GM = G * mass with Vernazza et al. (2021) Table 1 (VizieR J/A+A/654/A56) m = 2.20 +/- 1.30 x 10^18 kg and G = 6.6743e-20 km^3 kg^-1 s^-2.",
   "asteroid": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27173%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

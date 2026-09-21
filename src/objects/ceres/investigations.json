@@ -143,7 +143,7 @@
       "id": "jpl-physical-and-orbit-data",
       "subject": "Vendored JPL body data through the astronomy package",
       "status": "included",
-      "finding": "Physical and orbital data come from the vendored JPL body data, Kepler state vectors and IAU rotation, with mean radius 469.7 km and a fixed geometry epoch of 2026-09-04T00:00:00 TT; the mesh is a sphere at that mean radius and claims no resolved shape.",
+      "finding": "Physical and orbital data come from the vendored JPL body data, Kepler state vectors and IAU rotation, with mean radius 469.7 km and a fixed geometry epoch of 2026-09-03T00:00:00 TT; the mesh is a sphere at that mean radius and claims no resolved shape.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L85",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/ceres/README.md#L92",

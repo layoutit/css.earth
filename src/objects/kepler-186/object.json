@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "99d270004bca46f9e5147eec1fe91117a6c2c6773920bc2a93f6055f3da2f8ff"
+        "sha256": "f5d042ff2d6cb5f68297e889b8835e36a5eaaa3e0279ab3668aa9d371f202b1f"
       }
     },
     "catalog": {
       "name": "Kepler-186",
       "classification": "star",
-      "color": "#ffb58a",
+      "color": "#ffbd89",
       "distanceAu": 36612974.2,
       "description": "Red dwarf 178 parsecs away that hosts Kepler-186 f.",
       "systemName": "Kepler-186 system",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c0dc0918f3857a5a27978811cec421d2f0761f4d61cde64fdfc7006072f97f2f"
+    "sha256": "5c2d2b8b60cb429514d341379847d65d78100ff54e1d75c32f448b48099267ea"
   }
 }

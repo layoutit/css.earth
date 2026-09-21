@@ -4,7 +4,7 @@
 
 - **Monochrome:** USGS [Voyager/Galileo global mosaic](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_global_mosaic_1km), `Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif`.
 
-- **Enhanced color:** USGS [Voyager/Galileo false-color global mosaic](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_false_color_global_mosaic_1km), the Galileo SSI global false-color mosaic.
+- **False color:** USGS [Voyager/Galileo false-color global mosaic](https://astrogeology.usgs.gov/search/map/io_voyager_galileo_ssi_false_color_global_mosaic_1km), the Galileo SSI global false-color mosaic.
 
 - The Geology view uses the original `Io_GeoUnits` polygon/attribute/projection members from [USGS SIM3168](https://pubs.usgs.gov/sim/3168/), Williams et al. (2011), at 1:15,000,000.
 
@@ -27,7 +27,7 @@ These download sizes refer only to the polar sprites. Decoded dimensions are unc
 
 Photographic refresh, 12 September 2026, on base `3efdf2c9`:
 [monochrome detail](evidence/photographic-detail/monochrome.png) and
-[the Pele hemisphere in enhanced color](evidence/photographic-detail/pele-hemisphere.png)
+[the Pele hemisphere in false color](evidence/photographic-detail/pele-hemisphere.png)
 were inspected in Chrome, 1280 × 720, with Shadows on/off and DPR 1 and 2.
 The native color mosaic remains soft around Pele; increasing the atlas size
 cannot recover detail absent from the observations.
@@ -42,7 +42,7 @@ search used a preview index of these three moons. This does not qualify all
 scientific lenses or the aggregate application.
 
 This photographic refresh preserves the source maps, masks, geometry and scene
-structure. It increases photograph sampling to 4096 × 2048 and 8192 × 4096.
+structure. It increased photograph sampling to 4096 × 2048 and 8192 × 4096; only the 8192 × 4096 map ships now.
 It also corrects the feature catalogue's map origin from 180° to 0° E: the
 photograph decoder already outputs 0–360° E. The previous origin put all 260
 named features on the opposite hemisphere. Pele now selects its red deposit
@@ -79,7 +79,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 Feature notes: 44 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
-- **Enhanced color:** Its colors are enhanced and do not represent a visual true-color measurement. Io changed between the Voyager and Galileo observations; the mosaic is not a single-date snapshot, and spatial/brightness/color boundaries remain visible.
+- **False color:** USGS superimposed color from Galileo violet, green and near-infrared (756 nm) images; this is false color, not a visual true-color measurement. Io changed between the Voyager and Galileo observations; the mosaic is not a single-date snapshot, and spatial/brightness/color boundaries remain visible.
 
 - USGS explicitly states that color lacks coverage within approximately 5° of both poles and that merged polar color was interpolated. We therefore withhold color at |latitude| ≥ 85° before resampling. Independently valid monochrome replaces missing or withheld color. The shared neutral gray grid appears only where neither source provides valid imagery.
 
@@ -121,7 +121,7 @@ NASA's [Io facts](https://science.nasa.gov/jupiter/jupiter-moons/io/facts/) supp
 
 Exact source byte lengths, SHA-256 identities, credits and direct restoration URLs are in `source/manifest.json`.
 
-Both GeoTIFFs contain 11445 × 5723 samples on a 1000 m grid. Actual monochrome detail varies from approximately 1–10 km per pixel. Color detail varies from 1.3–21 km per pixel; the published enhanced product combines Galileo near-infrared, green and violet color ratios with Voyager/Galileo monochrome detail. This is an existing USGS derived observation product, not a new detail transfer in cssEarth.
+Both GeoTIFFs contain 11445 × 5723 samples on a 1000 m grid. Actual monochrome detail varies from approximately 1–10 km per pixel. Color detail varies from 1.3–21 km per pixel; the published false-color product combines Galileo near-infrared, green and violet color ratios with Voyager/Galileo monochrome detail. This is an existing USGS derived observation product, not a new detail transfer in cssEarth.
 
 USGS reports calibration, geometric control, Lunar–Lambert limb-darkening correction with coefficient 0.7, and seam matching in production of these products. We preserve the published display values, with no second photometric correction or brightness fit. Photographed terrain shadows remain possible. Our existing **Shadows** control remains active for both lenses; its globe lighting is approximate and cannot infer relief hidden in a photographed shadow.
 
@@ -129,14 +129,15 @@ USGS reports calibration, geometric control, Lunar–Lambert limb-darkening corr
 
 The GeoTIFF georeference, rather than the catalog's positive-west coordinate labels, defines raster sampling. Both products use a simple cylindrical sphere of radius 1821460 m, center longitude 0°, origin (-5723000, 2862000) m and pixel increments (+1000, -1000) m. East increases to the right, north is up. Preparation maps each canonical output pixel centre through the actual metric origin and increments, using native bilinear interpolation. The outer longitude is −180.022479853° and the map spans 360.013503743°; those fractional bounds are preserved rather than rounded to an integer roll or stretched to a full globe. Output longitude remains 0–360° positive-east, without horizontal reflection. [Pele's](https://planetarynames.wr.usgs.gov/Feature/4638) large red deposit at 18.71° S, 104.72° E (255.28° W) is an independent orientation landmark. The 30 m difference from the current astronomical mean radius is not interpreted as terrain.
 
-`GDAL_NODATA=0` marks missing raster data. Monochrome uses exact zero; enhanced color requires the complete RGB tuple to be zero. Low but nonzero observed dark terrain is retained. Every native contributor with nonzero bilinear weight must be valid; incomplete or masked interpolation footprints are withheld. This coordinate correction replaces the earlier whole-image resize and roll, so prepared image bytes change while the original source values remain unchanged.
+`GDAL_NODATA=0` marks missing raster data. Monochrome uses exact zero; false color requires the complete RGB tuple to be zero. Low but nonzero observed dark terrain is retained. Every native contributor with nonzero bilinear weight must be valid; incomplete or masked interpolation footprints are withheld. This coordinate correction replaces the earlier whole-image resize and roll, so prepared image bytes change while the original source values remain unchanged.
 
 This is a conservative geographic cut based on the published approximate coverage boundary, not a recovered per-image observation mask. No synthetic terrain or extrapolated pole color is used.
 
 ## Prepared delivery
 
 The shared raster lane now samples the original 11,445 × 5,723 photographs into
-4,096 × 2,048 and 8,192 × 4,096 maps before packing. The larger map has roughly
+one 8,192 × 4,096 map before packing, the only density shipped
+([asset record](prepared/assets.json)). That map has roughly
 1.4 km equatorial texel spacing; source areas coarser than that remain coarse.
 Pole sprite dimensions, geometry, scientific maps and lighting are unchanged.
 Canonical assets are selected once per mount, independently of DPR. Runtime only
