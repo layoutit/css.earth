@@ -8,8 +8,6 @@ Leda is Jupiter XIII. JPL Horizons carries it as body 513.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
-
 JPL Horizons lists a radius of 5 km on Leda's object data page (revised 2025-May-12). Horizons gives no shape, albedo map or rotation state for it.
 
 The orbit is a precessing ellipse fitted to JPL Horizons osculating elements sampled every 5 days from 2020 to 2032, with a position correction series, by the same shared generator as Jupiter's other irregular moons.
