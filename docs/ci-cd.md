@@ -30,6 +30,20 @@ group and can supersede an older deployment.
 - Keep correctness, source integrity, changed-key publication and relevant type
   checks blocking. Exhaustive remote sweeps and broad release qualification have
   scheduled/manual homes. Moving a check requires naming where its proof remains.
+- Gate on what ships, ratchet what is merely incomplete. A merge-required check may
+  only assert something whose failure means the shipped application is broken, wrong
+  or unverifiable as shipped — a build error, a broken page, a missing published
+  asset, or an unverified pin behind an asset the site serves. Provenance of a
+  *published* asset is part of what this project ships and stays blocking. Repository
+  completeness — an absent test fixture, a missing ledger, a stale link — is backlog:
+  it must stay visible, but it may not block an unrelated change. `tools/object-package-backlog.json`
+  is the ratcheted inventory for the object package contract: `tools/object-package-contract.mts`
+  reports a missing `backlogFiles` entry instead of throwing, and
+  `tools/restore-source-inputs.test.mts` prints the outstanding list and fails only
+  when it *grows*, or when an entry is stale because its file now exists. Shrink the
+  list in the change that supplies the file. This is not a tolerance, a skip or a
+  `continue-on-error`: every entry is still named on every run, and new debt is still
+  blocked at the moment it is introduced.
 - Restore only inputs the selected tests consume. Compiler jobs need pinned JSON
   and generated shell data, not the global texture bank. Image-consuming tests
   must restore their real pinned inputs; missing data is not a pass.
