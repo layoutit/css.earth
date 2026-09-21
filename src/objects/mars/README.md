@@ -19,11 +19,11 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 Polar sprites now sample the pinned original photographs directly, preserving the declared coordinates and source gaps. Existing monochrome fallback is retained where a color view already uses it. Each sprite is 1024 × 512 pixels, the one prepared density; latitude-band images, geometry and lighting remain unchanged. [The shared preparation guide](../../../docs/surface-preparation.md#preserve-photographic-detail-through-preparation) describes the method and its limits.
 
-| View | Both prepared levels, before → current |
+| View | Polar sprite, one prepared level (`@2x`) |
 | --- | --- |
-| normal | 608.1 → 681.8 kB |
+| normal | 524,794 bytes |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+This download size refers only to the polar sprite, as listed in `prepared/assets.json`. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 The lane change was verified with the package, source-closure and browser conformance checks listed in the pull request that made it. No dated oracle report is cited for the new lane; the source and acquisition records identify every input.
 
@@ -35,7 +35,7 @@ Landing sites: 14 spacecraft landing, touchdown or impact sites and 2 published 
 
 Feature notes: 644 of the labelled names carry a caption note, the lead summary of their English Wikipedia article (CC BY-SA 4.0, retrieved 2026-09-12), joined through Wikidata's Gazetteer id property and pinned with the article link and revision in `source/features/notes.json`; the caption credits Wikipedia beside the IAU naming year.
 
-- THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic has exact-zero fill in rows 0–26 (north of about 87.6° N) and rows 1894–2047 (south of about 76.5° S) and 15.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
+- THEMIS shows qualitative infrared response, not calibrated temperature or one observation date. The pinned mosaic (sha256 `1e9123a6…`) has fully black rows 0–28 (north of about 87.5° N) and rows 2034–2047 (south of about 88.8° S), and 2.6% zero samples overall. The shared raster lane has no source-validity mask, so those bands render black under the shared lighting; they are missing coverage, not dark terrain. The earlier gray grid and polar inpainting were features of the retired affine lane.
 - The MOLA lens mosaic is stitched from NASA Trek zoom-3 WMTS tiles and the THEMIS lens is a USGS Astrogeology WMS GetMap of the global day-IR mosaic (2026-09-16); the source manifest pins those bytesed mosaics.
 - The atmosphere is a display approximation from the authored scattering parameters in `source/atmosphere/model.json`, adapted from the OpenSpace RenderableAtmosphere tuning; it is not an epoch-specific observation. The material disc is prepared for a sphere of the equatorial radius; the 0.6% polar flattening of the mesh stays inside the disc’s 0.992 content margin.
 - The camera and background sky do not represent an observer at a stated epoch.
@@ -81,10 +81,11 @@ lane.
 
 ## Raster preparation
 
-Each lens is decoded and resampled with Lanczos3 to 2,048 by 1,024 texels for
-DPR 1 and 4,096 by 2,048 for DPR 2 (`density-before-pack`), packed into 16
-latitude bands with a 16-texel gutter, and encoded as WebP. Polar tiles are
-256-pixel orthographic bilinear projections per lens. The 21,339 by 10,670
+Each lens is decoded and resampled with Lanczos3 to 4,096 by 2,048 texels
+(`density-before-pack`; only the `@2x` level ships), packed into 16 latitude
+bands with a 32-texel gutter as one 4,160 by 3,072 image, and encoded as WebP.
+Each lens also gets a 1,024 by 512 pole image: two 512-pixel orthographic
+bilinear projections, one per pole. The 21,339 by 10,670
 Viking mosaic is resampled directly from its checked bytes; the MOLA and THEMIS
 snapshots are already 4,096 by 2,048. No exposure or sharpening curve is
 applied to any Mars lens.

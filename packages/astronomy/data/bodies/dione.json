@@ -5,11 +5,11 @@
   "physical": {
     "name": "Dione",
     "horizonsCode": "604",
-    "meanRadiusKm": 562.5,
+    "meanRadiusKm": 561.4,
     "gravitationalParameterKm3PerS2": 73.116,
     "parent": "saturn"
   },
-  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "physicalNotes": "GM: JPL SAT441 (Jacobson 2022, AJ 164:199) via ssd.jpl.nasa.gov/sats/phys_par.\nRadii: IAU 2015 mean radii (Archinal et al. 2018) from the same JPL table.",
   "satellite": {
     "parent": "saturn",
     "horizonsCode": "604",

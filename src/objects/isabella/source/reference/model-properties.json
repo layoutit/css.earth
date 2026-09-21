@@ -11,7 +11,7 @@
     "reportedUncertaintyKm": 0.92,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
     "systematicUncertaintyFraction": null,
-    "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
+    "additionalSystematics": "Usui 2011 section 2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about 10% in size, especially for few detections; no invented total error bar is assigned.",
     "diameterSemantics": "Mean fitted diameter of a nonrotating sphere in the modified Standard Thermal Model. Assigning it as the volume-equivalent diameter of a separate DAMIT mesh is an explicit display-scale approximation, not a published mesh-volume calibration.",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al. (2011), PASJ 63, 1117–1138",
@@ -24,7 +24,7 @@
       "detections": 8,
       "originalRow": "210    Isabella                       9.33  0.15  8   69.58  0.92 0.068 0.002"
     },
-    "limitations": "Hanuš2016 supplies an updated convex lightcurve-inversion model with two allowed poles; choose 987 as a reproducible representative. The archive provides no calibrated physical size. The paper does not support resolved terrain or a local relief accuracy claim. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+    "limitations": "Hanuš 2016 supplies an updated convex lightcurve-inversion model with two allowed poles; choose 987 as a reproducible representative. The archive provides no calibrated physical size. The paper does not support resolved terrain or a local relief accuracy claim. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
     "visibleDescription": "Convex light-curve reconstruction with approximate thermal size: 69.58 km effective diameter (catalog ±0.92 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 56.08119911397687,
     "metersPerSourceUnit": 56081.19911397687,
@@ -42,7 +42,7 @@
     278,
     -26
   ],
-  "modelLimitations": "Hanuš2016 supplies an updated convex lightcurve-inversion model with two allowed poles; choose 987 as a reproducible representative. The archive provides no calibrated physical size. The paper does not support resolved terrain or a local relief accuracy claim. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
+  "modelLimitations": "Hanuš 2016 supplies an updated convex lightcurve-inversion model with two allowed poles; choose 987 as a reproducible representative. The archive provides no calibrated physical size. The paper does not support resolved terrain or a local relief accuracy claim. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/3681/shape.txt",
     "vertices": 1020,

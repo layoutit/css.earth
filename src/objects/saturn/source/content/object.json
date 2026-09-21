@@ -77,7 +77,7 @@
       {
         "id": "moon-count",
         "label": "Known moons",
-        "value": "293 · Sep 2026",
+        "value": "293 · Aug 2026",
         "source": {
           "url": "https://science.nasa.gov/saturn/moons/",
           "label": "NASA/JPL reference",
@@ -407,7 +407,7 @@
       "label": "JPL",
       "role": "orbits",
       "description": "Moon orbits",
-      "href": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html"
+      "href": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
     },
     {
       "label": "OpenSpace",

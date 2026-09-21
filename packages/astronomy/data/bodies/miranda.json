@@ -9,7 +9,7 @@
     "gravitationalParameterKm3PerS2": 4.3,
     "parent": "uranus"
   },
-  "physicalNotes": "Ring-dynamics mass estimates: French et al. 2024, Table 3 footnote b.\nhttps://arxiv.org/abs/2401.04634; same published prolate radii as above.",
+  "physicalNotes": "GM: JPL URA111 solution via ssd.jpl.nasa.gov/sats/phys_par (read 2026-09-21).\nRadius 235.7 km is the vendored display value; that JPL table gives 235.8 km.",
   "satellite": {
     "parent": "uranus",
     "horizonsCode": "705",

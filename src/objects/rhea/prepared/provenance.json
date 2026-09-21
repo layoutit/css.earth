@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a03d4d2e359f43cc75436732a17e33cb454211fea103bacec39f550f6e80f9c7"
+    "sha256": "99aa6579f025999f946eeffe4b34c5451cae69eb867b7cf46783a958b51f5463"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "terrestrial",
       "path": "source/preparation/terrestrial.json",
-      "sha256": "caeebc7f9cf3b32ff431a7a2ee11863ad7c4f998c73d34fdf88373e9dc0bc1e6",
+      "sha256": "dd56ae0b0076432dddccd54570aa61ff3489d6ffa924d1e26c810141240db5d9",
       "parameters": {
         "schema": "cssearth-terrestrial-preparation@1",
         "kind": "solid-observation-body",
@@ -248,7 +248,7 @@
         },
         "geometry": {
           "radius": 230,
-          "radiusKm": 764.5,
+          "radiusKm": 763.5,
           "mapUrl": "/scenes/rhea/rhea-normal-surface@2x.webp",
           "polesUrl": "/scenes/rhea/rhea-normal-poles@2x.webp",
           "radialTerrain": {
@@ -1228,8 +1228,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-normal-surface@2x.webp",
-          "bytes": 6149912,
-          "sha256": "c6a5288cdd9f40e089a099a31e9c07e2ab439a91f8fc92654488dc78a0f913ac",
+          "bytes": 6149982,
+          "sha256": "059fa4a775f9d729ead4621e246200dd888822bdf639721d1c9640d5e252251f",
           "verification": "bytes-verified"
         }
       ],
@@ -1286,8 +1286,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-enhanced-surface@2x.webp",
-          "bytes": 13829616,
-          "sha256": "e1564037d7cd51b830a8542cde175c379b99ee8f31228be7ea7ffa212a9fc647",
+          "bytes": 13828608,
+          "sha256": "4121ecad7a61dce8199cee806696357d4b6860d552ca8787e8d81cadba32a22d",
           "verification": "bytes-verified"
         }
       ],
@@ -1344,8 +1344,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-infrared-surface@2x.webp",
-          "bytes": 211782,
-          "sha256": "ec2f3b57dc35fc0f6f6f6fbbf23aa5e92483a8dfc7ae18cd7701c738410c637c",
+          "bytes": 211798,
+          "sha256": "3aac8254b8a065194ebd2dc744b9d45f5146769879c1c95e998d95b64b48aace",
           "verification": "bytes-verified"
         }
       ],
@@ -1402,8 +1402,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-elevation-surface@2x.webp",
-          "bytes": 1802764,
-          "sha256": "47c32d751ca9be6c9c0b7d54972e5b42873f3c16c955f368b01a0bd503591af5",
+          "bytes": 1803024,
+          "sha256": "4d9418243e5a6416c7bdd6b1d648ff7d9f5fc6512ef50164598a9544042d941c",
           "verification": "bytes-verified"
         }
       ],
@@ -1455,8 +1455,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-relative-albedo-surface@2x.webp",
-          "bytes": 11456172,
-          "sha256": "64b4e6b9cc7d38a5657cdd362e31399919c588574b957eae118902d0e59d980c",
+          "bytes": 11457156,
+          "sha256": "b6ad37f654b5a131989e81fd49c598bd4a0755a80816ec95b0fefe92ed5d3634",
           "verification": "bytes-verified"
         }
       ],
@@ -1507,8 +1507,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-ice-absorption-surface@2x.webp",
-          "bytes": 159296,
-          "sha256": "e9c031a2e4e77071594d72a93228ec923fbcb75055107dbb1ddf7b49e95f3e53",
+          "bytes": 159192,
+          "sha256": "9998e618e2ebfe496c4e00e6bf341e472b531c67a23dc589b1f5707a872cb113",
           "verification": "bytes-verified"
         }
       ],
@@ -1551,8 +1551,8 @@
         },
         {
           "url": "/scenes/rhea/rhea-shape-surface@2x.webp",
-          "bytes": 131012,
-          "sha256": "39a189bb2e434cba724c4cc5c4c3b2c49fadd66b2869ab2ecff68609939b507d",
+          "bytes": 131004,
+          "sha256": "3ca21492289e0697c6660a29436b03999e84b14e543b007191adc9825774122f",
           "verification": "bytes-verified"
         }
       ],
@@ -1619,8 +1619,8 @@
       "outputs": [
         {
           "url": "/scenes/rhea/rhea-features.json",
-          "bytes": 208080,
-          "sha256": "5c96cba5c41ad06a111d918e6e3ff98922c34497e4f2184b7621ce810ab900e3",
+          "bytes": 208059,
+          "sha256": "f300a64a40141455c3c29d453695e9c0bea75098f67bbd0d56554d156f0476e4",
           "verification": "bytes-verified"
         }
       ],
@@ -1808,7 +1808,7 @@
   },
   "lastPreparation": {
     "objectId": "rhea",
-    "materialSha256": "ff3975aa8b971697755b6218a5e8b117ddedf04cd95ae7faf8677ccc3ace6559",
+    "materialSha256": "0fd923987ad22701b74a1dd8ba5c6c4062aeceec61fa0eac38c315703b74c085",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

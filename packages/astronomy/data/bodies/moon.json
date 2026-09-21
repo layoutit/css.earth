@@ -9,5 +9,5 @@
     "gravitationalParameterKm3PerS2": 4902.800066,
     "parent": "earth"
   },
-  "physicalNotes": "Published radar-model scales; use a documented primary mass where available."
+  "physicalNotes": "JPL Horizons body 301 physical data (revised 31 July 2013): IAU radius 1737.4 km, GM 4902.800066 +- 0.0001 km^3/s^2. JPL's satellite table gives the DE440 GM as 4902.800 +- 0.001, which agrees."
 }

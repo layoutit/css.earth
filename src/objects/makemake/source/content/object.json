@@ -38,13 +38,13 @@
       {
         "id": "rotation-period",
         "label": "Rotation period",
-        "value": "About 22.5 hours",
+        "value": "About 22.83 hours",
         "source": {
-          "url": "https://science.nasa.gov/dwarf-planets/makemake/",
-          "label": "Makemake · nasa makemake size",
-          "checked": "2026-09-16",
+          "url": "https://doi.org/10.1051/0004-6361/201935274",
+          "label": "Hromakina et al. (2019) · A&A 625, A46",
+          "checked": "2026-09-21",
           "path": "source/measurements.json",
-          "catalogueId": "source-makemake-nasa-makemake-size",
+          "catalogueId": "hromakina-2019-makemake",
           "locator": "/rotationPeriodHours"
         }
       },

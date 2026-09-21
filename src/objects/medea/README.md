@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2016 Table2 lists 46 dense lightcurves across eight apparitions and 397 sparse points. Both poles remain; model 1091 is a reproducible representative, not an observational rejection of 1092. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+Hanuš 2016 Table 2 lists 46 dense lightcurves across eight apparitions and 397 sparse points. Both poles remain; model 1091 is a reproducible representative, not an observational rejection of 1092. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

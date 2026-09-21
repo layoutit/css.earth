@@ -14,7 +14,7 @@
     "processing": "Published calibration, registration and photometric correction by Paul Schenk. Preserve intrinsic hemisphere albedo and color, including very dark pixels. No new brightness matching or photographic shadow removal."
   },
   "shape": {
-    "renderingSphereKm": 734.5,
+    "renderingSphereKm": 734.3,
     "source": "packages/astronomy/src/bodies.ts, NAIF 608",
     "monochromeCartographicRadiusKm": 736,
     "nasaFactRadiusKm": 736,

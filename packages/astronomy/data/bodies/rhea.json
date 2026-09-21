@@ -5,11 +5,11 @@
   "physical": {
     "name": "Rhea",
     "horizonsCode": "605",
-    "meanRadiusKm": 764.5,
+    "meanRadiusKm": 763.5,
     "gravitationalParameterKm3PerS2": 153.94,
     "parent": "saturn"
   },
-  "physicalNotes": "No measured GM is supplied for these small moons; zero means omitted mass.\nRadii: Thomas2013/IAU2015 shapes, not an inferred density or invented mass.",
+  "physicalNotes": "GM: JPL SAT441 (Jacobson 2022, AJ 164:199) via ssd.jpl.nasa.gov/sats/phys_par.\nRadii: IAU 2015 mean radii (Archinal et al. 2018) from the same JPL table.",
   "satellite": {
     "parent": "saturn",
     "horizonsCode": "605",

@@ -6,7 +6,7 @@
       "id": "nasa-science-size-and-rotation",
       "subject": "NASA Science Makemake overview",
       "status": "included",
-      "finding": "The display sphere uses the approximate 715 km radius from NASA Science, which also supplies the 22.5-hour rotation, 305-year orbital period and 45.8 AU average distance recorded as content.",
+      "finding": "The display sphere uses the approximate 715 km radius from NASA Science, which also supplies the 305-year orbital period and 45.8 AU average distance recorded as content. The rotation content is the 22.8266 h period of Hromakina et al. (2019), replacing NASA's rounded 22.5 hours.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L5",
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L31",
@@ -124,7 +124,7 @@
       "id": "pinned-jpl-elements",
       "subject": "Pinned JPL elements at the shared epoch",
       "status": "included",
-      "finding": "Orbital placement uses the existing pinned JPL elements at the shared 2026-09-04 epoch, as recorded under known problems.",
+      "finding": "Orbital placement uses the existing pinned JPL elements at the shared 2026-09-03 TT epoch, as recorded under known problems.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/ade60d022899e38561cb1b56027ce2a299e444b9/src/objects/makemake/README.md#L17"
       ],

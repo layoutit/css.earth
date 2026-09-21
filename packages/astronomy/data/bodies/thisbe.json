@@ -7,10 +7,10 @@
     "name": "Thisbe",
     "horizonsCode": "88;",
     "meanRadiusKm": 109,
-    "gravitationalParameterKm3PerS2": 0,
+    "gravitationalParameterKm3PerS2": 0.7742188,
     "parent": "sun"
   },
-  "physicalNotes": "DAMIT calibrated model radii; GM from the pinned Horizons physical blocks.",
+  "physicalNotes": "Radius 109 km = D/2 from Vernazza et al. (2021) Table 1, D = 218 +/- 3 km. GM = G * mass with Vernazza et al. (2021) Table 1 (VizieR J/A+A/654/A56) m = 11.60 +/- 2.20 x 10^18 kg and G = 6.6743e-20 km^3 kg^-1 s^-2.",
   "asteroid": {
     "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%2788%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
     "elements": {

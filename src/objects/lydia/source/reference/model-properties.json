@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",
     "reference": "DAMIT model 152",
     "sourceLabel": "DAMIT model 152",
-    "limitations": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+    "limitations": "Delbo and Tanga 2009 supplementary section on Lydia explicitly choose pole 1 (149.3,-55), matching model 152, because it fits slightly better (reduced chi-square 0.7 versus 0.76). The second pole remains possible. Its IRAS thermophysical diameter range is 90–92 km versus 94–97 km for pole 2; the archive stores 91±1 km.",
     "visibleDescription": "Convex light-curve reconstruction with the thermally preferred pole and a published 90–92 km diameter fit range. The archive mesh uses 91 km; another pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 1.0000000790258456,
     "metersPerSourceUnit": 1000.0000790258456,
@@ -29,7 +29,7 @@
     149,
     -55
   ],
-  "modelLimitations": "Delbo and Tanga2009 supplementary section on Lydia explicitly choose pole1 (149.3,-55), matching model152, because it fits slightly better (reduced chi-square0.7 versus0.76). The second pole remains possible. Its IRAS thermophysical diameter range is90–92 km versus94–97 km for pole2; the archive stores91±1 km.",
+  "modelLimitations": "Delbo and Tanga 2009 supplementary section on Lydia explicitly choose pole 1 (149.3,-55), matching model 152, because it fits slightly better (reduced chi-square 0.7 versus 0.76). The second pole remains possible. Its IRAS thermophysical diameter range is 90–92 km versus 94–97 km for pole 2; the archive stores 91±1 km.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/361/shape.txt",
     "vertices": 1597,

@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1859",
     "sourceLabel": "DAMIT model 1859",
     "reference": "DAMIT model 1859",
-    "limitations": "The 2017 ADAM study combines29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent147±14 km; the paper ensemble is142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
+    "limitations": "The 2017 ADAM study combines 29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent 147±14 km; the paper ensemble is 142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to 147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
     "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.9977937779105762,
     "metersPerSourceUnit": 997.7937779105762
@@ -23,7 +23,7 @@
     257,
     23
   ],
-  "modelLimitations": "The 2017 ADAM study combines29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent147±14 km; the paper ensemble is142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
+  "modelLimitations": "The 2017 ADAM study combines 29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent 147±14 km; the paper ensemble is 142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to 147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/568/shape.txt",
     "vertices": 402,

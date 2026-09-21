@@ -9,7 +9,7 @@
     "quotedUncertaintyKm": 12.7,
     "quantity": "NEATM effective spherical diameter",
     "reference": "Licandro et al. (2016), A&A 585, A9, Table 3",
-    "notes": "WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance9.067au, observer distance9.014au and phaseangle6.262deg (Table2); beamingparameter0.90±0.24 was fitted.",
+    "notes": "WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance 9.067 au, observer distance 9.014 au and phaseangle 6.262 deg (Table 2); beamingparameter 0.90±0.24 was fitted.",
     "basis": "effective spherical radiometric diameter applied as approximate volume-equivalent size",
     "assumption": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty.",
     "methodSystematicFraction": null,
@@ -19,7 +19,7 @@
     "sourceUrl": "https://doi.org/10.1051/0004-6361/201526866",
     "sourceLabel": "Licandro et al. (2016), A&A 585, A9, Table 3",
     "diameterSemantics": "NEATM effective spherical diameter",
-    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance9.067au, observer distance9.014au and phaseangle6.262deg (Table2); beamingparameter0.90±0.24 was fitted.",
+    "limitations": "Uniformly scale the independently inferred convex shape to the reported effective thermal diameter. This does not establish a measured volume or shape-matched thermophysical calibration; quoted catalog errors exclude shape/orientation and survey systematic uncertainty. WISE W3 and W4: 5 measurements in each band, observed at heliocentric distance 9.067 au, observer distance 9.014 au and phaseangle 6.262 deg (Table 2); beamingparameter 0.90±0.24 was fitted.",
     "visibleDescription": "Approximate scale from a thermal diameter of 61.4 ± 12.7 km. Quoted uncertainty does not fully include thermal-model and viewing-geometry effects."
   },
   "periodHours": 10.05822,

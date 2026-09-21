@@ -1496,7 +1496,7 @@
     {
       "path": "observations/catalog.json",
       "expectedBytes": 2201,
-      "expectedSha256": "45d1ae5f7836b02eaa5052ddca756bb78a81443561affc1e91bee9d71ed4c3ae"
+      "expectedSha256": "0caaf402d15849efeefc86e07ffea4030eec4997034b5ed1e0b24099dc3d74c0"
     },
     {
       "path": "observations/productdescription.pdf",
@@ -1520,8 +1520,8 @@
     },
     {
       "path": "preparation/terrestrial.json",
-      "expectedBytes": 14783,
-      "expectedSha256": "77fcd93ab17e8b90ca742337426ab3d4d81995778ece6e42e770b4f3c244ec9a"
+      "expectedBytes": 14791,
+      "expectedSha256": "08ed578a4a4e7ce914735cfe0ae711c9d94d45a669e6da4fb1f5f22131084cb0"
     },
     {
       "path": "preparation/navigation.json",
@@ -1535,8 +1535,8 @@
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16589,
-      "expectedSha256": "53ec6282d61e9533ef495172f1246572b3685c148804b909c1da744f3af0c066",
+      "expectedBytes": 16597,
+      "expectedSha256": "a3a02e069edf40770ba89ec9d552c72d75dfb97fadafdb898b62f3134ab60fb3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."

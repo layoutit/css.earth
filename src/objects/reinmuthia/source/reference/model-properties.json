@@ -10,7 +10,7 @@
     "reportedUncertaintyKm": 0.48,
     "uncertaintyMeaning": "Published thermal-model uncertainty propagated from flux, absolute magnitude and slope parameter. Shape, spin/aspect and fixed thermophysical assumptions are not fully included.",
     "systematicUncertaintyFraction": null,
-    "systematicMeaning": "Usui2011 notes additional unquantified model effects and typically a few to approximately10% rotation-related size uncertainty; this is not an object-specific interval.",
+    "systematicMeaning": "Usui 2011 notes additional unquantified model effects and typically a few to approximately 10% rotation-related size uncertainty; this is not an object-specific interval.",
     "quantity": "Standard Thermal Model mean effective spherical diameter",
     "sourceUrl": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
     "reference": "Usui et al. (2011), PASJ63,1117-1138, AcuA V1",

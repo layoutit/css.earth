@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "ad9e0a997130a2e69b56348baf5a6506afaa4ebfd2ce96fb216a7a5504dc0629"
+    "sha256": "0c07cfa22d0b1b9b466123ff084bfe69280c0e0a1d8abfe4ae83a04d963658dd"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -539,7 +539,7 @@
       "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
       "license": "Public-domain NASA mission data and published PDS cartographic product; cite Stooke.",
       "licenseEvidence": [
-        "observations/map-guide.html",
+        "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/00_map_guide.html",
         "https://sbn.psi.edu/pds/resource/stookemaps.html"
       ],
       "acquisition": "Download the pinned original mosaic.",

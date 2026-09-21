@@ -8,12 +8,12 @@
     "method": "published-volume-equivalent-size-transfer",
     "diameterKm": 51.1,
     "uncertaintyKm": 2.1,
-    "uncertaintyKind": "Empirical VS-TPM interval formed from the smallest range of14 best-fit varied-shape solutions out of20 (approximately68% of models), as defined in Hanuš2018 section3. It is not an independent Gaussian confidence interval or a local surface accuracy bound.",
+    "uncertaintyKind": "Empirical VS-TPM interval formed from the smallest range of 14 best-fit varied-shape solutions out of 20 (approximately 68% of models), as defined in Hanuš 2018 section 3. It is not an independent Gaussian confidence interval or a local surface accuracy bound.",
     "diameterSemantics": "Published volume-equivalent diameter for the same pole and nominal shape family; transferred uniformly to the archived nominal mesh.",
     "sourceUrl": "https://arxiv.org/pdf/1803.06116",
     "reference": "Hanuš et al. (2018), Table A.3",
     "sourceLabel": "Hanuš et al. (2018), Table A.3",
-    "limitations": "Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
+    "limitations": "Ďurech 2007 is the actual published collaboration-network shape source. Hanuš 2018 TableA.3 uses its pole(95,68), period 3.96820 h, QF3 and VS-TPM volume-equivalent diameter 51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own 50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
     "visibleDescription": "Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 2.1 km (reported model-ensemble range). An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 41.186395818873095,
     "metersPerSourceUnit": 41186.3958188731,
@@ -29,7 +29,7 @@
     95,
     68
   ],
-  "modelLimitations": "Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
+  "modelLimitations": "Ďurech 2007 is the actual published collaboration-network shape source. Hanuš 2018 TableA.3 uses its pole(95,68), period 3.96820 h, QF3 and VS-TPM volume-equivalent diameter 51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own 50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/383/shape.txt",
     "vertices": 1598,

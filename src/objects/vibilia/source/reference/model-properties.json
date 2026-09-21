@@ -13,7 +13,7 @@
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1824",
     "reference": "DAMIT model 1824",
     "sourceLabel": "DAMIT model 1824",
-    "limitations": "Hanuš2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.",
+    "limitations": "Hanuš 2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.",
     "visibleDescription": "Nonconvex ADAM shape constrained by resolved AO imaging, light curves and occultations. The selected archive gives 143 ± 3 km equivalent-volume size; its size error is not local shape accuracy. The grid marks unavailable imagery; rotational phase is illustrative.",
     "scaleKmPerSourceUnit": 0.9998011979133545,
     "metersPerSourceUnit": 999.8011979133545
@@ -23,7 +23,7 @@
     251,
     63
   ],
-  "modelLimitations": "Hanuš2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.",
+  "modelLimitations": "Hanuš 2017 rejects the opposite pole using two disk-resolved AO images and three occultation epochs. Archive D143±3 km and pole(251,63) are retained rather than paper ensemble D141±3 km and pole(250,58). No resolved surface imagery is projected onto this mesh.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/4039/shape.txt",
     "vertices": 402,

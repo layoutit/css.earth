@@ -174,8 +174,9 @@ assumptions, not a direct bolometric measurement. The wrapper retains every
 original byte without resampling. The lens applies the label's scale
 0.00392156862745; DN zero remains missing. The 1518×700 map uses a 606 km sphere,
 east-positive planetocentric coordinates and 2508.307177965 m pixels. Coverage
-ends before the south pole and retains unobserved sectors. Display endpoints
-are 0.1–0.5. The migrated label's summary mentions Pluto in error; its title,
+ends before the south pole and retains unobserved sectors. Values run
+0.02–0.53 (1st–99th percentile 0.15–0.44); display endpoints 0.1–0.5 saturate
+both tails. The migrated label's summary mentions Pluto in error; its title,
 target, LIDVID and data object identify Charon. The source label is retained.
 
 Exact bytes, coordinates and validity rules are in the intake plans and receipts.

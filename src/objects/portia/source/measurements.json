@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-measured-ellipsoid@1",
   "source": "https://arxiv.org/abs/2401.04634",
-  "citation": "French et al. (2024), Table3, reproducing Karkoschka (2001) Voyager paper TableV; adopted prolate axes also in Karkoschka HST paper TableIV.",
+  "citation": "French et al. (2024), Table 3, reproducing Karkoschka (2001) Voyager paper TableV; adopted prolate axes also in Karkoschka HST paper TableIV.",
   "semiAxesKm": [
     78,
     63,
@@ -32,5 +32,5 @@
     "height": 32,
     "noData": 160
   },
-  "qualification": "Published size and elongation fit, not a detailed terrain mesh. The third semi-axis63km is the prolate assumption, not an independent measurement. Reported uncertainties apply to projected radius sqrt(A*B) and ratioB/A; no separate-axis error bars are invented."
+  "qualification": "Published size and elongation fit, not a detailed terrain mesh. The third semi-axis 63 km is the prolate assumption, not an independent measurement. Reported uncertainties apply to projected radius sqrt(A*B) and ratioB/A; no separate-axis error bars are invented."
 }

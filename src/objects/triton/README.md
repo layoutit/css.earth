@@ -76,7 +76,7 @@ and exposure receipts are generated in `prepared/surfaces.json`.
 <details>
 <summary>Methods and source notes</summary>
 
-The generic authored solid-body package provides one retained 452-leaf sphere,
+The generic authored solid-body package provides one retained 450-leaf sphere,
 shared shell, flood lighting and optional Sun Shadows. Its 1,352.6 km mean
 radius, Neptune parent orbit, pole and synchronous retrograde rotation come from
 the vendored JPL/NAIF/IAU astronomy sources. The opening camera faces measured

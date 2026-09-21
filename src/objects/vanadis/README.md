@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2021 ASAS-SN study lists349 measurements and two poles. Select6039 as the first archived convex solution; the mirror6040 remains scientifically allowed. ASAS-SN photometry constrains broad shape and spin, not resolved terrain. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+Hanuš 2021 ASAS-SN study lists 349 measurements and two poles. Select 6039 as the first archived convex solution; the mirror 6040 remains scientifically allowed. ASAS-SN photometry constrains broad shape and spin, not resolved terrain. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

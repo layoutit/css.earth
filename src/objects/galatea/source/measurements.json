@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-measured-ellipsoid@1",
   "source": "https://doi.org/10.1016/S0019-1035(03)00002-2",
-  "citation": "Karkoschka (2003), Sizes, shapes, and albedos of the inner satellites of Neptune, Icarus162,400–407",
+  "citation": "Karkoschka (2003), Sizes, shapes, and albedos of the inner satellites of Neptune, Icarus 162,400–407",
   "semiAxesKm": [
     102,
     92,
@@ -22,5 +22,5 @@
     "height": 32,
     "noData": 160
   },
-  "qualification": "Published triaxial fit to Voyager images; smooth interpolation represents the measured axes, not terrain. The PCK80679km spherical radius is older and is not used for dimensions."
+  "qualification": "Published triaxial fit to Voyager images; smooth interpolation represents the measured axes, not terrain. The PCK BODY806 79 km spherical radius is older and is not used for dimensions."
 }

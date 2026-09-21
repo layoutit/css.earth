@@ -23,7 +23,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2013 table reports 22 dense lightcurves from five apparitions plus 292 sparse measurements. Both published poles remain; model 506 is a reproducible representative. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
+Hanuš 2013 table reports 22 dense lightcurves from five apparitions plus 292 sparse measurements. Both published poles remain; model 506 is a reproducible representative. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 

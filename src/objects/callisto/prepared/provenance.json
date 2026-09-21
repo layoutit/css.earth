@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "d659622a704f2f97fdcd779c832af025a888db747cbbe3e3f6842b88c4069e68"
+    "sha256": "8204365437bfaae8a1c4b2c698a12110061b843a59d55d0fa994306d6b355f36"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -152,7 +152,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "1610ab2dbb1d320847a5c1d152d7c51eb41174cc3e398f70e986f46a2bacc839",
+      "sha256": "823c46ae52a74f7774225a9aa0121ee144ed076dce440bb2578bd811700efe3e",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -206,14 +206,14 @@
             {
               "id": "orbital-period",
               "label": "Orbit around Jupiter",
-              "value": "16.69 days",
+              "value": "16.69 days · sidereal",
               "source": {
-                "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-                "label": "JPL Planetary Satellite Mean Orbital Parameters",
-                "checked": "2026-09-16",
+                "url": "https://doi.org/10.1007/s10569-017-9805-5",
+                "label": "IAU WGCCRE 2015 sidereal rate",
+                "checked": "2026-09-21",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "jpl-satellite-mean-elements",
-                "locator": "/references/2; P (days)"
+                "catalogueId": "iau-wgccre-2015",
+                "locator": "/references/4; orbital-period"
               }
             }
           ],
@@ -637,8 +637,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "1610ab2dbb1d320847a5c1d152d7c51eb41174cc3e398f70e986f46a2bacc839",
-      "bytes": 11073,
+      "sha256": "823c46ae52a74f7774225a9aa0121ee144ed076dce440bb2578bd811700efe3e",
+      "bytes": 11067,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1142,8 +1142,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6520,
-          "sha256": "b35b5f0b4292d89a3f85372021431c5114fd9955eca421dd5625cd49060e446a",
+          "bytes": 6514,
+          "sha256": "513fa9fb79282a4545abf2fa9388d5453baa44f523ca2e2968f4bce55759387e",
           "verification": "bytes-verified"
         }
       ],
@@ -1266,7 +1266,7 @@
   },
   "lastPreparation": {
     "objectId": "callisto",
-    "materialSha256": "7e4b36d144f707b994a95f35d30690864c64c62658be2db6b7f87ddf2a8dd0c9",
+    "materialSha256": "4e987be2c865bc51898078c06a969848aea4c1a13ccb1b31a7e06d0192ad9b36",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

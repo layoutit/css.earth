@@ -43,7 +43,7 @@
     "enhanced": {
       "title": "SSI false-color mosaic",
       "detail": "Color mosaic",
-      "summary": "False color from 756, 559 and 404 nm bands over monochrome detail; areas without color stay gray."
+      "summary": "False color from 756, 559 and 404 nm bands over monochrome detail; monochrome remains where color is missing."
     },
     "elevation": {
       "title": "Agenor Linea stereo terrain model",
@@ -59,48 +59,6 @@
       "title": "Galileo NIMS spectral color",
       "detail": "NIMS spectral bands",
       "summary": "False color from 1.50, 1.34 and 0.73 µm NIMS bands: spectral differences, not natural color or mineral amounts."
-    },
-    "ice-signature": {
-      "title": "SPHERE ice absorption",
-      "detail": "Infrared ratio",
-      "summary": "Ice absorption in the measured 1.30000/1.50263 µm ratio. SPHERE, December 2014; roughly 150 km detail.",
-      "sources": [
-        {
-          "catalogueId": "europa-sphere-composition-2022",
-          "url": "https://doi.org/10.5281/zenodo.6034904",
-          "label": "Oliver King et al. · SPHERE",
-          "checked": "2026-09-13",
-          "locator": "Native mapped numerical grids; methods paper"
-        }
-      ]
-    },
-    "fine-ice": {
-      "title": "SPHERE 0.1–0.3 mm ice",
-      "detail": "Model estimate",
-      "summary": "Modeled 0.1–0.3 mm crystalline ice component, not total ice. SPHERE, December 2014; roughly 150 km detail.",
-      "sources": [
-        {
-          "catalogueId": "europa-sphere-composition-2022",
-          "url": "https://doi.org/10.5281/zenodo.6034904",
-          "label": "Oliver King et al. · SPHERE",
-          "checked": "2026-09-13",
-          "locator": "Native mapped numerical grids; methods paper"
-        }
-      ]
-    },
-    "coarse-ice": {
-      "title": "SPHERE 0.3–1 mm ice",
-      "detail": "Model estimate",
-      "summary": "Modeled 0.3–1 mm crystalline ice component, not total ice. SPHERE, December 2014; roughly 150 km detail.",
-      "sources": [
-        {
-          "catalogueId": "europa-sphere-composition-2022",
-          "url": "https://doi.org/10.5281/zenodo.6034904",
-          "label": "Oliver King et al. · SPHERE",
-          "checked": "2026-09-13",
-          "locator": "Native mapped numerical grids; methods paper"
-        }
-      ]
     }
   }
 }

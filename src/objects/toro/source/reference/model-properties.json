@@ -15,8 +15,8 @@
     "reference": "DAMIT model 1862, version 2017-11-21",
     "scaleKmPerSourceUnit": 0.9999999990088962,
     "metersPerSourceUnit": 999.9999990088962,
-    "limitations": "Published 2018 YORP/thermophysical solution; rotation uses the fixed published reference period, with arbitrary display phase and no runtime YORP propagation. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. The archive symmetrizes its size uncertainty to±0.4 km; Ďurech et al.2018 report3.5 km with an asymmetric -0.4/+0.3 km interval.",
-    "visibleDescription": "Convex lightcurve model with thermophysical diameter3.5 km (published interval3.1–3.8 km). Grid marks unavailable imagery; phase is illustrative.",
+    "limitations": "Published 2018 YORP/thermophysical solution; rotation uses the fixed published reference period, with arbitrary display phase and no runtime YORP propagation. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. The archive symmetrizes its size uncertainty to±0.4 km; Ďurech et al.2018 report 3.5 km with an asymmetric -0.4/+0.3 km interval.",
+    "visibleDescription": "Convex lightcurve model with thermophysical diameter 3.5 km (published interval 3.1–3.8 km). Grid marks unavailable imagery; phase is illustrative.",
     "publishedIntervalKm": {
       "lower": 3.1,
       "upper": 3.8
@@ -27,7 +27,7 @@
     71,
     -69
   ],
-  "modelLimitations": "Published 2018 YORP/thermophysical solution; rotation uses the fixed published reference period, with arbitrary display phase and no runtime YORP propagation. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. The archive symmetrizes its size uncertainty to±0.4 km; Ďurech et al.2018 report3.5 km with an asymmetric -0.4/+0.3 km interval.",
+  "modelLimitations": "Published 2018 YORP/thermophysical solution; rotation uses the fixed published reference period, with arbitrary display phase and no runtime YORP propagation. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred. The archive symmetrizes its size uncertainty to±0.4 km; Ďurech et al.2018 report 3.5 km with an asymmetric -0.4/+0.3 km interval.",
   "shape": {
     "source": "https://damit.cuni.cz/projects/damit/stored_files/open/6127/shape.txt",
     "vertices": 1022,

@@ -77,11 +77,11 @@
       {
         "id": "axial-tilt",
         "label": "Axial tilt",
-        "value": "177.3°",
+        "value": "177.4°",
         "source": {
-          "url": "https://solarsystem.nasa.gov/internal_resources/1028/",
-          "label": "NASA/JPL reference",
-          "checked": "2026-09-08",
+          "url": "https://nssdc.gsfc.nasa.gov/planetary/factsheet/venusfact.html",
+          "label": "NASA NSSDCA Venus Fact Sheet",
+          "checked": "2026-09-21",
           "path": "source/editorial/factsheet-review.json",
           "catalogueId": "nasa-venus-factsheet",
           "locator": "/references/2; axial-tilt"
@@ -145,7 +145,7 @@
         },
         "poles": "venus-poles-clouds@2x.webp",
         "material": "venus-material@2x.webp",
-        "shortLabel": "VIS",
+        "shortLabel": "Illustration",
         "qualification": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck.",
         "falseColor": false,
         "notes": "Cloud presentation from the pinned OpenSpace texture. Its original camera, wavelength and color processing are unresolved; treat this view as an illustration of the cloud deck."
@@ -179,51 +179,174 @@
         "material": "venus-observation-material@2x.webp",
         "legend": {
           "kind": "scale",
-          "title": "Relative elevation",
+          "title": "Elevation",
+          "labels": [
+            "−3",
+            "4",
+            "11"
+          ],
+          "meta": "km relative to a 6,051 km radius",
+          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m",
           "recipe": {
             "palette": [
               [
-                52,
-                24,
-                111
+                98,
+                68,
+                134
               ],
               [
-                41,
-                85,
+                108,
+                63,
                 151
               ],
               [
-                40,
-                152,
-                132
+                108,
+                63,
+                151
               ],
               [
-                104,
-                173,
+                108,
+                63,
+                151
+              ],
+              [
+                108,
+                63,
+                153
+              ],
+              [
+                89,
+                62,
+                153
+              ],
+              [
+                67,
+                92,
+                164
+              ],
+              [
+                70,
+                168,
+                105
+              ],
+              [
+                111,
+                167,
                 69
               ],
               [
-                205,
-                105,
-                82
+                165,
+                136,
+                58
               ],
               [
-                231,
-                202,
-                190
+                163,
+                98,
+                61
+              ],
+              [
+                166,
+                82,
+                62
+              ],
+              [
+                171,
+                72,
+                64
+              ],
+              [
+                173,
+                64,
+                63
+              ],
+              [
+                179,
+                57,
+                64
+              ],
+              [
+                178,
+                56,
+                76
+              ],
+              [
+                174,
+                55,
+                89
+              ],
+              [
+                172,
+                57,
+                107
+              ],
+              [
+                170,
+                58,
+                127
+              ],
+              [
+                172,
+                56,
+                148
+              ],
+              [
+                161,
+                58,
+                153
+              ],
+              [
+                145,
+                63,
+                153
+              ],
+              [
+                136,
+                62,
+                157
+              ],
+              [
+                124,
+                61,
+                154
+              ],
+              [
+                113,
+                62,
+                152
+              ],
+              [
+                104,
+                64,
+                154
+              ],
+              [
+                102,
+                62,
+                152
+              ],
+              [
+                102,
+                62,
+                152
+              ],
+              [
+                102,
+                62,
+                152
               ]
             ],
             "labels": [
-              "Lower",
-              "Higher"
+              "−3",
+              "4",
+              "11"
             ]
-          },
-          "sourceUrl": "https://astrogeology.usgs.gov/search/map/venus_magellan_global_c3_mdir_colorized_topographic_mosaic_6600m"
+          }
         },
+        "legendNote": "From the USGS legend. Colors wrap: peaks above about 8 km turn purple again, like lowlands below 0 km. Shading is radar, not height.",
         "shortLabel": "DEM",
         "qualification": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic",
         "falseColor": true,
-        "notes": "USGS/NASA Magellan C3-MDIR colorized topographic mosaic with shaded relief. This archival scientific visualization is not visible surface color."
+        "notes": "USGS/NASA Magellan C3-MIDR radar mosaic overlain with colorized topography. Hue shows elevation from −3 to 11 km on a 6,051 km reference radius and wraps back to purple above about 8 km; brightness is the radar image. This archival scientific visualization is not visible surface color."
       },
       {
         "id": "ultraviolet",

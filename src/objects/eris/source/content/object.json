@@ -40,11 +40,11 @@
         "label": "Rotation period",
         "value": "About 15.8 days",
         "source": {
-          "url": "https://doi.org/10.1038/nature10550",
-          "label": "Research publication · DOI 10.1038/nature10550",
-          "checked": "2026-09-16",
+          "url": "https://doi.org/10.3847/PSJ/acdd5f",
+          "label": "Bernstein et al. (2023) · PSJ 4, 115",
+          "checked": "2026-09-21",
           "path": "source/measurements.json",
-          "catalogueId": "doi-10-1038-nature10550",
+          "catalogueId": "doi-10-3847-psj-acdd5f",
           "locator": "/rotationPeriodDays"
         }
       }

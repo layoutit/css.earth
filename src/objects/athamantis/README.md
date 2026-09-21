@@ -56,7 +56,7 @@ The 2 browser cases predate final integration. The report compares their recorde
 
 ## Known problems
 
-Hanuš2013 Keck study Table3 independently confirms115±12 km for the first pole and116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.
+Hanuš 2013 Keck study Table 3 independently confirms 115±12 km for the first pole and 116±12 km for the mirror, based on one adaptive-optics image. DAMIT comment slightly prefers pole(74,+27), selected here. The geometry remains a convex lightcurve model; AO constrains scale and silhouette, not a global photographic surface.
 
 Absolute phase is arbitrary; accelerated display spin is illustrative.
 
