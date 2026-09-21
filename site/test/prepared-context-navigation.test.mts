@@ -46,7 +46,6 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       if (!bankState) { pendingLens = id; return; }
       assert.ok(bankState.lenses.some(lens => lens.id === id)); applyBank({ id, selectedLens: id });
     },
-    setVolumeStarsVisible(objectId: string, enabled: boolean) { assert.equal(objectId, required(bankState).objectId); applyBank({ starsVisible: enabled }); },
     subscribeVolumeLens(objectId: string, listener: (state: PreparedVolumeLensState) => void) {
       assert.equal(objectId, bankState?.objectId ?? required(deferredVolumeBank).objectId);
       lensCallbacks.add(listener); return () => { lensCallbacks.delete(listener); };
@@ -62,7 +61,7 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
       return { ...galaxy, kind: 'galaxy-cluster', classification: required(object.classification),
         redshift: { value: .01, type: 'spectroscopic', sourceRef: 'positions:row' },
         aperture: { definition: 'R500', properRadiusM: 1e22, comovingRadiusM: 1e22, sourceRef: 'positions:row' } };
-    } } satisfies Pick<ContextLayer, 'imageLayerFrames' | 'volumeLensFrames' | 'selectVolumeLens' | 'setVolumeStarsVisible' | 'subscribeVolumeLens' | 'selectGalaxy' | 'resolveGalaxy'> & { volumeLensState(id: string): PreparedVolumeLensState | null };
+    } } satisfies Pick<ContextLayer, 'imageLayerFrames' | 'volumeLensFrames' | 'selectVolumeLens' | 'subscribeVolumeLens' | 'selectGalaxy' | 'resolveGalaxy'> & { volumeLensState(id: string): PreparedVolumeLensState | null };
   const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', sha256: '0'.repeat(64), bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
     { id: 'membership', url: 'https://example.test/membership', sha256: '0'.repeat(64), bytes: 1, citation: 'Published membership' },
     { id: 'unrelated', url: 'https://example.test/unrelated', sha256: '0'.repeat(64), bytes: 1, citation: 'Unused audit input' }];
@@ -192,7 +191,7 @@ test('volume focus uses its authored framing radius before transparent bounds an
   }
 });
 
-test('focused lens selection and star visibility follow applied runtime state while URL restore keeps the same camera owner', () => {
+test('focused lens selection follows applied runtime state while URL restore keeps the same camera owner', () => {
   const f = fixture({ volumeLensFrames, volumeBank: volumeBank(), object: { detailedObjectId: 'detailed' } });
   f.windowTarget.location.searchParams.set('focusLens', 'second');
   const incoming = f.windowTarget.location.href;
@@ -208,10 +207,6 @@ test('focused lens selection and star visibility follow applied runtime state wh
   assert.equal(required(last(f.content).presentation).selectedLens, 'third');
   assert.equal(f.windowTarget.location.searchParams.get('focusLens'), 'third');
   assert.equal(f.windowTarget.location.searchParams.get('v'), 'saved');
-  required(controls.setStarsVisible)(false);
-  assert.equal(required(f.layer.volumeLensState('detailed')).starsVisible, false);
-  assert.equal(required(last(f.content).presentation).starsVisible, false);
-  assert.equal(f.windowTarget.location.searchParams.get('focusLens'), 'third');
   f.controller.suspend();
   controls.selectLens('first');
   assert.equal(required(f.layer.volumeLensState('detailed')).selectedLens, 'third');
@@ -288,7 +283,6 @@ test('an image-layer focus exposes its single optical dataset without volume-onl
   assert.deepEqual(f.errors, []);
   const controls = required(last(f.content).presentation);
   assert.equal(controls.selectedLens, 'optical');
-  assert.equal(controls.setStarsVisible, undefined);
   controls.selectLens('optical');
   assert.deepEqual(f.lensWrites, []);
   f.controller.destroy();

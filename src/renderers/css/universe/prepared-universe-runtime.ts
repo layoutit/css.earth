@@ -461,18 +461,14 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             void ensureLensLoaded(index).catch(() => {});
           },
-          setVolumeStarsVisible(id: string, enabled: boolean) {
-            const index = volumeLensBanks.findIndex(bank => bank.id === id);
-            if (index < 0) throw new TypeError('Unknown prepared volume lens bank.');
-            if (typeof enabled !== 'boolean') throw new TypeError('Catalogue point visibility must be a boolean.');
-            lensPendingStarsVisible[index] = enabled;
-            const bank = lensBanks[index];
-            if (bank) { bank.setStarsVisible(enabled); return; }
-            void ensureLensLoaded(index).catch(() => {});
-          },
           setStellarPointsEnabled(enabled: boolean) {
-            if (destroyed || stellarPointsEnabled === (enabled === true)) return;
-            stellarPointsEnabled = enabled === true;
+            const next = enabled === true;
+            if (destroyed || stellarPointsEnabled === next) return;
+            stellarPointsEnabled = next;
+            for (const [index, bank] of lensBanks.entries()) {
+              lensPendingStarsVisible[index] = next;
+              bank?.setStarsVisible(next);
+            }
             if (stellarPublication) stellarPoints?.publish(stellarPublication, stellarPointsEnabled ? stellarOpacity : 0);
           },
           subscribeVolumeLens(id: string, listener: (state: ReturnType<NonNullable<(typeof lensBanks)[number]>['state']>) => void) {

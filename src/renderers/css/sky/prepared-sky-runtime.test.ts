@@ -466,7 +466,7 @@ test('hidden lens banks are bounded, active subscriptions pin them, and eviction
   const mounted = universe.mount(stage as unknown as HTMLElement);
   try {
     mounted.selectVolumeLens('near-bank', 'infrared');
-    mounted.setVolumeStarsVisible('near-bank', false);
+    mounted.setStellarPointsEnabled(false);
     const releaseNear = mounted.subscribeVolumeLens('near-bank', () => {});
     await vi.waitFor(() => expect(mounted.volumeLensState('near-bank')).not.toBeNull());
     const camera = (distancePc: number): WorldCameraPose => ({ referenceFrame: volume.frame.referenceFrame, epochJdTt: volume.frame.epochJdTt,

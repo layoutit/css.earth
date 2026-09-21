@@ -13,7 +13,7 @@ class Element extends EventTarget {
   removeAttribute(name: string) { this.attributes.delete(name); }
 }
 function fixture(unavailableObjects = '') {
-  const root = new Element(), bank = new Element(), stars = new Element(), datasetTab = new Element();
+  const root = new Element(), bank = new Element(), datasetTab = new Element();
   const tabs: string[] = [];
   root.selectors.set('[data-information-tab="dataset"]', datasetTab);
   const unavailable = new Element(); unavailable.dataset.unavailableObjects = unavailableObjects;
@@ -24,7 +24,6 @@ function fixture(unavailableObjects = '') {
   const details = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id } }));
   bank.selectors.set('[data-focus-lens]', buttons);
   bank.selectors.set('[data-focus-lens-details]', details);
-  bank.selectors.set('[data-focus-stars]', stars);
   const factsBank = new Element(); factsBank.dataset.focusFactsBank = 'prepared-galaxy';
   const facts = ids.map(id => Object.assign(new Element(), { dataset: { focusLensDetails: id }, textContent: 'Source pixels 2048 × 4096' }));
   factsBank.selectors.set('[data-focus-lens-details]', facts);
@@ -36,9 +35,9 @@ function fixture(unavailableObjects = '') {
     positionM: [0, 0, 0], skyPosition: { raDeg: 0, decDeg: 0, sourceRef: 'observations' },
     distance: { valuePc: 50000, sourceRef: 'observations', method: 'Published distance' }, membership: { group: 'local-group', subgroup: 'milky-way', basis: 'Published membership' } };
   const presentation: PreparedFocusPresentation = { id: 'first', defaultLens: 'first', objectId: 'prepared-galaxy', selectedLens: 'first', starsVisible: true,
-    lenses: ids.map(id => ({ id, label: id, title: id, description: id, sourceUrl: 'https://example.test/source' })), selectLens() {}, setStarsVisible() {} };
+    lenses: ids.map(id => ({ id, label: id, title: id, description: id, sourceUrl: 'https://example.test/source' })), selectLens() {} };
   // This retained DOM stand-in implements only the card's queried fields and events.
-  return { root, bank, factsBank, facts, stars, buttons, details, record, presentation, datasetTab, tabs, unavailable,
+  return { root, bank, factsBank, facts, buttons, details, record, presentation, datasetTab, tabs, unavailable,
     card: createPreparedFocusCard(root as unknown as HTMLElement, id => tabs.push(id)) };
 }
 
@@ -58,34 +57,27 @@ test('an unavailable volume keeps catalogue facts and a retained explanation, wi
 });
 
 test('prepared focus lenses retain controls and reflect only the applied runtime selection', () => {
-  const f = fixture(), requested: string[] = [], starRequests: boolean[] = [];
+  const f = fixture(), requested: string[] = [];
   f.presentation.selectLens = id => requested.push(id);
-  f.presentation.setStarsVisible = value => starRequests.push(value);
   f.card.set(f.record, [], f.presentation);
   assert.equal(f.bank.hidden, false);
   assert.equal(f.buttons[0].getAttribute('aria-pressed'), 'true');
   assert.deepEqual(f.details.map(detail => detail.hidden), [false, true, true]);
   assert.equal(f.factsBank.hidden, false);
   assert.deepEqual(f.facts.map(detail => detail.hidden), [false, true, true]);
-  assert.equal(f.stars.checked, true);
   f.buttons[1].dispatchEvent(new Event('click'));
   assert.deepEqual(requested, ['second']);
   assert.equal(f.buttons[0].getAttribute('aria-pressed'), 'true', 'Do not publish a lens before the runtime applies it');
-  const retained = [...f.buttons, ...f.details, f.stars];
+  const retained = [...f.buttons, ...f.details];
   f.card.set(f.record, [], { ...f.presentation, selectedLens: 'second' });
   assert.deepEqual(f.buttons.map(button => button.getAttribute('aria-pressed')), ['false', 'true', 'false']);
   assert.deepEqual(f.details.map(detail => detail.hidden), [true, false, true]);
   assert.deepEqual(f.facts.map(detail => detail.hidden), [true, false, true]);
-  assert.deepEqual([...f.bank.querySelectorAll('[data-focus-lens]'), ...f.bank.querySelectorAll('[data-focus-lens-details]'), f.bank.querySelector('[data-focus-stars]')], retained);
-  f.stars.checked = false; f.stars.dispatchEvent(new Event('change'));
-  assert.deepEqual(starRequests, [false]);
-  f.card.set(f.record, [], { ...f.presentation, selectedLens: 'third', starsVisible: false });
-  assert.equal(f.stars.checked, false);
+  assert.deepEqual([...f.bank.querySelectorAll('[data-focus-lens]'), ...f.bank.querySelectorAll('[data-focus-lens-details]')], retained);
+  f.card.set(f.record, [], { ...f.presentation, selectedLens: 'third' });
   f.card.destroy();
   f.buttons[0].dispatchEvent(new Event('click'));
-  f.stars.dispatchEvent(new Event('change'));
   assert.deepEqual(requested, ['second']);
-  assert.deepEqual(starRequests, [false]);
 });
 
 test('departed or unsupported galaxy focus hides its retained lens bank and disables stale actions', () => {

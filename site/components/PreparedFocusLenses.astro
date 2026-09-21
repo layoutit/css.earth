@@ -38,12 +38,9 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
 </div> : <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
   <DatasetLenses objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={`/${objectId}/`} lenses={presentation} controlName="focusLens" />
-    {bank.lenses.some(lens => lens.stars.points.length > 0) && <label class="planet-setting-control">
-      <input type="checkbox" data-focus-stars name="focusStars" form={`focus-${bank.id}-datasets`} checked />
-      <span class="planet-setting-text">Catalogue stars</span>
-      <span class="planet-setting-switch" aria-hidden="true"></span>
-    </label>}
   <DatasetContextPanels objectId={bank.id} lenses={presentation} />
-  {/* Follow the shell's direct children so each moving catalogue does not search all sidebar descendants. */}
-  <style is:inline set:html={`.planet-ui-layer:has(> .planet-sidebar-frame > .planet-sidebar > .planet-drawer-content > .planet-object-context > [data-prepared-focus-card] > #prepared-focus-dataset-content > [data-focus-lens-bank="${bank.id}"] > .planet-setting-control > [data-focus-stars]:not(:checked)) ~ .planet-viewport .prepared-volume-lenses[data-volume-lens-object="${bank.id}"] .prepared-catalogue-points { display:none !important; }`}></style>
 </div>)}
+{/* The one shell-level 3D-stars setting owns every 3D point layer, including catalogue points inside prepared volumes. */}
+<style is:inline>
+  .planet-ui-layer:has(.planet-three-d-stars-setting:not(:checked)) ~ .planet-viewport .prepared-catalogue-points { display: none !important; }
+</style>

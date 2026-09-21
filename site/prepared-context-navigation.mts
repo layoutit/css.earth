@@ -9,7 +9,6 @@ type PreparedContextLayer = ReturnType<ReturnType<typeof createPreparedUniverse>
 type VolumeLensState = NonNullable<ReturnType<PreparedContextLayer['volumeLensState']>>;
 export type PreparedFocusPresentation = VolumeLensState & {
   selectLens(lensId: string): void;
-  setStarsVisible?(enabled: boolean): void;
 };
 export interface FocusCallbacks {
   onFocusChange?(url: string): void;
@@ -66,11 +65,6 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         layer.selectVolumeLens(state.objectId, lensId);
         if (!unsubscribeLens) publishLens();
       },
-      ...(!layer.imageLayerFrames?.[state?.objectId ?? ''] && layer.setVolumeStarsVisible ? { setStarsVisible(enabled: boolean) {
-        if (!canSelect()) return;
-        layer.setVolumeStarsVisible(state.objectId, enabled);
-        if (!unsubscribeLens) publishLens();
-      } } : {}),
     } : null;
     const citations = references.map(reference => {
       const citation = resolveSpatialCitation(reference, currentSources());

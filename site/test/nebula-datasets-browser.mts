@@ -65,14 +65,7 @@ try {
     const camera = new URL(page.url()).searchParams.get('v');
     await bank.locator('[data-focus-lens][aria-pressed="true"]').click();
     assert.equal(new URL(page.url()).searchParams.get('v'), camera, 'Reselecting a dataset preserves the camera');
-    const stars = bank.locator('[data-focus-stars]');
-    if (await stars.count()) {
-      const toggle = bank.locator('label:has([data-focus-stars])');
-      await toggle.click();
-      assert.equal(await stars.isChecked(), false);
-      await toggle.click();
-      assert.equal(await stars.isChecked(), true);
-    }
+    assert.equal(await bank.locator('[data-focus-stars]').count(), 0, 'Dataset cards do not duplicate the shell-level 3D-stars setting.');
     await card.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
     await rail.waitFor({ state: 'hidden' });
     await card.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');

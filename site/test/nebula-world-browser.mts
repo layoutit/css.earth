@@ -309,10 +309,9 @@ try {
       sideCaptures.push({ name, angleRadians: angle, lens: payload.defaultLens, textures: sideTextures });
     }
     await apply(frontDistance);
-    const stars = controls.locator('[data-focus-stars]');
-    assert.equal(await stars.count(), count ? 1 : 0, 'A nonempty prepared compact-light bank retains its shared toggle.');
-    const starToggle = controls.locator('label:has([data-focus-stars])');
-    if (count && !await stars.isChecked()) await starToggle.click();
+    assert.equal(await controls.locator('[data-focus-stars]').count(), 0, 'The selected-object card does not duplicate the shell-level 3D-stars setting.');
+    const stars = page.locator('.planet-three-d-stars-setting');
+    if (count && !await stars.isChecked()) await page.locator('label:has(.planet-three-d-stars-setting)').click();
     const pointRoot = bank.locator('.prepared-catalogue-points');
     assert.equal(await pointRoot.evaluate(element => getComputedStyle(element).display), 'block');
     const checkStars = async (distance: number) => {

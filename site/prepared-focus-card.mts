@@ -28,16 +28,12 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
   const banks = [...root.querySelectorAll<HTMLElement>('[data-focus-lens-bank], [data-focus-facts-bank]')].map(bank => ({ root: bank,
     buttons: [...bank.querySelectorAll<HTMLButtonElement>('[data-focus-lens]')],
     details: [...bank.querySelectorAll<HTMLElement>('[data-focus-lens-details]')],
-    stars: bank.querySelector<HTMLInputElement>('[data-focus-stars]'),
   }));
   for (const bank of banks) {
     for (const button of bank.buttons) button.addEventListener('click', event => {
       if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) {
         event.preventDefault(); currentPresentation.selectLens(button.value);
       }
-    }, { signal: events.signal });
-    bank.stars?.addEventListener('change', () => {
-      if (currentPresentation && currentPresentation.objectId === bank.root.dataset.focusLensBank) currentPresentation.setStarsVisible?.(bank.stars!.checked);
     }, { signal: events.signal });
   }
   const setPresentation = (record: PreparedCatalogObject | null, presentation: PreparedFocusPresentation | null) => {
@@ -58,10 +54,6 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
         if (button.getAttribute('aria-pressed') !== pressed) button.setAttribute('aria-pressed', pressed);
       }
       for (const detail of bank.details) detail.hidden = detail.dataset.focusLensDetails !== currentPresentation.selectedLens;
-      if (bank.stars) {
-        bank.stars.disabled = typeof currentPresentation.setStarsVisible !== 'function';
-        bank.stars.checked = currentPresentation.starsVisible;
-      }
     }
   };
   const write = (name: string, value: string) => { if (fields[name].textContent !== value) fields[name].textContent = value; };
