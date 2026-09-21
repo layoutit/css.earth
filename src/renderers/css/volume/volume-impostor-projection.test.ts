@@ -59,3 +59,16 @@ test('directional views have bounded continuous weights and declared orthonormal
   expect(() => validateVolumeImpostors(bank, new Set())).toThrow('declared');
   expect(() => validateVolumeImpostors({ ...bank, views: [{ ...bank.views[0], right: [2, 0, 0] }, ...bank.views.slice(1)] }, resources)).toThrow('orthonormal');
 });
+test('turning in place keeps the same views; moving around the volume selects new ones', () => {
+  const p = publication();
+  const turned = (yawDegrees: number) => {
+    const half = yawDegrees * Math.PI / 360;
+    return projectVolumeImpostors({ ...p, world: { ...p.world, pose: { ...p.world.pose, orientationXyzw: [0, Math.sin(half), 0, Math.cos(half)] } } }, frame, bank);
+  };
+  // A small turn keeps the sphere on screen; the chosen views and weights must not change with it.
+  const ahead = turned(0), aside = turned(4);
+  expect(aside.visible).toBe(true);
+  expect(aside.views.map(view => [view.id, view.weight])).toEqual(ahead.views.map(view => [view.id, view.weight]));
+  const moved = projectVolumeImpostors({ ...p, world: { ...p.world, pose: { positionM: [10, 0, 0], orientationXyzw: [0, Math.sin(Math.PI / 4), 0, Math.cos(Math.PI / 4)] } } }, frame, bank);
+  expect(moved.views.map(view => view.id)).toEqual(['right']);
+});
