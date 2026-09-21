@@ -1,0 +1,83 @@
+{
+  "id": "weywot",
+  "classification": "satellite",
+  "physical": {
+    "name": "Weywot",
+    "horizonsCode": "120050000",
+    "meanRadiusKm": 85,
+    "gravitationalParameterKm3PerS2": 0.04783,
+    "parent": "quaoar"
+  },
+  "physicalNotes": "Mean radius is the approximate value in the Horizons satellite-solution header (RAD~ 85 km). The gravitational parameter is that header's value and defines the orbit calculation only.",
+  "acquisition": {
+    "sceneSatellite": {
+      "parent": "quaoar",
+      "target": 120050000,
+      "center": 920050000
+    }
+  },
+  "sceneSatellite": {
+    "epochJdTt": 2461286.5,
+    "positionKm": [
+      -3706.461294241996,
+      -10136.51157944524,
+      684.5561261427479
+    ],
+    "velocityKmPerDay": [
+      -8529.051564530348,
+      1746.719360592456,
+      1852.239192901381
+    ],
+    "centerBodyId": "quaoar",
+    "gravitationalParametersKm3PerS2": {
+      "body": 0.04783,
+      "parent": 95.6,
+      "combined": 95.64783
+    },
+    "systemGmKm3PerS2": 95.64783,
+    "parentHeliocentricState": {
+      "positionKm": [
+        1261604907.550475,
+        -6026290815.63251,
+        -1647891916.745353
+      ],
+      "velocityKmPerDay": [
+        386096.7326769416,
+        85623.15327618536,
+        32440.0481779242
+      ],
+      "provenance": {
+        "model": "Horizons geometric state at prepared epoch",
+        "epochJdTt": 2461286.5,
+        "referenceFrame": "ICRF",
+        "target": 920050000,
+        "center": 10,
+        "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920050000&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+        "sourcePath": "src/objects/weywot/source/orbit/quaoar-epoch.txt",
+        "sha256": "2fe5f1bb661817293c23d7800d3c233d3bf5360dfaf5c903a367a576af97c91b",
+        "solution": "tnosat_v001_20050000_jpl043_20220908",
+        "limitations": [
+          "The Horizons satellite solution tnosat_v001_20050000_jpl043_20220908 uses 9 observations from 2006 to 2011 and states a 3600 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+          "The gravitational parameters are the values in the retained Horizons response headers; they define this orbit calculation and are not adopted as independent body facts."
+        ],
+        "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+      }
+    },
+    "provenance": {
+      "model": "Horizons geometric state at prepared epoch",
+      "epochJdTt": 2461286.5,
+      "referenceFrame": "ICRF",
+      "target": 120050000,
+      "center": 920050000,
+      "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120050000&CENTER=500%40920050000&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+      "sourcePath": "src/objects/weywot/source/orbit/weywot-epoch.txt",
+      "sha256": "66344f75556ee978d274837e75249a4f0f80e78c95089f48e9a8bc020552d1f0",
+      "solution": "tnosat_v001_20050000_jpl043_20220908",
+      "limitations": [
+        "The Horizons satellite solution tnosat_v001_20050000_jpl043_20220908 uses 9 observations from 2006 to 2011 and states a 3600 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+        "The gravitational parameters are the values in the retained Horizons response headers; they define this orbit calculation and are not adopted as independent body facts."
+      ],
+      "timeQualification": "UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation."
+    }
+  }
+}

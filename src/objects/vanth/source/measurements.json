@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "vanth",
+  "name": "Vanth",
+  "titleLabel": "Vanth",
+  "horizons": "120090482",
+  "aliases": [
+    "Orcus I",
+    "Orcus I Vanth",
+    "S/2005 (90482) 1"
+  ],
+  "classification": "satellite",
+  "population": "Trans-Neptunian satellite",
+  "parent": "orcus",
+  "fullAxesKm": [
+    443.0,
+    443.0,
+    443.0
+  ],
+  "radiusKm": 221.5,
+  "axesStatus": "Illustrative equal axes at the approximate radius Horizons carries for this satellite solution; these are not measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at the JPL radius",
+  "source": "https://ssd.jpl.nasa.gov/horizons/",
+  "credit": "JPL Horizons TNO satellite solution tnosat_v001_20090482_jpl043_20220908: header radius RAD~ 221.5 km for Vanth",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/horizons/"
+  ],
+  "shapeMeaning": "Illustrative sphere at the approximate 221.5 km radius in the header of JPL Horizons' satellite solution for Vanth. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Vanth is a moon of Orcus, found in 2005. JPL's orbit for it rests on 12 observations from 2005 to 2015.",
+  "card": "A moon of Orcus.",
+  "datasetSummary": "A sphere at the roughly 221.5 km radius JPL lists. Shape, pole and rotation are not measured.",
+  "distanceAu": 39.2,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-horizons",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons",
+      "checked": "2026-09-21",
+      "locator": "Satellite solution tnosat_v001_20090482_jpl043_20220908: header and observation span"
+    }
+  ]
+}
