@@ -122,8 +122,8 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored shared navigation frame; only the frame identity and navigation epoch are read. No solar data supplies galaxy positions.",
-      "expectedSha256": "02a2fc7561bf3402bdda66f88d21108bc0fca01308eaf864ad108321039b4195",
-      "expectedBytes": 3396,
+      "expectedSha256": "84f7b26c703371a694ef560f80bff255ab81585b3d60756e72037f36af8a81af",
+      "expectedBytes": 3395,
       "sourceBinding": {
         "kind": "local",
         "reason": "Authored application frame identity, not a galaxy measurement."

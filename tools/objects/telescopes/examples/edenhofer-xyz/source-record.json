@@ -1,0 +1,59 @@
+{
+  "id": "edenhofer-2024-xyz",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "version": "v1.0.2",
+  "title": "A Parsec-Scale Galactic 3D Dust Map out to 1.25 kpc from the Sun — dataset",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.5281/zenodo.10658339"
+    }
+  ],
+  "creators": [
+    "Gordian Edenhofer",
+    "Catherine Zucker",
+    "Philipp Frank",
+    "Andrew K. Saydjari",
+    "Joshua S. Speagle",
+    "Douglas Finkbeiner",
+    "Torsten Enßlin"
+  ],
+  "publisher": "Zenodo",
+  "publicationDate": "2023-08-01",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.5281/zenodo.10658339",
+      "label": "Version 1.0.2 data release"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://zenodo.org/api/records/10658339",
+      "checkedOn": "2026-09-20",
+      "locator": "metadata, version, creators, CC-BY-4.0 license, file sizes and checksums"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Edenhofer et al. (2024), A parsec-scale Galactic 3D dust map out to 1.25 kpc.",
+      "scope": "Posterior mean and standard-deviation XYZ reconstruction",
+      "evidence": "https://doi.org/10.5281/zenodo.10658339"
+    },
+    {
+      "kind": "rights",
+      "text": "Creative Commons Attribution 4.0 International.",
+      "scope": "Version 1.0.2 dataset",
+      "evidence": "https://zenodo.org/api/records/10658339"
+    },
+    {
+      "kind": "limitation",
+      "text": "The css.earth example restores and visualizes a pinned bounded crop, not the complete 15.7 GB product.",
+      "scope": "css.earth example",
+      "evidence": "tools/objects/telescopes/examples/edenhofer-xyz/README.md"
+    }
+  ]
+}

@@ -703,15 +703,57 @@ The data-only specification names files/directories, roles and byte/member limit
 regular files without following symlinks, pins every byte and proposes handlers from bounded
 content inspection. When one declared family selects an existing content validator, import also
 writes a pinned `descriptor.json`; `outputs` exposes that descriptor's package-owned family
-operations. Ambiguous inputs stay pinned and say which family choice is missing. Recognized
+operations only after reopening every member pin. A family operation that applies to several
+components requires an explicit `componentId`; its receipt names exactly the component used and
+hashes the dispatcher, registry, selected scientific owner and pinned Python toolchain. The
+operation record is itself inspectable as a terminal artifact. Ambiguous inputs stay pinned and say which family choice is missing. Recognized
 profiles that still lack the metadata or dependency closure their handler needs remain explicitly
 unsupported. Target, origin, units, frame, calibration and family hints supplied by the
 user remain declarations until a handler validates them. A content hash proves integrity, not
 archive origin or scientific fitness.
 
+`telescope family-assess` reports descriptor compatibility as `matched`, `unresolved` or
+`refused`; it never calls that structural result fulfillment of the original request. It compares
+the target and selected family, delegates spectral-unit conversion to Astropy, and considers every
+eligible component. Requested observation bounds or measured-resolution thresholds remain
+unresolved when the descriptor does not carry those facts. Criteria that do not apply to the
+selected family are not inherited from the legacy query shape.
+
 Archive product terms retain the source label and map against the dated IVOA product-type
 vocabulary. This proposes a family route; product bytes and metadata must still confirm the
 handler profile. Preliminary and unknown vocabulary terms remain marked as such.
+
+Archive and package observations carry that classification as
+`cssearth-observation-family-evidence@1`. It names the family, source term, vocabulary version,
+responsible adapter or source product, and supporting evidence. Exploration filters consume this
+record directly; they do not reconstruct a family from a bare product kind. Format-specific
+profiles may make a narrower claim only after their declared archive identity matches. The first
+such profile is the NASA STEREO/SECCHI COR1 electron-density reconstruction: its FITS axes
+(`CRLN`, `CRLT`, `HECR`), units and instrument identity establish an F16 spherical physical grid.
+The profile classifies the observation; it does not certify the tomography or invent a rendering
+route.
+
+The qualified COR1 profile now also writes a pinned F16 descriptor. `telescope outputs` exposes
+`spherical-grid-inspect` and `spherical-grid-prepare-volume` from that delivered observation. The
+latter uses Astropy to validate the archive FITS and its default-UTC time convention, SciPy to
+resample the longitude/latitude/radius field into explicitly sized Cartesian voxels, and the
+existing cssEarth density-volume preparer and loader for the result. The transfer remains an
+explicit caller choice. The native source and resampled float FITS remain available beside the
+RGBA8/KTX2 display approximation; transparent voxels outside the measured 1.5–4.0 solar-radius
+shell do not become zero-density measurements.
+
+```sh
+pnpm telescope explore sun --family F16 --out work/sun-f16
+pnpm telescope get work/sun-f16 --pick 1
+pnpm telescope outputs work/sun-f16/pick-1/result.json
+pnpm telescope family-run work/sun-f16/pick-1/files/output/telescopes/sun/stereo-cor1a-n3d-cr2053p1-m1/descriptor.json \
+  spherical-grid-prepare-volume --params TRANSFER.json --out work/sun-cor1-volume
+pnpm telescope outputs work/sun-cor1-volume/physical-grid-volume.json
+```
+
+Family-operation receipts identify the complete local TypeScript module closure discovered by the
+build graph, plus the pinned scientific toolchain. Changing a helper imported by the selected
+operation therefore invalidates reuse even when its public owner module is unchanged.
 
 ## From a delivered product to an output
 

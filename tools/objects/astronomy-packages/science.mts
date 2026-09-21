@@ -244,10 +244,18 @@ def read_science(path):
 if request['operation'] in ('fits','extract'): answer=read_science(request['path'])
 elif request['operation']=='units':
     answer={'units':[None if unit(text) is None else str(unit(text)) for text in request['units']], 'astropy':astropy.__version__}
+elif request['operation']=='spectral-convert':
+    source=unit(request['unit'])
+    if source is None: raise ValueError('Unsupported spectral coordinate unit')
+    values=np.asarray(request['values'],dtype=float)
+    if values.ndim != 1 or not np.all(np.isfinite(values)): raise ValueError('Spectral coordinates must be finite')
+    try: converted=(values*source).to_value(u.um,equivalencies=u.spectral())
+    except u.UnitConversionError as exc: raise ValueError('Unit is not a supported spectral coordinate: '+str(source)) from exc
+    answer={'valuesMicrometres':converted.tolist(),'sourceUnit':str(source),'astropy':astropy.__version__}
 else: raise ValueError('Unknown science operation')
 json.dump(answer,sys.stdout,allow_nan=False,separators=(',',':'))
 `;
-export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] }): Promise<Record<string, unknown>> {
+export async function sciencePackage(request: { operation: 'fits'; path: string; region?: import('../telescopes/vo/contracts.mts').IcrsCircle } | { operation:'extract';path:string;hdu:number;arrayDirectory?:string;kind:'image'|'spectrum'|'band-image'|'aperture-spectrum'|'feature-map';plane?:number;x?:number;y?:number;band?:readonly number[];aperture?:readonly number[];background?:'none'|readonly number[];continuum?:readonly number[];uncertainty?:'omit'|'independent' } | { operation: 'units'; units: readonly string[] } | {operation:'spectral-convert';values:readonly number[];unit:string}): Promise<Record<string, unknown>> {
   const tc = await astroqueryToolchain();
   return new Promise((done, fail) => {
     const child = spawn(tc.python, ['-c', SCIENCE_PYTHON], { env: { ...process.env, ...tc.env }, stdio: ['pipe', 'pipe', 'pipe'] });

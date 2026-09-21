@@ -50,6 +50,9 @@ const contextVisibility = () => page.evaluate(() => ({
   overview: [...document.querySelectorAll<HTMLElement>('[data-volume-opacity]')].map(root => ({
     display: getComputedStyle(root).display, opacity: Number(getComputedStyle(root).opacity),
   })),
+  stellar: [...document.querySelectorAll<HTMLElement>('.stellar-direct-points')].map(root => ({
+    display: getComputedStyle(root).display, opacity: Number(getComputedStyle(root).opacity),
+  })),
 }));
 const assertCloseContext = async () => {
   const state = await contextVisibility();
@@ -58,6 +61,8 @@ const assertCloseContext = async () => {
     'A close-up must take surrounding detailed volumes out of rendering.');
   assert.ok(state.overview.length > 0 && state.overview.every(bank => bank.display === 'none'),
     'A close-up must take the detailed Milky Way overview out of rendering.');
+  assert.ok(state.stellar.length > 0 && state.stellar.every(bank => bank.display === 'none'),
+    'A close-up must take the surrounding direct-star field out of rendering.');
   return state;
 };
 const focus = async () => {

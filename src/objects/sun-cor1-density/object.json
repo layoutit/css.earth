@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "sun-cor1-density",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        0,
+        0,
+        0
+      ],
+      "localToReferenceXyzw": [
+        0,
+        0,
+        0,
+        1
+      ],
+      "metersPerUnit": 695700000,
+      "boundsUnits": {
+        "min": [
+          -4,
+          -4,
+          -4
+        ],
+        "max": [
+          4,
+          4,
+          4
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "aa799069fba9138c0a64238de21bfafff440cb73eb20ae535a9f9e28b4acd6da"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "16c16e07619e8dcd57dc8a7ada270b6e0c9e2eaea3a22cb8858ade4f0cbac89e"
+  }
+}

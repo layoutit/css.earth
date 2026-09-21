@@ -25,20 +25,32 @@ node tools/objects/dist/prepare-stars.js src/objects/stellar-neighbourhood
 pnpm test:preparation --universe
 ```
 
-Every source row survives at its recorded Sun-origin ICRS Cartesian parsec
-position. Node ranges partition the reordered catalogue; leaves contain at
+Every source row survives. Eight explicit Hipparcos identities share the detailed
+body astrometry at the fixed scene epoch; other rows keep their HYG J2000.0
+Sun-origin ICRS Cartesian parsec positions. Node ranges partition the reordered catalogue; leaves contain at
 most 32 rows. Runtime culling descends that tree, then displays exact star
 rows, never centroid proxies. One real brightest apparent star per each of 96
-all-sky cube cells receives the prepared alpha floor. The fixed 2,048 active
-and 2,048 transition slots retain the complete dataset but may retire fainter
-visible rows when the point budget is saturated; the recorded projected-error
-statistic reports that condition. The full prepared dataset and image bank are
-resident before navigation; no runtime geometry or imagery is baked.
+all-sky cube cells receives the prepared alpha floor. The complete bank supports
+the fixed 2,048 active and 2,048 transition slots used by specialist consumers.
+
+The application does not load that complete bank. The manifest carries a
+deterministic 2,048-row direct display sample: all 96 prepared sky-coverage
+anchors, then the brightest remaining HYG rows by apparent magnitude at the
+Sun. Positions and magnitudes include the explicit astrometry reconciliation
+above; palette indices remain from the pinned catalogue. The browser projects the sample through
+eight retained CSS `box-shadow` nodes. It fades in as the baked near-star cube
+fades out, over the plain Milky Way image, and fades out when the completed
+Milky Way volume contribution takes over.
 
 The HYG Stellar Database by David Nash / Astronexus and its prepared derivatives
 are licensed CC-BY-SA-4.0. This is a local stellar neighbourhood (all rows within
-991 pc), not a complete Milky Way census. Catalogue astrometry is preserved
-without proper-motion propagation to the navigation epoch. Source details and
+991 pc), not a complete Milky Way census. The eight reconciled stars retain HYG apparent magnitudes at the Sun: absolute
+magnitudes are adjusted for the adopted distances. Coordinates use the existing
+float32 parsec bank, so agreement with float64 body positions is limited by that
+quantization. Remaining catalogue rows are not propagated. The retained GXCT
+metadata incorrectly describes the coordinate epoch as J1991.25; the corrected
+source provenance and prepared catalogue metadata identify J2000.0. The
+reconciliation receipt retains the original epoch description for traceability. Source details and
 modifications remain in the pinned provenance; reproduction requires no sibling
 checkout or network.
 

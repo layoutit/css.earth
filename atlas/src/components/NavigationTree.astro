@@ -15,6 +15,6 @@ const artifact = bounded ? navigationTreeArtifact(tree) : null;
 <div class="atlas-tree-card" data-object-navigation-tree data-atlas-current={current}
   data-atlas-tree-src={artifact?.url} data-atlas-tree-sha256={artifact?.sha256} data-atlas-tree-bytes={artifact?.bytes}>
   <ul class="atlas-tree top-level">
-    {tree.map(node => <li><TreeItem node={node} current={current} depth={0} {bounded} assetOrigin={bounded ? '' : undefined} /></li>)}
+    {tree.map(node => <li data-atlas-item-key={node.key}><TreeItem node={node} current={current} depth={0} {bounded} assetOrigin={bounded ? '' : undefined} /></li>)}
   </ul>
 </div>
