@@ -187,6 +187,11 @@ test('approved artwork and emblems retain source bytes, dimensions and transpare
     assert.ok(facility);
     assert.equal(facility.imageId, undefined);
   }
+  for (const id of ['vst', 'vista', 'gaia']) {
+    const facility = catalog.facilities.find(facility => facility.id === id);
+    assert.equal(facility?.imageId, id);
+    assert.equal(prepared.images[id]?.kind, id === 'gaia' ? 'published-artwork' : 'published-photograph');
+  }
 });
 
 test('unknown identities, impossible capture pairs, stale lenses and damaged indexes fail closed', async () => {
