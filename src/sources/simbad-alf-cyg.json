@@ -1,0 +1,32 @@
+{
+  "id": "simbad-alf-cyg",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * alf Cyg (Deneb)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cyg",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/deneb/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "0a42af256ead58a1bbaec777af067379bb750232fa10134a9f8032be3fca6bde",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/deneb/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

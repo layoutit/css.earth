@@ -1,0 +1,30 @@
+{
+ "id": "proxima-centauri",
+ "classification": "star",
+ "order": 1209,
+ "physical": {
+  "name": "Proxima Centauri",
+  "horizonsCode": null,
+  "meanRadiusKm": 98094,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Radius 0.141 \u00b1 0.007 solar radii measured with VLTI/AMBER by Demory et al. (2009), A&A 505, 205. Kervella, Th\u00e9venin and Lovis (2017) give 0.1542 \u00b1 0.0045 from a radius to magnitude relation; the interferometric value is adopted. Adopted 98,094 km, 0.1410 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "star": {
+  "rightAscensionDegrees": 217.42894222160578,
+  "declinationDegrees": -62.67949018907555,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 1.302,
+  "properMotionRaMasPerYear": -3781.741,
+  "properMotionDecMasPerYear": 769.465,
+  "radialVelocityKmPerS": -20.578199,
+  "sources": {
+   "position": "SIMBAD basic record for NAME Proxima Centauri (HIP 70890), ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Proxima+Centauri",
+   "distance": "Inverse of the Gaia EDR3 parallax 768.0665 \u00b1 0.0499 mas via SIMBAD",
+   "properMotion": "SIMBAD: -3781.741, 769.465 mas/yr, reference 2020yCat.1350....0G",
+   "radialVelocity": "SIMBAD: -20.578199 km/s, reference 2020AJ....160..120J"
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 70890
+ }
+}

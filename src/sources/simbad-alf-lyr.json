@@ -1,0 +1,32 @@
+{
+  "id": "simbad-alf-lyr",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * alf Lyr (Vega)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Lyr",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/vega/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "f12b5b78caaf4673a8c4f5bf4e420ce9356e73deb8926caab1024d306a18dfaa",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/vega/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

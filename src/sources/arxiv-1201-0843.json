@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1201-0843",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Asteroseismology of the nearby SN-II progenitor Rigel. Part I. The MOST high-precision photometry and radial velocity monitoring",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1201.0843"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1201.0843",
+      "label": "Moravveji et al. 2012"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/rigel/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "172235813dbee7a99731e58066c8e2f0fa145e45bb0914a9065e957471dd1d38",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "E. Moravveji, E. F. Guinan, M. Shultz et al.",
+      "scope": "citation",
+      "evidence": "src/objects/rigel/text.json#/introduction/sources/0"
+    }
+  ]
+}

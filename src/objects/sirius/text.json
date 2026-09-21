@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "sirius",
+  "card": {
+    "text": "A-type star 2.64 parsecs away; its photosphere is not imaged here.",
+    "sources": [
+      {
+        "catalogueId": "simbad-alf-cma",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+CMa",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "A0mA1Va"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Sirius A is an A-type star 2.64 parsecs from the Sun and about 1.7 times its radius. The VLTI measured its disc at 6.04 milliarcseconds; here its surface is a plain sphere.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-astro-ph-0306604",
+        "url": "https://arxiv.org/abs/astro-ph/0306604",
+        "label": "Kervella et al. 2003",
+        "checked": "2026-09-21",
+        "locator": "Abstract",
+        "quote": "a limb darkened value of θLD = 6.039 ±0.019 mas"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Sphere of the measured radius",
+      "detail": "No image",
+      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    }
+  }
+}

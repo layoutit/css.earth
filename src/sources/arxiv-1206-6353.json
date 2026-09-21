@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1206-6353",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "On the Age and Binarity of Fomalhaut",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1206.6353"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1206.6353",
+      "label": "Mamajek 2012"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/fomalhaut/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "2de663de9957d5846d5c5f6890dc97bb02b643ae411adc481e3c5194b8b123ba",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "E. E. Mamajek",
+      "scope": "citation",
+      "evidence": "src/objects/fomalhaut/text.json#/introduction/sources/0"
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "alpha-centauri-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Alpha Centauri B",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 600528
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/alpha-centauri-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "2dc48f837601badc61cb2f4f336755f12afb5ca2e52aa84b8125a1da081f3ea0"
+      }
+    },
+    "catalog": {
+      "name": "Alpha Centauri B",
+      "classification": "star",
+      "color": "#ffe2c0",
+      "distanceAu": 275937.8,
+      "description": "Orange dwarf 1.34 parsecs away; its photosphere is not imaged here.",
+      "systemName": "Centaurus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -15447730645843086,
+        -12889361910819304,
+        -36045053737125064
+      ],
+      "presentationToReference": [
+        -0.374151377324471,
+        0.6699585550388589,
+        -0.6412224897618967,
+        -0.3121863574365887,
+        0.5600947476240742,
+        0.7673549060991265,
+        -0.8732413326662201,
+        -0.48728780839886504,
+        0.00040830032468760396
+      ],
+      "orbitUpReference": [
+        -0.6699585550388589,
+        -0.5600947476240742,
+        0.48728780839886504
+      ],
+      "metersPerUnit": 1937187.0967741935,
+      "bodyRadiusM": 600528000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "4f788ca326df5fb9f02d592c1bc55ea7fe4d07bc711bb59315d251b53f50638d"
+  }
+}

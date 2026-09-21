@@ -1,0 +1,30 @@
+{
+ "id": "altair",
+ "classification": "star",
+ "order": 1204,
+ "physical": {
+  "name": "Altair",
+  "horizonsCode": null,
+  "meanRadiusKm": 1313290,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Altair is a rapid rotator: Monnier et al. (2007), Science 317, 342, measure an equatorial radius of 2.029 \u00b1 0.007 and a polar radius of 1.634 \u00b1 0.011 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 1.89 solar radii; the flattening is not drawn. Adopted 1,313,290 km, 1.8877 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "star": {
+  "rightAscensionDegrees": 297.69582729638694,
+  "declinationDegrees": 8.868321196436963,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 5.1295,
+  "properMotionRaMasPerYear": 536.23,
+  "properMotionDecMasPerYear": 385.29,
+  "radialVelocityKmPerS": -26.6,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Aql (HIP 97649), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Aql",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 194.95 \u00b1 0.57 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 536.23, 385.29 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: -26.6 km/s, reference 2006AstL...32..759G"
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 97649
+ }
+}

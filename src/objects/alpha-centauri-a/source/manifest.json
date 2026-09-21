@@ -1,0 +1,203 @@
+{
+  "schema": "cssalpha-centauri-a-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "alpha-centauri-a-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1116,
+      "expectedSha256": "fc29a056e2299fa6710ff19a1bb8bf17f02566482f91989495cda10368a8e630",
+      "origin": "https://arxiv.org/abs/1610.06185",
+      "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-alpha-centauri-a-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/alpha-centauri-a/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "alpha-centauri-a-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2008,
+      "expectedSha256": "83d9bbafcd160ac46bd7d8ff6e0f9b40dba8fbdaf86f2ed13d4c2f50d9d1769f",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "alpha-centauri-a-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1753,
+      "expectedSha256": "e9e78cc1cb757494ab14e4747ec9e3f318dac164b98e49e647597a29efc1ba03",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "alpha-centauri-a-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "alpha-centauri-a-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 111,
+      "expectedSha256": "722e1ca09b37d3fd35477eb574a856f7735e41e18048c443e86429eaad233a13",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "alpha-centauri-a-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 231,
+      "expectedSha256": "2d18ca4b4fbf6862101821ab7ec039acceac5dd818ab58420a73e30df1ff4b2f",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://arxiv.org/abs/1610.06185",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-star.mts",
+        "inputs": [
+          "alpha-centauri-a-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-star.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2938,
+      "expectedSha256": "c415c71cae11917680c993a40b38e2aafdcb3e3afd24cc432c6f245697ea1ffe",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 453,
+      "expectedSha256": "2def6006d7fcbcbfdaada11d1ae87d0d152d6ec0396c59e220e8d95239757090"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1000,
+      "expectedSha256": "811b1622f8fa50e3daee1bced5235466d6900dbb9ee22518d534b9f0efdda0bc"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 7281,
+      "expectedSha256": "f8c24378c6567074a40adf06270ac58283a4fccd77909b1c97a0610150a3a61c"
+    }
+  ]
+}

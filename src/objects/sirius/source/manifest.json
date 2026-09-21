@@ -1,0 +1,203 @@
+{
+  "schema": "csssirius-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "sirius-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 1179,
+      "expectedSha256": "ef5b55512a44c06f5adedb7b3d79d839968aefbb08b29e47683910fd22c9c915",
+      "origin": "https://doi.org/10.1051/0004-6361:20030994",
+      "credit": "Kervella et al. (2003), Astronomy & Astrophysics 408, 681; VLTI/VINCI limb-darkened angular diameter of Sirius A",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-sirius-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/sirius/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "sirius-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 1928,
+      "expectedSha256": "6687c646ebbc95d77971b3fcb9ecd033949690d80a921814187a32775e403cfc",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "sirius-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1683,
+      "expectedSha256": "482bce48a13899568c53a6518d4c27ef81fc05c656e2ef27e6d569ef97b48df4",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "sirius-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 135,
+      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield"
+      ]
+    },
+    {
+      "id": "sirius-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 101,
+      "expectedSha256": "7cae0721e5bdf87c9cb4174fe9fc67445b8ba0e4804c53d6416547cac277cb93",
+      "origin": "Repository-authored presentation profile: emissive mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "sirius-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 212,
+      "expectedSha256": "5152ebf0117955b649820e3086469a93649127a067402d85047bf11bcfc573f9",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://doi.org/10.1051/0004-6361:20030994",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-star.mts",
+        "inputs": [
+          "sirius-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-star.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 2856,
+      "expectedSha256": "ebcb8750b544d35c87c327ce4b56546094fac3cb863bb24c1473e554cb74aa06",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 443,
+      "expectedSha256": "d7af4a08ce40a7e65133b0a8a67cc25ea899d67f4798e5711ba440cbc03bed23"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 1012,
+      "expectedSha256": "185716fc6dcecb7c08dea94734b4d689af2585a01371be43c000de3a8baabd94"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 3234,
+      "expectedSha256": "c4a5be2b1cb2ae2261b651324c8c7021443d4605bd10b783a8d6e5233428899c"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1610-06185",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The radii and limb darkenings of α Centauri A and B: interferometric measurements with VLTI/PIONIER",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1610.06185"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1610.06185",
+      "label": "Kervella et al. 2017"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/alpha-centauri-a/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "f1fa23192f41122f16e4d1fbd3f676577350bcf3664b165b1201dd93ab723397",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Kervella, L. Bigot, A. Gallenne, F. Thévenin",
+      "scope": "citation",
+      "evidence": "src/objects/alpha-centauri-a/text.json#/introduction/sources/0"
+    }
+  ]
+}
