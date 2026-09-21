@@ -67,6 +67,11 @@ try {
     assert.equal(new URL(page.url()).searchParams.get('v'), camera, 'Reselecting a dataset preserves the camera');
     assert.equal(await bank.locator('[data-focus-stars]').count(), 0, 'Dataset cards do not duplicate the shell-level 3D-stars setting.');
     assert.equal(await bank.locator('.planet-lens-source').count(), 0, 'Dataset cards leave source attribution to the footer.');
+    const preview = bank.locator('[data-focus-lens-details]:not([hidden]) .planet-surface-minimap');
+    if (await preview.count()) assert.deepEqual(await preview.evaluate(element => {
+      const bounds = element.getBoundingClientRect(), image = element.querySelector('.planet-lens-texture');
+      return { ratio: Number((bounds.width / bounds.height).toFixed(2)), fit: image ? getComputedStyle(image).objectFit : '' };
+    }), { ratio: 2, fit: 'cover' }, 'Dataset cards use the same bounded panoramic preview as body datasets.');
     await card.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
     await rail.waitFor({ state: 'hidden' });
     await card.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');
