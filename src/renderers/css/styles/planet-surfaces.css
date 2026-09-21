@@ -1044,6 +1044,22 @@
   background-image: url("/scenes/ceres/ceres-poles-elevation@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-clay-band@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-clay-band@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-ammonium-band@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-ammonium-band@2x.webp") !important;
+}
+
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .planet-stage[data-object-id="ceres"] .ceres-fixed-material {
@@ -1749,6 +1765,14 @@
 
 .planet-stage[data-object-id="io"][data-lens="visible-absorption"] .polycss-scene s.io-polar {
   background-image: url("/scenes/io/io-poles-visible-absorption@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-volcanic-heat@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-volcanic-heat@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.

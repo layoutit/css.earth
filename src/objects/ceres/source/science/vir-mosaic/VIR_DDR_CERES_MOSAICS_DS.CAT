@@ -1,0 +1,236 @@
+PDS_VERSION_ID                     = PDS3                                     
+RECORD_TYPE                        = "STREAM"                                 
+LABEL_REVISION_NOTE                = "                                        
+   2018-03-19, J. Mafi - initial version (based upon VIR Vesta DDR);          
+   2018-10-18, S. Fonte - updated to apply specifically to Ceres;             
+   2018-12-03, S. Fonte - updated Ammannito, et al., 2016 reference;          
+   2019-01-28, J. Mafi - peer review lien resolution;                         
+   "                                                                          
+                                                                              
+OBJECT                             = DATA_SET                                 
+  DATA_SET_ID                      = "DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0"     
+                                                                              
+  OBJECT                           = DATA_SET_INFORMATION                     
+    DATA_SET_NAME                  = "                                        
+      DAWN VIR DERIVED CERES GLOBAL MOSAICS V1.0"                             
+    DATA_SET_TERSE_DESC            = "Derived data (OH band center and band   
+      depth, NH4 band center and band depth) from the VIR instrument on the   
+      DAWN spacecraft during the Ceres Survey mission phases."                
+                                                                              
+    ABSTRACT_DESC                  = "This data set contains global mosaics   
+      of the Dawn VIR band centers and depths of phyllosilicate absorption    
+      bands, located at 2.7 (OH band) and 3.1 microns (NH4 band), from the    
+      Ceres encounter. The data set was acquired during the Survey and Ceres  
+      Science RC3 (CSR) phases  between 2015-04-25 and 2015-06-27."           
+                                                                              
+    CITATION_DESC                  = "De Sanctis, M.C., M.T. Capria,          
+      E. Ammannito, A. Frigeri, F. Tosi, M. Giardino, S. Fonte, F. Zambon,    
+      DAWN VIR DERIVED CERES GLOBAL MOSAICS V1.0,                             
+      DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0, NASA Planetary Data System,         
+      2018."                                                                  
+                                                                              
+    DATA_OBJECT_TYPE               = "IMAGE"                                  
+    DATA_SET_COLLECTION_MEMBER_FLG = "N"                                      
+    DETAILED_CATALOG_FLAG          = "N"                                      
+    DATA_SET_RELEASE_DATE          = 2018-03-19                               
+    PRODUCER_FULL_NAME             = "MARIA CRISTINA DE SANCTIS"              
+                                                                              
+    START_TIME                     = 2015-04-25T05:30:00                      
+    STOP_TIME                      = 2015-06-27T22:00:00                      
+                                                                              
+    DATA_SET_DESC = "                                                         
+                                                                              
+  Data Set Overview                                                           
+  =================                                                           
+    This data set contains global mosaics of the Dawn VIR band centers and    
+    depths of phyllosilicate absorption bands, located at 2.7 (OH band) and   
+    3.1 microns (NH4 band), from the Ceres encounter. The data set was        
+    acquired during the Survey and Ceres Science RC3 (CSR) phases between     
+    2015-04-25 and 2015-06-27.                                                
+                                                                              
+  VIR Ceres Observations                                                      
+  ======================                                                      
+    The following table contains a listing of VIR mosaics at Ceres.           
+                                                                              
+    ----------------------------------------------------------------------    
+    VIR mosaics                                                               
+    ----------------------------------------------------------------------    
+    Target    Spectral                                Product                 
+    Coverage  Parameter                               Name                    
+    ======================================================================    
+    GLOBAL   OH Absorption Band Center   CMT_MOSAIC-BI_CENTER                 
+    ----------------------------------------------------------------------    
+    GLOBAL   OH Absorption Band Depth    CMT_MOSAIC-BI_DEPTH                  
+    ----------------------------------------------------------------------    
+    GLOBAL   NH4 Absorption Band Center  CMT_MOSAIC-BII_CENTER                
+    ----------------------------------------------------------------------    
+    GLOBAL   NH4 Absorption Band Depth   CMT_MOSAIC-BII_DEPTH                 
+    ----------------------------------------------------------------------    
+                                                                              
+  Processing                                                                  
+  ==========                                                                  
+    The archived maps contain four spectral parameters relative to the        
+    strong phyllosilicate bands observed on VIR data of Ceres's surface       
+    [DESANCTISETAL2015]. The mapped spectral parameters are following:        
+       1. Band center at 2.7 micron;                                          
+       2. Band center at 3.1 micron;                                          
+       3. Band depth  at 2.7 micron;                                          
+       4. Band depth  at 3.1 micron;                                          
+    The dataset used to retrieve the spectral parameters is Ceres             
+    Science Survey (CSS) phases of the                                        
+    mission.                                                                  
+                                                                              
+    VIR data provided in radiance units were converted into reflectance in    
+    order to calculate the spectral parameters (for more details see VIR      
+    Calibration Document in the /DOCUMENT directory).                         
+                                                                              
+    The photometric correction applied to these data is described in detail   
+    in [AMMANNITOETAL2016] but can be briefly described as radiance (R) is    
+    the product of the Lommel Seeliger disk function (LS) and the phase       
+    function (F), R = LS*F. The dataset has corrected with a 30 deg function  
+    D(i=30,e=0,p=30). Below the steps to derive the spectral parameters, as   
+    described by supplementary online material of[AMMANNITOETAL2016].         
+                                                                              
+    The artifact removing procedure (described in the VIR Calibration         
+    Document) was not applied to these data.                                  
+                                                                              
+    Band centers:                                                             
+                                                                              
+    The band centers were computed with the following steps:                  
+       1. Smoothing of the spectra. The spectra have been smoothed with a     
+          boxcar average of 3 spectral channels.                              
+       2. Evaluation of the continuum and continuum removal.                  
+                                                                              
+       The band continuum of each band has been computed as the straight      
+       line between the two local maxima in the range 2.58 -3.00 microns for  
+       OH band and 2.85 -3.30 for the NH4 band.                               
+                                                                              
+                                                                              
+       3. Band centers: after the continuum removal, the band center is the   
+          wavelength which corresponds to the minimum of the spectra.         
+                                                                              
+    Band depth:                                                               
+                                                                              
+    Band depths have been calculated by using the definition of               
+    [CLARKETAL1984]:                                                          
+       1-Rc/Rb,                                                               
+         where Rb is the reflectance at the band minimum and Rc is the        
+         reflectance of the continuum at the same wavelength as Rb.           
+                                                                              
+    Projection and Coordinate System:                                         
+                                                                              
+    All of the products use the same projection, a simple cylindrical         
+    projection in Ceres IAU coordinates (SPICE refers to this as Ceres        
+    BODY-FIXED ROTATING coordinates). The geometric information were          
+    derived by using the SPICE kernels available at                           
+    [http://naif.jpl.nasa.gov].                                               
+                                                                              
+    The map projection was done onto a sphere with the mean radius of         
+    470 km, and refer to east longitude positive direction and                
+    planetocentric latitude. See the Ceres Coordinate System document in the  
+    document directory for details of the Ceres coordinate system. The        
+    spatial resolution is constant throughout the image and is 11.4           
+    pixels/degree, with a map scale of 0.72 km/pixel. Spatially overlapping   
+    data are averaged (simple) after projection.                              
+                                                                              
+  Data                                                                        
+  ====                                                                        
+    The data are in PDS format image format and are described by detached     
+    PDS labels.                                                               
+                                                                              
+  Ancillary Data                                                              
+  ==============                                                              
+    No ancillary data are included in this data set.                          
+                                                                              
+  References                                                                  
+  ==========                                                                  
+                                                                              
+      De Sanctis, M.C., J.P. Combe, E. Ammannito, E. Palomba, A.              
+      Longobardo, T.B. McCord, S. Marchi, F. Capaccioni, M.T. Capria, D.W.    
+      Mittlefehldt, C.M. Pieters, J. Sunshine, F. Tosi, F. Zambon,            
+      F. Carraro, S. Fonte, A. Frigeri, G. Magni, C.A. Raymond,               
+      C.T. Russell, and D. Turrini, Detection of Widespread Hydrated Materials
+      on Vesta by the VIR Imaging Spectrometer on board the Dawn Mission,     
+      Astrophys. J. Lett. 758 L36, 2012, doi:10.1088/2041-8205/758/2/L36.     
+                                                                              
+      Clark, R.N., R.H. Brown, P.D. Owensby, and A. Steele,                   
+      Saturn's Satellites: Near-Infrared Spectrophotometry (0.65-2.5/~m)      
+      of the Leading and Trailing Sides and Compositional Implications,       
+      Icarus, 58, p265-281, 1984, doi:10.1016/0019-1035(84)90043-5.           
+                                                                              
+      Ammannito, E., DeSanctis, M. C., Ciarniello, M., Frigeri, A., Carrozzo, 
+      F. G., Combe, J.-P., Ehlmann, B. L., Marchi, S., McSween, H. Y.,        
+      Raponi, A., Toplis, M. J., Tosi, F., Castillo-Rogez, J. C., Capaccioni, 
+      F., Capria, M. T., Fonte, S., Giardino, M., Jaumann, R., Longobardo,    
+      A., Joy, S. P., Magni, G., McCord, T. B., McFadden, L. A., Palomba, E., 
+      Pieters, C. M., Polanskey, C. A., Rayman, M. D., Raymond, C. A.,        
+      Schenk, P. M., Zambon, F. and Russell, C. T.,                           
+      Distribution of phyllosilicates on the surface of Ceres,                
+      Science, 353, pp. aaf4279, 2016, doi:10.1126/science.aaf4279.           
+      "                                                                       
+                                                                              
+                                                                              
+  CONFIDENCE_LEVEL_NOTE            = "                                        
+                                                                              
+  Confidence Level Overview                                                   
+  =========================                                                   
+    Data confidence is nominal, meaning that all data have been               
+    validated by the VIR team and found as expected.                          
+                                                                              
+  Review                                                                      
+  ======                                                                      
+    These are the same data files that were utilized by the Dawn Science      
+    Team. Any errors or deficiencies reported by the Science Team were        
+    corrected by the VIR team. A full PDS peer review was conducted of        
+    all products in this data set.                                            
+                                                                              
+  Data Coverage and Quality                                                   
+  =========================                                                   
+    To obtain these products, data acquired during the following              
+    mission phases were used: Ceres Science Survey (CSS), Ceres Science       
+    HAMO (CSH). Data quality is good and band depths and centers were spot    
+    verified by examination of individual spectra. However, striping and      
+    checkerboard geometric patterns should be disregarded. These result       
+    from striping in the original data and/or alternation of data from        
+    multiple observations. For further information about known instrument     
+    artifacts, please refer to the VIR Calibration Document.                  
+                                                                              
+  Limitations                                                                 
+  ===========                                                                 
+    No limitations on these data"                                             
+                                                                              
+  END_OBJECT                       = DATA_SET_INFORMATION                     
+                                                                              
+  OBJECT                           = DATA_SET_MISSION                         
+    MISSION_NAME                   = "DAWN"                                   
+  END_OBJECT                       = DATA_SET_MISSION                         
+                                                                              
+  OBJECT                           = DATA_SET_TARGET                          
+    TARGET_NAME                    = "1 CERES"                                
+  END_OBJECT                       = DATA_SET_TARGET                          
+                                                                              
+  OBJECT                           = DATA_SET_HOST                            
+    INSTRUMENT_HOST_ID             = "DAWN"                                   
+    INSTRUMENT_ID                  = "VIR"                                    
+  END_OBJECT                       = DATA_SET_HOST                            
+                                                                              
+  OBJECT                           = DATA_SET_REFERENCE_INFORMATION           
+    REFERENCE_KEY_ID               = "DESANCTISETAL2012"                      
+  END_OBJECT                       = DATA_SET_REFERENCE_INFORMATION           
+                                                                              
+  OBJECT                           = DATA_SET_REFERENCE_INFORMATION           
+    REFERENCE_KEY_ID               = "CLARKETAL1984"                          
+  END_OBJECT                       = DATA_SET_REFERENCE_INFORMATION           
+                                                                              
+  OBJECT                           = DATA_SET_REFERENCE_INFORMATION           
+    REFERENCE_KEY_ID               = "AMMANNITOETAL2016"                      
+  END_OBJECT                       = DATA_SET_REFERENCE_INFORMATION           
+                                                                              
+  OBJECT                           = DATA_SET_REFERENCE_INFORMATION           
+    REFERENCE_KEY_ID               = "LONGOBARDOETAL2014"                     
+  END_OBJECT                       = DATA_SET_REFERENCE_INFORMATION           
+                                                                              
+                                                                              
+END_OBJECT                         = DATA_SET                                 
+                                                                              
+END                                                                           

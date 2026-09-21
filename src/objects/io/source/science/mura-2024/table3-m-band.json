@@ -1,0 +1,883 @@
+{
+ "schema": "cssearth-published-table@1",
+ "source": "Mura, A. et al. (2024), The temporal variability of Io's hotspots, Frontiers in Astronomy and Space Sciences 11:1369472, doi:10.3389/fspas.2024.1369472, CC BY 4.0",
+ "extract": "Table 3, single-band M total output (GW) per orbit, with each hot spot's latitude and west longitude from Table 2. Transcribed from the article HTML on 2026-09-21; orbits without an M value are omitted, as in the table. Used only to check the Volcanic heat map.",
+ "rows": [
+  {
+   "name": "Shamash Patera",
+   "latitude": -32.0,
+   "longitudeWest": 154.0,
+   "mBandOutputGW": {
+    "49": 2.34
+   }
+  },
+  {
+   "name": "close to Tupan Patera",
+   "latitude": -23.0,
+   "longitudeWest": 137.0,
+   "mBandOutputGW": {
+    "49": 2.18
+   }
+  },
+  {
+   "name": "close to Tohil Patera",
+   "latitude": -23.0,
+   "longitudeWest": 158.0,
+   "mBandOutputGW": {
+    "49": 0.43
+   }
+  },
+  {
+   "name": "Culann Patera",
+   "latitude": -20.0,
+   "longitudeWest": 161.0,
+   "mBandOutputGW": {
+    "49": 1.16
+   }
+  },
+  {
+   "name": "P22",
+   "latitude": -12.0,
+   "longitudeWest": 216.0,
+   "mBandOutputGW": {
+    "49": 0.18
+   }
+  },
+  {
+   "name": "P26",
+   "latitude": -8.0,
+   "longitudeWest": 185.0,
+   "mBandOutputGW": {
+    "49": 0.44
+   }
+  },
+  {
+   "name": "P17",
+   "latitude": -5.0,
+   "longitudeWest": 231.0,
+   "mBandOutputGW": {
+    "49": 1.96
+   }
+  },
+  {
+   "name": "Seth",
+   "latitude": -5.0,
+   "longitudeWest": 131.0,
+   "mBandOutputGW": {
+    "49": 1.26
+   }
+  },
+  {
+   "name": "Prometheus A",
+   "latitude": -3.0,
+   "longitudeWest": 151.0,
+   "mBandOutputGW": {
+    "43": 1.21,
+    "49": 2.25
+   }
+  },
+  {
+   "name": "Unnamed",
+   "latitude": -2.0,
+   "longitudeWest": 129.0,
+   "mBandOutputGW": {
+    "43": 4.5,
+    "49": 23.99
+   }
+  },
+  {
+   "name": "Prometheus B",
+   "latitude": -2.0,
+   "longitudeWest": 154.0,
+   "mBandOutputGW": {
+    "43": 0.27,
+    "49": 0.56
+   }
+  },
+  {
+   "name": "Ot Patera",
+   "latitude": -1.0,
+   "longitudeWest": 216.0,
+   "mBandOutputGW": {
+    "43": 0.28,
+    "49": 0.47
+   }
+  },
+  {
+   "name": "Tawhaki Patera",
+   "latitude": 4.0,
+   "longitudeWest": 75.0,
+   "mBandOutputGW": {
+    "41": 1.63,
+    "47": 3.28
+   }
+  },
+  {
+   "name": "Ah Peku Patera",
+   "latitude": 10.0,
+   "longitudeWest": 105.0,
+   "mBandOutputGW": {
+    "41": 0.5,
+    "43": 0.12,
+    "47": 0.42,
+    "49": 0.12
+   }
+  },
+  {
+   "name": "Kotar Patera",
+   "latitude": 11.0,
+   "longitudeWest": 61.0,
+   "mBandOutputGW": {
+    "41": 2.0,
+    "47": 1.06
+   }
+  },
+  {
+   "name": "P13",
+   "latitude": 15.0,
+   "longitudeWest": 230.0,
+   "mBandOutputGW": {
+    "43": 0.31,
+    "49": 0.3
+   }
+  },
+  {
+   "name": "Gish Bar Patera",
+   "latitude": 16.0,
+   "longitudeWest": 89.0,
+   "mBandOutputGW": {
+    "41": 0.57,
+    "43": 0.39,
+    "47": 1.97
+   }
+  },
+  {
+   "name": "Mulungu Patera",
+   "latitude": 16.0,
+   "longitudeWest": 217.0,
+   "mBandOutputGW": {
+    "43": 0.85,
+    "49": 0.42
+   }
+  },
+  {
+   "name": "Maui Patera",
+   "latitude": 16.0,
+   "longitudeWest": 123.0,
+   "mBandOutputGW": {
+    "43": 0.27,
+    "49": 0.23
+   }
+  },
+  {
+   "name": "Unnamed",
+   "latitude": 17.0,
+   "longitudeWest": 42.0,
+   "mBandOutputGW": {
+    "41": 0.17
+   }
+  },
+  {
+   "name": "Zamama",
+   "latitude": 18.0,
+   "longitudeWest": 174.0,
+   "mBandOutputGW": {
+    "43": 0.8,
+    "49": 0.81
+   }
+  },
+  {
+   "name": "Daedalus Patera",
+   "latitude": 18.0,
+   "longitudeWest": 274.0,
+   "mBandOutputGW": {
+    "47": 5.82,
+    "49": 1.75
+   }
+  },
+  {
+   "name": "Yeloje Patera A",
+   "latitude": 19.0,
+   "longitudeWest": 131.0,
+   "mBandOutputGW": {
+    "41": 0.2,
+    "43": 0.21,
+    "47": 1.18,
+    "49": 0.86
+   }
+  },
+  {
+   "name": "Monan Patera",
+   "latitude": 20.0,
+   "longitudeWest": 106.0,
+   "mBandOutputGW": {
+    "41": 0.63,
+    "43": 0.7,
+    "47": 0.97,
+    "49": 0.93
+   }
+  },
+  {
+   "name": "PV99",
+   "latitude": 20.0,
+   "longitudeWest": 313.0,
+   "mBandOutputGW": {
+    "41": 0.32
+   }
+  },
+  {
+   "name": "Amirani A",
+   "latitude": 21.0,
+   "longitudeWest": 115.0,
+   "mBandOutputGW": {
+    "41": 3.97,
+    "43": 4.73,
+    "47": 9.08,
+    "49": 6.19
+   }
+  },
+  {
+   "name": "Estan Patera",
+   "latitude": 21.0,
+   "longitudeWest": 86.0,
+   "mBandOutputGW": {
+    "43": 0.14,
+    "47": 0.3
+   }
+  },
+  {
+   "name": "Girru Patera",
+   "latitude": 22.0,
+   "longitudeWest": 239.0,
+   "mBandOutputGW": {
+    "41": 2.09,
+    "43": 0.71,
+    "47": 1.71,
+    "49": 0.69
+   }
+  },
+  {
+   "name": "East Girru",
+   "latitude": 22.0,
+   "longitudeWest": 234.0,
+   "mBandOutputGW": {
+    "41": 1.27,
+    "43": 0.3,
+    "47": 8.88,
+    "49": 7.49
+   }
+  },
+  {
+   "name": "E. Surya",
+   "latitude": 22.0,
+   "longitudeWest": 145.0,
+   "mBandOutputGW": {
+    "41": 0.36,
+    "43": 0.59,
+    "47": 0.54,
+    "49": 0.32
+   }
+  },
+  {
+   "name": "N Lei-Zi Fluctus",
+   "latitude": 22.0,
+   "longitudeWest": 47.0,
+   "mBandOutputGW": {
+    "41": 0.09
+   }
+  },
+  {
+   "name": "PV129",
+   "latitude": 23.0,
+   "longitudeWest": 334.0,
+   "mBandOutputGW": {
+    "41": 0.22,
+    "47": 3.64
+   }
+  },
+  {
+   "name": "Susanoo Patera",
+   "latitude": 23.0,
+   "longitudeWest": 219.0,
+   "mBandOutputGW": {
+    "41": 0.31,
+    "43": 6.51,
+    "47": 3.1,
+    "49": 1.8
+   }
+  },
+  {
+   "name": "Unrecognized",
+   "latitude": 25.0,
+   "longitudeWest": 175.0,
+   "mBandOutputGW": {
+    "43": 0.9,
+    "49": 1.2
+   }
+  },
+  {
+   "name": "Volund A",
+   "latitude": 25.0,
+   "longitudeWest": 174.0,
+   "mBandOutputGW": {
+    "49": 0.7
+   }
+  },
+  {
+   "name": "Unrecognized",
+   "latitude": 25.0,
+   "longitudeWest": 175.0,
+   "mBandOutputGW": {
+    "49": 0.5
+   }
+  },
+  {
+   "name": "Unnamed",
+   "latitude": 26.0,
+   "longitudeWest": 58.0,
+   "mBandOutputGW": {
+    "41": 0.07
+   }
+  },
+  {
+   "name": "Fuchi Patera",
+   "latitude": 27.0,
+   "longitudeWest": 327.0,
+   "mBandOutputGW": {
+    "41": 0.59,
+    "43": 1.12,
+    "47": 0.87
+   }
+  },
+  {
+   "name": "P77",
+   "latitude": 27.0,
+   "longitudeWest": 190.0,
+   "mBandOutputGW": {
+    "43": 0.16,
+    "49": 0.12
+   }
+  },
+  {
+   "name": "PFu1128",
+   "latitude": 29.0,
+   "longitudeWest": 230.0,
+   "mBandOutputGW": {
+    "41": 0.89,
+    "43": 0.39,
+    "47": 0.71,
+    "49": 0.25
+   }
+  },
+  {
+   "name": "Volund B",
+   "latitude": 30.0,
+   "longitudeWest": 175.0,
+   "mBandOutputGW": {
+    "41": 0.99,
+    "43": 0.4,
+    "47": 3.03,
+    "49": 0.48
+   }
+  },
+  {
+   "name": "Arinna Fluctus",
+   "latitude": 30.0,
+   "longitudeWest": 148.0,
+   "mBandOutputGW": {
+    "41": 0.32,
+    "43": 0.37,
+    "47": 0.45,
+    "49": 0.29
+   }
+  },
+  {
+   "name": "(includes 12 and 13)",
+   "latitude": 31.0,
+   "longitudeWest": 206.0,
+   "mBandOutputGW": {
+    "41": 3.99,
+    "43": 4.0,
+    "47": 3.87,
+    "49": 2.42
+   }
+  },
+  {
+   "name": "P245",
+   "latitude": 31.0,
+   "longitudeWest": 34.0,
+   "mBandOutputGW": {
+    "41": 0.32,
+    "43": 0.31,
+    "47": 0.31
+   }
+  },
+  {
+   "name": "Amirani B (P235?)",
+   "latitude": 31.0,
+   "longitudeWest": 115.0,
+   "mBandOutputGW": {
+    "41": 0.1,
+    "43": 0.13,
+    "47": 0.19,
+    "49": 0.09
+   }
+  },
+  {
+   "name": "Shango Patera",
+   "latitude": 32.0,
+   "longitudeWest": 100.0,
+   "mBandOutputGW": {
+    "41": 0.66,
+    "43": 0.62,
+    "47": 1.16,
+    "49": 0.64
+   }
+  },
+  {
+   "name": "Gauwa Patera",
+   "latitude": 34.0,
+   "longitudeWest": 11.0,
+   "mBandOutputGW": {
+    "41": 0.33,
+    "43": 0.28,
+    "47": 0.35
+   }
+  },
+  {
+   "name": "Manua Patera",
+   "latitude": 35.0,
+   "longitudeWest": 322.0,
+   "mBandOutputGW": {
+    "41": 0.2,
+    "43": 0.3,
+    "47": 0.31
+   }
+  },
+  {
+   "name": "P63",
+   "latitude": 35.0,
+   "longitudeWest": 137.0,
+   "mBandOutputGW": {
+    "41": 0.14,
+    "43": 0.38,
+    "47": 0.36,
+    "49": 0.28
+   }
+  },
+  {
+   "name": "Amaterasu Patera",
+   "latitude": 37.0,
+   "longitudeWest": 305.0,
+   "mBandOutputGW": {
+    "41": 1.41,
+    "43": 1.25,
+    "47": 1.39
+   }
+  },
+  {
+   "name": "Dusura Patera",
+   "latitude": 37.0,
+   "longitudeWest": 118.0,
+   "mBandOutputGW": {
+    "41": 0.94,
+    "43": 0.95,
+    "47": 1.03,
+    "49": 0.7
+   }
+  },
+  {
+   "name": "Verbti Patera",
+   "latitude": 38.0,
+   "longitudeWest": 87.0,
+   "mBandOutputGW": {
+    "41": 0.17,
+    "43": 0.19,
+    "47": 0.23,
+    "49": 0.15
+   }
+  },
+  {
+   "name": "PFu1239",
+   "latitude": 38.0,
+   "longitudeWest": 44.0,
+   "mBandOutputGW": {
+    "41": 0.05,
+    "43": 0.03
+   }
+  },
+  {
+   "name": "P151",
+   "latitude": 39.0,
+   "longitudeWest": 141.0,
+   "mBandOutputGW": {
+    "41": 0.06,
+    "43": 0.13,
+    "47": 0.23,
+    "49": 0.12
+   }
+  },
+  {
+   "name": "Zal Patera A",
+   "latitude": 40.0,
+   "longitudeWest": 76.0,
+   "mBandOutputGW": {
+    "41": 2.47,
+    "43": 2.52,
+    "47": 3.98,
+    "49": 2.63
+   }
+  },
+  {
+   "name": "Thor",
+   "latitude": 40.0,
+   "longitudeWest": 133.0,
+   "mBandOutputGW": {
+    "41": 0.73,
+    "43": 0.7,
+    "47": 1.13,
+    "49": 0.54
+   }
+  },
+  {
+   "name": "Lei-Kung A",
+   "latitude": 40.0,
+   "longitudeWest": 202.0,
+   "mBandOutputGW": {
+    "41": 0.22,
+    "43": 0.66,
+    "47": 0.73,
+    "49": 0.32
+   }
+  },
+  {
+   "name": "Fo Patera B",
+   "latitude": 40.0,
+   "longitudeWest": 191.0,
+   "mBandOutputGW": {
+    "43": 0.07,
+    "49": 0.04
+   }
+  },
+  {
+   "name": "Zal Patera B",
+   "latitude": 41.0,
+   "longitudeWest": 73.0,
+   "mBandOutputGW": {
+    "49": 0.54
+   }
+  },
+  {
+   "name": "Pfu1063",
+   "latitude": 42.0,
+   "longitudeWest": 354.0,
+   "mBandOutputGW": {
+    "41": 0.11,
+    "43": 0.05,
+    "47": 0.14
+   }
+  },
+  {
+   "name": "Lei-Kung H (PV13)",
+   "latitude": 42.0,
+   "longitudeWest": 214.0,
+   "mBandOutputGW": {
+    "41": 0.11,
+    "43": 0.06
+   }
+  },
+  {
+   "name": "Fo Patera A",
+   "latitude": 42.0,
+   "longitudeWest": 190.0,
+   "mBandOutputGW": {
+    "43": 0.12,
+    "49": 0.09
+   }
+  },
+  {
+   "name": "Lei-Kung B P173/P174",
+   "latitude": 42.0,
+   "longitudeWest": 202.0,
+   "mBandOutputGW": {
+    "43": 0.07
+   }
+  },
+  {
+   "name": "PFd1293",
+   "latitude": 43.0,
+   "longitudeWest": 346.0,
+   "mBandOutputGW": {
+    "41": 0.06,
+    "43": 0.08,
+    "47": 0.07
+   }
+  },
+  {
+   "name": "Unnamed",
+   "latitude": 43.0,
+   "longitudeWest": 52.0,
+   "mBandOutputGW": {
+    "41": 0.05
+   }
+  },
+  {
+   "name": "Asis Patera",
+   "latitude": 44.0,
+   "longitudeWest": 92.0,
+   "mBandOutputGW": {
+    "41": 0.54,
+    "43": 3.66,
+    "47": 1.46,
+    "49": 1.06
+   }
+  },
+  {
+   "name": "Surt",
+   "latitude": 44.0,
+   "longitudeWest": 335.0,
+   "mBandOutputGW": {
+    "41": 0.4,
+    "43": 0.65,
+    "47": 0.47
+   }
+  },
+  {
+   "name": "Kinich Ahau Patera A",
+   "latitude": 48.0,
+   "longitudeWest": 309.0,
+   "mBandOutputGW": {
+    "41": 0.54,
+    "43": 0.48,
+    "47": 0.71
+   }
+  },
+  {
+   "name": "Kinich Ahau Patera B",
+   "latitude": 49.0,
+   "longitudeWest": 312.0,
+   "mBandOutputGW": {
+    "47": 0.53
+   }
+  },
+  {
+   "name": "Gurzil Patera",
+   "latitude": 50.0,
+   "longitudeWest": 48.0,
+   "mBandOutputGW": {
+    "41": 0.41,
+    "43": 0.43,
+    "47": 0.98,
+    "49": 0.68
+   }
+  },
+  {
+   "name": "Lei-Kung E",
+   "latitude": 50.0,
+   "longitudeWest": 219.0,
+   "mBandOutputGW": {
+    "41": 0.13,
+    "43": 0.09,
+    "47": 0.1,
+    "49": 0.12
+   }
+  },
+  {
+   "name": "PFu1276",
+   "latitude": 51.0,
+   "longitudeWest": 264.0,
+   "mBandOutputGW": {
+    "41": 0.22,
+    "43": 0.17,
+    "47": 0.21
+   }
+  },
+  {
+   "name": "Tonatiuh A",
+   "latitude": 52.0,
+   "longitudeWest": 84.0,
+   "mBandOutputGW": {
+    "41": 1.69,
+    "43": 2.13,
+    "47": 2.84,
+    "49": 1.45
+   }
+  },
+  {
+   "name": "Tonatiuh C",
+   "latitude": 52.0,
+   "longitudeWest": 78.0,
+   "mBandOutputGW": {
+    "41": 1.0
+   }
+  },
+  {
+   "name": "Dazhbog Patera",
+   "latitude": 55.0,
+   "longitudeWest": 300.0,
+   "mBandOutputGW": {
+    "41": 0.94,
+    "43": 0.73,
+    "49": 1.55
+   }
+  },
+  {
+   "name": "Tonatiuh B",
+   "latitude": 57.0,
+   "longitudeWest": 66.0,
+   "mBandOutputGW": {
+    "41": 0.39,
+    "43": 0.32,
+    "47": 0.44,
+    "49": 0.26
+   }
+  },
+  {
+   "name": "PV103",
+   "latitude": 57.0,
+   "longitudeWest": 319.0,
+   "mBandOutputGW": {
+    "41": 0.11,
+    "43": 0.12,
+    "47": 0.16,
+    "49": 0.18
+   }
+  },
+  {
+   "name": "PFu1410",
+   "latitude": 57.0,
+   "longitudeWest": 39.0,
+   "mBandOutputGW": {
+    "41": 0.12,
+    "43": 0.1,
+    "47": 0.14
+   }
+  },
+  {
+   "name": "Lei-Kung F",
+   "latitude": 59.0,
+   "longitudeWest": 220.0,
+   "mBandOutputGW": {
+    "41": 0.09,
+    "43": 0.06,
+    "47": 0.05,
+    "49": 0.05
+   }
+  },
+  {
+   "name": "Tvashtar B (P155)",
+   "latitude": 59.0,
+   "longitudeWest": 118.0,
+   "mBandOutputGW": {
+    "41": 0.05,
+    "43": 0.07
+   }
+  },
+  {
+   "name": "PV3",
+   "latitude": 60.0,
+   "longitudeWest": 144.0,
+   "mBandOutputGW": {
+    "41": 0.05,
+    "43": 0.08,
+    "47": 0.08,
+    "49": 0.05
+   }
+  },
+  {
+   "name": "Tvashtar D",
+   "latitude": 64.0,
+   "longitudeWest": 126.0,
+   "mBandOutputGW": {
+    "41": 0.63,
+    "43": 1.01,
+    "47": 0.87,
+    "49": 0.84
+   }
+  },
+  {
+   "name": "Unrecognized",
+   "latitude": 66.0,
+   "longitudeWest": 125.0,
+   "mBandOutputGW": {
+    "47": 0.25
+   }
+  },
+  {
+   "name": "Chors Patera",
+   "latitude": 68.0,
+   "longitudeWest": 250.0,
+   "mBandOutputGW": {
+    "41": 0.58,
+    "43": 0.6,
+    "47": 0.99,
+    "49": 0.81
+   }
+  },
+  {
+   "name": "Unnamed",
+   "latitude": 68.0,
+   "longitudeWest": 31.0,
+   "mBandOutputGW": {
+    "41": 0.15,
+    "43": 0.09,
+    "47": 0.08,
+    "49": 0.11
+   }
+  },
+  {
+   "name": "Unnamed",
+   "latitude": 70.0,
+   "longitudeWest": 54.0,
+   "mBandOutputGW": {
+    "41": 0.19,
+    "43": 0.11,
+    "47": 0.06
+   }
+  },
+  {
+   "name": "Lei-Kung C",
+   "latitude": 72.0,
+   "longitudeWest": 272.0,
+   "mBandOutputGW": {
+    "41": 0.22,
+    "43": 0.18,
+    "47": 0.31,
+    "49": 0.26
+   }
+  },
+  {
+   "name": "Lei-Kung K",
+   "latitude": 74.0,
+   "longitudeWest": 256.0,
+   "mBandOutputGW": {
+    "41": 0.07,
+    "43": 0.04,
+    "47": 0.06,
+    "49": 0.06
+   }
+  },
+  {
+   "name": "Vivasvant Patera",
+   "latitude": 75.0,
+   "longitudeWest": 292.0,
+   "mBandOutputGW": {
+    "41": 3.47,
+    "43": 1.97,
+    "47": 2.65,
+    "49": 1.52
+   }
+  },
+  {
+   "name": "Pajonn Patera",
+   "latitude": 83.0,
+   "longitudeWest": 93.0,
+   "mBandOutputGW": {
+    "41": 0.11,
+    "43": 0.11,
+    "47": 0.12,
+    "49": 0.13
+   }
+  }
+ ]
+}

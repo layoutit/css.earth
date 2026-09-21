@@ -916,8 +916,8 @@
     {
       "id": "io-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1145,
-      "expectedSha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
+      "expectedBytes": 1166,
+      "expectedSha256": "30ee803bc616c989f623fae0df92f81f94ba07cd2f4100cb3e1d5325dcfa3338",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -982,8 +982,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 12594,
-      "expectedSha256": "827d36dbc224e8ac71ddf5b84d1a6275289a9715b63c7e0286df6332089ad0b4",
+      "expectedBytes": 15304,
+      "expectedSha256": "e9191bef4e52b9e66726e5a8fb675a73c9bc43e9b020bde5f723808bd8bbe1a8",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1076,8 +1076,8 @@
     {
       "id": "io-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3220,
-      "expectedSha256": "14b8655d0acafc7c0801a3f7885b44989579f48b7d39cefea6c17ffa81c2a35d",
+      "expectedBytes": 3463,
+      "expectedSha256": "0395c10d5c5eff84e3210ec0f0e7aad0ea80d6c2c4733b2b47f7b05e7a3b3997",
       "origin": "Repository-authored Io acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14002,
-      "expectedSha256": "6b6fe98a7f64556d6375b34b68d0e30a86619dc0020d304ebd674fb22f9c7812",
+      "expectedBytes": 19010,
+      "expectedSha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1110,9 +1110,121 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
+    },
+    {
+      "id": "io-jiram-m-night-recipe",
+      "path": "science/jiram/recipe.json",
+      "expectedBytes": 18165,
+      "expectedSha256": "e20a147eea6c2645bb8f7dd20dbb36b9e790219e190f490f98acf6053e8dde8d",
+      "origin": "Repository-authored reduction recipe pinning 59 Juno JIRAM imager RDR frames (JNO-J-JIRAM-3-RDR-V1.0) by volume, product id and SHA-256, and the Juno kernel-bank files each visit uses",
+      "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors",
+      "license": "Public NASA mission data; repository-authored recipe",
+      "acquisition": "Frames listed by the PDS volume indexes, screened by Io range and by the SPICE camera, restored by node tools/objects/juno/jiram-mosaic.mts --fetch and checked against their pins.",
+      "redistribution": "The recipe and the reduced map are kept in Git; the frames are fetched from the archive by pin.",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Every frame pinned in science/jiram/recipe.json by product id and SHA-256."
+          }
+        ]
+      }
     }
   ],
-  "generatedIntermediates": [],
+  "generatedIntermediates": [
+    {
+      "id": "io-jiram-m-night-map",
+      "path": "science/jiram/io-jiram-m-night.IMG",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "expectedBytes": 1036800,
+      "expectedSha256": "84f2671acc566a7e52e71f977b2391d5a240cc9617bc8774c45ec685a963381b",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-m-night-label",
+      "path": "science/jiram/io-jiram-m-night.LBL",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "expectedBytes": 1307,
+      "expectedSha256": "efb8da37d9c03e37cef8fc44b95f9d8c5da9fccdf99b7c2d39218fe0a9351504",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-m-night-receipt",
+      "path": "science/jiram/receipt.json",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "expectedBytes": 27895,
+      "expectedSha256": "b65931d8970ff1c4c68d3c8c45e939767fc391a9af5baf7d44b60068b1184cda",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      }
+    }
+  ],
   "documents": [
     {
       "path": "editorial/factsheet-review.json",
@@ -1537,6 +1649,20 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "science/davies-2024/psjad4346t10_mrt.txt",
+      "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+      "purpose": "Davies et al. (2024) Table A1 hot-spot positions (CC BY 4.0), kept byte for byte. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks that bright spots in the JIRAM map fall on these independently catalogued sources.",
+      "expectedBytes": 27553,
+      "expectedSha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5"
+    },
+    {
+      "path": "science/mura-2024/table3-m-band.json",
+      "origin": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1369472/full",
+      "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks the Volcanic heat map against them.",
+      "expectedBytes": 14176,
+      "expectedSha256": "90ad29f2e09ce3a2db70081810d21aba3b65c8ca137fa9d76a7d880cd07631ce"
     }
   ]
 }
