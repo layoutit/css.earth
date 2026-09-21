@@ -169,8 +169,8 @@
     {
       "id": "hd-209458-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1433,
-      "expectedSha256": "09a3200c26bceb8eb21e559a31d46e5174208b028f708c6ef99fb095d23e358d",
+      "expectedBytes": 1841,
+      "expectedSha256": "21d649f199b4d76961470e7ff6a77e08382632e243dadc57945749fa1b8e051e",
       "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
       "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -242,6 +242,34 @@
         "kind": "local",
         "reason": "Published coefficients transcribed in this package with their table cells; repinned when edited."
       }
+    },
+    {
+      "id": "hd-209458-crosscheck-spectrum",
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv",
+      "expectedBytes": 10240,
+      "expectedSha256": "377be5b7e0799eddff95a3472d8b8b618ce670af6146a6353820640d25153e18",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1779546757669063552&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-1779546757669063552",
+            "role": "material",
+            "evidence": "src/objects/hd-209458/source/photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -285,8 +313,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 592,
-      "expectedSha256": "8f24c9a6124cda94b981c2e2c47d510794fc8e5751d3dcd9d2ebf1b0dc5ac9f5"
+      "expectedBytes": 922,
+      "expectedSha256": "dcb617377866cdb4d8bb98bd08ba40bf583cbe1663ce2a1ece71e9d5ffcc8b41"
     },
     {
       "path": "preparation/navigation.json",

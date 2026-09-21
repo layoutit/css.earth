@@ -3,23 +3,39 @@
   "objectId": "proxima-centauri",
   "spectrum": "measured",
   "measuredSpectrum": {
-    "source": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34, star MD021 (Gl 551), merged spectrum corrected for slit losses",
-    "path": "photometry/xsl_spectrum_MD021_merged_scl.fits",
-    "service": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_MD021_merged_scl.fits",
+    "source": "HST Low Resolution Stellar Library (LowLib, HLSP lead Guy Worthey; https://doi.org/10.17909/kmdt-pw63), GJ 551: HST/STIS G230LB, G430L and G750L spectra from programme 13776, 171-1008 nm",
+    "path": "photometry/hlsp_lowlib_gj551.fits",
+    "service": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/lowlib/hlsp_lowlib_hst_stis_gj551_g230lb-g430l-g750l_v1.0_spect.fits",
     "checked": "2026-09-21",
     "format": "fits-table",
-    "extension": "SPECTRUM",
+    "extension": "FLUX TABLE",
     "wavelength": {
-      "column": "WAVE",
-      "unit": "nm"
+      "column": "Wavelength",
+      "unit": "angstrom"
     },
     "flux": {
-      "column": "FLUX_SC",
+      "column": "Scattered Light & Slit Offcenter Corrected",
       "kind": "flux"
     },
     "gaps": [],
-    "note": "VLT/X-shooter spectrum taken 2014-01-15; FLUX_SC is the slit-loss-corrected flux. Proxima is a flare star, so the colour is one quiet or flaring moment."
+    "note": "Space spectrophotometry taken 2015-04-26, the flux corrected for scattered light and an off-centre slit. Proxima flares, so the colour is one moment. It replaces the X-Shooter Spectral Library spectrum (MD021), whose colour (#ffc073) disagreed with both this spectrum and Gaia DR3 XP."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 5853498713190525696",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "5853498713190525696",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
 }

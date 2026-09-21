@@ -402,7 +402,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       case 'stellar-photometric-color': {
         // A self-luminous photosphere with no image: one colour from its measured spectrum or catalogued photometric temperature, no map.
         const source = await manifest;
-        const { temperature, spectrum, color, range, limbDarkening } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
+        const { temperature, spectrum, color, range, limbDarkening, crossCheck } = await loadStellarPhotometricColor(async path => { await source.validatePath(path); return readFile(resolve(sourceDirectory, path)); },
           surface.science, surface.source);
         const data = Buffer.alloc(width * height * 4);
         // A published Roche-von Zeipel fit darkens the surface by latitude (gravity-darkening.mts); otherwise the colour is uniform.
@@ -422,6 +422,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (limbDarkening) plates.limb = limbDarkeningPlate(recipe.emission.limbSize * density, limbDarkening.coefficients, color);
         return { data, channels: 4, nearest: true, plates,
           report: { stellarPhotometricColor: { ...(temperature ? { temperature } : { spectrum }), srgb: color.srgb, linearSrgb: color.linear, ...(range ? { srgbAtBounds: range.map(bound => bound.srgb) } : {}),
+            ...(crossCheck ? { crossCheck } : {}),
             ...(gravity ? { gravityDarkening: { poleTemperatureK: gravity.record.poleTemperatureK, equatorTemperatureK: gravity.record.equatorTemperatureK,
               meanTemperatureK: Math.round(gravity.meanK), omega: gravity.record.omega, beta: gravity.record.beta, poleSrgb: gravity.rows[0], equatorSrgb: gravity.rows[Math.floor(height / 2)] } } : {}),
             ...(limbDarkening ? { limbDarkening: { law: 'quadratic', ...limbDarkening.coefficients, limbToCentre: 1 - limbDarkening.coefficients.u1 - limbDarkening.coefficients.u2,

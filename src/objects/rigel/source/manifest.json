@@ -169,8 +169,8 @@
     {
       "id": "rigel-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1076,
-      "expectedSha256": "87812b9f95f5e6df2a1db27ddb14ffa82465a5f5c26d84c62882197d41df57b7",
+      "expectedBytes": 1647,
+      "expectedSha256": "900a353f8d2c694405bb3b7a34ff02ca44f509d53d7a29399faa9a30cb1fa43f",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -223,6 +223,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "rigel-crosscheck-spectrum",
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "expectedBytes": 798312,
+      "expectedSha256": "e7cc5be688f5e901665debb10a296230ab8ff59b6288c7ed5965821217b0c28d",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
+      "credit": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-202-kharitonov-342",
+            "role": "material",
+            "evidence": "src/objects/rigel/source/photometry/crosscheck-kharitonov-catalog.dat"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -265,8 +293,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 541,
-      "expectedSha256": "f6ed6f9a61b92467b242b6c1fab7c2985e358e7e762afcdb4ace620203cc9d74"
+      "expectedBytes": 775,
+      "expectedSha256": "e3474b0d832dbba7787d4577c92ab6e295a4e87f8e7f3c8354acd5b8abf440bc"
     },
     {
       "path": "preparation/navigation.json",

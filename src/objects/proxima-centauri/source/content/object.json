@@ -41,17 +41,17 @@
       {
         "id": "color",
         "label": "Color",
-        "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+        "qualification": "Colour from Hubble's spectrum of the star. The disc is unresolved, and no darkening toward the edge is measured.",
         "thumbnail": "proxima-centauri-lens-color.webp",
         "surface": "proxima-centauri-surface-color@2x.webp",
         "poles": "proxima-centauri-poles-color@2x.webp",
         "source": {
           "id": "proxima-centauri-stellar-color",
           "path": "../manifest.json",
-          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+          "url": "https://doi.org/10.17909/kmdt-pw63"
         },
         "falseColor": false,
-        "notes": "The colour of Proxima Centauri's VLT/X-shooter spectrum. ESO's Very Large Telescope observed it on 15 January 2014; Proxima flares, so this is one moment. No resolved image of the surface is cast here."
+        "notes": "The colour of the Hubble Space Telescope's STIS spectrum of Proxima Centauri from 26 April 2015; Proxima flares, so this is one moment."
       }
     ]
   },
@@ -70,8 +70,8 @@
     {
       "label": "Spectrum",
       "role": "facts",
-      "description": "X-Shooter Spectral Library DR3: MD021 (Proxima Centauri)",
-      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+      "description": "HST LowLib GJ 551 (programme 13776)",
+      "href": "https://doi.org/10.17909/kmdt-pw63"
     }
   ],
   "provenance": {

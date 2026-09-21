@@ -169,8 +169,8 @@
     {
       "id": "deneb-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1076,
-      "expectedSha256": "e81b790e532ae0c966e0cab1c5fb7dd02248af86d0c555919394a419406ef1fe",
+      "expectedBytes": 1686,
+      "expectedSha256": "5f39f7276fb59042de2cd1cd24b43cc571a477da6c05f88dc8c588c62e32e99f",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -251,6 +251,34 @@
           }
         ]
       }
+    },
+    {
+      "id": "deneb-crosscheck-spectrum",
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "expectedBytes": 506596,
+      "expectedSha256": "b031729b448d64e34a2801e208e7f22254cfe03a32ea8b9b5dc1dfac329d4d10",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-126-burnashev-466",
+            "role": "material",
+            "evidence": "src/objects/deneb/source/photometry/crosscheck-III_126_part2.dat.gz"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -294,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1373,
-      "expectedSha256": "aa107bcbaaba70990ce2d8e2a5d50d629e1b48d50932d83694b0c6ca1945175b"
+      "expectedBytes": 1606,
+      "expectedSha256": "6944803324b58da986560ad5342c9955c855e596ecf684f4a10360b27d544f2c"
     },
     {
       "path": "preparation/navigation.json",

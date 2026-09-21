@@ -49,8 +49,8 @@
     {
       "id": "proxima-centauri-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2119,
-      "expectedSha256": "9c8aebb9ded1ebf935060e63188e95e344b3cfc81248ddde42e4ccbb0e750044",
+      "expectedBytes": 2123,
+      "expectedSha256": "010d907d8de02c69b74e2167d102b85dc32f7bad7d7501be650783d120a1b247",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "proxima-centauri-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1753,
-      "expectedSha256": "df7ca6ab10d5c7f64eb28af0a80ac2c3fbe1e578e69d1490d4c8af9986b0c30d",
+      "expectedSha256": "af30250d8c9d7379671c5b6e3f3b5535626fabc02dd879cc209ce156df5e8edb",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -139,17 +139,17 @@
       ]
     },
     {
-      "id": "proxima-centauri-xsl-dr3",
-      "path": "photometry/xsl_spectrum_MD021_merged_scl.fits",
-      "expectedBytes": 950400,
-      "expectedSha256": "eab47063414421564e22f0732420d111b8ab3c40c9be46c922fdf2b892397e75",
-      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_MD021_merged_scl.fits",
-      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34",
-      "license": "CDS VizieR catalogue: free use with citation",
+      "id": "proxima-centauri-hst-lowlib",
+      "path": "photometry/hlsp_lowlib_gj551.fits",
+      "expectedBytes": 518400,
+      "expectedSha256": "598ca9572c02db72e8d6097484fb39e92d248db5f39abea9fe14593acafde89a",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/lowlib/hlsp_lowlib_hst_stis_gj551_g230lb-g430l-g750l_v1.0_spect.fits",
+      "credit": "NASA/STScI; HST Low Resolution Stellar Library (LowLib, Worthey), programme 13776",
+      "license": "HST archive data: public, with acknowledgement",
       "licenseEvidence": [
-        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+        "https://archive.stsci.edu/publishing/data-use"
       ],
-      "acquisition": "Archive file downloaded unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "acquisition": "HLSP FITS file downloaded unchanged on 2026-09-21 through the MAST API; restored through source/preparation/acquisition.json",
       "redistribution": "One archived spectrum, unchanged, with acknowledgement",
       "consumers": [
         "assets",
@@ -159,9 +159,9 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "xsl-dr3-md021",
+            "catalogueId": "hst-lowlib-gj551",
             "role": "material",
-            "evidence": "src/objects/proxima-centauri/source/photometry/xsl_spectrum_MD021_merged_scl.fits"
+            "evidence": "src/objects/proxima-centauri/source/photometry/hlsp_lowlib_gj551.fits"
           }
         ]
       }
@@ -169,10 +169,10 @@
     {
       "id": "proxima-centauri-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 973,
-      "expectedSha256": "777962b8783673899b27d6b12fcd65f2e207c41fb886dcfa475ff3ede4fef7bb",
-      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
-      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34; CIE 1931 2° observer",
+      "expectedBytes": 1614,
+      "expectedSha256": "5792a3847eb1f705dc08ea74f91043c160b31fcb84a4e3adf3ae25f546bedb80",
+      "origin": "https://doi.org/10.17909/kmdt-pw63",
+      "credit": "NASA/STScI; HST Low Resolution Stellar Library (LowLib, Worthey), programme 13776; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
       "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
       "redistribution": "Method record only",
@@ -184,7 +184,7 @@
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "xsl-dr3-md021",
+            "catalogueId": "hst-lowlib-gj551",
             "role": "material",
             "evidence": "src/objects/proxima-centauri/source/photometry/stellar-color.json#/measuredSpectrum"
           },
@@ -223,15 +223,43 @@
           }
         ]
       }
+    },
+    {
+      "id": "proxima-centauri-crosscheck-spectrum",
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10240,
+      "expectedSha256": "f35d4042ec00aa66d80583c3182a5892752a86ec131349cfa9cd0e43e98917fa",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5853498713190525696&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-5853498713190525696",
+            "role": "material",
+            "evidence": "src/objects/proxima-centauri/source/photometry/crosscheck-gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6342,
-      "expectedSha256": "8f9577405216bb9f0ad65985fb20689db9bf0640095062efb842b3fec6e7603e",
-      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
+      "expectedBytes": 6349,
+      "expectedSha256": "8971232d2ce51f93fa2d04e6137b46fc639dd76d38e5755caf34f6b181a0b2d1",
+      "origin": "https://doi.org/10.17909/kmdt-pw63",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
@@ -241,7 +269,7 @@
         "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
           "proxima-centauri-stellar-color",
-          "proxima-centauri-xsl-dr3",
+          "proxima-centauri-hst-lowlib",
           "proxima-centauri-cie-1931-2deg-cmf",
           "proxima-centauri-preparation-raster"
         ]
@@ -256,8 +284,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3169,
-      "expectedSha256": "79a325f2b491ea7c3bb0e066a457fecafb670570105e3905eba11447b167546f",
+      "expectedBytes": 3022,
+      "expectedSha256": "d795a0aaa840c870961d62bfd2568ed704d17ded164563145bc3205be22096bf",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -265,8 +293,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 592,
-      "expectedSha256": "f95a1b7ab5cd6a39372fdabcaedf1548d143d75531014de4e0d6155b68511ee1"
+      "expectedBytes": 940,
+      "expectedSha256": "c5cfb37ebb23e554ac97fffb699aee2e886ce62ebe145090410ab2a2826e5070"
     },
     {
       "path": "preparation/navigation.json",

@@ -20,5 +20,22 @@
     "note": "Ground-based photoelectric scans by Pulkovo astronomers, combined into one absolute energy distribution per star with a stated accuracy of 1.5-2%. The catalogue gives no observation dates. HR 5340's column is read from the raw flux file, which lists seven stars per block."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kiehling (1987), HR 5340: an independent ground-based scan",
+    "spectrum": {
+      "path": "photometry/crosscheck-kiehling-5340.tsv",
+      "format": "tsv-columns",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "m(HR5340)",
+        "kind": "magnitude",
+        "missing": 99.999
+      },
+      "gaps": []
+    }
+  }
 }

@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6e09695383a7adbaa6ec35879b51cfe386caf3abbe033582ef7dbb60373c8a26"
+    "sha256": "48e0fea22571b319ce4f2045230ef64ea7ea1d1c8767814781f96adae6bb8506"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -671,8 +671,8 @@
           }
         ]
       },
-      "sha256": "efd81efb5dbcea9c51af1d75b809dea005ef26a245240e8447eb65d8bc0f4f99",
-      "bytes": 1064,
+      "sha256": "df22a40b869425218e40af61058aec096acf06c483135d9b6b97ac7d271136a8",
+      "bytes": 1483,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1091,7 +1091,7 @@
   },
   "lastPreparation": {
     "objectId": "betelgeuse",
-    "materialSha256": "33103f68af52911a7786a44fd0308e64d250795ebe9565e8291c6df3a0ac56e5",
+    "materialSha256": "25f43b7a29f74603626554cf69284bded38a14201b442d622cc56bd43f0f8f83",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

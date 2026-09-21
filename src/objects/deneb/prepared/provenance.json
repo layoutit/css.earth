@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "043de7771d5d880fc445dd9d72f55f00239cf7950f3ecc1bd4a019430b8e1ed8"
+    "sha256": "e50206569b8fa5e2ca7aed494dea1a01485930acfac54fed6333516d91d2b1e3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "e81b790e532ae0c966e0cab1c5fb7dd02248af86d0c555919394a419406ef1fe",
-      "bytes": 1076,
+      "sha256": "5f39f7276fb59042de2cd1cd24b43cc571a477da6c05f88dc8c588c62e32e99f",
+      "bytes": 1686,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "deneb",
-    "materialSha256": "5cd84262a5be44c468bbd21e3280e106ffee792822902bb5b595e31dab7136ff",
+    "materialSha256": "6efbcb1291e66e36cf2a930900b118a6e45f41272c4f3d18ebd27da6f7dc7240",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

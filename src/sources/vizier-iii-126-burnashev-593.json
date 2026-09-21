@@ -1,0 +1,36 @@
+{
+  "id": "vizier-iii-126-burnashev-593",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Burnashev (1985) spectrophotometry, record 593: Altair (BS 7557) (Crimean scan)",
+  "identifiers": [
+    {
+      "type": "VizieR III/126 part2 record",
+      "value": "593"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126",
+      "label": "VizieR III/126"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
+      "checkedOn": "2026-09-21",
+      "locator": "part2.dat line 593: from byte 59, pairs of wavelength (0.1 nm) and log10 flux; -9.999999 no data"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
+      "scope": "citation",
+      "evidence": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

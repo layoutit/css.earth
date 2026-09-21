@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "622341de7d7520d7cb6a347296f2f22c2e23775cd06563f86bbb368631bc2bc6"
+    "sha256": "877f30ba37c6e1258d9be56468c35eca64ae521b98ef4f5afa86e43cf145fb39"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "3a2d456deb3ceb339386e65b7708213d4c02123abfa754003f9333466e02b5e5",
-      "bytes": 1082,
+      "sha256": "a830f39badc943920396b740681272a21c4e91ebba2f4720ef8db4f62ac2e339",
+      "bytes": 1501,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "arcturus",
-    "materialSha256": "8a34603cf0ed5e4f5f3abb127018ead5a3670fd02ca4e74e8b32003d3a0b263d",
+    "materialSha256": "9f296d00cc8dd4e0a56e7790a32aa866996b86fdd8cf95ac217d2deba98f7f13",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

@@ -74,6 +74,15 @@
           "replacement": ""
         }
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-III_126_part2.dat.gz",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz"
     }
   ]
 }

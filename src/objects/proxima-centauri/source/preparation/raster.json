@@ -29,7 +29,7 @@
       "science": {
         "kind": "stellar-photometric-color",
         "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
-        "qualification": "Uniform photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+        "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (LowLib). The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
       }
     }
   ],

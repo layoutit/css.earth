@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "1bfa76626ae29fb85b889a75161ce9766248b9aeff90ecb38aa12de73fe79e37"
+    "sha256": "770fb12ae937fefd79db1f1bd9df72c86d23c822ca6319c998faa21ea624afa4"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -221,8 +221,8 @@
           }
         ]
       },
-      "sha256": "10d7157ca73cb272f2b8a0d2cb35d004bf12704e43c965733f436d5733851cb7",
-      "bytes": 1028,
+      "sha256": "7c52230e6505f7fcc07ef5c04070e7dcc5c59a77095a1cf95da03f3808bffe19",
+      "bytes": 1436,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -488,7 +488,7 @@
   },
   "lastPreparation": {
     "objectId": "vega",
-    "materialSha256": "2c958f07e68d8c2fd1a254c7cce5b70a6e60442f685808a8dbea74d7a2166860",
+    "materialSha256": "03f6b6bdf4761379dd49ac4ae47266f865724f27e8ee5546654b358da22f2505",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

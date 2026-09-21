@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "dcc7f1e8f54c12467686ce27398b2a018fc7ae10ec67210ef39437c331727d1d"
+    "sha256": "ac1d704c34cfefd99a2650469d6da51841583e376efa62986be1d1b1fd21dbde"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -220,8 +220,8 @@
           }
         ]
       },
-      "sha256": "2eed57aa91ced34880a0d01981d5df9e601fb6454f2938511033aa427be70eba",
-      "bytes": 1058,
+      "sha256": "93b51daaa6b3a4bca03a44ff90a230aabf96c441a4aa4f8b7fc5023248a0bc61",
+      "bytes": 1599,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -466,7 +466,7 @@
   },
   "lastPreparation": {
     "objectId": "alpha-centauri-b",
-    "materialSha256": "ddc60fc41576f67205c751953841381582f7dacbe4f41d88cc12a65a904f324a",
+    "materialSha256": "676a626ef7f02852e13323dcf2c5283738bf3d6bdf6911c18df20b85f8f85598",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

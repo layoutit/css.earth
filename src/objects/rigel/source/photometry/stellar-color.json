@@ -20,5 +20,28 @@
     "note": "Ground-based photoelectric scans by Pulkovo astronomers, combined into one absolute energy distribution per star with a stated accuracy of 1.5-2%. The catalogue gives no observation dates. HR 1713's column is read from the raw flux file, which lists seven stars per block."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kharitonov et al. (1988), record 342: Alma-Ata scans",
+    "spectrum": {
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "format": "kharitonov-records",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "342",
+        "kind": "flux",
+        "missing": 0
+      },
+      "gaps": [
+        {
+          "fromNm": 757,
+          "toNm": 780,
+          "reason": "the catalogue ends at 757.5 nm; the last value is held to 780 nm"
+        }
+      ]
+    }
+  }
 }

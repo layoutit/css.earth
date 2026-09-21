@@ -54,6 +54,15 @@
           "replacement": ""
         }
       ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-kharitonov-catalog.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat"
     }
   ]
 }

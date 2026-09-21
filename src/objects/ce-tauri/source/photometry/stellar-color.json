@@ -27,5 +27,22 @@
     "note": "Ground-based photoelectric scan of 1982-10-24, 327.5-772.5 nm in 2.5 nm steps, published as log10 flux. The second Crimean scan, record 647 of 1983-02-02, gives a paler colour (#ffb859); CE Tau is a semi-regular variable."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 3400796031719045632 (G = 3.1, likely saturated)",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "3400796031719045632",
+        "kind": "flux"
+      },
+      "gaps": []
+    },
+    "disagreement": "Gaia XP gives a paler colour (#ffbe5f), and so does the second Crimean night (record 647, #ffb859); CE Tau is a semi-regular variable and Gaia XP is unreliable this bright, so which colour is typical is not settled."
+  }
 }

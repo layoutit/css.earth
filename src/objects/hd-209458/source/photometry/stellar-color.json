@@ -36,5 +36,21 @@
     "note": "Space spectrophotometry on the CALSPEC flux scale. Between 380 and 780 nm every sample is STIS measurement. Rows with DATAQUAL 0 are left out; the flagged stretches are declared gaps, bridged by a straight line between the good samples either side."
   },
   "whitePoint": "sRGB D65",
-  "normalization": "brightest linear sRGB channel = 1"
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Gaia DR3 XP spectrum, source 1779546757669063552",
+    "spectrum": {
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv",
+      "format": "gaia-xp-sampled",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "1779546757669063552",
+        "kind": "flux"
+      },
+      "gaps": []
+    }
+  }
 }
