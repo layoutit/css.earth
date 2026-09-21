@@ -71,9 +71,10 @@ test('shared occlusion preserves point visibility, clipped chords and saturated 
       const options = { toEye, project, near: .1 * scale, clipX: 500, clipY: 300 };
       const before = createPreparedRingProjector({ ...options, hidden: oldHidden, mayOcclude: oldMay });
       const after = createPreparedRingProjector({ ...options, hidden: shared.hidden, mayOcclude: shared.mayOcclude });
-      expect(after(vertices, trail)).toEqual(before(vertices, trail));
-      for (const saturation of [48, 128]) expect(after.measureExtent(vertices, trail, saturation))
-        .toBe(before.measureExtent(vertices, trail, saturation));
+      const flat = Float64Array.from(vertices.flat());
+      expect(after(flat, trail)).toEqual(before(flat, trail));
+      for (const saturation of [48, 128]) expect(after.measureExtent(flat, trail, saturation))
+        .toBe(before.measureExtent(flat, trail, saturation));
     }
   }
 }, 20000);

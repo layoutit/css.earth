@@ -11,7 +11,7 @@ import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDesc
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
 import { createPreparedUniverse, parseLensBillboards, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
-import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONTEXT_URL } from './world-context-plan.mts';
+import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_PLANNER_SOURCE } from './world-context-plan.mts';
 import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
 import { createCameraViewport } from '../src/renderers/css/dist/navigation.js';
@@ -124,7 +124,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     });
     // The worker reads its own prepared context. The bounded spatial-star sample is
     // already inside pointAppearance; the complete binary catalogue stays out of the app.
-    const plannerSource = { contextUrl: APPLICATION_WORLD_CONTEXT_URL };
+    const plannerSource = APPLICATION_WORLD_PLANNER_SOURCE;
     const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
       clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
     const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,

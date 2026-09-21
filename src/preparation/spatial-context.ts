@@ -255,12 +255,12 @@ export function prepareWorldContext(source: WorldContextSource, facts: Readonly<
     })), camera: source.camera, system: source.system, volume: source.volume, stars: source.stars });
 }
 
-/** The main thread's copy of a prepared world context. Orbit paths and detail levels
- * stay in the full file, which only the planner worker and build tools read; each
- * orbit keeps its parent, bounds and size. Classification views are build-time only. */
-export function summarizeWorldContext(prepared: PreparedWorldContext) {
+/** The browser's copy of a prepared world context. Orbit paths and detail levels go to the planner worker as the
+ * binary orbit bank (`encodeWorldOrbits`), which this summary pins; each orbit here keeps its parent, bounds and
+ * size. Classification views are build-time only. */
+export function summarizeWorldContext(prepared: PreparedWorldContext, orbitBank: { readonly byteLength: number; readonly sha256: string }) {
   const { classificationViews: _views, ...rest } = prepared;
-  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, bodies: freeze(prepared.bodies.map(body => {
+  return freeze({ ...rest, schema: 'cssearth-world-context-summary@1' as const, orbitBank: freeze({ ...orbitBank }), bodies: freeze(prepared.bodies.map(body => {
     if (!body.orbit) return body;
     const { centerBodyId, centerPositionM, verticesM, trail, bounds, lod, closed, displayExtentAu } = body.orbit;
     return freeze({ ...body, orbit: freeze({ centerBodyId, centerPositionM, vertexCount: verticesM.length, fullTrail: trail.every(weight => weight === 1),
@@ -268,6 +268,44 @@ export function summarizeWorldContext(prepared: PreparedWorldContext) {
   })) });
 }
 
+/** The orbit bank's layout: `CSWO`, format version, header byte length (little-endian u32s), the UTF-8 JSON
+ * header, then 8-byte-aligned sections. The header names each orbit's sections as [byteOffset, count] from the
+ * start of the bank: vertices as Float64 x,y,z triples, trail weights as Float64, chord and vertex indices as
+ * Uint32. The planner worker reads them as typed-array views; nothing is parsed into objects. */
+export const WORLD_ORBITS_MAGIC = 0x4f575343; // 'CSWO'
+export const WORLD_ORBITS_VERSION = 1;
+export function encodeWorldOrbits(prepared: PreparedWorldContext): Uint8Array {
+  const sections: (Float64Array | Uint32Array)[] = [];
+  let offset = 0;
+  const section = (values: Float64Array | Uint32Array) => { const at = offset; sections.push(values); offset += values.byteLength; offset += (8 - offset % 8) % 8; return [at, values.length] as const; };
+  const f64 = (values: readonly number[]) => section(Float64Array.from(values));
+  const u32 = (values: readonly number[]) => {
+    if (values.some(value => !Number.isSafeInteger(value) || value < 0 || value > 0xffffffff)) throw new TypeError('Orbit bank indices must be unsigned 32-bit integers.');
+    return section(Uint32Array.from(values));
+  };
+  const bodies = prepared.bodies.flatMap(body => {
+    const orbit = body.orbit;
+    if (!orbit) return [];
+    return [{ id: body.id, vertices: f64(orbit.verticesM.flat()), trail: f64(orbit.trail), activeChords: u32(orbit.activeChords),
+      extentChords: u32(orbit.extentChords),
+      ...(orbit.closed === false ? { bodyVertexIndex: orbit.bodyVertexIndex, trailModel: orbit.trailModel } : {}),
+      levels: orbit.lod.levels.map(level => ({ vertexIndices: u32(level.vertexIndices), trail: f64(level.trail),
+        activeChords: u32(level.activeChords), deviationM: level.deviationM })) }];
+  });
+  const header = new TextEncoder().encode(JSON.stringify({ schema: 'cssearth-world-orbits@1', bodies }));
+  const dataStart = 12 + header.byteLength + (8 - (12 + header.byteLength) % 8) % 8;
+  const bytes = new Uint8Array(dataStart + offset);
+  const view = new DataView(bytes.buffer);
+  view.setUint32(0, WORLD_ORBITS_MAGIC, true); view.setUint32(4, WORLD_ORBITS_VERSION, true); view.setUint32(8, header.byteLength, true);
+  bytes.set(header, 12);
+  // Section offsets in the header are relative to the data start, which follows the padded header.
+  let at = dataStart;
+  for (const values of sections) {
+    bytes.set(new Uint8Array(values.buffer, values.byteOffset, values.byteLength), at);
+    at += values.byteLength; at += (8 - (at - dataStart) % 8) % 8;
+  }
+  return bytes;
+}
 export interface PreparedOrbitLodLevel {
   readonly vertexIndices: readonly number[]; readonly trail: readonly number[];
   readonly activeChords: readonly number[]; readonly deviationM: number;
