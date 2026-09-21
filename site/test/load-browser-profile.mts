@@ -74,7 +74,7 @@ export async function assertRenderedObjectControls(page: BrowserPage, profile: O
     { name: "motion", kind: "toggle" },
     ...(speed ? [{ name: speed.name, kind: speed.kind }] : []),
     ...(shadows ? [{ name: shadows.name, kind: shadows.kind }] : []),
-    { name: "minimap", kind: "toggle" }, { name: "surfaceLabels", kind: "toggle" },
+    { name: "minimap", kind: "toggle" }, { name: "surfaceLabels", kind: "toggle" }, { name: "threeDStars", kind: "toggle" },
     { name: "heliosphere", kind: "toggle" }, { name: "illustrationModels", kind: "toggle" },
     ...remainingSettings.map(({ name, kind }) => ({ name, kind })),
   ];

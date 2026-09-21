@@ -242,6 +242,11 @@ test.each([
     expect(Number(volumeImage.dataset.volumeBrightness)).toBeCloseTo(expectedGain, 12);
     expect(Number(volumeRoot.style.opacity)).toBeCloseTo(expected * (withSky ? expectedGain : 1), 12);
   }
+  expect(stellarRoot.style.display).toBe('block');
+  mounted.setStellarPointsEnabled(false);
+  expect(stellarRoot.style.display).toBe('none');
+  mounted.setStellarPointsEnabled(true);
+  expect(stellarRoot.style.display).toBe('block');
   expect(document.count).toBe(count); expect(root.children).toEqual(originalNodes);
   mounted.destroy(); expect(stage.children).toEqual([detail]); expect(document.defaultView.pending.size).toBe(0);
 });

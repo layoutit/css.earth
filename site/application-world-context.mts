@@ -291,6 +291,9 @@ export function createApplicationWorldContext() {
           setMinimapEnabled(enabled: boolean) {
             if (!destroyed) minimap.setEnabled(enabled);
           },
+          setThreeDStarsEnabled(enabled: boolean) {
+            if (!destroyed) layer.setStellarPointsEnabled(enabled);
+          },
           setHighlightedClassification(classification: string | null) {
             if (destroyed) return;
             highlightedClassification = classification;

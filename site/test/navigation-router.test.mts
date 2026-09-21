@@ -32,7 +32,7 @@ type MockPrepare = (options: MockRequest) => unknown | Promise<unknown>;
 type FocusController = ReturnType<typeof createPreparedContextNavigation>;
 type FocusCallbacks = NonNullable<Parameters<FocusController['connect']>[1]>;
 type MockWorldContext = { mount(options: { stage: HTMLElement; signal: AbortSignal; windowTarget: Window }): Promise<MockWorldMount> };
-type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setMinimapEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
+type MockWorldMount = { destroy(): void; publish?(world: WorldCameraPose & {pose: {id?: string}}, viewport: {principalOffsetPixels: readonly [number, number]}): void; selectObject?(id: string, frame: PreparedWorldCameraFrame & {id?: string}): void; previewSelection?(id?: string | null): void; setMinimapEnabled?(value: boolean): void; setThreeDStarsEnabled?(value: boolean): void; setNavigationInFlight?(value: boolean): void; connectNavigation?: FocusController['connect']; suspendFocus?: FocusController['suspend']; restoreFocus?: FocusController['restore'] };
 type MockDataset = { ids: readonly string[]; defaultId: string; volumes: readonly LensVolume[]; volumeOf(id: string): LensVolume | null; current(): string; select(id: string, options?: { signal?: AbortSignal }): Promise<boolean>; subscribe(listener: (id: string) => void): () => void };
 type MockMount = Mutable<Omit<ObjectSceneLifecycle, 'navigation' | 'datasets'>> & { id: string; options: MountOptions & {proof?: string}; value: SharedView; calls: string[]; restores: number; publishCamera?(camera: WorldCameraPose): void; manualDataset?(id: string): void; datasets?: MockDataset; navigation?: ObjectWorldNavigation };
 type MockShell = { input: Record<string, never>; options: ShellOptions; destroyed: number; selected: string; playback?: unknown; datasetShown?: boolean; datasetNotice?: string | null; preparedFocus?: PreparedGalaxyRecord | null; focusSources?: readonly SpatialCitation[]; focusPresentation?: PreparedFocusPresentation | null; beginCardNavigation?: (object: ObjectEntry, world: unknown) => () => void; beginOverviewSelection?: (scope?: string) => (() => void) | void; setPlaybackState(value: unknown): void; showDataset(): void; setDatasetNotice(message: string | null): void; setMotionEnabled(value: boolean): void; setPreparedFocus(record: PreparedGalaxyRecord | null, sources: readonly SpatialCitation[], presentation: PreparedFocusPresentation | null): void; setObject(content: { id: string; apply(): void }): void; destroy(): void };
@@ -417,6 +417,27 @@ test('the minimap setting defaults off, reaches the retained context and survive
   h.router.destroy();
   required(settings.onMinimapChange)(true);
   assert.deepEqual(minimap, [false, true, false]);
+});
+
+test('the 3D stars setting defaults off, reaches the retained context and survives a body change', async () => {
+  const stars: boolean[] = [];
+  const h = harness({ persistentWorldContext: { async mount() {
+    return { selectObject() {}, publish() {}, destroy() {},
+      setThreeDStarsEnabled: (value: boolean) => stars.push(value) };
+  } } });
+  await h.router.settled;
+  const settings = h.shells[0].options;
+  assert.equal(settings.threeDStarsEnabled, false);
+  assert.deepEqual(stars, [false]);
+  required(settings.onThreeDStarsChange)(true);
+  await h.router.navigate('venus');
+  assert.equal(h.shells.length, 1);
+  assert.deepEqual(stars, [false, true]);
+  required(settings.onThreeDStarsChange)(false);
+  assert.deepEqual(stars, [false, true, false]);
+  h.router.destroy();
+  required(settings.onThreeDStarsChange)(true);
+  assert.deepEqual(stars, [false, true, false]);
 });
 
 test('entering overview on the current object changes selection without invoking focus or restoring the camera', async () => {

@@ -12,7 +12,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; surfaceLabelsEnabled?: boolean; onSurfaceLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; surfaceLabelsEnabled?: boolean; onSurfaceLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; threeDStarsEnabled?: boolean; onThreeDStarsChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -56,6 +56,8 @@ export function mountPlanetShell({
   onSurfaceLabelsChange = () => {},
   minimapEnabled = false,
   onMinimapChange = () => {},
+  threeDStarsEnabled = false,
+  onThreeDStarsChange = () => {},
   onCategoryChange = () => {},
 }: ShellOptions) {
   const drawer = requiredElement(documentTarget, ".planet-drawer-content");
@@ -285,7 +287,7 @@ export function mountPlanetShell({
     retain(createChartPixelAlignmentController(drawer, windowTarget));
     retain(createLensBrowserController(drawer, windowTarget, owner));
     settingsController = retain(createSettingsController(documentTarget, windowTarget,
-      { motionEnabled, onMotionChange, heliosphereEnabled, illustrationModelsEnabled, surfaceLabelsEnabled, minimapEnabled,
+      { motionEnabled, onMotionChange, heliosphereEnabled, illustrationModelsEnabled, surfaceLabelsEnabled, minimapEnabled, threeDStarsEnabled,
         onHeliosphereChange(enabled) { heliosphereEnabled = enabled; onHeliosphereChange(enabled); },
         onIllustrationModelsChange(enabled) {
           illustrationModelsEnabled = enabled;
@@ -294,6 +296,7 @@ export function mountPlanetShell({
         },
         onSurfaceLabelsChange(enabled) { surfaceLabelsEnabled = enabled; onSurfaceLabelsChange(enabled); },
         onMinimapChange(enabled) { minimapEnabled = enabled; onMinimapChange(enabled); },
+        onThreeDStarsChange(enabled) { threeDStarsEnabled = enabled; onThreeDStarsChange(enabled); },
       }, owner));
     const surfaceReader = retain(createSurfaceMapReader({ documentTarget, windowTarget }));
     minimapController = retain(createSurfaceMinimap({ drawer, documentTarget, windowTarget, surfaceReader,
@@ -377,7 +380,7 @@ function createSettingsController(
   windowTarget: BrowserWindow,
   { motionEnabled, onMotionChange, heliosphereEnabled, onHeliosphereChange,
     illustrationModelsEnabled, onIllustrationModelsChange, surfaceLabelsEnabled, onSurfaceLabelsChange,
-    minimapEnabled, onMinimapChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'surfaceLabelsEnabled' | 'onSurfaceLabelsChange' | 'minimapEnabled' | 'onMinimapChange'>>,
+    minimapEnabled, onMinimapChange, threeDStarsEnabled, onThreeDStarsChange }: Required<Pick<ShellOptions, 'motionEnabled' | 'onMotionChange' | 'heliosphereEnabled' | 'onHeliosphereChange' | 'illustrationModelsEnabled' | 'onIllustrationModelsChange' | 'surfaceLabelsEnabled' | 'onSurfaceLabelsChange' | 'minimapEnabled' | 'onMinimapChange' | 'threeDStarsEnabled' | 'onThreeDStarsChange'>>,
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
@@ -388,6 +391,7 @@ function createSettingsController(
   const illustrationModels = documentTarget.querySelector(".planet-illustration-models-setting");
   const surfaceLabels = documentTarget.querySelector(".planet-surface-labels-setting");
   const minimap = documentTarget.querySelector(".planet-minimap-setting");
+  const threeDStars = documentTarget.querySelector(".planet-three-d-stars-setting");
   const speed = documentTarget.querySelector(
     '.planet-speed-setting[type="range"][name="speed"]',
   );
@@ -396,13 +400,14 @@ function createSettingsController(
       !(illustrationModels instanceof windowTarget.HTMLInputElement) ||
       !(surfaceLabels instanceof windowTarget.HTMLInputElement) ||
       !(minimap instanceof windowTarget.HTMLInputElement) ||
+      !(threeDStars instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement))) {
     throw new Error("Planet shell settings controls are incomplete.");
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
   let motionOn = motionEnabled === true;
-  for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap]) input.disabled = false;
+  for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap, threeDStars]) input.disabled = false;
 
   const renderMotion = () => {
     motion.checked = motionOn;
@@ -446,6 +451,11 @@ function createSettingsController(
     onMinimapChange(minimapEnabled);
   }, { signal: events.signal });
   renderMinimap();
+  threeDStars.checked = threeDStarsEnabled === true;
+  threeDStars.addEventListener("change", () => {
+    threeDStarsEnabled = threeDStars.checked;
+    onThreeDStarsChange(threeDStarsEnabled);
+  }, { signal: events.signal });
   renderMotion();
 
   return Object.freeze({
@@ -470,7 +480,7 @@ function createSettingsController(
     },
     destroy() {
       events.abort();
-      for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap]) input.disabled = true;
+      for (const input of [motion, heliosphere, illustrationModels, surfaceLabels, minimap, threeDStars]) input.disabled = true;
       delete documentTarget.body.dataset.surfaceLabels;
     },
   });

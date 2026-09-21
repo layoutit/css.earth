@@ -30,7 +30,7 @@ function profile(withLenses = false) {
   };
 }
 
-const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "minimap", kind: "toggle" }, { name: "surfaceLabels", kind: "toggle" }, { name: "heliosphere", kind: "toggle" }, { name: "illustrationModels", kind: "toggle" }]);
+const sharedSettings = Object.freeze([{ name: "motion", kind: "toggle" }, { name: "minimap", kind: "toggle" }, { name: "surfaceLabels", kind: "toggle" }, { name: "threeDStars", kind: "toggle" }, { name: "heliosphere", kind: "toggle" }, { name: "illustrationModels", kind: "toggle" }]);
 type FixtureControls = { readonly lenses: null | { readonly defaultLens: string; readonly controls: readonly { readonly id: string }[] }; readonly settings: null | { readonly controls: readonly { readonly name: string; readonly kind: string }[] } };
 function snapshot(controls: FixtureControls = emptyControls) {
   const objectSettings = controls.settings?.controls ?? [];

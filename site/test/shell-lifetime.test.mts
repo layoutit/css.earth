@@ -89,7 +89,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
     ".planet-information-panel", ".planet-object-browser", ".planet-object-empty",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
-    ".planet-motion-setting", ".planet-surface-labels-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-minimap-setting"]) {
+    ".planet-motion-setting", ".planet-surface-labels-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-minimap-setting", ".planet-three-d-stars-setting"]) {
     const element = new Element();
     selectors.set(selector, element); elements.push(element);
   }
@@ -229,6 +229,26 @@ test('Minimap starts off, mirrors its state for the stylesheet and keeps the pre
       assert.equal(toggle.checked, enabled);
       assert.equal(f.documentTarget.body.dataset.minimap, enabled ? 'on' : 'off');
       assert.equal(f.selectors.element('.planet-surface-labels-setting').checked, false);
+    }
+  }
+  assert.deepEqual(changes, [true, false]);
+  shell.destroy();
+  assert.equal(toggle.disabled, true);
+  toggle.dispatchEvent(new Event('change'));
+  assert.deepEqual(changes, [true, false]);
+  assert.ok(f.elements.every(element => element.listeners.size === 0));
+});
+
+test('3D stars starts off and retains its independent preference across body navigation', () => {
+  const changes: boolean[] = [], f = fixture({ onThreeDStarsChange: value => changes.push(value) }), shell = f.mount();
+  const toggle = f.selectors.element('.planet-three-d-stars-setting');
+  assert.equal(toggle.checked, false); assert.equal(toggle.disabled, false);
+  for (const enabled of [true, false]) {
+    toggle.checked = enabled; toggle.dispatchEvent(new Event('change'));
+    for (const id of ['itokawa', 'sun', 'saturn']) {
+      shell.setObject({ id, name: id, apply() {}, dispose() {} });
+      assert.equal(toggle.checked, enabled);
+      assert.equal(f.selectors.element('.planet-minimap-setting').checked, false);
     }
   }
   assert.deepEqual(changes, [true, false]);

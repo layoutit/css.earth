@@ -3,7 +3,7 @@ import { mountBackgroundPoints } from './background-points.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import { mountPreparedCssVolume } from '../volume/prepared-volume-runtime.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
-import type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedCssVolume, VolumeCameraPublication } from '../volume/types.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -172,6 +172,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let stellarPoints: ReturnType<typeof mountStellarPoints> = null;
+      let stellarPointsEnabled = true;
+      let stellarPublication: VolumeCameraPublication | null = null, stellarOpacity = 0;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let labelBudget = createLabelBudget(0, 0);
       let labelBlockers: readonly LabelScreenRect[] = [];
@@ -468,6 +470,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (bank) { bank.setStarsVisible(enabled); return; }
             void ensureLensLoaded(index).catch(() => {});
           },
+          setStellarPointsEnabled(enabled: boolean) {
+            if (destroyed || stellarPointsEnabled === (enabled === true)) return;
+            stellarPointsEnabled = enabled === true;
+            if (stellarPublication) stellarPoints?.publish(stellarPublication, stellarPointsEnabled ? stellarOpacity : 0);
+          },
           subscribeVolumeLens(id: string, listener: (state: ReturnType<NonNullable<(typeof lensBanks)[number]>['state']>) => void) {
             const index = volumeLensBanks.findIndex(bank => bank.id === id);
             if (index < 0) return () => {};
@@ -548,7 +555,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             }
             publishBackground();
             skyLayer?.publish(world, viewport, publishedVolumeAlpha < 1, 1 - starsHandoff);
-            stellarPoints?.publish({world,viewport},stellarPointsOpacity(starsHandoff,publishedVolumeAlpha));
+            stellarPublication = { world, viewport };
+            stellarOpacity = stellarPointsOpacity(starsHandoff, publishedVolumeAlpha);
+            stellarPoints?.publish(stellarPublication, stellarPointsEnabled ? stellarOpacity : 0);
             if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.
