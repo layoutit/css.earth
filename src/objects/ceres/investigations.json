@@ -192,18 +192,16 @@
       "id": "dawn-vir-band-depth-mosaics",
       "subject": "Dawn VIR global band-depth mosaics, 2.7 µm and 3.1 µm (DAWN-A-VIR-5-DDR-CERES-MOSAIC-V1.0)",
       "status": "included",
-      "finding": "The archived CMT_MOSAIC-BI_DEPTH and CMT_MOSAIC-BII_DEPTH maps are drawn as the Clay band and Ammonium band lenses on the color scales of Frigeri et al. (2019), Figure 7. The archive states its artifact removal was not applied, so scan stripes remain, and its values are offset from the paper's histograms (2.7 µm median 0.255 against a peak near 0.20; 3.1 µm median 0.064 against a peak near 0.087); the lens text and README state this. East-positive placement is checked at Haulani and Cerealia Facula.",
+      "finding": "The archived CMT_MOSAIC-BI_DEPTH and CMT_MOSAIC-BII_DEPTH maps supply the Clay band and Ammonium band lenses, each colored over its own 2nd to 98th percentile (0.229 to 0.283; 0.047 to 0.089) with the rainbow core of Frigeri et al. (2019), Figure 7. On the paper's own ranges most of Ceres sat in the bar's dark ends: the archive (Survey spectra, Ammannito et al. 2016 continuum, no artifact removal) differs from the paper (Survey and HAMO, Carrozzo et al. 2016 correction). A one-cube HAMO reduction with Frigeri's continuum and the public calibration gives a 2.7 um median of 0.272, near the archive's 0.255.",
       "evidence": [
-        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/CATALOG/VIR_DDR_CERES_MOSAICS_DS.CAT",
-        "https://doi.org/10.1016/j.icarus.2018.04.019",
-        "https://github.com/layoutit/css.earth/blob/f067baedf12d3aea944f786105b63d151c84d9d8/src/objects/ceres/README.md",
-        "https://github.com/layoutit/css.earth/blob/f067baedf12d3aea944f786105b63d151c84d9d8/src/objects/ceres/evidence/band-depth/clay-band.png",
-        "https://github.com/layoutit/css.earth/blob/f067baedf12d3aea944f786105b63d151c84d9d8/src/objects/ceres/evidence/band-depth/ammonium-band.png"
+        "https://github.com/layoutit/css.earth/blob/e80b240ec4162f6765c8bf39d6692eedc9d9d27a/src/objects/ceres/README.md",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/",
+        "https://doi.org/10.1016/j.icarus.2018.04.019"
       ],
       "checked": [
         {
           "date": "2026-09-21",
-          "commit": "f067baedf12d3aea944f786105b63d151c84d9d8"
+          "commit": "e80b240ec4162f6765c8bf39d6692eedc9d9d27a"
         }
       ]
     },
@@ -223,6 +221,40 @@
           "commit": "f067baedf12d3aea944f786105b63d151c84d9d8"
         }
       ]
+    },
+    {
+      "id": "frigeri-2019-maps-as-data",
+      "subject": "Frigeri et al. (2019) 140 m spectral-parameter quadrangle maps as data",
+      "status": "excluded",
+      "finding": "The paper says the maps were exported as GeoTIFF, but they are not in the PDS, and the first author's GitHub repository ceres_spectral_parameter_maps holds only a README (last pushed 2017-12-19).",
+      "evidence": [
+        "https://github.com/afrigeri/ceres_spectral_parameter_maps",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "e80b240ec4162f6765c8bf39d6692eedc9d9d27a"
+        }
+      ],
+      "revisitWhen": "The maps are released in the PDS or another public archive."
+    },
+    {
+      "id": "frigeri-2019-reproduction",
+      "subject": "Our own reduction of the Survey and HAMO VIR cubes with Frigeri et al. (2019) processing",
+      "status": "deferred",
+      "finding": "One HAMO cube was reduced end to end (SPICE geometry per line with the scan-mirror CK, I/F with the archived solar spectrum, three-channel boxcar, Frigeri continuum). Geometry matches the label centre and incidence. The values match the archive, not the paper, because the Carrozzo et al. (2016) response correction the paper used was never released.",
+      "evidence": [
+        "https://doi.org/10.1063/1.4972256",
+        "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "e80b240ec4162f6765c8bf39d6692eedc9d9d27a"
+        }
+      ],
+      "revisitWhen": "The Carrozzo et al. (2016) artifact matrix or a corrected VIR calibration is released, or a sharper HAMO-resolution lens is wanted on the archive's own scale."
     }
   ]
 }
