@@ -19,7 +19,7 @@
       "tests": 19
     },
     "site": {
-      "implementations": 100,
+      "implementations": 98,
       "tests": 2
     },
     "site/components": {
@@ -31,7 +31,7 @@
       "tests": 152
     },
     "src/platform": {
-      "implementations": 63,
+      "implementations": 62,
       "tests": 48
     },
     "src/renderers/css/navigation": {
@@ -48,7 +48,7 @@
     },
     "tools": {
       "implementations": 151,
-      "tests": 108
+      "tests": 109
     },
     "tools/objects": {
       "implementations": 57,

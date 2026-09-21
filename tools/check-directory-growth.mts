@@ -12,9 +12,11 @@
  *   node tools/check-directory-growth.mts           fail if any directory exceeds its baseline
  *   node tools/check-directory-growth.mts --write   record the current counts as the baseline
  */
-import { readFile, readdir, writeFile } from 'node:fs/promises';
-import { relative, resolve } from 'node:path';
+import { execFile } from 'node:child_process';
+import { readFile, writeFile } from 'node:fs/promises';
+import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
+import { promisify } from 'node:util';
 
 /** A directory may hold this many authored modules before it is counted at all. */
 export const FREE_ALLOWANCE = 20;
@@ -32,24 +34,28 @@ const EXEMPT = [
 ];
 export const isExempt = (directory: string) => EXEMPT.some(pattern => pattern.test(directory));
 
+/** Tracked files only. Counting the working tree would let generated output into the baseline —
+ * `src/platform/solar-geometry.mts` alone is 26,968 generated lines — and would make the count
+ * depend on whether the reader had run `pnpm prebuild`. */
+export async function trackedFiles(root = process.cwd()): Promise<string[]> {
+  const { stdout } = await promisify(execFile)('git', ['ls-files', '-z', '--', ...ROOTS], { cwd: root, maxBuffer: 64 * 1024 * 1024 });
+  return stdout.split('\0').filter(Boolean);
+}
+
 /** Authored modules directly in each directory. Tests are counted separately from implementations
  * so that adding a test never reads as structural decay. */
-export async function countModules(root = process.cwd(), roots: readonly string[] = ROOTS) {
+export async function countModules(root = process.cwd(), list: (root: string) => Promise<string[]> = trackedFiles) {
   const counts = new Map<string, { implementations: number; tests: number }>();
-  async function walk(absolute: string) {
-    const directory = relative(root, absolute).replaceAll('\\', '/');
-    if (directory && isExempt(directory)) return;
-    let entries;
-    try { entries = await readdir(absolute, { withFileTypes: true }); } catch { return; }
-    let implementations = 0, tests = 0;
-    for (const entry of entries) {
-      if (entry.isDirectory()) { await walk(resolve(absolute, entry.name)); continue; }
-      if (!CODE.test(entry.name) || entry.name.endsWith('.d.ts') || entry.name.endsWith('.d.mts')) continue;
-      if (/\.test\.[cm]?tsx?$/u.test(entry.name) || /-browser\.mts$/u.test(entry.name)) tests++; else implementations++;
-    }
-    if (implementations + tests) counts.set(directory || '.', { implementations, tests });
+  for (const file of await list(root)) {
+    const path = file.replaceAll('\\', '/');
+    const directory = dirname(path);
+    if (directory === '.' || isExempt(directory)) continue;
+    const name = path.slice(path.lastIndexOf('/') + 1);
+    if (!CODE.test(name) || name.endsWith('.d.ts') || name.endsWith('.d.mts')) continue;
+    const count = counts.get(directory) ?? { implementations: 0, tests: 0 };
+    if (/\.test\.[cm]?tsx?$/u.test(name) || /-browser\.mts$/u.test(name)) count.tests++; else count.implementations++;
+    counts.set(directory, count);
   }
-  for (const entry of roots) await walk(resolve(root, entry));
   return counts;
 }
 
