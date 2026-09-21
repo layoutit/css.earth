@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "proxima-centauri",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34, star MD021 (Gl 551), merged spectrum corrected for slit losses",
+    "path": "photometry/xsl_spectrum_MD021_merged_scl.fits",
+    "service": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_MD021_merged_scl.fits",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "SPECTRUM",
+    "wavelength": {
+      "column": "WAVE",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "FLUX_SC",
+      "kind": "flux"
+    },
+    "gaps": [],
+    "note": "VLT/X-shooter spectrum taken 2014-01-15; FLUX_SC is the slit-loss-corrected flux. Proxima is a flare star, so the colour is one quiet or flaring moment."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "5a5b84afd3f4847d89a9610f6e42146321da680ccec29b4f49e9e20eb5490427"
+        "sha256": "893c705544eb71916cc1c8af8a0041f2b65e71a190b0eb55edad7f3e5e2a9a99"
       }
     },
     "catalog": {
       "name": "Arcturus",
       "classification": "star",
-      "color": "#ffd5b3",
+      "color": "#ffd8a5",
       "distanceAu": 2321996.7,
       "description": "Red giant 11.26 parsecs away; its photosphere is not imaged here.",
       "systemName": "Boötes",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "723befb61db3cbc3c32a43d65b223b7daef5f6b828c9a11c757f7b368975ff71"
+    "sha256": "9378b383c2bc35586678d90a26c24ae156c91317102bbfb31b6f82839221893c"
   }
 }

@@ -49,8 +49,8 @@
     {
       "id": "rigel-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1920,
-      "expectedSha256": "d349e0a4b11a912a09fdaf2ddcf631b1b435bd682df18928bbc2ec56e29ce99d",
+      "expectedBytes": 2059,
+      "expectedSha256": "0296dbe5cf35db4b5ba614d04ec471fc3e28b4d35d5cc12f9245efe959d2971e",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "rigel-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1676,
-      "expectedSha256": "f8554feb89c8ee7f5e40cc1ed544ef2a615e76c2814f50951d911b445a52e09f",
+      "expectedSha256": "fc1320f4f38d8a8fb3d6c719d9fb345199e2997d042ae8725be669b0d83c45ca",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,127 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "rigel-pulkovo-spectrophotometry",
+      "path": "photometry/pulkovo-table5.dat",
+      "expectedBytes": 935951,
+      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Raw catalogue flux file table5.dat downloaded unchanged from the CDS archive on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One catalogue file, unchanged, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/rigel/source/photometry/pulkovo-table5.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rigel-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1076,
+      "expectedSha256": "87812b9f95f5e6df2a1db27ddb14ffa82465a5f5c26d84c62882197d41df57b7",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/rigel/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "rigel-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/1201.0843",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 6347,
+      "expectedSha256": "5be5d954cc1e47446121a498a4a8c52d539b20b472e812c754b0391bb5fd44d5",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "rigel-observational-measurements"
+          "rigel-stellar-color",
+          "rigel-pulkovo-spectrophotometry",
+          "rigel-cie-1931-2deg-cmf",
+          "rigel-preparation-raster"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2856,
-      "expectedSha256": "4c5b5c709d64c00b29a71b96029870719500c2d03ed516eaf8b1ca5111ad4a7c",
+      "expectedBytes": 3075,
+      "expectedSha256": "942f06c0e678817195f5fd78326ff8f3ec304c41f5c4c77d6ba852bcc4d75967",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +265,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 541,
+      "expectedSha256": "f6ed6f9a61b92467b242b6c1fab7c2985e358e7e762afcdb4ace620203cc9d74"
     },
     {
       "path": "preparation/navigation.json",

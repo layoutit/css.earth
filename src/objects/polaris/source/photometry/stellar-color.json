@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "polaris",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST/STIS Next Generation Spectral Library v2 (Heap & Lindler; MAST high-level science product), HD 8890: 168-1020 nm",
+    "path": "photometry/h_stis_ngsl_hd008890_v2.fits",
+    "service": "https://archive.stsci.edu/pub/hlsp/stisngsl/v2/hd008890/h_stis_ngsl_hd008890_v2.fits",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "1",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "gaps": [],
+    "note": "Space spectrophotometry taken 2001-09-20. The header marks the spectrum good, with a slit offset of 0.815 pixel, under the 0.9 pixel limit for a reliable correction. Polaris is a low-amplitude Cepheid, so the colour is one moment of its 4-day cycle."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

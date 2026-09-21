@@ -1,0 +1,40 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "hd-209458",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "HST CALSPEC spectrum hd209458_stisnic_008.fits: HST/STIS spectrophotometry of HD 209458 on the CALSPEC flux scale (Bohlin et al. (2020), AJ 160, 21; FITS SOURCE keyword)",
+    "path": "photometry/hd209458_stisnic_008.fits",
+    "service": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/hd209458_stisnic_008.fits",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "SCI",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "quality": {
+      "column": "DATAQUAL",
+      "good": 1
+    },
+    "gaps": [
+      {
+        "fromNm": 476.8,
+        "toNm": 482.1,
+        "reason": "DATAQUAL 0 from 477.1 to 481.8 nm in the CALSPEC file"
+      },
+      {
+        "fromNm": 628.2,
+        "toNm": 637.1,
+        "reason": "DATAQUAL 0 from 628.8 to 636.6 nm in the CALSPEC file"
+      }
+    ],
+    "note": "Space spectrophotometry on the CALSPEC flux scale. Between 380 and 780 nm every sample is STIS measurement. Rows with DATAQUAL 0 are left out; the flagged stretches are declared gaps, bridged by a straight line between the good samples either side."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

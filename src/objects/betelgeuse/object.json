@@ -31,6 +31,11 @@
               "id": "matisse",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -100,13 +105,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8926f033d86fab9cb1258ede65337ba6accb1a032e7257cdb6d3119c1ffc0927"
+        "sha256": "ab518de5fcd8594d52af3d4dade4ec7a1a31aed04c9927462b62661f040729ad"
       }
     },
     "catalog": {
       "name": "Betelgeuse",
       "classification": "star",
-      "color": "#ffc392",
+      "color": "#ffc876",
       "distanceAu": 34652487.4,
       "description": "Red supergiant in Orion, resolved by the VLT interferometer.",
       "systemName": "Orion",
@@ -146,6 +151,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "409b688674a6a4c425ce84372fd786cb8e392bcdf7322007ab06b47087e23b90"
+    "sha256": "31352fa41ba1dbca0217f3539fdd3ef845f9fdc487861c42b946e03e7304e7ad"
   }
 }

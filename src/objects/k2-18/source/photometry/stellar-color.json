@@ -1,0 +1,25 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "k2-18",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "LAMOST DR11 v2.0 low-resolution spectrum, obsid 227610116 (Cui et al. 2012, RAA 12, 1197)",
+    "path": "photometry/spec-227610116-dr11v2.fits.gz",
+    "service": "https://www.lamost.org/dr11/v2.0/spectrum/fits/227610116",
+    "checked": "2026-09-21",
+    "format": "fits-table-array",
+    "extension": "COADD",
+    "wavelength": {
+      "column": "WAVELENGTH",
+      "unit": "angstrom"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "gaps": [],
+    "note": "Ground-based fibre spectrum taken 2014-03-21, 370-910 nm with a relative flux calibration, which is all a colour needs. The header carries a fibre warning (FIB_MASK 192); both pixel masks are zero."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1"
+}

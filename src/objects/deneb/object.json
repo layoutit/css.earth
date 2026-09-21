@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "9506dd1c11343ac4706660ffba3449184519690254c09fbdf09d101052d6cb50"
+        "sha256": "2adcda61325380fac4142e9e6226dd10cf026531a4d204a1a9fe3825c13080fe"
       }
     },
     "catalog": {
       "name": "Deneb",
       "classification": "star",
-      "color": "#d6e1ff",
+      "color": "#ccdaff",
       "distanceAu": 89292089.6,
       "description": "White supergiant about 433 parsecs away; its photosphere is not imaged here.",
       "systemName": "Cygnus",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "44ebbea5ccd35618a54096fc7f6fb01c77c2ad8bd4561d86d26ac58188b4a90e"
+    "sha256": "fdfc0cc531928a88ad9d654e36280a648eae1fe8a0192d5f507e8b05eb831c54"
   }
 }

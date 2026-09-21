@@ -9,6 +9,15 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_MD021_merged_scl.fits",
+      "path": "photometry/xsl_spectrum_MD021_merged_scl.fits"
     }
   ]
 }

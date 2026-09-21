@@ -67,6 +67,23 @@
           "commit": "c073f58a8c03314266a0c50e86ad973d9b6ff723"
         }
       ]
+    },
+    {
+      "id": "gravity-2023",
+      "subject": "VLTI/GRAVITY K-band spectro-interferometry, June 2023 (ESO programme 111.24K0, PI Ohnaka)",
+      "status": "unresolved",
+      "finding": "The ESO archive serves 57 pipeline-reduced GRAVITY products at Antares, found by an ObsCore query on 2026-09-21, public since June 2024: 13 June 2023 on the compact array (to 34 m, DUAL), 18-20 June on the medium array K0-G2-D0-J3 (to 104 m, SINGLE) and 27 June on the large array (to 129 m, DUAL), high spectral resolution. Three arrays in two weeks reach about 1.8 mas against a disc of about 40 mas, some 20 resolution elements, comparable to the Betelgeuse MATISSE image. The products are uncalibrated (VISCAL UNCALIBRATED) and need the pipeline calibration step (gravity_viscal) against the archived calibrators (eps Sco on 12 June, omi Sco on 18 June); no raw reduction is needed. Whether the DUAL-mode files track on Antares itself or on Antares B is not checked, and no published GRAVITY image of Antares exists to compare against. The ESO programmes 109.22WQ.002 (one night, 2022) and 111.24LM (monthly compact-array monitoring, 2023) are thinner.",
+      "revisitWhen": "Calibrate the June 2023 products with gravity_viscal, pin them, and test an image reconstruction against the medium and large array coverage.",
+      "evidence": [
+        "http://archive.eso.org/tap_obs",
+        "https://dataportal.eso.org/dataPortal/file/ADP.2026-03-04T19:28:16.109"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "cf0e44e4cf7c565d8144e290a7737ac3761f4cfa"
+        }
+      ]
     }
   ]
 }

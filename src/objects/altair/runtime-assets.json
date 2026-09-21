@@ -2,29 +2,29 @@
   "schema": "cssaltair-runtime-assets@1",
   "assets": [
     {
-      "filename": "altair-context-shape@2x.webp",
+      "filename": "altair-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "altair-lens-shape.webp",
-      "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "filename": "altair-lens-color.webp",
+      "bytes": 172,
+      "sha256": "0eba2f5ed960706e0c83c4b6daa68dfc27916f7eee013008285c62c7f422b1e3"
     },
     {
-      "filename": "altair-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "altair-limb-color@2x.webp",
+      "bytes": 94728,
+      "sha256": "cbd79b06b6a360446094ef94724d101371b1ea85da74e6d1a9228cf0c25af860"
     },
     {
-      "filename": "altair-poles-shape@2x.webp",
-      "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "filename": "altair-poles-color@2x.webp",
+      "bytes": 2876,
+      "sha256": "b7d1c6336f0e13f7e776fde2a145c8d30265a5306f87a1946b977f1ea6ec5607"
     },
     {
-      "filename": "altair-surface-shape@2x.webp",
-      "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "filename": "altair-surface-color@2x.webp",
+      "bytes": 2310,
+      "sha256": "dd226a648ca6b02e3f6a468b14e51d2b2a119c643d8834746a632c6535fa0c0a"
     }
   ]
 }

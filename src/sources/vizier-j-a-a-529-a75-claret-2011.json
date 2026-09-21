@@ -1,0 +1,42 @@
+{
+  "id": "vizier-j-a-a-529-a75-claret-2011",
+  "kind": "model",
+  "identityLevel": "work",
+  "title": "Claret & Bloemen (2011) limb-darkening coefficients for ATLAS and PHOENIX model atmospheres (VizieR J/A+A/529/A75)",
+  "identifiers": [
+    {
+      "type": "VizieR catalogue",
+      "value": "J/A+A/529/A75"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/529/A75",
+      "label": "VizieR J/A+A/529/A75"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/529/A75/ReadMe",
+      "checkedOn": "2026-09-21",
+      "locator": "table-af (tableab.dat): logg, Teff, Z, xi, quadratic a and b, Filt, Met (L least squares), Mod (A ATLAS, P PHOENIX); I(mu)/I(1) = 1 - a(1-mu) - b(1-mu)^2"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "scope": "citation",
+      "evidence": "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+    },
+    {
+      "kind": "limitation",
+      "text": "Coefficients computed from plane-parallel model atmospheres, not measured on any star.",
+      "scope": "interpretation",
+      "evidence": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/529/A75/ReadMe"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

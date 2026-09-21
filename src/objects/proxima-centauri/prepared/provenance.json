@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "0069c01da3693fbbace04c895f2e7ce72acf8380b6c8eb19250f7409adcd0140"
+    "sha256": "b753e5683437491357469bf3177d38235b1dd2326db252ba405ce2bc12eddff0"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "b8e0e8f3e7636d3b7aed3eddeca3508a4a0c149901ff00b5fa8fb3b7cb892c65"
+    "bindingsSha256": "e1312dc040e72148488251cc8cdcb2ad1c120bf69e187539d31f26d88932b5f3"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "dc484f644ca1d929869df61715b11d917ceda5a85297291aaa4af8e53fecbdf7",
+      "sha256": "9c8aebb9ded1ebf935060e63188e95e344b3cfc81248ddde42e4ccbb0e750044",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/proxima-centauri/",
@@ -39,14 +39,15 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "proxima-centauri-surface-{id}{suffix}.webp",
             "thumbnail": "proxima-centauri-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
             }
           }
         ],
@@ -82,7 +83,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "da83256dc5e85ef1c129425815e78066d57be310b2898573bf0c9fa0cc7e9c10",
+      "sha256": "79a325f2b491ea7c3bb0e066a457fecafb670570105e3905eba11447b167546f",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +122,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "proxima-centauri-lens-shape.webp",
-              "surface": "proxima-centauri-surface-shape@2x.webp",
-              "poles": "proxima-centauri-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+              "thumbnail": "proxima-centauri-lens-color.webp",
+              "surface": "proxima-centauri-surface-color@2x.webp",
+              "poles": "proxima-centauri-poles-color@2x.webp",
               "source": {
-                "id": "proxima-centauri-observational-measurements",
+                "id": "proxima-centauri-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/0906.0602"
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of Proxima Centauri's VLT/X-shooter spectrum. ESO's Very Large Telescope observed it on 15 January 2014; Proxima flares, so this is one moment. No resolved image of the surface is cast here."
             }
           ]
         },
@@ -151,6 +152,12 @@
             "role": "facts",
             "description": "Demory, Ségransan, Forveille et al., \"Mass-radius relation of low and very low-mass stars revisited with the VLTI\", A&A 505, 205 (2009), arXiv:0906.0602",
             "href": "https://arxiv.org/abs/0906.0602"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "X-Shooter Spectral Library DR3: MD021 (Proxima Centauri)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
           }
         ],
         "provenance": {
@@ -172,19 +179,59 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "proxima-centauri-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/0906.0602",
-      "credit": "Demory, Ségransan, Forveille et al., \"Mass-radius relation of low and very low-mass stars revisited with the VLTI\", A&A 505, 205 (2009), arXiv:0906.0602",
+      "id": "proxima-centauri-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
+      "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
       "sourceBinding": {
-        "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "xsl-dr3-md021",
+            "role": "material",
+            "evidence": "src/objects/proxima-centauri/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
       },
-      "sha256": "1e99bdac138d876328048414dee1ef048f96ef2dda1635ac45fd590820086bcd",
-      "bytes": 1425,
+      "sha256": "777962b8783673899b27d6b12fcd65f2e207c41fb886dcfa475ff3ede4fef7bb",
+      "bytes": 973,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "proxima-centauri-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -203,8 +250,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "da83256dc5e85ef1c129425815e78066d57be310b2898573bf0c9fa0cc7e9c10",
-      "bytes": 2976,
+      "sha256": "79a325f2b491ea7c3bb0e066a457fecafb670570105e3905eba11447b167546f",
+      "bytes": 3169,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +260,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,35 +280,36 @@
         "falseColor": false
       },
       "inputs": [
-        "proxima-centauri-observational-measurements"
+        "proxima-centauri-stellar-color",
+        "proxima-centauri-cie-1931-2deg-cmf"
       ],
       "outputs": [
         {
-          "url": "/scenes/proxima-centauri/proxima-centauri-surface-shape@2x.webp",
+          "url": "/scenes/proxima-centauri/proxima-centauri-surface-color@2x.webp",
           "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "sha256": "e4f02a9df46f81c555251725068eacec6e3e92faacb3c1f959eec75d93c6982f",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/proxima-centauri/proxima-centauri-lens-shape.webp",
+          "url": "/scenes/proxima-centauri/proxima-centauri-lens-color.webp",
           "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "sha256": "edca032595fef144dff2f9c563139c20416bbd6f5e17cee5ca6423fd536038de",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/proxima-centauri/proxima-centauri-poles-shape@2x.webp",
+          "url": "/scenes/proxima-centauri/proxima-centauri-poles-color@2x.webp",
           "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "sha256": "ae67fb897b1666ff3defd2075279ca34ae076a2e939d0d355e27a613721ee7e2",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/proxima-centauri/proxima-centauri-context-shape@2x.webp",
+          "url": "/scenes/proxima-centauri/proxima-centauri-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/proxima-centauri/proxima-centauri-limb-shape@2x.webp",
+          "url": "/scenes/proxima-centauri/proxima-centauri-limb-color@2x.webp",
           "bytes": 84,
           "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
           "verification": "bytes-verified"
@@ -269,7 +317,7 @@
       ],
       "inputEvidence": [
         {
-          "sourceId": "proxima-centauri-observational-measurements",
+          "sourceId": "proxima-centauri-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +343,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 9780,
-          "sha256": "2afd41f8b8a84c8f5d6309dd9ac0dc37e332a3333f81f738161cc48db6753b35",
+          "bytes": 9954,
+          "sha256": "97f03f014bb555b4ee18ae7ac6d974943d849632f724389e0694cfb70869eba9",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +361,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 448,
+          "sha256": "285cab649a4e789411c8bc41672fc11d16c62be7aa1d3f8a75e2e1323caba6af",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +382,11 @@
   },
   "lastPreparation": {
     "objectId": "proxima-centauri",
-    "materialSha256": "aa763c8f07ef7be62809cb8dd6564d2bab369eab7aac1fa5b4c5444b74c2711f",
+    "materialSha256": "19752c2c97186b06d6dc133496278882595bbf2830d99984cb119d21330403b1",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "b8e0e8f3e7636d3b7aed3eddeca3508a4a0c149901ff00b5fa8fb3b7cb892c65"
+      "bindingsSha256": "e1312dc040e72148488251cc8cdcb2ad1c120bf69e187539d31f26d88932b5f3"
     }
   }
 }

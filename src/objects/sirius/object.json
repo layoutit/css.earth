@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "e214d0bfb001e9e52b8c1f3ee922788c2b390f2320c4196e12657a0e820d005b"
+        "sha256": "5a89603dc126593f35a0326de32b069548663abe5a024b56bf54af4ceb75fc5b"
       }
     },
     "catalog": {
       "name": "Sirius",
       "classification": "star",
-      "color": "#cbdbff",
+      "color": "#b3c8ff",
       "distanceAu": 543910,
       "description": "A-type star 2.64 parsecs away; its photosphere is not imaged here.",
       "systemName": "Canis Major",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "42bec959a4869823ec70622658c94bf2403fe641a98640e9397b803f854b5512"
+    "sha256": "43b71ee8187ca50e4d448b38e6aec3d3d56fe9fc7ec5a85fb2dcc2470145ca3c"
   }
 }

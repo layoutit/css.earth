@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/aldebaran/aldebaran-surface-shape@2x.webp",
+      "url": "/scenes/aldebaran/aldebaran-surface-color@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/aldebaran/aldebaran-poles-shape@2x.webp",
+      "url": "/scenes/aldebaran/aldebaran-poles-color@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -22,7 +22,7 @@
     "polarRadiusScale": 1.035,
     "polarOffset": 0.1,
     "uv": "cell",
-    "color": "#ffcca3"
+    "color": "#ffcb8d"
   },
   "projection": {
     "tileSize": 50,

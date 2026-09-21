@@ -63,24 +63,26 @@
   background-image: var(--aldebaran-poles-image) !important;
 }
 
-/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px. */
+/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px, times the sphere's
+   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
 .planet-stage[data-object-id="aldebaran"] .aldebaran-corona-layer {
   background-image: var(--aldebaran-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * var(--aldebaran-camera-zoom, 1))
-    calc(600px * var(--aldebaran-camera-zoom, 1));
+    calc(600px * 1.25 * var(--aldebaran-camera-zoom, 1))
+    calc(600px * 1.25 * var(--aldebaran-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
 .planet-stage[data-object-id="aldebaran"] .aldebaran-limb-layer {
   background-image: var(--aldebaran-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--aldebaran-camera-zoom, 1))
-    calc(496px * var(--aldebaran-camera-zoom, 1));
+    calc(496px * 1.25 * var(--aldebaran-camera-zoom, 1))
+    calc(496px * 1.25 * var(--aldebaran-camera-zoom, 1));
 }
 
 .planet-stage[data-object-id="aldebaran"] .polycss-camera {

@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "af43e6a073b86a2239b881f54376d04da40c7c7f12d405c44f8ff6079372378d"
+        "sha256": "e521280b24e56fd9895a979f3883b5bf3217f341f7be819168499e2e173c2fa9"
       }
     },
     "catalog": {
       "name": "Kepler-452",
       "classification": "star",
-      "color": "#fff2e6",
+      "color": "#ffece1",
       "distanceAu": 114254911.2,
       "description": "Sun-like star about 554 parsecs away that hosts Kepler-452 b.",
       "systemName": "Kepler-452 system",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "f1145024b6a22e9d632b47fc203fbce8be1574916f3e160f39891958076bb175"
+    "sha256": "8e60a7bed9deb3f9f874ba5018e35b256a492e1c4cfd6ca245bc3d64563bbdff"
   }
 }

@@ -107,6 +107,18 @@
           "consumer": "sphere-photograph"
         }
       }
+    },
+    {
+      "id": "color",
+      "output": "betelgeuse-surface-{id}{suffix}.webp",
+      "thumbnail": "betelgeuse-lens-{id}.webp",
+      "source": "photometry/stellar-color.json",
+      "falseColor": false,
+      "science": {
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Uniform photosphere colour from the star's VLT/X-shooter spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+      }
     }
   ],
   "emission": {

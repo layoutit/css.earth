@@ -12,15 +12,14 @@ Radius: Stellar radius 0.411 ± 0.038 solar radii from Sarkis et al. (2018), AJ 
 
 Rotation: Sarkis et al. 2018 measure a 39.63 ± 0.50 day rotation period from photometry; no spin axis is measured, so none is adopted The display axis is celestial north at the star, a convention.
 
-Shape lens: a sphere of the measured radius in neutral gray. No image of the surface is shown.
+Colour lens: The colour of K2-18's LAMOST spectrum. The LAMOST survey telescope observed it on 21 March 2014, with a relative flux calibration and a fibre warning in the file. Its samples from 380 to 780 nm are weighted by the CIE 1931 2° observer and converted to sRGB with the D65 white, brightest channel full ([stellar-photometric-color.mts](../../../tools/objects/observation/stellar-photometric-color.mts)): **#ffc796**. The file, how it is read and the full citation are in [stellar-color.json](source/photometry/stellar-color.json). The disc is darkened toward its edge by the quadratic V-band law that Claret & Bloemen (2011, A&A 529, A75) compute from PHOENIX model atmospheres, read at 3457 K and log g 4.77: the edge is 17% as bright as the centre. That law is a model, not a measurement of this star. Gravity: log g from the astronomy record's GM and radius (physicalNotes), log10(GM/R^2) in cgs. The catalogue swatch, the minimap and the navigation marker use the same colour. [stellar-spectra/author.mts](../../../tools/objects/source-authoring/stellar-spectra/author.mts) writes the colours from these inputs, and `--check` recomputes them.
 
-Catalogue colour: #ffbf8a, the swatch that search, the catalogue and the minimap show. It is the shared star field's temperature-to-colour fit (`temperatureColor` in [color.ts](../../../src/preparation/stars/color.ts), the fit the HYG stars around it are drawn with) at the effective temperature recorded in [measurements.json](source/measurements.json). Effective temperature 3457 ± 39 K from Sarkis et al. 2018 (AJ 155, 257; <https://arxiv.org/abs/1805.00830>), Table 2, the radius source, which adopts it from Benneke et al. 2017. The fit is a display colour, not a spectrum, and the sphere itself stays neutral gray.
 
 ## Evidence
 
-Run of 2026-09-21:
+Run of 2026-09-21 (this version):
 
-- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffbf8a is the star field's colour at the cited 3457 K.
+- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffc796 is the colour lens's prepared colour and that the limb-darkening law is read at the recorded temperature and gravity; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour and marker from the pinned spectrum.
 
 ## Known problems
 

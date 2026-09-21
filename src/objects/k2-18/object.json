@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "75697b15e363a175a4a453b382c3c930e1e6a92084d751e177ef22089297223b"
+        "sha256": "a7bd04647c148b6b0fe2a81d09a42638caa3b1c657726d1985553c21347435aa"
       }
     },
     "catalog": {
       "name": "K2-18",
       "classification": "star",
-      "color": "#ffbf8a",
+      "color": "#ffc796",
       "distanceAu": 7858629.1,
       "description": "Red dwarf 38 parsecs away that hosts the planet K2-18 b.",
       "systemName": "K2-18 system",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "862efffd561b66ac7aae988c47711a27a54537145777f252435d00c5b79e8705"
+    "sha256": "968769c4ea70c062960b21d8be46497bd62595bc8b06e227726bb612693e174c"
   }
 }

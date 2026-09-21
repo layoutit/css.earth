@@ -4,8 +4,8 @@
     {
       "id": "aldebaran-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1334,
-      "expectedSha256": "03dedbe6ea559a789fcde407336682da05f6789fb6fd2298c78e9751fb2aeeff",
+      "expectedBytes": 1580,
+      "expectedSha256": "a256a3386c39109669dc3e5fc76ee6999c4f45fa9955a8e703fe98317b55982e",
       "origin": "https://arxiv.org/abs/astro-ph/0502181",
       "credit": "Richichi and Roccatagliata, \"Aldebaran’s angular diameter: How well do we know it?\", A&A 433, 305 (2005), arXiv:astro-ph/0502181",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "aldebaran-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1952,
-      "expectedSha256": "0a712799d4236d3bcca7f116e66a481a69e930eb77277f0872136e12eea1b2f3",
+      "expectedBytes": 2731,
+      "expectedSha256": "d041c61fcc8131f660d1f5f080e248655688a9c2dacddedfbfe5a60fb8c76ee1",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "aldebaran-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1704,
-      "expectedSha256": "9e6c4f9856ad1eded7394fb2afc78ceae9119b96c0e33d0cfc70bdf871405274",
+      "expectedSha256": "23a1c152a4ded145703007b35677f4af72f201f4b6c3107cea7a39b32a576dbd",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,156 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "aldebaran-kiehling-1987",
+      "path": "photometry/kiehling-1987.tsv",
+      "expectedBytes": 6206,
+      "expectedSha256": "b0d95cfe9e22f48e8e120a4e2cb7c68501c17efa5aa1c3af46039ff49dfed04a",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for III/124/spectra, columns lambda and m(HR1457), with the response's dated comment lines and blank lines removed so the bytes are stable; saved 2026-09-21; restored through source/preparation/acquisition.json.",
+      "redistribution": "One catalogue column, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr1457",
+            "role": "material",
+            "evidence": "src/objects/aldebaran/source/photometry/kiehling-1987.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aldebaran-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1044,
+      "expectedSha256": "a13cf072415614ee767fb16cc6b8b9b1eabb004731c3d4c5d669ad9343fa4156",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr1457",
+            "role": "material",
+            "evidence": "src/objects/aldebaran/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aldebaran-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "aldebaran-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "8914b4d5dc90737f77d5890dcfdb99f6ad8c81f4320d676ef20de03a0f7f361f",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/aldebaran/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/astro-ph/0502181",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 53241,
+      "expectedSha256": "575d3e6695379e004d7cc54624f77e277f35c2bafe3b678f88877c1297fc5b2e",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "aldebaran-observational-measurements"
+          "aldebaran-stellar-color",
+          "aldebaran-kiehling-1987",
+          "aldebaran-cie-1931-2deg-cmf",
+          "aldebaran-preparation-raster",
+          "aldebaran-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2916,
-      "expectedSha256": "424859b91401986a2d80d4ed519bf77cd30357bda67a5c3985e17712257ffcbd",
+      "expectedBytes": 3193,
+      "expectedSha256": "84cde6228e18b8e509a971bbbd60fd29bba5a913ea805f3a340ca5e5f0390e6c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +294,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1797,
+      "expectedSha256": "f0b8a32a6baacb5493ccbc89c63f2c504ac77d22c25a1c8423325f9cdb7162da"
     },
     {
       "path": "preparation/navigation.json",

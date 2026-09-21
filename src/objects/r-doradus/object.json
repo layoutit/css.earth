@@ -36,6 +36,11 @@
               "id": "shape",
               "source": "content",
               "material": "emission"
+            },
+            {
+              "id": "color",
+              "source": "content",
+              "material": "emission"
             }
           ]
         }
@@ -105,13 +110,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "ce3b4e86e42bae51c80cbd593bb0c8379d3bebda26fd2159ca2e76981d277013"
+        "sha256": "73eebb889fd54007c7c2cda746ac71b6637c2bc9ef0103f2753404da99ca1038"
       }
     },
     "catalog": {
       "name": "R Doradus",
       "classification": "star",
-      "color": "#ffa758",
+      "color": "#ff6725",
       "distanceAu": 11265291.9,
       "description": "A red giant measured at 57 milliarcseconds: wider, its observers concluded, than any star but the Sun.",
       "systemName": "Dorado",
@@ -151,6 +156,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "dd76d53b6540eeb15371cdc69bb2c85c2088bc36f8c7d8ff264d5e890214c858"
+    "sha256": "3b8a050ac2ba65bd530749b5bd34e62407081d51ec4e587a88721ef1fd8cc901"
   }
 }

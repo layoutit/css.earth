@@ -2,29 +2,29 @@
   "schema": "csssirius-runtime-assets@1",
   "assets": [
     {
-      "filename": "sirius-context-shape@2x.webp",
+      "filename": "sirius-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "sirius-lens-shape.webp",
+      "filename": "sirius-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "58ee77cfff2db716403679f5f60043ec0a40eb50e3a02c38e963b591879c67ed"
     },
     {
-      "filename": "sirius-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "sirius-limb-color@2x.webp",
+      "bytes": 92760,
+      "sha256": "781d29f42ea1777544af41302751cf41655a309a04f8f71e1caa4f178484360c"
     },
     {
-      "filename": "sirius-poles-shape@2x.webp",
+      "filename": "sirius-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "6ea0e0a90553e1a1e6e9f39732d5c0155d23b78d943bc4d06cc49160715c5078"
     },
     {
-      "filename": "sirius-surface-shape@2x.webp",
+      "filename": "sirius-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "5f87784f54db9d5518f79a69e8ae4c1971ff1af1f40d8edce95f493ee5902705"
     }
   ]
 }

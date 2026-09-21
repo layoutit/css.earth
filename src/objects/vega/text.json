@@ -15,7 +15,7 @@
     ]
   },
   "introduction": {
-    "text": "Vega is a rapidly rotating A-type star 7.68 parsecs away, wider at its equator than at its poles. Here it is a plain sphere of the same volume.",
+    "text": "Vega is a rapidly rotating A-type star 7.68 parsecs away, wider at its equator than at its poles. It is drawn that shape, pole toward us.",
     "sources": [
       {
         "catalogueId": "arxiv-1211-6055",
@@ -28,10 +28,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Sphere of the measured radius",
-      "detail": "No image",
-      "summary": "A sphere at the published size in neutral gray. No picture of the surface is cast here."
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "Spectrum and spin",
+      "summary": "Measured colour, with hot bright poles and a cool equator from the star's fast spin. The darker edge is a model."
     }
   }
 }

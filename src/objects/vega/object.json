@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -36,8 +36,9 @@
         }
       ],
       "shape": {
-        "kind": "sphere",
-        "radiusKm": 1822180
+        "kind": "ellipsoid",
+        "radiusKm": 1896478,
+        "polarRadiusKm": 1682203
       },
       "materials": [
         {
@@ -100,13 +101,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "dfe53e837e92f82a2faacab35a05e5d4bae4d7225e573adad62b91d0c46c6f77"
+        "sha256": "236dc31b6f6a1fa3f5d5be5bfd4aa9f776d28eda601300427a5bc6d56189095f"
       }
     },
     "catalog": {
       "name": "Vega",
       "classification": "star",
-      "color": "#ceddff",
+      "color": "#b3c9ff",
       "distanceAu": 1583769.6,
       "description": "Rapidly rotating A-type star 7.68 parsecs away; its photosphere is not imaged here.",
       "systemName": "Lyra",
@@ -119,33 +120,33 @@
       "referenceFrame": "sun-icrf",
       "epochJdTt": 2461286.5,
       "originM": [
-        29644120170396630,
+        29644120170396640,
         -182289536278880580,
-        148414604038353180
+        148414604038353150
       ],
       "presentationToReference": [
-        0.12512211029269993,
-        0.10052151806621042,
-        -0.9870359071085338,
-        -0.7694089578341932,
-        -0.6182634857331963,
-        -0.16049958820364302,
-        0.6263819227279813,
-        -0.7795163158104533,
-        0.000016275596624120248
+        -0.8714239495647694,
+        0.2205192927439847,
+        -0.43816839417355435,
+        0.10757368157355915,
+        -0.7855984934714625,
+        -0.6093134744021991,
+        0.4785898067841071,
+        0.5781057416970198,
+        -0.6608672697745667
       ],
       "orbitUpReference": [
-        -0.10052151806621042,
-        0.6182634857331963,
-        0.7795163158104533
+        -0.2205192927439847,
+        0.7855984934714625,
+        -0.5781057416970198
       ],
-      "metersPerUnit": 5878000,
-      "bodyRadiusM": 1822180000
+      "metersPerUnit": 6117670.9677419355,
+      "bodyRadiusM": 1896478000
     }
   },
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "883573b5cb28186cc752dae42e9f0ad1cddf546cec2a313c89ade536def42bbc"
+    "sha256": "5e0290e28b66c99e7bdd92cc0fa0e6f195bf0907a26abd7a514fc9c77dc7969b"
   }
 }

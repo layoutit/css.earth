@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7975405b3a02479fa744cf72b833c1494b85c0e165c517779624faab81d71dc"
+    "sha256": "1bfa76626ae29fb85b889a75161ce9766248b9aeff90ecb38aa12de73fe79e37"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "8eb8567bdcb62f4c78618cbcc6e1dd304635643a7c50fb98c75c9de3f61d2bcf"
+    "bindingsSha256": "e73b27eed176c266f82f581944347c4aac8583eef4d530858d680e08e1279138"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "dbf4214eb4a80b98786427dfe6d33849ffe730e97f93da2731a1056535ed3d64",
+      "sha256": "6a7c084080cc52e7b083f60a246f2d740e1e313ebd6f3638284e3068ee26e818",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/vega/",
@@ -39,14 +39,35 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "color",
             "output": "vega-surface-{id}{suffix}.webp",
             "thumbnail": "vega-lens-{id}.webp",
-            "source": "measurements.json",
+            "source": "photometry/stellar-color.json",
             "falseColor": false,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (CALSPEC). The surface is darkened by latitude from the published Roche-von Zeipel fit of Monnier et al. (2012), ApJL 761, L3: the hot poles brighter and bluer, the cool equator dimmer and redder. The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+              "limbDarkening": {
+                "law": "quadratic",
+                "path": "photometry/claret-2011-v-quadratic.tsv",
+                "grid": {
+                  "teffK": 9360,
+                  "logg": 3.93,
+                  "models": {
+                    "Filt": "V",
+                    "Met": "L",
+                    "Mod": "A"
+                  }
+                },
+                "columns": {
+                  "teff": "Teff",
+                  "logg": "logg",
+                  "u1": "a",
+                  "u2": "b"
+                }
+              },
+              "gravityDarkening": "photometry/gravity-darkening.json"
             }
           }
         ],
@@ -82,7 +103,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "ae11d4d15eaab02bbc759be4f072f66907a8778c3f95ff16d46b8f1107efb187",
+      "sha256": "d0cfdabff33fb592eab0d964b1d59981feca480aa9233d637f716bcb59a5ae64",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -121,22 +142,22 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "color",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-              "thumbnail": "vega-lens-shape.webp",
-              "surface": "vega-surface-shape@2x.webp",
-              "poles": "vega-poles-shape@2x.webp",
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from Hubble's spectrum of the star. The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement.",
+              "thumbnail": "vega-lens-color.webp",
+              "surface": "vega-surface-color@2x.webp",
+              "poles": "vega-poles-color@2x.webp",
               "source": {
-                "id": "vega-observational-measurements",
+                "id": "vega-stellar-color",
                 "path": "../manifest.json",
-                "url": "https://arxiv.org/abs/1211.6055"
+                "url": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
               },
               "falseColor": false,
-              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+              "notes": "The colour of the Hubble Space Telescope's calibrated STIS spectrum of Vega, a CALSPEC flux standard. No resolved image of the surface is cast; the display axis is celestial north, a convention."
             }
           ]
         },
@@ -151,6 +172,12 @@
             "role": "facts",
             "description": "Monnier, Che, Zhao et al., \"Resolving Vega and the inclination controversy with CHARA/MIRC\", ApJ 761, L3 (2012), arXiv:1211.6055",
             "href": "https://arxiv.org/abs/1211.6055"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "HST CALSPEC alpha_lyr_stis_012 (Bohlin et al. (2020), AJ 160, 21 flux scale)",
+            "href": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec"
           }
         ],
         "provenance": {
@@ -172,19 +199,143 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "vega-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://arxiv.org/abs/1211.6055",
-      "credit": "Monnier, Che, Zhao et al., \"Resolving Vega and the inclination controversy with CHARA/MIRC\", ApJ 761, L3 (2012), arXiv:1211.6055",
+      "id": "vega-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
+      "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "calspec-alpha-lyr-stis-012",
+            "role": "material",
+            "evidence": "src/objects/vega/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "10d7157ca73cb272f2b8a0d2cb35d004bf12704e43c965733f436d5733851cb7",
+      "bytes": 1028,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "vega-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "vega-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/vega/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      },
+      "sha256": "de6a63dfd66cea6eac15656b598f390568a6df70c8a71eea342643198ed4c0b6",
+      "bytes": 844,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "request-download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "photometry/claret-2011-v-quadratic.tsv",
+        "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+        "form": {
+          "-source": "J/A+A/529/A75/table-af",
+          "-out.max": "500",
+          "Teff": "9000..9750",
+          "logg": "3.5..4.0",
+          "Z": "=0",
+          "xi": "=2",
+          "Filt": "V",
+          "Met": "L",
+          "Mod": "A",
+          "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+        },
+        "requiredText": [
+          "logg\tTeff"
+        ],
+        "replacements": [
+          {
+            "pattern": "^#.*\\n",
+            "flags": "gm",
+            "replacement": ""
+          },
+          {
+            "pattern": "^\\s*\\n",
+            "flags": "gm",
+            "replacement": ""
+          }
+        ]
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "vega-roche-von-zeipel",
+      "path": "photometry/gravity-darkening.json",
+      "origin": "https://arxiv.org/abs/1211.6055",
+      "credit": "Monnier et al. (2012), ApJL 761, L3",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed from the paper's table in the authors' LaTeX source, with each cell quoted",
       "redistribution": "Factual parameter transcription only; no paper figures",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "reason": "Published model parameters transcribed in this package with their table cells; repinned when edited."
       },
-      "sha256": "bfa9a9b43f59e70b0d063e5abfac70ed3e728e72f62e69f3c564ebc2f64c86bf",
-      "bytes": 1696,
+      "sha256": "4cb2283a1953c1b01dc50cdf48947534c51d411820479646c9468b0dd8b14af3",
+      "bytes": 1827,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -203,8 +354,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "ae11d4d15eaab02bbc759be4f072f66907a8778c3f95ff16d46b8f1107efb187",
-      "bytes": 2830,
+      "sha256": "d0cfdabff33fb592eab0d964b1d59981feca480aa9233d637f716bcb59a5ae64",
+      "bytes": 3261,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -213,18 +364,18 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "color",
+      "label": "Color",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+        "Colour from Hubble's spectrum of the star. The poles are hotter and brighter than the equator, from a fit to interferometric images; the disc is unresolved in colour, and its darker edge follows a model limb-darkening law, not a measurement."
       ],
       "lensIds": [
-        "shape"
+        "color"
       ],
       "recipeDependencies": [
         "raster"
@@ -233,43 +384,46 @@
         "falseColor": false
       },
       "inputs": [
-        "vega-observational-measurements"
+        "vega-stellar-color",
+        "vega-cie-1931-2deg-cmf",
+        "vega-claret-2011-v-quadratic",
+        "vega-roche-von-zeipel"
       ],
       "outputs": [
         {
-          "url": "/scenes/vega/vega-surface-shape@2x.webp",
-          "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "url": "/scenes/vega/vega-surface-color@2x.webp",
+          "bytes": 1830,
+          "sha256": "65018073fe6546dd617d0544eeb5951b3c285910d7319d3ceb24e4e5f8a27242",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/vega/vega-lens-shape.webp",
-          "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "url": "/scenes/vega/vega-lens-color.webp",
+          "bytes": 162,
+          "sha256": "1965309f57089dfcb20d526b3888e949d1c901108e0046a26088279679392317",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/vega/vega-poles-shape@2x.webp",
-          "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "url": "/scenes/vega/vega-poles-color@2x.webp",
+          "bytes": 2834,
+          "sha256": "1d63065904feaa732db5bc8e978fa0fdf10b5eab4b5871df24a5289a7e516021",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/vega/vega-context-shape@2x.webp",
+          "url": "/scenes/vega/vega-context-color@2x.webp",
           "bytes": 100,
           "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/vega/vega-limb-shape@2x.webp",
-          "bytes": 84,
-          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "url": "/scenes/vega/vega-limb-color@2x.webp",
+          "bytes": 93026,
+          "sha256": "10343d3ee670bf2e99938442525096e299596c98df2bab2bd686296750adac1d",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "vega-observational-measurements",
+          "sourceId": "vega-stellar-color",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
@@ -295,16 +449,16 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4756,
-          "sha256": "b77865858b7710d66576e675c07c73008731d9ad66dfb8b2a8f286b985b2ba14",
+          "bytes": 5007,
+          "sha256": "eb5cfd5665e25b911af47dca0aed3a75e359dc1b3e707ad4902034d798eea877",
           "verification": "bytes-verified"
         }
       ],
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:color",
+      "label": "Color preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -313,16 +467,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "color"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 1308,
+          "sha256": "46c8c937a9db198d19ffde421c327f0b7dbc64c6a9d885480e86c3fa86fd549e",
           "verification": "bytes-verified"
         }
       ]
@@ -334,11 +488,11 @@
   },
   "lastPreparation": {
     "objectId": "vega",
-    "materialSha256": "da7ea4f8c3c50145e72f198c0473f1e3dcdf4d0873a9a1246a86b0ef6c8adfd1",
+    "materialSha256": "2c958f07e68d8c2fd1a254c7cce5b70a6e60442f685808a8dbea74d7a2166860",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "8eb8567bdcb62f4c78618cbcc6e1dd304635643a7c50fb98c75c9de3f61d2bcf"
+      "bindingsSha256": "e73b27eed176c266f82f581944347c4aac8583eef4d530858d680e08e1279138"
     }
   }
 }

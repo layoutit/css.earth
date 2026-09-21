@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "d40c7164095b9c06e25c544ec56e39b5b6536c24fde6bade86c32ff050b0230f"
+        "sha256": "1b46fd8de093a4857f47a5b846580cf9dc9bb2a69e8ac1b43cd2085ef967607b"
       }
     },
     "catalog": {
       "name": "Aldebaran",
       "classification": "star",
-      "color": "#ffcca3",
+      "color": "#ffcb8d",
       "distanceAu": 4214956.1,
       "description": "Red giant 20.43 parsecs away; its photosphere is not imaged here.",
       "systemName": "Taurus",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "8403a6f0a0ab00cee587742dec8647e4872c9c66a51c787e9ffe73e8dd3e009d"
+    "sha256": "04499665dada90f2032e8663b43734b1f12beee48377688358393a9c699ce7dc"
   }
 }

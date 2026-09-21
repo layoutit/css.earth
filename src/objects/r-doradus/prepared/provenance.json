@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "fc9cef1e47d62316de861eb876dbf20acd75ae78160eaa133439799b143fa50f"
+    "sha256": "de1f69de830f9ca43cc26f366894e7ccbe6217045d88c17dbe5aa4c79cd9a1cb"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "5753bc67246cc194085ce117f463936191f5b95aaa6c3cb52f64220d70dfe49c"
+    "bindingsSha256": "749f48e5930a9211ec91233051951161b5e5734ce713282a9f64d25fe6b8f5f5"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "b6a1e71358b52920f7133b5634a865d680abc1cc217803d83fef8f4ea7a9d0f9",
+      "sha256": "74eec4b29c4602939dd68916ca405cc21719a0e943a01d61409adc21af408e40",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/r-doradus/",
@@ -137,6 +137,18 @@
               "kind": "neutral-shape",
               "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
             }
+          },
+          {
+            "id": "color",
+            "output": "r-doradus-surface-{id}{suffix}.webp",
+            "thumbnail": "r-doradus-lens-{id}.webp",
+            "source": "photometry/stellar-color.json",
+            "falseColor": false,
+            "science": {
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's VLT/UVES spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+            }
           }
         ],
         "emission": {
@@ -171,7 +183,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
+      "sha256": "d5c6577bc1ec0a6144bbb529597faf514293820bd3dec951165d0a1d23bc32d4",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -302,6 +314,21 @@
               },
               "falseColor": false,
               "notes": "A sphere of the published radius with no image cast on it, for comparison with the ALMA lens. Neutral gray is a display convention, not a measured colour; the display axis is celestial north at the star, also a convention."
+            },
+            {
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured.",
+              "thumbnail": "r-doradus-lens-color.webp",
+              "surface": "r-doradus-surface-color@2x.webp",
+              "poles": "r-doradus-poles-color@2x.webp",
+              "source": {
+                "id": "r-doradus-stellar-color",
+                "path": "../manifest.json",
+                "url": "https://www.eso.org/sci/observing/tools/uvespop.html"
+              },
+              "falseColor": false,
+              "notes": "The colour of R Doradus's VLT/UVES spectrum. It was taken on 27 December 2002 through a narrow slit with the atmospheric dispersion corrector off, so the colour is uncertain; R Doradus also varies. No resolved image of the surface is cast here."
             }
           ]
         },
@@ -316,6 +343,12 @@
             "role": "facts",
             "description": "Vlemmings et al. (2024), ALMA 2022.1.01071.S",
             "href": "https://doi.org/10.1038/s41586-024-07836-9"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "UVES POP merged spectrum of HD 29712 (R Doradus)",
+            "href": "https://www.eso.org/sci/observing/tools/uvespop.html"
           }
         ],
         "provenance": {
@@ -469,6 +502,66 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "r-doradus-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://www.eso.org/sci/observing/tools/uvespop.html",
+      "credit": "ESO UVES Paranal Observatory Project (Bagnulo et al.); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "uves-pop-hd29712",
+            "role": "material",
+            "evidence": "src/objects/r-doradus/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "51b2f7a43f20dfce6ea15c1a099b398f7adf4eddbb10986cd3a080747fbbfb36",
+      "bytes": 1273,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "r-doradus-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -481,8 +574,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "3d1c859899590960b5e45595fbc0da2571db71c44fec7ea66bad488169e25d59",
-      "bytes": 5592,
+      "sha256": "d5c6577bc1ec0a6144bbb529597faf514293820bd3dec951165d0a1d23bc32d4",
+      "bytes": 6648,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -667,6 +760,71 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "color",
+      "label": "Color",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Colour from a measured spectrum of the star (VLT/UVES). The disc is unresolved, and no darkening toward the edge is measured."
+      ],
+      "lensIds": [
+        "color"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "r-doradus-stellar-color",
+        "r-doradus-cie-1931-2deg-cmf"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/r-doradus/r-doradus-surface-color@2x.webp",
+          "bytes": 178,
+          "sha256": "1b0e9730d9c1b747ee6653cd07724bc2acdccb80e88f8d5ed04640236b7c30c1",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/r-doradus/r-doradus-lens-color.webp",
+          "bytes": 44,
+          "sha256": "f77b07188f2288d4a268295004d89a10293946e5c815376608d08a06c3e32ed0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/r-doradus/r-doradus-poles-color@2x.webp",
+          "bytes": 1340,
+          "sha256": "f5dad6469bf8615225f90390c9be8c03444b547c05826045e92d904cc5bdf8a5",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/r-doradus/r-doradus-context-color@2x.webp",
+          "bytes": 220,
+          "sha256": "621226388c2d514f742c00ec6ac0f5e8643c575dbeaa8fa41da4b266182c4fc2",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/r-doradus/r-doradus-limb-color@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "r-doradus-stellar-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -685,8 +843,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 6730,
-          "sha256": "bdaf93fafa9dbd5e18a80859782a801ef01b2be0ce340a9aba1cc1e0b15d64c8",
+          "bytes": 6893,
+          "sha256": "b2b6a381926d4a129d2109f8852da5db678206fbf43ecdba01ba7305f7c02237",
           "verification": "bytes-verified"
         }
       ],
@@ -741,6 +899,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:color",
+      "label": "Color preview",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 456,
+          "sha256": "9fc357e1f39fdfb6f236fa610ac7fcf3d82c838dc124e999eddaa72ee83b3fd9",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -749,11 +932,11 @@
   },
   "lastPreparation": {
     "objectId": "r-doradus",
-    "materialSha256": "6caf82e479f05d1a9743a28b7f37df715e3c71a90d16d4289f088c4f86116bb4",
+    "materialSha256": "a28761cf00792835cf003fd6bbf77dce6c38cdc5b06f7c071f8ad846ace11332",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "5753bc67246cc194085ce117f463936191f5b95aaa6c3cb52f64220d70dfe49c"
+      "bindingsSha256": "749f48e5930a9211ec91233051951161b5e5734ce713282a9f64d25fe6b8f5f5"
     }
   }
 }

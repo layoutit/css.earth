@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "8e03274a395ccc62c586620b83b38261193bb27363640efd84ca78ba97665c26"
+        "sha256": "85d45b246dfcfa92364d807085a68d0ab6d493cfc02facfa71ede7e3cecbbb3a"
       }
     },
     "catalog": {
       "name": "Polaris",
       "classification": "star",
-      "color": "#fff6ed",
+      "color": "#fff9fa",
       "distanceAu": 28237559.6,
       "description": "Supergiant Cepheid at the celestial pole; its photosphere is not imaged here.",
       "systemName": "Ursa Minor",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "176c71fe58d81b5c82d2b6ad97cb495382dc59348356b0ff4e2d250d1161319a"
+    "sha256": "bebc6950de9545fb1fc6def48814705a9996c66636f951479dc30c6d0fd1fdb9"
   }
 }
