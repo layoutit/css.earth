@@ -397,6 +397,66 @@ test('hover-only trails reveal the full orbit and keep their circle and label be
   layer.destroy();
 });
 
+test('open trajectories stay hidden until their body circle is hovered', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1), body = source.bodies[0]!;
+  const verticesM = [[-100, -50, 0], [-50, -30, 0], [0, -10, 0], [100, 0, 0],
+    [150, 20, 0], [200, 50, 0], [250, 90, 0], [300, 140, 0]];
+  const context = parsePreparedWorldContext({ ...source, bodies: [{ ...body, orbit: {
+    centerBodyId: 'sun', centerPositionM: [0, 0, 0], verticesM, closed: false,
+    bodyVertexIndex: 3, displayExtentAu: 600, trailModel: 'finite-open-trajectory-constant-weight',
+    trail: Array(7).fill(1), activeChords: [0, 1, 2, 3, 4, 5, 6], extentChords: [0, 3, 1, 5, 2, 4, 6],
+  } }, source.bodies[1]!] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite } });
+  const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  publish();
+  const root = layer.root as unknown as FakeElement;
+  const circle = find(root, 'contextBody', 'mercury'), orbit = find(root, 'contextOrbit', 'mercury');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
+  expect(orbit.style.opacity).toBe('0');
+  circle.dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(orbit.style.opacity).not.toBe('0');
+  expect(layer.inspect().find(entry => entry.id === 'mercury')!.orbit.some(piece => paintedOrbitLeaf(piece))).toBe(true);
+  circle.dataset.objectHovered = 'false';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(orbit.style.opacity).toBe('0');
+  layer.destroy();
+});
+
+test('an unlabelled minor body cannot leave an anonymous orbit across the stage', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: plan(1), sprites: { sun: sprite, mercury: sprite, venus: sprite },
+    annotationPriorities: { mercury: 1, venus: 3 } });
+  layer.setHiddenLabels(['mercury']);
+  const publish = () => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600 });
+  publish();
+  const root = layer.root as unknown as FakeElement;
+  const marker = find(root, 'contextBody', 'mercury'), orbit = find(root, 'contextOrbit', 'mercury');
+  expect(annotationVisibility(marker, 'indicator')).toBe('hidden');
+  expect(orbit.style.opacity).toBe('0');
+  marker.dataset.objectHovered = 'true';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(annotationVisibility(marker, 'indicator')).toBe('');
+  expect(orbit.style.opacity).not.toBe('0');
+  marker.dataset.objectHovered = 'false';
+  host.dispatchEvent(new Event('objecthoverchange'));
+  document.defaultView.advance(16); publish(); document.defaultView.advance(200);
+  expect(orbit.style.opacity).toBe('0');
+  layer.destroy();
+});
+
 test('hidden annotations leave the physical dot pickable and hover reveals the complete annotation', () => {
   const root = mount(1), layer = mounted.get(root)!, nodes = all(root);
   const clock = root.ownerDocument.defaultView, host = root.parentNode!;
@@ -587,6 +647,28 @@ test('accepts the generated Sun context and rejects detached or malformed prepar
     expect(() => parsePreparedWorldContext({ ...source,
       bodies: bodies.map(body => body === parent ? { ...body, systemView } : body) })).toThrow();
   }
+});
+
+test('the Earth reference remains painted when its physical marker has faded at outer-system scale', async () => {
+  const context = parsePreparedWorldContext(JSON.parse(await readFile(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url), 'utf8')));
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 1280; host.clientHeight = 720; host.append(before);
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: Object.fromEntries([context.focus, ...context.bodies].map(body => [body.id, sprite])),
+    annotationPriorities: Object.fromEntries(SCENE_OBJECTS.map(object => [object.id,
+      labelImportance(object.classification, object.discovery.featured, object.discovery.orientationReference ?? 0)])),
+  });
+  layer.setOverview(true);
+  layer.publish({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
+    pose: { positionM: [0, 0, 233.27 * 149_597_870_700], orientationXyzw: [0, 0, 0, 1] } },
+  { focalPixels: 1100, principalOffsetPixels: [0, 0], widthPixels: 1280, heightPixels: 720 });
+  const earth = layer.inspect().find(body => body.id === 'earth')!;
+  expect(annotationVisibility(earth.billboard, 'indicator')).toBe('hidden');
+  expect(annotationVisibility(earth.billboard, 'label')).toBe('');
+  expect(earth.billboard.style.visibility).toBe('');
+  expect(Number(earth.billboard.style.opacity)).toBeGreaterThan(0);
+  expect(earth.orbit.some(paintedOrbitLeaf)).toBe(false);
+  layer.destroy();
 });
 
 test('prepared planetary systems retain identified moon paths and retire offscreen context annotations', async () => {
@@ -872,6 +954,31 @@ test('camera updates retain fixed stroke styles and only publish changed orbit p
   layer.setNavigationInFlight(true); layer.setNavigationInFlight(false);
   expect(orbitWrites).not.toHaveBeenCalled();
   expect(orbit.dataset.objectNavigate).toBe('mercury');
+  layer.destroy();
+});
+
+test('distant ordinary bodies stop intercepting navigation while retained bodies remain selectable', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: [source.bodies[0],
+    { ...source.bodies[1], positionM: [0, 100, 0], orbit: orbit([0, 100, 0], 1) }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite },
+    distantNavigation: { afterDistanceM: 500, nonNavigableIds: ['mercury'] } });
+  const root = layer.root as unknown as FakeElement;
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  publish(400);
+  expect(find(root, 'contextBody', 'mercury').dataset.objectNavigate).toBe('mercury');
+  expect(find(root, 'contextBody', 'venus').dataset.objectNavigate).toBe('venus');
+  publish(600);
+  expect(find(root, 'contextBody', 'mercury').dataset.objectNavigate).toBeUndefined();
+  expect(find(root, 'contextOrbit', 'mercury').dataset.objectNavigate).toBeUndefined();
+  expect(find(root, 'contextBody', 'venus').dataset.objectNavigate).toBe('venus');
+  publish(400);
+  expect(find(root, 'contextBody', 'mercury').dataset.objectNavigate).toBe('mercury');
   layer.destroy();
 });
 
@@ -1288,7 +1395,7 @@ test.each(['pointer', 'keyboard'])('a hidden moon annotation reveals together on
   layer.destroy();
 });
 
-test('hover keeps a circle label inside the viewport when every normal placement is clipped', () => {
+test('an in-frame circle and caption stay visible and constrained at the viewport edge', () => {
   const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
   host.clientWidth = 800; host.clientHeight = 600; host.append(before);
   const source = plan(1);
@@ -1301,13 +1408,16 @@ test('hover keeps a circle label inside the viewport when every normal placement
     { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const root = layer.root as unknown as FakeElement;
   const circle = find(root, 'contextBody', 'mercury'), label = find(root, 'contextLabel', 'mercury');
-  expect(annotationVisibility(circle, 'indicator')).toBe('hidden');
-  expect(annotationVisibility(label, 'label')).toBe('hidden');
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
+  expect(annotationVisibility(label, 'label')).toBe('');
+  const beforeHover = captionPosition(label);
   circle.dataset.objectHovered = 'true';
   host.dispatchEvent(new Event('objecthoverchange'));
   document.defaultView.advance(16); document.defaultView.advance(200);
+  expect(annotationVisibility(circle, 'indicator')).toBe('');
   expect(annotationVisibility(label, 'label')).toBe('');
   const [x, y] = captionPosition(label);
+  expect([x, y]).toEqual(beforeHover);
   expect(x).toBeGreaterThanOrEqual(-396); expect(x + label.dataset.contextName.length * 6).toBeLessThanOrEqual(396);
   expect(y).toBeGreaterThanOrEqual(-296); expect(y + 14).toBeLessThanOrEqual(296);
   layer.destroy();
@@ -1461,8 +1571,8 @@ test('an offscreen context body keeps the ring the camera crosses; explicit sele
     {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600});
   const body = layer.inspect().find(entry => entry.id === 'mercury')!;
   expect(body.billboard.style.visibility).toBe('hidden');
-  // The body is off screen and unnamed, but its path still crosses the viewport: the
-  // camera draws the ring it can see instead of retiring it with the absent caption.
+  // The body is off screen and cannot own an annotation, but its path still crosses
+  // the viewport and remains useful in the ordinary context view.
   expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   layer.setOverview(false); layer.selectObject('mercury');
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,

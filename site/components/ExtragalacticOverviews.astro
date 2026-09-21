@@ -37,7 +37,6 @@ const groups = [
   <PlanetCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
     <PlanetBreadcrumbs scope={group.id} />
   </PlanetCardHeader>
-  <div data-object-navigation-slot data-navigation-current={group.id}></div>
   <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
     tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />
   <div class="planet-object-results-scroll planet-card-tabpanel" id={`${group.id}-objects-content`} hidden

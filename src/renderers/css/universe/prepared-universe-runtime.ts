@@ -3,7 +3,7 @@ import { mountBackgroundPoints } from './background-points.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
 import { mountPreparedCssVolume } from '../volume/prepared-volume-runtime.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
-import type { PreparedCssVolume } from '../volume/types.js';
+import type { PreparedCssVolume, VolumeCameraPublication } from '../volume/types.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
 import { logarithmicFade, mountPreparedWorldContext, parsePreparedWorldContext, preparedVolumeOpacity } from './prepared-world-context.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -13,7 +13,6 @@ import type { PreparedAssets } from '../rendering/prepared-residency.js';
 import type { PreparedCssSurfaceShell } from '../shell/types.js';
 import { mountPreparedCssSurfaceShell } from '../shell/prepared-shell-runtime.js';
 import { mountPreparedCssSky } from '../sky/prepared-sky-runtime.js';
-import type { OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import { mountEnvironmentLabels } from './environment-labels.js';
 import { mountPreparedGalaxyCatalog } from './prepared-galaxy-catalog.js';
 import { mountPreparedCssImageLayers } from '../image-layers/prepared-image-layer-runtime.js';
@@ -29,6 +28,7 @@ import type { WorldContextPublication } from './world-context-frame.js';
 import { createWorldContextPlannerClient } from './world-context-planner-client.js';
 import { prefetchPreparedResources } from '../rendering/prepared-prefetch.js';
 import { createLabelBudget } from '../labels/universe-label-policy.js';
+import { mountStellarPoints, stellarPointsOpacity } from './stellar-points.js';
 
 /** Prepared, route-independent surroundings. One application owner holds the decoded bank and DOM. */
 // Galaxy files download from this fraction of the volume's fade-start distance:
@@ -41,7 +41,7 @@ type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource
 type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource }: {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -50,6 +50,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   sprites: Readonly<Record<string, SpriteWithUrl>>;
   annotationPriorities?: Readonly<Record<string, number>>;
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
+  distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
   shells?: readonly { payload: PreparedCssSurfaceShell; resolveResource(path: string): string }[];
   environmentLinks?: Readonly<Record<string, string>>;
   imageLayers?: readonly PreparedImageLayerBank[];
@@ -170,6 +171,9 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256);
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
+      let stellarPoints: ReturnType<typeof mountStellarPoints> = null;
+      let stellarPointsEnabled = true;
+      let stellarPublication: VolumeCameraPublication | null = null, stellarOpacity = 0;
       let spatial: ReturnType<typeof mountPreparedWorldContext> | null = null;
       let labelBudget = createLabelBudget(0, 0);
       let labelBlockers: readonly LabelScreenRect[] = [];
@@ -330,21 +334,25 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       const mountedShells = [...shells];
       let selected = plan.focus;
       let destroyed = false;
-      let highContrastSky = false, volumeOpacity = 0, volumeBrightness = 1, volumeSize = 1;
+      let volumeOpacity = 0, volumeBrightness = 1, volumeSize = 1;
       let publishedVolumeAlpha = NaN, publishedImageAlpha = NaN, publishedSkyAlpha = NaN;
       let publishedVolumeOpacity = NaN, publishedVolumeBrightness = NaN;
       let publishedVolumeVisible: boolean | undefined, publishedScale = '';
-      // The baked star cube holds the Sun's near stars. As the camera leaves the Sun's neighbourhood the 3D star field takes
-      // over those stars at their catalogue positions; the star cube, which would show them from the wrong place, hands the
-      // background to the plain Milky Way cube, which still holds from another star.
+      // The baked star cube holds the Sun's near view. As the camera leaves the
+      // neighbourhood, its stars hand off to the direct 3D sample while the plain
+      // Milky Way cube remains behind both until the completed volume replaces it.
       let starsHandoff = 0;
       const publishBackground = () => {
-        const brightness = highContrastSky ? 1 : volumeBrightness;
-        // The completed images contribute (1-t)*sky + t*b*volume. Factoring
-        // t*b onto the volume avoids nesting its exposure inside its handoff.
-        // Compensate the opaque sky underlay so its contribution stays 1-t.
+        const brightness = volumeBrightness;
+        // The volume's prepared exposure is part of its visible contribution. Keep the
+        // opaque sky underneath it until that completed contribution actually replaces it;
+        // fading the sky by raw volume opacity leaves a black trough while b is still low.
         const alpha = skyLayer ? volumeOpacity * brightness : volumeOpacity;
-        if (alpha !== publishedVolumeAlpha) { volumeHost.style.opacity = String(alpha); publishedVolumeAlpha = alpha; }
+        if (alpha !== publishedVolumeAlpha) {
+          volumeHost.style.opacity = String(alpha);
+          if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - alpha);
+          publishedVolumeAlpha = alpha;
+        }
         // The galaxy's own slices fade with its projected size; the matte and sky handoff do not.
         const imageAlpha = (skyLayer ? 1 : brightness) * volumeSize;
         if (imageAlpha !== publishedImageAlpha) {
@@ -352,7 +360,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           volumeImage.style.display = imageAlpha > 0 ? '' : 'none';
           publishedImageAlpha = imageAlpha;
         }
-        const skyAlpha = alpha < 1 ? (1 - volumeOpacity) / (1 - alpha) : 0;
+        const skyAlpha = 1;
         if (skyLayer && skyAlpha !== publishedSkyAlpha) { skyLayer.root.style.opacity = String(skyAlpha); publishedSkyAlpha = skyAlpha; }
       };
       const destroy = () => {
@@ -360,7 +368,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         destroyed = true;
         for (let index = 0; index < lensGeneration.length; index++) lensGeneration[index]++;
         prefetchAbort.abort();
-        volumeLayer?.destroy(); skyLayer?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
+        volumeLayer?.destroy(); skyLayer?.destroy(); stellarPoints?.destroy(); spatial?.destroy(); focusPoint?.destroy(); environmentLabels?.destroy();
         for (const shell of shellLayers) shell.destroy();
         for (const bank of imageBanks) bank?.destroy(); galaxyCatalog?.destroy();
         for (const bank of lensBanks) bank?.destroy();
@@ -371,6 +379,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       };
       try {
         if (payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
+        stellarPoints = mountStellarPoints({ host: root, before: volumeHost, field: pointAppearance });
         volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
         for (const [index, bank] of declaredImageLayers.entries()) if (initialImageLayers.has(bank.id)) void ensureImageLayerLoaded(index);
         // Image and volume lens banks mount lazily; far layers have no payload or DOM until admitted.
@@ -385,7 +394,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, opacityClock });
+        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' });
         const bodyAnnotations = spatial.inspect();
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock });
@@ -461,6 +470,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (bank) { bank.setStarsVisible(enabled); return; }
             void ensureLensLoaded(index).catch(() => {});
           },
+          setStellarPointsEnabled(enabled: boolean) {
+            if (destroyed || stellarPointsEnabled === (enabled === true)) return;
+            stellarPointsEnabled = enabled === true;
+            if (stellarPublication) stellarPoints?.publish(stellarPublication, stellarPointsEnabled ? stellarOpacity : 0);
+          },
           subscribeVolumeLens(id: string, listener: (state: ReturnType<NonNullable<(typeof lensBanks)[number]>['state']>) => void) {
             const index = volumeLensBanks.findIndex(bank => bank.id === id);
             if (index < 0) return () => {};
@@ -495,14 +509,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
           },
           previewSelection(id?: string | null) { selectionPreview = id; spatial!.previewSelection(id); },
           setOverview(enabled: boolean) { overview = enabled; spatial!.setOverview(enabled); },
-          setHighContrastSky(enabled: boolean) {
-            if (destroyed || highContrastSky === enabled) return;
-            highContrastSky = enabled;
-            publishBackground();
-          },
           setNavigationInFlight(active: boolean) { spatial!.setNavigationInFlight(active); focusPoint?.setNavigationEnabled(!active); },
           setHiddenOrbits(ids: readonly string[]) { spatial!.setHiddenOrbits(ids); },
-          setOrbitRenderer(renderer: OrbitRenderer) { spatial!.setOrbitRenderer(renderer); },
           setHiddenBodies(ids: readonly string[]) { spatial!.setHiddenBodies(ids); },
           setHiddenLabels(ids: readonly string[]) { spatial!.setHiddenLabels(ids); },
           setSuppressedLabels(ids: readonly string[]) { spatial!.setSuppressedLabels(ids); },
@@ -540,14 +548,16 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
             if (volumeVisible !== publishedVolumeVisible) { volumeHost.style.display = volumeVisible ? '' : 'none'; publishedVolumeVisible = volumeVisible; }
             if (volumeOpacity !== publishedVolumeOpacity) {
               volumeHost.dataset.volumeOpacity = String(volumeOpacity);
-              if (skyLayer) skyLayer.root.dataset.skyContribution = String(1 - volumeOpacity);
               publishedVolumeOpacity = volumeOpacity;
             }
             if (volumeBrightness !== publishedVolumeBrightness) {
               volumeImage.dataset.volumeBrightness = String(volumeBrightness); publishedVolumeBrightness = volumeBrightness;
             }
             publishBackground();
-            skyLayer?.publish(world, viewport, volumeOpacity < 1, 1 - starsHandoff);
+            skyLayer?.publish(world, viewport, publishedVolumeAlpha < 1, 1 - starsHandoff);
+            stellarPublication = { world, viewport };
+            stellarOpacity = stellarPointsOpacity(starsHandoff, publishedVolumeAlpha);
+            stellarPoints?.publish(stellarPublication, stellarPointsEnabled ? stellarOpacity : 0);
             if (volumeOpacity > 0 && volumeSize > 0) volumeLayer!.publish({ world, viewport });
             // A galaxy under a few projected pixels is its label: its bank fades, then
             // leaves layout and compositing. Like lens banks, a faded image bank does too.

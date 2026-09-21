@@ -9,40 +9,26 @@ import { validateSphereSource } from './sphere.mts';
 import { inspectSpatialObject } from './spatial-handoff.mts';
 import { contextTarget, sourceContext } from './delivery-context.mts';
 import type { FamilyOperation } from './family-handlers.mts';
-import { executableFamilyOperations } from './family-operation.mts';
+import { verifiedExecutableFamilyOperations } from './family-operation.mts';
 
 const unavailable = (kind:OutputChoice['kind'],reason:string):OutputChoice => ({kind,available:false,reason});
 const available = (kind:OutputChoice['kind'],reason:string,parameters:readonly string[]=[]):OutputChoice => ({kind,available:true,reason,...(parameters.length?{parameters}:{})});
+export interface ArtifactOutputInspection {readonly artifact:string;readonly target?:string;readonly source:unknown;readonly sourceContext?:ReturnType<typeof sourceContext>;readonly outputs:readonly OutputChoice[];readonly terminal?:boolean;readonly profiles?:readonly {readonly handlerId:string;readonly profileId:string}[];readonly issues?:readonly string[];readonly familyOperations?:readonly FamilyOperation[];readonly [key:string]:unknown}
 
-type DeliveryOutputs = Awaited<ReturnType<typeof listDeliveryOutputs>>;
-export interface ArtifactOutputs {
-  readonly artifact:string;
-  readonly target?:unknown;
-  readonly source:string|DeliveryOutputs['source'];
-  readonly outputs:OutputChoice[];
-  readonly sourceContext?:DeliveryOutputs['sourceContext'];
-  readonly native?:DeliveryOutputs['native'];
-  readonly terminal?:boolean;
-  readonly profiles?:{handlerId:string;profileId:string}[];
-  readonly issues?:string[];
-  readonly familyOperations?:readonly FamilyOperation[];
-  readonly via?:string;
-}
-
-export async function listArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputs>{
+export async function listArtifactOutputs(path:string,structure?:string):Promise<ArtifactOutputInspection>{
   const artifact=resolve(path),raw=requireRecord(JSON.parse(await readFile(artifact,'utf8')));
   if(raw.schema==='cssearth-telescope-local-import@1'){
     if(structure!==undefined)throw new TypeError('--structure does not select a local-import member.');
     const declarations=raw.declarations===undefined?undefined:requireRecord(raw.declarations,'import declarations');
     const profiles=requireArray(raw.proposedProfiles,'proposed profiles').map(value=>{const row=requireRecord(value,'proposed profile');return {handlerId:requireString(row.handlerId,'handler id'),profileId:requireString(row.profileId,'profile id')};});
     const issues=requireArray(raw.issues,'import issues').map(value=>requireString(requireRecord(value,'import issue').reason,'import issue reason'));
-    if(raw.descriptor!==undefined){const descriptor=requireRecord(raw.descriptor,'qualified import descriptor'),relativePath=requireString(descriptor.path,'qualified descriptor path');if(relativePath!=='descriptor.json'||!Number.isSafeInteger(descriptor.bytes)||typeof descriptor.sha256!=='string')throw new TypeError('Qualified import descriptor pin is invalid.');const path=resolve(artifact,'..',relativePath),pin=await pinFile(path);if(pin.bytes!==descriptor.bytes||pin.sha256!==descriptor.sha256)throw new Error('Qualified import descriptor pin changed.');const value=JSON.parse(await readFile(path,'utf8'));return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:path,outputs:[],profiles,issues,familyOperations:executableFamilyOperations(value)};}
+    if(raw.descriptor!==undefined){const descriptor=requireRecord(raw.descriptor,'qualified import descriptor'),relativePath=requireString(descriptor.path,'qualified descriptor path');if(relativePath!=='descriptor.json'||!Number.isSafeInteger(descriptor.bytes)||typeof descriptor.sha256!=='string')throw new TypeError('Qualified import descriptor pin is invalid.');const path=resolve(artifact,'..',relativePath),pin=await pinFile(path);if(pin.bytes!==descriptor.bytes||pin.sha256!==descriptor.sha256)throw new Error('Qualified import descriptor pin changed.');return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:path,outputs:[],profiles,issues,familyOperations:await verifiedExecutableFamilyOperations(path)};}
     return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:artifact,outputs:[],terminal:true,profiles,issues};
   }
   if(raw.schema==='cssearth-telescope-product-descriptor@1'){
     if(structure!==undefined)throw new TypeError('--structure does not select a descriptor component.');
     const dataset=requireRecord(raw.dataset,'descriptor dataset'),target=typeof dataset.target==='string'?dataset.target:undefined;
-    return {artifact:'product-descriptor',...(target?{target}:{}),source:artifact,outputs:[],familyOperations:executableFamilyOperations(raw)};
+    return {artifact:'product-descriptor',...(target?{target}:{}),source:artifact,outputs:[],familyOperations:await verifiedExecutableFamilyOperations(artifact)};
   }
   if(raw.schema==='cssearth-telescope-delivery@1'||raw.schema==='cssearth-telescope-delivery@2')return {...await listDeliveryOutputs(artifact,structure),artifact:'delivery'};
   if(structure!==undefined)throw new TypeError('--structure applies only to native delivery inspection');
@@ -80,12 +66,13 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
   if(stage==='body-map'){
     let checked:Awaited<ReturnType<typeof validateSphereSource>>|undefined,issue:string|undefined;
     try{checked=await validateSphereSource(source);}catch(error){issue=error instanceof Error?error.message:String(error);}
-    return {artifact:stage,target:checked?contextTarget(checked.context):undefined,source:artifact,...(checked?{sourceContext:checked.context}:{}),outputs:[
+    return {artifact:stage,...(checked?{target:contextTarget(checked.context),sourceContext:checked.context}:{}),source:artifact,outputs:[
       issue?unavailable('sphere',`Sphere prerequisites are unavailable: ${issue}`):available('sphere','The body-map bundle and target standard sphere closure were verified.'),
       unavailable('body-map','This artifact is already a body map.')
     ]};
   }
   if(stage==='telescope-sphere'){const context=sourceContext(source.record.parameters);return {artifact:stage,target:contextTarget(context),source:artifact,sourceContext:context,outputs:[],terminal:true};}
-  if(stage==='telescope-spatial-handoff')return {artifact:stage,target:source.record.parameters.target,source:artifact,outputs:[],terminal:true};
+  if(stage==='telescope-spatial-handoff')return {artifact:stage,...(typeof source.record.parameters.target==='string'?{target:source.record.parameters.target}:{}),source:artifact,outputs:[],terminal:true};
+  if(stage==='telescope-family-operation')return{artifact:stage,...(typeof source.record.parameters.target==='string'?{target:source.record.parameters.target}:{}),source:artifact,outputs:[],terminal:true};
   throw new TypeError(`Product stage ${stage} has no public telescope output route`);
 }

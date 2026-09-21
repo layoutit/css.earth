@@ -49,6 +49,7 @@ try {
       ${values.card ? `
         html, body, .planet-viewport, .planet-stage { background: ${cardBackground} !important; }
         .planet-stage > :not(.planet-render-root) { display: none !important; }
+        .prepared-world-context, .catalogue-moon-labels { display: none !important; }
         .space-minimap { display: none !important; }
       ` : ""}
     ` });

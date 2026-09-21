@@ -38,6 +38,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
   const events = new AbortController();
   let selected = root.dataset.atlasCurrent ?? '';
   let payloadPromise: Promise<NavigationTreePayload> | null = null;
+  let filterRevision = 0;
 
   const load = () => {
     if (!pin) return Promise.reject(new Error('Navigation tree has no deferred-data pin.'));
@@ -70,6 +71,7 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
   const createItem = (key: string, depth: number, payload: NavigationTreePayload): HTMLLIElement => {
     const node = payload.nodes[key]!;
     const item = root.ownerDocument.createElement('li');
+    item.dataset.atlasItemKey = key;
     if (!node.children.length) {
       if (node.objectId) item.append(markerAnchor(node, false));
       return item;
@@ -115,32 +117,92 @@ export function createNavigationTreeController(root: HTMLElement, windowTarget: 
     }
   }, { capture: true, signal: events.signal });
 
+  const select = async (objectId: string) => {
+    selected = objectId;
+    root.dataset.atlasCurrent = objectId;
+    let target = anchorByObject(objectId);
+    if (!target && pin) {
+      try {
+        const payload = await load();
+        const parent = new Map<string, string>();
+        for (const [key, node] of Object.entries(payload.nodes)) for (const child of node.children) parent.set(child, key);
+        const path: string[] = [];
+        const targetKey = Object.entries(payload.nodes).find(([, node]) => node.objectId === objectId)?.[0];
+        for (let key: string | undefined = targetKey; key; key = parent.get(key)) path.unshift(key);
+        for (const key of path.slice(0, -1)) {
+          const details = detailsByKey(key);
+          if (!details) break;
+          await materialize(details, payload);
+          details.open = true;
+        }
+        target = anchorByObject(objectId);
+      } catch (error) { report(error); }
+    }
+    for (const anchor of root.querySelectorAll<HTMLAnchorElement>('a[data-atlas-object][aria-current]')) anchor.removeAttribute('aria-current');
+    target?.setAttribute('aria-current', 'page');
+    const selectedRoot = target?.closest<HTMLDetailsElement>('details[data-atlas-depth="0"]') ?? null;
+    if (selectedRoot) {
+      for (const branch of root.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth="0"]')) {
+        if (branch !== selectedRoot) branch.open = false;
+      }
+    }
+    for (let branch = target?.closest<HTMLDetailsElement>('details') ?? null; branch; branch = branch.parentElement?.closest<HTMLDetailsElement>('details') ?? null) {
+      branch.open = true;
+    }
+  };
+
   return Object.freeze({
-    async select(objectId: string) {
-      selected = objectId;
-      root.dataset.atlasCurrent = objectId;
-      let target = anchorByObject(objectId);
-      if (!target && pin) {
-        try {
-          const payload = await load();
-          const parent = new Map<string, string>();
-          for (const [key, node] of Object.entries(payload.nodes)) for (const child of node.children) parent.set(child, key);
+    select,
+    async filter(objectIds: readonly string[] | null) {
+      const revision = ++filterRevision;
+      if (objectIds === null) {
+        root.removeAttribute('data-atlas-filtered');
+        for (const item of root.querySelectorAll<HTMLElement>('li[data-atlas-item-key]')) item.hidden = false;
+        for (const branch of root.querySelectorAll<HTMLDetailsElement>('details[data-atlas-depth]:not([data-atlas-depth="0"])')) branch.open = false;
+        await select(selected);
+        return;
+      }
+      root.setAttribute('data-atlas-filtered', '');
+      root.ariaBusy = 'true';
+      try {
+        if (!pin) {
+          const matches = new Set(objectIds);
+          for (const item of root.querySelectorAll<HTMLElement>('li[data-atlas-item-key]')) {
+            item.hidden = ![...item.querySelectorAll<HTMLElement>('a[data-atlas-object]')]
+              .some(anchor => matches.has(anchor.dataset.atlasObject ?? ''));
+          }
+          return;
+        }
+        const payload = await load();
+        if (revision !== filterRevision) return;
+        const parent = new Map<string, string>();
+        const keyByObject = new Map<string, string>();
+        for (const [key, node] of Object.entries(payload.nodes)) {
+          if (node.objectId) keyByObject.set(node.objectId, key);
+          for (const child of node.children) parent.set(child, key);
+        }
+        const matched = new Set(objectIds.map(id => keyByObject.get(id)).filter((key): key is string => Boolean(key)));
+        const retained = new Set<string>();
+        for (const match of matched) for (let key: string | undefined = match; key; key = parent.get(key)) retained.add(key);
+        for (const match of matched) {
           const path: string[] = [];
-          for (let key: string | undefined = objectId; key; key = parent.get(key)) path.unshift(key);
+          for (let key: string | undefined = match; key; key = parent.get(key)) path.unshift(key);
           for (const key of path.slice(0, -1)) {
             const details = detailsByKey(key);
             if (!details) break;
             await materialize(details, payload);
-            details.open = true;
           }
-          target = anchorByObject(objectId);
-        } catch (error) { report(error); }
-      }
-      for (const anchor of root.querySelectorAll<HTMLAnchorElement>('a[data-atlas-object][aria-current]')) anchor.removeAttribute('aria-current');
-      target?.setAttribute('aria-current', 'page');
-      for (let branch = target?.closest<HTMLDetailsElement>('details') ?? null; branch; branch = branch.parentElement?.closest<HTMLDetailsElement>('details') ?? null) {
-        branch.open = true;
-      }
+        }
+        if (revision !== filterRevision) return;
+        for (const item of root.querySelectorAll<HTMLElement>('li[data-atlas-item-key]')) {
+          item.hidden = !retained.has(item.dataset.atlasItemKey ?? '');
+        }
+        for (const details of root.querySelectorAll<HTMLDetailsElement>('details[data-atlas-key]')) {
+          const node = payload.nodes[details.dataset.atlasKey ?? ''];
+          details.open = Boolean(node?.children.some(child => retained.has(child)));
+        }
+      } catch (error) { report(error); }
+      finally { if (revision === filterRevision) root.removeAttribute('aria-busy'); }
     },
     destroy() { events.abort(); },
   });
