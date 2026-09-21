@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "491f1380e1cc4c25630538162dcf8cb6002df95b851504b4a6125baa6070b4be"
+    "sha256": "c316e471b1169aea976720303e486deaa0adbd991e6562b27f0c5fa20f41190e"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -230,8 +230,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "dd2f0ac45921558a3fda61e05a0022ef964f53c5a3f8893c3458c2e93e88e67b",
-      "bytes": 1498,
+      "sha256": "bb4fa5e3e7cffd32653ada808d23e20614af2889900810d3e505fe78b668de63",
+      "bytes": 1504,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -588,7 +588,7 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1e",
-    "materialSha256": "3db61a1277d38f913fd1bd2bde4f0d768d82fe1d035d25b23eded5ebece07ff8",
+    "materialSha256": "59ba464c62b644bcfb3ef8c17d9000cf86adf7f8f7f4309a0e427a55f2dc1568",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

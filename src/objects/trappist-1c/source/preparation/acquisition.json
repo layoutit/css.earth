@@ -9,6 +9,24 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/svo/JWST_MIRI.F1500W.xml",
+      "url": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml",
+      "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=137"
     }
   ]
 }

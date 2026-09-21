@@ -23,10 +23,16 @@ TRAPPIST-1c is measured. Longitude 0 faces the star.
 depth of 318 to 389 ppm depending on the phase-curve shape the fit assumes, a brightness temperature of 353 to 379 K through the
 F1500W response and a model of the star. Its four eclipse visits alone give 331 to 463 ppm.
 
-**What is not here.** No image, colour or map of this planet exists. The phase curve does not constrain c's day-night pattern: with
-its offset free the fit runs to the edge of what it allows, and held symmetric its day-night amplitude fits to zero. A map would
-draw an assumed shape, so none is shown ([ledger](investigations.json)). The sphere is the shared neutral gray of an unresolved
-surface, lit by its own star at the measured orbit, and the page says so.
+**The lens is a model.** The day-night pattern of c is not measured: with its offset free the phase-curve fit runs to the edge of
+what it allows, and held symmetric its day-night amplitude fits to zero, so no map is fitted ([ledger](investigations.json)). The
+lens instead draws the simplest surface the one measurement allows: a bare rock with no atmosphere, whose ground re-radiates the
+starlight it absorbs, T cos(z)^(1/4) at an angle z from the point under the star and nothing at night (the equilibrium temperature of
+[Cowan & Agol 2011](https://doi.org/10.1088/0004-637X/726/2/82), eq. 3), the model TRAPPIST-1b's light curve supports. Its one
+number is set so the rock shows c's eclipse depth
+([`c-dayside-15um.json`](source/science/jwst-trappist-1/c-dayside-15um.json)) through the F1500W response and a BT-Settl model of the
+star, with [`bare-rock.mts`](../../../tools/objects/eclipse-map/bare-rock.mts): 392 to 421 K under the star for 318 to 389 ppm, drawn
+at 407 K for the middle of the range. A perfectly black rock at c's distance would reach 480 K (Agol's 2566 K star at 28.549 stellar
+radii), so the measured day side is dimmer than a black rock's. The lens is labelled a model on the page.
 
 ## Evidence
 
@@ -34,13 +40,17 @@ surface, lit by its own star at the measured orbit, and the page says so.
   with longitude 0 on its star and orbits it;
   [`hostedOrbits.test.ts`](../../../packages/astronomy/src/hostedOrbits.test.ts) checks that it transits at the published times.
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the TRAPPIST-1 system holds all seven planets.
-- Driven in a real browser: the seven orbits and labels draw around the star in the system view, and this planet's page opens on a
-  lit sphere of the measured radius.
+- [`lens-fits.test.mts`](../../../tests/objects/unit/trappist-1c/lens-fits.test.mts) runs the shipped recipe and checks that the
+  drawn rock shows the middle of the measured eclipse depth and is dark at night.
+- Driven in a real browser: the seven orbits and labels draw around the star in the system view. The rendered
+  [day side](source/reference/rendered-model-day.png) and [terminator](source/reference/rendered-model-terminator.png) show the model lens.
 
 ## Known problems
 
-**No observation of the planet itself is shown.** Size, mass, orbit and the dayside brightness above are measured; the surface
-and its day-night pattern are not.
+**The lens is a model, not an observation.** Size, mass, orbit and the dayside brightness above are measured; the surface and its
+day-night pattern are not. A dark night is the rock's assumption: a thin atmosphere carrying some heat round would also fit the one
+depth, and would draw a cooler day and a warmer night. The depth's range comes from the phase-curve shapes the joint fit can assume,
+whose separate values were not kept.
 
 **The orbit is circular here.** The measured eccentricity is small but not zero, and the transit-timing variations the masses come
 from are not drawn.
