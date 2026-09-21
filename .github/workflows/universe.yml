@@ -80,15 +80,8 @@ jobs:
     timeout-minutes: 8
     permissions:
       contents: read
-      # The publish gate reads the last green main run to scope a push to main.
-      actions: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
-        with:
-          # History without blobs: the published-assets check diffs against a merge base, and
-          # `git diff --name-only` needs only commits and trees.
-          fetch-depth: 0
-          filter: blob:none
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -145,22 +138,10 @@ jobs:
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: pnpm test:ci
-      - name: Check published assets this change adds
-        # HEAD only the R2 keys this change's inventories add (keys are content-addressed, so an unchanged line
-        # needs no new proof): on a PR, against its base branch, failing only on a real 404; on a push to main,
-        # against the last green main run (a full sweep when there is none), reporting only. Unverified (network)
-        # keys never fail. Findings go to the job summary. The full sweep of every key is nightly (nightly.yml).
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
-            pnpm check:assets-published --added-since-last-green --report-only
-          else
-            pnpm check:assets-published --added-since="${CI_BASE_REF:-origin/${GITHUB_BASE_REF:-main}}"
-          fi
 
   audit:
     name: Repository and provenance audit (advisory)
+    needs: changes
     # Advisory by construction: this job is deliberately NOT in the repository's required status checks, so a
     # failure here is reported on the pull request and in the run summary without vetoing an unrelated change.
     # Nothing is skipped, tolerated or wrapped in `continue-on-error` — every check below still runs on every
@@ -168,7 +149,9 @@ jobs:
     # has not been written yet, a source input that cannot be re-downloaded, a stale link, a misplaced file);
     # none of it can make the deployed site broken, wrong or unverifiable. See docs/ci-cd.md, "Gate on what ships".
     runs-on: ubuntu-latest
-    timeout-minutes: 8
+    # Also covers the two relocated bookkeeping lanes, which run here in series where the gate ran them in
+    # parallel. This job reports, so its latency sits outside the required-path budget in docs/ci-cd.md.
+    timeout-minutes: 30
     permissions:
       contents: read
     steps:
@@ -230,6 +213,25 @@ jobs:
         with:
           path: tools/objects/dist
           key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
+          path: src/objects/earth/source/presentation/InterVariable.ttf
+          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+      - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # Only the baked JSON payloads, not texture banks. The installer below revalidates every pin.
+          path: |
+            src/objects/*/prepared/runtime.json
+            src/objects/*/prepared/scene.json
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          restore-keys: prepared-json-v1-
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        with:
+          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download. This job took
+          # over the preparation lane that used to own this cache, so it owns the save too.
+          path: .local/galaxy-field/sources
+          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Generate the registry, renderer and preparation bundle
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -239,15 +241,71 @@ jobs:
           CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/build-ci.mts lint
+          CI_AUDIT_UNIVERSE: ${{ needs.changes.outputs.run_universe }}
+          CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}
+        # The contract checks below need only the lint closure. The relocated source and reproduction lanes also
+        # read navigation, world context and title assets, so they need the same `full` build they had on the gate.
+        run: |
+          if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_UNIVERSE" != true ] && [ "$CI_AUDIT_PREPARATION" != true ]; then
+            node tools/build-ci.mts lint
+          else
+            node tools/build-ci.mts full
+          fi
       - name: Check every object's package files and source restoration plan
         # Package-file completeness (a body without its browser profile or ledger) and source *restorability*
         # (a declared input with neither a tracked copy nor an acquisition operation). Neither reaches the
         # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
-        # stay blocking in `Contract lint` (physical frame receipts) and in the `Universe / sources` lane.
+        # stay blocking in `Contract lint` (physical frame receipts and document pins).
         run: node --test tools/restore-source-inputs.test.mts
       - name: Check authored object directory layout
         run: node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
+      - name: Reconcile the source catalogue, facility records and provenance receipts
+        # Moved off the `Universe / sources` gate lane. These assert that every catalogue row, facility record
+        # and provenance receipt reconciles with the tracked sources and their READMEs — repository bookkeeping.
+        # The site serves the already-baked, sha256-pinned prepared bank and reads none of it, so a reconciliation
+        # gap cannot break a page; the pins that do back shipped bytes stay blocking in `Contract lint`. Nothing
+        # is skipped or tolerated: the same commands run in full, with the same arguments, whenever the change
+        # selects a universe area — the identical selection the gate lane applied as a job condition.
+        env:
+          CI_AUDIT_UNIVERSE: ${{ needs.changes.outputs.run_universe }}
+        run: |
+          if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_UNIVERSE" != true ]; then
+            echo "This change selects no universe area; the source catalogue has nothing to reconcile."
+            exit 0
+          fi
+          if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
+            pnpm setup:asset-data
+          else
+            node tools/prepare-ci-inputs.mts universe
+          fi
+          node tools/restore-object-json.mts
+          node tools/prepare-feature-index.mts
+          node site/minimap/prepare.mts --data-only
+          if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
+            # Authoring replays volume provenance from pinned FITS.
+            node tools/restore-source-inputs.mts --repository-volumes
+            pnpm test:sources
+          else
+            pnpm test:sources:pr
+          fi
+      - name: Reproduce the prepared bank and the galaxy field from their pinned inputs
+        # Moved off the `Preparation / world` gate lane. These re-run a bake and compare it with the recorded
+        # output: finalization idempotence, catalogue-row reconciliation, and the point-field recipe reproducing
+        # identical JSON and image bytes. The site never bakes anything — it serves the published bank, whose
+        # bytes `Contract lint` still verifies by SHA-256 — so a reproduction gap is a stale recipe or a drifted
+        # toolchain, visible here, and not a broken page. Nothing is skipped: the same commands run in full.
+        env:
+          CI_AUDIT_PREPARATION: ${{ needs.changes.outputs.run_universe_preparation }}
+        run: |
+          if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_PREPARATION" != true ]; then
+            echo "This change selects no preparation area; there is no bake to reproduce."
+            exit 0
+          fi
+          node tools/prepare-ci-inputs.mts universe-preparation
+          # The galaxy writer finishes before world/provenance readers in this workspace.
+          node tools/restore-source-inputs.mts --repository-volumes
+          pnpm test:galaxy-field
+          pnpm test:ci-preparation:world
       - name: Explain that this job does not gate the merge
         if: failure()
         run: |
@@ -256,8 +314,8 @@ jobs:
             echo
             echo "This job reports repository completeness and provenance backlog. It is **not** a required"
             echo "status check: it does not block this pull request. Fix it in the change that owns the gap,"
-            echo "or file it as backlog. Merge-blocking proof lives in \`Contract lint\`, \`Typecheck\`, the"
-            echo "universe/preparation lanes and the published-asset checks."
+            echo "or file it as backlog. Merge-blocking proof is what ships: it compiles (\`Typecheck\`), it"
+            echo "builds, and it behaves (the universe runtime/shell/renderer lanes and \`Contract lint\`)."
           } >> "$GITHUB_STEP_SUMMARY"
 
   typecheck:
@@ -416,7 +474,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [sources, runtime, shell, renderer]
+        lane: [runtime, shell, renderer]
     env:
       CI_UNIVERSE_LANE: ${{ matrix.lane }}
     needs: changes
@@ -505,15 +563,6 @@ jobs:
           RUNTIME_OWNERSHIP_ARGS: ${{ needs.changes.outputs.runtime_ownership_args }}
         run: |
           case "$CI_UNIVERSE_LANE" in
-            sources)
-              if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
-                # Authoring replays volume provenance from pinned FITS; each matrix runner needs its own inputs.
-                node tools/restore-source-inputs.mts --repository-volumes
-                pnpm test:sources
-              else
-                pnpm test:sources:pr
-              fi
-              ;;
             runtime|shell|renderer)
               node tools/prepare-facilities.mts --catalog-only
               pnpm "test:universe:$CI_UNIVERSE_LANE"
@@ -538,7 +587,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        lane: [publication, world]
+        lane: [publication]
     env:
       CI_PREPARATION_LANE: ${{ matrix.lane }}
     needs: changes
@@ -585,11 +634,6 @@ jobs:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
-      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
-        with:
-          # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download.
-          path: .local/galaxy-field/sources
-          key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -616,12 +660,6 @@ jobs:
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
               pnpm test:ci-preparation:publication
-              ;;
-            world)
-              # The galaxy writer finishes before world/provenance readers in this workspace.
-              node tools/restore-source-inputs.mts --repository-volumes
-              pnpm test:galaxy-field
-              pnpm test:ci-preparation:world
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac

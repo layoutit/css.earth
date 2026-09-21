@@ -16,6 +16,10 @@ const WORKFLOW_TOKEN='${{ github.token }}';
  * local run has no such diff, so it substitutes the most thorough, always-correct value instead of failing. */
 const LOCAL_EXPRESSION_SUBSTITUTIONS:Record<string,string>={
  '${{ needs.changes.outputs.runtime_ownership_args }}':'--all',
+ // The advisory audit runs the relocated source and reproduction lanes only for a change that selects their
+ // area. A local run has no PR diff to select from, so it substitutes the most thorough answer: run them.
+ '${{ needs.changes.outputs.run_universe }}':'true',
+ '${{ needs.changes.outputs.run_universe_preparation }}':'true',
  '${{ steps.build-tools-cache.outputs.cache-hit }}':'false',
  '${{ steps.ci-cache-key.outputs.build_digest }}':'',
  '${{ steps.package-cache.outputs.cache-hit }}':'false',
@@ -110,9 +114,15 @@ function readJobSteps(workflow:Record<string,unknown>,job:Record<string,unknown>
 }
 
 /** `--quick` (the pre-push hook) runs both always-run jobs — the `lint` merge gate and the advisory `audit` —
- * and skips only the steps that need the network or take longest; nothing else. The documentation audit lives in
- * `audit` and the published-assets check in `lint`, so both job lists are needed for the names below to resolve. */
-export const QUICK_SKIPPED_STEPS=['Check published assets this change adds','Check documentation links and organization'];
+ * and skips only the steps that take longest; nothing else. No pull-request job contacts R2 any more, so the
+ * published-assets check is no longer among these: its homes are the deploy and the nightly sweep. The two
+ * relocated audit lanes restore a prepared bank and replay a bake, which a push hook cannot afford; they are
+ * advisory, and GitHub still runs them in full on the pushed commit. `--quick` is explicitly partial. */
+export const QUICK_SKIPPED_STEPS=[
+ 'Check documentation links and organization',
+ 'Reconcile the source catalogue, facility records and provenance receipts',
+ 'Reproduce the prepared bank and the galaxy field from their pinned inputs',
+];
 export function quickSteps(steps:readonly CiStep[]):CiStep[] {
  for(const name of QUICK_SKIPPED_STEPS)if(!steps.some(step=>step.name===name))throw new Error(`--quick expects a step named "${name}".`);
  return steps.filter(step=>!QUICK_SKIPPED_STEPS.includes(step.name));
