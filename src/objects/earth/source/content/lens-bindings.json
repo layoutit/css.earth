@@ -11,7 +11,7 @@
       "thumbnailUrl": "/scenes/earth/earth-lens-normal.webp",
       "surfaceUrl": "/scenes/earth/earth-surface.webp",
       "polesUrl": "/scenes/earth/earth-surface-poles.webp",
-      "qualification": "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic",
+      "qualification": "NASA Blue Marble Next Generation July 2004, cloud-free global surface mosaic. Deep ocean is shaded from depth, taken from NASA's bathymetry edition of the same month where the plain edition carries its arbitrary constant fill; shallow and coastal water stays observed.",
       "surfacePagePrefix": "earth-surface",
       "maximumZoom": 4
     },
@@ -22,7 +22,7 @@
       "thumbnailUrl": "/scenes/earth/earth-lens-clouds.webp",
       "surfaceUrl": "/scenes/earth/earth-clouds.webp",
       "polesUrl": "/scenes/earth/earth-clouds-poles.webp",
-      "qualification": "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather",
+      "qualification": "Archival NASA Blue Marble cloud composite over July 2004 surface imagery; not live weather. Deep ocean is shaded from depth, taken from NASA's bathymetry edition of the same month where the plain edition carries its arbitrary constant fill.",
       "surfacePagePrefix": "earth-clouds",
       "maximumZoom": 4
     },

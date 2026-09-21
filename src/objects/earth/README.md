@@ -9,7 +9,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 | View | Source | What it means |
 | --- | --- | --- |
-| Surface and clouds | NASA Blue Marble, July 2004 surface plus archival cloud TIFF | Brightness is adjusted for display. Surface and clouds are separate observations. |
+| Surface and clouds | NASA Blue Marble, July 2004 surface plus archival cloud TIFF | Brightness is adjusted for display. Surface and clouds are separate observations. Deep ocean is shaded from depth, not observed water colour. |
 | Elevation | [GEBCO_2026](https://doi.org/10.5285/4f68d5c7-45eb-f999-e063-7086abc036fa) | Sampled modeled height relative to sea level. Relief shading is exaggerated; globe geometry is unchanged. |
 | Night lights | [NASA VJ146A4.002](https://doi.org/10.5067/VIIRS/VJ146A4.002), 2025, via Jurij Stare | Annual radiance in logarithmic false color. Gaps and aurora remain; this is not ground-level sky darkness. |
 | Atmosphere and charts | Authored atmosphere parameter record; NASA Planetary Spectrum Generator (PSG) | Simulated atmosphere, spectrum and temperature/pressure charts. Atmosphere brightness is adjusted for display. |
@@ -86,6 +86,7 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
 <summary>Blue Marble brightness and alternative imagery</summary>
 
 - Normal colour: NASA Earth Observatory, Blue Marble Next Generation, July 2004. The pinned 21,600 × 10,800 cloud-free JPEG is `source/blue-marble-july.jpg`; December remains an archival comparison input.
+- Deep ocean: the NASA topography and bathymetry edition of the same month, pinned as `source/blue-marble-july-bathymetry.jpg` on the same 21,600 × 10,800 grid. Only its ocean is used; its land carries baked relief shading and is not used.
 - Clouds: NASA Visible Earth, Blue Marble Clouds. The checked 8,192 × 4,096 TIFF is `source/blue-marble-clouds.tif`.
 - Navigation marker: NASA image-library Earth globe `GSFC_20171208_Archive_e001016`, checked as `source/earth-navigation.jpg`.
 
@@ -104,13 +105,33 @@ July value, then applies the existing cloud alpha recipe. This keeps the source 
 it does not make the July surface and cloud observation simultaneous or turn display RGB into
 calibrated albedo.
 
+Deep ocean in the plain edition is not an observation. Stöckli et al. (2005), section 2.4,
+states that deep ocean pixels there are replaced by an arbitrary ocean reflectance, and the
+pinned JPEG carries that as one exact code value, `(2, 5, 20)`. Measured over three
+256 × 256 deep-ocean tiles the standard deviation is 0.00 per channel, and of the
+134,955,917 pixels whose eight neighbours are all exactly that value only 1,476, eleven per
+million, differ at all, never by more than two code values. Preparation therefore reads the
+plain source value and takes the ocean sample from the bathymetry edition wherever every
+channel is within two code values of `(2, 5, 20)`. That test selects 64.4396% of the sphere
+by area, below the 70.8% water share, because shallow and coastal water is real MODIS
+observation and stays untouched. The replacement weight rises from nothing at the edge of
+that region to full over 40 source pixels, about 74 km at the equator, on a smoothstep of
+the chamfer distance into the region. This is a display choice: it keeps the boundary with
+observed water free of a visible step, and it means a narrow strip of every coast keeps the
+original fill. The ocean sample does not receive the midtone lift; land, ice, lakes and
+shallow water are unchanged.
+
+Deep ocean colour in the clear and cloud views is therefore shaded from depth, not observed
+water colour. It is not a measurement of sea surface reflectance and it is not a calibrated
+depth scale; for depth numbers use the elevation view.
+
 The prepared page layout remains fixed: seven 4,096-pixel-wide pages per view, their existing
 512/1,024/2,048-pixel texture levels, and one 2,048 × 512 pole atlas. The existing 4,096-pixel
 page size, density-8 atlas, four-pixel gutter and 450 retained surface leaves are unchanged.
 No source projection, Earth geometry, lighting, atmosphere, scientific palette or runtime
 selection rule changed. The same adjusted base still feeds the clear surface, cloud composite,
-cutaway exterior, thumbnails and minimaps; the original source JPEG remains unchanged.
-Dataset selection is manual at every zoom level.
+cutaway exterior, thumbnails, minimaps, the pole atlas and every texture level; the original
+source JPEGs remain unchanged. Dataset selection is manual at every zoom level.
 
 Visible color and Cloud coverage share the adjusted July surface. Cloud coverage adds the
 archival NASA cloud TIFF using the existing alpha recipe. The sources are not simultaneous
@@ -164,7 +185,9 @@ thumbnail and minimap share the same interpretation.
 
 We selected GEBCO_2026 for the global numeric model. NOAA ETOPO 2022 remains an older
 alternative; the previous Blue Marble base plus relief is excluded because its land colors do
-not encode elevation. The [elevation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md)
+not encode elevation. That exclusion still stands: the visible views take only the ocean of
+the Blue Marble topography and bathymetry edition, never its relief-shaded land. The
+[elevation report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/evidence/earth-elevation/README.md)
 records the source download, numerical checks, browser views and file sizes.
 
 </details>

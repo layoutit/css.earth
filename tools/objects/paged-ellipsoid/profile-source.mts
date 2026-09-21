@@ -20,6 +20,11 @@ const advisory = object({status: string, date: string});
 const enso = {date: string, baseline: string, checked: string, advisory};
 const colorByte: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 255;
 const opacity: Guard<number> = (value): value is number => number(value) && value >= 0 && value <= 1;
+const blendPixels: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 512;
+const fillTolerance: Guard<number> = (value): value is number => number(value) && Number.isInteger(value) && value >= 0 && value <= 32;
+// A second edition of the same source month supplies the pixels the plain
+// edition filled with one arbitrary constant; the rule states that constant.
+const deepOceanFill = object({path: string, replacedColor: tuple(colorByte, colorByte, colorByte), tolerance: fillTolerance, blendSourcePixels: blendPixels});
 const scientific = union(
   object({kind: literal('gibs-mur-imagery'), ...enso}),
   object({kind: literal('coraltemp-anomaly'), ...enso, filename: string, minimum: number, maximum: number, palette: array(array(number)), missingColor: array(number)}),
@@ -38,6 +43,7 @@ const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfig
   atmosphere: object({sourcePath: string, responsePath: string, sourceId: string, maximumOpacityKey: string}),
   surface: object({width: number, height: number, quality: number, clouds: object({path: string, maximumAlpha: number, threshold: number, scale: number, color: tuple(number, number, number)}),
     maps: array(object({path: string, name: string, thumbnail: string, scientific: optional(scientific), compositeClouds: optional(boolean), displayGamma: optional(number), nativePhotographicSampling: optional(boolean),
+      deepOceanFill: optional(deepOceanFill),
       thumbnailRegion: optional(object({longitude: optional(number), latitude: optional(number), spanDegrees: optional(number)})),
       webp: optional(object({quality: optional(number), effort: optional(number)}))}))})});
 const profile = object({textureLevels: optional(object({widths:array(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string, cityPath: string,

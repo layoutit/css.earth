@@ -215,6 +215,44 @@
       }
     },
     {
+      "id": "nasa-blue-marble-july-bathymetry",
+      "path": "blue-marble-july-bathymetry.jpg",
+      "expectedSha256": "d225f1f35a6448a4d1d8f6de6e48f3433e470085b70a35800e64f384f269a7b0",
+      "expectedBytes": 27201049,
+      "origin": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg",
+      "credit": "NASA Earth Observatory",
+      "license": "NASA media usage guidelines",
+      "licenseEvidence": [
+        "https://www.nasa.gov/nasa-brand-center/images-and-media/"
+      ],
+      "acquisition": "NASA Blue Marble Next Generation July 2004 topography and bathymetry edition; same month and same 21600 x 10800 equirectangular grid as the plain edition, downloaded 2026-09-21. Only its ocean is used: preparation reads it where the plain edition carries NASA arbitrary deep-ocean fill. Its land carries baked relief shading and is not used.",
+      "redistribution": "NASA image with credit and no endorsement claim",
+      "consumers": [
+        "scene",
+        "lenses"
+      ],
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "terra",
+            "missionId": "terra",
+            "evidence": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-earth-nasa-blue-marble-july-bathymetry",
+            "role": "material",
+            "evidence": "src/objects/earth/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      }
+    },
+    {
       "id": "nasa-blue-marble-clouds",
       "path": "blue-marble-clouds.tif",
       "expectedSha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
@@ -1599,13 +1637,13 @@
     },
     {
       "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 13560,
-      "expectedSha256": "081e3b12dc0dfaa42d8d4701fb64ab96cdc29c75f7d36e36f13f0547fbe591c3"
+      "expectedBytes": 14036,
+      "expectedSha256": "7b38f6519ddaa24974a5977d0c7ec39a21d0ba6111a11c09dac5670cd8471106"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16197,
-      "expectedSha256": "cd31ba6a97a01a826fc34fcca433a9a20450f223802fa6e4a4a262c4f0904112",
+      "expectedBytes": 16431,
+      "expectedSha256": "86896f31c1a5c7bf77c2c4a973bda2cb31890dd3ae0235cad40c70386f7480c3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -1613,8 +1651,8 @@
     },
     {
       "path": "content/lens-bindings.json",
-      "expectedBytes": 5760,
-      "expectedSha256": "56897b899d614f9a36c5eb834123eb7188b374ea008774d0cf80c8cad8dd1f0a"
+      "expectedBytes": 6102,
+      "expectedSha256": "ba3fd4eaed733d98e0a4b2c02f71135eca35c9dc295f3c9fb30e9845ec5f271f"
     },
     {
       "path": "content/charts.json",
