@@ -8,7 +8,7 @@ Ananke is Jupiter XII. JPL Horizons carries it as body 512.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 JPL Horizons lists a radius of 10 km on Ananke's object data page (revised 2025-May-12). Horizons gives no shape, albedo map or rotation state for it.
 

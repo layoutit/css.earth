@@ -8,7 +8,7 @@ Carme is Jupiter XI. JPL Horizons carries it as body 511.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 JPL Horizons lists a radius of 15 km on Carme's object data page (revised 2025-May-12). Horizons gives no shape, albedo map or rotation state for it.
 

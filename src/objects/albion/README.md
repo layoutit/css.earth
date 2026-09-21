@@ -8,7 +8,7 @@ Albion is 15760 Albion, provisional designation 1992 QB1. The JPL Small-Body Dat
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at 130.2 km, estimated from JPL's absolute magnitude H = 7.18 with an assumed albedo of 0.14, the median Vilenius et al. (2014) report for cold classical objects. The size is not measured. JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35.
 

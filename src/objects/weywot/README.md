@@ -8,7 +8,7 @@ Weywot is Quaoar I, first designated S/2006 (50000) 1. JPL Horizons carries it a
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the approximate 85 km radius in the header of JPL Horizons' satellite solution for Weywot. No shape model is published.
 

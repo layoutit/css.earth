@@ -8,7 +8,7 @@ Psamathe is Neptune X. JPL Horizons carries it as body 810.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Sheppard, Jewitt and Kleyna (2006), Table 3, estimate a radius of 20 km for S/2003 N1 from its R-band brightness, assuming a geometric albedo of 0.04. The size is an estimate from an assumed albedo, not a measurement. JPL's satellite discovery table identifies S/2003 N1 as Psamathe.
 

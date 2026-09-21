@@ -8,7 +8,7 @@ Uni is 55637 Uni, provisional designation 2002 UX25. The JPL Small-Body Database
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the 692 ± 23 km diameter measured from thermal emission. No shape model is published. Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry.
 

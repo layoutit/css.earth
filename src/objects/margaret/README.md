@@ -8,7 +8,7 @@ Margaret is Uranus XXIII. JPL Horizons carries it as body 723.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Sheppard, Jewitt and Kleyna (2005), Table 3, estimate a radius of 10 km for S/2003 U3 from its R-band brightness, assuming a geometric albedo of 0.04. The size is an estimate from an assumed albedo, not a measurement. JPL's satellite discovery table identifies S/2003 U3 as Margaret.
 

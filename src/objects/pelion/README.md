@@ -8,7 +8,7 @@ Pelion is 49036 Pelion, provisional designation 1998 QM107. The JPL Small-Body D
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at 45.9 km, estimated from JPL's absolute magnitude H = 10.38 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured. JPL Small-Body Database, absolute magnitude H = 10.38 for 49036 Pelion (1998 QM107); diameter estimated by cssEarth with an assumed albedo of 0.059.
 
