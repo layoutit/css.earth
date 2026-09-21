@@ -58,5 +58,5 @@ Warnings are for the reviewer and never block:
   `site/prepared-facilities.json`, so run `pnpm prepare:facilities` first.
 
 `tools/prepare-text.test.mts` runs the check on every registered body.
-`site/test/reader-text-browser.mts` measures the rendered lines at desktop and
+`site/test/rendered-page.test.mts` measures the rendered lines at desktop and
 phone widths.

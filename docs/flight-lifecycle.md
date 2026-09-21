@@ -126,18 +126,18 @@ Choose checks for the changed behavior after building and preparing its inputs:
 ```sh
 node --test tools/prepared-activation-registry.test.mts
 node --test tools/prepared-activation-transport.test.mts
-HOPS=30 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:navigation-stress:matrix
-ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
-DPR=2 ORIGIN=http://127.0.0.1:4221 pnpm test:browser:interaction-chain
-ORIGIN=http://127.0.0.1:4221 node site/test/replacement-flight-browser.mts
-ORIGIN=http://127.0.0.1:4221 node site/test/natural-navigation-browser.mts
-node site/test/flight-registry-browser.mts http://127.0.0.1:4221
-node site/test/flight-activation-browser.mts http://127.0.0.1:4221 mars
-DPR=2 node site/test/flight-activation-browser.mts http://127.0.0.1:4221 saturn
-node site/test/shared-camera-viewport-browser.mts http://127.0.0.1:4221
-node site/test/lazy-surface-preview-browser.mts http://127.0.0.1:4221
-node site/test/shell-surface-browser.mts http://127.0.0.1:4221
-DPR=2 node site/test/shell-surface-browser.mts http://127.0.0.1:4221
+HOPS=30 ORIGIN=http://127.0.0.1:4221 `pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
+ORIGIN=http://127.0.0.1:4221 `pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
+DPR=2 ORIGIN=http://127.0.0.1:4221 `pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
+ORIGIN=http://127.0.0.1:4221 node `site/test/rendered-page.test.mts`
+ORIGIN=http://127.0.0.1:4221 node `site/test/rendered-page.test.mts`
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4221 mars
+DPR=2 node `site/test/rendered-page.test.mts` http://127.0.0.1:4221 saturn
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
+DPR=2 node `site/test/rendered-page.test.mts` http://127.0.0.1:4221
 ```
 
 The registry browser suite covers every object at DPR 1 and 2. The interruption

@@ -136,12 +136,12 @@ After building the packages and renderer, check page metadata with:
 ```sh
 node --test site/test/object-page-data.test.mts
 node --test tools/serialize-prepared-scene.test.mts
-node site/test/progressive-enhancement-browser.mts http://127.0.0.1:4210
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
 node --test site/test/search-response.test.mts
-node site/test/search-browser.mts http://127.0.0.1:4210
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
 node --test site/test/dataset-response.test.mts site/test/dataset-url.test.mts
-node site/test/native-datasets-browser.mts http://127.0.0.1:4210
-node site/test/native-shell-browser.mts http://127.0.0.1:4210
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
+node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
 ```
 
 Worker reuse, cancellation and disposal are covered by
