@@ -138,15 +138,16 @@ test('repository volume package restores a pinned input from the content-address
     schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', inputs: [{
       id: 'volume', path: 'src/objects/nebula/source.bin', origin: `${origin}/publisher.bin`,
       expectedBytes: bytes.length, expectedSha256,
-    }], documents: [], generatedIntermediates: [],
+    }], documents: [{ id: 'preview', path: 'src/objects/nebula/preview.png', bytes: bytes.length, sha256: expectedSha256 }], generatedIntermediates: [],
   });
   await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
     schema: 'cssearth-volume-presentation-source@1',
   });
   await rm(resolve(root, 'site/objects.mts'));
   await run(root, ['tools/restore-source-inputs.mts', '--repository-volumes']);
-  assert.deepEqual(requests, [`/source-cache/${expectedSha256}/source.bin`]);
+  assert.deepEqual(requests, [`/source-cache/${expectedSha256}/source.bin`, `/source-cache/${expectedSha256}/preview.png`]);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
+  assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), bytes);
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {

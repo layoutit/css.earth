@@ -59,7 +59,7 @@ test('the PR asset-origin check exercises the exact deploy build path',async()=>
 });
 test('trusted body publication prepares only the requested object',async()=>{
  const workflow=requireRecord(parse(await readFile(new URL('../.github/workflows/publish-assets.yml',import.meta.url),'utf8')));
- const bake=requireRecord(requireRecord(workflow.jobs).bake),steps=requireArray(bake.steps).map(requireRecord);
+ const bake=requireRecord(requireRecord(workflow.jobs).bake),steps=requireArray(bake.steps).map(value=>requireRecord(value));
  const command=requireString(steps.find(step=>step.name==='Bake')?.run);
  assert.match(command,/node tools\/prepare-planets\.mts "--object=\$OBJECT"/);
  assert.doesNotMatch(command,/^\s*pnpm prepare:planets(?:\s|$)/m,'pnpm forwards the object argument only to the compound script\'s last command');

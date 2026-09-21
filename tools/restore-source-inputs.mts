@@ -40,11 +40,12 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
   const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
   if (manifest.schema !== 'cssearth-volume-source-manifest@1') return false;
   if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
-  for (const raw of sourceArray(manifest.inputs, sourceObject)) {
+  const entries = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => sourceArray(manifest[section] ?? [], sourceObject));
+  for (const raw of entries) {
     const path = sourcePath(raw.path);
     if (path.startsWith('.local/')) continue;
-    const expectedSha256 = sourceDigest(raw.expectedSha256);
-    const expectedBytes = raw.expectedBytes;
+    const expectedSha256 = sourceDigest(raw.expectedSha256 ?? raw.sha256);
+    const expectedBytes = raw.expectedBytes ?? raw.bytes;
     if (typeof expectedBytes !== 'number' || !Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
       throw new TypeError(`Invalid repository volume source size: ${id}/${path}.`);
     }
@@ -59,9 +60,9 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
       }
       continue;
     }
-    const origin = sourceText(raw.origin);
+    const origin = typeof raw.origin === 'string' && raw.origin ? raw.origin : null;
     let lastError: unknown;
-    for (const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, expectedSha256, basename(path)), origin]) {
+    for (const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, expectedSha256, basename(path)), ...(origin ? [origin] : [])]) {
       try {
         const bytes = await fetchWithRetry(fetch, url);
         await publishSourceBytes({ destination, bytes, planetName: id,
