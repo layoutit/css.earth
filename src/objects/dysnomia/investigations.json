@@ -1,0 +1,178 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "dysnomia",
+  "entries": [
+    {
+      "id": "selected-size",
+      "subject": "Brown and Butler (2023), PSJ 4, 193",
+      "status": "included",
+      "finding": "ALMA Band 6 detects Dysnomia separately from Eris at 45 +/- 7 microjansky (1280 micrometres), giving diameter 615 (+60/-50) km and geometric albedo 0.05 +/- 0.01. The thermal flux is the measurement and the albedo is derived, which removes the factor-of-three albedo degeneracy their 2018 paper described. Assumed: 850 micrometre emissivity fixed at 0.685, and emissivity and phase-integral priors typical of Kuiper-belt objects. The adopted sphere uses this diameter; its three equal axes are a construction, not three measurements.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ace52a",
+        "https://arxiv.org/abs/2307.04848"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "superseded-size",
+      "subject": "Brown and Butler (2018), AJ 156, 164, and the Horizons header",
+      "status": "excluded",
+      "finding": "The 2018 ALMA Band 7 result, diameter 700 +/- 115 km with albedo 0.04 (+0.02/-0.01), is superseded by the same authors 2023 revision. JPL Horizons still serves that older value as RAD = 350 +/- 57.5 km, so the Horizons radius is not used for the body size; it is used only where this orbit solution defines its own parameters.",
+      "revisitWhen": "Horizons refreshes the satellite record, or a further radiometric or occultation determination supersedes the 2023 value.",
+      "evidence": [
+        "https://doi.org/10.3847/1538-3881/aad9f2",
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "selected-orbit",
+      "subject": "Horizons tnosat_v001_20136199_jpl and Holler et al. (2021), Icarus 355, 114130",
+      "status": "included",
+      "finding": "The retained Horizons responses place Dysnomia relative to Eris at the fixed scene epoch. The solution uses 19 observations from 2005 to 2018 and states a 110 km position uncertainty with respect to the primary on 2025-Jan-01, which is 0.30 percent of the published 37,273 +/- 64 km semi-major axis. The underlying published orbit is Holler et al. (2021): period 15.785899 +/- 0.000050 d, eccentricity 0.0062 +/- 0.0010, inclination 45.49 +/- 0.15 deg in J2000 equatorial coordinates. That paper excludes a purely Keplerian fit at 5.8 to 6.3 sigma without identifying the cause; the deviation is a few milliarcseconds of HST astrometry and does not affect placement at this scene scale.",
+      "evidence": [
+        "https://doi.org/10.1016/j.icarus.2020.114130",
+        "https://arxiv.org/abs/2009.13733",
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "namaka-alternative",
+      "subject": "Namaka, the alternative companion",
+      "status": "excluded",
+      "finding": "Namaka was the other candidate and was rejected on evidence. Its Horizons solution tnosat_v001b_20136108_jp uses 29 observations ending in 2008 and states a 1570 km position uncertainty on 2025-Jan-01, about fourteen times Dysnomia's on an arc that ends eighteen years before the scene epoch. Its size is not measured: the 2025 single-chord occultation gives a lower limit of 83 +/- 2 km, the roughly 150 km figure comes from decomposing unresolved Spitzer and Herschel flux that also contains Haumea and its ring, and Horizons serves RAD~ 85 km with an assumed albedo of 0.8 +/- 0.2. Its orbit is strongly non-Keplerian, precessing about -6.5 deg per year, so a frozen element set drifts far from the published solution of Proudfoot et al. (2024).",
+      "revisitWhen": "A multi-chord occultation measures Namaka's diameter, or the published non-Keplerian ephemeris becomes usable as retained data rather than an integration.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ad26e9",
+        "https://arxiv.org/abs/2403.12782",
+        "https://arxiv.org/abs/2503.16142",
+        "https://doi.org/10.1088/0004-6256/137/6/4766"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "gravitational-parameter-conflict",
+      "subject": "Dysnomia's mass",
+      "status": "unresolved",
+      "finding": "Three results disagree and none is retracted. Horizons states GM = 9.56 to 29.7 km^3/s^2, a mass ratio of 0.0087 to 0.0270. Brown and Butler (2023) measure a mass ratio of 0.0050 +/- 0.0035 with a 1-sigma upper limit of 0.0085, below the whole Horizons range, and a density of 0.7 +/- 0.5 g/cm3. Szakats et al. (2023) argue from the tidal despinning of Eris that Dysnomia must have a mass ratio of 0.01 to 0.03 and a density of 1.8 to 2.4 g/cm3. The records carry the Horizons value because it is the parameter that defines this orbit calculation, and no mass is presented as a body fact.",
+      "revisitWhen": "A dynamical or radiometric determination reconciles the tidal and thermal arguments, or Horizons adopts a single value.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ace52a",
+        "https://doi.org/10.1051/0004-6361/202245234",
+        "https://arxiv.org/abs/2211.07987"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "rotation",
+      "subject": "Rotation and pole",
+      "status": "unresolved",
+      "finding": "Eris is measured to rotate synchronously with Dysnomia's orbit: Szakats et al. (2023) find a light-curve period equal to the 15.8 d orbit with an amplitude of 0.027 +/- 0.005 mag, and Bernstein et al. (2023) independently find 15.771 +/- 0.008 d. Dysnomia's own brightness varies by 0.3 mag peak to peak in HST WFC3 F606W, which Bernstein et al. call a plausible but not unique double-peaked curve at the synchronous period. So the variability is measured and the tidal locking is inferred. No rotation pole for Dysnomia has been published, and the display uses an illustrative pole. Horizons' ROTPER = 25.9 h on the Eris primary record is superseded by the synchronous period.",
+      "revisitWhen": "A published rotation-pole or shape solution for Dysnomia supplies a body-fixed frame.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/acdd5f",
+        "https://arxiv.org/abs/2303.13445",
+        "https://doi.org/10.1051/0004-6361/202245234"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "colour",
+      "subject": "Whole-disc colour",
+      "status": "unresolved",
+      "finding": "No absolute colour indices for Dysnomia were found. What is published is flux relative to Eris: about 0.2 to 0.4 percent at visible wavelengths against 1.9 +/- 0.5 percent in K', so Dysnomia is substantially redder than Eris. A flux ratio to a body whose own colour is the reference does not give a display colour, so the shared neutral material is used and no colour is claimed.",
+      "revisitWhen": "Resolved spectrophotometry of Dysnomia, such as a JWST NIRSpec extraction, supplies absolute colour.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/acdd5f"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Registered surface imagery",
+      "status": "unresolved",
+      "finding": "Dysnomia has never been resolved as a disc and no occultation by it has been published. The grid marks unmapped terrain. Its size comes from unresolved thermal flux, which cannot supply a surface map.",
+      "revisitWhen": "A multi-chord occultation or a spacecraft encounter supplies a silhouette or per-pixel geometry.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ace52a",
+        "https://sbn.psi.edu/pds/"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "jwst-followup",
+      "subject": "JWST programmes on the Eris system",
+      "status": "deferred",
+      "finding": "JWST GO 6064 observed Eris with NIRCam on 2024-08-23 and its exclusive-access period has passed; GTO 1191 holds NIRSpec from 2022-08-30 and MIRI from 2023-07-15. NIRSpec would give Dysnomia's resolved near-infrared spectrum, which is what its colour entry needs, and MIRI adds a thermal point that would tighten the radiometric diameter.",
+      "revisitWhen": "Dysnomia-resolved spectra or fluxes are extracted from these programmes, or a published analysis of them appears.",
+      "evidence": [
+        "https://www.stsci.edu/jwst-program-info/program/?program=6064",
+        "https://www.stsci.edu/jwst-program-info/program/?program=1191"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    },
+    {
+      "id": "parent-scene-position",
+      "subject": "Eris's scene position",
+      "status": "unresolved",
+      "finding": "Adding the first moon to a parent redefines the parent's position: the shared solar geometry takes the primary's heliocentric state from the moon's retained response instead of propagating the parent's own osculating elements. For Eris the two differ by 92,802 km, about 80 Eris radii, because the committed elements are osculating at JD 2461041.5 and propagated 245 days while the moon's response is a direct geometric state at the scene epoch. The shared spatial context refuses the mismatch, so preparation stops at the page step. The direct state is the more accurate of the two, but adopting it changes a shipped dwarf planet's scene and needs an explicit decision.",
+      "revisitWhen": "Eris is re-prepared onto the moon-supplied state, after which this entry closes and the remaining preparation steps run.",
+      "evidence": [
+        "https://ssd.jpl.nasa.gov/horizons/",
+        "https://github.com/layoutit/css.earth/blob/b0539bf1a0cd83049528c0330af05d52e4541f8d/src/objects/dysnomia/source/validation/epoch-state.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "b0539bf1a0cd83049528c0330af05d52e4541f8d"
+        }
+      ]
+    }
+  ]
+}

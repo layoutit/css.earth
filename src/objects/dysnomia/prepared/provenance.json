@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "18ef3d5ab8e6bc1eaa080a3398a22ef69e9f5430ce492a55a18c4df507f578d0"
+    "sha256": "cca152214146976c6f9b43303b6b7e4b77a2a309d549150719c47ca93c5798e5"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -254,7 +254,7 @@
           {
             "catalogueId": "doi-10-3847-psj-ace52a",
             "role": "material",
-            "evidence": "src/objects/dysnomia/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "src/objects/dysnomia/source/manifest.json@b0539bf1a0cd83049528c0330af05d52e4541f8d#/inputs/1"
           }
         ]
       },
@@ -281,6 +281,10 @@
     },
     {
       "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
       "id": "authored-document:content/object.json",
       "kind": "authored-content",
       "origin": "object:source/content/object.json",
