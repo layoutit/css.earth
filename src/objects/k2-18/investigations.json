@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "k2-18",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: 0.411 +/- 0.038 solar radii at 695700 km per solar radius, the stellar radius in Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2). GM from their stellar mass 0.359 +/- 0.047 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up. Placement: SIMBAD basic record for K2-18, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=K2-18; Gaia EDR3 parallax 26.2469 +/- 0.0266 mas via SIMBAD (2020yCat.1350....0G): 1000/26.2469 = 38.10 pc, no zero-point correction.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=K2-18",
+        "https://arxiv.org/abs/1805.00830"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }

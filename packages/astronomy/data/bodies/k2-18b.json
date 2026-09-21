@@ -14,14 +14,18 @@
   "periodDays": 32.939614,
   "semiMajorAxisStellarRadii": 74.78,
   "inclinationDegrees": 89.5785,
-  "eccentricity": 0,
+  "eccentricity": 0.2,
+  "argumentOfPeriapsisDegrees": 354.27,
+  "epochDefinition": "inferior-conjunction",
   "transitTimeBmjdTdb": 57263.89144,
   "ascendingNodePositionAngleDegrees": 0,
   "sources": {
    "period": "Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830), Table 2: 32.939614 d",
-   "shape": "Inclination 89.5785 degrees from Sarkis et al. (2018), Table 2. The scaled distance a/R* = 74.78 is DERIVED here, not quoted: Kepler's third law with their period, their stellar mass 0.359 solar masses and their stellar radius 0.411 solar radii. Eccentricity is set to 0: this record is a circular display approximation, not an orbital solution.",
-   "phase": "Sarkis et al. (2018), Table 2: T0 = BJD 2457264.39144, here BMJD 57263.89144.",
-   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+   "shape": "Inclination 89.5785 degrees from Sarkis et al. (2018), Table 2. The scaled distance a/R* = 74.78 is DERIVED here, not quoted: Kepler's third law with their period, their stellar mass 0.359 solar masses and their stellar radius 0.411 solar radii.",
+   "phase": "Sarkis et al. (2018), Tables 2 and 3: T0 = BJD 2457264.39144, the time of inferior conjunction, here BMJD 57263.89144.",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north).",
+   "eccentricity": "Sarkis et al. (2018), Table 3 (joint HARPS and CARMENES-VIS radial velocities): e = 0.20 +/- 0.08.",
+   "argumentOfPeriapsis": "Sarkis et al. (2018), Table 3: omega = -0.10 (+0.81/-0.59) rad, fitted with RadVel, whose transit convention f = pi/2 - omega is the one this record uses; here 354.27 degrees."
   }
  }
 }

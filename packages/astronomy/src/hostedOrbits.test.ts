@@ -1,5 +1,6 @@
+import { keplerStateKm } from './kepler.js'
 import { describe, expect, it } from 'vitest'
-import { hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
+import { hostedKeplerElements, hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
 import { directionFromRaDec, skyBasis, starAstrometry } from './stars.js'
 import { BODIES, EXOPLANET_IDS } from './bodies.js'
 
@@ -21,9 +22,9 @@ const eccentricOrbit: HostedOrbit = {
 describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
-    expect(EXOPLANET_IDS).toEqual(['hd-189733b', ...trappist, 'wasp-43b'])
+    expect(EXOPLANET_IDS).toEqual(['hd-189733b', 'hd-209458b', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b', ...trappist])
+    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b'])
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
     expect(BODIES['hd-189733b'].parent).toBe('hd-189733')
@@ -90,8 +91,8 @@ describe('hosted orbits', () => {
     expect(hostedOrbitPhase(orbit, orbit.transitTimeBmjdTdb + 2400000.5 + 2.5 * orbit.periodDays) / (2 * Math.PI)).toBeCloseTo(2.5, 9)
     expect(hostedOrbitPhaseBmjdTdb(orbit, orbit.transitTimeBmjdTdb + 2.5 * orbit.periodDays) / (2 * Math.PI)).toBeCloseTo(2.5, 9)
   })
-  it('preserves the exact original propagator for circular source-pinned orbits', () => {
-    for (const id of HOSTED_PLANET_IDS) {
+  it('reproduces the analytic circle to rounding on every circular hosted orbit, through the shared Kepler propagator', () => {
+    for (const id of HOSTED_PLANET_IDS.filter(id => hostedOrbit(id).eccentricity === 0)) {
       const orbit = hostedOrbit(id), host = starAstrometry(BODIES[id].parent as Parameters<typeof starAstrometry>[0])
       const radiusKm = BODIES[BODIES[id].parent as keyof typeof BODIES].meanRadiusKm
       const epochJdTt = orbit.transitTimeBmjdTdb + 2400000.5 + 1234.5 * orbit.periodDays
@@ -101,7 +102,25 @@ describe('hosted orbits', () => {
       const local = [a * Math.sin(phase), -a * Math.cos(inclination) * Math.cos(phase), a * Math.sin(inclination) * Math.cos(phase)]
       const localVelocity = [a * rate * Math.cos(phase), a * rate * Math.cos(inclination) * Math.sin(phase), -a * rate * Math.sin(inclination) * Math.sin(phase)]
       const toIcrf = (v: readonly number[]) => [0, 1, 2].map(axis => v[0]! * x[axis]! + v[1]! * y[axis]! + v[2]! * z[axis]!)
-      expect(hostedOrbitStateRelativeKm(orbit, host, radiusKm, epochJdTt), id).toEqual({ positionKm: toIcrf(local), velocityKmPerDay: toIcrf(localVelocity) })
+      const state = hostedOrbitStateRelativeKm(orbit, host, radiusKm, epochJdTt), position = toIcrf(local), velocity = toIcrf(localVelocity)
+      const miss = (a: readonly number[], b: readonly number[]) => Math.hypot(...a.map((v, i) => v - b[i]!)) / Math.hypot(...b)
+      // Measured 4e-13 to 1.4e-12 for the thirteen shipped planets: float rounding in a different order of operations.
+      expect(miss(state.positionKm, position), id).toBeLessThan(1e-11)
+      expect(miss(state.velocityKmPerDay, velocity), id).toBeLessThan(1e-11)
+    }
+  })
+  it('is an ordinary Kepler element set: keplerStateKm on hostedKeplerElements gives every hosted planet its state', () => {
+    for (const id of HOSTED_PLANET_IDS) {
+      const orbit = hostedOrbit(id), host = starAstrometry(BODIES[id].parent as Parameters<typeof starAstrometry>[0])
+      const radiusKm = BODIES[BODIES[id].parent as keyof typeof BODIES].meanRadiusKm
+      const elements = hostedKeplerElements(orbit, host, radiusKm), epochJdTt = orbit.transitTimeBmjdTdb + 2400000.5 + 7.25 * orbit.periodDays
+      const viaKepler = keplerStateKm(elements, epochJdTt), hosted = hostedOrbitStateRelativeKm(orbit, host, radiusKm, epochJdTt)
+      // The elements carry a Julian Date epoch; one rounding step of a 2.46-million-day JD times WASP-43b's 7.7 rad/day mean motion is
+      // 1.35e-9 of its orbit, 3 mm. The state function keeps its epochs in BMJD and does not pay it.
+      expect(Math.hypot(...viaKepler.positionKm.map((v, i) => v - hosted.positionKm[i]!)) / Math.hypot(...hosted.positionKm), id).toBeLessThan(1e-8)
+      expect(elements.meanMotionRadPerDay, id).toBe(2 * Math.PI / orbit.periodDays)
+      expect(elements.semiMajorAxisKm, id).toBe(orbit.semiMajorAxisStellarRadii * radiusKm)
+      expect(elements.eccentricity, id).toBe(orbit.eccentricity)
     }
   })
   it('propagates an eccentric orbit periodically with variable radius and speed', () => {
@@ -135,7 +154,7 @@ describe('hosted orbits', () => {
     const behindTime = eccentricOrbit.transitTimeBmjdTdb + elapsedMean * eccentricOrbit.periodDays / (2 * Math.PI)
     expect(dot(hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, star, hostRadiusKm, behindTime).positionKm, sight)).toBeGreaterThan(0)
     const rotated = hostedOrbitStateRelativeBmjdTdb({ ...eccentricOrbit, ascendingNodePositionAngleDegrees: 137 }, star, hostRadiusKm, eccentricOrbit.transitTimeBmjdTdb)
-    expect(Math.hypot(...rotated.positionKm)).toBeCloseTo(Math.hypot(...inFront.positionKm), 9)
+    expect(Math.abs(Math.hypot(...rotated.positionKm) / Math.hypot(...inFront.positionKm) - 1)).toBeLessThan(1e-13)
     expect(dot(rotated.positionKm, sight)).toBeCloseTo(dot(inFront.positionKm, sight), 8)
   })
   it('returns analytic eccentric velocity independent of host RA and Dec', () => {

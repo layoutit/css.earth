@@ -1,5 +1,23 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "fomalhaut",
-  "entries": []
+  "entries": [
+    {
+      "id": "jwst-archive-observations",
+      "subject": "JWST observations of FOMALHAUT (programmes 1193, 3925)",
+      "status": "unresolved",
+      "finding": "JWST observed FOMALHAUT in programmes 1193, 3925 (NIRCam and MIRI imaging and coronagraphy), a image of the surrounding debris disc. The star itself is not resolved and is masked or saturated, so these give no stellar surface. Not reduced here.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=1193",
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=3925"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ],
+      "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
+    }
+  ]
 }

@@ -1,0 +1,22 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "uni",
+  "entries": [
+    {
+      "id": "jwst-archive-observations",
+      "subject": "JWST observations of 2002UX25 (programme 2418)",
+      "status": "unresolved",
+      "finding": "JWST observed 2002UX25 in programme 2418 (NIRSpec IFU), a reflectance spectrum. The body is far smaller than JWST's resolution at its distance, so these give composition, not a resolved disc, shape or map. Not reduced here.",
+      "evidence": [
+        "https://www.stsci.edu/jwst/science-execution/program-information?id=2418"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ],
+      "revisitWhen": "When these observations are reduced for this body, or a resolved image or map derived from them is published."
+    }
+  ]
+}

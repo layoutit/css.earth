@@ -1,5 +1,22 @@
 {
   "schema": "cssearth-investigation-ledger@1",
   "objectId": "rigel",
-  "entries": []
+  "entries": [
+    {
+      "id": "selected-published-values",
+      "subject": "Radius adopted from the published record",
+      "status": "included",
+      "finding": "Radius: Radius 78.9 ± 7.4 solar radii from Moravveji et al. (2012), ApJ 747, 108, who combine the limb-darkened angular diameter 2.75 ± 0.01 mas of Aufdenberg et al. (2008) with the Hipparcos distance. Adopted 54,890,730 km, 78.9000 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted. Placement: SIMBAD basic record for * bet Ori (HIP 24436), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=bet+Ori; Inverse of the Hipparcos new-reduction parallax 3.78 ± 0.34 mas (van Leeuwen 2007) via SIMBAD.",
+      "evidence": [
+        "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=bet+Ori",
+        "https://arxiv.org/abs/1201.0843"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "f137b67d36a74346d81bb81663864285091e9dda"
+        }
+      ]
+    }
+  ]
 }
