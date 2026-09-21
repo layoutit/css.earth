@@ -1,5 +1,5 @@
 import type { PositionM } from '@cssearth/engine';
-import type { PreparedWorldContext } from './prepared-world-context.js';
+import type { PreparedWorldContext, PreparedWorldContextGeometry } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
@@ -161,7 +161,7 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   });
 }
 
-export function createWorldContextPlanner(plan: PreparedWorldContext, annotationPriorities: Readonly<Record<string, number>> = {}) {
+export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {}) {
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
   const systemFade = createSystemFade(plan);
