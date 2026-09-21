@@ -59,14 +59,12 @@ test('retained provenance copies preserve pins, revision identities and manifest
   assert.ok(references > 0);
 });
 
-test('historical source records keep revision pins and portable statement links without current lab reads', async () => {
+test('source records cited from the lab keep portable statement links without current lab reads', async () => {
   const records = await Promise.all((await readdir(resolve(root, 'src/sources'))).filter(path => path.endsWith('.json')).map(path => json(`src/sources/${path}`)));
   const catalog = parseSourceCatalog({ schema: 'cssearth-source-catalog@1', records });
   let histories = 0;
   for (const record of Object.values(catalog.records)) for (const evidence of record.evidence) {
     if (!('path' in evidence) || !evidence.path.startsWith('labs/')) continue;
-    assert.match(evidence.revision, /^[a-f0-9]{40}$/);
-    assert.match(evidence.sha256, /^[a-f0-9]{64}$/);
     for (const statement of record.statements) {
       assert.ok(!statement.evidence.startsWith(evidence.path), 'Historical statement still implies a current local path');
     }

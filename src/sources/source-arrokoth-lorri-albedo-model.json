@@ -19,14 +19,10 @@
   "evidence": [
     {
       "path": "src/objects/arrokoth/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "464e773765bc05c0f483f2bedfd2fb317f8ce04393a84143382f1d4464895c2c",
       "locator": "/inputs/3"
     },
     {
       "path": "src/objects/arrokoth/source/science/albedo_arrokoth4_fp36h2_masked1.lblx",
-      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
-      "sha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "locator": "/Product_Observational/Identification_Area"
     }
   ],
