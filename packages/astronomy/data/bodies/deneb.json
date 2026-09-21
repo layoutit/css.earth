@@ -1,0 +1,30 @@
+{
+ "id": "deneb",
+ "classification": "star",
+ "order": 1210,
+ "physical": {
+  "name": "Deneb",
+  "horizonsCode": null,
+  "meanRadiusKm": 89370157,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Limb-darkened angular diameter 2.76 \u00b1 0.06 mas from Aufdenberg et al. (2002), ApJ 570, 344: the NPOI uniform-disc diameter 2.40 \u00b1 0.06 mas times a model limb-darkening correction of 1.15 for a star with a wind. At the Hipparcos distance this is the record\u2019s radius. Adopted 89,370,157 km, 128.4608 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+ "star": {
+  "rightAscensionDegrees": 310.35797975307673,
+  "declinationDegrees": 45.280338806527574,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 432.9004,
+  "properMotionRaMasPerYear": 2.01,
+  "properMotionDecMasPerYear": 1.85,
+  "radialVelocityKmPerS": -4.9,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Cyg (HIP 102098), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cyg",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 2.31 \u00b1 0.32 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 2.01, 1.85 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: -4.9 km/s, reference 2006AstL...32..759G"
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 102098
+ }
+}

@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-0706-0867",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Imaging the Surface of Altair",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0706.0867"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0706.0867",
+      "label": "Monnier et al. 2007"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/altair/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "f634c706c8f551eab0947c8876d50d64eb659e279ec30692877353db06448e0f",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. D. Monnier, M. Zhao, E. Pedretti et al.",
+      "scope": "citation",
+      "evidence": "src/objects/altair/text.json#/introduction/sources/0"
+    }
+  ]
+}

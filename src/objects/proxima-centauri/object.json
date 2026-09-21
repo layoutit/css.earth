@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "proxima-centauri",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Proxima Centauri",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 98094
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/proxima-centauri-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "44ff3462f44ed74471625b0afe3848b1c9d67c15966809856810a7b694216811"
+      }
+    },
+    "catalog": {
+      "name": "Proxima Centauri",
+      "classification": "star",
+      "color": "#ffb070",
+      "distanceAu": 268441,
+      "description": "Red dwarf 1.30 parsecs away, the nearest star to the Sun; its photosphere is not imaged here.",
+      "systemName": "Centaurus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -14651209142921296,
+        -11188687658327098,
+        -35676840399400656
+      ],
+      "presentationToReference": [
+        -0.36476700748045887,
+        0.7055273749751941,
+        -0.6075986779234818,
+        -0.2785614714532566,
+        0.5399813412916016,
+        0.7942440794105547,
+        -0.8884528895082437,
+        -0.45896761783107826,
+        0.0004346342345782305
+      ],
+      "orbitUpReference": [
+        -0.7055273749751941,
+        -0.5399813412916016,
+        0.45896761783107826
+      ],
+      "metersPerUnit": 316432.2580645161,
+      "bodyRadiusM": 98094000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "0c7fce60d422c5d5e9d29de5e789d3a58e697f8bc1224eff5543207ab924b067"
+  }
+}

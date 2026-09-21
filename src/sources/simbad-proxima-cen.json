@@ -1,0 +1,32 @@
+{
+  "id": "simbad-proxima-cen",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for NAME Proxima Centauri (Proxima Centauri)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=Proxima+Centauri",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/proxima-centauri/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "9eb38fc3aed93f5d0cd49a2fd78d30968cc1d2b2eed896a2e2a2f4bdf3b05cb6",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/proxima-centauri/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}
