@@ -1,0 +1,29 @@
+{
+ "id": "k2-18",
+ "classification": "star",
+ "order": 1220,
+ "physical": {
+  "name": "K2-18",
+  "horizonsCode": null,
+  "meanRadiusKm": 285933,
+  "gravitationalParameterKm3PerS2": 47643765975.05624,
+  "parent": null
+ },
+ "physicalNotes": "Radius: 0.411 +/- 0.038 solar radii at 695700 km per solar radius, the stellar radius in Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2). GM from their stellar mass 0.359 +/- 0.047 solar masses times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: no spin axis is measured, so the display axis (celestial north at the star) is up.",
+ "star": {
+  "rightAscensionDegrees": 172.56049060233,
+  "declinationDegrees": 7.588404263470001,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 38.0997,
+  "properMotionRaMasPerYear": -80.479,
+  "properMotionDecMasPerYear": -133.007,
+  "radialVelocityKmPerS": 0.328,
+  "sources": {
+   "position": "SIMBAD basic record for K2-18, ICRS J2000 position, reference 2020yCat.1350....0G, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=K2-18",
+   "distance": "Gaia EDR3 parallax 26.2469 +/- 0.0266 mas via SIMBAD (2020yCat.1350....0G): 1000/26.2469 = 38.10 pc, no zero-point correction",
+   "properMotion": "SIMBAD: -80.479, -133.007 mas/yr, reference 2020yCat.1350....0G",
+   "radialVelocity": "SIMBAD: 0.328 km/s, reference 2018A&A...612A..49R"
+  },
+  "presentationUp": "display-axis"
+ }
+}

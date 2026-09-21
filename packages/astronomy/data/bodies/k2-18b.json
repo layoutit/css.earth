@@ -1,0 +1,27 @@
+{
+ "id": "k2-18b",
+ "classification": "exoplanet",
+ "order": 1221,
+ "physical": {
+  "name": "K2-18 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 15116.2,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "k2-18"
+ },
+ "physicalNotes": "Radius 2.37 +/- 0.22 Earth radii from Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830, Table 2), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 32.939614,
+  "semiMajorAxisStellarRadii": 74.78,
+  "inclinationDegrees": 89.5785,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 57263.89144,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Sarkis et al. (2018, AJ 155, 257; arXiv:1805.00830), Table 2: 32.939614 d",
+   "shape": "Inclination 89.5785 degrees from Sarkis et al. (2018), Table 2. The scaled distance a/R* = 74.78 is DERIVED here, not quoted: Kepler's third law with their period, their stellar mass 0.359 solar masses and their stellar radius 0.411 solar radii. Eccentricity is set to 0: this record is a circular display approximation, not an orbital solution.",
+   "phase": "Sarkis et al. (2018), Table 2: T0 = BJD 2457264.39144, here BMJD 57263.89144.",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}
