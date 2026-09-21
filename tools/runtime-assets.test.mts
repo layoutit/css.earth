@@ -99,6 +99,7 @@ test('prepared-assets: default discovery scans src/objects/*, install restores r
 
   assert.deepEqual(preparedAssetObjectIds([], root), ['fixture-body', 'fixture-context']);
   assert.deepEqual(preparedAssetObjectIds(['--object=fixture-context'], root), ['fixture-context']);
+  assert.deepEqual(setupObjectIds(['--object=fixture-context'], root), ['fixture-context']);
   assert.throws(() => preparedAssetObjectIds(['--object=missing-fixture'], root), /prepared-assets\.json inventory/);
 
   const assets = await preparedAssets(root, ['fixture-body', 'fixture-context']);

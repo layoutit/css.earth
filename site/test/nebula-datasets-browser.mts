@@ -42,6 +42,9 @@ try {
     for (const lensId of lenses) {
       const camera = await page.locator('.planet-stage .polycss-camera > .polycss-scene').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).transform));
       const button = bank.locator(`[data-focus-lens][value="${lensId}"]`);
+      const detail = (await button.locator('.planet-lens-detail').innerText()).trim();
+      assert.ok(detail, `${objectId}/${lensId}: the row names its instrument or facility`);
+      assert.doesNotMatch(detail, /\d+\s*[×x]\s*\d+\s*px/u, 'Pixel dimensions belong in Factsheet.');
       await button.click();
       await page.waitForFunction(({ objectId, lensId }) => document.querySelector(`[data-focus-lens-bank="${objectId}"] [data-focus-lens][value="${lensId}"]`)?.getAttribute('aria-pressed') === 'true', { objectId, lensId });
       const context = selectedContext(objectId, lensId);
@@ -53,8 +56,9 @@ try {
       const sourceIds = ownSources.flatMap(source => source.sourceBinding?.kind === 'catalogued'
         ? source.sourceBinding.references.filter(ref => ref.role === 'material').map(ref => ref.catalogueId) : []);
       assert.ok(sourceIds.length > 0, 'Every lens identifies its own original image');
-      for (const id of sourceIds) assert.equal(await context.locator(`[data-source="${id}"]`).first().isVisible(), true, `${objectId}/${lensId}: ${id}`);
-      assert.ok(await context.locator('[data-facility], [data-mission], [data-unresolved]').count() > 0, 'Capture attribution remains explicit');
+      assert.equal(await context.locator('[data-source]').count(), 0, 'Source links stay in the footer.');
+      assert.equal(await context.locator('[data-facility], [data-mission], [data-unresolved]').count(), 1,
+        'The selected image shows only its directly captured instrument card.');
       assert.equal(documents, count, 'Switching datasets keeps the document');
       assert.equal(await stage?.evaluate(node => node.isConnected), true, 'Switching datasets retains the stage');
       assert.deepEqual(await page.locator('.planet-stage .polycss-camera > .polycss-scene').evaluateAll(nodes => nodes.map(node => getComputedStyle(node).transform)), camera,
@@ -65,14 +69,13 @@ try {
     const camera = new URL(page.url()).searchParams.get('v');
     await bank.locator('[data-focus-lens][aria-pressed="true"]').click();
     assert.equal(new URL(page.url()).searchParams.get('v'), camera, 'Reselecting a dataset preserves the camera');
-    const stars = bank.locator('[data-focus-stars]');
-    if (await stars.count()) {
-      const toggle = bank.locator('label:has([data-focus-stars])');
-      await toggle.click();
-      assert.equal(await stars.isChecked(), false);
-      await toggle.click();
-      assert.equal(await stars.isChecked(), true);
-    }
+    assert.equal(await bank.locator('[data-focus-stars]').count(), 0, 'Dataset cards do not duplicate the shell-level 3D-stars setting.');
+    assert.equal(await bank.locator('.planet-lens-source').count(), 0, 'Dataset cards leave source attribution to the footer.');
+    const preview = bank.locator('[data-focus-lens-details]:not([hidden]) .planet-surface-minimap');
+    if (await preview.count()) assert.deepEqual(await preview.evaluate(element => {
+      const bounds = element.getBoundingClientRect(), image = element.querySelector('.planet-lens-texture');
+      return { ratio: Number((bounds.width / bounds.height).toFixed(2)), fit: image ? getComputedStyle(image).objectFit : '' };
+    }), { ratio: 2, fit: 'cover' }, 'Dataset cards use the same bounded panoramic preview as body datasets.');
     await card.getByRole('radio', { name: 'Factsheet', exact: true }).press('Space');
     await rail.waitFor({ state: 'hidden' });
     await card.getByRole('radio', { name: 'Datasets', exact: true }).press('Space');

@@ -33,10 +33,17 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
       const descriptor = readPreparedDescriptor(readSource(), object.id);
       if (!descriptor) { releaseSource(); throw new Error(`Object ${object.id} navigation content has no prepared descriptor.`); }
       const required = ['.planet-sidebar', '.planet-sidebar-search', '.planet-drawer-content',
-        '.planet-object-browser', '.planet-information-panel', '.planet-settings-panel'];
+        '.planet-information-panel', '.planet-settings-panel'];
       for (const selector of required) if (!readSource().querySelector(selector) || !documentTarget.querySelector(selector)) {
         releaseSource();
         throw new Error(`Object shell content is missing ${selector}.`);
+      }
+      // Navigation fragments deliberately omit the shared object browser. Its
+      // Atlas tree and deferred catalogue belong to the retained shell, not to
+      // every destination fragment.
+      if (!documentTarget.querySelector('.planet-object-browser')) {
+        releaseSource();
+        throw new Error('Retained object shell content is missing .planet-object-browser.');
       }
       const existing = new Map(styles.map(style => [key(style), style]));
       const added: StyleNode[] = [], next: IncomingStyle[] = [];
@@ -130,6 +137,7 @@ export function createNavigationContent({ documentTarget, windowTarget, fragment
               } else documentTarget.head.append(documentTarget.importNode(incoming, true));
             }
             documentTarget.body.dataset.objectShell = object.id;
+            requiredElement(documentTarget, '.planet-object-browser').id = `${object.id}-object-browser`;
             publishPreparedDescriptor(documentTarget, descriptor);
             const stage = requiredElement(documentTarget, '.planet-stage'), input = documentTarget.querySelector('.planet-input-surface');
             stage.dataset.objectId = object.id;

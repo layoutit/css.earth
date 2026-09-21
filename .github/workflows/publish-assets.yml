@@ -96,7 +96,7 @@ jobs:
           node-version: '24'
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
-      - name: Restore the pinned source downloads
+      - name: Restore the pinned preparation inputs
         run: node tools/restore-source-inputs.mts "--object=$OBJECT"
       - name: Bake
         env:
@@ -105,9 +105,42 @@ jobs:
           set -euo pipefail
           if [ "$KIND" = volume ]; then
             pnpm build:tools
-            pnpm prepare:volume "src/objects/$OBJECT"
+            object_type=$(node -e 'const {readFileSync}=require("node:fs");process.stdout.write(JSON.parse(readFileSync(process.argv[1],"utf8")).type)' "src/objects/$OBJECT/object.json")
+            case "$object_type" in
+              density-volume)
+                pnpm prepare:volume "src/objects/$OBJECT"
+                ;;
+              volume-lens-bank)
+                delivery_schema=$(node -e 'const {existsSync,readFileSync}=require("node:fs");const base=process.argv[1];const path=existsSync(`${base}/source/compact-delivery.json`)?`${base}/source/compact-delivery.json`:`${base}/source/delivery.json`;process.stdout.write(JSON.parse(readFileSync(path,"utf8")).schema)' "src/objects/$OBJECT")
+                case "$delivery_schema" in
+                  cssearth-nebula-delivery@1|cssearth-compact-density-delivery@1)
+                    node tools/nebula/prepare.mts "--object=$OBJECT"
+                    ;;
+                  cssearth-density-volume-lens-bank-source@1)
+                    echo "::error::$OBJECT is a promoted physical volume bank; publish it from its producing checkout after verifying its committed inventory."
+                    exit 1
+                    ;;
+                  *)
+                    echo "::error::$OBJECT has unsupported volume delivery $delivery_schema."
+                    exit 1
+                    ;;
+                esac
+                ;;
+              *)
+                echo "::error::$OBJECT is $object_type, not a publishable volume object."
+                exit 1
+                ;;
+            esac
           else
-            pnpm prepare:planets "--object=$OBJECT"
+            # Forwarding an argument through `pnpm prepare:planets` reaches only the final
+            # command in that compound script. Run the shared prerequisites explicitly so
+            # the expensive authoring pass is actually restricted to this one object. The
+            # global feature index is a tracked catalogue, not an asset needed by this job.
+            pnpm prepare:catalog
+            pnpm build:astronomy
+            node tools/prepare-solar-geometry.mts
+            pnpm build:catalog
+            node tools/prepare-planets.mts "--object=$OBJECT"
           fi
       - name: Check the rebake reproduces the committed inventory
         # Early contributor feedback. The trusted publish job independently checks the frozen inventory;

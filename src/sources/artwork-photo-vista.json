@@ -1,0 +1,32 @@
+{
+  "id": "artwork-photo-vista",
+  "kind": "artwork",
+  "identityLevel": "work",
+  "title": "VISTA photograph",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/vista_hz_02/",
+      "label": "Source"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/large/vista_hz_02.jpg",
+      "label": "Original file"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/vista_hz_02/",
+      "checkedOn": "2026-09-21",
+      "locator": "Image credit, CC BY 4.0 usage terms and original file"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "European Southern Observatory",
+  "creators": [
+    "ESO"
+  ]
+}

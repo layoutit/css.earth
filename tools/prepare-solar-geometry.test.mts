@@ -79,7 +79,7 @@ test('all retained body centers are composed with their named parent at the fixe
     const parent = source.centerBodyId === 'sun' ? [0, 0, 0] : heliocentricKm(source.centerBodyId);
     const relative = sub(heliocentricKm(id), parent);
     assert.ok(Math.hypot(...sub(relative, source.positionKm)) < 0.00001, `${id}: wrong center or stale position`);
-    assert.equal(geometry.BODY_POSITION_PROVENANCE[id].sha256, source.provenance.sha256);
+    assert.equal(requireSnapshot(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get(id), `${id} position provenance`).sha256, source.provenance.sha256);
   }
   const emb = scale(astronomy.systemBarycentreHeliocentricAu('emb', epoch), geometry.ASTRONOMICAL_UNIT_KILOMETERS);
   assert.ok(Math.hypot(...sub(heliocentricKm('earth'), emb)) > 4000, 'Earth must not be replaced with the barycentre');

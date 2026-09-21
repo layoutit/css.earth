@@ -498,17 +498,19 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const trigger = documentTarget.querySelector(".planet-sidebar-view-all");
   const information = documentTarget.querySelector(".planet-information-panel");
   const browser = documentTarget.querySelector(".planet-object-browser");
+  const selectedContent = documentTarget.querySelector(".planet-selected-content");
   const empty = documentTarget.querySelector(".planet-object-empty");
   if (!(search instanceof windowTarget.HTMLInputElement) ||
       !(searchCard instanceof windowTarget.HTMLElement) ||
       !(trigger instanceof windowTarget.HTMLButtonElement) ||
       !(information instanceof windowTarget.HTMLElement) ||
       !(browser instanceof windowTarget.HTMLElement) ||
+      !(selectedContent instanceof windowTarget.HTMLElement) ||
       !(empty instanceof windowTarget.HTMLElement)) {
     throw new Error("Planet shell object browser is incomplete.");
   }
-  // Search/navigation owns the header dropdown. The selected object or overview
-  // owns the sidebar card; neither surface moves into the other at runtime.
+  // Search/navigation and the selection share one sidebar content owner. The
+  // selected content stays retained while the browser temporarily replaces it.
   const context = documentTarget.querySelector<HTMLElement>('.planet-object-context') ?? browser;
   const sharedLegacyContext = context === browser;
   const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
@@ -898,6 +900,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     open = next;
     trigger.ariaExpanded = String(next);
     search.ariaExpanded = String(next);
+    setPanelHidden(selectedContent, next);
     trigger.title = trigger.ariaLabel = next ? 'Collapse celestial objects' : 'Browse celestial objects';
     const currentUrl = new URL(windowTarget.location.href);
     for (const input of documentTarget.querySelectorAll<HTMLInputElement>('[data-search-context], [data-dataset-context]')) {
