@@ -179,8 +179,8 @@ function billboardCenter(element: HTMLElement | FakeElement): number[] {
 }
 function captionPosition(element: HTMLElement | FakeElement): number[] {
   const [x, y] = billboardCenter(element);
-  const dx = Number(element.dataset.contextLabelX?.replace('px', ''));
-  const dy = Number(element.dataset.contextLabelY?.replace('px', ''));
+  const dx = Number(element.style.getPropertyValue('--context-label-x').replace('px', ''));
+  const dy = Number(element.style.getPropertyValue('--context-label-y').replace('px', ''));
   return [x + dx, y + dy];
 }
 const paintedOrbitLeaf = (piece: HTMLElement | SVGElement) => piece.getAttribute('stroke-opacity') !== null
