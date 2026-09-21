@@ -66,7 +66,7 @@ test('a Gaia XP sampled spectrum gives the colour of the star\'s own light: HD 1
     const { color, range, temperature } = await load();
     assert.equal(temperature, null);
     assert.deepEqual(color.srgb, srgb, id);
-    for (const bound of range) for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(bound.srgb[channel]! - color.srgb[channel]!) <= 3, `${id} bound`);
+    for (const bound of range!) for (let channel = 0; channel < 3; channel++) assert.ok(Math.abs(bound.srgb[channel]! - color.srgb[channel]!) <= 3, `${id} bound`);
     const csv = (await readFile(new URL('photometry/gaia-dr3-xp-sampled.csv', system))).toString('utf8');
     assert.throws(() => readXpSampledSpectrum(csv, '1'), /exactly one row/u);
     // A flat spectrum in energy is slightly pink in sRGB, since the D65 white is not flat; a hotter slope is bluer.
@@ -84,8 +84,8 @@ test('a cool dwarf too faint to measure in blue: TRAPPIST-1 keeps its own spectr
   assert.equal(spectrum?.samples, 343);
   assert.deepEqual(color.srgb, [255, 205, 106]);
   // The blue end is noise, so the one-sigma range is wide there and narrow in red.
-  assert.equal(range[0].srgb[0], 255);
-  assert.ok(range[1].srgb[2]! - range[0].srgb[2]! > 50, 'the blue channel is poorly constrained');
+  assert.equal(range![0].srgb[0], 255);
+  assert.ok(range![1].srgb[2]! - range![0].srgb[2]! > 50, 'the blue channel is poorly constrained');
   const flux = readXpSampledSpectrum((await readFile(new URL('photometry/gaia-dr3-xp-sampled.csv', system))).toString('utf8'), '2635476908753563008');
   const visible = (wavelength: number) => (wavelength - 336) / 2;
   // Sixteen visible samples are at or below zero; none is below zero by more than the floor allows.

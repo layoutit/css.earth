@@ -36,22 +36,22 @@
   },
   "lenses": {
     "titleKey": "lenses",
-    "defaultLens": "shape",
+    "defaultLens": "color",
     "controls": [
       {
-        "id": "shape",
-        "label": "Shape",
-        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
-        "thumbnail": "aldebaran-lens-shape.webp",
-        "surface": "aldebaran-surface-shape@2x.webp",
-        "poles": "aldebaran-poles-shape@2x.webp",
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (Kiehling 1987, relative calibration). The disc is unresolved; its darker edge follows a model limb-darkening law, not a measurement.",
+        "thumbnail": "aldebaran-lens-color.webp",
+        "surface": "aldebaran-surface-color@2x.webp",
+        "poles": "aldebaran-poles-color@2x.webp",
         "source": {
-          "id": "aldebaran-observational-measurements",
+          "id": "aldebaran-stellar-color",
           "path": "../manifest.json",
-          "url": "https://arxiv.org/abs/astro-ph/0502181"
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124"
         },
         "falseColor": false,
-        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+        "notes": "The colour of Aldebaran's spectrum as Kiehling (1987) measured it from the ground, 320-880 nm with a relative calibration; the observation date is not published. No resolved image of the surface is cast; the display axis is celestial north, a convention."
       }
     ]
   },
@@ -66,6 +66,12 @@
       "role": "facts",
       "description": "Richichi and Roccatagliata, \"Aldebaran’s angular diameter: How well do we know it?\", A&A 433, 305 (2005), arXiv:astro-ph/0502181",
       "href": "https://arxiv.org/abs/astro-ph/0502181"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "Kiehling (1987) spectrophotometry, HR 1457 (VizieR III/124)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124"
     }
   ],
   "provenance": {

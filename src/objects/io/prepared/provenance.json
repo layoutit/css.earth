@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f4217bd0c1508c3d89c765727dc73a85ff8662b604a543e528cd11bc542a1eac"
+    "sha256": "ff18bc3b511f464e13727a9bd564ad0b2b243682bbb2352dd5da8f007bfb27d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "329e5022473efb69e5e694ef1ec6bb96bdbb497e03d98c975bb57f75ee9a07dc"
+    "bindingsSha256": "e0f3b1f541f5efee4049a29c3615cd60d4cd746e0e76300e113c9e5121570471"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "270606134ae784b5dd479ddf6a5a1057d26941908e3f5f8796838ccc7c3ef004",
+      "sha256": "e9191bef4e52b9e66726e5a8fb675a73c9bc43e9b020bde5f723808bd8bbe1a8",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -76,7 +76,7 @@
             "output": "io-{id}{suffix}.webp",
             "thumbnail": "io-lens-{id}.webp",
             "source": "io-color-1km.tif",
-            "falseColor": true,
+            "falseColor": false,
             "science": {
               "kind": "terrestrial-observation",
               "input": "usgs-enhanced-global-1km",
@@ -408,6 +408,94 @@
                 }
               ]
             }
+          },
+          {
+            "id": "volcanic-heat",
+            "output": "io-{id}{suffix}.webp",
+            "thumbnail": "io-lens-{id}.webp",
+            "source": "science/jiram/io-jiram-m-night.IMG",
+            "falseColor": true,
+            "science": {
+              "kind": "terrestrial-scientific",
+              "id": "volcanic-heat",
+              "label": "Volcanic heat",
+              "format": "pds3-float-map",
+              "path": "science/jiram/io-jiram-m-night.IMG",
+              "labelPath": "science/jiram/io-jiram-m-night.LBL",
+              "grid": {
+                "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
+                "dataSetId": "CSSEARTH-IO-JIRAM-M-NIGHT-MOSAIC-V1",
+                "targetName": "IO",
+                "width": 720,
+                "height": 360,
+                "pixelsPerDegree": 2,
+                "referenceRadiusMeters": 1821490,
+                "centerLongitudeEastDegrees": 180,
+                "longitudeRangeEast": [
+                  0,
+                  360
+                ],
+                "sampleProjectionOffset": 359.5,
+                "lineProjectionOffset": 179.5,
+                "projectionRotation": "0.0 <degree>",
+                "missingValue": -1e+32,
+                "sampleType": "PC_REAL",
+                "coordinateSystem": "PLANETOCENTRIC",
+                "latitudeRange": [
+                  -90,
+                  90
+                ]
+              },
+              "description": "Juno JIRAM 4.8 µm night side · Mura et al. 2024 scale",
+              "title": "Heat from Io's volcanoes at 4.8 µm, seen by Juno's JIRAM camera on the night side, where no sunlight is reflected. Each spot is a hot spot's glow; the rest of the night side is too cold to register. Color follows the linear scale of Mura et al. (2024), Figure 2. Gray grid: never seen at night by the frames used.",
+              "sourceUrl": "https://atmos.nmsu.edu/PDS/data/PDS4/",
+              "minimum": 0,
+              "maximum": 0.15,
+              "colors": [
+                "#4020b0",
+                "#4328c5",
+                "#4633dc",
+                "#453dea",
+                "#3f4bf5",
+                "#3658fb",
+                "#1d66fd",
+                "#0271fc",
+                "#017efb",
+                "#0189f8",
+                "#0193ec",
+                "#029de7",
+                "#02a6e1",
+                "#03b1d9",
+                "#02b6cd",
+                "#01bcbf",
+                "#03bfb0",
+                "#01c69e",
+                "#01ca8d",
+                "#02cc76",
+                "#04ce5c",
+                "#5ec942",
+                "#9ac71d",
+                "#c0c504",
+                "#e6bc02",
+                "#fbbb13",
+                "#fdbf21",
+                "#fec912",
+                "#fdd703",
+                "#fae402",
+                "#f8f001",
+                "#fafb03"
+              ],
+              "labels": [
+                "0",
+                "0.05",
+                "0.10",
+                "0.15"
+              ],
+              "units": "band radiance, W m⁻² sr⁻¹",
+              "consumer": "volcanic-heat",
+              "sampling": "nearest",
+              "displaySampling": "nearest"
+            }
           }
         ],
         "lighting": {
@@ -456,7 +544,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "caaa0bad5b03a4107fc0526b08f10b25bbac4e7b9e168bfbdf0f3bc7b2d13279",
+      "sha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -512,11 +600,11 @@
               "label": "Orbit around Jupiter",
               "value": "1.77 days · sidereal",
               "source": {
-                "url": "https://doi.org/10.1007/s10569-017-9805-5",
-                "label": "IAU WGCCRE 2015 sidereal rate",
-                "checked": "2026-09-21",
+                "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
+                "label": "PDS/IAU sidereal rate",
+                "checked": "2026-09-08",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "iau-wgccre-2015",
+                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
                 "locator": "/references/2; orbital-period"
               }
             },
@@ -525,11 +613,11 @@
               "label": "Rotation period",
               "value": "1.77 days · synchronous",
               "source": {
-                "url": "https://doi.org/10.1007/s10569-017-9805-5",
-                "label": "IAU WGCCRE 2015 sidereal rate",
-                "checked": "2026-09-21",
+                "url": "https://pds.nasa.gov/ds-view/pds/viewProfile.jsp?dsid=GO-J-MAG-3-RDR-HIGHRES-V1.0",
+                "label": "PDS/IAU sidereal rate",
+                "checked": "2026-09-08",
                 "path": "source/editorial/factsheet-review.json",
-                "catalogueId": "iau-wgccre-2015",
+                "catalogueId": "galileo-jupiter-magnetometer-highres-v1",
                 "locator": "/references/2; rotation-period"
               }
             }
@@ -569,7 +657,7 @@
             },
             {
               "id": "enhanced",
-              "label": "False color",
+              "label": "Enhanced color",
               "thumbnail": "io-lens-enhanced.webp",
               "surface": "io-enhanced@2x.webp",
               "poles": "io-poles-enhanced@2x.webp",
@@ -577,8 +665,7 @@
                 "id": "usgs-enhanced-global-1km",
                 "path": "../manifest.json"
               },
-              "falseColor": true,
-              "notes": "USGS false-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
+              "notes": "USGS enhanced-color mosaic: near-infrared, green and violet color ratios combined with observed monochrome detail. USGS corrected broad limb darkening and matched image seams. Source color detail varies from 1.3 to 21 km per pixel. Interpolated polar color is withheld; observed monochrome remains where available. Gray grid marks missing imagery. Acquisition shading, seams and changes between mission dates can remain; globe lighting is approximate.",
               "noData": true
             },
             {
@@ -805,6 +892,220 @@
               },
               "notes": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
               "noData": true
+            },
+            {
+              "id": "volcanic-heat",
+              "label": "Volcanic heat",
+              "thumbnail": "io-lens-volcanic-heat.webp",
+              "surface": "io-volcanic-heat@2x.webp",
+              "poles": "io-poles-volcanic-heat@2x.webp",
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "4.8 µm radiance, night side",
+                "labels": [
+                  "0",
+                  "0.05",
+                  "0.10",
+                  "0.15"
+                ],
+                "meta": "W sr⁻¹ m⁻²",
+                "sourceUrl": "https://doi.org/10.3389/fspas.2024.1369472",
+                "recipe": {
+                  "palette": [
+                    [
+                      64,
+                      32,
+                      176
+                    ],
+                    [
+                      67,
+                      40,
+                      197
+                    ],
+                    [
+                      70,
+                      51,
+                      220
+                    ],
+                    [
+                      69,
+                      61,
+                      234
+                    ],
+                    [
+                      63,
+                      75,
+                      245
+                    ],
+                    [
+                      54,
+                      88,
+                      251
+                    ],
+                    [
+                      29,
+                      102,
+                      253
+                    ],
+                    [
+                      2,
+                      113,
+                      252
+                    ],
+                    [
+                      1,
+                      126,
+                      251
+                    ],
+                    [
+                      1,
+                      137,
+                      248
+                    ],
+                    [
+                      1,
+                      147,
+                      236
+                    ],
+                    [
+                      2,
+                      157,
+                      231
+                    ],
+                    [
+                      2,
+                      166,
+                      225
+                    ],
+                    [
+                      3,
+                      177,
+                      217
+                    ],
+                    [
+                      2,
+                      182,
+                      205
+                    ],
+                    [
+                      1,
+                      188,
+                      191
+                    ],
+                    [
+                      3,
+                      191,
+                      176
+                    ],
+                    [
+                      1,
+                      198,
+                      158
+                    ],
+                    [
+                      1,
+                      202,
+                      141
+                    ],
+                    [
+                      2,
+                      204,
+                      118
+                    ],
+                    [
+                      4,
+                      206,
+                      92
+                    ],
+                    [
+                      94,
+                      201,
+                      66
+                    ],
+                    [
+                      154,
+                      199,
+                      29
+                    ],
+                    [
+                      192,
+                      197,
+                      4
+                    ],
+                    [
+                      230,
+                      188,
+                      2
+                    ],
+                    [
+                      251,
+                      187,
+                      19
+                    ],
+                    [
+                      253,
+                      191,
+                      33
+                    ],
+                    [
+                      254,
+                      201,
+                      18
+                    ],
+                    [
+                      253,
+                      215,
+                      3
+                    ],
+                    [
+                      250,
+                      228,
+                      2
+                    ],
+                    [
+                      248,
+                      240,
+                      1
+                    ],
+                    [
+                      250,
+                      251,
+                      3
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "0.05",
+                    "0.10",
+                    "0.15"
+                  ]
+                }
+              },
+              "source": {
+                "id": "io-jiram-m-night-recipe",
+                "path": "../manifest.json",
+                "url": "https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT"
+              },
+              "facts": [
+                {
+                  "id": "classification",
+                  "label": "Quantity",
+                  "value": "Measured M-band (4.5–5.0 µm) radiance, night side"
+                },
+                {
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "22% of Io; 34 Juno JIRAM frames, orbits 41–49"
+                },
+                {
+                  "id": "scale",
+                  "label": "Color scale",
+                  "value": "Mura et al. (2024), Frontiers, Fig. 2"
+                }
+              ],
+              "notes": "Heat from Io's volcanoes at 4.8 µm, our own reduction of 34 Juno JIRAM frames from orbits 41, 43, 47 and 49 (April 2022 to March 2023), the orbits Mura et al. (2024) mapped. Only the night side is kept, where no sunlight is reflected. Each hot spot's total output agrees with the paper's; its peak is lower, because we do not sharpen the images as they do. Color follows the linear scale of their Figure 2. Gray grid: never seen at night in these orbits, including the south and Loki Patera.",
+              "noData": true
             }
           ],
           "labels": {
@@ -874,7 +1175,7 @@
     {
       "id": "features",
       "path": "source/preparation/features.json",
-      "sha256": "21927345b6204d7414b49f365c46ff33e6ccfdf175fc2219adb387782038c8fc",
+      "sha256": "30ee803bc616c989f623fae0df92f81f94ba07cd2f4100cb3e1d5325dcfa3338",
       "parameters": {
         "schema": "cssearth-surface-features@1",
         "directory": "features",
@@ -895,7 +1196,8 @@
           "enhanced",
           "geology",
           "spectral-slope",
-          "visible-absorption"
+          "visible-absorption",
+          "volcanic-heat"
         ],
         "kinds": {
           "point": [
@@ -1024,7 +1326,7 @@
       "acquisition": "Download the published GeoTIFF and verify pinned bytes before preparation.",
       "redistribution": "Reacquirable source binary excluded from Git; prepared textures retain credits.",
       "lensId": "enhanced",
-      "label": "False color",
+      "label": "Enhanced color",
       "falseColor": true,
       "width": 11445,
       "height": 5723,
@@ -1558,6 +1860,74 @@
       "verificationOperations": []
     },
     {
+      "id": "io-jiram-m-night-map",
+      "path": "science/jiram/io-jiram-m-night.IMG",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      },
+      "kind": "generated-intermediate",
+      "title": "science/jiram/io-jiram-m-night.IMG",
+      "acquisition": "tools/objects/juno/jiram-mosaic.mts",
+      "upstreamLineage": "not-recorded",
+      "sha256": "84f2671acc566a7e52e71f977b2391d5a240cc9617bc8774c45ec685a963381b",
+      "bytes": 1036800,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "io-jiram-m-night-label",
+      "path": "science/jiram/io-jiram-m-night.LBL",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      },
+      "kind": "generated-intermediate",
+      "title": "science/jiram/io-jiram-m-night.LBL",
+      "acquisition": "tools/objects/juno/jiram-mosaic.mts",
+      "upstreamLineage": "not-recorded",
+      "sha256": "efb8da37d9c03e37cef8fc44b95f9d8c5da9fccdf99b7c2d39218fe0a9351504",
+      "bytes": 1307,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "kind": "authored-content",
       "id": "io-object-content",
       "path": "content/object.json",
@@ -1570,8 +1940,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "caaa0bad5b03a4107fc0526b08f10b25bbac4e7b9e168bfbdf0f3bc7b2d13279",
-      "bytes": 13912,
+      "sha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
+      "bytes": 19010,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1738,7 +2108,7 @@
     },
     {
       "id": "enhanced",
-      "label": "False color",
+      "label": "Enhanced color",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "observationAttribution": "source-lineage",
@@ -1752,7 +2122,7 @@
         "raster"
       ],
       "interpretation": {
-        "falseColor": true,
+        "falseColor": false,
         "polarSampling": "original-photograph-footprint"
       },
       "inputs": [
@@ -1939,6 +2309,57 @@
           "sourceId": "io-muse-visible-absorption-night-1",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/4/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "volcanic-heat",
+      "label": "Volcanic heat",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [],
+      "lensIds": [
+        "volcanic-heat"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": true
+      },
+      "inputs": [
+        "io-jiram-m-night-map",
+        "io-jiram-m-night-label"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/io/io-volcanic-heat@2x.webp",
+          "bytes": 111402,
+          "sha256": "88a522e92ee8198caad78691d29d4069ac3945e9fcc086772113db8ae090a759",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-lens-volcanic-heat.webp",
+          "bytes": 878,
+          "sha256": "ef59e15bebb60088d8dd643dba5d4de81f14a0dbdafeb011ab1bc15782840f09",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/io/io-poles-volcanic-heat@2x.webp",
+          "bytes": 17596,
+          "sha256": "ff993b2a6b084f9c139bdbcc5ec7228623a2b2cfaa0d76fb54352c5339595929",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "io-jiram-m-night-map",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/5/source."
         }
       ],
       "inputBasis": "bound-inputs"
@@ -2181,8 +2602,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 4132,
-          "sha256": "18faf9e92f87ccf170ebebc2c3a67db8e7e480ebf63589babcca5db09d22584b",
+          "bytes": 4244,
+          "sha256": "b1c7f3d32a74b9c70df8e0c81e1e0d30a1f861f1c62391fe838f96d075687ae1",
           "verification": "bytes-verified"
         }
       ],
@@ -2250,7 +2671,7 @@
     },
     {
       "id": "preview:enhanced",
-      "label": "False color preview",
+      "label": "Enhanced color preview",
       "recipe": "raster",
       "selector": "/surfaces/1",
       "recipeDependencies": [
@@ -2347,6 +2768,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:volcanic-heat",
+      "label": "Volcanic heat preview",
+      "recipe": "raster",
+      "selector": "/surfaces/5",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "volcanic-heat"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/volcanic-heat.webp",
+          "bytes": 34792,
+          "sha256": "94bd89225b60589a74a6d8c0d2c680872e87ecea67b4ece51b82b8944db71365",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -2355,11 +2801,11 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "c02c2cac20e626586ccd4b1df775e5362fa2e632249a6c6bc2026629bad8b81d",
+    "materialSha256": "26e7d8646de983cf3ba694b3ebbb5f504c5a2511cabd88837b3b8a7d9d2e7e57",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "329e5022473efb69e5e694ef1ec6bb96bdbb497e03d98c975bb57f75ee9a07dc"
+      "bindingsSha256": "e0f3b1f541f5efee4049a29c3615cd60d4cd746e0e76300e113c9e5121570471"
     }
   }
 }

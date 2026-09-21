@@ -1,5 +1,4 @@
-import { presentPhysicalPoseInVolume } from '@cssearth/engine';
-import { cssCameraAxesFromOrientation } from '../navigation/world-camera-math.js';
+import { projectVolumeSphere } from './projected-volume-visibility.js';
 import type { PreparedCssVolume, PreparedVolumeImpostors, VolumeCameraPublication, VolumeVector } from './types.js';
 
 type View = PreparedVolumeImpostors['views'][number];
@@ -19,32 +18,14 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
   if (!(viewport.focalPixels > 0) || !Number.isFinite(viewport.focalPixels) || !viewport.principalOffsetPixels.every(Number.isFinite)) {
     throw new TypeError('Volume impostor camera viewport is invalid.');
   }
-  const local = presentPhysicalPoseInVolume(world.pose, frame), rotation = cssCameraAxesFromOrientation(local.orientationXyzw);
-  const right: VolumeVector = [rotation[0]!, rotation[3]!, rotation[6]!];
-  const down: VolumeVector = [rotation[1]!, rotation[4]!, rotation[7]!];
-  const back: VolumeVector = [rotation[2]!, rotation[5]!, rotation[8]!];
-  const depth = dot(back, local.positionUnits), radius = bank.radiusUnits, distance = Math.hypot(...local.positionUnits);
-  const scale = viewport.focalPixels / Math.max(Number.MIN_VALUE, depth);
-  const x = viewport.principalOffsetPixels[0] - dot(right, local.positionUnits) * scale;
-  const y = viewport.principalOffsetPixels[1] - dot(down, local.positionUnits) * scale;
-  // Inside the bounding sphere the full volume draws and its physical leaf frustum does the culling. Whether the
-  // camera is inside is its true distance, not its depth along the view axis: a distant cloud beside the camera has
-  // near-zero depth and must not pass for a near one.
-  const inside = distance <= radius;
+  const radius = bank.radiusUnits;
+  const { local, right, down, back, depth, distance, x, y, inside, visible } = projectVolumeSphere(world, viewport, frame, radius);
   // In front of the sphere the projected size is unchanged; beside or behind it the tangent-cone size replaces the
-  // old infinite answer, so an off-axis cloud never switches to its full volume.
+  // old infinite answer, so an off-axis cloud never switches to its full volume. Inside it the full volume draws and
+  // its physical leaf frustum does the culling.
   const diameterPixels = inside ? Number.POSITIVE_INFINITY
     : 2 * radius * viewport.focalPixels / (depth > radius ? depth : Math.sqrt(distance * distance - radius * radius));
   const volumeMix = smooth((diameterPixels - bank.fullBelowDiameterPixels) / (bank.volumeAboveDiameterPixels - bank.fullBelowDiameterPixels));
-  // Outside, the sphere is visible when its angular radius reaches into the field of view (the viewport's half
-  // diagonal), and, in front of the camera, when its projected footprint overlaps the viewport.
-  const halfWidth = (viewport.widthPixels ?? Infinity) / 2, halfHeight = (viewport.heightPixels ?? Infinity) / 2;
-  const fieldRadius = Math.atan(Math.hypot(halfWidth, halfHeight) / viewport.focalPixels);
-  const offAxis = Math.acos(Math.max(-1, Math.min(1, depth / Math.max(Number.MIN_VALUE, distance))));
-  const reachesField = offAxis - Math.asin(Math.min(1, radius / Math.max(Number.MIN_VALUE, distance))) < fieldRadius;
-  const extent = viewport.focalPixels * radius / Math.max(Number.MIN_VALUE, depth - radius);
-  const visible = inside || (reachesField && (depth <= radius ||
-    (Math.abs(x) <= halfWidth + extent && Math.abs(y) <= halfHeight + extent)));
   // A baked view shows the volume from a direction, so the view follows where the camera is, not where it looks:
   // turning in place keeps the same views and only rotates their images.
   const toViewer: VolumeVector = distance > 0
@@ -60,8 +41,9 @@ export function projectVolumeImpostors(publication: VolumeCameraPublication, fra
 export function selectImpostorViews(views: readonly View[], back: VolumeVector): readonly { view: View; weight: number }[] {
   const nearest = views.map(view => ({ view, distance: Math.max(0, 1 - dot(view.back, back)) }))
     .sort((a, b) => a.distance - b.distance || a.view.id.localeCompare(b.view.id)).slice(0, 4);
-  if (nearest[0]!.distance < 1e-10) return [{ view: nearest[0]!.view, weight: 1 }];
-  const cutoff = nearest[3]!.distance;
+  // A single view (a distant billboard) is the whole image from every direction.
+  if (nearest.length === 1 || nearest[0]!.distance < 1e-10) return [{ view: nearest[0]!.view, weight: 1 }];
+  const cutoff = nearest[3]?.distance ?? Number.POSITIVE_INFINITY;
   const weighted = nearest.slice(0, 3).map(({ view, distance }) => ({ view, weight: Math.max(0, 1 / Math.max(1e-10, distance) - 1 / Math.max(1e-10, cutoff)) ** 2 }));
   const total = weighted.reduce((sum, entry) => sum + entry.weight, 0);
   // Exact equal-distance directions are rare with the prepared 26-view lattice.

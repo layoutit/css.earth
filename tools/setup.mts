@@ -1,6 +1,9 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import type { RuntimeAssetLocation } from './runtime-assets.mts';
 interface InstallProgress {completed: number; total: number; installed: number; reused: number; skipped: number;}
+/** Network failures and 5xx are retried; a 404 is a verdict and is never retried. */
+const TRANSIENT_RETRIES = 3, RETRY_BACKOFF_MS = 500;
+const delay = (ms: number) => new Promise<void>(resolve => setTimeout(resolve, ms));
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -32,7 +35,21 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
             sha256(existing) === asset.sha256) {
           reused++;
         } else {
-          const response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) });
+          // A dropped connection is not a missing asset. Across 5,500+ files a single transient
+          // failure would otherwise fail the whole run, so retry the network with backoff. A 404
+          // still fails (or skips) on the first response: "not published" is a fact, not a blip.
+          let response!: Awaited<ReturnType<typeof fetcher>>;
+          for (let attempt = 0; ; attempt++) {
+            try { response = await fetcher(asset.url, { signal: AbortSignal.timeout(120000) }); }
+            catch (error) {
+              if (attempt >= TRANSIENT_RETRIES) throw error;
+              await delay(RETRY_BACKOFF_MS * 2 ** attempt);
+              continue;
+            }
+            if (response.status < 500 || attempt >= TRANSIENT_RETRIES) break;
+            await response.body?.cancel();
+            await delay(RETRY_BACKOFF_MS * 2 ** attempt);
+          }
           // A deploy build may tolerate one object's asset genuinely missing from R2 (a 404, not a flaky
           // 5xx/network error) rather than fail the whole build: skip it loudly and let the object's own
           // unavailable-package path report it, instead of installing a fabricated or partial file here.

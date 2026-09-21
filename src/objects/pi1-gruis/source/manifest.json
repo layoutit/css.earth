@@ -143,8 +143,8 @@
       }
     },
     {
-      "expectedBytes": 5868,
-      "expectedSha256": "705525ebc5b314155b354c8fc4460ad77627199a16e65ad871d29f5ae1e9a3b8",
+      "expectedBytes": 6418,
+      "expectedSha256": "2d5f202433a2200dc4b1696d1d0e501b52d88be60ab02156ad644371ea936326",
       "id": "pi1-gruis-preparation-raster",
       "path": "preparation/raster.json",
       "origin": "Repository-authored raster recipe: the PIONIER reconstruction cast onto the reference sphere by the surface-observation route, polar bands, off-limb plate",
@@ -163,7 +163,7 @@
     },
     {
       "expectedBytes": 1874,
-      "expectedSha256": "2f4961a22bca3aedd6a648505bfe6fe7e33e032fbcc69c89ae4e58948fc8dc7a",
+      "expectedSha256": "660c775f6d8540d690d5b8397018927523761f93f7b3489cfd3ae699b67d9b48",
       "id": "pi1-gruis-preparation-geometry",
       "path": "preparation/geometry.json",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, stepped seam outset, emissive material",
@@ -233,6 +233,92 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "pi1-gruis-gaia-dr3-xp-sampled",
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "expectedBytes": 10165,
+      "expectedSha256": "220d5a51b829440f2226046cf24a5156f604d8512ffc824cb1381897e3696fe7",
+      "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6518817665843312000&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "license": "Gaia data terms: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.cosmos.esa.int/web/gaia-users/credits"
+      ],
+      "acquisition": "Gaia DataLink XP_SAMPLED CSV for the source, saved unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One sampled spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-pi1-gruis",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/photometry/gaia-dr3-xp-sampled.csv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pi1-gruis-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1369,
+      "expectedSha256": "d8048427c6d6d03ae725200a6fe12b97e0772812ad592e45a5e74ab233a27a05",
+      "origin": "https://gea.esac.esa.int/archive/",
+      "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "gaia-dr3-xp-pi1-gruis",
+            "role": "material",
+            "evidence": "src/objects/pi1-gruis/source/photometry/stellar-color.json#/sampledSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "pi1-gruis-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
@@ -262,8 +348,8 @@
   ],
   "documents": [
     {
-      "expectedBytes": 5375,
-      "expectedSha256": "cdf02e6d556f2d4e153081d4d5e593f2c4c87f135886549e3f5de17d8dd8e1f3",
+      "expectedBytes": 6489,
+      "expectedSha256": "53374eabc116c5e78e02a7be7432775a079052a71ed9cd7d95f4d045879696c4",
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -271,8 +357,8 @@
       }
     },
     {
-      "expectedBytes": 1329,
-      "expectedSha256": "0ab463ef98063843f73bc8c8bc2d27508ef4d1c63ebf32f01414f702fab9dd08",
+      "expectedBytes": 1691,
+      "expectedSha256": "c192c41f3bba636858ad612ba3dcb384577a8198c1571efc25fd4c32fee22c68",
       "path": "measurements.json",
       "sourceBinding": {
         "kind": "local",
@@ -280,8 +366,8 @@
       }
     },
     {
-      "expectedBytes": 607,
-      "expectedSha256": "0c86dfc7fca672120ae30921da2d51dcc8797ca61a115a5642dc66d669ad06d2",
+      "expectedBytes": 915,
+      "expectedSha256": "bd2975fc582cda33687560dc2d301f1acd80c8e43b39a16cc169dbcb762d4d90",
       "path": "preparation/acquisition.json"
     },
     {

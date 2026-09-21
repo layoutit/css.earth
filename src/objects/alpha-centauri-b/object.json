@@ -28,7 +28,7 @@
           "projection": "equirectangular",
           "lenses": [
             {
-              "id": "shape",
+              "id": "color",
               "source": "content",
               "material": "emission"
             }
@@ -100,13 +100,13 @@
       ],
       "metadata": {
         "url": "prepared/page.json",
-        "sha256": "2dc48f837601badc61cb2f4f336755f12afb5ca2e52aa84b8125a1da081f3ea0"
+        "sha256": "a5986601be685da43778a758709407244392d8dc1746f7f29dae3a5da6230935"
       }
     },
     "catalog": {
       "name": "Alpha Centauri B",
       "classification": "star",
-      "color": "#ffe2c0",
+      "color": "#ffe8d7",
       "distanceAu": 275937.8,
       "description": "Orange dwarf 1.34 parsecs away; its photosphere is not imaged here.",
       "systemName": "Centaurus",
@@ -146,6 +146,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "4f788ca326df5fb9f02d592c1bc55ea7fe4d07bc711bb59315d251b53f50638d"
+    "sha256": "12702d57c0e4ff77f1f28f055015ad3818f3eab158ca57861e2bb340cc0878c3"
   }
 }

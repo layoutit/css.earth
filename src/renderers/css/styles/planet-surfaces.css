@@ -105,7 +105,9 @@
   transform-style: preserve-3d;
 }
 
+/* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
 .mercury-cutaway {
+  display: none;
   visibility: hidden;
 }
 
@@ -229,6 +231,7 @@
 
 .planet-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
   .mercury-cutaway {
+  display: block;
   visibility: visible;
 }
 
@@ -1044,6 +1047,22 @@
   background-image: url("/scenes/ceres/ceres-poles-elevation@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-clay-band@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-clay-band@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-ammonium-band@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-ammonium-band@2x.webp") !important;
+}
+
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .planet-stage[data-object-id="ceres"] .ceres-fixed-material {
@@ -1749,6 +1768,14 @@
 
 .planet-stage[data-object-id="io"][data-lens="visible-absorption"] .polycss-scene s.io-polar {
   background-image: url("/scenes/io/io-poles-visible-absorption@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-volcanic-heat@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-volcanic-heat@2x.webp") !important;
 }
 
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
@@ -2581,24 +2608,26 @@
   background-image: var(--sun-poles-image) !important;
 }
 
-/* Off-limb context: 768 px = raster.json emission.offLimbSize = the plate's logical size at zoom 1. */
+/* Off-limb context: 768 px = raster.json emission.offLimbSize = the plate's logical size at zoom 1, times the sphere's
+   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
 .planet-stage[data-object-id="sun"] .sun-corona-layer {
   background-image: var(--sun-corona-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(768px * var(--sun-camera-zoom, 1))
-    calc(768px * var(--sun-camera-zoom, 1));
+    calc(768px * 1.25 * var(--sun-camera-zoom, 1))
+    calc(768px * 1.25 * var(--sun-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale (1.25), the size
+   the sphere is drawn at, so the plate's edge is the sphere's outline. */
 .planet-stage[data-object-id="sun"] .sun-limb-layer {
   background-image: var(--sun-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--sun-camera-zoom, 1))
-    calc(496px * var(--sun-camera-zoom, 1));
+    calc(496px * 1.25 * var(--sun-camera-zoom, 1))
+    calc(496px * 1.25 * var(--sun-camera-zoom, 1));
 }
 
 /* Spin origin carried from the retired sun-surfaces.css (Carrington longitude 0 faces the default yaw). */

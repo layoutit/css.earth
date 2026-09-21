@@ -22,7 +22,7 @@ import { pinObjectDocuments, type DocumentPinChange } from './pin-object-documen
 import { readContextObjects } from './prepare-catalog.mts';
 
 const registryPath = "site/objects.mts";
-const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json"]);
+const approvedSharedData = new Set(["src/objects/sun/prepared/world-context.json", "src/objects/sun/prepared/world-context-summary.json"]);
 // Registered objects own packages; context folders beside them (galaxies, nebulae, the heliosphere) are application data.
 const objectPackageIds: ReadonlySet<string> = new Set(OBJECTS.map(object => object.id));
 const objectPackage = (file: string) => file.startsWith('src/objects/') && objectPackageIds.has(file.split('/')[2] ?? '');
@@ -162,9 +162,9 @@ function worldContextPlanImport(ast: Program | null, file: string): {data: numbe
     node.test.right.type === 'Literal' && node.test.right.value === 'file:');
   const inNodeBranch = (node: Node | undefined) => !!node && !!nodeBranch && sourceStart(node) >= sourceStart(nodeBranch.consequent) && sourceEnd(node) <= sourceEnd(nodeBranch.consequent);
   if (!url || nameOf(url.callee) !== 'URL' || url.arguments.length !== 2 ||
-      sourcePath !== '../src/objects/sun/prepared/world-context.json' ||
+      sourcePath !== '../src/objects/sun/prepared/world-context-summary.json' ||
       base?.object.type !== 'MetaProperty' || base.object.meta.name !== 'import' || base.object.property.name !== 'meta' || nameOf(base.property) !== 'url' ||
-      parser?.type !== 'ImportDeclaration' || !parser.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'parsePreparedWorldContext' && specifier.local.name === 'parsePreparedWorldContext') ||
+      parser?.type !== 'ImportDeclaration' || !parser.specifiers.some(specifier => specifier.type === 'ImportSpecifier' && nameOf(specifier.imported) === 'parsePreparedWorldContextSummary' && specifier.local.name === 'parsePreparedWorldContextSummary') ||
       imports.length !== 2 || !helper || options(helper) || !data || !inNodeBranch(helper) || !inNodeBranch(data) ||
       json?.type !== 'Literal' || json.value !== 'json' ||
       pattern?.properties.length !== 1 || pattern.properties[0]?.type !== 'Property' ||
@@ -173,7 +173,7 @@ function worldContextPlanImport(ast: Program | null, file: string): {data: numbe
       locateBase?.object.type !== 'MetaProperty' || locateBase.object.meta.name !== 'import' || locateBase.object.property.name !== 'meta' || nameOf(locateBase.property) !== 'url' ||
       // Project-relative spelling of the same file `source` names from `site/`.
       locatePath?.value !== sourcePath.slice('../'.length) ||
-      nameOf(validation?.callee) !== 'parsePreparedWorldContext' || validation?.arguments.length !== 1 ||
+      nameOf(validation?.callee) !== 'parsePreparedWorldContextSummary' || validation?.arguments.length !== 1 ||
       nameOf(read?.callee) !== 'readPreparedWorldContext' || read?.arguments.length !== 0) return null;
   // No assignment may redirect the statically bound source or the helper binding.
   if (nodes.some(node => node.type === 'AssignmentExpression' && (['source', 'nodeProjectFileUrl'].includes(nameOf(node.left)) || memberPath(node.left)?.[0] === 'source'))) return null;
@@ -572,7 +572,9 @@ function requireContextFrame(value: unknown, objectId: string) {
   const identity = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*$/.test(value);
   if (!isRecord(value)) fail('context is not an object');
   const context = value, frame = context.frame, focus = context.focus, camera = context.camera, stars = context.stars;
-  if (context.schema !== 'cssearth-world-context@1' || !isRecord(frame) || !isRecord(focus) || !isRecord(camera) || !isRecord(stars) || focus.id !== objectId ||
+  // The summary is the main thread's copy: the same bodies and frame, orbits without paths.
+  const summary = context.schema === 'cssearth-world-context-summary@1';
+  if ((!summary && context.schema !== 'cssearth-world-context@1') || !isRecord(frame) || !isRecord(focus) || !isRecord(camera) || !isRecord(stars) || focus.id !== objectId ||
       !vector(frame.originM) || !vector(focus.positionM) || !sameVector(frame.originM, focus.positionM) ||
       !positive(frame.bodyRadiusM) || focus.radiusM !== frame.bodyRadiusM || !positive(frame.metersPerUnit) ||
       !positive(camera.minimumDistanceM) || !positive(camera.maximumDistanceM) || camera.maximumDistanceM <= camera.minimumDistanceM) fail('focus, physical frame, or camera range disagree');
@@ -602,6 +604,13 @@ function requireContextFrame(value: unknown, objectId: string) {
     if (body.orbit === undefined) continue;
     const orbit = requireRecord(body.orbit), parent = points.get(requireString(orbit.centerBodyId));
     const open = orbit.closed === false;
+    if (summary) {
+      if (!parent || parent.id === body.id || !vector(orbit.centerPositionM) || !orbit.centerPositionM.every((value, axis) => value === parent.positionM[axis]) ||
+          typeof orbit.vertexCount !== 'number' || !Number.isSafeInteger(orbit.vertexCount) || orbit.vertexCount < 8 || typeof orbit.fullTrail !== 'boolean' ||
+          ['verticesM', 'trail', 'activeChords', 'extentChords', 'bodyVertexIndex', 'trailModel'].some(key => orbit[key] !== undefined) ||
+          (open ? !positive(orbit.displayExtentAu) : orbit.closed !== undefined || orbit.displayExtentAu !== undefined)) fail('body orbit summary is invalid');
+      continue;
+    }
     const bodyVertexIndex = open ? orbit.bodyVertexIndex : 0;
     if (open) {
       if (!positive(orbit.displayExtentAu) || orbit.trailModel !== 'finite-open-trajectory-constant-weight' ||
@@ -706,10 +715,11 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       return;
     }
     if (approvedSharedData.has(file)) {
-      let context: unknown;
-      try { context = JSON.parse(await source(path)); }
-      catch { throw new TypeError(`Prepared context frame is invalid: ${file} cannot be read.`); }
-      requireContextFrame(context, 'sun');
+      const read = async (file: string): Promise<unknown> => {
+        try { return JSON.parse(await source(path)); }
+        catch { throw new TypeError(`Prepared context frame is invalid: ${file} cannot be read.`); }
+      };
+      requireContextFrame(await read(file), 'sun');
       return;
     }
     if (file.startsWith("../") || objectPackage(file)) {
@@ -724,9 +734,12 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
       if (worldContextPlanImport(parseRuntimeSource(await source(path), file), file) === null) {
         sharedViolations.push({ file, line: 1, reason: 'Application world context plan must validate its pinned JSON source.' });
       } else {
-        const contextPath = resolve(root, 'src/objects/sun/prepared/world-context.json');
-        sharedEdges.get(path)!.add(contextPath);
-        await sharedVisit(contextPath);
+        // The main thread reads the summary; the planner worker reads the full file.
+        for (const file of ['world-context-summary.json', 'world-context.json']) {
+          const contextPath = resolve(root, 'src/objects/sun/prepared', file);
+          sharedEdges.get(path)!.add(contextPath);
+          await sharedVisit(contextPath);
+        }
       }
     }
     sharedFactoryCalls.set(path, facts.factoryCalls);

@@ -69,18 +69,19 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(600px * var(--antares-camera-zoom, 1))
-    calc(600px * var(--antares-camera-zoom, 1));
+    calc(600px * 1.25 * var(--antares-camera-zoom, 1))
+    calc(600px * 1.25 * var(--antares-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
 .planet-stage[data-object-id="antares"] .antares-limb-layer {
   background-image: var(--antares-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--antares-camera-zoom, 1))
-    calc(496px * var(--antares-camera-zoom, 1));
+    calc(496px * 1.25 * var(--antares-camera-zoom, 1))
+    calc(496px * 1.25 * var(--antares-camera-zoom, 1));
 }
 
 .planet-stage[data-object-id="antares"] .polycss-camera {

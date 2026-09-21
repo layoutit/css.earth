@@ -1,0 +1,30 @@
+{
+ "id": "rasalhague",
+ "classification": "star",
+ "order": 1213,
+ "physical": {
+  "name": "Rasalhague",
+  "horizonsCode": null,
+  "meanRadiusKm": 1872729,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Rasalhague is a rapid rotator: Monnier et al. (2010), ApJ 725, 1192 measure an equatorial radius of 2.858 and a polar radius of 2.388 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 2.69 solar radii; the scene draws the measured flattening, with the equatorial radius on the outline. Adopted 1,872,729 km, 2.6919 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis, the measured rotation pole, is up.",
+ "star": {
+  "rightAscensionDegrees": 263.73362272030505,
+  "declinationDegrees": 12.560037391671425,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 14.8965,
+  "properMotionRaMasPerYear": 108.07,
+  "properMotionDecMasPerYear": -221.57,
+  "radialVelocityKmPerS": 11.7,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Oph (HIP 86032), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Oph",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 67.13 \u00b1 1.06 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: 108.07, -221.57 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: 11.7 km/s, reference 2006AstL...32..759G."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 86032
+ }
+}

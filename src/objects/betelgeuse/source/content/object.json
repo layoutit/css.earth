@@ -121,6 +121,134 @@
         }
       },
       {
+        "id": "matisse-2018-12",
+        "label": "MATISSE December 2018",
+        "thumbnail": "betelgeuse-lens-matisse-2018-12.webp",
+        "surface": "betelgeuse-surface-matisse-2018-12@2x.webp",
+        "poles": "betelgeuse-poles-matisse-2018-12@2x.webp",
+        "source": {
+          "id": "betelgeuse-matisse-2018-12-continuum",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 3 to 15 December 2018, in the 3.94-4.00 micrometre continuum, with the February 2020 recipe unchanged, convolved to the 3 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius, so nothing finer than the beam is shown. The reconstruction does not reach the check: it fits the closure phases at reduced chi-squared 3.03 against a limit of 3, and a spotless disc from the same coverage leaves patches as strong (ratio 1.04, limit 2). So its bright and dark patches are not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative intensity at 4 µm",
+          "labels": [
+            "0.74",
+            "0.87",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.74",
+              "0.87",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+          "sourceUrl": "https://arxiv.org/abs/2401.12404"
+        }
+      },
+      {
+        "id": "matisse-2020-12",
+        "label": "MATISSE December 2020",
+        "thumbnail": "betelgeuse-lens-matisse-2020-12.webp",
+        "surface": "betelgeuse-surface-matisse-2020-12@2x.webp",
+        "poles": "betelgeuse-poles-matisse-2020-12@2x.webp",
+        "source": {
+          "id": "betelgeuse-matisse-2020-12-continuum",
+          "path": "../manifest.json"
+        },
+        "falseColor": true,
+        "notes": "An image of the photosphere reconstructed by the public SQUEEZE code from public VLT/MATISSE visibilities and closure phases of 14, 18 and 27 December 2020, in the 3.94-4.00 micrometre continuum, with the February 2020 recipe unchanged, convolved to the 3.1 milliarcsecond beam of this epoch's longest baseline and cast onto a sphere of the published radius, so nothing finer than the beam is shown. The reconstruction fits its data (reduced chi-squared 0.53 and 1.77), but a spotless disc from the same coverage leaves patches as strong (ratio 0.87, limit 2), and the two halves of the data agree only at 0.45 (limit 0.5). So its bright and dark patches are not confirmed as surface features. The colours are a legend for reconstructed relative intensity in one infrared band, the paper's heat scale: not colour, temperature or albedo. The far hemisphere and the poles were not observed.",
+        "noData": true,
+        "legend": {
+          "kind": "scale",
+          "title": "Relative intensity at 4 µm",
+          "labels": [
+            "0.62",
+            "0.81",
+            "1.00"
+          ],
+          "recipe": {
+            "palette": [
+              [
+                59,
+                5,
+                0
+              ],
+              [
+                154,
+                30,
+                0
+              ],
+              [
+                224,
+                100,
+                26
+              ],
+              [
+                255,
+                179,
+                64
+              ],
+              [
+                255,
+                233,
+                160
+              ],
+              [
+                255,
+                251,
+                240
+              ]
+            ],
+            "labels": [
+              "0.62",
+              "0.81",
+              "1.00"
+            ]
+          },
+          "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
+          "sourceUrl": "https://arxiv.org/abs/2401.12404"
+        }
+      },
+      {
         "id": "dust-2024",
         "label": "Polarised dust · December 2024",
         "thumbnail": "betelgeuse-lens-matisse.webp",
@@ -249,6 +377,21 @@
           "meta": "fraction of the peak · ALMA band 6, 217.105 GHz · viridis, false colour",
           "sourceUrl": "https://almascience.org/aq/?result_view=observation&projectCode=2022.A.00026.S"
         }
+      },
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from a measured spectrum of the star (VLT/X-shooter). The disc is unresolved, and no darkening toward the edge is measured.",
+        "thumbnail": "betelgeuse-lens-color.webp",
+        "surface": "betelgeuse-surface-color@2x.webp",
+        "poles": "betelgeuse-poles-color@2x.webp",
+        "source": {
+          "id": "betelgeuse-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
+        },
+        "falseColor": false,
+        "notes": "The colour of Betelgeuse's VLT/X-shooter spectrum. It was taken on 12 October 2009, before the Great Dimming, and is not corrected for light lost at the slit, which can tilt the colour. No resolved image of the surface is cast here."
       }
     ]
   },
@@ -281,6 +424,12 @@
       "role": "facts",
       "description": "SQUEEZE, GPL-3.0",
       "href": "https://github.com/fabienbaron/squeeze"
+    },
+    {
+      "label": "Spectrum",
+      "role": "facts",
+      "description": "X-Shooter Spectral Library DR3: X0036 (Betelgeuse)",
+      "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34"
     }
   ],
   "provenance": {

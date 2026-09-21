@@ -1,0 +1,32 @@
+{
+  "id": "simbad-bet-cas",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * bet Cas (Caph)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=bet+Cas",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/caph/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "cf11ce7356970d52fa5846e565461c81e39b38d9b61f6287d86334cd0866cc7b",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/caph/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

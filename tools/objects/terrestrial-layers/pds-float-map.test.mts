@@ -25,3 +25,38 @@ test('PDS sample support does not fill missing cells, cross hemispheres, or extr
   assert.equal(s.sample(225,-45),0.03);assert.equal(s.sample(45,45),null);assert.equal(s.sample(225,-90),null);assert.equal(s.sample(225,91),null);
  } finally {await rm(root,{recursive:true,force:true});}
 });
+// A detached-label, big-endian, east-positive grid limited to ±30° latitude, like the Dawn VIR Ceres mosaics.
+const eastGrid={productId:'EXAMPLE_EAST',dataSetId:'EXAMPLE',targetName:'1 CERES',width:12,height:2,pixelsPerDegree:1/30,referenceRadiusMeters:470000,
+ centerLongitudeEastDegrees:180,longitudeRangeEast:[0,360],sampleProjectionOffset:5.5,lineProjectionOffset:0.5,projectionRotation:'0.0 <degree>',
+ missingValue:-1e32,sampleType:'IEEE_REAL',coordinateSystem:'PLANETOCENTRIC',latitudeRange:[-30,30]};
+function eastLabel(overrides={}) {
+ const fields={PDS_VERSION_ID:'PDS3',DATA_SET_ID:'"EXAMPLE"',PRODUCT_ID:'"EXAMPLE_EAST"',RECORD_BYTES:48,FILE_RECORDS:3,RECORD_TYPE:'FIXED_LENGTH','^IMAGE':'"EAST.IMG"',TARGET_NAME:'"1 CERES"',
+  LINES:2,LINE_SAMPLES:12,OFFSET:0.0,SCALING_FACTOR:1.0,MISSING_CONSTANT:'-1.0E+32',SAMPLE_BITS:32,SAMPLE_TYPE:'IEEE_REAL',MAP_PROJECTION_TYPE:'"EQUIRECTANGULAR"',
+  A_AXIS_RADIUS:'470.0 <km>',B_AXIS_RADIUS:'470.0 <km>',C_AXIS_RADIUS:'470.0 <km>',COORDINATE_SYSTEM_NAME:'PLANETOCENTRIC',COORDINATE_SYSTEM_TYPE:'"BODY-FIXED ROTATING"',
+  POSITIVE_LONGITUDE_DIRECTION:'EAST',CENTER_LATITUDE:'0.0 <degree>',CENTER_LONGITUDE:'180.0 <degree>',MAP_PROJECTION_ROTATION:'0.0 <degree>',MAP_RESOLUTION:`${1/30} <pixel/degree>`,
+  MAXIMUM_LATITUDE:'30 <degree>',MINIMUM_LATITUDE:'-30 <degree>',EASTERNMOST_LONGITUDE:'360.0 <degree>',WESTERNMOST_LONGITUDE:'0.0 <degree>',
+  LINE_PROJECTION_OFFSET:'0.5 <pixel>',SAMPLE_PROJECTION_OFFSET:'5.5 <pixel>',...overrides};
+ return Object.entries(fields).map(([k,v])=>`${k} = ${v}\n`).join('')+'END\n';
+}
+function eastImage() {
+ const bytes=Buffer.alloc(96);for(let i=0;i<24;i++)bytes.writeFloatBE(i/100,i*4);bytes.writeFloatBE(-1e32,5*4);return bytes;
+}
+test('detached big-endian east-positive grids place longitude eastward and keep their latitude limits',async()=>{
+ const image={text:eastLabel(),imageName:'EAST.IMG'};
+ const r=decodePdsFloatImage(eastImage(),eastGrid,image);
+ assert.equal(r.data[1],Math.fround(0.01));assert.ok(Number.isNaN(r.data[5]),'the decimal missing constant stays missing');
+ // Longitude grows with the column: 15°E is the first column, 345°E the last.
+ assert.deepEqual(r.pixel(15,15),[0.5,0.5]);assert.deepEqual(r.pixel(345,-15),[11.5,1.5]);assert.deepEqual(r.pixel(-15,-15),[11.5,1.5]);
+ assert.equal(r.pixel(15,45),null,'unmeasured latitudes are outside the grid');
+ const root=await mkdtemp(resolve(tmpdir(),'pds-float-east-'));
+ try {
+  await writeFile(resolve(root,'EAST.IMG'),eastImage());await writeFile(resolve(root,'EAST.LBL'),eastLabel());
+  const s=await loadPdsFloatMap(root,{path:'EAST.IMG',labelPath:'EAST.LBL',grid:eastGrid,sampling:'nearest'});
+  assert.equal(s.sample(15,15),Math.fround(0));assert.equal(s.sample(45,15),Math.fround(0.01));assert.equal(s.sample(345,-15),Math.fround(0.23));
+  assert.equal(s.sample(165,15),null,'missing pixel');assert.equal(s.sample(15,31),null);assert.equal(s.sample(15,-31),null);
+ } finally {await rm(root,{recursive:true,force:true});}
+ for(const [label,grid,bytes] of [[eastLabel({POSITIVE_LONGITUDE_DIRECTION:'WEST'}),eastGrid,eastImage()],[eastLabel({'^IMAGE':'"OTHER.IMG"'}),eastGrid,eastImage()],
+   [eastLabel({MAXIMUM_LATITUDE:'90'}),eastGrid,eastImage()],[eastLabel({SAMPLE_TYPE:'PC_REAL'}),eastGrid,eastImage()],[eastLabel(),{...eastGrid,sampleType:'PC_REAL'},eastImage()],
+   [eastLabel({SAMPLE_PROJECTION_OFFSET:'6.5'}),{...eastGrid,sampleProjectionOffset:6.5},eastImage()],[eastLabel(),eastGrid,eastImage().subarray(0,-4)]] as const)
+  assert.throws(()=>decodePdsFloatImage(bytes,grid,{text:label,imageName:'EAST.IMG'}),/differs/);
+});

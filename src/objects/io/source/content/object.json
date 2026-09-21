@@ -346,6 +346,220 @@
         },
         "notes": "Published mean absorption around 560 nm after continuum removal. The 578–605 nm instrument gap is omitted. Sulfur-bearing materials can contribute, but the absorbing species is not uniquely identified. July 2019 observing nights retain seams and residual differences. Native two-degree samples, missing areas and withheld edges remain; this is not abundance.",
         "noData": true
+      },
+      {
+        "id": "volcanic-heat",
+        "label": "Volcanic heat",
+        "thumbnail": "io-lens-volcanic-heat.webp",
+        "surface": "io-volcanic-heat@2x.webp",
+        "poles": "io-poles-volcanic-heat@2x.webp",
+        "falseColor": true,
+        "legend": {
+          "kind": "scale",
+          "title": "4.8 µm radiance, night side",
+          "labels": [
+            "0",
+            "0.05",
+            "0.10",
+            "0.15"
+          ],
+          "meta": "W sr⁻¹ m⁻²",
+          "sourceUrl": "https://doi.org/10.3389/fspas.2024.1369472",
+          "recipe": {
+            "palette": [
+              [
+                64,
+                32,
+                176
+              ],
+              [
+                67,
+                40,
+                197
+              ],
+              [
+                70,
+                51,
+                220
+              ],
+              [
+                69,
+                61,
+                234
+              ],
+              [
+                63,
+                75,
+                245
+              ],
+              [
+                54,
+                88,
+                251
+              ],
+              [
+                29,
+                102,
+                253
+              ],
+              [
+                2,
+                113,
+                252
+              ],
+              [
+                1,
+                126,
+                251
+              ],
+              [
+                1,
+                137,
+                248
+              ],
+              [
+                1,
+                147,
+                236
+              ],
+              [
+                2,
+                157,
+                231
+              ],
+              [
+                2,
+                166,
+                225
+              ],
+              [
+                3,
+                177,
+                217
+              ],
+              [
+                2,
+                182,
+                205
+              ],
+              [
+                1,
+                188,
+                191
+              ],
+              [
+                3,
+                191,
+                176
+              ],
+              [
+                1,
+                198,
+                158
+              ],
+              [
+                1,
+                202,
+                141
+              ],
+              [
+                2,
+                204,
+                118
+              ],
+              [
+                4,
+                206,
+                92
+              ],
+              [
+                94,
+                201,
+                66
+              ],
+              [
+                154,
+                199,
+                29
+              ],
+              [
+                192,
+                197,
+                4
+              ],
+              [
+                230,
+                188,
+                2
+              ],
+              [
+                251,
+                187,
+                19
+              ],
+              [
+                253,
+                191,
+                33
+              ],
+              [
+                254,
+                201,
+                18
+              ],
+              [
+                253,
+                215,
+                3
+              ],
+              [
+                250,
+                228,
+                2
+              ],
+              [
+                248,
+                240,
+                1
+              ],
+              [
+                250,
+                251,
+                3
+              ]
+            ],
+            "labels": [
+              "0",
+              "0.05",
+              "0.10",
+              "0.15"
+            ]
+          }
+        },
+        "source": {
+          "id": "io-jiram-m-night-recipe",
+          "path": "../manifest.json",
+          "url": "https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT"
+        },
+        "facts": [
+          {
+            "id": "classification",
+            "label": "Quantity",
+            "value": "Measured M-band (4.5–5.0 µm) radiance, night side"
+          },
+          {
+            "id": "coverage",
+            "label": "Coverage",
+            "value": "22% of Io; 34 Juno JIRAM frames, orbits 41–49"
+          },
+          {
+            "id": "scale",
+            "label": "Color scale",
+            "value": "Mura et al. (2024), Frontiers, Fig. 2"
+          }
+        ],
+        "notes": "Heat from Io's volcanoes at 4.8 µm, our own reduction of 34 Juno JIRAM frames from orbits 41, 43, 47 and 49 (April 2022 to March 2023), the orbits Mura et al. (2024) mapped. Only the night side is kept, where no sunlight is reflected. Each hot spot's total output agrees with the paper's; its peak is lower, because we do not sharpen the images as they do. Color follows the linear scale of their Figure 2. Gray grid: never seen at night in these orbits, including the south and Loki Patera.",
+        "noData": true
       }
     ],
     "labels": {

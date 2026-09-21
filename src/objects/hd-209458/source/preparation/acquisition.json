@@ -9,6 +9,24 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/hd209458_stisnic_008.fits",
+      "path": "photometry/hd209458_stisnic_008.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1779546757669063552&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
     }
   ]
 }

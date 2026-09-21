@@ -1,0 +1,42 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "betelgeuse",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34, star X0036 (Betelgeuse), merged spectrum without slit-loss correction",
+    "path": "photometry/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+    "service": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+    "checked": "2026-09-21",
+    "format": "fits-table",
+    "extension": "SPECTRUM",
+    "wavelength": {
+      "column": "WAVE",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "FLUX",
+      "kind": "flux"
+    },
+    "gaps": [],
+    "note": "VLT/X-shooter spectrum taken 2009-10-12, ten years before the Great Dimming. It is not corrected for slit losses, which can tilt the overall shape; Kiehling (1987, VizieR III/124, HR 2061) gives a close colour from an independent scan."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Kiehling (1987), HR 2061: an independent ground-based scan",
+    "spectrum": {
+      "path": "photometry/crosscheck-kiehling-2061.tsv",
+      "format": "tsv-columns",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "m(HR2061)",
+        "kind": "magnitude",
+        "missing": 99.999
+      },
+      "gaps": []
+    }
+  }
+}

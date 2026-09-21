@@ -1,0 +1,30 @@
+{
+ "id": "regulus",
+ "classification": "star",
+ "order": 1211,
+ "physical": {
+  "name": "Regulus",
+  "horizonsCode": null,
+  "meanRadiusKm": 2678523,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": null
+ },
+ "physicalNotes": "Radius: Regulus is a rapid rotator: Che et al. (2011), ApJ 732, 68 measure an equatorial radius of 4.21 and a polar radius of 3.22 solar radii with CHARA/MIRC. The record's radius is the volume-equivalent sphere of those two, 3.85 solar radii; the scene draws the measured flattening, with the equatorial radius on the outline. Adopted 2,678,523 km, 3.8501 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis, the measured rotation pole, is up.",
+ "star": {
+  "rightAscensionDegrees": 152.09296243828146,
+  "declinationDegrees": 11.967208776100023,
+  "positionEpochJulianYear": 2000,
+  "distanceParsecs": 24.3132,
+  "properMotionRaMasPerYear": -248.73,
+  "properMotionDecMasPerYear": 5.59,
+  "radialVelocityKmPerS": 0.72,
+  "sources": {
+   "position": "SIMBAD basic record for * alf Leo (HIP 49669), ICRS J2000 position, reference 2007A&A...474..653V, retrieved 2026-09-21: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Leo",
+   "distance": "Inverse of the Hipparcos new-reduction parallax 41.13 \u00b1 0.35 mas (van Leeuwen 2007) via SIMBAD",
+   "properMotion": "SIMBAD: -248.73, 5.59 mas/yr, reference 2007A&A...474..653V",
+   "radialVelocity": "SIMBAD: 0.72 km/s, reference 2020AJ....160..120J. Regulus has a white-dwarf companion on a 40-day orbit (Gies et al. 2008), so this may not be the system velocity."
+  },
+  "presentationUp": "display-axis",
+  "hipparcosId": 49669
+ }
+}

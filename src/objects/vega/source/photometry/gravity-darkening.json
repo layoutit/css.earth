@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "vega",
+  "source": "Monnier et al. (2012), Resolving Vega and the Inclination Controversy with CHARA/MIRC, ApJL 761, L3 (https://arxiv.org/abs/1211.6055), Table 2, Model 3 \"Concordance\", read from the authors' LaTeX source",
+  "caption": "Modeling Results for Vega. The Concordance Model incorporated the observed v sin i = 22 ± 2 km/s and the period estimate 0.71 ± 0.03 days as priors. Surface temperature follows T = T_pole (g/g_pole)^β.",
+  "model": {
+    "omega": {
+      "value": 0.774,
+      "uncertainty": 0.012,
+      "cell": "0.774 ± 0.012"
+    },
+    "beta": {
+      "value": 0.231,
+      "uncertainty": 0.028,
+      "cell": "0.231 ± 0.028"
+    },
+    "poleTemperatureK": {
+      "value": 10070,
+      "uncertainty": 90,
+      "cell": "10070 ± 90"
+    },
+    "equatorTemperatureK": {
+      "value": 8910,
+      "uncertainty": 130,
+      "cell": "8910 ± 130 (derived)"
+    },
+    "polarRadiusSolar": {
+      "value": 2.418,
+      "uncertainty": 0.012,
+      "cell": "2.418 ± 0.012"
+    },
+    "equatorialRadiusSolar": {
+      "value": 2.726,
+      "uncertainty": 0.006,
+      "cell": "2.726 ± 0.006 (derived)"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 6.2,
+      "uncertainty": 0.4,
+      "cell": "6.2 ± 0.4"
+    },
+    "polePositionAngleDegrees": {
+      "value": -58,
+      "uncertainty": 6,
+      "cell": "-58 ± 6"
+    }
+  },
+  "note": "Vega is seen almost pole-on, so its bright pole faces us. The paper warns that the pole position angle is fragile: fits to different epochs differ by as much as 90°. The Roche shape equation is not printed; the one used here reproduces the table's equatorial radius, equatorial temperature and surface-mean temperature (9360 ± 90 K) from its polar values, ω and β (tests)."
+}

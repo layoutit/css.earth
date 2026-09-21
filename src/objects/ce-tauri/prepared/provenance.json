@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "c6662f31a611c6afc6324e8fb7c5217b88090b45f38dbdc99788692a7b718754"
+    "sha256": "f5871b8bd6d7393c2b092556352001f3588a79c412aee66b487729d89ce5e2b3"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "357923efce4e380f2b7fab15d766a9829ade2ebc16d9dc3ee4aa61e9236dcdc0"
+    "bindingsSha256": "877f3aedc35e150286daf7417f907c5be5d73077d8dcfa5d6a5ec4e9d0164353"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "cb59097d4933c33aeab0bcaf8cf689d39e5e31fa8f18e0144fc2ca0d2d2de707",
+      "sha256": "eceab9512a70b71fd9407231a861cb2727b69c7af12747508439df17bba3c62c",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ce-tauri/",
@@ -214,6 +214,18 @@
               },
               "offLimb": {}
             }
+          },
+          {
+            "id": "color",
+            "output": "ce-tauri-surface-{id}{suffix}.webp",
+            "thumbnail": "ce-tauri-lens-{id}.webp",
+            "source": "photometry/stellar-color.json",
+            "falseColor": false,
+            "science": {
+              "kind": "stellar-photometric-color",
+              "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+              "qualification": "Uniform photosphere colour from the star's Crimean photoelectric spectrum. The disc is unresolved: no map, limb darkening or absolute brightness is implied. Self-luminous, so no lighting."
+            }
           }
         ],
         "emission": {
@@ -248,7 +260,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "d99a1d036458da0d7b1cc8ae17a47b0430f3e497649c1732e647d4c92356aefb",
+      "sha256": "f72b65894def671412d8dbc10110b8e9c109e2afdbbcb88aa1afd3bf05faa861",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -429,6 +441,21 @@
                 "meta": "fraction of the brightest point · 1st–99.5th percentile stretch",
                 "sourceUrl": "https://doi.org/10.1051/0004-6361/201731471"
               }
+            },
+            {
+              "id": "color",
+              "label": "Color",
+              "qualification": "Colour from a measured spectrum of the star (Crimean photoelectric). The disc is unresolved, and no darkening toward the edge is measured.",
+              "thumbnail": "ce-tauri-lens-color.webp",
+              "surface": "ce-tauri-surface-color@2x.webp",
+              "poles": "ce-tauri-poles-color@2x.webp",
+              "source": {
+                "id": "ce-tauri-stellar-color",
+                "path": "../manifest.json",
+                "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126"
+              },
+              "falseColor": false,
+              "notes": "The colour of CE Tauri's Crimean photoelectric spectrum. The scan is from 24 October 1982; a second scan in February 1983 is paler, and CE Tau varies. No resolved image of the surface is cast here."
             }
           ]
         },
@@ -461,6 +488,12 @@
             "role": "facts",
             "description": "SIMBAD record for 119 Tau: Gaia DR3 position, parallax and proper motion",
             "href": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=CE+Tau"
+          },
+          {
+            "label": "Spectrum",
+            "role": "facts",
+            "description": "Burnashev (1985) spectrophotometry, record 617: CE Tau (BS 1845)",
+            "href": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126"
           }
         ],
         "provenance": {
@@ -620,6 +653,66 @@
       "verificationOperations": []
     },
     {
+      "kind": "source-input",
+      "id": "ce-tauri-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126",
+      "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-126-burnashev-617",
+            "role": "material",
+            "evidence": "src/objects/ce-tauri/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "eeb7ed20e2528dfe83daa9f43c2328c7d001bf6275e6fc0fcf5ddc1a154b9642",
+      "bytes": 1842,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "ce-tauri-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      },
+      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "bytes": 24021,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
       "path": "content/object.json",
       "sourceBinding": {
         "kind": "local",
@@ -632,8 +725,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "d99a1d036458da0d7b1cc8ae17a47b0430f3e497649c1732e647d4c92356aefb",
-      "bytes": 7534,
+      "sha256": "f72b65894def671412d8dbc10110b8e9c109e2afdbbcb88aa1afd3bf05faa861",
+      "bytes": 8562,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -864,6 +957,71 @@
       "inputBasis": "bound-inputs"
     },
     {
+      "id": "color",
+      "label": "Color",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "Colour from a measured spectrum of the star (Crimean photoelectric). The disc is unresolved, and no darkening toward the edge is measured."
+      ],
+      "lensIds": [
+        "color"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "ce-tauri-stellar-color",
+        "ce-tauri-cie-1931-2deg-cmf"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-surface-color@2x.webp",
+          "bytes": 178,
+          "sha256": "3359a05f10b711154c1def40682f2549bb902314501004a44d3686ed19d228b6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-lens-color.webp",
+          "bytes": 44,
+          "sha256": "8a21d930b2f5260cdcb688b36ac190139a8ab5554e0398793854fabb8ea847b6",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-poles-color@2x.webp",
+          "bytes": 1340,
+          "sha256": "0d7d862095a245bded4a0b14cf0516c8207df4b10d61742e8b81a69849497d48",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-context-color@2x.webp",
+          "bytes": 142,
+          "sha256": "793d4eafe032e7678cfbc3dfbd7a35b07c0ba425f8df61374519f77406b5c623",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/ce-tauri/ce-tauri-limb-color@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "ce-tauri-stellar-color",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/2/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
       "id": "content",
       "label": "Object information",
       "recipe": "content",
@@ -882,8 +1040,8 @@
       "outputs": [
         {
           "url": "object:prepared/content.json",
-          "bytes": 5821,
-          "sha256": "ef94502e000909b4b873583e878116b36f6c2ef088c3e11e43619091add37177",
+          "bytes": 5997,
+          "sha256": "871d0d0e879b21587da8bd02cf1dabbe0ed45a26c7c5fd244bdd0965dbb8ec64",
           "verification": "bytes-verified"
         }
       ],
@@ -938,6 +1096,31 @@
           "verification": "bytes-verified"
         }
       ]
+    },
+    {
+      "id": "preview:color",
+      "label": "Color preview",
+      "recipe": "raster",
+      "selector": "/surfaces/2",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "color"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/color.webp",
+          "bytes": 450,
+          "sha256": "b9123afa7f2adac9e4a8bdbc080c637de21defc98460c92fd5f7d35708d9ce30",
+          "verification": "bytes-verified"
+        }
+      ]
     }
   ],
   "coverage": {
@@ -946,11 +1129,11 @@
   },
   "lastPreparation": {
     "objectId": "ce-tauri",
-    "materialSha256": "8a771d1f6676d3873aedc2f89e50023f1d186e4a7d2d9e1c67120af0fe0e301c",
+    "materialSha256": "ccfeb1c8787170e62dd5d87542712f859b4a0ee29a298db61c7f0e7404dc7be8",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "357923efce4e380f2b7fab15d766a9829ade2ebc16d9dc3ee4aa61e9236dcdc0"
+      "bindingsSha256": "877f3aedc35e150286daf7417f907c5be5d73077d8dcfa5d6a5ec4e9d0164353"
     }
   }
 }
