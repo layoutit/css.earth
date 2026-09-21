@@ -10,6 +10,7 @@ import type { ProductKind } from './query.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
 import { verifyCalibrationDependencies, type CalibrationDependency } from './calibration-dependencies.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
+import { archiveProfileFamilyEvidence, productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
 export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }
@@ -17,6 +18,7 @@ export interface SourceProduct {
   readonly id: string; readonly target: string; readonly telescope: string; readonly mode: string; readonly kind: ProductKind;
   readonly archiveProductId: string; readonly decoder: 'fits-image' | 'pds-image' | 'pds-product' | 'isis3'; readonly labelPath?: string; readonly files: readonly SourceFile[];
   readonly identity: Readonly<Record<string, string | number | boolean>>;
+  readonly familyEvidence?: ObservationFamilyEvidence;
   readonly startIso?: string; readonly endIso?: string;
   readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
   readonly centralWavelengthMicrometres?: number;
@@ -77,6 +79,10 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       return [key, value as string | number | boolean];
     }));
     if (!Object.keys(identity).length) throw new TypeError(`${id} requires header or label identity assertions.`);
+    const telescope = requireString(row.telescope, 'telescope'), mode = requireString(row.mode, 'mode'), familyOwner = { kind: 'source-product' as const, id, evidence: requireString(row.citation, 'citation') };
+    const familyEvidence = row.familyProfile === undefined
+      ? productKindFamilyEvidence(kind, familyOwner)
+      : archiveProfileFamilyEvidence(requireString(row.familyProfile, 'archive family profile'), { kind: kind as ProductKind, decoder, identity, owner: familyOwner });
     const intervals = row.wavelengthIntervalsMicrometres === undefined ? undefined : requireArray(row.wavelengthIntervalsMicrometres, 'wavelength intervals').map(rawRange => {
       const range = requireArray(rawRange, 'wavelength interval'), a = requireFiniteNumber(range[0], 'wavelength start'), b = requireFiniteNumber(range[1], 'wavelength end');
       if (range.length !== 2 || a <= 0 || b <= a) throw new TypeError('Wavelength intervals must have two increasing positive bounds.');
@@ -90,7 +96,7 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
       const value = requireFiniteNumber(row[key], key); if (!(value > 0)) throw new TypeError(`${key} must be positive.`); resolution[key] = value;
     }
     if (Object.keys(resolution).length) resolution.resolutionBasis = requireString(row.resolutionBasis, 'achieved resolution basis');
-    return { ...resolution, id, target, telescope: requireString(row.telescope, 'telescope'), mode: requireString(row.mode, 'mode'), kind: kind as ProductKind,
+    return { ...resolution, id, target, telescope, mode, kind: kind as ProductKind, familyEvidence,
       archiveProductId: requireString(row.archiveProductId, 'archive identity'), decoder, files, identity, ...(labelPath ? { labelPath } : {}),
       ...(startIso ? { startIso } : {}), ...(endIso ? { endIso } : {}), ...(intervals ? { wavelengthIntervalsMicrometres: intervals } : {}),
       ...(row.centralWavelengthMicrometres === undefined ? {} : { centralWavelengthMicrometres: requireFiniteNumber(row.centralWavelengthMicrometres, 'central wavelength') }),

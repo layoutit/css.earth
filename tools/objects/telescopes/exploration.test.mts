@@ -44,5 +44,12 @@ test('unknown targets return suggestions without exposing provider results', () 
 test('explicit family filters separate known mismatches from selectable choices',()=>{
   const source={id:'image',target:'sun',telescope:'Fixture',mode:'camera',kind:'image' as const,archiveProductId:'archive-image',decoder:'fits-image' as const,files:[],identity:{OBJECT:'SUN'},units:'counts',meaning:'fixture',citation:'https://example.test/',limitations:[],qualified:false};
   const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
-  assert.deepEqual(answer.choices,[]);assert.deepEqual(answer.unresolved,[]);assert.equal(answer.unsupported.length,1);assert.match(answer.unsupported[0]!.reason,/F01 do not match F16/u);
+  assert.deepEqual(answer.choices,[]);assert.deepEqual(answer.unresolved,[]);assert.equal(answer.unsupported.length,1);assert.match(answer.unsupported[0]!.reason,/F01, not F16/u);
+});
+
+test('an archive-owned physical-grid profile makes a cube selectable as F16',()=>{
+  const familyEvidence={schema:'cssearth-observation-family-evidence@1' as const,families:['F16' as const],status:'source' as const,sourceTerm:'spherical physical grid',vocabulary:'fixture',vocabularyVersion:'1',owner:{kind:'source-product' as const,id:'density',evidence:'archive profile'}};
+  const source={id:'density',target:'sun',telescope:'STEREO-A',mode:'SECCHI/COR1 tomography',kind:'cube' as const,archiveProductId:'archive-density',decoder:'fits-image' as const,files:[],identity:{NAXIS:3},familyEvidence,units:'cm^-3',meaning:'electron density',citation:'https://example.test/',limitations:[],qualified:false,receipt:'density.receipt'};
+  const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
+  assert.equal(answer.choices.length,1);assert.deepEqual(answer.choices[0]!.familyEvidence.families,['F16']);assert.equal(answer.unresolved.length,0);
 });

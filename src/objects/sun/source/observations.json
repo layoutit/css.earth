@@ -1007,6 +1007,45 @@
         "Native grid is retained. This is not a shared body-map product and no display colour transform is applied."
       ],
       "centralWavelengthMicrometres": 0.0171
+    },
+    {
+      "id": "stereo-cor1a-n3d-cr2053p1-m1",
+      "telescope": "STEREO-A",
+      "mode": "SECCHI/COR1 tomography",
+      "kind": "cube",
+      "familyProfile": "stereo-secchi-cor1-electron-density@2025-05-06",
+      "archiveProductId": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/N3D_COR1A/fits/n3d_CR2053P1_m1.0.fits",
+      "decoder": "fits-image",
+      "inputs": [
+        {
+          "input": "stereo-secchi-cor1a-n3d-cr2053p1-m1",
+          "role": "science"
+        }
+      ],
+      "identity": {
+        "NAXIS": 3,
+        "NAXIS1": 361,
+        "NAXIS2": 181,
+        "NAXIS3": 51,
+        "CTYPE1": "CRLN",
+        "CTYPE2": "CRLT",
+        "CTYPE3": "HECR",
+        "CUNIT1": "deg",
+        "CUNIT2": "deg",
+        "CUNIT3": "solRad",
+        "BUNIT": "cm^-3",
+        "INSTRUME": "SECCHI",
+        "DATE-BEG": "2007-02-04T20:13:00.006",
+        "DATE-END": "2007-02-18T08:13:00.020"
+      },
+      "units": "cm^-3",
+      "meaning": "Tomographically reconstructed coronal electron density on the archive spherical grid of Carrington longitude, Carrington latitude, and heliocentric radius.",
+      "citation": "https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml",
+      "limitations": [
+        "This is a reconstruction from a series of COR1-A polarized-brightness observations, not one instantaneous exposure.",
+        "The FITS header gives DATE-BEG and DATE-END but does not declare their time scale, so the API retains them as identity evidence and does not promote them to canonical observation time.",
+        "F16 classification establishes source-declared physical spherical coordinates and electron-density units; it does not independently validate the tomography."
+      ]
     }
   ]
 }

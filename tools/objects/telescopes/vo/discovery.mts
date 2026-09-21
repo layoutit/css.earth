@@ -6,6 +6,7 @@ import { requireFiniteNumber, requireRecord, requireString } from '../../../sour
 import { canonical, digest, jsonValue, parseMetadata, recordKey, type DiscoverySnapshot, type Json, type TransferLimits } from './contracts.mts';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';
+import { productTypeFamilyEvidence, type ObservationFamilyEvidence } from '../observation-families.mts';
 
 export interface ServiceProfile {
   readonly authority: string; readonly service: string; readonly table: string; readonly model: DiscoverySnapshot['model'];
@@ -47,7 +48,7 @@ export function associateTarget(rawName: Json | undefined, rawClass: Json | unde
 export interface DiscoveredObservation {
   readonly key: string; readonly snapshot: string; readonly service: string; readonly table: string;
   readonly identities: Readonly<Record<string, Json>>; readonly target: TargetAssociation; readonly rawTarget: Json;
-  readonly kind: string | null; readonly productType:ProductTypeMapping|null; readonly calibration: { readonly scheme: string; readonly token: Json };
+  readonly kind: string | null; readonly productType:ProductTypeMapping|null; readonly familyEvidence: ObservationFamilyEvidence; readonly calibration: { readonly scheme: string; readonly token: Json };
   readonly wavelengthsMicrometres: readonly [number | null, number | null]; readonly startIso: string | null; readonly endIso: string | null;
   readonly spatial: { readonly frame: string | null; readonly description: Json; readonly coordinates: Readonly<Record<string, Json>> };
   readonly access: { readonly url: string | null; readonly mime: string | null; readonly estimatedKilobytes: number | null };
@@ -82,10 +83,11 @@ export function normalizeSnapshot(snapshot: DiscoverySnapshot, profile: ServiceP
     const keys = epn ? ['granule_uid', 'granule_gid', 'obs_id'] : ['obs_publisher_did', 'obs_id'];
     const uniqueIdentity = profile.identityColumns.every(k => row[k] !== undefined && row[k] !== null && row[k] !== '') && snapshot.response.rows.filter(r => profile.identityColumns.every(k => canonical(r[k] ?? null) === canonical(row[k] ?? null))).length === 1;
     if (!uniqueIdentity) issues.push('Declared row identity is absent or repeated; this record key is bound to its snapshot and row position.');
-    const kind=epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type');
+    const kind=epn && row.dataproduct_type === 'im' ? 'image' : epn && row.dataproduct_type === 'sc' ? 'cube' : string('dataproduct_type'),productType=mapIvoaProductType(kind);
     return { key: recordKey(snapshot, row, profile.identityColumns, index), snapshot: snapshot.response.raw.sha256, service: snapshot.service, table: snapshot.table,
       identities: Object.fromEntries(keys.map(k => [k, row[k] ?? null])), rawTarget: row.target_name ?? null,
-      target: associateTarget(row.target_name, row.target_class, target, catalogue), kind,productType:mapIvoaProductType(kind),
+      target: associateTarget(row.target_name, row.target_class, target, catalogue), kind,productType,
+      familyEvidence: productTypeFamilyEvidence(productType, { kind: 'archive-adapter', id: profile.authority, evidence: `${profile.service} ${profile.table}; ${profile.documentation}` }),
       calibration: { scheme: epn ? 'epn-tap:processing_level' : 'obscore:calib_level', token: row[epn ? 'processing_level' : 'calib_level'] ?? null },
       wavelengthsMicrometres: wavelengths, startIso: time(epn ? 'time_min' : 't_min'), endIso: time(epn ? 'time_max' : 't_max'),
       spatial: { frame: epn ? string('spatial_frame_type') : 'icrs', description: row[epn ? 'spatial_coordinate_description' : 's_region'] ?? null,
