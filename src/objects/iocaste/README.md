@@ -8,8 +8,6 @@ JPL Horizons carries Iocaste as body 524; its identity and discovery are in JPL'
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
-
 Illustrative sphere at about 8.4 km, estimated from the apparent magnitude JPL Horizons gives for Iocaste (22.14 on 2026-Sep-03, H = 14.5 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. The estimate ignores the phase term, which slightly understates the size.
 
 The orbit is a precessing ellipse fitted to JPL Horizons osculating elements sampled every 5 days from 2020 to 2032, with a position correction series, by the same shared generator as Jupiter's other irregular moons.

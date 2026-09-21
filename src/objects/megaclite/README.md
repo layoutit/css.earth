@@ -8,8 +8,6 @@ JPL Horizons carries Megaclite as body 519; its identity and discovery are in JP
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
-
 Illustrative sphere at about 6.3 km, estimated from the apparent magnitude JPL Horizons gives for Megaclite (22.729 on 2026-Sep-03, H = 15.1 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. The estimate ignores the phase term, which slightly understates the size.
 
 The orbit is a precessing ellipse fitted to JPL Horizons osculating elements sampled every 5 days from 2020 to 2032, with a position correction series, by the same shared generator as Jupiter's other irregular moons.
