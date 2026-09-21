@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-0804-0192",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The limb-darkened Arcturus: imaging with the IOTA/IONIC interferometer",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0804.0192"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0804.0192",
+      "label": "Lacour et al. 2008"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/arcturus/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "bce8deecc0a2fcb8e0a1707eab45b1bf4d9b0baafb6f18142f9d699679764e4f",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "S. Lacour, S. Meimon, E. Thiébaut et al.",
+      "scope": "citation",
+      "evidence": "src/objects/arcturus/text.json#/introduction/sources/0"
+    }
+  ]
+}

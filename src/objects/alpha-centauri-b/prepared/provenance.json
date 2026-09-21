@@ -1,0 +1,344 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "alpha-centauri-b",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "d85d65d005b26217ba7098bf27ed8ed93075f9abfa74dcb9c6c96e0da5763dfc"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "381174db4a33dcaf6fd091e39be0d6053730c609e62bd4d02a988971502f0966"
+  },
+  "recipes": [
+    {
+      "id": "raster",
+      "path": "source/preparation/raster.json",
+      "sha256": "250aafb808c5cfabec364a4f7b39a0975cecf605f805c8e2d3a8fde1cf43cc80",
+      "parameters": {
+        "schema": "cssearth-raster-recipe@1",
+        "publicBase": "/scenes/alpha-centauri-b/",
+        "sourceWidth": 1024,
+        "sourceHeight": 512,
+        "width": 1024,
+        "height": 512,
+        "latitudeBands": 16,
+        "polarTile": 256,
+        "resample": "density-before-pack",
+        "polarProjection": "orthographic-bilinear",
+        "polesCombined": false,
+        "polesOutput": "alpha-centauri-b-poles-{id}{suffix}.webp",
+        "surfaceMetadata": {
+          "schema": "cssalpha-centauri-b-prepared-assets@1"
+        },
+        "thumbnail": {
+          "size": 64,
+          "quality": 88,
+          "centerLongitudeDegrees": 0
+        },
+        "surfaces": [
+          {
+            "id": "shape",
+            "output": "alpha-centauri-b-surface-{id}{suffix}.webp",
+            "thumbnail": "alpha-centauri-b-lens-{id}.webp",
+            "source": "measurements.json",
+            "falseColor": false,
+            "science": {
+              "kind": "neutral-shape",
+              "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+            }
+          }
+        ],
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "alpha-centauri-b-context-{id}{suffix}.webp",
+          "limbOutput": "alpha-centauri-b-limb-{id}{suffix}.webp",
+          "metadata": {
+            "schema": "cssalpha-centauri-b-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: no observation, a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
+          }
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "f9f6c3094854fd6d88a2184ffb7b22c4d07b44125c6fbfe5286e089a7f469749",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "alpha-centauri-b",
+        "displayName": "Alpha Centauri B",
+        "panel": {
+          "facts": [
+            {
+              "id": "radius",
+              "label": "Radius",
+              "value": "0.86 solar radii",
+              "source": {
+                "catalogueId": "arxiv-1610-06185",
+                "url": "https://arxiv.org/abs/1610.06185",
+                "label": "Kervella et al. 2017",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "radiusKm; radiusSource"
+              }
+            },
+            {
+              "id": "distance",
+              "label": "Distance from the Sun",
+              "value": "1.34 parsecs",
+              "source": {
+                "catalogueId": "simbad-alf-cen-b",
+                "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+B",
+                "label": "SIMBAD parallax",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "locator": "distanceParsecs; distanceSource"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "shape",
+          "controls": [
+            {
+              "id": "shape",
+              "label": "Shape",
+              "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+              "thumbnail": "alpha-centauri-b-lens-shape.webp",
+              "surface": "alpha-centauri-b-surface-shape@2x.webp",
+              "poles": "alpha-centauri-b-poles-shape@2x.webp",
+              "source": {
+                "id": "alpha-centauri-b-observational-measurements",
+                "path": "../manifest.json",
+                "url": "https://arxiv.org/abs/1610.06185"
+              },
+              "falseColor": false,
+              "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": []
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Research",
+            "role": "facts",
+            "description": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
+            "href": "https://arxiv.org/abs/1610.06185"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://arxiv.org/abs/1610.06185",
+            "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185"
+          },
+          "physical": {
+            "path": "../../../../../packages/astronomy/data/bodies/alpha-centauri-b.json",
+            "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "alpha-centauri-b-observational-measurements",
+      "path": "measurements.json",
+      "origin": "https://arxiv.org/abs/1610.06185",
+      "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      },
+      "sha256": "2065f8c7231277694f4051190f5dd9b943c27dfa5ca21e836b6b502fcd77ed38",
+      "bytes": 1114,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "f9f6c3094854fd6d88a2184ffb7b22c4d07b44125c6fbfe5286e089a7f469749",
+      "bytes": 2938,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "shape",
+      "label": "Shape",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
+      "limitations": [
+        "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness."
+      ],
+      "lensIds": [
+        "shape"
+      ],
+      "recipeDependencies": [
+        "raster"
+      ],
+      "interpretation": {
+        "falseColor": false
+      },
+      "inputs": [
+        "alpha-centauri-b-observational-measurements"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/alpha-centauri-b/alpha-centauri-b-surface-shape@2x.webp",
+          "bytes": 178,
+          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/alpha-centauri-b/alpha-centauri-b-lens-shape.webp",
+          "bytes": 44,
+          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/alpha-centauri-b/alpha-centauri-b-poles-shape@2x.webp",
+          "bytes": 1340,
+          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/alpha-centauri-b/alpha-centauri-b-context-shape@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/alpha-centauri-b/alpha-centauri-b-limb-shape@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "alpha-centauri-b-observational-measurements",
+          "role": "appearance",
+          "evidence": "Raster source at /surfaces/0/source."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 9158,
+          "sha256": "ad20b065af4856db4f42bad65a80ea3c31140e77264f8044ff93e9a8930a6369",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:shape",
+      "label": "Shape preview",
+      "recipe": "raster",
+      "selector": "/surfaces/0",
+      "recipeDependencies": [
+        "raster"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "shape"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/shape.webp",
+          "bytes": 422,
+          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "alpha-centauri-b",
+    "materialSha256": "f4dd7831a56722e00ec9bba291b47a68affb986d9dc8364c2bb87db55f4b9c34",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "381174db4a33dcaf6fd091e39be0d6053730c609e62bd4d02a988971502f0966"
+    }
+  }
+}

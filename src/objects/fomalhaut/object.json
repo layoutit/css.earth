@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "fomalhaut",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Fomalhaut",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 1281479
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/fomalhaut-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "f010e8ffb32f9604fad67a2f07073b402bc7cf9b5173329caa51536a5cc2f7d5"
+      }
+    },
+    "catalog": {
+      "name": "Fomalhaut",
+      "classification": "star",
+      "color": "#e8eeff",
+      "distanceAu": 1589018.1,
+      "description": "A-type star 7.70 parsecs away; its photosphere is not imaged here.",
+      "systemName": "Piscis Austrinus",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        199045626482598600,
+        -55516511646735700,
+        -117501372727668180
+      ],
+      "presentationToReference": [
+        0.8373434587608781,
+        -0.47610074268386027,
+        -0.26867082998763797,
+        -0.23354639239505082,
+        0.1328160303859674,
+        -0.9632320513104673,
+        -0.4942792881252729,
+        -0.8693031605190392,
+        -0.000021023391855885917
+      ],
+      "orbitUpReference": [
+        0.47610074268386027,
+        -0.1328160303859674,
+        0.8693031605190392
+      ],
+      "metersPerUnit": 4133803.2258064514,
+      "bodyRadiusM": 1281479000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "bfb1193491c01786088a5ea79a72af443bee04d7c58430652770eb787af2a9ba"
+  }
+}

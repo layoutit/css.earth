@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "alpha-centauri-b",
+  "displayName": "Alpha Centauri B",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "0.86 solar radii",
+        "source": {
+          "catalogueId": "arxiv-1610-06185",
+          "url": "https://arxiv.org/abs/1610.06185",
+          "label": "Kervella et al. 2017",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "1.34 parsecs",
+        "source": {
+          "catalogueId": "simbad-alf-cen-b",
+          "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+B",
+          "label": "SIMBAD parallax",
+          "checked": "2026-09-21",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the published radius; the neutral gray is a display convention, not a measured colour or brightness.",
+        "thumbnail": "alpha-centauri-b-lens-shape.webp",
+        "surface": "alpha-centauri-b-surface-shape@2x.webp",
+        "poles": "alpha-centauri-b-poles-shape@2x.webp",
+        "source": {
+          "id": "alpha-centauri-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/1610.06185"
+        },
+        "falseColor": false,
+        "notes": "No image of the photosphere is cast here (no resolved image of this star's surface is published in a form this pipeline can cast; see the investigation ledger). Neutral gray marks an unresolved surface; the display axis is celestial north, a convention."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185",
+      "href": "https://arxiv.org/abs/1610.06185"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/1610.06185",
+      "credit": "Kervella, Bigot, Gallenne and Thévenin, \"The radii and limb darkenings of α Centauri A and B\", A&A 597, A137 (2017), arXiv:1610.06185"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/alpha-centauri-b.json",
+      "credit": "Published radius at the catalogue distance; SIMBAD astrometry; no measured rotation axis (display convention)"
+    }
+  }
+}

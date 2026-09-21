@@ -1,0 +1,14 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "fomalhaut",
+  "angularDiameterMas": 2.22,
+  "angularDiameterSource": "Radius 1.842 ± 0.019 solar radii from Mamajek (2012), ApJ 754, L20, using the VLTI limb-darkened angular diameter 2.223 ± 0.022 mas.",
+  "distanceParsecs": 7.7036,
+  "distanceSource": "Inverse of the Hipparcos new-reduction parallax 129.81 ± 0.47 mas (van Leeuwen 2007) via SIMBAD",
+  "radiusKm": 1281479,
+  "radiusSource": "Radius: Radius 1.842 ± 0.019 solar radii from Mamajek (2012), ApJ 754, L20, using the VLTI limb-darkened angular diameter 2.223 ± 0.022 mas. Adopted 1,281,479 km, 1.8420 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."
+  }
+}

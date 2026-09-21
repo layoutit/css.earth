@@ -1,0 +1,32 @@
+{
+  "id": "simbad-alf-cen-b",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * alf Cen B (Alpha Centauri B)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Cen+B",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/alpha-centauri-b/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "b683a3347a78c6e90d7f6ee335a97ed67d27ac192148cb20a553fda13086beaf",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/alpha-centauri-b/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

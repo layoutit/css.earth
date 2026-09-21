@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "arcturus",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Arcturus",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 17617284
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/arcturus-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "5a5b84afd3f4847d89a9610f6e42146321da680ccec29b4f49e9e20eb5490427"
+      }
+    },
+    "catalog": {
+      "name": "Arcturus",
+      "classification": "star",
+      "color": "#ffd9a8",
+      "distanceAu": 2321996.7,
+      "description": "Red giant 11.26 parsecs away; its photosphere is not imaged here.",
+      "systemName": "Boötes",
+      "order": 1100,
+      "context": {
+        "order": 1097
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -272312679218080300,
+        -183032920166292830,
+        114051442255613200
+      ],
+      "presentationToReference": [
+        -0.7838659359374368,
+        -0.2726737417225386,
+        -0.5578559178246268,
+        -0.526869580631495,
+        -0.1833348636107442,
+        0.8299378126040665,
+        0.3285766873685943,
+        -0.9444772937238143,
+        -0.000046454503623811457
+      ],
+      "orbitUpReference": [
+        0.2726737417225386,
+        0.1833348636107442,
+        0.9444772937238143
+      ],
+      "metersPerUnit": 56829948.38709678,
+      "bodyRadiusM": 17617284000
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "723befb61db3cbc3c32a43d65b223b7daef5f6b828c9a11c757f7b368975ff71"
+  }
+}
