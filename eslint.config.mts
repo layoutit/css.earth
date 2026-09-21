@@ -4,7 +4,21 @@ import typescriptParser from '@typescript-eslint/parser';
 export const packageLineLimit = 600;
 
 export default [
-  { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**'] },
+  { ignores: ['**/node_modules/**', '**/dist/**', '**/.cache/**', '**/coverage/**',
+    // Generated output and the open-ended registries. `src/platform/solar-geometry.mts` alone is
+    // 26,968 generated lines; `src/objects` is 586 authored body packages, not modules.
+    '**/prepared/**', '**/generated/**', 'src/objects/**', 'src/sources/**',
+    'src/platform/solar-geometry.mts', 'site/prepared-object-catalog.mts', 'site/prepared-context-objects.mts'] },
+  {
+    // `tools`, `src` and `site` — roughly 232,000 authored lines — had no ESLint at all, so the
+    // size and boundary rules below governed only the two smallest trees. Warnings, not errors:
+    // the debt is pre-existing and this is meant to make it visible, not to block work on it.
+    files: ['tools/**/*.{ts,mts}', 'src/**/*.{ts,mts}', 'site/**/*.{ts,mts}'],
+    languageOptions: { parser: typescriptParser },
+    rules: {
+      'max-lines': ['warn', { max: packageLineLimit, skipBlankLines: false, skipComments: false }],
+    },
+  },
   {
     files: ['packages/**/*.{js,mjs,cjs,ts,tsx,mts}', 'labs/nebula/packages/**/*.{ts,tsx,mts}'],
     languageOptions: { parser: typescriptParser },

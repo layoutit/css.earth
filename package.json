@@ -55,6 +55,7 @@
     "lab:nebula:particles": "node --experimental-strip-types labs/nebula/run.mts prepare-particles",
     "lab:nebula:structures": "node --experimental-strip-types labs/nebula/run.mts prepare-structures labs/nebula/models/structure-benchmark.json",
     "lab:nebula:verify": "node --experimental-strip-types labs/nebula/run.mts verify-nebula",
+    "lint": "eslint packages labs tools src site",
     "lint:packages": "eslint packages --max-warnings 0",
     "oracle:venus": "node tools/oracles/venus/run.mts",
     "oracles:run": "node tools/oracles/run.mts",
