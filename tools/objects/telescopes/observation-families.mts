@@ -16,6 +16,7 @@ export interface ObservationFamilyEvidence {
 }
 
 export interface FamilyEvidenceOwner { readonly kind: ObservationFamilyEvidence['owner']['kind']; readonly id: string; readonly evidence: string }
+export const STEREO_COR1_F16_PROFILE = 'stereo-secchi-cor1-electron-density@2025-05-06' as const;
 
 export function productTypeFamilyEvidence(mapping: ProductTypeMapping | null, owner: FamilyEvidenceOwner): ObservationFamilyEvidence {
   return { schema: OBSERVATION_FAMILY_EVIDENCE_SCHEMA, families: mapping?.families ?? [], status: mapping?.status ?? 'unmapped',
@@ -34,11 +35,11 @@ interface ArchiveFamilyProfile {
 
 /** Profiles describe archive-owned formats. They classify observations; they do not claim a reduction or rendering route. */
 const ARCHIVE_FAMILY_PROFILES: Readonly<Record<string, ArchiveFamilyProfile>> = Object.freeze({
-  'stereo-secchi-cor1-electron-density@2025-05-06': {
-    id: 'stereo-secchi-cor1-electron-density@2025-05-06', families: ['F16'], sourceTerm: '3D tomographic coronal electron density on a spherical physical grid',
+  [STEREO_COR1_F16_PROFILE]: {
+    id: STEREO_COR1_F16_PROFILE, families: ['F16'], sourceTerm: '3D tomographic coronal electron density on a spherical physical grid',
     vocabulary: 'STEREO/SECCHI COR1 N3D FITS', vocabularyVersion: '2025-05-06',
     documentation: 'https://stereo-ssc.nascom.nasa.gov/pub/ins_data/secchi/cor1_tomography_data.shtml', kind: 'cube', decoder: 'fits-image',
-    requiredIdentity: { NAXIS: 3, CTYPE1: 'CRLN', CTYPE2: 'CRLT', CTYPE3: 'HECR', CUNIT1: 'deg', CUNIT2: 'deg', CUNIT3: 'solRad', BUNIT: 'cm^-3', INSTRUME: 'SECCHI' },
+    requiredIdentity: { NAXIS: 3, NAXIS1: 361, NAXIS2: 181, NAXIS3: 51, CTYPE1: 'CRLN', CRPIX1: 1, CRVAL1: 0, CDELT1: 1, CUNIT1: 'deg', CTYPE2: 'CRLT', CRPIX2: 91, CRVAL2: 0, CDELT2: 1, CUNIT2: 'deg', CTYPE3: 'HECR', CRPIX3: 1, CRVAL3: 1.5, CDELT3: 0.05, CUNIT3: 'solRad', BUNIT: 'cm^-3', INSTRUME: 'SECCHI' },
   },
 });
 

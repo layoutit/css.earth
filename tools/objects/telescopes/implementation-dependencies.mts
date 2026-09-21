@@ -8,7 +8,7 @@ export interface ImplementationFingerprint { readonly sha256: string; readonly f
 
 export async function implementationFingerprint(root: string, entries: readonly string[]): Promise<ImplementationFingerprint> {
   const absolute = entries.map(entry => isAbsolute(entry) ? entry : resolve(root, entry));
-  const result = await build({ absWorkingDir: root, entryPoints: absolute, bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
+  const result = await build({ absWorkingDir: root, entryPoints: absolute, outdir: resolve(root, '.fingerprint-output'), bundle: true, write: false, metafile: true, platform: 'node', format: 'esm',
     packages: 'external', treeShaking: false, logLevel: 'silent' });
   const paths = Object.keys(result.metafile.inputs).map(path => resolve(root, path)).filter(path => !relative(root, path).startsWith('..')).sort();
   const files = await Promise.all(paths.map(async path => { const bytes = await readFile(path); return { path: relative(root, path), sha256: createHash('sha256').update(bytes).digest('hex'), bytes }; }));
