@@ -24,7 +24,7 @@ import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validate
 import { validateGeologyProfile } from '../terrestrial-layers/categorical-geology.mts';
 import { validatePds4ObservationPolicy } from '../terrestrial-layers/observed-pds4.mts';
 import { preparePdsByteMosaic } from '../terrestrial-layers/pds-byte-mosaic.mts';
-import { prepareControlledOrthographicMosaic } from '../terrestrial-layers/controlled-orthographic-mosaic.mts';
+import { prepareControlledOrthographicMosaic, prepareControlledOrthographicColor } from '../terrestrial-layers/controlled-orthographic-mosaic.mts';
 import { loadControlledObservationGeometry, matchObservedColorLevels } from '../terrestrial-layers/photometric-observations.mts';
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry } from '../terrestrial-layers/solid-source.mts';
@@ -317,6 +317,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (photometry?.consumer) await source.validateGroup(photometry.consumer);
         const { rgb, missing } = plan.format === 'controlled-orthographic'
           ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, surface.science, width, height)
+          : plan.format === 'controlled-orthographic-color' ? await prepareControlledOrthographicColor(sourceDirectory, tiles, surface.science, width, height)
           : plan.format === 'pds3-byte-equirectangular' ? await preparePdsByteMosaic(sourceDirectory, tiles, width, height)
           : (() => { throw new TypeError(`${objectId}/${surface.id}: mosaic format ${plan.format} is a radial-terrain format.`); })();
         return rgb3(rgb, missing, width, height, false, recipe.missingCoverage);

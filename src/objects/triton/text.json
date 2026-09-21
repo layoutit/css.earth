@@ -35,6 +35,11 @@
       "title": "Enhanced-color map",
       "detail": "Corrected O/G/B color",
       "summary": "Orange, green and blue filters combined; the unlit north stays unavailable."
+    },
+    "ultraviolet": {
+      "title": "Ultraviolet-color map",
+      "detail": "Orange/blue/UV color",
+      "summary": "Orange, blue and ultraviolet filters as red, green and blue; the unlit north stays unavailable."
     }
   }
 }

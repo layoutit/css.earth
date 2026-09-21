@@ -128,6 +128,27 @@
           "quality": 95
         }
       }
+    },
+    {
+      "id": "ultraviolet",
+      "output": "triton-{id}{suffix}.webp",
+      "thumbnail": "triton-lens-{id}.webp",
+      "source": "observations/tnmap-cyl-KH-obu.jpg",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observation",
+        "input": "voyager-triton-uv-color",
+        "id": "ultraviolet",
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 0,
+          "centerLongitude": 0
+        },
+        "nativePhotographicSampling": {
+          "samplesPerAxis": 2,
+          "quality": 95
+        }
+      }
     }
   ],
   "lighting": {
