@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "megaclite",
+  "displayName": "Megaclite",
+  "panel": {
+    "facts": [
+      {
+        "id": "dimensions",
+        "label": "Display model extents",
+        "value": "6.30 × 6.30 × 6.30 km",
+        "source": {
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "catalogueId": "jpl-horizons",
+          "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "model",
+    "labels": {
+      "model": "Shape model"
+    },
+    "controls": [
+      {
+        "id": "model",
+        "label": "Shape model",
+        "thumbnail": "/scenes/megaclite/megaclite-model-thumbnail.webp",
+        "surface": "megaclite-model-surface@2x.webp",
+        "poles": "megaclite-model-poles@2x.webp",
+        "source": {
+          "id": "published-shape",
+          "path": "../manifest.json",
+          "url": "https://ssd.jpl.nasa.gov/horizons/"
+        },
+        "noData": true
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": [
+      {
+        "kind": "toggle",
+        "name": "shadows",
+        "label": "Shadows",
+        "checked": false
+      }
+    ]
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Shape source",
+      "role": "surface",
+      "description": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04",
+      "href": "https://ssd.jpl.nasa.gov/horizons/"
+    },
+    {
+      "label": "Scientific source",
+      "role": "facts",
+      "description": "Published observations and interpretation",
+      "href": "https://ssd.jpl.nasa.gov/sats/discovery.html"
+    },
+    {
+      "label": "Uranian irregular satellites physical summary and occultation prospects",
+      "role": "facts",
+      "description": "Source measurements and model interpretation",
+      "href": "https://www.hou.usra.edu/meetings/jupiterflagship2023/eposter/8187.pdf"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04"
+    },
+    "physical": {
+      "path": "../measurements.json",
+      "credit": "JPL Horizons apparent magnitude for Megaclite (body 519); diameter estimated by cssEarth with an assumed geometric albedo of 0.04"
+    }
+  }
+}

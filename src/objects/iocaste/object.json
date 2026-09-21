@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "iocaste",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Iocaste",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 4.2
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -515135231444.3243,
+        564186897358.3542,
+        252427709359.96054
+      ],
+      "presentationToReference": [
+        -0.6402583244920622,
+        2.4356826039297786e-17,
+        0.7681596695470396,
+        0.7047727176143992,
+        0.3977771559319137,
+        0.5874255278119366,
+        0.3055563686540201,
+        -0.9174820620691818,
+        0.25468013537818485
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 18.26086956521739,
+      "bodyRadiusM": 4200
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/iocaste-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "fe242d04e74bde0649e222383276b3e73da54a40982cb0c600f9615b25e16f41"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Iocaste",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 5.2,
+      "description": "A small, distant irregular moon of Jupiter.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "167762c1b3ec41ecbc3c102b55096e46ef7662736792c8f115666bde80911e8d"
+  }
+}

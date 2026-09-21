@@ -1,0 +1,27 @@
+{
+ "id": "wasp-39b",
+ "classification": "exoplanet",
+ "order": 1241,
+ "physical": {
+  "name": "WASP-39 b",
+  "horizonsCode": null,
+  "meanRadiusKm": 91462.5,
+  "gravitationalParameterKm3PerS2": 0,
+  "parent": "wasp-39"
+ },
+ "physicalNotes": "Radius 1.279 \u00b1 0.037 \u00b1 0.014 Jupiter radii (at 71492 km per Jupiter radius) from Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859), at 6378.137 km per Earth radius. No gravitational parameter is adopted. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 4.0552941,
+  "semiMajorAxisStellarRadii": 11.07,
+  "inclinationDegrees": 87.32,
+  "eccentricity": 0,
+  "transitTimeBmjdTdb": 55342.46913,
+  "ascendingNodePositionAngleDegrees": 0,
+  "sources": {
+   "period": "Mancini et al. 2018 (A&A 613, A41 (2018); arXiv:1802.03859), Table of photometric results, row WASP-39: 4.0552941 d",
+   "shape": "Inclination 87.32 degrees and a/R* = 11.07, DERIVED here from the paper\u2019s fitted sum of fractional radii rA + rb = 0.10303 and ratio k = 0.14052 (a/R* = (1 + k)/(rA + rb)), not quoted. Eccentricity is set to 0: a circular display approximation, not an orbital solution.",
+   "phase": "Mancini et al. 2018, Table of photometric results, row WASP-39: T0 = BJD 2455342.96913.",
+   "orientation": "Display convention: transit photometry does not measure the orbit's position angle on the sky, so the ascending node is set at position angle 0 (celestial north)."
+  }
+ }
+}

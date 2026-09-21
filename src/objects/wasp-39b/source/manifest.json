@@ -1,0 +1,204 @@
+{
+  "schema": "csswasp-39b-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "wasp-39b-observational-measurements",
+      "path": "measurements.json",
+      "expectedBytes": 759,
+      "expectedSha256": "244d1b0463348b329ae25d342afc62abea3c5df5e8ff38e5314b48e2e0646708",
+      "origin": "https://arxiv.org/abs/1802.03859",
+      "credit": "L. Mancini et al., \"The GAPS programme with HARPS-N at TNG XVI: Measurement of the Rossiter-McLaughlin effect of transiting planetary systems HAT-P-3, HAT-P-12, HAT-P-22, WASP-39 and WASP-60\", A&A 613, A41 (2018), arXiv:1802.03859",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Transcribed published measurements with their sources",
+      "redistribution": "Factual parameter transcription only; no paper figures",
+      "consumers": [
+        "shape-model"
+      ],
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-wasp-39b-inter-title-font",
+            "role": "material",
+            "evidence": "src/objects/wasp-39b/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      }
+    },
+    {
+      "id": "wasp-39b-preparation-raster",
+      "path": "preparation/raster.json",
+      "expectedBytes": 2360,
+      "expectedSha256": "61a77fa5911e936e4a02e0ee567ae020f7cce6e4c5c7d42b52f46206d7d61080",
+      "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "assets",
+        "lenses"
+      ]
+    },
+    {
+      "id": "wasp-39b-preparation-geometry",
+      "path": "preparation/geometry.json",
+      "expectedBytes": 1645,
+      "expectedSha256": "616a2e31ea53c69182c6c48531139872e4fc1367d9c60ac595f7c2a326d015d5",
+      "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene",
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-39b-preparation-celestial",
+      "path": "preparation/celestial.json",
+      "expectedBytes": 108,
+      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
+      "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "starfield",
+        "sky-sun"
+      ]
+    },
+    {
+      "id": "wasp-39b-preparation-presentation",
+      "path": "preparation/presentation.json",
+      "expectedBytes": 104,
+      "expectedSha256": "51ba8e301001716d1c10be96d0686c148b199b7598f026a324c6d2e617042604",
+      "origin": "Repository-authored presentation profile: composite mode",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "presentation"
+      ]
+    },
+    {
+      "id": "wasp-39b-physical-solar-system-recipe",
+      "path": "presentation/solar-system.json",
+      "expectedBytes": 217,
+      "expectedSha256": "3fd2fccff6446bacdb36e6123b78db31c8ba8a93045494769abd9098f445a539",
+      "origin": "Repository-authored scene recipe: published radius, camera plan",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored preparation record; published inputs retain their own identities and hashes."
+      },
+      "credit": "cssEarth and the institutional sources identified in this record",
+      "license": "Project-authored preparation record; referenced observations retain their source terms",
+      "acquisition": "checked repository source",
+      "redistribution": "checked authored source with embedded provenance",
+      "consumers": [
+        "scene"
+      ]
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "neutral-disc-context-marker",
+      "path": "presentation/context.png",
+      "expectedBytes": 6339,
+      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
+      "origin": "https://arxiv.org/abs/1802.03859",
+      "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
+      "license": "Project-authored display derivative.",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/new-hosted-planet.mts",
+        "inputs": [
+          "wasp-39b-observational-measurements"
+        ]
+      },
+      "generator": "tools/objects/new-hosted-planet.mts",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+      }
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "expectedBytes": 3745,
+      "expectedSha256": "0c2174d96d6e88b38e3fdd2056a7f1841d5c851c62fd5a719f951db40974c82a",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipe and legend."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json",
+      "expectedBytes": 323,
+      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+    },
+    {
+      "path": "preparation/navigation.json",
+      "expectedBytes": 445,
+      "expectedSha256": "639f79e0c21b826d94eee14d38dd00239e8e9acd793bce1f88c55260a7001677"
+    },
+    {
+      "path": "preparation/rotation.json",
+      "expectedBytes": 685,
+      "expectedSha256": "3e3d2c6a9ecb8fe079392b5e10310c0547728697cb2ded99ace2878d09cfe34d"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL",
+      "expectedBytes": 4370,
+      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+    },
+    {
+      "path": "presentation/title-mark.json",
+      "expectedBytes": 5323,
+      "expectedSha256": "6e5df655a58e6ea0933fbbc35fd059312bee0f17e74e9fc0aa9314588611e2b5"
+    }
+  ]
+}
