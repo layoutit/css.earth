@@ -24,6 +24,10 @@ group and can supersede an older deployment.
 
 ## Keep the PR path lean without dropping proof
 
+- Prefer focused, small PRs that turn green quickly. Put an independent
+  optimization in a follow-up PR instead of delaying a correct repair. Do not
+  split object work this way: an object change ships only after its rendering
+  and source qualification are complete.
 - Put a check with the code it protects. Use the shared
   [affected-path map](../.github/ci-areas.json); unknown paths deliberately select
   all shared lanes. Do not add a second ownership map in workflow scripts.
