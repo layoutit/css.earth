@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1012-0787",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rotationally-modulated g-modes in the rapidly-rotating delta Scuti star Rasalhague (alpha Ophiuchi)",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1012.0787"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1012.0787",
+      "label": "Monnier et al. 2010"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/rasalhague/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "3b0ef50a94d2a642e6f5b07fcf85bccf452652a3950540c5f588baf8052a2de8",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "J. D. Monnier, R. H. D. Townsend, X. Che et al.",
+      "scope": "citation",
+      "evidence": "src/objects/rasalhague/text.json#/introduction/sources/0"
+    }
+  ]
+}

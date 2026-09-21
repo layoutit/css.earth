@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-roche-von-zeipel@1",
+  "objectId": "caph",
+  "source": "Che et al. (2011), Colder and Hotter: Interferometric imaging of beta Cassiopeiae and alpha Leonis, https://arxiv.org/abs/1105.0740, Table 3, modified von Zeipel model (beta free), read from the authors' LaTeX source",
+  "caption": "Best-fit and physical parameters of beta Cas; the modified von Zeipel model with beta free. Model mass 1.91 ± 0.02 solar masses, distance 16.8 pc.",
+  "model": {
+    "omega": {
+      "value": 0.92,
+      "uncertainty": 0.034,
+      "cell": "0.920^{+0.024}_{-0.034}"
+    },
+    "beta": {
+      "value": 0.146,
+      "uncertainty": 0.013,
+      "cell": "0.146^{+0.013}_{-0.007}"
+    },
+    "poleTemperatureK": {
+      "value": 7208,
+      "uncertainty": 42,
+      "cell": "7208^{+42}_{-24}"
+    },
+    "equatorTemperatureK": {
+      "value": 6167,
+      "uncertainty": 36,
+      "cell": "6167^{+36}_{-21}"
+    },
+    "polarRadiusSolar": {
+      "value": 3.06,
+      "uncertainty": 0.08,
+      "cell": "3.06^{+0.08}_{-0.07}"
+    },
+    "equatorialRadiusSolar": {
+      "value": 3.79,
+      "uncertainty": 0.1,
+      "cell": "3.79^{+0.10}_{-0.09}"
+    }
+  },
+  "view": {
+    "inclinationDegrees": {
+      "value": 19.9,
+      "uncertainty": 1.9,
+      "cell": "19.9^{+1.9}_{-1.9}"
+    },
+    "polePositionAngleDegrees": {
+      "value": -7.09,
+      "uncertainty": 2.4,
+      "cell": "-7.09^{+2.24}_{-2.40}"
+    }
+  },
+  "note": "The paper calls the bright centre one pole without saying which. At this low inclination beta and the inclination and omega are degenerate (section 3.1). The effective temperature is the apparent value; no true value is given."
+}

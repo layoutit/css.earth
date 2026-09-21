@@ -72,5 +72,7 @@ test('the displayed image is the raw reconstruction convolved to the beam, and k
 
 test('the merged visibilities are the pinned MATISSE files averaged by the authoring tool', { skip: !(await access(resolve(SOURCE, 'observations/oifits')).then(() => true, () => false)) && 'MATISSE files not acquired' }, async () => {
   const result = await authorBetelgeuse({ check: true });
-  assert.equal(result.files, 29); assert.equal(result.vis2, 780); assert.equal(result.t3, 520);
+  assert.deepEqual(result['2020-02'], { files: 29, vis2: 780, t3: 520 });
+  assert.deepEqual(result['2018-12'], { files: 111, vis2: 3240, t3: 2160 });
+  assert.deepEqual(result['2020-12'], { files: 48, vis2: 1248, t3: 832 });
 });

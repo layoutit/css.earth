@@ -19,9 +19,9 @@ const readJson = async (path: string) => JSON.parse(await readFile(path, 'utf8')
 const DEGREE = Math.PI / 180, PARSEC_AU = 648000 / Math.PI, MAS_RAD = DEGREE / 3.6e6;
 const direction = (ra: number, dec: number) => [Math.cos(dec * DEGREE) * Math.cos(ra * DEGREE), Math.cos(dec * DEGREE) * Math.sin(ra * DEGREE), Math.sin(dec * DEGREE)];
 
-test('the lens recipe states the camera the pinned astrometry and pole imply', async () => {
+for (const lensId of ['matisse', 'matisse-2018-12', 'matisse-2020-12']) test(`the ${lensId} lens states the camera the pinned astrometry and pole imply`, async () => {
   const recipe = requireRecord(await readJson(resolve(BODY, 'source/preparation/raster.json')));
-  const surface = requireRecord(requireArray(recipe.surfaces).find(entry => requireRecord(entry).id === 'matisse'));
+  const surface = requireRecord(requireArray(recipe.surfaces).find(entry => requireRecord(entry).id === lensId));
   const lens = requireRecord(requireRecord(surface.science).lens);
   const frames = requireArray(lens.frames);
   assert.equal(frames.length, 1, 'the lens states one reconstructed frame');

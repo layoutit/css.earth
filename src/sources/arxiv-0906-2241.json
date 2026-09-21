@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-0906-2241",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Imaging and Modeling Rapidly Rotating Stars: alpha Cephei and alpha Ophiuchi",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "0906.2241"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/0906.2241",
+      "label": "Zhao et al. 2009"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/alderamin/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "c5e6e1cccdc565715da56a28551ae47bb4914f0f8551981d918840568cbc855b",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "M. Zhao, J. D. Monnier, E. Pedretti et al.",
+      "scope": "citation",
+      "evidence": "src/objects/alderamin/text.json#/introduction/sources/0"
+    }
+  ]
+}

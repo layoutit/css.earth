@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "rasalhague",
+  "card": {
+    "text": "White star in Ophiuchus, seen almost equator-on, flattened by its fast spin.",
+    "sources": [
+      {
+        "catalogueId": "simbad-alf-oph",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=alf+Oph",
+        "label": "SIMBAD",
+        "checked": "2026-09-21",
+        "locator": "Basic data: spectral type",
+        "quote": "A5IVnn"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Rasalhague spins so fast that its equator swells to 2.86 solar radii while its poles sit at 2.39. It is drawn that shape, 14.9 parsecs away.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-1012-0787",
+        "url": "https://arxiv.org/abs/1012.0787",
+        "label": "Monnier et al. 2010",
+        "checked": "2026-09-21",
+        "locator": "Table 1, row R_eq",
+        "quote": "2.858 ± 0.015"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "Spectrum and spin",
+      "summary": "Measured colour, with hot poles and a cool equator from a fit that fixes β; its tilt is disputed."
+    }
+  }
+}

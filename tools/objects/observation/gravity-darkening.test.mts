@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
+import { readFile, readdir } from 'node:fs/promises';
 import { test } from 'node:test';
 import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from './disc-integrated-color.mts';
@@ -12,11 +13,15 @@ const record = async (id: string) => {
 };
 
 test('the Roche-von Zeipel model reproduces each paper\'s equatorial radius and temperature from its polar values', async () => {
-  for (const id of ['altair', 'vega']) {
+  const ids = (await readdir(objects, { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name)
+    .filter(id => existsSync(new URL(`${id}/source/photometry/gravity-darkening.json`, objects))).sort();
+  assert.deepEqual(ids, ['alderamin', 'altair', 'caph', 'rasalhague', 'regulus', 'vega']);
+  for (const id of ids) {
     const { raw, record: model } = await record(id);
     const ratio = model.equatorialRadiusSolar / model.polarRadiusSolar;
     // The published radii each carry about half a percent; the model ratio must fall inside their combined error.
     const ratioError = ratio * Math.hypot(raw.model.equatorialRadiusSolar.uncertainty / model.equatorialRadiusSolar, raw.model.polarRadiusSolar.uncertainty / model.polarRadiusSolar);
+    // Asymmetric published errors are recorded as their larger side.
     assert.ok(Math.abs(rocheRadius(model.omega, Math.PI / 2) - ratio) <= ratioError, `${id}: equatorial radius`);
     assert.ok(Math.abs(surfaceTemperature(model, Math.PI / 2) - model.equatorTemperatureK) <= raw.model.equatorTemperatureK.uncertainty, `${id}: equatorial temperature`);
     assert.equal(surfaceTemperature(model, 0), model.poleTemperatureK, `${id}: the pole is the reference`);
