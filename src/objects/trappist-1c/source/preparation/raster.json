@@ -21,56 +21,77 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "temperature",
       "output": "trappist-1c-surface-{id}{suffix}.webp",
       "thumbnail": "trappist-1c-lens-{id}.webp",
-      "source": "measurements.json",
-      "falseColor": false,
+      "source": "science/jwst-trappist-1/c-dayside-15um.json",
+      "falseColor": true,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star."
+        "kind": "terrestrial-scientific",
+        "id": "temperature",
+        "label": "Rock model",
+        "format": "bare-rock-eclipse",
+        "path": "science/jwst-trappist-1/c-dayside-15um.json",
+        "consumer": "trappist-1c-bare-rock-model",
+        "sampling": "bilinear",
+        "displaySampling": "bilinear",
+        "outputLongitudeOrigin": 0,
+        "units": "K",
+        "planet": "trappist-1c",
+        "host": "trappist-1",
+        "band": {
+          "encoding": "svo-filter",
+          "path": "science/svo/JWST_MIRI.F1500W.xml"
+        },
+        "star": {
+          "encoding": "svo-model-spectrum",
+          "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml"
+        },
+        "minimum": 50,
+        "maximum": 600,
+        "colors": [
+          "#0d0887",
+          "#7e03a8",
+          "#cc4778",
+          "#f89540",
+          "#f0f921"
+        ],
+        "labels": [
+          "≤ 50",
+          "325",
+          "600"
+        ],
+        "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 15 µm eclipse depth this project measured in ten JWST MIRI visits: about 407 K under the star, nothing at night. Only the dayside brightness is measured.",
+        "title": "Bare-rock model · from our JWST eclipse depth",
+        "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
       }
     }
   ],
-  "lighting": {
-    "frameSize": 512,
-    "columns": 8,
-    "presentationSize": 460,
-    "defaultFrame": 230,
-    "billboardFrameSize": 24,
-    "billboardColumns": 16,
-    "rowOutput": "trappist-1c-lighting-{density}x-row-{row}.webp",
-    "billboardOutput": "trappist-1c-lighting-{density}x-billboard.webp",
-    "minimumLightViewZ": -1,
-    "maximumLightViewZ": 1,
-    "frameCount": 256,
-    "shadowlessFloodLimbFloor": 0.35,
-    "ambientIntensity": 0.05,
-    "radiusScale": 0.505,
-    "terminator": [
-      0,
-      0.1
-    ],
-    "maximumAlpha": 0.95,
-    "bankSchema": "csstrappist-1c-prepared-lighting-bank@1",
-    "billboardSchema": "csstrappist-1c-prepared-lighting-billboard@1",
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "trappist-1c-context-{id}{suffix}.webp",
+    "limbOutput": "trappist-1c-limb-{id}{suffix}.webp",
     "metadata": {
-      "schema": "csstrappist-1c-prepared-lighting@1",
-      "storageModel": "prepared-full-resolution-density-row-shards",
-      "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
-      "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-      "ambientIntensity": 0.05,
-      "shadowlessFloodLimbFloor": 0.35,
-      "orenNayarRoughness": 0,
-      "terminatorSmoothstep": [
-        0,
-        0.1
-      ],
-      "minimumLightViewZ": -1,
-      "maximumLightViewZ": 1,
-      "baseLightAzimuthDegrees": 0,
-      "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-      "runtimeRasterization": false
+      "schema": "csstrappist-1c-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
     }
   }
 }

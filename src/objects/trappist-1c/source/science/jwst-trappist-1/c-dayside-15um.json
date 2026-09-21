@@ -1,0 +1,9 @@
+{
+  "schema": "cssearth-eclipse-depth@1",
+  "planet": "trappist-1c",
+  "eclipseDepthPpm": {
+    "low": 318,
+    "high": 389
+  },
+  "source": "This project's joint least-squares fit of the ten JWST MIRI/F1500W visits (program 3077's phase curve, 1177 observations 7-11, 2304 observations 1-4), reduced from raw with tools/objects/jwst/reduce-tso.mts and fitted with tools/objects/jwst/joint-emission.mts on tools/objects/jwst/programs/trappist-1b-joint. c's eclipse depth runs from 318 to 389 ppm across the phase-curve shapes the fit can assume (Bell's quasi-Lambertian curve, a symmetric sinusoid, a free one), recorded in trappist-1c's investigation ledger on 2026-09-18 at commit cd06eda64580b25d4c60e7bd6cd5cd1b07732976. The per-shape values were not kept."
+}
