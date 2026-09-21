@@ -1,4 +1,6 @@
 import { LENS_VISIBILITY } from './runtime-policy.mts';
+import lensBillboardData from './prepared-lens-billboards.json' with { type: 'json' };
+import lensBillboardAtlasUrl from './prepared-lens-billboards.webp?url';
 import { labelOcclusionFor } from '../src/renderers/css/dist/index.js';
 import galaxyFieldDescriptor from '../src/objects/nearby-universe/object.json' with { type: 'json' };
 import galaxyDisplaySample from '../src/objects/local-group/prepared/display-sample.json' with { type: 'json' };
@@ -8,7 +10,7 @@ import { loadFocusCatalogs } from './focus-catalog.mts';
 import { parseDensityVolumeFrame, parseImageLayerBankDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { createSpaceMinimapSetting } from './minimap/minimap-setting.mts';
 import { DIAGNOSTICS_ENABLED } from './diagnostics-policy.mts';
-import { createPreparedUniverse, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
+import { createPreparedUniverse, parseLensBillboards, createWorldFrameQueue, prepareObjectResources, loadPreparedCssVolume, loadPreparedPointAppearance, loadPreparedCssSurfaceShell, loadPreparedCssImageLayers, loadPreparedVolumeLenses, createRetainedGeometrySnapshot } from '../src/renderers/css/dist/universe.js';
 import { APPLICATION_WORLD_CONTEXT as applicationContext, APPLICATION_WORLD_CONTEXT_URL } from './world-context-plan.mts';
 import { contextMarkerSprite, contextAnnotationOpacity } from '../src/navigation/marker-presentation.mts';
 import { PREPARED_NAVIGATION_MARKERS } from './prepared-navigation-markers.mjs';
@@ -110,7 +112,10 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // selected or comes into view. This mirrors loadShells' deferral, one bank at a time.
     const volumeLensDescriptors = Object.values(descriptors).map(parseObjectDescriptor)
       .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
-    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
+    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame),
+      sha256: descriptor.prepared?.sha256 ?? (() => { throw new TypeError(`${descriptor.id}: volume lens bank is not pinned.`); })() }));
+    // Every bank's context visibility and Sun-facing billboard, prepared from those same pinned payloads.
+    const lensBillboards = { plan: parseLensBillboards(lensBillboardData), atlasUrl: lensBillboardAtlasUrl };
     const loadVolumeLens = createInFlightLoader(async (id: string) => {
       const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
       if (!descriptor) throw new TypeError(`Unknown prepared volume lens bank: ${id}.`);
@@ -124,7 +129,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
       clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
     const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
-      lensVisibility: LENS_VISIBILITY,
+      lensVisibility: LENS_VISIBILITY, lensBillboards,
       loadCatalog: async () => {
         const { galaxies, clusters, nebulae } = await loadCatalogs();
         return { payload: galaxies, galaxySample: galaxyDisplaySample, nebulae, ...catalogBank,

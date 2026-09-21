@@ -56,6 +56,7 @@ export type { PreparedCssVolume, PreparedVolumeCameraTransform, PreparedVolumeLe
 export { prepareObjectResources } from './runtime/prepared-resource-lease.js';
 export { createPreparedObjectNavigation } from './runtime/prepared-object-navigation.js';
 export { createPreparedUniverse } from './universe/prepared-universe-runtime.js';
+export { parseLensBillboards } from './universe/lens-billboards.js';
 
 export { requireAssets } from './validation/resources-tree.js';
 export { requireControls } from './validation/camera-controls.js';
