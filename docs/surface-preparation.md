@@ -434,15 +434,6 @@ east-positive longitude, latitude extent and missing value come from the label
 and must equal the recipe's grid. Pixels outside the label's latitude limits
 and missing pixels stay missing.
 
-A published point catalogue in the AAS machine-readable table layout uses
-format `mrt-point-table`
-([mrt-point-table.mts](../tools/objects/terrestrial-layers/mrt-point-table.mts)),
-as in Io's volcanic hot spots. The recipe repeats the table's column
-description, which must match; each row becomes a circle on the sphere sized and
-colored by its class, as a published figure legend draws it. A lens that names a
-`monochromeBase` observation shows that observation outside the symbols instead
-of the no-data grid.
-
 ## Seam repair and the globe interior disc
 
 Spherical and ellipsoidal objects share one retained interior disc behind their

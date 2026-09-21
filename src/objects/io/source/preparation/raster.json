@@ -395,131 +395,88 @@
       "id": "volcanic-heat",
       "output": "io-{id}{suffix}.webp",
       "thumbnail": "io-lens-{id}.webp",
-      "source": "science/davies-2024/psjad4346t10_mrt.txt",
+      "source": "science/jiram/io-jiram-m-night.IMG",
       "falseColor": true,
       "science": {
         "kind": "terrestrial-scientific",
         "id": "volcanic-heat",
         "label": "Volcanic heat",
-        "format": "mrt-point-table",
-        "path": "science/davies-2024/psjad4346t10_mrt.txt",
+        "format": "pds3-float-map",
+        "path": "science/jiram/io-jiram-m-night.IMG",
+        "labelPath": "science/jiram/io-jiram-m-night.LBL",
+        "grid": {
+          "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
+          "dataSetId": "CSSEARTH-IO-JIRAM-M-NIGHT-MOSAIC-V1",
+          "targetName": "IO",
+          "width": 720,
+          "height": 360,
+          "pixelsPerDegree": 2,
+          "referenceRadiusMeters": 1821490,
+          "centerLongitudeEastDegrees": 180,
+          "longitudeRangeEast": [
+            0,
+            360
+          ],
+          "sampleProjectionOffset": 359.5,
+          "lineProjectionOffset": 179.5,
+          "projectionRotation": "0.0 <degree>",
+          "missingValue": -1e+32,
+          "sampleType": "PC_REAL",
+          "coordinateSystem": "PLANETOCENTRIC",
+          "latitudeRange": [
+            -90,
+            90
+          ]
+        },
+        "description": "Juno JIRAM 4.8 µm night side · Mura et al. 2024 scale",
+        "title": "Heat from Io's volcanoes at 4.8 µm, seen by Juno's JIRAM camera on the night side, where no sunlight is reflected. Each spot is a hot spot's glow; the rest of the night side is too cold to register. Color follows the linear scale of Mura et al. (2024), Figure 2. Gray grid: never seen at night by the frames used.",
+        "sourceUrl": "https://atmos.nmsu.edu/PDS/data/PDS4/",
+        "minimum": 0,
+        "maximum": 0.15,
+        "colors": [
+          "#4020b0",
+          "#4328c5",
+          "#4633dc",
+          "#453dea",
+          "#3f4bf5",
+          "#3658fb",
+          "#1d66fd",
+          "#0271fc",
+          "#017efb",
+          "#0189f8",
+          "#0193ec",
+          "#029de7",
+          "#02a6e1",
+          "#03b1d9",
+          "#02b6cd",
+          "#01bcbf",
+          "#03bfb0",
+          "#01c69e",
+          "#01ca8d",
+          "#02cc76",
+          "#04ce5c",
+          "#5ec942",
+          "#9ac71d",
+          "#c0c504",
+          "#e6bc02",
+          "#fbbb13",
+          "#fdbf21",
+          "#fec912",
+          "#fdd703",
+          "#fae402",
+          "#f8f001",
+          "#fafb03"
+        ],
+        "labels": [
+          "0",
+          "0.05",
+          "0.10",
+          "0.15"
+        ],
+        "units": "band radiance, W m⁻² sr⁻¹",
         "consumer": "volcanic-heat",
         "sampling": "nearest",
-        "monochromeBase": "normal",
-        "description": "Davies et al. 2024 thermal sources · power classes",
-        "title": "343 volcanic hot spots from Davies et al. (2024), Table A1, drawn over the Monochrome mosaic with the symbol classes, sizes and colors of the paper's Figure 1. Symbol size shows the power class, not the size of the hot spot; most are far smaller than one symbol.",
-        "sourceUrl": "https://doi.org/10.3847/PSJ/ad4346",
-        "grid": {
-          "title": "New Global Map of Io’s Volcanic Thermal Emission and Discovery of Hemispherical Dichotomies",
-          "expectedRows": 343,
-          "longitudeDirection": "west-positive",
-          "rank": {
-            "label": "Rank",
-            "bytes": [
-              1,
-              3
-            ],
-            "format": "I3",
-            "units": "---",
-            "explanation": "Rank by power"
-          },
-          "latitude": {
-            "label": "Lat",
-            "bytes": [
-              38,
-              42
-            ],
-            "format": "F5.1",
-            "units": "deg",
-            "explanation": "Degrees North latitude"
-          },
-          "longitude": {
-            "label": "Long",
-            "bytes": [
-              44,
-              48
-            ],
-            "format": "F5.1",
-            "units": "deg",
-            "explanation": "Degrees West longitude"
-          },
-          "value": {
-            "label": "Power",
-            "bytes": [
-              66,
-              72
-            ],
-            "format": "F7.2",
-            "units": "GW",
-            "explanation": "Hot spot thermal emission (4)"
-          }
-        },
-        "classes": [
-          {
-            "category": "under-1-gw",
-            "below": 1,
-            "diameterDegrees": 3.01
-          },
-          {
-            "category": "1-to-10-gw",
-            "minimum": 1,
-            "below": 10,
-            "diameterDegrees": 4.07
-          },
-          {
-            "category": "10-to-100-gw",
-            "minimum": 10,
-            "below": 100,
-            "diameterDegrees": 4.43
-          },
-          {
-            "category": "100-to-1000-gw",
-            "minimum": 100,
-            "below": 1000,
-            "diameterDegrees": 4.78,
-            "outlineDegrees": 0.53
-          },
-          {
-            "category": "1000-to-10000-gw",
-            "minimum": 1000,
-            "below": 10000,
-            "diameterDegrees": 7.08,
-            "outlineDegrees": 0.53
-          }
-        ],
-        "outlineCategory": "outline",
-        "categories": [
-          {
-            "value": "under-1-gw",
-            "label": "<1 GW",
-            "color": "#2a00f7"
-          },
-          {
-            "value": "1-to-10-gw",
-            "label": ">1 to 10 GW",
-            "color": "#84ff2b"
-          },
-          {
-            "value": "10-to-100-gw",
-            "label": ">10 to 100 GW",
-            "color": "#cb181b"
-          },
-          {
-            "value": "100-to-1000-gw",
-            "label": ">100 to 1000 GW",
-            "color": "#e3b229"
-          },
-          {
-            "value": "1000-to-10000-gw",
-            "label": ">1000 to 10000 GW",
-            "color": "#f3ff31"
-          },
-          {
-            "value": "outline",
-            "label": "Symbol outline",
-            "color": "#010101"
-          }
-        ]
+        "displaySampling": "nearest"
       }
     }
   ],

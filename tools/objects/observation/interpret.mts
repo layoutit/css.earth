@@ -22,7 +22,6 @@ import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation } from '../terrestrial-layers/solid-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';
 import { validateGeologyProfile } from '../terrestrial-layers/categorical-geology.mts';
-import { validatePointTableProfile } from '../terrestrial-layers/mrt-point-table.mts';
 import { validatePds4ObservationPolicy } from '../terrestrial-layers/observed-pds4.mts';
 import { preparePdsByteMosaic } from '../terrestrial-layers/pds-byte-mosaic.mts';
 import { prepareControlledOrthographicMosaic } from '../terrestrial-layers/controlled-orthographic-mosaic.mts';
@@ -300,20 +299,12 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         if (parsed.path !== surface.source) throw new TypeError(`${objectId}/${surface.id}: science.path must equal the surface source.`);
         validateScienceQualityMasks(parsed);
         if (parsed.format === 'geologic-shapefile') validateGeologyProfile(parsed);
-        else if (parsed.format === 'mrt-point-table') validatePointTableProfile(parsed);
         else validateCategoricalGrid(parsed);
         const source = await manifest;
         await source.validateGroup(parsed.consumer);
         let raster = science.get(surface.id);
         if (!raster) { raster = loadScienceSurface(sourceDirectory, parsed); science.set(surface.id, raster); }
         const { rgb, missing } = paintScienceSurface(await raster, parsed, width, height);
-        if (parsed.monochromeBase !== undefined) {
-          // Symbols drawn over a photograph: pixels outside every symbol show the declared observation, not the no-data grid.
-          const baseSurface = surfaces.get(parsed.monochromeBase);
-          if (baseSurface?.science?.kind !== 'terrestrial-observation') throw new TypeError(`${objectId}/${surface.id}: base ${parsed.monochromeBase} is not a terrestrial observation.`);
-          const base = await observation({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height);
-          for (let i = 0; i < missing.length; i++) if (missing[i] && !base.missing[i]) { rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); missing[i] = 0; }
-        }
         const painted = rgb3(rgb, missing, width, height, Boolean(parsed.categories) || parsed.displaySampling === 'nearest', recipe.missingCoverage);
         // A self-luminous body (a thermal emission map) owes the emissive presentation its plates; nothing lies beyond its limb.
         return recipe.emission ? { ...painted, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : painted;

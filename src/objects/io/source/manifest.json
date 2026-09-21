@@ -982,8 +982,8 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 16465,
-      "expectedSha256": "a6839e4126794b7d0603e5655c10eaf36f29199176d62eb20b908d756182e6fe",
+      "expectedBytes": 15304,
+      "expectedSha256": "e9191bef4e52b9e66726e5a8fb675a73c9bc43e9b020bde5f723808bd8bbe1a8",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1095,8 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 16152,
-      "expectedSha256": "c9f42fcd6b9e9e5071389cd9395f9493008473f8bec83408474ba10460f6ebbc",
+      "expectedBytes": 19010,
+      "expectedSha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1112,68 +1112,119 @@
       }
     },
     {
-      "id": "davies-2024-io-thermal-sources",
-      "path": "science/davies-2024/psjad4346t10_mrt.txt",
-      "expectedBytes": 27553,
-      "expectedSha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5",
-      "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
-      "credit": "Davies, Perry, Williams, Veeder and Nelson (2024), Planetary Science Journal 5, 121, Table A1 (machine-readable)",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://doi.org/10.3847/PSJ/ad4346",
-        "https://creativecommons.org/licenses/by/4.0/"
-      ],
-      "acquisition": "Retrieve the exact machine-readable Table A1 file from the IOP Publishing article supplement, pinned 2026-09-21. No source substitution or automatic hash refresh.",
-      "redistribution": "Small published table retained in Git byte for byte under CC BY 4.0 with attribution.",
+      "id": "io-jiram-m-night-recipe",
+      "path": "science/jiram/recipe.json",
+      "expectedBytes": 18165,
+      "expectedSha256": "e20a147eea6c2645bb8f7dd20dbb36b9e790219e190f490f98acf6053e8dde8d",
+      "origin": "Repository-authored reduction recipe pinning 59 Juno JIRAM imager RDR frames (JNO-J-JIRAM-3-RDR-V1.0) by volume, product id and SHA-256, and the Juno kernel-bank files each visit uses",
+      "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors",
+      "license": "Public NASA mission data; repository-authored recipe",
+      "acquisition": "Frames listed by the PDS volume indexes, screened by Io range and by the SPICE camera, restored by node tools/objects/juno/jiram-mosaic.mts --fetch and checked against their pins.",
+      "redistribution": "The recipe and the reduced map are kept in Git; the frames are fetched from the archive by pin.",
       "consumers": [
         "volcanic-heat"
       ],
-      "lensId": "volcanic-heat",
-      "label": "Volcanic heat",
-      "falseColor": true,
-      "format": "mrt-point-table",
-      "projection": {
-        "type": "geographic-points",
-        "latitudeDegrees": [
-          90,
-          -90
-        ],
-        "longitudeDegrees": [
-          0,
-          360
-        ],
-        "longitudeDirection": "west-positive"
-      },
-      "coverage": "343 thermal sources ranked by thermal emission (GW): the estimates of Veeder et al. (2015), Keck and Gemini detections, and new Juno JIRAM detections up to orbit PJ49 (Table A1 notes). Each source is a point position; the symbol drawn around it is the size of the paper's Figure 1 marker for its power class, not the size of the hot spot.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "galileo",
-            "missionId": "galileo",
-            "evidence": "Davies et al. (2024), Table A1: sources without a status flag come from Veeder et al. (2015), built on Galileo observations"
-          },
-          {
-            "kind": "facility",
-            "facilityId": "juno",
-            "missionId": "juno",
-            "evidence": "Davies et al. (2024), Table A1 status 1: new Juno JIRAM detections through PJ49"
-          }
-        ]
-      },
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "doi-10-3847-psj-ad4346",
+            "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Table A1, machine-readable file psjad4346t10_mrt.txt"
+            "evidence": "Every frame pinned in science/jiram/recipe.json by product id and SHA-256."
           }
         ]
       }
     }
   ],
-  "generatedIntermediates": [],
+  "generatedIntermediates": [
+    {
+      "id": "io-jiram-m-night-map",
+      "path": "science/jiram/io-jiram-m-night.IMG",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "expectedBytes": 1036800,
+      "expectedSha256": "84f2671acc566a7e52e71f977b2391d5a240cc9617bc8774c45ec685a963381b",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-m-night-label",
+      "path": "science/jiram/io-jiram-m-night.LBL",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "expectedBytes": 1307,
+      "expectedSha256": "efb8da37d9c03e37cef8fc44b95f9d8c5da9fccdf99b7c2d39218fe0a9351504",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      }
+    },
+    {
+      "id": "io-jiram-m-night-receipt",
+      "path": "science/jiram/receipt.json",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "consumers": [
+        "volcanic-heat"
+      ],
+      "expectedBytes": 27895,
+      "expectedSha256": "b65931d8970ff1c4c68d3c8c45e939767fc391a9af5baf7d44b60068b1184cda",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
+      },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      }
+    }
+  ],
   "documents": [
     {
       "path": "editorial/factsheet-review.json",
@@ -1598,6 +1649,20 @@
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
       }
+    },
+    {
+      "path": "science/davies-2024/psjad4346t10_mrt.txt",
+      "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
+      "purpose": "Davies et al. (2024) Table A1 hot-spot positions (CC BY 4.0), kept byte for byte. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks that bright spots in the JIRAM map fall on these independently catalogued sources.",
+      "expectedBytes": 27553,
+      "expectedSha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5"
+    },
+    {
+      "path": "science/mura-2024/table3-m-band.json",
+      "origin": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1369472/full",
+      "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks the Volcanic heat map against them.",
+      "expectedBytes": 14176,
+      "expectedSha256": "90ad29f2e09ce3a2db70081810d21aba3b65c8ca137fa9d76a7d880cd07631ce"
     }
   ]
 }

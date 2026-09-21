@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "f31d3bfea6561abc235d1b7185a84646467a7c43a6ca938c7e6eb69743c31d36"
+    "sha256": "ff18bc3b511f464e13727a9bd564ad0b2b243682bbb2352dd5da8f007bfb27d7"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "4d4fb7a8dbda3e996127f9e4c1f4f1e0dbf6783050be20d0f01f2238dc49b8b7"
+    "bindingsSha256": "e0f3b1f541f5efee4049a29c3615cd60d4cd746e0e76300e113c9e5121570471"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "a6839e4126794b7d0603e5655c10eaf36f29199176d62eb20b908d756182e6fe",
+      "sha256": "e9191bef4e52b9e66726e5a8fb675a73c9bc43e9b020bde5f723808bd8bbe1a8",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/io/",
@@ -413,131 +413,88 @@
             "id": "volcanic-heat",
             "output": "io-{id}{suffix}.webp",
             "thumbnail": "io-lens-{id}.webp",
-            "source": "science/davies-2024/psjad4346t10_mrt.txt",
+            "source": "science/jiram/io-jiram-m-night.IMG",
             "falseColor": true,
             "science": {
               "kind": "terrestrial-scientific",
               "id": "volcanic-heat",
               "label": "Volcanic heat",
-              "format": "mrt-point-table",
-              "path": "science/davies-2024/psjad4346t10_mrt.txt",
+              "format": "pds3-float-map",
+              "path": "science/jiram/io-jiram-m-night.IMG",
+              "labelPath": "science/jiram/io-jiram-m-night.LBL",
+              "grid": {
+                "productId": "IO_JIRAM_M_NIGHT_MOSAIC",
+                "dataSetId": "CSSEARTH-IO-JIRAM-M-NIGHT-MOSAIC-V1",
+                "targetName": "IO",
+                "width": 720,
+                "height": 360,
+                "pixelsPerDegree": 2,
+                "referenceRadiusMeters": 1821490,
+                "centerLongitudeEastDegrees": 180,
+                "longitudeRangeEast": [
+                  0,
+                  360
+                ],
+                "sampleProjectionOffset": 359.5,
+                "lineProjectionOffset": 179.5,
+                "projectionRotation": "0.0 <degree>",
+                "missingValue": -1e+32,
+                "sampleType": "PC_REAL",
+                "coordinateSystem": "PLANETOCENTRIC",
+                "latitudeRange": [
+                  -90,
+                  90
+                ]
+              },
+              "description": "Juno JIRAM 4.8 µm night side · Mura et al. 2024 scale",
+              "title": "Heat from Io's volcanoes at 4.8 µm, seen by Juno's JIRAM camera on the night side, where no sunlight is reflected. Each spot is a hot spot's glow; the rest of the night side is too cold to register. Color follows the linear scale of Mura et al. (2024), Figure 2. Gray grid: never seen at night by the frames used.",
+              "sourceUrl": "https://atmos.nmsu.edu/PDS/data/PDS4/",
+              "minimum": 0,
+              "maximum": 0.15,
+              "colors": [
+                "#4020b0",
+                "#4328c5",
+                "#4633dc",
+                "#453dea",
+                "#3f4bf5",
+                "#3658fb",
+                "#1d66fd",
+                "#0271fc",
+                "#017efb",
+                "#0189f8",
+                "#0193ec",
+                "#029de7",
+                "#02a6e1",
+                "#03b1d9",
+                "#02b6cd",
+                "#01bcbf",
+                "#03bfb0",
+                "#01c69e",
+                "#01ca8d",
+                "#02cc76",
+                "#04ce5c",
+                "#5ec942",
+                "#9ac71d",
+                "#c0c504",
+                "#e6bc02",
+                "#fbbb13",
+                "#fdbf21",
+                "#fec912",
+                "#fdd703",
+                "#fae402",
+                "#f8f001",
+                "#fafb03"
+              ],
+              "labels": [
+                "0",
+                "0.05",
+                "0.10",
+                "0.15"
+              ],
+              "units": "band radiance, W m⁻² sr⁻¹",
               "consumer": "volcanic-heat",
               "sampling": "nearest",
-              "monochromeBase": "normal",
-              "description": "Davies et al. 2024 thermal sources · power classes",
-              "title": "343 volcanic hot spots from Davies et al. (2024), Table A1, drawn over the Monochrome mosaic with the symbol classes, sizes and colors of the paper's Figure 1. Symbol size shows the power class, not the size of the hot spot; most are far smaller than one symbol.",
-              "sourceUrl": "https://doi.org/10.3847/PSJ/ad4346",
-              "grid": {
-                "title": "New Global Map of Io’s Volcanic Thermal Emission and Discovery of Hemispherical Dichotomies",
-                "expectedRows": 343,
-                "longitudeDirection": "west-positive",
-                "rank": {
-                  "label": "Rank",
-                  "bytes": [
-                    1,
-                    3
-                  ],
-                  "format": "I3",
-                  "units": "---",
-                  "explanation": "Rank by power"
-                },
-                "latitude": {
-                  "label": "Lat",
-                  "bytes": [
-                    38,
-                    42
-                  ],
-                  "format": "F5.1",
-                  "units": "deg",
-                  "explanation": "Degrees North latitude"
-                },
-                "longitude": {
-                  "label": "Long",
-                  "bytes": [
-                    44,
-                    48
-                  ],
-                  "format": "F5.1",
-                  "units": "deg",
-                  "explanation": "Degrees West longitude"
-                },
-                "value": {
-                  "label": "Power",
-                  "bytes": [
-                    66,
-                    72
-                  ],
-                  "format": "F7.2",
-                  "units": "GW",
-                  "explanation": "Hot spot thermal emission (4)"
-                }
-              },
-              "classes": [
-                {
-                  "category": "under-1-gw",
-                  "below": 1,
-                  "diameterDegrees": 3.01
-                },
-                {
-                  "category": "1-to-10-gw",
-                  "minimum": 1,
-                  "below": 10,
-                  "diameterDegrees": 4.07
-                },
-                {
-                  "category": "10-to-100-gw",
-                  "minimum": 10,
-                  "below": 100,
-                  "diameterDegrees": 4.43
-                },
-                {
-                  "category": "100-to-1000-gw",
-                  "minimum": 100,
-                  "below": 1000,
-                  "diameterDegrees": 4.78,
-                  "outlineDegrees": 0.53
-                },
-                {
-                  "category": "1000-to-10000-gw",
-                  "minimum": 1000,
-                  "below": 10000,
-                  "diameterDegrees": 7.08,
-                  "outlineDegrees": 0.53
-                }
-              ],
-              "outlineCategory": "outline",
-              "categories": [
-                {
-                  "value": "under-1-gw",
-                  "label": "<1 GW",
-                  "color": "#2a00f7"
-                },
-                {
-                  "value": "1-to-10-gw",
-                  "label": ">1 to 10 GW",
-                  "color": "#84ff2b"
-                },
-                {
-                  "value": "10-to-100-gw",
-                  "label": ">10 to 100 GW",
-                  "color": "#cb181b"
-                },
-                {
-                  "value": "100-to-1000-gw",
-                  "label": ">100 to 1000 GW",
-                  "color": "#e3b229"
-                },
-                {
-                  "value": "1000-to-10000-gw",
-                  "label": ">1000 to 10000 GW",
-                  "color": "#f3ff31"
-                },
-                {
-                  "value": "outline",
-                  "label": "Symbol outline",
-                  "color": "#010101"
-                }
-              ]
+              "displaySampling": "nearest"
             }
           }
         ],
@@ -587,7 +544,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "c9f42fcd6b9e9e5071389cd9395f9493008473f8bec83408474ba10460f6ebbc",
+      "sha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -942,61 +899,212 @@
               "thumbnail": "io-lens-volcanic-heat.webp",
               "surface": "io-volcanic-heat@2x.webp",
               "poles": "io-poles-volcanic-heat@2x.webp",
-              "source": {
-                "id": "davies-2024-io-thermal-sources",
-                "path": "../manifest.json",
-                "url": "https://doi.org/10.3847/PSJ/ad4346"
-              },
               "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "4.8 µm radiance, night side",
+                "labels": [
+                  "0",
+                  "0.05",
+                  "0.10",
+                  "0.15"
+                ],
+                "meta": "W sr⁻¹ m⁻²",
+                "sourceUrl": "https://doi.org/10.3389/fspas.2024.1369472",
+                "recipe": {
+                  "palette": [
+                    [
+                      64,
+                      32,
+                      176
+                    ],
+                    [
+                      67,
+                      40,
+                      197
+                    ],
+                    [
+                      70,
+                      51,
+                      220
+                    ],
+                    [
+                      69,
+                      61,
+                      234
+                    ],
+                    [
+                      63,
+                      75,
+                      245
+                    ],
+                    [
+                      54,
+                      88,
+                      251
+                    ],
+                    [
+                      29,
+                      102,
+                      253
+                    ],
+                    [
+                      2,
+                      113,
+                      252
+                    ],
+                    [
+                      1,
+                      126,
+                      251
+                    ],
+                    [
+                      1,
+                      137,
+                      248
+                    ],
+                    [
+                      1,
+                      147,
+                      236
+                    ],
+                    [
+                      2,
+                      157,
+                      231
+                    ],
+                    [
+                      2,
+                      166,
+                      225
+                    ],
+                    [
+                      3,
+                      177,
+                      217
+                    ],
+                    [
+                      2,
+                      182,
+                      205
+                    ],
+                    [
+                      1,
+                      188,
+                      191
+                    ],
+                    [
+                      3,
+                      191,
+                      176
+                    ],
+                    [
+                      1,
+                      198,
+                      158
+                    ],
+                    [
+                      1,
+                      202,
+                      141
+                    ],
+                    [
+                      2,
+                      204,
+                      118
+                    ],
+                    [
+                      4,
+                      206,
+                      92
+                    ],
+                    [
+                      94,
+                      201,
+                      66
+                    ],
+                    [
+                      154,
+                      199,
+                      29
+                    ],
+                    [
+                      192,
+                      197,
+                      4
+                    ],
+                    [
+                      230,
+                      188,
+                      2
+                    ],
+                    [
+                      251,
+                      187,
+                      19
+                    ],
+                    [
+                      253,
+                      191,
+                      33
+                    ],
+                    [
+                      254,
+                      201,
+                      18
+                    ],
+                    [
+                      253,
+                      215,
+                      3
+                    ],
+                    [
+                      250,
+                      228,
+                      2
+                    ],
+                    [
+                      248,
+                      240,
+                      1
+                    ],
+                    [
+                      250,
+                      251,
+                      3
+                    ]
+                  ],
+                  "labels": [
+                    "0",
+                    "0.05",
+                    "0.10",
+                    "0.15"
+                  ]
+                }
+              },
+              "source": {
+                "id": "io-jiram-m-night-recipe",
+                "path": "../manifest.json",
+                "url": "https://atmos.nmsu.edu/PDS/data/jnojir_2041/CATALOG/JNO_JIRAM_RDR_DS.CAT"
+              },
               "facts": [
                 {
                   "id": "classification",
                   "label": "Quantity",
-                  "value": "Thermal power of each hot spot, GW"
+                  "value": "Measured M-band (4.5–5.0 µm) radiance, night side"
                 },
                 {
-                  "id": "sources",
-                  "label": "Hot spots",
-                  "value": "343, through Juno orbit PJ49"
+                  "id": "coverage",
+                  "label": "Coverage",
+                  "value": "22% of Io; 34 Juno JIRAM frames, orbits 41–49"
                 },
                 {
-                  "id": "symbols",
-                  "label": "Symbols",
-                  "value": "Davies et al. (2024), Fig. 1 classes; size is not physical"
+                  "id": "scale",
+                  "label": "Color scale",
+                  "value": "Mura et al. (2024), Frontiers, Fig. 2"
                 }
               ],
-              "legend": {
-                "kind": "categories",
-                "title": "Thermal power",
-                "meta": "Symbol size marks the class, not the hot spot's size.",
-                "sourceUrl": "https://doi.org/10.3847/PSJ/ad4346",
-                "items": [
-                  {
-                    "label": "<1 GW",
-                    "description": "Smallest dot",
-                    "color": "#2a00f7"
-                  },
-                  {
-                    "label": ">1 to 10 GW",
-                    "color": "#84ff2b"
-                  },
-                  {
-                    "label": ">10 to 100 GW",
-                    "color": "#cb181b"
-                  },
-                  {
-                    "label": ">100 to 1000 GW",
-                    "description": "Black outline",
-                    "color": "#e3b229"
-                  },
-                  {
-                    "label": ">1000 to 10000 GW",
-                    "description": "Largest dot, black outline",
-                    "color": "#f3ff31"
-                  }
-                ]
-              },
-              "notes": "343 volcanic hot spots from Davies et al. (2024), Table A1, drawn over the Monochrome mosaic with the symbol classes, sizes and colors of the paper's Figure 1. Symbol size shows the power class, not the size of the hot spot; most are far smaller than one symbol.",
+              "notes": "Heat from Io's volcanoes at 4.8 µm, our own reduction of 34 Juno JIRAM frames from orbits 41, 43, 47 and 49 (April 2022 to March 2023), the orbits Mura et al. (2024) mapped. Only the night side is kept, where no sunlight is reflected. Each hot spot's total output agrees with the paper's; its peak is lower, because we do not sharpen the images as they do. Color follows the linear scale of their Figure 2. Gray grid: never seen at night in these orbits, including the south and Loki Patera.",
               "noData": true
             }
           ],
@@ -1752,73 +1860,71 @@
       "verificationOperations": []
     },
     {
-      "kind": "source-input",
-      "id": "davies-2024-io-thermal-sources",
-      "path": "science/davies-2024/psjad4346t10_mrt.txt",
-      "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
-      "credit": "Davies, Perry, Williams, Veeder and Nelson (2024), Planetary Science Journal 5, 121, Table A1 (machine-readable)",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://doi.org/10.3847/PSJ/ad4346",
-        "https://creativecommons.org/licenses/by/4.0/"
-      ],
-      "acquisition": "Retrieve the exact machine-readable Table A1 file from the IOP Publishing article supplement, pinned 2026-09-21. No source substitution or automatic hash refresh.",
-      "redistribution": "Small published table retained in Git byte for byte under CC BY 4.0 with attribution.",
-      "lensId": "volcanic-heat",
-      "label": "Volcanic heat",
-      "falseColor": true,
-      "format": "mrt-point-table",
-      "projection": {
-        "type": "geographic-points",
-        "latitudeDegrees": [
-          90,
-          -90
-        ],
-        "longitudeDegrees": [
-          0,
-          360
-        ],
-        "longitudeDirection": "west-positive"
-      },
-      "coverage": "343 thermal sources ranked by thermal emission (GW): the estimates of Veeder et al. (2015), Keck and Gemini detections, and new Juno JIRAM detections up to orbit PJ49 (Table A1 notes). Each source is a point position; the symbol drawn around it is the size of the paper's Figure 1 marker for its power class, not the size of the hot spot.",
-      "capture": {
-        "attributions": [
-          {
-            "kind": "facility",
-            "facilityId": "galileo",
-            "evidence": "Davies et al. (2024), Table A1: sources without a status flag come from Veeder et al. (2015), built on Galileo observations",
-            "missionId": "galileo"
-          },
-          {
-            "kind": "facility",
-            "facilityId": "juno",
-            "evidence": "Davies et al. (2024), Table A1 status 1: new Juno JIRAM detections through PJ49",
-            "missionId": "juno"
-          }
+      "id": "io-jiram-m-night-map",
+      "path": "science/jiram/io-jiram-m-night.IMG",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
         ]
       },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
           {
-            "catalogueId": "doi-10-3847-psj-ad4346",
+            "catalogueId": "pds-juno-jiram-rdr-v1",
             "role": "material",
-            "evidence": "Table A1, machine-readable file psjad4346t10_mrt.txt"
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
           }
         ]
       },
-      "sha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5",
-      "bytes": 27553,
+      "kind": "generated-intermediate",
+      "title": "science/jiram/io-jiram-m-night.IMG",
+      "acquisition": "tools/objects/juno/jiram-mosaic.mts",
+      "upstreamLineage": "not-recorded",
+      "sha256": "84f2671acc566a7e52e71f977b2391d5a240cc9617bc8774c45ec685a963381b",
+      "bytes": 1036800,
       "dependencies": [],
       "verification": "bytes-verified",
-      "acquisitionOperation": {
-        "kind": "download",
-        "groups": [
-          "refresh"
-        ],
-        "path": "science/davies-2024/psjad4346t10_mrt.txt",
-        "url": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt"
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "id": "io-jiram-m-night-label",
+      "path": "science/jiram/io-jiram-m-night.LBL",
+      "origin": "https://atmos.nmsu.edu/PDS/data/",
+      "credit": "Juno JIRAM team via the NASA PDS Atmospheres Node; reduced by cssEarth contributors",
+      "license": "Public NASA mission data",
+      "recipe": {
+        "generator": "tools/objects/juno/jiram-mosaic.mts",
+        "inputs": [
+          "io-jiram-m-night-recipe"
+        ]
       },
+      "generator": "tools/objects/juno/jiram-mosaic.mts",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "pds-juno-jiram-rdr-v1",
+            "role": "material",
+            "evidence": "Reduced by tools/objects/juno/jiram-mosaic.mts from the JIRAM frames pinned in science/jiram/recipe.json."
+          }
+        ]
+      },
+      "kind": "generated-intermediate",
+      "title": "science/jiram/io-jiram-m-night.LBL",
+      "acquisition": "tools/objects/juno/jiram-mosaic.mts",
+      "upstreamLineage": "not-recorded",
+      "sha256": "efb8da37d9c03e37cef8fc44b95f9d8c5da9fccdf99b7c2d39218fe0a9351504",
+      "bytes": 1307,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
       "verificationOperations": []
     },
     {
@@ -1834,8 +1940,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "c9f42fcd6b9e9e5071389cd9395f9493008473f8bec83408474ba10460f6ebbc",
-      "bytes": 16152,
+      "sha256": "a97f0afa9de013afac8addaf5b08c47392fd5cceb4639a32f5c8730bc377f984",
+      "bytes": 19010,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -2006,9 +2112,7 @@
       "recipe": "raster",
       "selector": "/surfaces/1",
       "observationAttribution": "source-lineage",
-      "parents": [
-        "normal"
-      ],
+      "parents": [],
       "process": "Prepare latitude bands with the declared coverage/exposure policy; sample the pinned original photograph directly for polar sprites, then encode the existing texture layout.",
       "limitations": [],
       "lensIds": [
@@ -2215,9 +2319,7 @@
       "recipe": "raster",
       "selector": "/surfaces/5",
       "observationAttribution": "source-lineage",
-      "parents": [
-        "normal"
-      ],
+      "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [],
       "lensIds": [
@@ -2230,31 +2332,32 @@
         "falseColor": true
       },
       "inputs": [
-        "davies-2024-io-thermal-sources"
+        "io-jiram-m-night-map",
+        "io-jiram-m-night-label"
       ],
       "outputs": [
         {
           "url": "/scenes/io/io-volcanic-heat@2x.webp",
-          "bytes": 3520096,
-          "sha256": "58c5e045c3b5e9eb4e58c65ae4a124dcfaa5c4f8bf883b98d7f7cbb9cef56cfb",
+          "bytes": 111402,
+          "sha256": "88a522e92ee8198caad78691d29d4069ac3945e9fcc086772113db8ae090a759",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-lens-volcanic-heat.webp",
-          "bytes": 3038,
-          "sha256": "959ce2a538490e3107fb1d4548e8b707f066918f3ef6d6a2d3449aa8712a5094",
+          "bytes": 878,
+          "sha256": "ef59e15bebb60088d8dd643dba5d4de81f14a0dbdafeb011ab1bc15782840f09",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/io/io-poles-volcanic-heat@2x.webp",
-          "bytes": 97652,
-          "sha256": "83ed74398f6acb8a3b3d29b9622ff46dbce9b7b3bbf94903078b9ec195908ce9",
+          "bytes": 17596,
+          "sha256": "ff993b2a6b084f9c139bdbcc5ec7228623a2b2cfaa0d76fb54352c5339595929",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "davies-2024-io-thermal-sources",
+          "sourceId": "io-jiram-m-night-map",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/5/source."
         }
@@ -2685,8 +2788,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/volcanic-heat.webp",
-          "bytes": 109476,
-          "sha256": "a3d18e327fd849e143c455054a7601fb38e7d9e172dc49fb3e51477a5cdb7d4d",
+          "bytes": 34792,
+          "sha256": "94bd89225b60589a74a6d8c0d2c680872e87ecea67b4ece51b82b8944db71365",
           "verification": "bytes-verified"
         }
       ]
@@ -2698,11 +2801,11 @@
   },
   "lastPreparation": {
     "objectId": "io",
-    "materialSha256": "9f2577673d5d3e9edd55f8062a49b50f86a5128ed21d550c0db8e297cbd731a2",
+    "materialSha256": "26e7d8646de983cf3ba694b3ebbb5f504c5a2511cabd88837b3b8a7d9d2e7e57",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "4d4fb7a8dbda3e996127f9e4c1f4f1e0dbf6783050be20d0f01f2238dc49b8b7"
+      "bindingsSha256": "e0f3b1f541f5efee4049a29c3615cd60d4cd746e0e76300e113c9e5121570471"
     }
   }
 }
