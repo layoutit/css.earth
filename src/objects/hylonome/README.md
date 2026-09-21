@@ -8,7 +8,7 @@ Hylonome is 10370 Hylonome, provisional designation 1995 DW2. The JPL Small-Body
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at 125.3 km, estimated from JPL's absolute magnitude H = 8.2 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured. JPL Small-Body Database, absolute magnitude H = 8.2 for 10370 Hylonome (1995 DW2); diameter estimated by cssEarth with an assumed albedo of 0.059.
 

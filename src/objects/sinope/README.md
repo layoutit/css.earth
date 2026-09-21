@@ -8,7 +8,7 @@ Sinope is Jupiter IX. JPL Horizons carries it as body 509.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 JPL Horizons lists a radius of 14 km on Sinope's object data page (revised 2025-May-12). Horizons gives no shape, albedo map or rotation state for it.
 

@@ -8,7 +8,7 @@ Elatus is 31824 Elatus, provisional designation 1999 UG5. The JPL Small-Body Dat
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the 57 km diameter the JPL Small-Body Database lists for Elatus. No shape model is published. JPL Small-Body Database, physical parameters for 31824 Elatus (1999 UG5): diameter 57 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B).
 

@@ -8,7 +8,7 @@ Goibniu is 90568 Goibniu, provisional designation 2004 GV9. The JPL Small-Body D
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the 680 ± 34 km diameter measured from thermal emission. No shape model is published. Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry.
 

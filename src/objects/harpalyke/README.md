@@ -8,7 +8,7 @@ JPL Horizons carries Harpalyke as body 522; its identity and discovery are in JP
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at about 5.3 km, estimated from the apparent magnitude JPL Horizons gives for Harpalyke (23.167 on 2026-Sep-03, H = 15.5 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. The estimate ignores the phase term, which slightly understates the size.
 

@@ -8,7 +8,7 @@ Vanth is Orcus I, first designated S/2005 (90482) 1. JPL Horizons carries it as 
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the approximate 221.5 km radius in the header of JPL Horizons' satellite solution for Vanth. No shape model is published.
 

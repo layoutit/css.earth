@@ -8,7 +8,7 @@ JPL Horizons carries Erinome as body 525; its identity and discovery are in JPL'
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at about 6.6 km, estimated from the apparent magnitude JPL Horizons gives for Erinome (22.527 on 2026-Sep-03, H = 15.0 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. The estimate ignores the phase term, which slightly understates the size.
 

@@ -8,7 +8,7 @@ JPL Horizons carries Callirrhoe as body 517; its identity and discovery are in J
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at about 10.5 km, estimated from the apparent magnitude JPL Horizons gives for Callirrhoe (21.659 on 2026-Sep-03, H = 14.0 with no phase term) and an assumed geometric albedo of 0.04. The size is not measured. The estimate ignores the phase term, which slightly understates the size.
 

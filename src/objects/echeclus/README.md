@@ -8,7 +8,7 @@ Echeclus is 60558 Echeclus, provisional designation 2000 EC98. The JPL Small-Bod
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the 59 km diameter the JPL Small-Body Database lists for Echeclus. No shape model is published. JPL Small-Body Database, physical parameters for 60558 Echeclus (2000 EC98): diameter 59 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B).
 

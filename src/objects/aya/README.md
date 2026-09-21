@@ -8,7 +8,7 @@ Aya is 55565 Aya, provisional designation 2002 AW197. The JPL Small-Body Databas
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at the 768 (+39/-38) km diameter measured from thermal emission. No shape model is published. Vilenius et al. (2014), Astronomy & Astrophysics 564, A35; Herschel PACS and Spitzer MIPS thermal radiometry.
 

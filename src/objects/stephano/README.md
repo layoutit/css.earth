@@ -8,7 +8,7 @@ Stephano is Uranus XX. JPL Horizons carries it as body 720.
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Sheppard, Jewitt and Kleyna (2005), Table 3, estimate a radius of 16 km for S/1999 U2 from its R-band brightness, assuming a geometric albedo of 0.04. The size is an estimate from an assumed albedo, not a measurement. JPL's satellite discovery table identifies S/1999 U2 as Stephano.
 

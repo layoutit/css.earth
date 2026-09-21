@@ -8,7 +8,7 @@ Nessus is 7066 Nessus, provisional designation 1993 HA2. The JPL Small-Body Data
 
 ## Sources
 
-Source selections, recorded trials and open questions are in the [investigation ledger](investigations.json).
+Pinned inputs are listed in the [source manifest](source/manifest.json).
 
 Illustrative sphere at 66.7 km, estimated from JPL's absolute magnitude H = 9.57 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured. JPL Small-Body Database, absolute magnitude H = 9.57 for 7066 Nessus (1993 HA2); diameter estimated by cssEarth with an assumed albedo of 0.059.
 
