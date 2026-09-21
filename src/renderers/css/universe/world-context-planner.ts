@@ -16,6 +16,7 @@ export const BODY_INDICATOR_DIAMETER = 16;
 export const CONTEXT_LINE_WIDTH = 1;
 const ORBIT_FADE_START_PIXELS = 12, ORBIT_FULL_PIXELS = 48;
 const ORBIT_LOD_PIXELS = 0.1;
+const ORIENTATION_REFERENCE_MAX_DISTANCE_M = 50 * 149_597_870_700;
 // Keep the existing exit thresholds. A hidden annotation must clear a small
 // entry margin before returning, so a boundary cannot reverse its fade each
 // camera sample. This uses committed visibility, never worker-local history.
@@ -89,6 +90,10 @@ export interface WorldContextView {
   overview: boolean;
   selectionPreview?: string | null;
   navigationInFlight: boolean;
+  /** Preserve the committed annotation membership and placement during a camera drag. */
+  rotationActive?: boolean;
+  /** Preserve the last moving frame through the first settled publication. */
+  preserveCommittedAnnotations?: boolean;
   /** Shell occlusion bounds in the same screen coordinates as annotations. */
   labelBlockers?: readonly LabelScreenRect[];
   /** Largest chord-bank deviation, in screen pixels, the paint owner accepts; default 0.1. */
@@ -182,7 +187,8 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
   // Only the selected path fades with depth; one shared scratch pool serves it.
   const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0))));
   return (view: WorldContextView) => {
-    const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight } = view;
+    const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
+      rotationActive = false, preserveCommittedAnnotations = false } = view;
     if (world.referenceFrame !== plan.frame.referenceFrame || world.epochJdTt !== plan.frame.epochJdTt ||
         view.bodies.length !== prepared.length || !(viewport.widthPixels! > 0 && viewport.heightPixels! > 0)) {
       throw new TypeError('World context planning requires a matching frame, body state and measured viewport.');
@@ -197,6 +203,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
     // Once the system retires, the anchor and every placed orbitless body (a star) stay as galactic locators.
     const publishingBodies = view.anchorOnly ? bodies.filter(entry => entry.index === 0 || entry.orbit === null) : bodies;
     const opacity = systemFade.update(world.pose.positionM);
+    const focusDistanceM = Math.hypot(
+      world.pose.positionM[0] - plan.focus.positionM[0],
+      world.pose.positionM[1] - plan.focus.positionM[1],
+      world.pose.positionM[2] - plan.focus.positionM[2],
+    );
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
       const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
         position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
@@ -362,13 +373,21 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const foregroundSystem = !systemFade.isSystemStar(selectedId) && !overview;
         const unrelatedMinor = !satellite && body.id !== plan.focus.id && foregroundSystem && (annotationPriorities[body.id] ?? 2) < 2;
         const flightDestination = navigationInFlight && body.id === emphasizedId;
+        // Prepared orientation references (the Sun, then Earth) remain usable
+        // landmarks when their orbit is too compact to read. At that scale the
+        // annotation stands alone; revealing a dense subpixel orbit would add
+        // clutter without helping identify the body.
+        const referenceAnnotationOnly = focusDistanceM <= ORIENTATION_REFERENCE_MAX_DISTANCE_M &&
+          (annotationPriorities[body.id] ?? 0) >= 4 && !targeted && !resolvedDisc &&
+          labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
         // The destination stays named through the whole flight, across its preview fade.
-        const alpha = flightDestination ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
+        const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
             (!targeted && !resolvedDisc && (!inContext || unrelatedMinor)));
+        if (referenceAnnotationOnly) { projected.orbitVisibility = 0; projected.segments = []; }
         // A presentation setting removes the body from annotation admission;
         // final admission below retires an on-screen context orbit with the caption.
         // Selection/hover can still reveal the complete annotation.
@@ -376,7 +395,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         const gap = Math.max(5, diameter / 2, circle ? BODY_INDICATOR_DIAMETER / 2 : 0) + 4;
         const positions = [[x + gap, y - size.height / 2], [x - gap - size.width, y - size.height / 2],
           [x - size.width / 2, y - gap - size.height], [x - size.width / 2, y + gap]];
-        const sides = body.id === plan.focus.id ? [3] : !flightDestination && (resolvedDisc || body.id === emphasizedId) ? [3, 2, 0, 1] : [0, 1, 2, 3];
+        const primary = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId);
+        const radialSide = primary && entry.parent ? (() => {
+          const [parentX, parentY] = project(frame.eye(entry.parent!));
+          const dx = x - parentX, dy = y - parentY;
+          return Math.abs(dx) >= Math.abs(dy) ? dx >= 0 ? 0 : 1 : dy >= 0 ? 3 : 2;
+        })() : 0;
+        const radialSides = [radialSide, ...[0, 1, 2, 3].filter(side => side !== radialSide)];
+        const sides = body.id === plan.focus.id ? [3] : flightDestination ? [0, 1, 2, 3]
+          : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
           if (hovered) {
@@ -386,7 +413,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           return { slot, rect: { left, top, right: left + size.width, bottom: top + size.height } };
         });
         const radius = BODY_INDICATOR_DIAMETER / 2;
-        const anchor = circle ? { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius } : undefined;
+        // At the outer reference range Earth's honest projected position falls
+        // inside the Sun's 16 px locator. Keep the outward caption collision-safe,
+        // but do not let the two reference circles suppress one another.
+        const anchor = circle && !referenceAnnotationOnly
+          ? { left: x - radius, right: x + radius, top: y - radius, bottom: y + radius }
+          : undefined;
         // Test fixed constraints before admission mutates the shared budget. If the
         // shell or viewport makes every placement impossible, the body's path is
         // still meaningful in the visible stage, just as when the body is offscreen.
@@ -400,7 +432,17 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       }
       // Circle and caption reserve space together. A rejected candidate owns no
       // annotation or context orbit; physical sprites remain independent.
-      const accepted = admitStableLabels(candidates, labelBudget);
+      // A drag moves every candidate on every frame. Re-running collision admission
+      // during that motion made adjacent bodies trade the same slot, so their circles
+      // and captions blinked while the physical markers remained visible. Keep the
+      // committed membership and side until release; only the fixed viewport/shell
+      // bounds may retire a moving annotation during the gesture.
+      const accepted = rotationActive || preserveCommittedAnnotations ? candidates.flatMap(candidate => {
+        if (!candidate.shown) return [];
+        const previous = candidate.placements.find(item => item.slot === candidate.previousPlacement);
+        if (!previous || !createLabelBudget(width, height, [], view.labelBlockers).accepts(previous.rect, candidate.anchor)) return [];
+        return [{ candidate, placement: previous.slot, rect: previous.rect }];
+      }) : admitStableLabels(candidates, labelBudget);
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;

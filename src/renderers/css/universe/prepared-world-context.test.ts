@@ -875,6 +875,31 @@ test('camera updates retain fixed stroke styles and only publish changed orbit p
   layer.destroy();
 });
 
+test('distant ordinary bodies stop intercepting navigation while retained bodies remain selectable', () => {
+  const document = new FakeDocument(), host = document.createElement('section'), before = document.createElement('i');
+  host.clientWidth = 800; host.clientHeight = 600; host.append(before);
+  const source = plan(1);
+  const context = parsePreparedWorldContext({ ...source, bodies: [source.bodies[0],
+    { ...source.bodies[1], positionM: [0, 100, 0], orbit: orbit([0, 100, 0], 1) }] });
+  const layer = mountPreparedWorldContext({ host: host as unknown as HTMLElement, before: before as unknown as Element,
+    plan: context, sprites: { sun: sprite, mercury: sprite, venus: sprite },
+    distantNavigation: { afterDistanceM: 500, nonNavigableIds: ['mercury'] } });
+  const root = layer.root as unknown as FakeElement;
+  const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
+    pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } },
+    { focalPixels: 400, principalOffsetPixels: [30, -20] });
+  publish(400);
+  expect(find(root, 'contextBody', 'mercury').dataset.objectNavigate).toBe('mercury');
+  expect(find(root, 'contextBody', 'venus').dataset.objectNavigate).toBe('venus');
+  publish(600);
+  expect(find(root, 'contextBody', 'mercury').dataset.objectNavigate).toBeUndefined();
+  expect(find(root, 'contextOrbit', 'mercury').dataset.objectNavigate).toBeUndefined();
+  expect(find(root, 'contextBody', 'venus').dataset.objectNavigate).toBe('venus');
+  publish(400);
+  expect(find(root, 'contextBody', 'mercury').dataset.objectNavigate).toBe('mercury');
+  layer.destroy();
+});
+
 test('orbit chords stop at the circular indicator on both sides of the centered body', () => {
   const root = mount(1), layer = mounted.get(root)!;
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,

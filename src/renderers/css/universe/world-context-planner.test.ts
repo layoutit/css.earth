@@ -288,6 +288,44 @@ test('turning the view identifies on-screen orbits and preserves paths crossing 
   expect(offScreenPaths, 'paths keep crossing after their bodies leave the frame').toBeGreaterThan(0);
 });
 
+test('an active camera drag preserves the committed inner-system annotations', () => {
+  const calculate = createWorldContextPlanner(plan), input = view();
+  const points = [plan.focus, ...plan.bodies];
+  const tracked = new Set(['venus', 'earth', 'mars', 'ceres']);
+  input.overview = false;
+  input.world.pose.positionM = [0, 0, 27.5 * 149597870700];
+  const initial = calculate(input);
+  const committed = new Map(initial.projectedBodies
+    .filter(body => tracked.has(points[body.index]!.id))
+    .map(body => [points[body.index]!.id, body.labelShown]));
+  for (const body of initial.projectedBodies) Object.assign(input.bodies[body.index], {
+    labelShown: body.labelShown, labelPlacement: body.labelPlacement, indicatorShown: body.indicatorShown,
+  });
+  expect([...committed.values()].some(Boolean)).toBe(true);
+  input.rotationActive = true;
+  for (let step = -12; step <= 12; step++) {
+    const angle = step * Math.PI / 180;
+    Object.assign(input.world.pose, { orientationXyzw: [0, 0, Math.sin(angle / 2), Math.cos(angle / 2)] });
+    const frame = calculate(input);
+    for (const body of frame.projectedBodies) {
+      const id = points[body.index]!.id;
+      if (tracked.has(id)) expect(body.labelShown, `${id} keeps its drag-start admission`).toBe(committed.get(id));
+      Object.assign(input.bodies[body.index], {
+        labelShown: body.labelShown, labelPlacement: body.labelPlacement, indicatorShown: body.indicatorShown,
+      });
+    }
+  }
+  input.rotationActive = false;
+  input.preserveCommittedAnnotations = true;
+  const settled = calculate(input);
+  for (const body of settled.projectedBodies) {
+    const id = points[body.index]!.id;
+    if (!tracked.has(id)) continue;
+    expect(body.labelShown, `${id} keeps its final inertial admission on settlement`).toBe(committed.get(id));
+    if (body.labelShown) expect(body.labelPlacement).toBe(input.bodies[body.index]!.labelPlacement);
+  }
+});
+
 test('an off-screen body keeps an orbit path that crosses the viewport', () => {
   const calculate = createWorldContextPlanner(plan), input = view();
   // Closing in on the Sun takes body after body out of the frame while their rings
@@ -317,6 +355,25 @@ test('Earth priority keeps its ordinary scale fade and leaves the Sun at outer-s
   expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toContain('earth');
   input.world.pose.positionM = [0, 0, plan.system.hiddenDistanceM * 2];
   expect(calculate(input).projectedBodies.filter(body => body.labelShown).map(body => points[body.index].id)).toEqual(['sun']);
+});
+
+test('Earth remains a circle-and-label orientation reference through 50 AU, then retires normally', () => {
+  const input = view(), points = [plan.focus, ...plan.bodies];
+  input.viewport = { focalPixels: 600, widthPixels: 1445, heightPixels: 720, principalOffsetPixels: [0, 0] };
+  const calculate = createWorldContextPlanner(plan, {
+    sun: labelImportance('star', true, 5), earth: labelImportance('planet', true, 4),
+  });
+  for (const distanceAu of [27.5, 50]) {
+    input.world.pose.positionM = [0, 0, distanceAu * 149597870700];
+    const frame = calculate(input), earth = frame.projectedBodies.find(body => points[body.index].id === 'earth')!;
+    expect(earth.labelShown).toBe(true);
+    expect(earth.indicatorShown).toBe(true);
+    expect(earth.segments).toHaveLength(0);
+  }
+  input.world.pose.positionM = [0, 0, 50.1 * 149597870700];
+  const beyond = calculate(input).projectedBodies.find(body => points[body.index].id === 'earth')!;
+  expect(beyond.labelShown).toBe(false);
+  expect(beyond.indicatorShown).toBe(false);
 });
 
 test('fixed shell occlusion preserves context paths that still cross the visible stage', () => {
