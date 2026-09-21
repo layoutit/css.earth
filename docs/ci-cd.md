@@ -11,7 +11,7 @@ timings before claiming it is met. Report cold and warm-cache runs separately.
 
 | Workflow | Trigger and responsibility |
 | --- | --- |
-| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification, contract lint and the advisory repository audit. Changed ownership selects application/test types, source/runtime/shell/renderer, preparation/publication and nebula checks. Main runs every lane. |
+| [Shared universe](../.github/workflows/universe.yml) | PRs always run classification, contract lint and the advisory repository audit. Changed ownership selects application/test types, runtime/shell/renderer, preparation/publication and nebula checks, and — inside the advisory audit — the source-catalogue and bake-reproduction checks. Main runs every lane. |
 | [Object-scope gate](../.github/workflows/object-scope.yml) | Every PR: more than 12 changed object directories needs the `pipeline-change` label. Labels re-evaluate this gate. |
 | [Nightly asset sweep](../.github/workflows/nightly.yml) | Scheduled/manual runs check all published keys and test types. A separately selected production build/browser check also runs on relevant PRs; it does not publish the site. Keep it outside the merge-required set unless it fits the total PR budget. |
 | [Deploy](../.github/workflows/deploy.yml) | A successful Shared universe run on main automatically builds and deploys that exact revision. Manual dispatch also deploys. Merging is therefore not deployment-neutral. |
@@ -27,9 +27,17 @@ group and can supersede an older deployment.
 - Put a check with the code it protects. Use the shared
   [affected-path map](../.github/ci-areas.json); unknown paths deliberately select
   all shared lanes. Do not add a second ownership map in workflow scripts.
-- Keep correctness, source integrity, changed-key publication and relevant type
-  checks blocking. Exhaustive remote sweeps and broad release qualification have
-  scheduled/manual homes. Moving a check requires naming where its proof remains.
+- Keep correctness, source integrity and relevant type checks blocking. Exhaustive
+  remote sweeps and broad release qualification have scheduled/manual homes. Moving
+  a check requires naming where its proof remains.
+- **No pull-request job contacts R2.** The merge gate is compile, build and behave;
+  it takes no network dependency that can be slow or flaky. Publication proof lives
+  at the two boundaries that can act on it: `pnpm check:deploy-assets` in
+  [Deploy](../.github/workflows/deploy.yml), which refuses to ship a build whose
+  runtime assets are not inventoried, and the full key sweep in the
+  [nightly workflow](../.github/workflows/nightly.yml). A contributor publishing an
+  object runs `node tools/check-assets-published.mts --object=<id>` themselves; see
+  [the publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 - Gate on what ships; report what is merely incomplete. A merge-required check may
   only assert something whose failure means the shipped application is broken, wrong
   or unverifiable as shipped: it does not compile, it does not build, it does not
@@ -45,7 +53,16 @@ group and can supersede an older deployment.
   move it only when its failure cannot make the deployed site broken or wrong, and
   say in the pull request where the shipped-side proof remains. The provenance *pins*
   behind published assets are shipped-side proof: they stay in `Contract lint`
-  (physical frame receipts and document pins) and in the `Universe / sources` lane.
+  (physical frame receipts and document pins), which verifies by SHA-256 the bytes the
+  site actually serves.
+- Two whole lanes live in that advisory job rather than on the gate, and run there in
+  full with the same commands and arguments: the source-catalogue reconciliation that
+  was `Universe / sources`, and the bake reproduction that was `Preparation / world`.
+  Both assert that the *repository's* records reconcile and that a bake replays
+  byte-for-byte. The site bakes nothing — it serves the already-published,
+  SHA-256-pinned bank — so a reconciliation or reproduction gap is a stale recipe or a
+  drifted toolchain, not a broken page. They keep the same path-based selection they
+  had as job conditions, so an unrelated change still runs neither.
 - Restore only inputs the selected tests consume. Compiler jobs need pinned JSON
   and generated shell data, not the global texture bank. Image-consuming tests
   must restore their real pinned inputs; missing data is not a pass.
