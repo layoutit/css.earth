@@ -46,7 +46,7 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
     const panel = await read('prepared/panel.json');
     await publish('prepared/panel.json', { ...panel, facts, moreFacts });
   } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
-  for (const path of ['prepared/authored-preparation.json', 'prepared/world-navigation.json']) {
+  for (const path of ['prepared/authored-preparation.json']) {
     try {
       const receipt = await read(path);
       await publish(path, { ...receipt,
