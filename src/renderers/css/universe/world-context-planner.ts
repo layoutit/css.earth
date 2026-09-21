@@ -434,7 +434,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
           return Math.abs(dx) >= Math.abs(dy) ? dx >= 0 ? 0 : 1 : dy >= 0 ? 3 : 2;
         })() : 0;
         const radialSides = [radialSide, ...[0, 1, 2, 3].filter(side => side !== radialSide)];
-        const sides = body.id === plan.focus.id ? [3] : flightDestination ? [0, 1, 2, 3]
+        const sides = body.id === plan.focus.id ? [2] : flightDestination ? [0, 1, 2, 3]
           : resolvedDisc || body.id === emphasizedId ? [3, 2, 0, 1] : primary ? radialSides : [0, 1, 2, 3];
         const placements = sides.map(slot => {
           let [left, top] = positions[slot];
@@ -463,15 +463,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
       // and captions blinked while the physical markers remained visible. Keep the
       // committed membership and side until release. A caption is constrained
       // rather than retired when its committed side reaches the viewport edge.
-      // Planets are permanent orientation landmarks at the zoom levels where
-      // their normal alpha policy names them. Admit each independently so a
-      // crowded minor-body label can never make a planet blink during rotation.
-      const planets = candidates.filter(candidate => candidate.projected.entry.orbit !== null &&
-        systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) && (candidate.tier ?? 0) >= 3);
-      const acceptedPlanets = planets.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
-      for (const { candidate, rect } of acceptedPlanets) labelBudget.admit(rect, candidate.anchor);
-      const planetSet = new Set(planets);
-      const otherCandidates = candidates.filter(candidate => !planetSet.has(candidate));
+      // The system anchor and its planets are permanent orientation landmarks
+      // at the zoom levels where their normal alpha policy names them. Admit
+      // each independently so minor-body labels cannot make one blink.
+      const landmarks = candidates.filter(candidate => candidate.projected.entry.body.id === plan.focus.id ||
+        candidate.projected.entry.orbit !== null && systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
+        (candidate.tier ?? 0) >= 3);
+      const acceptedLandmarks = landmarks.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
+      for (const { candidate, rect } of acceptedLandmarks) labelBudget.admit(rect, candidate.anchor);
+      const landmarkSet = new Set(landmarks);
+      const otherCandidates = candidates.filter(candidate => !landmarkSet.has(candidate));
       const acceptedOthers = rotationActive || preserveCommittedAnnotations ? (() => {
         const admitted = admitStableLabels(otherCandidates.filter(candidate => candidate.pinned > 0), labelBudget);
         const admittedCandidates = new Set(admitted.map(item => item.candidate));
@@ -484,7 +485,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContext, annotation
         }
         return admitted;
       })() : admitStableLabels(otherCandidates, labelBudget);
-      const accepted = [...acceptedPlanets, ...acceptedOthers];
+      const accepted = [...acceptedLandmarks, ...acceptedOthers];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;

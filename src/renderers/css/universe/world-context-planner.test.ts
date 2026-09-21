@@ -428,6 +428,22 @@ test('Earth remains a circle-and-label reference through the framed outer Solar 
   expect(beyond.indicatorShown).toBe(false);
 });
 
+test('the Sun and Earth remain distinct landmarks in the distant Solar System', () => {
+  const input = view(), points = [plan.focus, ...plan.bodies];
+  input.viewport = { focalPixels: 1108.5, widthPixels: 1280, heightPixels: 720, principalOffsetPixels: [0, 0] };
+  input.world.pose.positionM = [0, 0, 357.27 * 149597870700];
+  input.bodies.forEach((body, index) => { body.bodyHidden = !['sun', 'earth'].includes(points[index]!.id); });
+  const frame = createWorldContextPlanner(plan, {
+    sun: labelImportance('star', true, 5), earth: labelImportance('planet', true, 4),
+  })(input);
+  const sun = frame.projectedBodies.find(body => points[body.index]!.id === 'sun')!;
+  const earth = frame.projectedBodies.find(body => points[body.index]!.id === 'earth')!;
+  expect(sun.labelShown).toBe(true);
+  expect(sun.indicatorShown).toBe(true);
+  expect(earth.labelShown).toBe(true);
+  expect(sun.labelPosition![1]).toBeLessThan(earth.labelPosition![1]);
+});
+
 test.each(['ryugu', 'bennu'])('%s remains identifiable when its category is hidden, then retires on deselection', id => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const points = [plan.focus, ...plan.bodies], index = points.findIndex(body => body.id === id);
