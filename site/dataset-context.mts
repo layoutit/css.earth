@@ -2,6 +2,8 @@ import type { ContributionGraph } from '../src/platform/exploration-contribution
 import type { ExplorationCatalog } from '../src/platform/exploration-catalog.mts';
 import type { ProvenanceDocument } from '../src/platform/object-provenance.mts';
 
+const datasetFacilityLabels: Readonly<Record<string, string>> = Object.freeze({ vst: 'VLT' });
+
 /** The directly captured instrument/facility that belongs in a dataset row. */
 export function datasetSourceDetail(lensId: string, provenance: Pick<ProvenanceDocument, 'sources'>, catalog: ExplorationCatalog) {
   const labels = provenance.sources.filter(source => source.lensId === lensId).flatMap(source => {
@@ -9,7 +11,7 @@ export function datasetSourceDetail(lensId: string, provenance: Pick<ProvenanceD
     return (source.capture?.attributions ?? []).flatMap(attribution => {
       if (attribution.kind === 'facility') {
         const facility = catalog.facilities.find(record => record.id === attribution.facilityId);
-        return facility ? [facility.name.value] : [];
+        return facility ? [datasetFacilityLabels[facility.id] ?? facility.name.value] : [];
       }
       if (attribution.kind === 'mission') {
         const mission = catalog.missions.find(record => record.id === attribution.missionId);

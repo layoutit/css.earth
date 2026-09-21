@@ -115,7 +115,7 @@ try {
       const summary = (await detail.locator('.planet-lens-details-copy').innerText()).trim();
       const description = await detail.locator('.planet-lens-details-copy').getAttribute('title');
       assert.equal(summary, lens.summary ?? lens.description);
-      assert.equal(description, lens.description);
+      assert.equal(description, null, 'Nebula datasets use the same visible summary treatment as bodies.');
       assert.match(summary, /model|conditional|inferred|reconstruct|illustrative|simulated|assumed|relative emission/iu,
         `${id}/${lens.id}: visible copy must disclose the interpreted model, beyond a hover title.`);
       const preview = await detail.locator('.planet-lens-texture').evaluate(async node => {

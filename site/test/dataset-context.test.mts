@@ -35,7 +35,7 @@ test('an unknown dataset does not inherit another dataset’s contributors', () 
 
 test('volume dataset rows name their directly captured instrument instead of image dimensions', async () => {
   const provenance = validateObjectProvenance(await read('../../src/objects/m42/prepared/provenance.json'), 'm42');
-  assert.equal(datasetSourceDetail('eso-optical', provenance, exploration.catalog), 'VLT Survey Telescope');
+  assert.equal(datasetSourceDetail('eso-optical', provenance, exploration.catalog), 'VLT');
   assert.equal(datasetSourceDetail('eso-vista', provenance, exploration.catalog), 'VISTA');
   const direct = provenance.sources.filter(source => source.lensId === 'eso-vista').map(source => source.id);
   assert.deepEqual(datasetContributors('m42', 'eso-vista', exploration.graph, exploration.catalog, direct).facilities.map(facility => facility.id), ['vista']);
