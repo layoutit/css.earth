@@ -94,25 +94,6 @@
       }
     },
     {
-      "id": "saturn-approved-static-weather",
-      "path": "saturn-weather-static.webp",
-      "expectedSha256": "04a8df6aa490a2d769b6f579a29d16f78e3c58427438daa6114b3a6ebfbe30b3",
-      "origin": "accepted cssEarth Saturn three-storm texel snapshot prepared from the declared Saturn surface and documented storm kernels",
-      "credit": "cssEarth adapter preparation using the OpenSpace Saturn surface",
-      "license": "project-authored prepared presentation over the OpenSpace MIT source",
-      "acquisition": "checked accepted static snapshot; shared material-composition preparation validates and copies it without re-encoding",
-      "redistribution": "project runtime asset with OpenSpace attribution",
-      "consumers": [
-        "scene",
-        "weather"
-      ],
-      "expectedBytes": 1692,
-      "sourceBinding": {
-        "kind": "local",
-        "reason": "The retained record explicitly identifies a cssEarth preparation snapshot or adapter-owned presentation specification. Published input dependencies and qualifications remain in the existing product lineage and source recipe."
-      }
-    },
-    {
       "id": "nasa-psg-saturn-expanded-configuration",
       "path": "atmosphere/psg-saturn-20260829.cfg",
       "expectedSha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
@@ -436,8 +417,8 @@
     {
       "id": "saturn-authored-content",
       "path": "content/object.json",
-      "expectedBytes": 17218,
-      "expectedSha256": "18a4dce9ffd85aa2e44ec6f8bcbe78acae62236ed51dee290f8237a64d442243",
+      "expectedBytes": 17317,
+      "expectedSha256": "0f2a377ee017750153b34e11c673a0cb92de21700b206a783913d81a03351e72",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -454,8 +435,8 @@
     {
       "id": "saturn-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 10370,
-      "expectedSha256": "9622e8017d068049476a935d1cb3d9eb6f0c780f0f7df1d7d21aefd52f106fdb",
+      "expectedBytes": 7706,
+      "expectedSha256": "83923469387c8219a17d7dcd0e95de907f9805f8cd053df178052b0cc85f672c",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -472,8 +453,8 @@
     {
       "id": "saturn-authored-surface",
       "path": "preparation/surface.json",
-      "expectedBytes": 8500,
-      "expectedSha256": "174aaeebbc2c1aa6075903414eace181cf37974dd0eccf1106d62e5ae4dce0e8",
+      "expectedBytes": 8651,
+      "expectedSha256": "6e79578dc8aa6505826e634d387bffb27ca64a0dc1a815d2b9d48b87ff3b8091",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
