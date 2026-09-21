@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "33491273eafb31d2796e5709d302d559d8f268f2ade975ce7a85a7a8b2e7545a"
+    "sha256": "65bfef7e419cf2d31fa414ebf2b3e88e3b4f6f801b3617b5a9d26c8b08504a5d"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -96,7 +96,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "f0c68b53fd381f1ab07d2d2b705d6b33faa0fbd3027d33dd22185df80db99cdd",
+      "sha256": "16cc9549772942164628f1b8b6405e7405d32770d6c012ae55dac0f1dc8ec8e7",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -150,7 +150,7 @@
                 "url": "https://arxiv.org/abs/1501.01101"
               },
               "falseColor": false,
-              "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit."
+              "notes": "No image or colour of this planet exists (it has never been resolved: only its transit depth and orbit are measured; see the investigation ledger). The gray marks an unresolved surface; the lighting is its own star's, at the measured orbit. Its reality as a planet is disputed: Burke et al. (2019) put its planet probability at 96%, below the validation threshold; Robnik & Seljak (2025) give it a 20% false-alarm probability."
             }
           ]
         },
@@ -204,8 +204,8 @@
         "kind": "local",
         "reason": "Measurements transcribed in this package with their sources; repinned when edited."
       },
-      "sha256": "41b9ab215caebaef5e448291e480cd71663f5b5c03e48a9c186074997abd3d9f",
-      "bytes": 722,
+      "sha256": "f8e52d0f34305faa0dc45cc0a4c561bf0bd06ab38263bde672426312e6a33c19",
+      "bytes": 716,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -224,8 +224,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "f0c68b53fd381f1ab07d2d2b705d6b33faa0fbd3027d33dd22185df80db99cdd",
-      "bytes": 3278,
+      "sha256": "16cc9549772942164628f1b8b6405e7405d32770d6c012ae55dac0f1dc8ec8e7",
+      "bytes": 3464,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -562,7 +562,7 @@
   },
   "lastPreparation": {
     "objectId": "kepler-186f",
-    "materialSha256": "ef305bda5591361434e6054f7e4cefcd1212cccd5629fb13878e2cedbb8583af",
+    "materialSha256": "20e1c496bc2b747e9c92e67de7b9a3208351cda3b645c2b3a76ee0f963b7b9b2",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

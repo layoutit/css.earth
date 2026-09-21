@@ -11,6 +11,8 @@ import type { ChangeMode } from './classify-changes.mts';
 
 const execFileAsync = promisify(execFile);
 
+/** Jobs every change runs regardless of what it touched: the merge gate and the advisory repository audit. */
+export const ALWAYS_JOBS = ['lint', 'audit'] as const;
 export const HEAVY_JOBS = ['typecheck', 'universe', 'universePreparation', 'nebula'] as const;
 export type HeavyJob = typeof HEAVY_JOBS[number];
 
@@ -89,7 +91,9 @@ export function needsProductionBuild(paths: readonly string[], config: CiAreasCo
 }
 
 export function affectedJobNames(result: AffectedAreas): string[] {
-  return ['lint', ...HEAVY_JOBS.flatMap(job => !result.jobs.has(job) ? [] :
+  // `lint` gates the merge; `audit` reports repository completeness without gating it. Both run on every change,
+  // so a local plan shows the same two always-run jobs GitHub schedules (docs/ci-cd.md, "Gate on what ships").
+  return [...ALWAYS_JOBS, ...HEAVY_JOBS.flatMap(job => !result.jobs.has(job) ? [] :
     job === 'typecheck' ? ['typecheck', 'typecheck-tests'] :
       job === 'universePreparation' ? ['universe-preparation'] : [job])];
 }

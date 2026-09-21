@@ -4,8 +4,8 @@
     {
       "id": "hd-209458b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 738,
-      "expectedSha256": "4c5cfb29fd728a8d6d0b02c37ff750b0956596d7ad8f8db0a329d86fd0d010cb",
+      "expectedBytes": 716,
+      "expectedSha256": "b87c1d4772110094eda4c9594e0146a3f484c4bc1abd9ffe9f5adee2a2294d2e",
       "origin": "https://arxiv.org/abs/0801.1841",
       "credit": "G. Torres et al., \"Improved parameters for extrasolar transiting planets\", ApJ 677, 1324 (2008), arXiv:0801.1841",
       "license": "Factual numerical measurements; source attribution retained",
@@ -168,8 +168,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3164,
-      "expectedSha256": "d3af7465f29c8c056e5469ed378bc8d3396abdbbb905d0425eee8707c9328298",
+      "expectedBytes": 3190,
+      "expectedSha256": "c5f71363d4bfeca70e83af1e4f90e73ce0ba3b681fb988cb5db55a2e0c485b40",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -199,6 +199,15 @@
       "path": "presentation/title-mark.json",
       "expectedBytes": 5987,
       "expectedSha256": "6593a78d0042ca11ca781911eac2ae566487ca4a34b4535ec12ec855dbba6958"
+    },
+    {
+      "path": "reference/rendered-default-view.png",
+      "expectedBytes": 454935,
+      "expectedSha256": "d0f04f47ba32af4949509cbd2b1cbeb91dab042ab36315e01c5bff78a6169cb2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Evidence capture of the default camera view in the app, committed with the package in 7e71ba192e; the capture's settings were not recorded."
+      }
     }
   ]
 }

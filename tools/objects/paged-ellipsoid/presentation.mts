@@ -154,7 +154,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
         {kind:"class",target:-1,name:`${config.namespace}-hide-atmosphere`,value:!atmosphere}],
       materials:tracks.map(track=>({track:track.id,bank:track.id,mode:track.id==="lighting"&&!shadows?"fixed":plan.material[track.id].illumination?"frames":"default-pose",
         enabled:!isInterior&&(track.id==="lighting"?shadows&&lens.id!=="night-lights":atmosphere),rotationEnabled:track.id!=="lighting"||shadows,
-        frameOverride:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
+        frameOverride:track.id!=="lighting"&&!shadows&&plan.material[track.id].illumination?plan.material[track.id].frameCount-1:null,clearWhenHidden:false,fixedMode:"shadowless",publishWhenHidden:"static",
         addressAttributes:[{name:"data-material-frame",source:"mode-or-frame",value:null}]}))};
   })));
   const prepared = {schema:PREPARED_PRESENTATION_SCHEMA,camera:cameraPlan,sky,sun,

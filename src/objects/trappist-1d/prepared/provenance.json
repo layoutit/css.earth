@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a7e128d172e15294da87c7c710dcc1ba69f0ea712793673c5fc43e657c2b2049"
+    "sha256": "9df11046ac8e4b31a538bd5e4c621eeea308cb8e73ca62b014002eba630ef73c"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -96,7 +96,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "4fffe37553704e03439076dd84ad6ad54be74eea29a926678614f118ee20aaad",
+      "sha256": "4096d7e0ded9fcfdad485205d7e808fe30f0271dcad194585c2eacb3c7c5abe9",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -146,7 +146,7 @@
             {
               "id": "starlight",
               "label": "Starlight received",
-              "value": "1.11 times Earth's",
+              "value": "1.12 times Earth's",
               "source": {
                 "catalogueId": "doi-10-3847-psj-abd022",
                 "url": "https://doi.org/10.3847/PSJ/abd022",
@@ -250,7 +250,7 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "4fffe37553704e03439076dd84ad6ad54be74eea29a926678614f118ee20aaad",
+      "sha256": "4096d7e0ded9fcfdad485205d7e808fe30f0271dcad194585c2eacb3c7c5abe9",
       "bytes": 3811,
       "dependencies": [],
       "verification": "bytes-verified",
@@ -550,7 +550,7 @@
         {
           "url": "object:prepared/content.json",
           "bytes": 5928,
-          "sha256": "6d3693313487bd93b7e9662f50293c03a26d63c1aebbbe3f99a4be5c167eeef4",
+          "sha256": "6a3537b60efa0218b6108932f548d29a6b06e7468a35e1a585b31aa4f5023cba",
           "verification": "bytes-verified"
         }
       ],
@@ -588,7 +588,7 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1d",
-    "materialSha256": "feacad89c86383345cba8ca14770de65b4807499dc5a050ce39cf05956ead135",
+    "materialSha256": "26868fcc65af23a775b929dc4d104110876f3f99947a9052ee24abb573540662",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
