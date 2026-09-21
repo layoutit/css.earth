@@ -169,11 +169,13 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
     const orbit = 'orbit' in body ? body.orbit ?? null : null;
     // Prepared detail levels are decoded once; each frame only selects one.
     const levels = !orbit ? [] : [{ vertices: orbit.verticesM, trail: orbit.trail, activeChords: orbit.activeChords, deviationM: 0 },
-      ...(orbit.lod?.levels ?? []).map(level => ({ vertices: level.vertexIndices.map(index => orbit.verticesM[index]!),
+      // Each coarser level gathers its selected vertices once, into its own flat array.
+      ...(orbit.lod?.levels ?? []).map(level => ({ vertices: Float64Array.from({ length: level.vertexIndices.length * 3 },
+        (_, slot) => orbit.verticesM[level.vertexIndices[Math.floor(slot / 3)]! * 3 + slot % 3]!),
         trail: level.trail, activeChords: level.activeChords, deviationM: level.deviationM }))];
     return { body, orbit, levels, parent: orbit ? byId.get(orbit.centerBodyId) ?? null : null,
-      closedOrbit: orbit?.trail.every(weight => weight === 1) === true,
-      orbitProjection: createRetainedRingProjection(orbit ? orbit.verticesM.length * 2 : 0),
+      closedOrbit: orbit?.fullTrail === true,
+      orbitProjection: createRetainedRingProjection(orbit ? orbit.vertexCount * 2 : 0),
       // A hidden body is the same retired stub every frame: no projection, no allocation, no packet.
       hiddenStub: null as null | { projected: ProjectedBody<unknown> },
       // Per-frame working objects are retained per body: the view's fields are
@@ -182,7 +184,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       output: null as PlannedBodyOutput | null, bounds: { left: 0, top: 0, right: 0, bottom: 0 } };
   });
   // Only the selected path fades with depth; one shared scratch pool serves it.
-  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.verticesM.length ?? 0))));
+  const selectedOrbitProjection = createRetainedRingProjection(Math.max(0, ...prepared.map(entry => orbitProjectionCapacity(entry.orbit?.vertexCount ?? 0))));
   return (view: WorldContextView) => {
     const { world, viewport, selectedId, overview, selectionPreview, navigationInFlight,
       rotationActive = false, preserveCommittedAnnotations = false } = view;
