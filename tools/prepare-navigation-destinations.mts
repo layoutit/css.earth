@@ -26,7 +26,7 @@ export function prepareSceneDistance(descriptor: unknown) {
 }
 
 export function prepareFocusObject(object: PreparedCatalogObject, sceneHostId: string) {
-  const classification = isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? 'nebula' : 'galaxy';
+  const classification = isPreparedCluster(object) ? 'galaxy-cluster' : isPreparedNebula(object) ? object.kind : 'galaxy';
   return definePreparedFocus({ kind: 'prepared-focus', id: object.id, focusId: object.id, name: object.name,
     searchNames: [...new Set([object.id, object.name, ...object.aliases].flatMap(name => {
       const normalized = normalizeDestinationQuery(name);

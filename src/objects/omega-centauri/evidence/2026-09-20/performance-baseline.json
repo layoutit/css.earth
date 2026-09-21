@@ -1,0 +1,1259 @@
+{
+  "claim": "Native-focus numerical performance baseline, not user FPS",
+  "base": "http://127.0.0.1:4219",
+  "measuredAt": "2026-09-20T21:21:37.945Z",
+  "revision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
+  "viewport": {
+    "width": 1440,
+    "height": 1000
+  },
+  "deviceScaleFactor": 1,
+  "browser": "148.0.7778.96",
+  "headless": true,
+  "node": "v22.23.2",
+  "platform": "darwin",
+  "arch": "arm64",
+  "protocol": {
+    "nativeUrl": "/sun/?focus=omega-centauri",
+    "warmup": "networkidle, then30 RAF",
+    "idleFrames": 30,
+    "drag": {
+      "from": [
+        720,
+        500
+      ],
+      "to": [
+        920,
+        560
+      ],
+      "steps": 40
+    },
+    "settleFrames": 30,
+    "noCameraOverride": true,
+    "noSourceChanges": true
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/sun/prepared/world-context.json",
+      "bytes": 7536975,
+      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/nebula.json",
+      "bytes": 2633,
+      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/lenses.json",
+      "bytes": 1202415,
+      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+    },
+    {
+      "path": "site/prepared-context-navigation.mts",
+      "bytes": 13194,
+      "sha256": "39b882f2d0ddf921b50827ba267fe8b83ba61dd6dc27c0ff469115a077045aea"
+    },
+    {
+      "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
+      "bytes": 46748,
+      "sha256": "14f1953aa5ba1734b88532980cd2078044225c3b42d59b0cf67831c0dba1b3e0"
+    },
+    {
+      "path": "src/renderers/css/universe/prepared-world-context.ts",
+      "bytes": 75841,
+      "sha256": "00758c8d75054092c209c68b4e311605a4a886d59fda5b36cdf86bf5d41d9ab2"
+    },
+    {
+      "path": "src/renderers/css/dist/universe.js",
+      "bytes": 10185,
+      "sha256": "ce237fcd30c24ab63ed72016f0f8309de1fe0c2f0a6370649af54b1d8f3569a2"
+    }
+  ],
+  "reports": [
+    {
+      "repeat": 1,
+      "beforePose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -105140426158691240000,
+              -41833991150782185000,
+              -115235646545839930000
+            ],
+            "orientationXyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "distanceM": 8165459600736780000,
+        "distanceRadii": 6.096653162046748,
+        "projectedRadiusPixels": 204.55157392967627
+      },
+      "afterPose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -109962411235333930000,
+              -40387395627789610000,
+              -116972221966195500000
+            ],
+            "orientationXyzw": [
+              -0.0937021412901332,
+              -0.3123404709671109,
+              -5.5050914713649234e-18,
+              0.9453376851229868
+            ]
+          }
+        },
+        "distanceM": 8165459600736674000,
+        "distanceRadii": 6.096653162046668,
+        "projectedRadiusPixels": 204.55157392967894
+      },
+      "beforeDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0810833,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.566307,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 79,
+        "eagerImagesPending": 0
+      },
+      "afterDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0739867,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.576726,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 79,
+        "eagerImagesPending": 0
+      },
+      "inputDurationMs": 32255.737458,
+      "idle": {
+        "durationMs": 247.40000009536743,
+        "raf": {
+          "frames": 29,
+          "medianGapMs": 8.300000000000182,
+          "p95GapMs": 9,
+          "maxGapMs": 9.199999999999818,
+          "gapsOver33ms": 0,
+          "gapsOver50ms": 0,
+          "gapsMs": [
+            9.199999999999818,
+            8.199999999999818,
+            8.400000000000546,
+            7.800000000000182,
+            8.899999999999636,
+            8.300000000000182,
+            8.300000000000182,
+            8.299999999999272,
+            8.400000000000546,
+            8.300000000000182,
+            7.899999999999636,
+            8.899999999999636,
+            7.700000000000728,
+            8.899999999999636,
+            8.199999999999818,
+            8.5,
+            8.300000000000182,
+            8.100000000000364,
+            8.5,
+            8.399999999999636,
+            8.100000000000364,
+            8.5,
+            8.299999999999272,
+            8.300000000000182,
+            8.400000000000546,
+            8.399999999999636,
+            7.699999999999818,
+            9,
+            8.199999999999818
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 0,
+          "RecalcStyleCount": 0,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0,
+          "DevToolsCommandDuration": 0.0001439999999999983,
+          "ScriptDuration": 0.0009179999999999883,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.02055399999999996,
+          "TaskOtherDuration": 0.019491999999999954
+        }
+      },
+      "interaction": {
+        "durationMs": 34616.39999985695,
+        "raf": {
+          "frames": 74,
+          "medianGapMs": 458.29999999999563,
+          "p95GapMs": 1150,
+          "maxGapMs": 2225,
+          "gapsOver33ms": 41,
+          "gapsOver50ms": 41,
+          "gapsMs": [
+            9.300000000000182,
+            8.199999999999818,
+            8.300000000000182,
+            8.399999999999636,
+            16.699999999999818,
+            8.199999999999818,
+            16.800000000000182,
+            33.19999999999982,
+            916.7000000000007,
+            16.69999999999891,
+            940.7000000000007,
+            942.6000000000004,
+            958.3999999999996,
+            1016.7000000000007,
+            983.1999999999989,
+            991.7000000000007,
+            841.6000000000004,
+            841.6999999999989,
+            874.6000000000004,
+            750.5,
+            725,
+            1158.2999999999993,
+            1150,
+            1158.2999999999993,
+            2225,
+            1116.6000000000022,
+            1075,
+            1083.5,
+            1074.8999999999978,
+            1075,
+            1066.300000000003,
+            1067.0999999999985,
+            1041.5999999999985,
+            8.30000000000291,
+            1041.699999999997,
+            1033.4000000000015,
+            1032.5,
+            166.59999999999854,
+            1009.2000000000044,
+            466.6999999999971,
+            458.3000000000029,
+            449.8999999999942,
+            458.40000000000146,
+            466.70000000000437,
+            458.29999999999563,
+            458.3000000000029,
+            466.6999999999971,
+            458.3000000000029,
+            166.6999999999971,
+            458.3000000000029,
+            158.40000000000146,
+            8.39999999999418,
+            8.30000000000291,
+            8.30000000000291,
+            8.299999999995634,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.39999999999418,
+            8.200000000004366,
+            8.400000000001455,
+            8.299999999995634,
+            8.30000000000291
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 5,
+          "RecalcStyleCount": 47,
+          "LayoutDuration": 0.0010539999999999994,
+          "RecalcStyleDuration": 0.094471,
+          "DevToolsCommandDuration": 0.0072510000000000005,
+          "ScriptDuration": 0.13705799999999999,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.532591,
+          "TaskOtherDuration": 0.29275699999999993
+        }
+      },
+      "cdpBefore": {
+        "Timestamp": 1844319.413174,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5259,
+        "LayoutObjects": 10202,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 38646,
+        "Resources": 938,
+        "ContextLifecycleStateObservers": 41,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 4,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 499,
+        "LayoutCount": 13,
+        "RecalcStyleCount": 22,
+        "LayoutDuration": 0.013495,
+        "RecalcStyleDuration": 0.056598,
+        "DevToolsCommandDuration": 0.017051,
+        "ScriptDuration": 0.078296,
+        "V8CompileDuration": 0.000058,
+        "TaskDuration": 1.138569,
+        "TaskOtherDuration": 0.973071,
+        "ThreadTime": 0.876668,
+        "ProcessTime": 3.652211,
+        "JSHeapUsedSize": 214989588,
+        "JSHeapTotalSize": 269746176,
+        "FirstMeaningfulPaint": 1844314.985271,
+        "DomContentLoaded": 1844312.233133,
+        "NavigationStart": 1844311.773126
+      },
+      "cdpAfter": {
+        "Timestamp": 1844354.027361,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5308,
+        "LayoutObjects": 9034,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 35734,
+        "Resources": 481,
+        "ContextLifecycleStateObservers": 40,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 40,
+        "LayoutCount": 18,
+        "RecalcStyleCount": 69,
+        "LayoutDuration": 0.014549,
+        "RecalcStyleDuration": 0.151069,
+        "DevToolsCommandDuration": 0.024302,
+        "ScriptDuration": 0.215354,
+        "V8CompileDuration": 0.000058,
+        "TaskDuration": 1.67116,
+        "TaskOtherDuration": 1.265828,
+        "ThreadTime": 1.365116,
+        "ProcessTime": 5.305769,
+        "JSHeapUsedSize": 203181924,
+        "JSHeapTotalSize": 208928768,
+        "FirstMeaningfulPaint": 1844314.985271,
+        "DomContentLoaded": 1844312.233133,
+        "NavigationStart": 1844311.773126
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "repeat": 2,
+      "beforePose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -105140426158691240000,
+              -41833991150782185000,
+              -115235646545839930000
+            ],
+            "orientationXyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "distanceM": 8165459600736780000,
+        "distanceRadii": 6.096653162046748,
+        "projectedRadiusPixels": 204.55157392967627
+      },
+      "afterPose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -109962411235333930000,
+              -40387395627789610000,
+              -116972221966195500000
+            ],
+            "orientationXyzw": [
+              -0.0937021412901332,
+              -0.3123404709671109,
+              -5.5050914713649234e-18,
+              0.9453376851229868
+            ]
+          }
+        },
+        "distanceM": 8165459600736674000,
+        "distanceRadii": 6.096653162046668,
+        "projectedRadiusPixels": 204.55157392967894
+      },
+      "beforeDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0810833,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.566307,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 84,
+        "eagerImagesPending": 0
+      },
+      "afterDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0739867,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.576726,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 84,
+        "eagerImagesPending": 0
+      },
+      "inputDurationMs": 32173.033125,
+      "idle": {
+        "durationMs": 246.70000004768372,
+        "raf": {
+          "frames": 29,
+          "medianGapMs": 8.300000000000182,
+          "p95GapMs": 9,
+          "maxGapMs": 9.300000000000182,
+          "gapsOver33ms": 0,
+          "gapsOver50ms": 0,
+          "gapsMs": [
+            8.599999999999454,
+            8.300000000000182,
+            8.300000000000182,
+            8.300000000000182,
+            8.399999999999636,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            8.300000000000182,
+            8.399999999999636,
+            8.300000000000182,
+            8.300000000000182,
+            7.899999999999636,
+            8.800000000000182,
+            7.5,
+            9.300000000000182,
+            8.199999999999818,
+            8.300000000000182,
+            7.699999999999818,
+            9,
+            7.699999999999818,
+            8.400000000000546,
+            9,
+            8.199999999999818,
+            8,
+            8.699999999999818,
+            8.300000000000182,
+            8.300000000000182,
+            8.399999999999636
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 0,
+          "RecalcStyleCount": 0,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0,
+          "DevToolsCommandDuration": 0.00012900000000000064,
+          "ScriptDuration": 0.001025000000000012,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.02099899999999999,
+          "TaskOtherDuration": 0.019845
+        }
+      },
+      "interaction": {
+        "durationMs": 34532.300000190735,
+        "raf": {
+          "frames": 71,
+          "medianGapMs": 458.29999999999563,
+          "p95GapMs": 1133.4000000000015,
+          "maxGapMs": 1158.4000000000015,
+          "gapsOver33ms": 41,
+          "gapsOver50ms": 41,
+          "gapsMs": [
+            8.300000000000182,
+            8.300000000000182,
+            16.699999999999818,
+            8.400000000000546,
+            16.599999999999454,
+            16.699999999999818,
+            933.3000000000002,
+            15.800000000000182,
+            925.7999999999993,
+            941.5,
+            950.2000000000007,
+            1025,
+            975,
+            1000,
+            850,
+            841.7000000000007,
+            875,
+            758.2999999999993,
+            775,
+            1150,
+            1158.4000000000015,
+            1149.8999999999978,
+            1133.4000000000015,
+            1108.2999999999993,
+            1125,
+            1083.4000000000015,
+            1075,
+            1075,
+            1083.2999999999993,
+            1058.2999999999993,
+            1050.0999999999985,
+            1066.6000000000022,
+            1041.6000000000022,
+            1041.699999999997,
+            1041.699999999997,
+            1016.6000000000058,
+            466.6999999999971,
+            458.3000000000029,
+            458.3999999999942,
+            466.6000000000058,
+            458.29999999999563,
+            458.5,
+            458.20000000000437,
+            458.5,
+            457.59999999999854,
+            175.59999999999854,
+            458.1999999999971,
+            157.90000000000146,
+            9,
+            8.200000000004366,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.400000000001455,
+            8.299999999995634,
+            8.30000000000291,
+            8.30000000000291,
+            8.39999999999418,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634,
+            8.30000000000291,
+            8.30000000000291,
+            8.39999999999418,
+            8.30000000000291,
+            8.400000000001455
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 5,
+          "RecalcStyleCount": 46,
+          "LayoutDuration": 0.0010360000000000005,
+          "RecalcStyleDuration": 0.093308,
+          "DevToolsCommandDuration": 0.006971999999999999,
+          "ScriptDuration": 0.13447599999999998,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.514086,
+          "TaskOtherDuration": 0.27829399999999993
+        }
+      },
+      "cdpBefore": {
+        "Timestamp": 1844361.1967,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5259,
+        "LayoutObjects": 10213,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 38646,
+        "Resources": 941,
+        "ContextLifecycleStateObservers": 41,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 4,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 504,
+        "LayoutCount": 12,
+        "RecalcStyleCount": 21,
+        "LayoutDuration": 0.012336,
+        "RecalcStyleDuration": 0.053859,
+        "DevToolsCommandDuration": 0.016086,
+        "ScriptDuration": 0.074418,
+        "V8CompileDuration": 0.000054,
+        "TaskDuration": 1.088446,
+        "TaskOtherDuration": 0.931693,
+        "ThreadTime": 0.829258,
+        "ProcessTime": 3.432394,
+        "JSHeapUsedSize": 214960736,
+        "JSHeapTotalSize": 274202624,
+        "FirstMeaningfulPaint": 1844357.082668,
+        "DomContentLoaded": 1844354.546646,
+        "NavigationStart": 1844354.10523
+      },
+      "cdpAfter": {
+        "Timestamp": 1844395.727329,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5296,
+        "LayoutObjects": 9034,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 35734,
+        "Resources": 481,
+        "ContextLifecycleStateObservers": 40,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 36,
+        "LayoutCount": 17,
+        "RecalcStyleCount": 67,
+        "LayoutDuration": 0.013372,
+        "RecalcStyleDuration": 0.147167,
+        "DevToolsCommandDuration": 0.023058,
+        "ScriptDuration": 0.208894,
+        "V8CompileDuration": 0.000054,
+        "TaskDuration": 1.602532,
+        "TaskOtherDuration": 1.209987,
+        "ThreadTime": 1.30703,
+        "ProcessTime": 5.081607,
+        "JSHeapUsedSize": 202608160,
+        "JSHeapTotalSize": 208404480,
+        "FirstMeaningfulPaint": 1844357.082668,
+        "DomContentLoaded": 1844354.546646,
+        "NavigationStart": 1844354.10523
+      },
+      "errors": [],
+      "failed": []
+    },
+    {
+      "repeat": 3,
+      "beforePose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -105140426158691240000,
+              -41833991150782185000,
+              -115235646545839930000
+            ],
+            "orientationXyzw": [
+              0,
+              0,
+              0,
+              1
+            ]
+          }
+        },
+        "distanceM": 8165459600736780000,
+        "distanceRadii": 6.096653162046748,
+        "projectedRadiusPixels": 204.55157392967627
+      },
+      "afterPose": {
+        "world": {
+          "referenceFrame": "sun-icrf",
+          "epochJdTt": 2461286.5,
+          "pose": {
+            "positionM": [
+              -109962411235333930000,
+              -40387395627789610000,
+              -116972221966195500000
+            ],
+            "orientationXyzw": [
+              -0.0937021412901332,
+              -0.3123404709671109,
+              -5.5050914713649234e-18,
+              0.9453376851229868
+            ]
+          }
+        },
+        "distanceM": 8165459600736674000,
+        "distanceRadii": 6.096653162046668,
+        "projectedRadiusPixels": 204.55157392967894
+      },
+      "beforeDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0810833,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.566307,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 83,
+        "eagerImagesPending": 0
+      },
+      "afterDom": {
+        "totalElements": 29063,
+        "banks": [
+          {
+            "id": "omega-centauri",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1422,
+            "planes": 1377,
+            "stars": 0
+          },
+          {
+            "id": "m42",
+            "display": "none",
+            "opacity": 0,
+            "elements": 4068,
+            "planes": 2523,
+            "stars": 1500
+          },
+          {
+            "id": "lmc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 1784,
+            "planes": 726,
+            "stars": 1042
+          },
+          {
+            "id": "m8",
+            "display": "block",
+            "opacity": 0.0739867,
+            "elements": 2290,
+            "planes": 2019,
+            "stars": 226
+          },
+          {
+            "id": "smc",
+            "display": "block",
+            "opacity": 1,
+            "elements": 2635,
+            "planes": 816,
+            "stars": 1803
+          }
+        ],
+        "overview": [
+          {
+            "id": "milky-way-overview",
+            "display": "block",
+            "opacity": 0.576726,
+            "elements": 1382,
+            "planes": 1368,
+            "stars": 0,
+            "volumeOpacity": "1"
+          }
+        ],
+        "imagesPending": 83,
+        "eagerImagesPending": 0
+      },
+      "inputDurationMs": 32703.860291000005,
+      "idle": {
+        "durationMs": 248.69999980926514,
+        "raf": {
+          "frames": 29,
+          "medianGapMs": 8.300000000000182,
+          "p95GapMs": 9.099999999999454,
+          "maxGapMs": 9.199999999999818,
+          "gapsOver33ms": 0,
+          "gapsOver50ms": 0,
+          "gapsMs": [
+            8.300000000000182,
+            8.299999999999272,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            7.600000000000364,
+            9,
+            8.099999999999454,
+            8.700000000000728,
+            7.5,
+            9.199999999999818,
+            8.199999999999818,
+            8.399999999999636,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            8.300000000000182,
+            8.100000000000364,
+            8,
+            9,
+            8.199999999999818,
+            8.399999999999636,
+            7.700000000000728,
+            9.099999999999454,
+            8.199999999999818
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 0,
+          "RecalcStyleCount": 0,
+          "LayoutDuration": 0,
+          "RecalcStyleDuration": 0,
+          "DevToolsCommandDuration": 0.00011399999999999952,
+          "ScriptDuration": 0.0003989999999999966,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.00971500000000014,
+          "TaskOtherDuration": 0.009201999999999932
+        }
+      },
+      "interaction": {
+        "durationMs": 34633.5,
+        "raf": {
+          "frames": 71,
+          "medianGapMs": 458.3000000000029,
+          "p95GapMs": 1141.6000000000022,
+          "maxGapMs": 1150.0999999999985,
+          "gapsOver33ms": 40,
+          "gapsOver50ms": 40,
+          "gapsMs": [
+            8.299999999999272,
+            8.300000000000182,
+            8.400000000000546,
+            8.299999999999272,
+            16.700000000000728,
+            25,
+            941.5999999999995,
+            16.699999999999818,
+            950,
+            966.8000000000011,
+            974.7999999999993,
+            1058.3999999999996,
+            1025,
+            1016.7000000000007,
+            825,
+            833.2999999999993,
+            841.6999999999989,
+            725,
+            724.9000000000015,
+            1150.0999999999985,
+            1141.7000000000007,
+            1141.6000000000022,
+            1141.699999999997,
+            1116.7000000000007,
+            1108.2999999999993,
+            1083.300000000003,
+            1075,
+            1066.699999999997,
+            1083.300000000003,
+            1066.699999999997,
+            1057.7000000000007,
+            1075.6000000000022,
+            1058.4000000000015,
+            1050,
+            1049.8999999999942,
+            1016.6000000000058,
+            482.79999999999563,
+            909,
+            457.70000000000437,
+            467.29999999999563,
+            458.3000000000029,
+            466.59999999999854,
+            458.40000000000146,
+            458.29999999999563,
+            175,
+            466.70000000000437,
+            166.59999999999854,
+            8.400000000001455,
+            7.599999999998545,
+            9.099999999998545,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.299999999995634,
+            8.400000000001455,
+            8.30000000000291,
+            8.400000000001455,
+            8.299999999995634
+          ]
+        },
+        "longTasks": [],
+        "longTaskTotalMs": 0,
+        "cdpDelta": {
+          "LayoutCount": 5,
+          "RecalcStyleCount": 46,
+          "LayoutDuration": 0.001059000000000001,
+          "RecalcStyleDuration": 0.093461,
+          "DevToolsCommandDuration": 0.006645999999999999,
+          "ScriptDuration": 0.127967,
+          "V8CompileDuration": 0,
+          "TaskDuration": 0.4928450000000002,
+          "TaskOtherDuration": 0.26371200000000006
+        }
+      },
+      "cdpBefore": {
+        "Timestamp": 1844402.953677,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5259,
+        "LayoutObjects": 10213,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 38646,
+        "Resources": 941,
+        "ContextLifecycleStateObservers": 41,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 4,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 503,
+        "LayoutCount": 12,
+        "RecalcStyleCount": 21,
+        "LayoutDuration": 0.012584,
+        "RecalcStyleDuration": 0.054188,
+        "DevToolsCommandDuration": 0.01531,
+        "ScriptDuration": 0.070378,
+        "V8CompileDuration": 0.000054,
+        "TaskDuration": 1.079152,
+        "TaskOtherDuration": 0.926638,
+        "ThreadTime": 0.822325,
+        "ProcessTime": 3.362924,
+        "JSHeapUsedSize": 216212528,
+        "JSHeapTotalSize": 279707648,
+        "FirstMeaningfulPaint": 1844398.72813,
+        "DomContentLoaded": 1844396.214436,
+        "NavigationStart": 1844395.805343
+      },
+      "cdpAfter": {
+        "Timestamp": 1844437.585837,
+        "AudioHandlers": 0,
+        "AudioWorkletProcessors": 0,
+        "Documents": 2,
+        "Frames": 1,
+        "JSEventListeners": 5304,
+        "LayoutObjects": 9034,
+        "MediaKeySessions": 0,
+        "MediaKeys": 0,
+        "Nodes": 35734,
+        "Resources": 481,
+        "ContextLifecycleStateObservers": 40,
+        "V8PerContextDatas": 2,
+        "WorkerGlobalScopes": 2,
+        "UACSSResources": 0,
+        "RTCPeerConnections": 0,
+        "ResourceFetchers": 3,
+        "AdSubframes": 0,
+        "DetachedScriptStates": 0,
+        "ArrayBufferContents": 38,
+        "LayoutCount": 17,
+        "RecalcStyleCount": 67,
+        "LayoutDuration": 0.013643,
+        "RecalcStyleDuration": 0.147649,
+        "DevToolsCommandDuration": 0.021956,
+        "ScriptDuration": 0.198345,
+        "V8CompileDuration": 0.000054,
+        "TaskDuration": 1.571997,
+        "TaskOtherDuration": 1.19035,
+        "ThreadTime": 1.273883,
+        "ProcessTime": 4.88941,
+        "JSHeapUsedSize": 202351632,
+        "JSHeapTotalSize": 208666624,
+        "FirstMeaningfulPaint": 1844398.72813,
+        "DomContentLoaded": 1844396.214436,
+        "NavigationStart": 1844395.805343
+      },
+      "errors": [],
+      "failed": []
+    }
+  ]
+}

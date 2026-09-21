@@ -1,0 +1,29 @@
+[
+  {
+    "packet": "context-owner-r1",
+    "emptyTools": true,
+    "emptyMcp": true,
+    "complete": true,
+    "durationMs": 68972,
+    "changedInputsSinceReview": []
+  },
+  {
+    "packet": "context-transport-browser-r1",
+    "emptyTools": true,
+    "emptyMcp": true,
+    "complete": true,
+    "durationMs": 91279,
+    "changedInputsSinceReview": [
+      "tests/objects/browser/omega-centauri/native-focus-browser.mts"
+    ],
+    "supersededBy": "context-browser-restoration-r1"
+  },
+  {
+    "packet": "context-browser-restoration-r1",
+    "emptyTools": true,
+    "emptyMcp": true,
+    "complete": true,
+    "durationMs": 26803,
+    "changedInputsSinceReview": []
+  }
+]

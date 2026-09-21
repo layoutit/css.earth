@@ -1,0 +1,12 @@
+{
+  "mutation": "Omit maximumLayers from actual optimizeVolumeLayers call in isolated copied baker.",
+  "exitCode": 1,
+  "tests": 2,
+  "failed": 2,
+  "observedFailures": [
+    "Prepared volume needs 623 retained elements; limit is 500.",
+    "Prepared volume needs 626 retained elements; limit is 500."
+  ],
+  "interpretation": "Both real default planning tests go red. The final receipt guard rejects the oversized result before it can be returned; the live optimizer passes31targetedtests.",
+  "liveProducerChanged": false
+}

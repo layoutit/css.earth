@@ -94,7 +94,7 @@ export function createPreparedFocusCard(root: HTMLElement | null, showTab: (id: 
     if (fields.uncertainty.parentElement) fields.uncertainty.parentElement.hidden = !uncertainty && minusPc === undefined && plusPc === undefined;
     if (fields.membership.parentElement) fields.membership.parentElement.hidden = cluster;
     write('membership', cluster ? 'Galaxy cluster' : nebula ? 'Milky Way' : words(record.membership.group));
-    write('association', cluster ? `${record.redshift.value}` : nebula ? 'Galactic nebula' : words(record.membership.subgroup));
+    write('association', cluster ? `${record.redshift.value}` : nebula ? record.kind === 'globular-cluster' ? 'Galactic globular cluster' : 'Galactic nebula' : words(record.membership.subgroup));
     write('basis', cluster || nebula ? `${record.classification.basis} ${record.distance.method}` : record.membership.basis);
     write('reference', `Distance reference: ${record.distance.sourceRef}`);
     for (const [index, link] of links.entries()) {

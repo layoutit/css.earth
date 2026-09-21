@@ -11,11 +11,24 @@ import { productSourceIds } from '../src/platform/object-provenance.mts';
 import { prepareVolumeProvenance } from './prepare-volume-provenance.mts';
 
 const root = resolve(import.meta.dirname, '..');
+test('one selected volume prepares without reading unrelated presentation inputs', async () => {
+  const seen: string[] = [];
+  const entries = await prepareVolumeProvenance({ root, objectId: 'omega-centauri', input: async path => {
+    if (path.endsWith('/source/presentation.json')) assert.equal(path, 'src/objects/omega-centauri/source/presentation.json');
+    seen.push(path);
+    return readFile(resolve(root, path));
+  } });
+  assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [['omega-centauri', 2]]);
+  assert.ok(seen.includes('src/objects/omega-centauri/source/delivery.json'));
+  assert.equal(entries[0]!.route, '/sun/?focus=omega-centauri');
+  await assert.rejects(prepareVolumeProvenance({ root, objectId: 'absent-test-volume' }), /No volume presentation/);
+});
+
 test('all installed volume lenses retain real source-to-product edges', async () => {
   const closure = new Set<string>();
   const entries = await prepareVolumeProvenance({ root, input: async path => { closure.add(path); return readFile(resolve(root, path)); } });
   assert.deepEqual(entries.map(entry => [entry.id, entry.controls.length]), [
-    ['betelgeuse-shell', 4], ['hd-181327-disc', 1], ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['smc', 5], ['sun-cor1-density', 1],
+    ['betelgeuse-shell', 4], ['hd-181327-disc', 1], ['helix', 3], ['lmc', 3], ['m1', 6], ['m2-9', 1], ['m31', 1], ['m33', 1], ['m42', 2], ['m45', 5], ['m8', 3], ['omega-centauri', 2], ['smc', 5], ['sun-cor1-density', 1],
   ]);
   assert.equal(entries.find(entry => entry.id === 'm45')?.defaultLens, 'optical-composite');
   assert.ok([...closure].every(path => !path.startsWith('.local/') && !path.endsWith('/prepared/lenses.json')));

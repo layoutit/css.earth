@@ -1,0 +1,26 @@
+{
+  "schema": "cssearth-nebula-intake-registration-evidence@1",
+  "objectId": "omega-centauri",
+  "checkedAt": "2026-09-19",
+  "source": {
+    "id": "eso1119b",
+    "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
+    "width": 14540,
+    "height": 14540,
+    "fieldArcminutes": [50.88, 50.88],
+    "nativeArcsecPerPixel": 0.2099
+  },
+  "method": "Whole-field publisher-WCS-vs-catalogue center check. No star-by-star astrometric fit was run in this session.",
+  "check": {
+    "publisherPointingCenterRaDec": ["13:26:47.27", "-47:28:46.34"],
+    "simbadCatalogueRaDec": ["13:26:47.28", "-47:28:46.1"],
+    "separationArcsec": 0.24,
+    "verdict": "Publisher WCS center agrees with the independently catalogued cluster center (NGC 5139, SIMBAD, ref 2010AJ....140.1830G) to within 0.24 arcsec, sub-pixel at the native 0.21 arcsec/px scale."
+  },
+  "orientation": "Publisher states north is 0.0 degrees left of vertical (north-up); east/west handedness not independently re-derived from pixel data in this session.",
+  "limitations": [
+    "This is a whole-image pointing check, not a matched-star homography fit against an external astrometric catalogue (e.g. Gaia); no per-star registration residuals were computed.",
+    "The field is dominated by the crowded cluster itself, so a compact-source cross-match against a stellar catalogue (rather than field background galaxies) would be the appropriate next step before any pixel-level star-position use.",
+    "Sufficient for the evidence-ledger and profile work in this delivery; not sufficient by itself to satisfy the skill's full registration gate (METHOD.md step 2) for a pixel-level bake."
+  ]
+}

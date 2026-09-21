@@ -1,0 +1,66 @@
+{
+  "schema": "cssearth-nebula-catalog@1",
+  "frame": {
+    "referenceFrame": "sun-icrf",
+    "epochJdTt": 2461286.5
+  },
+  "sources": [
+    {
+      "id": "baumgardt-vasiliev-2021",
+      "url": "https://arxiv.org/pdf/2105.09526",
+      "sha256": "2272702d483b16695ee19346a207e3a69bc75a27e585b3390af79ffd62254e24",
+      "bytes": 4020280,
+      "citation": "Baumgardt & Vasiliev (2021), Accurate distances to Galactic globular clusters through a combination of Gaia EDR3, HST and literature data, Table 2, NGC 5139: combined distance 5.426 +/- 0.047 kpc. Full downloaded paper bytes."
+    },
+    {
+      "id": "eso1119b-frame",
+      "url": "https://cdn.eso.org/images/original/eso1119b.tif",
+      "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
+      "bytes": 555370438,
+      "citation": "ESO/INAF-VST/OmegaCAM eso1119b native TIFF and embedded AVM. The common observation-frame center is an adopted registration origin, not a new dynamical centroid measurement."
+    },
+    {
+      "id": "dsouza-rix-2013",
+      "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
+      "sha256": "5701eed16944eb96e0d3e8dea258f909e99a1fa4a5a0305581e878909e70db92",
+      "bytes": 480080,
+      "citation": "D’Souza & Rix (2013), Mass estimates from stellar proper motions: the mass of omega Centauri, Table 1 and section 4.3. Eight projected Gaussian components define a conditional oblate light prior, not resolved stellar depths."
+    }
+  ],
+  "objects": [
+    {
+      "id": "omega-centauri",
+      "kind": "globular-cluster",
+      "name": "Omega Centauri",
+      "aliases": [
+        "NGC 5139",
+        "ω Centauri",
+        "Caldwell 80"
+      ],
+      "positionM": [
+        -105140426158691240000,
+        -41833991150782185000,
+        -123401106146576710000
+      ],
+      "skyPosition": {
+        "raDeg": 201.696958,
+        "decDeg": -47.479539,
+        "sourceRef": "eso1119b-frame"
+      },
+      "distance": {
+        "valuePc": 5426,
+        "minusPc": 47,
+        "plusPc": 47,
+        "sourceRef": "baumgardt-vasiliev-2021",
+        "method": "Combined Gaia EDR3, HST and literature distance, Table 2, NGC 5139. One cluster scale; individual stellar distances are not recovered."
+      },
+      "classification": {
+        "name": "Globular stellar cluster",
+        "basis": "Observed integrated cluster starlight; the selected oblate Gaussian profile supplies conditional depth for finite display-emission components.",
+        "sourceRef": "dsouza-rix-2013"
+      },
+      "status": "confirmed",
+      "detailedObjectId": "omega-centauri"
+    }
+  ]
+}

@@ -1,5 +1,8 @@
 import type { DensityVolumeFrame } from './volume-frame.ts';
 import type { EmissionBounds, EmissionVector3, SkyBounds } from './emission.ts';
+import { readVolumeLayerPlan, type VolumeLayerPlan } from './volume-slices.ts';
+import { readLayerOptimizationReport, type LayerOptimizationReport } from '../sampling/layer-optimization.ts';
+import { readRenderElementBudget, type RenderElementBudget } from './render-element-budget.ts';
 
 export const COMPILER_LONGEST_AXIS_SLICES = 512;
 
@@ -15,7 +18,7 @@ export interface CompilerLensVolume {
 export interface CompilerStarMaterial { rgb: [number, number, number]; diameterUnits: number; alpha: number }
 export interface PreparedCompilerStar {
   id: string;
-  /** Centered west/north/away coordinates in the scene's arcsecond units. */
+  /** Centered coordinates in frame.referenceFrame; current preparations use west/north/toward. */
   positionUnits: EmissionVector3;
   rgb: [number, number, number];
   /** Historical fixed-screen markers; newly prepared stars use angular scene units. */
@@ -56,7 +59,8 @@ export interface CompilerBakeResult {
   stars: PreparedCompilerStar[];
   starSprites?: CompilerStarSprites;
   alphaSha256: string;
-  sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: 512; samplesPerSlab: 4 };
+  sampling: { sliceCounts: { x: number; y: number; z: number }; imageWidth: 512; samplesPerSlab: 4;
+    layerPlan?: VolumeLayerPlan; layerOptimization?: LayerOptimizationReport; renderBudget?: RenderElementBudget };
 }
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
@@ -137,7 +141,7 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
   const local = { min: bounds.min.map((n, i) => n - origin[i]!), max: bounds.max.map((n, i) => n - origin[i]!) };
   const frame = value.frame, coordinates = value.coordinates, sampling = value.sampling;
   const counts = sampling.sliceCounts;
-  if (frame.referenceFrame !== 'lab-sky-angular' || frame.epochJdTt !== 2451545 || frame.metersPerUnit !== 1 ||
+  if (!['lab-sky-angular', 'lab-sky-west-north-toward'].includes(String(frame.referenceFrame)) || frame.epochJdTt !== 2451545 || frame.metersPerUnit !== 1 ||
       !same(frame.originM, [0, 0, 0]) || !same(frame.localToReferenceXyzw, [0, 0, 0, 1]) || !bounds3(frame.boundsUnits) ||
       !same(frame.boundsUnits.min, local.min) || !same(frame.boundsUnits.max, local.max) ||
       !Array.isArray(coordinates.axes) || coordinates.axes.join(',') !== 'west,north,away' ||
@@ -145,10 +149,19 @@ export function readCompilerBakeResult(value: unknown): CompilerBakeResult {
       sampling.imageWidth !== 512 || sampling.samplesPerSlab !== 4 || !record(counts) ||
       ['x', 'y', 'z'].some(axis => !Number.isInteger(counts[axis]) || Number(counts[axis]) < 1 || Number(counts[axis]) > COMPILER_LONGEST_AXIS_SLICES))
     throw new TypeError('Compiler bake frame or sampling is invalid.');
+  if (sampling.layerPlan !== undefined) {
+    const plan = readVolumeLayerPlan(sampling.layerPlan);
+    if (plan.referenceSamplesPerSlab !== sampling.samplesPerSlab ||
+        (['x', 'y', 'z'] as const).some(axis => plan.axes[axis].length !== counts[axis]))
+      throw new TypeError('Compiler grouped sampling differs from its retained layer plan.');
+    if (sampling.layerOptimization !== undefined) readLayerOptimizationReport(sampling.layerOptimization, plan);
+  } else if (sampling.layerOptimization !== undefined) throw new TypeError('Compiler layer optimization report requires its retained plan.');
   const expectedSpan = Math.max(value.skyBoundsArcsec.max[0] - value.skyBoundsArcsec.min[0], value.skyBoundsArcsec.max[1] - value.skyBoundsArcsec.min[1]);
   if (Math.abs(value.spanArcsec - expectedSpan) > 1e-10) throw new TypeError('Compiler source span differs from its sky bounds.');
   if (!Array.isArray(value.lenses) || value.lenses.length < 1 || value.lenses.length > 8 ||
       !Array.isArray(value.stars) || value.stars.length > 5000) throw new TypeError('Compiler bake collections are invalid.');
+  if (sampling.renderBudget !== undefined) readRenderElementBudget(sampling.renderBudget, value.stars.length,
+    Number(counts.x) + Number(counts.y) + Number(counts.z));
   const lensIds = new Set<string>();
   for (const item of value.lenses) {
     if (!record(item)) throw new TypeError('Invalid compiler lens volume.');

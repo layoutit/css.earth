@@ -31,6 +31,17 @@ angle — leaves on every side. Slabs pack into per-axis atlases for delivery. I
 handoff explicitly: brightness and colour agreement between banks is an acceptance criterion,
 not a detail.
 
+New compiler and sampled-volume deliveries target **500 total retained scene elements**,
+including stars, every optical slab copy, impostors and wrappers. Reserve their actual costs
+before planning XYZ intervals; 500 slabs is not a 500-element scene. Prefer source-backed
+slab emission for unresolved or dense light, and use fewer separate catalogue stars where
+the evidence supports that representation. Never count the same light in both, invent stellar
+depths, or silently discard retained stars to fit the quota. Preserve the saved plan and
+cost receipt for replay and all component mixtures. A planning estimate is not visual
+acceptance; keep the actual brightness/detail/handoff gates. Historical pinned deliveries
+remain unchanged and report when over budget. See
+`labs/nebula/docs/emission-compiler.md#automatic-layer-budget` before changing this step.
+
 ## Packages and boundaries
 
 `labs/nebula/packages/{lab,volume-core,volume-bake,reconstruction,volume-viewer}`.
@@ -71,7 +82,28 @@ Pick by what the evidence supports, not by habit.
 
 Two-scale in one line: broad light is `gain(x,y) × prior(x,y,z)` with `gain = fraction × blur(image) / blur(column)`; finite components fit the residual at prior-supported depths, so image brightness scales the envelope and never moves it in depth. Example recipe: `labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json`, with its method note beside it.
 
-**Lenses:** every image recolours one shared geometry, so switching lens changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+**RGB-only lenses:** every image recolours one shared geometry, so switching lens changes colour, never shape. **The prior is a hypothesis, never a measurement** — prefer one that scores better against observations; for the SMC a VMC-constrained ellipsoid beat the tidal simulation (withheld deviance 0.457 vs 0.601).
+
+## Numerical alignment before image inspection
+
+Diagnose alignment numerically before judging screenshots or rebaking. Use the configured
+lenses as independent checks of the shared coordinate transport; different spectral structures
+and brightness are expected, so do not force their pixels to match.
+
+- Check registered landmarks or matched stars in the common sky frame: translation, scale,
+  rotation, handedness, footprints and held-out residuals in pixels/arcseconds. Verify the same
+  points through source, prepared geometry and camera projection.
+- Compare shared geometry/alpha across RGB-only lenses. For declared component mixtures,
+  compare the shared frame, slab intervals and layout while preserving legitimate support
+  differences. Use spatial residuals, not histogram agreement, to establish alignment.
+- Separate registration error from material, sampling and browser compositing error. Compare
+  analytic projections, decoded baked values and rendered pixel measurements at the same
+  camera. Fix the owner identified by those measurements; do not compensate with a display
+  offset or assume that every failed image metric proves misregistration.
+- Run capture analysis locally and return compact numerical reports. Keep captures on disk;
+  do not routinely load them into model context. Inspect an image only for a named question
+  that the numbers cannot settle, a required final visual check, or an explicit user request;
+  use the smallest useful crop and fewest images.
 
 ## Matching a lens to its image
 
@@ -143,6 +175,17 @@ server route you can call directly, so an agent sees exactly what a person sees.
 | --- | --- | --- |
 | Levels | `GET /__nebula/reconstruction-levels?resultId=<lens>` | per-channel histograms, signed delta, transfer curve, percentile ratios |
 | Difference map | `GET /__nebula/reconstruction-difference?resultId=<lens>` (`&format=png` for the image) | render − image on luminance, over the Earth view: blue too dark, red too bright, clear within tolerance |
+| Radial profile | `GET /__nebula/reconstruction-radial?resultId=<lens>` | azimuthally averaged source/render brightness in radial bins from the footprint centroid, per-bin ratio and delta, half-light radius ratio |
+
+**Radial profile answers what the other two cannot: does brightness fall off with radius like the source?**
+Levels is a histogram and spatially blind — it can match p50/p90/p99 exactly while the structure sits in the
+wrong place (a brightness swap between the centre and an annulus conserves the histogram outright). The
+difference map shows *where* the error is but not its radial shape. The radial profile's own control is that
+swap: a permutation of the same pixel values that moves brightness from the core to the rim reads as p50/p90
+ratio 1.00 in Levels while the radial profile's per-bin ratio runs from ~0 at the centre to tens at the rim
+and its half-light radius is pushed outward. A pure scale error (render radially compressed or expanded) is
+caught by the half-light radius ratio instead. Highest value for a centrally concentrated, near-spherical
+subject.
 
 **Read the difference map for *where*, the levels for *how much*.** On the LMC it showed the bar
 blue (core too dark, the opacity shoulder) and the body a red ring (mid-tones too bright), which

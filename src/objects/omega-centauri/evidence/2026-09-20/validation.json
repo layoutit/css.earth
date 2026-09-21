@@ -1,0 +1,412 @@
+{
+  "schema": "cssearth-omega-app-evidence@1",
+  "recordedAt": "2026-09-20T21:50:32.736Z",
+  "baseRevision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
+  "testedState": "Base revision plus the uncommitted app package, native focus readiness, shared context visibility, scoped provenance tooling and refreshed dependent asset inventories identified below. The base commit alone does not contain this app integration.",
+  "environment": {
+    "node": "v22.23.2",
+    "platform": "darwin",
+    "arch": "arm64",
+    "browser": "148.0.7778.96",
+    "viewport": {
+      "width": 1440,
+      "height": 1000
+    },
+    "deviceScaleFactor": 1
+  },
+  "sourcePins": [
+    {
+      "path": ".gitignore",
+      "bytes": 15864,
+      "sha256": "10415a3512410f3367389fc73983c5b2e0019f56fdcd20c37e6fe7febac920bc"
+    },
+    {
+      "path": "site/prepared-context-navigation.mts",
+      "bytes": 13264,
+      "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36"
+    },
+    {
+      "path": "site/test/prepared-context-navigation.test.mts",
+      "bytes": 23828,
+      "sha256": "bc80889dedb3c2b7906dd4792c7be68119442856bae95e4562bbf83c2c2713ba"
+    },
+    {
+      "path": "src/objects/m31/runtime-assets.json",
+      "bytes": 15070,
+      "sha256": "288f180fc548cdcba00f98afecf2db2121cc69a1c7fe9e2e5d736d6662432adb"
+    },
+    {
+      "path": "src/objects/m33/runtime-assets.json",
+      "bytes": 15713,
+      "sha256": "ea94ccdd23f58680df91740f9e7a71c89446eac1533c559d08b434465ea545f0"
+    },
+    {
+      "path": "src/objects/nearby-universe/object.json",
+      "bytes": 456,
+      "sha256": "61ea1293df390647595e3ac471ced4cdedcb17befba635cbc7b00e4be80bbbcf"
+    },
+    {
+      "path": "src/objects/nearby-universe/prepared/manifest.json",
+      "bytes": 355,
+      "sha256": "c4fbba552ace7d685a67116f1db52a8a323545e2678a8c7a74615de602a7fe63"
+    },
+    {
+      "path": "src/objects/nearby-universe/runtime-assets.json",
+      "bytes": 713,
+      "sha256": "ba593972c6a03433669e88931779b3f82218394a4cf53531b733e9bee386f79c"
+    },
+    {
+      "path": "src/objects/omega-centauri/investigations.json",
+      "bytes": 11844,
+      "sha256": "6733ae6b94b38f0eede05c2d4d5adf0b060cb3e25ee9266a70f7a07ba98103e7"
+    },
+    {
+      "path": "src/objects/omega-centauri/object.json",
+      "bytes": 1116,
+      "sha256": "7846b5714f0d3c55f547ab5207914ee7ec1494c82413b650a20a3f4b91242781"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared-assets.json",
+      "bytes": 10599,
+      "sha256": "a307635f2e3b99073e303b62fc7ec43ca731ea9c99a4d47df411c49e921c4fbd"
+    },
+    {
+      "path": "src/objects/omega-centauri/runtime-assets.json",
+      "bytes": 595,
+      "sha256": "e30940cfcec240029ada2ddd666379804e57d863087d97a7ad91be598cb0f5bf"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs.json.gz",
+      "bytes": 2277027,
+      "sha256": "869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/01-compiler.json",
+      "bytes": 1361,
+      "sha256": "37c12a3be28a8dfbebb8931cd5f528673b63018c34aea8a4a07b23b26b6a1f3f"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/02-photometric-mge.json",
+      "bytes": 2508,
+      "sha256": "4e28dac4271eeafd77f77582cfd69105ca02677e6bbe6c88e583f412c7b27914"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/03-observation-structures.json",
+      "bytes": 397,
+      "sha256": "dc8dd69f0a7f1c15d8b6376e43147e3e2cd2c52ab802d7fc5651d23c28ae8c0e"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/04-physical-evidence.json",
+      "bytes": 36711,
+      "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/bake-inputs/references/05-observations.json",
+      "bytes": 3842,
+      "sha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/delivery.json",
+      "bytes": 2436,
+      "sha256": "013ec10f387fb5b8ba47ba08412151abce621df4b48b748a68a795c579cbe2aa"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/manifest.json",
+      "bytes": 11285,
+      "sha256": "8048b39285f795d9a06bf824f00b241b7800edfc4f1e13253f750fca4571b569"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/nebula.json",
+      "bytes": 2633,
+      "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/presentation.json",
+      "bytes": 6278,
+      "sha256": "a3e6293031bf6c92c90fd14cc3c9f2329f8bbe7389c443ee6fe8c832d7740859"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/provenance-references.json",
+      "bytes": 1856,
+      "sha256": "9a749e5f63493aa373c47d09b1bfec5bd312c32b6896aafd0d51cb7a29e1d5d4"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/replay-references.json",
+      "bytes": 1302,
+      "sha256": "d289333b8061b55f07f97bad5bef7a515123cc2e5bf845dec0a50724ba6df358"
+    },
+    {
+      "path": "src/objects/omega-centauri/source/request.json",
+      "bytes": 365,
+      "sha256": "043c6218aedd90269ec68822cfa2d729d731b7995150c0e01af8b5c68127e241"
+    },
+    {
+      "path": "src/renderers/css/sky/prepared-sky-runtime.test.ts",
+      "bytes": 52229,
+      "sha256": "3652d5086c4422b64ee66347d6909617693f443e1c7e577452796d5d4a5805e1"
+    },
+    {
+      "path": "src/renderers/css/universe/detailed-focus-context.test.ts",
+      "bytes": 1302,
+      "sha256": "11a9abf0d929d27d84c698e3a1e9684778d65eafe7eb29b39a747e834b999beb"
+    },
+    {
+      "path": "src/renderers/css/universe/detailed-focus-context.ts",
+      "bytes": 873,
+      "sha256": "12a727775a8277fede7cd743642b960a30c10a7334f2e47186d97b6e8d5413f4"
+    },
+    {
+      "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
+      "bytes": 48720,
+      "sha256": "fd0d735b8f44cd639e3c9cf5333a4f4fbef1a2c9dbbbf8d288cf59a4441dae2f"
+    },
+    {
+      "path": "src/sources/baumgardt-vasiliev-2021.json",
+      "bytes": 1528,
+      "sha256": "b4ae3323e47295475a036cbe09a6867bb023b8051cda5570eb027b86e7478d9a"
+    },
+    {
+      "path": "src/sources/dsouza-rix-2013.json",
+      "bytes": 1662,
+      "sha256": "bd246d2f836c5ae7d2b60712037d24381b62b408381e81d774cee9080ebff37c"
+    },
+    {
+      "path": "src/sources/eso-eso0844a.json",
+      "bytes": 1855,
+      "sha256": "3a3badbe0e8601a3216ff3ec818b7a216e823a3db6c1bebbbcc619ba81cec237"
+    },
+    {
+      "path": "src/sources/eso-eso1119b.json",
+      "bytes": 1864,
+      "sha256": "19872e1f27077b4525444a15ae4c990fa2ea877daefb92fd1b9408fa24c5c9d6"
+    },
+    {
+      "path": "tests/objects/browser/omega-centauri/native-focus-browser.mts",
+      "bytes": 9389,
+      "sha256": "730b922ea4eb4e500c32d0834a0ace7d816d45a4943d106f9f51132cb77c430d"
+    },
+    {
+      "path": "tests/objects/browser/omega-centauri/promotion-inspection-browser.mts",
+      "bytes": 383,
+      "sha256": "541e88c9d226f3e6ca978556d3486be390e5a8623bf5839efb1dcfa35ef69acc"
+    },
+    {
+      "path": "tests/objects/browser/volume-lens-bank/promotion-inspection.mts",
+      "bytes": 14687,
+      "sha256": "af8599e45889d28d44126c115a7176c451a30baa997e9304d2062ad71768efe9"
+    },
+    {
+      "path": "tools/prepare-volume-provenance.mts",
+      "bytes": 28227,
+      "sha256": "725908ea7e406a82276e82e58bf8d7ed2e830ca345eb1db04a1ab7ff0bc3b862"
+    },
+    {
+      "path": "tools/prepare-volume-provenance.test.mts",
+      "bytes": 26438,
+      "sha256": "0050fec1efc5e7d2ac17d39794023bc8655ecb2648e7e6ea9e213f4de9c31f7c"
+    }
+  ],
+  "browserRuntimePins": [
+    {
+      "path": "src/renderers/css/dist/universe.js",
+      "bytes": 10185,
+      "sha256": "a4aa3371c6836dcb1df973ab5cadbf9c9bd5d3ebb2555e9e46aff31fc2b9c520"
+    },
+    {
+      "path": "src/objects/sun/prepared/world-context.json",
+      "bytes": 7536975,
+      "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+    },
+    {
+      "path": "src/objects/omega-centauri/prepared/lenses.json",
+      "bytes": 1202415,
+      "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+    }
+  ],
+  "checks": [
+    {
+      "command": "pnpm build",
+      "result": "passed",
+      "builtPages": 995,
+      "catalogueFragmentPages": 497
+    },
+    {
+      "command": "pnpm test:renderer",
+      "result": "passed",
+      "files": 84,
+      "tests": 594
+    },
+    {
+      "command": "node --test site/test/*.test.mts",
+      "result": "failed",
+      "tests": 399,
+      "passed": 376,
+      "failed": 23,
+      "receipt": "shell-tests.tap",
+      "failureNames": [
+        "15 - every object mounts one canonical high-density image bank",
+        "75 - all objects retain browser evidence for the controls they support",
+        "103 - adding and reordering bodies preserves existing marker bytes",
+        "107 - reproduces the checked-in body images and utility markers",
+        "108 - failed object source preserves accepted files or recoverable backups outside public",
+        "109 - failed late utility source preserves accepted files or recoverable backups outside public",
+        "110 - failed publication preserves accepted files or recoverable backups outside public",
+        "111 - failed rollback preserves accepted files or recoverable backups outside public",
+        "34 - site/test/navigation-router.test.mts",
+        "120 - every actual profile reads its recorded coordinates from the shared camera endpoint",
+        "124 - an already ready object does not depend on a redundant browser waiter",
+        "137 - category browsing and asteroid settings cannot bypass Illustration models",
+        "138 - photographic arrivals use the prepared package camera, excluding modeled and unexposed datasets",
+        "180 - derives deterministic test discovery from an authored object id",
+        "50 - site/test/planet-shell.test.mts",
+        "225 - keeps every planet factsheet comparable and concise",
+        "244 - every object forwards its object-owned legend through the shared shell",
+        "64 - site/test/projective-surface-seam-contract.test.mts",
+        "299 - loads object-owned browser and audit expectations for every implementation",
+        "67 - site/test/router-runtime.test.mts",
+        "68 - site/test/runtime-policy.test.mts",
+        "370 - system flights keep the viewing angle and approach the center from QMbBW5Yy",
+        "371 - system flights keep the viewing angle and approach the center from QIZBtofG"
+      ],
+      "baseline": "Not independently reproduced on current main; no identical-main claim."
+    },
+    {
+      "command": "node --test tools/prepare-volume-provenance.test.mts tools/report-investigations.test.mts tools/nebula-provenance-contract.test.mts src/platform/source-catalog.test.mts tools/object-package-consistency.test.mts",
+      "result": "passed",
+      "tests": 29
+    },
+    {
+      "command": "pnpm typecheck:tests",
+      "result": "passed",
+      "files": 1706
+    },
+    {
+      "command": "pnpm typecheck:renderer; pnpm typecheck:shell; pnpm typecheck:tools; pnpm check:typescript-ownership",
+      "result": "passed",
+      "reuse": "Tool owner unchanged since its recorded app-integration pass; renderer/shell checked after context implementation. Authored JavaScript backlog has no additions."
+    },
+    {
+      "command": "node tests/objects/browser/omega-centauri/native-focus-browser.mts http://127.0.0.1:4219 output/pr390-audit/app-integration/context-native-final",
+      "result": "passed",
+      "receipt": "native-focus.json",
+      "claim": "Cold/warm automatic framing; real drag/wheel/reselection; suppression, real outward restoration and return; one scene/camera; no request/page errors."
+    },
+    {
+      "command": "node tests/objects/browser/omega-centauri/promotion-inspection-browser.mts http://127.0.0.1:4219 output/pr390-audit/app-integration/browser-context-final",
+      "result": "passed",
+      "receipt": "app-inspection.json",
+      "captures": 7,
+      "claim": "Two lens controls and controlled front/oblique/side views in the actual app, separate from native navigation proof."
+    },
+    {
+      "command": "node tools/nebula/prepare.mts --object=omega-centauri (empty-cache independent replay)",
+      "result": "passed",
+      "receipt": "cold-replay.json",
+      "rawResourceIdentities": 1377,
+      "bakedFiles": 60
+    },
+    {
+      "result": "passed",
+      "claim": "Omega cold restore of all 64 pinned R2 bytes and warm reuse without network",
+      "receipt": "r2-restore.json"
+    },
+    {
+      "result": "passed",
+      "claim": "M31/M33/Nearby Universe dependent publication: 200 files cold-restored; four changed keys verified; warm reuse without network",
+      "receipt": "dependent-r2-restore.json"
+    },
+    {
+      "result": "passed",
+      "claim": "Context owner tests and four property-removal mutations; source pins distinguish this from prior focus readiness checks",
+      "receipt": "context-regressions.json"
+    },
+    {
+      "result": "passed",
+      "claim": "Different-vendor final context/transport/browser review with one corrected browser restoration assertion",
+      "receipt": "context-review.json"
+    }
+  ],
+  "captures": [
+    {
+      "path": "src/objects/omega-centauri/evidence/2026-09-20/front.png",
+      "bytes": 361515,
+      "sha256": "15699f9c5573f4b9270b33f12c0ecce680dc8e1cb4a42f363973e145b5d2f595",
+      "sourceCapture": "view-earth",
+      "sourceReceipt": "app-inspection.json"
+    },
+    {
+      "path": "src/objects/omega-centauri/evidence/2026-09-20/oblique.png",
+      "bytes": 385925,
+      "sha256": "e22fbcb65d767e56927a30ab214caad06764a195cc0650845a25f9cc469fa253",
+      "sourceCapture": "view-oblique",
+      "sourceReceipt": "app-inspection.json"
+    },
+    {
+      "path": "src/objects/omega-centauri/evidence/2026-09-20/side-x.png",
+      "bytes": 409805,
+      "sha256": "526cf13e89988b5d33392abd97db842ade6fea989a7c74e665b219481bb02bca",
+      "sourceCapture": "view-side-plus",
+      "sourceReceipt": "app-inspection.json"
+    },
+    {
+      "path": "src/objects/omega-centauri/evidence/2026-09-20/side-y.png",
+      "bytes": 339301,
+      "sha256": "b76500bd18ebbec4020b392f4129ea5d5b73aa4b9926e12cbf44c4f5c12d0640",
+      "sourceCapture": "view-side-y",
+      "sourceReceipt": "app-inspection.json"
+    },
+    {
+      "path": "src/objects/omega-centauri/evidence/2026-09-20/wfi.png",
+      "bytes": 375193,
+      "sha256": "b0c6a4e887c73e704a96d9d54846882f0c37699657a8393ba5231258bb33e7c7",
+      "sourceCapture": "lens-eso0844a",
+      "sourceReceipt": "app-inspection.json"
+    },
+    {
+      "path": "src/objects/omega-centauri/evidence/2026-09-20/native-arrival.png",
+      "bytes": 433050,
+      "sha256": "2dde0d51ef595984fef135f394019cdddccbdf65c01d62b0c44ab80375078c5d",
+      "sourceReceipt": "native-focus.json",
+      "sourceCapture": "ordinary cold native arrival"
+    }
+  ],
+  "captureScope": "Seven controlled captures executed; retain five complementary controlled views plus ordinary native arrival. Duplicate front and reverse-X captures remain local; their metadata remain in app-inspection.json. No visual handoff or scientific acceptance is inferred from capture completion.",
+  "performance": {
+    "before": "performance-baseline.json",
+    "pageOnlyControl": "performance-background-control.json",
+    "after": "performance-after.json",
+    "comparison": "performance-comparison.json",
+    "limitation": "Headless Chromium uses SwiftShader software rendering, not the desktop GPU. Identical start/end poses and input protocol; timed runs were separate from builds/tests."
+  },
+  "dependentPreparation": {
+    "receipt": "nearby-recomputation.json",
+    "meaning": "M31/M33 provenance generator identity changes with the scoped tool; Nearby Universe recomputation changes only tiny floating values and dependent hashes, with unchanged source data/frame/appearance."
+  },
+  "reusedLab": {
+    "revision": "862cdbed96bbca43cdf1f13549c94e4ca501add3",
+    "reason": "No further Lab implementation or fitted-field/baked-bank changes after that revision. App inputs are exact pinned copies; native camera/context results are newly checked rather than inferred from old Lab captures.",
+    "tests": {
+      "total": 681,
+      "passed": 659,
+      "skipped": 17,
+      "failed": 5
+    },
+    "failures": [
+      "Four missing LMC research inputs",
+      "One temporary fixture package-resolution failure"
+    ],
+    "baseline": "Not independently reproduced on current main."
+  },
+  "unresolved": [
+    "Omega neutral and both optical axis-handoff image gates remain failed; earlier scientific bake round cap remains exhausted.",
+    "Minimum zoom remains 0.05 framing radii (2.17 pc), allowing entry into the cluster; close-zoom visual quality not accepted.",
+    "Full broad shell sweep is not green; its 23 failures are retained without calling them an identical-main result.",
+    "Desktop GPU frame rate not measured."
+  ],
+  "mergeStatus": "Draft; not approved for merge or scientific visual acceptance.",
+  "shellTranscript": {
+    "originalBytes": 180336,
+    "originalSha256": "ab9124b128caddc3b86868650879359cea9db84907f36b03d9a5f3f00bfc3168",
+    "normalization": "Removed whitespace on blank lines only; test names, counts, errors and stack traces are unchanged."
+  }
+}

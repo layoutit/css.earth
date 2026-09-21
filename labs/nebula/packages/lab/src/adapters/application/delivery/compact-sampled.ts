@@ -1,3 +1,4 @@
+import { CSS_COMPILER_RENDER_BUDGET } from '../../../../../../../../src/renderers/css/volume/compiler-render-budget.ts';
 import { replayCompactSampled as replay } from '@cssearth/volume-bake/compact-inputs/sampled';
 import { compileCssVolume } from '../../../../../../../../src/renderers/css/preparation/volume.ts';
 import { validatePreparedCssVolume } from '../../../../../../../../src/renderers/css/volume/validation.ts';
@@ -187,6 +188,7 @@ export async function exportCompactSampled(
 }
 export async function replayCompactSampled(root: string, inputPin: CompilerPin, outputDirectory: string) {
   return replay(root, inputPin, outputDirectory, {
+    renderBudget: CSS_COMPILER_RENDER_BUDGET,
     compileVolume: input => compileCssVolume({ ...input, recipe: { anchors: [] } }),
     validateVolume: validatePreparedCssVolume,
     prepareStarSprites: prepareCompilerStarSprites,

@@ -50,7 +50,8 @@ type FamilyOperationArguments=
   |{readonly operationId:'count-image-preview';readonly image:{readonly x:readonly[number,number];readonly y:readonly[number,number];readonly bins:readonly[number,number];readonly selection?:EventSelection}}
   |{readonly operationId:'energy-histogram-preview';readonly histogram:{readonly edgesEv:readonly number[];readonly selection?:EventSelection}}
   |{readonly operationId:'light-curve-preview';readonly lightCurve:{readonly range:readonly[number,number];readonly binWidthSeconds:number;readonly selection?:EventSelection}}
-  |{readonly operationId:'slit-scan-inspect'|'dynamic-spectrum-inspect'|'polarimetry-inspect'|'polarimetry-export'}
+  |{readonly operationId:'slit-scan-inspect'|'polarimetry-inspect'|'polarimetry-export'}
+  |{readonly operationId:'dynamic-spectrum-inspect'}
   |{readonly operationId:'stokes-inspect'}
   |{readonly operationId:'stokes-image'|'stokes-series';readonly component:'I'|'Q'|'U'|'V';readonly slice:Readonly<Record<string,number>>}
   |{readonly operationId:'stokes-spectrum';readonly component:'I'|'Q'|'U'|'V';readonly slice:Readonly<Record<string,number>>;readonly x:number;readonly y:number}
