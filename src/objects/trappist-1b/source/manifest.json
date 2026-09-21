@@ -49,8 +49,8 @@
     {
       "id": "trappist-1b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 4597,
-      "expectedSha256": "8081c79ae4bea1b1dcc7be0ab3b7e66932952479299683106c08a821dd88b867",
+      "expectedBytes": 5059,
+      "expectedSha256": "974c7a41492c92ced72a3252652b7a05fcd208d8e849eda1e3d0284529ce467b",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -245,8 +245,8 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4833,
-      "expectedSha256": "48c12f4b952e6d50b3feebb6407724710effadcb0a6bf9e162abf16b54a903ae",
+      "expectedBytes": 4913,
+      "expectedSha256": "889d6dfae130faf7780a01722c3ef51fcfce130acddf4b6c54745ea1a342b57d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -279,17 +279,17 @@
     },
     {
       "path": "reference/rendered-thermal-day.png",
-      "expectedBytes": 489074,
-      "expectedSha256": "04af0d35cc636a9f28f00f26682508f5e178d65ee6e4e8826912586063015957",
+      "expectedBytes": 494735,
+      "expectedSha256": "931f10e0bde7ef9b5cf95481e4d6eb8911c5f994627860db165cc53454cb524d",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture: the branch's dev server at /trappist-1b/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: the default camera on the day side: the bare rock at 497 K under the star, with the lens panel's ≤ 50–550 K legend and map preview."
+        "reason": "Evidence capture: the branch's dev server at /trappist-1b/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: the default camera on the day side: the bare rock at 575 K under the star, with the lens panel's ≤ 50–600 K legend and map preview."
       }
     },
     {
       "path": "reference/rendered-thermal-terminator.png",
-      "expectedBytes": 421899,
-      "expectedSha256": "916d1a9747a611a505bf5cd20e60715d45717a85f1d1cd8dcf9a48a5c8054673",
+      "expectedBytes": 430335,
+      "expectedSha256": "db27ec0b256ba5518ed2f9ce253f2b2b9b197d3506d5c6bb67ab371f53ca018f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /trappist-1b/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: after dragging the camera a quarter turn: the terminator edge on, the day side cooling toward it and the night side at the bottom of the scale."
@@ -297,8 +297,8 @@
     },
     {
       "path": "reference/rendered-thermal-night.png",
-      "expectedBytes": 323025,
-      "expectedSha256": "5c4393340cd999728c9069174b7c0906c1fab0a0f334e67d04f7b6ed9ea4e6c8",
+      "expectedBytes": 324602,
+      "expectedSha256": "932d1b809c676e56b467580c8f505c41b51317bd92567c630ef1e364eee324d8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /trappist-1b/, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-21 after preparation, no console errors: after dragging the camera half way round: the night side, uniformly at the bottom of the scale."

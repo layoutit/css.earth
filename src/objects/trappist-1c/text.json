@@ -28,10 +28,10 @@
     ]
   },
   "datasets": {
-    "shape": {
-      "title": "Shape only",
-      "detail": "Published radius",
-      "summary": "A sphere of the measured radius, lit by its star. No image, colour or map of this planet exists."
+    "temperature": {
+      "title": "Bare rock from JWST depth",
+      "detail": "From our eclipse depth",
+      "summary": "A model, not a map: a bare rock as bright at 15 µm as c's measured day side. About 400 K under the star, dark at night."
     }
   }
 }

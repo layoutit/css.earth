@@ -4,18 +4,18 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "a9657223b8227b7965f4700d7a23cd4864aa118bdb0e1b35ded0eeabbfd775fa"
+    "sha256": "2b97c1bd81baca575b7a81fa1e37649e6769911a018621cb2948df50919da525"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
     "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-    "bindingsSha256": "d997f881cfdad4636bc0dc1776d06354cb4c0e411f4684c815271339855a41a9"
+    "bindingsSha256": "3760a8528904535854f4c40197302ee65761b790f24f10ca10915e3c4b146de6"
   },
   "recipes": [
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "64a45ae107c9a9b6cd9837a1d0eb2cc0599a8cd63e30218236e8a5ca6103f98c",
+      "sha256": "48cd56e48b86dbb08a7052e870a663b42b5d950aabc41d41b4985603a3050d0d",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/trappist-1c/",
@@ -39,56 +39,77 @@
         },
         "surfaces": [
           {
-            "id": "shape",
+            "id": "temperature",
             "output": "trappist-1c-surface-{id}{suffix}.webp",
             "thumbnail": "trappist-1c-lens-{id}.webp",
-            "source": "measurements.json",
-            "falseColor": false,
+            "source": "science/jwst-trappist-1/c-dayside-15um.json",
+            "falseColor": true,
             "science": {
-              "kind": "neutral-shape",
-              "qualification": "Shared neutral gray display convention for a planet with no image or measured colour in this package; a sphere of the published radius, lit by its own star."
+              "kind": "terrestrial-scientific",
+              "id": "temperature",
+              "label": "Rock model",
+              "format": "bare-rock-eclipse",
+              "path": "science/jwst-trappist-1/c-dayside-15um.json",
+              "consumer": "trappist-1c-bare-rock-model",
+              "sampling": "bilinear",
+              "displaySampling": "bilinear",
+              "outputLongitudeOrigin": 0,
+              "units": "K",
+              "planet": "trappist-1c",
+              "host": "trappist-1",
+              "band": {
+                "encoding": "svo-filter",
+                "path": "science/svo/JWST_MIRI.F1500W.xml"
+              },
+              "star": {
+                "encoding": "svo-model-spectrum",
+                "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml"
+              },
+              "minimum": 50,
+              "maximum": 600,
+              "colors": [
+                "#0d0887",
+                "#7e03a8",
+                "#cc4778",
+                "#f89540",
+                "#f0f921"
+              ],
+              "labels": [
+                "≤ 50",
+                "325",
+                "600"
+              ],
+              "description": "A model, not a map: the temperature of a bare rock with no atmosphere to carry heat, set by the 15 µm eclipse depth this project measured in ten JWST MIRI visits: about 407 K under the star, nothing at night. Only the dayside brightness is measured.",
+              "title": "Bare-rock model · from our JWST eclipse depth",
+              "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
             }
           }
         ],
-        "lighting": {
-          "frameSize": 512,
-          "columns": 8,
-          "presentationSize": 460,
-          "defaultFrame": 230,
-          "billboardFrameSize": 24,
-          "billboardColumns": 16,
-          "rowOutput": "trappist-1c-lighting-{density}x-row-{row}.webp",
-          "billboardOutput": "trappist-1c-lighting-{density}x-billboard.webp",
-          "minimumLightViewZ": -1,
-          "maximumLightViewZ": 1,
-          "frameCount": 256,
-          "shadowlessFloodLimbFloor": 0.35,
-          "ambientIntensity": 0.05,
-          "radiusScale": 0.505,
-          "terminator": [
-            0,
-            0.1
-          ],
-          "maximumAlpha": 0.95,
-          "bankSchema": "csstrappist-1c-prepared-lighting-bank@1",
-          "billboardSchema": "csstrappist-1c-prepared-lighting-billboard@1",
+        "emission": {
+          "offLimbSize": 600,
+          "limbSize": 512,
+          "bodyDiameter": 496,
+          "offLimbOutput": "trappist-1c-context-{id}{suffix}.webp",
+          "limbOutput": "trappist-1c-limb-{id}{suffix}.webp",
           "metadata": {
-            "schema": "csstrappist-1c-prepared-lighting@1",
-            "storageModel": "prepared-full-resolution-density-row-shards",
-            "model": "prepared-full-phase-lambert-cubic-sky-sun-no-atmosphere",
-            "sourceRenderer": "OpenSpace@56e29b54/modules/globebrowsing/shaders/texturetilemapping.glsl",
-            "ambientIntensity": 0.05,
-            "shadowlessFloodLimbFloor": 0.35,
-            "orenNayarRoughness": 0,
-            "terminatorSmoothstep": [
-              0,
-              0.1
-            ],
-            "minimumLightViewZ": -1,
-            "maximumLightViewZ": 1,
-            "baseLightAzimuthDegrees": 0,
-            "cameraContract": "unbounded-accumulated-matrix3d-phase-and-roll",
-            "runtimeRasterization": false
+            "schema": "csstrappist-1c-prepared-emission@1",
+            "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+            "offLimbContext": {
+              "logicalSize": 600,
+              "source": "none: a transparent plate",
+              "composition": "transparent",
+              "rotation": "none",
+              "runtimeAlphaProcessing": false
+            },
+            "limbMaterial": {
+              "logicalSize": 496,
+              "composition": "transparent: the sphere's own silhouette is the limb",
+              "surfaceReplacement": false,
+              "runtimeAlphaProcessing": false
+            },
+            "lighting": false,
+            "shadows": false,
+            "runtimeLighting": false
           }
         }
       }
@@ -96,7 +117,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "6d2a85e0a3bab075d55396d48a2477c320f09314c6db65c497fa5770f66b9f26",
+      "sha256": "ae59ea6a59d45038debd7a571ef35993607a1bdaa0b6044836db7e9a6336e14c",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -161,22 +182,67 @@
         },
         "lenses": {
           "titleKey": "lenses",
-          "defaultLens": "shape",
+          "defaultLens": "temperature",
           "controls": [
             {
-              "id": "shape",
-              "label": "Shape",
-              "qualification": "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour.",
-              "thumbnail": "trappist-1c-lens-shape.webp",
-              "surface": "trappist-1c-surface-shape@2x.webp",
-              "poles": "trappist-1c-poles-shape@2x.webp",
+              "id": "temperature",
+              "label": "Rock model",
+              "qualification": "A model set by one measurement: the 15 µm eclipse depth this project measured in raw JWST MIRI visits, 2022–2023",
+              "thumbnail": "trappist-1c-lens-temperature.webp",
+              "surface": "trappist-1c-surface-temperature@2x.webp",
+              "poles": "trappist-1c-poles-temperature@2x.webp",
               "source": {
-                "id": "trappist-1c-observational-measurements",
+                "id": "trappist-1c-miri-dayside",
                 "path": "../manifest.json",
-                "url": "https://doi.org/10.3847/PSJ/abd022"
+                "url": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
               },
-              "falseColor": false,
-              "notes": "No image or colour of TRAPPIST-1c exists: it is known from the dips it makes in its star's light and from the way the seven planets pull on each other. The gray marks an unresolved surface; the lighting is TRAPPIST-1's, at the measured orbit."
+              "falseColor": true,
+              "legend": {
+                "kind": "scale",
+                "title": "Brightness temperature",
+                "labels": [
+                  "≤ 50",
+                  "325",
+                  "600"
+                ],
+                "recipe": {
+                  "palette": [
+                    [
+                      13,
+                      8,
+                      135
+                    ],
+                    [
+                      126,
+                      3,
+                      168
+                    ],
+                    [
+                      204,
+                      71,
+                      120
+                    ],
+                    [
+                      248,
+                      149,
+                      64
+                    ],
+                    [
+                      240,
+                      249,
+                      33
+                    ]
+                  ],
+                  "labels": [
+                    "≤ 50",
+                    "325",
+                    "600"
+                  ]
+                },
+                "meta": "K",
+                "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304"
+              },
+              "notes": "A model, not a map. Only c's dayside brightness is measured: an eclipse depth of 318 to 389 ppm at 15 µm. A bare rock with that depth is 392 to 421 K under the star and dark at night; whether c's night is dark is not measured, and a thin atmosphere would also fit."
             }
           ]
         },
@@ -219,22 +285,94 @@
   "sources": [
     {
       "kind": "source-input",
-      "id": "trappist-1c-observational-measurements",
-      "path": "measurements.json",
-      "origin": "https://doi.org/10.3847/PSJ/abd022",
-      "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
-      "license": "Factual numerical measurements; source attribution retained",
-      "acquisition": "Transcribed published measurements with their sources",
-      "redistribution": "Factual parameter transcription only; no paper figures",
+      "id": "trappist-1c-miri-dayside",
+      "path": "science/jwst-trappist-1/c-dayside-15um.json",
+      "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=2304",
+      "credit": "JWST programs 3077 (PI Gillon), 1177 and 2304; reduced and jointly fitted in this project with Eureka! 1.4 on Bell's settings (Gillon, Ducrot et al. 2025)",
+      "license": "JWST data are public; the derived depths are this project's measurement",
+      "acquisition": "Recorded from this project's joint fit of the ten visits (see the record's source); the per-shape fit outputs were not kept.",
+      "redistribution": "A two-number measurement record authored in this repository",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Measurements transcribed in this package with their sources; repinned when edited."
+        "reason": "Measurement record authored in this package from this project's own joint fit; repinned when edited."
       },
-      "sha256": "06061867de7770d343265b68f57d4a32b24fee979c780c892e068ebccd943ca1",
-      "bytes": 1490,
+      "sha256": "77278cfd1bfb3a191fcc0bca0b8436d21b28370a165b467c89411eda0b81ec48",
+      "bytes": 764,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "jwst-miri-f1500w-filter",
+      "path": "science/svo/JWST_MIRI.F1500W.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W",
+      "productId": "JWST/MIRI.F1500W",
+      "version": "SVO Filter Profile Service",
+      "title": "JWST MIRI F1500W filter response, electrons per photon",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/fps/index.php?id=JWST/MIRI.F1500W",
+      "credit": "Spanish Virtual Observatory Filter Profile Service (Rodrigo & Solano 2020); JWST MIRI filter data from STScI",
+      "displayCredit": "SVO Filter Profile Service",
+      "license": "Filter profiles served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/fps/index.php?mode=use"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO Filter Profile Service VOTable for JWST/MIRI.F1500W, unchanged; photon-counting detector (DetectorType 1), for the MIRI lens's temperature conversion.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO filter profile; the service has no catalogue record in this repository yet."
+      },
+      "sha256": "cabdc5d635e5515842e25d2fc26fda27c315c2c98d36e2729bb5a4c93109dca6",
+      "bytes": 77631,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/svo/JWST_MIRI.F1500W.xml",
+        "url": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W"
+      },
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "trappist-1-bt-settl-cifist-2600",
+      "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml",
+      "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=137",
+      "productId": "bt-settl-cifist fid 137",
+      "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
+      "title": "BT-Settl CIFIST model spectrum, Teff 2600 K, log g 5.0, [M/H] 0",
+      "sourceUrl": "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist",
+      "credit": "F. Allard, D. Homeier, B. Freytag (2012), BT-Settl CIFIST2011; Spanish Virtual Observatory Theoretical Spectra service",
+      "displayCredit": "BT-Settl · SVO",
+      "license": "Model spectra served openly by the SVO for research use with citation",
+      "licenseEvidence": [
+        "https://svo2.cab.inta-csic.es/theory/newov2/index.php?models=bt-settl-cifist"
+      ],
+      "acquisition": "Restored through source/preparation/acquisition.json from the SVO SSAP access reference for Teff 2600 K, log g 5.0, [M/H] 0, the grid point nearest TRAPPIST-1 (Agol et al. 2021: 2566 K, log g 5.24), for the MIRI lens's temperature conversion, unchanged VOTable.",
+      "redistribution": "Not redistributed in git; restored from the SVO.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Pinned SVO model spectrum; the service has no catalogue record in this repository yet."
+      },
+      "sha256": "a889b5ab4f06694e6d0e12ee9b382594b99e0bae864873b2d0d7daa08f17225f",
+      "bytes": 64359008,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": {
+        "kind": "download",
+        "groups": [
+          "restore",
+          "refresh"
+        ],
+        "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml",
+        "url": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=137"
+      },
       "verificationOperations": []
     },
     {
@@ -250,8 +388,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "6d2a85e0a3bab075d55396d48a2477c320f09314c6db65c497fa5770f66b9f26",
-      "bytes": 3811,
+      "sha256": "ae59ea6a59d45038debd7a571ef35993607a1bdaa0b6044836db7e9a6336e14c",
+      "bytes": 4836,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -260,275 +398,70 @@
   ],
   "products": [
     {
-      "id": "shape",
-      "label": "Shape",
+      "id": "temperature",
+      "label": "Rock model",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "observationAttribution": "source-lineage",
       "parents": [],
       "process": "Decode source map, apply the declared coverage/exposure policy, pack latitude bands, project poles and encode textures.",
       "limitations": [
-        "A sphere of the published radius, lit by TRAPPIST-1; the neutral gray is a display convention, not a measured colour."
+        "A model set by one measurement: the 15 µm eclipse depth this project measured in raw JWST MIRI visits, 2022–2023"
       ],
       "lensIds": [
-        "shape"
+        "temperature"
       ],
       "recipeDependencies": [
         "raster"
       ],
       "interpretation": {
-        "falseColor": false
+        "falseColor": true
       },
       "inputs": [
-        "trappist-1c-observational-measurements"
+        "trappist-1c-miri-dayside",
+        "jwst-miri-f1500w-filter",
+        "trappist-1-bt-settl-cifist-2600"
       ],
       "outputs": [
         {
-          "url": "/scenes/trappist-1c/trappist-1c-surface-shape@2x.webp",
-          "bytes": 178,
-          "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d",
+          "url": "/scenes/trappist-1c/trappist-1c-surface-temperature@2x.webp",
+          "bytes": 25130,
+          "sha256": "f14af9187d783950d30b2ba8a405983c54fd0e4d489225babcda5f6a2f6f171f",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/trappist-1c/trappist-1c-lens-shape.webp",
-          "bytes": 44,
-          "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634",
+          "url": "/scenes/trappist-1c/trappist-1c-lens-temperature.webp",
+          "bytes": 176,
+          "sha256": "c9fe21370b79ddf349cec1184b8bdfe1b08e14df9e37ade0aeb9cde759992187",
           "verification": "bytes-verified"
         },
         {
-          "url": "/scenes/trappist-1c/trappist-1c-poles-shape@2x.webp",
-          "bytes": 1340,
-          "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875",
+          "url": "/scenes/trappist-1c/trappist-1c-poles-temperature@2x.webp",
+          "bytes": 27468,
+          "sha256": "612c1ccdb10590ba13592277606709f5734cb8c084b25a57d12812237e2410de",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1c/trappist-1c-context-temperature@2x.webp",
+          "bytes": 100,
+          "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/trappist-1c/trappist-1c-limb-temperature@2x.webp",
+          "bytes": 84,
+          "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232",
           "verification": "bytes-verified"
         }
       ],
       "inputEvidence": [
         {
-          "sourceId": "trappist-1c-observational-measurements",
+          "sourceId": "trappist-1c-miri-dayside",
           "role": "appearance",
           "evidence": "Raster source at /surfaces/0/source."
         }
       ],
       "inputBasis": "bound-inputs"
-    },
-    {
-      "id": "lighting",
-      "label": "lighting",
-      "recipe": "raster",
-      "selector": "/lighting",
-      "observationAttribution": "source-lineage",
-      "parents": [],
-      "process": "Evaluate the declared surface-lighting model into phase banks.",
-      "limitations": [],
-      "lensIds": [],
-      "recipeDependencies": [
-        "raster"
-      ],
-      "interpretation": {
-        "kind": "rendering-model"
-      },
-      "inputs": [],
-      "outputs": [
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-billboard.webp",
-          "bytes": 115740,
-          "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-00.webp",
-          "bytes": 37672,
-          "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-01.webp",
-          "bytes": 70898,
-          "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-02.webp",
-          "bytes": 92030,
-          "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-03.webp",
-          "bytes": 106840,
-          "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-04.webp",
-          "bytes": 120584,
-          "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-05.webp",
-          "bytes": 132094,
-          "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-06.webp",
-          "bytes": 143228,
-          "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-07.webp",
-          "bytes": 153142,
-          "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-08.webp",
-          "bytes": 163984,
-          "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-09.webp",
-          "bytes": 172632,
-          "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-10.webp",
-          "bytes": 177128,
-          "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-11.webp",
-          "bytes": 179144,
-          "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-12.webp",
-          "bytes": 173518,
-          "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-13.webp",
-          "bytes": 161150,
-          "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-14.webp",
-          "bytes": 132038,
-          "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-15.webp",
-          "bytes": 69930,
-          "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-16.webp",
-          "bytes": 74522,
-          "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-17.webp",
-          "bytes": 143520,
-          "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-18.webp",
-          "bytes": 185628,
-          "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-19.webp",
-          "bytes": 218252,
-          "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-20.webp",
-          "bytes": 245184,
-          "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-21.webp",
-          "bytes": 269836,
-          "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-22.webp",
-          "bytes": 291326,
-          "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-23.webp",
-          "bytes": 312110,
-          "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-24.webp",
-          "bytes": 333302,
-          "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-25.webp",
-          "bytes": 355976,
-          "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-26.webp",
-          "bytes": 377782,
-          "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-27.webp",
-          "bytes": 403282,
-          "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-28.webp",
-          "bytes": 429004,
-          "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-29.webp",
-          "bytes": 456570,
-          "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-30.webp",
-          "bytes": 481914,
-          "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9",
-          "verification": "bytes-verified"
-        },
-        {
-          "url": "/scenes/trappist-1c/trappist-1c-lighting-2x-row-31.webp",
-          "bytes": 526556,
-          "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637",
-          "verification": "bytes-verified"
-        }
-      ],
-      "inputBasis": "authored-recipe"
     },
     {
       "id": "content",
@@ -557,8 +490,8 @@
       "inputBasis": "bound-inputs"
     },
     {
-      "id": "preview:shape",
-      "label": "Shape preview",
+      "id": "preview:temperature",
+      "label": "Rock model preview",
       "recipe": "raster",
       "selector": "/surfaces/0",
       "recipeDependencies": [
@@ -567,16 +500,16 @@
       "observationAttribution": "source-lineage",
       "inputs": [],
       "parents": [
-        "shape"
+        "temperature"
       ],
       "lensIds": [],
       "process": "Prepare a small surface preview from the same interpreted dataset.",
       "limitations": [],
       "outputs": [
         {
-          "url": "object:prepared/minimaps/shape.webp",
-          "bytes": 422,
-          "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62",
+          "url": "object:prepared/minimaps/temperature.webp",
+          "bytes": 3030,
+          "sha256": "7cc2d8bfa0a64ab0b0b8ea4974adc975c7af744dc0bf97e531b5ec8a1723b473",
           "verification": "bytes-verified"
         }
       ]
@@ -588,11 +521,11 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1c",
-    "materialSha256": "ada574f8f28460e370bece8368d07794262c97733f39141e0bf23f1810f59555",
+    "materialSha256": "d838be1b62b25f8d747f96f5a3ba05f39b68a71a5be67b3223c8356ced866249",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
-      "bindingsSha256": "d997f881cfdad4636bc0dc1776d06354cb4c0e411f4684c815271339855a41a9"
+      "bindingsSha256": "3760a8528904535854f4c40197302ee65761b790f24f10ca10915e3c4b146de6"
     }
   }
 }

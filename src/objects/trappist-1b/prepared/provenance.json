@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "e22666f2c41c29cee643e4d7c78ed376a62cefed3a3cf47e05e3b049a2586e2e"
+    "sha256": "6f2e2285ff76279a60e49f6c56a8ce785f85921e628b61dd3edfc16d27933413"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "8081c79ae4bea1b1dcc7be0ab3b7e66932952479299683106c08a821dd88b867",
+      "sha256": "974c7a41492c92ced72a3252652b7a05fcd208d8e849eda1e3d0284529ce467b",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/trappist-1b/",
@@ -57,6 +57,11 @@
               "units": "K",
               "planet": "trappist-1b",
               "host": "trappist-1",
+              "ephemeris": {
+                "transitTimeBmjdTdb": 60271.25431,
+                "periodDays": 1.5108699,
+                "source": "Linear ephemeris of these observations: the transit of b in this project's joint fit (60271.25436 BMJD, TRAPPIST-1's investigation ledger) and the centres of the five 2022 eclipses in this light curve, which it places within 1.3 minutes. The package orbit's 2015 osculating elements put these eclipses 2.0 to 2.4 hours early."
+              },
               "lightCurve": {
                 "encoding": "csv",
                 "time": "time",
@@ -128,7 +133,7 @@
                 "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml"
               },
               "minimum": 50,
-              "maximum": 550,
+              "maximum": 600,
               "colors": [
                 "#0d0887",
                 "#7e03a8",
@@ -138,10 +143,10 @@
               ],
               "labels": [
                 "≤ 50",
-                "300",
-                "550"
+                "325",
+                "600"
               ],
-              "description": "Temperature of a bare rock, with no atmosphere to carry heat, fitted in this project to ten JWST MIRI 15 µm visits it reduced from raw exposures: about 500 K under the star, falling to nothing at night. The data measure the day-to-night pattern; the rock model gives the shape.",
+              "description": "Temperature of a bare rock, with no atmosphere to carry heat, fitted in this project to ten JWST MIRI 15 µm visits it reduced from raw exposures: about 575 K under the star, falling to nothing at night. The data measure the day-to-night pattern; the rock model gives the shape.",
               "title": "JWST MIRI · bare rock fitted to our data",
               "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
             }
@@ -179,7 +184,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "48c12f4b952e6d50b3feebb6407724710effadcb0a6bf9e162abf16b54a903ae",
+      "sha256": "889d6dfae130faf7780a01722c3ef51fcfce130acddf4b6c54745ea1a342b57d",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -264,8 +269,8 @@
                 "title": "Brightness temperature",
                 "labels": [
                   "≤ 50",
-                  "300",
-                  "550"
+                  "325",
+                  "600"
                 ],
                 "recipe": {
                   "palette": [
@@ -297,14 +302,14 @@
                   ],
                   "labels": [
                     "≤ 50",
-                    "300",
-                    "550"
+                    "325",
+                    "600"
                   ]
                 },
                 "meta": "K",
                 "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
               },
-              "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 497 ± 12 K where the star is overhead, cooling toward the terminator and cold at night. It fits the ten visits better than a free smooth map. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
+              "notes": "A bare rock with no atmosphere to carry heat, fitted to the light curve: 575 ± 10 K where the star is overhead, the limit for a perfectly dark surface, cooling toward the terminator and cold at night. It fits the ten visits as well as a free smooth map, whose hot spot also sits under the star. The data measure the day-to-night pattern; the shape across the disc comes from the rock model."
             }
           ]
         },
@@ -457,8 +462,8 @@
       "credit": "cssEarth contributors",
       "acquisition": "Authored, pinned object-package document.",
       "upstreamLineage": "not-recorded",
-      "sha256": "48c12f4b952e6d50b3feebb6407724710effadcb0a6bf9e162abf16b54a903ae",
-      "bytes": 4833,
+      "sha256": "889d6dfae130faf7780a01722c3ef51fcfce130acddf4b6c54745ea1a342b57d",
+      "bytes": 4913,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -494,20 +499,20 @@
       "outputs": [
         {
           "url": "/scenes/trappist-1b/trappist-1b-surface-temperature@2x.webp",
-          "bytes": 27632,
-          "sha256": "5f3389943c11a43533921846c9546ba3924a8ee6816b27b567154788ae30f785",
+          "bytes": 28570,
+          "sha256": "d8df977a0a5bd688e4283d934546cd9d72aa29b6afb1e2c225265d9121e61588",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/trappist-1b/trappist-1b-lens-temperature.webp",
-          "bytes": 198,
-          "sha256": "b6341fea548ac727e336e10ead5af7791909c81dd91f06b1d423048f6603a3c0",
+          "bytes": 232,
+          "sha256": "9366919a36f77e0293be7194f33ac04a3264996365113d8dc24971794b79bf0c",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/trappist-1b/trappist-1b-poles-temperature@2x.webp",
-          "bytes": 29724,
-          "sha256": "fc300bf78f865d7ced517fcff30d4cebef9cda68a5617f40162a9e9b5b87e7db",
+          "bytes": 30956,
+          "sha256": "a7938583401b6660cd22b88796db845b81188c66cd9fb11085afc0b80eb7a00a",
           "verification": "bytes-verified"
         },
         {
@@ -577,8 +582,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/temperature.webp",
-          "bytes": 3436,
-          "sha256": "2a5b4b8978a5801e27c53781fb3d8447dd77d44f366b835bd829d5fa8f4a4309",
+          "bytes": 3604,
+          "sha256": "bea20aaf23f7233587c0484b3bf9c0744b16c06ec0e44eca44050d10816ab21d",
           "verification": "bytes-verified"
         }
       ]
@@ -590,7 +595,7 @@
   },
   "lastPreparation": {
     "objectId": "trappist-1b",
-    "materialSha256": "650a98d599c6e4202cfe92b95f0312fec1240c83fa21c4ffac98514b29453b77",
+    "materialSha256": "a2361544acf2ecdd9cede4d05a37c2396d7402c67a0c7c0fbcdcffe52acd9855",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
