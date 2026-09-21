@@ -1,0 +1,104 @@
+/* Kepler-186: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. Both plates are transparent: no observation is cast. */
+.planet-stage[data-object-id="kepler-186"] > :is(.polycss-camera, .kepler-186-corona-layer, .kepler-186-limb-layer) {
+  --kepler-186-scene-side-padding: 16px;
+  --kepler-186-reference-width: 1920px;
+  --kepler-186-reference-height: 1080px;
+  --kepler-186-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--kepler-186-scene-side-padding) - var(--kepler-186-scene-side-padding)) /
+        var(--kepler-186-reference-width)
+    ),
+    calc(100cqh / var(--kepler-186-reference-height))
+  );
+}
+
+/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.planet-stage[data-object-id="kepler-186"] > :is(.kepler-186-corona-layer, .kepler-186-limb-layer) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* Paint order: off-limb context behind the sphere, limb plate above it. */
+.planet-stage[data-object-id="kepler-186"] .kepler-186-corona-layer {
+  z-index: 0;
+}
+
+.planet-stage[data-object-id="kepler-186"] .polycss-camera {
+  z-index: 1;
+}
+
+.planet-stage[data-object-id="kepler-186"] .kepler-186-limb-layer {
+  z-index: 2;
+}
+
+.planet-stage[data-object-id="kepler-186"] .kepler-186-body {
+  transform-style: preserve-3d;
+}
+
+.planet-stage[data-object-id="kepler-186"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
+   hide their back faces. */
+.planet-stage[data-object-id="kepler-186"] .polycss-scene s:not(.kepler-186-polar) {
+  backface-visibility: visible;
+  background-image: var(--kepler-186-surface-image) !important;
+}
+
+.planet-stage[data-object-id="kepler-186"] .polycss-scene s.kepler-186-polar {
+  backface-visibility: hidden;
+  background-image: var(--kepler-186-poles-image) !important;
+}
+
+/* Off-limb context: 600 px = raster.json emission.offLimbSize, drawn at the disc's 496 px. */
+.planet-stage[data-object-id="kepler-186"] .kepler-186-corona-layer {
+  background-image: var(--kepler-186-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(600px * var(--kepler-186-camera-zoom, 1))
+    calc(600px * var(--kepler-186-camera-zoom, 1));
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+.planet-stage[data-object-id="kepler-186"] .kepler-186-limb-layer {
+  background-image: var(--kepler-186-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(496px * var(--kepler-186-camera-zoom, 1))
+    calc(496px * var(--kepler-186-camera-zoom, 1));
+}
+
+.planet-stage[data-object-id="kepler-186"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.planet-stage[data-object-id="kepler-186"] .polycss-scene {
+  will-change: transform;
+}
+
+.planet-stage[data-object-id="kepler-186"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
