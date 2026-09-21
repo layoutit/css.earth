@@ -78,7 +78,6 @@ export async function renderNativeFocus(shell: Document, stage: HTMLElement, url
   card.destroy(); root.hidden = false;
   const initial = shell.createElement('script'); initial.type = 'application/json'; initial.dataset.initialFocus = selected.id;
   initial.textContent = JSON.stringify(initialFocusCatalog(catalog, selected)).replace(/</gu, '\\u003c'); root.append(initial);
-  requiredElement<HTMLInputElement>(shell, '.planet-sidebar-search').setAttribute('value', selected.name);
   requiredElement(shell, '.planet-sheet-handle').setAttribute('checked', '');
   return saved;
 }

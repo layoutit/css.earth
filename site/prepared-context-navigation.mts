@@ -139,12 +139,16 @@ export function createPreparedContextNavigation({ layer, presentation, sources =
         const id = query.get('focus'), focus = id ? resolve(id) : null, state = lensState(id);
         const lensId = query.get('focusLens') ?? state?.defaultLens;
         const object = id ? layer.resolveGalaxy(id) : null;
+        const detailedObjectId = object && !isPreparedCluster(object) ? object.detailedObjectId : undefined;
+        const declaredVolume = detailedObjectId ? layer.volumeLensFrames?.[detailedObjectId] : undefined;
+        const selectableVolumeId = declaredVolume && detailedObjectId ? detailedObjectId
+          : state && !layer.imageLayerFrames?.[state.objectId] ? state.objectId : null;
         const unavailable = object && !isPreparedCluster(object) && object.detailedObjectId && unavailableObjectIds.includes(object.detailedObjectId);
-        if (id && !unavailable && lensId !== undefined && (!state || !state.lenses.some(lens => lens.id === lensId))) {
+        if (id && !unavailable && lensId !== undefined && state && !state.lenses.some(lens => lens.id === lensId)) {
           throw new TypeError(`Unknown prepared focus lens: ${lensId}`);
         }
         navigation.setPreparedFocus(focus);
-        if (state && lensId !== undefined && !layer.imageLayerFrames?.[state.objectId]) layer.selectVolumeLens(state.objectId, lensId);
+        if (!unavailable && lensId !== undefined && selectableVolumeId) layer.selectVolumeLens(selectableVolumeId, lensId);
         selected = id; layer.selectGalaxy(id); observeLens(id);
         publishContent(id);
         if (!id || (state && !query.has('focusLens'))) writeSelectionUrl(id);

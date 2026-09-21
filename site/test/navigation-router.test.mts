@@ -683,6 +683,32 @@ test('real input interruption preserves the last painted source view and flushes
   assert.deepEqual(h.errors, []); h.router.destroy();
 });
 
+test('input interrupting a same-owner selection keeps the new selection and drawn camera, not the departed prepared focus', async () => {
+  const context = catalogueContext();
+  const h = harness({
+    initialUrl: `https://example.test/mercury/?focus=catalogue:a&${formatSharedView(saved(10000))}`,
+    persistentWorldContext: context,
+    focus: async ({ mount }) => {
+      required(mount).value = saved(123456);
+      throw Object.assign(new Error('User took over the selection flight'), { name: 'AbortError', preserveView: true });
+    },
+  });
+  await h.router.settled;
+  assert.equal(required(h.mounts[0].navigation).preparedFocus()?.id, 'catalogue:a');
+  assert.equal(await h.router.navigate('mercury', { sceneSelection: true }), false);
+  assert.equal(h.windowTarget.location.pathname, '/mercury/');
+  assert.equal(h.windowTarget.location.searchParams.has('focus'), false);
+  assert.equal(h.windowTarget.location.searchParams.has('focusLens'), false);
+  assert.equal(h.windowTarget.location.searchParams.get('v'), new URLSearchParams(formatSharedView(saved(123456))).get('v'));
+  assert.equal(required(h.mounts[0].navigation).preparedFocus(), null);
+  assert.equal(h.shells[0].preparedFocus, null);
+  assert.equal(h.writes.filter(write => write === 'push').length, 1);
+  h.windowTarget.history.back(); await h.router.settled;
+  assert.equal(required(h.mounts[0].navigation).preparedFocus()?.id, 'catalogue:a', 'Back retains the departed focus as its own entry');
+  assert.deepEqual([...h.errors, ...context.errors], []);
+  h.router.destroy();
+});
+
 test('a missing destination asset preserves the painted view and permits a fresh selection retry', async () => {
   const failure = new Error('Prepared image did not decode: /scenes/venus/surface.webp.');
   let attempt = 0;
