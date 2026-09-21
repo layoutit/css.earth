@@ -1,0 +1,59 @@
+{
+  "id": "eso-eso0844a",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Omega Centauri: MPG/ESO 2.2-m WFI optical composite",
+  "identifiers": [
+    {
+      "type": "ESO image",
+      "value": "eso0844a"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.eso.org/public/images/eso0844a/",
+      "label": "Publisher image and instrument metadata"
+    },
+    {
+      "role": "original",
+      "url": "https://cdn.eso.org/images/original/eso0844a.tif",
+      "label": "Original publisher TIFF"
+    },
+    {
+      "role": "rights",
+      "url": "https://www.eso.org/public/outreach/copyright/",
+      "label": "ESO image use and full-credit terms"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://www.eso.org/public/images/eso0844a/",
+      "checkedOn": "2026-09-20",
+      "locator": "About the image, coordinates, filters, credit and original download"
+    }
+  ],
+  "publisher": "European Southern Observatory",
+  "publicationDate": "2008-12-02",
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESO",
+      "scope": "Published image and derived views",
+      "evidence": "https://www.eso.org/public/images/eso0844a/"
+    },
+    {
+      "kind": "rights",
+      "text": "ESO public images use CC BY 4.0 unless otherwise noted; retain the complete visible credit and do not imply endorsement.",
+      "scope": "Selected published image",
+      "evidence": "https://www.eso.org/public/outreach/copyright/"
+    },
+    {
+      "kind": "limitation",
+      "text": "Published B/V/I display composite. The publisher identifies two mosaic gaps filled with lower-quality Digitized Sky Survey data; those areas do not supply independent WFI star detections.",
+      "scope": "Scientific interpretation",
+      "evidence": "https://www.eso.org/public/images/eso0844a/"
+    }
+  ]
+}

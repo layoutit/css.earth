@@ -15,6 +15,13 @@ test('recipe defaults reach unsaved controls while explicit user choices win', (
   assert.deepEqual(compilerControlsForRecipe(readCompilerRecipe(source)), defaultCompilerControls);
 });
 
+test('photometric recipes cannot configure the hidden depth control away from their pinned prior', () => {
+  const photometricPriorRecipe = 'labs/nebula/models/example/photometric-mge.json';
+  assert.equal(compilerControlsForRecipe(readCompilerRecipe({ ...source, photometricPriorRecipe })).depth, 1);
+  assert.throws(() => readCompilerRecipe({ ...source, photometricPriorRecipe,
+    defaultControls: { detail: .9, faint: .15, depth: 1.2 } }), /require depth=1/);
+});
+
 test('named source weights follow source IDs and explicit diagnostic weights override', () => {
   const recipe = readCompilerRecipe({ ...source, sourceWeights: { optical: 1, infrared: .15 } });
   assert.deepEqual(compilerSourceWeights(recipe, ['infrared', 'optical', 'third']), [.15, 1, 1]);

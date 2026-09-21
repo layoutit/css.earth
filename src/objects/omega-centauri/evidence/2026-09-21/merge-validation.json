@@ -1,0 +1,263 @@
+{
+  "schema": "cssearth-omega-merge-evidence@1",
+  "parents": [
+    "bb7cab3c2e5be0b58a63e2cbeca33ca94a7b3b5a",
+    "3aebc31094dff8332755b394b88c708b7c3f1062"
+  ],
+  "testedState": "Uncommitted merge plus regenerated dependent asset inventories. Incoming main contains catalogue transport changes; shared native-focus and detailed-context owners are unchanged. Typing issues in seven inherited telescope source/test files are repaired without changing the application renderer. The exact repair evidence is linked separately.",
+  "recordedAt": "2026-09-20T22:10:59.269Z",
+  "checks": [
+    {
+      "command": "pnpm build",
+      "result": "passed",
+      "pages": 995
+    },
+    {
+      "command": "pnpm test:renderer",
+      "result": "passed",
+      "files": 84,
+      "tests": 594
+    },
+    {
+      "command": "node --experimental-test-module-mocks --import ./site/test/navigation-router-context.mts --test site/test/prepared-context-navigation.test.mts site/test/navigation-lifecycle.test.mts site/test/scene-session.test.mts site/test/navigation-router.test.mts site/test/router-runtime.test.mts site/test/catalogue-window.test.mts site/test/catalogue-fragment-loader.test.mts site/test/catalogue-fragment-pin.test.mts",
+      "result": "passed",
+      "tests": 104
+    },
+    {
+      "command": "node --test tools/prepare-volume-provenance.test.mts tools/setup-volume-metadata.test.mts tools/prepare-context-availability.test.mts tools/context-provenance.test.mts tools/nebula-provenance-contract.test.mts tools/object-package-consistency.test.mts",
+      "result": "passed",
+      "tests": 41
+    },
+    {
+      "command": "pnpm typecheck:shell; pnpm typecheck:renderer; pnpm check:typescript-ownership",
+      "result": "passed"
+    },
+    {
+      "command": "node tests/objects/browser/omega-centauri/native-focus-browser.mts http://127.0.0.1:4219 output/pr390-audit/ci-head-bb7cab3/native",
+      "result": "passed",
+      "receipt": "native-focus.json"
+    },
+    {
+      "command": "pnpm typecheck:tools",
+      "result": "passed"
+    },
+    {
+      "command": "pnpm typecheck:tests",
+      "result": "passed",
+      "files": 1758
+    },
+    {
+      "command": "Standard runtime publisher and independent cold/warm restoration",
+      "result": "passed",
+      "receipt": "dependent-r2-restore.json",
+      "files": 200,
+      "uploadedNewProvenanceKeys": 3
+    },
+    {
+      "result": "partial",
+      "claim": "Targeted inherited telescope typing repair behaviors",
+      "tests": 29,
+      "passed": 23,
+      "failed": 6,
+      "receipt": "telescope-types.json",
+      "environmentReceipt": "telescope-environment.json",
+      "limitation": "All six require the absent pinned astronomy decoder environment; four direct failures and two retained local-import validator refusals."
+    },
+    {
+      "result": "passed",
+      "claim": "Independent final merge/typing review",
+      "receipt": "independent-review.json"
+    }
+  ],
+  "reusedEvidence": {
+    "baseRevision": "bb7cab3c2e5be0b58a63e2cbeca33ca94a7b3b5a",
+    "pins": [
+      {
+        "path": "site/prepared-context-navigation.mts",
+        "bytes": 13264,
+        "sha256": "67286a0589f42d990d467d5c1e199661bc8b98b7102d152c527f34fc095e4a36"
+      },
+      {
+        "path": "src/objects/omega-centauri/investigations.json",
+        "bytes": 11844,
+        "sha256": "6733ae6b94b38f0eede05c2d4d5adf0b060cb3e25ee9266a70f7a07ba98103e7"
+      },
+      {
+        "path": "src/objects/omega-centauri/object.json",
+        "bytes": 1116,
+        "sha256": "7846b5714f0d3c55f547ab5207914ee7ec1494c82413b650a20a3f4b91242781"
+      },
+      {
+        "path": "src/objects/omega-centauri/prepared-assets.json",
+        "bytes": 10599,
+        "sha256": "a307635f2e3b99073e303b62fc7ec43ca731ea9c99a4d47df411c49e921c4fbd"
+      },
+      {
+        "path": "src/objects/omega-centauri/runtime-assets.json",
+        "bytes": 595,
+        "sha256": "e30940cfcec240029ada2ddd666379804e57d863087d97a7ad91be598cb0f5bf"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/bake-inputs.json.gz",
+        "bytes": 2277027,
+        "sha256": "869e9ab24b644c4ea7d04cf2d4e2c719445c205b879eaebf13a420c7d7d75eac"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/bake-inputs/references/01-compiler.json",
+        "bytes": 1361,
+        "sha256": "37c12a3be28a8dfbebb8931cd5f528673b63018c34aea8a4a07b23b26b6a1f3f"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/bake-inputs/references/02-photometric-mge.json",
+        "bytes": 2508,
+        "sha256": "4e28dac4271eeafd77f77582cfd69105ca02677e6bbe6c88e583f412c7b27914"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/bake-inputs/references/03-observation-structures.json",
+        "bytes": 397,
+        "sha256": "dc8dd69f0a7f1c15d8b6376e43147e3e2cd2c52ab802d7fc5651d23c28ae8c0e"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/bake-inputs/references/04-physical-evidence.json",
+        "bytes": 36711,
+        "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/bake-inputs/references/05-observations.json",
+        "bytes": 3842,
+        "sha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/delivery.json",
+        "bytes": 2436,
+        "sha256": "013ec10f387fb5b8ba47ba08412151abce621df4b48b748a68a795c579cbe2aa"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/manifest.json",
+        "bytes": 11285,
+        "sha256": "8048b39285f795d9a06bf824f00b241b7800edfc4f1e13253f750fca4571b569"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/nebula.json",
+        "bytes": 2633,
+        "sha256": "94257a65f14b1fb1fb74d6f893010928afead94b47cc3c4342399f14d332a991"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/presentation.json",
+        "bytes": 6278,
+        "sha256": "a3e6293031bf6c92c90fd14cc3c9f2329f8bbe7389c443ee6fe8c832d7740859"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/provenance-references.json",
+        "bytes": 1856,
+        "sha256": "9a749e5f63493aa373c47d09b1bfec5bd312c32b6896aafd0d51cb7a29e1d5d4"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/replay-references.json",
+        "bytes": 1302,
+        "sha256": "d289333b8061b55f07f97bad5bef7a515123cc2e5bf845dec0a50724ba6df358"
+      },
+      {
+        "path": "src/objects/omega-centauri/source/request.json",
+        "bytes": 365,
+        "sha256": "043c6218aedd90269ec68822cfa2d729d731b7995150c0e01af8b5c68127e241"
+      },
+      {
+        "path": "src/renderers/css/sky/prepared-sky-runtime.test.ts",
+        "bytes": 52229,
+        "sha256": "3652d5086c4422b64ee66347d6909617693f443e1c7e577452796d5d4a5805e1"
+      },
+      {
+        "path": "src/renderers/css/universe/detailed-focus-context.test.ts",
+        "bytes": 1302,
+        "sha256": "11a9abf0d929d27d84c698e3a1e9684778d65eafe7eb29b39a747e834b999beb"
+      },
+      {
+        "path": "src/renderers/css/universe/detailed-focus-context.ts",
+        "bytes": 873,
+        "sha256": "12a727775a8277fede7cd743642b960a30c10a7334f2e47186d97b6e8d5413f4"
+      },
+      {
+        "path": "src/renderers/css/universe/prepared-universe-runtime.ts",
+        "bytes": 48720,
+        "sha256": "fd0d735b8f44cd639e3c9cf5333a4f4fbef1a2c9dbbbf8d288cf59a4441dae2f"
+      },
+      {
+        "path": "src/renderers/css/dist/universe.js",
+        "bytes": 10185,
+        "sha256": "a4aa3371c6836dcb1df973ab5cadbf9c9bd5d3ebb2555e9e46aff31fc2b9c520"
+      },
+      {
+        "path": "src/objects/sun/prepared/world-context.json",
+        "bytes": 7536975,
+        "sha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242"
+      },
+      {
+        "path": "src/objects/omega-centauri/prepared/lenses.json",
+        "bytes": 1202415,
+        "sha256": "e2529a1cc053cc4f79620062d40d05dcf921968d83761289b79010b62655b813"
+      }
+    ],
+    "mismatches": []
+  },
+  "captureReuse": "Six app views and three-repeat performance measurements remain the 2026-09-20 bb7cab3 evidence. The 25 recorded model, context owner, world-context and runtime entrypoint pins still match. A fresh native browser check verifies the merged catalogue navigation; this is not a new desktop FPS measurement.",
+  "limitations": [
+    "Visual axis-handoff/side-view acceptance is still failed; no new bake or scientific acceptance.",
+    "Minimum zoom is unchanged at 0.05 framing radii.",
+    "The broad 399-test shell sweep and full Lab results remain historical 2026-09-20 runs, not reruns on this merge.",
+    "Six telescope native-decoder checks were not validated locally because the pinned Python environment is absent."
+  ],
+  "sourcePins": [
+    {
+      "path": "tools/prepare-volume-provenance.mts",
+      "bytes": 31380,
+      "sha256": "d923c49fa343ce93d64590dd10b4e40b1f843e306d5e7014144a587815f4518d"
+    },
+    {
+      "path": "site/planet-shell-client.mts",
+      "bytes": 81490,
+      "sha256": "3ad1ee46c0b086b4e901c16c6e45bd619372d2c2b73eada60c0d2498629f74b2"
+    },
+    {
+      "path": "site/catalogue-window.mts",
+      "bytes": 9261,
+      "sha256": "8cace8dfc4766a634a7130904ff55a36d07177f4fbc63e15c2f0f2bf7988e380"
+    },
+    {
+      "path": "site/components/PlanetCatalogueRows.astro",
+      "bytes": 1955,
+      "sha256": "6eb4e18b45723f290ecab5aa2d61ef6201df23fb466992482a91898ea7171c14"
+    },
+    {
+      "path": "site/object-catalog.mts",
+      "bytes": 4439,
+      "sha256": "69335874276d2243c948c9de72dc7346d0a26d250425bc84a1146fdf371d5509"
+    },
+    {
+      "path": "src/objects/m31/runtime-assets.json",
+      "bytes": 15070,
+      "sha256": "2bd4d877481fd744f0ea58a681ccc6f852ecf182ebeafa3a11d920acd1373b9a"
+    },
+    {
+      "path": "src/objects/m33/runtime-assets.json",
+      "bytes": 15713,
+      "sha256": "a5a109a5bb110fa7d16c48ecdbe42713414513a40d4418d86ef78f115025c9fa"
+    },
+    {
+      "path": "src/objects/nearby-universe/runtime-assets.json",
+      "bytes": 713,
+      "sha256": "d76eabec4d44fd1588021a6b4afdffe175b0ff31659efcc898b3f09e12483957"
+    },
+    {
+      "path": "src/objects/nearby-universe/object.json",
+      "bytes": 456,
+      "sha256": "61ea1293df390647595e3ac471ced4cdedcb17befba635cbc7b00e4be80bbbcf"
+    },
+    {
+      "path": "src/objects/nearby-universe/prepared/manifest.json",
+      "bytes": 355,
+      "sha256": "c4fbba552ace7d685a67116f1db52a8a323545e2678a8c7a74615de602a7fe63"
+    }
+  ],
+  "dependentAssets": "M31/M33 provenance changes only its compiler source identity; nearby points retain the previously observed 1454 numeric-only differences (maximum relative4.620e-13), with the incoming authored navigation-source provenance preserved. Three provenance keys were uploaded; the points key was already published."
+}

@@ -1,5 +1,8 @@
 name: Deploy
 
+# Deployment follows green main automatically; merging is not validation-only.
+# PR timing and publication/metadata rules: docs/ci-cd.md.
+
 on:
   workflow_dispatch:
     inputs:

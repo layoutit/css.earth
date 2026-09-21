@@ -2,6 +2,20 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { compilerSlabMaterial, alphaLimitedSlabMaterial, channelGainSlabMaterial, lensChannelGainMaterial, splitChannelGain, validateChannelGain } from '@cssearth/volume-core/materials/slab-material';
 
+test('explicit slab offsets and quadrature spacing govern chroma and alpha-limited color', () => {
+  const emission = (x: number, _y: number, _z: number, out: [number, number, number]) => out.fill(x < 0 ? .01 : .03);
+  const material = (_x: number, _y: number, _z: number, out: [number, number, number]) => { out[0] = 255; out[1] = out[2] = 0; return true; };
+  const visits: number[] = [], sample = compilerSlabMaterial(emission, (x, y, z, out) => { visits.push(x); return material(x, y, z, out); });
+  const out: [number, number, number] = [0, 0, 0];
+  const slab = { axis: 'x' as const, pitch: 100, samples: 2, sampleOffsets: [-.75, .25], sampleSpacing: .5 };
+  assert.ok(alphaLimitedSlabMaterial(sample, emission, 1, 24)(0, 0, 0, out, slab));
+  assert.deepEqual(visits, [-.75, .25]);
+  const trust = 255 * -Math.expm1(-.02) / 24;
+  assert.ok(Math.abs(out[1] - 255 * (1 - trust)) < 1e-10, 'Alpha uses the reference step, never mean pitch.');
+  assert.throws(() => sample(0, 0, 0, out, { ...slab, sampleOffsets: [0] }), /matching offsets/);
+  assert.throws(() => sample(0, 0, 0, out, { ...slab, sampleOffsets: [NaN, 0] }), /finite/);
+});
+
 test('thin displaced emission takes its own image color rather than the empty slice center', () => {
   const color: [number, number, number] = [0, 0, 0];
   const sample = compilerSlabMaterial((x, _y, _z, out) => { out[0] = out[1] = out[2] = x > .5 ? 2 : 0; },

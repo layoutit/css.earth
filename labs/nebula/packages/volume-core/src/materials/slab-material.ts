@@ -2,14 +2,34 @@ type Vector3 = [number, number, number];
 
 type Sample = (x: number, y: number, z: number, out: Vector3) => void;
 type MaterialSample = (x: number, y: number, z: number, out: Vector3) => boolean;
+export interface SlabMaterialSampling {
+  axis: 'x' | 'y' | 'z'; pitch: number; samples: number;
+  /** Reference-grid sample positions relative to the quad plane, in the caller's physical units. */
+  sampleOffsets?: readonly number[];
+  /** Reference quadrature step; required with sampleOffsets. */
+  sampleSpacing?: number;
+}
+function validateOffsets(slab: SlabMaterialSampling) {
+  if (slab.sampleOffsets === undefined && slab.sampleSpacing === undefined) return;
+  if (!slab.sampleOffsets || slab.sampleOffsets.length !== slab.samples || slab.samples < 1 || slab.samples > 4096 ||
+      !Number.isFinite(slab.sampleSpacing) || !(slab.sampleSpacing! > 0))
+    throw new TypeError('Explicit slab samples require matching offsets and a finite positive quadrature step.');
+}
+const sampleOffset = (slab: SlabMaterialSampling, i: number) => {
+  if (!slab.sampleOffsets) return slab.pitch * ((i + .5) / slab.samples - .5);
+  const offset = slab.sampleOffsets[i]!;
+  if (!Number.isFinite(offset)) throw new TypeError('Slab sample offsets must be finite.');
+  return offset;
+};
 /** Color follows the same emitting sub-samples as neutral alpha, not an empty slab midpoint. */
 export function compilerSlabMaterial(sampleEmission: Sample, sampleMaterial: MaterialSample) {
   const emission: Vector3 = [0, 0, 0], color: Vector3 = [0, 0, 0];
-  return (x: number, y: number, z: number, out: Vector3, slab: { axis: 'x' | 'y' | 'z'; pitch: number; samples: number }): boolean => {
+  return (x: number, y: number, z: number, out: Vector3, slab: SlabMaterialSampling): boolean => {
+    validateOffsets(slab);
     let weight = 0, covered = 0;
     out[0] = out[1] = out[2] = 0;
     for (let i = 0; i < slab.samples; i++) {
-      const offset = slab.pitch * ((i + .5) / slab.samples - .5);
+      const offset = sampleOffset(slab, i);
       const sx = x + (slab.axis === 'x' ? offset : 0), sy = y + (slab.axis === 'y' ? offset : 0), sz = z + (slab.axis === 'z' ? offset : 0);
       sampleEmission(sx, sy, sz, emission); const light = emission[0];
       if (!(light > 0)) continue;
@@ -40,12 +60,14 @@ export function alphaLimitedSlabMaterial(material: SlabMaterial, sampleEmission:
     throw new TypeError('Alpha-limited material requires positive exposure and a full-chroma alpha byte in 1..255.');
   const emission: Vector3 = [0, 0, 0];
   return (x, y, z, out, slab) => {
+    validateOffsets(slab);
     if (!material(x, y, z, out, slab)) return false;
     let integrated = 0;
     for (let i = 0; i < slab.samples; i++) {
-      const offset = slab.pitch * ((i + .5) / slab.samples - .5);
+      const offset = sampleOffset(slab, i);
       sampleEmission(x + (slab.axis === 'x' ? offset : 0), y + (slab.axis === 'y' ? offset : 0), z + (slab.axis === 'z' ? offset : 0), emission);
-      integrated += Math.max(0, emission[0]) * slab.pitch / slab.samples;
+      integrated += slab.sampleSpacing === undefined ? Math.max(0, emission[0]) * slab.pitch / slab.samples
+        : Math.max(0, emission[0]) * slab.sampleSpacing;
     }
     const trust = Math.min(1, 255 * -Math.expm1(-exposureGain * integrated) / fullChromaAlphaByte);
     for (let c = 0; c < 3; c++) out[c] = Math.min(255, Math.max(0, 255 - (255 - out[c]!) * trust));

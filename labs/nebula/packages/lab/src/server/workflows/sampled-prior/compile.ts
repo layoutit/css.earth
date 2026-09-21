@@ -23,6 +23,7 @@ import { registerComponentBanks } from './layout.ts';
 import { fitSampledEmission, type EmissionFitResult } from '@cssearth/nebula-reconstruction/methods/sampled/emission-fit';
 import { prepareSampledMaterial } from '@cssearth/volume-core/materials/sampled';
 import { fitSampledMaterialColors } from '@cssearth/nebula-reconstruction/methods/sampled/material-fit';
+import { maximumPlanningEmission } from '@cssearth/volume-bake/compact-inputs/sampled';
 
 /** Spectral appearances belong to the final scene, so its atlas must include their complete palette. */
 export async function prepareSampledSceneStars(root: string, outputDirectory: string,
@@ -169,6 +170,10 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     ...prepared.evidence, source: sampled.source, rawToArcsec: sampled.rawToArcsec, terms: sampled.terms, ejecta, wind, emissionFits })));
   const referenceFit = fitsBySource.get(reference.id);
   const neutralField = referenceFit ? prepared.field({ ejecta: referenceFit.receipt.ejectaGain, pwn: 1 }, 1, referenceFit.diffuse) : field;
+  const mixtureFields = new Map(sourceData.images.map(image => [image.id,
+    fitsBySource.get(image.id)?.field ?? prepared.field(sampled.lensComponents[image.id]!)]));
+  const samplePlanningEmission = maximumPlanningEmission([neutralField.sampleEmission,
+    ...sourceData.images.map(image => mixtureFields.get(image.id)!.sampleEmission)]);
   started = performance.now();
   // Independent radiative components share a frame, never an inferred photo extrusion.
   // Within one mixture the normal baker enforces exact shared alpha for its RGB materials.
@@ -178,6 +183,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     const group = groups.get(key) ?? []; group.push(image); groups.set(key, group);
   }
   const neutral = await bakeCompiler({ root, outputDirectory: `${directory}/scene-neutral`, id, fieldIdentity, boundsArcsec: field.bounds,
+    samplePlanningEmission,
     skyBoundsArcsec: skyBounds, sampleEmission: neutralField.sampleEmission, lenses: [{ id: 'neutral-material', label: 'Neutral components', sampleMaterial(_x, _y, _z, rgb) { rgb.fill(255); return true; } }],
     stars: stars.map(({ materials: _materials, ...star }) => star), signal,
     progress: p => progress(`Neutral components · ${p.message}`, .3 + .08 * sampledBakeProgress(p)) });
@@ -185,7 +191,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     fit?: ReturnType<typeof fitSampledMaterialColors>['receipt'] }[] = []; let groupIndex = 0;
   let referenceMaterial: ReturnType<typeof prepareSampledMaterial>['sampleMaterial'] | undefined;
   for (const images of groups.values()) {
-    const mixture = fitsBySource.get(images[0]!.id)?.field ?? prepared.field(sampled.lensComponents[images[0]!.id]!);
+    const mixture = mixtureFields.get(images[0]!.id)!;
     const materials = images.map(image => {
       progress(`Assigning ${image.label} colors to finite 3D emitters…`, .38 + .5 * groupIndex / groups.size);
       const fit = fitsBySource.get(image.id);
@@ -198,6 +204,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
       return { id: image.id, label: image.label, sampleMaterial: material.sampleMaterial };
     });
     const bank = await bakeCompiler({ root, outputDirectory: `${directory}/scene-${groupIndex}`, id, fieldIdentity,
+      sampling: neutral.sampling,
       boundsArcsec: field.bounds, skyBoundsArcsec: skyBounds, sampleEmission: mixture.sampleEmission,
       lenses: materials, signal,
       progress: p => progress(`${images.map(i => i.label).join(' / ')} · ${p.message}`, .4 + .5 * (groupIndex + sampledBakeProgress(p)) / groups.size) });

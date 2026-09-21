@@ -1,0 +1,38 @@
+{
+  "id": "412d070141ce5119bd773d7a1eec65f12f78fa36ced3f930aa4fc9491fa7bdca",
+  "errors": [],
+  "thresholds": {
+    "relativeLuminanceDifference": 0.05,
+    "normalizedL1": 0.04
+  },
+  "measurements": [
+    {
+      "pixelated": false,
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.007448274204638095,
+      "normalizedL1": 0.10579373570430688,
+      "passed": false
+    },
+    {
+      "pixelated": false,
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.0013473004012343357,
+      "normalizedL1": 0.09407192435762682,
+      "passed": false
+    },
+    {
+      "pixelated": true,
+      "seam": "xz",
+      "relativeLuminanceDifference": 0.0008566774711162329,
+      "normalizedL1": 0.09625850191616052,
+      "passed": false
+    },
+    {
+      "pixelated": true,
+      "seam": "yz",
+      "relativeLuminanceDifference": 0.00038089515411631034,
+      "normalizedL1": 0.08279774555926805,
+      "passed": false
+    }
+  ]
+}

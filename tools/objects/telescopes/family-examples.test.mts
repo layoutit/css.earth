@@ -6,7 +6,7 @@ import test from 'node:test';
 import {executableFamilyOperations} from './family-operation.mts';
 import {parseProductDescriptor} from './product-descriptor.mts';
 
-const root=resolve(import.meta.dirname,'../../..'),base=resolve(root,'tools/objects/telescopes/examples/family-examples');
+const root=resolve(import.meta.dirname,'../../..'),base=resolve(root,'tests/fixtures/telescope-family-examples');
 const assigned=['F01','F02','F03','F04','F05','F06','F07','F08','F09','F10','F11','F12','F13','F14','F15','F16','F17','F18'];
 const sha256=(bytes:Buffer)=>createHash('sha256').update(bytes).digest('hex');
 
@@ -30,6 +30,7 @@ test('checked family examples contain exactly one pinned representative per assi
     if(example.family==='F01')assert.equal(tokens[1],'export');
     else{
       assert.equal(tokens[1],'family-run');const descriptorPath=tokens[2],operationId=tokens[3],descriptor=parseProductDescriptor(JSON.parse(await readFile(resolve(root,descriptorPath),'utf8')));
+      if(descriptor.dataset.acquisition.identity.startsWith('../'))assert.equal((await stat(resolve(root,descriptorPath,'..',descriptor.dataset.acquisition.identity))).isFile(),true,`${example.family} acquisition identity`);
       assert.deepEqual(descriptor.dataset.families,[example.family]);assert.ok(executableFamilyOperations(descriptor).some(operation=>operation.id===operationId&&operation.available),`${example.family} ${operationId} executable`);
       for(const member of descriptor.members){const file=resolve(resolve(root,descriptorPath),'..',member.path),bytes=await readFile(file);assert.equal(bytes.length,member.bytes);assert.equal(sha256(bytes),member.sha256);}
       const params=tokens.indexOf('--params');if(params>=0){const value=JSON.parse(await readFile(resolve(root,tokens[params+1]!),'utf8'));assert.equal(value.operationId,operationId);}

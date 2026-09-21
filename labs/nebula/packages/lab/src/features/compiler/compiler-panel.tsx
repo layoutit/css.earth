@@ -50,6 +50,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   const controlsChosen = useRef(initialControls !== null);
   const [controls, setControls] = useState<CompilerControls>(initialControls ?? { ...defaultCompilerControls });
   const [fixedGeometry, setFixedGeometry] = useState<boolean | null>(null);
+  const [fixedDepth, setFixedDepth] = useState(false);
   const [configuredWeights, setConfiguredWeights] = useState<Record<string, number>>({});
   const [recipeError, setRecipeError] = useState('');
   const [presentation, setPresentation] = useState(() => savedPresentation(`${storageKey}:view`));
@@ -71,8 +72,11 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       }
       const sampled = Boolean(configured.value.sampledRecipe);
       setFixedGeometry(sampled);
+      const photometric = Boolean(configured.value.photometricPriorRecipe);
+      setFixedDepth(photometric);
       // Sampled geometry has no editable fit controls. Preserve saved fit controls for the standard operator.
       if (sampled || !controlsChosen.current) setControls(compilerControlsForRecipe(configured.value));
+      else if (photometric) setControls(previous => ({ ...previous, depth: 1 }));
       setConfiguredWeights(configured.value.sourceWeights ?? {});
       if (structures.status === 'fulfilled') setCatalogue(structures.value);
       if (manifest.status === 'fulfilled') setObservations(manifest.value);
@@ -176,8 +180,9 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
       title="Retain more prepared small-scale image structure in the inferred cloud." onChange={detail => updateControls({ ...controls, detail })} />
     <CompilerSlider id="compiler-faint" label="Faint emission" value={controls.faint} min={0} max={1} step={.05} display={`${Math.round(controls.faint * 100)}%`}
       title="Change the contribution of faint, less constrained emission." onChange={faint => updateControls({ ...controls, faint })} />
-    <CompilerSlider id="compiler-depth" label="Depth" value={controls.depth} min={.5} max={2} step={.05} display={`${controls.depth.toFixed(2)}×`}
-      title="Scale the inferred line-of-sight extent. This remains a model assumption." onChange={depth => updateControls({ ...controls, depth })} />
+    {!fixedDepth && <CompilerSlider id="compiler-depth" label="Depth" value={controls.depth} min={.5} max={2} step={.05} display={`${controls.depth.toFixed(2)}×`}
+      title="Scale the inferred line-of-sight extent. This remains a model assumption." onChange={depth => updateControls({ ...controls, depth })} />}
+    {fixedDepth && <p className="compiler-auto-note">Depth is an inferred realization of the published model.</p>}
     <p className="compiler-auto-note" title={sourceStatus || 'After the first completed compile, changes update automatically. Processing survives refresh.'}>{result ? 'Controls update automatically' : 'Prepared sources restored on compile'}</p>
     </>}
     {fixedGeometry && <p className="compiler-auto-note" title="Depth and component weights are fixed by the qualified model. Detail, faint-emission and depth refits are unavailable.">Fixed reconstructed geometry</p>}

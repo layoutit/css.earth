@@ -1,0 +1,7 @@
+{
+  "schema": "cssearth-observation-structure-recipe@1",
+  "observationRecipe": "labs/nebula/models/omega-centauri/observations.json",
+  "observationCatalogue": ".local/nebula-lab/observations/omega-centauri/observations.json",
+  "workingWidth": 768,
+  "wavelets": { "scales": 6, "significanceSigma": 2, "compactMaxScale": 1, "elongatedAxisRatio": 2.5, "minRegionPixels": 5, "connectivity": 8 }
+}

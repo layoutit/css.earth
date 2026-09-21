@@ -11,7 +11,7 @@ const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex
 test('the curated lab retains the selected LMC images, SMC comparisons and verified density banks', async () => {
   const ids = ['vista-infrared', 'horalek-widefield', 'wise-wide-infrared'];
   const subjects = await read('labs/nebula/packages/lab/src/state/subjects.json');
-  assert.deepEqual(subjects.map((subject: {id: string}) => subject.id), ['lmc-clouds', 'smc-particles', 'smc-vmc', 'smc-ellipsoid', 'smc-constrained', 'm2-9-inferred', 'helix-single-axis', 'helix-model-prior', 'm42', 'm8', 'carina', 'ngc6357', 'm78', 'horsehead', 'm45', 'm1']);
+  assert.deepEqual(subjects.map((subject: {id: string}) => subject.id), ['lmc-clouds', 'smc-particles', 'smc-vmc', 'smc-ellipsoid', 'smc-constrained', 'm2-9-inferred', 'helix-single-axis', 'helix-model-prior', 'm42', 'm8', 'carina', 'ngc6357', 'm78', 'horsehead', 'm45', 'omega-centauri', 'm1']);
   const experiment = subjects.find((subject: {id: string}) => subject.id === 'm2-9-inferred');
   assert.equal(experiment.density, undefined, 'An inferred-emission experiment must not masquerade as an independent density prior.');
   assert.equal(experiment.directory, experiment.emissionExperiment.directory);

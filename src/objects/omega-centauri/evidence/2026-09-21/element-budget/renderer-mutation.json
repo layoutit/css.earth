@@ -1,0 +1,14 @@
+{
+  "mutation": "add one retained DOM leaf per slab in isolated renderer copy",
+  "rendererTestsPassed": 14,
+  "baselinePassed": 2,
+  "mutationExit": 1,
+  "failedBudgetCases": 2,
+  "actualAssertions": [
+    "expected604leaves to be453",
+    "expected600leaves to be450"
+  ],
+  "sharedRendererUnchanged": true,
+  "rendererSourceSha256": "0612a2aa83bb116a133c9c0178e685f741d038fb8e6f6e599470c9ad7f70fd48",
+  "testSha256": "1890c38e736381678d411c69a111bc628d6f06c008cd72786e1cca656543e759"
+}

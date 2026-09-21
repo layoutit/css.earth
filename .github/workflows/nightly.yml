@@ -4,6 +4,7 @@ name: Nightly asset sweep
 # merge-required checks. Exhaustive sweeps stay scheduled/manual. The production
 # build/browser probe below is separate, change-selected qualification; do not
 # make it merge-required without bringing it inside that same total budget.
+# Maintenance rules and failure recovery: docs/ci-cd.md.
 
 on:
   schedule:

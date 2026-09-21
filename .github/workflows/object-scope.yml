@@ -3,6 +3,7 @@ name: Object-scope gate
 # Part of the shared PR feedback budget: target 2 minutes, maximum 3 minutes
 # end to end across all merge-required checks, including queue/setup time.
 # Keep this gate lightweight; timeout-minutes is a safety limit, not the budget.
+# Maintenance rules and failure recovery: docs/ci-cd.md.
 
 on:
   pull_request:

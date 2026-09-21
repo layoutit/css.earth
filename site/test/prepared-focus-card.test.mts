@@ -119,6 +119,20 @@ test('a nebula focus displays its actual classification and preserves the shared
   f.card.destroy();
 });
 
+test('a globular-cluster focus keeps its stellar classification and the shared lens controls', () => {
+  const f = fixture();
+  const { membership: _membership, ...common } = f.record;
+  f.card.set({ ...common, kind: 'globular-cluster', detailedObjectId: 'prepared-galaxy',
+    classification: { name: 'Globular cluster', basis: 'Integrated stellar light.', sourceRef: 'observations' } }, [], f.presentation);
+  assert.equal(f.root.querySelector('[data-focus-status]')?.textContent, 'Globular cluster');
+  assert.equal(f.root.querySelector('[data-focus-membership]')?.textContent, 'Milky Way');
+  assert.equal(f.root.querySelector('[data-focus-association]')?.textContent, 'Galactic globular cluster');
+  assert.match(f.root.querySelector('[data-focus-basis]')?.textContent ?? '', /Integrated stellar light/);
+  assert.equal(f.bank.hidden, false);
+  assert.equal(f.datasetTab.hidden, false);
+  f.card.destroy();
+});
+
 test('focus uses shared dataset tabs only when a prepared presentation is available', () => {
   const f = fixture();
   f.card.set(f.record);
