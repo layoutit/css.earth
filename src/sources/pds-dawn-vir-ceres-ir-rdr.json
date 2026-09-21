@@ -1,0 +1,33 @@
+{
+  "id": "pds-dawn-vir-ceres-ir-rdr",
+  "kind": "data-product",
+  "identityLevel": "release",
+  "title": "Dawn VIR calibrated infrared spectra of Ceres",
+  "version": "1.0",
+  "identifiers": [
+    {
+      "type": "PDS3 data set",
+      "value": "DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0"
+    }
+  ],
+  "creators": [
+    "M. C. De Sanctis"
+  ],
+  "publisher": "NASA Planetary Data System, Small Bodies Node",
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/",
+      "label": "Dawn VIR volumes DWNCSVIR_I1B and DWNCHVIR_I1B"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCHVIR_I1B/INDEX/INDEX.TAB",
+      "checkedOn": "2026-09-21",
+      "locator": "DATA_SET_ID column and the cube list"
+    }
+  ],
+  "relations": [],
+  "statements": []
+}
