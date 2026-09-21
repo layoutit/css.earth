@@ -1,0 +1,36 @@
+{
+  "id": "arxiv-1805-00830",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1805.00830"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1805.00830",
+      "label": "Sarkis et al. 2018"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/k2-18/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "cf9f45edc49a8aaefe4b69a03d5b961ceb193b11913cb1367090d13b413e8dbe",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "P. Sarkis, Th. Henning, M. Kürster et al.",
+      "scope": "citation",
+      "evidence": "src/objects/k2-18/text.json#/introduction/sources/0"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "simbad-k2-18",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for K2-18 (K2-18)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=K2-18",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/k2-18/text.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "cf9f45edc49a8aaefe4b69a03d5b961ceb193b11913cb1367090d13b413e8dbe",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/k2-18/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}
