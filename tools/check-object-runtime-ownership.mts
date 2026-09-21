@@ -564,22 +564,6 @@ function requireContextObjectModuleSource(source: string, contexts: readonly { i
   }
 }
 
-/** The main thread's summary is exactly the full context with each orbit reduced
- * to its parent, bounds and size, and without the build-time classification views. */
-function requireContextSummary(value: unknown, full: unknown) {
-  requireContextFrame(full, 'sun');
-  const context = requireRecord(full), bodies = requireArray(context.bodies).map(body => requireRecord(body));
-  const { classificationViews: _views, ...rest } = context;
-  const expected = { ...rest, schema: 'cssearth-world-context-summary@1', bodies: bodies.map(body => {
-    if (body.orbit === undefined) return body;
-    const orbit = requireRecord(body.orbit), verticesM = requireArray(orbit.verticesM), trail = requireArray(orbit.trail), lod = requireRecord(orbit.lod);
-    return { ...body, orbit: { centerBodyId: orbit.centerBodyId, centerPositionM: orbit.centerPositionM, vertexCount: verticesM.length,
-      fullTrail: trail.every(weight => weight === 1), bounds: orbit.bounds, lod: { bounds: lod.bounds },
-      ...(orbit.closed === false ? { closed: false, displayExtentAu: orbit.displayExtentAu } : {}) } };
-  }) };
-  if (JSON.stringify(value) !== JSON.stringify(expected)) throw new TypeError('Prepared context frame is invalid: the summary is not the full context reduced.');
-}
-
 function requireContextFrame(value: unknown, objectId: string) {
   function fail(message: string): never { throw new TypeError(`Prepared context frame is invalid: ${message}.`); }
   const vector = (value: unknown): value is number[] => isArray(value) && value.length === 3 && value.every(item => typeof item === 'number' && Number.isFinite(item));
@@ -588,7 +572,9 @@ function requireContextFrame(value: unknown, objectId: string) {
   const identity = (value: unknown): value is string => typeof value === 'string' && /^[a-z][a-z0-9-]*$/.test(value);
   if (!isRecord(value)) fail('context is not an object');
   const context = value, frame = context.frame, focus = context.focus, camera = context.camera, stars = context.stars;
-  if (context.schema !== 'cssearth-world-context@1' || !isRecord(frame) || !isRecord(focus) || !isRecord(camera) || !isRecord(stars) || focus.id !== objectId ||
+  // The summary is the main thread's copy: the same bodies and frame, orbits without paths.
+  const summary = context.schema === 'cssearth-world-context-summary@1';
+  if ((!summary && context.schema !== 'cssearth-world-context@1') || !isRecord(frame) || !isRecord(focus) || !isRecord(camera) || !isRecord(stars) || focus.id !== objectId ||
       !vector(frame.originM) || !vector(focus.positionM) || !sameVector(frame.originM, focus.positionM) ||
       !positive(frame.bodyRadiusM) || focus.radiusM !== frame.bodyRadiusM || !positive(frame.metersPerUnit) ||
       !positive(camera.minimumDistanceM) || !positive(camera.maximumDistanceM) || camera.maximumDistanceM <= camera.minimumDistanceM) fail('focus, physical frame, or camera range disagree');
@@ -618,6 +604,13 @@ function requireContextFrame(value: unknown, objectId: string) {
     if (body.orbit === undefined) continue;
     const orbit = requireRecord(body.orbit), parent = points.get(requireString(orbit.centerBodyId));
     const open = orbit.closed === false;
+    if (summary) {
+      if (!parent || parent.id === body.id || !vector(orbit.centerPositionM) || !orbit.centerPositionM.every((value, axis) => value === parent.positionM[axis]) ||
+          typeof orbit.vertexCount !== 'number' || !Number.isSafeInteger(orbit.vertexCount) || orbit.vertexCount < 8 || typeof orbit.fullTrail !== 'boolean' ||
+          ['verticesM', 'trail', 'activeChords', 'extentChords', 'bodyVertexIndex', 'trailModel'].some(key => orbit[key] !== undefined) ||
+          (open ? !positive(orbit.displayExtentAu) : orbit.closed !== undefined || orbit.displayExtentAu !== undefined)) fail('body orbit summary is invalid');
+      continue;
+    }
     const bodyVertexIndex = open ? orbit.bodyVertexIndex : 0;
     if (open) {
       if (!positive(orbit.displayExtentAu) || orbit.trailModel !== 'finite-open-trajectory-constant-weight' ||
@@ -723,11 +716,10 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
     }
     if (approvedSharedData.has(file)) {
       const read = async (file: string): Promise<unknown> => {
-        try { return JSON.parse(await source(resolve(root, file))); }
+        try { return JSON.parse(await source(path)); }
         catch { throw new TypeError(`Prepared context frame is invalid: ${file} cannot be read.`); }
       };
-      if (file.endsWith('-summary.json')) requireContextSummary(await read(file), await read(file.replace(/-summary\.json$/, '.json')));
-      else requireContextFrame(await read(file), 'sun');
+      requireContextFrame(await read(file), 'sun');
       return;
     }
     if (file.startsWith("../") || objectPackage(file)) {
