@@ -69,18 +69,19 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1168px * var(--betelgeuse-camera-zoom, 1))
-    calc(1168px * var(--betelgeuse-camera-zoom, 1));
+    calc(1168px * 1.25 * var(--betelgeuse-camera-zoom, 1))
+    calc(1168px * 1.25 * var(--betelgeuse-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
 .planet-stage[data-object-id="betelgeuse"] .betelgeuse-limb-layer {
   background-image: var(--betelgeuse-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--betelgeuse-camera-zoom, 1))
-    calc(496px * var(--betelgeuse-camera-zoom, 1));
+    calc(496px * 1.25 * var(--betelgeuse-camera-zoom, 1))
+    calc(496px * 1.25 * var(--betelgeuse-camera-zoom, 1));
 }
 
 .planet-stage[data-object-id="betelgeuse"] .polycss-camera {

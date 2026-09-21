@@ -21,14 +21,35 @@
   },
   "surfaces": [
     {
-      "id": "shape",
+      "id": "color",
       "output": "vega-surface-{id}{suffix}.webp",
       "thumbnail": "vega-lens-{id}.webp",
-      "source": "measurements.json",
+      "source": "photometry/stellar-color.json",
       "falseColor": false,
       "science": {
-        "kind": "neutral-shape",
-        "qualification": "Shared neutral gray display convention for a photosphere with no image in this package; a sphere of the published radius, self-luminous, so no lighting."
+        "kind": "stellar-photometric-color",
+        "colorMatching": "reference/CIE_xyz_1931_2deg.csv",
+        "qualification": "Uniform photosphere colour from the star's HST/STIS spectrum (CALSPEC). The surface is darkened by latitude from the published Roche-von Zeipel fit of Monnier et al. (2012), ApJL 761, L3: the hot poles brighter and bluer, the cool equator dimmer and redder. The disc is unresolved: it is darkened toward the limb by the quadratic V-band law Claret & Bloemen (2011) compute from ATLAS model atmospheres at the star's temperature and gravity, a model rather than a measurement; no map or absolute brightness is implied. Self-luminous, so no lighting.",
+        "limbDarkening": {
+          "law": "quadratic",
+          "path": "photometry/claret-2011-v-quadratic.tsv",
+          "grid": {
+            "teffK": 9360,
+            "logg": 3.93,
+            "models": {
+              "Filt": "V",
+              "Met": "L",
+              "Mod": "A"
+            }
+          },
+          "columns": {
+            "teff": "Teff",
+            "logg": "logg",
+            "u1": "a",
+            "u2": "b"
+          }
+        },
+        "gravityDarkening": "photometry/gravity-darkening.json"
       }
     }
   ],

@@ -4,8 +4,8 @@
     {
       "id": "k2-18-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1174,
-      "expectedSha256": "46492526431b50bafa517a16cfb20a8e3e94d9511b9c30df8ad54c124614072e",
+      "expectedBytes": 1546,
+      "expectedSha256": "273d5db1b6e0a1df96e2d1d62ad4d09aa70733f7805cc839845b7a7ef4c14cbc",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "k2-18-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1920,
-      "expectedSha256": "d16b3c57a8e00dab7720c52192f396cb961a3af18dd0b097a20b24f0056882ac",
+      "expectedBytes": 2670,
+      "expectedSha256": "ff654210e1ef4279f653a407267d35f6ea8f4f64499ffe51e9e7415fb6e92fa0",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "k2-18-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1676,
-      "expectedSha256": "75cf072944b05b4833945e77d22fc62f5c04adae6740bcf2f37a1540284bb2ae",
+      "expectedSha256": "a8b176d770122a73e30edfb1a7dc8ca9d938831621e2186b25ebbcf4e9a6387b",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,184 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "k2-18-lamost-dr11",
+      "path": "photometry/spec-227610116-dr11v2.fits.gz",
+      "expectedBytes": 45850,
+      "expectedSha256": "1a2be3b468bf9b3d81fbc40896fd107fd3c423ba01a6a21a9e00aa9bf143e3bc",
+      "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/227610116",
+      "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
+      "license": "LAMOST public data release: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.lamost.org/dr11/v2.0/"
+      ],
+      "acquisition": "Archive file downloaded unchanged on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum, unchanged, with acknowledgement",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lamost-dr11-227610116",
+            "role": "material",
+            "evidence": "src/objects/k2-18/source/photometry/spec-227610116-dr11v2.fits.gz"
+          }
+        ]
+      }
+    },
+    {
+      "id": "k2-18-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1399,
+      "expectedSha256": "d59c4e1eaa04798c6dc3f71111856f2c56b69ea2198e39b8d1bb839fccf711f4",
+      "origin": "https://www.lamost.org/dr11/v2.0/",
+      "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197; CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lamost-dr11-227610116",
+            "role": "material",
+            "evidence": "src/objects/k2-18/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "k2-18-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "k2-18-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "c7f80a7818b5feda7476a71146d0063874f857149024cc5a876a334237ec7f93",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/k2-18/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "k2-18-crosscheck-spectrum",
+      "path": "photometry/crosscheck-lamost-400516214.fits.gz",
+      "expectedBytes": 42847,
+      "expectedSha256": "c1c164f23474464c6709d1168aaa17f8d5ec23e1b921c10462cce4ba81e5c029",
+      "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/400516214",
+      "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
+      "license": "LAMOST public data release: free use with acknowledgement",
+      "licenseEvidence": [
+        "https://www.lamost.org/dr11/v2.0/"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "lamost-dr11-400516214",
+            "role": "material",
+            "evidence": "src/objects/k2-18/source/photometry/crosscheck-lamost-400516214.fits.gz"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/1805.00830",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 49802,
+      "expectedSha256": "122eee080f3061577b5e25d8e00673d0d184e24d49586b0434e7d8aebe62b302",
+      "origin": "https://www.lamost.org/dr11/v2.0/",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "k2-18-observational-measurements"
+          "k2-18-stellar-color",
+          "k2-18-lamost-dr11",
+          "k2-18-cie-1931-2deg-cmf",
+          "k2-18-preparation-raster",
+          "k2-18-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2951,
-      "expectedSha256": "d0acbce6844c145bac0bc5fe1aac15c3a467dec5ab150d70703d76f3c124fd16",
+      "expectedBytes": 3112,
+      "expectedSha256": "433ee62175aad14fbccb7d209c4095985c84c19e528fd1aec348477ea2ffda30",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 1627,
+      "expectedSha256": "799c7942e8a42575e5f113190a14a73df4dd5a9397c0ab45abe97dacce3e02d6"
     },
     {
       "path": "preparation/navigation.json",
@@ -205,7 +351,7 @@
       "expectedSha256": "26d03b850a0974cefd18f1caf07ab408ab9b784e635adb8c2aa955634dcc1707",
       "sourceBinding": {
         "kind": "local",
-        "reason": "Evidence capture of the system view in the app, committed with the package in 38da64e3fb; the capture's settings were not recorded."
+        "reason": "Evidence capture of the opened planetary system, cited by the README; declared now that the reference folder holds a pinned input."
       }
     }
   ]

@@ -7,6 +7,8 @@
   "distanceSource": "Inverse of the Gaia EDR3 parallax 768.0665 ± 0.0499 mas via SIMBAD",
   "radiusKm": 98094,
   "radiusSource": "Radius: Radius 0.141 ± 0.007 solar radii measured with VLTI/AMBER by Demory et al. (2009), A&A 505, 205. Kervella, Thévenin and Lovis (2017) give 0.1542 ± 0.0045 from a radius to magnitude relation; the interferometric value is adopted. Adopted 98,094 km, 0.1410 solar radii at 695700 km per solar radius. No gravitational parameter is adopted. presentationUp: the display axis (celestial north at the star) is up; no spin axis is adopted.",
+  "effectiveTemperatureK": 3098,
+  "effectiveTemperatureSource": "Effective temperature 3098 ± 56 K from Demory et al. 2009 (A&A 505, 205; https://doi.org/10.1051/0004-6361/200911976), Table 4, GJ 551, derived Teff: the VLTI/AMBER diameter with surface-brightness relations.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "qualification": "A sphere at the published radius in the shared neutral gray; no picture of the photosphere is cast."

@@ -1,0 +1,47 @@
+{
+  "schema": "cssearth-stellar-photometric-color@1",
+  "objectId": "alpha-centauri-b",
+  "spectrum": "measured",
+  "measuredSpectrum": {
+    "source": "Kiehling (1987), spectrophotometry of 60 bright F, G, K and M stars, 320-880 nm in 1 nm steps as normalised magnitudes: Kiehling (1987), A&AS 69, 465; VizieR III/124. Alpha Centauri B is HR 5460.",
+    "path": "photometry/kiehling-1987.tsv",
+    "service": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+    "checked": "2026-09-21",
+    "format": "tsv-columns",
+    "wavelength": {
+      "column": "lambda",
+      "unit": "nm"
+    },
+    "flux": {
+      "column": "m(HR5460)",
+      "kind": "magnitude",
+      "missing": 99.999
+    },
+    "gaps": [],
+    "note": "Ground-based photoelectric spectrophotometry, published as magnitudes normalised to the star's own flux near 555 nm; read here as flux 10^(-0.4 m). The calibration is relative, which is all a colour needs. The catalogue gives no observation dates."
+  },
+  "whitePoint": "sRGB D65",
+  "normalization": "brightest linear sRGB channel = 1",
+  "crossCheck": {
+    "source": "Pulkovo spectrophotometric catalogue, table 6, HR 5460 (320-735 nm)",
+    "spectrum": {
+      "path": "photometry/crosscheck-table6.dat",
+      "format": "pulkovo-blocks",
+      "wavelength": {
+        "column": "lambda",
+        "unit": "nm"
+      },
+      "flux": {
+        "column": "5460",
+        "kind": "flux"
+      },
+      "gaps": [
+        {
+          "fromNm": 735,
+          "toNm": 780,
+          "reason": "table 6 ends at 735 nm; the last value is held to 780 nm"
+        }
+      ]
+    }
+  }
+}

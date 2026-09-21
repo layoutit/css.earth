@@ -7,6 +7,8 @@
   "distanceSource": "Gaia DR3 parallax 1.5207 +/- 0.2661 mas (Gaia Collaboration 2020, yCat I/350, via SIMBAD): 658 pc. Montargès et al. (2018) adopt the Hipparcos 1.82 +/- 0.26 mas (549 pc), which gives 587-593 solar radii.",
   "radiusKm": 500725430,
   "radiusSource": "The December limb-darkened diameter at the Gaia distance: 10.18 mas at 657.6 pc is 500,725,430 km, 720 solar radii at 695700 km; at the Hipparcos distance the same diameter is 601 solar radii.",
+  "effectiveTemperatureK": 3801,
+  "effectiveTemperatureSource": "Effective temperature 3801 ± 134 K from Montargès et al. 2018 (A&A 614, A12; https://doi.org/10.1051/0004-6361/201731471), Section 4.1: the PIONIER limb-darkened diameter of December 2016, the epoch of the package's diameter, with the bolometric flux. The paper gives 3820 ± 135 K for November 2016.",
   "shape": {
     "kind": "uniform-disc-sphere",
     "path": "shape/uniform-disc.tab",

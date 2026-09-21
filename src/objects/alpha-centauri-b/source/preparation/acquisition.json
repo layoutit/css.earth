@@ -9,6 +9,80 @@
       ],
       "path": "presentation/InterVariable.ttf",
       "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "III/124/spectra",
+        "-out": "lambda,m(HR5460)",
+        "-out.max": "1000"
+      },
+      "requiredText": [
+        "m(HR5460)"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ],
+      "path": "photometry/kiehling-1987.tsv"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/529/A75/table-af",
+        "-out.max": "500",
+        "Teff": "4750..5500",
+        "logg": "4.5..5.0",
+        "Z": "=0",
+        "xi": "=2",
+        "Filt": "V",
+        "Met": "L",
+        "Mod": "A",
+        "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-table6.dat",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/III/201/table6.dat"
     }
   ]
 }

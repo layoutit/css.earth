@@ -58,18 +58,24 @@
     {
       "id": "other-epochs",
       "subject": "December 2018 and December 2020 MATISSE epochs; PIONIER 2014, GRAVITY 2019-2023, AMBER 2006-2018, ALMA 2015 and 2023",
-      "status": "deferred",
-      "finding": "The OiDB holds calibrated Betelgeuse data only for February 2020. The ESO archive holds thousands of raw VLTI science frames of Betelgeuse across PIONIER, GRAVITY, MATISSE and AMBER, and ALMA holds six public projects, screened on 2026-09-18, but each needs its public pipeline run before any reconstruction. The photosphere changes within months, so those would be further epochs, not more coverage of this one.",
-      "revisitWhen": "A calibrated OIFITS release of another epoch, or a pipeline run of the raw frames that is itself pinned and checked.",
+      "status": "unresolved",
+      "finding": "The JMMC OiDB holds calibrated (level 3) MATISSE data of Betelgeuse for two more epochs, found by a TAP query on 2026-09-21: 2-15 December 2018 (about 200 files, PI Drevon, several station sets; some night-1 files are calibrator products or noChop) and 14-27 December 2020 (98 files). Drevon et al. (2024, MNRAS 527, L88) image all three epochs, so each has an author image to compare against, and the February 2020 recipe (image-star.mts --calibrated) should apply unchanged. The earlier statement that the OiDB held calibrated data only for February 2020 was wrong. The ESO archive also holds raw PIONIER, GRAVITY and AMBER frames and ALMA six public projects, which each need their pipeline run first.",
+      "revisitWhen": "Reconstruct the December 2018 and December 2020 MATISSE epochs with the February 2020 recipe and compare them with Drevon et al. (2024).",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/c4bf87a07d4159a8ef06278b02f567c5782215a6/src/objects/betelgeuse/README.md",
         "https://archive.eso.org/",
-        "https://almascience.org/"
+        "https://almascience.org/",
+        "http://oidb.jmmc.fr/",
+        "https://arxiv.org/abs/2401.12404"
       ],
       "checked": [
         {
           "date": "2026-09-16",
           "commit": "c4bf87a07d4159a8ef06278b02f567c5782215a6"
+        },
+        {
+          "date": "2026-09-21",
+          "commit": "cf0e44e4cf7c565d8144e290a7737ac3761f4cfa"
         }
       ]
     },
@@ -128,7 +134,7 @@
       "id": "spotless-twin-size",
       "subject": "Whether the MATISSE reconstruction's bright and dark patches beat a spotless disc across plausible disc sizes",
       "status": "unresolved",
-      "finding": "Run through image-star.mts with --calibrated on the 29 pinned files, the season merges byte-identically to the pinned continuum OIFITS and SQUEEZE fits it at reduced chi-squared 0.31 and 1.20; its patches come back from two interleaved halves (correlation 0.57, limit 0.5). Spotless twins at 0.98 to 1.02 times the fitted 43.08 mas leave patch maps at 0.49 to 0.81 of the image's strength (spot ratios 2.02 to 1.24, limit 2); the twin of 42.45 mas this lens was first checked with gave 2.73. On one half of the data, twins between 42.0 and 44.3 mas range from rms 0.03 to 0.14 against the image's 0.13, and 10 000 iterations, four chains or half-size pixels did not make a spotty twin clean. \u03c0\u00b9 Gruis's twins stay clean over the same relative range. The lens is kept by the user's decision and its notes say the patches are not confirmed.",
+      "finding": "Run through image-star.mts with --calibrated on the 29 pinned files, the season merges byte-identically to the pinned continuum OIFITS and SQUEEZE fits it at reduced chi-squared 0.31 and 1.20; its patches come back from two interleaved halves (correlation 0.57, limit 0.5). Spotless twins at 0.98 to 1.02 times the fitted 43.08 mas leave patch maps at 0.49 to 0.81 of the image's strength (spot ratios 2.02 to 1.24, limit 2); the twin of 42.45 mas this lens was first checked with gave 2.73. On one half of the data, twins between 42.0 and 44.3 mas range from rms 0.03 to 0.14 against the image's 0.13, and 10 000 iterations, four chains or half-size pixels did not make a spotty twin clean. π¹ Gruis's twins stay clean over the same relative range. The lens is kept by the user's decision and its notes say the patches are not confirmed.",
       "evidence": [
         "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/docs/interferometric-imaging.md#measured-checks",
         "https://github.com/layoutit/css.earth/blob/03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7/tools/objects/interferometry/image-star.mts",
@@ -140,7 +146,7 @@
           "commit": "03e80fd13cc2b10d56c0aba3f7e70a2574f15ec7"
         }
       ],
-      "revisitWhen": "A reconstruction of these or more data (the public 25 February 2020 night, another recipe or another code) whose spotless twins stay clean across \u00b12 percent in size, or a published spotless-disc test of the MATISSE images."
+      "revisitWhen": "A reconstruction of these or more data (the public 25 February 2020 night, another recipe or another code) whose spotless twins stay clean across ±2 percent in size, or a published spotless-disc test of the MATISSE images."
     }
   ]
 }

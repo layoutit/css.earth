@@ -2,29 +2,29 @@
   "schema": "cssk2-18-runtime-assets@1",
   "assets": [
     {
-      "filename": "k2-18-context-shape@2x.webp",
+      "filename": "k2-18-context-color@2x.webp",
       "bytes": 100,
       "sha256": "ffde7336c53842afae5563a9c9eb24671860b20d1200c10b06a811128c1359a0"
     },
     {
-      "filename": "k2-18-lens-shape.webp",
+      "filename": "k2-18-lens-color.webp",
       "bytes": 44,
-      "sha256": "d69cd44609e82fdbc30ea71de5faf8d2f8d9b592a261de81fe64c5e7fc9ef634"
+      "sha256": "8d2ab2a9ddabf5ab5f6ab7c95c83befde37bb75e000616c51db48b6ed031f081"
     },
     {
-      "filename": "k2-18-limb-shape@2x.webp",
-      "bytes": 84,
-      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+      "filename": "k2-18-limb-color@2x.webp",
+      "bytes": 102250,
+      "sha256": "10fa1e4c81dacf8c61f30c1d95a57ad6a61477163d90066d895997862ce25c23"
     },
     {
-      "filename": "k2-18-poles-shape@2x.webp",
+      "filename": "k2-18-poles-color@2x.webp",
       "bytes": 1340,
-      "sha256": "759b971d936aefb4dddb9b348dcb6b4811b4356c0205ed35887b0298b7ef8875"
+      "sha256": "132d3848a787846d0f65b5d438f4bd5b2c37e212f88a57957730aac9ac06a884"
     },
     {
-      "filename": "k2-18-surface-shape@2x.webp",
+      "filename": "k2-18-surface-color@2x.webp",
       "bytes": 178,
-      "sha256": "2ab49dbdca1e2aa0d39c023a1ae4de1b56e316fed84b871c1d431a87f9d9841d"
+      "sha256": "790ca62c963cddb4dbb40692f52708d8d9e86ec7d1a9058f7f29a994c756e8ab"
     }
   ]
 }

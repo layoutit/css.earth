@@ -71,6 +71,11 @@
           "checked": "2026-09-18"
         }
       ]
+    },
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of a measured spectrum of the star. No surface picture or edge darkening is measured."
     }
   }
 }

@@ -4,8 +4,8 @@
     {
       "id": "arcturus-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1120,
-      "expectedSha256": "13e0ec659497b490a92ed49aaadb432f2c486ab575d4474ec4e02e6ae9a9154e",
+      "expectedBytes": 1575,
+      "expectedSha256": "222fee2fd84b006c989019be00945d108561a2eed9191fc48a7d4da648e2013e",
       "origin": "https://arxiv.org/abs/0804.0192",
       "credit": "Lacour, Meimon, Thiébaut et al., \"The limb-darkened Arcturus: imaging with the IOTA/IONIC interferometer\", A&A 485, 561 (2008), arXiv:0804.0192",
       "license": "Factual numerical measurements; source attribution retained",
@@ -49,8 +49,8 @@
     {
       "id": "arcturus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 1944,
-      "expectedSha256": "6b235822fc48b512d45f3823e8beb239a8b5cbb5c4ee0e12ec6874f49b4d4618",
+      "expectedBytes": 2727,
+      "expectedSha256": "daf11e3a7c9b4a914ef347eecf580f352310870350afa6ab6d181171253f4245",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -69,7 +69,7 @@
       "id": "arcturus-preparation-geometry",
       "path": "preparation/geometry.json",
       "expectedBytes": 1697,
-      "expectedSha256": "fbc645f4b7f0a0f3bfa596e0c76408cdc2e29f02c4fae692e9ffbb6c8da59a3c",
+      "expectedSha256": "755fb8872b13e87dd308a9acfd2d135a107e769254616d2cb4ec89e7c7150871",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -137,38 +137,184 @@
       "consumers": [
         "scene"
       ]
+    },
+    {
+      "id": "arcturus-pulkovo-spectrophotometry",
+      "path": "photometry/pulkovo-table5.dat",
+      "expectedBytes": 935951,
+      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Raw catalogue flux file table5.dat downloaded unchanged from the CDS archive on 2026-09-21; restored through source/preparation/acquisition.json",
+      "redistribution": "One catalogue file, unchanged, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/arcturus/source/photometry/pulkovo-table5.dat"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arcturus-stellar-color",
+      "path": "photometry/stellar-color.json",
+      "expectedBytes": 1501,
+      "expectedSha256": "a830f39badc943920396b740681272a21c4e91ebba2f4720ef8db4f62ac2e339",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
+      "license": "Factual numerical measurements; source attribution retained",
+      "acquisition": "Authored method record: names the archived spectrum, how it is read and the colour computation applied",
+      "redistribution": "Method record only",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-201-pulkovo-spectrophotometry",
+            "role": "material",
+            "evidence": "src/objects/arcturus/source/photometry/stellar-color.json#/measuredSpectrum"
+          },
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arcturus-cie-1931-2deg-cmf",
+      "path": "reference/CIE_xyz_1931_2deg.csv",
+      "expectedBytes": 24021,
+      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
+      "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
+      "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
+      "license": "CC BY-SA 4.0",
+      "licenseEvidence": [
+        "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json"
+      ],
+      "acquisition": "Downloaded unchanged; the sha256 equals the checksum in the CIE dataset metadata",
+      "redistribution": "Unchanged CSV under CC BY-SA 4.0 with attribution",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "cie-1931-2deg-cmf",
+            "role": "method",
+            "evidence": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv_metadata.json#/checksums"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arcturus-claret-2011-v-quadratic",
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "expectedBytes": 844,
+      "expectedSha256": "636a0ecd96da7910e1515cb3e22f5f64d8b3ae7365dbed0d9d30357e7452a7ed",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "VizieR ASU TSV for J/A+A/529/A75/table-af, the grid nodes around the star's temperature and gravity (V filter, least-squares fit, solar metallicity, 2 km/s microturbulence), with the response's dated comment lines and blank lines removed so the bytes are stable; restored through source/preparation/acquisition.json.",
+      "redistribution": "A few catalogue rows, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-j-a-a-529-a75-claret-2011",
+            "role": "method",
+            "evidence": "src/objects/arcturus/source/photometry/claret-2011-v-quadratic.tsv"
+          }
+        ]
+      }
+    },
+    {
+      "id": "arcturus-crosscheck-spectrum",
+      "path": "photometry/crosscheck-kiehling-5340.tsv",
+      "expectedBytes": 6086,
+      "expectedSha256": "6b879cf8cb57bc67ed08bab2f7daeeb469ba8ff0b67584ddffe77a581ede8c25",
+      "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
+      "license": "CDS VizieR catalogue: free use with citation",
+      "licenseEvidence": [
+        "https://cds.unistra.fr/vizier-org/licences_vizier.html"
+      ],
+      "acquisition": "Archive file saved on 2026-09-21 (VizieR TSV comment lines removed where it is a query); restored through source/preparation/acquisition.json",
+      "redistribution": "One archived spectrum or catalogue file, with citation",
+      "consumers": [
+        "assets",
+        "lenses"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "vizier-iii-124-kiehling-hr5340",
+            "role": "material",
+            "evidence": "src/objects/arcturus/source/photometry/crosscheck-kiehling-5340.tsv"
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [
     {
-      "id": "neutral-disc-context-marker",
+      "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
-      "origin": "https://arxiv.org/abs/0804.0192",
-      "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
+      "expectedBytes": 54059,
+      "expectedSha256": "0f941945565826f9e7b79f24a3668ca8f13c5ab444d801cb0fc2022b4904f5d2",
+      "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
+      "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
       "consumers": [
         "navigation"
       ],
       "recipe": {
-        "generator": "tools/objects/new-star.mts",
+        "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
         "inputs": [
-          "arcturus-observational-measurements"
+          "arcturus-stellar-color",
+          "arcturus-pulkovo-spectrophotometry",
+          "arcturus-cie-1931-2deg-cmf",
+          "arcturus-preparation-raster",
+          "arcturus-claret-2011-v-quadratic"
         ]
       },
-      "generator": "tools/objects/new-star.mts",
+      "generator": "tools/objects/source-authoring/stellar-spectra/author.mts",
       "sourceBinding": {
         "kind": "local",
-        "reason": "A flat neutral gray disc, the marker of an unresolved surface."
+        "reason": "The colour lens rendered as a disc; `author.mts --check` recomputes it."
       }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2891,
-      "expectedSha256": "58afb76ca4dec748b12c3d98aea0d1ba4ae9f2938a790656c9d3bb29b42462da",
+      "expectedBytes": 3138,
+      "expectedSha256": "b4560308043fb36988412442a197b93b37bfe63acdc4a6d74304191e28497636",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
@@ -176,8 +322,8 @@
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "expectedBytes": 2026,
+      "expectedSha256": "29e67f27dde5256e194f37c280fa0a53f219c636950164bac20cce1a45fbf570"
     },
     {
       "path": "preparation/navigation.json",

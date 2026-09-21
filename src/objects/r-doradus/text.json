@@ -37,6 +37,11 @@
       "title": "Sphere of the published radius",
       "detail": "No image",
       "summary": "A sphere at the published size in neutral gray, for comparison with the image."
+    },
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its spectrum",
+      "summary": "The colour of a measured spectrum of the star. No surface picture or edge darkening is measured."
     }
   }
 }

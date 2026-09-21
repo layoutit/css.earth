@@ -69,18 +69,19 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(1398px * var(--pi1-gruis-camera-zoom, 1))
-    calc(1398px * var(--pi1-gruis-camera-zoom, 1));
+    calc(1398px * 1.25 * var(--pi1-gruis-camera-zoom, 1))
+    calc(1398px * 1.25 * var(--pi1-gruis-camera-zoom, 1));
 }
 
-/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter. */
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
+   sphere is drawn at, so the plate's edge is the sphere's outline. */
 .planet-stage[data-object-id="pi1-gruis"] .pi1-gruis-limb-layer {
   background-image: var(--pi1-gruis-limb-image);
   background-position: center;
   background-repeat: no-repeat;
   background-size:
-    calc(496px * var(--pi1-gruis-camera-zoom, 1))
-    calc(496px * var(--pi1-gruis-camera-zoom, 1));
+    calc(496px * 1.25 * var(--pi1-gruis-camera-zoom, 1))
+    calc(496px * 1.25 * var(--pi1-gruis-camera-zoom, 1));
 }
 
 .planet-stage[data-object-id="pi1-gruis"] .polycss-camera {

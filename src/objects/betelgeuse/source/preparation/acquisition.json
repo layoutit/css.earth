@@ -270,6 +270,44 @@
       ],
       "path": "observations/oifits/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0.fits",
       "url": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/74fa6eda-da5b-4a04-ba6e-dada5b2a0485/2020-02-19T013715_alfOri_K0G2D0J3_IR-LM_MED_OUT_OUT_noChop_cal_oifits_0%20%282023_11_07%2016_30_29%20UTC%29.fits"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_X0036_merged_ncl_ncge.fits",
+      "path": "photometry/xsl_spectrum_X0036_merged_ncl_ncge.fits"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/crosscheck-kiehling-2061.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "III/124/spectra",
+        "-out": "lambda,m(HR2061)",
+        "-out.max": "1000"
+      },
+      "requiredText": [
+        "m(HR2061)"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
     }
   ]
 }
