@@ -7,6 +7,7 @@ import { renderDatasetResponse } from './dataset-response.mts';
 import { renderSourceLink } from './source-link.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
 import { readCatalogueFragmentPin } from './catalogue-fragment-pin.mts';
+import { overviewScopeFromUrl, withOverviewScope } from './navigation-scope.mts';
 
 export interface SearchPin { url: string; bytes: number; sha256: string; count: number; }
 export function parseSearchPin(value: unknown): SearchPin {
@@ -129,12 +130,14 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
+  // Clearing the search keeps the view context, normalized the way the router resolves it.
+  withOverviewScope(clear, overviewScopeFromUrl(url));
   document.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
   const browser = requiredElement<HTMLElement>(document, '.planet-object-browser');
   const information = requiredElement<HTMLElement>(document, '.planet-information-panel');
   const context = document.querySelector<HTMLElement>('.planet-object-context') ?? browser;
   const sharedLegacyContext = context === browser;
-  const selectedOverview = url.searchParams.get('overview');
+  const selectedOverview = overviewScopeFromUrl(url);
   const showingContext = Boolean(focusCard || selectedOverview);
   browser.toggleAttribute('hidden', !searching);
   information.toggleAttribute('hidden', showingContext);
@@ -209,7 +212,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     requiredElement<HTMLElement>(browser, '.planet-object-empty').hidden = !catalogueLoaded || items.some(item => !item.hidden) || detailCount + overviewCount > 0;
   }
   browser.dataset.sourceFocus = focusCard?.dataset.preparedFocusId ?? '';
-  const overview = url.searchParams.get('overview') ?? '';
+  const overview = selectedOverview ?? '';
   // A system overview is hosted by the route's star, so its credits follow that system.
   renderSourceLink(document, focusCard ? `focus:${focusCard.dataset.preparedFocusId}` : `overview:${overview === 'system' ? `system:${objectId}` : overview}`);
   return html.slice(0, start) + document.body.innerHTML + html.slice(end);

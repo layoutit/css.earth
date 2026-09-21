@@ -926,6 +926,18 @@ test('a first Sun click frames the Solar System card, and a repeat opens the Sun
   h.router.destroy();
 });
 
+test('opening an overview drops the catalogue focus it supersedes, and a focused URL names no overview', async () => {
+  const h = harness({ withSun: true, systemTarget: () => ({ pose: 'solar-system-framing' }),
+    initialUrl: 'https://example.test/sun/?focus=m42&focusLens=eso-optical' });
+  await h.router.settled;
+  assert.equal(h.router.state().overview, false, 'a named focus leaves no overview to restore');
+  await h.router.navigate('sun', { overview: true, preserveView: true });
+  assert.equal(h.windowTarget.location.searchParams.get('overview'), 'system');
+  assert.equal(h.windowTarget.location.searchParams.has('focus'), false);
+  assert.equal(h.windowTarget.location.searchParams.has('focusLens'), false);
+  h.router.destroy();
+});
+
 test('clicking the Sun from the Solar System overview opens its body instead of refitting the outer planets', async () => {
   const focuses: (MockRequest)[] = [], systems: (MockRequest)[] = [];
   const h = harness({ withSun: true,
