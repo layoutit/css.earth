@@ -1,0 +1,55 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "weywot",
+  "card": {
+    "text": "A moon of Quaoar.",
+    "sources": [
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons",
+        "checked": "2026-09-21",
+        "locator": "Satellite solution tnosat_v001_20050000_jpl043_20220908: header and observation span"
+      },
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons TNO satellite solution tnosat_v001_20050000_jpl043_20220908: header radius RAD~ 85 km for Weywot",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Weywot is a moon of Quaoar, found in 2006. JPL's orbit for it rests on 9 observations from 2006 to 2011.",
+    "sources": [
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons",
+        "checked": "2026-09-21",
+        "locator": "Satellite solution tnosat_v001_20050000_jpl043_20220908: header and observation span"
+      },
+      {
+        "catalogueId": "jpl-horizons",
+        "url": "https://ssd.jpl.nasa.gov/horizons/",
+        "label": "JPL Horizons TNO satellite solution tnosat_v001_20050000_jpl043_20220908: header radius RAD~ 85 km for Weywot",
+        "checked": "2026-09-21"
+      }
+    ]
+  },
+  "datasets": {
+    "model": {
+      "title": "Sphere at the JPL radius",
+      "detail": "Inferred shape",
+      "summary": "A sphere at the roughly 85 km radius JPL lists. Shape, pole and rotation are not measured.",
+      "sources": [
+        {
+          "catalogueId": "jpl-horizons",
+          "url": "https://ssd.jpl.nasa.gov/horizons/",
+          "label": "JPL Horizons TNO satellite solution tnosat_v001_20050000_jpl043_20220908: header radius RAD~ 85 km for Weywot",
+          "checked": "2026-09-21"
+        }
+      ]
+    }
+  }
+}

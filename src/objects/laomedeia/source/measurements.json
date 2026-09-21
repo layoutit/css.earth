@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "laomedeia",
+  "name": "Laomedeia",
+  "titleLabel": "Laomedeia",
+  "horizons": "812",
+  "aliases": [
+    "Neptune XII",
+    "S/2002 N3"
+  ],
+  "classification": "satellite",
+  "population": "Irregular satellite of Neptune",
+  "parent": "neptune",
+  "fullAxesKm": [
+    42.0,
+    42.0,
+    42.0
+  ],
+  "radiusKm": 21.0,
+  "axesStatus": "Illustrative equal axes at a radius estimated from brightness with an assumed albedo of 0.04; not measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at an assumed-albedo radius",
+  "source": "https://doi.org/10.1086/504799",
+  "credit": "Sheppard, Jewitt and Kleyna (2006), The Astronomical Journal 132, 171; Table 3, radius for an assumed geometric albedo of 0.04",
+  "papers": [
+    "https://arxiv.org/abs/astro-ph/0604552",
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 21 km radius Sheppard, Jewitt and Kleyna (2006) estimate for S/2002 N3 from its brightness, assuming a geometric albedo of 0.04. The size is not measured.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Laomedeia is a distant, irregular moon of Neptune, found in 2002 as S/2002 N3. Its size is estimated from its brightness.",
+  "card": "A distant, irregular moon of Neptune.",
+  "datasetSummary": "A sphere at 21 km radius, estimated from brightness with an assumed 4% albedo.",
+  "textCitations": [
+    {
+      "catalogueId": "jpl-horizons",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons",
+      "checked": "2026-09-21",
+      "locator": "Object data page for 812 (Laomedeia) and the JPL satellite discovery table"
+    }
+  ],
+  "distanceAu": 30.05
+}

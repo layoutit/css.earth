@@ -1,0 +1,88 @@
+{
+ "schema": "cssearth-body-epoch-ephemeris@1",
+ "id": "weywot",
+ "centerBodyId": "quaoar",
+ "epochJdTt": 2461286.5,
+ "requestEpochJdUtc": 2461286.499199259,
+ "ttMinusUtcSeconds": 69.184,
+ "referenceFrame": "ICRF",
+ "units": "KM-D",
+ "correction": "NONE",
+ "solution": "tnosat_v001_20050000_jpl043_20220908",
+ "positionKm": [
+  -3706.461294241996,
+  -10136.51157944524,
+  684.5561261427479
+ ],
+ "velocityKmPerDay": [
+  -8529.051564530348,
+  1746.719360592456,
+  1852.239192901381
+ ],
+ "parentHeliocentricState": {
+  "positionKm": [
+   1261604907.550475,
+   -6026290815.63251,
+   -1647891916.745353
+  ],
+  "velocityKmPerDay": [
+   386096.7326769416,
+   85623.15327618536,
+   32440.0481779242
+  ]
+ },
+ "gravitationalParametersKm3PerS2": {
+  "body": 0.04783,
+  "parent": 95.6,
+  "combined": 95.64783
+ },
+ "sources": {
+  "relative": {
+   "path": "source/orbit/weywot-epoch.txt",
+   "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120050000&CENTER=500%40920050000&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+   "sha256": "66344f75556ee978d274837e75249a4f0f80e78c95089f48e9a8bc020552d1f0",
+   "bytes": 6942,
+   "target": 120050000,
+   "center": 920050000
+  },
+  "parent": {
+   "path": "source/orbit/quaoar-epoch.txt",
+   "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920050000&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+   "sha256": "2fe5f1bb661817293c23d7800d3c233d3bf5360dfaf5c903a367a576af97c91b",
+   "bytes": 6769,
+   "target": 920050000,
+   "center": 10
+  },
+  "heliocentricCheck": {
+   "path": "source/orbit/weywot-heliocentric-check.txt",
+   "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120050000&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
+   "sha256": "965acc380a9be3d6c0f7030d13bc93acd7659cf9913fdd620bdc45175419c032",
+   "bytes": 6921,
+   "target": 120050000,
+   "center": 10
+  }
+ },
+ "validation": {
+  "model": "independent Horizons heliocentric query minus primary heliocentric query agrees with direct primary-relative query",
+  "positionResidualKm": [
+   3.0622004487668164e-07,
+   -6.83103280607611e-08,
+   9.286327440349851e-07
+  ],
+  "velocityResidualKmPerDay": [
+   5.275069270282984e-11,
+   -1.1368683772161603e-12,
+   -1.8189894035458565e-12
+  ],
+  "maxPositionResidualKm": 9.286327440349851e-07,
+  "maxVelocityResidualKmPerDay": 5.275069270282984e-11,
+  "positionToleranceKm": 1e-05,
+  "velocityToleranceKmPerDay": 1e-08,
+  "qualification": "This validates that the three retained Horizons responses compose; it is not an independent measurement of the orbit."
+ },
+ "limitations": [
+  "The Horizons satellite solution tnosat_v001_20050000_jpl043_20220908 uses 9 observations from 2006 to 2011 and states a 3600 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
+  "The gravitational parameters are the values in the retained Horizons response headers; they define this orbit calculation and are not adopted as independent body facts."
+ ],
+ "runtimeExtrapolation": false
+}

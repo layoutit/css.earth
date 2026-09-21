@@ -1,0 +1,16 @@
+{
+  "schema": "csselatus-prepared-assets@1",
+  "resourceRoot": "prepared",
+  "assets": [
+    {
+      "filename": "runtime.json",
+      "bytes": 458414,
+      "sha256": "7225eefda62eebfa3926c796485adaa44822e2f5b862886d556ecb45c650f1aa"
+    },
+    {
+      "filename": "scene.json",
+      "bytes": 370049,
+      "sha256": "b8bd9595a21dad8f06b0362c962aa277dd240b10f6f616f91e344fe93d111be5"
+    }
+  ]
+}

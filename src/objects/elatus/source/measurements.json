@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "elatus",
+  "name": "Elatus",
+  "titleLabel": "Elatus",
+  "horizons": "31824;",
+  "aliases": [
+    "31824 Elatus",
+    "1999 UG5"
+  ],
+  "classification": "asteroid",
+  "population": "Centaur",
+  "fullAxesKm": [
+    57.0,
+    57.0,
+    57.0
+  ],
+  "radiusKm": 28.5,
+  "axesStatus": "Illustrative equal axes at the diameter JPL lists; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 26.82,
+  "periodText": "26.82 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the JPL diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "credit": "JPL Small-Body Database, physical parameters for 31824 Elatus (1999 UG5): diameter 57 km; JPL's stated reference: urn:nasa:pds:neowise_diameters_albedos::2.0[centaurs] (http://adsabs.harvard.edu/abs/2013ApJ...773...22B)",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 57 km diameter the JPL Small-Body Database lists for Elatus. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Elatus is a centaur, a small icy body orbiting the Sun among the giant planets.",
+  "card": "A centaur orbiting among the giant planets.",
+  "datasetSummary": "A sphere at the 57 km diameter JPL lists. Its shape and pole are not measured.",
+  "distanceAu": 11.8,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 31824 Elatus (1999 UG5): orbit class and physical parameters"
+    }
+  ]
+}

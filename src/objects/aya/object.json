@@ -1,0 +1,125 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "aya",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Aya",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 384
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/aya-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "3497ccc5c6f81422ce66e208de939f7f8efd496969e3be02d01704aa4dcb701a"
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -5986506317292.854,
+        2757534363781.7505,
+        -936680895595.4902
+      ],
+      "presentationToReference": [
+        -0.9407743835573106,
+        2.4356826039297786e-17,
+        0.33903327158608176,
+        0.31105694512485926,
+        0.3977771559319137,
+        0.8631436213680247,
+        0.13485969053780367,
+        -0.9174820620691818,
+        0.37421855866502635
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 1669.5652173913043,
+      "bodyRadiusM": 384000
+    },
+    "catalog": {
+      "name": "Aya",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 47.4,
+      "description": "A large icy body in the Kuiper belt.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "8018a994628c490807b0f4e043c5cd0f45f1cc4e0cb88a30ef74725940d647af"
+  }
+}
