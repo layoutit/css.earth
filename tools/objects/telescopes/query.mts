@@ -38,6 +38,7 @@ import { loadSourceProducts, sourceQualifiedObservations, type LoadedSourceProdu
 import { qualificationActionsFor, type QualificationAction } from './qualification-routes.mts';
 import { loadTargetAssociations, parseTargetAssociationSources, type TargetAssociation } from './target-associations.mts';
 import { resolveTarget, type TargetCatalogueEntry, type TargetResolution } from './targets.mts';
+import { productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 const ARCSEC_PER_RADIAN = 206_264.806_247;
 const TARGET_ASSOCIATIONS_PATH = 'data/telescopes/target-associations.json';
@@ -693,6 +694,7 @@ export interface IndexedObservation {
   readonly observation: string; readonly programme?: string; readonly title?: string;
   readonly startIso: string | null; readonly endIso: string | null;
   readonly kind?: ProductKind; readonly instrument?: string; readonly filter?: string;
+  readonly familyEvidence: ObservationFamilyEvidence;
   readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
   readonly sourceProductId?: string;
   readonly qualification?: { readonly verified: boolean; readonly receipt: string; readonly problem?: string; readonly limitations: readonly string[] };
@@ -703,9 +705,10 @@ export interface IndexedObservation {
 /** Expose exact indexed observation identities without running scientific-request assessment. */
 export function indexedTargetObservations(inputs: QueryInputs, target: string): { readonly observations: readonly IndexedObservation[]; readonly coverage: readonly TargetCoverage[] } {
   const rows = new Map<string, IndexedObservation>(), coverage: TargetCoverage[] = [];
+  const qualifiedIndex = [...inputs.qualifiedProducts ?? [], ...sourceQualifiedObservations(inputs.sourceProducts ?? [])];
   const add = (row: Omit<IndexedObservation, 'qualifiedProducts'>) => {
     const key = JSON.stringify([row.telescope, row.mode, row.observation]);
-    const qualifiedProducts = (inputs.qualifiedProducts ?? []).filter(product => product.target === target && product.telescope === row.telescope && product.mode === row.mode && product.observation === row.observation);
+    const qualifiedProducts = qualifiedIndex.filter(product => product.target === target && product.telescope === row.telescope && product.mode === row.mode && product.observation === row.observation);
     const previous = rows.get(key);
     rows.set(key, { ...(previous ?? row), ...row, qualifiedProducts });
   };
@@ -717,12 +720,14 @@ export function indexedTargetObservations(inputs: QueryInputs, target: string): 
     for (const mode of modes) for (const record of mode.observations?.records ?? []) add({ source: 'ledger', telescope: mode.telescope, mode: mode.mode, archiveDate: mode.archiveDate,
       observation: record.id, ...(record.programme ? { programme: record.programme } : {}), ...(record.title ? { title: record.title } : {}),
       startIso: record.startIso || null, endIso: record.endIso ?? null, ...(record.kind ? { kind: record.kind } : {}),
+      familyEvidence: productKindFamilyEvidence(record.kind, { kind: 'archive-adapter', id: ledger.telescope, evidence: ledger.path }),
       ...(record.instrument ? { instrument: record.instrument } : {}), ...(record.filter ? { filter: record.filter } : {}),
       ...(record.wavelengthIntervalsMicrometres ? { wavelengthIntervalsMicrometres: record.wavelengthIntervalsMicrometres } : record.wavelengthIntervalMicrometres ? { wavelengthIntervalsMicrometres: [record.wavelengthIntervalMicrometres] } : {}),
       ...(record.sourceProductId ? { sourceProductId: record.sourceProductId } : {}), ...(record.qualification ? { qualification: record.qualification } : {}), routeObservation: record });
   }
   for (const product of inputs.sourceProducts ?? []) add({ source: 'package', telescope: product.telescope, mode: product.mode, archiveDate: 'package-owned pins', observation: product.id,
-    programme: product.id, startIso: product.startIso ?? null, endIso: product.endIso ?? null, kind: product.kind, wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres,
+    programme: product.id, startIso: product.startIso ?? null, endIso: product.endIso ?? null, kind: product.kind,
+    familyEvidence: product.familyEvidence ?? productKindFamilyEvidence(product.kind, { kind: 'source-product', id: product.id, evidence: product.citation }), wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres,
     sourceProductId: product.id, qualification: { verified: product.qualified, receipt: product.receipt, problem: product.receiptProblem, limitations: product.limitations },
     routeObservation: { id: product.id, programme: product.id, startIso: product.startIso ?? '', ...(product.endIso ? { endIso: product.endIso } : {}), sourceProductId: product.id,
       kind: product.kind, wavelengthIntervalsMicrometres: product.wavelengthIntervalsMicrometres } });

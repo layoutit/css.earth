@@ -723,6 +723,20 @@ Archive product terms retain the source label and map against the dated IVOA pro
 vocabulary. This proposes a family route; product bytes and metadata must still confirm the
 handler profile. Preliminary and unknown vocabulary terms remain marked as such.
 
+Archive and package observations carry that classification as
+`cssearth-observation-family-evidence@1`. It names the family, source term, vocabulary version,
+responsible adapter or source product, and supporting evidence. Exploration filters consume this
+record directly; they do not reconstruct a family from a bare product kind. Format-specific
+profiles may make a narrower claim only after their declared archive identity matches. The first
+such profile is the NASA STEREO/SECCHI COR1 electron-density reconstruction: its FITS axes
+(`CRLN`, `CRLT`, `HECR`), units and instrument identity establish an F16 spherical physical grid.
+The profile classifies the observation; it does not certify the tomography or invent a rendering
+route.
+
+Family-operation receipts identify the complete local TypeScript module closure discovered by the
+build graph, plus the pinned scientific toolchain. Changing a helper imported by the selected
+operation therefore invalidates reuse even when its public owner module is unchanged.
+
 ## From a delivered product to an output
 
 `tools/objects/telescopes/outputs.mts` is the final boundary after `session.mts` delivery.

@@ -9,7 +9,7 @@ import { parseLimits, parseRegion, type TransferLimits } from './vo/contracts.mt
 import type { DiscoveryRequest } from './vo/discovery.mts';
 import type { VoInputs } from './vo/bridge.mts';
 import { FAMILY_IDS, type FamilyId } from './product-descriptor.mts';
-import { familiesForProductKind } from './product-type.mts';
+import type { ObservationFamilyEvidence } from './observation-families.mts';
 
 export const EXPLORATION_SCHEMA = 'cssearth-telescope-exploration@1';
 export interface ExplorationRequest extends DiscoveryRequest {}
@@ -28,6 +28,7 @@ export interface ExplorationChoice {
   readonly pick: number; readonly key: string; readonly state: 'ready' | 'qualify';
   readonly target: string; readonly telescope: string; readonly mode: string; readonly observation: string; readonly program: string;
   readonly reference: ExplorationReference; readonly display: ExplorationDisplay;
+  readonly familyEvidence: ObservationFamilyEvidence;
   readonly configuration?: QualificationConfiguration; readonly product?: QualifiedObservation;
   readonly reason: string; readonly limitations: readonly string[];
 }
@@ -83,10 +84,10 @@ type FilterAnswer='yes'|'no'|'unknown';
 interface FilterVerdict {readonly answer:FilterAnswer;readonly reason:string}
 type FilterAssessment=Readonly<Partial<Record<'kind'|'family'|'wavelength'|'time',FilterVerdict>>>;
 const filterVerdict=(answer:FilterAnswer,reason:string):FilterVerdict=>({answer,reason});
-function filterAssessment(request: ExplorationRequest, facts: { kind?: string | null;families?:readonly FamilyId[]; startIso?: string | null; endIso?: string | null; wavelengths?: readonly (readonly [number, number])[] }): FilterAssessment {
+function filterAssessment(request: ExplorationRequest, facts: { kind?: string | null; familyEvidence?: ObservationFamilyEvidence; startIso?: string | null; endIso?: string | null; wavelengths?: readonly (readonly [number, number])[] }): FilterAssessment {
   const assessment:Partial<Record<'kind'|'family'|'wavelength'|'time',FilterVerdict>> = {};
   if(request.kind)assessment.kind=facts.kind===null||facts.kind===undefined?filterVerdict('unknown','Advertised product kind is unknown.'):facts.kind===request.kind?filterVerdict('yes',`Advertised product kind matches ${request.kind}.`):filterVerdict('no',`Advertised product kind ${facts.kind} does not match ${request.kind}.`);
-  if(request.family){const families=facts.families??familiesForProductKind(facts.kind??null);assessment.family=!families.length?filterVerdict('unknown','Advertised product family is unknown.'):families.includes(request.family)?filterVerdict('yes',`Advertised product families include ${request.family}.`):filterVerdict('no',`Advertised product families ${families.join(', ')} do not match ${request.family}.`);}
+  if(request.family){const evidence=facts.familyEvidence,families=evidence?.families??[];assessment.family=!families.length?filterVerdict('unknown','No archive adapter supplied observational-family evidence.'):families.includes(request.family)?filterVerdict('yes',`${evidence!.owner.id} evidence maps ${evidence!.sourceTerm} to ${request.family}.`):filterVerdict('no',`${evidence!.owner.id} evidence maps ${evidence!.sourceTerm} to ${families.join(', ')}, not ${request.family}.`);}
   if (request.wavelengthMicrometres) {
     assessment.wavelength=!facts.wavelengths?.length?filterVerdict('unknown','Advertised wavelength coverage is unknown.'):
       facts.wavelengths.some(([from, to]) => from <= request.wavelengthMicrometres![1] && to >= request.wavelengthMicrometres![0])?filterVerdict('yes','Advertised wavelength coverage overlaps the supplied filter.'):filterVerdict('no','Advertised wavelength coverage does not overlap the supplied filter.');
@@ -113,7 +114,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
   const target = targetResolution.canonical.id, canonicalRequest = { ...request, target }, choices: Omit<ExplorationChoice, 'pick'>[] = [], unresolved: ExplorationIssue[] = [], unsupported: ExplorationIssue[] = [];
   const indexed = indexedTargetObservations(inputs, target);
   for (const row of indexed.observations) {
-    const assessment = filterAssessment(canonicalRequest, { kind: row.kind, startIso: row.startIso, endIso: row.endIso, wavelengths: row.wavelengthIntervalsMicrometres }),filters=filterReasons(assessment);
+    const assessment = filterAssessment(canonicalRequest, { kind: row.kind, familyEvidence: row.familyEvidence, startIso: row.startIso, endIso: row.endIso, wavelengths: row.wavelengthIntervalsMicrometres }),filters=filterReasons(assessment);
     const identity = `${row.telescope} / ${row.mode} / ${row.observation}`;
     if(filterState(assessment)==='mismatch'){unsupported.push({scope:'indexed-source',code:'unsupported-observation',identity,reason:filters.join(' ')});continue;}
     if(filterState(assessment)==='unresolved'){unresolved.push({scope:'indexed-source',code:'filter-unresolved',identity,reason:filters.join(' ')});continue;}
@@ -122,7 +123,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     if (!ready && !availability?.available) { unsupported.push({ scope: 'indexed-source', code: 'unsupported-observation', identity, reason: [availability?.reason, ...filters].filter(Boolean).join(' ') }); continue; }
     const program = ready?.program ?? row.sourceProductId ?? row.programme ?? `${target}-${row.observation}`;
     const reference: ExplorationReference = { kind: 'indexed-observation', telescope: row.telescope, mode: row.mode, observation: row.observation, programme: program };
-    choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: row.telescope, mode: row.mode, observation: row.observation, program, reference,
+    choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: row.telescope, mode: row.mode, observation: row.observation, program, reference, familyEvidence: row.familyEvidence,
       display: { instrument: row.instrument ?? `${row.telescope} / ${row.mode}`, observationTime: { startIso: row.startIso, endIso: row.endIso }, productKind: row.kind ?? null,
         wavelengthsMicrometres: row.wavelengthIntervalsMicrometres ?? [], advertisedKilobytes: null, metadataBasis: ready ? 'qualified' : 'indexed' },
       ...(ready ? { product: ready } : availability?.configuration ? { configuration: availability.configuration } : {}),
@@ -131,7 +132,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
   }
   for (const entry of inputs.vo?.records ?? []) {
     const observation = entry.observation, ranges = observation.wavelengthsMicrometres[0] === null || observation.wavelengthsMicrometres[1] === null ? [] : [observation.wavelengthsMicrometres as readonly [number, number]];
-    const assessment=filterAssessment(canonicalRequest,{kind:observation.kind,families:observation.productType?.families,startIso:observation.startIso,endIso:observation.endIso,wavelengths:ranges}),filters=filterReasons(assessment);
+    const assessment=filterAssessment(canonicalRequest,{kind:observation.kind,familyEvidence:observation.familyEvidence,startIso:observation.startIso,endIso:observation.endIso,wavelengths:ranges}),filters=filterReasons(assessment);
     const identity = `${observation.service} / ${observation.key}`;
     if(observation.target.status==='confirmed'&&filterState(assessment)==='unresolved'){unresolved.push({scope:'observation',code:'filter-unresolved',identity,reason:filters.join(' ')});continue;}
     if (observation.target.status !== 'confirmed' || filterState(assessment)==='mismatch' || !entry.products.length) {
@@ -141,7 +142,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
     for (const spec of entry.products) {
       const ready = (inputs.qualifiedProducts ?? []).find(product => product.target === target && product.program === spec.key && product.observation === observation.key);
       const reference: ExplorationReference = { kind: 'vo-acquisition', acquisitionKey: spec.key, observation: observation.key, snapshot: observation.snapshot };
-      choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference,
+      choices.push({ key: referenceKey(reference), state: ready ? 'ready' : 'qualify', target, telescope: observation.service, mode: ready?.mode ?? `native-${spec.kind}`, observation: observation.key, program: spec.key, reference, familyEvidence: observation.familyEvidence,
         display: { instrument: observation.service, observationTime: { startIso: observation.startIso, endIso: observation.endIso }, productKind: observation.kind,
           wavelengthsMicrometres: observation.wavelengthsMicrometres, advertisedKilobytes: observation.access.estimatedKilobytes, metadataBasis: ready ? 'qualified' : 'advertised' },
         ...(ready ? { product: ready } : { configuration: { kind: 'archive-acquisition', key: spec.key, request: canonicalRequest } as const }),

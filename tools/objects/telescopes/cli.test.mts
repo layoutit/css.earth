@@ -7,6 +7,7 @@ import type { ExplorationSession } from './session.mts';
 
 const choice = { pick:1,key:'fixture-choice',state:'qualify' as const,target:'eris',telescope:'Fixture telescope',mode:'camera',observation:'obs-1',program:'eris-obs-1',
   reference:{kind:'indexed-observation' as const,telescope:'Fixture telescope',mode:'camera',observation:'obs-1',programme:'eris-obs-1'},
+  familyEvidence:{schema:'cssearth-observation-family-evidence@1' as const,families:['F01' as const],status:'mapped' as const,sourceTerm:'image',vocabulary:'IVOA product-type',vocabularyVersion:'1.1',owner:{kind:'archive-adapter' as const,id:'fixture',evidence:'fixture ledger'}},
   display:{instrument:'Fixture camera',observationTime:{startIso:'2025-01-02T03:04:05.000Z',endIso:null},productKind:'image',wavelengthsMicrometres:[[2.2,2.4]] as const,advertisedKilobytes:null,metadataBasis:'indexed' as const},
   reason:'Exact source product can be qualified.',limitations:['Resolution is not established.'] };
 const answer = {schema:'cssearth-telescope-exploration@1' as const,request:{target:'eris'},target:'eris',targetResolution:{status:'resolved' as const,requested:'Eris',canonical:{id:'eris',name:'Eris'},matchedBy:'name' as const},
