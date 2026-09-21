@@ -7,6 +7,13 @@
  * names the focus over the overview. */
 const PREPARED_FOCUS_KEYS = ['focus', 'focusLens'] as const;
 
+/** The catalogue focus a URL names. A focus whose prepared bank is still loading
+ * has not reached the runtime yet, so the runtime cannot answer this: the URL is
+ * the selection, and it is a selection from the moment it is named. */
+export function preparedFocusFromUrl(url: string | URL) {
+  return new URL(url).searchParams.get('focus');
+}
+
 /** Overview routes share the mounted world and its camera. */
 export function overviewScopeFromUrl(url: string | URL) {
   const query = new URL(url).searchParams;

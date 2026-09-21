@@ -27,7 +27,7 @@ import * as applicationWorldContext from './application-world-context.mts';
 import { watchOverviewSelection } from './overview-selection.mts';
 import { systemById } from './object-systems.mts';
 import { SYSTEM_CENTERS } from './system-framing.mts';
-import { overviewScopeFromUrl, withOverviewScope, withPreparedFocus } from './navigation-scope.mts';
+import { overviewScopeFromUrl, preparedFocusFromUrl, withOverviewScope, withPreparedFocus } from './navigation-scope.mts';
 import { createNavigationTiming } from './navigation-timing.mts';
 import { isFocusDatasetUrl, readDatasetUrl, withDataset } from './dataset-url.mts';
 import { retainInitialScene } from './initial-scene.mts';
@@ -699,7 +699,11 @@ export function createSceneRouter({
       getOverview: () => overview,
       // The pending flight owns the camera; repeat-click bookkeeping must not
       // suppress zoom-out deselection after that flight has finished.
-      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current && !owner.preparedFocus?.(),
+      // A focus the URL names is a selection from the moment it is named, before
+      // its prepared bank has loaded and the runtime can report it. The camera
+      // scale must not deselect it during that window.
+      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
+        && !owner.preparedFocus?.() && !preparedFocusFromUrl(windowTarget.location.href),
       windowTarget,
       onChange(next) {
         if (!next.overview || next.objectId === objectId) {
