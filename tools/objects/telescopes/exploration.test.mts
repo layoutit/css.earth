@@ -41,6 +41,13 @@ test('unknown targets return suggestions without exposing provider results', () 
   assert.equal(answer.targetResolution.status, 'unknown'); assert.deepEqual(answer.services, []); assert.equal(answer.issues[0]!.code, 'unknown-target');
 });
 
+test('an OPUS service joins the provider list and a target unknown to OPUS stays a provider fact, not an empty result',()=>{
+  const opus={service:'https://opus.pds-rings.seti.org/api/' as const,state:'unknown-target' as const,scope:'OPUS surface-geometry search.',reason:'OPUS has no surface-geometry target named Eris.'};
+  const answer=explorationAnswer({target:'eris'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'eris',name:'Eris',aliases:[]}],targetAssociations:[],bodyMaps:[],opus});
+  assert.deepEqual(answer.services,[opus]);
+  assert.deepEqual(answer.issues.map(issue=>[issue.code,issue.identity]),[['provider-target-unknown',opus.service]]);
+});
+
 test('explicit family filters separate known mismatches from selectable choices',()=>{
   const source={id:'image',target:'sun',telescope:'Fixture',mode:'camera',kind:'image' as const,archiveProductId:'archive-image',decoder:'fits-image' as const,files:[],identity:{OBJECT:'SUN'},units:'counts',meaning:'fixture',citation:'https://example.test/',limitations:[],qualified:false,receipt:'image.receipt'};
   const answer=explorationAnswer({target:'sun',family:'F16'},{ledgers:[],capabilities:[],targetCatalogue:[{id:'sun',name:'Sun',aliases:[]}],targetAssociations:[],bodyMaps:[],sourceProducts:[source],qualifiedProducts:[]});
