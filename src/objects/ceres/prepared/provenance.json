@@ -4,7 +4,7 @@
   "basis": "prepared",
   "manifest": {
     "path": "source/manifest.json",
-    "sha256": "6d3218e577d36ae9cc761b403232ee5fed3beac85a120de78a18c426aca6f8d2"
+    "sha256": "0a061f8bd28e86db4b41bb2a7f0543607f8b532e867d4d8355fa61d8a8aa0fb1"
   },
   "generator": {
     "path": "tools/objects/provenance.mts",
@@ -15,7 +15,7 @@
     {
       "id": "raster",
       "path": "source/preparation/raster.json",
-      "sha256": "3f808a6f7ecc2edb4b296fa959fadebb4c680cf2a600fdbf8541d64018e91aed",
+      "sha256": "e1093e81637b591a6a3e063519a56794b483a03c77a4690a34a6ef7a0477f515",
       "parameters": {
         "schema": "cssearth-raster-recipe@1",
         "publicBase": "/scenes/ceres/",
@@ -235,18 +235,26 @@
               "minimum": 0.047,
               "maximum": 0.089,
               "colors": [
-                "#d80101",
-                "#d50000",
-                "#d40100",
-                "#d10100",
-                "#d10001",
-                "#cf0000",
-                "#ce0100",
-                "#cb0100",
-                "#cb0001",
-                "#c90000",
-                "#c70100",
-                "#c50000"
+                "#0101e0",
+                "#0006e7",
+                "#001ff0",
+                "#003bf8",
+                "#005cfd",
+                "#008cfe",
+                "#03b6fe",
+                "#11e1ef",
+                "#2effcf",
+                "#6cff93",
+                "#a8ff58",
+                "#e2ff1e",
+                "#f5d40c",
+                "#ffad01",
+                "#ff7e00",
+                "#ff4c02",
+                "#f43100",
+                "#ec1701",
+                "#e40000",
+                "#e30001"
               ],
               "labels": [
                 "0.047",
@@ -306,7 +314,7 @@
     {
       "id": "content",
       "path": "source/content/object.json",
-      "sha256": "0682bda2874708829292da6fde8658ccad8c079dc9451d1a01c1eb8da47f2e50",
+      "sha256": "02c77f79a836241410b58466ba9be9c5ddacb09578e44e832ad3b2dd7e520220",
       "parameters": {
         "schema": "cssearth-object-content@1",
         "version": 1,
@@ -521,64 +529,64 @@
                 "recipe": {
                   "palette": [
                     [
-                      216,
-                      1,
-                      1
-                    ],
-                    [
-                      213,
                       0,
-                      0
-                    ],
-                    [
-                      212,
                       1,
-                      0
+                      227
                     ],
                     [
-                      209,
+                      0,
+                      12,
+                      233
+                    ],
+                    [
                       1,
-                      0
+                      62,
+                      248
                     ],
                     [
-                      209,
-                      0,
-                      1
+                      2,
+                      138,
+                      252
                     ],
                     [
-                      207,
-                      0,
-                      0
+                      15,
+                      223,
+                      240
                     ],
                     [
+                      89,
+                      255,
+                      162
+                    ],
+                    [
+                      202,
+                      255,
+                      55
+                    ],
+                    [
+                      249,
                       206,
-                      1,
+                      13
+                    ],
+                    [
+                      253,
+                      122,
                       0
                     ],
                     [
-                      203,
-                      1,
+                      246,
+                      52,
                       0
                     ],
                     [
-                      203,
-                      0,
+                      229,
+                      2,
                       1
                     ],
                     [
-                      201,
+                      227,
                       0,
-                      0
-                    ],
-                    [
-                      199,
-                      1,
-                      0
-                    ],
-                    [
-                      197,
-                      0,
-                      0
+                      1
                     ]
                   ],
                   "labels": [
@@ -633,64 +641,104 @@
                 "recipe": {
                   "palette": [
                     [
-                      216,
                       1,
-                      1
+                      1,
+                      224
                     ],
                     [
-                      213,
                       0,
-                      0
+                      6,
+                      231
                     ],
                     [
+                      0,
+                      31,
+                      240
+                    ],
+                    [
+                      0,
+                      59,
+                      248
+                    ],
+                    [
+                      0,
+                      92,
+                      253
+                    ],
+                    [
+                      0,
+                      140,
+                      254
+                    ],
+                    [
+                      3,
+                      182,
+                      254
+                    ],
+                    [
+                      17,
+                      225,
+                      239
+                    ],
+                    [
+                      46,
+                      255,
+                      207
+                    ],
+                    [
+                      108,
+                      255,
+                      147
+                    ],
+                    [
+                      168,
+                      255,
+                      88
+                    ],
+                    [
+                      226,
+                      255,
+                      30
+                    ],
+                    [
+                      245,
                       212,
-                      1,
-                      0
+                      12
                     ],
                     [
-                      209,
-                      1,
-                      0
-                    ],
-                    [
-                      209,
-                      0,
+                      255,
+                      173,
                       1
                     ],
                     [
-                      207,
-                      0,
+                      255,
+                      126,
                       0
                     ],
                     [
-                      206,
-                      1,
+                      255,
+                      76,
+                      2
+                    ],
+                    [
+                      244,
+                      49,
                       0
                     ],
                     [
-                      203,
-                      1,
-                      0
-                    ],
-                    [
-                      203,
-                      0,
+                      236,
+                      23,
                       1
                     ],
                     [
-                      201,
+                      228,
                       0,
                       0
                     ],
                     [
-                      199,
-                      1,
-                      0
-                    ],
-                    [
-                      197,
+                      227,
                       0,
-                      0
+                      1
                     ]
                   ],
                   "labels": [
@@ -1248,8 +1296,8 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       },
-      "sha256": "0682bda2874708829292da6fde8658ccad8c079dc9451d1a01c1eb8da47f2e50",
-      "bytes": 17167,
+      "sha256": "02c77f79a836241410b58466ba9be9c5ddacb09578e44e832ad3b2dd7e520220",
+      "bytes": 17947,
       "dependencies": [],
       "verification": "bytes-verified",
       "acquisitionOperation": null,
@@ -1591,14 +1639,14 @@
       "outputs": [
         {
           "url": "/scenes/ceres/ceres-ammonium-band@2x.webp",
-          "bytes": 2933488,
-          "sha256": "9b85965d4d614f05ee2701cb83b08b6acab092815a85c27723c365bf5d091c9b",
+          "bytes": 3649714,
+          "sha256": "432930bbbb4d4cb4876ddabafef36160e2fdcccfabe86a074426abe966863623",
           "verification": "bytes-verified"
         },
         {
           "url": "/scenes/ceres/ceres-lens-ammonium-band.webp",
-          "bytes": 2218,
-          "sha256": "b5834f26ca16e553bf54489f6c36d6f0fc2ec1ffd1882d8e2086d68151a32b37",
+          "bytes": 3044,
+          "sha256": "db394e292ae450b61a2716544d444dac56c47a6abe493c168b620f91ddd9f80b",
           "verification": "bytes-verified"
         },
         {
@@ -2016,8 +2064,8 @@
       "outputs": [
         {
           "url": "object:prepared/minimaps/ammonium-band.webp",
-          "bytes": 74058,
-          "sha256": "095c6388a47a792a1f8713c511a596c5ba592fa20b29dcab56fdc7a4c95ff5d5",
+          "bytes": 91760,
+          "sha256": "44c37cf599199dd1a4ea8a6ea690ba6d33369e043109c40229b9742e52c944b5",
           "verification": "bytes-verified"
         }
       ]
@@ -2029,7 +2077,7 @@
   },
   "lastPreparation": {
     "objectId": "ceres",
-    "materialSha256": "0f7b400acc5b9d8a44cbac8e45ce41791e4af207c65baabe0741ced79f919aaa",
+    "materialSha256": "6d7e8645d2c4907ea8201beba9422b67ef7aaccad764286314a3da8147d75747",
     "verifier": {
       "path": "tools/objects/provenance.mts",
       "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",

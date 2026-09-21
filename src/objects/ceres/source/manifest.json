@@ -317,8 +317,8 @@
     {
       "id": "ceres-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 9960,
-      "expectedSha256": "3f808a6f7ecc2edb4b296fa959fadebb4c680cf2a600fdbf8541d64018e91aed",
+      "expectedBytes": 10128,
+      "expectedSha256": "e1093e81637b591a6a3e063519a56794b483a03c77a4690a34a6ef7a0477f515",
       "origin": "Repository-authored Ceres raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -430,8 +430,8 @@
     {
       "id": "ceres-object-content",
       "path": "content/object.json",
-      "expectedBytes": 17167,
-      "expectedSha256": "0682bda2874708829292da6fde8658ccad8c079dc9451d1a01c1eb8da47f2e50",
+      "expectedBytes": 17947,
+      "expectedSha256": "02c77f79a836241410b58466ba9be9c5ddacb09578e44e832ad3b2dd7e520220",
       "origin": "Repository-authored Ceres object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
