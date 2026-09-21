@@ -70,5 +70,33 @@
     "license": "CC BY-SA 3.0",
     "sha256": "fb6cfc07e50411fa6c7b1dcce909eeac9a01cd9a22726d3cd320d7b15e4db643",
     "bytes": 2350978
+  },
+  {
+    "id": "vst",
+    "url": "https://cdn.eso.org/images/large/eso1119k.jpg",
+    "sourcePage": "https://www.eso.org/public/images/eso1119k/",
+    "credit": "ESO/INAF-VST/OmegaCAM/G. Lombardi",
+    "license": "CC BY 4.0",
+    "sha256": "09fdf087fe6f6de848c8638b1c5934bf7f35248a3fb040c376fb265972661239",
+    "bytes": 6700160
+  },
+  {
+    "id": "vista",
+    "url": "https://cdn.eso.org/images/large/vista_hz_02.jpg",
+    "sourcePage": "https://www.eso.org/public/images/vista_hz_02/",
+    "credit": "ESO",
+    "license": "CC BY 4.0",
+    "sha256": "d7332db87f3567bc8a71511f8f9194dc38a3ac218affebda6fe1b8c1918f56e9",
+    "bytes": 3793201
+  },
+  {
+    "id": "gaia",
+    "url": "https://cdn.eso.org/images/large/eso1908d.jpg",
+    "sourcePage": "https://www.eso.org/public/images/eso1908d/",
+    "credit": "ESA/ATG medialab; background image: ESO/S. Brunier",
+    "license": "CC BY 4.0",
+    "kind": "published-artwork",
+    "sha256": "de1a96add15e5f8e0fbf848152945978e8a958fd0cd599840c0e0a0c779bb74b",
+    "bytes": 2007483
   }
 ]

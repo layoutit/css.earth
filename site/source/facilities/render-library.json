@@ -380,6 +380,42 @@
       }
     },
     {
+      "id": "gaia",
+      "path": "images/gaia.webp",
+      "url": "/shell/facility-renders/gaia.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 57642,
+      "sha256": "0647986992cd5288ccb4d1ac47418615ba12fa50370ca2d3b341df275f296717",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-gaia",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/10"
+          }
+        ]
+      },
+      "source": {
+        "id": "gaia",
+        "url": "https://cdn.eso.org/images/large/eso1908d.jpg",
+        "sourcePage": "https://www.eso.org/public/images/eso1908d/",
+        "credit": "ESA/ATG medialab; background image: ESO/S. Brunier",
+        "license": "CC BY 4.0",
+        "sha256": "de1a96add15e5f8e0fbf848152945978e8a958fd0cd599840c0e0a0c779bb74b",
+        "bytes": 2007483,
+        "kind": "published-artwork",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
       "id": "galileo",
       "path": "images/galileo.webp",
       "url": "/shell/facility-renders/galileo.webp",
@@ -2479,6 +2515,42 @@
       }
     },
     {
+      "id": "vista",
+      "path": "images/vista.webp",
+      "url": "/shell/facility-renders/vista.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 65020,
+      "sha256": "7ba157b4c786c03ec664050aa4301269bc4d78f2761d0f4ae98d8065d09314ee",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vista",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/9"
+          }
+        ]
+      },
+      "source": {
+        "id": "vista",
+        "url": "https://cdn.eso.org/images/large/vista_hz_02.jpg",
+        "sourcePage": "https://www.eso.org/public/images/vista_hz_02/",
+        "credit": "ESO",
+        "license": "CC BY 4.0",
+        "sha256": "d7332db87f3567bc8a71511f8f9194dc38a3ac218affebda6fe1b8c1918f56e9",
+        "bytes": 3793201,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
+      }
+    },
+    {
       "id": "vlba",
       "path": "images/vlba.webp",
       "url": "/shell/facility-renders/vlba.webp",
@@ -2762,6 +2834,42 @@
             0.44020438923995003
           ]
         }
+      }
+    },
+    {
+      "id": "vst",
+      "path": "images/vst.webp",
+      "url": "/shell/facility-renders/vst.webp",
+      "width": 592,
+      "height": 296,
+      "displayWidth": 296,
+      "displayHeight": 148,
+      "composition": {
+        "scale": 1,
+        "offsetXCssPixels": 0
+      },
+      "bytes": 54404,
+      "sha256": "b5414e461108870313185c792dd46c48edc5d55bbc112ecfde555e1b59880623",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "artwork-photo-vst",
+            "role": "artwork",
+            "evidence": "site/source/facilities/photograph-records.json#/8"
+          }
+        ]
+      },
+      "source": {
+        "id": "vst",
+        "url": "https://cdn.eso.org/images/large/eso1119k.jpg",
+        "sourcePage": "https://www.eso.org/public/images/eso1119k/",
+        "credit": "ESO/INAF-VST/OmegaCAM/G. Lombardi",
+        "license": "CC BY 4.0",
+        "sha256": "09fdf087fe6f6de848c8638b1c5934bf7f35248a3fb040c376fb265972661239",
+        "bytes": 6700160,
+        "kind": "published-photograph",
+        "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
       }
     }
   ]
