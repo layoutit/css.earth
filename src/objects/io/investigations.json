@@ -106,23 +106,74 @@
       ]
     },
     {
-      "id": "davies-2024-thermal-sources",
-      "subject": "Davies et al. (2024) global map of Io's volcanic thermal emission, Table A1 and Figure 1",
+      "id": "jiram-m-night-mosaic",
+      "subject": "Juno JIRAM M-band (4.8 µm) night-side hot-spot map, orbits 41, 43, 47 and 49",
       "status": "included",
-      "finding": "The open-access (CC BY 4.0) machine-readable Table A1 lists 343 thermal sources with latitude, west longitude and power, through Juno orbit PJ49. It is drawn as the Volcanic heat lens with Figure 1's five power classes, colors and symbol sizes measured from the published figure, over the Monochrome mosaic. West longitudes land within 2 degrees of the IAU Gazetteer east longitudes for Loki Patera, Pele, Janus Patera and Pillan. Symbol sizes are display classes, not hot-spot sizes.",
+      "finding": "Our reduction of 59 JIRAM frames, following Mura et al. (2024), supplies the Volcanic heat lens. 34 frames register to the sunlit limb; integrated hot-spot output matches the paper's Table 3 (median ratio 1.06 per orbit, 0.83 in the merged map) and 22 of 24 bright peaks lie within 3 degrees of a Davies et al. (2024) source. Coverage is 22% of Io, north and night side only.",
       "evidence": [
-        "https://doi.org/10.3847/PSJ/ad4346",
-        "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
-        "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision3/psjad4346f1_hr.jpg",
-        "https://github.com/layoutit/css.earth/blob/f067baedf12d3aea944f786105b63d151c84d9d8/src/objects/io/README.md",
-        "https://github.com/layoutit/css.earth/blob/f067baedf12d3aea944f786105b63d151c84d9d8/src/objects/io/evidence/volcanic-heat/volcanic-heat.png"
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/README.md",
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/source/science/jiram/receipt.json",
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/evidence/volcanic-heat/figure-2.png",
+        "https://doi.org/10.3389/fspas.2024.1369472"
       ],
       "checked": [
         {
           "date": "2026-09-21",
-          "commit": "f067baedf12d3aea944f786105b63d151c84d9d8"
+          "commit": "d6d719b618fbcc16a70c0aa4fe650f71199a4d11"
         }
-      ]
+      ],
+      "revisitWhen": "Orbits 51 to 60 are reduced, or Mura et al. or the JIRAM team publish radiance maps as data."
+    },
+    {
+      "id": "jiram-pre-orbit-37",
+      "subject": "JIRAM Io frames before orbit 37 (2018 to 2021)",
+      "status": "excluded",
+      "finding": "Mura et al. (2024), Section 2.2: most images before orbit 37 are heavily saturated and fit only for locating hot spots, so their radiances are not mapped. A trial with them raised coverage to 49% but carried saturation streaks.",
+      "evidence": [
+        "https://doi.org/10.3389/fspas.2024.1369472",
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/README.md"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "d6d719b618fbcc16a70c0aa4fe650f71199a4d11"
+        }
+      ],
+      "revisitWhen": "A saturation correction for early JIRAM Io frames is published, or the lens shows hot-spot locations rather than radiance."
+    },
+    {
+      "id": "jiram-orbits-51-to-60",
+      "subject": "JIRAM Io close passes of orbits 51 to 60 (late 2023 to 2024), down to 3 km per pixel, including the south",
+      "status": "deferred",
+      "finding": "Not yet screened with the SPICE camera. Mura et al. (2024) say Io is too large in these frames to fit as a sphere; the limb fit needs the ellipsoid, and the south would fill much of the missing coverage.",
+      "evidence": [
+        "https://doi.org/10.3389/fspas.2024.1369472",
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/src/objects/io/source/science/jiram/recipe.json"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "d6d719b618fbcc16a70c0aa4fe650f71199a4d11"
+        }
+      ],
+      "revisitWhen": "The mosaic tool fits the limb with Io's ellipsoid and the orbits 51 to 60 frames are screened."
+    },
+    {
+      "id": "davies-2024-thermal-sources",
+      "subject": "Davies et al. (2024) Table A1 hot spots",
+      "status": "excluded",
+      "finding": "No longer drawn: the symbol lens was replaced by measured JIRAM radiance. The table is kept byte for byte as an independent check of the map's hot-spot positions.",
+      "evidence": [
+        "https://doi.org/10.3847/PSJ/ad4346",
+        "https://github.com/layoutit/css.earth/blob/d6d719b618fbcc16a70c0aa4fe650f71199a4d11/tests/objects/unit/io/volcanic-heat.test.mts"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "d6d719b618fbcc16a70c0aa4fe650f71199a4d11"
+        }
+      ],
+      "revisitWhen": "A lens shows catalogued hot-spot power as symbols again."
     }
   ]
 }
