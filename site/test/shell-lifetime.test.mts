@@ -86,7 +86,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
   const elements: Element[] = [];
   for (const selector of [".planet-drawer-content", ".planet-sidebar", ".planet-sidebar-collapse",
     ".planet-sidebar-search", ".planet-sidebar-search-card", ".planet-sidebar-view-all",
-    ".planet-information-panel", ".planet-object-browser", ".planet-object-context", ".planet-object-empty",
+    ".planet-information-panel", ".planet-object-browser", ".planet-object-context", ".planet-object-empty", ".planet-selected-content",
     ".planet-sheet-handle", ".planet-settings-panel", ".planet-settings-action",
     ".explorer-rail-explore", ".explorer-rail-about", ".explorer-about-panel",
     ".planet-motion-setting", ".planet-surface-labels-setting", ".planet-heliosphere-setting", ".planet-illustration-models-setting", ".planet-minimap-setting", ".planet-three-d-stars-setting"]) {
@@ -98,7 +98,7 @@ function fixture(options: Partial<ShellOptions> = {}) {
   drawer.selectors.set(".planet-information-panel", selectors.element(".planet-information-panel"));
   const item = new Element();
   selectors.element(".planet-object-browser").selectors.set(".planet-object-item", [item]);
-  const tabs = ['all', 'planet', 'satellite', 'asteroid'].map(type => {
+  const tabs = ['all', 'planet', 'satellite', 'nebula', 'galaxy', 'asteroid'].map(type => {
     const tab = new Element(); tab.dataset.objectTab = type; tab.id = `object-tab-${type}`;
     tab.selectors.set('.planet-object-tab-count', new Element()); elements.push(tab);
     return tab;
@@ -164,12 +164,14 @@ test('retained catalogue groups follow filters and release their visibility obse
   assert.deepEqual(groups.map(group => group.hidden), [true, false]);
   assert.deepEqual(groups.map(group => group.style.containIntrinsicBlockSize), ['0px', '20px']);
   assert.equal(browser.inert, false);
-  assert.equal(f.selectors.element('.planet-information-panel').inert, false, 'Search stays separate from the selected object card');
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
+  assert.equal(f.selectors.element('.planet-selected-content').inert, true);
   search.value = 'Solar System'; search.dispatchEvent(new Event('input'));
   assert.deepEqual(groups.map(group => group.hidden), [false, false]);
   search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
   assert.equal(browser.inert, true);
-  assert.equal(f.selectors.element('.planet-information-panel').inert, false);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, false);
+  assert.equal(f.selectors.element('.planet-selected-content').inert, false);
   shell.destroy();
   assert.equal(getObserver().disconnected, true);
 });
@@ -433,9 +435,8 @@ test('camera scale keeps the overview while the separate Atlas browser filters a
   assert.equal(planetBranch.open, false, 'Second-level groups collapse when Solar System auto-selects');
   assert.equal(earthBranch.open, false, 'Deeper body branches collapse with their second-level group');
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
-  assert.equal(introduction.hidden, false, 'Search does not replace the retained overview card');
-  assert.equal(contextPanel.hidden, false);
-  assert.equal(navigationTree.hidden, false);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, true, 'Search replaces the selected content as one unit');
+  assert.equal(navigationTree.hidden, false, 'Search filters the retained Atlas navigation');
   assert.equal(browser.requireSelector('#object-category-results').hidden, false);
   assert.equal(items[0].hidden, true); assert.equal(items[1].hidden, false);
   assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
@@ -443,7 +444,7 @@ test('camera scale keeps the overview while the separate Atlas browser filters a
   assert.equal(tabs[0].getAttribute('aria-selected'), 'true', 'Text search includes every matching category');
   assert.equal(browser.requireSelector('#object-category-results').getAttribute('aria-labelledby'), null);
   search.dispatchEvent(Object.assign(new Event('keydown'), { key: 'Escape' }));
-  assert.equal(introduction.hidden, false);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, false);
   assert.equal(navigationTree.hidden, false);
   assert.equal(browser.hidden, true);
   assert.equal(browser.requireSelector('#object-category-results').hidden, false, 'The retained results stay ready inside the closed browser');
@@ -604,7 +605,7 @@ test('clearing search keeps the current object or overview card and permits anot
   const checkClear = (scope: string, value = '') => {
     input('moon');
     assert.equal(browser.hidden, false);
-    assert.equal(information.hidden, scope !== 'object');
+    assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
     input(value);
     assert.equal(search.value, value, 'The cleared input is not refilled');
     assert.equal(information.hidden, scope !== 'object');
@@ -637,7 +638,7 @@ test('flight completion and overview handoff preserve a newer active search', ()
   search.value = 'second'; search.dispatchEvent(new Event('input'));
   shell.setObject({ id: 'first', name: 'First', apply() {}, dispose() {} });
   assert.equal(search.value, 'second');
-  assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
   shell.setOverview(true);
   assert.equal(search.value, 'second');
   f.documentTarget.activeElement = null;
@@ -646,7 +647,7 @@ test('flight completion and overview handoff preserve a newer active search', ()
   f.selectors.element('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
   assert.equal(search.value, 'second', 'Search button preserves the active query');
   assert.equal(f.documentTarget.activeElement, search);
-  assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
+  assert.equal(f.selectors.element('.planet-selected-content').hidden, false, 'The browse button toggles: collapsing results restores the selected content');
   f.selectors.element('.planet-sidebar-view-all').dispatchEvent(new Event('click'));
   assert.equal(search.value, 'second', 'Repeating search does not dismiss results');
   search.dispatchEvent(Object.assign(new Event('keydown', { cancelable: true }), { key: 'Escape' }));
@@ -663,6 +664,9 @@ test('category pills toggle shared results without camera navigation or opening 
     { label: 'Moons', type: 'satellite', name: 'moon', singular: 'moon' },
     { label: 'Comets', type: 'comet', name: 'halley', singular: 'comet' },
     { label: 'Asteroids', type: 'asteroid', name: 'eros', singular: 'asteroid' },
+    { label: 'Stars', type: 'star', name: 'sun', singular: 'star' },
+    { label: 'Nebulae', type: 'nebula', name: 'm42', singular: 'nebula' },
+    { label: 'Galaxies', type: 'galaxy', name: 'm31', singular: 'galaxy' },
   ];
   const buttons = categories.map(category => {
     const button = new Element();
@@ -705,13 +709,13 @@ test('category pills toggle shared results without camera navigation or opening 
     assert.equal(search.value, categories[index].label);
     assert.equal(introduction.hidden, true, 'Category searches also use the plain results card');
     assert.equal(browser.hidden, false);
-    assert.equal(f.selectors.element('.planet-information-panel').hidden, false);
+    assert.equal(f.selectors.element('.planet-selected-content').hidden, true);
     assert.deepEqual(items.map(item => item.hidden), items.map((item, i) =>
       i !== index && !(index === 0 && item === dwarf)));
     assert.deepEqual(buttons.map(item => item.ariaPressed), buttons.map((_, i) => String(i === index)));
   }
   assert.deepEqual(navigations, [], 'pills never request camera navigation');
-  buttons[3].dispatchEvent(new Event('click'));
+  buttons[6].dispatchEvent(new Event('click'));
   await Promise.resolve();
   assert.equal(search.value, '');
   assert.equal(browser.hidden, true);
@@ -720,11 +724,11 @@ test('category pills toggle shared results without camera navigation or opening 
   assert.equal(f.selectors.element('.planet-sheet-handle').checked, false);
   for (const query of ['planet', 'planets']) {
     search.value = query; search.dispatchEvent(new Event('input'));
-    assert.deepEqual(items.map(item => item.hidden), [false, true, true, true, false]);
+    assert.deepEqual(items.map(item => item.hidden), [false, true, true, true, true, true, true, false]);
     assert.equal(buttons[0].ariaPressed, 'true');
   }
   search.value = 'dwarf planets'; search.dispatchEvent(new Event('input'));
-  assert.deepEqual(items.map(item => item.hidden), [true, true, true, true, false], 'Specific dwarf planet search stays specific');
+  assert.deepEqual(items.map(item => item.hidden), [true, true, true, true, true, true, true, false], 'Specific dwarf planet search stays specific');
   buttons[3].dispatchEvent(new Event('click'));
   shell.setObject({ id: 'mars', name: 'Mars', apply() {}, dispose() {} });
   assert.equal(search.value, 'Asteroids');

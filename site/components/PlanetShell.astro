@@ -6,7 +6,6 @@ import PreparedFocusLenses from "./PreparedFocusLenses.astro";
 import { CONTEXT_AVAILABILITY } from '../context-availability.mts';
 import type { Props } from "../planet-shell-types";
 import { SCENE_OBJECTS } from "../objects.mts";
-import { objectClassificationLabel } from "../planet-search-objects.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { requireObjectControls } from "../scene-contract.mts";
 import SourcesLink from './SourcesLink.astro';
@@ -72,10 +71,15 @@ const unavailableSystems = planetarySystems.unavailable.map(system => ({
 const searchPlaceholder = 'Search celestial objects...';
 const searchFormId = `${objectId}-search`;
 // Each pill types the plural classification query the search already understands.
-const searchCategories = ([
-  ['planet', 'public'], ['satellite', 'moon_stars'], ['comet', 'motion_blur'], ['asteroid', 'grain'],
-] as const).map(([classification, icon]) =>
-  ({ classification, icon, label: `${objectClassificationLabel(classification)}s` }));
+const searchCategories = [
+  { classification: 'planet', icon: 'public', label: 'Planets' },
+  { classification: 'satellite', icon: 'moon_stars', label: 'Moons' },
+  { classification: 'comet', icon: 'motion_blur', label: 'Comets' },
+  { classification: 'asteroid', icon: 'grain', label: 'Asteroids' },
+  { classification: 'star', icon: 'asterisk', label: 'Stars' },
+  { classification: 'nebula', icon: 'grain', label: 'Nebulae' },
+  { classification: 'galaxy', icon: 'public', label: 'Galaxies' },
+] as const;
 ---
 
 <header class="explorer-shell-header">
@@ -119,38 +123,6 @@ const searchCategories = ([
           <span class="planet-search-browser-caret" aria-hidden="true"></span>
         </button>
       </form>
-      {!navigation && <nav
-        id={`${objectId}-object-browser`}
-        class="planet-object-browser maps-object-results"
-        aria-label="Celestial objects"
-        hidden
-      >
-        <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
-          <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
-            aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
-            <p class="planet-feature-hint planet-destination-hint" role="status"></p>
-            <ul class="planet-destination-list">
-              {Array.from({ length: 8 }, () => <li hidden>
-                <a class="planet-destination-result">
-                  <span class="planet-destination-result-name"></span>
-                  <span class="planet-destination-result-context"></span>
-                </a>
-              </li>)}
-            </ul>
-          </PlanetAccordion>
-          {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
-            <p class="planet-destination-hint" role="status"></p>
-            <ul class="planet-destination-list">
-              {Array.from({ length: 8 }, () => <li hidden>
-                <button class="planet-destination-result" type="button">
-                  <span class="planet-destination-result-name"></span>
-                  <span class="planet-destination-result-context"></span>
-                </button>
-              </li>)}
-            </ul>
-          </section>}
-        </PlanetObjectResults>
-      </nav>}
     </div>
   </div>
   <div class="planet-search-categories" role="group" aria-label="Browse by type">
@@ -288,6 +260,39 @@ const searchCategories = ([
   </section>
   <div class="planet-drawer-content" id={`${objectId}-information`}>
     <input class="planet-sheet-handle" type="checkbox" aria-label="Expand information sheet" aria-controls={`${objectId}-information`} />
+    {!navigation && <nav
+      id={`${objectId}-object-browser`}
+      class="planet-object-browser maps-object-results"
+      aria-label="Celestial objects"
+      hidden
+    >
+      <PlanetObjectResults activeObjectId={objectId} formId={searchFormId}>
+        <PlanetAccordion title="Named features" count={0} class="planet-feature-results"
+          aria-label={features?.searchLabel ?? 'Named features'} data-feature-index={JSON.stringify(featureIndex)} hidden>
+          <p class="planet-feature-hint planet-destination-hint" role="status"></p>
+          <ul class="planet-destination-list">
+            {Array.from({ length: 8 }, () => <li hidden>
+              <a class="planet-destination-result">
+                <span class="planet-destination-result-name"></span>
+                <span class="planet-destination-result-context"></span>
+              </a>
+            </li>)}
+          </ul>
+        </PlanetAccordion>
+        {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+          <p class="planet-destination-hint" role="status"></p>
+          <ul class="planet-destination-list">
+            {Array.from({ length: 8 }, () => <li hidden>
+              <button class="planet-destination-result" type="button">
+                <span class="planet-destination-result-name"></span>
+                <span class="planet-destination-result-context"></span>
+              </button>
+            </li>)}
+          </ul>
+        </section>}
+      </PlanetObjectResults>
+    </nav>}
+    <div class="planet-selected-content">
     {!navigation && <div class="planet-object-context" hidden><PlanetCard class="planet-prepared-information-panel" data-prepared-focus-card hidden>
         <section class="planet-selected-panel">
           {(['milky-way', 'local-group', 'nearby-universe'] as const).map(scope =>
@@ -393,6 +398,7 @@ const searchCategories = ([
         <p class="planet-introduction" data-card-preview-description></p>
       </section>
     </template>}
+    </div>
   </div>
 </aside>
 </div>
