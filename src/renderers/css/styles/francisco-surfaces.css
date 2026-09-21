@@ -1,0 +1,25 @@
+/* Prepared scene presentation, scoped to its mounted object. */
+.example-stage:where([data-object-id="francisco"]) > :is(.francisco-sun-camera, .francisco-camera, .francisco-material-root) {
+  position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="francisco"]) .francisco-sun-camera, :where(.planet-stage[data-object-id="francisco"]) .francisco-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="francisco"]) .francisco-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.planet-stage[data-object-id="francisco"]) .francisco-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.planet-stage[data-object-id="francisco"]) .francisco-body > u {
+  position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
+  margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
+  border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
+  corner-top-left-shape: bevel; corner-top-right-shape: bevel;
+  background-image: var(--francisco-surface-image); background-repeat: no-repeat;
+}
+:where(.planet-stage[data-object-id="francisco"]) .francisco-body > .francisco-polar { background-image: var(--francisco-poles-image); }
+:where(.planet-stage[data-object-id="francisco"]) .francisco-material-root { z-index: 3; --francisco-billboard-opacity: 0; }
+:where(.planet-stage[data-object-id="francisco"]) .francisco-material, :where(.planet-stage[data-object-id="francisco"]) .francisco-billboard {
+  position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
+  margin: -230px 0 0 -230px; pointer-events: none;
+}
+:where(.planet-stage[data-object-id="francisco"]) .francisco-material { background-repeat: no-repeat; transform: rotate(var(--francisco-light-roll, 0deg)); }
+:where(.planet-stage[data-object-id="francisco"]) .francisco-billboard { border-radius: 50%; background-color: var(--francisco-billboard-color); opacity: var(--francisco-billboard-opacity); }
+.planet-stage:where([data-object-id="francisco"])[data-lod="billboard"] .francisco-scene, .planet-stage:where([data-object-id="francisco"])[data-lod="marker"] .francisco-scene { visibility: hidden; }
+.planet-stage:where([data-object-id="francisco"])[data-lod="marker"] .francisco-billboard { opacity: 0; }
+

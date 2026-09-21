@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "lysithea",
+  "name": "Lysithea",
+  "titleLabel": "Lysithea",
+  "horizons": "510",
+  "aliases": [
+    "Jupiter X",
+    "JX"
+  ],
+  "classification": "satellite",
+  "population": "Irregular satellite of Jupiter",
+  "parent": "jupiter",
+  "fullAxesKm": [
+    24.0,
+    24.0,
+    24.0
+  ],
+  "radiusKm": 12.0,
+  "axesStatus": "Illustrative equal axes at the radius JPL Horizons lists; these are not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": null,
+  "periodText": "Not adopted",
+  "rotationFact": false,
+  "shapeLabel": "Sphere at the JPL radius",
+  "source": "https://ssd.jpl.nasa.gov/horizons/",
+  "credit": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/sats/discovery.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 12 km radius JPL Horizons lists for Lysithea. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Lysithea is an outer, irregular moon of Jupiter, discovered in 1938. It follows a wide, tilted orbit far beyond the large moons.",
+  "card": "An outer, irregular moon of Jupiter.",
+  "datasetSummary": "A sphere at the 12 km radius JPL lists. Its shape, pole and rotation are not measured.",
+  "textCitations": [
+    {
+      "catalogueId": "jpl-horizons",
+      "url": "https://ssd.jpl.nasa.gov/horizons/",
+      "label": "JPL Horizons",
+      "checked": "2026-09-21",
+      "locator": "Object data page for 510 (Lysithea), revised 2025-May-12"
+    }
+  ],
+  "distanceAu": 5.2
+}

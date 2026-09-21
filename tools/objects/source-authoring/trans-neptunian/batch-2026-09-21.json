@@ -1,0 +1,258 @@
+{
+ "checkedOn": "2026-09-21",
+ "base": "main",
+ "acquisitionNote": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/trans-neptunian/batch-2026-09-21.json.",
+ "referenceDirectory": "output/trans-neptunian/references",
+ "bodies": [
+  {
+   "id": "albion",
+   "name": "Albion",
+   "titleLabel": "Albion",
+   "horizons": "15760;",
+   "aliases": [
+    "15760 Albion",
+    "1992 QB1"
+   ],
+   "classification": "asteroid",
+   "population": "Trans-Neptunian object",
+   "fullAxesKm": [
+    130.2,
+    130.2,
+    130.2
+   ],
+   "radiusKm": 65.1,
+   "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.14; not measured.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": null,
+   "periodText": "Not adopted",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": false,
+   "shapeLabel": "Sphere at an assumed-albedo diameter",
+   "source": "https://doi.org/10.1051/0004-6361/201322416",
+   "credit": "JPL Small-Body Database absolute magnitude H = 7.18 for 15760 Albion (1992 QB1); diameter estimated by cssEarth with the 0.14 median albedo of cold classical objects from Vilenius et al. (2014), Astronomy & Astrophysics 564, A35",
+   "papers": [
+    "https://doi.org/10.1051/0004-6361/201322416",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at 130.2 km, estimated from JPL's absolute magnitude H = 7.18 with an assumed albedo of 0.14, the median Vilenius et al. (2014) report for cold classical objects. The size is not measured.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Albion, found in 1992 as 1992 QB1, was the first Kuiper belt object discovered after Pluto and Charon.",
+   "card": "The first Kuiper belt object found after Pluto.",
+   "datasetSummary": "A sphere at about 130.2 km, estimated from brightness with an assumed albedo.",
+   "distanceAu": 44.1,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 15760 Albion (1992 QB1): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "uni",
+   "name": "Uni",
+   "titleLabel": "Uni",
+   "horizons": "55637;",
+   "aliases": [
+    "55637 Uni",
+    "2002 UX25"
+   ],
+   "classification": "asteroid",
+   "population": "Trans-Neptunian object",
+   "fullAxesKm": [
+    692.0,
+    692.0,
+    692.0
+   ],
+   "radiusKm": 346.0,
+   "axesStatus": "Illustrative equal axes at the radiometric diameter; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 14.382,
+   "periodText": "14.382 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the measured diameter",
+   "source": "https://doi.org/10.1051/0004-6361/201321329",
+   "credit": "Fornasier et al. (2013), Astronomy & Astrophysics 555, A15; Herschel PACS and SPIRE thermal radiometry",
+   "papers": [
+    "https://doi.org/10.1051/0004-6361/201321329",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 692 ± 23 km diameter measured from thermal emission. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Uni is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2002 UX25.",
+   "card": "A large icy body in the Kuiper belt.",
+   "datasetSummary": "A sphere at the 692 km diameter measured from its heat. Shape and pole are not measured.",
+   "distanceAu": 42.9,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 55637 Uni (2002 UX25): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "aya",
+   "name": "Aya",
+   "titleLabel": "Aya",
+   "horizons": "55565;",
+   "aliases": [
+    "55565 Aya",
+    "2002 AW197"
+   ],
+   "classification": "asteroid",
+   "population": "Trans-Neptunian object",
+   "fullAxesKm": [
+    768.0,
+    768.0,
+    768.0
+   ],
+   "radiusKm": 384.0,
+   "axesStatus": "Illustrative equal axes at the radiometric diameter; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 8.86,
+   "periodText": "8.86 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the measured diameter",
+   "source": "https://doi.org/10.1051/0004-6361/201322416",
+   "credit": "Vilenius et al. (2014), Astronomy & Astrophysics 564, A35; Herschel PACS and Spitzer MIPS thermal radiometry",
+   "papers": [
+    "https://doi.org/10.1051/0004-6361/201322416",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 768 (+39/-38) km diameter measured from thermal emission. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Aya is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2002 AW197.",
+   "card": "A large icy body in the Kuiper belt.",
+   "datasetSummary": "A sphere at the 768 km diameter measured from its heat. Shape and pole are not measured.",
+   "distanceAu": 47.4,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 55565 Aya (2002 AW197): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "goibniu",
+   "name": "Goibniu",
+   "titleLabel": "Goibniu",
+   "horizons": "90568;",
+   "aliases": [
+    "90568 Goibniu",
+    "2004 GV9"
+   ],
+   "classification": "asteroid",
+   "population": "Trans-Neptunian object",
+   "fullAxesKm": [
+    680.0,
+    680.0,
+    680.0
+   ],
+   "radiusKm": 340.0,
+   "axesStatus": "Illustrative equal axes at the radiometric diameter; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 5.86,
+   "periodText": "5.86 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the measured diameter",
+   "source": "https://doi.org/10.1051/0004-6361/201118743",
+   "credit": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+   "papers": [
+    "https://doi.org/10.1051/0004-6361/201118743",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 680 ± 34 km diameter measured from thermal emission. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Goibniu is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2004 GV9.",
+   "card": "A large icy body in the Kuiper belt.",
+   "datasetSummary": "A sphere at the 680 km diameter measured from its heat. Shape and pole are not measured.",
+   "distanceAu": 41.9,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 90568 Goibniu (2004 GV9): orbit class and physical parameters"
+    }
+   ]
+  },
+  {
+   "id": "ritona",
+   "name": "Ritona",
+   "titleLabel": "Ritona",
+   "horizons": "145452;",
+   "aliases": [
+    "145452 Ritona",
+    "2005 RN43"
+   ],
+   "classification": "asteroid",
+   "population": "Trans-Neptunian object",
+   "fullAxesKm": [
+    679.0,
+    679.0,
+    679.0
+   ],
+   "radiusKm": 339.5,
+   "axesStatus": "Illustrative equal axes at the radiometric diameter; not three measured axes.",
+   "poleIcrfDegrees": [
+    0,
+    90
+   ],
+   "periodHours": 6.95,
+   "periodText": "6.95 h",
+   "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+   "rotationFact": true,
+   "shapeLabel": "Sphere at the measured diameter",
+   "source": "https://doi.org/10.1051/0004-6361/201118743",
+   "credit": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+   "papers": [
+    "https://doi.org/10.1051/0004-6361/201118743",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+   ],
+   "shapeMeaning": "Illustrative sphere at the 679 (+55/-73) km diameter measured from thermal emission. No shape model is published.",
+   "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+   "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+   "introduction": "Ritona is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2005 RN43.",
+   "card": "A large icy body in the Kuiper belt.",
+   "datasetSummary": "A sphere at the 679 km diameter measured from its heat. Shape and pole are not measured.",
+   "distanceAu": 41.5,
+   "textCitations": [
+    {
+     "catalogueId": "jpl-small-body-database",
+     "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+     "label": "JPL Small-Body Database",
+     "checked": "2026-09-21",
+     "locator": "Record for 145452 Ritona (2005 RN43): orbit class and physical parameters"
+    }
+   ]
+  }
+ ]
+}

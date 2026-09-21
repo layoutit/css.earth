@@ -6,7 +6,7 @@
     "name": "Kerberos",
     "horizonsCode": "904",
     "meanRadiusKm": 4.75,
-    "gravitationalParameterKm3PerS2": 6.038e-05,
+    "gravitationalParameterKm3PerS2": 0.00006038,
     "parent": "pluto"
   },
   "physicalNotes": "PLU060 Horizons GMs (2024); radii match the sourced display shapes.\nNix/Hydra: Porter released meshes. Kerberos/Styx: Porter2025 fitted volumes.",

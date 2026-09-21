@@ -1,0 +1,52 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "goibniu",
+  "name": "Goibniu",
+  "titleLabel": "Goibniu",
+  "horizons": "90568;",
+  "aliases": [
+    "90568 Goibniu",
+    "2004 GV9"
+  ],
+  "classification": "asteroid",
+  "population": "Trans-Neptunian object",
+  "fullAxesKm": [
+    680.0,
+    680.0,
+    680.0
+  ],
+  "radiusKm": 340.0,
+  "axesStatus": "Illustrative equal axes at the radiometric diameter; not three measured axes.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 5.86,
+  "periodText": "5.86 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at the measured diameter",
+  "source": "https://doi.org/10.1051/0004-6361/201118743",
+  "credit": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+  "papers": [
+    "https://doi.org/10.1051/0004-6361/201118743",
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at the 680 ± 34 km diameter measured from thermal emission. No shape model is published.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Goibniu is a large icy body in the Kuiper belt beyond Neptune, first catalogued as 2004 GV9.",
+  "card": "A large icy body in the Kuiper belt.",
+  "datasetSummary": "A sphere at the 680 km diameter measured from its heat. Shape and pole are not measured.",
+  "distanceAu": 41.9,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 90568 Goibniu (2004 GV9): orbit class and physical parameters"
+    }
+  ]
+}

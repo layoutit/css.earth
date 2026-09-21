@@ -1,0 +1,20 @@
+{
+  "schema": "cssaya-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "aya-model-shadow@2x.webp",
+      "bytes": 42180,
+      "sha256": "6648cce95fa610eaa5136aeeab8c5cb1e6097d3d397030f65f1074af69c0cafb"
+    },
+    {
+      "filename": "aya-model-surface@2x.webp",
+      "bytes": 51060,
+      "sha256": "0046ca99cb82613c72eff4168a99e7f9b9bd941e54c8cad4d9dfe425cd6bee75"
+    },
+    {
+      "filename": "aya-model-thumbnail.webp",
+      "bytes": 444,
+      "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994"
+    }
+  ]
+}

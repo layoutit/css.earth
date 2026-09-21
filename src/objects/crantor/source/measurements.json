@@ -1,0 +1,51 @@
+{
+  "schema": "cssearth-distant-world-model@1",
+  "checkedOn": "2026-09-21",
+  "id": "crantor",
+  "name": "Crantor",
+  "titleLabel": "Crantor",
+  "horizons": "83982;",
+  "aliases": [
+    "83982 Crantor",
+    "2002 GO9"
+  ],
+  "classification": "asteroid",
+  "population": "Centaur",
+  "fullAxesKm": [
+    91.2,
+    91.2,
+    91.2
+  ],
+  "radiusKm": 45.6,
+  "axesStatus": "Illustrative equal axes at a diameter estimated from brightness with an assumed albedo of 0.059; not measured.",
+  "poleIcrfDegrees": [
+    0,
+    90
+  ],
+  "periodHours": 13.94,
+  "periodText": "13.94 h",
+  "periodSource": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "rotationFact": true,
+  "shapeLabel": "Sphere at an assumed-albedo diameter",
+  "source": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+  "credit": "JPL Small-Body Database, absolute magnitude H = 8.89 for 83982 Crantor (2002 GO9); diameter estimated by cssEarth with an assumed albedo of 0.059",
+  "papers": [
+    "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html"
+  ],
+  "shapeMeaning": "Illustrative sphere at 91.2 km, estimated from JPL's absolute magnitude H = 8.89 with an assumed albedo of 0.059, the median of the seven centaurs in this batch that have a JPL-cited albedo. The size is not measured.",
+  "orientationMeaning": "Illustrative ICRF north pole, arbitrary prime meridian and phase; no spin pole is published.",
+  "surfaceMeaning": "Unmapped surface: the standard grid is a coordinate aid, not observed colour or terrain.",
+  "introduction": "Crantor is a centaur, a small icy body orbiting the Sun among the giant planets.",
+  "card": "A centaur orbiting among the giant planets.",
+  "datasetSummary": "A sphere at about 91.2 km, estimated from brightness with an assumed albedo.",
+  "distanceAu": 19.4,
+  "textCitations": [
+    {
+      "catalogueId": "jpl-small-body-database",
+      "url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html",
+      "label": "JPL Small-Body Database",
+      "checked": "2026-09-21",
+      "locator": "Record for 83982 Crantor (2002 GO9): orbit class and physical parameters"
+    }
+  ]
+}

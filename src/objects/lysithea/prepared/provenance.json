@@ -1,0 +1,405 @@
+{
+  "schema": "cssearth-object-provenance@3",
+  "objectId": "lysithea",
+  "basis": "prepared",
+  "manifest": {
+    "path": "source/manifest.json",
+    "sha256": "4cc833a545652766bc63d1043db37bfd1a0fb169f11fc38d334ace2163357b5d"
+  },
+  "generator": {
+    "path": "tools/objects/provenance.mts",
+    "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+    "bindingsSha256": "5bbc8f934576a08c62696ef7bdc8f157bb9a1e59d4b5ef52b4e68bdd991e4ef3"
+  },
+  "recipes": [
+    {
+      "id": "terrestrial",
+      "path": "source/preparation/terrestrial.json",
+      "sha256": "c02969970ce6d92b97f4967a367af767809a609af693f8de49a1636e01c68fc1",
+      "parameters": {
+        "schema": "cssearth-terrestrial-preparation@1",
+        "kind": "solid-observation-body",
+        "namespace": "lysithea",
+        "displayName": "Lysithea",
+        "publicBase": "/scenes/lysithea/",
+        "raster": {
+          "width": 512,
+          "height": 256,
+          "bandCount": 16,
+          "gutter": 64,
+          "poleSize": 128,
+          "surfaceQuality": 94,
+          "reportMissingPixels": true,
+          "observations": [
+            {
+              "id": "model",
+              "consumer": "model-surface",
+              "validity": {
+                "kind": "image-rgb-no-data",
+                "noData": 160,
+                "centerLongitude": 180
+              },
+              "metadata": {
+                "label": "Shape model",
+                "modeled": true,
+                "coverage": "Illustrative sphere at the 12 km radius JPL Horizons lists for Lysithea. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted. The grid marks unmapped terrain."
+              }
+            }
+          ],
+          "scientific": [],
+          "observedColors": [],
+          "mosaics": []
+        },
+        "lighting": {
+          "frameSize": 512,
+          "columns": 8,
+          "frameCount": 128,
+          "logicalSize": 460,
+          "terminatorWidth": 0.1,
+          "directionalAmbient": 0.05,
+          "fullPhaseAmbient": 0.35,
+          "fullPhaseDiffuse": 0.65,
+          "maximumOpacity": 0.95
+        },
+        "geometry": {
+          "radius": 230,
+          "radiusKm": 12,
+          "camera": {
+            "framingScale": 1
+          },
+          "mapUrl": "/scenes/lysithea/lysithea-model-surface@2x.webp",
+          "polesUrl": "/scenes/lysithea/lysithea-model-poles@2x.webp",
+          "radialTerrain": {
+            "path": "shape/ellipsoid.tab",
+            "format": "pds-radius-table",
+            "grid": {
+              "metersPerUnit": 1000,
+              "expectedVertices": 2522,
+              "expectedFaces": 5040,
+              "stepDegrees": 5,
+              "longitudeDirection": "east-positive"
+            },
+            "faceBudget": 2000,
+            "texelsPerFace": 4096,
+            "simplification": {
+              "targetFaces": 480,
+              "maximumErrorMeters": 300,
+              "method": "source-meshoptimizer"
+            },
+            "primitive": "u"
+          }
+        },
+        "celestial": {
+          "sunSource": "JPL Horizons fixed 2026-09-03 epoch. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted."
+        },
+        "presentation": {
+          "defaultLens": "model"
+        }
+      }
+    },
+    {
+      "id": "content",
+      "path": "source/content/object.json",
+      "sha256": "7f09b5b0e58206ef50a4e9238e67f660636aa6cab105b081f4aeca36e41058b0",
+      "parameters": {
+        "schema": "cssearth-object-content@1",
+        "version": 1,
+        "id": "lysithea",
+        "displayName": "Lysithea",
+        "panel": {
+          "facts": [
+            {
+              "id": "dimensions",
+              "label": "Display model extents",
+              "value": "24 × 24 × 24 km",
+              "source": {
+                "url": "https://ssd.jpl.nasa.gov/horizons/",
+                "label": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12",
+                "checked": "2026-09-21",
+                "path": "source/measurements.json",
+                "catalogueId": "jpl-horizons",
+                "locator": "/fullAxesKm/0; /fullAxesKm/1; /fullAxesKm/2"
+              }
+            }
+          ],
+          "moreFacts": []
+        },
+        "lenses": {
+          "titleKey": "lenses",
+          "defaultLens": "model",
+          "labels": {
+            "model": "Shape model"
+          },
+          "controls": [
+            {
+              "id": "model",
+              "label": "Shape model",
+              "thumbnail": "/scenes/lysithea/lysithea-model-thumbnail.webp",
+              "surface": "lysithea-model-surface@2x.webp",
+              "poles": "lysithea-model-poles@2x.webp",
+              "source": {
+                "id": "published-shape",
+                "path": "../manifest.json",
+                "url": "https://ssd.jpl.nasa.gov/horizons/"
+              },
+              "noData": true
+            }
+          ]
+        },
+        "settings": {
+          "titleKey": "settings",
+          "controls": [
+            {
+              "kind": "toggle",
+              "name": "shadows",
+              "label": "Shadows",
+              "checked": false
+            }
+          ]
+        },
+        "charts": [],
+        "resources": [
+          {
+            "label": "Shape source",
+            "role": "surface",
+            "description": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12",
+            "href": "https://ssd.jpl.nasa.gov/horizons/"
+          },
+          {
+            "label": "Scientific source",
+            "role": "facts",
+            "description": "Published observations and interpretation",
+            "href": "https://ssd.jpl.nasa.gov/sats/discovery.html"
+          },
+          {
+            "label": "Uranian irregular satellites physical summary and occultation prospects",
+            "role": "facts",
+            "description": "Source measurements and model interpretation",
+            "href": "https://www.hou.usra.edu/meetings/jupiterflagship2023/eposter/8187.pdf"
+          }
+        ],
+        "provenance": {
+          "title": {
+            "path": "../presentation/title-mark.json"
+          },
+          "editorial": {
+            "url": "https://ssd.jpl.nasa.gov/horizons/",
+            "credit": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12"
+          },
+          "physical": {
+            "path": "../measurements.json",
+            "credit": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12"
+          }
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "kind": "source-input",
+      "id": "model-surface",
+      "path": "material/neutral.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored grid marking unavailable surface imagery."
+      },
+      "origin": "https://github.com/layoutit/cssEarth",
+      "credit": "cssEarth missing-coverage grid",
+      "license": "MIT",
+      "width": 64,
+      "height": 32,
+      "lensId": "model",
+      "label": "Shape model",
+      "falseColor": false,
+      "coverage": "Authored neutral material; no observed imagery.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 12000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
+      "bytes": 153,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "kind": "source-input",
+      "id": "published-shape",
+      "path": "shape/ellipsoid.tab",
+      "origin": "https://ssd.jpl.nasa.gov/horizons/",
+      "credit": "JPL Horizons object data for Lysithea (Jupiter X), revised 2025-May-12",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "jpl-horizons",
+            "role": "material",
+            "evidence": "src/objects/lysithea/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "license": "MIT numeric extraction of published scientific facts",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "coverage": "Illustrative sphere at the 12 km radius JPL Horizons lists for Lysithea. No shape model is published. Illustrative ICRF north pole, arbitrary prime meridian and phase; no pole or rotation state is adopted. The grid marks unmapped terrain.",
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 12000
+      },
+      "acquisition": "Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py using tools/objects/source-authoring/irregular-moons/inputs.json.",
+      "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
+      "sha256": "84bd2184c8d373e71ce165f63fbbcc12b769c6a14d3413a978f584648bdcdfc3",
+      "bytes": 62404,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    },
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      },
+      "id": "authored-document:content/object.json",
+      "kind": "authored-content",
+      "origin": "object:source/content/object.json",
+      "title": "content/object.json",
+      "credit": "cssEarth contributors",
+      "acquisition": "Authored, pinned object-package document.",
+      "upstreamLineage": "not-recorded",
+      "sha256": "7f09b5b0e58206ef50a4e9238e67f660636aa6cab105b081f4aeca36e41058b0",
+      "bytes": 2572,
+      "dependencies": [],
+      "verification": "bytes-verified",
+      "acquisitionOperation": null,
+      "verificationOperations": []
+    }
+  ],
+  "products": [
+    {
+      "id": "model",
+      "label": "Shape model",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Apply the source-defined validity and registration policy, then prepare the projected observation texture.",
+      "limitations": [],
+      "lensIds": [
+        "model"
+      ],
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "interpretation": {
+        "validity": {
+          "kind": "image-rgb-no-data",
+          "noData": 160,
+          "centerLongitude": 180
+        }
+      },
+      "inputs": [
+        "model-surface",
+        "published-shape"
+      ],
+      "outputs": [
+        {
+          "url": "/scenes/lysithea/lysithea-model-thumbnail.webp",
+          "bytes": 444,
+          "sha256": "2ff9864e24cc04281a2d258bd980914bbbc82ccdbaa226c0f8be35e2b2456994",
+          "verification": "bytes-verified"
+        },
+        {
+          "url": "/scenes/lysithea/lysithea-model-surface@2x.webp",
+          "bytes": 51060,
+          "sha256": "0046ca99cb82613c72eff4168a99e7f9b9bd941e54c8cad4d9dfe425cd6bee75",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputEvidence": [
+        {
+          "sourceId": "model-surface",
+          "role": "appearance",
+          "evidence": "Observation selected at /raster/observations/0."
+        },
+        {
+          "sourceId": "published-shape",
+          "role": "geometry",
+          "evidence": "Source selected by the terrestrial radial-terrain geometry recipe."
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "content",
+      "label": "Object information",
+      "recipe": "content",
+      "selector": "",
+      "observationAttribution": "source-lineage",
+      "parents": [],
+      "process": "Compile the authored facts, dataset recipes and references into the shared content document.",
+      "limitations": [],
+      "lensIds": [],
+      "recipeDependencies": [
+        "content"
+      ],
+      "inputs": [
+        "authored-document:content/object.json"
+      ],
+      "outputs": [
+        {
+          "url": "object:prepared/content.json",
+          "bytes": 5746,
+          "sha256": "3727ae1337029dde67ee5005a1c307ca4a23105ff62a300c61c4717bef760bc6",
+          "verification": "bytes-verified"
+        }
+      ],
+      "inputBasis": "bound-inputs"
+    },
+    {
+      "id": "preview:model",
+      "label": "Shape model preview",
+      "recipe": "terrestrial",
+      "selector": "/raster/observations/0",
+      "recipeDependencies": [
+        "terrestrial"
+      ],
+      "observationAttribution": "source-lineage",
+      "inputs": [],
+      "parents": [
+        "model"
+      ],
+      "lensIds": [],
+      "process": "Prepare a small surface preview from the same interpreted dataset.",
+      "limitations": [],
+      "outputs": [
+        {
+          "url": "object:prepared/minimaps/model.webp",
+          "bytes": 2958,
+          "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2",
+          "verification": "bytes-verified"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "scope": "object-datasets-and-bound-rendering-products",
+    "unresolved": []
+  },
+  "lastPreparation": {
+    "objectId": "lysithea",
+    "materialSha256": "a002836924cbf4ffc0718d7498d8254a56ea264144d4e17113dd7a627fb97e11",
+    "verifier": {
+      "path": "tools/objects/provenance.mts",
+      "sha256": "9524b9b3e38bdc41531d0be6a1878406c5261881b8dbcf11087209a75ad03a0f",
+      "bindingsSha256": "5bbc8f934576a08c62696ef7bdc8f157bb9a1e59d4b5ef52b4e68bdd991e4ef3"
+    }
+  }
+}

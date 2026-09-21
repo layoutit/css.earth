@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1051-0004-6361-201118743",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Research publication · DOI 10.1051/0004-6361/201118743",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201118743"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201118743",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/goibniu/source/manifest.json",
+      "revision": "0000000000000000000000000000000000000000",
+      "sha256": "bb0eacfefb98a0860e49e04ebbbba0fadd4c43fe44ccd50363a53abbccfd537b",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Vilenius et al. (2012), Astronomy & Astrophysics 541, A94; Herschel PACS and Spitzer MIPS thermal radiometry",
+      "scope": "The published shape input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "MIT numeric extraction of published scientific facts",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

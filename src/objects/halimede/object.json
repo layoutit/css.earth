@@ -1,0 +1,128 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "halimede",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Halimede",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 31
+      },
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "model",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        4456002098852.811,
+        215027572324.0017,
+        -8985504126.049097
+      ],
+      "presentationToReference": [
+        0.9990564454500103,
+        2.4356826039297786e-17,
+        0.04343062058951854,
+        0.03984681533541574,
+        0.3977771559319137,
+        -0.9166163676949824,
+        0.017275708738456696,
+        -0.9174820620691818,
+        -0.39740183148655217
+      ],
+      "orbitUpReference": [
+        0,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 134.7826086956522,
+      "bodyRadiusM": 31000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/halimede-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e3f8383011b78629d452ce401910dd0be7443422b1cc9235c6e37cf4a2fd9ea7"
+      }
+    },
+    "catalog": {
+      "illustrationLenses": [
+        "model"
+      ],
+      "name": "Halimede",
+      "classification": "satellite",
+      "color": "#a0a0a0",
+      "distanceAu": 30.05,
+      "description": "A distant, irregular moon of Neptune.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "4f7454aaadbf26dbb18f717eb1874df23ed0fcba3e56161dd214caf13579a2b3"
+  }
+}
