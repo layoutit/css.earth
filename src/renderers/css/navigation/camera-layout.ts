@@ -6,7 +6,7 @@ import { BASE_TILE } from "@layoutit/polycss";
 import { isTrackballMetrics, smoothstep, clamp } from "@cssearth/engine";
 
 /** Share of a phone's open scene area (width, and height between header and drawer) the focus body spans on arrival. */
-export const MOBILE_OPEN_AREA_SHARE = .5;
+export const MOBILE_OPEN_AREA_SHARE = .75;
 
 export function selectPreparedResponsiveZoom({
   stage,

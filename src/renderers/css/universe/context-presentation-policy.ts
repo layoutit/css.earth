@@ -17,6 +17,12 @@ export function contextOrbitOpacity(fade: OrbitLineFade, discHeightShare: number
   return CLOSE_ORBIT_OPACITY + (1 - CLOSE_ORBIT_OPACITY) * orbitLineOpacity(fade, discHeightShare);
 }
 
+/** The focused body's own orbit has no close-up floor. Up close it is a line through the body's centre that says nothing,
+ * as a map shows no orbit at all; it fades out with the body's growth and returns as the camera pulls back to the system. */
+export function focusOwnOrbitOpacity(fade: OrbitLineFade, discHeightShare: number): number {
+  return orbitLineOpacity(fade, discHeightShare);
+}
+
 /** A planet and its satellites share emphasis, including when a moon is selected. */
 export function createContextSelectionPolicy(plan: PreparedWorldContext) {
   const parents = new Map(plan.bodies.map(body => [body.id, body.orbit?.centerBodyId]));
