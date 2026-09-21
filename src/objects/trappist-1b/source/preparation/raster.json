@@ -30,7 +30,7 @@
         "kind": "terrestrial-scientific",
         "id": "temperature",
         "label": "MIRI 15 µm",
-        "format": "eclipse-map-fit",
+        "format": "bare-rock-fit",
         "path": "science/jwst-trappist-1/b-emission-15um.csv",
         "consumer": "trappist-1b-miri-map",
         "sampling": "bilinear",
@@ -39,6 +39,11 @@
         "units": "K",
         "planet": "trappist-1b",
         "host": "trappist-1",
+        "ephemeris": {
+          "transitTimeBmjdTdb": 60271.25431,
+          "periodDays": 1.5108699,
+          "source": "Linear ephemeris of these observations: the transit of b in this project's joint fit (60271.25436 BMJD, TRAPPIST-1's investigation ledger) and the centres of the five 2022 eclipses in this light curve, which it places within 1.3 minutes. The package orbit's 2015 osculating elements put these eclipses 2.0 to 2.4 hours early."
+        },
         "lightCurve": {
           "encoding": "csv",
           "time": "time",
@@ -59,17 +64,6 @@
           ]
         },
         "fit": {
-          "degrees": [
-            1,
-            2
-          ],
-          "eigencurves": [
-            1,
-            2,
-            3,
-            4
-          ],
-          "positive": true,
           "transitExclusionPhase": 0.02,
           "gridHeight": 45,
           "systematics": [
@@ -110,8 +104,7 @@
               "column": "visit9"
             }
           ],
-          "transitFromLightCurve": false,
-          "longitudeSymmetric": true
+          "transitFromLightCurve": false
         },
         "band": {
           "encoding": "svo-filter",
@@ -122,7 +115,7 @@
           "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml"
         },
         "minimum": 50,
-        "maximum": 550,
+        "maximum": 600,
         "colors": [
           "#0d0887",
           "#7e03a8",
@@ -131,12 +124,12 @@
           "#f0f921"
         ],
         "labels": [
-          "50",
-          "300",
-          "550"
+          "≤ 50",
+          "325",
+          "600"
         ],
-        "description": "Brightness temperature at 15 µm, fitted in this project to ten JWST MIRI visits it reduced from raw exposures. Only the day-to-night pattern is measured.",
-        "title": "JWST MIRI · our map from raw data",
+        "description": "Temperature of a bare rock, with no atmosphere to carry heat, fitted in this project to ten JWST MIRI 15 µm visits it reduced from raw exposures: about 575 K under the star, falling to nothing at night. The data measure the day-to-night pattern; the rock model gives the shape.",
+        "title": "JWST MIRI · bare rock fitted to our data",
         "sourceUrl": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077"
       }
     }

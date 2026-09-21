@@ -7,14 +7,14 @@
     "latitudeSegments": 16,
     "longitudeSegments": 32,
     "surface": {
-      "url": "/scenes/trappist-1c/trappist-1c-surface-shape@2x.webp",
+      "url": "/scenes/trappist-1c/trappist-1c-surface-temperature@2x.webp",
       "width": 1024,
       "height": 768
     },
     "surfaceLatitudeHeight": 512,
     "packedBandGutter": 8,
     "poles": {
-      "url": "/scenes/trappist-1c/trappist-1c-poles-shape@2x.webp",
+      "url": "/scenes/trappist-1c/trappist-1c-poles-temperature@2x.webp",
       "width": 512,
       "height": 256
     },
@@ -37,20 +37,20 @@
     "positionVariables": false,
     "projectivePoles": false,
     "lightColor": "#ffffff",
-    "ambientIntensity": 0.05
+    "ambientIntensity": 1
   },
   "bodyRotationDegrees": 0,
   "output": {
     "schema": "csstrappist-1c-prepared-runtime-scene@1",
-    "materialSchema": "csstrappist-1c-prepared-lighting@1",
+    "materialSchema": "csstrappist-1c-prepared-emission@1",
     "layout": "body-container",
     "body": {
       "axialTiltDegrees": 0,
       "rotationDirection": "prograde",
       "rotationPeriodEarthDays": 2.421937,
-      "sourceProjection": "no observation: the shared neutral gray of an unresolved surface on the reference sphere",
-      "polarPreparation": "the same gray on the polar tiles",
-      "axialTiltNote": "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies"
+      "sourceProjection": "A bare-rock model of TRAPPIST-1c at 15 µm, drawn from the eclipse depth this project measured in ten JWST MIRI visits it reduced from raw exposures, sampled bilinearly onto the reference sphere",
+      "polarPreparation": "the same map sampled on the polar tiles",
+      "axialTiltNote": "the object's synchronous rotation record puts the pole on the orbit normal and longitude 0 toward the host star at the scene epoch; no spin is animated"
     }
   }
 }

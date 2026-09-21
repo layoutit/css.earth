@@ -66,7 +66,9 @@ describe('asteroid positions against JPL Horizons', () => {
       // 2I/Borisov: ceil(527.705 km independent endpoint maximum * 1.15).
       'comet-2i': 607,
       // Adeona, added with its VLT/SPHERE photograph: ceil(1124.257 km independent endpoint maximum * 1.15).
-      adeona: 1293 }
+      adeona: 1293,
+      // Centaurs and Kuiper belt objects added 2026-09-21: ceil(independent endpoint maximum * 1.15).
+      albion: 620, amycus: 576, asbolus: 661, aya: 626, chiron: 621, crantor: 556, damocles: 518, echeclus: 904, elatus: 574, goibniu: 606, hylonome: 581, nessus: 579, okyrhoe: 954, pelion: 692, pholus: 592, ritona: 596, thereus: 614, uni: 624 }
     for (const id of SMALL_BODY_IDS) for (const row of [ASTEROID_FIXTURES[id].rows[0], ASTEROID_FIXTURES[id].rows[2]]) {
       const actual = asteroidPositionKm(id, row.jd)
       expect(Math.hypot(...actual.map((v, i) => v - row.position[i]!))).toBeLessThan(maximumErrorKm[id])
