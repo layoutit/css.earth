@@ -78,8 +78,10 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (destroyed) return;
     const projection = projectVolumeImpostors(publication, options.payload.frame, bank, options.nativeFocalCss !== undefined);
     const { visible, volumeMix, diameterPixels, x, y } = projection;
-    options.host.dataset.volumeDetailMix = String(volumeMix);
-    options.host.dataset.volumeDiameterPixels = String(diameterPixels);
+    // Test hooks: rounded and written only on change, so a steady frame writes no attributes.
+    const mixHook = String(Math.round(volumeMix * 1000) / 1000), diameterHook = String(Math.round(diameterPixels * 10) / 10);
+    if (options.host.dataset.volumeDetailMix !== mixHook) options.host.dataset.volumeDetailMix = mixHook;
+    if (options.host.dataset.volumeDiameterPixels !== diameterHook) options.host.dataset.volumeDiameterPixels = diameterHook;
     const responsive = options.nativeFocalCss !== undefined && Number.isFinite(diameterPixels);
     full.style.display = visible && (responsive || volumeMix > 0) ? 'block' : 'none';
     distant.style.display = visible && (responsive || volumeMix < 1) ? 'block' : 'none';
@@ -106,7 +108,7 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
       node.style.transform = `translate(${length(x - diameterPixels / 2)},${length(y - diameterPixels / 2)}) matrix(${view.matrix.join(',')},0,0)`;
     }
     active = next;
-    distant.dataset.activeViews = String(next.length);
+    if (distant.dataset.activeViews !== String(next.length)) distant.dataset.activeViews = String(next.length);
   };
   return Object.freeze({ roots: runtime.roots, publish, setPresentation(payload: PreparedVolumeMountOptions['payload']) {
     const next = validatePreparedCssVolume(payload);
