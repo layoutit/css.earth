@@ -85,6 +85,11 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "ultraviolet",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -133,7 +138,8 @@
         "src/renderers/css/styles/planet-surfaces.css"
       ],
       "metadata": {
-        "url": "prepared/page.json"
+        "url": "prepared/page.json",
+        "sha256": "24b470f36707b6b55f88d7801175f32a7d1a63104841c7298284132b819f271b"
       }
     },
     "catalog": {
@@ -152,6 +158,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "75109bb9a29443d8bba5a89d3ac5ab5ef28db87737386a1afb5b97faaeac06ee"
+    "sha256": "5919ffeae1d1ac6579fb1bf4fb336abbde42b595b8650143d61cff3d4373a7c6"
   }
 }

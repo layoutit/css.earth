@@ -22,6 +22,11 @@
       "sha256": "c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9"
     },
     {
+      "filename": "triton-lens-ultraviolet.webp",
+      "bytes": 734,
+      "sha256": "098a348381d377c3e1848613052b6b2b2afce4576541c2c05c24e72ffeaec94a"
+    },
+    {
       "filename": "triton-lighting-2x-billboard.webp",
       "bytes": 115740,
       "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
@@ -200,6 +205,16 @@
       "filename": "triton-poles-normal@2x.webp",
       "bytes": 11250,
       "sha256": "7ad021feb5c12e2ef3a26356182d6becd4841d8aa7f4345f8cd36bb499bdab73"
+    },
+    {
+      "filename": "triton-poles-ultraviolet@2x.webp",
+      "bytes": 135830,
+      "sha256": "f47733d25c4aa2e2d68600b2f772d7e82ca0ef5b33fbfcd0488bdf30bf1d9706"
+    },
+    {
+      "filename": "triton-ultraviolet@2x.webp",
+      "bytes": 7089368,
+      "sha256": "d4006f0813bccc3f2a84c62ecd87984514b68d9ffb6ffbe5fecc9661406f2e47"
     }
   ]
 }

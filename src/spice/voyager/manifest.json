@@ -1,0 +1,173 @@
+{
+  "schema": "cssspice-voyager-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "voyager-naif0012-tls",
+      "path": "lsk/naif0012.tls",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 5257,
+      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-pck00010-tpc",
+      "path": "pck/pck00010.tpc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00010.tpc",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 126143,
+      "expectedSha256": "59468328349aa730d18bf1f8d7e86efe6e40b75dfb921908f99321b3a7a701d2",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-vg200051-tsc",
+      "path": "sclk/vg200051.tsc",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/VOYAGER/kernels/sclk/vg200051.tsc",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 108191,
+      "expectedSha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-vg2-v02-tf",
+      "path": "fk/vg2_v02.tf",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/VOYAGER/kernels/fk/vg2_v02.tf",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 12008,
+      "expectedSha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-vg2-issna-v02-ti",
+      "path": "ik/vg2_issna_v02.ti",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/VOYAGER/kernels/ik/vg2_issna_v02.ti",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 1246,
+      "expectedSha256": "0528b1ea7e0f825515f05f07d735611cf49b24de3566d95a88ba91086ee0a8e9",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-vgr2-nep097-bsp",
+      "path": "spk/vgr2_nep097.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/VOYAGER/kernels/spk/vgr2_nep097.bsp",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 1469440,
+      "expectedSha256": "1aee50e5e4a5253c660d06f7359eb4dac2fe4a5dab5fdc821d2b868469bdc473",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-vg2-nep-version1-type1-iss-sedr-bc",
+      "path": "ck/vg2_nep_version1_type1_iss_sedr.bc",
+      "origin": "https://pds-rings.seti.org/voyager/ck/vg2_nep_version1_type1_iss_sedr.bc",
+      "credit": "PDS Ring-Moon Systems Node (M. R. Showalter); Voyager ISS SEDR pointing",
+      "license": "Public PDS data; retain the Ring-Moon Systems Node and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 885760,
+      "expectedSha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-rings-node-ck",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    }
+  ]
+}

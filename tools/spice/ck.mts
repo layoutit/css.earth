@@ -57,8 +57,11 @@ export function ckSegments(daf: Daf): CkSegment[] {
 }
 
 function type1(daf: Daf, summary: DafSummary, hasRates: boolean): CkSegment['pointing'] {
-  const size = hasRates ? 7 : 4, trailer = daf.words(summary.endAddress - 1, 2), directories = trailer[0], count = trailer[1];
-  if (!Number.isInteger(count) || count < 1 || directories !== Math.floor((count - 1) / 100)) throw new Error(`Invalid type 1 CK trailer in ${summary.name}.`);
+  // Records, then their time tags, then one directory epoch per 100 tags, then the record count as the final word.
+  const size = hasRates ? 7 : 4, count = daf.words(summary.endAddress, 1)[0]!;
+  if (!Number.isInteger(count) || count < 1 || summary.endAddress - summary.startAddress + 1 !== count * (size + 1) + Math.floor((count - 1) / 100) + 1) {
+    throw new Error(`Invalid type 1 CK trailer in ${summary.name}.`);
+  }
   const times = daf.words(summary.startAddress + count * size, count);
   return (sclk, tolerance = 0) => {
     const index = lastNotAfter(times, sclk + tolerance);
