@@ -14,17 +14,28 @@ const nameClass = depth === 0 ? 'atlas-tree-root' : place ? 'atlas-tree-group' :
 const marker = node.object ? treeMarker(node.object.id, assetOrigin) : null;
 const open = holds(node);
 const deferred = bounded && node.children.length > 0 && !open;
+// The node carries the destination this site opens. A row whose site cannot open
+// it keeps its marker and stays a label: nothing clickable that we cannot open.
+const href = node.object ? node.href : null;
 ---
 {node.children.length
   ? <details open={open} data-atlas-depth={depth} data-atlas-key={node.key} data-atlas-lazy={deferred ? '' : undefined}
       data-atlas-group={node.object ? undefined : node.label.toLowerCase()}>
       <summary>{node.object
-        ? <a class:list={['atlas-tree-body', marker?.className]} style={marker?.style} href={`/${node.object.id}/`} data-atlas-object={node.object.id} aria-current={node.object.id === current ? 'page' : undefined}>{node.label}</a>
+        ? href
+          ? <a class:list={['atlas-tree-body', marker?.className]} style={marker?.style} href={href} data-atlas-object={node.object.id}
+              data-prepared-focus-id={node.focusId ?? undefined} aria-current={node.object.id === current ? 'page' : undefined}>{node.label}</a>
+          : <span class:list={['atlas-tree-body', marker?.className]} style={marker?.style} data-atlas-place={node.object.id}>{node.label}</span>
         : <span class={nameClass}>{label}</span>}</summary>
       {!deferred && <ul>
         {node.children.map(child => <li data-atlas-item-key={child.key}><Astro.self node={child} current={current} depth={depth + 1} {bounded} {assetOrigin} /></li>)}
       </ul>}
     </details>
-  : node.object && <a class:list={['atlas-row', marker?.className]} style={marker?.style} href={`/${node.object.id}/`} data-atlas-object={node.object.id} aria-current={node.object.id === current ? 'page' : undefined}>
-      {node.label}
-    </a>}
+  : node.object && (href
+    ? <a class:list={['atlas-row', marker?.className]} style={marker?.style} href={href} data-atlas-object={node.object.id}
+        data-prepared-focus-id={node.focusId ?? undefined} aria-current={node.object.id === current ? 'page' : undefined}>
+        {node.label}
+      </a>
+    : <span class:list={['atlas-row', marker?.className]} style={marker?.style} data-atlas-place={node.object.id}>
+        {node.label}
+      </span>)}
