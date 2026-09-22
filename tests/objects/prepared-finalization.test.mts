@@ -76,8 +76,9 @@ test('finalization writes a prepared-assets.json inventory covering only runtime
   try {
     const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
     await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
-    // A tracked contract file that must stay out of the inventory.
-    await copyFile(resolve(objectDirectory, 'prepared/provenance.json'), resolve(preparedDirectory, 'provenance.json'));
+    // A tracked contract file that must stay out of the inventory. provenance.json used to serve
+    // here; it became a build output, so a checkout is not guaranteed to hold one.
+    await copyFile(resolve(objectDirectory, 'prepared/content.json'), resolve(preparedDirectory, 'content.json'));
     await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
       descriptorPath: resolve(stage, 'object.json') });
     const manifest = requirePreparedAssetManifest('mimas', JSON.parse(await readFile(resolve(stage, 'prepared-assets.json'), 'utf8')));
@@ -85,7 +86,7 @@ test('finalization writes a prepared-assets.json inventory covering only runtime
     assert.equal(manifest.resourceRoot, 'prepared');
     assert.deepEqual(manifest.assets.map(a => a.filename).sort(), ['runtime.json', 'scene.json']);
     assert.equal(await verifyPreparedAssetClosure({ planetId: 'mimas', manifest, root: preparedDirectory, closure: false }), true);
-    // Mutation check: corrupting an inventoried file must fail verification even though provenance.json (not
+    // Mutation check: corrupting an inventoried file must fail verification even though content.json (not
     // inventoried) is untouched, proving the writer records real hashes rather than trusting its file list.
     const { writeFile } = await import('node:fs/promises');
     await writeFile(resolve(preparedDirectory, 'scene.json'), 'drifted');
