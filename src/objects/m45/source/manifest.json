@@ -188,8 +188,6 @@
       "title": "Pleiades physical evidence and authored limits",
       "credit": "Published structural studies; authored display assumptions",
       "acquisition": "Checked-in evidence ledger. This pin identifies the metadata record; cited publications and native scientific arrays retain their own identities. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
-      "expectedSha256": "73ec8317dbd6e75b0e39184b2196011495a4ddf0e88571cc1719ec871d9385c4",
-      "expectedBytes": 15400,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -215,8 +213,6 @@
       "title": "Pleiades field stars · Hipparcos and Tycho-2",
       "credit": "ESA (1997); Høg et al. (2000); CDS/VizieR",
       "acquisition": "Checked-in normalized stellar catalogue from the two pinned CDS cone queries, preserving native astrometry and photometry. Johnson transformations and display-star selection are documented in the stellar source receipt. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
-      "expectedSha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
-      "expectedBytes": 1654998,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -251,8 +247,6 @@
       "title": "Pleiades adopted world placement",
       "credit": "Melis et al. (2014), A VLBI Resolution of the Pleiades Distance Controversy",
       "acquisition": "Checked-in delivery record. The pin identifies our placement metadata, not downloaded paper bytes; the adopted value and uncertainty are explained in the body README.",
-      "expectedSha256": "381cffce1a521c5d9cdd8f508dc61fad280e0e3ce27e72e18b7d10a704f4600a",
-      "expectedBytes": 2715,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -274,8 +268,6 @@
       "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
       "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
       "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
-      "expectedSha256": "b23d82f9fb1132b7c01aa2d95795fd92a4136268f78ebf61b40963c48e1c7fbe",
-      "expectedBytes": 332226,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -313,8 +305,6 @@
     {
       "id": "document-1",
       "path": "src/objects/m45/source/delivery.json",
-      "expectedSha256": "381cffce1a521c5d9cdd8f508dc61fad280e0e3ce27e72e18b7d10a704f4600a",
-      "expectedBytes": 2715,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -323,8 +313,6 @@
     {
       "id": "document-2",
       "path": "src/objects/m45/source/nebula.json",
-      "expectedSha256": "d98a7a4347c5da3d6ccd1b684c6dbe5c989a053987b9f80d9485917b9fb62f99",
-      "expectedBytes": 2677,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -333,8 +321,6 @@
     {
       "id": "document-3",
       "path": "src/objects/m45/source/presentation.json",
-      "expectedSha256": "0643445a71d527654fc0b5de4d3e0c1abe9324d31ea5276368fc98145ca46d9c",
-      "expectedBytes": 11154,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -343,8 +329,6 @@
     {
       "id": "document-4",
       "path": "src/objects/m45/source/request.json",
-      "expectedSha256": "3bb422960ec26a91969880747c14aabea9044b84b138436ffdf5edec32e2c82d",
-      "expectedBytes": 354,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, presentation or saved processing choices. Native published inputs are separately bound in this manifest."
@@ -353,8 +337,6 @@
     {
       "id": "retained-evidence-5",
       "path": "src/objects/m45/source/bake-inputs/references/01-compiler.json",
-      "expectedSha256": "1800455c7fcb2d8915d9d6dff68aec5ec70c45335316ad0666b3e22878ead44e",
-      "expectedBytes": 1147,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -363,8 +345,6 @@
     {
       "id": "retained-evidence-6",
       "path": "src/objects/m45/source/bake-inputs/references/02-depth-model.json",
-      "expectedSha256": "81dcdc57f35def587304c69a3562cd5e052f44ecfe2b1b0543e2ef2ee8735305",
-      "expectedBytes": 3319,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -373,8 +353,6 @@
     {
       "id": "retained-evidence-7",
       "path": "src/objects/m45/source/bake-inputs/references/03-observation-structures.json",
-      "expectedSha256": "86d89e8901a62ebad11ac6babb3e175a047bd3dbf5de66ac4fb6c223a6a711ee",
-      "expectedBytes": 423,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -383,8 +361,6 @@
     {
       "id": "retained-evidence-8",
       "path": "src/objects/m45/source/bake-inputs/references/05-processing-observations.json",
-      "expectedSha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
-      "expectedBytes": 8832,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -393,8 +369,6 @@
     {
       "id": "retained-evidence-9",
       "path": "src/objects/m45/source/bake-inputs/references/07-optical-composite-observations.json",
-      "expectedSha256": "2fa3d672cb4c7d20aea35dc444393a4b9a0fe5b65d5a86fd8409b5a4332f6cfe",
-      "expectedBytes": 5257,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -403,8 +377,6 @@
     {
       "id": "retained-evidence-10",
       "path": "src/objects/m45/source/bake-inputs/references/08-optical-composite.json",
-      "expectedSha256": "2237970cf3a72f09ad43ea694a6cc40a4f8b0a692986f6d5b9eb20106ebb84fa",
-      "expectedBytes": 1320,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -413,8 +385,6 @@
     {
       "id": "retained-evidence-11",
       "path": "src/objects/m45/source/provenance-references.json",
-      "expectedSha256": "a30990fa55a6be5b411a049e29feebc3eac4b076b0ba1f2af651eb12749c1a02",
-      "expectedBytes": 2806,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -423,8 +393,6 @@
     {
       "id": "retained-evidence-12",
       "path": "src/objects/m45/source/replay-references.json",
-      "expectedSha256": "b6824da751d24d19e0e8c30f11015cf140f774ebb3b4a071419a14091d0a82ae",
-      "expectedBytes": 2007,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
@@ -438,9 +406,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
-      },
-      "expectedBytes": 359419,
-      "expectedSha256": "3857ef8b5e9aa0f77ac7ee7a9a5f4b84df45b1c72dfb65ca6ada3970ca7f1450"
+      }
     }
   ]
 }

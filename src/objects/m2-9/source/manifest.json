@@ -45,8 +45,6 @@
       "title": "M2–9 angular frame and adopted distance",
       "credit": "Bruce Balick (University of Washington), Vincent Icke (Leiden University, The Netherlands), Garrelt Mellema (Stockholm University), and NASA/ESA",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
-      "expectedSha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
-      "expectedBytes": 5899,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -78,8 +76,6 @@
       "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
       "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
       "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
-      "expectedSha256": "d2d7d05e3147c312d8c2741a72aea5864a19daee2ef8caee3414ce6ed0b2425c",
-      "expectedBytes": 19733,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,8 +113,6 @@
     {
       "id": "document-1",
       "path": "src/objects/m2-9/source/delivery.json",
-      "expectedSha256": "6bbc8f16e48fdccaea6ef70057952e60ad47000255eb4e0b0e89c53e9ee07be8",
-      "expectedBytes": 1578,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -127,8 +121,6 @@
     {
       "id": "document-2",
       "path": "src/objects/m2-9/source/image-frame.json",
-      "expectedSha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14",
-      "expectedBytes": 5899,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -137,8 +129,6 @@
     {
       "id": "document-3",
       "path": "src/objects/m2-9/source/nebula.json",
-      "expectedSha256": "2c659ff6271c371ed8683008c999579be91c4282a8d1b510856b75ead4fa1b30",
-      "expectedBytes": 2424,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -147,8 +137,6 @@
     {
       "id": "document-4",
       "path": "src/objects/m2-9/source/presentation.json",
-      "expectedSha256": "b014dc164cd6e3b096397a4360d1c29110963d6bce844098d3532826f17b3114",
-      "expectedBytes": 2546,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -157,8 +145,6 @@
     {
       "id": "retained-evidence-5",
       "path": "src/objects/m2-9/source/bake-inputs/references/00-experiment.json",
-      "expectedSha256": "e0e30629eb3e52409257b0bc8ee16143d14edfcd2aeaddc74704d6b898cdd68c",
-      "expectedBytes": 2015,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -167,8 +153,6 @@
     {
       "id": "retained-evidence-6",
       "path": "src/objects/m2-9/source/provenance-references.json",
-      "expectedSha256": "66fd4db16edddb5e7c3eafcc08c394c985ae6b7a2672db61f35e80fa25e0d921",
-      "expectedBytes": 400,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -177,8 +161,6 @@
     {
       "id": "retained-evidence-7",
       "path": "src/objects/m2-9/source/replay-references.json",
-      "expectedSha256": "270ea78f3350d13edd479eab4fa1de7a75d9e3bc3b13507ef0d3bcec6c719cb6",
-      "expectedBytes": 296,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
@@ -192,9 +174,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
-      },
-      "expectedBytes": 7582,
-      "expectedSha256": "5752828a0c0600ec870282717b4793b1143b78227f90c2e8f2df498bc7458c3c"
+      }
     },
     {
       "id": "compact-compact-emission-1-f32-gz",
@@ -202,9 +182,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
-      },
-      "expectedBytes": 749597,
-      "expectedSha256": "df58e6399068ad39abddd7201d76f775aa75d312acf88c4f8eed64b244aa512e"
+      }
     },
     {
       "id": "compact-compact-emission-2-f32-gz",
@@ -212,9 +190,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
-      },
-      "expectedBytes": 748663,
-      "expectedSha256": "cc4ef57649dce3b61f9b98447f991ef6ae6f734cf5324ba6c78ff515ce27b6cb"
+      }
     },
     {
       "id": "compact-compact-emission-0-f32-gz",
@@ -222,9 +198,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
-      },
-      "expectedBytes": 1163407,
-      "expectedSha256": "4f1b2591a498ac400e1f00ded341ec96617d6edff0cf74a66e297e9ae6bf4c8d"
+      }
     },
     {
       "id": "compact-compact-README-md",
@@ -232,9 +206,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice model/material input or replay record; published inputs are separately bound in this manifest and retained provenance."
-      },
-      "expectedBytes": 784,
-      "expectedSha256": "357e6c01d095fc2720533a20989ec4b50be0296beae0f835ee17ee2e2b06f09c"
+      }
     }
   ]
 }

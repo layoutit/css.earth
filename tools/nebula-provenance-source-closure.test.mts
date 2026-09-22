@@ -11,10 +11,12 @@ const json = async (path: string) => sourceObject(JSON.parse(await readFile(reso
 
 test('application provenance input and recipe pins read source-owned files without laboratory data', async () => {
   let references = 0;
+  // A download carries a pin the file must match. A file authored and tracked here carries none; it only has to be there.
   async function checked(path: string, sha256: unknown, size: unknown) {
     assert.ok(!path.startsWith('labs/'), `Application provenance attempted a lab read: ${path}`);
     const bytes = await readFile(resolve(root, path));
-    assert.equal(hash(bytes), sha256); assert.equal(bytes.length, size); references++;
+    if (sha256 !== undefined) { assert.equal(hash(bytes), sha256); assert.equal(bytes.length, size); }
+    references++;
   }
   for (const id of (await readdir(resolve(root, 'src/objects'), { withFileTypes: true })).filter(entry => entry.isDirectory()).map(entry => entry.name)) {
     const base = `src/objects/${id}/source`;

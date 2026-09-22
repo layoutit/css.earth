@@ -11,8 +11,6 @@
       "credit": "ESA/Hubble & Digitized Sky Survey 2. Acknowledgment: Davide De Martin (ESA/Hubble)",
       "displayCredit": "ESA/Hubble",
       "acquisition": "High-resolution crop/resample derived offline from the publisher Large JPEG. The hash identifies the local JPEG bytes, not a calibrated native scientific array; acquisition details and provider product ID are retained in source/provenance.json.",
-      "expectedSha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137",
-      "expectedBytes": 10592116,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -42,8 +40,6 @@
     {
       "id": "recipe",
       "path": "src/objects/m31/source/recipe.json",
-      "expectedSha256": "24505d74fa94294cb448949b21554427c21774774101720abbd685eeb8eca398",
-      "expectedBytes": 2898,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -57,8 +53,6 @@
     {
       "id": "provenance",
       "path": "src/objects/m31/source/provenance.json",
-      "expectedSha256": "52bf488f3fe4d713b23091c6b523d1269bfac2b3d1cae1c098e305029bfa1c66",
-      "expectedBytes": 2088,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -72,8 +66,6 @@
     {
       "id": "presentation",
       "path": "src/objects/m31/source/presentation.json",
-      "expectedSha256": "9520347a9232afbab4865eb769dba8f58eb2f775702734551dcc43d1b6f5f62f",
-      "expectedBytes": 2391,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."

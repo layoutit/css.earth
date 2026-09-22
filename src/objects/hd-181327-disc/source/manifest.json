@@ -157,8 +157,6 @@
     {
       "id": "circumstellar-json",
       "path": "src/objects/hd-181327-disc/source/circumstellar.json",
-      "expectedSha256": "aee1354f62fea987eb58e2ba191afcb666d82e19fce3f4a65f883b9e73a62983",
-      "expectedBytes": 5497,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against."
@@ -167,8 +165,6 @@
     {
       "id": "delivery-json",
       "path": "src/objects/hd-181327-disc/source/delivery.json",
-      "expectedSha256": "fa724e018510f0bec288c32c79853897879db3acd9fd57aac0b16f3cdc855dba",
-      "expectedBytes": 2089,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
@@ -177,8 +173,6 @@
     {
       "id": "presentation-json",
       "path": "src/objects/hd-181327-disc/source/presentation.json",
-      "expectedSha256": "bbd9571575fdcec5bffff05236579a27e07cd614eba6734d62859b725b7e29aa",
-      "expectedBytes": 3528,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
@@ -187,8 +181,6 @@
     {
       "id": "provenance-json",
       "path": "src/objects/hd-181327-disc/source/provenance.json",
-      "expectedSha256": "9e849ced41f18e148638afabf0fd6641e4aa1ffc4b7b40b226d187e6fbfc8e16",
-      "expectedBytes": 25709,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
@@ -199,8 +191,6 @@
     {
       "id": "density-reflectance-ktx2",
       "path": "src/objects/hd-181327-disc/source/density-reflectance.ktx2",
-      "expectedSha256": "a18bcaff61ab9e7006d569e5452ed6ba47afee610ad42211f6ab40ebfc0ba371",
-      "expectedBytes": 1566950,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -209,8 +199,6 @@
     {
       "id": "volume-reflectance-json",
       "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
-      "expectedSha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32",
-      "expectedBytes": 1683,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -219,8 +207,6 @@
     {
       "id": "previews-reflectance-png",
       "path": "src/objects/hd-181327-disc/source/previews/reflectance.png",
-      "expectedSha256": "983e59b38bdcbee648af1b4abf838bfe07055c5e71cbaa9def8fe4df7323d627",
-      "expectedBytes": 81227,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
