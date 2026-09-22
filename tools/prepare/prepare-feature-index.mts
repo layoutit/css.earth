@@ -4,21 +4,61 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { record } from '../../site/browser-types.mts';
+import { normalizeDestinationQuery } from '../../site/destination-search.mts';
+import { resolveBuildSceneAddress } from '../../site/asset-origin.mts';
 
 /** One search index over every body's prepared named features, so a feature can be found
  * from any page. Each body's catalogue stays the byte-verified source; the index carries
  * only names, search keys and the identity needed to navigate and select. */
-export const FEATURE_INDEX_SCHEMA = 'cssearth-prepared-feature-index@1';
+export const FEATURE_INDEX_SCHEMA = 'cssearth-prepared-feature-index@2';
 export const FEATURE_INDEX_URL = '/features/index.json';
 
 interface IndexedFeature { readonly objectId: string; readonly id: string; readonly name: string; readonly type: string; readonly diameterKm: number; readonly searchNames: readonly string[]; readonly searchContext: string; }
+/** One body's places catalogue, pinned for the search function, which searches every place and alternate name so no
+ * browser downloads it (Earth's is 14.8 MB). `duplicates` pairs a place with the named feature of the body that already
+ * carries it ([place id, feature id]): search lists the feature, found by the place's alternate names too. */
+interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly bytes: number; readonly sha256: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
+
+/** A place and a named feature of the same settlement (Natural Earth's Buenos Aires and GeoNames' Buenos Aires): same
+ * search name, within this distance. The named feature is kept; it already has a label on the body. */
+const SAME_SETTLEMENT_KM = 50;
+interface Settlement { readonly id: string; readonly name: string; readonly latitudeDeg: number; readonly longitudeDeg: number; }
+function greatCircleKm(a: Settlement, b: Settlement, radiusKm: number) {
+  const rad = Math.PI / 180, dLat = (b.latitudeDeg - a.latitudeDeg) * rad, dLon = (b.longitudeDeg - a.longitudeDeg) * rad;
+  const h = Math.sin(dLat / 2) ** 2 + Math.cos(a.latitudeDeg * rad) * Math.cos(b.latitudeDeg * rad) * Math.sin(dLon / 2) ** 2;
+  return 2 * radiusKm * Math.asin(Math.min(1, Math.sqrt(h)));
+}
+
+/** A body's prepared places (Earth's GeoNames cities) are named features of that body too, selected as `city-<id>`. */
+async function preparedPlaces(root: string, objectId: string, settlements: readonly Settlement[], radiusM: number | null): Promise<PlacePin | null> {
+  const pin: unknown = await readFile(resolve(root, 'src/objects', objectId, 'prepared/places.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
+  if (pin === null) return null;
+  if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
+  if (!record(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
+  const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
+  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${objectId}: the public places catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
+  const catalog: unknown = JSON.parse(bytes.toString('utf8'));
+  if (!record(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
+  const duplicates: (readonly [string, string])[] = [];
+  for (const place of catalog.places) {
+    if (!record(place)) throw new TypeError(`${objectId}: place record is invalid.`);
+    const id = place.id;
+    if (!(typeof id === 'number' && Number.isSafeInteger(id)) && !(typeof id === 'string' && /^[0-9]+$/u.test(id))) throw new TypeError(`${objectId}: place id is invalid.`);
+    const name = text(place.name, 'place name');
+    const at = { id: String(id), name: normalizeDestinationQuery(name), latitudeDeg: finite(place.latitude, 'place latitude'), longitudeDeg: finite(place.longitude, 'place longitude') };
+    const settlement = settlements.find(candidate => candidate.name === at.name && greatCircleKm(candidate, at, radiusM / 1000) < SAME_SETTLEMENT_KM);
+    if (settlement) duplicates.push([at.id, settlement.id]);
+  }
+  // The deploy serves scene files from the asset bucket (ASSET_ORIGIN); a local build serves them itself.
+  return { objectId, type: 'City', url, assetUrl: await resolveBuildSceneAddress(url, root), bytes: bytes.length, sha256: text(pin.sha256, 'places sha256'), count: catalog.places.length, duplicates };
+}
 
 function text(value: unknown, at: string): string { if (typeof value !== 'string' || !value) throw new TypeError(`${at} must be text.`); return value; }
 function finite(value: unknown, at: string): number { if (typeof value !== 'number' || !Number.isFinite(value)) throw new TypeError(`${at} must be finite.`); return value; }
 
 export async function prepareFeatureIndex({ root = process.cwd() }: { root?: string } = {}) {
   const objects: { id: string; name: string; route: string; count: number; lensIds?: string[] }[] = [];
-  const features: IndexedFeature[] = [];
+  const features: IndexedFeature[] = [], places: PlacePin[] = [];
   for (const object of SCENE_OBJECTS) {
     const descriptor: unknown = await readFile(resolve(root, 'src/objects', object.id, 'prepared/features.json'), 'utf8').then(JSON.parse, (error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
     if (descriptor === null) continue;
@@ -64,9 +104,14 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
       if (!record(runtime) || !record(runtime.features) || !Array.isArray(runtime.features.lensIds) || !runtime.features.lensIds.length) throw new TypeError(`${object.id}: landmark datasets are missing.`);
       lensIds = runtime.features.lensIds.map(id => text(id, 'landmark dataset'));
     }
+    // Named features that are settlements: search leaves the same places out.
+    const settlements = values.filter((value): value is Record<string, unknown> => record(value) && (value.type === 'Capital' || value.type === 'City'))
+      .map(value => ({ id: text(value.id, 'feature id'), name: normalizeDestinationQuery(text(value.name, 'feature name')), latitudeDeg: finite(value.latitudeDeg, 'feature latitude'), longitudeDeg: finite(value.longitudeDeg, 'feature longitude') }));
+    const placePin = await preparedPlaces(root, object.id, settlements, object.worldFrame?.bodyRadiusM ?? null);
+    if (placePin) places.push(placePin);
     objects.push({ id: object.id, name: object.name, route: object.route, count: values.length, ...(lensIds ? { lensIds } : {}) });
   }
-  const index = { schema: FEATURE_INDEX_SCHEMA, objects, features };
+  const index = { schema: FEATURE_INDEX_SCHEMA, objects, features, places };
   const encoded = Buffer.from(`${JSON.stringify(index)}\n`);
   await mkdir(resolve(root, 'public/features'), { recursive: true });
   await writeFile(resolve(root, 'public/features/index.json'), encoded);

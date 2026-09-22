@@ -2,7 +2,8 @@ import { parseHTML } from 'linkedom';
 import { record, requiredElement } from './browser-types.mts';
 import { OBJECT_CATEGORIES, matchesObjectCategory, objectCategoryCount } from './object-categories.mts';
 import { objectSearchLabels, searchObjects, SEARCH_QUERY_LIMIT } from './object-search.mts';
-import { parseFeatureIndex, parseFeaturePin, matchFeatures, featureResult } from './feature-search.mts';
+import { parseFeaturePin } from './feature-search.mts';
+import { findResults } from './find.mts';
 import { renderDatasetResponse } from './dataset-response.mts';
 import { renderSourceLink } from './source-link.mts';
 import { presentFeatureResults, presentOverviewResults, presentSearchResults } from './search-results-presentation.mts';
@@ -16,29 +17,6 @@ export function parseSearchPin(value: unknown): SearchPin {
     || typeof value.bytes !== 'number' || !Number.isSafeInteger(value.bytes) || value.bytes <= 0
     || typeof value.count !== 'number' || !Number.isSafeInteger(value.count) || value.count < 0) throw new TypeError('Invalid prepared search index pin.');
   return { url: value.url, sha256: value.sha256, bytes: value.bytes, count: value.count };
-}
-
-const indexes = new Map<string, Promise<unknown>>();
-async function readIndex(pin: SearchPin, origin: string, fetcher: typeof fetch): Promise<unknown> {
-  const response = await fetcher(new URL(pin.url, origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
-  if (!response.ok) throw new Error('Prepared search index could not load.');
-  const bytes = await response.arrayBuffer();
-  if (bytes.byteLength !== pin.bytes) throw new Error('Prepared search index size drifted.');
-  const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
-  if (digest !== pin.sha256) throw new Error('Prepared search index identity drifted.');
-  return JSON.parse(new TextDecoder().decode(bytes));
-}
-function loadIndex(pin: SearchPin, origin: string, fetcher: typeof fetch): Promise<unknown> {
-  // Reuse authenticated data across warm invocations, never query results or DOM.
-  // Custom transports (including tests) own their own caching policy.
-  if (fetcher !== fetch) return readIndex(pin, origin, fetcher);
-  const key = `${origin}${pin.url}:${pin.sha256}:${pin.bytes}:${pin.count}`;
-  const cached = indexes.get(key);
-  if (cached) return cached;
-  if (indexes.size >= 4) indexes.delete(indexes.keys().next().value!);
-  const pending = readIndex(pin, origin, fetcher).catch(error => { indexes.delete(key); throw error; });
-  indexes.set(key, pending);
-  return pending;
 }
 
 interface Result { name: string; context: string; label: string; href: string; }
@@ -200,8 +178,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
       try {
         const pin = parseFeaturePin(featureRoot.dataset.featureIndex);
         if (pin) {
-          const index = parseFeatureIndex(await loadIndex(parseSearchPin(pin), url.origin, fetcher), pin);
-          const results = matchFeatures(index, result.detailQuery, objectId).map(feature => featureResult(feature, index, objectId));
+          const results = await findResults(pin, url.origin, result.detailQuery, objectId, fetcher);
           publishResults(featureRoot, results, '');
           presentFeatureResults(featureRoot, results.length);
           detailCount = results.length;
