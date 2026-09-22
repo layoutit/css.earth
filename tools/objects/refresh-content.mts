@@ -10,6 +10,7 @@ import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readAuthoredSources } from './authored-sources.ts';
+import { refreshPreparedInventory } from '../prepare-object-json.mts';
 
 /** Prepared files the content stage writes that depend on lens images in the public folder, which the scratch run omits. */
 const IMAGE_DERIVED = new Set(['lenses.json']);
@@ -37,6 +38,8 @@ export async function refreshContent(id: string, root = process.cwd()) {
     const staged = await readFile(resolve(output, 'content.json')), current = await readFile(resolve(preparedDirectory, 'content.json'));
     if (staged.equals(current)) return false;
     await writeFile(resolve(preparedDirectory, 'content.json'), staged);
+    // Nothing under prepared/ is tracked: the inventory records the new content.json, which still has to be published.
+    await refreshPreparedInventory(id, root);
     return true;
   } finally { await rm(stage, { recursive: true, force: true }); }
 }
