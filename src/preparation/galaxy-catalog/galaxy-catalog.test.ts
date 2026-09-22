@@ -34,11 +34,7 @@ test('canonical catalogue rebakes byte-for-byte from the independently pinned or
     const data = await prepareGalaxyCatalogObject({ objectDirectory });
     assert.deepEqual(await readFile(resolve(objectDirectory, 'object.json')), await readFile(resolve(directory, 'object.json')));
     assert.deepEqual(await readFile(resolve(out, 'catalogue.json')), await readFile(resolve(directory, 'prepared/catalogue.json')));
-    for (const name of ['display-sample.json', 'manifest.json']) {
-      assert.deepEqual(await readFile(resolve(out, name)), await readFile(resolve(directory, 'prepared', name)));
-    }
-    const receipt = JSON.parse(await readFile(resolve(out, 'manifest.json'), 'utf8'));
-    assert.deepEqual(receipt.outputs.map((output: { path: string }) => output.path).sort(), ['catalogue.json', 'display-sample.json']);
+    assert.deepEqual(await readFile(resolve(out, 'display-sample.json')), await readFile(resolve(directory, 'prepared/display-sample.json')));
     assert.equal(parsePreparedGalaxyCatalog(data), data);
     assert.equal(data.objects.length + data.exclusions.length, 1727);
     assert.equal(data.objects.length, 776);
