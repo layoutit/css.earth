@@ -199,14 +199,14 @@ Use the [Sources preparation workflow](../sources-catalogue.md#prepare-and-check
 after changing capture records, catalogue metadata or artwork. It publishes object
 provenance, Sources and Missions together without acquiring or rendering images.
 
-Run `pnpm test:sources` for metadata, bindings and catalogue compilation. It covers
+Run `pnpm test:node` for metadata, bindings and catalogue compilation. It covers
 malformed records, source conservation, reverse links and deterministic output.
 For changes to dataset selection or routing, also run the affected
 [selection](../../src/platform/object-selection-runtime.test.mts) and
 [router](../../site/test/navigation-router.test.mts) tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run
-`pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) against an assembled build.
+`pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) against an assembled build.
 The [browser regression](../../site/test/rendered-page.test.mts)
 uses the public shell and records its cases, browser version, requests and
 screenshots under `output/playwright/dataset-navigation/`. It checks direct,

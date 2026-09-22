@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../source-test.mts';
+const test = sourceTest();
 import { assertCalibratedAsteroidSource } from './asteroid-calibration-contract.mts';
 import { anchorTable, numberList, selectedObjectIds } from './anchor-table.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';

@@ -3,7 +3,7 @@
 // the same and the numbers per moon are read from their own reports.
 import assert from "node:assert/strict";
 import { sourceTest } from '../../source-test.mts';
-const test = sourceTest('uranian-moons');
+const test = sourceTest();
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { requireRecord } from "../../../../tools/sources/source-values.mts";
