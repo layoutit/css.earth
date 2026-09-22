@@ -40,10 +40,10 @@ test('deploy catalogue recovery reads prepared contexts without authoring interm
 });
 test('changed prepared bytes are rejected; an authored source document is read as it is', async () => {
   await prepareContextProvenance({input:async path=>{ const bytes=await readFile(path); return path==='src/objects/nearby-universe/source/preparation/field.json' ? Buffer.concat([bytes,Buffer.from(' ')]) : bytes; }});
-  for(const target of ['src/objects/local-group/prepared/manifest.json']) {
+  for(const target of ['src/objects/local-group/prepared-receipt.json']) {
     await assert.rejects(prepareContextProvenance({input:async path=>{
       const bytes=await readFile(path);if(path !== target) return bytes;
-      if(path.endsWith('/manifest.json')) { const receipt=JSON.parse(bytes.toString()); receipt.outputs[0].sha256='0'.repeat(64); return Buffer.from(JSON.stringify(receipt)); }
+      if(path.endsWith('prepared-receipt.json')) { const receipt=JSON.parse(bytes.toString()); receipt.outputs[0].sha256='0'.repeat(64); return Buffer.from(JSON.stringify(receipt)); }
       return Buffer.concat([bytes,Buffer.from(' ')]);
     }}),/Unpinned context output|Changed source document|Changed prepared descriptor bank/);
   }
@@ -95,7 +95,7 @@ test('offline context recovery is independent of installed generated images and 
     await mkdir(join(root,base,'prepared'),{recursive:true});
     await cp(`${base}/source`,join(root,base,'source'),{recursive:true});
     await copyFile(`${base}/object.json`,join(root,base,'object.json'));
-    await copyFile(`${base}/prepared/manifest.json`,join(root,base,'prepared/manifest.json'));
+    await copyFile(`${base}/prepared-receipt.json`,join(root,base,'prepared-receipt.json'));
   }
   await mkdir(join(root,'src/objects/sun/source/navigation'),{recursive:true});
   await copyFile(

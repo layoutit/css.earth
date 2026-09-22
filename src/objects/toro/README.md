@@ -24,7 +24,7 @@ Recorded four-body results retain their [original build identities](https://gith
 - The archive gives a symmetric ±0.4 km error, while the paper reports −0.4/+0.3 km. Reference-period display rotation does not propagate the published YORP effect.
 - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods
 

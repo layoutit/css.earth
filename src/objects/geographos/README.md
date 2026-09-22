@@ -26,7 +26,7 @@ The display prime meridian is arbitrary; accelerated rotation and lighting do no
 
 The JPL release has more vertices than the 512-vertex fit discussed in the paper. Its sampling density is not observation resolution. The paper gives a model-dependent volume upper bound near 8.8 km³; rounded archival geometry is not a new physical measurement. The separate PDS release is thicker and has different coordinates. These variants are not claimed identical. Later thermophysical research favors a thinner/lightcurve-based interpretation; this package intentionally identifies the archived radar reconstruction.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="geographos-sources"></a>
 <a id="shape-and-physical-interpretation"></a>

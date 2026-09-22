@@ -24,7 +24,7 @@ Recorded four-body results retain their [original build identities](https://gith
 - The separate varied-shape fit gives 8.0 km (−0.9/+0.3 km); the adopted fixed-shape error is not total physical uncertainty. The older nonconvex model 272 is only a plausible alternative.
 - No registered reflectance texture is available. Grid marks missing imagery; Elevation is shape-derived radius relative to a sphere, not measured geology. Rotation phase is arbitrary.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods
 

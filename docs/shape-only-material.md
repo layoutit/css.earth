@@ -58,6 +58,12 @@ gray material hid its relief; the gentle bake makes the source shape readable.
 | --- | --- |
 | ![Kleopatra with uniform gray](images/shape-only-material/shadows-off-before.png) | ![Kleopatra with gentle shape shading](images/shape-only-material/shadows-off-after.png) |
 
+The five DAMIT asteroids added in `5c4324b3c` at their default views, all on the
+same shape-only material: the outline is the measured shape model, and nothing in
+the surface is invented.
+
+![Apollo, Koronis, Karin, Datura and Hungaria as gray shape models](images/damit-asteroids.png)
+
 ## Preparation
 
 [shape-material.mts](../tools/objects/terrestrial-layers/shape-material.mts) owns

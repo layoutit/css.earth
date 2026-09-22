@@ -25,4 +25,4 @@ Run of 2026-09-21 (this version):
 
 Sirius is a binary. This package is Sirius A only; the white dwarf Sirius B is not represented. No mass or gravitational parameter is adopted. The surface is a neutral sphere: no spots, limb darkening map or resolved image is shown.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

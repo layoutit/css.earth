@@ -437,10 +437,9 @@ authored commands. It routes `test:planets` to `tests/objects/unit/<id>/` plus t
 `pnpm test` currently runs packages, renderer, platform and shell checks;
 `test:planets` and `test:preparation` are separate commands.
 
-`pnpm test:browser` currently runs DOM cleanliness. Shared interaction
-conformance is `pnpm test:browser:conformance`. Browser profiles live in
-`tests/objects/browser/<id>/`, use `site/test/object-browser-profile.mts`, and
-consume prepared controls. `site/test/load-browser-profile.mts` already handles
-absent lenses and requires race inputs only when more than one lens exists.
+Rendering proof is `site/test/rendered-page.test.mts`: it builds each body's page
+and asserts the served HTML over `linkedom`, so there is no browser to drive. The
+Playwright suites and their per-body browser profiles were retired; test the code
+that produces the markup, not a live render.
 Use the actual command coverage when reporting proof; readiness requirements
 belong to the user's contract and [qualification](qualification.md).

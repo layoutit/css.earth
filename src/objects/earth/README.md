@@ -78,7 +78,7 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
   ice and unavailable imagery remain gaps; the display does not reconstruct
   continuous temperature measurements from RGB.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

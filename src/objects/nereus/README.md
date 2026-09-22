@@ -26,7 +26,7 @@ Prime-meridian display phase is arbitrary. Lighting does not claim an absolute c
 
 The final Elevation atlas withholds 116 of 5,777,054 triangle-interior texels (0.0020%) to the shared grid. The scientific value is not extrapolated beyond the source-distance allowance. Atlas bleed is counted separately in prepared/surfaces.json.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="nereus-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>

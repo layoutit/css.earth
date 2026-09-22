@@ -38,7 +38,7 @@ The selected 2017 nonconvex ADAM model 1855 combines adaptive-optics constraints
 
 The linked optical light-curve, occultation and thermophysical source products constrain shape and scale; they provide no registered global reflectance image. DAMIT preview renders are illustrations. Both views therefore retain the shared neutral-gray material or a clearly labeled visualization of the selected model radius.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

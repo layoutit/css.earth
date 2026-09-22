@@ -73,4 +73,4 @@ they are not the same quantity, but the superlative is not ours to assert.
 **One hemisphere, one epoch, one band.** The far hemisphere and the poles were not observed and carry the no-data grid. The
 pattern changes over weeks, so the lens is one night of a changing surface.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

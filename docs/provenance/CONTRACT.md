@@ -47,6 +47,7 @@ PDS4 archive compliance nor assessed ISO conformity, and does not require PDS XM
 | `object.json` and `source/preparation/` | Executable choices and exact parameters; explain their meaning without copying parameter lists |
 | Body `text.json` | [Reader text](../reader-text.md): the card line, introduction and dataset text, each citing the source records it is checked against. It stays outside `source/` and provenance; `pnpm prepare:text` publishes `prepared/text.json` |
 | `prepared/provenance.json` | Generated connections between inputs, processing and outputs; a build output, not committed |
+| `prepared/*` (everything else) | Baked output. Published to R2 through `prepared-assets.json`, restored by `setup:assets`, never committed |
 | `runtime-assets.json` at the body root | Generated delivery inventory used by installation and publication |
 | `site/prepared-sources.json` and `site/prepared-facilities.json` | Ignored source usage and mission attribution outputs; prepare together |
 | Shared guides and illustrations under `docs/` | Maintained explanations used across bodies |

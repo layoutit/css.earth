@@ -26,7 +26,7 @@ Checked 2026-09-21 by `tools/objects/source-authoring/damit-asteroids/author.mts
 - Elevation is false color for model radius minus a reference sphere, not gravitational height or independent terrain.
 - The displayed rotation phase is arbitrary and not propagated from the model epoch. Orbit context is fixed at 2026-09-03 TT.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

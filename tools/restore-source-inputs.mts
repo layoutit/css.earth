@@ -44,6 +44,9 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
   for (const raw of entries) {
     const path = sourcePath(raw.path);
     if (path.startsWith('.local/')) continue;
+    // Since 185c3ae2b a tracked file carries no pin in these manifests: it arrives with the
+    // checkout, so there is nothing to fetch and no digest to verify it against.
+    if ((raw.expectedSha256 ?? raw.sha256) === undefined) continue;
     const expectedSha256 = sourceDigest(raw.expectedSha256 ?? raw.sha256);
     const expectedBytes = raw.expectedBytes ?? raw.bytes;
     if (typeof expectedBytes !== 'number' || !Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {

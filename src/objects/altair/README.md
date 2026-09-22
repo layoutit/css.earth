@@ -27,4 +27,4 @@ Run of 2026-09-21 (this version):
 
 The edge darkening is drawn on a round plate fitted to the equator. Altair's outline is an ellipse that changes as the camera turns, so near the poles the darkening starts slightly outside the edge; computing it per view would derive geometry at runtime, which the renderer does not do. The paper does not say which pole faces us; its image shows the bright pole in the northwest, toward the position angle, so that pole is taken as the near one.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

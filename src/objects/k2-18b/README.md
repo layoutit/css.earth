@@ -18,4 +18,4 @@ No dated test report exists for this body yet.
 
 K2-18 b is often described as a candidate ocean or habitable world. Nothing here supports or shows that: the package draws a neutral gray sphere of the measured radius and makes no claim about its surface. Its atmosphere has been observed in transmission, first with Hubble (water vapour, Benneke et al. 2019) and since with JWST; no atmosphere is drawn.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

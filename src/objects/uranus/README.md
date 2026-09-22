@@ -62,7 +62,7 @@ observed-disc mean from their own checked FITS products as their uniform
 unobserved-area baseline. No local feature is reflected, extended, or invented
 outside the observed OPAL coverage.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="uranus-source-and-preparation-record"></a>
 <a id="visible-surface-and-observation-lenses"></a>

@@ -28,7 +28,7 @@ The final Elevation atlas withholds 5,821 of 5,778,790 triangle-interior texels 
 
 The paper’s alternate retrograde model is excluded as a duplicate interpretation of the same radar data, with the source ambiguity retained. Less than half the surface was radar-constrained; the unseen hemisphere uses model regularization and should not be read as observed terrain. The nominal 1.69 ± 0.05 km equivalent diameter gives the reference radius and its ±0.025 km uncertainty; coordinates retain their original scale.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="mithra-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>
