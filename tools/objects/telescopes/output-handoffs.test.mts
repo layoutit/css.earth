@@ -37,7 +37,8 @@ with fits.open(sys.argv[1]) as f:
  assert u.Unit(f[0].header['BUNIT']).is_equivalent(u.W/u.m**2)
 a=np.load(sys.argv[2]);assert a.dtype==np.dtype('uint8');np.testing.assert_equal(a,[[0,2],[0,0]])`,output.data,resolve(root,'arrays/native-2.npy')],{env:{...process.env,...tc.env}});
     const evidence=JSON.parse(await readFile(output.receipt,'utf8'));assert.deepEqual(evidence.parameters.sourceContext,context);assert.deepEqual(output.sourceContext,context);
-    await writeFile(data,Buffer.alloc(36));await assert.rejects(listOutputs(result),/pin mismatch/);
+    // Deliveries name files by path and size (no hashes, PR #531), so a changed file is caught by its size.
+    await writeFile(data,Buffer.alloc(35));await assert.rejects(listOutputs(result),/size mismatch/);
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

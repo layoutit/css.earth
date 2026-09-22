@@ -63,7 +63,7 @@ test('saved VO choice acquires, qualifies, exports through existing owners, and 
     await assert.rejects(qualifyVoProduct(root, plan.products[0]!), /stale|changed/u);
     const metadata = data.files.find(f => f.path.endsWith('.xml'))!;
     await appendFile(resolve(data.directory, metadata.path), '\nchanged');
-    await assert.rejects(delivery(result.resultPath), /pin mismatch/u);
+    await assert.rejects(delivery(result.resultPath), /size mismatch/u);
   } finally { server.closeAllConnections(); await new Promise<void>(done => server.close(() => done())); await rm(root, { recursive: true, force: true }); }
 });
 
@@ -119,7 +119,8 @@ test('two saved SODA subsets of one parent keep separate acquisition, qualificat
     assert.notEqual(firstDelivery.record.choice, secondDelivery.record.choice);
     const firstScience = firstDelivery.files.find(file => file.path.endsWith('science.fits'))!, secondScience = secondDelivery.files.find(file => file.path.endsWith('science.fits'))!;
     assert.notEqual(firstScience.path, secondScience.path);
-    assert.equal(firstScience.sha256, secondScience.sha256);
+    // Deliveries name files by path and size (PR #531); the two copies are compared byte for byte.
+    assert.ok((await readFile(resolve(firstDelivery.directory, firstScience.path))).equals(await readFile(resolve(secondDelivery.directory, secondScience.path))));
     const qualifications = await readdir(resolve(root, 'output/telescopes', target.id, 'qualifications'));
     assert.equal(qualifications.filter(name => name.endsWith('.json')).length, 2);
     assert.ok(requests.some(url => url.includes('CIRCLE=88.792938'))); assert.equal(requests.length, 2);

@@ -67,7 +67,9 @@ async function qualifyLocalImport(spec:LocalImportSpec,members:readonly Descript
   }
   const science=members.filter(member=>member.role==='science');
   if(science.length!==1)return{issue:{state:'unknown',reason:`The selected local profile requires exactly one science member; this import has ${science.length}.`}};
-  const member=science[0]!,pin={path:resolve(staging,member.path)},profile=selected[0]!;
+  // The import manifest keeps the digests it computed for its copies; a product descriptor names members by path (PR #531).
+  const {id,path:memberPath,role,mediaType}=science[0]!,member:DescriptorMember={id,path:memberPath,role,...mediaType?{mediaType}:{}};
+  const pin={path:resolve(staging,member.path)},profile=selected[0]!;
   try{
     const acquisition={kind:'local-import' as const,identity:'import.json'},calibration={state:'unknown' as const,basis:['Local byte import and content inspection establish structure, not archive origin or calibration.']};
     const value=profile.profileId==='astropy-mixed-nd-fits@1'
