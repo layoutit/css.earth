@@ -52,6 +52,19 @@ beam=sci.copy();beam.header['BUNIT']='mJy/beam'
 columns=[fits.Column(name='BMAJ',format='E',unit='arcsec',array=[1.,2.,3.]),fits.Column(name='BMIN',format='E',unit='arcsec',array=[.5,1.,1.5]),fits.Column(name='CHAN',format='J',array=[0,1,2]),fits.Column(name='POL',format='J',array=[0,0,0])]
 beams=fits.BinTableHDU.from_columns(columns,name='BEAMS');save('beams.fits',[beam,beams])
 beams.data['CHAN'][2]=1;save('bad-beams.fits',[beam,beams])
+def eso(name,role,**links):
+    h=fits.ImageHDU(np.ones((3,2,2),dtype='float32'),name=name);h.header['HDUCLAS1']='IMAGE';h.header['HDUCLAS2']=role
+    for k,v in links.items():h.header[k]=v
+    return h
+d=eso('DATA','DATA',ERRDATA='ERROR',QUALDATA='DQI')
+for k in ['BUNIT','CTYPE1','CTYPE2','CTYPE3','CUNIT1','CUNIT2','CUNIT3','CRPIX1','CRPIX2','CRPIX3','CRVAL1','CRVAL2','CRVAL3','CDELT1','CDELT2','CDELT3']:d.header[k]=sci.header[k]
+e=eso('ERROR','ERROR',SCIDATA='DATA',QUALDATA='DQI');e.header['HDUCLAS3']='RMSE';e.header['BUNIT']='erg / (s cm2 Angstrom)'
+q=eso('DQI','QUALITY',SCIDATA='DATA',ERRDATA='ERROR');q.header['HDUCLAS3']='FLAG16BIT';q.data=np.zeros((3,2,2),dtype='uint16');q.data[1]=1
+save('eso.fits',[d,e,q])
+m=e.copy();m.header['HDUCLAS3']='MSE';m.header['BUNIT']='erg2 / (s2 cm4 Angstrom2)';save('eso-mse.fits',[d,m,q])
+bad=d.copy();bad.header['ERRDATA']='NOPE';save('eso-missing.fits',[bad,e,q])
+back=e.copy();back.header['SCIDATA']='OTHER';save('eso-backlink.fits',[d,back,q])
+inv=e.copy();inv.header['HDUCLAS3']='INVRMSE';save('eso-invrmse.fits',[d,inv,q])
 ` ,root],{env:{...process.env,...tc.env}});
 });
 after(async()=>{await rm(root,{recursive:true,force:true});});
@@ -64,6 +77,14 @@ test('shape, unit and unmasked negative uncertainty contradictions are refused',
  await assert.rejects(read('ambiguous.fits'),/Ambiguous science association/);
  await assert.rejects(read('bad-unit.fits'),/units disagree/);await assert.rejects(read('bad-shape.fits'),/shape mismatch/);await assert.rejects(read('negative.fits'),/Negative unmasked/);
  const unknown=await read('missing-unit.fits');assert.equal(unknown.nativeMetadata?.uncertainty?.status,'unknown');assert.equal(unknown.nativeMetadata?.quality?.usable,0);assert.deepEqual(unknown.wavelengthIntervalsMicrometres,[]);
+});
+test('ESO science data products are read by their declared roles and links, not by extension names',async()=>{
+ const f=await read('eso.fits');
+ assert.equal(f.nativeMetadata?.uncertainty?.kind,'standard-deviation');assert.equal(f.nativeMetadata?.uncertainty?.structure,'ERROR');assert.equal(f.nativeMetadata?.uncertainty?.status,'validated');
+ assert.equal(f.nativeMetadata?.quality?.flagged,4);assert.equal(f.nativeMetadata?.quality?.usable,8);
+ assert.equal((await read('eso-mse.fits')).nativeMetadata?.uncertainty?.kind,'variance');
+ await assert.rejects(read('eso-missing.fits'),/ERRDATA of .* names 0 extensions called NOPE/);await assert.rejects(read('eso-backlink.fits'),/links back to OTHER/);
+ const unsupported=await read('eso-invrmse.fits');assert.equal(unsupported.nativeMetadata?.uncertainty?.status,'unknown');assert.ok(unsupported.nativeMetadata?.limitations?.some(line=>line.includes('INVRMSE')));
 });
 test('variance and inverse variance carry correct dimensional checks',async()=>{
  assert.equal((await read('variance.fits')).nativeMetadata?.uncertainty?.kind,'variance');
@@ -122,7 +143,7 @@ t=QTable.read(sys.argv[1]);assert list(t['value'].mask)==[False,True,False]
 assert list(t['standard_deviation'].mask)==[False,True,False]
 assert t['wavelength'].unit==u.um and t['value'].unit==u.erg/(u.s*u.cm**2*u.AA)
 `,spectrum.data],{env:{...process.env,...tc.env}});
- await writeFile(file,'changed');await assert.rejects(listOutputs(result),/pin mismatch/);
+ await writeFile(file,'changed');await assert.rejects(listOutputs(result),/size mismatch/);
 });
 
 test('output CLI selections remain explicit and sampling is reproducible',async()=>{

@@ -37,6 +37,10 @@ def read_science(path):
         primary=hdus[0].header
         images=[(i,h) for i,h in enumerate(hdus) if isinstance(h,(fits.PrimaryHDU,fits.ImageHDU,fits.CompImageHDU)) and h.header.get('NAXIS',0)>0]
         science=[(i,h) for i,h in images if h.name.upper()=='SCI']
+        # ESO science data products declare each array's role (HDUCLAS2) and name their companions (ERRDATA, QUALDATA,
+        # SCIDATA); a file that declares roles is read by them, not by extension names.
+        declared=any('HDUCLAS2' in h.header for _,h in images)
+        if not science and declared: science=[(i,h) for i,h in images if str(h.header.get('HDUCLAS2','')).upper()=='DATA']
         auxnames={'ERR','ERROR','VAR','VARIANCE','IVAR','DQ','MASK','WMAP','WHT','CON','CONTEXT','VAR_POISSON','VAR_RNOISE','VAR_FLAT'}
         if not science: science=[(i,h) for i,h in images if h.name.upper() not in auxnames]
         if not science: raise ValueError('No science image in FITS product')
@@ -54,6 +58,16 @@ def read_science(path):
             rawunit=h.get('BUNIT'); dataunit=unit(rawunit)
             if dataunit is not None: row['units']={'value':rawunit,'source':name+':BUNIT','canonical':str(dataunit)}
             else: limits.append('Missing or unsupported science unit: '+str(rawunit))
+            def linked(keyword, role):
+                target=h.get(keyword)
+                if target is None: return None
+                candidates=[x for _,x in images if x.name==str(target)]
+                if len(candidates)!=1: raise ValueError(keyword+' of '+name+' names '+str(len(candidates))+' extensions called '+str(target))
+                result=candidates[0]
+                if str(result.header.get('HDUCLAS2','')).upper()!=role: raise ValueError(keyword+' of '+name+' names '+result.name+', whose HDUCLAS2 is not '+role)
+                if result.header.get('SCIDATA') not in (None, hdu.name): raise ValueError(result.name+' links back to '+str(result.header.get('SCIDATA'))+', not '+hdu.name)
+                if tuple(result.shape)!=shape: raise ValueError('Companion shape mismatch: '+result.name+' for '+name)
+                return result
             def companion(names):
                 candidates=[x for _,x in images if x.name.upper() in names and x.header.get('EXTVER',1)==version]
                 if len(candidates)>1: raise ValueError('Ambiguous companion '+str(names)+' for '+name)
@@ -62,11 +76,18 @@ def read_science(path):
                 result=candidates[0]
                 if tuple(result.shape)!=shape: raise ValueError('Companion shape mismatch: '+result.name+' for '+name)
                 return result
-            error=companion({'ERR','ERROR','VAR','VARIANCE','IVAR'})
-            dq=companion({'DQ','MASK'})
             error_kind=None; error_unit_valid=False
+            if declared:
+                error=linked('ERRDATA','ERROR'); dq=linked('QUALDATA','QUALITY')
+                if error is not None:
+                    error_kind={'MSE':'variance','RMSE':'standard-deviation','INVMSE':'inverse-variance'}.get(str(error.header.get('HDUCLAS3','')).upper())
+                    if error_kind is None:
+                        limits.append('Uncertainty kind '+str(error.header.get('HDUCLAS3'))+' of '+error.name+' is not supported; uncertainty ignored.'); error=None
+            else:
+                error=companion({'ERR','ERROR','VAR','VARIANCE','IVAR'})
+                dq=companion({'DQ','MASK'})
             if error is not None:
-                error_kind='variance' if error.name.upper() in ('VAR','VARIANCE') else 'inverse-variance' if error.name.upper()=='IVAR' else 'standard-deviation'
+                if error_kind is None: error_kind='variance' if error.name.upper() in ('VAR','VARIANCE') else 'inverse-variance' if error.name.upper()=='IVAR' else 'standard-deviation'
                 eu=unit(error.header.get('BUNIT')); wanted=None if dataunit is None else dataunit**(2 if error_kind=='variance' else -2 if error_kind=='inverse-variance' else 1)
                 if eu is not None and wanted is not None:
                     if not eu.is_equivalent(wanted): raise ValueError('Uncertainty units disagree with science: '+name)
