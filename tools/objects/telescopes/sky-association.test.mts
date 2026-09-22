@@ -12,7 +12,7 @@ const temporary = async () => mkdtemp(resolve(tmpdir(), 'sky-association-'));
 test('relative astrometry is read in the orbitize! layout and refuses what it cannot represent', async () => {
   const rows = readRelativeAstrometryCsv(await readFile(fixture, 'utf8'));
   assert.equal(rows.length, 4);
-  assert.deepEqual(rows[0], { id: 'b-2022-01-25', epochMjd: 59604.16, eastMas: 256.753, northMas: 422.165, covariance: [0.056 ** 2, -0.499 * 0.056 * 0.141, 0.141 ** 2] });
+  assert.deepEqual(rows[0], { id: 'b-2022-01-25', epochMjd: 59604.16, eastMas: 256.753, northMas: 422.165, body: 'beta-pictoris-b', covariance: [0.056 ** 2, -0.499 * 0.056 * 0.141, 0.141 ** 2] });
   assert.throws(() => readRelativeAstrometryCsv('epoch,sep,pa\n59604.16,494,31\n'), /raoff/u);
   assert.throws(() => readRelativeAstrometryCsv('id,epoch,raoff,decoff,raoff_err\na,1,2,3,0.1\n'), /only one offset error/u);
   assert.throws(() => readRelativeAstrometryCsv('id,epoch,raoff,decoff,raoff_err,decoff_err,radec_corr\na,1,2,3,0.1,0.2,2\n'), /correlation/u);
@@ -123,7 +123,7 @@ test('the system chart carries the orbit draws, the archival astrometry and the 
     assert.equal((await readFile(resolve(work, 'run', 'system', 'preview.png'))).subarray(1, 4).toString(), 'PNG');
     // The tool ships the astrometry its own fit was made from: 74 rows over 2004 to 2022, of which 65 are offsets.
     // The other nine are separation and position angle, which this route refuses to convert.
-    const archival = result.rows.filter(row => row.association.measurement.body !== undefined);
+    const archival = result.rows.filter(row => row.association.measurement.id.includes('@'));
     assert.equal(archival.length, 65);
     assert.ok(archival.every(row => row.association.closest === row.association.measurement.body), 'every archival row matches the planet it was measured for');
     const epochs = result.rows.map(row => row.association.measurement.epochMjd);

@@ -14,6 +14,7 @@ import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { plotNumericPreview, type FigureOptions } from '../astronomy-packages/plots.mts';
 
 const KM_PER_AU = 1.495978707e8;
+const GM_SUN_KM3_S2 = 132712440041.93938;
 
 export type Covariance = readonly [number, number, number];
 /** A sky position as offsets from the host star, in mas: east (Δα cos δ) and north (Δδ), with an optional [xx, xy, yy] covariance in mas². */
@@ -56,12 +57,12 @@ export function readRelativeAstrometryCsv(text: string): RelativePosition[] {
     const number = (name: string) => { const text = cell(name); if (text === '' || text.toLowerCase() === 'nan') return undefined; const value = Number(text); if (!Number.isFinite(value)) throw new TypeError(`Relative astrometry row ${index + 1} ${name} is not a number.`); return value; };
     const east = number('raoff'), north = number('decoff'), epoch = number('epoch');
     if (east === undefined || north === undefined || epoch === undefined) throw new TypeError(`Relative astrometry row ${index + 1} needs epoch, raoff and decoff; separation and position angle are not converted.`);
-    const id = cell('id') || (cell('object') ? `${cell('object')}@${epoch}` : `row-${index + 1}`);
+    const named = cell('object'), id = cell('id') || (named ? `${named}@${epoch}` : `row-${index + 1}`);
     if (ids.has(id)) throw new TypeError(`Relative astrometry repeats row ${id}.`); ids.add(id);
     const sx = number('raoff_err'), sy = number('decoff_err'), rho = number('radec_corr') ?? 0;
     if ((sx === undefined) !== (sy === undefined)) throw new TypeError(`Relative astrometry row ${index + 1} states only one offset error.`);
     if (rho < -1 || rho > 1) throw new TypeError(`Relative astrometry row ${index + 1} correlation is outside [-1, 1].`);
-    return { id, epochMjd: epoch, eastMas: east, northMas: north, ...(sx === undefined ? {} : { covariance: checkedCovariance([sx * sx, rho * sx * sy!, sy! * sy!], `Row ${id} covariance`) }) };
+    return { id, epochMjd: epoch, eastMas: east, northMas: north, ...(named ? { body: named } : {}), ...(sx === undefined ? {} : { covariance: checkedCovariance([sx * sx, rho * sx * sy!, sy! * sy!], `Row ${id} covariance`) }) };
   });
 }
 
@@ -125,6 +126,30 @@ def fit_astrometry(planet):
    'sigmaEastMas':float(row['quant1_err']),'sigmaNorthMas':float(row['quant2_err']),
    'correlation':(0.0 if not np.isfinite(row['quant12_corr']) else float(row['quant12_corr'])),'instrument':row['instrument'].decode()})
  return kept
+def fit_orbit(rows,mtot,mtot_err,plx,plx_err,settings):
+ # orbitize owns the fit; we hand it the rows in its own format and keep the draws it returns.
+ import csv,tempfile
+ from orbitize import driver
+ with tempfile.NamedTemporaryFile('w',suffix='.csv',delete=False,newline='') as handle:
+  writer=csv.writer(handle); writer.writerow(['epoch','object','raoff','raoff_err','decoff','decoff_err','radec_corr'])
+  for row in rows: writer.writerow([row['epochMjd'],1,row['eastMas'],row['sigmaEastMas'],row['northMas'],row['sigmaNorthMas'],row.get('correlation',0.0)])
+  path=handle.name
+ with contextlib.redirect_stdout(io.StringIO()):
+  run=driver.Driver(path,'MCMC',1,mtot,plx,mass_err=mtot_err,plx_err=plx_err,
+   mcmc_kwargs={'num_temps':int(settings['temperatures']),'num_walkers':int(settings['walkers']),'num_threads':1})
+  run.sampler.run_sampler(int(settings['walkers'])*int(settings['steps']),burn_steps=int(settings['burn']),thin=int(settings['thin']))
+ os.remove(path)
+ post=np.asarray(run.sampler.results.post,dtype=float)
+ return post,float(run.sampler.results.tau_ref_epoch)
+def fitted_tracks(post,tau_ref,mjd,draws,steps):
+ out=[]
+ for i in np.linspace(0,len(post)-1,min(draws,len(post))).astype(int):
+  sma,ecc,inc,aop,pan,tau,plx,mtot=post[i][:8]
+  period=np.sqrt(sma**3/mtot)*365.25
+  times=mjd+np.linspace(0,period,steps)
+  ra,dec,_=kepler.calc_orbit(times,sma,ecc,inc,aop,pan,tau,plx,mtot,tau_ref_epoch=tau_ref)
+  out.append([[float(a),float(b)] for a,b in zip(np.ravel(ra),np.ravel(dec))])
+ return out
 def predict(planet,mjd):
  with contextlib.redirect_stdout(io.StringIO()):
   ra,dec,sep,pa=wtp.predict_planet(planet,time_mjd=mjd,num_samples=None)
@@ -148,6 +173,15 @@ for item in request['epochs']:
 extra={}
 if request.get('tracks'):
  extra['tracks']={body['id']:tracks(body['planet'],request['epochs'][0]['epochMjd'],int(request['tracks']['draws']),int(request['tracks']['steps'])) for body in request['bodies']}
+if request.get('fit'):
+ settings=request['fit']; fitted={}
+ for body in request['bodies']:
+  rows=settings['rows'].get(body['id'],[])
+  if len(rows)<3: continue
+  post,tau_ref=fit_orbit(rows,settings['massSolar'],settings['massErrorSolar'],settings['parallaxMas'],settings['parallaxErrorMas'],settings)
+  fitted[body['id']]={'draws':len(post),'tracks':fitted_tracks(post,tau_ref,request['epochs'][0]['epochMjd'],int(settings['draws']),int(settings['trackSteps'])),
+   'median':{'semiMajorAxisAu':float(np.median(post[:,0])),'eccentricity':float(np.median(post[:,1])),'inclinationDegrees':float(np.degrees(np.median(post[:,2])))}}
+ extra['fitted']=fitted
 if request.get('fitAstrometry'):
  extra['fitAstrometry']={body['id']:fit_astrometry(body['planet']) for body in request['bodies']}
 json.dump({'software':software,'epochs':out,**extra},sys.stdout)
@@ -157,6 +191,7 @@ interface BridgeResult {
   software: Record<string, string>;
   epochs: { epochMjd: number; predicted: Record<string, { eastMas: number; northMas: number; sigmaEastMas: number; sigmaNorthMas: number; orbit: string }>; tests: CandidateTest[] }[];
   tracks?: Record<string, [number, number][][]>;
+  fitted?: Record<string, { draws: number; tracks: [number, number][][]; median: { semiMajorAxisAu: number; eccentricity: number; inclinationDegrees: number } }>;
   fitAstrometry?: Record<string, { epochMjd: number; eastMas: number; northMas: number; sigmaEastMas: number; sigmaNorthMas: number; correlation: number; instrument: string }[]>;
 }
 async function bridge(request: unknown): Promise<BridgeResult> {
@@ -216,12 +251,17 @@ export async function candidatesAtEpoch(system: string, epochMjd: number, option
   return { system, epochMjd, candidates, tracks: orbitTracks(result, bodies, system, epochMjd), excluded, software: result.software };
 }
 
+/** Settings for an orbitize! fit of the measurements themselves; it samples, so it costs minutes, not seconds. */
+export interface FitSettings { readonly walkers?: number; readonly steps?: number; readonly burn?: number; readonly thin?: number; readonly temperatures?: number; readonly draws?: number }
+export interface FittedOrbit { readonly id: string; readonly draws: number; readonly semiMajorAxisAu: number; readonly eccentricity: number; readonly inclinationDegrees: number }
+
 /** Each measured row against the candidates at its own epoch. */
-export async function associate(measurements: readonly RelativePosition[], system: string, options: { readonly orbitDraws?: number; readonly fitAstrometry?: boolean } = {}): Promise<{ sets: CandidateSet[]; associations: Association[]; software: Record<string, string>; fitAstrometry: RelativePosition[] }> {
+export async function associate(measurements: readonly RelativePosition[], system: string, options: { readonly orbitDraws?: number; readonly fitAstrometry?: boolean; readonly fit?: FitSettings } = {}): Promise<{ sets: CandidateSet[]; associations: Association[]; software: Record<string, string>; fitAstrometry: RelativePosition[]; fitted: FittedOrbit[] }> {
   for (const measurement of measurements) if (!measurement.covariance) throw new TypeError(`Measurement ${measurement.id} states no position covariance; an association needs one.`);
   const planets = hostedPlanetsOf(system), { predicted: bodies, excluded } = predictionKeys(planets);
   const result = await bridge({ star: system, bodies, epochs: measurements.map(measurement => ({ epochMjd: measurement.epochMjd, measurement: { eastMas: measurement.eastMas, northMas: measurement.northMas, covariance: measurement.covariance } })), tracks: { draws: options.orbitDraws ?? 1, steps: 361 }, ...(options.fitAstrometry ? { fitAstrometry: true } : {}) });
   const sets: CandidateSet[] = [], associations: Association[] = [];
+  const fitted: FittedOrbit[] = [];
   result.epochs.forEach((epoch, index) => {
     const measurement = measurements[index]!;
     const candidates: Candidate[] = [{ id: system, kind: 'star', eastMas: 0, northMas: 0 }];
@@ -234,7 +274,7 @@ export async function associate(measurements: readonly RelativePosition[], syste
     id: `${id}@${row.epochMjd.toFixed(3)}`, body: id, epochMjd: row.epochMjd, eastMas: row.eastMas, northMas: row.northMas,
     covariance: checkedCovariance([row.sigmaEastMas ** 2, row.correlation * row.sigmaEastMas * row.sigmaNorthMas, row.sigmaNorthMas ** 2], `${id} ${row.instrument} covariance`),
   })));
-  return { sets, associations, software: result.software, fitAstrometry };
+  return { sets, associations, software: result.software, fitAstrometry, fitted };
 }
 
 const mark = (system: string, id: string) => id.replace(`${system}-`, '');
@@ -309,8 +349,29 @@ export async function runCandidates(system: string, epoch: number, directory: st
   return { directory, set };
 }
 
+/**
+ * Fits an orbit to the measurements of each body, through orbitize!, and returns its draws as orbit tracks. This is what a
+ * system paper does with its own data: the spread of the drawn orbits is what that data alone says about them.
+ */
+export async function fitOrbits(system: string, grouped: ReadonlyMap<string, readonly RelativePosition[]>, epochMjd: number, settings: FitSettings = {}) {
+  const planets = hostedPlanetsOf(system), { predicted: bodies } = predictionKeys(planets), star = starAstrometry(system as StarId);
+  const massSolar = (BODIES[system as keyof typeof BODIES] as { gravitationalParameterKm3PerS2: number }).gravitationalParameterKm3PerS2 / GM_SUN_KM3_S2;
+  const rows = Object.fromEntries([...grouped].map(([id, items]) => [id, items.map(item => ({ epochMjd: item.epochMjd, eastMas: item.eastMas, northMas: item.northMas,
+    sigmaEastMas: Math.sqrt(item.covariance![0]), sigmaNorthMas: Math.sqrt(item.covariance![2]), correlation: item.covariance![1] / Math.sqrt(item.covariance![0] * item.covariance![2]) }))]));
+  const result = await bridge({ star: system, bodies: bodies.filter(body => (rows[body.id]?.length ?? 0) >= 3), epochs: [{ epochMjd }],
+    fit: { rows, massSolar, massErrorSolar: 0, parallaxMas: 1000 / star.distanceParsecs, parallaxErrorMas: 0,
+      walkers: settings.walkers ?? 50, steps: settings.steps ?? 200, burn: settings.burn ?? 100, thin: settings.thin ?? 10,
+      temperatures: settings.temperatures ?? 5, draws: settings.draws ?? 50, trackSteps: 361 } });
+  const tracks: OrbitTrack[] = [], fitted: FittedOrbit[] = [];
+  for (const [id, fit] of Object.entries(result.fitted ?? {})) {
+    fitted.push({ id, draws: fit.draws, semiMajorAxisAu: fit.median.semiMajorAxisAu, eccentricity: fit.median.eccentricity, inclinationDegrees: fit.median.inclinationDegrees });
+    for (const points of fit.tracks) tracks.push({ id, points });
+  }
+  return { tracks, fitted, software: result.software };
+}
+
 /** `telescope associate`: measured rows against the candidates at each row's epoch, with one chart per row. */
-export async function runAssociation(measurementsPath: string, system: string, directory: string, options: FigureOptions & { readonly orbitDraws?: number; readonly fitAstrometry?: boolean } = {}) {
+export async function runAssociation(measurementsPath: string, system: string, directory: string, options: FigureOptions & { readonly orbitDraws?: number; readonly fitAstrometry?: boolean; readonly fitOrbits?: FitSettings | boolean } = {}) {
   await refuseExisting(directory);
   const read = readRelativeAstrometryCsv(await readFile(measurementsPath, 'utf8'));
   const first = await associate(read, system, { orbitDraws: options.orbitDraws ?? 1, fitAstrometry: options.fitAstrometry ?? false });
@@ -324,11 +385,24 @@ export async function runAssociation(measurementsPath: string, system: string, d
   }
   // The system chart shows the predictions for the newest epoch it holds; older rows are the track of how the bodies got there.
   const newest = associations.reduce((latest, association, index) => association.measurement.epochMjd > associations[latest]!.measurement.epochMjd ? index : latest, 0);
-  await previewSystem(resolve(directory, 'system'), system, sets[newest]!, associations, options);
+  let set = sets[newest]!, fitted: FittedOrbit[] = [];
+  if (options.fitOrbits) {
+    const grouped = new Map<string, RelativePosition[]>();
+    for (const association of associations) {
+      const body = association.measurement.body ?? association.closest;
+      if (body === system) continue;
+      grouped.set(body, [...(grouped.get(body) ?? []), association.measurement]);
+    }
+    const fit = await fitOrbits(system, grouped, set.epochMjd, options.fitOrbits === true ? {} : options.fitOrbits);
+    fitted = fit.fitted;
+    if (fit.tracks.length) set = { ...set, tracks: fit.tracks };
+  }
+  await previewSystem(resolve(directory, 'system'), system, set, associations, options);
   await writeJson(resolve(directory, 'association.json'), {
     chart: 'system/preview.png',
     schema: 'cssearth-sky-association@1', system, measurements: resolve(measurementsPath),
     method: 'Candidate positions and their per-axis spread come from whereistheplanet, which propagates each planet published orbit posterior. SciPy measures the Mahalanobis distance R between the measurement and each candidate under their summed covariance, the chi-square tail p of R in two dimensions, and the one-sided normal sigma with the same tail.',
-    limits: [...LIMITS, 'The system chart draws the predicted positions at the newest epoch it holds; every measurement is coloured by the body it is closest to, and a measurement closest to the star is left uncoloured.'], software, rows });
+    ...(fitted.length ? { fitted } : {}),
+    limits: [...LIMITS, ...(fitted.length ? ['The orbits drawn are an orbitize! fit of these measurements alone, one body at a time, with the stellar mass and parallax held at the registry values. A short arc of a long orbit leaves that fit wide; the narrow bands a system paper prints come from fitting the bodies together with absolute astrometry, which this route does not do.'] : []), 'The system chart draws the predicted positions at the newest epoch it holds; every measurement is coloured by the body it is closest to, and a measurement closest to the star is left uncoloured.'], software, rows });
   return { directory, rows, software };
 }
