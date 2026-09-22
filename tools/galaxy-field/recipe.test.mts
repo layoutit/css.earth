@@ -6,7 +6,6 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 import { parseFieldRecipe } from './recipe.mts';
-import { sha256 } from '../../src/platform/sha256.mts';
 
 const input: unknown = JSON.parse(await readFile(new URL('../../src/objects/nearby-universe/source/preparation/field.json', import.meta.url), 'utf8'));
 const recipe = parseFieldRecipe(input);
@@ -27,9 +26,12 @@ test('the galaxy field pins the authored frame contract, not rendered world geom
   const manifest = JSON.parse(await readFile('src/objects/nearby-universe/source/manifest.json', 'utf8'));
   const navigation = manifest.documents.find((entry: { id: string }) => entry.id === 'navigation-frame');
   assert.equal(navigation.path, 'src/objects/sun/source/navigation/universe.json');
-  const frame = await readFile(navigation.path);
-  assert.equal(frame.length, navigation.expectedBytes);
-  assert.equal(sha256(frame), navigation.expectedSha256);
+  // `185c3ae2b` stopped pinning tracked files, and CLAUDE.md now states that a manifest pin
+  // identifies bytes git does not hold. This entry names a tracked authored document, so it
+  // carries no pin: git holds the bytes and proves them.
+  assert.equal(navigation.expectedBytes, undefined);
+  assert.equal(navigation.expectedSha256, undefined);
+  assert.ok((await readFile(navigation.path)).length > 0);
   assert.equal(manifest.generatedIntermediates.length, 0);
   const preparer = await readFile(new URL('./prepare-points.mts', import.meta.url), 'utf8');
   assert.match(preparer, /sun\/source\/navigation\/universe\.json/u);
