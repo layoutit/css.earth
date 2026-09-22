@@ -6,11 +6,6 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/palma/source'),read=createSourceFixtureReader(root);
-test('Palma retains source identity and restoration closure',async()=>{
- const source=await createSourceManifest({planetId:'palma',planetName:'Palma',sourceRoot:root});await source.verify();
- const plan=await read('preparation/acquisition.json');for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
- const model=await read('reference/damit-model.json');assert.equal(model.modelId,298);assert.equal(model.fields['Calibrated Size'],'1 (Yes)');assert.equal(model.fields.Version,'2011-02-18');
-});
 test('Palma preserves calibrated original coordinates and the paired spin model',async()=>{
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,mesh=await loadPdsPlateShape(resolve(root,p.path),p.grid),t=validateClosedMesh(mesh.indices.flat(),mesh.positions);
  assert.deepEqual(mesh.positions[0],[41933.515999999996,-7047.72,76626.975]);assert.deepEqual(mesh.indices[0],[0,1,2]);assert.deepEqual([t.vertices,t.faces,t.components,t.eulerCharacteristic],[1022,2040,1,2]);

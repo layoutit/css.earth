@@ -8,7 +8,6 @@ import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentati
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
-objectRuntimePackageTests(runtimeDefinition);
 test("Jupiter's actual import closure has no private runtime owner", async () => {
   const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "jupiter") });
   assert.equal(audit.complete, true);

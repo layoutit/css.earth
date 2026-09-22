@@ -24,7 +24,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   context.after(() => rm(projectRoot, { recursive: true, force: true }));
   const object = { id: "local-body", name: "LocalBody" };
   const paths = objectPackagePaths(object, projectRoot, true);
-  for (const file of [...paths.requiredFiles, ...paths.backlogFiles]) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
+  for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
   const body = authoredObjectFixture(object.id, { path: "source/local-data.bin" });
@@ -56,9 +56,6 @@ test("derives the complete owned file contract from planet identity", () => {
   assert.ok(paths.requiredFiles.includes(
     `/project/site/pages/[id].astro`,
   ));
-  // #505 deleted the 547 browser profiles with the harness that read them, so the backlog
-  // this ratchet tracked is empty. It stays a ratchet for whatever earns one next.
-  assert.deepEqual(paths.backlogFiles, []);
   assert.ok(!paths.requiredFiles.includes(
     `/project/tests/objects/browser/${planet.id}/browser-profile.mts`,
   ));
@@ -96,15 +93,13 @@ test("requires every registered object package file", async () => {
     }),
     /is missing .*prepared\/content\.json/,
   );
-  // The backlog is empty since #505 deleted the browser profiles it tracked, so a missing file
-  // that used to be backlogged is now simply not asked for: it must not become a hard failure.
-  const backlogged = await validateObjectPackageFiles(implemented[0], {
+  // A file the contract no longer asks for (the retired browser profiles) must not become a hard failure.
+  await validateObjectPackageFiles(implemented[0], {
     accessFile: async (file) => {
       assert.ok(typeof file === "string", "Package validator passes filesystem paths");
       if (file.endsWith("browser-profile.mts")) throw new Error("ENOENT");
     },
   });
-  assert.deepEqual(backlogged.missingBacklogFiles, []);
 });
 
 test("validates local editorial identity and provenance", () => {

@@ -63,13 +63,6 @@ group and can supersede an older deployment.
   SHA-256-pinned bank — so a reconciliation or reproduction gap is a stale recipe or a
   drifted toolchain, not a broken page. They keep the same path-based selection they
   had as job conditions, so an unrelated change still runs neither.
-- `tools/contract/object-package-backlog.json` is the ratcheted inventory for the object
-  package contract: `tools/contract/object-package-contract.mts` reports a missing
-  `backlogFiles` entry instead of throwing, and `tools/assets/restore-source-inputs.test.mts`
-  prints the outstanding list and fails only when it *grows*, or when an entry is
-  stale because its file now exists. Shrink the list in the change that supplies the
-  file. This is not a tolerance, a skip or a `continue-on-error`: every entry is still
-  named on every run, and new debt is still blocked at the moment it is introduced.
 - Restore only inputs the selected tests consume. Compiler jobs need pinned JSON
   and generated shell data, not the global texture bank. Image-consuming tests
   must restore their real pinned inputs; missing data is not a pass.

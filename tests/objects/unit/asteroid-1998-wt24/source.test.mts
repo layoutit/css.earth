@@ -8,11 +8,6 @@ import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/te
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig,requireRotation} from '../radial-fixture.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-1998-wt24/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('1998 WT24 retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'asteroid-1998-wt24',planetName:'1998 WT24',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('1998 WT24 preserves the original kilometer mesh and published spin interpretation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

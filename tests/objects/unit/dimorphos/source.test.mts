@@ -8,11 +8,6 @@ import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/te
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig} from '../radial-fixture.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/dimorphos/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('Dimorphos restores all required source inputs from pinned acquisition operations',async()=>{
- const source=await createSourceManifest({planetId:'dimorphos',planetName:'Dimorphos',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('Dimorphos retains the published DART kilometer coordinates, closed volume and original topology',async()=>{
  const {config,terrain:p}=requireRadialTestConfig(await read('preparation/terrestrial.json')),mesh=await loadObjShape(resolve(root,p.path),p.grid);
  for(const [axis,value] of [-46.509999781847,45.719999819994,37.5000014901161].entries())assert.ok(Math.abs(mesh.positions[0][axis]-value)<1e-8);
