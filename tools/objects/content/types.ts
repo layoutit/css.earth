@@ -141,7 +141,7 @@ export interface Fact {
 
 export interface PreparedObjectContent {
   objectId: string;
-  title: TitleSource & {
+  title: Omit<TitleSource, "sourceSha256" | "sourceGenerator" | "xOrigin"> & {
     renderViewBox: string;
     renderWidth: number;
     renderHeight: number;
