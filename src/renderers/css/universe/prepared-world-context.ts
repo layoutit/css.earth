@@ -205,7 +205,21 @@ function focusPoint(value: unknown): PreparedContextFocus {
   return Object.freeze({ ...base, pointSource: Object.freeze({ absoluteMagnitude, color,
     proximityEnhancement: Object.freeze({ fullDistanceM, fadeOutDistanceM, radiusMultiplier, brightnessMultiplier }) }) });
 }
-function equalPosition(a: PositionM, b: PositionM): boolean { return a.every((value, index) => value === b[index]); }
+/** Two positions are the same place when they agree to double precision.
+ *
+ * A body's position and the orbit vertex pinned to it are computed by different runs, and doubles at solar
+ * system scale carry their last digit at tenths of a millimetre: Neptune's own vertex and body position differ
+ * by 0.5 mm at 30 au, a relative 2e-15. Exact equality makes that a failure while the orbit is pinned to the
+ * body exactly as intended. The bound sits fifty times above that roundoff and, at Neptune's distance, still
+ * refuses anything beyond a few metres, so an orbit on the wrong body or the wrong vertex cannot pass. */
+const POSITION_TOLERANCE = 1e-12;
+function equalPosition(a: PositionM, b: PositionM): boolean {
+  return a.every((value, index) => {
+    const other = b[index]!;
+    return Number.isFinite(value) && Number.isFinite(other)
+      && Math.abs(value - other) <= POSITION_TOLERANCE * Math.max(1, Math.abs(value), Math.abs(other));
+  });
+}
 function parseSky(value: unknown): PreparedWorldContext['sky'] {
   const input = record(value, 'context sky', ['sceneRegistration']);
   const sceneRegistration = text(input.sceneRegistration, 'context sky registration');
