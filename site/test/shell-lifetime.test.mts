@@ -436,7 +436,7 @@ test('camera scale keeps the overview while the separate Atlas browser filters a
   assert.equal(earthBranch.open, false, 'Deeper body branches collapse with their second-level group');
   search.value = 'moon'; search.dispatchEvent(new Event('input'));
   assert.equal(f.selectors.element('.planet-selected-content').hidden, true, 'Search replaces the selected content as one unit');
-  assert.equal(navigationTree.hidden, false, 'Search filters the retained Atlas navigation');
+  assert.equal(navigationTree.hidden, true, 'Typed results are a flat list; the tree steps aside while searching');
   assert.equal(browser.requireSelector('#object-category-results').hidden, false);
   assert.equal(items[0].hidden, true); assert.equal(items[1].hidden, false);
   assert.equal(tabs[2].getAttribute('aria-selected'), 'true');
