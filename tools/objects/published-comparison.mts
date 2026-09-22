@@ -13,8 +13,8 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { sha256 } from '../../src/platform/sha256.mts';
-import { requireArray, requireRecord } from '../source-values.mts';
-import { readPdfImage } from '../pdf-image.mts';
+import { requireArray, requireRecord } from '../sources/source-values.mts';
+import { readPdfImage } from '../fits/pdf-image.mts';
 import { deriveObserverCameras, loadObserverCameraInputs, loadOrientation, type DerivedCamera } from './terrestrial-layers/observer-cameras.mts';
 import { decodeCalibratedCamera, loadCameraShape } from './terrestrial-layers/shape-camera-mosaic.mts';
 import { radialTerrainForLens } from './terrestrial-layers/radial-models.mts';
@@ -47,7 +47,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   if (spec.document.sha256 === UNPINNED && adopt) {
     Object.assign(stated.document, { width: image.width, height: image.height, sha256: pixels }); Object.assign(spec.document, stated.document);
     await writeFile(specPath, JSON.stringify(stated, null, 2) + '\n');
-    console.log(`Adopted object ${spec.document.object} as ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}. Look at the figure before trusting it, then run pnpm pin:documents ${objectId}.`);
+    console.log(`Adopted object ${spec.document.object} as ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}. Look at the figure before trusting it, then run node tools/sources/pin-object-documents.mts ${objectId}.`);
   }
   if (image.width !== spec.document.width || image.height !== spec.document.height || pixels !== spec.document.sha256)
     throw new Error(`Object ${spec.document.object} is not the pinned ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}.${spec.document.sha256 === UNPINNED ? ' Run with --write to adopt it.' : ''}`);

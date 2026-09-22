@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { hostSkyFrame, hostedOrbitStateRelativeBmjdTdb, type HostedOrbit } from '@cssearth/astronomy';
 import { readOracleFixture } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 
 const fixture = await readOracleFixture('astronomy/hosted-eccentric.json');
 const numbers = (value: unknown) => requireArray(value).map(entry => requireFiniteNumber(entry));

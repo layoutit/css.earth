@@ -11,8 +11,8 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { mergeContinuum, mergedOifits, type ContinuumRecipe } from '../../interferometry/matisse-continuum.mts';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
-import { skyDisplayRaster } from '../../../fits-sky.mts';
-import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
+import { skyDisplayRaster } from '../../../fits/fits-sky.mts';
+import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../sources/source-values.mts';
 import sharp from 'sharp';
 import { interpolatePalette } from '../../color-transfer.mts';
 

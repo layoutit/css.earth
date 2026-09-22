@@ -3,7 +3,7 @@ import { validateTerrestrialRings } from './rings.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
 import {parseSolidPreparationSource} from './profile-source.mts';
 import type {parseSolidScience} from './solid-source.mts';
-import {requireRecord,requireFiniteNumber,requireString} from '../../source-values.mts';
+import {requireRecord,requireFiniteNumber,requireString} from '../../sources/source-values.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {validatePreparedCubicSky} from '../../../src/platform/cubic-sky-contract.mts';
 import {validateDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';

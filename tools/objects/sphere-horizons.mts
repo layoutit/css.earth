@@ -16,8 +16,8 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../src/platform/sha256.mts';
-import { readFitsHdu } from '../fits.mts';
-import { requireArray, requireRecord } from '../source-values.mts';
+import { readFitsHdu } from '../fits/fits.mts';
+import { requireArray, requireRecord } from '../sources/source-values.mts';
 import { horizonsRows, loadObserverCameraInputs, observerRowValues, rowJd, zimpolExposure } from './terrestrial-layers/observer-cameras.mts';
 
 const ROOT = resolve(import.meta.dirname, '../..');
@@ -143,7 +143,7 @@ const TABLES = {
   observer: { suffix: 'horizons-sphere-observer', coverage: 'observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure' },
   heliocentric: { suffix: 'horizons-sphere-heliocentric', coverage: 'heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun' },
 } as const;
-/** A manifest input for a table this tool wrote; `pnpm author:sources` adds its source binding. */
+/** A manifest input for a table this tool wrote; `node tools/sources/author-source-records.mts` adds its source binding. */
 export function tableInput(objectId: string, kind: keyof typeof TABLES, path: string, bytes: Uint8Array) {
   return { id: `${objectId}-${TABLES[kind].suffix}`, path, origin: HORIZONS_API, credit: 'NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons',
     license: 'Public ephemeris service output; cite JPL Horizons.',
@@ -180,7 +180,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (flag === '--write') {
     const declared = await writeHorizonsTables(objectId, sourceDirectory, record.ephemeris, tables);
     await writeHorizonsOperations(objectId, sourceDirectory);
-    console.log(`Wrote ${record.ephemeris.observer} and ${record.ephemeris.heliocentric}, pinned them in the manifest and wrote their refresh steps; run pnpm pin:documents ${objectId}.`);
-    if (declared.length) console.log(`Declared ${declared.join(' and ')} as new inputs; run pnpm author:sources ${objectId} to bind them.`);
+    console.log(`Wrote ${record.ephemeris.observer} and ${record.ephemeris.heliocentric}, pinned them in the manifest and wrote their refresh steps; run node tools/sources/pin-object-documents.mts ${objectId}.`);
+    if (declared.length) console.log(`Declared ${declared.join(' and ')} as new inputs; run node tools/sources/author-source-records.mts ${objectId} to bind them.`);
   }
 }

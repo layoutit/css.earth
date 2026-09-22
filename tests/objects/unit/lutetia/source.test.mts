@@ -1,4 +1,4 @@
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {createSourceFixtureReader,requireClosedTerrain} from '../../fixtures/source-fixture.mts';

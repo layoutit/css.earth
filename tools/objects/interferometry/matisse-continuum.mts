@@ -8,7 +8,7 @@
  * carries one sign. The output scales every baseline to one reference wavelength, so the reconstruction is monochromatic. */
 import { readFile } from 'node:fs/promises';
 import { basename } from 'node:path';
-import { readFitsHeader } from '../../fits.mts';
+import { readFitsHeader } from '../../fits/fits.mts';
 import { binaryTableHdu, findTable, numbers, primaryHdu, readFitsHdus, tableColumn, text } from './fits-table.mts';
 
 export interface ContinuumRecipe {

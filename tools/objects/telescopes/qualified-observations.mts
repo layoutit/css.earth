@@ -4,7 +4,7 @@ import { parseNativeMetadata } from './native-metadata.mts';
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../sources/source-values.mts';
 import { readProductRecord, sameRun } from '../product-record.mts';
 import { assessInput, assessRequest, type ProductFacts } from './request-satisfaction.mts';
 import type { CapabilityRequest } from './query.mts';

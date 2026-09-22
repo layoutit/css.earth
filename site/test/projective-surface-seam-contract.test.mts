@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { SourceEvidence } from "./source-evidence-values.mts";
-import { requireFiniteNumber } from "../../tools/source-values.mts";
+import { requireFiniteNumber } from "../../tools/sources/source-values.mts";
 
 import { readFile } from "node:fs/promises";
 import { loadObjectContent } from "./load-object-content.mts";

@@ -11,9 +11,9 @@ import type { RouterOptions } from '../scene-router.mts';
 import type { ShellOptions } from '../planet-shell-client.mts';
 import type { BrowserWindow } from '../browser-types.mts';
 import { required } from './navigation-test-values.mts';
-import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
 import { createSceneRouter } from "../scene-router.mts";
-import { validateObjectPackageFiles } from "../../tools/object-package-contract.mts";
+import { validateObjectPackageFiles } from "../../tools/contract/object-package-contract.mts";
 
 test("keeps every implemented scene in one object registry", () => {
   assert.deepEqual(

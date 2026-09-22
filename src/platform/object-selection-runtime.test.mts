@@ -1,4 +1,4 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
@@ -14,7 +14,7 @@ import type { PreparedResidencyTicket } from '../renderers/css/rendering/prepare
 import type { PreparedPresentationContext, PreparedPresentationPlan, PreparedView } from '../renderers/css/rendering/prepared-presentation.ts';
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 const saturnDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('saturn'));
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
 import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";
 
 const flush = async () => { for (let i = 0; i < 40; i++) await Promise.resolve(); };

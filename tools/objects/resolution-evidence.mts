@@ -1,5 +1,5 @@
 /** Resolution numbers only answer a request when their basis supports that claim. */
-import { requireRecord, requireString } from '../source-values.mts';
+import { requireRecord, requireString } from '../sources/source-values.mts';
 
 export const RESOLUTION_KINDS = ['measured', 'calibrated', 'modeled', 'nominal', 'sampling', 'conditional-bound', 'unknown'] as const;
 export interface ResolutionEvidence {

@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readOracleFixture } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
 import { brightnessTemperatureKelvin, planckIntensity } from './interferometry/alma-disc-selfcal.mts';
 import { rayleighPerSample } from './hst/line-stack-reduction.mts';
 

@@ -9,7 +9,7 @@ import {layeredPresentationRecipe} from './presentation-recipe.mts';
 import {cutawayRecipe} from '../cutaway/recipe-contract.mts';
 import {parseRadialLayerRecipe} from '../giant-layers/index.mts';
 import {shape,text,number,boolean,array} from '../terrestrial-layers/source-records.mts';
-import {isRecord,requireRecord} from '../../source-values.mts';
+import {isRecord,requireRecord} from '../../sources/source-values.mts';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import {mkdir,readFile,realpath,writeFile} from 'node:fs/promises';
@@ -22,7 +22,7 @@ import {requirePreparedPresentation} from '../../../src/platform/prepared-presen
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
 import {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
-import {prepareMaterialTracks} from '../../prepare-materials.mts';
+import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
 import {prepareGiantLayers} from '../giant-layers/index.mts';
 import {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import {createLayeredOblatePreparation} from './layered-oblate.mts';

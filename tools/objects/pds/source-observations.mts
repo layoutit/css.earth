@@ -5,7 +5,7 @@
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
 
 const sha256 = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');

@@ -1,7 +1,7 @@
 import {createHash} from 'node:crypto';
-import {requireRecord} from '../../../../tools/source-values.mts';
+import {requireRecord} from '../../../../tools/sources/source-values.mts';
 import {fileURLToPath} from 'node:url';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';

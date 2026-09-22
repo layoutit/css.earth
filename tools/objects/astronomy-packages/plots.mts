@@ -1,7 +1,7 @@
 /** Astropy owns scientific serialization and axes; Matplotlib owns static rendering. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 export const PLOT_PYTHON = String.raw`
 import csv,json,sys,warnings
 from pathlib import Path

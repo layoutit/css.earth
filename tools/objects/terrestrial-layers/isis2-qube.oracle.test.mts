@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeIsis2Qube } from './isis2-qube.mts';
 import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
-import { requireRecord, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireFiniteNumber } from '../../sources/source-values.mts';
 
 /** pvl and numpy as the oracle for the ISIS2 QUBE reader over Borrelly's MICAS orthographic image and DEM components. */
 const fixture = await readOracleFixture('isis2/borrelly-micas.json');

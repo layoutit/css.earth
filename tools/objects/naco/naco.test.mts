@@ -4,7 +4,7 @@ import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promis
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseAssociationTree } from '../interferometry/eso-associations.mts';
 import { parseRawTable } from '../interferometry/eso-pipeline.mts';
 import { evidenceFor, productRecordPath, readProductRecord } from '../product-record.mts';

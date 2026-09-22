@@ -20,7 +20,7 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { parseCalibrationRecord, requiredTables, type CalibrationApplication } from './alma-calibration.mts';
-import { readFitsHeader } from '../../fits.mts';
+import { readFitsHeader } from '../../fits/fits.mts';
 import { agentFlagCommands, loggedFlagging, pipelineFlagSummary } from './alma-flags.mts';
 import { pipelineImaging, precisePhaseCentre, type PipelineImaging } from './alma-imaging.mts';
 import { parseSelfCalibration, type SelfCalibration } from './alma-selfcal.mts';

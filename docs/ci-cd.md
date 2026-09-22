@@ -36,7 +36,7 @@ group and can supersede an older deployment.
   [Deploy](../.github/workflows/deploy.yml), which refuses to ship a build whose
   runtime assets are not inventoried, and the full key sweep in the
   [nightly workflow](../.github/workflows/nightly.yml). A contributor publishing an
-  object runs `node tools/check-assets-published.mts --object=<id>` themselves; see
+  object runs `node tools/assets/check-assets-published.mts --object=<id>` themselves; see
   [the publishing instructions](../CONTRIBUTING.md#publishing-prepared-assets-maintainers).
 - Gate on what ships; report what is merely incomplete. A merge-required check may
   only assert something whose failure means the shipped application is broken, wrong
@@ -63,9 +63,9 @@ group and can supersede an older deployment.
   SHA-256-pinned bank — so a reconciliation or reproduction gap is a stale recipe or a
   drifted toolchain, not a broken page. They keep the same path-based selection they
   had as job conditions, so an unrelated change still runs neither.
-- `tools/object-package-backlog.json` is the ratcheted inventory for the object
-  package contract: `tools/object-package-contract.mts` reports a missing
-  `backlogFiles` entry instead of throwing, and `tools/restore-source-inputs.test.mts`
+- `tools/contract/object-package-backlog.json` is the ratcheted inventory for the object
+  package contract: `tools/contract/object-package-contract.mts` reports a missing
+  `backlogFiles` entry instead of throwing, and `tools/assets/restore-source-inputs.test.mts`
   prints the outstanding list and fails only when it *grows*, or when an entry is
   stale because its file now exists. Shrink the list in the change that supplies the
   file. This is not a tolerance, a skip or a `continue-on-error`: every entry is still
@@ -92,13 +92,13 @@ group and can supersede an older deployment.
   either: Contract lint already sets it and checks out in the same time as jobs that set
   no options. Checkout on these runners is dominated by fixed per-job cost, not by bytes.
   Two hazards make it worse than neutral. Small non-JSON evidence under `source/` is read
-  by more steps than it looks: `tools/prepare-facilities.mts --catalog-only` reads roughly
+  by more steps than it looks: `tools/prepare/prepare-facilities.mts --catalog-only` reads roughly
   350 such files and re-downloads or fails when one is absent, and the shell lane's
   `pnpm test:sbmt --unit` still reads Eros `.SUM` and `.INFO` observations because
   `SBMT_TEST_UNIT` narrows the case list without skipping those tests. Enumerating the
   wanted extensions is an allowlist over a data-driven citation set, so a new body citing
   a new extension fails later with a confusing network error. Separately,
-  `tools/ci-cache-key.mts` digests the Git index, so paths
+  `tools/ci/ci-cache-key.mts` digests the Git index, so paths
   left out of the worktree hash as `deleted`—a different cache identity from the
   unnarrowed jobs, and one that no longer reflects the real bytes. Spend effort on the
   steps that actually dominate a lane instead: building shared packages and restoring

@@ -2,7 +2,7 @@ import type {Vec3, PolyTextureLeafGeometry} from '@layoutit/polycss';
 import type {PagedSceneProfile, InteriorSource, SphereConfiguration, SpherePolygon, RasterPolygon} from './scene-contract.mts';
 import type {createAtmospherePreparation, AtmosphereConfiguration} from './atmosphere.mts';
 import type {createPagedSurfaceRaster} from './surface-raster.mts';
-import {requireFiniteNumber} from '../../source-values.mts';
+import {requireFiniteNumber} from '../../sources/source-values.mts';
 import type {EllipsoidAttitude} from './attitude.mts';
 import {preparedControlPitch} from '@cssearth/engine';
 import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';

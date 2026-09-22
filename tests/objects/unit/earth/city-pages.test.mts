@@ -1,4 +1,4 @@
-import {required} from "../../../../tools/test-values.mts";
+import {required} from "../../../../tools/contract/test-values.mts";
 import {pagePlanFixture,pageNodesFixture} from "./page-plan-fixture.mts";
 import {parseCityFixtureBounds} from "./city-fixture-schema.mts";
 import assert from "node:assert/strict";

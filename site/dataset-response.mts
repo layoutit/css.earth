@@ -3,7 +3,7 @@ import { parseObjectDescriptor } from '@cssearth/objects';
 import { loadPreparedCssObject, loadPreparedSurfaceFeature, surfaceFeatureCaption, publishPreparedNativeView, initialObjectSelection } from '../src/renderers/css/dist/index.js';
 import { parseSharedView, parsePreparedWorldCameraFrame, formatSharedView } from '../src/renderers/css/dist/navigation.js';
 import { renderNativeFocus } from './focus-response.mts';
-import { serializePreparedScene } from '../tools/serialize-prepared-scene.mts';
+import { serializePreparedScene } from '../tools/prepared/serialize-prepared-scene.mts';
 import { requiredElement } from './browser-types.mts';
 
 function region(html: string, name: string) {

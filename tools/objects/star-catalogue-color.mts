@@ -3,7 +3,7 @@
 // Every other star takes the shared star field's display fit (temperatureColor in src/preparation/stars/color.ts, the mapping
 // the HYG field draws its stars with) at the effective temperature its measurement record cites.
 import { temperatureColor } from '../../src/preparation/stars/color.ts';
-import { requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 
 export interface StarTemperature { readonly kelvin: number; readonly source: string }
 

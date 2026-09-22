@@ -81,7 +81,7 @@ sparse M2–9 and Lagoon fields are not a complete view of every surrounding sta
 
 The normal clean-checkout [nebula preparation command](README.md#reproduce-from-a-clean-checkout)
 rebuilds the points alongside the cloud. An intentional catalogue refresh uses
-`node tools/prepare-nebula-field-catalogues.mts --two-stage m42 helix m2-9 m45 m1 m8` and requires
+`node tools/prepare/prepare-nebula-field-catalogues.mts --two-stage m42 helix m2-9 m45 m1 m8` and requires
 updating the delivery/source pins after inspecting the new selection. It is not
 part of ordinary installation. Refresh reuses the saved radius and magnitude
 limit unless an explicit override is supplied.

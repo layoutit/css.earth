@@ -1,5 +1,5 @@
 import {array,number,shape} from './source-records.mts';
-import {requireRecord} from '../../source-values.mts';
+import {requireRecord} from '../../sources/source-values.mts';
 import {equatorialVector,validateBodyFrame} from './encounter-camera.mts';
 
 const dot=(a:readonly number[],b:readonly number[])=>a.reduce((s,v,i)=>s+v*b[i],0);

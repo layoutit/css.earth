@@ -8,7 +8,7 @@ import { SCIENTIFIC_CHART_TITLES } from "../../../site/scientific-chart-titles.m
 import { createPreparedTitleLayout } from "../../../src/platform/prepared-title.mts";
 import { prepareLenses } from "./lenses";
 import { lensBillboardColors } from "./billboard-colors.mts";
-import { parseFactsheet, verifyFactsheetSources } from '../../factsheet-sources.mts';
+import { parseFactsheet, verifyFactsheetSources } from '../../sources/factsheet-sources.mts';
 import type {
   ContentPreparationContext,
   ObjectContentSource,

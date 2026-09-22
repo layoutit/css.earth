@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareArtworkRefresh } from './refresh.mts';
-import { requireArray, requireRecord } from '../source-values.mts';
+import { requireArray, requireRecord } from '../sources/source-values.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const library = await readFile(resolve(root, 'site/source/facilities/render-library.json'));

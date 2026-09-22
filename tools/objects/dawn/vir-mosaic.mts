@@ -31,8 +31,8 @@ import { numbers } from '../../spice/text-kernel.mts';
 import { encodeClock, clockToEt } from '../../spice/sclk.mts';
 import { spiceCamera, type PixelModelKeys } from '../../spice/camera.mts';
 import { pds3Keyword } from '../pds-labels.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { flagValue, positionalArguments } from '../../cli-arguments.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 
 export const RECIPE_SCHEMA = 'cssearth-vir-mosaic@1';
 const REDUCED_SCHEMA = 'cssearth-vir-reduced@1';

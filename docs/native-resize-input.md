@@ -213,7 +213,7 @@ containment and adds layout/style containment to the resized element.
 
 ```sh
 CSSEARTH_CHROME_LOG_STDIO=1 node tests/experiments/native-resize/compare-browser.mts
-pnpm perf:trace output/playwright/native-resize/matched-input/native-1.json.gz \
+node tools/performance/trace-brief.mts output/playwright/native-resize/matched-input/native-1.json.gz \
   --out output/playwright/native-resize/matched-input/native-1-analysis \
   --framesleuth /path/to/cssGraphics/scripts/frame-sleuth.mjs --url 4351
 ```
@@ -260,7 +260,7 @@ occluded captures are marked invalid in ignored output.
 
 The test stores its substituted module, adapter and source hashes with raw traces
 under `output/playwright/native-resize/saturn-transparent/`. Process each trace
-with `pnpm perf:trace`, selecting port 4349, and then run
+with `node tools/performance/trace-brief.mts`, selecting port 4349, and then run
 `node tools/experiments/native-resize/saturn-analysis.mts`. The comparison uses
 explicit drag markers and unions main-thread task intervals to avoid counting
 nested work twice. CPU sampling is disabled consistently across the comparison.

@@ -93,7 +93,7 @@
     "browser": "153.0.8010.37",
     "sharp": "0.35.3",
     "implementation": {
-      "tools/prepare-facility-renders.mts": "03b81a86c1825b7139de72e60316a0f943cccd3d104e6c26517f0219ec4e5604",
+      "tools/prepare/prepare-facility-renders.mts": "03b81a86c1825b7139de72e60316a0f943cccd3d104e6c26517f0219ec4e5604",
       "tools/facility-renders/render.mts": "36a4e5921698c939e27c6a1070238e7878a55a561e38620baefa45807fe46ffb",
       "tools/facility-renders/poses.mts": "f5dc1d2f52d0dfcf690b614129cf3ce83c62079ba462610e658942aa3b6d4b41",
       "tools/facility-renders/voyager.mts": "76621b0757e6fc4d587d5b7f4e847744361b6f24d272748d84b6f6fcd1c94ead",

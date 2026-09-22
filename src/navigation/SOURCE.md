@@ -61,7 +61,7 @@ second detailed object scene is mounted. The images remain source-derived
 context proxies; they do not claim a newly rendered observation geometry.
 
 The Sun's scene indicator is a project-authored rounded heptagonal outline.
-`prepareSunIndicator` in `tools/prepare-navigation.mts` rasterizes the numerical
+`prepareSunIndicator` in `tools/prepare/prepare-navigation.mts` rasterizes the numerical
 path to `public/navigation/sun-indicator-heptagon.png` at a fixed 80px resolution for a
 20px UI box. Its stroke uses the authored soft-yellow `display.hex` accent in
 `src/objects/sun/swatch.json`, matching the navigation label. The independent

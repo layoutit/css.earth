@@ -20,7 +20,7 @@ if (unknown.length) throw new Error(`Unknown oracle ${unknown.join(', ')}; known
 for (const name of requested.length ? requested : known) {
   console.log(`oracle ${name}`);
   const sbmt = name === 'sbmt/projection';
-  if (!sbmt && !existsSync(python)) throw new Error('No Python oracle environment: run pnpm oracles:setup first.');
+  if (!sbmt && !existsSync(python)) throw new Error('No Python oracle environment: run node tools/oracles/setup.mts first.');
   const result = spawnSync(sbmt ? process.execPath : python,
     sbmt ? ['--max-old-space-size=192', resolve(oracles, `${name}.mts`)] : [resolve(oracles, `${name}.py`)],
     { cwd: root, stdio: 'inherit', ...(sbmt ? { timeout: 240_000, killSignal: 'SIGKILL' as const,

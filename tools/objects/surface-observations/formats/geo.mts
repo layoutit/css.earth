@@ -8,7 +8,7 @@ import type { CameraKind, LoadContext, ObservationFrame, ObservationImage, Obser
 import type { NumericRaster, SpiceCameraDeclaration } from '../../terrestrial-layers/source-records.mts';
 import { array, boolean, decodeProfile, number, optional, shape, text, parseGeoCameraClosure, parseGeometryCube, parseLevelMatching, parseLimbRefinement,
   parsePhasePhotometry, parseSpiceCamera, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord, requireString } from '../../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, osirisRadianceFactorScale } from '../../terrestrial-layers/osiris-geo.mts';

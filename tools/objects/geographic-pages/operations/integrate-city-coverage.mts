@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import type { AssetReference } from '../contracts.mts';
-import { hasErrorCode, requireRecord } from '../../../source-values.mts';
+import { hasErrorCode, requireRecord } from '../../../sources/source-values.mts';
 import { parseCitySource, parseRuntimePages, shape, text, array, optional, parseGeographicScene } from '../source-records.mts';
 import {commandContext} from './context.mts';
 const context=commandContext();

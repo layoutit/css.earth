@@ -1,7 +1,7 @@
 /** Narrow native reader for the PDS4 MRO SHARAD three-dimensional radargram products. */
 import { open, stat } from 'node:fs/promises';
 import { parsePlanetaryGridQualification, type PlanetaryGridQualification } from './f16-planetary-depth.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../../source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../../sources/source-values.mts';
 import { MRO_SHARAD_3D_F16_PROFILE } from '../observation-families.mts';
 import type { FamilyHandler } from '../family-handlers.mts';
 

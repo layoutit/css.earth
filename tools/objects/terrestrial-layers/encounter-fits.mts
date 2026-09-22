@@ -1,5 +1,5 @@
 import {parseEncounterPolicy} from './source-records.mts';
-import { readFitsHdu, fitsImageAccessor, type FitsHeader } from '../../fits.mts';
+import { readFitsHdu, fitsImageAccessor, type FitsHeader } from '../../fits/fits.mts';
 // Preparation-only decoding of calibrated Stardust and Deep Impact/EPOXI
 // observations. Detector quality is independent of brightness and display tone.
 const integer = (n: unknown, min: number, max: number): n is number => typeof n === "number" && Number.isSafeInteger(n) && n >= min && n <= max;

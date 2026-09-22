@@ -7,7 +7,7 @@
  * Everything here is pure and covered by [slit-scan.test.mts](slit-scan.test.mts): the pinned definition and its validation, the
  * continuum fit and band integral, the disc geometry read off the scan itself, and the two directions that place a sample on the
  * sky. The parts that read files, ask JPL Horizons and write products are in [slit-scan-map.mts](slit-scan-map.mts). */
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 
 const DEGREE = Math.PI / 180;
 /** How much wider than a scan's own step an interval may be before it counts as a slit position the scan never took. */

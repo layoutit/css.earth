@@ -10,7 +10,7 @@ import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, writeFile } from 'node
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readAuthoredSources } from './authored-sources.ts';
-import { refreshPreparedInventory } from '../prepare-object-json.mts';
+import { refreshPreparedInventory } from '../prepare/prepare-object-json.mts';
 
 /** Prepared files the content stage writes that depend on lens images in the public folder, which the scratch run omits. */
 const IMAGE_DERIVED = new Set(['lenses.json']);
@@ -51,7 +51,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   for (const id of ids) if (await refreshContent(id)) changed.push(id);
   console.log(`content refreshed for ${changed.length} of ${ids.length} objects`);
   if (changed.length) {
-    const run = spawnSync('node', ['tools/prepare-provenance.mts', ...changed], { stdio: 'inherit' });
+    const run = spawnSync('node', ['tools/prepare/prepare-provenance.mts', ...changed], { stdio: 'inherit' });
     if (run.status !== 0) process.exitCode = 1;
   }
 }

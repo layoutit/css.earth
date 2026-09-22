@@ -13,7 +13,7 @@ import type { ProvenanceDocument } from '../../src/platform/object-provenance.mt
 import { explorationArray, explorationId, explorationRecord, explorationText } from '../../src/platform/exploration-catalog.mts';
 import type { Capture } from '../../src/platform/exploration-catalog.mts';
 import type { ExplorationImage } from '../../src/platform/prepared-exploration.mts';
-import { sourceTestVolumes as prepareVolumeProvenance } from '../../tools/source-test-inputs.mts';
+import { sourceTestVolumes as prepareVolumeProvenance } from '../../tools/sources/source-test-inputs.mts';
 
 const json = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 const { sources } = parsePreparedSources(await json('../prepared-sources.json'));

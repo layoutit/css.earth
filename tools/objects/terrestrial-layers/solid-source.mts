@@ -1,4 +1,4 @@
-import {requireRecord} from '../../source-values.mts';
+import {requireRecord} from '../../sources/source-values.mts';
 import {shape,number,text,optional,boolean,array,dictionary,choice,parseSciencePalette} from './source-records.mts';
 import {parseNativePhotographicSampling} from './native-photograph.mts';
 

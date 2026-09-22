@@ -1,4 +1,4 @@
-import { fixtureRecord } from '../../test-values.mts';
+import { fixtureRecord } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import{readFile,mkdtemp,readdir,rm}from'node:fs/promises';

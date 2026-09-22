@@ -1,7 +1,7 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import {requireArray, requireFiniteNumber, requireRecord} from '../../../../tools/source-values.mts';
+import {requireArray, requireFiniteNumber, requireRecord} from '../../../../tools/sources/source-values.mts';
 import {assertAsteroidPackage} from '../asteroid-contract.mts';
 test('2002 CE26 Primary retains Shape, Elevation and native raster triangles',async()=>{
  await assertAsteroidPackage('asteroid-2002-ce26',['shape','elevation'],1730);

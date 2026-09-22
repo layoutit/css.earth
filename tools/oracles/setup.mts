@@ -14,7 +14,7 @@ if (process.argv[2] === 'sbmt') {
   if (result.error || result.status !== 0) throw new Error(`SBMT setup failed: ${result.error?.message ?? result.status}`);
   process.exit(0);
 }
-if (process.argv.length > 2) throw new Error('Usage: pnpm oracles:setup [sbmt]');
+if (process.argv.length > 2) throw new Error('Usage: node tools/oracles/setup.mts [sbmt]');
 
 const root = resolve(import.meta.dirname, '../..'), venv = resolve(root, '.local/oracles/venv');
 const requirements = resolve(root, 'tools/oracles/requirements.txt');

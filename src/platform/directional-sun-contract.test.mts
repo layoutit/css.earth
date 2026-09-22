@@ -1,6 +1,6 @@
-import { requireRecord, requireFiniteNumber } from '../../tools/source-values.mts';
+import { requireRecord, requireFiniteNumber } from '../../tools/sources/source-values.mts';
 import { readFile } from 'node:fs/promises';
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import PREPARED_MERCURY_SUN from "../../src/objects/mercury/prepared/sun.json" with {type: "json"};

@@ -2,7 +2,7 @@ import { record } from './browser-types.mts';
 
 /**
  * Identifies the one shared, content-addressed object catalogue fragment
- * (`dist/catalogue/<sha256>.html`, built by `tools/build-catalogue-fragment.mts`
+ * (`dist/catalogue/<sha256>.html`, built by `tools/prepare/build-catalogue-fragment.mts`
  * from `PlanetCatalogueRows.astro`). Every object page carries this same pin
  * on its `#object-category-results` panel. The server/no-JS search function
  * (`search-response.mts`) reads it, while the browser normally consumes the
