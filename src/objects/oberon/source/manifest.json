@@ -317,6 +317,1070 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
+    },
+    {
+      "id": "voyager-c2657840-geomed-frame",
+      "path": "observations/voyager/C2657840_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657840_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2657840-geomed-label",
+      "path": "observations/voyager/C2657840_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657840_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2657852-geomed-frame",
+      "path": "observations/voyager/C2657852_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657852_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2657852-geomed-label",
+      "path": "observations/voyager/C2657852_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657852_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2657858-geomed-frame",
+      "path": "observations/voyager/C2657858_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657858_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2657858-geomed-label",
+      "path": "observations/voyager/C2657858_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7204/DATA/C26578XX/C2657858_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2666510-geomed-frame",
+      "path": "observations/voyager/C2666510_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666510_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2666510-geomed-label",
+      "path": "observations/voyager/C2666510_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666510_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2666522-geomed-frame",
+      "path": "observations/voyager/C2666522_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666522_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2666522-geomed-label",
+      "path": "observations/voyager/C2666522_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666522_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2666528-geomed-frame",
+      "path": "observations/voyager/C2666528_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666528_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2666528-geomed-label",
+      "path": "observations/voyager/C2666528_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26665XX/C2666528_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2672319-geomed-frame",
+      "path": "observations/voyager/C2672319_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672319_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2672319-geomed-label",
+      "path": "observations/voyager/C2672319_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672319_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2672331-geomed-frame",
+      "path": "observations/voyager/C2672331_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672331_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2672331-geomed-label",
+      "path": "observations/voyager/C2672331_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672331_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2672337-geomed-frame",
+      "path": "observations/voyager/C2672337_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672337_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2672337-geomed-label",
+      "path": "observations/voyager/C2672337_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26723XX/C2672337_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2676027-geomed-frame",
+      "path": "observations/voyager/C2676027_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676027_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2676027-geomed-label",
+      "path": "observations/voyager/C2676027_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676027_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2676039-geomed-frame",
+      "path": "observations/voyager/C2676039_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676039_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2676039-geomed-label",
+      "path": "observations/voyager/C2676039_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676039_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2676045-geomed-frame",
+      "path": "observations/voyager/C2676045_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676045_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2676045-geomed-label",
+      "path": "observations/voyager/C2676045_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26760XX/C2676045_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2678717-geomed-frame",
+      "path": "observations/voyager/C2678717_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678717_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2678717-geomed-label",
+      "path": "observations/voyager/C2678717_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678717_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2678729-geomed-frame",
+      "path": "observations/voyager/C2678729_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678729_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2678729-geomed-label",
+      "path": "observations/voyager/C2678729_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678729_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2678735-geomed-frame",
+      "path": "observations/voyager/C2678735_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678735_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2678735-geomed-label",
+      "path": "observations/voyager/C2678735_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26787XX/C2678735_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2690421-geomed-frame",
+      "path": "observations/voyager/C2690421_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690421_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2690421-geomed-label",
+      "path": "observations/voyager/C2690421_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690421_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2690433-geomed-frame",
+      "path": "observations/voyager/C2690433_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690433_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2690433-geomed-label",
+      "path": "observations/voyager/C2690433_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690433_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2690439-geomed-frame",
+      "path": "observations/voyager/C2690439_GEOMED.IMG",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690439_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c2690439-geomed-label",
+      "path": "observations/voyager/C2690439_GEOMED.LBL",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26904XX/C2690439_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-color-c2678717",
+      "path": "observations/voyager-color/c2678717.equi.tif",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/008228a54a7828e188b8b484a8361ff6d8793687dfd2ef24fe4bf5c8016dca7e/c2678717.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts oberon --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "set-19860122-1731",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "width": 600,
+      "height": 114,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, the Oberon mosaic and the Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c2678717-geometry",
+      "path": "photometry/voyager-color/c2678717.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/12d9b3cb72c5dc45e42eb7fd5c86e71f27285b28d29ab10f2f3ec43b78d3bc8d/c2678717.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts oberon --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c2678717",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, the Oberon mosaic and the Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c2678729",
+      "path": "observations/voyager-color/c2678729.equi.tif",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/f793e972acdf9b2b8643bb8f42ca0e272699b606b366ce0266f91004368cc3a8/c2678729.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts oberon --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "set-19860122-1731",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "width": 600,
+      "height": 114,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, the Oberon mosaic and the Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c2678729-geometry",
+      "path": "photometry/voyager-color/c2678729.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/c0b1ea50a596905d6c4bb372ff1d03392c90f0701fce62f915014ddd5f4397e5/c2678729.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts oberon --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c2678729",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, the Oberon mosaic and the Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c2678735",
+      "path": "observations/voyager-color/c2678735.equi.tif",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/8dfa6ca542c42bf56ff9d0f19a43ba19b91974906ac4d790432d3faed841a0de/c2678735.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts oberon --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "set-19860122-1731",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "width": 600,
+      "height": 114,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, the Oberon mosaic and the Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c2678735-geometry",
+      "path": "photometry/voyager-color/c2678735.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/87b0c2aec5134d467f8837cd672b056b615de66ba836f1037cd5e54dde3a81e8/c2678735.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts oberon --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c2678735",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, the Oberon mosaic and the Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-observer-vectors",
+      "path": "photometry/horizons-observer-voyager-color.json",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40704%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272446453.231171118%0A2446453.237837784%0A2446453.241171117%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons",
+      "license": "Public JPL Horizons ephemeris service output.",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "acquisition": "Query the recorded JPL Horizons API URL.",
+      "redistribution": "Recorded API response retained with its query.",
+      "consumers": [
+        "voyager-color-vectors"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-horizons-voyager-color",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-color-sun-vectors",
+      "path": "photometry/horizons-sun-voyager-color.json",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40704%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272446453.231171118%0A2446453.237837784%0A2446453.241171117%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons",
+      "license": "Public JPL Horizons ephemeris service output.",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "acquisition": "Query the recorded JPL Horizons API URL.",
+      "redistribution": "Recorded API response retained with its query.",
+      "consumers": [
+        "voyager-color-vectors"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-oberon-horizons-voyager-color",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
@@ -351,6 +1415,30 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "preparation/voyager-color-frames.json",
+      "purpose": "Recipe for the Voyager colour frames: kernel bank, route, registration policy and the frames of each observation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored for the Voyager colour lens; regenerated by tools/objects/voyager-iss."
+      }
+    },
+    {
+      "path": "reference/voyager-color-placement.json",
+      "purpose": "Placement evidence written by the authoring tool: each frame's limb fit, its registration against the controlled mosaic, verdict and tiles.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored for the Voyager colour lens; regenerated by tools/objects/voyager-iss."
+      }
+    },
+    {
+      "path": "reference/voyager-color-oracle.json",
+      "purpose": "Placement oracle written by tools/objects/voyager-iss/oracle.mts: each limb-placed frame against the Oberon mosaic rendered through its camera, the residual in detector pixels and the correlation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored for the Voyager colour lens; regenerated by tools/objects/voyager-iss."
       }
     }
   ]

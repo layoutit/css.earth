@@ -59,6 +59,92 @@
           "quality": 95
         }
       }
+    },
+    {
+      "id": "voyager-color",
+      "output": "oberon-{id}{suffix}.webp",
+      "thumbnail": "oberon-lens-{id}.webp",
+      "source": "observations/voyager-color/c2678717.equi.tif",
+      "falseColor": true,
+      "science": {
+        "kind": "terrestrial-observed-color",
+        "id": "voyager-color",
+        "consumer": "voyager-color",
+        "monochromeBase": "normal",
+        "profile": {
+          "referenceRadiusMeters": 761400,
+          "centerLongitude": 0,
+          "standardParallel": 0,
+          "sampleFormat": 3,
+          "sampleBytes": 4,
+          "noData": -9999,
+          "specialValueMagnitude": 1e+30,
+          "filters": [
+            "GREEN",
+            "VIOLET",
+            "UV"
+          ]
+        },
+        "metadata": {
+          "label": "Voyager color",
+          "falseColor": true,
+          "projection": {
+            "type": "equirectangular",
+            "longitudeDegrees": [
+              0,
+              360
+            ],
+            "latitudeDegrees": [
+              90,
+              -90
+            ],
+            "longitudeDirection": "east-positive",
+            "referenceRadiusMeters": 761400
+          },
+          "coverage": "Voyager 2 green, violet and ultraviolet frames shown as red, green and blue over the monochrome mosaic: 1 frame sets at 22 to 22 km per pixel, each placed here by a limb fit and registered to the mosaic. Gray where no filter set observed."
+        },
+        "photometry": {
+          "consumer": "voyager-color-photometry",
+          "vectors": {
+            "sun": "photometry/horizons-sun-voyager-color.json",
+            "observer": "photometry/horizons-observer-voyager-color.json"
+          },
+          "profile": {
+            "model": "Lunar-Lambert",
+            "observationWeights": {
+              "set-19860122-1731": 1
+            },
+            "referenceIncidenceDegrees": 30,
+            "referenceEmissionDegrees": 0,
+            "maximumIncidenceDegrees": 60,
+            "maximumEmissionDegrees": 60,
+            "phaseNormalization": false,
+            "radiusKm": 761.4,
+            "withheld": "next-observation",
+            "bandLevels": {
+              "reference": "set-19860122-1731",
+              "cellDegrees": 0.25,
+              "minimumOverlapPixels": 1000
+            },
+            "bandRatios": {
+              "reference": "GREEN",
+              "ratios": {
+                "VIOLET": 0.935,
+                "UV": 0.915
+              },
+              "source": "bell-mccord-1991"
+            }
+          },
+          "levels": {
+            "boundaryPixels": 4,
+            "luminance": [
+              0.2126,
+              0.7152,
+              0.0722
+            ]
+          }
+        }
+      }
     }
   ],
   "lighting": {

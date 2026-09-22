@@ -94,6 +94,20 @@
         },
         "notes": "Voyager 2 monochrome mosaic with source photometric correction. Native detail varies; photographed terrain shadows and mosaic seams remain. Gray grid marks missing observations. This display is not calibrated albedo.",
         "noData": true
+      },
+      {
+        "id": "voyager-color",
+        "label": "Voyager color",
+        "thumbnail": "oberon-lens-voyager-color.webp",
+        "surface": "oberon-voyager-color@2x.webp",
+        "poles": "oberon-poles-voyager-color@2x.webp",
+        "source": {
+          "id": "voyager-color-c2678717",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        },
+        "falseColor": true,
+        "notes": "Voyager color: Voyager 2 green, violet and ultraviolet frames as red, green and blue over the monochrome mosaic. Oberon's colour frames were taken from 22 to 22 km per pixel; each is placed by fitting the moon's limb, then registered to the mosaic. Every set is scaled band by band onto the 22 km set where they overlap, and ground the closest set views too steeply takes the next set's color. The archive's Voyager filter calibration leaves violet too dark against green and ultraviolet, so the whole-footprint band ratios are tied to the published whole-disc colour of Bell and McCord (1991, Fig. 2); spatial colour differences are Voyager's own. The north was in darkness during the 1986 flyby and stays unavailable."
       }
     ]
   },

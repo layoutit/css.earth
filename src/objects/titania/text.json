@@ -40,6 +40,11 @@
       "title": "Geologic map",
       "detail": "Historical map",
       "summary": "A historical map of interpreted units, with reconstructed placement."
+    },
+    "voyager-color": {
+      "title": "Voyager color map",
+      "detail": "Green/violet/UV color",
+      "summary": "Voyager's own color frames, 7 to 24 km per pixel, placed by the moon's limb; the unlit north stays unavailable."
     }
   }
 }

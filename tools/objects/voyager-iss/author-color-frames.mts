@@ -20,7 +20,8 @@ import { loadKernelSet } from '../../spice/kernel-set.mts';
 import { orthographicPoint } from '../terrestrial-layers/orthographic-observation.mts';
 import { sampleColorBand } from '../terrestrial-layers/scientific-raster.mts';
 import { numericRasterBands } from '../terrestrial-layers/source-records.mts';
-import { decodeGeomed, equirectangularGeoTiff, equirectangularTiles, placeFrame, projectFrame, type EquirectangularTile, type VoyagerRoute } from './place.mts';
+import { decodeGeomed, equirectangularGeoTiff, equirectangularTiles, frameSampler, placeFrame, projectFrame, type EquirectangularTile, type PlacedFrame, type VoyagerRoute } from './place.mts';
+import { MOSAIC_REGISTER_POLICY, mosaicSampler, registerToMosaic, renderMosaicThroughCamera, renderStep, type MosaicReference } from './mosaic-register.mts';
 
 interface Recipe {
   schema: 'cssearth-voyager-color-frames@1';
@@ -29,8 +30,12 @@ interface Recipe {
   wavelengthsMicrometers: Record<string, number>;
   /** Body rotation written into every geometry label, copied from the pinned PCK the controlled release also used. */
   rotation: Record<'PoleRa' | 'PoleDec' | 'PrimeMeridian' | 'PoleRaNutPrec' | 'PoleDecNutPrec' | 'PmNutPrec' | 'SysNutPrec0' | 'SysNutPrec1', number[]>;
-  controlledArchive: string; controlledDirectory: string;
-  output: { frames: string; labels: string; report: string };
+  /** The controlled release whose orthophotos `controlled-ortho` frames come from; a recipe of limb-placed frames only needs neither. */
+  controlledArchive?: string; controlledDirectory?: string;
+  /** The controlled reference the oracle compares against; with `registration: 'limb-then-mosaic'` a mosaic also refines each placement. */
+  oracle?: { reference: 'controlled-orthophotos' } | MosaicReference;
+  registration?: 'limb' | 'limb-then-mosaic';
+  output: { frames: string; labels: string; report: string; oracle?: string };
   observations: { id: string; frames: { id: string; kind: 'geomed' | 'controlled-ortho'; path?: string; labelPath?: string }[] }[];
 }
 
@@ -48,27 +53,74 @@ const geometryLabel = (et: number, rotation: Recipe['rotation']) => [
   ...Object.entries(rotation).map(([key, values]) => pvl(key, values)),
   'End_Object', 'End', ''].join('\n');
 
+export const groundFloor = (placed: PlacedFrame) => placed.limb.levels.sky + 0.1 * (placed.limb.levels.disc - placed.limb.levels.sky);
+
 export async function authorColorFrames(objectId: string, write: boolean) {
   const objectDirectory = resolve(root, 'src/objects', objectId), sourceDirectory = resolve(objectDirectory, 'source');
   const recipe: Recipe = JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/voyager-color-frames.json'), 'utf8'));
   if (recipe.schema !== 'cssearth-voyager-color-frames@1') throw new TypeError('Unknown Voyager colour frame recipe.');
   const set = await loadKernelSet(await kernelBankPaths(recipe.kernelSet, recipe.kernels), { ckToleranceSeconds: recipe.ckToleranceSeconds });
   const radiusMeters = recipe.route.radiusKm * 1000, cell = recipe.cellDegrees, report: Record<string, unknown>[] = [];
+  const registration = recipe.registration ?? 'limb';
+  if (registration === 'limb-then-mosaic' && recipe.oracle?.reference !== 'mosaic') throw new TypeError('limb-then-mosaic registration needs a mosaic reference in `oracle`.');
+  const mosaic = registration === 'limb-then-mosaic' && recipe.oracle?.reference === 'mosaic' ? await mosaicSampler(sourceDirectory, recipe.oracle) : null;
   const scratch = await mkdtemp(resolve(tmpdir(), 'cssearth-voyager-color-'));
   try {
-    for (const observation of recipe.observations) for (const frame of observation.frames) {
+    for (const observation of recipe.observations) {
+     // Limb-placed frames of one set are first placed on their own, then the bands are tied to the set's anchor: the frame
+     // the mosaic registered best. Each other band registers to that frame rendered through its own camera (same scene,
+     // same light, so the correlation is high), which keeps the three bands' edges together to a pixel.
+     const placedSet = new Map<string, { placed: PlacedFrame; image: ReturnType<typeof decodeGeomed>; entry: Record<string, unknown> }>();
+     for (const frame of observation.frames) {
+      if (frame.kind !== 'geomed') continue;
+      const bytes = await readFile(resolve(sourceDirectory, frame.path!)), labelText = await readFile(resolve(sourceDirectory, frame.labelPath!), 'utf8');
+      let placed = placeFrame(frame.id, bytes, labelText, set, recipe.route);
+      let entry: Record<string, unknown> = { kind: 'geomed', pixelScaleKm: +placed.pixelScaleKm.toFixed(3), limb: { accepted: placed.accepted, seed: placed.limb.seed, edgePoints: placed.limb.edgePoints,
+        candidates: placed.limb.candidates, rmsPixels: +placed.limb.rmsPixels.toFixed(3), shiftPixels: placed.limb.shift.map(v => +v.toFixed(2)), groundFloor: +groundFloor(placed).toFixed(4) } };
+      if (!placed.accepted) { report.push({ id: frame.id, observation: observation.id, filter: placed.filter, ...entry, placed: false }); continue; }
+      const image = decodeGeomed(bytes);
+      if (mosaic) {
+        // The limb fixes the disc centre to a pixel or two; the controlled mosaic, seen through that camera, fixes the rest.
+        const rendered = renderMosaicThroughCamera(placed, recipe.route.radiusKm, mosaic.sample,
+          { width: image.width, height: image.height, stepDegrees: renderStep(placed), maximumEmissionDegrees: recipe.route.maximumEmissionDegrees });
+        const registered = registerToMosaic(image.values, rendered, image.width, image.height);
+        const applied = registered.samples > 0 && registered.correlation >= MOSAIC_REGISTER_POLICY.minimumCorrelation;
+        if (applied) placed = placed.shifted(registered.shiftPixels);
+        entry = { ...entry, mosaic: { ...registered, correlation: registered.samples > 0 ? registered.correlation : null, applied } };
+      }
+      placedSet.set(frame.id, { placed, image, entry });
+     }
+     if (mosaic) {
+      // A set stands on its anchor, the frame the mosaic registered best; that one must have registered (a disc a few dozen
+      // pixels across, or one with no agreeing detail, is placed by its limb alone to a few percent of its radius, and its
+      // bands would fringe). Every other band then registers to the anchor rendered through its own camera, or is dropped.
+      const applied = (member: { entry: Record<string, unknown> }) => (member.entry.mosaic as { applied?: boolean } | undefined)?.applied === true;
+      const anchorId = [...placedSet].filter(([, member]) => applied(member)).sort(([, a], [, b]) => (b.entry.mosaic as { correlation: number }).correlation - (a.entry.mosaic as { correlation: number }).correlation)[0]?.[0];
+      for (const [id, member] of placedSet) {
+        if (anchorId === undefined) { report.push({ id, observation: observation.id, filter: member.placed.filter, ...member.entry, placed: false, reason: 'no frame of this set registered against the mosaic' }); placedSet.delete(id); continue; }
+        if (id === anchorId) { member.entry = { ...member.entry, bands: { anchor: anchorId } }; continue; }
+        const anchor = placedSet.get(anchorId)!, anchorSampler = frameSampler(anchor.placed, anchor.image.values, recipe.route.radiusKm);
+        const rendered = renderMosaicThroughCamera(member.placed, recipe.route.radiusKm, anchorSampler,
+          { width: member.image.width, height: member.image.height, stepDegrees: renderStep(member.placed), maximumEmissionDegrees: 90 });
+        const registered = registerToMosaic(member.image.values, rendered, member.image.width, member.image.height);
+        const bandApplied = registered.samples > 0 && registered.correlation >= MOSAIC_REGISTER_POLICY.minimumCorrelation;
+        if (bandApplied) member.placed = member.placed.shifted(registered.shiftPixels);
+        member.entry = { ...member.entry, bands: { anchor: anchorId, shiftPixels: registered.shiftPixels, correlation: registered.samples > 0 ? registered.correlation : null, applied: bandApplied } };
+        if (!bandApplied) { report.push({ id, observation: observation.id, filter: member.placed.filter, ...member.entry, placed: false, reason: 'band did not register to the set anchor' }); placedSet.delete(id); }
+      }
+     }
+     for (const frame of observation.frames) {
       let tiles: EquirectangularTile[] = [], filter: string, et: number, entry: Record<string, unknown>, frameCellDegrees = cell;
       if (frame.kind === 'geomed') {
-        const bytes = await readFile(resolve(sourceDirectory, frame.path!)), labelText = await readFile(resolve(sourceDirectory, frame.labelPath!), 'utf8');
-        const placed = placeFrame(frame.id, bytes, labelText, set, recipe.route);
-        filter = placed.filter; et = placed.et;
-        entry = { kind: 'geomed', pixelScaleKm: +placed.pixelScaleKm.toFixed(3), limb: { accepted: placed.accepted, edgePoints: placed.limb.edgePoints,
-          candidates: placed.limb.candidates, rmsPixels: +placed.limb.rmsPixels.toFixed(3), shiftPixels: placed.limb.shift.map(v => +v.toFixed(2)) } };
-        if (!placed.accepted) { report.push({ id: frame.id, observation: observation.id, filter, ...entry, placed: false }); continue; }
+        const member = placedSet.get(frame.id);
+        if (!member) continue;
+        const { placed, image } = member; entry = member.entry; filter = placed.filter; et = placed.et;
         frameCellDegrees = frameCell(placed.pixelScaleKm, recipe.route.radiusKm, cell);
-        tiles = projectFrame(placed, decodeGeomed(bytes).values, recipe.route, frameCellDegrees) ?? [];
+        // Ground is what the limb fit called disc: a tenth of the way up from the frame's sky level, so border rows and sky never project.
+        tiles = projectFrame(placed, image.values, recipe.route, frameCellDegrees, groundFloor(placed)) ?? [];
       } else {
         // A controlled orthophoto: every pixel's latitude and longitude follow from its map projection.
+        if (!recipe.controlledArchive || !recipe.controlledDirectory) throw new TypeError(`${frame.id} is a controlled orthophoto but the recipe names no controlled release.`);
         const member = `${recipe.controlledDirectory}/${frame.id}.ortho.tif`, archive = resolve(sourceDirectory, recipe.controlledArchive);
         const xml = execFileSync('unzip', ['-p', archive, `${member}.aux.xml`]).toString();
         const meta = JSON.parse(xml.match(/<Metadata[^>]*>([\s\S]*?)<\/Metadata>/)![1]!);
@@ -106,6 +158,7 @@ export async function authorColorFrames(objectId: string, write: boolean) {
       }
       report.push({ id: frame.id, observation: observation.id, filter, et, ...entry, placed: true, wavelengthMicrometers, cellDegrees: frameCellDegrees,
         tiles: products.map(({ tile, tileId, framePath, labelPath }) => ({ id: tileId, framePath, labelPath, width: tile.width, height: tile.height, firstColumn: tile.firstColumn, firstRow: tile.firstRow })) });
+     }
     }
   } finally { await rm(scratch, { recursive: true, force: true }); }
   const document = { schema: 'cssearth-voyager-color-placement@1', objectId, route: recipe.route, cellDegrees: cell, frames: report };

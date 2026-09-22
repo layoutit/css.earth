@@ -14,6 +14,29 @@ const createProjector = (options: Parameters<typeof createPreparedRingProjector>
 const project = ([x, y, z]: Vector3) => [130 + 800 * x / -z, -40 + 800 * y / -z];
 const limits = { toEye: (point: Vector3) => point, project, near: .1, clipX: 1000, clipY: 600 };
 
+test('the chord test bounds a sphere by its exact screen outline, inside the old cube bound', () => {
+  let seed = 12345;
+  const random = () => { seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0; return seed / 2 ** 32; };
+  for (let trial = 0; trial < 200; trial++) {
+    const radius = 1 + random() * 20, center: Vector3 = [(random() - .5) * 200, (random() - .5) * 200, -radius - 1 - random() * 300];
+    const test = createSphereChordTest(center, radius, project);
+    let outside = 0;
+    for (let sample = 0; sample < 400; sample++) {
+      const u = random() * 2 - 1, angle = random() * 2 * Math.PI, ring = Math.sqrt(1 - u * u);
+      const point = project([center[0] + radius * ring * Math.cos(angle), center[1] + radius * ring * Math.sin(angle), center[2] + radius * u]);
+      // A zero-length chord at each surface point must overlap the bound.
+      if (!test(point, point)) outside++;
+    }
+    expect(outside).toBe(0);
+  }
+  // A near sphere: points just beyond its outline but inside the cube's corner bound no longer count.
+  const near: Vector3 = [0, 0, -12], test = createSphereChordTest(near, 10, project);
+  const edge = project([Math.sin(Math.asin(10 / 12)), 0, -Math.cos(Math.asin(10 / 12))])[0]!;
+  expect(test([edge - 1, -40], [edge - 1, -40])).toBe(true);
+  expect(test([edge + 50, -40], [edge + 50, -40])).toBe(false);
+  expect(project([10, 0, -2])[0]! > edge + 50).toBe(true);
+});
+
 test('distance fade preserves nearby chords and clips a long distant continuation into bounded opacity bands', () => {
   const vertices: Vector3[] = [[-10, 0, -100], [10, 0, -100], [2000, 200, -4000]];
   const trail = [1, 1], pool = createRetainedRingProjection(orbitProjectionCapacity(vertices.length));

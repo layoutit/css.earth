@@ -15,6 +15,12 @@
     },
     {
       "location": "public",
+      "filename": "oberon-lens-voyager-color.webp",
+      "bytes": 366,
+      "sha256": "9b0bdd46eb23bbbdbf800aa289c473d4a4a559e0d5a18b8eb438565968e6d553"
+    },
+    {
+      "location": "public",
       "filename": "oberon-lighting-2x-billboard.webp",
       "bytes": 115740,
       "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
@@ -224,16 +230,28 @@
       "sha256": "4702987c37d9412adf3d92b1c3c256e97dc49750d75c8755fbcda2a76cdf944c"
     },
     {
+      "location": "public",
+      "filename": "oberon-poles-voyager-color@2x.webp",
+      "bytes": 57548,
+      "sha256": "bcdc402d862ab99fe058e4bdbf2816ff490f3193384ebbbed5b078b9f77ecc7a"
+    },
+    {
+      "location": "public",
+      "filename": "oberon-voyager-color@2x.webp",
+      "bytes": 178974,
+      "sha256": "7b379220bb7a6ba73723100e771eee907615cc0ff38b1eaf78f4df3785f37cac"
+    },
+    {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 91791,
-      "sha256": "f84406bc1a6e2ac978692e36c439bd2c1eb01e61a8ef9b4f7f6ccc576753f851"
+      "bytes": 93963,
+      "sha256": "c4b422ae0454becf694eea52df84ce20e50cad17d44ba702d9d4ff75136ec126"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1557,
-      "sha256": "289b53cba9bcd5c51524bc0a991f8b84493adcd266b94b4a7dc43502462d6765"
+      "sha256": "93db79adc1874047bf441a9549e333e74a7dc16aeea84c056e8644b335eda2ce"
     },
     {
       "location": "prepared",
@@ -244,8 +262,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 438,
-      "sha256": "76470a6d14a65f4561f7976177f15f24a0739ba0a06547fbe75df3c8ed8fb3ea"
+      "bytes": 548,
+      "sha256": "7c467ce1c328f6d43a5f3eaad4ef9cd4346c1a2c504ed18c479acceaafd46ac7"
     },
     {
       "location": "prepared",
@@ -256,8 +274,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 683,
-      "sha256": "e84cb0573819d8c795aa60e91e89f6a617df56a5c5622ead3e976023c191881c"
+      "bytes": 1201,
+      "sha256": "dac38b468666600b605d9f5521343f32b18139b0c8c9dd328b8cd9120335e8e9"
     },
     {
       "location": "prepared",
@@ -268,8 +286,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 84,
-      "sha256": "0dcc01518cba2bb44a1f80eb8f7052313d2cbacbfe03e4aaa60bb07771dc7076"
+      "bytes": 169,
+      "sha256": "73bb6d18a4bde90810b482dd65dc76c309972be2fa38f576295daa259a7087b1"
     },
     {
       "location": "prepared",
@@ -279,21 +297,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/voyager-color.webp",
+      "bytes": 13684,
+      "sha256": "26c3dd236899bc691e9bd5f1b259de8288ecb505c1861041c4382ce659172118"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 515962,
-      "sha256": "863697585f32be700ba6c613ab24761ebe8823ba6cfbeb9aa48fc7c67b60ba5c"
+      "bytes": 517363,
+      "sha256": "0829bf14828a3ac6e4da19f7ecd96040cafa2413833b2faeb1feb3d1bd82f377"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 377062,
-      "sha256": "334078f652b6d1a22242adfa1d613ee9ad791068e80d55f381373ba9d06d4e71"
+      "bytes": 377118,
+      "sha256": "eaaa97e4cdb411163ff18f8c5c9d77fcc35ae90a0aaf08bb7bcfbb4d3600c7ec"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1030,
-      "sha256": "7715ec2a44a7cd700fe1c0f1ae36e7def8ad47c21bd47fb7b3bdcb1ab4c29d02"
+      "bytes": 1180,
+      "sha256": "072d2b416392445f03e6e9683ee979db6927751524c3c76f3698e37ef6ecb7d9"
     },
     {
       "location": "prepared",
@@ -310,8 +334,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 843,
-      "sha256": "f8daa799a0885d76ebfe383f24ef4189a93add05053d8ecd58919d5c144884ea"
+      "bytes": 1041,
+      "sha256": "abc9cecb150cfec5ecd5a2e3db39745caa583362efa042adcbcf18c252e19bcc"
     },
     {
       "location": "prepared",

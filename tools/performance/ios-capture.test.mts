@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseSteps, summariseCpu, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { comparePixels, parseSteps, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
 test('steps are validated before anything records', () => {
   assert.deepEqual(parseSteps([{ tap: [194, 94] }, { type: 'saturn' }, { wait: 1.5 }, { screenshot: 'after' },
@@ -28,7 +28,8 @@ test('timeline time counts nested records of one type once and lists rendering f
     { type: 'RenderingFrame', startTime: 0.1, endTime: 0.11 },
   ]);
   assert.deepEqual(summary.byType.find(entry => entry.type === 'FunctionCall'), { type: 'FunctionCall', ms: 20, count: 2 });
-  assert.deepEqual(summary.renderingFrames, { count: 2, over16ms: 1, over50ms: 1, longestMs: 60, totalMs: 70 });
+  // The first frame's work is its children's union (0-30 ms), not its 60 ms span; the second has no work inside.
+  assert.deepEqual(summary.renderingFrames, { count: 2, over16ms: 1, over50ms: 0, longestMs: 30, totalMs: 30 });
 });
 
 test('CPU is averaged per thread and names workers by their script', () => {
@@ -50,4 +51,25 @@ test('the Time Profiler table resolves id and ref compression and ranks the web 
   assert.equal(summary.webContentMs, 2);
   assert.deepEqual(summary.self, [{ frame: 'collectMatchingRules', ms: 2 }]);
   assert.deepEqual(summary.processes.map(entry => entry.process), ['com.apple.WebKit.WebContent (7)', 'WindowServer (1)']);
+});
+
+test('style and layout scheduling is attributed to the first script frame of its stack', () => {
+  const frame = (functionName: string) => ({ functionName, url: 'http://x/a.js', lineNumber: 3, columnNumber: 7 });
+  const stacks = schedulingStacks([{ type: 'RenderingFrame', children: [
+    { type: 'ScheduleStyleRecalculation', stackTrace: { callFrames: [{ functionName: 'native', url: '' }, frame('publish')] } },
+    { type: 'ScheduleStyleRecalculation', data: { stackTrace: [frame('publish')] } },
+    { type: 'InvalidateLayout', stackTrace: [frame('measure')] },
+    { type: 'ScheduleStyleRecalculation' },
+  ] }]);
+  const summary = summariseInitiators(stacks, f => f.name);
+  assert.deepEqual(summary.ScheduleStyleRecalculation, [{ label: 'publish', count: 2 }, { label: '(no script frame)', count: 1 }]);
+  assert.deepEqual(summary.InvalidateLayout, [{ label: 'measure', count: 1 }]);
+});
+
+test('pixel comparison counts differing pixels, 0 for identical screenshots', () => {
+  const a = new Uint8Array(2 * 2 * 4).fill(255), b = Uint8Array.from(a);
+  assert.equal(comparePixels(a, b, 2, 2).differing, 0);
+  b.set([0, 0, 0, 255], 4);
+  assert.deepEqual({ ...comparePixels(a, b, 2, 2), diff: undefined }, { differing: 1, total: 4, diff: undefined });
+  assert.throws(() => comparePixels(a, b.subarray(4), 2, 2), /size/);
 });

@@ -1,4 +1,4 @@
-import type {ObservationGeometry,PhotometryProfile,BandLevelPolicy,ObservedColorContext,ColorBand,RgbObservation} from './contracts.mts';
+import type { BandRatioPolicy, ObservationGeometry,PhotometryProfile,BandLevelPolicy,ObservedColorContext,ColorBand,RgbObservation} from './contracts.mts';
 import {shape,text,array as sourceArray,number} from './source-records.mts';
 import {requireRecord} from '../../sources/source-values.mts';
 import { diskGain as diskFunctionGain } from '../../photometry/disk.mts';
@@ -76,7 +76,8 @@ function correctedSampler(bands: readonly ColorBand[], filters: readonly string[
     const samples = channels.map(channel => {
       for (const band of channel) {
         const value = sampleColorBand(band, easting, northing);
-        if (value !== null) return { value, band };
+        // A non-positive I/F is sky or a frame border, never ground.
+        if (value !== null && value > 0) return { value, band };
       }
       return null;
     });
@@ -165,7 +166,8 @@ export function composeCorrectedColor({groups,profile,width,height,sourceIds,pho
  // Level matching carries corrected I/F into the monochrome base's display-linear light, where I/F 1 is white.
  const display=bandColorDisplay(profile.filters,'radiance-factor',[0,1]);
  const photometry={...photometryProfile,observations:{} as Record<string,{correctedPixels:number;withheldPixels:number}>,correctedPixels:0,withheldPixels:0,
-   bandLevels:undefined as ReturnType<typeof solveBandLevels>|undefined};
+   bandLevels:undefined as ReturnType<typeof solveBandLevels>|undefined,
+   bandRatios:undefined as {reference:string;source:string;measured:Record<string,number>;published:Record<string,number>;gains:number[]}|undefined};
   // Keep corrected highlights until exposure matching; quantize only afterward.
   const rgb = new Float32Array(width * height * 3), missing = new Uint8Array(width * height).fill(1);
   const owners = new Uint8Array(width * height);
@@ -214,8 +216,33 @@ export function composeCorrectedColor({groups,profile,width,height,sourceIds,pho
     coverage[observation] = { pixels, surfacePercent: solidAngle / (width * height * 2 / Math.PI) * 100 };
   }
   for (let i = 0; i < missing.length; i++) if (missing[i] === 2) missing[i] = 1;
+  if (photometryProfile.bandRatios) photometry.bandRatios = tieBandRatios(rgb, owners, width, height, profile.filters, photometryProfile.bandRatios);
   return { rgb, missing, owners, observationNames: ordered.map(([name]) => name), coverage, photometry,
     sourceIds,display,colorDisplay:bandColorEvidence(display) };
+}
+
+/**
+ * Tie the composed footprint's whole-disc colour to a published one. The Voyager filter calibration carried by the archive
+ * products is not the last word on these bands (Bell and McCord 1991 apply per-filter factors of up to 19 % to reach
+ * ground-based spectra), so a recipe may name the published whole-disc ratios; each named band is scaled by one gain so its
+ * cosine-weighted mean over every coloured texel, against the reference band's mean, equals the published ratio. Spatial
+ * colour differences are untouched. The measured ratios, the published ones and the gains are reported.
+ */
+export function tieBandRatios(rgb: Float32Array, owners: Uint8Array, width: number, height: number, filters: readonly string[], policy: BandRatioPolicy) {
+  const reference = filters.indexOf(policy.reference);
+  if (reference < 0) throw new Error(`Band ratio reference is not a filter: ${policy.reference}`);
+  const sums = filters.map(() => 0); let weightSum = 0;
+  for (let y = 0; y < height; y++) { const w = Math.cos((90 - (y + 0.5) * 180 / height) * Math.PI / 180);
+    for (let x = 0; x < width; x++) { const i = y * width + x; if (!owners[i]) continue; weightSum += w; for (let c = 0; c < filters.length; c++) sums[c]! += w * rgb[i * 3 + c]!; } }
+  if (!(weightSum > 0)) throw new Error('Band ratios need a coloured footprint.');
+  const measured: Record<string, number> = {}, published: Record<string, number> = {}, gains = filters.map(() => 1);
+  for (const [filter, ratio] of Object.entries(policy.ratios)) {
+    const c = filters.indexOf(filter);
+    if (c < 0 || c === reference) throw new Error(`Band ratio names no other filter: ${filter}`);
+    measured[filter] = +(sums[c]! / sums[reference]!).toFixed(4); published[filter] = ratio; gains[c] = +(ratio / measured[filter]!).toFixed(4);
+  }
+  for (let i = 0; i < owners.length; i++) if (owners[i]) for (let c = 0; c < filters.length; c++) rgb[i * 3 + c] = rgb[i * 3 + c]! * gains[c]!;
+  return { reference: policy.reference, source: policy.source, measured, published, gains };
 }
 
 /**

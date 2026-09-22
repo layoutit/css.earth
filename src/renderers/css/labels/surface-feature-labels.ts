@@ -40,7 +40,7 @@ export interface SurfaceFeatureMountOptions {
 }
 
 interface Entry {
-  readonly element: HTMLElement; feature: PreparedSurfaceFeature | null; width: number; height: number;
+  readonly element: HTMLElement; feature: PreparedSurfaceFeature | null; width: number; height: number; measured: boolean;
   targetOpacity: number; hideTimer: ReturnType<typeof setTimeout> | null; x: number; y: number;
 }
 
@@ -92,9 +92,10 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   let pendingFrame: number | null = null, loopFrame: number | null = null, populateFrame: number | null = null;
   let visible = new Set<number>(), rects = new Map<string, LabelScreenRect>(), eligible = 0;
   let hoveredIndex: number | null = null, pinnedIndex: number | null = null, shownIndex: number | null = null;
+  // A font change invalidates every measured name; each is measured again when it next competes for a place.
   const measure = () => {
     if (destroyed || !loaded) return;
-    for (const entry of entries) { entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; }
+    for (const entry of entries) entry.measured = false;
     schedule();
   };
   const fonts = document.fonts;
@@ -115,7 +116,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     element.style.cssText = 'position:absolute;left:50%;top:50%;white-space:nowrap;visibility:hidden;opacity:0;pointer-events:none';
     element.ariaHidden = 'true';
     root.appendChild(element);
-    const entry: Entry = { element, feature: null, width: 0, height: 0, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
+    const entry: Entry = { element, feature: null, width: 0, height: 0, measured: false, targetOpacity: 0, hideTimer: null, x: 0, y: 0 };
     const activate = (event: Event) => {
       if (!visible.has(index)) return;
       event.preventDefault();
@@ -133,14 +134,14 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   // Label picks are consumed by the shared picker before they bubble, so a click that
   // reaches the window from the input surface picked nothing: it clears the selection.
   let press: { x: number; y: number } | null = null;
-  const onPress = (event: PointerEvent) => { startLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
-  const onWheel = () => { startLoading(); };
+  const onPress = (event: PointerEvent) => { requestLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
+  const onWheel = () => { requestLoading(); };
   const onSurfaceClick = (event: MouseEvent) => {
     if (pinnedIndex === null || event.target !== inputSurface || event.button !== 0) return;
     if (press && Math.hypot(event.clientX - press.x, event.clientY - press.y) > CLICK_SLOP_PIXELS) return;
     clearSelection();
   };
-  const onKey = (event: KeyboardEvent) => { startLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
+  const onKey = (event: KeyboardEvent) => { requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
   if (inputSurface) {
     windowTarget.addEventListener('pointerdown', onPress, { capture: true });
     inputSurface.addEventListener('wheel', onWheel, { passive: true });
@@ -150,6 +151,16 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   lifetime.onDispose(destroy);
   const occlusion = labelOcclusionFor(host.ownerDocument);
   lifetime.onDispose(occlusion.subscribe(() => refresh()));
+  // The catalogue (5.9 MB for Mars) loads on the first interaction, and typing the next search while a flight passes
+  // this body counts as one. A flight's destination mounts before the camera arrives, so while the flight is under way
+  // the load is held. It runs when the flight ends with this body on screen (it landed, or the visitor stopped it here);
+  // a flight another navigation replaces drops it, so a body the camera only passes never fetches it. Explicit requests
+  // (search, selection) load at once.
+  let navigationInFlight = false, loadHeld = false;
+  function requestLoading() {
+    if (navigationInFlight) { loadHeld = true; return; }
+    startLoading();
+  }
   function startLoading() {
     if (destroyed || loadStarted) return;
     loadStarted = true;
@@ -177,11 +188,6 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     for (let index = start; index < end; index++) {
       const entry = entries[index]!, feature = entry.feature!;
       populateEntry(entry, feature);
-    }
-    // Read after this batch's writes, so each forced layout covers the new names, not the whole pool.
-    for (let index = start; index < end; index++) {
-      const entry = entries[index]!;
-      entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight;
     }
     if (end < loadedValue.features.length) {
       populateFrame = windowTarget!.requestAnimationFrame(() => populate(loadedValue, end));
@@ -253,7 +259,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     local = readLocal();
     matrix = new windowTarget!.DOMMatrix(Array.from(projection.eyeFromScene)).multiply(local).toFloat64Array();
     const width = host.clientWidth, height = host.clientHeight;
-    const candidates: SurfaceLabelCandidate[] = [];
+    const projectedEntries: { index: number; kind: PreparedSurfaceFeature['kind']; projected: NonNullable<ReturnType<typeof projectSurfaceFeature>> }[] = [];
     for (let index = 0; index < entries.length; index++) {
       const entry = entries[index]!, feature = entry.feature;
       // A search-only name labels the map only while it is the selected feature.
@@ -261,8 +267,17 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
       const projected = projectSurfaceFeature(feature, matrix, projection.focalPixels, projection.principalOffsetPixels);
       if (!projected) continue;
       entry.x = projected.x; entry.y = projected.y;
-      candidates.push({ index, kind: feature.kind, projected, width: entry.width, height: entry.height });
+      projectedEntries.push({ index, kind: feature.kind, projected });
     }
+    // A name is measured when it first competes for a place, all in one read. Measuring every name of a body on
+    // arrival forced a layout per batch across thousands of names that never reach the screen.
+    for (const { index } of projectedEntries) {
+      const entry = entries[index]!;
+      if (entry.measured) continue;
+      entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; entry.measured = true;
+    }
+    const candidates: SurfaceLabelCandidate[] = projectedEntries.map(({ index, kind, projected }) =>
+      ({ index, kind, projected, width: entries[index]!.width, height: entries[index]!.height }));
     // The label budget grows with the zoom: a whole body carries a third of the prepared maximum, the closest view all of it.
     const budget = { ...plan.policy, maximumVisible: Math.max(4, Math.round(plan.policy.maximumVisible * (0.3 + 0.7 * currentShare))) };
     const admitted = admitSurfaceFeatureLabels(candidates, budget, { width, height }, visible, occlusion.read(), pinnedIndex);
@@ -402,6 +417,13 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     },
     catalog: () => catalog,
     loaded: () => { startLoading(); return loadedCatalog; },
+    setNavigationInFlight(active: boolean, landed = true) {
+      navigationInFlight = active;
+      if (active) return;
+      const held = loadHeld;
+      loadHeld = false;
+      if (held && landed) startLoading();
+    },
     async select(id: string) {
       startLoading(); await loadedCatalog;
       if (destroyed) return { completed: false };
@@ -411,7 +433,7 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
         if (!feature || destroyed) return { completed: false };
         const entry = createEntry();
         populateEntry(entry, feature);
-        entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight;
+        entry.width = entry.element.offsetWidth; entry.height = entry.element.offsetHeight; entry.measured = true;
         index = entries.length - 1;
       }
       return selectIndex(index);
