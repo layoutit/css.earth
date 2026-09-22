@@ -235,8 +235,8 @@
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09",
       "artifact": {
         "path": "artifacts/F09.csv",
-        "bytes": 30677,
-        "sha256": "b41b12fbd1470980a5f9e2676185d6d7bc52eadb26ba9d7b716fc5e916dfcd72"
+        "bytes": 30969,
+        "sha256": "638c425f46b4c60580aa01af40ec6ef5e0202d144c2a8b91287ba57f0f1dd0da"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",

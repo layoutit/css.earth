@@ -143,9 +143,14 @@ export async function plotProduct(directory:string,target:string,data:Record<str
  * units and Matplotlib owns the rendered figure; callers retain selection,
  * calibration and scientific interpretation in their family receipts.
  */
+/** A point with an optional 2×2 covariance packed as [xx, xy, yy] in the squared axis unit. */
+export interface EllipsePoint {readonly x:number;readonly y:number;readonly label?:string;readonly covariance?:readonly [number,number,number]}
+/** One drawn contour: k times the 1σ covariance ellipse, full axis lengths, major-axis angle in degrees from +x toward +y. */
+export interface DrawnEllipse {readonly label:string;readonly sigma:number;readonly x:number;readonly y:number;readonly width:number;readonly height:number;readonly angleDeg:number}
 export type NumericPreview =
   | { readonly kind:'series'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly series:readonly {readonly label:string;readonly x:readonly number[];readonly y:readonly number[];readonly uncertainty?:readonly (number|null)[];readonly upperLimit?:readonly boolean[]}[] }
   | { readonly kind:'scatter'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly {readonly x:number;readonly y:number;readonly label?:string}[] }
+  | { readonly kind:'scatter-ellipses'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly EllipsePoint[]; readonly origin?:{readonly label:string;readonly covariance?:readonly [number,number,number]}; readonly sigmaLevels?:readonly number[]; readonly invertX?:boolean }
   | { readonly kind:'histogram'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly edges:readonly number[]; readonly counts:readonly number[] }
   | { readonly kind:'raster'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly width:number; readonly height:number; readonly values:readonly number[]; readonly colorLabel:string };
 
@@ -179,6 +184,36 @@ elif kind=='scatter':
  p=d['points']; x=np.asarray([q['x'] for q in p],dtype=float); y=np.asarray([q['y'] for q in p],dtype=float)
  if x.shape!=y.shape or not np.isfinite(x).all() or not np.isfinite(y).all(): raise ValueError('Scatter coordinates are invalid')
  ax.scatter(x,y,s=16,alpha=.8)
+elif kind=='scatter-ellipses':
+ from matplotlib.patches import Ellipse
+ from matplotlib.lines import Line2D
+ levels=np.asarray(d.get('sigmaLevels',[1,2,3]),dtype=float)
+ if levels.ndim!=1 or not levels.size or not np.isfinite(levels).all() or np.any(levels<=0) or np.any(np.diff(levels)<=0): raise ValueError('Sigma levels must be positive and increasing')
+ alphas=np.linspace(1,.35,len(levels))
+ def contour(label,x,y,c):
+  c=np.asarray(c,dtype=float)
+  if c.shape!=(3,) or not np.isfinite(c).all() or c[0]<=0 or c[2]<=0 or c[0]*c[2]-c[1]**2<=0: raise ValueError('Covariance of '+label+' is not a positive-definite 2x2 block')
+  w,v=np.linalg.eigh(np.array([[c[0],c[1]],[c[1],c[2]]])); angle=float(np.degrees(np.arctan2(v[1,1],v[0,1])))
+  for k,alpha in zip(levels,alphas):
+   width=float(2*k*np.sqrt(w[1])); height=float(2*k*np.sqrt(w[0]))
+   ax.add_patch(Ellipse((x,y),width,height,angle=angle,fill=False,lw=1.2,color='C0',alpha=alpha))
+   drawn.append({'label':label,'sigma':float(k),'x':x,'y':y,'width':width,'height':height,'angleDeg':angle})
+ drawn=[]; p=d['points']; x=np.asarray([q['x'] for q in p],dtype=float); y=np.asarray([q['y'] for q in p],dtype=float)
+ if x.shape!=y.shape or not np.isfinite(x).all() or not np.isfinite(y).all(): raise ValueError('Scatter coordinates are invalid')
+ origin=d.get('origin')
+ if origin is not None:
+  ax.axhline(0,ls=':',lw=.8,color='0.45',zorder=1); ax.axvline(0,ls=':',lw=.8,color='0.45',zorder=1)
+  if 'covariance' in origin: contour(origin['label'],0.,0.,origin['covariance'])
+  ax.scatter([0],[0],marker='*',s=180,color='C1',edgecolors='0.2',linewidths=.6,zorder=4)
+  ax.annotate(origin['label'],(0,0),xytext=(7,-13),textcoords='offset points',fontsize=8)
+ for q in p:
+  if 'covariance' in q: contour(q.get('label',''),float(q['x']),float(q['y']),q['covariance'])
+ ax.scatter(x,y,s=22,color='C3',edgecolors='0.2',linewidths=.6,zorder=4)
+ for q in p:
+  if q.get('label'): ax.annotate(q['label'],(q['x'],q['y']),xytext=(6,5),textcoords='offset points',fontsize=8)
+ ax.set_aspect('equal',adjustable='datalim')
+ if d.get('invertX'): ax.invert_xaxis()
+ if drawn: ax.legend(handles=[Line2D([],[],color='C0',alpha=alpha,label=f'{k:g}σ') for k,alpha in zip(levels,alphas)],frameon=False,fontsize=8)
 elif kind=='histogram':
  edges=np.asarray(d['edges'],dtype=float); counts=np.asarray(d['counts'],dtype=float)
  if len(edges)!=len(counts)+1 or not np.isfinite(edges).all() or np.any(np.diff(edges)<=0) or np.any(counts<0): raise ValueError('Histogram bins are invalid')
@@ -193,10 +228,10 @@ ax.set_title(d['title'],fontsize=10);ax.set_xlabel(d['xLabel']);ax.set_ylabel(d[
 fig.savefig(out/'preview.png',dpi=160,transparent=True,bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope family preview'})
 fig.savefig(out/'preview.svg',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope family preview'})
 plt.close(fig)
-json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':['preview.png','preview.svg'],'kind':kind},sys.stdout)
+json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':['preview.png','preview.svg'],'kind':kind,**({'ellipses':drawn} if kind=='scatter-ellipses' else {})},sys.stdout)
 `;
 
-export async function plotNumericPreview(directory:string,preview:NumericPreview):Promise<{readonly astropy:string;readonly matplotlib:string;readonly files:readonly string[];readonly kind:NumericPreview['kind']}> {
+export async function plotNumericPreview(directory:string,preview:NumericPreview):Promise<{readonly astropy:string;readonly matplotlib:string;readonly files:readonly string[];readonly kind:NumericPreview['kind'];readonly ellipses?:readonly DrawnEllipse[]}> {
   const tc=await astroqueryToolchain();
   return new Promise((accept,reject)=>{
     const child=spawn(tc.python,['-c',NUMERIC_PREVIEW_PYTHON],{env:{...process.env,...tc.env,MPLBACKEND:'Agg'},stdio:['pipe','pipe','pipe']});
@@ -207,7 +242,9 @@ export async function plotNumericPreview(directory:string,preview:NumericPreview
         const result=requireRecord(JSON.parse(out));
         if(requireString(result.matplotlib)!=='3.11.2'||requireString(result.astropy)!=='8.0.1')throw new Error('Unexpected plotting package version');
         const files=requireArray(result.files).map((value,index)=>requireString(value,`plot file ${index}`));
-        accept({astropy:requireString(result.astropy),matplotlib:requireString(result.matplotlib),files,kind:preview.kind});
+        const number=(value:unknown,label:string)=>{if(typeof value!=='number'||!Number.isFinite(value))throw new TypeError(`${label} must be finite.`);return value;};
+        const ellipses=result.ellipses===undefined?undefined:requireArray(result.ellipses).map((value,index)=>{const row=requireRecord(value);return{label:requireString(row.label,`ellipse ${index} label`),sigma:number(row.sigma,'ellipse sigma'),x:number(row.x,'ellipse x'),y:number(row.y,'ellipse y'),width:number(row.width,'ellipse width'),height:number(row.height,'ellipse height'),angleDeg:number(row.angleDeg,'ellipse angle')};});
+        accept({astropy:requireString(result.astropy),matplotlib:requireString(result.matplotlib),files,kind:preview.kind,...(ellipses?{ellipses}:{})});
       }catch(error){reject(error);}
     });
     child.stdin.end(JSON.stringify({directory,preview}));

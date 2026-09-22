@@ -10,7 +10,7 @@ import{describeStandaloneSpectrum}from'./families/f03-spectrum.mts';
 import{describePhotometry}from'./families/f05-photometry.mts';
 import{describeTimeSeries}from'./families/f06-time-series.mts';
 import{describeWindRad1,WIND_RAD1_FIXTURE}from'./families/f07-dynamic-spectrum.mts';
-import{describeAstrometry}from'./families/f09-astrometry.mts';
+import{describeAstrometry,readAstrometryCsv}from'./families/f09-astrometry.mts';
 import{describeCompound}from'./families/f18-compound.mts';
 import{readTessLightCurve}from'../eclipse-map/transit-limb-darkening.mts';
 import{describeDelayDoppler}from'./families/f15-radar.mts';
@@ -73,4 +73,14 @@ test('remaining family baseline operations execute through the public dispatcher
   const subset=await readFile((await run('F12',{operationId:'oifits-subset',subset:{OI_VIS2:[0],OI_T3:[0]}},'oifits-subset')).product);assert.equal(subset.subarray(0,6).toString(),'SIMPLE');
   const radar=JSON.parse(await readFile((await run('F15',{operationId:'radar-coordinate-view'},'radar-coordinates')).product,'utf8'));assert.deepEqual(radar.shape,[127,64]);const spatial=JSON.parse(await readFile((await run('F16',{operationId:'spatial-select-components',components:['points']},'spatial-components')).product,'utf8'));assert.equal(spatial[0].id,'points');
   const calibration=JSON.parse(await readFile((await run('F17',{operationId:'near-msi-inspect'},'near-msi')).product,'utf8'));assert.equal(calibration.unit,'I/F');assert.ok(calibration.acceptedPixels>100000);const bundle=await run('F17',{operationId:'export-bundle'},'near-msi-bundle'),bundleRecord=await readProductRecord(bundle.record);assert.equal(bundleRecord?.outputs.length,4);
+}finally{await rm(work,{recursive:true,force:true});}});
+
+test('F09 offset operations run on a real Gaia DR3 CSV and write data, chart and record',async()=>{const work=await temporary();try{
+  const file=resolve(work,'gaia-dr3-astrometry.csv');await copyFile(resolve(root,'tests/fixtures/telescope-families/f09-gaia-hd-189733/gaia-dr3-astrometry.csv'),file);const bytes=await readFile(file),rows=readAstrometryCsv(bytes.toString());
+  const descriptor=describeAstrometry({id:'hd-189733-gaia',target:'hd-189733',member:member('gaia','gaia-dr3-astrometry.csv','science',bytes,'text/csv'),rows,frame:'ICRS',epochJulianYear:2016,producingRecord:'Gaia DR3 archive query',calibrationBasis:['Gaia DR3']}),path=await save(work,descriptor);
+  assert.ok(descriptor.components[0]!.columns.some(column=>column.id==='ra-dec-correlation'));const advertised=executableFamilyOperations(descriptor);for(const id of ['astrometry-offset-data','astrometry-offset-preview'])assert.equal(advertised.find(operation=>operation.id===id)?.available,true);
+  const reference='1827242816201846144',shown=['1827242816176111360','1827242816176119296'];
+  await assert.rejects(executeFamilyOperation(path,{operationId:'astrometry-offset-data'} as any,resolve(work,'no-reference')),/reference row ID/u);
+  const data=JSON.parse(await readFile((await executeFamilyOperation(path,{operationId:'astrometry-offset-data',reference,rows:shown},resolve(work,'offsets'))).product,'utf8'));assert.equal(data.projection,'gnomonic about the reference position');assert.deepEqual(data.rows.map((row:any)=>row.id),[reference,...shown]);
+  const preview=await executeFamilyOperation(path,{operationId:'astrometry-offset-preview',reference,rows:shown},resolve(work,'chart')),record=await readProductRecord(preview.record);assert.equal((await readFile(preview.product)).subarray(1,4).toString(),'PNG');assert.deepEqual(record?.parameters.arguments,{operationId:'astrometry-offset-preview',reference,rows:shown});assert.ok(record?.outputs.some(output=>output.path==='preview.svg'));
 }finally{await rm(work,{recursive:true,force:true});}});
