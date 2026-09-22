@@ -20,10 +20,10 @@ const requirePresent = <T,>(value: T | undefined | null, label: string): T => {
 const prefix = 'src/objects/moon/runtime/';
 const sharedFile = 'src/renderers/css/runtime/object-runtime.ts';
 const shared = await readFile(sharedFile, 'utf8');
-const registrySource = `import { defineObject, defineObjects } from '../object-schema.mts';
+const registrySource = `import { defineObject, defineObjects } from './object-schema.mts';
 export const OBJECTS = defineObjects([
   object("moon", "Moon", "satellite", "#aaa7a0", 1, "Moon fixture", async () => {
-    const { mountMoonClient } = await import("../../src/objects/moon/runtime/client.mjs");
+    const { mountMoonClient } = await import("../src/objects/moon/runtime/client.mjs");
     return mountMoonClient;
   }),
 ]);
@@ -75,7 +75,7 @@ test('nullable physical lighting projection is data while adjacent identity tabl
 });
 test("shared owners reject private packages, fixed asset namespaces, v1 hooks and an extra native camera", async () => {
   const cases: readonly [string, RegExp][] = [
-    [shared + "\nimport { runtimeDefinition } from '../../../../objects/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
+    [shared + "\nimport { runtimeDefinition } from '../../../objects/moon/runtime/definition.mjs';", /Shared runtime imports an object package/],
     [shared + '\nconst url = "/scenes/earth/wmts-data.pack";', /object-specific asset namespace/],
     [shared + '\nconst valid = /^\\/scenes\\/earth\\/wmts/;', /object-specific asset namespace/],
     [shared + '\nfunction hidden(value) { return value.createPresentation(); }', /Legacy object callbacks/],
@@ -87,11 +87,11 @@ test("shared owners reject private packages, fixed asset namespaces, v1 hooks an
 test("common shell ownership follows actual Astro imports, template expressions, and client scripts", async () => {
   const shell = "site/components/PlanetShell.astro", helper = "site/shared-content.mjs";
   const files: SourceOverlay = { [shell]: `---
-import { label } from '../../shared-content.mjs';
+import { label } from '../shared-content.mjs';
 interface Props { title: string }
 ---
 <aside>{label}</aside>
-<script>import '../../shared-client.mjs';</script>`,
+<script>import '../shared-client.mjs';</script>`,
     [helper]: "export const label = freeze('Details'); function freeze(value) { return Object.freeze(value); }",
     "site/shared-client.mjs": "export function bind() {}" };
   const report = await auditObjectRuntimeOwnership(fixture(files));
@@ -103,8 +103,8 @@ interface Props { title: string }
     [{ [helper]: "export const label = 'Details'; if (object.id === 'moon') act();" }, /shared-content.mjs.*object-ID dispatch/],
     [{ "site/shared-client.mjs": "import { createPolyCamera } from '@layoutit/polycss'; createPolyCamera({});" }, /native camera factory site; found 2/],
     [{ [shell]: files[shell].replace("{label}", "{object.id === 'moon' ? label : ''}") }, /PlanetShell.astro.*object-ID dispatch/],
-    [{ [shell]: files[shell].replace("import '../../shared-client.mjs';", "import('../../shared-' + 'client.mjs');") }, /PlanetShell.astro.*Computed dynamic imports/],
-    [{ [helper]: "export { data } from '../../src/objects/moon/site/generated.mjs';" }, /Shared runtime imports an object package/],
+    [{ [shell]: files[shell].replace("import '../shared-client.mjs';", "import('../shared-' + 'client.mjs');") }, /PlanetShell.astro.*Computed dynamic imports/],
+    [{ [helper]: "export { data } from '../src/objects/moon/site/generated.mjs';" }, /Shared runtime imports an object package/],
     [{ [shell]: "<script>const broken = ;</script>" }, /Invalid runtime source/],
   ];
   for (const [changed, expected] of shellMutations) await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, ...changed })), expected);
@@ -116,21 +116,21 @@ test("Astro server builtins do not hide the same imports in browser scripts", as
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [shell]:
     frontmatter + "<script>import { existsSync } from 'node:fs';</script>" })), /(?:Unclosed runtime source|Runtime import escapes the source root:) node:fs/);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ [shell]:
-    "<script>import '../../shared-client.mjs';</script>",
+    "<script>import '../shared-client.mjs';</script>",
     'site/shared-client.mjs': "import { resolve } from 'node:path';" })), /(?:Unclosed runtime source|Runtime import escapes the source root:) node:path/);
 });
 test("transitive Astro server helpers cannot hide Node imports on a client path", async () => {
   const shell = 'site/components/PlanetShell.astro';
   const files = {
-    [shell]: "---\nimport { label } from '../../server-helper.mjs';\n---\n<aside>{label}</aside>",
+    [shell]: "---\nimport { label } from '../server-helper.mjs';\n---\n<aside>{label}</aside>",
     'site/server-helper.mjs': "export { label } from '../source-reader.mjs';",
     'site/source-reader.mjs': "import { readFile } from 'node:fs/promises'; export const label = 'Source';",
   };
   assert.equal((await auditObjectRuntimeOwnership(fixture(files))).complete, true);
-  for (const client of ["<script>import '../../server-helper.mjs';</script>",
-    "<script>import '../../other-client.mjs';</script>"]) {
+  for (const client of ["<script>import '../server-helper.mjs';</script>",
+    "<script>import '../other-client.mjs';</script>"]) {
     await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files,
-      [shell]: files[shell] + client, 'site/other-client.mjs': "import '../server-helper.mjs';" })),
+      [shell]: files[shell] + client, 'site/other-client.mjs': "import './server-helper.mjs';" })),
       /(?:Unclosed runtime source|Runtime import escapes the source root:) node:fs/);
   }
 });
@@ -138,10 +138,10 @@ test("literal navigation content is allowed only through the shell closure, not 
   const file = "site/navigation-content.mts";
   const content = `export const MARKERS = Object.freeze(${JSON.stringify({moon:{label:"Moon"},saturn:{label:"Saturn"}})});`;
   const files = { [file]: content,
-    "site/components/PlanetShell.astro": "---\nimport { MARKERS } from '../../navigation-content.mts';\n---\n<nav>{Object.values(MARKERS).map(marker => marker.label)}</nav>" };
+    "site/components/PlanetShell.astro": "---\nimport { MARKERS } from '../navigation-content.mts';\n---\n<nav>{Object.values(MARKERS).map(marker => marker.label)}</nav>" };
   assert.equal((await auditObjectRuntimeOwnership(fixture(files))).complete, true);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files,
-    [sharedFile]: shared + "\nimport { MARKERS } from '../../../../../site/navigation-content.mts';" })), /navigation-content.mts.*object-ID dispatch/);
+    [sharedFile]: shared + "\nimport { MARKERS } from '../../../../site/navigation-content.mts';" })), /navigation-content.mts.*object-ID dispatch/);
   await assert.rejects(auditObjectRuntimeOwnership(fixture({ ...files, [file]: content + "\nexport function dispatch(id) { return MARKERS[id](); }" })), /navigation-content.mts.*object-ID dispatch/);
 });
 test("a content validation failure cannot be labeled migrated", async () => {

@@ -1792,7 +1792,7 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   expect(element.children.map(child => child.tagName)).toEqual(['i']); expect(element.textContent).toBe('');
   expect(element.dataset.contextName).toBe('Mercury');
   expect(element.dataset.contextLabelVisible).toBe('true');
-  expect(Number(element.parentNode!.style.opacity)).toBeGreaterThan(0);
+  expect(Number((element.parentNode as unknown as HTMLElement).style.opacity)).toBeGreaterThan(0);
   expect(clock.timers.size).toBe(0); expect(layer.opacityStats().active).toBe(0);
   publish(1e31);
   expect(element.style.visibility).toBe('hidden');
@@ -1807,11 +1807,11 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
 test('suppression retires the whole annotation while flight preserves admission and disables picking', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const element = layer.inspect().find(body => body.id === 'mercury')!.billboard;
-  const opacity = element.parentNode!.style.opacity;
+  const opacity = (element.parentNode as unknown as HTMLElement).style.opacity;
   layer.setSuppressedLabels(['mercury']);
   expect(annotationVisibility(element, 'label')).toBe('hidden');
   expect(annotationVisibility(element, 'indicator')).toBe('hidden');
-  expect(element.parentNode!.style.opacity).toBe(opacity); expect(clock.timers.size).toBe(0);
+  expect((element.parentNode as unknown as HTMLElement).style.opacity).toBe(opacity); expect(clock.timers.size).toBe(0);
   layer.setSuppressedLabels([]);
   expect(annotationVisibility(element, 'label')).toBe('');
   layer.previewSelection('venus');
