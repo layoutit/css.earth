@@ -13,6 +13,12 @@ A star's surface reaches this project as interferometric data, not as a picture.
    - its spots come back from two interleaved halves of the data: once each half's own spotless twin is subtracted, the two halves' spots correlate at 0.5 or more.
 5. **Cast.** A flat image goes onto the sphere through the `surface-observation` route with a computed camera, as for Betelgeuse and π¹ Gruis. A sphere reconstruction goes through `surface-lens.mts`, which writes the float32 image map the `terrestrial-scientific` lens reads, to be stated with `outputLongitudeOrigin: -90`.
 
+The four CHARA-imaged fast rotators are oblate and gravity-darkened; the three
+Betelgeuse epochs are MATISSE reconstructions cast onto the sphere. Both routes
+end in the same lens.
+
+![Regulus, Alderamin, Rasalhague and Caph beside Betelgeuse in December 2018, February 2020 and December 2020](images/star-enhancements.png)
+
 ## One command per star
 
 `image-star.mts` runs stages 1 to 4 on one season of one star and ends with a verdict:

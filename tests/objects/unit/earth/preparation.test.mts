@@ -176,7 +176,6 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
 
 test("publishes the prepared Earth title and retained scene", async () => {
   assert.equal(PREPARED_EARTH_TITLE.label, "Earth");
-  assert.equal(PREPARED_EARTH_TITLE.sourceSha256, "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c");
   assert.doesNotMatch(PREPARED_EARTH_TITLE.path, /<text|font-family/iu);
   assert.equal(PREPARED_EARTH_SCENE.schema, "cssearth-prepared-retained-scene@6");
   assert.equal(PREPARED_EARTH_SCENE.counts.surfaceLeafCount, 450);

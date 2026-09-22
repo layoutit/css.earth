@@ -287,13 +287,15 @@ test('the advisory audit dispatches the relocated source and reproduction comman
   }finally{await rm(root,{recursive:true,force:true});}
  };
  assert.equal(await run({GITHUB_EVENT_NAME:'pull_request'}),[
-  'node tools/prepare-ci-inputs.mts universe','node tools/restore-object-json.mts','node tools/prepare-feature-index.mts',
+  'node tools/prepare-ci-inputs.mts universe','node tools/restore-object-json.mts',
+  'node tools/prepare-provenance.mts --objects-only','node tools/prepare-feature-index.mts',
   'node site/minimap/prepare.mts --data-only','pnpm test:sources:pr',
   'node tools/prepare-ci-inputs.mts universe-preparation','node tools/restore-source-inputs.mts --repository-volumes',
   'pnpm test:galaxy-field','pnpm test:ci-preparation:world','',
  ].join('\n'));
  assert.equal(await run({GITHUB_EVENT_NAME:'push'}),[
-  'pnpm setup:asset-data','node tools/restore-object-json.mts','node tools/prepare-feature-index.mts',
+  'pnpm setup:asset-data','node tools/restore-object-json.mts',
+  'node tools/prepare-provenance.mts --objects-only','node tools/prepare-feature-index.mts',
   'node site/minimap/prepare.mts --data-only','node tools/restore-source-inputs.mts --repository-volumes','pnpm test:sources',
   'node tools/prepare-ci-inputs.mts universe-preparation','node tools/restore-source-inputs.mts --repository-volumes',
   'pnpm test:galaxy-field','pnpm test:ci-preparation:world','',

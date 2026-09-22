@@ -20,6 +20,9 @@ const marsMarker = validateMarkerDescriptor(await loadObjectMarkerDescriptor("ma
 test("accepts every object-owned marker recipe", async () => {
   for (const descriptor of await loadMarkerDescriptors()) {
     assert.equal(validateMarkerDescriptor(descriptor), descriptor);
+    // Pins became optional for files this repository authors; a marker source is a download, so
+    // it must still carry one.
+    assert.ok(descriptor.source.expectedSha256, `${descriptor.source.origin}: a downloaded marker source must stay pinned`);
     assert.match(descriptor.source.expectedSha256, /^[0-9a-f]{64}$/u);
     assert.ok(["http:", "https:"].includes(new URL(descriptor.source.origin).protocol));
     assert.ok(descriptor.source.credit.length > 0);
