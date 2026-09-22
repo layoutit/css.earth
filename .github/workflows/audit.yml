@@ -37,6 +37,10 @@ jobs:
     permissions:
       contents: read
     steps:
+      # Every step below carries `if: ${{ !cancelled() }}` so the job runs to the end and reports
+      # all of its findings. This audit exists to show backlog; stopping at the first failure hid
+      # the rest, which is how a `pnpm lint` step ordered before `pnpm` was installed survived
+      # unnoticed behind 541 documentation findings.
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           # History without blobs: the documentation audit diffs against a merge base, and
@@ -44,6 +48,7 @@ jobs:
           fetch-depth: 0
           filter: blob:none
       - name: Check documentation links and organization
+        if: ${{ !cancelled() }}
         # PRs reject new findings and debt in changed files, including unchanged inbound links they break.
         # Main retains the full organization audit; existing unrelated debt is visible but not a PR veto.
         run: |
@@ -55,17 +60,8 @@ jobs:
           else
             node tools/audits/check-documentation-links.mts --all
           fi
-      - name: Lint every authored tree
-        # `tools`, `src` and `site` had no ESLint at all, so the size and boundary rules governed
-        # only the two smallest trees. Warnings are reported here; `lint:packages` still fails on
-        # any warning inside `packages/`, where the rules have always been enforced.
-        run: pnpm lint
-      - name: Check that no directory grew past its baseline
-        # Convention, not correctness: a flat directory cannot break the shipped site, so this
-        # reports rather than gates (docs/ci-cd.md, "Gate on what ships"). Ratcheted, so existing
-        # flatness is visible without blocking work and the tree cannot get flatter while it is fixed.
-        run: pnpm check:directory-growth
       - name: Check tracked files against ignore rules
+        if: ${{ !cancelled() }}
         run: |
           git ls-files -z > "$RUNNER_TEMP/tracked-paths"
           set +e
@@ -74,11 +70,14 @@ jobs:
           tr '\0' '\n' < "$RUNNER_TEMP/ignored-tracked"
           test "$check_result" -eq 1
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
+        if: ${{ !cancelled() }}
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        if: ${{ !cancelled() }}
         with:
           node-version: '22'
           cache: pnpm
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         with:
           # Restore-only: `Contract lint` owns the save for every key below, so the two jobs never race to
           # write the same cache entry.
@@ -86,31 +85,50 @@ jobs:
           key: node-modules-${{ hashFiles('pnpm-lock.yaml') }}
           restore-keys: node-modules-
       - name: Install dependencies and prove the lockfile
+        if: ${{ !cancelled() }}
         run: pnpm install --frozen-lockfile --ignore-scripts
+      - name: Lint every authored tree
+        if: ${{ !cancelled() }}
+        # `tools`, `src` and `site` had no ESLint at all, so the size and boundary rules governed
+        # only the two smallest trees. Warnings are reported here; `lint:packages` still fails on
+        # any warning inside `packages/`, where the rules have always been enforced.
+        run: pnpm lint
+      - name: Check that no directory grew past its baseline
+        if: ${{ !cancelled() }}
+        # Convention, not correctness: a flat directory cannot break the shipped site, so this
+        # reports rather than gates (docs/ci-cd.md, "Gate on what ships"). Ratcheted, so existing
+        # flatness is visible without blocking work and the tree cannot get flatter while it is fixed.
+        run: pnpm check:directory-growth
       - name: Hash tracked build and compiler inputs
+        if: ${{ !cancelled() }}
         id: ci-cache-key
         run: node tools/ci-cache-key.mts
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         id: package-cache
         with:
           path: packages/*/dist
           key: compiled-packages-v2-${{ steps.ci-cache-key.outputs.package_digest }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         id: renderer-cache
         with:
           path: src/renderers/css/dist
           key: compiled-renderer-v2-${{ steps.ci-cache-key.outputs.renderer_digest }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         id: build-tools-cache
         with:
           path: tools/objects/dist
           key: compiled-preparation-js-v3-${{ steps.ci-cache-key.outputs.build_digest }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
           key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         with:
           # Only the baked JSON payloads, not texture banks. The installer below revalidates every pin.
           path: |
@@ -119,12 +137,14 @@ jobs:
           key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
           restore-keys: prepared-json-v1-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
+        if: ${{ !cancelled() }}
         with:
           # The galaxy-field acquisition sha-verifies a cached catalogue and skips its download. This job took
           # over the preparation lane that used to own this cache, so it owns the save too.
           path: .local/galaxy-field/sources
           key: galaxy-field-sources-${{ hashFiles('src/objects/nearby-universe/source/catalogue.json') }}
       - name: Generate the registry, renderer and preparation bundle
+        if: ${{ !cancelled() }}
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
           CI_PACKAGE_DIGEST: ${{ steps.ci-cache-key.outputs.package_digest }}
@@ -144,14 +164,17 @@ jobs:
             node tools/build-ci.mts full
           fi
       - name: Check every object's package files and source restoration plan
+        if: ${{ !cancelled() }}
         # Package-file completeness (a body without its browser profile or ledger) and source *restorability*
         # (a declared input with neither a tracked copy nor an acquisition operation). Neither reaches the
         # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
         # stay blocking in `Contract lint` (physical frame receipts and document pins).
         run: node --test tools/restore-source-inputs.test.mts
       - name: Check authored object directory layout
+        if: ${{ !cancelled() }}
         run: node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Reconcile the source catalogue, facility records and provenance receipts
+        if: ${{ !cancelled() }}
         # Moved off the `Universe / sources` gate lane. These assert that every catalogue row, facility record
         # and provenance receipt reconciles with the tracked sources and their READMEs — repository bookkeeping.
         # The site serves the already-baked, sha256-pinned prepared bank and reads none of it, so a reconciliation
@@ -182,6 +205,7 @@ jobs:
             pnpm test:sources:pr
           fi
       - name: Reproduce the prepared bank and the galaxy field from their pinned inputs
+        if: ${{ !cancelled() }}
         # Moved off the `Preparation / world` gate lane. These re-run a bake and compare it with the recorded
         # output: finalization idempotence, catalogue-row reconciliation, and the point-field recipe reproducing
         # identical JSON and image bytes. The site never bakes anything — it serves the published bank, whose
