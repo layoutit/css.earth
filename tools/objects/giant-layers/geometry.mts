@@ -8,7 +8,7 @@ interface GeometryPolygon extends Omit<Parameters<typeof computeTextureAtlasPlan
 }
 type TextureLeafOptions = {seamEdges?: Set<number>; seamBleed?:number; fitSurface?:boolean; leafSize?:number};
 import {buildSeamBleedPolygonEdges,computeTextureAtlasPlanPublic,resolvePolyTextureLeafGeometry,formatCssLength} from '@layoutit/polycss';
-import {createProjectiveSurfaceRasterPresentation,fitProjectiveTextureGeometryToStableLayout,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
+import {createProjectiveSurfaceRasterPresentation,fitProjectiveTextureGeometryToStableLayout,polarCapRasterScale,prepareProjectiveTextureLayer} from '../../../src/platform/projective-surface-raster.mts';
 import {fitTextureGeometry} from '../material-composition/texture-geometry.mts';
 import {ellipsoidPoint} from '../material-composition/ellipsoid.mts';
 
@@ -48,16 +48,17 @@ function textureLeaf(config:BandedGeometryRecipe,polygon:GeometryPolygon,index:n
   const plan=computeTextureAtlasPlanPublic(polygon,index,{...config.planOptions,seamBleed,...(seamEdges?{seamEdges}:{})}),geometry=plan&&resolvePolyTextureLeafGeometry(plan,presentation);
   if(!geometry)throw new Error(`Retained texture leaf ${index} did not prepare.`);
   let fitted=leafSize?fitTextureGeometry(geometry,leafSize,leafSize):geometry;if(fitSurface)fitted=fitProjectiveTextureGeometryToStableLayout(fitted);
+  const rasterScale=polygon.polarCap?polarCapRasterScale(config.surface.rasterScale,polygon.textureImageSource.sourceRect.width,fitted.leafWidth):config.surface.rasterScale;
   const address=fitSurface?createProjectiveSurfaceRasterPresentation({sourceWidth:config.surface.width,sourceHeight:config.surface.height,sourceRect:polygon.textureImageSource.sourceRect,addressSourceWidth:polygon.textureImageSource.width,addressSourceHeight:polygon.textureImageSource.height,addressSourceRect:polygon.textureImageSource.sourceRect,backgroundPosition:fitted.backgroundPosition,backgroundSize:fitted.backgroundSize,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,...(config.latitudeBoundsDegrees?{bands:latitudeRasterBands(config.latitudeBoundsDegrees,config.surface.height)}:{bandCount:config.latitudeSegments}),gutter:config.surface.gutter,overscan:config.surface.overscan}):fitted;
   if(config.leafRecord==='explicit'){
     const length=(value:number)=>value===0?'0px':formatCssLength(value);
-    return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}`,...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,config.surface.rasterScale)}:{})};
+    return{style:`transform:matrix3d(${fitted.matrix});width:${length(fitted.leafWidth)};height:${length(fitted.leafHeight)};background-position:${address.backgroundPosition.map(length).join(' ')};background-size:${address.backgroundSize.map(length).join(' ')}`,...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,rasterScale)}:{})};
   }
   const compact=config.leafRecord==='compact';
   const position=address.backgroundPosition.map(value=>!compact&&value===0?'0px':formatCssLength(value)).join(' '),size=address.backgroundSize.map(formatCssLength).join(' ');
   const dimensions=compact?(fitted.leafWidth===64?'':`;--polycss-atlas-width:${formatCssLength(fitted.leafWidth)}`)+(fitted.leafHeight===64?'':`;--polycss-atlas-height:${formatCssLength(fitted.leafHeight)}`):(fitted.leafWidth===64&&fitted.leafHeight===64?'':`;--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px`);
   return{...(compact?{tag:'s'}:{}),style:`transform:matrix3d(${fitted.matrix})${dimensions}${compact&&polygon.polarCap?`;background-image:url(${fitted.url})`:''};background-position:${position};background-size:${size}`,
-    ...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,config.surface.rasterScale)}:{}),...(!compact?{sourceRect:fitted.sourceRect,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,projection:fitted.projection,lighting:'source',lightingOverlay:false}:{})};
+    ...(fitSurface?{projectiveTextureLayer:prepareProjectiveTextureLayer(fitted.matrix,rasterScale)}:{}),...(!compact?{sourceRect:fitted.sourceRect,leafWidth:fitted.leafWidth,leafHeight:fitted.leafHeight,projection:fitted.projection,lighting:'source',lightingOverlay:false}:{})};
 }
 
 export function prepareBandedEllipsoid(input:unknown){

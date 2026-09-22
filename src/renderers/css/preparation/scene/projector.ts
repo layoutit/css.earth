@@ -2,6 +2,7 @@ import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCs
 import type { ComputeTextureAtlasPlanOptions, PolyTextureLeafGeometry, Polygon } from '@layoutit/polycss';
 import type { SurfacePatch } from '@cssearth/objects';
 import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer } from './projective.js';
+import { polarCapRasterScale } from '../../../../platform/projective-surface-raster.mts';
 import type { GeometryProfile } from './profile.js';
 import { prepareLeafSeamOutset, type PreparedLeafSeamOutset } from './seam-outset.js';
 
@@ -61,7 +62,8 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
         ? `transform:matrix3d(${fitted.matrix});${variable}:${position};background-position:var(${variable});background-size:${size};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${caps}`
         : `transform:matrix3d(${fitted.matrix});--polycss-atlas-width:${formatCssLength(fitted.leafWidth)};--polycss-atlas-height:${formatCssLength(fitted.leafHeight)};background-image:url(${fitted.url});background-position:${position};background-size:${size}${caps}`;
       return { tag: 's', className: className ?? (patch.pole ? `${ns}-polar ${ns}-polar-${patch.pole}${patch.inner ? ` ${ns}-polar-inner` : ''}` : ''), style,
-        ...(!patch.pole || p.projectivePoles ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix, p.rasterScale),
+        ...(!patch.pole || p.projectivePoles ? { projectiveTextureLayer: { ...prepareProjectiveTextureLayer(fitted.matrix,
+          patch.pole ? polarCapRasterScale(p.rasterScale, patch.textureImageSource.sourceRect.width, fitted.leafWidth) : p.rasterScale),
           // Surface leaves tile exactly; the body publishes the outset that closes their antialiased seams.
           ...(p.seamOutset && !patch.pole ? { seamOutset: prepareLeafSeamOutset(fitted.matrix, fitted.leafWidth, fitted.leafHeight, 2 * surface.radius * p.tileSize) } : {}) } } : {}),
         ...(p.positionVariables ? { polar: patch.pole ?? null } : { polarCap: patch.pole ?? null, longitudeIndex: patch.longitudeIndex ?? null, latitudeIndex: patch.latitudeIndex }) };
@@ -73,7 +75,8 @@ export function createLeafProjector(profile: GeometryProfile, direction: [number
       const fitted = patch.pole || dimensions ? initial : fitProjectiveTextureGeometryToStableLayout(initial);
       return { tag: 's', className,
         style: `transform:matrix3d(${fitted.matrix});background-position:${fitted.backgroundPosition.map(formatCssLength).join(' ')};background-size:${fitted.backgroundSize.map(formatCssLength).join(' ')};--polycss-atlas-width:${fitted.leafWidth}px;--polycss-atlas-height:${fitted.leafHeight}px${dimensions ? ';backface-visibility:visible' : ''}`,
-        ...(!dimensions ? { projectiveTextureLayer: prepareProjectiveTextureLayer(fitted.matrix, p.rasterScale), polar: patch.pole ?? null } : {}) };
+        ...(!dimensions ? { projectiveTextureLayer: prepareProjectiveTextureLayer(fitted.matrix,
+          patch.pole ? polarCapRasterScale(p.rasterScale, patch.textureImageSource.sourceRect.width, fitted.leafWidth) : p.rasterScale), polar: patch.pole ?? null } : {}) };
     },
   };
 }
