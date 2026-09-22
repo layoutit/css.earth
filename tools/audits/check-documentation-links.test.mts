@@ -129,6 +129,27 @@ test('deleting a target catches unchanged inbound Markdown and HTML links', t =>
   assert.ok(errors.some(error => error.file === 'docs/README.md' && error.target === 'guide.md'));
 });
 
+test('a body README may cite its generated provenance and page contract files', t => {
+  const f = fixture(t);
+  // `prepared-assets.json` is the tracked file that proves the object exists; the two build
+  // outputs beside it are written by `predev`/`prebuild` and never committed.
+  f.write('src/objects/mimas/prepared-assets.json', '{}\n');
+  f.write('src/objects/mimas/README.md',
+    '[Provenance](prepared/provenance.json)\n[Page](prepared/page.json)\n[Absent](prepared/scene.json)\n');
+  f.commit();
+  const errors = f.check().errors;
+  assert.deepEqual(errors.filter(error => error.file === 'src/objects/mimas/README.md').map(error => error.target),
+    ['prepared/scene.json'], 'only the file that is neither tracked nor a declared build output is missing');
+});
+
+test('a build output is not accepted where no object declares it', t => {
+  const f = fixture(t);
+  f.write('README.md', '[Provenance](docs/prepared/provenance.json)\n');
+  f.commit();
+  assert.ok(f.check().errors.some(error =>
+    error.target === 'docs/prepared/provenance.json' && error.reason === 'missing repository path'));
+});
+
 test('changing an anchor catches unchanged inbound links without importing their old debt', t => {
   const f = fixture(t);
   f.write('README.md', '[Guide](docs/guide.md#guide)\n[Old broken](absent.md)\n');
