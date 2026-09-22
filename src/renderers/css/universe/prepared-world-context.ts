@@ -311,7 +311,7 @@ function jsonOrbitGeometry(value: unknown): OrbitGeometryCandidate {
     ...(strokes ? { strokes } : {}), ...(lod ? { lod } : {}) };
 }
 /** Every prepared orbit path, whether it came from JSON or the binary bank, passes the same checks. */
-function validateOrbitGeometry(orbit: OrbitGeometryCandidate, bodyPositionM: PositionM, focusId: string, renderedIds: ReadonlySet<string>): PreparedContextOrbitGeometry {
+function validateOrbitGeometry(orbit: OrbitGeometryCandidate, bodyPositionM: PositionM, focusId: string, renderedIds: ReadonlySet<string>, bodyId = 'orbit'): PreparedContextOrbitGeometry {
   const { centerBodyId, verticesM, trail } = orbit;
   const count = verticesM.length / 3;
   const distance = (index: number, centerM: PositionM) =>
@@ -331,7 +331,14 @@ function validateOrbitGeometry(orbit: OrbitGeometryCandidate, bodyPositionM: Pos
   const pinned = open ? orbit.bodyVertexIndex! : 0;
   if (!Number.isInteger(count) || count < 8 || trail.length !== count - (open ? 1 : 0) || trail.some(value => !(value >= 0 && value <= 1)) ||
       !equalPosition(bodyPositionM, [verticesM[pinned * 3]!, verticesM[pinned * 3 + 1]!, verticesM[pinned * 3 + 2]!]) || !verticesM.every(Number.isFinite)) {
-    throw new TypeError('Context orbit must align with its body and carry matching prepared trail weights.');
+    // One context holds hundreds of orbits; the body and the part that disagrees are what make a failure actionable.
+    const pinnedM: PositionM = [verticesM[pinned * 3]!, verticesM[pinned * 3 + 1]!, verticesM[pinned * 3 + 2]!];
+    const said = !Number.isInteger(count) || count < 8 ? `it has ${count} vertices`
+      : trail.length !== count - (open ? 1 : 0) ? `it carries ${trail.length} trail weights for ${count} vertices`
+      : trail.some(value => !(value >= 0 && value <= 1)) ? 'a trail weight lies outside 0 to 1'
+      : !verticesM.every(Number.isFinite) ? 'a vertex is not finite'
+      : `its vertex ${pinned} is at ${pinnedM.join(', ')} and the body at ${bodyPositionM.join(', ')}`;
+    throw new TypeError(`${bodyId}: context orbit must align with its body and carry matching prepared trail weights: ${said}.`);
   }
   const drawnChords = trail.reduce((sum, weight) => sum + (weight > 0 ? 1 : 0), 0);
   if (orbit.activeChords) {
@@ -419,7 +426,7 @@ export function decodeWorldOrbits(plan: PreparedWorldContext, bytes: ArrayBuffer
         const level = record(value, 'orbit bank level', ['vertexIndices', 'trail', 'activeChords', 'deviationM']);
         return { vertexIndices: section(level.vertexIndices, Uint32Array, `${body.id} level vertices`), trail: section(level.trail, Float64Array, `${body.id} level trail`),
           activeChords: section(level.activeChords, Uint32Array, `${body.id} level chords`), deviationM: finite(level.deviationM, `${body.id} level deviation`) };
-      }) } } : {}) }, body.positionM, plan.focus.id, renderedIds);
+      }) } } : {}) }, body.positionM, plan.focus.id, renderedIds, body.id);
     if (geometry.vertexCount !== orbit.vertexCount || geometry.fullTrail !== orbit.fullTrail) throw new TypeError(`${body.id}: orbit bank differs from its summary.`);
     return Object.freeze({ ...body, orbit: geometry });
   });
@@ -475,7 +482,7 @@ function parseContext(value: unknown, geometry: boolean): PreparedWorldContext {
       ...(input.placement === 'approximate' ? { placement: 'approximate' as const } : {}) };
     if (input.orbit === undefined) return Object.freeze(body);
     if (!geometry) return Object.freeze({ ...body, orbit: parseSummaryOrbit(input.orbit) });
-    return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focus.id, renderedIds) });
+    return Object.freeze({ ...body, orbit: validateOrbitGeometry(jsonOrbitGeometry(input.orbit), body.positionM, focus.id, renderedIds, body.id) });
   });
   if (bodies.length === 0) throw new TypeError('World context requires bodies.');
   unique([focus.id, ...bodies.map(body => body.id)], 'context body identities');
