@@ -1,8 +1,8 @@
 export const HELP = `Telescope — explore observations or continue from an existing artifact.
 
 Human entry points:
-  telescope explore TARGET [--family F01..F18] [--kind KIND] [--wavelength MIN,MAX] [--out DIRECTORY]
-  telescope papers TARGET [--instrument NAME] [--json] [--out DIRECTORY]
+  telescope explore TARGET [--family F01..F18] [--kind KIND] [--instrument NAME] [--wavelength MIN,MAX] [--icrs-circle RA,DEC,RADIUS] [--out DIRECTORY]
+  telescope papers TARGET [--instrument NAME] [--host NAME] [--json] [--out DIRECTORY]
   telescope import SPEC.json --out DIRECTORY
   telescope families [--json]
   telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
@@ -11,7 +11,8 @@ Human entry points:
   telescope candidates STAR --epoch MJD|DATE --out DIRECTORY [--figure-background transparent|opaque]
   telescope associate MEASUREMENTS.csv --system STAR --out DIRECTORY [--orbit-draws N] [--fit-astrometry] [--fit-orbits]
 
-Explore needs only a target. In a terminal it saves the bounded discovery snapshot, shows actual
+Explore needs only a target. A name outside the catalogue is resolved by SIMBAD, and the search uses its identifiers and
+position, with SIMBAD's position error as the circle. In a terminal it saves the bounded discovery snapshot, shows actual
 observations and limitations, and asks which exact identity to retrieve. With --json, redirected
 stdin, or redirected stdout it never prompts and writes the saved exploration as JSON. If --out is
 omitted, a unique directory is created under ./telescope-runs/. Get accepts that directory's
@@ -71,7 +72,9 @@ Figures:
 
 Explore filters and query options use micrometres, arcseconds and kilometres:
   --from ISO --to ISO                 Time range instead of --any-time
-  --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees
+  --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees. Explore also lists archive records
+                                      whose footprint intersects it as in the field, never as the target
+  --instrument NAME                   Archive instrument name, e.g. ERIS (explore)
   --spectral-frame barycentric        Permit advertised SODA BAND subsetting
   --max-science-bytes N               Science transfer bound (default 1 GiB)
   --max-metadata-bytes N              Metadata response bound (default 32 MiB)

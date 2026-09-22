@@ -12,6 +12,15 @@ test('target-only exploration preserves omitted filters and archive queries add 
   assert.match(filtered, /dataproduct_type/u); assert.match(filtered, /em_min/u); assert.match(filtered, /t_min/u);
 });
 
+test('an instrument and a region reach the archive query as instrument_name and a footprint clause', () => {
+  const request = parseExplorationArguments(['sgr-a-star','--instrument','ERIS','--icrs-circle','266.416816625,-29.007824972,0.000277777777778']);
+  assert.equal(request.instrument, 'ERIS');
+  const query = targetQuery(SERVICES[0]!, ['Sagittarius A*'], 50, request);
+  assert.match(query, /instrument_name='ERIS'/u); assert.match(query, /INTERSECTS\(CIRCLE\('ICRS',266\.416816625,-29\.007824972,/u);
+  assert.throws(() => parseExplorationArguments(['sgr-a-star','--instrument',' ']), /archive instrument name/u);
+  assert.throws(() => targetQuery(SERVICES[0]!, ['x'], 50, { target: 'x', instrument: "ERIS\u0000" }), /Invalid instrument/u);
+});
+
 test('wavelength-only exploration remains exploratory rather than becoming a strict capability request', () => {
   const request = parseExplorationArguments(['eris','--wavelength','2.2,2.4']);
   assert.deepEqual(request, { target: 'eris', wavelengthMicrometres: [2.2, 2.4] });

@@ -1,4 +1,5 @@
 import { inputWavelengths } from './recipe-request.mts';
+import { skyCatalogueEntry } from './sky-target.mts';
 import { parseLimits, parseRegion } from './vo/contracts.mts';
 import { loadVoInputs, voCandidates, type VoInputs, type VoProductCandidate } from './vo/bridge.mts';
 import type { DiscoveryRequest } from './vo/discovery.mts';
@@ -1098,7 +1099,8 @@ export async function loadTargetCatalogue(root: string): Promise<TargetCatalogue
 /** The string overload retains legacy archive loading; an explicit request also searches bounded VO services. */
 export async function loadQueryInputs(root: string, targetOrRequest: string | CapabilityRequest | DiscoveryRequest, selectedObservation?: string): Promise<QueryInputs> {
   const target = typeof targetOrRequest === 'string' ? targetOrRequest : targetOrRequest.target;
-  const objectRoot = resolve(root, 'src/objects'), targetCatalogue = await loadTargetCatalogue(root);
+  const sky = typeof targetOrRequest !== 'string' && 'skyTarget' in targetOrRequest ? targetOrRequest.skyTarget : undefined;
+  const objectRoot = resolve(root, 'src/objects'), targetCatalogue = [...await loadTargetCatalogue(root), ...sky ? [skyCatalogueEntry(sky)] : []];
   const resolution = resolveTarget(target, targetCatalogue), canonicalTarget = resolution.status === 'resolved' ? resolution.canonical.id : target;
   const ledgers: { telescope: string; path: string; value: unknown }[] = [], dynamicCapabilities: ModeCapability[] = [];
   for (const telescope of LEDGER_TELESCOPES) {

@@ -1,9 +1,10 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { readFile } from 'node:fs/promises';
+import { mkdir, mkdtemp, readFile, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { CAPTION_LIMIT, abstractText, evidenceScore, extractCaptions, isChallenge, mentions, openAlexQuery, parseOpenAlexResponse, rankWorks, relevantCaptions } from './papers.mts';
+import { CAPTION_LIMIT, abstractText, displayName, evidenceScore, extractCaptions, hostNames, isChallenge, mentions, openAlexQuery, parseOpenAlexResponse, rankWorks, relevantCaptions } from './papers.mts';
 import { parseCli } from './cli.mts';
 
 const fixtures = resolve(import.meta.dirname, '../../../tests/fixtures/telescope-papers');
@@ -48,6 +49,38 @@ test('the OpenAlex query searches title and abstract of papers only', () => {
   assert.equal(url.searchParams.has('mailto'), false);
 });
 
+test('a target name with the OpenAlex wildcard is searched without it', () => {
+  const url = new URL(openAlexQuery('Sagittarius A*'));
+  assert.equal(url.searchParams.get('filter'), 'title_and_abstract.search:Sagittarius A ,type:article|review|preprint|letter');
+});
+
+test('a hosted body is searched together with any one of its host names', () => {
+  const url = new URL(openAlexQuery('S2', undefined, ['Sagittarius A*', 'Sgr A*']));
+  assert.equal(url.searchParams.get('filter'), 'title_and_abstract.search:S2 AND ("Sagittarius A" OR "Sgr A"),type:article|review|preprint|letter');
+  const withInstrument = new URL(openAlexQuery('S2', 'GRAVITY', ['Sgr A*']));
+  assert.equal(withInstrument.searchParams.get('filter'), 'title_and_abstract.search:S2 AND ("Sgr A") AND GRAVITY,type:article|review|preprint|letter');
+});
+
+test('host names come from a body record with a hosted orbit, and only from one', async () => {
+  const root = await mkdtemp(resolve(tmpdir(), 'papers-hosts-')), bodies = resolve(root, 'packages/astronomy/data/bodies');
+  await mkdir(bodies, { recursive: true });
+  await writeFile(resolve(bodies, 'star.json'), JSON.stringify({ physical: { parent: 'host' }, hostedOrbit: { periodDays: 1 } }));
+  await writeFile(resolve(bodies, 'moon.json'), JSON.stringify({ physical: { parent: 'host' } }));
+  await writeFile(resolve(bodies, 'lost.json'), JSON.stringify({ physical: { parent: 'missing' }, hostedOrbit: { periodDays: 1 } }));
+  const catalogue = [{ id: 'host', name: 'Sagittarius A*', aliases: ['Sgr A*'] }];
+  assert.deepEqual(await hostNames(root, 'star', catalogue), ['Sagittarius A*', 'Sgr A*']);
+  assert.deepEqual(await hostNames(root, 'moon', catalogue), [], 'a moon keeps a plain search');
+  assert.deepEqual(await hostNames(root, 'absent', catalogue), []);
+  await assert.rejects(hostNames(root, 'lost', catalogue), /not in the target catalogue/u);
+});
+
+test('a name outside the catalogue is searched as written; a catalogue name still resolves', () => {
+  const catalogue = [{ id: 'io', name: 'Io', aliases: [] }];
+  assert.deepEqual(displayName('S301', catalogue), { id: 'S301', name: 'S301' });
+  assert.deepEqual(displayName('io', catalogue), { id: 'io', name: 'Io' });
+  assert.throws(() => displayName('  ', catalogue), /requires a target name/u);
+});
+
 test('captions and table titles are extracted verbatim with their labels', async () => {
   const { scanned, captions } = extractCaptions(await readFile(resolve(fixtures, 'article.html'), 'utf8'));
   assert.equal(scanned, 5, 'the outline copy of Table 1 is deduplicated and script state is ignored');
@@ -72,6 +105,7 @@ test('browser challenges are recognised from headers or page', () => {
 
 test('the papers command takes one target and optional instrument, JSON and output directory', () => {
   assert.deepEqual(parseCli(['papers', 'io', '--instrument', 'JIRAM', '--json']), { command: 'papers', target: 'io', instrument: 'JIRAM', json: true, verbose: false });
+  assert.deepEqual(parseCli(['papers', 'S301', '--host', 'Sgr A*']), { command: 'papers', target: 'S301', host: 'Sgr A*', json: false, verbose: false });
   assert.throws(() => parseCli(['papers']), /telescope papers OBJECT/u);
   assert.throws(() => parseCli(['papers', 'io', '--kind', 'cube']), /Unknown or repeated papers option/u);
 });
