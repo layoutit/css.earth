@@ -1,0 +1,14 @@
+{
+  "source": "Gaia DR3 gaia_source, ESA Gaia Archive TAP synchronous query",
+  "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+  "query": "query.adql",
+  "retrieved": "2026-09-22",
+  "license": "CC BY-SA 3.0 IGO; credit ESA/Gaia/DPAC",
+  "citation": "Gaia Collaboration, Vallenari et al. 2023, A&A 674, A1",
+  "file": "gaia-dr3-astrometry.csv",
+  "rows": 36,
+  "selection": "Every Gaia DR3 source within 0.006 deg (21.6 arcsec) of HD 189733, brightest first. HD 189733 A is 1827242816201846144 and its M-dwarf companion HD 189733 B is 1827242816176111360.",
+  "units": "ra and dec in deg; ra_error, dec_error, parallax and parallax_error in mas; ra_error is the error of ra cos dec; pmra and pmdec in mas/yr; ref_epoch in Julian years.",
+  "coverage": "Five rows are two-parameter solutions with no proper motion or parallax. Source 1827242816176119296 has a 34 mas declination error with RA-Dec correlation 0.97, the most elongated ellipse in the table.",
+  "independentCheck": "Astropy 8.0.1 SkyCoord.spherical_offsets_to from HD 189733 A gives the offsets asserted in tools/objects/telescopes/families/f09-astrometry.test.mts."
+}

@@ -21,3 +21,17 @@ test('Astropy and Matplotlib render bounded previews from pinned family data',as
     assert.equal(raster.kind,'raster');assert.ok((await stat(resolve(directory,'radar','preview.png'))).size>1_000);
   } finally { await rm(directory,{recursive:true,force:true}); }
 });
+
+test('scatter-ellipses draws k-sigma covariance contours that match the closed-form 2×2 eigen solution',async()=>{
+  const directory=await mkdtemp(resolve(tmpdir(),'family-ellipses-'));
+  try {
+    // Oracle: closed-form eigenvalues and principal angle of [[a,b],[b,c]], independent of NumPy's eigh.
+    const covariance=[4,1.5,1] as const,[a,b,c]=covariance,mean=(a+c)/2,radius=Math.hypot((a-c)/2,b),major=Math.sqrt(mean+radius),minor=Math.sqrt(mean-radius),angle=Math.atan2(2*b,a-c)/2*180/Math.PI;
+    const drawn=await plotNumericPreview(resolve(directory,'ellipses'),{kind:'scatter-ellipses',title:'Offsets',xLabel:'East (mas)',yLabel:'North (mas)',invertX:true,origin:{label:'star'},points:[{x:10,y:-5,label:'b',covariance},{x:-3,y:2,label:'no error'}]});
+    assert.equal(drawn.kind,'scatter-ellipses');assert.equal(drawn.ellipses?.length,3);assert.ok((await stat(resolve(directory,'ellipses','preview.svg'))).size>1_000);
+    for(const [index,ellipse] of drawn.ellipses!.entries()){const k=index+1;assert.equal(ellipse.sigma,k);assert.equal(ellipse.label,'b');assert.deepEqual([ellipse.x,ellipse.y],[10,-5]);
+      assert.ok(Math.abs(ellipse.width-2*k*major)<1e-9&&Math.abs(ellipse.height-2*k*minor)<1e-9,`axes at ${k}σ`);assert.ok(Math.abs(((ellipse.angleDeg-angle)%180+180)%180)<1e-9||Math.abs(((ellipse.angleDeg-angle)%180+180)%180-180)<1e-9,`angle ${ellipse.angleDeg} vs ${angle}`);}
+    await assert.rejects(plotNumericPreview(resolve(directory,'singular'),{kind:'scatter-ellipses',title:'Singular',xLabel:'x',yLabel:'y',points:[{x:0,y:0,label:'s',covariance:[1,1,1]}]}),/positive-definite/u);
+    await assert.rejects(plotNumericPreview(resolve(directory,'levels'),{kind:'scatter-ellipses',title:'Levels',xLabel:'x',yLabel:'y',sigmaLevels:[2,1],points:[{x:0,y:0}]}),/increasing/u);
+  } finally { await rm(directory,{recursive:true,force:true}); }
+});
