@@ -47,7 +47,7 @@ but they compare two photographs, not photograph pixels with surface points.
 With no measured camera or control points, that placement does not register
 the photograph, so the photographic lens stays deferred.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="toutatis-source-and-presentation"></a>
 <a id="dataset-survey"></a>

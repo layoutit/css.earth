@@ -31,7 +31,7 @@ src/objects/<id>/
   source/                      original inputs, labels and necessary source notes
   prepared/                    generated content, geometry and lineage records
   prepared/page.json           generated page assets and controls
-  runtime-assets.json          generated runtime image inventory
+  inventory.json               generated inventory of the baked files (public textures and prepared/*)
 
 public/scenes/<id>/             installed/generated serving assets
 public/navigation/body-<id>*.webp   prepared navigation images

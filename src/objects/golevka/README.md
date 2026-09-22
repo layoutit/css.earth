@@ -26,7 +26,7 @@ The bounded JPL/PDS/paper survey found no calibrated registered optical mosaic, 
 
 The published ecliptic pole (202°, -45°) is converted to equatorial J2000 using obliquity 23.439291111°. Body longitude is east-positive; display phase is arbitrary.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="golevka-sources-and-preparation"></a>
 <a id="model-identity-coordinates-and-spin"></a>

@@ -38,7 +38,7 @@ test('Earth mount and delivery contain the authored globe views, without geograp
   assert.equal(PREPARED_EARTH_SCENE.counts.noisePageLeafCount,0);
   assert.deepEqual(required(runtimeDefinition.controls.lenses).controls.map(lens=>lens.id),['normal','clouds','topography','night-lights','enso','cross-section','mantle-tomography']);
   assert.doesNotMatch(JSON.stringify(content),/WorldCover|GeoNames|Buenos Aires/);
-  const assets=shape({assets:array(shape({filename:text}))})(await read('src/objects/earth/runtime-assets.json'));
+  const assets=shape({assets:array(shape({filename:text}))})(await read('src/objects/earth/inventory.json'));
   assert.equal(assets.assets.some((asset: { filename: string; })=>/noise|places|city|wmts/.test(asset.filename)),false);
   for(const kind of ['surface','topography','night-lights','interior','atmosphere']) assert.ok(assets.assets.some((asset: { filename: string|string[]; })=>asset.filename.includes(kind)),kind);
 });

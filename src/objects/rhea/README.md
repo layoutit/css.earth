@@ -53,7 +53,7 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 - The [old catalog](source/observations/catalog.json) still says relative albedo was
   excluded, although the current recipe and content include it.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

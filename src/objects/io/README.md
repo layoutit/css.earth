@@ -23,7 +23,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | enhanced | 247.3 → 244.8 kB |
 | normal | 118.5 → 118.9 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/io/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/io/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Photographic refresh, 12 September 2026, on base `3efdf2c9`:
 [monochrome detail](evidence/photographic-detail/monochrome.png) and
@@ -94,7 +94,7 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 - **Peaks are lower than the paper's.** Mura et al. stack frames with a super-resolution method and correct the smear; we take a median of registered frames. The total output of each hot spot agrees (above), but a hot spot's light is spread over more cells, so its peak is lower, most for small spots near the limb. A hot spot is usually far smaller than one pixel (13.5 to 27 km).
 - **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between April 2022 and March 2023, and hot spots change: Mura et al. find single hot spots varying by about 40% between these orbits.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

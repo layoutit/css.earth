@@ -42,9 +42,9 @@ async function commitAll(root: string, message: string): Promise<void> {
 
 test('touchedObjectDirectories extracts the distinct object ids from src/objects/<id>/ paths', () => {
   const ids = touchedObjectDirectories([
-    'src/objects/hebe/prepared-assets.json',
+    'src/objects/hebe/inventory.json',
     'src/objects/hebe/prepared/runtime.json',
-    'src/objects/iris/runtime-assets.json',
+    'src/objects/iris/inventory.json',
     'README.md',
     'src/objects/README.md', // no trailing object id, must not match
     'site/objects.mts',

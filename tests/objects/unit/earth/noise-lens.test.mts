@@ -14,6 +14,6 @@ test("archived city noise source remains pinned but is absent from the globe MVP
   assert.equal(shape({features:array(requireRecord)})(JSON.parse(source.toString('utf8'))).features.length,181);
   assert.equal(PREPARED_EARTH_LENSES.controls.some(lens=>lens.id==="buenos-aires-noise"),false);
   assert.deepEqual(runtimeDefinition.pageLayers,[]);
-  const assets=shape({assets:array(shape({filename:text}))})(JSON.parse((await readFile(new URL("../../../../src/objects/earth/runtime-assets.json",import.meta.url))).toString('utf8')));
+  const assets=shape({assets:array(shape({filename:text}))})(JSON.parse((await readFile(new URL("../../../../src/objects/earth/inventory.json",import.meta.url))).toString('utf8')));
   assert.equal(assets.assets.some((asset: { filename: string; })=>/noise|places|city|wmts/.test(asset.filename)),false);
 });

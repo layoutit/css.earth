@@ -4,6 +4,8 @@ import { resolve } from 'node:path';
 import { sourceArray, sourceObject, sourcePath, sourceText, sourceDigest } from '../../src/platform/source-catalog.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import { manifestSources } from '../sources/context-source-records.mts';
+import { requireInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
+import { VOLUME_METADATA_FILENAMES } from '../assets/runtime-assets.mts';
 export const contextProvenanceCompilerClosure = ['tools/prepare/prepare-context-provenance.mts', 'tools/sources/context-source-records.mts'];
 export async function prepareContextProvenance({ root = process.cwd(), input = (path: string) => readFile(resolve(root, path)) } = {}) {
   const results = [];
@@ -21,9 +23,9 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
     const manifestBytes = await input(`${base}/source/manifest.json`), manifest = sourceObject(JSON.parse(manifestBytes.toString()));
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
     const sources = await manifestSources(manifest, root, input);
-    // The receipt is the context's own output inventory, tracked beside object.json; runtime-assets.json is derived from it below.
-    const receipt = sourceObject(JSON.parse((await input(`${base}/prepared-receipt.json`)).toString()));
-    const pins = sourceArray(receipt.outputs, sourceObject);
+    // The context's baked outputs are pinned by its inventory; the record and presentation written below join them there.
+    const inventory = requireInventory(id, JSON.parse((await input(`${base}/inventory.json`)).toString()));
+    const pins = inventory.assets.filter(asset => asset.location === 'prepared' && !VOLUME_METADATA_FILENAMES.includes(asset.filename as typeof VOLUME_METADATA_FILENAMES[number])).map(asset => ({ path: asset.filename, sha256: asset.sha256, bytes: asset.bytes }));
     const descriptorPath = `${base}/object.json`;
     const descriptorBytes = await readFile(resolve(root, descriptorPath)).catch((error: unknown) => { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });
     if (descriptorBytes) {
@@ -66,9 +68,9 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
       { filename: 'presentation.json', text: JSON.stringify({ name: sourceText(presentation.name), products: products.map(({ id, label, limitations }) => ({ id, label, limitations })) }, null, 2) + '\n' }
     ];
     for (const item of metadata) runtimeAssets.push({ filename: item.filename, bytes: Buffer.byteLength(item.text), sha256: sha256(item.text) });
-    const inventory = JSON.stringify({ schema: `css${id}-runtime-assets@1`, resourceRoot: 'prepared', assets: runtimeAssets }, null, 2) + '\n';
+    const next = mergeInventory(inventory, 'prepared', runtimeAssets);
     const outputs = [...metadata.map(item => ({ path: resolve(root, base, 'prepared', item.filename), text: item.text })),
-      { path: resolve(root, base, 'runtime-assets.json'), text: inventory }];
+      { path: resolve(root, base, 'inventory.json'), text: inventoryText(next) }];
     results.push({ id, name: sourceText(presentation.name), route: '/sun/', base, controls: [], provenance, outputs });
   }
   return results;

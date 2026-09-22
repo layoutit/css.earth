@@ -1,0 +1,437 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "charon-albedo@2x.webp",
+      "bytes": 295890,
+      "sha256": "b6f320ab2309a6a73ca130f731daacd77aaf2ae66da10075b4e256dbd19502e2"
+    },
+    {
+      "location": "public",
+      "filename": "charon-ammonia@2x.webp",
+      "bytes": 921744,
+      "sha256": "52441cde913d84450456a24fbd613fe39b3122bc2d5118543ab403d86530ef40"
+    },
+    {
+      "location": "public",
+      "filename": "charon-elevation@2x.webp",
+      "bytes": 2364048,
+      "sha256": "37304b9513340545aadb6a44af74ccc644790bed1d188faa74b8a23ef353079c"
+    },
+    {
+      "location": "public",
+      "filename": "charon-enhanced-color@2x.webp",
+      "bytes": 1589082,
+      "sha256": "df7ddc1ede1e7e69ac35d24acfe1e37601096d71a4f9c069459780c8557de620"
+    },
+    {
+      "location": "public",
+      "filename": "charon-features.json",
+      "bytes": 76716,
+      "sha256": "f1c006b5e1fad0a948e192694dbe551815091d0c43c9c4debe065992175e4556"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lens-albedo.webp",
+      "bytes": 1154,
+      "sha256": "ec6d5dbec3849608cee76f972d0bd894037504eeed1abb2cf7da99a1c6631c32"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lens-ammonia.webp",
+      "bytes": 178,
+      "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lens-elevation.webp",
+      "bytes": 168,
+      "sha256": "c3464c3a2b828b0d9b29a1813fe263b99075860a656e22d6d6d8c09bbbf70fa9"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lens-enhanced-color.webp",
+      "bytes": 380,
+      "sha256": "e3b8942645f8510b65b42822732b735f2318c8223d21ede0fde8a3b563cd08f0"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lens-normal.webp",
+      "bytes": 918,
+      "sha256": "4d879b196a8a41ec92fb6607d02e8a9e70a8b788ce349566ef869fea164526d8"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lens-water-ice.webp",
+      "bytes": 178,
+      "sha256": "dfbccca79454584e537c2528a5a0f8261ff0320a8b4f21b1a8f9defdb08f4e05"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-billboard.webp",
+      "bytes": 115740,
+      "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-00.webp",
+      "bytes": 37672,
+      "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-01.webp",
+      "bytes": 70898,
+      "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-02.webp",
+      "bytes": 92030,
+      "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-03.webp",
+      "bytes": 106840,
+      "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-04.webp",
+      "bytes": 120584,
+      "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-05.webp",
+      "bytes": 132094,
+      "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-06.webp",
+      "bytes": 143228,
+      "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-07.webp",
+      "bytes": 153142,
+      "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-08.webp",
+      "bytes": 163984,
+      "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-09.webp",
+      "bytes": 172632,
+      "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-10.webp",
+      "bytes": 177128,
+      "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-11.webp",
+      "bytes": 179144,
+      "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-12.webp",
+      "bytes": 173518,
+      "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-13.webp",
+      "bytes": 161150,
+      "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-14.webp",
+      "bytes": 132038,
+      "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-15.webp",
+      "bytes": 69930,
+      "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-16.webp",
+      "bytes": 74522,
+      "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-17.webp",
+      "bytes": 143520,
+      "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-18.webp",
+      "bytes": 185628,
+      "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-19.webp",
+      "bytes": 218252,
+      "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-20.webp",
+      "bytes": 245184,
+      "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-21.webp",
+      "bytes": 269836,
+      "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-22.webp",
+      "bytes": 291326,
+      "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-23.webp",
+      "bytes": 312110,
+      "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-24.webp",
+      "bytes": 333302,
+      "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-25.webp",
+      "bytes": 355976,
+      "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-26.webp",
+      "bytes": 377782,
+      "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-27.webp",
+      "bytes": 403282,
+      "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-28.webp",
+      "bytes": 429004,
+      "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-29.webp",
+      "bytes": 456570,
+      "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-30.webp",
+      "bytes": 481914,
+      "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9"
+    },
+    {
+      "location": "public",
+      "filename": "charon-lighting-2x-row-31.webp",
+      "bytes": 526556,
+      "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
+    },
+    {
+      "location": "public",
+      "filename": "charon-normal@2x.webp",
+      "bytes": 5759254,
+      "sha256": "63257c2d55bbd2aaec3720e7d3ce56cf1a2d84fa51625d4d9c51d3f65bf4a136"
+    },
+    {
+      "location": "public",
+      "filename": "charon-poles-albedo@2x.webp",
+      "bytes": 14168,
+      "sha256": "9abf55667011be61a0c2983c26478b142a56c4f5331bcb94b4cc71b246f908b5"
+    },
+    {
+      "location": "public",
+      "filename": "charon-poles-ammonia@2x.webp",
+      "bytes": 71400,
+      "sha256": "1c3c00a8145bcc9205ea12933bcd9728ec580be4efc8fc28f92aa9cb16b17661"
+    },
+    {
+      "location": "public",
+      "filename": "charon-poles-elevation@2x.webp",
+      "bytes": 156636,
+      "sha256": "9a8354d1b55ac8f82e2642b3db538486cfb8ddb0122aa29d7fa99c6c49d096af"
+    },
+    {
+      "location": "public",
+      "filename": "charon-poles-enhanced-color@2x.webp",
+      "bytes": 120610,
+      "sha256": "ca059654e408d48831ed254cff5224c6a99bf49971f843522936148777e67d4f"
+    },
+    {
+      "location": "public",
+      "filename": "charon-poles-normal@2x.webp",
+      "bytes": 117244,
+      "sha256": "92933b9ff45c544a8242faa4a984cfb7fa9549a88a278ec041d6a29f7a59c810"
+    },
+    {
+      "location": "public",
+      "filename": "charon-poles-water-ice@2x.webp",
+      "bytes": 103854,
+      "sha256": "34c2dc40cbd87bbde52b552b10f97f4be7051e2c321bc68809317293eee6dce9"
+    },
+    {
+      "location": "public",
+      "filename": "charon-water-ice@2x.webp",
+      "bytes": 1783736,
+      "sha256": "f038a5e9d7bb8e24b4d80ee887e7590cc4df646d5b7c68b7c5eed124d82aff16"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 95343,
+      "sha256": "4d227aeb8e7106025dc772d6de5318749fc001f3bb81530b6e05842234de409b"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1557,
+      "sha256": "03b9100a5bc8dfd8437ba6b056317bd8934ae08a8feb98114e46e4e6e2e59bd1"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 7116,
+      "sha256": "fe5d7c335aa9d72ac333460bf19bb59634ddde962516fae2e11e150f4fc956b5"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 6639,
+      "sha256": "2e8d1b892aac147339f218b6f32cbd5834fd7c389cbdbfca5792289c02532530"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 658,
+      "sha256": "1af0c6a7547d8ae0d95318c625b3d77fc52b17d34c9478de5fb00a04a2b7252e"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 9265,
+      "sha256": "b170f9d10b81b836cf59cedbf88d18e21b949c9a9a361ce51f639988cb357772"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 23843,
+      "sha256": "fc41f7231b2a79dac4fc954d4e6b3f65158030d578ae3439d6766119fe762c0f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 469,
+      "sha256": "4d128e45393418e18c555259d215ed21e48ddd1b0f9bdca749dafa08e6881d6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/albedo.webp",
+      "bytes": 26110,
+      "sha256": "0c81231db29ae2fe66c12a540be74bed139ba1304e2607db045d3f3d01564967"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ammonia.webp",
+      "bytes": 44296,
+      "sha256": "0447da653bfd668d742f9de45bd343bd88098a9936219440d74c9f538dc49506"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 27074,
+      "sha256": "6722f525468e91a107c3a41ba3a77c8e95e5c497d3c5f861738d540b4838edae"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/enhanced-color.webp",
+      "bytes": 17406,
+      "sha256": "e237ca76e683ff9a29916e266e18541fc8d7e51efe44d5e7aefda81685757229"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 34620,
+      "sha256": "c465ecdef75f4cd5d0f2d60922eeb881306c18d19378e514894127a99d187bbc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/water-ice.webp",
+      "bytes": 63642,
+      "sha256": "3fa8f8769e814d59277eec681c47d1c2c1bf165baaa037e9346c5b7ebc06b4d0"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 540744,
+      "sha256": "0274e588e2471932d9852dc5fb6d1c0305ffa0bc4c1d864886970e8b232b195a"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 386065,
+      "sha256": "4eee8a4beb83b19b9808c1df58074eb740ea9b1948c28341a5e49036def345c3"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1032,
+      "sha256": "d6afa6d351d1ebcea2201f3060e98d94bf171c6b7492a14c5c7ecda98d8d3280"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 614,
+      "sha256": "ed331ef5fae46bb6be778902fd2ae2515def3de3a1ef350752c08cd823dda8a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1841,
+      "sha256": "804d9575a0dd23c71e430e6042bf5215321fa1fc85b7a79465a4646e48ab675b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1222,
+      "sha256": "a266b0abac1136a53ebc7f1f20a857f8c6e925c4c55def31a1daf2065e689323"
+    }
+  ]
+}

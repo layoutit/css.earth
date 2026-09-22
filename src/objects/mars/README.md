@@ -23,7 +23,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | --- | --- |
 | normal | 524,794 bytes |
 
-This download size refers only to the polar sprite, as listed in `prepared/assets.json`. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+This download size refers only to the polar sprite, as listed in `prepared/assets.json`. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mars/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 The lane change was verified with the package, source-closure and browser conformance checks listed in the pull request that made it. No dated oracle report is cited for the new lane; the source and acquisition records identify every input.
 
@@ -147,7 +147,7 @@ its structured block endpoint. The prepared snapshot is committed at
 ## Runtime boundary
 
 All browser assets are generated under `public/scenes/mars/` and enumerated by
-`runtime-assets.json`. Authoritative inputs and pinned recipes stay under
+`inventory.json`. Authoritative inputs and pinned recipes stay under
 `source/`; generated runtime transport stays under `prepared/`. The shared
 raster, celestial, geometry, content and presentation lanes in
 `tools/objects/prepare-authored.ts` prepare the package; it contains no

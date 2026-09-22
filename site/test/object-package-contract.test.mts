@@ -14,7 +14,7 @@ import {
   objectPackagePaths,
   validateObjectPackageFiles,
   validatePlanetData,
-  validateRuntimeAssetManifest,
+  validateInventory,
 } from "../../tools/contract/object-package-contract.mts";
 
 const implemented = SCENE_OBJECTS;
@@ -34,11 +34,11 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   await mkdir(paths.publicAssets, { recursive: true });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
-  await writeFile(paths.runtimeAssets, JSON.stringify({ schema: "csslocal-body-runtime-assets@1", assets: [{ filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
+  await writeFile(paths.inventory, JSON.stringify({ schema: "cssearth-inventory@1", assets: [{ location: "public", filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
   await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@2", inputs: [{ id: "local", path: "local-data.bin", expectedSha256: hash, expectedBytes: bytes.length, origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
   assert.deepEqual(await validatePlanetData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), "corrupt");
-  await assert.rejects(validatePlanetData(object, { projectRoot }), /runtime asset drifted/);
+  await assert.rejects(validatePlanetData(object, { projectRoot }), /public asset drifted/);
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "undeclared.bin"), "hidden source");
   await assert.rejects(validatePlanetData(object, { projectRoot }), /undeclared|Undeclared|closure/);
@@ -142,26 +142,27 @@ test("validates local editorial identity and provenance", () => {
 test("validates runtime asset manifest entries", () => {
   const planetId = "fixture";
   const valid = {
-    schema: `css${planetId}-runtime-assets@1`,
+    schema: 'cssearth-inventory@1',
     assets: [{
+      location: "public",
       filename: "surface.webp",
       bytes: 42,
       sha256: "a".repeat(64),
     }],
   };
-  assert.equal(validateRuntimeAssetManifest(planetId, valid), true);
+  assert.equal(validateInventory(planetId, valid), true);
   assert.throws(
-    () => validateRuntimeAssetManifest(planetId, {
+    () => validateInventory(planetId, {
       ...valid,
       assets: [...valid.assets, ...valid.assets],
     }),
-    /repeats runtime asset/,
+    /repeats inventory entry/,
   );
   assert.throws(
-    () => validateRuntimeAssetManifest(planetId, {
+    () => validateInventory(planetId, {
       ...valid,
       assets: [{ ...valid.assets[0], filename: "../escape.webp" }],
     }),
-    /invalid runtime asset entry/,
+    /invalid inventory entry/,
   );
 });

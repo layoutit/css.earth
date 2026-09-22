@@ -24,7 +24,7 @@ The lower-resolution maps now resize before latitude bands and gutters are packe
 | normal | 5021.0 → 5019.0 kB |
 | topography | 5033.2 → 5031.9 kB |
 
-These download sizes refer to the band images. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mercury/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer to the band images. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mercury/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Named features, 2026-09-11, this version: `tools/objects/surface-features/surface-features.test.ts` decodes the pinned archive and checks every anchor against the shared minimap map convention; `tests/objects/unit/mercury/features.test.mts` pins the prepared catalogue bytes, the spin-node anchor, the diameter ordering and the landmark coordinates (Caloris Planitia, Rembrandt, Enterprise Rupes, Hokusai); `src/renderers/css/labels/surface-feature-layout.test.ts` covers projection, limb fading, the zoom gate, admission and outline chords. `site/test/rendered-page.test.mts` (headless Chrome, 2026-09-11, this version) typed Caloris Planitia, Rembrandt, Enterprise Rupes, Beethoven and Rachmaninoff into the sidebar search from the overview, selected each feature row and waited for the flight: every feature arrived pinned within 50 px of the view centre with its caption naming it and its outline traced (256 chords for the Caloris extent box and the crater rim circles, 154 chords of mapped scarp traces for Enterprise Rupes). In the enhanced-colour lens the Caloris extent box encloses the basin's bright plains and the Rembrandt rim circle follows the basin rim, which fixes the map's left edge at 180° E. The `surface-features` browser conformance case (labels, hover caption, outline chords, spin, lens gate, retained DOM) is written but could not run here: on the development server every Mercury conformance case, including the pre-existing `desktop` case, stops at the shared lens-panel count assertion before loading.
 
@@ -49,7 +49,7 @@ Feature outlines are not published nomenclature boundaries. Craters and faculae 
 
 Filled enhanced-color poles are not direct observations. The 366 km rendered outer shell is the difference between the cited radii; NASA separately describes it as “about 400 km.” The sky and display rotation are contextual, not an epoch-correct observation. The PSG source specifies no atmosphere structure, so no temperature-pressure chart is supplied.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="mercury-sources"></a>
 

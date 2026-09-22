@@ -61,7 +61,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - **Orientation:** Small optical librations and dynamical phase errors are not represented.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## False color preparation
 
@@ -109,7 +109,7 @@ All lenses use the same prepared geometry and coverage interpretation. A dedicat
 
 Every examined source, with its decision and what would reopen it, is in the [investigation ledger](investigations.json).
 
-[NASA’s Prometheus overview](https://science.nasa.gov/saturn/moons/prometheus/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `runtime-assets.json`.
+[NASA’s Prometheus overview](https://science.nasa.gov/saturn/moons/prometheus/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `inventory.json`.
 
 The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
 

@@ -31,7 +31,7 @@ Feature notes: 1 of the labelled names carry a caption note, the lead summary of
 - Native VIMS gaps remain missing. Bilinear/WebP packing can soften infrared mask edges, and the fixed 3500-face terrain shows coarse lighting facets. More display texels do not add measurements.
 - The retained rotation phase has no new qualification in these records. The separate SBIB regional RGB candidate still has no qualified registration to the revised shape and center.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

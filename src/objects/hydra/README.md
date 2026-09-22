@@ -51,7 +51,7 @@ The PDS image header’s body-fixed convenience fields are unavailable, but that
 
 Hydra’s northern hemisphere is the well-observed part of the released fit; southern radii and the short axis remain poorly constrained. The lens has one LORRI view. It does not establish global coverage, a photometric correction, natural color, or scientific surface units.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 <details>
 <summary>Method and source details</summary>

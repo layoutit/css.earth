@@ -3,7 +3,7 @@ import { readFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { clearInactiveImageBindings } from './sphere-assets.mts';
-import { preparedAssets } from '../../assets/runtime-assets.mts';
+import { inventoryAssets } from '../../assets/runtime-assets.mts';
 import { installRuntimeAssets } from '../../assets/setup.mts';
 import { requireRecord } from '../../sources/source-values.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
@@ -29,7 +29,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const geometry = parseGeometryProfile(await json(resolve(object, 'source/preparation/geometry.json')));
   if (geometry.namespace !== id) throw new Error('Standard sphere geometry belongs to another body');
   const recipe = parseRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
-  await pinned(resolve(object, 'prepared-assets.json'));
+  await pinned(resolve(object, 'inventory.json'));
   const original = parsePreparedObjectRuntime(await json(resolve(object, 'prepared/runtime.json')));
   if (original.id !== id || original.pageLayers?.length || original.destinations)
     throw new Error('This sphere requires application capabilities that cannot be exported');
@@ -54,7 +54,7 @@ export async function measurementSphere(root: string, target: string, texture: s
   focus: { longitudeDegrees: number; latitudeDegrees: number; zoom: number }) {
   const id=target.toLowerCase();
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new Error('Sphere output needs an existing body identity');
-  const assetsToInstall = await preparedAssets(root, [id]);
+  const assetsToInstall = await inventoryAssets(root, [id], { location: 'prepared' });
   await installRuntimeAssets(assetsToInstall.filter(asset => asset.filename === 'runtime.json'));
   const {inputs,pinned,recipe,original,lensId,surface,variant,required,styles,worldFrame,context}=await inspectMeasurementSphere(root,target);
   // Keep the original packing, gutters, pole atlas and density. The standard raster lane

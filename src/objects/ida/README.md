@@ -63,7 +63,7 @@ pixels alone do not qualify their projection onto this model.
 
 The Thomas mosaic is processed monochrome, with photographed shadows, local stretches and seams. Its exactly-zero gaps remain a grid. A conflicting PDS4 display-direction label is overridden by the north-up registration evidence below. Elevation is radius minus 16 km, not gravitational height.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="ida-source-record"></a>
 <a id="selected-release-and-interpretation"></a>

@@ -20,4 +20,4 @@ No dated test report exists for this body yet.
 
 The scaled distance is derived here from the paper’s semimajor axis (1.046 AU) and stellar radius (1.11 solar radii), not quoted from it. This planet is often described as potentially habitable; nothing here supports or shows that. The package draws a neutral gray sphere of the measured radius.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

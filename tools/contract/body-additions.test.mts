@@ -28,10 +28,10 @@ test('context prepared resources stay external until their bank is selected', ()
 test('asset-origin context resources come from inventories without local prepared bytes', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-context-assets-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  await write(resolve(root, 'src/objects/nearby-universe/runtime-assets.json'), {
-    schema: 'cssnearby-universe-runtime-assets@1', resourceRoot: 'prepared', assets: [
-      { filename: 'points.json', sha256: 'a'.repeat(64), bytes: 10 },
-      { filename: 'cloud.webp', sha256: 'b'.repeat(64), bytes: 20 },
+  await write(resolve(root, 'src/objects/nearby-universe/inventory.json'), {
+    schema: 'cssearth-inventory@1', assets: [
+      { location: 'prepared', filename: 'points.json', sha256: 'a'.repeat(64), bytes: 10 },
+      { location: 'prepared', filename: 'cloud.webp', sha256: 'b'.repeat(64), bytes: 20 },
       { filename: 'datasets/preview.webp', sha256: 'c'.repeat(64), bytes: 30, location: 'public' },
     ],
   });

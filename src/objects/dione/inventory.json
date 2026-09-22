@@ -1,0 +1,281 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "dione-elevation-legend.webp",
+      "bytes": 240,
+      "sha256": "3266d5961e902b025cedbde6d5ead4a6df753e5cfc460d519b4fdf387326cbbd"
+    },
+    {
+      "location": "public",
+      "filename": "dione-elevation-shadow@2x.webp",
+      "bytes": 886254,
+      "sha256": "93a06a4f99133559c463fa2b6eceae62eecef3a28751111494501d9af0e0175d"
+    },
+    {
+      "location": "public",
+      "filename": "dione-elevation-surface@2x.webp",
+      "bytes": 2054294,
+      "sha256": "f48efed988bbf1b9bf72c4b7d0065848ccae12e54d71c9269844eddf11cd09cf"
+    },
+    {
+      "location": "public",
+      "filename": "dione-elevation-thumbnail.webp",
+      "bytes": 6576,
+      "sha256": "a78215a343e7974777db0d8bf527f09c685d5617477eafa5f75fdca1c8ebbbfd"
+    },
+    {
+      "location": "public",
+      "filename": "dione-enhanced-shadow@2x.webp",
+      "bytes": 4712668,
+      "sha256": "c34d0781088479549582887b5b2f0d9a00f0a14f01f4689abd227ee7300e9ce4"
+    },
+    {
+      "location": "public",
+      "filename": "dione-enhanced-surface@2x.webp",
+      "bytes": 11021550,
+      "sha256": "efb2f5ae5b19aefa8a3406015c18e4883cb42f48bad1cf36c9f57b93454776f4"
+    },
+    {
+      "location": "public",
+      "filename": "dione-enhanced-thumbnail.webp",
+      "bytes": 5686,
+      "sha256": "6c7afd5c45392cf68f8911a67d52a8b249c5a5da062a13ba795c4bd94fc0d5d0"
+    },
+    {
+      "location": "public",
+      "filename": "dione-features.json",
+      "bytes": 213600,
+      "sha256": "b45ba3cdcdfd680af13f55c263805cacf624dac93462d1b775507e1242b45c50"
+    },
+    {
+      "location": "public",
+      "filename": "dione-ice-absorption-legend.webp",
+      "bytes": 162,
+      "sha256": "989724748ca27ff3f9100c05b4eeb7b936f787550b41223655a1fbee8c888477"
+    },
+    {
+      "location": "public",
+      "filename": "dione-ice-absorption-shadow@2x.webp",
+      "bytes": 172764,
+      "sha256": "6ea99c98f0e9057448203c19e81d13216adbb3001441385c7c8342202a74044d"
+    },
+    {
+      "location": "public",
+      "filename": "dione-ice-absorption-surface@2x.webp",
+      "bytes": 176488,
+      "sha256": "e65806a301e6c294333e894000c3c1466e1f45589fcaf720451ac3ab02b77e65"
+    },
+    {
+      "location": "public",
+      "filename": "dione-ice-absorption-thumbnail.webp",
+      "bytes": 3876,
+      "sha256": "4a4ddd8621409cdc530a663df53cd069ec83007dd35c81ee3f0297c88d02ddc0"
+    },
+    {
+      "location": "public",
+      "filename": "dione-infrared-shadow@2x.webp",
+      "bytes": 207728,
+      "sha256": "e3feae7966aa3be98bdce43e5642fcc4127b04521930f90416ee3d78f39f650d"
+    },
+    {
+      "location": "public",
+      "filename": "dione-infrared-surface@2x.webp",
+      "bytes": 256740,
+      "sha256": "a70a8845f1ac836083d601ae093e3a2879b3ea961ece544396c257f1f6a62068"
+    },
+    {
+      "location": "public",
+      "filename": "dione-infrared-thumbnail.webp",
+      "bytes": 5282,
+      "sha256": "3ffff60af0ed43572dea9d7204dd9a03283ec1fdb02a2762a43f382d0a99197f"
+    },
+    {
+      "location": "public",
+      "filename": "dione-normal-shadow@2x.webp",
+      "bytes": 5557576,
+      "sha256": "a0375dab09c2ec64e97bae05545f3e3ad86497df7f2925205127f408b7b34d39"
+    },
+    {
+      "location": "public",
+      "filename": "dione-normal-surface@2x.webp",
+      "bytes": 11325294,
+      "sha256": "5cd9c0e0b08c18796f32224c9dc9f58a1b3f5e67eaf135235d741e3ae6d5107d"
+    },
+    {
+      "location": "public",
+      "filename": "dione-normal-thumbnail.webp",
+      "bytes": 3404,
+      "sha256": "3fa0418a8627fd84fad2af811005c1cee1d2e707ceef5b6d9e81748a76c76175"
+    },
+    {
+      "location": "public",
+      "filename": "dione-relative-albedo-legend.webp",
+      "bytes": 276,
+      "sha256": "f61e0581d01ee4f64e6fdc197976a02ff5d748a017b594b59ba493725548f6f7"
+    },
+    {
+      "location": "public",
+      "filename": "dione-relative-albedo-shadow@2x.webp",
+      "bytes": 8595380,
+      "sha256": "06464331a2fc5c92b6df2730013d339b1c7781ff426b7556925372689c64a144"
+    },
+    {
+      "location": "public",
+      "filename": "dione-relative-albedo-surface@2x.webp",
+      "bytes": 14142908,
+      "sha256": "97d22b03c30c1029482b686210646d3ccf7a42d67e2900dbab75f1cbfce9596d"
+    },
+    {
+      "location": "public",
+      "filename": "dione-relative-albedo-thumbnail.webp",
+      "bytes": 3820,
+      "sha256": "3ca9e442cf8651e4a6fec3b07a8ed444d28474af6feae454c13bf020e654c360"
+    },
+    {
+      "location": "public",
+      "filename": "dione-shape-shadow@2x.webp",
+      "bytes": 158558,
+      "sha256": "340283c619c35441066a2c2b55eebba4df8f09d8d74d1ab03f808f623f3589aa"
+    },
+    {
+      "location": "public",
+      "filename": "dione-shape-surface@2x.webp",
+      "bytes": 130846,
+      "sha256": "f1d66fe915d73f4afb66dd953fc0976fb3932a1627e198dd7b97fdbe188590fd"
+    },
+    {
+      "location": "public",
+      "filename": "dione-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1733,
+      "sha256": "8f2d451a6ff85cfa6250a619028d42bd7a7908ff261f4f9cc2ca8c75bbfa7042"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 5764,
+      "sha256": "dae42c264066372d10d8edc7196d47d4bbb90f3396217be5c1b80509f7a27408"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 1877,
+      "sha256": "d2c4bdec3f544c733f977f2a5e8ba6a96b233d3dba55ccebad8e7ad95f5e7a74"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 662,
+      "sha256": "1e3fea658159ec3e5ec86cd6aaa27bcefd6e01fe9459e5528ae3163c84e2b1b4"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 4276,
+      "sha256": "9c2fff97138fc73afa09f85a72683bbf62a38b9c81f8efe5319b36fc0ae6a8fa"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 11656,
+      "sha256": "c27ba7c033610a4fb09af1d9c39af7b646d9ba8841f4228670080a073149023d"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 556,
+      "sha256": "543640a82d3b1530a4181daeb55e9092bb70e775c956e0567ddd5ed2c95728fb"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 68810,
+      "sha256": "b7a3a7865e3ab05f3deb769e42c33e2882969863ab1d755fc6dc2f6aa7dd6203"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/enhanced.webp",
+      "bytes": 79992,
+      "sha256": "09b4d6762086c7a813d887d390e979202326d3ee87f9576d50187680635c9d12"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ice-absorption.webp",
+      "bytes": 68482,
+      "sha256": "8b813097d1f2bcc08848ce78b295bcedd9b0120c5e55ef634040583159b807bf"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/infrared.webp",
+      "bytes": 113024,
+      "sha256": "8db1cfd198a71908b65a4d1ca20fff2cf0733763bd55ea9a15c794dbc88e5924"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 88360,
+      "sha256": "69ca687ff4ec71716359e3dad6f45f6153c97f49cbee712983715ba0867f8601"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/relative-albedo.webp",
+      "bytes": 225062,
+      "sha256": "c1491d72b2d54c092c11204b9e4508899b009c3508025b981fb48e84ebb095a7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 422,
+      "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 1586896,
+      "sha256": "0e16b6b65fd61b08bc455b021f053c7a7a76ce125e92e49433902e47cf73dd5d"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 1536340,
+      "sha256": "a906850d925d8d5113a5ae7d7c0abc0d830ddfe5451e8d3b07baa7c3bdbce696"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1030,
+      "sha256": "1ff618ff5e1667f8392ba78ccd177bef4e754521744204cb13877afc7302b1d4"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 619,
+      "sha256": "ea391c0d100591e67e99cb9fba1258d3f67674df168203341e79573e44c84bce"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 11659,
+      "sha256": "95268eb41c72c6c3dcd36cd1606d626c8548ba9be582922df818c4874ce8bf44"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1851,
+      "sha256": "9cf61203efd89c91edeeba5775f074c044fbfec6427229651ce049cc1b00ff83"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1220,
+      "sha256": "66150d9bd04ea8dbe9ec33cfbe46d0c297a086ad10ccc5b7b082502dccc7f919"
+    }
+  ]
+}

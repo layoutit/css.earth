@@ -1,7 +1,7 @@
 import { copyFile, lstat, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requirePreparedAssetManifest, requireRuntimeAssetManifest } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
 
 /** Refuse links at every component, including the inventory itself. Never follow PR-controlled paths. */
@@ -35,22 +35,19 @@ export async function stagePublishedAssets({ artifactRoot, sourceRoot, root, obj
   const base = `src/objects/${objectId}`;
   const inventories: { path: string; bytes: Buffer | null }[] = [];
   const files = new Set<string>();
-  for (const kind of ['runtime', 'prepared'] as const) {
-    const path = `${base}/${kind}-assets.json`;
-    const committed = await regularPath(sourceRoot, path, true);
-    const uploaded = await regularPath(artifactRoot, path, true);
-    if (committed !== uploaded) throw new Error(`Artifact inventory differs from the PR commit: ${path}`);
-    if (!committed) {
-      inventories.push({ path, bytes: null });
-      continue;
-    }
+  const path = `${base}/inventory.json`;
+  const committed = await regularPath(sourceRoot, path, true);
+  const uploaded = await regularPath(artifactRoot, path, true);
+  if (committed !== uploaded) throw new Error(`Artifact inventory differs from the PR commit: ${path}`);
+  if (!committed) inventories.push({ path, bytes: null });
+  else {
     const bytes = await readFile(resolve(artifactRoot, path));
     if (!bytes.equals(await readFile(resolve(sourceRoot, path)))) throw new Error(`Artifact inventory differs from the PR commit: ${path}`);
     const value: unknown = JSON.parse(bytes.toString('utf8'));
-    const manifest = kind === 'runtime' ? requireRuntimeAssetManifest(objectId, value) : requirePreparedAssetManifest(objectId, value);
+    const manifest = requireInventory(objectId, value);
     inventories.push({ path, bytes });
     for (const asset of manifest.assets) {
-      const directory = manifest.resourceRoot === 'prepared' && asset.location !== 'public' ? `${base}/prepared` : `public/scenes/${objectId}`;
+      const directory = asset.location === 'prepared' ? `${base}/prepared` : `public/scenes/${objectId}`;
       const assetPath = `${directory}/${asset.filename}`;
       await regularPath(artifactRoot, assetPath);
       const content = await readFile(resolve(artifactRoot, assetPath));

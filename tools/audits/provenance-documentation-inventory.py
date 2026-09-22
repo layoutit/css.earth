@@ -112,7 +112,7 @@ def summarize(label, entries):
         raise RuntimeError(f'No registered bodies found in {label}; update registry discovery before using this inventory')
     # Read the selected Git snapshot, never execute its JavaScript or use local assets.
     manifests = [p for p in content if p.endswith('/source/manifest.json')]
-    required = ['README.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','runtime-assets.json']
+    required = ['README.md','NOTICE.md','source/manifest.json','object.json','prepared/provenance.json','inventory.json']
     missing = {suffix:[i for i in registry_ids if f'src/objects/{i}/{suffix}' not in entries] for suffix in required}
     source_counts, rights_counts, bases = collections.Counter(), collections.Counter(), collections.Counter()
     invalid_json = []

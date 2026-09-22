@@ -1,0 +1,185 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "ce-tauri-context-color@2x.webp",
+      "bytes": 142,
+      "sha256": "793d4eafe032e7678cfbc3dfbd7a35b07c0ba425f8df61374519f77406b5c623"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-context-pionier-2016-11@2x.webp",
+      "bytes": 53660,
+      "sha256": "feb1898d96f2bf6a73f83ad2d4ecfadbbab8fb1d29baa28a13e9ca8cfed59812"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-context-pionier-2016-12@2x.webp",
+      "bytes": 59090,
+      "sha256": "66ccf85b41062c7fcddc0a9bbf39213a93b2a698732f99fc37fbb5e553672da9"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-lens-color.webp",
+      "bytes": 44,
+      "sha256": "8a21d930b2f5260cdcb688b36ac190139a8ab5554e0398793854fabb8ea847b6"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-lens-pionier-2016-11.webp",
+      "bytes": 384,
+      "sha256": "ee656e8275e054467e227a44ec063003184ce2070f7b8e6aee8f4a9137c873a5"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-lens-pionier-2016-12.webp",
+      "bytes": 432,
+      "sha256": "91f790a71bd852f6e968203f2d1f2066e74dbcf002f892a473986589c84ebbeb"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-limb-color@2x.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-limb-pionier-2016-11@2x.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-limb-pionier-2016-12@2x.webp",
+      "bytes": 84,
+      "sha256": "1f9883c4642bcb8773c409d200ca3802026cdae505ccda58fada3892667b3232"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-poles-color@2x.webp",
+      "bytes": 1340,
+      "sha256": "0d7d862095a245bded4a0b14cf0516c8207df4b10d61742e8b81a69849497d48"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-poles-pionier-2016-11@2x.webp",
+      "bytes": 42818,
+      "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-poles-pionier-2016-12@2x.webp",
+      "bytes": 42818,
+      "sha256": "132cfae211110faaf3103011459fbe90983a54019e06aa54c6a98f6bbdcfc9be"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-surface-color@2x.webp",
+      "bytes": 178,
+      "sha256": "3359a05f10b711154c1def40682f2549bb902314501004a44d3686ed19d228b6"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-surface-pionier-2016-11@2x.webp",
+      "bytes": 72058,
+      "sha256": "8f9171c12cfea3e7b3eb1b71ed4308cfcee26626381f23b2d6afae751a40b7ab"
+    },
+    {
+      "location": "public",
+      "filename": "ce-tauri-surface-pionier-2016-12@2x.webp",
+      "bytes": 76512,
+      "sha256": "e4a19ee08feb5e656de754d689b566b6708e741ca36cf30014f74b8daa9c71b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 15377,
+      "sha256": "08c1c3c0cdcb224723e439466b8816c92df059d2517fdd92873e4d7d32b7f332"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1543,
+      "sha256": "6e333a7ca775be0b15d0cc1e5dbd889842824be6354cdd3e7ccc67b53864325f"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 5826,
+      "sha256": "6ecdbe15eaecdc3465926a34fc947c12a62a1bd939d772b3c0472972f75de326"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3388,
+      "sha256": "101a2c2a560c74693e64731efc466b722bce1bb9945a7d8007ec78ea678cbfad"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 5481,
+      "sha256": "0243b3485af6485be028a25f88129d7d6cca767127c3964d8ef3548fa2d6a3ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 260,
+      "sha256": "d8b92256ee874dfe39a69ad50cd11ac1d57f0bde10010cae14f88caed74b8198"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/color.webp",
+      "bytes": 450,
+      "sha256": "b9123afa7f2adac9e4a8bdbc080c637de21defc98460c92fd5f7d35708d9ce30"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pionier-2016-11.webp",
+      "bytes": 14054,
+      "sha256": "4a50fc162b9c28506536f6d404ec0be8a1270da9f3ca20192b304ee6ce85cecc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/pionier-2016-12.webp",
+      "bytes": 14332,
+      "sha256": "3fc50fda0ddaa588e8a16814f5174e551f2ffc347e4bf6e675f22a0e40641ead"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 362674,
+      "sha256": "a968ce7063072990cd2c20ce3f731f29d485fa6f975df161da5b7e27697bdbc7"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 347927,
+      "sha256": "fc9483d0de0f748c1bc56e259ef76b927d509a45c0918b88a422c9aa40e67a6f"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1051,
+      "sha256": "5f00882c6e05d721d1519ba9ae1ba802c53e2026ac8924f3cc0d91aa1694795b"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1525,
+      "sha256": "cf0ae5508f1754b3ca0c8ad9ce4132633fa60242dddaebb1bd4e06f243e68b0b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1168,
+      "sha256": "cb3bedaa1abfbf926fa8ddd7adb75ca836ae87031f07a304cc24441891f57ea3"
+    }
+  ]
+}

@@ -26,16 +26,16 @@ test('runtime inventory comes from nested JSON and CSS image addresses with exac
  const data=Buffer.from('a'),other=Buffer.from('b');await writeFile(join(root,'one.webp'),data);await writeFile(join(root,'two.webp'),other);
  const values=[{url:'/scenes/open-body/one.webp',style:'background-image:url("/scenes/open-body/two.webp")',external:'/scenes/different/ignored.webp'}];
  assert.deepEqual(collectRuntimeAssetUrls('open-body',...values),['/scenes/open-body/one.webp','/scenes/open-body/two.webp']);
- const output=join(root,'..',`manifest-${Date.now()}.json`);
+ const objectDirectory=join(root,'..',`object-${Date.now()}`);await mkdir(objectDirectory,{recursive:true});
  try{
-  const manifest=await prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values});assert.equal(manifest.assets.length,2);
-  await assert.rejects(prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values:[values[0].url]}),/closure/);
-  const subset=await prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values:[values[0].url],allowPreparationArtifacts:true});
+  const manifest=await prepareRuntimeManifest({id:'open-body',publicRoot:root,objectDirectory,values});assert.equal(manifest.assets.length,2);
+  await assert.rejects(prepareRuntimeManifest({id:'open-body',publicRoot:root,objectDirectory,values:[values[0].url]}),/closure/);
+  const subset=await prepareRuntimeManifest({id:'open-body',publicRoot:root,objectDirectory,values:[values[0].url],allowPreparationArtifacts:true});
   assert.deepEqual(subset.assets.map(asset=>asset.filename),['one.webp']);
-  await assert.rejects(prepareRuntimeManifest({id:'open-body',publicRoot:root,manifestPath:output,values:['/scenes/open-body/missing.webp'],allowPreparationArtifacts:true}),/ENOENT/);
+  await assert.rejects(prepareRuntimeManifest({id:'open-body',publicRoot:root,objectDirectory,values:['/scenes/open-body/missing.webp'],allowPreparationArtifacts:true}),/not a regular file|ENOENT/);
   await writeFile(join(root,'leftover.webp'),'leftover');await assembleRuntimeAssets({id:'open-body',manifest,productionRoot:root});assert.deepEqual(await readdir(root),['one.webp','two.webp']);
   await writeFile(join(root,'one.webp'),'corrupt');await writeFile(join(root,'evidence.txt'),'keep');await assert.rejects(assembleRuntimeAssets({id:'open-body',manifest,productionRoot:root}),/drifted/);assert.equal(await readFile(join(root,'evidence.txt'),'utf8'),'keep');
- }finally{await rm(output,{force:true});}
+ }finally{await rm(objectDirectory,{recursive:true,force:true});}
 }));
 test('acquisition runs declared groups and validates downloaded bytes before publication',()=>temporary(async root=>{
  const data=Buffer.from('remote pin'),source={...entry('acquired.txt',data),origin:'https://example.org/source'},manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[source],generatedIntermediates:[],documents:[]};

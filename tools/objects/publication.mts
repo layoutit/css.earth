@@ -1,4 +1,5 @@
 import { sha256 } from '../../src/platform/sha256.mts';
+import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import type { RuntimeManifest } from './operations.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -25,7 +26,7 @@ export async function readPreparedJsonOutputs(directory: string) {
 /** Preflight images and describe their writes; metadata joins the same set below. */
 export async function preparedAssetWrites({ id, stage, destination, previous, manifest }: { id: string; stage: string; destination: string; previous: RuntimeManifest | null; manifest: RuntimeManifest }): Promise<PreparedOutput[]> {
   if (!/^[a-z][a-z0-9-]*$/.test(id)) throw new TypeError('Invalid publication identity.');
-  if (manifest.schema !== `css${id}-runtime-assets@1` || !manifest.assets?.length) throw new TypeError('Invalid prepared publication manifest.');
+  if (!manifest.assets?.length) throw new TypeError('Invalid prepared publication manifest.');
   const names = new Set<string>();
   for (const asset of manifest.assets) {
     if (!safe(asset.filename) || names.has(asset.filename)) throw new TypeError('Unsafe or duplicate prepared publication asset.');
@@ -56,17 +57,17 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
 }) {
   const data = resolve(stage, 'prepared'), outputs = await readPreparedJsonOutputs(data);
   const { parseRuntimeManifest } = await import('./dist/operations.js');
-  const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'runtime-assets.json')), id);
-  const oldManifest = await optionalJson(resolve(objectDirectory, 'runtime-assets.json'));
-  const previous = oldManifest === null ? null : parseRuntimeManifest(oldManifest, id);
+  const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
+  const current = await readInventory(id, objectDirectory);
+  const previous = current === null ? null : parseRuntimeManifest(current, id);
   const writes = await preparedAssetWrites({ id, stage: resolve(stage, 'public'), destination: publicDirectory, previous, manifest });
   const minimaps = minimapPaths(await optionalJson(resolve(data, 'minimaps.json')));
   const oldMinimaps = minimapPaths(await optionalJson(resolve(outputDirectory, 'minimaps.json')));
   writes.push(...minimaps.map(path => ({ path: resolve(outputDirectory, path), source: resolve(data, path) })),
     ...oldMinimaps.filter(path => !minimaps.includes(path)).map(path => ({ path: resolve(outputDirectory, path), remove: true as const })),
     // The staged inventory is published once, at the body root; prepared/ never carries a copy.
-    ...outputs.filter(entry => entry.filename !== 'runtime-assets.json').map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
-    { path: resolve(objectDirectory, 'runtime-assets.json'), source: resolve(data, 'runtime-assets.json') },
+    ...outputs.filter(entry => entry.filename !== 'inventory.json').map(entry => ({ path: resolve(outputDirectory, entry.filename), source: entry.path })),
+    { path: resolve(objectDirectory, 'inventory.json'), text: inventoryText(mergeInventory(current, 'public', manifest.assets)) },
     { path: resolve(objectDirectory, 'object.json'), source: resolve(stage, 'object.json') });
   JSON.parse(await readFile(resolve(stage, 'object.json'), 'utf8'));
   await writePreparedSet(writes);
