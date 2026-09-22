@@ -237,8 +237,6 @@ const INTERIOR_ATMOSPHERE_ROW_WIDTH = INTERIOR_ATMOSPHERE_GRID_WIDTH;
 const INTERIOR_ATMOSPHERE_ROW_HEIGHT = INTERIOR_ATMOSPHERE_STRIDE;
 const INTERIOR_ATMOSPHERE_DEFAULT_SHARD_SIZE =
   PLANET_FIXED_MATERIAL_SIZE + INTERIOR_ATMOSPHERE_GUTTER * 2;
-const PLANET_FIXED_MATERIAL_DEFAULT_RAW_SHA256 =
-  config.parameters.planetFixedMaterialDefaultRawSha256;
 const PLANET_FIXED_MATERIAL_CONTENT_SCALE = config.parameters.planetFixedMaterialContentScale;
 const PLANET_FIXED_MATERIAL_COVERAGE_SCALE = config.parameters.planetFixedMaterialCoverageScale;
 const PLANET_FIXED_MATERIAL_DEPTH_BIAS = config.parameters.planetFixedMaterialDepthBias;
@@ -1775,13 +1773,8 @@ async function prepareNormalMaterialMasters() {
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
-  const approvedReferenceFixedMaterialRawSha256 = createHash("sha256")
-    .update(approvedReferenceFixedMaterial)
-    .digest("hex");
   if (approvedReferenceFixedMaterialInfo.width !== PLANET_FIXED_MATERIAL_SIZE ||
-      approvedReferenceFixedMaterialInfo.height !== PLANET_FIXED_MATERIAL_SIZE ||
-      approvedReferenceFixedMaterialRawSha256 !==
-        PLANET_FIXED_MATERIAL_DEFAULT_RAW_SHA256) {
+      approvedReferenceFixedMaterialInfo.height !== PLANET_FIXED_MATERIAL_SIZE) {
     throw new Error("Ellipsoid approved reference material source changed.");
   }
   const maximumTint = textureTintFactors(

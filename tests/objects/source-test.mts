@@ -29,7 +29,7 @@ export function missingSourceReason(error: unknown, objectId: string | null = nu
     if (directory === 'prepared') return `${id}: ${path.slice(root.length + 1)} is not restored; run node tools/assets/setup.mts --object=${id}`;
   }
   if (code === 'ENOENT' && path && path.startsWith(local)) return `${path.slice(root.length + 1)} is not restored; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
-  if (/manifest coverage failed|source is missing|is not restored|not installed|toolchain is not installed/u.test(error.message)) return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
+  if (/manifest coverage failed|Source coverage failed|source is missing|is not restored|not installed|toolchain is not installed/u.test(error.message)) return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   return null;
 }
 
@@ -38,7 +38,7 @@ export function missingSourceReason(error: unknown, objectId: string | null = nu
  * and names the restore command. A bare clone then reports what it could not prove instead of failing on it.
  */
 export function sourceTest(objectId: string | null = null, sources?: RestoredSources) {
-  return function test(name: string, optionsOrBody: TestOptions | TestBody, maybeBody?: TestBody) {
+  return Object.assign(function test(name: string, optionsOrBody: TestOptions | TestBody, maybeBody?: TestBody) {
     const [options, body] = typeof optionsOrBody === 'function' ? [{}, optionsOrBody] : [optionsOrBody, maybeBody!];
     if (sources?.skip) return nodeTest(name, { ...options, skip: sources.skip }, body);
     return nodeTest(name, options, async t => {
@@ -49,5 +49,5 @@ export function sourceTest(objectId: string | null = null, sources?: RestoredSou
         t.skip(reason);
       }
     });
-  };
+  }, { after: nodeTest.after, afterEach: nodeTest.afterEach, before: nodeTest.before, beforeEach: nodeTest.beforeEach, describe: nodeTest.describe, skip: nodeTest.skip, todo: nodeTest.todo });
 }

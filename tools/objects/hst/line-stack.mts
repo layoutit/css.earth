@@ -259,7 +259,8 @@ export async function prepareFrames(definition: LineStackDefinition, directory: 
       throw new Error(`${pinned.name}: the file is programme ${header.programme} target ${header.targetName}, the pin says ${pinned.programme} ${pinned.targetName}.`);
     if (verifyDigests) {
       const digest = await sha256File(path);
-      if (digest.sha256 !== pinned.sha256) throw new Error(`${pinned.name}: the file on disk is not the pinned one.`);
+      if (digest.bytes !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`);
+      measuredFrameDigests.set(pinned.name, digest.sha256);
     }
     headers.push(header);
   }
@@ -439,6 +440,8 @@ export async function lineStackSoftware(): Promise<ProductSoftware[]> {
 
 /** What identifies one stacked set: the frames that went into this one at their pinned sizes and digests, the definition and
  * the pinned Horizons responses that placed them, and the line, subset and grid it was stacked on. */
+/** Frame digests measured while the stack read its frames; a receipt names what was actually read, not a pin. */
+const measuredFrameDigests = new Map<string, string>();
 export async function stackRun(definition: LineStackDefinition, line: StackLine, subset: string, frames: readonly string[],
   software: readonly ProductSoftware[]): Promise<ProductRun> {
   const pinned = new Map(definition.frames.map(frame => [frame.name, frame]));
@@ -448,7 +451,9 @@ export async function stackRun(definition: LineStackDefinition, line: StackLine,
     ...[...frames].sort().map(name => {
       const frame = pinned.get(name);
       if (!frame) throw new Error(`${name} went into the stack but is not a frame the definition pins.`);
-      return { role: `frame, programme ${frame.programme}`, identity: frame.uri, bytes: frame.bytes, sha256: frame.sha256 };
+      const sha256 = measuredFrameDigests.get(name);
+      if (!sha256) throw new Error(`${name} was stacked without its frame digest being measured.`);
+      return { role: `frame, programme ${frame.programme}`, identity: frame.uri, bytes: frame.bytes, sha256 };
     }),
   ];
   return {

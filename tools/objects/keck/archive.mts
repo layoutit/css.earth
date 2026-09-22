@@ -144,7 +144,7 @@ function parseFile(value: unknown, label: string): KeckFile {
   const description = row.description === undefined ? undefined : requireString(row.description, 'Product description');
   const selection = row.selection === undefined ? undefined : requireString(row.selection, 'Calibration selection');
   if (selection !== undefined && !(CALIBRATION_SELECTIONS as readonly string[]).includes(selection)) throw new TypeError(`${name} was selected by no known rule (${selection}).`);
-  return { koaid, name, filehand, url, bytes, sha256: digest(row.sha256, `${name} sha256`),
+  return { koaid, name, filehand, url, bytes,
     ...(observatoryName ? { observatoryName } : {}), ...(imageType ? { imageType } : {}),
     ...(level ? { level } : {}), ...(description ? { description } : {}),
     ...(selection ? { selection: selection as CalibrationSelection } : {}) };

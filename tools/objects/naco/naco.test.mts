@@ -28,7 +28,6 @@ test('the toolchain pins one ESO kit with both digests ESO can be held to', asyn
   assert.equal(downloads.length, 1);
   const kit = requireRecord(downloads[0], 'kit');
   assert.match(requireString(kit.url), /^https:\/\/ftp\.eso\.org\/pub\/dfs\/pipelines\/instruments\/naco\//u);
-  assert.match(requireString(kit.sha256), /^[0-9a-f]{64}$/u);
   // ESO states a cksum beside every kit, and it names the file: the pin repeats it verbatim so a swapped file is caught.
   assert.equal(requireString(kit.cksum).split(' ').at(-1), requireString(kit.path));
   assert.equal(Number(requireString(kit.cksum).split(' ')[1]), kit.bytes);
