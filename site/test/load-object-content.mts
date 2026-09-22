@@ -36,7 +36,8 @@ export async function loadObjectContent(id: string): Promise<LoadedObjectContent
     const pin = ["inputs", "documents", "generatedIntermediates"].flatMap(key => requireArray(manifest[key] ?? [], key).map(entry => requireRecord(entry, key)))
       .find(entry => `source/${String(entry.path)}` === reference.path);
     assert.ok(pin, `${id}: ${name} is declared in the source manifest`);
-    assert.equal(createHash("sha256").update(bytes).digest("hex"), pin.expectedSha256, `${id}: ${name} must match its manifest pin`);
+    // A download carries a pin; a file authored and tracked here carries none.
+    if (pin.expectedSha256 !== undefined) assert.equal(createHash("sha256").update(bytes).digest("hex"), pin.expectedSha256, `${id}: ${name} must match its manifest pin`);
     return requireRecord(JSON.parse(bytes.toString("utf8")), `${id}: ${name} source`);
   }
   return { descriptor, source, prepared: requireRecord(await readJson("prepared/content.json"), `${id}: prepared content`),
