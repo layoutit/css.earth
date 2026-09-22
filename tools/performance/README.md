@@ -20,6 +20,32 @@ NODE_OPTIONS=--max-old-space-size=6144 node tools/performance/trace-brief.mts /p
 Run large reports sequentially. The loader validates JSON/gzip completion and
 records the compressed SHA-256 and decoded byte count.
 
+## iOS Simulator
+
+`ios-capture.mts` records one moment of the site in Safari on the booted iOS Simulator:
+
+```sh
+node tools/performance/ios-capture.mts --name typing --open http://127.0.0.1:4261/ --settle 25 --steps steps.json --dist dist
+node tools/performance/ios-capture.mts --name by-hand --seconds 15
+```
+
+It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of
+`{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`,
+`{ "wait": seconds }` and `{ "screenshot": "name" }`, in simulator points, sent as real touch input. `--open` loads the
+page in the visible tab first, so each capture starts from a fresh load. Check the screenshots before reading any
+numbers: a tap that lands on the wrong control records the wrong moment.
+
+For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then
+`astro build --mode performance`, and pass that output as `--dist`. Output goes to
+`output/performance/ios-captures/<name>-<time>/`: `report.json`, a `README.md` summary, `native.trace` (open it in
+Instruments) and the screenshots. The report holds JavaScript samples for the page and each worker, timeline time by
+record type and rendering frames, CPU per thread, memory by category after collection before and after, console
+messages, network requests, and the Time Profiler summary for Safari's web content process.
+
+The simulator runs on the Mac's CPU and GPU, so absolute times are not a phone's. Compare builds with the same steps.
+
+## Chrome traces
+
 For internal measurements, `navigation-capture.mts` records a Chrome trace and
 recorder metadata without screencasting or video encoding. Use the same saved
 `CSSEARTH_CAPTURE_ROUTE` and `CSSEARTH_CAPTURE_SCENARIO=drag-zoom` for a bounded,
