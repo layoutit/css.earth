@@ -175,7 +175,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   await run(projectRoot, ['site/minimap/prepare.mts', '--data-only']);
   // `prepared/page.json` is a build output, not a tracked file: restore-object-json writes it from
   // the restored runtime. The two steps below read it, so it has to exist before they run.
-  await run(projectRoot, ['tools/restore-object-json.mts']);
+  await run(projectRoot, ['tools/restore-object-json.mts', '--restored-only']);
   await run(projectRoot, ['tools/prepare-feature-index.mts']);
   await run(projectRoot, ['tools/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: real minimap and source catalogues generated.');
