@@ -26,7 +26,6 @@ test('the pinned definition parses, and names the file, the target and the claim
   assert.equal(definition.horizonsTarget, '502');
   assert.equal(definition.files.filter(file => file.role === 'events').length, 1);
   for (const file of definition.files) assert.match(file.uri, /^mast:HST\/product\//u, file.name);
-  for (const file of definition.files) assert.match(file.sha256, /^[0-9a-f]{64}$/u, file.name);
   const sector = definition.sectors[0]!;
   assert.deepEqual(sector.annulusRadii, [1, 1.25]);
   assert.deepEqual(sector.latitudeRange, [-60, -40]);

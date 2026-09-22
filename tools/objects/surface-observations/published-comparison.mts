@@ -19,7 +19,7 @@ export interface ComparisonColumn { label: string; frame: string | null; band: n
 export interface ComparisonSpec {
   schema: string; lensId: string; source: string; figure: string;
   /** The figure as an image object of a pinned paper: the manifest input, the object number and the decoded pixels' identity. */
-  document: { input: string; object: number; width: number; height: number; sha256: string };
+  document: { input: string; object: number; width: number; height: number };
   /** The rows of photographs and of the model the lens rides, counted from the top of the figure's dark band, how many image rows the
    * band holds, and how many lines of text each photograph panel prints at its top, which the body's outline leaves out. */
   rows: { image: number; model: number; count: number; labelLines: number };
@@ -34,11 +34,9 @@ export function parseComparisonSpec(value: unknown): ComparisonSpec {
   if (!/^https:\/\/doi\.org\/10\.\S+$/u.test(source)) throw new TypeError('A published comparison names its paper by DOI URL.');
   const document = requireRecord(record.document, 'document'), rows = requireRecord(record.rows, 'rows');
   const integer = (value: unknown, at: string) => { const n = requireFiniteNumber(value, at); if (!Number.isSafeInteger(n) || n < 0) throw new TypeError(`${at} is a whole number.`); return n; };
-  const sha256 = requireString(document.sha256, 'document sha256');
-  if (!/^[0-9a-f]{64}$/u.test(sha256)) throw new TypeError('The figure pixels are pinned by a SHA-256 digest.');
   const spec: ComparisonSpec = {
     schema: COMPARISON_SPEC_SCHEMA, lensId: requireString(record.lensId, 'lensId'), source, figure: requireString(record.figure, 'figure'),
-    document: { input: requireString(document.input, 'document input'), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height'), sha256 },
+    document: { input: requireString(document.input, 'document input'), object: integer(document.object, 'document object'), width: integer(document.width, 'figure width'), height: integer(document.height, 'figure height') },
     rows: { image: integer(rows.image, 'image row'), model: integer(rows.model, 'model row'), count: integer(rows.count, 'row count'),
       labelLines: rows.labelLines === undefined ? 0 : integer(rows.labelLines, 'label lines') },
     columns: requireArray(record.columns, 'columns').map((value, index) => {

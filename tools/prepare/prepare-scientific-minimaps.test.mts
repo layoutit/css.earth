@@ -1,4 +1,5 @@
 import assert from 'node:assert/strict';
+import type { TestContext } from 'node:test';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import {mkdtemp, mkdir, readFile, writeFile, rm} from 'node:fs/promises';
@@ -12,7 +13,7 @@ const colors=[[231,21,41],[13,211,31],[82,84,82]];
 const pixelSet=(data: Uint8Array)=>{
   const set=new Set<string>();for(let i=0;i<data.length;i+=3)set.add(data.subarray(i,i+3).join(','));return set;
 };
-async function directories(t: test.TestContext) {
+async function directories(t: TestContext) {
   const root=await mkdtemp(resolve(tmpdir(),'scientific-minimap-'));
   t.after(()=>rm(root,{recursive:true,force:true}));
   const source=resolve(root,'source'),publicDirectory=resolve(root,'public'),outputDirectory=resolve(root,'prepared');

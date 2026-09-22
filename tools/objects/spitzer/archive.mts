@@ -319,10 +319,9 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
     if (!(FILE_ROLES as readonly string[]).includes(role)) throw new TypeError(`${role} is not a pinned file role.`);
     const name = requireString(entry.name, 'file name'), url = requireString(entry.url, 'file url'), bytes = number(entry.bytes, `${name} bytes`);
     if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${name} has no byte count.`);
-    if (!HEX64.test(requireString(entry.sha256, 'file sha256'))) throw new TypeError(`${name} has no sha256.`);
     if (!url.startsWith(`${DATA}/sha/archive/`) || !url.endsWith(`/${name}`)) throw new TypeError(`${name} is not pinned to the Spitzer archive.`);
     if (entry.archiveMd5 !== undefined && !HEX32.test(requireString(entry.archiveMd5, 'archive md5'))) throw new TypeError(`${name} has an unreadable archive MD5.`);
-    return { role: role as FileRole, name, url, bytes, sha256: entry.sha256 as string, ...(entry.archiveMd5 === undefined ? {} : { archiveMd5: entry.archiveMd5 as string }) };
+    return { role: role as FileRole, name, url, bytes, ...(entry.archiveMd5 === undefined ? {} : { archiveMd5: entry.archiveMd5 as string }) };
   };
   const channels = requireArray(row.channels, 'channels').map(raw => {
     const entry = requireRecord(raw, 'channel'), channel = number(entry.channel, 'channel');

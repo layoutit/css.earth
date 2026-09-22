@@ -98,7 +98,7 @@ export interface StackSubset { readonly id: string; readonly rule: SubsetRule; r
 export interface StackRejection { readonly targetNamePattern: string; readonly minimumPrimaryLimbClearanceArcsec: number }
 export interface StackGrid { readonly pixels: number; readonly halfWidthRadii: number }
 export interface StackFrame {
-  readonly name: string; readonly uri: string; readonly bytes: number; readonly sha256: string;
+  readonly name: string; readonly uri: string; readonly bytes: number;
   readonly programme: string; readonly targetName: string;
   /** Why this frame is not stacked, as the rejection rule states it. Absent for a frame that is used. */
   readonly rejected?: string;
@@ -232,12 +232,12 @@ export function parseLineStack(value: unknown): LineStackDefinition {
     unlitTargetNamePattern: requireString(r.unlitTargetNamePattern, 'Unlit target pattern'),
   };
   const frames = requireArray(row.frames, 'Frames').map((entry): StackFrame => {
-    const frame = requireRecord(entry, 'Frame'), name = requireString(frame.name, 'Frame name'), sha256 = requireString(frame.sha256, 'Frame digest');
+    const frame = requireRecord(entry, 'Frame'), name = requireString(frame.name, 'Frame name');
     const bytes = requireFiniteNumber(frame.bytes, 'Frame bytes');
     if (!/^[a-z0-9]+_x2d\.fits$/u.test(name)) throw new TypeError(`${name} is not a rectified STIS product.`);
     if (requireString(frame.uri, 'Frame URI') !== `mast:HST/product/${name}`) throw new TypeError(`${name}: a frame is pinned by its MAST URI.`);
-    if (!/^[0-9a-f]{64}$/u.test(sha256) || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${name}: a frame is pinned by byte count and digest.`);
-    return { name, uri: `mast:HST/product/${name}`, bytes, sha256, programme: requireString(frame.programme, 'Frame programme'),
+    if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${name}: a frame carries its byte count.`);
+    return { name, uri: `mast:HST/product/${name}`, bytes, programme: requireString(frame.programme, 'Frame programme'),
       targetName: requireString(frame.targetName, 'Frame target'), ...frame.rejected === undefined ? {} : { rejected: requireString(frame.rejected, 'Rejection') } };
   });
   if (!frames.length) throw new TypeError('A stack pins at least one frame.');
