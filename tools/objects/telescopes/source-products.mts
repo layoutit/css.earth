@@ -110,7 +110,7 @@ export async function sourceRun(product: SourceProduct, dependencies: readonly C
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
   const inputs = await Promise.all(product.files.map(async file => ({ role: file.role, identity: file.origin, ...await fileSize(resolve(import.meta.dirname, '../../..', file.path)) })));
-  return { telescope: product.telescope, stage: 'source-qualification', inputs: inputs.concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!,sha256:d.sha256!}))),
+  return { telescope: product.telescope, stage: 'source-qualification', inputs: inputs.concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!}))),
     parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = []): Promise<LoadedSourceProduct[]> {

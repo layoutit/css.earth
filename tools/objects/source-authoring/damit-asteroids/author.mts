@@ -374,7 +374,7 @@ async function authorBody(body: Body) {
       catalog: { name, classification: 'asteroid', color: '#aaaaaa', distanceAu: semiMajorAxisAu, description: body.text.card, systemName: 'Solar System', context: {} },
     },
     schema: descriptor.schema, type: descriptor.type,
-    prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json', sha256: '0'.repeat(64) },
+    prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' },
   };
   await write(resolve(pkg, 'object.json'), json(object));
   const astronomyPath = resolve('packages/astronomy/data/bodies', `${id}.json`);

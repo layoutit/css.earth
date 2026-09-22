@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import { sourceBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
 import { acquireVolumeSource } from './acquisition.js';
@@ -44,7 +44,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
     // The preparation reference is output metadata; authored physical/model facts remain untouched.
     const { volume: _volume, preparation: _preparation, ...baseDescriptor } = descriptor;
     await writeFile(descriptorPath, JSON.stringify({ ...baseDescriptor, prepared: { format: envelope.format,
-      url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
+      url: relative(objectDirectory, outputPath).split('\\').join('/') } }, null, 2) + '\n');
   }
   await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
