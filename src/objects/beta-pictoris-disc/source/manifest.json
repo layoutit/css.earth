@@ -41,7 +41,7 @@
       "path": ".local/beta-pictoris-disc/observations/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
       "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
-      "title": "MAST JWST programme 4758 · jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "title": "MAST JWST programme 4758 \u00b7 jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r level-3 coronagraph mosaic",
       "credit": "NASA/ESA/CSA JWST, NIRCam GO programme 4758 (PI Y. Zhou); MAST (STScI); Zhou et al. 2026, arXiv:2607.13133. NASA/ESA HST/STIS, programmes 7125, 12551 and 12923, reduced by Ren et al. 2023, A&A 672, A114",
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/beta-pictoris-4758.json.",
@@ -64,7 +64,7 @@
       "path": ".local/beta-pictoris-disc/observations/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
       "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
-      "title": "MAST JWST programme 4758 · jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "title": "MAST JWST programme 4758 \u00b7 jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r level-3 coronagraph mosaic",
       "credit": "NASA/ESA/CSA JWST, NIRCam GO programme 4758 (PI Y. Zhou); MAST (STScI); Zhou et al. 2026, arXiv:2607.13133. NASA/ESA HST/STIS, programmes 7125, 12551 and 12923, reduced by Ren et al. 2023, A&A 672, A114",
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/beta-pictoris-4758.json.",
@@ -87,7 +87,7 @@
       "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f435w-roll1_drz.fits",
       "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
-      "title": "HST programme 9987 · ACS/HRC F435W, roll 1, PSF-subtracted and drizzled here",
+      "title": "HST programme 9987 \u00b7 ACS/HRC F435W, roll 1, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
@@ -110,7 +110,7 @@
       "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f435w-roll2_drz.fits",
       "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
-      "title": "HST programme 9987 · ACS/HRC F435W, roll 2, PSF-subtracted and drizzled here",
+      "title": "HST programme 9987 \u00b7 ACS/HRC F435W, roll 2, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
@@ -133,7 +133,7 @@
       "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f606w-roll1_drz.fits",
       "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
-      "title": "HST programme 9987 · ACS/HRC F606W, roll 1, PSF-subtracted and drizzled here",
+      "title": "HST programme 9987 \u00b7 ACS/HRC F606W, roll 1, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
@@ -156,7 +156,7 @@
       "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f606w-roll2_drz.fits",
       "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
-      "title": "HST programme 9987 · ACS/HRC F606W, roll 2, PSF-subtracted and drizzled here",
+      "title": "HST programme 9987 \u00b7 ACS/HRC F606W, roll 2, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
@@ -179,7 +179,7 @@
       "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f814w-roll1_drz.fits",
       "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
-      "title": "HST programme 9987 · ACS/HRC F814W, roll 1, PSF-subtracted and drizzled here",
+      "title": "HST programme 9987 \u00b7 ACS/HRC F814W, roll 1, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
@@ -202,7 +202,7 @@
       "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f814w-roll2_drz.fits",
       "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
       "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
-      "title": "HST programme 9987 · ACS/HRC F814W, roll 2, PSF-subtracted and drizzled here",
+      "title": "HST programme 9987 \u00b7 ACS/HRC F814W, roll 2, PSF-subtracted and drizzled here",
       "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
@@ -241,6 +241,30 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "reconstruction-colour-json",
+      "path": "src/objects/beta-pictoris-disc/source/reconstruction-colour.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned record of the colour lens reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships."
+      }
+    },
+    {
+      "id": "reconstruction-contrast-json",
+      "path": "src/objects/beta-pictoris-disc/source/reconstruction-contrast.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned record of the contrast lens reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships."
+      }
+    },
+    {
+      "id": "reconstruction-visible-json",
+      "path": "src/objects/beta-pictoris-disc/source/reconstruction-visible.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned record of the visible lens reconstruction: the grid it solved on, the shown image it was fitted to and the settings that produced the density this package ships."
       }
     }
   ],
