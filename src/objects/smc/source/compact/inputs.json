@@ -79,7 +79,7 @@
   },
   "envelope": {
     "path": "src/objects/smc/source/compact/envelope.json.gz",
-    "bytes": 245417
+    "bytes": 245420
   },
   "neutralSlices": {
     "path": "src/objects/smc/source/compact/neutral-slices.json.gz",
@@ -87,9 +87,6 @@
   },
   "neutralTextures": "src/objects/smc/source/compact/neutral",
   "priorCloud": {
-    "identityPin": {
-      "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json"
-    },
     "recipe": {
       "path": "src/objects/smc/source/compact/prior/volume.json",
       "bytes": 1369
@@ -135,8 +132,8 @@
         "path": "src/objects/smc/source/lenses/smc-horalek-wide/provenance.json"
       },
       "presentation": {
-        "label": "Horálek optical",
-        "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
+        "label": "Hor\u00e1lek optical",
+        "description": "Visible-light colors from Petr Hor\u00e1lek's NOIRLab wide-field photograph, painted onto the shared image-fitted SMC emission model. Its broad envelope follows the VMC-constrained ellipsoid shape hypothesis, not measured gas depth.",
         "sourceUrl": "https://noirlab.edu/public/images/iotw2615a/"
       },
       "brightness": {
