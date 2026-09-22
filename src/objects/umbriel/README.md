@@ -36,7 +36,7 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 
 The neutral grid marks missing observations. The separate limb-profile product uses an older control network displaced by degrees and does not provide continuous elevation coverage.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="umbriel-source-record"></a>
 <a id="dataset-survey"></a>

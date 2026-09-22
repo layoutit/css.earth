@@ -3,6 +3,41 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 91801,
+      "sha256": "04b8069b925f4fdfb544a5ca47f2a02121ef33db0a5fa5fc4aebd424a37d070f"
+    },
+    {
+      "filename": "authored-preparation.json",
+      "bytes": 1541,
+      "sha256": "b37667b1bbe9f616131cf8de5d99ef535ca8b6a81f19b1f54ca7f68db961a743"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 4402,
+      "sha256": "dc03ad2e0b22dbad93217d6b2530ef22b2715ab8751c30abd0089701063d63a6"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 416,
+      "sha256": "53722e54ff3f8aa0336b96899b0880a90c576ea337c0e02bb67255fbc3ace463"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 807,
+      "sha256": "2ff3cd3904a4a814377cf2db989f42f87df52c5d729b91ce7460969a1b553b4b"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 82,
+      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+    },
+    {
+      "filename": "minimaps/shape.webp",
+      "bytes": 422,
+      "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 438323,
       "sha256": "86bbd255d85c3049f51949658775f1c50d9a73eabf3ce3471b6e388ac11c09a8"
@@ -11,6 +46,26 @@
       "filename": "scene.json",
       "bytes": 340459,
       "sha256": "c70ddd2638d5be04facd54169fb0e72d1f8934a44c5c6b854e179c5315f450ca"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1050,
+      "sha256": "f21d4fdf3d4c7bf88c91c774b522108998c0cde0e666fdd8e34648dea296cfcf"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 670,
+      "sha256": "91d9175440bcd79091f5e4b7772ebe975da0f677ae155ed2f94b414d7d38212e"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 1047,
+      "sha256": "2072da0a3acdbde84b84ac84da0ca8b8e08527a61831028b95ddb102e4c444ee"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1155,
+      "sha256": "91ccbf2e8c4db715b8b7b804035f7a06d112f722ccc14976e00b13c02da2b640"
     }
   ]
 }

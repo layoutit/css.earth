@@ -3,6 +3,41 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 271,
+      "sha256": "4d34c464404237a74ff82af4ca902d6b60e08df9e6be247284a24265d3c95e3b"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 6102,
+      "sha256": "0c84ace4a4a41d2f68b56133bb537e78af64277043958970e0a7898a65074264"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 447,
+      "sha256": "5a15b542e07829c743ce7b7295b2686627222d750130c1f032a39e9e6135afc7"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 703,
+      "sha256": "ac1fd65939036b6c7bc5983fb421f4aa176255792ea7039d6a61fef434b4eab9"
+    },
+    {
+      "filename": "material.json",
+      "bytes": 1642,
+      "sha256": "dc337e8173ebad9b45cf8d5ee0613eb7b69a591b96f463a7738d89dd78e0e275"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 82,
+      "sha256": "d2c1add892ab2a7bb9eb7ecfbef8b3a837f8635234c8bf4b4fee2193a02adc18"
+    },
+    {
+      "filename": "minimaps/model.webp",
+      "bytes": 2958,
+      "sha256": "be75136ea4700a9799259b1b10080128445c3ca4cc3576f257b725eaf7aad9d2"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 459956,
       "sha256": "d3fceeb0273058027db6d8184cbd6ec4a768ac985f08aee3bc4b2b040029e47a"
@@ -11,6 +46,31 @@
       "filename": "scene.json",
       "bytes": 371272,
       "sha256": "15223e73a98b9757b902e854b78d3c5728cb49d4e9ff4a8d07f6a90b3ef3154d"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1029,
+      "sha256": "667cc328fb1a71eeb30bfea8d134c2013960596d000aa781c2286c7582d1bd41"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 698,
+      "sha256": "157fbcfdc34e506818ea6a5e05bb7f6f53e4ddf4cd92c568c9d0e47dc3fa6e11"
+    },
+    {
+      "filename": "surfaces.json",
+      "bytes": 1649,
+      "sha256": "592ffb5769d3d3d570b04928bc4b643aefb792cf5542d616946e071ef61b5e52"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 1745,
+      "sha256": "fc3684cc1ef7becb96a7d17ca494c76f75e11eee23446f53b79409d8e68fb3d4"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1158,
+      "sha256": "720be2691249d1ac1d24392fa50a74c43fd3c5dbd6db5bdb590834f5fd864fac"
     }
   ]
 }

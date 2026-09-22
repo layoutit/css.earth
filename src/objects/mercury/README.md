@@ -49,7 +49,7 @@ Feature outlines are not published nomenclature boundaries. Craters and faculae 
 
 Filled enhanced-color poles are not direct observations. The 366 km rendered outer shell is the difference between the cited radii; NASA separately describes it as “about 400 km.” The sky and display rotation are contextual, not an epoch-correct observation. The PSG source specifies no atmosphere structure, so no temperature-pressure chart is supplied.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="mercury-sources"></a>
 

@@ -21,7 +21,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 26704 × 13080 | 3.09 → 5.55 MB |
 
-Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/vesta/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/vesta/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 The [LAMO qualification record](evidence/lamo-2026-09-14.json) tests
 `86364a47f5ab7261a3716897b5e421e81abf5458`: three Vesta source/package checks,

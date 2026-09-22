@@ -40,7 +40,7 @@ The linked optical light-curve, occultation and thermophysical source products c
 
 The 2023 calibrated release is associated with Marciniak et al., Scaling slowly rotating asteroids with stellar occultations (A&A 679, A60). It scales a lightcurve-inversion shape with occultation evidence; the paired alternative pole solution is retained in the source survey, not blended into this model.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

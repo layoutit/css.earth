@@ -24,7 +24,7 @@ The nominal inferred axes have correlated uncertainties; independent extremes do
 
 The source workbook has a 2023-04-16 label despite event/year fields saying 2021; that label is not used as the epoch. The article’s CC BY-NC-ND 4.0 terms do not permit assuming that adapted graphics are freely redistributable; this package uses numerical facts and an authored ellipsoid.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="hiʻiaka-source-model"></a>
 <a id="selected-geometry"></a>

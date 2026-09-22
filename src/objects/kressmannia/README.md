@@ -39,7 +39,7 @@ Published alternate pole solutions remain plausible: model 383: λ=172°, β=34�
 
 The displayed phase is not propagated from the historical source epoch and does not claim exact current attitude.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

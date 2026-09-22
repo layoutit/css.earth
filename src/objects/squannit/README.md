@@ -27,7 +27,7 @@ Later mutual-event photometry favors roughly 1.3 times the original radar model�
 
 The fixed-epoch orbit is evaluated from Scheirich et al. (2021), Table 4 and section 2.2, with the phase-bearing source parameters retained in source/orbit/published-parameters.json. The 2026 scene extrapolates the 2000–2019 photometric fit. Summed individual phase sensitivities are about 55 degrees at this epoch; this is not a formal confidence interval, and no independent 2026 position product was acquired. The older radar pole checks the orbital plane but does not verify the extrapolated current phase. Geometry retains the original 2006 OBJ scale independently of the later photometric size preference. No current attitude or libration is predicted.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="squannit-source-model"></a>
 <a id="selected-geometry"></a>

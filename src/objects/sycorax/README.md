@@ -19,7 +19,7 @@ No dated test report is cited in the existing source notes.
 
 The minimum elongation assumes uniform reflectivity and an equator-on view. Equal short axes (b=c), volume normalization, pole, spin sense and meridian are display assumptions; polar compression and current attitude are not measured.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="sycorax-source-model"></a>
 <a id="selected-geometry"></a>

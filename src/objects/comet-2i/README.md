@@ -35,6 +35,6 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 The [shared distant-worlds methods](../../../tools/objects/source-authoring/distant-worlds/README.md) explain numerical authoring, acquisition, preparation and checks; this body's inputs are in [the interstellar input table](../../../tools/objects/source-authoring/interstellar/inputs.json). The existing terrestrial preparer and meshoptimizer turn the sphere into native PolyCSS `u` raster triangles.
 
-Edit source interpretation in [measurements](source/measurements.json) and the [preparation records](source/preparation/). Trace the generated result through [prepared provenance](prepared/provenance.json) and the [runtime asset inventory](runtime-assets.json). Common installation and usage belong in the [body contributor guide](../README.md).
+Edit source interpretation in [measurements](source/measurements.json) and the [preparation records](source/preparation/). Trace the generated result through prepared provenance (`prepared/provenance.json`) and the [runtime asset inventory](runtime-assets.json). Common installation and usage belong in the [body contributor guide](../README.md).
 
 </details>

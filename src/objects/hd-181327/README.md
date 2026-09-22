@@ -21,4 +21,4 @@ Catalogue colour: the swatch that search, the catalogue and the minimap show is 
 - The photosphere is a uniform colour with a modelled limb: the star is 0.27 mas across and no image or limb measurement exists ([ledger](investigations.json)).
 - The star's spin axis is not measured, so the sphere's axis is a display convention; the ring's own orientation is measured in the disc package.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

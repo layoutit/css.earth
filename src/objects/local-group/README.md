@@ -30,7 +30,7 @@ The [source manifest](source/manifest.json) inventories every retained input and
 
 ## Evidence
 
-The [catalogue tests](../../preparation/galaxy-catalog/galaxy-catalog.test.ts) compare regenerated catalogue, display sample and output receipt byte-for-byte, check cardinal coordinate axes independently, and retain the four detailed galaxies' published directions and adopted distances. The [prepared inventory](prepared/manifest.json) pins both delivered data files. These checks establish derivation and reproduction, not visual or scientific acceptance of a reconstruction.
+The [catalogue tests](../../preparation/galaxy-catalog/galaxy-catalog.test.ts) compare regenerated catalogue, display sample and output receipt byte-for-byte, check cardinal coordinate axes independently, and retain the four detailed galaxies' published directions and adopted distances. The prepared inventory (`prepared-receipt.json`) pins both delivered data files. These checks establish derivation and reproduction, not visual or scientific acceptance of a reconstruction.
 
 ## Known problems
 

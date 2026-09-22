@@ -20,7 +20,7 @@ The original convex mesh was not obtained. No surface texture, concavity, biloba
 
 Original thesis bytes are linked and hashed, not redistributed.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <details>
 <summary>Methods and source notes</summary>

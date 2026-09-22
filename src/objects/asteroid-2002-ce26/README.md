@@ -26,7 +26,7 @@ No calibrated registered optical mosaic, composition map or independent topograp
 
 Rotational phase is arbitrary, not a present-attitude ephemeris. The prior 3.2930 h synodic light-curve value is not substituted for the model period. The secondary's approximately 15.6 h orbit is not a primary spin period.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="2002-ce26-primary-sources-and-preparation"></a>
 <a id="model-identity-scale-and-spin"></a>

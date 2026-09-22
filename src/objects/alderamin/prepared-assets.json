@@ -3,6 +3,41 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 2584,
+      "sha256": "dac73f1447f5cb12cbf770a652c15144c3dfcb539d75237c67f23b01dbf410ca"
+    },
+    {
+      "filename": "authored-preparation.json",
+      "bytes": 1544,
+      "sha256": "d10d04c5f750a8528128d50f50cb26781511edfed495e3dcfd064e0223f712a7"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 6054,
+      "sha256": "9075c04e4fdd739b480c80dbae8d27625ec0a6abcea431dc65ff484033a13384"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 354,
+      "sha256": "b38765b313177e069c3df25c0251afd8412566e5b730bbb1e5a9699d8f6fed26"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 1229,
+      "sha256": "1fbaeef7e0928fc207befed49774fcc5e36d5c54ca9fe18751d696d143d375e4"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 82,
+      "sha256": "4ced2100d4ed8015b0566ad92ec4245ec6389385ef405fecc9d8536c6a29974f"
+    },
+    {
+      "filename": "minimaps/color.webp",
+      "bytes": 1714,
+      "sha256": "55fe73f8a05e2088fcbd8c6fcccbd91bc50286daa23f8bdeaa6e8d78284ccd88"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 352791,
       "sha256": "4b688fed3a0758a1b77292e1af1200664e96dbe5ff0d2c829bf0f0ed82e92fb9"
@@ -11,6 +46,26 @@
       "filename": "scene.json",
       "bytes": 343091,
       "sha256": "8e7a2e8543a7a6af87affb99f32d10f47fea9643ea2e90614467c2db9f76de2d"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1052,
+      "sha256": "3bfb30a07781ba0b71a5e3ceb32800059b3e263bc92b4df8b0b9b5f99fc76664"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 1060,
+      "sha256": "ff77cffc2b18c1b1c5995e102b64095e1680103af1b3b83e6e22595d621f57d0"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1163,
+      "sha256": "12a9e462c196f504cb8792899f5295b5c555ce60a65490bf91e4c262139d5630"
     }
   ]
 }

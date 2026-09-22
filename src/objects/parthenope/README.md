@@ -41,7 +41,7 @@ Overlaps are scale-free. Read each against the same-shape column, which is what 
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -70,7 +70,7 @@ Rotation has an explicitly arbitrary display meridian, not an absolute rotationa
 
 The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Parthenope from 17° south to 71° north, so surface the survey did not see keeps the missing-imagery grid. Left out by name: zimpol-20190605-052639. The level fit finds it 4.79× dimmer than its apparition's first frame, which anchors that apparition's level, and 2.88× dimmer than the apparition's median frame; the lens's level budget is 4×, and the figure does not show it.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

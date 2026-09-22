@@ -24,7 +24,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - Combining the mass with uncertain shape volume gives density 0.87(+0.89/−0.30) g/cm³; the broad density uncertainty is volume-dominated. It is not a direct compositional measurement.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
