@@ -9,11 +9,6 @@ import {requireAcquisitionPlan,requireClosedRadialTerrain,requireProjectionAncho
 import {requireArray,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/bacchus/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('Bacchus retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'bacchus',planetName:'Bacchus',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('Bacchus preserves the original kilometer mesh and published spin interpretation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

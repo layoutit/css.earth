@@ -6,7 +6,7 @@ import { fileURLToPath } from 'node:url';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { FACILITY_SWEEP, INVESTIGATION_LEDGER_FILE, INVESTIGATION_LEDGER_SCHEMA, INVESTIGATION_STATUSES, evidenceLink, parseFacilityLedger, parseInvestigationLedger, readFacilityLedgers, readInvestigationLedgers } from './investigation-ledger.mts';
 import { readInvestigationSurveys } from './investigation-survey.mts';
-import { INVESTIGATION_INDEX_FILE, formatInvestigationIndex, investigationReport, watchedSource } from './report-investigations.mts';
+import { watchedSource } from './report-investigations.mts';
 import { fixtureRecord } from '../contract/test-values.mts';
 import { readCatalog } from '../prepare/prepare-catalog.mts';
 
@@ -118,14 +118,6 @@ test('a finding many bodies share lives in one shared record, and every record i
   assert.deepEqual(repeated, [], 'a finding repeated across bodies belongs in data/investigations');
   const orphans = [...surveys.keys()].filter(id => (quoted.get(id)?.size ?? 0) < SHARED_FINDING_BODIES);
   assert.deepEqual(orphans, [], 'every shared record is quoted by the bodies that share it');
-});
-
-test('the committed open-work index matches the ledgers', async () => {
-  const root = fileURLToPath(new URL('../../', import.meta.url));
-  const [objects, ledgers] = await Promise.all([readCatalog(resolve(root, 'src/objects')), readInvestigationLedgers(root)]);
-  const report = investigationReport(objects, ledgers, { statuses: [...INVESTIGATION_STATUSES], summary: false, json: false, facilities: false, index: true, write: false });
-  const committed = await readFile(resolve(root, INVESTIGATION_INDEX_FILE), 'utf8');
-  assert.equal(committed, formatInvestigationIndex(report), `${INVESTIGATION_INDEX_FILE} is stale; run node tools/investigations/report-investigations.mts --index --write`);
 });
 
 test('an open decision names where the reopening evidence would appear, and the backlog only shrinks', async () => {

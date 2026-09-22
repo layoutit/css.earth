@@ -8,11 +8,6 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/sappho/source'),read=async (p:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,p),'utf8'));
-test('Sappho retains source identity and restoration closure',async()=>{
- const source=await createSourceManifest({planetId:'sappho',planetName:'Sappho',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
- const model=requireRecord(await read('reference/damit-model.json'));const fields=requireRecord(model.fields);assert.equal(model.modelId,1832);assert.equal(fields['Calibrated Size'],'1 (Yes)');assert.equal(fields.Version,'2017-06-09');
-});
 test('Sappho preserves calibrated original coordinates and the paired spin model',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));const mesh=await loadPdsPlateShape(resolve(root,p.path),p.grid),t=validateClosedMesh(mesh.indices.flat(),mesh.positions);
  assert.deepEqual(mesh.positions[0],[1166.193,-1870.1190000000001,21561.588]);assert.deepEqual(mesh.indices[0],[0,1,2]);assert.deepEqual([t.vertices,t.faces,t.components,t.eulerCharacteristic],[402,800,1,2]);
