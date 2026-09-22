@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFitsPrimary } from '../objects/observation/fits.mts';
 import { readOracleFixture, readOracleInput, sampleList } from '../oracles/fixture.mts';
 import { requireRecord } from '../sources/source-values.mts';

@@ -61,7 +61,6 @@ export interface SpitzerFile {
   readonly name: string;
   readonly url: string;
   readonly bytes: number;
-  readonly sha256: string;
   /** The archive's own MD5, where its catalogue publishes one. Absent for the ancillary planes, which it does not list. */
   readonly archiveMd5?: string;
 }
@@ -210,13 +209,13 @@ export async function pinFile(role: FileRole, url: string, directory: string, ar
   const name = url.slice(url.lastIndexOf('/') + 1);
   if (!/^[A-Za-z0-9._-]+\.fits$/u.test(name)) throw new TypeError(`Not an archive FITS name: ${name}`);
   const path = resolve(directory, name);
-  const { bytes, sha256 } = await download(url, path);
+  const { bytes } = await download(url, path);
   if (archiveMd5 !== undefined) {
     if (!HEX32.test(archiveMd5)) throw new TypeError(`${name}: the archive's checksum is not an MD5 (${archiveMd5}).`);
     const found = await md5File(path);
     if (found !== archiveMd5) throw new Error(`${name} does not match the archive's own MD5: got ${found}, the catalogue says ${archiveMd5}.`);
   }
-  return { role, name, url, bytes, sha256, ...(archiveMd5 === undefined ? {} : { archiveMd5 }) };
+  return { role, name, url, bytes, ...(archiveMd5 === undefined ? {} : { archiveMd5 }) };
 }
 
 const card = (header: FitsHeader, key: string, label: string): string => {
@@ -319,10 +318,9 @@ export function parseSpitzerProgram(value: unknown): SpitzerProgram {
     if (!(FILE_ROLES as readonly string[]).includes(role)) throw new TypeError(`${role} is not a pinned file role.`);
     const name = requireString(entry.name, 'file name'), url = requireString(entry.url, 'file url'), bytes = number(entry.bytes, `${name} bytes`);
     if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${name} has no byte count.`);
-    if (!HEX64.test(requireString(entry.sha256, 'file sha256'))) throw new TypeError(`${name} has no sha256.`);
     if (!url.startsWith(`${DATA}/sha/archive/`) || !url.endsWith(`/${name}`)) throw new TypeError(`${name} is not pinned to the Spitzer archive.`);
     if (entry.archiveMd5 !== undefined && !HEX32.test(requireString(entry.archiveMd5, 'archive md5'))) throw new TypeError(`${name} has an unreadable archive MD5.`);
-    return { role: role as FileRole, name, url, bytes, sha256: entry.sha256 as string, ...(entry.archiveMd5 === undefined ? {} : { archiveMd5: entry.archiveMd5 as string }) };
+    return { role: role as FileRole, name, url, bytes, ...(entry.archiveMd5 === undefined ? {} : { archiveMd5: entry.archiveMd5 as string }) };
   };
   const channels = requireArray(row.channels, 'channels').map(raw => {
     const entry = requireRecord(raw, 'channel'), channel = number(entry.channel, 'channel');

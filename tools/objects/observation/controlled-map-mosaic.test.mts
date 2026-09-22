@@ -1,4 +1,5 @@
-import test from 'node:test';import assert from 'node:assert/strict';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();import assert from 'node:assert/strict';
 import {areaSampler,parseControlledFrames,parseControlledMapProfile,controlledMapPoint,controlledMapBounds,samplePolarCell,matchControlledMapLevels} from './controlled-map-mosaic.mts';
 const profile=parseControlledMapProfile({referenceRadiusMeters:100,wavelengthMicrometers:.611,filter:'CLEAR',displayRange:[0,2],polarBoundaryDegrees:78.75});
 const base={id:'frame',path:'frame.tif',width:40,height:40,noData:-999,transform:[-20,1,0,20,0,-1],projection:'polar-stereographic',centerLongitude:0,poleLatitude:90};

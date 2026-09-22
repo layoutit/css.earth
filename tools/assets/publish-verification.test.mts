@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { verifyPublished, reportVerification, type PublishAsset } from './publish-verification.mts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');

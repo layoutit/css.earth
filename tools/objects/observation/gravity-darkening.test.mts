@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { existsSync } from 'node:fs';
 import { readFile, readdir } from 'node:fs/promises';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { skyPlaneOrientation, starAstrometry } from '@cssearth/astronomy';
 import { parseCieTable } from './disc-integrated-color.mts';
 import { gravityDarkenedRows, inclinedPoleOrientation, meanSurfaceTemperature, parseGravityDarkeningRecord, rocheRadius, surfaceTemperature } from './gravity-darkening.mts';

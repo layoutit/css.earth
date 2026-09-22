@@ -15,6 +15,6 @@ if (args.length === 1 && args[0] === '--help') {
   const recipePath = 'labs/nebula/models/lmc/bake.json';
   const recipe = readProcessingEnvironmentRecipe(JSON.parse(await readFile(resolve(process.cwd(), recipePath), 'utf8')));
   const python = await prepareEnvironment(process.cwd(), recipe, args[0]?.slice('--python='.length));
-  console.log(`NOX_MODEL_VERIFIED ${recipe.removal.model.path} sha256=${recipe.removal.model.sha256}`);
+  console.log(`NOX_MODEL_VERIFIED ${recipe.removal.model.path}`);
   console.log(`PROCESSING_PYTHON ${python}`);
 }

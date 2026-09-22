@@ -1,0 +1,337 @@
+{
+  "schema": "cssearth-jwst-imaging-program@1",
+  "id": "beta-pictoris-4758",
+  "programme": "4758",
+  "target": "-bet-Pic",
+  "crdsContext": "jwst_1535.pmap",
+  "bands": [
+    {
+      "band": "NIRCAM-F210M-MASK335R",
+      "observation": "jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r",
+      "level3": {
+        "name": "jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+        "uri": "mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+        "bytes": 42382080
+      },
+      "association": {
+        "name": "jw04758-c1002_20260718t212455_coron3_00002_asn.json",
+        "uri": "mast:JWST/product/jw04758-c1002_20260718t212455_coron3_00002_asn.json",
+        "bytes": 17375
+      },
+      "stage": "coron3",
+      "members": [
+        {
+          "name": "jw04758001001_03106_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03106_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_03107_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03107_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_03108_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03108_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_03109_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03109_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310a_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310a_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310b_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310b_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310c_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310c_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310d_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310d_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310e_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310e_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310f_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310f_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03106_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03106_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03107_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03107_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03108_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03108_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03109_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03109_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310a_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310a_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310b_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310b_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310c_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310c_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310d_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310d_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310e_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310e_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310f_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310f_00001_nrca2_calints.fits",
+          "bytes": 270884160
+        }
+      ],
+      "references": [
+        {
+          "name": "jw04758003001_04103_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00001_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00002_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00002_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00003_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00003_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00004_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00004_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00005_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00005_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00006_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00006_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00007_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00007_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00008_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00008_nrca2_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00009_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00009_nrca2_calints.fits",
+          "bytes": 123431040
+        }
+      ]
+    },
+    {
+      "band": "NIRCAM-F410M-MASK335R",
+      "observation": "jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r",
+      "level3": {
+        "name": "jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
+        "uri": "mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
+        "bytes": 42382080
+      },
+      "association": {
+        "name": "jw04758-c1002_20260718t212455_coron3_00001_asn.json",
+        "uri": "mast:JWST/product/jw04758-c1002_20260718t212455_coron3_00001_asn.json",
+        "bytes": 17462
+      },
+      "stage": "coron3",
+      "members": [
+        {
+          "name": "jw04758001001_03106_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03106_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_03107_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03107_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_03108_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03108_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_03109_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_03109_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310a_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310a_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310b_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310b_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310c_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310c_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310d_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310d_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310e_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310e_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758001001_0310f_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758001001_0310f_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03106_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03106_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03107_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03107_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03108_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03108_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_03109_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_03109_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310a_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310a_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310b_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310b_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310c_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310c_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310d_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310d_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310e_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310e_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        },
+        {
+          "name": "jw04758002001_0310f_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758002001_0310f_00001_nrcalong_calints.fits",
+          "bytes": 270884160
+        }
+      ],
+      "references": [
+        {
+          "name": "jw04758003001_04103_00001_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00001_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00002_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00002_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00003_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00003_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00004_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00004_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00005_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00005_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00006_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00006_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00007_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00007_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00008_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00008_nrcalong_calints.fits",
+          "bytes": 123431040
+        },
+        {
+          "name": "jw04758003001_04103_00009_nrcalong_calints.fits",
+          "uri": "mast:JWST/product/jw04758003001_04103_00009_nrcalong_calints.fits",
+          "bytes": 123431040
+        }
+      ]
+    }
+  ]
+}

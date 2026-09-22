@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createPreparedFocusCard } from '../prepared-focus-card.mts';
 import type { PreparedGalaxyRecord } from '@cssearth/catalog';
 import type { PreparedFocusPresentation } from '../prepared-context-navigation.mts';

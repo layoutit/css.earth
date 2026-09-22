@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {
   OBJECT_TEXT_SCHEMA, PREPARED_TEXT_SCHEMA, compositionWarnings, parseObjectText, parsePreparedText, readerTextErrors, readerTextWarnings,
 } from '../object-text.mts';

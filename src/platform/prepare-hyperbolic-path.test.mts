@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { prepareHyperbolicPath } from "./prepare-hyperbolic-path.mts";
 
 // Independent polar conic: a=-10 au, e=2 has p=a(1-e²)=30 au.

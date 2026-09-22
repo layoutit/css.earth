@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createSceneSessions } from '../scene-session.mts';
 import { createPreparedSceneOwnership } from '../prepared-scene-ownership.mts';
 import type { SceneFactory } from '../browser-types.mts';

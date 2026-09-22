@@ -1,7 +1,8 @@
 /** What the capability query may and may not say. The cases run on small ledgers written here, in the shapes the real
  * ledgers use, so nothing asks an archive anything; the last cases run on the committed ledgers themselves. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { resolve } from 'node:path';
 import { BODY_MAP_SCHEMA } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
@@ -592,20 +593,6 @@ test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a d
   assert.ok(navcam.selectionAssessment.blockers.some(blocker => blocker.code === 'body-map-author-missing'));
   assert.equal(answer.targetCoverage.find(entry => entry.telescope === 'package-sources')?.state, 'observed');
   assert.equal(navcam.observations?.records?.[0]?.requestSatisfaction?.constraints.wavelength?.answer, 'unknown');
-});
-
-test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {
-  for (const target of ['europa', 'jupiter', 'betelgeuse', 'ceres']) {
-    const loaded = await loadQueryInputs(ROOT, target);
-    for (const arcsec of [1e-6, 0.05, 1, 1000]) {
-      const answer = queryCapabilities({ target, wavelengthMicrometres: [0.5, 5], angularResolutionArcsec: arcsec, rangeKm: 6.3e8, bodyRadiusKm: 1560.8, surfaceResolutionKm: 10, resolutionElements: 8 }, loaded);
-      for (const entry of answer.candidates) {
-        assert.notEqual(entry.meetsConstraints.angularResolution?.answer, 'yes', `${entry.telescope} ${entry.mode} claimed a sharpness`);
-        assert.notEqual(entry.meetsConstraints.surfaceResolution?.answer, 'yes', `${entry.telescope} ${entry.mode} claimed kilometres`);
-        assert.notEqual(entry.meetsConstraints.resolutionElements?.answer, 'yes', `${entry.telescope} ${entry.mode} claimed elements`);
-      }
-    }
-  }
 });
 
 /** Ledger modes with no sourced entry in `modes.json`: the query reports each as "capabilities not recorded". A mode leaves

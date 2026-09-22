@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { decodeNpyLonLatGrid, readNpy, spinFrameTransfer } from './npy-lonlat-grid.mts';
 
 /** A version 1.0 .npy file as NumPy writes it: magic, header padded with spaces to a 64-byte boundary, then the data. */

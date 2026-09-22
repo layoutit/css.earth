@@ -1,0 +1,38 @@
+{
+  "id": "arxiv-2609-16720",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Ortiz Ceballos, Berger and Cendes (2026): Discovery of radio emission from the exoplanet beta Pictoris b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2609.16720"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2609.16720",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2609.16720",
+      "checkedOn": "2026-09-22",
+      "locator": "Abstract and Extended Data Tables 1 and 3: MeerKAT bursts at 0.85 to 3.5 GHz over four epochs in 2025 and 2026, 40-70% circularly polarised, electron cyclotron maser emission implying a field of at least 1.25 kG; brightest L-band burst 307 microjansky, quiescent S-band 48 microjansky; radio source coincident with planet b (R = 1.1) and 4.4 sigma from the star"
+    },
+    {
+      "path": "src/objects/beta-pictoris/text.json",
+      "locator": "/introduction/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "K. N. Ortiz Ceballos",
+    "E. Berger",
+    "Y. Cendes"
+  ]
+}

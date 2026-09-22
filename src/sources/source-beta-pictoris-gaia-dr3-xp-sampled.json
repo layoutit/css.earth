@@ -1,0 +1,35 @@
+{
+  "id": "source-beta-pictoris-gaia-dr3-xp-sampled",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Beta Pictoris · beta pictoris gaia dr3 xp sampled",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4792774797545800832&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/beta-pictoris/source/manifest.json",
+      "locator": "/inputs/9"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
+      "scope": "The beta pictoris gaia dr3 xp sampled input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Gaia data are released under the ESA Gaia data usage terms: free use with the Gaia mission and DPAC acknowledged.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

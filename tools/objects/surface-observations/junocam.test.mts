@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { validateSurfaceObservation } from './index.mts';
 
 const geometry = { path: 'shape/iau-ellipsoid.tab', format: 'pds-radius-table', simplification: { method: 'source-mesh', maximumErrorMeters: 480 } };

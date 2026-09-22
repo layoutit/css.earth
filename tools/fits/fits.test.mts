@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable } from './fits.mts';
 import { readFitsPrimary, readFitsPlane } from '../objects/observation/fits.mts';
 import { card, imageFixture } from '../../tests/fixtures/fits/helpers.mts';
@@ -40,7 +41,8 @@ test('supported numeric widths and native row order, including signed int32', ()
 
 test('duplicate value keys fail, while commentary can repeat and undefined optional cards can survive', () => {
   assert.throws(() => readFitsHeader(imageFixture(16, [0, 1], [card('BITPIX', '16')])), /Duplicate/);
-  const extra = ['COMMENT repeated'.padEnd(80), 'COMMENT repeated'.padEnd(80), 'HISTORY once'.padEnd(80), 'HISTORY twice'.padEnd(80), card('UNUSED', '')];
+  // drizzlepac writes a rule of `=` into HISTORY, which puts `=` in column 9 of a commentary card.
+  const extra = ['COMMENT repeated'.padEnd(80), 'COMMENT repeated'.padEnd(80), 'HISTORY once'.padEnd(80), 'HISTORY twice'.padEnd(80), `HISTORY ${'='.repeat(60)}`.padEnd(80), card('UNUSED', '')];
   assert.ok(Object.hasOwn(readFitsHeader(imageFixture(16, [0, 1], extra)).header, 'UNUSED'));
   for (const key of ['BSCALE', 'BZERO', 'BLANK']) assert.throws(() => readFitsImage(imageFixture(16, [0, 1], [card(key, '')])), /Invalid/);
 });

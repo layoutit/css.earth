@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { handleSearchRequest, renderSearchResponse, parseSearchPin } from '../search-response.mts';
 import { objectSearchLabels, searchObjects } from '../object-search.mts';

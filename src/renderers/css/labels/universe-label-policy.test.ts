@@ -7,6 +7,8 @@ test('proper names and curated notable designations qualify independently', () =
   expect(labelEligible({ named: false, notable: false })).toBe(false);
   expect(labelImportance('satellite', true)).toBeGreaterThan(labelImportance('satellite'));
   expect(labelImportance('planet')).toBeGreaterThan(labelImportance('asteroid'));
+  // A planet of another star holds its system's planet tier, so it keeps its caption at the scale that frames its orbit.
+  expect(labelImportance('exoplanet')).toBe(labelImportance('planet'));
   expect(labelExtentOpacity(12)).toBe(0);
   expect(labelExtentOpacity(48)).toBe(1);
 });

@@ -8,9 +8,10 @@
  */
 import { createHash } from 'node:crypto';
 import { copyFile, mkdir } from 'node:fs/promises';
+import { sha256File } from '../../../../src/platform/sha256.mts';
 import { basename, resolve } from 'node:path';
 import { pds3Values } from '../../pds3-labels.mts';
-import { pinFile } from '../../product-record.mts';
+import { fileSize } from '../../product-record.mts';
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { AxisDescriptor, DescriptorIssue, DescriptorMember, ProductComponent, ProductDescriptor, UncertaintyDescriptor } from '../product-descriptor.mts';
 import { assertPlanetaryProductSemantics, planetaryOutputPolicy } from '../planetary-depth-policy.mts';
@@ -322,7 +323,7 @@ export async function exportJunoMwrRetrievalNative(pins:readonly PinnedJunoMwrFi
   const directory=resolve(output);await mkdir(directory,{recursive:true});
   const written:{path:string;bytes:number;sha256:string}[]=[];
   for(const pin of pins){
-    const actual=await pinFile(pin.path);
+    const actual=await sha256File(pin.path);
     const destination=resolve(directory,basename(pin.path));
     if(written.some(entry=>entry.path===destination))throw new TypeError(`Native Juno MWR export would overwrite ${basename(pin.path)}.`);
     await copyFile(pin.path,destination);written.push({path:destination,...actual});

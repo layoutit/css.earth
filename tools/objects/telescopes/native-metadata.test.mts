@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { isisMetadata, pdsMetadata } from './native-metadata.mts';
 const isis = (fields: string, calibration = '') => Buffer.from(`Object = IsisCube\nGroup = BandBin\n${fields}\nEnd_Group\nGroup = RadiometricCalibration\n${calibration}\nEnd_Group\nEnd_Object\nEnd\n`);
 

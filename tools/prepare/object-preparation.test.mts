@@ -4,7 +4,8 @@ import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promi
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readObjectPreparation, resolveObjectPreparation, runObjectPreparation } from './object-preparation.mts';
 import type { PreparationCommand } from '../../src/platform/preparation-runner.mts';
 

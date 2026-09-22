@@ -95,13 +95,13 @@ export async function prepareCatalogueDensity(configPath: string) {
             'No image-to-model scaling, rotation or translation is fitted. No photographic material has been applied.'] };
     const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
     await writeFile(resolve(sourceDirectory, 'provenance.json'), provenanceBytes);
-    const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1', grid: { path: 'density.ktx2', sha256: converted.outputs.gridSha256,
-            decodedSha256: converted.outputs.decodedSha256, dimensions: plan.dimensions, encoding: 'sqrt-density-unorm8', bounds: plan.boundsKpc },
+    const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1', grid: { path: 'density.ktx2',
+            dimensions: plan.dimensions, encoding: 'sqrt-density-unorm8', bounds: plan.boundsKpc },
         material: { emission: [{ channel: 3, color: [1, 1, 1], strength: 1 }], absorption: [], intensityScale: 1, stepScale: 1,
             stepMetric: 'source', exposureGain: .08, emissionTransfer: 'shared-opacity' },
         bake: { sliceCounts: { x: 48, y: 48, z: 48 }, unitsPerSourceUnit: 1, imageWidth: 512, samplesPerSlab: 2, cropTransparent: true,
             opticalWeight: 1, imageEncoding: { format: 'webp', quality: 90 } }, anchors: [],
-        provenance: { path: 'provenance.json', sha256: sha256(provenanceBytes) } };
+        provenance: { path: 'provenance.json' } };
     const recipeBytes = Buffer.from(JSON.stringify(recipe, null, 2) + '\n');
     await writeFile(resolve(sourceDirectory, 'volume.json'), recipeBytes);
     const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory: prepared, recipe });

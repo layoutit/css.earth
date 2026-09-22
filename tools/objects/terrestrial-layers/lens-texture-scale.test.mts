@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {lensTextureGrid} from './solid-raster.mts';
 import {createProjectiveSurfaceRasterLayout} from '../../../src/platform/projective-surface-raster.mts';
 

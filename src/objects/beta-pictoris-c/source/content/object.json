@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "beta-pictoris-c",
+  "displayName": "Beta Pictoris c",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.2 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2010-04442",
+          "url": "https://arxiv.org/abs/2010.04442",
+          "label": "Nowak et al. 2020",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "1,221 days",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "2.7 au",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "8.9 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "1,250 K",
+        "source": {
+          "catalogueId": "arxiv-2010-04442",
+          "url": "https://arxiv.org/abs/2010.04442",
+          "label": "Nowak et al. 2020",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "beta-pictoris-c-lens-shape.webp",
+        "surface": "beta-pictoris-c-surface-shape@2x.webp",
+        "poles": "beta-pictoris-c-poles-shape@2x.webp",
+        "source": {
+          "id": "beta-pictoris-c-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2109.10671"
+        },
+        "falseColor": false,
+        "notes": "No image of this planet's surface exists: GRAVITY resolves it from its star as a point 0.1 arcseconds away. Its size, 1.2 Jupiter radii, is the radius an atmospheric model needs to give its measured K-band flux at 1,250 K, not a measured disc (see the ledger). No spin is measured; the display axis is its orbit normal. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lacour et al. (2021), A&A 654, L2: orbits and masses of planets b and c from GRAVITY astrometry and radial velocities",
+      "href": "https://arxiv.org/abs/2109.10671"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Nowak et al. (2020), A&A 642, L2: direct confirmation of planet c with GRAVITY",
+      "href": "https://arxiv.org/abs/2010.04442"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2010.04442",
+      "credit": "Nowak et al. (2020), A&A 642, L2"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/beta-pictoris-c.json",
+      "credit": "Model radius from the GRAVITY spectrum (Nowak et al. 2020); dynamical mass and orbit (Lacour et al. 2021); no measured rotation (display convention)"
+    }
+  }
+}

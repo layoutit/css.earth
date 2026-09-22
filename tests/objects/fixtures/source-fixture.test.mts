@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,mkdir,rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { subdividedOctahedron } from './ellipsoid-parameters.mts';
 import { parseObjShape } from './obj-shape.mts';
 import { refineCameraByLimb, rotateCamera, rotationOf, limbThreshold, observedLimb } from './limb-refinement.mts';

@@ -3,7 +3,8 @@ import { createHash } from 'node:crypto';
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createSurfaceInterpreter } from './interpret.mts';
 
 const bytes = Buffer.from('pinned');

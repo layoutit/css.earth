@@ -1,0 +1,321 @@
+{
+  "schema": "cssearth-volume-source-manifest@1",
+  "pathBase": "repository",
+  "inputs": [
+    {
+      "id": "visible-stis-50ccd",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-visible-stis-50ccd",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/observations/Beta_Pic_STIS.fits",
+      "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A114/fits/Beta_Pic_STIS.fits",
+      "sourceUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114",
+      "title": "Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits",
+      "credit": "NASA/ESA HST/STIS, programmes 7125 (PI S. Heap), 12551 (PI D. Apai) and 12923 (PI A. Gaspar); reduced by Ren et al. 2023, A&A 672, A114, deposited at CDS",
+      "displayCredit": "NASA/ESA HST, Ren et al. 2023 (CDS)",
+      "acquisition": "Downloaded unchanged from the CDS FTP archive of VizieR J/A+A/672/A114 (fits/Beta_Pic_STIS.fits) and pinned by digest in this recipe.",
+      "license": "Data deposited at CDS under the VizieR catalogue J/A+A/672/A114; free for scientific use with the reference cited (Ren et al. 2023, A&A 672, A114).",
+      "lensId": "visible"
+    },
+    {
+      "id": "contrast-f410m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-contrast-f410m",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/observations/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "title": "MAST JWST programme 4758 · jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GO programme 4758 (PI Y. Zhou); MAST (STScI); Zhou et al. 2026, arXiv:2607.13133. NASA/ESA HST/STIS, programmes 7125, 12551 and 12923, reduced by Ren et al. 2023, A&A 672, A114",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/beta-pictoris-4758.json.",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "contrast"
+    },
+    {
+      "id": "contrast-f210m",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-contrast-f210m",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/observations/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "title": "MAST JWST programme 4758 · jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r level-3 coronagraph mosaic",
+      "credit": "NASA/ESA/CSA JWST, NIRCam GO programme 4758 (PI Y. Zhou); MAST (STScI); Zhou et al. 2026, arXiv:2607.13133. NASA/ESA HST/STIS, programmes 7125, 12551 and 12923, reduced by Ren et al. 2023, A&A 672, A114",
+      "displayCredit": "NASA/ESA/CSA JWST, MAST",
+      "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/beta-pictoris-4758.json.",
+      "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "contrast"
+    },
+    {
+      "id": "colour-f435w-roll1",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-colour-f435w-roll1",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/3"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f435w-roll1_drz.fits",
+      "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "title": "HST programme 9987 · ACS/HRC F435W, roll 1, PSF-subtracted and drizzled here",
+      "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "displayCredit": "NASA/ESA HST, MAST",
+      "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "colour"
+    },
+    {
+      "id": "colour-f435w-roll2",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-colour-f435w-roll2",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/4"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f435w-roll2_drz.fits",
+      "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "title": "HST programme 9987 · ACS/HRC F435W, roll 2, PSF-subtracted and drizzled here",
+      "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "displayCredit": "NASA/ESA HST, MAST",
+      "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "colour"
+    },
+    {
+      "id": "colour-f606w-roll1",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-colour-f606w-roll1",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/5"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f606w-roll1_drz.fits",
+      "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "title": "HST programme 9987 · ACS/HRC F606W, roll 1, PSF-subtracted and drizzled here",
+      "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "displayCredit": "NASA/ESA HST, MAST",
+      "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "colour"
+    },
+    {
+      "id": "colour-f606w-roll2",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-colour-f606w-roll2",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/6"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f606w-roll2_drz.fits",
+      "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "title": "HST programme 9987 · ACS/HRC F606W, roll 2, PSF-subtracted and drizzled here",
+      "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "displayCredit": "NASA/ESA HST, MAST",
+      "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "colour"
+    },
+    {
+      "id": "colour-f814w-roll1",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-colour-f814w-roll1",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f814w-roll1_drz.fits",
+      "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "title": "HST programme 9987 · ACS/HRC F814W, roll 1, PSF-subtracted and drizzled here",
+      "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "displayCredit": "NASA/ESA HST, MAST",
+      "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "colour"
+    },
+    {
+      "id": "colour-f814w-roll2",
+      "dependencies": [],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-beta-pictoris-disc-colour-f814w-roll2",
+            "role": "material",
+            "evidence": "src/objects/beta-pictoris-disc/source/manifest.json@0000000000000000000000000000000000000000#/inputs/8"
+          }
+        ]
+      },
+      "path": ".local/beta-pictoris-disc/hst/psf-subtracted/beta-pictoris-9987-f814w-roll2_drz.fits",
+      "origin": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sourceUrl": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "title": "HST programme 9987 · ACS/HRC F814W, roll 2, PSF-subtracted and drizzled here",
+      "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "displayCredit": "NASA/ESA HST, MAST",
+      "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
+      "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "lensId": "colour"
+    }
+  ],
+  "documents": [
+    {
+      "id": "circumstellar-json",
+      "path": "src/objects/beta-pictoris-disc/source/circumstellar.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against."
+      }
+    },
+    {
+      "id": "delivery-json",
+      "path": "src/objects/beta-pictoris-disc/source/delivery.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "presentation-json",
+      "path": "src/objects/beta-pictoris-disc/source/presentation.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    },
+    {
+      "id": "provenance-json",
+      "path": "src/objects/beta-pictoris-disc/source/provenance.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "density-visible-ktx2",
+      "path": "src/objects/beta-pictoris-disc/source/density-visible.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-visible-json",
+      "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-visible-png",
+      "path": "src/objects/beta-pictoris-disc/source/previews/visible.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "density-contrast-ktx2",
+      "path": "src/objects/beta-pictoris-disc/source/density-contrast.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-contrast-json",
+      "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-contrast-png",
+      "path": "src/objects/beta-pictoris-disc/source/previews/contrast.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "density-colour-ktx2",
+      "path": "src/objects/beta-pictoris-disc/source/density-colour.ktx2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "volume-colour-json",
+      "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    },
+    {
+      "id": "previews-colour-png",
+      "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
+      }
+    }
+  ]
+}

@@ -12,11 +12,10 @@ import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsImage } from '../../fits/fits.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { bodyMapFits, topRowFirst } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct, type BodyMapFrame, type MeasurementDefinition } from '../body-map-product.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord } from '../body-map-publication.mts';
-import { productRecordPath, readProductRecord, sameRun, type ProductInput, type ProductSoftware } from '../product-record.mts';
+import { fileSize, productRecordPath, readProductRecord, sameRun, type ProductInput, type ProductSoftware } from '../product-record.mts';
 import { placeResolvedDisc } from '../resolved-disc-map.mts';
 import { horizonsTables } from '../sphere-horizons.mts';
 import { horizonsRows, LEAP_SECONDS_KERNEL, loadOrientation, observerRowValues, rowJd } from '../terrestrial-layers/observer-cameras.mts';
@@ -97,13 +96,13 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
     throw new Error('The input is not this program\'s WCS-free COADDED_IMG jitter product.');
 
   const frames = program.science.filter(frame => frame.type === 'OBJECT' && frame.template === template), rawPaths = frames.map(frame => resolve(options.rawDirectory, `${frame.dpId}.fits`));
-  if (!frames.length || frames.some(frame => !frame.sha256)) throw new Error(`${programId} has no fully pinned object template ${template}.`);
+  if (!frames.length) throw new Error(`${programId} has no object template ${template}.`);
   const rawHeaders: EsoHeader[] = [];
   for (let index = 0; index < frames.length; index++) {
-    const pin = await sha256File(rawPaths[index]!), consumed = reductionRecord.inputs.find(input => input.identity === frames[index]!.dpId);
+    const pin = await fileSize(rawPaths[index]!), consumed = reductionRecord.inputs.find(input => input.identity === frames[index]!.dpId);
     // The archive table reports the compressed transfer size. The reduction record owns the expanded FITS byte count it
-    // actually read; both records carry the same content digest and both must agree with the file now.
-    if (!consumed || pin.bytes !== consumed.bytes || pin.sha256 !== consumed.sha256 || pin.sha256 !== frames[index]!.sha256)
+    // actually read, and the file now must be that size.
+    if (!consumed || pin.bytes !== consumed.bytes)
       throw new Error(`${rawPaths[index]} is not the pinned ${frames[index]!.dpId} consumed by this reduction.`);
     rawHeaders.push(await esoHeader(rawPaths[index]!));
   }
@@ -153,13 +152,13 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
   const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', placed.centre), mapProduct = resolution.product;
   const metadata = Buffer.from(formatBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);
   const inputs: ProductInput[] = [
-    { role: 'reduced jitter image', identity: product, bytes: productBytes.byteLength, sha256: sha256(productBytes) },
-    { role: 'reduction product record', identity: reductionRecordPath, bytes: reductionRecordBytes.byteLength, sha256: sha256(reductionRecordBytes) },
-    ...await Promise.all(rawPaths.map(async (path, index) => ({ role: 'raw spatial header', identity: frames[index]!.dpId, ...(await sha256File(path)) }))),
-    { role: 'observer ephemeris', identity: observerPath, bytes: Buffer.byteLength(tables.observer), sha256: sha256(tables.observer) },
-    { role: 'heliocentric ephemeris', identity: heliocentricPath, bytes: Buffer.byteLength(tables.heliocentric), sha256: sha256(tables.heliocentric) },
-    { role: 'rotation model', identity: PCK, bytes: pckBytes.byteLength, sha256: sha256(pckBytes) },
-    { role: 'leap seconds', identity: LEAP_SECONDS_KERNEL, bytes: leapBytes.byteLength, sha256: sha256(leapBytes) },
+    { role: 'reduced jitter image', identity: product, bytes: productBytes.byteLength },
+    { role: 'reduction product record', identity: reductionRecordPath, bytes: reductionRecordBytes.byteLength },
+    ...await Promise.all(rawPaths.map(async (path, index) => ({ role: 'raw spatial header', identity: frames[index]!.dpId, ...(await fileSize(path)) }))),
+    { role: 'observer ephemeris', identity: observerPath, bytes: Buffer.byteLength(tables.observer) },
+    { role: 'heliocentric ephemeris', identity: heliocentricPath, bytes: Buffer.byteLength(tables.heliocentric) },
+    { role: 'rotation model', identity: PCK, bytes: pckBytes.byteLength },
+    { role: 'leap seconds', identity: LEAP_SECONDS_KERNEL, bytes: leapBytes.byteLength },
   ];
   const software: ProductSoftware[] = [{ name: 'cssEarth resolved-disc-map', version: '1' }, { name: 'node', version: process.versions.node }];
   const mapRecord = Buffer.from(formatProductRecord(bodyMapProductRecord(mapProduct, fits, metadata, inputs, software, undefined, [resolution.output])));

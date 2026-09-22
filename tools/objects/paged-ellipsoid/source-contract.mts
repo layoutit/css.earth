@@ -17,10 +17,10 @@ export function parseAtmosphereResponse(value: unknown) {
   return parse(value, response, 'atmosphere response');
 }
 
-const murTile = object({row: number, col: number, url: string, actualTime: union(string, nil), actualLayer: union(string, nil), empty: boolean, bytes: number, sha256: string});
+const murTile = object({row: number, col: number, url: string, actualTime: union(string, nil), actualLayer: union(string, nil), empty: boolean, bytes: number});
 const murReceipt = object({schema: literal('cssearth-mur-gibs@1'), date: string, complete: boolean, grid: object({level: number}), tiles: array(murTile),
-  checked: string, baseline: string, sourceBytes: number, archiveSha256: string, archiveBytes: number,
-  mosaic: object({width: number, height: number, sourceWidth: number, sourceHeight: number, sampling: string, covered: number, missing: number, sha256: string})});
+  checked: string, baseline: string, sourceBytes: number, archiveBytes: number,
+  mosaic: object({width: number, height: number, sourceWidth: number, sourceHeight: number, sampling: string, covered: number, missing: number})});
 export const parseMurReceipt = (value: unknown) => parse(value, murReceipt, 'MUR receipt');
 
 const advisory = object({status: string, date: string});

@@ -49,7 +49,7 @@ function parsePointFieldDescriptor(input: unknown): { readonly descriptor: Objec
   const preparation = properties.preparation;
   if (!preparation || typeof preparation !== 'object' || Array.isArray(preparation)) throw new TypeError('Point-field preparation reference is invalid.');
   const reference = preparation as Record<string, unknown>;
-  if (Object.keys(reference).length !== 2 || typeof reference.source !== 'string' || !reference.source || reference.source.startsWith('/') || reference.source.split('/').includes('..')) throw new TypeError('Point-field preparation reference is invalid.');
+  if (Object.keys(reference).length !== 1 || typeof reference.source !== 'string' || !reference.source || reference.source.startsWith('/') || reference.source.split('/').includes('..')) throw new TypeError('Point-field preparation reference is invalid.');
   return Object.freeze({ descriptor, frame: parseDensityVolumeFrame(properties.frame) });
 }
 

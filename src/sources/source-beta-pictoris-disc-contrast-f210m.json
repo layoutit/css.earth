@@ -1,0 +1,35 @@
+{
+  "id": "source-beta-pictoris-disc-contrast-f210m",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Beta Pictoris Disc · contrast f210m",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/beta-pictoris-disc/source/manifest.json",
+      "locator": "/inputs/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA/CSA JWST, NIRCam GO programme 4758 (PI Y. Zhou); MAST (STScI); Zhou et al. 2026, arXiv:2607.13133",
+      "scope": "The contrast f210m input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

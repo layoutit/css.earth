@@ -15,7 +15,7 @@ import { readRiceCompressedImage } from '../../fits/fits-rice.mts';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
 import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
-import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
+import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
 import { inside, assertPinnedLabel, sourceCacheAddress, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
 import { STEREO_COR1_F16_PROFILE } from './observation-families.mts';
 import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16-spherical-grid.mts';
@@ -23,7 +23,7 @@ import { member } from './families/common.mts';
 
 export async function acquireSourceFile(root: string, file: SourceFile): Promise<void> {
   const path = inside(root, file.path);
-  if (await pinFile(path).then(() => true, () => false)) return;
+  if (await fileSize(path).then(() => true, () => false)) return;
   await mkdir(dirname(path), { recursive: true });
   const tmp = `${path}.${process.pid}.partial`;
   const urls = [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, ...sourceCacheAddress(file)), file.origin];

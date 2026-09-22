@@ -1,0 +1,84 @@
+{
+  "schema": "cssearth-circumstellar-reconstruction@1",
+  "objectId": "beta-pictoris-disc",
+  "lensId": "colour",
+  "shownSha256": "3d1ac2f1b333014081ffb2ea247fecd5ca57815aced0bb90acc4537a84f8b488",
+  "grid": {
+    "size": 156,
+    "halfUnits": 135
+  },
+  "method": {
+    "name": "axial-symmetry emission inference",
+    "paper": "Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216",
+    "implementation": "labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts",
+    "command": "node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc",
+    "axis": [
+      -0.8671078732756862,
+      -0.49781457352398245,
+      0.017452406437283376
+    ],
+    "center": [
+      77.5,
+      77.5,
+      77.5
+    ],
+    "binWidthVoxels": 1,
+    "tau": 0.001,
+    "iterations": 200,
+    "weights": "one for pixels with displayed data, zero under the inner edge and beyond the footprint; a voxel seen only through the blank inside the inner edge takes its group mean, and one seen only beyond the footprint stays empty"
+  },
+  "ktx2": {
+    "path": "density-colour.ktx2",
+    "sha256": "45d5d304f0ad4901d3f5d8614266726faf84cb7f849d1ade0b0be57e5aa47c61",
+    "bytes": 1554371
+  },
+  "decodedSha256": "87d11b3b427f389062639f1370ec540c9dd5250af5221f4001d98d60b4bfa697",
+  "peak": 0.1585624170716853,
+  "filledVoxels": 1606289,
+  "exposureGain": 0.1099070923360088,
+  "opacity": {
+    "drawnColumns": 15913,
+    "median": 0.05109212144574138,
+    "p90": 0.28439516050465574,
+    "max": 0.49222236121332574
+  },
+  "checks": {
+    "relativeProjectionError": [
+      0.0799,
+      0.0811,
+      0.0835
+    ],
+    "voxelsFilledFromGroups": [
+      122110,
+      122110,
+      122110
+    ],
+    "groupsWithNoObservedVoxel": [
+      471,
+      471,
+      471
+    ],
+    "weightedPixels": 23243,
+    "pixels": 24336,
+    "tangentShare": [
+      {
+        "projectedUnits": 40.5,
+        "widthUnits": 20,
+        "reconstructed": 0.4648729274446488,
+        "extrusion": 0.3333333333333333
+      },
+      {
+        "projectedUnits": 67.5,
+        "widthUnits": 20,
+        "reconstructed": 0.5388521789296992,
+        "extrusion": 0.41025641025641024
+      },
+      {
+        "projectedUnits": 94.5,
+        "widthUnits": 20,
+        "reconstructed": 0.5805117062088729,
+        "extrusion": 0.47435897435897434
+      }
+    ]
+  }
+}

@@ -1,11 +1,11 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { rememberQualification, loadQualifiedObservations } from './qualified-observations.mts';
 import { writeProductRecord, productRecordPath } from '../product-record.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { PROFILE_ASSUMPTIONS } from '../resolution-evidence.mts';
 import { assessRequest } from './request-satisfaction.mts';
 test('qualification readback binds facts to the exact output, receipt and producing record', async () => {
@@ -16,13 +16,13 @@ test('qualification readback binds facts to the exact output, receipt and produc
     await writeProductRecord(productRecordPath(product), { telescope: 'JWST', stage: 'spec3-cube', inputs: [], software: [], parameters: {} }, [{ path: 'cube.fits', file: product }]);
     await rememberQualification(root, { ...{ schema: 'cssearth-telescope-qualification@2' }, target: 'test', telescope: 'JWST', mode: 'NIRSPEC/IFU', observation: 'obs', program: 'test-obs', product, receipt, productRecord: productRecordPath(product), outputRoot: root,
       facts: { target: 'test', verified: true, kind: 'cube', result: 'telescope-product', wavelengthIntervalsMicrometres: [[2.2, 2.4]],
-        resolutionEvidence: [{ kind: 'measured', receipt: { file: resolution, sha256: sha256('{}') } }],
+        resolutionEvidence: [{ kind: 'measured', receipt: { file: resolution } }],
         angularResolutionBound: { arcsec: .4, method: 'jwst-point-source-profile@1', receipt: resolution } } });
     const loaded = await loadQualifiedObservations(root, 'test');
     assert.equal(loaded.length, 1); assert.equal(loaded[0]!.product, 'cube.fits');
     assert.deepEqual(loaded[0]!.facts.wavelengthIntervalsMicrometres, [[2.2, 2.4]]);
     assert.equal(loaded[0]!.facts.angularResolutionBound!.receipt, 'resolution.json');
-    assert.deepEqual(loaded[0]!.facts.resolutionEvidence, [{ kind: 'measured', receipt: { file: 'resolution.json', sha256: sha256('{}') } }]);
+    assert.deepEqual(loaded[0]!.facts.resolutionEvidence, [{ kind: 'measured', receipt: { file: 'resolution.json' } }]);
     const request = { target: 'test', wavelengthMicrometres: [2.2, 2.4] as const, time: { any: true as const }, kind: 'cube' as const, result: 'telescope-product' as const };
     assert.equal(assessRequest({ ...request, angularResolutionArcsec: 1 }, loaded[0]!.facts).status, 'unresolved');
     assert.equal(assessRequest({ ...request, angularResolutionArcsec: 1, acceptedAssumptions: [PROFILE_ASSUMPTIONS[0]!] }, loaded[0]!.facts).status, 'unresolved');

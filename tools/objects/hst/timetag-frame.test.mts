@@ -2,7 +2,8 @@
  * an archive product: the synthetic exposure below is a few thousand events around a dark disc that drifts, written into a
  * FITS file with the same two tables a STIS TIME-TAG product carries. */
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -25,7 +26,6 @@ test('the pinned definition parses, and names the file, the target and the claim
   assert.equal(definition.horizonsTarget, '502');
   assert.equal(definition.files.filter(file => file.role === 'events').length, 1);
   for (const file of definition.files) assert.match(file.uri, /^mast:HST\/product\//u, file.name);
-  for (const file of definition.files) assert.match(file.sha256, /^[0-9a-f]{64}$/u, file.name);
   const sector = definition.sectors[0]!;
   assert.deepEqual(sector.annulusRadii, [1, 1.25]);
   assert.deepEqual(sector.latitudeRange, [-60, -40]);
@@ -40,7 +40,6 @@ test('a definition with a broken pin, an odd grid or a Horizons path is refused'
   const raw = JSON.parse(JSON.stringify(definition)) as Record<string, unknown>;
   const changed = (patch: Record<string, unknown>) => parseTimeTagDefinition({ ...raw, ...patch });
   assert.throws(() => changed({ schema: 'cssearth-hst-timetag-frame@2' }), /Unsupported TIME-TAG definition schema/u);
-  assert.throws(() => changed({ files: [{ ...definition.files[0]!, sha256: 'abc' }] }), /sha256/u);
   assert.throws(() => changed({ files: [{ ...definition.files[1]! }] }), /pins the events file/u);
   assert.throws(() => changed({ grid: { pixels: 511, kmPerPixel: 35 } }), /even number of pixels/u);
   assert.throws(() => changed({ horizons: { ...definition.horizons, responses: '../elsewhere.json' } }), /beside the definition/u);
@@ -333,7 +332,7 @@ function runOf(pixels: number, kmPerPixel: number, positionAngleDegrees: number,
   const radiusDetectorPixels = place.angularDiameterArcsec / 2 / patched.plateScaleArcsec;
   const empty = new Float64Array(pixels * pixels);
   return {
-    definition: patched, place, radiusDetectorPixels, radiusGridPixels: patched.bodyRadiusKm / kmPerPixel,
+    definition: patched, inputs: [], place, radiusDetectorPixels, radiusGridPixels: patched.bodyRadiusKm / kmPerPixel,
     file: { path: '', rootname: patched.rootname, aperture: patched.aperture, opticalElement: patched.opticalElement,
       exposureSeconds: 100, startMjd: 56683.76083348, endMjd: 56683.78984969, positionAngleDegrees,
       events: 0, rowBytes: 10, dataStart: 0, tickSeconds: patched.tickSeconds, intervals: [[0, 100]] },

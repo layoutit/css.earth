@@ -3,7 +3,8 @@ import { createHash } from 'node:crypto';
 import { copyFile, mkdir, mkdtemp, readFile, rm, stat, utimes, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { restoreObjectJson } from './restore-object-json.mts';
 
 test('restores a missing transport from its pinned runtime without rebaking or repinning', async () => {

@@ -139,18 +139,16 @@ export const CHANDRA_REPRODUCTION_SCHEMA = 'cssearth-chandra-reproduction@1';
 /** What a receipt has to say for the observation it names to count as reproduced: which program, obsid and level-2 product it
  * re-ran, the detector, grating and mode that product was taken in, and the archive file it compared the result against. */
 export interface ChandraReceipt { readonly program: string; readonly obsid: number; readonly product: string; readonly instrument: string; readonly grating: string;
-  readonly dataMode: string; readonly archive: { readonly path: string; readonly bytes: number; readonly sha256: string } }
-const DIGEST = /^[0-9a-f]{64}$/u;
+  readonly dataMode: string; readonly archive: { readonly path: string; readonly bytes: number } }
 
 /** One receipt read as the external value it is: another schema, a missing field or a missing pin is an error, never a skip. */
 export function parseChandraReceipt(value: unknown, label: string): ChandraReceipt {
   const row = requireRecord(value, label);
   if (row.schema !== CHANDRA_REPRODUCTION_SCHEMA) throw new TypeError(`${label}: ${String(row.schema)} is not a reproduction receipt.`);
-  const archive = requireRecord(row.archive, `${label}: archive file`), sha256 = requireString(archive.sha256, `${label}: archive digest`);
-  if (!DIGEST.test(sha256)) throw new TypeError(`${label}: the archive digest it compared is not a sha256.`);
+  const archive = requireRecord(row.archive, `${label}: archive file`);
   return { program: requireString(row.program, `${label}: program`), obsid: requireFiniteNumber(row.obsid, `${label}: obsid`), product: requireString(row.product, `${label}: product`),
     instrument: requireString(row.instrument, `${label}: instrument`), grating: requireString(row.grating, `${label}: grating`), dataMode: requireString(row.dataMode, `${label}: data mode`),
-    archive: { path: requireString(archive.path, `${label}: archive path`), bytes: requireFiniteNumber(archive.bytes, `${label}: archive bytes`), sha256 } };
+    archive: { path: requireString(archive.path, `${label}: archive path`), bytes: requireFiniteNumber(archive.bytes, `${label}: archive bytes`) } };
 }
 
 /** The schemas a frozen-frame receipt has carried. The receipt committed before the environment had one owner is @1; @2 states
@@ -203,7 +201,7 @@ export async function pinnedState(directory = PROGRAMS) {
         : ![observationMode(observation), `${observation.readMode}/${observation.dataMode}`].includes(receipt.dataMode) ? `the mode ${receipt.dataMode}`
         : !pinned ? `${receipt.archive.path}, which obsid ${receipt.obsid} does not pin`
         : pinned.bytes !== receipt.archive.bytes ? `${receipt.archive.bytes} bytes of ${receipt.archive.path}, not the ${pinned.bytes} pinned`
-        : pinned.sha256 !== undefined && pinned.sha256 !== receipt.archive.sha256 ? `another ${receipt.archive.path}` : null;
+        : null;
       if (wrong) throw new TypeError(`${file}: it compared ${wrong}.`);
       reproduced.add(`${receipt.program}|${receipt.obsid}`);
     } catch (error) { problems.push(receiptProblem(file, error)); }

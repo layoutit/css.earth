@@ -1,5 +1,6 @@
 import { required } from './test-values.mts';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality, lommelSeeligerGain, fitCamera, project, PLANE_NAMES, GEO_SHAPE_MODEL, osirisRadianceFactorScale, phaseGain, observationGain } from '../objects/terrestrial-layers/osiris-geo.mts';
 import { sampleFootprint } from '../objects/surface-observations/footprint.mts';

@@ -23,8 +23,7 @@ async function preparedFixture() {
 
 async function authenticateFixture({ descriptor, payload }: Awaited<ReturnType<typeof preparedFixture>>) {
   const bytes = new TextEncoder().encode(JSON.stringify(payload)).buffer;
-  const sha256 = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(v => v.toString(16).padStart(2, '0')).join('');
-  return { descriptor: { ...descriptor, prepared: { ...descriptor.prepared!, sha256 } }, bytes };
+  return { descriptor, bytes };
 }
 
 

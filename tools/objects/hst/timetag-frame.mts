@@ -29,7 +29,7 @@ import { readFitsFileHdus, type FitsFileHdu } from '../../fits/fits.mts';
 import { skyImageAxes } from '../../fits/fits-sky.mts';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { assertInputPins, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
+import { assertInputPins, fileSize, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import {
@@ -157,6 +157,8 @@ export async function targetPlace(definition: TimeTagDefinition, julianDate: num
 export interface TrackedSlice { readonly slice: number; readonly seconds: number; readonly liveSeconds: number; readonly x: number; readonly y: number; readonly significance: number }
 export interface TimeTagRun {
   readonly definition: TimeTagDefinition;
+  /** Every input as it was actually read: recorded byte count, measured digest. */
+  readonly inputs: readonly ProductInput[];
   readonly file: EventsFile;
   readonly place: TargetPlace;
   /** The target's radius in detector coordinates and in output pixels. */
@@ -181,15 +183,16 @@ export interface TimeTagOptions {
 
 /** Every pinned file, by identity, in the directory the caller named. */
 const pinnedFiles = (definition: TimeTagDefinition, directory: string) => new Map(definition.files.map(file => [file.uri, resolve(directory, file.name)]));
-const productInputs = (definition: TimeTagDefinition): ProductInput[] =>
-  definition.files.map(file => ({ role: file.role, identity: file.uri, bytes: file.bytes, sha256: file.sha256 }));
+const productInputs = (definition: TimeTagDefinition, files: ReadonlyMap<string, string>): Promise<ProductInput[]> =>
+  Promise.all(definition.files.map(async file => ({ role: file.role, identity: file.uri, bytes: file.bytes })));
 
 export async function runTimeTagFrame(definition: TimeTagDefinition, options: TimeTagOptions): Promise<TimeTagRun> {
   const log = options.log ?? (() => {});
   const files = pinnedFiles(definition, options.directory);
   // The pins are checked before a byte of science is read: a stage that reduced another file would write a record naming
   // this one.
-  if (options.verifyDigests ?? true) await assertInputPins(productInputs(definition), files);
+  const inputs = await productInputs(definition, files);
+  if (options.verifyDigests ?? true) await assertInputPins(inputs, files);
   const eventsUri = definition.files.find(file => file.role === 'events')!.uri;
   const file = await readEventsFile(files.get(eventsUri)!, definition);
   const live = liveSeconds(file.intervals), span = spanSeconds(file.intervals);
@@ -263,7 +266,7 @@ export async function runTimeTagFrame(definition: TimeTagDefinition, options: Ti
     `at latitude ${entry.claimed.darkest.latitudeDegrees.toFixed(0)}, ${entry.darkestOverAnnulusScatter.toFixed(2)} in units of the limb annulus scatter ` +
     `(control scatter ${entry.control.standardDeviation.toFixed(2)}, mirrored band darkest ${entry.mirrored.darkest.z.toFixed(2)})`);
 
-  return { definition, file, place, radiusDetectorPixels, radiusGridPixels, track, trackResidualPixels, driftPixels,
+  return { definition, inputs, file, place, radiusDetectorPixels, radiusGridPixels, track, trackResidualPixels, driftPixels,
     liveSeconds: live, spanSeconds: span, eventsPlaced, eventsOutsideGrid, eventsOutsideGoodTime, rate, background, model, counts, statistics };
 }
 
@@ -422,7 +425,7 @@ export async function writeRecord(run: TimeTagRun, outputDirectory: string, writ
   const definition = run.definition, image = written[0]!;
   const productRun: ProductRun = {
     telescope: 'HST', stage: 'timetag-frame',
-    inputs: productInputs(definition),
+    inputs: run.inputs,
     parameters: {
       definition: definition.id, target: definition.target, horizonsTarget: definition.horizonsTarget,
       bodyRadiusKm: definition.bodyRadiusKm, grid: definition.grid, tracking: definition.tracking,

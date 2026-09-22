@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { partitionSurface, prepareDepthPartitions, restoreDepthSource } from './prepared-depth-partitions.mts';
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 import { readFile } from 'node:fs/promises';

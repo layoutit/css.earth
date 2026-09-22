@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { performance, PerformanceMark, PerformanceMeasure } from 'node:perf_hooks';
 import { SourceEvidence } from './source-evidence-values.mts';

@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseDbf } from './dbf.js';
 import { budgetTracePaths, extentPolygon, meshRadiusBand, nodeIndex as nodeIndexForTest, normalizeExtent, projectRadial, parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures, rimVectors, selectTraces, surfaceDirection } from './index.js';
 import { parseShpPolylines } from './shp.js';
@@ -125,14 +126,14 @@ test('the pinned Mercury Gazetteer archive prepares anchored IAU features on the
     const { plan, catalog } = await prepareSurfaceFeatures({ objectId: 'mercury', sourceDirectory: mercurySource, publicDirectory: resolve(directory, 'public'), outputDirectory: resolve(directory, 'prepared'),
       config, maxEntries: 1000, radiusKm: 2439.7, meshRadiusUnits: 11500, tree, declaredLensIds: ['normal', 'enhanced', 'topography', 'interior'] });
     assert.deepEqual(plan.outline, { pieces: 256 });
-    assert.equal(plan.policy.minimumZoomShare, 1);
+    assert.equal(plan.policy.minimumZoomShare, config.labelPolicy.minimumZoomShare);
     assert.equal(plan.target, 3);
     // Every adopted row is accounted for: labelled names, the MESSENGER impact site (unsized, from the pinned sites document), the 32 excluded albedo features and the folded duplicates.
     assert.equal(catalog.features.length + 32 + catalog.duplicates.rows, 614);
     assert.deepEqual(catalog.assumed.unsized, { IM: 1 });
     assert.deepEqual(catalog.sites, { source: catalog.sites?.source ?? '', retrievedAt: '2026-09-12', count: 1 });
     const impact = catalog.features.find(feature => feature.code === 'IM');
-    assert.ok(impact && impact.diameterKm === 0 && impact.note?.credit && impact.credit.endsWith('2015'), 'the MESSENGER impact carries its cited source');
+    assert.ok(impact && impact.diameterKm === 0 && impact.note && impact.credit.endsWith('2015'), 'the MESSENGER impact carries its cited source');
     assert.deepEqual(catalog.excluded.AL?.count, 32);
     assert.deepEqual(catalog.duplicates, { features: 8, rows: 8, maxSeparationDeg: 0.1632, maxDiameterDifferenceKm: 0.846 });
     assert.equal(new Set(catalog.features.map(feature => feature.id)).size, catalog.features.length);

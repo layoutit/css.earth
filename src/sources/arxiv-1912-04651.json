@@ -1,0 +1,50 @@
+{
+  "id": "arxiv-1912-04651",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "GRAVITY Collaboration (2020): Peering into the formation history of beta Pictoris b with VLTI/GRAVITY long-baseline interferometry",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1912.04651"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201936898"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1912.04651",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201936898",
+      "label": "Astronomy & Astrophysics 633, A110"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1912.04651",
+      "checkedOn": "2026-09-22",
+      "locator": "Abstract and Section 4: Exo-REM fits to the GRAVITY K-band and GPI spectra of beta Pictoris b; C/O 0.43 +/- 0.05, mass 12.7 +/- 2.2 Jupiter masses, e 0.15; Teff 1742 +/- 10 K as Ortiz Ceballos et al. (2026, Extended Data Table 3) cite it"
+    },
+    {
+      "path": "src/objects/beta-pictoris-b/source/content/object.json",
+      "locator": "/panel/moreFacts/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "GRAVITY Collaboration",
+    "M. Nowak",
+    "S. Lacour",
+    "P. Mollière",
+    "J. Wang",
+    "B. Charnay"
+  ]
+}

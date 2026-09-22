@@ -23,7 +23,6 @@
 import { access, readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import type { FitsHeader } from '../../fits/fits.mts';
 import { addProductEvidence, productRecordPath, readProductRecord, runDigest, type ProductEvidence, type ProductRecord } from '../product-record.mts';
 import { chandraFile, observationMode, PROGRAMS, type ChandraFile } from './archive.mts';
@@ -235,8 +234,8 @@ export async function compareWithArchive(id: string, obsid: number, run: string,
       // run. Nothing here is read from the software installed on the machine that ran this comparison.
       productRecord: { file: recordPath.slice(run.length + 1), runDigest: runDigest(made.record) },
       reprocessedWith: { ciao: made.ciao, caldb: made.caldb },
-      archive: { ...pinned, sha256: pinned.sha256 ?? (await sha256File(archivePath)).sha256, ...cards(theirs.table.hdu.header, RUN_CARDS) },
-      local: { name: written[0]!, bytes: ours.bytes.length, sha256: (await sha256File(ours.path)).sha256, ...cards(ours.table.hdu.header, RUN_CARDS) },
+      archive: { ...pinned, ...cards(theirs.table.hdu.header, RUN_CARDS) },
+      local: { name: written[0]!, bytes: ours.bytes.length, ...cards(ours.table.hdu.header, RUN_CARDS) },
       differentCards: differentCards(ours.table.hdu.header, theirs.table.hdu.header),
       events: { key, ours: ours.table.rows, archive: theirs.table.rows, matched: match.ourRows.length, onlyOurs: match.onlyOurs, onlyArchive: match.onlyArchive },
       sky: compareSky(ourX, ourY, theirX, theirY, match.ourRows, match.theirRows),

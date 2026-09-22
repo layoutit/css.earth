@@ -3,7 +3,8 @@ import { execFile } from 'node:child_process';
 import { mkdir, mkdtemp, rename, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { promisify } from 'node:util';
 import { DEFAULT_OBJECT_DIRECTORY_LIMIT, PIPELINE_CHANGE_LABEL, evaluateObjectScopeGate,
   objectScopeGate, parseLabelsArgument, touchedObjectDirectories } from './object-scope-gate.mts';

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createHash } from 'node:crypto';
 import { readFitsImage, readFitsHdus } from './fits.mts';
 import { readFitsPrimary } from '../objects/observation/fits.mts';

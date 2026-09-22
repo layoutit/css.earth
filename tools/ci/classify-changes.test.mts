@@ -3,7 +3,8 @@ import { execFile } from 'node:child_process';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { promisify } from 'node:util';
 import { classifyChanges, classifyChangedPaths, isDocPath } from './classify-changes.mts';
 

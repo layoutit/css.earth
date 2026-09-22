@@ -15,6 +15,16 @@ export const MAX_PROJECTIVE_TEXTURE_LEAF_LAYOUT_SIZE = 32;
 export const PREPARED_PROJECTIVE_TEXTURE_LAYER_SCHEMA =
   "polycss-prepared-projective-texture-layer@1";
 
+/** The raster scale for a polar cap: only as fine as its texture. A cap's leaf samples `texturePixels` logical texture
+ * pixels across `leafCssPixels`; the site ships 2x textures and every screen it serves shows at least 2 device pixels
+ * per CSS px, so a scale of ceil(texturePixels / leafCssPixels) keeps every texture pixel. A higher configured scale only
+ * enlarges the layer: on an iPhone each of Earth's caps took 36 MB at scale 4 against 2.3 MB at scale 1, with the
+ * same pixels drawn. */
+export function polarCapRasterScale(configured: number, texturePixels: number, leafCssPixels: number): number {
+  if (!(texturePixels > 0) || !(leafCssPixels > 0)) throw new RangeError('A polar cap needs its texture and leaf size.');
+  return Math.min(configured, Math.max(1, Math.ceil(texturePixels / leafCssPixels)));
+}
+
 export function prepareProjectiveTextureLayer(matrixValue: string | readonly number[], rasterScale = 1) {
   const matrix = String(matrixValue).split(",").map(Number);
   if (matrix.length !== 16 || matrix.some((value) => !Number.isFinite(value)) ||

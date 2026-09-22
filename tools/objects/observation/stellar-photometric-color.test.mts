@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseCieTable } from './disc-integrated-color.mts';
 import { limbDarkeningPlate, loadStellarPhotometricColor, parseStellarColorRecord, planckColor, quadraticIntensity, readQuadraticLimbDarkening, readStellarTemperature } from './stellar-photometric-color.mts';
 import { linearToSrgb } from '../color-transfer.mts';
