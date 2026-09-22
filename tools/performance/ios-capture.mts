@@ -199,26 +199,142 @@ export function summariseSamples(stacks: readonly (readonly Frame[])[], name: (f
   return { samples: stacks.length, self: top(self, limit), inclusive: top(inclusive, limit) };
 }
 
+const span = (value: Record<string, unknown>) => {
+  const start = typeof value.startTime === 'number' ? value.startTime : 0;
+  return [start, typeof value.endTime === 'number' && value.endTime >= start ? value.endTime : start] as const;
+};
+/** Milliseconds of work inside a rendering frame: the union of its direct children's spans. */
+export function frameWork(frame: Record<string, unknown>): number {
+  const ranges = (Array.isArray(frame.children) ? frame.children : []).filter(isRecord).map(span).sort((a, b) => a[0] - b[0]);
+  let until = -Infinity, total = 0;
+  for (const [start, end] of ranges) { total += Math.max(0, end - Math.max(start, until)); until = Math.max(until, end); }
+  return total * 1000;
+}
 /** Timeline records by type: time inside each type, counting nested records of the same type once. */
 export function summariseTimeline(records: readonly unknown[]) {
   const time = new Map<string, number>(), count = new Map<string, number>(), frames: number[] = [];
   const walk = (value: unknown, open: ReadonlySet<string>) => {
     if (!isRecord(value)) return;
     const type = typeof value.type === 'string' ? value.type : 'unknown';
-    const start = typeof value.startTime === 'number' ? value.startTime : 0, end = typeof value.endTime === 'number' ? value.endTime : start;
+    // Instant records (timer install, removal) carry no end time and add no duration.
+    const start = typeof value.startTime === 'number' ? value.startTime : 0, end = typeof value.endTime === 'number' && value.endTime >= start ? value.endTime : start;
     bump(count, type);
     if (!open.has(type)) bump(time, type, (end - start) * 1000);
-    if (type === 'RenderingFrame') frames.push((end - start) * 1000);
+    // A rendering frame stays open while nothing needs drawing, so its own span includes idle time. Its work is the
+    // union of its top-level records.
+    if (type === 'RenderingFrame') frames.push(frameWork(value));
     const next = new Set(open).add(type);
     for (const child of Array.isArray(value.children) ? value.children : []) walk(child, next);
   };
   for (const record of records) walk(record, new Set());
   const round = (value: number) => Math.round(value * 10) / 10;
+  // The longest rendering frames, each with its own time by record type and the scripts it ran.
+  const inside = (frame: Record<string, unknown>) => {
+    const byType = new Map<string, number>(), scripts = new Map<string, number>();
+    const visit = (value: unknown, open: ReadonlySet<string>) => {
+      if (!isRecord(value)) return;
+      const type = typeof value.type === 'string' ? value.type : 'unknown';
+      const begin = typeof value.startTime === 'number' ? value.startTime : 0;
+      const ms = (typeof value.endTime === 'number' && value.endTime >= begin ? value.endTime - begin : 0) * 1000;
+      if (!open.has(type)) bump(byType, type, ms);
+      const data = isRecord(value.data) ? value.data : {};
+      if (type === 'FunctionCall' || type === 'EvaluateScript') bump(scripts, `${String(data.scriptName ?? data.url ?? '').split('/').pop()}:${String(data.scriptLine ?? data.lineNumber ?? '')}`, ms);
+      const next = new Set(open).add(type);
+      for (const child of Array.isArray(value.children) ? value.children : []) visit(child, next);
+    };
+    for (const child of Array.isArray(frame.children) ? frame.children : []) visit(child, new Set());
+    return { byType: [...byType].sort((a, b) => b[1] - a[1]).slice(0, 8).map(([type, ms]) => ({ type, ms: round(ms) })),
+      scripts: [...scripts].sort((a, b) => b[1] - a[1]).slice(0, 5).map(([script, ms]) => ({ script, ms: round(ms) })) };
+  };
+  const rendering = records.filter(isRecord).filter(record => record.type === 'RenderingFrame');
+  const firstStart = Math.min(...records.filter(isRecord).map(record => typeof record.startTime === 'number' ? record.startTime : Infinity));
+  const longest = rendering.map(record => ({ record, ms: frameWork(record), wallMs: (span(record)[1] - span(record)[0]) * 1000 }))
+    .sort((a, b) => b.ms - a.ms).slice(0, 5)
+    .map(({ record, ms, wallMs }) => ({ ms: round(ms), wallMs: round(wallMs), atMs: round(((Number(record.startTime) || 0) - firstStart) * 1000), ...inside(record) }));
   return {
+    longestFrames: longest,
     byType: [...time].sort((a, b) => b[1] - a[1]).map(([type, ms]) => ({ type, ms: round(ms), count: count.get(type) ?? 0 })),
     renderingFrames: { count: frames.length, over16ms: frames.filter(ms => ms > 16.7).length, over50ms: frames.filter(ms => ms > 50).length,
       longestMs: round(Math.max(0, ...frames)), totalMs: round(frames.reduce((sum, ms) => sum + ms, 0)) },
   };
+}
+
+/** The JavaScript that scheduled style and layout work: the top frame of each scheduling record's stack. */
+export const SCHEDULING_TYPES = ['ScheduleStyleRecalculation', 'InvalidateLayout', 'ScheduleLayout'] as const;
+export function schedulingStacks(records: readonly unknown[]): { type: string; frames: Frame[] }[] {
+  const found: { type: string; frames: Frame[] }[] = [];
+  const framesOf = (value: unknown): Frame[] => {
+    const list = Array.isArray(value) ? value : isRecord(value) && Array.isArray(value.callFrames) ? value.callFrames : [];
+    return list.filter(isRecord).map(frame => ({ name: typeof frame.functionName === 'string' ? frame.functionName : '',
+      url: typeof frame.url === 'string' ? frame.url : '', line: typeof frame.lineNumber === 'number' ? frame.lineNumber : 0,
+      column: typeof frame.columnNumber === 'number' ? frame.columnNumber : 0 }));
+  };
+  const walk = (value: unknown) => {
+    if (!isRecord(value)) return;
+    if (typeof value.type === 'string' && (SCHEDULING_TYPES as readonly string[]).includes(value.type)) {
+      const frames = framesOf(value.stackTrace ?? (isRecord(value.data) ? value.data.stackTrace : undefined));
+      found.push({ type: value.type, frames });
+    }
+    for (const child of Array.isArray(value.children) ? value.children : []) walk(child);
+  };
+  for (const record of records) walk(record);
+  return found;
+}
+export function summariseInitiators(stacks: readonly { type: string; frames: readonly Frame[] }[], name: (frame: Frame) => string, limit = 20) {
+  return Object.fromEntries(SCHEDULING_TYPES.map(type => {
+    const counts = new Map<string, number>();
+    for (const stack of stacks.filter(entry => entry.type === type)) {
+      const frame = stack.frames.find(candidate => candidate.url);
+      bump(counts, frame ? name(frame) : '(no script frame)');
+    }
+    return [type, top(counts, limit)];
+  }));
+}
+
+/** Composited layers: how many, their backing memory, and why the largest were composited. */
+async function layerTree(session: ReturnType<typeof inspector>) {
+  const documentReply = await session.send('DOM.getDocument');
+  const rootNode = isRecord(documentReply.result) && isRecord(documentReply.result.root) ? documentReply.result.root.nodeId : null;
+  if (typeof rootNode !== 'number') return { error: 'no document' };
+  await session.send('LayerTree.enable');
+  const reply = await session.send('LayerTree.layersForNode', { nodeId: rootNode });
+  const layers = isRecord(reply.result) && Array.isArray(reply.result.layers) ? reply.result.layers.filter(isRecord) : [];
+  const memory = (layer: Record<string, unknown>) => typeof layer.memory === 'number' ? layer.memory : 0;
+  const reasons = new Map<string, number>();
+  const paints = (layer: Record<string, unknown>) => typeof layer.paintCount === 'number' ? layer.paintCount : 0;
+  // The largest by backing memory, then the most repainted: a layer repainted every frame is re-sent every frame.
+  const byMemory = [...layers].sort((a, b) => memory(b) - memory(a)).slice(0, 12);
+  const byPaints = [...layers].sort((a, b) => paints(b) - paints(a)).filter(layer => !byMemory.includes(layer)).slice(0, 8);
+  const largest = [...byMemory, ...byPaints];
+  // Reasons for a sample of layers across the list, so the count by reason describes the whole tree.
+  const sample = layers.filter((_, index) => index % Math.max(1, Math.ceil(layers.length / 300)) === 0);
+  for (const layer of sample) {
+    const why = await session.send('LayerTree.reasonsForCompositingLayer', { layerId: layer.layerId });
+    const flags = isRecord(why.result) && isRecord(why.result.compositingReasons) ? why.result.compositingReasons : {};
+    for (const [reason, on] of Object.entries(flags)) if (on === true) bump(reasons, reason);
+  }
+  // What each large layer is: resolve its node and read the element's identity and image.
+  const describe = async (nodeId: unknown) => {
+    if (typeof nodeId !== 'number') return null;
+    const resolved = await session.send('DOM.resolveNode', { nodeId });
+    const objectId = isRecord(resolved.result) && isRecord(resolved.result.object) ? resolved.result.object.objectId : null;
+    if (typeof objectId !== 'string') return null;
+    const call = await session.send('Runtime.callFunctionOn', { objectId, returnByValue: true, functionDeclaration: `function () {
+      const element = this.nodeType === 1 ? this : this.parentElement; if (!element) return null;
+      const style = getComputedStyle(element);
+      const data = [...element.attributes].filter(attribute => attribute.name.startsWith('data-') || attribute.name === 'id').map(attribute => attribute.name + '=' + attribute.value.slice(0, 40));
+      const path = []; for (let node = element; node && path.length < 4; node = node.parentElement) path.push(node.tagName.toLowerCase() + (node.className && typeof node.className === 'string' ? '.' + node.className.trim().split(/\\s+/).slice(0, 2).join('.') : ''));
+      return { path: path.join(' < '), data, image: style.backgroundImage.slice(0, 160), size: element.offsetWidth + 'x' + element.offsetHeight };
+    }` });
+    return isRecord(call.result) && isRecord(call.result.result) ? call.result.result.value ?? null : null;
+  };
+  const described = [];
+  for (const layer of largest) described.push({ layer, element: await describe(layer.nodeId) });
+  await session.send('LayerTree.disable');
+  return { count: layers.length, memoryMb: Math.round(layers.reduce((sum, layer) => sum + memory(layer), 0) / 1048576 * 10) / 10,
+    paints: layers.reduce((sum, layer) => sum + (typeof layer.paintCount === 'number' ? layer.paintCount : 0), 0),
+    reasonsInSample: { sampled: sample.length, counts: top(reasons, 20) },
+    largest: described.map(({ layer, element }) => ({ memoryKb: Math.round(memory(layer) / 1024), bounds: layer.bounds ?? null, paintCount: layer.paintCount ?? 0, element })) };
 }
 
 /** CPU per thread, averaged over the tracking updates, with each worker named by its script. */
@@ -337,7 +453,7 @@ function options(args: readonly string[]) {
   if (!stepsFile === !seconds) throw new TypeError('Pass either --steps <file.json> or --seconds <n>.');
   return { name, stepsFile, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), settle: Number(value('--settle') ?? 12) };
+    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache') };
 }
 
 export async function captureIosMoment(args: readonly string[]) {
@@ -366,7 +482,8 @@ export async function captureIosMoment(args: readonly string[]) {
   });
   // Page.enable starts the inspector stopwatch every timestamp reads (WebKit InspectorPageAgent::enable); without it all are 0.
   for (const domain of ['Page', 'Console', 'Network', 'Timeline', 'Worker']) await session.send(`${domain}.enable`);
-  await session.send('Network.setResourceCachingDisabled', { disabled: true });
+  // Real visits keep Safari's cache; --no-cache measures a cold load (it also refetches repeated images).
+  if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
   // --open loads the page in this same tab, so each capture starts from a fresh load in the tab on screen.
   if (option.open) { workers.clear(); await session.send('Page.navigate', { url: option.open }); await wait(option.settle * 1000); }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
@@ -400,6 +517,7 @@ export async function captureIosMoment(args: readonly string[]) {
   await new Promise(done => xctrace.once('exit', done));
   await wait(1500);
   const moment = events.slice(recordingStart);
+  const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
   const memoryAfter = await memorySample(session, events);
   session.close(); proxy?.kill();
 
@@ -413,19 +531,31 @@ export async function captureIosMoment(args: readonly string[]) {
     const source = requireString(event.source, 'source');
     stacks.set(source === 'page' ? 'page' : `worker ${workers.get(source) ?? source}`, traces);
   }
+  const timelineRecords = moment.filter(event => event.method === 'Timeline.eventRecorded' && isRecord(event.params)).map(event => (event.params as Message).record);
+  const scheduling = schedulingStacks(timelineRecords);
   const namer = await sourceNamer(option.dist);
-  await namer.prepare([...stacks.values()].flat(2));
+  await namer.prepare([...[...stacks.values()].flat(2), ...scheduling.flatMap(entry => entry.frames)]);
+  const initiators = summariseInitiators(scheduling, frame => namer.name(frame));
   const javascript = Object.fromEntries([...stacks].map(([target, list]) => [target, summariseSamples(list, frame => namer.name(frame))]));
-  const timeline = summariseTimeline(moment.filter(event => event.method === 'Timeline.eventRecorded' && isRecord(event.params)).map(event => (event.params as Message).record));
+  const timeline = summariseTimeline(timelineRecords);
   const cpu = summariseCpu(moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event), workers);
   const consoleMessages = moment.filter(event => event.method === 'Console.messageAdded' && isRecord(event.params)).map(event => requireRecord((event.params as Message).message, 'console'))
     .map(message => ({ level: String(message.level), text: String(message.text).slice(0, 500), url: typeof message.url === 'string' ? message.url : null, line: message.line ?? null }));
-  const responses = new Map<string, { url: string; type: string; status: number; bytes: number }>();
+  const responses = new Map<string, { url: string; type: string; status: number; bytes: number; initiator?: string }>();
+  const requestStacks = new Map<string, Frame[]>();
   for (const event of moment) {
     if (!isRecord(event.params)) continue;
     const id = String(event.params.requestId);
+    // Who asked for it: the script stack WebKit attaches to the request.
+    if (event.method === 'Network.requestWillBeSent' && isRecord(event.params.initiator))
+      requestStacks.set(id, schedulingStacks([{ type: 'ScheduleLayout', stackTrace: event.params.initiator.stackTrace }])[0]?.frames ?? []);
     if (event.method === 'Network.responseReceived' && isRecord(event.params.response)) responses.set(id, { url: String(event.params.response.url), type: String(event.params.type), status: Number(event.params.response.status), bytes: 0 });
     if (event.method === 'Network.dataReceived' && responses.has(id)) responses.get(id)!.bytes += Number(event.params.dataLength) || 0;
+  }
+  await namer.prepare([...requestStacks.values()].flat());
+  for (const [id, response] of responses) {
+    const frames = requestStacks.get(id)?.filter(frame => frame.url) ?? [];
+    if (frames.length) response.initiator = frames.slice(0, 10).map(frame => namer.name(frame)).join(' < ');
   }
   const requests = [...responses.values()];
 
@@ -439,7 +569,7 @@ export async function captureIosMoment(args: readonly string[]) {
   const report = {
     schema: 'cssearth-ios-capture@1', name: option.name, url, udid, durationMs, steps: marks, workers: Object.fromEntries(workers),
     sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter },
-    javascript, timeline, cpu, console: consoleMessages,
+    javascript, timeline, initiators, layers, cpu, console: consoleMessages,
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
     native: nativeSummary, files: (await readdir(out)).sort(),
   };
@@ -449,13 +579,19 @@ export async function captureIosMoment(args: readonly string[]) {
 }
 
 type ReadmeInput = { name: string; url: string; durationMs: number; memoryMb: { before: unknown; after: unknown }; sourceMaps: { mapped: number };
+  initiators: Record<string, { label: string; count: number }[]>; layers: unknown;
   javascript: Record<string, ReturnType<typeof summariseSamples>>; timeline: ReturnType<typeof summariseTimeline>; cpu: ReturnType<typeof summariseCpu>;
   console: readonly { level: string; text: string }[]; network: { requests: number; bytes: number }; native: ReturnType<typeof summariseTimeProfile> | { error: string } };
 function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
-    `Rendering frames: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
+    `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
+    '## Composited layers', '', `${JSON.stringify(r.layers).slice(0, 900)}`, '',
+    '## Busiest frames (work inside the frame; wall time in brackets)', '', ...r.timeline.longestFrames.map(frame => `- ${frame.ms} ms (${frame.wallMs} ms) at ${frame.atMs} ms: ` +
+      `${frame.byType.map(entry => `${entry.type} ${entry.ms}`).join(', ')}${frame.scripts.length ? `; scripts ${frame.scripts.map(entry => `${entry.script} ${entry.ms}`).join(', ')}` : ''}`), '',
     '## Timeline', '', ...r.timeline.byType.slice(0, 15).map(entry => `- ${entry.type}: ${entry.ms} ms (${entry.count})`), '',
+    '## Who scheduled style and layout', '', ...Object.entries(r.initiators).flatMap(([type, list]) => list.length
+      ? [`${type}:`, ...list.slice(0, 8).map(entry => `- ${entry.count} ${entry.label}`), ''] : []),
     '## CPU by thread', '', `Page average ${r.cpu.averagePercent}%, peak ${r.cpu.peakPercent}%.`, ...r.cpu.threads.slice(0, 10).map(thread => `- ${thread.thread}: ${thread.averagePercent}% average, ${thread.peakPercent}% peak`), ''];
   for (const [target, summary] of Object.entries(r.javascript)) {
     lines.push(`## JavaScript: ${target} (${summary.samples} samples)`, '', 'Self:', ...summary.self.slice(0, 15).map(entry => `- ${entry.count} ${entry.label}`), '',
