@@ -27,12 +27,18 @@ export interface VoyagerRoute {
   /** Frames are used only where the view and the Sun are within these angles of the surface normal. */
   maximumEmissionDegrees: number; maximumIncidenceDegrees: number;
 }
+/** Smallest disc, in pixels across, that a frame may be placed from. */
+export const MINIMUM_DISC_PIXELS = 24;
 export interface PlacedFrame {
   id: string; filter: string; imageTime: string; et: number;
   prediction: { centre: [number, number]; radiusPixels: number };
   limb: LimbFit; accepted: boolean;
   camera: ReturnType<typeof spiceCamera>;
   pixelScaleKm: number;
+  /** Body radius the placement used, in km. */
+  radiusKm: number;
+  /** The camera with its optical centre moved by a further detector offset, for a registration after the limb fit. */
+  shifted(extraPixels: readonly [number, number]): PlacedFrame;
 }
 
 const label = (text: string, key: string) => {
@@ -70,21 +76,32 @@ export function placeFrame(id: string, bytes: Buffer, labelText: string, set: Ke
   const sx = (m[0]![0]! * q[0]! + m[0]![1]! * q[1]! + m[0]![2]! * q[2]! + m[0]![3]!) / w - centre[0];
   const sy = (m[1]![0]! * q[0]! + m[1]![1]! * q[1]! + m[1]![2]! * q[2]! + m[1]![3]!) / w - centre[1], sn = Math.hypot(sx, sy);
   const limb = fitLimb(image, { centre, radiusPixels, sunDirection: [sx / sn, sy / sn] });
-  const accepted = limbAccepted(limb);
+  // A disc under MINIMUM_DISC_PIXELS across carries no surface detail worth a limb fit; it is reported, never placed.
+  const accepted = 2 * radiusPixels >= MINIMUM_DISC_PIXELS && limbAccepted(limb, radiusPixels);
   // Shifting the optical centre by the limb offset moves every projected point by that offset: the corrected camera.
-  const corrected = accepted ? camera([optical[0] + limb.shift[0], optical[1] + limb.shift[1]]) : recorded;
-  return { id, filter, imageTime, et, prediction: { centre, radiusPixels }, limb, accepted, camera: corrected,
-    pixelScaleKm: recorded.report.rangeKm / focalLengthPixels };
+  const place = (shift: readonly [number, number]): PlacedFrame => ({ id, filter, imageTime, et, prediction: { centre, radiusPixels }, limb, accepted,
+    camera: accepted ? camera([optical[0] + shift[0], optical[1] + shift[1]]) : recorded, pixelScaleKm: recorded.report.rangeKm / focalLengthPixels, radiusKm: route.radiusKm,
+    shifted: extra => place([shift[0] + extra[0], shift[1] + extra[1]]) });
+  return place(limb.shift);
 }
 
 /**
  * The placed frame on an equirectangular grid of `cellDegrees`, clipped to its footprint: raw calibrated I/F (no photometric
  * correction; the lens applies its own), NaN where the frame has no usable sample.
  */
-export function projectFrame(placed: PlacedFrame, values: ArrayLike<number>, route: VoyagerRoute, cellDegrees: number) {
+/**
+ * Write the placed frame onto an equirectangular grid. Only pixels brighter than `minimumValue` are ground: a GEOMED frame's
+ * border rows carry negative values rather than the exact zeros of the resampling margin, and a disc cut by the frame edge would
+ * otherwise project that band as terrain (Ariel's 1.3 km set, 2026-09-22).
+ */
+export function projectFrame(placed: PlacedFrame, values: ArrayLike<number>, route: VoyagerRoute, cellDegrees: number, minimumValue = 0) {
   const { matrix: m, positionKm: obs, sunDirection: sun } = placed.camera, R = route.radiusKm, d2r = Math.PI / 180;
   const cosE = Math.cos(route.maximumEmissionDegrees * d2r), cosI = Math.cos(route.maximumIncidenceDegrees * d2r);
   const columns = Math.round(360 / cellDegrees), rows = Math.round(180 / cellDegrees), full = new Float32Array(columns * rows).fill(NaN);
+  // The emission limit is also applied in the image: inside the fitted limb circle by the same margin. A registration shift moves
+  // the camera, not the disc in the picture, so without this a shifted frame samples its own darkened limb on one side.
+  const cx = placed.prediction.centre[0] + placed.limb.shift[0], cy = placed.prediction.centre[1] + placed.limb.shift[1];
+  const maximumImageRadius = placed.prediction.radiusPixels * Math.sin(route.maximumEmissionDegrees * d2r);
   let x0 = columns, x1 = -1, y0 = rows, y1 = -1;
   for (let y = 0; y < rows; y++) {
     const latitude = 90 - (y + 0.5) * cellDegrees, la = (latitude - route.datumShiftDegrees.latitude) * d2r;
@@ -96,15 +113,30 @@ export function projectFrame(placed: PlacedFrame, values: ArrayLike<number>, rou
       const w = m[2]![0]! * p[0]! + m[2]![1]! * p[1]! + m[2]![2]! * p[2]! + m[2]![3]!;
       const px = Math.round((m[0]![0]! * p[0]! + m[0]![1]! * p[1]! + m[0]![2]! * p[2]! + m[0]![3]!) / w);
       const py = Math.round((m[1]![0]! * p[0]! + m[1]![1]! * p[1]! + m[1]![2]! * p[2]! + m[1]![3]!) / w);
-      if (px < 20 || py < 20 || px > 979 || py > 979) continue;
+      if (px < 20 || py < 20 || px > 979 || py > 979 || Math.hypot(px - cx, py - cy) > maximumImageRadius) continue;
       const value = values[py * 1000 + px]!;
-      if (!Number.isFinite(value)) continue;
+      if (!(value > minimumValue)) continue;
       full[y * columns + x] = value;
       x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y);
     }
   }
   if (x1 < 0) return null;
   return equirectangularTiles(full, columns, rows);
+}
+
+/** A placed frame as a sampler by east longitude and latitude: its calibrated value where the point is on the usable disc, else null. */
+export function frameSampler(placed: PlacedFrame, values: ArrayLike<number>, radiusKm: number, maximumEmissionDegrees = 90) {
+  const { matrix: m, positionKm: obs } = placed.camera, d2r = Math.PI / 180, cosE = Math.cos(maximumEmissionDegrees * d2r);
+  return (longitude: number, latitude: number) => {
+    const n = [Math.cos(latitude * d2r) * Math.cos(longitude * d2r), Math.cos(latitude * d2r) * Math.sin(longitude * d2r), Math.sin(latitude * d2r)], p = n.map(c => c * radiusKm);
+    const v = [obs[0]! - p[0]!, obs[1]! - p[1]!, obs[2]! - p[2]!], vn = Math.hypot(v[0]!, v[1]!, v[2]!);
+    if ((v[0]! * n[0]! + v[1]! * n[1]! + v[2]! * n[2]!) / vn < cosE) return null;
+    const w = m[2]![0]! * p[0]! + m[2]![1]! * p[1]! + m[2]![2]! * p[2]! + m[2]![3]!;
+    const x = Math.round((m[0]![0]! * p[0]! + m[0]![1]! * p[1]! + m[0]![2]! * p[2]! + m[0]![3]!) / w), y = Math.round((m[1]![0]! * p[0]! + m[1]![1]! * p[1]! + m[1]![2]! * p[2]! + m[1]![3]!) / w);
+    if (x < 15 || y < 15 || x > 984 || y > 984) return null;
+    const value = values[y * 1000 + x]!;
+    return Number.isFinite(value) && value > 0 ? value : null;
+  };
 }
 
 export interface EquirectangularTile { data: Float32Array; width: number; height: number; firstColumn: number; firstRow: number }

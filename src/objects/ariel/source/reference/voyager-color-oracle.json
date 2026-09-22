@@ -1,0 +1,461 @@
+{
+  "schema": "cssearth-voyager-color-oracle@1",
+  "objectId": "ariel",
+  "reference": "mosaic",
+  "method": "Recorded pointing plus limb fit; the controlled mosaic rendered through the fitted camera and cross-correlated with the frame's high-passed detail over ±30 detector pixels (box half-width 12 px).",
+  "stepDegrees": 0.05,
+  "searchCells": 60,
+  "framesDirectory": "Every limb-placed frame of the recipe, read from the pinned observations.",
+  "recipeDatumShiftDegrees": {
+    "longitude": 0,
+    "latitude": 0
+  },
+  "meanResidualDegrees": null,
+  "residualSpreadKm": null,
+  "meanResidualKm": 25.05,
+  "meanCorrelation": 0.394,
+  "comparedFrames": 9,
+  "frames": [
+    {
+      "id": "c2673243",
+      "observation": "set-19860120-2152",
+      "filter": "VIOLET",
+      "pixelScaleKm": 39.505,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.677,
+        "sedrShiftPixels": [
+          -89.78,
+          -33.36
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2673255",
+      "observation": "set-19860120-2152",
+      "filter": "GREEN",
+      "pixelScaleKm": 39.437,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.363,
+        "sedrShiftPixels": [
+          -65.82,
+          -28.14
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2673301",
+      "observation": "set-19860120-2152",
+      "filter": "UV",
+      "pixelScaleKm": 39.404,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.598,
+        "sedrShiftPixels": [
+          -60.62,
+          -41.73
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2676403",
+      "observation": "set-19860121-2256",
+      "filter": "GREEN",
+      "pixelScaleKm": 28.136,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 25,
+        "rmsPixels": 0.712,
+        "sedrShiftPixels": [
+          -39.49,
+          42.23
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2676415",
+      "observation": "set-19860121-2256",
+      "filter": "VIOLET",
+      "pixelScaleKm": 28.065,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 40,
+        "rmsPixels": 0.653,
+        "sedrShiftPixels": [
+          -61.73,
+          -9.13
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2676421",
+      "observation": "set-19860121-2256",
+      "filter": "UV",
+      "pixelScaleKm": 28.03,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 16,
+        "rmsPixels": 1.438,
+        "sedrShiftPixels": [
+          -52,
+          6.71
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2678106",
+      "observation": "set-19860122-1235",
+      "filter": "VIOLET",
+      "pixelScaleKm": 22.588,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 312,
+        "rmsPixels": 0.939,
+        "sedrShiftPixels": [
+          -183.35,
+          -56.02
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2678112",
+      "observation": "set-19860122-1235",
+      "filter": "GREEN",
+      "pixelScaleKm": 22.558,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.371,
+        "sedrShiftPixels": [
+          -183.11,
+          -67.72
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2678118",
+      "observation": "set-19860122-1235",
+      "filter": "UV",
+      "pixelScaleKm": 22.528,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.485,
+        "sedrShiftPixels": [
+          -202.36,
+          -50.06
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2679041",
+      "observation": "set-19860122-2015",
+      "filter": "GREEN",
+      "pixelScaleKm": 19.759,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.657,
+        "sedrShiftPixels": [
+          -63.96,
+          -17.99
+        ]
+      },
+      "compared": true,
+      "correlation": 0.411,
+      "samples": 521,
+      "limbResidualPixels": [
+        1,
+        0
+      ],
+      "residualKm": 19.76,
+      "applied": true
+    },
+    {
+      "id": "c2679047",
+      "observation": "set-19860122-2015",
+      "filter": "VIOLET",
+      "pixelScaleKm": 19.73,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.587,
+        "sedrShiftPixels": [
+          -50.14,
+          -24.58
+        ]
+      },
+      "compared": true,
+      "correlation": 0.393,
+      "samples": 523,
+      "limbResidualPixels": [
+        1,
+        -1
+      ],
+      "residualKm": 27.9,
+      "applied": true
+    },
+    {
+      "id": "c2679053",
+      "observation": "set-19860122-2015",
+      "filter": "UV",
+      "pixelScaleKm": 19.7,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.501,
+        "sedrShiftPixels": [
+          -53.47,
+          -18.51
+        ]
+      },
+      "compared": true,
+      "correlation": 0.366,
+      "samples": 524,
+      "limbResidualPixels": [
+        1,
+        0
+      ],
+      "residualKm": 19.7,
+      "applied": true
+    },
+    {
+      "id": "c2679728",
+      "observation": "set-19860123-0140",
+      "filter": "GREEN",
+      "pixelScaleKm": 17.735,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 62,
+        "rmsPixels": 0.669,
+        "sedrShiftPixels": [
+          -116.36,
+          -35.13
+        ]
+      },
+      "compared": true,
+      "correlation": 0.409,
+      "samples": 644,
+      "limbResidualPixels": [
+        2,
+        0
+      ],
+      "residualKm": 35.47,
+      "applied": true
+    },
+    {
+      "id": "c2679734",
+      "observation": "set-19860123-0140",
+      "filter": "VIOLET",
+      "pixelScaleKm": 17.705,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.368,
+        "sedrShiftPixels": [
+          -116.22,
+          -26.16
+        ]
+      },
+      "compared": true,
+      "correlation": 0.449,
+      "samples": 645,
+      "limbResidualPixels": [
+        1,
+        -1
+      ],
+      "residualKm": 25.04,
+      "applied": true
+    },
+    {
+      "id": "c2679740",
+      "observation": "set-19860123-0140",
+      "filter": "UV",
+      "pixelScaleKm": 17.674,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 319,
+        "rmsPixels": 0.801,
+        "sedrShiftPixels": [
+          -102.67,
+          -27.77
+        ]
+      },
+      "compared": true,
+      "correlation": 0.347,
+      "samples": 650,
+      "limbResidualPixels": [
+        4,
+        -2
+      ],
+      "residualKm": 79.04,
+      "applied": true
+    },
+    {
+      "id": "c2684340",
+      "observation": "set-19860124-1438",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.296,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 134,
+        "rmsPixels": 0.903,
+        "sedrShiftPixels": [
+          -9.48,
+          -178.49
+        ]
+      },
+      "compared": true,
+      "correlation": 0.517,
+      "samples": 107471,
+      "limbResidualPixels": [
+        2,
+        1
+      ],
+      "residualKm": 2.9,
+      "applied": true
+    },
+    {
+      "id": "c2684342",
+      "observation": "set-19860124-1438",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.288,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 237,
+        "rmsPixels": 0.769,
+        "sedrShiftPixels": [
+          -17.77,
+          -173.86
+        ]
+      },
+      "compared": true,
+      "correlation": 0.437,
+      "samples": 110043,
+      "limbResidualPixels": [
+        3,
+        1
+      ],
+      "residualKm": 4.07,
+      "applied": true
+    },
+    {
+      "id": "c2684344",
+      "observation": "set-19860124-1438",
+      "filter": "UV",
+      "pixelScaleKm": 1.28,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 63,
+        "rmsPixels": 1.167,
+        "sedrShiftPixels": [
+          -70.64,
+          -156.59
+        ]
+      },
+      "compared": true,
+      "correlation": 0.217,
+      "samples": 108318,
+      "limbResidualPixels": [
+        -1,
+        -9
+      ],
+      "residualKm": 11.59,
+      "applied": true
+    },
+    {
+      "id": "c2690305",
+      "observation": "set-19860126-1410",
+      "filter": "VIOLET",
+      "pixelScaleKm": 19.374,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 0,
+        "rmsPixels": null,
+        "sedrShiftPixels": [
+          0,
+          0
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2690317",
+      "observation": "set-19860126-1410",
+      "filter": "GREEN",
+      "pixelScaleKm": 19.454,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 0,
+        "rmsPixels": null,
+        "sedrShiftPixels": [
+          0,
+          0
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2690323",
+      "observation": "set-19860126-1410",
+      "filter": "UV",
+      "pixelScaleKm": 19.493,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 0,
+        "rmsPixels": null,
+        "sedrShiftPixels": [
+          0,
+          0
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    }
+  ]
+}

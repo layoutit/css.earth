@@ -168,6 +168,78 @@
           }
         ]
       }
+    },
+    {
+      "id": "voyager-vgr2-ura111-bsp",
+      "path": "spk/vgr2.ura111.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/VOYAGER/kernels/spk/vgr2.ura111.bsp",
+      "credit": "NASA/JPL NAIF; Voyager project SPICE kernels",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 646144,
+      "expectedSha256": "c0f9d70a52dea606505505b1889d18157d4f2c82c7603cf7a8ede63fb8dd931d",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-vg2-ura-version1-type1-iss-sedr-bc",
+      "path": "ck/vg2_ura_version1_type1_iss_sedr.bc",
+      "origin": "https://pds-rings.seti.org/voyager/ck/vg2_ura_version1_type1_iss_sedr.bc",
+      "credit": "PDS Ring-Moon Systems Node (M. R. Showalter); Voyager ISS SEDR pointing",
+      "license": "Public PDS data; retain the Ring-Moon Systems Node and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 272384,
+      "expectedSha256": "433f81e8c29623fa1143fb7832d4044a98a1c16c5cc641a901c8a371ee626f96",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-rings-node-ck",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-ura111-bsp",
+      "path": "spk/ura111.bsp",
+      "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/spk/satellites/a_old_versions/ura111.bsp",
+      "credit": "NASA/JPL NAIF; R. A. Jacobson URA111 satellite ephemeris",
+      "license": "Public NASA mission data; retain the NAIF and Voyager project credit.",
+      "acquisition": "Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire voyager; its size and SHA-256 are verified.",
+      "redistribution": "Public NAIF SPICE kernel; retain the credit.",
+      "consumers": [
+        "spice"
+      ],
+      "expectedBytes": 169928704,
+      "expectedSha256": "384647ab7fdc085eb573926a8db6326748518d4ad600d5ca6bdaa06f9c0d7bdc",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-voyager-spice-kernels",
+            "role": "material",
+            "evidence": "NAIF kernel pinned in src/spice/voyager/manifest.json by URL, size and SHA-256."
+          }
+        ]
+      }
     }
   ],
   "generatedIntermediates": [],
