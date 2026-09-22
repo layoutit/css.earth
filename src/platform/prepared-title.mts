@@ -1,10 +1,8 @@
-export interface TitleSource { label: string; viewBox: string; path: string; source: string; sourceUrl: string; sourceSha256: string; width: number; height: number; weight: number; opticalSize: number; fontSize: number; letterSpacing: number; baseline: number; }
-export type PreparedTitle = TitleSource & ReturnType<typeof createPreparedTitleLayout> & { inputSha256: string; generator: string };
+export interface TitleSource { label: string; viewBox: string; path: string; source: string; sourceUrl: string; width: number; height: number; weight: number; opticalSize: number; fontSize: number; letterSpacing: number; baseline: number; }
+export type PreparedTitle = TitleSource & ReturnType<typeof createPreparedTitleLayout> & { generator: string };
 
-import { sha256 } from './sha256.mts';
 import { PLANET_TITLE_RECIPE } from "./planet-title-recipe.mts";
 
-const SHA256 = /^[0-9a-f]{64}$/u;
 const SAFE_EXPORT = /^[A-Z][A-Z0-9_]*$/u;
 const VIEW_BOX = /^0 0 ([1-9][0-9]*(?:\.[0-9]+)?) ([1-9][0-9]*(?:\.[0-9]+)?)$/u;
 
@@ -25,18 +23,14 @@ const PLANET_TITLE_SCALE =
 
 
 
-export function createPreparedTitle(source: TitleSource, { inputSha256, generator }: { inputSha256: string; generator: string }) {
+export function createPreparedTitle(source: TitleSource, { generator }: { generator: string }) {
   validateTitleSource(source);
-  if (!SHA256.test(inputSha256 ?? "")) {
-    throw new TypeError("Prepared title input hash is invalid.");
-  }
   if (!nonEmpty(generator)) {
     throw new TypeError("Prepared title generator is missing.");
   }
   return Object.freeze({
     ...source,
     ...createPreparedTitleLayout(source),
-    inputSha256,
     generator,
   });
 }
@@ -68,7 +62,7 @@ export function serializePreparedTitleModule(exportName: string, title: Prepared
       throw new TypeError(`Prepared title has invalid ${field}.`);
     }
   }
-  if (!SHA256.test(title.inputSha256 ?? "") || !nonEmpty(title.generator)) {
+  if (!nonEmpty(title.generator)) {
     throw new TypeError("Prepared title provenance is incomplete.");
   }
   return [
@@ -90,9 +84,6 @@ export function validateTitleSource(value: TitleSource) {
   if (!VIEW_BOX.test(value.viewBox) ||
       !/^M[-0-9.]/u.test(value.path) || /[<>"'`]/u.test(value.path)) {
     throw new TypeError("Prepared title vector is invalid.");
-  }
-  if (!SHA256.test(value.sourceSha256 ?? "")) {
-    throw new TypeError("Prepared title font hash is invalid.");
   }
   for (const field of [
     "width",

@@ -1,11 +1,11 @@
 /** Renderer-independent, pinned celestial radiance image and fixed offline display transfer. */
 import { record, finite, text } from '@cssearth/volume-core/contracts/volume-recipe';
-export interface SkyReference { path: string; sha256: string; }
+export interface SkyReference { path: string; }
 export interface SkyShadowFloor { blackPoint: number; fullSignal: number; }
 export interface SkyParallax { originM: [number, number, number]; radiusM: number; }
 export interface SkyRecipe {
   schema: 'cssearth-sky-recipe@1';
-  source: { format: 'rgb16f-le-zstd-rows'; width: number; height: number; decodedSha256: string;
+  source: { format: 'rgb16f-le-zstd-rows'; width: number; height: number;
     chunks: (SkyReference & { firstRow: number; rows: number })[]; acquisition: SkyReference };
   projection: { frame: 'icrf-j2000'; mapping: 'equirectangular-ra-left'; centerRaDegrees: 0 };
   bake: { faceSize: number; exposure: number; transfer: 'linear-to-srgb'; displayGain?: number;
@@ -17,11 +17,11 @@ export interface SkyRecipe {
 }
 /** The point field is a sibling object; its pinned descriptor pins the bank it carries.
  * Sprite radii are screen pixels, so one authored screen scale fixes their angular size. */
-export interface SkyStars { object: string; sha256: string; cssPixelsPerDegree: number; }
+export interface SkyStars { object: string; cssPixelsPerDegree: number; }
 export function reference(value: unknown): SkyReference {
-  const r = record(value, 'sky source reference'), path = text(r.path, 'sky path'), sha256 = text(r.sha256, 'sky digest');
-  if (path.startsWith('/') || /[\\\u0000]/u.test(path) || path.split('/').includes('..') || !/^[a-f0-9]{64}$/u.test(sha256)) throw new TypeError('Sky source needs a contained path and SHA256.');
-  return { path, sha256 };
+  const r = record(value, 'sky source reference'), path = text(r.path, 'sky path');
+  if (path.startsWith('/') || /[\\\u0000]/u.test(path) || path.split('/').includes('..')) throw new TypeError('Sky source needs a contained path.');
+  return { path };
 }
 function positive(value: unknown, label: string, integer = false): number {
   const n = finite(value, label); if (n <= 0 || (integer && !Number.isSafeInteger(n))) throw new TypeError(`${label} must be positive.`); return n;
@@ -32,8 +32,6 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
     p.mapping !== 'equirectangular-ra-left' || p.centerRaDegrees !== 0 || b.transfer !== 'linear-to-srgb') throw new TypeError('Unsupported sky recipe.');
   const width = positive(s.width, 'sky width', true), height = positive(s.height, 'sky height', true);
   if (width !== height * 2 || width * height > 268435456 || !Array.isArray(s.chunks)) throw new TypeError('Sky source must be a bounded 2:1 image.');
-  const decodedSha256 = text(s.decodedSha256, 'decoded sky digest');
-  if (!/^[a-f0-9]{64}$/u.test(decodedSha256)) throw new TypeError('Invalid decoded sky digest.');
   let nextRow = 0;
   const chunks = s.chunks.map((input: unknown) => {
     const c = record(input, 'sky chunk'), rows = positive(c.rows, 'chunk rows', true);
@@ -56,9 +54,9 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
   }
   let stars: SkyStars | undefined;
   if (r.stars !== undefined) {
-    const input = record(r.stars, 'sky stars'), object = text(input.object, 'sky stars object'), sha256 = text(input.sha256, 'sky stars digest');
-    if (!/^[a-z][a-z0-9-]*$/u.test(object) || !/^[a-f0-9]{64}$/u.test(sha256) || Object.keys(input).length !== 3) throw new TypeError('Sky stars need a sibling object id, its descriptor digest and a screen scale.');
-    stars = { object, sha256, cssPixelsPerDegree: positive(input.cssPixelsPerDegree, 'sky stars screen scale') };
+    const input = record(r.stars, 'sky stars'), object = text(input.object, 'sky stars object');
+    if (!/^[a-z][a-z0-9-]*$/u.test(object) || Object.keys(input).length !== 2) throw new TypeError('Sky stars need a sibling object id and a screen scale.');
+    stars = { object, cssPixelsPerDegree: positive(input.cssPixelsPerDegree, 'sky stars screen scale') };
   }
   if (b.shadowFloor !== undefined) {
     const floor = record(b.shadowFloor, 'sky shadow floor');
@@ -68,7 +66,7 @@ export function parseSkyRecipe(value: unknown): SkyRecipe {
       throw new TypeError('Sky shadow floor must increase within transferred display RGB.');
     shadowFloor = { blackPoint, fullSignal };
   }
-  return { schema: r.schema, source: { format: s.format, width, height, decodedSha256, chunks, acquisition: reference(s.acquisition) },
+  return { schema: r.schema, source: { format: s.format, width, height, chunks, acquisition: reference(s.acquisition) },
     projection: { frame: p.frame, mapping: p.mapping, centerRaDegrees: 0 },
     bake: { faceSize, exposure: positive(b.exposure, 'sky exposure'), transfer: b.transfer, displayGain,
       ...(shadowFloor ? { shadowFloor } : {}), webpQuality }, provenance: reference(r.provenance), ...(parallax ? { parallax } : {}),

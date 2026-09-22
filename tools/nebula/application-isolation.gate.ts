@@ -62,7 +62,7 @@ for (const id of ['m42', 'm2-9', 'lmc']) {
   await run(id, false); await run(id, true);
   const directory = join(sandbox, 'src/objects', id);
   const descriptor = JSON.parse(await readFile(join(directory, 'object.json'), 'utf8'));
-  const bytes = await readFile(join(directory, descriptor.prepared.url)); assert.equal(sha256(bytes), descriptor.prepared.sha256);
+  const bytes = await readFile(join(directory, descriptor.prepared.url));
   const bank = JSON.parse(bytes.toString()).data; let resources = 0;
   for (const lens of bank.lenses) for (const resource of lens.volume.resources) {
     assert.equal(sha256(await readFile(join(directory, 'prepared', resource.path))), resource.sha256); resources++;

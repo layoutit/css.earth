@@ -8,7 +8,7 @@ import { rayToOverlayPlane, type ImageWcs } from '@cssearth/volume-core/coordina
 import { createAlignedObservationMapping, type ReconstructionAlignment } from '@cssearth/volume-core/coordinates/observation-mapping';
 import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
 
-type Pin = { path: string; sha256: string };
+type Pin = { path: string };
 export interface ReconstructionStarsInput {
   frame: DensityVolumeFrame;
   /** These catalogue/source/registration bytes are verified by the caller before parsing. */
@@ -19,7 +19,7 @@ export interface ReconstructionStarsInput {
   /** Common full-density observer-ray signal; no candidate image color/coverage. */
   sampleProjectedDensitySignal(x: number, y: number, z: number): number;
 }
-const validPin = (pin: Pin | undefined) => Boolean(pin?.path && /^[0-9a-f]{64}$/.test(pin.sha256));
+const validPin = (pin: Pin | undefined) => Boolean(pin?.path);
 
 /**
  * Measured sky ray → native reference-image UV → accepted image-to-model fit.
@@ -32,11 +32,9 @@ export function prepareReconstructionStars(existing: PreparedLmcStars, input: Re
     throw new TypeError('Reconstruction stars accept only the fixed reference registration and density, not candidate image inputs.');
   if (!validPin(input.source) || !validPin(input.reference?.provenancePin))
     throw new TypeError('Reconstruction stars require pinned original catalogue and reference alignment.');
-  const inherited = existing.provenance as { depthModel?: { object?: Pin; grid?: { sha256?: string; decodedSha256?: string } }; footprint?: { wcs?: ImageWcs } } | null;
-  if (!validPin(input.canonicalCloud) || inherited?.depthModel?.object?.sha256 !== input.canonicalCloud.sha256 ||
-      inherited.depthModel.grid?.sha256 !== input.densitySource.recipe.grid.sha256 ||
-      inherited.depthModel.grid?.decodedSha256 !== input.densitySource.recipe.grid.decodedSha256)
-    throw new TypeError('Canonical density differs from the catalogue’s pinned simulation source.');
+  const inherited = existing.provenance as { depthModel?: { object?: Pin }; footprint?: { wcs?: ImageWcs } } | null;
+  if (!validPin(input.canonicalCloud) || inherited?.depthModel?.object?.path !== input.canonicalCloud.path)
+    throw new TypeError('Canonical density differs from the catalogue’s simulation source.');
   if (JSON.stringify(input.reference.wcs) !== JSON.stringify(inherited.footprint?.wcs))
     throw new TypeError('Canonical stellar reference must use the original catalogue image footprint.');
   const sourceMapping = createObservationMapping(input.reference.wcs, input.frame);

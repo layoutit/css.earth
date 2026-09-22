@@ -18,10 +18,9 @@
   "images": [
     {
       "id": "eso-optical",
-      "label": "ESO/DSS2 \u00b7 optical / near-infrared",
+      "label": "ESO/DSS2 · optical / near-infrared",
       "url": "https://cdn.eso.org/images/publicationtiff/eso1226c.tif",
       "page": "https://www.eso.org/public/images/eso1226c/",
-      "sha256": "577d509404e2f95466bf82290be584b7e9e8158c2a7584d00a3980e3f52cd6ac",
       "width": 4000,
       "height": 3464,
       "fieldArcminutes": [
@@ -33,15 +32,15 @@
         -34.200073
       ],
       "northRightDegrees": 22.92393288661,
-      "bands": "DSS2 composite \u00b7 B optical and I near-infrared",
+      "bands": "DSS2 composite · B optical and I near-infrared",
       "credit": "Davide De Martin (ESA/Hubble), the ESA/ESO/NASA Photoshop FITS Liberator & Digitized Sky Survey 2",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
         "referenceDimension": [
-          13445.0,
-          11645.0
+          13445,
+          11645
         ],
         "referencePixel": [
           6020.13214253,
@@ -67,10 +66,9 @@
     },
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "url": "https://cdn.eso.org/images/publicationtiff/eso1309a.tif",
       "page": "https://www.eso.org/public/images/eso1309a/",
-      "sha256": "80f6ce7c031923b9fb736fb11100619d4f4a913b75e1623339c8cd2e3cc2ae95",
       "width": 4000,
       "height": 4000,
       "fieldArcminutes": [
@@ -82,27 +80,27 @@
         -34.3111111481
       ],
       "northRightDegrees": -55.958999202686606,
-      "bands": "Near-infrared \u00b7 J / H / Ks",
+      "bands": "Near-infrared · J / H / Ks",
       "credit": "ESO/VVV Survey/D. Minniti. Acknowledgement: Ignacio Toledo",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
         "referenceDimension": [
-          16000.0,
-          16000.0
+          16000,
+          16000
         ],
         "referencePixel": [
-          8000.0,
-          8000.0
+          8000,
+          8000
         ],
         "referenceValueDeg": [
           261.268475427,
           -34.3111111481
         ],
         "scaleDeg": [
-          -9.47096377919e-05,
-          9.47096377919e-05
+          -0.0000947096377919,
+          0.0000947096377919
         ],
         "rotationDeg": 55.958999202686606
       },
@@ -117,9 +115,7 @@
   ],
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   }
 }

@@ -11,11 +11,9 @@
     "identityCountOver5xScrambledControls": true,
     "allWrongTransformsMedianOver100ReferencePixels": false
   },
-  "imageSha256": "88bb3e8363abb63ac7ba10dc1cb9f07236f94731f0d15a124ea6230e5c31cc9e",
   "coordinateConvention": "Zero-based top-left raster pixel centres; edges at -.5 and size-.5. Resize: x_native=(x_work+.5)*native_width/work_width-.5, likewise y. AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. Row-major homography maps source native centres to reference native centres.",
   "source": {
     "path": ".local/nebula-lab/smc-intake/irida-smc.jpg",
-    "sha256": "88bb3e8363abb63ac7ba10dc1cb9f07236f94731f0d15a124ea6230e5c31cc9e",
     "nativeDimensions": [
       4000,
       3067
@@ -48,7 +46,6 @@
   },
   "reference": {
     "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-    "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
     "nativeDimensions": [
       3827,
       3190
@@ -142,9 +139,9 @@
       -0.2177764857843882,
       0.4020374278676088,
       1310.9835797769406,
-      1.9371528171110255e-07,
-      -6.303910858469223e-07,
-      1.0
+      1.9371528171110255e-7,
+      -6.303910858469223e-7,
+      1
     ]
   },
   "localScaleReferencePixelsPerSourcePixel": [

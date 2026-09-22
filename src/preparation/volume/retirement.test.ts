@@ -65,9 +65,9 @@ test('normal preparation CLI removes obsolete PNG/count outputs after publishing
       sky: { path: 'sky.json', sha256: sha256(skyRecipe) } };
     const descriptor = { schema: 'cssearth-object@1', id: 'test-cloud', type: 'density-volume', properties: {
       volume: { referenceFrame: 'sun-icrf', epochJdTt: 2451545, originM: [0, 0, 0], localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 1, boundsUnits: bounds },
-      preparation: { source: 'source/volume.json', sha256: '' } } };
+      preparation: { source: 'source/volume.json' } } };
     async function prepare() {
-      const bytes = Buffer.from(JSON.stringify(recipe)); descriptor.properties.preparation.sha256 = sha256(bytes);
+      const bytes = Buffer.from(JSON.stringify(recipe));
       await writeFile(join(object, 'source/volume.json'), bytes); await writeFile(join(object, 'object.json'), JSON.stringify(descriptor));
       const result = spawnSync(process.execPath, [executable, object], { encoding: 'utf8' });
       assert.equal(result.status, 0, result.stderr); assert.match(result.stdout, /PREPARED test-cloud:/);

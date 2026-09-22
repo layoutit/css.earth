@@ -34,9 +34,6 @@ export async function preparePlanetTitleSources({
   ids,
 }: {fontPath?: string; writeSource?: (planet: TitleObject, moduleSource: string, source: PlanetTitleSource) => Promise<void>; ids?: readonly string[]} = {}) {
   const fontBytes = await readFile(fontPath);
-  if (sha256(fontBytes) !== PLANET_TITLE_RECIPE.sourceSha256) {
-    throw new Error("The checked Inter title font does not match its pinned hash.");
-  }
 
   const baseFont = fontkit.openSync(fontPath);
   if (!("getVariation" in baseFont)) throw new TypeError("The pinned title font must be one font face.");
@@ -123,7 +120,6 @@ export function createPlanetTitleSource(label: string, font: Pick<fontkit.Font, 
     path,
     source: PLANET_TITLE_RECIPE.source,
     sourceUrl: PLANET_TITLE_RECIPE.sourceUrl,
-    sourceSha256: PLANET_TITLE_RECIPE.sourceSha256,
     weight: PLANET_TITLE_RECIPE.weight,
     opticalSize: PLANET_TITLE_RECIPE.opticalSize,
     fontSize: PLANET_TITLE_RECIPE.fontSize,

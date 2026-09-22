@@ -32,8 +32,7 @@ export const COMPACT_FINITE_EMISSION_SCHEMA = 'cssearth-compact-finite-emission@
 const parsePin = (value: unknown, label: string): Pin => {
   const pin = record(value, label);
   assert.ok(typeof pin.path === 'string', `${label} needs a path`);
-  assert.ok(typeof pin.sha256 === 'string' && /^[a-f0-9]{64}$/.test(pin.sha256), `${label} needs a digest`);
-  return { path: pin.path, sha256: pin.sha256 };
+  return { path: pin.path };
 };
 const numbers = (value: unknown, length: number, label: string): number[] => {
   assert.ok(Array.isArray(value) && value.length === length && value.every(entry => typeof entry === 'number' && Number.isFinite(entry)), `Invalid ${label}`);

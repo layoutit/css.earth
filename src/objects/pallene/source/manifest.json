@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -65,8 +63,6 @@
     {
       "id": "cassini-n1496910582",
       "path": "observations/N1496910582_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.IMG",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
       "license": "NASA/PDS scientific data",
@@ -161,14 +157,10 @@
       }
     },
     {
-      "path": "geometry/05157_05162ra.bc",
-      "expectedBytes": 6858752,
-      "expectedSha256": "3c7599503bd1648fb1914d130f5e2d67b86d5f1a859fd3df3f78a1d627affdc5"
+      "path": "geometry/05157_05162ra.bc"
     },
     {
-      "path": "geometry/10289_10294ra.bc",
-      "expectedBytes": 6853632,
-      "expectedSha256": "a46a260a002f40386d7fb9de387acf7cff298dc48c06bc8bd0760585676d5add"
+      "path": "geometry/10289_10294ra.bc"
     },
     {
       "path": "geometry/cas00172.tsc"
@@ -186,9 +178,7 @@
       "path": "geometry/naif0012.tls"
     },
     {
-      "path": "geometry/pallene_mst2013.bpc",
-      "expectedBytes": 3156992,
-      "expectedSha256": "6424cdd916fc8dba014f40268a5e585fa274d8c0485033719f5a887dbb6f8817"
+      "path": "geometry/pallene_mst2013.bpc"
     },
     {
       "path": "geometry/pck00011.tpc"
@@ -197,25 +187,19 @@
       "path": "measurements.json"
     },
     {
-      "path": "observations/N1496910582_1.IMG",
-      "expectedBytes": 1077344,
-      "expectedSha256": "905b9ed1fa44c865784897f25d2601cb0f8ee9656e4c0db3190c185481044a57"
+      "path": "observations/N1496910582_1.IMG"
     },
     {
       "path": "observations/N1496910582_1.LBL"
     },
     {
-      "path": "observations/N1665947247_1.IMG",
-      "expectedBytes": 1077344,
-      "expectedSha256": "c2ac5a48d847ef782953a49a71be6bc3f1b80a2d49f82b01c4491c56af9d006a"
+      "path": "observations/N1665947247_1.IMG"
     },
     {
       "path": "observations/N1665947247_1.LBL"
     },
     {
-      "path": "observations/N1665947247_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "779a5fe95fee36faaeb382992a282b9d244efe091e046c6197bf22e4229b1e6a"
+      "path": "observations/N1665947247_1_CALIB.IMG"
     },
     {
       "path": "observations/N1665947247_1_CALIB.LBL"

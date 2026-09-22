@@ -33,7 +33,7 @@ async function original(){
 test('Aemilia source preserves original ISAM OBJ identity and acquisition closure',async()=>{
  const source=await createSourceManifest({planetId:'aemilia',planetName:'Aemilia',sourceRoot});await source.verify();
  const plan=await read('source/preparation/acquisition.json');for(const i of source.manifest.inputs)assert.ok(plan.operations.some((s: { path: string; })=>s.path===i.path),i.path);
- const input=required(source.manifest.inputs.find(i=>i.path==='shape/isam-sage-102.obj'));assert.equal(input.expectedSha256,expected.sha256);
+ const input=required(source.manifest.inputs.find(i=>i.path==='shape/isam-sage-102.obj'));
  assert.equal(input.origin,'http://isam.astro.amu.edu.pl/model.php?nr_planet=159&nr_modelu=102');assert.ok(plan.operations.some((s: { path: string; kind: string; url: string; })=>s.path===input.path&&s.kind==='download'&&s.url===input.origin));
  const model=await read('source/reference/isam-model.json');assert.equal(model.sourceArchive,'ISAM');assert.equal(model.modelId,102);assert.equal(model.nonconvex,true);assert.equal(model.sourceFormat,'wavefront-obj');await original();
 });

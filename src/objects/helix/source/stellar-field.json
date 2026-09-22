@@ -99471,7 +99471,6 @@
     "queryUrl": "https://dc.g-vo.org/__system__/tap/run/async/6x4lxcad",
     "query": "WITH candidates AS (SELECT source_id,ra,dec,pmra,pmdec,parallax,parallax_error,phot_g_mean_mag,phot_bp_mean_mag,phot_rp_mean_mag,ruwe FROM gaia.dr3lite WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',337.4107083333334,-20.83717222222222,13.38430845226725)) AND phot_g_mean_mag<16 AND ruwe<1.4 AND parallax>5*parallax_error) SELECT TOP 8000 c.source_id,c.ra,c.dec,c.pmra,c.pmdec,c.parallax,c.parallax_error,c.phot_g_mean_mag,c.phot_bp_mean_mag,c.phot_rp_mean_mag,c.ruwe,r_med_geo,r_lo_geo,r_hi_geo FROM candidates AS c JOIN gedr3dist.main AS d ON c.source_id=d.source_id WHERE r_med_geo BETWEEN 166 AND 266 AND POWER(r_med_geo,2)+46656-2*r_med_geo*216*COS(RADIANS(DISTANCE(POINT('ICRS',c.ra,c.dec),POINT('ICRS',337.4107083333334,-20.83717222222222))))<2500 ORDER BY phot_g_mean_mag,c.source_id",
     "cache": ".local/nebula-lab/stellar-fields/helix-7a8c6eae749f.csv",
-    "sha256": "21c72c135c93817826a3a0393abeb70a22d18ebeda78387790e77e64dea4cb56",
     "bytes": 1124894,
     "retrievedAt": "2026-09-13T22:01:47.818Z",
     "queryRows": 6627,
@@ -99486,19 +99485,16 @@
       "inputSourceResult": {
         "id": "26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597",
         "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/result.json",
-        "sha256": "1e7d6b1c11b4d30ed469bca4fb871e74a27f8f98cb40dd803f23e4380ac57ce0",
         "bytes": 374895
       },
       "referenceImage": {
         "id": "eso-wfi",
         "page": "https://www.eso.org/public/images/eso0907a/",
         "url": "https://cdn.eso.org/images/original/eso0907a.tif",
-        "sha256": "057c8dacfe1686cc6cd464768996369c68d23e32844a5059107aba03bcf38769",
         "credit": "ESO",
         "bands": "Optical · B / V / R",
         "registration": {
-          "path": "labs/nebula/models/helix/observations.json",
-          "sha256": "94c86a73e965bf38c4df792047cdbeb2321cccecb2bfd3a4d0340b84c4af38ea"
+          "path": "labs/nebula/models/helix/observations.json"
         }
       },
       "catalogueAcquisition": {
@@ -99506,7 +99502,6 @@
         "endpoint": "https://dc.zah.uni-heidelberg.de/tap/sync",
         "query": "SELECT TOP 12000 source_id,ra,dec,pmra,pmdec,phot_g_mean_mag,phot_bp_mean_mag,phot_rp_mean_mag,ruwe,parallax,parallax_error,r_med_geo,r_lo_geo,r_hi_geo FROM gedr3dist.litewithdist WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',337.4107083333334,-20.83717222222222,0.5)) AND phot_g_mean_mag<17 ORDER BY phot_g_mean_mag,source_id",
         "cache": "output/helix-core-diagnosis/gaia-cone.csv",
-        "sha256": "086bef1a5be5875fca38731745b48e52afb04043f3a443b433b1693dc669fa2c",
         "bytes": 100214,
         "rows": 589,
         "truncated": false,
@@ -100228,34 +100223,27 @@
         "candidateBudget": 2000,
         "reason": "The six inspected stellar halos lie beyond WFI coverage. Exact observed core eso-vista-17840 ranks1098 in the registered union; the app still retains only34 image anchors within its1500-total point budget.",
         "recipe": {
-          "path": "labs/nebula/models/helix/compiler.json",
-          "sha256": "ce2aa4f55bc2569784b50cae163ecc98502fc3f76add6c07b0a4fd64b6a3ff85"
+          "path": "labs/nebula/models/helix/compiler.json"
         },
         "observations": {
-          "path": ".local/nebula-lab/observations/helix/observations.json",
-          "sha256": "f6d3c610c168dd2fe11aeb9c5e1a6a1682d83956c8f6594f2b98c5cb521ebd36"
+          "path": ".local/nebula-lab/observations/helix/observations.json"
         },
         "model": {
-          "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/field.json",
-          "sha256": "288838de2f4815825390884c5582a74d20059cc32e5db5bef86525c7024dbc62"
+          "path": ".local/nebula-lab/compiler/26c8c2b43cd55398b8ee3489e66ae8944a867f52b8cfa5a72f0af3d4361b9597/field.json"
         },
         "implementation": [
           {
-            "path": "labs/nebula/src/reconstruction/compiler/stars.ts",
-            "sha256": "1b800e7cb6d4615530975a3ebef58efef3d803559f1ad8f97b693c0a2088ca45"
+            "path": "labs/nebula/src/reconstruction/compiler/stars.ts"
           },
           {
-            "path": "labs/nebula/src/reconstruction/compiler/star-union.ts",
-            "sha256": "10cd9b68c6c237df00978ff1de9dc21346dd4bfe953d42761ec314d07c8dbb9a"
+            "path": "labs/nebula/src/reconstruction/compiler/star-union.ts"
           },
           {
-            "path": "labs/nebula/src/reconstruction/compiler/images.ts",
-            "sha256": "18eeebb30a09f2699947f90b383dd48d7199ad5c54b3dfcf9b24607c338000a9"
+            "path": "labs/nebula/src/reconstruction/compiler/images.ts"
           }
         ],
         "inspection": {
           "path": "output/helix-core-diagnosis/union-stars-2000.json",
-          "sha256": "4334af0867a904ce3b36afe02bdc2b9c1bdf52b21b7bde737df697bc53a2b1de",
           "bytes": 2411038
         },
         "sources": [
@@ -100263,20 +100251,17 @@
             "id": "eso-vista",
             "page": "https://www.eso.org/public/images/eso1205a/",
             "url": "https://cdn.eso.org/images/original/eso1205a.tif",
-            "sha256": "8b08b35b5d71f6d4ddfb8e010cb58eb702656d865a485f259617d65524c1d337",
             "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
             "bands": "Near-infrared · Y / J / K",
             "original": {
               "path": ".local/nebula-lab/observations/helix/eso-vista/original.png",
               "width": 2048,
-              "height": 2048,
-              "sha256": "d1f914f440eebeef21e0236997be6b42360541bfd14a0161b4aa1f773e77a051"
+              "height": 2048
             },
             "residual": {
               "path": ".local/nebula-lab/observations/helix/eso-vista/stars.png",
               "width": 2048,
-              "height": 2048,
-              "sha256": "22575abeeeb241af1549c906b9f1a96fc52b3ef27c65b16aac1486a9ccf6ce1c"
+              "height": 2048
             },
             "imageToFrame": [
               0.0971827647572442,
@@ -100291,20 +100276,17 @@
             "id": "eso-wide",
             "page": "https://www.eso.org/public/images/helix/",
             "url": "https://cdn.eso.org/images/original/helix.tif",
-            "sha256": "9736dd85dd142f7b3be7c320235518211e2614380c76e793e24a62706f9584d2",
             "credit": "ESO",
             "bands": "ESO 3.6 m · filters not listed",
             "original": {
               "path": ".local/nebula-lab/observations/helix/eso-wide/original.png",
               "width": 2048,
-              "height": 1423,
-              "sha256": "1b81425003e1c76891067c8c600a077a058f5cae959038adf51025fede48f70b"
+              "height": 1423
             },
             "residual": {
               "path": ".local/nebula-lab/observations/helix/eso-wide/stars.png",
               "width": 2048,
-              "height": 1423,
-              "sha256": "9aa9dcb71389c2f4e8cc75333144941e48b6018a192b787c997d5d9d2f4f3471"
+              "height": 1423
             },
             "imageToFrame": [
               0.12218025293999737,

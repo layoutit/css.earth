@@ -52,7 +52,6 @@
       "label": "ESO · optical",
       "url": "https://cdn.eso.org/images/publicationtiff/eso0936a.tif",
       "page": "https://www.eso.org/public/images/eso0936a/",
-      "sha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
       "credit": "ESO",
       "bands": "Optical · H-alpha / R / V / B",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
@@ -102,7 +101,6 @@
       "label": "ESO VISTA · infrared",
       "url": "https://cdn.eso.org/images/publicationtiff/eso1101d.tif",
       "page": "https://www.eso.org/public/images/eso1101d/",
-      "sha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
       "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "bands": "Near-infrared · J / H / Ks (caption; publisher AVM incorrectly labels H as H-alpha)",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
@@ -121,7 +119,6 @@
       "label": "Spitzer · IRAC mid-infrared (FITS)",
       "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FSPITZER%2FIRAC4&width=1757&height=1417&projection=TAN&fov=0.59542973&coordsys=icrs&ra=270.92629672565334&dec=-24.37339360321821&format=fits",
       "page": "https://irsa.ipac.caltech.edu/data/SPITZER/docs/irac/",
-      "sha256": "8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e",
       "bytes": 5769508,
       "width": 1757,
       "height": 1417,
@@ -159,17 +156,14 @@
       "credit": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
       "termsUrl": "https://www.spitzer.caltech.edu/page/image-use-policy",
       "skyBands": {
-        "path": "src/objects/m8/source/sky-bands/spitzer-irac.json",
-        "sha256": "68a22ff2c6bce4ddc3a24c48e7c8eea2b962b96c730bcec7e396a682cae2a4da"
+        "path": "src/objects/m8/source/sky-bands/spitzer-irac.json"
       },
       "metadataNote": "Composed from pinned CDS hips2fits IRAC maps in MJy/sr, calibrated with IRAC Handbook surface-brightness factors, one measured background and range per band, then one Lupton asinh display. WCS is the recipe grid. MIPS 24 µm is omitted: its HiPS has no data over the Hourglass core."
     }
   ],
   "nativeRemoval": {
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
     }
   }
 }

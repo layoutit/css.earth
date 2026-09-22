@@ -130,12 +130,12 @@ test('rotation only publishes changed optical copies and translation leaves thei
 
 test('actual baked homogeneous emission keeps physical optical density through a full rotation and stack handoffs', () => {
   const count = 256, data = payload(count), { runtime, roots, meshes } = mount(data);
-  const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1', grid: { path: 'density.ktx2', sha256: 'a'.repeat(64), decodedSha256: 'b'.repeat(64),
+  const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1', grid: { path: 'density.ktx2',
     dimensions: [1, 1, 1], encoding: 'sqrt-density-unorm8', bounds: { min: [-1, -1, -1], max: [1, 1, 1] } },
     material: { emission: [0, 1, 2].map(channel => ({ channel, color: [Number(channel === 0), Number(channel === 1), Number(channel === 2)], strength: 1 })),
       absorption: [], intensityScale: 1, stepScale: 1, exposureGain: 16 },
     bake: { sliceCounts: { x: count, y: count, z: count }, unitsPerSourceUnit: 1, imageWidth: 1, samplesPerSlab: 1, cropTransparent: false, opticalWeight: 1 },
-    anchors: [], provenance: { path: 'provenance.json', sha256: 'c'.repeat(64) } };
+    anchors: [], provenance: { path: 'provenance.json' } };
   const texel = bakeSlab({ width: 1, height: 1, depth: 1, encodedRgba: Buffer.from([32, 32, 32, 0]), recipe, provenance: {} }, 'z', 0, 2 / count, 1, 1, undefined).rgba;
   expect([...texel]).toEqual([255, 255, 255, 1]);
   const alpha = texel[3]! / 255, density = -count * Math.log1p(-alpha) / 2;

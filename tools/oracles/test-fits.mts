@@ -24,7 +24,7 @@ run(['--test', '--test-concurrency=1', ...unit]);
 run(['labs/nebula/run.mts', 'test', 'getsf-fits', 'getsf', 'sampled-prior', 'ownership']);
 if (args.includes('--unit')) process.exit(0);
 
-const inputs = new Map<string, { path: string; sha256: string; bytes: number }>();
+const inputs = new Map<string, { path: string; bytes?: number }>();
 for (const name of ['fits/encounter.json', 'fits/llorri.json', 'fits/charon-leisa.json', 'fits/synoptic.json', 'fits/pallas.json', 'pds/dart-draco-cube.json'])
   for (const input of (await readOracleFixture(name)).inputs) inputs.set(input.path, input);
 for (const id of ['didymos', 'dimorphos', 'arrokoth', 'pluto']) {
@@ -42,11 +42,11 @@ for (const id of ['didymos', 'dimorphos', 'arrokoth', 'pluto']) {
     if (!wanted.has(path) && !(id === 'pluto' && /\.fits$/u.test(path)) &&
         !(id === 'arrokoth' && /\.(?:obj|fits?|png)$/u.test(path))) continue;
     const full = `src/objects/${id}/source/${path}`;
-    inputs.set(full, { path: full, sha256: requireString(entry.expectedSha256), bytes: requireFiniteNumber(entry.expectedBytes) });
+    inputs.set(full, { path: full });
   }
 }
 // Verify before each decoder's own byte-bound comparisons. Corruption never triggers a refresh.
-const missing: { path: string; sha256: string; bytes: number }[] = [];
+const missing: { path: string; bytes?: number }[] = [];
 for (const input of inputs.values()) {
   try { await readOracleInput(input); }
   catch (error) {
@@ -55,7 +55,7 @@ for (const input of inputs.values()) {
   }
 }
 if (missing.length && !args.includes('--restore')) throw new Error(
-  `${missing.length} missing pinned FITS test inputs (${Math.ceil(missing.reduce((n, i) => n + i.bytes, 0) / 1048576)} MiB). ` +
+  `${missing.length} missing FITS test inputs. ` +
   'Run pnpm build:preparation, then pnpm test:fits --restore. For the offline checks only, use pnpm test:fits --unit.\n' + missing.map(i => i.path).join('\n'));
 if (missing.length) {
   const { executeAcquisition, parseAcquisitionPlan, parseSourceManifest } = await import('../objects/dist/operations.js');
@@ -82,7 +82,7 @@ if (missing.length) {
     if (!match) throw new Error(`Cannot download a checked-in fixture: ${input.path}`);
     const sourceRoot = resolve(ORACLE_ROOT, 'src/objects', match[1], 'source');
     const manifest = parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot, 'manifest.json'), 'utf8')), match[1]);
-    console.log(`Restoring ${input.path} (${Math.ceil(input.bytes / 1048576)} MiB)`);
+    console.log(`Restoring ${input.path}${input.bytes === undefined ? "" : ` (${Math.ceil(input.bytes / 1048576)} MiB)`}`);
     const plan = parseAcquisitionPlan(JSON.parse(await readFile(resolve(sourceRoot, 'preparation/acquisition.json'), 'utf8')));
     const operations = plan.operations.filter(step => 'path' in step && step.path === match[2]);
     if (!operations.length) throw new Error(`No authored restoration for ${input.path}.`);

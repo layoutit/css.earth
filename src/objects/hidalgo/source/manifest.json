@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "f30c7a641723b33c5d7b9f14c451d70ee8b357a909bd640ec704b302918f703a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -138,9 +135,7 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/licandro-2016.pdf",
-      "expectedBytes": 241916,
-      "expectedSha256": "4b1c28a66a93d808a256e35c3a051ec3660875f62be6a25ebe13823e6ea28835"
+      "path": "reference/licandro-2016.pdf"
     },
     {
       "path": "reference/model-properties.json"

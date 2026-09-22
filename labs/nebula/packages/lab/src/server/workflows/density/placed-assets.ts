@@ -4,7 +4,7 @@ import { dirname, resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import { parseDensityPlacement, placeDensitySlices } from '@cssearth/volume-core/coordinates/density-placement';
 import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
-import { sha256, verifiedBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { parseLabModelJson } from '../../../resources/model-paths.ts';
 export interface PlacedDensityOptions { sourceDirectory: string; outputDirectory: string; placement: { path: string; sha256: string }; }
@@ -12,26 +12,26 @@ export async function preparePlacedDensity(root: string, options: PlacedDensityO
   const source = containedPath(root, options.sourceDirectory), output = containedPath(root, options.outputDirectory);
   if (!output.startsWith(resolve(root, '.local/nebula-lab') + '/'))
     throw new TypeError('Placed density must be prepared in its own ignored lab directory.');
-  const placementRecord = parseLabModelJson((await verifiedBytes(root, options.placement)).toString());
+  const placementRecord = parseLabModelJson((await sourceBytes(root, options.placement)).toString());
   const placement = parseDensityPlacement(placementRecord);
   if (output === source || source.startsWith(output + '/')) throw new TypeError('Placed output cannot contain its canonical source.');
   const descriptorBytes = await readFile(resolve(source, 'object.json')), descriptor = parseLabModelJson(descriptorBytes.toString());
   const sourceSlicesBytes = await readFile(resolve(source, 'prepared/volume-slices.json'));
   const sourceSlices = parseLabModelJson(sourceSlicesBytes.toString()) as VolumeSlices;
-  const original = await verifiedBytes(source, { path: descriptor.properties.preparation.source, sha256: descriptor.properties.preparation.sha256 });
-  if (!placementRecord.originalDensity || sha256(await verifiedBytes(root, placementRecord.originalDensity)) !== sha256(original))
+  const original = await sourceBytes(source, { path: descriptor.properties.preparation.source });
+  if (!placementRecord.originalDensity || sha256(await sourceBytes(root, placementRecord.originalDensity)) !== sha256(original))
     throw new TypeError('Authored placement must pin its canonical density recipe.');
   const sourceRecipe = parseLabModelJson(original.toString());
-  await verifiedBytes(dirname(resolve(source, descriptor.properties.preparation.source)), sourceRecipe.grid);
+  await sourceBytes(dirname(resolve(source, descriptor.properties.preparation.source)), sourceRecipe.grid);
   const identity = { sourceDescriptor: sha256(descriptorBytes), sourceSlices: sha256(sourceSlicesBytes), placement: options.placement };
   const id = `placed-density-${sha256(Buffer.from(JSON.stringify(identity))).slice(0, 24)}`;
   const existing = await readFile(resolve(output, 'placement-receipt.json'), 'utf8').catch(() => null);
   if (existing && JSON.parse(existing).id === id) {
     try {
       const cached = parseLabModelJson((await readFile(resolve(output, 'object.json'))).toString());
-      const manifest = parseLabModelJson((await verifiedBytes(output, { path: cached.prepared.url, sha256: cached.prepared.sha256 })).toString());
-      for (const resource of manifest.data.resources) await verifiedBytes(resolve(output, 'prepared'), { path: resource.path, sha256: resource.sha256 });
-      await verifiedBytes(output, { path: 'prepared/volume-slices.json', sha256: JSON.parse(existing).slicesSha256 });
+      const manifest = parseLabModelJson((await sourceBytes(output, { path: cached.prepared.url })).toString());
+      for (const resource of manifest.data.resources) await sourceBytes(resolve(output, 'prepared'), { path: resource.path });
+      await sourceBytes(output, { path: 'prepared/volume-slices.json' });
       return;
     } catch { /* Restore missing or damaged generated products from the pinned originals. */ }
   }
@@ -40,7 +40,7 @@ export async function preparePlacedDensity(root: string, options: PlacedDensityO
   try {
     await symlink(await realpath(resolve(source, 'source')), resolve(temporary, 'source'), 'dir');
     for (const quad of sourceSlices.quads) {
-      await verifiedBytes(resolve(source, 'prepared'), { path: quad.texturePath, sha256: quad.sha256 });
+      await sourceBytes(resolve(source, 'prepared'), { path: quad.texturePath });
       const target = containedPath(resolve(temporary, 'prepared'), quad.texturePath); await mkdir(dirname(target), { recursive: true });
       await symlink(await realpath(containedPath(resolve(source, 'prepared'), quad.texturePath)), target).catch(error => { if (error.code !== 'EEXIST') throw error; });
     }

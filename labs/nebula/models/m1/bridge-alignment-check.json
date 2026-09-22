@@ -4,12 +4,10 @@
   "checkedAt": "2026-09-13",
   "source": {
     "id": "hubble-2017-bridge",
-    "sha256": "8d1201151df2bd95825eba62049175dd5f1d764090d3aa2e22abf767ca7b3a1a",
     "bytes": 15801158
   },
   "reference": {
-    "id": "hubble-optical",
-    "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6"
+    "id": "hubble-optical"
   },
   "method": {
     "channel": "maximum-rgb",

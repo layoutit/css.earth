@@ -23,8 +23,6 @@
         "referenceRadiusMeters": 49000
       },
       "coverage": "Closed published model: image-derived northern terrain joined to lightcurve/adaptive-optics constrained unseen regions; source seams and local defects remain.",
-      "expectedBytes": 2954640,
-      "expectedSha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
       "capture": {
         "attributions": [
           {
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -84,8 +80,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 37775872,
-      "expectedSha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -218,8 +212,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 801308,
-      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -242,8 +234,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 14720439,
-      "expectedSha256": "5d7264ac14a57179b7c381c92aab7756993624deb58cf70a6936b0ceb00b9b9b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -314,8 +304,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 37775872,
-      "expectedSha256": "b9435d017f9469503f099f224ca86567b6722ff877aa27d3a178a857e23b43b1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -424,8 +412,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 37776384,
-      "expectedSha256": "b1c6c6ecf86cd733290f2eebd972d6b227d235e5f5552bb3a1e42f3d9f496481",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

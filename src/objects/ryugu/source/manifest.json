@@ -66,8 +66,6 @@
         "referenceRadiusMeters": 448
       },
       "coverage": "JAXA’s mapped 548.9 nm reflectance from the 10 July 2018 BOX-A observations. The source grid is 0.2° per pixel and missing values are explicitly marked. This monochrome view uses the published corrected reflectance, with a display stretch; it does not reconstruct missing poles.",
-      "expectedBytes": 12965947,
-      "expectedSha256": "b01f45512c7028865cc656712d8982f837a29bcbea07df6460f4d7acd0c1c969",
       "capture": {
         "attributions": [
           {
@@ -112,8 +110,6 @@
         "referenceRadiusMeters": 448
       },
       "coverage": "The mapping team’s published color composite assigns the p, v and ul filters to red, green and blue. It includes near-infrared light and is not natural color. Global brightness and contrast were matched across observations, so these mosaic values are unsuitable for quantitative photometry. Local residual shadows remain.",
-      "expectedBytes": 9557231,
-      "expectedSha256": "984780a02a343e13873e76030b56dd9f34fbb476baf983f52af6ac12b4741974",
       "capture": {
         "attributions": [
           {
@@ -146,8 +142,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 9634064,
-      "expectedSha256": "3bc584b95c756b9b480e97238138a3906fe11e8ae8092132f4a5fe3a1c9d3c40",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -170,8 +164,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 215772319,
-      "expectedSha256": "8775e50c6e0c01840b5d72207cf4b4a4ecd8d427aa35a087bde3ceef2340473a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -194,8 +186,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 6936576,
-      "expectedSha256": "8af04c9aee94e5c9d49017043f7c50a140789d006ebfc46f155713567765db89",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -218,8 +208,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 54623613,
-      "expectedSha256": "ee9fe9935303c39fb91509fd2136ab04a961619ca9324628cf32a4f22a89d519",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -285,8 +273,6 @@
         "referenceRadiusMeters": 448
       },
       "coverage": "Images taken by Hayabusa2 during MASCOT deployment show boulders across Ryugu’s equatorial strip. The original sampling is about 28 cm per pixel; the display is coarser. Brightness includes the illumination when the photographs were taken. The grid marks gaps and the unobserved poles.",
-      "expectedBytes": 134493995,
-      "expectedSha256": "38901188a1aef23afef25e2938334564a03f2c9e2f08e3be3de9596855bc9453",
       "capture": {
         "attributions": [
           {
@@ -334,8 +320,6 @@
         "referenceRadiusMeters": 448
       },
       "coverage": "False colors show how slowly the surface heats and cools, inferred from a thermal model fitted to Hayabusa2 observations. Higher values mean slower temperature changes. This is a thermal property, not a temperature map. The underlying observations sampled roughly 4.5 m per pixel; the finer map grid adds no measured detail. The grid marks missing values.",
-      "expectedBytes": 25931356,
-      "expectedSha256": "e8c7ca2229dbebd58d1b1d081ece321ac1a32f36db98665615173d7924edba25",
       "capture": {
         "attributions": [
           {
@@ -383,8 +367,6 @@
         "referenceRadiusMeters": 448
       },
       "coverage": "False colors show the change in reflectance from blue to near-infrared light (b–x bands). Positive values mean a redder spectrum; negative values mean bluer. This does not measure terrain slope or identify minerals. The source’s saturated ±1 endpoints are withheld, and the grid marks those pixels. Polar mapping artifacts remain.",
-      "expectedBytes": 25931356,
-      "expectedSha256": "1494e3ce2d1846238bf9325b598f8bbdd27cea528d73ed8463afb7e3d447f8ca",
       "capture": {
         "attributions": [
           {

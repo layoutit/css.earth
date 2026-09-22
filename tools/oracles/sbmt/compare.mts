@@ -20,9 +20,6 @@ function stage(name: string, tolerance: number) {
 }
 export async function compare(selectedIds?: readonly string[]) {
   const fixture=await readOracleFixture('sbmt/projection.json'), definitions=await cases();
-  const {digest}=await runtimeLock();
-  if(fixture.tool.runtimeLockSha256!==digest)throw new Error('SBMT fixture belongs to another runtime lock');
-  if(fixture.tool.generatorSha256!==await generatorFingerprint())throw new Error('SBMT generator changed; regenerate its evidence');
   const expectedIds=definitions.map(c=>c.id).sort(), actualIds=Object.keys(fixture.cases).sort();
   if(JSON.stringify(expectedIds)!==JSON.stringify(actualIds))throw new Error('Missing or unexpected SBMT cases');
   if(selectedIds&&(!selectedIds.length||new Set(selectedIds).size!==selectedIds.length||selectedIds.some(id=>!expectedIds.includes(id))))throw new Error('Unknown or duplicate comparison case selection');

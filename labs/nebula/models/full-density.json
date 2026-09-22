@@ -1,17 +1,37 @@
 {
   "schema": "cssearth-full-particle-density@1",
   "transform": {
-    "mwCenterKpc": [7.501954079, 64.324386597, 2.888671398],
-    "simulationToGalactic": [
-      0.99766431534, -0.068307495179, 0,
-      0.068307495179, 0.99766431534, 0,
-      0, 0, 1
+    "mwCenterKpc": [
+      7.501954079,
+      64.324386597,
+      2.888671398
     ],
-    "sunGalactocentricKpc": [-8, 0, 0],
+    "simulationToGalactic": [
+      0.99766431534,
+      -0.068307495179,
+      0,
+      0.068307495179,
+      0.99766431534,
+      0,
+      0,
+      0,
+      1
+    ],
+    "sunGalactocentricKpc": [
+      -8,
+      0,
+      0
+    ],
     "galacticToIcrs": [
-      -0.054875560416, 0.494109427876, -0.867666149019,
-      -0.873437090235, -0.44482962996, -0.198076373431,
-      -0.483835015549, 0.746982244497, 0.455983776175
+      -0.054875560416,
+      0.494109427876,
+      -0.867666149019,
+      -0.873437090235,
+      -0.44482962996,
+      -0.198076373431,
+      -0.483835015549,
+      0.746982244497,
+      0.455983776175
     ],
     "method": "Recover raw simulation coordinates; subtract the measured MW star median; apply an active +3.916781113 degree Z rotation derived to reproduce the paper's rounded Table 2 LMC position; subtract the paper's Sun position; convert Galactic Cartesian to ICRS; transform into the existing object-local frame.",
     "limitation": "The paper specifies MW centering and rotation to the observed LMC angle but does not publish the exact angle or center estimator. The MW star median and +3.916781113 degree rotation are a derived diagnostic that reproduces its rounded Table 2 positions; this is not observational astrometry."
@@ -30,13 +50,20 @@
     "exposureGain": 0.6
   },
   "bake": {
-    "sliceCounts": { "x": 48, "y": 48, "z": 48 },
+    "sliceCounts": {
+      "x": 48,
+      "y": 48,
+      "z": 48
+    },
     "unitsPerSourceUnit": 1,
     "imageWidth": 512,
     "samplesPerSlab": 2,
     "cropTransparent": true,
     "opticalWeight": 1,
-    "imageEncoding": { "format": "webp", "quality": 90 }
+    "imageEncoding": {
+      "format": "webp",
+      "quality": 90
+    }
   },
   "targets": [
     {
@@ -44,25 +71,36 @@
       "outputDirectory": "labs/nebula/models/lmc-full-density",
       "centeredParticles": {
         "path": ".local/nebula-lab/particles/lmc-particles-centered.f32",
-        "sha256": "931b30fe369f07c4d03f5131075bb2d1efe5e5c99cb2193a6d7135ab9ed4f4f4",
         "bytes": 25920000
       },
       "importReceipt": {
-        "path": "labs/nebula/models/lmc-particles/source/import.json",
-        "sha256": "03a4311aa78243e1f50f772c283fb2924e6f5343c1a22b8cab23eb5fca027715"
+        "path": "labs/nebula/models/lmc-particles/source/import.json"
       },
       "sourceObject": {
-        "path": "labs/nebula/models/lmc-particles/object.json",
-        "sha256": "423c2444c51f62f69870f77c698ea68c487724688b6654877f0f683f7f35175a"
+        "path": "labs/nebula/models/lmc-particles/object.json"
       },
-      "centeringOffsetKpc": [3.6076940298080444, 22.08785057067871, -22.46514129638672],
+      "centeringOffsetKpc": [
+        3.6076940298080444,
+        22.08785057067871,
+        -22.46514129638672
+      ],
       "centeredToLocal": {
         "matrix": [
-          -0.15518132027283374, -0.5620506051433191, 0.8124148417508039,
-          -0.9839735481974685, 0.014821186510361017, -0.17769746446807044,
-          0.08783401554363529, -0.8269700415907021, -0.5553428994994767
+          -0.15518132027283374,
+          -0.5620506051433191,
+          0.8124148417508039,
+          -0.9839735481974685,
+          0.014821186510361017,
+          -0.17769746446807044,
+          0.08783401554363529,
+          -0.8269700415907021,
+          -0.5553428994994767
         ],
-        "offsetKpc": [2.814160547629932, -0.150340024608683, 0.22862548208158984]
+        "offsetKpc": [
+          2.814160547629932,
+          -0.150340024608683,
+          0.22862548208158984
+        ]
       }
     },
     {
@@ -70,25 +108,36 @@
       "outputDirectory": "labs/nebula/models/smc-full-density",
       "centeredParticles": {
         "path": ".local/nebula-lab/particles/smc-particles-centered.f32",
-        "sha256": "2a13f21bddc8d082ef6e8cb72556db76f5287c94808f860abced752b5c7acb24",
         "bytes": 3600000
       },
       "importReceipt": {
-        "path": "labs/nebula/models/smc-particles/source/import.json",
-        "sha256": "2da8dcc3dea8a857397946847e05a31ed3da7c76ee62993e038ca3d4f84feb13"
+        "path": "labs/nebula/models/smc-particles/source/import.json"
       },
       "sourceObject": {
-        "path": "labs/nebula/models/smc-particles/object.json",
-        "sha256": "88d47c0226495619c25200d7e61a66cfec4a3fe42b081c582840d1939d4b2e07"
+        "path": "labs/nebula/models/smc-particles/object.json"
       },
-      "centeringOffsetKpc": [23.290157318115234, 28.379194259643555, -28.512484550476074],
+      "centeringOffsetKpc": [
+        23.290157318115234,
+        28.379194259643555,
+        -28.512484550476074
+      ],
       "centeredToLocal": {
         "matrix": [
-          -0.8598805905753955, -0.5077744872834146, 0.052634969518330146,
-          -0.3901586816067124, 0.5871907186576315, -0.7092131295241788,
-          0.3292135676412449, -0.6303745949722863, -0.7030265264512969
+          -0.8598805905753955,
+          -0.5077744872834146,
+          0.052634969518330146,
+          -0.3901586816067124,
+          0.5871907186576315,
+          -0.7092131295241788,
+          0.3292135676412449,
+          -0.6303745949722863,
+          -0.7030265264512969
         ],
-        "offsetKpc": [-3.562215820796453, -8.431331169806512, -9.535496125797295]
+        "offsetKpc": [
+          -3.562215820796453,
+          -8.431331169806512,
+          -9.535496125797295
+        ]
       }
     }
   ]

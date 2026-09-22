@@ -4,33 +4,27 @@
   "name": "Triangulum Galaxy",
   "defaultLens": "optical",
   "bank": {
-    "path": "src/objects/m33/prepared/image-layers.json",
-    "sha256": "1e89f7d7ea9673eeebbbc3ad6da2695202dce3dfd2281830aa5fa5ff1c9e6572",
-    "bytes": 183493
+    "path": "src/objects/m33/prepared/image-layers.json"
   },
   "recipes": [
     {
       "id": "image-layer-recipe",
-      "path": "src/objects/m33/source/recipe.json",
-      "sha256": "0ba55895cb5e67e57c894ae9c71a87240ab1448e9cb5b48fdee0915d32d40219",
-      "bytes": 2706
+      "path": "src/objects/m33/source/recipe.json"
     },
     {
       "id": "source-evidence",
-      "path": "src/objects/m33/source/provenance.json",
-      "sha256": "17e205fb26ff54083afb30859f6bec0df62377b1467bc1a8d26a249894434e0d",
-      "bytes": 1387
+      "path": "src/objects/m33/source/provenance.json"
     }
   ],
   "sharedInputs": [],
   "lenses": [
     {
       "id": "optical",
-      "label": "ESO \u00b7 optical",
+      "label": "ESO · optical",
       "title": "VST snaps a very detailed view of the Triangulum Galaxy",
       "description": "The observation is decomposed by local compactness into one high-frequency midplane residual and a diffuse component. Only diffuse optical depth is distributed through 32 normalized parametric slabs; cross-axis textures sample the same separable field. This is not measured per-pixel depth. The 68 by 57 arcminute VST field contains the full bright optical disk. The larger warped neutral-hydrogen outskirts are not represented.",
       "summary": "Visible-light image on an approximate depth model; individual depths are not measured.",
-      "detail": "4000 \u00d7 3355 px",
+      "detail": "4000 × 3355 px",
       "facts": [
         {
           "id": "bands",
@@ -40,12 +34,12 @@
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 \u00d7 3355"
+          "value": "4000 × 3355"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "68.01 \u00d7 57.04 arcmin"
+          "value": "68.01 × 57.04 arcmin"
         },
         {
           "id": "license",
@@ -56,8 +50,6 @@
       "input": "optical",
       "preview": {
         "path": "src/objects/m33/source/source.jpg",
-        "sha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853",
-        "bytes": 3788911,
         "url": "https://cdn.eso.org/images/publicationjpg/eso1424a.jpg"
       }
     }

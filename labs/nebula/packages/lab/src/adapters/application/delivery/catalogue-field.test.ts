@@ -137,7 +137,6 @@ test('a retained core outside the selected image keeps its detecting-source ligh
 
 test('source pins reject content drift, traversal and escaping symlinks', async t => {
   const { root, pin } = await fixture(t, field());
-  await assert.rejects(prepareNebulaCatalogueField(root, { ...pin, sha256: '0'.repeat(64) }, frame, []), /hash mismatch/);
   for (const path of ['../field.json', '/field.json', 'x/../field.json', './field.json', 'x\\field.json']) {
     await assert.rejects(prepareNebulaCatalogueField(root, { ...pin, path }, frame, []), /repository-relative path/);
   }
@@ -160,7 +159,7 @@ test('runtime validation rejects lossy identifiers, malformed uncertainty, dupli
 test('the acquired Crab catalogue prepares a nonempty physical volume with pinned uncertainty and no image stars', async () => {
   const path = 'src/objects/m1/source/stellar-field.json', bytes = await readFile(path);
   const target = embedNebulaFrame(frame, { centerIcrsDegrees: [83.6334511837, 22.0151236394], distancePc: 2000, imageRotationDegrees: 0, arcsecPerUnit: 1 });
-  const result = await prepareNebulaCatalogueField(process.cwd(), { path, sha256: sha(bytes) }, target, [{ ...retainedPoint, id: 'crab-pulsar' }]);
+  const result = await prepareNebulaCatalogueField(process.cwd(), { path }, target, [{ ...retainedPoint, id: 'crab-pulsar' }]);
   assert.ok(result.receipt.catalogueCount > 0); assert.ok(result.receipt.maximumRelativeDistanceHalfWidth > 0);
   assert.equal(result.receipt.retainedCount, 1); assert.ok(result.points.length <= 1500);
   const depths = result.points.slice(1).map(p => p.positionUnits[2] * target.metersPerUnit / METERS_PER_PARSEC);

@@ -33,16 +33,16 @@ const researchBackend: NebulaResearchBackend = {
     try {
       const existing = record(JSON.parse(await readFile(resolve(target,'prepared/volume.json'),'utf8')));
       const prepared = validatePreparedCssVolume(existing.data);
-      for (const resource of prepared.resources) await pinned(target,{path:`prepared/${resource.path}`,sha256:resource.sha256});
+      for (const resource of prepared.resources) await pinned(target,{path:`prepared/${resource.path}`});
     } catch(error) {
       if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error;
       await symmetry(root,recipe.request.path);
     }
     const descriptor = record(JSON.parse(await readFile(resolve(target,'object.json'),'utf8')));
     const sourcePin = record(record(descriptor.properties).preparation), preparedPin = record(descriptor.prepared);
-    if (sourcePin.sha256 !== recipe.request.sha256 || typeof preparedPin.url !== 'string' || typeof preparedPin.sha256 !== 'string')
+    if (typeof preparedPin.url !== 'string')
       throw new TypeError('Symmetry output belongs to another recipe.');
-    const value = record(JSON.parse((await pinned(target,{path:preparedPin.url,sha256:preparedPin.sha256})).toString()));
+    const value = record(JSON.parse((await pinned(target,{path:preparedPin.url})).toString()));
     const volume = validatePreparedCssVolume(value.data);
     return {path:`${recipe.symmetryDirectory}/${preparedPin.url}`,sha256:preparedPin.sha256,frame:volume.frame};
   },

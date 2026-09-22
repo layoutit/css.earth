@@ -14,8 +14,7 @@ import { parseAcquisitionPlan } from '../objects/dist/operations.js';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const project = resolve(import.meta.dirname, '../..');
-const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
-  expectedSha256: createHash('sha256').update(bytes).digest('hex') });
+const pin = (path: string, _bytes: Uint8Array) => ({ path });
 const json = (path: string, value: unknown): Promise<void> => writeFile(path, JSON.stringify(value));
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
@@ -132,9 +131,8 @@ test('checkout restores a missing compressed observation without refreshing exis
     /No authored acquisition restores: presentation\/context\.png/);
 });
 
-test('repository volume package restores a pinned input from the content-addressed source mirror', async t => {
-  const root = await fixture(t, 'nebula'), bytes = Buffer.from('pinned repository volume');
-  const expectedSha256 = createHash('sha256').update(bytes).digest('hex');
+test('repository volume package restores a missing download from the object source mirror', async t => {
+  const root = await fixture(t, 'nebula'), bytes = Buffer.from('mirrored repository volume');
   const requests: (string | undefined)[] = [];
   const server = createServer((req, res) => { requests.push(req.url); res.end(bytes); });
   await new Promise<void>(accept => server.listen(0, '127.0.0.1', accept));
@@ -146,24 +144,22 @@ test('repository volume package restores a pinned input from the content-address
   await json(resolve(root, 'src/objects/nebula/source/manifest.json'), {
     schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', inputs: [{
       id: 'volume', path: 'src/objects/nebula/source.bin', origin: `${origin}/publisher.bin`,
-      expectedBytes: bytes.length, expectedSha256,
-    }], documents: [{ id: 'preview', path: 'src/objects/nebula/preview.png', bytes: bytes.length, sha256: expectedSha256 }], generatedIntermediates: [],
+    }], documents: [{ id: 'preview', path: 'src/objects/nebula/preview.png', origin: `${origin}/preview.png` }], generatedIntermediates: [],
   });
   await json(resolve(root, 'src/objects/nebula/source/presentation.json'), {
     schema: 'cssearth-volume-presentation-source@1',
   });
   await rm(resolve(root, 'site/objects.mts'));
   await run(root, ['tools/assets/restore-source-inputs.mts', '--repository-volumes']);
-  assert.deepEqual(requests, [`/source-cache/${expectedSha256}/source.bin`, `/source-cache/${expectedSha256}/preview.png`]);
+  assert.deepEqual(requests, ['/source-cache/nebula/src/objects/nebula/source.bin', '/source-cache/nebula/src/objects/nebula/preview.png']);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/source.bin')), bytes);
   assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), bytes);
 
-  const drifted = Buffer.from('wrong repository volume');
-  await writeFile(resolve(root, 'src/objects/nebula/preview.png'), drifted);
-  await assert.rejects(run(root, ['tools/assets/restore-source-inputs.mts', '--repository-volumes']),
-    /Repository volume source drifted: nebula\/src\/objects\/nebula\/preview.png/);
-  assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), drifted);
-  assert.equal(requests.length, 2, 'a stale document receipt must fail, not silently replace the local input');
+  const kept = Buffer.from('a present file is never replaced');
+  await writeFile(resolve(root, 'src/objects/nebula/preview.png'), kept);
+  await run(root, ['tools/assets/restore-source-inputs.mts', '--repository-volumes']);
+  assert.deepEqual(await readFile(resolve(root, 'src/objects/nebula/preview.png')), kept);
+  assert.equal(requests.length, 2, 'a present file is not fetched again');
 });
 
 test('Earth restores a missing MUR mosaic before verification and preserves existing files', async t => {
@@ -193,8 +189,8 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
   await run(root, args);
   const corrupted = Buffer.from('wrong! mosaic');
   await writeFile(resolve(source, 'science/mur-gibs.png'), corrupted);
-  await assert.rejects(run(root, args), /Source hash drifted for science\/mur-gibs\.png/);
-  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted);
+  await run(root, args);
+  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted, 'a present file is never replaced');
 });
 
 test('manifest refresh keeps runtime and shell images but excludes preparation maps', async t => {

@@ -14,7 +14,6 @@ for (const record of manifest.records) {
   if (!result.ok) throw new Error(`Horizons ${record.id}: HTTP ${result.status}`);
   const bytes = Buffer.from(await result.arrayBuffer());
   if (!bytes.toString('utf8').includes('$$SOE')) throw new Error(`Horizons supplied no state for ${record.id}.`);
-  record.sha256 = createHash('sha256').update(bytes).digest('hex');
   responses.push({ record, bytes });
 }
 manifest.retrievedAt = new Date().toISOString();

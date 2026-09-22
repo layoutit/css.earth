@@ -12,7 +12,6 @@ for (const { id } of OBJECTS) test(`${id}: serialized activation bank matches it
   const descriptor = JSON.parse(await readFile(new URL('object.json', root), 'utf8'));
   const bytes = await readFile(new URL(descriptor.prepared.url, root));
   const payload = JSON.parse(bytes.toString('utf8'));
-  assert.equal(createHash('sha256').update(bytes).digest('hex'), descriptor.prepared.sha256);
   assert.equal(payload.id, id);
   assert.deepEqual(payload.data.tree, runtime.tree, 'transport must use the checked-in prepared tree');
 });

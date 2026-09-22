@@ -3,7 +3,7 @@ import { parseDensityVolumeFrame, type DensityVolumeFrame } from '@cssearth/obje
 import { finite, record, text, triple, type Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
 
 export interface ShellDisplaySubdivision { method: 'radial-linear'; segmentsPerEdge: number; }
-interface ShellShapeSource { path: string; sha256: string; displaySubdivision?: ShellDisplaySubdivision; }
+interface ShellShapeSource { path: string; displaySubdivision?: ShellDisplaySubdivision; }
 export interface IndexedShellShape extends ShellShapeSource { kind: 'indexed-mesh'; }
 export interface GriddedShellShape extends ShellShapeSource { kind: 'gridded-surface'; }
 export interface ShellRecipe {
@@ -14,7 +14,7 @@ export interface ShellRecipe {
   atlas: { tileSize: number; columns: number; frames: number; facingLevels?: number[]; triangleInsetPixels?: number };
   visibility: { hiddenInsideUnits: number; fullUntilUnits: number; hiddenBeyondUnits: number };
   unitScale: number;
-  provenance: { path: string; sha256: string };
+  provenance: { path: string };
 }
 function positive(value: unknown, at: string, integer = false): number {
   const n = finite(value, at);
@@ -66,10 +66,10 @@ function parseDisplaySubdivision(value: unknown): ShellDisplaySubdivision {
   if (segmentsPerEdge > 8) throw new TypeError('Shell display subdivision exceeds the prepared face bound.');
   return { method: subdivision.method, segmentsPerEdge };
 }
-function pinnedSource(p: Record<string, unknown>): { path: string; sha256: string } {
-  const path = text(p.path, 'source path'), sha256 = text(p.sha256, 'source hash');
-  if (path.startsWith('/') || path.split('/').includes('..') || /[\\\u0000]/.test(path) || !/^[a-f0-9]{64}$/.test(sha256)) {
-    throw new TypeError('Source must be relative and pinned.');
+function pinnedSource(p: Record<string, unknown>): { path: string } {
+  const path = text(p.path, 'source path');
+  if (path.startsWith('/') || path.split('/').includes('..') || /[\\\u0000]/.test(path)) {
+    throw new TypeError('Source must be relative.');
   }
-  return { path, sha256 };
+  return { path };
 }

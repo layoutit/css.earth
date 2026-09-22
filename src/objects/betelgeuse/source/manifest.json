@@ -97,8 +97,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "de0734453b63208d0220f44853918de8067ae99c4e20d91aa8b4ed6d5a69fbcf",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -132,8 +130,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "1b98a0a0826d2cffbe60ded2f2fc60909fea10399d13981f845cc576909cad89",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -167,8 +163,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "293f95c11fb984c3ed1e5715e8f476de23af8283264453f139d7b6df3cdf44c0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -202,8 +196,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "65f58af2ba7bc3023ff4d315ad0794974a72c3800a3fcc1b9c65b67ad8ed1a44",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -237,8 +229,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "00587ff48d7595e9da9bd1ed5d64e29a96c68feae5a4c84cfbd9c6d329c445fc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -272,8 +262,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "1f8c324078486c7a450438a6c9c7be133ece9b6815e00b26615731eeb605912e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -307,8 +295,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "3a7a7745856cf57cf47de5dad02b866034afeda2bb77c125804dc25dac01a4bd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -342,8 +328,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "0bba7a0902f2a971a8c29a9368836b6ab63567594807f7ec445b5bf54c3548cd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -377,8 +361,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "14e84b26042166e28fde38449920862730c238e5ea23a4bc66f57f931131bffb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -412,8 +394,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "855a2df3b756437f78696ad8f4a88b184ff9cc1e1b09a53e0654627ae8e09471",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -447,8 +427,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "0fa1cb87f42e1517e2d2ea9f1f8a92e400be68f4900bd2f13645b761ed24741a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -482,8 +460,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "8262be402727a537a8d8bcdb3a58b0ad87b7c40fec683d650bed68ba65b65874",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -517,8 +493,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "1cb0968954646aa88f228dd03fd886cfd7d713b71ec144acde121befe84d69f2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -552,8 +526,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "6503ac32c433bb93139ca881b9846dedc6eda7669b79f6120a6f612cf15a443c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -587,8 +559,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "6887f46553d49b468b70b2185dd8f0e2c7221ffc0951a62079f1e95f2850104a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -622,8 +592,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "14450aa2b5c9b605b7312ec2477536a7f0e36fa469e5ee86ae606e20c877b063",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -657,8 +625,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "338b7f00ba8cd05caab590ad39321314a4e62b5fe2c9641596b215804373d6d8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -692,8 +658,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "4d3d5276953fc090c0c4061f73808663fde793f43d59215b2376009186c1307f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -727,8 +691,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "67b322b5d12f593821e72066798143f035f4879a54149dc4f39fbf29c8bcec4a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -762,8 +724,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "adfee12915f1ad07d5d3cf38edf5cb86a306e8b329d5ce77c89d204dc2c7a9f1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -797,8 +757,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "2f163f6fcac20c9c3cd02c025434ffdba5c7173508ba51c8a1797d3370e60ac2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -832,8 +790,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "eaed297daddf92466a9ed8992d32bb56c38a9d5f071614aa3c4bf64661eb9f75",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -867,8 +823,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "ae20e8d1ea7836003d6671522c596b3dc1209c7b61d5c007cce19e70ca7fb722",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -902,8 +856,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "d4a156f30a8eede61ae8f6cf3e96a7560118189b9bc10cbfbd79e5c0ea1e7cad",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -937,8 +889,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "f87310738dd3063e6cc44128b302201aaaf719389dcbcd676f9184506f1a11c1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -972,8 +922,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "02a49dd026a2aa4d24f3f74523efbaeeea883198d94f418ee73cbaa2fed7573f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1007,8 +955,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "1ce7aeb8e68784eea3ce6fa7ed6976d4733630e8633dd0d2595b2436efd2a857",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1042,8 +988,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "eac561111e2edc6560d74316437d513b7f25a907bb9a21e43fda754ded7cb977",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1077,8 +1021,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, 1560 channels, night 2020-02-19, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "fff05115aae9d9009b5ae69221319c9df07510fa522c2f574f326a396da3eb0f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1104,8 +1046,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1202,8 +1142,6 @@
     {
       "id": "betelgeuse-xsl-dr3",
       "path": "photometry/xsl_spectrum_X0036_merged_ncl_ncge.fits",
-      "expectedBytes": 717120,
-      "expectedSha256": "88d53fadca75bca108f5c97ae03e0b085c2e954f252bee2602ceaa34b923d193",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/660/A34/fits/xsl_spectrum_X0036_merged_ncl_ncge.fits",
       "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -1329,8 +1267,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "b5c815ef8b323e83a4092cf136ee1cecfcf44e22213d32805c4cf5e55049c60f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1364,8 +1300,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "9f06a11257a3ba1f2c5897425407e2192c2f9b10fc4e503e54ec840ea5d109e9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1399,8 +1333,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "f64617a5ed9e7d3ddf96fbd5f6855fc341b8a7557f8ba7d334680c7449c8122e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1434,8 +1366,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "f7837a6d0d522c6da957d4677d897be59f1ef1d9e933f3bd1094a64f1c5ecdf8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1469,8 +1399,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "186c335089aed46fadbe7b67b416abc872123658cf7af2459122203a93710cbb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1504,8 +1432,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "ff82acb5e4cf4f4fe63aff75214973a1157eb9c3b953d46d26a3804e4dd431c8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1539,8 +1465,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "7d2e71e659b39feccb96b130fd63e32307b05278daf2c8acb3775961180ae238",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1574,8 +1498,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "6a6c9cc5b515cbcdb56d963b0074f776140f124552ccd1a71a4f3088288ccab8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1609,8 +1531,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "ff84362f3aa904aa1604a607a72e39c45b6623b31da77a70f9c5c16523627d69",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1644,8 +1564,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "ae353194258102ec739e95a86a86f8aeb3fb69376fb7aa98ea11612fa5226c00",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1679,8 +1597,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "449ca5f6e7ccef8bb1383f10a9c12d8d16a5871bac5d651d06bf874e96613f4f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1714,8 +1630,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-03, stations A0B2J2C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "3062d9c320765d6fe83d27d44dc77cfbebebb32bbc1cb40f98560ff484586d25",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1749,8 +1663,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-05, stations A0B2J2C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "d2aaaaeec39dd570bd4b8033053974e84e797edf9c349239a4d85f6cbdfdc337",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1784,8 +1696,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-05, stations A0B2J2C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "9e73ec58aed25ead2ffafcd44b71ef344a2da2119e47061f56780a88fb115b12",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1819,8 +1729,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-05, stations A0B2J2C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "82a791145b15649b613ab8dafd0a74b9123b7badc213ba02950cb9b3798ff72a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1854,8 +1762,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-05, stations A0B2J2C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "aeb0cdf7300f54e4b601687dc83b3aabde81ce37b5b0fc25bbfa959a3b52f89b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1889,8 +1795,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-05, stations A0B2J2C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "6ba0d3681e662e0b74048799dbdf547cbd1da8385b5ee31e4b3e007bdbb36c91",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1924,8 +1828,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-05, stations A0B2J2C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "abcd97a08ae3624ff7c11f2d4deb5eea5097448675bdbd99cbbe015b04f00624",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1959,8 +1861,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "f44685253aa57166dcf9be7371914a51b4e9e7c766a2e08b27878590e8ea48d0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1994,8 +1894,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "6b0c4a9c1905cac3a9a482f566cbec41f0bae3429ccf530abb85d8512c483919",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2029,8 +1927,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "764f4d40f7b5ccf8e4074ab98801e4c78a07aee175dee5a19d1566e70f664c49",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2064,8 +1960,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "5edd611df61b2831b6a229aa5e0deecb014050c387f10dec851bc680fd947e1d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2099,8 +1993,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "83d6f63c5d480570f2b1c2c210577090a58b46a72e9d054264b234f1fa31128f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2134,8 +2026,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "13fca527597c60d09d0cd6c79e9bc6906628775e4101bc235cd0cd8448417283",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2169,8 +2059,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "71833422535ec90f93e18e925c33f86073119424f465ad9102e74a62ef6cfa73",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2204,8 +2092,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "23a7ad577b28565d50774335f0e5c2d0f93df860b7d0c5e0dc19fffc523f3c20",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2239,8 +2125,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "dbc64915119c46a8e7512e52e48f73066454d56c1dd9d51fb445706b0f02a2aa",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2274,8 +2158,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "d126935d429f4fd50747c871d7235e413f37978a89b487ccb8692cdf3d4c7eba",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2309,8 +2191,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "251fff0d359cc559fd123cac72378a9380c762f5adaeea3386e427bf1564915c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2344,8 +2224,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "9bedc93f1529051ca24c86a1ac1717e548529d6e68af2245c69e471f1c6e9816",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2379,8 +2257,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "5eb7ad85f79ed3c9e50a30138f19da17f7a787bd16f01cc8cffe0f2837ede72f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2414,8 +2290,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "69704e3a51c06f5d9704755e0d0e572fc1540d6056922a55cb47836b456e3927",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2449,8 +2323,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "ce9bd20159e3781d0113b8b5865f70de781a1295f969ce2f57143309e0db2c5d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2484,8 +2356,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "12de14ef39cb6a92b217730e6e29aeca93b6ae068d7921b8c8ecc66423ca2e71",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2519,8 +2389,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "5cd5930841e6486f2309ed0f78fc38e0c21fdadd2536b61444930fcc1fcde7f7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2554,8 +2422,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "fea54c339b71567c1a6c9f067c95b2ec10595152820f93d92786de8233fdaabf",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2589,8 +2455,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "52f40f2a61e12aece5e3ddd5135e7ac89b83f636e5177844654390de4edffabc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2624,8 +2488,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "c90558f84acbef7ddac54cd2a8bf103807c9361b37568a8eb73ace12ea03b808",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2659,8 +2521,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "335794a125f911dc98b64f8439753f7de471d020c4e924b3261e896e5ae2052d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2694,8 +2554,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "db253f0123353e242da303b1af9b00e8e1ad8d40647366cf7d3d982ec805415b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2729,8 +2587,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "98a77287da6283913b0571fb4f9506d47bb7474e38fa49c4f64fa05260edaada",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2764,8 +2620,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-08, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "0a2407184192f8d6e0e5354886c304145b6cb0b9d10e402eaef2ca967b53c36a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2799,8 +2653,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "d1d951445f447cc1b15da34cfa62e7db87f2bf41f2c950184ddb3a22f9ee6175",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2834,8 +2686,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "94d3195c7d9d870251a4aa3e73b2719a0bc8f9b30228438ebf164e1a8cdfb16d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2869,8 +2719,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "bdf0018616b362cda9435750ffa22dfdc670a05a4c2ba758db380c6dd5f61f01",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2904,8 +2752,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "d57929252ef5297e871d8e4ac9154c1f047bc95bf2fed4cb3854e41a93deb341",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2939,8 +2785,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "4574a4b6efc1dedf0ef29ab067d9a03dfaec8ae31d33dea69080dd9fb556fca2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2974,8 +2818,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "4d74ce3ba9add6efc3db178eabcbf799a67d4c3848c9c4f81cd953aca9b191d4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3009,8 +2851,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_IN_Chop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "02f2df70103db1ae9b24442bdb2dbb9aad4354d991a6ac2ad3e1bb0853de8359",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3044,8 +2884,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_IN_noChop.",
-      "expectedBytes": 956160,
-      "expectedSha256": "aa87485b29bcd642888243d40ec20bac2d46861a34bea26c1197ebf55a83fa7b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3079,8 +2917,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 956160,
-      "expectedSha256": "67c25840596c0521849f726554a19e4ad376c620862dfeb59bfbaa48c75d63c3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3114,8 +2950,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 956160,
-      "expectedSha256": "afa80e3f23f854d71866da5b6d6c088b782ecbfa3c98dcb42a0595d3f6f35c05",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3149,8 +2983,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 956160,
-      "expectedSha256": "3a3102e7363a6b65b55fb471b3239a7fa77e2b56d8488d1bd2a03eb9acd8008f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3184,8 +3016,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2983680,
-      "expectedSha256": "4f73590e9b75b7194bdd883d39adec557fabb9de9be66fad7e177f0750de928b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3219,8 +3049,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "c7ba9495afc84ce45a4a03ea28ac9f99d81b65c7bd07ed20367447b9172db551",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3254,8 +3082,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "6babd7fce4d8c97aea1d272407fca2c3c35831bf35d0b86f016498fc4d6eb3ae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3289,8 +3115,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "0f4102eef6e396ffb80bf7dc6ede8d61367038b8127854e2846581e4801feec1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3324,8 +3148,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2983680,
-      "expectedSha256": "5d162771b308bf4489b419ae816b66d778b21b6859f0c5164dc0e17b67ab0236",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3359,8 +3181,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-09, stations K0B2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "97aa25ba42f36fe8aa0f5504c5c7c7f5c268c9263a722e4298ea03b496cf2533",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3394,8 +3214,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "784ccc472610b70ac10b25890490afc04ecee886abf73322cec01744790c75d9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3429,8 +3247,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "15173f8eac7165bcb17273b78c3bf10e4a0951d14dce7263843217c7d387ea68",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3464,8 +3280,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "255f9c774a80b48b15253e6eec737a2517762131b4dd22eced9375501239a95e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3499,8 +3313,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "cc163d5eab2cda94dc5b497c571dba49c80f48b71b4753c13dfe2e9680556caf",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3534,8 +3346,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "7a73476b8b7880e26756a8692065dce3def9eb388b937940fba81874e3c49861",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3569,8 +3379,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 959040,
-      "expectedSha256": "102dd99edd548aa8312b2e3748ce17a8778adf4a84b9ab1fc7350b89f6cc4865",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3604,8 +3412,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "3d4ba249a266fe8773b479840e1e7353c4a326e4e5048dc84ac1efc9db6aff05",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3639,8 +3445,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "0e3d1f995e2c2b6decb8918963b0f8663e7abb99b3a0a4ceb82cfd147bf1bc33",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3674,8 +3478,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "3513917ba03bf94534bd9ed5c419965ae9579a1b755054b3bda07f93a8520a7b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3709,8 +3511,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "5bfeec4b92543a94f35998f1a90ebc33804e9a9fbed539e01772f33814950cf3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3744,8 +3544,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "26dfcd050645e1cc76573d67828aca32eea2cff73f2d2ce8197d2f8ac29a3196",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3779,8 +3577,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "ef429b503f8f512136cf04dae1b6fc910b5cb2782fb1d62db17a89ceb788e656",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3814,8 +3610,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "155fd5f93ddb34bee51c172d14ed4779604ae08d0355b4b08c77815172e05720",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3849,8 +3643,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "b19da38006f468fb2ab566fb3b42cea765a3e7d1433e398e527d387c2777a652",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3884,8 +3676,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "e86ab8dc7395c8f0083b43741f4c5378cfd0f454abb0287cf04b29238243122b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3919,8 +3709,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "23e18875800f8cd99feb502b2d0dc72ab75c8fe843faae002ec379b4f0616330",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3954,8 +3742,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "ffbc3800fff618d339d2646a9dd9a08461fdf13129d51008223878a5b5fc3e61",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -3989,8 +3775,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "92f4c20ca51dc79494581acbc3f6534aec779309dcac5ecc2d3320ffc0f0f9ae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4024,8 +3808,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "b88b5ffbb950306fe857ff9ecdcb25f0d954e6187106f3f9a8c55315a50ae7e6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4059,8 +3841,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "5b3be757cef99c01514b2365407d77cb52fe47ae29178f707fb1261361d912ee",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4094,8 +3874,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "d547ebd176664f4f2a69689b54d04a607d0515d38365c6afdab6cc41ae226588",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4129,8 +3907,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "3e80a974f1f1bc922b0106df370b60956911e0b0921f22e93eb6ea76c751a71c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4164,8 +3940,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "f4d8383c5ddbd71ac0427ca01dcda327a380f115a30cadd80531741a0559768a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4199,8 +3973,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-11, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "09ce5d4c18c6a73ba94a00e73cfa3b41dfcc99fa723e7024615f05be3f611e12",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4234,8 +4006,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "88fd07e7516f5ce2fd14e099085dab32fe7f7cc7a574d73bcd054efe09bfefa9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4269,8 +4039,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "23780ac1444d7a0d52676985d65bc07c495b6fd54b787707c06ec8cfecc47f14",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4304,8 +4072,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, OUT_IN_noChop.",
-      "expectedBytes": 1944000,
-      "expectedSha256": "0c5beb155508d9e3db4a75ad20a91a0b8e241852f8bf21c60e45711717eceb7b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4339,8 +4105,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "dc347e754a75fdf9d21c3fa4085042153cc65b74e8402a2d747da68dc56bf599",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4374,8 +4138,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "3ce7b3e3b87356d2d3c364cdf61b1f32b7f4ffa71606c780861eee081adf16b0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4409,8 +4171,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "666da0a89947e28730223b635cbcdc9901801eeb93cc86fc7c75356195595aa6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4444,8 +4204,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "c0be95690025c055ef9840c80e8eb7a9ea60e15f7f21db3688d8e9f2f4e9185c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4479,8 +4237,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-12, stations A0G1D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "af298e9db2a153875eec79f112a38c9ba8af116118825f13e2e024e5bdb31cff",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4514,8 +4270,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "36ff8f1aa1126a8fe5bf94599cda7eed193b78746964fedbb025014a7796632d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4549,8 +4303,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "c8d718b3592b4fd611ad83ff757fb5db4bbd7be9366fda668c373528cdf9b3b9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4584,8 +4336,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "905aa0eea7632f169f08039bd3f67b2195ae84492e4a0865ae6c722666e11ddb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4619,8 +4369,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "dc831f1d0015a9a69e288f66b90f76aa917b3503c5aae2a7d89530bbb4370244",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4654,8 +4402,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "07d0c88802ca3a70835ca19f81eb23b62d47bb07df5af5950e2f9426d8037bed",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4689,8 +4435,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "dc4fd3905aca3ef578f58945d79e236da96cab562b51e0ac4648753b0f8b33ae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4724,8 +4468,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "c4f0a217ed18ef1fc4c793ca337e659142a8a2ddd424512076bc65b7b26a8d5c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4759,8 +4501,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-14, stations A0G1J2J3, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "8f013b7e0d80065f2fdd71d240e0836528f182855de802e4cab86231923da8c3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4794,8 +4534,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "f589ec99a3937a2bd6fe01b20dc522705607c8e055740381b2e4cbb6c45d2f1a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4829,8 +4567,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "71ac67d79da7874c0652cbd8f7d3fd8a534397406f4bf6dc5dd22de6afa9df31",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4864,8 +4600,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "dd6f3cfb89dbb7fdfc9cd03ae9e34a101f6a3af244e1eb89b008ebe48d908422",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4899,8 +4633,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "672e5ec706dc8dbc103f72e51432148e0554e1f5d7378eec3fadade5f3b7a330",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4934,8 +4666,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "6d05cc0efe06bc96d7db793307204a117d8a302d4af1891beb30632919f05e0e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -4969,8 +4699,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "ca032200566e1fbdbb24c330d8522783a2971c942b606a0ee5d99b9e4a68c969",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5004,8 +4732,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "6d45c70a55cf7b158761b77cd3229632ddd9efc1f804eef42d3b0fbcfb5e2cdf",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5039,8 +4765,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, IN_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "598a7ce762a59404793eee1eb8c62c8b1445ed44a6cdf1cb0e3e48716830c4bc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5074,8 +4798,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, IN_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "2eacf78e0715c0c1a4b00d24a408a0eb6d6434add8c4b5e474e7d300f0b3befa",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5109,8 +4831,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, OUT_IN_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "e052d7bd763ea4e01c7a987143584578477016e190a02b67439fbbd8cf1814e8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5144,8 +4864,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "a5b791c28bc6d63fc94e5c7c3e93eb997098443f1ee938ec7963b7043f969772",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5179,8 +4897,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2018-12-15, stations A0G1J2K0, OUT_OUT_noChop.",
-      "expectedBytes": 1632960,
-      "expectedSha256": "dd25f703048d7baa819b8ac90a177fe3008d4847fc867261e080c0c091eb3a8c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5214,8 +4930,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "ce4631d60e49b0fda38aa6fa3a478296b41acaf96dbc5a4736e3fedc7576df9f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5249,8 +4963,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "0b30c5ff9bc1aec4710265b675622adba1a029b91ed44f617e4319ff4dedba3a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5284,8 +4996,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "11143632b5b7a4667529c139ae48d41d95ea9bcbbca3dc64bce38ee1e790e47d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5319,8 +5029,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "82c616b6584a1a8e3730f29f1fe8d0c5d21695c236a50abc4a61eb01a1e89ee9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5354,8 +5062,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "48790d4dddd6e89de11f55b8078432e9570096030cddaf00801e4143e1423b97",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5389,8 +5095,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "da704750c060d46ec879b4c177ac10e3659d6b77e6934ac206641067a184dcc2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5424,8 +5128,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, IN_IN_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "bac80567ed69b365d371e5f5a6094f42c546c8b2233cb33f8f2f3948ab4bc29f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5459,8 +5161,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "75d01265abd953026ef642861189fbf585e0c6adb039cd2d693f68ceb76cde5e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5494,8 +5194,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "2cefcd9e1be8b96b2835bd52f209ce39b60f19addb5c1e13453113cb3d55c20c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5529,8 +5227,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "155893b372f8e35379478f74d8407d8424301483fe344cf99b9627c771079f87",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5564,8 +5260,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "f24397f4cc99afc3b136531c973ebad7489f72f1043e2e0c942aa255d5c2beb5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5599,8 +5293,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-14, stations A0G1J2J3, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "7d9492f26f2840ff40155bc296ad606296eea007dc33f1abe8f3eba3dc12766b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5634,8 +5326,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "75be3a07355cfe33dae7337443ba6d1568ba7b29202cb57102cda369bcee7424",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5669,8 +5359,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "8c98ae3166ba7a0c740ca90925f9a6ffa61de82bea2aa4d362469c6fdb4f167e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5704,8 +5392,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "612fd1baded8ead3c2e8a13d5bf520fdfec864442a8a712587985880eddc1812",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5739,8 +5425,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "e6936bda6d77b0d73ea73516ba27c81024f4a6a024442f872ec8af06fbfba5bb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5774,8 +5458,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "3e3cd341b4acba39a6bedccfe8d5cd2656a16061ee42aa0a58e263e3827db455",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5809,8 +5491,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "9025408ebeb2c13f079863d32c3da02ed0c67bf118baeaf302dd38ee7acec67b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5844,8 +5524,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "2cd0c86b2939b00a6c918cd5dbf5dc820dfe1d47c7f10552c4d795eddf1f84c5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5879,8 +5557,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "f071a8e6b8b7e93a7d39784781b36cfe81158ed276af2b75cba1800b91ceca3b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5914,8 +5590,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "88f6711201c366468ab74a6fbf4b9504ccbf676335f8b76fd1e7290a1de61df5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5949,8 +5623,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "75f109dc9ff7fcad6ec2ab8a878d128479b0cc296c2ebc9c306c753ba4c1125f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -5984,8 +5656,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "ded28f2ea6c66a58608b10d684f1c570241831fdb5d718a51f7934a4c817893e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6019,8 +5689,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "c8fb35ef8145778c43e4bdaaaac5c23ff9c19cda13bb2ffa570ee843464d4e85",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6054,8 +5722,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_IN_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "9322723aa4a9030fb702bc3ddc51c0e80ee7e242294239d256bed92a71e54147",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6089,8 +5755,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "b2a8c69609d52770766e8a73fbcd79cc08e7b75cede0e1db6bc4a3e6e917d8f1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6124,8 +5788,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "c03a6b815521d49823795701dc860b2f8f651af1b6844de9a14d937a75bab6c0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6159,8 +5821,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "750b59138b661c0fe1a40f008eb52712d5db3d9186e32ef75ddcae27bb3155d4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6194,8 +5854,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_OUT_Chop.",
-      "expectedBytes": 2986560,
-      "expectedSha256": "acbbc63fbc45a84ae3ed637008839e4f3c601f34169f233227ab664c8d3fc04a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6229,8 +5887,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-18, stations K0G2D0J3, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "52b5634ed04ca1c8f96e2ed6878180599d8a6535d027558e1a79ecb6386ef65f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6264,8 +5920,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "d3447f7b171bf6114c3fb1674ac27a329044f4eb5937a7fe0edf49c9e125781c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6299,8 +5953,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "a0a8221e99233e1e430b07c9249508e51e37f865b4e7b3b46ff63a03c9984e41",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6334,8 +5986,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "f66c088117f12ccec51b00df08a3815a70b94862849bd4355bb1c96d27c8d26b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6369,8 +6019,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "2f3f29d105ab3574cbc77909357d6875e6341412f200a3627675333d524f8fd8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6404,8 +6052,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "1e05f36ba88ef3983b56aa603d4ebf5cc2ac340348cad750dab7651780131f77",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6439,8 +6085,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "a613769769b8de85d8f37070abf847a233ff46819706bc0d0ef2042a61c9dff3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6474,8 +6118,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "012733c4fbc44fb15e7bfb9b5c45f8570eb22bbe67d1782270f3feda55e0476a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6509,8 +6151,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "238905d3c2d68d0af52b1a043d15f861e3b4d624df571d482df12d1ea546cc82",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6544,8 +6184,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "c1370415404e898fc2ff141672363d7ec090bb773576e03f21832142944731ed",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6579,8 +6217,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "a3fc4b4f9aab7bbc3595c10d399d1866df3ce652fe9bfae59b7b25ebdc5310f3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6614,8 +6250,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "1b9ecb53b05b27bf2f85fa36e3170df6346c69ff2d00b254a30d698e6c60d919",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6649,8 +6283,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "f437feabcc846923c3ab9893a3b03dd9e5d511bffcd35e2feb54d4ee55f6e39c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6684,8 +6316,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_IN_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "42cac8eea6127d36a89f5824132a3ec4986a88fc3ea40a70d4c3890871de315c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6719,8 +6349,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "3ac0c53217c73e65c698b096a0036012b5be9c1e40963f0dcc3c63b336bfb7ba",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6754,8 +6382,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, IN_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "92ac0ca7ef0bb9fa1b72bcc75f1863f37618ed2f92ac7dbadf60185f4ad96b29",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6789,8 +6415,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_IN_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "015c3c3ec8ce05a1b45b4becbd55a13b42ee7a0dc9aa96f62d4ed98d044c5feb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6824,8 +6448,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_OUT_Chop.",
-      "expectedBytes": 2989440,
-      "expectedSha256": "204edc606cd85eff218b9863bffb7cf26309221a692f944c6a1c8a7abfc313c8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -6859,8 +6481,6 @@
         "continuum-visibilities"
       ],
       "coverage": "MATISSE L/M-band medium resolution, night 2020-12-27, stations A0B2D0C1, OUT_OUT_noChop.",
-      "expectedBytes": 961920,
-      "expectedSha256": "9f05a9979f7704fe19a8a635c6490a072bbdceb99187223449cb0e4054f37ec5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

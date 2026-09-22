@@ -5,16 +5,20 @@
   "frame": {
     "width": 1024,
     "height": 1024,
-    "fieldArcminutes": [55, 55],
-    "centerIcrsDegrees": [201.696958, -47.479539],
+    "fieldArcminutes": [
+      55,
+      55
+    ],
+    "centerIcrsDegrees": [
+      201.696958,
+      -47.479539
+    ],
     "northUp": true
   },
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   },
   "images": [
     {
@@ -23,25 +27,46 @@
       "localCache": ".local/nebula-lab/source-originals/eso1119b.tif",
       "url": "https://cdn.eso.org/images/original/eso1119b.tif",
       "page": "https://www.eso.org/public/images/eso1119b/",
-      "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
       "width": 14540,
       "height": 14540,
-      "fieldArcminutes": [50.88, 50.88],
-      "centerIcrsDegrees": [201.69695833333333, -47.47953888888889],
+      "fieldArcminutes": [
+        50.88,
+        50.88
+      ],
+      "centerIcrsDegrees": [
+        201.69695833333333,
+        -47.47953888888889
+      ],
       "northRightDegrees": -0.00051173061,
       "bands": "Optical G (480nm) / R (625nm) / I (770nm)",
       "credit": "ESO/INAF-VST/OmegaCAM. Acknowledgement: A. Grado, L. Limatola/INAF-Capodimonte Observatory",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "registrationMode": "field-stars",
-      "registrationDetection": { "sourceMaximum": 8000, "referenceMaximum": 8000, "maximumStars": 12000 },
+      "registrationDetection": {
+        "sourceMaximum": 8000,
+        "referenceMaximum": 8000,
+        "maximumStars": 12000
+      },
       "stellarTreatment": "preserve",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
-        "referenceDimension": [1280, 1280],
-        "referencePixel": [633.141898442, 623.135269606],
-        "referenceValueDeg": [201.696944, -47.479539],
-        "scaleDeg": [-0.00066245096, 0.00066245096],
+        "referenceDimension": [
+          1280,
+          1280
+        ],
+        "referencePixel": [
+          633.141898442,
+          623.135269606
+        ],
+        "referenceValueDeg": [
+          201.696944,
+          -47.479539
+        ],
+        "scaleDeg": [
+          -0.00066245096,
+          0.00066245096
+        ],
         "rotationDeg": 0.00051173061
       },
       "metadataNote": "Exact embedded AVM WCS from the hash-pinned native TIFF, including its 1280-pixel reference grid and noncentral reference pixel. The AVM sky reference is not the raster centre. Native 14540x14540; the ignored derivative is an 8192px WebP. Relative alignment is tested against WFI; absolute astrometry remains publisher metadata."
@@ -52,25 +77,46 @@
       "localCache": ".local/nebula-lab/source-originals/eso0844a.tif",
       "url": "https://cdn.eso.org/images/original/eso0844a.tif",
       "page": "https://www.eso.org/public/images/eso0844a/",
-      "sha256": "384d1cfc31e6a2b78e5c7018f9eaecfe49a1014630bcb1bd8dceb563d69e6429",
       "width": 8040,
       "height": 7560,
-      "fieldArcminutes": [31.88, 29.99],
-      "centerIcrsDegrees": [201.69716666666667, -47.479683333333334],
+      "fieldArcminutes": [
+        31.88,
+        29.99
+      ],
+      "centerIcrsDegrees": [
+        201.69716666666667,
+        -47.479683333333334
+      ],
       "northRightDegrees": 0.00724264734,
       "bands": "Optical B (451nm) / V (539nm) / I (783nm)",
       "credit": "ESO",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "registrationMode": "field-stars",
-      "registrationDetection": { "sourceMaximum": 8000, "referenceMaximum": 8000, "maximumStars": 12000 },
+      "registrationDetection": {
+        "sourceMaximum": 8000,
+        "referenceMaximum": 8000,
+        "maximumStars": 12000
+      },
       "stellarTreatment": "preserve",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
-        "referenceDimension": [1280, 1204],
-        "referencePixel": [620.447024342, 636.048276073],
-        "referenceValueDeg": [201.697148, -47.479684],
-        "scaleDeg": [-0.00041507559, 0.00041507559],
+        "referenceDimension": [
+          1280,
+          1204
+        ],
+        "referencePixel": [
+          620.447024342,
+          636.048276073
+        ],
+        "referenceValueDeg": [
+          201.697148,
+          -47.479684
+        ],
+        "scaleDeg": [
+          -0.00041507559,
+          0.00041507559
+        ],
         "rotationDeg": -0.00724264734
       },
       "metadataNote": "Exact embedded AVM WCS from the hash-pinned native TIFF, including its 1280x1204 reference grid and noncentral reference pixel. Independent telescope/instrument/epoch from VST/OmegaCAM. Publisher notes Digitized Sky Survey data fills some gaps in this mosaic; DSS-filled regions are not independently attributed star detections."

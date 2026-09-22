@@ -38,17 +38,14 @@
   "manuals": [
     {
       "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/geo_products_v02.pdf",
-      "sha256": "f48bf2c2277248f558060a0d957a48397323044c505a474014e5c296e7e63e45",
       "purpose": "Nine GEO planes, coordinates, angles and SHAP7 geometry."
     },
     {
       "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/calib/osiris_cal_pipeline_v06.pdf",
-      "sha256": "af602ed81e51b0705af474f8499078dab7a35ba316e694ab68eb3c26b1653624",
       "purpose": "Section 3.15.2: quality bits; Section 3.16: GEO generated from L4 radiance."
     },
     {
       "url": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/document/sis/osiris_sis_v05.pdf",
-      "sha256": "8f977b5de20ae9968ab53227bc22ece8b9ab8cc772eb9f328e9ffc14492e8c68",
       "purpose": "PDS plane layout, stored image orientation and image metadata."
     }
   ],

@@ -8,9 +8,6 @@
     325.9541756735663,
     319.874174604298
   ],
-  "fitSha256": "b982b2be31a14e64afd8a00df13554224e302f7503d76ed816d249ccac64c5ec",
-  "sourcePhotoSha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638",
-  "gazetteerKmzSha256": "620f3aff9dfe5a7ecca7c72358ca2a57ae47879ec7d3ab454893ec75e34a0f09",
   "mapMetadata": {
     "width": 15138,
     "height": 7569,
@@ -216,24 +213,19 @@
   ],
   "outputHashes": [
     {
-      "path": "validation/agent-source-unmodified.png",
-      "sha256": "8934889dab1e589cdb491ee93392098e643469ac7bcef1dd44c8341a571545d7"
+      "path": "validation/agent-source-unmodified.png"
     },
     {
-      "path": "validation/agent-native-predicted.png",
-      "sha256": "5b4c7ee2ef3101598635201bf920aed1b2f899c60110ddb13c3cc24cf98f227f"
+      "path": "validation/agent-native-predicted.png"
     },
     {
-      "path": "validation/agent-named-fixed-camera.png",
-      "sha256": "47656784b0da6410567c33efe3134ce6da589475793223954703ac93d4cc525f"
+      "path": "validation/agent-named-fixed-camera.png"
     },
     {
-      "path": "validation/agent-feature-patches.png",
-      "sha256": "d58014dbeee7c63d2c6726185632d8345aebb4b55a9f7bbc351cc041fad35835"
+      "path": "validation/agent-feature-patches.png"
     }
   ],
   "mapSourcePath": "src/objects/callisto/source/callisto-global-1km.tif",
-  "mapSourceSha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
   "visualReview": {
     "inspected": [
       "agent-source-unmodified.png",
@@ -255,7 +247,6 @@
   "independentSourceView": {
     "url": "https://rgcps.asu.edu/urn-nasa-pds-asurgcps_slides_jovian_system/document_database/callisto_photo_database.pdf",
     "localPath": "observations/callisto-photo-database.pdf",
-    "sha256": "fba3191b10234799c29aa83fa56f1e75114a370f7d0332e7b01122769eebef98",
     "fact": "PDS catalog entry callisto_a_004_pht identifies PIA03456 as C30 global color with sub-spacecraft longitude 215 degrees west, consistent with 145 degrees east."
   },
   "gazetteerUrl": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CALLISTO_nomenclature_center_pts.kmz",

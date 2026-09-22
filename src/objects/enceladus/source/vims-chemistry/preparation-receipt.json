@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-enceladus-vims-spectral@1",
-  "preparerSha256": "25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914",
   "sourceLicense": "CC-BY-4.0",
   "policy": {
     "minimumPhaseDegrees": 10,
@@ -667,7 +666,6 @@
     {
       "kind": "depth",
       "output": "enceladus-vims-depth.tif",
-      "sha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "bytes": 101934,
       "dimensions": [
         1024,
@@ -706,12 +704,10 @@
       "audit": [
         {
           "file": "enceladus-vims-depth-observation.tif",
-          "sha256": "6de961347e1c3d7f585053a159f758375d718e7540d9b8fba3459d1c5c5dfa36",
           "bytes": 11826
         },
         {
           "file": "enceladus-vims-depth-source-pixel.tif",
-          "sha256": "d402e563883f33d0aae324a64d95530b92b4c07145255bb2d6e0eed7275a706b",
           "bytes": 26264
         }
       ]
@@ -719,7 +715,6 @@
     {
       "kind": "ratio",
       "output": "enceladus-vims-ratio.tif",
-      "sha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "bytes": 109752,
       "dimensions": [
         1024,
@@ -758,12 +753,10 @@
       "audit": [
         {
           "file": "enceladus-vims-ratio-observation.tif",
-          "sha256": "6de961347e1c3d7f585053a159f758375d718e7540d9b8fba3459d1c5c5dfa36",
           "bytes": 11826
         },
         {
           "file": "enceladus-vims-ratio-source-pixel.tif",
-          "sha256": "d402e563883f33d0aae324a64d95530b92b4c07145255bb2d6e0eed7275a706b",
           "bytes": 26264
         }
       ]

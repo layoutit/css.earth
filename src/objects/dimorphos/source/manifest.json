@@ -25,8 +25,6 @@
         "referenceRadiusMeters": 75
       },
       "coverage": "Closed DART encounter model v004 derived from DRACO and LICIACube; source uncertainty varies with imaging coverage. Not a reconstructed post-impact surface.",
-      "expectedBytes": 14454228,
-      "expectedSha256": "9633847a16c34faad7590f43ba6b07fed53926fb363da0a72f977f6cf2c61f3e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -52,8 +50,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -77,8 +73,6 @@
       "consumers": [
         "facet-science"
       ],
-      "expectedBytes": 4726080,
-      "expectedSha256": "6bd56d7f107552ef6220b4e629848954f0630f9017f5914eb2c5e140493e66be",
       "coverage": "Slope relative to modeled gravity, including uniform density, rotation and Didymos. This encounter-era model includes inferred terrain; it does not measure impact-driven change.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -102,8 +96,6 @@
       "consumers": [
         "albedo"
       ],
-      "expectedBytes": 4728960,
-      "expectedSha256": "1328bc2564f09c41d414c55f2b2deaab79bc63f1778610bb2422a2941aab51dd",
       "lensId": "albedo",
       "projection": {
         "kind": "source-triangle-facet-field",
@@ -180,8 +172,6 @@
         "draco-observation",
         "draco-spice"
       ],
-      "expectedBytes": 67132800,
-      "expectedSha256": "280764106bd4a2eb43fd614a5f70a5008b3820b0ef22d3f75bfea8875300edd2",
       "observationDate": "2022-09-26T23:14:12.737Z",
       "width": 1024,
       "height": 1024,
@@ -403,8 +393,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 119741440,
-      "expectedSha256": "6e1b277c5f07135a84950604b83e56b736be696a7f3560bcddb1d4aeb944fca1",
       "interpretation": "SPICE SPK file containing JPL planetary ephemerides version DE430, created by the Solar System Dynamics group (SSD), JPL. Covers 1549-12-30T23:59:19Z to 2650-01-24T23:58:51Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -429,8 +417,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 236544,
-      "expectedSha256": "e627aa63662e4700ae3590d6be2e740fcbc9b4b8fd11de9aa53ae8ee111ce69a",
       "interpretation": "SPICE SPK file containing ephemeris of the asteroid system barycenter (20065803) Didymos, created by the Solar System Dynamics group (SSD), JPL. This file was originally named didymos_barycenter_s205_v01.bsp. Label coverage 2000-12-31T23:58:56Z to 2025-07-13T23:58:51Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -455,8 +441,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 51214336,
-      "expectedSha256": "6a5d9fe10131d43a941fc6c71424e8a3207e4d5ade8f0a57be3d974118bb6ae6",
       "interpretation": "SPICE SPK file containing ephemerides of Didymos and Dimorphos, created by the Solar System Dynamics group (SSD), JPL. This file was originally named didymos_system_s542_v01.bsp. Label coverage 2000-01-01T00:12:05Z to 2024-12-30T23:58:51Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -481,8 +465,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 14336,
-      "expectedSha256": "12d0ed3831ab96bb3d5228953a84d69ee82334ad4a872e245cbbf903767a6bc3",
       "interpretation": "SPICE SPK file containing relative locations of selected DART structures and science instruments, created by the DART SOC, JHU/APL. Label coverage 2021-11-26T23:58:51Z to 2022-10-17T23:58:51Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -507,8 +489,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 11256832,
-      "expectedSha256": "0014277e927ffe6191b1404497d3ad5011eb67121ef248f5959a25c1b3ac632f",
       "interpretation": "SPICE SPK file providing reconstructed trajectory of the DART spacecraft, created by the DART Navigation Team at JPL. This file was originally named dart_2022_231_2022_269_rec_v03.bsp. Label coverage 2022-08-19T00:00:00Z to 2022-09-26T21:58:51Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -533,8 +513,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 357376,
-      "expectedSha256": "88f75d64552f33573f0da607f1295ee84c08d32187f9b575a78a56fa8330dad0",
       "interpretation": "SPICE SPK file providing reconstructed trajectory of the DART spacecraft, created by the DART Navigation Team at JPL. This file was originally named dart_2022_269_2022_269_rec_v03.bsp. Label coverage 2022-09-26T21:58:51Z to 2022-09-26T23:14:24Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -559,8 +537,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 10240,
-      "expectedSha256": "cbc254ea38d919880571cb7a6ef1f546260d0910012da53783d63886f24d0d28",
       "interpretation": "SPICE SPK file providing reconstructed trajectory of the DART spacecraft, created by the DART Navigation Team at JPL. This file was originally named dart_2022_269_2022_269_spc_v04.bsp. Label coverage 2022-09-26T23:13:36Z to 2022-09-26T23:14:24Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -585,8 +561,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 11264,
-      "expectedSha256": "1a3f4a50808b9ad0a5c790659da1aea41b45bfae6336104606dba2efcaa76517",
       "interpretation": "SPICE CK file containing DART spacecraft attitude history from DOY 2022-269 to 2022-269, created by DART mission operations, JHU/APL. Label coverage 2022-09-26T23:13:36.148Z to 2022-09-26T23:14:24.184Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -611,8 +585,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 67132800,
-      "expectedSha256": "d8b2171b610235dced9306b01bcf2c6dbfb9317693457b441cdb36678a9ab629",
       "observationDate": "2022-09-26T23:14:22.365Z",
       "width": 1024,
       "height": 1024,
@@ -667,8 +639,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 67132800,
-      "expectedSha256": "d16f3b899ee14588f0ee89abf60babe85c5b1dc8f1d2203f322c3db980c68443",
       "observationDate": "2022-09-26T23:14:19.477Z",
       "width": 1024,
       "height": 1024,
@@ -723,8 +693,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 67132800,
-      "expectedSha256": "12a5f0021799f65f1ee3fb35dfda3b6857def98473fbc4d43307b9e6cb082bbe",
       "observationDate": "2022-09-26T23:14:17.551Z",
       "width": 1024,
       "height": 1024,

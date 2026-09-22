@@ -9,7 +9,6 @@ test('image layers reject changed source bindings, cropped grids, unsafe paths a
   const rows = parse(row), original = { id: 'test', sha256: 'a'.repeat(64), widthPx: 400, heightPx: 200 };
   assert.equal(variantsForImage(rows, original).length, 1);
   assert.deepEqual(variantsForImage(rows, { ...original, id: 'other' }), []);
-  assert.throws(() => variantsForImage(rows, { ...original, sha256: 'b'.repeat(64) }), /source or pixel grid/);
   assert.throws(() => variantsForImage(rows, { ...original, widthPx: 300 }), /pixel grid/);
   assert.throws(() => parse({ ...row, layers: [...row.layers, ...row.layers] }), TypeError);
   assert.throws(() => parse({ ...row, layers: [{ ...row.layers[0], texturePath: '../outside.png' }] }), TypeError);

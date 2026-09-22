@@ -2345,8 +2345,6 @@ async function composePlanetTextures({
         northSource: Object.freeze({
           product: config.labels.label008,
           sourcePath: config.labels.label009,
-          sourceSha256:
-            "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
           sourceTile: Object.freeze({
             x: POLAR_OBSERVATION_2017_TILE_LEFT,
             y: 0,

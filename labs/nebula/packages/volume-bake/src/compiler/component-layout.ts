@@ -128,7 +128,7 @@ export async function registerComponentBanks(root: string, outputDirectory: stri
     return quads;
   };
   const pixels = async (volume: CompilerPin, source: RegisteredSlice) => {
-    const bytes = await readPinned({ path: `${dirname(volume.path)}/${source.texturePath}`, sha256: source.sha256 });
+    const bytes = await readPinned({ path: `${dirname(volume.path)}/${source.texturePath}` });
     const decoded = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (bytes.length !== source.bytes || decoded.info.width !== source.widthPx || decoded.info.height !== source.heightPx || decoded.info.channels !== 4)
       throw new TypeError('Component raster differs from its registered crop.');
@@ -197,7 +197,7 @@ export async function registerComponentBanks(root: string, outputDirectory: stri
       layout: 'Canonical union mesh; original component RGBA pixels translated without resampling and padded with transparent pixels.', sourceVolume: bank.volume,
     } });
     const bytes = Buffer.from(JSON.stringify(payload)), path = `${outputDirectory}/${bank.id}/volume.json`;
-    await writeFile(resolve(root, path), bytes); pins.set(bank.id, { volume: { path, sha256: geometrySha(bytes) }, alphaSha256 });
+    await writeFile(resolve(root, path), bytes); pins.set(bank.id, { volume: { path }, alphaSha256 });
   }
   return { ...neutral, neutral: pins.get('neutral')!.volume, alphaSha256: pins.get('neutral')!.alphaSha256,
     lenses: lenses.map(lens => ({ ...lens, ...pins.get(lens.id)! })) };

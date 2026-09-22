@@ -2,13 +2,11 @@
   "schema": "cssearth-observation-astrometric-calibration@1",
   "source": {
     "id": "webb-components",
-    "sha256": "1ec85e2b0cf6a35d176af48a48e1f37c8922abadb60dc53866ee282855808a36",
     "width": 2958,
     "height": 2569
   },
   "reference": {
     "id": "hubble-optical",
-    "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
     "width": 3864,
     "height": 3864
   },
@@ -25,7 +23,6 @@
     ],
     "northUp": true
   },
-  "matchedStarCatalogueSha256": "7b6da0c051926aecc4e4919ba5db0aeacdbc0ebe924149596c1f414af901f6f5",
   "publisherToCalibratedFrame": [
     1.0267,
     0,

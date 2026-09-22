@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 56.4
       },
       "coverage": "The archived mesh matches the paper’s A-rough best-fit model to its rounded dimensions and volume. Northern observations constrain the shape better than the southern hemisphere. Rotation uses the published 2001-07-27 reference spin rate of 42582.41 degrees/day, held fixed for display; the measured 0.0002 degrees/day² spin acceleration is not extrapolated. This is not a current attitude ephemeris.",
-      "expectedBytes": 16131,
-      "expectedSha256": "f9047ccbf39831b20d4571f17158f6960313d1b51c9d4ea429162ddb614a51e7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 233089,
-      "expectedSha256": "5396db0f3c137897b39801c12b244d6df4a372ace4501bd86b781e7e5dec378c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -148,8 +142,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 228378,
-      "expectedSha256": "8440b25865d56c7325caf86ddbb6eb574669be3b431ac35dbd00f73239cba67f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

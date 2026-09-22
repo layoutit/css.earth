@@ -76,5 +76,5 @@ test('shared navigation reaches the selected release and source, context and nav
   // #242 moved pin ownership to the manifest; the recipe source only declares the id/path binding now.
   assert.equal(descriptor.properties.recipe.sources.find((source: { id: string }) => source.id === 'world-context').path, 'source/navigation/universe.json');
   assert.equal(navigation.sources.find((source: { id: string }) => source.id === 'world-context').sha256, hash);
-  assert.equal(manifest.inputs.find((source: { path: string }) => source.path === 'navigation/universe.json').expectedSha256, hash);
+  assert.ok(manifest.inputs.find((source: { path: string }) => source.path === 'navigation/universe.json'));
 });

@@ -1,5 +1,4 @@
 /** Cache pinned 192px recognition JPEGs only. Never writes the science catalogue or inventory. */
-import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, rename } from 'node:fs/promises';
 import { dirname, resolve, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -9,17 +8,14 @@ import { readMessierPresentation, type MessierPresentationObject } from '../../.
 const dataPath = 'labs/nebula/models/messier/presentation.json';
 const cacheRoot = '.local/nebula-lab/catalogue/messier/thumbnails';
 const maximumBytes = 512 * 1024;
-const hash = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 
-export async function validateThumbnail(bytes: Buffer, expectedHash?: string) {
+export async function validateThumbnail(bytes: Buffer) {
   if (!bytes.length || bytes.length > maximumBytes || bytes[0] !== 0xff || bytes[1] !== 0xd8) throw new TypeError('Expected a bounded JPEG recognition image.');
   const metadata = await sharp(bytes).metadata();
   if (metadata.format !== 'jpeg' || metadata.width !== 192 || metadata.height !== 192 || metadata.channels !== 3) throw new TypeError('Expected a 192×192 RGB JPEG.');
   // Decode pixels as well: a plausible JPEG header alone does not prove an intact preview.
   await sharp(bytes).raw().toBuffer();
-  const sha256 = hash(bytes);
-  if (expectedHash !== undefined && expectedHash !== sha256) throw new Error('Published recognition pixels changed; inspect and explicitly repin the presentation source.');
-  return { sha256, bytes: bytes.length, width: 192, height: 192 };
+  return { bytes: bytes.length, width: 192, height: 192 };
 }
 
 async function acquire(url: string): Promise<Buffer> {
@@ -49,8 +45,8 @@ async function cacheObject(root: string, object: MessierPresentationObject): Pro
   let bytes: Buffer | undefined;
   try { bytes = await readFile(destination); }
   catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
-  if (bytes && object.thumbnail.sha256) {
-    const metadata = await validateThumbnail(bytes, object.thumbnail.sha256);
+  if (bytes) {
+    const metadata = await validateThumbnail(bytes);
     if (object.thumbnail.bytes !== metadata.bytes) throw new Error(`Cached byte count changed: ${object.objectId}.`);
     object.thumbnail.localPath = localPath; return 'cached';
   }
@@ -60,7 +56,7 @@ async function cacheObject(root: string, object: MessierPresentationObject): Pro
     catch (error) { lastError = error; }
   }
   if (lastError || !bytes) throw lastError ?? new Error('No recognition image.');
-  const metadata = await validateThumbnail(bytes, object.thumbnail.sha256);
+  const metadata = await validateThumbnail(bytes);
   await mkdir(dirname(destination), { recursive: true });
   await writeFile(`${destination}.tmp`, bytes); await rename(`${destination}.tmp`, destination);
   Object.assign(object.thumbnail, metadata, { localPath }); return 'downloaded';
@@ -87,7 +83,7 @@ export async function acquireMessierPresentation(root: string, args: string[]) {
     }
   }));
   // Keep metadata edits from a parallel source intake; rerun after that writer finishes.
-  if (hash(Buffer.from(await readFile(path, 'utf8'))) !== hash(Buffer.from(original))) throw new Error('Presentation metadata changed during acquisition; rerun with one presentation writer.');
+  if (!Buffer.from(await readFile(path, 'utf8')).equals(Buffer.from(original))) throw new Error('Presentation metadata changed during acquisition; rerun with one presentation writer.');
   readMessierPresentation(presentation);
   await writeFile(`${path}.tmp`, `${JSON.stringify(presentation, null, 2)}\n`); await rename(`${path}.tmp`, path);
   console.log(`MESSIER_PRESENTATION_SAVED selected=${queue.length} downloaded=${downloaded} cached=${cached} failed=${failures.length}`);

@@ -3,7 +3,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { SkyRecipe } from './config.js';
 import { loadSkySource, HALF_LINEAR } from './source.js';
 import type { LinearHalfImage } from './exr.js';
@@ -82,7 +82,6 @@ export function skyFacePixels(source: LinearHalfImage, basis: SkyBasis, bake: Sk
 export interface SkyStarSprites { field: PreparedCssPointField; atlas: { rgba: Buffer; width: number; height: number }; cssPixelsPerDegree: number; }
 export async function loadSkyStarSprites(objectDirectory: string, stars: NonNullable<SkyRecipe['stars']>): Promise<SkyStarSprites> {
   const descriptorBytes = await readFile(resolve(objectDirectory, 'object.json'));
-  if (sha256(descriptorBytes) !== stars.sha256) throw new TypeError(`Sky stars descriptor digest mismatch: ${stars.object}`);
   const descriptor: unknown = JSON.parse(descriptorBytes.toString('utf8'));
   const read = async (url: string) => { const b = await readFile(resolve(objectDirectory, url)); return b.buffer.slice(b.byteOffset, b.byteOffset + b.byteLength) as ArrayBuffer; };
   const field = await loadPreparedCssPointField(descriptor, { read });
@@ -140,7 +139,7 @@ function tileAlpha(atlas: SkyStarSprites['atlas'], tileX: number, tx: number, ty
 }
 export async function prepareSkyFaces(options: { sourceDirectory: string; outputDirectory: string; recipe: SkyRecipe; stars?: SkyStarSprites }): Promise<BakedSky> {
   const { sourceDirectory, outputDirectory, recipe, stars } = options, source = await loadSkySource(sourceDirectory, recipe);
-  const provenance: unknown = JSON.parse((await verifiedBytes(sourceDirectory, recipe.provenance)).toString('utf8'));
+  const provenance: unknown = JSON.parse((await sourceBytes(sourceDirectory, recipe.provenance)).toString('utf8'));
   const size = recipe.bake.faceSize, faces: BakedSkyFace[] = [], nearFaces: BakedSkyFace[] = [];
   await mkdir(resolve(outputDirectory, 'sky'), { recursive: true });
   if (stars) await mkdir(resolve(outputDirectory, 'sky-near'), { recursive: true });

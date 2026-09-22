@@ -6,65 +6,52 @@
     "sbmt": "0.9.2.1",
     "release": "2026.09.10",
     "java": "17.0.2",
-    "java-bridge": "2.8.1",
-    "runtimeLockSha256": "57a144e335253f743faadb98475083bf2973f09b27426ed529a01897b8519476",
-    "generatorSha256": "b0dcaa3f7079754c18c7b822d664c1b785630c8dcbe57c86ffbaad2122e56e41"
+    "java-bridge": "2.8.1"
   },
   "inputs": [
     {
       "path": "src/objects/eros/source/observations/M0146235607.SUM",
-      "bytes": 6723,
-      "sha256": "7509644c53314875d4aacc4664c7e47f3f7b6336efda68abc8b6b3e0ae4bc383"
+      "bytes": 6723
     },
     {
       "path": "src/objects/eros/source/observations/M0146235607F4_2P_CIF_DBL.FIT",
-      "bytes": 535680,
-      "sha256": "3622997c199640d8b400c4a11d4da30ff5ae7634d8ae77830b9d84c187cf5cb3"
+      "bytes": 535680
     },
     {
       "path": "src/objects/eros/source/observations/M0146235607F4_2P_CIF_DBL.INFO",
-      "bytes": 4179,
-      "sha256": "b8426142683a18780ad25f44d4ef51bd850c52cedb82e8b6c07ad27dab2809a4"
+      "bytes": 4179
     },
     {
       "path": "src/objects/eros/source/shape/ver128q.tab",
-      "bytes": 16897935,
-      "sha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458"
+      "bytes": 16897935
     },
     {
       "path": "src/objects/itokawa/source/observations/N2402987304.SUM",
-      "bytes": 10449,
-      "sha256": "a5c2ad8714f3442bd9a0495a58d09e178b47ed5badfcafdf4f8516c2e4670a87"
+      "bytes": 10449
     },
     {
       "path": "src/objects/itokawa/source/observations/st_2402987304_v.fit",
-      "bytes": 1056960,
-      "sha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32"
+      "bytes": 1056960
     },
     {
       "path": "src/objects/itokawa/source/shape/ver128q.tab",
-      "bytes": 16897935,
-      "sha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964"
+      "bytes": 16897935
     },
     {
       "path": "tests/fixtures/fits/byte.fits",
-      "bytes": 5760,
-      "sha256": "a4697bb0e54261c40e72cfca8d6f126cf5270cf3f12054626981a8ae0cca2886"
+      "bytes": 5760
     },
     {
       "path": "tests/fixtures/sbmt/cases.json",
-      "bytes": 1332,
-      "sha256": "3c711346ecbad319342a37ec72b70d59a6fb0267fc94f76c0d6ac67cd873a984"
+      "bytes": 1332
     },
     {
       "path": "tests/fixtures/sbmt/concave.sum",
-      "bytes": 192,
-      "sha256": "21777139c9b44ee29a84e3fe41966961a197545d5950a1d60dba3f05bf049d10"
+      "bytes": 192
     },
     {
       "path": "tests/fixtures/sbmt/concave.tab",
-      "bytes": 306,
-      "sha256": "9a3cf1e96c7083d7d73f65a193a0d10da3c79f956d3445594bc19560623791ae"
+      "bytes": 306
     }
   ],
   "references": [],

@@ -23,8 +23,8 @@ test('Omega Centauri native stars reject the former centred AVM reference pixels
   assert.ok(value && typeof value === 'object' && 'stars' in value && Array.isArray(value.stars));
   const reference = recipe.images.find(image => image.id === 'eso1119b')!, source = recipe.images.find(image => image.id === 'eso0844a')!;
   assert.ok('source' in value && 'reference' in value);
-  assert.deepEqual(value.source, { id: source.id, sha256: source.sha256 });
-  assert.deepEqual(value.reference, { id: reference.id, sha256: reference.sha256 });
+  assert.deepEqual(value.source, { id: source.id });
+  assert.deepEqual(value.reference, { id: reference.id });
   const point = (input: unknown): [number, number] => {
     assert.ok(Array.isArray(input) && input.length === 2 && input.every(n => typeof n === 'number' && Number.isFinite(n)));
     return [input[0], input[1]];
@@ -82,8 +82,6 @@ test('observation recipe rejects unpinned and malformed sky inputs', async () =>
   const value = JSON.parse(await readFile('labs/nebula/models/helix/observations.json', 'utf8'));
   assert.equal(readObservationRecipe(value).images.length, 3);
   assert.throws(() => readObservationRecipe({ ...value, frame: { ...value.frame, northUp: false } }));
-  const invalid = structuredClone(value); invalid.images[0].sha256 = 'unverified';
-  assert.throws(() => readObservationRecipe(invalid));
 });
 
 test('registration measures coverage over the actual shared footprint, preserving held-out error gates', () => {

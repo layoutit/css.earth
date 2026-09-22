@@ -45,8 +45,8 @@ type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource
 type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: {
-  backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: {
+  backgroundPointManifest?: string; backgroundPointCloud?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
   plannerSource?: WorldPlannerSource;
@@ -69,7 +69,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   /** Volume lens banks are identified and framed from their descriptor alone; their heavy prepared
    * payload (all lenses, plus catalogue points) is fetched only through {@link loadVolumeLens}, the
    * first time a bank is selected or comes into view. Nothing here downloads at construction time. */
-  volumeLensBanks?: readonly { id: string; frame: DensityVolumeFrame; sha256: string }[];
+  volumeLensBanks?: readonly { id: string; frame: DensityVolumeFrame }[];
   /** Prepared before any lens is fetched: each bank's context visibility and, where it has one, its Sun-facing
    * billboard in a shared atlas. A small or distant bank draws its billboard; its lenses load only once large. */
   lensBillboards?: { readonly plan: LensBillboards; readonly atlasUrl: string };
@@ -88,7 +88,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   if (volumeLensBanks.length && !lensBillboards) throw new TypeError('Volume lens banks require their prepared billboards.');
   const lensFacts = volumeLensBanks.map(bank => {
     const facts = lensBillboards!.plan.banks.get(bank.id);
-    if (!facts || facts.payloadSha256 !== bank.sha256) throw new TypeError(`${bank.id}: lens billboards are stale; run pnpm prepare:lens-billboards.`);
+    if (!facts) throw new TypeError(`${bank.id}: lens billboards are missing; run pnpm prepare:lens-billboards.`);
     return facts;
   });
   if (!Number.isSafeInteger(warmVolumeLensDomNodeBudget) || warmVolumeLensDomNodeBudget < 0) {
@@ -197,7 +197,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       volumeImage.style.transformStyle = 'flat';
       volumeHost.appendChild(volumeImage);
       const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeImage.appendChild(volumeEnd);
-      const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256);
+      const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud);
       let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let stellarPoints: ReturnType<typeof mountStellarPoints> = null;

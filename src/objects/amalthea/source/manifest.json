@@ -4,8 +4,6 @@
     {
       "id": "c0420626379",
       "path": "observations/C0420626379R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "5183ec1e59c472691fd82c30956f485b37d499154a0ca9fddbc245ccadf25e0a",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -85,8 +83,6 @@
     {
       "id": "c0420652501",
       "path": "observations/C0420652501R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "ed9310d63df477a715f46349aec4d07eb66466ef7878046f6de8fcc7a8e33495",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -166,8 +162,6 @@
     {
       "id": "c0512324200",
       "path": "observations/C0512324200R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "28617d6c3a4e3efe8532db03d6479ed494f79712dd2c24d1ddd0e99964bc5b4f",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -247,8 +241,6 @@
     {
       "id": "c0532888100",
       "path": "observations/C0532888100R.IMG",
-      "expectedBytes": 840192,
-      "expectedSha256": "a9984536219b37e770cd92036aca30cd53a83b91b9d87e881550ed0de23a01bf",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -328,8 +320,6 @@
     {
       "id": "stooke-shape",
       "path": "shape/j5amalthea.tab",
-      "expectedBytes": 70226,
-      "expectedSha256": "031ee6036cf67e170d39da24487672cd3d4dd2bbb5e9391cf1e3ad56c67706f1",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/j5amalthea.tab",
       "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
       "credit": "Philip Stooke; NASA PDS",
@@ -365,8 +355,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

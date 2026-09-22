@@ -81,7 +81,6 @@ const seo = objectSeo(objectRecord, { socialImages: availableSocialImages(), def
           style={scene?.style}
           data-object-id={objectRecord.id}
           data-prepared-object={scene ? objectRecord.id : undefined}
-          data-prepared-sha256={scene?.sha256}
           aria-label={`3D CSS view of ${objectRecord.name}`}
           set:html={scene?.html ?? ''}
         />

@@ -9,7 +9,6 @@
   "solution": "Carry et al. 2021 Table3 printed circular Kepler orbit",
   "source": {
     "path": "source/orbit/published-parameters.json",
-    "sha256": "8a1e50f6040b207756bec082d48d03537da1dcc8a466a5b363e184e73b4e6362",
     "bytes": 5247
   },
   "positionKm": [
@@ -43,7 +42,6 @@
   "parentHeliocentricSource": {
     "path": "source/orbit/sylvia-heliocentric.txt",
     "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE",
-    "sha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
     "bytes": 8489,
     "target": 87,
     "center": 10,

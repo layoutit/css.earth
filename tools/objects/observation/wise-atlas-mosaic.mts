@@ -4,7 +4,6 @@
  * pair of overlapping tiles contributes the median of their difference, and one constant per tile
  * is solved by least squares with a zero-mean gauge. No pixel is interpolated: each tile pixel
  * centre lands in exactly one output pixel, whose value is the mean of what lands in it. */
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { gunzipSync } from 'node:zlib';
@@ -17,7 +16,7 @@ export type WiseBand = keyof typeof WISE_ATLAS_BANDS;
 export const WISE_ATLAS_REFERENCE = 'https://wise2.ipac.caltech.edu/docs/release/allsky/expsup/sec4_4f.html';
 export { MONTAGE_BACKGROUND_REFERENCE } from './background-offsets.mts';
 
-export interface TilePins { readonly schema: 'cssearth-wise-atlas-tiles@1'; readonly band: WiseBand; readonly tiles: readonly { readonly coaddId: string; readonly sha256: string; readonly bytes: number }[] }
+export interface TilePins { readonly schema: 'cssearth-wise-atlas-tiles@1'; readonly band: WiseBand; readonly tiles: readonly { readonly coaddId: string; readonly bytes: number }[] }
 export interface SkyGrid { readonly width: number; readonly height: number; readonly fovDeg: number; readonly centerIcrsDegrees: readonly [number, number] }
 
 /** A TAN output grid as a recipe states it. CDS hips2fits refuses requests above 50 million pixels; every route keeps that limit. */
@@ -35,10 +34,10 @@ export function parseTilePins(value: unknown): TilePins {
   const row = requireRecord(value, 'WISE atlas tiles');
   if (row.schema !== 'cssearth-wise-atlas-tiles@1' || typeof row.band !== 'string' || !Object.hasOwn(WISE_ATLAS_BANDS, row.band)) throw new TypeError('Unsupported WISE atlas tile list.');
   const tiles = requireArray(row.tiles).map(raw => {
-    const tile = requireRecord(raw, 'WISE atlas tile'), coaddId = requireString(tile.coaddId, 'coadd_id'), sha256 = requireString(tile.sha256, 'Tile sha256');
+    const tile = requireRecord(raw, 'WISE atlas tile'), coaddId = requireString(tile.coaddId, 'coadd_id');
     const bytes = requireFiniteNumber(tile.bytes, 'Tile bytes');
-    if (!/^\d{4}[pm]\d{3}_ac51$/u.test(coaddId) || !/^[0-9a-f]{64}$/u.test(sha256) || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`Invalid WISE atlas tile pin: ${coaddId}`);
-    return { coaddId, sha256, bytes };
+    if (!/^\d{4}[pm]\d{3}_ac51$/u.test(coaddId) || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`Invalid WISE atlas tile pin: ${coaddId}`);
+    return { coaddId, bytes };
   });
   if (!tiles.length || new Set(tiles.map(tile => tile.coaddId)).size !== tiles.length) throw new TypeError('WISE atlas tiles must be unique and non-empty.');
   return { schema: row.schema, band: row.band as WiseBand, tiles };
@@ -56,10 +55,10 @@ export async function readWiseAtlasTile(pins: TilePins, tile: TilePins['tiles'][
     const url = wiseAtlasUrl(tile.coaddId, pins.band), response = await fetch(url, { signal: AbortSignal.timeout(900_000) });
     if (!response.ok) throw new Error(`WISE atlas download failed: ${response.status} ${url}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== tile.bytes || sha256(bytes) !== tile.sha256) throw new Error(`Changed WISE atlas tile: ${url}`);
+    if (bytes.length !== tile.bytes) throw new Error(`Changed WISE atlas tile: ${url}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(`${path}.part`, bytes); await rename(`${path}.part`, path);
   }
-  if (bytes.length !== tile.bytes || sha256(bytes) !== tile.sha256) throw new Error(`Changed WISE atlas tile: ${path}`);
+  if (bytes.length !== tile.bytes) throw new Error(`Changed WISE atlas tile: ${path}`);
   return bytes;
 }
 

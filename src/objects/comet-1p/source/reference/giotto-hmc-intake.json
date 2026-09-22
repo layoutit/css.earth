@@ -10,12 +10,10 @@
   "guide": {
     "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/hmcguide.doc",
     "file": "hmcguide.doc",
-    "bytes": 36720,
-    "sha256": "3db4461e4cb1efbf99df0d0ef2e4162de6f84d51076e242323399c4840583839"
+    "bytes": 36720
   },
   "shape": {
     "path": "shape/1682q1halley.tab",
-    "sha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
     "description": "Stooke shape, east-positive longitude and long-axis +Z toward the large end; Vega 2 02:00:30 reference longitude 270 degrees.",
     "absoluteUncertaintyKm": [
       0.5,
@@ -47,20 +45,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.hdr",
         "file": "hmc01814.hdr",
-        "bytes": 5760,
-        "sha256": "956e3752d620376369bde2ad1adc1f705e179cdb8ac2266aace7d2e59d14998d"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.img",
         "file": "hmc01814.img",
-        "bytes": 14400,
-        "sha256": "842a15232f6a7ba7e032d148d890caba1b06c54ce83645e1272ff515d9095dd8"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.lbl",
         "file": "hmc01814.lbl",
-        "bytes": 1920,
-        "sha256": "c99ca4b63d3dbc0887528d76c0adc4ad2912c2e9f435663bc3ea970be0dd9f0f"
+        "bytes": 1920
       }
     },
     {
@@ -71,20 +66,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01838.hdr",
         "file": "hmc01838.hdr",
-        "bytes": 5760,
-        "sha256": "0beab2e4cab769ca0a409d532d7e8e75a8ccb1571407814357e2b7cb8b346a53"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01838.img",
         "file": "hmc01838.img",
-        "bytes": 14400,
-        "sha256": "b45dfcc1713ad24edd63c6622592525870d30a1b917e921b2bab59958869bc12"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01838.lbl",
         "file": "hmc01838.lbl",
-        "bytes": 1920,
-        "sha256": "a8ea7092a1152b581a492c5da12d6e59a90dbcd3442087cf131c4b0359add07b"
+        "bytes": 1920
       }
     },
     {
@@ -95,20 +87,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01848.hdr",
         "file": "hmc01848.hdr",
-        "bytes": 5760,
-        "sha256": "0915e6efd54286431a778f07db780e66fa78f60f295f8f3bab38d42fc2c43640"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01848.img",
         "file": "hmc01848.img",
-        "bytes": 14400,
-        "sha256": "561808691597487203a2c960502f8d155be7671bbf5033a57873e4e3ae97c880"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01848.lbl",
         "file": "hmc01848.lbl",
-        "bytes": 1920,
-        "sha256": "ede1c95ae701f9d1d60652bc0ecbeec5ba31a264043cf8a982e87ad431edaf16"
+        "bytes": 1920
       }
     },
     {
@@ -119,20 +108,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01856.hdr",
         "file": "hmc01856.hdr",
-        "bytes": 5760,
-        "sha256": "84c7ba373e523f901ac0a5b00bd864265720b3adf000b9f2d143c8997b5de02e"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01856.img",
         "file": "hmc01856.img",
-        "bytes": 14400,
-        "sha256": "6171e3679dc05b9f3521176c89186f6dc53978126796578d8d275a8abf5985f3"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01856.lbl",
         "file": "hmc01856.lbl",
-        "bytes": 1920,
-        "sha256": "0e29d8d58a8d3fc4ce3d552dce3190ebcfda97f860f744341ad20d606c4739e8"
+        "bytes": 1920
       }
     },
     {
@@ -143,20 +129,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01860.hdr",
         "file": "hmc01860.hdr",
-        "bytes": 5760,
-        "sha256": "8a3a00ef4b7a19cfd4b90d478b87d4e4c195ad0b4249c8d30b999599384732df"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01860.img",
         "file": "hmc01860.img",
-        "bytes": 14400,
-        "sha256": "024cdad6388663fbaef480f71cb6023a08765f9f8e61acd0c206d5d45f7c33ee"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01860.lbl",
         "file": "hmc01860.lbl",
-        "bytes": 1920,
-        "sha256": "7eeb592084840ece1964aff68c2d082ee451bf2fd61d00a8041ee33982083136"
+        "bytes": 1920
       }
     },
     {
@@ -167,20 +150,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01869.hdr",
         "file": "hmc01869.hdr",
-        "bytes": 5760,
-        "sha256": "b1a8838a92250a971216748db0e164d30a3d813718501f45d1b5f4d44cc23ae7"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01869.img",
         "file": "hmc01869.img",
-        "bytes": 14400,
-        "sha256": "a19b25ec4d0bb247b74ee90920c406525a46770b136d500db007d69bc7355a01"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01869.lbl",
         "file": "hmc01869.lbl",
-        "bytes": 1920,
-        "sha256": "e551efc4cbaaa07d544cb7b42a34cd2c45fb398e0e821d91684312f9b56042e3"
+        "bytes": 1920
       }
     },
     {
@@ -191,20 +171,17 @@
       "header": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01881.hdr",
         "file": "hmc01881.hdr",
-        "bytes": 5760,
-        "sha256": "383691c47a8854049faa225bc7ec3ef45b597fb35f7c9fa26f9221f6324dfe97"
+        "bytes": 5760
       },
       "image": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01881.img",
         "file": "hmc01881.img",
-        "bytes": 14400,
-        "sha256": "54304bc81443133c04d1cc464dd540168d00ffc02333c8cfd899700c7e9fb098"
+        "bytes": 14400
       },
       "label": {
         "url": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01881.lbl",
         "file": "hmc01881.lbl",
-        "bytes": 1920,
-        "sha256": "fc36b4961d6d472821fe8f1df485931458748021c54bb538cb8a89ab1cb6f79a"
+        "bytes": 1920
       }
     }
   ]

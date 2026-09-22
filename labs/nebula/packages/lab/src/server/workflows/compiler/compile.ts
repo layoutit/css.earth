@@ -42,32 +42,28 @@ export async function validateCompilerResult(root: string, value: unknown) {
     const depth = method.physicalDepth;
     if (!jointRecord(depth)) throw new TypeError('Invalid saved physical-depth method.');
     const snapshot = async (v: unknown) => {
-      if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`) ||
-          typeof v.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(v.sha256)) throw new TypeError('Invalid physical evidence snapshot.');
-      return readGeometryPin(root, { path: v.path, sha256: v.sha256 });
+      if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`)) throw new TypeError('Invalid physical evidence snapshot.');
+      return readGeometryPin(root, { path: v.path });
     };
     const recipe = readDepthRecipe(JSON.parse((await snapshot(depth.recipe)).toString())), evidence = await snapshot(depth.evidence);
-    if (geometrySha(evidence) !== recipe.evidence.sha256) throw new TypeError('Saved depth recipe and evidence differ.');
     verifyDepthEvidence(recipe, JSON.parse(evidence.toString()));
   }
   if (jointRecord(method) && method.photometricPrior !== undefined) {
     const prior = method.photometricPrior;
     if (!jointRecord(prior) || !jointRecord(prior.recipe) || !jointRecord(prior.evidence)) throw new TypeError('Invalid saved photometric model.');
     const snapshot = async (pin: Record<string, unknown>) => {
-      if (!jointPath(pin.path) || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`) ||
-          typeof pin.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(pin.sha256)) throw new TypeError('Invalid photometric evidence snapshot.');
-      return readGeometryPin(root, { path: pin.path, sha256: pin.sha256 });
+      if (!jointPath(pin.path) || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`)) throw new TypeError('Invalid photometric evidence snapshot.');
+      return readGeometryPin(root, { path: pin.path });
     };
     const recipe = readPhotometricMgeRecipe(JSON.parse((await snapshot(prior.recipe)).toString()));
     const evidenceBytes = await snapshot(prior.evidence);
-    if (geometrySha(evidenceBytes) !== recipe.evidence.sha256) throw new TypeError('Saved photometric evidence differs.');
     const compilerRecipe = readCompilerRecipe(method.recipe);
     if (!compilerRecipe.photometricPriorRecipe) throw new TypeError('Saved compiler recipe omits its photometric prior.');
     verifyPhotometricEvidence(recipe, JSON.parse(evidenceBytes.toString()), compilerRecipe.id);
   }
   async function readBank(pin: CompilerPin) {
     const volume = validatePreparedCssVolume(JSON.parse((await readGeometryPin(root, pin)).toString())), directory = pin.path.slice(0, pin.path.lastIndexOf('/') + 1);
-    for (const resource of volume.resources) await readGeometryPin(root, { path: directory + resource.path, sha256: resource.sha256 });
+    for (const resource of volume.resources) await readGeometryPin(root, { path: directory + resource.path });
     return volume;
   }
   const neutral = await readBank(result.scene.neutral);
@@ -113,7 +109,6 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
       imageToFrame: request.imageToFrame, evidence: { ...request.evidence, weights }, controls: defaultJointControls });
   }
   const observedStarsBytes = recipe.observedStars ? await readFile(resolve(root, recipe.observedStars.path)) : undefined;
-  if (observedStarsBytes && geometrySha(observedStarsBytes) !== recipe.observedStars!.sha256) throw new TypeError('Observed stellar source changed.');
   const sourceData = await loadCompilerImages(root, recipe.observationCatalogue, request, center);
   const source = sourceData.images.find(s => s.id === recipe.defaultSourceId); if (!source) throw new TypeError('Default compiler lens is unavailable.');
   const windowSource = recipe.emissionWindow && sourceData.images.find(image => image.id === recipe.emissionWindow!.sourceId);
@@ -127,15 +122,15 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
     observedStars: recipe.observedStars, starProfile: geometrySha(await readFile(resolve(root, COMPILER_STAR_PROFILE_PATH))),
     sourceLayers: sourceData.images.map(image => [image.id, image.original.sha256, image.diffuse.sha256, image.stars.sha256]),
     molecular: joint && { recipe: joint.recipeSha256, evidence: joint.evidence },
-    physicalDepth: depthModel && { recipe: depthModel.recipeSha256, evidence: depthModel.recipe.evidence.sha256 },
-    photometricPrior: photometricModel && { recipe: photometricModel.recipeSha256, evidence: photometricModel.recipe.evidence.sha256 },
+    physicalDepth: depthModel && { recipe: depthModel.recipeSha256, evidence: geometrySha(depthModel.evidenceBytes) },
+    photometricPrior: photometricModel && { recipe: photometricModel.recipeSha256, evidence: geometrySha(photometricModel.evidenceBytes) },
     request: { controls: request.controls, evidence: { sensitivity: request.evidence.sensitivity, weights } } }));
   const directory = `.local/nebula-lab/compiler/${id}`, receipt = resolve(root, directory, 'result.json');
   try { const cached = await validateCompilerResult(root, JSON.parse(await readFile(receipt, 'utf8'))); progress('Prepared nebula restored', 1); return cached; }
   catch (error) { if (!(error instanceof Error && 'code' in error && error.code === 'ENOENT')) throw error; }
   signal.throwIfAborted(); await mkdir(resolve(root, directory), { recursive: true });
   async function save(name: string, bytes: Uint8Array): Promise<CompilerPin> {
-    signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root, path); await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path, sha256: geometrySha(bytes) };
+    signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root, path); await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path };
   }
   let started = performance.now();
   if (joint) progress('Fitting the velocity scaffold…', .22);

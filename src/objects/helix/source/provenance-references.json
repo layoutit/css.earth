@@ -5,35 +5,30 @@
       "originalPath": "labs/nebula/models/helix/compiler.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/01-compiler.json",
-      "sha256": "ce2aa4f55bc2569784b50cae163ecc98502fc3f76add6c07b0a4fd64b6a3ff85",
       "bytes": 1329
     },
     {
       "originalPath": "labs/nebula/models/helix/observations.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/02-observations.json",
-      "sha256": "94c86a73e965bf38c4df792047cdbeb2321cccecb2bfd3a4d0340b84c4af38ea",
       "bytes": 4470
     },
     {
       "originalPath": "labs/nebula/models/helix/observation-structures.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/03-observation-structures.json",
-      "sha256": "31906fc965cd98acce4d3d8b6589135311f48a14ecfd94c20abbe2e298434156",
       "bytes": 405
     },
     {
       "originalPath": "labs/nebula/models/helix/joint-fit.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/bake-inputs/references/04-joint-fit.json",
-      "sha256": "5380e28a8c39c629c586a701c8dda36e4a7f5dd643c3c1adda552359549f2065",
       "bytes": 1020
     },
     {
       "originalPath": "labs/nebula/models/helix/kinematics-hco.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/helix/source/evidence/helix/kinematics-hco.json",
-      "sha256": "f6fec28e77fb4e87bbcee87941f57c6d1463910cafb9f113c60e6e02fe8db125",
       "bytes": 7355
     }
   ]

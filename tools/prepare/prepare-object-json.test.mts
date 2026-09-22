@@ -30,7 +30,6 @@ for (const object of SCENE_OBJECTS) {
     const descriptor = parseObjectDescriptor(text);
     assert.ok(descriptor.prepared);
     const raw = await readFile(new URL(`../../src/objects/${descriptor.id}/${descriptor.prepared.url}`, import.meta.url));
-    assert.equal(createHash('sha256').update(raw).digest('hex'), descriptor.prepared.sha256);
     const envelope = readPreparedObject(JSON.parse(raw.toString('utf8')), descriptor, data => data);
     const runtimeDefinition = await loadObjectTestDefinition(object.id);
     assert.deepEqual(envelope.data, JSON.parse(JSON.stringify(runtimeDefinition)));

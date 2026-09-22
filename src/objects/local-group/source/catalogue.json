@@ -6,22 +6,18 @@
   },
   "catalogue": {
     "path": "lvdb/comb_all.csv",
-    "sha256": "7d2f231646bfee843e549818f9b3332929afd9c14d5eb450d59e051d07dcebd6",
     "bytes": 835074
   },
   "archive": {
     "path": "lvdb/v1.1.1.tar.gz",
-    "sha256": "d4dfeb5812e357dad6766cf3426805a76511fe48aa4f0bbd52b17b693e2727f4",
     "bytes": 3949330
   },
   "membershipTable": {
     "path": "mcconnachie/table1_OCT2019.txt",
-    "sha256": "0d3a83927f994b6b50fbcb778ace5f4232be13e817920b48c764d5900288afe1",
     "bytes": 14694
   },
   "provenance": {
     "path": "provenance.json",
-    "sha256": "0295fed693904100c581ca1ab610ed86244cc8e96f43138db29da4c7115cb7f3",
     "bytes": 7624
   },
   "catalogueSourceId": "lvdb-v1.1.1",

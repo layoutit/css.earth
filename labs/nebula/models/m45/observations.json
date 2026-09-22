@@ -21,7 +21,6 @@
       "label": "NOIRLab · optical B / V / I",
       "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif",
       "page": "https://noirlab.edu/public/images/noao-m45/",
-      "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
       "width": 4000,
       "height": 2920,
       "fieldArcminutes": [
@@ -65,7 +64,6 @@
         "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
         "width": 9700,
         "height": 7080,
-        "sha256": "a7780281f9ef87ab815d1dbf93f6dd596a25d14f263d8d66fc6b82a17d758e91",
         "hashStatus": "publisher-published; original not downloaded"
       },
       "processingVariant": "Publisher 4K TIFF, complete 9700×7080 master footprint. Embedded AVM reference grid retained."
@@ -75,7 +73,6 @@
       "label": "Spitzer · IRAC 3.6–8 µm",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif",
       "page": "https://science.nasa.gov/photojournal/pink-pleiades/",
-      "sha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
       "width": 2855,
       "height": 2855,
       "fieldArcminutes": [
@@ -128,7 +125,6 @@
       "label": "Spitzer · IRAC + MIPS 4.5–24 µm",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif",
       "page": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
-      "sha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
       "width": 2855,
       "height": 2855,
       "fieldArcminutes": [
@@ -181,7 +177,6 @@
       "label": "WISE · 3.4–22 µm wide field",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif",
       "page": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
-      "sha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
       "width": 4007,
       "height": 3061,
       "fieldArcminutes": [
@@ -234,7 +229,6 @@
       "label": "2MASS · J / H / Ks context",
       "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2F2MASS%2Fcolor&wcs=%7B%22NAXIS%22%3A2%2C%22NAXIS1%22%3A4096%2C%22NAXIS2%22%3A4096%2C%22WCSAXES%22%3A2%2C%22CRPIX1%22%3A2048.5%2C%22CRPIX2%22%3A2048.5%2C%22CDELT1%22%3A-0.00087890625%2C%22CDELT2%22%3A0.00087890625%2C%22CUNIT1%22%3A%22deg%22%2C%22CUNIT2%22%3A%22deg%22%2C%22CTYPE1%22%3A%22RA---TAN%22%2C%22CTYPE2%22%3A%22DEC--TAN%22%2C%22CRVAL1%22%3A56.75%2C%22CRVAL2%22%3A24.1167%2C%22RADESYS%22%3A%22ICRS%22%7D&format=png",
       "page": "https://alasky.cds.unistra.fr/2MASS/Color/properties",
-      "sha256": "b98192efc2a53be14598a6af8b5bbc06e1746d70b112f7cb29abaa868fa2a107",
       "width": 4096,
       "height": 4096,
       "fieldArcminutes": [
@@ -284,7 +278,6 @@
       "label": "IRAS / IRIS · 25 / 60 / 100 µm",
       "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FIRIS%2Fcolor&wcs=%7B%22NAXIS%22%3A2%2C%22NAXIS1%22%3A1024%2C%22NAXIS2%22%3A1024%2C%22WCSAXES%22%3A2%2C%22CRPIX1%22%3A512.5%2C%22CRPIX2%22%3A512.5%2C%22CDELT1%22%3A-0.00390625%2C%22CDELT2%22%3A0.00390625%2C%22CUNIT1%22%3A%22deg%22%2C%22CUNIT2%22%3A%22deg%22%2C%22CTYPE1%22%3A%22RA---TAN%22%2C%22CTYPE2%22%3A%22DEC--TAN%22%2C%22CRVAL1%22%3A56.75%2C%22CRVAL2%22%3A24.1167%2C%22RADESYS%22%3A%22ICRS%22%7D&format=png",
       "page": "https://alasky.cds.unistra.fr/IRISColor/properties",
-      "sha256": "a9e1a3b6a82048c8ab98a68f06bb69d0d2a624de43b3bbf3ff85c2c19a0879a0",
       "width": 1024,
       "height": 1024,
       "fieldArcminutes": [
@@ -334,7 +327,6 @@
       "label": "IAU / Usama · wide optical · unverified",
       "url": "https://iauarchive.eso.org/static/archives/images/original/ann22042ab.tif",
       "page": "https://iauarchive.eso.org/public/images/detail/ann22042ab/",
-      "sha256": "7df5986e086ea3f332ae1f8d07b56c7de5ec1c1a34d0309a000cf4a43ed77bd9",
       "width": 3365,
       "height": 2234,
       "bytes": 13318250,
@@ -384,7 +376,6 @@
       "label": "Andreo · wide optical · unverified",
       "url": "https://apod.nasa.gov/apod/image/0910/pleiades_andreo_big.jpg",
       "page": "https://apod.nasa.gov/apod/ap091014.html",
-      "sha256": "be7518ac9f74e4ac31aef6704511190c4ca6eb87d5e32800fe56feed27a94d68",
       "width": 2200,
       "height": 1567,
       "bytes": 1607314,
@@ -434,7 +425,6 @@
       "label": "Tõrva / Niittee · wide optical",
       "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg",
       "page": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-      "sha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
       "width": 8000,
       "height": 5199,
       "bytes": 16654428,
@@ -487,16 +477,13 @@
   ],
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   },
   "intakeStatus": "Original-image inspection only. Removal pins satisfy the existing recipe schema; no star removal, reconstruction or physical constraints have been run.",
   "nativeSeparationCache": {
     "recipe": {
-      "path": "labs/nebula/models/m45/processing-observations.json",
-      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705"
+      "path": "labs/nebula/models/m45/processing-observations.json"
     }
   }
 }

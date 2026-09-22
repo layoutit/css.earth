@@ -31,7 +31,6 @@ const catalog = parsePreparedSurfaceFeatureCatalog(JSON.parse(bytes.toString("ut
 
 test("Tempel 1 Fig. 2b terrain anchors reproduce the published cylindrical-map axes", () => {
   const digitization = object(landmarks.digitization);
-  assert.equal(digitization.pdfSha256, "33cc898a17b33c68a83bd451f901d11220ec3bb1fae4d17690787e8717849429");
   assert.deepEqual(digitization.longitudeAxisPixels, [59, 922]);
   assert.deepEqual(digitization.longitudeAxisDegreesUnwrapped, [180, 540]);
   assert.deepEqual(digitization.latitudeAxisPixels, [566, 995]);

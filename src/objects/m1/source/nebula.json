@@ -8,14 +8,12 @@
     {
       "id": "martin-2021",
       "url": "https://arxiv.org/pdf/2101.02709v1",
-      "sha256": "11e28a7280788f67f2d61bc5aa82626c68793af7b779e734239cd5feb4f0fef9",
       "bytes": 17057529,
       "citation": "Martin, Milisavljevic & Drissen (2021), 3D mapping of the Crab Nebula with SITELLE. I"
     },
     {
       "id": "m1-registered-frame",
       "url": "https://github.com/layoutit/css.earth/blob/9d0a453d4c82637ebc54277f97281e0c8426e85b/labs/nebula/models/m1/observations.json",
-      "sha256": "6adf56098e54344fe8615772b27c871e84aa86613a5bd50351f0b8168b3c94f7",
       "bytes": 14682,
       "citation": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid."
     }

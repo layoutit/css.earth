@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 658.5
       },
       "coverage": "This is the archived Alpha model alone; its companion Squannit is not rendered. The source paper identifies regions constrained by weaker Goldstone images where reconstruction accuracy is lower. Table 2 supplies the equivalent diameter, rotation period and ecliptic pole; no gravitational-slope or optical albedo map is inferred.",
-      "expectedBytes": 288969,
-      "expectedSha256": "2bdeafb28dbb20b0aa74d79dbee76021ca7dd09e43fc72ff6cf43445dcc812bf",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 17334,
-      "expectedSha256": "dfbeba97244d07296b2e7a8eb6b6d959d1dccc3d75f2388cb8327f223652757e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

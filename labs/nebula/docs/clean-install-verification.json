@@ -31,8 +31,7 @@
     "summary": {
       "schema": "cssearth-nebula-verification@1",
       "recipe": {
-        "path": "labs/nebula/models/lmc/bake.json",
-        "sha256": "6946cf57f16e33531ceb50ef34aac765ff4031260221671808f9ea0ae1e08b35"
+        "path": "labs/nebula/models/lmc/bake.json"
       },
       "images": 3,
       "densitySlices": 288,
@@ -83,44 +82,34 @@
   },
   "logs": {
     "clone": {
-      "bytes": 3800,
-      "sha256": "35eed67916c7a37e075cec30b4b6a9c0d593d15dcf4258469737ad7bc53e6f9e"
+      "bytes": 3800
     },
     "install": {
-      "bytes": 1222,
-      "sha256": "37c78e37799b9d66d84bb38b529abda1f59e8efe48b154a1a8c798396e7aa5a7"
+      "bytes": 1222
     },
     "packages": {
-      "bytes": 3889,
-      "sha256": "c5bdc7c302e2c6d3919787101d01d94f4f313725e76876ea57867a8467c8420a"
+      "bytes": 3889
     },
     "bake": {
-      "bytes": 23542,
-      "sha256": "f13cbc9d7120856c848000f2d429af35f2d81196e9828445ecfd728460b9056d"
+      "bytes": 23542
     },
     "tests": {
-      "bytes": 38353,
-      "sha256": "0bedf50ef0e99cb967c19c0f0335be9daeae2a6dd51e6e91fdf334100acf03df"
+      "bytes": 38353
     },
     "types": {
-      "bytes": 0,
-      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      "bytes": 0
     },
     "build": {
-      "bytes": 481,
-      "sha256": "df9519d225b55c81538c9b2a622a6898118c9185e0349bc0825f518d00f9d679"
+      "bytes": 481
     },
     "verification": {
-      "bytes": 701,
-      "sha256": "da8444963d4a01c7aa94fff904d3f071483ad9fb6dbfa5811dd01da9d915610d"
+      "bytes": 701
     },
     "browser": {
-      "bytes": 353,
-      "sha256": "8b7b1d0ef579bf082c2c21e5bdf98c8c7716586928c1e2c0f2a2ab20bd99b524"
+      "bytes": 353
     },
     "tabs": {
-      "bytes": 284,
-      "sha256": "a09f5a49c8c0f78e088428b62032933b9b36f6a7a20ccc56a976cc5c2c60e554"
+      "bytes": 284
     }
   },
   "limitations": [

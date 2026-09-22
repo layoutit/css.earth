@@ -20880,25 +20880,21 @@
     "sources": [
       {
         "path": "Bonanos2009-ReadMe.txt",
-        "sha256": "56d1846aa9c97ac7d55bbc0cabc40cf569a212ba2254ec08103ce103bfae90dc",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/ReadMe",
         "bytes": 8730
       },
       {
         "path": "table1.dat",
-        "sha256": "e5ff8b477fa08d6be1b6786990a9b77affff3a2dcb1791c48201b8080dd652dc",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table1.dat",
         "bytes": 139187
       },
       {
         "path": "table3.dat",
-        "sha256": "7be6d2307566607a9bf58ebbeddca97a805b2bdeb5c024bf18413e50306019ef",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/table3.dat",
         "bytes": 390139
       },
       {
         "path": "refs.dat",
-        "sha256": "ced374c916db9cf5409bc3bcef91018f64671ae673f9595cd28ba041781127e4",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/138/1003/refs.dat",
         "bytes": 2279
       }
@@ -20922,27 +20918,22 @@
       "modelResultId": "a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
       "directory": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d",
       "provenance": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/provenance.json",
-        "sha256": "223bc533e340241feb4533187ed60c937dc73aa82093d53ab37118b579d43089"
+        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/provenance.json"
       },
       "emissionField": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/emission-field.json",
-        "sha256": "c9325a0890571aa3670ce9edba93db55f987605e89926943c0f9f89f0f03b45b"
+        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/emission-field.json"
       },
       "envelope": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/envelope.json",
-        "sha256": "c83631367274d8ed55f99a0f676591d90379c359a78b02e3f95712334767ddf4"
+        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/envelope.json"
       },
       "depthDensity": {
-        "path": "labs/nebula/models/lmc/full-density/source/volume.json",
-        "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+        "path": "labs/nebula/models/lmc/full-density/source/volume.json"
       },
       "depthDensityIdentity": "ee7b67e2a66170086760d48ebbd74d34c7f68f8f4dd718ee26680929f4903e57",
       "depthDensitySource": "The model request's pinned cloud; this envelope record pins none of its own.",
       "footprint": {
         "image": {
-          "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/original-image.png",
-          "sha256": "a9d35609459d73a511423f9586535c58d8bdc3d8089a5080e239575ef4594e09"
+          "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/original-image.png"
         },
         "width": 384,
         "height": 285,
@@ -20950,12 +20941,10 @@
         "exclusions": []
       },
       "cutoffSignal": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/aligned-image.png",
-        "sha256": "a1b45d96bb05ae4b1ac21c8f7ce4dafdb5ff85f2d22ffef2d0640924190ae626"
+        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/aligned-image.png"
       },
       "cloudParts": {
-        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/cloud-parts.json",
-        "sha256": "417e89086dd62895d06031654321be2e6f42e3fe6a5213a33c9295a1a07ad2cf"
+        "path": ".local/nebula-lab/reconstructions/a9e2048ad1726cf92d93b801f4328a2356dbd188a3091d25f6f51050ebf13d1d/source/cloud-parts.json"
       },
       "observerDistanceKpc": 49.590672750490434,
       "tangentBoundsKpc": {
@@ -20982,8 +20971,7 @@
       },
       "subjectId": "lmc-clouds",
       "lensRecipe": {
-        "path": "labs/nebula/models/lmc/envelope/finite-lenses.json",
-        "sha256": "e69f1eb5f9f3c9fe63c0a3ef703bbb875bb93e882f1fd25442b8d07718c8ff6e"
+        "path": "labs/nebula/models/lmc/envelope/finite-lenses.json"
       },
       "implementation": {
         "labs/nebula/packages/lab/src/adapters/sources/stellar-color.ts": "22159c656a18818d53b5d9c110c8edffce6a44edba845ea2e6cbcaa6bf2f512f",

@@ -9,8 +9,6 @@
     "matplotlib": "3.11.2"
   },
   "sceneParity": {
-    "runtimeSha256": "b39dddfec4e30954e7908e7893325b6caa6cf516fcdff0e27e03f75ef0d0d31a",
-    "contextSha256": "4330a638b653f9529d1089b0069353ba8669b7f447c055d7c8b929e1e75b7242",
     "physicalCameraMountValidated": true,
     "missingContextRejected": true,
     "unchanged": [
@@ -21,7 +19,6 @@
       "surfaceHit",
       "sky"
     ],
-    "treeSha256": "4fea4a67e9eaa8ff90df28ed3d75a7523bccabca1d6718dd006dc28724700e95",
     "mutationRejected": true
   },
   "controlBinding": {
@@ -40,18 +37,15 @@
   },
   "inputs": {
     "map": {
-      "sha256": "69333e2b7a98858e8b83f91aeb523774eef3d607b99368b00e0c2145249ef16e",
       "bytes": 9318
     },
     "sphere": {
-      "sha256": "7ffef328bffc42df4ec224cdac472c815c7f5077efff7de167826f35642cab94",
       "bytes": 8689
     }
   },
   "source": "tools/objects/telescopes/sphere-oracle.mts",
   "example": {
     "cube": "jw01250-o002_t001_nirspec_g395h-f290lp_s3d.fits",
-    "cubeSha256": "838c59a8b0ddcb8e7f464324e1a1515dcfe8f4a42c7c79b7d10e8f23f5ffe64a",
     "selection": {
       "kind": "band-image",
       "hdu": 1,
@@ -66,28 +60,23 @@
   "illustrations": [
     {
       "file": "docs/images/telescopes/europa-projected-brightness.png",
-      "sha256": "9e2935a38528b9d8b4759bc398c80e1858e14783a48da4dffdbb1cc2ef99e754",
       "bytes": 60808
     },
     {
       "file": "docs/images/telescopes/europa-sphere-reference.png",
-      "sha256": "b54d17fe6835caa998424f60e63865e6c2188af450f4b0d411de692b03b82bb7",
       "bytes": 213940
     },
     {
       "file": "docs/images/telescopes/europa-sphere-html.png",
-      "sha256": "2aa5a78eafa9e9ed1b4e5ad3a1fa02b846d3974d72d335146f20f0010ed34614",
       "bytes": 209323,
       "kind": "browser screenshot of the standalone HTML at its initial view",
       "viewport": {
         "width": 1280,
         "height": 720
-      },
-      "htmlSha256": "72cbf9b3aaaaa4cf594c5a0730eb0f4bf2bb7da7c80e82110dadab5700cdb896"
+      }
     },
     {
       "file": "docs/images/telescopes/europa-sphere-rotation.gif",
-      "sha256": "366ea7cd3fc920e65f1e10c34b4a4a8c2e6a27f95d5c9222a738e2230b1b3358",
       "bytes": 2632417,
       "kind": "browser drag sequence, played at 12.5 frames per second; illustration, not a performance recording",
       "frames": 61,
@@ -98,16 +87,14 @@
       "sourceViewport": [
         1280,
         720
-      ],
-      "htmlSha256": "72cbf9b3aaaaa4cf594c5a0730eb0f4bf2bb7da7c80e82110dadab5700cdb896"
+      ]
     }
   ],
   "browser": {
     "transport": "local HTTP preview of the self-contained HTML",
     "html": {
       "path": "sphere.html",
-      "bytes": 8445876,
-      "sha256": "72cbf9b3aaaaa4cf594c5a0730eb0f4bf2bb7da7c80e82110dadab5700cdb896"
+      "bytes": 8445876
     },
     "rendered": true,
     "rotationAndWheelZoomChecked": true,
@@ -127,27 +114,22 @@
     "erisValues": [
       {
         "kind": "image",
-        "csvSha256": "86132ee9b61bf95c9717f9857290b41f0c6daf9e5e6d5398f90dcf149ce8dd23",
         "unchanged": true
       },
       {
         "kind": "spectrum",
-        "csvSha256": "fe31f8066ab945bbdaaf8d70aac9d614238ad7f1dbfe34f8f4b1ffe72616d51b",
         "unchanged": true
       },
       {
         "kind": "band-image",
-        "csvSha256": "8011e33333f73500ead1dbc21b566a5c2e5e609558783428ae85125b0746b8b9",
         "unchanged": true
       },
       {
         "kind": "aperture-spectrum",
-        "csvSha256": "4119662f5e8d689bed94bd51e9665da64ce235192b17fb0337ce80dd9442614a",
         "unchanged": true
       },
       {
         "kind": "feature-map",
-        "csvSha256": "392f46a567354a0c5cbbbd86288fba2dd6032a29fd6992c00ff467c1ab484ef9",
         "unchanged": true
       }
     ],

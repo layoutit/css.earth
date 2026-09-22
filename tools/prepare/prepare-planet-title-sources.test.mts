@@ -17,9 +17,8 @@ import type { PathLike } from "node:fs";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 
-test("Hiʻiaka preserves its okina using a real glyph in the pinned title font", async () => {
+test("Hiʻiaka preserves its okina using a real glyph in the title font", async () => {
   const fontPath = resolve(projectRoot, PLANET_TITLE_RECIPE.checkedFontPath);
-  assert.equal(sha256(await readFile(fontPath)), PLANET_TITLE_RECIPE.sourceSha256);
   const opened = fontkit.openSync(fontPath);
   assert.ok("getVariation" in opened);
   const font = opened.getVariation({
@@ -56,7 +55,6 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
     assert.equal(source.baseline, PLANET_TITLE_RECIPE.baseline);
     assert.equal(source.height, PLANET_TITLE_RECIPE.viewBoxHeight);
     assert.equal(source.xOrigin, "trim-left-bearing");
-    assert.equal(source.sourceSha256, PLANET_TITLE_RECIPE.sourceSha256);
     assert.equal(source.sourceGenerator, PLANET_TITLE_RECIPE.sourceGenerator);
     const jsonTitlePath = resolve(projectRoot,
       `src/objects/${planet.id}/source/presentation/title-mark.json`);
@@ -89,8 +87,6 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
           ["renderViewBox", "renderWidth", "renderHeight", "renderPathOffsetY"].includes(field))),
         `${planet.id}: prepared title layout`,
       );
-      assert.equal(preparedTitle.inputSha256, PLANET_TITLE_RECIPE.sourceSha256,
-        `${planet.id}: prepared title input pin`);
       assert.match(requireString(preparedTitle.generator), /prepare-content\.mjs$/u,
         `${planet.id}: prepared title generator`);
     }

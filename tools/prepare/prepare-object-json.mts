@@ -1,4 +1,3 @@
-import { sha256 } from '../../src/platform/sha256.mts';
 import { preparePageMetadata } from '../prepared/prepared-page-metadata.mts';
 import {parseObjectDescriptor} from '@cssearth/objects';
 import {requireObjectRuntimeDefinition} from '../contract/object-runtime-contract.mts';
@@ -86,8 +85,8 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   const descriptor = parseObjectDescriptor({ ...originalDescriptor, properties: { ...originalProperties, ...properties } });
   const payload = serializeObjectJson(descriptor, runtime);
   await writePreparedText(resolve(preparedDirectory, 'object.json'), payload);
-  const prepared = { format, url: 'prepared/object.json', sha256: sha256(payload) };
-  const page = preparePageMetadata(id, prepared.sha256, definition);
+  const prepared = { format, url: 'prepared/object.json' };
+  const page = preparePageMetadata(id, definition);
   await writePreparedText(resolve(preparedDirectory, 'page.json'), page.text);
   // Validation may normalize key order. Retain the authored document's order
   // so an unchanged prepared object does not rewrite its descriptor.
@@ -119,7 +118,7 @@ export async function repinObjectJson(id: string, projectRoot = root) {
   const originalDescriptor = requireRecord(JSON.parse(await readFile(descriptorPath, 'utf8')));
   const before = JSON.stringify(originalDescriptor.prepared);
   const pin = await pinPreparedObject(id, originalDescriptor, {}, projectRoot);
-  return before !== JSON.stringify({ format: pin.format, url: pin.url, sha256: pin.sha256 });
+  return before !== JSON.stringify({ format: pin.format, url: pin.url });
 }
 
 /** Existing descriptors opt into JSON baking; planned objects get no fallback. */

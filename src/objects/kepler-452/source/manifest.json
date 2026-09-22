@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "kepler-452-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10152,
-      "expectedSha256": "1b47bc9321956d8904ecb395e76031ff302bddb7c0b31afe745ccfa3e53bb47a",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2079597124345617280&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",
@@ -237,8 +233,6 @@
     {
       "id": "kepler-452-crosscheck-spectrum",
       "path": "photometry/crosscheck-lamost-247708059.fits.gz",
-      "expectedBytes": 58344,
-      "expectedSha256": "43e63e6c7ba637ad35869f5784bc58b7d460b392bcc69f52a1ed05bce15d3bad",
       "origin": "https://www.lamost.org/dr11/v2.0/spectrum/fits/247708059",
       "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197",
       "license": "LAMOST public data release: free use with acknowledgement",

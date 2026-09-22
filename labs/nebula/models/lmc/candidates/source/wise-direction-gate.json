@@ -25,7 +25,6 @@
   },
   "source": {
     "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-    "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
     "nativeDimensions": [
       6000,
       6000
@@ -55,7 +54,6 @@
   },
   "catalogue": {
     "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/allwise-bright.csv",
-    "sha256": "57b77df8a37cb5cf9076f7b99c30c43674cea26ce44f48c02a74e360363f3e3d",
     "name": "IRSA AllWISE Source Catalog allwise_p3as_psd",
     "query": {
       "endpoint": "https://irsa.ipac.caltech.edu/TAP/sync",
@@ -143,7 +141,6 @@
     "Fixed publisher WCS is verified without fitting an offset, scale, reflection or homography."
   ],
   "id": "wise-wide-infrared",
-  "imageSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
   "status": "passed",
   "verifiedWcs": {
     "projection": "TAN",
@@ -170,19 +167,15 @@
   "predeclaredProtocolSource": "Thresholds declared before catalogue matching in the alignment task; unchanged after measurement.",
   "catalogueDocumentationUrl": "https://irsa.ipac.caltech.edu/data/WISE/docs/release/AllWISE/expsup/sec2_1.html",
   "bandMappingEvidence": {
-    "path": ".local/nebula-lab/image-candidates/wise-wide/receipt.json",
-    "sha256": "c0471ef6bb3d9cf8cd06900c9c238dc8322407ba48ea57abc4f05c8246f39a08"
+    "path": ".local/nebula-lab/image-candidates/wise-wide/receipt.json"
   },
   "matchedStarEvidence": {
-    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/matched-catalogue-stars.json",
-    "sha256": "42897adacce126cd52dc9bf758066e81c4f72b2d6ce7807849a1b70f85d5e235"
+    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/matched-catalogue-stars.json"
   },
   "starMapEvidence": {
-    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/wise-w1-star-centroids.json",
-    "sha256": "bb5c285efd832af32f71f365621dcfa7a3d663f36e20e2e3cc53dfc1c00cc1ac"
+    "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/wise-w1-star-centroids.json"
   },
   "checkScript": {
-    "path": "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py",
-    "sha256": "dd8a7830d8bf1ea8611770eab27d1157f811b47883091712ffa08c6c8e54cf76"
+    "path": "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py"
   }
 }

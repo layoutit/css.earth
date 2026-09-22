@@ -23,9 +23,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "reflectance",
-      "expectedSha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
-      "expectedBytes": 3084480
+      "lensId": "reflectance"
     },
     {
       "id": "reflectance-f444w",
@@ -48,9 +46,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "reflectance",
-      "expectedSha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
-      "expectedBytes": 3084480
+      "lensId": "reflectance"
     },
     {
       "id": "reflectance-f250m",
@@ -73,9 +69,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "reflectance",
-      "expectedSha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
-      "expectedBytes": 3084480
+      "lensId": "reflectance"
     },
     {
       "id": "reflectance-f300m",
@@ -98,9 +92,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "reflectance",
-      "expectedSha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
-      "expectedBytes": 3084480
+      "lensId": "reflectance"
     },
     {
       "id": "reflectance-f182m",
@@ -123,9 +115,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "reflectance",
-      "expectedSha256": "1475883875640febac23487f0e171900cb6a5a37352945f74bec6b8e42e728f3",
-      "expectedBytes": 3101760
+      "lensId": "reflectance"
     },
     {
       "id": "reflectance-f210m",
@@ -148,9 +138,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (tools/objects/jwst/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/hd-181327-2780.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "reflectance",
-      "expectedSha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
-      "expectedBytes": 3101760
+      "lensId": "reflectance"
     }
   ],
   "documents": [

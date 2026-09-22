@@ -44,7 +44,7 @@ export async function prepareCompilerStarSprites(root: string, outputDirectory: 
   // Previous angular diameter denotes a flat circle: integral area pi*d²/4.
   // Preserve every channel and peak opacity. Expand the tile to compensate its decoded PSF area.
   const diameterScale = Math.sqrt(Math.PI * tileSize * tileSize / (4 * alphaIntegralPixels));
-  return { starSprites: { schema: 'cssearth-compiler-star-sprites@1', atlas: { path, sha256: sha256(bytes) },
+  return { starSprites: { schema: 'cssearth-compiler-star-sprites@1', atlas: { path },
     width, height, tileSize, entries, diameterScale, alphaScale: 1, alphaIntegralPixels,
-    profile: { path: COMPILER_STAR_PROFILE_PATH, sha256: sha256(source) } } };
+    profile: { path: COMPILER_STAR_PROFILE_PATH } } };
 }

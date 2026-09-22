@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import sharp from 'sharp';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import { bakeMasterVolumeSlices } from '@cssearth/volume-bake/slices/emission';
@@ -53,8 +53,8 @@ async function fixture(t: TestContext, variable = false) {
 test('retained material prepares RGB through the existing slab/compiler path with exact geometry and alpha', async t => {
   const { options, slices } = await fixture(t), sourceHash = sha256(await readFile(join(options.root, options.scene.neutral.path)));
   const lens = await prepareRetainedMaterialBank(options);
-  const neutral = validatePreparedCssVolume(JSON.parse((await verifiedBytes(options.root, options.scene.neutral)).toString()));
-  const painted = validatePreparedCssVolume(JSON.parse((await verifiedBytes(options.root, lens.volume)).toString()));
+  const neutral = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, options.scene.neutral)).toString()));
+  const painted = validatePreparedCssVolume(JSON.parse((await sourceBytes(options.root, lens.volume)).toString()));
   assertCompilerLensGeometry(neutral, painted, options.scene, {});
   assert.equal(sha256(await readFile(join(options.root, options.scene.neutral.path))), sourceHash);
   assert.ok(lens.coverage.recoloredTexels > 0);

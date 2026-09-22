@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 265
       },
       "coverage": "The 1995 radar reconstruction resolves global shape at tens of meters. Its angular edges and concavities are modeled geometry, not measured optical texture; the archived Cartesian X/Y/Z extents correspond to the intermediate/long/short principal axes.",
-      "expectedBytes": 123654,
-      "expectedSha256": "294881d2e3988029b35a9cef93e38e6b53cb02574b2c59df938759cf286af79d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 665422,
-      "expectedSha256": "9c28c792ea386d85815ba3b034cd780c90ccca41266b28f3bde02a12357bdd5f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

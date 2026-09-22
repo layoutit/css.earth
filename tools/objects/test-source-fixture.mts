@@ -11,8 +11,7 @@ export async function fixtureSource(sourceRoot: string, entries: readonly {
     const bytes = await readFile(resolve(sourceRoot, entry.path));
     return { id: `fixture-${index}`, origin: 'Generated unit-test input', credit: 'Authored fixture',
       license: 'CC0', acquisition: 'Generated in a temporary test directory', redistribution: 'Allowed',
-      sourceBinding: { kind: 'local', reason: 'Synthetic unit-test input' }, ...entry,
-      expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
+      sourceBinding: { kind: 'local', reason: 'Synthetic unit-test input' }, ...entry, bytes: bytes.length };
   }));
   await writeFile(resolve(sourceRoot, 'manifest.json'), JSON.stringify({
     schema: 'cssfixture-authoritative-sources@2', inputs, documents: [], generatedIntermediates: [],

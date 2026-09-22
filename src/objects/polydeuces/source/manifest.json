@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -62,8 +60,6 @@
     {
       "id": "cassini-n1527002576",
       "path": "observations/N1527002576_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "30e586a1594776e581f559be522b2a93643753ad2c5a909350e723f1cd7396c1",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.IMG",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
       "license": "NASA/PDS scientific data",
@@ -164,9 +160,7 @@
       "path": "measurements.json"
     },
     {
-      "path": "observations/N1527002576_1.IMG",
-      "expectedBytes": 2127944,
-      "expectedSha256": "5052d1c5f20c840e61f94c751f2969415edcee28283f2ce11acd7ef4bb5c1f00"
+      "path": "observations/N1527002576_1.IMG"
     },
     {
       "path": "observations/N1527002576_1.LBL"

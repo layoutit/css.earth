@@ -117,7 +117,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     // A band depth is the ground's own, so cubes from different dates are one measurement and a cell is their weighted mean.
     const definition: MeasurementDefinition = { quantity, units, timeDependence: 'surface-property', wavelengthIntervalsMicrometres: [recipe.band], source: requireString(measure.source, 'measure.source'),
       method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } };
-    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };
     const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition, frame, observation: observations[index]! })), policy, limit);
     const fits = bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
@@ -125,7 +125,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     // What the map means, beside it: the band and continuum that define the number, the frame, and every cube that went in.
     const unqualifiedMap = { schema: 'cssearth-body-map@1',
       definition, frame,
-      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
+      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
     const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', cubes), mapProduct = resolution.product;
     const metadata = Buffer.from(formatBodyMapProduct(mapProduct));

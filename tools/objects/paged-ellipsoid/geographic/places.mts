@@ -14,7 +14,7 @@ const source=new URL(recipe.directory+'/',new URL('file://'+sourceDirectory+'/')
 const manifest = parsePlacesManifest(JSON.parse(await readFile(new URL("manifest.json", source), "utf8")));
 for (const entry of manifest.inputs) {
   const bytes = await readFile(new URL(entry.path, source));
-  if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) {
+  if (bytes.length !== entry.bytes) {
     throw new Error(`GeoNames source snapshot drifted: ${entry.path}`);
   }
 }

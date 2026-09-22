@@ -26,8 +26,7 @@
     "dimensions": [
       4783,
       5000
-    ],
-    "sha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137"
+    ]
   },
   "geometryEvidence": {
     "inclinationDeg": 77.5,
@@ -38,7 +37,6 @@
   "coverage": "The wide DSS2 field contains the full visible galaxy and substantial surrounding sky, foreground stars and background objects. Those released sources are retained. Faint halo coverage is limited by the survey composite.",
   "acquisition": {
     "url": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg",
-    "sha256": "ea314835bd6f5cdfdac49c2b2b6ba204c1f99e9fe47b9bdeb4a647b5934cefa8",
     "dimensions": [
       21299,
       13775

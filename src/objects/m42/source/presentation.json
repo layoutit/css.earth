@@ -4,52 +4,36 @@
   "name": "Orion Nebula",
   "defaultLens": "eso-optical",
   "bank": {
-    "path": "src/objects/m42/prepared/lenses.json",
-    "sha256": "82dca90628603201c9a8ce9475554b6a584663a61a1cb6e4483a5cc8666d7a7f",
-    "bytes": 3190987
+    "path": "src/objects/m42/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "recipe-1",
-      "path": "src/objects/m42/source/delivery.json",
-      "sha256": "9f8d67ff4de2ffeaf8e8f00da3d67460e1bdbd215fc39bda7247a875221048fe",
-      "bytes": 2087
+      "path": "src/objects/m42/source/delivery.json"
     },
     {
       "id": "recipe-2",
-      "path": "src/objects/m42/source/request.json",
-      "sha256": "06fa668d847469d5c1e982be1e1a9e1da8fbc674f9d1a3b15249706010579f3b",
-      "bytes": 724
+      "path": "src/objects/m42/source/request.json"
     },
     {
       "id": "recipe-3",
-      "path": "src/objects/m42/source/bake-inputs/references/01-compiler.json",
-      "sha256": "5b3c572b7f5075d6f4bf53b646a476378533b53df0e7ee6b380a0c8ab6d6e573",
-      "bytes": 1039
+      "path": "src/objects/m42/source/bake-inputs/references/01-compiler.json"
     },
     {
       "id": "recipe-4",
-      "path": "src/objects/m42/source/bake-inputs/references/02-observations.json",
-      "sha256": "be4195e2e45f37f977436584e9a94967d090d8a1c5f95328ae97730f71bb9df4",
-      "bytes": 4085
+      "path": "src/objects/m42/source/bake-inputs/references/02-observations.json"
     },
     {
       "id": "recipe-5",
-      "path": "src/objects/m42/source/bake-inputs/references/03-observation-structures.json",
-      "sha256": "be81194675d0472bd2bbf6efee0e27e968fde0bc8dde6e6c551fc0824dd34fda",
-      "bytes": 401
+      "path": "src/objects/m42/source/bake-inputs/references/03-observation-structures.json"
     },
     {
       "id": "recipe-6",
-      "path": "src/objects/m42/source/bake-inputs/references/04-depth-model.json",
-      "sha256": "7133715515c356cca625531de979a626add41ac9d7441adfe8505a8ffe46ef88",
-      "bytes": 3349
+      "path": "src/objects/m42/source/bake-inputs/references/04-depth-model.json"
     },
     {
       "id": "recipe-7",
-      "path": "src/objects/m42/source/bake-inputs/references/05-physical-evidence.json",
-      "sha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc",
-      "bytes": 13110
+      "path": "src/objects/m42/source/bake-inputs/references/05-physical-evidence.json"
     }
   ],
   "sharedInputs": [
@@ -62,65 +46,61 @@
   "lenses": [
     {
       "id": "eso-optical",
-      "label": "ESO \u00b7 optical",
+      "label": "ESO · optical",
       "title": "Orion in visible light",
       "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Optical display colors on an inferred cloud; physical depth and faint outer structure remain uncertain.",
-      "detail": "4000 \u00d7 3106 px",
+      "detail": "4000 × 3106 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Optical \u00b7 i / H-alpha / r / G"
+          "value": "Optical · i / H-alpha / r / G"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "4000 \u00d7 3106"
+          "value": "4000 × 3106"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "59.95 \u00d7 46.56 arcmin"
+          "value": "59.95 × 46.56 arcmin"
         }
       ],
       "input": "eso-optical",
       "preview": {
         "path": ".local/nebula-presentation/m42-eso-optical.jpg",
-        "sha256": "05d6612e1525ac45c22f111a42d545cc565d769c2e21999c5206d3edfd47fc7a",
-        "bytes": 161362,
         "url": "https://cdn.eso.org/images/screen/eso1723a.jpg"
       }
     },
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "title": "Orion in near infrared",
       "description": "Source-colored relative emission fitted to aligned ESO images. Its coherent depth surface is an evidence-guided hypothesis, not measured gas density. Compact-light positions and display photometry are image-derived; their depths are conditional, not measured stellar distances. The reference image shows the photograph before star removal and 3D color fitting. Surrounding optical stars use Gaia positions and parallax-informed distances; their brightness/color display is independent of this spectral image.",
       "summary": "Near-infrared false color on the same inferred cloud; the image does not measure its depth.",
-      "detail": "3252 \u00d7 4000 px",
+      "detail": "3252 × 4000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared \u00b7 K / J / Z"
+          "value": "Near-infrared · K / J / Z"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "3252 \u00d7 4000"
+          "value": "3252 × 4000"
         },
         {
           "id": "coverage",
           "label": "Image field",
-          "value": "71.84 \u00d7 88.35 arcmin"
+          "value": "71.84 × 88.35 arcmin"
         }
       ],
       "input": "eso-vista",
       "preview": {
         "path": ".local/nebula-presentation/m42-eso-vista.jpg",
-        "sha256": "a03f0f7892cfa04c22fa0d12fda99e4a861272d8f471d62663e23dd638210448",
-        "bytes": 371360,
         "url": "https://cdn.eso.org/images/screen/eso1006a.jpg"
       }
     }

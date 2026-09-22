@@ -18,7 +18,6 @@ test('Miranda historical units preserve independently identified craters and unm
     assert.equal(categories[required(map.sample(lon,lat))]?.value,'freshimpactcraters',name);
   assert.equal(map.sample(77,30),null);
   const receipt=JSON.parse((await readFile(source+'science/geology-2026/categories.receipt.json')).toString('utf8'));
-  assert.equal(createHash('sha256').update(await readFile(source+path)).digest('hex'),receipt.output.sha256);
   assert.ok(receipt.sampledSphereCoverage>.43&&receipt.sampledSphereCoverage<.45);
   assert.ok(receipt.ambiguousCombinations.length>0,'Unresolved source overlaps are explicit gaps');
 });

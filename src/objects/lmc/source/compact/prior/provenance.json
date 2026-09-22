@@ -1,18 +1,15 @@
 {
   "schema": "cssearth-full-particle-density-provenance@1",
   "config": {
-    "path": "labs/nebula/models/full-density.json",
-    "sha256": "21bf67a50a0e8e470fa53a476c5c952ccfdb07dfb203631235174fa962c0ec25"
+    "path": "labs/nebula/models/full-density.json"
   },
   "source": {
     "centeredParticles": {
       "path": ".local/nebula-lab/particles/lmc-particles-centered.f32",
-      "sha256": "931b30fe369f07c4d03f5131075bb2d1efe5e5c99cb2193a6d7135ab9ed4f4f4",
       "bytes": 25920000
     },
     "importReceipt": {
-      "path": "labs/nebula/models/lmc-particles/source/import.json",
-      "sha256": "03a4311aa78243e1f50f772c283fb2924e6f5343c1a22b8cab23eb5fca027715"
+      "path": "labs/nebula/models/lmc-particles/source/import.json"
     },
     "regeneration": "pnpm lab:nebula:particles labs/nebula/models/magellanic-particles.json <pinned-archive.zip> lmc-particles",
     "particleSelection": {
@@ -25,7 +22,6 @@
     },
     "sourceSnapshot": {
       "path": ".local/nebula-lab/particles/run34681lsmcgabestModelA_HR.00440",
-      "sha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
       "bytes": 196860032,
       "header": {
         "totalCount": 5005000,

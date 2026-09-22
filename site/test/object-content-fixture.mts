@@ -2,7 +2,7 @@ import type { ObjectContentSource, TitleSource } from '../../tools/objects/conte
 import { parse, object, array, dictionary, union, optional, literal, number, string, boolean, json } from '../../tools/objects/material-composition/data-schema.mts';
 
 const title = object({ label: string, viewBox: string, path: string, source: string, sourceUrl: string,
-  sourceSha256: string, xOrigin: string, sourceGenerator: string, width: number, height: number,
+  xOrigin: string, sourceGenerator: string, width: number, height: number,
   weight: number, opticalSize: number, fontSize: number, letterSpacing: number, baseline: number });
 const source = object({ id: string, path: optional(string), url: optional(string) });
 const fact = object({ id: string, label: string, value: string, source: optional(object({

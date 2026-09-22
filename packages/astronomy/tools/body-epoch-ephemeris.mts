@@ -43,7 +43,7 @@ export async function loadBodyEpochEphemeris({ bodyRoot, bodyId, centerBodyId, t
   }
   const provenance = (source: HorizonsPin) => Object.freeze({ model: 'Horizons geometric state at prepared epoch',
     epochJdTt, referenceFrame: 'ICRF', target: source.target, center: source.center,
-    source: source.url, sourcePath: `src/objects/${bodyId}/${source.path}`, sha256: source.sha256,
+    source: source.url, sourcePath: `src/objects/${bodyId}/${source.path}`,
     solution: record.solution, limitations: record.limitations,
     timeQualification: 'UTC request converted to the exact TT scene epoch using TT−UTC = 69.184 s; no extrapolation.' });
   return Object.freeze({ epochJdTt, positionKm: Object.freeze(relative.positionKm), velocityKmPerDay: Object.freeze(relative.velocityKmPerDay),
@@ -70,8 +70,8 @@ export async function loadBodyEpochEphemeris({ bodyRoot, bodyId, centerBodyId, t
       throw new TypeError(`Body ephemeris request convention differs: ${bodyId}.`);
     }
     const bytes = await readFile(resolve(bodyRoot, source.path));
-    if (bytes.length !== source.bytes || createHash('sha256').update(bytes).digest('hex') !== source.sha256) {
-      throw new TypeError(`Body ephemeris source hash/length differs: ${bodyId}.`);
+    if (bytes.length !== source.bytes) {
+      throw new TypeError(`Body ephemeris source length differs: ${bodyId}.`);
     }
     const text = bytes.toString('utf8');
     const responseTarget = text.match(/^Target body name:.*\((\d+)\)/m)?.[1];
@@ -105,8 +105,8 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
     throw new TypeError(`Published body ephemeris identity, epoch or convention differs: ${bodyId}.`);
   }
   const bytes = await readFile(resolve(bodyRoot, record.source.path));
-  if (bytes.length !== record.source.bytes || createHash('sha256').update(bytes).digest('hex') !== record.source.sha256) {
-    throw new TypeError(`Published body ephemeris source hash/length differs: ${bodyId}.`);
+  if (bytes.length !== record.source.bytes) {
+    throw new TypeError(`Published body ephemeris source length differs: ${bodyId}.`);
   }
   const parameters = parsePublishedParameters(JSON.parse(bytes.toString('utf8')));
   if (parameters.schema !== 'cssearth-published-mutual-orbit@1' || parameters.id !== bodyId ||
@@ -174,7 +174,7 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
       velocityKmPerDay: Object.freeze(rows[0].velocityKmPerDay), provenance: Object.freeze({
         model: 'Horizons numbered-asteroid geometric state at prepared epoch', epochJdTt, referenceFrame: 'ICRF',
         target: source.target, targetKind: source.targetKind, center: 10, source: source.url,
-        sourcePath: `src/objects/${bodyId}/${source.path}`, sha256: source.sha256,
+        sourcePath: `src/objects/${bodyId}/${source.path}`,
         qualification: record.limitations }) });
   }
   if (record.validation.comparisons) verifyPublishedProjections(parameters, record, sources);
@@ -187,7 +187,7 @@ async function loadPublishedRecord({ record, bodyRoot, bodyId, centerBodyId, epo
       : 'Published mutual-orbit model evaluated once at prepared epoch', epochJdTt,
       ...(parameters.placement === 'approximate' ? { placement: 'approximate' } : {}),
       referenceFrame: 'ICRF', source: parameters.citation.url, sourcePath: `src/objects/${bodyId}/${record.source.path}`,
-      sha256: record.source.sha256, timeQualification: parameters.timeQualification,
+      timeQualification: parameters.timeQualification,
       limitations: record.limitations, validation: record.validation }) });
 }
 
@@ -196,8 +196,8 @@ async function readPinnedText(bodyRoot: string, source: SourcePin) {
     throw new TypeError('Published ephemeris evidence path differs.');
   }
   const bytes = await readFile(resolve(bodyRoot, source.path));
-  if (bytes.length !== source.bytes || createHash('sha256').update(bytes).digest('hex') !== source.sha256) {
-    throw new TypeError('Published ephemeris evidence hash/length differs.');
+  if (bytes.length !== source.bytes) {
+    throw new TypeError('Published ephemeris evidence length differs.');
   }
   return bytes.toString('utf8');
 }

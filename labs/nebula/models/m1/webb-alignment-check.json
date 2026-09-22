@@ -3,14 +3,11 @@
   "objectId": "m1",
   "checkedAt": "2026-09-13",
   "testedRevision": "86a6060ec",
-  "recipeSha256": "da5dd2f6366db6ca90b62c17f92657c23c559863ab5c754e8b9a495304d66fec",
   "source": {
-    "id": "webb-infrared",
-    "sha256": "bb1b9a0023eb5424bb75a7c29e9c8a83a7e3c06601bb3019ab58c24beb02f8dd"
+    "id": "webb-infrared"
   },
   "reference": {
-    "id": "hubble-optical",
-    "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6"
+    "id": "hubble-optical"
   },
   "method": {
     "name": "Compact-star diagnostic; publisher coordinates checked without changing placement",

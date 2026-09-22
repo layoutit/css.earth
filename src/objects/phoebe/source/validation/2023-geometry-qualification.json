@@ -4,7 +4,6 @@
   "source": {
     "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
     "bytes": 17787240,
-    "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
     "units": "km",
     "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
     "boundsMeters": [
@@ -54,12 +53,10 @@
   },
   "toolchain": [
     {
-      "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
-      "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+      "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
     },
     {
-      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
-      "sha256": "d52121152411f7c2beed3d0d857b6c628be549584ed2cd47dcb955575ba9a0b1"
+      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
     }
   ],
   "acceptedTrial": {
@@ -113,7 +110,6 @@
         "distanceMeters": 1178.2819380522692
       }
     },
-    "facesSha256": "93f6530fbd33b88a036832ba9b1d3be33f70b8203a1c5599026619927cf3ab5f",
     "ok": true
   },
   "independentMaximumAcceptedMeters": 1195,
@@ -122,13 +118,11 @@
     {
       "path": "shape-trial.json",
       "bytes": 4524,
-      "sha256": "922b9cd4c4d2d0dea007e5d4f9f1fc999881d86da8d342a505e79aec3013850d",
       "report": {
         "schema": "cssearth-phoebe-2023-shape-trial@1",
         "source": {
           "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
           "bytes": 17787240,
-          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
           "units": "km",
           "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
           "boundsMeters": [
@@ -235,19 +229,16 @@
                 "distanceMeters": 1423.4696255118486
               }
             },
-            "facesSha256": "3723a8ab750706a7f8e1ac6bc0a5704b0438a3ce419c747a3040863ca9a16d4f",
             "ok": false
           }
         ],
         "node": "v24.19.0",
         "toolchain": [
           {
-            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
-            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
           },
           {
-            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
-            "sha256": "c1235063c390c69e9a20765e9d560e8381ff813ca59cda7847861e615205715b"
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
           }
         ],
         "elapsedMs": 1195,
@@ -282,13 +273,11 @@
     {
       "path": "shape-trial-regularized.json",
       "bytes": 4401,
-      "sha256": "e5d7548e98a6f01027fadee7970968813f59dab10d05ef5a8ec386f1bb33f93e",
       "report": {
         "schema": "cssearth-phoebe-2023-shape-trial@1",
         "source": {
           "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
           "bytes": 17787240,
-          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
           "units": "km",
           "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
           "boundsMeters": [
@@ -388,19 +377,16 @@
                 "distanceMeters": 1734.5214818322954
               }
             },
-            "facesSha256": "e74a0fb8bf93417e2b0705c9627face315b3132e789450fb9b0f58e593c415e1",
             "ok": false
           }
         ],
         "node": "v24.19.0",
         "toolchain": [
           {
-            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
-            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
           },
           {
-            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
-            "sha256": "c1235063c390c69e9a20765e9d560e8381ff813ca59cda7847861e615205715b"
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
           }
         ],
         "elapsedMs": 1330,
@@ -435,13 +421,11 @@
     {
       "path": "shape-trial-expanded.json",
       "bytes": 6149,
-      "sha256": "c6f8e79ef4a8c75e94aea31ad9b40c6f5de0a55a91bc4c8d188ec0b64c847dff",
       "report": {
         "schema": "cssearth-phoebe-2023-shape-trial@1",
         "source": {
           "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
           "bytes": 17787240,
-          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
           "units": "km",
           "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
           "boundsMeters": [
@@ -541,7 +525,6 @@
                 "distanceMeters": 1614.4526735908328
               }
             },
-            "facesSha256": "347d17eb5b60528de6a5f80cf7c9aba676733fbb4f6b9d212a261753e1867fd2",
             "ok": false
           },
           {
@@ -595,19 +578,16 @@
                 "distanceMeters": 1457.4662155943915
               }
             },
-            "facesSha256": "65df9e2951c32c7cc3211b17b7b79ae02b43709cac933c2509e70119029e2021",
             "ok": false
           }
         ],
         "node": "v24.19.0",
         "toolchain": [
           {
-            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
-            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
           },
           {
-            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
-            "sha256": "d52121152411f7c2beed3d0d857b6c628be549584ed2cd47dcb955575ba9a0b1"
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
           }
         ],
         "elapsedMs": 1416,
@@ -642,13 +622,11 @@
     {
       "path": "shape-trial-4000.json",
       "bytes": 6160,
-      "sha256": "ea1a820952ec94ed72664f9944304aadccd06069a0730b34a76792d61aa0801c",
       "report": {
         "schema": "cssearth-phoebe-2023-shape-trial@1",
         "source": {
           "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
           "bytes": 17787240,
-          "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
           "units": "km",
           "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
           "boundsMeters": [
@@ -748,7 +726,6 @@
                 "distanceMeters": 1178.2819380522692
               }
             },
-            "facesSha256": "93f6530fbd33b88a036832ba9b1d3be33f70b8203a1c5599026619927cf3ab5f",
             "ok": true
           },
           {
@@ -802,19 +779,16 @@
                 "distanceMeters": 1178.2819380522692
               }
             },
-            "facesSha256": "22c2e01ebb64273edf4de49e0a238189ed947dd47efbadee5c008e30f6b59151",
             "ok": true
           }
         ],
         "node": "v24.19.0",
         "toolchain": [
           {
-            "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
-            "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+            "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
           },
           {
-            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
-            "sha256": "d52121152411f7c2beed3d0d857b6c628be549584ed2cd47dcb955575ba9a0b1"
+            "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
           }
         ],
         "elapsedMs": 1687,
