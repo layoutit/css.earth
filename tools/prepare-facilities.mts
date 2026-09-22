@@ -11,6 +11,7 @@ import { sourceInventory, metadataCitations, factsheetCitations } from './source
 import { verifyFactsheetSources } from './factsheet-sources.mts';
 import { sourcePath, sourceDigest } from '../src/platform/source-catalog.mts';
 import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
+import { existsSync } from 'node:fs';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -49,11 +50,14 @@ export const explorationCompilerClosure = [
 interface Options { root?: string; publish?: boolean | 'catalogues'; provenance?: ReadonlyMap<string, ProvenanceDocument>; sourceTransport?: FactsheetSourceTransport;
   /** Catalogue consumers validate published package records; authoring explicitly reproduces them. */
   packageMode?: 'author' | 'published';
+  /** Skip bodies whose derived `prepared/page.json` this checkout has not restored. */
+  restoredOnly?: boolean;
   /** Opt-in (default null/off) content-addressed mirror for volume previews; a production caller names
    * RUNTIME_ASSET_ORIGIN explicitly. Left off by default so a test never makes a surprise real request. */
   mirrorOrigin?: string | null; }
 /** Compile evidenced links and reuse approved artwork, restoring only missing cited evidence. */
 export async function prepareFacilities({ root = resolve(import.meta.dirname, '..'), publish = true, provenance = new Map(), sourceTransport, mirrorOrigin = null,
+  restoredOnly = false,
   packageMode = publish === 'catalogues' ? 'published' : 'author' }: Options = {}) {
   if (!['author', 'published'].includes(packageMode) || publish === 'catalogues' && packageMode !== 'published')
     throw new TypeError('Catalogue-only publication requires published package inputs.');
@@ -132,7 +136,13 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
     factsheets.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
-    const page = explorationRecord(await json(`${base}/prepared/page.json`));
+    // `prepared/page.json` is derived from the restored runtime, so a checkout that deliberately
+    // restores no body banks (the typecheck job) does not have one. Skipping there yields a partial
+    // catalogue, which is all a compiler program needs; every publishing path leaves this off and
+    // still fails loudly on a missing page.
+    const pagePath = `${base}/prepared/page.json`;
+    if (restoredOnly && !existsSync(resolve(root, pagePath))) continue;
+    const page = explorationRecord(await json(pagePath));
     if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id || page.sceneSha256 !== explorationRecord(descriptor.prepared).sha256) throw new Error(`Stale prepared controls for ${object.id}.`);
     const controls = explorationRecord(page.controls);
     const lenses = controls.lenses === null ? [] : explorationArray(explorationRecord(controls.lenses).controls, raw => {
@@ -184,10 +194,11 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
 }
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2);
-  if (args.some(arg => arg !== '--catalog-only')) throw new TypeError('Usage: node tools/prepare-facilities.mts [--catalog-only]');
+  if (args.some(arg => arg !== '--catalog-only' && arg !== '--restored-only'))
+    throw new TypeError('Usage: node tools/prepare-facilities.mts [--catalog-only] [--restored-only]');
   // The real CLI entry point: opts into the mirror explicitly (library code above defaults it off).
   const { prepared, factsheets } = await prepareFacilities({ mirrorOrigin: RUNTIME_ASSET_ORIGIN,
-    publish: args.includes('--catalog-only') ? 'catalogues' : true });
+    publish: args.includes('--catalog-only') ? 'catalogues' : true, restoredOnly: args.includes('--restored-only') });
   console.log(`Prepared ${prepared.catalog.missions.length} missions, ${prepared.catalog.facilities.length} facilities and ${prepared.graph.datasets.length} dataset destinations.`);
   console.log(`Factsheets: ${factsheets.facts} facts, each with its own citation.`);
 }

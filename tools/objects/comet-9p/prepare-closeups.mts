@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {array,number,shape,text,parseEncounterPolicy,parseEncounterSourceControl,parseMeshProfile} from '../terrestrial-layers/source-records.mts';
+import {array,number,optional,shape,text,parseEncounterPolicy,parseEncounterSourceControl,parseMeshProfile} from '../terrestrial-layers/source-records.mts';
 import {decodeEncounterFits} from '../terrestrial-layers/encounter-fits.mts';
 import {encounterCamera} from '../terrestrial-layers/encounter-camera.mts';
 import {validateEncounterControls} from '../terrestrial-layers/encounter-controls.mts';
@@ -57,7 +57,7 @@ export async function prepareCloseups(sourceDirectory:string,write=false) {
     const control={schema:'cssearth-encounter-control@1',observation:entry.observation,camera:{...seed,offsetPixels:match.offsetPixels},registration:{method:'registered-image-feature-translation',sourceShapeSha256:recipe.shapeSha256,reference:{id:entry.referenceId.replaceAll('_','-'),imageSha256:sha256(refBytes),controlSha256:sha256(refControlBytes)},nominalPixelScaleMeters:camera.report.nominalPixelScaleMeters,maximumRmsMeters:Math.min(100,recipe.maximumRmsPixels*camera.report.nominalPixelScaleMeters),maximumResidualMeters:Math.min(200,recipe.maximumResidualPixels*camera.report.nominalPixelScaleMeters),limitations:'Relative overlap registration inherits the reference photograph and 2012 shape placement uncertainty. Subpixel relative residuals do not establish subpixel absolute surface coordinates.',controls},matching:{...recipe.matching,excluded:match.excluded},frameBinding:refControl.camera.bodyToJ2000};
     const registered=encounterCamera(target.header,control.camera),report=validateEncounterControls(registered,control.registration,recipe.shapeSha256);
     const path=`${directory}/${entry.id}.json`,bytes=Buffer.from(JSON.stringify(control,null,2)+'\n');
-    if(write){await writeFile(resolve(source,path),bytes);const pin=manifest.inputs.find(p=>p.path===path);assert.ok(pin);if(pin.expectedSha256!==undefined){pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);}
+    if(write){await writeFile(resolve(source,path),bytes);const pin=manifest.inputs.find(p=>p.path===path);assert.ok(pin);if(pin.expectedSha256!==undefined){pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);}}
     else assert.equal((await pinned(path)).toString('utf8'),bytes.toString('utf8'),`Registration is not reproducible: ${entry.id}`);
     reports.push({id:entry.id,...report});
   }

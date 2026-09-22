@@ -1,3 +1,4 @@
+import assert from 'node:assert/strict';
 /** Encounter FITS photographs: calibrated flyby images whose cameras come from a registered control network. */
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.mts';
@@ -61,6 +62,10 @@ export const encounterFormat: SurfaceObservationFormat = {
       const controlBytes = await readFile(resolve(sourceDirectory, f.controlPath)), imageBytes = await readFile(resolve(sourceDirectory, f.path));
       const control = parseEncounterSourceControl(JSON.parse(controlBytes.toString('utf8')));
       const decoded = decodeEncounterFits(imageBytes, control.observation), encounter = encounterCamera(decoded.header, control.camera);
+      // Pins became optional when files this repository authors stopped carrying them, but a
+      // source-bound registration is verified against the shape's pinned bytes: without the pin
+      // there is nothing to bind it to, so refuse rather than skip the check.
+      assert.ok(shape.expectedSha256, `Encounter registration needs the shape's pinned sha256: ${shape.path}`);
       const registration = validateEncounterControls(encounter, control.registration, shape.expectedSha256);
       // The registration's source-scale pixel size ranks finest-resolution selection.
       const camera: ObservationCamera = { kind: 'control-network', project: encounter.project, ray: encounter.ray, positionMeters: encounter.positionMeters, positionKm: encounter.positionKm,
