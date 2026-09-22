@@ -86,10 +86,12 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   const inventory = stagedInventory ?? await json(resolve(objectDirectory, 'inventory.json'));
   const outputPins = new Map<string, Identity>(records(inventory.assets).filter(asset => asset.location === 'public').map(asset => [`/scenes/${id}/${text(asset.filename)}`, identity(asset)]));
   for (const [filename, value] of Object.entries(record(assets?.hashes ?? {}))) {
-    const pin = identity(value);
-    const url = `/scenes/${id}/${filename}`, existing = outputPins.get(url);
-    if (existing) assertIdentity(pin, existing, url);
-    outputPins.set(url, pin);
+    // The inventory is the one owner of a published file's identity. A baked assets.json carries its own copy,
+    // and `refresh-photographs` merges the previous map forward, so a rebaked file leaves a stale duplicate
+    // behind. It fills gaps the inventory does not cover and never overrides it; the bytes themselves are
+    // still verified against the pin below.
+    const url = `/scenes/${id}/${filename}`;
+    if (!outputPins.has(url)) outputPins.set(url, identity(value));
   }
   const geographic: GeographicProvenance = {};
   const noiseRecipe = maybeRecord(maybeRecord(recipes.get('paged-ellipsoid')?.parameters.geographic)?.noise);

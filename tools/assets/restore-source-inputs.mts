@@ -40,8 +40,9 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
   const manifest = sourceObject(JSON.parse(manifestBytes.toString('utf8')));
   if (manifest.schema !== 'cssearth-volume-source-manifest@1') return false;
   if (manifest.pathBase !== 'repository') throw new TypeError(`Invalid repository volume source manifest: ${id}.`);
-  const entries = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section => sourceArray(manifest[section] ?? [], sourceObject));
-  for (const raw of entries) {
+  const entries = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section =>
+    sourceArray(manifest[section] ?? [], sourceObject).map(raw => ({ raw, generated: section === 'generatedIntermediates' })));
+  for (const { raw, generated } of entries) {
     const path = sourcePath(raw.path);
     if (path.startsWith('.local/')) continue;
     // A tracked file arrives with the checkout; a download is fetched only while it is missing.
@@ -49,6 +50,9 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
     const present = await lstat(destination).then(() => true, error => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
     if (present) continue;
     const origin = typeof raw.origin === 'string' && raw.origin ? raw.origin : null;
+    // A generated intermediate is written by the step the manifest names, not restored. It is ignored, so a
+    // fresh checkout never holds one; the step that needs it fails on its own terms if it was never produced.
+    if (!origin && generated) continue;
     if (!origin) throw new Error(`Repository volume source is missing and has no origin: ${id}/${path}.`);
     let lastError: unknown;
     for (const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, id, path), origin]) {

@@ -46,7 +46,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   const bytes = Buffer.from(JSON.stringify(envelope)+'\n'), outputPath = resolve(outputDirectory,'stars.json');
   await writeFile(outputPath,bytes);
   if (outputDirectory===resolve(objectDirectory,'prepared')) {
-    await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/'),sha256:sha256(bytes)}},null,2)+'\n');
+    await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/')}},null,2)+'\n');
     await inventoryPreparedAssets({ planetId: id, objectDirectory, preparedRoot: outputDirectory });
   }
   const magnitude = encoded.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;

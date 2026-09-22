@@ -92,7 +92,7 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});
   await writeFile(resolve(outputDirectory,'object.json'),payload);
   if(write) {
-    await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json',sha256:sha256(payload)}},null,2)+'\n');
+    await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json'}},null,2)+'\n');
   }
   await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:'cssearth-authored-preparation@1',id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}});
   return {descriptor,sources,raster:surface,celestial:{sky,sun},scene,definition,content};

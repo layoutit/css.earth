@@ -26,7 +26,10 @@ export type SourceResolver = Readonly<Record<string, SourceRecord>>;
 
 export function sourceObject(input: unknown, keys?: readonly string[]): Record<string, unknown> {
   if (input === null || typeof input !== 'object' || Array.isArray(input) || ![Object.prototype, null].includes(Object.getPrototypeOf(input))) throw new TypeError('Expected a source record.');
-  if (keys && Object.keys(input).some(key => !keys.includes(key))) throw new TypeError('Unexpected source field.');
+  // Naming the fields is what makes a failure actionable: the reader walks hundreds of records, and a bare
+  // refusal leaves a CI log with no object, no field and nothing to grep for.
+  const unexpected = keys ? Object.keys(input).filter(key => !keys.includes(key)) : [];
+  if (unexpected.length) throw new TypeError(`Unexpected source field ${unexpected.join(', ')}; this record takes ${keys!.join(', ')}.`);
   return input as Record<string, unknown>;
 }
 export function sourceText(input: unknown): string {

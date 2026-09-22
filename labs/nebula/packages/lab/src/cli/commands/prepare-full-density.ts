@@ -125,8 +125,8 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     await writeFile(resolve(outputDirectory, 'volume.json'), preparedBytes);
     await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@1', id: target.id,
       type: 'density-volume', properties: { volume: frame,
-        preparation: { source: 'source/volume.json', sha256: sha256(volumeRecipeBytes) } },
-      prepared: { format: envelope.format, url: 'prepared/volume.json', sha256: sha256(preparedBytes) } });
+        preparation: { source: 'source/volume.json' } },
+      prepared: { format: envelope.format, url: 'prepared/volume.json' } });
     await json(resolve(sourceDirectory, 'preparation-receipt.json'), {
       schema: 'cssearth-full-particle-density-receipt@1', id: target.id,
       source: converted.outputs, grid: plan, mass: converted.particles, boundary,

@@ -133,8 +133,8 @@ export async function promoteVolumeLenses(root: string, input: VolumeLensPromoti
   await output('source/lenses.json', recipeBytes);
   await output('prepared/lenses.json', preparedBytes);
   await output('object.json', bytes({ schema: 'cssearth-object@1', id: recipe.id, type: 'volume-lens-bank',
-    properties: { frame: commonFrame, preparation: { source: 'source/lenses.json', sha256: hash(recipeBytes) } },
-    prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json', sha256: hash(preparedBytes) } }));
+    properties: { frame: commonFrame, preparation: { source: 'source/lenses.json' } },
+    prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json' } }));
   await put(resolve(destination, 'source/lens-manifest.json'), bytes({ schema: 'cssearth-volume-lens-manifest@1', outputs }));
   return { id: recipe.id, lenses: lenses.map(lens => ({ id: lens.id, stars: lens.stars.points.length,
     slices: lens.volume.stacks.reduce((sum, stack) => sum + stack.leaves.length, 0) })),

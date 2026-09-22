@@ -19,7 +19,7 @@
       "tests": 19
     },
     "site": {
-      "implementations": 98,
+      "implementations": 101,
       "tests": 2
     },
     "site/components": {
@@ -27,12 +27,12 @@
       "tests": 0
     },
     "site/test": {
-      "implementations": 19,
-      "tests": 152
+      "implementations": 10,
+      "tests": 70
     },
     "src/platform": {
       "implementations": 55,
-      "tests": 48
+      "tests": 40
     },
     "src/renderers/css/navigation": {
       "implementations": 31,
@@ -46,13 +46,9 @@
       "implementations": 24,
       "tests": 15
     },
-    "tools": {
-      "implementations": 148,
-      "tests": 109
-    },
     "tools/objects": {
       "implementations": 56,
-      "tests": 28
+      "tests": 24
     },
     "tools/objects/interferometry": {
       "implementations": 35,
@@ -60,7 +56,7 @@
     },
     "tools/objects/paged-ellipsoid": {
       "implementations": 26,
-      "tests": 2
+      "tests": 1
     },
     "tools/objects/telescopes": {
       "implementations": 44,
@@ -68,11 +64,15 @@
     },
     "tools/objects/telescopes/families": {
       "implementations": 26,
-      "tests": 24
+      "tests": 23
     },
     "tools/objects/terrestrial-layers": {
       "implementations": 89,
-      "tests": 79
+      "tests": 78
+    },
+    "tools/prepare": {
+      "implementations": 51,
+      "tests": 18
     }
   }
 }
