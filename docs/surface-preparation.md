@@ -139,20 +139,17 @@ also fits and validates cameras and applies photometric corrections.
 keeps numeric values available for sampling. Unit conversion, palette and
 optional relief follow that sampling. The displayed RGB value is therefore a
 presentation of the source quantity; it cannot replace the original numeric input.
-A numeric palette is looked up through 256 steps across its declared range
-(`PALETTE_STEPS`): finer than any legend stop and than the 8-bit channels the
-surface is encoded in, and it bounds an unshaded numeric surface to 256 colours.
-Lossless WebP pays for entropy rather than colour count, so the saving is the
-noise between steps: baked on 2026-09-22 against the earlier 1024-step lookup,
-Moon heat anomalies 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, midnight
-temperature 13.98 → 13.74 MB, Ceres ammonium band 13.11 → 12.65 MB, mean channel
-error 0.14 to 0.34 of 255 and no texel off by more than 8. Relief shading
-multiplies the looked-up colour afterwards, so shaded lenses keep their wider
-colour range. Pixelmatch (threshold 0.1) against the previous bake finds no
-differing pixel in 78 of the 80 changed files; the largest visible change is a
-lossy-encoder shift of up to 58 on atlas band edges of Miranda's elevation
-([Moon heat anomalies](illustrations/palette-steps/moon-heat-anomalies-pixelmatch.png),
-[Miranda worst crop](illustrations/palette-steps/miranda-elevation-worst-crop.png)).
+A numeric palette on a lossless surface (`displaySampling: "nearest"`) is looked
+up through 256 steps across its declared range, finer than any legend stop and
+than the 8-bit channels. Lossless WebP pays for the noise between steps, so this
+trims those files: baked on 2026-09-22 against 1024 steps, Moon heat anomalies
+9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, Titan interpolated 2.59 → 1.19 MB,
+and pixelmatch finds no differing pixel ([Moon heat anomalies](illustrations/palette-steps/moon-heat-anomalies-pixelmatch.png)).
+A lossy surface keeps 1024 steps. Its size does not depend on colour count, and a
+coarser ramp's flat one-level steps raised the quality-88 encoder's own error on
+Miranda's elevation from 41 to 66 at the worst texel although the raw pixels
+differed by at most 2 ([Miranda worst crop](illustrations/palette-steps/miranda-elevation-worst-crop.png)).
+Relief shading multiplies the looked-up colour afterwards.
 
 Validity comes from the selected product's mask, alpha or no-data rule. Numeric
 bilinear sampling rejects a footprint containing an invalid neighbor. Categorical
