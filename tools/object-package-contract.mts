@@ -34,16 +34,16 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "tools", "verify-source-manifest.mjs"),
       resolve(root, "tools", "compact-production-assets.mjs"),
       ]),
-      resolve(root, 'prepared/page.json'),
+      // `prepared/page.json` is not listed: #510 made it a build output that
+      // `restore-object-json.mts` writes during `predev`/`prebuild`, so a checkout never
+      // holds one and requiring it here only asserts that a generated file was generated.
       resolve(projectRoot, 'site/pages/[id].astro'),
     ]),
     // These are repository-completeness files: their absence does not change what the
     // application ships, so they are tracked as a ratcheted backlog rather than a merge
-    // gate (see docs/ci-cd.md).
-    backlogFiles: Object.freeze([
-      authored ? resolve(projectRoot, 'tests/objects/browser', objectRecord.id, 'browser-profile.mts')
-        : resolve(root, "test", "browser-profile.mts"),
-    ]),
+    // gate (see docs/ci-cd.md). Empty since #505 retired the browser harness and its 547
+    // per-object profiles; the ratchet stays for the next backlog that earns one.
+    backlogFiles: Object.freeze([]),
     runtimeAssets: resolve(root, "runtime-assets.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
     sourceRoot: resolve(root, "source"),

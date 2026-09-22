@@ -3,6 +3,10 @@
 !/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits
 !/source/observations/betelgeuse-matisse-2020-02-continuum.oifits
 !/source/observations/betelgeuse-matisse-2020-02-continuum-4mas.fits
+!/source/observations/betelgeuse-matisse-2018-12-continuum-squeeze.fits
+!/source/observations/betelgeuse-matisse-2018-12-continuum-3mas.fits
+!/source/observations/betelgeuse-matisse-2020-12-continuum-squeeze.fits
+!/source/observations/betelgeuse-matisse-2020-12-continuum-3.1mas.fits
 # The archived spectrum behind the colour lens is restored from its archive by pinned URL and digest
 # (source/preparation/acquisition.json), so it is not committed.
 /source/photometry/*.dat
