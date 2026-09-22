@@ -1,0 +1,228 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "beta-pictoris",
+  "displayName": "Beta Pictoris",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.55 solar radii",
+        "source": {
+          "catalogueId": "doi-10-1051-0004-6361-20047189",
+          "url": "https://doi.org/10.1051/0004-6361:20047189",
+          "label": "Di Folco et al. 2004",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from the Sun",
+        "value": "19.6 parsecs",
+        "source": {
+          "catalogueId": "gaia-dr3-beta-pictoris",
+          "url": "https://gea.esac.esa.int/archive/",
+          "label": "Gaia DR3 parallax",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "distanceParsecs; distanceSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "1.75 solar masses",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "surfaceGravitySource"
+        }
+      },
+      {
+        "id": "temperature",
+        "label": "Surface temperature",
+        "value": "8,090 K",
+        "source": {
+          "catalogueId": "arxiv-1905-12545",
+          "url": "https://arxiv.org/abs/1905.12545",
+          "label": "Zwintz et al. 2019",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ],
+    "moreFacts": []
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "color",
+    "controls": [
+      {
+        "id": "color",
+        "label": "Color",
+        "qualification": "Colour from Gaia's spectrum of the star; darkening toward the edge from a model atmosphere. The disc itself is unresolved.",
+        "thumbnail": "beta-pictoris-lens-color.webp",
+        "surface": "beta-pictoris-surface-color@2x.webp",
+        "poles": "beta-pictoris-poles-color@2x.webp",
+        "source": {
+          "id": "beta-pictoris-stellar-color",
+          "path": "../manifest.json",
+          "url": "https://gea.esac.esa.int/archive/"
+        },
+        "falseColor": false,
+        "notes": "The colour of Gaia DR3's measured spectrum of the star: a blue-white A-type dwarf, the same hue Fomalhaut's ground-based spectrum gives. The darkening toward the edge is the quadratic law Claret and Bloemen (2011) compute from ATLAS model atmospheres for a star of 8,090 K and log g 4.30: a model, because no image measures this star's limb. The spin axis is measured only in projection, so the display axis is celestial north."
+      },
+      {
+        "id": "debris-disc-visible",
+        "label": "Debris disc · Hubble visible light",
+        "thumbnail": "beta-pictoris-lens-color.webp",
+        "volume": {
+          "objectId": "beta-pictoris-disc",
+          "lensId": "visible",
+          "surface": "color"
+        },
+        "notes": "The star in its Gaia colour, with the edge-on disc of dust around it in visible light, as Hubble's STIS coronagraph imaged it in 1997, 2012 and 2013, combined by Ren et al. (2023). It reaches 0.8 arcseconds (16 au) from the star, so the disc is drawn where planet d orbits, 26 au out; planets b and c, at 10 and 2.7 au, orbit inside the part no image reaches. It is one filter shown in grey, brightness only. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Near the star the subtraction leaves some starlight off the disc, which is drawn with it.",
+        "falseColor": false,
+        "legend": {
+          "kind": "categories",
+          "title": "Brightness of the dust in visible light",
+          "items": [
+            {
+              "label": "Bright",
+              "description": "More starlight scattered by the dust along this line of sight",
+              "color": "#e8e8e8"
+            },
+            {
+              "label": "Faint",
+              "description": "Less scattered light; black where it falls under three times the noise",
+              "color": "#404040"
+            }
+          ]
+        }
+      },
+      {
+        "id": "debris-disc-colour",
+        "label": "Debris disc · Hubble colour",
+        "thumbnail": "beta-pictoris-lens-color.webp",
+        "volume": {
+          "objectId": "beta-pictoris-disc",
+          "lensId": "colour",
+          "surface": "color"
+        },
+        "notes": "The star in its Gaia colour, with the edge-on disc of dust around it in blue, visible and near-infrared light, as Hubble's ACS coronagraph imaged it on 1 October 2003 (programme 9987, Golimowski et al. 2006). The starlight was removed here from the raw exposures with a reference star, alpha Pictoris, scaled by the brightness ratio the paper states. Each filter is divided by the star's own brightness in it, so the colour is the disc's against the star's: F435W is drawn blue, F606W green and F814W red, and a disc that scattered like the star shines looks white. The paper's scaling leaves some of the star's glow beside the disc, a little bluer than the star, which is drawn with it; the disc comes out slightly bluer than the paper measures. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, and nothing beyond 135 au, where the volume ends; the images themselves show the disc to 320 au.",
+        "falseColor": false,
+        "legend": {
+          "kind": "categories",
+          "title": "Colour of the dust against the star",
+          "items": [
+            {
+              "label": "White",
+              "description": "Scatters blue, visible and near-infrared light like the star shines them",
+              "color": "#e8e8e8"
+            },
+            {
+              "label": "Blue",
+              "description": "Brighter in F435W against the star, as the leftover starlight is",
+              "color": "#9fb8ff"
+            },
+            {
+              "label": "Red",
+              "description": "Brighter in F814W against the star",
+              "color": "#e8a080"
+            }
+          ]
+        }
+      },
+      {
+        "id": "debris-disc",
+        "label": "Debris disc · JWST 2.1 and 4.1 µm",
+        "thumbnail": "beta-pictoris-lens-color.webp",
+        "volume": {
+          "objectId": "beta-pictoris-disc",
+          "lensId": "contrast",
+          "surface": "color"
+        },
+        "notes": "The star in its Gaia colour, with the edge-on disc of dust around it as JWST/NIRCam imaged it behind a coronagraph on 21 March 2025 (programme 4758), at 2.1 and 4.1 micrometres. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; 2.1 micrometres is drawn blue, 4.1 red and their mean green. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colours, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Seen from Earth this reproduces the image. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc, and the light fades into the noise 124 au out.",
+        "falseColor": true,
+        "legend": {
+          "kind": "categories",
+          "title": "Colour of the dust (contrast to the star)",
+          "items": [
+            {
+              "label": "White",
+              "description": "As bright against the star at 2.1 and 4.1 µm",
+              "color": "#e8e8e8"
+            },
+            {
+              "label": "Orange",
+              "description": "Brighter at 4.1 µm: where the wider 4.1 µm image spreads the disc's light",
+              "color": "#e8b070"
+            },
+            {
+              "label": "Blue",
+              "description": "Brighter at 2.1 µm",
+              "color": "#9fb8ff"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ortiz Ceballos, Berger and Cendes (2026), arXiv:2609.16720: radio emission from the planet Beta Pictoris b with MeerKAT",
+      "href": "https://arxiv.org/abs/2609.16720"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zhou et al. (2026), arXiv:2607.13133: the JWST/NIRCam coronagraphic monitoring of programme 4758 whose images draw the disc",
+      "href": "https://arxiv.org/abs/2607.13133"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ren et al. (2023), A&A 672, A114: the HST/STIS image of the disc, deposited at CDS",
+      "href": "https://arxiv.org/abs/2302.04273"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lacour et al. (2021), A&A 654, L2: the orbits and masses of planets b and c from GRAVITY astrometry",
+      "href": "https://arxiv.org/abs/2109.10671"
+    },
+    {
+      "label": "Archive",
+      "role": "facts",
+      "description": "Gaia DR3 source 4792774797545800832",
+      "href": "https://gea.esac.esa.int/archive/"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2609.16720",
+      "credit": "Ortiz Ceballos, Berger and Cendes (2026), arXiv:2609.16720"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/beta-pictoris.json",
+      "credit": "VLTI/VINCI angular diameter at the Gaia DR3 distance; dynamical mass from the planets' orbits; Gaia DR3 astrometry; no adopted rotation (display convention)"
+    }
+  }
+}

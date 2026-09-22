@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "beta-pictoris-c",
+  "radiusKm": 85790.4,
+  "radiusSource": "Radius 1.2 +/- 0.1 Jupiter radii: the Exo-REM atmospheric model Nowak et al. (2020, A&A 642, L2; arXiv:2010.04442, Section 4) fit to the flux-calibrated GRAVITY K-band spectrum (a Drift-Phoenix fit gives 1.05 +/- 0.1). A model radius, not a measured diameter: 85,790 km at 71,492 km per Jupiter radius. GM from the dynamical mass 8.89 +/- 0.75 Jupiter masses of Lacour et al. (2021, Table 2) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 1221,
+  "orbitalPeriodSource": "Lacour et al. (2021, Section 5 and abstract): 1221 +/- 15 days.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the model radius in the shared neutral gray, self-luminous. No image, visible colour, map or oblateness of Beta Pictoris c is measured; its size comes from its luminosity and models, its mass and orbit from astrometry."
+  },
+  "effectiveTemperatureK": 1250,
+  "effectiveTemperatureSource": "1250 +/- 50 K, Nowak et al. (2020, A&A 642, L2; arXiv:2010.04442), Exo-REM fit to the GRAVITY K-band spectrum.",
+  "semiMajorAxisSource": "Lacour et al. (2021, Table 2, RV + b and c astrometry): a 2.68 +/- 0.02 au at their parallax 51.44 mas, kept as the angular size 137.86 mas and placed at the Gaia DR3 distance: 2.707 au, 374.62 radii of the star's 1,080,920 km; inclination 88.95 +0.09/-0.10 degrees.",
+  "massSource": "Radius 1.2 +/- 0.1 Jupiter radii: the Exo-REM atmospheric model Nowak et al. (2020, A&A 642, L2; arXiv:2010.04442, Section 4) fit to the flux-calibrated GRAVITY K-band spectrum (a Drift-Phoenix fit gives 1.05 +/- 0.1). A model radius, not a measured diameter: 85,790 km at 71,492 km per Jupiter radius. GM from the dynamical mass 8.89 +/- 0.75 Jupiter masses of Lacour et al. (2021, Table 2) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured."
+}

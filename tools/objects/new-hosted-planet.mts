@@ -13,7 +13,7 @@
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
+import { hostedKeplerElements, hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
 import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';
@@ -25,6 +25,9 @@ const INTER_URL = 'https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/f
 export interface HostedPlanetScaffold {
   readonly id: string; readonly name: string; readonly system: string; readonly description: string;
   readonly paper: string; readonly paperCredit: string; readonly order?: number; readonly color?: string;
+  /** `synchronous` (the default) assumes tidal locking on a circular orbit; `unmeasured` writes a display orientation whose axis is
+   * the orbit normal and no spin, for a planet whose rotation is not measured and whose orbit may be eccentric. */
+  readonly rotation?: 'synchronous' | 'unmeasured';
 }
 
 /** Every file of a new shape-only planet of another star, keyed by repository path. Pure: the caller writes them. */
@@ -35,8 +38,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
   if (body.id !== spec.id) throw new TypeError(`The astronomy record is for ${String(body.id)}, not ${spec.id}.`);
   const hostId = requireString(physical.parent, 'physical.parent');
   if (host.id !== hostId) throw new TypeError(`${spec.id} orbits ${hostId}, but the host record is ${String(host.id)}.`);
-  const eccentricity = requireFiniteNumber(orbit.eccentricity);
-  if (eccentricity !== 0) throw new TypeError(`Cannot scaffold ${spec.id}: synchronous rotation requires a circular hosted orbit. Supply an explicit authored rotation law for eccentricity ${eccentricity}.`);
+  const eccentricity = requireFiniteNumber(orbit.eccentricity), rotation = spec.rotation ?? 'synchronous';
+  if (eccentricity !== 0 && rotation === 'synchronous') throw new TypeError(`Cannot scaffold ${spec.id}: synchronous rotation requires a circular hosted orbit. Scaffold it with --rotation unmeasured and author the rotation law, or supply one, for eccentricity ${eccentricity}.`);
   const star = requireRecord(host.star, 'host star astrometry');
   const astrometry = { rightAscensionDegrees: requireFiniteNumber(star.rightAscensionDegrees), declinationDegrees: requireFiniteNumber(star.declinationDegrees),
     positionEpochJulianYear: requireFiniteNumber(star.positionEpochJulianYear), distanceParsecs: requireFiniteNumber(star.distanceParsecs),
@@ -89,17 +92,26 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     projection: { tileSize: 50, layerElevation: 50, seamBleed: 24, interiorSeamBleed: 8, overlap: 0.008, fitToSource: false, rasterScale: 2, rasterGutter: 8, rasterOverscan: 0,
       positionVariables: false, projectivePoles: false, lightColor: '#ffffff', ambientIntensity: 0.05 },
     bodyRotationDegrees: 0, output: { schema: `css${id}-prepared-runtime-scene@1`, materialSchema: `css${id}-prepared-lighting@1`, layout: 'body-container',
-      body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: periodDays,
+      body: { axialTiltDegrees: 0, rotationDirection: 'prograde', rotationPeriodEarthDays: rotation === 'unmeasured' ? 0 : periodDays,
         sourceProjection: 'no observation: the shared neutral gray of an unresolved surface on the reference sphere',
         polarPreparation: 'the same gray on the polar tiles',
-        axialTiltNote: "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies" } } });
+        axialTiltNote: rotation === 'unmeasured' ? 'no obliquity or spin of this planet is measured; the display axis is the orbit normal and nothing turns' : "no obliquity of this planet is measured; the rotation record assumes the spin axis on the orbit normal, as tidal locking implies" } } });
 
   put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'] });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: 'composite' });
   put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@1', planetId: id, owner: 'object', presentation: { size: 5 },
     source: { path: 'presentation/context.png' }, operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }],
     context: { pixels: 512 } });
-  put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-synchronous-rotation@1', host: hostId,
+  if (rotation === 'unmeasured') {
+    // The orbit normal in ICRF, from the same elements the orbit is propagated with: a display axis, not a measured pole.
+    const elements = hostedKeplerElements(orbit as unknown as Parameters<typeof hostedKeplerElements>[0], astrometry, requireFiniteNumber(requireRecord(host.physical, 'host physical').meanRadiusKm));
+    const normal = [Math.sin(elements.inclinationRad) * Math.sin(elements.ascendingNodeRad), -Math.sin(elements.inclinationRad) * Math.cos(elements.ascendingNodeRad), Math.cos(elements.inclinationRad)];
+    put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1',
+      rightAscensionDegrees: (Math.atan2(normal[1]!, normal[0]!) * 180 / Math.PI + 360) % 360, declinationDegrees: Math.asin(normal[2]!) * 180 / Math.PI, displayMeridianDegrees: 90, phase: 'arbitrary-display-phase',
+      source: `No rotation period or spin axis of ${name} is measured (${TODO}: name the literature checked). The display axis is the normal of its hosted orbit in packages/astronomy/data/bodies/${id}.json, computed by hostedKeplerElements in @cssearth/astronomy; the meridian is set so that grid longitude 0 faces the Sun and Earth at the scene epoch.`,
+      coordinateSystem: 'ICRF/J2000. +Z is the display axis, the orbit normal; +X is the display meridian; east longitude. No spin is propagated.',
+      qualification: `Display convention, not a measurement: the spin axis, spin sense, period and prime meridian of ${name} are unmeasured; the axis shown is its orbit normal.` });
+  } else put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-synchronous-rotation@1', host: hostId,
     source: `Assumed synchronous rotation: a planet ${Math.round(requireFiniteNumber(orbit.semiMajorAxisStellarRadii))} stellar radii from its star is expected to be tidally locked, and no rotation period of ${name} is measured (${TODO}: name the literature checked). Pole, prime meridian and rate are computed from the hosted orbit in packages/astronomy/data/bodies/${id}.json.`,
     coordinateSystem: 'ICRF/J2000. +Z is the orbit normal (prograde spin); +X points at the host star at each instant, so longitude 0 is the substellar point; east longitude, the direction of rotation.',
     qualification: `Tidal locking and a spin axis on the orbit normal are assumptions, not measurements: neither the rotation period nor the obliquity of ${name} is measured.` });
@@ -130,7 +142,8 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     introduction: { text: `${TODO}: two sentences, 180 characters at most.`, sources: [{ catalogueId: `${TODO}-introduction-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     datasets: { shape: { title: 'Shape only', detail: 'Published radius', summary: `${TODO}: what the sphere is and is not, 125 characters at most.` } } });
   put(`${o}/.gitignore`, '# No observation files: the sphere is the shared neutral gray.\n');
-  const pin = { expectedBytes: 0, expectedSha256: '0'.repeat(64) }, local = (reason: string) => ({ kind: 'local', reason });
+  // Git records the files a scaffold authors, so their manifest entries carry no pin (tools/sources/source-pins.test.mts).
+  const pin = {}, local = (reason: string) => ({ kind: 'local', reason });
   const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: 'Origin and product identifier recorded on this manifest entry.' }] });
   const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, ...pin, origin,
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
@@ -140,7 +153,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     { id: `${id}-observational-measurements`, path: 'measurements.json', ...pin, origin: spec.paper, credit: spec.paperCredit,
       license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources',
       redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'],
-      sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
+      sourceBinding: local('Measurements transcribed in this package with their sources.') },
     { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', expectedBytes: 862936, expectedSha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c',
       origin: INTER_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'],
       acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.', redistribution: 'Permitted with the accompanying SIL Open Font License.',
@@ -173,7 +186,8 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   // Everything the scaffold copies is checked before a file is written, so a missing input never leaves half a package.
   const font = 'src/objects/themis/source/presentation/InterVariable.ttf', license = 'src/objects/betelgeuse/source/presentation/LICENSE.INTER-OFL';
   for (const path of [font, license]) if (!await exists(path)) throw new Error(`${path} is missing; restore it (pnpm setup:assets) before scaffolding.`);
-  const order = flag('order'), color = flag('color');
+  const order = flag('order'), color = flag('color'), rotation = flag('rotation');
+  if (rotation !== undefined && rotation !== 'synchronous' && rotation !== 'unmeasured') throw new TypeError(`--rotation takes synchronous or unmeasured, not ${rotation}.`);
   if (order !== undefined && !Number.isSafeInteger(Number(order))) throw new TypeError(`--order must be a whole number, not ${order}.`);
   if (color !== undefined && !/^#[0-9a-f]{6}$/iu.test(color)) throw new TypeError(`--color must be #rrggbb, not ${color}.`);
   const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
@@ -184,7 +198,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     id, name: requireString(flag('name'), '--name'), system: requireString(flag('system'), '--system'),
     description: requireString(flag('description'), '--description'), paper: requireString(flag('paper'), '--paper'),
     paperCredit: requireString(flag('paper-credit'), '--paper-credit'),
-    ...(order === undefined ? {} : { order: Number(order) }), ...(color === undefined ? {} : { color }),
+    ...(order === undefined ? {} : { order: Number(order) }), ...(color === undefined ? {} : { color }), ...(rotation === undefined ? {} : { rotation: rotation as 'synchronous' | 'unmeasured' }),
   }, body, await read(`packages/astronomy/data/bodies/${hostId}.json`), SOLAR_GEOMETRY_EPOCH_JD_TT);
   for (const [path, text] of files) { await mkdir(dirname(resolve(root, path)), { recursive: true }); await writeFile(resolve(root, path), text); }
   const { neutralDiscMarker } = await import('./new-star.mts');

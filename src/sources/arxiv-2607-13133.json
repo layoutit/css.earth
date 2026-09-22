@@ -1,0 +1,40 @@
+{
+  "id": "arxiv-2607-13133",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zhou et al. (2026): Photometric Variability and Rotation of beta Pictoris b from JWST NIRCam Coronagraphic Imaging",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2607.13133"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2607.13133",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2607.13133",
+      "checkedOn": "2026-09-22",
+      "locator": "Abstract and Section 5: JWST programme 4758, 21-22 March 2025, F210M and F410M behind MASK335R over 16.2 h; rotation period 9.00 +/- 0.13 h with amplitudes 0.85 and 0.89%; spin axis inclination consistent with 90 degrees, no misalignment with the orbit"
+    },
+    {
+      "path": "src/objects/beta-pictoris/investigations.json",
+      "locator": "/entries/4"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "Y. Zhou",
+    "B. A. Biller",
+    "A. L. Carter",
+    "M. D. Perrin",
+    "M. Poon"
+  ]
+}

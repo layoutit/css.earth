@@ -1,0 +1,2258 @@
+{
+  "schema": "cssearth-volume-provenance@1",
+  "title": "Beta Pictoris debris disc: JWST coronagraph imaging given the depth of the fitted disc",
+  "kind": "observed-sky-image-on-fitted-envelope",
+  "authors": [],
+  "organizations": [
+    "NASA/ESA HST, Ren et al. 2023 (CDS)",
+    "NASA/ESA/CSA JWST; MAST (STScI)"
+  ],
+  "license": {
+    "spdx": "LicenseRef-STScI-public-data",
+    "dataLicenseDeclaration": "https://archive.stsci.edu/publishing/data-use",
+    "note": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited."
+  },
+  "sources": [
+    {
+      "id": "visible-stis-50ccd",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A114/fits/Beta_Pic_STIS.fits",
+      "landing": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114",
+      "sha256": "d67e6f3ca3d5031c955ec2c5a75268f776c5b8df96584f54e274b171fe4067e5",
+      "bytes": 227520,
+      "role": "HST/STIS behind its coronagraph 50CCD, clear, centred on 0.58 micrometres image deposited with its paper, the visible leaves"
+    },
+    {
+      "id": "contrast-f410m",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "sha256": "e2390f5a10e6ce5a658e2abb3b0d2d1cb34e89904b93023693be93dea78df2d1",
+      "bytes": 42382080,
+      "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F410M band of the contrast leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F410M-MASK335R.reproduction.json"
+    },
+    {
+      "id": "contrast-f210m",
+      "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+      "landing": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "sha256": "da30c8d65230ba0bbca70213d464aa60732546b690f2f3a0619745b64db68381",
+      "bytes": 42382080,
+      "role": "MAST level-3 coronagraph mosaic jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the contrast leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/beta-pictoris-4758.NIRCAM-F210M-MASK335R.reproduction.json"
+    },
+    {
+      "id": "colour-f435w-roll1",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sha256": "718dbab23e402848968acb25779935ef12f6461ea5efc4551f360a7b29e7468b",
+      "bytes": 17507520,
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F435W image of roll 1, PSF-subtracted and drizzled here, the colour leaves"
+    },
+    {
+      "id": "colour-f435w-roll2",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sha256": "2432198ba4ebbbde4704c943fab093ca96d992fa0457701a435e9c3d86a6108f",
+      "bytes": 14402880,
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F435W image of roll 2, PSF-subtracted and drizzled here, the colour leaves"
+    },
+    {
+      "id": "colour-f606w-roll1",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sha256": "9b1db256a6a6f96208a469baf5d9ab77686ed077b7fc1d78e6bb5eaba48b8d1a",
+      "bytes": 17507520,
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F606W image of roll 1, PSF-subtracted and drizzled here, the colour leaves"
+    },
+    {
+      "id": "colour-f606w-roll2",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sha256": "78fc1611be1de128b04a675648f0494c272a837898255df89585bc3b6b159a3b",
+      "bytes": 14402880,
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F606W image of roll 2, PSF-subtracted and drizzled here, the colour leaves"
+    },
+    {
+      "id": "colour-f814w-roll1",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sha256": "8707cc2f880231e9391d13f13f2ab868fdbe963b9023d140c38bb73262a973ce",
+      "bytes": 17507520,
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F814W image of roll 1, PSF-subtracted and drizzled here, the colour leaves"
+    },
+    {
+      "id": "colour-f814w-roll2",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "sha256": "39698541190011103166592c3a06e8fe10617ff41c41a93f64566aad6fa8f074",
+      "bytes": 14402880,
+      "role": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot F814W image of roll 2, PSF-subtracted and drizzled here, the colour leaves"
+    }
+  ],
+  "paper": [
+    {
+      "lens": "visible",
+      "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+      "url": "https://arxiv.org/abs/2401.05271"
+    },
+    {
+      "lens": "contrast",
+      "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+      "url": "https://arxiv.org/abs/2401.05271"
+    },
+    {
+      "lens": "colour",
+      "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+      "url": "https://arxiv.org/abs/2401.05271"
+    }
+  ],
+  "measured": {
+    "sceneOriginRaDecDeg": [
+      86.82125885900825,
+      -51.06588715530487
+    ],
+    "distancePc": 19.634710385537517,
+    "arcsecPerUnit": 0.050930213910187205,
+    "grid": {
+      "size": 156,
+      "halfUnits": 135,
+      "slabs": 78
+    },
+    "lenses": {
+      "visible": {
+        "geometry": "edge-on",
+        "bands": [
+          {
+            "band": "HST-STIS-50CCD",
+            "mosaic": "Beta_Pic_STIS.fits",
+            "sha256": "d67e6f3ca3d5031c955ec2c5a75268f776c5b8df96584f54e274b171fe4067e5",
+            "observed": "in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923)",
+            "starRaDecDeg": null,
+            "starPixel": [
+              83,
+              83
+            ],
+            "mosaicArcsecPerPixel": 0.05072,
+            "background": 1.562613010406494,
+            "noise": 1.9386905626773816,
+            "backgroundPixels": 4724,
+            "unit": ""
+          }
+        ],
+        "channels": {
+          "red": [
+            "HST-STIS-50CCD"
+          ],
+          "green": [
+            "HST-STIS-50CCD"
+          ],
+          "blue": [
+            "HST-STIS-50CCD"
+          ]
+        },
+        "stellarFluxJy": {
+          "HST-STIS-50CCD": 1
+        },
+        "stellarFluxSource": "Not divided by the star: the deposit is in counts per pixel per second, and it is shown in those units, one filter in grey.",
+        "stretch": {
+          "a": 10,
+          "top": 530,
+          "source": "Stated, not fitted: the top is the 99.5th percentile of the image within 12 au of the midplane beyond the inner edge (529.6 counts per pixel per second), and a = 10 is the display's log strength, the same as the JWST lens's."
+        },
+        "registration": null,
+        "bandMidplanes": {
+          "HST-STIS-50CCD": {
+            "positionAngleDeg": 29.51693912005834,
+            "starOffsetUnits": -1.4962479868509437,
+            "ridgeResidualUnits": 2.1565010010060877
+          }
+        },
+        "noiseFade": {
+          "fromNoise": 1,
+          "toNoise": 3,
+          "source": "Stated, a display choice, as for the JWST lens: a column fades in as its brightness rises from one to three times the per-pixel noise measured 3.6 to 4.1 arcseconds out."
+        },
+        "innerMaskUnits": 15.707768308430014,
+        "midplaneHalfHeightUnits": 12,
+        "lightEndsUnits": 101.8305269551002,
+        "lightEnds": {},
+        "coverageEndsUnits": 101.8305269551002,
+        "midplaneProfile": [
+          {
+            "alongUnits": -102.11538461538461,
+            "median": 9.291157722473145,
+            "samples": 2
+          },
+          {
+            "alongUnits": -98.65384615384616,
+            "median": 11.557311058044434,
+            "samples": 9
+          },
+          {
+            "alongUnits": -95.1923076923077,
+            "median": 18.227745056152344,
+            "samples": 17
+          },
+          {
+            "alongUnits": -91.73076923076924,
+            "median": 20.496633529663086,
+            "samples": 24
+          },
+          {
+            "alongUnits": -88.26923076923077,
+            "median": 21.565383911132812,
+            "samples": 28
+          },
+          {
+            "alongUnits": -84.8076923076923,
+            "median": 22.601755142211914,
+            "samples": 27
+          },
+          {
+            "alongUnits": -81.34615384615385,
+            "median": 24.610666275024414,
+            "samples": 28
+          },
+          {
+            "alongUnits": -77.88461538461539,
+            "median": 28.18958282470703,
+            "samples": 27
+          },
+          {
+            "alongUnits": -74.42307692307692,
+            "median": 27.32413101196289,
+            "samples": 29
+          },
+          {
+            "alongUnits": -70.96153846153847,
+            "median": 35.29734420776367,
+            "samples": 27
+          },
+          {
+            "alongUnits": -67.5,
+            "median": 32.27431869506836,
+            "samples": 29
+          },
+          {
+            "alongUnits": -64.03846153846155,
+            "median": 36.558509826660156,
+            "samples": 27
+          },
+          {
+            "alongUnits": -60.57692307692308,
+            "median": 38.29015350341797,
+            "samples": 28
+          },
+          {
+            "alongUnits": -57.11538461538462,
+            "median": 44.96906661987305,
+            "samples": 26
+          },
+          {
+            "alongUnits": -53.65384615384615,
+            "median": 44.937007904052734,
+            "samples": 28
+          },
+          {
+            "alongUnits": -50.19230769230769,
+            "median": 50.72275924682617,
+            "samples": 27
+          },
+          {
+            "alongUnits": -46.73076923076923,
+            "median": 53.261600494384766,
+            "samples": 28
+          },
+          {
+            "alongUnits": -43.269230769230774,
+            "median": 60.49552917480469,
+            "samples": 27
+          },
+          {
+            "alongUnits": -39.80769230769231,
+            "median": 74.75035095214844,
+            "samples": 29
+          },
+          {
+            "alongUnits": -36.34615384615385,
+            "median": 90.48784637451172,
+            "samples": 27
+          },
+          {
+            "alongUnits": -32.88461538461539,
+            "median": 99.35238647460938,
+            "samples": 28
+          },
+          {
+            "alongUnits": -29.423076923076923,
+            "median": 126.81526184082031,
+            "samples": 28
+          },
+          {
+            "alongUnits": -25.961538461538463,
+            "median": 161.9463653564453,
+            "samples": 27
+          },
+          {
+            "alongUnits": -22.5,
+            "median": 209.14186096191406,
+            "samples": 28
+          },
+          {
+            "alongUnits": -19.03846153846154,
+            "median": 288.3833923339844,
+            "samples": 27
+          },
+          {
+            "alongUnits": -15.576923076923077,
+            "median": 328.4849853515625,
+            "samples": 25
+          },
+          {
+            "alongUnits": -12.115384615384617,
+            "median": 305.12200927734375,
+            "samples": 3
+          },
+          {
+            "alongUnits": -8.653846153846153,
+            "median": 403.70025634765625,
+            "samples": 7
+          },
+          {
+            "alongUnits": -5.1923076923076925,
+            "median": 605.0667114257812,
+            "samples": 5
+          },
+          {
+            "alongUnits": -1.7307692307692308,
+            "median": 504.4870300292969,
+            "samples": 4
+          },
+          {
+            "alongUnits": 1.7307692307692308,
+            "median": 596.6422119140625,
+            "samples": 2
+          },
+          {
+            "alongUnits": 5.1923076923076925,
+            "median": 502.14599609375,
+            "samples": 6
+          },
+          {
+            "alongUnits": 8.653846153846153,
+            "median": 345.8771057128906,
+            "samples": 3
+          },
+          {
+            "alongUnits": 12.115384615384617,
+            "median": 259.82183837890625,
+            "samples": 5
+          },
+          {
+            "alongUnits": 15.576923076923077,
+            "median": 342.47064208984375,
+            "samples": 14
+          },
+          {
+            "alongUnits": 19.03846153846154,
+            "median": 252.7261199951172,
+            "samples": 27
+          },
+          {
+            "alongUnits": 22.5,
+            "median": 192.59828186035156,
+            "samples": 28
+          },
+          {
+            "alongUnits": 25.961538461538463,
+            "median": 155.68719482421875,
+            "samples": 27
+          },
+          {
+            "alongUnits": 29.423076923076923,
+            "median": 122.21156311035156,
+            "samples": 27
+          },
+          {
+            "alongUnits": 32.88461538461539,
+            "median": 102.56232452392578,
+            "samples": 27
+          },
+          {
+            "alongUnits": 36.34615384615385,
+            "median": 79.64517974853516,
+            "samples": 28
+          },
+          {
+            "alongUnits": 39.80769230769231,
+            "median": 70.39000701904297,
+            "samples": 28
+          },
+          {
+            "alongUnits": 43.269230769230774,
+            "median": 53.73798370361328,
+            "samples": 29
+          },
+          {
+            "alongUnits": 46.73076923076923,
+            "median": 51.66255569458008,
+            "samples": 27
+          },
+          {
+            "alongUnits": 50.19230769230769,
+            "median": 45.800010681152344,
+            "samples": 28
+          },
+          {
+            "alongUnits": 53.65384615384615,
+            "median": 43.0643424987793,
+            "samples": 27
+          },
+          {
+            "alongUnits": 57.11538461538462,
+            "median": 41.2036018371582,
+            "samples": 28
+          },
+          {
+            "alongUnits": 60.57692307692308,
+            "median": 37.125701904296875,
+            "samples": 28
+          },
+          {
+            "alongUnits": 64.03846153846155,
+            "median": 33.0959587097168,
+            "samples": 27
+          },
+          {
+            "alongUnits": 67.5,
+            "median": 32.01160430908203,
+            "samples": 28
+          },
+          {
+            "alongUnits": 70.96153846153847,
+            "median": 31.662425994873047,
+            "samples": 28
+          },
+          {
+            "alongUnits": 74.42307692307692,
+            "median": 25.526142120361328,
+            "samples": 29
+          },
+          {
+            "alongUnits": 77.88461538461539,
+            "median": 25.045169830322266,
+            "samples": 27
+          },
+          {
+            "alongUnits": 81.34615384615385,
+            "median": 23.192564010620117,
+            "samples": 28
+          },
+          {
+            "alongUnits": 84.8076923076923,
+            "median": 21.189361572265625,
+            "samples": 27
+          },
+          {
+            "alongUnits": 88.26923076923077,
+            "median": 18.970348358154297,
+            "samples": 27
+          },
+          {
+            "alongUnits": 91.73076923076924,
+            "median": 20.31326675415039,
+            "samples": 20
+          },
+          {
+            "alongUnits": 95.1923076923077,
+            "median": 18.039350509643555,
+            "samples": 14
+          },
+          {
+            "alongUnits": 98.65384615384616,
+            "median": 10.791361808776855,
+            "samples": 5
+          }
+        ],
+        "positionAngleDeg": 29.595901454431527,
+        "positionAngleSpreadDeg": 0.19552278220804503,
+        "starOffsetUnits": -1.5314778744511053,
+        "ridgeResidualUnits": 2.16122749810747,
+        "midplaneBins": [
+          {
+            "alongUnits": -79.61538461538461,
+            "heightUnits": -0.39209695335024985,
+            "widthUnits": 5.691252467415468,
+            "peakOverNoise": 37.976318290599984
+          },
+          {
+            "alongUnits": -72.6923076923077,
+            "heightUnits": -1.081811786413648,
+            "widthUnits": 5.746824185442222,
+            "peakOverNoise": 45.38455774159783
+          },
+          {
+            "alongUnits": -65.76923076923077,
+            "heightUnits": -1.4022268631943575,
+            "widthUnits": 5.820918131538292,
+            "peakOverNoise": 52.00544451592249
+          },
+          {
+            "alongUnits": -58.84615384615385,
+            "heightUnits": -1.153995244336767,
+            "widthUnits": 5.727316162274886,
+            "peakOverNoise": 60.473779994971736
+          },
+          {
+            "alongUnits": -51.92307692307693,
+            "heightUnits": -0.9967355339707956,
+            "widthUnits": 5.88307992740497,
+            "peakOverNoise": 67.59087917587867
+          },
+          {
+            "alongUnits": -45,
+            "heightUnits": -0.9115086505947563,
+            "widthUnits": 5.9659324645897875,
+            "peakOverNoise": 83.88947901222312
+          },
+          {
+            "alongUnits": -38.07692307692308,
+            "heightUnits": -1.1887422131405971,
+            "widthUnits": 5.894484881422032,
+            "peakOverNoise": 117.54975339153971
+          },
+          {
+            "alongUnits": -31.153846153846153,
+            "heightUnits": -0.20968653546927363,
+            "widthUnits": 6.1084118001268966,
+            "peakOverNoise": 178.62247953108474
+          },
+          {
+            "alongUnits": -24.230769230769234,
+            "heightUnits": -1.1015130893381926,
+            "widthUnits": 6.044698887584825,
+            "peakOverNoise": 315.94697792230966
+          },
+          {
+            "alongUnits": -17.307692307692307,
+            "heightUnits": -1.1835877840016773,
+            "widthUnits": 6.283738714288369,
+            "peakOverNoise": 537.6077230312129
+          },
+          {
+            "alongUnits": 10.384615384615385,
+            "heightUnits": -10.180617155756579,
+            "widthUnits": 1.045362473118016,
+            "peakOverNoise": 278.6901570561469
+          },
+          {
+            "alongUnits": 17.307692307692307,
+            "heightUnits": 0.19773535311727186,
+            "widthUnits": 6.515944094047223,
+            "peakOverNoise": 541.1649605035293
+          },
+          {
+            "alongUnits": 24.230769230769234,
+            "heightUnits": -1.0509189499657623,
+            "widthUnits": 5.937317170313957,
+            "peakOverNoise": 311.47187121181196
+          },
+          {
+            "alongUnits": 31.153846153846153,
+            "heightUnits": -1.2386708540414106,
+            "widthUnits": 5.8473693615589895,
+            "peakOverNoise": 198.39050375942847
+          },
+          {
+            "alongUnits": 38.07692307692308,
+            "heightUnits": -1.1200257849005861,
+            "widthUnits": 5.907975175466326,
+            "peakOverNoise": 120.98222717355695
+          },
+          {
+            "alongUnits": 45,
+            "heightUnits": -1.0093086720799664,
+            "widthUnits": 6.044792178834405,
+            "peakOverNoise": 86.08730756485708
+          },
+          {
+            "alongUnits": 51.92307692307693,
+            "heightUnits": -0.8047828668313605,
+            "widthUnits": 5.962463833895334,
+            "peakOverNoise": 66.60756761959404
+          },
+          {
+            "alongUnits": 58.84615384615385,
+            "heightUnits": 0.533032252408655,
+            "widthUnits": 6.005918366730218,
+            "peakOverNoise": 57.92740515172136
+          },
+          {
+            "alongUnits": 65.76923076923077,
+            "heightUnits": 0.2851784705192224,
+            "widthUnits": 5.902497665082677,
+            "peakOverNoise": 48.06114923363937
+          },
+          {
+            "alongUnits": 72.6923076923077,
+            "heightUnits": 0.4556894968806988,
+            "widthUnits": 5.950582185113948,
+            "peakOverNoise": 39.87724006953765
+          },
+          {
+            "alongUnits": 79.61538461538461,
+            "heightUnits": 0.1877906963933158,
+            "widthUnits": 5.6877362846110415,
+            "peakOverNoise": 33.02947614095138
+          }
+        ],
+        "sideBrightness": {
+          "positive": 47654.419439315796,
+          "negative": 52368.03487491608,
+          "ratio": 0.9099905992871604
+        },
+        "iterations": 10,
+        "published": {
+          "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+          "url": "https://arxiv.org/abs/2401.05271",
+          "inclinationDeg": 89,
+          "positionAngleDeg": 29.6,
+          "toleranceDeg": 2
+        },
+        "differences": {
+          "positionAngleDeg": 0.004098545568467671
+        },
+        "reconstruction": {
+          "path": "reconstruction-visible.json",
+          "method": {
+            "name": "axial-symmetry emission inference",
+            "paper": "Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216",
+            "implementation": "labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts",
+            "command": "node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc",
+            "axis": [
+              -0.8693978268104603,
+              -0.493804447374461,
+              0.017452406437283376
+            ],
+            "center": [
+              77.5,
+              77.5,
+              77.5
+            ],
+            "binWidthVoxels": 1,
+            "tau": 0.001,
+            "iterations": 200,
+            "weights": "one for pixels with displayed data, zero under the inner edge and beyond the footprint; a voxel seen only through the blank inside the inner edge takes its group mean, and one seen only beyond the footprint stays empty"
+          },
+          "checks": {
+            "relativeProjectionError": [
+              0.0676,
+              0.0676,
+              0.0676
+            ],
+            "voxelsFilledFromGroups": [
+              36902,
+              36902,
+              36902
+            ],
+            "groupsWithNoObservedVoxel": [
+              10623,
+              10623,
+              10623
+            ],
+            "weightedPixels": 8937,
+            "pixels": 24336,
+            "tangentShare": [
+              {
+                "projectedUnits": 30.549158086530056,
+                "widthUnits": 20,
+                "reconstructed": 0.643551878612741,
+                "extrusion": 0.2948717948717949
+              },
+              {
+                "projectedUnits": 50.9152634775501,
+                "widthUnits": 20,
+                "reconstructed": 0.6594179220102914,
+                "extrusion": 0.3717948717948718
+              },
+              {
+                "projectedUnits": 71.28136886857013,
+                "widthUnits": 20,
+                "reconstructed": 0.8325591460725064,
+                "extrusion": 0.4230769230769231
+              }
+            ]
+          },
+          "axis": [
+            -0.8693978268104603,
+            -0.493804447374461,
+            0.017452406437283376
+          ],
+          "inclinationDeg": 89,
+          "nearSidePositionAngleDeg": 300
+        },
+        "exposureGain": 0.02299214229142451,
+        "topAlpha": 0.5,
+        "faceOnOpacity": {
+          "drawnColumns": 4938,
+          "median": 0.07584703491753741,
+          "p90": 0.3055652615308413,
+          "max": 0.48691812688509717
+        },
+        "droppedShare": [
+          0,
+          0,
+          0
+        ],
+        "filledVoxels": 348956
+      },
+      "contrast": {
+        "geometry": "edge-on",
+        "bands": [
+          {
+            "band": "NIRCAM-F410M-MASK335R",
+            "mosaic": "jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "e2390f5a10e6ce5a658e2abb3b0d2d1cb34e89904b93023693be93dea78df2d1",
+            "observed": "2025-03-21",
+            "starRaDecDeg": [
+              86.82125627257385,
+              -51.06592237164618
+            ],
+            "starPixel": [
+              172.6995291710599,
+              197.27556471032568
+            ],
+            "mosaicArcsecPerPixel": 0.062421497926023965,
+            "background": -1.0343804359436035,
+            "noise": 4.432509188747406,
+            "backgroundPixels": 11491,
+            "unit": "MJy/sr"
+          },
+          {
+            "band": "NIRCAM-F210M-MASK335R",
+            "mosaic": "jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
+            "sha256": "da30c8d65230ba0bbca70213d464aa60732546b690f2f3a0619745b64db68381",
+            "observed": "2025-03-21",
+            "starRaDecDeg": [
+              86.82125627257385,
+              -51.06592237164618
+            ],
+            "starPixel": [
+              185.01179185270942,
+              182.42284554862232
+            ],
+            "mosaicArcsecPerPixel": 0.030680568262477583,
+            "background": -10.27316951751709,
+            "noise": 23.539836658287047,
+            "backgroundPixels": 41722,
+            "unit": "MJy/sr"
+          }
+        ],
+        "channels": {
+          "red": [
+            "NIRCAM-F410M-MASK335R"
+          ],
+          "green": [
+            "NIRCAM-F210M-MASK335R",
+            "NIRCAM-F410M-MASK335R"
+          ],
+          "blue": [
+            "NIRCAM-F210M-MASK335R"
+          ]
+        },
+        "stellarFluxJy": {
+          "NIRCAM-F210M-MASK335R": 26.14,
+          "NIRCAM-F410M-MASK335R": 8.2
+        },
+        "stellarFluxSource": "Kammerer et al. (2024, AJ 168, 51, arXiv:2405.18422), Table 2: planet b's MCRDI flux and its contrast to a stellar model atmosphere of Beta Pictoris give the star's flux, F_star = F_b 10^(0.4 dmag): F210M 6.10e-3 Jy at 9.08 mag is 26.14 Jy. F410M, which that programme did not observe, is interpolated in log flux and log wavelength between its F335M (7.85e-3 Jy, 7.91 mag: 11.45 Jy) and F444W (6.06e-3 Jy, 7.68 mag: 7.15 Jy) at the pivot wavelengths 3.362, 4.082 and 4.421 micrometres: 8.20 Jy.",
+        "stretch": {
+          "a": 10,
+          "top": 7.2,
+          "source": "Stated, not fitted: no published figure shows these two filters of this programme combined, so there is no panel to fit a stretch to. The top is the 99.5th percentile of the mean contrast within 20 au of the midplane beyond the inner mask (7.24), and a = 10 is the display's log strength, chosen so the disc's faint outer reaches stay visible."
+        },
+        "registration": {
+          "planet": "beta-pictoris-b",
+          "source": "Planet b is a bright point 0.54 arcseconds from the star in both mosaics. Its orbit (packages/astronomy/data/bodies/beta-pictoris-b.json, from Lacour et al. 2021) reproduces GRAVITY's astrometry to 1.3 mas, so it places the star in each mosaic better than the mosaic's own pointing, which misses it by 80 to 90 mas. PSF full widths at half maximum: the JWST User Documentation's NIRCam values for F210M and F410M.",
+          "bands": {
+            "NIRCAM-F410M-MASK335R": {
+              "predictedEastNorthArcsec": [
+                0.28877356088247585,
+                0.46109855062519417
+              ],
+              "targetPixel": [
+                171.8309314832676,
+                198.07539248267946
+              ],
+              "predictedPixel": [
+                179.10063889159846,
+                202.88357834573006
+              ],
+              "foundPixel": [
+                179.96923657964666,
+                202.08375057285966
+              ],
+              "peakOverLocal": 10.312702314885524,
+              "correctionMas": [
+                -51.257273042611814,
+                52.96281298967642
+              ],
+              "starRaDecDeg": [
+                86.8212336157527,
+                -51.065907659753684
+              ]
+            },
+            "NIRCAM-F210M-MASK335R": {
+              "predictedEastNorthArcsec": [
+                0.28877356088247585,
+                0.46109855062519417
+              ],
+              "targetPixel": [
+                184.1614516148734,
+                184.54467076325912
+              ],
+              "predictedPixel": [
+                198.9648563553147,
+                194.307931650934
+              ],
+              "foundPixel": [
+                199.81519659227845,
+                192.1861064357411
+              ],
+              "peakOverLocal": 6.854200002380653,
+              "correctionMas": [
+                -65.69455251033357,
+                24.550176445359284
+              ],
+              "starRaDecDeg": [
+                86.82122723416353,
+                -51.065915552152724
+              ]
+            }
+          }
+        },
+        "bandMidplanes": {
+          "NIRCAM-F410M-MASK335R": {
+            "positionAngleDeg": 30.151525709276967,
+            "starOffsetUnits": -2.494830983540389,
+            "ridgeResidualUnits": 3.790892186218066
+          },
+          "NIRCAM-F210M-MASK335R": {
+            "positionAngleDeg": 30.85603552738482,
+            "starOffsetUnits": 0.6548963971578079,
+            "ridgeResidualUnits": 2.669423357061222
+          }
+        },
+        "noiseFade": {
+          "fromNoise": 1,
+          "toNoise": 3,
+          "source": "Stated, a display choice: a column fades in as the mean contrast rises from one to three times its per-pixel noise (the scatter measured 4 to 5.5 arcseconds out), so empty sky is not drawn as speckle. Every channel of a column is scaled alike, so no colour ratio changes."
+        },
+        "innerMaskUnits": 49.08677596384379,
+        "midplaneHalfHeightUnits": 20,
+        "lightEndsUnits": 124.2927309315991,
+        "lightEnds": {},
+        "coverageEndsUnits": 124.2927309315991,
+        "midplaneProfile": [
+          {
+            "alongUnits": -122.88461538461539,
+            "median": 0.4522175192832947,
+            "samples": 4
+          },
+          {
+            "alongUnits": -119.42307692307693,
+            "median": 0.7577366828918457,
+            "samples": 11
+          },
+          {
+            "alongUnits": -115.96153846153847,
+            "median": 0.9063067436218262,
+            "samples": 18
+          },
+          {
+            "alongUnits": -112.5,
+            "median": 0.9029666781425476,
+            "samples": 24
+          },
+          {
+            "alongUnits": -109.03846153846155,
+            "median": 1.2297604084014893,
+            "samples": 32
+          },
+          {
+            "alongUnits": -105.57692307692308,
+            "median": 1.1135444641113281,
+            "samples": 38
+          },
+          {
+            "alongUnits": -102.11538461538461,
+            "median": 0.9944494366645813,
+            "samples": 43
+          },
+          {
+            "alongUnits": -98.65384615384616,
+            "median": 1.115551471710205,
+            "samples": 47
+          },
+          {
+            "alongUnits": -95.1923076923077,
+            "median": 1.0377525091171265,
+            "samples": 46
+          },
+          {
+            "alongUnits": -91.73076923076924,
+            "median": 1.5058056116104126,
+            "samples": 46
+          },
+          {
+            "alongUnits": -88.26923076923077,
+            "median": 1.5653436183929443,
+            "samples": 46
+          },
+          {
+            "alongUnits": -84.8076923076923,
+            "median": 1.669777750968933,
+            "samples": 47
+          },
+          {
+            "alongUnits": -81.34615384615385,
+            "median": 1.8842421770095825,
+            "samples": 45
+          },
+          {
+            "alongUnits": -77.88461538461539,
+            "median": 1.9564541578292847,
+            "samples": 47
+          },
+          {
+            "alongUnits": -74.42307692307692,
+            "median": 2.350815534591675,
+            "samples": 47
+          },
+          {
+            "alongUnits": -70.96153846153847,
+            "median": 2.5177133083343506,
+            "samples": 45
+          },
+          {
+            "alongUnits": -67.5,
+            "median": 2.6875722408294678,
+            "samples": 47
+          },
+          {
+            "alongUnits": -64.03846153846155,
+            "median": 2.919107675552368,
+            "samples": 46
+          },
+          {
+            "alongUnits": -60.57692307692308,
+            "median": 2.636256694793701,
+            "samples": 47
+          },
+          {
+            "alongUnits": -57.11538461538462,
+            "median": 3.2842655181884766,
+            "samples": 46
+          },
+          {
+            "alongUnits": -53.65384615384615,
+            "median": 3.9399611949920654,
+            "samples": 47
+          },
+          {
+            "alongUnits": -50.19230769230769,
+            "median": 4.231389999389648,
+            "samples": 45
+          },
+          {
+            "alongUnits": -46.73076923076923,
+            "median": 4.613701343536377,
+            "samples": 47
+          },
+          {
+            "alongUnits": -43.269230769230774,
+            "median": 4.852205753326416,
+            "samples": 46
+          },
+          {
+            "alongUnits": -39.80769230769231,
+            "median": 5.208859920501709,
+            "samples": 46
+          },
+          {
+            "alongUnits": -36.34615384615385,
+            "median": 6.510071754455566,
+            "samples": 47
+          },
+          {
+            "alongUnits": -32.88461538461539,
+            "median": 6.109177589416504,
+            "samples": 46
+          },
+          {
+            "alongUnits": -29.423076923076923,
+            "median": 4.763172149658203,
+            "samples": 46
+          },
+          {
+            "alongUnits": -25.961538461538463,
+            "median": 3.186372756958008,
+            "samples": 47
+          },
+          {
+            "alongUnits": -22.5,
+            "median": 5.9038166999816895,
+            "samples": 45
+          },
+          {
+            "alongUnits": -19.03846153846154,
+            "median": 9.788698196411133,
+            "samples": 45
+          },
+          {
+            "alongUnits": -15.576923076923077,
+            "median": 5.428627014160156,
+            "samples": 48
+          },
+          {
+            "alongUnits": -12.115384615384617,
+            "median": 3.5157182216644287,
+            "samples": 45
+          },
+          {
+            "alongUnits": -8.653846153846153,
+            "median": 4.346540927886963,
+            "samples": 46
+          },
+          {
+            "alongUnits": -5.1923076923076925,
+            "median": -0.541651725769043,
+            "samples": 47
+          },
+          {
+            "alongUnits": -1.7307692307692308,
+            "median": -2.463270425796509,
+            "samples": 46
+          },
+          {
+            "alongUnits": 1.7307692307692308,
+            "median": -3.131685733795166,
+            "samples": 46
+          },
+          {
+            "alongUnits": 5.1923076923076925,
+            "median": 1.0112335681915283,
+            "samples": 47
+          },
+          {
+            "alongUnits": 8.653846153846153,
+            "median": 6.195765972137451,
+            "samples": 46
+          },
+          {
+            "alongUnits": 12.115384615384617,
+            "median": 8.376380920410156,
+            "samples": 46
+          },
+          {
+            "alongUnits": 15.576923076923077,
+            "median": 9.354108810424805,
+            "samples": 47
+          },
+          {
+            "alongUnits": 19.03846153846154,
+            "median": 7.078900337219238,
+            "samples": 46
+          },
+          {
+            "alongUnits": 22.5,
+            "median": 5.276325702667236,
+            "samples": 46
+          },
+          {
+            "alongUnits": 25.961538461538463,
+            "median": 4.021611213684082,
+            "samples": 47
+          },
+          {
+            "alongUnits": 29.423076923076923,
+            "median": 5.561797618865967,
+            "samples": 46
+          },
+          {
+            "alongUnits": 32.88461538461539,
+            "median": 7.015673637390137,
+            "samples": 46
+          },
+          {
+            "alongUnits": 36.34615384615385,
+            "median": 5.98482608795166,
+            "samples": 47
+          },
+          {
+            "alongUnits": 39.80769230769231,
+            "median": 5.857654094696045,
+            "samples": 44
+          },
+          {
+            "alongUnits": 43.269230769230774,
+            "median": 5.4729790687561035,
+            "samples": 47
+          },
+          {
+            "alongUnits": 46.73076923076923,
+            "median": 4.848308086395264,
+            "samples": 47
+          },
+          {
+            "alongUnits": 50.19230769230769,
+            "median": 4.346893310546875,
+            "samples": 44
+          },
+          {
+            "alongUnits": 53.65384615384615,
+            "median": 4.210617542266846,
+            "samples": 47
+          },
+          {
+            "alongUnits": 57.11538461538462,
+            "median": 3.7059028148651123,
+            "samples": 47
+          },
+          {
+            "alongUnits": 60.57692307692308,
+            "median": 3.3641111850738525,
+            "samples": 46
+          },
+          {
+            "alongUnits": 64.03846153846155,
+            "median": 2.583739757537842,
+            "samples": 46
+          },
+          {
+            "alongUnits": 67.5,
+            "median": 2.7754461765289307,
+            "samples": 48
+          },
+          {
+            "alongUnits": 70.96153846153847,
+            "median": 2.749734878540039,
+            "samples": 44
+          },
+          {
+            "alongUnits": 74.42307692307692,
+            "median": 2.5820868015289307,
+            "samples": 47
+          },
+          {
+            "alongUnits": 77.88461538461539,
+            "median": 2.2745678424835205,
+            "samples": 47
+          },
+          {
+            "alongUnits": 81.34615384615385,
+            "median": 2.1391401290893555,
+            "samples": 45
+          },
+          {
+            "alongUnits": 84.8076923076923,
+            "median": 2.162987232208252,
+            "samples": 47
+          },
+          {
+            "alongUnits": 88.26923076923077,
+            "median": 1.9900487661361694,
+            "samples": 47
+          },
+          {
+            "alongUnits": 91.73076923076924,
+            "median": 1.5602349042892456,
+            "samples": 45
+          },
+          {
+            "alongUnits": 95.1923076923077,
+            "median": 1.4700815677642822,
+            "samples": 47
+          },
+          {
+            "alongUnits": 98.65384615384616,
+            "median": 1.366213083267212,
+            "samples": 48
+          },
+          {
+            "alongUnits": 102.11538461538461,
+            "median": 1.2414528131484985,
+            "samples": 41
+          },
+          {
+            "alongUnits": 105.57692307692308,
+            "median": 1.3805826902389526,
+            "samples": 36
+          },
+          {
+            "alongUnits": 109.03846153846155,
+            "median": 1.4052821397781372,
+            "samples": 30
+          },
+          {
+            "alongUnits": 112.5,
+            "median": 1.0626873970031738,
+            "samples": 22
+          },
+          {
+            "alongUnits": 115.96153846153847,
+            "median": 0.8070435523986816,
+            "samples": 19
+          },
+          {
+            "alongUnits": 119.42307692307693,
+            "median": 0.4828812777996063,
+            "samples": 14
+          },
+          {
+            "alongUnits": 122.88461538461539,
+            "median": 0.4631018042564392,
+            "samples": 6
+          }
+        ],
+        "positionAngleDeg": 30.71239528608183,
+        "positionAngleSpreadDeg": 0.20318861799988736,
+        "starOffsetUnits": -0.852131658037974,
+        "ridgeResidualUnits": 2.8667514176752276,
+        "midplaneBins": [
+          {
+            "alongUnits": -107.3076923076923,
+            "heightUnits": -3.7427430430183968,
+            "widthUnits": 7.769793821857114,
+            "peakOverNoise": 5.701351721526674
+          },
+          {
+            "alongUnits": -100.38461538461539,
+            "heightUnits": 2.119637624553464,
+            "widthUnits": 8.794444038950452,
+            "peakOverNoise": 5.001685776856749
+          },
+          {
+            "alongUnits": -93.46153846153847,
+            "heightUnits": -0.6466042424026329,
+            "widthUnits": 8.200459402276172,
+            "peakOverNoise": 6.901335686910436
+          },
+          {
+            "alongUnits": -86.53846153846155,
+            "heightUnits": 1.3528339638392062,
+            "widthUnits": 8.117929529007283,
+            "peakOverNoise": 8.001784565435047
+          },
+          {
+            "alongUnits": -79.61538461538461,
+            "heightUnits": 0.6526378380966046,
+            "widthUnits": 8.153739972563923,
+            "peakOverNoise": 10.473827464705952
+          },
+          {
+            "alongUnits": -72.6923076923077,
+            "heightUnits": -0.5284637780581201,
+            "widthUnits": 8.379731693191326,
+            "peakOverNoise": 13.279722495190539
+          },
+          {
+            "alongUnits": -65.76923076923077,
+            "heightUnits": 0.6718714432273344,
+            "widthUnits": 8.370076493505215,
+            "peakOverNoise": 13.888586344304596
+          },
+          {
+            "alongUnits": -58.84615384615385,
+            "heightUnits": 0.4105874901446803,
+            "widthUnits": 8.519968786004878,
+            "peakOverNoise": 17.27456883742497
+          },
+          {
+            "alongUnits": -51.92307692307693,
+            "heightUnits": -2.1859307175985374,
+            "widthUnits": 9.209262274830511,
+            "peakOverNoise": 19.2346790659617
+          },
+          {
+            "alongUnits": -45,
+            "heightUnits": -7.769023231021651,
+            "widthUnits": 12.926149797953757,
+            "peakOverNoise": 13.830028554040265
+          },
+          {
+            "alongUnits": 45,
+            "heightUnits": 7.807899845901425,
+            "widthUnits": 15.25101720041602,
+            "peakOverNoise": 12.531161240293919
+          },
+          {
+            "alongUnits": 51.92307692307693,
+            "heightUnits": -0.3469093339716042,
+            "widthUnits": 9.205308071806538,
+            "peakOverNoise": 21.834752642825244
+          },
+          {
+            "alongUnits": 58.84615384615385,
+            "heightUnits": -0.49985061675269027,
+            "widthUnits": 8.85383335514498,
+            "peakOverNoise": 18.34126497104426
+          },
+          {
+            "alongUnits": 65.76923076923077,
+            "heightUnits": -2.6974345301421736,
+            "widthUnits": 8.850359810119723,
+            "peakOverNoise": 14.64174875116669
+          },
+          {
+            "alongUnits": 72.6923076923077,
+            "heightUnits": -1.8221537936284653,
+            "widthUnits": 8.76225544613872,
+            "peakOverNoise": 12.982187425770533
+          },
+          {
+            "alongUnits": 79.61538461538461,
+            "heightUnits": -1.5309768591323267,
+            "widthUnits": 8.87881340894656,
+            "peakOverNoise": 11.13541391268518
+          },
+          {
+            "alongUnits": 86.53846153846155,
+            "heightUnits": -2.465474303952456,
+            "widthUnits": 8.743698823536917,
+            "peakOverNoise": 8.929249255841748
+          },
+          {
+            "alongUnits": 93.46153846153847,
+            "heightUnits": -2.0081995527954315,
+            "widthUnits": 9.230789286681095,
+            "peakOverNoise": 7.625579786668371
+          },
+          {
+            "alongUnits": 100.38461538461539,
+            "heightUnits": -2.1261936714581755,
+            "widthUnits": 9.189429369109366,
+            "peakOverNoise": 6.3404014177554995
+          },
+          {
+            "alongUnits": 107.3076923076923,
+            "heightUnits": -2.0086759077131293,
+            "widthUnits": 7.5825242788286475,
+            "peakOverNoise": 6.251441549379876
+          }
+        ],
+        "sideBrightness": {
+          "positive": 2102.8043450168334,
+          "negative": 1826.4590020868927,
+          "ratio": 1.151301147528738
+        },
+        "iterations": 11,
+        "published": {
+          "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+          "url": "https://arxiv.org/abs/2401.05271",
+          "inclinationDeg": 89,
+          "positionAngleDeg": 29.6,
+          "toleranceDeg": 2
+        },
+        "differences": {
+          "positionAngleDeg": 1.112395286081835
+        },
+        "reconstruction": {
+          "path": "reconstruction-contrast.json",
+          "method": {
+            "name": "axial-symmetry emission inference",
+            "paper": "Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216",
+            "implementation": "labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts",
+            "command": "node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc",
+            "axis": [
+              -0.8596108585190313,
+              -0.5106511386707384,
+              0.017452406437283376
+            ],
+            "center": [
+              77.5,
+              77.5,
+              77.5
+            ],
+            "binWidthVoxels": 1,
+            "tau": 0.001,
+            "iterations": 200,
+            "weights": "one for pixels with displayed data, zero under the inner edge and beyond the footprint; a voxel seen only through the blank inside the inner edge takes its group mean, and one seen only beyond the footprint stays empty"
+          },
+          "checks": {
+            "relativeProjectionError": [
+              0.0825,
+              0.0992,
+              0.1178
+            ],
+            "voxelsFilledFromGroups": [
+              299082,
+              299082,
+              299082
+            ],
+            "groupsWithNoObservedVoxel": [
+              8843,
+              8843,
+              8843
+            ],
+            "weightedPixels": 10815,
+            "pixels": 24336,
+            "tangentShare": [
+              {
+                "projectedUnits": 53.99545356022818,
+                "widthUnits": 20,
+                "reconstructed": 0.47985199915780885,
+                "extrusion": 0.3717948717948718
+              },
+              {
+                "projectedUnits": 62.14636546579955,
+                "widthUnits": 20,
+                "reconstructed": 0.5286652549246322,
+                "extrusion": 0.3974358974358974
+              },
+              {
+                "projectedUnits": 87.00491165211936,
+                "widthUnits": 20,
+                "reconstructed": 0.7906324411542254,
+                "extrusion": 0.46153846153846156
+              }
+            ]
+          },
+          "axis": [
+            -0.8596108585190313,
+            -0.5106511386707384,
+            0.017452406437283376
+          ],
+          "inclinationDeg": 89,
+          "nearSidePositionAngleDeg": 300
+        },
+        "exposureGain": 0.03636358971018223,
+        "topAlpha": 0.5,
+        "faceOnOpacity": {
+          "drawnColumns": 4927,
+          "median": 0.23452471460671176,
+          "p90": 0.3968628698886715,
+          "max": 0.49688522597173423
+        },
+        "droppedShare": [
+          0,
+          0,
+          0
+        ],
+        "filledVoxels": 285664
+      },
+      "colour": {
+        "geometry": "edge-on",
+        "bands": [
+          {
+            "band": "HST-ACS-HRC-F435W",
+            "mosaic": "beta-pictoris-9987-f435w-roll1_drz.fits",
+            "sha256": "718dbab23e402848968acb25779935ef12f6461ea5efc4551f360a7b29e7468b",
+            "observed": "2003-10-01",
+            "starRaDecDeg": null,
+            "starPixel": [
+              757.5212475993283,
+              792.8277298144411
+            ],
+            "mosaicArcsecPerPixel": 0.025000000372528974,
+            "background": 0.021803125739097595,
+            "noise": 0.01934911083765328,
+            "backgroundPixels": 316049,
+            "unit": "ELECTRONS/S"
+          },
+          {
+            "band": "HST-ACS-HRC-F435W",
+            "mosaic": "beta-pictoris-9987-f435w-roll2_drz.fits",
+            "sha256": "2432198ba4ebbbde4704c943fab093ca96d992fa0457701a435e9c3d86a6108f",
+            "observed": "2003-10-01",
+            "starRaDecDeg": null,
+            "starPixel": [
+              695.6184546670447,
+              720.8202763476017
+            ],
+            "mosaicArcsecPerPixel": 0.025000000372528974,
+            "background": 0.021533994004130363,
+            "noise": 0.019173675980977713,
+            "backgroundPixels": 315811,
+            "unit": "ELECTRONS/S"
+          },
+          {
+            "band": "HST-ACS-HRC-F606W",
+            "mosaic": "beta-pictoris-9987-f606w-roll1_drz.fits",
+            "sha256": "9b1db256a6a6f96208a469baf5d9ab77686ed077b7fc1d78e6bb5eaba48b8d1a",
+            "observed": "2003-10-01",
+            "starRaDecDeg": null,
+            "starPixel": [
+              755.2503952518193,
+              794.2993288342093
+            ],
+            "mosaicArcsecPerPixel": 0.025000000372528974,
+            "background": 0.045657407492399216,
+            "noise": 0.036220184821262956,
+            "backgroundPixels": 316163,
+            "unit": "ELECTRONS/S"
+          },
+          {
+            "band": "HST-ACS-HRC-F606W",
+            "mosaic": "beta-pictoris-9987-f606w-roll2_drz.fits",
+            "sha256": "78fc1611be1de128b04a675648f0494c272a837898255df89585bc3b6b159a3b",
+            "observed": "2003-10-01",
+            "starRaDecDeg": null,
+            "starPixel": [
+              693.8766977795309,
+              722.0323703731033
+            ],
+            "mosaicArcsecPerPixel": 0.025000000372528957,
+            "background": 0.04523662105202675,
+            "noise": 0.03628923757150769,
+            "backgroundPixels": 315872,
+            "unit": "ELECTRONS/S"
+          },
+          {
+            "band": "HST-ACS-HRC-F814W",
+            "mosaic": "beta-pictoris-9987-f814w-roll1_drz.fits",
+            "sha256": "8707cc2f880231e9391d13f13f2ab868fdbe963b9023d140c38bb73262a973ce",
+            "observed": "2003-10-01",
+            "starRaDecDeg": null,
+            "starPixel": [
+              756.6163102397518,
+              794.9669150046424
+            ],
+            "mosaicArcsecPerPixel": 0.025000000372528974,
+            "background": 0.023896265774965286,
+            "noise": 0.021054496986418963,
+            "backgroundPixels": 315970,
+            "unit": "ELECTRONS/S"
+          },
+          {
+            "band": "HST-ACS-HRC-F814W",
+            "mosaic": "beta-pictoris-9987-f814w-roll2_drz.fits",
+            "sha256": "39698541190011103166592c3a06e8fe10617ff41c41a93f64566aad6fa8f074",
+            "observed": "2003-10-01",
+            "starRaDecDeg": null,
+            "starPixel": [
+              695.516946868887,
+              722.5133434999726
+            ],
+            "mosaicArcsecPerPixel": 0.025000000372528957,
+            "background": 0.0245697982609272,
+            "noise": 0.021702651147544383,
+            "backgroundPixels": 315640,
+            "unit": "ELECTRONS/S"
+          }
+        ],
+        "channels": {
+          "red": [
+            "HST-ACS-HRC-F814W"
+          ],
+          "green": [
+            "HST-ACS-HRC-F606W"
+          ],
+          "blue": [
+            "HST-ACS-HRC-F435W"
+          ]
+        },
+        "stellarFluxJy": {
+          "HST-ACS-HRC-F435W": 284446110.7447908,
+          "HST-ACS-HRC-F606W": 681082936.7676408,
+          "HST-ACS-HRC-F814W": 293494522.22697985
+        },
+        "stellarFluxSource": "Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colours rest on, with zero-point errors under 2%",
+        "stretch": {
+          "a": 10,
+          "top": 6.3,
+          "source": "Stated, not fitted: the top is the 99.5th percentile of the three channels within 12 au of the midplane beyond the inner edge (6.26 in MJy/sr-per-Jy units), and a = 10 is the display's log strength, the same as the other lenses'."
+        },
+        "registration": null,
+        "bandMidplanes": {
+          "HST-ACS-HRC-F435W": {
+            "positionAngleDeg": 29.85410911135756,
+            "starOffsetUnits": -0.8192621613182322,
+            "ridgeResidualUnits": 2.156751187922098
+          },
+          "HST-ACS-HRC-F606W": {
+            "positionAngleDeg": 29.611399002270304,
+            "starOffsetUnits": -2.021198257659626,
+            "ridgeResidualUnits": 2.6772995390374126
+          },
+          "HST-ACS-HRC-F814W": {
+            "positionAngleDeg": 29.90070818947592,
+            "starOffsetUnits": 0.6062009643677926,
+            "ridgeResidualUnits": 2.302819947875605
+          }
+        },
+        "noiseFade": {
+          "fromNoise": 1,
+          "toNoise": 3,
+          "source": "Stated, a display choice, as for the other lenses: a column fades in as its brightness rises from one to three times the per-pixel noise measured 10 to 13 arcseconds out."
+        },
+        "innerMaskUnits": 29.452065578306275,
+        "midplaneHalfHeightUnits": 12,
+        "lightEndsUnits": 135,
+        "lightEnds": {},
+        "coverageEndsUnits": 161.56790134315256,
+        "midplaneProfile": [
+          {
+            "alongUnits": -133.26923076923077,
+            "median": 0.29270702600479126,
+            "samples": 28
+          },
+          {
+            "alongUnits": -129.80769230769232,
+            "median": 0.37307974696159363,
+            "samples": 26
+          },
+          {
+            "alongUnits": -126.34615384615385,
+            "median": 0.3764627277851105,
+            "samples": 29
+          },
+          {
+            "alongUnits": -122.88461538461539,
+            "median": 0.42434239387512207,
+            "samples": 28
+          },
+          {
+            "alongUnits": -119.42307692307693,
+            "median": 0.44943010807037354,
+            "samples": 28
+          },
+          {
+            "alongUnits": -115.96153846153847,
+            "median": 0.4982631206512451,
+            "samples": 27
+          },
+          {
+            "alongUnits": -112.5,
+            "median": 0.5586347579956055,
+            "samples": 28
+          },
+          {
+            "alongUnits": -109.03846153846155,
+            "median": 0.6261693239212036,
+            "samples": 27
+          },
+          {
+            "alongUnits": -105.57692307692308,
+            "median": 0.6939209699630737,
+            "samples": 28
+          },
+          {
+            "alongUnits": -102.11538461538461,
+            "median": 0.7626305818557739,
+            "samples": 28
+          },
+          {
+            "alongUnits": -98.65384615384616,
+            "median": 0.8437736630439758,
+            "samples": 28
+          },
+          {
+            "alongUnits": -95.1923076923077,
+            "median": 0.9178918600082397,
+            "samples": 28
+          },
+          {
+            "alongUnits": -91.73076923076924,
+            "median": 0.9714996814727783,
+            "samples": 28
+          },
+          {
+            "alongUnits": -88.26923076923077,
+            "median": 1.1041301488876343,
+            "samples": 28
+          },
+          {
+            "alongUnits": -84.8076923076923,
+            "median": 1.1305997371673584,
+            "samples": 27
+          },
+          {
+            "alongUnits": -81.34615384615385,
+            "median": 1.2272214889526367,
+            "samples": 28
+          },
+          {
+            "alongUnits": -77.88461538461539,
+            "median": 1.3943644762039185,
+            "samples": 27
+          },
+          {
+            "alongUnits": -74.42307692307692,
+            "median": 1.4505596160888672,
+            "samples": 28
+          },
+          {
+            "alongUnits": -70.96153846153847,
+            "median": 1.5853790044784546,
+            "samples": 28
+          },
+          {
+            "alongUnits": -67.5,
+            "median": 1.681078553199768,
+            "samples": 29
+          },
+          {
+            "alongUnits": -64.03846153846155,
+            "median": 1.852658748626709,
+            "samples": 27
+          },
+          {
+            "alongUnits": -60.57692307692308,
+            "median": 1.847761869430542,
+            "samples": 28
+          },
+          {
+            "alongUnits": -57.11538461538462,
+            "median": 1.9974919557571411,
+            "samples": 27
+          },
+          {
+            "alongUnits": -53.65384615384615,
+            "median": 2.051213502883911,
+            "samples": 28
+          },
+          {
+            "alongUnits": -50.19230769230769,
+            "median": 2.174555540084839,
+            "samples": 27
+          },
+          {
+            "alongUnits": -46.73076923076923,
+            "median": 2.437905788421631,
+            "samples": 28
+          },
+          {
+            "alongUnits": -43.269230769230774,
+            "median": 2.6681718826293945,
+            "samples": 29
+          },
+          {
+            "alongUnits": -39.80769230769231,
+            "median": 2.860844850540161,
+            "samples": 28
+          },
+          {
+            "alongUnits": -36.34615384615385,
+            "median": 3.3610644340515137,
+            "samples": 27
+          },
+          {
+            "alongUnits": -32.88461538461539,
+            "median": 3.7187604904174805,
+            "samples": 28
+          },
+          {
+            "alongUnits": -29.423076923076923,
+            "median": 3.8298606872558594,
+            "samples": 28
+          },
+          {
+            "alongUnits": -25.961538461538463,
+            "median": 3.921135663986206,
+            "samples": 27
+          },
+          {
+            "alongUnits": -22.5,
+            "median": 6.003835678100586,
+            "samples": 23
+          },
+          {
+            "alongUnits": -19.03846153846154,
+            "median": 8.004403114318848,
+            "samples": 12
+          },
+          {
+            "alongUnits": -15.576923076923077,
+            "median": 10.251209259033203,
+            "samples": 1
+          },
+          {
+            "alongUnits": 12.115384615384617,
+            "median": 9.665814399719238,
+            "samples": 1
+          },
+          {
+            "alongUnits": 15.576923076923077,
+            "median": 12.992918014526367,
+            "samples": 7
+          },
+          {
+            "alongUnits": 19.03846153846154,
+            "median": 10.37106990814209,
+            "samples": 20
+          },
+          {
+            "alongUnits": 22.5,
+            "median": 8.289487838745117,
+            "samples": 28
+          },
+          {
+            "alongUnits": 25.961538461538463,
+            "median": 6.102224349975586,
+            "samples": 27
+          },
+          {
+            "alongUnits": 29.423076923076923,
+            "median": 4.7827630043029785,
+            "samples": 28
+          },
+          {
+            "alongUnits": 32.88461538461539,
+            "median": 3.8507769107818604,
+            "samples": 27
+          },
+          {
+            "alongUnits": 36.34615384615385,
+            "median": 3.550720691680908,
+            "samples": 28
+          },
+          {
+            "alongUnits": 39.80769230769231,
+            "median": 3.1587941646575928,
+            "samples": 28
+          },
+          {
+            "alongUnits": 43.269230769230774,
+            "median": 2.6865437030792236,
+            "samples": 29
+          },
+          {
+            "alongUnits": 46.73076923076923,
+            "median": 2.460252523422241,
+            "samples": 27
+          },
+          {
+            "alongUnits": 50.19230769230769,
+            "median": 2.2203450202941895,
+            "samples": 28
+          },
+          {
+            "alongUnits": 53.65384615384615,
+            "median": 2.0117220878601074,
+            "samples": 27
+          },
+          {
+            "alongUnits": 57.11538461538462,
+            "median": 1.9383947849273682,
+            "samples": 28
+          },
+          {
+            "alongUnits": 60.57692307692308,
+            "median": 1.7557896375656128,
+            "samples": 28
+          },
+          {
+            "alongUnits": 64.03846153846155,
+            "median": 1.6710916757583618,
+            "samples": 27
+          },
+          {
+            "alongUnits": 67.5,
+            "median": 1.610336184501648,
+            "samples": 29
+          },
+          {
+            "alongUnits": 70.96153846153847,
+            "median": 1.5235109329223633,
+            "samples": 28
+          },
+          {
+            "alongUnits": 74.42307692307692,
+            "median": 1.3636720180511475,
+            "samples": 28
+          },
+          {
+            "alongUnits": 77.88461538461539,
+            "median": 1.239773154258728,
+            "samples": 27
+          },
+          {
+            "alongUnits": 81.34615384615385,
+            "median": 1.1554505825042725,
+            "samples": 28
+          },
+          {
+            "alongUnits": 84.8076923076923,
+            "median": 1.0638426542282104,
+            "samples": 27
+          },
+          {
+            "alongUnits": 88.26923076923077,
+            "median": 0.9562612175941467,
+            "samples": 27
+          },
+          {
+            "alongUnits": 91.73076923076924,
+            "median": 0.8679053783416748,
+            "samples": 27
+          },
+          {
+            "alongUnits": 95.1923076923077,
+            "median": 0.7842883467674255,
+            "samples": 29
+          },
+          {
+            "alongUnits": 98.65384615384616,
+            "median": 0.7977174520492554,
+            "samples": 28
+          },
+          {
+            "alongUnits": 102.11538461538461,
+            "median": 0.7124658226966858,
+            "samples": 28
+          },
+          {
+            "alongUnits": 105.57692307692308,
+            "median": 0.6567284464836121,
+            "samples": 27
+          },
+          {
+            "alongUnits": 109.03846153846155,
+            "median": 0.6028634905815125,
+            "samples": 28
+          },
+          {
+            "alongUnits": 112.5,
+            "median": 0.538779616355896,
+            "samples": 28
+          },
+          {
+            "alongUnits": 115.96153846153847,
+            "median": 0.4987158179283142,
+            "samples": 27
+          },
+          {
+            "alongUnits": 119.42307692307693,
+            "median": 0.4552120864391327,
+            "samples": 28
+          },
+          {
+            "alongUnits": 122.88461538461539,
+            "median": 0.4024011194705963,
+            "samples": 28
+          },
+          {
+            "alongUnits": 126.34615384615385,
+            "median": 0.3781629204750061,
+            "samples": 29
+          },
+          {
+            "alongUnits": 129.80769230769232,
+            "median": 0.34020566940307617,
+            "samples": 27
+          },
+          {
+            "alongUnits": 133.26923076923077,
+            "median": 0.3052866458892822,
+            "samples": 28
+          }
+        ],
+        "positionAngleDeg": 29.860528164539573,
+        "positionAngleSpreadDeg": 0.1303137677084203,
+        "starOffsetUnits": -1.1363554811976695,
+        "ridgeResidualUnits": 2.177004923593713,
+        "midplaneBins": [
+          {
+            "alongUnits": -128.0769230769231,
+            "heightUnits": 1.5611793705347872,
+            "widthUnits": 5.988443243853738,
+            "peakOverNoise": 355.5544525475163
+          },
+          {
+            "alongUnits": -121.15384615384616,
+            "heightUnits": 1.063171017279769,
+            "widthUnits": 6.133818053369386,
+            "peakOverNoise": 434.77269798123905
+          },
+          {
+            "alongUnits": -114.23076923076924,
+            "heightUnits": 0.6494480853745332,
+            "widthUnits": 5.940689079403487,
+            "peakOverNoise": 503.48983823973725
+          },
+          {
+            "alongUnits": -107.3076923076923,
+            "heightUnits": 0.5567695455530808,
+            "widthUnits": 6.054664589752563,
+            "peakOverNoise": 590.5730372605449
+          },
+          {
+            "alongUnits": -100.38461538461539,
+            "heightUnits": 0.1880467740785816,
+            "widthUnits": 5.955555761610191,
+            "peakOverNoise": 665.1072497919419
+          },
+          {
+            "alongUnits": -93.46153846153847,
+            "heightUnits": 0.06155812929666182,
+            "widthUnits": 6.092552430057038,
+            "peakOverNoise": 772.8595013955323
+          },
+          {
+            "alongUnits": -86.53846153846155,
+            "heightUnits": -0.770805814416579,
+            "widthUnits": 6.005545434438824,
+            "peakOverNoise": 937.9623089433434
+          },
+          {
+            "alongUnits": -79.61538461538461,
+            "heightUnits": -1.5674126466965406,
+            "widthUnits": 5.972327765677254,
+            "peakOverNoise": 1084.7101223734962
+          },
+          {
+            "alongUnits": -72.6923076923077,
+            "heightUnits": -1.7791827930634834,
+            "widthUnits": 5.970289955198259,
+            "peakOverNoise": 1304.8610518633848
+          },
+          {
+            "alongUnits": -65.76923076923077,
+            "heightUnits": -1.8627102917058234,
+            "widthUnits": 5.858280241761928,
+            "peakOverNoise": 1442.4014344192683
+          },
+          {
+            "alongUnits": -58.84615384615385,
+            "heightUnits": -1.7676455423906894,
+            "widthUnits": 5.901773823939231,
+            "peakOverNoise": 1625.4413481662161
+          },
+          {
+            "alongUnits": -51.92307692307693,
+            "heightUnits": -0.9987357992715911,
+            "widthUnits": 5.940362941330557,
+            "peakOverNoise": 1864.017743022434
+          },
+          {
+            "alongUnits": -45,
+            "heightUnits": -0.769182416581552,
+            "widthUnits": 5.978523996693395,
+            "peakOverNoise": 2294.291214011414
+          },
+          {
+            "alongUnits": -38.07692307692308,
+            "heightUnits": -0.9233132723147542,
+            "widthUnits": 5.928794049243224,
+            "peakOverNoise": 3050.7351295693047
+          },
+          {
+            "alongUnits": -31.153846153846153,
+            "heightUnits": 0.07906226177410391,
+            "widthUnits": 6.26449220755116,
+            "peakOverNoise": 3730.0568912450676
+          },
+          {
+            "alongUnits": -24.230769230769234,
+            "heightUnits": -11.545277874662476,
+            "widthUnits": 0,
+            "peakOverNoise": 1307.6942595038834
+          },
+          {
+            "alongUnits": 31.153846153846153,
+            "heightUnits": -2.4120827594181318,
+            "widthUnits": 6.129421556032192,
+            "peakOverNoise": 4169.530614261489
+          },
+          {
+            "alongUnits": 38.07692307692308,
+            "heightUnits": -0.29191209355327286,
+            "widthUnits": 6.071895689185701,
+            "peakOverNoise": 3054.0605821748195
+          },
+          {
+            "alongUnits": 45,
+            "heightUnits": -0.5318828718416133,
+            "widthUnits": 5.930020059285303,
+            "peakOverNoise": 2284.19709676251
+          },
+          {
+            "alongUnits": 51.92307692307693,
+            "heightUnits": 0.3354864254561507,
+            "widthUnits": 5.9937588005180045,
+            "peakOverNoise": 1890.7860163167204
+          },
+          {
+            "alongUnits": 58.84615384615385,
+            "heightUnits": 0.18937504397237026,
+            "widthUnits": 6.0800813897326025,
+            "peakOverNoise": 1616.1679904509
+          },
+          {
+            "alongUnits": 65.76923076923077,
+            "heightUnits": 0.2974588872297861,
+            "widthUnits": 5.9373678286325084,
+            "peakOverNoise": 1374.0452452620243
+          },
+          {
+            "alongUnits": 72.6923076923077,
+            "heightUnits": -0.3833491083909829,
+            "widthUnits": 6.1398944516673515,
+            "peakOverNoise": 1155.6432540978
+          },
+          {
+            "alongUnits": 79.61538461538461,
+            "heightUnits": -0.44515684053678606,
+            "widthUnits": 6.066111804406238,
+            "peakOverNoise": 996.4788018176803
+          },
+          {
+            "alongUnits": 86.53846153846155,
+            "heightUnits": -1.3133411733923044,
+            "widthUnits": 6.006781364726143,
+            "peakOverNoise": 828.890861909022
+          },
+          {
+            "alongUnits": 93.46153846153847,
+            "heightUnits": -1.2567555281123752,
+            "widthUnits": 6.094348837243637,
+            "peakOverNoise": 730.6446548633221
+          },
+          {
+            "alongUnits": 100.38461538461539,
+            "heightUnits": -1.7681681063174994,
+            "widthUnits": 6.13749242961832,
+            "peakOverNoise": 616.1252534188843
+          },
+          {
+            "alongUnits": 107.3076923076923,
+            "heightUnits": -1.80520129535241,
+            "widthUnits": 6.074915219587604,
+            "peakOverNoise": 536.1176970695552
+          },
+          {
+            "alongUnits": 114.23076923076924,
+            "heightUnits": -2.118464160283864,
+            "widthUnits": 6.074274932950214,
+            "peakOverNoise": 472.8215082193462
+          },
+          {
+            "alongUnits": 121.15384615384616,
+            "heightUnits": -2.025762263880862,
+            "widthUnits": 6.113657789135166,
+            "peakOverNoise": 406.6514755039377
+          },
+          {
+            "alongUnits": 128.0769230769231,
+            "heightUnits": -2.641519380032296,
+            "widthUnits": 6.016235937710319,
+            "peakOverNoise": 342.55099236515724
+          }
+        ],
+        "sideBrightness": {
+          "positive": 1262.3897783607244,
+          "negative": 1257.525563672185,
+          "ratio": 1.0038680841400434
+        },
+        "iterations": 4,
+        "published": {
+          "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+          "url": "https://arxiv.org/abs/2401.05271",
+          "inclinationDeg": 89,
+          "positionAngleDeg": 29.6,
+          "toleranceDeg": 2
+        },
+        "differences": {
+          "positionAngleDeg": 0.26052816453955074
+        },
+        "reconstruction": {
+          "path": "reconstruction-colour.json",
+          "method": {
+            "name": "axial-symmetry emission inference",
+            "paper": "Wenger, Lorenz & Magnor (2013), Computer Graphics Forum 32, 93; doi:10.1111/cgf.12216",
+            "implementation": "labs/nebula/packages/reconstruction/src/methods/symmetry/solver.ts",
+            "command": "node --experimental-strip-types labs/nebula/run.mts reconstruct-circumstellar beta-pictoris-disc",
+            "axis": [
+              -0.8671078732756862,
+              -0.49781457352398245,
+              0.017452406437283376
+            ],
+            "center": [
+              77.5,
+              77.5,
+              77.5
+            ],
+            "binWidthVoxels": 1,
+            "tau": 0.001,
+            "iterations": 200,
+            "weights": "one for pixels with displayed data, zero under the inner edge and beyond the footprint; a voxel seen only through the blank inside the inner edge takes its group mean, and one seen only beyond the footprint stays empty"
+          },
+          "checks": {
+            "relativeProjectionError": [
+              0.0799,
+              0.0811,
+              0.0835
+            ],
+            "voxelsFilledFromGroups": [
+              122110,
+              122110,
+              122110
+            ],
+            "groupsWithNoObservedVoxel": [
+              471,
+              471,
+              471
+            ],
+            "weightedPixels": 23243,
+            "pixels": 24336,
+            "tangentShare": [
+              {
+                "projectedUnits": 40.5,
+                "widthUnits": 20,
+                "reconstructed": 0.4648729274446488,
+                "extrusion": 0.3333333333333333
+              },
+              {
+                "projectedUnits": 67.5,
+                "widthUnits": 20,
+                "reconstructed": 0.5388521789296992,
+                "extrusion": 0.41025641025641024
+              },
+              {
+                "projectedUnits": 94.5,
+                "widthUnits": 20,
+                "reconstructed": 0.5805117062088729,
+                "extrusion": 0.47435897435897434
+              }
+            ]
+          },
+          "axis": [
+            -0.8671078732756862,
+            -0.49781457352398245,
+            0.017452406437283376
+          ],
+          "inclinationDeg": 89,
+          "nearSidePositionAngleDeg": 300
+        },
+        "exposureGain": 0.1099070923360088,
+        "topAlpha": 0.5,
+        "faceOnOpacity": {
+          "drawnColumns": 15913,
+          "median": 0.05109212144574138,
+          "p90": 0.28439516050465574,
+          "max": 0.49222236121332574
+        },
+        "droppedShare": [
+          0,
+          0,
+          0
+        ],
+        "filledVoxels": 1606289
+      }
+    }
+  },
+  "models": {
+    "visible": "Fitted edge-on disc. The deposited image (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits) is read about its star at the array centre with 50.72 mas pixels, north up and east left (The deposit's ReadMe puts the star at the array's centre; the plate scale, 50.72 mas per pixel, is the STIS value Ren et al. (2023, Section 2) state. The orientation is measured here: the disc's midplane lies at position angle 29.8 degrees north up and east left, against 29.6 +/- 1.1 in Rebollido et al. (2024), where a mirror would put it at 150.2; and the half of the image's brightness that is not symmetric about the star correlates with the registered JWST F210M and F410M images at +0.21 to +0.47 in every window from 49 to 80 au, where a 180-degree turn would give the opposite sign.), onto a sky plane in astronomical units; its background, the median in the 3.6–4.1″ annulus, is subtracted, and it is shown in its own counts per pixel per second in every channel. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 29.60° (published 29.6°) with the star -1.5 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0676,0.0676,0.0676] (relative error by channel); density-visible.ktx2 and reconstruction-visible.json record it.",
+    "contrast": "Fitted edge-on disc. Each of the 2 mosaics is read about the star through its own WCS onto a sky plane in astronomical units; the star is placed by planet beta-pictoris-b's orbit. Each band's background, the median in the 4–5.5″ annulus, is subtracted, and the band is divided by the star's own flux in it (Kammerer et al. (2024, AJ 168, 51, arXiv:2405.18422), Table 2: planet b's MCRDI flux and its contrast to a stellar model atmosphere of Beta Pictoris give the star's flux, F_star = F_b 10^(0.4 dmag): F210M 6.10e-3 Jy at 9.08 mag is 26.14 Jy. F410M, which that programme did not observe, is interpolated in log flux and log wavelength between its F335M (7.85e-3 Jy, 7.91 mag: 11.45 Jy) and F444W (6.06e-3 Jy, 7.68 mag: 7.15 Jy) at the pivot wavelengths 3.362, 4.082 and 4.421 micrometres: 8.20 Jy.), its contrast. The channels: red F410M, green F210M + F410M, blue F210M. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 30.71° (published 29.6°) with the star -0.9 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0825,0.0992,0.1178] (relative error by channel); density-contrast.ktx2 and reconstruction-contrast.json record it.",
+    "colour": "Fitted edge-on disc. Each band's two telescope rolls, PSF-subtracted and drizzled north up here (tools/objects/hst/psf-subtract.mts beta-pictoris-9987, the reference star divided by the flux ratio the paper states), are read about the star where that subtraction found it, through each product's own WCS, onto a sky plane in astronomical units. Each roll's background, the median in the 10–13″ annulus, is subtracted; the rolls are averaged, each one standing alone where the other is blank; and the band is divided by the star's own count rate in it, F435W 2.844e+8 e-/s, F606W 6.811e+8 e-/s, F814W 2.935e+8 e-/s (Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colours rest on, with zero-point errors under 2%; Sirianni et al. (2005, PASP 117, 1049; arXiv:astro-ph/0507614), Table 11: HRC VEGAMAG zero points 25.185, 25.893 and 24.849 for F435W, F606W and F814W, for the total count rate in electrons per second (Section 7), the zero points Golimowski et al. (2006) cite for their magnitudes), its contrast. The channels: red F814W, green F606W, blue F435W. The midplane is measured on the mean of the channels: the ridge of each vertical profile along a trial direction, a line through the ridges, the direction turned until it settles, at position angle 29.86° (published 29.6°) with the star -1.1 au from the line. The depth is reconstructed, not fitted to a shape: each displayed channel is solved for emission in three dimensions by the axially symmetric method of Wenger, Lorenz & Magnor (2013) as the lab implements it (labs/nebula/packages/reconstruction, methods/symmetry), with the symmetry axis the disc's normal, tilted 1.0° from the sky toward the north-west side, voxels grouped by their height above the midplane and their radius about that axis, and pixels with no data given no weight. The volume reprojects to the image to [0.0799,0.0811,0.0835] (relative error by channel); density-colour.ktx2 and reconstruction-colour.json record it."
+  },
+  "limitations": [
+    "No third axis was observed. The depth is reconstructed by assuming the disc is symmetric about its normal: each ring of radius and height carries one emission, fitted so the volume reprojects to the image. Real asymmetries the image shows are kept where the fit allows, but anything the symmetry cannot place is not measured.",
+    "Which side of the midplane tilts toward the observer is a stated convention; an image this close to edge-on barely changes with it.",
+    "Where no pixel sees a ring of radius and height, nothing constrains it and it stays empty: inside each lens’s inner edge the disc is not drawn.",
+    "Inside each lens’s inner edge the image is not data and is not drawn; the star and planets are their own spheres.",
+    "Opacity is the renderer’s convention, not the dust’s: brightness and blocking are one number in its emission model, and the real disc blocks a small fraction of a percent of what is behind it.",
+    "Nothing finer than an image’s pixels or the grid’s cells is in the drawn volume.",
+    "colour: the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three lenses share, so switching dataset does not move the object, and its 1.7 au cells are what the inner lenses need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn.",
+    "visible: the HST/STIS behind its coronagraph image is the authors’ own reduction (Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits), combined from observations made in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), and carries no sky coordinates; its orientation is stated and checked, not read from a header. Close to the star its PSF subtraction leaves light off the disc too, which is drawn with the disc. It is one visible filter shown in grey, brightness only.",
+    "contrast: the colours are the disc’s contrast to the star in F410M and F210M, mapped to blue and red by wavelength: infrared colours, not what an eye would see. MAST’s coronagraphy products are drawn as the pipeline made them, and the stellar flux the contrast is computed against is a model atmosphere.",
+    "colour: the colours are the disc’s contrast to the star in F435W, F606W, F814W, blue, green and red, which the eye would see as its colour against the star’s: a white disc scatters like the star shines. The reference star’s light was removed at the flux ratio the paper states, not at the scale that best cancels it here, and what that leaves near the star and along the occulting finger is drawn with the disc (beta-pictoris-9987.psf-subtraction.json records the scale a free fit would choose)."
+  ]
+}

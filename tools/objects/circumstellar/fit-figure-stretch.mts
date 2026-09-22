@@ -27,7 +27,9 @@ export const stretchOf = (a: number, top: number) => (value: number) => Math.log
 
 /** The reflectance channels on a square grid about the star: each band over its star's flux, averaged by channel. */
 export async function reflectanceChannels(options: { program: string; channels: Readonly<Record<(typeof CHANNELS)[number], readonly string[]>>; stellarFluxJy: Readonly<Record<string, number>>;
-  distancePc: number; halfUnits: number; size: number; backgroundAnnulusArcsec: readonly [number, number]; downloads: string; sources: readonly string[] }) {
+  distancePc: number; halfUnits: number; size: number; backgroundAnnulusArcsec: readonly [number, number]; downloads: string; sources: readonly string[];
+  /** Where the star lies in a mosaic, when its target position is not trusted: returns the ICRS position to read the mosaic about. */
+  starPosition?: (band: string, mosaic: string, primary: Record<string, unknown>) => Promise<readonly [number, number]> }) {
   const { program } = await readImagingProgram(options.program), planes = new Map<string, Awaited<ReturnType<typeof readSkyPlane>>>();
   const bands = [...new Set(CHANNELS.flatMap(channel => options.channels[channel]))], entries = [];
   for (const band of bands) {
@@ -36,7 +38,8 @@ export async function reflectanceChannels(options: { program: string; channels: 
     const flux = options.stellarFluxJy[band];
     if (!(flux! > 0)) throw new Error(`No stellar flux for ${band}.`);
     const mosaic = await mastFile(entry.level3, resolve(options.downloads, 'observations'), options.sources), primary = (await readFitsFileHdus(mosaic))[0]!.header;
-    planes.set(band, await readSkyPlane(mosaic, { starRaDeg: requireFiniteNumber(primary.TARG_RA, 'TARG_RA'), starDecDeg: requireFiniteNumber(primary.TARG_DEC, 'TARG_DEC'),
+    const [starRaDeg, starDecDeg] = options.starPosition ? await options.starPosition(band, mosaic, primary) : [requireFiniteNumber(primary.TARG_RA, 'TARG_RA'), requireFiniteNumber(primary.TARG_DEC, 'TARG_DEC')];
+    planes.set(band, await readSkyPlane(mosaic, { starRaDeg, starDecDeg,
       arcsecPerUnit: 1 / options.distancePc, halfUnits: options.halfUnits, size: options.size, backgroundAnnulusArcsec: options.backgroundAnnulusArcsec }));
     entries.push({ band, entry, mosaic, primary });
   }
