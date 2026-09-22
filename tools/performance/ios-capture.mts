@@ -10,11 +10,15 @@
 // category, sampled after collection before and after the moment; console messages and network requests.
 // Steps drive the simulator with AXe (`brew install cameroncooke/axe/axe`), so input is real touch input.
 // Output: output/performance/ios-captures/<name>-<time>/ with report.json, README.md, native.trace and screenshots.
+// --compare <capture dir> pixelmatches each screenshot against the one of the same name there (a visual change that should
+// not show gives 0 differing pixels) and writes <name>.diff.png. The status-bar clock is pinned so it never differs.
 import { execFile, spawn, type ChildProcess } from 'node:child_process';
 import { mkdir, readFile, writeFile, readdir, realpath } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
+import pixelmatch from 'pixelmatch';
+import sharp from 'sharp';
 import type { SourceMapConsumer } from 'source-map-js';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 import { readSourceMap } from './trace-brief.mts';
@@ -170,6 +174,19 @@ function inspector(socketUrl: string) {
     else post(message);
   });
   return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => socket.close() };
+}
+
+/** Waits until the page has loaded and the app reports its body ready (window.__cssEarth.ready, as the other capture tools
+ * wait for) or failed. Evaluations during the navigation itself can fail; they count as not ready. */
+async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120_000): Promise<void> {
+  const expression = "document.readyState === 'complete' && Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error))";
+  const deadline = Date.now() + timeoutMs;
+  while (Date.now() < deadline) {
+    const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
+    if (reply && isRecord(reply.result) && isRecord(reply.result.result) && reply.result.result.value === true) return;
+    await wait(500);
+  }
+  throw new Error(`The page did not report ready within ${timeoutMs / 1000} s.`);
 }
 
 async function memorySample(session: ReturnType<typeof inspector>, events: Message[]) {
@@ -443,6 +460,35 @@ export function summariseTimeProfile(xml: string, limit = 30) {
     self: ms(top(self, limit)), inclusive: ms(top(inclusive, limit)) };
 }
 
+// ---- Pixels ---------------------------------------------------------------------------------------------------------
+
+/** The settings tools/investigations/compare-visual-evidence.mts uses; antialiased pixels count, so 0 means identical. */
+export const PIXEL_SETTINGS = { threshold: 0.1, includeAA: true, alpha: 0.2, diffColor: [255, 0, 0] as [number, number, number] };
+
+/** Differing pixels between two same-sized RGBA images, and the diff image pixelmatch draws. */
+export function comparePixels(a: Uint8Array, b: Uint8Array, width: number, height: number) {
+  if (a.length !== width * height * 4 || b.length !== a.length) throw new RangeError('Screenshots differ in size.');
+  const diff = new Uint8Array(a.length);
+  return { differing: pixelmatch(a, b, diff, width, height, PIXEL_SETTINGS), total: width * height, diff };
+}
+
+async function compareScreenshots(out: string, baseline: string, steps: readonly Step[]) {
+  const decode = async (file: string) => sharp(file).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const screenshots = [];
+  for (const step of steps) {
+    if (!('screenshot' in step)) continue;
+    const name = step.screenshot;
+    const reference = await decode(resolve(baseline, `${name}.png`)).catch(() => null);
+    if (!reference) { screenshots.push({ name, differing: null, total: null }); continue; }
+    const current = await decode(resolve(out, `${name}.png`));
+    const { width, height } = current.info;
+    const { differing, total, diff } = comparePixels(reference.data, current.data, width, height);
+    await sharp(diff, { raw: { width, height, channels: 4 } }).png().toFile(resolve(out, `${name}.diff.png`));
+    screenshots.push({ name, differing, total });
+  }
+  return { baseline: relative(root, baseline), screenshots };
+}
+
 // ---- Capture -------------------------------------------------------------------------------------------------------
 
 function options(args: readonly string[]) {
@@ -453,7 +499,7 @@ function options(args: readonly string[]) {
   if (!stepsFile === !seconds) throw new TypeError('Pass either --steps <file.json> or --seconds <n>.');
   return { name, stepsFile, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache') };
+    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare') };
 }
 
 export async function captureIosMoment(args: readonly string[]) {
@@ -465,6 +511,8 @@ export async function captureIosMoment(args: readonly string[]) {
   const { page, proxy } = await connectProxy(option.port);
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
+  // A fixed status-bar clock keeps screenshots of the same view identical across captures.
+  await run('xcrun', ['simctl', 'status_bar', udid, 'override', '--time', '9:41']);
   const events: Message[] = [], workers = new Map<string, string>();
   let recording = false;
   session.listen((source, message) => {
@@ -485,7 +533,8 @@ export async function captureIosMoment(args: readonly string[]) {
   // Real visits keep Safari's cache; --no-cache measures a cold load (it also refetches repeated images).
   if (option.noCache) await session.send('Network.setResourceCachingDisabled', { disabled: true });
   // --open loads the page in this same tab, so each capture starts from a fresh load in the tab on screen.
-  if (option.open) { workers.clear(); await session.send('Page.navigate', { url: option.open }); await wait(option.settle * 1000); }
+  // --settle then counts from the moment the app reports its body loaded, not from the navigation.
+  if (option.open) { workers.clear(); await session.send('Page.navigate', { url: option.open }); await waitForApp(session); await wait(option.settle * 1000); }
   const location = await session.send('Runtime.evaluate', { expression: 'location.href', returnByValue: true });
   const url = isRecord(location.result) && isRecord(location.result.result) && typeof location.result.result.value === 'string' ? location.result.result.value : page.url;
   await wait(500);
@@ -566,25 +615,30 @@ export async function captureIosMoment(args: readonly string[]) {
     nativeSummary = summariseTimeProfile(stdout);
   } catch (error) { nativeSummary = { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
 
+  const pixels = option.compare ? await compareScreenshots(out, resolve(option.compare), steps) : null;
   const report = {
     schema: 'cssearth-ios-capture@1', name: option.name, url, udid, durationMs, steps: marks, workers: Object.fromEntries(workers),
     sourceMaps: { dist: option.dist, mapped: namer.mapped() }, memoryMb: { before: memoryBefore, after: memoryAfter },
     javascript, timeline, initiators, layers, cpu, console: consoleMessages,
     network: { requests: requests.length, bytes: requests.reduce((sum, request) => sum + request.bytes, 0), largest: requests.sort((a, b) => b.bytes - a.bytes).slice(0, 15) },
-    native: nativeSummary, files: (await readdir(out)).sort(),
+    native: nativeSummary, pixels, files: (await readdir(out)).sort(),
   };
   await writeFile(resolve(out, 'report.json'), JSON.stringify(report, null, 2) + '\n');
   await writeFile(resolve(out, 'README.md'), readme(report));
+  await run('xcrun', ['simctl', 'status_bar', udid, 'clear']).catch(() => undefined);
   return { out, report };
 }
 
 type ReadmeInput = { name: string; url: string; durationMs: number; memoryMb: { before: unknown; after: unknown }; sourceMaps: { mapped: number };
   initiators: Record<string, { label: string; count: number }[]>; layers: unknown;
   javascript: Record<string, ReturnType<typeof summariseSamples>>; timeline: ReturnType<typeof summariseTimeline>; cpu: ReturnType<typeof summariseCpu>;
-  console: readonly { level: string; text: string }[]; network: { requests: number; bytes: number }; native: ReturnType<typeof summariseTimeProfile> | { error: string } };
+  console: readonly { level: string; text: string }[]; network: { requests: number; bytes: number }; native: ReturnType<typeof summariseTimeProfile> | { error: string };
+  pixels: Awaited<ReturnType<typeof compareScreenshots>> | null };
 function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
+    ...(r.pixels ? ['## Pixels against ' + r.pixels.baseline, '', ...r.pixels.screenshots.map(shot => shot.differing === null
+      ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`), ''] : []),
     `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
     '## Composited layers', '', `${JSON.stringify(r.layers).slice(0, 900)}`, '',
     '## Busiest frames (work inside the frame; wall time in brackets)', '', ...r.timeline.longestFrames.map(frame => `- ${frame.ms} ms (${frame.wallMs} ms) at ${frame.atMs} ms: ` +

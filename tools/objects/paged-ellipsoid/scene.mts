@@ -673,9 +673,11 @@ function textureStyle(polygon: RasterPolygon, index: number, seamEdges: Set<numb
       preparedAtlasDimensions(fitted.leafWidth, fitted.leafHeight) +
       `;background-position:${backgroundPosition}` +
       `;background-size:${backgroundSize}`,
+    // A polar cap samples the 256-pixel poles image, so it is rastered at its own size. At the interior shells' scale
+    // WebKit backed each cap with a 1024-pixel layer (36 MB on an iPhone) for no extra detail.
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fitted.matrix,
-      INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE,
+      polygon.polarCap ? 1 : INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
     sourceRect: fitted.sourceRect,
     leafWidth: fitted.leafWidth,
