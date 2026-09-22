@@ -34,7 +34,7 @@ jobs:
           # The gate counts object paths in Git's complete diff; it never reads those objects' data.
           sparse-checkout-cone-mode: false
           sparse-checkout: |
-            /tools/*.mts
+            /tools/**/*.mts
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '22'
