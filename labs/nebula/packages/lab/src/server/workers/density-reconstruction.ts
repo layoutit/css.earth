@@ -124,7 +124,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   await json(resolve(output,'source/validation.json'),validation);
   const volumeSha=await json(resolve(output,'prepared/volume.json'),prepared);
   const resultDescriptor={schema:'cssearth-object@1',id:work.id,type:'density-volume',properties:{volume:frame,
-    preparation:{source:'source/provenance.json',sha256:provenanceSha}},prepared:{format:prepared.format,url:'prepared/volume.json',sha256:volumeSha}};
+    preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),resultDescriptor);
   const referenceLeafIds=data.stacks.flatMap(stack=>stack.leaves.map(leaf=>leaf.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(stack=>({...stack,leaves:stack.leaves.flatMap(leaf=>[leaf,{...leaf,id:'all-light::'+leaf.id}])}))}};
@@ -133,7 +133,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
     parts:[{id:'all-light',label:'Reference cloud',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,
     composition:'One immutable Alignment density cloud; candidate images replace material colors only.'});
   await json(resolve(output,'inspection-object.json'),{...resultDescriptor,properties:{...resultDescriptor.properties,
-    preparation:{source:'source/cloud-parts.json',sha256:catalogueSha}},prepared:{format:prepared.format,url:'prepared/inspection.json',sha256:inspectionSha}});
+    preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
   const artifacts:Record<string,{sha256:string;bytes:number}>={};
   async function collect(directory:string){for(const entry of await readdir(directory,{withFileTypes:true})){
     const path=resolve(directory,entry.name);if(entry.isDirectory())await collect(path);else{const bytes=await readFile(path);artifacts[relative(output,path)]={sha256:sha256(bytes),bytes:bytes.length};}}}

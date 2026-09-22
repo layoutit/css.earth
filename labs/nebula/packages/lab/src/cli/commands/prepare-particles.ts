@@ -118,7 +118,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
     const frame = { ...reference.properties.frame, boundsUnits: target.boundsKpc };
     await json(resolve(objectDirectory, 'object.json'), { schema: 'cssearth-object@1', id: target.id,
       type: 'density-volume', properties: { volume: frame,
-        preparation: { source: 'source/volume.json', sha256: await fileDigest(resolve(sourceDirectory, 'volume.json')) } } });
+        preparation: { source: 'source/volume.json' } } });
     console.log(`PARTICLES_BAKE ${target.id}: ${(100 * provenance.display.massRetention).toFixed(2)}% stellar mass inside display bounds`);
     const baked = spawnSync(process.execPath, [resolve(root, 'tools/objects/dist/prepare-volume.js'), objectDirectory], { stdio: 'inherit' });
     if (baked.error) throw baked.error;
