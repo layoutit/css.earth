@@ -30,7 +30,7 @@ export interface SourcePds3Observation {
   readonly observatory: string; readonly instrument: string; readonly startIso: string; readonly endIso: string;
   readonly filter?: string; readonly centralWavelengthMicrometres?: number; readonly surfaceResolutionKm?: number;
   readonly kind: 'image'; readonly use: string; readonly units: string;
-  readonly sourceFiles: readonly { readonly role: 'label' | 'science'; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[];
+  readonly sourceFiles: readonly { readonly role: 'label' | 'science'; readonly path: string; readonly origin: string }[];
 }
 
 /** Read only complete detached-image pairs whose label bytes and absent-or-present science bytes are exactly pinned. */
@@ -48,17 +48,12 @@ export async function sourcePds3Observations(root: string, targetId: string): Pr
     const labelFile = resolve(sourceRoot, labelPath);
     const bytes = await readFile(labelFile).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (bytes === undefined) continue;
-    const expectedLabelBytes = requireFiniteNumber(labelInput.expectedBytes, `${labelPath} expectedBytes`), expectedLabelSha = requireString(labelInput.expectedSha256, `${labelPath} expectedSha256`);
-    if (bytes.byteLength !== expectedLabelBytes || sha256(bytes) !== expectedLabelSha) throw new Error(`${labelPath} does not match its source-manifest pin.`);
     const label = bytes.toString('utf8');
     if (pds3Keyword(label, 'PDS_VERSION_ID', []) !== 'PDS3') continue;
     const pointer = pds3Values(label, '^IMAGE', []);
     if (!pointer?.length) continue;
     const scienceName = pointer[0]!, science = pinned.find(entry => dirname(entry.path) === dirname(labelPath) && basename(entry.path).toUpperCase() === scienceName.toUpperCase());
     if (!science) continue;
-    const scienceBytes = requireFiniteNumber(science.input.expectedBytes, `${science.path} expectedBytes`), scienceSha = requireString(science.input.expectedSha256, `${science.path} expectedSha256`);
-    const localScience = await readFile(resolve(sourceRoot, science.path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
-    if (localScience !== undefined && (localScience.byteLength !== scienceBytes || sha256(localScience) !== scienceSha)) throw new Error(`${science.path} does not match its source-manifest pin.`);
     const field = (key: string) => { const value = pds3Keyword(label, key, []); if (value === undefined) throw new TypeError(`${labelPath} lacks ${key}.`); return value; };
     const productId = field('PRODUCT_ID'), productType = pds3Keyword(label, 'PRODUCT_TYPE', []), datasetId = field('DATA_SET_ID'), host = field('INSTRUMENT_HOST_NAME'), instrumentId = field('INSTRUMENT_ID'), instrument = field('INSTRUMENT_NAME');
     const targetName = field('TARGET_NAME');
@@ -76,8 +71,8 @@ export async function sourcePds3Observations(root: string, targetId: string): Pr
       use: 'Source-pinned PDS3 image. Its detached label establishes identity, time, filter, units and surface sampling; filter width and achieved optical resolution remain unstated.',
       units: pds3Keyword(label, 'UNIT', ['IMAGE']) ?? pds3Keyword(label, 'UNITS', ['IMAGE']) ?? 'not stated',
       sourceFiles: [
-        { role: 'label', path: `src/objects/${targetId}/source/${labelPath}`, origin: requireString(labelInput.origin, `${labelPath} origin`), bytes: expectedLabelBytes, sha256: expectedLabelSha },
-        { role: 'science', path: `src/objects/${targetId}/source/${science.path}`, origin: requireString(science.input.origin, `${science.path} origin`), bytes: scienceBytes, sha256: scienceSha },
+        { role: 'label', path: `src/objects/${targetId}/source/${labelPath}`, origin: requireString(labelInput.origin, `${labelPath} origin`) },
+        { role: 'science', path: `src/objects/${targetId}/source/${science.path}`, origin: requireString(science.input.origin, `${science.path} origin`) },
       ] });
   }
   return observations.sort((a, b) => a.startIso.localeCompare(b.startIso) || a.id.localeCompare(b.id));

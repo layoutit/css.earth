@@ -3,12 +3,10 @@
   "inputs": {
     "particles": {
       "path": ".local/nebula-lab/particles/lmc-particles.f32",
-      "sha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
       "bytes": 25920000
     },
     "photo": {
       "path": "labs/nebula/models/lmc-particles/source/photo-diffuse.png",
-      "sha256": "573e4cfd8269b74e6cc348b8dff472850945bdb051aeef9c6f3d7e9a6da07812",
       "bytes": 9339689
     }
   },
@@ -75,7 +73,6 @@
   },
   "outputs": {
     "comparison": "alignment-comparison.png",
-    "sha256": "6da3180a85633631e4ea5bc10b3d8b3137d94957f20ba0c72135c72f01072552",
     "bytes": 494294
   }
 }

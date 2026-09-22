@@ -14,8 +14,7 @@ test('WASP-43b pins its Zenodo deposit unchanged and reads the map from it', asy
   const source = await createSourceManifest({ planetId: 'wasp-43b', planetName: 'WASP-43b', sourceRoot: root });
   await source.verify();
   const deposit = source.manifest.inputs.find(input => input.path === 'science/challener-2024/wasp-43b.tar');
-  assert.ok(deposit, 'the tar is a pinned input');
-  assert.equal(deposit.expectedSha256, 'a2dc0004e40fad053933156237d8aeb5defaeee68ef6981f667f503b96731138');
+  assert.ok(deposit, 'the tar is a declared input');
   const plan = requireRecord(await read('preparation/acquisition.json'));
   assert.ok(requireArray(plan.operations).some(operation => requireRecord(operation).url === 'https://zenodo.org/api/records/12627524/files/wasp-43b.tar/content'));
   const surface = requireRecord(requireArray(requireRecord(await read('preparation/raster.json')).surfaces)[0]);

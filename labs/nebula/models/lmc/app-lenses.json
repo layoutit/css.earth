@@ -3,13 +3,12 @@
   "id": "lmc",
   "defaultLens": "vista-infrared",
   "framingRadiusUnits": 5,
-  "settingsReceiptSha256": "14038af02a7638ae44d047d184b77a55fd98e1db7064b011993932673791342d",
   "lenses": [
     {
       "imageId": "vista-infrared",
       "resultId": "932a145d2050e9811bc95a0a8a02672f5fc53eccb408ebff9a6ad748b5db7823",
       "label": "ESO VISTA",
-      "description": "Near-infrared colors from ESO\u2019s VISTA survey, painted onto the shared simulated LMC density cloud.",
+      "description": "Near-infrared colors from ESO’s VISTA survey, painted onto the shared simulated LMC density cloud.",
       "enabledIds": [
         "all-light"
       ],
@@ -33,8 +32,8 @@
     {
       "imageId": "horalek-widefield",
       "resultId": "e7a94397c65ac9a9aa2f2d644c0f5e47e8fa91d0b220ee24137b329ff55a47ca",
-      "label": "Hor\u00e1lek optical",
-      "description": "Visible-light colors from Petr Hor\u00e1lek\u2019s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud.",
+      "label": "Horálek optical",
+      "description": "Visible-light colors from Petr Horálek’s NOIRLab wide-field image, painted onto the shared simulated LMC density cloud.",
       "enabledIds": [
         "all-light"
       ],

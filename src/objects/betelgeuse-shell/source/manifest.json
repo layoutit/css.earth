@@ -22,9 +22,7 @@
       "credit": "ALMA (ESO/NAOJ/NRAO), project 2022.A.00026.S, member uid://A001/X360d/Xae",
       "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
       "acquisition": "The member's continuum image member.uid___A001_X360d_Xae.Betelgeuse_sci.spw25_27_29_31.cont.regcal.I.pbcor.fits, made with the same calibration as the line cube, downloaded whole from the archive and cut by tools/objects/source-authoring/betelgeuse-shell/reduce-alma-sio.mts to a box 300 mas either way of the phase centre, values unchanged. It is the only product of the observation that shows where the star is.",
-      "license": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
-      "expectedSha256": "28b7cfb6075b5cdb5dcfac176f94f3e116e1ce986903393314f26c8cf887bd68",
-      "expectedBytes": 40320
+      "license": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line."
     },
     {
       "id": "alma-sio-v0-5-4-2023-08",
@@ -47,9 +45,7 @@
       "displayCredit": "ALMA (ESO/NAOJ/NRAO)",
       "acquisition": "Cut out of the archive's own pipeline cube member.uid___A001_X360d_Xae.Betelgeuse_sci.spw27.cube.regcal.I.pbcor.fits through its SODA service, on the circle about the observation's phase centre that the origin URL requests. tools/objects/source-authoring/betelgeuse-shell/reduce-alma-sio.mts keeps the channels within 32 km/s of 8 km/s LSRK in a box 300 mas either way of the phase centre, and subtracts from each pixel the median of the 1738 channels more than 120 km/s from the line. The pipeline removes the continuum before imaging, so that median is only its residual. The archive product is 72 GB; this is the part of it that carries the line around this star.",
       "license": "ALMA data are public under the ALMA data access policy; retain the ALMA credit line.",
-      "lensId": "sio-2023",
-      "expectedSha256": "fd94c4ff071920e8222cb9780b04f8ef9f71d459a9c3751f6e21932ea604c151",
-      "expectedBytes": 1428480
+      "lensId": "sio-2023"
     },
     {
       "id": "matisse-2020-02-continuum-4mas",
@@ -72,9 +68,7 @@
       "displayCredit": "ESO/VLTI/MATISSE; reconstruction by this repository",
       "acquisition": "The same bytes Betelgeuse’s own package ships and pins, copied here so this package accounts for every byte it reads. Only the light outside the published disc is used; the disc itself is the star’s drawn sphere.",
       "license": "Reconstruction released by this repository under its own licence; the MATISSE visibilities are ESO archive data under the ESO data access policy.",
-      "lensId": "emission-2020",
-      "expectedSha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
-      "expectedBytes": 135360
+      "lensId": "emission-2020"
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-n-i-dolp",
@@ -96,9 +90,7 @@
       "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
       "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
       "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.648. N_I degree of linear polarisation, retained for comparison and not drawn.",
-      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
-      "expectedSha256": "9198ce56b85ea829347d12a69e63b9e7113efc240c461af0c3010c21b55c5af7",
-      "expectedBytes": 8455680
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-n-i-phase3",
@@ -120,9 +112,7 @@
       "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
       "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
       "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.647. N_I pipeline intensity, retained for comparison and not drawn.",
-      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
-      "expectedSha256": "50acda00ac3cde75cde275504c90849d33e6f975e4b4e0ac2e98dc40c9e92bb3",
-      "expectedBytes": 8458560
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-v-dolp",
@@ -145,9 +135,7 @@
       "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
       "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.656. V-band degree of linear polarisation; the quantity the 2024 lens carries.",
       "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
-      "lensId": "zimpol-v",
-      "expectedSha256": "0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687",
-      "expectedBytes": 8455680
+      "lensId": "zimpol-v"
     },
     {
       "id": "sphere-zimpol-betelgeuse-p1-v-phase3",
@@ -169,9 +157,7 @@
       "credit": "ESO/VLT/SPHERE-ZIMPOL, programme 114.28H9.001; Montargès et al. 2026, A&A 711, L12",
       "displayCredit": "ESO/VLT/SPHERE-ZIMPOL",
       "acquisition": "Downloaded unchanged from the ESO archive by its DataLink identifier ADP.2026-08-19T13:19:07.655. V-band pipeline intensity; the star centre and the intensity floor are measured on it.",
-      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation.",
-      "expectedSha256": "b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb",
-      "expectedBytes": 8458560
+      "license": "CC-BY-4.0 under the ESO data access policy; retain the ESO provenance and the paper citation."
     },
     {
       "id": "preview-zimpol-v",

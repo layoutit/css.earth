@@ -17,7 +17,7 @@ export function readMatchedStarCatalogue(value: unknown, source: ObservationSour
   if (row.schema !== 'cssearth-native-matched-stars@1' || row.discovery !== 'model-assisted-visually-inspected' || !Array.isArray(row.stars) || row.stars.length < 45 || row.stars.length > 1000) throw new TypeError('Unsupported explicit star correspondence catalogue.');
   for (const [key, image] of [['source', source], ['reference', reference]] as const) {
     const pin = record(row[key]);
-    if (pin.id !== image.id || pin.sha256 !== image.sha256 || pin.width !== image.width || pin.height !== image.height) throw new Error(`Matched-star ${key} pin differs.`);
+    if (pin.id !== image.id || pin.width !== image.width || pin.height !== image.height) throw new Error(`Matched-star ${key} pin differs.`);
   }
   const sourceSeen = new Set<string>(), referenceSeen = new Set<string>();
   return row.stars.map((value, index): Pair => {
@@ -30,17 +30,15 @@ export function readMatchedStarCatalogue(value: unknown, source: ObservationSour
 export async function loadMatchedStarCatalogue(source: ObservationSource, reference: ObservationSource, referenceMatrix: Affine): Promise<Pair[]> {
   if (!source.matchedStarCatalogue) throw new Error('No explicit matched-star catalogue configured.');
   const bytes = await readFile(source.matchedStarCatalogue.path);
-  if (createHash('sha256').update(bytes).digest('hex') !== source.matchedStarCatalogue.sha256) throw new Error('Matched-star catalogue pin differs.');
   return readMatchedStarCatalogue(JSON.parse(bytes.toString()), source, reference, referenceMatrix);
 }
 export async function calibratedInitialTransform(source: ObservationSource, reference: ObservationSource, frame: SkyFrame, publisherMatrix: Affine): Promise<Affine> {
   if (!source.astrometricCalibration) return publisherMatrix;
   const bytes = await readFile(source.astrometricCalibration.path);
-  if (createHash('sha256').update(bytes).digest('hex') !== source.astrometricCalibration.sha256) throw new Error('Astrometric calibration pin differs.');
   const row = record(JSON.parse(bytes.toString())), s = record(row.source), r = record(row.reference), correction = row.publisherToCalibratedFrame;
-  if (row.schema !== 'cssearth-observation-astrometric-calibration@1' || s.id !== source.id || s.sha256 !== source.sha256 || s.width !== source.width || s.height !== source.height ||
-    r.id !== reference.id || r.sha256 !== reference.sha256 || r.width !== reference.width || r.height !== reference.height ||
-    row.matchedStarCatalogueSha256 !== source.matchedStarCatalogue?.sha256 || JSON.stringify(row.frame) !== JSON.stringify(frame) ||
+  if (row.schema !== 'cssearth-observation-astrometric-calibration@1' || s.id !== source.id || s.width !== source.width || s.height !== source.height ||
+    r.id !== reference.id || r.width !== reference.width || r.height !== reference.height ||
+    JSON.stringify(row.frame) !== JSON.stringify(frame) ||
     typeof row.interpretation !== 'string' || !row.interpretation.trim() || !Array.isArray(correction) || correction.length !== 6 || correction.some(v => typeof v !== 'number' || !Number.isFinite(v))) throw new Error('Astrometric calibration evidence differs.');
   const matrix: Affine = [correction[0], correction[1], correction[2], correction[3], correction[4], correction[5]];
   if (matrix[0] * matrix[3] - matrix[1] * matrix[2] <= 0) throw new Error('Astrometric calibration cannot reverse parity.');

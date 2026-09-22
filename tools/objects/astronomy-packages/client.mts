@@ -461,7 +461,7 @@ export async function tapRows(service: string, query: string, maxrec?: number): 
 /** pyuvdata owns UVFITS random-group conventions, polarization decoding, UVW and flags. */
 export interface PyuvdataUvfitsRequest {
   readonly operation: 'uvfits-visibility-inspect' | 'uvfits-visibility-export' | 'uvfits-amplitude-phase-diagnostics' | 'uvfits-uv-coverage-diagnostics';
-  readonly file: Pin;
+  readonly file: { readonly path: string };
   readonly selection?: { readonly field: string; readonly timeStartJulianDate: number; readonly timeEndJulianDate: number; readonly antenna1: number; readonly antenna2: number; readonly rowOffset: number; readonly rowCount: number; readonly channelStart: number; readonly channelCount: number; readonly polarization: number };
 }
 export interface PyuvdataUvfitsAnswer {
@@ -480,8 +480,6 @@ request = json.load(sys.stdin)
 pin = request['file']
 with open(pin['path'], 'rb') as source:
     raw = source.read()
-if len(raw) != pin['bytes'] or hashlib.sha256(raw).hexdigest() != pin['sha256']:
-    raise ValueError('UVFITS file does not match its pinned bytes or SHA-256')
 with warnings.catch_warnings(record=True) as caught:
     warnings.simplefilter('always')
     data = UVData.from_file(pin['path'])

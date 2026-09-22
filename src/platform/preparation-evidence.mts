@@ -5,8 +5,8 @@ import { sourceDigest, sourceObject, sourcePath, sourceText } from './source-cat
 export interface PreparationEvidence {
   readonly objectId: string;
   readonly materialSha256: string;
-  readonly verifier: { readonly path: string; readonly sha256: string; readonly bindingsSha256: string };
-  readonly record?: { readonly revision: string; readonly path: string; readonly sha256: string };
+  readonly verifier: { readonly path: string };
+  readonly record?: { readonly revision: string; readonly path: string };
 }
 
 /** Only consumed material and recipe bindings determine whether old byte evidence applies. */
@@ -22,12 +22,12 @@ export function preparationMaterial(document: ProvenanceDocument) {
 
 export function parsePreparationEvidence(raw: unknown): PreparationEvidence {
   const value = sourceObject(raw, ['objectId', 'materialSha256', 'verifier', 'record']);
-  const verifier = sourceObject(value.verifier, ['path', 'sha256', 'bindingsSha256']);
+  const verifier = sourceObject(value.verifier, ['path']);
   const parsed: PreparationEvidence = { objectId: sourceText(value.objectId), materialSha256: sourceDigest(value.materialSha256),
-    verifier: { path: sourcePath(verifier.path), sha256: sourceDigest(verifier.sha256), bindingsSha256: sourceDigest(verifier.bindingsSha256) } };
+    verifier: { path: sourcePath(verifier.path) } };
   if (value.record === undefined) return parsed;
-  const record = sourceObject(value.record, ['revision', 'path', 'sha256']);
+  const record = sourceObject(value.record, ['revision', 'path']);
   const revision = sourceText(record.revision);
   if (!/^[a-f0-9]{40}$/u.test(revision)) throw new TypeError('Historical preparation needs an exact revision.');
-  return { ...parsed, record: { revision, path: sourcePath(record.path), sha256: sourceDigest(record.sha256) } };
+  return { ...parsed, record: { revision, path: sourcePath(record.path) } };
 }

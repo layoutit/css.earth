@@ -1,5 +1,5 @@
 /** Published molecular line fits: measurements, pointing footprint and inferred quantities stay distinct. */
-export interface MolecularSourcePin { url: string; cachePath: string; sha256: string; bytes: number }
+export interface MolecularSourcePin { url: string; cachePath: string; bytes: number }
 export interface MolecularColumn { start: number; end: number; unit: string }
 export interface MolecularRecipe {
   schema: 'cssearth-molecular-evidence@1'; id: string; title: string;
@@ -36,7 +36,7 @@ export interface MolecularPointing {
   detectedComponents: number; upperLimits: number;
 }
 export interface MolecularCatalogue {
-  schema: 'cssearth-molecular-catalogue@1'; recipe: MolecularRecipe; recipeSha256: string; sourceSha256: string;
+  schema: 'cssearth-molecular-catalogue@1'; recipe: MolecularRecipe; recipeSha256: string;
   points: MolecularPoint[]; pointings: MolecularPointing[];
   diagnostics: { rows: number; pointings: number; detectedComponents: number; detectedPointings: number;
     upperLimits: number; multiComponentPointings: number; maximumComponents: number; broadComponents: number;

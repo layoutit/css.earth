@@ -67,9 +67,8 @@ export async function checkProjectedControlRecipe(recipePath: string, inputDirec
   const input = async (v: unknown) => {
     const p = record(v, 'pinned input'), file = text(p.file, 'input filename');
     if (basename(file) !== file || file === '.' || file === '..' || file.includes('\\')) throw new Error('Input must be a filename in the input directory.');
-    const bytes = await readFile(resolve(inputDirectory, file)), expectedBytes = number(p.bytes, 'input bytes'), pin = text(p.sha256, 'input hash');
-    if (!Number.isSafeInteger(expectedBytes) || expectedBytes <= 0 || !/^[a-f0-9]{64}$/.test(pin) || bytes.length !== expectedBytes || sha256(bytes) !== pin) throw new Error(`Pinned input changed: ${file}.`);
-    return { file, bytes, sha256: pin, path: resolve(inputDirectory, file) };
+    const bytes = await readFile(resolve(inputDirectory, file));
+    return { file, bytes, sha256: sha256(bytes), path: resolve(inputDirectory, file) };
   };
   if (image.format !== 'fits-primary' || image.pixelConvention !== 'zero-based-x-right-y-down-reversed-fits-rows') throw new Error('Unsupported native image convention.');
   const native = await input(image), fits = readFitsPrimary(native.bytes);

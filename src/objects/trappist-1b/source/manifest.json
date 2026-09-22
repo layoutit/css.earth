@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -130,8 +128,6 @@
     {
       "id": "jwst-miri-f1500w-filter",
       "path": "science/svo/JWST_MIRI.F1500W.xml",
-      "expectedBytes": 77631,
-      "expectedSha256": "cabdc5d635e5515842e25d2fc26fda27c315c2c98d36e2729bb5a4c93109dca6",
       "origin": "https://svo2.cab.inta-csic.es/theory/fps/fps.php?ID=JWST/MIRI.F1500W",
       "productId": "JWST/MIRI.F1500W",
       "version": "SVO Filter Profile Service",
@@ -156,8 +152,6 @@
     {
       "id": "trappist-1-bt-settl-cifist-2600",
       "path": "science/bt-settl-cifist/bt-settl-cifist-2600-5.0-0.0.xml",
-      "expectedBytes": 64359008,
-      "expectedSha256": "a889b5ab4f06694e6d0e12ee9b382594b99e0bae864873b2d0d7daa08f17225f",
       "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=137",
       "productId": "bt-settl-cifist fid 137",
       "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",

@@ -4,8 +4,6 @@
     {
       "id": "c0532890500",
       "path": "observations/C0532890500R.IMG",
-      "expectedBytes": 857088,
-      "expectedSha256": "4c3501a4e341b74405b89b285b404361fcff442b4819423a745cd6dbf26fe811",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532890500",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -85,8 +83,6 @@
     {
       "id": "c0420681401",
       "path": "observations/C0420681401R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "9a3e93326e589847d6033a75cae9dbbd884ff52a9022c6f96ae722321f3f8895",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420681401",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -166,8 +162,6 @@
     {
       "id": "c0420685801",
       "path": "observations/C0420685801R.IMG",
-      "expectedBytes": 831488,
-      "expectedSha256": "d34cbf3bafcc2d7f079c3ad250287660d0dac936082b183436ecc7d1f92c2e3b",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420685801",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -247,8 +241,6 @@
     {
       "id": "c0394682801",
       "path": "observations/C0394682801R.IMG",
-      "expectedBytes": 810000,
-      "expectedSha256": "4daafe1c0c21cdaca61cc258f7835d31561ec76e7ac2ef8e07f033471ec67d71",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0394682801",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -328,8 +320,6 @@
     {
       "id": "c0401751800",
       "path": "observations/C0401751800R.IMG",
-      "expectedBytes": 808000,
-      "expectedSha256": "9df4199697827534e3d6429f4a879d2cc851c5a17f287c8d6b46925227ad3f69",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0401751800",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -439,8 +429,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

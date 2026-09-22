@@ -23,17 +23,16 @@ function parseJson(bytes: ArrayBuffer, label: string): unknown {
   catch (cause) { throw new TypeError(`${label} is not valid UTF-8 JSON.`, { cause }); }
 }
 
-/** Identical authentication and validation in the browser worker and Node tools. */
+/** Identical validation in the browser worker and Node tools. */
 export async function decodePreparedCssObject(descriptorInput: unknown, bytes: ArrayBuffer): Promise<ObjectRuntimeDefinition> {
   const descriptor = requirePreparedCssDescriptor(descriptorInput);
-  if (await sha256(bytes) !== descriptor.prepared!.sha256) throw new Error(`Prepared object ${descriptor.id} failed its SHA-256 identity check.`);
   const value = parseJson(bytes, `Prepared object ${descriptor.id}`);
   const prepared = readPreparedObject(value, descriptor, input => {
     if (record(input, 'runtime plan').id !== descriptor.id) throw new TypeError(`Prepared CSS definition does not match object ${descriptor.id}.`);
     return parsePreparedObjectRuntime(input, { parsedJson: true });
   });
-  // Origin resolution is carried by the descriptor, never the sha256-verified transport
-  // itself: a rebake is never required to move an object's assets onto `assetOrigin`.
+  // Origin resolution is carried by the descriptor, never the transport itself:
+  // a rebake is never required to move an object's assets onto `assetOrigin`.
   const assetOrigin = parsePreparedAssetOrigin(descriptor.properties.assetOrigin);
   return assetOrigin ? { ...prepared.data, assetOrigin } : prepared.data;
 }

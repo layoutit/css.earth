@@ -10,22 +10,18 @@
  "inputs": [
   {
    "path": "tests/fixtures/fits/rice-int16.fits",
-   "sha256": "5a757876001838932b3cb8d8f0fd5fe46c93a5e07e3e9ef963c2a1f0c4dbdcdc",
    "bytes": 8640
   },
   {
    "path": "tests/fixtures/fits/rice-uint8.fits",
-   "sha256": "e871ac9685d205209cd4613c55431e4c9d6926609f3be53b9cfd5df34251aae3",
    "bytes": 8640
   },
   {
    "path": "tests/fixtures/fits/rice-int32.fits",
-   "sha256": "8d49e0a1dd53ccc162ec46e7d811317a7ea3161799ffa380bf47893dbc8ba229",
    "bytes": 8640
   },
   {
    "path": "src/objects/sun/source/hmi/continuum/keywords.json",
-   "sha256": "36289d8a41a477a0e163f32b87c1fb5aeb1b12a40a5d15197cc6dd722405c866",
    "bytes": 10387
   }
  ],

@@ -2,7 +2,6 @@
   "id": "horalek-widefield",
   "source": {
     "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
-    "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
     "bytes": 8507407,
     "nativeDimensions": [
       6582,
@@ -11,7 +10,6 @@
   },
   "reference": {
     "path": "labs/nebula/sources/lmc-smash-full.webp",
-    "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
     "nativeDimensions": [
       6737,
       6536
@@ -89,8 +87,7 @@
     ]
   ],
   "rawEvidence": {
-    "path": ".local/nebula-lab/new-references/noirlab-star-registration.json",
-    "sha256": "6bedad6d6ae0ec52f9ef62cc87af216d8e81ca840bf240ccd5488653c408748d"
+    "path": ".local/nebula-lab/new-references/noirlab-star-registration.json"
   },
   "nativeImagePoints": [
     [

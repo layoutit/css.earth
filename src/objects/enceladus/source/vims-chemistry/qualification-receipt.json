@@ -1,10 +1,8 @@
 {
   "schema": "cssearth-enceladus-independent-qualification@1",
-  "scriptSha256": "6c66e5b917acf13ae0a3a551e512fed23fb0326ff31c3199b272919a7db48653",
   "checks": [
     {
       "kind": "depth",
-      "outputSha256": "2e3d5caa47220371e2b8e4ad12192f4613b3f6f1de4f933881b1a277ae4a9d4d",
       "independentExactValueMatches": 94916,
       "independentGnomonicSupportChecks": 192,
       "uniqueNativeOwners": {
@@ -596,7 +594,6 @@
     },
     {
       "kind": "ratio",
-      "outputSha256": "1857dd4eadd3af1e7808941bfb0e4dfa57f61a04b6dc48d3157b292c9ef601ec",
       "independentExactValueMatches": 94916,
       "independentGnomonicSupportChecks": 192,
       "uniqueNativeOwners": {
@@ -1190,12 +1187,10 @@
   "scope": "Independent native struct bytes/formula and gnomonic source-cell containment; absolute spacecraft pointing unproven.",
   "sourceEvidence": [
     {
-      "file": "evidence/native-spectral-panels.png",
-      "sha256": "a46c948c9233e5857a74c704bf4c18f6c1922999da507ae50b645f9317e9bb63"
+      "file": "evidence/native-spectral-panels.png"
     },
     {
-      "file": "evidence/projected-spectral-panels.png",
-      "sha256": "7fc6f9d1c3bc1c5e23e2a77b0903fd9f12ff37498c2811d8b3c2d9701a4b965e"
+      "file": "evidence/projected-spectral-panels.png"
     }
   ]
 }

@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 1224
       },
       "coverage": "Closed radar-derived principal-axis model, based on 1992 and 1996 observations. +Z is the long axis, not a spin pole. Later radar and Chang’e-2 images reveal shape differences.",
-      "expectedBytes": 2879779,
-      "expectedSha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

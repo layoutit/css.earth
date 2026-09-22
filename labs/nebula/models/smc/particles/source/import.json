@@ -2,7 +2,6 @@
   "schema": "cssearth-tipsy-stars-lab@1",
   "source": {
     "path": ".local/nebula-lab/particles/run34681lsmcgabestModelA_HR.00440",
-    "sha256": "a56ff2dc994ed9c993b283351f2226886ce9c3d26967525d26addad3fcb37153",
     "bytes": 196860032,
     "header": {
       "totalCount": 5005000,
@@ -160,7 +159,6 @@
   },
   "output": {
     "path": ".local/nebula-lab/particles/smc-particles-centered.f32",
-    "sha256": "2a13f21bddc8d082ef6e8cb72556db76f5287c94808f860abced752b5c7acb24",
     "bytes": 3600000,
     "count": 225000,
     "layout": "float32-le-xyz-mass",
@@ -185,7 +183,6 @@
   ],
   "rotatedOutput": {
     "path": ".local/nebula-lab/particles/smc-particles.f32",
-    "sha256": "2a13f21bddc8d082ef6e8cb72556db76f5287c94808f860abced752b5c7acb24",
     "bytes": 3600000
   }
 }

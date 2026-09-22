@@ -20,22 +20,18 @@
   "sources": [
     {
       "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/AcuA_V1.txt.gz",
-      "sha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51",
       "bytes": 120256
     },
     {
       "url": "https://data.darts.isas.jaxa.jp/pub/akari/AKARI-IRC_Catalogue_AllSky_AcuA_1.0/ReadMe.AcuA.txt",
-      "sha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057",
       "bytes": 3836
     },
     {
       "url": "https://arxiv.org/pdf/1106.1948",
-      "sha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499",
       "bytes": 635799
     },
     {
       "url": "https://www.ir.isas.jaxa.jp/AKARI/results/20111013_AcuA/",
-      "sha256": "9fb77b99f8f1983ba7694234ff6d017723e348eaeaa8c0f4565202385e81979b",
       "bytes": 11064
     }
   ],

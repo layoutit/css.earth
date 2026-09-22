@@ -4,7 +4,9 @@
 //   node tools/performance/ios-capture.mts --name saturn-flight --steps steps.json [--open <url>] [--dist dist] [--udid <udid>]
 //   node tools/performance/ios-capture.mts --name hand-drag --seconds 15        (record while someone uses the app)
 //
-// Native side: an Instruments Time Profiler trace of every process (`xcrun xctrace`), summarised for Safari's web content
+// Native side: an Instruments Time Profiler trace (`xcrun xctrace`) of the simulator's web content process holding the page
+// (`--native page`, the default), of every process on the Mac (`--native all`, for compositor and GPU questions) or none
+// (`--native off`), summarised for Safari's web content
 // process. Page side, through Safari's Web Inspector (`ios_webkit_debug_proxy`): JavaScript samples for the page and each
 // worker, named through the build's source maps; timeline records and rendering frames; CPU per thread; memory by
 // category, sampled after collection before and after the moment; console messages and network requests.
@@ -34,7 +36,8 @@ export type Step =
   | { readonly type: string }
   | { readonly drag: { readonly from: readonly [number, number]; readonly to: readonly [number, number]; readonly seconds: number } }
   | { readonly wait: number }
-  | { readonly screenshot: string };
+  | { readonly screenshot: string }
+  | { readonly probe: string };
 
 const point = (value: unknown, label: string): [number, number] => {
   const list = requireArray(value, label);
@@ -50,6 +53,11 @@ export function parseSteps(value: unknown): Step[] {
     if ('tap' in step) return { tap: point(step.tap, label) };
     if ('type' in step) return { type: requireString(step.type, label) };
     if ('wait' in step) return { wait: requireFiniteNumber(step.wait, label) };
+    if ('probe' in step) {
+      const name = requireString(step.probe, label);
+      if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: probe names are lowercase words and dashes.`);
+      return { probe: name };
+    }
     if ('screenshot' in step) {
       const name = requireString(step.screenshot, label);
       if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: screenshot names are lowercase words and dashes.`);
@@ -63,11 +71,23 @@ export function parseSteps(value: unknown): Step[] {
   });
 }
 
-async function perform(steps: readonly Step[], udid: string, out: string, marks: { label: string; at: number }[], started: number) {
+/** What a probe step reads from the page: the scene router's state and the size of the document. */
+const PROBE_EXPRESSION = `(() => {
+  const app = window.__cssEarth, read = key => { try { return app ? app[key] : undefined; } catch (error) { return 'unreadable'; } };
+  const error = read('error');
+  return { path: location.pathname, ready: read('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
+    overview: read('overview'), mountedObjectCount: read('mountedObjectCount'), lifecycle: read('lifecycle'),
+    error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
+})()`;
+
+async function perform(steps: readonly Step[], udid: string, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
+  evaluate: (expression: string) => Promise<unknown>) {
   for (const step of steps) {
     const label = JSON.stringify(step);
-    marks.push({ label, at: Date.now() - started });
-    if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
+    const mark: { label: string; at: number; value?: unknown } = { label, at: Date.now() - started };
+    marks.push(mark);
+    if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    else if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
     else if ('type' in step) await run('axe', ['type', step.type, '--udid', udid]);
     else if ('wait' in step) await wait(step.wait * 1000);
     else if ('screenshot' in step) await run('axe', ['screenshot', '--output', resolve(out, `${step.screenshot}.png`), '--udid', udid]);
@@ -489,6 +509,41 @@ async function compareScreenshots(out: string, baseline: string, steps: readonly
   return { baseline: relative(root, baseline), screenshots };
 }
 
+// ---- Native trace ---------------------------------------------------------------------------------------------------
+
+function nativeMode(value: string) {
+  if (value !== 'page' && value !== 'all' && value !== 'off') throw new TypeError('--native is page, all or off.');
+  return value;
+}
+
+/** The simulator's web content process holding the page: the largest of Safari's in the simulator runtime. Recording only
+ * it keeps the trace a fraction of an every-process one, whose export alone took 14 s. */
+async function pageProcess(): Promise<number> {
+  const { stdout } = await run('ps', ['-Ao', 'pid=,rss=,args=']);
+  const candidates = stdout.split('\n').map(line => /^\s*(\d+)\s+(\d+)\s+(.*)$/u.exec(line))
+    .filter((match): match is RegExpExecArray => match !== null && match[3]!.includes('CoreSimulator') && match[3]!.includes('WebKit.WebContent'))
+    .map(match => ({ pid: Number(match[1]), rss: Number(match[2]) })).sort((a, b) => b.rss - a.rss);
+  if (!candidates[0]) throw new Error('No web content process runs in the simulator.');
+  return candidates[0].pid;
+}
+
+/** Stops a recording; xctrace has hung finalising, so after 30 s it is killed and the capture reports no native trace. */
+async function stopRecording(xctrace: ChildProcess): Promise<boolean> {
+  if (xctrace.exitCode !== null) return true;
+  const exited = new Promise<boolean>(done => xctrace.once('exit', () => done(true)));
+  xctrace.kill('SIGINT');
+  const stopped = await Promise.race([exited, wait(30_000).then(() => false)]);
+  if (!stopped) { xctrace.kill('SIGKILL'); await exited; }
+  return stopped;
+}
+
+async function exportTimeProfile(native: string): Promise<ReturnType<typeof summariseTimeProfile> | { error: string }> {
+  try {
+    const { stdout } = await run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 });
+    return summariseTimeProfile(stdout);
+  } catch (error) { return { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
+}
+
 // ---- Capture -------------------------------------------------------------------------------------------------------
 
 function options(args: readonly string[]) {
@@ -499,7 +554,7 @@ function options(args: readonly string[]) {
   if (!stepsFile === !seconds) throw new TypeError('Pass either --steps <file.json> or --seconds <n>.');
   return { name, stepsFile, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare') };
+    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare'), native: nativeMode(value('--native') ?? 'page') };
 }
 
 export async function captureIosMoment(args: readonly string[]) {
@@ -543,27 +598,34 @@ export async function captureIosMoment(args: readonly string[]) {
 
   // Instruments first, so the native trace covers the whole moment.
   const native = resolve(out, 'native.trace');
-  const xctrace = spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, '--all-processes', '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const target = option.native === 'all' ? ['--all-processes'] : option.native === 'page' ? ['--attach', String(await pageProcess())] : null;
+  const xctrace = target ? spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, ...target, '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] }) : null;
   const xctraceLog: string[] = [];
-  xctrace.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
-  xctrace.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
-  for (let attempt = 0; attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
+  xctrace?.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
+  xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
+  for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
   await session.send('ScriptProfiler.startTracking', { includeSamples: true });
   for (const worker of workers.keys()) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
   recording = true;
   await session.send('CPUProfiler.startTracking');
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
-  const started = Date.now(), marks: { label: string; at: number }[] = [];
-  if (steps.length) await perform(steps, udid, out, marks, started);
+  const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
+  const evaluate = async (expression: string) => {
+    const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true });
+    return isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
+  };
+  if (steps.length) await perform(steps, udid, out, marks, started, evaluate);
   else { marks.push({ label: `manual ${option.seconds} s`, at: 0 }); await wait((option.seconds ?? 0) * 1000); }
   const durationMs = Date.now() - started;
   await session.send('Timeline.stop');
   await session.send('CPUProfiler.stopTracking');
   await session.send('ScriptProfiler.stopTracking');
   for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
-  xctrace.kill('SIGINT');
-  await new Promise(done => xctrace.once('exit', done));
+  const recorded = xctrace ? await stopRecording(xctrace) : false;
+  // The export runs while the page side is read.
+  const nativeExport = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
+    : recorded ? exportTimeProfile(native) : Promise.resolve({ error: 'xctrace did not finish its recording within 30 s.' });
   await wait(1500);
   const moment = events.slice(recordingStart);
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
@@ -609,11 +671,7 @@ export async function captureIosMoment(args: readonly string[]) {
   const requests = [...responses.values()];
 
   // Native side.
-  let nativeSummary: ReturnType<typeof summariseTimeProfile> | { error: string };
-  try {
-    const { stdout } = await run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 });
-    nativeSummary = summariseTimeProfile(stdout);
-  } catch (error) { nativeSummary = { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
+  const nativeSummary = await nativeExport;
 
   const pixels = option.compare ? await compareScreenshots(out, resolve(option.compare), steps) : null;
   const report = {
@@ -633,10 +691,12 @@ type ReadmeInput = { name: string; url: string; durationMs: number; memoryMb: { 
   initiators: Record<string, { label: string; count: number }[]>; layers: unknown;
   javascript: Record<string, ReturnType<typeof summariseSamples>>; timeline: ReturnType<typeof summariseTimeline>; cpu: ReturnType<typeof summariseCpu>;
   console: readonly { level: string; text: string }[]; network: { requests: number; bytes: number }; native: ReturnType<typeof summariseTimeProfile> | { error: string };
-  pixels: Awaited<ReturnType<typeof compareScreenshots>> | null };
+  pixels: Awaited<ReturnType<typeof compareScreenshots>> | null; steps: readonly { label: string; at: number; value?: unknown }[] };
 function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
+    ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
+      .map(step => `- ${JSON.parse(step.label).probe} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
     ...(r.pixels ? ['## Pixels against ' + r.pixels.baseline, '', ...r.pixels.screenshots.map(shot => shot.differing === null
       ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`), ''] : []),
     `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',

@@ -30,7 +30,6 @@
   "reference": {
    "name": "sun_reference_stis_002.fits",
    "url": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/sun_reference_stis_002.fits",
-   "sha256": "20133cdf2a402655e3726de6b334bf09d05c9429ebd27ebf5492dc37fc89cfd8",
    "note": "CALSPEC sun_reference_stis_002, Colina, Bohlin & Castelli (1996), AJ 112, 307, with Bohlin, Dickinson & Calzetti (2001), AJ 122, 2118; 4100-8700 A from Neckel & Labs (1984) and 1195-4100 A from Woods et al. (1996). Sampled every 10.0 A through the visible, close to the 9 A this grating resolves. The paper divided by ASTM E-490, which this repository does not hold; this is this repository's choice of solar reference and any mismatch between it and the true solar spectrum is the same in every row, so it moves the whole map by one amount rather than changing its shape."
   }
  },

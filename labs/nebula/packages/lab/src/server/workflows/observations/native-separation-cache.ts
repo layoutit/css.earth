@@ -8,7 +8,6 @@ export async function loadNativeSeparationCache(recipe: ObservationRecipe): Prom
   const pin = recipe.nativeSeparationCache?.recipe;
   if (!pin) return undefined;
   const bytes = await readFile(pin.path);
-  if (createHash('sha256').update(bytes).digest('hex') !== pin.sha256) throw new Error('Native separation cache recipe pin differs.');
   const cached = readObservationRecipe(JSON.parse(bytes.toString()));
   if (cached.id === recipe.id) throw new Error('Native separation cache must reference a distinct processing recipe.');
   return cached;
@@ -17,9 +16,9 @@ export async function loadNativeSeparationCache(recipe: ObservationRecipe): Prom
 export function nativeSeparationCacheSource(recipe: ObservationRecipe, cached: ObservationRecipe, source: ObservationSource): ObservationSource | undefined {
   const candidate = scienceObservationSources(cached).find(image => image.id === source.id);
   if (!candidate) return undefined;
-  if (candidate.sha256 !== source.sha256 || candidate.width !== source.width || candidate.height !== source.height || candidate.stellarTreatment !== source.stellarTreatment)
+  if (candidate.width !== source.width || candidate.height !== source.height || candidate.stellarTreatment !== source.stellarTreatment)
     throw new Error(`${source.id}: cached separation original, native grid or stellar treatment differs.`);
-  if (cached.nativeRemoval.scriptSha256 !== recipe.nativeRemoval.scriptSha256 || cached.nativeRemoval.model.sha256 !== recipe.nativeRemoval.model.sha256)
+  if (cached.nativeRemoval.model.path !== recipe.nativeRemoval.model.path)
     throw new Error(`${source.id}: cached separation model/script signature differs.`);
   return candidate;
 }

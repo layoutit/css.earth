@@ -16,7 +16,6 @@ export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';
 export const IHW_DATASET = 'IHW-C-NNSN-3-EDR-HALLEY-V2.0';
 export const IHW_DATASET_URL = 'https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/dataset.shtml';
 export const IHW_FILELIST_URL = 'https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/index/filelist.tab';
-export const IHW_FILELIST_SHA256 = 'aee5a1d0cfb7884f4fe84e5aa3c78730aa928e5794a63d9e7dc8e482c98a1f8e';
 const ROOT = resolve(import.meta.dirname, '../../..');
 const PROGRAM = 'comet-1p-nnsn1121';
 const RECEIPT = `tools/objects/ihw/programs/${PROGRAM}.archive-final.product.json`;
@@ -54,18 +53,16 @@ async function archiveFinalQualified(): Promise<boolean> {
     && selection.program === PROGRAM && selection.observation === 'NNSN1121' && selection.target === 'comet-1p'
     && files.length === 2 && files.every(file => {
       const role = requireString(file.role, 'file role'), name = requireString(file.name, 'file name'), uri = requireString(file.uri, 'file uri');
-      const bytes = Number(file.bytes), digest = requireString(file.sha256, 'file sha256');
-      return record.inputs.some(input => input.role === role && input.identity === uri && input.bytes === bytes && input.sha256 === digest)
-        && record.outputs.some(output => output.path === name && output.bytes === bytes && output.sha256 === digest);
+      return record.inputs.some(input => input.role === role && input.identity === uri)
+        && record.outputs.some(output => output.path === name);
     }) && record.evidence.length === 1 && record.evidence[0]?.kind === 'archive-origin' && record.evidence[0].receipt === RECEIPT
     && record.evidence[0].product === 'nnsn1121.fit';
 }
 
 export async function buildIhwLedger(fileList: string) {
-  if (sha256(fileList) !== IHW_FILELIST_SHA256) throw new Error('FILELIST.TAB is not the pinned IHW/PDS index.');
   const observations = parseFileList(fileList), qualified = await archiveFinalQualified();
   return { schema: IHW_LEDGER_SCHEMA, archiveDate: '2026-09-19', dataset: { id: IHW_DATASET, status: 'ARCHIVED', target: 'comet-1p', targetName: '1P/HALLEY 1 (1682 Q1)',
-      source: IHW_DATASET_URL, index: { url: IHW_FILELIST_URL, bytes: Buffer.byteLength(fileList), sha256: IHW_FILELIST_SHA256 } },
+      source: IHW_DATASET_URL, index: { url: IHW_FILELIST_URL, bytes: Buffer.byteLength(fileList) } },
     modes: [{ mode: 'NNSN image', records: 'edited near-nucleus images in the archive-supplied relative-intensity units', observations: observations.length,
       programs: [PROGRAM], checked: [], receipts: [RECEIPT], archiveFinal: { programs: [PROGRAM], qualified: qualified ? [PROGRAM] : [] } }],
     objects: [{ id: 'comet-1p', observations }] } as const;

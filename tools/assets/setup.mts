@@ -72,9 +72,9 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
             if (size > asset.bytes) throw new Error(`Prepared asset exceeds its expected size: ${asset.filename}.`);
             chunks.push(chunk);
           }
-          await publishSourceBytes({ destination: asset.file, bytes: Buffer.concat(chunks),
-            planetName: asset.id, entry: { path: asset.filename,
-              expectedBytes: asset.bytes, expectedSha256: asset.sha256 } });
+          const bytes = Buffer.concat(chunks);
+          if (bytes.length !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Prepared asset does not match its inventory: ${asset.filename}.`);
+          await publishSourceBytes({ destination: asset.file, bytes });
           installed++;
         }
         onProgress({ completed: installed + reused + skipped, total: assets.length, installed, reused, skipped });

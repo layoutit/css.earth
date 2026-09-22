@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -235,8 +233,6 @@
     {
       "id": "aldebaran-crosscheck-spectrum",
       "path": "photometry/crosscheck-III_126_part2.dat.gz",
-      "expectedBytes": 506596,
-      "expectedSha256": "b031729b448d64e34a2801e208e7f22254cfe03a32ea8b9b5dc1dfac329d4d10",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
       "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

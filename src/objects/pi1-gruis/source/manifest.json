@@ -76,8 +76,6 @@
       }
     },
     {
-      "expectedBytes": 152640,
-      "expectedSha256": "a40957e402029713b858f34083b25924eefbf9de6d3c106a978b706c773b532f",
       "id": "pionier-2014-09-for-image",
       "path": "observations/PI_GRU_forImage.fits",
       "origin": "https://oidb.jmmc.fr/exist/apps/oidb-data/oifits/staging/61231614-66b1-43d9-a316-1466b1f3d961/PI_GRU_forImage.fits",
@@ -112,8 +110,6 @@
       }
     },
     {
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
@@ -223,8 +219,6 @@
     {
       "id": "pi1-gruis-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10165,
-      "expectedSha256": "220d5a51b829440f2226046cf24a5156f604d8512ffc824cb1381897e3696fe7",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=6518817665843312000&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",

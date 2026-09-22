@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -62,8 +60,6 @@
     {
       "id": "c2683716",
       "path": "observations/C2683716_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "b13a0124dc199090c2047ef316df5bee68c12cb6b008ff2a49beb238a6c38832",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -162,9 +158,7 @@
       "path": "geometry/vg200051.tsc"
     },
     {
-      "path": "geometry/vg2_ura_version1_type1_iss_sedr.bc",
-      "expectedBytes": 272384,
-      "expectedSha256": "433f81e8c29623fa1143fb7832d4044a98a1c16c5cc641a901c8a371ee626f96"
+      "path": "geometry/vg2_ura_version1_type1_iss_sedr.bc"
     },
     {
       "path": "geometry/vg2_ura_version1_type1_iss_sedr.txt"

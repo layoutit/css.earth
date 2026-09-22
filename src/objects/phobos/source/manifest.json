@@ -4,8 +4,6 @@
     {
       "id": "stooke-mosaic",
       "path": "observations/phobos-mosaic.tif",
-      "expectedBytes": 103738243,
-      "expectedSha256": "d7934d5b209e5f31ed26297e1e85a4713d8d0aa2906111ffe4b3d60d02ae0ccb",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Phobos_Viking_Mosaic_40ppd_DLRcontrol.tif",
       "catalog": "https://astrogeology.usgs.gov/search/map/phobos_viking_global_mosaic_5m",
       "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
@@ -62,8 +60,6 @@
     {
       "id": "ernst-2023-shape",
       "path": "shape/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
-      "expectedBytes": 3018535,
-      "expectedSha256": "69fffc77f4fd799767e50fc03631bea43f8d9110edcae8f355fad926136339fa",
       "origin": "https://sbmt.jhuapl.edu/shared-files/files/phobos_g_148m_spc_obj_0000n00000_v004.obj.zip",
       "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
       "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
@@ -100,8 +96,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -139,8 +133,6 @@
       "consumers": [
         "facet-science"
       ],
-      "expectedBytes": 34508570,
-      "expectedSha256": "ac77f93a5fe2c547f118b566f37444713de7e25579bafc77bbd5499c8259e49d",
       "coverage": "Released facet attributes include relative albedo and slope relative to modeled gravity, assuming uniform density, rotation and Mars at the mean orbital distance. Albedo retains the SPC relative scale, not calibrated absolute albedo. The scientific views withhold facets without finite Albedo support; this is not a complete photographic coverage measurement.",
       "sourceBinding": {
         "kind": "catalogued",

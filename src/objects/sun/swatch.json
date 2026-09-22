@@ -11,15 +11,13 @@
     "title": "ASTM E490-00 air-mass-zero solar spectral irradiance",
     "url": "https://nrel.sitefinity.cloud/grid/solar-resource/spectra-astm-e490",
     "dataUrl": "https://www.nlr.gov/media/docs/libraries/grid/e490_00a_amo.xls?sfvrsn=ce97914b_1",
-    "sha256": "82d5de38f529fcd65d1648e397a1e2d1a8dfaff1e3e701ba5861ed4ab5bc1e7a",
     "columns": "NewAM0 worksheet, columns A and B: wavelength in micrometres and irradiance in W/m2/micrometre."
   },
   "conversion": {
     "observer": {
       "name": "CIE 1931 2 degree standard observer",
       "dataUrl": "https://files.cie.co.at/CIE_xyz_1931_2deg.csv",
-      "doi": "https://doi.org/10.25039/CIE.DS.xvudnb9b",
-      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1"
+      "doi": "https://doi.org/10.25039/CIE.DS.xvudnb9b"
     },
     "integration": "Linearly interpolate solar irradiance onto the CIE 360-830 nm grid at 1 nm. Sum irradiance times each CIE matching function and normalize XYZ to Y=1. All inputs cover the integration interval; no extrapolation.",
     "chromaticAdaptation": "None. Convert the emitted spectrum directly to the sRGB D65 display primaries; do not white-balance the emitter as a reflective surface.",

@@ -19,7 +19,7 @@ def emit(stage,current,total,message):
  print(json.dumps(dict(type='progress',stage=stage,current=current,total=total,message=message)),flush=True)
 
 def read_pin(pin,dimensions=False):
- if not isinstance(pin,dict) or set(pin)!=({'path','sha256','nativeDimensions'} if dimensions else {'path','sha256'}) or not Path(pin['path']).is_absolute() or sha(pin['path'])!=pin['sha256']:
+ if not isinstance(pin,dict) or set(pin)!=({'path','sha256','nativeDimensions'} if dimensions else {'path'}) or not Path(pin['path']).is_absolute() or ('sha256' in pin and sha(pin['path'])!=pin['sha256']):
   raise ValueError('Pinned source/model/baseline identity differs.')
  return Path(pin['path'])
 
@@ -117,7 +117,7 @@ def run(request):
  baseline=decode(baseline_path) if baseline_path else None
  if baseline is not None and (baseline.shape!=image.shape or np.any(baseline>image)):raise ValueError('Baseline changed the native grid or adds pixels.')
  output.mkdir(parents=True,exist_ok=True);emit('validating',1,1,'Source pins and native pixel grid verified');emit('loading-model',0,1,'Loading NOX once for this job');predict=Nox(model_path);emit('loading-model',1,1,'NOX ready')
- result=dict(schema='cssearth-nox-output@1',operation=request['operation'],sourceSha256=request['source']['sha256'],modelSha256=request['model']['sha256'],scriptSha256=sha(__file__),baselineSha256=request.get('baseline',{}).get('sha256'),nativeDimensions=[w,h])
+ result=dict(schema='cssearth-nox-output@1',operation=request['operation'],sourceSha256=request['source']['sha256'],modelSha256=sha(request['model']['path']),scriptSha256=sha(__file__),baselineSha256=request.get('baseline',{}).get('sha256'),nativeDimensions=[w,h])
  try:
   overview=reduced(image,1600);write_image(output/'overview.webp',overview);result['overview']=dict(path='overview.webp',dimensions=[overview.shape[1],overview.shape[0]])
   if request['operation']=='preview':

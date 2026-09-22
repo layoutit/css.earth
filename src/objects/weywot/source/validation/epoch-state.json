@@ -40,7 +40,6 @@
   "relative": {
    "path": "source/orbit/weywot-epoch.txt",
    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120050000&CENTER=500%40920050000&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-   "sha256": "66344f75556ee978d274837e75249a4f0f80e78c95089f48e9a8bc020552d1f0",
    "bytes": 6942,
    "target": 120050000,
    "center": 920050000
@@ -48,7 +47,6 @@
   "parent": {
    "path": "source/orbit/quaoar-epoch.txt",
    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920050000&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-   "sha256": "2fe5f1bb661817293c23d7800d3c233d3bf5360dfaf5c903a367a576af97c91b",
    "bytes": 6769,
    "target": 920050000,
    "center": 10
@@ -56,7 +54,6 @@
   "heliocentricCheck": {
    "path": "source/orbit/weywot-heliocentric-check.txt",
    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120050000&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-   "sha256": "965acc380a9be3d6c0f7030d13bc93acd7659cf9913fdd620bdc45175419c032",
    "bytes": 6921,
    "target": 120050000,
    "center": 10

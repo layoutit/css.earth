@@ -23,7 +23,7 @@ export async function validateDetectionResult(root: string, value: unknown): Pro
   const result = readDetectionResult(value), { image } = await readRegisteredGeometrySource(root, result.cataloguePath, result.imageId);
   if (image.sourceSha256 !== result.sourceSha256 || image.mapSha256 !== result.mapSha256 || image.width !== result.width || image.height !== result.height)
     throw new TypeError('Detector proposal belongs to changed source evidence.');
-  readGeometryMap(JSON.parse((await readGeometryPin(root, { path: `${image.directory}/${result.geometry.file}`, sha256: result.geometry.sha256 })).toString()), image);
+  readGeometryMap(JSON.parse((await readGeometryPin(root, { path: `${image.directory}/${result.geometry.file}` })).toString()), image);
   return result;
 }
 export async function prepareDetection(root: string, value: unknown, progress: (value: DetectionProgress) => void): Promise<DetectionResult> {

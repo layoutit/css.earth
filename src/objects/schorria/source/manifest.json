@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "ad5151b43540333b3c05d2e2c696d00bb09d7645f703b9451aaf3be06f48992f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -116,9 +113,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/ali-lagoa-delbo-2017.pdf",
-      "expectedBytes": 403097,
-      "expectedSha256": "029bc9e0c46618a70d79a125081a67eb4fa0c3a2cb10a204cdb9585f487b9f78"
+      "path": "reference/ali-lagoa-delbo-2017.pdf"
     },
     {
       "path": "reference/calibration.json"

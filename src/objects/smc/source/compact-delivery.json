@@ -5,12 +5,10 @@
     "directory": "src/objects/smc",
     "method": "finite-emission",
     "compactInputs": {
-      "path": "src/objects/smc/source/compact/inputs.json",
-      "sha256": "03dfa6f3020a96479f3d0451a1b36136dd9116268fb6e0b09328f1476f42b5a6"
+      "path": "src/objects/smc/source/compact/inputs.json"
     }
   },
   "researchRecipe": {
-    "path": "labs/nebula/models/smc/app-lenses.json",
-    "sha256": "29316234cc7b336293a9c3e8590c2b014b22e48bb22d780f8f8ea48c8eff4dab"
+    "path": "labs/nebula/models/smc/app-lenses.json"
   }
 }

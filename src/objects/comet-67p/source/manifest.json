@@ -4,8 +4,6 @@
     {
       "id": "mtp019",
       "path": "shape/mtp019.obj",
-      "expectedBytes": 5157570,
-      "expectedSha256": "e90fd0b7d86bc826cf967e2e0234a945c55be7dfd2f710c00e11ed953b14f801",
       "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
       "credit": "ESA/Rosetta/NAVCAM; ESA/RMOC",
       "license": "CC BY-SA 3.0 IGO",
@@ -61,8 +59,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -115,8 +111,6 @@
     {
       "id": "osiris-20140805-geo",
       "path": "observations/n20140805t194314611id50f22.IMG",
-      "expectedBytes": 151028736,
-      "expectedSha256": "de0884a0d83f972bb7f7025dfa784d2b153763dda035b43afa918c8023fe511b",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140805t194314611id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -146,8 +140,6 @@
     {
       "id": "osiris-20140805-quality",
       "path": "observations/n20140805t194314611id40f22.IMG",
-      "expectedBytes": 37776896,
-      "expectedSha256": "e7d60cefabbc04c08c90caf0d281a3c65746f8f08c016e73e93287b0087102b8",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m06-v2.0/data/img/n20140805t194314611id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -177,8 +169,6 @@
     {
       "id": "osiris-20140805-2344-geo",
       "path": "observations/n20140805t234316579id50f22.IMG",
-      "expectedBytes": 151028736,
-      "expectedSha256": "2cbe1a4cef9576331eb52f387e1d2b72897f2605b41f35b579481e41fc557ed1",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140805t234316579id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -208,8 +198,6 @@
     {
       "id": "osiris-20140805-2344-quality",
       "path": "observations/n20140805t234316579id40f22.IMG",
-      "expectedBytes": 37776896,
-      "expectedSha256": "92f13a95c7d56f0ee5a4eb62bdb8d8e8a60a5435e5d5cbae9a6c4726318cd239",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m06-v2.0/data/img/n20140805t234316579id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -239,8 +227,6 @@
     {
       "id": "osiris-20140806-0244-geo",
       "path": "observations/n20140806t024316574id50f22.IMG",
-      "expectedBytes": 151028736,
-      "expectedSha256": "c431756b48ec0e00392be8a88d9847a33ec35121c4ca5139edc72ac5a2223d39",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140806t024316574id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -270,8 +256,6 @@
     {
       "id": "osiris-20140806-0244-quality",
       "path": "observations/n20140806t024316574id40f22.IMG",
-      "expectedBytes": 37776896,
-      "expectedSha256": "9835bd612a76017a15bcaa815fda197126bf72b3f3918ccd2af0981572b1868a",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m06-v2.0/data/img/n20140806t024316574id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -301,8 +285,6 @@
     {
       "id": "osiris-20140806-0520-geo",
       "path": "observations/n20140806t051914575id50f22.IMG",
-      "expectedBytes": 151028736,
-      "expectedSha256": "0552334b0799c77a0bd9d79a953459e1c28211ef7ff2bb333ef0d6be29d30326",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m06-geo-v1.0/data/img/n20140806t051914575id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -332,8 +314,6 @@
     {
       "id": "osiris-20140806-0520-quality",
       "path": "observations/n20140806t051914575id40f22.IMG",
-      "expectedBytes": 37776896,
-      "expectedSha256": "64fb11ae63cb2e3d7f96e2be63cd9ceae315ae71e4d94bc40c85df3d3fe3d4ce",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m06-v2.0/data/img/n20140806t051914575id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -463,8 +443,6 @@
     {
       "id": "virtis-cg_spc_shap5_097k_cart-wrl",
       "path": "science/cg_spc_shap5_097k_cart.wrl",
-      "expectedBytes": 11912468,
-      "expectedSha256": "330e975fc3f263a15efce021733a7d35388e23c3b5a9c142434802aee2941d76",
       "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_LAM_PSI/SHAP5/CG_SPC_SHAP5_097K_CART.WRL",
       "credit": "ESA/Rosetta; LAM/PSI SPC SHAP5 team; Jorda et al.",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -490,8 +468,6 @@
     {
       "id": "virtis-albedo",
       "path": "science/al01_glb_m006_m006_v01.tab",
-      "expectedBytes": 8035200,
-      "expectedSha256": "e5a4ec5aa28af5210a5746f82f23bf253bd1b6eefd0a36434e462ecc575d2def",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "capture": {
@@ -565,8 +541,6 @@
     {
       "id": "virtis-slope",
       "path": "science/sl01_glb_m006_m006_v01.tab",
-      "expectedBytes": 8035200,
-      "expectedSha256": "689efa4371d0b4d9f16ce1bc72b94c8c98aaf99488a7d6ce27e4d946724c11b1",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/sl01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "capture": {
@@ -640,8 +614,6 @@
     {
       "id": "virtis-absorption",
       "path": "science/bd01_glb_m006_m006_v01.tab",
-      "expectedBytes": 8035200,
-      "expectedSha256": "00b78b5c28765f16b63999697f3e0f8a3878e21fdbd84d5b47f649681a5e0437",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/bd01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "capture": {
@@ -715,8 +687,6 @@
     {
       "id": "virtis-ice",
       "path": "science/wi01_glb_m006_m006_v01.tab",
-      "expectedBytes": 8035200,
-      "expectedSha256": "24236aa2032d17f829d24e2eddf2e628e1ee824beee48b999223d276da7c9965",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.tab",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "capture": {
@@ -790,8 +760,6 @@
     {
       "id": "shap7-region-cells",
       "path": "geology/shap7-regions.vtk",
-      "expectedBytes": 6309622,
-      "expectedSha256": "9af9fbedcdc04046786a1c3cb614938245f39cacba69639ba1847fa50fb1e963",
       "origin": "https://data.mendeley.com/public-files/datasets/2845znt54k/files/d6036dad-ade7-4645-afc1-6f8e86c36a4e/file_downloaded",
       "credit": "Thomas et al. (2018); Rosetta/OSIRIS; SHAP7 by Preusker et al.",
       "license": "CC BY 4.0",
@@ -949,8 +917,6 @@
     {
       "id": "n20151026-125938-path",
       "path": "observations/n20151026t125938783id50f22.img",
-      "expectedBytes": 151027712,
-      "expectedSha256": "86e92509e8413eb74ab39fd5d557dad8c9f4e8a5b5c982dc13c194a79a69749e",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151026t125938783id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -980,8 +946,6 @@
     {
       "id": "n20151026-125938-qualityPath",
       "path": "observations/n20151026t125938783id40f22.img",
-      "expectedBytes": 37775872,
-      "expectedSha256": "81a4d0d4cb6240d7a065e0c1f55eb7233412c56c77951f9ea4186eb4f426fc3c",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151026t125938783id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1011,8 +975,6 @@
     {
       "id": "n20151031-234514-path",
       "path": "observations/n20151031t234514781id50f22.img",
-      "expectedBytes": 151028224,
-      "expectedSha256": "bd37d73e5f2b5f0ad5064a6975fe0bb8c7fb7b05b1b8cb8c0bd9528ba573a7ef",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151031t234514781id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1042,8 +1004,6 @@
     {
       "id": "n20151031-234514-qualityPath",
       "path": "observations/n20151031t234514781id40f22.img",
-      "expectedBytes": 37775872,
-      "expectedSha256": "ea5e6339128039ecf5af0665e10ac03ac89a1724a173748ac5a0b186d2fde000",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151031t234514781id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1073,8 +1033,6 @@
     {
       "id": "n20151104-112633-path",
       "path": "observations/n20151104t112633715id50f22.img",
-      "expectedBytes": 151027712,
-      "expectedSha256": "c52efdf3d8ac954f2eee09eef415fd216b715ef3fd6ef327ae965fcccf72b0ff",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151104t112633715id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1104,8 +1062,6 @@
     {
       "id": "n20151104-112633-qualityPath",
       "path": "observations/n20151104t112633715id40f22.img",
-      "expectedBytes": 37775872,
-      "expectedSha256": "1dc00a7acb5efafb93e822670794c75a77738dd007f1936e87f0cc705e4855cb",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151104t112633715id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1135,8 +1091,6 @@
     {
       "id": "n20151115-050650-path",
       "path": "observations/n20151115t050650703id50f22.img",
-      "expectedBytes": 151027712,
-      "expectedSha256": "a552e2d9e692b68398bb5c18cc18fab8ff7172ac03b52cdd79fd15e0e2ce95a8",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151115t050650703id50f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1166,8 +1120,6 @@
     {
       "id": "n20151115-050650-qualityPath",
       "path": "observations/n20151115t050650703id40f22.img",
-      "expectedBytes": 37775872,
-      "expectedSha256": "187e591b1898727928166a180f62e1df7af26770d641221703123604cf628a7f",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151115t050650703id40f22.img",
       "credit": "ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "CC-BY-SA-4.0",
@@ -1303,8 +1255,6 @@
     {
       "id": "consert-fss-orbiter-geometry-table",
       "path": "telescopes/consert/cn_g_o_fss.tab",
-      "expectedBytes": 5723160,
-      "expectedSha256": "d9b69d7ff8cd17f56363684b10d1d0727b6c642185c32389f4860944931d359d",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.tab",
       "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
       "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",
@@ -1377,8 +1327,6 @@
     {
       "id": "consert-fss-lander-geometry-table",
       "path": "telescopes/consert/cn_g_l_fss.tab",
-      "expectedBytes": 4655868,
-      "expectedSha256": "0a29c1b563d17196b4d9824e6d5b1d8c2be2bd130e17c10441c24f3ad7a013b4",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.tab",
       "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
       "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",

@@ -33,7 +33,7 @@ def archive_mesh(vertices, plates, recipe, descriptor):
     obj_bytes = obj.getvalue().encode('ascii')
     receipt = {
         'schema':'cssearth-dsk-mesh-provenance@1',
-        'source':{'sha256':recipe['inputSha256'],'bytes':recipe['inputBytes']},
+        'source':{'bytes':recipe['inputBytes']},
         'toolchain':{'spiceypy':recipe['spiceypyVersion'],'cspice':recipe['cspiceVersion']},
         'descriptor':descriptor,
         'units':'kilometres',
@@ -62,7 +62,7 @@ def main():
     if spice.__version__ != recipe['spiceypyVersion'] or spice.tkvrsn('TOOLKIT') != recipe['cspiceVersion']:
         raise ValueError('Install the pinned SpiceyPy/CSPICE conversion toolchain')
     content = pathlib.Path(source).read_bytes()
-    if len(content) != recipe['inputBytes'] or hashlib.sha256(content).hexdigest() != recipe['inputSha256']:
+    if len(content) != recipe['inputBytes']:
         raise ValueError('DSK input identity differs')
     handle = spice.dasopr(source)
     try:

@@ -5,47 +5,37 @@
     {
       "codePins": [
         {
-          "path": "labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts",
-          "sha256": "485d460329a04c9a389ca24a6d09763552aeb375340f6a8280a8d7a8b3e6c0cb"
+          "path": "labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts"
         },
         {
-          "path": "labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts",
-          "sha256": "a353336f5eb1951d1ee29d38de85f2b0280635baa12f9fbf34f46d4e9a0296bd"
+          "path": "labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts"
         },
         {
-          "path": "labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts",
-          "sha256": "adae41efcc1ce3c00296757e5a9d7e87200958fb4e8a6f30952d49128484b0d0"
+          "path": "labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts"
         },
         {
-          "path": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts",
-          "sha256": "99a165eed2c2affe67eef87d53afe97ef80a304c2312b669b6b54767c12eab96"
+          "path": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts"
         }
       ],
       "schema": "cssearth-constrained-tracer-fit@1",
       "recipe": {
-        "path": "labs/nebula/models/smc/constrained/fit.json",
-        "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe"
+        "path": "labs/nebula/models/smc/constrained/fit.json"
       },
       "inputs": {
         "simulation": {
-          "path": ".local/nebula-lab/full-density/smc-full-density.f32",
-          "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4"
+          "path": ".local/nebula-lab/full-density/smc-full-density.f32"
         },
         "catalogue": {
-          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
-          "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
         },
         "footprint": {
-          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
-          "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f"
+          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz"
         },
         "observedReceipt": {
-          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
-          "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
         },
         "frameObject": {
-          "path": "labs/nebula/models/smc/full-density/object.json",
-          "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+          "path": "labs/nebula/models/smc/full-density/object.json"
         }
       },
       "simulationCenter": {
@@ -486,7 +476,6 @@
         ],
         "particles": {
           "path": ".local/nebula-lab/smc-constrained/simulation.f32",
-          "sha256": "5917a60fd09a619f362b5f346ee609c15e7dab779bfedee7a83f8f008b3bdbf7",
           "count": 225000
         }
       },
@@ -503,47 +492,37 @@
     {
       "codePins": [
         {
-          "path": "labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts",
-          "sha256": "485d460329a04c9a389ca24a6d09763552aeb375340f6a8280a8d7a8b3e6c0cb"
+          "path": "labs/nebula/packages/reconstruction/src/registration/regional-density-weights.ts"
         },
         {
-          "path": "labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts",
-          "sha256": "a353336f5eb1951d1ee29d38de85f2b0280635baa12f9fbf34f46d4e9a0296bd"
+          "path": "labs/nebula/packages/reconstruction/src/registration/forward-density-fit.ts"
         },
         {
-          "path": "labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts",
-          "sha256": "adae41efcc1ce3c00296757e5a9d7e87200958fb4e8a6f30952d49128484b0d0"
+          "path": "labs/nebula/packages/lab/src/cli/commands/forward-fit-data.ts"
         },
         {
-          "path": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts",
-          "sha256": "99a165eed2c2affe67eef87d53afe97ef80a304c2312b669b6b54767c12eab96"
+          "path": "labs/nebula/packages/lab/src/cli/commands/fit-tracer-density.ts"
         }
       ],
       "schema": "cssearth-constrained-tracer-fit@1",
       "recipe": {
-        "path": "labs/nebula/models/smc/constrained/fit.json",
-        "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe"
+        "path": "labs/nebula/models/smc/constrained/fit.json"
       },
       "inputs": {
         "simulation": {
-          "path": ".local/nebula-lab/full-density/smc-full-density.f32",
-          "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4"
+          "path": ".local/nebula-lab/full-density/smc-full-density.f32"
         },
         "catalogue": {
-          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv",
-          "sha256": "a3efee3625fd8c1fda07049f2c1a40cdb4af8ff31728f0147fa2df3838f4c00e"
+          "path": ".local/nebula-lab/smc-vmc/density-rc.tsv"
         },
         "footprint": {
-          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz",
-          "sha256": "e27a0db84ce43032161a53fef64af23cabc2a508c481459164d04f88cc86502f"
+          "path": ".local/nebula-lab/smc-vmc/rcsmcext.dat.gz"
         },
         "observedReceipt": {
-          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json",
-          "sha256": "46185c29d4f2028691dedc60468ea8afd00fbd2c81362f7be4e2840082279383"
+          "path": "labs/nebula/models/smc/vmc/crossmatch-receipt.json"
         },
         "frameObject": {
-          "path": "labs/nebula/models/smc/full-density/object.json",
-          "sha256": "ca7aa69e0c37ca01ae8fd1b437786bb178693996a0d67930c22fce19f57a5957"
+          "path": "labs/nebula/models/smc/full-density/object.json"
         }
       },
       "simulationCenter": {
@@ -872,7 +851,6 @@
         "activeBounds": [],
         "particles": {
           "path": ".local/nebula-lab/smc-constrained/ellipsoid.f32",
-          "sha256": "2b00aa9d019095d4c9118a4e85b3c80d85e9547f195b86abe821f2f1cfbf024e",
           "count": 65536
         }
       },

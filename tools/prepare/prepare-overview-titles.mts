@@ -7,7 +7,6 @@ import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-r
 import { createPreparedTitleLayout } from '../../src/platform/prepared-title.mts';
 
 const fontPath = fileURLToPath(new URL(`../../${recipe.checkedFontPath}`, import.meta.url));
-if (sha256(await readFile(fontPath)) !== recipe.sourceSha256) throw new Error('Shared card title font hash mismatch.');
 const baseFont = fontkit.openSync(fontPath);
 if (!("getVariation" in baseFont)) throw new TypeError("The pinned overview font must be one font face.");
 const font = baseFont.getVariation({ wght: recipe.weight, opsz: recipe.opticalSize });

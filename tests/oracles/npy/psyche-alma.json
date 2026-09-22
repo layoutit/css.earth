@@ -9,22 +9,18 @@
  "inputs": [
   {
    "path": "src/objects/psyche/source/thermal/ThermalInertia_BestFitValue.npy",
-   "sha256": "869ac19ed10168a25d83749d16df095fb8032145f414df914d5168895161f179",
    "bytes": 21736
   },
   {
    "path": "src/objects/psyche/source/thermal/DielectricConstant_BestFitValue.npy",
-   "sha256": "7c7be079837b29f26f3f464a64904127e442d1230adc7a44687480f4a8068abd",
    "bytes": 21736
   },
   {
    "path": "src/objects/psyche/source/thermal/LongitudeArray.npy",
-   "sha256": "0795daf24637ad406a927b4a385a678765d43608999427606b04110387739245",
    "bytes": 712
   },
   {
    "path": "src/objects/psyche/source/thermal/LatitudeArray.npy",
-   "sha256": "72dbcca412048092d3c1b755ce612ed1a6aadc3553129126a0799cf798421b2b",
    "bytes": 424
   }
  ],

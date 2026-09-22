@@ -14,22 +14,19 @@
           "label": "F405N, 4.05 microns, red",
           "source": { "kind": "fits-image", "path": "output/jwst-imaging/f405n-grid/image3/jw02733-o001_t001_nircam_f405n-f444w_grid_i2d.fits", "extension": 1, "plane": 1 },
           "unit": "MJy/sr",
-          "stretch": { "kind": "asinh", "black": 0, "white": 45, "softening": 2 },
-          "sha256": "9c4ca0a94ebcabe7e7ae6fd68acd94d73c6c9d67f724fd494b27044c173de3a7"
+          "stretch": { "kind": "asinh", "black": 0, "white": 45, "softening": 2 }
         },
         {
           "label": "F187N, 1.87 microns, green",
           "source": { "kind": "fits-image", "path": "output/jwst-imaging/f187n-grid/image3/jw02733-o001_t001_nircam_clear-f187n_grid_i2d.fits", "extension": 1, "plane": 1 },
           "unit": "MJy/sr",
-          "stretch": { "kind": "asinh", "black": 0, "white": 180, "softening": 4 },
-          "sha256": "213680aebed947c2c82790b412c174b3bbf9f54113425c6f8429c48c11b65589"
+          "stretch": { "kind": "asinh", "black": 0, "white": 180, "softening": 4 }
         },
         {
           "label": "F090W, 0.90 microns, blue",
           "source": { "kind": "fits-image", "path": "output/jwst-imaging/f090w-grid/image3/jw02733-o001_t001_nircam_clear-f090w_grid_i2d.fits", "extension": 1, "plane": 1 },
           "unit": "MJy/sr",
-          "stretch": { "kind": "asinh", "black": 0.2, "white": 25, "softening": 1 },
-          "sha256": "825f5d6d0186c5088e045403f7e5e1264db1cd8491c15c1423f4330cd9519353"
+          "stretch": { "kind": "asinh", "black": 0.2, "white": 25, "softening": 1 }
         }
       ],
       "window": { "x": 267, "y": 267, "width": 490, "height": 490 },
@@ -58,7 +55,6 @@
       "colour": { "kind": "greys", "missing": "#4a4a4a" },
       "enlarge": 9,
       "product": {
-        "sha256": "5946bf8cfe1055c0b09cfee14ef618ef2b33c950b06680023f97d230a7727635",
         "command": "node tools/objects/jwst/cubes/spec3.mts sn-1987a-1232 NIRSPEC-G140M-F100LP .local/sn-1987a-1232/spec3-0.05",
         "definition": "tools/objects/jwst/imaging/programs/sn-1987a-1232.NIRSPEC-G140M-F100LP.reproduction.json"
       },
@@ -80,7 +76,6 @@
       "colour": { "kind": "greys", "missing": "#4a4a4a" },
       "enlarge": 1,
       "product": {
-        "sha256": "59bc12176a464215d4cfdef317b9ffae4b3ed99a0626f79a43991bf777918b57",
         "command": "node tools/objects/jwst/imaging/image3.mts ngc-6720-1558 MIRI-F770W output/jwst-ngc6720",
         "definition": "tools/objects/jwst/imaging/programs/ngc-6720-1558.json"
       },
@@ -101,7 +96,6 @@
       "colour": { "kind": "ramp", "stops": [[0, "#08203a"], [0.4, "#1f5f74"], [0.75, "#c8b26a"], [1, "#fff4d2"]], "missing": "#4a4a4a" },
       "enlarge": 2,
       "product": {
-        "sha256": "548febdcad279cc1f2675e1d25de68d110d5664643e92269e7422ac151edf45f",
         "command": "node tools/objects/hst/slit-scan-map.mts europa-salt-map .local/hst/europa-14650 output/europa-salt-map --mirror --receipt",
         "definition": "tools/objects/hst/programs/europa-salt-map.scan.json"
       },
@@ -123,7 +117,6 @@
       "colour": { "kind": "ramp", "stops": [[0, "#000000"], [0.35, "#7a1500"], [0.7, "#e06b1e"], [1, "#fff6c8"]] },
       "enlarge": 5,
       "product": {
-        "sha256": "5ab44d6be1e3c4727d48dc5ef13f6b24a47bac394b139f64951c6790c1b0bbe4",
         "command": "node tools/objects/interferometry/alma-disc-selfcal.mts <calibrated continuum .ms> --body Europa --radius-km 1560.8 --out output/alma-europa/selfcal --scratch output/alma-europa/scratch",
         "definition": "output/alma-europa/selfcal/Europa.selfcal.receipt.json (this stage has no pinned program file; the run states its parameters on the command line and records them in the receipt)"
       },
@@ -144,7 +137,6 @@
       "colour": { "kind": "greys" },
       "enlarge": 6,
       "product": {
-        "sha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
         "command": "node tools/objects/interferometry/image-star.mts tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02 output/stars/betelgeuse-matisse-2020-02 --raw output/calibration/raw-matisse",
         "definition": "tools/objects/interferometry/seasons/betelgeuse-matisse-2020-02/season.json"
       },
@@ -166,7 +158,6 @@
       "colour": { "kind": "greys" },
       "enlarge": 5,
       "product": {
-        "sha256": "39edc841ad732ca92657569317fdf107df2a4ab3e77335b62999e2e2180cb2b7",
         "command": "node tools/objects/naco/reduce.mts ceres-080C0881 .local/naco/ceres-080C0881 --template 2007-11-11T02:38:47",
         "definition": "tools/objects/naco/programs/ceres-080C0881.COADDED_IMG.reproduction.json"
       },
@@ -185,22 +176,19 @@
           "label": "0.5 to 1.5 keV, red",
           "source": { "kind": "fits-events", "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits", "columns": ["x", "y"], "binPixels": 2, "origin": [3468, 3369], "size": [350, 350], "band": { "column": "energy", "limits": [500, 1500] } },
           "unit": "counts per bin",
-          "stretch": { "kind": "asinh", "black": 0, "white": 25, "softening": 1 },
-          "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9"
+          "stretch": { "kind": "asinh", "black": 0, "white": 25, "softening": 1 }
         },
         {
           "label": "1.5 to 3.0 keV, green",
           "source": { "kind": "fits-events", "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits", "columns": ["x", "y"], "binPixels": 2, "origin": [3468, 3369], "size": [350, 350], "band": { "column": "energy", "limits": [1500, 3000] } },
           "unit": "counts per bin",
-          "stretch": { "kind": "asinh", "black": 0, "white": 30, "softening": 1 },
-          "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9"
+          "stretch": { "kind": "asinh", "black": 0, "white": 30, "softening": 1 }
         },
         {
           "label": "3.0 to 7.0 keV, blue",
           "source": { "kind": "fits-events", "path": ".local/chandra/casa-acisi/repro/acisf00210_repro_evt2.fits", "columns": ["x", "y"], "binPixels": 2, "origin": [3468, 3369], "size": [350, 350], "band": { "column": "energy", "limits": [3000, 7000] } },
           "unit": "counts per bin",
-          "stretch": { "kind": "asinh", "black": 0, "white": 6, "softening": 1 },
-          "sha256": "ed50d48111fd7951b13f50a472133d37d50ad0d40d6c33cc830bd540dd352ab9"
+          "stretch": { "kind": "asinh", "black": 0, "white": 6, "softening": 1 }
         }
       ],
       "window": { "x": 1, "y": 1, "width": 350, "height": 350 },
@@ -226,22 +214,19 @@
           "label": "channel 4, 8.0 microns, red",
           "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch4.remosaic.fits", "extension": 0, "plane": 1 },
           "unit": "MJy/sr",
-          "stretch": { "kind": "asinh", "black": 2.6, "white": 25, "softening": 0.5 },
-          "sha256": "1f9bc98b6601915f0e72cf4d1a9d8e4d48e169736524ee4d7750d2c27a610fe7"
+          "stretch": { "kind": "asinh", "black": 2.6, "white": 25, "softening": 0.5 }
         },
         {
           "label": "channel 2, 4.5 microns, green",
           "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch2.remosaic.fits", "extension": 0, "plane": 1 },
           "unit": "MJy/sr",
-          "stretch": { "kind": "asinh", "black": 0.07, "white": 20, "softening": 0.2 },
-          "sha256": "80a806c5919936b1930a279f8f2a25a265a98f06811ea234f6603719ee1118e0"
+          "stretch": { "kind": "asinh", "black": 0.07, "white": 20, "softening": 0.2 }
         },
         {
           "label": "channel 1, 3.6 microns, blue",
           "source": { "kind": "fits-image", "path": "output/spitzer/ngc3132-4416768/ngc3132-4416768.ch1.remosaic.fits", "extension": 0, "plane": 1 },
           "unit": "MJy/sr",
-          "stretch": { "kind": "asinh", "black": 0.05, "white": 20, "softening": 0.2 },
-          "sha256": "017c90bc68baf8a8ff77c6292c41a5a8277c73d2f25082cce914b37b1682b93f"
+          "stretch": { "kind": "asinh", "black": 0.05, "white": 20, "softening": 0.2 }
         }
       ],
       "window": { "x": 1031, "y": 368, "width": 300, "height": 300 },
@@ -270,7 +255,6 @@
       "colour": { "kind": "greys" },
       "enlarge": [14, 6],
       "product": {
-        "sha256": "228f72550288c0c93749adf64c739c9752f5dded28ded6e52274283b3c1b8a1f",
         "command": "node tools/objects/keck/reduce.mts m42-kcwi-2023b-u124 KB.20231209.37031.94.fits",
         "definition": "tools/objects/keck/programs/m42-kcwi-2023b-u124.json"
       },
@@ -292,7 +276,6 @@
       "colour": { "kind": "greys" },
       "enlarge": 1,
       "product": {
-        "sha256": "82fd87999812f0ca5b0f2fb1c61956226821f786d92be650b68b71c9a5d939d1",
         "command": "node tools/objects/gemini/reduce.mts comet-3i-gs2025bdd102 .local/gemini/work science",
         "definition": "tools/objects/gemini/programs/comet-3i-gs2025bdd102.json"
       },
@@ -318,7 +301,6 @@
       "colour": { "kind": "greys" },
       "enlarge": 1,
       "product": {
-        "sha256": "2ba58b89307ddf45488c9d0b847e463248fbd89bf8dd009a52c9bc84efc81153",
         "command": "node tools/objects/juno/archive.mts europa-pj45 JNOJNC_0024 EUROPA 502 IAU_EUROPA --orbit 45 --kernels lsk/naif0012.tls,pck/pck00011.tpc,sclk/JNO_SCLKSCET.00211.tsc,fk/juno_v12.tf,ik/juno_junocam_v03.ti,spk/spk_rec_220909_221019_221027.bsp,ck/juno_sc_rec_220925_221001_v01.bc",
         "definition": "tools/objects/juno/programs/europa-pj45.json"
       },

@@ -1,3 +1,4 @@
+import { createHash } from 'node:crypto';
 import {sampleRaster} from '@cssearth/nebula-reconstruction/observations/image-sampling';
 export {compilerImagePanel} from '@cssearth/nebula-reconstruction/observations/image-sampling';
 import { readFile } from 'node:fs/promises';
@@ -13,10 +14,11 @@ import type { CompilerRequest } from '../../../features/compiler/model.ts';
 import type {CompilerRaster,CompilerImage} from '@cssearth/nebula-reconstruction/observations/compiler-image';
 export type {CompilerRaster,CompilerImage} from '@cssearth/nebula-reconstruction/observations/compiler-image';
 async function raster(root: string, v: unknown): Promise<CompilerRaster> {
-  if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.sha256 !== 'string' || typeof v.width !== 'number' || typeof v.height !== 'number') throw new TypeError('Missing pinned source layer.');
-  const { data, info } = await sharp(await readGeometryPin(root, { path: v.path, sha256: v.sha256 })).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.width !== 'number' || typeof v.height !== 'number') throw new TypeError('Missing source layer.');
+  const bytes = await readGeometryPin(root, { path: v.path });
+  const { data, info } = await sharp(bytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== v.width || info.height !== v.height || info.channels !== 3) throw new TypeError('Source layer dimensions changed.');
-  return { width: info.width, height: info.height, data, path: v.path, sha256: v.sha256 };
+  return { width: info.width, height: info.height, data, path: v.path, sha256: createHash('sha256').update(bytes).digest('hex') };
 }
 export async function loadCompilerImages(root: string, path: string, request: CompilerRequest, center: [number, number], native = false, lowFrequencyArcsec?: number) {
   if (lowFrequencyArcsec !== undefined && (!native || !Number.isFinite(lowFrequencyArcsec) || lowFrequencyArcsec < 1 || lowFrequencyArcsec > 3600))
@@ -34,7 +36,7 @@ export async function loadCompilerImages(root: string, path: string, request: Co
       if (!jointRecord(source) || !jointRecord(removal) || !jointRecord(removal.settings) || typeof removal.settings.directory !== 'string' ||
           typeof removal.receiptSha256 !== 'string' || image.registration.status === 'publisher') throw new TypeError('Native composite requires verified registration and completed NOX.');
       const directory = removal.settings.directory;
-      const receipt: unknown = JSON.parse((await readGeometryPin(root, { path: `${directory}/result.json`, sha256: removal.receiptSha256 })).toString());
+      const receipt: unknown = JSON.parse((await readGeometryPin(root, { path: `${directory}/result.json` })).toString());
       if (!jointRecord(receipt) || receipt.schema !== 'cssearth-nox-output@1' || receipt.sourceSha256 !== removal.sourceSha256 ||
           !jointRecord(receipt.artifactSha256) || !jointRecord(receipt.applied) || !jointRecord(receipt.applied.verification) ||
           receipt.applied.verification.coverageComplete !== true || receipt.applied.verification.maximumReconstructionErrorCodeValues !== 0)

@@ -3,13 +3,11 @@
   "id": "m2-9",
   "method": "axial-symmetry",
   "request": {
-    "path": "labs/nebula/models/m2-9/experiment.json",
-    "sha256": "e0e30629eb3e52409257b0bc8ee16143d14edfcd2aeaddc74704d6b898cdd68c"
+    "path": "labs/nebula/models/m2-9/experiment.json"
   },
   "inputPins": [
     {
-      "path": "src/objects/m2-9/source/image-frame.json",
-      "sha256": "03b7bfa303f1776503301524fa6b24a57df4fd23d91dfbba9d355acbab4d8a14"
+      "path": "src/objects/m2-9/source/image-frame.json"
     }
   ],
   "sky": {
@@ -28,12 +26,10 @@
   "acceptedLabResult": "m2-9-inferred",
   "symmetryDirectory": ".local/nebula-lab/planetary/m2-9-inferred",
   "fieldStars": {
-    "path": "src/objects/m2-9/source/stellar-field.json",
-    "sha256": "d2d7d05e3147c312d8c2741a72aea5864a19daee2ef8caee3414ce6ed0b2425c"
+    "path": "src/objects/m2-9/source/stellar-field.json"
   },
   "compactInputs": {
-    "path": "src/objects/m2-9/source/compact/model.json",
-    "sha256": "5752828a0c0600ec870282717b4793b1143b78227f90c2e8f2df498bc7458c3c"
+    "path": "src/objects/m2-9/source/compact/model.json"
   },
   "compactMethod": "symmetry"
 }

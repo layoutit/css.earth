@@ -3,8 +3,7 @@
   "paper": {
     "source": "https://doi.org/10.1051/0004-6361/202141781",
     "citation": "Vernazza et al. (2021), A&A 654, A56, Appendix B",
-    "bytes": 25270498,
-    "sha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f"
+    "bytes": 25270498
   },
   "derivation": "Each page's caption 'Fig. B.n: (number) Name' matched in order to the page's image XObjects wider than 500 pixels, read with pypdf from the pinned PDF. The setup tool checks each object's decoded size, and that the labels it reads from the figure are exposure starts of the body's own frames. Each pole is Table A.1's λ and β as printed on page 18, read the same way and checked against a render of the page; the table prints Thisbe's latitude as 116°, past the pole. Eleonora's and Thisbe's releasedModel is the survey's released model as DAMIT's 2021 import of it states, cited to the survey paper: their release rotation records agree with it and not with Table A.1. Flora's releasedModel also names DAMIT's files for the model, because LAM withholds the release's own spin record and ADAM mesh for it.",
   "figures": [

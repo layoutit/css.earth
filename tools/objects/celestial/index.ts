@@ -27,14 +27,10 @@ function profile(value: unknown): CelestialConfig {
 async function verifySources(sourceDirectory: string, paths: readonly string[]): Promise<void> {
   const manifest = record(JSON.parse(await readFile(resolve(sourceDirectory, 'manifest.json'), 'utf8')), 'source manifest');
   if (!Array.isArray(manifest.inputs)) throw new TypeError('Source manifest inputs are invalid.');
-  const known = new Map(manifest.inputs.map(item => { const input = record(item, 'source manifest input'); return [input.path, input.expectedSha256]; }));
+  const known = new Set(manifest.inputs.map(item => record(item, 'source manifest input').path));
   for (const path of paths) {
     if (!known.has(path)) throw new TypeError(`Celestial source ${path} is not declared in the source manifest.`);
-    // A file authored in this repository carries no pin; git is its record. A pinned source must match its digest.
-    const expected = known.get(path);
-    if (expected === undefined) { await readFile(resolve(sourceDirectory, path)); continue; }
-    if (typeof expected !== 'string' || !sourceDigest.test(expected)) throw new TypeError(`Celestial source ${path} has an invalid pin in the source manifest.`);
-    const bytes = await readFile(resolve(sourceDirectory, path)); if (sha256(bytes) !== expected) throw new TypeError(`Celestial source ${path} changed from its pinned digest.`);
+    await readFile(resolve(sourceDirectory, path));
   }
 }
 function solarSource(value: unknown): SolarSource { const source = record(value, 'solar-system source'); if (typeof source.bodyId !== 'string' || typeof source.displayName !== 'string') throw new TypeError('Solar-system source is invalid.'); return Object.freeze({ bodyId: source.bodyId, displayName: source.displayName }); }

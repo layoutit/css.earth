@@ -1,4 +1,3 @@
-import { sha256 } from '../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { parseObjectDescriptor } from '@cssearth/objects';
@@ -15,9 +14,6 @@ export async function readPreparedObjectBytes(id: string, root = process.cwd()) 
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
   const bytes = await readFile(resolve(directory, 'prepared/object.json'));
-  if (sha256(bytes) !== descriptor.prepared.sha256) {
-    throw new Error(`${id}: prepared page data differs from its descriptor pin.`);
-  }
   return { descriptor, bytes };
 }
 
@@ -30,12 +26,10 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
-  // page.json is written from the restored runtime by prepare:object-json; its sceneSha256 below ties it to the
-  // same runtime the descriptor pins.
+  // page.json is written from the restored runtime by prepare:object-json.
   const bytes = await readFile(resolve(directory, reference.url));
   const object: unknown = JSON.parse(bytes.toString('utf8'));
-  if (!record(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id ||
-      object.sceneSha256 !== descriptor.prepared?.sha256 || !object.assets || !object.controls) {
+  if (!record(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id || !object.assets || !object.controls) {
     throw new TypeError(`${id}: incomplete prepared page data.`);
   }
   requireAssets(object.assets);

@@ -8,13 +8,11 @@
   "archiveProduct": {
     "name": "SPITZER_I4_4416768_0000_7_E8348786_maic.fits",
     "bytes": 9797760,
-    "sha256": "d174ccfb8aa522951bfa40323d370a1f67fd3309c2854a2891a20d5ed5f82210",
     "pipeline": "S18.25.0"
   },
   "ourProduct": {
     "name": "ngc3132-4416768.ch4.remosaic.fits",
     "bytes": 9792000,
-    "sha256": "1f9bc98b6601915f0e72cf4d1a9d8e4d48e169736524ee4d7750d2c27a610fe7",
     "stage": "open-remosaic",
     "toolchainDigest": "57d10b4f335a2b3f6abbe10732b610db92c3e2089cadcaa0059d4b0a78299cc6",
     "software": [
@@ -38,13 +36,11 @@
   },
   "archiveUncertainty": {
     "name": "SPITZER_I4_4416768_0000_7_A42446681_munc.fits",
-    "bytes": 9797760,
-    "sha256": "5eb0565540ef7c9aa994eb1f61c8cf5c586c0ea177692401dd81c184d166719d"
+    "bytes": 9797760
   },
   "archiveCoverage": {
     "name": "SPITZER_I4_4416768_0000_7_A42446682_mcov.fits",
-    "bytes": 9797760,
-    "sha256": "c2635259d80e99d1b05c22b7253d72c50d751b14584e17b328cec1ab7d2ab736"
+    "bytes": 9797760
   },
   "framesCombined": [
     "0001",

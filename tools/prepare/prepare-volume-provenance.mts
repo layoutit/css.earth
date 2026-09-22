@@ -2,7 +2,7 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import { parseProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import type { ProductInputEvidence } from '../../src/platform/product-input-evidence.mts';
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
-import { basename, dirname, resolve } from 'node:path';
+import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
@@ -17,7 +17,7 @@ import { hasErrorCode } from '../sources/source-values.mts';
 import { writePreparedSet } from '../prepared/write-prepared-set.mts';
 import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import { manifestSources } from '../sources/context-source-records.mts';
-import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
+import { composeSkyBandPng, verifySkyBandRecipe } from '../objects/observation/sky-band-composite.mts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from '../assets/source-mirror.mts';
 
 export const volumeProvenanceCompilerClosure = ['tools/prepare/prepare-volume-provenance.mts', 'site/dataset-content.mts', 'tools/sources/context-source-records.mts',
@@ -46,18 +46,25 @@ function pin(raw: unknown): Pin {
  * draws itself from one of its own declared inputs. The third kind exists for a dataset whose source is the package's
  * own product rather than a figure someone published: there is nothing to download, and a publisher figure of some
  * other observation would misrepresent it. */
-interface Preview extends Pin { url?: string; skyBands?: { path: string; sha256: string }; authoredFrom?: string;
-  crop?: { left: number; top: number; width: number; height: number }; }
+type Crop = { left: number; top: number; width: number; height: number };
+/** A preview whose file is in this repository (authored here, or a download kept beside its source) is identified by that
+ * file; a preview fetched into the ignored cache is named by its path there. */
+interface TrackedPreview { path: string; url?: string; authoredFrom?: string; crop?: Crop; }
+interface CachedPreview { path: string; url?: string; skyBands?: { path: string }; crop?: Crop; }
+type Preview = TrackedPreview | CachedPreview;
+const isTracked = (preview: Preview): preview is TrackedPreview => !preview.path.startsWith('.local/');
 function preview(raw: unknown): Preview {
-  const value = sourceObject(raw, ['path', 'sha256', 'bytes', 'url', 'skyBands', 'authoredFrom', 'crop']);
-  const result: Preview = pin({ path: value.path, sha256: value.sha256, bytes: value.bytes });
+  const value = sourceObject(raw, ['path', 'url', 'skyBands', 'authoredFrom', 'crop']);
+  const path = sourcePath(value.path);
+  const result: Preview = path.startsWith('.local/') ? { path }
+    : { path, ...(value.authoredFrom === undefined ? {} : { authoredFrom: sourceId(value.authoredFrom) }) };
   const kinds = [value.url, value.skyBands, value.authoredFrom].filter(candidate => candidate !== undefined);
   if (kinds.length !== 1) throw new TypeError('A preview names exactly one of a URL, a sky band recipe or the input it is drawn from.');
-  if (value.authoredFrom !== undefined) result.authoredFrom = sourceId(value.authoredFrom);
+  if (value.authoredFrom !== undefined) { /* named above */ }
   else if (value.url !== undefined) result.url = sourceUrl(value.url);
+  else if (isTracked(result)) throw new TypeError('A tracked preview names its URL or the input it is drawn from.');
   else {
-    const bands = sourceObject(value.skyBands, ['path', 'sha256']);
-    result.skyBands = { path: sourcePath(bands.path), sha256: sourceDigest(bands.sha256) };
+    result.skyBands = { path: sourcePath(sourceObject(value.skyBands, ['path']).path) };
   }
   if (value.crop !== undefined) {
     const crop = sourceObject(value.crop, ['left', 'top', 'width', 'height']);
@@ -73,7 +80,7 @@ interface LensRecord {
   inputEvidence: ProductInputEvidence[];
 }
 interface Presentation {
-  objectId: string; name: string; defaultLens: string; bank: Pin; recipes: (Pin & { id: string })[];
+  objectId: string; name: string; defaultLens: string; bank: { path: string }; recipes: { path: string; id: string }[];
   sharedInputs: string[]; inputEvidence: ProductInputEvidence[]; lenses: LensRecord[];
 }
 function presentation(raw: unknown): Presentation {
@@ -91,21 +98,19 @@ function presentation(raw: unknown): Presentation {
   sourceUnique(lenses.map(lens => lens.id), 'volume lens');
   const defaultLens = sourceId(value.defaultLens);
   if (!lenses.length || !lenses.some(lens => lens.id === defaultLens)) throw new TypeError('Invalid volume default lens.');
-  return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultLens, bank: pin(value.bank), lenses: [...lenses],
+  return { objectId: sourceId(value.objectId), name: sourceText(value.name), defaultLens, bank: { path: sourcePath(sourceObject(value.bank, ['path']).path) }, lenses: [...lenses],
     sharedInputs: [...sourceArray(value.sharedInputs, sourceId)], inputEvidence: [...sourceArray(value.inputEvidence ?? [], parseProductInputEvidence)], recipes: [...sourceArray(value.recipes, raw => {
-      const recipe = sourceObject(raw, ['id', 'path', 'sha256', 'bytes']);
-      return { ...pin({ path: recipe.path, sha256: recipe.sha256, bytes: recipe.bytes }), id: sourceId(recipe.id) };
+      const recipe = sourceObject(raw, ['id', 'path']);
+      return { path: sourcePath(recipe.path), id: sourceId(recipe.id) };
     })] };
 }
-/** A manifest input. A download carries its pin; a file authored and tracked here is identified from the bytes the caller read. */
-function source(raw: unknown, identity?: { sha256: string; bytes: number }): ProvenanceSource {
-  const value = sourceObject(raw, ['id', 'path', 'origin', 'sourceUrl', 'title', 'credit', 'displayCredit', 'acquisition', 'expectedSha256', 'expectedBytes', 'sourceBinding', 'capture', 'lensId', 'license', 'dependencies']);
-  const pinned = value.expectedSha256 !== undefined;
-  if (!pinned && !identity) throw new TypeError(`Unpinned volume input needs its bytes: ${String(value.path)}`);
+/** A manifest input, identified from its bytes when the file is present. */
+function source(raw: unknown, identity: { sha256: string; bytes: number } | null): ProvenanceSource {
+  const value = sourceObject(raw, ['id', 'path', 'origin', 'sourceUrl', 'title', 'credit', 'displayCredit', 'acquisition', 'sourceBinding', 'capture', 'lensId', 'license', 'dependencies']);
   return { id: sourceId(value.id), kind: 'source-input', path: sourcePath(value.path), origin: sourceUrl(value.origin), sourceUrl: sourceUrl(value.sourceUrl),
     title: sourceText(value.title), credit: sourceText(value.credit), acquisition: sourceText(value.acquisition),
-    sha256: pinned ? sourceDigest(value.expectedSha256) : identity!.sha256, bytes: pinned ? integer(value.expectedBytes) : identity!.bytes, sourceBinding: parseSourceBinding(value.sourceBinding),
-    dependencies: [...sourceArray(value.dependencies, sourceId)], verification: pinned ? 'manifest-pin' : 'bytes-verified',
+    ...(identity ? { sha256: identity.sha256, bytes: identity.bytes } : {}), sourceBinding: parseSourceBinding(value.sourceBinding),
+    dependencies: [...sourceArray(value.dependencies, sourceId)], verification: identity ? 'bytes-verified' : 'download-not-present',
     ...(value.lensId === undefined ? {} : { lensId: sourceId(value.lensId) }),
     ...(value.displayCredit === undefined ? {} : { displayCredit: sourceText(value.displayCredit) }),
     ...(value.license === undefined ? {} : { license: sourceText(value.license) }),
@@ -170,8 +175,7 @@ export async function readPreparedVolumeProvenance({ root = process.cwd(), input
     const prepared = parsePreparedVolumePresentation(json(await input(`${base}/prepared/presentation.json`)),
       { id, defaultLens, lenses: lensIds.map(lensId => ({ id: lensId })) }, provenance);
     const bankUrl = `${base}/${descriptor.prepared!.url}`;
-    const bankPin = provenance.products.flatMap(product => product.outputs).find(output => output.url === bankUrl);
-    if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
+    if (!provenance.products.flatMap(product => product.outputs).some(output => output.url === bankUrl)) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
     const hostedBy = await hostedDatasets(root, base, id, prepared.controls.map(control => control.id), input);
     results.push({ id, name: sourceText(sourcePresentation.name), route: hostedBy?.route ?? `/sun/?focus=${id}`, base,
       controls: prepared.controls, defaultLens: prepared.defaultLens, provenance, outputs: [], ...(hostedBy ? { hostedBy } : {}) });
@@ -191,49 +195,30 @@ interface Options {
 
 export async function preparePreview(root: string, pin: Preview, input: (path: string) => Promise<Buffer>,
   { mirrorOrigin = null, fetcher = fetch }: { mirrorOrigin?: string | null; fetcher?: typeof fetch } = {}): Promise<{ bytes: Buffer; width: number; height: number }> {
-  const path = resolve(root, pin.path);
-  if (pin.skyBands) {
-    // The recipe is source closure whether or not its composite is already cached.
-    await verifySkyBandRecipe(pin.skyBands, input);
-    const name = pin.path.split('/').at(-1);
-    if (name !== skyBandCompositeFile(name?.split('.')[0] ?? '', pin.sha256)) throw new TypeError(`A sky band preview is cached under its own hash: ${pin.path}`);
-  }
+  const path = resolve(root, pin.path), download = isTracked(pin) ? null : pin;
+  // The recipe is source closure whether or not its composite is already cached.
+  if (download?.skyBands) await verifySkyBandRecipe(download.skyBands, input);
   // An authored preview is written and checked in by the package's own author, so it is source closure; every other
   // preview is a download or a cache and stays outside it.
-  let bytes = pin.authoredFrom
-    ? await input(pin.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) throw new Error(`Authored preview is missing: ${pin.path}; run this object's source author.`); throw error; })
+  let bytes = isTracked(pin)
+    ? await input(pin.path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) throw new Error(`Preview is missing: ${pin.path}; it is kept in this repository beside its source.`); throw error; })
     : await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-  if (bytes === null && pin.skyBands) {
-    // The composite is pinned by its own hash, so our own content-addressed mirror can serve it (only when a caller
-    // opted in), sha-verified before use. That keeps an ordinary build off the survey archive, whose availability is
-    // outside this project: a miss, a mismatch or any mirror error composes from the archive exactly as before.
+  if (bytes === null && download) {
+    // Our own mirror first (only when a caller opted in), addressed by the cache path. A miss or any mirror error
+    // composes the sky bands from the survey archive or downloads the publisher image, which stays the provenance
+    // origin either way.
     if (mirrorOrigin) {
-      const mirrorUrl = sourceCacheUrl(mirrorOrigin, pin.sha256, basename(pin.path));
-      bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 })
-        .then(candidate => (candidate.length === pin.bytes && sha256(candidate) === pin.sha256) ? candidate : null)
-        .catch(() => null);
+      const mirrorUrl = sourceCacheUrl(mirrorOrigin, 'local', pin.path.slice('.local/'.length));
+      bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 }).catch(() => null);
     }
-    // The survey bands download into the shared cache; only the pinned recipe and tile lists are source closure.
-    if (bytes === null) bytes = (await composeSkyBandPng(pin.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
-    if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed sky band preview: ${pin.skyBands.path}`);
-    await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
-  } else if (bytes === null) {
-    // Try the content-addressed mirror first (only when a caller opted in): it is our own reliable storage,
-    // sha-verified before use. A miss, a mismatch or any mirror error falls back to the publisher URL, which stays
-    // the provenance origin either way.
-    if (mirrorOrigin) {
-      const mirrorUrl = sourceCacheUrl(mirrorOrigin, pin.sha256, basename(pin.path));
-      bytes = await fetchWithRetry(fetcher, mirrorUrl, { idleMs: 5000, attempts: 1 })
-        .then(candidate => (candidate.length === pin.bytes && sha256(candidate) === pin.sha256) ? candidate : null)
-        .catch(() => null);
-    }
+    // The survey bands download into the shared cache; only the recipe and tile lists are source closure.
+    if (bytes === null && download.skyBands) bytes = (await composeSkyBandPng(download.skyBands, { input, cache: resolve(root, '.local/nebula-lab/sky-bands') })).bytes;
     // Capped at 3 attempts x 120s idle (~6 min worst case, not 30): a stalled publisher must not hang the build.
-    if (bytes === null) bytes = await fetchWithRetry(fetcher, pin.url!, { idleMs: 120000, attempts: 3 })
-      .catch((error: unknown) => { throw new Error(`Preview download failed: ${pin.url} (${error instanceof Error ? error.message : String(error)})`); });
-    if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed publisher preview: ${pin.url}`);
+    else if (bytes === null) bytes = await fetchWithRetry(fetcher, download.url!, { idleMs: 120000, attempts: 3 })
+      .catch((error: unknown) => { throw new Error(`Preview download failed: ${download.url} (${error instanceof Error ? error.message : String(error)})`); });
     await mkdir(dirname(path), { recursive: true }); await writeFile(path, bytes);
   }
-  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`Changed preview input: ${pin.path}`);
+  if (bytes === null) throw new Error(`Preview is missing: ${pin.path}`);
   let pipeline = sharp(bytes, { limitInputPixels: 50000000 });
   if (pin.crop) pipeline = pipeline.extract(pin.crop);
   const result = await pipeline.resize({ width: 768, height: 768, fit: 'inside', withoutEnlargement: true }).webp({ quality: 82 }).toBuffer({ resolveWithObject: true });
@@ -259,15 +244,15 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
     const manifest = sourceObject(json(manifestBytes), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError('Invalid volume source manifest.');
     const descriptor = sourceObject(json(await input(`${base}/object.json`)));
-    // Small checked-in evidence records are real compiler inputs, identified from their bytes. Original
-    // rasters/table downloads remain pins, outside source closure.
+    // Every manifest input is identified from its bytes when it is present: checked-in evidence through the source
+    // reader, a restored download from the checkout. A download that is not restored is named by path alone.
     const inputs: ProvenanceSource[] = [];
     for (const raw of sourceArray(manifest.inputs, sourceObject)) {
       const path = sourcePath(raw.path);
-      const bytes = path.startsWith('.local/') ? null : await input(path);
-      const entry = source(raw, bytes === null ? undefined : { sha256: sha256(bytes), bytes: bytes.length });
-      if (bytes !== null && (sha256(bytes) !== entry.sha256 || bytes.length !== entry.bytes)) throw new Error(`Changed volume evidence: ${path}`);
-      inputs.push(entry);
+      const bytes = path.startsWith('.local/')
+        ? await readFile(resolve(root, path)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; })
+        : await input(path);
+      inputs.push(source(raw, bytes === null ? null : { sha256: sha256(bytes), bytes: bytes.length }));
     }
     const sources = [...inputs, ...(descriptor.type === 'image-layer-bank'
       ? await manifestSources({ documents: manifest.documents, generatedIntermediates: manifest.generatedIntermediates }, root, input) : [])];
@@ -275,13 +260,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
     const prepared = sourceObject(descriptor.prepared);
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-lens-bank' && prepared.format === 'cssearth-volume-lenses@1') ||
       (descriptor.type === 'image-layer-bank' && prepared.format === 'cssearth-image-layer-bank@1' && record.lenses.length === 1 && record.defaultLens === 'optical'))) throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);
-    const bankPath = `${base}/${sourcePath(prepared.url)}`, bankSha256 = sourceDigest(prepared.sha256);
+    const bankPath = `${base}/${sourcePath(prepared.url)}`;
     const installedBank = await readFile(resolve(root, bankPath)).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-    if (installedBank !== null && sha256(installedBank) !== bankSha256) throw new Error(`Changed installed volume bank: ${record.objectId}`);
-    // The descriptor owns the current bank identity. An ordinary rebake needs
-    // no presentation edit. The source receipt only supplies size offline when
-    // it still identifies precisely the descriptor's bank.
-    const bankBytes = installedBank?.length ?? (bankPath === record.bank.path && bankSha256 === record.bank.sha256 ? record.bank.bytes : undefined);
     const layerOutputs: { url: string; sha256: string; bytes: number; verification: string }[] = [];
     if (descriptor.type === 'image-layer-bank') {
       if (!bankPath.startsWith(`${base}/prepared/`)) throw new TypeError(`Image-layer delivery must be prepared: ${record.objectId}`);
@@ -303,8 +283,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
     const recipes = [{ id: 'presentation', path: presentationPath, sha256: sha256(ownedPresentationBytes), parameters: provenanceJson(json(ownedPresentationBytes)) }];
     for (const recipe of record.recipes) {
       const bytes = await input(recipe.path);
-      if (sha256(bytes) !== recipe.sha256 || bytes.length !== recipe.bytes) throw new Error(`Changed volume recipe: ${recipe.path}`);
-      recipes.push({ id: recipe.id, path: recipe.path, sha256: recipe.sha256, parameters: provenanceJson(json(bytes)) });
+      recipes.push({ id: recipe.id, path: recipe.path, sha256: sha256(bytes), parameters: provenanceJson(json(bytes)) });
     }
     const outputs: { path: string; text: string | Uint8Array }[] = [];
     const controls: Lens[] = [];
@@ -325,15 +304,15 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
         inputs: [...new Set([lens.input, ...lens.inputEvidence.map(evidence => evidence.sourceId), ...record.sharedInputs])],
         inputEvidence: [{ sourceId: lens.input, role: 'appearance', evidence: `Selected image at source/presentation.json#/lenses/${index}/input.` }, ...lens.inputEvidence, ...record.inputEvidence], parents: [], lensIds: [lens.id],
         observationAttribution: 'source-lineage', interpretation: { kind: 'observation-conditioned-volume', sourceKind: 'published-display-image' }, limitations: [lens.description, lens.detail],
-        outputs: [...(bankBytes === undefined ? [] : [{ url: bankPath, sha256: bankSha256, bytes: bankBytes, verification: installedBank === null ? 'descriptor-pin' : 'bytes-verified' }]),
+        outputs: [...(installedBank === null ? [] : [{ url: bankPath, sha256: sha256(installedBank), bytes: installedBank.length, verification: 'bytes-verified' }]),
           ...layerOutputs, { url: previewUrl, sha256: sha256(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
     }
     const provenance = validateObjectProvenance({ schema: 'cssearth-object-provenance@3', objectId: record.objectId, basis: 'recovered',
-      manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
-      generator: { path: volumeProvenanceCompilerClosure[0], sha256: sha256(generatorBytes), bindingsSha256: sha256(stringify(sources.map(source => source.sourceBinding))) },
+      manifest: { path: 'source/manifest.json' },
+      generator: { path: volumeProvenanceCompilerClosure[0] },
       sources, recipes, products, coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved: [
         'Native source identities are recovered from checked-in pins; this metadata preparation does not rerun or scientifically validate the reconstruction.',
-        ...(bankBytes === undefined ? ['The current volume bank is not installed and its byte count has no matching receipt; only the source-preview outputs are represented.'] : [])
+        ...(installedBank === null ? ['The current volume bank is not installed; only the source-preview outputs are represented.'] : [])
       ] } }, record.objectId);
     outputs.push({ path: resolve(root, `${base}/prepared/provenance.json`), text: stringify(provenance) },
       { path: resolve(root, `${base}/prepared/presentation.json`), text: stringify({ schema: 'cssearth-volume-presentation@1', objectId: record.objectId, controls, defaultLens: record.defaultLens }) });
@@ -351,7 +330,7 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
       return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
     });
     const preparedAssets = descriptor.type === 'image-layer-bank'
-      ? [{ filename: bankPath.slice(prefix.length), bytes: bankBytes ?? 0, sha256: bankSha256 },
+      ? [{ filename: bankPath.slice(prefix.length), bytes: installedBank!.length, sha256: sha256(installedBank!) },
         ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })), ...preparedOutputs]
       : [...(current?.assets.filter(asset => asset.location === 'prepared' && !preparedOutputs.some(output => output.filename === asset.filename)) ?? []), ...preparedOutputs];
     const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);

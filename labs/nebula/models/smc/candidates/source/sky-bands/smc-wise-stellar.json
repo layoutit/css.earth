@@ -13,15 +13,13 @@
     {
       "band": "W2",
       "tiles": {
-        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar-w2-tiles.json",
-        "sha256": "69280e3e9dc9fa8f0410d167ade3bc389b5550688ff227f5fb0644966267b20b"
+        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar-w2-tiles.json"
       }
     },
     {
       "band": "W1",
       "tiles": {
-        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar-w1-tiles.json",
-        "sha256": "26ddaa209c57684c19b624a650ab3cc65b2990cdcec259ea268cb08594fd7412"
+        "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar-w1-tiles.json"
       }
     }
   ],

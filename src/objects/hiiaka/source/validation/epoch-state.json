@@ -40,7 +40,6 @@
     "relative": {
       "path": "source/orbit/hiiaka-epoch.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%40920136108&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-      "sha256": "5c2d93c8540488799fa2e147849419e234138732a845c479b24af0385b608288",
       "bytes": 6920,
       "target": 120136108,
       "center": 920136108
@@ -48,7 +47,6 @@
     "parent": {
       "path": "source/orbit/haumea-epoch.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-      "sha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f",
       "bytes": 6815,
       "target": 920136108,
       "center": 10
@@ -56,7 +54,6 @@
     "heliocentricCheck": {
       "path": "source/orbit/hiiaka-heliocentric-check.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-      "sha256": "fc598ca5242537ad0233dd7e5f8906b5e62005f2511b6572873e2b4d33e0d107",
       "bytes": 6899,
       "target": 120136108,
       "center": 10

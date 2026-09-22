@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 16000
       },
       "coverage": "Released 2-degree stereogrammetry and limb-fit radial model; source resolution and confidence vary.",
-      "expectedBytes": 527072,
-      "expectedSha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df",
       "capture": {
         "attributions": [
           {
@@ -71,8 +69,6 @@
         "referenceRadiusMeters": 16000
       },
       "coverage": "High-pass Galileo montage on a low-pass coarse-image background. 7 pixels per degree; best contributing images approximately 25 m/pixel. Exact zero marks unprojectable surface.",
-      "expectedBytes": 3179520,
-      "expectedSha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7",
       "capture": {
         "attributions": [
           {
@@ -108,8 +104,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -168,8 +162,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 2563200,
-      "expectedSha256": "172489ebbefee3c7c1a1630d7c72fc7269b7de5c38459eedc2450e5c2dbd0d8f",
       "width": 800,
       "height": 800,
       "lensId": "calibrated",
@@ -220,8 +212,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 645120,
-      "expectedSha256": "f80c9991b7ed9f81ebefddf71a0a37f53ee499b1658ba1bd909895f8d393bb16",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -268,8 +258,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 23270,
-      "expectedSha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -339,8 +327,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 4320,
-      "expectedSha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -386,8 +372,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 2563200,
-      "expectedSha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886",
       "width": 800,
       "height": 800,
       "sourceBinding": {
@@ -434,8 +418,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 645120,
-      "expectedSha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -550,8 +532,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 2563200,
-      "expectedSha256": "4a2a3cceab721b795e5fb0805844910197acea84c5bd626ebf90311fd168231c",
       "width": 800,
       "height": 800,
       "sourceBinding": {
@@ -598,8 +578,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 645120,
-      "expectedSha256": "15ec88bd164a53c273bac8e1060e37be4355d05f6c6a6820f572dde76813984e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -644,8 +622,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 2563200,
-      "expectedSha256": "a163371d531d462cb8707129a9c546dbdc001b1054621136764d8fb46aa91bce",
       "width": 800,
       "height": 800,
       "sourceBinding": {
@@ -692,8 +668,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 645120,
-      "expectedSha256": "e2290d3988e58108464079721fba21bb66b5d33347de4bb4bf2ccee733d26a0d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

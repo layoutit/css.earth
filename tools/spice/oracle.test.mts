@@ -31,7 +31,7 @@ test('the fixture was generated from the pinned kernels by a named SPICE toolkit
   assert.match(requireString(fixture.tool.cspice), /^CSPICE_N\d{4}$/);
   await assertPinnedInputs(fixture.inputs);
   assert.equal(kernels.length, 15);
-  assert.deepEqual(set.kernels.map(kernel => kernel.sha256), kernels.map(entry => entry.sha256), 'the same kernels in the same order');
+  assert.deepEqual(set.kernels.map(kernel => kernel.path), kernels.map(entry => entry.path), 'the same kernels in the same order');
   assert.equal(fixture.inputs.length, 17, 'fifteen kernels, the cube and its label');
 });
 

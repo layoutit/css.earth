@@ -40,14 +40,11 @@ function contained(root:string, path:string) { const candidate=resolve(root,path
 function sourceRecord(manifest:RecordValue, path:string) {
   const entries=requireArray(manifest.inputs).map(value=>requireRecord(value));
   const selected=entries.filter(value=>value.path===path);
-  if(selected.length!==1) throw new Error(`Expected one pinned source input for ${path}.`);
-  const source=selected[0]!, expectedBytes=requireFiniteNumber(source.expectedBytes), expectedSha256=requireString(source.expectedSha256);
-  if(!Number.isSafeInteger(expectedBytes)||expectedBytes<1||!/^[0-9a-f]{64}$/.test(expectedSha256)) throw new TypeError(`Invalid pin for ${path}.`);
-  return source;
+  if(selected.length!==1) throw new Error(`Expected one declared source input for ${path}.`);
+  return selected[0]!;
 }
 async function verifySourcePin(sourceDirectory:string, source:RecordValue) {
   const path=contained(sourceDirectory,requireString(source.path)), actual=await fingerprint(path);
-  if(actual.bytes!==requireFiniteNumber(source.expectedBytes)||actual.sha256!==requireString(source.expectedSha256)) throw new Error(`Pinned source changed: ${source.path}`);
   return {path,actual};
 }
 function recipe(value:RecordValue):Recipe {
@@ -163,9 +160,8 @@ export async function refreshSpherePhotographs(id:string,lensId:string) {
   const config=recipe(rasterRecipe),lens=config.surfaces.filter(surface=>surface.id===lensId);
   if(lens.length!==1) throw new Error(`Unknown raster lens: ${id}/${lensId}.`);
   const recipePath=resolve(sourceDirectory,'preparation/raster.json'),recipePin=await fingerprint(recipePath),descriptorRecipe=requireArray(requireRecord(requireRecord(descriptor.properties).recipe).sources).map(value=>requireRecord(value)).find(source=>source.id==='raster');
-  if(!descriptorRecipe||requireString(descriptorRecipe.path)!=='source/preparation/raster.json'||requireString(descriptorRecipe.sha256)!==recipePin.sha256) throw new Error('Object descriptor does not pin the selected raster recipe.');
-  const manifestRecipe=[...requireArray(sourceManifest.inputs).map(value=>requireRecord(value)),...requireArray(sourceManifest.documents).map(value=>requireRecord(value))].filter(source=>source.path==='preparation/raster.json');
-  for(const pin of manifestRecipe) if(requireFiniteNumber(pin.expectedBytes)!==recipePin.bytes||requireString(pin.expectedSha256)!==recipePin.sha256) throw new Error('Source manifest does not pin the selected raster recipe.');
+  if(!descriptorRecipe||requireString(descriptorRecipe.path)!=='source/preparation/raster.json') throw new Error('Object descriptor does not name the selected raster recipe.');
+  if(![...requireArray(sourceManifest.inputs).map(value=>requireRecord(value)),...requireArray(sourceManifest.documents).map(value=>requireRecord(value))].some(source=>source.path==='preparation/raster.json')) throw new Error('Source manifest does not declare the selected raster recipe.');
   await mkdir(stage,{recursive:true});
   const assets=config.resample==='source-packed' ? await stageMercuryBand({lens:lens[0]!,config,sourceDirectory,manifest:sourceManifest,stage,publicDirectory}) : await stagePoles({lens:lens[0]!,config,sourceDirectory,manifest:sourceManifest,stage,publicDirectory});
   const selected=sourceContributors(lens[0]!,config,sourceManifest), selectedFiles=await Promise.all(selected.map(source=>verifySourcePin(sourceDirectory,source)));

@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "26f6728587b3ded3bb01203720730f41316092092e596811606f0d6fa1a84eed",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -129,9 +126,7 @@
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/hanus-2023-trojans.pdf",
-      "expectedBytes": 5394386,
-      "expectedSha256": "e3bb592daa38ca3ff74a1947825fd0deba0da4922b58a66fb20bbe6162836575"
+      "path": "reference/hanus-2023-trojans.pdf"
     },
     {
       "path": "reference/horizons-elements.txt"

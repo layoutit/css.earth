@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import { verifiedBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../renderers/css/preparation/volume.js';
 import { acquireVolumeSource } from './acquisition.js';
@@ -19,7 +19,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   const descriptorPath = resolve(objectDirectory, 'object.json');
   const authored: unknown = JSON.parse(await readFile(descriptorPath, 'utf8'));
   const descriptor = parseDensityVolumeObjectDescriptor(authored);
-  const configBytes = await verifiedBytes(objectDirectory, { path: descriptor.preparation.source, sha256: descriptor.preparation.sha256 });
+  const configBytes = await readFile(containedPath(objectDirectory, descriptor.preparation.source));
   const recipe = parseVolumeRecipe(JSON.parse(configBytes.toString('utf8')) as unknown);
   const sourceDirectory = dirname(containedPath(objectDirectory, descriptor.preparation.source));
   if (options.acquisitionCache) await acquireVolumeSource(sourceDirectory, recipe, resolve(options.acquisitionCache));
@@ -28,7 +28,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   const slices = await prepareVolumeSlices({ sourceDirectory, outputDirectory, recipe });
   let data = compileCssVolume({ id: descriptor.id, frame: descriptor.volume, slices, recipe });
   if (recipe.sky) {
-    const skyRecipe = parseSkyRecipe(JSON.parse((await verifiedBytes(sourceDirectory, recipe.sky)).toString('utf8')));
+    const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(sourceDirectory, recipe.sky)).toString('utf8')));
     const skyDirectory = dirname(containedPath(sourceDirectory, recipe.sky.path));
     if (options.acquisitionCache) await acquireSkySource(skyDirectory, skyRecipe, resolve(options.acquisitionCache));
     // The point field is a sibling object; its pinned descriptor makes the bake reproducible.

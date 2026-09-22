@@ -4,13 +4,11 @@
   "type": "galaxy-catalog",
   "properties": {
     "preparation": {
-      "source": "source/catalogue.json",
-      "sha256": "9e713794c5d86c665845e63cfaf7f2b36ebe34d3c1c5438ee23d69d5e3f6578a"
+      "source": "source/catalogue.json"
     }
   },
   "prepared": {
     "format": "cssearth-galaxy-catalog@1",
-    "url": "prepared/catalogue.json",
-    "sha256": "e16a215436c5bec5e2fe1a126d1b5134e57faaf4e86037f563a48db3db7e6e97"
+    "url": "prepared/catalogue.json"
   }
 }

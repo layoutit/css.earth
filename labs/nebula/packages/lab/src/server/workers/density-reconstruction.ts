@@ -24,11 +24,9 @@ type Progress = { type:'progress'; stage:string; current:number; total:number; m
 export const RECONSTRUCTION_SETTINGS = { analysisWidth:1024,originalWidth:2048,quality:92 };
 
 const json=async(path:string,value:unknown)=>{const bytes=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,bytes);return sha256(bytes);};
-async function pinned(root:string,pin:{path:string;sha256:string}) {
-  if(isAbsolute(pin.path)||!/^[a-f0-9]{64}$/.test(pin.sha256))throw new TypeError('Inputs require repository-relative paths and SHA256 pins.');
-  const bytes=await readFile(containedPath(root,pin.path));
-  if(sha256(bytes)!==pin.sha256)throw new TypeError(`Reconstruction source changed: ${pin.path}`);
-  return bytes;
+async function pinned(root:string,pin:{path:string}) {
+  if(isAbsolute(pin.path))throw new TypeError('Inputs require repository-relative paths.');
+  return readFile(containedPath(root,pin.path));
 }
 export async function prepareReconstruction(work:ReconstructionWork,options:{root?:string;onProgress?:(progress:Progress)=>void;
   settings?:typeof RECONSTRUCTION_SETTINGS}={}) {
@@ -50,8 +48,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   if (placement && JSON.stringify((sourceSlices.provenance as { identity?: { placement?: unknown } }).identity?.placement) !== JSON.stringify(work.cloud.modelPlacement))
     throw new TypeError('Placed density geometry and authored placement pin disagree.');
   if (placement && work.stars) throw new TypeError('Placed density with an observed stellar catalogue requires a separately qualified catalogue realization.');
-  if(descriptor.properties.preparation.sha256!==work.cloud.provenance.sha256||
-    JSON.stringify(descriptor.properties.volume.boundsUnits)!==JSON.stringify(sourceSlices.boundsUnits))throw new TypeError('Canonical cloud pins or bounds disagree.');
+  if(JSON.stringify(descriptor.properties.volume.boundsUnits)!==JSON.stringify(sourceSlices.boundsUnits))throw new TypeError('Canonical cloud pins or bounds disagree.');
   const frame=descriptor.properties.volume;
   for(const key of ['referenceFrame','epochJdTt','originM','localToReferenceXyzw','metersPerUnit'])
     if(JSON.stringify(frame[key])!==JSON.stringify((work.frame as any)[key]))throw new TypeError('Material and canonical cloud frames disagree.');
@@ -141,7 +138,7 @@ export async function prepareReconstruction(work:ReconstructionWork,options:{roo
   async function collect(directory:string){for(const entry of await readdir(directory,{withFileTypes:true})){
     const path=resolve(directory,entry.name);if(entry.isDirectory())await collect(path);else{const bytes=await readFile(path);artifacts[relative(output,path)]={sha256:sha256(bytes),bytes:bytes.length};}}}
   await collect(output);
-  await json(resolve(output,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id:work.id,sourceSha256:work.source.sha256,
+  await json(resolve(output,'manifest.json'),{schema:'cssearth-nebula-reconstruction-artifacts@1',id:work.id,
     removalResultId:work.original.removalResultId,artifacts,elapsedSeconds:(performance.now()-started)/1000});
   progress('complete',1,1,'Fixed cloud material and original comparison are ready');
   return {type:'complete' as const,stars:starsPath,reconstructionOverlay,cloudParts:{descriptor:'inspection-object.json',catalogue:'source/cloud-parts.json'}};

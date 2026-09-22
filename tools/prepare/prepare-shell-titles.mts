@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -52,9 +51,7 @@ export async function prepareShellTitles({
       height: Number(height),
       source: SHELL_TITLE_SOURCES.font.source,
       sourceUrl: SHELL_TITLE_SOURCES.font.sourceUrl,
-      sourceSha256: SHELL_TITLE_SOURCES.font.sourceSha256,
       fontSize: SHELL_TITLE_SOURCES.recipe.fontSize,
-      inputSha256: sha256(bytes),
       generator: "tools/prepare/prepare-shell-titles.mts",
     });
   }
@@ -75,7 +72,6 @@ export async function prepareShellTitles({
 
 function validateManifest() {
   if (SHELL_TITLE_SOURCES.schema !== "cssearth-shell-title-sources@1" ||
-      !/^[0-9a-f]{64}$/u.test(SHELL_TITLE_SOURCES.font.sourceSha256) ||
       SHELL_TITLE_SOURCES.recipe.fontSize !== 17 ||
       SHELL_TITLE_SOURCES.recipe.viewBoxHeight !== 23) {
     throw new TypeError("Shell title source manifest is incompatible.");

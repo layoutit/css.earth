@@ -74,11 +74,9 @@
     1e-07
   ],
   "detectorQualityPolicy": "pds3-ir-adc-background-and-filter-dependencies@1",
-  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
   "registrationEvidence": {
     "file": "evidence/registration.md",
-    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Independent exact USGS image comparisons support gross longitude and latitude framing; precise absolute registration remains unqualified.",
-    "sha256": "6754186ab44f6f4a3c68ed1bf5eca50578c2921410dd47e0f9934131bda7f800"
+    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Independent exact USGS image comparisons support gross longitude and latitude framing; precise absolute registration remains unqualified."
   },
   "width": 1024,
   "height": 512,

@@ -42,6 +42,6 @@ test('review identity is isolated by source and exact output; missing decisions 
   assert.notEqual(reviewStorageKey(path, image), reviewStorageKey(path, { ...image, sourceSha256: 'd'.repeat(64) }));
   assert.deepEqual(readDecisions(null), {});
   assert.deepEqual(readDecisions({ a: 'keep', b: 'unsure', c: 'reject', d: 'depth', e: null }), { a: 'keep', b: 'unsure', c: 'reject' });
-  assert.equal(observationFitStorageKey('observations.json', { id: image.id, source: { sha256: image.sourceSha256 } }),
-    `nebula-observation-fit@1:observations.json:${image.id}:${image.sourceSha256}`);
+  assert.equal(observationFitStorageKey('observations.json', { id: image.id, source: { url: 'https://example.org/source' } }),
+    `nebula-observation-fit@1:observations.json:${image.id}:https://example.org/source`);
 });

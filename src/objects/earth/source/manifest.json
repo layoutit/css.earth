@@ -104,8 +104,6 @@
     {
       "id": "nasa-earth-navigation-globe",
       "path": "earth-navigation.jpg",
-      "expectedSha256": "48ccd32ef57d182662999905841109095d66d68d69e27dba7decc6e134a811a0",
-      "expectedBytes": 183367,
       "origin": "https://images-assets.nasa.gov/image/GSFC_20171208_Archive_e001016/GSFC_20171208_Archive_e001016~large.jpg",
       "credit": "NASA",
       "license": "NASA media usage guidelines",
@@ -131,8 +129,6 @@
     {
       "id": "nasa-blue-marble-december",
       "path": "blue-marble-december.jpg",
-      "expectedSha256": "b0ffc9d12205689aeaec66116bbae2c4c263fcd98a0cbadba8d5488567b53278",
-      "expectedBytes": 23931114,
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/74000/74218/world.200412.3x21600x10800.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
@@ -170,8 +166,6 @@
     {
       "id": "nasa-blue-marble-july",
       "path": "blue-marble-july.jpg",
-      "expectedSha256": "dea8b4dc8a4f93f5f8bce0c8c85a508a178e7901e9ed8e6bf86e6ce7ef6d61e2",
-      "expectedBytes": 21125326,
       "origin": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-base/july/world.200407.3x21600x10800.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
@@ -209,8 +203,6 @@
     {
       "id": "nasa-blue-marble-july-bathymetry",
       "path": "blue-marble-july-bathymetry.jpg",
-      "expectedSha256": "d225f1f35a6448a4d1d8f6de6e48f3433e470085b70a35800e64f384f269a7b0",
-      "expectedBytes": 27201049,
       "origin": "https://assets.science.nasa.gov/content/dam/science/esd/eo/images/bmng/bmng-topography-bathymetry/july/world.topo.bathy.200407.3x21600x10800.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
@@ -247,8 +239,6 @@
     {
       "id": "nasa-blue-marble-clouds",
       "path": "blue-marble-clouds.tif",
-      "expectedSha256": "d137775d8966ab8d443fd5126dc6e7ad72072bc1ed50555c5818d221735daf0f",
-      "expectedBytes": 35870468,
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/57000/57747/cloud_combined_8192.tif",
       "credit": "NASA Visible Earth",
       "license": "NASA media usage guidelines",
@@ -274,8 +264,6 @@
     {
       "id": "nasa-black-marble-2016",
       "path": "black-marble-2016.jpg",
-      "expectedSha256": "230aac448ae68c358be433dd518888cccb3a85ccf66f7b44326441c324ad6725",
-      "expectedBytes": 8106233,
       "origin": "https://eoimages.gsfc.nasa.gov/images/imagerecords/144000/144898/BlackMarble_2016_3km.jpg",
       "credit": "NASA Earth Observatory",
       "license": "NASA media usage guidelines",
@@ -414,8 +402,6 @@
     {
       "id": "inter-earth-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
-      "expectedBytes": 862936,
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -1161,8 +1147,6 @@
     {
       "id": "nasa-black-marble-2025-public-radiance",
       "path": "science/night-lights-2025/radiance.zip",
-      "expectedSha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480",
-      "expectedBytes": 973526576,
       "origin": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
       "credit": "NASA Black Marble science team; Jurij Stare, www.lightpollutionmap.info",
       "license": "NASA Earth science open data (CC0); public mosaic with publisher attribution",
@@ -1189,8 +1173,6 @@
     {
       "id": "natural-earth-populated-places",
       "path": "features/ne_10m_populated_places.zip",
-      "expectedBytes": 2811199,
-      "expectedSha256": "cd149186f03d2603e0410da399b980a4357d0ac32d3a2305a49ed3dffcc41d7b",
       "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip",
       "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
       "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
@@ -1213,8 +1195,6 @@
     {
       "id": "natural-earth-geography-regions-points",
       "path": "features/ne_10m_geography_regions_points.zip",
-      "expectedBytes": 87372,
-      "expectedSha256": "2cf54b21fc684f0f7023886379c7ae9c5c716d8bd4c3ead19050f3a7f53e4f7d",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_points.zip",
       "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
       "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
@@ -1237,8 +1217,6 @@
     {
       "id": "natural-earth-geography-regions-polys",
       "path": "features/ne_10m_geography_regions_polys.zip",
-      "expectedBytes": 2038519,
-      "expectedSha256": "cb7b9db200284ed1551f20eacc7f3333e9b5f311c19f7cb2670694529f688682",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_polys.zip",
       "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
       "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
@@ -1261,8 +1239,6 @@
     {
       "id": "natural-earth-geography-marine-polys",
       "path": "features/ne_10m_geography_marine_polys.zip",
-      "expectedBytes": 940563,
-      "expectedSha256": "a2d3395904c41e718e02c3ec5bc988712164c524c236fad32d95d282ca303b2a",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip",
       "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
       "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
@@ -1285,8 +1261,6 @@
     {
       "id": "natural-earth-rivers-lake-centerlines",
       "path": "features/ne_10m_rivers_lake_centerlines.zip",
-      "expectedBytes": 2079507,
-      "expectedSha256": "ded71b01870855ccfe19b51f2ec14c9bb48fae23c0e9f3c11974d426433b5c38",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip",
       "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
       "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
@@ -1309,8 +1283,6 @@
     {
       "id": "natural-earth-admin-0-countries",
       "path": "features/ne_10m_admin_0_countries.zip",
-      "expectedBytes": 4930492,
-      "expectedSha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6",
       "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
       "credit": "Natural Earth (Tom Patterson, Nathaniel Vaughn Kelso and contributors)",
       "license": "Public domain; Natural Earth terms of use: all versions of the raster and vector map data are in the public domain",
@@ -1360,8 +1332,6 @@
       "path": "science/mur-gibs.png",
       "origin": "tools/objects/paged-ellipsoid/mur-imagery.mjs",
       "generator": "tools/objects/paged-ellipsoid/mur-imagery.mjs restore src/objects/earth/source/science",
-      "expectedSha256": "eb4f6ee98ea4293de369acd709110f8970f503dcc5b523a6a9124a6f39f5a3f0",
-      "expectedBytes": 22564700,
       "description": "Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.",
       "consumers": [
         "enso"

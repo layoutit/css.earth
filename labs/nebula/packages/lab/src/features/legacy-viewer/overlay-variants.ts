@@ -3,13 +3,12 @@ export const overlayVariantsPath = 'labs/nebula/models/lmc/star-separation/varia
 export type ImageLayer = 'original' | 'diffuse' | 'stars';
 export interface OverlayVariant {
   id: Exclude<ImageLayer, 'original'>; label: string; texturePath: string;
-  widthPx: number; heightPx: number; sha256: string;
+  widthPx: number; heightPx: number;
 }
 export interface OverlayVariants {
-  imageId: string; originalTextureSha256: string; sourceSha256: string; receiptPath: string;
+  imageId: string; receiptPath: string;
   layers: OverlayVariant[];
 }
-const hash = (value: unknown): value is string => typeof value === 'string' && /^[a-f0-9]{64}$/.test(value);
 const path = (value: unknown): value is string => typeof value === 'string' && value.length > 0 &&
   !/^(?:[a-z]+:|\/)/i.test(value) && !value.split('/').includes('..') && !/[\\\u0000-\u0020?#]/.test(value);
 export function parseOverlayVariants(input: unknown): OverlayVariants[] {
@@ -18,23 +17,23 @@ export function parseOverlayVariants(input: unknown): OverlayVariants[] {
   const ids = new Set<string>();
   for (const row of value.variants) {
     if (!row || typeof row.imageId !== 'string' || !/^[a-z0-9-]+$/.test(row.imageId) || ids.has(row.imageId) ||
-      !hash(row.originalTextureSha256) || !hash(row.sourceSha256) || !path(row.receiptPath) || !Array.isArray(row.layers) || !row.layers.length)
+      !path(row.receiptPath) || !Array.isArray(row.layers) || !row.layers.length)
       throw new TypeError('Invalid prepared image layers.');
     ids.add(row.imageId);
     const layers = new Set<string>();
     for (const layer of row.layers) {
       if (!layer || !['diffuse', 'stars'].includes(layer.id) || layers.has(layer.id) || !layer.label ||
-        !path(layer.texturePath) || !hash(layer.sha256) || !Number.isInteger(layer.widthPx) || layer.widthPx < 1 ||
+        !path(layer.texturePath) || !Number.isInteger(layer.widthPx) || layer.widthPx < 1 ||
         !Number.isInteger(layer.heightPx) || layer.heightPx < 1) throw new TypeError('Invalid prepared image layer.');
       layers.add(layer.id);
     }
   }
   return value.variants;
 }
-export function variantsForImage(rows: OverlayVariants[], image: { id: string; sha256: string; widthPx: number; heightPx: number }) {
+export function variantsForImage(rows: OverlayVariants[], image: { id: string; widthPx: number; heightPx: number }) {
   const row = rows.find(value => value.imageId === image.id);
   if (!row) return [];
-  if (row.originalTextureSha256 !== image.sha256 || row.layers.some(layer =>
+  if (row.layers.some(layer =>
     Math.abs(layer.widthPx / layer.heightPx / (image.widthPx / image.heightPx) - 1) > .001))
     throw new TypeError(`Image layer source or pixel grid differs: ${image.id}`);
   return row.layers;

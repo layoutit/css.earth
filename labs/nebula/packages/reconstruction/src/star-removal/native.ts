@@ -5,7 +5,7 @@ import sharp from 'sharp';
 export interface NativeRemovalRequest {
   schema: 'cssearth-star-removal@1'; operation: 'apply';
   source: { path: string; sha256: string; nativeDimensions: [number, number] };
-  model: { path: string; sha256: string }; outputDirectory: string;
+  model: { path: string }; outputDirectory: string;
 }
 export interface NativeExecution { executable: string; script: string; cwd: string }
 /** Allow model startup plus bounded per-tile work on the full published grid. */

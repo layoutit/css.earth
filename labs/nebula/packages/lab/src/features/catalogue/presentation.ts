@@ -6,7 +6,7 @@ export interface MessierPresentationObject {
   displayType?: string;
   thumbnail: {
     url: string; localPath?: string; sourceUrl: string; credit: string; fieldArcsec: number;
-    sha256?: string; bytes?: number; width?: number; height?: number;
+    bytes?: number; width?: number; height?: number;
   };
   extent?: { majorArcsec: number; minorArcsec: number | null; sourceUrl: string; label: string; notes?: string };
   facts?: { constellation: string; visualMagnitude: number | null; magnitudeUncertaintyFlag: string; sourceUrl: string };
@@ -35,11 +35,10 @@ export function readMessierPresentation(value: unknown): MessierPresentation {
     const t = object.thumbnail;
     if (!record(t) || !safeArchiveUrl(t.url) || !safeArchiveUrl(t.sourceUrl) || !text(t.credit) || !positive(t.fieldArcsec) ||
         (t.localPath !== undefined && t.localPath !== `.local/nebula-lab/catalogue/messier/thumbnails/${object.objectId}.jpg`) ||
-        (t.sha256 !== undefined && (!text(t.sha256) || !/^[a-f0-9]{64}$/.test(t.sha256))) ||
         ['bytes', 'width', 'height'].some(key => t[key] !== undefined && (!positive(t[key]) || !Number.isInteger(t[key])))) {
       throw new TypeError('Invalid Messier recognition thumbnail.');
     }
-    if (t.localPath !== undefined && (t.sha256 === undefined || t.bytes === undefined)) throw new TypeError('Unpinned thumbnail cache.');
+    if (t.localPath !== undefined && t.bytes === undefined) throw new TypeError('Unpinned thumbnail cache.');
     const extent = object.extent;
     if (extent !== undefined && (!record(extent) || !positive(extent.majorArcsec) ||
         !(extent.minorArcsec === null || positive(extent.minorArcsec) && extent.minorArcsec <= extent.majorArcsec) ||

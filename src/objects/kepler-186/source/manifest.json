@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "kepler-186-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10134,
-      "expectedSha256": "8297508b354ac2af5c4fd1ebcc559b0560851d707e921db011e1077f503d15b4",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=2079000330051813504&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",

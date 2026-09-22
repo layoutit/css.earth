@@ -44,8 +44,6 @@
         "referenceRadiusMeters": 200
       },
       "coverage": "The north pole was not covered by the radar images, so its topography and flattening depend on modeling constraints. The pole is uncertain by 10 degrees and equivalent diameter is 400 ± 50 m. The unmodified archive mesh is retained; no resolved optical surface map is supplied.",
-      "expectedBytes": 120483,
-      "expectedSha256": "c8cf2f1466cef4ef8cedd033e83a00ef625a64313068255954003d64ae2b6dd9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -71,8 +69,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,8 +113,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1610259,
-      "expectedSha256": "da32aca932a661196050a3078126c930778a5673b625ad389b0c3fa49d5c7fcc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -6,10 +6,7 @@
   "inspectedOn": "2026-09-13",
   "acquisitionNote": "Existing ESO files reused unchanged from the 2026-09-12 cache; four new source images and supporting metadata downloaded 2026-09-13.",
   "observationRecipe": "alignment-candidates.json",
-  "legacyPreserved": {
-    "observationsSha256": "1d614c4efbeeae252d5e4043b4d19bc5d0d00d7065246a19a03c94b3e4ad630d",
-    "compilerSha256": "ac535cb1f5db423408fd8139c5d30c9c0ff983d6f0aad2415c1b3b7419efc6c5"
-  },
+  "legacyPreserved": {},
   "images": [
     {
       "id": "eso-optical",
@@ -28,7 +25,6 @@
       "native": {
         "path": ".local/nebula-lab/observations/m8/sources/eso-optical.tif",
         "bytes": 18672974,
-        "sha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
         "width": 4000,
         "height": 2679,
         "bitDepth": 8,
@@ -57,7 +53,6 @@
       "native": {
         "path": ".local/nebula-lab/observations/m8/sources/eso-vista.tif",
         "bytes": 29816152,
-        "sha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
         "width": 4000,
         "height": 2202,
         "bitDepth": 8,
@@ -86,7 +81,6 @@
       "native": {
         "path": ".local/nebula-lab/intake/m8/heic1808a.tif",
         "bytes": 57485000,
-        "sha256": "fa079be18e9db40874e8379a5be9f1fe0e6f52036758a987643447114728e076",
         "width": 4782,
         "height": 6028,
         "bitDepth": 8,
@@ -119,7 +113,6 @@
       "native": {
         "path": ".local/nebula-lab/intake/m8/heic1808b.tif",
         "bytes": 51243264,
-        "sha256": "ac04dc5bf0acc39e8a476fb97e445557996db551fceabf670dd21708662cf545",
         "width": 4782,
         "height": 6028,
         "bitDepth": 8,
@@ -148,7 +141,6 @@
       "native": {
         "path": ".local/nebula-lab/intake/m8/sig11-012.tif",
         "bytes": 5591662,
-        "sha256": "94ab668c21880706ae4fa6e401f8a7237f440cdcf4bcf3f93b45c0794c21ff34",
         "width": 1757,
         "height": 1417,
         "bitDepth": 8,
@@ -159,8 +151,7 @@
       "astrometrySource": "https://www.astropix.org/image/spitzer/sig11-012",
       "astrometryReceipt": {
         "path": ".local/nebula-lab/intake/m8/spitzer-astropix.html",
-        "bytes": 31706,
-        "sha256": "2f7ead519d32fb3b12a85d7edf6031b3dea68e8c9dbb9cb60ee3a2f92c40818e"
+        "bytes": 31706
       },
       "observationEpoch": {
         "iracStart": "2005-09-16T14:19",
@@ -188,7 +179,6 @@
       "native": {
         "path": ".local/nebula-lab/intake/m8/herschel-pacs160.jpg",
         "bytes": 182823,
-        "sha256": "f1f0e689f58b473aae81a3e9616ae773f2ca7bcf48fe80ef1f02b9a83b5a96e8",
         "width": 2000,
         "height": 2000,
         "bitDepth": 8,
@@ -200,7 +190,6 @@
       "supportingFits": {
         "path": ".local/nebula-lab/intake/m8/herschel-pacs160.fits",
         "bytes": 32005440,
-        "sha256": "a291df806ec8d89ab1f927432e3b61b3ba7f25f6051ea5a0ff23677ea58ebf2a",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=ESAVO%2FP%2FHERSCHEL%2FPACS160norm&width=2000&height=2000&projection=TAN&fov=2&coordsys=icrs&ra=270.76531645904527&dec=-24.30622861770443&format=fits",
         "bitpix": -64,
         "arrayDimensions": [
@@ -215,7 +204,6 @@
         "id": "ESAVO/P/HERSCHEL/PACS160norm",
         "path": ".local/nebula-lab/intake/m8/herschel-properties.txt",
         "bytes": 2331,
-        "sha256": "9d780b555285ef58664fe653a1bdf4d4c7896a40024fe829745edde7b9327edc",
         "url": "https://alasky.cds.unistra.fr/ESAC/ESAVO_P_HERSCHEL_PACS160norm/properties",
         "nativeHierarchy": "HEALPix order 8, 512-pixel tiles; bilinear sampling, mean overlay, median hierarchy.",
         "sourceArchiveUrl": "https://archives.esac.esa.int/hsa/whsa/"
@@ -343,7 +331,6 @@
     "attempts": [
       {
         "path": "output/m8-center-research/hst-eso-native.json",
-        "sha256": "1ad0cf244258ada062094f284e0f0747c7ccdb85a02dd4aa395b64ae7ccda47a",
         "reference": "Existing 4000 × 2679 ESO optical",
         "sourceDiscoveryMaximum": 6028,
         "referenceDiscoveryMaximum": 4000,
@@ -354,7 +341,6 @@
       },
       {
         "path": "output/m8-center-research/hst-eso-master.json",
-        "sha256": "b61443597b3eb8f1c0a3a99d6ba85ea6be6f2dc6096299a0082618449eff7b5b",
         "reference": "Full-size 23569 × 15784 ESO JPEG; local native 2000² inspection crop",
         "sourceDiscoveryMaximum": 512,
         "referenceDiscoveryMaximum": 1024,
@@ -366,7 +352,6 @@
     ],
     "officialFullOpticalMaster": {
       "path": ".local/nebula-lab/intake/m8/eso0936a-full.jpg",
-      "sha256": "f9a2778cbeebee9bc6ae34a3ef18a4db3cd6a92c6b21455d7873e50f5d524918",
       "bytes": 88856053,
       "width": 23569,
       "height": 15784,
@@ -376,7 +361,6 @@
     },
     "visualInspection": {
       "path": "output/m8-center-research/eso-central-native.png",
-      "sha256": "696c84fb2186c609ae230de9dfca6c104b4ed5ba8d3b166f7c907ee6eb54e942",
       "cropNativePixels": {
         "left": 11301,
         "top": 10558,
@@ -387,16 +371,13 @@
     "conclusion": "Retain HST as an excluded, provisional candidate. Sparse common stars and incompatible PSFs/stretches defeat the current bounded matcher. Need qualified optical astrometric catalogue or an intermediate image before an accepted multiscale composite; do not weaken the 45-match/spatial-holdout gate.",
     "unchanged": [
       {
-        "path": "labs/nebula/models/m8/alignment-candidates.json",
-        "sha256": "6f6d4424e43755e725af2934194d01a91890a89a05841bbf0a790b33a5859e41"
+        "path": "labs/nebula/models/m8/alignment-candidates.json"
       },
       {
-        "path": "labs/nebula/models/m8/processing-observations.json",
-        "sha256": "12963ecaa7f630cd9562e74eb9d85e8cd03f0385784ed92fc69033a59e556db5"
+        "path": "labs/nebula/models/m8/processing-observations.json"
       },
       {
-        "path": "labs/nebula/models/m8/compiler.json",
-        "sha256": "3a233959d89665b2bf15c3f2ca16b740bedcb62c78a248f62350613bf242817f"
+        "path": "labs/nebula/models/m8/compiler.json"
       }
     ],
     "processing": "No star removal, volume baking or running-server mutation."

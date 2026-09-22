@@ -2,17 +2,14 @@
   "schema": "cssearth-stars-source@1",
   "catalogue": {
     "path": "stars-hyg.gxct",
-    "sha256": "d1574537361ac78d67f32ddf30ac0122e9d52115851f1519cb91bed26dcf8e74",
     "count": 109389,
     "idPrefix": "hyg-v4.4-row"
   },
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "fd847807b3d09795c54d09ed535860bb13a9ab504592db712cb1775925affda1"
+    "path": "provenance.json"
   },
   "license": {
-    "path": "LICENSE.CC-BY-SA-4.0.md",
-    "sha256": "45d033070c4fa82793db0b67758aff7ba7c796648324b61f2af99945146297b0"
+    "path": "LICENSE.CC-BY-SA-4.0.md"
   },
   "tree": {
     "leafSize": 32,

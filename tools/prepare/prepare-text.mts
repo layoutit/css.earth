@@ -59,7 +59,7 @@ function compositionGroups(body: BodyText, exploration: ReturnType<typeof parseP
 
 function outputs(body: BodyText, descriptor: Record<string, unknown>): [string, string][] {
   const datasets = Object.fromEntries(body.context.lenses.map(lens => [lens.id, body.text.datasets[lens.id]]));
-  const prepared = { schema: PREPARED_TEXT_SCHEMA, objectId: body.id, sourceSha256: body.sha256,
+  const prepared = { schema: PREPARED_TEXT_SCHEMA, objectId: body.id,
     card: body.text.card, introduction: body.text.introduction, datasets };
   const properties = requireRecord(descriptor.properties), catalog = requireRecord(properties.catalog);
   // The card is also the catalogue's description, which search, previews and sharing read.

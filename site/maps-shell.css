@@ -223,7 +223,6 @@
   background: var(--shell-background);
 }
 
-.planet-destination-results[hidden],
 .planet-feature-results[hidden],
 .planet-destination-panel[hidden],
 .planet-destination-list > li[hidden] { display: none; }

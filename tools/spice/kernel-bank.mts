@@ -14,7 +14,6 @@
  * bank's first kernel unless the flags give others. A recipe names the bank with
  * `spice.kernelSet` and lists kernels by their paths inside it, in load order.
  */
-import { sha256 } from '../../src/platform/sha256.mts';
 import { lstat, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -60,9 +59,7 @@ export async function acquireKernelBank(set: string) {
   const root = kernelBankRoot(set), bank = await openKernelBank(set), restored: string[] = [];
   for (const entry of bank.manifest.inputs) {
     try { await lstat(resolve(root, entry.path)); continue; } catch { /* missing: restore below */ }
-    const bytes = await download(entry.origin);
-    if (bytes.length !== entry.expectedBytes || sha256(bytes) !== entry.expectedSha256) throw new Error(`Downloaded ${entry.path} does not match its pin.`);
-    await publish(resolve(root, entry.path), bytes); restored.push(entry.path);
+    await publish(resolve(root, entry.path), await download(entry.origin)); restored.push(entry.path);
   }
   await bank.verify();
   return { set, restored, kernels: bank.manifest.inputs.length };
@@ -89,8 +86,8 @@ export async function addKernels(set: string, urls: readonly string[], options: 
     const bytes = await download(url);
     await publish(resolve(root, path), bytes);
     inputs.push({ id: `${set}-${name.toLowerCase().replace(/[^a-z0-9]+/gu, '-')}`, path, origin: url, credit, license,
-      acquisition: `Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire ${set}; its size and SHA-256 are verified.`,
-      redistribution: 'Public NAIF SPICE kernel; retain the credit.', consumers: ['spice'], expectedBytes: bytes.length, expectedSha256: sha256(bytes),
+      acquisition: `Restore the unmodified kernel with node tools/spice/kernel-bank.mts acquire ${set}.`,
+      redistribution: 'Public NAIF SPICE kernel; retain the credit.', consumers: ['spice'],
       sourceBinding: binding });
     added.push(path);
   }

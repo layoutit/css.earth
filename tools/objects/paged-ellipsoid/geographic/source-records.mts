@@ -27,6 +27,6 @@ export const parseGeographicScene = shape({ body: shape({ bands: array(shape({ l
 export const parsePlacesConfig = shape({ namespace: text, publicBase: text, sceneBodyKey: text,
   camera: shape({ maximumControlPitchDegrees: number, maximumScenePitchDegrees: number }),
   geographic: shape({ places: shape({ directory: text, overviewZoom: number }) }) });
-export const parsePlacesManifest = shape({ inputs: array(shape({ path: text, bytes: number, sha256: text })), source: text,
+export const parsePlacesManifest = shape({ inputs: array(shape({ path: text, bytes: number })), source: text,
   snapshotDate: text, qualification: text, sourcePage: text, license: text });
 export const dictionary = <T,>(decode: Decoder<T>): Decoder<Record<string,T>> => value => Object.fromEntries(Object.entries(requireRecord(value)).map(([key,value])=>[key,decode(value)]));

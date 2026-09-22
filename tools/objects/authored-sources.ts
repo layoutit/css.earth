@@ -4,13 +4,13 @@ import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type Sour
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
 
-/** A recipe source bound to its manifest record, with the digest of the bytes that were read. A download must also match its manifest pin. */
+/** A recipe source bound to its manifest record, with the digest of the bytes that were read. */
 export interface BoundSource { readonly id: string; readonly path: string; readonly sha256: string; }
 export interface VerifiedSource { readonly reference: BoundSource; readonly path: string; readonly value: unknown; }
 export interface AuthoredSources {
   readonly descriptor: AuthoredObjectDescriptor;
   readonly manifest: Awaited<ReturnType<typeof createSourceManifest>>;
-  /** Every recipe source, verified byte for byte against the manifest, in recipe order. */
+  /** Every recipe source, declared in the manifest, in recipe order. */
   readonly entries: readonly VerifiedSource[];
   readonly sources: ReadonlyMap<string, VerifiedSource>;
 }
@@ -30,10 +30,10 @@ export function manifestRecord(manifest: AuthoredSources['manifest'], reference:
   return entry;
 }
 
-/** Read and verify one recipe source against its manifest record. */
+/** Read one recipe source declared in the manifest. */
 export async function verifiedSource(objectDirectory: string, manifest: AuthoredSources['manifest'], reference: SourceReference): Promise<VerifiedSource> {
-  const entry = manifestRecord(manifest, reference), path = contained(objectDirectory, reference.path), bytes = await readFile(path);
-  manifest.assertBytes(entry, bytes);
+  manifestRecord(manifest, reference);
+  const path = contained(objectDirectory, reference.path), bytes = await readFile(path);
   const reference_ = Object.freeze({ id: reference.id, path: reference.path, sha256: sha256(bytes) });
   try { return Object.freeze({ reference: reference_, path, value: JSON.parse(bytes.toString('utf8')) as unknown }); }
   catch { throw new TypeError(`Source ${reference.path} must be JSON configuration.`); }

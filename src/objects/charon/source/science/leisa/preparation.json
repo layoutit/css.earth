@@ -130,23 +130,19 @@
       "inputs": [
         {
           "path": "science/leisa/0299175509_charon_cube.fit",
-          "bytes": 419434560,
-          "sha256": "c33dbdd082d6612ba41a5e8e7ce4fd76421334813558efe06f2c8a0d7b24f4b2"
+          "bytes": 419434560
         },
         {
           "path": "science/leisa/0299175509_charon_wavelengths.fit",
-          "bytes": 419434560,
-          "sha256": "5f4ebc9cb6ecb9f67d685dceb5da948d30c547373f52b348717e1e0ed44134da"
+          "bytes": 419434560
         },
         {
           "path": "science/leisa/0299175509_charon_geometry.fit",
-          "bytes": 8196480,
-          "sha256": "49b20130e431e988d004f5142d40d360b5b4a0d6dd65c8ffabb9f5e5e71554ff"
+          "bytes": 8196480
         },
         {
           "path": "science/leisa/0299175509_charon_cube.lblx",
-          "bytes": 17729,
-          "sha256": "0edfb68a81bda916b72fe77e392db7f26fd2559a48829b904be9ac59cf85bf22"
+          "bytes": 17729
         }
       ],
       "quantities": [
@@ -610,23 +606,19 @@
       "inputs": [
         {
           "path": "science/leisa/0299171308_charon_cube.fit",
-          "bytes": 104860800,
-          "sha256": "00ea97e6c828f535868a8864d3b592f49f7473aaf349ac4d28d0e9cd88d3190d"
+          "bytes": 104860800
         },
         {
           "path": "science/leisa/0299171308_charon_wavelengths.fit",
-          "bytes": 104860800,
-          "sha256": "f517266558805c5bee41956d590065934c3120eb4f5be56ad00da3b300e69e17"
+          "bytes": 104860800
         },
         {
           "path": "science/leisa/0299171308_charon_geometry.fit",
-          "bytes": 2053440,
-          "sha256": "b53c0815a430cff5fa7e541808a6105dcdcd7a40fe037b42246003c7d7971b74"
+          "bytes": 2053440
         },
         {
           "path": "science/leisa/0299171308_charon_cube.lblx",
-          "bytes": 17730,
-          "sha256": "773847bb6f69bc71be633a8147e35b74c4cf16c25dbcc8f85d60f7c7def439c8"
+          "bytes": 17730
         }
       ],
       "quantities": [

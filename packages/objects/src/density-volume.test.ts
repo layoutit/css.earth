@@ -7,9 +7,9 @@ const volume = () => ({
     volume: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [8.2e20, -1.1e20, 3.4e19],
       localToReferenceXyzw: [0, 0, 0, 1], metersPerUnit: 8.269676e19,
       boundsUnits: { min: [-10, -10, -1.25], max: [10, 10, 1.25] } },
-    preparation: { source: 'source/preparation/volume.json', sha256: 'a'.repeat(64) },
+    preparation: { source: 'source/preparation/volume.json' },
   },
-  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/object.json', sha256: 'b'.repeat(64) },
+  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/object.json' },
 });
 
 describe('density-volume object descriptor', () => {
@@ -22,7 +22,7 @@ describe('density-volume object descriptor', () => {
 
   it.each([
     ['wrong reusable type', (value: ReturnType<typeof volume>) => { value.type = 'layered-body'; }],
-    ['missing source hash', (value: ReturnType<typeof volume>) => { value.properties.preparation.sha256 = 'bad'; }],
+    ['stray source hash', (value: ReturnType<typeof volume>) => { (value.properties.preparation as Record<string, unknown>).sha256 = 'a'.repeat(64); }],
     ['absolute source path', (value: ReturnType<typeof volume>) => { value.properties.preparation.source = '/volume.json'; }],
     ['non-unit rotation', (value: ReturnType<typeof volume>) => { value.properties.volume.localToReferenceXyzw = [0, 0, 0, 2]; }],
     ['collapsed bounds', (value: ReturnType<typeof volume>) => { value.properties.volume.boundsUnits.max = [-10, 10, 1.25]; }],

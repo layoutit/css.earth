@@ -4,7 +4,7 @@ const jointPath = (v: unknown): v is string => typeof v === 'string' && v.length
 import type { EmissionVector3 } from './emission.ts';
 import { readSampledEmissionFit, type SampledEmissionFit } from './sampled-emission-fit.ts';
 
-export interface SamplePin { path: string; sha256: string }
+export interface SamplePin { path: string }
 interface TermBase { id: string; weight: number; evidenceIds: string[] }
 export type SampleTerm = TermBase & (
   { kind: 'torus'; centerArcsec: EmissionVector3; axis: EmissionVector3; radiusArcsec: number; sigmaArcsec: number } |
@@ -33,9 +33,8 @@ function evidenceIds(v: unknown): string[] {
   if (!Array.isArray(v) || !v.length || v.length > 30) throw new TypeError('Every sampled component needs evidence identities.'); return v.map(id);
 }
 function pin(v: unknown, allowedSourcePath: (path: string) => boolean): SamplePin {
-  if (!jointRecord(v) || !jointPath(v.path) || !allowedSourcePath(v.path) ||
-      typeof v.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(v.sha256)) throw new TypeError('Invalid sampled source pin.');
-  return { path: v.path, sha256: v.sha256 };
+  if (!jointRecord(v) || !jointPath(v.path) || !allowedSourcePath(v.path)) throw new TypeError('Invalid sampled source path.');
+  return { path: v.path };
 }
 export function readSampledRecipe(v: unknown, allowedSourcePath: (path: string) => boolean = () => true): SampledRecipe {
   if (!jointRecord(v) || v.schema !== 'cssearth-sampled-nebula@1' || !jointRecord(v.source) || !jointRecord(v.grid) ||

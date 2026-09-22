@@ -1,7 +1,7 @@
 import * as s from '../material-composition/data-schema.mts';
 const n = s.number, str = s.string, opt = s.optional, arr = s.array, obj = s.object;
 export const vector2 = s.tuple(n, n), vector3 = s.tuple(n, n, n);
-export const sourcePin = obj({path: str, expectedBytes: n, expectedSha256: str});
+export const sourcePin = obj({path: str});
 export type SourcePin = s.Infer<typeof sourcePin>;
 export const webpEncoding = obj({quality: opt(n), alphaQuality: opt(n), lossless: opt(s.boolean), nearLossless: opt(s.boolean), smartSubsample: opt(s.boolean), effort: opt(n), preset: opt(s.literal('default', 'picture', 'photo', 'drawing', 'icon', 'text'))});
 const radiusMapping = s.union(obj({kind: s.literal('linear'), scale: n}), obj({kind: s.literal('piecewise-log'), knots: arr(vector2)}));

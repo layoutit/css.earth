@@ -11,7 +11,6 @@
   },
   "source": {
     "path": ".local/nebula-lab/smc-intake/sky-bands/smc-dss2-fits.108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93.png",
-    "sha256": "108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93",
     "nativeDimensions": [
       4000,
       4000
@@ -41,12 +40,10 @@
   },
   "catalogue": {
     "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
-    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
     "downloadedRows": 13220,
     "inFieldIsolatedCandidates": 7170,
     "query": {
-      "path": "labs/nebula/models/smc/registration/allwise-query.json",
-      "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
+      "path": "labs/nebula/models/smc/registration/allwise-query.json"
     }
   },
   "predeclaredProtocol": {
@@ -157,15 +154,12 @@
   ],
   "compositeBlueChannel": "DSS2 blue photographic plates",
   "skyBands": {
-    "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-dss2-fits.json",
-    "sha256": "990f60858960874795a095222035cf360f285a076ba2173ee517e36407f7bbb4"
+    "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-dss2-fits.json"
   },
   "implementation": {
-    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
-    "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
+    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts"
   },
   "matchedStars": {
-    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-dss2-fits/matched-stars.json",
-    "sha256": "cc40375b757c65a4fad1d83aa7212c975304500b3930a5c68304d70e3d6a1fd5"
+    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-dss2-fits/matched-stars.json"
   }
 }

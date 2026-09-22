@@ -4,337 +4,270 @@
   "inputs": [
     {
       "path": "src/objects/helix/prepared/presentation.json",
-      "sha256": "bdc3631d42cf88799749658f649d4fe27b56a54a30a1cccff2ce5d6738e61c35",
       "bytes": 5030
     },
     {
       "path": "public/scenes/helix/datasets/17afee1138af878f69a37fe1417217c6b52510a17fcab58360e218cfd4d5778a.webp",
-      "sha256": "17afee1138af878f69a37fe1417217c6b52510a17fcab58360e218cfd4d5778a",
       "bytes": 141558
     },
     {
       "path": "public/scenes/helix/datasets/8cf49f171820b6952a5ecdd21dde4330adebe6e806d1dcb5859ac4bb47d5d238.webp",
-      "sha256": "8cf49f171820b6952a5ecdd21dde4330adebe6e806d1dcb5859ac4bb47d5d238",
       "bytes": 30748
     },
     {
       "path": "public/scenes/helix/datasets/0277fa5871f09116565e68d86ab5b4613d46616904d07f0ff2e16248a1a208b2.webp",
-      "sha256": "0277fa5871f09116565e68d86ab5b4613d46616904d07f0ff2e16248a1a208b2",
       "bytes": 21948
     },
     {
       "path": "src/objects/lmc/prepared/presentation.json",
-      "sha256": "978fb2bf2216e1b22acf81206c8bac1b07e5b0bff1536daa7dbbd463ea783777",
       "bytes": 4682
     },
     {
       "path": "public/scenes/lmc/datasets/872daf96753f0bf6c9988c086bc94c0a56c5c7fa3e567a8c32a8a0a9881603b1.webp",
-      "sha256": "872daf96753f0bf6c9988c086bc94c0a56c5c7fa3e567a8c32a8a0a9881603b1",
       "bytes": 129932
     },
     {
       "path": "public/scenes/lmc/datasets/a7bbccb1cf77b6dbec789dec872a56b7560c1a9ff12270a6f8c56c6554088fbd.webp",
-      "sha256": "a7bbccb1cf77b6dbec789dec872a56b7560c1a9ff12270a6f8c56c6554088fbd",
       "bytes": 94442
     },
     {
       "path": "public/scenes/lmc/datasets/d56d42a74fdfd2938fdc3eba02c9209aada4527eaba104d85b34498d1578f2fd.webp",
-      "sha256": "d56d42a74fdfd2938fdc3eba02c9209aada4527eaba104d85b34498d1578f2fd",
       "bytes": 13406
     },
     {
       "path": "src/objects/m1/prepared/presentation.json",
-      "sha256": "61379693d8889018ff70ee64e0968acaf02fe1bed27474c6a65d9848803d9231",
       "bytes": 10855
     },
     {
       "path": "public/scenes/m1/datasets/be89c395ddce28b848c82a4262403097d338dda053f843c7b1cdfade4b576d74.webp",
-      "sha256": "be89c395ddce28b848c82a4262403097d338dda053f843c7b1cdfade4b576d74",
       "bytes": 115198
     },
     {
       "path": "public/scenes/m1/datasets/dc4e7b449942ad7ea14feee933728b9d877a1f12d29d2f929fa91497c917dfcd.webp",
-      "sha256": "dc4e7b449942ad7ea14feee933728b9d877a1f12d29d2f929fa91497c917dfcd",
       "bytes": 83904
     },
     {
       "path": "public/scenes/m1/datasets/ea8d1676e209ac5e606f7f61f39fae27f41d58a306f67024ddb0014d2c853b9f.webp",
-      "sha256": "ea8d1676e209ac5e606f7f61f39fae27f41d58a306f67024ddb0014d2c853b9f",
       "bytes": 80394
     },
     {
       "path": "public/scenes/m1/datasets/ec737ccea80f08ea68582d69ff57530944be171d2bef59027200b06c0a6aeb0d.webp",
-      "sha256": "ec737ccea80f08ea68582d69ff57530944be171d2bef59027200b06c0a6aeb0d",
       "bytes": 8010
     },
     {
       "path": "public/scenes/m1/datasets/e1bf5bbddb29f2ff696cda6a398ee11a60f3b568b41902625fc9ff24a5d49702.webp",
-      "sha256": "e1bf5bbddb29f2ff696cda6a398ee11a60f3b568b41902625fc9ff24a5d49702",
       "bytes": 15234
     },
     {
       "path": "public/scenes/m1/datasets/13923d9d55e216369891a091d8d511b1d7d44c1d17eaee97ba0053caeb43824d.webp",
-      "sha256": "13923d9d55e216369891a091d8d511b1d7d44c1d17eaee97ba0053caeb43824d",
       "bytes": 12574
     },
     {
       "path": "src/objects/m2-9/prepared/presentation.json",
-      "sha256": "a3a8d86ec1fa153f55a0b3ac27a10ea873cc5c1d0e3061dac07ff8c19b16ea03",
       "bytes": 1945
     },
     {
       "path": "public/scenes/m2-9/datasets/e758d5612fc62ce558e494e0e6aabf73ed3b4098610f0752a5885129c950d09e.webp",
-      "sha256": "e758d5612fc62ce558e494e0e6aabf73ed3b4098610f0752a5885129c950d09e",
       "bytes": 61188
     },
     {
       "path": "src/objects/m31/prepared/presentation.json",
-      "sha256": "ef01151d319c4a1ad480d65a58cafaf24db1b3d28ac5deab5bcb0a420d36dbe1",
       "bytes": 1857
     },
     {
       "path": "public/scenes/m31/datasets/4c152fc4d7ea84f7b4b0676fbd81dd3d0400838d2ece4f60f44d93c98ab70de9.webp",
-      "sha256": "4c152fc4d7ea84f7b4b0676fbd81dd3d0400838d2ece4f60f44d93c98ab70de9",
       "bytes": 85990
     },
     {
       "path": "src/objects/m33/prepared/presentation.json",
-      "sha256": "9193e89bf84c577cf77f8fb4d584505b03a069264f009959ece9df73c6c59d71",
       "bytes": 1799
     },
     {
       "path": "public/scenes/m33/datasets/d4e0dfa5159d8e7f4bd1deca9d23df7546ab2d0a97693188a3b4e285c68251b3.webp",
-      "sha256": "d4e0dfa5159d8e7f4bd1deca9d23df7546ab2d0a97693188a3b4e285c68251b3",
       "bytes": 59744
     },
     {
       "path": "src/objects/m42/prepared/presentation.json",
-      "sha256": "b16db0f269e14482d1f3a37adf78747ba2c28ea7f09fe251812e29e4bd4f53e9",
       "bytes": 3447
     },
     {
       "path": "public/scenes/m42/datasets/2b53b5a8e2ff310c5e793abee19eb6dd6c17a95f59e9827a7c25c08dce47879f.webp",
-      "sha256": "2b53b5a8e2ff310c5e793abee19eb6dd6c17a95f59e9827a7c25c08dce47879f",
       "bytes": 34432
     },
     {
       "path": "public/scenes/m42/datasets/408de7aaef5d55fdf0fa04dc4ef769c7d5a48abcddf52fbd6f16378f6445a3ac.webp",
-      "sha256": "408de7aaef5d55fdf0fa04dc4ef769c7d5a48abcddf52fbd6f16378f6445a3ac",
       "bytes": 59250
     },
     {
       "path": "src/objects/m45/prepared/presentation.json",
-      "sha256": "396cf97355c3bd5eb41fc34dc6dab0860872a36f6169c53529e85bcb4d58e318",
       "bytes": 8638
     },
     {
       "path": "public/scenes/m45/datasets/de2e504747540d0de25f6d5ff6eec925671afa032698a72a0b72b6f8bbc3cce2.webp",
-      "sha256": "de2e504747540d0de25f6d5ff6eec925671afa032698a72a0b72b6f8bbc3cce2",
       "bytes": 57016
     },
     {
       "path": "public/scenes/m45/datasets/58402568a5356273409286bd006d83238c7ae4bc325d14468587739cfea628b3.webp",
-      "sha256": "58402568a5356273409286bd006d83238c7ae4bc325d14468587739cfea628b3",
       "bytes": 40700
     },
     {
       "path": "public/scenes/m45/datasets/93588b4ea142cd734f890b08b1ed7f61dfcd8de1682fd3a59effe2f52b7df72c.webp",
-      "sha256": "93588b4ea142cd734f890b08b1ed7f61dfcd8de1682fd3a59effe2f52b7df72c",
       "bytes": 61030
     },
     {
       "path": "public/scenes/m45/datasets/f4e75b7df85585712dbd835dce3cb227f93e0d5138877501681a5df89221fd56.webp",
-      "sha256": "f4e75b7df85585712dbd835dce3cb227f93e0d5138877501681a5df89221fd56",
       "bytes": 47032
     },
     {
       "path": "public/scenes/m45/datasets/0042ca173378ea26d5a5cac318c860b21bc6d6ada17389256dbf1f66d407df11.webp",
-      "sha256": "0042ca173378ea26d5a5cac318c860b21bc6d6ada17389256dbf1f66d407df11",
       "bytes": 79256
     },
     {
       "path": "src/objects/m8/prepared/presentation.json",
-      "sha256": "71e7fa9a352a779f881189853c9d94e8edcf51b58903f75b894585dc6b682e4c",
       "bytes": 5338
     },
     {
       "path": "public/scenes/m8/datasets/af6d54eb3fe1c721ce123804e4628aa7d4c121939b9e8e80a0641bd137aeb6fe.webp",
-      "sha256": "af6d54eb3fe1c721ce123804e4628aa7d4c121939b9e8e80a0641bd137aeb6fe",
       "bytes": 92308
     },
     {
       "path": "public/scenes/m8/datasets/51ee96fddc55feb60de53295f3dfc2c8e0e13c936252d5d4bb1b9e16de479212.webp",
-      "sha256": "51ee96fddc55feb60de53295f3dfc2c8e0e13c936252d5d4bb1b9e16de479212",
       "bytes": 147486
     },
     {
       "path": "public/scenes/m8/datasets/43973c18725feb2dbf5a7eda525bab125623949a9cbd34b858588d2908f0192d.webp",
-      "sha256": "43973c18725feb2dbf5a7eda525bab125623949a9cbd34b858588d2908f0192d",
       "bytes": 139228
     },
     {
       "path": "src/objects/smc/prepared/presentation.json",
-      "sha256": "0ef0ac06940dce20be98188cc4a4de77f9bd4152626088f17319371f337bf360",
       "bytes": 1854
     },
     {
       "path": "public/scenes/smc/datasets/55c76e39df1bc3bff4e281bd40c226209ad3e84b7b3abd5657c4f03278915419.webp",
-      "sha256": "55c76e39df1bc3bff4e281bd40c226209ad3e84b7b3abd5657c4f03278915419",
       "bytes": 146784
     },
     {
       "path": "src/objects/milky-way/prepared/volume-slices.json",
-      "sha256": "4e7a33be1b8f327eb26aeca6d6e11f1f18a3f4be7522450ff3cba1ffcb8c83bc",
       "bytes": 564665
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/01.webp",
-      "sha256": "b12d4549ebcd514be0bf6b3a6510af054a9f4f1410e6398b93fd78145efd601f",
       "bytes": 124
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/02.webp",
-      "sha256": "e03cb82c2459431a2802081313181caf9aedfaf79a4575324fe862d0072ff9ba",
       "bytes": 10112
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/03.webp",
-      "sha256": "26f9387e648fab17f78ce19253cd157204ed269adf27e26ebc5a176806f0569e",
       "bytes": 10952
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/04.webp",
-      "sha256": "28ec0b29462ed026885d52b592054819765bb73f390a0e4bfa4f215c148c7842",
       "bytes": 20966
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/05.webp",
-      "sha256": "acbe8a613a3b032103d5fae829343f0ecdace55f31512592e15709d8d9242900",
       "bytes": 37988
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/06.webp",
-      "sha256": "74cc3ee4ee11d71dd7b880b70912f9495d8543c35f793fe0f0b199133f798128",
       "bytes": 73386
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/07.webp",
-      "sha256": "cc5b321d5dec61361e3d0c18a310d6b3c1e82a77b13702cebcf9452b07c7205d",
       "bytes": 130584
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/08.webp",
-      "sha256": "1866a344affe3aa5b5100f48590eca5560972c23b7656e6e500434677bd8c8f2",
       "bytes": 165480
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/09.webp",
-      "sha256": "3340eef0995ef0eed348a1dbbad25a0551c1b1c48577fb826004e7e0de282cb6",
       "bytes": 198540
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/10.webp",
-      "sha256": "906e5f5210bc8cfc360d6f8446aeaaef24113af8dc62495e1c917579617691a8",
       "bytes": 219122
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/11.webp",
-      "sha256": "0f8911c6380bc54290f1438be9de4e2e4c1ff51975ef794d8c4ec8290b7bff8c",
       "bytes": 248654
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/12.webp",
-      "sha256": "0fa492438b93abb0abdefa458488c324b5bbd8a75228ee71337bae59be341579",
       "bytes": 280430
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/13.webp",
-      "sha256": "aa6f6ba0907d8352254c063f3277e3d08183c663827a86b3651488391596ef50",
       "bytes": 308316
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/14.webp",
-      "sha256": "570e00c335b9595f5ca66003e9c04124df24479d6c183ecbe8afa98f36797dc2",
       "bytes": 335156
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/15.webp",
-      "sha256": "32a319491f87ae03e3759067a7bec12653f8334ede4217b0f39f8cc0b83f6db1",
       "bytes": 368472
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/16.webp",
-      "sha256": "7cd3ef7e9cc3c0eb40a03b4f1779b7ac7aecd6f3a80b6e44b3c08ca4b21a0b59",
       "bytes": 362918
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/17.webp",
-      "sha256": "48a27a93dfc7f8a2266b38883fc83fa1406be83c05378a292cc8c511372f809f",
       "bytes": 320228
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/18.webp",
-      "sha256": "ea607f4d72c560360da72b233485a563c00c50c2b74eabcd0f3a7dea07b4063e",
       "bytes": 290280
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/19.webp",
-      "sha256": "ad8c9944e98e9cebd26f00068e419739d2eeebebb240e16c1af8f3bd9ba06b53",
       "bytes": 254958
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/20.webp",
-      "sha256": "103abc5d1baa04f31ea70cf4ff3f7ec402cd078c331751d2a864b4c6a2fa9604",
       "bytes": 228018
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/21.webp",
-      "sha256": "991cc4f36738e6a433d4e9f5824fb1c6ea95b2cc2b51cae13fd20f2f0b759888",
       "bytes": 192430
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/22.webp",
-      "sha256": "cdceb41f3245499336a6c6efaaf3411af9347e0176dd37abbfebc2d3283cab9c",
       "bytes": 164436
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/23.webp",
-      "sha256": "40cca7f65bf2724a777b4c9abc19297e8b8a24d94fc19e1a5a670b82aeb74c8a",
       "bytes": 104854
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/24.webp",
-      "sha256": "8b31aa134dbe326e33fdfbacf2a7bfee0663fee1be1a8b29fbdd8904a66d1cfd",
       "bytes": 51100
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/25.webp",
-      "sha256": "c09d1cc4eb0cfd2cda132f36c5d6de13c99519a9be2a6bd33ac1cc813fbef43e",
       "bytes": 28386
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/26.webp",
-      "sha256": "ca3d53701ed67475a2ac3be5ed934eff60a290f2f18c2db4f5683543a185fe8b",
       "bytes": 14992
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/27.webp",
-      "sha256": "996174d33f60b456c73fd5967715b072fb30724e086655de502c6d610b3b0232",
       "bytes": 8870
     },
     {
       "path": "src/objects/milky-way/prepared/slices/z/28.webp",
-      "sha256": "ad38ff0491f958abe91cb5a6cd415f87976bb20d56a684d41efb5adcda2f749a",
       "bytes": 986
     },
     {
       "path": "src/objects/milky-way/source/provenance.json",
-      "sha256": "d2ab968a9443f24eb53d40e83aefebc8084c177b4a8fff2ce0ff915a9e8ea818",
       "bytes": 7825
     },
     {
       "path": "src/objects/local-group/prepared/catalogue.json",
-      "sha256": "e16a215436c5bec5e2fe1a126d1b5134e57faaf4e86037f563a48db3db7e6e97",
       "bytes": 702832
     }
   ],
@@ -342,8 +275,6 @@
     "helix/eso-vista": {
       "url": "/navigation/focus-helix-eso-vista.webp",
       "url2x": "/navigation/focus-helix-eso-vista@2x.webp",
-      "sha256": "1270c1c32107449a7879cfa7fd9d9560c4ee42f994b550d511389b8a2fef8e19",
-      "sha2562x": "da55b98e473b357fe618542d31a38b7fffef27d4d9177baab02845dc27288059",
       "inputs": [
         "src/objects/helix/prepared/presentation.json",
         "public/scenes/helix/datasets/17afee1138af878f69a37fe1417217c6b52510a17fcab58360e218cfd4d5778a.webp"
@@ -354,8 +285,6 @@
     "helix/eso-wfi": {
       "url": "/navigation/focus-helix-eso-wfi.webp",
       "url2x": "/navigation/focus-helix-eso-wfi@2x.webp",
-      "sha256": "6f131e8e7ddd41c8634aff0f579732bfbfea6904e342f0332439da3b456aa346",
-      "sha2562x": "6bf59bad862dcce9c3eb60affb84c0e42ca5a74d69722da106c66749b976c783",
       "inputs": [
         "src/objects/helix/prepared/presentation.json",
         "public/scenes/helix/datasets/8cf49f171820b6952a5ecdd21dde4330adebe6e806d1dcb5859ac4bb47d5d238.webp"
@@ -366,8 +295,6 @@
     "helix/eso-wide": {
       "url": "/navigation/focus-helix-eso-wide.webp",
       "url2x": "/navigation/focus-helix-eso-wide@2x.webp",
-      "sha256": "657a4f3f6b7aaffccd63580cb877bb85e9efd88d3a0359de816a2df58987e75a",
-      "sha2562x": "a1e21989178f0f1fee96af1d27e7dd022bdd4fb81878de00c05613eeb623fe03",
       "inputs": [
         "src/objects/helix/prepared/presentation.json",
         "public/scenes/helix/datasets/0277fa5871f09116565e68d86ab5b4613d46616904d07f0ff2e16248a1a208b2.webp"
@@ -378,8 +305,6 @@
     "lmc/vista-infrared": {
       "url": "/navigation/focus-lmc-vista-infrared.webp",
       "url2x": "/navigation/focus-lmc-vista-infrared@2x.webp",
-      "sha256": "85efcdef1626eb2551454b3576e0e0c3efa3e1839d5af82fee325b394abbffcd",
-      "sha2562x": "c5a73d50f410e4108907b5c16d0a9e013cc85062aad81d11b5607c717ea5508f",
       "inputs": [
         "src/objects/lmc/prepared/presentation.json",
         "public/scenes/lmc/datasets/872daf96753f0bf6c9988c086bc94c0a56c5c7fa3e567a8c32a8a0a9881603b1.webp"
@@ -390,8 +315,6 @@
     "lmc/horalek-widefield": {
       "url": "/navigation/focus-lmc-horalek-widefield.webp",
       "url2x": "/navigation/focus-lmc-horalek-widefield@2x.webp",
-      "sha256": "ce188d5722bd3f9f3b1fb05f144bbd118a6030ef11363c2a4cf61cc7fcccb5df",
-      "sha2562x": "b89a05401e883be9ffef02d06eb2198c50ed5bc1a3ebbf44ec123f7dad307c9a",
       "inputs": [
         "src/objects/lmc/prepared/presentation.json",
         "public/scenes/lmc/datasets/a7bbccb1cf77b6dbec789dec872a56b7560c1a9ff12270a6f8c56c6554088fbd.webp"
@@ -402,8 +325,6 @@
     "lmc/wise-wide-infrared": {
       "url": "/navigation/focus-lmc-wise-wide-infrared.webp",
       "url2x": "/navigation/focus-lmc-wise-wide-infrared@2x.webp",
-      "sha256": "a37752144d2386951fd5c1a273e0d530e1dc6e05b179e69d38dbab0d9f66edf5",
-      "sha2562x": "cef8a26b0ec965129cbfc3f0ca33aa03ba72f4b5cb588e01f0cfc2ceb6229491",
       "inputs": [
         "src/objects/lmc/prepared/presentation.json",
         "public/scenes/lmc/datasets/d56d42a74fdfd2938fdc3eba02c9209aada4527eaba104d85b34498d1578f2fd.webp"
@@ -414,8 +335,6 @@
     "m1/hubble-optical": {
       "url": "/navigation/focus-m1-hubble-optical.webp",
       "url2x": "/navigation/focus-m1-hubble-optical@2x.webp",
-      "sha256": "b2936b277bb437a0becbfba163daef36d1c6b524eb3987cfb51e67a35fc6278b",
-      "sha2562x": "40233b92e335263f0ce6ceabab20120fda34894af7d29d1609f3715ffb70437e",
       "inputs": [
         "src/objects/m1/prepared/presentation.json",
         "public/scenes/m1/datasets/be89c395ddce28b848c82a4262403097d338dda053f843c7b1cdfade4b576d74.webp"
@@ -426,8 +345,6 @@
     "m1/webb-infrared": {
       "url": "/navigation/focus-m1-webb-infrared.webp",
       "url2x": "/navigation/focus-m1-webb-infrared@2x.webp",
-      "sha256": "7420016ae4b211e0587093c28e424c716d168ccc6718a3ae31b46e569e3921b8",
-      "sha2562x": "5605fc89cf1dc614660d91c3970b8848a4bfc85cd4afc493af145826aa855256",
       "inputs": [
         "src/objects/m1/prepared/presentation.json",
         "public/scenes/m1/datasets/dc4e7b449942ad7ea14feee933728b9d877a1f12d29d2f929fa91497c917dfcd.webp"
@@ -438,8 +355,6 @@
     "m1/webb-components": {
       "url": "/navigation/focus-m1-webb-components.webp",
       "url2x": "/navigation/focus-m1-webb-components@2x.webp",
-      "sha256": "0d97eb6344ad04e31ed08003ff9665d508ebd80cccc28925da6322bb65410102",
-      "sha2562x": "2586b3768d4c7ab8348ef350de15e719941df5badd55479a71b0e1f75d109708",
       "inputs": [
         "src/objects/m1/prepared/presentation.json",
         "public/scenes/m1/datasets/ea8d1676e209ac5e606f7f61f39fae27f41d58a306f67024ddb0014d2c853b9f.webp"
@@ -450,8 +365,6 @@
     "m1/spitzer-infrared": {
       "url": "/navigation/focus-m1-spitzer-infrared.webp",
       "url2x": "/navigation/focus-m1-spitzer-infrared@2x.webp",
-      "sha256": "cad326456fdc9280fb72d8044462da00678571d0f68e8c8f306ed5123a0e6ff6",
-      "sha2562x": "247e8ac5e4dabc05eedded5d31e103a123a8f61388a54b3d4b3cced95dea2dad",
       "inputs": [
         "src/objects/m1/prepared/presentation.json",
         "public/scenes/m1/datasets/ec737ccea80f08ea68582d69ff57530944be171d2bef59027200b06c0a6aeb0d.webp"
@@ -462,8 +375,6 @@
     "m1/vla-radio": {
       "url": "/navigation/focus-m1-vla-radio.webp",
       "url2x": "/navigation/focus-m1-vla-radio@2x.webp",
-      "sha256": "3e2b48f323c8f0d989685ad630b5fde1c3c0c26e398631d30f5b02ccd49d7535",
-      "sha2562x": "e2fd3d5e64ec271d085bdcc57054bb58675b721432b43492fddbe27cc1bf1621",
       "inputs": [
         "src/objects/m1/prepared/presentation.json",
         "public/scenes/m1/datasets/e1bf5bbddb29f2ff696cda6a398ee11a60f3b568b41902625fc9ff24a5d49702.webp"
@@ -474,8 +385,6 @@
     "m1/chandra-xray": {
       "url": "/navigation/focus-m1-chandra-xray.webp",
       "url2x": "/navigation/focus-m1-chandra-xray@2x.webp",
-      "sha256": "15998d87241bc824ea8028647a381156e7f345683ab352c70596442ad2d3e64c",
-      "sha2562x": "075fcbc747affd7cf5e439262a42e961c334c0c1277a3fea503ef0ca628e1dd4",
       "inputs": [
         "src/objects/m1/prepared/presentation.json",
         "public/scenes/m1/datasets/13923d9d55e216369891a091d8d511b1d7d44c1d17eaee97ba0053caeb43824d.webp"
@@ -486,8 +395,6 @@
     "m2-9/hst-optical": {
       "url": "/navigation/focus-m2-9-hst-optical.webp",
       "url2x": "/navigation/focus-m2-9-hst-optical@2x.webp",
-      "sha256": "a797eb672ab5e2e545865d0dc872d473b56aed54981aee4de7912a89c737ac48",
-      "sha2562x": "8af81f78fd202c9a3c510b9d837ff7c1fe78cb56a796c74e9e9345a0ed95f264",
       "inputs": [
         "src/objects/m2-9/prepared/presentation.json",
         "public/scenes/m2-9/datasets/e758d5612fc62ce558e494e0e6aabf73ed3b4098610f0752a5885129c950d09e.webp"
@@ -498,8 +405,6 @@
     "m31/optical": {
       "url": "/navigation/focus-m31-optical.webp",
       "url2x": "/navigation/focus-m31-optical@2x.webp",
-      "sha256": "351684147a877d8fbb5bcf7ac151b465425483d5c1d5840e53cb28fc6144bf48",
-      "sha2562x": "9f7ed4b076239934ac1748329b02cfd4c24305b03de6b2ddc7af7648e2243e13",
       "inputs": [
         "src/objects/m31/prepared/presentation.json",
         "public/scenes/m31/datasets/4c152fc4d7ea84f7b4b0676fbd81dd3d0400838d2ece4f60f44d93c98ab70de9.webp"
@@ -510,8 +415,6 @@
     "m33/optical": {
       "url": "/navigation/focus-m33-optical.webp",
       "url2x": "/navigation/focus-m33-optical@2x.webp",
-      "sha256": "064cb5a2558040c432a3275fa8e41b8a494240f806fffe54e06c4807c5b12bae",
-      "sha2562x": "917f3b40e9b00d2f3f75ad370d53b5fdce1f0a7cdbb8679d1f08899e7f4c137f",
       "inputs": [
         "src/objects/m33/prepared/presentation.json",
         "public/scenes/m33/datasets/d4e0dfa5159d8e7f4bd1deca9d23df7546ab2d0a97693188a3b4e285c68251b3.webp"
@@ -522,8 +425,6 @@
     "m42/eso-optical": {
       "url": "/navigation/focus-m42-eso-optical.webp",
       "url2x": "/navigation/focus-m42-eso-optical@2x.webp",
-      "sha256": "53ee29c8f2b58dd947bbfaf6dc4cc55bde342381dbe584db68671e0e7ad3be89",
-      "sha2562x": "62ef41a86743e60d4ee419246111d8b0414f3cf7f6fcbde45640dbb48e0b6ffe",
       "inputs": [
         "src/objects/m42/prepared/presentation.json",
         "public/scenes/m42/datasets/2b53b5a8e2ff310c5e793abee19eb6dd6c17a95f59e9827a7c25c08dce47879f.webp"
@@ -534,8 +435,6 @@
     "m42/eso-vista": {
       "url": "/navigation/focus-m42-eso-vista.webp",
       "url2x": "/navigation/focus-m42-eso-vista@2x.webp",
-      "sha256": "8e020dfaecc88c6ca3a49015919495b183a2ae82d1bcb7b988852c2faa85c102",
-      "sha2562x": "b31c145ba20cbbcc9defcca7f49a67bd750211d81422baf6702eeece169e2a8c",
       "inputs": [
         "src/objects/m42/prepared/presentation.json",
         "public/scenes/m42/datasets/408de7aaef5d55fdf0fa04dc4ef769c7d5a48abcddf52fbd6f16378f6445a3ac.webp"
@@ -546,8 +445,6 @@
     "m45/optical-composite": {
       "url": "/navigation/focus-m45-optical-composite.webp",
       "url2x": "/navigation/focus-m45-optical-composite@2x.webp",
-      "sha256": "eaae675ceb2b16905fcb532c58d87483a791b795e9d61cab574ab3ca24b7c6c1",
-      "sha2562x": "3acadfe520524defc5eb57651ea935534fda85522fd5d6b283208277b7d5ebd4",
       "inputs": [
         "src/objects/m45/prepared/presentation.json",
         "public/scenes/m45/datasets/de2e504747540d0de25f6d5ff6eec925671afa032698a72a0b72b6f8bbc3cce2.webp"
@@ -558,8 +455,6 @@
     "m45/noirlab-optical": {
       "url": "/navigation/focus-m45-noirlab-optical.webp",
       "url2x": "/navigation/focus-m45-noirlab-optical@2x.webp",
-      "sha256": "64bbdfe0830b8cb889c5b12fe1e6cae0d674d4364d4538abecc8ca272ae7767c",
-      "sha2562x": "47bb59bf80d789866c95fdbef42c2c298f25b82b4f712684fba885b4705a7344",
       "inputs": [
         "src/objects/m45/prepared/presentation.json",
         "public/scenes/m45/datasets/58402568a5356273409286bd006d83238c7ae4bc325d14468587739cfea628b3.webp"
@@ -570,8 +465,6 @@
     "m45/spitzer-irac": {
       "url": "/navigation/focus-m45-spitzer-irac.webp",
       "url2x": "/navigation/focus-m45-spitzer-irac@2x.webp",
-      "sha256": "7e245fee4d7730b1b08c5b25f5c7ddb6622b6ba9e0b177b589e2ff35f76cff2c",
-      "sha2562x": "0776f185c84ca3398112ca5831dd0f5fb6b1f8a97825152f27f16fc76ba1798b",
       "inputs": [
         "src/objects/m45/prepared/presentation.json",
         "public/scenes/m45/datasets/93588b4ea142cd734f890b08b1ed7f61dfcd8de1682fd3a59effe2f52b7df72c.webp"
@@ -582,8 +475,6 @@
     "m45/spitzer-irac-mips": {
       "url": "/navigation/focus-m45-spitzer-irac-mips.webp",
       "url2x": "/navigation/focus-m45-spitzer-irac-mips@2x.webp",
-      "sha256": "eee3eeb5223da64a2f292a3ecf62eb773fc7c56e821ad5560975b81c279f16b8",
-      "sha2562x": "f0e8aefaa10c569bc34c6100518364759e3b89d40baf206dfff865d4e4efc51a",
       "inputs": [
         "src/objects/m45/prepared/presentation.json",
         "public/scenes/m45/datasets/f4e75b7df85585712dbd835dce3cb227f93e0d5138877501681a5df89221fd56.webp"
@@ -594,8 +485,6 @@
     "m45/wise-four-band": {
       "url": "/navigation/focus-m45-wise-four-band.webp",
       "url2x": "/navigation/focus-m45-wise-four-band@2x.webp",
-      "sha256": "4f13049d132bfda319a4fd71a3545fab7d5f57478d92d2750d7e541717dc901f",
-      "sha2562x": "4648b65e5d5e7fc31ac4cb41bbf60c52ad7cf89c61583b85d017fa860dad8ecb",
       "inputs": [
         "src/objects/m45/prepared/presentation.json",
         "public/scenes/m45/datasets/0042ca173378ea26d5a5cac318c860b21bc6d6ada17389256dbf1f66d407df11.webp"
@@ -606,8 +495,6 @@
     "m8/eso-optical": {
       "url": "/navigation/focus-m8-eso-optical.webp",
       "url2x": "/navigation/focus-m8-eso-optical@2x.webp",
-      "sha256": "d2143d4ec318296a987e47f1ad8b0ca730d79b925f4166521ef26f51a6f77714",
-      "sha2562x": "08919e7a09ac01a70cd41b5969309fe1735c68df53d8aeadb77d88da95cd9b15",
       "inputs": [
         "src/objects/m8/prepared/presentation.json",
         "public/scenes/m8/datasets/af6d54eb3fe1c721ce123804e4628aa7d4c121939b9e8e80a0641bd137aeb6fe.webp"
@@ -618,8 +505,6 @@
     "m8/eso-vista": {
       "url": "/navigation/focus-m8-eso-vista.webp",
       "url2x": "/navigation/focus-m8-eso-vista@2x.webp",
-      "sha256": "61cfbfd6bc2db6b246aa07abba23154c52c7c8f5672f7997f48825ba90c0fe2e",
-      "sha2562x": "1f577c5a6ff2a193eb1bb4f9c0cb8639bf90fd9fdb749f7b8269eaa81db62fdf",
       "inputs": [
         "src/objects/m8/prepared/presentation.json",
         "public/scenes/m8/datasets/51ee96fddc55feb60de53295f3dfc2c8e0e13c936252d5d4bb1b9e16de479212.webp"
@@ -630,8 +515,6 @@
     "m8/spitzer-mid-infrared": {
       "url": "/navigation/focus-m8-spitzer-mid-infrared.webp",
       "url2x": "/navigation/focus-m8-spitzer-mid-infrared@2x.webp",
-      "sha256": "82c1979c90f036a37de85fa4c5493116ef89dafa43a986d59c25bf6f33752fe6",
-      "sha2562x": "243840e83fc15fa2fec12d3994bd7e995f42c1f50de50c47987e745c48ad695d",
       "inputs": [
         "src/objects/m8/prepared/presentation.json",
         "public/scenes/m8/datasets/43973c18725feb2dbf5a7eda525bab125623949a9cbd34b858588d2908f0192d.webp"
@@ -642,8 +525,6 @@
     "smc/optical": {
       "url": "/navigation/focus-smc-optical.webp",
       "url2x": "/navigation/focus-smc-optical@2x.webp",
-      "sha256": "16f5c4b37d1e1ba9afea290a4bdd49bfc3b79e435351f70d4d8a964ac24c9c35",
-      "sha2562x": "a8d3cc52da59e1e5224d87cf0e42984c437b8056ddf257a105d1d25369cbaced",
       "inputs": [
         "src/objects/smc/prepared/presentation.json",
         "public/scenes/smc/datasets/55c76e39df1bc3bff4e281bd40c226209ad3e84b7b3abd5657c4f03278915419.webp"
@@ -654,8 +535,6 @@
     "milky-way/volume": {
       "url": "/navigation/focus-milky-way-volume.webp",
       "url2x": "/navigation/focus-milky-way-volume@2x.webp",
-      "sha256": "8fec1a6e649ef0ac9298cf38ac9adf39d5c74c593b34334001ce90e05abc917e",
-      "sha2562x": "4e96c015fe13080a7476225c33bb14069d9ba57f90619d9e1f7a338488e1144a",
       "inputs": [
         "src/objects/milky-way/prepared/volume-slices.json",
         "src/objects/milky-way/prepared/slices/z/01.webp",

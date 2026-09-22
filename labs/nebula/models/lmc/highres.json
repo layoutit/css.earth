@@ -2,14 +2,12 @@
   "schema": "cssearth-photo-master-experiment@1",
   "base": {
     "path": "labs/nebula/models/magellanic-particles.json",
-    "sha256": "2185f0f4163f5ecbe67c6d8a8b19ffe67866e3071de29d1a846c3c545973931a",
     "targetId": "lmc-particles"
   },
   "photo": {
     "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
     "id": "noirlab2030a",
     "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
     "bytes": 264225774,
     "width": 6737,
     "height": 6536,

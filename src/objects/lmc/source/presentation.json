@@ -4,46 +4,32 @@
   "name": "Large Magellanic Cloud",
   "defaultLens": "horalek-widefield",
   "bank": {
-    "path": "src/objects/lmc/prepared/lenses.json",
-    "sha256": "4dd5f002f13c6610c6b39ec941e64817e6d40eb60a4d74578bd1876d3a6c2d50",
-    "bytes": 2600584
+    "path": "src/objects/lmc/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "recipe-1",
-      "path": "src/objects/lmc/source/lenses.json",
-      "sha256": "38ac1f1e4579d471ac963c8e0a5ddbaa8abd8aacc5a30e828588b3cd77b0943e",
-      "bytes": 2756
+      "path": "src/objects/lmc/source/lenses.json"
     },
     {
       "id": "recipe-2",
-      "path": "src/objects/lmc/source/evidence/lmc/envelope/emission-envelope.json",
-      "sha256": "a15784844e8188e01641280ef9fbef430afd93d56062644ef7d50fba58769e76",
-      "bytes": 1291
+      "path": "src/objects/lmc/source/evidence/lmc/envelope/emission-envelope.json"
     },
     {
       "id": "recipe-3",
-      "path": "src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-      "sha256": "e69f1eb5f9f3c9fe63c0a3ef703bbb875bb93e882f1fd25442b8d07718c8ff6e",
-      "bytes": 8202
+      "path": "src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"
     },
     {
       "id": "recipe-4",
-      "path": "src/objects/lmc/source/compact/prior/volume.json",
-      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
-      "bytes": 1370
+      "path": "src/objects/lmc/source/compact/prior/volume.json"
     },
     {
       "id": "recipe-5",
-      "path": "src/objects/lmc/source/evidence/lmc/candidates/source/alignment-report.json",
-      "sha256": "c9da3dc239c365f10ec3527386b6081a4a74d1909b9d316395cfaa34d3471e98",
-      "bytes": 8098
+      "path": "src/objects/lmc/source/evidence/lmc/candidates/source/alignment-report.json"
     },
     {
       "id": "recipe-6",
-      "path": "src/objects/lmc/source/lens-settings-evidence.json",
-      "sha256": "02d555eed945c678eaca56361bec35fec532d451152dc04b9498a1b73f41d0f4",
-      "bytes": 1910
+      "path": "src/objects/lmc/source/lens-settings-evidence.json"
     }
   ],
   "sharedInputs": [
@@ -54,11 +40,11 @@
   "lenses": [
     {
       "id": "horalek-widefield",
-      "label": "Hor\u00e1lek optical",
-      "title": "Petr Hor\u00e1lek\u2019s visible-light LMC",
+      "label": "Horálek optical",
+      "title": "Petr Horálek’s visible-light LMC",
       "description": "Optical photograph colours are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
       "summary": "Optical photograph colours on an image-fitted emission model; gas and dust depth are not measured.",
-      "detail": "6582 \u00d7 4388 px",
+      "detail": "6582 × 4388 px",
       "facts": [
         {
           "id": "bands",
@@ -68,7 +54,7 @@
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6582 \u00d7 4388"
+          "value": "6582 × 4388"
         },
         {
           "id": "depth",
@@ -79,8 +65,6 @@
       "input": "horalek-widefield",
       "preview": {
         "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
-        "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
-        "bytes": 8507407,
         "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg"
       }
     },
@@ -90,17 +74,17 @@
       "title": "LMC in near infrared",
       "description": "Near-infrared colours from ESO's VISTA survey are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All lenses share one opacity, so this lens renders brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
       "summary": "Near-infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
-      "detail": "8954 \u00d7 10000 px",
+      "detail": "8954 × 10000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Near-infrared \u00b7 Y / J / Ks"
+          "value": "Near-infrared · Y / J / Ks"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "8954 \u00d7 10000"
+          "value": "8954 × 10000"
         },
         {
           "id": "depth",
@@ -111,8 +95,6 @@
       "input": "vista-infrared",
       "preview": {
         "path": ".local/nebula-presentation/lmc-vista-infrared.jpg",
-        "sha256": "c26c476daad651ff342856aad837b5408caec62a46f1637381089ff15a0465ab",
-        "bytes": 641609,
         "url": "https://cdn.eso.org/images/screen/eso1914a.jpg"
       }
     },
@@ -122,17 +104,17 @@
       "title": "LMC in WISE infrared",
       "description": "Infrared colours from the NASA/IPAC AllWISE mosaic are painted onto the shared image-fitted LMC emission model. Its broad envelope keeps the shape of the Garver et al. stellar simulation; depth is not measured gas or dust. All lenses share one opacity, so this lens renders much brighter than its own image. Catalogue-star positions are observed; their modeled depths do not establish individual distances. The reference image shows the photograph before star removal and 3D emission fitting.",
       "summary": "AllWISE infrared false colour on an image-fitted emission model; gas and dust depth are not measured.",
-      "detail": "6000 \u00d7 6000 px",
+      "detail": "6000 × 6000 px",
       "facts": [
         {
           "id": "bands",
           "label": "Bands",
-          "value": "Infrared display color \u00b7 W4 / W2 / W1"
+          "value": "Infrared display color · W4 / W2 / W1"
         },
         {
           "id": "source-pixels",
           "label": "Source pixels",
-          "value": "6000 \u00d7 6000"
+          "value": "6000 × 6000"
         },
         {
           "id": "depth",
@@ -143,8 +125,6 @@
       "input": "wise-wide-infrared",
       "preview": {
         "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-        "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
-        "bytes": 1942085,
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
       }
     }

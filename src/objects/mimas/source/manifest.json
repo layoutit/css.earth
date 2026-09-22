@@ -38,8 +38,6 @@
       },
       "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
       "catalog": "https://science.nasa.gov/resource/mimas-global-map-june-2017/",
-      "expectedBytes": 6959979,
-      "expectedSha256": "f8ffa667b2c35ec890973ea3300a33d3ee506f596b53d3818cdfee56943e038b",
       "capture": {
         "attributions": [
           {
@@ -97,8 +95,6 @@
       },
       "coverage": "Published full rectangular mosaic; no separate validity mask or documented missing code. Preserve every supplied pixel, including black shadows. Native resolution and illumination vary.",
       "catalog": "https://www.jpl.nasa.gov/images/pia18437-color-maps-of-mimas-2014/",
-      "expectedBytes": 1848860,
-      "expectedSha256": "303d5653875d507e8859a26d0afdedd0173c7d4e691f27c3266ca63d1aa4f97f",
       "capture": {
         "attributions": [
           {
@@ -123,8 +119,6 @@
     {
       "id": "cassini-spc-2025-elevation",
       "path": "observations/mimas_radius_g.tif",
-      "expectedBytes": 9881891,
-      "expectedSha256": "cb2368b033cde32ae6cda6831d248299929518cbcf747bc832e671cc5751fc2c",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.tif",
       "catalog": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
       "credit": "NASA/JPL-Caltech/Space Science Institute; Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS",
@@ -180,8 +174,6 @@
     {
       "id": "cassini-spc-2025-shape",
       "path": "shape/mimas_128_o.obj",
-      "expectedBytes": 17694840,
-      "expectedSha256": "e8191c356f899817536ef1d71dbddedc21077bd6bc44f1883264df2929a540ca",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.obj",
       "catalog": "https://sbn.psi.edu/pds/resource/weirichmimasshape.html",
       "credit": "NASA/JPL-Caltech/Space Science Institute; Weirich, Gaskell, Palmer and Domingue (2025), NASA PDS",
@@ -224,8 +216,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

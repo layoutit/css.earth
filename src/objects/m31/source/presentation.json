@@ -4,22 +4,16 @@
   "name": "Andromeda Galaxy",
   "defaultLens": "optical",
   "bank": {
-    "path": "src/objects/m31/prepared/image-layers.json",
-    "sha256": "16951a0b2f8fcccdd5c9b7c419cd6e486fda759448437ffe06fc6ba20a3b3957",
-    "bytes": 177609
+    "path": "src/objects/m31/prepared/image-layers.json"
   },
   "recipes": [
     {
       "id": "image-layer-recipe",
-      "path": "src/objects/m31/source/recipe.json",
-      "sha256": "24505d74fa94294cb448949b21554427c21774774101720abbd685eeb8eca398",
-      "bytes": 2898
+      "path": "src/objects/m31/source/recipe.json"
     },
     {
       "id": "source-evidence",
-      "path": "src/objects/m31/source/provenance.json",
-      "sha256": "52bf488f3fe4d713b23091c6b523d1269bfac2b3d1cae1c098e305029bfa1c66",
-      "bytes": 2088
+      "path": "src/objects/m31/source/provenance.json"
     }
   ],
   "sharedInputs": [],
@@ -56,8 +50,6 @@
       "input": "optical",
       "preview": {
         "path": "src/objects/m31/source/source.jpg",
-        "sha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137",
-        "bytes": 10592116,
         "url": "https://cdn.esahubble.org/archives/images/large/heic1112f.jpg"
       }
     }

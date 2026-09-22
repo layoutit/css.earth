@@ -3,8 +3,8 @@
   "telescope": "IHW/PDS",
   "stage": "archive-final",
   "inputs": [
-    { "role": "label", "identity": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.lbl", "bytes": 5120, "sha256": "08fea7f02af15534c67cd8db159f3a17e8c69c0c605ca176580dcd9a3184cd14" },
-    { "role": "science", "identity": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.fit", "bytes": 480960, "sha256": "5f42e101c3a2cc81c17417f32036cca86ddd1b5880080b0e0b12cee3bf7ed7aa" }
+    { "role": "label", "identity": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.lbl", "bytes": 5120 },
+    { "role": "science", "identity": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.fit", "bytes": 480960 }
   ],
   "parameters": {
     "selection": { "program": "comet-1p-nnsn1121", "dataset": "IHW-C-NNSN-3-EDR-HALLEY-V2.0", "observation": "NNSN1121", "archiveObservationId": "401132", "target": "comet-1p", "kind": "image" },
@@ -17,8 +17,8 @@
   },
   "software": [],
   "outputs": [
-    { "path": "nnsn1121.lbl", "bytes": 5120, "sha256": "08fea7f02af15534c67cd8db159f3a17e8c69c0c605ca176580dcd9a3184cd14" },
-    { "path": "nnsn1121.fit", "bytes": 480960, "sha256": "5f42e101c3a2cc81c17417f32036cca86ddd1b5880080b0e0b12cee3bf7ed7aa", "units": "REL. INT.", "conventions": { "pixelScale": "0.36 arcsec per pixel", "orientation": "celestial north clock angle 0 degrees", "registration": "no celestial WCS or comet-surface registration is supplied" } }
+    { "path": "nnsn1121.lbl", "bytes": 5120 },
+    { "path": "nnsn1121.fit", "bytes": 480960, "units": "REL. INT.", "conventions": { "pixelScale": "0.36 arcsec per pixel", "orientation": "celestial north clock angle 0 degrees", "registration": "no celestial WCS or comet-surface registration is supplied" } }
   ],
   "evidence": [
     { "kind": "archive-origin", "receipt": "tools/objects/ihw/programs/comet-1p-nnsn1121.archive-final.product.json", "product": "nnsn1121.fit", "establishes": "nnsn1121.fit is the PDS Small Bodies Node byte stream for IHW product NNSN1121. Its size, SHA-256 and archive-published MD5 were checked, and its label, index row and FITS header agree on the observation. This establishes origin and integrity only; no local calibration ran and no archive agreement is claimed." }

@@ -41,7 +41,7 @@ export interface EmissionFieldModel {
   emissionWindow?: EmissionWindow;
   photometricEnvelope?: RetainedPhotometricEnvelope;
   depthConstraints?: {
-    recipeId: string; evidenceSha256: string; paperGuidedComponents: number; authoredComponents: number;
+    recipeId: string; evidencePath: string; paperGuidedComponents: number; authoredComponents: number;
     assignments: { componentId: string; featureId: string; methodId: string; evidenceIds: string[]; support: string }[];
   };
   assumptions: {

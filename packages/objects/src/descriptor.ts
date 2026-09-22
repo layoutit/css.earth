@@ -4,7 +4,6 @@ export interface JsonRecord { readonly [key: string]: JsonValue; }
 export interface PreparedAssetReference {
   readonly format: string;
   readonly url: string;
-  readonly sha256: string;
 }
 export interface ObjectDescriptor {
   readonly schema: 'cssearth-object@1';

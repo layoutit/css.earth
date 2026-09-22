@@ -12,13 +12,11 @@
       "products": [
         {
           "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11385XX/C1138527_GEOMED.IMG",
-          "bytes": 2002000,
-          "sha256": "6873a3d59b832b145c9ec975f96d1e764487a14edaa7b4047fd1c09d79bb10da"
+          "bytes": 2002000
         },
         {
           "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11385XX/C1138527_GEOMED.LBL",
-          "bytes": 3345,
-          "sha256": "8472670b4b32a81df2d42c9ab7d4fb6eae6537e703ba73ae7da36274366e26eb"
+          "bytes": 3345
         }
       ],
       "disposition": "Excluded: insufficient resolved surface sampling and/or exposure trailing; no registered terrain map."
@@ -33,13 +31,11 @@
       "products": [
         {
           "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133806_GEOMED.IMG",
-          "bytes": 2002000,
-          "sha256": "7415b7090dbe3a310cad07aa1050c2cef999dc018a28bb1c9a1c50b1606e8764"
+          "bytes": 2002000
         },
         {
           "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133806_GEOMED.LBL",
-          "bytes": 3307,
-          "sha256": "3d1f30c2fa00224e9fd23a720699f96e63edf8eee189b5e728dd651c9e7d28c4"
+          "bytes": 3307
         }
       ],
       "disposition": "Excluded: insufficient resolved surface sampling and/or exposure trailing; no registered terrain map."
@@ -54,13 +50,11 @@
       "products": [
         {
           "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11337XX/C1133759_GEOMED.IMG",
-          "bytes": 2002000,
-          "sha256": "c9f0cf7a34001e67c25c9c9052478ed8164a916d6c9745ff48d0175833998515"
+          "bytes": 2002000
         },
         {
           "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11337XX/C1133759_GEOMED.LBL",
-          "bytes": 3307,
-          "sha256": "043ae02aa12d44ed292185444a9469e7d3b8998810d2a687ec020a6c71eda4ac"
+          "bytes": 3307
         }
       ],
       "disposition": "Excluded: insufficient resolved surface sampling and/or exposure trailing; no registered terrain map."

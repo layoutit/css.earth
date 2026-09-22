@@ -4,8 +4,6 @@
     {
       "id": "c1137317",
       "path": "observations/C1137317_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "2cbc85b09e7424100cc70ae04e2c3e6348de9c16e3d2b470cfcd3c80a6a7dcc5",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137317",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -85,8 +83,6 @@
     {
       "id": "c1138920",
       "path": "observations/C1138920_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "37251119522eb390347b918920b14621f9b28ec6aecd12ebe48d79d64fd4223b",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138920",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -166,8 +162,6 @@
     {
       "id": "stooke-shape",
       "path": "shape/n8proteus.tab",
-      "expectedBytes": 70226,
-      "expectedSha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n8proteus.tab",
       "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
       "credit": "Philip Stooke; NASA Planetary Data System",
@@ -203,8 +197,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -230,8 +222,6 @@
     {
       "id": "c1137328-color",
       "path": "observations/C1137328_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137328",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -311,8 +301,6 @@
     {
       "id": "c1137339-color",
       "path": "observations/C1137339_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137339",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -392,8 +380,6 @@
     {
       "id": "c1137350-color",
       "path": "observations/C1137350_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137350",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",

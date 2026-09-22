@@ -304,10 +304,10 @@ export async function author(id: string, options: { sources?: readonly string[] 
       path: `${downloadsBase}/observations/${band.entry.level3.name}`, origin: mastDownloadUrl(band.entry.level3.uri), sourceUrl: recipe.sourceUrl,
       title: `MAST JWST programme ${band.program.programme} · ${band.entry.observation} level-3 coronagraph mosaic`, credit: recipe.credit, displayCredit: 'NASA/ESA/CSA JWST, MAST',
       acquisition: `Downloaded unchanged from MAST by its URI ${band.entry.level3.uri} (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/${lens.program}.json. This repository re-ran that stage on the pinned toolchain and compared the result (compare.mts receipt beside the program).`,
-      license: recipe.license.note, lensId: lens.id, expectedSha256: band.mosaicSha256, expectedBytes: band.entry.level3.bytes };
+      license: recipe.license.note, lensId: lens.id };
   });
   const produced = new Map(outputs.map(([name, bytes]) => [name, bytes]));
-  const local = (path: string, reason: string) => ({ id: path.replace(/[^a-z0-9-]+/gu, '-').toLowerCase(), path: `${packageBase}/${path}`, expectedSha256: sha256(produced.get(path) ?? recipeBytes), expectedBytes: (produced.get(path) ?? recipeBytes).length, sourceBinding: { kind: 'local', reason } });
+  const local = (path: string, reason: string) => ({ id: path.replace(/[^a-z0-9-]+/gu, '-').toLowerCase(), path: `${packageBase}/${path}`, sourceBinding: { kind: 'local', reason } });
   const intermediates = outputs.filter(([name]) => name.endsWith('.ktx2') || name.startsWith('volume-') || name.startsWith('previews/')).map(([name]) =>
     local(name, `Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json.`));
   const documents = [local('circumstellar.json', 'Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against.'),

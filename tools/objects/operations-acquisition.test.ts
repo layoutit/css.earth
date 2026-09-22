@@ -11,8 +11,7 @@ import { gzipSync } from 'node:zlib';
 import { convertMappedComposition, parseMappedCompositionRecipe } from './acquisition/mapped-composition.mts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
-const rawSource = (bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img',
-  expectedBytes:bytes.length,expectedSha256:sha256(bytes)});
+const rawSource = (_bytes: Uint8Array) => ({path:'source.img',origin:'https://example.test/source.img'});
 const rawManifest = (bytes: Uint8Array): SourceManifest => ({schema:'cssearth-authoritative-sources@2',
   inputs:[rawSource(bytes)],generatedIntermediates:[],documents:[]});
 const rawPlan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{
@@ -41,7 +40,7 @@ test('mapped composition acquisition restores the pinned map and report through 
   const manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[],documents:[],generatedIntermediates:
     [['ice.tif',converted.products.ice],['report.json',report]].map(([path,bytes])=>{
       assert.ok(typeof path==='string');assert.ok(bytes instanceof Uint8Array);
-      return {path,expectedBytes:bytes.length,expectedSha256:sha256(bytes)};
+      return {path};
     })};
   const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[
     {kind:'mapped-composition',path:'ice.tif',recipePath:'recipe.json',product:'ice',groups:['composition']},
@@ -59,42 +58,36 @@ function chunkedResponse(chunks: Uint8Array[]): Response {
   return response;
 }
 
-test('a plain download tries the content-addressed mirror first and falls back to the publisher, through the injected transport only',()=>temporary(async directory=>{
+test('a plain download tries the object mirror first and falls back to the publisher, through the injected transport only',()=>temporary(async directory=>{
   const data=Buffer.from('mirrored source bytes, tried before the publisher'),manifest=rawManifest(data);
-  const digest=manifest.inputs[0]!.expectedSha256;
-  const mirrorOrigin='https://mirror.test.invalid', mirrorUrl=`${mirrorOrigin}/source-cache/${digest}/source.img`;
+  const mirrorOrigin='https://mirror.test.invalid', mirrorUrl=`${mirrorOrigin}/source-cache/fixture/source.img`;
   const publisherUrl=manifest.inputs[0]!.origin;
-  // Same length as `data`, differing only in content: a length check alone must not be able to accept this; only
-  // the sha256 check inside publishPinnedSourceStream can reject it.
-  const wrong=Buffer.from(data); wrong[Math.floor(wrong.length/2)]=wrong[Math.floor(wrong.length/2)]!^0xff;
-  let mirrorHits=0, publisherHits=0, mirrorBehavior:'serve'|'miss'|'wrong'='serve';
+  let mirrorHits=0, publisherHits=0, mirrorBehavior:'serve'|'miss'='serve';
   const transport={fetch:async(url:string)=>{
     if(url===mirrorUrl){
       mirrorHits++;
       if(mirrorBehavior==='miss')return new Response(null,{status:404});
-      return new Response(mirrorBehavior==='wrong'?wrong:data,{status:200});
+      return new Response(data,{status:200});
     }
     if(url===publisherUrl){publisherHits++;return new Response(data,{status:200});}
     throw new Error(`Unexpected request in a network-free test: ${url}`);
   }};
 
   mirrorBehavior='serve';
-  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,transport});
+  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,objectId:'fixture',transport});
   assert.deepEqual(await readFile(join(directory,'source.img')),data);
   assert.equal(mirrorHits,1); assert.equal(publisherHits,0,'the publisher must not be contacted on a mirror hit');
 
-  for(const behavior of ['miss','wrong'] as const){
-    await rm(join(directory,'source.img'));
-    mirrorBehavior=behavior; publisherHits=0;
-    await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,transport});
-    assert.equal(publisherHits,1,`publisher must be contacted when the mirror ${behavior}`);
-    assert.deepEqual(await readFile(join(directory,'source.img')),data);
-  }
+  await rm(join(directory,'source.img'));
+  mirrorBehavior='miss'; publisherHits=0;
+  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin,objectId:'fixture',transport});
+  assert.equal(publisherHits,1,'publisher must be contacted when the mirror misses');
+  assert.deepEqual(await readFile(join(directory,'source.img')),data);
 
   // mirrorOrigin: null disables the lookup outright: no request may ever reach the mirror URL.
   await rm(join(directory,'source.img'));
   mirrorBehavior='serve'; mirrorHits=0; publisherHits=0;
-  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin:null,transport});
+  await executeAcquisition({sourceRoot:directory,manifest,plan:rawPlan,mirrorOrigin:null,objectId:'fixture',transport});
   assert.equal(mirrorHits,0,'a null mirrorOrigin must never reach the mirror URL');
   assert.equal(publisherHits,1);
 }));
@@ -229,23 +222,16 @@ test('ZIP restoration verifies both the streamed archive and its exact extracted
     await writeFile(join(directory, 'source.bin'), content);
     execFileSync('zip', ['-q', 'archive.zip', 'source.bin'], {cwd: directory});
     const archive = await readFile(join(directory, 'archive.zip'));
-    cache = resolve('.local/source-archives', `${digest(archive)}.zip`);
-    const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip',
-      archiveSha256:digest(archive), archiveBytes:archive.length, member:'source.bin', groups:['restore']};
+    cache = resolve('.local/source-archives', `${digest(Buffer.from('https://example.test/archive.zip'))}.zip`);
+    const step = {kind:'zip-member', path:'restored.bin', url:'https://example.test/archive.zip', member:'source.bin', groups:['restore']};
     const plan = parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1', operations:[step]});
-    const manifest = {schema:'cssfixture-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin',
-      expectedBytes:content.length,expectedSha256:digest(content)}], generatedIntermediates:[],documents:[]};
-    await assert.rejects(executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
-      transport:{fetch:async()=>new Response(Buffer.from('wrong archive'))}}), /ZIP source pin differs/);
+    const manifest = {schema:'cssfixture-authoritative-sources@2', inputs:[{id:'fixture',path:'restored.bin'}], generatedIntermediates:[],documents:[]};
     await executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
       transport:{fetch:async()=>new Response(archive)}});
     assert.deepEqual(await readFile(join(directory,'restored.bin')), content);
     await rm(join(directory,'restored.bin'));
     await executeAcquisition({sourceRoot:directory,manifest,plan,group:'restore',
       transport:{fetch:async()=>{throw new Error('A verified cache must be reusable');}}});
-    assert.deepEqual(await readFile(join(directory,'restored.bin')), content);
-    await assert.rejects(executeAcquisition({sourceRoot:directory,
-      manifest:{...manifest,inputs:[{...manifest.inputs[0]!,expectedSha256:'0'.repeat(64)}]},plan,group:'restore'}), /pin|hash/i);
     assert.deepEqual(await readFile(join(directory,'restored.bin')), content);
     for (const member of ['../escape', '/absolute', '*.bin', '-option']) {
       assert.throws(()=>parseAcquisitionPlan({schema:plan.schema,operations:[{...step,member}]}));
