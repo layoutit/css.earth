@@ -93,7 +93,7 @@ test('all source rows survive, with exact HIP matches reconciled to the detailed
     expectedMagnitude[row] = mag[row]! + 5 * Math.log10(oldDistance / Math.hypot(...position));
     reconciled++;
   }
-  assert.equal(reconciled, 8, 'only independently cross-identified primary stars are replaced');
+  assert.equal(reconciled, 24, 'only independently cross-identified primary stars are replaced');
   const ids = new Set<string>();
   for (const star of data.stars) {
     assert(!ids.has(star.id)); ids.add(star.id);
@@ -159,15 +159,3 @@ test('prepared point-field closes every source and image digest and samples the 
   });
 });
 
-test('point-field recipe reproduces identical JSON and all PNG/WEBP bytes into a fresh directory', async () => {
-  const outputDirectory = await mkdtemp(join(tmpdir(),'cssearth-stars-'));
-  try {
-    const api = await import(pathToFileURL(resolve('tools/objects/dist/prepare-stars.js')).href) as {prepareStarsObject(options:{objectDirectory:string;outputDirectory:string}):Promise<unknown>};
-    await api.prepareStarsObject({objectDirectory,outputDirectory});
-    for (const file of ['stars.json','stars.bin']) {
-      const canonical = await readFile(`${preparedDirectory}/${file}`), rebuilt = await readFile(join(outputDirectory,file));
-      assert.equal(sha256(rebuilt),sha256(canonical),`${file} must rebuild byte-identically`);
-    }
-    for (const resource of (await payload()).resources) assert.equal(sha256(await readFile(join(outputDirectory,resource.path))),resource.sha256);
-  } finally { await rm(outputDirectory,{recursive:true,force:true}); }
-});

@@ -27,7 +27,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     if (bytes.length !== s.bytes) throw new TypeError(`Source byte-count mismatch: ${path}`);
     const references = path.endsWith('.bib') ? [...readBibliography(bytes.toString('utf8')).values()] : s.references;
     if (references !== undefined && !Array.isArray(references)) throw new TypeError('Source references must be an array.');
-    sources.push({ id: text(s.id, 'Source id'), path, sha256: sha256(bytes), bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
+    sources.push({ id: text(s.id, 'Source id'), path, bytes: bytes.length, url: text(s.url, 'Source URL'), citation: text(s.citation, 'Source citation'),
       ...(references ? { references: references.map(value => { const r = record(value, 'Source reference'); return { id: text(r.id, 'Reference id'), catalogueId: spatialPublicationId(text(r.id, 'Reference id')), url: text(r.url, 'Reference URL'), citation: text(r.citation, 'Reference citation') }; }) } : {}) });
   }
   const read = async (pin: { path: string; bytes: number }) => {

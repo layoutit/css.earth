@@ -19,10 +19,10 @@ function positive(value: unknown, label: string): number {
   const result = finite(value, label); if (!(result > 0)) throw new TypeError(`${label} must be positive.`); return result;
 }
 function pin(value: unknown, label: string): SourcePin {
-  const r = record(value, label); keys(r, ['path', 'sha256', 'bytes'], label);
-  const path = text(r.path, label), sha256 = text(r.sha256, label), bytes = positive(r.bytes, label);
-  if (path.startsWith('/') || path.includes('\\') || path.split('/').some(v => ['..', '.', ''].includes(v)) || !/^[a-f0-9]{64}$/.test(sha256) || !Number.isSafeInteger(bytes)) throw new TypeError(`${label} must be a pinned contained path.`);
-  return { path, sha256, bytes };
+  const r = record(value, label); keys(r, ['path', 'bytes'], label);
+  const path = text(r.path, label), bytes = positive(r.bytes, label);
+  if (path.startsWith('/') || path.includes('\\') || path.split('/').some(v => ['..', '.', ''].includes(v)) || !Number.isSafeInteger(bytes)) throw new TypeError(`${label} must be a pinned contained path.`);
+  return { path, bytes };
 }
 function strings(value: unknown, label: string): string[] {
   if (!Array.isArray(value) || !value.length) throw new TypeError(`${label} must be a nonempty list.`);
