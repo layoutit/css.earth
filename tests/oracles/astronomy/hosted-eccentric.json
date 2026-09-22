@@ -12,19 +12,16 @@
  "inputs": [
   {
    "path": "tests/fixtures/hosted-orbits/trappist-1f-agol2021/qualification.json",
-   "sha256": "57adcb6d1e8bd20d8111daebbeef653053b67b01c17b589db7867aa9efecf98e",
    "bytes": 3860
   }
  ],
  "references": [
   {
    "url": "https://raw.githubusercontent.com/ChristopherRabotin/cspice/26c72936fb7ff6f366803a1419b7cc3c61e0b6e5/src/cspice/conics_c.c",
-   "sha256": "cf46b31e3440a3af38984ceba0409d8b338b7790c27ffa4732bee52a4f0100c9",
    "bytes": 5678
   },
   {
    "url": "https://raw.githubusercontent.com/ChristopherRabotin/cspice/26c72936fb7ff6f366803a1419b7cc3c61e0b6e5/src/cspice/conics.c",
-   "sha256": "79c8ac37b15d4197530aee23c4606431ab9bbd5f616e55e0b61cb77516a09f37",
    "bytes": 14637
   }
  ],

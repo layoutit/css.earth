@@ -111,7 +111,6 @@ export function createCloudDensityPreparer(repositoryRoot: string, options: {
       const volumeDescriptor = await json(`${reconstructedDirectory}/object.json`);
       const provenancePin = volumeDescriptor.properties?.preparation;
       recipeBytes = await readFile(await safe(`${reconstructedDirectory}/${provenancePin.source}`));
-      if (digest(recipeBytes) !== provenancePin.sha256) throw new TypeError('Reconstruction provenance differs.');
       const provenance = parseLabModelJson(recipeBytes.toString());
       if (provenance.schema !== 'cssearth-nebula-reconstruction-provenance@1' || !sameFrame(manifest.data.frame, provenance.request?.frame ?? {}))
         throw new TypeError('Reconstruction signal and volume frames differ.');

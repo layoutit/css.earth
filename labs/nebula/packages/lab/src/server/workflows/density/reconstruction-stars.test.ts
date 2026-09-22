@@ -17,10 +17,10 @@ const fixturePromise = (async () => {
   const recipe = JSON.parse(await readFile('labs/nebula/models/lmc/full-density/source/volume.json', 'utf8'));
   const densitySource = await loadVolumeSource('labs/nebula/models/lmc/full-density/source', recipe);
   const projection = prepareDensityProjection(densitySource, Math.hypot(...catalogue.frame.originM) / catalogue.frame.metersPerUnit);
-  const input: ReconstructionStarsInput = { frame: catalogue.frame, source: { path, sha256: sha256(bytes) },
-    canonicalCloud: { path: cloudPath, sha256: sha256(await readFile(cloudPath)) }, densitySource,
+  const input: ReconstructionStarsInput = { frame: catalogue.frame, source: { path },
+    canonicalCloud: { path: cloudPath }, densitySource,
     reference: { wcs: (catalogue.provenance as any).footprint.wcs, alignment: { ...overlay, placement: overlay.initialPlacement },
-      provenancePin: { path: referencePath, sha256: sha256(referenceBytes) } }, sampleProjectedDensitySignal: projection.sampleSignal };
+      provenancePin: { path: referencePath } }, sampleProjectedDensitySignal: projection.sampleSignal };
   return { catalogue, input, projection, overlay };
 })();
 
@@ -67,7 +67,6 @@ test('all 943 stars follow the fixed reference-image fit and occupy the unchange
 
 test('wrong reference/density, unsupported model rays and candidate-image inputs reject instead of placing or filtering stars', async () => {
   const { catalogue, input } = await fixturePromise;
-  assert.throws(() => prepareReconstructionStars(catalogue, { ...input, canonicalCloud: { ...input.canonicalCloud, sha256: 'a'.repeat(64) } }), /Canonical density differs/);
   assert.throws(() => prepareReconstructionStars(catalogue, { ...input, reference: { ...input.reference,
     wcs: { ...input.reference.wcs, rotationDeg: input.reference.wcs.rotationDeg + 5 } } }), /original catalogue image footprint/);
   assert.throws(() => prepareReconstructionStars(catalogue, { ...input, reference: { ...input.reference, alignment: { ...input.reference.alignment,

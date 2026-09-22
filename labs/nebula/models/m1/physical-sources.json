@@ -10,7 +10,6 @@
       "locator": "Table 1 and Section II; table visually checked",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/astro-ph-0310155v1.pdf",
-      "sha256": "4420e4012121738a8f9b767e2da7037192afa46f4ad59f2eff72f5687fd2398c",
       "bytes": 286263
     },
     {
@@ -20,7 +19,6 @@
       "locator": "Systematic uncertainty context",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/0710.4168v1.pdf",
-      "sha256": "cc7a2dc03cebc3d65866d08ec80baafd07d4aedf5a515bffbbee3236b384ed55",
       "bytes": 247440
     },
     {
@@ -30,7 +28,6 @@
       "locator": "Tables 1-3 and Section 4; tables visually checked",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/1109.2868v1.pdf",
-      "sha256": "1eb68ed6ea615c958bee48368dc8b2b3eb4071276fa44fd2917896213f7e9a4d",
       "bytes": 1161081
     },
     {
@@ -40,7 +37,6 @@
       "locator": "Section 2.4 ICRS position and reference-frame caveats",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/0801.1142v1.pdf",
-      "sha256": "eb9e0f699b532d308bd1faf01d68a13aac29f4e6391291cf47370fec6a211517",
       "bytes": 557126
     },
     {
@@ -50,7 +46,6 @@
       "locator": "Sections 2-4, released dataset and notebook",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/2101.02709v1.pdf",
-      "sha256": "11e28a7280788f67f2d61bc5aa82626c68793af7b779e734239cd5feb4f0fef9",
       "bytes": 17057529
     },
     {
@@ -60,7 +55,6 @@
       "locator": "Sections 2-6, Table 1, dust/synchrotron maps",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/2406.00172v1.pdf",
-      "sha256": "98d35024ef07749125d16e7c07cbd82b2c131151c8a831f4f8cf020114614eb8",
       "bytes": 22545382
     },
     {
@@ -70,7 +64,6 @@
       "locator": "Sections 2-5, radio beam and observation epochs",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/1704.02968v1.pdf",
-      "sha256": "032f8b0f2c085898b21498752fc7dcdbd09a69197eaebffa6c67f77bdeb32801",
       "bytes": 1620320
     },
     {
@@ -80,7 +73,6 @@
       "locator": "Sections 2-4; newer arrays not acquired",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/2606.26231v1.pdf",
-      "sha256": "c507168b85427945d74ccf2cd7111a5620d289c473ce1bad4fdb58d43b2df665",
       "bytes": 37319784
     },
     {
@@ -90,7 +82,6 @@
       "locator": "Abstract and proper-motion limits",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/2502.19632v1.pdf",
-      "sha256": "90cb4798149062ef7118d7c75ef55aa4ab7b580c5dce837459fc9ffd103fa340",
       "bytes": 17568324
     },
     {
@@ -100,7 +91,6 @@
       "locator": "Sections 2,4,5; pointing centres are not astrometric measurement positions",
       "access": "full PDF downloaded; cited portions inspected",
       "path": ".local/nebula-lab/intake/m1/physical/2306.01617v1.pdf",
-      "sha256": "1f00dfcb4cfa1d6002f2262cbd958f883029c2ec642fad77eb42c96d010b1a4e",
       "bytes": 2088458
     }
   ],
@@ -111,14 +101,12 @@
     "license": {
       "name": "GPL-3.0 repository license",
       "path": ".local/nebula-lab/intake/m1/physical/LICENSE",
-      "sha256": "3972dc9744f6499f0f9b2dbf76696f2ae7ad8af9b23dde66d6af86c9dfb36986",
       "bytes": 35149
     },
     "products": [
       {
         "name": "3dmap_XYZflux.fits",
         "bytes": 6670080,
-        "sha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
         "width": 4,
         "height": 416573,
         "header": {
@@ -208,7 +196,6 @@
       {
         "name": "3dmap_XYZvel.fits",
         "bytes": 6670080,
-        "sha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
         "width": 4,
         "height": 416573,
         "header": {
@@ -298,7 +285,6 @@
       {
         "name": "3dmap_XYZsii_sii.fits",
         "bytes": 1915200,
-        "sha256": "819d6981fd3d830690c3ee7a60b70661811e9993b9aa3c6c372fefacd1d4b4ab",
         "width": 4,
         "height": 119386,
         "header": {
@@ -388,7 +374,6 @@
       {
         "name": "m1.deep_frame.fits",
         "bytes": 16917120,
-        "sha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
         "width": 2048,
         "height": 2064,
         "header": {
@@ -576,7 +561,6 @@
     ],
     "notebook": {
       "path": ".local/nebula-lab/intake/m1/physical/3d maps.ipynb",
-      "sha256": "9fb247c9b522b403aa1019338c4b48df3f3c242476083ea8766f24097a007eff",
       "bytes": 4118,
       "url": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3d%20maps.ipynb",
       "limits": "Notebook origin and parsec scale do not reproduce the released point projection onto its deep image; measured native-grid mapping is explicit in sampled.json."
@@ -586,7 +570,6 @@
     "id": "simbad-gaia-crab-pulsar",
     "url": "https://simbad.harvard.edu/simbad/sim-basic?Ident=Crab+Pulsar&submit=SIMBAD+search",
     "path": ".local/nebula-lab/intake/m1/physical/simbad-crab-pulsar.html",
-    "sha256": "fb889941da206da155e47b663939001680c75aad421a3b2ae336226beb20ea83",
     "bytes": 40591
   }
 }

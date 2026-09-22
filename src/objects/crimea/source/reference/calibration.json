@@ -71,17 +71,14 @@
   "sources": [
     {
       "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=select+%2A+from+neowisesbpropv2+where+asteroid_number%3D1140",
-      "sha256": "fb3bc0bf62b9890a29aa2b8c6e0d54a04da560bc05c2dd536e8420285aa2fc7e",
       "bytes": 579
     },
     {
       "url": "https://irsa.ipac.caltech.edu/data/WISE/NEOWISE_SB/gator_docs/neowisesbprop_colDescriptions.html",
-      "sha256": "86e58305e65ba7c6872acbba10fe821479dcd849085e91885a403ad6e06be4ac",
       "bytes": 18419
     },
     {
       "url": "https://arxiv.org/pdf/1406.6645",
-      "sha256": "6cec5824e942b6f3abea47934c4ab127445fd89a587308f36ddf167c94c5b500",
       "bytes": 969599
     }
   ],

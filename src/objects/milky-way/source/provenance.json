@@ -38,7 +38,6 @@
     },
     "raw": {
       "url": "https://liu-se.cdn.openspaceproject.com/files/milkyway/milkyway/volume/1/MilkyWayRGBAVolume1024x1024x128.raw",
-      "sha256": "16cf24ed3bf1e3f85d4c64be603b47fa68a3dd8fad7839ae7b7ff17c4bd12d01",
       "bytes": 536870912,
       "dimensions": [
         1024,
@@ -153,34 +152,27 @@
     "nodeVersion": "22.23.2",
     "zstdVersion": "1.5.7",
     "bytes": 43800096,
-    "sha256": "49db3a43576ad1977c97f181c177e970064f4574265b70ce4999c27caa28fe05",
-    "decodedSha256": "16cf24ed3bf1e3f85d4c64be603b47fa68a3dd8fad7839ae7b7ff17c4bd12d01",
     "error": "Lossless container conversion: decoded bytes are identical to every byte of the original published raw volume; no source averaging or quantization."
   },
   "references": [
     {
       "path": "openspace/LICENSE.md",
-      "sha256": "a72bc2c9cf5aac70e1b7634fde0af32e0e3a25ca2b7e1e9834fddbeba691a3d5",
       "bytes": 1148
     },
     {
       "path": "openspace/volume.asset",
-      "sha256": "8c05c396e89b4893641131d96c53c899ce7a7258c0736629b00beaa2d6bf1e21",
       "bytes": 1838
     },
     {
       "path": "openspace/galaxyraycast.glsl",
-      "sha256": "f27d48a313b980683d5bd7c7cabe0958bdf11f8b22b8e7c2124d9d6d2eb91a90",
       "bytes": 3788
     },
     {
       "path": "openspace/sync-response.txt",
-      "sha256": "5b0f8456ba998a056bcbd0f0d241df93e3543243037cea74f8e9d717ca13423d",
       "bytes": 279
     },
     {
-      "path": "color-calibration.json",
-      "sha256": "e6db71912892f1cc8672aaad47ea68b8b97b4a47f1ee917f80c24c9772fb4c32"
+      "path": "color-calibration.json"
     }
   ],
   "sourceBinding": {

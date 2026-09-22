@@ -4,8 +4,6 @@
     {
       "id": "cassini-mosaic",
       "path": "observations/SP_1M_0_0_SIMP.IMG",
-      "expectedBytes": 4158720,
-      "expectedSha256": "e2a26482052ef9d67dd5c82df096daedc9cec0c0345c94e07f9b4461622aa69a",
       "origin": "https://planetarydata.jpl.nasa.gov/img/data/cassini/cassini_orbiter/coiss_3001/data/images/SP_1M_0_0_SIMP.IMG",
       "catalog": "https://science.nasa.gov/resource/map-of-phoebe-december-2005/",
       "credit": "NASA/JPL/Space Science Institute; DLR",
@@ -60,8 +58,6 @@
     {
       "id": "gaskell-2012-shape",
       "path": "shape/phoebe_ver128q.tab",
-      "expectedBytes": 16897992,
-      "expectedSha256": "92550ba0625255a2f91cd5d9a7b52e020fc4ba76c7ef3fd76a9728a66df697c2",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.phoebe.shape-model/data/phoebe_ver128q.tab",
       "catalog": "https://sbn.psi.edu/pds/resource/phoebeshape.html",
       "credit": "Robert Gaskell; NASA PDS Small Bodies Node",
@@ -95,8 +91,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -122,8 +116,6 @@
     {
       "id": "phoebe-2023-shape",
       "path": "shape/2023/phoebe_128_o.obj",
-      "expectedBytes": 17787240,
-      "expectedSha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_128_o.obj",
       "catalog": "https://doi.org/10.26033/3k3c-5713",
       "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
@@ -156,8 +148,6 @@
     {
       "id": "phoebe-2023-albedo",
       "path": "science/2023/phoebe_albedo_c.cub",
-      "expectedBytes": 9941545,
-      "expectedSha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_albedo_c.cub",
       "catalog": "https://doi.org/10.26033/3k3c-5713",
       "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
@@ -211,8 +201,6 @@
     {
       "id": "phoebe-2023-radius",
       "path": "science/2023/phoebe_radius_c.cub",
-      "expectedBytes": 9942047,
-      "expectedSha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_radius_c.cub",
       "catalog": "https://doi.org/10.26033/3k3c-5713",
       "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
@@ -372,8 +360,6 @@
     {
       "id": "phoebe-cassini-original-c1465671822_1_ir-cub",
       "path": "cassini-ice/native/C1465671822_1_ir.cub",
-      "expectedBytes": 1090377,
-      "expectedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
       "origin": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -625,8 +611,6 @@
     {
       "id": "n1465662798",
       "path": "observations/N1465662798_2_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "456243a0a80a1b4b9786cca0555acc4833ae43ccf4a9e65250fa16835edaeb37",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",

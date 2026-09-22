@@ -2,7 +2,6 @@
   "schema": "cssearth-particle-volume-lab@1",
   "input": {
     "path": ".local/nebula-lab/particles/lmc-particles.f32",
-    "sha256": "fdcf3e9db15f3bbfeb33c157f6725a1e9172b07a18fb9318a4ba03ece0469f2c",
     "bytes": 25920000,
     "layout": "float32-le-xyzmass-kpc"
   },
@@ -65,8 +64,7 @@
       "spanKpc": [
         8.092550727,
         7.851107548
-      ],
-      "imageSha256": "573e4cfd8269b74e6cc348b8dff472850945bdb051aeef9c6f3d7e9a6da07812"
+      ]
     }
   },
   "particles": {
@@ -91,8 +89,6 @@
   },
   "outputs": {
     "gridPath": "density.ktx2",
-    "gridSha256": "3ee737547a95a8f54057627e8f488ad9f016e146fba0f8aeb5f00a3d0eea8953",
-    "decodedSha256": "0fa359b92c04e887a367318e7e6c9126c36fd5873c122fd84d7ecddf1591024e",
     "bytes": 3705134
   },
   "interpretation": {

@@ -5,84 +5,72 @@
       "originalPath": "labs/nebula/models/m1/physical-evidence.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/06-physical-evidence.json",
-      "sha256": "a03ec3e88e8d4aee345d89326da85e5d8cf93f6789ae54b18afe059e7963e1ff",
       "bytes": 17007
     },
     {
       "originalPath": "labs/nebula/models/m1/chandra-xray-grid-transfer.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/01-chandra-xray-grid-transfer.json",
-      "sha256": "38b8dfe2e5f4bb6d0e75c1b65b845e57df80c1710429fd1322ef7822f61d0ee7",
       "bytes": 1846
     },
     {
       "originalPath": "labs/nebula/models/m1/compiler.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/02-compiler.json",
-      "sha256": "e455c763a99a1b155fe3617b1e804ac90af25426f9cc368d6de2985bcbb59014",
       "bytes": 1132
     },
     {
       "originalPath": "labs/nebula/models/m1/hubble-2017-bridge-matched-stars.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/03-hubble-2017-bridge-matched-stars.json",
-      "sha256": "23d3be909bc6a07de74713efdabb957946d291d4b46f38ac3fbc11c4fc883501",
       "bytes": 28015
     },
     {
       "originalPath": "labs/nebula/models/m1/observation-structures.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/04-observation-structures.json",
-      "sha256": "bcb4bb8e2ba0e69b8e1056257d5fb2aa2a15b0595eadfc691021bd988a9d17e3",
       "bytes": 371
     },
     {
       "originalPath": "labs/nebula/models/m1/observations.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/05-observations.json",
-      "sha256": "6adf56098e54344fe8615772b27c871e84aa86613a5bd50351f0b8168b3c94f7",
       "bytes": 14682
     },
     {
       "originalPath": "labs/nebula/models/m1/sampled.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/07-sampled.json",
-      "sha256": "b008424726e7c0cb520d05652c3f4b6b3d018505841d2a0bfb2af08597a92f0f",
       "bytes": 5839
     },
     {
       "originalPath": "labs/nebula/models/m1/sitelle-alignment-check.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/08-sitelle-alignment-check.json",
-      "sha256": "69e44977756ea8f730b8ee76b53816c5909ffd27c33423a20356f74245e14cf2",
       "bytes": 25298
     },
     {
       "originalPath": "labs/nebula/models/m1/spitzer-infrared-grid-transfer.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/09-spitzer-infrared-grid-transfer.json",
-      "sha256": "6515e56408db67572fe2a965ffad0ab716a75b53a7242902bde8ae70a126b6d8",
       "bytes": 1850
     },
     {
       "originalPath": "labs/nebula/models/m1/vla-radio-grid-transfer.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/10-vla-radio-grid-transfer.json",
-      "sha256": "446316324a90f0205a835cbac3cd4554e32682aaa9677e765f2677dd49acc2eb",
       "bytes": 1843
     },
     {
       "originalPath": "labs/nebula/models/m1/webb-components-astrometric-calibration.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/11-webb-components-astrometric-calibration.json",
-      "sha256": "0f84903f49281212aee3eeabe1d14ce936cc5509d5a61d1e169d9e6324861aaf",
       "bytes": 1862
     },
     {
       "originalPath": "labs/nebula/models/m1/webb-components-matched-stars.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m1/source/bake-inputs/references/12-webb-components-matched-stars.json",
-      "sha256": "7b6da0c051926aecc4e4919ba5db0aeacdbc0ebe924149596c1f414af901f6f5",
       "bytes": 15572
     }
   ]

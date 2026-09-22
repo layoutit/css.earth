@@ -18,7 +18,6 @@ export interface DensityVolumeFrame {
 
 export interface DensityVolumePreparationReference {
   readonly source: string;
-  readonly sha256: string;
 }
 
 export interface DensityVolumeObjectDescriptor extends ObjectDescriptor {
@@ -59,12 +58,11 @@ export function parseDensityVolumeFrame(value: unknown): DensityVolumeFrame {
 
 function parsePreparation(value: unknown): DensityVolumePreparationReference {
   const input = record(value, 'object.properties.preparation');
-  keys(input, ['source', 'sha256'], 'object.properties.preparation');
+  keys(input, ['source'], 'object.properties.preparation');
   if (typeof input.source !== 'string' || !input.source || input.source.startsWith('/') || input.source.split('/').includes('..') || /[\\\u0000-\u0020]/.test(input.source)) {
     throw new TypeError('Volume preparation source must be a relative path.');
   }
-  if (typeof input.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(input.sha256)) throw new TypeError('Volume preparation hash must be a SHA-256 digest.');
-  return Object.freeze({ source: input.source, sha256: input.sha256 });
+  return Object.freeze({ source: input.source });
 }
 
 function record(value: unknown, name: string): Record<string, unknown> {

@@ -16,7 +16,6 @@
       "id": "reflectance-f335m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
       "bytes": 3084480,
       "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F335M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F335M-MASK335R.reproduction.json"
     },
@@ -24,7 +23,6 @@
       "id": "reflectance-f444w",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
       "bytes": 3084480,
       "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F444W band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F444W-MASK335R.reproduction.json"
     },
@@ -32,7 +30,6 @@
       "id": "reflectance-f250m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
       "bytes": 3084480,
       "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F250M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F250M-MASK335R.reproduction.json"
     },
@@ -40,7 +37,6 @@
       "id": "reflectance-f300m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
       "bytes": 3084480,
       "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F300M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F300M-MASK335R.reproduction.json"
     },
@@ -48,7 +44,6 @@
       "id": "reflectance-f182m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "1475883875640febac23487f0e171900cb6a5a37352945f74bec6b8e42e728f3",
       "bytes": 3101760,
       "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F182M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F182M-MASK335R.reproduction.json"
     },
@@ -56,7 +51,6 @@
       "id": "reflectance-f210m",
       "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:JWST/product/jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
       "landing": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
-      "sha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
       "bytes": 3101760,
       "role": "MAST level-3 coronagraph mosaic jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (calwebb_coron3), the F210M band of the reflectance leaves; reproduced by tools/objects/jwst/imaging/coron3.mts in programs/hd-181327-2780.NIRCAM-F210M-MASK335R.reproduction.json"
     }
@@ -86,7 +80,6 @@
           {
             "band": "NIRCAM-F335M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f335m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "065f01c0c2c04841377f0e67934f76b47b310a509ac5fe6e723f8ac87ec477bf",
             "observed": "2023-10-11",
             "starRaDecDeg": [
               290.74587654529444,
@@ -105,7 +98,6 @@
           {
             "band": "NIRCAM-F444W-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f444w-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "597a39c0999a4e978be3d83bc044938390bac88b91f81adf3b52df05ac4f2e81",
             "observed": "2023-10-11",
             "starRaDecDeg": [
               290.74587654733455,
@@ -124,7 +116,6 @@
           {
             "band": "NIRCAM-F250M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f250m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "8f95f361e650d90348870fe46ab4957bac40523107c2a1bedc64ef4eb88e7926",
             "observed": "2023-10-11",
             "starRaDecDeg": [
               290.74587654597315,
@@ -143,7 +134,6 @@
           {
             "band": "NIRCAM-F300M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f300m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "a3b5ad2a08e666b55c2441834b4ee22b977b3107dedfa3030c2efd97e67e55cb",
             "observed": "2023-10-11",
             "starRaDecDeg": [
               290.74587654665544,
@@ -162,7 +152,6 @@
           {
             "band": "NIRCAM-F182M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f182m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "1475883875640febac23487f0e171900cb6a5a37352945f74bec6b8e42e728f3",
             "observed": "2023-10-11",
             "starRaDecDeg": [
               290.7458765452947,
@@ -181,7 +170,6 @@
           {
             "band": "NIRCAM-F210M-MASK335R",
             "mosaic": "jw02780-c1014_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits",
-            "sha256": "aa0469294b4a6bf2d1910754e87aeb4100d2b53db16803a6051985f56b017b48",
             "observed": "2023-10-11",
             "starRaDecDeg": [
               290.7458765466557,

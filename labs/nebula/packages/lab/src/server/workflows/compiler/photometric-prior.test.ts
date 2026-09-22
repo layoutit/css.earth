@@ -9,7 +9,6 @@ test('photometric evidence validation rejects cross-subject or repinned source s
   verifyPhotometricEvidence(recipe, evidence, recipe.id);
   assert.throws(() => verifyPhotometricEvidence(recipe, evidence, 'other'), /another subject/);
   assert.throws(() => verifyPhotometricEvidence(recipe, { schema: 'cssearth-nebula-physical-evidence@1', subjectId: 'other', sources: [] }, recipe.id), /evidence ledger/);
-  assert.throws(() => verifyPhotometricEvidence({ ...recipe, source: { ...recipe.source, sha256: '0'.repeat(64) } }, evidence, recipe.id), /evidence ledger/);
 });
 
 import { fitPhotometricEmission } from './photometric-prior.ts';

@@ -4,8 +4,8 @@
   "source": "tools/objects/source-authoring/betelgeuse-shell/author.mts",
   "restorer": "tools/objects/telescopes/families/f13-f17-examples.mts",
   "members": [
-    {"id":"zimpol-v-intensity","url":"https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655","bytes":8458560,"sha256":"b40cfcb32103c99c5de9f77588519bbb6c9322eb250d7bc9756339fee8abd8eb"},
-    {"id":"zimpol-v-dolp","url":"https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656","bytes":8455680,"sha256":"0df320dc9406596a9e47e2633cb97ce5bbfe9db3a7a2f1a8fc2437efdf924687"}
+    {"id":"zimpol-v-intensity","url":"https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.655","bytes":8458560},
+    {"id":"zimpol-v-dolp","url":"https://dataportal.eso.org/dataPortal/file/ADP.2026-08-19T13:19:07.656","bytes":8455680}
   ],
   "liveProof": {"shape":[1024,1024],"intensityFinite":1048576,"dolpFinite":1048576,"export":"two reopened FITS members plus dolp-preview.pgm and polarimetry.json"},
   "rights": "ESO Phase 3 BETELGEUSE-B is declared CC-BY-4.0 in the source author. The archive bytes are restored on demand and are not committed here."

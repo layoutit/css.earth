@@ -2,26 +2,26 @@ import { isisGeometryBands } from './native-metadata.mts';
 /** Inventory native products already pinned by a body package. Header reads are discovery only; qualification verifies whole-file pins. */
 import { sourceHeaders } from './source-transfer.mts';
 import { isis3CoreHeader } from '../terrestrial-layers/isis3-raster.mts';
-import { open, readFile, mkdir, writeFile } from 'node:fs/promises';
+import {open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
 import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../sources/source-values.mts';
 import { readFitsHeader } from '../../fits/fits.mts';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
-import { inside, type SourceFile, type SourceProduct } from './source-products.mts';
+import { inside, sourceCacheAddress, type SourceFile, type SourceProduct } from './source-products.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }
 const LIMIT = 128 * 1024;
 export async function sourceHeader(root: string, file: SourceFile): Promise<Buffer> {
   const local = await open(resolve(root,file.path),'r').catch(error => { if(hasErrorCode(error,'ENOENT')) return undefined; throw error; });
-  if(local) { try { const bytes=Buffer.alloc(Math.min(file.bytes,LIMIT)); const read=await local.read(bytes,0,bytes.length,0); return bytes.subarray(0,read.bytesRead); } finally {await local.close();} }
-  const cache=resolve(root,'output/telescopes/source-headers',`${file.sha256}.json`);
+  if(local) { try { const bytes=Buffer.alloc(LIMIT); const read=await local.read(bytes,0,bytes.length,0); return bytes.subarray(0,read.bytesRead); } finally {await local.close();} }
+  const cache=resolve(root,'output/telescopes/source-headers',`${encodeURIComponent(file.path)}.json`);
   const cached=await readFile(cache,'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
   if(cached && cached.version === 3) { const bytes=Buffer.from(requireString(cached.base64),'base64'); if(cached.origin!==file.origin || cached.digest!==sha256(bytes))throw new Error('Header cache identity mismatch.');return bytes; }
   const headers=await sourceHeaders(root,file);
   let response:Response|undefined;
-  for(const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN,file.sha256,basename(file.path)),file.origin]) {
-   try { response=await fetch(url,{headers:{...(url===file.origin?headers:{}),Range:`bytes=0-${Math.min(file.bytes,LIMIT)-1}`},signal:AbortSignal.timeout(15000)}); if ([416,417].includes(response.status)) { await response.body?.cancel(); response=await fetch(url,{headers:url===file.origin?headers:{},signal:AbortSignal.timeout(15000)}); } if(response.ok)break; await response.body?.cancel(); } catch { response=undefined; }
+  for(const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN,...sourceCacheAddress(file)),file.origin]) {
+   try { response=await fetch(url,{headers:{...(url===file.origin?headers:{}),Range:`bytes=0-${LIMIT-1}`},signal:AbortSignal.timeout(15000)}); if ([416,417].includes(response.status)) { await response.body?.cancel(); response=await fetch(url,{headers:url===file.origin?headers:{},signal:AbortSignal.timeout(15000)}); } if(response.ok)break; await response.body?.cancel(); } catch { response=undefined; }
   }
   if(!response?.ok || !response.body)throw new Error(`Header retrieval HTTP ${response?.status ?? 'unavailable'}`);
   const reader=response.body.getReader(),chunks:Buffer[]=[];let size=0;
@@ -33,14 +33,13 @@ export async function intakeSources(root:string,target:string,existing:readonly 
  const source=`src/objects/${target}/source`,manifest=await readFile(resolve(root,source,'manifest.json'),'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
  if(!manifest)return [];
  const entries=[...requireArray(manifest.inputs),...requireArray(manifest.documents??[]),...requireArray(manifest.generatedIntermediates??[])];
- // Science products are downloads, and downloads are pinned. Files authored here carry no pin and are not products.
- const files=entries.filter(raw=>requireRecord(raw).expectedSha256!==undefined).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:p.origin===undefined?`repository:${source}/${path}`:requireString(p.origin),bytes:requireFiniteNumber(p.expectedBytes),sha256:requireString(p.expectedSha256)};});
+ // Science products are downloads with an archive origin; files authored here are not products.
+ const files=entries.filter(raw=>typeof requireRecord(raw).origin==='string'&&/^https?:\/\//u.test(String(requireRecord(raw).origin))).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:requireString(p.origin)};});
  const products:SourceProduct[]=[];const used=new Set(existing.flatMap(p=>p.files.map(f=>f.path)));
  for(const file of files.filter(f=>/\.(?:fits?|img|cub|qub|lbl|xml)$/iu.test(f.path)&&!used.has(f.path)).sort((a,b)=>(/\.xml$/iu.test(a.path)?0:/\.lbl$/iu.test(a.path)?1:2)-(/\.xml$/iu.test(b.path)?0:/\.lbl$/iu.test(b.path)?1:2))) {
   try {
    if(used.has(file.path))continue;
    inside(root,file.path);
-   if(!Number.isSafeInteger(file.bytes)||file.bytes<=0||!/^[a-f0-9]{64}$/u.test(file.sha256))throw new Error('Invalid source pin.');
    const bytes=await sourceHeader(root,file), text=bytes.toString('latin1');
    let product:SourceProduct;
    if (pds4Blocks(text,'Product_Observational').length) {
@@ -79,7 +78,8 @@ export async function intakeSources(root:string,target:string,existing:readonly 
       const pointer=pds3Values(label,key),name=pointer?.[0];if(!name)throw new Error(`Unreadable ${key} pointer.`);
       if(/^\d+(?:\s*<BYTES>)?$/u.test(name)){
         const recordBytes=Number(pds3Keyword(label,'RECORD_BYTES',[])??1),offset=(Number(name.split(/\s/u)[0])-1)*(name.includes('<BYTES>')?1:recordBytes);
-        if(!Number.isSafeInteger(offset)||offset<0||offset>=file.bytes)throw new Error(`Attached ${key} pointer lies outside the pinned file; an extracted label is not the complete observation.`);
+        const size=await stat(resolve(root,file.path)).then(s=>s.size,()=>undefined);
+        if(!Number.isSafeInteger(offset)||offset<0||(size!==undefined&&offset>=size))throw new Error(`Attached ${key} pointer lies outside the local file; an extracted label is not the complete observation.`);
         if(!/HISTORY|HEADER|STRUCTURE/u.test(key))science=file;continue;
       }
       const wanted=resolve(dirname(file.path),name).toLowerCase(),dependency=files.find(f=>resolve(f.path).toLowerCase()===wanted);

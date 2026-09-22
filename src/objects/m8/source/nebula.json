@@ -8,14 +8,12 @@
     {
       "id": "wright-2019-kinematics",
       "url": "https://arxiv.org/pdf/1903.12176v1",
-      "sha256": "5e632aee5684cb1c4ba65d5c09b3bceca4e032b0f47e94ba7f4a4202e45e05f7",
       "bytes": 1808250,
       "citation": "Wright et al. (2019), The Gaia-ESO Survey: Asymmetric expansion of the Lagoon Nebula cluster NGC 6530 from GES and Gaia DR2"
     },
     {
       "id": "m8-registered-frame",
       "url": "https://github.com/layoutit/css.earth/blob/9d0a453d4c82637ebc54277f97281e0c8426e85b/labs/nebula/models/m8/processing-observations.json",
-      "sha256": "ead054a15a28d3c7645a833f4e4a7d818d8b6ee0b4412fdb97b5ecd5fcab2482",
       "bytes": 5501,
       "citation": "Pinned common ICRS image-frame origin derived from registered observations; adopted display centre, not a measured nebular centroid."
     }

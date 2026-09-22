@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -118,9 +116,7 @@
       "path": "reference/16312-IAUspin.txt"
     },
     {
-      "path": "reference/AcuA_V1.txt.gz",
-      "expectedBytes": 120256,
-      "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
+      "path": "reference/AcuA_V1.txt.gz"
     },
     {
       "path": "reference/ReadMe.AcuA.txt"
@@ -145,9 +141,7 @@
       "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/paper-choukroun-2025.pdf",
-      "expectedBytes": 14229821,
-      "expectedSha256": "cfda2253ff70b23be74fe8c023d13b266cdd97b7b37c0f79fc33450d48d05727"
+      "path": "reference/paper-choukroun-2025.pdf"
     }
   ]
 }

@@ -14,7 +14,7 @@ const fixture = async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'source-qualification-')), source = resolve(root, 'src/objects/test-body/source');
   await mkdir(source, { recursive: true });
   const bytes = imageFixture(16, [-2, 0, 1, 3], [card('OBS_ID', "'exposure-1'")]);
-  const manifest = { inputs: [{ id: 'frame', path: 'image.fits', origin: 'https://example.org/image.fits', expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') }] };
+  const manifest = { inputs: [{ id: 'frame', path: 'image.fits', origin: 'https://example.org/image.fits' }] };
   const declaration = { schema: SOURCE_PRODUCTS_SCHEMA, target: 'test-body', observations: [{ id: 'frame-1', telescope: 'New Observatory', mode: 'unknown-mode', kind: 'image', archiveProductId: 'exposure-1', decoder: 'fits-image', inputs: [{ input: 'frame', role: 'science' }], identity: { OBS_ID: 'exposure-1' }, units: 'counts', meaning: 'Native detector counts', citation: 'https://example.org/', limitations: ['No resolution or bandpass qualification.'] }] };
   await writeFile(resolve(source, 'manifest.json'), JSON.stringify(manifest)); await writeFile(resolve(source, 'observations.json'), JSON.stringify(declaration)); await writeFile(resolve(source, 'image.fits'), bytes);
   return { root, source, bytes, manifest, declaration, product: parseSourceProducts(declaration, manifest, 'test-body')[0]! };

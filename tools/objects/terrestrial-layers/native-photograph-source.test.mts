@@ -10,7 +10,7 @@ import { loadNativePhotograph } from './native-photograph-source.mts';
 
 const source = (path: string, bytes: Buffer, width: number, height: number, projection: Record<string, unknown> = {
   kind: 'simple-cylindrical', longitudeDirection: 'east', latitudeType: 'planetocentric'
-}) => ({path, expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex'), width, height, projection});
+}) => ({path, width, height, projection});
 
 test('native geographic GeoTIFF uses the published degree origin and excludes each no-data contributor', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'cssearth-native-geographic-'));

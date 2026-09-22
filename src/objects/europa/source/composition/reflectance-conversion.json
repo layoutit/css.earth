@@ -3,7 +3,6 @@
   "target": "Europa",
   "source": {
     "path": "composition/reflectance_SPHERE.json.gz",
-    "sha256": "e8d8f85e838180e1363aef0d57e9205ff476f6573fa0f44e588366d3728fa2c3",
     "bytes": 2072834,
     "metadata": {
       "reference": "Oliver King, Leigh Fletcher & Nicolas Ligier (2022) Compositional Mapping of Europa using MCMC Modelling of Near-IR VLT/SPHERE and Galileo/NIMS Observations",
@@ -90,8 +89,7 @@
       "missingNativeNodes": 45156,
       "minimum": 1.7684239665354329,
       "maximum": 3.1352896341463414,
-      "outputBytes": 260920,
-      "outputSha256": "6d0eab3e645a2d81262818e7227ee37a4a3bf82718e55613cf2ac24c641a4f71"
+      "outputBytes": 260920
     }
   }
 }

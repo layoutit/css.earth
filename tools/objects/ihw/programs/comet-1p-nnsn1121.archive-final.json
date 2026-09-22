@@ -23,8 +23,8 @@
     { "role": "quality", "supplied": true, "carriedBy": "nnsn1121.lbl", "note": "The product label states DATA_QUALITY_DESC = EXCELLENT; it supplies no per-pixel quality plane." }
   ],
   "files": [
-    { "role": "label", "name": "nnsn1121.lbl", "uri": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.lbl", "bytes": 5120, "sha256": "08fea7f02af15534c67cd8db159f3a17e8c69c0c605ca176580dcd9a3184cd14", "pdsMd5": "991d6f94669242bdbf5e6fc52c496485" },
-    { "role": "science", "name": "nnsn1121.fit", "uri": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.fit", "bytes": 480960, "sha256": "5f42e101c3a2cc81c17417f32036cca86ddd1b5880080b0e0b12cee3bf7ed7aa", "pdsMd5": "2e1add6d4a9f8a72fc85335428ba2dce" }
+    { "role": "label", "name": "nnsn1121.lbl", "uri": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.lbl", "bytes": 5120, "pdsMd5": "991d6f94669242bdbf5e6fc52c496485" },
+    { "role": "science", "name": "nnsn1121.fit", "uri": "https://pdssbn.astro.umd.edu/holdings/ihw-c-nnsn-3-edr-halley-v2.0/data/198603/nnsn1121.fit", "bytes": 480960, "pdsMd5": "2e1add6d4a9f8a72fc85335428ba2dce" }
   ],
   "note": "One archive-qualified near-nucleus image selected from the complete 3523-row IHW index. It is an edited relative-intensity product, not an absolute radiometric calibration and not a surface map."
 }

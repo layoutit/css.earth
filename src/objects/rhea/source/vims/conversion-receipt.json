@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-cassini-vims@1",
-  "preparerSha256": "09354b3cc859b90017582071f39527371a7c71c40ad17af1515d0017b77f8233",
   "source": {
     "target": "rhea",
     "width": 360,
@@ -188,7 +187,6 @@
     {
       "kind": "rgb",
       "output": "rhea-infrared.tif",
-      "sha256": "6363e6ba38ca29df67a8dba301ef8db2a45daba0cd29896c2397e4e13b1b46d1",
       "bytes": 48826,
       "noData": 0,
       "missingPixels": 25727
@@ -196,7 +194,6 @@
     {
       "kind": "depth",
       "output": "rhea-water-ice.tif",
-      "sha256": "559e109a8bd3891ed2d7ddbfc9e505694574c6af80547f3c63e0f401aa1ded19",
       "bytes": 133351,
       "noData": -9999,
       "missingPixels": 2728

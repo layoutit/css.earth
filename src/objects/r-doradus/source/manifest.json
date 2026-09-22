@@ -32,8 +32,6 @@
       }
     },
     {
-      "expectedBytes": 33212160,
-      "expectedSha256": "432234148d0633a028e987736f24a90a4d686074faf14b01c0772c079b58cb40",
       "id": "alma-2023-07-band7-continuum",
       "path": "observations/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
       "origin": "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
@@ -115,8 +113,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -224,8 +220,6 @@
     {
       "id": "r-doradus-uves-pop",
       "path": "photometry/hd29712.tfits.gz",
-      "expectedBytes": 8807521,
-      "expectedSha256": "0d79bfcee0ab3bce23d76ffa16ee99bbee7bcfd022d285ad6f9c8ed8a38a22f9",
       "origin": "https://www.eso.org/sci/php/tools/uvespop/DATA/merged/hd29712.tfits.gz",
       "credit": "ESO UVES Paranal Observatory Project (Bagnulo et al.)",
       "license": "ESO archive data: free use with acknowledgement",

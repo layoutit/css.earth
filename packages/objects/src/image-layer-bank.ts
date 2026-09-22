@@ -19,12 +19,11 @@ export function parseImageLayerBankDescriptor(input: unknown): ImageLayerBankDes
   const preparation = properties.preparation;
   if (!preparation || typeof preparation !== 'object' || Array.isArray(preparation)) throw new TypeError('Image layers need a preparation reference.');
   const reference = preparation as Record<string, unknown>;
-  if (Object.keys(reference).some(key => key !== 'source' && key !== 'sha256') ||
+  if (Object.keys(reference).some(key => key !== 'source') ||
       typeof reference.source !== 'string' || !reference.source || reference.source.startsWith('/') ||
-      reference.source.split('/').includes('..') || /[\\\u0000-\u0020]/u.test(reference.source) ||
-      typeof reference.sha256 !== 'string' || !/^[a-f0-9]{64}$/u.test(reference.sha256)) {
-    throw new TypeError('Image-layer preparation must be a contained, hashed source.');
+      reference.source.split('/').includes('..') || /[\\\u0000-\u0020]/u.test(reference.source)) {
+    throw new TypeError('Image-layer preparation must be a contained source.');
   }
   return Object.freeze({ ...descriptor, type: 'image-layer-bank', frame,
-    preparation: Object.freeze({ source: reference.source, sha256: reference.sha256 }) });
+    preparation: Object.freeze({ source: reference.source }) });
 }

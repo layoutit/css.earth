@@ -36,8 +36,7 @@ export function parsePreparedNebulaCatalog(input: unknown): PreparedNebulaCatalo
   const sourceIds = new Set<string>(), ids = new Set<string>(), details = new Set<string>();
   for (const value of sources) {
     const source = record(value), id = text(source.id);
-    if (sourceIds.has(id) || !/^https:\/\//.test(text(source.url)) || !/^[a-f0-9]{64}$/.test(text(source.sha256)) ||
-        !Number.isSafeInteger(positive(source.bytes))) throw new TypeError('Invalid nebula source pin.');
+    if (sourceIds.has(id) || !/^https:\/\//.test(text(source.url)) || !Number.isSafeInteger(positive(source.bytes))) throw new TypeError('Invalid nebula source pin.');
     sourceIds.add(id); text(source.citation);
   }
   const reference = (v: unknown) => { const id = text(v); if (![...sourceIds].some(source => id === source || id.startsWith(`${source}:`))) throw new TypeError('Unknown nebula source reference.'); };

@@ -10,47 +10,38 @@
  "inputs": [
   {
    "path": "tests/fixtures/fits/byte.fits",
-   "sha256": "a4697bb0e54261c40e72cfca8d6f126cf5270cf3f12054626981a8ae0cca2886",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/scaled-blank.fits",
-   "sha256": "a4c56a1350464fc7a3ed7e6c092a429baab0ec0cfdc537dbe5019cdc1397ac7d",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/signed-int32.fits",
-   "sha256": "d13a11fe9bfddabea9818488ea211a4817cdc33cfb43e43d3d5ba3302be64fb8",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/float32.fits",
-   "sha256": "b39612319fd33b619da91b1775821d994dfce470404de540c03cfbab78db3d2b",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/float64.fits",
-   "sha256": "499deafab4cea0b144f3f03693a16f8a21eec5d0ab2fe73015f231fdddd498b3",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/cube.fits",
-   "sha256": "f247516bfab2df781cb5e9b08a202aee3fe9e93cb379161ae619e546807242ee",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/eso-hierarchy.fits",
-   "sha256": "fd2acdf636a6c0ec1c5cfae0fdfb2496906677c9ed3101f097e5f89b58a4bf49",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/long-string.fits",
-   "sha256": "13f193d32dd5693335a158dd4308deb09726eea5d9ce9d81d1eb72ede45845a7",
    "bytes": 5760
   },
   {
    "path": "tests/fixtures/fits/extensions.fits",
-   "sha256": "54c22932c64b874701747f7a09a0e6f6d52e1c947e478658af344fc101c46746",
    "bytes": 8640
   }
  ],

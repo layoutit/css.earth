@@ -3,10 +3,8 @@
   "sourceDirectory": "labs/nebula/models/smc/full-density",
   "descriptorPath": "labs/nebula/models/smc/full-density/object.json",
   "particlesPath": ".local/nebula-lab/full-density/smc-full-density.f32",
-  "particlesSha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4",
   "image": {
     "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-    "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
     "wcs": {
       "referenceDimension": [
         3827,

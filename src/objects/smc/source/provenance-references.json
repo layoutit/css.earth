@@ -5,70 +5,60 @@
       "originalPath": "labs/nebula/models/smc/image-candidates.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/image-candidates.json",
-      "sha256": "370201999627e8a3f80649bc82c25cae491005a8fc78739e9d88dcbadb79144f",
       "bytes": 29958
     },
     {
       "originalPath": "labs/nebula/models/smc/registration/alignment-report.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/registration/alignment-report.json",
-      "sha256": "f02d9370c74450cc5143a5d3fcc608635f2714dc7141cbf466a22690d2398001",
       "bytes": 12990
     },
     {
       "originalPath": "labs/nebula/models/smc/stars/source/catalogue.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/stars/source/catalogue.json",
-      "sha256": "dd51263f9ae8446c439fb68f46fe4fdef6c156e9bbdaac43903665f982bdaac3",
       "bytes": 1015
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/emission-envelope-ellipsoid.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/emission-envelope-ellipsoid.json",
-      "sha256": "43430d8b03e3ab441d8a9bd1ea4dc8821ec513e6cd0e0d5815d11095990d38af",
       "bytes": 1724
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
-      "sha256": "f9d891bb54805746101d363270f474b9ca1a3b758a886f238d44e351e6804da2",
       "bytes": 2224
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/fit.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/fit.json",
-      "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe",
       "bytes": 4922
     },
     {
       "originalPath": "labs/nebula/models/smc/constrained/fit-evidence.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/constrained/fit-evidence.json",
-      "sha256": "36aa5b2a390ccc9b32982299145bb1e5fb581f6495323a29e2b1a38aab1e0c65",
       "bytes": 32306
     },
     {
       "originalPath": "labs/nebula/models/smc/vmc/recipe.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/vmc/recipe.json",
-      "sha256": "7403284f4cee68aaf7bd7641ebeb984cd28a4f18ebd61769fdef4d26e1a3396c",
       "bytes": 817
     },
     {
       "originalPath": "labs/nebula/models/smc/vmc/density.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/vmc/density.json",
-      "sha256": "6f216098d6958178966072fe23142b6611c2abfe1c93afa272d2581a0b04b961",
       "bytes": 626
     },
     {
       "originalPath": "labs/nebula/models/smc/full-density/source/provenance.json",
       "revision": "8e373745bb306a170772c622b8edbf4e334b4037",
       "path": "src/objects/smc/source/evidence/smc/full-density/source/provenance.json",
-      "sha256": "f82fa5ab1aa15f5a6785e12ef229ed241a19bc0028768b792963ba74821f2094",
       "bytes": 5794
     }
   ]

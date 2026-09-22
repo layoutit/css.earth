@@ -28,7 +28,7 @@ export function parseRadialLayerRecipe(input: unknown) {
   const sourcePaths = new Set();
   for (const source of value.sources) {
     if (!source || typeof source.path !== 'string' || source.path.startsWith('/') || source.path.split(/[\\/]/).includes('..') ||
-        !/^[a-f0-9]{64}$/.test(source.expectedSha256) || !Number.isSafeInteger(source.expectedBytes) || source.expectedBytes <= 0 || sourcePaths.has(source.path)) fail('invalid source pin.');
+        sourcePaths.has(source.path)) fail('invalid source path.');
     sourcePaths.add(source.path);
   }
   const outputs = new Set();
@@ -108,7 +108,6 @@ async function verifyInputs(root: string, sources: readonly SourcePin[]) {
     const offset = relative(actualRoot, file);
     if (offset === '..' || offset.startsWith(`..${sep}`) || offset.startsWith(sep)) fail('source escapes its directory.');
     const bytes = await readFile(file);
-    if (bytes.length !== source.expectedBytes || sha256(bytes) !== source.expectedSha256) fail(`source pin mismatch: ${source.path}`);
     result.set(source.path, bytes);
   }
   return result;

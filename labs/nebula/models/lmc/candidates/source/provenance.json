@@ -1,12 +1,10 @@
 {
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
-    "path": "labs/nebula/models/image-candidates.json",
-    "sha256": "283509ae172e7cdc7bdcb2e5e5eb9cab0f800e948de8717e1650881c615a6f5f"
+    "path": "labs/nebula/models/image-candidates.json"
   },
   "frame": {
-    "path": "labs/nebula/models/lmc-particles/object.json",
-    "sha256": "423c2444c51f62f69870f77c698ea68c487724688b6654877f0f683f7f35175a"
+    "path": "labs/nebula/models/lmc-particles/object.json"
   },
   "images": [
     {
@@ -14,7 +12,6 @@
         "id": "smash-original",
         "label": "SMASH · current reconstruction",
         "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
-        "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
         "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
         "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
         "license": "CC-BY-4.0",
@@ -41,7 +38,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
         },
         "registrationNote": "Current cloud color source. Full 6737 × 6536 image; about 9.35° × 9.07°. Publisher sky coordinates anchor the relative image comparison. The shared saved user-authored model fit (scale 3, +39°, translated about the SMASH pivot) is applied for the Alignment display; it does not establish scientific size or simulated-to-observed star identities. Covers only part of the full simulated stellar field.",
@@ -79,7 +75,6 @@
         "texturePath": "prepared/smash-original.webp",
         "width": 4096,
         "height": 3974,
-        "sha256": "6294691a6bc2ec9fd9e505b6315e72780cd7d60921ecab0b856743413ee3d072",
         "bytes": 10537480
       }
     },
@@ -88,7 +83,6 @@
         "id": "vista-infrared",
         "label": "ESO VISTA · infrared, star-aligned",
         "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
-        "sha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
         "url": "https://cdn.eso.org/images/publicationtiff10k/eso1914a.tif",
         "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
         "credit": "ESO/VMC Survey",
@@ -116,7 +110,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Sky anchor is SMASH publisher AVM. Exact native-pixel homography is verified against discrete matched star fields, with held-out residuals and negative controls in source/vista-direction-gate.json. Original VISTA WCS is retained as provenance but not used for geometry."
         },
         "registrationNote": "8954 × 10000 ESO Y/J/Ks image; about 7.7° × 8.6°. Image-to-image scale, rotation and handedness fitted to 16,020 SMASH stars; 5,340 held out, P90 error 0.67 SMASH pixels (~3.3 arcsec), matched hull 83%. Corrected the publisher placement; corners outside the matched hull are extrapolated. The same saved user-authored model fit as SMASH is then applied for display, not as scientific size or simulation registration. Infrared display colors; still partial density coverage. Selected for a full-footprint 2D separation trial; the current 3D reconstruction is unchanged.",
@@ -189,7 +182,6 @@
         "texturePath": "prepared/vista-infrared.webp",
         "width": 5372,
         "height": 6000,
-        "sha256": "8fa8fa33a1b790bd19e9cb07186667c3d1d2e8108380f2c65bd80e9b5b37b96d",
         "bytes": 17455320
       }
     },
@@ -198,7 +190,6 @@
         "id": "wise-wide-infrared",
         "label": "NASA WISE · 24° infrared candidate",
         "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-        "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
         "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
         "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
@@ -226,7 +217,6 @@
         },
         "wcsSource": {
           "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
-          "sha256": "33cd09d02bcf3c3d3b1b0aeaeec3244400136bc19280c67ef54ab3693e932a7f",
           "description": "Exact ICRS TAN WCS from matching CDS HiPS2FITS; JPEG/FITS raster orientation verified. NASA/IPAC data, CDS W4/W2/W1 display-color composition."
         },
         "registrationNote": "24° NASA/IPAC WISE field rendered by CDS as W4/W2/W1 RGB, 6000 × 6000 (~14.6 arcsec/pixel). Fixed publisher WCS verified against 34,811 independently retrieved AllWISE W1 catalogue positions; 11,604 reserved checks, P90 0.632 native WISE pixels, 99.3% matched hull. No geometry correction fitted. This checks position, not diffuse photometry or visible atlas seams. The shared user-authored SMASH model fit is applied separately for display. Selected for a full-footprint 2D separation trial.",
@@ -262,7 +252,6 @@
         "texturePath": "prepared/wise-wide-infrared.webp",
         "width": 6000,
         "height": 6000,
-        "sha256": "76c3e0f512e4a546ca364135a5af12abb866d935358649abcdd6c7c6c42cbdf4",
         "bytes": 2049980
       }
     },
@@ -271,7 +260,6 @@
         "id": "dss2-wide-optical",
         "label": "DSS2 · 24° wide optical",
         "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
-        "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
         "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
         "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
@@ -300,7 +288,6 @@
         },
         "wcsSource": {
           "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
-          "sha256": "a72fa01bce7c3f05b7d17b6ec4eff58afd5a1302594e89a230bda45dc0b4c92d",
           "description": "Exact ICRS TAN WCS from the matching CDS HiPS2FITS color FITS; JPEG/FITS orientation verified. See source/dss2-wide-receipt.json."
         },
         "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval."
@@ -335,7 +322,6 @@
         "texturePath": "prepared/dss2-wide-optical.webp",
         "width": 6000,
         "height": 6000,
-        "sha256": "32615b2bd3c035eb947b45d292365e6fe5424391423e8952e26f7e92ca2f87a6",
         "bytes": 3208688
       }
     },
@@ -344,7 +330,6 @@
         "id": "horalek-widefield",
         "label": "Horálek · optical wide field",
         "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
-        "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
         "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg",
         "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
         "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
@@ -388,7 +373,6 @@
         "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval. Selected for a full-footprint 2D separation trial; compact residual and diffuse light remain inspectable before a new volume bake.",
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
         },
         "wcs": {
@@ -444,7 +428,6 @@
         "texturePath": "prepared/horalek-widefield.webp",
         "width": 4096,
         "height": 2731,
-        "sha256": "ada2c5d4b6f75f24ca37f1446e6ccb98993e4c996ce6ab0da5d662722ec1d046",
         "bytes": 3353640
       }
     },
@@ -453,7 +436,6 @@
         "id": "smash-dr2-wide-mosaic",
         "label": "SMASH DR2 · wider optical mosaic",
         "path": ".local/nebula-lab/smash-mosaic/smash-lmc-author-mosaic.jpg",
-        "sha256": "fed588625354f48632d0433975f635f5aaf58999ed40b9316c11384dfb44a53a",
         "url": "https://raw.githubusercontent.com/SMASHsurvey/smashsurvey.github.io/e759f028d2edc199c60003f2e0c666f20eb0f9b5/assets/smash_lmc_small.jpg",
         "sourcePageUrl": "https://smashsurvey.github.io/",
         "credit": "SMASH survey / D. Nidever et al.; CTIO/NOIRLab/NSF/AURA",
@@ -496,7 +478,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "SMASH publisher AVM is the sky anchor. 20,661 matched point identities; 6,887 held out; P90 1.82 native reference pixels. Central 30% matched hull, outer field extrapolated. See source/smash-mosaic-registration.json."
         },
         "registrationNote": "4111 × 5000 optical mosaic from the SMASH survey team. Wider irregular field footprint; black regions are missing observations, not zero light. 20,661 star matches to current SMASH; 6,887 held out, P90 1.82 SMASH pixels (~9.1 arcsec). Central 30% verified; outer placement extrapolated. Shared saved image-to-density visual fit applied. Visible exposure/field seams retained. Catalogue preview only; no cloud processing.",
@@ -532,7 +513,6 @@
         "texturePath": "prepared/smash-dr2-wide-mosaic.webp",
         "width": 4111,
         "height": 5000,
-        "sha256": "06aa4f8efd7333a409401687e77d3afbdce7e7236742798729adce053e2e02cc",
         "bytes": 7517784
       }
     },
@@ -541,7 +521,6 @@
         "id": "ciel-austral-optical",
         "label": "Ciel Austral · optical + emission lines",
         "path": ".local/nebula-lab/amateur-candidates/ciel-austral/photo95fb.jpg",
-        "sha256": "70691426d5c57b19bbd539ee2d48a51590f3ee9a388fea8abca280b286bde109",
         "url": "https://www.cielaustral.com/galerie/photo95fb.jpg",
         "sourcePageUrl": "https://www.cielaustral.com/galerie/photo95.htm",
         "credit": "Team Ciel Austral — J. C. Canonne, N. Outters, P. Bernhard, D. Chaplain, L. Bourgon",
@@ -584,7 +563,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Star registration to the pinned original SMASH image, whose publisher AVM supplies the sky anchor. See source/ciel-austral-registration.json."
         },
         "registrationNote": "14,400 × 14,200 author original; 8192-pixel inspection preview. RHaVBO: optical RGB enhanced with emission-line data, from the APOD-featured Ciel Austral project; this is its optical color variant. 4,418 matched SMASH stars; 1,473 held out, P90 2.02 SMASH pixels, 74.1% matched hull; remaining outer area extrapolated. Shared saved image-to-density visual fit applied, not a physical simulation registration. Detailed central field, not full stellar outskirts. Comparison candidate only; no cloud processing.",
@@ -620,7 +598,6 @@
         "texturePath": "prepared/ciel-austral-optical.webp",
         "width": 8192,
         "height": 8078,
-        "sha256": "82e06a09d4200bcb2b69645e8cbf7c4ce51db8c47f75bf328009110f0dbe25cd",
         "bytes": 36438886
       }
     },
@@ -629,7 +606,6 @@
         "id": "naztronomy-optical",
         "label": "Naztronomy · optical · 3K preview",
         "path": ".local/nebula-lab/amateur-candidates/naztronomy/naztronomy-optical.jpg",
-        "sha256": "72722af6da33f19b6d807ed583408fb39c9ecf91694dc8a42428197605d760a2",
         "url": "https://wp.naztronomy.com/wp/wp-content/uploads/2026/04/LMC_RGB_0.25x.jpg",
         "sourcePageUrl": "https://www.naztronomy.com/post/71-hour-12-panel-260-megapixel-mosaic-of-the-large-magellanic-cloud",
         "credit": "Nazmus Nasir / Naztronomy; Kagga Kamma Remote Observatory",
@@ -672,7 +648,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Star registration to the pinned original SMASH image, whose publisher AVM supplies the sky anchor. See source/naztronomy-direction-gate.json."
         },
         "registrationNote": "3,074 × 3,163 author-hosted 0.25× preview; the advertised 160 MP AstroBin version was unavailable. Author page labels RGB, while the retained footer mentions dual narrowband; colors are a processed optical composite. 4,861 matched SMASH stars; 1,621 held out, P90 0.66 SMASH pixels; 73.9% matched hull, outer area extrapolated. Shared saved image-to-density visual fit applied. Catalogue comparison only; no cloud processing.",
@@ -708,14 +683,12 @@
         "texturePath": "prepared/naztronomy-optical.webp",
         "width": 3074,
         "height": 3163,
-        "sha256": "35560e5b3eaa7924ef40efe007505f5913d13bdd4b1618d0b60e4cf75b8feba7",
         "bytes": 5778172
       }
     }
   ],
   "alignment": {
-    "path": "labs/nebula/models/lmc-overlays/source/manual-placement.json",
-    "sha256": "f51f97c5976dfb7a6d2e094c144c876a57c3ac6339e9ba50238bb56151635783"
+    "path": "labs/nebula/models/lmc-overlays/source/manual-placement.json"
   },
   "method": "Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.",
   "limits": [

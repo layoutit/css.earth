@@ -11,7 +11,6 @@
     "title": "Payne et al. (2026), A Comprehensive Spectroscopic Reference of the Solar System and Its Application to Exoplanet Direct Imaging",
     "url": "https://doi.org/10.3847/PSJ/ae2feb",
     "dataUrl": "https://raw.githubusercontent.com/nasapsg/reference/61d5035b67082bc0a419d87efbe957931c83f0cf/uranus_composite_data.txt",
-    "sha256": "8f5ee9d0bbfb3c909b4f8d76c0c2dd7a917d0d5c3c56c9c93b9f999c83dc3120",
     "columns": "Column 1: wavelength in micrometres. Column 2: disk-integrated reflectance (I/F apparent albedo for the Earth and Mars PSG model outputs).",
     "basis": "Composite reference reflectance spectrum from observations."
   },
@@ -19,14 +18,12 @@
     "observer": {
       "name": "CIE 1931 2 degree standard observer",
       "dataUrl": "https://files.cie.co.at/CIE_xyz_1931_2deg.csv",
-      "doi": "https://doi.org/10.25039/CIE.DS.xvudnb9b",
-      "sha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1"
+      "doi": "https://doi.org/10.25039/CIE.DS.xvudnb9b"
     },
     "illuminant": {
       "name": "ASTM E490-00 air-mass-zero solar spectral irradiance",
       "url": "https://nrel.sitefinity.cloud/grid/solar-resource/spectra-astm-e490",
       "dataUrl": "https://www.nlr.gov/media/docs/libraries/grid/e490_00a_amo.xls?sfvrsn=ce97914b_1",
-      "sha256": "82d5de38f529fcd65d1648e397a1e2d1a8dfaff1e3e701ba5861ed4ab5bc1e7a",
       "columns": "NewAM0 worksheet, columns A and B: wavelength in micrometres and irradiance in W/m2/micrometre.",
       "whitePointXy": [
         0.3235628272,

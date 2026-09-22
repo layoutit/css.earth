@@ -2267,7 +2267,6 @@
     "publicCopyLanding": "https://www.researchgate.net/publication/224781529_The_morphology_and_surface_processes_of_Comet_19P_Borrelly",
     "reviewedPdf": {
       "bytes": 644782,
-      "sha256": "14e7aa261cd87ca01a55fc0de44c92ba830dcd45e599481c63a9ced0d188e49d",
       "downloadIdentity": "The exact original file-download URL was not retained; this hash identifies the PDF examined for these measurements."
     },
     "extraction": "Embedded JPEGs decoded to PNG using pypdf 6.10.0 image.save(), without page resizing: PDF page 3 Im3.jpg and page 4 Im6.jpg.",
@@ -2276,15 +2275,13 @@
         "figure": 1,
         "width": 464,
         "height": 509,
-        "bytes": 48934,
-        "sha256": "bf44f6e3a4986d80167b210fba06d7bb0241d4d98d3ff4135992576166994a4c"
+        "bytes": 48934
       },
       {
         "figure": 4,
         "width": 664,
         "height": 855,
-        "bytes": 146241,
-        "sha256": "283118025c4f3c38249794a5b9d67da0f58c5e7287ba6a04caff7c8ce509ee9e"
+        "bytes": 146241
       }
     ]
   },

@@ -48,7 +48,6 @@ function compileStyle(vertices: Quad['verticesUnits'], texture: string, width: n
 }
 export async function prepareImageLayers(options: { sourceDirectory: string; outputDirectory: string; recipe: ImageLayerRecipe }): Promise<PreparedImageLayerBank> {
   const { recipe }=options, source=await readFile(resolve(options.sourceDirectory,recipe.source.path));
-  if(sha256(source)!==recipe.source.sha256) throw new TypeError('Image source digest mismatch.');
   const metadata=await sharp(source).metadata();
   if(metadata.width!==recipe.source.dimensions[0]||metadata.height!==recipe.source.dimensions[1]) throw new TypeError('Image source dimensions mismatch.');
   const resized=sharp(source).rotate().resize({width:recipe.bake.maxFacePixels,height:recipe.bake.maxFacePixels,fit:'inside',withoutEnlargement:true});
@@ -111,7 +110,6 @@ export async function prepareImageLayers(options: { sourceDirectory: string; out
       leaves.push({id:`${axis}-${s}`,axis,offsetKpc:offset,centerUnits:scale(add(...v),.25),doubleSided:true,texturePath:path,widthPx:sideWidth,heightPx:depth,verticesUnits:v,uvs:[[0,0],[1,0],[1,1],[0,1]],style:compileStyle(v,path,sideWidth,depth,leaves.length),sha256:sha256(bytes),bytes:bytes.length}); }};
   await side('x');await side('y');
   const provenanceBytes=await readFile(resolve(options.sourceDirectory,recipe.provenance.path));
-  if(sha256(provenanceBytes)!==recipe.provenance.sha256)throw new TypeError('Provenance digest mismatch.');
   const provenance=JSON.parse(provenanceBytes.toString('utf8')) as unknown;
   const allVertices=leaves.flatMap(l=>l.verticesUnits),bounds={min:[0,1,2].map(i=>Math.min(...allVertices.map(v=>v[i]))) as Vec3,max:[0,1,2].map(i=>Math.max(...allVertices.map(v=>v[i]))) as Vec3};
   const difference=(a:Vec3,b:Vec3):Vec3=>[a[0]-b[0],a[1]-b[1],a[2]-b[2]];

@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -123,14 +121,10 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/outer-worlds-gomez-limon-2026.pdf",
-      "expectedBytes": 6130177,
-      "expectedSha256": "7cfae421b8edec8742552721a4d559d4e9dc83209dc426f40a9c56830355f7d9"
+      "path": "reference/outer-worlds-gomez-limon-2026.pdf"
     },
     {
-      "path": "reference/vs2-vara-lubiano-2022-publisher.pdf",
-      "expectedBytes": 2151178,
-      "expectedSha256": "8cc2589921d078f7d88fd6c38b2fddedcd91e1e98e630070b84cc5c1a327b810"
+      "path": "reference/vs2-vara-lubiano-2022-publisher.pdf"
     },
     {
       "path": "reference/sbdb.json",

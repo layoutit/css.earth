@@ -4,8 +4,6 @@
     {
       "id": "hubble-opal-saturn-2025a-visible",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
-      "expectedSha256": "c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7",
-      "expectedBytes": 4885052,
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
       "credit": "NASA, ESA, STScI, and the OPAL team",
       "license": "STScI public science archive data",
@@ -190,7 +188,6 @@
     {
       "id": "hubble-opal-2025a-f225w",
       "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
-      "expectedSha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -199,7 +196,6 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880,
       "capture": {
         "attributions": [
           {
@@ -224,7 +220,6 @@
     {
       "id": "hubble-opal-2025b-f225w",
       "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
-      "expectedSha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -233,7 +228,6 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880,
       "capture": {
         "attributions": [
           {
@@ -258,7 +252,6 @@
     {
       "id": "hubble-opal-2025a-fq889n",
       "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
-      "expectedSha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -267,7 +260,6 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880,
       "capture": {
         "attributions": [
           {
@@ -292,7 +284,6 @@
     {
       "id": "hubble-opal-2025b-fq889n",
       "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
-      "expectedSha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/saturn/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -301,7 +292,6 @@
       "consumers": [
         "lenses"
       ],
-      "expectedBytes": 6482880,
       "capture": {
         "attributions": [
           {
@@ -541,8 +531,6 @@
     {
       "id": "cassini-uvis-alpvir-2006-285-occultation",
       "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
-      "expectedSha256": "65bd6d68c20a40c98e751480dad2832bac791dfa898226e30a9f573664250341",
-      "expectedBytes": 10591493,
       "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.TAB",
       "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
       "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set",

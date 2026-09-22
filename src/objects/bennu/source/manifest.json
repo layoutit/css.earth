@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 241
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
-      "expectedBytes": 195300487,
-      "expectedSha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "capture": {
         "attributions": [
           {
@@ -68,8 +66,6 @@
         "referenceRadiusMeters": 250
       },
       "coverage": "The low-phase PolyCam mosaic is normalized with the ROLO phase function and Lommel–Seeliger disk function. Its 6.25 cm source sampling covers approximately ±55° latitude. The publisher’s 8-bit stretch maps 0.002–0.007 to 1–254. Gray grid marks source NoData, including the polar gaps.",
-      "expectedBytes": 315960161,
-      "expectedSha256": "71bfeecce5615a5602d16d176c4cc17cc2550b2dc8c7cdac1332dea8d9f3da36",
       "capture": {
         "attributions": [
           {
@@ -114,8 +110,6 @@
         "referenceRadiusMeters": 250
       },
       "coverage": "The 5 cm global image basemap retains surface texture and photographed shading. It was normalized to 30° phase and registered to the SPC v28 control shape; small differences from the OLA v20 display mesh remain. This is a separate observed image view; it does not silently fill the albedo view’s missing poles.",
-      "expectedBytes": 493624548,
-      "expectedSha256": "7bab2d349967ea0b31021f93c37411e4be48147cb8ad4c1612b9e7e1371445bd",
       "capture": {
         "attributions": [
           {
@@ -160,8 +154,6 @@
         "referenceRadiusMeters": 250
       },
       "coverage": "Published MapCam false-color composite over 550 nm normal reflectance. Red shows the 847/550 nm ratio, green the 698 nm band strength, and blue the 473/550 nm ratio. These colors show spectral differences, not natural color or mineral abundance. Coverage extends to about 65° north and south; omitted shadows and gaps use the gray grid. The controlled map is draped on the simplified OLA shape, so individual boulders need not align precisely.",
-      "expectedBytes": 114072003,
-      "expectedSha256": "a7ace83ab2fb6afa45d53dbd77c150d2339017909aab02c912a7826332e7e95c",
       "capture": {
         "attributions": [
           {

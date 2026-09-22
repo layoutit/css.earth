@@ -4,7 +4,6 @@
     {
       "path": "science/b2-intake/dione_eqalbedo_g.tif",
       "expectedBytes": 6044025,
-      "expectedSha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6",
       "minimum": 0.7413637638092041,
       "maximum": 1.623831868171692,
       "anchors": [
@@ -34,7 +33,6 @@
     {
       "path": "science/b2-intake/dione_npalbedo_g.tif",
       "expectedBytes": 790785,
-      "expectedSha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d",
       "minimum": 0.6755878329277039,
       "maximum": 1.3359596729278564,
       "anchors": [
@@ -64,7 +62,6 @@
     {
       "path": "science/b2-intake/dione_spalbedo_g.tif",
       "expectedBytes": 790785,
-      "expectedSha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8",
       "minimum": 0.748867928981781,
       "maximum": 1.4052398204803467,
       "anchors": [

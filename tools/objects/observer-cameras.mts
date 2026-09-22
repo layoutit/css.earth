@@ -44,10 +44,5 @@ if (flag === '--write') {
     for (const [index, frame] of requireArray(target.frames).map(value => requireRecord(value)).entries()) Object.assign(frame, recipeFields(derived[index]));
     await writeFile(recipePath, JSON.stringify(document, null, 2) + '\n');
   }
-  // The manifest owns the recipe document's pin; a written recipe is re-pinned in the same step so the two never disagree.
-  const bytes = await readFile(recipePath), digest = sha256(bytes);
-  const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')));
-  for (const entry of requireArray(manifest.documents).map(value => requireRecord(value))) if (entry.path === 'preparation/terrestrial.json') { entry.expectedBytes = bytes.length; entry.expectedSha256 = digest; }
-  await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
-  console.log(`${differences ? `Wrote ${frames.length} frame camera(s) to the recipe` : 'The recipe already states the derived fields'}; re-pinned it in the manifest.`);
+  console.log(differences ? `Wrote ${frames.length} frame camera(s) to the recipe.` : 'The recipe already states the derived fields.');
 }

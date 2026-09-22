@@ -32,13 +32,11 @@
       }
     },
     "preparation": {
-      "source": "source/recipe.json",
-      "sha256": "24505d74fa94294cb448949b21554427c21774774101720abbd685eeb8eca398"
+      "source": "source/recipe.json"
     }
   },
   "prepared": {
     "format": "cssearth-image-layer-bank@1",
-    "url": "prepared/image-layers.json",
-    "sha256": "16951a0b2f8fcccdd5c9b7c419cd6e486fda759448437ffe06fc6ba20a3b3957"
+    "url": "prepared/image-layers.json"
   }
 }

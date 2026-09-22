@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 650
       },
       "coverage": "This view uses the published 2007 retrograde reconstruction. The 2014 Yarkovsky analysis rules out the prograde alternative. About 30% of the retrograde model surface was unseen or seen at incidence angles above 75 degrees in the original observations, so that region depends on the model assumptions. No optical surface map is supplied.",
-      "expectedBytes": 29079,
-      "expectedSha256": "2a9078d6ea00783ec32d4598517789f1f293d90807b024f5b03b1fda5de10657",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 2998257,
-      "expectedSha256": "b471319d487bbc0fc2cde1a4865ea48af77ee0aea30b9ff957fbb22a981893ba",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -148,8 +142,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 771711,
-      "expectedSha256": "ae40f904bac23bd154528bc2fd4c86b3c8113aad7ac2e07a3f64970e73ee5ae8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

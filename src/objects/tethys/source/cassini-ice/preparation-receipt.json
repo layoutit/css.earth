@@ -1,9 +1,5 @@
 {
   "schema": "cssearth-cassini-ice-surfaces@1",
-  "preparerSha256": "b67682f3ea069c0e371bcedc8f440836dc591f95f9b202d39510ef89efabbf3a",
-  "transferSha256": "25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914",
-  "navigationPreparerSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
-  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
   "observations": [
     {
       "id": "1807469104_1",
@@ -44,7 +40,6 @@
           "coreEndByteExclusive": 252928,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -75,7 +70,6 @@
               257,
               2574
             ],
-            "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
             "directInvalidIndices": []
           },
           "44": {
@@ -94,7 +88,6 @@
               288,
               1078
             ],
-            "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
             "directInvalidIndices": []
           },
           "58": {
@@ -113,7 +106,6 @@
               191,
               1037
             ],
-            "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
             "directInvalidIndices": []
           },
           "70": {
@@ -132,7 +124,6 @@
               188,
               476
             ],
-            "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
             "directInvalidIndices": []
           },
           "81": {
@@ -151,7 +142,6 @@
               179,
               841
             ],
-            "maskSha256": "f612f8ec8c834489358aacb9f1771b9ee52f13679a98de0fed079fd6a5c94431",
             "directInvalidIndices": []
           }
         },
@@ -177,20 +167,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "c449253bd648e324ba043aa445c35b148315f2dc4fb576fb0694a98a5ea8f99c",
-        "navigationLabelSha256": "54dac55227c5e8c84d43ab922636930b4c77dbb092efdaee674fcdbe98ff643a",
-        "navigationPlanesSha256": "8e8031c96d43e3b4fec785f905223d4c45fbbec695834507e93fa48a9b192893",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "2d3f7afee4e9ef4ea2f2fd3060c1bc0703d20fcbe4a5c28af2b8fbcad6811057",
             "bytes": 1216
           },
           "InstrumentPosition": {
-            "sha256": "efea5a0553330c600715d63afdc554e345571e64d7863b870380a717f382a70c",
             "bytes": 6272
           },
           "BodyRotation": {
-            "sha256": "c808728b0abbbe8f537c8565ed38c591bef00a2a84cd86975ab6b07dcbe80ba6",
             "bytes": 128
           }
         }
@@ -287,7 +271,6 @@
           "coreEndByteExclusive": 195584,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -320,7 +303,6 @@
               297,
               4095
             ],
-            "maskSha256": "6e407b565b497f999534e670c3417c70e4ba53385b6f8098e5bf2d4071b61c71",
             "directInvalidIndices": [
               57,
               58,
@@ -386,7 +368,6 @@
               301,
               2141
             ],
-            "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
             "directInvalidIndices": []
           },
           "58": {
@@ -405,7 +386,6 @@
               189,
               2186
             ],
-            "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
             "directInvalidIndices": []
           },
           "70": {
@@ -424,7 +404,6 @@
               190,
               862
             ],
-            "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
             "directInvalidIndices": []
           },
           "81": {
@@ -443,7 +422,6 @@
               182,
               1769
             ],
-            "maskSha256": "761136e30319b547b806f3753bb0237dcf74194a44f77561bcc360ba1a5b7adb",
             "directInvalidIndices": []
           }
         },
@@ -469,20 +447,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "853716341a26fbf78512fae7272cea67d1b859a712a7b469cde54cbb9a427dd9",
-        "navigationLabelSha256": "d2a82eb2c13c067a61ff94b817c308235939278a79a129319fb429712a14f389",
-        "navigationPlanesSha256": "dc70b6184bffc91000c572516ccb525bfe3ccdf31a57c62f437ab0dab4ba7e90",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "1ad57ccb5dcae20c835a172e1e643eb90d69f1c37028729d2be82d17436e30c4",
             "bytes": 1088
           },
           "InstrumentPosition": {
-            "sha256": "8afb3126cf000f75900480980dcb9117a32021e256365034c2f1595f223b01d4",
             "bytes": 5264
           },
           "BodyRotation": {
-            "sha256": "d9431497765fb002b970559a0cbc18b461ae074209401749a24a1da8ae332c10",
             "bytes": 128
           }
         }
@@ -579,7 +551,6 @@
           "coreEndByteExclusive": 248000,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -615,7 +586,6 @@
               238,
               4095
             ],
-            "maskSha256": "e987565ad6ab736e372345429722ef447dddf286cc10f878e0558a6477633aad",
             "directInvalidIndices": [
               8,
               10,
@@ -733,7 +703,6 @@
               246,
               1689
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           },
           "58": {
@@ -752,7 +721,6 @@
               167,
               1685
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           },
           "70": {
@@ -771,7 +739,6 @@
               166,
               717
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           },
           "81": {
@@ -790,7 +757,6 @@
               159,
               1370
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           }
         },
@@ -816,20 +782,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "a2c0a4822bfedb66ac086b5ca63a8e695ccc7be3ac469318e2f35592f3deb024",
-        "navigationLabelSha256": "88f398b794fe02fa1a01630025d2706b3dcfeb3820fb8266a36407a3368cfd65",
-        "navigationPlanesSha256": "fde3ba4a38c024ebc8fc929b61f2025eddf5fd8801bbc5aa28dea7be2888f523",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "9af1f94b27d2963216219b287bbaa32c17ce8eab6ed4bed420924957200cde6c",
             "bytes": 1024
           },
           "InstrumentPosition": {
-            "sha256": "12d90a71cbbc1771ee74aa4b758d74f25bd8583341695318f6f0d15b8ae3cf7d",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "a44bb8269fbd8c21d7ce04684e5cba740af6913858736655a5ea16f366d711a0",
             "bytes": 128
           }
         }
@@ -926,7 +886,6 @@
           "coreEndByteExclusive": 414976,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -962,7 +921,6 @@
               307,
               4095
             ],
-            "maskSha256": "286d327dbf156f7c09ef3e9c50b9de5f377332e7cabccac1954d55ecbb79020d",
             "directInvalidIndices": [
               2
             ]
@@ -983,7 +941,6 @@
               316,
               1502
             ],
-            "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
             "directInvalidIndices": []
           },
           "58": {
@@ -1002,7 +959,6 @@
               209,
               1660
             ],
-            "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
             "directInvalidIndices": []
           },
           "70": {
@@ -1021,7 +977,6 @@
               207,
               655
             ],
-            "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
             "directInvalidIndices": []
           },
           "81": {
@@ -1040,7 +995,6 @@
               199,
               1443
             ],
-            "maskSha256": "6caf38d537984e261527b8caef5f990fb91415a1db917198821a79ed28997973",
             "directInvalidIndices": []
           }
         },
@@ -1066,20 +1020,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "a55702245d1cb831877cb60e2acbb344d9c152043a823f13aa290b4aa2c31041",
-        "navigationLabelSha256": "eb70d4e9bf296eebb4d44911fcbd724e320af61529c27325bc4ae941706508b9",
-        "navigationPlanesSha256": "192053d206af5e79fecfb6f83d6b0dadad8faf605057b65f96c18af2a2051a9d",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "56bb5719310cfe62aff3e2278f8224407805c15628c67afb7ece2bcf4388bab7",
             "bytes": 3456
           },
           "InstrumentPosition": {
-            "sha256": "acbebb1e36b2e08d165509cc84897d01c574c88379cc907581f527f1ec39f59e",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "b7b36db63f788dd91c6407dcc8a1cb40cea0586b9c7675a801addb7470e0b554",
             "bytes": 128
           }
         }
@@ -1176,7 +1124,6 @@
           "coreEndByteExclusive": 325728,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -1210,7 +1157,6 @@
               555,
               3370
             ],
-            "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
             "directInvalidIndices": []
           },
           "44": {
@@ -1229,7 +1175,6 @@
               353,
               1216
             ],
-            "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
             "directInvalidIndices": []
           },
           "58": {
@@ -1248,7 +1193,6 @@
               283,
               1311
             ],
-            "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
             "directInvalidIndices": []
           },
           "70": {
@@ -1267,7 +1211,6 @@
               202,
               519
             ],
-            "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
             "directInvalidIndices": []
           },
           "81": {
@@ -1286,7 +1229,6 @@
               260,
               1058
             ],
-            "maskSha256": "46116c60127706306abf1be40dae364e3e104a0e6c4be22018eaaac5107cbd3d",
             "directInvalidIndices": []
           }
         },
@@ -1312,20 +1254,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "bd43695a507d899ca947e3e70b4f18dcee419a9bd75b5a7737e7815dfa704f73",
-        "navigationLabelSha256": "5cecbb5b486bab98e0d1a1209889f7ec76a1de5ab03f7732ffb96bb4b52491dc",
-        "navigationPlanesSha256": "9b9807c7cb3a35eae9c8938655a79bb1634f6119691475bb8aa5b3dd7a24f033",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "114526fc6909851ac5f4bde2514dbf566fc4034c40c470a0ce9aba5bae89b7dc",
             "bytes": 1856
           },
           "InstrumentPosition": {
-            "sha256": "2f250e0d2d8737b4b54f54877b0a966da6ded27877981e82e9e8d527b5089401",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "f3f67c6b0d6efbb71fb87c7a7d50e25c389b2597bf5a2493d8d014c7644aca1b",
             "bytes": 128
           }
         }
@@ -1422,7 +1358,6 @@
           "coreEndByteExclusive": 248000,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -1458,7 +1393,6 @@
               243,
               4095
             ],
-            "maskSha256": "99a3fc073b5c191bf1e639f56dda2b874bcea8c4fd109ec7995d2adecca0f17a",
             "directInvalidIndices": [
               0,
               1,
@@ -1611,7 +1545,6 @@
               259,
               2235
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           },
           "58": {
@@ -1630,7 +1563,6 @@
               173,
               2396
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           },
           "70": {
@@ -1649,7 +1581,6 @@
               176,
               911
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           },
           "81": {
@@ -1668,7 +1599,6 @@
               168,
               1923
             ],
-            "maskSha256": "c3be2af8b2e98345a8cea9cf6862d443bd323fe273f4103d667529c6842a1cb8",
             "directInvalidIndices": []
           }
         },
@@ -1694,20 +1624,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "17d1e5840f5971f0ea4e3b85029d41d4e997c2b4b25621be810e4dc9d331504d",
-        "navigationLabelSha256": "b8e5fb81971a9efabd770a25d1d1cdf3ef1f3d277ec6de3f8c7370ab1090104f",
-        "navigationPlanesSha256": "743f65b18290157dcaf084046cb9451cc4a5e517ff97dffde1886b4289e1a277",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "1acaf7f2429d3ee1d6eb83660d3a0877ea1d2fbe40e8d9b85465aead47c34528",
             "bytes": 1408
           },
           "InstrumentPosition": {
-            "sha256": "d43818d6de09d6fb35cab9ffb17f77af04540e35f25ded85b6052914818243ad",
             "bytes": 9072
           },
           "BodyRotation": {
-            "sha256": "511da81ca3c1e8d2d97dd2e6855cdc99f4fa84864007ef0d3f47f5cd77b96b93",
             "bytes": 128
           }
         }
@@ -1783,7 +1707,6 @@
           "coreEndByteExclusive": 439440,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -1819,7 +1742,6 @@
               452,
               4095
             ],
-            "maskSha256": "81ee3639da29c760d147b5182f1c2b82567905d8910eaf78218766b9c54584e7",
             "directInvalidIndices": [
               11,
               12,
@@ -2287,7 +2209,6 @@
               433,
               4095
             ],
-            "maskSha256": "df408600cb1c239e36b6e61e70803a4b06483ce27f2f444b093bc97701e1a714",
             "directInvalidIndices": [
               13,
               14,
@@ -2412,7 +2333,6 @@
               245,
               4095
             ],
-            "maskSha256": "0f2b1f8d006989ac6d14f226b88bb8c374648e9f2df6c82885f55121da9e134d",
             "directInvalidIndices": [
               13,
               14,
@@ -2628,7 +2548,6 @@
               233,
               1808
             ],
-            "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
             "directInvalidIndices": []
           },
           "81": {
@@ -2649,7 +2568,6 @@
               239,
               4095
             ],
-            "maskSha256": "03af148f98109af882564e5d7cd2f45bfb865553433cc76b9fe50f325e4daa4b",
             "directInvalidIndices": [
               135,
               136,
@@ -2707,20 +2625,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "4003f4c41c55e72ef20873d78dbcfbc412b5e0d1c4cfdd9671f088cd216a150d",
-        "navigationLabelSha256": "84c56dc9e36c924c5bf1b0b4deb47fdab27aed6e67546570208f85e621cdb862",
-        "navigationPlanesSha256": "d1a6dc025add86c82d6fd77d6f2bf0f9ccf098abe37c5ca528a405b8f0323e90",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "b4f4dbc2f5adc748fe49ea8b07b2f8010b53a41c8934b8f2fa46d1cc3a6e723c",
             "bytes": 6272
           },
           "InstrumentPosition": {
-            "sha256": "b24ce5ff2134be533e3384985928b1c88fb7110fed5eb4e76e911648d79ccf9f",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "9daa78c1af5f27796132b973f9921c060623d372e779404775c8215d1401485d",
             "bytes": 128
           }
         }
@@ -2796,7 +2708,6 @@
           "coreEndByteExclusive": 439440,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -2830,7 +2741,6 @@
               178,
               3622
             ],
-            "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
             "directInvalidIndices": []
           },
           "44": {
@@ -2849,7 +2759,6 @@
               202,
               1307
             ],
-            "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
             "directInvalidIndices": []
           },
           "58": {
@@ -2868,7 +2777,6 @@
               149,
               1417
             ],
-            "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
             "directInvalidIndices": []
           },
           "70": {
@@ -2887,7 +2795,6 @@
               153,
               542
             ],
-            "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
             "directInvalidIndices": []
           },
           "81": {
@@ -2906,7 +2813,6 @@
               148,
               1153
             ],
-            "maskSha256": "23b05a15e8a51fc19ecedea57f24e21137dacca9d1b770a3c80c2b6c3724ae79",
             "directInvalidIndices": []
           }
         },
@@ -2932,20 +2838,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "a8ddff8968340f9a2398a904cb0cdc2c55ea1f3b334a3b5d891ee88d59ea3700",
-        "navigationLabelSha256": "e5d1bceb77811a93e01a0b116d1ec4d4ad1bba8f2df7ee132eda432157a78531",
-        "navigationPlanesSha256": "8c40de22e87286234775908fcb0c4afce5b1b8afb4de26aef45d29e7792d48a1",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "215dccb15610d2521820e2a2198790cfdbd0695b7a78e235d0061b71a877c59e",
             "bytes": 1664
           },
           "InstrumentPosition": {
-            "sha256": "84156af222e066455cac02733bcc5bf0956388974a034bc02d6cca80107f61ac",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "ad401c97b4b7edbe6e862d823855b74d33084f1588c54b46997331afed217d6c",
             "bytes": 128
           }
         }
@@ -3042,7 +2942,6 @@
           "coreEndByteExclusive": 360224,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -3076,7 +2975,6 @@
               281,
               3296
             ],
-            "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
             "directInvalidIndices": []
           },
           "44": {
@@ -3095,7 +2993,6 @@
               287,
               1238
             ],
-            "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
             "directInvalidIndices": []
           },
           "58": {
@@ -3114,7 +3011,6 @@
               173,
               1306
             ],
-            "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
             "directInvalidIndices": []
           },
           "70": {
@@ -3133,7 +3029,6 @@
               177,
               535
             ],
-            "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
             "directInvalidIndices": []
           },
           "81": {
@@ -3152,7 +3047,6 @@
               167,
               1078
             ],
-            "maskSha256": "4d76a8e07293ab0f0f03fdfac009845631cde02c427e14dc7c4cfc9419a1b3cc",
             "directInvalidIndices": []
           }
         },
@@ -3178,20 +3072,14 @@
       },
       "footprintRejections": {},
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "ce77929babd421b61e17233f22d680016c85e27c73c72b01cdd1c2a873a72176",
-        "navigationLabelSha256": "d4d2b02b6ba036d8718a6df277f4c7b3715243e89f66599569961748284eb0bc",
-        "navigationPlanesSha256": "5b0786a43653988e6d7d5077250237cb0cfd575e869209b6fa21bfa7b3a3c75e",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "3cb9362c4b2bc5c27285fcc8a7cf5e8be1c79179640618d10fc5b584d3f6007c",
             "bytes": 2688
           },
           "InstrumentPosition": {
-            "sha256": "22250524ad374ce5e22536bee77fbe18c7b37870b574e1738f1e642156209d19",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "6797ee24fae4cee8a0d6e797c4a00c841eef789a612e98dfc969aa760e7d9b32",
             "bytes": 128
           }
         }
@@ -3254,7 +3142,6 @@
     {
       "kind": "depth",
       "file": "tethys-ice-absorption.tif",
-      "sha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
       "bytes": 126710,
       "areaFraction": 0.2259290423446786,
       "contributingDetectorApertures": {
@@ -3281,19 +3168,16 @@
       },
       "audit": [
         {
-          "file": "tethys-ice-absorption-observation.tif",
-          "sha256": "3d90aec662312d48ea563efbe9768d15736740606c82da2f5930b4a9fc7a40da"
+          "file": "tethys-ice-absorption-observation.tif"
         },
         {
-          "file": "tethys-ice-absorption-source-pixel.tif",
-          "sha256": "b48993134b1d17199d344188747f769c2eb59f4cd947cdf78e4a5243339083ed"
+          "file": "tethys-ice-absorption-source-pixel.tif"
         }
       ]
     },
     {
       "kind": "rgb",
       "file": "tethys-infrared-if.tif",
-      "sha256": "b18ecacb19d5c3d873f59bbfee385e609a94746fdddb93aeb5c601ea2df1cce6",
       "bytes": 216690,
       "areaFraction": 0.14762451682018507,
       "contributingDetectorApertures": {
@@ -3320,17 +3204,14 @@
       },
       "audit": [
         {
-          "file": "tethys-infrared-if-observation.tif",
-          "sha256": "1cc530c1f92226156ab280a24082385732291001fb166e94a2bfef7802f449b6"
+          "file": "tethys-infrared-if-observation.tif"
         },
         {
-          "file": "tethys-infrared-if-source-pixel.tif",
-          "sha256": "9efeb7b820abed78404ecc4cdbdcfe53448fb6203af3974b7355a3550493caf8"
+          "file": "tethys-infrared-if-source-pixel.tif"
         }
       ],
       "display": {
         "file": "tethys-infrared-display.tif",
-        "sha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
         "bytes": 117380,
         "centerLongitudeDegrees": 180,
         "sourceColumnRoll": 512,
@@ -3363,7 +3244,6 @@
   ],
   "registrationEvidence": {
     "file": "evidence/registration.md",
-    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Selected Cassini regions use released native navigation. Independent registration to the separate fixed normal-map control is not established; there is no resolved Odysseus-center claim.",
-    "sha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Selected Cassini regions use released native navigation. Independent registration to the separate fixed normal-map control is not established; there is no resolved Odysseus-center claim."
   }
 }

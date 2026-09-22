@@ -2,8 +2,6 @@
   "schema": "cssearth-volume-recipe@1",
   "grid": {
     "path": "density.ktx2",
-    "sha256": "49db3a43576ad1977c97f181c177e970064f4574265b70ce4999c27caa28fe05",
-    "decodedSha256": "16cf24ed3bf1e3f85d4c64be603b47fa68a3dd8fad7839ae7b7ff17c4bd12d01",
     "dimensions": [
       1024,
       1024,
@@ -23,8 +21,7 @@
       ]
     },
     "acquisition": {
-      "path": "acquisition.json",
-      "sha256": "adf168eec41cc62107bdff2b48e15abbb4b8cd0cba9fbb067acacba299ef8cce"
+      "path": "acquisition.json"
     }
   },
   "material": {
@@ -116,11 +113,9 @@
     }
   ],
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "1d6d16fd035c7f0531b2c478f0389ac003a8ba506071b2ffd491442318260de9"
+    "path": "provenance.json"
   },
   "sky": {
-    "path": "sky/recipe.json",
-    "sha256": "b7f402e1689ca26ff6bc639ebf690a899ac174820f123369afb34f0a2a6dcdc7"
+    "path": "sky/recipe.json"
   }
 }

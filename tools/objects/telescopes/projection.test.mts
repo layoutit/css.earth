@@ -12,7 +12,7 @@ import { bodyMapFits } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct,type BodyMapProduct } from '../body-map-product.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import sharp from 'sharp';
-const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',bytes:10,sha256:'a'.repeat(64),source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};
+const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};
 const sourceRequest={target:'mercury',wavelengthMicrometres:[1,2],kind:'image',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'};
 const sourceAssessment={status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}};
 const explorationContext={kind:'exploration',target:'mercury',discovery:{schema:'cssearth-telescope-exploration@1',observation:'observation',snapshot:'a'.repeat(64)},assessment:{status:'not-requested'}};
@@ -27,7 +27,7 @@ async function measurementFixture(root:string){
 }
 async function mapFixture(root:string,target='mercury'){
   await mkdir(root,{recursive:true});
-  const plane=fits(3),map:BodyMapProduct={schema:'cssearth-body-map@1',definition:{quantity:'Brightness temperature',units:'K',timeDependence:'instantaneous-state',method:{owner:'fixture'},source:'fixture'},frame:{body:target,radiusKm:2439.7,rotation:{model:'pck.tpc',sha256:'a'.repeat(64),bodyCode:199}},grid:{width:4,height:2,longitude:'east-positive-from-0',rows:'north-to-south'},planes:{file:'map.fits',sha256:sha256(plane),value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:65,missing:'NaN'},observations:[{id:'observation',telescope:'Fixture',instrument:'Camera',midTimeJd:2460000,rangeKm:1e8,subObserver:{latitudeDegrees:0,westLongitudeDegrees:0},angularResolution:{majorArcsec:1,minorArcsec:1,basis:'fixture'}}]};
+  const plane=fits(3),map:BodyMapProduct={schema:'cssearth-body-map@1',definition:{quantity:'Brightness temperature',units:'K',timeDependence:'instantaneous-state',method:{owner:'fixture'},source:'fixture'},frame:{body:target,radiusKm:2439.7,rotation:{model:'pck.tpc',bodyCode:199}},grid:{width:4,height:2,longitude:'east-positive-from-0',rows:'north-to-south'},planes:{file:'map.fits',value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:65,missing:'NaN'},observations:[{id:'observation',telescope:'Fixture',instrument:'Camera',midTimeJd:2460000,rangeKm:1e8,subObserver:{latitudeDegrees:0,westLongitudeDegrees:0},angularResolution:{majorArcsec:1,minorArcsec:1,basis:'fixture'}}]};
   const files={map:resolve(root,'map.fits'),metadata:resolve(root,'map.fits.body-map.json'),texture:resolve(root,'texture.png'),poles:resolve(root,'poles.png'),navigation:resolve(root,'navigation.json'),record:resolve(root,'map.fits.product.json')};
   await writeFile(files.map,plane);await writeFile(files.metadata,formatBodyMapProduct(map));
   const png=await sharp({create:{width:2,height:2,channels:4,background:'#6688aaff'}}).png().toBuffer();await writeFile(files.texture,png);await writeFile(files.poles,png);

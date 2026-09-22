@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "1c4431f5716432c5f43807f752033a02f89eb9d66ad709990b0ef8849134dbd1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."

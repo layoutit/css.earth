@@ -12,14 +12,12 @@
       "catalogueUrl": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/591/A74",
       "file": {
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/591/A74/table1.dat",
-        "sha256": "c85efedd4a186b22ab187590be9e66378357e778ebb79f522ed75257adafdcf9",
         "bytes": 244212,
         "localPath": ".local/nebula-lab/research/carina/table1.dat"
       },
       "readme": {
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/591/A74/ReadMe",
-        "bytes": 9799,
-        "sha256": "f5d8dedfcaa6954f2826fed92c2f4c3e0724e3698fac79ad94e238e6f8e4e132"
+        "bytes": 9799
       },
       "status": "downloaded; fixed-width coordinates and missing fields inspected; not integrated",
       "format": "CDS fixed-width table; field specification is in the pinned ReadMe",

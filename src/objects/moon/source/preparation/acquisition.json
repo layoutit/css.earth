@@ -36,7 +36,6 @@
     {
       "kind": "zip-member",
       "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
-      "archiveSha256": "f3ec29803c1ad3b8c41a7fff3e9339bd66f9fbb8f63e30f13c52561b8d5559a1",
       "archiveBytes": 224413040,
       "member": "Unified_Geologic_Map_of_the_Moon_GIS/Lunar_GIS/Shapefiles/GeoUnits.shp",
       "path": "geology/GeoUnits.shp",
@@ -47,7 +46,6 @@
     {
       "kind": "zip-member",
       "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
-      "archiveSha256": "f3ec29803c1ad3b8c41a7fff3e9339bd66f9fbb8f63e30f13c52561b8d5559a1",
       "archiveBytes": 224413040,
       "member": "Unified_Geologic_Map_of_the_Moon_GIS/Lunar_GIS/Shapefiles/GeoUnits.dbf",
       "path": "geology/GeoUnits.dbf",
@@ -58,7 +56,6 @@
     {
       "kind": "zip-member",
       "url": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
-      "archiveSha256": "f3ec29803c1ad3b8c41a7fff3e9339bd66f9fbb8f63e30f13c52561b8d5559a1",
       "archiveBytes": 224413040,
       "member": "Unified_Geologic_Map_of_the_Moon_GIS/Lunar_GIS/Shapefiles/GeoUnits.prj",
       "path": "geology/GeoUnits.prj",

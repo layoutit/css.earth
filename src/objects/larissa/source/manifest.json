@@ -4,8 +4,6 @@
     {
       "id": "c1138148",
       "path": "observations/C1138148_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "c39ac58bbc5c4fe39c43adea9807a614b1510b63c886b0a3d90c7b4f75c9f26e",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11381XX/C1138148_GEOMED.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138148",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -65,8 +63,6 @@
     {
       "id": "stooke-shape",
       "path": "shape/n7larissa.tab",
-      "expectedBytes": 70226,
-      "expectedSha256": "c22e8f6968eeab0519c238851542780f9a94b15ee1c7bbe6067fe1ce774deaeb",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/n7larissa.tab",
       "catalog": "https://sbn.psi.edu/pds/resource/stkshape.html",
       "credit": "Philip Stooke; NASA Planetary Data System",
@@ -102,8 +98,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

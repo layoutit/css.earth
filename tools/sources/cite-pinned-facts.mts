@@ -291,13 +291,12 @@ async function reviewSatelliteRows(objectDirectory: string, name: string, tables
   });
 }
 
-/** Declare a project-written document in the manifest when it is new; pins are recomputed by pin:documents afterwards. */
+/** Declare a project-written document in the manifest when it is new. */
 async function pinDocument(objectDirectory: string, path: string, reason: string, binding?: Record<string, unknown>) {
   const manifestPath = resolve(objectDirectory, 'source/manifest.json'), manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')), 'source manifest');
   const documents = requireArray(manifest.documents ?? [], 'manifest documents').map(value => requireRecord(value, 'manifest document'));
   if (documents.some(entry => entry.path === path)) return;
-  const bytes = await readFile(resolve(objectDirectory, 'source', path));
-  documents.push({ path, expectedBytes: bytes.length, expectedSha256: sha256(bytes), sourceBinding: binding ?? { kind: 'local', reason } });
+  documents.push({ path, sourceBinding: binding ?? { kind: 'local', reason } });
   await writeFile(manifestPath, `${JSON.stringify({ ...manifest, documents }, null, 2)}\n`);
 }
 

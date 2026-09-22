@@ -5,12 +5,12 @@
  * infrared bands differ in brightness by an order of magnitude. No authored gain, crop or rotation. */
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { createWriteStream } from 'node:fs';
-import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, rename, rm, writeFile, stat } from 'node:fs/promises';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { dirname, resolve } from 'node:path';
 import sharp from 'sharp';
-import { readFitsFileHdus, readFitsFileRegion, readFitsImage, sha256FitsData } from '../../fits/fits.mts';
+import { readFitsFileHdus, readFitsFileRegion, readFitsImage } from '../../fits/fits.mts';
 import { skyDisplayRaster, skyImageAxes, skyProjection } from '../../fits/fits-sky.mts';
 import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { asinhBandDisplay, asinhBandEvidence, encodeAsinhBands, type AsinhBandDisplay } from '../color-transfer.mts';
@@ -90,10 +90,10 @@ function herschel(label: string, hips: string): SkyBand {
     calibration: 'Relative source units: ESASky HiPS of public Herschel Science Archive maps; the HiPS declares no unit. NaN outside the observed footprint stays missing.' };
 }
 
-type Pin = { readonly path: string; readonly sha256: string };
-export type SkyBandInput = { readonly band: string; readonly sha256: string; readonly bytes: number; readonly product?: undefined } | { readonly band: string; readonly tiles: Pin } |
-  { readonly band: string; readonly product: string; readonly sha256: string; readonly bytes: number } |
-  { readonly band: string; readonly program: string; readonly sciSha256: string };
+type Pin = { readonly path: string };
+export type SkyBandInput = { readonly band: string; readonly bytes: number; readonly product?: undefined } | { readonly band: string; readonly tiles: Pin } |
+  { readonly band: string; readonly product: string; readonly bytes: number } |
+  { readonly band: string; readonly program: string };
 export interface SkyBandComposite {
   readonly schema: 'cssearth-sky-band-composite@1';
   readonly grid: SkyGrid;
@@ -126,25 +126,25 @@ export function parseSkyBandComposite(value: unknown): SkyBandComposite {
   const grid = parseSkyGrid(row.grid);
   const bands = requireArray(row.bands).map((raw): SkyBandInput => {
     const band = requireRecord(raw, 'Sky band'), id = requireString(band.band, 'Band'), route = Object.hasOwn(SKY_BANDS, id) ? SKY_BANDS[id]! : undefined;
-    if (route?.acquisition.kind === 'hips2fits' && Object.keys(band).sort().join() === 'band,bytes,sha256') {
+    if (route?.acquisition.kind === 'hips2fits' && Object.keys(band).sort().join() === 'band,bytes') {
       const bytes = requireFiniteNumber(band.bytes, 'Band bytes');
       if (!Number.isSafeInteger(bytes) || bytes < 2880) throw new TypeError(`Invalid ${id} byte count.`);
-      return { band: id, sha256: digest(band.sha256, `${id} sha256`), bytes };
+      return { band: id, bytes };
     }
-    if (route?.acquisition.kind === 'jwst' && Object.keys(band).sort().join() === 'band,program,sciSha256') {
+    if (route?.acquisition.kind === 'jwst' && Object.keys(band).sort().join() === 'band,program') {
       const program = requireString(band.program, `${id} program`);
       if (!/^[A-Za-z0-9._-]+$/u.test(program)) throw new TypeError(`Invalid ${id} image3 program.`);
-      return { band: id, program, sciSha256: digest(band.sciSha256, `${id} SCI sha256`) };
+      return { band: id, program };
     }
-    if (route?.acquisition.kind === 'jwst' && Object.keys(band).sort().join() === 'band,bytes,product,sha256') {
+    if (route?.acquisition.kind === 'jwst' && Object.keys(band).sort().join() === 'band,bytes,product') {
       const product = requireString(band.product, `${id} product`), bytes = requireFiniteNumber(band.bytes, 'Band bytes');
       if (!/^jw\d{5}-[a-z0-9]+_t\d{3}_(?:nircam|miri)_[a-z0-9-]+_i2d\.fits$/u.test(product)) throw new TypeError(`${id}: not a JWST level-3 i2d product name.`);
       if (!Number.isSafeInteger(bytes) || bytes < 2880) throw new TypeError(`Invalid ${id} byte count.`);
-      return { band: id, product, sha256: digest(band.sha256, `${id} sha256`), bytes };
+      return { band: id, product, bytes };
     }
     if (route?.acquisition.kind === 'wise-atlas' && Object.keys(band).sort().join() === 'band,tiles') {
       const tiles = requireRecord(band.tiles, 'Tile list pin');
-      return { band: id, tiles: { path: repositoryPath(tiles.path), sha256: digest(tiles.sha256, `${id} tile list sha256`) } };
+      return { band: id, tiles: { path: repositoryPath(tiles.path) } };
     }
     throw new TypeError(`Unsupported sky band or acquisition: ${id}`);
   });
@@ -170,17 +170,18 @@ export interface SkyBandIo {
   readonly progress?: (message: string) => void;
 }
 
-async function hips2fitsBytes(grid: SkyGrid, band: { band: string; sha256: string; bytes: number }, hips: string, cache: string) {
-  const path = resolve(cache, 'hips2fits', `${band.sha256}.fits`);
+/** The cache names a hips2fits response by its request URL. */
+async function hips2fitsBytes(grid: SkyGrid, band: { band: string; bytes: number }, hips: string, cache: string) {
+  const url = skyBandUrl(grid, hips), path = resolve(cache, 'hips2fits', `${sha256(url)}.fits`);
   let bytes = await readFile(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
   if (bytes === null) {
-    const url = skyBandUrl(grid, hips), response = await fetch(url, { signal: AbortSignal.timeout(600_000) });
+    const response = await fetch(url, { signal: AbortSignal.timeout(600_000) });
     if (!response.ok) throw new Error(`Sky band download failed: ${response.status} ${url}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== band.bytes || sha256(bytes) !== band.sha256) throw new Error(`Changed hips2fits response: ${url}`);
+    if (bytes.length !== band.bytes) throw new Error(`Changed hips2fits response: ${url}`);
     await mkdir(dirname(path), { recursive: true }); await writeFile(`${path}.part`, bytes); await rename(`${path}.part`, path);
   }
-  if (bytes.length !== band.bytes || sha256(bytes) !== band.sha256) throw new Error(`Changed sky band input: ${path}`);
+  if (bytes.length !== band.bytes) throw new Error(`Changed sky band input: ${path}`);
   return bytes;
 }
 
@@ -200,33 +201,33 @@ function checkHips2fits(header: Record<string, unknown>, cards: readonly string[
     throw new Error(`${hips}: FITS history does not name this HiPS.`);
 }
 
-/** Download a MAST product into the cache by streaming, never holding it whole, and return its pin; the file is stored under
- * its own digest. `expected` refuses bytes that differ from an existing pin. */
-export async function acquireMastProduct(product: string, cache: string, expected?: { sha256: string; bytes: number }) {
+/** Download a MAST product into the cache by streaming, never holding it whole, and return its size; the file is stored under
+ * its product name. `expected` refuses a response of another size. */
+export async function acquireMastProduct(product: string, cache: string, expected?: { bytes: number }) {
   const url = `${MAST_PRODUCT_URL}${product}`, response = await fetch(url, { signal: AbortSignal.timeout(3_600_000) });
   if (!response.ok || !response.body) throw new Error(`MAST download failed: ${response.status} ${url}`);
   const part = resolve(cache, 'mast', `${product}.part`);
   await mkdir(dirname(part), { recursive: true });
   await pipeline(Readable.fromWeb(response.body as import('node:stream/web').ReadableStream), createWriteStream(part));
   const pin = await sha256File(part);
-  if (expected && (pin.bytes !== expected.bytes || pin.sha256 !== expected.sha256)) { await rm(part, { force: true }); throw new Error(`Changed MAST product: ${url}`); }
-  await rename(part, resolve(cache, 'mast', `${pin.sha256}.fits`));
+  if (expected && pin.bytes !== expected.bytes) { await rm(part, { force: true }); throw new Error(`Changed MAST product: ${url}`); }
+  await rename(part, resolve(cache, 'mast', product));
   return pin;
 }
 
-/** A pinned MAST product in the cache, downloaded when missing; hashed by streaming either way. */
-async function mastProductPath(input: { band: string; product: string; sha256: string; bytes: number }, cache: string) {
-  const path = resolve(cache, 'mast', `${input.sha256}.fits`);
-  let pin = await sha256File(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-  if (pin === null) pin = await acquireMastProduct(input.product, cache, input);
-  if (pin.bytes !== input.bytes || pin.sha256 !== input.sha256) throw new Error(`Changed sky band input: ${path}`);
+/** A named MAST product in the cache, downloaded when missing. */
+async function mastProductPath(input: { band: string; product: string; bytes: number }, cache: string) {
+  const path = resolve(cache, 'mast', input.product);
+  let size = await stat(path).then(entry => entry.size).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
+  if (size === null) size = (await acquireMastProduct(input.product, cache, input)).bytes;
+  if (size !== input.bytes) throw new Error(`Changed sky band input: ${path}`);
   return path;
 }
 
 /** A JWST level-3 mosaic resampled onto the grid: each grid pixel is the mean of k x k bilinear samples of the mosaic, k the
  * ratio of the grid pixel to the mosaic pixel (at least 1, at most 8), so the grid averages rather than aliases. Only the
  * mosaic rows the grid covers are read. NaN, which the pipeline writes where no exposure contributed, stays missing. */
-async function mastProductPlane(grid: SkyGrid, input: { band: string; product: string; sha256: string; bytes: number }, band: JwstBand, cache: string) {
+async function mastProductPlane(grid: SkyGrid, input: { band: string; product: string; bytes: number }, band: JwstBand, cache: string) {
   const path = await mastProductPath(input, cache), hdus = await readFitsFileHdus(path), primary = hdus[0]!.header;
   if (bandOfHeader(primary)?.id !== band.id)
     throw new Error(`${input.product}: not a ${band.instrument} ${band.filter}${band.pupil ? `/${band.pupil}` : ''} product.`);
@@ -268,24 +269,19 @@ async function mastProductPlane(grid: SkyGrid, input: { band: string; product: s
   return { plane, k, region: { x0, y0, width: x1 - x0, height: y1 - y0 }, header: primary, mosaicScaleArcsec: mosaic.scaleArcsec };
 }
 
-/** The image3 stage's mosaic on the recipe grid. Its headers carry run dates and paths, so it is pinned by the digest of its
- * SCI data, which a re-run reproduces exactly (measured). It is taken from the cache, or built by
- * tools/objects/jwst/imaging/image3.mts from the program's pinned members and checked against the pin. The mosaic must be the
- * grid itself (shape, reference and scale) with no rotation, so it is only flipped into display order. */
-async function image3Plane(grid: SkyGrid, input: { band: string; program: string; sciSha256: string }, band: JwstBand, io: SkyBandIo) {
-  const path = resolve(io.cache, 'jwst-image3', `${input.sciSha256}.fits`);
+/** The image3 stage's mosaic on the recipe grid, named by program and band. A re-run reproduces its SCI data exactly
+ * (measured). It is taken from the cache, or built by tools/objects/jwst/imaging/image3.mts from the program's members.
+ * The mosaic must be the grid itself (shape, reference and scale) with no rotation, so it is only flipped into display order. */
+async function image3Plane(grid: SkyGrid, input: { band: string; program: string }, band: JwstBand, io: SkyBandIo) {
+  const path = resolve(io.cache, 'jwst-image3', `${input.program}-${band.id}.fits`);
   let run: Record<string, unknown> | undefined;
-  const sciOf = async (file: string) => { const hdu = (await readFitsFileHdus(file)).find(entry => entry.header.EXTNAME === 'SCI'); return hdu ? sha256FitsData(file, hdu) : ''; };
-  let digestOnDisk = await sciOf(path).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return null; throw error; });
-  if (digestOnDisk === null) {
+  const present = await stat(path).then(() => true).catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
+  if (!present) {
     io.progress?.(`${input.band}: running the image3 stage for ${input.program}`);
     const built = await runImage3(input.program, band.id, resolve(io.cache, 'jwst-image3', 'work', input.program, band.id), { grid });
-    digestOnDisk = await sciOf(built.mosaic);
-    if (digestOnDisk !== input.sciSha256) throw new Error(`${input.band}: the image3 mosaic differs from its pin (SCI ${digestOnDisk}).`);
     await mkdir(dirname(path), { recursive: true }); await rename(built.mosaic, path);
     run = { seconds: built.seconds, peakRssBytes: built.peakRssBytes, members: built.members };
   }
-  if (digestOnDisk !== input.sciSha256) throw new Error(`Changed sky band input: ${path}`);
   const hdus = await readFitsFileHdus(path), primary = hdus[0]!.header, sci = hdus.find(hdu => hdu.header.EXTNAME === 'SCI');
   if (bandOfHeader(primary)?.id !== band.id || !sci || sci.header.BUNIT !== 'MJy/sr') throw new Error(`${input.band}: not a ${band.id} image3 mosaic in MJy/sr.`);
   const wcs = gridWcs(grid), axes = skyImageAxes(sci.header), [width, height] = sci.dimensions as [number, number];
@@ -301,23 +297,23 @@ async function image3Plane(grid: SkyGrid, input: { band: string; program: string
 /** One band on the grid, in its source unit, top raster row first; NaN where nothing was observed. */
 async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyBandIo) {
   const route = SKY_BANDS[input.band]!, { width, height } = recipe.grid;
-  if ('sha256' in input && input.product === undefined && route.acquisition.kind === 'hips2fits') {
+  if ('bytes' in input && input.product === undefined && route.acquisition.kind === 'hips2fits') {
     const hips = route.acquisition.hips, image = readFitsImage(await hips2fitsBytes(recipe.grid, input, hips, io.cache), { maxDecodedBytes: 1024 ** 3 });
     checkHips2fits(image.header, image.cards, hips, recipe.grid);
     const plane = skyDisplayRaster(Float32Array.from(image.values), width, height, skyImageAxes(image.header));
-    return { plane, acquisition: { kind: 'hips2fits', hips, url: skyBandUrl(recipe.grid, hips), sha256: input.sha256, bytes: input.bytes,
+    return { plane, acquisition: { kind: 'hips2fits', hips, url: skyBandUrl(recipe.grid, hips), bytes: input.bytes,
       limits: 'CDS hips2fits interpolates HiPS pixels by an undocumented method.' } };
   }
   if ('program' in input && route.acquisition.kind === 'jwst') {
     const { plane, header, run } = await image3Plane(recipe.grid, input, route.acquisition.band, io);
-    return { plane, acquisition: { kind: 'jwst-image3', program: input.program, sciSha256: input.sciSha256,
+    return { plane, acquisition: { kind: 'jwst-image3', program: input.program,
       program_file: `tools/objects/jwst/imaging/programs/${input.program}.json`, pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX, ...(run ? { run } : {}),
       limits: 'The pipeline\u2019s image3 stage (tweakreg, skymatch, outlier detection, resample) re-run from MAST\u2019s level-2 members onto the recipe grid, north up, so the exposures are resampled once. Pixels no exposure covered are missing.' } };
   }
   if ('product' in input && input.product !== undefined && route.acquisition.kind === 'jwst') {
     const { plane, k, region, header, mosaicScaleArcsec } = await mastProductPlane(recipe.grid, input, route.acquisition.band, io.cache);
     const jwstBand = route.acquisition.band;
-    return { plane, acquisition: { kind: 'mast-product', product: input.product, url: `${MAST_PRODUCT_URL}${input.product}`, sha256: input.sha256, bytes: input.bytes,
+    return { plane, acquisition: { kind: 'mast-product', product: input.product, url: `${MAST_PRODUCT_URL}${input.product}`, bytes: input.bytes,
       instrument: jwstBand.instrument, filter: jwstBand.filter, ...(jwstBand.pupil ? { pupil: jwstBand.pupil } : {}),
       ...(header ? { program: header.PROGRAM, observed: header['DATE-BEG'], pipeline: header.CAL_VER, crdsContext: header.CRDS_CTX } : {}),
       mosaicPixelArcsec: mosaicScaleArcsec ?? null, samplesPerAxis: k, mosaicRegion: region,
@@ -325,7 +321,6 @@ async function bandPlane(recipe: SkyBandComposite, input: SkyBandInput, io: SkyB
   }
   if ('tiles' in input && route.acquisition.kind === 'wise-atlas') {
     const listBytes = await io.input(input.tiles.path);
-    if (sha256(listBytes) !== input.tiles.sha256) throw new Error(`Changed WISE atlas tile list: ${input.tiles.path}`);
     const pins = parseTilePins(JSON.parse(listBytes.toString('utf8')));
     if (pins.band !== route.acquisition.band) throw new Error(`${input.tiles.path} lists ${pins.band} tiles, not ${route.acquisition.band}.`);
     const binned = [], outside = [];
@@ -415,31 +410,22 @@ export async function composeSkyBands(recipe: SkyBandComposite, io: SkyBandIo) {
       limits: 'The survey products have no absolute zero level, so each band loses one measured background. Bands without a documented calibration stay in relative source units. Dividing each band by its own range means hue does not show physical band ratios. Missing pixels are black. Rows are reversed once from FITS order into top-down raster order.' } };
 }
 
-/** Read and verify a pinned recipe and every tile list it names. Callers run this before trusting a cached
- * composite, so a missing or altered recipe fails the same way with a warm or a cold cache. */
-export async function verifySkyBandRecipe(recipePin: { readonly path: string; readonly sha256: string }, input: SkyBandIo['input']) {
+/** Read a recipe and every tile list it names. Callers run this before trusting a cached composite, so a
+ * missing recipe fails the same way with a warm or a cold cache. */
+export async function verifySkyBandRecipe(recipePin: { readonly path: string }, input: SkyBandIo['input']) {
   const recipeBytes = await input(recipePin.path);
-  if (sha256(recipeBytes) !== recipePin.sha256) throw new Error(`Changed sky band recipe: ${recipePin.path}`);
   const recipe = parseSkyBandComposite(JSON.parse(recipeBytes.toString('utf8')));
-  const files = [{ path: recipePin.path, sha256: recipePin.sha256, bytes: recipeBytes.length }];
+  const files = [{ path: recipePin.path, bytes: recipeBytes.length }];
   for (const band of recipe.bands) if ('tiles' in band) {
     const list = await input(band.tiles.path);
-    if (sha256(list) !== band.tiles.sha256) throw new Error(`Changed WISE atlas tile list: ${band.tiles.path}`);
     parseTilePins(JSON.parse(list.toString('utf8')));
-    files.push({ path: band.tiles.path, sha256: band.tiles.sha256, bytes: list.length });
+    files.push({ path: band.tiles.path, bytes: list.length });
   }
   return { recipe, files };
 }
 
-/** A composed raster's cache name carries its own hash, so a retired publisher file cached under the
- * source's earlier name is left alone instead of being mistaken for, or overwritten by, the composite. */
-export function skyBandCompositeFile(sourceId: string, compositeSha256: string) {
-  if (!/^[a-z0-9-]+$/u.test(sourceId) || !/^[0-9a-f]{64}$/u.test(compositeSha256)) throw new TypeError('Invalid sky band composite identity.');
-  return `${sourceId}.${compositeSha256}.png`;
-}
-
-/** The pinned recipe's composite as a deterministic lossless RGB8 PNG: the lab working raster and the app preview source. */
-export async function composeSkyBandPng(recipePin: { readonly path: string; readonly sha256: string }, io: SkyBandIo) {
+/** The recipe's composite as a deterministic lossless RGB8 PNG: the lab working raster and the app preview source. */
+export async function composeSkyBandPng(recipePin: { readonly path: string }, io: SkyBandIo) {
   const { recipe } = await verifySkyBandRecipe(recipePin, io.input);
   const composed = await composeSkyBands(recipe, io);
   const bytes = await sharp(composed.rgb, { raw: { width: composed.width, height: composed.height, channels: composed.channels } })

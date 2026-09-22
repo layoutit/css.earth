@@ -3,7 +3,6 @@
   "id": "m31",
   "source": {
     "path": "source.jpg",
-    "sha256": "f0a9a514317745945591c7677e2d76c358357cf4e4ef00b95928e6d350835137",
     "dimensions": [
       4783,
       5000
@@ -129,7 +128,6 @@
     "diffuseSigmaPixels": 2
   },
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "52bf488f3fe4d713b23091c6b523d1269bfac2b3d1cae1c098e305029bfa1c66"
+    "path": "provenance.json"
   }
 }

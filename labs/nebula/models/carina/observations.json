@@ -18,10 +18,9 @@
   "images": [
     {
       "id": "eso-optical",
-      "label": "ESO \u00b7 optical",
+      "label": "ESO · optical",
       "url": "https://cdn.eso.org/images/publicationtiff/eso0905a.tif",
       "page": "https://www.eso.org/public/images/eso0905a/",
-      "sha256": "2d03cc062c779d85e71b32c84be47f6d7cdf057062fe3b8dfa50fe1dd1992e31",
       "width": 4000,
       "height": 3966,
       "fieldArcminutes": [
@@ -33,15 +32,15 @@
         -59.684619
       ],
       "northRightDegrees": -0.18548238494,
-      "bands": "Optical \u00b7 B / U / V / R / Sii / H-alpha",
+      "bands": "Optical · B / U / V / R / Sii / H-alpha",
       "credit": "ESO",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
         "referenceDimension": [
-          4000.0,
-          3966.0
+          4000,
+          3966
         ],
         "referencePixel": [
           1519.24626792,
@@ -67,10 +66,9 @@
     },
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "url": "https://cdn.eso.org/images/publicationtiff/eso1828b.tif",
       "page": "https://www.eso.org/public/images/eso1828b/",
-      "sha256": "772f6966b92f4484befcf3d4f24582dd2168e2fbe1075d21222dd59b363c7ad0",
       "width": 4000,
       "height": 3245,
       "fieldArcminutes": [
@@ -82,27 +80,27 @@
         -59.8244880881
       ],
       "northRightDegrees": -0.21999999999999992,
-      "bands": "Near-infrared \u00b7 Ks / J / Z",
+      "bands": "Near-infrared · Ks / J / Z",
       "credit": "ESO/J. Emerson/M. Irwin/J. Lewis",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "wcs": {
         "projection": "TAN",
         "coordinateFrame": "ICRS",
         "referenceDimension": [
-          15542.0,
-          12608.0
+          15542,
+          12608
         ],
         "referencePixel": [
-          7771.0,
-          6304.0
+          7771,
+          6304
         ],
         "referenceValueDeg": [
           161.668663214,
           -59.8244880881
         ],
         "scaleDeg": [
-          -9.48900987901e-05,
-          9.48900987901e-05
+          -0.0000948900987901,
+          0.0000948900987901
         ],
         "rotationDeg": 0.21999999999999992
       },
@@ -117,9 +115,7 @@
   ],
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   }
 }

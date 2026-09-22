@@ -3,7 +3,6 @@
   "id": "lmc",
   "defaultLens": "horalek-widefield",
   "framingRadiusUnits": 5,
-  "settingsReceiptSha256": "a97bc44b890dfabc37813f51cf0906c9b2c462e1f09f7ebfc395000deb870ba1",
   "evidence": {
     "emissionRecipe": "src/objects/lmc/source/evidence/lmc/envelope/emission-envelope.json",
     "lensRecipe": "src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json"

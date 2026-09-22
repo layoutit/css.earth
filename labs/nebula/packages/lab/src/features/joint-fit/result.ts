@@ -8,7 +8,7 @@ export interface JointResult {
   sources: { id: string; label: string; image: JointPin }[]; ridgePaths: string[];
   candidates: JointCandidate[]; graph: JointPin; method: JointPin;
   accounting: { ridgePoints: number; excludedRidgePoints: number; pointings: number; components: number; upperLimits: number; evaluatedModels: number; beamFwhmArcsec: number };
-  molecularSourceSha256: string; inputIdentity: string; interpretation: string;
+  inputIdentity: string; interpretation: string;
 }
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const hash = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
@@ -30,7 +30,7 @@ function readFit(v: unknown): JointFit {
     missingTraining: Number(m.missingTraining), missingHeldOut: Number(m.missingHeldOut), objective: Number(m.objective) } };
 }
 export function readJointResult(v: unknown): JointResult {
-  if (!jointRecord(v) || v.schema !== 'cssearth-joint-fit-result@1' || !hash(v.id) || !hash(v.molecularSourceSha256) || !hash(v.inputIdentity) ||
+  if (!jointRecord(v) || v.schema !== 'cssearth-joint-fit-result@1' || !hash(v.id) || !hash(v.inputIdentity) ||
       !finite(v.spanArcsec) || v.spanArcsec <= 0 || v.diagramSize !== 512 || !Array.isArray(v.sources) || !v.sources.length || v.sources.length > 8 ||
       !Array.isArray(v.ridgePaths) || v.ridgePaths.length > 20000 || !v.ridgePaths.every(p => typeof p === 'string') || !Array.isArray(v.candidates) || v.candidates.length !== 2 ||
       !jointRecord(v.accounting) || typeof v.interpretation !== 'string') throw new TypeError('Invalid joint fit result.');
@@ -47,7 +47,7 @@ export function readJointResult(v: unknown): JointResult {
   const a = v.accounting;
   for (const name of ['ridgePoints', 'excludedRidgePoints', 'pointings', 'components', 'upperLimits', 'evaluatedModels', 'beamFwhmArcsec']) if (!finite(a[name]) || a[name] < 0) throw new TypeError('Invalid joint evidence accounting.');
   return { schema: v.schema, id: v.id, controls: readJointControls(v.controls), spanArcsec: v.spanArcsec, diagramSize: 512, sources, candidates,
-    ridgePaths: v.ridgePaths, graph: pin(v.graph), method: pin(v.method), inputIdentity: v.inputIdentity, molecularSourceSha256: v.molecularSourceSha256, interpretation: v.interpretation,
+    ridgePaths: v.ridgePaths, graph: pin(v.graph), method: pin(v.method), inputIdentity: v.inputIdentity, interpretation: v.interpretation,
     accounting: { ridgePoints: Number(a.ridgePoints), excludedRidgePoints: Number(a.excludedRidgePoints), pointings: Number(a.pointings), components: Number(a.components),
       upperLimits: Number(a.upperLimits), evaluatedModels: Number(a.evaluatedModels), beamFwhmArcsec: Number(a.beamFwhmArcsec) } };
 }

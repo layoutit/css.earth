@@ -36,8 +36,6 @@
       "label": "Monochrome",
       "falseColor": false,
       "coverage": "New Horizons observed terrain; southern darkness remains unavailable. Native detail varies across the map. The source already applies Lunar-Lambert photometric correction; local photographed terrain shadows remain.",
-      "expectedBytes": 80613890,
-      "expectedSha256": "4a874809e0a33a851cd026b8e4647f5875ed15807e677d413812367509564b00",
       "capture": {
         "attributions": [
           {
@@ -82,8 +80,6 @@
       ],
       "acquisition": "Restore the exact pinned binary through source/preparation/acquisition.json.",
       "redistribution": "Retain NASA/JHUAPL/SwRI, Paul Schenk/LPI, New Horizons team and archive LIDVID attribution.",
-      "expectedBytes": 116006912,
-      "expectedSha256": "dd23352035996d670b9c278a1466461623556acc88d66aabd3bc2da1dd15fc5a",
       "width": 3808,
       "height": 1904,
       "projection": {
@@ -151,8 +147,6 @@
       "label": "Elevation",
       "falseColor": true,
       "coverage": "Measured topography relative to a 606 km sphere. Gray grid marks missing elevation. Stereo/shape-from-shading product; 300 m grid spacing is not uniform effective resolution.",
-      "expectedBytes": 161176369,
-      "expectedSha256": "4496de98a9b682fd3440da616ef7f5adfbc315b438e4d18833ae3a843eb41bcc",
       "capture": {
         "attributions": [
           {
@@ -177,8 +171,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -237,8 +229,6 @@
     },
     {
       "path": "science/nh_charon_bond.img",
-      "expectedBytes": 1062600,
-      "expectedSha256": "7e58c10961d1721bc2912e7cd48254f54abf22f1e09351aa5cdc80845f1fab11",
       "id": "mapped-science-science-nh-charon-bond-img",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.img",
       "credit": "NASA/JHUAPL/SwRI; New Horizons geophysics derived products",
@@ -509,8 +499,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 419434560,
-      "expectedSha256": "c33dbdd082d6612ba41a5e8e7ce4fd76421334813558efe06f2c8a0d7b24f4b2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -547,8 +535,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 419434560,
-      "expectedSha256": "5f4ebc9cb6ecb9f67d685dceb5da948d30c547373f52b348717e1e0ed44134da",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -585,8 +571,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 8196480,
-      "expectedSha256": "49b20130e431e988d004f5142d40d360b5b4a0d6dd65c8ffabb9f5e5e71554ff",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -659,8 +643,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 104860800,
-      "expectedSha256": "00ea97e6c828f535868a8864d3b592f49f7473aaf349ac4d28d0e9cd88d3190d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -697,8 +679,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 104860800,
-      "expectedSha256": "f517266558805c5bee41956d590065934c3120eb4f5be56ad00da3b300e69e17",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -735,8 +715,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 2053440,
-      "expectedSha256": "b53c0815a430cff5fa7e541808a6105dcdcd7a40fe037b42246003c7d7971b74",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -808,8 +786,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 1037800,
-      "expectedSha256": "d5e97dc34ed6bbb93a9ec148f7a38efb92a7b580cc044ae365a9976a14810a91",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -855,8 +831,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 1037800,
-      "expectedSha256": "863ce7313592e1370c4e4c86837e1bcc56d05beb0443aee085b5ea1a531d6657",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -924,9 +898,7 @@
             "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
           }
         ]
-      },
-      "expectedBytes": 2820762,
-      "expectedSha256": "6607dd35232b08be79db3006b7610a728785f9309fb0f0437461c1de223099b7"
+      }
     },
     {
       "id": "charon-organa-landmark",

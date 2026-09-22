@@ -13,9 +13,9 @@ const plane = bodyMapFits({ width: 4, height: 2 }, {}, [{ name: 'CO2 BAND DEPTH'
 const product = (): BodyMapProduct => ({ schema: 'cssearth-body-map@1',
   definition: { quantity: 'CO2 band depth', units: 'band depth', timeDependence: 'surface-property', wavelengthIntervalsMicrometres: [[4.24, 4.28]], source: 'a published definition',
     method: { bandMicrometres: [4.24, 4.28], continuumMicrometres: [[4.2, 4.225], [4.3, 4.33]] } },
-  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } },
+  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', bodyCode: 502 } },
   grid: { width: 4, height: 2, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-  planes: { file: 'co2.fits', sha256: sha256(plane), value: 'CO2 BAND DEPTH', uncertainty: 'CO2 BAND DEPTH ERROR' },
+  planes: { file: 'co2.fits', value: 'CO2 BAND DEPTH', uncertainty: 'CO2 BAND DEPTH ERROR' },
   mask: { maximumEmissionDegrees: 65, missing: 'NaN' }, observations: [{ id: 'jw01250-o002', telescope: 'JWST', instrument: 'NIRSPEC-G395H-F290LP',
     mode: 'NIRSPEC/IFU', programme: 'europa-1250', midTimeJd: 2_459_800.5, rangeKm: 6.3e8,
     subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 }, angularResolution: { majorArcsec: 0.1, minorArcsec: 0.1, basis: 'disc-edge fit' } }] });
@@ -47,9 +47,6 @@ test('publication binds the question and selected program to current map bytes',
 });
 
 test('publication refuses changed bytes, changed meaning and a selection absent from the map', async () => {
-  const changedPlane = await fixture(); await writeFile(changedPlane.planePath, 'changed');
-  await assert.rejects(qualifyBodyMap(changedPlane.mapPath, selection), /not the plane pinned/u);
-
   const changedMeaning = await fixture(), parsed = JSON.parse(await readFile(changedMeaning.mapPath, 'utf8')) as Record<string, unknown>;
   parsed.definition = { ...(parsed.definition as object), quantity: 'another quantity' };
   await writeFile(changedMeaning.mapPath, `${JSON.stringify(parsed, null, 2)}\n`);

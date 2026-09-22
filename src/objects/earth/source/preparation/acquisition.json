@@ -224,12 +224,10 @@
         "meanDensityGPerCm3": 3.344,
         "sources": {
           "physical": {
-            "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-            "sha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440"
+            "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html"
           },
           "elements": {
-            "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-            "sha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8"
+            "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
           }
         }
       }
@@ -584,13 +582,11 @@
           "documentation": "https://www.lightpollutionmap.info/help.html",
           "url": "https://www2.lightpollutionmap.info/data/v2/viirs_2025_raw.zip",
           "httpLastModified": "Sun, 29 Mar 2026 22:55:59 GMT",
-          "bytes": 973526576,
-          "sha256": "c5a2778bb9438f92d06f61b02e387c11b425f68b3eba1e28fbb9860b8ec8d480"
+          "bytes": 973526576
         },
         "member": {
           "filename": "viirs_2025_raw.tif",
           "bytes": 1034233344,
-          "sha256": "1d085195298ddb12c30d2f13e5799cf02f34845719cf14ff3807bca7b05102c3",
           "width": 86400,
           "height": 33600,
           "bands": 1,

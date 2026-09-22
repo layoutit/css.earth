@@ -9,7 +9,7 @@ import { loadScienceSurface } from '../../../../tools/objects/terrestrial-layers
 import { pinnedOracleVersions } from '../../../../tools/oracles/fixture.mts';
 
 const root = new URL('../../../../src/objects/pluto/source/', import.meta.url);
-const fixture = shape({ astropy: text, numpy: text, inputs: array(shape({ path: text, bytes: number, sha256: text })),
+const fixture = shape({ astropy: text, numpy: text, inputs: array(shape({ path: text, bytes: number })),
   cases: array(shape({ hdu: number, name: text, units: text, missingTupleCells: number, acceptedCells: number,
     acceptedAreaFraction: number, north60to90Mean: number,
     samples: array(shape({ x: number, y: number, raw: number, error: number, expected: nullable(number) })) }))
@@ -22,7 +22,7 @@ test('Pluto LEISA sampling and coverage agree with independent Astropy and NumPy
   assert.equal(fixture.astropy, versions.get('astropy')); assert.equal(fixture.numpy, versions.get('numpy'));
   for (const input of fixture.inputs) {
     const bytes = await readFile(new URL('../../../../' + input.path, import.meta.url));
-    assert.equal(bytes.length, input.bytes); assert.equal(createHash('sha256').update(bytes).digest('hex'), input.sha256);
+    assert.equal(bytes.length, input.bytes);
   }
   const raw = await readFile(new URL('science/leisa/params_ls.fits', root));
   for (const [i, id] of ['methane-ice', 'nitrogen-ice', 'water-ice'].entries()) {

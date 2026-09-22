@@ -1,7 +1,7 @@
 import { array, boolean, dictionary, literal, number, optional, shape, string, vector } from './source-validation.mts';
 import { objectValue } from './generator-records.mts';
 const stateFields = { positionKm: vector, velocityKmPerDay: vector };
-const pinFields = { path: string, sha256: string, bytes: number };
+const pinFields = { path: string, bytes: number };
 const urlPinFields = { ...pinFields, url: string };
 const horizonPinFields = { ...urlPinFields, target: number, center: number };
 const sourcePin = shape(urlPinFields);
@@ -43,4 +43,4 @@ export type ProjectionSample = ReturnType<typeof comparison> | ReturnType<typeof
 export const parseSceneManifest = shape({ schema: literal('cssearth-scene-epoch-ephemeris@1'), epochJdTt: number,
   requestEpochJdUtc: number, ttMinusUtcSeconds: number, timeQualification: string, referenceFrame: string,
   units: string, correction: string, retrievedAt: string,
-  records: array(shape({ id: string, target: number, center: number, centerBodyId: string, path: string, sha256: string, url: string })) });
+  records: array(shape({ id: string, target: number, center: number, centerBodyId: string, path: string, url: string })) });

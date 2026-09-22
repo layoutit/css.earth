@@ -4,9 +4,9 @@
   "source": "src/objects/mathilde/source/manifest.json",
   "restorer": "tools/objects/telescopes/families/f13-f17-examples.mts",
   "members": [
-    {"id":"raw","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit","bytes":273600,"sha256":"c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c"},
-    {"id":"calibrated","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit","bytes":535680,"sha256":"c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d"},
-    {"id":"label","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml","bytes":15271,"sha256":"399ced8980cad90e87bb692aedeac32759d8a1ebea5c9ba4ece579d7d467d52d"}
+    {"id":"raw","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_raw/mathilde/1997/178/m0042826360f0_2p.fit","bytes":273600},
+    {"id":"calibrated","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit","bytes":535680},
+    {"id":"label","url":"https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml","bytes":15271}
   ],
   "liveProof": {"shape":[244,537],"filter":"0","startTime":"1997-06-27T12:55:52.496Z","rawMissingPixels":0,"rawSaturatedPixels":0,"export":"three reopened closure members plus calibration-bundle.json"},
   "rights": "The Mathilde source manifest declares public mission scientific data with source labels and attribution retained. Archive bytes are restored on demand and are not committed here."

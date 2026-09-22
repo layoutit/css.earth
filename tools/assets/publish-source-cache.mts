@@ -1,21 +1,20 @@
-// Maintainer command: mirror a pinned publisher input into R2 under source-cache/<sha256>/<filename>, content-addressed
-// and additive. Replaces the ad hoc scripts used to seed this mirror by hand. Two forms:
+// Maintainer command: mirror an object's downloaded source inputs into R2 under source-cache/<object id>/<manifest path>,
+// addressed the way the manifest names them and additive. Two forms:
 //
 //   node tools/assets/publish-source-cache.mts --object=<id> [...]
-//     Publishes every pinned input this repository already knows how to mirror for that object: a volume's
-//     publisher previews (source/presentation.json) and any *_nomenclature_center_pts.zip pinned in
-//     source/manifest.json. Skips a pin whose local file is missing or does not match its own hash (run
-//     restore-source-inputs first).
+//     Publishes every download this repository knows how to mirror for that object: a volume's publisher previews
+//     and sky-band composites (source/presentation.json, under .local/) and every source/manifest.json input with an
+//     archive origin. Skips a file that is not present locally (run restore-source-inputs first).
 //
-//   node tools/assets/publish-source-cache.mts --file=<path> --sha256=<hex> --bytes=<n>
-//     Publishes exactly one file under its own pin, for a one-off input outside those two categories.
+//   node tools/assets/publish-source-cache.mts --file=<path> --key=<object id>/<manifest path>
+//     Publishes exactly one file under the key a restorer will ask for.
 //
 // Same verify-after-publish contract as publish-runtime-assets.mts: HEAD every key, retry a miss with a per-key
 // `wrangler r2 object put`, byte-verify, exit non-zero on any remaining failure.
 import { sha256 } from '../../src/platform/sha256.mts';
 import { spawn } from 'node:child_process';
 import { readFile } from 'node:fs/promises';
-import { basename, resolve } from 'node:path';
+import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { RUNTIME_ASSET_ORIGIN, sourceCacheKey } from './source-mirror.mts';
 import { verifyPublished, reportVerification, type PublishAsset } from './publish-verification.mts';
@@ -38,13 +37,14 @@ async function uploadOne(asset: PublishAsset): Promise<void> {
     '--file', asset.file, '--remote', '--content-type', CONTENT_TYPE, '--cache-control', CACHE_CONTROL]);
 }
 
-interface Candidate { readonly filename: string; readonly path: string; readonly sha256: string; readonly bytes: number; }
+/** A local file and the mirror key a restorer asks for it by. */
+interface Candidate { readonly key: string; readonly path: string; }
 
 async function readJson(path: string): Promise<unknown> {
   return JSON.parse(await readFile(resolve(projectRoot, path), 'utf8'));
 }
 
-/** Every source-cache-eligible pin this repository knows about for one object: volume previews and nomenclature zips. */
+/** Every mirror-eligible download this repository knows about for one object: volume previews and manifest downloads. */
 export async function objectSourceCacheCandidates(id: string): Promise<readonly Candidate[]> {
   if (!/^[a-z][a-z0-9-]*$/u.test(id)) throw new TypeError('Invalid object id.');
   const candidates: Candidate[] = [];
@@ -54,22 +54,22 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
     const lenses = (presentation as Record<string, unknown>).lenses;
     if (Array.isArray(lenses)) for (const lens of lenses) {
       const preview = (lens as Record<string, unknown>).preview as Record<string, unknown> | undefined;
-      // A sky-band composite has no publisher URL: it is composed here from survey tiles and pinned by its own
-      // hash, so mirroring it is what keeps a fresh checkout off the survey archive.
+      // A sky-band composite has no publisher URL: it is composed here from survey tiles, so mirroring it is what
+      // keeps a fresh checkout off the survey archive.
       const addressable = typeof preview?.url === 'string' || (typeof preview?.skyBands === 'object' && preview.skyBands !== null);
-      if (preview && addressable && typeof preview.path === 'string' && typeof preview.sha256 === 'string' && typeof preview.bytes === 'number') {
-        candidates.push({ filename: basename(preview.path), path: preview.path, sha256: preview.sha256, bytes: preview.bytes });
+      if (preview && addressable && typeof preview.path === 'string' && preview.path.startsWith('.local/')) {
+        candidates.push({ key: sourceCacheKey('local', preview.path.slice('.local/'.length)), path: preview.path });
       }
     }
   }
 
   const manifest = await readJson(`src/objects/${id}/source/manifest.json`).catch(() => null);
   if (manifest && typeof manifest === 'object') {
+    const repositoryPaths = (manifest as Record<string, unknown>).pathBase === 'repository';
     for (const entry of (manifest as Record<string, unknown>).inputs as unknown[] ?? []) {
       const input = entry as Record<string, unknown>;
-      if (typeof input.path === 'string' && input.path.endsWith('_nomenclature_center_pts.zip')
-        && typeof input.expectedSha256 === 'string' && typeof input.expectedBytes === 'number') {
-        candidates.push({ filename: basename(input.path), path: `src/objects/${id}/source/${input.path}`, sha256: input.expectedSha256, bytes: input.expectedBytes });
+      if (typeof input.path === 'string' && !input.path.startsWith('.local/') && typeof input.origin === 'string' && /^https?:\/\//u.test(input.origin)) {
+        candidates.push({ key: sourceCacheKey(id, input.path), path: repositoryPaths ? input.path : `src/objects/${id}/source/${input.path}` });
       }
     }
   }
@@ -79,15 +79,14 @@ export async function objectSourceCacheCandidates(id: string): Promise<readonly 
 async function toAsset(candidate: Candidate): Promise<PublishAsset | null> {
   const file = resolve(projectRoot, candidate.path);
   const bytes = await readFile(file).catch(() => null);
-  if (!bytes || bytes.length !== candidate.bytes || sha256(bytes) !== candidate.sha256) return null;
-  return { key: sourceCacheKey(candidate.sha256, candidate.filename), file, bytes: candidate.bytes, sha256: candidate.sha256 };
+  if (!bytes || !bytes.length) return null;
+  return { key: candidate.key, file, bytes: bytes.length, sha256: sha256(bytes) };
 }
 
 export async function publishSourceCache(args: readonly string[]): Promise<void> {
   const objectArgs = args.filter(a => a.startsWith('--object='));
   const fileArg = args.find(a => a.startsWith('--file='));
-  const shaArg = args.find(a => a.startsWith('--sha256='));
-  const bytesArg = args.find(a => a.startsWith('--bytes='));
+  const keyArg = args.find(a => a.startsWith('--key='));
 
   const assets: PublishAsset[] = [];
   const skipped: string[] = [];
@@ -95,23 +94,23 @@ export async function publishSourceCache(args: readonly string[]): Promise<void>
     for (const arg of objectArgs) {
       const id = arg.slice('--object='.length);
       const candidates = await objectSourceCacheCandidates(id);
-      if (!candidates.length) throw new Error(`${id}: no source-cache-eligible pins found (no volume previews, no nomenclature zip).`);
+      if (!candidates.length) throw new Error(`${id}: no mirror-eligible downloads found (no volume previews, no manifest input with an archive origin).`);
       for (const candidate of candidates) {
         const asset = await toAsset(candidate);
-        if (asset) assets.push(asset); else skipped.push(`${id}/${candidate.filename}`);
+        if (asset) assets.push(asset); else skipped.push(candidate.path);
       }
     }
   } else if (fileArg) {
-    if (!shaArg || !bytesArg) throw new TypeError('Usage: --file=<path> --sha256=<hex> --bytes=<n>');
-    const path = fileArg.slice('--file='.length), expectedSha256 = shaArg.slice('--sha256='.length), expectedBytes = Number(bytesArg.slice('--bytes='.length));
-    const candidate: Candidate = { filename: basename(path), path, sha256: expectedSha256, bytes: expectedBytes };
-    const asset = await toAsset(candidate);
+    if (!keyArg) throw new TypeError('Usage: --file=<path> --key=<object id>/<manifest path>');
+    const path = fileArg.slice('--file='.length), [id, ...rest] = keyArg.slice('--key='.length).split('/');
+    if (!id || !rest.length) throw new TypeError('Usage: --file=<path> --key=<object id>/<manifest path>');
+    const asset = await toAsset({ key: sourceCacheKey(id, rest.join('/')), path });
     if (asset) assets.push(asset); else skipped.push(path);
   } else {
-    throw new TypeError('Usage: publish-source-cache.mts --object=<id> [...] | --file=<path> --sha256=<hex> --bytes=<n>');
+    throw new TypeError('Usage: publish-source-cache.mts --object=<id> [...] | --file=<path> --key=<object id>/<manifest path>');
   }
 
-  if (skipped.length) throw new Error(`Not locally present or hash mismatch (restore-source-inputs first): ${skipped.join(', ')}`);
+  if (skipped.length) throw new Error(`Not locally present (restore-source-inputs first): ${skipped.join(', ')}`);
   if (!assets.length) { console.log('Nothing to publish.'); return; }
 
   console.log(`Publishing ${assets.length} source-cache object(s) (${(assets.reduce((sum, a) => sum + a.bytes, 0) / 1e6).toFixed(1)} MB).`);

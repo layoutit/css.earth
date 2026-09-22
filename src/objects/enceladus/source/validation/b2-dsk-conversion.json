@@ -26,25 +26,20 @@
   },
   "duplicateVertices": 3076,
   "geometry": {
-    "facesUint32LeSha256": "b63c51cfd818976df487f5958e9265d01ec09c50b309d705a5cf5083c5b363ae",
-    "verticesFloat64LeSha256": "1bde956fda0b06d22b925d316c7922d68c66edfa33c5fb29ac5a9452a151f2c5"
   },
   "mapping": {
     "encoding": "little-endian uint32",
     "entries": 396294,
     "indexBase": 0,
-    "member": "source-vertex-to-output-vertex.u32le",
-    "sha256": "76d59142d5f76fd8cd4cdb08b29550d7d7d8d0982988f921e2fbdbfe875c568f"
+    "member": "source-vertex-to-output-vertex.u32le"
   },
   "mesh": {
     "bytes": 37702026,
-    "member": "enceladus-v2-q256.obj",
-    "sha256": "5eb931df5277e7da0d7a95bfbeec29003877a67b1980520ac28c049dde5f0021"
+    "member": "enceladus-v2-q256.obj"
   },
   "schema": "cssearth-dsk-mesh-provenance@1",
   "source": {
-    "bytes": 30258176,
-    "sha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98"
+    "bytes": 30258176
   },
   "sourceFaces": 786432,
   "sourceVertices": 396294,

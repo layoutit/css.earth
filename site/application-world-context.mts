@@ -115,9 +115,8 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     // selected or comes into view. This mirrors loadShells' deferral, one bank at a time.
     const volumeLensDescriptors = Object.values(descriptors).map(parseObjectDescriptor)
       .filter(descriptor => descriptor.type === 'volume-lens-bank' && CONTEXT_AVAILABILITY[descriptor.id]?.available);
-    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame),
-      sha256: descriptor.prepared?.sha256 ?? (() => { throw new TypeError(`${descriptor.id}: volume lens bank is not pinned.`); })() }));
-    // Every bank's context visibility and Sun-facing billboard, prepared from those same pinned payloads.
+    const volumeLensBanks = volumeLensDescriptors.map(descriptor => ({ id: descriptor.id, frame: parseDensityVolumeFrame(descriptor.properties.frame) }));
+    // Every bank's context visibility and Sun-facing billboard, prepared from those same payloads.
     const lensBillboards = { plan: parseLensBillboards(JSON.parse(lensBillboardText)), atlasUrl: lensBillboardAtlasUrl };
     const loadVolumeLens = createInFlightLoader(async (id: string) => {
       const descriptor = volumeLensDescriptors.find(candidate => candidate.id === id);
@@ -130,7 +129,7 @@ function loadApplicationUniverse(): Promise<ApplicationUniverse> {
     const plannerSource = APPLICATION_WORLD_PLANNER_SOURCE;
     const catalogBank = { fadeStartDistanceM: galaxyPresentation.fadeStartDistanceM, fullDistanceM: galaxyPresentation.fullDistanceM,
       clusters: { fadeStartDistanceM: clusterPresentation.fadeStartDistanceM, fullDistanceM: clusterPresentation.fullDistanceM } };
-    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointSha256: parseObjectDescriptor(galaxyFieldDescriptor).prepared?.sha256, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationLandmarks: majorMoonIds(), annotationOpacities, plannerSource, catalogBank,
+    const universe = createPreparedUniverse({ environmentLinks: { 'milky-way': '/sun/?overview=milky-way' }, context: applicationContext, volume, pointAppearance, sprites, imageLayerBanks, loadImageLayer, volumeLensBanks, loadVolumeLens, backgroundPointManifest: backgroundPointSet.resolve('prepared/points.json'), backgroundPointCloud: backgroundPointSet.resolve('prepared/cloud.webp'), annotationPriorities, annotationLandmarks: majorMoonIds(), annotationOpacities, plannerSource, catalogBank,
       distantNavigation: { afterDistanceM: 25 * ASTRONOMICAL_UNIT_M, nonNavigableIds: ordinaryAsteroidIds },
       lensVisibility: LENS_VISIBILITY, lensBillboards,
       // Phones draw no celestial sky cube: about 60 MB of layers and 27 MB of decoded faces behind the body.

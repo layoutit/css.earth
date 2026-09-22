@@ -4,12 +4,9 @@
     {
       "id": "schenk-2020-ariel-normal",
       "path": "observations/aumap-cyl-180180.cub.gz",
-      "expectedBytes": 12992353,
-      "expectedSha256": "2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9",
       "origin": "https://repository.hou.usra.edu/bitstreams/fcdd781c-765e-4686-928f-257395918dc8/download",
       "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
       "mirror": "https://earth-assets.lowpoly.cc/source-assets/2e616ac7f472dfbca4226d58f24d8810e8f431b50059bfca4ce29258925328b9/aumap-cyl-180180.cub.gz",
-      "upstreamSha256": "fd85bca38db1954253012f270f476100202b13709bb889dfb0cf5cc8e87cdd80",
       "upstreamBytes": 26753560,
       "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
       "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
@@ -67,12 +64,9 @@
     {
       "id": "schenk-2020-ariel-elevation",
       "path": "science/audem-ZTL-cyl-180180.cub.gz",
-      "expectedBytes": 7759355,
-      "expectedSha256": "2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69",
       "origin": "https://repository.hou.usra.edu/bitstreams/55639bf1-6c1c-4824-8634-d4a4500fb095/download",
       "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
       "mirror": "https://earth-assets.lowpoly.cc/source-assets/2f2568538e310cf26388a99ca59e43ea09f12e66b8208ca84f3466e048e8dc69/audem-ZTL-cyl-180180.cub.gz",
-      "upstreamSha256": "47a0d47ac9832ca912451d3b43c94d0f982b1dade6aa83e2a0c49f2be98a3288",
       "upstreamBytes": 26745332,
       "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
       "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
@@ -129,8 +123,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -388,8 +380,6 @@
     {
       "id": "voyager-c2673243-geomed-frame",
       "path": "observations/voyager/C2673243_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "95aa14ec1b42cf408e4b4f0b23053017715b9907fb66c0d3434fbe3a91cf7a01",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26732XX/C2673243_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -415,8 +405,6 @@
     {
       "id": "voyager-c2673243-geomed-label",
       "path": "observations/voyager/C2673243_GEOMED.LBL",
-      "expectedBytes": 3349,
-      "expectedSha256": "8812dafe61faddd6357a69c19c1408ee047191196a4764bc146a40afbf2f0585",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26732XX/C2673243_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -442,8 +430,6 @@
     {
       "id": "voyager-c2673255-geomed-frame",
       "path": "observations/voyager/C2673255_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "09c8dceb4b91e04c85daeda0154fa6781cb7a8eee641cf51ca09fd4ed66ac2cc",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26732XX/C2673255_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -469,8 +455,6 @@
     {
       "id": "voyager-c2673255-geomed-label",
       "path": "observations/voyager/C2673255_GEOMED.LBL",
-      "expectedBytes": 3348,
-      "expectedSha256": "091ca8604fe477604094a902cd1f73b523b34b28f8ed563eb19d5f7052e05011",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26732XX/C2673255_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -496,8 +480,6 @@
     {
       "id": "voyager-c2673301-geomed-frame",
       "path": "observations/voyager/C2673301_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "c2bd5d77b20764473ee4c75d70bd93918c6475b5431fcb519ce50a2709415475",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26733XX/C2673301_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -523,8 +505,6 @@
     {
       "id": "voyager-c2673301-geomed-label",
       "path": "observations/voyager/C2673301_GEOMED.LBL",
-      "expectedBytes": 3346,
-      "expectedSha256": "cfa855d2b82bef9d9a9ce929f456306b438729c19cd491fa9d656faf4eeee254",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26733XX/C2673301_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -550,8 +530,6 @@
     {
       "id": "voyager-c2676403-geomed-frame",
       "path": "observations/voyager/C2676403_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "51dce7b2f8e1c64049d465e70abf2fd96d6954f2df9655951b69e57bb518606c",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26764XX/C2676403_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -577,8 +555,6 @@
     {
       "id": "voyager-c2676403-geomed-label",
       "path": "observations/voyager/C2676403_GEOMED.LBL",
-      "expectedBytes": 3348,
-      "expectedSha256": "73d68364b7d2b7f4961d5bdd666c2edc2541fb35fa9a845dd374b1f7546d89ed",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26764XX/C2676403_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -604,8 +580,6 @@
     {
       "id": "voyager-c2676415-geomed-frame",
       "path": "observations/voyager/C2676415_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "a06073366485422930393f60d5ee25afa14ae58ebc8cce05aa99dbfd5436ff34",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26764XX/C2676415_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -631,8 +605,6 @@
     {
       "id": "voyager-c2676415-geomed-label",
       "path": "observations/voyager/C2676415_GEOMED.LBL",
-      "expectedBytes": 3349,
-      "expectedSha256": "1b988763d7e1242583b10f87ef6eab69888bcd869e0b19dadb80e70ec498a5ec",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26764XX/C2676415_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -658,8 +630,6 @@
     {
       "id": "voyager-c2676421-geomed-frame",
       "path": "observations/voyager/C2676421_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "6a38c11b0bb20017982516c169a2885e799a9a2c8b62f4ef7139dac8c18c486e",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26764XX/C2676421_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -685,8 +655,6 @@
     {
       "id": "voyager-c2676421-geomed-label",
       "path": "observations/voyager/C2676421_GEOMED.LBL",
-      "expectedBytes": 3346,
-      "expectedSha256": "909a49cb065c35948bab99caf68139b363e1ecbaff743860f379f77c003362b9",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26764XX/C2676421_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -712,8 +680,6 @@
     {
       "id": "voyager-c2678106-geomed-frame",
       "path": "observations/voyager/C2678106_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "9091dd47f48b878cd8237334e01800e1a3416e9c3b2b11613626a061e090fe5b",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26781XX/C2678106_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -739,8 +705,6 @@
     {
       "id": "voyager-c2678106-geomed-label",
       "path": "observations/voyager/C2678106_GEOMED.LBL",
-      "expectedBytes": 3349,
-      "expectedSha256": "9e3909c337f787c5b13bc2b89277b01c2a3f7f4a30b06d846f697fedaeb4ea26",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26781XX/C2678106_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -766,8 +730,6 @@
     {
       "id": "voyager-c2678112-geomed-frame",
       "path": "observations/voyager/C2678112_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "2eb449de61e97c7da94892edf6bb90b3699d8cee47c274c8ce1bf0fbbf5093b2",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26781XX/C2678112_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -793,8 +755,6 @@
     {
       "id": "voyager-c2678112-geomed-label",
       "path": "observations/voyager/C2678112_GEOMED.LBL",
-      "expectedBytes": 3348,
-      "expectedSha256": "d2a53187a1e52d901d52b7c83a02f7129ee5d91e1f3a35b0496c16d78876b91a",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26781XX/C2678112_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -820,8 +780,6 @@
     {
       "id": "voyager-c2678118-geomed-frame",
       "path": "observations/voyager/C2678118_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "5a074aac3f456afd405ffdbdb85a7b963579b6f291bab64bbc0b044c951e83a7",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26781XX/C2678118_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -847,8 +805,6 @@
     {
       "id": "voyager-c2678118-geomed-label",
       "path": "observations/voyager/C2678118_GEOMED.LBL",
-      "expectedBytes": 3346,
-      "expectedSha256": "beb5a540c3258e9e3ec1049c5b737b88a7403e5762625cd910654e0366eb17bf",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26781XX/C2678118_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -874,8 +830,6 @@
     {
       "id": "voyager-c2679041-geomed-frame",
       "path": "observations/voyager/C2679041_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "a1e192ae3ee40593f3b2cc5764a6d9ba0f3ec2ef290a470cbd8e90c3d9619657",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26790XX/C2679041_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -901,8 +855,6 @@
     {
       "id": "voyager-c2679041-geomed-label",
       "path": "observations/voyager/C2679041_GEOMED.LBL",
-      "expectedBytes": 3348,
-      "expectedSha256": "8ef3ab484e2b1e2763c088d070605d3515cbda1e7c763349858a76f995822408",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26790XX/C2679041_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -928,8 +880,6 @@
     {
       "id": "voyager-c2679047-geomed-frame",
       "path": "observations/voyager/C2679047_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "35e201772bb8a2e18acecc633fe6522780261014d790ae149f9ab04bd8b0f4fa",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26790XX/C2679047_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -955,8 +905,6 @@
     {
       "id": "voyager-c2679047-geomed-label",
       "path": "observations/voyager/C2679047_GEOMED.LBL",
-      "expectedBytes": 3349,
-      "expectedSha256": "3174cbeb6f51a4cd4bdfda42906ad6b55c65dac2829a35eb4cc2d9e4f4d59f68",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26790XX/C2679047_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -982,8 +930,6 @@
     {
       "id": "voyager-c2679053-geomed-frame",
       "path": "observations/voyager/C2679053_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "d8f283503a0359fd3d90034ef237542528c5919bdc2b0c6511d69323518cc6fd",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26790XX/C2679053_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1009,8 +955,6 @@
     {
       "id": "voyager-c2679053-geomed-label",
       "path": "observations/voyager/C2679053_GEOMED.LBL",
-      "expectedBytes": 3346,
-      "expectedSha256": "2764072dc9e013cf33a5dabe47fe1189f84f3edc2143c38631a60129a761db2b",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26790XX/C2679053_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1036,8 +980,6 @@
     {
       "id": "voyager-c2679728-geomed-frame",
       "path": "observations/voyager/C2679728_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "32dd39bfcd7fbf5f1ffbcc05853c9a864fa0e1e12c0ef10092a026f858eca831",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26797XX/C2679728_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1063,8 +1005,6 @@
     {
       "id": "voyager-c2679728-geomed-label",
       "path": "observations/voyager/C2679728_GEOMED.LBL",
-      "expectedBytes": 3348,
-      "expectedSha256": "58ae80b64707328962dd2e989c0e92c6c3e36b331c511cd6d807b15783caad9a",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26797XX/C2679728_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1090,8 +1030,6 @@
     {
       "id": "voyager-c2679734-geomed-frame",
       "path": "observations/voyager/C2679734_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "3761d450e5e8fcf311321bdd2078e163e918eb8ddc09d0e311aebfb5cd486314",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26797XX/C2679734_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1117,8 +1055,6 @@
     {
       "id": "voyager-c2679734-geomed-label",
       "path": "observations/voyager/C2679734_GEOMED.LBL",
-      "expectedBytes": 3349,
-      "expectedSha256": "7317e2ccaa9be9faa9b25fdd62e8f7cfab2dc8e29673f54eabed45f92a440036",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26797XX/C2679734_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1144,8 +1080,6 @@
     {
       "id": "voyager-c2679740-geomed-frame",
       "path": "observations/voyager/C2679740_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "b61b5d6458236851ea4eabc88f54dbd6b4b4948dc51d72233fb1eba920f72454",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26797XX/C2679740_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1171,8 +1105,6 @@
     {
       "id": "voyager-c2679740-geomed-label",
       "path": "observations/voyager/C2679740_GEOMED.LBL",
-      "expectedBytes": 3346,
-      "expectedSha256": "686573b64a28ae57aa46a7031a282ff716066eb9de15c38ed623e8f88a34d2b5",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26797XX/C2679740_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1198,8 +1130,6 @@
     {
       "id": "voyager-c2684340-geomed-frame",
       "path": "observations/voyager/C2684340_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "825129f00b51c1fca74ea2f7049f1bb3dfe380e971e7e310cf96e5f764660096",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26843XX/C2684340_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1225,8 +1155,6 @@
     {
       "id": "voyager-c2684340-geomed-label",
       "path": "observations/voyager/C2684340_GEOMED.LBL",
-      "expectedBytes": 3313,
-      "expectedSha256": "1f05b55dde35ad8f836ca926e2038aa46fbe9767207574a5bdd24b247e7a61d8",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26843XX/C2684340_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1252,8 +1180,6 @@
     {
       "id": "voyager-c2684342-geomed-frame",
       "path": "observations/voyager/C2684342_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "17c04d035ceb8db65d37be448461576ad696714b6b2e627f6db69758e5f352f7",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26843XX/C2684342_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1279,8 +1205,6 @@
     {
       "id": "voyager-c2684342-geomed-label",
       "path": "observations/voyager/C2684342_GEOMED.LBL",
-      "expectedBytes": 3312,
-      "expectedSha256": "f6fa236df3c25c4184d407efd1c09db6133b62c20d86f16e5eb702b09ed3e754",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26843XX/C2684342_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1306,8 +1230,6 @@
     {
       "id": "voyager-c2684344-geomed-frame",
       "path": "observations/voyager/C2684344_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "e45d8ef1ac914452cc50c1d07a08588149c3ced02a982d829d903a2703dc56a2",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26843XX/C2684344_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1333,8 +1255,6 @@
     {
       "id": "voyager-c2684344-geomed-label",
       "path": "observations/voyager/C2684344_GEOMED.LBL",
-      "expectedBytes": 3294,
-      "expectedSha256": "56c8e8256f976b4357536d0d77962e87f2408dd7d5f05ba880d05f7143c6b6ce",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26843XX/C2684344_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1360,8 +1280,6 @@
     {
       "id": "voyager-c2690305-geomed-frame",
       "path": "observations/voyager/C2690305_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "fc4f72625c594bdf2974c7218c352db20b4e13274c004656f13841d67f520ea6",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26903XX/C2690305_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1387,8 +1305,6 @@
     {
       "id": "voyager-c2690305-geomed-label",
       "path": "observations/voyager/C2690305_GEOMED.LBL",
-      "expectedBytes": 3308,
-      "expectedSha256": "c79644a84180fe984701ca0d4b374e6683e3c575d75c7f772beba9d9a3a145ec",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26903XX/C2690305_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1414,8 +1330,6 @@
     {
       "id": "voyager-c2690317-geomed-frame",
       "path": "observations/voyager/C2690317_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "27e7209eb0fb6bb0fb768388d620d3d72bda7e6093ebcb40d0a7d39b53e26fd0",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26903XX/C2690317_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1441,8 +1355,6 @@
     {
       "id": "voyager-c2690317-geomed-label",
       "path": "observations/voyager/C2690317_GEOMED.LBL",
-      "expectedBytes": 3307,
-      "expectedSha256": "d2822dfec78f631badeab1fac647138a9c8b22e116cba12c36db62a514c80336",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26903XX/C2690317_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1468,8 +1380,6 @@
     {
       "id": "voyager-c2690323-geomed-frame",
       "path": "observations/voyager/C2690323_GEOMED.IMG",
-      "expectedBytes": 2002000,
-      "expectedSha256": "8154facc5985e6b370803c4a8d4459e9292004bd94dc2bb63a3a46bc73464c3f",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26903XX/C2690323_GEOMED.IMG",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1495,8 +1405,6 @@
     {
       "id": "voyager-c2690323-geomed-label",
       "path": "observations/voyager/C2690323_GEOMED.LBL",
-      "expectedBytes": 3304,
-      "expectedSha256": "6b6863589ad7217a0e56559254806bc0ccbcee39828faa21dd63463459e245eb",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26903XX/C2690323_GEOMED.LBL",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1522,8 +1430,6 @@
     {
       "id": "voyager-color-c2679041",
       "path": "observations/voyager-color/c2679041.equi.tif",
-      "expectedBytes": 274600,
-      "expectedSha256": "5337a5ed68a17f41fba124584e0d63e293d98db6e41d542a15d820b5fb54f7b2",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/5337a5ed68a17f41fba124584e0d63e293d98db6e41d542a15d820b5fb54f7b2/c2679041.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1562,8 +1468,6 @@
     {
       "id": "voyager-color-c2679047",
       "path": "observations/voyager-color/c2679047.equi.tif",
-      "expectedBytes": 272200,
-      "expectedSha256": "c16bb5bf637f4649df5b5716a582af1908ac68b405b21ec7f3db97ecac8d0ac8",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/c16bb5bf637f4649df5b5716a582af1908ac68b405b21ec7f3db97ecac8d0ac8/c2679047.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1602,8 +1506,6 @@
     {
       "id": "voyager-color-c2679053",
       "path": "observations/voyager-color/c2679053.equi.tif",
-      "expectedBytes": 272200,
-      "expectedSha256": "fcc382b094ecdd12e5274d99bf59061ceddd9433f7ceca41a5d09b543895b751",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/fcc382b094ecdd12e5274d99bf59061ceddd9433f7ceca41a5d09b543895b751/c2679053.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1642,8 +1544,6 @@
     {
       "id": "voyager-color-c2679728",
       "path": "observations/voyager-color/c2679728.equi.tif",
-      "expectedBytes": 272200,
-      "expectedSha256": "6b5066dc4ccd96f71a3c8ca6a6b62caea98937543234c59a2c844662d2db31b4",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/6b5066dc4ccd96f71a3c8ca6a6b62caea98937543234c59a2c844662d2db31b4/c2679728.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1682,8 +1582,6 @@
     {
       "id": "voyager-color-c2679734",
       "path": "observations/voyager-color/c2679734.equi.tif",
-      "expectedBytes": 272200,
-      "expectedSha256": "c527de14702618c1a2632a0c83ed0278c77037ae432444f8ef49a92da6c37cdd",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/c527de14702618c1a2632a0c83ed0278c77037ae432444f8ef49a92da6c37cdd/c2679734.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1722,8 +1620,6 @@
     {
       "id": "voyager-color-c2679740",
       "path": "observations/voyager-color/c2679740.equi.tif",
-      "expectedBytes": 265000,
-      "expectedSha256": "070e15da3b59e77de74a491b0c43f45adfc78abf150b58aae756b736d46d4b7b",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/070e15da3b59e77de74a491b0c43f45adfc78abf150b58aae756b736d46d4b7b/c2679740.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1762,8 +1658,6 @@
     {
       "id": "voyager-color-c2684340",
       "path": "observations/voyager-color/c2684340.equi.tif",
-      "expectedBytes": 8525800,
-      "expectedSha256": "f1d118335e776e0a60bfe20fe1c6bd1eebbb1a11d3967ac140f37bffcd1f0cac",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/f1d118335e776e0a60bfe20fe1c6bd1eebbb1a11d3967ac140f37bffcd1f0cac/c2684340.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1802,8 +1696,6 @@
     {
       "id": "voyager-color-c2684342",
       "path": "observations/voyager-color/c2684342.equi.tif",
-      "expectedBytes": 8511400,
-      "expectedSha256": "27428f5ce665aa4c0ef8a43c7831fb81b418ac97b26bbbcae8612cb40881cb60",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/27428f5ce665aa4c0ef8a43c7831fb81b418ac97b26bbbcae8612cb40881cb60/c2684342.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1842,8 +1734,6 @@
     {
       "id": "voyager-color-c2684344",
       "path": "observations/voyager-color/c2684344.equi.tif",
-      "expectedBytes": 8525800,
-      "expectedSha256": "b7d99299fe59c9f640dfe7d487091a012761e8db93f4a9ba1527424ae9ca7014",
       "origin": "https://earth-assets.lowpoly.cc/source-cache/b7d99299fe59c9f640dfe7d487091a012761e8db93f4a9ba1527424ae9ca7014/c2684344.equi.tif",
       "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
       "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
@@ -1882,8 +1772,6 @@
     {
       "id": "voyager-color-observer-vectors",
       "path": "photometry/horizons-observer-voyager-color.json",
-      "expectedBytes": 9084,
-      "expectedSha256": "081a0d4633fed800d1ba3b2c3f5d014cdfee2ade8f07496c6307ff347ab5e9fb",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40701%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272446453.344504451%0A2446453.347837784%0A2446453.351171118%0A2446453.570615562%0A2446453.573948896%0A2446453.577282229%0A2446455.110603989%0A2446455.111715100%0A2446455.112826210%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
       "credit": "NASA/JPL Solar System Dynamics, Horizons",
       "license": "Public JPL Horizons ephemeris service output.",
@@ -1909,8 +1797,6 @@
     {
       "id": "voyager-color-sun-vectors",
       "path": "photometry/horizons-sun-voyager-color.json",
-      "expectedBytes": 7563,
-      "expectedSha256": "87b9cece32e96c43e77c36c01fe91cbbd1e09100e82ebc5344046e1b58085cc4",
       "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40701%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272446453.344504451%0A2446453.347837784%0A2446453.351171118%0A2446453.570615562%0A2446453.573948896%0A2446453.577282229%0A2446455.110603989%0A2446455.111715100%0A2446455.112826210%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
       "credit": "NASA/JPL Solar System Dynamics, Horizons",
       "license": "Public JPL Horizons ephemeris service output.",

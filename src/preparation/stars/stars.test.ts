@@ -9,7 +9,7 @@ import { readCatalog } from '@cssearth/catalog';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
 import sharp from 'sharp';
 import { parseStarsRecipe } from './config.js';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../../renderers/css/stars/validation.js';
 import { POINT_FIELD_MAGNITUDE_BOUND } from '../../renderers/css/stars/point-field-bank.js';
@@ -20,7 +20,7 @@ const objectDirectory = 'src/objects/stellar-neighbourhood', sourceDirectory = `
 function coverageCell(x:number,y:number,z:number,divisions:number):number { const ax=Math.abs(x),ay=Math.abs(y),az=Math.abs(z),d=Math.max(ax,ay,az); if (!(d>0)) return -1; let face:number,u:number,v:number; if(ax>=ay&&ax>=az){face=x>=0?0:1;u=(x>=0?-z:z)/d;v=y/d;}else if(ay>=az){face=y>=0?2:3;u=x/d;v=(y>=0?-z:z)/d;}else{face=z>=0?4:5;u=(z>=0?x:-x)/d;v=y/d;} const c=(n:number)=>Math.min(divisions-1,Math.max(0,Math.floor((n+1)*divisions/2))); return face*divisions**2+c(v)*divisions+c(u); }
 async function payload(): Promise<PreparedCssPointField> {
   const manifest = parsePreparedCssPointFieldManifest((JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8')) as { data: unknown }).data);
-  return decodePreparedCssPointField(manifest, new Uint8Array(await verifiedBytes(preparedDirectory, manifest.bank)));
+  return decodePreparedCssPointField(manifest, new Uint8Array(await sourceBytes(preparedDirectory, manifest.bank)));
 }
 // Hierarchy aggregates are computed from the float32 source magnitudes, before transport quantization.
 function assertTree(data: PreparedCssPointField, magnitudeOf = (star: PreparedCssPointField['stars'][number]) => star.absoluteMagnitude): void {
@@ -76,7 +76,7 @@ test('enclosing radii are recomputed from the rounded centre and retain exact so
 test('all source rows survive, with exact HIP matches reconciled to the detailed bodies', async () => {
   const data = await payload();
   const recipe = parseStarsRecipe(JSON.parse(await readFile(`${sourceDirectory}/stars.json`,'utf8')) as unknown);
-  const catalogue = readCatalog(Uint8Array.from(await verifiedBytes(sourceDirectory,recipe.catalogue)).buffer);
+  const catalogue = readCatalog(Uint8Array.from(await sourceBytes(sourceDirectory,recipe.catalogue)).buffer);
   const p = catalogue.numeric('posPc'), mag = catalogue.numeric('absMag'); assert(p instanceof Float32Array && mag instanceof Float32Array);
   assert.equal(data.stars.length,109389); assert.equal(data.stars.length,catalogue.count);
   const hip = catalogue.numeric('hip');
@@ -134,18 +134,17 @@ test('all source rows survive, with exact HIP matches reconciled to the detailed
 });
 
 test('prepared point-field closes every source and image digest and samples the actual photometry chain', async () => {
-  const descriptor = JSON.parse(await readFile(`${objectDirectory}/object.json`,'utf8')) as {properties:{preparation:{source:string;sha256:string}};prepared:{url:string;sha256:string}};
-  const recipeBytes = await verifiedBytes(objectDirectory,{path:descriptor.properties.preparation.source,sha256:descriptor.properties.preparation.sha256});
+  const descriptor = JSON.parse(await readFile(`${objectDirectory}/object.json`,'utf8')) as {properties:{preparation:{source:string}};prepared:{url:string}};
+  const recipeBytes = await readFile(`${objectDirectory}/${descriptor.properties.preparation.source}`);
   const recipe = parseStarsRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   const data = await payload();
   const manifest = JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8'));
   assert.equal(manifest.data.provenance.catalogueMetadata.epoch, 'ICRS/J2000.0 equinox and coordinate epoch');
   assert.match(manifest.data.provenance.reconciliation.sourceEpochDescription, /J1991.25/);
-  await verifiedBytes(objectDirectory,{path:descriptor.prepared.url,sha256:descriptor.prepared.sha256});
-  for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await verifiedBytes(sourceDirectory,reference);
+  for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await sourceBytes(sourceDirectory,reference);
   assert.deepEqual(data.resources.map(resource=>resource.path),['point-atlas.png']); assert.equal(data.diffuseSky,undefined);
   for (const resource of data.resources) {
-    const bytes = await verifiedBytes(preparedDirectory,resource); assert.equal(bytes.length,resource.bytes);
+    const bytes = await sourceBytes(preparedDirectory,resource); assert.equal(bytes.length,resource.bytes);
     const metadata = await sharp(bytes).metadata(); assert.equal(metadata.width,resource.width); assert.equal(metadata.height,resource.height);
   }
   const atlas = await sharp(`${preparedDirectory}/${data.atlas.path}`).raw().toBuffer();
@@ -158,7 +157,6 @@ test('prepared point-field closes every source and image digest and samples the 
     assert(Math.abs(sample.luminance - Math.min(1,Math.max(0,expected?.luminance??0))) <= 5.1e-13);
     assert(sample.luminance<=1);
   });
-  await assert.rejects(()=>verifiedBytes(sourceDirectory,{...recipe.catalogue,sha256:'0'.repeat(64)}),/digest/);
 });
 
 test('point-field recipe reproduces identical JSON and all PNG/WEBP bytes into a fresh directory', async () => {

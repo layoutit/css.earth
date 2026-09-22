@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "37b52cdbe11615741f4551f391f5de94c30b33942bd6ce753f80aeaa6f97c622",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -116,14 +113,10 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/AcuA_V1.txt.gz",
-      "expectedBytes": 120256,
-      "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
+      "path": "reference/AcuA_V1.txt.gz"
     },
     {
-      "path": "reference/ali-lagoa-2020.pdf",
-      "expectedBytes": 2223718,
-      "expectedSha256": "fda3c0b18b2af7740c04cdadb069d16e98fa31c72282cd4d7ed50d1a8f105b2b"
+      "path": "reference/ali-lagoa-2020.pdf"
     },
     {
       "path": "reference/calibration.json"
@@ -148,17 +141,13 @@
       "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/podlewska-gaca-2020.pdf",
-      "expectedBytes": 1933308,
-      "expectedSha256": "b8d3b3a934cfb63dc0c07b415b1d19ca603d8d856b5a314f2252afee17fd9f1e"
+      "path": "reference/podlewska-gaca-2020.pdf"
     },
     {
       "path": "reference/ReadMe.AcuA.txt"
     },
     {
-      "path": "reference/usui-2011.pdf",
-      "expectedBytes": 635799,
-      "expectedSha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+      "path": "reference/usui-2011.pdf"
     }
   ]
 }

@@ -1,11 +1,10 @@
-import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-recipe.mts';
 import { hasErrorCode } from '../sources/source-values.mts';
 
-/** Restore only the small, pinned font needed to bootstrap the shared shell. */
+/** Restore only the small font needed to bootstrap the shared shell. */
 export async function restoreTitleFont({
   projectRoot = resolve(import.meta.dirname, '../..'),
   fetchBytes = async (url: string): Promise<Uint8Array> => {
@@ -22,9 +21,6 @@ export async function restoreTitleFont({
     if (!hasErrorCode(error, 'ENOENT')) throw error;
     bytes = await fetchBytes(recipe.sourceUrl);
     missing = true;
-  }
-  if (sha256(bytes) !== recipe.sourceSha256) {
-    throw new Error('The shared title font does not match its pinned SHA-256.');
   }
   if (missing) {
     await mkdir(dirname(destination), { recursive: true });

@@ -9,7 +9,7 @@ import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/opera
 import {prepareSatelliteCatalog} from '../../tools/objects/acquisition/satellite-catalog.mts';
 import type {SourceManifest,SourceEntry} from '../../tools/objects/operations.js';
 const digest=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
-const entry=(path:string,bytes:Uint8Array):SourceEntry=>({path,expectedBytes:bytes.length,expectedSha256:digest(bytes)});
+const entry=(path:string,_bytes:Uint8Array):SourceEntry=>({path});
 const temporary=async(work:(root:string)=>Promise<void>)=>{const root=await mkdtemp(join(tmpdir(),'catalog-acquisition-'));try{await work(root);}finally{await rm(root,{recursive:true,force:true});}};
 const row=(cells:string[])=>'<tr>'+cells.map(cell=>'<td>'+cell+'</td>').join('')+'</tr>';
 const documents={

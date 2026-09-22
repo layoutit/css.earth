@@ -63,7 +63,7 @@ export interface BodyMapObservation {
 
 export interface BodyMapFrame { readonly body: string; readonly radiusKm: number;
   /** The rotation model that defines longitude and latitude: the file, its sha256 and the body code read from it. */
-  readonly rotation: { readonly model: string; readonly sha256: string; readonly bodyCode: number } }
+  readonly rotation: { readonly model: string; readonly bodyCode: number } }
 
 export interface BodyMapGrid { readonly width: number; readonly height: number; readonly longitude: 'east-positive-from-0'; readonly rows: 'north-to-south' }
 
@@ -71,7 +71,7 @@ export interface BodyMapProduct {
   readonly schema: typeof BODY_MAP_SCHEMA;
   readonly definition: MeasurementDefinition; readonly frame: BodyMapFrame; readonly grid: BodyMapGrid;
   /** The FITS file and which of its extensions hold the value and its one-sigma uncertainty. */
-  readonly planes: { readonly file: string; readonly sha256: string; readonly value: string; readonly uncertainty: string };
+  readonly planes: { readonly file: string; readonly value: string; readonly uncertainty: string };
   /** A cell is NaN where the body was not seen within this emission angle, or where the measurement had no support. */
   readonly mask: { readonly maximumEmissionDegrees: number; readonly missing: 'NaN' };
   readonly observations: readonly BodyMapObservation[];
@@ -131,7 +131,7 @@ export function parseBodyMapProduct(value: unknown): BodyMapProduct {
     ...(wavelengthIntervalsMicrometres === undefined ? {} : { wavelengthIntervalsMicrometres }), method, source: requireString(definitionRecord.source, 'definition.source') };
   const frameRecord = requireRecord(record.frame, 'frame'), rotation = requireRecord(frameRecord.rotation, 'frame.rotation');
   const frame: BodyMapFrame = { body: requireString(frameRecord.body, 'frame.body'), radiusKm: requireFiniteNumber(frameRecord.radiusKm, 'frame.radiusKm'),
-    rotation: { model: requireString(rotation.model, 'rotation.model'), sha256: requireString(rotation.sha256, 'rotation.sha256'), bodyCode: requireFiniteNumber(rotation.bodyCode, 'rotation.bodyCode') } };
+    rotation: { model: requireString(rotation.model, 'rotation.model'), bodyCode: requireFiniteNumber(rotation.bodyCode, 'rotation.bodyCode') } };
   const gridRecord = requireRecord(record.grid, 'grid');
   if (gridRecord.longitude !== 'east-positive-from-0' || gridRecord.rows !== 'north-to-south') throw new TypeError('A body map grid runs east from 0 degrees, north to south.');
   const grid: BodyMapGrid = { width: requireFiniteNumber(gridRecord.width, 'grid.width'), height: requireFiniteNumber(gridRecord.height, 'grid.height'), longitude: 'east-positive-from-0', rows: 'north-to-south' };
@@ -161,7 +161,7 @@ export function parseBodyMapProduct(value: unknown): BodyMapProduct {
   });
   if (!observations.length) throw new TypeError('A body map names the observations it was made from.');
   const product: BodyMapProduct = { schema: BODY_MAP_SCHEMA, definition, frame, grid,
-    planes: { file: requireString(planesRecord.file, 'planes.file'), sha256: requireString(planesRecord.sha256, 'planes.sha256'), value: requireString(planesRecord.value, 'planes.value'), uncertainty: requireString(planesRecord.uncertainty, 'planes.uncertainty') },
+    planes: { file: requireString(planesRecord.file, 'planes.file'), value: requireString(planesRecord.value, 'planes.value'), uncertainty: requireString(planesRecord.uncertainty, 'planes.uncertainty') },
     mask: { maximumEmissionDegrees: requireFiniteNumber(maskRecord.maximumEmissionDegrees, 'maximumEmissionDegrees'), missing: 'NaN' }, observations,
     ...(record.combination === undefined ? {} : { combination: parseCombinationPolicy(record.combination) }) };
   if (observations.length > 1 && !product.combination) throw new TypeError('A map made from several observations states how they were combined.');
@@ -186,7 +186,7 @@ export function assertCombinable(definitions: readonly MeasurementDefinition[], 
   const digest = definitionDigest(first);
   definitions.forEach((definition, index) => { if (definitionDigest(definition) !== digest) throw new TypeError(
     `Map ${index} measures ${definition.quantity} (${definition.units}) by another definition than map 0's ${first.quantity} (${first.units}): the same quantity name and units are not the same measurement.`); });
-  frames.forEach((frame, index) => { const base = frames[0]!; if (frame.body !== base.body || frame.radiusKm !== base.radiusKm || frame.rotation.sha256 !== base.rotation.sha256 || frame.rotation.bodyCode !== base.rotation.bodyCode) throw new TypeError(`Map ${index} is in another body frame than map 0.`); });
+  frames.forEach((frame, index) => { const base = frames[0]!; if (frame.body !== base.body || frame.radiusKm !== base.radiusKm || frame.rotation.bodyCode !== base.rotation.bodyCode) throw new TypeError(`Map ${index} is in another body frame than map 0.`); });
   grids.forEach((grid, index) => { if (grid.width !== grids[0]!.width || grid.height !== grids[0]!.height) throw new TypeError(`Map ${index} is on another grid than map 0.`); });
   const times = observations.map(observation => observation.midTimeJd), spreadDays = Math.max(...times) - Math.min(...times);
   if (policy.time.rule === 'time-invariant' && first.timeDependence !== 'surface-property') throw new TypeError(`${first.quantity} is an instantaneous state; observations ${spreadDays.toFixed(1)} days apart cannot be combined as if time did not matter. Use mosaic-of-snapshots or same-epoch-only.`);

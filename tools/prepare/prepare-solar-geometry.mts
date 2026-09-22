@@ -358,7 +358,7 @@ export const BODY_POSITION_PROVENANCE = Object.freeze(${JSON.stringify(Object.fr
 
 // Canonical ICRF heliocentric primary states at this exact scene epoch. A
 // coordinate origin here need not have a visible surface or navigation marker.
-export const BODY_HELIOCENTRIC_STATES: Readonly<Record<string, { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; provenance: { model: string; epochJdTt: number; referenceFrame: string; target: number; center: number; source: string; sourcePath: string; sha256: string; solution?: string; limitations?: readonly string[]; timeQualification?: string; qualification?: readonly string[]; targetKind?: string } }>> = Object.freeze(${JSON.stringify(Object.fromEntries(primaryStates), null, 2)});
+export const BODY_HELIOCENTRIC_STATES: Readonly<Record<string, { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; provenance: { model: string; epochJdTt: number; referenceFrame: string; target: number; center: number; source: string; sourcePath: string; solution?: string; limitations?: readonly string[]; timeQualification?: string; qualification?: readonly string[]; targetKind?: string } }>> = Object.freeze(${JSON.stringify(Object.fromEntries(primaryStates), null, 2)});
 
 // A planet of another star is lit by that star. Its direction in the planet's own frame, which synchronous rotation holds
 // at longitude 0: what the lighting bake and the scene's light presentation read instead of the Sun's direction.

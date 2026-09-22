@@ -33,8 +33,6 @@ test('manual fit rotates around registered center and leaves original registrati
 test('invalid sky registration and unsafe source paths fail at JSON boundary', () => {
   const singular = fixture(); singular.images[0]!.imageToFrame = [1, 1, 1, 1, 0, 0];
   assert.throws(() => readObservations(singular), /Invalid observation/);
-  const missing = fixture(); missing.images[0]!.source.sha256 = 'not-a-source-hash';
-  assert.throws(() => readObservations(missing), /Invalid observation source/);
   const outside = fixture(); outside.images[0]!.layers.original.path = '../source.webp';
   assert.throws(() => readObservations(outside), /Invalid observation image layer/);
   const invalidFit = { x: NaN, y: 0, rotation: 0, scale: -1 };

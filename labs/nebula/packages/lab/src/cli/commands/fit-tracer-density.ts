@@ -2,7 +2,7 @@
 import {readFile,writeFile,mkdir} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {pathToFileURL} from 'node:url';
-import {sha256,verifiedBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import {sha256,sourceBytes} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import {fitForwardModel,evaluateForwardModel,transformForwardPoint,FORWARD_PARAMETER_KEYS,
  type ForwardParameters,type ParameterBounds,type FitOptions,type ForwardFit,type ForwardEvaluation} from '@cssearth/nebula-reconstruction/registration/forward-density-fit';
 import {fitRegionalWeights,applyRegionalWeights} from '@cssearth/nebula-reconstruction/registration/regional-density-weights';
@@ -16,7 +16,7 @@ export async function fitTracerDensity(recipePath:string){
  if(config.schema!=='cssearth-tracer-forward-fit@1')throw new TypeError('Unsupported fit recipe');
  const out=string(config.outputDirectory),output=resolve(root,out);
  if(!out.startsWith('.local/nebula-lab/')||relative(resolve(root,'.local/nebula-lab'),output).startsWith('..'))throw new TypeError('Output must stay in the local cache');
- await mkdir(output,{recursive:true});await verifiedBytes(root,pin(config.observedReceipt));
+ await mkdir(output,{recursive:true});await sourceBytes(root,pin(config.observedReceipt));
  const data=await forwardFitData(root,config),range=bounds(config.bounds),search=record(config.search);
  const options:FitOptions={maxSweeps:finite(search.maxSweeps),refinements:finite(search.refinements),initialStepFraction:finite(search.initialStepFraction)};
  if(!Array.isArray(config.starts)||!config.starts.length)throw new TypeError('Missing starts');const starts=config.starts.map(parameters);

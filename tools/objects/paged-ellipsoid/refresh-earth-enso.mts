@@ -79,18 +79,14 @@ export async function refreshEarthEnso(root = process.cwd(), now = new Date()) {
     const newInputs = [ { id: 'noaa-coraltemp-anomaly', path: map.path, origin: url },
       { id: 'noaa-coraltemp-checksum', path: 'science/coraltemp-latest.nc.md5', origin: `${url}.md5` } ];
     for (const input of newInputs) {
-      const record = { ...input, expectedSha256: sha256(requireUpdateBytes(updates, input.path)), expectedBytes: requireUpdateBytes(updates, input.path).length,
+      const record = { ...input,
         credit: 'NOAA Coral Reef Watch and NOAA Climate Prediction Center', license: 'US government public domain',
         licenseEvidence: ['https://www.ncei.noaa.gov/archive'], acquisition: `Analysis checked ${today}; native netCDF and publisher checksum retained. The recipe records the separately dated NOAA advisory and its URL.`,
         redistribution: 'Retained NOAA data with attribution', consumers: ['enso'] };
       const at = manifest.inputs.findIndex(entry => entry.id === input.id);
       if (at < 0) manifest.inputs.push(record); else manifest.inputs[at] = record;
     }
-    for (const collection of ['inputs', 'documents', 'generatedIntermediates'] as const) for (const entry of manifest[collection]) {
-      const changed = updates.get(entry.path);
-      if (changed) Object.assign(entry, { expectedSha256: sha256(changed), expectedBytes: changed.length });
-    }
-    // Parse and verify the complete scientific input before changing any pins.
+    // Parse and verify the complete scientific input before writing anything.
     await mkdir(resolve(source, 'science'), { recursive: true });
     for (const [path, value] of updates) {
       const destination = resolve(source, path), staging = `${destination}.enso-update`;

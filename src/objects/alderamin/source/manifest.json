@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "alderamin-pulkovo-spectrophotometry",
       "path": "photometry/pulkovo-table5.dat",
-      "expectedBytes": 935951,
-      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -211,8 +207,6 @@
     {
       "id": "alderamin-crosscheck-spectrum",
       "path": "photometry/crosscheck-kharitonov-catalog.dat",
-      "expectedBytes": 798312,
-      "expectedSha256": "e7cc5be688f5e901665debb10a296230ab8ff59b6288c7ed5965821217b0c28d",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/202/catalog.dat",
       "credit": "Kharitonov, Tereshchenko & Knyazeva (1988), Spectrophotometric Catalogue of Stars, Alma-Ata; VizieR III/202 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

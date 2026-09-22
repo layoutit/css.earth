@@ -14,7 +14,7 @@ import {createEnvelopeSampler,envelopeChromaticity,validateEnvelopeSettings,enve
 import {loadSimulationPrior} from '../../../cli/commands/simulation-prior.ts';
 import {parseCloudAppearance,type CloudAppearance} from '@cssearth/volume-core/materials/cloud-appearance';
 import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';
-import {sha256,verifiedBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import {sha256,sourceBytes,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type {EmissionFieldModel} from '@cssearth/volume-core/contracts/emission';
 import type {VolumeSlices} from '@cssearth/volume-core/contracts/volume-slices';
 import type {Vector3} from '@cssearth/volume-core/contracts/volume-recipe';
@@ -44,7 +44,7 @@ export async function bakeFiniteLens(root:string,input:FiniteLensInput,signal?:A
  const work=source.request,frame=model.request.frame;
  for(const key of ['referenceFrame','epochJdTt','originM','localToReferenceXyzw','metersPerUnit'])if(JSON.stringify(frame[key])!==JSON.stringify(work.frame[key]))throw Error('Source and model observer frames differ: '+key);
  if(Math.abs(model.geometry.observerDistanceKpc-source.geometry.observerDistanceKpc)>1e-8)throw Error('Observer distances differ');
- await verifiedBytes(root,work.source);await verifiedBytes(root,work.original);
+ await sourceBytes(root,work.source);await sourceBytes(root,work.original);
  const identity={method:'simulation-guided-finite-material@1',model:{resultId:input.modelResultId,provenanceSha256:sha256(modelBytes),fieldSha256:sha256(fieldBytes)},source:{resultId:input.sourceResultId,provenanceSha256:sha256(sourceBytes)},appearance,...(channelGain?{channelGain}:{}),...(toneCurve?{toneCurve}:{}),implementation:await implementationPins(root,['labs/nebula/packages/lab/src/server/workflows/density/finite-lens.ts','labs/nebula/packages/lab/src/cli/commands/simulation-prior.ts'])};
  const resultId=sha256(Buffer.from(JSON.stringify(identity))),id=`reconstruction-${resultId}`,output=resolve(base,resultId),staging=output+'.pending';
  try{const r=parseLabModelJson(await readFile(resolve(output,'result.json'),'utf8'));await verifyFiniteMaterialArtifacts(output,id);return r;}catch(e){if(!e||typeof e!=='object'||!('code'in e)||e.code!=='ENOENT')throw e;}

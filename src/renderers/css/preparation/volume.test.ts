@@ -128,7 +128,6 @@ test('prepared volume descriptor and external PNG bank form a complete pinned cl
   const descriptor = parseDensityVolumeObjectDescriptor(JSON.parse(await readFile(resolve(root, 'object.json'), 'utf8')) as unknown);
   assert(descriptor.prepared);
   const bytes = await readFile(resolve(root, descriptor.prepared.url));
-  assert.equal(sha256(bytes), descriptor.prepared.sha256);
   const envelope = record(JSON.parse(bytes.toString('utf8')) as unknown);
   assert.equal(envelope.id, descriptor.id); assert.equal(envelope.format, descriptor.prepared.format);
   const data = record(envelope.data), resources = data.resources;

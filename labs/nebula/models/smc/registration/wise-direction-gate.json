@@ -3,10 +3,8 @@
   "status": "fail",
   "pass": false,
   "cloudProcessingPerformed": false,
-  "imageSha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
   "source": {
     "path": ".local/nebula-lab/smc-intake/WISE2010-028.tiff",
-    "sha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
     "nativeDimensions": [
       5855,
       4596
@@ -37,7 +35,6 @@
   },
   "reference": {
     "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-    "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
     "nativeDimensions": [
       3827,
       3190

@@ -4,7 +4,7 @@ import type { JsonRecord, ObjectPreparation } from './index.js';
 
 const descriptor = (id = 'example') => ({
   schema: 'cssearth-object@1', id, type: 'layered-body', properties: { radiusKm: 2, layers: ['surface'] },
-  prepared: { format: 'example-artifact@1', url: '/prepared/example.json', sha256: 'a'.repeat(64) },
+  prepared: { format: 'example-artifact@1', url: '/prepared/example.json' },
 });
 
 const hash = (letter: string) => letter.repeat(64);
@@ -99,7 +99,7 @@ describe('object descriptor boundary', () => {
     { ...descriptor(), properties: { run: () => {} } },
     { ...descriptor(), properties: { sparse: Array(1) } },
     { ...descriptor(), properties: new Date() },
-    { ...descriptor(), prepared: { ...descriptor().prepared, sha256: 'short' } },
+    { ...descriptor(), prepared: { ...descriptor().prepared, sha256: 'a'.repeat(64) } },
     { ...descriptor(), prepared: { ...descriptor().prepared, url: ' ' } },
     { ...descriptor(), unexpected: true },
   ])('rejects malformed or unsupported descriptors %#', input => {

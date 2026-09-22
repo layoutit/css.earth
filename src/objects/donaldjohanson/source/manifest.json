@@ -47,8 +47,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -71,8 +69,6 @@
       "consumers": [
         "provenance"
       ],
-      "expectedBytes": 23416832,
-      "expectedSha256": "4de93b1d1e7a8d75dd551330b562924af47153a08caee0c3b4ee30f35e393f72",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -96,8 +92,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 6093152,
-      "expectedSha256": "88801e0ab935c52e0f0e06bab5604d919aab4af421b114618eb86dac01644bae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -122,8 +116,6 @@
         "rotation",
         "camera-reference"
       ],
-      "expectedBytes": 789535,
-      "expectedSha256": "744a6482837456a97cd1d59f1eda426660030e72f2a5bd646f6bd4136766c8e0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -146,8 +138,6 @@
       "consumers": [
         "llorri-observation"
       ],
-      "expectedBytes": 10526400,
-      "expectedSha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -290,8 +280,6 @@
       "consumers": [
         "llorri-observation"
       ],
-      "expectedBytes": 10526400,
-      "expectedSha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

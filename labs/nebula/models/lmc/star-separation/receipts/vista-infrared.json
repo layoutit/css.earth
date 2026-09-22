@@ -3,16 +3,12 @@
   "status": "inspectable-trial",
   "source": {
     "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
-    "sha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
     "nativeDimensions": [
       8954,
       10000
     ],
     "dtype": "uint8"
   },
-  "sourceSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
-  "recipeSha256": "c713b261eceae35123e9ce0180d69850e1bf2024a3410207e2c4d3ba91b17f20",
-  "scriptSha256": "0dfaa6eb36a60fb1543233f660430a312b2a766104692bbd77f840eaff18b96e",
   "parameters": {
     "detectionSigma": 2,
     "detectionThreshold": 0.025,
@@ -121,54 +117,43 @@
   ],
   "outputs": {
     "star-detections.json": {
-      "sha256": "ebb41080153d126204ac99adf46d0b5c0d2812d428ae0bcde310583e7789f931",
       "bytes": 62115955
     },
     "star-detection-map.png": {
-      "sha256": "27395f2a7243edfb48ef6b88f1c349af342b2f1789179dc619017535c1bf23ce",
       "bytes": 4152104
     },
     "diffuse.png": {
-      "sha256": "12bc69a795b0b04c06ed68f98573b42bf7433b7c97e53d78196245ae91fc74b1",
       "bytes": 185643274
     },
     "stars.png": {
-      "sha256": "386ee504ac490cb466024220d3577839661a2f4755ec210f4d011ea1f1460e6a",
       "bytes": 25803711
     },
     "star-mask.png": {
-      "sha256": "9f68bee1d72313d179a1e67ed7e3a170e5f96c5234fb01bb4361df6e1801bbdf",
       "bytes": 7313040
     },
     "accepted-stars.json": {
-      "sha256": "0fecf1f16208610934c8c57fc705f1881ddae6a928b7d21cf8bdae48e791116b",
       "bytes": 106624506
     },
     "comparison.png": {
-      "sha256": "92b58b5598dca9dc96ead4f582987ab21f6557107a3821aa7fd4fff3e65da672",
       "bytes": 8546992
     }
   },
   "elapsedSeconds": 417.817,
   "delivery": {
-    "sourceReceiptSha256": "f973d1ca92035e798e1f4f692a2fc9ac11ab0ee474b94d8ea6308112b73c6f42",
-    "scriptSha256": "3173cd9f6152ca0440ebbdddda652935ee6c582af6da3773d0419c23121fb198",
     "layers": [
       {
         "id": "diffuse",
         "label": "Diffuse trial",
         "texturePath": "labs/nebula/models/lmc-star-separation/prepared/vista-infrared-diffuse.webp",
         "widthPx": 3668,
-        "heightPx": 4096,
-        "sha256": "36a57735e4357255dfe553dc7761bcbf562789546fe6cfeb292598aea0973d80"
+        "heightPx": 4096
       },
       {
         "id": "stars",
         "label": "Compact residual",
         "texturePath": "labs/nebula/models/lmc-star-separation/prepared/vista-infrared-stars.webp",
         "widthPx": 3668,
-        "heightPx": 4096,
-        "sha256": "2d0cd15eeecf5e722a4fcc2ba7c41af9c92dadeb782521fe3ef13536880c7064"
+        "heightPx": 4096
       }
     ],
     "note": "Full source extent, reduced delivery sampling only. Original sky geometry and placement reused. No crop, tone change or 3D reconstruction."

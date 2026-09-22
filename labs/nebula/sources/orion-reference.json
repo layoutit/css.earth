@@ -15,7 +15,6 @@
     "releaseDate": "2006-01-11",
     "acquiredAt": "2026-09-08",
     "localCachePath": ".local/nebula-lab/orion-source/STScI-01EVT7Y95A2C07EEX772ZV79V3.tif",
-    "sha256": "dd5b957da63a9b74bc28aab639d025044338e60047264ccb2eb0554fadde881b",
     "bytes": 28894870,
     "widthPx": 4806,
     "heightPx": 3364,
@@ -125,7 +124,6 @@
   },
   "crop": {
     "outputPath": "labs/nebula/models/orion-structure-benchmark/source.png",
-    "sha256": "467b33eed47995f19a46cd379ecede7ba081e27d6a3088af0a0d96cb5e6d56b7",
     "bytes": 388431,
     "widthPx": 512,
     "heightPx": 512,

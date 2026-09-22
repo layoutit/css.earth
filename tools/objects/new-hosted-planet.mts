@@ -130,19 +130,18 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     introduction: { text: `${TODO}: two sentences, 180 characters at most.`, sources: [{ catalogueId: `${TODO}-introduction-source`, url: spec.paper, label: TODO, checked: TODO, locator: TODO, quote: TODO }] },
     datasets: { shape: { title: 'Shape only', detail: 'Published radius', summary: `${TODO}: what the sphere is and is not, 125 characters at most.` } } });
   put(`${o}/.gitignore`, '# No observation files: the sphere is the shared neutral gray.\n');
-  const pin = { expectedBytes: 0, expectedSha256: '0'.repeat(64) }, local = (reason: string) => ({ kind: 'local', reason });
+  const local = (reason: string) => ({ kind: 'local', reason });
   const catalogued = (entryId: string, index: number) => ({ kind: 'catalogued', references: [{ catalogueId: `source-${id}-${entryId}`, role: 'material', evidence: 'Origin and product identifier recorded on this manifest entry.' }] });
-  const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, ...pin, origin,
+  const preparation = (entryId: string, path: string, origin: string, consumers: string[]) => ({ id: `${id}-${entryId}`, path, origin,
     sourceBinding: local('Project-authored preparation record; published inputs retain their own identities and hashes.'),
     credit: 'cssEarth and the institutional sources identified in this record', license: 'Project-authored preparation record; referenced observations retain their source terms',
     acquisition: 'checked repository source', redistribution: 'checked authored source with embedded provenance', consumers });
   put(`${o}/source/manifest.json`, { schema: `css${id}-authoritative-sources@2`, inputs: [
-    { id: `${id}-observational-measurements`, path: 'measurements.json', ...pin, origin: spec.paper, credit: spec.paperCredit,
+    { id: `${id}-observational-measurements`, path: 'measurements.json', origin: spec.paper, credit: spec.paperCredit,
       license: 'Factual numerical measurements; source attribution retained', acquisition: 'Transcribed published measurements with their sources',
       redistribution: 'Factual parameter transcription only; no paper figures', consumers: ['shape-model'],
       sourceBinding: local('Measurements transcribed in this package with their sources; repinned when edited.') },
-    { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', expectedBytes: 862936, expectedSha256: '746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c',
-      origin: INTER_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'],
+    { id: 'inter-title-font', path: 'presentation/InterVariable.ttf', origin: INTER_URL, credit: 'Inter Project Authors / Rasmus Andersson', license: 'SIL Open Font License 1.1', licenseEvidence: ['presentation/LICENSE.INTER-OFL'],
       acquisition: 'Restore exact Inter font pin through source/preparation/acquisition.json.', redistribution: 'Permitted with the accompanying SIL Open Font License.',
       consumers: ['title'], sourceBinding: catalogued('inter-title-font', 1) },
     preparation('preparation-raster', 'preparation/raster.json', 'Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star', ['assets', 'lenses']),
@@ -150,11 +149,11 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
     preparation('preparation-celestial', 'preparation/celestial.json', 'Repository-authored celestial recipe: astrometric sky registration and the host star as the light', ['starfield', 'sky-sun']),
     preparation('preparation-presentation', 'preparation/presentation.json', 'Repository-authored presentation profile: composite mode', ['presentation']),
     preparation('physical-solar-system-recipe', 'presentation/solar-system.json', 'Repository-authored scene recipe: published radius, camera plan', ['scene'])],
-    generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', ...pin, origin: spec.paper,
+    generatedIntermediates: [{ id: 'neutral-disc-context-marker', path: 'presentation/context.png', origin: spec.paper,
       credit: 'Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts', license: 'Project-authored display derivative.', consumers: ['navigation'],
       recipe: { generator: 'tools/objects/new-hosted-planet.mts', inputs: [`${id}-observational-measurements`] }, generator: 'tools/objects/new-hosted-planet.mts',
       sourceBinding: local('A flat neutral gray disc, the marker of an unresolved surface.') }],
-    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path, ...pin,
+    documents: ['content/object.json', 'preparation/acquisition.json', 'preparation/navigation.json', 'preparation/rotation.json', 'presentation/LICENSE.INTER-OFL', 'presentation/title-mark.json'].map(path => ({ path,
       ...(path === 'content/object.json' ? { sourceBinding: local('Project-authored factsheet, dataset recipe and legend.') } : {}) })) });
   put(`${o}/README.md`, `# ${name}\n\n## Sources\n\n${TODO}: what is measured, what is not, and where each number comes from.\n\n## Evidence\n\n${TODO}\n\n## Known problems\n\n${TODO}\n\n[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](inventory.json) · [Credits](NOTICE.md)\n`);
   put(`${o}/NOTICE.md`, `# ${name} credits\n\n${TODO}: the sources this package redistributes and their terms.\n`);

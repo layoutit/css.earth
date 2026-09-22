@@ -5,7 +5,6 @@
     {
       "id": "lvdb-v1.1.1",
       "path": "lvdb/comb_all.csv",
-      "sha256": "7d2f231646bfee843e549818f9b3332929afd9c14d5eb450d59e051d07dcebd6",
       "bytes": 835074,
       "url": "https://github.com/apace7/local_volume_database/releases/download/v1.1.1/comb_all.csv",
       "citation": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1."
@@ -13,7 +12,6 @@
     {
       "id": "lvdb-author-inputs",
       "path": "lvdb/v1.1.1.tar.gz",
-      "sha256": "d4dfeb5812e357dad6766cf3426805a76511fe48aa4f0bbd52b17b693e2727f4",
       "bytes": 3949330,
       "url": "https://codeload.github.com/apace7/local_volume_database/tar.gz/refs/tags/v1.1.1",
       "citation": "Unmodified author repository v1.1.1, commit 72dabf7862bf9e9f1cbf6846e8c1a684fdec904c. Original per-object YAML and bibliography."
@@ -21,7 +19,6 @@
     {
       "id": "lvdb-license",
       "path": "lvdb/LICENSE",
-      "sha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
       "bytes": 7048,
       "url": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/LICENSE",
       "citation": "Pace LVDB CC0 1.0 dedication; original scientific papers retain their separate rights."
@@ -29,7 +26,6 @@
     {
       "id": "lvdb-bibliography",
       "path": "lvdb/lvdb.bib",
-      "sha256": "0044298753c9c937c94fc5813e4e6d75479158dae531f7d7dd852d3af4680fce",
       "bytes": 876966,
       "url": "https://raw.githubusercontent.com/apace7/local_volume_database/v1.1.1/table/lvdb.bib",
       "citation": "Original paper references for the catalogue measurements."
@@ -37,7 +33,6 @@
     {
       "id": "mcconnachie-table1-2019",
       "path": "mcconnachie/table1_OCT2019.pdf",
-      "sha256": "4430d15db2b425265a1becd20d0009cbc884b707bc6fd137e71d7505e006ea16",
       "bytes": 101033,
       "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/table1_OCT2019.pdf",
       "citation": "McConnachie (2012), AJ 144,4, DOI10.1088/0004-6256/144/1/4; author October2019 Table1 update."
@@ -45,7 +40,6 @@
     {
       "id": "mcconnachie-table1-text",
       "path": "mcconnachie/table1_OCT2019.txt",
-      "sha256": "0d3a83927f994b6b50fbcb778ace5f4232be13e817920b48c764d5900288afe1",
       "bytes": 14694,
       "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
       "citation": "Text extracted from the first seven pages of the original October2019 Table1 with pypdf5.9.0; numeric membership classifications unchanged."
@@ -53,7 +47,6 @@
     {
       "id": "mcconnachie-2021-audit",
       "path": "mcconnachie/NearbyGalaxies_Jan2021_PUBLIC.fits",
-      "sha256": "879c15cb0aee9357287fd32268276eff5b36501a11d0b434a5d58c461240502d",
       "bytes": 60480,
       "url": "https://cadc-west-01.canfar.net/vault/files/PANDAS/NearbyGals/NearbyGalaxies_Jan2021_PUBLIC.fits",
       "citation": "Author January2021 catalogue: independent audit input, no membership column; astrometry here comes from LVDB."
@@ -61,7 +54,6 @@
     {
       "id": "mcconnachie-2012-audit",
       "path": "mcconnachie/table1.dat",
-      "sha256": "26242954e8befa9159a0757cbbcbf0d40f14ffd188ef58fcf1ada0930d17fe39",
       "bytes": 13027,
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/table1.dat",
       "citation": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table."
@@ -69,7 +61,6 @@
     {
       "id": "mcconnachie-field-definitions",
       "path": "mcconnachie/ReadMe",
-      "sha256": "b8a381bc6567dbecbfa669edc911d15534033931563f13fa5b9874829c1c18ea",
       "bytes": 27242,
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/144/4/ReadMe",
       "citation": "Author/CDS original catalogue byte-column descriptions; n_Name meanings G/A/L/N."
@@ -79,7 +70,6 @@
       "path": "papers/Graczyk2020-SMC.pdf",
       "url": "https://arxiv.org/pdf/2010.08754",
       "citation": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors.",
-      "sha256": "6e3dd9d45208af0cefaec579deee84f5e6726bfb7e3c7a2257facacbf790711d",
       "bytes": 3328489,
       "references": [
         {
@@ -94,7 +84,6 @@
       "path": "mcconnachie/extract.py",
       "url": "https://www.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/en/community/nearby/",
       "citation": "Local deterministic extraction receipt, pypdf5.9.0; checks unchanged author PDF against the checked text. Not a scientific data source.",
-      "sha256": "d58169afd0c25564ee9075605309152791972651161117cff06fd38d7c0e1d84",
       "bytes": 756
     }
   ],

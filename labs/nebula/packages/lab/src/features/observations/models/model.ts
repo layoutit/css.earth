@@ -4,7 +4,7 @@ export type LayerId = 'original' | 'diffuse' | 'stars';
 export type ImageLayer = { path: string; width: number; height: number };
 export interface Observation {
   id: string; label: string;
-  source: { width: number; height: number; url: string; sha256: string; credit: string; page: string; stellarTreatment?: 'preserve'; coordinateOrigin?: 'authored-bright-star-seed' };
+  source: { width: number; height: number; url: string; credit: string; page: string; stellarTreatment?: 'preserve'; coordinateOrigin?: 'authored-bright-star-seed' };
   layers: { original: ImageLayer; diffuse?: ImageLayer; stars?: ImageLayer };
   imageToFrame: Matrix;
   registration: { status: 'verified' | 'publisher' | 'transferred'; matchedStars: number; rmsPixels: number; maxResidualPixels: number;
@@ -36,7 +36,7 @@ export function readObservations(value: unknown): Observations {
   const images = value.images.map((image: unknown): Observation => {
     if (!record(image) || !string(image.id) || ids.has(image.id) || !string(image.label) || !record(image.source) || !record(image.layers) || !matrix(image.imageToFrame) || !record(image.registration)) throw new Error('Invalid observation.');
     ids.add(image.id); const s = image.source, r = image.registration;
-    if (!positive(s.width) || !positive(s.height) || !string(s.url) || !s.url.startsWith('https://') || !string(s.page) || !s.page.startsWith('https://') || !string(s.sha256) || !/^[a-f0-9]{64}$/.test(s.sha256) || !string(s.credit)) throw new Error('Invalid observation source.');
+    if (!positive(s.width) || !positive(s.height) || !string(s.url) || !s.url.startsWith('https://') || !string(s.page) || !s.page.startsWith('https://') || !string(s.credit)) throw new Error('Invalid observation source.');
     if (!['verified', 'publisher', 'transferred'].includes(String(r.status)) || !finite(r.matchedStars) || r.matchedStars < 0 || !finite(r.rmsPixels) || r.rmsPixels < 0 || !finite(r.maxResidualPixels) || r.maxResidualPixels < 0 || (r.matches !== undefined && !Array.isArray(r.matches))) throw new Error('Invalid registration evidence.');
     if (s.stellarTreatment !== undefined && s.stellarTreatment !== 'preserve') throw new Error('Invalid stellar treatment.');
     if (s.coordinateOrigin !== undefined && s.coordinateOrigin !== 'authored-bright-star-seed') throw new Error('Invalid coordinate origin.');
@@ -46,7 +46,7 @@ export function readObservations(value: unknown): Observations {
       return { source: match.source, frame: match.frame, heldOut: match.heldOut === true };
     });
     return { id: image.id, label: image.label,
-      source: { width: s.width, height: s.height, url: s.url, page: s.page, sha256: s.sha256, credit: s.credit, ...(s.stellarTreatment === 'preserve' ? { stellarTreatment: 'preserve' } : {}), ...(s.coordinateOrigin === 'authored-bright-star-seed' ? { coordinateOrigin: 'authored-bright-star-seed' } : {}) },
+      source: { width: s.width, height: s.height, url: s.url, page: s.page, credit: s.credit, ...(s.stellarTreatment === 'preserve' ? { stellarTreatment: 'preserve' } : {}), ...(s.coordinateOrigin === 'authored-bright-star-seed' ? { coordinateOrigin: 'authored-bright-star-seed' } : {}) },
       imageToFrame: image.imageToFrame, layers: { original: layer(image.layers.original),
         ...(image.layers.diffuse === undefined ? {} : { diffuse: layer(image.layers.diffuse) }),
         ...(image.layers.stars === undefined ? {} : { stars: layer(image.layers.stars) }) },
@@ -71,7 +71,7 @@ export function readAdjustment(value: unknown): Adjustment {
 export function imageCorners(image: RegisteredImage, matrix: Matrix): Point[] {
   return [[0, 0], [image.source.width, 0], [0, image.source.height], [image.source.width, image.source.height]].map(([x, y]) => transform(matrix, [x!, y!]));
 }
-export const observationFitStorageKey = (path: string, image: { id: string; source: { sha256: string } }) => `nebula-observation-fit@1:${path}:${image.id}:${image.source.sha256}`;
-export function savedObservationFit(path: string, image: { id: string; source: { sha256: string } }): Adjustment {
+export const observationFitStorageKey = (path: string, image: { id: string; source: { url: string } }) => `nebula-observation-fit@1:${path}:${image.id}:${image.source.url}`;
+export function savedObservationFit(path: string, image: { id: string; source: { url: string } }): Adjustment {
   try { return readAdjustment(JSON.parse(localStorage.getItem(observationFitStorageKey(path, image)) ?? 'null')); } catch { return { ...unchanged }; }
 }

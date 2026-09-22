@@ -5,7 +5,6 @@
     "albedo": {
       "path": "phoebe_albedo_c.cub",
       "bytes": 9941545,
-      "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3",
       "shape": [
         1111,
         2222
@@ -48,7 +47,6 @@
     "bestmap": {
       "path": "phoebe_bestmap_c.cub",
       "bytes": 326427,
-      "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
       "shape": [
         180,
         360
@@ -101,7 +99,6 @@
     "numimg": {
       "path": "phoebe_numimg_c.cub",
       "bytes": 326413,
-      "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
       "shape": [
         180,
         360
@@ -234,7 +231,6 @@
     "radius": {
       "path": "phoebe_radius_c.cub",
       "bytes": 9942047,
-      "sha256": "9d30106e1acd7a85ba374b4f6cd8af0da8cf9569efab5ca95439d9975858817d",
       "shape": [
         1111,
         2222

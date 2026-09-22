@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 1150
       },
       "coverage": "This is the 2008 radar model and its adopted prograde spin interpretation. The original radar data did not uniquely determine the pole; later lightcurve studies favor a different, retrograde solution and a slightly longer period. The displayed attitude is model-specific and has arbitrary phase, not a current rotational ephemeris. No resolved optical surface map is supplied.",
-      "expectedBytes": 67284,
-      "expectedSha256": "ca9286eb9d89d384f3d7860a78a78ce94d7a22f6e5c5071f04349729684ada2d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 2440297,
-      "expectedSha256": "36447f3728e28c8a7b63a70617ad08b8e3a70e58f6920708b6fabedbb10fe1a5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
