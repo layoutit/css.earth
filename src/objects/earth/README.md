@@ -134,6 +134,13 @@ selection rule changed. The same adjusted base still feeds the clear surface, cl
 cutaway exterior, thumbnails, minimaps, the pole atlas and every texture level; the original
 source JPEGs remain unchanged. Dataset selection is manual at every zoom level.
 
+The two polar caps are rastered at their own 256-pixel cell size. They used to share the
+interior shells' four-times raster scale, so Safari backed each cap with a 1,024-pixel layer
+of 36 MB. On the iPhone 17 Pro simulator, during a four-drag Earth capture
+(`tools/performance/ios-capture.mts`, 2026-09-22), each cap layer is now 2.3 MB, and
+composited layers total 153.2 MB, down from 220.7 MB. In the same session, applying the
+256-pixel caps to the live page left the rendered frame pixel-for-pixel identical.
+
 Visible color and Cloud coverage share the adjusted July surface. Cloud coverage adds the
 archival NASA cloud TIFF using the existing alpha recipe. The sources are not simultaneous
 observations or live weather.
