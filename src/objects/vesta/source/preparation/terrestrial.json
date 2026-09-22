@@ -13,6 +13,20 @@
     "reportMissingPixels": true,
     "observations": [
       {
+        "id": "hamo",
+        "validity": {
+          "kind": "image-monochrome-no-data",
+          "noData": 0,
+          "centerLongitude": 180,
+          "grid": {
+            "pixelsPerDegree": 74.176493209759,
+            "sampleOffset": 13351,
+            "lineOffset": 6675
+          },
+          "labelPath": "reference/hamo-clear.lbl"
+        }
+      },
+      {
         "id": "normal",
         "validity": {
           "kind": "image-rgb-no-data",
@@ -27,7 +41,8 @@
         "nativePhotographicSampling": {
           "samplesPerAxis": 2,
           "quality": 95
-        }
+        },
+        "monochromeBase": "hamo"
       },
       {
         "id": "surface",
@@ -41,7 +56,8 @@
             "lineOffset": 20027
           },
           "labelPath": "reference/lamo-clear.lbl"
-        }
+        },
+        "monochromeBase": "hamo"
       },
       {
         "id": "ratios",
