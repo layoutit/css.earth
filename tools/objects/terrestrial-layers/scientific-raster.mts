@@ -215,18 +215,21 @@ export function sourceSurfaceBrightness({ point, normal }: {point:readonly numbe
 }
 
 /**
- * A numeric palette is looked up through this many steps across its declared range. 256 steps are finer than any legend
- * stop and finer than the 8-bit channels the surface is encoded in, and they bound a numeric surface to 256 colours, which
- * trims its lossless encoding by the noise between steps (baked 2026-09-22 against the 1024-step lookup: Moon heat anomalies
- * 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, midnight temperature 13.98 → 13.74 MB, Ceres ammonium band 13.11 → 12.65 MB;
- * mean channel error 0.14 to 0.34 of 255, no texel off by more than 8). Relief shading multiplies these colours afterwards.
+ * A numeric palette on a lossless (nearest-sampled) surface is looked up through 256 steps across its declared range: finer
+ * than any legend stop and than the 8-bit channels, and it trims the noise between steps that lossless WebP pays for (baked
+ * 2026-09-22 against 1024 steps: Moon heat anomalies 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, Titan interpolated
+ * 2.59 → 1.19 MB). A lossy surface keeps 1024 steps: its size does not depend on colour count, and the flat one-level steps
+ * a coarser ramp leaves on smooth slopes raised the q88 encoder's own error on Miranda's elevation from 41 to 66 at its worst
+ * texel (raw pixels differ by at most 2). Relief shading multiplies the looked-up colour afterwards.
  */
-export const PALETTE_STEPS = 256;
+export const LOSSLESS_PALETTE_STEPS = 256, LOSSY_PALETTE_STEPS = 1024;
+export const paletteSteps = (lens: SciencePalette) => lens.displaySampling === 'nearest' ? LOSSLESS_PALETTE_STEPS : LOSSY_PALETTE_STEPS;
 export function paletteLookup(lens: SciencePalette) {
   const { minimum, maximum } = lens;
   if (minimum === undefined || maximum === undefined || !(maximum > minimum)) throw new TypeError('A numeric palette needs a declared range.');
-  const palette = Array.from({ length: PALETTE_STEPS }, (_, i) => colorForValue(minimum + i / (PALETTE_STEPS - 1) * (maximum - minimum), lens));
-  return (value: number) => palette[Math.round(Math.max(0, Math.min(1, (value - minimum) / (maximum - minimum))) * (PALETTE_STEPS - 1))]!;
+  const steps = paletteSteps(lens);
+  const palette = Array.from({ length: steps }, (_, i) => colorForValue(minimum + i / (steps - 1) * (maximum - minimum), lens));
+  return (value: number) => palette[Math.round(Math.max(0, Math.min(1, (value - minimum) / (maximum - minimum))) * (steps - 1))]!;
 }
 
 export function createSourceSurfacePainter(lens: SciencePalette) {
