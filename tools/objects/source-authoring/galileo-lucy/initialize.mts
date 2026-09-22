@@ -1,14 +1,14 @@
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
+import {refreshSourceRecord} from '../../../sources/source-authoring-templates.mts';
 import assert from 'node:assert/strict';
-import { parseAuthoringSolid, parseAuthoringManifest, parseAuthoringDescriptor } from '../../../source-authoring-templates.mts';
+import { parseAuthoringSolid, parseAuthoringManifest, parseAuthoringDescriptor } from '../../../sources/source-authoring-templates.mts';
 import { shape, text, number, array } from '../../terrestrial-layers/source-records.mts';
-import { requireRecord } from '../../../source-values.mts';
+import { requireRecord } from '../../../sources/source-values.mts';
 const parseNavigation = (v: unknown) => { const raw=requireRecord(v); return {...raw,source:shape({path:text})(raw.source)}; };
 const parseSnapshotRecipe=shape({size:number,longitudeDegrees:number,latitudeDegrees:number,ambient:number,diffuse:number,inputs:array(text)});
 import {bodies} from './catalog.mts';
 import {readFile,writeFile,mkdir,readdir} from 'node:fs/promises';import {resolve} from 'node:path';import {createHash} from 'node:crypto';
-import * as fontkit from 'fontkit';import {createPlanetTitleSource} from '../../../../tools/prepare-planet-title-sources.mts';import {PLANET_TITLE_RECIPE} from '../../../../src/platform/planet-title-recipe.mts';
+import * as fontkit from 'fontkit';import {createPlanetTitleSource} from '../../../prepare/prepare-planet-title-sources.mts';import {PLANET_TITLE_RECIPE} from '../../../../src/platform/planet-title-recipe.mts';
 import {loadRadialTerrain} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';import {prepareSolidRasters} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';import {renderRadialSnapshot} from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 const read=async (p: string): Promise<unknown>=>JSON.parse(await readFile(p,'utf8')),write=async(p: string,o: unknown)=>writeFile(p,JSON.stringify(o,null,2)+'\n'),pin=(b: Uint8Array)=>({expectedBytes:b.length,expectedSha256:sha256(b)});
 const loadedFont=fontkit.openSync('src/objects/dactyl/source/presentation/InterVariable.ttf');

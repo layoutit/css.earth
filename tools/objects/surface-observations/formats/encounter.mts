@@ -4,7 +4,7 @@ import { sha256 } from '../../../../src/platform/sha256.mts';
 import type { ObservationCamera, ObservationFrame, ObservationImage, SurfaceObservationFormat } from '../contract.mts';
 import type { SourceMesh } from '../../terrestrial-layers/contracts.mts';
 import { array, decodeProfile, number, optional, shape, text, publishedOr, parseLevelMatching, parseSurfaceGeometry, parseEncounterSourceControl, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord } from '../../../source-values.mts';
+import { requireArray, requireRecord } from '../../../sources/source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeEncounterFits } from '../../terrestrial-layers/encounter-fits.mts';

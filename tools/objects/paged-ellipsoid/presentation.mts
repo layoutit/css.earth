@@ -1,6 +1,6 @@
 import type { prepareTextureLevels, TextureLevelConfiguration } from './texture-levels.mts';
-import type { PreparedNode } from '../../prepared-node-tree.mts';
-import type { MaterialSourceTrack } from '../../prepare-materials.mts';
+import type { PreparedNode } from '../../prepared/prepared-node-tree.mts';
+import type { MaterialSourceTrack } from '../../prepare/prepare-materials.mts';
 import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contract.mts';
 import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
 import type { ShellObjectControls } from '../../../site/shell-contract-types.mts';
@@ -10,7 +10,7 @@ import type { prepareVectorOverlay } from '../geographic-pages/vector-overlay.mt
 import type { preparePinnedGlobalWmts } from '../geographic-pages/pinned-hierarchy.mts';
 import type { CameraPlan } from '../../../src/renderers/css/navigation/types.ts';
 import type { SurfaceBankLenses } from './contracts.mts';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireRecord, requireString } from '../../sources/source-values.mts';
 type PagedPlan = ReturnType<typeof preparePagedEllipsoidScene>['scene'];
 type MaterialId = 'lighting' | 'atmosphere';
 export type PagedLens = SurfaceBankLenses['controls'][number] & { maximumZoom: number; polesUrl?: string;
@@ -24,9 +24,9 @@ export interface PagedPresentationInput { config: PresentationConfiguration; pla
 const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
-import { prepareCssomDeclarationReads } from "../../prepared-cssom.mts";
-import { createPreparedNodeTree } from "../../prepared-node-tree.mts";
-import { prepareMaterialTracks } from "../../prepare-materials.mts";
+import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
+import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
+import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";
 
 export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, noise, textureLevels, controls }: PagedPresentationInput) {

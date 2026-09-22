@@ -1,7 +1,7 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
-import { hasErrorCode, requireString } from '../source-values.mts';
+import { hasErrorCode, requireString } from '../sources/source-values.mts';
 import type { JsonRecord, TraceEvent, TraceSelection } from './trace-model.mts';
 import { arrayOf, errorMessage, isFiniteNumber, isInstantPhase, recordOf } from './trace-model.mts';
 import type { DomSnapshot } from './trace-invalidations.mts';

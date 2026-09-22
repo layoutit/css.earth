@@ -120,7 +120,7 @@ native submits; a small form binding refreshes that context after interactive
 camera movement. Feature flights and continuous camera input require JavaScript
 in the normal site.
 
-`tools/search-server.mts` calls the same routing and request handler in Astro dev
+`tools/cli/search-server.mts` calls the same routing and request handler in Astro dev
 and `pnpm preview`. `netlify.toml` declares the production build, Node function
 and edge route. Deployment is deferred: before launch, verify a real Netlify
 Deploy Preview, prepared asset restoration, query routing and the initial page
@@ -135,7 +135,7 @@ After building the packages and renderer, check page metadata with:
 
 ```sh
 node --test site/test/object-page-data.test.mts
-node --test tools/serialize-prepared-scene.test.mts
+node --test tools/prepared/serialize-prepared-scene.test.mts
 node `site/test/rendered-page.test.mts` http://127.0.0.1:4210
 node --test site/test/search-response.test.mts
 node `site/test/rendered-page.test.mts` http://127.0.0.1:4210

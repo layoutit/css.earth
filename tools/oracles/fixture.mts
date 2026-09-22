@@ -8,7 +8,7 @@ import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
 
 export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
 export interface OracleSample { index: number; value: number }

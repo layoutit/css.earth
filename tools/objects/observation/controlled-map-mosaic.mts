@@ -1,6 +1,6 @@
 import {resolve,relative,isAbsolute} from 'node:path';
 import {fromFile} from 'geotiff';
-import {requireArray,requireFiniteNumber,requireRecord,requireString} from '../../source-values.mts';
+import {requireArray,requireFiniteNumber,requireRecord,requireString} from '../../sources/source-values.mts';
 import {numericRasterBands} from '../terrestrial-layers/source-records.mts';
 import {linearToSrgb,srgbToLinear} from '../color-transfer.mts';
 

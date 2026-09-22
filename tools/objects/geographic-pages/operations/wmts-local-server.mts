@@ -2,7 +2,7 @@ import { open, readFile, stat } from "node:fs/promises";
 import {readFileSync} from 'node:fs';
 import type { ViteDevServer, PreviewServer, Plugin } from 'vite';
 import { parseCitySource } from '../source-records.mts';
-import { hasErrorCode } from '../../../source-values.mts';
+import { hasErrorCode } from '../../../sources/source-values.mts';
 import {createOperationContext} from './context.mts';
 
 // A local mirror is optional. A fresh checkout reads the same immutable

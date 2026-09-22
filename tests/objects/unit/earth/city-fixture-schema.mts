@@ -1,7 +1,7 @@
 import { array, boolean, number, optional, shape, text, parseAddress, parseAssetReference,
   parseBounds, parseIndexHead } from '../../../../tools/objects/geographic-pages/source-records.mts';
 import type { GeographicBounds, PolarBounds } from '../../../../tools/objects/geographic-pages/contracts.mts';
-import { requireArray, requireRecord } from '../../../../tools/source-values.mts';
+import { requireArray, requireRecord } from '../../../../tools/sources/source-values.mts';
 
 // Decode the legacy local raster fixture at its filesystem boundary. Parent
 // nodes have geometry but no image; published leaves carry the complete raster.

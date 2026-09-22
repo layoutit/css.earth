@@ -16,9 +16,9 @@ import { access, cp, mkdir, readFile, readdir, rm, stat, writeFile } from 'node:
 import { dirname, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { readFitsHdu } from '../../fits.mts';
-import { readPdfImage } from '../../pdf-image.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { readFitsHdu } from '../../fits/fits.mts';
+import { readPdfImage } from '../../fits/pdf-image.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { measurePublishedComparison, writeComparisonEvidence } from '../published-comparison.mts';
 import { horizonsCommand, horizonsTables, tableInput } from '../sphere-horizons.mts';
 import { COMPARISON_SPEC_FILE, COMPARISON_SPEC_SCHEMA, figureBands, figureCells, parseComparisonSpec, type Raster } from '../surface-observations/published-comparison.mts';

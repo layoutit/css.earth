@@ -1,7 +1,7 @@
 /** Numerical reproduction of an aligned image or cube, not a test of the underlying astrophysics.
  * The absolute floor is the archive's median nonzero brightness, so noise near zero cannot
  * dominate the ratio. Both products must cover exactly the same samples. */
-import { requireRecord } from '../../source-values.mts';
+import { requireRecord } from '../../sources/source-values.mts';
 export function sampleAgreement(value: unknown, kind: 'cube' | 'image' = 'cube') {
   const samples = requireRecord(value, 'comparison samples');
   const finite = (key: string) => typeof samples[key] === 'number' && Number.isFinite(samples[key]);

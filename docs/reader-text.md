@@ -57,6 +57,6 @@ Warnings are for the reviewer and never block:
   summary and the mission, facility and note cards beside it. This check reads
   `site/prepared-facilities.json`, so run `pnpm prepare:facilities` first.
 
-`tools/prepare-text.test.mts` runs the check on every registered body.
+`tools/prepare/prepare-text.test.mts` runs the check on every registered body.
 `site/test/rendered-page.test.mts` measures the rendered lines at desktop and
 phone widths.

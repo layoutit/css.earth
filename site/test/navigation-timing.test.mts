@@ -2,7 +2,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { performance, PerformanceMark, PerformanceMeasure } from 'node:perf_hooks';
 import { SourceEvidence } from './source-evidence-values.mts';
-import { requireFiniteNumber } from '../../tools/source-values.mts';
+import { requireFiniteNumber } from '../../tools/sources/source-values.mts';
 import { createNavigationTiming } from '../navigation-timing.mts';
 
 test('navigation timing records phases once and bounds retained entries without clearing unrelated timing', () => {

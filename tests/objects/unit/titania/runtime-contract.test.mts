@@ -1,8 +1,8 @@
 // Draft replacement for the retired terrestrial-lane unit tests of Titania
 // (modelled on tests/objects/unit/pluto/runtime-contract.test.mts). Decoder-level tests that only read the
 // source files and tools/objects/terrestrial-layers decoders stay valid and are kept beside this file.
-import { requireRecord } from '../../../../tools/source-values.mts';
-import { required } from '../../../../tools/test-values.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/objects/titania/prepared/runtime.json" with { type: "json" };
@@ -13,7 +13,7 @@ import text from "../../../../src/objects/titania/prepared/text.json" with { typ
 import controls from "../../../../src/objects/titania/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
 const LENS_IDS = ["normal","elevation","geology"];
 

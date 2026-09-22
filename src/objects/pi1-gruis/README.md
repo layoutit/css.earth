@@ -22,7 +22,7 @@
 - `tests/objects/unit/pi1-gruis/default-view.test.mts` derives what the default camera shows from the runtime's own camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up, the Earth direction toward the viewer. Preparation refuses a default view more than 25 degrees from a photograph lens's sub-observer point.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/pi1-gruis/` with the default camera: the photographed hemisphere faces the camera with the display axis up, the halo plate behind it and the legend in the panel.
 - Preparation accepted 1,433 pixels with geometry; 12.8 percent of the beam-convolved flux lies outside the fitted disc and is drawn on the off-limb plate.
-- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ff9a41 is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
+- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ff9a41 is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
 
 ## Known problems
 

@@ -1,4 +1,4 @@
-import {requireRecord,requireFiniteNumber} from '../../source-values.mts';
+import {requireRecord,requireFiniteNumber} from '../../sources/source-values.mts';
 import {shape,text,number,array,optional} from '../terrestrial-layers/source-records.mts';
 const parseGltf=shape({meshes:array(shape({primitives:array(shape({mode:optional(number),attributes:shape({POSITION:number,TEXCOORD_0:number}),indices:number,material:number}))})),nodes:array(requireRecord),
   accessors:array(shape({bufferView:number,type:text,componentType:number,count:number,byteOffset:optional(number),sparse:optional(requireRecord)})),

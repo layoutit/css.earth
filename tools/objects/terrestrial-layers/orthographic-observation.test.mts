@@ -1,4 +1,4 @@
-import { required } from '../../test-values.mts';
+import { required } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {orthographicPoint} from './orthographic-observation.mts';

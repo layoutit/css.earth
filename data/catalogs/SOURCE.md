@@ -72,7 +72,7 @@ they do not derive it).
 
 ## Sync and integrity
 
-`node tools/sync-upstream.mts` re-copies these catalogues together with
+`node tools/ci/sync-upstream.mts` re-copies these catalogues together with
 `packages/astronomy` and `packages/catalog` from `UPSTREAM_ROOT` (default: the
 local galaxio checkout) in one idempotent run, and regenerates `upstream.json`
 and `manifest.json`. `tools/sync-upstream.test.mjs` (run by

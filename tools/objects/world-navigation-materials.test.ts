@@ -1,7 +1,7 @@
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/validation/index.js';
-import { requireRecord } from '../source-values.mts';
-import { required } from '../test-values.mts';
+import { requireRecord } from '../sources/source-values.mts';
+import { required } from '../contract/test-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

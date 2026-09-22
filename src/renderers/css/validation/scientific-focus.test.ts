@@ -7,7 +7,7 @@ import type {ObjectControls} from '../runtime/object-contract.js';
 import {prepareScientificNavigation} from '../../../../tools/objects/terrestrial-layers/scientific-focus.mts';
 import {preparedScenePitch} from '@cssearth/engine';
 import {requireCamera} from './camera-controls.js';
-import {requireRecord,requireString} from '../../../../tools/source-values.mts';
+import {requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 
 // This small prepared carrier is independent of the focus helper's frame math.
 // No body raster preparation, browser, or complete runtime document is needed.

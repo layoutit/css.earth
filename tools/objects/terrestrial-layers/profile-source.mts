@@ -1,5 +1,5 @@
 import { refuseAuthoredCameraAngles } from '../../../src/platform/default-camera.mts';
-import {requireRecord} from '../../source-values.mts';
+import {requireRecord} from '../../sources/source-values.mts';
 import {shape,number,text,optional,nullable,array,boolean,dictionary,choice,parseTransform,parseSciencePalette} from './source-records.mts';
 import {parseSolidScience,parseSolidRasterConfig} from './solid-source.mts';
 import {parseRadialSource} from './radial-source.mts';

@@ -10,7 +10,7 @@ import { resolve, dirname } from 'node:path';
 import os from 'node:os';
 import { chromium } from 'playwright';
 import type { Browser, CDPSession, Page } from 'playwright';
-import { previewSite } from '../preview.mts';
+import { previewSite } from '../cli/preview.mts';
 import { errorMessage, recordOf } from './trace-model.mts';
 
 // A real, adaptive input journey. No request interception, cache disabling,

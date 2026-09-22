@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { test } from "node:test";
-import { required } from "../../../../tools/test-values.mts";
+import { required } from "../../../../tools/contract/test-values.mts";
 import { parseInterpreterRecipe } from "../../../../tools/objects/observation/interpret.mts";
 import { loadPdsFloatMap } from "../../../../tools/objects/terrestrial-layers/pds-float-map.mts";
 

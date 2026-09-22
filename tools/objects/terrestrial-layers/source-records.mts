@@ -1,4 +1,4 @@
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 export type Decoder<T> = (value: unknown) => T;
 export const text = requireString;
 export const number = requireFiniteNumber;

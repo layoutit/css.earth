@@ -13,7 +13,7 @@ import {worldPositionToCss} from '@layoutit/polycss';
 import {intersectViewRayWithEllipsoid,normalizeVector,dotVector,rotateSequence} from '../material-composition/ellipsoid.mts';
 import {writeMaterialAtlasTile,sampleRgbaBilinear} from '../material-composition/raster.mts';
 export {writeMaterialAtlasTile} from '../material-composition/raster.mts';
-import {optimizePreparedDisplayLosslessWebp,optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared-webp.mts';
+import {optimizePreparedDisplayLosslessWebp,optimizePreparedQ75Webp,PREPARED_Q75_WEBP_ENCODING} from '../../prepared/prepared-webp.mts';
 
 const clamp=(value: number,low=0,high=1)=>Math.max(low,Math.min(high,value));
 const scale=(vector: ReadonlyVector3,value: number): Vector3=>[vector[0]*value,vector[1]*value,vector[2]*value];

@@ -23,7 +23,7 @@ import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { pathToFileURL } from 'node:url';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 export const DESCRIPTOR = resolve(import.meta.dirname, 'toolchain.json');

@@ -18,7 +18,7 @@ const pin = 'a'.repeat(64);
 const provenance = (objectId: string): ProvenanceDocument => ({
   schema: 'cssearth-object-provenance@3', objectId, basis: 'recovered',
   manifest: { path: 'source/manifest.json', sha256: pin },
-  generator: { path: 'tools/prepare-volume-provenance.mts', sha256: pin, bindingsSha256: pin },
+  generator: { path: 'tools/prepare/prepare-volume-provenance.mts', sha256: pin, bindingsSha256: pin },
   sources: [{ id: 'image', kind: 'source-input', path: 'observed.fits', origin: 'https://example.org/image',
     credit: 'Observatory', acquisition: 'Pinned source image', sha256: pin, bytes: 1, dependencies: [], verification: 'retained-pin',
     sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'observation', role: 'material', evidence: 'Native image identity' }] },

@@ -3,7 +3,7 @@ import {shape,array,text,number} from '../../../../tools/objects/geographic-page
 const nullableText = (value: unknown): string | null => value === null ? null : text(value);
 import {parseMurReceipt} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';
 import {earthPreparationConfig as config} from './prepared-fixture.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import sharp from 'sharp';

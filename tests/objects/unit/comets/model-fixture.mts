@@ -1,5 +1,5 @@
 import { array, boolean, number, shape, text } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
-import { requireRecord } from '../../../../tools/source-values.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
 
 const vector = (input: unknown): number[] => {
   const value = array(number)(input);

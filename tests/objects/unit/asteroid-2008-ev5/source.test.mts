@@ -6,7 +6,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireProjectionAnchors,requireRadialTestConfig,requireRotation} from '../radial-fixture.mts';
-import {requireArray,requireRecord,requireString} from '../../../../tools/source-values.mts';
+import {requireArray,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-2008-ev5/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('2008 EV5 retains original source pins and acquisition closure',async()=>{

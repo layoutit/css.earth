@@ -27,7 +27,7 @@ import { createHash } from 'node:crypto';
 import { createReadStream, rmSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { eurekaToolchain, type EurekaToolchain } from './toolchain.mts';
 import { freeMemoryPercent, mastFile, toolchainPython } from './mast.mts';
 

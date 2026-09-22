@@ -21,7 +21,7 @@ import { request } from 'node:https';
 import { dirname, resolve } from 'node:path';
 import { pipeline } from 'node:stream/promises';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { tapRows } from '../astronomy-packages/client.mts';
 
 export const KOA = 'https://koa.ipac.caltech.edu';

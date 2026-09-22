@@ -1,4 +1,4 @@
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import {readFile} from 'node:fs/promises';
 import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/pds-radial-table.mts';
 export async function evaluateRegistration() {

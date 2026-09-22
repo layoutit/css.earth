@@ -5,7 +5,7 @@ import PreparedObjectPanel from './PreparedObjectPanel.astro';
 import { loadObjectPageData } from '../object-page-data.mts';
 import { objectPageStyles } from '../object-page-contract.mts';
 import shellCss from '../planet-shell.css?inline';
-import { loadPreparedSceneMarkup } from '../../tools/load-prepared-scene.mts';
+import { loadPreparedSceneMarkup } from '../../tools/prepared/load-prepared-scene.mts';
 import { rewriteSceneCss, resolveSceneAddressesDeep, withPreparedAssetOrigin } from '../asset-origin.mts';
 
 interface Props { objectId: string; navigation?: boolean; }

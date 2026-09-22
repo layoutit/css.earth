@@ -17,7 +17,7 @@ import { sampleAgreement } from './sample-agreement.mts';
 import { readdir, readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { hasErrorCode, isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { mastRequest } from './mast.mts';
 import { bandMode, JWST_BANDS } from './imaging/bands.mts';
 

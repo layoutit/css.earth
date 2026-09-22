@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { chromium } from 'playwright';
-import { previewSite } from '../preview.mts';
-import { readJsonSource, requireArray, requireFiniteNumber, requireRecord } from '../source-values.mts';
+import { previewSite } from '../cli/preview.mts';
+import { readJsonSource, requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
 import { recordOf } from './trace-model.mts';
 
 // The baseline capture report is external JSON; page diagnostics are read through

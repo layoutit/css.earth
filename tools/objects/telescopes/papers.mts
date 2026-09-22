@@ -6,7 +6,7 @@
  * whether the paper made the product and which frames it used. */
 import { mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { loadTargetCatalogue } from './query.mts';
 import { resolveTarget } from './targets.mts';
 

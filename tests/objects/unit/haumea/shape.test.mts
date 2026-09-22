@@ -1,4 +1,4 @@
-import {requireRecord} from '../../../../tools/source-values.mts';
+import {requireRecord} from '../../../../tools/sources/source-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';

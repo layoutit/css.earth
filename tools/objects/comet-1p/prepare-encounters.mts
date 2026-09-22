@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
-import { readFitsHeader } from '../../fits.mts';
+import { readFitsHeader } from '../../fits/fits.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';

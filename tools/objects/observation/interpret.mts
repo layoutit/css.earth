@@ -12,12 +12,12 @@ import { createSolarSynopticInterpreter, type SynopticRecipe } from './solar-syn
 import { array, literal, number, object, optional, parse, string, tuple, union, nil } from '../material-composition/data-schema.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
-import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { loadSurfaceObservation, type SurfaceObservation } from '../surface-observations/index.mts';
 import { requireTerrainMesh, sampleRadialTriangles } from '../terrestrial-layers/radial-terrain.mts';
 import { loadPdsRadiusTable } from '../terrestrial-layers/obj-shape.mts';
 import { readReconstruction } from '../interferometry/beam-convolve.mts';
-import { skyDisplayRaster } from '../../fits-sky.mts';
+import { skyDisplayRaster } from '../../fits/fits-sky.mts';
 import { offLimbPlate } from './off-limb-plate.mts';
 import { readObservation } from '../terrestrial-layers/solid-raster.mts';
 import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validateScienceQualityMasks } from '../terrestrial-layers/scientific-raster.mts';

@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { OBJECTS, SCENE_OBJECTS, requireObject, requireSceneObject } from '../objects.mts';
 import { objectAdapter } from '../object-adapter.mts';
 import { PLANET_SEARCH_OBJECTS } from '../planet-search-objects.mts';
-import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare-navigation-destinations.mts';
+import { readPreparedFocusObjects, prepareSceneDistance, prepareFocusObject } from '../../tools/prepare/prepare-navigation-destinations.mts';
 import { normalizeDestinationQuery } from '../destination-search.mts';
 import { parsePreparedGalaxyCatalog, resolveSpatialCitation } from '@cssearth/catalog';
 import { parseNavigationDistance, distanceDescription } from '../navigation-distance.mts';

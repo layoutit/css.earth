@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeLlorri, sipPixel } from './llorri-geo.mts';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 
 /** astropy as the oracle for the L'LORRI FITS reader and the TAN-SIP distortion (Donaldjohanson). */
 const fixture = await readOracleFixture('fits/llorri.json');

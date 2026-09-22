@@ -7,7 +7,7 @@ import {readAuthoredRotation} from '../../../../tools/objects/authored-rotation.
 import {loadObjShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireObjectRotationReference,requireRadialTestConfig} from '../radial-fixture.mts';
-import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/source-values.mts';
+import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/apophis/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Apophis retains original source pins and acquisition closure',async()=>{

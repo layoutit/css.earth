@@ -8,7 +8,7 @@ import world from '../../src/objects/sun/prepared/world-context.json' with { typ
 import catalogue from '../source/moon-catalogues.json' with { type: 'json' };
 import { parseMoonLabels, projectMoonLabels } from '../catalogue-moon-labels.mts';
 import { hasProperMoonName, prepareBodyMoons } from '../prepare-body-moons.mts';
-import { parseMoonVector } from '../../tools/prepare-moon-labels.mts';
+import { parseMoonVector } from '../../tools/prepare/prepare-moon-labels.mts';
 import { sourceArray, sourceObject, sourceText } from '../../src/platform/source-catalog.mts';
 import { minorMoonOrbitIds } from '../moon-orbit-policy.mts';
 

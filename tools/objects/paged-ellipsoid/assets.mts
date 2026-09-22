@@ -8,7 +8,7 @@ import type {InteriorSource} from './scene-contract.mts';
 import type {createAtmospherePreparation} from './atmosphere.mts';
 import type {createPagedSurfaceRaster, NativeDeepOceanFill, NativePhotographicCloudComposite, PagedSurfaceRasterPlan} from './surface-raster.mts';
 import {applyDeepOceanFill, clearDeepOceanFillCache, readDeepOceanFill, resizeDeepOceanFill} from './deep-ocean-fill.mts';
-import {readJsonSource, requireFiniteNumber, requireString} from '../../source-values.mts';
+import {readJsonSource, requireFiniteNumber, requireString} from '../../sources/source-values.mts';
 import {parseInteriorSource, parseMapFocusBindings} from './source-contract.mts';
 type AtmospherePreparation = ReturnType<typeof createAtmospherePreparation>;
 type AtmosphereModel = Awaited<ReturnType<AtmospherePreparation['readAtmosphereModel']>>;

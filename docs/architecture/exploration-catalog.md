@@ -57,7 +57,7 @@ bytes and credits. A facility with no 3D model carries a published photograph
 instead, pinned in
 [`photograph-records.json`](../../site/source/facilities/photograph-records.json)
 and prepared by
-[`prepare-facility-photographs.mts`](../../tools/prepare-facility-photographs.mts)
+[`prepare-facility-photographs.mts`](../../tools/prepare/prepare-facility-photographs.mts)
 into the same library, where `source.kind` tells a photograph from a render.
 
 Artwork preparation is an explicit maintenance operation; normal builds reuse the
@@ -125,7 +125,7 @@ existing exclusions for schematic interiors, illustrative models, modeled noise
 and schematic morphology. Empty attribution stays empty; names, publishers,
 mission targets and aliases are not association rules.
 
-[`prepare-facilities.mts`](../../tools/prepare-facilities.mts) compiles the Sources
+[`prepare-facilities.mts`](../../tools/prepare/prepare-facilities.mts) compiles the Sources
 and Missions catalogues with their validated records, graphs and dependency hashes.
 The hashes cover source records, every body manifest/provenance/page/descriptor,
 registry and compiler owners, and approved artwork bytes. The common

@@ -13,7 +13,7 @@ import { parsePagedProfile } from '../../../../tools/objects/paged-ellipsoid/pro
 import type { SurfaceBankLenses, SurfaceBankPlan } from '../../../../tools/objects/paged-ellipsoid/contracts.mts';
 import { createPagedSurfaceRaster } from '../../../../tools/objects/paged-ellipsoid/surface-raster.mts';
 import { surfaceBankInventory, requireSurfacePages } from '../../../../tools/objects/paged-ellipsoid/surface-banks.mts';
-import { requireRecord, requireString } from '../../../../tools/source-values.mts';
+import { requireRecord, requireString } from '../../../../tools/sources/source-values.mts';
 
 type JsonRecord = Record<string, unknown>;
 type PagingDiagnostic = Readonly<{ preparedJson: string; descriptorJson: string; descriptorModule: string }>;

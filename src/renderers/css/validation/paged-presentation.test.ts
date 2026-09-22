@@ -4,7 +4,7 @@ import { test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
 import { parsePreparedPagePlan } from '../paging/capabilities.js';
 import { record, array } from './guards.js';
-import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
+import { prepareActivationGroups } from '../../../../tools/prepared/prepared-activation-groups.mts';
 
 // Optional page bindings use the same final activation preparation as production.
 const original = { ...source, tree: { ...source.tree, activationGroups: prepareActivationGroups(source) } };

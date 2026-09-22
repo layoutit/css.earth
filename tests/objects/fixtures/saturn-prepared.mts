@@ -1,5 +1,5 @@
 import {array,boolean,dictionary,number,nullable,optional,shape,text} from '../../../tools/objects/terrestrial-layers/source-records.mts';
-import {requireRecord} from '../../../tools/source-values.mts';
+import {requireRecord} from '../../../tools/sources/source-values.mts';
 import {preparedLeaf,textureLayer} from './prepared-schemas.mts';
 const bands=array(shape({visualRotationSeconds:number,leaves:array(preparedLeaf)}));
 const asset=shape({url:text,width:number,height:number,bytes:number,sha256:text});

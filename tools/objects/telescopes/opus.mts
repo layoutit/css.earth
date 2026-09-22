@@ -1,6 +1,6 @@
 /** Spacecraft images from the PDS Ring-Moon Systems Node's OPUS search, reported per target without downloading them. */
 import { BODIES, BODY_IDS } from '@cssearth/astronomy';
-import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import type { TargetCatalogueEntry } from './targets.mts';
 
 export const OPUS_SERVICE = 'https://opus.pds-rings.seti.org/api/';

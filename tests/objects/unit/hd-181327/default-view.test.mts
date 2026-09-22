@@ -7,7 +7,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { angularSeparationDegrees, defaultViewGeometry } from '../../../../tools/objects/default-view.mts';
 import { requireBodyFixedToIcrf } from '../../../../src/platform/solar-geometry.mts';
-import { requireRecord } from '../../../../tools/source-values.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
 
 for (const id of ['hd-181327']) {
   test(`${id}: the default camera looks at the Earth-facing hemisphere with the pole up`, async () => {

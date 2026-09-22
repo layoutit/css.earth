@@ -3,10 +3,10 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString } from '../source-values.mts';
+import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
 import { parsePreparedSources, sourceCatalogDigest } from '../../src/platform/prepared-sources.mts';
 import { parsePreparedExploration, parseExplorationImage } from '../../src/platform/prepared-exploration.mts';
-import { readSourceCatalog } from '../read-source-catalogue.mts';
+import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
 
 /** Refresh only artwork bytes/crops. Existing attribution and every unrelated
  * input must still match; this does not reacquire or rebake celestial datasets. */

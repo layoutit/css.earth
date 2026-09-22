@@ -42,7 +42,7 @@ export function parseSpatialContextCommand(args: readonly string[], cwd = proces
 export async function prepareSpatialContext(options: SpatialContextPreparationOptions): Promise<void> {
   const input = JSON.parse(await readFile(options.sourcePath, 'utf8'));
   if (input.bodies === 'catalog') {
-    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
+    const { readCatalog } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-catalog.mts')).href) as { readCatalog: (directory?: string) => Promise<readonly { id: string; name: string; color: string; context?: { order?: number; name?: string; color?: string } }[]> };
     const objects = await readCatalog(options.objectsDirectory);
     input.bodies = objects.filter(body => body.context && body.id !== input.focus.id)
       .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'))

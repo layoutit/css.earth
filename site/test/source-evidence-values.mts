@@ -1,4 +1,4 @@
-import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
 
 /** Read only fields consumed by an assertion; keep the original evidence intact. */
 export class SourceEvidence {

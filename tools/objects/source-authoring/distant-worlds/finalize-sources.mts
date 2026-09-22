@@ -1,6 +1,6 @@
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
-import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../../source-values.mts';
+import {refreshSourceRecord} from '../../../sources/source-authoring-templates.mts';
+import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../../sources/source-values.mts';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {requireTerrainMesh} from '../../terrestrial-layers/radial-terrain.mts';
 import { mkdir as ensureReportDirectory } from 'node:fs/promises';
@@ -10,7 +10,7 @@ import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import sharp from 'sharp';
 import * as fontkit from 'fontkit';
-import { createPlanetTitleSource } from '../../../../tools/prepare-planet-title-sources.mts';
+import { createPlanetTitleSource } from '../../../prepare/prepare-planet-title-sources.mts';
 import { PLANET_TITLE_RECIPE } from '../../../../src/platform/planet-title-recipe.mts';
 import { loadRadialTerrain } from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import { renderRadialSnapshot } from '../../../../tools/objects/terrestrial-layers/radial-snapshot.mts';

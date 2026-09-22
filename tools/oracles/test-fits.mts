@@ -5,7 +5,7 @@ import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { readOracleFixture, readOracleInput, verifyOracleBytes, ORACLE_ROOT } from './fixture.mts';
 import { fitsArchiveInputs } from './fits/archive-inputs.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../sources/source-values.mts';
 
 const args = process.argv.slice(2);
 if (args.some(arg => !['--unit', '--restore'].includes(arg)) || args.includes('--unit') && args.includes('--restore'))
@@ -15,9 +15,9 @@ const run = (args: string[]) => {
   if (result.error) throw result.error;
   if (result.status !== 0) process.exit(result.status ?? 1);
 };
-const unit = ['tools/fits.test.mts', 'tools/fits.oracle.test.mts', 'tools/fits-sky.test.mts', 'tools/fits-sky.oracle.test.mts', 'tools/fits-sky-projection.oracle.test.mts', 'tools/fits-rice.oracle.test.mts',
+const unit = ['tools/fits/fits.test.mts', 'tools/fits/fits.oracle.test.mts', 'tools/fits/fits-sky.test.mts', 'tools/fits/fits-sky.oracle.test.mts', 'tools/fits/fits-sky-projection.oracle.test.mts', 'tools/fits/fits-rice.oracle.test.mts',
   'tools/objects/interferometry/fits-table.oracle.test.mts', 'tools/objects/color-transfer.oracle.test.mts', 'tools/objects/observation/wise-atlas-mosaic.oracle.test.mts',
-  'tools/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'tools/objects/jwst/imaging/imaging.test.mts', 'tools/oracle-fixtures.test.mts',
+  'tools/objects/observation/wise-atlas-mosaic.test.mts', 'tools/objects/observation/sky-band-composite.test.mts', 'tools/objects/jwst/imaging/imaging.test.mts', 'tools/contract/oracle-fixtures.test.mts',
   ...['observed-fits', 'encounter-fits', 'fits-image-map', 'facet-scalars', 'obj-uv-fits', 'pds4-geometry-cube']
     .map(name => `tools/objects/terrestrial-layers/${name}.test.mts`)];
 run(['--test', '--test-concurrency=1', ...unit]);
@@ -91,8 +91,8 @@ if (missing.length) {
   }
 }
 run(['--test', '--test-concurrency=1',
-  'tools/fits-products.test.mts',
-  'tools/fits-pallas.test.mts',
+  'tools/fits/fits-products.test.mts',
+  'tools/fits/fits-pallas.test.mts',
   'tools/objects/terrestrial-layers/encounter-fits.oracle.test.mts',
   'tools/objects/terrestrial-layers/llorri-geo.oracle.test.mts',
   'tools/objects/terrestrial-layers/pds4-geometry-cube.oracle.test.mts',

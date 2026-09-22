@@ -9,7 +9,7 @@
  * slit is the seeing-and-optics profile; a resolved disc is wider. Programme 088.C-0833(B) took a telluric standard through
  * the same slit and grism minutes after each Europa set, so the two widths can be compared directly and the answer is a
  * measurement, not an inference from an ephemeris. */
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits.mts';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits/fits.mts';
 
 /** No product larger than this is read; a NACO detector is 1024 x 1024. */
 export const MAX_SAMPLES = 16 * 1024 * 1024;

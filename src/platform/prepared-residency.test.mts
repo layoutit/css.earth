@@ -4,8 +4,8 @@ import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '../ren
 import type { PreparedResidencyOptions, PreparedResourcePool, PreparedResourceEntry, PreparedAssets } from '../renderers/css/dist/platform/prepared-residency.js';
 import type { PreparedImage } from '../renderers/css/dist/platform/prepared-image-store.js';
 import { createPreparedResidency } from '../renderers/css/dist/testing.js';
-import { requireRecord, requireArray } from '../../tools/source-values.mts';
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
+import { requireRecord, requireArray } from '../../tools/sources/source-values.mts';
+import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
 const definitions=Object.fromEntries(await Promise.all(['mercury','mars','jupiter','earth','uranus','saturn'].map(async id=>[id,parsePreparedObjectRuntime(await loadObjectTestDefinition(id))] as const)));
 const assetUrl=(definition: ObjectRuntimeDefinition,key: string | null)=>{assert.ok(key); const asset=definition.assets.entries.find(entry=>entry.key===key);assert.ok(asset,`Actual prepared resource ${key} is missing`);return asset.url;};
 

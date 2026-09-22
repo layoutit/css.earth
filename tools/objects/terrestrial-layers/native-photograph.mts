@@ -2,7 +2,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { resolve } from 'node:path';
 import { writeFile } from 'node:fs/promises';
 import sharp from 'sharp';
-import { requireFiniteNumber, requireRecord } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 import { missingCoverageColor } from '../../../src/platform/prepare-missing-coverage.mts';
 import type { PreparedTriangle } from './contracts.mts';
 import { BASE_TILE } from '@layoutit/polycss';

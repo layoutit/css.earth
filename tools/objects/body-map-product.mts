@@ -20,7 +20,7 @@
  * never averaged as if they were one without the caller saying so. */
 import { sha256 } from '../../src/platform/sha256.mts';
 import { parseResolutionEvidence, type ResolutionEvidence } from './resolution-evidence.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 import { combineBodyMaps, type BodyMap } from './jwst/cubes/body-map.mts';
 
 export const BODY_MAP_SCHEMA = 'cssearth-body-map@1';

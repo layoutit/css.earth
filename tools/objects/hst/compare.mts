@@ -21,7 +21,7 @@ import { access, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
+import { readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { binaryTable, numbers, readFitsHdus, tableColumn, type BinaryTable } from '../interferometry/fits-table.mts';
 import { mastFile } from '../astronomy-packages/mast.mts';
 import { addProductEvidence, productRecordPath, type ProductRecord } from '../product-record.mts';

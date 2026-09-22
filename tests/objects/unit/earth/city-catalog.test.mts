@@ -1,5 +1,5 @@
 import {parseCitySource,shape,array,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";

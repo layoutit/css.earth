@@ -26,7 +26,7 @@ HD 189733b is a hot Jupiter that orbits the K dwarf [HD 189733 A](../hd-189733/R
 
 ## Evidence
 
-Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733b` prepared the package.
+Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-189733b` prepared the package.
 
 - [`eclipse-map.test.mts`](../../../tests/objects/unit/hd-189733b/eclipse-map.test.mts) reads the deposit and checks the table above: the hottest cell, the dayside mean, the visible range from the saved times and the 240 shown cells. It then turns the deposited map with this package's orbit and rotation ([phase-curve.mts](../../../tools/objects/eclipse-map/phase-curve.mts)) and compares its light curve with the deposit's own best-fit model over the MIRI eclipses.
 - [`npy-pickle.test.mts`](../../../tools/objects/terrestrial-layers/npy-pickle.test.mts) checks the stated grid layout, ThERESA's visible-longitude rule including its wrapping, and that a kept cell is drawn whole.

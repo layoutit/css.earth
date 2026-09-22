@@ -32,9 +32,9 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsHeader, type FitsHeader } from '../../fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
-import { flagValue, positionalArguments } from '../../cli-arguments.mts';
+import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
+import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { artifactName, isRawName, primaryHeaderBytes, query, requireMd5, ARTIFACT_URI, type GeminiFile } from './cadc.mts';
 import { sha256File } from '../../../src/platform/sha256.mts';
 
