@@ -40,7 +40,7 @@ Only source-valid samples are interpolated. ISIS special pixels become the share
 
 The DEM contains sparse curved limb-profile tracks outside the denser image-derived terrain coverage; those are real source-valid samples, not continuous regional coverage. They remain visible without filling their surroundings.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="selected-interpretation"></a>
 <a id="source-grid-and-preparation"></a>

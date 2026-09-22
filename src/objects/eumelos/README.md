@@ -27,7 +27,7 @@ L4 Jupiter Trojan. Source records checked 2026-09-09.
 - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole.
 - The selected sidereal period is 21.2689 h; [SBDB](https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=5436&phys-par=true) repeats French et al. (2013)’s older 38.41 h synodic value. The selected shape and sidereal spin remain paired.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods
 

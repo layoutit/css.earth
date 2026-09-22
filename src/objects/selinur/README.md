@@ -37,7 +37,7 @@ It is model-derived radial relief, not an independent DEM, gravitational height 
 
 The displayed phase is not propagated from the historical source epoch and does not claim exact current attitude.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

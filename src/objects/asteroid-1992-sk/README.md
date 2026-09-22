@@ -24,7 +24,7 @@ This is the published 2006 combined radar and lightcurve model. The north polar 
 
 Prime-meridian display phase is arbitrary. Lighting does not claim an absolute current rotational attitude.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="1992-sk-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>

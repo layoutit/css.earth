@@ -33,7 +33,7 @@ The opt-in Shadows bank illustrates illumination on this attitude, not a reconst
 
 No original radar surface mesh was identified in the surveyed releases. Delay-Doppler images constrain geometry; they are not optical surface maps.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 <a id="source-selection"></a>
 

@@ -21,7 +21,7 @@ The fixed-epoch orbit uses the published 2021 Sylvia-system model retained in [p
 
 The selected 2014 projected ellipse is one admissible solution. Unseen depth is assumed equal to the short axis; the 2.7:1 ratio does not establish a unique measured three-dimensional shape. Herald’s 2020 reanalysis finds strong covariance between axes and orientation.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="romulus-source-model"></a>
 <a id="selected-geometry"></a>

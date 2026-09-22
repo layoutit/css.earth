@@ -57,6 +57,6 @@ await writePreparedSet([
   {path:'src/objects/nearby-universe/prepared/points.json',text:prepared},
   {path:'src/objects/nearby-universe/prepared/cloud.webp',text:cloudBytes},
   {path:'src/objects/nearby-universe/object.json',text:descriptor},
-  {path:'src/objects/nearby-universe/prepared/manifest.json',text:receipt},
+  {path:'src/objects/nearby-universe/prepared-receipt.json',text:receipt},
 ]);
 console.log(`CLOUDS: ${clouds.length}; POINTS PREPARED: ${points.length}/${catalogue.points.length}`);

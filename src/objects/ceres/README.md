@@ -107,7 +107,7 @@ Feature notes: 31 of the labelled names carry a caption note, the lead summary o
 - **Lighting:** The optional Shadows setting adds approximate directional illumination of the spherical model. With Shadows off, a fixed curvature overlay gives the globe depth. Neither mode reconstructs unlit albedo or physically relights the photographed crater shadows.
 - The last two columns of the PIA19977 enhanced-color source map are brighter than their neighbours (mean brightness 173 and 193 against about 135). A thin light line can show along 0° at close zoom.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

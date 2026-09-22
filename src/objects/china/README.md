@@ -45,7 +45,7 @@ Optional directional Shadows are illustrative lighting on that mesh, separate fr
 
 The archived epoch and phase are retained for provenance, not claimed as the current attitude.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

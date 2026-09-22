@@ -27,7 +27,7 @@ Only a uniform scale from the published thermophysical fit is transferred to the
 
 The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 143, pole ['266', '68'], [Model 143](https://damit.cuni.cz/projects/damit/asteroid_models/view/143)
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

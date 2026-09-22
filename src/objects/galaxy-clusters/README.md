@@ -14,7 +14,7 @@ The [source manifest](source/manifest.json) pins all retained bytes and authored
 
 ## Evidence
 
-The [cluster tests](../../preparation/cluster-catalog/cluster-catalog.test.ts) compare catalogue selection and the independent published kpc/arcsec scale with the derived cosmology. The [prepared inventory](prepared/manifest.json) pins the delivered catalogue. These checks cover data and derivation; they do not qualify a cluster image or density model.
+The [cluster tests](../../preparation/cluster-catalog/cluster-catalog.test.ts) compare catalogue selection and the independent published kpc/arcsec scale with the derived cosmology. The prepared inventory (`prepared-receipt.json`) pins the delivered catalogue. These checks cover data and derivation; they do not qualify a cluster image or density model.
 
 ## Known problems
 

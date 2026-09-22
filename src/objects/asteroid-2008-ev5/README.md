@@ -24,7 +24,7 @@ The north pole was not covered by the radar images, so its topography and flatte
 
 Display phase is arbitrary; the animation is not a present-day attitude ephemeris.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="2008-ev5-sources"></a>
 <a id="geometry-scale-and-rotation"></a>

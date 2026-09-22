@@ -25,4 +25,4 @@ Run of 2026-09-21 (this version):
 
 The distance rests on a 9 percent parallax, so the radius carries a 7.4 solar radii uncertainty. Rigel is a multiple system; this package is Rigel A only. No mass is adopted.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

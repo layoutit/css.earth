@@ -29,7 +29,7 @@ Absolute phase is arbitrary; accelerated display spin is illustrative.
 
 The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 1105, pole ['103', '-27'], [Model 1105](https://damit.cuni.cz/projects/damit/asteroid_models/view/1105;) model 1106, pole ['282', '-5'], [Model 1106](https://damit.cuni.cz/projects/damit/asteroid_models/view/1106;) model 1852, pole ['283', '-1'], [Model 1852](https://damit.cuni.cz/projects/damit/asteroid_models/view/1852)
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

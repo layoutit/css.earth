@@ -50,4 +50,4 @@ Betelgeuse is the first body here that is not in the Solar System and the first 
 
 **Self-luminous, so no lighting.** The star is drawn by the emissive material, the same as the Sun: the leaves carry the reconstruction's own brightness and no light direction or shadow is applied. The pipeline's Sun direction, which from Betelgeuse coincides with the direction to Earth within a thousandth of a degree, only sets the display meridian and the camera's reference view.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
