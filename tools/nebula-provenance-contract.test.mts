@@ -47,7 +47,7 @@ test('every presented bank lens has an included, revision-pinned investigation',
   }
 });
 
-test('presented bank manifests account for each retained source file and verify its bytes', async () => {
+test('presented bank manifests account for each retained source file and verify pinned bytes', async () => {
   for (const { id, base } of await presentedBanks()) {
     const manifest = sourceObject(await read(`${base}/source/manifest.json`));
     const entries = ['inputs', 'documents', 'generatedIntermediates'].flatMap(section =>
@@ -61,8 +61,11 @@ test('presented bank manifests account for each retained source file and verify 
         const entry = listed.get(path);
         assert.ok(entry, `${id}: unlisted source ${relative(root, resolve(root, path))}`);
         const bytes = await readFile(resolve(root, path));
-        assert.equal(entry.expectedBytes, bytes.length, `${path}: byte count`);
-        assert.equal(entry.expectedSha256, digest(bytes), `${path}: byte identity`);
+        // A download carries a pin its bytes must match; a file authored and tracked here carries none.
+        if (entry.expectedSha256 !== undefined) {
+          assert.equal(entry.expectedBytes, bytes.length, `${path}: byte count`);
+          assert.equal(entry.expectedSha256, digest(bytes), `${path}: byte identity`);
+        }
         assert.notEqual(parseSourceBinding(entry.sourceBinding).kind, 'unresolved', `${path}: source identity`);
       }
     }

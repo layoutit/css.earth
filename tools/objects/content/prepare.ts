@@ -30,10 +30,11 @@ const titleMap: Record<string, { label: string; src: string; width: number; heig
   settings: PREPARED_SHELL_TITLES.settings,
 };
 
-function requiredShellTitle(key: string) {
+/** The display fields of a shell title. Its font pin and input hash are the generator's receipt and stay in its own module. */
+function requiredShellTitle(key: string): { label: string; src: string; width: number; height: number } {
   const title = titleMap[key];
   if (!title) throw new Error(`Unknown shared shell title key: ${key}`);
-  return title;
+  return { label: title.label, src: title.src, width: title.width, height: title.height };
 }
 
 function requiredChartTitle(key: string) {
@@ -41,7 +42,7 @@ function requiredChartTitle(key: string) {
     ? SCIENTIFIC_CHART_TITLES.photometricPhase
     : titleMap[key];
   if (!title) throw new Error(`Unknown shared chart title key: ${key}`);
-  return title;
+  return { label: title.label };
 }
 
 export function prepareObjectContent(
@@ -54,8 +55,11 @@ export function prepareObjectContent(
   if (source.title.label !== source.displayName) {
     throw new Error(`${source.id}: title label does not match display name`);
   }
+  // The prepared title carries what the page draws: the glyph path, its boxes and the font's name. The font pin and
+  // the generator note stay in the object's title-mark source, whose bytes git records.
+  const { sourceSha256: _fontPin, sourceGenerator: _generator, xOrigin: _origin, ...titleSource } = source.title;
   const title = {
-    ...source.title,
+    ...titleSource,
     ...createPreparedTitleLayout(source.title),
   } as PreparedObjectContent["title"];
   const { facts, moreFacts } = parseFactsheet(source.panel);
