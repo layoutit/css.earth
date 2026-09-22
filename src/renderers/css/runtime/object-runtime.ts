@@ -39,7 +39,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -71,7 +71,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     ready.catch(() => {});
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
-    let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null;
+    let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null, featuresInFlight = arrivingByFlight;
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
     let startupDecodedAssets = 0;
@@ -208,6 +208,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       select: (id: string) => ready.then(() => surfaceFeatures?.select(id) ?? { completed: false }),
       selected: () => surfaceFeatures?.selected() ?? null,
       clear: () => surfaceFeatures?.clear(),
+      setNavigationInFlight: (active: boolean, landed = true) => { featuresInFlight = active; surfaceFeatures?.setNavigationInFlight?.(active, landed); },
     }) : undefined;
     const controller = Object.freeze({ ready, sharedView, ...(datasets ? { datasets } : {}), ...(destinations ? { destinations } : {}), ...(features ? { features } : {}), ...(navigation ? { navigation } : {}),
       refineTextures() { if (!lifetime.disposed) guarded(() => selection?.refineTextures()); },
@@ -356,6 +357,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
             fetch(resolvePreparedAssetUrl(url, featureOrigin, featurePlan.catalog.sha256), init) } : {}),
           lifetime, pickingHost: stage, inputSurface, onError: error => console.error(error) });
         context.own(() => surfaceFeatures?.destroy());
+        if (featuresInFlight) surfaceFeatures.setNavigationInFlight?.(true);
         surfaceFeatures.setLens({ id: initialSelection.lensId });
       }
       orbit = environment.createOrbit({ stage, inputSurface, runtimePolicy, cameraElement: mounted.cameraElement, sceneElement: mounted.sceneElement,

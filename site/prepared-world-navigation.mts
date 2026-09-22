@@ -296,6 +296,8 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
         return {
           transferTo: ownership.transferTo,
           mountOptions: { preparedResources: preparedLease.resources, preparedTree: preparedLease.tree, initialWorldCamera: checkpoint.world, initialProjection: preparedLease.projection({ world: checkpoint.world, viewport: optics }),
+            // The destination holds its catalogue load until this flight ends; see afterMount.
+            arrivingByFlight: true,
             ...(continuation ? { progressiveActivation: approachLimitS > 0, onNavigationReady(owner: ObjectWorldNavigation) {
               // An interrupted flight still mounts its destination; afterMount reports the interruption.
               if (controller.signal.aborted) return;
@@ -321,6 +323,11 @@ export function createPreparedWorldNavigation({ objects, windowTarget = window, 
               } else mount.navigation.apply(checkpoint.world);
               lastCamera = mount.navigation.capture(); lastOptics = mount.navigation.optics();
             } finally {
+              // The flight ended. The destination stays on screen when it landed or the visitor stopped it (preserveView);
+              // a navigation that replaced it will retire it, so the loads it held are dropped.
+              const reason: unknown = controller.signal.reason;
+              mount.features?.setNavigationInFlight?.(false, !controller.signal.aborted ||
+                (reason instanceof Error && 'preserveView' in reason && reason.preserveView === true));
               mountedSignal.removeEventListener('abort', cancelMounted);
               cleanup();
             }
