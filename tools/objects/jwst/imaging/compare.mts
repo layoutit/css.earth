@@ -128,7 +128,7 @@ export async function compareWithMast(id: string, band: string, local: string, s
   const record = await recordProductEvidence(local, 'archive-agreement', path, `These level-2 exposures, this CRDS context and this pinned pipeline ` +
     `reproduce MAST's own level-3 ${entry.stage === 'coron3' ? 'PSF-subtracted mosaic' : 'mosaic'} of this observation; the receipt holds the grid cards, the ` +
     `share of identical pixels and the brightness agreement it was measured on. It establishes that MAST's software was run the way MAST ran it, and nothing about the sky.`);
-  return { path: resolve(dirname(local), record.evidence.findLast(entry => entry.kind === 'archive-agreement' && entry.receiptPin)!.receipt), receipt, record };
+  return { path: resolve(dirname(local), record.evidence.findLast(entry => entry.kind === 'archive-agreement')!.receipt), receipt, record };
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

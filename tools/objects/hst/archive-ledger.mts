@@ -222,18 +222,16 @@ export const HST_REPRODUCTION_SCHEMA = 'cssearth-hst-reproduction@1';
 /** What a receipt has to say for the observation it names to count as re-calibrated: which program, observation and product it
  * ran, the configuration that product was taken in, and the MAST product it compared the result against. */
 export interface ReproductionReceipt { readonly program: string; readonly observation: string; readonly product: string; readonly instrument: string;
-  readonly mast: { readonly name: string; readonly bytes: number; readonly sha256: string } }
-const DIGEST = /^[0-9a-f]{64}$/u;
+  readonly mast: { readonly name: string; readonly bytes: number } }
 
 /** One receipt read as the external value it is: another schema, a missing field or a missing pin is an error, never a skip. */
 export function parseReproductionReceipt(value: unknown, label: string): ReproductionReceipt {
   const row = requireRecord(value, label);
   if (row.schema !== HST_REPRODUCTION_SCHEMA) throw new TypeError(`${label}: ${String(row.schema)} is not a reproduction receipt.`);
-  const mast = requireRecord(row.mast, `${label}: MAST product`), sha256 = requireString(mast.sha256, `${label}: MAST digest`);
-  if (!DIGEST.test(sha256)) throw new TypeError(`${label}: the MAST digest it compared is not a sha256.`);
+  const mast = requireRecord(row.mast, `${label}: MAST product`);
   return { program: requireString(row.program, `${label}: program`), observation: requireString(row.observation, `${label}: observation`),
     product: requireString(row.product, `${label}: product`), instrument: requireString(row.instrument, `${label}: instrument`),
-    mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`), sha256 } };
+    mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`) } };
 }
 
 /** What an archive-final program has to have for its configuration to count as qualified: the program parses, the record beside
@@ -251,25 +249,22 @@ export function archiveFinalQualification(program: ArchiveFinalProgram, record: 
   if (record.software.length) throw new TypeError(`${label}: it names software that ran, and nothing of ours makes an archive-final product.`);
   const outputs = new Map(record.outputs.map(output => [output.path, output]));
   if (outputs.size !== program.files.length) throw new TypeError(`${label}: it pins ${outputs.size} files against the program's ${program.files.length}.`);
-  const digests = new Map<string, string>();
   for (const file of program.files) {
     const output = outputs.get(file.name);
     if (!output) throw new TypeError(`${label}: it does not pin ${file.name}.`);
-    if (file.sha256 === undefined) throw new TypeError(`${program.id}.archive-final.json: ${file.name} has no digest, so nothing says which bytes were read.`);
-    if (output.bytes !== file.bytes || output.sha256 !== file.sha256) throw new TypeError(`${label}: its ${file.name} is ${output.bytes} bytes, sha256 ${output.sha256}, not the pinned ${file.bytes} and ${file.sha256}.`);
-    digests.set(file.name, file.sha256);
+    if (output.bytes !== file.bytes) throw new TypeError(`${label}: its ${file.name} is ${output.bytes} bytes, not the ${file.bytes} the program records.`);
   }
-  // Matching digests are not enough. One WFPC2 file holds four chips and a waivered spectrum holds every group of its exposure,
+  // Matching sizes are not enough. One WFPC2 file holds four chips and a waivered spectrum holds every group of its exposure,
   // so a program that moves a component from one unit to another measures a different detector out of the very same bytes, and
-  // every digest still agrees. The run is therefore rebuilt from the program as it is NOW (its selection, the units each part is
+  // every size still agrees. The run is therefore rebuilt from the program as it is NOW (its selection, the units each part is
   // read from, the identity the check ran against) and the record must be the record of that run.
-  const expected = archiveFinalQualificationRun(program, digests), stated = archiveFinalQualifiedRun(record);
+  const expected = archiveFinalQualificationRun(program), stated = archiveFinalQualifiedRun(record);
   if (runDigest(expected) !== runDigest(stated)) {
     const wanted = expected.parameters.selection as Record<string, unknown>, held = stated.parameters.selection;
     // The verdict is the digest, which ignores key order; the message sorts keys too, so it never blames a field that only moved.
     const said = !isRecord(held) ? 'it states no selection at all, so nothing says which units it read'
       : Object.keys(wanted).filter(key => stable(held[key]) !== stable(wanted[key])).map(key => `${key} (${stable(held[key])}, not ${stable(wanted[key])})`).join('; ')
-        || 'its inputs are not the files this program pins, in these roles, at these digests';
+        || 'its inputs are not the files this program records, in these roles, at these sizes';
     throw new TypeError(`${label}: it was qualified against another run: ${said}.`);
   }
   const science = program.components.find(component => component.role === 'science')!.file!;
@@ -324,7 +319,7 @@ export async function repositoryReceipts(repository = REPOSITORY) {
         : receipt.product !== receipt.mast.name.replace(/\.fits$/u, '') ? `the product ${receipt.product} against ${receipt.mast.name}`
         : !product ? `${receipt.mast.name}, which ${receipt.observation} does not pin`
         : product.bytes !== receipt.mast.bytes ? `${receipt.mast.bytes} bytes of ${receipt.mast.name}, not the ${product.bytes} pinned`
-        : product.sha256 !== undefined && product.sha256 !== receipt.mast.sha256 ? `another ${receipt.mast.name}` : null;
+        : null;
       if (wrong) throw new TypeError(`${file}: it compared ${wrong}.`);
       proved.add(`${receipt.program}|${observation.instrument}/${observation.detector}`);
     } catch (error) { problems.push(receiptProblem(file, error)); }

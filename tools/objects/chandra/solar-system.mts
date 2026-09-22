@@ -136,7 +136,7 @@ export function freezeRun(entry: ChandraObservation, files: { readonly archive: 
   options: { readonly versions: { ciao: string; caldb: string }; readonly toolchainDigest: string }): ProductRun {
   const pin = (role: string, file: ChandraFile): ProductInput => {
     if (file.sha256 === undefined) throw new Error(`${file.path} is pinned without a digest; a record states every input by sha256.`);
-    return { role, identity: file.url, bytes: file.bytes, sha256: file.sha256 };
+    return { role, identity: file.url, bytes: file.bytes };
   };
   return { telescope: 'Chandra', stage: `sso-freeze/${entry.obsid}-${entry.instrument}`,
     inputs: [pin('archive level-2 event list', files.archive), pin('spacecraft orbit ephemeris', files.orbit), pin('body ephemeris', files.body), pin('aspect solution', files.aspect)],

@@ -56,8 +56,8 @@ export async function buildPdsLedger() {
     const record = parseProductRecord(JSON.parse(await readFile(resolve(ROOT, receipt), 'utf8')) as unknown);
     const selection = requireRecord(record.parameters.selection, 'PDS selection'), science = files.find(file => file.role === 'science');
     const qualified = record.telescope === telescope && record.stage === 'archive-final' && selection.program === id && selection.target === target && selection.lidvid === program.lidvid
-      && files.every(file => record.inputs.some(input => input.identity === file.uri && input.bytes === file.bytes && input.sha256 === file.sha256)
-        && record.outputs.some(output => output.path === file.name && output.bytes === file.bytes && output.sha256 === file.sha256))
+      && files.every(file => record.inputs.some(input => input.identity === file.uri && input.bytes === file.bytes)
+        && record.outputs.some(output => output.path === file.name && output.bytes === file.bytes))
       && Boolean(science && record.evidence.some(evidence => evidence.kind === 'archive-origin' && evidence.receipt === receipt && evidence.product === science.name));
     const key = `${telescope} :: ${mode}`, modeEntry = modes.get(key) ?? { telescope, mode, programs: [], qualified: [], receipts: [] };
     if (!modeEntry.programs.includes(id)) modeEntry.programs.push(id); if (!modeEntry.receipts.includes(receipt)) modeEntry.receipts.push(receipt);

@@ -108,7 +108,7 @@ export function imagingProductRun(program: ImagingProgram, entry: ImagingBand, s
   toolchain: { toolchainDigest: string; software: readonly ProductSoftware[] }): ProductRun {
   const pin = (role: string) => (member: MastFile): ProductInput => {
     if (member.sha256 === undefined) throw new TypeError(`${member.name} has no digest; a member is digested when it is fetched.`);
-    return { role, identity: member.uri, bytes: member.bytes, sha256: member.sha256 };
+    return { role, identity: member.uri, bytes: member.bytes };
   };
   return { telescope: 'JWST', stage, inputs: [...entry.members.map(pin('level-2 exposure')), ...(entry.references ?? []).map(pin('level-2 PSF reference'))],
     parameters: { program: program.id, band: entry.band, observation: entry.observation, crdsContext: program.crdsContext, ...parameters },

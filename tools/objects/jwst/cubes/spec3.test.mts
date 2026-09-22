@@ -38,9 +38,9 @@ test('a requested wavelength interval becomes an exact subset of the archive pla
 test('a spec3 run pins both detectors of every dither, and a finer sky grid is another run', () => {
   const run = cubeRun();
   assert.equal(run.stage, 'spec3');
-  assert.deepEqual(run.inputs.map(input => [input.role, input.identity, input.sha256]),
-    [['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs1_cal.fits', 'a'.repeat(64)],
-      ['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs2_cal.fits', 'b'.repeat(64)]]);
+  assert.deepEqual(run.inputs.map(input => [input.role, input.identity]),
+    [['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs1_cal.fits'],
+      ['level-2 exposure', 'mast:JWST/product/jw01250002001_03105_00001_nrs2_cal.fits']]);
   assert.equal(run.parameters.crdsContext, 'jwst_1535.pmap');
   assert.equal(run.parameters.observation, 'jw01250-o002_t001_nirspec_g395h-f290lp');
   assert.deepEqual(run.software, [{ name: 'jwst', version: '2.0.1' }, { name: 'stcal', version: '1.20.0' }]);

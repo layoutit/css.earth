@@ -29,7 +29,7 @@ import { readFitsFileHdus, type FitsFileHdu } from '../../fits/fits.mts';
 import { skyImageAxes } from '../../fits/fits-sky.mts';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { assertInputPins, pinFile, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
+import { assertInputPins, fileSize, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses } from './line-stack-ephemeris.mts';
 import {
@@ -184,7 +184,7 @@ export interface TimeTagOptions {
 /** Every pinned file, by identity, in the directory the caller named. */
 const pinnedFiles = (definition: TimeTagDefinition, directory: string) => new Map(definition.files.map(file => [file.uri, resolve(directory, file.name)]));
 const productInputs = (definition: TimeTagDefinition, files: ReadonlyMap<string, string>): Promise<ProductInput[]> =>
-  Promise.all(definition.files.map(async file => ({ role: file.role, identity: file.uri, bytes: file.bytes, sha256: (await pinFile(files.get(file.uri)!)).sha256 })));
+  Promise.all(definition.files.map(async file => ({ role: file.role, identity: file.uri, bytes: file.bytes })));
 
 export async function runTimeTagFrame(definition: TimeTagDefinition, options: TimeTagOptions): Promise<TimeTagRun> {
   const log = options.log ?? (() => {});

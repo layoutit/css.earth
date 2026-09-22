@@ -26,11 +26,11 @@
  * Only KCWI is re-run. toolchain.json says why: the OSIRIS DRP is IDL, and no other Keck pipeline is installed here. A program
  * of another instrument is refused rather than reduced by something that is not that instrument's pipeline. */
 import { spawn, spawnSync } from 'node:child_process';
-import { copyFile, mkdir, readdir, readFile, rm, writeFile } from 'node:fs/promises';
+import { copyFile, mkdir, readdir, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { createWriteStream } from 'node:fs';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
+import { sha256 } from '../../../src/platform/sha256.mts';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { assertInputPins, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
@@ -94,9 +94,7 @@ export async function stageFrames(program: KeckProgram, observation: KeckObserva
   if (channel && !wanted.length) throw new Error(`${observation.koaid}: the program pins no calibration of its own channel.`);
   for (const file of [...wanted, observation.science]) {
     const source = resolve(DOWNLOADS, program.id, 'lev0', file.name);
-    const digest = await sha256File(source).catch(() => null);
-    if (!digest) throw new Error(`${file.name} is not downloaded: node tools/objects/keck/archive.mts ${program.id} ${program.instrument} ${observation.koaid}`);
-    measuredDigests.set(file.name, digest.sha256);
+    if (!await stat(source).then(() => true, () => false)) throw new Error(`${file.name} is not downloaded: node tools/objects/keck/archive.mts ${program.id} ${program.instrument} ${observation.koaid}`);
     const name = stagedName(file);
     await copyFile(source, resolve(directory, name));
     staged.push(name);
@@ -105,13 +103,7 @@ export async function stageFrames(program: KeckProgram, observation: KeckObserva
   return { staged, files, inputs: [...wanted, observation.science].map(pinnedInput) };
 }
 
-/** Digests measured while the frames were staged; a receipt names what was actually read, not a pin. */
-const measuredDigests = new Map<string, string>();
-export const pinnedInput = (file: KeckFile): ProductInput => {
-  const sha256 = measuredDigests.get(file.name);
-  if (!sha256) throw new Error(`${file.name} was not staged before its receipt was written.`);
-  return { role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256 };
-};
+export const pinnedInput = (file: KeckFile): ProductInput => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes });
 
 /** What identifies one reduction: the pinned frames it read, the channel and configuration it ran with, and the installed
  * pipeline. The same frames through the same pipeline at the same settings are the same run. */

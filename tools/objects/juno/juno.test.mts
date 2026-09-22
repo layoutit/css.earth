@@ -75,11 +75,11 @@ test('a registration record pins every image, label and kernel the run read, and
   const made = registrationRun(MEASURED, KERNELS, await registrationSoftware());
   assert.equal(made.telescope, 'Juno');
   assert.equal(made.stage, 'junocam-registration');
-  assert.deepEqual(made.inputs.map(input => [input.role, input.identity, input.bytes, input.sha256]), [
-    ['image JNCR_2022272_45C00001_V01', `${PRODUCT}.IMG`, 35438592, 'a'.repeat(64)],
-    ['label JNCR_2022272_45C00001_V01', `${PRODUCT}.LBL`, 2500, 'b'.repeat(64)],
-    ['kernel', 'juno/lsk/naif0012.tls', 5023, 'c'.repeat(64)],
-    ['kernel', 'juno/pck/pck00011.tpc', 129000, 'd'.repeat(64)]]);
+  assert.deepEqual(made.inputs.map(input => [input.role, input.identity, input.bytes]), [
+    ['image JNCR_2022272_45C00001_V01', `${PRODUCT}.IMG`, 35438592],
+    ['label JNCR_2022272_45C00001_V01', `${PRODUCT}.LBL`, 2500],
+    ['kernel', 'juno/lsk/naif0012.tls', 5023],
+    ['kernel', 'juno/pck/pck00011.tpc', 129000]]);
   assert.deepEqual(made.parameters.policy, POLICY);
   assert.deepEqual([made.parameters.observer, made.parameters.aberration], [-61, 'LT+S']);
   // Nothing external runs, so there is no toolchain to pin: the version is the digest of the modules that did the work.
@@ -100,7 +100,7 @@ test('the measurement adds geometric registration to its own record, and refuses
     const record = await addRegistrationEvidence(path, work);
     const registration = evidenceFor(record, name, 'geometric-registration');
     assert.equal(registration.length, 1);
-    assert.ok(registration[0]!.receiptPin);
+    assert.ok(registration[0]!.receipt.endsWith('.evidence.json'));
     assert.match(registration[0]!.establishes, /limb was fitted to the target's IAU ellipsoid/u);
     assert.match(registration[0]!.establishes, /not agreement with any archive product/u);
     assert.equal(evidenceFor(record, name, 'archive-agreement').length, 0, 'fitting our own geometry is not agreement with an archive');

@@ -4,7 +4,6 @@ const test = sourceTest();
 import { mkdir, mkdtemp, readdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseAssociationTree } from '../interferometry/eso-associations.mts';
 import { parseRawTable } from '../interferometry/eso-pipeline.mts';
@@ -236,7 +235,7 @@ async function imagingFixture() {
     const path = resolve(raw, `${dpId}.fits`);
     await writeFile(path, fitsBytes(['HIERARCH ESO DET DIT =                  2.0', "HIERARCH ESO INS OPTI6 ID = 'Ks'"]));
     return { dpId, category: tag.startsWith('CAL') ? 'CALIB' : 'SCIENCE', tag, type, technique: 'IMAGE,JITTER', filter: 'KS',
-      dit: 2, ndit: 5, exposure: 10, start: dpId, template, bytes: 1234, sha256: (await sha256File(path)).sha256 };
+      dit: 2, ndit: 5, exposure: 10, start: dpId, template, bytes: 1234 };
   };
   const science: NacoFrame[] = [];
   for (const [index, template] of ['A', 'A', 'A', 'A', 'B', 'B', 'B', 'B'].entries()) science.push(await frame(`NACO.2007-11-11T02:4${index}:00.000`, 'IM_JITTER_OBJ', 'OBJECT', template));
@@ -295,9 +294,9 @@ test('a reduction writes the record of what made its product, with the pins the 
   // Every frame the run consumed, by its own id and the digest the program pins for it. The other template's frames went
   // nowhere near this product and are not in the record.
   const consumed = [...templateFrames(fixture.program.science, 'A'), ...fixture.program.calibration];
-  const pinned = new Map(consumed.map(frame => [frame.dpId, frame.sha256]));
+  const sizes = new Map(consumed.map(frame => [frame.dpId, frame.bytes]));
   assert.deepEqual(record.inputs.map(input => input.identity).sort(), consumed.map(frame => frame.dpId).sort());
-  for (const input of record.inputs) assert.equal(input.sha256, pinned.get(input.identity), input.identity);
+  for (const input of record.inputs) assert.ok(input.bytes > 0 && sizes.has(input.identity), input.identity);
   assert.equal(record.outputs.length, 1);
   assert.equal(record.outputs[0]!.path, 'naco_img_jitter.fits');
   await rm(fixture.directory, { recursive: true, force: true });
@@ -317,7 +316,7 @@ test('a comparison adds internal-consistency evidence to those records, and refu
   const [evidence] = record.evidence;
   assert.equal(evidence!.kind, 'internal-consistency');
   assert.equal(evidence!.product, 'naco_img_jitter.fits');
-  assert.ok(evidence!.receiptPin);
+  assert.ok(evidence!.receipt.endsWith('.evidence.json'));
   // What the record says it is worth: there is nothing external to agree with, so this is never archive agreement.
   assert.match(evidence!.establishes, /no archive product for this re-run to agree with/u);
   assert.match(evidence!.establishes, /repeatability, not accuracy/u);

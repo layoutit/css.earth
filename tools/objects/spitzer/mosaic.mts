@@ -21,7 +21,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
-import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
+import { assertInputPins, fileSize, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';
 
@@ -116,11 +116,10 @@ export async function channelInputs(program: SpitzerProgram, channel: SpitzerCha
   const inputs: ProductInput[] = [];
   const reference = channel.products.find(product => product.role === 'mosaic');
   if (!reference) throw new Error(`Channel ${channel.channel} pins no archive mosaic.`);
-  const measured = async (name: string) => (await pinFile(resolve(directory, name))).sha256;
-  inputs.push({ role: 'archive-mosaic', identity: reference.name, bytes: reference.bytes, sha256: await measured(reference.name) });
+  inputs.push({ role: 'archive-mosaic', identity: reference.name, bytes: reference.bytes });
   for (const frame of mosaicMembers(channel))
     for (const file of frame.files) if (file.role !== 'frame-uncertainty')
-      inputs.push({ role: file.role, identity: file.name, bytes: file.bytes, sha256: await measured(file.name) });
+      inputs.push({ role: file.role, identity: file.name, bytes: file.bytes });
   if (!inputs.some(input => input.role === 'frame')) throw new Error(`Channel ${channel.channel}: no frame has the mosaic's frame time of ${channel.mosaicFrameTimeSeconds} s.`);
   return inputs;
 }

@@ -18,11 +18,10 @@
 import { access, open, readFile, writeFile, type FileHandle } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
-import { assertInputPins, addProductEvidence, pinFile, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
+import { assertInputPins, addProductEvidence, fileSize, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
@@ -230,7 +229,7 @@ export async function comparisonPins(id: string, observation: KeckObservation, p
   const lev0 = (file: KeckFile) => resolve(downloads, id, 'lev0', file.name);
   const pins: ProductInput[] = [], files = new Map<string, string>();
   const add = async (role: string, file: KeckFile, path: string) => {
-    pins.push({ role, identity: file.filehand, bytes: file.bytes, sha256: (await pinFile(path)).sha256 });
+    pins.push({ role, identity: file.filehand, bytes: file.bytes });
     files.set(file.filehand, path);
   };
   await add('archive product', product, resolve(downloads, id, 'products', product.level ?? 'lev1', product.name));
@@ -265,21 +264,21 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
     if (!extensions.length) throw new Error(`${product.name}: nothing was comparable (${differentGrid.join('; ') || 'no extensions with samples'}).`);
     // The bytes are read again after the samples, so the receipt states the file as it was for the whole comparison and not
     // only as it was when the check above ran.
-    const archiveRead = await sha256File(archive);
+    const archiveRead = await fileSize(archive);
     if (archiveRead.bytes !== product.bytes)
       throw new Error(`${product.name} changed while it was being compared: ${archiveRead.bytes} bytes; the program records ${product.bytes} bytes.`);
     const receipt = {
       schema: 'cssearth-keck-reproduction@1', program: id, koaid, product: stageOf(product.name),
       instrument: program.instrument, configuration: observation.configuration, target: observation.targetName,
       toolchain: 'tools/objects/keck/toolchain.json',
-      // `bytes` and `sha256` are what the program pins; `read` is what was on disk when the samples were read. A receipt that
+      // `bytes` is what the program records; `read` is what was on disk when the samples were read. A receipt that
       // quietly replaced the first with the second would say a comparison was against the archive's product whatever bytes it
       // actually read, so both are written and the two have to be equal.
       archive: { ...product, read: archiveRead, ...cards(theirPrimary, RUN_CARDS), pipeline: theirPipeline,
         sampleBits: Math.abs(theirHdus[0]!.bitpix) },
-      // Our own product has no pin to be checked against: it is what this run made, and its digest is recorded so the
-      // receipt, the product record and the file on disk name the same bytes.
-      local: { name: basename(local), ...(await sha256File(local)), record: relative(REPOSITORY, productRecordPath(local)),
+      // Our own product has no pin to be checked against: it is what this run made, and its size is recorded so the
+      // receipt, the product record and the file on disk name the same file.
+      local: { name: basename(local), ...(await fileSize(local)), record: relative(REPOSITORY, productRecordPath(local)),
         ...cards(ourPrimary, RUN_CARDS), pipeline: ourPipeline, sampleBits: Math.abs(ourHdus[0]!.bitpix) },
       // The two runs are the same pipeline at different versions where the archive's product is old enough, and that is the
       // first thing a reader has to know before reading a difference as a failure to reproduce.

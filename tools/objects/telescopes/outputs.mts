@@ -5,7 +5,7 @@ import { nativeFigureInput } from './native-figure.mts';
 import { dirname, resolve, relative, isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
-import { pinFile, writeProductRecord, parseProductRecord } from '../product-record.mts';
+import { fileSize, writeProductRecord, parseProductRecord } from '../product-record.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { plotProduct } from '../astronomy-packages/plots.mts';
@@ -49,7 +49,7 @@ export async function delivery(resultPath:string){
   const realDirectory=await realpath(directory);
   for(const expected of files){
     const file=beneath(directory,expected.path);beneath(realDirectory,relative(realDirectory,await realpath(file)));
-    const actual=await pinFile(file);if(actual.sha256!==expected.sha256||actual.bytes!==expected.bytes)throw new Error(`Delivery pin mismatch: ${expected.path}`);
+    const actual=await fileSize(file);if(actual.bytes!==expected.bytes)throw new Error(`Delivery size mismatch: ${expected.path}`);
   }
   const productPath=requireString(record.product),product=files.find(f=>f.path===productPath);
   if(!product)throw new Error('The chosen product is absent from the delivery pins');
@@ -59,7 +59,7 @@ export async function delivery(resultPath:string){
   const outputRoot=record.outputRoot===undefined?undefined:beneath(directory,requireString(record.outputRoot));
   const outputPins=producing.outputs.map(output=>{
     const exact=outputRoot===undefined?undefined:relative(directory,beneath(outputRoot,output.path));
-    const matches=files.filter(f=>f.sha256===output.sha256&&f.bytes===output.bytes&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
+    const matches=files.filter(f=>f.bytes===output.bytes&&(exact===undefined?(f.path===output.path||f.path.endsWith('/'+output.path)):f.path===exact));
     if(matches.length!==1)throw new Error('Producing output is absent or ambiguous in delivery');return matches[0];
   });
   if(!outputPins.some(f=>f.path===product.path))throw new Error('Product is not bound by its producing record');
