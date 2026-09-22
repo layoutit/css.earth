@@ -12,7 +12,7 @@ Human entry points:
   telescope associate MEASUREMENTS.csv --system STAR --out DIRECTORY [--orbit-draws N] [--fit-astrometry] [--fit-orbits]
 
 Explore needs only a target. A name outside the catalogue is resolved by SIMBAD, and the search uses its identifiers and
-position, with SIMBAD's position error as the circle. In a terminal it saves the bounded discovery snapshot, shows actual
+position, with SIMBAD's position error as a footprint circle that selects records without cutting them. In a terminal it saves the bounded discovery snapshot, shows actual
 observations and limitations, and asks which exact identity to retrieve. With --json, redirected
 stdin, or redirected stdout it never prompts and writes the saved exploration as JSON. If --out is
 omitted, a unique directory is created under ./telescope-runs/. Get accepts that directory's

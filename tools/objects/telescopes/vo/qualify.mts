@@ -12,7 +12,8 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Pro
   const inField = spec.observation.target.status === 'in-field';
   if (spec.observation.target.status !== 'confirmed' && !inField || spec.observation.target.target !== spec.request.target || typeof spec.observation.rawTarget !== 'string')
     throw new Error('The selected archive record does not establish the requested target.');
-  if (inField && !spec.request.region) throw new Error('An in-field archive record is qualified only against the region that selected it.');
+  const circle = spec.request.region ?? spec.request.footprint;
+  if (inField && !circle) throw new Error('An in-field archive record is qualified only against the circle that selected it.');
   const acquired = await acquireVoProduct(root, spec), outputRoot = dirname(acquired.record), acquisition = await readProductRecord(acquired.record);
   if (!acquisition) throw new Error('Acquisition record is missing.');
   const content = JSON.parse(await readFile(resolve(outputRoot, 'content.json'), 'utf8')) as { schema?: unknown; archiveProposal?: { kind?: unknown; decoder?: unknown }; legacyRasterMember?: unknown; members?: readonly { member?: unknown; profile?: unknown; state?: unknown; reason?: unknown }[] };
@@ -31,7 +32,7 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Pro
   if (typeof archiveId === 'string' && archiveId.startsWith('ivo://eso.org/ID?') && decoded.header.ARCFILE !== `${archiveId.slice('ivo://eso.org/ID?'.length)}.fits`)
     throw new Error('ESO archive product identity disagrees with the FITS ARCFILE header.');
   const facts = { target: spec.request.target, verified: true, kind: spec.kind, result: 'telescope-product' as const,
-    ...await readProductScience(root, { file: acquired.file, format: 'fits', target: spec.request.target, decoded, ...(spec.request.region ? { region: spec.request.region } : {}) }) };
+    ...await readProductScience(root, { file: acquired.file, format: 'fits', target: spec.request.target, decoded, ...(circle ? { region: circle } : {}) }) };
   // Field membership rests on the archive footprint until the product's own WCS puts usable pixels inside the circle.
   if (inField && !(facts.regionCoverage && facts.regionCoverage.usablePixelCenters > 0))
     throw new Error('The in-field product has no usable pixel centre inside the requested ICRS circle.');

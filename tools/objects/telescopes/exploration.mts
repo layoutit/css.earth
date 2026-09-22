@@ -179,8 +179,9 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
  */
 export async function skyTargetRequest(root: string, request: ExplorationRequest, resolveSky: typeof resolveSkyTarget = resolveSkyTarget): Promise<{ readonly request: ExplorationRequest; readonly simbadMiss: boolean; readonly evidence?: SkyResolution['evidence'] }> {
   const withRegion = (sky: SkyTarget): ExplorationRequest => {
-    const region = request.region ?? skyRegion(sky);
-    return { ...request, target: sky.id, skyTarget: sky, ...region ? { region } : {} };
+    // SIMBAD's position and error select footprints; they never become a cutout, which only --icrs-circle asks for.
+    const footprint = skyRegion(sky);
+    return { ...request, target: sky.id, skyTarget: sky, ...footprint ? { footprint } : {} };
   };
   if (request.skyTarget) {
     const sky = parseSkyTarget(request.skyTarget);
