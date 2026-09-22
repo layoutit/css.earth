@@ -1,5 +1,6 @@
 // Reprepare selected photographs and their small previews, preserving the existing scene,
 // lighting banks and scientific maps. Full preparation uses these same raster/interpreter owners.
+import { updateInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { readAuthoredSources } from './authored-sources.js';
 import { createHash } from 'node:crypto';
 import { readFile, writeFile, mkdir, mkdtemp, copyFile } from 'node:fs/promises';
@@ -35,8 +36,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   sharp.concurrency(1); sharp.cache(false);
   const start = Date.now();
   const assets = await prepareRasterAssets({ sourceDirectory, publicDirectory: stage, outputDirectory: stage, config: selected, interpret });
-  const manifestPath = resolve(objectDirectory, 'runtime-assets.json');
-  const manifest = parseRuntimeManifest(JSON.parse(await readFile(manifestPath, 'utf8')), id);
+  const manifest = parseRuntimeManifest(JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8')), id);
   const replacements = new Map<string, { filename: string; bytes: number; sha256: string }>();
   for (const [filename, pin] of Object.entries(assets.hashes)) {
     if (!manifest.assets.some(asset => asset.filename === filename)) throw new Error(`Refresh cannot introduce an unbound resource: ${filename}`);
@@ -49,8 +49,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   await mkdir(publicDirectory, { recursive: true });
   for (const filename of replacements.keys()) await copyFile(resolve(stage, filename), resolve(publicDirectory, filename));
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
-  const inventory = JSON.stringify({ ...manifest, assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) }, null, 2) + '\n';
-  await writeFile(manifestPath, inventory);
+  await updateInventory({ planetId: id, objectDirectory, location: 'public', assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) });
   const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare-surface-minimaps.mts')).href) as typeof import('../prepare-surface-minimaps.mts');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshSurfaceContent(id, lensIds);

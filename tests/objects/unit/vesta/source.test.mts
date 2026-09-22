@@ -61,7 +61,7 @@ test('Dawn radius anchors preserve meters, poles and east longitude; elevation h
 });
 
 test('Vesta uses one shared scene and its measured mesh for drawing and hits', async () => {
-  const [runtime, terrain, descriptor, manifest, scene] = await Promise.all(['prepared/runtime.json', 'prepared/terrain.json', 'object.json', 'runtime-assets.json', 'prepared/scene.json'].map(read));
+  const [runtime, terrain, descriptor, manifest, scene] = await Promise.all(['prepared/runtime.json', 'prepared/terrain.json', 'object.json', 'inventory.json', 'prepared/scene.json'].map(read));
   assert.equal(descriptor.properties.recipe.shape.kind, 'radial-terrain');
   assert.equal(runtime.tree.nodes.filter((n: { className: string|string[]; }) => n.className?.includes('polycss-camera')).length, 1);
   assert.equal(runtime.surfaceHit.triangles.length, terrain.faces.length);

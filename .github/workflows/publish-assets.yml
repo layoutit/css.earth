@@ -148,8 +148,7 @@ jobs:
         run: |
           set -euo pipefail
           drift=$(git status --porcelain -- \
-            "src/objects/$OBJECT/runtime-assets.json" \
-            "src/objects/$OBJECT/prepared-assets.json")
+            "src/objects/$OBJECT/inventory.json")
           if [ -n "$drift" ]; then
             echo "::error::Rebaking changed the committed inventory, so it does not match this branch's sources:"
             echo "$drift"
@@ -161,8 +160,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p upload
-          for path in "src/objects/$OBJECT/runtime-assets.json" \
-                      "src/objects/$OBJECT/prepared-assets.json" ; do
+          for path in "src/objects/$OBJECT/inventory.json" ; do
             [ -f "$path" ] && { mkdir -p "upload/$(dirname "$path")"; cp "$path" "upload/$path"; }
           done
           for directory in "src/objects/$OBJECT/prepared" \

@@ -63,4 +63,4 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733-compa
 
 **The blue end of the spectrum is noise.** Below about 400 nm B's samples are within their errors of zero. They carry little weight in the colour, which the one-sigma test above bounds.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -24,7 +24,7 @@ for(const {id} of selected){
  });
  test(`${id}: compiled runtime asset manifest equals the canonical public closure`,async()=>{
   const {parseRuntimeManifest}=await import('../../tools/objects/dist/operations.js');
-  const manifest=parseRuntimeManifest(JSON.parse(await readFile(resolve(projectRoot,'src/objects',id,'runtime-assets.json'),'utf8')),id);
+  const manifest=parseRuntimeManifest(JSON.parse(await readFile(resolve(projectRoot,'src/objects',id,'inventory.json'),'utf8')),id);
   const root=resolve(projectRoot,'public/scenes',id);assert.deepEqual((await readdir(root)).sort(),manifest.assets.map(asset=>asset.filename).sort());
   const {createHash}=await import('node:crypto');for(const asset of manifest.assets){const bytes=await readFile(resolve(root,asset.filename));assert.equal(bytes.length,asset.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),asset.sha256);}
  });

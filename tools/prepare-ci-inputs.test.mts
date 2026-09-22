@@ -23,7 +23,7 @@ async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) 
       return { filename, bytes: bytes.length, sha256: digest };
     });
     await json(`src/objects/${id}/${kind}-assets.json`, {
-      schema: `css${id}-${kind}-assets@1`, ...(kind === 'prepared' || resourceRoot ? { resourceRoot: 'prepared' } : {}), assets,
+      schema: `css${id}-${kind}-assets@1`, ...(kind === 'prepared' || resourceRoot ? {} : {}), assets,
     });
   };
   await inventory('mimas', 'prepared', ['runtime.json', 'scene.json']);

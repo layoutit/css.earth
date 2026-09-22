@@ -24,7 +24,7 @@ This is the paper’s conservative single-lobe working model, not a uniquely res
 
 The display prime meridian is arbitrary; accelerated rotation and lighting do not propagate a measured present-day attitude.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="bacchus-sources"></a>
 <a id="shape-and-physical-interpretation"></a>

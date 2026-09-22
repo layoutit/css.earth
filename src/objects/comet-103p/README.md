@@ -65,7 +65,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - The landmarks are mapped terrain, not official names or precise boundaries. Two are published figure-panel centres; the elongate smooth area is a representative point read from the map. The ±3° and ±12° placement estimates are ours, not published measurement errors.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

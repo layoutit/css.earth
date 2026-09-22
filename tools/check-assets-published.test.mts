@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { promisify } from 'node:util';
 import { addedAssetKeys, checkAssetsPublished, createHeadFetcher, gateVerdict, lastGreenMainSha, MAX_CONNECTIONS, type CheckAssetsPublishedResult, type HeadFetcher } from './check-assets-published.mts';
-import { preparePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '../src/platform/runtime-asset-closure.mts';
 
 const execFileAsync = promisify(execFile);
 const ok = () => new Response(null, { status: 200, headers: { 'content-length': '12' } });
@@ -21,8 +21,7 @@ async function fixtureObject(root: string, id: string, sceneBytes = '12-byte-scn
   await writeFile(resolve(preparedDirectory, 'runtime.json'), '12-byte-run!');
   await writeFile(resolve(preparedDirectory, 'scene.json'), sceneBytes);
   for (const [index, name] of extra.entries()) await writeFile(resolve(preparedDirectory, name), `12-byte-x${String(index).padStart(2, '0')}!`);
-  await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory,
-    manifestPath: resolve(preparedDirectory, '..', 'prepared-assets.json'), filenames: ['runtime.json', 'scene.json', ...extra] });
+  await inventoryPreparedAssets({ planetId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory, filenames: ['runtime.json', 'scene.json', ...extra], gitTrackedPaths: async () => new Set() });
 }
 
 async function fixtureRoot(extra: readonly string[] = []) {
@@ -257,7 +256,7 @@ test('a scoped gate still fails when an added key is missing', async t => {
 
 test('addedAssetKeys checks everything when key-construction code changed or there is no merge base', async () => {
   const widened = await addedAssetKeys('origin/main', { mergeBase: async () => 'b'.repeat(40),
-    changedPaths: async () => ['tools/runtime-assets.mts', 'src/objects/hebe/prepared-assets.json'], inventoryAt: async () => null });
+    changedPaths: async () => ['tools/runtime-assets.mts', 'src/objects/hebe/inventory.json'], inventoryAt: async () => null });
   assert.deepEqual(widened, { all: true, reason: 'tools/runtime-assets.mts changed' });
   const closure = await addedAssetKeys('origin/main', { mergeBase: async () => 'b'.repeat(40),
     changedPaths: async () => ['src/platform/runtime-asset-closure.mts'], inventoryAt: async () => null });
@@ -276,7 +275,7 @@ test('a scope-widening change makes the gate check every inventoried key', async
 
 test('addedAssetKeys refuses to silently drop an inventory path with an id outside [a-z][a-z0-9-]*', async () => {
   await assert.rejects(addedAssetKeys('origin/main', { mergeBase: async () => 'b'.repeat(40),
-    changedPaths: async () => ['src/objects/Bad_Id/prepared-assets.json'], inventoryAt: async () => null }), /Unexpected object id/);
+    changedPaths: async () => ['src/objects/Bad_Id/inventory.json'], inventoryAt: async () => null }), /Unexpected object id/);
 });
 
 test('lastGreenMainSha asks for the latest successful push run on main and validates the answer', async () => {

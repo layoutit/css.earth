@@ -100,7 +100,8 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   if (!views.length) throw new Error(`${id} has no shape-only lens.`);
   await readAuthoredSources(objectDirectory);
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.json', 'surfaces.json', 'material.json', 'runtime-assets.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['scene.json', 'surfaces.json', 'material.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  originals.set('inventory.json', await readFile(resolve(objectDirectory, 'inventory.json')));
   const scene = requireRecord(JSON.parse(originals.get('scene.json')!.toString('utf8')));
   const document = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8'))), oldSurfaces = records(document.surfaces);
   const sourceDirectory = resolve(objectDirectory, 'source');
@@ -142,14 +143,14 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
   // No partial changes while an asset is being baked, and no writes into a shared inode.
   for (const [name, bytes] of originals) if (sha256(await readFile(resolve(outputDirectory, name))) !== sha256(bytes)) throw new Error(`Package changed during refresh: ${name}.`);
   if (sha256(await readFile(recipePath)) !== sha256(recipeBytes)) throw new Error('Recipe changed during refresh.');
-  const inventory = requireRecord(JSON.parse(originals.get('runtime-assets.json')!.toString('utf8'))), assets = records(inventory.assets);
+  const inventory = requireRecord(JSON.parse(originals.get('inventory.json')!.toString('utf8'))), assets = records(inventory.assets);
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
   for (const surface of surfaces) for (const key of ['map', 'surface', 'shadowSurface', 'thumbnail']) {
     const asset = requireRecord(surface[key]), filename = basename(requireString(asset.url));
     const bytes = await readFile(resolve(stage, filename));
     if (sha256(bytes) !== asset.sha256 || bytes.length !== asset.bytes) throw new Error(`Invalid staged asset: ${filename}.`);
     await replaceAsset(resolve(stage, filename), resolve(publicDirectory, filename));
-    if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
+    if (assets.some(asset => asset.location === 'public' && asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
   }
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
   for (const name of ['surfaces.json', 'material.json']) {
@@ -157,8 +158,8 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
     await save(resolve(outputDirectory, name), document);
   }
-  const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
-  await writeFile(resolve(objectDirectory, 'runtime-assets.json'), JSON.stringify(nextInventory, null, 2) + '\n');
+  const nextInventory = { ...inventory, assets: assets.map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) };
+  await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   const lensIds = views.map(view => view.id);
   // Context images and tiny navigation icons use the same material and retained mesh.
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);

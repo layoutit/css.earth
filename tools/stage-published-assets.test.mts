@@ -10,10 +10,10 @@ import { stagePublishedAssets } from './stage-published-assets.mts';
 
 const objectId = 'fixture';
 const base = `src/objects/${objectId}`;
-const inventoryPath = `${base}/prepared-assets.json`;
+const inventoryPath = `${base}/inventory.json`;
 const assetPath = `${base}/prepared/levels/data.json`;
 const bytes = Buffer.from('{"prepared":true}');
-const manifest = { schema: 'cssfixture-prepared-assets@1', resourceRoot: 'prepared',
+const manifest = { schema: 'cssearth-inventory@1',
   assets: [{ filename: 'levels/data.json', bytes: bytes.length, sha256: sha256(bytes) }] };
 
 async function put(root: string, path: string, content: string | Buffer): Promise<void> {
@@ -37,19 +37,19 @@ test('stages pinned nested bytes and inventories without importing arbitrary art
   const options = await fixture(t);
   await put(options.artifactRoot, 'tools/publish-runtime-assets.mts', 'untrusted replacement');
   await put(options.artifactRoot, 'package.json', '{"scripts":{"postinstall":"malicious"}}');
-  await put(options.root, `${base}/runtime-assets.json`, 'stale inventory from main');
+  await put(options.root, `${base}/inventory.json`, 'stale inventory from main');
   assert.equal(await stagePublishedAssets(options), 1);
   assert.deepEqual(await readFile(resolve(options.root, assetPath)), bytes);
   assert.equal(await readFile(resolve(options.root, inventoryPath), 'utf8'), JSON.stringify(manifest));
   assert.equal(await readFile(resolve(options.root, 'tools/publish-runtime-assets.mts'), 'utf8'), 'trusted publisher');
   await assert.rejects(readFile(resolve(options.root, 'package.json')), { code: 'ENOENT' });
-  await assert.rejects(readFile(resolve(options.root, `${base}/runtime-assets.json`)), { code: 'ENOENT' });
+  await assert.rejects(readFile(resolve(options.root, `${base}/inventory.json`)), { code: 'ENOENT' });
 });
 
 test('stages runtime public assets as well as prepared bytes', async t => {
   const options = await fixture(t);
-  const runtime = { schema: 'cssfixture-runtime-assets@1', assets: [{ ...manifest.assets[0], filename: 'surface.webp' }] };
-  for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, `${base}/runtime-assets.json`, JSON.stringify(runtime));
+  const runtime = { schema: 'cssearth-inventory@1', assets: [{ ...manifest.assets[0], filename: 'surface.webp' }] };
+  for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, `${base}/inventory.json`, JSON.stringify(runtime));
   await put(options.artifactRoot, 'public/scenes/fixture/surface.webp', bytes);
   assert.equal(await stagePublishedAssets(options), 2);
   assert.deepEqual(await readFile(resolve(options.root, 'public/scenes/fixture/surface.webp')), bytes);
@@ -70,7 +70,7 @@ test('rejects missing or extra inventories and changed file bytes before mutatin
     await t.test(mutation, async child => {
       const options = await fixture(child);
       if (mutation === 'missing') await rm(resolve(options.artifactRoot, inventoryPath));
-      if (mutation === 'extra') await put(options.artifactRoot, `${base}/runtime-assets.json`, '{}');
+      if (mutation === 'extra') await put(options.artifactRoot, `${base}/inventory.json`, '{}');
       if (mutation === 'bytes') await put(options.artifactRoot, assetPath, 'changed');
       await assert.rejects(stagePublishedAssets(options), /differs|differ/);
       await assert.rejects(readFile(resolve(options.root, inventoryPath)), { code: 'ENOENT' });

@@ -93,4 +93,4 @@ Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43b` prepa
 - **The planet is a sphere.** Its tidal and rotational flattening are not modelled.
 - **Other maps of the same planet are not shown.** See the [investigation ledger](investigations.json) for the MIRI map of Hammond et al. (2024), the Bell et al. (2024) products and the two single-detector NIRSpec maps.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

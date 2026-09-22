@@ -3,7 +3,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { extname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { promisify } from 'node:util';
-import { inventoriedAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
+import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from './runtime-assets.mts';
 
 const execFileAsync = promisify(execFile);
 const textExtensions = new Set(['.css', '.html', '.js', '.json', '.map', '.svg', '.txt', '.xml']);
@@ -35,7 +35,7 @@ export async function checkDeployAssets(root = resolve(import.meta.dirname, '..'
   const files = await textFiles(resolve(root, 'dist'));
   const referenced = (await Promise.all(files.map(async file => runtimeAssetUrls(await readFile(file, 'utf8'))))).flat();
   if (!referenced.length) throw new Error('The R2 deploy emitted no runtime asset URLs.');
-  const assets = await inventoriedAssets(root, inventoriedObjectIds([], root));
+  const assets = await inventoryAssets(root, inventoriedObjectIds([], root));
   const unknown = unknownRuntimeAssetUrls(referenced, new Set(assets.map(asset => asset.url)));
   if (unknown.length) throw new Error(`The built site references runtime assets outside the committed inventories:\n${unknown.join('\n')}`);
   return { files: files.length, urls: new Set(referenced).size };

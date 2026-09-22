@@ -17,7 +17,7 @@ import {relative,resolve,sep} from 'node:path';
 import {pathToFileURL} from 'node:url';
 import sharp from 'sharp';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';
-import {prepareRuntimeAssetManifest} from '../../../src/platform/runtime-asset-closure.mts';
+import {inventoryPublicAssets} from '../../../src/platform/runtime-asset-closure.mts';
 import {requirePreparedPresentation} from '../../../src/platform/prepared-presentation-contract.mts';
 import {CUBIC_SKY_CAMERA_PRESENTATION_STANDARD} from '../../../src/platform/cubic-sky-contract.mts';
 import {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
@@ -88,21 +88,20 @@ export async function prepareLayeredOblateObject({objectDirectory,publicDirector
   // raw masters and diagnostic shader metadata are not runtime dependencies.
   const values={scene,sky,sun,runtime:definition,'material-lenses':materialLenses,views,layouts};
   for(const[name,value]of Object.entries(values))await writeJson(resolve(outputDirectory,`${name}.json`),value);
-  const manifest=await prepareLayeredConsumerManifest({id:descriptor.id,definition,content,stylesheet,publicDirectory,manifestPath:resolve(outputDirectory,'runtime-assets.json')});
+  await prepareLayeredConsumerManifest({id:descriptor.id,definition,content,stylesheet,publicDirectory,objectDirectory:write?objectRoot:outputDirectory});
   const payload=JSON.stringify({schema:'cssearth-prepared-object@1',id:descriptor.id,type:descriptor.type,format:PREPARED_CSS_OBJECT_FORMAT,data:definition});
   await writeFile(resolve(outputDirectory,'object.json'),payload);
   if(write) {
     await writeFile(descriptorPath,JSON.stringify({...rawDescriptor,prepared:{format:PREPARED_CSS_OBJECT_FORMAT,url:'prepared/object.json',sha256:sha256(payload)}},null,2)+'\n');
-    await writeFile(resolve(objectRoot,'runtime-assets.json'),JSON.stringify(manifest,null,2)+'\n');
   }
   await writeJson(resolve(outputDirectory,'authored-preparation.json'),{schema:'cssearth-authored-preparation@1',id:descriptor.id,sources:[...sources.values()].map(source=>source.reference),lanes:{radial:true,materials:true,geometry:true,content:true,celestial:true,presentation:true}});
   return {descriptor,sources,raster:surface,celestial:{sky,sun},scene,definition,content};
 }
 
 /** Preparation may retain intermediate density banks; deployed closure is exact. */
-export function prepareLayeredConsumerManifest({id,definition,content,stylesheet,publicDirectory,manifestPath}: {id:string;definition:unknown;content:unknown;stylesheet:string;publicDirectory:string;manifestPath:string}) {
+export function prepareLayeredConsumerManifest({id,definition,content,stylesheet,publicDirectory,objectDirectory}: {id:string;definition:unknown;content:unknown;stylesheet:string;publicDirectory:string;objectDirectory:string}) {
   const urls=collectUrls(id,[definition,content,stylesheet]);
-  return prepareRuntimeAssetManifest({planetId:id,urls,publicRoot:publicDirectory,manifestPath:pathToFileURL(manifestPath),allowPreparationArtifacts:true});
+  return inventoryPublicAssets({planetId:id,objectDirectory,urls,publicRoot:publicDirectory,allowPreparationArtifacts:true});
 }
 
 function collectUrls(id:string,values:readonly unknown[]) {

@@ -164,9 +164,9 @@ test('image-layer deliveries retain authored documents and every layer in matchi
       assert.equal(entry.provenance.sources.filter(source => source.kind === 'authored-document').length, 3);
       const bank = sourceObject(JSON.parse(await readFile(resolve(root, entry.base, 'prepared/image-layers.json'), 'utf8')));
       assert.ok(Array.isArray(bank.resources));
-      const rootInventory = entry.outputs.find(output => output.path === resolve(fixture, entry.base, 'runtime-assets.json'));
+      const rootInventory = entry.outputs.find(output => output.path === resolve(fixture, entry.base, 'inventory.json'));
       assert.ok(rootInventory, 'the inventory is published once, at the body root');
-      assert.ok(!entry.outputs.some(output => output.path.endsWith('prepared/runtime-assets.json')));
+      assert.ok(!entry.outputs.some(output => output.path.endsWith('prepared/inventory.json')));
       const inventory = sourceObject(JSON.parse(String(rootInventory.text)));
       assert.equal(inventory.resourceRoot, 'prepared');
       assert.ok(Array.isArray(inventory.assets));

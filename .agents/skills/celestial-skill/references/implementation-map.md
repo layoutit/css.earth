@@ -24,7 +24,7 @@ src/objects/<id>/
   source/presentation/                title and applicable map inputs
   prepared/                           generated runtime/content/controls/object JSON
   prepared/page.json                  generated page assets and controls
-  runtime-assets.json                 generated image inventory and hashes
+  inventory.json                      generated inventory of every baked file and its hash
 
 public/scenes/<id>/                    prepared assets
 site/pages/[id].astro                  one shared route for all body ids

@@ -1,0 +1,257 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "ryugu-close-up-shadow@2x.webp",
+      "bytes": 799934,
+      "sha256": "c40a0344656371bab56242ac8f8f2a440a68fb0ab7a13889b98a66de2cad78fe"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-close-up-surface@2x.webp",
+      "bytes": 1726058,
+      "sha256": "0fbe277735c9ea3b83a9ac318b382acf7d8e649d09596b939702286b759074de"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-close-up-thumbnail.webp",
+      "bytes": 1914,
+      "sha256": "477e8371d5e5a4efd096606f8e4230cb062bcdae4a00bd7d785a0189708bcab3"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-elevation-shadow@2x.webp",
+      "bytes": 875160,
+      "sha256": "eb00c3e0d7bfe14ecbd19ac6f5e893d101e961e4d536c1d31303f5ad502138f9"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-elevation-surface@2x.webp",
+      "bytes": 1019642,
+      "sha256": "b423dd2b015aa30203e888addadb645bc337fc323c146705854ed0bbfdc60f2a"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-elevation-thumbnail.webp",
+      "bytes": 8348,
+      "sha256": "b8e016ee261c5d3c576c84802d7d06eb4245d9c1e8c91a84de9df9dca1ca7676"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-enhanced-shadow@2x.webp",
+      "bytes": 1646802,
+      "sha256": "f152385555ba8c579a80f01c812b0bb94514796568358a9ac4ab87170764f79d"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-enhanced-surface@2x.webp",
+      "bytes": 4152684,
+      "sha256": "ca59f918bdeea02e5a7a5e310660e37ccd927a9961e6b32c7f6ee85223167580"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-enhanced-thumbnail.webp",
+      "bytes": 6194,
+      "sha256": "1438099ab967c8e2ae9687620752424bce56ff9b8f830bfa190ee2ee84c75247"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-features.json",
+      "bytes": 19037,
+      "sha256": "319496b54c4be250996b275606daf810d2f0368e034f3ea48a2db73249679c3a"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-normal-shadow@2x.webp",
+      "bytes": 430956,
+      "sha256": "54bf2aa37867e9a73df55248d4233025f1d6ff131a6ca4d09f2e2cffbb064e3a"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-normal-surface@2x.webp",
+      "bytes": 973070,
+      "sha256": "ed6c493b166d7218f6b9d730af0f897bf87499016f7fd2fbc94afc33d67c4720"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-normal-thumbnail.webp",
+      "bytes": 3246,
+      "sha256": "8d3fd455c4117bc51b2cc022229b7544f80d41b26d311db27752d52f2894d1e5"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-spectral-slope-legend.webp",
+      "bytes": 190,
+      "sha256": "9095128dd6be1407b5a1fca35279e0eeba2d36cc5449efa91c8d3a63cebc00be"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-spectral-slope-shadow@2x.webp",
+      "bytes": 1008584,
+      "sha256": "04dc7b236bc4d29b42406079829ad373e34085c440fdc908941bf7422e471b6a"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-spectral-slope-surface@2x.webp",
+      "bytes": 2410266,
+      "sha256": "78b0da7c699d8b049196c6c5adb661f80f7201ed870658982d8ab6df004cc0b9"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-spectral-slope-thumbnail.webp",
+      "bytes": 6918,
+      "sha256": "12a16bb29cf271a6eb30286a125514162c0ff58c8f8baca0fddb0ec675f27e91"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-thermal-inertia-legend.webp",
+      "bytes": 266,
+      "sha256": "8aacc5d3e9a207839d3c0689fd98ad74502229e5f29ce47ef6f163210bb2842c"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-thermal-inertia-shadow@2x.webp",
+      "bytes": 1094904,
+      "sha256": "77a257a76659e4beb97daf9faf2bbf1364dbebedd64d8e2f1260e0250a868202"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-thermal-inertia-surface@2x.webp",
+      "bytes": 2101824,
+      "sha256": "5f38ab7e363925383e58a5322cf2d1ab015138fb97e72080ea31dee28105b8fb"
+    },
+    {
+      "location": "public",
+      "filename": "ryugu-thermal-inertia-thumbnail.webp",
+      "bytes": 8612,
+      "sha256": "145375d4f777d49cc4cf87d6baff11dea2eaad35676e49fe5ec8730e20d3bb2f"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1509,
+      "sha256": "893bedfaa39995f79a7a5f809ab776924f69492a7421ff394ada2e28d1141be2"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 5216,
+      "sha256": "9a136144a47ff727b70e3d008991eaba0d85edbda6c19e006aee463ba5563e8a"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 1849,
+      "sha256": "13428770ac5824e2973f9b459d8d0a2233d864da637024934bc2767ae55609fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 660,
+      "sha256": "81b3ff068c499de748ec4149d891d99efe4c1c7d0f032fc57ce9b2562475b91a"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 3998,
+      "sha256": "3c97fd4483de7d99af0c9d2f828681a1b41f29a496f72f64635b8d02664ccdc1"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 11138,
+      "sha256": "245598ce13f1dbc6768a8371785b07e5084b940ede9617458aa878b7da240d27"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 487,
+      "sha256": "155707fbf6fd6804eef49f469acdc87a4a19158688b617a29fe00265055ef1b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/close-up.webp",
+      "bytes": 13256,
+      "sha256": "795d4800f47c2321c9bf2283d3bf36c413dde23af6a52dec062af8f1934d387f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 41950,
+      "sha256": "d7eeee29315627945887b73816f1c78dbb054e1293338103b0f1bba54d70baf3"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/enhanced.webp",
+      "bytes": 69524,
+      "sha256": "e097bfff1c5b10a11a24d82a946c27db0fd043f072ad6ed875470d0599772393"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 35278,
+      "sha256": "092f140cfa43090ef005f73ddec2d8d3a81431a353e93a15641df8bc9ebf9c92"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/spectral-slope.webp",
+      "bytes": 97072,
+      "sha256": "5f653a35f2b1917529d510a7acce6ac5fe2af74470fe2b0f53dad692e91a3cb6"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/thermal-inertia.webp",
+      "bytes": 98962,
+      "sha256": "e5db04dc88ea18e29f394288df3e0cc6ac4bf3f63b856250455c6925db0a14f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 757063,
+      "sha256": "7934663578476485be85c40698587a11e70dca889e53f45c5c071bce6b52659b"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 611551,
+      "sha256": "fab11400e25be9102ebcf0c0b1676e515af9f58ce3b87b7a9dbdc145857bfc23"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1180,
+      "sha256": "6264fbf5bd72829dc23495913156c1789814063aa8d27aa94bf0e230c97276e4"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 639,
+      "sha256": "f812dbdd90cbd0bf65e47d0ab676141c8f669df4eecbe9fd4895546d0982afaf"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 11141,
+      "sha256": "7606e4dd19df7c44a3db1b05db90bbdbe0a37fec5eaa8c01c8d74c3566230526"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 3162,
+      "sha256": "21ecf75044ec588e4774b277cad7e420a22fea5a544659038caf79133f36cdc3"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1180,
+      "sha256": "62af7308f93c9683dc90992ef567fc082cd9c01d2bce15aa5545d2e5d12ee23c"
+    }
+  ]
+}

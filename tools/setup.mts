@@ -8,7 +8,8 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { publishSourceBytes } from "../src/platform/source-acquisition.mts";
-import { runtimeAssets, setupObjectIds } from "./runtime-assets.mts";
+import { ASSET_LOCATIONS, type AssetLocation } from "../src/platform/runtime-asset-closure.mts";
+import { inventoriedObjectIds, inventoryAssets, volumeMetadataAssets } from "./runtime-assets.mts";
 
 /** `node tools/setup.mts --allow-missing` or `CSSEARTH_ALLOW_MISSING_ASSETS=1`: deploy builds only. */
 export function readAllowMissingFlag(args: readonly string[] = []) {
@@ -86,13 +87,26 @@ export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation
   return { installed, reused, skipped };
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const allowMissing = readAllowMissingFlag(process.argv.slice(2));
-  const ids = setupObjectIds(process.argv.slice(2).filter(arg => arg !== "--allow-missing"));
-  const assets = await runtimeAssets(resolve(import.meta.dirname, ".."), ids);
-  console.log(`Setting up ${ids.join(", ")}: ${assets.length} prepared files. No source preparation or geometry mirror required.`);
+/**
+ * `node tools/setup.mts [--object=<id>…] [--location=public|prepared] [--metadata] [--allow-missing]`
+ * restores inventoried files from R2. `--location` narrows to one location; `--metadata` restores only the
+ * prepared record and presentation of the volume and context objects, which is all a deploy catalogue reads.
+ */
+export async function setupAssets(args: readonly string[], root = resolve(import.meta.dirname, "..")) {
+  const allowMissing = readAllowMissingFlag(args), metadata = args.includes("--metadata");
+  const locationArg = args.find(arg => arg.startsWith("--location="))?.slice("--location=".length);
+  if (locationArg !== undefined && !(ASSET_LOCATIONS as readonly string[]).includes(locationArg)) throw new TypeError(`Unknown asset location: ${locationArg}.`);
+  const rest = args.filter(arg => arg !== "--allow-missing" && arg !== "--metadata" && !arg.startsWith("--location="));
+  const { ids, assets } = metadata ? await volumeMetadataAssets(root)
+    : await (async () => { const ids = inventoriedObjectIds(rest, root); return { ids, assets: await inventoryAssets(root, ids, { location: locationArg as AssetLocation | undefined }) }; })();
+  console.log(`Setting up ${metadata ? 'catalogue metadata for ' : ''}${ids.length} object(s): ${assets.length} file(s). No source preparation or geometry mirror required.`);
   const result = await installRuntimeAssets(assets, { allowMissing, onProgress: ({ completed, total }) => {
     if (completed % 100 === 0) console.log(`Prepared files: ${completed}/${total}`);
   } });
-  console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused${result.skipped ? `, ${result.skipped} skipped (missing on R2, allow-missing)` : ""}. Run pnpm dev.`);
+  console.log(`Setup complete: ${result.installed} downloaded, ${result.reused} reused${result.skipped ? `, ${result.skipped} skipped (missing on R2, allow-missing)` : ""}.`);
+  return result;
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
+  await setupAssets(process.argv.slice(2));
 }

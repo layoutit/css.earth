@@ -48,7 +48,7 @@ async function fixture(t: TestContext): Promise<FixtureContext> {
     writeFile(resolve(root, 'object.json'), JSON.stringify({ id: 'fixture', properties: { recipe: { sources: [
       { id: 'raster', path: 'source/preparation/raster.json' },
     ] } } })),
-    writeFile(resolve(root, 'runtime-assets.json'), JSON.stringify({ assets: [{ filename: 'surface@2x.webp', sha256: hash(output), bytes: output.length }] })),
+    writeFile(resolve(root, 'inventory.json'), JSON.stringify({ assets: [{ filename: 'surface@2x.webp', sha256: hash(output), bytes: output.length }] })),
     writeFile(resolve(outputDirectory, 'lenses.json'), JSON.stringify({ controls: [{ id: 'surface', label: 'Surface', surfaceUrl: '/scenes/fixture/surface@2x.webp' }] })),
   ]);
   return { objectDirectory: root, source, outputDirectory, publicDirectory, basis: 'prepared', write: false };

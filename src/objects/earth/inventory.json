@@ -1,0 +1,2339 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-default.webp",
+      "bytes": 50882,
+      "sha256": "b9bf4628fb88346191fa06cab61be936bef1495bd3a751a87ac0ec2e69b2cbdf"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-default@2x.webp",
+      "bytes": 128110,
+      "sha256": "9236b1aaf66619be03126da1a3dc682db7e859732a8330ebec8359411bab16ed"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-00@2x.webp",
+      "bytes": 157132,
+      "sha256": "c4fd45ed0fb233016cbb28fa6842eb763859642f05428ee56926ddeb4ca783e1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-01@2x.webp",
+      "bytes": 196732,
+      "sha256": "f68fe985cbad3ef2766eb1dee8f9a3487f4875b6d3cff4dc2d49c923976ff416"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-02@2x.webp",
+      "bytes": 215228,
+      "sha256": "91e8d3ddd9102efd5b877069a84528ab2bf73a9e016c11c3bcf7af69acc79dd6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-03@2x.webp",
+      "bytes": 227898,
+      "sha256": "7b8dc4ca683df7794b01b4d33e9e9800b8ee19673e090c73b4f74696fec022a9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-04@2x.webp",
+      "bytes": 236484,
+      "sha256": "998638ec898440048657d1dffe625d32c99f095bd82c60358576132a67c60ace"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-05@2x.webp",
+      "bytes": 242590,
+      "sha256": "c7e7a7da298ff325e2d8ec573cc5b1ba13cc4ac0ed003690ecda16fb9bb222b8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-06@2x.webp",
+      "bytes": 245770,
+      "sha256": "fdd1530052574270ca35993859d039e815f9f745083bb77048a4fdf88136bce1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-07@2x.webp",
+      "bytes": 249874,
+      "sha256": "7af7fca4c73df6521d899e4155b2906904dc601565bdc52af4e2670cdd979ac9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-08@2x.webp",
+      "bytes": 251506,
+      "sha256": "c11cba700ade19cb38651fe44cc326d91ae06b6b73673d123cb7c2bc76761ee3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-09@2x.webp",
+      "bytes": 251818,
+      "sha256": "e85ea5c481f0b4c255a2afc440e3032d1061fc1067fc05bc1889bea0a699a92b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-10@2x.webp",
+      "bytes": 255516,
+      "sha256": "a6d3393374c4a4b61f577192412f91bf9685ac7f7d0dce941bdea716be185432"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-11@2x.webp",
+      "bytes": 255500,
+      "sha256": "687b70e320c64f6b4abb1e1d4773bcfa46e4f7811a127566cc2363999a29426f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-12@2x.webp",
+      "bytes": 254952,
+      "sha256": "9ac8924c5764738ef6fbbcf43ff51cc04a5aad3323e712b6d757d8c4acc0602d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-13@2x.webp",
+      "bytes": 253622,
+      "sha256": "bc4b92d0d37ebebc6113b60c1244db0de658a69ee04dd9cea7490deba79dd42f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-14@2x.webp",
+      "bytes": 248888,
+      "sha256": "05cc29c224823d61fe1b389d7b01d275a1a9a895404c44e7b40455ea67f47ef8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-15@2x.webp",
+      "bytes": 235176,
+      "sha256": "30f0c7b4400141113ad97d56cbfb368e25373bcc136bb91789ee1b6390b129f5"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-16@2x.webp",
+      "bytes": 231420,
+      "sha256": "836441461718c5cb0357396d8890667df8ff4d2e82b0756a562e6bb41294ec7d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-17@2x.webp",
+      "bytes": 253886,
+      "sha256": "6272814bee74a5bdc512fbef19ede60f65d7f3f2fc9684d13797b9d0a0ef8d05"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-18@2x.webp",
+      "bytes": 266896,
+      "sha256": "df8f21cfc6aac8ded6bbeb1cc77620cc618fd4e7a7b857abf67040b632f32ab3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-19@2x.webp",
+      "bytes": 279140,
+      "sha256": "dd3324bb9f4a3fe5e3669d65f975982fb42320e9b8c1ddd02d2168d0e929be7f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-20@2x.webp",
+      "bytes": 288502,
+      "sha256": "aec125c09351d74021f5f450d5e1a521963cf910bbe96979f2e8e27460fc61f9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-21@2x.webp",
+      "bytes": 298998,
+      "sha256": "015b39a609d97ea054f4f26b2b71b3c87c3b08241b26b87ee3256d8ec147fb77"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-22@2x.webp",
+      "bytes": 307404,
+      "sha256": "027622f1e07461a345aa5c7abdf17f2aa5c4ce181a506f523dc262e4ac021070"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-23@2x.webp",
+      "bytes": 323684,
+      "sha256": "37855b372393be85cd01a355096858a07fcedabe849a9b95eafef31f4f4501a3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-24@2x.webp",
+      "bytes": 338344,
+      "sha256": "32f5919a2dc57f83b9161dde929e7319c39f84c9808eee6cbb24ad7c03eaf74d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-25@2x.webp",
+      "bytes": 352570,
+      "sha256": "e6082a619bf9f9fa7f1fe644a9f6c40f940bc46a665074c68edb0443ba8404c7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-26@2x.webp",
+      "bytes": 370236,
+      "sha256": "2f135684299429accb0fe2d8752f949ecf9dccec166d01d4e142f897c6bd88d5"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-27@2x.webp",
+      "bytes": 392444,
+      "sha256": "40be8574b553f0eba01b21655f1a671e8f62a2c577ba8646cbb9ad3f98c5fb8d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-28@2x.webp",
+      "bytes": 415528,
+      "sha256": "57b5ced86dfcc6a79238d458184808c334b35f9ecfcc33d5f1687464edd41ed0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-29@2x.webp",
+      "bytes": 445450,
+      "sha256": "a97692ebfc20aaf13d2f67e7ee0ab79ca8761a0a0042b9e4e045573968800f28"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-30@2x.webp",
+      "bytes": 481190,
+      "sha256": "477cbc59f80fa6e098083e0c1bd7c43453d05398178be2b64e14409a846d3076"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-row-31@2x.webp",
+      "bytes": 533458,
+      "sha256": "8946f1eb12d565714a12074a002bb44d82d7d43dd71e33a1c6d5b915dfc8aa1f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-atmosphere-spectrum.svg",
+      "bytes": 4019,
+      "sha256": "618392880a079fe55e93904b4f6648d1c15f737e79b3d4b7aa46ce44994d6a80"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-level-1024.webp",
+      "bytes": 590684,
+      "sha256": "9af7b4ec66e4247b35bb87033a9604d62a4c1a9bda717ba01e17afd5f12b1e12"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-level-2048.webp",
+      "bytes": 1627360,
+      "sha256": "139666d78010d7182fafa270a480bda4989b707b618db84274b5b13adcdb2ee4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-level-512.webp",
+      "bytes": 187096,
+      "sha256": "79f5089bc0ae8f0dfd534266d3c6705a38b1ce4493152ec1540bb3693c2cc424"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-1-level-1024.webp",
+      "bytes": 870798,
+      "sha256": "4d26307e524674881df829454fdefc247d4037059b4c624afcbb9b63db30d796"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-1-level-2048.webp",
+      "bytes": 2718904,
+      "sha256": "3c159691f8dc7239486c4e07d5a367ddf494b95bc99e5a72c11898f54c5a215d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-1-level-512.webp",
+      "bytes": 268256,
+      "sha256": "b00341fd3f14f61db21d28800bdee03e86e118130b9731bc1cc5e83f1feaa9f4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-1.webp",
+      "bytes": 855462,
+      "sha256": "1209c828f8065ef8bc4f74fce56ee5a7ccdeb15a114bbd1d3cb5adb0e3074ec8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-2-level-1024.webp",
+      "bytes": 1330944,
+      "sha256": "de183aad39602eb48948f76821fe684fcf832955fc53bb1e8f9ed7b45dae5c3a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-2-level-2048.webp",
+      "bytes": 4348148,
+      "sha256": "480daa8a17d68a42c867b77f730b75ba91ec71b499acc6476915ce6b52b8418c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-2-level-512.webp",
+      "bytes": 397912,
+      "sha256": "b2f21ef4dddf8e811c8236cc46821e2888ed9c3eb68c78202800e69192f2525e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-2.webp",
+      "bytes": 1838070,
+      "sha256": "cee988ec8e057f04a4a98469621154bc5854e3cbe5b0e2e16dae1f3ca96ea7a9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-3-level-1024.webp",
+      "bytes": 1439054,
+      "sha256": "23f0759c3aa3173991370daf1dbb3f144639722db349ceaf6be467510aa035d8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-3-level-2048.webp",
+      "bytes": 4671306,
+      "sha256": "86235b422d36804c779faa326465f1079d150adcaec06af478d9be701ba154c0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-3-level-512.webp",
+      "bytes": 430856,
+      "sha256": "ab5dc38f7648fad83e0e3ba652a69072cd6aa3379ac4218543b40dd3f9ab5104"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-3.webp",
+      "bytes": 1977766,
+      "sha256": "5c8e3bb74a7772d1ddfbd35a68bf82c47ceb389cf90179c38cba2b675aaf2836"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-4-level-1024.webp",
+      "bytes": 1137254,
+      "sha256": "aeab4e9bf9caebdf5fd29bde230349148d59e1684322203defe9ceaf7d003bb7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-4-level-2048.webp",
+      "bytes": 3699282,
+      "sha256": "c045316fffa8ec87f215e5671d860d8e68d0214d05e3308ffb1e5877940c0228"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-4-level-512.webp",
+      "bytes": 344562,
+      "sha256": "1a7c34cee8eed616df04be76d33aa1c1a12e0cef78f1eb8889f3b4af5f6c8c27"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-4.webp",
+      "bytes": 1453434,
+      "sha256": "da6e2a261649f2c89ea56aa8d8ea2dc704e6cab08c8eb61c9fb86abab7dd7558"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-5-level-1024.webp",
+      "bytes": 782694,
+      "sha256": "2cfcda11fe77627b7ae72d9f1a10f10379256c39700198d1f12f0b398816b4fe"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-5-level-2048.webp",
+      "bytes": 2483998,
+      "sha256": "8f697be5b8cf488f9b959e4e29e27eacb4a6121b8aefcf5a3e2a38924adcbe73"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-5-level-512.webp",
+      "bytes": 236660,
+      "sha256": "cebaf7d0cf70a38dfa7da9818cf869100a738a88ea5471fec0e1f6fd1f0b199b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-5.webp",
+      "bytes": 768428,
+      "sha256": "32efa6ff42fb1424375cae14f35713e7b1c0d12f4c5e038a09df94d759c52e79"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-6-level-1024.webp",
+      "bytes": 124482,
+      "sha256": "c0a4d73b7108e9709d2d05e8342301c7e7f5ecec60415f8fea78ac19d238faa1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-6-level-2048.webp",
+      "bytes": 407602,
+      "sha256": "38b7d533a016e7d4df80b0fd7721d3f425b803f60923a6d15229ca3050a0e4cd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-6-level-512.webp",
+      "bytes": 39864,
+      "sha256": "10e7d3bef0f28fabc6d7cc69caf7d7ebb3584b8a002519996318e28721681c7e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-page-6.webp",
+      "bytes": 111714,
+      "sha256": "d5c2332a6c217311e53c983d99782c0cfc7013efe226cf24113a5e61bbcdb0c9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds-poles.webp",
+      "bytes": 92172,
+      "sha256": "711fe40c51e943cae79599e24c8ffafa412785a68a8779d7b6fbc3370353f04d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-clouds.webp",
+      "bytes": 447984,
+      "sha256": "12e459cdf85da2d07b76165d919a1db9fa9187e5b1edc624dd0fe8644e104835"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-legend.png",
+      "bytes": 603,
+      "sha256": "1cd39ea593edd9785a0a2e95edf4b32edefb18262f4eb8a58df50c9193951636"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-level-1024.webp",
+      "bytes": 33358,
+      "sha256": "dd13d15d13e1353d700e8d918a0e1fe53dbe0e96c464b15d39c828ac5e696a92"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-level-2048.webp",
+      "bytes": 67590,
+      "sha256": "c4868e8f318b05ee80c48873ac8450835eb0a241e6392c676d0bcbebb721f8c6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-level-512.webp",
+      "bytes": 16862,
+      "sha256": "115307043fd72759975f91d0858be67b69c6fe5991d2051e04b2c125f96c52bd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-1-level-1024.webp",
+      "bytes": 725688,
+      "sha256": "063c1d4e3e035888203ab3d165c08eb432533aa3d4111a7ef3eae80bec5952c6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-1-level-2048.webp",
+      "bytes": 2075322,
+      "sha256": "7535353acb1188c9552191bc0047501bc40a5a3bcf2eff6230e42bbecdbe63be"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-1-level-512.webp",
+      "bytes": 246228,
+      "sha256": "ca1d6baf6f2a7a74d9e82e1019631b5b93edb286a6f84ecab80a996dcb4512b2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-1.webp",
+      "bytes": 379154,
+      "sha256": "220cfbcdf0677be0bbc81cccac11944ba98bc26abd9409acda3be37381e35eed"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-2-level-1024.webp",
+      "bytes": 1643812,
+      "sha256": "125fb6ef08ea47a3d6cd3a6042283414b3e62c8aeca4a9a4e16310c84b7c7d77"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-2-level-2048.webp",
+      "bytes": 5116808,
+      "sha256": "3856278c4774d6c4495618d65de4d8dcd2fdb142e4ac7360921a15b3b18bc804"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-2-level-512.webp",
+      "bytes": 493534,
+      "sha256": "d9255f1fb96d437dd008b7caee6bd8b1566dc1a793328806faf099caa00f047a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-2.webp",
+      "bytes": 1161284,
+      "sha256": "29e0278606eb9433ecca0f5ac6f30482480d65c56fe6ac4f0459799741a89045"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-3-level-1024.webp",
+      "bytes": 1509098,
+      "sha256": "372d2d6ce0fcca12bd43987c626e8d3628074af3c475f105bad0024f510899c8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-3-level-2048.webp",
+      "bytes": 4703110,
+      "sha256": "2b3cc5dd0d12933e7bf9d9a9352a05b8f59b9e338b37945539ab774a08d53537"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-3-level-512.webp",
+      "bytes": 456516,
+      "sha256": "2400ad08f9106bde2ccff70afbe45e4ed361f7fb57abad4e8d872d2f9dfab5a0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-3.webp",
+      "bytes": 1150010,
+      "sha256": "8d55ce81ee52c407de6bc6914e9d617c119ecf03a286c33ca683ef51494eac0c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-4-level-1024.webp",
+      "bytes": 929862,
+      "sha256": "3c07f7fba9fe73cf931433bd86cd68b39db15867486a51e117ca0e4ee6f86199"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-4-level-2048.webp",
+      "bytes": 2708640,
+      "sha256": "2f9d8f2c6b16ed5bacddc0a1f451cacade201c7c34518b6007e8e8678d622447"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-4-level-512.webp",
+      "bytes": 308856,
+      "sha256": "6f95017beb36ea40c0b6577c7f5f7eb703ef5714655a0221353dd8f1ce0489a6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-4.webp",
+      "bytes": 598496,
+      "sha256": "4465a38042a9883f1558388429157e9a2029195bd29a8f8b3b03837e464c5c4d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-5-level-1024.webp",
+      "bytes": 616704,
+      "sha256": "934ff07dc046f228b8d005ab6a94dc13b1cd46dfb794cd3ab7d98e90f4271f4b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-5-level-2048.webp",
+      "bytes": 1770494,
+      "sha256": "f6a039c251d264685ec01ab92b249e76a97e37e4ce84ef970b6c08ef845fa503"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-5-level-512.webp",
+      "bytes": 210966,
+      "sha256": "3b5d212ee899fe50538cfaaf32e314f3f45e05aaa6b9b86677fe5ae38960602d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-5.webp",
+      "bytes": 347406,
+      "sha256": "d770c0d989e034fca8412d8dcf434d47c73d1ff839f25eb800af1c5204647913"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-6-level-1024.webp",
+      "bytes": 101578,
+      "sha256": "747c08215203d8e11a056616a5d4fb7ad6e99cdb56e5c64b8623fa488fb80258"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-6-level-2048.webp",
+      "bytes": 299524,
+      "sha256": "a95d9e7f54ab18d17fe51d8125a4a58dbae643e30b692848cbd6ae7e8d93bf5b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-6-level-512.webp",
+      "bytes": 34158,
+      "sha256": "c02de8f2511131c02fbf89dd678146550be91503b56169ee962368f35afd3667"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-page-6.webp",
+      "bytes": 60254,
+      "sha256": "de645f8970fe365e3c8fb2aed8f2f90006416dabf3126ddb41ee4afd3f0aadd3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso-poles.webp",
+      "bytes": 24716,
+      "sha256": "3b53c8ba2e3abe4cf07905acc4731c71073120b06691104c58d7b214bc6e92f6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-enso.webp",
+      "bytes": 40376,
+      "sha256": "bb7b6f6f3ea628e00c87a130674881b0bf1e527e531ac9ef362b6babfdf4e725"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-00.json",
+      "bytes": 130607,
+      "sha256": "6d4cda9cb5f57e36e84a5f796f15b5db03e377d53f1cac0599be3239588cbaf0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-01.json",
+      "bytes": 114630,
+      "sha256": "adc13f28e9ad29212530cb70bb0ccb11c770c74dd8eec4340dd919aa72ef9d70"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-02.json",
+      "bytes": 112267,
+      "sha256": "974f84420bcbf33d740175d98f685ed964cd84ad1f60f343be70f81d0e92de38"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-03.json",
+      "bytes": 117608,
+      "sha256": "3e6cc2b6a6b28503be291bf8a8056b42faedb94bbb39281a9fe682be0f7d7849"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-04.json",
+      "bytes": 128855,
+      "sha256": "e282ac1642a474afcf25180ec8e2e0af31e0d9b1ec2b850fd8d75519df8badb6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-05.json",
+      "bytes": 142249,
+      "sha256": "7574676191cb6bc45640def0442bc28012a1e26f3a802316219c8c24537c363d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-06.json",
+      "bytes": 133995,
+      "sha256": "c00dbc739d31d03862b9d691ce98c69c573dbdcd2a231f0f01732b5920c12237"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-07.json",
+      "bytes": 150506,
+      "sha256": "71396bcd638a51b6944b5ed991c05907efe0c64ee4bf57272d7fd4e264ef5dc3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-08.json",
+      "bytes": 149213,
+      "sha256": "1a76389f8079268e30b95a6d9ec4f7ec1b1d5ff0fb143d3077d6f77b0770b9ab"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-09.json",
+      "bytes": 83125,
+      "sha256": "a153bf7af962e75c22104ea375fb5609403bd354ad9da67ef387ca946f544be6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-10.json",
+      "bytes": 147048,
+      "sha256": "a60b4b21561d4c0dbba6953a6ef7ee0ab5d19f68a53013b946a16bec6c8a5b98"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-11.json",
+      "bytes": 158217,
+      "sha256": "c8522b98b72291e13f8d486bcf69e95762fb4d08ea0ec21f527e26236b0ceb0c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-12.json",
+      "bytes": 178677,
+      "sha256": "f3d53c248300bd59832f6c40e482d1c5dab3fdd03482a1eb9a43486bec51589e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-13.json",
+      "bytes": 117533,
+      "sha256": "feb4afaf9349bcbec363579c2047e22f8155e95b48e0a8dc83f488152c38a160"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-14.json",
+      "bytes": 139766,
+      "sha256": "2ec661bf4129872d8e66ff7a9d31ec92ac6910f1eee271473f8cf371b9470b06"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-15.json",
+      "bytes": 153289,
+      "sha256": "900bf194a8fc613b2a96a91d6f81ada3bdb8e91bf4b0f69732ee4d4d9a8ced0a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-16.json",
+      "bytes": 186710,
+      "sha256": "767c65616740b99920eba0d8cea31cfe67098d8eb158593072f1500946ce00c3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-17.json",
+      "bytes": 105039,
+      "sha256": "200e4a8ed66bf112c1b61d2b5a77db597359b36bea9edfbf6c322f387293a87f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-18.json",
+      "bytes": 131570,
+      "sha256": "705645306499385c1c507a72b514b0a2cdbfa7356c24dce9e8cc650e628490cc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-19.json",
+      "bytes": 186261,
+      "sha256": "b8e0d78907ebd8102ed75b5b0342f6e752eb10090e7fdff1a22abe6b0fe15082"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-20.json",
+      "bytes": 141550,
+      "sha256": "d042c78059fb5180c125f9134547905abd50f2746615e7167e22434d797ed8a7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-21.json",
+      "bytes": 116026,
+      "sha256": "6cf6f41d1e52895cf5f6b7b7b34d6316f11f515b23bf7ae3031a1440a560960b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-22.json",
+      "bytes": 115484,
+      "sha256": "50a9684cd060b69031413ec813626dd2e98400a151d4790ea9f03db546a4932f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-23.json",
+      "bytes": 85802,
+      "sha256": "14722d4b111557e34c99398bf305404b695cac5522cc9b24fbd94f6fc9cf4d68"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-24.json",
+      "bytes": 199994,
+      "sha256": "f571a3470c9df39b1ec601e9b0aac184596c56b3a7c51cc7732ee52224fce025"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-25.json",
+      "bytes": 71392,
+      "sha256": "a981b89ecd02dd1e851cd2984fe16376a7a2f9d1e90b22764b941b241b03a758"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-26.json",
+      "bytes": 144230,
+      "sha256": "b5882f7f1a30661d2840fd69edb5d8456d46e63fb6693e1e1aca28144ab89b65"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-27.json",
+      "bytes": 164052,
+      "sha256": "87542d76d303cf15bb96725612124bbf9879b22d63b4de359bcdf3875a67370b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-28.json",
+      "bytes": 120856,
+      "sha256": "be275b27e1b01d07be9c927e0192777bf986496486b9af5a359c6fb13cc20737"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-29.json",
+      "bytes": 168414,
+      "sha256": "e349a3eb619f3f286c529deb8070d1a2179df79933b397c9b968cb4b77bc99c4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-30.json",
+      "bytes": 120374,
+      "sha256": "f0cbc2bf44291608e822de26c0b303e007534d4d77b125089d96415a827ffd1f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-31.json",
+      "bytes": 193287,
+      "sha256": "3bdc7476cc920e6b398d064f3ca3cf2ef5b7ad078f42859db3726ce49d092723"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-32.json",
+      "bytes": 152139,
+      "sha256": "66f4a5d3544490e0e37e4abf3a60107e5757950604783476b0a085f20a10e265"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-33.json",
+      "bytes": 97548,
+      "sha256": "919e71a53b54308ec9548fcd9cc15766ca79854d41c04c4998d3a36420a42115"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-34.json",
+      "bytes": 110289,
+      "sha256": "6f5e963ebbd41b2991de76ece65e70b4455a4c93cef5d94eb82e942ae5cd261e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-35.json",
+      "bytes": 155718,
+      "sha256": "2cefee6cfe3b203457d2e09664b119e274023807c5bb04d396ffbaebe27228b3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-36.json",
+      "bytes": 150255,
+      "sha256": "6b23dab6d43c64bfdb286d202f69f05c1b60867401e898c292a158f63f07e21d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-37.json",
+      "bytes": 125462,
+      "sha256": "de16adb7eed279e067f3f65921685a35766e679c866bb946108e8e36780c3373"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-38.json",
+      "bytes": 155262,
+      "sha256": "18ab7c06fdbf8fbe47b84889dfc3e1e92752e3231cacb1b88137df866d755d1a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-39.json",
+      "bytes": 164790,
+      "sha256": "b1fa807c09770eed4709bf63750e09899ae85789b0fd7e70d40403f62db3c49d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-40.json",
+      "bytes": 139329,
+      "sha256": "7240d5eb6b737fc0742f80a1447eabdb4be63e203e02051a49bc0a786e87b312"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-41.json",
+      "bytes": 111413,
+      "sha256": "95f9d4aa13424fca963695f89ef7264ce2a0a0afbe802f02e726853c51767fce"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-42.json",
+      "bytes": 181547,
+      "sha256": "5969fbd2043e9381ad59e0d1fe187339867498e2d3a38ebf61d7c3b918bf74dd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-43.json",
+      "bytes": 139383,
+      "sha256": "3ead89579af08fb1ac0a8d71a3a20d3b4a0168f3862721821c9f0413760800fb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-44.json",
+      "bytes": 147900,
+      "sha256": "9cb88b5e7ae6ea276188464ec8e2137d3f0c254bd94697524b7658c70387abbb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-45.json",
+      "bytes": 138872,
+      "sha256": "280f4b24f945acdc92b2d9155823bcbf7fbb5bef5c30a4e5957b767bf4fdf9ad"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-46.json",
+      "bytes": 89923,
+      "sha256": "8a9b604c2dc75ccea7c8edc21b203d0266a46531f1dffc18669e48eff64177b3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-47.json",
+      "bytes": 146816,
+      "sha256": "2da7f799feaab6112c1710bc5752eab7798a213b3ba23131c2e1471f9508e41e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-48.json",
+      "bytes": 147061,
+      "sha256": "68d2034bc0acf6fd010270604cf7a76bb2703a06e0887384ca06f9c543fcbb98"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-49.json",
+      "bytes": 122974,
+      "sha256": "170fabaae67809c51c9fb43d67537ebad0f9dbd0dd5008ae7859030589200d0a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-50.json",
+      "bytes": 134201,
+      "sha256": "d89359efa480f9497e3be2de2c6d231a2c2a1b4ba2b1503bd4c85cd9d9c59987"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-51.json",
+      "bytes": 154767,
+      "sha256": "aaafadcb775ee27b445c800286c5ae0855e141d23986ddd079d93b93b229acbb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-52.json",
+      "bytes": 156464,
+      "sha256": "8f4984b2eed7b2b40fef006ab06bdac2b2db19b35ee1ca6685799c43a6bbfda9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-53.json",
+      "bytes": 138311,
+      "sha256": "1892dacc1ac9f6b94cdbeac5ca41705adcb04fcc2ee2975647c143af5a48a5bd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-54.json",
+      "bytes": 157624,
+      "sha256": "5e6050ac7f92f2c927b5b04fb2c620644f51fc79ec2d1ae9441152a2bb9bb7fb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-55.json",
+      "bytes": 161018,
+      "sha256": "d22f26a8a84517b58e3871fa0ae118a8498f1a032427b3202596580b201c1eda"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-56.json",
+      "bytes": 132563,
+      "sha256": "05d136032af427a14aa9f6d0863557a13b6d6638d1dcc497af80f3fd7f2edabd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-57.json",
+      "bytes": 88365,
+      "sha256": "5430362e7936822f2e9c1ddfc2bb2776d01df8a3f0763341d71a7d221b198a90"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-58.json",
+      "bytes": 137046,
+      "sha256": "9eaa74fa8aa2cd2bc09c42d48065a7dd39ea620316b026a175182a4fd9ef5c26"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-59.json",
+      "bytes": 151844,
+      "sha256": "b470111faf40381f7734abe91c6e5a6bbd48b56799c54a3748c9103751391f93"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-60.json",
+      "bytes": 100214,
+      "sha256": "f12ebce6c4682e1707079b09fbecafb0040de38135bde3f0ea32332394f627e1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-61.json",
+      "bytes": 119181,
+      "sha256": "69f9831434d29d2aa0baf9fc8a1c898745613630b264ad67e542d7a404b9a6ad"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-62.json",
+      "bytes": 167586,
+      "sha256": "5de8527098789f659f3ba006484eb75de7cece9f80ee8d75cb5541194852fae4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features-selection-63.json",
+      "bytes": 205590,
+      "sha256": "cae157235b42d09f41d321b062b373680083c776fe09385c4a612d9f26b912fc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-features.json",
+      "bytes": 386121,
+      "sha256": "f9c9f28bf2bec27d2df18266346498d2b9d2f47cd717dfca1cfb17d99fc1926b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-inner-core-poles@2x.webp",
+      "bytes": 20260,
+      "sha256": "798ca53f64696c3f65dfdf17057bd9fcdf6ca2501d1c993596f6fec10ecae793"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-inner-core@2x.webp",
+      "bytes": 107008,
+      "sha256": "25b334494dfbb0959d04d53f8a3a2242682eea641a4d56dc738086c3b48d27e3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-mantle-poles@2x.webp",
+      "bytes": 15634,
+      "sha256": "9263d70f1b5f2049b384ce4dc1930d59338e25bed814255b96d672c96eadb232"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-mantle@2x.webp",
+      "bytes": 73622,
+      "sha256": "03ab4b119a46a88af51e2ce17585dcbbe6dcec1acb6636c0af0aefbcab07cbb9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-core-poles@2x.webp",
+      "bytes": 17562,
+      "sha256": "ae4297773c515c0a3c6531b0121480f88bb0798fc5e9f7ebb6bf044f649f91e4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-core@2x.webp",
+      "bytes": 88492,
+      "sha256": "59abf483313abb0d00cb05d2e66897f9b7418e3d20df301a387bd411d78f1dc9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-1@2x-level-1024.webp",
+      "bytes": 661562,
+      "sha256": "a242ee281d0908cb1fc3e4658e092b176075ed5a7fac1a3fedcf92c37655f6af"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-1@2x-level-256.webp",
+      "bytes": 71514,
+      "sha256": "18d6f2b6ee5feefcd5923ae63a1ce6feb3ef952c8a5b38a82679a4112326c5f1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-1@2x-level-512.webp",
+      "bytes": 218924,
+      "sha256": "4bbe3262a7c0009b013897a4929b8763eabcff4116a0f7c802ed80edf650dbe3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-1@2x.webp",
+      "bytes": 215042,
+      "sha256": "cfb9f492caea13bf321d619ccbd4805e66e3e533608ae3b07ece97e85b5f8e54"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-2@2x-level-1024.webp",
+      "bytes": 1060760,
+      "sha256": "e0b6897f976878c66bf4fff8a360dd9ab0beb8e9cc4b3b5e0d53098a084a3ffb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-2@2x-level-256.webp",
+      "bytes": 96264,
+      "sha256": "3bfead1d163ea948e3d4967d12f18ac4210f8c6fa17147c38669eaecc6161bcf"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-2@2x-level-512.webp",
+      "bytes": 330670,
+      "sha256": "dcad772249f4403b65ff2b78559ce05650a16550ef412f7ccc1e454a9da06bdd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-2@2x.webp",
+      "bytes": 472180,
+      "sha256": "ea44d5f3827c8ad3a062d15f88b263cd60ac7e49e0d31f329a20b56384e55857"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-3@2x-level-1024.webp",
+      "bytes": 1087128,
+      "sha256": "4ef70aa99e274459ee74dd2bdb8504273ea93ba94ae5e7b5e94b58129692d26d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-3@2x-level-256.webp",
+      "bytes": 103306,
+      "sha256": "f682efb28096055a3aa8438c8c0a542651c22c6ced73305cbc3ee3b500b0b099"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-3@2x-level-512.webp",
+      "bytes": 344106,
+      "sha256": "d6b8dc7811272494eeb07f5400dcdfe5ad6ef6fb34ba7e63ed371c597bc7249a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-3@2x.webp",
+      "bytes": 465278,
+      "sha256": "440f763a59d61ef5051ffcd0f9ec9cc6c3b72baf45d8dc6db04e594fb6d8e374"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-4@2x-level-1024.webp",
+      "bytes": 953614,
+      "sha256": "e81c0b36a66265b6fb9c7f1387afce84ef62eb22ed04f0abcdbe6ba614958f7d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-4@2x-level-256.webp",
+      "bytes": 91920,
+      "sha256": "383b14e92c2846cbd06c3d859f43fca9782bc702e930239e3ee71895769d4aca"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-4@2x-level-512.webp",
+      "bytes": 298010,
+      "sha256": "21066d819a33360e8e55dc85d9a552ef63ed504f0ab54a12ad2cc31599600a3b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-4@2x.webp",
+      "bytes": 360282,
+      "sha256": "63b0a9838c71d0d1518433e37af67fc085ab258b6a709e0a6bdb7447b0b08edd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-5@2x-level-1024.webp",
+      "bytes": 573204,
+      "sha256": "4de0b24077e46b75100adb02f77933304eba0ba1b5566124faf4a26ea025f24b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-5@2x-level-256.webp",
+      "bytes": 64450,
+      "sha256": "4e50556fba0f71417659d44593668e5237721989642adfab5502c0854258c4c3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-5@2x-level-512.webp",
+      "bytes": 191744,
+      "sha256": "d584f58a7b707649d1e3c1b29610f91241e429b7c45a41bd9dbc059c25ab0e55"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-5@2x.webp",
+      "bytes": 169860,
+      "sha256": "feadcf745759463554d51fb539da8269bbee0f26ff7284b189894d52694d7f2b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-6@2x-level-1024.webp",
+      "bytes": 109832,
+      "sha256": "d28f326a1af48889bb32ee3bed082e049bda72748946623d7d6405b83cb2b148"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-6@2x-level-256.webp",
+      "bytes": 11728,
+      "sha256": "6373cc0ee5783c91afb946fd1dbba0fb105f4c4ac50acd1d6a282650ec7dd71f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-6@2x-level-512.webp",
+      "bytes": 34236,
+      "sha256": "0744461108c912deb31d86bc8a8c87f9f5469a53b989018785d7002645548d9e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-page-6@2x.webp",
+      "bytes": 32358,
+      "sha256": "1f1aeed2ffead26b4b86880804c539ef0f8d6e0645a71cee79c806205affc49e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit-poles@2x.webp",
+      "bytes": 134078,
+      "sha256": "6ee23c4ba18e0526c2f54d9361c84d160e643fefef0292aae179fd3f6230f16b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit@2x-level-1024.webp",
+      "bytes": 366922,
+      "sha256": "408fc8037744d28d8a969fafc4cf1ea2ee9bb769e5c201b229ba86e061b84767"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit@2x-level-256.webp",
+      "bytes": 48880,
+      "sha256": "455abb4567edb524aab75712e1ad4e8c93f3601334b1f37559757279540daa7f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit@2x-level-512.webp",
+      "bytes": 136360,
+      "sha256": "5052d4fa9171d7afbeec42a24937e9c476ea94fdd81e247db2c23e125a0b3983"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-lit@2x.webp",
+      "bytes": 103400,
+      "sha256": "50b29ae7c01d620f072bc745d5308f60c52db8af34d61955ae530fbe29e3184a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-1@2x-level-1024.webp",
+      "bytes": 810956,
+      "sha256": "e9adf6615d1d95edf6f63f37b85ccae3b3c93a5977c85c4793a4baff590adb76"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-1@2x-level-256.webp",
+      "bytes": 81426,
+      "sha256": "87cffe570e27c5f7b0ea2f0f4518be2844485e69afaf51ea488ad209f63303e6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-1@2x-level-512.webp",
+      "bytes": 257982,
+      "sha256": "ecc4948b80306af02bfc87dbf79d76950827e6bcff6d6befe5e34ae9700b1b1d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-1@2x.webp",
+      "bytes": 343446,
+      "sha256": "162f735893e21102cb01dd92e5f039cd0b06a14d77c7f41781b90e938e63ab22"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-2@2x-level-1024.webp",
+      "bytes": 1233310,
+      "sha256": "a967559289f3beb3c5fabc74f20a1bbb9f02df9a5701244601c0db32faf2753a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-2@2x-level-256.webp",
+      "bytes": 106564,
+      "sha256": "f2b93fa903b457bee0e024dc14660746ba0e6777a722776d1fb02385dd1901bc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-2@2x-level-512.webp",
+      "bytes": 372822,
+      "sha256": "0b034701399aaa6e4c3f56fb624948b54ccfd7f2ba71207a4a4ea94e117c28eb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-2@2x.webp",
+      "bytes": 740810,
+      "sha256": "4976c2af080cdac3f0ebd0846c4c88d4db388d97c385e8150d65560dffa59b3c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-3@2x-level-1024.webp",
+      "bytes": 1301644,
+      "sha256": "faa5c680fd4ae2ec98c38be133fd29d37822e239ac2e63067a931762c11b966e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-3@2x-level-256.webp",
+      "bytes": 116228,
+      "sha256": "c0613bfc679bfe1e8f8da609147269d71a92a0c74c0e92e020c0a274980ff619"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-3@2x-level-512.webp",
+      "bytes": 396996,
+      "sha256": "086e58615c2bb1625b4a0c7505ef110095426e9a3c362eae5f2d93dafb9b9043"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-3@2x.webp",
+      "bytes": 718064,
+      "sha256": "f60c898806faae85d0df7d3ddf01f57429a2584dd9a4282f8d9dc7fa5beb273d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-4@2x-level-1024.webp",
+      "bytes": 1113834,
+      "sha256": "34b29201f1c2bae13be6efeb38e1d28180f419c19f89f82f455defb674b4aa7d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-4@2x-level-256.webp",
+      "bytes": 104174,
+      "sha256": "f68b2012dfab6202e3453d2fdccc054755e482e693e9aacfd6e1bf04796803cd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-4@2x-level-512.webp",
+      "bytes": 341238,
+      "sha256": "70f05f745e8d7ddbe6b9cf567a04a922f6e4fb3fccf1a373837dbc42efaf9c14"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-4@2x.webp",
+      "bytes": 530738,
+      "sha256": "849154680dc1a71d4114ba74acbc8953c749b4df8ae54a12c76c2b88be648a23"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-5@2x-level-1024.webp",
+      "bytes": 714952,
+      "sha256": "63161eec795a368911539d100d691c20d04e108516ab4cfaf6b1a5008a5eb735"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-5@2x-level-256.webp",
+      "bytes": 74480,
+      "sha256": "5f71207a844159493b1cf5ff9d85793a8950976c83de34752a213fa209d32c3f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-5@2x-level-512.webp",
+      "bytes": 231400,
+      "sha256": "515857af58890807915fc22feee497b5f366b9bf46e0350c51f5494a9009ca4f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-5@2x.webp",
+      "bytes": 263850,
+      "sha256": "68a69b309617f29cfd11b53232956104210a1fae04c928542573e138dd2026e0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-6@2x-level-1024.webp",
+      "bytes": 121268,
+      "sha256": "6ee5268684aca7270319d2fe65373d56dda7f7ce4a907aa703476cc66344c9ff"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-6@2x-level-256.webp",
+      "bytes": 12794,
+      "sha256": "c5f754e446b230761c91a86950c735ba66ddeb1c79b4b527b515d8efffe5b755"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-6@2x-level-512.webp",
+      "bytes": 38304,
+      "sha256": "5389994c90505c4d1bac5da097ccaec63dc33d38fc5f045b4b011b2df291b4fe"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-page-6@2x.webp",
+      "bytes": 40084,
+      "sha256": "7c2b9d4e2b86f09ae6caa765f81c85ab1be3130e17aef1d3e2f487f3209fc6a8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer-poles@2x.webp",
+      "bytes": 169106,
+      "sha256": "11aa2bf3b9b5cca64d98c9fae59a49351bb1a5c9db89206d3f181adbc1676ca3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer@2x-level-1024.webp",
+      "bytes": 530958,
+      "sha256": "28d9767480e8d964da7ed19e1f1d836638d801fee38f5053e716db0777f1d6aa"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer@2x-level-256.webp",
+      "bytes": 60712,
+      "sha256": "391d54ae9d863813435ff684661e829dbd68de1d7f156a32703731bc1c8a35fb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer@2x-level-512.webp",
+      "bytes": 184318,
+      "sha256": "032d67848534150e351a09cc6d067e5215d9044043d7210517d311b9d697fa3e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-outer@2x.webp",
+      "bytes": 172186,
+      "sha256": "8f032c1d5e357ad0d80c2cba20f4721b9584f3b6ee89128048e69bbe877fbc38"
+    },
+    {
+      "location": "public",
+      "filename": "earth-interior-section@2x.webp",
+      "bytes": 56838,
+      "sha256": "403f1f7c445fe7d56e2232d71155734bc04dc052a94268cf56a7577f575f08ed"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lens-clouds.webp",
+      "bytes": 3194,
+      "sha256": "9f13e33b23a1d9cc0ceffb8f9c983c69b98c1445bedaea74ddcaf9ac462f659c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lens-enso.webp",
+      "bytes": 4414,
+      "sha256": "354f1bf436b4791fb792020a931a79d2d504e33e982c2ddb9fa820bc70afa8de"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lens-night-lights.webp",
+      "bytes": 2836,
+      "sha256": "d88f52b66ae3f501ebbd6c4ef0a5fa6c20ba2b669eefd97110c342f451431db0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lens-normal.webp",
+      "bytes": 2044,
+      "sha256": "616b83ae1e4c9b47b72bd8aef350c178630ade712c88a12839a4990913565a11"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lens-topography.webp",
+      "bytes": 1950,
+      "sha256": "b9fa0fc3c2238ce31009358bebda5b48092cb64c4249df278aa6c66a99bcba86"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-default.webp",
+      "bytes": 2026,
+      "sha256": "a44ce0a02ac693b105fa4d17de0b4f11bae5c9b14a877f91185bf5fb0cfbdc68"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-default@2x.webp",
+      "bytes": 4042,
+      "sha256": "8758c60e80b57b00373de70b2d0323dae3b6b27cbe9f0d45d037281d46a1d645"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-00@2x.webp",
+      "bytes": 18482,
+      "sha256": "55006301a2f0c500f6e785e1aae80122dc94ebca267480f19a5535274a49951a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-01@2x.webp",
+      "bytes": 34964,
+      "sha256": "cd70c2350763ddbc637424c16d8b55b1ded3b964185054ed1f08c2e28d1258dd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-02@2x.webp",
+      "bytes": 44094,
+      "sha256": "7e96dc592ee882a320dae76e2a55d9eaaccbb2350dafbe00cc231d6dbd50970c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-03@2x.webp",
+      "bytes": 52716,
+      "sha256": "a03b346bb58ffc8819450436fa48a7194adfeff2c2cd24098b553ddf7ae554e9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-04@2x.webp",
+      "bytes": 58652,
+      "sha256": "b7770d994afec46db57e7d09c5c1ca102ce828a573f23c60758408d0fd05e69a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-05@2x.webp",
+      "bytes": 64350,
+      "sha256": "3bc039f95321f78434b04e4bd9bee0701f719c5f1c36bf0a9b848d6046fdc922"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-06@2x.webp",
+      "bytes": 66620,
+      "sha256": "2ff5a75799e8c4d315339a8f9f1c61cd998db79f51098ba1e3e4e96a7cc9d499"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-07@2x.webp",
+      "bytes": 69682,
+      "sha256": "c189a2bdd0b83952f69291d5ed74bf8ee7894d4748b8e787c8e6ad4170af4ef7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-08@2x.webp",
+      "bytes": 71658,
+      "sha256": "f497d2bb3b2d3c2ea1dad34e16cf7a5a21bdacef11a4ef194a31f1a67328884b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-09@2x.webp",
+      "bytes": 71364,
+      "sha256": "93db8df4aaba0aab22ac11604fc4c1b1c17982b70d058b55aaaab61ecbec1b6c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-10@2x.webp",
+      "bytes": 72224,
+      "sha256": "04ea4faaa9cf8cd6feee730808b0438b45fd55ba35b8fbba7a72212660fa5d9c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-11@2x.webp",
+      "bytes": 71054,
+      "sha256": "182a36708e14f39b28c09dc965bc2f5ccb97c7cbe879c6f5541a84abb78627d0"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-12@2x.webp",
+      "bytes": 66972,
+      "sha256": "db6fb9f6ddeb49246579dfe8c5aa0354e8b8192a9f8741940f345ba030ca65fa"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-13@2x.webp",
+      "bytes": 61638,
+      "sha256": "821eb4bda34a76351570c4cf5b1470d6e9be72785c9c973a5cfa14a9fb1d8657"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-14@2x.webp",
+      "bytes": 50116,
+      "sha256": "683707b2fc9a83d3c8f405d97dfcb004a60e85e0d41ef42e330ae3a3b18e9570"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-15@2x.webp",
+      "bytes": 28522,
+      "sha256": "e9b324a03abf066237cbadcd64995bdc89df4ff28f69204b04e353122bb915f3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-16@2x.webp",
+      "bytes": 30204,
+      "sha256": "6cc440482774a2004c6a540a3fb46665b5f6a30a7c3cd10a284b5c0a7b748359"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-17@2x.webp",
+      "bytes": 55068,
+      "sha256": "6dc20f2529e9d4ca7b8b3f71599bf31d943b16baa0c512d976816c2f4b3a1185"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-18@2x.webp",
+      "bytes": 70732,
+      "sha256": "002552c3a8ce134ee6fb3c6198d042ba47409883875ecf1bd7c2e79f248ca4c1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-19@2x.webp",
+      "bytes": 81550,
+      "sha256": "85b24b9effb34f376ea28e635ebc5f6e27a35fab7f55fa32481b92e32951f8ce"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-20@2x.webp",
+      "bytes": 88796,
+      "sha256": "8c7b72a457e0842d43266e908332a9a19f8e4f43a69f74a8ff4485013ba47c00"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-21@2x.webp",
+      "bytes": 98244,
+      "sha256": "a874f195be8d80ee78c8b696407a881ad23acfea5149cea1a09d5420b61ae27a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-22@2x.webp",
+      "bytes": 104658,
+      "sha256": "f51cb4f8e044d98d522cb288ebc571ea951d74ca13ff5a0b6fbe32a92bb0bc5a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-23@2x.webp",
+      "bytes": 110628,
+      "sha256": "153ac487c3d71f5cd80f3088a409e3fb9835416aeaa30d26e21fc09e10d94bf2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-24@2x.webp",
+      "bytes": 117684,
+      "sha256": "e46e8f186facec71b2d120f61518813c0a9a4f32ba51758272429f042c5ba9ec"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-25@2x.webp",
+      "bytes": 124652,
+      "sha256": "10ada392681a84220ba9f8b285762970360ecb8f8068d31cd7651cf4cbe7e55d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-26@2x.webp",
+      "bytes": 131348,
+      "sha256": "8d8ce65cc2a70d7d239ea83c5b66792a1495f689dd1564d655bfae4494c5de71"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-27@2x.webp",
+      "bytes": 140442,
+      "sha256": "d429e4fc2ecbfeca9e8829d3c47ffdfe1165c1dd5005d682fac03ab8cca5e961"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-28@2x.webp",
+      "bytes": 149630,
+      "sha256": "0c831fc29ff6b3cf5d1703753da5802d1490c1d83347cc6cca36ca85a1c317ed"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-29@2x.webp",
+      "bytes": 160504,
+      "sha256": "b50a4f23d8add8671af99e8ba15039487fad7934f212132749030a3e45d2d9a6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-30@2x.webp",
+      "bytes": 169754,
+      "sha256": "dcdfeacbe292afdd19d48561d4729e11b85d4336e05c5213bba47e87537530a8"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-row-31@2x.webp",
+      "bytes": 187442,
+      "sha256": "edcdf02781043a73293cded7dbedbcb62acac72cdfaad43c6ad59bf3d3f794b3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-lighting-shadowless@2x.webp",
+      "bytes": 24622,
+      "sha256": "c9ee76563bcde58ca96f7cdb5a9dd1749b95d2febd965a34275b68ab88bfa335"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-legend.png",
+      "bytes": 1932,
+      "sha256": "3a2e79ee42683af3e652b0ce460c3dc0bbf6b601e244ded4511bfff6aafb6bc4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-level-1024.webp",
+      "bytes": 28688,
+      "sha256": "11e147950ac4f5a85aa0c7af5f2a0a8a0f3498fc2ae3cd07f2a42eba2db7e989"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-level-2048.webp",
+      "bytes": 57410,
+      "sha256": "2b74eb739c4118b6305d1a8706a18686a8b1000f772e3874a26f77e3387591dd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-level-512.webp",
+      "bytes": 14338,
+      "sha256": "25d04a15ecc5bb190ffb1ac8c91a3edb8179c31b30eb963621e3ade6037ad9f9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-1-level-1024.webp",
+      "bytes": 226772,
+      "sha256": "eb1b207ff3a5afc2a24cacadb634757d0979093640323084db1625338efef378"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-1-level-2048.webp",
+      "bytes": 673252,
+      "sha256": "c9aa61b4acdf68f1396db373a02928309a083c3320085d6e80cd2156abb6ed6a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-1-level-512.webp",
+      "bytes": 79938,
+      "sha256": "55820a96741c36e3ded21c9e6f9a738c452f90d655b8e07c13bad6a63c4f275a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-1.webp",
+      "bytes": 235660,
+      "sha256": "570b8cc6bf0b8de8a92b40c43be383cfdc1952f79f2595b6fea95531af4967ac"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-2-level-1024.webp",
+      "bytes": 224106,
+      "sha256": "44316a9d59cd2e75e2121b8d34592f1f8ff26bbac6815bfb7e07de98520496b1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-2-level-2048.webp",
+      "bytes": 619606,
+      "sha256": "33383a5c372a3ddff45640c092c951850f0215ea74846e2f45d86f7794d4caf6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-2-level-512.webp",
+      "bytes": 85594,
+      "sha256": "fe09be49783a8d9270548f7149f44757c7b8494affc9ed6e985e11fc5c74101f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-2.webp",
+      "bytes": 320088,
+      "sha256": "9bc313a895b2edbd10c31f64cbbdf9f19dcaf0bee98533b94023c857441c23b2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-3-level-1024.webp",
+      "bytes": 449396,
+      "sha256": "6302c5b05660ecaf56ffd81d6e4078bb3931f8365025da524f81344e947cd886"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-3-level-2048.webp",
+      "bytes": 1396548,
+      "sha256": "69e1be4242f35bb37c0f05d8889893c880d3d39b40278b99950b9a2a784ef0c9"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-3-level-512.webp",
+      "bytes": 144788,
+      "sha256": "df08ef544cd3cee9e752fb0a5b69dae6a4ec5a1c5d1700accaaa0375d3abc54f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-3.webp",
+      "bytes": 839652,
+      "sha256": "04361dcd38276409544e1b10aa86bc9ffbb8d16a36855c8828f32c4f7e5b0adb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-4-level-1024.webp",
+      "bytes": 613294,
+      "sha256": "e81a58d358182944e73580d581e0506b46d997786ec66bc38f86d2afadcda981"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-4-level-2048.webp",
+      "bytes": 1978014,
+      "sha256": "1a86e8a586d1f01c4bf14e7a5a373c1ab32df9ea23beb125c2b24b1e87cc42fb"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-4-level-512.webp",
+      "bytes": 193334,
+      "sha256": "54c2e26def3cede938eae015c5ae16e1cd33389a7ff99dcdcde597a1a4d2d429"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-4.webp",
+      "bytes": 841832,
+      "sha256": "d7dcbd074c785b3cb0c494867fc98b2defe971f6d445261e21b90af7ed094b8c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-5-level-1024.webp",
+      "bytes": 591390,
+      "sha256": "a7fdeb2f9079e94a340a4aabf3e40e50fa999d67dd28390c7695547552012454"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-5-level-2048.webp",
+      "bytes": 1834022,
+      "sha256": "30ec4d094b9ceb78a2f923d2845d4dd39c92fbcb33f1d9914272cb0ec942494e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-5-level-512.webp",
+      "bytes": 171144,
+      "sha256": "9c6a66e60741c6eda546755b3625b03946ba973be483d9112cb01991b65682b1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-5.webp",
+      "bytes": 601666,
+      "sha256": "ff4da52d9ec0ab50929b9b70667f266a349196664e3fe3d4fabb162adc3416d6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-6-level-1024.webp",
+      "bytes": 103608,
+      "sha256": "3a76ec5f2ca46ec24ddfb7c969a275e5aab372967dffb96c831cf466d4d3629b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-6-level-2048.webp",
+      "bytes": 344806,
+      "sha256": "4b34ba3832cfd872bbc0e4a50ac0e29f7e7e2b57de5733fef1b3a0b72f9bac69"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-6-level-512.webp",
+      "bytes": 30374,
+      "sha256": "ac5ba4f3920f9c3e8e98cccac337c13ca3c574f82d6954df3ac99c94f059c397"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-page-6.webp",
+      "bytes": 113498,
+      "sha256": "c99599a1b3b1d013829b1c531d64c6b31ccfd671d47b53b4701fd245a69b45a1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights-poles.webp",
+      "bytes": 7234,
+      "sha256": "1bca79f43bab7a97e661f5b85ab3e5c8047fd82715a232a8473fab6924b4a4b4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-night-lights.webp",
+      "bytes": 44720,
+      "sha256": "3fd2bb8eb21b55ab7f0eddec4cd8ac5cec15e7f4be0a32b1a448c5ac82a70e09"
+    },
+    {
+      "location": "public",
+      "filename": "earth-photometric-phase-curve.svg",
+      "bytes": 4360,
+      "sha256": "f2c02091dcfe4343299fff3bd96b6fd8d542fc2ef4d6aeb1fbe7acef77ff2b98"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-level-1024.webp",
+      "bytes": 508690,
+      "sha256": "4b6b9043b72908c9aeb2733d6db84b80d52fc57c409a2a8acafbb78503898f56"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-level-2048.webp",
+      "bytes": 1371916,
+      "sha256": "38ba6de7ef771f853c8c023a86299f35d166c6c495fec084203599bff85a44bd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-level-512.webp",
+      "bytes": 164610,
+      "sha256": "b2920c1d5f3fc8f9f5df0e354b4994caf59bd8bf299271a40e6d1a473938be2e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-1-level-1024.webp",
+      "bytes": 584888,
+      "sha256": "87c27723f77e195270df00f0757bc595246e9dfe84d36290680a99b906141e3c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-1-level-2048.webp",
+      "bytes": 1481418,
+      "sha256": "73267016370d65f0b573ebade34ca5dcee8cfe724e55968c624441680f83010e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-1-level-512.webp",
+      "bytes": 197062,
+      "sha256": "ec90fd09608bb33bffc543bda6336d8be547d7764a963b9112ea3bb03204656e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-1.webp",
+      "bytes": 398618,
+      "sha256": "703af9df4aefa3cea575fffa2da83221ed9a97b0fae6caefb298a5f6d97f9b26"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-2-level-1024.webp",
+      "bytes": 899620,
+      "sha256": "145d3f91e0c8153500dc825b579c2950767b0cabae0616817e7bc00a75b8204e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-2-level-2048.webp",
+      "bytes": 2490752,
+      "sha256": "b06e66be09088a9233e5427ab5eab616e5483567d757bdeeb6f561369c080d3b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-2-level-512.webp",
+      "bytes": 293022,
+      "sha256": "2e9d6b801eecb098d47cf032bf0a049eb11da84ed2bbfd20f0f10224ffff13df"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-2.webp",
+      "bytes": 673264,
+      "sha256": "e441956b2dafdf37996fe6bd5ab6849f8b7eeeb6902245bf3ab4dd6bbe069fe7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-3-level-1024.webp",
+      "bytes": 1140878,
+      "sha256": "332f09b25598acd443e005a618165c428dff58cb81a2bb84368c76cddda70775"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-3-level-2048.webp",
+      "bytes": 3404332,
+      "sha256": "4179aa6068a867e369c75748f969df093dc9ce0032325d125d084bb3f84e18bc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-3-level-512.webp",
+      "bytes": 352658,
+      "sha256": "f57c5837a9155982a705fa8fbaa8a81ecaf86ad1764f988c8a09b2e438249b9b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-3.webp",
+      "bytes": 1122008,
+      "sha256": "71944a0c5fc2eb620bd59235fae4aff2b45cb0d2f8781d62b0ea9e49b7e01a27"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-4-level-1024.webp",
+      "bytes": 1016388,
+      "sha256": "0eb1cb73ef63d19cca068cc9e0e0d55ce0f4c2bc12a73ffba05fa63c9f70c95f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-4-level-2048.webp",
+      "bytes": 3273836,
+      "sha256": "bc47541b3114369fc45fee06e5300477ebcb3ff567a3e4728eae3fcaa0ffe60f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-4-level-512.webp",
+      "bytes": 311770,
+      "sha256": "204029551889d5da921127a744b422e3e961d2fb7ea46c298840c53a7d02abf5"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-4.webp",
+      "bytes": 1198356,
+      "sha256": "96e14661940cbd53ab3542b87545553e068af2583df5e00b8b74a395d59f1467"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-5-level-1024.webp",
+      "bytes": 752712,
+      "sha256": "bfcb5b9d49d2c4d5e143ddb5bfb438a02fa6f58e7504e74534bce78e002468cf"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-5-level-2048.webp",
+      "bytes": 2338022,
+      "sha256": "cbccedddb137881c171872d91cd7cf7f1bcfc7bca32cf9d5b05652885e8e4796"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-5-level-512.webp",
+      "bytes": 227068,
+      "sha256": "e8a391cc0076942d85008049867fb05d3c96508133093a10b68fc9f1c7884bd6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-5.webp",
+      "bytes": 743654,
+      "sha256": "c8919c9a9a840c320912653dfe0b7d619bd2ce0b787f2c1b31021f6cd45b8fcc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-6-level-1024.webp",
+      "bytes": 119472,
+      "sha256": "fbaad67e75d9fd5b52e9fce5ba3ee24e97dbc5d83bb0fce7b7faebf97efae8c2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-6-level-2048.webp",
+      "bytes": 402302,
+      "sha256": "c74b1c7718846cac967f9f66e0654629c9f1df1410b50d3a8ab8ee2390efdbb3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-6-level-512.webp",
+      "bytes": 36022,
+      "sha256": "ecbba2d549f2dfab7bc839384f95c2c0c63a53ae3d407a987d01c699b3700f63"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-page-6.webp",
+      "bytes": 121238,
+      "sha256": "31361813e737cfbc5c26c77a6d01409b01fbcab2e1983ae12281b445efadaed4"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface-poles.webp",
+      "bytes": 85488,
+      "sha256": "84580c26b19d4fee29ca4e56489fe9bbca487b3808d603209b85060b650ccc4d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-surface.webp",
+      "bytes": 435998,
+      "sha256": "329449b22b7deb3a50c10f5e1c335f74c2de2c059477636a881ce6e37d4bea84"
+    },
+    {
+      "location": "public",
+      "filename": "earth-temperature-pressure-profile.svg",
+      "bytes": 2530,
+      "sha256": "24b5c28e0c8ae1a9c82787d345ad27d391e2a3b0289263388fdaf583b73b829d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-inner-core-poles@2x.webp",
+      "bytes": 21366,
+      "sha256": "fa091a821de0d19607604b93266353511e4a32eb089e7e445a14eb442a0cdc1c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-inner-core@2x.webp",
+      "bytes": 115800,
+      "sha256": "e585328ba89004929bda4e9ff1d5932679c37e95cdb91968f355b55d46aed0d6"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-legend.png",
+      "bytes": 2083,
+      "sha256": "c1ba3f0d75a8a3d897168a575acd0568ce0ebe0f98fdb7be8c92e690fc176286"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-mantle-poles@2x.webp",
+      "bytes": 65172,
+      "sha256": "2d8a1988e6ca41cfea2c2c218b0edb94ff779e1ac80bea09e16158347bc85bab"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-mantle@2x.webp",
+      "bytes": 117986,
+      "sha256": "39525d3f990540d0ed27cf3d3b98deca0568be58a3fb89b79ce4541e612e5d6b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-outer-core-poles@2x.webp",
+      "bytes": 17316,
+      "sha256": "6163fc9c55f0bca18e5a07c1ec3e88c621a1b6dc844dda9f1bddc663252539ca"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-outer-core@2x.webp",
+      "bytes": 86368,
+      "sha256": "59671a6f82f756b1c8e74ef44429e5daccd1c33b0c59b856b05a95f72b2c8e99"
+    },
+    {
+      "location": "public",
+      "filename": "earth-tomography-section@2x.webp",
+      "bytes": 110362,
+      "sha256": "db5505965d3bfdb697a79cf4aaaed0983708f0211fd9267291a34ac5deab8735"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-legend.png",
+      "bytes": 2066,
+      "sha256": "cd30437db4818a37363dc9ac616ce395f3aec411d13c02960c4e03e46585496c"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-level-1024.webp",
+      "bytes": 475152,
+      "sha256": "e20a1f1fe7103b0941c73fa51175954c90a01d4de09792bb93e3f8f7531db4cd"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-level-2048.webp",
+      "bytes": 1150494,
+      "sha256": "3a9c7422be5e2234d468a8b0361de827c33672ecc5f14b8f115f2df505cfbd9a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-level-512.webp",
+      "bytes": 172606,
+      "sha256": "7e91697e5d4f64a4b9d104ac12dbe4317dfe8c283d29ffae5b30839e86e8cbca"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-1-level-1024.webp",
+      "bytes": 713620,
+      "sha256": "e3d413759d27aff8065eed95bf63a7cd6cd9d56fd0aceada56063b0228ae1a91"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-1-level-2048.webp",
+      "bytes": 1893958,
+      "sha256": "53a339d8db0ff1df7faaa35c35da7e9bd7f1ab2fbf633aff53baf9c5ef8078c2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-1-level-512.webp",
+      "bytes": 239538,
+      "sha256": "0610eb92225445450920aac20da28490ab11c8054c07a2393417f67a7dc6741f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-1.webp",
+      "bytes": 302048,
+      "sha256": "ca09f9accba30e928e5a37e5b01f29621c1ea7d0534f48a36649994265d29856"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-2-level-1024.webp",
+      "bytes": 1140150,
+      "sha256": "756e11b76a8399414061866e5f7d28af08bbb719141af6f7595284ce48105291"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-2-level-2048.webp",
+      "bytes": 3234724,
+      "sha256": "f57daa30d6af9993c6137c02e26f1ebd20a124221ab8a85851f61661ba7ec449"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-2-level-512.webp",
+      "bytes": 360038,
+      "sha256": "1042ac50a264d7aace5da1131064c54e3cc2e4410e2d830e25d036ab02c1753a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-2.webp",
+      "bytes": 543574,
+      "sha256": "e6f70903bfa6863b793b4f9e0ec767b28d96eda71f6ad078a1d68fb9bec0153d"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-3-level-1024.webp",
+      "bytes": 1271894,
+      "sha256": "232ce5276180c87e309d5164e2bed8b1b92ddd794b2b0ddcda32d1c599c8fd91"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-3-level-2048.webp",
+      "bytes": 3629174,
+      "sha256": "e8f7a4c73962262876ca9a53d847f646dcf7a8a22a98006b7dd1e94693600791"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-3-level-512.webp",
+      "bytes": 398850,
+      "sha256": "c80b1523cb3046f9bb967555a94499d1ecca7a482e4cae34773e961e50d1e3ed"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-3.webp",
+      "bytes": 680668,
+      "sha256": "d0331556d5df01d0f3d67db3d1d86ef24c73c502bd4a85129b695d3a37cbb5c7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-4-level-1024.webp",
+      "bytes": 923682,
+      "sha256": "c873db8d59456be00ae185ac341c835b938010875555042a075bebf8ba80265b"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-4-level-2048.webp",
+      "bytes": 2552410,
+      "sha256": "07d9ad963edab4f9f16e7d94eb07383805e072c837d224f2c04be82db411666e"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-4-level-512.webp",
+      "bytes": 306876,
+      "sha256": "fd4fb7c826a806c270b38456c48ee6943603deef5244ab290dce5f7b866d1bc7"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-4.webp",
+      "bytes": 442992,
+      "sha256": "0e3cb36a67754a860592717e1921fa1ec36c305e7f496eb2f1020654cb2f8aa3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-5-level-1024.webp",
+      "bytes": 653078,
+      "sha256": "d8ee998ba028acfe4c3534223236c7b5cd307e2e25b9cbebc0b304a9658af0e1"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-5-level-2048.webp",
+      "bytes": 1739154,
+      "sha256": "aa43aadb17c904c67820b23783c94daee400a955fdaf98c8ea74d89c44e66af2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-5-level-512.webp",
+      "bytes": 219300,
+      "sha256": "eb78ca2c4fece33ae97c2e98fa8fa39a3f282f3c970388277d907cefa3b11f8a"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-5.webp",
+      "bytes": 291264,
+      "sha256": "b9b8b0006bb10e04b6ecb9990de54c11b5c87da32c9299e11383ee893154a2a5"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-6-level-1024.webp",
+      "bytes": 79768,
+      "sha256": "ed9dc72d5136758377cc03e58035ea751128e613f5c89be5c96b0851312f3dd3"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-6-level-2048.webp",
+      "bytes": 205086,
+      "sha256": "c0b5ade5ca5ebf3b260a0e52798bdcecb249eb5cbc516a7d0eff544e7b16094f"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-6-level-512.webp",
+      "bytes": 28670,
+      "sha256": "b6342a98654a9d01ad767fa9b5083c6a11107df817a5c94697fba5159785a763"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-page-6.webp",
+      "bytes": 34268,
+      "sha256": "2f0088b9f88190fea9d76cbad1dcef2b4589aa1a959445927ab6828d5b3785dc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography-poles.webp",
+      "bytes": 43138,
+      "sha256": "90cbe1e58001cb8ca23f06e5221de6c9590cd1c03ac78f9aa1a74a16dbc26734"
+    },
+    {
+      "location": "public",
+      "filename": "earth-topography.webp",
+      "bytes": 167768,
+      "sha256": "640f30496491fd0fccb23e1167e6d3d6d57477c7ee98a11b321dbce5332f1ae2"
+    },
+    {
+      "location": "public",
+      "filename": "earth-view-interior.webp",
+      "bytes": 1152,
+      "sha256": "3d7bc0d6a342734fcb496bc3c275e3df6043de5304a967f736f7b52ea2d465dc"
+    },
+    {
+      "location": "public",
+      "filename": "earth-view-tomography.webp",
+      "bytes": 2094,
+      "sha256": "dbbf6668d7688e11815e304c7d056c027871c4876b188618b7574e32766b115f"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1425,
+      "sha256": "7c15733a0450f6147d4d127783d45593c0335d3c5150bc86ca88944697eebec6"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 6832,
+      "sha256": "54d7d42651220ac9a935b2c3d2d66cc639fc65f280e62457e9b63a7d96c651e8"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3689,
+      "sha256": "57739aa9622869c60ffe4ee30b1250ab7608c689f8d85f15a3dda862e917110d"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 11146,
+      "sha256": "06cb795afae292edb581699ef988d42ccc3de5540f9d3d9c0e08fa5590fb73fc"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 6631,
+      "sha256": "9a28705fdb1f87d61e8d88a83aaa0027d4b139bbd07d8e8556081ccd8012d218"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 384,
+      "sha256": "d31033111c936b66422615da6bc6f0753dec83a42df84b236e29c339933e0b57"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/clouds.webp",
+      "bytes": 76452,
+      "sha256": "4ffb7d18c2b8ec18c001b700bd1203943ec34f99c3a0449cf78d1c96af5f37bc"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/enso.webp",
+      "bytes": 80814,
+      "sha256": "ebe5ef2520f2164ce4e314022703e995fc3e371a48ef42f31f9f5679d4e252a2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/night-lights.webp",
+      "bytes": 18046,
+      "sha256": "5b3451025c107f05f58bf07dfe81685f05a21a7bfeb8def52b09a40d7866837f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 37820,
+      "sha256": "a008aa6d7156cf9f71e3cc28a62509955bfe14c0ac5ad94d3802eb858cdd0eb8"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/topography.webp",
+      "bytes": 56440,
+      "sha256": "5583ec3ea1d01e1b3cc1cd4a2bfb13bf0667557e7aac187e5041208785f2e21f"
+    },
+    {
+      "location": "prepared",
+      "filename": "noise.json",
+      "bytes": 18615,
+      "sha256": "6d0582861856aaee1de1327ac9d60bccbba6bc455c16467bd0f2b49e40b2f9c4"
+    },
+    {
+      "location": "prepared",
+      "filename": "page-preparation.json",
+      "bytes": 792,
+      "sha256": "b89b98083a3fb5aa8eecbc5e1d6cf94d73b6b8ea9395e9ad72040617051c5759"
+    },
+    {
+      "location": "prepared",
+      "filename": "pages.json",
+      "bytes": 1636151,
+      "sha256": "0ca1896fd4bba6d0ad2dd04389a7dcdb51c3898add531b9da3b0296a9cc5fb8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "places.json",
+      "bytes": 247,
+      "sha256": "60bc257fae123024ba1e96a5b7c90a3165758a70b293d1c0c45d9f57237d6585"
+    },
+    {
+      "location": "prepared",
+      "filename": "raster-assets.json",
+      "bytes": 11313,
+      "sha256": "318b997607ba6674078acc92438952ca6f8461993804bd0caf408286076f69b7"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 1195125,
+      "sha256": "76e18d1dd74d5c44be26ec65536c9a5d7e4d18fbf14be780be13474cc42eb8fa"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 1308910,
+      "sha256": "1c700720e772c64aa2bdb023701069a98e2428ac3a48e97f8d6535c8a571ccf6"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1026,
+      "sha256": "73a73992874f715d5c98758afe4c66ccac71255717be8989af2dcb05ef7489d0"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 637,
+      "sha256": "6872da35a786b08d6ff4e84a2a4a246d864012ca407c24edb39e875bbc6c386c"
+    },
+    {
+      "location": "prepared",
+      "filename": "surface-raster-plan.json",
+      "bytes": 234146,
+      "sha256": "0d1ed62d4a15b69e53ea9e3cf00bc21afc60c5b7e42ad7b1623b074cae4d63df"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2148,
+      "sha256": "f1d372486ef93829aa49c913e44b52b43c668627b877c51171aa077b5d9444cf"
+    },
+    {
+      "location": "prepared",
+      "filename": "texture-levels.json",
+      "bytes": 109873,
+      "sha256": "b20330e1dbbbbf356fb35290770460722eb2a32a2db844a7cfdbc5a77104bfe4"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1223,
+      "sha256": "54b747e0d6e28f7d8036be91cb191947423958a016ee648669571840c1758406"
+    }
+  ]
+}

@@ -5,7 +5,7 @@ import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
 import { promisify } from "node:util";
 import { Agent, fetch as undiciFetch } from "undici";
-import { inventoriedAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN, type RuntimeAssetLocation } from "./runtime-assets.mts";
+import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN, type RuntimeAssetLocation } from "./runtime-assets.mts";
 import { isRecord } from "./source-values.mts";
 
 const execFileAsync = promisify(execFile);
@@ -38,7 +38,7 @@ const SCOPE_WIDENING_PATHS = new Set([
   "src/platform/runtime-asset-closure.mts",
 ]);
 
-const INVENTORY_PATH = /^src\/objects\/([^/]+)\/(?:runtime|prepared)-assets\.json$/u;
+const INVENTORY_PATH = /^src\/objects\/([^/]+)\/inventory\.json$/u;
 
 /** What `addedAssetKeys` decided to check: every key, or only the keys a diff added. */
 export type AddedScope =
@@ -91,9 +91,8 @@ export async function addedAssetKeys(ref: string, { root = defaultRoot,
     objectIds.add(id);
     for (const key of baseInventoryKeys(await inventoryAt(base, path))) baseKeys.add(key);
   }
-  const current = [...objectIds].filter(id => existsSync(resolve(root, `src/objects/${id}/runtime-assets.json`)) ||
-    existsSync(resolve(root, `src/objects/${id}/prepared-assets.json`)));
-  const keys = new Set((await inventoriedAssets(root, current)).map(asset => asset.key).filter(key => !baseKeys.has(key)));
+  const current = [...objectIds].filter(id => existsSync(resolve(root, `src/objects/${id}/inventory.json`)));
+  const keys = new Set((await inventoryAssets(root, current)).map(asset => asset.key).filter(key => !baseKeys.has(key)));
   return { all: false, base, objectIds: new Set(current), keys };
 }
 
@@ -221,7 +220,7 @@ export interface CheckAssetsPublishedResult {
 
 /**
  * The publish gate (`check:assets-published`): HEAD inventoried keys from both inventory kinds
- * (`runtime-assets.json` and `prepared-assets.json`) and report exactly which ones R2 does not serve. Read-only.
+ * (`inventory.json`) and report exactly which ones R2 does not serve. Read-only.
  *
  * `addedSince` narrows the check to the keys `addedAssetKeys` finds against that ref (a PR's base branch, or the
  * last green `main` commit); without it every key is checked (local use and the nightly sweep). Each miss is
@@ -237,7 +236,7 @@ export async function checkAssetsPublished(objectIds: readonly string[], { origi
     sleep?: (ms: number) => Promise<void>; addedSince?: string; findAddedKeys?: (ref: string) => Promise<AddedScope> } = {})
   : Promise<CheckAssetsPublishedResult> {
   const ids = inventoriedObjectIds(objectIds, root);
-  const inventoried = await inventoriedAssets(root, ids);
+  const inventoried = await inventoryAssets(root, ids);
   let assets = inventoried, scope = "every inventoried key";
   if (addedSince) {
     const added = await findAddedKeys(addedSince);

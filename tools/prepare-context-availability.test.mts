@@ -61,7 +61,7 @@ test('an asset-origin build verifies a missing local preview against its publish
   await rm(resolve(root, 'public/scenes/helix/preview.webp'));
   assert.equal((await inspectContextAvailability(root)).helix.available, false);
   assert.deepEqual(await inspectContextAvailability(root, { publicAssets: 'manifest' }), { helix: { available: true } });
-  const manifestPath = resolve(f.directory, 'runtime-assets.json');
+  const manifestPath = resolve(f.directory, 'inventory.json');
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   manifest.assets[0].sha256 = '0'.repeat(64);
   await writeFile(manifestPath, JSON.stringify(manifest));

@@ -41,7 +41,8 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const selected = config.raster.surfaceObservations?.filter(recipe => lensIds.includes(recipe.id)) ?? [];
   if (selected.length !== lensIds.length) throw new Error('Unknown surface-observation lens.');
   const originals = new Map<string, Buffer>();
-  for (const name of ['scene.json', 'surfaces.json', 'material.json', 'runtime-assets.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  for (const name of ['scene.json', 'surfaces.json', 'material.json', 'minimaps.json']) originals.set(name, await readFile(resolve(outputDirectory, name)));
+  originals.set('inventory.json', await readFile(resolve(objectDirectory, 'inventory.json')));
   const previousSurfaces = requireRecord(JSON.parse(originals.get('surfaces.json')!.toString('utf8')));
   if (lensIds.some(id => !records(previousSurfaces.surfaces).some(surface => surface.id === id))) throw new Error('Refresh cannot add a lens.');
   sharp.concurrency(1); sharp.cache(false);
@@ -62,7 +63,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   await prepareRadialMaterials({ radial, surfaces, config: { ...rasterConfig, geometry: { ...config.geometry, radialTerrain: { thumbnail: terrain.thumbnail } } }, source, sourceDirectory, publicDirectory: stage, outputDirectory: stage,
     sunDirection: requireBodyFixedSunDirection(id), snapshotEntries: [] });
   const replacements = new Map(surfaces.map(surface => [surface.id, surface]));
-  const inventory = requireRecord(JSON.parse(originals.get('runtime-assets.json')!.toString('utf8'))), assets = records(inventory.assets);
+  const inventory = requireRecord(JSON.parse(originals.get('inventory.json')!.toString('utf8'))), assets = records(inventory.assets);
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
   for (const surface of surfaces) {
     const old = records(previousSurfaces.surfaces).find(old => old.id === surface.id)!;
@@ -72,7 +73,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
       const filename = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(stage, filename));
       if (sha256(bytes) !== value.sha256 || bytes.length !== value.bytes) throw new Error(`Invalid staged asset ${filename}.`);
-      if (assets.some(asset => asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
+      if (assets.some(asset => asset.location === 'public' && asset.filename === filename)) changed.set(filename, { filename, bytes: bytes.length, sha256: sha256(bytes) });
     }
   }
   // Confirm the package has not changed while preparing, before applying any replacements.
@@ -89,8 +90,8 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
     await copyFile(resolve(stage, filename), resolve(publicDirectory, filename));
   }
   for (const filename of await readdir(stage)) if (lensIds.some(id => filename === `${id}-source-index.json`)) await copyFile(resolve(stage, filename), resolve(outputDirectory, filename));
-  const nextInventory = { ...inventory, assets: assets.map(asset => changed.get(requireString(asset.filename)) ?? asset) };
-  await writeFile(resolve(objectDirectory, 'runtime-assets.json'), JSON.stringify(nextInventory, null, 2) + '\n');
+  const nextInventory = { ...inventory, assets: assets.map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) };
+  await writeFile(resolve(objectDirectory, 'inventory.json'), JSON.stringify(nextInventory, null, 2) + '\n');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshObservationControls(id, lensIds, new Map(surfaces.map(surface => [surface.id, requireString(surface.billboardColor)])));
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });

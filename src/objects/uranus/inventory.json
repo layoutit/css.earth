@@ -1,0 +1,311 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "uranus-atmosphere-spectrum.svg",
+      "bytes": 5663,
+      "sha256": "ba54a9ff388ead8fb89d750ec014f996e746f1b00832c1f1caeb7e8af9a0924b"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-methane.webp",
+      "bytes": 326,
+      "sha256": "8c453b227a428f36ed0993a6517b76316d9acb6d00666d640c608f648747b0be"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-near-infrared.webp",
+      "bytes": 210,
+      "sha256": "42fc7f50196d89871a9abbcf0986bac68604c19657acf099dc7946ec24544df2"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lens-normal.webp",
+      "bytes": 170,
+      "sha256": "c1076d759d598a7ad34ead3b478df0166701fe644c17488d8c4a30e2957455a8"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-billboard.webp",
+      "bytes": 47716,
+      "sha256": "ba40515b65efff3a3ea36cc58959e9317cee4c3eadf83ea02ec70359aeb4c4f7"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-00.webp",
+      "bytes": 31778,
+      "sha256": "4c489b10a7a0fa35103068746bfb4c4da72deff15539c998f0a63ff43c090fac"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-01.webp",
+      "bytes": 49558,
+      "sha256": "16160660f455777ad68f58f740b04e2c29bb865b29ce50c34e286ac5b0507791"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-02.webp",
+      "bytes": 53954,
+      "sha256": "127b73d25ee6737280b93b61da55c67fe935ccae933e272b140e3417c0cee7f6"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-03.webp",
+      "bytes": 58024,
+      "sha256": "1229d23516ad3e019883339ae517d2d679fcae57875c0148ba8e1c019847fc85"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-04.webp",
+      "bytes": 58004,
+      "sha256": "7030c7628e451c6d1d53c1a1440cdd3e2db75cf97f17d94aa1546687bc4c17af"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-05.webp",
+      "bytes": 56354,
+      "sha256": "99555bce1cc8c742cec7db8328cba4c7f468640f326ca495c17012e9c1de7d07"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-06.webp",
+      "bytes": 51022,
+      "sha256": "f087aeaa0e22003c20a3f9166cae54a955732b7b78b4b963858e5b00e187eb46"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-07.webp",
+      "bytes": 33516,
+      "sha256": "58cd6fd2c44de3a3a247d8bc70b59873e81fc9357ccdd002218a37ca1ae626fb"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-08.webp",
+      "bytes": 32518,
+      "sha256": "507c5a828fed2a978d5c80aaa426b36508d2a24cdc0bdd554e22cb4613efaf7f"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-09.webp",
+      "bytes": 47566,
+      "sha256": "c9e00f78b222f75020288d5b776c39c763132a84ce1b8227c8b34ba6d9fbf33a"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-10.webp",
+      "bytes": 55498,
+      "sha256": "a51554275b42e797bd24311634cecc3cfa62f08e2673a6cf9f4b33220fefa967"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-11.webp",
+      "bytes": 60624,
+      "sha256": "135627617513b17f781e6afe4323378f530c73bc5380ef6f0414b20b0cb26366"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-12.webp",
+      "bytes": 62450,
+      "sha256": "bf3597c023f2d7e27ad726e433435748254d824c7a587804f5c6eeb9f3313180"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-13.webp",
+      "bytes": 64296,
+      "sha256": "b72e276a6531d412f156b524a143b26ae7adf5ff4f9cfdea66a5c57565ecccb6"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-14.webp",
+      "bytes": 65536,
+      "sha256": "3f1eee02ee66f32dfac8beb61f72451e5491b71c1e317d66686dea0f38d3d2ed"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-lighting-2x-row-15.webp",
+      "bytes": 91614,
+      "sha256": "784d9ef6abd5cd73def891446dd9a61f8a4f1d622505fd0a3233db810747a745"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-photometric-phase-curve.svg",
+      "bytes": 4479,
+      "sha256": "70c8573641ff1671a3025885b22336fe5601ec5b963f9e85a877c51130e45c7a"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-methane.webp",
+      "bytes": 2802,
+      "sha256": "88b2097f66dbffc07e25dbd40bc20969893a12360174babe88fa15a2c245fb45"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-methane@2x.webp",
+      "bytes": 6018,
+      "sha256": "c14017892b28dd5fe5fb55682929bcc60edcbf3215c0181e2ff7264c095eff1d"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-near-infrared.webp",
+      "bytes": 2050,
+      "sha256": "6292d1e2e459d5d24b4b3765c9eb4e4fe2c3c411330342bd55d3caf3e8c402f0"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-near-infrared@2x.webp",
+      "bytes": 4478,
+      "sha256": "1bc0d9225f81abbd6a44f94abc855e1d5106a15efc1de5d74a7b4e8368a21047"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-normal.webp",
+      "bytes": 2028,
+      "sha256": "4d1d5c325348f44ae71a05dc24bd775f52573c7ff17d4e3c0d57c45bd8e0691b"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-poles-normal@2x.webp",
+      "bytes": 4302,
+      "sha256": "18f1f0ffc98a583514606da02e4d44c935ee37ebf2beee56467e90a8438c7e18"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-rings-wedges@2x.webp",
+      "bytes": 114320,
+      "sha256": "2bb8f96a2dc9364c4d36629f7d8559d79b6d006908415bf472bbb555602a9a74"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-methane.webp",
+      "bytes": 84292,
+      "sha256": "41291dfd165c7e6684d110076a115ef2ac186a116d6ebf78f8964dc6af859f88"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-methane@2x.webp",
+      "bytes": 213528,
+      "sha256": "45f9d4b41cf5f1326174e027815b9082fce375cce833ec9b9402e029706df8d8"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-near-infrared.webp",
+      "bytes": 47242,
+      "sha256": "090bfc86f7965c2f0bc56bfd3298aec851272b6f566437517f221454f47dd159"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-near-infrared@2x.webp",
+      "bytes": 131884,
+      "sha256": "7f873ded9574c8b7bb639fe8bbb7593e249349513162e7d8f9e2acbda606e9de"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-normal.webp",
+      "bytes": 50024,
+      "sha256": "83f85c865d3047732e5e4b6c26261817c9ba9470972a54f8dc0f0b84fd0b4c5d"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-surface-normal@2x.webp",
+      "bytes": 143348,
+      "sha256": "26f2daa62218faa38b4efb9b538c9eb73937ad9a5fbdb0baafff527aa53e6f28"
+    },
+    {
+      "location": "public",
+      "filename": "uranus-temperature-pressure-profile.svg",
+      "bytes": 2033,
+      "sha256": "085e1a338657174ceb28bd6dd50cf57ef9c8636406455fa6519018b235d1f2c7"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 84915,
+      "sha256": "68583b672cbc51b29df2dc2893b5a5782e997eee94a105f0b9bcc0b92b87a8fb"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1941,
+      "sha256": "a669c2eed246cef634f983be6472ddc0e7bfa204532f5ecbca95ec29459413af"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 8481,
+      "sha256": "00840888b8bd46ce103f747993eb2dc806d330c8834aebe179cde2e0331bd06a"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3338,
+      "sha256": "b461957fd1ddf7a54b23abe4222fb1fff7b52a24e298ec95bbe81c1e212e258a"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 4205,
+      "sha256": "91c711e614f0deffdbc87e0c3fbf0ae8a2bed23bdbbf9e16150bf87a4da93b74"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 242,
+      "sha256": "3ad553c48d9c637bee1b0407dda93362d9690cbe4ba25cba2a22ec8deac6a406"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/methane.webp",
+      "bytes": 9790,
+      "sha256": "668f06391a0756df28f5922f235bf5949ffafb85ae5c9a951a5fced5dbb0780b"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/near-infrared.webp",
+      "bytes": 4184,
+      "sha256": "528b37712073fbcef70ecb6cd15de835691081fbf96219b634923cffcd7b7a58"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 3972,
+      "sha256": "860d3af617ad640db7f5639333da02f092e991979ccb89ee4a9a9cd8bbf9d2cf"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 992553,
+      "sha256": "0494967a99a93999e97212b1a689056b6dd43c63bb564223e9d7370fa643e6c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 859322,
+      "sha256": "44fa3ba86f1251c3c195eb9dbdca0f8897bf06a9ca8a8af80173f1f5cae208b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1031,
+      "sha256": "f3f100af2397213a59b5c8974a009e7216673b2044814948cc98e19710614e0f"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 616,
+      "sha256": "b7d5604d8e31c2bc4d5afc58d03608eaed67c860a4895955dd20e8ffa2874547"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1188,
+      "sha256": "8b33df7864b4ed3fe783f61ca27c4ae1e4c94831f2ac6e25dd143f9ee39bef8b"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1227,
+      "sha256": "20eb630e982ceca1d8ca39aa4b0156792fbd1fdb9a3d7cac959d3eebf66f571f"
+    }
+  ]
+}

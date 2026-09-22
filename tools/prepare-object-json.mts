@@ -28,7 +28,7 @@ import { authoredObject } from './authored-object.mts';
 import { preparePresentationBindings } from './prepared-presentation-bindings.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
-import { bakedPreparedFiles, preparePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets, readInventory } from '../src/platform/runtime-asset-closure.mts';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const format = PREPARED_CSS_OBJECT_FORMAT;
@@ -96,25 +96,21 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
       page: { ...requireRecord(originalProperties.page), metadata: page.reference } }, prepared }, null, 2)}\n`);
   // Nothing under prepared/ is tracked. Every baked file moves to R2 through this inventory; object.json, page.json
   // and provenance.json are regenerated on each checkout and stay out of it.
-  const inventoried = await bakedPreparedFiles(preparedDirectory, id);
-  if (inventoried.length) {
-    await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory,
-      manifestPath: resolve(preparedDirectory, '..', 'prepared-assets.json'), filenames: inventoried });
-  }
+  await inventoryPreparedAssets({ planetId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory });
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 
 /**
- * Rewrite a body's prepared-assets.json after a tool wrote under prepared/ without a full bake (facts, reader text,
+ * Rewrite a body's inventory after a tool wrote under prepared/ without a full bake (facts, reader text,
  * a content refresh). Nothing under prepared/ is tracked, so the inventory is the only record of the change; the
  * bytes still have to be published. Returns whether the inventory changed.
  */
 export async function refreshPreparedInventory(id: string, projectRoot = root): Promise<boolean> {
-  const preparedDirectory = resolve(projectRoot, 'src/objects', id, 'prepared'), manifestPath = resolve(preparedDirectory, '..', 'prepared-assets.json');
-  const before = await readFile(manifestPath, 'utf8').catch(() => null);
+  const objectDirectory = resolve(projectRoot, 'src/objects', id);
+  const before = await readInventory(id, objectDirectory);
   if (before === null) return false;
-  await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory, manifestPath, filenames: await bakedPreparedFiles(preparedDirectory, id) });
-  return (await readFile(manifestPath, 'utf8')) !== before;
+  const after = await inventoryPreparedAssets({ planetId: id, objectDirectory });
+  return JSON.stringify(after) !== JSON.stringify(before);
 }
 
 /** Re-pin an already prepared object to its transport without preparing anything. */

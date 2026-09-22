@@ -173,7 +173,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       const path = sourcePath(output.path.slice(resolve(root).length + 1));
       if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
       if (path.startsWith(`${volume.base}/prepared/`)) closure[path] = sha256(output.text);
-      else if (path === `${volume.base}/runtime-assets.json`) closure[path] = sha256(output.text);
+      else if (path === `${volume.base}/inventory.json`) closure[path] = sha256(output.text);
       else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }

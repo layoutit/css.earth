@@ -11,7 +11,7 @@ import { writeContextPackage } from "../tests/fixtures/context-package.mts";
 test("setup installs pinned files, reuses them offline, and repairs a corrupt file", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
   const bytes = Buffer.from("prepared image");
-  const asset = { id: "earth", key: "earth/image.webp", filename: "image.webp", file: join(root, "image.webp"),
+  const asset = { id: "earth", key: "earth/image.webp", location: "public" as const, filename: "image.webp", file: join(root, "image.webp"),
     url: "https://example.invalid/image.webp", bytes: bytes.length,
     sha256: createHash("sha256").update(bytes).digest("hex") };
   try {
@@ -33,7 +33,7 @@ test("setup installs pinned files, reuses them offline, and repairs a corrupt fi
 
 test("setup reports every unavailable file instead of stopping at the first", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-"));
-  const asset = (name: string) => ({ id: "sun", key: `sun/${name}`, filename: name, file: join(root, name),
+  const asset = (name: string) => ({ id: "sun", key: `sun/${name}`, location: "public" as const, filename: name, file: join(root, name),
     url: `https://example.invalid/${name}`, bytes: 3, sha256: createHash("sha256").update("abc").digest("hex") });
   try {
     const missing = ["first.webp", "second.webp"];
@@ -51,7 +51,7 @@ test("allow-missing (deploy only) skips a genuinely missing R2 file so the objec
     const bankBytes = Buffer.from(JSON.stringify(helix.bank));
     const file = resolve(helix.directory, "prepared/lenses.json");
     await rm(file);
-    const asset = { id: "helix", key: "helix/lenses.json", filename: "lenses.json", file,
+    const asset = { id: "helix", key: "helix/lenses.json", location: "prepared" as const, filename: "lenses.json", file,
       url: "https://example.invalid/helix/lenses.json", bytes: bankBytes.length,
       sha256: helix.descriptor.prepared.sha256 };
     const fetcher = async () => new Response(null, { status: 404 });
@@ -73,7 +73,7 @@ test("allow-missing (deploy only) skips a genuinely missing R2 file so the objec
 test("allow-missing does not swallow a non-404 failure (mutation check: a 5xx must still fail the build)", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-allow-missing-"));
   try {
-    const asset = { id: "sun", key: "sun/x.webp", filename: "x.webp", file: join(root, "x.webp"),
+    const asset = { id: "sun", key: "sun/x.webp", location: "public" as const, filename: "x.webp", file: join(root, "x.webp"),
       url: "https://example.invalid/x.webp", bytes: 3, sha256: createHash("sha256").update("abc").digest("hex") };
     await assert.rejects(installRuntimeAssets([asset], {
       allowMissing: true, fetcher: async () => new Response(null, { status: 500 }),
@@ -98,7 +98,7 @@ test("readAllowMissingFlag reads the CLI flag or the deploy-only env var", () =>
 test("a dropped connection and a 5xx are retried; a 404 is a verdict and is not", async () => {
   const root = await mkdtemp(join(tmpdir(), "cssearth-setup-retry-"));
   const bytes = Buffer.from("prepared image");
-  const asset = { id: "earth", key: "earth/image.webp", filename: "image.webp", file: join(root, "image.webp"),
+  const asset = { id: "earth", key: "earth/image.webp", location: "public" as const, filename: "image.webp", file: join(root, "image.webp"),
     url: "https://example.invalid/image.webp", bytes: bytes.length,
     sha256: createHash("sha256").update(bytes).digest("hex") };
   try {

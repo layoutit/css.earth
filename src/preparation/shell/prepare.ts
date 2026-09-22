@@ -8,7 +8,7 @@ import { parseShellRecipe } from './config.js';
 import { loadShellMesh } from './mesh.js';
 import { prepareShellAtlas } from './atlas.js';
 import { compileCssSurfaceShell } from '../../renderers/css/preparation/shell.js';
-import { preparePreparedAssetManifest } from '../../platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '../../platform/runtime-asset-closure.mts';
 
 export async function prepareSurfaceShellObject(options: { objectDirectory: string; outputDirectory?: string }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
@@ -45,9 +45,7 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await writeFile(descriptorPath, JSON.stringify({ ...descriptor, prepared: { format: envelope.format,
       url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
-    // heliosphere has no runtime-assets.json, so the whole bake is the R2 inventory.
-    await preparePreparedAssetManifest({ planetId: descriptor.id, preparedRoot: outputDirectory,
-      manifestPath: resolve(objectDirectory, 'prepared-assets.json') });
+    await inventoryPreparedAssets({ planetId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   console.log(`PREPARED ${descriptor.id}: ${data.faces.length} PolyCSS triangle leaves; ${atlas.width * atlas.height * 4} decoded RGBA bytes; ${outputPath}`);
   return envelope;

@@ -362,7 +362,7 @@ jobs:
           path: |
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
-          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
       - name: Restore prepared assets and object JSON
         # Every object's JSON remains SHA-verified. Only tests that consume real prepared images restore them;
@@ -472,7 +472,7 @@ jobs:
           path: |
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
-          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
       - name: Restore only the inputs consumed by preparation tests
         run: node tools/prepare-ci-inputs.mts universe-preparation
