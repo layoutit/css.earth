@@ -194,12 +194,16 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
  * Keep the exact ray test whenever the cube crosses the eye plane. */
 export function createSphereChordTest(center: Vector3, radius: number, project: (eye: Vector3) => readonly number[]) {
   if (center[2] + radius >= 0) return () => true;
-  let left = Infinity, right = -Infinity, top = Infinity, bottom = -Infinity;
-  for (const dx of [-radius, radius]) for (const dy of [-radius, radius]) for (const dz of [-radius, radius]) {
-    const [x, y] = project([center[0] + dx, center[1] + dy, center[2] + dz]);
-    left = Math.min(left, x); right = Math.max(right, x);
-    top = Math.min(top, y); bottom = Math.max(bottom, y);
-  }
+  // A pinhole x depends only on a point's x and z, so the sphere's x extent is that of its xz footprint, a disc of the
+  // same radius: it lies between the two tangent directions from the eye. Likewise for y. This is the exact screen
+  // bound; the enclosing cube's near corners overstated a near sphere by about half its width on each side.
+  const tangents = (across: number, depth: number) => {
+    const middle = Math.atan2(across, -depth), half = Math.asin(Math.min(1, radius / Math.hypot(across, depth)));
+    return [middle - half, middle + half];
+  };
+  const xs = tangents(center[0], center[2]).map(angle => project([Math.sin(angle), 0, -Math.cos(angle)])[0]!);
+  const ys = tangents(center[1], center[2]).map(angle => project([0, Math.sin(angle), -Math.cos(angle)])[1]!);
+  const left = Math.min(...xs), right = Math.max(...xs), top = Math.min(...ys), bottom = Math.max(...ys);
   // Expand only the rejection bound, to keep grazing roundoff conservative.
   const epsilon = Math.max(1, Math.abs(left), Math.abs(right), Math.abs(top), Math.abs(bottom)) * Number.EPSILON * 8;
   return (start: readonly number[], end: readonly number[]) =>
