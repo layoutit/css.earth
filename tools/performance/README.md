@@ -33,8 +33,13 @@ It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe
 `{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`,
 `{ "wait": seconds }` and `{ "screenshot": "name" }`, in simulator points, sent as real touch input. Safari keeps its cache
 as a visitor's would; `--no-cache` measures a cold load. `--open` loads the
-page in the visible tab first, so each capture starts from a fresh load. Check the screenshots before reading any
-numbers: a tap that lands on the wrong control records the wrong moment.
+page in the visible tab first and waits until the app reports its body ready, then `--settle` seconds more, so each
+capture starts from a fresh, loaded page. Check the screenshots before reading any numbers: a tap that lands on the
+wrong control records the wrong moment.
+
+`--compare <capture dir>` pixelmatches each screenshot against the one with the same name in an earlier capture and
+writes `<name>.diff.png`; a change that should not show must report 0 differing pixels. Antialiased pixels count, and
+the status-bar clock is pinned to 9:41 during every capture so it never differs.
 
 For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then
 `astro build --mode performance`, and pass that output as `--dist`. Output goes to

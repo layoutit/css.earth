@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { parseSteps, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
+import { comparePixels, parseSteps, schedulingStacks, summariseCpu, summariseInitiators, summariseSamples, summariseTimeProfile, summariseTimeline } from './ios-capture.mts';
 
 test('steps are validated before anything records', () => {
   assert.deepEqual(parseSteps([{ tap: [194, 94] }, { type: 'saturn' }, { wait: 1.5 }, { screenshot: 'after' },
@@ -64,4 +64,12 @@ test('style and layout scheduling is attributed to the first script frame of its
   const summary = summariseInitiators(stacks, f => f.name);
   assert.deepEqual(summary.ScheduleStyleRecalculation, [{ label: 'publish', count: 2 }, { label: '(no script frame)', count: 1 }]);
   assert.deepEqual(summary.InvalidateLayout, [{ label: 'measure', count: 1 }]);
+});
+
+test('pixel comparison counts differing pixels, 0 for identical screenshots', () => {
+  const a = new Uint8Array(2 * 2 * 4).fill(255), b = Uint8Array.from(a);
+  assert.equal(comparePixels(a, b, 2, 2).differing, 0);
+  b.set([0, 0, 0, 255], 4);
+  assert.deepEqual({ ...comparePixels(a, b, 2, 2), diff: undefined }, { differing: 1, total: 4, diff: undefined });
+  assert.throws(() => comparePixels(a, b.subarray(4), 2, 2), /size/);
 });
