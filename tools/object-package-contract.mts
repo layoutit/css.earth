@@ -43,7 +43,7 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
     // application ships, so they are tracked as a ratcheted backlog rather than a merge
     // gate (see docs/ci-cd.md). Empty since #505 retired the browser harness and its 547
     // per-object profiles; the ratchet stays for the next backlog that earns one.
-    backlogFiles: Object.freeze([]),
+    backlogFiles: Object.freeze<readonly string[]>([]),
     runtimeAssets: resolve(root, "runtime-assets.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
     sourceRoot: resolve(root, "source"),
