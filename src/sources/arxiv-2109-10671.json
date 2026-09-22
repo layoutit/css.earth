@@ -1,0 +1,50 @@
+{
+  "id": "arxiv-2109-10671",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Lacour et al. (2021): The mass of beta Pictoris c from beta Pictoris b orbital motion",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2109.10671"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202141889"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2109.10671",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202141889",
+      "label": "Astronomy & Astrophysics 654, L2"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2109.10671",
+      "checkedOn": "2026-09-22",
+      "locator": "Table 2 (RV + b and c astrometry): a_b 9.93 au, e_b 0.103, i_b 89.00, omega_b 199.3, Omega_b 31.79, tau_b 0.719; a_c 2.68 au, e_c 0.32, i_c 88.95, omega_c 66.0, Omega_c 31.06, tau_c 0.724, period 1221 +/- 15 d; parallax 51.44 mas; M* 1.75, M_b 11.90, M_c 8.89; Table 1: GRAVITY astrometry of b and c"
+    },
+    {
+      "path": "src/objects/beta-pictoris/source/content/object.json",
+      "locator": "/panel/facts/2"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "S. Lacour",
+    "J. J. Wang",
+    "L. Rodet",
+    "M. Nowak",
+    "J. Shangguan",
+    "GRAVITY Collaboration"
+  ]
+}

@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-astronomy-packages-toolchain@1",
   "purpose": "Pinned archive clients, scientific metadata, measurement arithmetic, plotting and planetary mapping dependencies. cssEarth validates identities, scientific choices and evidence.",
-  "license": "Astroquery, Astropy, astropy-healpix, PyVO and SciPy are BSD-3-Clause. pyuvdata is BSD-2-Clause. batman-package is GPL-3.0. cdflib is MIT. Their notices are retained here; archive data keep their providers' separate terms.",
+  "license": "Astroquery, Astropy, astropy-healpix, PyVO and SciPy are BSD-3-Clause. pyuvdata is BSD-2-Clause. batman-package is GPL-3.0. cdflib is MIT. orbitize! and whereistheplanet are BSD-3-Clause; rebound, which orbitize imports, is GPL-3.0. Their notices are retained here; archive data keep their providers' separate terms.",
   "micromamba": {
     "channel": "conda-forge",
     "packages": [
@@ -23,5 +23,7 @@
     }
   ],
   "cdflib": "1.3.12",
-  "pyuvdata": "3.2.4"
+  "pyuvdata": "3.2.4",
+  "orbitize": "3.4.0",
+  "whereistheplanet": "1.0.1"
 }

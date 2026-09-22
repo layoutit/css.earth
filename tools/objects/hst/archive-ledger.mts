@@ -162,7 +162,12 @@ export async function shippedObjects(repository = REPOSITORY): Promise<ShippedOb
 }
 
 const PUBLIC_HST = [{ paramName: 'obs_collection', values: ['HST'] }, { paramName: 'dataRights', values: ['PUBLIC'] }];
-const only = (data: readonly Record<string, unknown>[]) => requireFiniteNumber(Object.values(data[0] ?? {})[0], 'COUNT_BIG');
+// MAST's Caom.Filtered count arrives as a string field ("1493155", column type "string") as of 2026-09-22; a count is accepted
+// as a number or as a string of digits, nothing else.
+const only = (data: readonly Record<string, unknown>[]) => {
+  const value = Object.values(data[0] ?? {})[0];
+  return requireFiniteNumber(typeof value === 'string' && /^\d+$/u.test(value) ? Number(value) : value, 'COUNT_BIG');
+};
 const DEADLINE_MS = 240_000, ATTEMPTS = 3;
 
 /** One MAST request, abandoned and asked again if it does not answer within its deadline. With `optional`, a request that never

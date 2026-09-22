@@ -1,0 +1,9 @@
+# JWST NIRISS aperture masking interferometry of HR 8799, F380M, 2023 August 3 UT (GTO 1200).
+# Table 2 of arXiv:2609.10507: recovered offsets from the star in mas with approximate 1 sigma errors.
+# Row f is the paper's candidate fifth planet, not a known companion.
+id,object,epoch,raoff,raoff_err,decoff,decoff_err
+b-2023-08-03,hr-8799-b,60159.0,1645.2,32.9,535.7,28.7
+c-2023-08-03,hr-8799-c,60159.0,-291.6,15.2,917.7,16.2
+d-2023-08-03,hr-8799-d,60159.0,-634.4,14.0,-321.1,18.0
+e-2023-08-03,hr-8799-e,60159.0,-225.8,10.4,302.2,13.3
+f-2023-08-03,candidate,60159.0,-15.0,19.3,149.0,22.8

@@ -1,0 +1,35 @@
+{
+  "id": "source-beta-pictoris-disc-visible-stis-50ccd",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Beta Pictoris Disc · visible stis 50ccd",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A114/fits/Beta_Pic_STIS.fits",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/beta-pictoris-disc/source/manifest.json",
+      "locator": "/inputs/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA HST/STIS, programmes 7125 (PI S. Heap), 12551 (PI D. Apai) and 12923 (PI A. Gaspar); reduced by Ren et al. 2023, A&A 672, A114, deposited at CDS",
+      "scope": "The visible stis 50ccd input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Data deposited at CDS under the VizieR catalogue J/A+A/672/A114; free for scientific use with the reference cited (Ren et al. 2023, A&A 672, A114).",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-1511-02894",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Morzinski et al. (2015): Magellan Adaptive Optics first-light observations of the exoplanet beta Pic b. II. 3-5 micron direct imaging with MagAO+Clio, and the empirical bolometric luminosity of a self-luminous giant planet",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1511.02894"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1088/0004-637X/815/2/108"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1511.02894",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1088/0004-637X/815/2/108",
+      "label": "The Astrophysical Journal 815, 108"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1511.02894",
+      "checkedOn": "2026-09-22",
+      "locator": "Abstract: from the bolometric luminosity and an age of 23 +/- 3 Myr, hot-start tracks give a mass of 12.7 +/- 0.3 Jupiter masses, a radius of 1.45 +/- 0.02 Jupiter radii and Teff 1708 +/- 23 K; log(L/Lsun) -3.78 +/- 0.03"
+    },
+    {
+      "path": "packages/astronomy/data/bodies/beta-pictoris-b.json",
+      "locator": "/physicalNotes"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "K. M. Morzinski",
+    "J. R. Males",
+    "A. J. Skemer",
+    "L. M. Close",
+    "P. M. Hinz"
+  ]
+}

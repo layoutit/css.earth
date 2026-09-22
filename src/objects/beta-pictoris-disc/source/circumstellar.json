@@ -1,0 +1,284 @@
+{
+  "schema": "cssearth-circumstellar-volume@1",
+  "id": "beta-pictoris-disc",
+  "host": "beta-pictoris",
+  "name": "Beta Pictoris debris disc",
+  "description": "The edge-on debris disc around Beta Pictoris in two views: in visible light from Hubble's STIS coronagraph, 16 to 82 au from the star, and at 2.1 and 4.1 micrometres from JWST/NIRCam behind its MASK335R coronagraph on 21 March 2025 (programme 4758), 49 to 126 au. One unit is one astronomical unit; the disc's depth is reconstructed from each image by assuming it is symmetric about its own axis, not measured.",
+  "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+  "credit": "NASA/ESA/CSA JWST, NIRCam GO programme 4758 (PI Y. Zhou); MAST (STScI); Zhou et al. 2026, arXiv:2607.13133. NASA/ESA HST/STIS, programmes 7125, 12551 and 12923, reduced by Ren et al. 2023, A&A 672, A114",
+  "license": {
+    "spdx": "LicenseRef-STScI-public-data",
+    "url": "https://archive.stsci.edu/publishing/data-use",
+    "note": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited."
+  },
+  "grid": {
+    "size": 156,
+    "halfUnits": 135,
+    "slabs": 78
+  },
+  "defaultLens": "visible",
+  "lenses": [
+    {
+      "id": "visible",
+      "geometry": "edge-on",
+      "midplaneHalfHeightUnits": 12,
+      "label": "HST/STIS · debris disc, visible light",
+      "title": "The edge-on debris disc of Beta Pictoris in visible light, from Hubble's STIS coronagraph",
+      "summary": "The edge-on disc of dust 16 to 82 au from the star in visible light, where planet d orbits, as Hubble imaged it.",
+      "description": "Hubble's STIS camera imaged Beta Pictoris behind its coronagraph at 0.58 micrometres in 1997, 2012 and 2013, and Ren et al. (2023) combined those observations into one image of the disc, which they deposited with their paper. It reaches closer to the star than the JWST images, down to 0.8 arcseconds (16 au), so the disc is drawn where planet d orbits, 26 au out; planets b and c, at 10 and 2.7 au, orbit inside the part no image reaches. The image is shown in grey, brightness only, one visible filter. The deposit carries no sky coordinates: the star is at its centre, its pixels are 50.72 mas, and it is north up and east left, which this project checked against the registered JWST image. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. The light seen near the star is placed on the far parts of the disc it passes through, not stacked along the sight line. Close to the star the subtraction leaves some starlight off the disc, which is drawn with it.",
+      "program": "",
+      "deposit": {
+        "band": "HST-STIS-50CCD",
+        "path": ".local/beta-pictoris-disc/observations/Beta_Pic_STIS.fits",
+        "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/672/A114/fits/Beta_Pic_STIS.fits",
+        "landing": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114",
+        "bytes": 227520,
+        "sha256": "d67e6f3ca3d5031c955ec2c5a75268f776c5b8df96584f54e274b171fe4067e5",
+        "pixelArcsec": 0.05072,
+        "orientation": "north-up-east-left",
+        "starPixel": "array-centre",
+        "orientationSource": "The deposit's ReadMe puts the star at the array's centre; the plate scale, 50.72 mas per pixel, is the STIS value Ren et al. (2023, Section 2) state. The orientation is measured here: the disc's midplane lies at position angle 29.8 degrees north up and east left, against 29.6 +/- 1.1 in Rebollido et al. (2024), where a mirror would put it at 150.2; and the half of the image's brightness that is not symmetric about the star correlates with the registered JWST F210M and F410M images at +0.21 to +0.47 in every window from 49 to 80 au, where a 180-degree turn would give the opposite sign.",
+        "unit": "counts per pixel per second",
+        "filter": "50CCD, clear, centred on 0.58 micrometres",
+        "instrument": "HST/STIS behind its coronagraph",
+        "observed": "in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923)",
+        "title": "Ren et al. (2023), VizieR J/A+A/672/A114, Beta_Pic_STIS.fits",
+        "credit": "NASA/ESA HST/STIS, programmes 7125 (PI S. Heap), 12551 (PI D. Apai) and 12923 (PI A. Gaspar); reduced by Ren et al. 2023, A&A 672, A114, deposited at CDS",
+        "displayCredit": "NASA/ESA HST, Ren et al. 2023 (CDS)",
+        "license": "Data deposited at CDS under the VizieR catalogue J/A+A/672/A114; free for scientific use with the reference cited (Ren et al. 2023, A&A 672, A114).",
+        "acquisition": "Downloaded unchanged from the CDS FTP archive of VizieR J/A+A/672/A114 (fits/Beta_Pic_STIS.fits) and pinned by digest in this recipe."
+      },
+      "channels": {
+        "red": [
+          "HST-STIS-50CCD"
+        ],
+        "green": [
+          "HST-STIS-50CCD"
+        ],
+        "blue": [
+          "HST-STIS-50CCD"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Not divided by the star: the deposit is in counts per pixel per second, and it is shown in those units, one filter in grey.",
+      "stretch": {
+        "a": 10,
+        "top": 530,
+        "source": "Stated, not fitted: the top is the 99.5th percentile of the image within 12 au of the midplane beyond the inner edge (529.6 counts per pixel per second), and a = 10 is the display's log strength, the same as the JWST lens's."
+      },
+      "innerMaskArcsec": 0.8,
+      "innerMaskSource": "Where the disc outshines what the subtraction leaves off it and the deposit covers most of the sky. At 14 to 16 au from the star the midplane is 318 times the noise measured 3.6 to 4.1 arcseconds out against 137 for the median light more than 35% of the radius off the midplane, and 44% of the pixels are blank; at 16 to 18 au, 243 against 116 with 13% blank; at 20 to 25 au, 146 against 57 with none blank. Nothing is drawn inside 0.8 arcseconds (15.7 au).",
+      "outerUnits": 82,
+      "backgroundAnnulusArcsec": [
+        3.6,
+        4.1
+      ],
+      "nearSidePositionAngleDeg": 300,
+      "nearSideSource": "The north-west side is drawn nearer, as for the JWST lens: Rebollido et al. (2024, Section 6), from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
+      "topAlpha": 0.5,
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 3,
+        "source": "Stated, a display choice, as for the JWST lens: a column fades in as its brightness rises from one to three times the per-pixel noise measured 3.6 to 4.1 arcseconds out."
+      },
+      "published": {
+        "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+        "url": "https://arxiv.org/abs/2401.05271",
+        "inclinationDeg": 89.0,
+        "inclinationSource": "Planet b's orbital inclination, 89.00 +/- 0.01 degrees (Lacour et al. 2021, Table 2), aligned with the disc and the star's spin to 3 +/- 4 degrees (Kraus et al. 2020).",
+        "positionAngleDeg": 29.6,
+        "toleranceDeg": 2.0
+      },
+      "reconstruction": {
+        "tau": 0.001,
+        "iterations": 200,
+        "source": "The axially symmetric emission inference of Wenger, Lorenz & Magnor (2013) as the nebula lab implements it, run by labs/nebula/run.mts reconstruct-circumstellar: the symmetry axis is the disc normal, tau 0.001 on the displayed [0, 1] values (the lab's M2-9 setting) and 200 iterations."
+      }
+    },
+    {
+      "id": "contrast",
+      "geometry": "edge-on",
+      "midplaneHalfHeightUnits": 20,
+      "label": "JWST/NIRCam · debris disc, 2.1 and 4.1 µm",
+      "title": "The edge-on debris disc of Beta Pictoris in its contrast to the star at 2.1 and 4.1 micrometres",
+      "summary": "The edge-on disc of dust 49 to 126 au from the star, from two JWST filters, in the colour of its contrast to the star.",
+      "description": "JWST/NIRCam imaged Beta Pictoris for 16 hours on 21 and 22 March 2025 behind the MASK335R coronagraph, which blocks the star, to time the rotation of its planet b (programme 4758, Zhou et al. 2026). The same images show the disc of dust around the star edge-on. These are MAST's own coronagraphy products, from the first of the observation's two coronagraph visits; the star is placed in each by planet b, whose orbit is known to a milliarcsecond, because the mosaics' own pointing misses it by 80 to 90 mas. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; F210M is drawn blue, F410M red and their mean green, and empty sky fades out below three times its noise. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colours, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. The light seen near the star is placed on the far parts of the disc it passes through, not stacked along the sight line. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc; the planets are their own spheres.",
+      "program": "beta-pictoris-4758",
+      "innerMaskArcsec": 2.5,
+      "innerMaskSource": "Where the subtraction residuals away from the disc fall below the noise in both filters. More than 30 au from the midplane, the median absolute brightness of the F210M mosaic is 32.3 MJy/sr at 30 to 40 au from the star against a noise of 23.6 MJy/sr measured 4 to 5.5 arcseconds out, and 15.0 at 40 to 50 au; in F410M it is 20.1 against a noise of 4.4 at 30 to 40 au, 5.7 at 40 to 50 au and 2.9 at 50 to 60 au. So nothing is drawn inside 2.5 arcseconds (49 au), where the petals of the PSF subtraction outweigh the noise in F410M. The MASK335R occulter reaches half transmission at 0.63 arcseconds (CRDS jwst_nircam_psfmask_0211.fits).",
+      "outerUnits": 130,
+      "backgroundAnnulusArcsec": [
+        4,
+        5.5
+      ],
+      "nearSidePositionAngleDeg": 300,
+      "nearSideSource": "The north-west side is drawn nearer: Rebollido et al. (2024, Section 6) note that the main disc is nearly edge-on with its north-west side nearer to us, from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
+      "topAlpha": 0.5,
+      "published": {
+        "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+        "url": "https://arxiv.org/abs/2401.05271",
+        "inclinationDeg": 89.0,
+        "inclinationSource": "The disc's inclination is not measured on these images, whose midplane is a line. It is planet b's orbital inclination, 89.00 +/- 0.01 degrees (Lacour et al. 2021, Table 2), which Kraus et al. (2020) show is aligned with the disc and the star's spin to 3 +/- 4 degrees.",
+        "positionAngleDeg": 29.6,
+        "toleranceDeg": 2.0
+      },
+      "channels": {
+        "red": [
+          "NIRCAM-F410M-MASK335R"
+        ],
+        "green": [
+          "NIRCAM-F210M-MASK335R",
+          "NIRCAM-F410M-MASK335R"
+        ],
+        "blue": [
+          "NIRCAM-F210M-MASK335R"
+        ]
+      },
+      "stellarFluxJy": {
+        "NIRCAM-F210M-MASK335R": 26.14,
+        "NIRCAM-F410M-MASK335R": 8.2
+      },
+      "stellarFluxSource": "Kammerer et al. (2024, AJ 168, 51, arXiv:2405.18422), Table 2: planet b's MCRDI flux and its contrast to a stellar model atmosphere of Beta Pictoris give the star's flux, F_star = F_b 10^(0.4 dmag): F210M 6.10e-3 Jy at 9.08 mag is 26.14 Jy. F410M, which that programme did not observe, is interpolated in log flux and log wavelength between its F335M (7.85e-3 Jy, 7.91 mag: 11.45 Jy) and F444W (6.06e-3 Jy, 7.68 mag: 7.15 Jy) at the pivot wavelengths 3.362, 4.082 and 4.421 micrometres: 8.20 Jy.",
+      "stretch": {
+        "a": 10,
+        "top": 7.2,
+        "source": "Stated, not fitted: no published figure shows these two filters of this programme combined, so there is no panel to fit a stretch to. The top is the 99.5th percentile of the mean contrast within 20 au of the midplane beyond the inner mask (7.24), and a = 10 is the display's log strength, chosen so the disc's faint outer reaches stay visible."
+      },
+      "registration": {
+        "planet": "beta-pictoris-b",
+        "searchArcsec": 0.2,
+        "fwhmArcsec": {
+          "NIRCAM-F210M-MASK335R": 0.07,
+          "NIRCAM-F410M-MASK335R": 0.134
+        },
+        "source": "Planet b is a bright point 0.54 arcseconds from the star in both mosaics. Its orbit (packages/astronomy/data/bodies/beta-pictoris-b.json, from Lacour et al. 2021) reproduces GRAVITY's astrometry to 1.3 mas, so it places the star in each mosaic better than the mosaic's own pointing, which misses it by 80 to 90 mas. PSF full widths at half maximum: the JWST User Documentation's NIRCam values for F210M and F410M."
+      },
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 3,
+        "source": "Stated, a display choice: a column fades in as the mean contrast rises from one to three times its per-pixel noise (the scatter measured 4 to 5.5 arcseconds out), so empty sky is not drawn as speckle. Every channel of a column is scaled alike, so no colour ratio changes."
+      },
+      "reconstruction": {
+        "tau": 0.001,
+        "iterations": 200,
+        "source": "The axially symmetric emission inference of Wenger, Lorenz & Magnor (2013) as the nebula lab implements it, run by labs/nebula/run.mts reconstruct-circumstellar: the symmetry axis is the disc normal, tau 0.001 on the displayed [0, 1] values (the lab's M2-9 setting) and 200 iterations."
+      }
+    },
+    {
+      "id": "colour",
+      "geometry": "edge-on",
+      "midplaneHalfHeightUnits": 12,
+      "label": "HST/ACS · debris disc, colour 0.43 to 0.81 µm",
+      "title": "The edge-on debris disc of Beta Pictoris in its colour against the star, from Hubble's ACS coronagraph",
+      "summary": "The edge-on disc of dust 29 to 135 au from the star in three visible filters, in its colour against the star's.",
+      "description": "Hubble's ACS camera imaged Beta Pictoris behind its coronagraph on 1 October 2003 through blue, visible and near-infrared filters (F435W, F606W and F814W), at two telescope rolls, with the star alpha Pictoris as a reference for the starlight (programme 9987, Golimowski et al. 2006). Here the raw exposures were calibrated again, alpha Pic's light was scaled by the brightness ratio the paper states and subtracted, and each result was put on the sky north up. Each filter is then divided by the star's own brightness in it, so the colour is the disc's against the star's: a disc that scattered like the star shines would look white. F435W is drawn blue, F606W green and F814W red, and empty sky fades out below three times its noise. The paper's scaling leaves some of the star's glow beside the disc, which is drawn with it. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, where the paper finds the subtraction too uncertain; planets b and c orbit inside that.",
+      "program": "",
+      "hst": {
+        "subtraction": "beta-pictoris-9987",
+        "work": ".local/beta-pictoris-disc/hst",
+        "products": {
+          "HST-ACS-HRC-F435W": [
+            {
+              "roll": "1",
+              "sha256": "718dbab23e402848968acb25779935ef12f6461ea5efc4551f360a7b29e7468b",
+              "bytes": 17507520
+            },
+            {
+              "roll": "2",
+              "sha256": "2432198ba4ebbbde4704c943fab093ca96d992fa0457701a435e9c3d86a6108f",
+              "bytes": 14402880
+            }
+          ],
+          "HST-ACS-HRC-F606W": [
+            {
+              "roll": "1",
+              "sha256": "9b1db256a6a6f96208a469baf5d9ab77686ed077b7fc1d78e6bb5eaba48b8d1a",
+              "bytes": 17507520
+            },
+            {
+              "roll": "2",
+              "sha256": "78fc1611be1de128b04a675648f0494c272a837898255df89585bc3b6b159a3b",
+              "bytes": 14402880
+            }
+          ],
+          "HST-ACS-HRC-F814W": [
+            {
+              "roll": "1",
+              "sha256": "8707cc2f880231e9391d13f13f2ab868fdbe963b9023d140c38bb73262a973ce",
+              "bytes": 17507520
+            },
+            {
+              "roll": "2",
+              "sha256": "39698541190011103166592c3a06e8fe10617ff41c41a93f64566aad6fa8f074",
+              "bytes": 14402880
+            }
+          ]
+        },
+        "vegaMagnitudes": {
+          "HST-ACS-HRC-F435W": 4.05,
+          "HST-ACS-HRC-F606W": 3.81,
+          "HST-ACS-HRC-F814W": 3.68
+        },
+        "vegaZeropoints": {
+          "HST-ACS-HRC-F435W": 25.185,
+          "HST-ACS-HRC-F606W": 25.893,
+          "HST-ACS-HRC-F814W": 24.849
+        },
+        "zeropointSource": "Sirianni et al. (2005, PASP 117, 1049; arXiv:astro-ph/0507614), Table 11: HRC VEGAMAG zero points 25.185, 25.893 and 24.849 for F435W, F606W and F814W, for the total count rate in electrons per second (Section 7), the zero points Golimowski et al. (2006) cite for their magnitudes",
+        "instrument": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot",
+        "observed": "on 1 October 2003 (HST programme 9987)",
+        "landing": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+        "credit": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+        "displayCredit": "NASA/ESA HST, MAST",
+        "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited."
+      },
+      "channels": {
+        "blue": [
+          "HST-ACS-HRC-F435W"
+        ],
+        "green": [
+          "HST-ACS-HRC-F606W"
+        ],
+        "red": [
+          "HST-ACS-HRC-F814W"
+        ]
+      },
+      "stellarFluxJy": {},
+      "stellarFluxSource": "Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2 and its footnote): beta Pic's Vega magnitudes from Synphot, F435W 4.05, F606W 3.81 and F814W 3.68, the magnitudes all their colours rest on, with zero-point errors under 2%",
+      "stretch": {
+        "a": 10,
+        "top": 6.3,
+        "source": "Stated, not fitted: the top is the 99.5th percentile of the three channels within 12 au of the midplane beyond the inner edge (6.26 in MJy/sr-per-Jy units), and a = 10 is the display's log strength, the same as the other lenses'."
+      },
+      "innerMaskArcsec": 1.5,
+      "innerMaskSource": "Golimowski et al. (2006, Section 2.2): the residuals of the PSF subtraction preclude accurate photometry of the disc within 1.5 arcseconds (about 30 au) of the star. Nothing is drawn inside 1.5 arcseconds (29.5 au at 19.63 pc).",
+      "outerUnits": 130,
+      "backgroundAnnulusArcsec": [
+        10,
+        13
+      ],
+      "nearSidePositionAngleDeg": 300,
+      "nearSideSource": "The north-west side is drawn nearer, as for the JWST lens: Rebollido et al. (2024, Section 6), from the bow toward the north-west that Milli et al. (2014), Golimowski et al. (2006) and Apai et al. (2015) attribute to forward scattering.",
+      "topAlpha": 0.5,
+      "noiseFade": {
+        "fromNoise": 1,
+        "toNoise": 3,
+        "source": "Stated, a display choice, as for the other lenses: a column fades in as its brightness rises from one to three times the per-pixel noise measured 10 to 13 arcseconds out."
+      },
+      "published": {
+        "citation": "Rebollido et al. (2024), AJ 167, 69, arXiv:2401.05271",
+        "url": "https://arxiv.org/abs/2401.05271",
+        "inclinationDeg": 89.0,
+        "inclinationSource": "Planet b's orbital inclination, 89.00 +/- 0.01 degrees (Lacour et al. 2021, Table 2), aligned with the disc and the star's spin to 3 +/- 4 degrees (Kraus et al. 2020).",
+        "positionAngleDeg": 29.6,
+        "toleranceDeg": 2.0
+      },
+      "reconstruction": {
+        "tau": 0.001,
+        "iterations": 200,
+        "source": "The axially symmetric emission inference of Wenger, Lorenz & Magnor (2013) as the nebula lab implements it, run by labs/nebula/run.mts reconstruct-circumstellar: the symmetry axis is the disc normal, tau 0.001 on the displayed [0, 1] values (the lab's M2-9 setting) and 200 iterations."
+      },
+      "beyondGrid": "the ACS images show the disc above the noise to the edge of the camera's field, 320 au out, and the volume ends at the grid's 135 au: its midplane is still twice the noise 300 to 320 au out. The grid is the one all three lenses share, so switching dataset does not move the object, and its 1.7 au cells are what the inner lenses need. The light beyond 135 au is measured (source/provenance.json, the midplane profile) and not drawn."
+    }
+  ]
+}

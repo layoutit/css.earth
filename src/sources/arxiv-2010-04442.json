@@ -1,0 +1,50 @@
+{
+  "id": "arxiv-2010-04442",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Nowak et al. (2020): Direct confirmation of the radial-velocity planet beta Pictoris c",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2010.04442"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/202039039"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2010.04442",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202039039",
+      "label": "Astronomy & Astrophysics 642, L2"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2010.04442",
+      "checkedOn": "2026-09-22",
+      "locator": "Section 4: Exo-REM fit to the flux-calibrated GRAVITY K-band spectrum gives T 1250 +/- 50 K, log g 3.85 and a radius of 1.2 +/- 0.1 Jupiter radii; Drift-Phoenix gives 1370 K and 1.05 +/- 0.1; K magnitude 14.3 +/- 0.1"
+    },
+    {
+      "path": "packages/astronomy/data/bodies/beta-pictoris-c.json",
+      "locator": "/physicalNotes"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "M. Nowak",
+    "S. Lacour",
+    "P. Mollière",
+    "J. J. Wang",
+    "B. Charnay",
+    "GRAVITY Collaboration"
+  ]
+}

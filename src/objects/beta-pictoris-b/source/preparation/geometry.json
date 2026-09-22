@@ -1,0 +1,56 @@
+{
+  "schema": "cssearth-css-geometry-profile@1",
+  "namespace": "beta-pictoris-b",
+  "surface": {
+    "radius": 248,
+    "polarRadius": 248,
+    "latitudeSegments": 16,
+    "longitudeSegments": 32,
+    "surface": {
+      "url": "/scenes/beta-pictoris-b/beta-pictoris-b-surface-shape@2x.webp",
+      "width": 1024,
+      "height": 768
+    },
+    "surfaceLatitudeHeight": 512,
+    "packedBandGutter": 8,
+    "poles": {
+      "url": "/scenes/beta-pictoris-b/beta-pictoris-b-poles-shape@2x.webp",
+      "width": 512,
+      "height": 256
+    },
+    "polarTileSize": 256,
+    "polarRadiusScale": 1.035,
+    "polarOffset": 0.1,
+    "uv": "cell",
+    "color": "#9a9a9a"
+  },
+  "projection": {
+    "tileSize": 50,
+    "layerElevation": 50,
+    "seamBleed": 24,
+    "interiorSeamBleed": 8,
+    "overlap": 0.008,
+    "fitToSource": false,
+    "rasterScale": 2,
+    "rasterGutter": 8,
+    "rasterOverscan": 0,
+    "positionVariables": false,
+    "projectivePoles": false,
+    "lightColor": "#ffffff",
+    "ambientIntensity": 0.05
+  },
+  "bodyRotationDegrees": 0,
+  "output": {
+    "schema": "cssbeta-pictoris-b-prepared-runtime-scene@1",
+    "materialSchema": "cssbeta-pictoris-b-prepared-lighting@1",
+    "layout": "body-container",
+    "body": {
+      "axialTiltDegrees": 0,
+      "rotationDirection": "prograde",
+      "rotationPeriodEarthDays": 0.375,
+      "sourceProjection": "no observation: the shared neutral gray of an unresolved surface on the reference sphere",
+      "polarPreparation": "the same gray on the polar tiles",
+      "axialTiltNote": "The spin axis is taken on the orbit normal, as the measured spin inclination (near equator-on) and the system alignment allow; the 9.00-hour period is measured (Zhou et al. 2026)."
+    }
+  }
+}

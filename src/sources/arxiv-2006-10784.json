@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-2006-10784",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kraus et al. (2020): Spin-orbit alignment of the beta Pictoris planetary system",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2006.10784"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/2041-8213/ab9d27"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2006.10784",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/2041-8213/ab9d27",
+      "label": "The Astrophysical Journal Letters 897, L8"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2006.10784",
+      "checkedOn": "2026-09-22",
+      "locator": "Abstract and Section 4: the stellar spin axis measured with VLTI/GRAVITY spectro-astrometry in the Br-gamma line is aligned with the disc and with planet b orbit; sky-projected obliquity 3 +/- 4 degrees"
+    },
+    {
+      "path": "src/objects/beta-pictoris/source/preparation/rotation.json",
+      "locator": "/source"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "S. Kraus",
+    "J. B. Le Bouquin",
+    "A. Kreplin",
+    "C. L. Davies",
+    "E. Gardner"
+  ]
+}

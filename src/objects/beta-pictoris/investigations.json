@@ -1,0 +1,88 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "beta-pictoris",
+  "entries": [
+    {
+      "id": "resolved-photosphere",
+      "subject": "Disc-resolved images or interferometric imaging of Beta Pictoris",
+      "status": "excluded",
+      "finding": "The star is 0.736 mas across (Di Folco et al. 2004), 14% resolved by VLTI/VINCI at 140 m; the OiDB holds only level-0 to level-2 visibilities of it from PIONIER, GRAVITY, MATISSE, AMBER and MIDI, none published as a surface image. The sphere carries the colour of its Gaia spectrum only.",
+      "revisitWhen": "A reconstructed image of the star's surface is published, or public calibrated interferometry resolves it in more than a few beams.",
+      "evidence": [
+        "https://jmmc.fr/jmdc",
+        "https://oidb.jmmc.fr/search.html",
+        "https://doi.org/10.1051/0004-6361:20047189"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "radius-sources",
+      "subject": "Stellar radius: interferometric diameter against seismic and Gaia values",
+      "status": "included",
+      "finding": "Adopted the VLTI/VINCI limb-darkened diameter 0.736 +/- 0.015 +/- 0.012 mas (Di Folco et al. 2004) at the Gaia DR3 distance: 1.554 solar radii. Zwintz et al. (2019) derive 1.538 +/- 0.040 from the same diameter at the Hipparcos parallax and 1.497 +/- 0.025 from their seismic model; Gaia DR3 FLAME gives 1.568 and GSP-Phot 1.574. The measured diameter is kept over the model values.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361:20047189",
+        "https://arxiv.org/abs/1905.12545"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "limb-darkening-model",
+      "subject": "Limb darkening of the sphere",
+      "status": "included",
+      "finding": "No image measures this star's limb, so the sphere is darkened by the quadratic V-band law Claret and Bloemen (2011) compute from ATLAS model atmospheres, interpolated to 8090 K and log g 4.30 between the grid nodes at 8000 and 8250 K, 4.0 and 4.5: a model, labelled as one in the lens text.",
+      "evidence": [
+        "https://doi.org/10.1051/0004-6361/201116451"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "stellar-rotation",
+      "subject": "Spin axis and rotation period of the star",
+      "status": "deferred",
+      "finding": "Kraus et al. (2020) measure the spin axis in projection with GRAVITY (aligned with the disc and planet b's orbit to 3 +/- 4 degrees) and Zwintz et al. (2019) fit a near equator-on inclination and 27% of break-up from the pulsations, but no rotation period is published, so the display axis is celestial north.",
+      "revisitWhen": "A rotation period of the star is measured.",
+      "evidence": [
+        "https://arxiv.org/abs/2006.10784",
+        "https://arxiv.org/abs/1905.12545"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    },
+    {
+      "id": "debris-disc-volume",
+      "subject": "The debris disc: HST/STIS in visible light (Ren et al. 2023 deposit) and JWST/NIRCam MASK335R at 2.1 and 4.1 micrometres (programme 4758)",
+      "status": "included",
+      "finding": "Drawn as the attached volume beta-pictoris-disc with two lenses: the Hubble image from 16 to 82 au, where planet d orbits, and the JWST images from 49 to 126 au. JWST programme 1411's F182M image behind the smaller MASK210R coronagraph was checked for the inner disc and not used: MAST's automatic subtraction leaves speckle out to about 1.5 arcseconds and planet b stands only 2.7 times above the scatter around it. See that package's ledger and README.",
+      "evidence": [
+        "https://arxiv.org/abs/2607.13133",
+        "https://mast.stsci.edu/portal/Mashup/Clients/Mast/Portal.html"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "0000000000000000000000000000000000000000"
+        }
+      ]
+    }
+  ]
+}

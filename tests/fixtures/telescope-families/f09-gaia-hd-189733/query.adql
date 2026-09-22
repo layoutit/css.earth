@@ -1,0 +1,1 @@
+SELECT source_id,ra,dec,ra_error,dec_error,ra_dec_corr,pmra,pmdec,parallax,parallax_error,ref_epoch FROM gaiadr3.gaia_source WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',300.18213,22.70970,0.006)) ORDER BY phot_g_mean_mag
