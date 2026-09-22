@@ -19,6 +19,11 @@
     "epochDefinition": "periastron",
     "transitTimeBmjdTdb": 65177.0,
     "ascendingNodePositionAngleDegrees": 31.79,
+    "prediction": {
+      "tool": "whereistheplanet",
+      "planet": "betapicb",
+      "reference": "Lacour et al. (2021, A&A 654, L2; arXiv:2109.10671), the RV + b and c astrometry fit, as distributed with whereistheplanet (Wang et al. 2021)."
+    },
     "sources": {
       "period": "Derived: Kepler's third law with the published semi-major axis 9.93 +/- 0.03 au and the fitted masses of Lacour et al. (2021, Table 2, RV + b and c astrometry): the star 1.75, planet b 11.90 and planet c 8.89 Jupiter masses in Jacobi coordinates (b orbits the star-and-c barycentre), 1.769846 solar masses in all: sqrt(9.93^3 / 1.769846) = 23.521 yr = 8591.0 d. The paper prints no period for b.",
       "shape": "Lacour et al. (2021, Table 2): a 9.93 +/- 0.03 au at their parallax 51.44 mas, kept as the angular size 510.80 mas and placed at the Gaia DR3 distance: 10.029 au, 1388.04 radii of the star's 1,080,920 km; inclination 89.00 +/- 0.01 degrees.",

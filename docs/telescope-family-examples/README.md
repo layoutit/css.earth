@@ -25,7 +25,7 @@ Each row carries `exampleProven: true` and `proposalBaseline.status: "complete"`
 | F17 | [F17.json](../../tests/fixtures/telescope-family-examples/artifacts/F17.json) | `telescope family-run` | Pinned NEAR MSI raw/calibrated/label closure |
 | F18 | [F18.json](../../tests/fixtures/telescope-family-examples/artifacts/F18.json) | `telescope family-run` | Exact compound-member enumeration |
 
-F09 also draws the relative astrometry chart used in companion and direct-imaging papers. `astrometry-offset-preview` takes a reference row ID and optional row IDs. It plots gnomonic offsets in mas with east on the left and draws 1σ, 2σ and 3σ ellipses for every row that states a position covariance or RA and Dec errors. Tables load from the Gaia archive column names (`source_id`, `ra`, `dec`, `ra_error`, `dec_error`, `ra_dec_corr`, `pmra`, `pmdec`, `parallax`, `parallax_error`, `ref_epoch`). The [HD 189733 Gaia DR3 fixture](../../tests/fixtures/telescope-families/f09-gaia-hd-189733/manifest.json) exercises it on real rows.
+F09 reads a CSV astrometry table by the Gaia archive column names (`source_id`, `ra`, `dec`, `ra_error`, `dec_error`, `ra_dec_corr`, `pmra`, `pmdec`, `parallax`, `parallax_error`, `ref_epoch`), and its export carries those errors and their correlation. To ask which body a measured sky position belongs to, see [sky association](../virtual-telescopes.md#sky-association).
 
 Every figure is transparent by default. Set `"figureBackground": "opaque"` in the parameters of any family operation that draws a figure, or pass `--figure-background opaque` to `telescope export`, to fill the PNG and SVG with the figure's own background colour.
 
