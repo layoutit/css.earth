@@ -217,7 +217,7 @@ def publication(d):
   q=np.asarray(t['points'],dtype=float)
   if q.ndim!=2 or q.shape[1]!=2 or not np.isfinite(q).all(): raise ValueError('Track '+t['label']+' is not a finite list of points')
   key=t.get('series'); count=bundle.get(key or t['label'],1)
-  ax.plot(q[:,0],q[:,1],lw=1 if count==1 else .7,color=colour.get(key,'0.6'),alpha=1 if count==1 else max(.06,1.2/count),zorder=1)
+  ax.plot(q[:,0],q[:,1],lw=1.4 if count==1 else 1.1,color=colour.get(key,'0.6'),alpha=1 if count==1 else max(.18,.9/np.sqrt(count)),zorder=1,solid_capstyle='round')
  origin=d.get('origin')
  if origin is not None:
   ax.axhline(0,ls=':',lw=1.5,color='k',zorder=1); ax.axvline(0,ls=':',lw=1.5,color='k',zorder=1)
@@ -228,8 +228,8 @@ def publication(d):
   if q.get('role')=='candidate':
    if 'covariance' in q:
     for k,a in zip(levels,alphas): ellipse(x,y,q['covariance'],k,lw=1,color=face,alpha=a*.8,zorder=3)
-   ax.plot([x],[y],ls='',marker='o',ms=16,mfc=face,mec='k',mew=1.3,zorder=7)
-   if q.get('mark'): ax.text(x,y,q['mark'],ha='center',va='center',fontsize=11,fontweight='bold',color='white',zorder=8)
+   ax.plot([x],[y],ls='',marker='o',ms=13,mfc=face,mec='0.15',mew=1,zorder=7)
+   if q.get('mark'): ax.text(x,y,q['mark'],ha='center',va='center',fontsize=9,fontweight='bold',color='white',zorder=8)
   else:
    if 'covariance' in q:
     for k,a in zip(levels,alphas):
@@ -254,21 +254,21 @@ def publication(d):
   # North up, east left, drawn where the sky convention is read from.
   ax.annotate('',xy=(.93,.20),xytext=(.93,.075),xycoords='axes fraction',arrowprops=dict(arrowstyle='-|>',color='k',lw=1.6))
   ax.annotate('',xy=(.80,.075),xytext=(.93,.075),xycoords='axes fraction',arrowprops=dict(arrowstyle='-|>',color='k',lw=1.6))
-  ax.annotate('N',(.93,.215),xycoords='axes fraction',fontsize=15,ha='center',va='bottom')
-  ax.annotate('E',(.785,.075),xycoords='axes fraction',fontsize=15,ha='right',va='center')
+  ax.annotate('N',(.93,.215),xycoords='axes fraction',fontsize=12,ha='center',va='bottom')
+  ax.annotate('E',(.785,.075),xycoords='axes fraction',fontsize=12,ha='right',va='center')
  span=max(abs(ax.get_xlim()[1]-ax.get_xlim()[0]),1e-9)
  for k,a,lx,ly,width,face in labels:
   # A contour narrower than a fiftieth of the frame has no room for its own label; the legend still names the levels.
-  if width>span/50: ax.annotate(f'{k:g}$\sigma$',(lx,ly),xytext=(4,0),textcoords='offset points',fontsize=14,color=face,alpha=a,va='center',ha='left')
+  if width>span/50: ax.annotate(f'{k:g}$\sigma$',(lx,ly),xytext=(4,0),textcoords='offset points',fontsize=11,color=face,alpha=a,va='center',ha='left')
  for key in order: handles.append(Line2D([],[],ls='-',lw=1.2,marker='o',ms=8,mfc=colour[key],mec='k',color=colour[key],label=key))
  if any(q.get('role')!='candidate' for q in d['points']): handles.append(Line2D([],[],ls='',marker='D',ms=5.5,mfc='0.35',mec='k',label=d.get('measurementLabel','measured, with 1–3σ ellipses')))
  if origin is not None: handles.append(Line2D([],[],ls='',marker='*',ms=13,mfc='#6baed6',mec='k',label=origin['label']))
- for side in ax.spines.values(): side.set_linewidth(4)
+ for side in ax.spines.values(): side.set_linewidth(1.2); side.set_color('0.25')
  ax.xaxis.set_minor_locator(AutoMinorLocator(4)); ax.yaxis.set_minor_locator(AutoMinorLocator(4))
- ax.tick_params(which='major',direction='in',length=14,width=.8,top=True,right=True,labelsize=18,pad=8)
- ax.tick_params(which='minor',direction='in',length=7,width=.6,top=True,right=True)
- ax.set_xlabel(d['xLabel'],fontsize=22); ax.set_ylabel(d['yLabel'],fontsize=22)
- if handles: ax.legend(handles=handles,frameon=False,fontsize=13,loc='lower left')
+ ax.tick_params(which='major',direction='out',length=6,width=1,top=False,right=False,labelsize=13,pad=5,colors='0.25')
+ ax.tick_params(which='minor',direction='out',length=3,width=.8,top=False,right=False,colors='0.25')
+ ax.set_xlabel(d['xLabel'],fontsize=16); ax.set_ylabel(d['yLabel'],fontsize=16)
+ if handles: ax.legend(handles=handles,frameon=True,framealpha=.9,edgecolor='0.8',fontsize=11,loc='lower left')
  return fig,ax
 kind=d['kind']; drawn=[]; published=kind=='scatter-ellipses' and d.get('layout')=='publication'
 if published: fig,ax=publication(d)
