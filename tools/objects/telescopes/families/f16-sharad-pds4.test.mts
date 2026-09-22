@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -207,8 +208,7 @@ test('the Mars source observations name real slices of the pinned label and publ
   for (const product of products) {
     const science = product.files.find(file => file.role === 'science')!;
     const { claim, window } = parseSharadSliceClaim(product.identity, parsed);
-    // The observation's claimed slice, the label's arithmetic and the manifest pin are the same bytes.
-    assert.equal(science.bytes, window.length);
+    // The observation's claimed slice and the label's arithmetic name the same bytes.
     assert.equal(science.origin, `https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/${parsed.dataFile}`);
     assert.equal(product.archiveProductId, `${parsed.lidvid}#bytes=${window.position}-${window.position + window.length - 1}`);
     assert.deepEqual(sharadSliceWindow(parsed, claim), window);

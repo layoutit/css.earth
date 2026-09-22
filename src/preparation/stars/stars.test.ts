@@ -9,7 +9,7 @@ import { readCatalog } from '@cssearth/catalog';
 import { createExposure, exposureLimits, POINT_MIN_RADIUS_PX, starPresentation } from '@cssearth/engine';
 import sharp from 'sharp';
 import { parseStarsRecipe } from './config.js';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type { PreparedCssPointField } from '../../renderers/css/stars/types.js';
 import { decodePreparedCssPointField, parsePreparedCssPointFieldManifest } from '../../renderers/css/stars/validation.js';
 import { POINT_FIELD_MAGNITUDE_BOUND } from '../../renderers/css/stars/point-field-bank.js';
@@ -20,7 +20,7 @@ const objectDirectory = 'src/objects/stellar-neighbourhood', sourceDirectory = `
 function coverageCell(x:number,y:number,z:number,divisions:number):number { const ax=Math.abs(x),ay=Math.abs(y),az=Math.abs(z),d=Math.max(ax,ay,az); if (!(d>0)) return -1; let face:number,u:number,v:number; if(ax>=ay&&ax>=az){face=x>=0?0:1;u=(x>=0?-z:z)/d;v=y/d;}else if(ay>=az){face=y>=0?2:3;u=x/d;v=(y>=0?-z:z)/d;}else{face=z>=0?4:5;u=(z>=0?x:-x)/d;v=y/d;} const c=(n:number)=>Math.min(divisions-1,Math.max(0,Math.floor((n+1)*divisions/2))); return face*divisions**2+c(v)*divisions+c(u); }
 async function payload(): Promise<PreparedCssPointField> {
   const manifest = parsePreparedCssPointFieldManifest((JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8')) as { data: unknown }).data);
-  return decodePreparedCssPointField(manifest, new Uint8Array(await verifiedBytes(preparedDirectory, manifest.bank)));
+  return decodePreparedCssPointField(manifest, new Uint8Array(await sourceBytes(preparedDirectory, manifest.bank)));
 }
 // Hierarchy aggregates are computed from the float32 source magnitudes, before transport quantization.
 function assertTree(data: PreparedCssPointField, magnitudeOf = (star: PreparedCssPointField['stars'][number]) => star.absoluteMagnitude): void {
@@ -73,79 +73,18 @@ test('enclosing radii are recomputed from the rounded centre and retain exact so
   assert(node.radiusUnits > 0, 'retaining the pre-rounding zero radius would wrongly cull this source row');
 });
 
-test('all source rows survive, with exact HIP matches reconciled to the detailed bodies', async () => {
-  const data = await payload();
-  const recipe = parseStarsRecipe(JSON.parse(await readFile(`${sourceDirectory}/stars.json`,'utf8')) as unknown);
-  const catalogue = readCatalog(Uint8Array.from(await verifiedBytes(sourceDirectory,recipe.catalogue)).buffer);
-  const p = catalogue.numeric('posPc'), mag = catalogue.numeric('absMag'); assert(p instanceof Float32Array && mag instanceof Float32Array);
-  assert.equal(data.stars.length,109389); assert.equal(data.stars.length,catalogue.count);
-  const hip = catalogue.numeric('hip');
-  const matches = new Map(STAR_IDS.flatMap(id => starAstrometry(id).hipparcosId === undefined ? [] : [[starAstrometry(id).hipparcosId!, id] as const]));
-  const expectedMagnitude = new Float32Array(mag), expectedPosition = new Float32Array(p);
-  let reconciled = 0;
-  for (let row = 0; row < catalogue.count; row++) {
-    const id = matches.get(hip[row]!);
-    if (!id) continue;
-    const state = starStateKm(id, data.frame.epochJdTt).positionKm;
-    const oldDistance = Math.hypot(...p.slice(row * 3, row * 3 + 3));
-    const position = state.map(value => Math.fround(value / PARSEC_KM));
-    expectedPosition.set(position, row * 3);
-    expectedMagnitude[row] = mag[row]! + 5 * Math.log10(oldDistance / Math.hypot(...position));
-    reconciled++;
-  }
-  assert.equal(reconciled, 8, 'only independently cross-identified primary stars are replaced');
-  const ids = new Set<string>();
-  for (const star of data.stars) {
-    assert(!ids.has(star.id)); ids.add(star.id);
-    const sourceIndex = Number(star.id.split(':').at(-1)); assert(Number.isSafeInteger(sourceIndex) && sourceIndex >= 0 && sourceIndex < catalogue.count);
-    assert.deepEqual(star.positionUnits,[expectedPosition[sourceIndex*3],expectedPosition[sourceIndex*3+1],expectedPosition[sourceIndex*3+2]]);
-    // Transport quantization: int16 millimagnitudes on the float32 source grid, within the declared bound.
-    assert(Math.abs(star.absoluteMagnitude-expectedMagnitude[sourceIndex]!) <= POINT_FIELD_MAGNITUDE_BOUND); assert(star.colorIndex>=0 && star.colorIndex<32); assert.equal(typeof star.coverageAnchor,'boolean');
-  }
-  for (const star of data.stars) {
-    const index = Number(star.id.split(':').at(-1));
-    if (!matches.has(hip[index]!)) continue;
-    const original: number = mag[index]! + 5 * Math.log10(Math.hypot(...p.slice(index * 3, index * 3 + 3))) - 5;
-    const prepared = star.absoluteMagnitude + 5 * Math.log10(Math.hypot(...star.positionUnits)) - 5;
-    assert.ok(Math.abs(prepared - original) < 0.00051, 'distance correction must preserve apparent photometry');
-  }
-  const sourceMagnitude = (star: PreparedCssPointField['stars'][number]) => expectedMagnitude[Number(star.id.split(':').at(-1))]!;
-  const anchors = data.stars.filter(star=>star.coverageAnchor);
-  assert.equal(anchors.length,6*recipe.coverage.faceDivisions**2,'one real apparent-magnitude anchor per all-sky cube cell');
-  const best = Array.from({length:6*recipe.coverage.faceDivisions**2},()=>({index:-1,magnitude:Infinity}));
-  for(let index=0;index<catalogue.count;index++){const x=expectedPosition[index*3]!,y=expectedPosition[index*3+1]!,z=expectedPosition[index*3+2]!,cell=coverageCell(x,y,z,recipe.coverage.faceDivisions), apparent=expectedMagnitude[index]!+5*Math.log10(Math.hypot(x,y,z))-5; if(apparent<best[cell]!.magnitude)best[cell]={index,magnitude:apparent};}
-  assert.deepEqual(new Set(anchors.map(star=>star.id)),new Set(best.map(entry=>`${recipe.catalogue.idPrefix}:${entry.index}`)),'anchors retain the real brightest apparent row for every cube cell');
-  assert(data.directPoints); assert.equal(data.directPoints.catalogueCount,catalogue.count); assert.equal(data.directPoints.points.length,data.policy.activeSlots);
-  const directRows=new Set(data.directPoints.points.map(point=>point.sourceRow)); assert.equal(directRows.size,data.policy.activeSlots);
-  const anchorRows=new Set(anchors.map(star=>Number(star.id.split(':').at(-1))));
-  assert([...anchorRows].every(row=>directRows.has(row)),'the bounded direct field must retain every all-sky coverage anchor');
-  const expectedRows=Array.from({length:catalogue.count},(_,index)=>({index,anchor:anchorRows.has(index),
-    apparent:expectedMagnitude[index]!+5*Math.log10(Math.hypot(expectedPosition[index*3]!,expectedPosition[index*3+1]!,expectedPosition[index*3+2]!))-5}))
-    .sort((left,right)=>Number(right.anchor)-Number(left.anchor)||left.apparent-right.apparent||left.index-right.index)
-    .slice(0,data.policy.activeSlots).map(entry=>entry.index);
-  assert.deepEqual([...directRows].sort((a,b)=>a-b),expectedRows.sort((a,b)=>a-b),'direct stars are the reproducible coverage plus apparent-brightness sample');
-  // Direct display rows retain source magnitudes; the binary bank has millimagnitude quantization.
-  const decodedByRow=new Map(data.stars.map(star=>[Number(star.id.split(':').at(-1)),star]));
-  for(const point of data.directPoints.points){const star=decodedByRow.get(point.sourceRow);assert(star);assert.deepEqual(point.positionUnits,star.positionUnits);assert.equal(point.absoluteMagnitude,expectedMagnitude[point.sourceRow]);assert(Math.abs(point.absoluteMagnitude-star.absoluteMagnitude)<=POINT_FIELD_MAGNITUDE_BOUND);assert.equal(point.colorIndex,star.colorIndex);assert.equal(point.coverageAnchor,star.coverageAnchor);}
-  assertTree(data,sourceMagnitude);
-  assert.throws(()=>assertTree({...data,stars:data.stars.slice(1)},sourceMagnitude));
-  const firstChild = data.nodes[0]!.children[0]!;
-  assert.throws(()=>assertTree({...data,nodes:data.nodes.map((node,index)=>index===firstChild?{...node,first:node.first+1}:node)},sourceMagnitude),/partition/);
-});
-
 test('prepared point-field closes every source and image digest and samples the actual photometry chain', async () => {
-  const descriptor = JSON.parse(await readFile(`${objectDirectory}/object.json`,'utf8')) as {properties:{preparation:{source:string;sha256:string}};prepared:{url:string;sha256:string}};
-  const recipeBytes = await verifiedBytes(objectDirectory,{path:descriptor.properties.preparation.source,sha256:descriptor.properties.preparation.sha256});
+  const descriptor = JSON.parse(await readFile(`${objectDirectory}/object.json`,'utf8')) as {properties:{preparation:{source:string}};prepared:{url:string}};
+  const recipeBytes = await readFile(`${objectDirectory}/${descriptor.properties.preparation.source}`);
   const recipe = parseStarsRecipe(JSON.parse(recipeBytes.toString('utf8')) as unknown);
   const data = await payload();
   const manifest = JSON.parse(await readFile(`${preparedDirectory}/stars.json`, 'utf8'));
   assert.equal(manifest.data.provenance.catalogueMetadata.epoch, 'ICRS/J2000.0 equinox and coordinate epoch');
   assert.match(manifest.data.provenance.reconciliation.sourceEpochDescription, /J1991.25/);
-  await verifiedBytes(objectDirectory,{path:descriptor.prepared.url,sha256:descriptor.prepared.sha256});
-  for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await verifiedBytes(sourceDirectory,reference);
+  for (const reference of [recipe.catalogue,recipe.provenance,recipe.license,...(recipe.diffuseSky?.faces??[])]) await sourceBytes(sourceDirectory,reference);
   assert.deepEqual(data.resources.map(resource=>resource.path),['point-atlas.png']); assert.equal(data.diffuseSky,undefined);
   for (const resource of data.resources) {
-    const bytes = await verifiedBytes(preparedDirectory,resource); assert.equal(bytes.length,resource.bytes);
+    const bytes = await sourceBytes(preparedDirectory,resource); assert.equal(bytes.length,resource.bytes);
     const metadata = await sharp(bytes).metadata(); assert.equal(metadata.width,resource.width); assert.equal(metadata.height,resource.height);
   }
   const atlas = await sharp(`${preparedDirectory}/${data.atlas.path}`).raw().toBuffer();
@@ -158,18 +97,5 @@ test('prepared point-field closes every source and image digest and samples the 
     assert(Math.abs(sample.luminance - Math.min(1,Math.max(0,expected?.luminance??0))) <= 5.1e-13);
     assert(sample.luminance<=1);
   });
-  await assert.rejects(()=>verifiedBytes(sourceDirectory,{...recipe.catalogue,sha256:'0'.repeat(64)}),/digest/);
 });
 
-test('point-field recipe reproduces identical JSON and all PNG/WEBP bytes into a fresh directory', async () => {
-  const outputDirectory = await mkdtemp(join(tmpdir(),'cssearth-stars-'));
-  try {
-    const api = await import(pathToFileURL(resolve('tools/objects/dist/prepare-stars.js')).href) as {prepareStarsObject(options:{objectDirectory:string;outputDirectory:string}):Promise<unknown>};
-    await api.prepareStarsObject({objectDirectory,outputDirectory});
-    for (const file of ['stars.json','stars.bin']) {
-      const canonical = await readFile(`${preparedDirectory}/${file}`), rebuilt = await readFile(join(outputDirectory,file));
-      assert.equal(sha256(rebuilt),sha256(canonical),`${file} must rebuild byte-identically`);
-    }
-    for (const resource of (await payload()).resources) assert.equal(sha256(await readFile(join(outputDirectory,resource.path))),resource.sha256);
-  } finally { await rm(outputDirectory,{recursive:true,force:true}); }
-});

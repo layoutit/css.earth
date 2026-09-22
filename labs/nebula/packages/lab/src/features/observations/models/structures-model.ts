@@ -7,7 +7,7 @@ export type Decision = typeof decisions[number];
 export type Morphology = typeof morphologies[number];
 export type StructureLayer = typeof structureLayers[number];
 export interface StructureImage {
-  id: string; label: string; sourceSha256: string; nativeWidth: number; nativeHeight: number; width: number; height: number;
+  id: string; label: string; sourceSha256: string; sourceUrl: string; nativeWidth: number; nativeHeight: number; width: number; height: number;
   imageToFrame: Matrix; directory: string; mapSha256: string; credit: string; page: string;
   geometry?: { file: string; sha256: string };
 }
@@ -39,7 +39,7 @@ export function readStructureCatalogue(value: unknown): StructureCatalogue {
   const f = value.frame;
   if (!integer(f.width, 1) || !integer(f.height, 1) || !point(f.fieldArcminutes) || !f.fieldArcminutes.every(n => n > 0) || !point(f.centerIcrsDegrees) || f.northUp !== true) throw new Error('Invalid structure sky frame.');
   const images = value.images.map((item: unknown): StructureImage => {
-    if (!record(item) || !text(item.id) || !text(item.label) || !hash(item.sourceSha256) || !hash(item.mapSha256) || !path(item.directory) ||
+    if (!record(item) || !text(item.id) || !text(item.label) || !hash(item.sourceSha256) || !text(item.sourceUrl) || !hash(item.mapSha256) || !path(item.directory) ||
         !integer(item.nativeWidth, 1) || !integer(item.nativeHeight, 1) || !integer(item.width, 1) || !integer(item.height, 1) || !matrix(item.imageToFrame) ||
         !text(item.credit) || !text(item.page) || !item.page.startsWith('https://')) throw new Error('Invalid structure source.');
     let geometry: StructureImage['geometry'];
@@ -47,7 +47,7 @@ export function readStructureCatalogue(value: unknown): StructureCatalogue {
       if (!record(item.geometry) || !path(item.geometry.file) || !hash(item.geometry.sha256)) throw new Error('Invalid prepared geometry reference.');
       geometry = { file: item.geometry.file, sha256: item.geometry.sha256 };
     }
-    return { id: item.id, label: item.label, sourceSha256: item.sourceSha256, nativeWidth: item.nativeWidth, nativeHeight: item.nativeHeight,
+    return { id: item.id, label: item.label, sourceSha256: item.sourceSha256, sourceUrl: item.sourceUrl, nativeWidth: item.nativeWidth, nativeHeight: item.nativeHeight,
       width: item.width, height: item.height, imageToFrame: item.imageToFrame, directory: item.directory, mapSha256: item.mapSha256, credit: item.credit, page: item.page,
       ...(geometry === undefined ? {} : { geometry }) };
   });

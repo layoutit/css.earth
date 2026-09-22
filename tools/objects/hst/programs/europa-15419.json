@@ -34,14 +34,12 @@
         {
           "name": "idr203wtq_raw.fits",
           "uri": "mast:HST/product/idr203wtq_raw.fits",
-          "bytes": 590400,
-          "sha256": "12648cca09ee6b93f0dc3d50e1ae04080573fa8de48ec06eb831fab697dff54b"
+          "bytes": 590400
         },
         {
           "name": "idr203wtq_spt.fits",
           "uri": "mast:HST/product/idr203wtq_spt.fits",
-          "bytes": 103680,
-          "sha256": "a488b3103527ce021511e4220d6cd2673425487faf385947978d4a3db8d3bd50"
+          "bytes": 103680
         }
       ],
       "products": [
@@ -119,32 +117,27 @@
         {
           "name": "odr2a1010_asn.fits",
           "uri": "mast:HST/product/odr2a1010_asn.fits",
-          "bytes": 11520,
-          "sha256": "b8b265ca1c3ced413369a4fdbe589ab06caa68be8b44092b900372f8271071a5"
+          "bytes": 11520
         },
         {
           "name": "odr2a1010_jit.fits",
           "uri": "mast:HST/product/odr2a1010_jit.fits",
-          "bytes": 37440,
-          "sha256": "ca1add1f6f9a7bfd62b0a282c3e71e3fc4f0a0a950404b95e784a82b001ac29e"
+          "bytes": 37440
         },
         {
           "name": "odr2a1010_raw.fits",
           "uri": "mast:HST/product/odr2a1010_raw.fits",
-          "bytes": 4501440,
-          "sha256": "05f7a9efa8269eb6502df947b1f6eb8422529640bacf6b234cd20021b71b094e"
+          "bytes": 4501440
         },
         {
           "name": "odr2a1010_spt.fits",
           "uri": "mast:HST/product/odr2a1010_spt.fits",
-          "bytes": 112320,
-          "sha256": "5b94bd39605673d3a62e9039f4d080b02b5007229250b22712a4fde6119d3882"
+          "bytes": 112320
         },
         {
           "name": "odr2a1010_wav.fits",
           "uri": "mast:HST/product/odr2a1010_wav.fits",
-          "bytes": 4501440,
-          "sha256": "0bb60159d9775294c24d3468d2168fdc44d24a6a316ee281ba489c4fb8c68863"
+          "bytes": 4501440
         }
       ],
       "products": [

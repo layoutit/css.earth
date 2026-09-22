@@ -5,7 +5,7 @@ import { isAbsolute, relative } from 'node:path';
 import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/volume-core/contracts/volume-frame';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import { containedPath, sha256, verifiedBytes } from '../compact-inputs/density-grid.ts';
+import { containedPath, sha256, sourceBytes } from '../compact-inputs/density-grid.ts';
 import type { VolumeSlices } from '@cssearth/volume-core/contracts/volume-slices';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { bakeMasterVolumeSlices } from '../slices/emission.ts';
@@ -116,13 +116,13 @@ function validSkyBounds(bounds: SkyBounds): boolean {
     bounds.min.every((n, i) => Number.isFinite(n) && Number.isFinite(bounds.max[i]) && n < bounds.max[i]!);
 }
 async function pin(root: string, path: string, value: unknown): Promise<CompilerPin> {
-  const bytes = json(value); await writeFile(containedPath(root, path), bytes); return { path, sha256: sha256(bytes) };
+  const bytes = json(value); await writeFile(containedPath(root, path), bytes); return { path };
 }
 export async function compilerAlphaDigest(directory: string, slices: VolumeSlices, signal?: AbortSignal): Promise<string> {
   const digest = createHash('sha256');
   for (const quad of slices.quads) {
     cancel(signal);
-    const bytes = await verifiedBytes(directory, { path: quad.texturePath, sha256: quad.sha256 });
+    const bytes = await sourceBytes(directory, { path: quad.texturePath });
     const { data, info } = await sharp(bytes).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (info.width !== quad.widthPx || info.height !== quad.heightPx || info.channels !== 4) throw new Error('Compiler alpha inspection found changed slice dimensions.');
     const alpha = Buffer.alloc(info.width * info.height);

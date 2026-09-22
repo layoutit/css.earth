@@ -3,13 +3,11 @@
   "subjectId": "m45",
   "asOf": "2026-09-13",
   "result": {
-    "path": ".local/nebula-lab/compiler/29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef/result.json",
-    "sha256": "5c3a60e2a10d401c89689e2276a881cb3751c2cbdbb816e97645ea364404ae8c"
+    "path": ".local/nebula-lab/compiler/29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef/result.json"
   },
   "retainedCloudResult": "a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8",
   "catalogue": {
-    "path": "labs/nebula/models/m45/stellar-catalogue.json",
-    "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7"
+    "path": "labs/nebula/models/m45/stellar-catalogue.json"
   },
   "catalogueRecords": 2105,
   "selectedStars": 450,

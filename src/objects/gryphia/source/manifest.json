@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "9f5d08a2db0d967db279a15bf2abc118d851553a8f696bb1854dee0615cdcdbb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -132,9 +129,7 @@
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/hanus-2021-asassn.pdf",
-      "expectedBytes": 1398918,
-      "expectedSha256": "3ee7a470b01d8e8087b7a8119ca9b1de1048fc3d5fb44b64a8ae46ca287cf604"
+      "path": "reference/hanus-2021-asassn.pdf"
     },
     {
       "path": "reference/horizons-elements.txt"
@@ -146,9 +141,7 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/masiero-2012.pdf",
-      "expectedBytes": 371921,
-      "expectedSha256": "291c9dcd3aafc1bf4f8e83c5557eb97b05b23238ec0137edb0d138a5567e9192"
+      "path": "reference/masiero-2012.pdf"
     },
     {
       "path": "reference/model-properties.json"
@@ -160,9 +153,7 @@
       "path": "reference/neowise-diameter-row.csv"
     },
     {
-      "path": "reference/pilcher-2017-mpb.pdf",
-      "expectedBytes": 30682666,
-      "expectedSha256": "d07da5af543855beea8f849a526fbd3728cb8ca770fef8472858f1c10119fdf5"
+      "path": "reference/pilcher-2017-mpb.pdf"
     },
     {
       "path": "reference/sbdb.json"

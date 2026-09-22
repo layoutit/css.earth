@@ -1,7 +1,8 @@
 import { fixtureRecord } from '../../../contract/test-values.mts';
 import { requireString } from '../../../sources/source-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadBodyEpochEphemeris, evaluatePublishedOrbit } from '../../../../packages/astronomy/tools/body-epoch-ephemeris.mts';

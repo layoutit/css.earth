@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {decodeNewHorizonsLorri,decodeArrokothMvic,newHorizonsCamera} from './new-horizons-geo.mts';
@@ -11,7 +12,7 @@ import {pinnedOracleVersions} from '../../oracles/fixture.mts';
 
 const source=new URL('../../../src/objects/arrokoth/source/',import.meta.url);
 const read=async(path:string)=>JSON.parse(await readFile(new URL(path,source),'utf8'));
-const fixture=shape({schema:text,tool:text,version:text,images:array(shape({path:text,sha256:text,bytes:number,
+const fixture=shape({schema:text,tool:text,version:text,images:array(shape({path:text,bytes:number,
   planes:array(shape({name:text,shape:array(number),samples:array(shape({index:number,value:nullable(number)}))})),
   wcs:optional(array(shape({pixel:array(number),raDecDegrees:array(number)}))),exposureSeconds:optional(number),acceptedPixels:optional(number)}))})(JSON.parse(await readFile(new URL('../../../tests/objects/fixtures/arrokoth/new-horizons-astropy.json',import.meta.url),'utf8')));
 
@@ -21,7 +22,7 @@ test('three pinned New Horizons products match independent Astropy pixels and HD
   let samples=0;
   for(const image of fixture.images){
     const bytes=await readFile(new URL(image.path,source));
-    assert.equal(bytes.length,image.bytes);assert.equal(createHash('sha256').update(bytes).digest('hex'),image.sha256);
+    assert.equal(bytes.length,image.bytes);
     if(image.wcs){
       let offset=0;
       for(const expected of image.planes){const plane=readFitsPrimary(bytes.subarray(offset));offset+=plane.nextOffset;
@@ -67,7 +68,7 @@ test('LORRI rejects a different image, incomplete quality layout and non-rigid b
   const changed=Buffer.from(bytes);changed[changed.length-1]^=1;
   assert.throws(()=>decodeNewHorizonsLorri(changed,camera),/hash/);
   const short=bytes.subarray(0,readFitsPrimary(bytes).nextOffset);
-  assert.throws(()=>decodeNewHorizonsLorri(short,{...camera,imageSha256:createHash('sha256').update(short).digest('hex')}));
+  assert.throws(()=>decodeNewHorizonsLorri(short,{...camera}));
   assert.throws(()=>newHorizonsCamera(bytes,{bodyToJ2000:[[2,0,0],[0,1,0],[0,0,1]],offsetPixels:[0,0]}),/attitude/);
 });
 

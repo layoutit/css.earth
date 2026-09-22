@@ -48,7 +48,6 @@
         "center": 10,
         "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136108&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
         "sourcePath": "src/objects/hiiaka/source/orbit/haumea-epoch.txt",
-        "sha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f",
         "solution": "tnosat_v001b_20136108_jpl110_20221014",
         "limitations": [
           "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",
@@ -66,7 +65,6 @@
       "center": 920136108,
       "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136108&CENTER=500%40920136108&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
       "sourcePath": "src/objects/hiiaka/source/orbit/hiiaka-epoch.txt",
-      "sha256": "5c2d93c8540488799fa2e147849419e234138732a845c479b24af0385b608288",
       "solution": "tnosat_v001b_20136108_jpl110_20221014",
       "limitations": [
         "Horizons solution uses 33 observations from 2005–2008 and reports a 900 km primary-relative position uncertainty at 2025-Jan-01; this is not a measured uncertainty at the 2026 scene epoch.",

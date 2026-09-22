@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -39,7 +40,7 @@ for (const path of ['prepared/lenses.json', 'prepared/slice.webp', '../../../pub
     await writeFile(resolve(f.directory, path), 'tampered');
     const state = await inspectContextAvailability(root);
     assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
-    await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /identity mismatch/i);
+    await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /identity mismatch|not valid JSON/i);
   });
 }
 

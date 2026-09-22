@@ -3,8 +3,8 @@ import { constants } from 'node:fs';
 import { copyFile, lstat, mkdir, mkdtemp, open, readdir, readFile, rename, rm, rmdir, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
-import { pinFile, writeProductRecord, type ProductInput } from '../product-record.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
+import { fileSize, writeProductRecord, type ProductInput } from '../product-record.mts';
+import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { proposedFamilyProfiles } from './family-handlers.mts';
 import { FAMILY_IDS, type CalibrationState, type DescriptorMember, type FamilyId, type MemberRole } from './product-descriptor.mts';
 import { describeMixedNd, inspectMixedNd } from './families/f02-mixed-nd.mts';
@@ -67,7 +67,7 @@ async function qualifyLocalImport(spec:LocalImportSpec,members:readonly Descript
   }
   const science=members.filter(member=>member.role==='science');
   if(science.length!==1)return{issue:{state:'unknown',reason:`The selected local profile requires exactly one science member; this import has ${science.length}.`}};
-  const member=science[0]!,pin={path:resolve(staging,member.path),bytes:member.bytes,sha256:member.sha256},profile=selected[0]!;
+  const member=science[0]!,pin={path:resolve(staging,member.path)},profile=selected[0]!;
   try{
     const acquisition={kind:'local-import' as const,identity:'import.json'},calibration={state:'unknown' as const,basis:['Local byte import and content inspection establish structure, not archive origin or calibration.']};
     const value=profile.profileId==='astropy-mixed-nd-fits@1'
@@ -76,7 +76,7 @@ async function qualifyLocalImport(spec:LocalImportSpec,members:readonly Descript
         ?describeHealpix({id:spec.datasetId,member,map:await inspectHealpix(pin),producingRecord:'import.product.json',acquisition,calibration})
         :spec.declarations?.physicalContext===undefined?(()=>{throw new TypeError('Physical Cartesian FITS import requires declarations.physicalContext; XYZ axes alone do not establish a physical volume.');})()
         :describePhysicalCartesianGrid({id:spec.datasetId,member,context:spec.declarations.physicalContext,inspection:await inspectPhysicalCartesianGrid(pin,spec.declarations.physicalContext),producingRecord:'import.product.json',target:spec.declarations.target,acquisition});
-    const path=resolve(staging,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return{descriptor:{path:'descriptor.json',...await pinFile(path)}};
+    const path=resolve(staging,'descriptor.json');await writeFile(path,`${JSON.stringify(value,null,2)}\n`);return{descriptor:{path:'descriptor.json',...await sha256File(path)}};
   }catch(error){return{issue:{state:'unsupported',reason:`The selected ${profile.profileId} content validator refused the imported bytes: ${error instanceof Error?error.message:String(error)}`}};}
 }
 
@@ -91,8 +91,8 @@ export async function importLocalArtifact(value:unknown,outputDirectory:string):
     const members:DescriptorMember[]=[],inputs:ProductInput[]=[];let copiedBytes=0;
     for(const [index,file] of pending.entries()){
       const target=resolve(staging,'files',file.logical),rel=relative(resolve(staging,'files'),target);if(rel==='..'||rel.startsWith('../'))throw new TypeError('Local import path escapes staging.');await mkdir(dirname(target),{recursive:true});
-      const before=await pinFile(file.source);if(before.bytes!==file.bytes)throw new Error(`Local source changed during enumeration: ${file.source}.`);await copyFile(file.source,target,constants.COPYFILE_EXCL);const copied=await pinFile(target),after=await pinFile(file.source);if(copied.sha256!==before.sha256||copied.bytes!==before.bytes||after.sha256!==before.sha256||after.bytes!==before.bytes)throw new Error(`Local source changed during import: ${file.source}.`);
-      copiedBytes+=copied.bytes;if(copiedBytes>spec.limits.maxBytes)throw new RangeError('Local import byte limit exceeded.');const id=`member-${String(index+1).padStart(4,'0')}`;members.push({id,path:`files/${file.logical}`,role:file.role,...copied,mediaType:mediaType(file.logical)});inputs.push({role:`local ${file.role}`,identity:file.source,...before});
+      const before=await sha256File(file.source);if(before.bytes!==file.bytes)throw new Error(`Local source changed during enumeration: ${file.source}.`);await copyFile(file.source,target,constants.COPYFILE_EXCL);const copied=await sha256File(target),after=await sha256File(file.source);if(copied.sha256!==before.sha256||copied.bytes!==before.bytes||after.sha256!==before.sha256||after.bytes!==before.bytes)throw new Error(`Local source changed during import: ${file.source}.`);
+      copiedBytes+=copied.bytes;if(copiedBytes>spec.limits.maxBytes)throw new RangeError('Local import byte limit exceeded.');const id=`member-${String(index+1).padStart(4,'0')}`;members.push({id,path:`files/${file.logical}`,role:file.role,...copied,mediaType:mediaType(file.logical)});inputs.push({role:`local ${file.role}`,identity:file.source,bytes:before.bytes});
     }
     const recognized=proposedFamilyProfiles(await Promise.all(members.map(async member=>({path:member.path,prefix:await prefix(resolve(staging,member.path))})))),candidates=[...recognized,...(spec.declarations?.physicalContext&&spec.declarations.familyHints?.includes('F16')?[{handlerId:'f16-cartesian-grid',profileId:'astropy-physical-cartesian-grid@1'} as const]:[])];
     const qualification=await qualifyLocalImport(spec,members,candidates,staging);

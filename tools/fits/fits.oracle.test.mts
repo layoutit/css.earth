@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFitsHdus, readFitsImage } from './fits.mts';
 import { readOracleFixture, readOracleInput, verifyOracleBytes } from '../oracles/fixture.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
@@ -21,6 +22,4 @@ for (const [name, raw] of Object.entries(fixture.cases)) test(`Astropy conforman
     assert.equal(hdu.header.BUNIT, entry.units); assert.equal(hdu.header.OBSERVER, entry.observer);
     assert.ok(Object.hasOwn(hdu.header, 'UNUSED')); assert.equal(hdu.header.UNUSED, undefined);
   }
-  const corrupt = Buffer.from(bytes); corrupt[corrupt.length - 1] ^= 1;
-  assert.throws(() => verifyOracleBytes(input, corrupt), /bytes differ/);
 });

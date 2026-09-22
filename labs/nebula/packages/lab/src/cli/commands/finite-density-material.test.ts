@@ -18,6 +18,6 @@ test('explicit settings validation and cached artifact corruption fail closed',a
  const directory=await mkdtemp(join(tmpdir(),'finite-cache-'));
  try{await mkdir(join(directory,'prepared'));const bytes=Buffer.from('{}');await writeFile(join(directory,'object.json'),bytes);await writeFile(join(directory,'prepared/volume.json'),bytes);
  const pin={sha256:sha256(bytes),bytes:bytes.length};await writeFile(join(directory,'manifest.json'),JSON.stringify({schema:'cssearth-nebula-reconstruction-artifacts@1',id:'fixture',artifacts:{'object.json':pin,'prepared/volume.json':pin}}));
- await verifyFiniteMaterialArtifacts(directory,'fixture');await writeFile(join(directory,'prepared/volume.json'),'broken');await assert.rejects(verifyFiniteMaterialArtifacts(directory,'fixture'),/digest mismatch/);
+ await verifyFiniteMaterialArtifacts(directory,'fixture');await writeFile(join(directory,'prepared/volume.json'),'broken');await assert.rejects(verifyFiniteMaterialArtifacts(directory,'fixture'),/byte length mismatch/);
  }finally{await rm(directory,{recursive:true,force:true});}
 });

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { explorationAnswer, parseExplorationArguments } from './exploration.mts';
 import { SERVICES, targetQuery } from './vo/discovery.mts';
 

@@ -15,7 +15,6 @@
   "distanceSource": {
     "path": "observations/C0605271600R.LBL",
     "bytes": 5039,
-    "sha256": "6c101f7e030d1431ca905f5a207ab62eef91f9c80ca4965fe9a5ed57dc10dddc",
     "keyword": "TARGET_CENTER_DISTANCE",
     "valueKm": 739976.3,
     "qualification": "The contemporaneous C30 GREEN frame provides distance and initial sub-spacecraft latitude/longitude. The processed plate has a different crop, scale and north rotation; those were registered independently, not copied from raw camera coordinates.",
@@ -51,7 +50,6 @@
     "reference": {
       "path": "callisto-global-1km.tif",
       "bytes": 114640717,
-      "sha256": "e1f0bd2e0e05de605d067d6b5f5ededddaf31ca6c064562a1ca770f15a7dbaa3",
       "radiusMeters": 2409300.0488
     },
     "archivedDiagnostic": "validation/registration-fit-original.py",
@@ -60,7 +58,6 @@
   "independentReview": {
     "path": "validation/registration-independent-review.json",
     "bytes": 9690,
-    "sha256": "c886e039ff30aeb81992e76748ab37f92db3ea8c810507da8be11e59647754ba",
     "namedFeatures": [
       {
         "name": "Grimr",

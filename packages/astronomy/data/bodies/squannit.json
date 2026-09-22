@@ -35,7 +35,6 @@
       "referenceFrame": "ICRF",
       "source": "https://arxiv.org/abs/1912.06456v2",
       "sourcePath": "src/objects/squannit/source/orbit/published-parameters.json",
-      "sha256": "0061b2a8a915b03b9cd65cb4216fb757249ae868face4c8014e95cdbb86bb2bf",
       "timeQualification": "The paper defines JD 2455305.0 as asterocentric (light-time-corrected), without naming UTC/TT/TDB. This preparation treats that numerical epoch as TT; a clock-scale ambiguity up to 70 seconds contributes less than 0.41 degree of phase, separate from the much larger source-parameter/extrapolation uncertainty. No light-time correction is applied to the resulting geometric vector.",
       "limitations": [
         "The 2026 position extrapolates the 2000–2019 photometric drift fit. It is context, not an observed or precisely predicted current position.",

@@ -54,26 +54,22 @@
     {
       "name": "y2p60503t_c0f.fits",
       "uri": "mast:HST/product/y2p60503t_c0f.fits",
-      "bytes": 43200,
-      "sha256": "40ef2f74f7261397e2ed5a8a182879d084a68cc15316de40221b76cd42a4f043"
+      "bytes": 43200
     },
     {
       "name": "y2p60503t_c1f.fits",
       "uri": "mast:HST/product/y2p60503t_c1f.fits",
-      "bytes": 43200,
-      "sha256": "aabd9708b5d9fc7b34d504a85b23fcdbc1d7593749a5172c95ee90a2ae33d718"
+      "bytes": 43200
     },
     {
       "name": "y2p60503t_c2f.fits",
       "uri": "mast:HST/product/y2p60503t_c2f.fits",
-      "bytes": 43200,
-      "sha256": "d527b80986f0e626298e2ab64290b5f9ee907159c31c63daaa01766c97607560"
+      "bytes": 43200
     },
     {
       "name": "y2p60503t_cqf.fits",
       "uri": "mast:HST/product/y2p60503t_cqf.fits",
-      "bytes": 43200,
-      "sha256": "5545af32a82c43f8076e91583e39c0836fede1684ca15a31612441abbe4d9035"
+      "bytes": 43200
     }
   ],
   "note": "A 130 second G270H spectrum of Europa (target EUROPA-EAST) through the 0.86 arcsec B-3 aperture, programme 5837, 22 June 1995. Section 30.1 of the FOS data handbook lists what calfos produced: calibrated wavelengths (.c0h), calibrated fluxes (.c1h), the propagated statistical error (.c2h) and the calibrated science data quality (.cqh), which are the four files pinned here as the complete product. The archive also holds the flat-fielded object spectrum (.c5h) and the background (.c7h), which this pin does not include. Each file is waivered FITS: the samples are the PRIMARY unit and the GEIS group parameters follow in a table extension. FLX_CORR is SKIPPED in the header and AIS_CORR is COMPLETE, because the flux scale of this closeout calibration comes from the absolute inverse sensitivity rather than the older flux step."

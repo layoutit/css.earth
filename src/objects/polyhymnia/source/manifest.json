@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -91,7 +89,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "sha256": "5b2629c5b34635ea0564d0cdeba57a468fe218fb5d6d06332aaa163f118f3000",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -116,9 +113,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/AcuA_V1.txt.gz",
-      "expectedBytes": 120256,
-      "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
+      "path": "reference/AcuA_V1.txt.gz"
     },
     {
       "path": "reference/calibration.json"
@@ -131,9 +126,7 @@
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/franco-polyhymnia-2020.pdf",
-      "expectedBytes": 523716,
-      "expectedSha256": "e14dd7655c1b5a3143a99a162d217144d40492a5ae685fafde0a3fd53adb1ece"
+      "path": "reference/franco-polyhymnia-2020.pdf"
     },
     {
       "path": "reference/horizons-elements.txt"
@@ -151,9 +144,7 @@
       "path": "reference/ReadMe.AcuA.txt"
     },
     {
-      "path": "reference/usui-2011.pdf",
-      "expectedBytes": 635799,
-      "expectedSha256": "77687e5d5a317e40c0c1abe9e32725e10da6eae768975cdcf340408e9356f499"
+      "path": "reference/usui-2011.pdf"
     }
   ]
 }

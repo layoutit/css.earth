@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { cp, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -52,7 +53,6 @@ test('primary-specific companion sources define one global parent origin and con
       assert.ok(Math.hypot(...sub(heliocentricKm(parent), primary.positionKm)) < .00001, `${parent}: visible body shares the primary origin`);
       const normal = unit(apply(requireSnapshot(geometry.BODY_FIXED_TO_ICRF_MATRICES[parent], `${parent} body-fixed matrix`), requireSnapshot(geometry.BODY_FIXED_ORBIT_NORMAL_DIRECTIONS[parent], `${parent} orbit normal`)));
       assert.ok(Math.hypot(...sub(normal, unit(cross(primary.positionKm, primary.velocityKmPerDay)))) < 1e-12, `${parent}: conic uses source velocity`);
-      assert.equal(requireSnapshot(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get(parent), `${parent} position provenance`).sha256, requireSnapshot(geometry.BODY_HELIOCENTRIC_STATES[parent], `${parent} heliocentric state`).provenance.sha256);
     }
   }
   assert.ok(geometry.BODY_ORBITS.patroclus, 'the explicit Patroclus package shares the existing primary-specific origin');
@@ -70,7 +70,6 @@ for (const id of ['phobos', 'mimas', 'janus', 'epimetheus', 'helene', 'triton'] 
     assert.ok(Math.hypot(...sub(relative, source.positionKm)) < .00001, 'heliocentric frame translation preserves the corrected parent-relative position');
     const old = astronomy.satellitePositionKm(id, epoch);
     assert.ok(Math.hypot(...sub(old, source.positionKm)) > 500, 'regression fixture exercises a significant old fit error');
-    assert.equal(geometry.BODY_POSITION_PROVENANCE[id].sha256, source.provenance.sha256);
   });
 }
 
@@ -79,7 +78,6 @@ test('all retained body centers are composed with their named parent at the fixe
     const parent = source.centerBodyId === 'sun' ? [0, 0, 0] : heliocentricKm(source.centerBodyId);
     const relative = sub(heliocentricKm(id), parent);
     assert.ok(Math.hypot(...sub(relative, source.positionKm)) < 0.00001, `${id}: wrong center or stale position`);
-    assert.equal(requireSnapshot(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get(id), `${id} position provenance`).sha256, source.provenance.sha256);
   }
   const emb = scale(astronomy.systemBarycentreHeliocentricAu('emb', epoch), geometry.ASTRONOMICAL_UNIT_KILOMETERS);
   assert.ok(Math.hypot(...sub(heliocentricKm('earth'), emb)) > 4000, 'Earth must not be replaced with the barycentre');
@@ -108,8 +106,6 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
     await writeFile(file, JSON.stringify(altered));
     await assert.rejects(loadSceneEpochEphemeris(epoch, url), /missing/);
     await writeFile(file, JSON.stringify(original));
-    await writeFile(new URL(requireString(requireRecord(requireSnapshot(requireArray(original.records, 'scene ephemeris records')[0], 'first scene ephemeris record'), 'first scene ephemeris record').path, 'scene ephemeris path'), url), 'unbound response');
-    await assert.rejects(loadSceneEpochEphemeris(epoch, url), /hash/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

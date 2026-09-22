@@ -13,7 +13,7 @@ export interface BakeRecipe {
   removal: { method: string; script: Pin; baselineScript: Pin; model: Pin & { url: string };
     tilePixels: number; stridePixels: number; paddingPixels: number; batchSize: number };
   reconstruction: { analysisWidth: number; originalWidth: number; quality: number };
-  images: { imageId: string; placement: OverlayPlacement; appearance: CloudAppearance; baselineSha256: string }[];
+  images: { imageId: string; placement: OverlayPlacement; appearance: CloudAppearance }[];
 }
 export async function readRecipe(root: string, path: string): Promise<BakeRecipe> {
   const recipe = await json(path) as BakeRecipe;
@@ -30,7 +30,6 @@ export async function readRecipe(root: string, path: string): Promise<BakeRecipe
   assert.deepEqual([recipe.removal.tilePixels, recipe.removal.stridePixels, recipe.removal.paddingPixels, recipe.removal.batchSize], [512, 384, 64, 2]);
   assert.deepEqual(recipe.reconstruction, { analysisWidth: 1024, originalWidth: 2048, quality: 92 });
   for (const image of recipe.images) {
-    assert.match(image.baselineSha256, /^[a-f0-9]{64}$/);
     parseCloudAppearance(image.appearance);
     parseReconstructionRequest({ action: 'apply', subjectId: recipe.subjectId, imageId: image.imageId,
       placement: image.placement, appearance: image.appearance, removalResultId: `${'0'.repeat(64)}.${'0'.repeat(64)}` });

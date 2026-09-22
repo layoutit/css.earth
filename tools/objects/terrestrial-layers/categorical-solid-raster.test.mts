@@ -1,7 +1,8 @@
 import { required } from '../../contract/test-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import { requireRecord, requireString } from '../../sources/source-values.mts';
-import {test} from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {mkdtemp, writeFile, readFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';

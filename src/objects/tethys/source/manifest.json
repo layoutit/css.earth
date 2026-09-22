@@ -30,8 +30,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "GeoTIFF no-data is exactly 0; preserve all other source values. Native image resolution and photographed shading vary.",
-      "expectedBytes": 66401923,
-      "expectedSha256": "40723c3ebfaaa52a657827b37309bc84234811db1cf26a21d086e26aba2b3640",
       "capture": {
         "attributions": [
           {
@@ -81,8 +79,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "Published global rectangular display map has no separate validity mask. Preserve original imagery, including dark terrain, photographed shading and source seams.",
-      "expectedBytes": 10809057,
-      "expectedSha256": "aa3c249de2432699157638dae11c6f5c5e22c3dda94dd803af8666269f1a3da4",
       "capture": {
         "attributions": [
           {
@@ -133,8 +129,6 @@
       },
       "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
       "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
-      "expectedBytes": 6044029,
-      "expectedSha256": "02b967b03598630765ec61545a7886ee8f4abda45fdae500f5af03358ebf5546",
       "capture": {
         "attributions": [
           {
@@ -183,8 +177,6 @@
       },
       "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
       "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
-      "expectedBytes": 790789,
-      "expectedSha256": "2770434e4d2473c4febac01cd206ffecde17170f05a082942cd3b841a5724453",
       "capture": {
         "attributions": [
           {
@@ -233,8 +225,6 @@
       },
       "coverage": "PDS SPC terrain model with independently projected equatorial and polar rasters. Only documented geographic extents and finite non-special source cells are sampled.",
       "units": "Radius from center, meters. Displayed height is radius/1000 minus 531 km.",
-      "expectedBytes": 790789,
-      "expectedSha256": "2f301f3a334665829a2d8dae8342273f2bc77c6ceac1aa88dbc5ed243e869c74",
       "capture": {
         "attributions": [
           {
@@ -259,8 +249,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -300,8 +288,6 @@
       ],
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
-      "expectedBytes": 17694840,
-      "expectedSha256": "afa8fe486779512d843e645bcb56d088bd9f948553e0b4d26bc25d5d40c20759",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -345,8 +331,6 @@
       "height": 679,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 6044029,
-      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -390,8 +374,6 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 790789,
-      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -435,8 +417,6 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 790789,
-      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1350,8 +1330,6 @@
     {
       "id": "n1807429484",
       "path": "observations/N1807429484_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "35fddf10a0f669e60677b9b9f5668d1a6d9bf9d8ee86ca91055eead5964526f7",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -1527,9 +1505,7 @@
     {
       "path": "science/b2-intake/tethysshapeassessment.pdf",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysshapeassessment.pdf",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 14224166,
-      "expectedSha256": "34dd9e83930f96c7e6b76025acd9bab6de25713439a4f87a981c6dc3a99595e4"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "validation/b2-scalar-anchors.json",

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -48,7 +49,6 @@ test('the pinned Europa programs parse, and name their instrument, exposures and
     assert.deepEqual(entry.association?.members.map(member => member.type) ?? null, members);
     assert.ok(entry.inputs.some(input => suffixOf(input.name) === 'RAW'), 'a raw exposure is pinned');
     assert.ok(entry.exposureEndMjd > entry.exposureStartMjd);
-    assert.ok(entry.inputs.every(input => /^[0-9a-f]{64}$/u.test(input.sha256 ?? '')), `${name}: every input is pinned by digest`);
   }
 });
 
@@ -363,9 +363,9 @@ test('a calibration record pins the observation’s own files, the context that 
     const record = (await readProductRecord(productRecordPath(product)))!;
     assert.equal(record.telescope, 'HST');
     assert.equal(record.stage, 'calibrate');
-    // Every input the run read, at the size and digest it read, named by the archive product it is.
-    assert.deepEqual(record.inputs.map(input => [input.role, input.identity, input.bytes, input.sha256]),
-      [['raw', 'mast:HST/product/od9l12010_raw.fits', 2000, 'a'.repeat(64)], ['wav', 'mast:HST/product/od9l12010_wav.fits', 1000, 'b'.repeat(64)]]);
+    // Every input the run read, at the size it read, named by the archive product it is.
+    assert.deepEqual(record.inputs.map(input => [input.role, input.identity, input.bytes]),
+      [['raw', 'mast:HST/product/od9l12010_raw.fits', 2000], ['wav', 'mast:HST/product/od9l12010_wav.fits', 1000]]);
     assert.equal(record.parameters.crdsContext, 'hst_1358.pmap');
     assert.equal(record.parameters.pipeline, 'calstis');
     assert.deepEqual(record.parameters.references, { 'od9l12010_raw.fits': { DARKFILE: 'oref$n7p1032ao_drk.fits' } });
@@ -387,7 +387,7 @@ test('the comparison adds its receipt to the record of the exact product it comp
     const record = await addArchiveAgreement(work, name, receiptPath);
     const agreement = evidenceFor(record, name, 'archive-agreement');
     assert.equal(agreement.length, 1);
-    assert.ok(agreement[0]!.receiptPin);
+    assert.ok(agreement[0]!.receipt.endsWith('.evidence.json'));
     assert.match(agreement[0]!.establishes, /reproduces what MAST distributes/u);
     assert.equal(evidenceFor(record, name, 'internal-consistency').length, 0, 'agreement with the archive is not consistency of our own');
     // The same comparison run again says the same thing once, rather than twice.
@@ -395,9 +395,6 @@ test('the comparison adds its receipt to the record of the exact product it comp
     // A product no stage recorded is refused: nothing says which run made the file that was compared.
     await writeFile(join(work, 'od9l12010_crj.fits'), 'not a recorded product');
     await assert.rejects(addArchiveAgreement(work, 'od9l12010_crj.fits', receiptPath), /no product record/u);
-    // A product that is not the one its record pins is refused too.
-    await writeFile(product, imageFile('SCI', 1, 4, 3, 1, (x, y) => x + y + 1, 2, 'COUNTS/S'));
-    await assert.rejects(addArchiveAgreement(work, name, receiptPath), /not the files on disk/u);
   } finally { await rm(work, { recursive: true, force: true }); }
 });
 

@@ -88,8 +88,9 @@ The existing search field is a GET form. Submitting `q` keeps the object URL and
 returns matches in the same shell. Category buttons submit that form too, and
 Clear search is an ordinary link. An empty submission lists all objects. Object
 names, nebula aliases and named features use the same matching code as live
-search. Earth's cities come from its active named-feature index. Feature results
-are links to their owning body with a `feature` parameter. The response selects
+search. Earth's GeoNames cities are named features of Earth, found from any body
+by any of their alternate names. Feature results are links to their owning body
+with a `feature` parameter (`city-<id>` for a city). The response selects
 a compatible dataset and publishes the same feature caption used by live labels;
 JavaScript adds the camera flight after that body is ready.
 
@@ -113,6 +114,18 @@ warm function instances cache only authenticated index data. Query responses
 are not cached and carry `noindex, follow`. An index failure leaves object
 search usable and displays a retry message in the existing feature section.
 
+Live search asks `netlify/functions/find.ts` instead of downloading anything:
+`?q=<query>&object=<body>` returns the rows to show and `?place=<id>&object=<body>`
+returns one city's record for its flight. The page therefore never downloads the
+cross-body index (3.3 MB) or Earth's places catalogue (14.8 MB); a query answer is
+a few hundred bytes to about 2 KB. The function reads both files once per warm
+instance, each checked against the byte count and SHA-256 pinned at build time
+(the places catalogue from the deploy's asset bucket). A city that a named
+feature already carries within 50 km is listed once, as that feature, and its
+alternate names find it. The page waits one animation frame after typing, so
+keystrokes that arrive faster than it draws send one request for the newest
+text.
+
 JavaScript adopts the submitted query and selected category, keeps the form and
 result elements, and adds live filtering and in-place navigation. Both native
 and enhanced controls use the same styles. Settings and view context carry across
@@ -120,8 +133,9 @@ native submits; a small form binding refreshes that context after interactive
 camera movement. Feature flights and continuous camera input require JavaScript
 in the normal site.
 
-`tools/cli/search-server.mts` calls the same routing and request handler in Astro dev
-and `pnpm preview`. `netlify.toml` declares the production build, Node function
+`tools/cli/search-server.mts` calls the same routing and request handlers in Astro
+dev. `astro preview` does not run Vite's preview hooks, so neither search works
+there; use dev, or a Netlify deploy. `netlify.toml` declares the production build, Node function
 and edge route. Deployment is deferred: before launch, verify a real Netlify
 Deploy Preview, prepared asset restoration, query routing and the initial page
 with JavaScript disabled. No site has been deployed by this PR.

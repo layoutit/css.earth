@@ -36100,25 +36100,21 @@
     "sources": [
       {
         "path": "Bonanos2010-ReadMe.txt",
-        "sha256": "d4c994ed7613d9c881c8859405a364d895abd2dc66c5a56cc6b2516ad3699a9c",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/140/416/ReadMe",
         "bytes": 8279
       },
       {
         "path": "table1.dat",
-        "sha256": "0a0e988db9ad1ed035d76c471939748bf72cd5fafd7624417a546412dba14bf5",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/140/416/table1.dat",
         "bytes": 519034
       },
       {
         "path": "table3.dat",
-        "sha256": "591442f9507a0cb2b763336e149238c54a47400c606c6173bd04a5edac0be8df",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/140/416/table3.dat",
         "bytes": 1171604
       },
       {
         "path": "refs.dat",
-        "sha256": "a7657ef1e60736b9aaabccc7f80782bd2daff5f229607f3bd62e2f822b3890d7",
         "url": "https://cdsarc.cds.unistra.fr/ftp/J/AJ/140/416/refs.dat",
         "bytes": 1772
       }
@@ -36144,23 +36140,19 @@
         "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/provenance.json"
       },
       "emissionField": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/emission-field.json",
-        "sha256": "4b4ac9a5c48bbcdba47a92752662e1e617e487524bb0e185d28b83ed8d5a7552"
+        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/emission-field.json"
       },
       "envelope": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/envelope.json",
-        "sha256": "a10e0caa3654c7e75f3b0373dac7f177488a406a4b3edcfa7503901d6340f691"
+        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/envelope.json"
       },
       "depthDensity": {
-        "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json",
-        "sha256": "9ac62796fc36a98a92c5b0d9d8c30f44eb6d35005476937237488d345ae2382e"
+        "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json"
       },
       "depthDensityIdentity": "c1df8f659e06e96a587e995d88133b19da54e53bb9bb628cc44c66caa0492a58",
       "depthDensitySource": "The cloud pinned by this model's own envelope record.",
       "footprint": {
         "image": {
-          "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/original-image.png",
-          "sha256": "70d55873a8e54b1307e0bc24063d1f5cb57b802f806d44bfba8f3eb80d1d5322"
+          "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/original-image.png"
         },
         "width": 384,
         "height": 380,
@@ -36175,12 +36167,10 @@
         ]
       },
       "cutoffSignal": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/aligned-image.png",
-        "sha256": "48f90296b749526b0bbd8a1359874d41307bdc4f73172f1bdd2f55d542c4e42e"
+        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/aligned-image.png"
       },
       "cloudParts": {
-        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/cloud-parts.json",
-        "sha256": "0f095fde72ad330ec6d7c695522715e0b44c4834ddecf1544132ed81a48c0d8c"
+        "path": ".local/nebula-lab/reconstructions/ed2688a0bd8a8714a58e9bc2b9dcd900d31ea4a77a52cc4220f0a2e1f5b839be/source/cloud-parts.json"
       },
       "observerDistanceKpc": 62.440000000000005,
       "tangentBoundsKpc": {
@@ -36207,8 +36197,7 @@
       },
       "subjectId": "smc-constrained",
       "lensRecipe": {
-        "path": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json",
-        "sha256": "f9d891bb54805746101d363270f474b9ca1a3b758a886f238d44e351e6804da2"
+        "path": "labs/nebula/models/smc/constrained/finite-lenses-ellipsoid.json"
       },
       "implementation": {
         "labs/nebula/packages/lab/src/adapters/sources/stellar-color.ts": "22159c656a18818d53b5d9c110c8edffce6a44edba845ea2e6cbcaa6bf2f512f",

@@ -49,7 +49,6 @@
         "center": 10,
         "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
         "sourcePath": "src/objects/sn263-beta/source/orbit/parent-heliocentric.txt",
-        "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
         "qualification": [
           "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",
           "The original solution is a three-body integration. This two-body snapshot omits measured nodal and apsidal precession, mutual perturbations, primary oblateness and subsequent planetary encounters. Both orbital phase and plane at 2026 are unqualified.",
@@ -66,7 +65,6 @@
       "referenceFrame": "ICRF",
       "source": "https://arxiv.org/abs/1012.2154v2",
       "sourcePath": "src/objects/sn263-beta/source/orbit/published-parameters.json",
-      "sha256": "c5806510c9b9c2350265ea3207d2cc2c805ffb768a088d57966bb618018c9bc8",
       "timeQualification": "Fang et al. Table 4 gives MJD 54509.0 without naming its clock scale. MJD is converted to JD by adding 2400000.5; this display evaluates the numerical JD as TT. A possible UTC/TT/TDB difference of under 70 seconds is separate from the overwhelming long-extrapolation and omitted-precession uncertainty. The resulting vector is geometric, with no light-time correction.",
       "limitations": [
         "The location is a deterministic display approximation from a phase-bearing 2008 osculating orbit, not an observed or accurately predicted 2026 position.",

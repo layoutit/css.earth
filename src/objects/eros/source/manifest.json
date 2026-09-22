@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 8420
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
-      "expectedBytes": 16897935,
-      "expectedSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "capture": {
         "attributions": [
           {
@@ -68,8 +66,6 @@
         "referenceRadiusMeters": 17000
       },
       "coverage": "Photometrically normalized 550 nm albedo from the 2023 deblurred NEAR MSI release. Display brightness is stretched from 0.05–0.40; this is a monochrome observation, not natural color. The source is registered to the Gaskell shape. Local residual shading may remain.",
-      "expectedBytes": 228242957,
-      "expectedSha256": "d8d890304d7f1d69029dedab526b938984588ece4928c76e4d57653d9d1ee761",
       "capture": {
         "attributions": [
           {
@@ -114,8 +110,6 @@
         "referenceRadiusMeters": 17000
       },
       "coverage": "NEAR MSI filter 4 albedo at 950 nm, from the 2023 deblurred release. The near-infrared map is corrected to zero phase and shown in grayscale with the same 0.05–0.40 reflectance range as the 550 nm view. Differences between the views include wavelength-dependent reflectance; this is not natural color or a mineral-abundance measurement. Missing source pixels use the gray grid.",
-      "expectedBytes": 228242957,
-      "expectedSha256": "b8dfab8238fc49e8b327f58eddca8e38619b2a684f2667e589f529a03ab14c3b",
       "capture": {
         "attributions": [
           {
@@ -357,8 +351,6 @@
     },
     {
       "path": "observations/M0146235607F4_2P_CIF_DBL.FIT",
-      "expectedBytes": 535680,
-      "expectedSha256": "3622997c199640d8b400c4a11d4da30ff5ae7634d8ae77830b9d84c187cf5cb3",
       "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/images/M0146235607F4_2P_CIF_DBL.FIT",
       "credit": "NASA/JHUAPL/NEAR and SBMT team",
       "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",

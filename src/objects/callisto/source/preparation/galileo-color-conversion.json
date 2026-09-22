@@ -2,13 +2,11 @@
   "schema": "cssearth-callisto-processed-color@1",
   "input": {
     "path": "observations/PIA03456-usgs.png",
-    "bytes": 821031,
-    "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
+    "bytes": 821031
   },
   "registration": {
     "path": "validation/galileo-color-registration.json",
-    "bytes": 8943,
-    "sha256": "0cb2e52bb4bd1ab5680be022e80a9b7e14e72fa01da56f665bb5a7b869bcbaf9"
+    "bytes": 8943
   },
   "maximumEmissionDegrees": 65,
   "output": {

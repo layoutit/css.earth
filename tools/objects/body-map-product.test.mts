@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import type { BodyMap } from './jwst/cubes/body-map.mts';
 import { combineUnderPolicy, assertProductsCombinable, definitionDigest, parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation, type BodyMapProduct, type MeasurementDefinition } from './body-map-product.mts';
 
@@ -10,8 +11,8 @@ const heat: MeasurementDefinition = { quantity: 'brightness temperature', units:
 const seen = (id: string, midTimeJd: number, majorArcsec: number, rangeKm = 8.385e8): BodyMapObservation => ({ id, telescope: 'ALMA', instrument: 'band 6', midTimeJd, rangeKm,
   subObserver: { latitudeDegrees: -1.5, westLongitudeDegrees: 210.5 }, angularResolution: { majorArcsec, minorArcsec: majorArcsec / 2, basis: 'fitted clean beam' } });
 const map = (definition: MeasurementDefinition, observations: BodyMapObservation[], combination?: BodyMapProduct['combination']): BodyMapProduct => ({ schema: 'cssearth-body-map@1', definition,
-  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } }, grid: { width: 720, height: 360, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-  planes: { file: 'surface-heat.fits', sha256: 'b'.repeat(64), value: 'BRIGHTNESS TEMPERATURE', uncertainty: 'BRIGHTNESS TEMPERATURE ERROR' }, mask: { maximumEmissionDegrees: 60, missing: 'NaN' }, observations, ...(combination ? { combination } : {}) });
+  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', bodyCode: 502 } }, grid: { width: 720, height: 360, longitude: 'east-positive-from-0', rows: 'north-to-south' },
+  planes: { file: 'surface-heat.fits', value: 'BRIGHTNESS TEMPERATURE', uncertainty: 'BRIGHTNESS TEMPERATURE ERROR' }, mask: { maximumEmissionDegrees: 60, missing: 'NaN' }, observations, ...(combination ? { combination } : {}) });
 
 test('the same quantity and units are not the same measurement', () => {
   const otherWindow = { ...salt, method: { ...salt.method, bandAngstrom: [4000, 5000] } };
@@ -45,7 +46,7 @@ test('a record without a method, a range or a combination rule is refused', () =
   assert.equal(parseBodyMapProduct(map(heat, [seen('a', 2457343.9, 0.05), seen('b', 2457352.9, 0.05)], { time: { rule: 'mosaic-of-snapshots' }, resolution: { rule: 'as-observed' } })).observations.length, 2);
 });
 
-const frame = { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } };
+const frame = { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', bodyCode: 502 } };
 /** A 4 x 2 map whose every cell has one value and was seen at one facing. */
 const placed = (value: number, facing: number): BodyMap => ({ width: 4, height: 2, depth: new Float32Array(8).fill(value), error: new Float32Array(8).fill(1), seenCells: 8, areaShare: 1, facing: new Float32Array(8).fill(facing) });
 

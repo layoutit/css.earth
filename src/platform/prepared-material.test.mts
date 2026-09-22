@@ -2,7 +2,8 @@ import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.
 import { prepareFrameLookup } from "../../tools/prepare/prepare-materials.mts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialFrame } from '../renderers/css/dist/testing.js';
 import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection } from '../renderers/css/dist/testing.js';
@@ -12,7 +13,7 @@ import definitionJson from "../../src/objects/venus/prepared/runtime.json" with 
 import { parsePreparedObjectRuntime } from '../renderers/css/dist/index.js';
 import { parse, object, array, tuple, number, boolean, string } from '../../tools/objects/material-composition/data-schema.mts';
 const definition = parsePreparedObjectRuntime(definitionJson);
-const referenceSchema = object({ source: object({sha256: string}), records: array(object({
+const referenceSchema = object({ source: object({}), records: array(object({
   shadows: boolean, direction: tuple(number, number, number),
   expected: object({frame: number, lightRollDegrees: number, sunViewDirection: tuple(number, number, number), shadowsEnabled: boolean}),
   backgroundSize: string, rotation: string,
@@ -22,7 +23,7 @@ const nativeElement = (element: ReturnType<ReturnType<typeof retainedPresentatio
 
 test("Venus preserves roll and shadow boundaries while selecting physical directional phases",()=>{
   const reference=parse(JSON.parse(readFileSync(new URL("./test/fixtures/venus-material-reference.json",import.meta.url), "utf8")), referenceSchema, "Venus material reference");
-  assert.ok(reference.records.length>400);assert.match(reference.source.sha256,/^[a-f0-9]{64}$/);
+  assert.ok(reference.records.length>400);
   const f=retainedPresentationFixture(definition);
   try{
     const track=definition.materials[0],element=f.document.createElement("s");

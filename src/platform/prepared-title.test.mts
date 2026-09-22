@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 
-import { sha256 } from "./sha256.mts";
 import { createPreparedTitle, PLANET_TITLE_STANDARD, serializePreparedTitleModule } from "./prepared-title.mts";
 
 const source = Object.freeze({
@@ -12,7 +12,6 @@ const source = Object.freeze({
   path: "M0 29V8.63H4.35Z",
   source: "Pinned font",
   sourceUrl: "https://example.test/font.ttf",
-  sourceSha256: "a".repeat(64),
   weight: 500,
   opticalSize: 28,
   fontSize: 28,
@@ -21,15 +20,12 @@ const source = Object.freeze({
 });
 
 test("prepares and serializes a source-bound title deterministically", () => {
-  const inputSha256 = sha256("source title");
   const prepared = createPreparedTitle(source, {
-    inputSha256,
     generator: "adapter/tools/prepare-title.mjs",
   });
   const first = serializePreparedTitleModule("PREPARED_PLANET_TITLE", prepared);
   const second = serializePreparedTitleModule("PREPARED_PLANET_TITLE", prepared);
   assert.equal(first, second);
-  assert.match(first, new RegExp(inputSha256, "u"));
   assert.match(first, /adapter\/tools\/prepare-title\.mjs/u);
   assert.deepEqual(
     {
@@ -56,7 +52,6 @@ test("normalizes divergent title sources to the Saturn scale and baseline", () =
     height: 20.63,
     baseline: 23,
   }, {
-    inputSha256: "b".repeat(64),
     generator: "adapter/tools/prepare-title.mjs",
   });
   assert.deepEqual(
@@ -79,16 +74,10 @@ test("normalizes divergent title sources to the Saturn scale and baseline", () =
 
 test("rejects unexplained or unsafe title vectors", () => {
   assert.throws(() => createPreparedTitle({ ...source, path: "<text>Planet</text>" }, {
-    inputSha256: "b".repeat(64),
     generator: "prepare-title.mjs",
   }), /vector/u);
-  assert.throws(() => createPreparedTitle(source, {
-    inputSha256: "not-a-hash",
-    generator: "prepare-title.mjs",
-  }), /hash/u);
   assert.throws(() => Reflect.apply(serializePreparedTitleModule, undefined, ["unsafe-name", {
     ...source,
-    inputSha256: "b".repeat(64),
     generator: "prepare-title.mjs",
   }]), /export name/u);
 });

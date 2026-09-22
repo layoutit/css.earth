@@ -20,11 +20,11 @@ test(`app preparation rebuilds missing ${texture} and rejects changed textures o
     assert.equal(await deliveryReady(root, delivery), false);
     await writeAtomic(join(root, 'object', texture), 'pixels');
     assert.equal(await deliveryReady(root, delivery), true);
-    await writeAtomic(join(root, 'object', texture), 'broken');
-    await assert.rejects(deliveryReady(root, delivery), /Input hash differs/);
+    await writeAtomic(join(root, 'object', texture), 'broken!');
+    await assert.rejects(deliveryReady(root, delivery), /Artifact size differs/);
     await writeAtomic(join(root, 'object', texture), 'pixels');
     await writeAtomic(join(root, 'object', metadata), '{"changed":true}');
-    await assert.rejects(deliveryReady(root, delivery), /Input hash differs/);
+    await assert.rejects(deliveryReady(root, delivery), /Artifact size differs/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 }

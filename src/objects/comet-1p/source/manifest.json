@@ -4,8 +4,6 @@
     {
       "id": "stooke-halley",
       "path": "shape/1682q1halley.tab",
-      "expectedBytes": 70226,
-      "expectedSha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/small_bodies.stooke.shape-models/data/1682q1halley.tab",
       "credit": "Philip Stooke; Alain Abergel (pointing); Giotto and Vega missions; NASA PDS",
       "license": "PDS public scientific archive; credit Stooke and Abergel",
@@ -31,8 +29,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -58,8 +54,6 @@
     {
       "id": "giotto-source-1",
       "path": "giotto/hmc_best.gif",
-      "expectedBytes": 203241,
-      "expectedSha256": "d1485de0bfb126c17fcca8b9d1b8936538694f86fd3bc867c6f07ab781dbff18",
       "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
       "credit": "Max Planck Institute for Solar System Research; Giotto HMC team",
       "license": "MPS educational image use with attribution; commercial reuse requires permission",
@@ -85,8 +79,6 @@
     {
       "id": "giotto-source-2",
       "path": "giotto/fig67.tif",
-      "expectedBytes": 1312466,
-      "expectedSha256": "0567352ef7ef86de5effe92b9c1ed2f374e91b012f7258a286d210a609b99487",
       "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/catalog/fig67.tif",
       "credit": "Max Planck Institute for Solar System Research; Giotto HMC team",
       "license": "MPS educational image use with attribution; commercial reuse requires permission",
@@ -112,8 +104,6 @@
     {
       "id": "giotto-source-3",
       "path": "giotto/rotation-2004.tab",
-      "expectedBytes": 2750,
-      "expectedSha256": "d7fb84ee47f3fd2440466ca22b460e55c04e45ade69ab6f8f432f6d84c2873c0",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.tab",
       "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
       "license": "Public scientific archive data; preserve original investigator credits",
@@ -377,8 +367,6 @@
     {
       "id": "vega-t11190-img",
       "path": "vega/t11190.img",
-      "expectedBytes": 264960,
-      "expectedSha256": "17b1aa86cdb268f4ae6e9aff3dda6c2059a015885cf0ce6eb7e2c60fcb2a9e9d",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.img",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",
@@ -457,8 +445,6 @@
     {
       "id": "vega-t11194-img",
       "path": "vega/t11194.img",
-      "expectedBytes": 264960,
-      "expectedSha256": "627a11052348a8e5ab01f69fadd7d81d59f6b9dbd4ec79b25f9ee72bedc1130e",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",

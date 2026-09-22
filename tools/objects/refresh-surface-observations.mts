@@ -29,11 +29,7 @@ export async function refreshSurfaceObservations(id: string, lensIds: readonly s
   const stage = resolve('output/surface-observation-refresh', id), recipePath = resolve(sourceDirectory, 'preparation/terrestrial.json');
   const recipeBytes = await readFile(recipePath), descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
-  for (const reference of references) {
-    const path = requireString(reference.path);
-    if (sha256(await readFile(resolve(objectDirectory, path))) !== reference.sha256) throw new Error(`Pin the source recipe before refreshing: ${path}.`);
-  }
-  if (references.find(reference => reference.id === 'terrestrial')?.sha256 !== sha256(recipeBytes)) throw new Error('Pin the observation recipe before refreshing.');
+  if (!references.some(reference => reference.id === 'terrestrial')) throw new Error('The descriptor names no observation recipe.');
   const config = parseSolidPreparationSource(JSON.parse(recipeBytes.toString('utf8')));
   const terrain = requireRecord(config.geometry.radialTerrain);
   if (config.geometry.radialModels || config.geometry.radialTerrainAlternatives || terrain.sourceLighting)
@@ -111,12 +107,11 @@ export async function refreshObservationControls(id: string, lensIds: readonly s
   const descriptor = await json(resolve(objectDirectory, 'object.json'));
   const references = records(requireRecord(requireRecord(descriptor.properties).recipe).sources);
   // Keep the existing prepared controls, feature catalogue and all other shell content; a refreshed control takes only its
-  // no-data flag from the pinned content, because reader text lives in text.json.
+  // no-data flag from the source content, because reader text lives in text.json.
   const contentPath = references.find(reference => reference.id === 'content');
   const noData = new Map<string, boolean>();
   if (contentPath) {
     const bytes = await readFile(resolve(objectDirectory, requireString(contentPath.path)));
-    if (sha256(bytes) !== contentPath.sha256) throw new Error('Source content changed from its descriptor pin.');
     const content = requireRecord(JSON.parse(bytes.toString('utf8')));
     for (const lens of records(requireRecord(content.lenses).controls)) if (lensIds.includes(requireString(lens.id))) noData.set(requireString(lens.id), lens.noData === true);
   }

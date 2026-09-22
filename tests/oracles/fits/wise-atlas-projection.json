@@ -10,17 +10,14 @@
  "inputs": [
   {
    "path": "tests/fixtures/fits/wise-atlas-pleiades-tile.fits",
-   "sha256": "7e2c3c1c7028c90f2404f7d0d44376623d1ce576003c5c6e2a0e6aa9e2302282",
    "bytes": 11520
   },
   {
    "path": "tests/fixtures/fits/wise-atlas-lmc-far-corner.fits",
-   "sha256": "cac0e84c9d6f0c1c5c5e3604d23d73e4d008c20fca81399665110c6ffadfb753",
    "bytes": 11520
   },
   {
    "path": "tests/fixtures/fits/wise-atlas-lmc-centre.fits",
-   "sha256": "32b1732f635712d0dd5ef4bd74a0828d6c35eaf660c5293d2118de5c3973eec8",
    "bytes": 11520
   }
  ],

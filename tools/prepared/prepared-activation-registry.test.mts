@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SCENE_OBJECTS as OBJECTS } from '../../site/objects.mts';
 import { prepareActivationGroups } from './prepared-activation-groups.mts';
 

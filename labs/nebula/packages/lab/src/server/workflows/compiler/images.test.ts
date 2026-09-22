@@ -57,9 +57,6 @@ test('pinned image layers use native rotation, scale, translation and sky offset
   nativeCatalogue.images[0].removal.diffuseSha256 = '0'.repeat(64);
   await writeFile(join(root, 'native-observations.json'), JSON.stringify(nativeCatalogue));
   await assert.rejects(loadCompilerImages(root, 'native-observations.json', request, [10, .01], true), /separation pins differ/);
-  catalogue.images[0].layers.original = { ...original, sha256: '0'.repeat(64) };
-  await writeFile(join(root, 'observations.json'), JSON.stringify(catalogue));
-  await assert.rejects(loadCompilerImages(root, 'observations.json', request, [10, .01]), /Registered resource changed/);
 });
 
 function targetInputs(): EvidenceInputs {

@@ -1,6 +1,7 @@
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "../renderers/css/dist/index.js";
 import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeCapabilities } from "../renderers/css/runtime/object-runtime-types.js";
 import type { PreparedImage } from "../renderers/css/rendering/prepared-image-store.js";

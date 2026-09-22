@@ -4,13 +4,11 @@
   "type": "galaxy-point-field",
   "properties": {
     "preparation": {
-      "source": "source/preparation/field.json",
-      "sha256": "f1bda9eba1032dfa4414729c7d2b7798e95c607400b394a0f24f507ad79bd6b6"
+      "source": "source/preparation/field.json"
     }
   },
   "prepared": {
     "format": "cssearth-galaxy-points@1",
-    "url": "prepared/points.json",
-    "sha256": "654a27747c21f8f9296f14cb0f74e5dcbf334d617f4607629f41b81334d87d73"
+    "url": "prepared/points.json"
   }
 }

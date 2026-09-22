@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 165
       },
       "coverage": "The archived filename contains alt1, but its measured 0.510 × 0.330 × 0.241 km extents identify the paper’s preferred smaller-volume model. Its polar dimension is weakly constrained; a thicker alternative fits comparably. The selected pole is within a 10° uncertainty radius and the period is 15.16 ± 0.04 h. No resolved optical surface map is supplied.",
-      "expectedBytes": 67291,
-      "expectedSha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1780803,
-      "expectedSha256": "cce85ba4434fad2e39b0d615de004ffb968696d4f3b756408f2e249373e29f94",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

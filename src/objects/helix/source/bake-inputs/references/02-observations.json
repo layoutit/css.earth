@@ -21,7 +21,6 @@
       "label": "ESO VISTA · infrared",
       "url": "https://cdn.eso.org/images/original/eso1205a.tif",
       "page": "https://www.eso.org/public/images/eso1205a/",
-      "sha256": "8b08b35b5d71f6d4ddfb8e010cb58eb702656d865a485f259617d65524c1d337",
       "width": 6592,
       "height": 6592,
       "fieldArcminutes": [
@@ -64,7 +63,6 @@
       "label": "ESO WFI · optical detail",
       "url": "https://cdn.eso.org/images/original/eso0907a.tif",
       "page": "https://www.eso.org/public/images/eso0907a/",
-      "sha256": "057c8dacfe1686cc6cd464768996369c68d23e32844a5059107aba03bcf38769",
       "width": 7059,
       "height": 6535,
       "fieldArcminutes": [
@@ -107,7 +105,6 @@
       "label": "ESO · wider field",
       "url": "https://cdn.eso.org/images/original/helix.tif",
       "page": "https://www.eso.org/public/images/helix/",
-      "sha256": "9736dd85dd142f7b3be7c320235518211e2614380c76e793e24a62706f9584d2",
       "width": 6850,
       "height": 4759,
       "fieldArcminutes": [
@@ -148,9 +145,7 @@
   ],
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   }
 }

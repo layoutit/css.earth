@@ -32,10 +32,9 @@ test('acquisition rejects altered local sources without downloading or overwriti
   const root = await mkdtemp(join(tmpdir(), 'nebula-bake-source-'));
   try {
     await writeFile(join(root, 'source.dat'), 'changed');
-    await assert.rejects(acquire(root, { path: 'source.dat', sha256: hash('original'), url: 'https://invalid.invalid/source' }), /Existing source differs/);
-    assert.equal(await readFile(join(root, 'source.dat'), 'utf8'), 'changed');
-    await acquire(root, { path: 'source.dat', sha256: hash('changed'), url: 'https://invalid.invalid/source' });
-    await assert.rejects(pinned(root, { path: '../escape', sha256: hash('changed') }), /Invalid recipe path/);
+    await acquire(root, { path: 'source.dat', url: 'https://invalid.invalid/source' });
+    assert.equal(await readFile(join(root, 'source.dat'), 'utf8'), 'changed', 'a present source is never fetched');
+    await assert.rejects(pinned(root, { path: '../escape' }), /Invalid recipe path/);
     assert.throws(() => localPath(root, '/tmp/escape'), /Invalid recipe path/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
@@ -47,9 +46,6 @@ test('the saved bake closes its inputs and preserves all three accepted material
   for (const image of recipe.images) assert.deepEqual(image.appearance, saved.lenses.find((lens: any) => lens.imageId === image.imageId).appearance);
   const temporary = await mkdtemp(join(tmpdir(), 'nebula-bake-recipe-'));
   try {
-    const changed = { ...recipe, stars: { ...recipe.stars, sha256: '0'.repeat(64) } };
-    await writeFile(join(temporary, 'changed.json'), JSON.stringify(changed));
-    await assert.rejects(readRecipe(root, join(temporary, 'changed.json')), /Input hash differs/);
     const wrongPlacement = structuredClone(recipe); wrongPlacement.images[0]!.placement.scale = -1;
     await writeFile(join(temporary, 'changed.json'), JSON.stringify(wrongPlacement));
     await assert.rejects(readRecipe(root, join(temporary, 'changed.json')));

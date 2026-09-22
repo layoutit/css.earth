@@ -64,15 +64,11 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
-      },
-      "expectedSha256": "8ab641af485bca84daea03738e2b17d1734df0fa21b9c275258bccbcfe1516eb",
-      "expectedBytes": 8835828
+      }
     },
     {
       "id": "usgs-messenger-enhanced-global-z3",
       "path": "maps/mercury-enhanced-global.png",
-      "expectedBytes": 17037150,
-      "expectedSha256": "63a6d2baa29eec230417837f6fc9d30739b210f8c3d2d43bc2db77b90ff6b3ec",
       "origin": "https://trek.nasa.gov/tiles/Mercury/EQ/Mercury_MESSENGER_MDIS_Basemap_EnhancedColor_Mosaic_Global_665m/1.0.0/default/default028mm/3/${y}/${x}.jpg",
       "credit": "NASA Solar System Treks; USGS Astrogeology; MESSENGER MDIS; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
@@ -159,15 +155,11 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
-      },
-      "expectedSha256": "48e8ffa812b74a3ba4ba586e377ae4919f98514ace9aa2b318eb5c4a46b16587",
-      "expectedBytes": 10330521
+      }
     },
     {
       "id": "usgs-messenger-topography-legend",
       "path": "maps/mercury-topography-legend.png",
-      "expectedBytes": 137315,
-      "expectedSha256": "b8dbc1f533a1da5787ab489ea1ed7a9383444f1e250ba2066dc53c7245e08e10",
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/707de5da-2ab4-4d69-ac6c-6dbeb48d49bd/resource/9c5abbc7-835b-4700-8f04-b612ea49400d/download/mercury_messenger_usgs_clrshade_global_legend.png",
       "credit": "USGS Astrogeology; MESSENGER; NASA/PDS",
       "license": "United States government work / NASA-PDS data; cite USGS authors",
@@ -193,8 +185,6 @@
     {
       "id": "nasa-mercury-pia15162-navigation",
       "path": "navigation/mercury.jpg",
-      "expectedBytes": 876817,
-      "expectedSha256": "5ea3d3b713fce74f6b45faa182023210ada11ae62b8b51183a5fc134e7ce1304",
       "origin": "https://science.nasa.gov/wp-content/uploads/2023/11/mercury-messenger-globe-pia15162.jpg",
       "credit": "NASA/JHU APL/Carnegie Institution of Washington",
       "license": "NASA image-use guidelines; United States government work",

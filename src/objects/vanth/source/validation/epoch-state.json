@@ -40,7 +40,6 @@
   "relative": {
    "path": "source/orbit/vanth-epoch.txt",
    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120090482&CENTER=500%40920090482&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-   "sha256": "c4a216452a805fd18c3d3b5a3f77286074cdb3d89b7e835af84673ff16e0a1d5",
    "bytes": 6844,
    "target": 120090482,
    "center": 920090482
@@ -48,7 +47,6 @@
   "parent": {
    "path": "source/orbit/orcus-epoch.txt",
    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920090482&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-   "sha256": "f7c9c8e3501f220dc4df48e096d4917123a072e47c94615b87eec44c84c0d20d",
    "bytes": 6768,
    "target": 920090482,
    "center": 10
@@ -56,7 +54,6 @@
   "heliocentricCheck": {
    "path": "source/orbit/vanth-heliocentric-check.txt",
    "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120090482&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
-   "sha256": "8312faaa83c587058c1f67a152a7f8c10cc2106612a5fffefcb267843166f1ec",
    "bytes": 6824,
    "target": 120090482,
    "center": 10

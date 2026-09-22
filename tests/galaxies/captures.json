@@ -7,14 +7,12 @@
   },
   "deviceScaleFactor": 1,
   "capture": "Actual Chromium app viewport; WebP quality 90, no crop, resize, color or exposure changes.",
-  "deliveryManifestSha256": "a6748babbb14411e3a5784792c5a24836b754fd6447829b2dd67de78e5cd943e",
   "passed": true,
   "images": [
     {
       "imageId": "vista-infrared",
       "path": "images/lmc-vista-infrared.webp",
       "bytes": 68082,
-      "sha256": "e99838ebfdc1547d747d4df5cd6a3e3d6494a5defb681998cd273d1684c6a5e3",
       "route": "/sun/?focus=lmc&focusLens=vista-infrared&v=QIZAIGJN0vGp_MBQYk3S8an8Q6NAziEHSnBBQsczQAAAAL-SHHY-Jtf4v8cBng4F6eS_uKhrxCWwLAABAAAAAAAAAAA",
       "stars": 943,
       "sameCamera": true
@@ -23,7 +21,6 @@
       "imageId": "horalek-widefield",
       "path": "images/lmc-horalek-widefield.webp",
       "bytes": 70924,
-      "sha256": "19b2b83dd913d1daeaed94cbaa2d0db4fb65cfd8c9b260f671af3750bb8ad0ee",
       "route": "/sun/?focus=lmc&focusLens=horalek-widefield&v=QIZAIGJN0vGp_MBQYk3S8an8Q6NAziEHSnBBQsczQAAAAL-SHHY-Jtf4v8cBng4F6eS_uKhrxCWwLAABAAAAAAAAAAA",
       "stars": 943,
       "sameCamera": true
@@ -32,7 +29,6 @@
       "imageId": "wise-wide-infrared",
       "path": "images/lmc-wise-wide-infrared.webp",
       "bytes": 75450,
-      "sha256": "2c21ce6fe0e9565168f93b719014301efb6b17c295fb89f67e3c99112a73fc00",
       "route": "/sun/?focus=lmc&focusLens=wise-wide-infrared&v=QIZAIGJN0vGp_MBQYk3S8an8Q6NAziEHSnBBQsczQAAAAL-SHHY-Jtf4v8cBng4F6eS_uKhrxCWwLAABAAAAAAAAAAA",
       "stars": 943,
       "sameCamera": true

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { scaffoldHostedPlanetFiles } from './new-hosted-planet.mts';
 
 test('the hosted-planet scaffold refuses to invent a uniform synchronous rotation for an eccentric orbit', () => {

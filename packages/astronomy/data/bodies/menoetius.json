@@ -48,7 +48,6 @@
         "center": 10,
         "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920000617&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
         "sourcePath": "src/objects/menoetius/source/orbit/patroclus-epoch.txt",
-        "sha256": "427924d795a0887115acb4ee033f42f7a2c254d63a9a2d6abe51b421c9132a97",
         "solution": "tnosat_v001_20000617_jpl082_20230601",
         "limitations": [
           "The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.",
@@ -66,7 +65,6 @@
       "center": 920000617,
       "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120000617&CENTER=500%40920000617&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
       "sourcePath": "src/objects/menoetius/source/orbit/menoetius-epoch.txt",
-      "sha256": "f6469c4b2b71cf87e87f1965c8dccf57960669e0843fae1928f41a66d1b38b9b",
       "solution": "tnosat_v001_20000617_jpl082_20230601",
       "limitations": [
         "The JPL satellite solution uses its own JPL#82 barycenter, not the current integrated 617; orbit.",

@@ -49,14 +49,12 @@
     {
       "name": "u9xe010cm_c0m.fits",
       "uri": "mast:HST/product/u9xe010cm_c0m.fits",
-      "bytes": 10307520,
-      "sha256": "d64a2a8f9f9694f01f0a55800bc3b6c34a0e35d766b88b540cb43d002368abe6"
+      "bytes": 10307520
     },
     {
       "name": "u9xe010cm_c1m.fits",
       "uri": "mast:HST/product/u9xe010cm_c1m.fits",
-      "bytes": 5178240,
-      "sha256": "7540ed7b956593440313df17cde93a8c4192d7312563cfcd91a0ac18c44b573b"
+      "bytes": 5178240
     }
   ],
   "note": "A 5 second F631N exposure of Europa on the planetary camera, programme 11085 (PI W. Sparks), the WFPC2 half of the visit whose ACS/SBC prism exposures are pinned in europa-11085.json. WFPC2 is delivered both as the waivered FITS the handbook describes (_c0f, one 800x800x4 cube and a table of the GEIS group parameters) and as ordinary multi-extension FITS (_c0m, one chip per extension). The multi-extension form is pinned here because each chip then carries its own header, and it is the same 800x800x4 samples. Table 2.1 of the handbook lists the calibrated science data and its data quality as the whole of calwp2's calibrated science output."

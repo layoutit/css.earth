@@ -45,7 +45,7 @@ export interface NebulaResearchBackend {
   compiler(root: string, recipe: ReturnType<typeof readNebulaDelivery>, progress: (message: string, fraction?: number) => void): Promise<{
     id: string; scene: CompilerBakeResult; sources: {id: string; label: string; credit: string; page: string}[];
   }>;
-  symmetry(root: string, recipe: ReturnType<typeof readNebulaDelivery>): Promise<{ path: string; sha256: string; frame: DensityVolumeFrame }>;
+  symmetry(root: string, recipe: ReturnType<typeof readNebulaDelivery>): Promise<{ path: string; frame: DensityVolumeFrame }>;
 }
 function local(root: string, path: string): string {
   const target = resolve(root,path), rel = relative(root,target);
@@ -54,13 +54,12 @@ function local(root: string, path: string): string {
 }
 async function read(root: string, path: string) { return JSON.parse(await readFile(local(root,path),'utf8')) as unknown; }
 async function put(path: string, value: string | Uint8Array) { await mkdir(dirname(path),{ recursive:true }); await writeFile(path,value); }
-interface Pin { path: string; sha256: string }
+interface Pin { path: string }
 function pin(v: unknown): Pin {
-  const p = record(v), path = text(p.path), sha256 = text(p.sha256);
-  if (!/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Invalid nebula source identity.');
-  return { path,sha256 };
+  const p = record(v), path = text(p.path);
+  return { path };
 }
-async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); if (sha256(bytes) !== p.sha256) throw new TypeError(`Nebula source hash mismatch: ${p.path}`); return bytes; }
+async function pinned(root: string, p: Pin) { const bytes = await readFile(local(root,p.path)); return bytes; }
 export function readNebulaDelivery(v: unknown) {
   const r = record(v), frame = record(r.sky), center = frame.centerIcrsDegrees;
   if (r.schema !== 'cssearth-nebula-delivery@1' || !/^[a-z][a-z0-9-]*$/.test(text(r.id)) ||
@@ -106,9 +105,9 @@ async function installed(directory: string, recipeSha256: string): Promise<boole
   try {
     const receipt = record(await read(directory,'prepared/delivery.json'));
     if (!installedDeliveryMatchesRecipe(receipt,recipeSha256)) return false;
-    const descriptor = record(await read(directory,'object.json')), prepared = pin({ path:record(descriptor.prepared).url,sha256:record(descriptor.prepared).sha256 });
+    const descriptor = record(await read(directory,'object.json')), prepared = pin({ path:record(descriptor.prepared).url });
     const envelope = record(JSON.parse((await pinned(directory,prepared)).toString())), data = validatePreparedVolumeLenses(envelope.data);
-    for (const lens of data.lenses) for (const resource of lens.volume.resources) await pinned(directory,{path:`prepared/${resource.path}`,sha256:resource.sha256});
+    for (const lens of data.lenses) for (const resource of lens.volume.resources) await pinned(directory,{path:`prepared/${resource.path}`});
     return true;
   } catch (error) { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return false; throw error; }
 }
@@ -152,13 +151,13 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
   let compilerSampling: CompilerBakeResult['sampling'] | undefined;
   let fieldStars: Awaited<ReturnType<typeof prepareNebulaCatalogueField>>['receipt'] | undefined;
   try {
-    const add = async (id: string,label: string,sourceUrl: string,volumePath: string,volumeSha: string,
+    const add = async (id: string,label: string,sourceUrl: string,volumePath: string,
       frame: ReturnType<typeof embedNebulaFrame>,stars: PreparedVolumeLens['stars'],anchorPoints?: PreparedVolumeLens['stars']['points'],
       occultingCentreUnits?: readonly [number,number,number]) => {
-      const raw = record(JSON.parse((await pinned(root,{path:volumePath,sha256:volumeSha})).toString()));
+      const raw = record(JSON.parse((await pinned(root,{path:volumePath})).toString()));
       const volume = sanitizeVolumeProvenance(validatePreparedCssVolume(raw.data ?? raw));
       for (const resource of volume.resources) {
-        const bytes = await pinned(dirname(local(root,volumePath)),{path:resource.path,sha256:resource.sha256});
+        const bytes = await pinned(dirname(local(root,volumePath)),{path:resource.path});
         await put(local(staging,`${id}/${resource.path}`),bytes);
       }
       const brightness: PreparedVolumeLens['brightness'] = {overall:1,x:1,y:1,z:1};
@@ -214,7 +213,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
             colorCss:`#${material.rgb.map(n=>n.toString(16).padStart(2,'0')).join('')}`,
             opacity:material.alpha,sizePx:star.widthPx??1,...(material.diameterUnits === undefined?{}:{diameterUnits:material.diameterUnits}) };
         });
-        await add(lens.id,lens.label,source.page,lens.volume.path,lens.volume.sha256,frame,{frame,points},anchorPoints);
+        await add(lens.id,lens.label,source.page,lens.volume.path,frame,{frame,points},anchorPoints);
       }
     } else if (recipe.method === 'density-grid') {
       // The Milky Way's slab baker on checked-in recipes and grids, one per lens. The baker works in the
@@ -234,18 +233,18 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
         const volumePath = resolve(output, 'volume.json');
         await put(volumePath, compiled);
         const frame = embedNebulaFrame(source, recipe.sky);
-        await add(grid.id, grid.label, grid.sourceUrl ?? recipe.sourceUrl, relative(root, volumePath), sha256(compiled), frame, { frame, points: [] },
+        await add(grid.id, grid.label, grid.sourceUrl ?? recipe.sourceUrl, relative(root, volumePath), frame, { frame, points: [] },
           undefined, grid.occultingCentreUnits);
       }
     } else if (recipe.compactInputs && !research) {
       const result = await replayCompactSymmetry(root, recipe.compactInputs, relative(root, resolve(staging, 'compact')), nebulaBakeBackend);
       const frame = embedNebulaFrame(result.frame, recipe.sky);
-      await add(recipe.defaultLens, 'Hubble · optical', recipe.sourceUrl, result.pin.path, result.pin.sha256, frame, { frame, points: [] });
+      await add(recipe.defaultLens, 'Hubble · optical', recipe.sourceUrl, result.pin.path, frame, { frame, points: [] });
     } else {
       if (!research) throw new TypeError('Research backend is unavailable.');
       const result = await research.symmetry(root, recipe);
       const frame = embedNebulaFrame(result.frame,recipe.sky);
-      await add(recipe.defaultLens,'Hubble · optical',recipe.sourceUrl,result.path,result.sha256,frame,{frame,points:[]});
+      await add(recipe.defaultLens,'Hubble · optical',recipe.sourceUrl,result.path,frame,{frame,points:[]});
     }
     await rm(resolve(staging, 'compact'), { recursive: true, force: true });
     const data = validatePreparedVolumeLenses({schema:'cssearth-volume-lenses@1',id:recipe.id,defaultLens:recipe.defaultLens,
@@ -261,7 +260,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     await mkdir(resolve(directory,'prepared'),{recursive:true});
     for (const entry of await readdir(staging)) { await rm(resolve(directory,'prepared',entry),{recursive:true,force:true}); await rename(resolve(staging,entry),resolve(directory,'prepared',entry)); }
     await put(resolve(directory,'object.json'),json({schema:'cssearth-object@1',id:recipe.id,type:'volume-lens-bank',properties:{frame:lenses[0]!.volume.frame,
-      preparation:{source:'source/delivery.json',sha256:sha256(recipeBytes)}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json',sha256:sha256(envelope)}}));
+      preparation:{source:'source/delivery.json'}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,lenses:lenses.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

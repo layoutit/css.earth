@@ -4,8 +4,6 @@
     {
       "id": "usgs-voyager-galileo-mono",
       "path": "ganymede-mono.tif",
-      "expectedBytes": 136844537,
-      "expectedSha256": "c2c8d9506b8cf8f7a0a90d823d9052e91c8d9885cf7267fdce8de8216f4df888",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_global_mosaic_1km.tif",
       "credit": "NASA/JPL/USGS",
       "license": "Public USGS scientific imagery; see NOTICE.md",
@@ -73,8 +71,6 @@
     {
       "id": "usgs-voyager-galileo-color",
       "path": "ganymede-color.tif",
-      "expectedBytes": 199204541,
-      "expectedSha256": "da47087e75bc530456d8206d5100ad3c687706353700b0cb44a8400957005a33",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Ganymede_Voyager_GalileoSSI_Global_ClrMosaic_1435m.tif",
       "credit": "NASA/JPL/USGS",
       "license": "Public USGS scientific imagery; see NOTICE.md",
@@ -141,8 +137,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -282,8 +276,6 @@
     {
       "id": "ganymede-muse-original-577-3nm-band-1",
       "path": "muse/577.3nm_band_ganymede_night_1.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/38a80f72d220dc18ccb5d8b3296041cfcce8d703",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -320,8 +312,6 @@
     {
       "id": "ganymede-muse-original-577-3nm-band-2",
       "path": "muse/577.3nm_band_ganymede_night_2.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/550f3c8f151a9360bcfa076fdb05b97d1065c01e",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -358,8 +348,6 @@
     {
       "id": "ganymede-muse-original-577-3nm-band-3",
       "path": "muse/577.3nm_band_ganymede_night_3.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/c6016c8d28a08170a3660a89485bb7d5ebf5fafb",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -786,8 +774,6 @@
     {
       "id": "ganymede-composition-dark-material",
       "path": "composition/dark-material.tif",
-      "expectedBytes": 260920,
-      "expectedSha256": "aaf6961e48c6125a804338b6930609ae834a586e7d1f05f1bc934cd094109d3a",
       "origin": "https://doi.org/10.5281/zenodo.6390469",
       "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
       "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
@@ -813,8 +799,6 @@
     {
       "id": "ganymede-composition-dark-uncertainty",
       "path": "composition/dark-uncertainty.tif",
-      "expectedBytes": 260920,
-      "expectedSha256": "4fb42e921b4f530359be2f795113d3d2863244daa3f6d679454e7d53923baad9",
       "origin": "https://doi.org/10.5281/zenodo.6390469",
       "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
       "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
@@ -840,8 +824,6 @@
     {
       "id": "ganymede-composition-fit-SPHERE",
       "path": "composition/fit_SPHERE.json.gz",
-      "expectedBytes": 8845543,
-      "expectedSha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4",
       "origin": "https://raw.githubusercontent.com/ortk95/king-2022-global-modelling-ganymede-surface-composition/1ff2f7069a194f6ce356604072077352b4c78f4a/fit_SPHERE.json.gz",
       "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
       "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
@@ -867,8 +849,6 @@
     {
       "id": "ganymede-composition-ice-fraction",
       "path": "composition/ice-fraction.tif",
-      "expectedBytes": 260920,
-      "expectedSha256": "b614ac1e22a9d2d4a3f87b3975718c2d988966eab1a807a2fb091b8aaa65b9d5",
       "origin": "https://doi.org/10.5281/zenodo.6390469",
       "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
       "license": "Open Access; numerical-data reuse terms unresolved (local preview)",
@@ -894,8 +874,6 @@
     {
       "id": "ganymede-composition-ice-uncertainty",
       "path": "composition/ice-uncertainty.tif",
-      "expectedBytes": 260920,
-      "expectedSha256": "84bb23bfca177af451d1165f85e9abf4889bd3144ba0ff0cd334e1a64acbe776",
       "origin": "https://doi.org/10.5281/zenodo.6390469",
       "credit": "Oliver King, Leigh N. Fletcher (2022); VLT/SPHERE",
       "license": "Open Access; numerical-data reuse terms unresolved (local preview)",

@@ -71,14 +71,13 @@ function outside(root: string, path: string): boolean {
   const rel = relative(root, path); return rel === '..' || rel.startsWith(`..${sep}`) || isAbsolute(rel);
 }
 async function readPinned(root: string, inputPin: unknown) {
-  const p = record(inputPin), path = text(p.path), pin = text(p.sha256);
-  if (isAbsolute(path) || /[\\\u0000]/.test(path) || path.split('/').some(part => !part || part === '.' || part === '..') ||
-      !/^[a-f0-9]{64}$/.test(pin)) throw new TypeError('Invalid catalogue field pin or repository-relative path.');
+  const p = record(inputPin), path = text(p.path);
+  if (isAbsolute(path) || /[\\\u0000]/.test(path) || path.split('/').some(part => !part || part === '.' || part === '..'))
+    throw new TypeError('Invalid catalogue field repository-relative path.');
   const owner = await realpath(root), target = await realpath(resolve(owner, path));
   if (outside(owner, target)) throw new TypeError('Catalogue field source escapes its repository owner.');
   const bytes = await readFile(target);
-  if (sha256(bytes) !== pin) throw new TypeError('Catalogue field source hash mismatch.');
-  return { input: { path, sha256: pin, bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
+  return { input: { path, sha256: sha256(bytes), bytes: bytes.length }, field: parseField(JSON.parse(bytes.toString()) as unknown) };
 }
 
 function direction(raDeg: number, decDeg: number): Vector {
@@ -125,7 +124,7 @@ function color(bpRp: number | null): { colorCss: string; fallback: boolean } {
 }
 
 /** Replaces image-derived fields with pinned 3D catalogue points; keeps only explicit named identities. */
-export async function prepareNebulaCatalogueField(root: string, pin: { path: string; sha256: string },
+export async function prepareNebulaCatalogueField(root: string, pin: { path: string },
   inputFrame: DensityVolumeFrame, existing: readonly PreparedCataloguePoint[], anchorPoints?: readonly PreparedCataloguePoint[]) {
   const { input, field } = await readPinned(root, pin), frame = parseDensityVolumeFrame(inputFrame), s = field.selection;
   if (frame.referenceFrame !== 'sun-icrf') throw new TypeError('Gaia catalogue fields require the Sun ICRF reference frame.');

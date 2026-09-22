@@ -3,7 +3,8 @@
  * package, and every placed star's catalogue distance, colour and stylesheet follow from its own records: its colour is its
  * measured colour lens, or the star field's colour fit at the effective temperature its measurement record cites. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile, readdir, stat } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';

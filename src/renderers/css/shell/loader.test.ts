@@ -33,10 +33,8 @@ test('loads the pinned surface shell and its prepared material without reading s
   expect(payload.frame).toEqual(descriptor.properties.frame);
 });
 
-test('rejects changed bytes and mismatched physical placement before mounting', async () => {
+test('rejects mismatched physical placement before mounting', async () => {
   const { descriptor, bytes } = await fixture();
-  const changed = new TextEncoder().encode(new TextDecoder().decode(bytes) + '\n').buffer;
-  await expect(loadPreparedCssSurfaceShell(descriptor, { read: async () => changed })).rejects.toThrow('SHA-256');
   const drifted = structuredClone(descriptor);
   drifted.properties.frame.originM[0] += 1e12;
   await expect(loadPreparedCssSurfaceShell(drifted, { read: async () => bytes })).rejects.toThrow('frame');

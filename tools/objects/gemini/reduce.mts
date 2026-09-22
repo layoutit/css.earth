@@ -170,7 +170,7 @@ export async function ourCalibrations(context: RunContext, stages: readonly Stag
         + `no longer the file its record pins. Re-run \`reduce ${stage}\`; a master from another program or another `
         + 'calibration set is never reused.');
     const output = record.outputs.find(entry => entry.path === product)!;
-    found.push({ role, path: resolve(directory, product), input: { role, identity: product, bytes: output.bytes, sha256: output.sha256 } });
+    found.push({ role, path: resolve(directory, product), input: { role, identity: product, bytes: output.bytes } });
   }
   return found;
 }
@@ -187,7 +187,7 @@ async function fetchFrames(frames: readonly GeminiFrame[], directory: string, so
 const inputPin = (frame: GeminiFrame, role: string): ProductInput => {
   if (frame.sha256 === undefined)
     throw new Error(`${frame.name} carries no sha256 yet. Download it once so the pin can be digested before a reduction uses it.`);
-  return { role, identity: frame.name, bytes: frame.bytes, sha256: frame.sha256 };
+  return { role, identity: frame.name, bytes: frame.bytes };
 };
 
 /** One `reduce` call. Non-zero status, or a run that leaves no product, is an error with DRAGONS' own last words attached:

@@ -22,9 +22,9 @@ export async function hashFile(path: string) {
 export function pin(value: unknown) {
   const p = requireRecord(value), path = requireString(p.path);
   if (!path || path.startsWith('/') || path.includes('\\') || path.split('/').includes('..')) throw new Error('Unsafe SBMT pin path');
-  const sha256 = requireString(p.sha256), bytes = requireFiniteNumber(p.bytes);
-  if (!/^[a-f0-9]{64}$/.test(sha256) || !Number.isSafeInteger(bytes) || bytes < 0) throw new Error('Invalid SBMT pin');
-  return { path, sha256, bytes };
+  const bytes = requireFiniteNumber(p.bytes);
+  if (!Number.isSafeInteger(bytes) || bytes < 0) throw new Error('Invalid SBMT pin');
+  return { path, bytes };
 }
 export async function runtimeLock() {
   const raw = await readFile(lockPath), lock = requireRecord(JSON.parse(raw.toString()));
@@ -35,7 +35,7 @@ export async function runtimeLock() {
 export async function verifyFiles(directory: string, files: readonly ReturnType<typeof pin>[]) {
   for (const file of files) {
     const actual = await hashFile(resolve(directory, file.path));
-    if (actual.sha256 !== file.sha256 || actual.bytes !== file.bytes) throw new Error(`SBMT byte identity failed: ${file.path}`);
+    if (actual.bytes !== file.bytes) throw new Error(`SBMT byte identity failed: ${file.path}`);
   }
 }
 /** This runs in a bounded child process. It never opens a render window. */

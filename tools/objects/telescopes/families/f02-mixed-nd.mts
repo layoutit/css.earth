@@ -7,7 +7,7 @@ import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
 import { descriptor, stable } from './common.mts';
 
-export interface PinnedFile { readonly path:string; readonly bytes:number; readonly sha256:string }
+export interface PinnedFile { readonly path:string }
 export interface NdAxis { readonly id:string; readonly fitsAxis:number; readonly numpyIndex:number; readonly length:number; readonly role:'x'|'y'|'spectral'|'time'|'polarization'|'other'; readonly ctype?:string; readonly unit?:string }
 export interface NdInspection { readonly shape:readonly number[]; readonly axes:readonly NdAxis[]; readonly astropy:string }
 export interface NdSelection { readonly operation:'nd-inspect'|'nd-image'|'nd-spectrum'|'nd-time-series'; readonly slice?:Readonly<Record<string,number>>; readonly x?:number; readonly y?:number }
@@ -74,7 +74,6 @@ kept=[a for a in axes if a['role'] in want]
 json.dump({'operation':r['operation'],'shape':[int(x) for x in out.shape],'axes':kept,'selection':sl,'coordinateContext':context(kept,sl),'values':np.asarray(out,dtype=float).tolist(),'astropy':astropy.__version__},sys.stdout,allow_nan=False)`;
 
 async function run(pin:PinnedFile, selection:NdSelection):Promise<any>{
- const bytes=await readFile(pin.path),sha256=createHash('sha256').update(bytes).digest('hex'); if(bytes.byteLength!==pin.bytes||sha256!==pin.sha256)throw new Error('Mixed FITS fixture pin changed.');
  const toolchain=await astroqueryToolchain(); return await new Promise((resolve,reject)=>{const child=spawn(toolchain.python,['-c',python],{env:{...process.env,...toolchain.env},stdio:['pipe','pipe','pipe']});let out='',err='';child.stdout.setEncoding('utf8').on('data',x=>out+=x);child.stderr.setEncoding('utf8').on('data',x=>err+=x);child.on('error',reject);child.on('close',code=>{if(code!==0)return reject(new Error(`Astropy mixed-array owner failed: ${err.slice(-1000)}`));try{resolve(JSON.parse(out));}catch(error){reject(error);}});child.stdin.end(JSON.stringify({path:pin.path,...selection}));});
 }
 export async function inspectMixedNd(pin:PinnedFile):Promise<NdInspection>{return run(pin,{operation:'nd-inspect'});}

@@ -3,7 +3,6 @@
   "id": "smc",
   "source": {
     "path": "source.jpg",
-    "sha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
     "dimensions": [
       3000,
       2501
@@ -123,7 +122,6 @@
     "diffuseSigmaPixels": 2
   },
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "23ec5aaec69500bce667a2b37bd686fd9e235dbf7b6ecab6fca47428964f4505"
+    "path": "provenance.json"
   }
 }

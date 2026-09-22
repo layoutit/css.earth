@@ -10,22 +10,18 @@
  "inputs": [
   {
    "path": "src/objects/comet-19p/source/micas/ccd_near_1_ortho.cub",
-   "sha256": "19912df4bac7177bafe5556bebbcd4dd178dd1ea57d94c5f3ecfd2f60c8cccd1",
    "bytes": 704512
   },
   {
    "path": "src/objects/comet-19p/source/micas/dem_x_component.cub",
-   "sha256": "3c415666d9ca641371c8579f659171273e36abfc4d1407a150f3900f67e8bf1e",
    "bytes": 704000
   },
   {
    "path": "src/objects/comet-19p/source/micas/dem_y_component.cub",
-   "sha256": "237a7f02e7ea4b64a92640abc2e69054218f4eb44b0710cce4ca6f81bd9f7e54",
    "bytes": 704000
   },
   {
    "path": "src/objects/comet-19p/source/micas/dem_z_component.cub",
-   "sha256": "ebda490e2e50e974406cda51fdba84859894e5d232a3a66ef4e0e14684705bc6",
    "bytes": 704000
   }
  ],

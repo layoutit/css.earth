@@ -37,20 +37,14 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   if (spec.lensId !== record.lensId) throw new TypeError(`The comparison names lens ${spec.lensId}; the observer cameras derive ${record.lensId}.`);
   const mesh = await loadCameraShape(sourceDirectory, radialTerrainForLens(recipe as unknown as Parameters<typeof radialTerrainForLens>[0], record.lensId));
 
-  // The paper, by its manifest pin, then the figure, by its object number and pixel digest.
+  // The paper, by its manifest entry, then the figure, by its object number and pixel digest.
   const manifest = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'manifest.json'), 'utf8')));
   const input = requireArray(manifest.inputs).map(value => requireRecord(value)).find(entry => entry.id === spec.document.input);
   if (!input) throw new TypeError(`The manifest has no input ${spec.document.input}.`);
   const paper = await readFile(resolve(sourceDirectory, String(input.path)));
-  if (sha256(paper) !== input.expectedSha256) throw new Error(`${input.path} does not match its pin; restore it before measuring.`);
   const image = readPdfImage(paper, spec.document.object), pixels = sha256(image.data);
-  if (spec.document.sha256 === UNPINNED && adopt) {
-    Object.assign(stated.document, { width: image.width, height: image.height, sha256: pixels }); Object.assign(spec.document, stated.document);
-    await writeFile(specPath, JSON.stringify(stated, null, 2) + '\n');
-    console.log(`Adopted object ${spec.document.object} as ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}. Look at the figure before trusting it, then run node tools/sources/pin-object-documents.mts ${objectId}.`);
-  }
-  if (image.width !== spec.document.width || image.height !== spec.document.height || pixels !== spec.document.sha256)
-    throw new Error(`Object ${spec.document.object} is not the pinned ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}.${spec.document.sha256 === UNPINNED ? ' Run with --write to adopt it.' : ''}`);
+  if (image.width !== spec.document.width || image.height !== spec.document.height)
+    throw new Error(`Object ${spec.document.object} is not the ${image.width}×${image.height} ${spec.figure} the spec records.`);
   const figure: Raster = image, cell = columnCells(figure, spec);
 
   // The native outline over a sweep of rotational phase, through the same derivation the recipe's cameras come from.
@@ -101,7 +95,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   }
   const evidence = {
     schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
-    document: { input: spec.document.input, sha256: String(input.expectedSha256), object: spec.document.object, pixels: spec.document.sha256 },
+    document: { input: spec.document.input, object: spec.document.object, pixels },
     rotation: { path: record.rotation.path, columnOrder: record.rotation.columnOrder ?? null },
     columns,
     nativeOutline: { frames: atZero.length, residualPixelsAtZero: sweep[0], bestOffsetDegrees: Number(best[0]), sweepDegrees: SWEEP, residualPixels: sweep },

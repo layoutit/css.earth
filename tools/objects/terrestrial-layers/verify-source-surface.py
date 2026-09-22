@@ -15,7 +15,6 @@ def read_mesh(id):
  spec=cfg['geometry']['radialTerrain']; path=p/spec['path']; profile=spec['grid']
  with path.open('rb') as f: sha=hashlib.file_digest(f,'sha256').hexdigest()
  entry=next(x for x in json.loads((p/'manifest.json').read_text())['inputs'] if x['path']==spec['path'])
- assert 'expectedSha256' not in entry or sha==entry['expectedSha256']
  if spec['format']=='pds-vertex-facet':
   n=profile['expectedVertices']; v=np.loadtxt(path,skiprows=1,max_rows=n,usecols=(1,2,3));f=np.loadtxt(path,skiprows=n+1,usecols=(1,2,3),dtype=np.int32)-1
  else:

@@ -3,7 +3,7 @@ import { readFile,writeFile,mkdir,rm,rmdir,rename,realpath } from 'node:fs/promi
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { requireArray,requireRecord,requireString,requireFiniteNumber } from '../../sources/source-values.mts';
-import { pinFile,parseProductRecord,sameRun,type ProductInput } from '../product-record.mts';
+import { fileSize,parseProductRecord,sameRun,type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes,bodyMapProductRecord,formatProductRecord } from '../body-map-publication.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
@@ -30,8 +30,8 @@ export function parseGeometry(raw:unknown,root:string){
   for(const key of Object.keys(g))if(!['schema','observer','kernels','registration','width','height','maximumEmissionDegrees'].includes(key))throw new TypeError(`Unknown navigation option ${key}`);
   const width=requireFiniteNumber(g.width),height=requireFiniteNumber(g.height),maximumEmissionDegrees=requireFiniteNumber(g.maximumEmissionDegrees);
   if(!Number.isInteger(width)||!Number.isInteger(height)||width<4||height<2||width*height>260000||maximumEmissionDegrees<=0||maximumEmissionDegrees>=90)throw new RangeError('Use a bounded map grid and emission limit strictly between 0 and 90 degrees');
-  const kernels=requireArray(g.kernels).map(value=>{const k=requireRecord(value),file=resolve(root,requireString(k.file)),bytes=requireFiniteNumber(k.bytes),digest=requireString(k.sha256);if(!/^[a-f0-9]{64}$/u.test(digest)||!Number.isSafeInteger(bytes)||bytes<1)throw new TypeError('Kernels require byte counts and SHA256 pins');return {file,bytes,sha256:digest,source:requireString(k.source),role:requireString(k.role)};});
-  if(!kernels.length||kernels.filter(k=>k.role==='rotation').length!==1||new Set(kernels.map(k=>k.file)).size!==kernels.length)throw new TypeError('Pin an ordered unique kernel set with exactly one rotation kernel');
+  const kernels=requireArray(g.kernels).map(value=>{const k=requireRecord(value),file=resolve(root,requireString(k.file));return {file,source:requireString(k.source),role:requireString(k.role)};});
+  if(!kernels.length||kernels.filter(k=>k.role==='rotation').length!==1||new Set(kernels.map(k=>k.file)).size!==kernels.length)throw new TypeError('Name an ordered unique kernel set with exactly one rotation kernel');
   const registration=requireRecord(g.registration),method=requireString(registration.method);
   for(const key of Object.keys(registration))if(!['method','explanation','parameters','evidence'].includes(key))throw new TypeError(`Unknown registration option ${key}`);
   if(method==='wcs'&&registration.parameters!==undefined)throw new TypeError('WCS registration does not accept disc parameters');
@@ -40,11 +40,11 @@ export function parseGeometry(raw:unknown,root:string){
   if(parameters&&(parameters.length!==4||parameters[2]<=0))throw new TypeError('Disc registration takes x, y, radius and rotation in PlanetMapper coordinates');
   const explanation=requireString(registration.explanation);
   const evidence=registration.evidence===undefined?undefined:requireRecord(registration.evidence);
-  const evidencePin=evidence?{file:resolve(root,requireString(evidence.file)),sha256:requireString(evidence.sha256),bytes:requireFiniteNumber(evidence.bytes)}:undefined;
-  if(method==='disc'&&(!evidencePin||!/^[a-f0-9]{64}$/u.test(evidencePin.sha256)||!Number.isSafeInteger(evidencePin.bytes)||evidencePin.bytes<1))throw new TypeError('Disc registration requires a pinned evidence file');
+  const evidencePin=evidence?{file:resolve(root,requireString(evidence.file))}:undefined;
+  if(method==='disc'&&!evidencePin)throw new TypeError('Disc registration requires an evidence file');
   return {observer:requireString(g.observer),kernels,registration:{method,explanation,...(parameters?{parameters}: {}),...(evidencePin?{evidence:evidencePin}:{})},width,height,maximumEmissionDegrees};
 }
-async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await pinFile(input.identity);if(actual.sha256!==input.sha256||actual.bytes!==input.bytes)throw new Error(`Input pin mismatch: ${input.identity}`);}}
+async function checkPins(inputs:readonly ProductInput[]){for(const input of inputs){const actual=await fileSize(input.identity);if(actual.bytes!==input.bytes)throw new Error(`Input size mismatch: ${input.identity}`);}}
 
 export async function validateProjectionSource(source:Awaited<ReturnType<typeof verifiedProduct>>){
   if(source.record.stage!=='telescope-output'||!source.record.outputs.some(o=>o.path==='image.fits'))throw new TypeError('Body-map export requires a telescope image output.product.json');
@@ -54,9 +54,9 @@ export async function validateProjectionSource(source:Awaited<ReturnType<typeof 
   const deliveryPins=source.record.inputs.filter(i=>i.role==='delivery');
   if(deliveryPins.length!==1)throw new Error('Measurement must name exactly one source delivery');
   const deliveryPin=deliveryPins[0]!,d=await delivery(deliveryPin.identity);
-  if(d.pin.sha256!==deliveryPin.sha256||d.pin.bytes!==deliveryPin.bytes)throw new Error('Measurement source delivery changed');
+  if(d.pin.bytes!==deliveryPin.bytes)throw new Error('Measurement source delivery changed');
   const context=sourceContext(source.record.parameters);if(canonical(context)!==canonical(d.context))throw new Error('Measurement source context differs from its delivery');
-  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes,sha256:o.sha256})),...source.record.inputs];
+  const inputs:ProductInput[]=[{role:'measurement record',identity:source.file,...source.pin},...source.record.outputs.map(o=>({role:'measurement output',identity:localOutput(source.root,o.path),bytes:o.bytes})),...source.record.inputs];
   await checkPins(inputs);
   return {source,d,context,selection,definition,metadata,measurement,inputs};
 }
@@ -66,8 +66,8 @@ export async function projectionSource(recordPath:string){return validateProject
 export async function projectOutput(recordPath:string,geometryPath:string,outputDirectory:string){
   const prepared=await projectionSource(recordPath),{source,d,context,selection,definition,metadata,measurement}=prepared;
   const geometryFile=resolve(geometryPath),geometryBytes=await readFile(geometryFile),geometry=parseGeometry(JSON.parse(geometryBytes.toString()),dirname(geometryFile));
-  const inputs:ProductInput[]=[...prepared.inputs,{role:'navigation choices',identity:geometryFile,bytes:geometryBytes.length,sha256:sha256(geometryBytes)},...geometry.kernels.map(k=>({role:`SPICE ${k.role}: ${k.source}`,identity:k.file,bytes:k.bytes,sha256:k.sha256}))];
-  if(geometry.registration.evidence)inputs.push({role:'registration evidence',identity:geometry.registration.evidence.file,sha256:geometry.registration.evidence.sha256,bytes:geometry.registration.evidence.bytes});
+  const inputs:ProductInput[]=[...prepared.inputs,{role:'navigation choices',identity:geometryFile,bytes:geometryBytes.length},...await Promise.all(geometry.kernels.map(async k=>({role:`SPICE ${k.role}: ${k.source}`,identity:k.file,...await fileSize(k.file)})))];
+  if(geometry.registration.evidence)inputs.push({role:'registration evidence',identity:geometry.registration.evidence.file,...await fileSize(geometry.registration.evidence.file)});
   await checkPins(inputs);
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;
   await mkdir(dirname(destination),{recursive:true});await mkdir(destination);await mkdir(staging);
@@ -83,7 +83,7 @@ export async function projectOutput(recordPath:string,geometryPath:string,output
     const product=parseBodyMapProduct({schema:'cssearth-body-map@1',definition:{quantity:definition,units:requireString(nav.units),timeDependence:'instantaneous-state',
       ...(Array.isArray(band)?{wavelengthIntervalsMicrometres:[band]}:selection.kind==='image'&&Array.isArray(spectral.centersMicrometres)&&typeof selection.plane==='number'?{wavelengthIntervalsMicrometres:[[spectral.centersMicrometres[selection.plane],spectral.centersMicrometres[selection.plane]]]}:{}),
       method:{measurement,selection:Object.fromEntries(Object.entries(selection).filter(([key])=>key!=='hdu')),projection:{owner:'PlanetMapper',interpolation:'nearest',latitude:'planetocentric',shape:nav.shape,uncertainty:nav.uncertainty}},source:source.file},
-      frame:{body:d.target,radiusKm:nav.radiusKm,rotation:{model:rotation.file,sha256:rotation.sha256,bodyCode:nav.bodyCode}},grid:{width:geometry.width,height:geometry.height,longitude:'east-positive-from-0',rows:'north-to-south'},
+      frame:{body:d.target,radiusKm:nav.radiusKm,rotation:{model:rotation.file,bodyCode:nav.bodyCode}},grid:{width:geometry.width,height:geometry.height,longitude:'east-positive-from-0',rows:'north-to-south'},
       planes:{file:'map.fits',sha256:sha256(plane),value:'VALUE',uncertainty:'SIGMA'},mask:{maximumEmissionDegrees:geometry.maximumEmissionDegrees,missing:'NaN'},
       observations:[{id:nav.observation,telescope:d.telescope,instrument:nav.instrument,midTimeJd:nav.midTimeJd,startTimeJd:nav.startTimeJd,endTimeJd:nav.endTimeJd,startIso:nav.startIso,endIso:nav.endIso,exposureSeconds:nav.exposureSeconds,rangeKm:nav.rangeKm,subObserver:nav.subObserver,angularResolution:resolution}]});
     assertBodyMapPlanes(plane,product);const bytes=Buffer.from(JSON.stringify(product,null,2)+'\n');await writeFile(resolve(staging,'map.fits.body-map.json'),bytes);

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseSourceCatalog, sourceResolver, parseSourceBinding, parseSourceCitation } from './source-catalog.mts';
 const record = (id = 'work') => ({id,title:'Published work',kind:'data-product',identityLevel:'work',identifiers:[],links:[{role:'landing',url:'https://example.org/product',label:'Provider'}],
   evidence:[{path:'source/record.json',locator:'/product'}],relations:[],statements:[]});

@@ -5,7 +5,7 @@ import { sciencePackage } from '../astronomy-packages/science.mts';
 import { isisMetadata, pdsMetadata, parseNativeMetadata, type NativeMetadata } from './native-metadata.mts';
 import { calibrationDependencies, verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import { parseProductFacts } from './qualified-observations.mts';
-import { pinFile } from '../product-record.mts';
+import { fileSize } from '../product-record.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
@@ -14,7 +14,7 @@ function intersection(left:readonly (readonly [number,number])[],right:readonly 
   return left.flatMap(([a,b])=>right.flatMap(([c,d])=>Math.max(a,c)<=Math.min(b,d)?[[Math.max(a,c),Math.min(b,d)] as [number,number]]:[]));
 }
 export async function readProductScience(root:string, product:ScienceProduct, options:{resolveCalibrations?:boolean}={}):Promise<Partial<ProductFacts>> {
-  const before=await pinFile(resolve(root,product.file));let facts:Partial<ProductFacts>, references:{field:string;value:string}[]=[],header:Record<string,unknown>={};
+  const before=await fileSize(resolve(root,product.file));let facts:Partial<ProductFacts>, references:{field:string;value:string}[]=[],header:Record<string,unknown>={};
   if(product.format==='fits'){
     const answer=await sciencePackage({operation:'fits',path:resolve(root,product.file), ...(product.region ? { region: product.region } : {})});
     const rows=requireArray(answer.structures).map(v=>requireRecord(v));
@@ -27,7 +27,7 @@ export async function readProductScience(root:string, product:ScienceProduct, op
       ...(rows.length === 1 && rows[0]!.regionCoverage ? { regionCoverage: rows[0]!.regionCoverage } : {}),
       kind:structures.every(s=>s.shape && (s.shape.length>3?2+s.shape.slice(0,-2).filter(n=>n!==1).length:s.shape.length)===3)?'cube':structures.every(s=>s.shape && (s.shape.length>3?2+s.shape.slice(0,-2).filter(n=>n!==1).length:s.shape.length)===2)?'image':undefined,
       ...(intervals===undefined?{}:{wavelengthIntervalsMicrometres:intervals}),
-      ...(beam===undefined?{}:{angularResolutionArcsec:beam,resolutionEvidence:[{kind:'calibrated',receipt:{file:product.file,sha256:before.sha256}}]})});
+      ...(beam===undefined?{}:{angularResolutionArcsec:beam,resolutionEvidence:[{kind:'calibrated',receipt:{file:product.file}}]})});
     references=requireArray(answer.references).map(r=>{const row=requireRecord(r);return {field:requireString(row.field),value:requireString(row.value)};});header=requireRecord(answer.primary);
   }else{
     if(product.format==='isis3'){
@@ -61,6 +61,6 @@ export async function readProductScience(root:string, product:ScienceProduct, op
     }
   }
   if(!await verifyCalibrationDependencies(root,facts.calibrationDependencies??[]))throw new Error('Calibration bytes changed during scientific readback');
-  const after=await pinFile(resolve(root,product.file));if(after.sha256!==before.sha256||after.bytes!==before.bytes)throw new Error('Product changed during scientific readback');
+  const after=await fileSize(resolve(root,product.file));if(after.bytes!==before.bytes)throw new Error('Product changed during scientific readback');
   return facts;
 }

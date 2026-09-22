@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { datasetHref, readDatasetUrl, withDataset } from '../dataset-url.mts';
 import { parseDatasetDestination } from '../../src/platform/dataset-destination.mts';
 

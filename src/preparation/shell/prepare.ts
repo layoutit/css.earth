@@ -3,7 +3,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { parseDensityVolumeFrame, parseObjectDescriptor } from '@cssearth/objects';
 import { record, text } from '@cssearth/volume-core/contracts/volume-recipe';
-import { verifiedBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { parseShellRecipe } from './config.js';
 import { loadShellMesh } from './mesh.js';
 import { prepareShellAtlas } from './atlas.js';
@@ -17,17 +17,17 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   if (descriptor.type !== 'surface-shell') throw new TypeError('Object descriptor is not a surface-shell.');
   const properties = record(descriptor.properties, 'properties'), frame = parseDensityVolumeFrame(properties.frame);
   const preparation = record(properties.preparation, 'preparation');
-  const source = text(preparation.source, 'preparation source'), sourceHash = text(preparation.sha256, 'preparation hash');
-  const configBytes = await verifiedBytes(objectDirectory, { path: source, sha256: sourceHash });
+  const source = text(preparation.source, 'preparation source');
+  const configBytes = await readFile(containedPath(objectDirectory, source));
   const recipe = parseShellRecipe(JSON.parse(configBytes.toString('utf8')) as unknown);
   if (JSON.stringify(frame) !== JSON.stringify(recipe.frame)) throw new TypeError('Shell recipe and descriptor physical frames disagree.');
   const sourceDirectory = dirname(containedPath(objectDirectory, source));
-  const provenanceBytes = await verifiedBytes(sourceDirectory, recipe.provenance);
+  const provenanceBytes = await sourceBytes(sourceDirectory, recipe.provenance);
   const provenance = record(JSON.parse(provenanceBytes.toString('utf8')) as unknown, 'provenance');
   if (!Array.isArray(provenance.sources)) throw new TypeError('Surface provenance must identify its pinned sources.');
   for (const value of provenance.sources) {
     const source = record(value, 'provenance source');
-    await verifiedBytes(sourceDirectory, { path: text(source.path, 'source path'), sha256: text(source.sha256, 'source hash') });
+    await sourceBytes(sourceDirectory, { path: text(source.path, 'source path') });
   }
   const mesh = await loadShellMesh(sourceDirectory, recipe), atlas = await prepareShellAtlas(recipe);
   await mkdir(outputDirectory, { recursive: true });
@@ -37,7 +37,7 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   await writeFile(resolve(outputDirectory, meshPath), meshBytes);
   const data = compileCssSurfaceShell({ id: descriptor.id, recipe, mesh,
     atlasResource: { path: atlasPath, sha256: sha256(atlas.png), bytes: atlas.png.length, width: atlas.width, height: atlas.height },
-    provenance: { ...provenance, preparationSha256: sourceHash, mesh: { path: meshPath, sha256: sha256(meshBytes), bytes: meshBytes.length } } });
+    provenance: { ...provenance, preparationSha256: sha256(configBytes), mesh: { path: meshPath, sha256: sha256(meshBytes), bytes: meshBytes.length } } });
   const envelope = { schema: 'cssearth-prepared-object@1' as const, id: descriptor.id, type: 'surface-shell' as const,
     format: 'cssearth-surface-shell@1' as const, data };
   const bytes = Buffer.from(JSON.stringify(envelope) + '\n'), outputPath = resolve(outputDirectory, 'shell.json');

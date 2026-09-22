@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { bandDepth, parseRecipe } from './vir-mosaic.mts';
 
 test('band depth is 1 - Rb/Rc at the band minimum under the line joining the two anchor maxima (Frigeri et al. 2019)', () => {

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { fitsCardValue, readFitsHeader, readFitsHdu, readFitsHdus, readFitsImage, fitsImageAccessor, assertUnscaledFitsTable } from './fits.mts';
 import { readFitsPrimary, readFitsPlane } from '../objects/observation/fits.mts';
 import { card, imageFixture } from '../../tests/fixtures/fits/helpers.mts';

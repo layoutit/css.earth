@@ -333,55 +333,46 @@
     "miriadeSolutions": {
       "path": "source/orbit/miriade-solutions.txt",
       "url": "https://ssp.imcce.fr/webservices/miriade/api/ephemsys.php?-get=gensol&-name=Sylvia&-from=cssEarth",
-      "sha256": "c3c0bd648373e3b47b8849fe68b3b3663b9054496aa560ab6fd7be34e69eb500",
       "bytes": 719
     },
     "miriade2018": {
       "path": "source/orbit/miriade-2018.xml",
       "url": "https://ssp.imcce.fr/webservices/miriade/api/ephemsys.php?-name=Sylvia&-ep=2458429.5&-tscale=TT&-gensol=1&-nbd=3&-step=1d&-mime=votable&-from=cssEarth",
-      "sha256": "6e51c7cf84e038ccb32fd443c2b1d493ceb3eac52476d0d52901bd5e6974c242",
       "bytes": 20658
     },
     "miriade2026": {
       "path": "source/orbit/miriade-2026.xml",
       "url": "https://ssp.imcce.fr/webservices/miriade/api/ephemsys.php?-name=Sylvia&-ep=2461286.5&-tscale=TT&-gensol=1&-nbd=3&-step=1d&-mime=votable&-from=cssEarth",
-      "sha256": "c17731d2b40b1f80cb593e3f2ec35740afbfe848ee16d99998e6e74e3c87d468",
       "bytes": 20657
     },
     "geocentric2018": {
       "path": "source/orbit/geocentric-2018.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&CENTER=500%40399&VEC_CORR=LT&TLIST=2458429.499199259%0A2458430.499199259%0A2458431.499199259",
-      "sha256": "3a532625e0a4436905bed3187d9a4359648d5790bf9c0d20f6cdc9c723d65425",
       "bytes": 9044
     },
     "geocentric2026": {
       "path": "source/orbit/geocentric-2026.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&CENTER=500%40399&VEC_CORR=LT&TLIST=2461286.499199259%0A2461287.499199259%0A2461288.499199259",
-      "sha256": "e8afc90caa7fd06b9ab42e3eb7f2d56704b7eefdb3baecf4ab977c33afc074c2",
       "bytes": 9044
     },
     "geocentricAstrometry": {
       "path": "source/orbit/geocentric-astrometry.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&CENTER=500%40399&VEC_CORR=LT&TLIST=2452401.900722454%0A2453676.050903935%0A2455423.859454861%0A2455911.6876875%0A2458406.8754684026%0A2458451.6956100697",
-      "sha256": "a6a058d9e1ba7bbb96a474acec1e2d3bb217180eaf8589cafadc47275ce4306a",
       "bytes": 9845
     },
     "paperAstrometry": {
       "path": "source/orbit/paper-astrometry.dat",
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/650/A129/tablec1.dat",
-      "sha256": "412aa8442b2784595a3ffc038384f4c007e9253e8f1a7cf35663a600c5df0ecc",
       "bytes": 10530
     },
     "paperAstrometryReadme": {
       "path": "source/orbit/paper-astrometry-readme.txt",
       "url": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/650/A129/ReadMe",
-      "sha256": "0f1aa8a1b2b56d6bd76b8d272f706358492a38b63799b3e5e34adfff2ea35276",
       "bytes": 9139
     },
     "parent": {
       "path": "source/orbit/sylvia-heliocentric.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=87%3B&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_TABLE=3&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259&CENTER=500%4010&VEC_CORR=NONE",
-      "sha256": "52d6187949be5192c1a56d5e47186335d05a6800c42a87f6cd3aa9408d795118",
       "bytes": 8489,
       "target": 87,
       "center": 10,

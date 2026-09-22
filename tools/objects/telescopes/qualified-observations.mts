@@ -1,7 +1,7 @@
 /** Durable result of the public qualifier. A small index of exact local artifacts, not an archive ledger. */
 import { parseCalibrationDependencies, verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import { parseNativeMetadata } from './native-metadata.mts';
-import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../sources/source-values.mts';
@@ -62,8 +62,8 @@ export async function rememberQualification(root: string, result: QualifiedObser
   if(!await verifyCalibrationDependencies(root, facts.calibrationDependencies ?? []))throw new Error('Calibration dependency pin mismatch');
   const resolutionEvidence = await Promise.all((facts.resolutionEvidence ?? []).map(async evidence => {
     if (!evidence.receipt) return evidence;
-    const file = resolve(root, evidence.receipt.file), actual = await sha256File(file);
-    if (actual.sha256 !== evidence.receipt.sha256) throw new Error('Resolution evidence digest mismatch.');
+    const file = resolve(root, evidence.receipt.file);
+    await stat(file).catch(() => { throw new Error('Resolution evidence receipt is missing.'); });
     return { ...evidence, receipt: { ...evidence.receipt, file: relative(root, file) } };
   }));
   const pins = await Promise.all([result.product, result.receipt, result.productRecord, ...(bound ? [bound.receipt] : []),
@@ -96,7 +96,7 @@ export async function loadQualifiedObservations(root: string, target: string): P
     if(!await verifyCalibrationDependencies(root,facts.calibrationDependencies ?? []))continue;
     if (facts.angularResolutionBound && !requireArray(value.pins).some(raw => requireRecord(raw).path === facts.angularResolutionBound!.receipt)) continue;
     if (facts.resolutionEvidence?.some(evidence => evidence.receipt && !requireArray(value.pins).some(raw => {
-      const pin = requireRecord(raw); return pin.path === evidence.receipt!.file && pin.sha256 === evidence.receipt!.sha256;
+      const pin = requireRecord(raw); return pin.path === evidence.receipt!.file;
     }))) continue;
     if (!facts.verified || facts.target !== target) continue;
     products.push({ target, telescope: fields.telescope!, mode: fields.mode!, observation: fields.observation!, program: fields.program!, product: fields.product!, receipt: fields.receipt!, productRecord: fields.productRecord!, outputRoot: fields.outputRoot!, facts });

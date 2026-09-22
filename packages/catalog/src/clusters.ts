@@ -37,7 +37,7 @@ export function parsePreparedClusterCatalog(input: unknown): PreparedClusterCata
   for (const value of array(data.sources)) {
     const source = record(value), id = text(source.id);
     unique(sourceIds, id);
-    if (!/^https:\/\//.test(text(source.url)) || !/^[a-f0-9]{64}$/.test(text(source.sha256)) || !Number.isSafeInteger(positive(source.bytes))) throw new TypeError('Invalid cluster source pin.');
+    if (!/^https:\/\//.test(text(source.url)) || !Number.isSafeInteger(positive(source.bytes))) throw new TypeError('Invalid cluster source.');
     text(source.citation);
     for (const value of source.references === undefined ? [] : array(source.references)) {
       const ref = record(value); unique(sourceIds, text(ref.id)); text(ref.citation);

@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import type { ObjectDescriptor } from '@cssearth/objects';
 import { publishPreparedDescriptor, readPreparedDescriptor } from '../prepared-descriptor.mts';
 
 const descriptor: ObjectDescriptor = {
   schema: 'cssearth-object@1', id: 'earth', type: 'layered-body', properties: {},
-  prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json', sha256: 'a'.repeat(64) },
+  prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' },
 };
 
 function fixture(value: unknown = descriptor) {

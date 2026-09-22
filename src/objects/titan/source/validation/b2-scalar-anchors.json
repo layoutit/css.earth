@@ -4,7 +4,6 @@
     {
       "path": "science/b2-intake/GTFED00N090_T126_V01.IMG.gz",
       "expectedBytes": 550734,
-      "expectedSha256": "5b44136c10b8541fb59b4b9c26a24c96f91ec3ca0669c263f40acd6e899909ad",
       "heightDatum": "metres above 2575.0 km sphere",
       "sourceCells": 2073600,
       "validCells": 136649,
@@ -60,7 +59,6 @@
     {
       "path": "science/b2-intake/GTFED00N270_T126_V01.IMG.gz",
       "expectedBytes": 532494,
-      "expectedSha256": "7abb589cfa572cb6a837d2f814ae7d1b8ccaa8f25edbaf56bd20b2728b6a50af",
       "heightDatum": "metres above 2575.0 km sphere",
       "sourceCells": 2073600,
       "validCells": 134308,
@@ -116,7 +114,6 @@
     {
       "path": "science/b2-intake/GTIED00N090_T126_V01.IMG.gz",
       "expectedBytes": 7422253,
-      "expectedSha256": "90efa690c9a7841449e9cae5b100343b6272c8b4dba3731c184efee3f3a02546",
       "heightDatum": "metres above 2575.0 km sphere",
       "sourceCells": 2073600,
       "validCells": 2070176,
@@ -172,7 +169,6 @@
     {
       "path": "science/b2-intake/GTIED00N270_T126_V01.IMG.gz",
       "expectedBytes": 7393466,
-      "expectedSha256": "380daf4e4ca7b8856bc69ea4eb228bce5b1c34bee69aac01b315f2b8fc582034",
       "heightDatum": "metres above 2575.0 km sphere",
       "sourceCells": 2073600,
       "validCells": 2073600,
@@ -221,7 +217,6 @@
     {
       "path": "science/b2-intake/GTDED00N090_T126_V01.IMG.gz",
       "expectedBytes": 6386495,
-      "expectedSha256": "10b62eed2a4fbe9c6b7746e1124780e43b260276930c0af86fdc7274e10f1c34",
       "heightDatum": "distance to nearest measurement, kilometres",
       "sourceCells": 2073600,
       "validCells": 2069282,
@@ -277,7 +272,6 @@
     {
       "path": "science/b2-intake/GTDED00N270_T126_V01.IMG.gz",
       "expectedBytes": 6529382,
-      "expectedSha256": "da614365c1a04d766dc8ea13f8c673128e632904b02ad210df7266e4e5f06b8b",
       "heightDatum": "distance to nearest measurement, kilometres",
       "sourceCells": 2073600,
       "validCells": 2070176,

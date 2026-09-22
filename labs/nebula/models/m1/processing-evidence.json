@@ -5,7 +5,6 @@
   "status": "Diffuse fit compiled and visually inspected as a bounded interior approximation; physical diffuse depth and immediate paint readiness remain unvalidated.",
   "result": {
     "id": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
-    "sha256": "0b8a420af0f922149c0abc03d9fa40e983adbb5fed05f36d8be723c08f4817ee",
     "secondsWithPreparedSources": 509.723635916,
     "releasedEmissionSamples": 416573,
     "analyticWindTerms": 4,
@@ -44,8 +43,7 @@
       {
         "sourceId": "hubble-optical",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-hubble-optical.json",
-          "sha256": "1d894c3285fa4c32b6d689f0eb3f6b1bf203c58b0bd4cbb2680656bf080721fc"
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-hubble-optical.json"
         },
         "atomCount": 143,
         "ejectaGain": 1.0407954901531884,
@@ -60,8 +58,7 @@
       {
         "sourceId": "spitzer-infrared",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-spitzer-infrared.json",
-          "sha256": "0f097fa86aa19fa53ca5afad0117c35d8440878f2bf0a45b6b1d1843203a0562"
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-spitzer-infrared.json"
         },
         "atomCount": 143,
         "ejectaGain": 0.40845510873534047,
@@ -76,8 +73,7 @@
       {
         "sourceId": "vla-radio",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-vla-radio.json",
-          "sha256": "f64d37fa8bc49c3e40ea48de55e5ff2fc48d14ff1a7e22c46e565c85e11cc0be"
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-vla-radio.json"
         },
         "atomCount": 143,
         "ejectaGain": 2.758817892664468,
@@ -92,8 +88,7 @@
       {
         "sourceId": "webb-components",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-components.json",
-          "sha256": "dc2ef8e99ad3b92ef8f903564935d9c5e52d506350c26a49d7dce52a59b12696"
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-components.json"
         },
         "atomCount": 143,
         "ejectaGain": 0.5400976988698133,
@@ -108,8 +103,7 @@
       {
         "sourceId": "webb-infrared",
         "receipt": {
-          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-infrared.json",
-          "sha256": "79ae0bdf1f84a755fe7ea7ced4faaec9cfe2f1d297880b77511c32a974f32259"
+          "path": ".local/nebula-lab/compiler/88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596/emission-fit-webb-infrared.json"
         },
         "atomCount": 143,
         "ejectaGain": 0.9190453236587317,
@@ -126,8 +120,7 @@
   },
   "preservation": {
     "receipt": {
-      "path": "output/m1-continuum/preservation.json",
-      "sha256": "58240ad3f81bde45c10d6e596efeefbb23e8f3153b58eb6b91ab1294c518e035"
+      "path": "output/m1-continuum/preservation.json"
     },
     "starsIdentical": true,
     "boundsIdentical": true,
@@ -140,8 +133,7 @@
     "strictTypescript": "passed",
     "targetedTests": 51,
     "testsLog": {
-      "path": "output/m1-continuum/tests.log",
-      "sha256": "682765e4a90219aef36d561d222c38e5247a7dbec817f5dfc0e008c1db6e1cca"
+      "path": "output/m1-continuum/tests.log"
     },
     "cancelledTrial": "An early bake was stopped to fix candidate-lattice bounding before processing extreme recipe inputs. Its log remains in output/m1-continuum/bake-interrupted-for-lattice-guard.log. No live lab server or user job was stopped."
   },
@@ -199,8 +191,7 @@
     "reload": "Reload restored Prepared nebula ready with the completed diffuse-fit stage, Hubble lens, Earth view and Original off. No Compile action was issued during this inspection.",
     "limits": "This does not repeat the historical 24-pose matrix or establish immediate CSS paint readiness, zero browser errors, measured diffuse depth or full outer coverage.",
     "receipt": {
-      "path": "output/m1-continuum/browser-check.json",
-      "sha256": "e3cad6b152adbf0e0ac2070fb07a26be7835aab6944c0b03a8d77a231ca1b31d"
+      "path": "output/m1-continuum/browser-check.json"
     }
   },
   "remaining": [
@@ -217,7 +208,6 @@
     "status": "Compiled and interactively inspected; immediate CSS paint readiness remains unresolved.",
     "result": {
       "id": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
-      "sha256": "17b9b322e5513e9f0855ac4828730904859abf39be2f4bf3d1cb74929621b1e2",
       "secondsWithPreparedSources": 327.666735208,
       "releasedEmissionSamples": 416573,
       "analyticWindTerms": 4,
@@ -286,18 +276,15 @@
     "sharedOwnerReplay": {
       "previousResultId": "60ebe9b931f75a6c9b527dfb48062bf60772aae31e9171797f0016774d3e2120",
       "receipt": "output/nebula-processing/m1-star-union-replay.json",
-      "sha256": "1313fadc13685da96783027d9a17e15a2bde030d5c6e2d8e878cea3473a8cdac",
       "interpretation": "The optional multisource star catalogue is enabled only for Lagoon. This current-owner replay preserves all 351 Crab lights, physical grids, panels, geometry, alpha and every bank resource. Only the field descriptor's generated grid paths changed with the result ID."
     },
     "currentBrowser": {
       "testedResultId": "68ab19f6dfa0180e124e672eb406fcaab6fd200c61a03d5d7e574e8c65cf1ff5",
       "receipt": {
-        "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/receipt.json",
-        "sha256": "aaa1044e6cd45c1d2553f60829a4671cc5519c6b4e1ef5505976ab51f444c7a2"
+        "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/receipt.json"
       },
       "visualAssessment": {
-        "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/visual-assessment.json",
-        "sha256": "4f156458157a5454c7dff10b68b7393eeb0343fb771167b469e302911997cd9f"
+        "path": "output/m1-sampled-inspection-68ab19f6-steady-bitmap/visual-assessment.json"
       },
       "result": "All 24 lens/pose loads, 351 lights, pulsar-only X-ray appearance, original overlays and refresh passed; zero processing requests or browser errors.",
       "captureLimit": "Each capture uses a bounded five-second delay. Hubble's full oblique ejecta are visible; Webb infrared remains dim in its oblique capture. These captures do not prove universal settling or immediate readiness.",

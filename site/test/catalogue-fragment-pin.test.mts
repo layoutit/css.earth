@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseCatalogueFragmentPin, parseCatalogueIndexPin, readCatalogueFragmentPin, readCatalogueIndexPin } from '../catalogue-fragment-pin.mts';
 
 const sha = 'a'.repeat(64);

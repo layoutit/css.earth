@@ -4,13 +4,11 @@
   "status": "target-qualified-and-app-inspected",
   "baselineResult": "dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5",
   "baselineMethod": {
-    "path": ".local/nebula-lab/compiler/dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5/method.json",
-    "sha256": "5fdcf8b2f7e12d7ed67174ffa6acb13c0c07887ff42ff5fd67a0a1281b8ea126"
+    "path": ".local/nebula-lab/compiler/dd7eedffd90f02c018b4940b38517d7e3233b5dfef1a9a1d4f5be8d72b2452e5/method.json"
   },
   "inputIdentity": "07b19faccd44114bde21775ff587a6f1105abdb528c86340917943f7939fbb00",
   "recipe": {
-    "path": "labs/nebula/models/m8/compiler.json",
-    "sha256": "2eccce756cf2d5448dabcadefefd2dd7aa5ed04821a540d1e3aea53045b94524"
+    "path": "labs/nebula/models/m8/compiler.json"
   },
   "sourceWeights": [
     1,

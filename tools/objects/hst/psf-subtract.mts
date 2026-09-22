@@ -32,7 +32,7 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
-import { pinFile, productRecordPath, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { fileSize, productRecordPath, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import { hstSoftware, hstToolchainDigest, MEMORY_GUARD, readHstProgram, REFERENCE_FILES, runCalibration } from './calibrate.mts';
 import { readHstFileHdus } from './product-file.mts';
@@ -226,10 +226,10 @@ export async function runPsfSubtraction(id: string, work: string, options: { sou
         resolve(work, `${name}.log`), { maxRssBytes: ceiling });
       const reported = requireRecord(JSON.parse(result.lastLine), 'subtraction result'), drizzled = requireString(reported.drizzled);
       const inputs: ProductInput[] = [
-        { role: `science, long frame of ${roll.long}, recalibrated here`, identity: basename(science.long), ...await pinFile(science.long) },
-        { role: `science, short frame of ${roll.short}, recalibrated here`, identity: basename(science.short), ...await pinFile(science.short) },
-        { role: `reference star, long frame of ${band.reference.long}, recalibrated here`, identity: basename(reference.long), ...await pinFile(reference.long) },
-        { role: `reference star, short frame of ${band.reference.short}, recalibrated here`, identity: basename(reference.short), ...await pinFile(reference.short) },
+        { role: `science, long frame of ${roll.long}, recalibrated here`, identity: basename(science.long), ...await fileSize(science.long) },
+        { role: `science, short frame of ${roll.short}, recalibrated here`, identity: basename(science.short), ...await fileSize(science.short) },
+        { role: `reference star, long frame of ${band.reference.long}, recalibrated here`, identity: basename(reference.long), ...await fileSize(reference.long) },
+        { role: `reference star, short frame of ${band.reference.short}, recalibrated here`, identity: basename(reference.short), ...await fileSize(reference.short) },
       ];
       const run: ProductRun = { telescope: 'HST', stage: 'psf-subtract', inputs,
         parameters: { instrument: 'ACS/HRC', program: program.programme, subtraction: record.id, band: band.band, roll: roll.roll, fit: record.fit, fluxRatio: { ...band.fluxRatio, source: record.fluxRatioSource }, drizzle, crdsContext: program.crdsContext },

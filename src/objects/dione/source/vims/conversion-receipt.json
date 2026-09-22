@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-cassini-vims@1",
-  "preparerSha256": "09354b3cc859b90017582071f39527371a7c71c40ad17af1515d0017b77f8233",
   "source": {
     "target": "dione",
     "width": 360,
@@ -188,7 +187,6 @@
     {
       "kind": "rgb",
       "output": "dione-infrared.tif",
-      "sha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
       "bytes": 67254,
       "noData": 0,
       "missingPixels": 12916
@@ -196,7 +194,6 @@
     {
       "kind": "depth",
       "output": "dione-water-ice.tif",
-      "sha256": "e58c7acfa469ac606b8cf4db2133dc2d9ad0b29edb37030beafb89f8480abf54",
       "bytes": 142499,
       "noData": -9999,
       "missingPixels": 1020

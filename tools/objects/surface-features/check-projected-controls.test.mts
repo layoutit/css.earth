@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
@@ -52,7 +53,7 @@ test('checks input bytes before decoding the native image', async () => {
   try {
     const recipe = { schema: 'cssearth-projected-controls@1', coordinateConvention: 'planetocentric-east-positive-z-north', purpose: 'diagnostic-only', source: 'test source', limitations: 'test only', controls: [control('a', 0, 0)], image: { file: 'native.fits', format: 'fits-primary', pixelConvention: 'zero-based-x-right-y-down-reversed-fits-rows', width: 100, height: 100, bytes: 3, sha256: '0'.repeat(64) } };
     await writeFile(join(directory, 'native.fits'), 'abc'); await writeFile(join(directory, 'recipe.json'), JSON.stringify(recipe));
-    await assert.rejects(checkProjectedControlRecipe(join(directory, 'recipe.json'), directory, join(directory, 'result')), /Pinned input changed/);
+    await assert.rejects(checkProjectedControlRecipe(join(directory, 'recipe.json'), directory, join(directory, 'result')));
     recipe.image.file = '../native.fits'; await writeFile(join(directory, 'recipe.json'), JSON.stringify(recipe));
     await assert.rejects(checkProjectedControlRecipe(join(directory, 'recipe.json'), directory, join(directory, 'result')), /filename in the input directory/);
   } finally { await rm(directory, { recursive: true }); }

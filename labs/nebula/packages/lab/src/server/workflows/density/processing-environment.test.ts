@@ -4,16 +4,15 @@ import { test } from 'node:test';
 import { readProcessingEnvironmentRecipe } from './processing-environment.ts';
 
 const source = { schema: 'cssearth-nebula-bake@1', environment: { pythonVersions: ['3.11'], packages: ['numpy==1.26.4'] },
-  removal: { model: { path: '.local/open-star-removal/model.pb', sha256: 'a'.repeat(64), url: 'https://example.org/model.pb' } } };
+  removal: { model: { path: '.local/open-star-removal/model.pb', url: 'https://example.org/model.pb' } } };
 test('processing setup reads the canonical package and NOX pins without object asset dependencies', async () => {
   const recipe = readProcessingEnvironmentRecipe(JSON.parse(await readFile('labs/nebula/models/lmc/bake.json', 'utf8')));
   assert.deepEqual(recipe.environment.pythonVersions, ['3.9', '3.10', '3.11', '3.12']);
   assert.ok(recipe.environment.packages.includes('tensorflow==2.16.2'));
-  assert.equal(recipe.removal.model.sha256, 'd54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546');
   assert.deepEqual(readProcessingEnvironmentRecipe(source), { environment: source.environment, removal: source.removal });
 });
 test('processing setup rejects missing pins, unsupported Python and unpinned package specifications', () => {
-  for (const model of [null, { ...source.removal.model, sha256: undefined }, { ...source.removal.model, path: '.local/open-star-removal/../outside.pb' },
+  for (const model of [null, { ...source.removal.model, path: '.local/open-star-removal/../outside.pb' },
     { ...source.removal.model, url: 'http://example.org/model.pb' }])
     assert.throws(() => readProcessingEnvironmentRecipe({ ...source, removal: { model } }));
   for (const environment of [{ ...source.environment, pythonVersions: ['3.13'] }, { ...source.environment, packages: ['numpy>=1'] },

@@ -7,24 +7,19 @@
     "labs/nebula/models/smc/full-density"
   ],
   "catalogue": {
-    "path": "labs/nebula/models/image-candidates.json",
-    "sha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583"
+    "path": "labs/nebula/models/image-candidates.json"
   },
   "separationPlan": {
-    "path": "labs/nebula/models/lmc/star-separation/plan.json",
-    "sha256": "8efdd86661ba8e9bdb2123bec253c1224f8256b6dfa2e1af3d68c37e97dcf498"
+    "path": "labs/nebula/models/lmc/star-separation/plan.json"
   },
   "stars": {
-    "path": "labs/nebula/models/lmc/stars/prepared/stars.json",
-    "sha256": "533b2fc01c71ce258e4bb5d5d4d3799ce80bb4ea65dfe7b3d9c9529feda89922"
+    "path": "labs/nebula/models/lmc/stars/prepared/stars.json"
   },
   "starAlignment": {
-    "path": "labs/nebula/models/lmc/stars/source/alignment.json",
-    "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
+    "path": "labs/nebula/models/lmc/stars/source/alignment.json"
   },
   "promotion": {
-    "path": "labs/nebula/models/lmc/app-lenses.json",
-    "sha256": "28ac14bbe85c93c834bd3b606f8f6a7f712ea80adab319bd855ecdd3a4ac32e6"
+    "path": "labs/nebula/models/lmc/app-lenses.json"
   },
   "environment": {
     "pythonVersions": [
@@ -43,16 +38,13 @@
   "removal": {
     "method": "nox-positive-union-with-saved-baseline",
     "script": {
-      "path": "labs/nebula/src/star-removal/star-removal.py",
-      "sha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": "labs/nebula/src/star-removal/star-removal.py"
     },
     "baselineScript": {
-      "path": "labs/nebula/src/star-removal/star-separation.py",
-      "sha256": "0dfaa6eb36a60fb1543233f660430a312b2a766104692bbd77f840eaff18b96e"
+      "path": "labs/nebula/src/star-removal/star-separation.py"
     },
     "model": {
       "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546",
       "url": "https://github.com/charvey2718/nox/releases/download/v1.1.0/noxGeneratorColor.pb"
     },
     "tilePixels": 512,
@@ -83,8 +75,7 @@
         "detailScale": 24,
         "brightness": 0.85,
         "gamma": 0.9
-      },
-      "baselineSha256": "12bc69a795b0b04c06ed68f98573b42bf7433b7c97e53d78196245ae91fc74b1"
+      }
     },
     {
       "imageId": "horalek-widefield",
@@ -103,8 +94,7 @@
         "detailScale": 96,
         "brightness": 1.3,
         "gamma": 1.3
-      },
-      "baselineSha256": "fd86857dac0755ebd420a48b0b2f37d6ad413f10961850760d3c8abf01ac8cc6"
+      }
     },
     {
       "imageId": "wise-wide-infrared",
@@ -123,12 +113,10 @@
         "detailScale": 24,
         "brightness": 1,
         "gamma": 1
-      },
-      "baselineSha256": "1044f3f7f8f6678ee9b75e28d5f4299fda068edc3c0af705be03b8655f2f4b56"
+      }
     }
   ],
   "starCalibration": {
-    "path": "labs/nebula/models/lmc/stars/source/catalogue.json",
-    "sha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8"
+    "path": "labs/nebula/models/lmc/stars/source/catalogue.json"
   }
 }

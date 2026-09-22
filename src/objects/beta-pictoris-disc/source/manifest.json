@@ -23,9 +23,7 @@
       "displayCredit": "NASA/ESA HST, Ren et al. 2023 (CDS)",
       "acquisition": "Downloaded unchanged from the CDS FTP archive of VizieR J/A+A/672/A114 (fits/Beta_Pic_STIS.fits) and pinned by digest in this recipe.",
       "license": "Data deposited at CDS under the VizieR catalogue J/A+A/672/A114; free for scientific use with the reference cited (Ren et al. 2023, A&A 672, A114).",
-      "lensId": "visible",
-      "expectedSha256": "d67e6f3ca3d5031c955ec2c5a75268f776c5b8df96584f54e274b171fe4067e5",
-      "expectedBytes": 227520
+      "lensId": "visible"
     },
     {
       "id": "contrast-f410m",
@@ -48,9 +46,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw04758-c1002_t001_nircam_f410m-maskrnd-sub320a335r_i2d.fits (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/beta-pictoris-4758.json.",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "contrast",
-      "expectedSha256": "e2390f5a10e6ce5a658e2abb3b0d2d1cb34e89904b93023693be93dea78df2d1",
-      "expectedBytes": 42382080
+      "lensId": "contrast"
     },
     {
       "id": "contrast-f210m",
@@ -73,9 +69,7 @@
       "displayCredit": "NASA/ESA/CSA JWST, MAST",
       "acquisition": "Downloaded unchanged from MAST by its URI mast:JWST/product/jw04758-c1002_t001_nircam_f210m-maskrnd-sub320a335r_i2d.fits (tools/objects/astronomy-packages/mast.mts mastFile), the pipeline's own calwebb_coron3 product of the association pinned in tools/objects/jwst/imaging/programs/beta-pictoris-4758.json.",
       "license": "JWST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "contrast",
-      "expectedSha256": "da30c8d65230ba0bbca70213d464aa60732546b690f2f3a0619745b64db68381",
-      "expectedBytes": 42382080
+      "lensId": "contrast"
     },
     {
       "id": "colour-f435w-roll1",
@@ -98,9 +92,7 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "colour",
-      "expectedSha256": "718dbab23e402848968acb25779935ef12f6461ea5efc4551f360a7b29e7468b",
-      "expectedBytes": 17507520
+      "lensId": "colour"
     },
     {
       "id": "colour-f435w-roll2",
@@ -123,9 +115,7 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "colour",
-      "expectedSha256": "2432198ba4ebbbde4704c943fab093ca96d992fa0457701a435e9c3d86a6108f",
-      "expectedBytes": 14402880
+      "lensId": "colour"
     },
     {
       "id": "colour-f606w-roll1",
@@ -148,9 +138,7 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "colour",
-      "expectedSha256": "9b1db256a6a6f96208a469baf5d9ab77686ed077b7fc1d78e6bb5eaba48b8d1a",
-      "expectedBytes": 17507520
+      "lensId": "colour"
     },
     {
       "id": "colour-f606w-roll2",
@@ -173,9 +161,7 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "colour",
-      "expectedSha256": "78fc1611be1de128b04a675648f0494c272a837898255df89585bc3b6b159a3b",
-      "expectedBytes": 14402880
+      "lensId": "colour"
     },
     {
       "id": "colour-f814w-roll1",
@@ -198,9 +184,7 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "colour",
-      "expectedSha256": "8707cc2f880231e9391d13f13f2ab868fdbe963b9023d140c38bb73262a973ce",
-      "expectedBytes": 17507520
+      "lensId": "colour"
     },
     {
       "id": "colour-f814w-roll2",
@@ -223,17 +207,13 @@
       "displayCredit": "NASA/ESA HST, MAST",
       "acquisition": "Made here: node tools/objects/hst/psf-subtract.mts beta-pictoris-9987 .local/beta-pictoris-disc/hst recalibrates the raw exposures pinned in tools/objects/hst/programs/beta-pictoris-9987.json with calacs, subtracts the reference star as tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json states, and drizzles the result north up; its product record is beside it.",
       "license": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
-      "lensId": "colour",
-      "expectedSha256": "39698541190011103166592c3a06e8fe10617ff41c41a93f64566aad6fa8f074",
-      "expectedBytes": 14402880
+      "lensId": "colour"
     }
   ],
   "documents": [
     {
       "id": "circumstellar-json",
       "path": "src/objects/beta-pictoris-disc/source/circumstellar.json",
-      "expectedSha256": "5a974826716df6ac8689c8dc03f775dd40acc5e907be159fa71480b02b779678",
-      "expectedBytes": 21469,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned recipe: the lenses, their pinned program and bands, the stated conventions and the published geometry each is checked against."
@@ -242,8 +222,6 @@
     {
       "id": "delivery-json",
       "path": "src/objects/beta-pictoris-disc/source/delivery.json",
-      "expectedSha256": "127142d234cd012af0a98b7eb7ba6de30a57a76e0cc5298318a36ecd5dbf508d",
-      "expectedBytes": 3145,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
@@ -252,8 +230,6 @@
     {
       "id": "presentation-json",
       "path": "src/objects/beta-pictoris-disc/source/presentation.json",
-      "expectedSha256": "d1914d103530cac0292172942206799823be96cf4fbd11506f142f1127ec7c93",
-      "expectedBytes": 10224,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
@@ -262,8 +238,6 @@
     {
       "id": "provenance-json",
       "path": "src/objects/beta-pictoris-disc/source/provenance.json",
-      "expectedSha256": "05ae072725f58c5b1fcc05f39eecb79ebd38c449e6a709c26657bc44f0aecb05",
-      "expectedBytes": 82702,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or provenance record written by the author; the published inputs it cites are bound above."
@@ -274,8 +248,6 @@
     {
       "id": "density-visible-ktx2",
       "path": "src/objects/beta-pictoris-disc/source/density-visible.ktx2",
-      "expectedSha256": "e212977a3b8c8bdc0b7a48482733d09e6ecdb583e30740282b6f12f1db23eefd",
-      "expectedBytes": 287058,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -284,8 +256,6 @@
     {
       "id": "volume-visible-json",
       "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
-      "expectedSha256": "047c9166273edbcf96b64c8315015ec4c57704bdc45a9b8ff2f7577035a1d435",
-      "expectedBytes": 1680,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -294,8 +264,6 @@
     {
       "id": "previews-visible-png",
       "path": "src/objects/beta-pictoris-disc/source/previews/visible.png",
-      "expectedSha256": "87e1f642660c55a774dc3e62a97d49cb771d80f6098c11031b16f099b8afd3b0",
-      "expectedBytes": 11180,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -304,8 +272,6 @@
     {
       "id": "density-contrast-ktx2",
       "path": "src/objects/beta-pictoris-disc/source/density-contrast.ktx2",
-      "expectedSha256": "adbc47ccd93f8971b3ddc0d6586534465de2b703c54a3c5c2fd2ddff6dc44394",
-      "expectedBytes": 327707,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -314,8 +280,6 @@
     {
       "id": "volume-contrast-json",
       "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json",
-      "expectedSha256": "d654229030198f7db82ca0638e071158b5a0c70dfda7e6355a95bc8fa60bd333",
-      "expectedBytes": 1681,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -324,8 +288,6 @@
     {
       "id": "previews-contrast-png",
       "path": "src/objects/beta-pictoris-disc/source/previews/contrast.png",
-      "expectedSha256": "7abd538758e526049bdd00c42913dde51e16a8cb4011605543a4ae3a7fd9d872",
-      "expectedBytes": 14488,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -334,8 +296,6 @@
     {
       "id": "density-colour-ktx2",
       "path": "src/objects/beta-pictoris-disc/source/density-colour.ktx2",
-      "expectedSha256": "45d5d304f0ad4901d3f5d8614266726faf84cb7f849d1ade0b0be57e5aa47c61",
-      "expectedBytes": 1554371,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -344,8 +304,6 @@
     {
       "id": "volume-colour-json",
       "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
-      "expectedSha256": "822d14231379ba0a1c7405fd755feea95c56e272103efc1ab7e4717448ce3f4c",
-      "expectedBytes": 1678,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."
@@ -354,8 +312,6 @@
     {
       "id": "previews-colour-png",
       "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
-      "expectedSha256": "85d12f68b5d40ce80da37a108565772d2238763d0e95d27ece324a21be8286cf",
-      "expectedBytes": 58940,
       "sourceBinding": {
         "kind": "local",
         "reason": "Written by tools/objects/circumstellar/author.mts from the mosaics bound above and the recipe circumstellar.json."

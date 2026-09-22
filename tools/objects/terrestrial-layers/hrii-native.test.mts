@@ -1,9 +1,10 @@
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
 import {array,boolean,nullable,number,shape,text} from './source-records.mts';
 import {decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spectra.mts';
-const parse=shape({method:text,cases:array(shape({body:text,path:text,sha256:text,detectorRow:number,incidenceCosine:number,heliocentricDistanceAu:number,
+const parse=shape({method:text,cases:array(shape({body:text,path:text,detectorRow:number,incidenceCosine:number,heliocentricDistanceAu:number,
  reference:shape({temperatureKelvin:number,slopePercentPer100Nm:number}),samples:array(shape({wavelengthMicrons:number,radiance:nullable(number),valid:boolean}))}))});
 const fixture=parse(JSON.parse(readFileSync(new URL('../../../tests/objects/fixtures/comets/hrii-native-reference.json',import.meta.url),'utf8')));
 for(const c of fixture.cases)test(`${c.body} native ${c.path.split('/').at(-1)} row ${c.detectorRow}: independent Astropy/SciPy fit`,()=>{
@@ -18,7 +19,6 @@ for(const c of fixture.cases)test(`${c.body} row ${c.detectorRow}: native FITS c
  const {createHash}=await import('node:crypto'),{decodeHriiSpectra}=await import('./hrii-spectra.mts');
  assert.ok(['comet-9p','comet-103p'].includes(c.body)&&/^science\/hrii\/hi[0-9_]+_r{1,2}\.fit$/.test(c.path));
  const bytes=readFileSync(new URL(`../../../src/objects/${c.body}/source/${c.path}`,import.meta.url));
- assert.equal(createHash('sha256').update(bytes).digest('hex'),c.sha256);
  const spectrum=decodeHriiSpectra(bytes),actual=[];
  for(let k=0;k<spectrum.width;k++){
   const i=c.detectorRow*spectrum.width+k,wavelengthMicrons=spectrum.wavelength[i];

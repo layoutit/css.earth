@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { minimapPointRange } from '../minimap/point-range.mts';
 import prepared from '../minimap/prepared.json' with { type: 'json' };

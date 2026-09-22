@@ -3,7 +3,6 @@
   "target": "Ganymede",
   "source": {
     "path": "composition/fit_SPHERE.json.gz",
-    "sha256": "cd7843ce36dcf64782907b29c34b7bfb61937288ffb99fd3ee38e2369261c8e4",
     "bytes": 8845543,
     "metadata": {
       "reference": "Oliver King & Leigh Fletcher (2022) Global MCMC Modelling of Ganymede's Surface Composition: Near-IR Mapping from VLT/SPHERE",
@@ -49,8 +48,7 @@
       "missingNativeNodes": 26327,
       "minimum": 0.10208,
       "maximum": 0.52761,
-      "outputBytes": 260920,
-      "outputSha256": "b614ac1e22a9d2d4a3f87b3975718c2d988966eab1a807a2fb091b8aaa65b9d5"
+      "outputBytes": 260920
     },
     "dark-material": {
       "selection": {
@@ -63,8 +61,7 @@
       "missingNativeNodes": 26327,
       "minimum": 0.03292,
       "maximum": 0.66811,
-      "outputBytes": 260920,
-      "outputSha256": "aaf6961e48c6125a804338b6930609ae834a586e7d1f05f1bc934cd094109d3a"
+      "outputBytes": 260920
     },
     "ice-uncertainty": {
       "selection": {
@@ -77,8 +74,7 @@
       "missingNativeNodes": 26327,
       "minimum": 0.058670000000000014,
       "maximum": 0.14076999999999998,
-      "outputBytes": 260920,
-      "outputSha256": "84bb23bfca177af451d1165f85e9abf4889bd3144ba0ff0cd334e1a64acbe776"
+      "outputBytes": 260920
     },
     "dark-uncertainty": {
       "selection": {
@@ -91,8 +87,7 @@
       "missingNativeNodes": 26327,
       "minimum": 0.04585,
       "maximum": 0.15879,
-      "outputBytes": 260920,
-      "outputSha256": "4fb42e921b4f530359be2f795113d3d2863244daa3f6d679454e7d53923baad9"
+      "outputBytes": 260920
     }
   }
 }

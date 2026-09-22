@@ -2,8 +2,6 @@
   "schema": "cssce-tauri-authoritative-sources@2",
   "inputs": [
     {
-      "expectedBytes": 17280,
-      "expectedSha256": "1df61d1032da8c02f5657e676e43d9afef75e95b9e4bd533d3033737571fd46a",
       "id": "cds-nov-avg",
       "path": "observations/nov_avg.fit",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_avg.fit",
@@ -41,8 +39,6 @@
       "label": "PIONIER image, November 2016"
     },
     {
-      "expectedBytes": 11520,
-      "expectedSha256": "3023df2e057335b82941d5d327f5fb07d424b16c89f31099c52e3cd20153581a",
       "id": "cds-dec-avg",
       "path": "observations/dec_avg.fit",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_avg.fit",
@@ -80,8 +76,6 @@
       "label": "PIONIER image, December 2016"
     },
     {
-      "expectedBytes": 17280,
-      "expectedSha256": "e7f0618e260eba075c4d6cb24341935fe931047179a8a94f7a2b2a5bfbe06e28",
       "id": "cds-nov-err",
       "path": "observations/nov_err.fit",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/nov_err.fit",
@@ -117,8 +111,6 @@
       }
     },
     {
-      "expectedBytes": 17280,
-      "expectedSha256": "7b40c54fc16908ed7cb9d626d4be42b58c90048167035f2979d8937c896760d8",
       "id": "cds-dec-err",
       "path": "observations/dec_err.fit",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/J/A+A/614/A12/fits/dec_err.fit",
@@ -154,8 +146,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "3c1d483bf0bbc2a4af8113e7d2e3a8c883d6f084a1d9286069760782191fc5de",
       "id": "pionier-2016-11-14t041639",
       "path": "observations/oifits/PIONI.2016-11-14T04:16:39.727_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-14T04:16:39.727_oidataCalibrated.fits",
@@ -189,8 +179,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "e76970cb69b555d531a2816c23e0d5a19b77ac77f4cb9fb5cc7ad93309e7a67e",
       "id": "pionier-2016-11-14t044112",
       "path": "observations/oifits/PIONI.2016-11-14T04:41:12.399_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-14T04:41:12.399_oidataCalibrated.fits",
@@ -224,8 +212,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "74f92e9c6b7b0f75199f3af44763a7504f009b11988925f47598b48e69027702",
       "id": "pionier-2016-11-22t045647",
       "path": "observations/oifits/PIONI.2016-11-22T04:56:47.075_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T04:56:47.075_oidataCalibrated.fits",
@@ -259,8 +245,6 @@
       }
     },
     {
-      "expectedBytes": 89280,
-      "expectedSha256": "79b48b7527fde43c642244f62411672791e20a26d4576d8c99f7fb9eb39c41f2",
       "id": "pionier-2016-11-22t050410",
       "path": "observations/oifits/PIONI.2016-11-22T05:04:10.459_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T05:04:10.459_oidataCalibrated.fits",
@@ -294,8 +278,6 @@
       }
     },
     {
-      "expectedBytes": 89280,
-      "expectedSha256": "ea2691f60322891ce045ffa186f632d08230658c953911b211f8ea94d5b5728d",
       "id": "pionier-2016-11-22t052236",
       "path": "observations/oifits/PIONI.2016-11-22T05:22:36.318_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T05:22:36.318_oidataCalibrated.fits",
@@ -329,8 +311,6 @@
       }
     },
     {
-      "expectedBytes": 89280,
-      "expectedSha256": "727f3ef61abf6dda21d9d275c420a7f4892fc17a9649d37353ac6f21547e9349",
       "id": "pionier-2016-11-22t054253",
       "path": "observations/oifits/PIONI.2016-11-22T05:42:53.491_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T05:42:53.491_oidataCalibrated.fits",
@@ -364,8 +344,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "12281ca232e749f657bcb4bb040c298760b56150d670b97c9faff47f81d4893f",
       "id": "pionier-2016-11-22t061410",
       "path": "observations/oifits/PIONI.2016-11-22T06:14:10.421_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T06:14:10.421_oidataCalibrated.fits",
@@ -399,8 +377,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "257f0ac107621056a624363d20eb37839f5d3a7770440a2a63a1152834e0c680",
       "id": "pionier-2016-11-22t064219",
       "path": "observations/oifits/PIONI.2016-11-22T06:42:19.844_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-11-22T06:42:19.844_oidataCalibrated.fits",
@@ -434,8 +410,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "3f29b699fb8501c8da33574809a1a8a86e8a8f74e79e4517c135b770dbad81d9",
       "id": "pionier-2016-12-19t031021",
       "path": "observations/oifits/PIONI.2016-12-19T03:10:21.862_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-19T03:10:21.862_oidataCalibrated.fits",
@@ -469,8 +443,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "426f8751a904732e9231178936ea397409390d2b5123b094e86a77d89bed080a",
       "id": "pionier-2016-12-22t034823",
       "path": "observations/oifits/PIONI.2016-12-22T03:48:23.776_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-22T03:48:23.776_oidataCalibrated.fits",
@@ -504,8 +476,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "6a22e8a6f8964ccbcdb361a59bbb323502d23ad4b4a63a83785e01a06bfad77d",
       "id": "pionier-2016-12-22t041033",
       "path": "observations/oifits/PIONI.2016-12-22T04:10:33.991_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-22T04:10:33.991_oidataCalibrated.fits",
@@ -539,8 +509,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "e0a6d739f88c43e64a228bdb08658225e96e96f559eb48683779cef67c32b5d5",
       "id": "pionier-2016-12-23t034322",
       "path": "observations/oifits/PIONI.2016-12-23T03:43:22.035_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T03:43:22.035_oidataCalibrated.fits",
@@ -574,8 +542,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "3a11ed9596b28625960b5e598e6da1fcafa5173f440a40e9262d41d11ee0754f",
       "id": "pionier-2016-12-23t040616",
       "path": "observations/oifits/PIONI.2016-12-23T04:06:16.023_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T04:06:16.023_oidataCalibrated.fits",
@@ -609,8 +575,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "d734729b0e9f46b560005614f8908eb9e4c0e3b291c6832e26f33d5d37ae72f9",
       "id": "pionier-2016-12-23t044355",
       "path": "observations/oifits/PIONI.2016-12-23T04:43:55.020_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T04:43:55.020_oidataCalibrated.fits",
@@ -644,8 +608,6 @@
       }
     },
     {
-      "expectedBytes": 86400,
-      "expectedSha256": "dc3b183a2d8a33d96ca286fc6118c1ec6e8db2486368b5ca8765f60ae9092403",
       "id": "pionier-2016-12-23t050722",
       "path": "observations/oifits/PIONI.2016-12-23T05:07:22.365_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2016-12-23T05:07:22.365_oidataCalibrated.fits",
@@ -679,8 +641,6 @@
       }
     },
     {
-      "expectedBytes": 89280,
-      "expectedSha256": "d3c0f5c51934406c8d9a73b8785bd042a8a79e91e10f65dc47ad3b2b007f4e81",
       "id": "pionier-2017-02-25t010436",
       "path": "observations/oifits/PIONI.2017-02-25T01:04:36.863_oidataCalibrated.fits",
       "origin": "https://apps.jmmc.fr/oidata/pionier/PIONI.2017-02-25T01:04:36.863_oidataCalibrated.fits",
@@ -751,8 +711,6 @@
       }
     },
     {
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
@@ -862,8 +820,6 @@
     {
       "id": "ce-tauri-burnashev-1985",
       "path": "photometry/III_126_part2.dat.gz",
-      "expectedBytes": 506596,
-      "expectedSha256": "b031729b448d64e34a2801e208e7f22254cfe03a32ea8b9b5dc1dfac329d4d10",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/126/part2.dat.gz",
       "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -944,8 +900,6 @@
     {
       "id": "ce-tauri-crosscheck-spectrum",
       "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10196,
-      "expectedSha256": "3b31d407de7e7f3355ad9df89e69c9c5114861e2b0010292fe2137d51a9d0488",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=3400796031719045632&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",

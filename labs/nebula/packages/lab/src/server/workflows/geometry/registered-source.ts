@@ -12,11 +12,8 @@ export async function readGeometryLocal(root: string, path: string): Promise<Buf
   if (offset.startsWith('../') || offset === '..' || isAbsolute(offset)) throw new TypeError('Registered resource leaves the repository.');
   return readFile(actual);
 }
-export async function readGeometryPin(root: string, pin: { path: string; sha256: string }): Promise<Buffer> {
-  if (!geometryHash(pin.sha256)) throw new TypeError('Registered resource requires a content hash.');
-  const bytes = await readGeometryLocal(root, pin.path);
-  if (geometrySha(bytes) !== pin.sha256) throw new TypeError(`Registered resource changed: ${pin.path}`);
-  return bytes;
+export async function readGeometryPin(root: string, pin: { path: string }): Promise<Buffer> {
+  return readGeometryLocal(root, pin.path);
 }
 export async function readRegisteredGeometrySource(root: string, cataloguePath: string, imageId: string) {
   const registry: unknown = JSON.parse(await readFile(resolve(root, 'labs/nebula/packages/lab/src/state/subjects.json'), 'utf8'));
@@ -25,7 +22,7 @@ export async function readRegisteredGeometrySource(root: string, cataloguePath: 
   const catalogue = readStructureCatalogue(JSON.parse((await readGeometryLocal(root, cataloguePath)).toString()));
   const image = catalogue.images.find(candidate => candidate.id === imageId);
   if (!image) throw new TypeError('The registered source is no longer in this catalogue.');
-  const raw: unknown = JSON.parse((await readGeometryPin(root, { path: `${image.directory}/map.json`, sha256: image.mapSha256 })).toString());
+  const raw: unknown = JSON.parse((await readGeometryPin(root, { path: `${image.directory}/map.json` })).toString());
   readReviewMap(raw, image);
   if (!record(raw) || !Array.isArray(raw.panels)) throw new TypeError('Registered source panel is missing.');
   const panel = raw.panels.find(item => record(item) && item.id === 'source');

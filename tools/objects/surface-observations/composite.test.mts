@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import type { FootprintSample, ObservationFrame } from './contract.mts';
 import { bandSetFrame, stripFrame, type Strip } from './composite.mts';
 

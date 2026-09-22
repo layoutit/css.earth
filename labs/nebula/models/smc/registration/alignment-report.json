@@ -7,7 +7,6 @@
       "id": "smc-vista",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/eso1714a.jpg",
-      "sourceSha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
       "geometry": {
         "kind": "matched-star-homography",
         "registration": {
@@ -41,22 +40,20 @@
             -0.5057859582721508,
             0.9350580472165388,
             1035.016905606283,
-            4.410272152398216e-06,
-            -6.593072039439585e-07,
+            0.000004410272152398216,
+            -6.593072039439585e-7,
             1
           ]
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/vista-direction-gate.json",
-        "sha256": "81b54d81b466ec327d32fe816adca4430bacdeda1bfe2ad6546ef99f2bd67662"
+        "path": "labs/nebula/models/smc/registration/vista-direction-gate.json"
       }
     },
     {
       "id": "smc-smash",
       "pass": true,
       "sourcePath": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-      "sourceSha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
       "geometry": {
         "kind": "fixed-publisher-wcs",
         "wcs": {
@@ -82,15 +79,13 @@
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/smash-direction-gate.json",
-        "sha256": "4304f6ee358059fb19715f37801b26dd390612b07c0840ec71915fd0c3e273b0"
+        "path": "labs/nebula/models/smc/registration/smash-direction-gate.json"
       }
     },
     {
       "id": "smc-dss2",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/heic0514c.jpg",
-      "sourceSha256": "6a6bd606a4cc2bbb8402af6a4fb258bc697263cb36c950a5ed200ec3716d3413",
       "geometry": {
         "kind": "matched-star-homography",
         "registration": {
@@ -124,22 +119,20 @@
             0.11134315940155647,
             -0.17080814314015258,
             1987.5744879190129,
-            -5.123940971180359e-08,
-            3.968688950516895e-08,
+            -5.123940971180359e-8,
+            3.968688950516895e-8,
             1
           ]
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/dss2-direction-gate.json",
-        "sha256": "a6ea1e52244bd1a576d10ba3d99ebe02d6e692ffab06675b3dea5aa0db01b5ea"
+        "path": "labs/nebula/models/smc/registration/dss2-direction-gate.json"
       }
     },
     {
       "id": "smc-allwise-wide",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
-      "sourceSha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
       "geometry": {
         "kind": "fixed-publisher-wcs",
         "wcs": {
@@ -165,15 +158,13 @@
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/allwise-catalogue-direction-gate.json",
-        "sha256": "ab71a172ce2ddbe3add8a585811ce417c2e74817c663216de5434c2fcdb565cd"
+        "path": "labs/nebula/models/smc/registration/allwise-catalogue-direction-gate.json"
       }
     },
     {
       "id": "smc-horalek-wide",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
-      "sourceSha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
       "geometry": {
         "kind": "matched-star-homography",
         "registration": {
@@ -205,29 +196,26 @@
             1.0675521440565587,
             -0.2616902746948353,
             -1199.962907109041,
-            1.3831792413558168e-08,
-            -9.878774783541113e-08,
-            1.0
+            1.3831792413558168e-8,
+            -9.878774783541113e-8,
+            1
           ]
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/horalek-vista-direction-gate.json",
-        "sha256": "0e2e6e8b9749d89500ae1778973036a4379b3451065fcfa4d6675c890c53fd48"
+        "path": "labs/nebula/models/smc/registration/horalek-vista-direction-gate.json"
       },
       "limitations": [
-        "Relative chain Hor\u00e1lek \u2192 VISTA \u2192 SMASH. Outer field outside matched hull extrapolated. No absolute catalogue verification."
+        "Relative chain Horálek → VISTA → SMASH. Outer field outside matched hull extrapolated. No absolute catalogue verification."
       ],
       "referenceGate": {
-        "path": "labs/nebula/models/smc/registration/vista-direction-gate.json",
-        "sha256": "81b54d81b466ec327d32fe816adca4430bacdeda1bfe2ad6546ef99f2bd67662"
+        "path": "labs/nebula/models/smc/registration/vista-direction-gate.json"
       }
     },
     {
       "id": "smc-dss2-fits",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/sky-bands/smc-dss2-fits.108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93.png",
-      "sourceSha256": "108a18706e10250d58c539057b854568b963045de65c473974234e2b45862e93",
       "geometry": {
         "kind": "fixed-publisher-wcs",
         "wcs": {
@@ -253,8 +241,7 @@
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/smc-dss2-fits-catalogue-gate.json",
-        "sha256": "3b9f8b84587eca12224870fbde6a3d1244f98dff1adb10962e68ebd35c8a84a1"
+        "path": "labs/nebula/models/smc/registration/smc-dss2-fits-catalogue-gate.json"
       },
       "limitations": [
         "Exact hips2fits TAN request grid, checked against AllWISE catalogue stars in the DSS2 blue plate channel. Relative photographic units.",
@@ -265,7 +252,6 @@
       "id": "smc-wise-stellar",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc.png",
-      "sourceSha256": "a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc",
       "geometry": {
         "kind": "fixed-publisher-wcs",
         "wcs": {
@@ -291,8 +277,7 @@
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/smc-wise-stellar-catalogue-gate.json",
-        "sha256": "f5193b538703a503bbc43909ca2ded38629aede0c1893376c669943c1b03e583"
+        "path": "labs/nebula/models/smc/registration/smc-wise-stellar-catalogue-gate.json"
       },
       "limitations": [
         "Exact TAN request grid of the atlas mosaic, checked against AllWISE catalogue stars in its own W1 channel. Catalogue and image share the AllWISE mission."
@@ -302,7 +287,6 @@
       "id": "smc-wise-starforming",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-starforming.a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1.png",
-      "sourceSha256": "a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1",
       "geometry": {
         "kind": "fixed-publisher-wcs",
         "wcs": {
@@ -328,8 +312,7 @@
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/smc-wise-starforming-catalogue-gate.json",
-        "sha256": "306b11009587a8f58b6e290ac22eafd5929373a14f11152384ba8c4aec00221c"
+        "path": "labs/nebula/models/smc/registration/smc-wise-starforming-catalogue-gate.json"
       },
       "limitations": [
         "Exact TAN request grid of the atlas mosaic, checked against AllWISE catalogue stars in its W1 channel. Compact 12 and 22 micron knots are dust, not stars."
@@ -339,7 +322,6 @@
       "id": "smc-herschel-dust",
       "pass": true,
       "sourcePath": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e.png",
-      "sourceSha256": "d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e",
       "geometry": {
         "kind": "fixed-publisher-wcs",
         "wcs": {
@@ -365,8 +347,7 @@
         }
       },
       "gate": {
-        "path": "labs/nebula/models/smc/registration/smc-herschel-dust-grid-transfer.json",
-        "sha256": "55c80ec44ed33c9569e054a3db4fdb012433211ffd760a18fe755025f85e8ba9"
+        "path": "labs/nebula/models/smc/registration/smc-herschel-dust-grid-transfer.json"
       },
       "limitations": [
         "Same-grid transfer: the identical TAN request grid is qualified by the AllWISE W2/W1 composite catalogue gate. This map has too few stars for its own gate; its diagnostic receipt records that failure.",
@@ -374,8 +355,7 @@
         "Pixels outside the SPIRE footprint carry alpha 0 and are read as no coverage, not as zero emission."
       ],
       "referenceGate": {
-        "path": "labs/nebula/models/smc/registration/smc-wise-stellar-catalogue-gate.json",
-        "sha256": "f5193b538703a503bbc43909ca2ded38629aede0c1893376c669943c1b03e583"
+        "path": "labs/nebula/models/smc/registration/smc-wise-stellar-catalogue-gate.json"
       }
     }
   ],

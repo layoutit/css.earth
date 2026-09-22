@@ -195,7 +195,6 @@ const receiptProblem = (file: string, error: unknown) => { const said = error in
 /** The schemas this route's checks write. `reproduction` compares two object templates or two nod halves of one night;
  * `spectrum` is the extracted spectrum's own check of the same night's two halves. */
 export const NACO_RECEIPT_SCHEMAS = ['cssearth-naco-reproduction@1', 'cssearth-naco-spectrum@1'] as const;
-const DIGEST = /^[0-9a-f]{64}$/u;
 const TEMPLATE = /^\d{4}-\d{2}-\d{2}T/u;
 
 /** One receipt read against the program it claims: another schema, another night, a missing pin or fewer than two disjoint
@@ -214,14 +213,13 @@ export function checkReceipt(value: unknown, file: string, program: Record<strin
     if (requireString(row.night, `${file}: night`) !== requireString(program.night, `${id}: night`)) throw new TypeError(`${file}: it names the night ${String(row.night)}.`);
   }
   const sides = requireArray(spectrum ? row.halves : row.sequences, `${file}: the two sides it compared`).map(entry => {
-    const side = requireRecord(entry, `${file}: side`), sha256 = requireString(side.sha256, `${file}: side digest`);
-    if (!DIGEST.test(sha256)) throw new TypeError(`${file}: a side it compared states no sha256.`);
-    requireString(side.path, `${file}: side path`); requireFiniteNumber(side.bytes, `${file}: side bytes`);
+    const side = requireRecord(entry, `${file}: side`), path = requireString(side.path, `${file}: side path`);
+    requireFiniteNumber(side.bytes, `${file}: side bytes`);
     // An imaging receipt compares two of the night's own object templates; a nodded night's halves carry their own labels.
     const template = requireString(side[spectrum ? 'half' : 'template'], `${file}: side label`);
     if (TEMPLATE.test(template) && !requireArray(program.objectTemplates, `${id}: object templates`).includes(template))
       throw new TypeError(`${file}: it reduced the template ${template}, which ${id} does not pin.`);
-    return sha256;
+    return path;
   });
   if (sides.length < 2) throw new TypeError(`${file}: it compares ${sides.length} reduction(s), not two.`);
   if (new Set(sides).size !== sides.length) throw new TypeError(`${file}: the sides it compared are the same file.`);

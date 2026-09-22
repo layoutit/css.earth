@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { explorationDate, parseAgencies, parseCapture, parseExplorationCatalog as parse, validateCapture } from './exploration-catalog.mts';
 const agencies = parseAgencies({ NASA: { name: 'NASA', sourceUrl: 'https://www.nasa.gov/' } });
 import { parseSourceCatalog, sourceResolver } from './source-catalog.mts';

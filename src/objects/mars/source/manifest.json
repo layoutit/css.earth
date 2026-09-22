@@ -89,7 +89,6 @@
     {
       "id": "usgs-viking-mdim21-color",
       "path": "surface/mars-viking-mdim21-color-1km.jpg",
-      "expectedSha256": "fdfcd335559c3dc67052b7e8a9565d850e336ac0d1f3ea7f5eb7826ffb44ecb2",
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/7131d503-cdc9-45a5-8f83-5126c0fd397e/resource/5ea881c6-01b3-41fa-a7af-42d2131b54f1/download/mars_viking_mdim21_clrmosaic_1km.jpg",
       "credit": "USGS Astrogeology, NASA Ames, NASA Viking",
       "license": "NASA/PDS United States government data",
@@ -100,7 +99,6 @@
         "lenses",
         "scene"
       ],
-      "expectedBytes": 36708552,
       "capture": {
         "attributions": [
           {
@@ -156,9 +154,7 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
-      },
-      "expectedSha256": "bf5fd7f33a34262e36c8437f2b7f3acb5ac100d0efd016a4315a65bec55f2142",
-      "expectedBytes": 16209831
+      }
     },
     {
       "id": "usgs-themis-ir-day",
@@ -194,9 +190,7 @@
             "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
-      },
-      "expectedSha256": "1e9123a696231c456ab210be3d847b880599c7485abfe46af68cf1e7dfe5c61c",
-      "expectedBytes": 9711562
+      }
     },
     {
       "id": "nasa-psg-mars-configuration",
@@ -454,8 +448,6 @@
     {
       "id": "mars-msl-curiosity-traverse-path",
       "path": "features/traverses/msl_localized_pos.csv",
-      "expectedBytes": 349568,
-      "expectedSha256": "d456ce9025ca71673af8b9f72a78dc508f5d963cbac74fa68eeac88a4c7c3a3b",
       "origin": "https://pds-imaging.jpl.nasa.gov/data/msl/msl_places/data_localizations/",
       "credit": "NASA PDS",
       "license": "NASA PDS archive; NASA content not subject to copyright",
@@ -478,8 +470,6 @@
     {
       "id": "mars-m2020-perseverance-traverse-path",
       "path": "features/traverses/m2020_best_tactical.csv",
-      "expectedBytes": 171404,
-      "expectedSha256": "9da19e4f70287fe0d33ba716ff2169c10447c30c7a048583f730e4155226cde9",
       "origin": "https://pds-geosciences.wustl.edu/m2020/urn-nasa-pds-mars2020_rover_places/data_localizations/",
       "credit": "NASA PDS",
       "license": "NASA PDS archive; NASA content not subject to copyright",
@@ -532,8 +522,6 @@
     {
       "id": "pds-mro-sharad-3d-east-deuteronilus-plane-x0640",
       "path": "telescopes/mro-sharad-3d/slices/plane-x0640.dat",
-      "expectedBytes": 20448000,
-      "expectedSha256": "ac87f803be52929e80e32595df5c0a18d4852fe78a01cfb3e3a9119acecf49c1",
       "range": {
         "offset": 13086720000,
         "length": 20448000
@@ -616,8 +604,6 @@
     {
       "id": "pds-mro-sharad-3d-east-deuteronilus-observations",
       "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_observations.tab",
-      "expectedBytes": 4660,
-      "expectedSha256": "1acb1ff4790b05c62e37ee7e9724c959fb263b717b60436d5181a4eb35e62ea8",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/index/east_deuteronilus_mensae_3d_v2_observations.tab",
       "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
       "license": "NASA scientific data; archive citation requested",

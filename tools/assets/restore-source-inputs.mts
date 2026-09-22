@@ -3,12 +3,12 @@ import { hasErrorCode } from '../sources/source-values.mts';
 import { lstat, mkdtemp, readFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 
-import { basename, resolve } from "node:path";
+import { resolve } from "node:path";
 import { spawn } from "node:child_process";
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { publishSourceBytes } from '../../src/platform/source-acquisition.mts';
-import { sourceArray, sourceDigest, sourceObject, sourcePath, sourceText } from '../../src/platform/source-catalog.mts';
+import { sourceArray, sourceObject, sourcePath } from '../../src/platform/source-catalog.mts';
 import { fetchWithRetry, RUNTIME_ASSET_ORIGIN, sourceCacheUrl } from './source-mirror.mts';
 
 const projectRoot = resolve(import.meta.dirname, "../..");
@@ -44,32 +44,16 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
   for (const raw of entries) {
     const path = sourcePath(raw.path);
     if (path.startsWith('.local/')) continue;
-    // Since 185c3ae2b a tracked file carries no pin in these manifests: it arrives with the
-    // checkout, so there is nothing to fetch and no digest to verify it against.
-    if ((raw.expectedSha256 ?? raw.sha256) === undefined) continue;
-    const expectedSha256 = sourceDigest(raw.expectedSha256 ?? raw.sha256);
-    const expectedBytes = raw.expectedBytes ?? raw.bytes;
-    if (typeof expectedBytes !== 'number' || !Number.isSafeInteger(expectedBytes) || expectedBytes <= 0) {
-      throw new TypeError(`Invalid repository volume source size: ${id}/${path}.`);
-    }
+    // A tracked file arrives with the checkout; a download is fetched only while it is missing.
     const destination = resolve(projectRoot, path);
-    const existing = await readFile(destination).catch(error => {
-      if (hasErrorCode(error, 'ENOENT')) return undefined;
-      throw error;
-    });
-    if (existing) {
-      if (existing.length !== expectedBytes || sha256(existing) !== expectedSha256) {
-        throw new Error(`Repository volume source drifted: ${id}/${path}.`);
-      }
-      continue;
-    }
+    const present = await lstat(destination).then(() => true, error => { if (hasErrorCode(error, 'ENOENT')) return false; throw error; });
+    if (present) continue;
     const origin = typeof raw.origin === 'string' && raw.origin ? raw.origin : null;
+    if (!origin) throw new Error(`Repository volume source is missing and has no origin: ${id}/${path}.`);
     let lastError: unknown;
-    for (const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, expectedSha256, basename(path)), ...(origin ? [origin] : [])]) {
+    for (const url of [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, id, path), origin]) {
       try {
-        const bytes = await fetchWithRetry(fetch, url);
-        await publishSourceBytes({ destination, bytes, planetName: id,
-          entry: { path, expectedBytes, expectedSha256 } });
+        await publishSourceBytes({ destination, bytes: await fetchWithRetry(fetch, url) });
         lastError = undefined;
         break;
       } catch (error) { lastError = error; }
@@ -98,7 +82,7 @@ for (const id of ids) {
     const recipe = parseVolumeRecipe(JSON.parse(volumeRecipeBytes.toString('utf8')) as unknown);
     if (recipe.grid.acquisition) {
       try {
-        await verifiedBytes(volumeSource, recipe.grid);
+        await sourceBytes(volumeSource, recipe.grid);
       } catch (error) {
         if (!hasErrorCode(error, 'ENOENT')) throw error;
         const cache = await mkdtemp(resolve(tmpdir(), `cssearth-${id}-volume-`));
@@ -112,13 +96,9 @@ for (const id of ids) {
         const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
           import('../../src/preparation/sky/config.ts'), import('./setup.mts'), import('./runtime-assets.mts'),
         ]);
-        const skyRecipe = parseSkyRecipe(JSON.parse((await verifiedBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
+        const skyRecipe = parseSkyRecipe(JSON.parse((await sourceBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
         if (skyRecipe.stars) {
           const starDirectory = resolve(projectRoot, 'src/objects', skyRecipe.stars.object);
-          const descriptorBytes = await readFile(resolve(starDirectory, 'object.json'));
-          if (sha256(descriptorBytes) !== skyRecipe.stars.sha256) {
-            throw new TypeError(`Sky stars descriptor digest mismatch: ${skyRecipe.stars.object}`);
-          }
           const assets = await inventoryAssets(projectRoot, [skyRecipe.stars.object], { location: 'prepared' });
           const result = await installRuntimeAssets(assets);
           console.log(`${id}: ${skyRecipe.stars.object} prepared dependency restored (${result.installed} downloaded, ${result.reused} reused)`);

@@ -42,7 +42,7 @@ async function worker(id: string, source: string): Promise<void> {
   const bytes = await copy(path, acceptedInput.sha256);
   const value: unknown = JSON.parse(gunzipSync(bytes).toString());
   const model = record(value), expected = readCompilerBakeResult(model.scene);
-  if (expected.starSprites) await copy(expected.starSprites.profile.path, expected.starSprites.profile.sha256);
+  if (expected.starSprites) await copy(expected.starSprites.profile.path);
   if (id === 'm1') {
     assert.ok(Array.isArray(model.lenses));
     for (const item of [model.particles, ...model.lenses.map(lens => record(lens).points)]) {

@@ -75,35 +75,29 @@
   },
   "emissionField": {
     "path": "src/objects/lmc/source/compact/emission-field.json.gz",
-    "sha256": "7a784cf87ae41fd29462f0875d34e8e59e1f977dc6c11891a21249e02294300f",
     "bytes": 20704
   },
   "envelope": {
     "path": "src/objects/lmc/source/compact/envelope.json.gz",
-    "sha256": "17fd2ae3a4d0064413b6ca95e201dc251fb46dd683e2ae91fce498f27fe47744",
     "bytes": 347745
   },
   "neutralSlices": {
     "path": "src/objects/lmc/source/compact/neutral-slices.json.gz",
-    "sha256": "07ab47cf2311b11d7dcd630f83972d12b2fcb01fa44374a2757a6f8510c116f3",
     "bytes": 39903
   },
   "neutralTextures": "src/objects/lmc/source/compact/neutral",
   "priorCloud": {
     "identityPin": {
-      "path": "labs/nebula/models/lmc/full-density/source/volume.json",
-      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+      "path": "labs/nebula/models/lmc/full-density/source/volume.json"
     },
     "recipe": {
       "path": "src/objects/lmc/source/compact/prior/volume.json",
-      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
       "bytes": 1370
     }
   },
   "toneProjection": {
     "image": {
       "path": "src/objects/lmc/source/compact/fit-projection.png",
-      "sha256": "a1b45d96bb05ae4b1ac21c8f7ce4dafdb5ff85f2d22ffef2d0640924190ae626",
       "bytes": 58725
     },
     "width": 384,
@@ -121,7 +115,6 @@
   },
   "stars": {
     "path": "src/objects/lmc/source/compact/stars.json.gz",
-    "sha256": "90f168d68f06616fac6d1b2be8df42b38498399ec3280ba5b272a44844303a95",
     "bytes": 98673
   },
   "lenses": [
@@ -142,12 +135,10 @@
       "sourceDigest": "fde07f3a937d444e8c03461403ea365998ef4b25195f85f4b7b07b9fc0eafce2",
       "registered": {
         "path": "src/objects/lmc/source/compact/lenses/horalek-widefield/registered.png",
-        "sha256": "f593f6df2a48f4b735c39c39628a67f43c0f11fc0ef0ac0cb70775dc24a62e9c",
         "bytes": 1402422
       },
       "coverage": {
         "path": "src/objects/lmc/source/compact/lenses/horalek-widefield/coverage.png",
-        "sha256": "399131de4c0bd10195e090a41c043f8c4690ea3c3886bd314ed313049e922aad",
         "bytes": 6909
       },
       "densityFilter": {
@@ -340,12 +331,10 @@
       "sourceDigest": "d595c34af23202b0094b55614575a84e0212b8e4e415bc6fad1f450b674d479d",
       "registered": {
         "path": "src/objects/lmc/source/compact/lenses/vista-infrared/registered.png",
-        "sha256": "1f789a54bac4177500e6f9ecd1f0e77f7d2ecbb71e183cea16ab2cff71906c8a",
         "bytes": 1839895
       },
       "coverage": {
         "path": "src/objects/lmc/source/compact/lenses/vista-infrared/coverage.png",
-        "sha256": "d7fcb15ec7dd8568864ec20eeff9d0ce05e8c58028cfbfb578b48a398078d13f",
         "bytes": 8723
       },
       "densityFilter": {
@@ -538,12 +527,10 @@
       "sourceDigest": "05443d097fa8abda86ba22ed4c5141d085c0614f207d1a278df2e664046767b9",
       "registered": {
         "path": "src/objects/lmc/source/compact/lenses/wise-wide-infrared/registered.png",
-        "sha256": "44f386ae92b17d794f7e4e817741d6b499e78f8d89f878bf80739fa2bd5fc229",
         "bytes": 667742
       },
       "coverage": {
         "path": "src/objects/lmc/source/compact/lenses/wise-wide-infrared/coverage.png",
-        "sha256": "c425c3462c107718bed50bb4d84a0ca81a4915771f4c1cfc183f86787347996d",
         "bytes": 4181
       },
       "densityFilter": {

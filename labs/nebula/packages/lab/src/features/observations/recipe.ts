@@ -3,21 +3,21 @@ import type { NativeRemoval } from '../../server/workflows/emission-inference/na
 import { validateImageWcs, type ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
 import { skyBandCompositeFile } from '../../adapters/sources/sky-bands.ts';
 export interface ObservationSource extends SkyRaster {
-  id: string; label: string; url: string; page: string; sha256: string; credit: string; bands: string; termsUrl: string;
+  id: string; label: string; url: string; page: string; credit: string; bands: string; termsUrl: string;
   registrationMode?: 'field-stars' | 'compact-stars' | 'publisher-wcs';
   registrationDetection?: { sourceMaximum: number; referenceMaximum: number; maximumStars: number };
   compactStarChannel?: 'minimum-rgb' | 'maximum-rgb';
   processingRole?: 'registration-reference';
   stellarTreatment?: 'preserve';
   coordinateOrigin?: 'authored-bright-star-seed';
-  matchedStarCatalogue?: { path: string; sha256: string };
-  astrometricCalibration?: { path: string; sha256: string };
-  registrationTransfer?: { referenceId: string; pixelToReference: Affine; evidence: { path: string; sha256: string } };
+  matchedStarCatalogue?: { path: string };
+  astrometricCalibration?: { path: string };
+  registrationTransfer?: { referenceId: string; pixelToReference: Affine; evidence: { path: string } };
   /** Working raster composed from pinned calibrated survey bands; `url` then names the survey page. */
-  skyBands?: { path: string; sha256: string };
+  skyBands?: { path: string };
 }
 export interface ObservationRecipe { schema: 'cssearth-nebula-observation-recipe@1'; id: string; referenceId: string; frame: SkyFrame; images: ObservationSource[]; nativeRemoval: Omit<NativeRemoval, 'directory'>;
-  nativeSeparationCache?: { recipe: { path: string; sha256: string } } }
+  nativeSeparationCache?: { recipe: { path: string } } }
 const record = (value: unknown): Record<string, unknown> => {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError('Expected observation record.');
   return value as Record<string, unknown>;
@@ -27,7 +27,6 @@ const finite = (value: unknown): number => { if (typeof value !== 'number' || !N
 const dimension = (value: unknown): number => { const n = finite(value); if (!Number.isInteger(n) || n < 1 || n > 50000) throw new TypeError('Invalid raster dimensions.'); return n; };
 const pair = (value: unknown): [number, number] => { if (!Array.isArray(value) || value.length !== 2) throw new TypeError('Expected coordinate pair.'); return [finite(value[0]), finite(value[1])]; };
 const id = (value: unknown) => { const s = string(value); if (!/^[a-z0-9-]+$/.test(s)) throw new TypeError('Invalid observation id.'); return s; };
-const pin = (value: unknown) => { const s = string(value); if (!/^[0-9a-f]{64}$/.test(s)) throw new TypeError('Expected SHA-256.'); return s; };
 const https = (value: unknown) => { const s = string(value); if (new URL(s).protocol !== 'https:') throw new TypeError('HTTPS source required.'); return s; };
 function transfer(value: unknown): NonNullable<ObservationSource['registrationTransfer']> {
   const row = record(value), evidence = record(row.evidence), m = row.pixelToReference;
@@ -36,12 +35,12 @@ function transfer(value: unknown): NonNullable<ObservationSource['registrationTr
   if (Math.abs(matrix[0] * matrix[3] - matrix[1] * matrix[2]) < 1e-12) throw new TypeError('Singular registration transfer.');
   const path = string(evidence.path);
   if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Transfer evidence requires a repository-relative path.');
-  return { referenceId: id(row.referenceId), pixelToReference: matrix, evidence: { path, sha256: pin(evidence.sha256) } };
+  return { referenceId: id(row.referenceId), pixelToReference: matrix, evidence: { path } };
 }
-/** Cached working raster name: publisher downloads keep `<id>.tif`; composed sky band rasters carry their hash, so an
+/** Cached working raster name: publisher downloads keep `<id>.tif`; composed sky band rasters get their own name, so an
  * existing checkout's retired publisher file is never read as, or overwritten by, the composite. */
-export const observationSourceFile = (source: Pick<ObservationSource, 'id' | 'sha256' | 'skyBands'>) =>
-  source.skyBands ? skyBandCompositeFile(source.id, source.sha256) : `${source.id}.tif`;
+export const observationSourceFile = (source: Pick<ObservationSource, 'id' | 'skyBands'>) =>
+  source.skyBands ? skyBandCompositeFile(source.id) : `${source.id}.tif`;
 export const scienceObservationSources = (recipe: ObservationRecipe): ObservationSource[] => recipe.images.filter(image => image.processingRole !== 'registration-reference');
 function sky(value: Record<string, unknown>) {
   const result = { width: dimension(value.width), height: dimension(value.height), fieldArcminutes: pair(value.fieldArcminutes), centerIcrsDegrees: pair(value.centerIcrsDegrees) };
@@ -56,7 +55,7 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
   if (row.nativeSeparationCache !== undefined) {
     const cache = record(row.nativeSeparationCache), recipe = record(cache.recipe), path = string(recipe.path);
     if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Native separation cache requires a repository-relative recipe.');
-    nativeSeparationCache = { recipe: { path, sha256: pin(recipe.sha256) } };
+    nativeSeparationCache = { recipe: { path } };
   }
   if (row.schema !== 'cssearth-nebula-observation-recipe@1' || frame.northUp !== true || !Array.isArray(row.images) || row.images.length < 2) throw new TypeError('Unsupported observation recipe.');
   const images = row.images.map((value): ObservationSource => {
@@ -83,25 +82,25 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
     if (image.matchedStarCatalogue !== undefined) {
       const catalogue = record(image.matchedStarCatalogue), path = string(catalogue.path);
       if (path.startsWith('/') || path.split('/').includes('..')) throw new TypeError('Star catalogue requires a repository-relative path.');
-      matchedStarCatalogue = { path, sha256: pin(catalogue.sha256) };
+      matchedStarCatalogue = { path };
     }
     let astrometricCalibration: ObservationSource['astrometricCalibration'];
     if (image.astrometricCalibration !== undefined) {
       const calibration = record(image.astrometricCalibration), path = string(calibration.path);
       if (path.startsWith('/') || path.split('/').includes('..') || !matchedStarCatalogue) throw new TypeError('Astrometric calibration requires pinned explicit stars and a relative evidence path.');
-      astrometricCalibration = { path, sha256: pin(calibration.sha256) };
+      astrometricCalibration = { path };
     }
     let skyBands: ObservationSource['skyBands'];
     if (image.skyBands !== undefined) {
       const bands = record(image.skyBands), path = string(bands.path);
       if (path.startsWith('/') || path.split('/').includes('..') || !path.endsWith('.json') || image.matchedStarCatalogue || image.registrationTransfer)
         throw new TypeError('Sky band sources need a repository-relative recipe and direct registration.');
-      skyBands = { path, sha256: pin(bands.sha256) };
+      skyBands = { path };
     }
     const wcs: ImageWcs = { projection: w.projection, coordinateFrame: w.coordinateFrame, referenceDimension: pair(w.referenceDimension),
       referencePixel: pair(w.referencePixel), referenceValueDeg: pair(w.referenceValueDeg), scaleDeg: pair(w.scaleDeg), rotationDeg: finite(w.rotationDeg) };
     validateImageWcs(wcs);
-    return { ...sky(image), wcs, id: id(image.id), label: string(image.label), url: https(image.url), page: https(image.page), sha256: pin(image.sha256),
+    return { ...sky(image), wcs, id: id(image.id), label: string(image.label), url: https(image.url), page: https(image.page),
       credit: string(image.credit), bands: string(image.bands), termsUrl: https(image.termsUrl), northRightDegrees: finite(image.northRightDegrees),
       ...(image.registrationMode === undefined ? {} : { registrationMode: image.registrationMode }),
       ...(registrationDetection === undefined ? {} : { registrationDetection }),
@@ -123,5 +122,5 @@ export function readObservationRecipe(value: unknown): ObservationRecipe {
   }
   return { schema: row.schema, id: id(row.id), referenceId, frame: { ...sky(frame), northUp: true }, images,
     ...(nativeSeparationCache === undefined ? {} : { nativeSeparationCache }),
-    nativeRemoval: { scriptSha256: pin(removal.scriptSha256), model: { path: string(model.path), sha256: pin(model.sha256) } } };
+    nativeRemoval: { model: { path: string(model.path) } } };
 }

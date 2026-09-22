@@ -188,7 +188,7 @@ export function createSurfaceObservation({ frames, policy, radial, config, entri
     display: { range: display.range, ...(display.range === 'stated-range' ? {} : { percentiles: display.percentiles }), low, high, units: display.units, ...(display.palette ? { palette: display.palette } : {}),
       basis: display.basis, ...(display.sourceId === undefined ? {} : { sourceId: display.sourceId }),
       ...(display.range === 'stated-range' && display.colorDisplay ? { colorDisplay: bandColorEvidence(display.colorDisplay) } : {}) },
-    areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id, sha256: entry.expectedSha256 })), previewPolicy: PREVIEW_POLICY,
+    areaCoverage, sourceIds: entries.map(entry => ({ id: entry.id })), previewPolicy: PREVIEW_POLICY,
     ...(policy.bandAlignment ? { bandAlignment: policy.bandAlignment } : {}), ...(policy.registration ? { registration: policy.registration } : {}), ...(policy.limitations ? { limitations: policy.limitations } : {}) };
   const preview = (width: number, height: number) => {
     const rgb = Buffer.alloc(width * height * 3), missingPixels = new Uint8Array(width * height);

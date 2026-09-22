@@ -21,7 +21,7 @@
  *
  * Finished batches and stages are recorded in the work directory and skipped on a rerun. */
 import { spawnSync } from 'node:child_process';
-import { access, lstat, mkdir, readdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
+import { access, lstat, mkdir, readdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { totalmem } from 'node:os';
 import { createHash } from 'node:crypto';
 import { createReadStream, rmSync } from 'node:fs';
@@ -43,7 +43,7 @@ export interface TsoProgram {
    * values instead, outside this reduction. */
   readonly oracle?: EurekaZipOracle | DepositFilesOracle;
 }
-export interface EurekaZipOracle { readonly kind: 'eureka-light-curve-zip'; readonly url: string; readonly path: string; readonly bytes: number; readonly sha256: string; readonly lightCurve: string }
+export interface EurekaZipOracle { readonly kind: 'eureka-light-curve-zip'; readonly url: string; readonly path: string; readonly bytes: number; readonly lightCurve: string }
 export interface DepositFile { readonly path: string; readonly url: string; readonly bytes: number; readonly md5: string }
 export interface DepositFilesOracle {
   readonly kind: 'deposit-files'; readonly files: readonly DepositFile[];
@@ -81,7 +81,7 @@ export async function readProgram(directory: string): Promise<TsoProgram> {
 }
 
 function parseOracle(oracle: Record<string, unknown>): TsoProgram['oracle'] {
-  if (oracle.kind === 'eureka-light-curve-zip') return { kind: 'eureka-light-curve-zip', url: requireString(oracle.url), path: requireString(oracle.path), bytes: requireFiniteNumber(oracle.bytes), sha256: requireString(oracle.sha256), lightCurve: requireString(oracle.lightCurve) };
+  if (oracle.kind === 'eureka-light-curve-zip') return { kind: 'eureka-light-curve-zip', url: requireString(oracle.url), path: requireString(oracle.path), bytes: requireFiniteNumber(oracle.bytes), lightCurve: requireString(oracle.lightCurve) };
   if (oracle.kind !== 'deposit-files') throw new TypeError(`Unknown oracle kind ${String(oracle.kind)}.`);
   const files = requireArray(oracle.files).map(value => {
     const file = requireRecord(value, 'deposit file'), md5 = requireString(file.md5);
@@ -348,9 +348,9 @@ export async function reduceTso(programDirectory: string, work: string, rawSourc
   await mkdir(oracleDirectory, { recursive: true });
   if (oracle.kind === 'eureka-light-curve-zip') {
     const deposit = resolve(oracleDirectory, oracle.path);
-    if (!await exists(deposit) || await sha256File(deposit) !== oracle.sha256) {
+    if (!await exists(deposit) || (await stat(deposit)).size !== oracle.bytes) {
       const fetched = spawnSync('curl', ['-s', '-L', '-o', deposit, oracle.url], { stdio: 'inherit' });
-      if (fetched.status !== 0 || await sha256File(deposit) !== oracle.sha256) throw new Error(`${oracle.path} does not match its pinned sha256.`);
+      if (fetched.status !== 0 || (await stat(deposit)).size !== oracle.bytes) throw new Error(`${oracle.path} does not match its recorded size.`);
     }
     const unzip = spawnSync('unzip', ['-o', '-q', deposit, oracle.lightCurve, '-d', oracleDirectory]);
     if (unzip.status !== 0) throw new Error(`Could not extract ${oracle.lightCurve}.`);

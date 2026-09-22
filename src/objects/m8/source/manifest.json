@@ -11,8 +11,6 @@
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "a0a2b4e1b926592642c1ee550925ca3d770d5d63522e37e39f058b27172d0c22",
-      "expectedBytes": 18672974,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -45,8 +43,6 @@
       "credit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "displayCredit": "ESO/VVV. Acknowledgment: Cambridge Astronomical Survey Unit",
       "acquisition": "Unchanged native publisher raster restored through the pinned Nebula Lab observation recipe. The repository-relative path is an ignored cache; native dimensions and image interpretation remain in that recipe.",
-      "expectedSha256": "906a2960105ac9344be261ba524c3e221f5bfdce3ab2efe33c022773cd7db3e9",
-      "expectedBytes": 29816152,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -79,8 +75,6 @@
       "credit": "NASA/JPL-Caltech; HiPS: CDS (CNRS/Unistra)",
       "displayCredit": "NASA/JPL-Caltech; CDS",
       "acquisition": "Composed by the pinned sky band recipe src/objects/m8/source/sky-bands/spitzer-irac.json from three pinned CDS hips2fits IRAC 8.0/4.5/3.6 µm maps: calibrated to MJy/sr, one measured background and range per band, one Lupton asinh display. The repository-relative path is an ignored cache that the recipe reproduces byte for byte.",
-      "expectedSha256": "8dc63f4c4a77d83cee790ccea04548b700724a9fb9c4bb85da5aa909b230227e",
-      "expectedBytes": 5769508,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { fitLimb, limbAccepted } from './limb.mts';
 
 /** A lit disc on noisy sky, with a bright interior band that must not pass for a limb. */

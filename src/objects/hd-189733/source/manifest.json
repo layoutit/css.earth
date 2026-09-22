@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "hd-189733-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
-      "expectedBytes": 338,
-      "expectedSha256": "e41d96af2c79c357137cb326548f8d12b719510ce04cbe2f825edf1c075ee113",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
       "license": "Gaia data terms: free use with acknowledgement",
@@ -156,8 +152,6 @@
     {
       "id": "hd-189733-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10243,
-      "expectedSha256": "1af2a36da52c92d3bffb857646e7cdfcc6caa50933692cddef80f2ce6e938c9a",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1827242816201846144&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",
@@ -212,8 +206,6 @@
     {
       "id": "hd-189733-tess-sector-41",
       "path": "photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
-      "expectedBytes": 1944000,
-      "expectedSha256": "442c1d97c549019f46b98026a6b74cd380112722e3e230e79203559f67cc326b",
       "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
       "productId": "tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
       "title": "TESS SPOC 2-minute light curve of HD 189733 (TIC 256364928), sector 41",
@@ -244,8 +236,6 @@
     {
       "id": "hd-189733-tess-sector-54",
       "path": "photometry/tess/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
-      "expectedBytes": 1918080,
-      "expectedSha256": "5d0423dae1340eea6a8ebaafa5dede4ce3d551d94b43a1a1b5f9ddc9f1e5c963",
       "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
       "productId": "tess2022190063128-s0054-0000000256364928-0227-s_lc.fits",
       "title": "TESS SPOC 2-minute light curve of HD 189733 (TIC 256364928), sector 54",
@@ -276,8 +266,6 @@
     {
       "id": "hd-189733-tess-sector-81",
       "path": "photometry/tess/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits",
-      "expectedBytes": 1946880,
-      "expectedSha256": "52923df5f5ca44f4eabb69db62385d44da6bb1f63e73c136b847fe3fa5451c77",
       "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2024196212429-s0081-0000000256364928-0276-s_lc.fits",
       "productId": "tess2024196212429-s0081-0000000256364928-0276-s_lc.fits",
       "title": "TESS SPOC 2-minute light curve of HD 189733 (TIC 256364928), sector 81",

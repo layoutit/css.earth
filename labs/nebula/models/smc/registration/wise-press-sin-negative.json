@@ -11,7 +11,6 @@
   },
   "source": {
     "path": ".local/nebula-lab/smc-intake/WISE2010-028.tiff",
-    "sha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
     "nativeDimensions": [
       5855,
       4596
@@ -41,12 +40,10 @@
   },
   "catalogue": {
     "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
-    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
     "downloadedRows": 13220,
     "inFieldIsolatedCandidates": 2324,
     "query": {
-      "path": "labs/nebula/models/smc/registration/allwise-query.json",
-      "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
+      "path": "labs/nebula/models/smc/registration/allwise-query.json"
     }
   },
   "predeclaredProtocol": {
@@ -157,12 +154,10 @@
   ],
   "compositeBlueChannel": "WISE press image blue channel",
   "implementation": {
-    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
-    "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
+    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts"
   },
   "matchedStars": {
-    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-wise-publisher-sin/matched-stars.json",
-    "sha256": "928f864661cbc842a8b1cf3bd00f7a25b920593a5fca7cf96f5f977960edc56d"
+    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-wise-publisher-sin/matched-stars.json"
   },
   "negativeControl": "publisher-sin",
   "role": "known-bad fixed WCS; this receipt must report pass: false for the protocol to be accepted"

@@ -20,6 +20,10 @@ export interface PreparedView {
   counterRotation: string; counterRotationFor(systemTransform: string | DOMMatrix | null): string;
   levelOfDetail?: { stage: string; silhouetteDiameter: number | null; billboardOpacity: number; markerOpacity: number };
   body?: { visible?: boolean; screen?: readonly number[] | null; silhouette?: { radial: readonly number[]; centre: readonly number[]; radialSemiAxis: number; tangentialSemiAxis: number } | null };
+  /** The camera root's principal point, and the stage's: the root moves to centre the body in the area the shell leaves
+   * open, so the two differ by that move. */
+  principalOffset?: readonly number[];
+  stageViewport?: { readonly principalOffsetPixels: readonly number[] };
 }
 export type PreparedWrite = { target: number; name: string } & (
   { kind: "attribute"; value: string | null } | { kind: "class"; value: boolean } |
@@ -292,7 +296,11 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
             const radialAngle = Math.atan2(silhouette.radial[1], silhouette.radial[0]) * 180 / Math.PI;
             const radial = Math.max(silhouette.radialSemiAxis, binding.minimumRadius);
             const tangential = Math.max(silhouette.tangentialSemiAxis, binding.minimumRadius);
-            const transform = `translate(${formatNumber(silhouette.centre[0])}px, ${formatNumber(silhouette.centre[1])}px) ` +
+            // The silhouette is measured from the camera root's centre; this overlay sits on the stage beside the root,
+            // so it takes the root's move too (the phone layout lifts the root above the sheet).
+            const shiftX = (view.stageViewport?.principalOffsetPixels[0] ?? 0) - (view.principalOffset?.[0] ?? 0);
+            const shiftY = (view.stageViewport?.principalOffsetPixels[1] ?? 0) - (view.principalOffset?.[1] ?? 0);
+            const transform = `translate(${formatNumber(silhouette.centre[0] + shiftX)}px, ${formatNumber(silhouette.centre[1] + shiftY)}px) ` +
               `rotate(${formatNumber(radialAngle)}deg) ` +
               `scale(${formatNumber(radial * binding.unitScale)}, ${formatNumber(tangential * binding.unitScale)}) ` +
               `rotate(${formatNumber(-radialAngle)}deg)`;

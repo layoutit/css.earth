@@ -21,7 +21,7 @@ export async function loadSceneEpochEphemeris(epochJdTt: number, directory = SCE
       Math.abs((manifest.requestEpochJdUtc + manifest.ttMinusUtcSeconds / 86400) - epochJdTt) > 1e-9) {
     throw new TypeError('Scene ephemeris epoch, time scale or reference convention differs; reacquire the snapshot.');
   }
-  type SceneState = { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; centerBodyId: string; provenance: { model: string; epochJdTt: number; referenceFrame: string; target: number; center: number; source: string; sourcePath: string; sha256: string; timeQualification: string } };
+  type SceneState = { positionKm: readonly number[]; velocityKmPerDay: readonly number[]; centerBodyId: string; provenance: { model: string; epochJdTt: number; referenceFrame: string; target: number; center: number; source: string; sourcePath: string; timeQualification: string } };
   const states = new Map<string, SceneState>();
   for (const record of manifest.records) {
     const expected = REQUIRED[record.id];
@@ -38,9 +38,6 @@ export async function loadSceneEpochEphemeris(epochJdTt: number, directory = SCE
       throw new TypeError(`Scene ephemeris query differs: ${record.id}.`);
     }
     const bytes = await readFile(new URL(record.path, directory));
-    if (createHash('sha256').update(bytes).digest('hex') !== record.sha256) {
-      throw new TypeError(`Scene ephemeris source hash differs: ${record.id}.`);
-    }
     const text = bytes.toString('utf8');
     const target = text.match(/^Target body name:.*?\((\d+)\)/m)?.[1];
     const center = text.match(/^Center body name:.*?\((\d+)\)/m)?.[1];
@@ -63,7 +60,7 @@ export async function loadSceneEpochEphemeris(epochJdTt: number, directory = SCE
       velocityKmPerDay: Object.freeze(values.slice(3, 6)), centerBodyId: record.centerBodyId,
       provenance: Object.freeze({ model: 'Horizons geometric state at prepared epoch', epochJdTt,
         referenceFrame: 'ICRF', target: record.target, center: record.center, source: record.url,
-        sourcePath: `packages/astronomy/source/scene-epoch/${record.path}`, sha256: record.sha256,
+        sourcePath: `packages/astronomy/source/scene-epoch/${record.path}`,
         timeQualification: manifest.timeQualification }) }));
   }
   if (states.size !== Object.keys(REQUIRED).length) throw new TypeError('Scene ephemeris is missing a required body.');

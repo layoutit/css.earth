@@ -67,8 +67,8 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     const recipe = { band: window(measure.band, 'band'), continuum: [window(requireArray(measure.continuum)[0], 'continuum'), window(requireArray(measure.continuum)[1], 'continuum')] as const };
     const limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees'), minimum = requireFiniteNumber(entry.minimumDiscPixels, 'minimumDiscPixels');
     const placed: BodyMap[] = [], cubes: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [];
-    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: relative(REPOSITORY, recipePath), bytes: recipeBytes.byteLength, sha256: sha256(recipeBytes) },
-      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength, sha256: sha256(rotationBytes) }];
+    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: relative(REPOSITORY, recipePath), bytes: recipeBytes.byteLength },
+      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength }];
     for (const rawCube of requireArray(entry.cubes, 'cubes')) {
       const stated = requireRecord(rawCube, 'cube'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris');
       const { program } = await readImagingProgram(requireString(stated.program)), band = program.bands.find(other => other.band === stated.band);
@@ -90,7 +90,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
         written.set(resolve(source, paths.observer), Buffer.from(tables.observer)); written.set(resolve(source, paths.heliocentric), Buffer.from(tables.heliocentric));
       }
       for (const [role, path, text] of [['observer ephemeris', paths.observer, tables.observer], ['heliocentric ephemeris', paths.heliocentric, tables.heliocentric]] as const) {
-        const bytes = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: bytes.byteLength, sha256: sha256(bytes) });
+        const bytes = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: bytes.byteLength });
       }
       if (!/\(-170\)/u.test(tables.observer)) throw new Error(`${paths.observer} was not asked for JWST as the observer.`);
       const row = horizonsRows(tables.observer)[0]!;
@@ -117,7 +117,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     // A band depth is the ground's own, so cubes from different dates are one measurement and a cell is their weighted mean.
     const definition: MeasurementDefinition = { quantity, units, timeDependence: 'surface-property', wavelengthIntervalsMicrometres: [recipe.band], source: requireString(measure.source, 'measure.source'),
       method: { kind: 'band-depth', bandMicrometres: recipe.band, continuumMicrometres: recipe.continuum, continuum: 'straight line through the two window means, each at the mean wavelength of its retained samples', depth: '1 - band mean / continuum at the band' } };
-    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), sha256: sha256(rotationBytes), bodyCode: requireFiniteNumber(rotation.body) } };
+    const frame: BodyMapFrame = { body: id, radiusKm, rotation: { model: requireString(rotation.path), bodyCode: requireFiniteNumber(rotation.body) } };
     const policy: CombinationPolicy = { time: { rule: 'time-invariant' }, resolution: { rule: 'as-observed' } };
     const { map, overlaps } = combineUnderPolicy(placed.map((placedMap, index) => ({ map: placedMap, definition, frame, observation: observations[index]! })), policy, limit);
     const fits = bodyMapFits(map, { TELESCOP: 'JWST', OBJECT: requireString(entry.target), QUANTITY: quantity, NCUBES: String(placed.length) },
@@ -125,7 +125,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     // What the map means, beside it: the band and continuum that define the number, the frame, and every cube that went in.
     const unqualifiedMap = { schema: 'cssearth-body-map@1',
       definition, frame,
-      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
+      grid: { width: map.width, height: map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' }, planes: { file: output.split('/').pop()!, value: quantity, uncertainty: `${quantity} ERROR` },
       mask: { maximumEmissionDegrees: limit, missing: 'NaN' }, observations, ...(observations.length > 1 ? { combination: policy } : {}) } as const;
     const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', cubes), mapProduct = resolution.product;
     const metadata = Buffer.from(formatBodyMapProduct(mapProduct));

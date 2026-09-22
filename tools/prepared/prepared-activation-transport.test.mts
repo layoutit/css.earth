@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SCENE_OBJECTS as OBJECTS } from '../../site/objects.mts';
 
 // Run after prepare:object-json. The checked-in tree gate also runs in CI
@@ -12,7 +13,6 @@ for (const { id } of OBJECTS) test(`${id}: serialized activation bank matches it
   const descriptor = JSON.parse(await readFile(new URL('object.json', root), 'utf8'));
   const bytes = await readFile(new URL(descriptor.prepared.url, root));
   const payload = JSON.parse(bytes.toString('utf8'));
-  assert.equal(createHash('sha256').update(bytes).digest('hex'), descriptor.prepared.sha256);
   assert.equal(payload.id, id);
   assert.deepEqual(payload.data.tree, runtime.tree, 'transport must use the checked-in prepared tree');
 });

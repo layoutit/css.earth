@@ -3,7 +3,6 @@
     "id": "gaia-edr3-stars",
     "source": {
       "path": ".local/nebula-lab/new-references/gaia-lmc.png",
-      "sha256": "8f77da661a66fa11b2c162552fbce922ed2f96a87351b9eafecd82f1309603e4",
       "bytes": 80046577,
       "nativeDimensions": [
         8000,
@@ -12,7 +11,6 @@
     },
     "reference": {
       "path": "labs/nebula/sources/lmc-smash-full.webp",
-      "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
       "nativeDimensions": [
         6737,
         6536
@@ -47,9 +45,9 @@
       0.37158794634465725,
       1.3938586909736124,
       -5870.449435468486,
-      -2.434776283344685e-07,
-      2.784333964270905e-07,
-      1.0
+      -2.434776283344685e-7,
+      2.784333964270905e-7,
+      1
     ],
     "nativeSourceCornersInSmash": [
       [
@@ -90,8 +88,7 @@
       ]
     ],
     "rawEvidence": {
-      "path": ".local/nebula-lab/new-references/gaia-star-registration-final.json",
-      "sha256": "e729bb50c0b33ad5b5dece7d3f631b019d5e5261519b219134ed38428dcf60be"
+      "path": ".local/nebula-lab/new-references/gaia-star-registration-final.json"
     },
     "nativeImagePoints": [
       [
@@ -3089,7 +3086,6 @@
     "id": "horalek-widefield",
     "source": {
       "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
-      "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
       "bytes": 8507407,
       "nativeDimensions": [
         6582,
@@ -3098,7 +3094,6 @@
     },
     "reference": {
       "path": "labs/nebula/sources/lmc-smash-full.webp",
-      "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
       "nativeDimensions": [
         6737,
         6536
@@ -3133,9 +3128,9 @@
       -0.4729033967977122,
       -0.9970462494720148,
       5409.185308143818,
-      2.3045914082800085e-07,
-      -4.331845136939875e-07,
-      1.0
+      2.3045914082800085e-7,
+      -4.331845136939875e-7,
+      1
     ],
     "nativeSourceCornersInSmash": [
       [
@@ -3176,8 +3171,7 @@
       ]
     ],
     "rawEvidence": {
-      "path": ".local/nebula-lab/new-references/noirlab-star-registration.json",
-      "sha256": "6bedad6d6ae0ec52f9ef62cc87af216d8e81ca840bf240ccd5488653c408748d"
+      "path": ".local/nebula-lab/new-references/noirlab-star-registration.json"
     },
     "nativeImagePoints": [
       [

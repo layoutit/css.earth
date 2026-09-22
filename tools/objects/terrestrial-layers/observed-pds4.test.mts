@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { validatePds4ObservationPolicy, readPds4ColorLabel, decodePds4Color, mapPds4Color } from './observed-pds4.mts';
 import {linearToSrgb} from '../color-transfer.mts';
 

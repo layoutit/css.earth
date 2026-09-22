@@ -93,7 +93,7 @@ try {
     if (direction.length !== 3) throw new Error('Invalid camera direction');
     const usda = requireString(model.path).endsWith('.usdz');
     const request: RenderRequest = { id, url: origin + '/' + requireString(model.path).replace(/\.usdz$/, '.usda'), direction: [direction[0], direction[1], direction[2]], rollDegrees: 0, usda,
-      ...(!inspectAxes ? { pose: getFacilityPose(id, requireString(model.sha256)) } : {}) };
+      ...(!inspectAxes ? { pose: getFacilityPose(id) } : {}) };
     if (inspectAxes) {
       for (const [axis, vector] of Object.entries({ xp: [1, 0, 0], xn: [-1, 0, 0], yp: [0, 1, 0], yn: [0, -1, 0], zp: [0, 0, 1], zn: [0, 0, -1] })) {
         const [x, y, z] = vector;
@@ -106,7 +106,7 @@ try {
       continue;
     }
     if (inspectRolls) {
-      const pose = getFacilityPose(id, requireString(model.sha256));
+      const pose = getFacilityPose(id);
       for (const degrees of [0, 90, 180, 270]) {
         const q = new Quaternion().setFromAxisAngle(new Vector3(...inwardDirection).normalize(), MathUtils.degToRad(degrees)).multiply(new Quaternion(...pose.modelQuaternion));
         await page.goto(origin);

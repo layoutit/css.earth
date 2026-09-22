@@ -6,7 +6,6 @@
     "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
     "id": "noirlab2030a",
     "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
     "bytes": 264225774,
     "width": 6737,
     "height": 6536,
@@ -36,12 +35,10 @@
     "rotationDeg": -16.920000000000027
   },
   "frame": {
-    "path": "labs/nebula/models/lmc-particles/object.json",
-    "sha256": "423c2444c51f62f69870f77c698ea68c487724688b6654877f0f683f7f35175a"
+    "path": "labs/nebula/models/lmc-particles/object.json"
   },
   "stellarPrior": {
-    "path": "labs/nebula/models/lmc-full-density/source/volume.json",
-    "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+    "path": "labs/nebula/models/lmc-full-density/source/volume.json"
   },
   "analysis": {
     "width": 1024,
@@ -96,13 +93,13 @@
   "variants": [
     {
       "id": "lmc-clouds-broad",
-      "name": "LMC clouds \u00b7 broad depth control",
+      "name": "LMC clouds · broad depth control",
       "directory": "labs/nebula/models/lmc-clouds-broad",
       "mode": "broad"
     },
     {
       "id": "lmc-clouds",
-      "name": "LMC clouds \u00b7 reconstructed",
+      "name": "LMC clouds · reconstructed",
       "directory": "labs/nebula/models/lmc-clouds",
       "mode": "coherent"
     }

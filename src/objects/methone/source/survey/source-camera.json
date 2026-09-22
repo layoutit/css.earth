@@ -23,45 +23,36 @@
   "kernels": [
     {
       "file": "methone_mst2013.bpc",
-      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/methone_mst2013.bpc",
-      "expectedBytes": 3156992,
-      "expectedSha256": "af307713f6b9585b1ff922247cd17e17e83472e9b0bfe9569c7d645bc76129bb"
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/methone_mst2013.bpc"
     },
     {
       "file": "12139_12144ra.bc",
-      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/12139_12144ra.bc",
-      "expectedBytes": 6994944,
-      "expectedSha256": "68aeb2288159fa07ec1cfc10b4e9411d0de8817c44e195fe6c0c8f30afabefce"
+      "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ck/12139_12144ra.bc"
     },
     {
       "file": "cas_rocks_v18.tf",
       "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_rocks_v18.tf",
-      "expectedBytes": 22880,
-      "expectedSha256": "4792ed40b4f084aa7aad1ce5265bbc12f44be6ac0c7965653e79d86cda394baa"
+      "expectedBytes": 22880
     },
     {
       "file": "cas_v43.tf",
       "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/fk/cas_v43.tf",
-      "expectedBytes": 196583,
-      "expectedSha256": "09b1f6f27a74d3cc64b28ef91fcea02bed78fe63c93035b8434a6b67e5224b5a"
+      "expectedBytes": 196583
     },
     {
       "file": "cas_iss_v10.ti",
       "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/ik/cas_iss_v10.ti",
-      "expectedBytes": 31060,
-      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
+      "expectedBytes": 31060
     },
     {
       "file": "cas00172.tsc",
       "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/sclk/cas00172.tsc",
-      "expectedBytes": 18954,
-      "expectedSha256": "9aebd8d2783d06c12c33d2c5794a04a7bcde26c95efd4fee974acd9b356442f8"
+      "expectedBytes": 18954
     },
     {
       "file": "naif0012.tls",
       "url": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/lsk/naif0012.tls",
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "expectedBytes": 5257
     }
   ],
   "clockExtraction": "CSPICE pxform(IAU_METHONE,CASSINI_ISS_NAC,midpointET); north=matrix*[0,0,1]; clockwise-from-image-up=atan2(-north.x,north.y). Image samples and lines decrease along ISS camera X/Y.",

@@ -67,8 +67,7 @@
       "access": "Full arXiv PDF downloaded and sections 2.3.3, 2.3.4 and 7.1 inspected on 2026-09-20; photometric major-axis PA100 degrees and coordinate convention confirmed.",
       "download": {
         "url": "https://arxiv.org/pdf/astro-ph/0509228",
-        "bytes": 1253405,
-        "sha256": "091115f8b04cf247f0d8ca04e7a6a5840fab8daa24f427168b6451fb37c13dd6"
+        "bytes": 1253405
       }
     },
     {
@@ -85,8 +84,7 @@
       "locator": "Accepted v2, section 8.2: kinematic PA104 +/-1 degree and inclination43.9 +/-1.3 degrees.",
       "access": "Full accepted-v2 HTML retrieved on 2026-09-20; section8.2 inspected.",
       "download": {
-        "bytes": 740755,
-        "sha256": "9e46c2738830485c2f0eec0f7bde39654434a02a03a1d445010f2c37531b73c9"
+        "bytes": 740755
       }
     },
     {
@@ -119,18 +117,15 @@
       "tables": [
         {
           "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/ReadMe",
-          "bytes": 27936,
-          "sha256": "48b6e46ffeceb668e3cb108a1ffd8723df2382e0a07a6174260e199354e757b5"
+          "bytes": 27936
         },
         {
           "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/table10.dat",
-          "bytes": 75735,
-          "sha256": "536b829f310535759f572dd781f2c9d7cec602999d53f07c2bce9b0638f9abf1"
+          "bytes": 75735
         },
         {
           "url": "https://cdsarc.cds.unistra.fr/ftp/J/ApJS/161/304/table11.dat",
-          "bytes": 84456,
-          "sha256": "8707d3e19c864e058138bd7d0132ec06c97521a06ac4051132b3f7c149260a2d"
+          "bytes": 84456
         }
       ]
     },
@@ -163,8 +158,7 @@
       "access": "Complete author-hosted PDF downloaded and table transcribed on2026-09-20; all eight rows cross-checked against Watkins2013 Table1. Coefficient error bars/covariance are not supplied in the table.",
       "download": {
         "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
-        "bytes": 480080,
-        "sha256": "5701eed16944eb96e0d3e8dea258f909e99a1fa4a5a0305581e878909e70db92"
+        "bytes": 480080
       }
     },
     {

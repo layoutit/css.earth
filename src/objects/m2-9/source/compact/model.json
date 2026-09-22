@@ -5,7 +5,6 @@
     "id": "m2-9-inferred",
     "source": {
       "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
-      "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
       "width": 800,
       "height": 525,
       "publisher": "https://apod.nasa.gov/apod/ap040201.html",
@@ -74,24 +73,17 @@
   "channels": [
     {
       "path": "src/objects/m2-9/source/compact/emission-0.f32.gz",
-      "sha256": "4f1b2591a498ac400e1f00ded341ec96617d6edff0cf74a66e297e9ae6bf4c8d",
-      "uncompressedSha256": "4b33da1b31ebe3c88b310e0bcc6e3e0887ebe805be78e466be81b7a71e9b9919",
       "bytes": 3686400
     },
     {
       "path": "src/objects/m2-9/source/compact/emission-1.f32.gz",
-      "sha256": "df58e6399068ad39abddd7201d76f775aa75d312acf88c4f8eed64b244aa512e",
-      "uncompressedSha256": "179130d00f97f6cd2c875e8c455a0a48e1c52a842e9728e201310522c226d7b0",
       "bytes": 3686400
     },
     {
       "path": "src/objects/m2-9/source/compact/emission-2.f32.gz",
-      "sha256": "cc4ef57649dce3b61f9b98447f991ef6ae6f734cf5324ba6c78ff515ce27b6cb",
-      "uncompressedSha256": "8e9aa8f2e4a4dba86031bdeca2ccd1dfdcffcf2bdfbce943806ac740551a777d",
       "bytes": 3686400
     }
   ],
-  "expectedSha256": "b24f7a42ffdccb80801a130b87b0efb6df03db7da69ad468ceab1275803f659e",
   "provenance": {
     "method": "Wenger, Lorenz & Magnor 2013, equations 1–7; independent TypeScript implementation",
     "doi": "https://doi.org/10.1111/cgf.12216",
@@ -101,7 +93,6 @@
       "id": "m2-9-inferred",
       "source": {
         "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
-        "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
         "width": 800,
         "height": 525,
         "publisher": "https://apod.nasa.gov/apod/ap040201.html",
@@ -169,20 +160,16 @@
     },
     "implementation": [
       {
-        "path": "labs/nebula/src/reconstruction/emission-inference/solver.ts",
-        "sha256": "4b68d82bac1f758219ce13d1399005f57074e8f2db5a71b4f3227b376fa2fedc"
+        "path": "labs/nebula/src/reconstruction/emission-inference/solver.ts"
       },
       {
-        "path": "labs/nebula/src/cli/prepare-emission.ts",
-        "sha256": "d7df03f76545c43c39b8753308986829c2d318a8b1995044a999a6372907ba22"
+        "path": "labs/nebula/src/cli/prepare-emission.ts"
       },
       {
-        "path": "labs/nebula/src/reconstruction/master-slices.ts",
-        "sha256": "a46fe9e026e897dffcd35026bc963bcce3367efe5e1f6eb83babcee1c8de178e"
+        "path": "labs/nebula/src/reconstruction/master-slices.ts"
       },
       {
-        "path": "src/renderers/css/preparation/volume.ts",
-        "sha256": "eaff56bdda04c398978087d75a4fb3b55eb08eb640926d7aaa26bcbfa5fc5bb6"
+        "path": "src/renderers/css/preparation/volume.ts"
       }
     ],
     "coordinateMeaning": "Image x right, y up in display; dimensionless units. No measured gas density, scale, distance or sky registration.",

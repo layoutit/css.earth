@@ -2,8 +2,6 @@
   "schema": "cssearth-volume-recipe@1",
   "grid": {
     "path": "density-veil-2019-12.ktx2",
-    "sha256": "15a5d4b31d7d943973d58f148d6de8b2cc0b6badd44895dcafe70ecfef74cd1d",
-    "decodedSha256": "7e128dcbb62a4c69b3561ab8639622e238586258b5fa491ff9dc0e5142550c5b",
     "dimensions": [
       96,
       96,
@@ -78,7 +76,6 @@
     }
   ],
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "8216524ba8b1b71be31e97f32a8dfe79ca41e9c79d5f7a426230e313a3198b5c"
+    "path": "provenance.json"
   }
 }

@@ -6,8 +6,7 @@
     -59.70454067972527
   ],
   "evidence": {
-    "path": "labs/nebula/models/carina/physical-evidence.json",
-    "sha256": "e23d4052da49aa753bd6bd5cbce039a59a83f274c4a1c73d39013905dd2f9be2"
+    "path": "labs/nebula/models/carina/physical-evidence.json"
   },
   "background": {
     "id": "unconstrained-wide-front",
@@ -33,9 +32,9 @@
       -0.04
     ],
     "curvaturePerArcsec": [
-      3.5e-05,
-      1.5e-05,
-      -2.2e-05
+      0.000035,
+      0.000015,
+      -0.000022
     ],
     "thicknessArcsec": 90,
     "strength": 1,

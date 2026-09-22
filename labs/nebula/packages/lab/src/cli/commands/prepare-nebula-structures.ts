@@ -41,8 +41,8 @@ catch (error) {
 }
 if (sha(original) !== sourceSha) throw new Error('Source hash differs.');
 const separated = await nativeStarless(original, [nativeWidth, nativeHeight], {
-  directory: text(removal.directory), scriptSha256: text(removal.scriptSha256),
-  model: { path: text(model.path), sha256: text(model.sha256) },
+  directory: text(removal.directory),
+  model: { path: text(model.path) },
 });
 const height = Math.round(width * nativeHeight / nativeWidth), dimensions = { width, height };
 const image = await sharp(separated.pixels, { raw: { width: nativeWidth, height: nativeHeight, channels: 3 } })

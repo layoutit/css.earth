@@ -1,6 +1,6 @@
 {
   "//": [
-    "Read by tools/ci/ci-affected.mts (unit tests: tools/ci/ci-affected.test.mts). Patterns use '**' for any depth,",
+    "Read by tools/ci/ci-affected.mts. Patterns use '**' for any depth,",
     "'*' for one path segment or a run of characters within a segment. `shared` is checked first against every",
     "changed path: one match there means the whole change is treated as shared, full run of every heavy job",
     "no matter what else changed. Otherwise each changed path is assigned to the first matching entry in `areas`,",

@@ -10,7 +10,7 @@ import { readPreparedReconstruction } from '../../services/density-reconstructio
 export async function verifyArtifacts(root: string, directory: string, artifacts: Record<string, {sha256: string; bytes?: number}>) {
   assert.ok(Object.keys(artifacts).length, 'The artifact manifest is empty.');
   for (const [path, pin] of Object.entries(artifacts)) {
-    const bytes = await pinned(root, { path: `${directory}/${path}`, sha256: pin.sha256 });
+    const bytes = await pinned(root, { path: `${directory}/${path}` });
     if (pin.bytes !== undefined) assert.equal(bytes.length, pin.bytes, `Artifact size differs: ${path}`);
   }
 }
@@ -26,7 +26,7 @@ export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/m
   for (const directory of recipe.densityObjects) {
     const slices = await json(resolve(root, directory, 'prepared/volume-slices.json'));
     for (const quad of slices.quads) {
-      await pinned(root, { path: `${directory}/prepared/${quad.texturePath}`, sha256: quad.sha256 });
+      await pinned(root, { path: `${directory}/prepared/${quad.texturePath}` });
       densitySlices++;
     }
   }
@@ -38,7 +38,7 @@ export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/m
       await pinned(root, input);
       const overlay = overlays.overlays.find((image: any) => image.id === input.id);
       assert.ok(overlay, `Missing image registration: ${input.id}`);
-      await pinned(root, { path: `${target.directory}/${overlay.texturePath}`, sha256: overlay.sha256 });
+      await pinned(root, { path: `${target.directory}/${overlay.texturePath}` });
       previews++;
     }
   }
@@ -52,7 +52,7 @@ export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/m
     const variant = separation.variants.find((entry: any) => entry.imageId === image.imageId);
     assert.ok(variant, `Missing extraction previews: ${image.imageId}`);
     for (const layer of variant.layers) {
-      await pinned(root, { path: layer.texturePath, sha256: layer.sha256 });
+      await pinned(root, { path: layer.texturePath });
       separationPreviews++;
     }
   }
@@ -63,11 +63,8 @@ export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/m
     assert.match(row.removalResultId, /^[a-f0-9]{64}\.[a-f0-9]{64}$/);
     const [removalKey, removalHash] = row.removalResultId.split('.');
     const removalDirectory = `.local/nebula-lab/star-removal-nox-applied/${removalKey}`;
-    const removal = JSON.parse((await pinned(root, { path: `${removalDirectory}/result.json`, sha256: removalHash })).toString());
+    const removal = JSON.parse((await pinned(root, { path: `${removalDirectory}/result.json` })).toString());
     assert.equal(removal.operation, 'apply');
-    assert.equal(removal.modelSha256, recipe.removal.model.sha256);
-    assert.equal(removal.scriptSha256, recipe.removal.script.sha256);
-    assert.equal(removal.baselineSha256, accepted.baselineSha256);
     const check = removal.applied.verification;
     assert.equal(check.maximumReconstructionErrorCodeValues, 0);
     assert.equal(check.changedPixelsOutsideMask, 0);

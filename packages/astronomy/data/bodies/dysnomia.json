@@ -54,7 +54,6 @@
         "center": 10,
         "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=920136199&CENTER=500%4010&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
         "sourcePath": "src/objects/dysnomia/source/orbit/eris-epoch.txt",
-        "sha256": "6bc7dd7b63f721b641b5006fedaa3126a846f69e025fe15bff90ee3ec0c2e41d",
         "solution": "tnosat_v001_20136199_jpl",
         "limitations": [
           "The Horizons satellite solution tnosat_v001_20136199_jpl uses 19 observations from 2005-2018 and states a 110 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",
@@ -73,7 +72,6 @@
       "center": 920136199,
       "source": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=120136199&CENTER=500%40920136199&EPHEM_TYPE=VECTORS&TIME_TYPE=UT&REF_PLANE=FRAME&REF_SYSTEM=ICRF&OUT_UNITS=KM-D&VEC_CORR=NONE&VEC_TABLE=2&CSV_FORMAT=YES&TLIST_TYPE=JD&TLIST=2461286.499199259",
       "sourcePath": "src/objects/dysnomia/source/orbit/dysnomia-epoch.txt",
-      "sha256": "8ccf871c0b53cdae17b51d2eb459998cc8be76fc206335feb0fbafefa6516941",
       "solution": "tnosat_v001_20136199_jpl",
       "limitations": [
         "The Horizons satellite solution tnosat_v001_20136199_jpl uses 19 observations from 2005-2018 and states a 110 km position uncertainty with respect to the primary on 2025-Jan-01. That is the solution's own statement at that date, not a measured uncertainty at this 2026 scene epoch.",

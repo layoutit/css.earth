@@ -18,7 +18,8 @@ import { mkdtemp, readFile, rm, mkdir, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { isBuiltin } from 'node:module';
 import { dirname, resolve, relative } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import ts from 'typescript';
 
 const root = resolve(import.meta.dirname, '../..');

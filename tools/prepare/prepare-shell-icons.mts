@@ -23,9 +23,6 @@ export async function prepareShellIcons({
   for (const descriptor of SHELL_ICON_SOURCES.icons) {
     const sourcePath = resolve(sourceRoot, descriptor.file);
     const sourceBytes = await readFile(sourcePath);
-    if (sha256(sourceBytes) !== descriptor.sourceSha256) {
-      throw new Error(`Shell icon source identity drifted: ${descriptor.file}.`);
-    }
     const sourceSvg = sourceBytes.toString("utf8");
     const root = sourceSvg.match(SVG_ROOT);
     if (!root || Number(root[1]) !== SHELL_ICON_SOURCES.recipe.width ||
@@ -44,8 +41,6 @@ export async function prepareShellIcons({
       family: SHELL_ICON_SOURCES.family,
       sourceName: descriptor.sourceName,
       sourceUrl: descriptor.sourceUrl,
-      sourceSha256: descriptor.sourceSha256,
-      preparedSha256: descriptor.sourceSha256,
       license: descriptor.license,
       licenseUrl: descriptor.licenseUrl,
       attribution: descriptor.author,
@@ -85,7 +80,6 @@ function validateManifest() {
         !descriptor.label || !descriptor.glyph || !descriptor.sourceName ||
         !descriptor.author || !descriptor.license || !descriptor.licenseUrl ||
         !/^https:\/\/commons\.wikimedia\.org\/wiki\/File:/u.test(descriptor.sourceUrl) ||
-        !/^[0-9a-f]{64}$/u.test(descriptor.sourceSha256) ||
         keys.has(descriptor.key) || sourceFiles.has(descriptor.file) ||
         outputFiles.has(descriptor.outputFile)) {
       throw new TypeError("Shell icon source descriptor is invalid.");

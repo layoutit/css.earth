@@ -159,13 +159,13 @@ export async function repositoryState(programs = PROGRAMS) {
   const files = await readdir(programs).catch(() => [] as string[]);
   const pinned = new Map<string, number>(), checked = new Map<string, number>();
   const programIds = new Map<string, string[]>(), checkedProgramIds = new Map<string, string[]>(), receiptPaths = new Map<string, string[]>();
-  const modeOf = new Map<string, string>(), pinnedFiles = new Map<string, Map<string, string>>();
+  const modeOf = new Map<string, string>(), pinnedFiles = new Map<string, Map<string, number>>();
   for (const file of files.filter(name => name.endsWith('.json') && !name.includes('.reproduction.') && !name.endsWith('.product.json'))) {
     const program = parseSpitzerProgram(JSON.parse(await readFile(resolve(programs, file), 'utf8')) as unknown);
     modeOf.set(program.id, program.mode);
     pinned.set(program.mode, (pinned.get(program.mode) ?? 0) + program.channels.length);
     programIds.set(program.mode, [...(programIds.get(program.mode) ?? []), program.id]);
-    pinnedFiles.set(program.id, new Map(program.channels.flatMap(channel => channel.products.map(product => [product.name, product.sha256]))));
+    pinnedFiles.set(program.id, new Map(program.channels.flatMap(channel => channel.products.map(product => [product.name, product.bytes]))));
   }
   for (const file of files.filter(name => name.endsWith('.reproduction.json'))) {
     const receipt = parseReproduction(JSON.parse(await readFile(resolve(programs, file), 'utf8')) as unknown);
@@ -174,7 +174,7 @@ export async function repositoryState(programs = PROGRAMS) {
     // A receipt counts only when the three archive files it says it read are the ones that program pinned. A comparison made
     // against some other mosaic, uncertainty or coverage plane proves nothing about the pinned observation, whatever it says.
     const against = [receipt.archiveProduct, receipt.archiveUncertainty, receipt.archiveCoverage];
-    if (!against.every(entry => known.get(entry.name) === entry.sha256)) continue;
+    if (!against.every(entry => known.get(entry.name) === entry.bytes)) continue;
     checked.set(mode, (checked.get(mode) ?? 0) + 1);
     checkedProgramIds.set(mode, [...new Set([...(checkedProgramIds.get(mode) ?? []), receipt.program])]);
     receiptPaths.set(mode, [...(receiptPaths.get(mode) ?? []), `tools/objects/spitzer/programs/${file}`]);

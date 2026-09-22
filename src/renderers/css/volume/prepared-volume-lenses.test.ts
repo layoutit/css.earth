@@ -1,4 +1,3 @@
-import { createHash } from 'node:crypto';
 import { afterEach, expect, test, vi } from 'vitest';
 import { parseObjectDescriptor, prepareObject } from '@cssearth/objects';
 import { createPreparedVolumeLenses, loadPreparedVolumeLenses, validatePreparedVolumeLenses,
@@ -348,19 +347,16 @@ test('declared lens resources do not download at startup or for inactive lenses 
 
 async function transportFixture(data = payload()) {
   const descriptor = parseObjectDescriptor({ schema: 'cssearth-object@1', id: data.id, type: 'volume-lens-bank',
-    properties: { frame, preparation: { source: 'source/lenses.json', sha256: 'b'.repeat(64) } } });
+    properties: { frame, preparation: { source: 'source/lenses.json' } } });
   const wrapped = await prepareObject(descriptor, { type: descriptor.type, format: 'cssearth-volume-lenses@1', parse: value => value, bake: () => data }, {});
   const bytes = new TextEncoder().encode(JSON.stringify(wrapped)).buffer;
-  return { bytes, descriptor: { ...descriptor, prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json',
-    sha256: createHash('sha256').update(new Uint8Array(bytes)).digest('hex') } } };
+  return { bytes, descriptor: { ...descriptor, prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json' } } };
 }
-test('generic descriptor loader verifies pinned bytes, wrapper identity and all volume frames', async () => {
+test('generic descriptor loader verifies wrapper identity and all volume frames', async () => {
   const f = await transportFixture(), read = vi.fn(async () => f.bytes);
   const loaded = await loadPreparedVolumeLenses(f.descriptor, { read });
   expect(loaded.id).toBe('fixture'); expect(loaded.lenses).toHaveLength(3);
   expect(read).toHaveBeenCalledExactlyOnceWith('prepared/lenses.json');
-  const stale = new TextEncoder().encode(new TextDecoder().decode(f.bytes) + '\n').buffer;
-  await expect(loadPreparedVolumeLenses(f.descriptor, { read: async () => stale })).rejects.toThrow('SHA-256');
   const drift = { ...f.descriptor, properties: { ...f.descriptor.properties, frame: { ...frame, originM: [1, 0, 0] } } };
   await expect(loadPreparedVolumeLenses(drift, { read })).rejects.toThrow('identity/frame');
   await expect(loadPreparedVolumeLenses({ ...f.descriptor, id: 'different' }, { read })).rejects.toThrow('identity');

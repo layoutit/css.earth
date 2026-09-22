@@ -4,12 +4,10 @@
   "label": "Optical composite · NOIRLab + Niittee",
   "compilerRecipe": "labs/nebula/models/m45/compiler.json",
   "baseResult": {
-    "path": ".local/nebula-lab/compiler/29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef/result.json",
-    "sha256": "5c3a60e2a10d401c89689e2276a881cb3751c2cbdbb816e97645ea364404ae8c"
+    "path": ".local/nebula-lab/compiler/29c367b2d0e32f5c5b9cb965c612d485a264a9266fbbbaeeef9090c18ca8dfef/result.json"
   },
   "neutralSlices": {
-    "path": ".local/nebula-lab/compiler/a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8/scene/neutral/volume-slices.json",
-    "sha256": "1a7db1ce7d4d8f87f5c137c6a24a908130a5250745f6df5390b9c8d877d01fb9"
+    "path": ".local/nebula-lab/compiler/a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8/scene/neutral/volume-slices.json"
   },
   "observationRecipe": "labs/nebula/models/m45/optical-composite-observations.json",
   "observationCatalogue": ".local/nebula-lab/observations/m45-optical-composite/observations.json",

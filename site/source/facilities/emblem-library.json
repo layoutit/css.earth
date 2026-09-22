@@ -8,17 +8,14 @@
       "width": 288,
       "height": 288,
       "bytes": 114715,
-      "sha256": "2a739cffa5e0a2b591d8594f66e17c8c15b7e49c173ee313d3faa6a1244a93dd",
       "source": {
         "id": "messenger",
         "url": "https://upload.wikimedia.org/wikipedia/commons/6/6e/MESSENGER_mission_emblem.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:MESSENGER_mission_emblem.png",
-        "sourceSha256": "f110348ac9deaa7a8e21cb95216da6de6de7613bd9934753164e2b1334bf4ba3",
         "sourceBytes": 4754643,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/messenger.png",
-        "inputSha256": "f110348ac9deaa7a8e21cb95216da6de6de7613bd9934753164e2b1334bf4ba3",
         "inputBytes": 4754643
       },
       "preparation": {
@@ -50,17 +47,14 @@
       "width": 288,
       "height": 288,
       "bytes": 172837,
-      "sha256": "1e2dd6c3f628342c5c997a861c428d6ce030af7345c17730ae1cf74b35bfb6e0",
       "source": {
         "id": "dawn",
         "url": "https://upload.wikimedia.org/wikipedia/commons/3/35/Dawn_logo.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dawn_logo.png",
-        "sourceSha256": "f23ffa823e1f69ab05d281ec51c41aac0928b5d29ef3dcf0ff4ca96d941f6abb",
         "sourceBytes": 2159257,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/dawn.png",
-        "inputSha256": "f23ffa823e1f69ab05d281ec51c41aac0928b5d29ef3dcf0ff4ca96d941f6abb",
         "inputBytes": 2159257
       },
       "preparation": {
@@ -92,17 +86,14 @@
       "width": 288,
       "height": 288,
       "bytes": 84024,
-      "sha256": "aa077ab5ff64b37a77d26352a2b0525c658aad0e8e7284e28b11e6c176f80d90",
       "source": {
         "id": "galileo",
         "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Galileo_mission_patch.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Galileo_mission_patch.png",
-        "sourceSha256": "a188f9dffc5f5c4c78cd57dfeaf24e79ead2e651031fa78a2105b18f0557a08a",
         "sourceBytes": 15797,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/galileo.png",
-        "inputSha256": "a188f9dffc5f5c4c78cd57dfeaf24e79ead2e651031fa78a2105b18f0557a08a",
         "inputBytes": 15797
       },
       "preparation": {
@@ -134,7 +125,6 @@
       "width": 288,
       "height": 288,
       "bytes": 21831,
-      "sha256": "337af78bef1687d7965ffc34fb68d957452292377af545cfbf0dde552bdafd88",
       "source": {
         "id": "juno",
         "kind": "emblem",
@@ -144,9 +134,7 @@
         "license": "Public domain",
         "description": "Juno mission insignia. The silhouette of Juno is placed in the bottom right of the blue circle, representing Jupiter. The white band and circle represent Jupiter’s Great Red Spot and surrounding jet stream, as well as its moons and magnetic field lines.",
         "localSource": "originals/juno.svg",
-        "sourceSha256": "96b68220a08acc71864ba45caec0a6f316a8add0f6dd0786cb0c12d21e2b3d8f",
         "sourceBytes": 5989,
-        "inputSha256": "96b68220a08acc71864ba45caec0a6f316a8add0f6dd0786cb0c12d21e2b3d8f",
         "inputBytes": 5989
       },
       "preparation": {
@@ -178,17 +166,14 @@
       "width": 288,
       "height": 288,
       "bytes": 158395,
-      "sha256": "fd6b25e26009dff61c77b0c16a78dd91ec4b0c727838665c605b0961c72ebb50",
       "source": {
         "id": "new-horizons",
         "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/New_Horizons_-_Logo2_big.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:New_Horizons_-_Logo2_big.png",
-        "sourceSha256": "8dd95ff0e56bbc1aa6839dc83af20f04555e11557240856f3eaeb6f0d65ad362",
         "sourceBytes": 1069353,
         "kind": "emblem",
         "credit": "NASA/JPL/APL/SwRI",
         "localSource": "originals/new-horizons.png",
-        "inputSha256": "8dd95ff0e56bbc1aa6839dc83af20f04555e11557240856f3eaeb6f0d65ad362",
         "inputBytes": 1069353
       },
       "preparation": {
@@ -220,17 +205,14 @@
       "width": 288,
       "height": 288,
       "bytes": 124647,
-      "sha256": "deef33c3addfed462e6690283d78ab8a824606b94109e1a3478b6125b63e952b",
       "source": {
         "id": "sdo",
         "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Solar_Dynamics_Observatory_insignia.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Solar_Dynamics_Observatory_insignia.png",
-        "sourceSha256": "c38e61ee80dbfdfef5875ba3d1bf152c137407e7019bb9e3785b9a657a02ff80",
         "sourceBytes": 2051141,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/sdo.png",
-        "inputSha256": "c38e61ee80dbfdfef5875ba3d1bf152c137407e7019bb9e3785b9a657a02ff80",
         "inputBytes": 2051141
       },
       "preparation": {
@@ -262,17 +244,14 @@
       "width": 288,
       "height": 288,
       "bytes": 43452,
-      "sha256": "d4ff7a777655e69c8da0a8382ab6f47a012da82261a08f6a84bd95d61a85d08c",
       "source": {
         "id": "voyager-1",
         "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png",
-        "sourceSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
         "sourceBytes": 108545,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/voyager-1.png",
-        "inputSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
         "inputBytes": 108545
       },
       "preparation": {
@@ -304,17 +283,14 @@
       "width": 288,
       "height": 288,
       "bytes": 43452,
-      "sha256": "d4ff7a777655e69c8da0a8382ab6f47a012da82261a08f6a84bd95d61a85d08c",
       "source": {
         "id": "voyager-2",
         "url": "https://upload.wikimedia.org/wikipedia/commons/8/87/Voyager_-_mission_logo.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Voyager_-_mission_logo.png",
-        "sourceSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
         "sourceBytes": 108545,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/voyager-2.png",
-        "inputSha256": "c29aadd6ac32c99bf8fa85c97daf98b6eb4135f10789ef09533a63e835525f55",
         "inputBytes": 108545
       },
       "preparation": {
@@ -346,18 +322,15 @@
       "width": 288,
       "height": 288,
       "bytes": 123377,
-      "sha256": "332a1b90d4fc40515d842474b0ab59471fb907d905e64463759de8789138c975",
       "source": {
         "id": "lro",
         "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c4/LRO_mission_logo_%28transparent_background%29_01.png/960px-LRO_mission_logo_%28transparent_background%29_01.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:LRO_mission_logo_(transparent_background)_01.png",
-        "sourceSha256": "26fc61ffad652b18a256d3b91d2425442ac3f9aa5805761801fa988d77c9db8a",
         "sourceBytes": 2028960,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/lro-commons.png",
         "inputKind": "commons-served-thumbnail",
-        "inputSha256": "3a58ee127e3d2a0b3a1ff69994e441b76765b7abf032411155d6322f219235bc",
         "inputBytes": 856431
       },
       "preparation": {
@@ -389,18 +362,15 @@
       "width": 288,
       "height": 288,
       "bytes": 80312,
-      "sha256": "230e95f24a812417abfc5ee04fd803f5a9417cb324c3b07696cacfaaf2b306cd",
       "source": {
         "id": "grail",
         "url": "https://upload.wikimedia.org/wikipedia/commons/7/71/GRAIL_-_GRAIL-logo-sm.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:GRAIL_-_GRAIL-logo-sm.png",
-        "sourceSha256": "dae76b78ac8a15f72b880bb9794fdfacf0f1b167e001f0b6b3654a8a3a2a7841",
         "sourceBytes": 465402,
         "kind": "emblem",
         "credit": "NASA/JPL/Corby Waste",
         "localSource": "originals/grail-prepared.webp",
         "inputKind": "previously-prepared-emblem",
-        "inputSha256": "9d2fd1b61a60afa01ccb23390877e71abb5f029a862bff7b7c4c2923015d8d03",
         "inputBytes": 16398
       },
       "preparation": {
@@ -432,18 +402,15 @@
       "width": 288,
       "height": 288,
       "bytes": 150681,
-      "sha256": "595f8e1f689cf5b7a8fbb58a4f41c9a0fec711ebeaf629495330854b46e5eb7f",
       "source": {
         "id": "viking",
         "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg/960px-Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Project_Viking_Logo_-_Patch_Style_1974-L-01916.jpg",
-        "sourceSha256": "ddc9ba676f17dc2899295a76f0a93015ec972eee156891f0b43bc468e1c10714",
         "sourceBytes": 1924048,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/viking-commons.jpg",
         "inputKind": "commons-served-thumbnail",
-        "inputSha256": "141d972c4b427c786ddb628affe22943fa1c9d439791690f387aabbabbd95dfa",
         "inputBytes": 190112
       },
       "preparation": {
@@ -475,17 +442,14 @@
       "width": 288,
       "height": 288,
       "bytes": 54128,
-      "sha256": "ca181584d258388e4f6f32ae8ac78ed5506d4dbcf04dd32d757b317f80f5d2fe",
       "source": {
         "id": "mro",
         "url": "https://upload.wikimedia.org/wikipedia/commons/6/6b/Mars_Reconnaissance_Orbiter_insignia.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mars_Reconnaissance_Orbiter_insignia.png",
-        "sourceSha256": "05a7052993d547de48731d9ac0cb1e8c1eed48e2bd7d91fac975b5bf28b9b414",
         "sourceBytes": 129628,
         "kind": "emblem",
         "credit": "NASA/JPL",
         "localSource": "originals/mro.png",
-        "inputSha256": "05a7052993d547de48731d9ac0cb1e8c1eed48e2bd7d91fac975b5bf28b9b414",
         "inputBytes": 129628
       },
       "preparation": {
@@ -517,17 +481,14 @@
       "width": 288,
       "height": 288,
       "bytes": 80651,
-      "sha256": "79a63c11753f9c2da78717cc279afcf01245b6cac9e314af76a09cca0b06bb21",
       "source": {
         "id": "osiris-rex",
         "url": "https://upload.wikimedia.org/wikipedia/commons/9/9a/OSIRIS-REx_Mission_Logo.png",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:OSIRIS-REx_Mission_Logo.png",
-        "sourceSha256": "027fb2600a23395b4286c8005ce46c97a8ca352dbfa6a7ed5ef5cc0379bc6743",
         "sourceBytes": 447581,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/osiris-rex.png",
-        "inputSha256": "027fb2600a23395b4286c8005ce46c97a8ca352dbfa6a7ed5ef5cc0379bc6743",
         "inputBytes": 447581
       },
       "preparation": {
@@ -559,18 +520,15 @@
       "width": 288,
       "height": 288,
       "bytes": 112836,
-      "sha256": "d6320b16c3903793ff95d03f6b407ceeb73190a44ccab0aecc80cab8c3244f96",
       "source": {
         "id": "terra",
         "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/29/Terra_logo.png/960px-Terra_logo.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
         "sourceUrl": "https://commons.wikimedia.org/wiki/File:Terra_logo.png",
-        "sourceSha256": "3853ec2ec5cda451b46a2844941de323892324a65794022b0ec6d443d570df85",
         "sourceBytes": 1189300,
         "kind": "emblem",
         "credit": "NASA",
         "localSource": "originals/terra-commons.png",
         "inputKind": "commons-served-thumbnail",
-        "inputSha256": "962fb4b9a3e4c68fc9417e9bb27b7ebdb31e9e4131a415307aa2f911a640097c",
         "inputBytes": 791331
       },
       "preparation": {
@@ -602,7 +560,6 @@
       "width": 288,
       "height": 288,
       "bytes": 126628,
-      "sha256": "1c59172393c84f85412e83c566f77c8c07a04b9ca8348c7d36adbdb5299f01d5",
       "source": {
         "id": "cassini",
         "kind": "emblem",
@@ -613,9 +570,7 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0",
         "description": "A tudás érdekében",
         "localSource": "originals/cassini.png",
-        "sourceSha256": "46b9a25e560d5be8b085793484b5c76b7f6356be843e5bcbf149d82e1e46a3b4",
         "sourceBytes": 724196,
-        "inputSha256": "46b9a25e560d5be8b085793484b5c76b7f6356be843e5bcbf149d82e1e46a3b4",
         "inputBytes": 724196
       },
       "preparation": {
@@ -647,7 +602,6 @@
       "width": 288,
       "height": 288,
       "bytes": 59106,
-      "sha256": "0426a057195dae563d707c9205296882441ec3b206eb248fd4b6ac98afd25e67",
       "source": {
         "id": "magellan",
         "kind": "emblem",
@@ -657,9 +611,7 @@
         "license": "Public domain",
         "description": "Magellan Mission Patch",
         "localSource": "originals/magellan.png",
-        "sourceSha256": "97c89c86bdefb1c23f03eb92cb777c6ccd44ed6dd923e053cc55fdd85d899f68",
         "sourceBytes": 19691,
-        "inputSha256": "97c89c86bdefb1c23f03eb92cb777c6ccd44ed6dd923e053cc55fdd85d899f68",
         "inputBytes": 19691
       },
       "preparation": {
@@ -691,7 +643,6 @@
       "width": 288,
       "height": 288,
       "bytes": 81390,
-      "sha256": "bdd637b832c970b93936477f7732a87970c94dc7b91ca7cdd5a6ffd711cd30c4",
       "source": {
         "id": "odyssey",
         "kind": "emblem",
@@ -701,9 +652,7 @@
         "license": "Public domain",
         "description": "\"The Mars Odyssey patch was designed by Corby Waste. Corby has also produced much of the artwork. of NASA spacecraft. For the Odyssey patch, Corby decided to create a “science logo.” In all the artwork Corby was doing for the Odyssey mission, the spacecraft was just seen hovering over Mars. He wanted to create a logo depicting the Odyssey instruments “in action.” On the right side of Mars, the Thermal Imaging System (THEMIS) instrument is taking infrared data. On the left, the Gamma Ray Spectrometer (GRS) is taking gamma ray data. The shape of the logo was “invented” by Corby. “It was something I just like…not round, not square, it was something new.” Within the border of the logo are all the institutions involved with the Odyssey mission: Arizona State University, the Jet Propulsion Laboratory, Johnson Space Center, NASA, Lockheed Martin and The University of Arizona.\"",
         "localSource": "originals/odyssey.png",
-        "sourceSha256": "30cfcee5e2342d67883a0fb2a5387a17b71d1d7c8d4445e6d27d20925cdbc31a",
         "sourceBytes": 277901,
-        "inputSha256": "30cfcee5e2342d67883a0fb2a5387a17b71d1d7c8d4445e6d27d20925cdbc31a",
         "inputBytes": 277901
       },
       "preparation": {
@@ -735,7 +684,6 @@
       "width": 288,
       "height": 288,
       "bytes": 98803,
-      "sha256": "d3f6e9faa3dec45b94142a93e83b82fe06b40eab879406dc9bee1674c99e0e97",
       "source": {
         "id": "near-shoemaker",
         "kind": "emblem",
@@ -745,9 +693,7 @@
         "license": "Public domain",
         "description": "Official mission insignia of the NEAR Shoemaker mission.",
         "localSource": "originals/near-shoemaker.png",
-        "sourceSha256": "95bd633622e2308a0ac8080ec66a55343f5140bd462f696eb79fec9c40fbbaad",
         "sourceBytes": 110248,
-        "inputSha256": "95bd633622e2308a0ac8080ec66a55343f5140bd462f696eb79fec9c40fbbaad",
         "inputBytes": 110248
       },
       "preparation": {
@@ -779,7 +725,6 @@
       "width": 288,
       "height": 288,
       "bytes": 96861,
-      "sha256": "edba6cc65eeaf13e964aa8d52135c25733d86aa9282350e80e2f12309c226c4e",
       "source": {
         "id": "mars-global-surveyor",
         "kind": "emblem",
@@ -790,8 +735,6 @@
         "description": "This is the official Mars Global Surveyor patch, and shows the spacecraft above Mars with stars in the background. A cartoon of the spacecraft trajectory can be seen leaving Earth (blue dot) and travelling around the Sun, Venus and Mercury to reach Mars. MGS launched in late 1996.",
         "localSource": "originals/mars-global-surveyor-jpl.jpg",
         "sourceBytes": 64084,
-        "sourceSha256": "ddfc7ad001e5913a9e7081e28a3065561a9a9b4f31b71bf4a2039e6e6f34b779",
-        "inputSha256": "ddfc7ad001e5913a9e7081e28a3065561a9a9b4f31b71bf4a2039e6e6f34b779",
         "inputBytes": 64084
       },
       "preparation": {
@@ -823,7 +766,6 @@
       "width": 288,
       "height": 288,
       "bytes": 113711,
-      "sha256": "a952763d5e62a57c98d89e96b3503e4fda0765a2f2763358ae07f12dac9f5d4b",
       "source": {
         "id": "suomi-npp",
         "kind": "emblem",
@@ -833,9 +775,7 @@
         "license": "Public domain",
         "description": "Logo of the NPOESS Preparatory Project, now Suomi NPP.",
         "localSource": "originals/suomi-npp-commons.png",
-        "sourceSha256": "d92cd21e0b0b7b85264252aec39b77cfc124dcc922adb732b9124514f9c4f72d",
         "sourceBytes": 388100,
-        "inputSha256": "d92cd21e0b0b7b85264252aec39b77cfc124dcc922adb732b9124514f9c4f72d",
         "inputBytes": 388100
       },
       "preparation": {
@@ -867,7 +807,6 @@
       "width": 288,
       "height": 288,
       "bytes": 58343,
-      "sha256": "f39f8a3e75504b1525fd7b68731e4efdc6d60f27c73be3234bb4de599ce261a1",
       "source": {
         "id": "hubble",
         "kind": "emblem",
@@ -878,9 +817,7 @@
         "licenseUrl": "https://creativecommons.org/licenses/by-sa/3.0",
         "description": "NASA Hubble 25th-anniversary emblem (2015)",
         "localSource": "originals/hubble-commons.png",
-        "sourceSha256": "820301a77e806b34f0ee010b2f1d8c22dfdea8962c50c3f064ba3fa51f7251be",
         "sourceBytes": 173563,
-        "inputSha256": "820301a77e806b34f0ee010b2f1d8c22dfdea8962c50c3f064ba3fa51f7251be",
         "inputBytes": 173563
       },
       "preparation": {
@@ -912,7 +849,6 @@
       "width": 288,
       "height": 288,
       "bytes": 104923,
-      "sha256": "5bbce8b4a8b7e23c2395e3c1604aebf1483f507dc71d44e7fb306aa1544bef05",
       "source": {
         "id": "hayabusa",
         "kind": "emblem",
@@ -921,9 +857,7 @@
         "credit": "JAXA",
         "license": "JAXA source page: private use only; permission required for commercial or other uses",
         "localSource": "originals/hayabusa.jpg",
-        "sourceSha256": "14116656107e8904945876d97756e7589b08bfd33f63646b05b69b36f7911fcb",
         "sourceBytes": 700648,
-        "inputSha256": "14116656107e8904945876d97756e7589b08bfd33f63646b05b69b36f7911fcb",
         "inputBytes": 700648
       },
       "preparation": {
@@ -955,7 +889,6 @@
       "width": 288,
       "height": 288,
       "bytes": 78493,
-      "sha256": "4432790095e53640a8fa05c81335a5251278ad73ca0327719f4094483da2db00",
       "source": {
         "id": "hayabusa2",
         "kind": "emblem",
@@ -965,9 +898,7 @@
         "license": "JAXA website terms",
         "description": "Exploring Ryugu mission logo",
         "localSource": "originals/hayabusa2.png",
-        "sourceSha256": "5de8e1e4ec8cefd1471432f9b5c5a32688d5374f348ec3381b4c90c317208acd",
         "sourceBytes": 267948,
-        "inputSha256": "5de8e1e4ec8cefd1471432f9b5c5a32688d5374f348ec3381b4c90c317208acd",
         "inputBytes": 267948
       },
       "preparation": {
@@ -999,7 +930,6 @@
       "width": 288,
       "height": 288,
       "bytes": 54550,
-      "sha256": "7559549406985cf8252e326d60c0a03895edc0374a14b345f3d69512c7b83cd3",
       "source": {
         "id": "rosetta",
         "kind": "emblem",
@@ -1008,9 +938,7 @@
         "credit": "ESA",
         "license": "ESA Standard Licence",
         "localSource": "originals/rosetta-patch.png",
-        "sourceSha256": "916ebac8b3c81f3ea4654b3ce84afbc1e21afa612796f2a4a646b998c1fd4bfb",
         "sourceBytes": 161297,
-        "inputSha256": "916ebac8b3c81f3ea4654b3ce84afbc1e21afa612796f2a4a646b998c1fd4bfb",
         "inputBytes": 161297
       },
       "preparation": {

@@ -30,8 +30,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "USGS 2012 Cassini/Voyager mosaic. Its download-link label is wrong; this pinned 11520 by 5760 file matches the 417 m metadata. Preserve nonzero pixels; zero is GeoTIFF no-data. Origin easting zero means left edge 180 E despite projection center 180 E.",
-      "expectedBytes": 66401915,
-      "expectedSha256": "ce537c3c93670a0d4ea5a64b99bffb76ff308727eb3eabeee0a38cf9f6f1abc7",
       "capture": {
         "attributions": [
           {
@@ -92,8 +90,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve supplied pixels, including real dark terrain, residual photographed shadows and coarse inserts. The one-pixel departure from 2:1 aspect is retained in source and resampled at preparation.",
-      "expectedBytes": 10389170,
-      "expectedSha256": "4a3f4c5cca6ec558a6dcd664ee818dd700df527fc07fe623d1c56d4e2ae81bc4",
       "capture": {
         "attributions": [
           {
@@ -144,8 +140,6 @@
       },
       "coverage": "Global SPC radius model. Sample original geotransform within actual raster bounds. Narrow uncovered east/south edges are not extrapolated.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 763.5 km.",
-      "expectedBytes": 9881887,
-      "expectedSha256": "a4d49eb12bfe5c0d97513d3d4692c78c7b5dd7179f8c2097203a37a4834bb51d",
       "capture": {
         "attributions": [
           {
@@ -170,8 +164,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -211,8 +203,6 @@
       ],
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
-      "expectedBytes": 17694840,
-      "expectedSha256": "e4b25f158adf4b430a145946996f4dbde85f50ca0d3c236084c956733e42beb2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -256,8 +246,6 @@
       "height": 1111,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 9881887,
-      "expectedSha256": "f28f37b666d7605a179ee82d8d138cc829bb57a46add484ed423c8fc9cded123",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -324,8 +312,6 @@
     {
       "id": "rhea-vims-source-vims-wavelengths-ir-tab",
       "path": "vims/data/vims_wavelengths_ir.tab",
-      "expectedBytes": 2304,
-      "expectedSha256": "8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -430,8 +416,6 @@
     {
       "id": "rhea-vims-source-rhea-notnorm-pc-modified-2-img",
       "path": "vims/data/rhea/rhea_notnorm_pc_modified_2.img",
-      "expectedBytes": 66355200,
-      "expectedSha256": "b36eb4c5d7c43c76c623fe2e1a5d8a133fd5836ba9f4c4c0442daf478553b9f6",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_notnorm_pc_modified_2.img",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -458,8 +442,6 @@
     {
       "id": "rhea-vims-source-rhea-phase-function-parameters-tab",
       "path": "vims/data/rhea/rhea_phase_function_parameters.tab",
-      "expectedBytes": 25547,
-      "expectedSha256": "611ec18cecc3c9c06a165649f603e3d769ce47174faee0ac3131db9d6678cdf1",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_phase_function_parameters.tab",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -512,8 +494,6 @@
     {
       "id": "rhea-vims-source-rhea-vims-cubes-list-tab",
       "path": "vims/data/rhea/rhea_vims_cubes_list.tab",
-      "expectedBytes": 8456,
-      "expectedSha256": "a54ff9b243b284040e8fc61053cada1ffd719615d647444978331b34fb4961fb",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/rhea/rhea_vims_cubes_list.tab",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",

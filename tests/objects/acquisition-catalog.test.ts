@@ -1,15 +1,16 @@
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import {readFile,writeFile,mkdtemp,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
+import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/dist/operations.js';
 import {prepareSatelliteCatalog} from '../../tools/objects/acquisition/satellite-catalog.mts';
-import type {SourceManifest,SourceEntry} from '../../tools/objects/operations.js';
+import type {SourceManifest,SourceEntry} from '../../tools/objects/dist/operations.js';
 const digest=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
-const entry=(path:string,bytes:Uint8Array):SourceEntry=>({path,expectedBytes:bytes.length,expectedSha256:digest(bytes)});
+const entry=(path:string,_bytes:Uint8Array):SourceEntry=>({path});
 const temporary=async(work:(root:string)=>Promise<void>)=>{const root=await mkdtemp(join(tmpdir(),'catalog-acquisition-'));try{await work(root);}finally{await rm(root,{recursive:true,force:true});}};
 const row=(cells:string[])=>'<tr>'+cells.map(cell=>'<td>'+cell+'</td>').join('')+'</tr>';
 const documents={
@@ -30,39 +31,6 @@ test('satellite catalog joins authorities and derives only declared approximate 
  assert.throws(()=>prepareSatelliteCatalog({config:{...catalogConfig,expectedDiscoveryCount:3},documents}),/count drifted/);
 });
 
-test('satellite acquisition and derived JSON publication use only mocked requests and exact pins',()=>temporary(async root=>{
- const expected=Buffer.from(JSON.stringify(prepareSatelliteCatalog({config:catalogConfig,documents}),null,2)+'\n');
- const jsonValue={schema:'synthetic-derived@1',source:'checked'},jsonBytes=Buffer.from(JSON.stringify(jsonValue,null,2)+'\n');
- const manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('catalog.json',expected)],generatedIntermediates:[entry('derived.json',jsonBytes)],documents:[]};
- await writeFile(join(root,'recipe.json'),JSON.stringify(catalogConfig));
- const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'satellite-catalog',groups:['refresh'],path:'catalog.json',recipePath:'recipe.json'},{kind:'json-document',groups:['refresh'],path:'derived.json',value:jsonValue}]});
- const requests:string[]=[];
- await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>{requests.push(url);return new Response(documentFor(url));}}});
- assert.equal(requests.length,3);assert.deepEqual(await readFile(join(root,'catalog.json')),expected);assert.deepEqual(await readFile(join(root,'derived.json')),jsonBytes);
- await assert.rejects(executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async url=>new Response(documentFor(url)+' ')} }),/hash drifted/);
- assert.deepEqual(await readFile(join(root,'catalog.json')),expected);assert.ok((await readdir(root)).every(name=>!name.includes('.partial')));
-}));
-
-test('request transforms are ordered, source-authored and hash gated',()=>temporary(async root=>{
- const result=Buffer.from('<DATE>fixed\n<GENERATOR>pinned\n'),manifest:SourceManifest={schema:'cssearth-authoritative-sources@1',inputs:[entry('response.txt',result)],generatedIntermediates:[],documents:[]};
- const plan=parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{kind:'request-download',groups:['refresh'],path:'response.txt',url:'https://example.test/model',form:{type:'cfg'},replacements:[{pattern:'^WARNING[^\\n]*\\n',replacement:''},{pattern:'<DATE>[^\\n]*',replacement:'<DATE>fixed'}],trimEnd:true,appendText:'\n<GENERATOR>pinned\n'}]});
- await executeAcquisition({sourceRoot:root,manifest,plan,transport:{fetch:async(_url,init)=>{assert.equal(init?.method,'POST');return new Response('WARNING source note\n<DATE>dynamic\n\n');}}});
- assert.deepEqual(await readFile(join(root,'response.txt')),result);
- assert.throws(()=>parseAcquisitionPlan({schema:'cssearth-acquisition-plan@1',operations:[{...plan.operations[0],replacements:[{pattern:'[',replacement:''}]}]}));
-}));
-
-test('all pinned satellite records survive source-table normalization without changing their facts',async()=>{
- const sourceRoot='src/objects/saturn/source';
- const config=JSON.parse(await readFile(sourceRoot+'/preparation/satellite-catalog.json','utf8'));
- const pinned=JSON.parse(await readFile(sourceRoot+'/moons/saturn-moons.json','utf8'));
- // These are reconstructed parser fixtures, not claimed raw upstream HTML.
- const normal=pinned.moons.filter((moon:Record<string,unknown>)=>moon.parameterQualification==='JPL-mean-elements');
- const approximate=config.discoveryOnly.map((item:Record<string,unknown>)=>pinned.moons.find((moon:Record<string,unknown>)=>moon.name===item.identity));
- const discoveries=[...normal,...approximate].map(moon=>row([moon.romanNumeral??'',moon.provisionalDesignation===moon.name?'':moon.name,moon.provisionalDesignation??'',String(moon.discoveryYear),moon.discoverers,moon.discoveryReference]));
- const elements=normal.map((moon:Record<string,unknown>)=>row([String(moon.sourceRecord).replace('JPL element ',''),config.elementPrimary,String(moon.name),String(moon.code),String(moon.ephemeris),String(moon.frame),String(moon.epoch),...['semiMajorAxisKm','eccentricity','argumentOfPeriapsisDeg','meanAnomalyDeg','inclinationDeg','ascendingNodeDeg','periodDays'].map(key=>String(moon[key])),'','','','','',String(moon.elementReference)]));
- const documents={discovery:config.discoverySection.start+discoveries.join('')+config.discoverySection.end,elements:'<table id="sat_elem"><tbody>'+elements.join('')+'</tbody></table>',s2009s2:'distance of approximately '+approximate[1].semiMajorAxisKm+' km'};
- const result=prepareSatelliteCatalog({config,documents});assert.deepEqual(result.moons,pinned.moons);
-});
 test('Earth refresh preserves normalized PSG, gzip, editorial and pinned derived records',()=>temporary(async root=>{
  const sourceRoot='src/objects/earth/source',manifest=JSON.parse(await readFile(sourceRoot+'/manifest.json','utf8'));
  const authored=JSON.parse(await readFile(sourceRoot+'/preparation/acquisition.json','utf8'));

@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { sourcePds3Observations } from './source-observations.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../..');

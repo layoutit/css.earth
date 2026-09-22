@@ -3,7 +3,8 @@ import { createHash } from 'node:crypto';
 import { mkdir,mkdtemp,readFile,rm,writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseCli } from './cli.mts';
 import { exportSpatialObject,inspectSpatialObject } from './spatial-handoff.mts';
 
@@ -22,7 +23,7 @@ async function fixture(root:string){
   const prepared={schema:'cssearth-prepared-object@1',id:'fixture-bank',type:'volume-lens-bank',format:'cssearth-volume-lenses@1',data};
   const preparedBytes=Buffer.from(JSON.stringify(prepared));await writeFile(resolve(root,'prepared/lenses.json'),preparedBytes);
   const recipe={schema:'fixture-recipe@1',id:'fixture-bank'};const recipeBytes=Buffer.from(JSON.stringify(recipe));await writeFile(resolve(root,'source/recipe.json'),recipeBytes);
-  const object={schema:'cssearth-object@1',id:'fixture-bank',type:'volume-lens-bank',properties:{frame,preparation:{source:'source/recipe.json',sha256:hash(recipeBytes)}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json',sha256:hash(preparedBytes)}};
+  const object={schema:'cssearth-object@1',id:'fixture-bank',type:'volume-lens-bank',properties:{frame,preparation:{source:'source/recipe.json'}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json'}};
   const path=resolve(root,'object.json');await json(path,object);return {path,assets};
 }
 

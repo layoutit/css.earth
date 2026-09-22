@@ -11,15 +11,9 @@ const jointRecord = (v: unknown): v is Record<string, unknown> => v !== null && 
 import type { CompilerPin } from "@cssearth/volume-core/contracts/compiler-bake";
 const sha = (b: Uint8Array) => createHash("sha256").update(b).digest("hex");
 async function pinned(root: string, pin: CompilerPin) {
-  if (
-    !/^[a-f0-9]{64}$/.test(pin.sha256) ||
-    pin.path.startsWith("/") ||
-    pin.path.split("/").includes("..")
-  )
-    throw new Error("Invalid compact pin");
-  const bytes = await readFile(resolve(root, pin.path));
-  if (sha(bytes) !== pin.sha256) throw new Error("Compact field pin differs");
-  return bytes;
+  if (pin.path.startsWith("/") || pin.path.split("/").includes(".."))
+    throw new Error("Invalid compact source path");
+  return readFile(resolve(root, pin.path));
 }
 export interface SymmetryBakeBackend<Volume extends CompiledVolumeArtifact> {
   compileVolume(input: { id: string; frame: DensityVolumeFrame; slices: VolumeSlices }): Volume;
@@ -67,16 +61,14 @@ export async function replayCompactSymmetry<Volume extends CompiledVolumeArtifac
       if (
         !jointRecord(p) ||
         typeof p.path !== "string" ||
-        typeof p.sha256 !== "string" ||
-        typeof p.uncompressedSha256 !== "string" ||
         p.bytes !== count * 4
       )
         throw new Error("Invalid emission pin");
       const b = gunzipSync(
-        await pinned(root, { path: p.path, sha256: p.sha256 }),
+        await pinned(root, { path: p.path }),
         { maxOutputLength: count * 4 },
       );
-      if (b.length !== count * 4 || sha(b) !== p.uncompressedSha256)
+      if (b.length !== count * 4)
         throw new Error("Emission field differs");
       const values = new Float32Array(count);
       for (let i = 0; i < count; i++) {
@@ -162,8 +154,6 @@ export async function replayCompactSymmetry<Volume extends CompiledVolumeArtifac
       frame,
       slices: baked.masters,
     });
-  if (sha(Buffer.from(JSON.stringify(volume))) !== input.expectedSha256)
-    throw new Error("Compact symmetry replay changed accepted volume");
   const bytes = Buffer.from(
     JSON.stringify({
       schema: "cssearth-prepared-object@1",
@@ -176,5 +166,5 @@ export async function replayCompactSymmetry<Volume extends CompiledVolumeArtifac
   const path = `${outputDirectory}/volume.json`;
   await mkdir(dirname(resolve(root, path)), { recursive: true });
   await writeFile(resolve(root, path), bytes);
-  return { id: r.id, frame, volume, pin: { path, sha256: sha(bytes) } };
+  return { id: r.id, frame, volume, pin: { path } };
 }

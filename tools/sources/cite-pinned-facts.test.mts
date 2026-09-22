@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { citePinnedFacts, conversionsFor, discoveryMatches, displayedValue, equalAtDisplayedPrecision, fieldMeasures, parseHorizonsElements, parseSatelliteTable, recordCitation, recordLeaves, smallBodyQuery, statedNumbers } from './cite-pinned-facts.mts';
 
 const ELEMENTS = [
@@ -42,7 +43,7 @@ async function fixture(panel: unknown, files: Record<string, string>) {
   await mkdir(join(root, 'source/reference'), { recursive: true });
   await mkdir(join(root, 'source/editorial'), { recursive: true });
   for (const [path, text] of Object.entries(files)) await writeFile(join(root, 'source', path), text);
-  await writeFile(join(root, 'source/manifest.json'), JSON.stringify({ inputs: [], documents: Object.keys(files).map(path => ({ path, expectedBytes: 1, expectedSha256: 'x' })) }));
+  await writeFile(join(root, 'source/manifest.json'), JSON.stringify({ inputs: [], documents: Object.keys(files).map(path => ({ path })) }));
   await writeFile(join(root, 'source/content/object.json'), JSON.stringify({ schema: 'cssearth-object-content@1', panel }));
   return root;
 }

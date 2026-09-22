@@ -28,10 +28,10 @@ test("compact sampled replay rejects changed measured particles before any recon
     await assert.rejects(
       replayCompactSampled(
         root,
-        { path, sha256: createHash("sha256").update(bytes).digest("hex") },
+        { path },
         "prepared",
       ),
-      /Compact pin differs/,
+      /header check|Compact pin differs/,
     );
   } finally {
     await rm(root, { recursive: true, force: true });
@@ -62,7 +62,7 @@ test('retained sampled loader rejects a renamed scene before reading particles o
     const bytes = gzipSync(Buffer.from(JSON.stringify(value))), path = 'input.json.gz';
     await writeFile(join(root, path), bytes);
     await assert.rejects(prepareCompactSampledInputs(root,
-      { path, sha256: createHash('sha256').update(bytes).digest('hex') },
+      { path },
       { decodeFits() { throw new Error('Must reject before decoding'); } }), /source result differs/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

@@ -27,7 +27,7 @@ export function EvidenceFusion({ cataloguePath, observationManifest }: { catalog
 function FusionSession({ catalogue, cataloguePath, observationManifest }: { catalogue: StructureCatalogue; cataloguePath: string; observationManifest?: string }) {
   const matrices = useMemo(() => Object.fromEntries(catalogue.images.map(image => [image.id,
     adjustedMatrix({ imageToFrame: image.imageToFrame, source: { width: image.nativeWidth, height: image.nativeHeight } }, catalogue.frame,
-      observationManifest ? savedObservationFit(observationManifest, { id: image.id, source: { sha256: image.sourceSha256 } }) : unchanged)])), [catalogue, observationManifest]);
+      observationManifest ? savedObservationFit(observationManifest, { id: image.id, source: { url: image.sourceUrl } }) : unchanged)])), [catalogue, observationManifest]);
   const key = `nebula:joint-evidence:1:${cataloguePath}:${JSON.stringify(catalogue.images.map(image => [image.id,image.sourceSha256,image.mapSha256,matrices[image.id]]))}`;
   const defaults: FusionRequest['settings'] = { channel: 'ridges', weights: catalogue.images.map(() => 1), sensitivity: 1 };
   const [settings, setSettings] = useState(() => { try { return readFusionSettings(JSON.parse(localStorage.getItem(key) ?? 'null')); } catch { return defaults; } });
