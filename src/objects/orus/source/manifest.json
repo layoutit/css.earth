@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/orus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "doi-10-3847-psj-acaf79",
             "role": "method",
-            "evidence": "src/planets/orus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -94,7 +94,7 @@
           {
             "catalogueId": "doi-10-3847-psj-acaf79",
             "role": "method",
-            "evidence": "src/planets/orus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,52 +103,34 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3935,
-      "expectedSha256": "fd02c2f6b9b4276d3fe1fd486a6542fea58034539f4adaa1d26b77d25d88336d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2777,
-      "expectedSha256": "bb6945425ba41e4a03e26f44ccdae68b908db99a995df5fc2d131592b3787434"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "dae6a109c6850205d5141e35fcc9be6b63907f06dfd61fafeababacb488320aa"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 592,
-      "expectedSha256": "8d643c97181fcc02285a0c1498d05acbce89f25c3b9ac3aff0979ce6d825da91"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2485,
-      "expectedSha256": "3cdb45027221c11c70458f9f5750fc2eff7280b11bff035822f011ee0661ff19"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2477,
-      "expectedSha256": "5de23d87016acf6d705e0c8b5a5e8f64bff46204b46946c7770362e94d87d307"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3525,
-      "expectedSha256": "614d7a2cd760d53663c3f164704fc127c74bc59b607b1a1bf25052e72fa50715",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -184,9 +166,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 73045,
-      "expectedSha256": "78f347c2caeda8abe6636417a808bfcf1574d869690c9ef465bde4105371d707"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

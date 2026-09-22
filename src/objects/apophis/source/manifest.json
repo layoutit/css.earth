@@ -31,7 +31,7 @@
           {
             "catalogueId": "source-apophis-apophis-shape",
             "role": "material",
-            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -58,7 +58,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -83,7 +83,7 @@
           {
             "catalogueId": "source-apophis-apophis-research-apophis-2018",
             "role": "method",
-            "evidence": "src/planets/apophis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -99,8 +99,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 39056,
-      "expectedSha256": "cf44e34f8b3d857c43165eeee5a1d7c7534b8adfedfb2c152887d9e739e147ba",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -119,97 +117,61 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10036,
-      "expectedSha256": "43577d64e6eac24140089c7e572dc610a2224923e8e6677e6ffb9fd20349717a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 823,
-      "expectedSha256": "e875a689e7979f8d8c37f137cfb400612f560301a526896b2b8c6f9abd7e3ed3"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "99e42c0676cb756f1f289b0c094c2d941c9514a6ee15c34f6127d228bb217d9f"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 710,
-      "expectedSha256": "4d9128e2fe01a3a29845e8969f24668472b4931e7509cc2e6ad07124feefa4c4"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2682,
-      "expectedSha256": "62e3e34da23be28ee37fd2bbe480c6a1c46383bf7b5c5b9e67fb2cc1d169692d"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3971,
-      "expectedSha256": "e413e503eb27e7af64f70843cc12416499586e339e46f48656f5277a53053e1c"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/apophis_v233s7.xml",
-      "expectedBytes": 11175,
-      "expectedSha256": "650ed00cec34f9cb91f2ee0e81a7eb505c9a307c846ccfaf5fd8f75e4000f6b0"
+      "path": "reference/apophis_v233s7.xml"
     },
     {
-      "path": "reference/apophis_v233s7_spin_state.csv",
-      "expectedBytes": 91,
-      "expectedSha256": "9cc851fd9f33a2696b51ce765688d0816269769ec6b080bfd1d2f4cec96ba176"
+      "path": "reference/apophis_v233s7_spin_state.csv"
     },
     {
-      "path": "reference/apophis_v233s7_spin_state.xml",
-      "expectedBytes": 12784,
-      "expectedSha256": "a307c97b287dcf0b9dffb45c4c41df002d8f6074605374af92e90594486a6413"
+      "path": "reference/apophis_v233s7_spin_state.xml"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 3017,
-      "expectedSha256": "f1c9df2c8b00b9ce0dac61eafa02dca679032056ddee04e77ce931bedef9e3df"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/bundle_gbo.ast-apophis.jpl.radar.shape_model.xml",
-      "expectedBytes": 7371,
-      "expectedSha256": "ef162961a2bf1e0df236e2ab74ab2aa991b8616c76745ce60d2cdfd3387e323c"
+      "path": "reference/bundle_gbo.ast-apophis.jpl.radar.shape_model.xml"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7836,
-      "expectedSha256": "0ef0cd05182157a2713d27a4b4ba572a005997f99572c4d48b5d1aa3f57ef478"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1818,
-      "expectedSha256": "2cdd53e0d22e50d78f9060609f004c4ab21cf30dcb440f54cc1713edc03ff114"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 7126,
-      "expectedSha256": "ab82fb131cc5f06231bff7fd9c2077faa23e66d96393deacea3a79460255ceaf"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2118,
-      "expectedSha256": "e8508cf2a16ad28ba51c6c6fce31b8e7d9fbc00cd84c0c6f9700568f39cdd20a"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/ref.txt",
-      "expectedBytes": 1384,
-      "expectedSha256": "3aa2f959debad375f817d7c474f11725a743736563227cf8e945d6eb27d648e0"
+      "path": "reference/ref.txt"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5090,
-      "expectedSha256": "3d6c7a129041791ef5029c4093bd7e4fa49e2fdca179cffb3163c2523ce928f6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -59,7 +59,7 @@
           {
             "catalogueId": "source-titania-schenk-2020-titania-normal",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -121,7 +121,7 @@
           {
             "catalogueId": "source-titania-schenk-2020-titania-elevation",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -148,7 +148,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -176,7 +176,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-1",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -204,7 +204,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-2",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -232,7 +232,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-3",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -260,7 +260,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-4",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -288,7 +288,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-5",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -316,7 +316,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-6",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -344,7 +344,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-7",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -372,7 +372,7 @@
           {
             "catalogueId": "source-titania-geology-2026-source-8",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -402,7 +402,7 @@
           {
             "catalogueId": "source-titania-geology-2026-categories",
             "role": "material",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -434,8 +434,6 @@
     {
       "id": "titania-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1009,
-      "expectedSha256": "15a91c8d54eaa400819137b5299b3698eb453a4f355cdeca57c878654edc93cd",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -452,8 +450,6 @@
     {
       "id": "titania-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1133,
-      "expectedSha256": "7a078791155b6a6e7c5884ece28d705944ca3cf3a81dc74b6626d688913577e9",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -470,8 +466,6 @@
     {
       "id": "titania-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "35728890c032564a8e1c6379072fd0aaa2374259a50e4d81ccfa6bd11a0cb3c4",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -507,7 +501,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/titania/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -515,8 +509,6 @@
     {
       "id": "titania-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 208,
-      "expectedSha256": "9355e331d3882a2394a911a78f2d95cb53c9d8756616a7faf5fc760b989d694a",
       "origin": "Repository-authored Titania solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -536,8 +528,6 @@
     {
       "id": "titania-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 7897,
-      "expectedSha256": "a31dda2482ad180cb4ba3c762e03ecb413e6e094d3cbb65d4d5ccbd35427061c",
       "origin": "Repository-authored Titania raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -555,8 +545,6 @@
     {
       "id": "titania-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1606,
-      "expectedSha256": "f5b825a908f454b69608f1fd089f7a753d189e8d32d814b3f6102c3c4babc117",
       "origin": "Repository-authored Titania geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -574,8 +562,6 @@
     {
       "id": "titania-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Titania celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -594,8 +580,6 @@
     {
       "id": "titania-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 103,
-      "expectedSha256": "d2e541e7099a7be54eff4fa45b027bbace1420f56c82c258ffb1dedc1c37b56a",
       "origin": "Repository-authored Titania presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -612,8 +596,6 @@
     {
       "id": "titania-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1345,
-      "expectedSha256": "18fe6be36f2d2a2a69aa8117dbac33379608dbdb09045ed88a7b205fcfabc659",
       "origin": "Repository-authored Titania navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -630,8 +612,6 @@
     {
       "id": "titania-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3095,
-      "expectedSha256": "25153077f65a5aebe0eb5d4ccfc034a209fdbc8cd20d4c2298fb242c141842e7",
       "origin": "Repository-authored Titania acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -649,8 +629,6 @@
     {
       "id": "titania-object-content",
       "path": "content/object.json",
-      "expectedBytes": 12666,
-      "expectedSha256": "791442d812ccc27a0813d56d4a7ef201092e0afad856b4a999e649fe44ef3cbd",
       "origin": "Repository-authored Titania object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -669,86 +647,58 @@
   "generatedIntermediates": [],
   "documents": [
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
-      "expectedBytes": 2426,
-      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+      "path": "observations/aaReadMe_uranian_MAP_DEM.txt"
     },
     {
-      "path": "observations/source-inspection.json",
-      "expectedBytes": 3755,
-      "expectedSha256": "5173038594c35caf327347b439747918527b69df678d153e399746440b0417cd"
+      "path": "observations/source-inspection.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2326,
-      "expectedSha256": "f0128fdda3534c791602a9ad01efff311346cb7173893574bc77fe824547a1ea"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "preparation/geology-conversion.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 6105,
-      "expectedSha256": "63f281e6d5472dbe303b2f687f1338c67803c6a13df8b878d28306fb89ca0943"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/preview-overlap-evidence.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 2440,
-      "expectedSha256": "e18502516f75a95b1013419a128370eb11c2d13cd1f995475205e0059b84e8e4"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/nomenclature.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 10589,
-      "expectedSha256": "7bbecba44adbe75155f3acc4fea477aee16939011ef451c8e712381e56397554"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/categories.receipt.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 2755,
-      "expectedSha256": "8d55006e28bc6a4127e4e8db9c2215e48dae33875ceba881d7e36c5d2e36bd27"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/registration.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 4004,
-      "expectedSha256": "49de4d090ca39167189fd4e9f74f2553a53b1030f0b2bf8968358dcadd3e4d07"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/release-metadata.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 6777,
-      "expectedSha256": "c9cd9f54a5397bd7c432fb1e1fe5f2edca0ad6fdf1ebb69e0a4459ac540bf437"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/acquisition-receipt.json",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 2888,
-      "expectedSha256": "7be47d4d17d200ca1c2bee6746af46635d82a25e72b1d1f9354388cf89146022"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/nomenclature.pdf",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 2446389,
-      "expectedSha256": "c139389b02627f54bdd416afce3dfdce84bfa59d21efa8fd745da31082e3ef9f"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "path": "science/geology-2026/nomenclature.zip",
-      "purpose": "Geologic map source, registration, or reproducible conversion evidence.",
-      "expectedBytes": 84339,
-      "expectedSha256": "3a17713bc5527b46fe23685ebeee3bc4461f3f7ea2a21c3035c14702ca14b0cc"
+      "purpose": "Geologic map source, registration, or reproducible conversion evidence."
     },
     {
       "id": "titania-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 2618,
-      "expectedSha256": "d5d62d12bd0fe87fd547239d732de968f948460581b3cf8060730a88abbed1b4",
       "origin": "Repository-pinned English Wikipedia lead summaries for 5 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

@@ -4,8 +4,6 @@
     {
       "id": "mars-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "47a97a8be2879223763aa53bbef1ff644a2c212151e5430bad0ec0f7f38ff7c6",
-      "expectedBytes": 204,
       "origin": "Repository-authored physical scene recipe; equatorial radius 3396.19 km from the JPL physical parameters pinned in editorial/factsheet-review.json and the USGS Viking MDIM product; pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
@@ -71,7 +69,7 @@
           {
             "catalogueId": "source-mars-nasa-hubble-mars-navigation-marker",
             "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -79,8 +77,6 @@
     {
       "id": "mars-atmosphere-model",
       "path": "atmosphere/model.json",
-      "expectedSha256": "e92febb5f3bb206f53066419a0ab586a017a2dc57a8a9488be126f2485186420",
-      "expectedBytes": 1446,
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
       "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
       "license": "Repository-authored record; adapted values credited inside the file",
@@ -125,7 +121,7 @@
           {
             "catalogueId": "source-mars-usgs-viking-mdim21-color",
             "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -161,7 +157,7 @@
           {
             "catalogueId": "source-mars-usgs-mola-pseudocolor",
             "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -199,7 +195,7 @@
           {
             "catalogueId": "source-mars-usgs-themis-ir-day",
             "role": "material",
-            "evidence": "src/planets/mars/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -258,8 +254,6 @@
     {
       "id": "mars-object-content",
       "path": "content/object.json",
-      "expectedSha256": "1abe1b1110beef8c97fe45f481b07f68888eb2ff10bcb2d1d43a16fb6bd2d966",
-      "expectedBytes": 13721,
       "origin": "Repository-authored Mars panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -278,8 +272,6 @@
     {
       "id": "mars-chart-assets",
       "path": "content/charts.json",
-      "expectedSha256": "0f880b44549b5c6c7b2a532b65727c7d54fd05fa10c17b33c576ebe3d0f1d541",
-      "expectedBytes": 4247,
       "origin": "Repository-authored Mars chart asset recipe bound to scientific source records.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -296,8 +288,6 @@
     {
       "id": "mars-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "ccdb3d78359f882dee9759873ae33b19b3064898527f1c125cd3f36c0ff7dd83",
-      "expectedBytes": 3231,
       "origin": "Repository-authored Mars acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -316,8 +306,6 @@
     {
       "id": "mars-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "80613a930f86f5c2903396743a181ae6e180535b3a88e6f1581d8f6f0eb5539b",
-      "expectedBytes": 506,
       "origin": "Repository-authored Mars navigation asset recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -334,8 +322,6 @@
     {
       "id": "mars-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "fea22162e7f8f75850be273b1231f8e8a14abaa24cf133eec89b23c0107b6613",
-      "expectedBytes": 1610,
       "origin": "Repository-authored Mars CSS geometry recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -353,8 +339,6 @@
     {
       "id": "mars-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
-      "expectedBytes": 108,
       "origin": "Repository-authored Mars sky, sun, and marker recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -373,8 +357,6 @@
     {
       "id": "mars-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedSha256": "0a33c89e6373f3596ec9ae1bee0c4f7fc63f6cd81deccacfe8685a9e588513c3",
-      "expectedBytes": 100,
       "origin": "Repository-authored Mars presentation capability recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -391,8 +373,6 @@
     {
       "id": "mars-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "ef74ed1c87a4a1df07cd2f3e673b0b98592bcd8eb75b8663e4a888ec22ebe0b8",
-      "expectedBytes": 1859,
       "origin": "Repository-authored Mars raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -434,8 +414,6 @@
     {
       "id": "mars-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 996,
-      "expectedSha256": "069f3952e2409ba3fd4e0f2fa496a4a89de4a916b56a79ece7a3a61d83530f24",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -452,8 +430,6 @@
     {
       "id": "mars-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1265,
-      "expectedSha256": "63517838c7d331f0d607729429f1900b841d704489dff3ecad38493c12451397",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -470,8 +446,6 @@
     {
       "id": "mars-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "1ddacfc53e5a5eef26ee98270502ac5ac628cb1a3c3b3349f89a52a0552dc079",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -773,22 +747,16 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1211,
-      "expectedSha256": "7fa4fd761e8d9ae033e9c1e0a6ccdb1ea0ce38239744af0554f8af0d3f50da87"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "sky/google-earth-pro-contract.json",
-      "expectedBytes": 3561,
-      "expectedSha256": "360618f1638471e2f3be37907a67c815104af4e9a57e713cf1938159ae9ad8a0",
       "origin": "Headless local measurements of Google Earth Pro 7.3.7.1327 Mars mode on 2026-09-02",
       "purpose": "Clean-room behavioural measurements retained as evidence for the shared directional-sun presentation standard, which cites this path (src/platform/directional-sun-contract.mts DIRECTIONAL_SUN_PRESENTATION_STANDARD.sourcePath). No Mars preparation step reads it since the generic raster lane replaced the affine lane."
     },
     {
       "id": "mars-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 20002,
-      "expectedSha256": "491a324ef342e576e40dc91882418cac617b5bc7db6ea20ee7c53d5360a08782",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -808,8 +776,6 @@
     {
       "id": "mars-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 301501,
-      "expectedSha256": "b2236444ed13365223dca094ead1db1c8a258bc6b8ea7009b0f02e7950919dfd",
       "origin": "Repository-pinned English Wikipedia lead summaries for 644 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -831,8 +797,6 @@
     {
       "path": "observations.json",
       "purpose": "Telescope API observation descriptors derived from the pinned Mars archive inputs and their native metadata; scientific limitations remain explicit per observation.",
-      "expectedBytes": 9074,
-      "expectedSha256": "092ce1153244f4727a62d0e8112a437e63bd5fec8f8173477a366edf819330d2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."

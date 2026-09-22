@@ -19,8 +19,8 @@ const fail = (detail: string): never => { throw new TypeError(`Authored physical
 
 /**
  * The part of the physical frame check that reads tracked files only: the receipt
- * (`prepared/world-navigation.json`) must list each recipe source with its manifest pin and repeat the
- * descriptor's frame, the frame must carry valid units, and an authored context must reproduce it.
+ * (`prepared/world-navigation.json`) must repeat the descriptor's frame, each recipe source must be
+ * declared in the manifest, the frame must carry valid units, and an authored context must reproduce it.
  * `requireAuthoredWorldFrame` continues from here with the restored scene and runtime.
  */
 export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorInput, directory, readText, closure }: AuthoredWorldFrameReceiptInput) {
@@ -35,14 +35,12 @@ export async function requireAuthoredWorldFrameReceipt({ descriptor: descriptorI
   const manifestPath = resolve(directory, 'source/manifest.json'), manifest = requireRecord(JSON.parse(await readText(manifestPath)), 'Source manifest');
   closure?.add(manifestPath);
   const records = ['inputs', 'documents', 'generatedIntermediates'].flatMap(key => requireArray(manifest[key] ?? [], key).map(value => requireRecord(value, key)));
-  // The receipt lists each source with the manifest pin it had; the manifest is the only owner of those pins.
-  const pinned = sources.map(source => {
-    const path = requireString(source.path, 'Authored source path'), record = records.find(entry => `source/${String(entry.path)}` === path);
-    if (!record) throw new TypeError(`Authored physical frame source ${path} is not declared in the manifest.`);
-    return { id: source.id, path, sha256: record.expectedSha256 };
-  });
+  for (const source of sources) {
+    const path = requireString(source.path, 'Authored source path');
+    if (!records.some(entry => `source/${String(entry.path)}` === path)) throw new TypeError(`Authored physical frame source ${path} is not declared in the manifest.`);
+  }
   if (receipt.schema !== 'cssearth-world-navigation-preparation@1' || receipt.id !== descriptor.id ||
-    !isDeepStrictEqual(receipt.sources, pinned) || !isDeepStrictEqual(receipt.frame, frame)) fail('receipt differs from its manifest source pins or descriptor');
+    !isDeepStrictEqual(receipt.frame, frame)) fail('receipt differs from its descriptor');
   if (typeof frame.epochJdTt !== 'number' || !Number.isFinite(frame.epochJdTt) || ![frame.bodyRadiusM, frame.metersPerUnit].every(value => typeof value === 'number' && Number.isFinite(value) && value > 0)) fail('has invalid physical units');
   const context = sources.find(source => source.id === 'world-context');
   if (context) {

@@ -16,15 +16,12 @@ const solarGeometryPath = resolve(root, 'src/platform/solar-geometry.mts');
 const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
   .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
 
-test('deploy generation never repins source manifests unless authoring requests it', () => {
+test('the command takes its paths and refuses unknown options', () => {
   const generated = parseSpatialContextCommand(['source.json', 'prepared.json'], '/repo');
-  assert.equal(generated.pinReferences, false);
   assert.equal(generated.sourcePath, '/repo/source.json');
   assert.equal(generated.outputPath, '/repo/prepared.json');
   assert.equal(generated.solarGeometryPath, '/repo/src/platform/solar-geometry.mts');
 
-  const authored = parseSpatialContextCommand(['source.json', 'prepared.json', '--pin-references'], '/repo');
-  assert.equal(authored.pinReferences, true);
   assert.throws(() => parseSpatialContextCommand(['source.json', 'prepared.json', '--unknown'], '/repo'), /Usage:/);
 });
 

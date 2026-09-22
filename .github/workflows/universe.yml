@@ -374,6 +374,7 @@ jobs:
             node tools/prepare-ci-inputs.mts universe
           fi
           node tools/restore-object-json.mts
+          node tools/prepare-provenance.mts --objects-only
           node tools/prepare-feature-index.mts
       - name: Prepare minimap data
         run: |

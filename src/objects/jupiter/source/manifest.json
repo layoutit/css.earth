@@ -23,7 +23,7 @@
           {
             "catalogueId": "hubble-jupiter-2024-01-05",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -59,7 +59,7 @@
           {
             "catalogueId": "source-jupiter-nasa-hubble-jupiter-global-map-2019",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -97,7 +97,7 @@
           {
             "catalogueId": "source-jupiter-nasa-juno-jupiter-north-pole-detail-pia24239",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -135,7 +135,7 @@
           {
             "catalogueId": "source-jupiter-nasa-juno-jupiter-north-polar-projection-pia23808",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -173,7 +173,7 @@
           {
             "catalogueId": "source-jupiter-nasa-juno-jupiter-south-polar-cyclones-pia23556",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -211,7 +211,7 @@
           {
             "catalogueId": "source-jupiter-nasa-juno-jupiter-south-pole-visible-pia21382",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -246,7 +246,7 @@
           {
             "catalogueId": "source-jupiter-hubble-opal-jupiter-f275w",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -281,7 +281,7 @@
           {
             "catalogueId": "source-jupiter-hubble-opal-jupiter-fq889n",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -340,7 +340,7 @@
           {
             "catalogueId": "source-jupiter-nasa-galileo-galilean-satellites",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -365,7 +365,7 @@
           {
             "catalogueId": "source-jupiter-nasa-galileo-jupiter-main-ring-halo",
             "role": "material",
-            "evidence": "src/planets/jupiter/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -454,8 +454,6 @@
     {
       "id": "jupiter-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 6821,
-      "expectedSha256": "3ac18bb56b1b57163d71c888d4e5a92fcd685fbd8997aa6cd0de75768435e54f",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -472,8 +470,6 @@
     {
       "id": "jupiter-authored-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 809,
-      "expectedSha256": "cb73a5374c85a16df023668ceeeb6e899cda4fb51ac1d3abf9c2b59b63d9249e",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -490,8 +486,6 @@
     {
       "id": "jupiter-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14940,
-      "expectedSha256": "2c908b05e2d97123dc4be94c1775fc079e410cb97f6849cfc21a83d80ddf56fe",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -508,8 +502,6 @@
     {
       "id": "jupiter-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3330,
-      "expectedSha256": "f43e0dd09e323c3dda60be5c9f9ab0ba37e3296813c4ed5073e3c68c391c7c4e",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -551,8 +543,6 @@
     {
       "id": "jupiter-authored-materials",
       "path": "preparation/materials.json",
-      "expectedBytes": 2232,
-      "expectedSha256": "2814b9d03a04313e18be3ef8c330010708bb35dd27b4b8cccaba83ec4d192eb4",
       "origin": "Checked source-informed normalized ellipsoid lighting and retained material preparation parameters",
       "credit": "cssEarth and the institutional sources identified by the source manifest",
       "license": "Project-authored specification",
@@ -569,8 +559,6 @@
     {
       "id": "jupiter-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1787,
-      "expectedSha256": "ee719f5c65cbba9ad69de931cbc96f6a79820e6a559fd21e220e8bd89ccb11a3",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -587,8 +575,6 @@
     {
       "id": "jupiter-authored-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 2168,
-      "expectedSha256": "ba02eaa090fd2113118c1c4012e9397135df5490ad4c05ab630ec2f0ae001ab2",
       "origin": "Checked retained scene camera and layer composition conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -605,8 +591,6 @@
     {
       "id": "jupiter-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 9253,
-      "expectedSha256": "1776c1f4044846198d516054ef59c3d4ca8819035337cc52d1b65809f867bc24",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and NASA/ESA Hubble, NASA Juno source authorities identified in the recipe",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -623,8 +607,6 @@
     {
       "id": "jupiter-authored-charts",
       "path": "content/charts.json",
-      "expectedBytes": 4316,
-      "expectedSha256": "3a78a58e034a2f037474c68408bc4ca79b5299af9b07fbbf20c2d1aadda88ccf",
       "origin": "Checked source-dependent scientific and presentation parameters",
       "credit": "cssEarth and the scientific authorities cited by this source",
       "license": "Project-authored scientific specification with cited authority",
@@ -666,8 +648,6 @@
     {
       "id": "jupiter-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 4253,
-      "expectedSha256": "7c62c1550f74a105b15962b8f2bc3e8c7c38a20680597a22bb4b18fca3ad2c71",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
@@ -831,21 +811,15 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1553,
-      "expectedSha256": "4ec463a524a4803db1601a02d908d886fb486f498514cca5302ccbf5c72982d4"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "presentation/overview.json",
-      "expectedBytes": 39,
-      "expectedSha256": "0abc410dea696938b08a69e03dc325d7fb484e190148ced3e6b65e8c94ad945a",
       "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     },
     {
       "path": "observations.json",
       "purpose": "Telescope API observation descriptors derived from the pinned Juno MWR inputs and their native metadata; scientific limitations remain explicit per observation.",
-      "expectedBytes": 3851,
-      "expectedSha256": "d086adb78a21571801cee1d55ee3b0e4fa3d9782d2c3f0005d141a30382b8e97",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."

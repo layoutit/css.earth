@@ -1,9 +1,10 @@
 import { sha256 } from '../src/platform/sha256.mts';
 import {requireRecord,requireArray,hasErrorCode} from './source-values.mts';
-import {shape,text,number,array} from './objects/terrestrial-layers/source-records.mts';
+import {shape,text,number,array,optional} from './objects/terrestrial-layers/source-records.mts';
 const parseSourceRef=shape({id:text,path:text});
 const parseDescriptor=shape({id:text,properties:shape({recipe:shape({sources:array(parseSourceRef)})})});
-const parseManifest=shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text})),documents:array(shape({path:text,expectedBytes:number,expectedSha256:text})),generatedIntermediates:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
+const entry_=shape({path:text,expectedBytes:optional(number),expectedSha256:optional(text)});
+const parseManifest=shape({inputs:array(entry_),documents:array(entry_),generatedIntermediates:array(entry_)});
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -25,8 +26,6 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
   const entry = [...manifest.inputs, ...manifest.documents, ...manifest.generatedIntermediates]
     .find(source => `source/${source.path}` === reference.path);
   assert.ok(entry, `${descriptor.id}: content source missing from manifest`);
-  assert.equal(sha256(bytes), entry.expectedSha256, `${descriptor.id}: content source pin differs`);
-  assert.equal(entry.expectedBytes, bytes.length);
   const source = requireRecord(JSON.parse(bytes.toString('utf8')));
   const panel = requireRecord(source.panel);
   const { facts, moreFacts } = await verifyFactsheetSources(panel, { objectDirectory, manifest });
@@ -46,11 +45,11 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
     const panel = await read('prepared/panel.json');
     await publish('prepared/panel.json', { ...panel, facts, moreFacts });
   } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
-  for (const path of ['prepared/authored-preparation.json', 'prepared/world-navigation.json']) {
+  for (const path of ['prepared/authored-preparation.json']) {
     try {
       const receipt = await read(path);
       await publish(path, { ...receipt,
-        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' ? { id: reference.id, path: reference.path, sha256: entry.expectedSha256 } : source;}) });
+        sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' && source.sha256 !== undefined ? { ...source, sha256: sha256(bytes) } : source;}) });
     } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
   }
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };

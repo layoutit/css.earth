@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/gkunhomdima/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "arxiv-2605-28636",
             "role": "method",
-            "evidence": "src/planets/gkunhomdima/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,47 +92,31 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3352,
-      "expectedSha256": "7726afb7bfe602cae7911854a36cfb9b5afb5712e0e3730e09d06fe9d17b205e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1741,
-      "expectedSha256": "a72e9587f7cc22795d816eeb4a6887dc4f5a636748bcdf0b99ecfc05d89ac10e"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 503,
-      "expectedSha256": "13fb3256042891abc6879d7d6bb4ecea24a812174d842b9ea3f823bb89f1e5a1"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 448,
-      "expectedSha256": "e27413f0c0a9229143c582315ed46da6ce7e2ce0098a845fc8314b7924fbc935"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 449,
-      "expectedSha256": "61b23e02395a9b6ea2d9f65be44b64f8b254f49c4b7d4c596f17484e74568537"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2606,
-      "expectedSha256": "e460b2c58f7e941d737c0dbf6ac77c14915cd431b3224ccc834fa23cf9b0f109"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 6924,
-      "expectedSha256": "a317a40e84d84fea8b5fbc05ad63413a838d900c3ad303fc8a3496ab21f49770"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/gkunhomdima-2026.pdf",
@@ -142,14 +124,10 @@
       "expectedSha256": "b2a9a3162dabc548500abb0781491a80fb36ae24c27c5909505e9848da5a40d6"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7360,
-      "expectedSha256": "4d463abbf0ce6fc5d93ec569aa2d0c7be84f46cf52113408154f09d3da028fe8"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6650,
-      "expectedSha256": "7fe5b821b6ce6da1b35ff5ad571a37663e9097331404f2ccd5452d587597ff6e"
+      "path": "reference/horizons-vectors.txt"
     }
   ],
   "generatedIntermediates": [
@@ -175,9 +153,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 85424,
-      "expectedSha256": "c183bd1a705510ce09ce0b994a808cc2adbe5826ee290d23645269fa7866d76a"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

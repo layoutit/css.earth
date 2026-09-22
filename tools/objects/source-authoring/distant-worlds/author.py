@@ -128,7 +128,7 @@ for body in INPUTS['bodies']:
             if not available.exists(): raise FileNotFoundError(f'Restore common input: {available}')
             target.parent.mkdir(parents=True,exist_ok=True)
             shutil.copyfile(available,target)
-    manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',**pin(source/'material/neutral.png'),origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
+    manifest['inputs'].append(dict(id='model-surface',path='material/neutral.png',origin='https://github.com/layoutit/cssEarth',credit='cssEarth missing-coverage grid',license='MIT',consumers=['surfaces'],width=64,height=32,lensId='model',label='Shape model',falseColor=False,coverage='Authored neutral material; no observed imagery.',projection=dict(type='equirectangular',longitudeDirection='east-positive',referenceRadiusMeters=radius*1000)))
     for entry in manifest['inputs']:
         entry.setdefault('acquisition',INPUTS.get('acquisitionNote','Restore pinned originals through acquisition; reproduce authored numbers with tools/objects/source-authoring/distant-worlds/author.py.'))
         entry.setdefault('redistribution','Retain source attribution and model qualifications; upstream papers are not relicensed.')

@@ -58,7 +58,7 @@
           {
             "catalogueId": "source-sun-sdo-hmi-continuum-cr2311-20260513",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1243,7 +1243,7 @@
           {
             "catalogueId": "source-sun-jsoc-hmi-cr2311-radial-field-synoptic-map",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1281,7 +1281,7 @@
           {
             "catalogueId": "source-sun-sdo-aia-171-cr2311-context",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1319,7 +1319,7 @@
           {
             "catalogueId": "source-sun-sdo-aia-304-cr2311-context",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1357,7 +1357,7 @@
           {
             "catalogueId": "source-sun-sdo-aia-304-cr2311-synoptic-map",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1395,7 +1395,7 @@
           {
             "catalogueId": "source-sun-sdo-aia-171-cr2311-synoptic-map",
             "role": "material",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1422,7 +1422,7 @@
           {
             "catalogueId": "nasa-sun-facts",
             "role": "reference",
-            "evidence": "src/planets/sun/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1430,8 +1430,6 @@
     {
       "id": "sun-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 21508,
-      "expectedSha256": "f39542ce12fa1dfd698224ba1a3c5fe174456681f2f956ec19ed9816a6fa913f",
       "origin": "Checked source acquisition recipe retaining the accepted institutional inputs and numerical semantics",
       "credit": "cssEarth and the institutional sources identified in this recipe",
       "license": "Project-authored acquisition specification; referenced observations retain their source terms",
@@ -1456,8 +1454,6 @@
       "consumers": [
         "world-context"
       ],
-      "expectedBytes": 3395,
-      "expectedSha256": "84f7b26c703371a694ef560f80bff255ab81585b3d60756e72037f36af8a81af",
       "sha256": "8095f6b133b30988cc6908bc5287130a1567b5c6806ad1343ff9b1eb117e0f78",
       "sourceBinding": {
         "kind": "local",
@@ -1467,8 +1463,6 @@
     {
       "id": "sun-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 11970,
-      "expectedSha256": "c2bd40a64526aeb97e984d72fc721ca0b5657a9133bf484d290f07adab339c65",
       "origin": "Repository-authored raster recipe: four CR2311 synoptic surfaces interpreted by the shared observation adapter (continuum mosaic, HMI and AIA FITS maps), polar bands, off-limb and limb plates",
       "sourceBinding": {
         "kind": "local",
@@ -1486,8 +1480,6 @@
     {
       "id": "sun-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1978,
-      "expectedSha256": "054204b5ae9d97e5bfc7828b738f483ec25791e56f832803b3fd0ccfdbc69a90",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, 32-segment polar bands with a centre cap, carried from the retired static-surface geometry",
       "sourceBinding": {
         "kind": "local",
@@ -1505,8 +1497,6 @@
     {
       "id": "sun-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: ESO panorama sky with the world-context baseline registration, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -1524,8 +1514,6 @@
     {
       "id": "sun-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 98,
-      "expectedSha256": "f756ccac74803c94810b3a1aaf201814cc0c093609284c140a34fe0ba440ec42",
       "origin": "Repository-authored presentation profile: emissive mode (no lighting track, no Shadows toggle)",
       "sourceBinding": {
         "kind": "local",
@@ -1542,8 +1530,6 @@
     {
       "id": "sun-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 635,
-      "expectedSha256": "5d9a78e12d07a45ce6206f29e112f43b4a652582f544a8e1c7df4741bc588278",
       "origin": "Repository-authored star-centred scene recipe; IAU nominal radius 695,700 km, camera plan (defaultZoom 1.25, initial pitch 40, yaw -105) and the 7.25 degree axis tilt carried from the retired static-surface geometry",
       "sourceBinding": {
         "kind": "local",
@@ -1562,8 +1548,6 @@
     {
       "id": "sun-object-content",
       "path": "content/object.json",
-      "expectedBytes": 14050,
-      "expectedSha256": "52ee4a51f0a6c185ada9a7948ce7eb5eee2e7fecdda4c3d8789e32f7c58bc67c",
       "origin": "Repository-authored object content: NASA Science facts with citations, four lens descriptions, legends as palette recipes, resources",
       "sourceBinding": {
         "kind": "local",
@@ -1581,8 +1565,6 @@
     {
       "id": "sun-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "ee4a0feba55d1f4b650093fe479af05a5197e506b15c19404c3a084cdbff4cdc",
-      "expectedBytes": 487,
       "origin": "Repository-authored Sun navigation asset recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1656,14 +1638,10 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://science.nasa.gov/sun/facts/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 414,
-      "expectedSha256": "680258c3b06128ebe501d83a44fef7bc1ee179ee85b0d1e67c0053259680fe0b"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "reference/rendered-lenses.png",
-      "expectedBytes": 244523,
-      "expectedSha256": "5c5e96b86085552fdee8309f3a62bda37a2574a00379b12182610ebafc32de80",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /sun/?embed with each of the four lenses, Chrome via Playwright at 1000 by 800 (DPR 2) after the scene reported ready, cropped to the disc and tiled, taken 2026-09-18 after preparation."
@@ -1671,8 +1649,6 @@
     },
     {
       "path": "reference/photosphere-before-after.png",
-      "expectedBytes": 154718,
-      "expectedSha256": "ec947c5a53675ed6d259bc894646326ca0ab90ec55c8df7ec957de7a96f1ef17",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence figure: one 180 by 70 degree patch of the interpreted 720 by 360 maps: the browse-JPEG photosphere on main at 11ac994699 (top), this branch's JSOC photosphere (middle) and the unchanged HMI radial field (bottom)."
@@ -1681,8 +1657,6 @@
     {
       "path": "observations.json",
       "purpose": "Telescope API observation descriptors derived from the pinned Sun archive inputs and their native metadata; scientific limitations remain explicit per observation.",
-      "expectedBytes": 43544,
-      "expectedSha256": "800dfdc2401f282190268acf6bb2fa277ca24a402bdfeead8f7647224144baea",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."

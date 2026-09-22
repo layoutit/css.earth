@@ -42,8 +42,6 @@
     {
       "id": "hd-189733b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1430,
-      "expectedSha256": "6ac19985b9774d11e3de0c6451769ea7efd8e2e5424b605a7cdbfd3c7578b8f4",
       "origin": "https://arxiv.org/abs/2503.20895",
       "credit": "Lally et al. (2025), arXiv:2503.20895",
       "license": "Factual numerical measurements; source attribution retained",
@@ -79,7 +77,7 @@
           {
             "catalogueId": "source-hd-189733b-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/hd-189733b/source/manifest.json@52e6e03f6de43f93ced1caea00c88926f07339ac#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -87,8 +85,6 @@
     {
       "id": "hd-189733b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2836,
-      "expectedSha256": "ac7b7ecefd155407b309e9538f265ab93d1e7bd4596a68da0c08544301591907",
       "origin": "Repository-authored raster recipe: the deposited MIRI temperature map on the reference sphere, false colour, observed longitudes only, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +102,6 @@
     {
       "id": "hd-189733b-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1792,
-      "expectedSha256": "d836dae77e960fc76cd9e5b1767efbf8f76f54d2790a3d0c1b95b51ef531603a",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -125,8 +119,6 @@
     {
       "id": "hd-189733b-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: no directional Sun for a self-luminous map",
       "sourceBinding": {
         "kind": "local",
@@ -143,8 +135,6 @@
     {
       "id": "hd-189733b-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 105,
-      "expectedSha256": "e085a5031fd2b2f35c05dea1641a36f5869a7235e9973c7653752c808848f771",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -161,8 +151,6 @@
     {
       "id": "hd-189733b-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 294,
-      "expectedSha256": "1b454a8e6fc2a3d35bad0c36480a68c53049846e6702222954b7276b72d27f61",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -181,8 +169,6 @@
     {
       "id": "eclipse-map-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 67640,
-      "expectedSha256": "5412bdf218d8ecaa735ce408eeaf0755a21acd412c3854ddccab13f888346f67",
       "origin": "https://zenodo.org/records/15103479",
       "credit": "Lally et al. (2025)'s deposited MIRI temperature map seen from the host star, in the lens's palette; rendered by tools/objects/source-authoring/hd-189733/author.mts",
       "license": "Project-authored display derivative of CC BY 4.0 data.",
@@ -206,42 +192,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4686,
-      "expectedSha256": "97ac7455dcebc7186e67222735cf89dbe1d612aa13ca223e8de4f91eb6c6234b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 557,
-      "expectedSha256": "9970bcd3ea778cddbf2a9b2d86c8be2f51f1494b31069dc46c3cd88987f0785d"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "d6bf2ce7771d526b6c0680ff6676a33c3c4292279f3151f9883d7e9c06b1e6c3"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 838,
-      "expectedSha256": "9f9fc325f599aae243cb31ede18de5c21fcd028fe4fefc2b4a3fb7025b193e59"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 6025,
-      "expectedSha256": "e20d41a116f8a164edcaaad432f84e973ac0103b54b72edff0caeccb5fc8e768"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 533042,
-      "expectedSha256": "a5060b3a600b69365ee7106b75de9e826add677501838e875b4e249343926f6a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /hd-189733b/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors."

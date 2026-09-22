@@ -30,7 +30,7 @@
           {
             "catalogueId": "source-steins-steins-shape",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -78,7 +78,7 @@
           {
             "catalogueId": "source-steins-steins-normal",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -102,7 +102,7 @@
           {
             "catalogueId": "source-steins-steins-observations-w20080905t183606461id4df17-img",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -126,7 +126,7 @@
           {
             "catalogueId": "naif-leapseconds-0012",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -150,7 +150,7 @@
           {
             "catalogueId": "rosetta-frames-v33",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -174,7 +174,7 @@
           {
             "catalogueId": "rosetta-osiris-v15",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -198,7 +198,7 @@
           {
             "catalogueId": "source-steins-steins-reference-ros-steins-v05-tpc",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -222,7 +222,7 @@
           {
             "catalogueId": "rosetta-osiris-boresight-v01",
             "role": "method",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -246,7 +246,7 @@
           {
             "catalogueId": "arxiv-1702-00184",
             "role": "method",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -262,8 +262,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 568,
-      "expectedSha256": "e6710af8ae266103c46eec3a9fd47f37c407bcc711f3f15e55c00648a3889c10",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
@@ -280,8 +278,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 2899,
-      "expectedSha256": "3b855f3764ab7baa2606a03fa3495e84ee8f4e3f0971d7a8757e5f29371069e9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:22.008."
@@ -298,8 +294,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 2932,
-      "expectedSha256": "c300b7604f69398ee30f89554bd79e5aaeaa722ef48e4fb58a9d0425ca87430e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for 2867 STEINS at 2008-09-05T18:36:46.044."
@@ -324,7 +318,7 @@
           {
             "catalogueId": "source-steins-steins-w20080905t183630497id4df17-img",
             "role": "material",
-            "evidence": "src/planets/steins/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -340,8 +334,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 588,
-      "expectedSha256": "480d77ff1d87c57ffc9fc54506e2ecb99bf2e46a37cd06d3a401be7973db9c4f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
@@ -374,8 +366,6 @@
     {
       "id": "steins-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1004,
-      "expectedSha256": "987fa5861a1e49485dd57340708cd38ca9b863f1538f09c02e686bb6333243c0",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -392,8 +382,6 @@
     {
       "id": "steins-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1093,
-      "expectedSha256": "3cfff761abb3af25442e399417e37f29d378e07f66d3c28cbfd4e14be97b9321",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -410,8 +398,6 @@
     {
       "id": "steins-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 185,
-      "expectedSha256": "f955c4a50a3ea62431e26a4daf17f18faf92b02eec6bfc7a521fcd01d608b64f",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -433,8 +419,6 @@
       "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/2867steins/steins_cylindrical_mosaic.jpg",
       "credit": "Phil Stooke/NASA PDS; ESA/Rosetta/MPS for OSIRIS Team MPS/UPD/LAM/IAA/SSO/INTA/UPM/DASP/IDA",
       "license": "Stooke Small Bodies Maps V3.0 states these maps are public domain; credit required.",
-      "expectedBytes": 95137,
-      "expectedSha256": "ffabff67434043f3953304863d9d1615b782c1c7d5497d827fbb43c20f9b3208",
       "consumers": [
         "navigation"
       ],
@@ -457,113 +441,71 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10453,
-      "expectedSha256": "bccae6cc1a939c271c04b0434d1b94154508afe676a434d0882cdaf990760121",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3142,
-      "expectedSha256": "b57c363c59d0914f3310bd804570808977955dd8251787962357f5167781e4b5"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "9cbe68ce9e7f72309b72828964cfe438aa5ec6b86e45e57ed2f92d7a79a86950"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 407,
-      "expectedSha256": "550429ed088ec14ff956495dc7edece9868df8c4ad10fa16b2dfd1bfbccbad40"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4737,
-      "expectedSha256": "238248c1a5cba10a18f13f786976e6b027c96708ca8b8f79e28308502b046632"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3676,
-      "expectedSha256": "ef3720e2653d747e7c9fc93919ce3fa4128cbcdb3ecc739f78ec9ca9d642499d"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1288,
-      "expectedSha256": "6cc0f2b5a25c13e81f77e6ac3d3fc5dd0b46f726df414457c7cfc948f19bba2f"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "reference/pck00011.tpc"
     },
     {
-      "path": "reference/plate_shape_definition.asc",
-      "expectedBytes": 6641,
-      "expectedSha256": "ce41e720a2a59c445c68894f3910839a7a42e98bd117eb3081d9051d6b07a651"
+      "path": "reference/plate_shape_definition.asc"
     },
     {
-      "path": "reference/reflect-dataset.cat",
-      "expectedBytes": 5838,
-      "expectedSha256": "ee03ea7c2e566d25d688a38634c9d50cad6235da95dc38685b6649230e7e1be2"
+      "path": "reference/reflect-dataset.cat"
     },
     {
-      "path": "reference/reflect-image.lbl",
-      "expectedBytes": 23040,
-      "expectedSha256": "55e8d3070b9addff859489becb47a7b18ed11c16d853a00ca99dd8714a332cd9"
+      "path": "reference/reflect-image.lbl"
     },
     {
-      "path": "reference/reflect-index.lbl",
-      "expectedBytes": 4720,
-      "expectedSha256": "99e1b9d99b2e3c0b152cf722a00deadc005df727dd7d94645060c5f784bb7cf6"
+      "path": "reference/reflect-index.lbl"
     },
     {
-      "path": "reference/reflect-index.tab",
-      "expectedBytes": 109600,
-      "expectedSha256": "371a4dc98546a649d6a67b0e63a6f0d47051185a2f7c0b56e2cf4e11a0e8e7d5"
+      "path": "reference/reflect-index.tab"
     },
     {
-      "path": "reference/registration.md",
-      "expectedBytes": 2853,
-      "expectedSha256": "22bc246f026f30ddce5780f78594462edd2913d9cd55e6ffa5e90d88d72aeadf"
+      "path": "reference/registration.md"
     },
     {
-      "path": "reference/shape-dataset.cat",
-      "expectedBytes": 13360,
-      "expectedSha256": "36afa1c7f593891d39993a12448c7ab534004884ada68a09050bf154478b697f"
+      "path": "reference/shape-dataset.cat"
     },
     {
-      "path": "reference/steins_0n0e.png",
-      "expectedBytes": 46284,
-      "expectedSha256": "5151fa0b7f72caee69670f7d2c95e035a8f0f8c5b7ea5b370794f904d6c12e77"
+      "path": "reference/steins_0n0e.png"
     },
     {
-      "path": "reference/steins_90s.png",
-      "expectedBytes": 72148,
-      "expectedSha256": "bb89efdf24c7e6eaab9899b523228ee185aaa5308cca92f93bcc336caab4347c"
+      "path": "reference/steins_90s.png"
     },
     {
-      "path": "reference/steins_cart.lbl",
-      "expectedBytes": 10000,
-      "expectedSha256": "a2f107a2f7fd0f764e0df951324bf7d7db2203704e4445333798fd5c90bedfed"
+      "path": "reference/steins_cart.lbl"
     },
     {
-      "path": "reference/steins_map_grid.jpg",
-      "expectedBytes": 1379481,
-      "expectedSha256": "d2ece2d2c4d85613f38d0de0cd9fc1aec6354994eb3d1a23f46a232c0d727563"
+      "path": "reference/steins_map_grid.jpg"
     },
     {
-      "path": "reference/steins_map_names.jpg",
-      "expectedBytes": 1543156,
-      "expectedSha256": "0aae142b37e081dfb97c30a3d2bd1597efaf0aebff62ba9e2d33515d1d544c07"
+      "path": "reference/steins_map_names.jpg"
     },
     {
       "id": "steins-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -584,8 +526,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4168,
-      "expectedSha256": "bb9ced7ef19b5eb594d763695fb7b7f15749edfb172c4e667cb899c0e5ef7fae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

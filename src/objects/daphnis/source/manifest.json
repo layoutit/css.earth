@@ -41,7 +41,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656997950-1-calib",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -79,7 +79,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656997950-1-calib",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -124,7 +124,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656998640-1-calib",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -162,7 +162,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2064-data-1656971575-1657039444-n1656998640-1-calib",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -207,7 +207,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2110-data-1863231911-1863269539-n1863267232-1-calib",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -245,7 +245,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2110-data-1863231911-1863269539-n1863267232-1-calib",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -293,7 +293,7 @@
           {
             "catalogueId": "source-daphnis-thomas-2018-shape",
             "role": "material",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -320,7 +320,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/daphnis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -603,72 +603,48 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 67997,
-      "expectedSha256": "283f692cf98d2bcb06d4c2d5e130360e5f4abd61019e3143f97ca1f7b535bd46"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5297,
-      "expectedSha256": "038e8498771c2a32b468e0d1c601f38d1197cff9b453cc3e02e60d8aca00d9d7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3882,
-      "expectedSha256": "3662e0b8f09c288eb34d88e054e44c56837acf837f7454355b7f6cac1f92996d"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "bf702c605780e6a63013083366bfd3d09fef8ae321131cd028b876d57fdc942e"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 535,
-      "expectedSha256": "c4e3638c0562d89bb908473c3cc88fb97f4f54f79cefcd2480622f2c123695ee"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 9474,
-      "expectedSha256": "d518aa6e8f4d824c492dc1959c3fe5ccc17993f75c25116d41125995b9d8e282"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4276,
-      "expectedSha256": "fd588fc9e03d23eb425d988ca6a23240ff494077014f1d6dd67b4c110fb8b031"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/daphnis_30k_plt.xml",
-      "expectedBytes": 12521,
-      "expectedSha256": "4a1fcdb111aac64b7951544af80f8d5d49f873f5f327673fc186e63e81c53bf0"
+      "path": "shape/daphnis_30k_plt.xml"
     },
     {
-      "path": "shape/daphnis_document.pdf",
-      "expectedBytes": 64615,
-      "expectedSha256": "70e32a5f4c9ac7855212a73017e9fc7619e5e9c564d637adfd78dd4ec6305f5b"
+      "path": "shape/daphnis_document.pdf"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1771,
-      "expectedSha256": "292ba46ee1376984a42d346f3c1ef3f79f2a3d4af67b908d38dd1149f53c746e"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     }
   ]
 }

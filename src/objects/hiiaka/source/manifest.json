@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/hiiaka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "source-hiiaka-occultation-approximation",
             "role": "material",
-            "evidence": "src/planets/hiiaka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -94,7 +94,7 @@
           {
             "catalogueId": "source-hiiaka-model-surface",
             "role": "material",
-            "evidence": "src/planets/hiiaka/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,67 +103,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3549,
-      "expectedSha256": "dc641b88f63fb6f7ec7fa22a700d68dcc528afbf030150e8664a1d51d96205e4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2612,
-      "expectedSha256": "04371f216ad232e8aee2c4467170b8adda11d79f557d183825818f2f178375bc"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/haumea-epoch.txt",
-      "expectedBytes": 6815,
-      "expectedSha256": "3337cf80561af77c3a24e634c5f0a58a258197b55a8c9faad3f43f8113c6d08f"
+      "path": "orbit/haumea-epoch.txt"
     },
     {
-      "path": "orbit/hiiaka-epoch.txt",
-      "expectedBytes": 6920,
-      "expectedSha256": "5c2d93c8540488799fa2e147849419e234138732a845c479b24af0385b608288"
+      "path": "orbit/hiiaka-epoch.txt"
     },
     {
-      "path": "orbit/hiiaka-heliocentric-check.txt",
-      "expectedBytes": 6899,
-      "expectedSha256": "fc598ca5242537ad0233dd7e5f8906b5e62005f2511b6572873e2b4d33e0d107"
+      "path": "orbit/hiiaka-heliocentric-check.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "1d480d5608b8e28707c80603b01262404d38ff76ba16caed3163fc2428e983e1"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 392,
-      "expectedSha256": "3518eaccc7f611f946344a3d2042ddec11b5085f0d40fd7612dc8b10f3d32c12"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2362,
-      "expectedSha256": "0d4d35aec8de5d7bde26a193dedc833f3e8d251334c115c07fc28ee8c6f86a17"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3543,
-      "expectedSha256": "abfce2616af106a4acf8996b1d401a694b2443b951faac113dac4cae0533ba06"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 3600,
-      "expectedSha256": "db9187d079c16aa96ff839e69329aabcca55207ff2ca9229f93d7a325b59407f"
+      "path": "validation/epoch-state.json"
     }
   ],
   "generatedIntermediates": [
@@ -189,9 +165,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 64111,
-      "expectedSha256": "7f24b71fcf6937c8b8d59af35b6cb5353eaa74217a52966f6da440841c9c6ea7"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

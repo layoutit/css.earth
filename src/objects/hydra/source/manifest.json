@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -69,7 +69,7 @@
           {
             "catalogueId": "source-hydra-porter-hydra-shape",
             "role": "material",
-            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -107,7 +107,7 @@
           {
             "catalogueId": "doi-10-6084-m9-figshare-12779975-v1",
             "role": "material",
-            "evidence": "src/planets/hydra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -286,14 +286,10 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Experimental camera from pinned PDS pole/phase, source mesh and native WCS, with two fitted detector translations. Separate views and withheld interior regions measure limitations; the camera remains unqualified for photographic publication."
-      },
-      "expectedBytes": 2917,
-      "expectedSha256": "52d4415d0070d87828cf0a4794223bce26bfd5e32d411b3d988c10c8b349bddb"
+      }
     },
     {
       "path": "preparation/photography.json",
-      "expectedBytes": 1890,
-      "expectedSha256": "94b0b7cb224efcdc07d0dbf536056c8b86b8d7c7f2dc4f96e4536c091e136760",
       "sourceBinding": {
         "kind": "local",
         "reason": "Source-bound diagnostic recipe retains native image, mesh and PCK pins, with spatially separate fit and holdout regions and independent views."
@@ -448,67 +444,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3989,
-      "expectedSha256": "1b9d89fdf272f6eaad9c899db500e6e7509b504e5f808345d59272374cd57ba3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1601,
-      "expectedSha256": "83cd279af2b69d7c86f9c42130ae77c198a9b17f8caf39dea4351ab7059e3822"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2948,
-      "expectedSha256": "5f6c72a42e0afef73a47510a84ffa1f936e17c5cc5b5d9fc73572a0d9f621413"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "60f414221ab60f69c46900fe59bada21145ab66474492bc1f2edf5c0a180b326"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 720,
-      "expectedSha256": "e2087c3b7441104018a97571561c36170d4170c21718453a2b1d1c1d9f004311"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3392,
-      "expectedSha256": "da959feab1b4d770b8f1fa2de4950ff80766ae9227fcb93b29170af8778bdc0e"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3079,
-      "expectedSha256": "34d04876cf166b7fa1bfe6c820c7b5d8486ea052e2aa550d29f005abcc72f8ff"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "survey/composition-overview.docx",
-      "expectedBytes": 31583,
-      "expectedSha256": "f5f5dfc5dd6d9085dd3d6d153a27f980977ae7caf10b4bdbf6a50e83d08189d0"
+      "path": "survey/composition-overview.docx"
     },
     {
-      "path": "survey/figshare-v1.json",
-      "expectedBytes": 10930,
-      "expectedSha256": "9ebacd8bfb84af7296de1dfadd0cbcfcb9f7479864ac5d0e8fc7268cb4af66de"
+      "path": "survey/figshare-v1.json"
     },
     {
-      "path": "survey/lor_0299165548_0x630_sci.lbl",
-      "expectedBytes": 46080,
-      "expectedSha256": "fd947906745512adcaf81365eac518f6019e752a618f4fb0cc335718a460a153"
+      "path": "survey/lor_0299165548_0x630_sci.lbl"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1853,
-      "expectedSha256": "bcb05b81fb330502930a339c104e9015faeefb104da8405757ee5f73c42af083",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -538,9 +510,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 76277,
-      "expectedSha256": "3847545e7f3c0d26e69e5bd72eead7a5a6dd9e3c9ce2102fbb7ac80639dd4a42"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

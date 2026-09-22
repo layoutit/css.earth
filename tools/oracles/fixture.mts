@@ -53,7 +53,9 @@ export async function assertPinnedInputs(inputs: readonly { path: string; sha256
     const manifest = requireRecord(JSON.parse(await readFile(resolve(ORACLE_ROOT, 'src/objects', match[1], 'source/manifest.json'), 'utf8')));
     const entry = [...requireArray(manifest.inputs), ...requireArray(manifest.documents)].map(e => requireRecord(e)).find(e => e.path === match[2]);
     if (!entry) throw new Error(`Oracle input is not a manifest input or document: ${input.path}`);
-    if (entry.expectedSha256 !== input.sha256 || entry.expectedBytes !== input.bytes) throw new Error(`Oracle input differs from the manifest pin: ${input.path}`);
+    // A download must agree with its manifest pin. A file authored here has none, so the oracle's own record is checked against its bytes.
+    if (entry.expectedSha256 === undefined) verifyOracleBytes(input, await readFile(resolve(ORACLE_ROOT, input.path)));
+    else if (entry.expectedSha256 !== input.sha256 || entry.expectedBytes !== input.bytes) throw new Error(`Oracle input differs from the manifest pin: ${input.path}`);
   }
 }
 

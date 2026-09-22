@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/styx/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "source-styx-measured-shape",
             "role": "method",
-            "evidence": "src/planets/styx/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -94,7 +94,7 @@
           {
             "catalogueId": "source-styx-model-surface",
             "role": "method",
-            "evidence": "src/planets/styx/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,82 +103,52 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3808,
-      "expectedSha256": "27677ae153cc65a3a96c1a50bd0aec303510cc370708b0332ef53894d5d6d097",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1154,
-      "expectedSha256": "ba60aa21d863f484abdc828b0b0e41b49dbb5b5c13c53ff32bae0d158f7a60a6"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "7f236ca94143fb9b6c369764fac1587376d5b106edd08f53d51e63f5678192ec"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2087,
-      "expectedSha256": "1db506dafc1bc48d3956f22145d4f0e1a8b9203422963fcfd56c09ffc00cb3f3"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2471,
-      "expectedSha256": "48c01924d05c8bd99afa690b5425e152dd5fb343f3f5da76e7328635c7a31d73"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/publication.json",
-      "expectedBytes": 1026,
-      "expectedSha256": "fcd635de9fc001dfff42c9e8e26fe1e060f805f8195f3e1775351a0cd9faa99d"
+      "path": "shape/publication.json"
     },
     {
-      "path": "shape/rotation.json",
-      "expectedBytes": 839,
-      "expectedSha256": "f531a97ba073afd2e7c922a8630f0ae96dc6d434e1de4b5c385d5775db9ca949"
+      "path": "shape/rotation.json"
     },
     {
-      "path": "survey/lorri-best-metadata.json",
-      "expectedBytes": 14008,
-      "expectedSha256": "c75540426c959498c3e185d0c2bf259814077233251a3469c43c71c4d9c60b3e"
+      "path": "survey/lorri-best-metadata.json"
     },
     {
-      "path": "survey/lorri-best.lbl",
-      "expectedBytes": 46080,
-      "expectedSha256": "320423f5cb093480917250ebf24ff2df21cd766dffda3dda0c92c26399e4e696"
+      "path": "survey/lorri-best.lbl"
     },
     {
-      "path": "survey/lorri-search.json",
-      "expectedBytes": 2370,
-      "expectedSha256": "99a9d665a45831fff918d29a7962c9f7010352e1bc79978e1d594db448d578d8"
+      "path": "survey/lorri-search.json"
     },
     {
-      "path": "survey/mvic-search.json",
-      "expectedBytes": 211,
-      "expectedSha256": "b23082f8da076df5178ed51ab6c5919cda3c5e84f13d7f15da707a10f2011510"
+      "path": "survey/mvic-search.json"
     },
     {
-      "path": "survey/native-inspection.json",
-      "expectedBytes": 764,
-      "expectedSha256": "88fffb320e2a113f2dc9723d78c6fd5673a9abc6d5f0d0bb308ff9bf3305509f"
+      "path": "survey/native-inspection.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1844,
-      "expectedSha256": "a36468d9cb3f12b23093455c30b76cb51f681eab37459d47fdbdd9b630fa6896",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -208,9 +178,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 52995,
-      "expectedSha256": "526ffdbc4edf03d297680ff0d60f370cc24739f2885a3ea2ea5a90b6e95f65da"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

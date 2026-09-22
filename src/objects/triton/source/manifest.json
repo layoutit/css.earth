@@ -37,7 +37,7 @@
           {
             "catalogueId": "source-triton-usgs-2023-triton-clear-frames",
             "role": "material",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -95,7 +95,7 @@
           {
             "catalogueId": "source-triton-voyager-triton-enhanced-color",
             "role": "material",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -122,7 +122,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -149,7 +149,7 @@
           {
             "catalogueId": "source-triton-voyager-triton-sun-vectors",
             "role": "material",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -176,7 +176,7 @@
           {
             "catalogueId": "source-triton-voyager-triton-observer-vectors",
             "role": "material",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -208,8 +208,6 @@
     {
       "id": "triton-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1005,
-      "expectedSha256": "30cd82e3b0536889cd30c9302e356ee2754fd2b8441685cd5220fb780e176bff",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -226,8 +224,6 @@
     {
       "id": "triton-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1110,
-      "expectedSha256": "719bcac440d79f29a46b3a8ac3d9b9ccf33e70ba170b398e16a13346391e008c",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -244,8 +240,6 @@
     {
       "id": "triton-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 187,
-      "expectedSha256": "7a96b21c979807295efe23ddc3dd3f6b3f8819484766bfb0c07433ba11d3e6ba",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -281,7 +275,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/triton/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -289,8 +283,6 @@
     {
       "id": "triton-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 207,
-      "expectedSha256": "f9a7888a3f9e92f1203a09422756c99a8bb5937cbfe1d762476f5043cc29f3e8",
       "origin": "Repository-authored Triton solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -310,8 +302,6 @@
     {
       "id": "triton-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 5040,
-      "expectedSha256": "242dba906057f7c57c9f34aa1d0e7e45c83ec67fd0a13d88a4945837fea8ffa6",
       "origin": "Repository-authored Triton raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -329,8 +319,6 @@
     {
       "id": "triton-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1614,
-      "expectedSha256": "29f5e9204a96b66f892b01b90c6b7c87b1a6e5ce7e565a1b64abbbfaab0f23b1",
       "origin": "Repository-authored Triton geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -348,8 +336,6 @@
     {
       "id": "triton-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Triton celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -368,8 +354,6 @@
     {
       "id": "triton-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 102,
-      "expectedSha256": "1527616dff13988c4c359ceab6b4ead42f7557a4aec32fa045171cc5831e5062",
       "origin": "Repository-authored Triton presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -386,8 +370,6 @@
     {
       "id": "triton-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 681,
-      "expectedSha256": "3a0cd496d4b7587c40393e3e2981d71f4cc36571d82df253b71d31a5c8d82090",
       "origin": "Repository-authored Triton navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -404,8 +386,6 @@
     {
       "id": "triton-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1048,
-      "expectedSha256": "e5a0f0fd21702453e33b0eda03f39641826f1cb8dd62f38e30e8185096924df8",
       "origin": "Repository-authored Triton acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -423,8 +403,6 @@
     {
       "id": "triton-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7934,
-      "expectedSha256": "08cb9dbb97987fc5e90694cbbe4a6e0ae19950467808621be4468dc00ebb8cf1",
       "origin": "Repository-authored Triton object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -442,27 +420,19 @@
   ],
   "documents": [
     {
-      "path": "observations/usgs-metadata.xml",
-      "expectedBytes": 18754,
-      "expectedSha256": "c7f20eeb2022f308eb002914a01f36943d75e3aa1dd916f3b143470d759d05c7"
+      "path": "observations/usgs-metadata.xml"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 29,
-      "expectedSha256": "7439571ba65953b5180445c9bc1b68d6086904d7182c157a468f0f23b8698bd6"
+      "path": "presentation/minimap.json"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2342,
-      "expectedSha256": "8c0773e1f0fbb9d75e901e9c9bcd8c4a98f58b300284f5eea08f7cbdfca75f75"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "triton-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 3320,
-      "expectedSha256": "10f3a8788729f56d50bb6808869917e8b22e23d0cd3a17acf7d14fb95a26ba15",
       "origin": "Repository-pinned English Wikipedia lead summaries for 7 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

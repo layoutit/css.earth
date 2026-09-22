@@ -2,8 +2,9 @@ import { readFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { parseAuthoredObjectDescriptor, type AuthoredObjectDescriptor, type SourceReference } from '@cssearth/objects';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
+import { sha256 } from '../../src/platform/sha256.mts';
 
-/** A recipe source bound to its manifest record: the manifest is the only owner of source pins. */
+/** A recipe source bound to its manifest record, with the digest of the bytes that were read. A download must also match its manifest pin. */
 export interface BoundSource { readonly id: string; readonly path: string; readonly sha256: string; }
 export interface VerifiedSource { readonly reference: BoundSource; readonly path: string; readonly value: unknown; }
 export interface AuthoredSources {
@@ -29,17 +30,11 @@ export function manifestRecord(manifest: AuthoredSources['manifest'], reference:
   return entry;
 }
 
-/** Pins for a recipe source: the manifest record it resolves to. */
-export function boundReference(manifest: AuthoredSources['manifest'], reference: SourceReference): BoundSource {
-  const entry = manifestRecord(manifest, reference);
-  return Object.freeze({ id: reference.id, path: reference.path, sha256: entry.expectedSha256 });
-}
-
 /** Read and verify one recipe source against its manifest record. */
 export async function verifiedSource(objectDirectory: string, manifest: AuthoredSources['manifest'], reference: SourceReference): Promise<VerifiedSource> {
   const entry = manifestRecord(manifest, reference), path = contained(objectDirectory, reference.path), bytes = await readFile(path);
   manifest.assertBytes(entry, bytes);
-  const reference_ = Object.freeze({ id: reference.id, path: reference.path, sha256: entry.expectedSha256 });
+  const reference_ = Object.freeze({ id: reference.id, path: reference.path, sha256: sha256(bytes) });
   try { return Object.freeze({ reference: reference_, path, value: JSON.parse(bytes.toString('utf8')) as unknown }); }
   catch { throw new TypeError(`Source ${reference.path} must be JSON configuration.`); }
 }

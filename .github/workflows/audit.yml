@@ -171,6 +171,7 @@ jobs:
             node tools/prepare-ci-inputs.mts universe
           fi
           node tools/restore-object-json.mts
+          node tools/prepare-provenance.mts --objects-only
           node tools/prepare-feature-index.mts
           node site/minimap/prepare.mts --data-only
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then

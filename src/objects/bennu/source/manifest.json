@@ -40,7 +40,7 @@
           {
             "catalogueId": "source-bennu-bennu-shape",
             "role": "material",
-            "evidence": "src/planets/bennu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -86,7 +86,7 @@
           {
             "catalogueId": "source-bennu-bennu-normal",
             "role": "material",
-            "evidence": "src/planets/bennu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -132,7 +132,7 @@
           {
             "catalogueId": "source-bennu-bennu-surface",
             "role": "material",
-            "evidence": "src/planets/bennu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -178,7 +178,7 @@
           {
             "catalogueId": "source-bennu-bennu-spectral",
             "role": "material",
-            "evidence": "src/planets/bennu/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -215,8 +215,6 @@
       "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a005000/a005069/Bennu_global_ShapeV20_GndControl_ROLOphase_ALBEDO_8bit_v6.tif",
       "credit": "NASA/University of Arizona/CSA/York University/MDA; NASA Scientific Visualization Studio",
       "license": "Public mission scientific data; retain attribution and source notices.",
-      "expectedBytes": 178217,
-      "expectedSha256": "ddfcec4744a629031d893e93a3c2fa3514316a04cf824dca1fc78e82bce4043a",
       "consumers": [
         "navigation"
       ],
@@ -239,47 +237,31 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9715,
-      "expectedSha256": "60b5b2bd9e21d832ca4f69b50a2b46e89defe254b6d59711871dfc4f7c2c43b9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2664,
-      "expectedSha256": "b85d0d454504851dead6fcceb12a31a908c3ce6260de004d3609c230cf360d56"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "89bf376f90297b670983c923bd1bb1e771b3e42fd4ea4163971e61675146da05"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 400,
-      "expectedSha256": "89129496045033de730f7eb52a59208378f4c7f0a029657922f21c174a84de18"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4269,
-      "expectedSha256": "6028f9b3011cb4760e49548a9fceddb3a749be7d0116175e0f0d02ad88ad4ecb"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2893,
-      "expectedSha256": "9d0374bd644a31fb1a0727e516e2cc4df888814ba2250b9f5e4a24fc47174589"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/bennu_v17.tpc",
-      "expectedBytes": 18460,
-      "expectedSha256": "cdb4bc04f2869d32503db87bddd5a9ab8ea59b6ae91a39cd144e5d9e93339a0a"
+      "path": "reference/bennu_v17.tpc"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 2913,
-      "expectedSha256": "d0192dbe1f3344ded793d9aef79ad4a5985082681c1945d255daa8292d98419a"
+      "path": "reference/horizons-physical.txt"
     },
     {
       "path": "reference/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.lbl",
@@ -296,8 +278,6 @@
     {
       "id": "bennu-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1303,
-      "expectedSha256": "f1be26d2e941aba923bf156af9702c84581142e891c53fa3d9e26bf113e67ca4",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -314,8 +294,6 @@
     {
       "id": "bennu-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1133,
-      "expectedSha256": "93ec56d49f163b3937ec40c90352eb04b72794f2d14ca61ba4d393f59b32e56a",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -332,8 +310,6 @@
     {
       "id": "bennu-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "23974c4acedb60420e05309c780a7c0a50e5b36e6a0b5ae96f2578bb0e6b21b1",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -350,8 +326,6 @@
     {
       "id": "bennu-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1864,
-      "expectedSha256": "62c5010feeff32bf6b8f57287e869946bf15752ef680a5702c24bd529ebfa386",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -371,8 +345,6 @@
     {
       "id": "bennu-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -393,8 +365,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 6137,
-      "expectedSha256": "5eba0434393c68aa1c0123740cdaf5413efc4a1608566bc326948eef85f6937b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

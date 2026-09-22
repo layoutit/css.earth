@@ -51,9 +51,7 @@ uncertainty threshold; those dated selections are not a current catalogue.
    names or URLs, and text a record repeats, are not evidence: the same author
    wrote them. A discovery matches by year and every surname. `--check` reports
    without writing; `--prune` removes what no record proves.
-3. Run `pnpm pin:documents -- <object-id>` to re-pin the content in the source
-   manifest; the manifest is the only owner of that pin.
-4. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their
+3. Run `pnpm prepare:factsheets -- <object-id>` to publish facts and refresh their
    preparation references. Add `--check` to verify without writing; omit the ID
    only when intentionally processing all bodies.
 

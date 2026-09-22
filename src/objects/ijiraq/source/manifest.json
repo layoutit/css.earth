@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ijiraq/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -57,7 +57,7 @@
           {
             "catalogueId": "denk-2018-irregular-moons",
             "role": "method",
-            "evidence": "src/planets/ijiraq/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -96,7 +96,7 @@
           {
             "catalogueId": "denk-2018-irregular-moons",
             "role": "method",
-            "evidence": "src/planets/ijiraq/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -105,62 +105,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3600,
-      "expectedSha256": "d568b64cd9215ac88b5ff6918f9f3b357df528f3e2134186c416a1ea2e151595",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1933,
-      "expectedSha256": "c4394666c34113baf7e9f4f69e90788849d618baf503878630f9cf981740769e"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "4083e69a3c43a343cc4fa0e5b32d18c2112f62dc9d9b79fa42e1f1bc97563233"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 432,
-      "expectedSha256": "c6a8fb99df7174adb432c5311d606677426ead4b4990badcaf19a7a745f14e1c"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2250,
-      "expectedSha256": "07846d95e458a92ed1ab42f464e4af8c0cc4a3727f6e9fa9048599ce96cf27cd"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3171,
-      "expectedSha256": "03e2c015ff4301279014265ba479247a51090d3c44300e9b54bd0c7107cba8fa"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "survey/research.json",
-      "expectedBytes": 5731,
-      "expectedSha256": "b30e42517e0caa573ddfeb1c3781584fd770e2f6ed808f0d668f03c344f0e3e5"
+      "path": "survey/research.json"
     },
     {
-      "path": "validation/orbit-checks.json",
-      "expectedBytes": 25698,
-      "expectedSha256": "fa1e836b59d7df631c4645968b0539bae25ec77de21dc1682b2baafeaff5116e"
+      "path": "validation/orbit-checks.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1468,
-      "expectedSha256": "9415831159ec5f5578cd17bd926ed7b8e8a4a63a881c8e3fa76cd456d5f1a997",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -190,9 +168,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 86588,
-      "expectedSha256": "b1f4e492d472069f1c0a4b632bc513f85c8ec5e472faacc3c381e2d1e224ec64"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

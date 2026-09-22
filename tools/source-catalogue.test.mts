@@ -12,15 +12,18 @@ import { SCENE_OBJECTS } from '../site/objects.mts';
 import { sourceInventory } from './source-catalogue-inputs.mts';
 import { hasErrorCode } from './source-values.mts';
 import { sourceObject, sourceArray, sourceText, parseSourceCatalog, sourceResolver } from '../src/platform/source-catalog.mts';
-import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
-import { readSourceCatalog, checkSourceCatalog } from './read-source-catalogue.mts';
+import { parsePreparedSources } from '../src/platform/prepared-sources.mts';
+import { readSourceCatalog } from './read-source-catalogue.mts';
 import { parsePreparedExploration } from '../src/platform/prepared-exploration.mts';
 import { compileSourceUsage, parseSourceUsage, sourceDatasetViews } from '../src/platform/source-usage.mts';
 import { validateObjectProvenance } from '../src/platform/object-provenance.mts';
 import { explorationCompilerClosure } from './prepare-facilities.mts';
 import { refreshSourceRecord } from './source-authoring-templates.mts';
+import { objectProvenanceOutputs } from './prepare-provenance.mts';
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
 const prepared = parsePreparedSources(await read('site/prepared-sources.json'));
+// A temporary root holds only the catalogue's own inputs, so each body's record is built once from the real packages.
+const { documents: provenance } = await objectProvenanceOutputs();
 const exploration = parsePreparedExploration(await read('site/prepared-facilities.json'),prepared.sources);
 // Preview originals are bounded pinned image inputs; the source graph never needs a baked volume bank.
 const volumePreviewInputs = async () => {
@@ -93,7 +96,7 @@ test('independent source additions merge and compile without changing shared tra
   assert.equal(await git('status', '--porcelain'), '');
 });
 
-test('source files reject mismatched IDs, duplicate provider identities and stale or tampered catalogues', async t => {
+test('source files reject mismatched IDs and duplicate provider identities', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-source-records-'));
   t.after(() => rm(root, {recursive: true, force: true}));
   await mkdir(join(root, 'src/sources'), {recursive: true});
@@ -102,23 +105,9 @@ test('source files reject mismatched IDs, duplicate provider identities and stal
   await assert.rejects(readSourceCatalog(root), /identity differs from filename/);
   await writeFile(join(root, first), JSON.stringify(sourceFixture('first')));
   await writeFile(join(root, second), JSON.stringify(sourceFixture('second')));
-  const closure: Record<string, string> = {};
-  for (const path of [first, second]) closure[path] = createHash('sha256').update(await readFile(join(root, path))).digest('hex');
-  const original = await readSourceCatalog(root);
-  const prepared = {catalogSha256: sourceCatalogDigest(original), closure};
-  await checkSourceCatalog(root, prepared);
+  await readSourceCatalog(root);
   await writeFile(join(root, second), JSON.stringify({...sourceFixture('second'), identifiers: sourceFixture('first').identifiers}));
   await assert.rejects(readSourceCatalog(root), /Duplicate/);
-  await assert.rejects(checkSourceCatalog(root, prepared), /Stale sources catalogue/);
-  await rm(join(root, second));
-  await assert.rejects(checkSourceCatalog(root, prepared), /differs from its records/);
-  await writeFile(join(root, second), JSON.stringify(sourceFixture('second')));
-  const added = join(root, 'src/sources/third.json');
-  await writeFile(added, JSON.stringify(sourceFixture('third')));
-  await assert.rejects(checkSourceCatalog(root, prepared), /Stale sources catalogue/);
-  await rm(added);
-  const tampered = {...original, records: original.records.map(record => ({...record, title: 'Invented title'}))};
-  await assert.rejects(checkSourceCatalog(root, {...prepared, catalogSha256: sourceCatalogDigest(tampered)}), /differs from its records/);
 });
 const objectInput = async (id: string) => {
   const object = SCENE_OBJECTS.find(object => object.id === id)!;
@@ -215,7 +204,7 @@ test(`both catalogues prepare deterministically from ${sourceCheckMode()} packag
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path))),before);
 });
 
-test('changed fact evidence and stale displayed facts leave both published catalogues intact', async t => {
+test('an undeclared fact citation and stale displayed facts leave both published catalogues intact', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-facilities.json'];
@@ -231,20 +220,22 @@ test('changed fact evidence and stale displayed facts leave both published catal
     await copyFile(path, target);
   }
   const before = await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8')));
-  const evidencePath = join(root, 'src/objects/abundantia/source/reference/calibration.json');
-  const evidence = await readFile(evidencePath, 'utf8');
-  await writeFile(evidencePath, evidence.replace('42.18', '52.18'));
-  await assert.rejects(prepareFacilities({ root }), /fact evidence pin differs/);
+  // Evidence authored here carries no pin; git shows an edit to it. A fact must still cite a file the manifest declares.
+  const manifestPath = join(root, 'src/objects/abundantia/source/manifest.json'), manifestText = await readFile(manifestPath, 'utf8');
+  const undeclared = sourceObject(JSON.parse(manifestText));
+  for (const section of ['inputs', 'documents', 'generatedIntermediates']) undeclared[section] = sourceArray(undeclared[section] ?? [], sourceObject).filter(entry => entry.path !== 'reference/calibration.json');
+  await writeFile(manifestPath, JSON.stringify(undeclared, null, 2) + '\n');
+  await assert.rejects(prepareFacilities({ root, provenance }), /fact evidence needs one manifest entry/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
-  await writeFile(evidencePath, evidence);
+  await writeFile(manifestPath, manifestText);
   const contentPath = join(root, 'src/objects/abundantia/prepared/content.json');
   const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
   sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
   await writeFile(contentPath, JSON.stringify(content));
-  await assert.rejects(prepareFacilities({ root }), /Stale factsheet for abundantia/);
+  await assert.rejects(prepareFacilities({ root, provenance }), /Stale factsheet for abundantia/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(contentPath, originalContent);
-  const rebuilt = await prepareFacilities({ root });
+  const rebuilt = await prepareFacilities({ root, provenance });
   const focusDatasets = rebuilt.preparedSources.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus='));
   assert.ok(focusDatasets.length > 0, 'The fixture must exercise delivered volume datasets.');
   assert.deepEqual(focusDatasets, prepared.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus=')),
@@ -289,16 +280,16 @@ test('missing cited evidence restores without body assets and leaves catalogues 
     assert.equal(url, 'https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl');
     return new Response(bytes);
   };
-  await assert.rejects(prepareFacilities({ root,
+  await assert.rejects(prepareFacilities({ root, provenance,
     sourceTransport: { fetch: async () => new Response(Buffer.alloc(bytes.length, 0)) },
   }), /Source hash drifted/);
   await assert.rejects(readFile(join(root, paper)), { code: 'ENOENT' });
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
-  const result = await prepareFacilities({ root, sourceTransport: { fetch: fetchPaper } });
+  const result = await prepareFacilities({ root, provenance, sourceTransport: { fetch: fetchPaper } });
   assert.deepEqual(requests, ['https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl']);
   assert.deepEqual(await readFile(join(root, paper)), bytes);
   assert.equal(result.preparedSources.closure[paper], createHash('sha256').update(bytes).digest('hex'));
-  const offline = await prepareFacilities({ root, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
+  const offline = await prepareFacilities({ root, provenance, sourceTransport: { fetch: async () => { throw new Error('Unexpected citation refresh'); } } });
   assert.deepEqual(offline.outputs, result.outputs, 'warm and cold preparation have identical closures');
 });
 

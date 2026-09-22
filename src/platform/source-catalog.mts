@@ -2,7 +2,7 @@
 export type SourceKind = 'data-product' | 'publication' | 'model' | 'reference-page' | 'software' | 'artwork';
 export type SourceRole = 'material' | 'method' | 'reference' | 'artwork';
 export type SourceEvidence =
-  | { readonly path: string; readonly revision: string; readonly sha256: string; readonly locator: string }
+  | { readonly path: string; readonly locator: string }
   | { readonly url: string; readonly checkedOn: string; readonly locator: string };
 export interface SourceLink { readonly role: 'landing' | 'archive' | 'original' | 'mirror' | 'rights'; readonly url: string; readonly label: string; }
 export interface SourceRecord {
@@ -74,10 +74,9 @@ export function parseSourceEvidence(raw: unknown): SourceEvidence {
     const value = sourceObject(raw, ['url','checkedOn','locator']);
     return Object.freeze({url:sourceUrl(value.url),checkedOn:sourceDate(value.checkedOn,true),locator:sourceText(value.locator)});
   }
-  const value = sourceObject(raw, ['path', 'revision', 'sha256', 'locator']);
-  const revision = sourceText(value.revision), locator = sourceText(value.locator);
-  if (!/^[a-f0-9]{40}$/.test(revision) || !locator.startsWith('/')) throw new TypeError('Invalid historical source evidence.');
-  return Object.freeze({ path: sourcePath(value.path), revision, sha256: sourceDigest(value.sha256), locator });
+  const value = sourceObject(raw, ['path', 'locator']), locator = sourceText(value.locator);
+  if (!locator.startsWith('/')) throw new TypeError('Invalid source evidence locator.');
+  return Object.freeze({ path: sourcePath(value.path), locator });
 }
 export function parseSourceBinding(raw: unknown, sources?: SourceResolver): SourceBinding {
   const value = sourceObject(raw), kind = sourceText(value.kind);

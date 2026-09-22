@@ -2,8 +2,6 @@
   "schema": "cssr-doradus-authoritative-sources@2",
   "inputs": [
     {
-      "expectedBytes": 325440,
-      "expectedSha256": "eaa56eb426806f2859644cb10d28e188249257c8c0e27cef279b29d7a15b975f",
       "id": "r-doradus-alma-338ghz",
       "path": "observations/r-doradus-alma-338ghz-0p625mas.fits",
       "origin": "https://almascience.eso.org/dataPortal/member.uid___A001_X35f5_Xaea.R_Dor_sci.spw25_27_29_31.cont.I.pbcor.fits",
@@ -62,8 +60,6 @@
       }
     },
     {
-      "expectedBytes": 65105,
-      "expectedSha256": "cacd9c8b013a24cd57334e58041bb240af45fee710a54fa90273d918b93d8d54",
       "id": "uniform-disc-sphere",
       "path": "shape/uniform-disc.tab",
       "origin": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=R+Dor",
@@ -113,7 +109,7 @@
           {
             "catalogueId": "source-r-doradus-r-doradus-observational-measurements",
             "role": "material",
-            "evidence": "src/objects/r-doradus/source/manifest.json@71348fe882075b91e3ea041e52ff94e4f4cbc01c#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -140,7 +136,7 @@
           {
             "catalogueId": "source-r-doradus-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/r-doradus/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -148,8 +144,6 @@
     {
       "id": "r-doradus-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 6739,
-      "expectedSha256": "74eec4b29c4602939dd68916ca405cc21719a0e943a01d61409adc21af408e40",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -167,8 +161,6 @@
     {
       "id": "r-doradus-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1704,
-      "expectedSha256": "065c8a2c71438c40a2b4d40b82f176966e3d27ceb646f559d4fe372f29a9946d",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -186,8 +178,6 @@
     {
       "id": "r-doradus-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -204,8 +194,6 @@
     {
       "id": "r-doradus-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 104,
-      "expectedSha256": "da6e3c6044795dda275319d6bf33e68537a68f36c124b132dc7550719829428b",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -222,8 +210,6 @@
     {
       "id": "r-doradus-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 220,
-      "expectedSha256": "ed0ded0020d04077237065a936c098daeb243e5e12fe1273d70527fc146efb15",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -328,8 +314,6 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 117101,
-      "expectedSha256": "04a1c6577ff1cfc79004bd65568bb6759e3416efa15dae7b621adc64a1048ca0",
       "origin": "https://doi.org/10.1038/s41586-024-07836-9",
       "credit": "The ALMA continuum image on the lens palette; marker written by tools/objects/source-authoring/r-doradus/author.mts",
       "license": "Project-authored display derivative.",
@@ -352,42 +336,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6648,
-      "expectedSha256": "d5c6577bc1ec0a6144bbb529597faf514293820bd3dec951165d0a1d23bc32d4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 888,
-      "expectedSha256": "d97ca67efce86036697804897c0141d9599964195dd1c30b7c0374eacfd8d3f3"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "f31298090147256894fbeeb51c075b5d2948e023c9566b05c4d1029efa243bc5"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1285,
-      "expectedSha256": "0ce934ecf3e8dc792d0de49b93752a6413005576bfca3ccbf41100e45ea05ff2"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5091,
-      "expectedSha256": "f23a0e7cfd21b71ffbaa037cb993d9c825faec0ad7a2d4222384377bbd6adbdb"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/alma-band8-restored-vs-archive.png",
-      "expectedBytes": 33899,
-      "expectedSha256": "51dd498b6ee46fbb027f1c46f899dd713dd8b351174a8753564279ea5f7fcc49",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the band 8 image this package restored from the raw ASDM beside the archive delivery, from the ALMA reduction route (pull request 302). The image arrived with that route; this entry declares it so the package passes its own source coverage."

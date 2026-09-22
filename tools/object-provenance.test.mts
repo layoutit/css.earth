@@ -8,7 +8,6 @@ import { resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import { prepareObjectProvenance } from './objects/provenance.mts';
 import { productSourceIds, validateObjectProvenance } from '../src/platform/object-provenance.mts';
-import { provenanceIdentity, reconcileObjectProvenance } from './prepare-provenance.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 
 type PreparationContext = Parameters<typeof prepareObjectProvenance>[0];
@@ -208,17 +207,6 @@ test('recovery preserves pins without claiming execution or requiring ignored so
   assert.throws(() => validateObjectProvenance({ ...recovered, basis: 'prepared' }), /unverified source/u);
 });
 
-test('changing a binding or an output identity invalidates an existing preparation record', async t => {
-  const context = await fixture(t), prepared = await prepareObjectProvenance(context);
-  const recovered = await prepareObjectProvenance({ ...context, basis: 'recovered' });
-  assert.equal(provenanceIdentity(prepared), provenanceIdentity(recovered));
-  assert.equal(provenanceIdentity({ ...prepared, generator: { ...prepared.generator, sha256: 'a'.repeat(64), bindingsSha256: 'b'.repeat(64) } }),
-    provenanceIdentity(prepared), 'a rule or compiler edit with the same material keeps the record');
-  const output = requireValue(requireValue(recovered.products[0], 'recovered fixture product').outputs[0], 'recovered fixture output');
-  assert.equal(Reflect.set(output, 'sha256', '0'.repeat(64)), true);
-  assert.notEqual(provenanceIdentity(prepared), provenanceIdentity(recovered));
-});
-
 test('invalid source edges and cyclic products are rejected', async t => {
   const document = await prepareObjectProvenance(await fixture(t));
   const invalid = structuredClone(document);
@@ -312,20 +300,16 @@ test('Mercury coverage completion binds all three maps; previews retain their pa
 });
 
 
-test('metadata recovery preserves the last verified preparation and checks its material applicability', async t => {
+test('a generated record is a function of the package alone, whatever copy of itself is on disk', async t => {
   const context = await fixture(t), prepared = await prepareObjectProvenance({ ...context, write: true });
-  assert.ok(prepared.lastPreparation);
+  assert.ok(prepared.lastPreparation, 'a preparation run records that it verified its bytes');
   assert.equal(preparationEvidenceApplies(prepared), true);
-  const recovered = await prepareObjectProvenance({ ...context, basis: 'recovered' });
-  assert.deepEqual(recovered.lastPreparation, prepared.lastPreparation);
-  assert.equal(recovered.basis, 'recovered');
-  const metadata = { ...recovered, generator: { ...recovered.generator, sha256: 'a'.repeat(64) } };
-  assert.equal(preparationEvidenceApplies(metadata), true, 'lineage compiler changes do not erase byte evidence');
-  const changed = structuredClone(metadata);
-  Reflect.set(changed.products[0]!.outputs[0]!, 'sha256', '0'.repeat(64));
-  assert.equal(preparationEvidenceApplies(changed), false, 'old evidence cannot certify different material');
-  assert.deepEqual(changed.lastPreparation, prepared.lastPreparation, 'the old evidence remains inspectable');
-  assert.throws(() => recordPreparationEvidence(recovered), /byte-verified preparation/);
+  const beside = await prepareObjectProvenance({ ...context, basis: 'recovered', write: false });
+  await rm(resolve(context.outputDirectory, 'provenance.json'));
+  const alone = await prepareObjectProvenance({ ...context, basis: 'recovered', write: false });
+  assert.deepEqual(beside, alone);
+  assert.equal(alone.lastPreparation, undefined, 'a view of the manifest claims no run');
+  assert.throws(() => recordPreparationEvidence(alone), /byte-verified preparation/);
   assert.throws(() => validateObjectProvenance({ ...prepared, lastPreparation: { ...prepared.lastPreparation, objectId: 'another' } }), /different object/);
 });
 
@@ -345,45 +329,4 @@ test('Gaspra separates its photographic appearance from the source shape in the 
   assert.deepEqual(roles.get('gaspra-normal'), ['appearance']);
   assert.deepEqual(roles.get('gaspra-shape'), ['geometry']);
   assert.deepEqual(productInputRoles(document, 'preview:normal'), roles);
-});
-
-test('reconciliation verifies a changed body, keeps an unchanged record, and never writes a downgrade over a prepared record', async t => {
-  const context = await fixture(t), { objectDirectory, publicDirectory } = context;
-  const recipePath = resolve(context.source, 'preparation/raster.json'), manifestPath = resolve(context.source, 'manifest.json');
-  const first = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
-  assert.equal(first.outcome, 'verified'); assert.equal(first.document.basis, 'prepared');
-  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(first.document, null, 2) + '\n');
-  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained');
-  // An edited recipe changes the material; with every pinned byte on disk the new record is verified, not recovered.
-  const recipe = JSON.stringify({ ...await read(recipePath), edited: true }), manifest = await read(manifestPath);
-  await writeFile(recipePath, recipe);
-  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(recipe), expectedBytes: Buffer.byteLength(recipe) });
-  await writeFile(manifestPath, JSON.stringify(manifest));
-  const second = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
-  assert.equal(second.outcome, 'verified'); assert.equal(second.document.basis, 'prepared');
-  assert.notEqual(provenanceIdentity(second.document), provenanceIdentity(first.document));
-  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(second.document, null, 2) + '\n');
-  // A pinned input that is not on this checkout leaves the prepared record untouched and names the file.
-  await rm(resolve(context.source, 'observation.dat'));
-  await writeFile(recipePath, JSON.stringify({ ...JSON.parse(recipe), edited: 2 }));
-  Object.assign(requireRecord(requireArray(manifest.documents)[0]), { expectedSha256: hash(await readFile(recipePath)), expectedBytes: (await readFile(recipePath)).length });
-  await writeFile(manifestPath, JSON.stringify(manifest));
-  const third = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
-  assert.equal(third.outcome, 'unverifiable'); assert.equal(third.reason, 'missing source/observation.dat');
-  assert.deepEqual(third.document, second.document);
-  const forced = await reconcileObjectProvenance({ objectDirectory, publicDirectory, recover: true });
-  assert.equal(forced.outcome, 'recovered'); assert.equal(forced.document.basis, 'recovered');
-  // A recovered record is upgraded as soon as its bytes can be verified, which is the same check preparation makes.
-  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
-  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'recovered', 'still unverifiable');
-  await writeFile(resolve(context.source, 'observation.dat'), 'original observation bytes');
-  const upgraded = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
-  assert.equal(upgraded.outcome, 'verified'); assert.equal(upgraded.document.basis, 'prepared');
-  // Output bytes that differ from their pin are a local problem for a recovered record and a refusal for a prepared one.
-  await writeFile(resolve(publicDirectory, 'surface@2x.webp'), 'a stale local copy');
-  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(forced.document, null, 2) + '\n');
-  const stale = await reconcileObjectProvenance({ objectDirectory, publicDirectory });
-  assert.equal(stale.outcome, 'recovered'); assert.match(stale.reason ?? '', /^bytes differ at .*surface@2x\.webp/u);
-  await writeFile(resolve(context.outputDirectory, 'provenance.json'), JSON.stringify(upgraded.document, null, 2) + '\n');
-  assert.equal((await reconcileObjectProvenance({ objectDirectory, publicDirectory })).outcome, 'retained', 'an unchanged prepared record is not re-verified');
 });

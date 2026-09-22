@@ -4,8 +4,6 @@
     {
       "id": "mercury-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "193267cebfab7b56820e11e191b41096957a52e532d9e6ac2c1e4c3a5d36f634",
-      "expectedBytes": 209,
       "origin": "Repository-authored physical scene recipe; radius from IAU/NASA and checked astronomy body data, pinned solar geometry from VSOP87A and IAU/WGCCRE",
       "credit": "Published physical facts and repository-authored presentation",
       "license": "Repository-authored factual data",
@@ -63,7 +61,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-bdr-global-z3",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -112,7 +110,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-enhanced-global-z3",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -158,7 +156,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-topography-z3",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -187,7 +185,7 @@
           {
             "catalogueId": "source-mercury-usgs-messenger-topography-legend",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -211,7 +209,7 @@
           {
             "catalogueId": "source-mercury-nasa-mercury-pia15162-navigation",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -237,7 +235,7 @@
           {
             "catalogueId": "source-mercury-nasa-mercury-facts-107747",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -293,7 +291,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-7433033",
             "role": "material",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -347,7 +345,7 @@
           {
             "catalogueId": "nasa-mercury-facts",
             "role": "reference",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -371,7 +369,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/mercury/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -379,8 +377,6 @@
     {
       "id": "mercury-object-content",
       "path": "content/object.json",
-      "expectedSha256": "b52be920085f18d3e55ebb13ea1fe0754461ec7627816551b15dd64b2cdaed40",
-      "expectedBytes": 15802,
       "origin": "Repository-authored Mercury panel, lens, chart, and provenance data.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -399,8 +395,6 @@
     {
       "id": "mercury-chart-assets",
       "path": "content/charts.json",
-      "expectedSha256": "390a7527acc15ec81c5a89e79f637c2f6704c2ae9c12b9a24e79f494e49b12c4",
-      "expectedBytes": 3314,
       "origin": "Repository-authored Mercury chart asset recipe bound to scientific source records.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -417,8 +411,6 @@
     {
       "id": "mercury-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "25aa0f2790c8ce35056d29c0777a618b9ae1f9939958c92017723eaed612c631",
-      "expectedBytes": 4091,
       "origin": "Repository-authored Mercury acquisition and qualification recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -437,8 +429,6 @@
     {
       "id": "mercury-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "4d7af8d4c28303bb55585a416e22829b414cd58d002d6083ced532be450d144c",
-      "expectedBytes": 497,
       "origin": "Repository-authored Mercury navigation asset recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -455,8 +445,6 @@
     {
       "id": "mercury-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "8dcaca0096ccdcb05152db1e5d262cd48911ea22fb5765181ad8ed67759be345",
-      "expectedBytes": 2413,
       "origin": "Repository-authored Mercury CSS geometry recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -474,8 +462,6 @@
     {
       "id": "mercury-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
-      "expectedBytes": 108,
       "origin": "Repository-authored Mercury sky, sun, and marker recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -494,8 +480,6 @@
     {
       "id": "mercury-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedSha256": "93f35492fb9aa508c31dc024f67045900139e73d72f186cdaa353e8cf441a42f",
-      "expectedBytes": 110,
       "origin": "Repository-authored Mercury presentation capability recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -512,8 +496,6 @@
     {
       "id": "mercury-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "213087b6fd57064c042e7330069f073461c7a044cf9d511f78dfef3ece077836",
-      "expectedBytes": 4762,
       "origin": "Repository-authored Mercury raster preparation recipe.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -531,8 +513,6 @@
     {
       "id": "mercury-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "03e3a362654927fe5ca054df0207da4a56817e51d65c6cb512531855e1052e17",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -573,7 +553,7 @@
           {
             "catalogueId": "source-mercury-usgs-gazetteer-nomenclature-center-pts",
             "role": "material",
-            "evidence": "src/planets/mercury/source/features/manifest.json@d1df0e9439e71dcf03fec387859d2817ca5285f1#/inputs/0"
+            "evidence": "src/objects/mercury/source/features/manifest.json#/inputs/0"
           }
         ]
       }
@@ -581,8 +561,6 @@
     {
       "id": "mercury-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1013,
-      "expectedSha256": "098425552904c728f661ba20bc94cb7236a133d174a8aeceae74cb5078cc4eb1",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -599,8 +577,6 @@
     {
       "id": "mercury-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1789,
-      "expectedSha256": "ba4b752a340702ad06ef767541636dc5cc70d46f494a17527ea36551fd56cf8e",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -639,7 +615,7 @@
           {
             "catalogueId": "doi-10-17632-p43b9wttpj-2",
             "role": "material",
-            "evidence": "src/planets/mercury/source/features/tectonic/manifest.json@2a491c27cde809cb7b26b95a967b07b949b17d11#/inputs/0"
+            "evidence": "src/objects/mercury/source/features/tectonic/manifest.json#/inputs/0"
           }
         ]
       }
@@ -647,8 +623,6 @@
     {
       "id": "mercury-tectonic-traces-source",
       "path": "features/tectonic/manifest.json",
-      "expectedBytes": 1116,
-      "expectedSha256": "4e4e306332d4a0f9d907780abb14a52583e9349602407d689c681ffa50dc8cc4",
       "origin": "Repository-authored pin of the tectonic map snapshot: record page, version, licence evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -667,22 +641,16 @@
   "documents": [
     {
       "path": "spectrum/LICENSE.md",
-      "expectedBytes": 699,
-      "expectedSha256": "63bcfe99e99570bf9f8869485c181dcb28688530763e9c32eaf76174cf76f88f",
       "purpose": "CC-BY-4.0 attribution and reproducibility route for the DLR MESSENGER MASCS derived spectrum."
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1434,
-      "expectedSha256": "a16802b765a74431dd446798afb9c0234cd8663156d194a78c2d3de674f6ebcd"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "mercury-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 1648,
-      "expectedSha256": "b9a809dbe52117450d9522c8700c1cfb20e1843e28a5d0a34f37b9dd03b84593",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -702,8 +670,6 @@
     {
       "id": "mercury-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 203960,
-      "expectedSha256": "c61971591f74b61d6f1d4eee6ae84f8b61658d8ab0e7b762e45fc691125d29e1",
       "origin": "Repository-pinned English Wikipedia lead summaries for 486 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

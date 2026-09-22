@@ -18,7 +18,7 @@ async function inputs(id: string) {
 test('every authored object closes over its numerical publication stage', async () => {
   for (const object of SCENE_OBJECTS) await requireAuthoredWorldFrame(await inputs(object.id));
 });
-test('final numerical stage rejects mutated frame, source pins, scene scale and removed receipt', async () => {
+test('final numerical stage rejects mutated frame, scene scale and removed receipt', async () => {
   let input;
   for (const object of SCENE_OBJECTS) {
     const descriptor = JSON.parse(await readText(resolve('src/objects', object.id, 'object.json')));
@@ -32,7 +32,6 @@ test('final numerical stage rejects mutated frame, source pins, scene scale and 
   const receipt = JSON.parse(await readText(path));
   for (const mutate of [
 (value: unknown) => { const frame = fixtureRecord(value, 'frame'); frame.bodyRadiusM = requireFiniteNumber(frame.bodyRadiusM) + 1; },
-(value: unknown) => { fixtureRecord(value, 'sources', 0).sha256 = '0'.repeat(64); },
 (value: unknown) => { const record = fixtureRecord(value); record.sceneScale = requireFiniteNumber(record.sceneScale) * 2; },
     (value: unknown) => { delete fixtureRecord(value).frame; },
   ]) {

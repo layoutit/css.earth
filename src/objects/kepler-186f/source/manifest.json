@@ -4,8 +4,6 @@
     {
       "id": "kepler-186f-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 716,
-      "expectedSha256": "f8e52d0f34305faa0dc45cc0a4c561bf0bd06ab38263bde672426312e6a33c19",
       "origin": "https://arxiv.org/abs/1501.01101",
       "credit": "G. Torres et al., \"Validation of Twelve Small Kepler Transiting Planets in the Habitable Zone\", ApJ 800, 99 (2015), arXiv:1501.01101",
       "license": "Factual numerical measurements; source attribution retained",
@@ -41,7 +39,7 @@
           {
             "catalogueId": "source-kepler-186f-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/kepler-186f/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,8 +47,6 @@
     {
       "id": "kepler-186f-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2390,
-      "expectedSha256": "6ebf46bc7ac33a7df549d948eacbed8ad8cddc27024ccd7a1c4263a30a2df4cc",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "kepler-186f-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1665,
-      "expectedSha256": "0f9385c5e7661f9125b298bfec7bb4018a2aa4ee53acfb2a203f661a7501eb37",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "kepler-186f-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +98,6 @@
     {
       "id": "kepler-186f-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 107,
-      "expectedSha256": "6eaf3790ab328a066a0562a3e97a9c7bf02727df018f1c2814e25ccb9eaa5c07",
       "origin": "Repository-authored presentation profile: composite mode",
       "sourceBinding": {
         "kind": "local",
@@ -124,8 +114,6 @@
     {
       "id": "kepler-186f-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 222,
-      "expectedSha256": "934f2df8dc2f7293369694f9a0fcdc68fa85569941f182babaeecf301557abbe",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -144,8 +132,6 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "origin": "https://arxiv.org/abs/1501.01101",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
@@ -168,37 +154,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3464,
-      "expectedSha256": "16cc9549772942164628f1b8b6405e7405d32770d6c012ae55dac0f1dc8ec8e7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 448,
-      "expectedSha256": "f13931d43a2a99695f4f7e2ab8845d590953b05faf52374dd47e23563d54b54b"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 697,
-      "expectedSha256": "5466d4719550fc55647a6482537dc015708094891209faf3f3a75edb0d7c24d9"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5884,
-      "expectedSha256": "d163493e2d2bbb602466b1b645e96bfaa69433dd337fc52661345105cae898cc"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

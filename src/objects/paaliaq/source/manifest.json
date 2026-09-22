@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/paaliaq/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -57,7 +57,7 @@
           {
             "catalogueId": "denk-2018-irregular-moons",
             "role": "method",
-            "evidence": "src/planets/paaliaq/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -96,7 +96,7 @@
           {
             "catalogueId": "denk-2018-irregular-moons",
             "role": "method",
-            "evidence": "src/planets/paaliaq/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -105,62 +105,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3608,
-      "expectedSha256": "c0bc1b11ec91c9482462cc5dc1c40d34eb6cdae4b5dea21916335919b3f8dc47",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1980,
-      "expectedSha256": "70e58c3906bb462bc1bb406d43b3058f21feab3c3dc239f0bcc0f4b7a2860ecd"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "58a91050827779f1c7fe0c07cdd4b49a577c68fdbcc5211e0f66e9d834f333ba"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 433,
-      "expectedSha256": "ca7a624012cc6dd04dd686d5a7f7674de8c22a4906d0b0887fee54b46340be1d"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2260,
-      "expectedSha256": "50337efa73227f8c0800fbeb60356c988c63672a93e0a808634158ede1667288"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4921,
-      "expectedSha256": "f7bfaa395b6b9901642d7d16a90247b73420cd0238dc96fff796efed2809c0fa"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "survey/research.json",
-      "expectedBytes": 5556,
-      "expectedSha256": "a5891c2053d209ba67c1e52f58bd845b5e1d07a70673ee85345140ea6d64b161"
+      "path": "survey/research.json"
     },
     {
-      "path": "validation/orbit-checks.json",
-      "expectedBytes": 25672,
-      "expectedSha256": "9252d4b6748c6ceaf8c97559deea230d4e9ade7e8e1d19ec32fd1e4a900ddeb8"
+      "path": "validation/orbit-checks.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1469,
-      "expectedSha256": "643c6bfcb53f14f94417f0f9a9a1827e127d015d818990d35bcf622737d13b84",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -190,9 +168,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 89239,
-      "expectedSha256": "e9e1f3a1d2a4b53f2f572b216feb061dbb858a2b08463193163ad715ed4ce7d4"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

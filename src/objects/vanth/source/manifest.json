@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/objects/vanth/source/manifest.json@0000000000000000000000000000000000000000#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -39,7 +39,7 @@
           {
             "catalogueId": "jpl-horizons",
             "role": "material",
-            "evidence": "src/objects/vanth/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       },
@@ -68,8 +68,6 @@
         "kind": "local",
         "reason": "Project-authored grid marking unavailable surface imagery."
       },
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,67 +92,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2641,
-      "expectedSha256": "6b21e05ae11306344b01d9308bd80bc903886777a5d0206393fec725941f6d29",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1961,
-      "expectedSha256": "e48d59823c66c42b40b7247a782a5be809fa5c5c0c9f03ddc9b345af4fe07d46"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/orcus-epoch.txt",
-      "expectedBytes": 6768,
-      "expectedSha256": "f7c9c8e3501f220dc4df48e096d4917123a072e47c94615b87eec44c84c0d20d"
+      "path": "orbit/orcus-epoch.txt"
     },
     {
-      "path": "orbit/vanth-epoch.txt",
-      "expectedBytes": 6844,
-      "expectedSha256": "c4a216452a805fd18c3d3b5a3f77286074cdb3d89b7e835af84673ff16e0a1d5"
+      "path": "orbit/vanth-epoch.txt"
     },
     {
-      "path": "orbit/vanth-heliocentric-check.txt",
-      "expectedBytes": 6824,
-      "expectedSha256": "8312faaa83c587058c1f67a152a7f8c10cc2106612a5fffefcb267843166f1ec"
+      "path": "orbit/vanth-heliocentric-check.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "8b163b54b10c5358fb52dffbb857979aae685b628fe2f634fa8f5a0ec821f288"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 352,
-      "expectedSha256": "9cb6567d73269408ecc2201b25b2cd77c22323dd20c087b8063905778a7a81ca"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2280,
-      "expectedSha256": "ce38109721f6d5b9deee9c15b80952ae8f0290d2c844bdf531ff9827d8ef8819"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2751,
-      "expectedSha256": "6aad93c5ca1fbcc5019d7b9a69be1e411efc35fcc3c51f1bff3552191744ebb9"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 3469,
-      "expectedSha256": "84d25bff8eb654dc690b5c41277383b977ac4582e6764eaab02243b975300b31"
+      "path": "validation/epoch-state.json"
     }
   ],
   "generatedIntermediates": [
@@ -167,8 +141,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 92829,
-      "expectedSha256": "725dabf5d1888c37ccbdfb33ebc903037610bb5f5e7027fe589e0e40aee31be0",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
         "inputs": [

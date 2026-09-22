@@ -4,7 +4,8 @@ import { parseSourceBinding } from './source-catalog.mts';
 import type { SourceBinding } from './source-catalog.mts';
 /** One byte range of a remote member, for archive files too large to keep whole. The pin covers exactly the kept bytes. */
 export interface SourceRange { offset: number; length: number; }
-export interface SourceEntry { path: string; expectedBytes: number; expectedSha256: string; range?: SourceRange; sourceBinding?: SourceBinding; }
+/** A pin identifies bytes git does not hold: a download, or an archive member. A file authored in this repository carries none; git is its record. */
+export interface SourceEntry { path: string; expectedBytes?: number; expectedSha256?: string; range?: SourceRange; sourceBinding?: SourceBinding; }
 export interface SourceInput extends SourceEntry { id: string; origin: string; credit: string; license: string; acquisition: string; redistribution: string; consumers: readonly string[]; licenseEvidence?: readonly string[]; sourceBinding: SourceBinding; }
 export interface SourceManifest { schema: string; inputs: readonly SourceInput[]; generatedIntermediates: readonly (SourceEntry & { generator: string })[]; documents: readonly (SourceEntry & { purpose?: string })[]; }
 export interface SourceManifestLocation { planetId: string; planetName: string; sourceRoot: string; }
@@ -173,6 +174,8 @@ export function assertSourceBytes({ entry, bytes, planetName }: { entry: SourceE
 }
 
 function assertSourceDigest({ entry, size, actual, planetName }: { entry: SourceEntry; size: number; actual: string; planetName: string }) {
+  // A file authored in this repository has no pin; its bytes on disk are the record.
+  if (entry.expectedSha256 === undefined) return actual;
   if (size !== entry.expectedBytes) {
     throw new Error(
       `${planetName} source size drifted for ${entry.path}: expected ${
@@ -188,7 +191,7 @@ function assertSourceDigest({ entry, size, actual, planetName }: { entry: Source
   return actual;
 }
 
-export const isPlaceholderDigest = (digest: string) => /^0{64}$/u.test(digest);
+export const isPlaceholderDigest = (digest: string | undefined) => digest !== undefined && /^0{64}$/u.test(digest);
 
 /** A ranged input asks for exactly its pinned bytes. Acquisition owns the request; this owns what the request must say. */
 export const rangeRequestHeader = (range: SourceRange) => `bytes=${range.offset}-${range.offset + range.length - 1}`;
@@ -229,9 +232,9 @@ async function validateSourceEntry({ entry, planetName, sourceRoot }: SourceVeri
 
 function validateEntryBase(planetId: string, entry: SourceEntry, kind: string, paths: Set<string>) {
   if (!entry || typeof entry !== "object" || isArray(entry) ||
-      !safeRelativePath(entry.path) ||
-      !Number.isSafeInteger(entry.expectedBytes) || entry.expectedBytes <= 0 ||
-      !SHA256.test(entry.expectedSha256 ?? "")) {
+      !safeRelativePath(entry.path) || (entry.expectedBytes === undefined) !== (entry.expectedSha256 === undefined) ||
+      entry.expectedBytes !== undefined && (!Number.isSafeInteger(entry.expectedBytes) || entry.expectedBytes <= 0) ||
+      entry.expectedSha256 !== undefined && !SHA256.test(entry.expectedSha256)) {
     throw new TypeError(`Planet ${planetId} has an invalid source ${kind}.`);
   }
   if (paths.has(entry.path)) {
@@ -245,7 +248,7 @@ function validateEntryBase(planetId: string, entry: SourceEntry, kind: string, p
  * An input may pin one byte range of a remote member instead of the whole file: acquisition asks for exactly those
  * bytes and the pin covers exactly those bytes, so local verification keeps streaming the local file unchanged.
  */
-export function assertSourceRange(entry: { path: string; expectedBytes: number; range?: SourceRange; origin?: string }, label: string) {
+export function assertSourceRange(entry: { path: string; expectedBytes?: number; range?: SourceRange; origin?: string }, label: string) {
   const range = entry.range;
   if (range === undefined) return;
   if (!range || typeof range !== "object" || isArray(range) ||

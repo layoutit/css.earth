@@ -4,24 +4,14 @@ import { requireRecord, requireFiniteNumber } from "../source-values.mts";
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 
-async function manifestPin(directory: string, path: string) {
-  const { createSourceManifest } = await import('../../src/platform/source-manifest.mts');
-  const { boundReference } = await import('./authored-sources.ts');
-  const { id } = requireRecord(JSON.parse(await readFile(resolve(directory, 'object.json'), 'utf8')), 'Object descriptor');
-  if (typeof id !== 'string') throw new TypeError('Object descriptor needs an id.');
-  const manifest = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: resolve(directory, 'source') });
-  return boundReference(manifest, { id: 'rotation', path });
-}
-
 // A measured pole is distinct from an IAU prime-meridian solution. For bodies
 // without a phase ephemeris, preserve an explicitly arbitrary display phase.
 export async function readAuthoredRotation(directory: string, reference: { path: string; sha256?: string }, epochJdTt: number): Promise<RotationElements> {
   const path = resolve(directory, reference.path);
   if (relative(directory, path).startsWith('..')) throw new TypeError('Rotation source escapes the object.');
   const bytes = await readFile(path);
-  // A recipe reference carries no pin of its own; the source manifest owns it.
-  const pin = reference.sha256 ?? (await manifestPin(directory, reference.path)).sha256;
-  if (sha256(bytes) !== pin) throw new TypeError('Rotation source pin differs.');
+  // The rotation source is authored here; a caller that already read it may hold its digest.
+  if (reference.sha256 !== undefined && sha256(bytes) !== reference.sha256) throw new TypeError('Rotation source pin differs.');
   const source = requireRecord(JSON.parse(bytes.toString("utf8")), "Rotation source");
   if (source.schema === 'cssearth-measured-rotation@1') {
     const rightAscensionDegrees = requireFiniteNumber(source.rightAscensionDegrees), declinationDegrees = requireFiniteNumber(source.declinationDegrees), primeMeridianDegrees = requireFiniteNumber(source.primeMeridianDegrees), spinDegreesPerDay = requireFiniteNumber(source.spinDegreesPerDay), referenceEpochJdTt = requireFiniteNumber(source.referenceEpochJdTt);

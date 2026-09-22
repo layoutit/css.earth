@@ -53,8 +53,8 @@ group and can supersede an older deployment.
   move it only when its failure cannot make the deployed site broken or wrong, and
   say in the pull request where the shipped-side proof remains. The provenance *pins*
   behind published assets are shipped-side proof: they stay in `Contract lint`
-  (physical frame receipts and document pins), which verifies by SHA-256 the bytes the
-  site actually serves.
+  (physical frame receipts and the prepared JSON each descriptor pins), which verifies by
+  SHA-256 the bytes the site actually serves.
 - Two whole lanes live in that advisory job rather than on the gate, and run there in
   full with the same commands and arguments: the source-catalogue reconciliation that
   was `Universe / sources`, and the bake reproduction that was `Preparation / world`.

@@ -23,7 +23,7 @@
           {
             "catalogueId": "pds-hartley2-shape-2012",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -31,8 +31,6 @@
     {
       "id": "model-surface",
       "path": "material/model-coverage.png",
-      "expectedBytes": 6627,
-      "expectedSha256": "0db4d110f3ee6967e751be2ee1526e08183e9a2e40b6075893275129118a564d",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "Farnham & Thomas (2013), NASA PDS flags; cssEarth coverage material",
       "license": "MIT",
@@ -121,7 +119,7 @@
           {
             "catalogueId": "pds-hartley2-shape-2012",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -148,7 +146,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -175,7 +173,7 @@
           {
             "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-path",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -202,7 +200,7 @@
           {
             "catalogueId": "source-comet-103p-mv10110413-6000001-001-r-labelpath",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -210,8 +208,6 @@
     {
       "id": "mv10110413-6000001-001-r-controlPath",
       "path": "photography/mri/mv10110413_6000001_001_r.json",
-      "expectedBytes": 14582,
-      "expectedSha256": "bf5fc034aa6130874592d90f68e7a9fec2af4aa310f57f1b1b5eb4ce2bbba1da",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -250,7 +246,7 @@
           {
             "catalogueId": "source-comet-103p-mv10110413-6000002-001-r-path",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -277,7 +273,7 @@
           {
             "catalogueId": "source-comet-103p-mv10110413-6000002-001-r-labelpath",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -285,8 +281,6 @@
     {
       "id": "mv10110413-6000002-001-r-controlPath",
       "path": "photography/mri/mv10110413_6000002_001_r.json",
-      "expectedBytes": 14618,
-      "expectedSha256": "bb438ff9ade24691d9810e89b0e4596f5253733e6c7883ca39cd87bef410d345",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -325,7 +319,7 @@
           {
             "catalogueId": "source-comet-103p-mv10110414-6000003-001-r-path",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -352,7 +346,7 @@
           {
             "catalogueId": "source-comet-103p-mv10110414-6000003-001-r-labelpath",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -360,8 +354,6 @@
     {
       "id": "mv10110414-6000003-001-r-controlPath",
       "path": "photography/mri/mv10110414_6000003_001_r.json",
-      "expectedBytes": 16613,
-      "expectedSha256": "e969bf8a39f0dfe7ab439bddc5f2b5544d877d87c0d35ec09ecdaf165adb18fb",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -400,7 +392,7 @@
           {
             "catalogueId": "source-comet-103p-hv10110413-5004004-001-d050-path",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -427,7 +419,7 @@
           {
             "catalogueId": "source-comet-103p-hv10110413-5004004-001-d050-labelpath",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -435,8 +427,6 @@
     {
       "id": "hv10110413-5004004-001-d050-controlPath",
       "path": "photography/hri/hv10110413_5004004_001_d050.json",
-      "expectedBytes": 12756,
-      "expectedSha256": "2f7da2da6c90bec0582475a86df202a4a662c037d3a9f2f9eeb986209cde2fbc",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -475,7 +465,7 @@
           {
             "catalogueId": "source-comet-103p-hv10110413-5004008-001-d050-path",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -502,7 +492,7 @@
           {
             "catalogueId": "source-comet-103p-hv10110413-5004008-001-d050-labelpath",
             "role": "material",
-            "evidence": "src/planets/comet-103p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -510,8 +500,6 @@
     {
       "id": "hv10110413-5004008-001-d050-controlPath",
       "path": "photography/hri/hv10110413_5004008_001_d050.json",
-      "expectedBytes": 11985,
-      "expectedSha256": "d37072d51aa81e01433b2e6331f71be129aa78cddd6bea8f8138382d7d1af6c2",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth source-camera registration",
       "license": "MIT",
@@ -555,8 +543,6 @@
     {
       "id": "comet-103p-features-manifest",
       "path": "features/manifest.json",
-      "expectedBytes": 984,
-      "expectedSha256": "48162a5fe51c8dc08cf1fdac819ab97cad9126704fcd27e064a5eccdecd9488d",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -573,8 +559,6 @@
     {
       "id": "comet-103p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 784,
-      "expectedSha256": "c3940f29f09c718eddbb26b759e9adc03fce9b8a9c924508bf3618417713d563",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -591,8 +575,6 @@
     {
       "id": "comet-103p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 189,
-      "expectedSha256": "58c30f0a02a32ec0a3e6b98a645895b0fd7046cc5f345f3660fb54bc873c5e0e",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -3837,8 +3819,6 @@
     {
       "id": "hrii-scan-json",
       "path": "science/hrii/scan.json",
-      "expectedBytes": 28199,
-      "expectedSha256": "b8a67f6ca03ee71ca5c3427646c86f1ce7b105bd2621b8c9809124954da5f7cb",
       "origin": "object:source/science/hrii/scan.json",
       "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",
@@ -3860,8 +3840,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 74996,
-      "expectedSha256": "5ff80a2ce37c4e9b017de88ee917a53c40f55ed47ead38304ce6403b0bb9003d",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_mri-5-hartley2-shape-v1.0/data/hartley2_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3892,77 +3870,49 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9536,
-      "expectedSha256": "fc3d62b984b5b88bed7698c0f3ccb187a686248ac3da14381819daa5765f743f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 38241,
-      "expectedSha256": "0d6d963d983b38a42a056a74ae7a8a769c060c54445d1441dc9305db783f180c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "b2b1b68555c745895b2f6762d5896029802638791f20677723ed3718ce3554c5"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "96fb45bb515a9e33170ee398574e8aef17dd599d1ae0445807a3e778494fb201"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 9250,
-      "expectedSha256": "4cf3691130f2e66d40f24c9af064ef963247a9aad025c8569f71eb0c320cc1a9"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3979,
-      "expectedSha256": "15b341f13ed33579391eda0943a1d6af71a7be18928572e95308b534064d69e8"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/dataset.cat",
-      "expectedBytes": 16000,
-      "expectedSha256": "ee81fa632064305849cdd283ef331bf8996d567e1de3924b2321e51c6ac6d0b0"
+      "path": "reference/dataset.cat"
     },
     {
-      "path": "shape/hartley2_2012_plan.lbl",
-      "expectedBytes": 12560,
-      "expectedSha256": "7890b02a5df3d77a18d195c3fb1a1880927613af07006f8d4489f3ea951db223"
+      "path": "shape/hartley2_2012_plan.lbl"
     },
     {
-      "path": "reference/encounter-photography.md",
-      "expectedBytes": 5948,
-      "expectedSha256": "142e98ffe05ff2326d48921a9260763a41433325dcfe47fb093a85901e5ecfbb"
+      "path": "reference/encounter-photography.md"
     },
     {
-      "path": "reference/mri-dataset.cat",
-      "expectedBytes": 59840,
-      "expectedSha256": "9cd868412db788e1ea924e8c0a1ba0e39e10c6918fa9dc6b74dcc2d8f0fef609"
+      "path": "reference/mri-dataset.cat"
     },
     {
-      "path": "reference/hri-restoration-dataset.cat",
-      "expectedBytes": 25200,
-      "expectedSha256": "d30b289c57d61cf3c58d6a6ae93e87f0a71adc201a7a76e24e97ab2808485770"
+      "path": "reference/hri-restoration-dataset.cat"
     },
     {
-      "path": "reference/epoxi-sis.pdf",
-      "expectedBytes": 6311705,
-      "expectedSha256": "3f5e960fd23d2d36dea0480583cc416acb0cd8445535e61703f44136ec3375aa"
+      "path": "reference/epoxi-sis.pdf"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4083,
-      "expectedSha256": "83b7d025fe22bd4ef9f59625b53451d4fd741cb2e2cbe57bd0698a0f3f0dcb7d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -4,8 +4,6 @@
     {
       "id": "vega-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1994,
-      "expectedSha256": "b8f8c4257ef3bc061660664fbfad420b24e2aa18dacab90988ae05ed4878bf28",
       "origin": "https://arxiv.org/abs/1211.6055",
       "credit": "Monnier, Che, Zhao et al., \"Resolving Vega and the inclination controversy with CHARA/MIRC\", ApJ 761, L3 (2012), arXiv:1211.6055",
       "license": "Factual numerical measurements; source attribution retained",
@@ -41,7 +39,7 @@
           {
             "catalogueId": "source-vega-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/vega/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,8 +47,6 @@
     {
       "id": "vega-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2923,
-      "expectedSha256": "6a7c084080cc52e7b083f60a246f2d740e1e313ebd6f3638284e3068ee26e818",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "vega-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1674,
-      "expectedSha256": "f0e4a5c37a58ec86a2bd29ccecf5b939bed9f36fdf672a8f5f6a997489f4ee34",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "vega-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "vega-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 99,
-      "expectedSha256": "ddcc68e9673512457ca64e8d3515c7cd4a3e3d3f2d463d8890e9e1ea7a8d3eb5",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "vega-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 208,
-      "expectedSha256": "227fc73b9ab5845cf0676a5280289bdd5ea0cde8729607f3c002336b3fc39d89",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -255,8 +243,6 @@
     {
       "id": "vega-roche-von-zeipel",
       "path": "photometry/gravity-darkening.json",
-      "expectedBytes": 1827,
-      "expectedSha256": "4cb2283a1953c1b01dc50cdf48947534c51d411820479646c9468b0dd8b14af3",
       "origin": "https://arxiv.org/abs/1211.6055",
       "credit": "Monnier et al. (2012), ApJL 761, L3",
       "license": "Factual numerical measurements; source attribution retained",
@@ -305,8 +291,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 37877,
-      "expectedSha256": "ec9740b9d26d76c497566e9ef3351df68161a2efd80860fb9bba61198352a21b",
       "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -333,37 +317,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3261,
-      "expectedSha256": "d0cfdabff33fb592eab0d964b1d59981feca480aa9233d637f716bcb59a5ae64",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1641,
-      "expectedSha256": "77f349e82b202c8524dda6e159b661eed26336d22bec39b1ac3089d5949e5397"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "c7b2ba04c82bdcf7308c3041e548c698baf61c68a1c71f7c1624345c60d33992"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1064,
-      "expectedSha256": "a4d4a74cdb1cb047fae5ead3c54631f9b805ecb985a9376eb4b0176e93e99480"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3365,
-      "expectedSha256": "23c2a1a0384cbaf23f95c7318ddd9e40745b14843dea5e24117642fabec78478"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

@@ -41,7 +41,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532890500r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -79,7 +79,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0023-e26-sml-sats-c0532890500r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -124,7 +124,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420681401r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -162,7 +162,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420681401r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -207,7 +207,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420685801r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -245,7 +245,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0020-e11-sml-sats-c0420685801r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -290,7 +290,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-g8-sml-sats-c0394682801r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -328,7 +328,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-g8-sml-sats-c0394682801r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -373,7 +373,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-c9-sml-sats-c0401751800r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -411,7 +411,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-go-0xxx-go-0019-c9-sml-sats-c0401751800r",
             "role": "material",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -443,7 +443,7 @@
           {
             "catalogueId": "naif-pck00011",
             "role": "method",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -470,7 +470,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/metis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -503,81 +503,51 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 22518,
-      "expectedSha256": "ee14a6b5539699a3a766e6a3688ead190bd7fda8f3c45c6a94c2a19ea3f1a7df"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
-      "path": "shape/model.json",
-      "expectedBytes": 462,
-      "expectedSha256": "dfb55d3dfbbfc69d6a6d0dbaba47e73f11d820178162701b687d5568c5e667a7"
+      "path": "shape/model.json"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3193,
-      "expectedSha256": "4870865583973ce31eced0d17e84743f12cc1666df6f02b4ce957c72cafa8d27"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 2710,
-      "expectedSha256": "7bee2e3c991a299689c0385e252a8304834316ea84041e0520535f1a3beaf53d"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "dff2eec745729f40aa5c511e374d570d319c4c94e7249fb882c71f833c30b175"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 6610,
-      "expectedSha256": "1c49f6fcc14a63fec4ea1510293af9e887e2ac936eca10789d9c10a69b675503"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "geometry/c0394682801-opus.json",
-      "expectedBytes": 11711,
-      "expectedSha256": "8e607002875cc50e82e41459cbe43d77ab887eb5c2e0d1eb19ac76ccf52e658d"
+      "path": "geometry/c0394682801-opus.json"
     },
     {
-      "path": "geometry/c0401751800-opus.json",
-      "expectedBytes": 11699,
-      "expectedSha256": "eb5ed7fbb59a3d1d37758fe30c59a1ee7864816b54e70345fec7d38a688c5c4b"
+      "path": "geometry/c0401751800-opus.json"
     },
     {
-      "path": "geometry/c0420681401-opus.json",
-      "expectedBytes": 11564,
-      "expectedSha256": "687b7ddf6094c290cef8fa4063a38d93c794de5d84019f815f05a2540cc47372"
+      "path": "geometry/c0420681401-opus.json"
     },
     {
-      "path": "geometry/c0420685801-opus.json",
-      "expectedBytes": 11545,
-      "expectedSha256": "524e3399b79dd7960015b42627d704c0cc9f90958e8c29d098abcd8e49de3caf"
+      "path": "geometry/c0420685801-opus.json"
     },
     {
-      "path": "geometry/c0532890500-opus.json",
-      "expectedBytes": 11677,
-      "expectedSha256": "f47d095784328245731a7894d38175f9f6a967549b3baba7b1ebc1eb6a0c1467"
+      "path": "geometry/c0532890500-opus.json"
     },
     {
-      "path": "geometry/registration.json",
-      "expectedBytes": 3798,
-      "expectedSha256": "64889dbcfab52f8b5ac22a13d71017033066eb1253ae1b644c33bceb961706bb"
+      "path": "geometry/registration.json"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 4381,
-      "expectedSha256": "58deccb5e66502ce13927eaa5a6cbed5dde713a2b953e326e00573a73c789a63",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -586,9 +556,7 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2608,
-      "expectedSha256": "1a4f3e607f27c5ecba5abb623b0d7a4fc76b5d75abf0d00afa78b11af3891cbd"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     }
   ]
 }

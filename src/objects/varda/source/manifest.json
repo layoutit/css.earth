@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/varda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "arxiv-2605-28636",
             "role": "method",
-            "evidence": "src/planets/varda/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,57 +92,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4203,
-      "expectedSha256": "350800ab4efa22fca87b543301eaaaeeb916c3d25d5bbb74b9281203a4ce531a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 6219,
-      "expectedSha256": "66c49bbe06d3e047e0d17500fde08997e3205ab471ece2afd3904f239a64bec0"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 726,
-      "expectedSha256": "57ce2544c90e355a75db9df3514bedbabd6ece2467c5d1297d214b00e05adabf"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "a609832ef71ef063e3b33b5adfa447530737e0dc1fd2d00232104210cb9a69ee"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 421,
-      "expectedSha256": "a657f35e94acc2ae2ee34902e5ae70ac3b599711689b850b5b5ed23d3ec9c6cc"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2508,
-      "expectedSha256": "8dfce61f0fbf002b6b0e04a077b40e6922d382c694cdb8f5a9e267aa5050e397"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3741,
-      "expectedSha256": "e05f04d6b0820cc6246d833df059237fb200b48ae0b86fb40c7863b2183d90fe"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7356,
-      "expectedSha256": "0836b51e2fce2856c6a5a75e24d86e20f438035452c28c5ee2cdf2fec3631428"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6646,
-      "expectedSha256": "17c854c9ba9feef05ab782ca5f99ab1ef31b09588a5d8a9292ff966c20da78d2"
+      "path": "reference/horizons-vectors.txt"
     },
     {
       "path": "reference/varda-proudfoot-2026.pdf",
@@ -158,8 +136,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3365,
-      "expectedSha256": "68f6d52dac641aa9287925fe49010bf63e476142025da2497677be7fec5f0361",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -195,9 +171,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 67449,
-      "expectedSha256": "27c7c5ddd3cc834d9b85b4c5841fb00a5c300a560ec52fcacdbdee5de9a617d9"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

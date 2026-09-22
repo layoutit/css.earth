@@ -41,7 +41,7 @@
           {
             "catalogueId": "source-geographos-geographos-shape",
             "role": "material",
-            "evidence": "src/planets/geographos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -68,7 +68,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/geographos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,7 +103,7 @@
           {
             "catalogueId": "source-geographos-geographos-research-geographos",
             "role": "method",
-            "evidence": "src/planets/geographos/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -119,8 +119,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 26220,
-      "expectedSha256": "bf87d0b37d7e8b266d5a94c6b74441b5b3a1cfc672a3498b942e440ee0454ae1",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -139,78 +137,50 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 13716,
-      "expectedSha256": "8b423651c4ad9b05d14a8976a2fef8bb1b0a34bc9d0a460cdd97244a0f30cd27",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 766,
-      "expectedSha256": "d89b7c5e0748b30bb4b0d3b95944df26091d207c3fcab55f556e612b2bc8d348"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "ad51c67b59b9bfb759767aa14518c28b2704f4f77df9343b928cb839dcc14ca6"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 949,
-      "expectedSha256": "fc20e4079a96a9a6fb9a48caaaea260f97099f483f9008b986dae37412b09569"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2850,
-      "expectedSha256": "9e7be03e4556886e3d368bc5c197cdfbd4e8891e5fd161569d6c4ab5c4409592"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 7232,
-      "expectedSha256": "36389d6e35a559effa2ebf2eded163ce73b372fb5b1fa23f50ee878d0e1e4949"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7755,
-      "expectedSha256": "84ad25f12a4c8b215978810e950e372edc786d471a7488ed828dbe9201948a17"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1756,
-      "expectedSha256": "fa466d6efabf1305a8b296f82fc5d067531884aada81995def6cdff9173cbdba"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 7045,
-      "expectedSha256": "835ff47021eef5b8c9e03cd75f2401c1b65cc653f1a1286b82a3ab722b653f35"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2241,
-      "expectedSha256": "077f88c198dab29883c7bf5c221965d6d54683a7eaa0e930fbd01f1423e8141f"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/pds-model.xml",
-      "expectedBytes": 10431,
-      "expectedSha256": "06b14203c2df42a2c7b678c1e6b5a15e24bbcedd627af374f9a975f8ad06b4e2"
+      "path": "reference/pds-model.xml"
     },
     {
       "path": "reference/source-survey.json",
-      "purpose": "Bounded source alternatives and scientific limitations.",
-      "expectedBytes": 2172,
-      "expectedSha256": "a14ebd61f6ba673a05281915322fb3cf328541bedea51fe28ef95d39ed5a9497"
+      "purpose": "Bounded source alternatives and scientific limitations."
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 6614,
-      "expectedSha256": "d80cc40fb62b3a18d6d9b12ea242942bb4d3ccd2188d14b07639e06dd3f1fee2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
