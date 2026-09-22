@@ -14,8 +14,9 @@ import controls from "../../../../src/objects/triton/prepared/controls.json" wit
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
+import { readFile } from "node:fs/promises";
 
-const LENS_IDS = ["normal","enhanced"];
+const LENS_IDS = ["normal","enhanced","ultraviolet","voyager-color"];
 
 objectRuntimePackageTests(runtimeDefinition);
 
@@ -27,7 +28,7 @@ test("Triton's actual import closure has only shared runtime owners", async () =
   }
 });
 
-test("Triton is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 2 lenses", () => {
+test("Triton is prepared by the generic raster lane with the source-radius sphere, the Lambert lighting bank and its 4 lenses", () => {
   assert.equal(scene.schema, "csstriton-prepared-runtime-scene@1");
   assert.equal(scene.runtimeGeometry, false);
   assert.equal(scene.runtimeRasterization, false);
@@ -94,4 +95,13 @@ test("Triton lens selection keeps the retained tree and switches only the surfac
     }
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
+});
+
+test("every Triton lens beyond the baked default has its surface and polar texture rules in the shared stylesheet", async () => {
+  // The raster lane bakes the default lens into each leaf; the other lenses swap textures through these hand-written rules.
+  const css = await readFile(new URL("../../../../src/renderers/css/styles/planet-surfaces.css", import.meta.url), "utf8");
+  for (const id of LENS_IDS.filter(id => id !== lenses.defaultLens)) {
+    assert.ok(css.includes(`.planet-stage[data-object-id="triton"][data-lens="${id}"] .polycss-scene s:not(.triton-polar) {\n  background-image: url("/scenes/triton/triton-${id}@2x.webp") !important;`), `${id} surface rule`);
+    assert.ok(css.includes(`.planet-stage[data-object-id="triton"][data-lens="${id}"] .polycss-scene s.triton-polar {\n  background-image: url("/scenes/triton/triton-poles-${id}@2x.webp") !important;`), `${id} poles rule`);
+  }
 });

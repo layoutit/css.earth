@@ -9,19 +9,16 @@ Use Node.js 24 (or 22.18+) and pnpm 10, then:
 
 ```sh
 pnpm install
-pnpm setup:assets
 pnpm dev
 ```
 
 `pnpm install` builds the shared packages, the renderer and the preparation
-tools; `pnpm setup:assets` downloads the prepared browser images and each
-object's baked `prepared/runtime.json` and `prepared/scene.json` (or, for
-milky-way/heliosphere/stellar-neighbourhood/lmc and the nebulae, its whole
-baked `prepared/` output) — git no longer tracks those files; `pnpm dev`
-re-derives the prepared JSON transport beside each
-body from what `setup:assets` just downloaded, and serves the site on port
-4210. For a single body, use `pnpm setup:assets --object=<id>` and open
-`/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
+tools. `pnpm dev` restores every object's baked `prepared/` output and the
+prepared browser images from R2 (nothing under `prepared/` is tracked; only
+files that are missing or changed are downloaded), derives the prepared JSON
+transport beside each body, and serves the site on port 4210. A warm start
+takes about 17 s; `pnpm setup:assets` runs the restore on its own. For a
+single body, use `pnpm setup:assets --object=<id>` and open `/<id>/`. Run `pnpm setup:prepared [--object=<id>]` alone to restore only the
 `prepared/*` inventory (skipping the public texture download) — useful when
 only the JSON changed. For a production build, run `pnpm build`, then `pnpm
 preview`; the build first runs `setup:assets` itself, which only downloads

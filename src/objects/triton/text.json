@@ -35,6 +35,16 @@
       "title": "Enhanced-color map",
       "detail": "Corrected O/G/B color",
       "summary": "Orange, green and blue filters combined; the unlit north stays unavailable."
+    },
+    "ultraviolet": {
+      "title": "Ultraviolet-color map",
+      "detail": "Orange/blue/UV color",
+      "summary": "Orange, blue and ultraviolet filters as red, green and blue; the unlit north stays unavailable."
+    },
+    "voyager-color": {
+      "title": "Voyager color map",
+      "detail": "Green/violet/UV color",
+      "summary": "Voyager's own color frames, including approach views placed by Triton's limb; the unlit north stays unavailable."
     }
   }
 }

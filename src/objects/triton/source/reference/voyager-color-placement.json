@@ -1,0 +1,865 @@
+{
+  "schema": "cssearth-voyager-color-placement@1",
+  "objectId": "triton",
+  "route": {
+    "observer": -32,
+    "target": 801,
+    "bodyFrame": "IAU_TRITON",
+    "instrument": -32101,
+    "frame": "VG2_ISSNA",
+    "aberration": "LT+S",
+    "radiusKm": 1352.6,
+    "datumShiftDegrees": {
+      "longitude": 0.78,
+      "latitude": -0.8
+    },
+    "maximumEmissionDegrees": 60,
+    "maximumIncidenceDegrees": 60
+  },
+  "cellDegrees": 0.1,
+  "frames": [
+    {
+      "id": "c1139257",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "et": -326699709.39527,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.62,
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139257-1",
+          "framePath": "observations/voyager-color/c1139257-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139257-1.equi.lbl",
+          "width": 752,
+          "height": 626,
+          "firstColumn": 2848,
+          "firstRow": 861
+        },
+        {
+          "id": "c1139257-2",
+          "framePath": "observations/voyager-color/c1139257-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139257-2.equi.lbl",
+          "width": 8,
+          "height": 626,
+          "firstColumn": 0,
+          "firstRow": 861
+        }
+      ]
+    },
+    {
+      "id": "c1139259",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "et": -326699613.39527,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.607,
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139259-1",
+          "framePath": "observations/voyager-color/c1139259-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139259-1.equi.lbl",
+          "width": 733,
+          "height": 601,
+          "firstColumn": 2867,
+          "firstRow": 907
+        },
+        {
+          "id": "c1139259-2",
+          "framePath": "observations/voyager-color/c1139259-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139259-2.equi.lbl",
+          "width": 11,
+          "height": 601,
+          "firstColumn": 0,
+          "firstRow": 907
+        }
+      ]
+    },
+    {
+      "id": "c1139305",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "et": -326699325.39527,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.565,
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139305-1",
+          "framePath": "observations/voyager-color/c1139305-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139305-1.equi.lbl",
+          "width": 469,
+          "height": 704,
+          "firstColumn": 3131,
+          "firstRow": 909
+        },
+        {
+          "id": "c1139305-2",
+          "framePath": "observations/voyager-color/c1139305-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139305-2.equi.lbl",
+          "width": 712,
+          "height": 704,
+          "firstColumn": 0,
+          "firstRow": 909
+        }
+      ]
+    },
+    {
+      "id": "c1139307",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "et": -326699229.39527,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.551,
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139307-1",
+          "framePath": "observations/voyager-color/c1139307-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139307-1.equi.lbl",
+          "width": 413,
+          "height": 724,
+          "firstColumn": 3187,
+          "firstRow": 890
+        },
+        {
+          "id": "c1139307-2",
+          "framePath": "observations/voyager-color/c1139307-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139307-2.equi.lbl",
+          "width": 776,
+          "height": 724,
+          "firstColumn": 0,
+          "firstRow": 890
+        }
+      ]
+    },
+    {
+      "id": "c1139309",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "et": -326699136.27627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.54,
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139309",
+          "framePath": "observations/voyager-color/c1139309.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139309.equi.lbl",
+          "width": 506,
+          "height": 576,
+          "firstColumn": 2726,
+          "firstRow": 504
+        }
+      ]
+    },
+    {
+      "id": "c1139311",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "et": -326699040.27627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.527,
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139311",
+          "framePath": "observations/voyager-color/c1139311.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139311.equi.lbl",
+          "width": 488,
+          "height": 565,
+          "firstColumn": 2731,
+          "firstRow": 505
+        }
+      ]
+    },
+    {
+      "id": "c1139313",
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "et": -326698946.19627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.511,
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139313",
+          "framePath": "observations/voyager-color/c1139313.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139313.equi.lbl",
+          "width": 804,
+          "height": 694,
+          "firstColumn": 2732,
+          "firstRow": 505
+        }
+      ]
+    },
+    {
+      "id": "c1139315",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "et": -326698848.27627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.496,
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139315-1",
+          "framePath": "observations/voyager-color/c1139315-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139315-1.equi.lbl",
+          "width": 738,
+          "height": 749,
+          "firstColumn": 2862,
+          "firstRow": 503
+        },
+        {
+          "id": "c1139315-2",
+          "framePath": "observations/voyager-color/c1139315-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139315-2.equi.lbl",
+          "width": 133,
+          "height": 749,
+          "firstColumn": 0,
+          "firstRow": 503
+        }
+      ]
+    },
+    {
+      "id": "c1139317",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "et": -326698752.27627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.482,
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139317-1",
+          "framePath": "observations/voyager-color/c1139317-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139317-1.equi.lbl",
+          "width": 594,
+          "height": 817,
+          "firstColumn": 3006,
+          "firstRow": 520
+        },
+        {
+          "id": "c1139317-2",
+          "framePath": "observations/voyager-color/c1139317-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139317-2.equi.lbl",
+          "width": 326,
+          "height": 817,
+          "firstColumn": 0,
+          "firstRow": 520
+        }
+      ]
+    },
+    {
+      "id": "c1139319",
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "et": -326698658.19627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.469,
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139319-1",
+          "framePath": "observations/voyager-color/c1139319-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139319-1.equi.lbl",
+          "width": 291,
+          "height": 967,
+          "firstColumn": 3309,
+          "firstRow": 567
+        },
+        {
+          "id": "c1139319-2",
+          "framePath": "observations/voyager-color/c1139319-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139319-2.equi.lbl",
+          "width": 601,
+          "height": 967,
+          "firstColumn": 0,
+          "firstRow": 567
+        }
+      ]
+    },
+    {
+      "id": "c1139321",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "et": -326698560.27627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.455,
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139321-1",
+          "framePath": "observations/voyager-color/c1139321-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139321-1.equi.lbl",
+          "width": 104,
+          "height": 914,
+          "firstColumn": 3496,
+          "firstRow": 618
+        },
+        {
+          "id": "c1139321-2",
+          "framePath": "observations/voyager-color/c1139321-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139321-2.equi.lbl",
+          "width": 769,
+          "height": 914,
+          "firstColumn": 0,
+          "firstRow": 618
+        }
+      ]
+    },
+    {
+      "id": "c1139323",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "et": -326698464.27627,
+      "kind": "controlled-ortho",
+      "pixelScaleKm": 1.442,
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1139323",
+          "framePath": "observations/voyager-color/c1139323.equi.tif",
+          "labelPath": "photometry/voyager-color/c1139323.equi.lbl",
+          "width": 833,
+          "height": 805,
+          "firstColumn": 157,
+          "firstRow": 694
+        }
+      ]
+    },
+    {
+      "id": "c1138703",
+      "observation": "approach-4-7km",
+      "filter": "GREEN",
+      "et": -326716698.8172655,
+      "kind": "geomed",
+      "pixelScaleKm": 4.022,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 295,
+        "candidates": 300,
+        "rmsPixels": 0.528,
+        "shiftPixels": [
+          11.28,
+          256.19
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1138703-1",
+          "framePath": "observations/voyager-color/c1138703-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1138703-1.equi.lbl",
+          "width": 633,
+          "height": 875,
+          "firstColumn": 2967,
+          "firstRow": 762
+        },
+        {
+          "id": "c1138703-2",
+          "framePath": "observations/voyager-color/c1138703-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1138703-2.equi.lbl",
+          "width": 541,
+          "height": 875,
+          "firstColumn": 0,
+          "firstRow": 762
+        }
+      ]
+    },
+    {
+      "id": "c1138657",
+      "observation": "approach-4-7km",
+      "filter": "VIOLET",
+      "et": -326716986.81726545,
+      "kind": "geomed",
+      "pixelScaleKm": 4.055,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 314,
+        "candidates": 316,
+        "rmsPixels": 0.581,
+        "shiftPixels": [
+          43.23,
+          190.29
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1138657-1",
+          "framePath": "observations/voyager-color/c1138657-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1138657-1.equi.lbl",
+          "width": 636,
+          "height": 879,
+          "firstColumn": 2964,
+          "firstRow": 762
+        },
+        {
+          "id": "c1138657-2",
+          "framePath": "observations/voyager-color/c1138657-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1138657-2.equi.lbl",
+          "width": 605,
+          "height": 879,
+          "firstColumn": 0,
+          "firstRow": 762
+        }
+      ]
+    },
+    {
+      "id": "c1138715",
+      "observation": "approach-4-7km",
+      "filter": "UV",
+      "et": -326716122.8172656,
+      "kind": "geomed",
+      "pixelScaleKm": 3.957,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 295,
+        "candidates": 318,
+        "rmsPixels": 1.222,
+        "shiftPixels": [
+          11.84,
+          47.85
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.1,
+      "tiles": [
+        {
+          "id": "c1138715-1",
+          "framePath": "observations/voyager-color/c1138715-1.equi.tif",
+          "labelPath": "photometry/voyager-color/c1138715-1.equi.lbl",
+          "width": 628,
+          "height": 868,
+          "firstColumn": 2972,
+          "firstRow": 762
+        },
+        {
+          "id": "c1138715-2",
+          "framePath": "observations/voyager-color/c1138715-2.equi.tif",
+          "labelPath": "photometry/voyager-color/c1138715-2.equi.lbl",
+          "width": 601,
+          "height": 868,
+          "firstColumn": 0,
+          "firstRow": 762
+        }
+      ]
+    },
+    {
+      "id": "c1137721",
+      "observation": "approach-8-6km",
+      "filter": "GREEN",
+      "et": -326744634.8172596,
+      "kind": "geomed",
+      "pixelScaleKm": 7.312,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 315,
+        "candidates": 320,
+        "rmsPixels": 0.514,
+        "shiftPixels": [
+          33.82,
+          111.15
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.15,
+      "tiles": [
+        {
+          "id": "c1137721",
+          "framePath": "observations/voyager-color/c1137721.equi.tif",
+          "labelPath": "photometry/voyager-color/c1137721.equi.lbl",
+          "width": 2400,
+          "height": 692,
+          "firstColumn": 0,
+          "firstRow": 508
+        }
+      ]
+    },
+    {
+      "id": "c1137715",
+      "observation": "approach-8-6km",
+      "filter": "VIOLET",
+      "et": -326744922.81725955,
+      "kind": "geomed",
+      "pixelScaleKm": 7.346,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 314,
+        "candidates": 317,
+        "rmsPixels": 0.576,
+        "shiftPixels": [
+          -36.74,
+          98.92
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.15,
+      "tiles": [
+        {
+          "id": "c1137715",
+          "framePath": "observations/voyager-color/c1137715.equi.tif",
+          "labelPath": "photometry/voyager-color/c1137715.equi.lbl",
+          "width": 2400,
+          "height": 692,
+          "firstColumn": 0,
+          "firstRow": 508
+        }
+      ]
+    },
+    {
+      "id": "c1137727",
+      "observation": "approach-8-6km",
+      "filter": "UV",
+      "et": -326744346.81725967,
+      "kind": "geomed",
+      "pixelScaleKm": 7.277,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 283,
+        "candidates": 320,
+        "rmsPixels": 1.055,
+        "shiftPixels": [
+          -3.17,
+          116.68
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.15,
+      "tiles": [
+        {
+          "id": "c1137727",
+          "framePath": "observations/voyager-color/c1137727.equi.tif",
+          "labelPath": "photometry/voyager-color/c1137727.equi.lbl",
+          "width": 2400,
+          "height": 692,
+          "firstColumn": 0,
+          "firstRow": 508
+        }
+      ]
+    },
+    {
+      "id": "c1137221",
+      "observation": "approach-10-6km",
+      "filter": "GREEN",
+      "et": -326759034.8172565,
+      "kind": "geomed",
+      "pixelScaleKm": 9.009,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 161,
+        "candidates": 166,
+        "rmsPixels": 0.821,
+        "shiftPixels": [
+          -124.38,
+          116.85
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.15,
+      "tiles": [
+        {
+          "id": "c1137221",
+          "framePath": "observations/voyager-color/c1137221.equi.tif",
+          "labelPath": "photometry/voyager-color/c1137221.equi.lbl",
+          "width": 2400,
+          "height": 692,
+          "firstColumn": 0,
+          "firstRow": 508
+        }
+      ]
+    },
+    {
+      "id": "c1137159",
+      "observation": "approach-10-6km",
+      "filter": "VIOLET",
+      "et": -326760090.81725633,
+      "kind": "geomed",
+      "pixelScaleKm": 9.132,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 244,
+        "candidates": 274,
+        "rmsPixels": 0.772,
+        "shiftPixels": [
+          -83.52,
+          -44.02
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.15,
+      "tiles": [
+        {
+          "id": "c1137159",
+          "framePath": "observations/voyager-color/c1137159.equi.tif",
+          "labelPath": "photometry/voyager-color/c1137159.equi.lbl",
+          "width": 2400,
+          "height": 692,
+          "firstColumn": 0,
+          "firstRow": 508
+        }
+      ]
+    },
+    {
+      "id": "c1137245",
+      "observation": "approach-10-6km",
+      "filter": "UV",
+      "et": -326757882.8172568,
+      "kind": "geomed",
+      "pixelScaleKm": 8.874,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 141,
+        "candidates": 164,
+        "rmsPixels": 1.007,
+        "shiftPixels": [
+          -164.2,
+          -48.85
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.15,
+      "tiles": [
+        {
+          "id": "c1137245",
+          "framePath": "observations/voyager-color/c1137245.equi.tif",
+          "labelPath": "photometry/voyager-color/c1137245.equi.lbl",
+          "width": 2400,
+          "height": 692,
+          "firstColumn": 0,
+          "firstRow": 508
+        }
+      ]
+    },
+    {
+      "id": "c1133859",
+      "observation": "approach-23km",
+      "filter": "GREEN",
+      "et": -326855130.8172359,
+      "kind": "geomed",
+      "pixelScaleKm": 19.729,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 82,
+        "candidates": 86,
+        "rmsPixels": 0.431,
+        "shiftPixels": [
+          -58.48,
+          98.22
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.4,
+      "tiles": [
+        {
+          "id": "c1133859",
+          "framePath": "observations/voyager-color/c1133859.equi.tif",
+          "labelPath": "photometry/voyager-color/c1133859.equi.lbl",
+          "width": 900,
+          "height": 244,
+          "firstColumn": 0,
+          "firstRow": 206
+        }
+      ]
+    },
+    {
+      "id": "c1133848",
+      "observation": "approach-23km",
+      "filter": "VIOLET",
+      "et": -326855658.81723577,
+      "kind": "geomed",
+      "pixelScaleKm": 19.787,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 109,
+        "candidates": 109,
+        "rmsPixels": 0.667,
+        "shiftPixels": [
+          -21.6,
+          98.16
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.4,
+      "tiles": [
+        {
+          "id": "c1133848",
+          "framePath": "observations/voyager-color/c1133848.equi.tif",
+          "labelPath": "photometry/voyager-color/c1133848.equi.lbl",
+          "width": 900,
+          "height": 244,
+          "firstColumn": 0,
+          "firstRow": 206
+        }
+      ]
+    },
+    {
+      "id": "c1133923",
+      "observation": "approach-23km",
+      "filter": "UV",
+      "et": -326853978.8172361,
+      "kind": "geomed",
+      "pixelScaleKm": 19.602,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 141,
+        "candidates": 145,
+        "rmsPixels": 0.503,
+        "shiftPixels": [
+          -68.4,
+          -69.9
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.4,
+      "tiles": [
+        {
+          "id": "c1133923",
+          "framePath": "observations/voyager-color/c1133923.equi.tif",
+          "labelPath": "photometry/voyager-color/c1133923.equi.lbl",
+          "width": 900,
+          "height": 244,
+          "firstColumn": 0,
+          "firstRow": 206
+        }
+      ]
+    },
+    {
+      "id": "c1132134",
+      "observation": "approach-30km",
+      "filter": "GREEN",
+      "et": -326905290.8172249,
+      "kind": "geomed",
+      "pixelScaleKm": 25.419,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 108,
+        "candidates": 108,
+        "rmsPixels": 0.408,
+        "shiftPixels": [
+          108.52,
+          -39.14
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.5,
+      "tiles": [
+        {
+          "id": "c1132134",
+          "framePath": "observations/voyager-color/c1132134.equi.tif",
+          "labelPath": "photometry/voyager-color/c1132134.equi.lbl",
+          "width": 720,
+          "height": 190,
+          "firstColumn": 0,
+          "firstRow": 170
+        }
+      ]
+    },
+    {
+      "id": "c1132400",
+      "observation": "approach-30km",
+      "filter": "VIOLET",
+      "et": -326898282.81722647,
+      "kind": "geomed",
+      "pixelScaleKm": 24.597,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 92,
+        "candidates": 92,
+        "rmsPixels": 0.461,
+        "shiftPixels": [
+          135.66,
+          18.53
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.5,
+      "tiles": [
+        {
+          "id": "c1132400",
+          "framePath": "observations/voyager-color/c1132400.equi.tif",
+          "labelPath": "photometry/voyager-color/c1132400.equi.lbl",
+          "width": 720,
+          "height": 190,
+          "firstColumn": 0,
+          "firstRow": 170
+        }
+      ]
+    },
+    {
+      "id": "c1132141",
+      "observation": "approach-30km",
+      "filter": "UV",
+      "et": -326904954.817225,
+      "kind": "geomed",
+      "pixelScaleKm": 25.379,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 105,
+        "candidates": 105,
+        "rmsPixels": 0.631,
+        "shiftPixels": [
+          72.86,
+          -63.78
+        ]
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.5,
+      "tiles": [
+        {
+          "id": "c1132141",
+          "framePath": "observations/voyager-color/c1132141.equi.tif",
+          "labelPath": "photometry/voyager-color/c1132141.equi.lbl",
+          "width": 720,
+          "height": 190,
+          "firstColumn": 0,
+          "firstRow": 170
+        }
+      ]
+    }
+  ]
+}

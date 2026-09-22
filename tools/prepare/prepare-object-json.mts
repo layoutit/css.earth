@@ -104,6 +104,19 @@ async function pinPreparedObject(id: string, originalDescriptor: Record<string, 
   return { bytes: Buffer.byteLength(payload), ...prepared };
 }
 
+/**
+ * Rewrite a body's prepared-assets.json after a tool wrote under prepared/ without a full bake (facts, reader text,
+ * a content refresh). Nothing under prepared/ is tracked, so the inventory is the only record of the change; the
+ * bytes still have to be published. Returns whether the inventory changed.
+ */
+export async function refreshPreparedInventory(id: string, projectRoot = root): Promise<boolean> {
+  const preparedDirectory = resolve(projectRoot, 'src/objects', id, 'prepared'), manifestPath = resolve(preparedDirectory, '..', 'prepared-assets.json');
+  const before = await readFile(manifestPath, 'utf8').catch(() => null);
+  if (before === null) return false;
+  await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory, manifestPath, filenames: await bakedPreparedFiles(preparedDirectory, id) });
+  return (await readFile(manifestPath, 'utf8')) !== before;
+}
+
 /** Re-pin an already prepared object to its transport without preparing anything. */
 export async function repinObjectJson(id: string, projectRoot = root) {
   const descriptorPath = resolve(projectRoot, 'src/objects', id, 'object.json');
