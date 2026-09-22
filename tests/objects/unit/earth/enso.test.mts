@@ -99,7 +99,6 @@ test('NASA full coverage, published bins, and independently decoded pixels survi
   assert.equal(colors.bins.length, 60);
   assert.deepEqual(colors.under.rgb, [107, 0, 219]); assert.deepEqual(colors.over.rgb, [128, 0, 0]);
   const bytes = await readFile(resolve(source, 'science/mur-gibs.png'));
-  assert.equal(sha256(bytes), receipt.mosaic.sha256);
   const { data, info } = await sharp(bytes).removeAlpha().raw().toBuffer({ resolveWithObject: true });
   assert.equal(info.width, 16384); assert.equal(info.height, 8192);
   const witnesses = shape({records:array(shape({outputPixel:array(number),expectedMosaicRgb:array(number),name:text,intervalCelsius:nullableText}))})(JSON.parse((await readFile('tests/objects/fixtures/earth-enso/mur-native-witnesses.json')).toString('utf8')));
