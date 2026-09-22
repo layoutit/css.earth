@@ -6,8 +6,7 @@
     -5.400382551151912
   ],
   "evidence": {
-    "path": "labs/nebula/models/m42/physical-evidence.json",
-    "sha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc"
+    "path": "labs/nebula/models/m42/physical-evidence.json"
   },
   "background": {
     "id": "wide-field-continuity",
@@ -31,9 +30,9 @@
       -0.08
     ],
     "curvaturePerArcsec": [
-      -8e-05,
-      2.5e-05,
-      -3.5e-05
+      -0.00008,
+      0.000025,
+      -0.000035
     ],
     "thicknessArcsec": 100,
     "strength": 1,
@@ -96,7 +95,7 @@
       "curvaturePerArcsec": [
         -0.00012,
         0,
-        -6e-05
+        -0.00006
       ],
       "thicknessArcsec": 80,
       "strength": 0.75,

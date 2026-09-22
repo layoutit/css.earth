@@ -9,7 +9,7 @@ import { compilerAlphaDigest } from '@cssearth/volume-bake/compiler/bake';
 import { compilerFrame, compilerPreparedSlices } from '@cssearth/volume-core/coordinates/compiler-frame';
 import { readCompilerBakeResult, type CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 import { validateVolumeLayerSlices, type VolumeLayerPlan } from '@cssearth/volume-core/contracts/volume-slices';
-import { sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { registerComponentBanks } from '@cssearth/volume-bake/compiler/component-layout';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
@@ -32,13 +32,13 @@ async function fixture(t: { after(fn: () => Promise<void>): void }) {
   const volume = compileCssVolume({ id: 'compiler-empty-layers', frame, slices: compilerPreparedSlices(slices), recipe: { anchors: [] } });
   const bytes = Buffer.from(JSON.stringify(volume));
   await writeFile(join(root, 'neutral/volume.json'), bytes);
-  const neutral: CompilerPin = { path: 'neutral/volume.json', sha256: sha256(bytes) };
+  const neutral: CompilerPin = { path: 'neutral/volume.json' };
   const scene = readCompilerBakeResult({ schema: 'cssearth-compiler-bake@1', id: 'empty-layers', fieldIdentity, frame, boundsArcsec,
     skyBoundsArcsec: { min: [-2, -2], max: [2, 2] }, spanArcsec: 4, sourceImage: { width: 512, height: 512 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin, earthView: 'observer-at-negative-z-looking-away' }, neutral, alphaSha256,
     stars: [], lenses: [{ id: 'optical', label: 'Optical', volume: neutral, coverage: { positiveAlphaTexels: 12, recoloredTexels: 12, outsideImageTexels: 0 } }],
     sampling: { sliceCounts: { x: 3, y: 3, z: 3 }, imageWidth: 512, samplesPerSlab: 4, layerPlan } });
-  const readPinned = (pin: CompilerPin) => verifiedBytes(root, pin);
+  const readPinned = (pin: CompilerPin) => sourceBytes(root, pin);
   return { root, scene, slices, readPinned };
 }
 

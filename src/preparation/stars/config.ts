@@ -10,9 +10,9 @@ function finite(value: unknown, label: string): number { if (typeof value !== 'n
 function positive(value: unknown, label: string): number { const v = finite(value, label); if (!(v > 0)) throw new TypeError(`${label} must be positive.`); return v; }
 function integer(value: unknown, label: string): number { const v = positive(value, label); if (!Number.isSafeInteger(v)) throw new TypeError(`${label} must be an integer.`); return v; }
 function reference(value: unknown, label: string) {
-  const r = record(value, label), path = text(r.path, `${label} path`), sha256 = text(r.sha256, `${label} hash`);
-  if (path.startsWith('/') || path.split(/[\\/]/).includes('..') || !/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError(`${label} must be a pinned relative source.`);
-  return { path, sha256 };
+  const r = record(value, label), path = text(r.path, `${label} path`);
+  if (path.startsWith('/') || path.split(/[\\/]/).includes('..')) throw new TypeError(`${label} must be a relative source.`);
+  return { path };
 }
 export function parseStarsRecipe(value: unknown): StarsRecipe {
   const r = record(value, 'Stars recipe'); if (r.schema !== 'cssearth-stars-source@1') throw new TypeError('Unsupported stars source schema.');
@@ -38,7 +38,7 @@ export function parseStarsRecipe(value: unknown): StarsRecipe {
 }
 function parseDiffuseSky(value: unknown): NonNullable<StarsRecipe['diffuseSky']> {
   const r=record(value,'Diffuse sky');
-  if (!Array.isArray(r.faces) || r.faces.length!==6) throw new TypeError('Diffuse sky requires six pinned cube faces.');
+  if (!Array.isArray(r.faces) || r.faces.length!==6) throw new TypeError('Diffuse sky requires six cube faces.');
   const faces=r.faces.map(value=>{const face=record(value,'Diffuse sky face');return {id:text(face.id,'Sky face id'),...reference(face,'Sky face')};});
   if (new Set(faces.map(face=>face.id)).size!==6 || faces.some(face=>!['front','right','back','left','top','bottom'].includes(face.id))) throw new TypeError('Diffuse sky cube face ids are invalid.');
   return {faces,width:integer(r.width,'Diffuse sky width'),blurSigmaPixels:positive(r.blurSigmaPixels,'Diffuse sky blur sigma')};

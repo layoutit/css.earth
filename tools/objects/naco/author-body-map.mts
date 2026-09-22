@@ -143,12 +143,12 @@ export async function authorNacoBodyMap(target: string, programId: string, produ
     kind: 'relative-surface-brightness', filter: String(productHeader['ESO INS OPTI6 NAME']), orientation: registration.convention,
     background: 'median beyond 1.5 apparent disc radii from the brightest sample', normalisation: 'median background-subtracted signal within one apparent disc radius of the brightest sample',
     uncertainty: '1.4826 times the median absolute deviation of the same sky samples, divided by the disc normalisation', photometricCorrection: 'none' } };
-  const frame: BodyMapFrame = { body: target, radiusKm, rotation: { model: PCK, sha256: sha256(pckBytes), bodyCode } };
+  const frame: BodyMapFrame = { body: target, radiusKm, rotation: { model: PCK, bodyCode } };
   const fits = bodyMapFits(placed.map, { TELESCOP: 'VLT/NACO', OBJECT: program.object, QUANTITY: quantity, FILTER: String(productHeader['ESO INS OPTI6 NAME']) },
     [{ name: quantity, units, values: placed.map.depth }, { name: `${quantity} ERROR`, units, values: placed.map.error }]);
   const unqualifiedMap = { schema: 'cssearth-body-map@1', definition, frame,
     grid: { width: placed.map.width, height: placed.map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-    planes: { file: basename(output), sha256: sha256(fits), value: quantity, uncertainty: `${quantity} ERROR` },
+    planes: { file: basename(output), value: quantity, uncertainty: `${quantity} ERROR` },
     mask: { maximumEmissionDegrees: 70, missing: 'NaN' }, observations: [placed.observation] } as const;
   const resolution = bindMapResolution(unqualifiedMap, 'measured', 'disc-edge-gaussian-fit', placed.centre), mapProduct = resolution.product;
   const metadata = Buffer.from(formatBodyMapProduct(mapProduct)), metadataPath = `${output}.body-map.json`, mapRecordPath = productRecordPath(output);

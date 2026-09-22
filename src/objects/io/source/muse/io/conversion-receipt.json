@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-muse-spectral-maps@1",
-  "preparerSha256": "2d8910aed38cd53a847448a912fe219db0314266da31d5d90d430a61050875f8",
   "target": "io",
   "registration": {
     "mode": "author-grid-two-degree-nodes",
@@ -121,7 +120,6 @@
   "outputs": [
     {
       "input": "485nm_slope_io_night_1.fits",
-      "sourceSha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -140,7 +138,6 @@
         "normalizationWavelengthNm": 495
       },
       "path": "io/485nm_slope-night-1.tif",
-      "sha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a",
       "bytes": 12012,
       "noData": -9999,
       "checked": {
@@ -157,7 +154,6 @@
     },
     {
       "input": "485nm_slope_io_night_2.fits",
-      "sourceSha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -176,7 +172,6 @@
         "normalizationWavelengthNm": 495
       },
       "path": "io/485nm_slope-night-2.tif",
-      "sha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9",
       "bytes": 12028,
       "noData": -9999,
       "checked": {
@@ -193,7 +188,6 @@
     },
     {
       "input": "485nm_slope_io_night_3.fits",
-      "sourceSha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -212,7 +206,6 @@
         "normalizationWavelengthNm": 495
       },
       "path": "io/485nm_slope-night-3.tif",
-      "sha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f",
       "bytes": 12297,
       "noData": -9999,
       "checked": {
@@ -229,7 +222,6 @@
     },
     {
       "input": "560nm_band_io_night_1.fits",
-      "sourceSha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -251,7 +243,6 @@
         ]
       },
       "path": "io/560nm_band-night-1.tif",
-      "sha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02",
       "bytes": 12689,
       "noData": -9999,
       "checked": {
@@ -268,7 +259,6 @@
     },
     {
       "input": "560nm_band_io_night_2.fits",
-      "sourceSha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -290,7 +280,6 @@
         ]
       },
       "path": "io/560nm_band-night-2.tif",
-      "sha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29",
       "bytes": 12790,
       "noData": -9999,
       "checked": {
@@ -307,7 +296,6 @@
     },
     {
       "input": "560nm_band_io_night_3.fits",
-      "sourceSha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -329,7 +317,6 @@
         ]
       },
       "path": "io/560nm_band-night-3.tif",
-      "sha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21",
       "bytes": 12820,
       "noData": -9999,
       "checked": {

@@ -21,7 +21,6 @@
       "label": "NOIRLab · optical B / V / I",
       "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif",
       "page": "https://noirlab.edu/public/images/noao-m45/",
-      "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
       "width": 4000,
       "height": 2920,
       "fieldArcminutes": [
@@ -65,7 +64,6 @@
         "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
         "width": 9700,
         "height": 7080,
-        "sha256": "a7780281f9ef87ab815d1dbf93f6dd596a25d14f263d8d66fc6b82a17d758e91",
         "hashStatus": "publisher-published; original not downloaded"
       },
       "processingVariant": "Publisher 4K TIFF, complete 9700×7080 master footprint. Embedded AVM reference grid retained."
@@ -75,7 +73,6 @@
       "label": "Tõrva / Niittee · wide optical",
       "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg",
       "page": "https://commons.wikimedia.org/wiki/File:Plejades.jpg",
-      "sha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
       "width": 8000,
       "height": 5199,
       "bytes": 16654428,
@@ -128,16 +125,13 @@
   ],
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   },
   "intakeStatus": "Authorized two-source optical composition. Qualified native NOX outputs are reused; source registration and removal receipts record the completed stages. This recipe does not fit a new cloud or establish physical dust density.",
   "nativeSeparationCache": {
     "recipe": {
-      "path": "labs/nebula/models/m45/processing-observations.json",
-      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705"
+      "path": "labs/nebula/models/m45/processing-observations.json"
     }
   }
 }

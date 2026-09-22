@@ -30,8 +30,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "USGS May 2008 Cassini/Voyager mosaic. Exactly zero is GeoTIFF no-data; preserve all other values, including dark terrain. Voyager covers poles and some areas were acquired in Saturnshine. Photographed shading and resolution vary.",
-      "expectedBytes": 16612487,
-      "expectedSha256": "eb8acdbed3af495102b6ec6d3efce1f03dc6bc39bb43323c23231ce590494d6e",
       "capture": {
         "attributions": [
           {
@@ -93,8 +91,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "Published global rectangular mosaic without a separate validity mask. Preserve every supplied pixel: the dark leading hemisphere is real surface albedo. Coarse polar coverage, patch seams and residual photographed shading remain.",
-      "expectedBytes": 4989080,
-      "expectedSha256": "6e0e1d17a50343d9176912d047392c4f7cd67c48bdb30789918a4ff24d9f683b",
       "capture": {
         "attributions": [
           {
@@ -119,8 +115,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -146,8 +140,6 @@
     {
       "id": "iapetus-cassini-original-c1568129671_1_ir-cub",
       "path": "cassini-ice/native/C1568129671_1_ir.cub",
-      "expectedBytes": 1911053,
-      "expectedSha256": "e7a4d85a4e30022e9a0af4de5ba06e799e0ee0f9ddb6e36c77068eb251a6b861",
       "origin": "https://vims.univ-nantes.fr/cube/C1568129671_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -202,8 +194,6 @@
     {
       "id": "iapetus-cassini-original-v1568129671_1-qub",
       "path": "cassini-ice/raw/v1568129671_1.qub",
-      "expectedBytes": 1232896,
-      "expectedSha256": "56726dd22fd5f13764d53798ffa2dc57dc40bc006e8a1b3ac03b66c2720df648",
       "origin": "https://vims.univ-nantes.fr/cube/1568129671_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -312,8 +302,6 @@
     {
       "id": "iapetus-cassini-original-c1568157352_4_ir-cub",
       "path": "cassini-ice/native/C1568157352_4_ir.cub",
-      "expectedBytes": 2669085,
-      "expectedSha256": "e8693e98d929f20d38d32659852d157c38a8d48ef13d5a38a6f4ea0fc00bc572",
       "origin": "https://vims.univ-nantes.fr/cube/C1568157352_4_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -368,8 +356,6 @@
     {
       "id": "iapetus-cassini-original-v1568157352_4-qub",
       "path": "cassini-ice/raw/v1568157352_4.qub",
-      "expectedBytes": 1751040,
-      "expectedSha256": "990bbd6f476f0a3530d250285d5b153b415604cbd01aab0550f07eb6cf5dc676",
       "origin": "https://vims.univ-nantes.fr/cube/1568157352_4.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",

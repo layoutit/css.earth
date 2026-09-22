@@ -9,7 +9,7 @@ export function backgroundPointsOpacity(distanceM: number): number {
   const t = Math.log(distanceM / near) / Math.log(far / near);
   return t * t * (3 - 2 * t);
 }
-export function mountBackgroundPoints(host: HTMLElement, before: Element, manifestUrl?: string, cloudUrl?: string, sha256?: string) {
+export function mountBackgroundPoints(host: HTMLElement, before: Element, manifestUrl?: string, cloudUrl?: string) {
   const root = host.ownerDocument.createElement('div');
   root.dataset.galaxyField='points';root.style.cssText='position:absolute;inset:0;pointer-events:none;display:none';
   if(manifestUrl)host.insertBefore(root,before);
@@ -23,7 +23,7 @@ export function mountBackgroundPoints(host: HTMLElement, before: Element, manife
     if (opacity === 0) return;
     if(runtime){runtime.publish(publication);return;}
     if(pending)return;pending=true;
-    void mountGalaxyPoints({host:root,manifestUrl,cloudUrl,sha256}).then(result=>{
+    void mountGalaxyPoints({host:root,manifestUrl,cloudUrl}).then(result=>{
       if(disposed){result.destroy();return;}runtime=result;if(latest && root.style.display !== 'none')runtime.publish(latest);root.dataset.ready='true';
     }).catch(error=>{root.dataset.error=String(error);console.error('Galaxy field failed',error);});
   },destroy(){disposed=true;runtime?.destroy();root.remove();}};

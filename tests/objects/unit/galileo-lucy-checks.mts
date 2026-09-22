@@ -27,7 +27,6 @@ export function checkGalileoLucy(id: string) {
       const ratio = (120 * 100 * 100) / (140 * 110 * 105);
       assert(Math.abs(mesh.centersMeters[0] * ratio + mesh.centersMeters[1]) < 1e-10, 'equal-density origin must be the two-lobe volume centroid');
     } else {
-      assert.equal(model.sourceSha256, '8dc8a6d9fc9f4138cfc44f896ca7732fdfdd9d44b10d6fb49fd43f80fa2e1b2f');
       assert.equal(model.sourceFaces - model.omittedZeroAreaSourceFaceIndices.length, model.faces);
       assert(Math.abs(model.volumeEquivalentRadiusKm - .369) < 1e-12);
       assert.match(model.meaning, /Authored reconstruction/);

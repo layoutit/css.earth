@@ -5,7 +5,7 @@ import { publishPreparedDescriptor, readPreparedDescriptor } from '../prepared-d
 
 const descriptor: ObjectDescriptor = {
   schema: 'cssearth-object@1', id: 'earth', type: 'layered-body', properties: {},
-  prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json', sha256: 'a'.repeat(64) },
+  prepared: { format: 'cssearth-css-object@5', url: 'prepared/object.json' },
 };
 
 function fixture(value: unknown = descriptor) {

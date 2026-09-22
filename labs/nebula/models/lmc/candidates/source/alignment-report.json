@@ -13,14 +13,12 @@
       "status": "passed",
       "pass": true,
       "sourcePath": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
-      "sourceSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
       "sourceDimensions": [
         8954,
         10000
       ],
       "gate": {
-        "path": "labs/nebula/models/lmc-candidates/source/vista-direction-gate.json",
-        "sha256": "2c17b7259fe98410e27cf14d5858add5cb27b75c7f3771169d5c50d7211f9ec2"
+        "path": "labs/nebula/models/lmc-candidates/source/vista-direction-gate.json"
       },
       "geometry": {
         "kind": "matched-star-homography",
@@ -55,8 +53,8 @@
             0.1190037618003177,
             0.596664958469161,
             -1479.567248000351,
-            -2.639112449735194e-06,
-            -1.2871658418376004e-06,
+            -0.000002639112449735194,
+            -0.0000012871658418376004,
             1
           ]
         }
@@ -64,7 +62,6 @@
       "verification": {
         "id": "vista-infrared",
         "sourcePath": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
-        "sourceSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
         "sourceHashMatchesRecipe": true,
         "matrixMatchesEvidence": true,
         "sourceNativeDimensions": [
@@ -81,7 +78,6 @@
         "matchedSourceHullFraction": 0.8309633790146702,
         "preparedCssGeometryClosureMaxPixels": 4.0419827920822775e-13,
         "evidencePath": ".local/nebula-lab/image-candidates/vista-registration/10k/direction-gate.json",
-        "evidenceSha256": "2c17b7259fe98410e27cf14d5858add5cb27b75c7f3771169d5c50d7211f9ec2",
         "pass": true
       },
       "limitations": [
@@ -94,14 +90,12 @@
       "status": "passed",
       "pass": true,
       "sourcePath": ".local/nebula-lab/new-references/iotw2547a.jpg",
-      "sourceSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
       "sourceDimensions": [
         6582,
         4388
       ],
       "gate": {
-        "path": "labs/nebula/models/lmc-candidates/source/horalek-registration.json",
-        "sha256": "28bd2b914cc66585ac9a83d05b6f20c718927e5642593452c6020915cf50b447"
+        "path": "labs/nebula/models/lmc-candidates/source/horalek-registration.json"
       },
       "geometry": {
         "kind": "matched-star-homography",
@@ -136,8 +130,8 @@
             -0.4729033967977122,
             -0.9970462494720148,
             5409.185308143818,
-            2.3045914082800085e-07,
-            -4.331845136939875e-07,
+            2.3045914082800085e-7,
+            -4.331845136939875e-7,
             1
           ]
         }
@@ -145,7 +139,6 @@
       "verification": {
         "id": "horalek-widefield",
         "sourcePath": ".local/nebula-lab/new-references/iotw2547a.jpg",
-        "sourceSha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
         "sourceHashMatchesRecipe": true,
         "matrixMatchesEvidence": true,
         "sourceNativeDimensions": [
@@ -162,7 +155,6 @@
         "matchedSourceHullFraction": 0.6022772060465406,
         "preparedCssGeometryClosureMaxPixels": 2.0495186137532011e-13,
         "evidencePath": ".local/nebula-lab/new-references/registration-receipts.json",
-        "evidenceSha256": "ae25c37f38a3d6a32c0b3436a1c93d9cfc4d42a53d14fcaa7123e3ae14b3e633",
         "pass": true
       },
       "limitations": [
@@ -175,14 +167,12 @@
       "status": "passed",
       "pass": true,
       "sourcePath": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-      "sourceSha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
       "sourceDimensions": [
         6000,
         6000
       ],
       "gate": {
-        "path": "labs/nebula/models/lmc-candidates/source/wise-direction-gate.json",
-        "sha256": "d826bb79d445368042d3f3bd9114bc1003072afe858f5f1519d3071a9da08117"
+        "path": "labs/nebula/models/lmc-candidates/source/wise-direction-gate.json"
       },
       "geometry": {
         "kind": "fixed-publisher-wcs",

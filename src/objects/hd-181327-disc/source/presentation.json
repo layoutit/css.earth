@@ -4,16 +4,12 @@
   "name": "HD 181327 debris ring",
   "defaultLens": "reflectance",
   "bank": {
-    "path": "src/objects/hd-181327-disc/prepared/lenses.json",
-    "sha256": "a7167ab9c08c5b7ec976d3286ab00e28a6e4eca34a0d2fc79fbc516afd0e5941",
-    "bytes": 310209
+    "path": "src/objects/hd-181327-disc/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "reflectance",
-      "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
-      "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32",
-      "bytes": 1683
+      "path": "src/objects/hd-181327-disc/source/volume-reflectance.json"
     }
   ],
   "sharedInputs": [],
@@ -56,8 +52,6 @@
       "input": "reflectance-f335m",
       "preview": {
         "path": "src/objects/hd-181327-disc/source/previews/reflectance.png",
-        "sha256": "983e59b38bdcbee648af1b4abf838bfe07055c5e71cbaa9def8fe4df7323d627",
-        "bytes": 81227,
         "authoredFrom": "reflectance-f335m"
       }
     }

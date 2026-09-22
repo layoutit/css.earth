@@ -22,22 +22,19 @@
           "name": "SPITZER_I1_4416768_0000_7_E8348771_maic.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/pbcd/SPITZER_I1_4416768_0000_7_E8348771_maic.fits",
           "bytes": 9797760,
-          "sha256": "7806d293b7ec7e5bc7fa99043ab7171afb7b8fa4029f8d9925a2432105168ac8",
           "archiveMd5": "ac522c4ea33c1ecb8cd2a9d16d2b0b39"
         },
         {
           "role": "mosaic-uncertainty",
           "name": "SPITZER_I1_4416768_0000_7_A42446624_munc.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/pbcd/SPITZER_I1_4416768_0000_7_A42446624_munc.fits",
-          "bytes": 9797760,
-          "sha256": "1b1bf93e89498e8c36771945eefb950a4df193e98db7f8c308d65056f9dda84a"
+          "bytes": 9797760
         },
         {
           "role": "mosaic-coverage",
           "name": "SPITZER_I1_4416768_0000_7_A42446625_mcov.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/pbcd/SPITZER_I1_4416768_0000_7_A42446625_mcov.fits",
-          "bytes": 9797760,
-          "sha256": "e9094073cd0b7f7ad3130d0238443eddd2107132867bd3facfc23bb786380023"
+          "bytes": 9797760
         }
       ],
       "frames": [
@@ -51,22 +48,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0000_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0000_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "74aab58cf2462d5b7856ce67599c0d243512a02443e32fae04480a4a01cc568f"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0000_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0000_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "16bad76f5c6d535cec38269922f916037038d5bf32c33a067d479a7571754820"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0000_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0000_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "67902763c02ae6b6c2da9c030bde43ed3c92077afd8cbd823643c5d95c1dfb0d"
+              "bytes": 141120
             }
           ]
         },
@@ -80,22 +74,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0001_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0001_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "e0c62f343e2e7d40bc64c6b515d5ff4868fad4e41050cecc3a335915b3c3d8f2"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0001_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0001_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "6757cedb62ea2033212692b43ff40dc8c40dc21dad54ecdb461ef3e72b568877"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0001_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0001_0000_7_bimsk.fits",
-              "bytes": 146880,
-              "sha256": "76ed4fc3380ed018c441bc7f4ea72f0745724fd58a2a191b2673968a93306698"
+              "bytes": 146880
             }
           ]
         },
@@ -109,22 +100,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0002_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0002_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "b6e86c292804a22ac4cc8124d97e1ddb4e1c61eeb0e120ea147b72f13577c5dc"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0002_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0002_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "65798be3f8c8975087a5614c9061a2f775657405a3c68e1c32f3d63f8c3782da"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0002_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0002_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "1491db54b795b2354820f6a7e7219c025fe3efe077da4f6d80e35d7b17adfda4"
+              "bytes": 141120
             }
           ]
         },
@@ -138,22 +126,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0003_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0003_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "5f22161777689700d2014e67fecd9987f16fc414c1592aa62afcab7b224eccdf"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0003_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0003_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "9165a133811d30cbe082bb6d719b0331d5ce4f9e0ef4df5254f5f35c13f15c81"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0003_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0003_0000_7_bimsk.fits",
-              "bytes": 149760,
-              "sha256": "84d4f9af534f2fe8c191db64d5f80dfb0b8f6210ce29c5bfc52c12449defb8b7"
+              "bytes": 149760
             }
           ]
         },
@@ -167,22 +152,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0004_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0004_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "583be30168e783f94402b3cf0f393ad8fcca7afbc02e91f6a6602d1b757c6892"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0004_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0004_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "a72c8bad36fae7045227fb83e876fe339e44327b04bfcbb44629b978a4ef4883"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0004_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0004_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "2a8496bc690a217d46b3091470c3faf6a0426684ca9a9c0cfabe153877003471"
+              "bytes": 141120
             }
           ]
         },
@@ -196,22 +178,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0005_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0005_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "1f7b61dec61c0b956c1cdeb6139b86992fc7faea44a7587b5dfec7ee7d3ee242"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0005_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0005_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "c99444f6ecbfabc5d6d86c627a801248c20a8c2f05f054e1076da1f9599c808e"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0005_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0005_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "834c919afe6f7cf68ed5b26683e2121151453cc39a7a6b26a4953ef68647cb24"
+              "bytes": 144000
             }
           ]
         },
@@ -225,22 +204,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0006_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0006_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "979a1ef7c2fc1efda4be049b59e8edae4aeeca68dd9193ab520b0d889dea9d86"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0006_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0006_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "aca92b00e94fdf7b5c6e6eba7c25d06d7ee40a29afb0685780a486ec41ca923f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0006_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0006_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "7b5a33b413423f86a0d10f319ab51e8aa07519fd16f4a403ff73a84e2d2716c2"
+              "bytes": 141120
             }
           ]
         },
@@ -254,22 +230,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0007_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0007_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "2ee4cd7f6c0131ac89dcaacb46e7c2518616760a051d1046a7b1435c5685353d"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0007_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0007_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "b7db31a225792017a7a823fb99a4841c060c7b12ee10eceecd8e09c66d1218cf"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0007_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0007_0000_7_bimsk.fits",
-              "bytes": 146880,
-              "sha256": "8e693a2e9a1284cf5a92df99633abbea458d43d6ea2d6cd0231b9ffcd9d93420"
+              "bytes": 146880
             }
           ]
         },
@@ -283,22 +256,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0008_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0008_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "11566ca8878605f57c8173a49fee270f6c438688de97afb3557059c3a601850c"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0008_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0008_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "cc84fbb1620c56443071a2f93471ab171d26f2b4770e50e173fbd1cfebea04f1"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0008_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0008_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "3737fa4e2a6eb9ab569e62448b27d9dda893c4e3d4d72e43e922c3f12674a376"
+              "bytes": 141120
             }
           ]
         },
@@ -312,22 +282,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0009_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0009_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "699e1c3ecb45eddc1218e18d6a47cf2084fd0084d5c4032b5e003e69a348d722"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0009_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0009_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "667f4b1fdc6300ed893872d4a13f172b8d0658e98600f780936cca7bda56e086"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0009_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0009_0000_7_bimsk.fits",
-              "bytes": 146880,
-              "sha256": "e17b12f5dc8ac96f95d184973ecabcb63bfffa97546a7cd5fb9fba1e8a6e51fb"
+              "bytes": 146880
             }
           ]
         },
@@ -341,22 +308,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0010_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0010_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "95162021cca8027260d397748acb232d9500d92aaefe3431a7b078471bcc41ad"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0010_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0010_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "fa4497835e287cf134abfdae431692f33a2ac10c4fa2413076241a07149e1142"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0010_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0010_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "a72cd9263fd3ed33dd8ee3019288f46fee80f513148be54fe48f995561145f47"
+              "bytes": 141120
             }
           ]
         },
@@ -370,22 +334,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0011_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0011_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "7c4e019512da93c463a3e09d529c9957df1c45f3decfbadded4dfe77e95aa585"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0011_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0011_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "5729cc9183f5ef2f219e447e76d2ef2dbe95d80db689e75cbd0f339ccd84c27b"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0011_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0011_0000_7_bimsk.fits",
-              "bytes": 146880,
-              "sha256": "94d53e45803bf36921031dc640bd448360a204131205fcccaf100a0229579b0d"
+              "bytes": 146880
             }
           ]
         },
@@ -399,22 +360,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0012_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0012_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "621b236f040c9cc30b3c6c58c2d295a2516ed1ed38abca2f506b737bb6520650"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0012_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0012_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "b12c3703940a0d3961a08850b2f4c7e0d8899c6486d99fbc8ab550472b9d6da2"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0012_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0012_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "f25a20965f1848f1d2cb3f0fdddf7b1b04788788f1b16727627728df2018fe73"
+              "bytes": 141120
             }
           ]
         },
@@ -428,22 +386,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0013_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0013_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "3d7a9460cffe7b8a2af4cd5aac958ee95a032526740b84a52c9a7456ff974bae"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0013_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0013_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "6dd8e5ece5e431096b2e10fae29df91b45c96cd283ed6229c95c269409f9d7c1"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0013_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0013_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "1f45b93fba085b7b52aa12292fec3c7ea90946d2a38fef2c1f4ada54e55dd0e3"
+              "bytes": 141120
             }
           ]
         },
@@ -457,22 +412,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0014_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0014_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "49098f2fd47633dfda2aeb731098a81693d22110848ac00e5632d713d57b78d7"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0014_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0014_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "a50b3e2dbba6487e48f40fb12709a399dc1439f875e8bb2dac4f9e42669c3590"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0014_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0014_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "cb29feeb495e2b5a99c2cb46e267a97c03fa3d38613f229d5b715e7b4f0b4298"
+              "bytes": 141120
             }
           ]
         },
@@ -486,22 +438,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0015_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0015_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "d654c4ab1dbb4ffed4c20bc791a93eb010288c75d1fe4da210f12a0e1d0478db"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0015_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0015_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "043f8e8066d2eea9f14a8228fe8d7d1e7ec6d2139575528396e65fd1e1272121"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0015_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0015_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "9a58a22642016b01abb6c3ac6727040d0b7755c53586126cb8e44ffc591a9ab2"
+              "bytes": 144000
             }
           ]
         },
@@ -515,22 +464,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0016_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0016_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "d5b2f4444d8029709f4e4d8cbe9e3b0e5b28003451e999063f84ecba5847084f"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0016_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0016_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "22b99fd5e6af06ed910a80ecea4466eef200f55e3a4f4827a420f26fdc7e790f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0016_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0016_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "7d866148e42e6d45844fb20aed602db31b220e009e093be2627b90d355b264bb"
+              "bytes": 141120
             }
           ]
         },
@@ -544,22 +490,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0017_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0017_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "f59aa627bec9e7058f7b44a4c2d66e0801c626be8689e638853cb9fd176776ce"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0017_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0017_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "e6c56bc37cb2de75c46dbfb3eaea65333ec0e3713cb6af5140cdd75b9dfc1573"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0017_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0017_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "3f8184a19b9192462590c8619ca800f75acff893c3b5a713eab29c9c0ebced3a"
+              "bytes": 141120
             }
           ]
         },
@@ -573,22 +516,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0018_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0018_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "b02f1911c4685c598759e8869157854e18292bb8a7881857fb61c7673476626d"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0018_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0018_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "33fc7fb589c885dffa235745de640e14d059009a0d5067489e8d4dd16d305c70"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0018_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0018_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "0ccd927b6a274ea6087677247907f0feb839a59218eb22f270a5eacad11f16fa"
+              "bytes": 141120
             }
           ]
         },
@@ -602,22 +542,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0019_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0019_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "7760e5075adbe2f79d57cb1a2f55c43dd5a6cf45c615503aa5c85cbf59db9011"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0019_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0019_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "15b1149d7a7bca31cd1d138c83b852dcf319a46cf57fd18da8b35c856a57dca6"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0019_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0019_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "574c00054f306ddd4da6bcb879a8923d70644981e4bb1536ab0a213311d25f13"
+              "bytes": 144000
             }
           ]
         },
@@ -631,22 +568,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0020_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0020_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "38f318944b56db7ade4b49e875d0751f24f2318141405662a5a465965cc77acd"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0020_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0020_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "5a68239ad7a489dc2e817bbc48d7af7b150dfc123165c8779d4b904ac2b3bfd3"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0020_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0020_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "d83f3b74a0af292c1f0e1dc3fe163ef281fe520a3b9bb454bf3833fab8770208"
+              "bytes": 141120
             }
           ]
         },
@@ -660,22 +594,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0021_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0021_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "948f3a0801685ab575294e6c6c7af34d4313908c345355bdb343500335e5aae6"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0021_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0021_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "3c2146bc396576050d325eef2900786dbf643792ba72d980f78040aa45b7b91e"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0021_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0021_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "864239ab3302f00153e123bac0419476dc99ad5539bc0cd983ab26ee304bba98"
+              "bytes": 141120
             }
           ]
         },
@@ -689,22 +620,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0022_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0022_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "4fb58e394c845ec41b1ab17eb315f426d3a2dee795e681c2e2871924d46aae77"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0022_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0022_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "af73bfe8e87a0a9f022acb94221c05aac7c0785e7604fea6e8c1b3821712bb30"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0022_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0022_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "2ed146805be4010d800b9595c3719757ff29c2a4def0b0eab18d080d11f469cc"
+              "bytes": 141120
             }
           ]
         },
@@ -718,22 +646,19 @@
               "role": "frame",
               "name": "SPITZER_I1_4416768_0023_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0023_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "cd302b2cd75b23e6aa162f4df37e4c58dec5678eb1c98c5b261678cd47a0a44b"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I1_4416768_0023_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0023_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "47b8774882ff4753a45a1f28e4f119e2372283d9705f3c216abd125db64f9349"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I1_4416768_0023_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch1/bcd/SPITZER_I1_4416768_0023_0000_7_bimsk.fits",
-              "bytes": 146880,
-              "sha256": "e59e70eefffcab0304242fe08eb5471bd40e1c11bde4d72bd7e9227e1f54f2d9"
+              "bytes": 146880
             }
           ]
         }
@@ -758,22 +683,19 @@
           "name": "SPITZER_I2_4416768_0000_7_E8349192_maic.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/pbcd/SPITZER_I2_4416768_0000_7_E8349192_maic.fits",
           "bytes": 9797760,
-          "sha256": "4a7e110d5016fb5319e66be7836694fd5c7f99419a983de94f4f952eed21376a",
           "archiveMd5": "045444ab0f86094e65c75c04f0747faa"
         },
         {
           "role": "mosaic-uncertainty",
           "name": "SPITZER_I2_4416768_0000_7_A42448481_munc.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/pbcd/SPITZER_I2_4416768_0000_7_A42448481_munc.fits",
-          "bytes": 9797760,
-          "sha256": "3e342f869f5e2deb272a75ee0233e494229de2174f45be007ee3be5fde49e6d6"
+          "bytes": 9797760
         },
         {
           "role": "mosaic-coverage",
           "name": "SPITZER_I2_4416768_0000_7_A42448482_mcov.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/pbcd/SPITZER_I2_4416768_0000_7_A42448482_mcov.fits",
-          "bytes": 9797760,
-          "sha256": "2bc074f99282797fce011d33531bcdd5f50fbf836ad22b21391ba2f5ae0d53d3"
+          "bytes": 9797760
         }
       ],
       "frames": [
@@ -787,22 +709,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0000_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0000_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "bf827424fd9911e277f4491452119d06a0898724e3549e70cf1038388f83b6a7"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0000_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0000_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "e1be0f2a2270b31a4a90b4d75685fe159415f6f980aed4bc01c28d137e660653"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0000_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0000_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "d653c6ac9415972bdd52beeced75e7b9a98ef26e5d034cbff2d61ccedbb0b7b3"
+              "bytes": 141120
             }
           ]
         },
@@ -816,22 +735,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0001_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0001_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "5b76b301c21273effd731022e66808a2c3df42d80ab518ee944e961752355722"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0001_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0001_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "05e3763377e3e6e2f44cee5980929aba7cab927170e181e295ed224bd16e1001"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0001_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0001_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "f2573ff0a9cb180319d1af37fc732def21fdef7c9576a27f0bbada9398ea5c42"
+              "bytes": 141120
             }
           ]
         },
@@ -845,22 +761,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0002_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0002_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "ca74a36aa377b1dd538a5488c94a2122393ed3350b882ae082f658a947a486ac"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0002_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0002_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "b0d2ac728e85df50e6e1986d39d732c2414bfc453f7f5b97a4d27bbf0a6711aa"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0002_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0002_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "6aaed1329264c2808bd42f565fa8dbbc63514709a17e329dfc6f8ac1893e8aff"
+              "bytes": 141120
             }
           ]
         },
@@ -874,22 +787,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0003_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0003_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "512db4b43d4fa71f40a44b9dd505ff2ae1d0ca339e239b7ca346fe2c657c192b"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0003_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0003_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "d4204edba411d892c50295ef85bed23b111d2bfa51654be06597a9d2fd099ed9"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0003_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0003_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "5cdab06dc3d67751528553c3c2f71b3338e0b08e1f28ef4e40e817f391a13769"
+              "bytes": 144000
             }
           ]
         },
@@ -903,22 +813,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0004_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0004_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "8b4c84862be0d2c84cbb86bf550243aa50a75d3cde37dd91331ac0b55d73bee2"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0004_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0004_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "22f41d26038458a9246704912a22653b92ffff6f677d3a8d4712859ebfcba3e9"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0004_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0004_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "794b138b59a01c3f125523642b7d5347f1f27bf44704317beb52f79a4fbfc9f7"
+              "bytes": 141120
             }
           ]
         },
@@ -932,22 +839,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0005_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0005_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "df4cbb4b784d2fd7b786ab8c13906cb657c13c0196d65f81ef007eaa32307e05"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0005_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0005_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "5e6a2ed40ea06ce8192f00f54e05472d3094a745d1b6cb71bdcf708aece5473d"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0005_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0005_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "767f2df64a4d879af9b8d080867539e953bf1481077ddcdcebd7ba5ab205e451"
+              "bytes": 141120
             }
           ]
         },
@@ -961,22 +865,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0006_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0006_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "915a14d547867233b33fef0516284b1e38a3266cb7ab78e98ba49bea97e29074"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0006_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0006_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "2086dda1267069413ce868294dc6d8f6e6f62f59a4521eb69d6406be41056a09"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0006_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0006_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "b4faa5d7ba8b26a31d4b6f3880f039c9cc9b9e7cd0762b515e1763cec2c09f43"
+              "bytes": 141120
             }
           ]
         },
@@ -990,22 +891,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0007_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0007_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "e0a1b536f7dba8c30e4cc6331a60fef480b99ef9d5193cd5c052b902bb99e8d1"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0007_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0007_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "9342ca2bc2b452438bcb0730713d6c4a105fde2ed69ffa33fa7eaef964b0bff6"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0007_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0007_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "701b0cd94be164fd513964ad0f809a1683fc72a4fe9237b1bd84b141728a4c5d"
+              "bytes": 141120
             }
           ]
         },
@@ -1019,22 +917,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0008_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0008_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "530ba204031f6ca603d0566f011e18e629b22fedcdc4629e56da84fefff722c7"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0008_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0008_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "cfa818764ba96ba4cad706edb8fb44e1f3119ba0d7aa28623ab4435cfd15a478"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0008_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0008_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "b8ae6af2fc7ae44ec07ef9a5ab67c8a14ea71f11d0e55ca47ffddf7882d8f4f2"
+              "bytes": 141120
             }
           ]
         },
@@ -1048,22 +943,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0009_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0009_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "655df4f9c23c7e48221299321aa5688be3e17dc08f7dcb311d2203e871555d72"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0009_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0009_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "a1f7486ad712868f934f71dbcae48ab9ddaace4911d3380e002b5b4add2a8799"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0009_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0009_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "b61b609c67970ea2f69d7700ecd6d9fe5c8a96b8c22a5622a5e0b5237bdc7d90"
+              "bytes": 141120
             }
           ]
         },
@@ -1077,22 +969,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0010_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0010_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "d99da188b8c5861e4c401ec58ca84b9233ed4969eef058651edd41f5374faf2e"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0010_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0010_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "bc05a46b7689b27eb01ebdc194fb2c810f5ce7b8a033451970cdcc4af3fc0e31"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0010_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0010_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "3bbf5837082cd1ae46426b5df8e452a91b1977f6669fb080885888c47903c10a"
+              "bytes": 141120
             }
           ]
         },
@@ -1106,22 +995,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0011_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0011_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "531ee6ee228f4c7951ef00b3433328ac92b1f863632e755c84586a48e48b7922"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0011_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0011_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "31ef7fa1d7e3b0c1e1c2b70fa3998438d561c9890da4f50f02d89fe3e506bf02"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0011_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0011_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "859771784cd63560bec293d7bc4435cadfdb1ef64fa3ba113b996962908ef83c"
+              "bytes": 141120
             }
           ]
         },
@@ -1135,22 +1021,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0012_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0012_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "aec2bcdab28ecf1777552680ae727075e14d2a571083a3ecc15082719ca78e3d"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0012_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0012_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "ea3088194b15e94dc0628575d4e68b58ae67cbb5f86b825141f4c878a8e340c5"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0012_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0012_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "a3f9a6856b3c4722e479c6fb5bd26914a9279955495d988834c21b2ad6c590fc"
+              "bytes": 141120
             }
           ]
         },
@@ -1164,22 +1047,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0013_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0013_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "c001783afff2d8487a0b3150f496947f205a230d66ffd37b0cf84a8d9acc3ecb"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0013_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0013_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "442da17cc26953cab8e8590f78a786a9daac96fb9f0f42f97fba2192f46ac83c"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0013_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0013_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "4bcd270e3ac9b01daea42407ffafc671aacb7469c68911347c47b2250005aa86"
+              "bytes": 144000
             }
           ]
         },
@@ -1193,22 +1073,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0014_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0014_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "b7d44b49d2461f5b45e64b8209e42f7473ce2711601b8578a7675d43f8ead017"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0014_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0014_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "266e187c2606afe4d96e3ed21e05dd383e807724e255f9fa1e42e65c6cf9926e"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0014_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0014_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "4cd0fd62189b4e71c67ef9cb182b41d87dc53245935262cd16df1ea0ee630c80"
+              "bytes": 141120
             }
           ]
         },
@@ -1222,22 +1099,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0015_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0015_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "8145b43c6806f272b94400d4bb0a6afe21a7c78d72826c98f2d27b6ccd11d629"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0015_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0015_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "d3fd265dc233dc6379a6252b7b0e2ff2723a30278e58dadb33de9c795aa44b75"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0015_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0015_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "49b36015f1c30fed0910dda81915c38c3271a0f29a1ea7cfcb538dce7b505ddd"
+              "bytes": 144000
             }
           ]
         },
@@ -1251,22 +1125,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0016_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0016_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "e03f69fc7b5db0202a67c14ca1380a19ce4fc4fd6ed29a9f072ea0a2795332e6"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0016_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0016_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "5cd95c9207795fad618968b3fb1237da0e80bc7b9f23d9b578a081cda084c2f6"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0016_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0016_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "ae1c0952fbd62a694fcd14f3f5910bc446f28143beeb3368c22491f25d76fd6d"
+              "bytes": 141120
             }
           ]
         },
@@ -1280,22 +1151,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0017_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0017_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "6df3ace2097ae89897589c92c315b4d1b412679e296ad733782db375b7cf65a3"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0017_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0017_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "2806f66a7fd28bf02a4899c81617d21a62934616de7d702429b50372c3c5d823"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0017_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0017_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "c27eb70f44519e4aea783924f8a255b54a47e7de8762e83012bf002a3a5af228"
+              "bytes": 141120
             }
           ]
         },
@@ -1309,22 +1177,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0018_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0018_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "ba90e3ef1b9c9ba89a4f1d256ad915f9552e76aebe74e75abedd7282357811c4"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0018_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0018_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "bdb871f6732eaf604e6d9bae33032279b2685c4ffcee753e9dfd3ae3404b51cc"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0018_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0018_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "c90f1a5ebbd9be3f31d649928652bb55626ffde528bc95674daef337472e3978"
+              "bytes": 141120
             }
           ]
         },
@@ -1338,22 +1203,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0019_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0019_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "601efaae96680ae3cf41533db4d0e91d226e09a751db93b41ac16bcde04ba3b9"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0019_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0019_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "331b3e80bf745cd95c2c4c3021cba5f684ef742973eb7d16c37d73311de3b869"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0019_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0019_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "182c8a989cfee814b87078d320cf088b7241f01ee492f0b30030576916209981"
+              "bytes": 144000
             }
           ]
         },
@@ -1367,22 +1229,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0020_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0020_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "f59b42c59d731d83f77edc69b7b4b45575defcd0cf173763cc1cb45cd06f0fe5"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0020_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0020_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "833e1e294a880d2bda34538919629039e27c25d081601d75e85553e81e109180"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0020_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0020_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "0b243856939343910332716129766d40eb3a866ff378d30fcd41180640463e7b"
+              "bytes": 141120
             }
           ]
         },
@@ -1396,22 +1255,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0021_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0021_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "0cd53ba8e1b3ff77a55e5aa8c3a93ab37ba8433a31fe5d0e47a73c4990919a16"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0021_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0021_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "a68b6bb2a7e14b232cf4b7a886f24a2b4d49d39fa9388674d30a0a67cb78cbcb"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0021_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0021_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "b5e2d956526b9c092f2d2d2f0c2bf4326ba4f10282840b484b0839cc9078e8e3"
+              "bytes": 144000
             }
           ]
         },
@@ -1425,22 +1281,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0022_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0022_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "1e392f7208b7f1ff0d8f16752564e4a1a286d640bebc6e916223fb458e8f8a31"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0022_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0022_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "4fb56b21139898b4e7f06ccc51c127fe4e5062555532414e5d2877cb89ecaff5"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0022_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0022_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "3253d622680daa802565160cb5521ca144c60b669add59dd2686d15157e017e3"
+              "bytes": 141120
             }
           ]
         },
@@ -1454,22 +1307,19 @@
               "role": "frame",
               "name": "SPITZER_I2_4416768_0023_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0023_0000_7_cbcd.fits",
-              "bytes": 293760,
-              "sha256": "21a4b9da2e35127b6d77d3f4f9bf966cd6be2b4a52ff18dad2e6c020c02f4852"
+              "bytes": 293760
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I2_4416768_0023_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0023_0000_7_cbunc.fits",
-              "bytes": 293760,
-              "sha256": "a9b4e55dbc19ae2e0adcf3b15cf6000331009adab1260b1ce10a1c610092b424"
+              "bytes": 293760
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I2_4416768_0023_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch2/bcd/SPITZER_I2_4416768_0023_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "dd516879c4e89d94806b4a5606bbcc2b49fd28d856eebebe31594d8c8d873aa3"
+              "bytes": 141120
             }
           ]
         }
@@ -1494,22 +1344,19 @@
           "name": "SPITZER_I3_4416768_0000_7_E8349184_maic.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/pbcd/SPITZER_I3_4416768_0000_7_E8349184_maic.fits",
           "bytes": 9797760,
-          "sha256": "b1a24cd4114fd5019622b6b427e9e965090634936afb39aff395e5bf54fc7c99",
           "archiveMd5": "d07ac11d58f9121961dea64ea7f3129f"
         },
         {
           "role": "mosaic-uncertainty",
           "name": "SPITZER_I3_4416768_0000_7_A42448387_munc.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/pbcd/SPITZER_I3_4416768_0000_7_A42448387_munc.fits",
-          "bytes": 9797760,
-          "sha256": "fdd26029deb249b32839c7effe93b81e89a15c23d3c9ed58fa6e6da7d1124ed5"
+          "bytes": 9797760
         },
         {
           "role": "mosaic-coverage",
           "name": "SPITZER_I3_4416768_0000_7_A42448388_mcov.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/pbcd/SPITZER_I3_4416768_0000_7_A42448388_mcov.fits",
-          "bytes": 9797760,
-          "sha256": "6552fdfb609522a7d98edf86f97a66939e0e33bd3e1b56509b30004b78eb3275"
+          "bytes": 9797760
         }
       ],
       "frames": [
@@ -1523,22 +1370,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0000_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0000_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "aba37c2114e431a5fb746bc28867d898437d15769a86feb3db7bf6ac148959e5"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0000_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0000_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "35cf029a6ef13b161eb2d2b68d2eb6115e80bbbe0df0eb603a51333c117a07e8"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0000_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0000_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "68d4d41b8b1be3f929055c4265989a1716130e422a722dffc97d12be4978458b"
+              "bytes": 141120
             }
           ]
         },
@@ -1552,22 +1396,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0001_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0001_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "5cd984bb64742d7dd1e21a13fa2410e1b71e2cf9576d3d016a6c0811e04cfb6d"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0001_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0001_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "1167b4f080c533f4117175934b044fddf2ea432fc97929fe10de16d5c775bb2f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0001_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0001_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "56c81b61ead94152f398e2a577edbecf5d8548acab4a94ba58beee31b7fff13a"
+              "bytes": 141120
             }
           ]
         },
@@ -1581,22 +1422,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0002_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0002_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "ffc44115921c441bd3d1d14c909747998130ab544f70f16a0cc87f9c533e8609"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0002_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0002_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "ba47d023238e47d6d596619dc2dde12538b9e3e681c6cebbafdb30ca06cf3ec0"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0002_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0002_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "c6daede55a1bfefa7d6ff37888765ed79918b987e71571c1d3dc272558201c16"
+              "bytes": 141120
             }
           ]
         },
@@ -1610,22 +1448,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0003_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0003_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "faec42bcc5bf5fac3c0d951d699642e1ed84024b824828cd9075abe9ff58d640"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0003_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0003_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "935c19cf3d25eec9c413399aedb49eb663c1a1db8e532262c24bf696a87c7f6e"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0003_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0003_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "bf73e3c4808fdc75b4e66508bb9c683d7b85726207e0cc67a585015bf4adcf95"
+              "bytes": 141120
             }
           ]
         },
@@ -1639,22 +1474,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0004_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0004_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "080dc8fb888be6b14f2d0f60e74e9decec7c914aeec8b8ada52b79fbbf67e688"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0004_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0004_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "355bdc20261972b64c5b34ff78594f39883568237f673bcb412440c3156cfb2e"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0004_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0004_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "0802af5505e55369f9bdc56c8a82ed7da6c87bfca56a35f9b3519357523f5440"
+              "bytes": 141120
             }
           ]
         },
@@ -1668,22 +1500,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0005_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0005_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "58295aebcabf6ce1111a755e6eb7fc2ab3a4a1f03d012cb967e081fa05fb564f"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0005_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0005_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "3c2ef798ed9389c520bff9c6da1d16fea5aa530dd17800d032256e312a4b78b1"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0005_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0005_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "1f2067ba877c8dc5c3cb0cd6a87157e25d17444285a88fb92187a1ced91b4b39"
+              "bytes": 141120
             }
           ]
         },
@@ -1697,22 +1526,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0006_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0006_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "7c010ec0ff8764a164070169fa39aa596d5b0339d62bed7dad5b9b7c47f08aec"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0006_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0006_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "a3a0574de39593109347b90ff4b5286427168e3d5f2e6ea4ac427b719212d8d4"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0006_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0006_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "a464990aec065c802337e279e347190896f84298724089208fe1c016cd31c055"
+              "bytes": 141120
             }
           ]
         },
@@ -1726,22 +1552,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0007_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0007_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "5d87b4c785cc7422cf69c584a8c72f0ab55c2e68b6d7abf31b5537d10928d479"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0007_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0007_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "2762fb22eb808ea2053199806caf28371a2d816d09034745c5121b9881ed397a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0007_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0007_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "2d84dab01e5ff8f7c31b0c944b86df053a2bd70d2edc9230b13d6b735a953fe1"
+              "bytes": 141120
             }
           ]
         },
@@ -1755,22 +1578,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0008_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0008_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "42affc8b80ebc704de4262ffcb06de3f5720a75fc73d118bbf9ef1da35c9f568"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0008_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0008_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "3ceaf6c2859d28e47f1f223597557921fdb6ba34cb8867831e95cc3368a316c8"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0008_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0008_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "23d79b876ab31200141988916ad3d5c82effb93c0a63a3e1b89cfd36bebf7ab6"
+              "bytes": 141120
             }
           ]
         },
@@ -1784,22 +1604,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0009_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0009_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "83b216366bb1b5207521123ec9599113ba7c24c658fc03deae7df0e30786b25f"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0009_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0009_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "2459d4dc8da80a32997db36d4bbbac1bb5987da946e864ea9a9fe4ee0447cf7f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0009_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0009_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "09260df36ea24656218e8c7134e857338eff08b070bf482659fbc5edbfd18c8e"
+              "bytes": 141120
             }
           ]
         },
@@ -1813,22 +1630,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0010_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0010_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "7ea8f35fa1d03ef9326537f6631c36bc6b7356b9360669ca76b677e50450444a"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0010_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0010_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "4e123605b28235813b3315f93aa8445afeb75d1406eb2ed1689cadec55a75dc6"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0010_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0010_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "b4c0abd5383abcc2bd685f955155e1432e06bd1e111ffcc8849fb4f5f293047d"
+              "bytes": 141120
             }
           ]
         },
@@ -1842,22 +1656,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0011_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0011_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "a5a2e30bf014a3d7f48d59f50be23c1a59678ae976b8ecf869b86865adf0698b"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0011_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0011_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "ef2f9544b757a1072673e6b495732e0daf55d8b1556f4f3ab68bb058a1694d26"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0011_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0011_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "977b835c01a5502b315fd925e51e89ec987e5f4098e8dd7e35c8ee4ccf63e7d9"
+              "bytes": 141120
             }
           ]
         },
@@ -1871,22 +1682,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0012_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0012_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "6f2a3e1a7db7db2351ca6d16b2f01e50533f76be0672d89eca3abfd99b4eb824"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0012_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0012_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "1de696c1e424e96a259e7950c8ee8ad4ecee07d18009823ec18ee1d94364f386"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0012_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0012_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "8130c4062c480963673751681bf16e285b0016222f861ee2e2e3afba05930714"
+              "bytes": 141120
             }
           ]
         },
@@ -1900,22 +1708,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0013_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0013_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "32464fcc79e4b0ff9ccd6d6777092f2fa13125dba3da2732b5fec345ec4d2f8e"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0013_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0013_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "fb611ddf8ae2a4187ae3516863ffa442cfbd88fb7d616c5e8306c875d2effe9a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0013_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0013_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "4bfef0a6a491279082ef82170afcd4dd2b6b59545954039fa0c6e479f91c8cb5"
+              "bytes": 141120
             }
           ]
         },
@@ -1929,22 +1734,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0014_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0014_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "292b148530cf3fdca36b135bbfb66ee79e151263b6d9517005bec27e77d74638"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0014_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0014_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "349ecdb502cb2e6614629cb68f0ab223895f624e581de9c59f29682523735d75"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0014_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0014_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "ca8121500c8b23780ee6dfbd336274af0b0859b28be537a179e5eb8f8aba4ab6"
+              "bytes": 141120
             }
           ]
         },
@@ -1958,22 +1760,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0015_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0015_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "92259f9c4ddd1de2f220d1400077fb2300f13931f0bac16ed191cdcc2700d1fd"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0015_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0015_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "ac7163ac794d5e82115827b522fb9d173dfae1172d08a32a16d1ae799fa7e623"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0015_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0015_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "abbc799256bdfc0c7c36873c121fdff88070370a119e633f423b73960c09c41d"
+              "bytes": 141120
             }
           ]
         },
@@ -1987,22 +1786,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0016_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0016_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "002658ac2bb510a478294a5f6ba818462b039230009e0dcc2f7e152ae0cd2519"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0016_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0016_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "8a06bdfc03fd1281d88132bad8696d69d2566eed7b59c30b515f68cf3e6becff"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0016_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0016_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "4653535b5de531701fdc8970174fcfe30f99190ff25a11cc96ecd65e5e9c2b91"
+              "bytes": 141120
             }
           ]
         },
@@ -2016,22 +1812,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0017_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0017_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "6a14dff94c90e9580a73d8154862b67e45b0a3ebc5c2671dc0268881ca8cf121"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0017_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0017_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "53e5c6b360ad08782c275de635bd6313f65fbe8a8493f55c09e4293634b3aa68"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0017_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0017_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "e5953ee55db9526dfd5050d08a937f504a1c14eaa276eb8afd0167f2f737ac4c"
+              "bytes": 141120
             }
           ]
         },
@@ -2045,22 +1838,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0018_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0018_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "6086951b95c6657ecf325c6957c73e7f1690ddba230aa752965f10e82014b846"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0018_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0018_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "b8ccb78b63db863bfb84d3b6e91340a1efe0b47e5e419e931827527e856d9d9d"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0018_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0018_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "518d2b40c62da7c84cec3cc3d101d2e16b6aa5c991280d1cdbf63d9522c394be"
+              "bytes": 141120
             }
           ]
         },
@@ -2074,22 +1864,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0019_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0019_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "c2ecb701cb55d00bc7f54a1701cee082d3324d41aabce6bd76785a7803586f65"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0019_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0019_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "bc71fcadc7004ad8ca4d9756ad65770d92639b0af741cc726cefffc94fc83541"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0019_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0019_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "1b2ea16fb91a0a28f23433820984e899e002fc1e299cf6f7b2747256bdedd8f4"
+              "bytes": 141120
             }
           ]
         },
@@ -2103,22 +1890,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0020_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0020_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "7d52332ad3352e2a4cf5085c070eefd7f776575be2adb65be1c8e6c67c7c5435"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0020_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0020_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "33fe520a4b06c22d71e433013362edc13023658d10614aa5109678269ea5055a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0020_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0020_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "4f78c3edd6f73f0fcfa38f7fcb9fc4c7dc2f90ab2449adb269247e8771af3ac6"
+              "bytes": 141120
             }
           ]
         },
@@ -2132,22 +1916,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0021_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0021_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "02898a1c3414ff06f011609395a01b8d657175bb044d9f4c1f6b80fe9149a2eb"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0021_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0021_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "22b7c7075b1ef4b466aa88b8b7799c0236811cfdd46fe001d224a8a3ff4501ee"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0021_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0021_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "3ece72e37f3e4b3099e7a9c5482741bed82073ec01bf7e0ec35d1740fad14b15"
+              "bytes": 141120
             }
           ]
         },
@@ -2161,22 +1942,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0022_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0022_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "7e1593d82ac68b1015cfcae782a1f72e8d31e6280277acf27b02f720bf1a9ceb"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0022_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0022_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "bf4a93c1f8126712c434964111a5af21b4a77027acd9ee720d9081eb4f48be7c"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0022_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0022_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "681826946c340090cfef2bf746e7748c355024b5be82cba8197028464c097889"
+              "bytes": 141120
             }
           ]
         },
@@ -2190,22 +1968,19 @@
               "role": "frame",
               "name": "SPITZER_I3_4416768_0023_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0023_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "c411025b8b4763758fef621ce0e6c431dd552cc9068214b22b686f84a8b01537"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I3_4416768_0023_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0023_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "e6c1243961bc91353d0f0c6f47e6e2c387d898be55a288541d05a915eb26b8d9"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I3_4416768_0023_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch3/bcd/SPITZER_I3_4416768_0023_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "1d54de0775ac9e56b8b189cc97a3996d6cca865d87f53f8e5ef8e31ebfeb3199"
+              "bytes": 141120
             }
           ]
         }
@@ -2230,22 +2005,19 @@
           "name": "SPITZER_I4_4416768_0000_7_E8348786_maic.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/pbcd/SPITZER_I4_4416768_0000_7_E8348786_maic.fits",
           "bytes": 9797760,
-          "sha256": "d174ccfb8aa522951bfa40323d370a1f67fd3309c2854a2891a20d5ed5f82210",
           "archiveMd5": "2550a51b21bb7f864d5a7a3e35f19ca6"
         },
         {
           "role": "mosaic-uncertainty",
           "name": "SPITZER_I4_4416768_0000_7_A42446681_munc.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/pbcd/SPITZER_I4_4416768_0000_7_A42446681_munc.fits",
-          "bytes": 9797760,
-          "sha256": "5eb0565540ef7c9aa994eb1f61c8cf5c586c0ea177692401dd81c184d166719d"
+          "bytes": 9797760
         },
         {
           "role": "mosaic-coverage",
           "name": "SPITZER_I4_4416768_0000_7_A42446682_mcov.fits",
           "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/pbcd/SPITZER_I4_4416768_0000_7_A42446682_mcov.fits",
-          "bytes": 9797760,
-          "sha256": "c2635259d80e99d1b05c22b7253d72c50d751b14584e17b328cec1ab7d2ab736"
+          "bytes": 9797760
         }
       ],
       "frames": [
@@ -2259,22 +2031,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0000_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0000_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "dea456e52a51d26b4cd9b2d6f226c2a6110c93213e3b28796b929946057ba05e"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0000_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0000_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "ac3a63db8aac38aed42d1538c3c33e7053b409d7f901b22cd8d8e5d20fe06946"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0000_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0000_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "e3e095e6ab9418273f95c1445b172bc74698e2f5171a93b55bb15713770617f7"
+              "bytes": 141120
             }
           ]
         },
@@ -2288,22 +2057,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0001_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0001_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "dfd6cd7e247df197a165ced0ccb3f6dd74d2032ceec62ecc4fcbb777c8ffafb8"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0001_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0001_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "29cb7ab365e246c5e8f284c7c9768e4bff43e84b1a935021ab33a4c9a4640c36"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0001_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0001_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "8ae0f9d7fb0af47ec681dd590b74331e71f4a9b46b26c1ac373419cec9e917dd"
+              "bytes": 144000
             }
           ]
         },
@@ -2317,22 +2083,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0002_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0002_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "df8d8807592f456af023bdba24db9c368de943b1fb5d778fdaad647f8bc8fb18"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0002_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0002_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "d60e3e7044610994d47fb6ce6ace015a6f40c8df1a789e939afde40a15bc796f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0002_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0002_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "74ad42937591b13165f77a282805bfb7e85f794477e4535dbdaf3b2885c2676a"
+              "bytes": 141120
             }
           ]
         },
@@ -2346,22 +2109,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0003_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0003_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "329511995e1ba5bbad7c30ceafd7eca5fe8560c2cc117848ee9d7402d9d6dce7"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0003_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0003_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "e9f7e9957db37a13e6d1834482b3362077cb37c09a9f54f873279e6b8726bcce"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0003_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0003_0000_7_bimsk.fits",
-              "bytes": 152640,
-              "sha256": "a47f0440cfac93ec32d5a373d240de2b8fa25483fbd6b7437ebc37046416b239"
+              "bytes": 152640
             }
           ]
         },
@@ -2375,22 +2135,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0004_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0004_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "c688352ff14049cc9553085c18ad16e5df7db86aee6b748909b9517401090788"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0004_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0004_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "6229972d98c46cf07bd81d9f01c2cd4e7e7a7047f0926469058e0df57cfaf469"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0004_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0004_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "f8d583ee6211bed6a42bb4e832ae090820b287c22d5dc08e257a03f0f50289c2"
+              "bytes": 141120
             }
           ]
         },
@@ -2404,22 +2161,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0005_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0005_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "d9da68eca2d541d731602e3c4b8422f6213575962fae5b6a3ffa51a761375827"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0005_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0005_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "44ff45af5ba5e17af12d2646ef57371669041a07f9b767e647ec231e52556862"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0005_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0005_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "6c2324fbf8363dee9a17e1ba48038b00d08a3b2e270bd96bb27cef6845279522"
+              "bytes": 141120
             }
           ]
         },
@@ -2433,22 +2187,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0006_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0006_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "fb4a54a4090938826a1b787749fc87fc3dfcf9c7cd4fff1b97a44fb69f1629bb"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0006_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0006_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "f72f3209600a4c6101cfeb50b63b923db56a8888b1654db401ef1a1239363d2d"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0006_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0006_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "fd0b58dc4e258fdb37bcd2b7d0738ecc1a98e2d4e64521386a556a5801356d6c"
+              "bytes": 141120
             }
           ]
         },
@@ -2462,22 +2213,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0007_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0007_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "8157f8e51680a95e9c32058c3bc7e16876c5b2dd62114eb575fa24724ad80ba8"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0007_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0007_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "2380caf0a4993553159d3ab71bbfaf6be45bacbc9cdc0005c1c9a937e06a7301"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0007_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0007_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "80b94e39287380598ec67d529f5411028932225b847f3a368c4f60ec3e654d83"
+              "bytes": 141120
             }
           ]
         },
@@ -2491,22 +2239,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0008_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0008_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "d087455306fa1384340d8452363bc52b44c034a39d79247a946581cfd36346a4"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0008_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0008_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "05d0cdd623676166f26c56dc06ca389eecde7e6101a3acefab841505f5a94d1c"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0008_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0008_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "c30a5d0bfa89a352419e47e4bbd903462017a6f96c68b52d82eb24854f1ba1f2"
+              "bytes": 141120
             }
           ]
         },
@@ -2520,22 +2265,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0009_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0009_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "6057d46504ed4050cd298bb569d0a012a150635bd61343840bf5276fe393c00b"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0009_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0009_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "8d6b93ba2d11d9161d81e679e9b3d0eb61e2b8358cf6c373ad448d16a7e8a03f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0009_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0009_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "479915cdf8305126d5424fcf99ca1e140db2f5b2a30707cfb80ccade814c11fd"
+              "bytes": 141120
             }
           ]
         },
@@ -2549,22 +2291,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0010_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0010_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "84113ada99ee2c1dc343b5607bedae561883ff865fa7e7c88312b9ae830d28ff"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0010_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0010_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "2766b79b505541ed706d98944395a4ea662cd48a1bc060faed12e2e90ffccd0b"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0010_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0010_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "2a19cd58735f4e730728228cd424d68786fbeccc9c2296130e48bfed0bba6318"
+              "bytes": 141120
             }
           ]
         },
@@ -2578,22 +2317,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0011_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0011_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "5eae0aa7c1d9347837f10a777c50e8dcad339a60f456e1533db1d76ea0cd5266"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0011_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0011_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "61e61d13998c055c5c63e72f07a6213fe20439f1190eb348ac85cd43b4094d5a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0011_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0011_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "babc1bddd6ff60a51a0842e581426aca93da8d71ea8eefa8e67ff3da825adcef"
+              "bytes": 141120
             }
           ]
         },
@@ -2607,22 +2343,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0012_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0012_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "6743b13711324e17d68c1233355fae90c0c30b29fb8f7bb8e83f471adb8a8b75"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0012_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0012_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "3dd9ff1ecf43cf7e6fd8ba64f1a0485cfb3e5c7e85a9ebac145e0909b634f093"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0012_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0012_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "c22a1a8c43ca53a809a50df9617a2644746b9ed5fe7d106e12159200fe082180"
+              "bytes": 141120
             }
           ]
         },
@@ -2636,22 +2369,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0013_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0013_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "b8c41f642a88e773b3c334dbb8e82b5f2b588f61ee1dad77fd01bc7c82f43a83"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0013_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0013_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "5345b8c319fdb5ec2680152dc24b8dbd2a8243811a8c6cbdf7910b0497092d5f"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0013_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0013_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "c835d35fded202b4f4c4d81439349951a5bec79553ea898fb91c5351c78d35c9"
+              "bytes": 144000
             }
           ]
         },
@@ -2665,22 +2395,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0014_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0014_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "d2e944339e7434ad23c0389b27807a417929ec504cf08727d93fab379e68bcb3"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0014_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0014_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "d93fc32ee50110b66aea055066bfd67ebdbe6ce681227f45fb8606177ee31b12"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0014_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0014_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "fc73624da30e0df08c7e5561a6e3807fdd169c59ccccf93a67c66a89b7604458"
+              "bytes": 141120
             }
           ]
         },
@@ -2694,22 +2421,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0015_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0015_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "ba7127328ad56a3d6c9ccc105ebd84b77cc761d04066cc452e425b2ecd8c31fe"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0015_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0015_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "9f36dfa7b7a9350a53c06b149e853a73567224e0ef694ede9523d7cea3c53eba"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0015_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0015_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "67dc248a470b2967442050aa4cca4ac663425f4f368ef5d94d1f0572279ea256"
+              "bytes": 144000
             }
           ]
         },
@@ -2723,22 +2447,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0016_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0016_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "83f234277ece449c184faa7cee7b2953fae605262cdfeb34d2392ffbf905132d"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0016_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0016_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "3fbf212017a0006e04675f5722fe702a85883481ceef7feccdab416f412e268a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0016_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0016_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "64233c75cad402f29b24fc184147f79549be8fdcde22a7e1ce78ba6848b6f7d0"
+              "bytes": 141120
             }
           ]
         },
@@ -2752,22 +2473,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0017_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0017_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "4225ab6542ddf91da9933ae53c591ec3aafb503d7987d540533dea568ee361e0"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0017_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0017_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "6d19c47510295aa83792969ac49c788f7d3189f87fd8ff86ac07c25f34ec7a3a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0017_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0017_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "833c370cf0853201234d6600aeb2f3edbe7994571fca3ebb0627b1098405c6cc"
+              "bytes": 141120
             }
           ]
         },
@@ -2781,22 +2499,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0018_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0018_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "c5932bb47b2b8a59a6535504cf0a5005efe497574d483a08f23dacc77eac6c69"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0018_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0018_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "580a381372be428e93a60f35aa5248744c8563feafaa6eb8ed5ac884436fd24a"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0018_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0018_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "bca5d0c2f7e141a2802ed3720bd5444dce0eb02dec785ba009bcc71a9ab83820"
+              "bytes": 141120
             }
           ]
         },
@@ -2810,22 +2525,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0019_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0019_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "92146211dcbe9e520fc2ddaa6b0b2977dd37df1fe4808acbc8396a1c610973e1"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0019_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0019_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "c2ea5c42522dfab1b808a2e1c19204cd8fd153650c61945addf8095573903035"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0019_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0019_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "64b410ba32b89ccc4e98d4b5e2fb4970793bb4c3982a1de4ed1c8e00415037b6"
+              "bytes": 144000
             }
           ]
         },
@@ -2839,22 +2551,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0020_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0020_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "d6bea29e3141d2f66e2fae25c0b817aa350975954dcd0e96ac395255ced1a387"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0020_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0020_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "f422d13252b717876fbde8295279a770f71d4b96cc0def16c3aecc84be9b00d7"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0020_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0020_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "84ad7d660431c61811a048a929fe4e15113702867e2ce8fc1de96e1905a13068"
+              "bytes": 141120
             }
           ]
         },
@@ -2868,22 +2577,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0021_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0021_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "da367f80433afe63f9384d442f09ebd016989b4b36ed0d1f688ee5fd0abc9b05"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0021_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0021_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "9bcf899c89eee98ff9f83c3eeb22ca514525a917f0a65221252ec7e04d32eb55"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0021_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0021_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "bc9f6236d7944a508a0acdebcc14fd309283df81e998bf8de2f03e727154cca0"
+              "bytes": 141120
             }
           ]
         },
@@ -2897,22 +2603,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0022_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0022_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "a5891b10779cadc18f04b275f9032d616f4e33d357428010c4c9c190198dfed1"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0022_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0022_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "2a9faf9ca69858604cff09ceff245c1f59d6cc5a961393be3d3c02bea551be49"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0022_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0022_0000_7_bimsk.fits",
-              "bytes": 141120,
-              "sha256": "9cf8d2a07a598afe5ecea6342604e6197f9453857afe025197d9d3e43d753429"
+              "bytes": 141120
             }
           ]
         },
@@ -2926,22 +2629,19 @@
               "role": "frame",
               "name": "SPITZER_I4_4416768_0023_0000_7_cbcd.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0023_0000_7_cbcd.fits",
-              "bytes": 290880,
-              "sha256": "0d9e9ad38efebbe1d8a0449e0fe0fe7a384f9111a7c16f6eea5672b34965f957"
+              "bytes": 290880
             },
             {
               "role": "frame-uncertainty",
               "name": "SPITZER_I4_4416768_0023_0000_7_cbunc.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0023_0000_7_cbunc.fits",
-              "bytes": 290880,
-              "sha256": "fe41aa46f6c87569dfe2c753a719fc36cadd5e40b1aa1a2c9306ecd4de02ff41"
+              "bytes": 290880
             },
             {
               "role": "frame-mask",
               "name": "SPITZER_I4_4416768_0023_0000_7_bimsk.fits",
               "url": "https://irsa.ipac.caltech.edu/ibe/data/spitzer/sha/archive/proc/IRAC003600/r4416768/ch4/bcd/SPITZER_I4_4416768_0023_0000_7_bimsk.fits",
-              "bytes": 144000,
-              "sha256": "87a177d273673991a396012b643aeb959732f549c54c124b9165af756e986f1c"
+              "bytes": 144000
             }
           ]
         }

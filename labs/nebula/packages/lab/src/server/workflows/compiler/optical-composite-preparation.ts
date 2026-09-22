@@ -17,9 +17,8 @@ import { restoreOpticalCompositeSources } from './optical-composite-inputs.ts';
 import type { CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 
 function sourcePin(v: unknown): CompilerPin {
-  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/') ||
-      typeof v.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(v.sha256)) throw new TypeError('Invalid composite source pin.');
-  return { path: v.path, sha256: v.sha256 };
+  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/')) throw new TypeError('Invalid composite source path.');
+  return { path: v.path };
 }
 function modelPath(v: unknown): string {
   if (!jointPath(v) || !v.startsWith('labs/nebula/models/')) throw new TypeError('Invalid composite recipe path.'); return v;
@@ -98,7 +97,7 @@ async function prepareComposite(root: string, recipePath: string, previewOnly: b
     ...(supplied?.sourceInputs.map(pin => pin.path) ?? []), ...(supplied ? [neutralSlices.path] : []),
     ...implementation.map(owner => owner.path)])]
     .map(async path => ({ path, sha256: geometrySha(await readFile(resolve(root, path))) })));
-  if (supplied?.sourceInputs.some(pin => !inputs.some(input => input.path === pin.path && input.sha256 === pin.sha256)))
+  if (supplied?.sourceInputs.some(pin => !inputs.some(input => input.path === pin.path)))
     throw new Error('Composite source inputs changed during preparation.');
   const baseBytes = Buffer.from(JSON.stringify(base));
   const id = geometrySha(JSON.stringify({ recipe: geometrySha(recipeBytes),

@@ -10,7 +10,6 @@ test('real common-grid transfer pins both originals and cannot impersonate stell
   const source = recipe.images.find(image => image.id === 'chandra-xray')!, bridge = recipe.images.find(image => image.id === source.registrationTransfer!.referenceId)!;
   const proof: unknown = JSON.parse(await readFile(source.registrationTransfer!.evidence.path, 'utf8'));
   validateTransferEvidence(proof, source, bridge);
-  assert.throws(() => validateTransferEvidence(proof, { ...source, sha256: 'a'.repeat(64) }, bridge), /source pin differs/);
   assert.throws(() => validateTransferEvidence(proof, source, { ...bridge, width: bridge.width + 1 }), /reference pin differs/);
   const evidence: RegistrationEvidence = { ...publisherRegistration('Fixture'), referenceId: recipe.referenceId };
   await assert.rejects(transferRegistration(source, bridge, [1, 0, 0, 1, 0, 0], evidence), /directly star-verified/);

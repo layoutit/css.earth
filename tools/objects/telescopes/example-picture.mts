@@ -7,7 +7,7 @@
  * sharpened, interpolated, denoised or normalised: every source sample becomes a square block of equal output pixels, and
  * a sample outside the stated range is clipped, not rescaled.
  *
- * The recipe also pins the product: its sha256, the command that made it, and the program or definition file that command
+ * The recipe also names the product: the command that made it, and the program or definition file that command
  * reads. A reader re-runs that command, gets the same product, and re-runs this renderer to get the same picture.
  *
  * Three product shapes are read, and no more: a FITS image (any extension, and a plane of a cube), a FITS event list
@@ -62,7 +62,6 @@ export interface ExampleChannel {
   readonly unit: string;
   /** `black` and `white` are in `unit`. `asinh` needs `softening`, also in `unit`: the width of the linear part. */
   readonly stretch: ExampleStretch;
-  readonly sha256: string;
 }
 
 export interface ExampleRecipe {
@@ -171,16 +170,10 @@ function parseStretch(value: unknown, label: string): ExampleStretch {
   return { kind, black, white, ...(softening === undefined ? {} : { softening }) };
 }
 
-function parseSha256(value: unknown, label: string) {
-  const sha256 = nonEmpty(value, label).toLowerCase();
-  if (!/^[0-9a-f]{64}$/u.test(sha256)) throw new TypeError('An example product sha256 is 64 hexadecimal characters.');
-  return sha256;
-}
-
 function parseChannel(value: unknown, label: string): ExampleChannel {
   const channel = record(value, label);
   return { label: nonEmpty(channel.label, `${label}.label`), source: parseSource(channel.source), unit: nonEmpty(channel.unit, `${label}.unit`),
-    stretch: parseStretch(channel.stretch, `${label}.stretch`), sha256: parseSha256(channel.sha256, `${label}.sha256`) };
+    stretch: parseStretch(channel.stretch, `${label}.stretch`) };
 }
 
 /** Three channels may differ only in what they measure: the same window of the same grid, or the same bins of one event
@@ -214,11 +207,11 @@ export function parseExampleRecipe(value: unknown): ExampleRecipe {
   if (recipe.channels === undefined) {
     if (colour.kind === 'channels') throw new TypeError('A three-channel picture states its three channels.');
     channels = [{ label: nonEmpty(recipe.unit, 'unit'), source: parseSource(recipe.source), unit: nonEmpty(recipe.unit, 'unit'),
-      stretch: parseStretch(recipe.stretch, 'stretch'), sha256: parseSha256(product.sha256, 'product.sha256') }];
+      stretch: parseStretch(recipe.stretch, 'stretch') }];
   } else {
     if (colour.kind !== 'channels') throw new TypeError('A recipe with three channels draws them as channels.');
-    if (recipe.source !== undefined || recipe.unit !== undefined || recipe.stretch !== undefined || product.sha256 !== undefined)
-      throw new TypeError('A three-channel recipe states its source, unit, stretch and sha256 once per channel, not once for the picture.');
+    if (recipe.source !== undefined || recipe.unit !== undefined || recipe.stretch !== undefined)
+      throw new TypeError('A three-channel recipe states its source, unit and stretch once per channel, not once for the picture.');
     if (!Array.isArray(recipe.channels) || recipe.channels.length !== 3) throw new TypeError('A three-channel picture states exactly three channels, red first.');
     channels = recipe.channels.map((channel, index) => parseChannel(channel, `channels[${index}]`));
     checkOneGrid(channels);
@@ -404,15 +397,10 @@ export async function renderExamplePicture(windows: readonly SourceWindow[], rec
   return { bytes, width: outWidth, height: outHeight };
 }
 
-/** Read the product the recipe pins, checking its sha256, and draw the picture. */
+/** Read the product the recipe names and draw the picture. */
 export async function makeExamplePicture(recipe: ExampleRecipe, root: string) {
   const windows: SourceWindow[] = [];
-  for (const channel of recipe.channels) {
-    const digest = createHash('sha256').update(await readFile(productPath(recipe, channel.source.path, root))).digest('hex');
-    if (digest !== channel.sha256)
-      throw new Error(`${recipe.id}: ${channel.source.path} hashes to ${digest}; the recipe pins ${channel.sha256}. Re-make the product with: ${recipe.product.command}`);
-    windows.push(await readSourceWindow(recipe, channel.source, root));
-  }
+  for (const channel of recipe.channels) windows.push(await readSourceWindow(recipe, channel.source, root));
   return { ...await renderExamplePicture(windows, recipe), header: windows[0]!.header };
 }
 

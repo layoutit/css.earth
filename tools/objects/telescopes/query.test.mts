@@ -64,9 +64,9 @@ const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026
 
 const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema: BODY_MAP_SCHEMA,
   definition: { quantity: 'salt band depth', units: 'dimensionless', timeDependence: 'surface-property', method: { window: [0.45, 0.5] }, source: 'a paper' },
-  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } },
+  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', bodyCode: 502 } },
   grid: { width: 4, height: 2, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-  planes: { file: 'map.fits', sha256: 'b'.repeat(64), value: 'SCI', uncertainty: 'ERR' }, mask: { maximumEmissionDegrees: 70, missing: 'NaN' },
+  planes: { file: 'map.fits', value: 'SCI', uncertainty: 'ERR' }, mask: { maximumEmissionDegrees: 70, missing: 'NaN' },
   observations: [{ id, telescope, instrument, midTimeJd: 2_459_800.5, rangeKm: 6.3e8, subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 },
     angularResolution: { majorArcsec: 0.05, minorArcsec: 0.05, basis: 'fitted point spread function' } }] });
 
@@ -587,7 +587,6 @@ test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a d
   assert.equal(navcam.observations?.count, 5);
   assert.deepEqual(navcam.observations?.records?.map(record => record.id), ['n2069we02_rr', 'n2073we02_rr', 'n2075we02_rr', 'n2077we02_rr', 'n2079we02_rr']);
   assert.equal(navcam.observations?.records?.[0]?.centralWavelengthMicrometres, 0.6988);
-  assert.equal(navcam.observations?.records?.[0]?.sourceFiles?.[1]?.sha256, '6fa36047b1f56f219417cc86fafb39c507c9ee83318b428942228e6f84448f62');
   assert.deepEqual([navcam.meetsConstraints.wavelength?.answer, navcam.meetsConstraints.time?.answer, navcam.meetsConstraints.kind?.answer], ['unknown', 'yes', 'yes']);
   assert.equal(navcam.toolkitSupport.tool, 'tools/objects/telescopes/qualify-source.mts');
   assert.ok(navcam.selectionAssessment.blockers.some(blocker => blocker.code === 'body-map-author-missing'));

@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -31,8 +29,6 @@
     {
       "id": "radar-shape",
       "path": "shape/kw4b.obj",
-      "expectedBytes": 67298,
-      "expectedSha256": "3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
       "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model",
       "license": "NASA/JPL original radar source; public-data catalog identifies public-domain release",

@@ -83,7 +83,7 @@ export async function bakeJointVolume(options: BakeJointVolumeOptions): Promise<
   await writeFile(containedPath(root, path), bytes);
   cancellation(signal);
   progress?.({ phase: 'compile', completed: 1, total: 1, message: 'Prepared retained joint-fit scene' });
-  return { schema: 'cssearth-joint-fit-volume@1', id, volume: { path, sha256: sha256(bytes) }, frame,
+  return { schema: 'cssearth-joint-fit-volume@1', id, volume: { path }, frame,
     boundsArcsec: { min: [...min] as Vector3, max: [...max] as Vector3 },
     coordinates: { axes: ['west', 'north', 'away'], localOriginArcsec: origin,
       earthView: 'observer-at-negative-z-looking-away' },

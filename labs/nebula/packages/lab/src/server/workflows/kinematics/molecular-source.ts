@@ -14,7 +14,7 @@ async function readRecipe(root: string, recipePath: string) {
   return { recipe: readMolecularRecipe(JSON.parse(bytes.toString()) as unknown), recipeSha256: digest(bytes) };
 }
 function validateBytes(bytes: Uint8Array, pin: MolecularSourcePin): void {
-  if (bytes.byteLength !== pin.bytes || digest(bytes) !== pin.sha256) throw new TypeError(`Molecular source identity changed: ${pin.cachePath}`);
+  if (bytes.byteLength !== pin.bytes) throw new TypeError(`Molecular source identity changed: ${pin.cachePath}`);
 }
 async function readPinned(root: string, pin: MolecularSourcePin): Promise<Buffer> {
   const directory = await realpath(resolve(root, '.local/nebula-lab/kinematics')), filename = await realpath(resolve(root, pin.cachePath));
@@ -49,17 +49,17 @@ async function acquirePin(root: string, pin: MolecularSourcePin): Promise<'verif
 export async function acquireMolecularSources(root: string, recipePath: string, options: { includePaper?: boolean } = {}) {
   const { recipe } = await readRecipe(root, recipePath);
   const pins = [recipe.citation.readme, recipe.table, ...(options.includePaper ? [recipe.citation.paper] : [])];
-  const results: { cachePath: string; sha256: string; status: 'verified' | 'downloaded' }[] = [];
-  for (const pin of pins) results.push({ cachePath: pin.cachePath, sha256: pin.sha256, status: await acquirePin(root, pin) });
+  const results: { cachePath: string; status: 'verified' | 'downloaded' }[] = [];
+  for (const pin of pins) results.push({ cachePath: pin.cachePath, status: await acquirePin(root, pin) });
   // A successful request is insufficient: parse and verify the full observed table before reporting completion.
   const catalogue = await loadMolecularCatalogue(root, recipePath);
-  return { status: 'complete' as const, sources: results, recipeSha256: catalogue.recipeSha256, sourceSha256: catalogue.sourceSha256, diagnostics: catalogue.diagnostics };
+  return { status: 'complete' as const, sources: results, recipeSha256: catalogue.recipeSha256, diagnostics: catalogue.diagnostics };
 }
 /** Read-only preparation boundary. Missing sources require explicit acquireMolecularSources. */
 export async function loadMolecularCatalogue(root: string, recipePath: string): Promise<MolecularCatalogue> {
   const { recipe, recipeSha256 } = await readRecipe(root, recipePath);
   await readPinned(root, recipe.citation.readme);
   const table = await readPinned(root, recipe.table);
-  return { schema: 'cssearth-molecular-catalogue@1', recipe, recipeSha256, sourceSha256: recipe.table.sha256,
+  return { schema: 'cssearth-molecular-catalogue@1', recipe, recipeSha256,
     ...parseMolecularTable(table.toString('ascii'), recipe) };
 }

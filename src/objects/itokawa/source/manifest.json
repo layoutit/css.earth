@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 165
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
-      "expectedBytes": 16897935,
-      "expectedSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
       "capture": {
         "attributions": [
           {
@@ -56,8 +54,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1861460,
-      "expectedSha256": "f5fae5ef42a701c050693523d1d149a99b85b83da6e1c0c5ce58626decee1ca6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -102,8 +98,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -126,8 +120,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 2686546,
-      "expectedSha256": "589cb14fb9df512057d4446a556633fdfa106e2d69efaa66813ad56786726540",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -172,8 +164,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "771627b27137dc9a3fe3b35cf8c89084415e186920f5d86f307e0ef76fa8883d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -196,8 +186,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 8142529,
-      "expectedSha256": "8b7a63ee56d362fcb7e59c80187c2706305955aacb6b517dbfb2a470b6762266",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -242,8 +230,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "796fbc5cff65320b6d66f9e541a36e3d1933b3460217980dfc6b3334a3d8c7ad",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -266,8 +252,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 4199040,
-      "expectedSha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -312,8 +296,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 1459262,
-      "expectedSha256": "e411d4f7bf93d345ac09575714611fac8aeb923b9f20a75140076e9e1c032f79",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -336,8 +318,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 4420715,
-      "expectedSha256": "d064e5b338d77ed5bfe27e28ac08a68e69858053aedc183b888d98a9641a5468",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -430,8 +410,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 28891943,
-      "expectedSha256": "6258068a9de0722b72255e9e727c25f770a8e90748de6bda6bb25f3ad0a956d0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -480,8 +458,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "52117052336333442c52754a242cadc45939b98288cf3b63f698d8fc31b6e938",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -505,8 +481,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 25666359,
-      "expectedSha256": "7b59b7616c5bb5973e4f7137d1b9325c421708ab7315e15f2a738fcbe6a0a928",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -555,8 +529,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "d1ff54eb9a55159f1dc655d4a7e4f68af83dff777ad503c8e1045dcd2a9905a8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -580,8 +552,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 17052744,
-      "expectedSha256": "d3684ac52b7acf53502a0bb2c09e77450824825bc0c48f4fd4fff58035f51132",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -630,8 +600,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "dd3cf6042057d50e87b50d09c58563e252cafce34dcebc2130ecdd3f30e837b9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -655,8 +623,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 31131915,
-      "expectedSha256": "bbf8c65b2bc7094208a11f65542098e20046dbc9bebda5b5a74cdd6aaf3740b6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -705,8 +671,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "7fcfe4069083c86611724dc92b8f14776b617db0032b4e1c88057321474daeb6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -754,8 +718,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 19500685,
-      "expectedSha256": "8388ce181b20156c072230ca9cdb34618e577c6894ee05d083055e7cca196a5c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -780,8 +742,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "81dd34cc05b6d547c876cfbf1c69161c5d88e97bdc4dbcffae5d30578d892daa",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -829,8 +789,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 26305966,
-      "expectedSha256": "d241ebf033e4760583fd72cbeb0fa0024e6b3c37076949b4c8ca3e5d090ea543",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -855,8 +813,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "802b81455a3f25982c127cc2fd4771d2cc17a96804fbf971a5a5cc9afd211f22",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -904,8 +860,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 27202758,
-      "expectedSha256": "9525cf54d1c6f854fa6cab5a0227d453e828a8fa3dcc76cd15768e0595f540ab",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -930,8 +884,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 1056960,
-      "expectedSha256": "33b6cc60bc286ea6ab96934aa12fc1e36a381a3f707edc6cd6b971c8c9335800",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

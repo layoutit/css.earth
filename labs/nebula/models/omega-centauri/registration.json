@@ -4,16 +4,24 @@
   "checkedAt": "2026-09-19",
   "source": {
     "id": "eso1119b",
-    "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
     "width": 14540,
     "height": 14540,
-    "fieldArcminutes": [50.88, 50.88],
+    "fieldArcminutes": [
+      50.88,
+      50.88
+    ],
     "nativeArcsecPerPixel": 0.2099
   },
   "method": "Whole-field publisher-WCS-vs-catalogue center check. No star-by-star astrometric fit was run in this session.",
   "check": {
-    "publisherPointingCenterRaDec": ["13:26:47.27", "-47:28:46.34"],
-    "simbadCatalogueRaDec": ["13:26:47.28", "-47:28:46.1"],
+    "publisherPointingCenterRaDec": [
+      "13:26:47.27",
+      "-47:28:46.34"
+    ],
+    "simbadCatalogueRaDec": [
+      "13:26:47.28",
+      "-47:28:46.1"
+    ],
     "separationArcsec": 0.24,
     "verdict": "Publisher WCS center agrees with the independently catalogued cluster center (NGC 5139, SIMBAD, ref 2010AJ....140.1830G) to within 0.24 arcsec, sub-pixel at the native 0.21 arcsec/px scale."
   },

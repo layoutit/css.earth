@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "trappist-1-gaia-dr3-source",
       "path": "photometry/gaia-dr3-source.csv",
-      "expectedBytes": 356,
-      "expectedSha256": "f76c19af3c0e2b7e3f47b587c5905f8779dbebca97de7bd482a3718e12530853",
       "origin": "https://gea.esac.esa.int/tap-server/tap/sync",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1",
       "license": "Gaia data terms: free use with acknowledgement",
@@ -156,8 +152,6 @@
     {
       "id": "trappist-1-gaia-dr3-xp-continuous",
       "path": "photometry/gaia-dr3-xp-continuous.csv",
-      "expectedBytes": 43698,
-      "expectedSha256": "5ded32edca69955c9e32c4880b34e073969ee5892978f66f69e602953a26a153",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_CONTINUOUS&ID=Gaia+DR3+2635476908753563008&format=csv&DATA_STRUCTURE=RAW",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2",
       "license": "Gaia data terms: free use with acknowledgement",

@@ -17,22 +17,19 @@
    "role": "events",
    "uri": "mast:HST/product/oc7u02g2q_tag.fits",
    "name": "oc7u02g2q_tag.fits",
-   "bytes": 540472320,
-   "sha256": "e73abbdf95e27f9b17451d3a4da5b98d04a670f3ee0d425d0ec90e84a720e8cb"
+   "bytes": 540472320
   },
   {
    "role": "engineering telemetry",
    "uri": "mast:HST/product/oc7u02g2q_spt.fits",
    "name": "oc7u02g2q_spt.fits",
-   "bytes": 1105920,
-   "sha256": "eea486f4c5aaccf01c1257acbedf8d82feca669631a8eff0de7c3e369ee78a5c"
+   "bytes": 1105920
   },
   {
    "role": "jitter",
    "uri": "mast:HST/product/oc7u02g2j_jit.fits",
    "name": "oc7u02g2j_jit.fits",
-   "bytes": 109440,
-   "sha256": "c36b4a4db20c2e21c89ab293bfbb6b8bcde6e940b79d425b95b708831fe2aaae"
+   "bytes": 109440
   }
  ],
  "horizons": {

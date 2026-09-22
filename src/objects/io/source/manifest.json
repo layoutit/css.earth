@@ -4,8 +4,6 @@
     {
       "id": "usgs-enhanced-global-1km",
       "path": "io-color-1km.tif",
-      "expectedBytes": 196637696,
-      "expectedSha256": "337778617ffa6a3cdb5d36375265222ef37410db9495ca5ddbe7bc6786276d14",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Io_Galileo_SSI_Global_Mosaic_FalseColor_1km.tif",
       "credit": "NASA/JPL/USGS",
       "license": "Public domain USGS imagery",
@@ -73,8 +71,6 @@
     {
       "id": "usgs-normal-global-1km",
       "path": "io-global-1km.tif",
-      "expectedBytes": 65546342,
-      "expectedSha256": "cf65a0323aac9c4c9eb582aa7b7ce0d36be8e445316fa6dba49ab5647b63584c",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Io_GalileoSSI-Voyager_Global_Mosaic_1km.tif",
       "credit": "NASA/JPL/USGS",
       "license": "Public domain USGS imagery",
@@ -143,8 +139,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -284,8 +278,6 @@
     {
       "id": "io-muse-original-485nm-slope-1",
       "path": "muse/485nm_slope_io_night_1.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "fca35e89f83f222978ffbfd40154d91ef03ab85f09a86fb605ae0420de46479d",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/f08e392882467dd84082340af068d07945b26a0a",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -322,8 +314,6 @@
     {
       "id": "io-muse-original-485nm-slope-2",
       "path": "muse/485nm_slope_io_night_2.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "58ae63f314d44d3f724b9cc7aeeea7475d9f64ea29005e01c4369f88d3893c31",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/d5aa063e4c5c19fae8252a711ddbcb69df4a7e28",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -360,8 +350,6 @@
     {
       "id": "io-muse-original-485nm-slope-3",
       "path": "muse/485nm_slope_io_night_3.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "fbed77eb6281eb850ff0bc948da12bcec2861ae7a9b9ae453942ec3b668697ff",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/bab631394382359f2f0cff86835d95f0cb69317a",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -398,8 +386,6 @@
     {
       "id": "io-muse-original-560nm-band-1",
       "path": "muse/560nm_band_io_night_1.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "60126a3558ae1c414ac556d9029107aff209a53cd4bf6ddb8eb46bb76987bf3b",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/602fb0d67dac8ba495a0331f57c45f126d6d7042",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -436,8 +422,6 @@
     {
       "id": "io-muse-original-560nm-band-2",
       "path": "muse/560nm_band_io_night_2.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "576242a7c73658b8767f77eca70b9833f196ad95fef455cdc3002f0cd77bcfcc",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/54aa6d283d18ad16f98e0212f1274f52e728efb1",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {
@@ -474,8 +458,6 @@
     {
       "id": "io-muse-original-560nm-band-3",
       "path": "muse/560nm_band_io_night_3.fits",
-      "expectedBytes": 132480,
-      "expectedSha256": "4e5747a2acb901f389ca962316f1b7250331c8ee7fcf92b040cedfc50e3cb6d5",
       "origin": "https://api.github.com/repos/ortk95/king-2024-spectroscopy-galilean-moons-vlt-muse/git/blobs/3f445cfc37a93f0ec06e39abc0bc85c089a9417f",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A)",
       "capture": {

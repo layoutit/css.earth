@@ -1,4 +1,3 @@
-import { sha256 } from '../../src/platform/sha256.mts';
 import { isArray } from '../../src/platform/is-array.mts';
 import { isDeepStrictEqual } from 'node:util';
 import { dirname, relative, resolve } from 'node:path';
@@ -109,7 +108,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   if (named(assignMember.object) !== 'Object' || named(assignMember.property) !== 'assign' || named(assignment.arguments[0]) !== mountId.name) fail();
   const rendererBinding = bindings.get('createWorldContextObjectRuntime');
   if (!rendererBinding || rendererBinding.name !== 'createWorldContextObjectRuntime' || bindings.get('createNavigableObjectMount')?.source !== rendererBinding.source || bindings.get(named(defaultFactory.callee))?.source !== rendererBinding.source) fail();
-  // The transport carries only the pinned prepared read.
+  // The transport carries only the prepared read.
   const transport = transportObject.properties;
   if (transport.some(property => property.type !== 'Property' || property.computed || property.kind !== 'init' ||
       String(propertyKey(property.key)) !== 'read')) fail();
@@ -129,7 +128,7 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
   const address = declarations.find(node => node.init?.type === 'TemplateLiteral');
   if (!address || address.id.type !== 'Identifier') fail();
   const template = kind(address.init, 'TemplateLiteral');
-  if (template.expressions.length !== 2 || !memberIs(template.expressions[0], [descriptorInput, 'id']) || !memberIs(template.expressions[1], [descriptorInput, 'prepared', 'sha256']) || template.quasis.map(part => part.value.cooked).join('|') !== '/objects/|/|.json') fail();
+  if (template.expressions.length !== 1 || !memberIs(template.expressions[0], [descriptorInput, 'id']) || template.quasis.map(part => part.value.cooked).join('|') !== '/objects/|/object.json') fail();
   const guard = kind(method.body.body[0], 'IfStatement');
   const alternatives = (node: Node): Node[] => node.type === 'LogicalExpression' && node.operator === '||' ? [...alternatives(node.left), ...alternatives(node.right)] : [node];
   const predicates = alternatives(guard.test);
@@ -139,9 +138,9 @@ export function requireDescriptorAdapterSource(text: string, exported: string): 
     const callee = node.argument.callee;
     return callee.type === 'MemberExpression' && !callee.computed && named(callee.property) === 'test' && callee.object.type === 'Literal' && 'regex' in callee.object && callee.object.regex.pattern === pattern && callee.object.regex.flags === 'u' && node.argument.arguments.length === 1 && memberIs(node.argument.arguments[0], parts);
   };
-  if (guard.alternate || guard.consequent.type !== 'BlockStatement' || guard.consequent.body.length !== 1 || guard.consequent.body[0].type !== 'ThrowStatement' || predicates.length !== 4 ||
+  if (guard.alternate || guard.consequent.type !== 'BlockStatement' || guard.consequent.body.length !== 1 || guard.consequent.body[0].type !== 'ThrowStatement' || predicates.length !== 3 ||
       !rejects(predicates[0], node => node.type === 'Literal' && node.value === 'prepared/object.json') || !rejects(predicates[1], node => memberIs(node, [descriptorInput, 'prepared', 'url'])) ||
-      !matches(predicates[2], '^[a-z][a-z0-9-]*$', [descriptorInput, 'id']) || !matches(predicates[3], '^[0-9a-f]{64}$', [descriptorInput, 'prepared', 'sha256'])) fail();
+      !matches(predicates[2], '^[a-z][a-z0-9-]*$', [descriptorInput, 'id'])) fail();
   const fetched = nodes.find(node => node.type === 'VariableDeclarator' && node.init?.type === 'AwaitExpression' && node.init.argument.type === 'CallExpression' && named(node.init.argument.callee) === 'fetch');
   if (fetched?.type !== 'VariableDeclarator' || fetched.id.type !== 'Identifier') fail();
   const fetchCall = call(kind(fetched.init, 'AwaitExpression').argument, 'fetch', 2);
@@ -249,7 +248,6 @@ export async function requireAuthoredSourcePins({ objectId, descriptor, root, so
     const record = records.find(entry => `source/${String(entry.path)}` === reference.path);
     if (!record) throw new TypeError(`Authored source is not declared in the manifest: ${reference.path}.`);
     const bytes = await source(path);
-    if (record.expectedSha256 !== undefined && sha256(bytes) !== record.expectedSha256) throw new TypeError(`Source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
   return recipe;
@@ -275,15 +273,14 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
     !descriptor.properties || isArray(descriptor.properties) || typeof descriptor.properties !== 'object' ||
     Object.keys(descriptor).some(key => !['schema', 'id', 'type', 'properties', 'prepared'].includes(key))) throw new TypeError('Registered JSON descriptor identity or shape is invalid.');
   const reference = requireRecord(descriptor.prepared);
-  if (reference?.format !== PREPARED_CSS_OBJECT_FORMAT || !/^[a-f0-9]{64}$/.test(typeof reference.sha256 === 'string' ? reference.sha256 : '') ||
-    typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url', 'sha256'].includes(key))) throw new TypeError('JSON descriptor requires its pinned prepared CSS artifact.');
+  if (reference?.format !== PREPARED_CSS_OBJECT_FORMAT ||
+    typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url'].includes(key))) throw new TypeError('JSON descriptor requires its prepared CSS artifact.');
   const descriptorDirectory = dirname(descriptorPath);
   const payloadPath = resolve(descriptorDirectory, reference.url);
   if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(descriptorDirectory, 'prepared/object.json')) {
     throw new TypeError('Prepared JSON transport must remain inside its owning object prepared directory.');
   }
   const bytes = await source(payloadPath);
-  if (sha256(bytes) !== reference.sha256) throw new TypeError('Prepared JSON transport SHA-256 does not match its descriptor.');
   const payload = requireRecord(JSON.parse(bytes));
   if (payload.schema !== 'cssearth-prepared-object@1' || payload.id !== objectId || payload.type !== descriptor.type || payload.format !== reference.format ||
     Object.keys(payload).some(key => !['schema', 'id', 'type', 'format', 'data'].includes(key))) throw new TypeError('Prepared JSON identity or format does not match its descriptor.');

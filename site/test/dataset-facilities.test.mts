@@ -2,7 +2,6 @@ import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { createHash } from 'node:crypto';
 import sharp from 'sharp';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
@@ -22,8 +21,8 @@ const catalog = prepared.catalog;
 const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/objects/${id}/prepared/provenance.json`), id);
 const missions = Object.fromEntries(catalog.missions.map(mission => [mission.id, mission]));
 interface PreparedPage { readonly controls: { readonly lenses?: { readonly controls: readonly { readonly id: string; readonly label: string }[] } } }
-interface ArtworkSource { readonly sourcePage?: string; readonly sourceUrl?: string; readonly credit: string; readonly localSource?: string; readonly inputSha256?: string; }
-interface ArtworkEntry { readonly id: string; readonly sha256: string; readonly source: ArtworkSource; }
+interface ArtworkSource { readonly sourcePage?: string; readonly sourceUrl?: string; readonly credit: string; readonly localSource?: string; }
+interface ArtworkEntry { readonly id: string; readonly source: ArtworkSource; }
 const positiveInteger = (value: unknown, label: string): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError(`${label} must be a positive integer.`);
   return value;
@@ -34,16 +33,14 @@ const artworkLibrary = (value: unknown, emblem: boolean): readonly ArtworkEntry[
   if (library.schema !== schema) throw new TypeError('Unsupported artwork library.');
   return explorationArray(library.entries, raw => {
     const image = explorationRecord(raw), source = explorationRecord(image.source);
-    const id = explorationId(image.id), sha256 = explorationText(image.sha256);
-    if (!/^[a-f0-9]{64}$/u.test(sha256)) throw new TypeError('Invalid artwork hash.');
+    const id = explorationId(image.id);
     positiveInteger(image.width, 'Artwork width'); positiveInteger(image.height, 'Artwork height'); positiveInteger(image.bytes, 'Artwork bytes');
     const credit = explorationText(source.credit);
     const sourcePage = source.sourcePage === undefined ? undefined : explorationText(source.sourcePage);
     const sourceUrl = source.sourceUrl === undefined ? undefined : explorationText(source.sourceUrl);
-    if (emblem && (sourceUrl === undefined || source.localSource === undefined || source.inputSha256 === undefined)) throw new TypeError('Incomplete emblem source.');
-    return { id, sha256, source: { credit, ...(sourcePage === undefined ? {} : { sourcePage }), ...(sourceUrl === undefined ? {} : { sourceUrl }),
-      ...(source.localSource === undefined ? {} : { localSource: explorationText(source.localSource) }),
-      ...(source.inputSha256 === undefined ? {} : { inputSha256: explorationText(source.inputSha256) }) } };
+    if (emblem && (sourceUrl === undefined || source.localSource === undefined)) throw new TypeError('Incomplete emblem source.');
+    return { id, source: { credit, ...(sourcePage === undefined ? {} : { sourcePage }), ...(sourceUrl === undefined ? {} : { sourceUrl }),
+      ...(source.localSource === undefined ? {} : { localSource: explorationText(source.localSource) })  } };
   });
 };
 async function objectInput(id: string, document: ProvenanceDocument | null = null): Promise<ContributionObject> {
@@ -160,8 +157,7 @@ test('approved artwork and emblems retain source bytes, dimensions and transpare
     for (const approved of library) {
       const image = images[approved.id], bytes = await readFile(new URL(`../../public${image.src}`, import.meta.url));
       assert.ok(image);
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), approved.sha256);
-      assert.equal(image.sha256, approved.sha256); assert.equal(image.bytes, bytes.length);
+      assert.equal(image.bytes, bytes.length);
       const metadata = await sharp(bytes).metadata();
       assert.equal(metadata.width, image.width); assert.equal(metadata.height, image.height);
       assert.equal(image.sourceUrl, approved.source.sourcePage ?? approved.source.sourceUrl);
@@ -176,9 +172,7 @@ test('approved artwork and emblems retain source bytes, dimensions and transpare
           if (x === 0 || y === 0 || x === info.width - 1 || y === info.height - 1) assert.equal(alpha, 0, `${image.id}: exterior pixels`);
         }
         assert.ok(transparent > info.width * info.height * .03); assert.ok(opaque > info.width * info.height * .1);
-        assert.ok(approved.source.localSource); assert.ok(approved.source.inputSha256);
         const source = await readFile(new URL(`../source/facilities/emblems/${approved.source.localSource}`, import.meta.url));
-        assert.equal(createHash('sha256').update(source).digest('hex'), approved.source.inputSha256);
       }
     }
   }

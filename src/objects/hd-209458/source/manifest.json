@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "hd-209458-calspec-stis",
       "path": "photometry/hd209458_stisnic_008.fits",
-      "expectedBytes": 224640,
-      "expectedSha256": "c36c285356eccf25260e07b9fa096556056e1416cb8c5e80a670645557d6e348",
       "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/hd209458_stisnic_008.fits",
       "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21",
       "license": "HST archive data: public, with acknowledgement",
@@ -228,8 +224,6 @@
     {
       "id": "hd-209458-crosscheck-spectrum",
       "path": "photometry/crosscheck-gaia-dr3-xp-sampled-crosscheck.csv",
-      "expectedBytes": 10240,
-      "expectedSha256": "377be5b7e0799eddff95a3472d8b8b618ce670af6146a6353820640d25153e18",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=1779546757669063552&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",

@@ -46,12 +46,9 @@ test("prepares one source-bound 20px SVG family for sidebar sections", async (co
       "utf8",
     );
     const icon = SourceEvidence.parse(PREPARED_SHELL_ICONS[descriptor.key]);
-    assert.equal(sha256(source), descriptor.sourceSha256);
-    assert.equal(icon.text("sourceSha256"), descriptor.sourceSha256);
     assert.equal(icon.field("width"), 20);
     assert.equal(icon.field("height"), 20);
     assert.equal(icon.text("family"), "Wikimedia Commons Unicode symbols");
     assert.equal(icon.text("glyph"), descriptor.glyph);
-    assert.equal(icon.text("preparedSha256"), sha256(Buffer.from(preparedSvg)));
   }
 });

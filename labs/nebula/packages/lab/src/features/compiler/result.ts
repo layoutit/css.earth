@@ -14,8 +14,8 @@ export interface CompilerResult { schema: 'cssearth-nebula-compiler-result@1'; i
 const finite = (v: unknown): v is number => typeof v === 'number' && Number.isFinite(v);
 const hash = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
 function pin(v: unknown): CompilerPin {
-  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/') || !hash(v.sha256)) throw new TypeError('Invalid compiler resource.');
-  return { path: v.path, sha256: v.sha256 };
+  if (!jointRecord(v) || !jointPath(v.path) || !v.path.startsWith('.local/nebula-lab/')) throw new TypeError('Invalid compiler resource.');
+  return { path: v.path };
 }
 function bounds(v: unknown): SkyBounds {
   if (!jointRecord(v) || !Array.isArray(v.min) || !Array.isArray(v.max) || v.min.length !== 2 || v.max.length !== 2 || !v.min.every(finite) || !v.max.every(finite) || v.min[0] >= v.max[0] || v.min[1] >= v.max[1]) throw new TypeError('Invalid compiler image bounds.');

@@ -4,46 +4,32 @@
   "name": "Small Magellanic Cloud",
   "defaultLens": "smc-horalek-wide",
   "bank": {
-    "path": "src/objects/smc/prepared/lenses.json",
-    "sha256": "560403477633ebcb5317292ca6ba06a0b93ff25d88211458b2cb47b86b2039ee",
-    "bytes": 5825147
+    "path": "src/objects/smc/prepared/lenses.json"
   },
   "recipes": [
     {
       "id": "recipe-1",
-      "path": "src/objects/smc/source/lenses.json",
-      "sha256": "29316234cc7b336293a9c3e8590c2b014b22e48bb22d780f8f8ea48c8eff4dab",
-      "bytes": 4033
+      "path": "src/objects/smc/source/lenses.json"
     },
     {
       "id": "recipe-2",
-      "path": "src/objects/smc/source/evidence/smc/constrained/emission-envelope-ellipsoid.json",
-      "sha256": "43430d8b03e3ab441d8a9bd1ea4dc8821ec513e6cd0e0d5815d11095990d38af",
-      "bytes": 1724
+      "path": "src/objects/smc/source/evidence/smc/constrained/emission-envelope-ellipsoid.json"
     },
     {
       "id": "recipe-3",
-      "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json",
-      "sha256": "f9d891bb54805746101d363270f474b9ca1a3b758a886f238d44e351e6804da2",
-      "bytes": 2224
+      "path": "src/objects/smc/source/evidence/smc/constrained/finite-lenses-ellipsoid.json"
     },
     {
       "id": "recipe-4",
-      "path": "src/objects/smc/source/evidence/smc/constrained/fit.json",
-      "sha256": "6f151258ce3480c48b6829dcd05fb1b5c78fd724a4da3ac06b3218aa9b90a7fe",
-      "bytes": 4922
+      "path": "src/objects/smc/source/evidence/smc/constrained/fit.json"
     },
     {
       "id": "recipe-5",
-      "path": "src/objects/smc/source/evidence/smc/registration/alignment-report.json",
-      "sha256": "f02d9370c74450cc5143a5d3fcc608635f2714dc7141cbf466a22690d2398001",
-      "bytes": 12990
+      "path": "src/objects/smc/source/evidence/smc/registration/alignment-report.json"
     },
     {
       "id": "recipe-6",
-      "path": "src/objects/smc/source/lens-settings-evidence.json",
-      "sha256": "a0d1bae24d960bdd98e91deaa48cfcd4c1e83cfca461fe1c531c6e2442885e9f",
-      "bytes": 2497
+      "path": "src/objects/smc/source/lens-settings-evidence.json"
     }
   ],
   "sharedInputs": [
@@ -81,8 +67,6 @@
       "input": "smc-horalek-wide",
       "preview": {
         "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
-        "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
-        "bytes": 7080917,
         "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2615a.jpg"
       }
     },
@@ -113,8 +97,6 @@
       "input": "smc-vista",
       "preview": {
         "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
-        "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
-        "bytes": 8087047,
         "url": "https://cdn.eso.org/images/publicationjpg/eso1714a.jpg"
       }
     },
@@ -145,8 +127,6 @@
       "input": "smc-smash",
       "preview": {
         "path": "src/objects/smc/source/source.jpg",
-        "sha256": "ccc00a30127b158f249227a55c150b10db72738b23ee4a263c4afd7601fa524c",
-        "bytes": 4359408,
         "url": "https://www.astropix.org/archive/noirlab/noirlab2030b/noirlab_noirlab2030b_3000.jpg"
       }
     },
@@ -177,8 +157,6 @@
       "input": "smc-dss2",
       "preview": {
         "path": ".local/nebula-presentation/smc-dss2.jpg",
-        "sha256": "3b995913acff5527b1ed14639d7ffdc8eeb5ad52767fd6f0a4b7c7a46e7ccc54",
-        "bytes": 605262,
         "url": "https://cdn.esahubble.org/archives/images/screen/heic0514c.jpg"
       }
     },
@@ -209,8 +187,6 @@
       "input": "smc-allwise-wide",
       "preview": {
         "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
-        "sha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
-        "bytes": 858260,
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.5&dec=-73&format=jpg"
       }
     }

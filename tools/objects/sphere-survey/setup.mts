@@ -72,7 +72,7 @@ function releasedModelOf(value: Record<string, unknown>): ReleasedModel {
 export async function surveyFigures() {
   const table = requireRecord(await readJson(resolve(import.meta.dirname, 'vernazza-2021-figures.json')));
   const paper = requireRecord(table.paper);
-  return { paper: { source: requireString(paper.source), bytes: requireFiniteNumber(paper.bytes), sha256: requireString(paper.sha256) },
+  return { paper: { source: requireString(paper.source) },
     figures: requireArray(table.figures).map(value => {
       const f = requireRecord(value), pole = requireArray(f.pole).map(angle => requireFiniteNumber(angle));
       if (pole.length !== 2) throw new TypeError(`Figure ${String(f.figure)} states no Table A.1 pole pair.`);
@@ -83,32 +83,29 @@ export async function surveyFigures() {
 
 /**
  * A file already on this machine: the package's own copy, then the same path in any sibling checkout's package or in the
- * survey downloads a checkout kept, checked by size and hash when a pin is known.
+ * survey downloads a checkout kept.
  */
-export async function localCopy(objectId: string, path: string, pin?: { bytes: number; sha256: string }): Promise<Buffer | null> {
+export async function localCopy(objectId: string, path: string): Promise<Buffer | null> {
   const siblings = (await readdir(dirname(ROOT))).filter(name => name.startsWith('css.earth')).map(name => resolve(dirname(ROOT), name));
   const candidates = [resolve(ROOT, 'src/objects', objectId, 'source', path), ...siblings.flatMap(checkout =>
     [resolve(checkout, 'src/objects', objectId, 'source', path), resolve(checkout, 'output/sphere-survey', objectId, 'downloads', path)])];
   for (const candidate of candidates) {
     const size = await stat(candidate).then(entry => entry.size, () => -1);
-    if (size < 0 || (pin && size !== pin.bytes)) continue;
-    const bytes = await readFile(candidate);
-    if (!pin || sha256(bytes) === pin.sha256) return bytes;
+    if (size <= 0) continue;
+    return readFile(candidate);
   }
   return null;
 }
 
-/** The survey paper, from any package or checkout on this machine that pins it, downloaded only when none does. */
-async function surveyPaper(objectId: string, pin: { bytes: number; sha256: string }) {
-  const own = await localCopy(objectId, PAPER_PATH, pin);
+/** The survey paper, from any package or checkout on this machine that holds it, downloaded only when none does. */
+async function surveyPaper(objectId: string) {
+  const own = await localCopy(objectId, PAPER_PATH);
   if (own) return own;
   for (const directory of await readdir(resolve(ROOT, 'src/objects'))) {
-    const bytes = await localCopy(directory, PAPER_PATH, pin);
+    const bytes = await localCopy(directory, PAPER_PATH);
     if (bytes) return bytes;
   }
-  const bytes = await lamBytes(SURVEY_PAPER_URL);
-  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error('The survey paper LAM serves is not the pinned one.');
-  return bytes;
+  return lamBytes(SURVEY_PAPER_URL);
 }
 
 /** A file for the package, from this machine when present, else from its origin, kept in the run's download folder. */
@@ -149,7 +146,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   const ownPole = properties.source === paperPin.source;
 
   // The figure and its column labels.
-  const paper = await surveyPaper(objectId, paperPin);
+  const paper = await surveyPaper(objectId);
   const image = readPdfImage(paper, figure.object);
   if (image.width !== figure.width || image.height !== figure.height) throw new Error(`Object ${figure.object} is ${image.width}×${image.height}, not Figure ${figure.figure}.`);
   const bands = figureBands(image);
@@ -283,9 +280,8 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   requireArray(raster.surfaceObservations).push(lens);
   await put('preparation/terrestrial.json', JSON.stringify(recipe, null, 2) + '\n');
 
-  // The manifest: every new file pinned, so the scratch copy measures exactly what the package would hold.
+  // The manifest: every new file declared, so the scratch copy measures exactly what the package would hold.
   const inputs = requireArray(manifest.inputs).map(value => requireRecord(value)), documents = requireArray(manifest.documents).map(value => requireRecord(value));
-  const pin = (bytes: Buffer | string) => { const data = Buffer.from(bytes); return { expectedBytes: data.length, expectedSha256: sha256(data) }; };
   const setInput = (entry: Record<string, unknown>) => { const at = inputs.findIndex(input => input.path === entry.path); if (at >= 0) inputs[at] = { ...inputs[at], ...entry }; else inputs.push(entry); };
   for (const entry of frames) setInput(frameInput(objectId, entry.frame, entry.bytes));
   if (adam && !primaryIsAdam) setInput(adamInput(objectId, number, figure.name, adamPath, adam, withheld));
@@ -295,8 +291,7 @@ export async function buildSetup(objectId: string, options: LeaveOuts = {}) {
   for (const path of [OBSERVER_CAMERAS_FILE, COMPARISON_SPEC_FILE, spinRecordPath, 'preparation/terrestrial.json']) {
     // A record the package already pins as a downloaded input stays an input; a manifest names each path once.
     if (inputs.some(input => input.path === path)) continue;
-    const bytes = await readFile(resolve(source, path)), at = documents.findIndex(document => document.path === path);
-    if (at >= 0) documents[at] = { ...documents[at], ...pin(bytes) }; else documents.push({ path, ...pin(bytes) });
+    if (!documents.some(document => document.path === path)) documents.push({ path });
   }
   manifest.inputs = inputs; manifest.documents = documents;
   await put('manifest.json', JSON.stringify(manifest, null, 2) + '\n');
@@ -373,8 +368,7 @@ function frameInput(objectId: string, frame: LamFrame, bytes: Buffer) {
   const { width, height } = readFitsImageSize(bytes);
   return { id: `${objectId}-sphere-${frame.second.replace(/\D/gu, '')}`, path: `observations/${frame.file}`, origin: frame.url, credit: SURVEY_CREDIT, capture: surveyCapture, ...surveyTerms,
     consumers: ['sphere-photograph'], width, height, lensId: LENS_ID, label: 'Deconvolved ZIMPOL frame',
-    coverage: 'Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.',
-    expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
+    coverage: 'Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.' };
 }
 function adamInput(objectId: string, number: number, name: string, path: string, bytes: Buffer, archive?: { model: string; shape: string }) {
   return { id: `${objectId}-adam-shape`, path, origin: archive?.shape ?? shapeUrl(number, name, 'adam'),
@@ -383,14 +377,13 @@ function adamInput(objectId: string, number: number, name: string, path: string,
     projection: { kind: 'body-fixed-cartesian-triangular-mesh', longitudeDirection: 'east', latitudeType: 'planetocentric', units: 'kilometers' },
     coverage: archive
       ? `ADAM reconstruction from the same survey, as ${archive.model} distributes it: LAM withholds the release’s own file for this body. The survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.`
-      : 'ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.',
-    expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
+      : 'ADAM reconstruction from the same survey. The release’s rotation record describes this frame, and the survey’s comparison figure shows it beside the frames, so the photographic lens is registered to this mesh.' };
 }
 const damitTerms = { license: 'CC-BY-4.0; DAMIT site license, retained with author and model attribution.', acquisition: 'Restored through source/preparation/acquisition.json.',
   redistribution: 'CC-BY-4.0 with author/model attribution; see NOTICE.md.' };
 function paperInputFor(objectId: string, bytes: Buffer) {
   return { id: `${objectId}-survey-research`, path: PAPER_PATH, origin: SURVEY_PAPER_URL, credit: 'P. Vernazza et al. (2021), Astronomy & Astrophysics 654, A56', ...surveyTerms,
-    license: 'CC-BY-4.0 research article; retain the citation.', consumers: ['physical', 'rotation'], expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
+    license: 'CC-BY-4.0 research article; retain the citation.', consumers: ['physical', 'rotation'] };
 }
 function readFitsImageSize(bytes: Buffer) {
   const { header } = readFitsHdu(bytes);

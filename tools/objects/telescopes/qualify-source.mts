@@ -16,20 +16,17 @@ import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field } from '../pds
 import { pds3Keyword, pds3Values } from '../pds3-labels.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord } from '../product-record.mts';
-import { inside, assertPinnedLabel, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
+import { inside, assertPinnedLabel, sourceCacheAddress, sourceReceipt, sourceRun, sourceRecordComplete, type SourceFile, type SourceProduct } from './source-products.mts';
 import { STEREO_COR1_F16_PROFILE } from './observation-families.mts';
 import { describePhysicalSphericalGrid, inspectPhysicalSphericalGrid, type SphericalGridContext } from './families/f16-spherical-grid.mts';
 import { member } from './families/common.mts';
 
 export async function acquireSourceFile(root: string, file: SourceFile): Promise<void> {
-  const path = inside(root, file.path), existing = await pinFile(path).catch(() => null);
-  if (existing) {
-    if (existing.bytes !== file.bytes || existing.sha256 !== file.sha256) throw new Error(`${file.path} differs from its manifest pin.`);
-    return;
-  }
+  const path = inside(root, file.path);
+  if (await pinFile(path).then(() => true, () => false)) return;
   await mkdir(dirname(path), { recursive: true });
   const tmp = `${path}.${process.pid}.partial`;
-  const urls = [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, file.sha256, basename(file.path)), file.origin];
+  const urls = [sourceCacheUrl(RUNTIME_ASSET_ORIGIN, ...sourceCacheAddress(file)), file.origin];
   const headers=await sourceHeaders(root,file);
   let last: unknown;
   for (const url of urls) {
@@ -40,13 +37,10 @@ export async function acquireSourceFile(root: string, file: SourceFile): Promise
       try {
       for await (const part of withIdleTimeout(Readable.fromWeb(response.body as never), 30_000)) {
         const chunk = Buffer.from(part); bytes += chunk.length;
-        if (bytes > file.bytes) throw new Error(`${file.path} exceeds its pinned byte count.`);
         await handle.writeFile(chunk);
-        if (bytes >= mark) { process.stderr.write(`${basename(file.path)}: ${(bytes / 1e6).toFixed(1)} / ${(file.bytes / 1e6).toFixed(1)} MB\n`); mark += 10_000_000; }
+        if (bytes >= mark) { process.stderr.write(`${basename(file.path)}: ${(bytes / 1e6).toFixed(1)} MB\n`); mark += 10_000_000; }
       }
       } finally { await handle.close(); }
-      const found = await pinFile(tmp);
-      if (found.bytes !== file.bytes || found.sha256 !== file.sha256) throw new Error(`${file.path}: downloaded bytes do not match the manifest.`);
       await rename(tmp, path); return;
     } catch (error) { last = error; await rm(tmp, { force: true }); }
   }
@@ -124,7 +118,7 @@ export async function qualifySourceProduct(root: string, product: SourceProduct)
   const descriptorOutput: { path: string; file: string }[] = [];
   if (product.familyEvidence?.profileId === STEREO_COR1_F16_PROFILE) {
     const descriptorPath = `${dirname(receipt)}/descriptor.json`, context: SphericalGridContext = { profileId: STEREO_COR1_F16_PROFILE, frame: 'sun-carrington-cr2053', frameBasis: 'Sun-centred Cartesian axes derived from Carrington longitude, Carrington latitude and heliocentric radius for CR2053 P1.', sourceUrl: science.origin, citation: product.citation, license: 'NASA scientific data; the source manifest retains the archive credit, citation request and redistribution statement.', quantity: 'electron number density', unit: product.units, hdu: 0 };
-    const sciencePath = inside(root, science.path), bytes = await readFile(sciencePath), inspection = await inspectPhysicalSphericalGrid({ path: sciencePath, bytes: science.bytes, sha256: science.sha256 }, context);
+    const sciencePath = inside(root, science.path), bytes = await readFile(sciencePath), inspection = await inspectPhysicalSphericalGrid({ path: sciencePath }, context);
     const value = describePhysicalSphericalGrid({ id: product.id, target: product.target, member: member('electron-density-fits', relative(dirname(resolve(root, descriptorPath)), sciencePath), 'science', bytes, 'application/fits'), context, inspection, producingRecord: receipt });
     await writeFile(resolve(root, descriptorPath), `${JSON.stringify(value, null, 2)}\n`); descriptorOutput.push({ path: descriptorPath, file: resolve(root, descriptorPath) });
   }

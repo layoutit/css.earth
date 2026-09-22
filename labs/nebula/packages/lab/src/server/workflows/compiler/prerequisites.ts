@@ -20,8 +20,8 @@ export async function compilerLayersReady(root: string, value: unknown): Promise
     if (!jointRecord(image) || !jointRecord(image.layers)) throw new TypeError('Missing observation layers.');
     for (const name of ['original', 'diffuse', 'stars'] as const) {
       const layer = image.layers[name]; if (!layer) return false;
-      if (!jointRecord(layer) || typeof layer.path !== 'string' || typeof layer.sha256 !== 'string') throw new TypeError('Missing observation layer pin.');
-      try { await readGeometryPin(root, { path: layer.path, sha256: layer.sha256 }); } catch (error) { if (missing(error)) return false; throw error; }
+      if (!jointRecord(layer) || typeof layer.path !== 'string') throw new TypeError('Missing observation layer path.');
+      try { await readGeometryPin(root, { path: layer.path }); } catch (error) { if (missing(error)) return false; throw error; }
     }
   }
   return true;

@@ -8,7 +8,6 @@
     "path": "source/orbit/parent-heliocentric.txt",
     "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
     "bytes": 8527,
-    "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
     "target": 153591,
     "targetKind": "numbered-asteroid",
     "center": 10,
@@ -31,14 +30,12 @@
     "elements": {
       "path": "source/orbit/heliocentric-elements.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27153591%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER=%27500%4010%27&START_TIME=%27JD2461286.5%27&STOP_TIME=%27JD2461287.5%27&STEP_SIZE=%271d%27&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&CSV_FORMAT=YES",
-      "bytes": 7056,
-      "sha256": "19173391b55d7fd244e4bf59648a2f51f4e3c24926f8e6d8bc66dd1022de1edc"
+      "bytes": 7056
     },
     "vectors": {
       "path": "source/orbit/heliocentric-vectors.txt",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27153591%3B%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500%4010%27&TLIST=2461256.5%2C2461286.5%2C2461316.5&TLIST_TYPE=JD&TIME_TYPE=TDB&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES",
-      "bytes": 6343,
-      "sha256": "2557db5240bd35609e006a78c8236dc0956972b6717260582466df30b15de837"
+      "bytes": 6343
     }
   },
   "limitations": [

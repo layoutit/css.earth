@@ -5,7 +5,6 @@
       "id": "hubble-opal-neptune-visible",
       "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
       "expectedBytes": 789926,
-      "expectedSha256": "8c17a2872b5d55577c63abe7ba1369997ff32bb83e0f9b9c350a46db96713cb8",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f467m-f547m-f657n_v1_globalmap.tif",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms"
@@ -14,7 +13,6 @@
       "id": "hubble-opal-neptune-fq619n",
       "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
       "expectedBytes": 1045440,
-      "expectedSha256": "b1ad52870f9fdcf36cde019705209005d07f927ab99ea00305f36ebe36967a1b",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_fq619n_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms"
@@ -23,7 +21,6 @@
       "id": "hubble-opal-neptune-f845m",
       "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
       "expectedBytes": 1045440,
-      "expectedSha256": "7373c6c3daf3ace7cf1576596ed0480659cb03c255893b71629d282fe7291b4c",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_f845m_v1_globalmap.fits",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms"
@@ -32,7 +29,6 @@
       "id": "ras-oxford-neptune-true-colour-reference",
       "path": "color/ras-oxford-neptune-true-colors-2024.jpg",
       "expectedBytes": 338632,
-      "expectedSha256": "2f7d106d547adde83f356a3bd5f97053cd314a199fd6fb2c7d8d9c470df55ec7",
       "origin": "https://ras.ac.uk/sites/default/files/2024-01/Combined_figures_crop.jpg",
       "credit": "Patrick Irwin, University of Oxford, and NASA",
       "license": "CC BY 4.0"

@@ -13,7 +13,7 @@ export interface DepthSurface {
 export interface DepthRecipe {
   schema: 'cssearth-nebula-depth-model@1'; id: string;
   centerIcrsDegrees: Pair;
-  evidence: { path: string; sha256: string };
+  evidence: { path: string };
   background: DepthSurface; features: DepthSurface[];
   /** The unobserved normal thickness may shrink with projected feature scale, never grow into rods. */
   detailThicknessRatio: number; minimumThicknessArcsec: number;
@@ -39,13 +39,13 @@ function surface(v: unknown): DepthSurface {
 }
 export function readDepthRecipe(v: unknown, allowedPath: (path: string) => boolean = () => true): DepthRecipe {
   if (!jointRecord(v) || v.schema !== 'cssearth-nebula-depth-model@1' || !id(v.id) || !jointRecord(v.evidence) ||
-      !jointPath(v.evidence.path) || !allowedPath(v.evidence.path) || typeof v.evidence.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(v.evidence.sha256) ||
+      !jointPath(v.evidence.path) || !allowedPath(v.evidence.path) ||
       !Array.isArray(v.features) || v.features.length > 64 || !number(v.detailThicknessRatio, .05, 2) || !number(v.minimumThicknessArcsec, .01, 1000) ||
       typeof v.interpretation !== 'string' || !v.interpretation.trim()) throw new TypeError('Invalid nebula depth-model recipe.');
   const center = pair(v.centerIcrsDegrees, -360, 360), background = surface(v.background), features = v.features.map(surface);
   if (center[0] < 0 || center[0] >= 360 || Math.abs(center[1]) > 90 || new Set([background.id, ...features.map(f => f.id)]).size !== features.length + 1 ||
       background.support !== 'unconstrained') throw new TypeError('Invalid depth frame, duplicate surface, or unsupported background claim.');
-  return { schema: v.schema, id: v.id, centerIcrsDegrees: center, evidence: { path: v.evidence.path, sha256: v.evidence.sha256 }, background, features,
+  return { schema: v.schema, id: v.id, centerIcrsDegrees: center, evidence: { path: v.evidence.path }, background, features,
     detailThicknessRatio: v.detailThicknessRatio, minimumThicknessArcsec: v.minimumThicknessArcsec, interpretation: v.interpretation };
 }
 export function verifyDepthEvidence(recipe: DepthRecipe, v: unknown): string[] {

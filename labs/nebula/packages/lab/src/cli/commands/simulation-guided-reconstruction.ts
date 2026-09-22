@@ -14,7 +14,7 @@ import {loadSimulationPrior} from './simulation-prior.ts';
 import {compilerSlabMaterial,alphaLimitedSlabMaterial} from '@cssearth/volume-core/materials/slab-material';
 import {bakeMasterVolumeSlices} from '@cssearth/volume-bake/slices/emission';
 import {recolorCloudSlices} from '@cssearth/volume-bake/slices/material';
-import {verifiedBytes,sha256,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
+import {sourceBytes,sha256,containedPath} from '@cssearth/volume-bake/compact-inputs/density-grid';
 import type {Vector3} from '@cssearth/volume-core/contracts/volume-recipe';
 import type {SkyBounds,EmissionBounds} from '@cssearth/volume-core/contracts/emission';
 const json=async(path:string,value:unknown)=>{const b=Buffer.from(JSON.stringify(value,null,2)+'\n');await writeFile(path,b);return sha256(b);};
@@ -36,7 +36,7 @@ async function main(settingsPath:string){
  const provenanceBytes=await readFile(resolve(baseline,'source/provenance.json')),oldResultBytes=await readFile(resolve(baseline,'result.json'));
  const provenance=parseLabModelJson(provenanceBytes.toString()),oldResult=parseLabModelJson(oldResultBytes.toString()),work=provenance.request;
  if(provenance.schema!=='cssearth-nebula-reconstruction-provenance@1'||oldResult.resultId!==baselineId||work.cloud.modelPlacement)throw Error('Unsupported baseline geometry');
- await verifiedBytes(root,work.source);await verifiedBytes(root,work.cloud.slices);await verifiedBytes(root,work.cloud.descriptor);
+ await sourceBytes(root,work.source);await sourceBytes(root,work.cloud.slices);await sourceBytes(root,work.cloud.descriptor);
  const implementation=await implementationPins(root,['labs/nebula/packages/lab/src/cli/commands/simulation-guided-reconstruction.ts']);
  const identity={baseline:{resultId:baselineId,provenanceSha256:sha256(provenanceBytes),resultSha256:sha256(oldResultBytes)},settings:{path:relative(root,resolve(settingsPath)),sha256:sha256(settingsBytes)},implementation};
  const resultId=sha256(Buffer.from(JSON.stringify(identity))),id=`reconstruction-${resultId}`,output=resolve(root,'.local/nebula-lab/reconstructions',resultId),staging=output+'.pending';

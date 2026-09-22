@@ -6,7 +6,6 @@
       "id": "nasa-hubble-jupiter-navigation-marker",
       "path": "presentation/navigation-marker.png",
       "expectedBytes": 1166501,
-      "expectedSha256": "50d1a1cb022550f18e835d9f8cb56e44c9b8196dfd19954ae6413c6e92fc3ebe",
       "origin": "https://science.nasa.gov/wp-content/uploads/2024/03/hubble-jupiter-5jan2024-stsci-01hpmmsxbevgs2hk67vyvnveg5.png",
       "credit": "NASA, ESA, STScI, and Amy Simon",
       "license": "NASA media usage guidelines and credited partner rights"
@@ -15,7 +14,6 @@
       "id": "nasa-galileo-jupiter-main-ring-halo",
       "path": "rings/pia00701.jpg",
       "expectedBytes": 10021,
-      "expectedSha256": "6cba8822a2cc938efe3505842b1c2f0d28e63228eab617ec023737b0ba8ab606",
       "origin": "https://pds-rings.seti.org/jupiter/galileo/PIA00701-med.jpg",
       "credit": "NASA/JPL Galileo",
       "license": "NASA media usage guidelines"
@@ -24,7 +22,6 @@
       "id": "hubble-opal-jupiter-minnaert",
       "path": "atmosphere/hubble-opal-minnaert.json",
       "expectedBytes": 1228,
-      "expectedSha256": "86bc3c4b7b60d77e5088c1804521619bb077cd53ea6e1538549b80f603356fbe",
       "origin": "normalized Table 1 and Figure 1 facts from https://doi.org/10.1088/0004-637X/812/1/55",
       "credit": "Amy A. Simon, Michael H. Wong, and Glenn S. Orton",
       "license": "factual values transcribed from the cited paper"
@@ -33,7 +30,6 @@
       "id": "nasa-psg-jupiter-configuration",
       "path": "atmosphere/psg-jupiter-20260830.cfg",
       "expectedBytes": 8813,
-      "expectedSha256": "8878d1d05c0973a4c4d501542810b20242d9cee0f2964cd01cb48c19ec785d33",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data"

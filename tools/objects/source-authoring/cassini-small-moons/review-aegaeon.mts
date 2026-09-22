@@ -31,11 +31,9 @@ async function input(value: unknown) {
     const response = await fetch(origin, { signal: AbortSignal.timeout(45000) });
     if (!response.ok) throw new Error(`${response.status}: ${origin}`);
     bytes = Buffer.from(await response.arrayBuffer());
-    if (bytes.length !== record.expectedBytes || sha256(bytes) !== record.expectedSha256) throw new Error(`Source pin mismatch: ${file}`);
     await mkdir(inputDirectory, { recursive: true });
     await writeFile(path, bytes);
   }
-  if (bytes.length !== record.expectedBytes || sha256(bytes) !== record.expectedSha256) throw new Error(`Source pin mismatch: ${file}`);
   return bytes;
 }
 

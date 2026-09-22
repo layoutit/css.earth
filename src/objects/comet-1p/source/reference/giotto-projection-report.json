@@ -5,14 +5,12 @@
     "width": 512,
     "height": 256,
     "bytes": 5391,
-    "sha256": "ea552e0b7b7973dca0b46eff9299fccf36f8e3acffe40a69c584000fc279f49a",
     "acceptedPixels": 4842,
     "missingPixels": 126230,
     "noData": 0
   },
   "validity": {
     "encoding": "one byte per equirectangular pixel; 1 observed, 0 missing",
-    "sha256": "816281ded6c5ad23a5daf851dc14b6dc12cfd58d2b5b4d70d856f4fe98292673",
     "bytes": 131072
   },
   "coverage": {

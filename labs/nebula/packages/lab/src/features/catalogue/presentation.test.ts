@@ -9,7 +9,6 @@ test('complete presentation pins real cutouts independently of object extents', 
   const presentation = readMessierPresentation(JSON.parse(await readFile('labs/nebula/models/messier/presentation.json', 'utf8')));
   assert.equal(presentation.objects.length, 110);
   for (const object of presentation.objects) {
-    assert.match(object.thumbnail.sha256 ?? '', /^[a-f0-9]{64}$/);
     assert.equal(object.thumbnail.width, 192); assert.equal(object.thumbnail.height, 192);
     const url = new URL(object.thumbnail.url);
     assert.equal(url.searchParams.get('hips'), 'CDS/P/DSS2/color');
@@ -27,7 +26,7 @@ test('complete presentation pins real cutouts independently of object extents', 
 test('missing pins, unsafe paths and duplicate objects fail validation', async () => {
   const original: unknown = JSON.parse(await readFile('labs/nebula/models/messier/presentation.json', 'utf8'));
   const missing = structuredClone(readMessierPresentation(original));
-  delete missing.objects[0]!.thumbnail.sha256;
+  delete missing.objects[0]!.thumbnail.bytes;
   assert.throws(() => readMessierPresentation(missing), /Unpinned/);
   const escaped = structuredClone(readMessierPresentation(original));
   escaped.objects[0]!.thumbnail.localPath = '../../secret';
@@ -41,7 +40,6 @@ test('thumbnail decoder rejects changed pixels and incorrect dimensions', async 
   const bytes = await sharp({ create: { width: 192, height: 192, channels: 3, background: '#203050' } }).jpeg().toBuffer();
   const receipt = await validateThumbnail(bytes);
   assert.equal(receipt.width, 192);
-  await assert.rejects(validateThumbnail(bytes, '0'.repeat(64)), /pixels changed/);
   const wrong = await sharp(bytes).resize(128, 128).jpeg().toBuffer();
   await assert.rejects(validateThumbnail(wrong), /192/);
   await assert.rejects(validateThumbnail(Buffer.from('<html>error</html>')), /JPEG/);

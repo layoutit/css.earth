@@ -4,8 +4,6 @@
     {
       "id": "stooke-mosaic",
       "path": "observations/deimos_cyl_viking_mro.jpg",
-      "expectedBytes": 4948381,
-      "expectedSha256": "90ff4ac7f23ece9255774cf72f9ed9ca5be861d9f2aa136977fc2d460141ad6d",
       "origin": "https://sbnarchive.psi.edu/pds3/multi_mission/MULTI_SA_MULTI_6_STOOKEMAPS_V3_0/document/m2deimos/deimos_cyl_viking_mro.jpg",
       "catalog": "https://sbn.psi.edu/pds/resource/stookemaps.html",
       "credit": "Philip Stooke; NASA/JPL; USGS/PDS",
@@ -67,8 +65,6 @@
     {
       "id": "ernst-2023-shape",
       "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.obj.zip",
-      "expectedBytes": 3530934,
-      "expectedSha256": "1572a49fa5dbe08eaf6f340ecd5c92f0cfcc41ceaae4c232b6a5d30bde53a68b",
       "origin": "https://sbmt.jhuapl.edu/shared-files/files/deimos_g_083m_spc_obj_0000n00000_v002.obj.zip",
       "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
       "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
@@ -105,8 +101,6 @@
     {
       "id": "ernst-2023-facet-support",
       "path": "shape/deimos_g_083m_spc_obj_0000n00000_v002.csv.zip",
-      "expectedBytes": 26366556,
-      "expectedSha256": "ddb6fdcca05fab3ce471999ded12b0f532d28274ad983e261d85e5d1f8a4c4f1",
       "origin": "https://sbmt.jhuapl.edu/shared-files/files/deimos_g_083m_spc_obj_0000n00000_v002.csv.zip",
       "catalog": "https://doi.org/10.1186/s40623-023-01814-7",
       "credit": "Carolyn Ernst and colleagues; JHU/APL Small Body Mapping Tool",
@@ -135,8 +129,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

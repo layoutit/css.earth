@@ -41,8 +41,9 @@ export async function surveyDeliveries(root:string,targets:readonly string[],out
       const catalogue=[{id:requireString(descriptor.id),name:requireString(catalog.name),aliases:[]}];
       const sources=await loadSourceProducts(root,target);
       for(const source of shuffled(sources.filter(s=>s.kind==='cube'||s.kind==='image').sort((a,b)=>a.id.localeCompare(b.id)),`${seed}:${target}`)){
-        if(source.files.reduce((s,f)=>s+f.bytes,0)>maxBytes)continue;
-        if((await Promise.all(source.files.map(f=>access(resolve(root,f.path)).then(()=>true,()=>false)))).every(Boolean)){selected=source;break;}
+        const sizes=await Promise.all(source.files.map(f=>stat(resolve(root,f.path)).then(s=>s.size,()=>-1)));
+        if(sizes.some(size=>size<0)||sizes.reduce((s,size)=>s+size,0)>maxBytes)continue;
+        selected=source;break;
       }
       if(!selected){results.push({target,state:'blocked',reason:'No locally available supported source product within the explicit size budget.',discoveredSources:sources.length});continue;}
       const product=selected;

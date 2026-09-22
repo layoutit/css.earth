@@ -18,6 +18,5 @@
   "missingPixels": 468179,
   "coordinatesVerified": "Every latitude and longitude cell matches the published axes exactly.",
   "sampling": "Nearest published coordinate; finite positive wavelengths only; no gap fill.",
-  "output": "diviner-cf-2021-georeferenced.tif",
-  "sha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632"
+  "output": "diviner-cf-2021-georeferenced.tif"
 }

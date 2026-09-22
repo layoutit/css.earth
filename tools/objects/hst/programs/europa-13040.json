@@ -53,32 +53,27 @@
         {
           "name": "obzp01010_asn.fits",
           "uri": "mast:HST/product/obzp01010_asn.fits",
-          "bytes": 11520,
-          "sha256": "2d9709f87fc42c581dc00b31d7c0f30f11b7f690775893231da219ecb7fe284d"
+          "bytes": 11520
         },
         {
           "name": "obzp01010_jit.fits",
           "uri": "mast:HST/product/obzp01010_jit.fits",
-          "bytes": 46080,
-          "sha256": "cedae8f76a1a1e07ae1aa07ede73252fb33cd5ade43b82db9cfaec79915ecc93"
+          "bytes": 46080
         },
         {
           "name": "obzp01010_raw.fits",
           "uri": "mast:HST/product/obzp01010_raw.fits",
-          "bytes": 16819200,
-          "sha256": "880a2cc182e43d46760b718f6c7dfcbd7bf1382d3fe4c5167c6fb063a57b6423"
+          "bytes": 16819200
         },
         {
           "name": "obzp01010_spt.fits",
           "uri": "mast:HST/product/obzp01010_spt.fits",
-          "bytes": 69120,
-          "sha256": "fc73a95eba01fd32dcc52fe33979ba3353c7fc46b52ec574e0209234deb3764a"
+          "bytes": 69120
         },
         {
           "name": "obzp01010_wav.fits",
           "uri": "mast:HST/product/obzp01010_wav.fits",
-          "bytes": 4262400,
-          "sha256": "bb86b80c9627f80bbd96eb9f35193f17953159c30663740386bef44fc2bd3237"
+          "bytes": 4262400
         }
       ],
       "products": [

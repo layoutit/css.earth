@@ -4,8 +4,6 @@
     {
       "id": "usgs-dawn-fc-global-140m",
       "path": "ceres-fc-global.png",
-      "expectedBytes": 9750062,
-      "expectedSha256": "44de5317d0989d3e1b05feaf970c21c36f51b193c0972dc19bb678ecd8e89c7c",
       "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv?map=/maps/asteroid_belt/ceres_simp_cyl.map&SERVICE=WMS&VERSION=1.1.1&REQUEST=GetMap&LAYERS=Ceres_FC_global&STYLES=&SRS=EPSG:4326&BBOX=0,-90,360,90&WIDTH=4096&HEIGHT=2048&FORMAT=image/png",
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Public scientific imagery with attribution; see NOTICE.md",
@@ -60,8 +58,6 @@
     {
       "id": "nasa-dawn-fc-pia19977",
       "path": "PIA19977.jpg",
-      "expectedBytes": 1033656,
-      "expectedSha256": "e974d7e46e9feff4f6910ada38eeffc8ae65b057d576c4bd9d12d710c323a116",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/i/a/1/PIA19977.jpg?crop=faces%2Cfocalpoint&fit=clip&h=1538&w=3078",
       "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
       "license": "Public scientific imagery with attribution; see NOTICE.md",
@@ -116,8 +112,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -143,8 +137,6 @@
     {
       "id": "dawn-elevation",
       "path": "science/ceres-hamo-dtm.tif",
-      "expectedBytes": 466647217,
-      "expectedSha256": "81da73151b4353c03d7ca18fa85972d1cb9c8530b3c5496df9ade7cb75af1915",
       "origin": "https://asc-pds-services.s3.us-west-2.amazonaws.com/mosaic/Ceres_Dawn_FC_HAMO_DTM_DLR_Global_60ppd_Oct2016.tif",
       "credit": "DLR / Dawn Team / USGS",
       "license": "Public NASA PDS / USGS scientific data with attribution; see NOTICE.md",
@@ -423,8 +415,6 @@
     {
       "id": "dawn-vir-ceres-bi-depth-img",
       "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.IMG",
-      "expectedBytes": 22429736,
-      "expectedSha256": "8a080640b296808d87a897827adfc4cae8de08adf0a21b3e9738bd983765d70a",
       "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.IMG",
       "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
@@ -507,8 +497,6 @@
     {
       "id": "ceres-vir-bd31-img",
       "path": "science/vir-reduction/ceres-vir-bd31.IMG.gz",
-      "expectedBytes": 36834007,
-      "expectedSha256": "6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b",
       "origin": "https://earth-assets.lowpoly.cc/source-assets/6c911bbace4ea77ce85cfe2e11fbdbca94f3b8f08a3d44e15a63a0617966797b/ceres-vir-bd31.IMG.gz",
       "credit": "Dawn VIR team (De Sanctis et al.), NASA PDS Small Bodies Node calibrated IR spectra DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0; reduced by cssEarth contributors",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",

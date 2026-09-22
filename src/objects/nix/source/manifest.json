@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -31,8 +29,6 @@
     {
       "id": "porter-nix-shape",
       "path": "shape/nix_nrf1d3_hipoly.stl.gz",
-      "expectedBytes": 4586869,
-      "expectedSha256": "331a11972b5d1f55fd901d0cfd358aee49e77070d7bf606729a51ba95be20428",
       "origin": "https://ndownloader.figshare.com/files/24176543",
       "catalog": "https://doi.org/10.6084/m9.figshare.12779948.v1",
       "credit": "Simon Porter (2021); NASA New Horizons Project",
@@ -113,8 +109,6 @@
     {
       "id": "lorri-best",
       "path": "observations/lor_0299174134_0x636_sci.fit",
-      "expectedBytes": 10529280,
-      "expectedSha256": "78f83c9887e252cfddbf4232002659d44cb0b1763df7fd1629a429cc9844fa1c",
       "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029917/lor_0299174134_0x636_sci.fit",
       "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
       "license": "NASA PDS scientific archive; retain original attribution and notices.",
@@ -179,8 +173,6 @@
     {
       "id": "lorri-holdout",
       "path": "observations/lor_0299174108_0x636_sci.fit",
-      "expectedBytes": 10529280,
-      "expectedSha256": "5cbc2617099350e724dc6448c6b4f2d771584c4dbd28f121a91e89eca92c8188",
       "origin": "https://pdssbn.astro.umd.edu/holdings/nh-p-lorri-3-pluto-v3.0/data/20150714_029917/lor_0299174108_0x636_sci.fit",
       "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
       "license": "NASA PDS scientific archive; retain original attribution and notices.",
@@ -299,8 +291,6 @@
     {
       "id": "lorri-interior-validation",
       "path": "observations/lor_0299167039_0x630_sci.fit",
-      "expectedBytes": 10529280,
-      "expectedSha256": "1bfd0717f88d865097cf9591e61e04a44e8926595eb535f28078a67a9eaa9353",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/NHxxLO_xxxx/NHPELO_2001/data/20150714_029916/lor_0299167039_0x630_sci.fit",
       "credit": "NASA / Johns Hopkins University Applied Physics Laboratory / Southwest Research Institute; New Horizons team",
       "license": "NASA PDS scientific archive; retain original attribution and notices.",

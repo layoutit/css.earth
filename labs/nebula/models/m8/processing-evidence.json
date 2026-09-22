@@ -3,7 +3,6 @@
   "subjectId": "m8",
   "date": "2026-09-13",
   "resultId": "5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8",
-  "resultSha256": "737065e4bd2dd3d3a0539fa77c8b38e9236c767eed4adb0aa49f23bfe75bde80",
   "checks": {
     "compilerResultHashes": "pass",
     "sameGeometryAcrossLenses": true,
@@ -34,8 +33,7 @@
       ],
       "pixels": 10716000,
       "changedPixels": 1926911,
-      "maximumReconstructionErrorCodeValues": 0,
-      "receiptSha256": "bd1b106ccbdceaeef0ec6721ff8d8b87cf98b7b321bad9215c583d23802c19e2"
+      "maximumReconstructionErrorCodeValues": 0
     },
     {
       "id": "eso-vista",
@@ -45,8 +43,7 @@
       ],
       "pixels": 8808000,
       "changedPixels": 2846228,
-      "maximumReconstructionErrorCodeValues": 0,
-      "receiptSha256": "c69daa4507be94aab77adec0dc1166a8e68b8566a65c09591c1c52ac848bb622"
+      "maximumReconstructionErrorCodeValues": 0
     },
     {
       "id": "spitzer-mid-infrared",
@@ -56,8 +53,7 @@
       ],
       "pixels": 2489669,
       "changedPixels": 582289,
-      "maximumReconstructionErrorCodeValues": 0,
-      "receiptSha256": "c0a61fcd97b09bc73e69ecb7cf6f0071fd0732ee700e4a340cf12e4d6b352cce"
+      "maximumReconstructionErrorCodeValues": 0
     }
   ],
   "registration": [
@@ -116,8 +112,7 @@
     "paperGuidedComponents": 3,
     "authoredComponents": 441,
     "method": {
-      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/method.json",
-      "sha256": "79dcc3bf9d9a0738711a5313050f5bb37938eadb9dc0b2f392c1e14eb53348d4"
+      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/method.json"
     },
     "interpretation": "Local topology is paper-guided; all numeric depth and thickness values remain authored."
   },
@@ -166,8 +161,7 @@
     "errors": [],
     "posts": [],
     "receipt": {
-      "path": "output/m8-reconstruction/browser-final/result.json",
-      "sha256": "685097a88182b3c43ffa5373ff32c451c645b77d7bdf6cae634cc9161879419a"
+      "path": "output/m8-reconstruction/browser-final/result.json"
     },
     "viewport": {
       "width": 1600,
@@ -182,68 +176,52 @@
     ],
     "screenshots": [
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-earth.png",
-        "sha256": "8fbf5a3abb900d1f0a56329f09ba783e25c5259f82102c3db63be0d2ccb9e728"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-earth.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-north-side.png",
-        "sha256": "261cbcc68208c1435f19cb9a53d13c19ce8c5b5af58f9b144e5d811b9826c7df"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-north-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-oblique.png",
-        "sha256": "d4d48a84748226760c7f6223cd1e58e934bcd12d85c5cc78e17f9c699167d6c7"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-oblique.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-west-side.png",
-        "sha256": "a8b97cbfa2484954660a5c393bd2113e17a60eb1dd85eb5dbc708aa8aa967863"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-optical-west-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-earth.png",
-        "sha256": "542991defa26e2d7f968cfa903f3f9199b58ed0b7bf94dfa0ce46424a21a8b09"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-earth.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-north-side.png",
-        "sha256": "c0e76ab1784e4235f6ca674f81d88306351474ca508e580234523c5ce5dc1c88"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-north-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-oblique.png",
-        "sha256": "4286b4a79135a1805396856c27131c9e13a15d6909565e61ad3c3e51fc5d101c"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-oblique.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-west-side.png",
-        "sha256": "0b56371c95cbc2b53e72abfa038b3af8a92cfb9e4d0b16147b39240cfe41aff4"
+        "path": "output/m8-reconstruction/browser-final/m8-eso-vista-west-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-neutral-north-side.png",
-        "sha256": "6d88f7ff157b8a5828dce3ff6d590c782fd0dae61e842769e0a14022b7cc58a7"
+        "path": "output/m8-reconstruction/browser-final/m8-neutral-north-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-neutral-oblique.png",
-        "sha256": "3634f929c899e673b1dc0f63ea29783847a41c9ed514f4aeb94ca06d5452931f"
+        "path": "output/m8-reconstruction/browser-final/m8-neutral-oblique.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-neutral-west-side.png",
-        "sha256": "7b344c23bc941aa88857a2507c688953eadc019f56a7f1dc36e4380ab9befe03"
+        "path": "output/m8-reconstruction/browser-final/m8-neutral-west-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-original.png",
-        "sha256": "c51916ec1a1feddfca63dc09ad9673e8d89ed530c6ae4520e78101fecc1dcbb8"
+        "path": "output/m8-reconstruction/browser-final/m8-original.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-earth.png",
-        "sha256": "d052255dd1e25686eb387595876b3a5b711baeb7e6e9692e44cbd59638ec5e57"
+        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-earth.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-north-side.png",
-        "sha256": "4efa8dcb29c64db4a277db74f196c1a0612318725babd7844411260294715e8f"
+        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-north-side.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-oblique.png",
-        "sha256": "832ddf20946cddbbb39be008e3edd8a869eac25757c2a8c95db7fafcd7a00400"
+        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-oblique.png"
       },
       {
-        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-west-side.png",
-        "sha256": "b9d7b0aa295b09c070b1fa09e94c3286d3bd6cc41d979a377c5a984ce4612065"
+        "path": "output/m8-reconstruction/browser-final/m8-spitzer-mid-infrared-west-side.png"
       }
     ]
   },
@@ -261,12 +239,10 @@
     "subjectId": "m8",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1/result.json",
-      "sha256": "0c832146106dcd910a0b27557ff4c44dc8c6b85114f59fb8669de0917f03d5b6"
+      "path": ".local/nebula-lab/compiler/60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482/result.json",
-      "sha256": "bde05bd69f41be6c886e4d28f99ee486cfcfca4adb87dea134ad672816ca33a6"
+      "path": ".local/nebula-lab/compiler/4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482/result.json"
     },
     "previousResultId": "60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1",
     "currentResultId": "4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482",
@@ -293,58 +269,45 @@
         "missingSignalFraction": 0.07838674399705182,
         "excessSignalFraction": 0.09258007190553014
       },
-      "identicalAlphaSha256": "7a4e12f379f007325c3fef9f34d7bacb8c97935863365f04aeb9e303bf2b32d1",
       "identicalBankResources": 3464,
       "identicalBankResourceBytes": 13161734,
       "banks": [
         {
           "id": "neutral",
-          "resources": 866,
-          "resourceManifestSha256": "e75279486362a65af0430925e0db37a7581ca7b32ffae86bed3da1a7098c37c9"
+          "resources": 866
         },
         {
           "id": "eso-optical",
-          "resources": 866,
-          "resourceManifestSha256": "1bd17f4baa3c3a8df1749113167cae3df8cc2d4770bec5395e2785d956722c4b"
+          "resources": 866
         },
         {
           "id": "eso-vista",
-          "resources": 866,
-          "resourceManifestSha256": "52a4ac242a0cb2e19b219158fd03a3e46373bca3d41af0620b04c560b1c51124"
+          "resources": 866
         },
         {
           "id": "spitzer-mid-infrared",
-          "resources": 866,
-          "resourceManifestSha256": "bd345ae08acb15c850f5da9da23ddae056fa51042a165e3e2798427f29c1afb4"
+          "resources": 866
         }
       ],
       "sourcePanels": [
         {
-          "id": "eso-optical",
-          "originalSha256": "6020bf517190b43733e33e0104d0bd810c0e018e8932d51a85706891d6d72833",
-          "starlessSha256": "7fa76dd7c9166a20b96098975c0e737da6c6ccd0cd56278176bcd706b7ff9bde"
+          "id": "eso-optical"
         },
         {
-          "id": "eso-vista",
-          "originalSha256": "422dcad574b0f6d0ba1bda8415c64e374d9ded45b0bae550809018040d2a5431",
-          "starlessSha256": "c01d0414395fcd8e5bf0ebf32f8dae5dd480521e0702ac7fd2c72cdcec404851"
+          "id": "eso-vista"
         },
         {
-          "id": "spitzer-mid-infrared",
-          "originalSha256": "780a0f1e8d448788ab2f8fff20e56832f5a216eb0213049c66fe981417e5f245",
-          "starlessSha256": "40469ab00c4b7bebae63be386e69e43936e3106ed060a2603fb3b8404c5e442a"
+          "id": "spitzer-mid-infrared"
         }
       ]
     },
     "visualEvidenceReuse": "Prior front/oblique/side screenshots remain applicable to the model/material assessment because all bank texture bytes, geometry, stars, controls and source panels are identical. Their original result IDs and receipts are retained; this comparison is not a fresh browser interaction run.",
     "receipt": {
-      "path": "output/nebula-processing/m8-integration-replay.json",
-      "sha256": "957cf8be8f2aef46841e1ffe823752415b0007eff3ff18d4f631fe938c2a880b"
+      "path": "output/nebula-processing/m8-integration-replay.json"
     },
     "previousVisualEvidence": {
       "receipt": {
-        "path": "output/m8-reconstruction/browser-final/result.json",
-        "sha256": "685097a88182b3c43ffa5373ff32c451c645b77d7bdf6cae634cc9161879419a"
+        "path": "output/m8-reconstruction/browser-final/result.json"
       },
       "resultId": "60cf5ab024377e2de9e4e36e1416d4fb1481011339a1a8b65739d8ee28150bf1",
       "archiveNote": "Original browser receipt and every screenshot byte/hash remain unchanged in output/m8-reconstruction/browser-final/."
@@ -356,12 +319,10 @@
     "subjectId": "m8",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482/result.json",
-      "sha256": "bde05bd69f41be6c886e4d28f99ee486cfcfca4adb87dea134ad672816ca33a6"
+      "path": ".local/nebula-lab/compiler/4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810/result.json",
-      "sha256": "1d523cbebca18b82f56a586068a8893dc382d82fa9e83c9b60d7a33ae8556e95"
+      "path": ".local/nebula-lab/compiler/8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810/result.json"
     },
     "previousResultId": "4a4fb45ad70327ae842a07780ee3865b4548ddd136d7a36b0bbec60e2a0e4482",
     "currentResultId": "8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810",
@@ -412,53 +373,41 @@
         "missingSignalFraction": 0.07838674399705182,
         "excessSignalFraction": 0.09258007190553014
       },
-      "identicalAlphaSha256": "7a4e12f379f007325c3fef9f34d7bacb8c97935863365f04aeb9e303bf2b32d1",
       "identicalBankResources": 3464,
       "identicalBankResourceBytes": 13161734,
       "banks": [
         {
           "id": "neutral",
-          "resources": 866,
-          "resourceManifestSha256": "e75279486362a65af0430925e0db37a7581ca7b32ffae86bed3da1a7098c37c9"
+          "resources": 866
         },
         {
           "id": "eso-optical",
-          "resources": 866,
-          "resourceManifestSha256": "1bd17f4baa3c3a8df1749113167cae3df8cc2d4770bec5395e2785d956722c4b"
+          "resources": 866
         },
         {
           "id": "eso-vista",
-          "resources": 866,
-          "resourceManifestSha256": "52a4ac242a0cb2e19b219158fd03a3e46373bca3d41af0620b04c560b1c51124"
+          "resources": 866
         },
         {
           "id": "spitzer-mid-infrared",
-          "resources": 866,
-          "resourceManifestSha256": "bd345ae08acb15c850f5da9da23ddae056fa51042a165e3e2798427f29c1afb4"
+          "resources": 866
         }
       ],
       "sourcePanels": [
         {
-          "id": "eso-optical",
-          "originalSha256": "6020bf517190b43733e33e0104d0bd810c0e018e8932d51a85706891d6d72833",
-          "starlessSha256": "7fa76dd7c9166a20b96098975c0e737da6c6ccd0cd56278176bcd706b7ff9bde"
+          "id": "eso-optical"
         },
         {
-          "id": "eso-vista",
-          "originalSha256": "422dcad574b0f6d0ba1bda8415c64e374d9ded45b0bae550809018040d2a5431",
-          "starlessSha256": "c01d0414395fcd8e5bf0ebf32f8dae5dd480521e0702ac7fd2c72cdcec404851"
+          "id": "eso-vista"
         },
         {
-          "id": "spitzer-mid-infrared",
-          "originalSha256": "780a0f1e8d448788ab2f8fff20e56832f5a216eb0213049c66fe981417e5f245",
-          "starlessSha256": "40469ab00c4b7bebae63be386e69e43936e3106ed060a2603fb3b8404c5e442a"
+          "id": "spitzer-mid-infrared"
         }
       ]
     },
     "visualEvidenceReuse": "The prior cloud/material assessment remains applicable because every bank texture byte, field and geometry matches. Star selection/photometry changed and requires the fresh browser receipt; historical captures remain tied to their original IDs.",
     "receipt": {
-      "path": "output/nebula-processing/m8-star-selection-replay.json",
-      "sha256": "2497fd9e7faef8d327f4fa9e8613d50ef788407cd0aec5ae59e919fdcfe407cd"
+      "path": "output/nebula-processing/m8-star-selection-replay.json"
     },
     "freshBrowser": {
       "status": "passed",
@@ -576,73 +525,56 @@
       "errors": [],
       "posts": [],
       "receipt": {
-        "path": "output/nebula-processing/m8-stars-final-browser/result.json",
-        "sha256": "1def45709d94ce5f846046b9c1543f8dd54ca0ce194aed0cb7140f184803ca58"
+        "path": "output/nebula-processing/m8-stars-final-browser/result.json"
       },
       "screenshots": [
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-earth.png",
-          "sha256": "f9feec9f40f3df19fa9632b64ebeb2e12cf74b16e8fce929f16463807acef5d8"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-earth.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-north-side.png",
-          "sha256": "3d162f6f9264756407a7cae0d168fa0a2db13931729a9e2b9fac5ab123b3b516"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-oblique.png",
-          "sha256": "0a22f09934eef649dbcbc15cdeb88c720a805b077c8acf03b1bfb858d232b58e"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-west-side.png",
-          "sha256": "b47be74ded7840e0054a8de82b06387cd48b789cdcd632417f34ab7b9605fdad"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-optical-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-earth.png",
-          "sha256": "9d5b445977c76ad74d20ffec8bc99c8075c709cf26bf381cd5d39d8211892d17"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-earth.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-north-side.png",
-          "sha256": "25d69ec3cd36141e5f075f69d56d41148d05b1056df326ea4177a59b8de9f52f"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-oblique.png",
-          "sha256": "d5f2593ac79fd7e0b5ec435a439cb623c61e85bb483dc4ae85eebedb348a3853"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-west-side.png",
-          "sha256": "d59806cf5f80a17b8db0b3db8458feda8deee1453da6bf6dfa098b7b14bb0b46"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-eso-vista-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-neutral-north-side.png",
-          "sha256": "a2883f4a478d8376b41dac10cd452d9edf5955a5f5142fc3fc0a563de1840ebb"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-neutral-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-neutral-oblique.png",
-          "sha256": "ae2f0dd156a1e85abd7ef61a3684e154b2929b809323fa3019d93938f47a86fb"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-neutral-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-neutral-west-side.png",
-          "sha256": "8fd24ee9bf78b8fdd8f7a20cb222179b84c4dc22c171f7afb61a514c4e1848c2"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-neutral-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-original.png",
-          "sha256": "b20313ff4da72105e6be01999d4f1d2ac75446fefd458ec6ff13da16dc3bd1e8"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-original.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-earth.png",
-          "sha256": "7cf519f3ad3592235d00052810e57ac9626c1b7900babca3b4624881fbd626cb"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-earth.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-north-side.png",
-          "sha256": "6f6694e745dd4305e92c040285e62139152f215db18111df865158038dd28a89"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-oblique.png",
-          "sha256": "0fdcfd982e9b9c68c81ddf3473fb4e74551f9268026df1fafc91207a2f8cedf5"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-west-side.png",
-          "sha256": "3991ec769b1c31c2c200121758caecffd77ccee0940a94d1ed9f6efade4581e1"
+          "path": "output/nebula-processing/m8-stars-final-browser/m8-spitzer-mid-infrared-west-side.png"
         }
       ]
     },
@@ -654,12 +586,10 @@
     "subjectId": "m8",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810/result.json",
-      "sha256": "1d523cbebca18b82f56a586068a8893dc382d82fa9e83c9b60d7a33ae8556e95"
+      "path": ".local/nebula-lab/compiler/8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/result.json",
-      "sha256": "737065e4bd2dd3d3a0539fa77c8b38e9236c767eed4adb0aa49f23bfe75bde80"
+      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/result.json"
     },
     "previousResultId": "8bfeaaf302d2d79b3026b294bdc1ec7ec513c447e148593103afc247a3ea4810",
     "currentResultId": "5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8",
@@ -740,53 +670,41 @@
         "missingSignalFraction": 0.07838674399705182,
         "excessSignalFraction": 0.09258007190553014
       },
-      "identicalAlphaSha256": "7a4e12f379f007325c3fef9f34d7bacb8c97935863365f04aeb9e303bf2b32d1",
       "identicalBankResources": 3464,
       "identicalBankResourceBytes": 13161734,
       "banks": [
         {
           "id": "neutral",
-          "resources": 866,
-          "resourceManifestSha256": "e75279486362a65af0430925e0db37a7581ca7b32ffae86bed3da1a7098c37c9"
+          "resources": 866
         },
         {
           "id": "eso-optical",
-          "resources": 866,
-          "resourceManifestSha256": "1bd17f4baa3c3a8df1749113167cae3df8cc2d4770bec5395e2785d956722c4b"
+          "resources": 866
         },
         {
           "id": "eso-vista",
-          "resources": 866,
-          "resourceManifestSha256": "52a4ac242a0cb2e19b219158fd03a3e46373bca3d41af0620b04c560b1c51124"
+          "resources": 866
         },
         {
           "id": "spitzer-mid-infrared",
-          "resources": 866,
-          "resourceManifestSha256": "bd345ae08acb15c850f5da9da23ddae056fa51042a165e3e2798427f29c1afb4"
+          "resources": 866
         }
       ],
       "sourcePanels": [
         {
-          "id": "eso-optical",
-          "originalSha256": "6020bf517190b43733e33e0104d0bd810c0e018e8932d51a85706891d6d72833",
-          "starlessSha256": "7fa76dd7c9166a20b96098975c0e737da6c6ccd0cd56278176bcd706b7ff9bde"
+          "id": "eso-optical"
         },
         {
-          "id": "eso-vista",
-          "originalSha256": "422dcad574b0f6d0ba1bda8415c64e374d9ded45b0bae550809018040d2a5431",
-          "starlessSha256": "c01d0414395fcd8e5bf0ebf32f8dae5dd480521e0702ac7fd2c72cdcec404851"
+          "id": "eso-vista"
         },
         {
-          "id": "spitzer-mid-infrared",
-          "originalSha256": "780a0f1e8d448788ab2f8fff20e56832f5a216eb0213049c66fe981417e5f245",
-          "starlessSha256": "40469ab00c4b7bebae63be386e69e43936e3106ed060a2603fb3b8404c5e442a"
+          "id": "spitzer-mid-infrared"
         }
       ]
     },
     "visualEvidenceReuse": "The prior cloud/material assessment remains applicable because every bank texture byte, field and geometry matches. Star selection/photometry changed and requires the fresh browser receipt; historical captures remain tied to their original IDs.",
     "receipt": {
-      "path": "output/nebula-processing/m8-star-union-replay.json",
-      "sha256": "83e2e3105062e1c2546fb9aee803371d73eb29f929b8b67632ad62cd4ece3a8f"
+      "path": "output/nebula-processing/m8-star-union-replay.json"
     },
     "freshBrowser": {
       "status": "passed",
@@ -933,79 +851,61 @@
       "errors": [],
       "posts": [],
       "receipt": {
-        "path": "output/nebula-processing/m8-stars-union-browser/result.json",
-        "sha256": "f95a8a463a0aa15dae7270c32a07fa18077a8e5502d7f2ecf67ca73e17b63a9f"
+        "path": "output/nebula-processing/m8-stars-union-browser/result.json"
       },
       "screenshots": [
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-earth.png",
-          "sha256": "c4823e33675c0e9774989be4ecbe9717f082adf0b8c53223356319d085d2140b"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-earth.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-north-side.png",
-          "sha256": "34ebd5b7db08e024bb85cb3b2aad6ddbe3cdeab5f7070d7ad19c674fad210d8b"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-oblique.png",
-          "sha256": "c6e0d21ea34d252996800488190ebd549879ad26ebdbcd8daac4416d66359516"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-west-side.png",
-          "sha256": "e20fd884c005b6b6d96db6a6cfdc02409fca5f8010264130ff8f24c11cbcc864"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-optical-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-earth.png",
-          "sha256": "b007d52fd40851937e901af52848ddab0f3af0b7abb7adb84a1dfe4129741547"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-earth.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-north-side.png",
-          "sha256": "a6cea9b614dc2bdbe8fbc730ee81580e842ca29e57a63075a16c69d79da44f88"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-oblique.png",
-          "sha256": "c02dfd7db1eaa973ee085880d6fa8661acd74b082eb00705aa174cb7981f8701"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-west-side.png",
-          "sha256": "32ba4bc73beda0f9550b6c84dd997b32b857d008bc8dfd420c257dcb896e3c10"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-eso-vista-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-neutral-north-side.png",
-          "sha256": "fec610cfa625a08a83e3cf68bdf8c915b55458bc4bb036e4651a215860f1216f"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-neutral-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-neutral-oblique.png",
-          "sha256": "6d0962d70cf7cc6b1bae0317717244f1175bc9955091af09491f9ec5bf363eee"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-neutral-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-neutral-west-side.png",
-          "sha256": "b10842c4cc138a68f9d82d699a884c1cde2a802bf6dd1f70c9ad8655c00e8d38"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-neutral-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-original.png",
-          "sha256": "847b01ded94b178d82b616cfd5b7e6cb7d58749f760585918c32a4d744a678b2"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-original.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-earth.png",
-          "sha256": "1ac5c76f12df6778eba1d0a5ed70b0bd7a77e6a1c049ea5e25627ef7698c1427"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-earth.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-north-side.png",
-          "sha256": "c0ab968666104b7a4b5beaa279e9264218e48fad3d68eb80ba72ca3f40044a91"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-oblique.png",
-          "sha256": "3e01358570e517800b541e5e12a0a1818c178e7a6c09a84d0826a08119439d12"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-west-side.png",
-          "sha256": "9086b4903cca4cb060235d4c38bd70143f6a212583cbbc85071eb1afc66294f0"
+          "path": "output/nebula-processing/m8-stars-union-browser/m8-spitzer-mid-infrared-west-side.png"
         }
       ]
     },
     "method": {
-      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/method.json",
-      "sha256": "79dcc3bf9d9a0738711a5313050f5bb37938eadb9dc0b2f392c1e14eb53348d4"
+      "path": ".local/nebula-lab/compiler/5b63a20679f9e62a9070850362c7542c2b87e35aff94e86c191cd1aa1b8985b8/method.json"
     },
     "sourceCoreDiagnostic": {
       "boundsArcsec": {
@@ -1029,69 +929,54 @@
       "top100VistaCoreWithoutSelectedStarWithin3Arcsec": 17,
       "nativeCrops": [
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-optical-original-native.png",
-          "sha256": "14b8c446ba5c6244bb360aab640d12595c69b3b3ad22464d9f0edcfbc409e355"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-optical-original-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-optical-residual-native.png",
-          "sha256": "cc1b627c2565c9a28c1b0979af3690f39d18fbe3c167ca6d05f6d7545badef91"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-optical-residual-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-vista-original-native.png",
-          "sha256": "1f85dfe74d25a9a2273da666d604a03eec95dce3a33bf561b894be71bdc3354c"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-vista-original-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-vista-residual-native.png",
-          "sha256": "8cb331faf25884589fca2c0a1bc953947dcf133d060b272b1e6f9f14d6b3db29"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank0-eso-vista-residual-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-optical-original-native.png",
-          "sha256": "4c894e8a212d0dddad1a5b9e0e3a0a8c659c738d34af11e8c1ba8761f616d394"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-optical-original-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-optical-residual-native.png",
-          "sha256": "a2e26f4e9801d5c153c709ee043eb3049a1b1657d2fdf6f6c7c1d6eb850b6a3f"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-optical-residual-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-vista-original-native.png",
-          "sha256": "43afd026c4ee0c8df2f3488a94d9e0a8a03a8008c14d35b91296e46f1a98680b"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-vista-original-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-vista-residual-native.png",
-          "sha256": "d23d81303076e5eaf285ab52fa4874a09a1d5ce7a87c7cb01465c6205cefc72b"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank1-eso-vista-residual-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-optical-original-native.png",
-          "sha256": "eff54130af221169adfa146bf45ee5072ff593f79982495d70278b62f3400347"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-optical-original-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-optical-residual-native.png",
-          "sha256": "bea4a93cee409a0bc2c2378709a46e213c7dba905b81a3c2cb43c5f6bbb98dfc"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-optical-residual-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-vista-original-native.png",
-          "sha256": "524c93c510a3e0e2a6be89167f0e7e0577de3d5f9586c31cc39ab5ac3b3a9620"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-vista-original-native.png"
         },
         {
-          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-vista-residual-native.png",
-          "sha256": "552f41c741f9cc872638d28f0f9e6d7c62ccfaaad82b104a6d0f7f0e5861e3e3"
+          "path": "output/nebula-processing/m8-vista-union-coverage/vista-rank4-eso-vista-residual-native.png"
         }
       ],
       "receipt": {
-        "path": "output/nebula-processing/m8-vista-union-coverage/result.json",
-        "sha256": "7bfaf235ad1e718b63e9d6f3d21881f61c51db6fb965f6e73370517d857fdeca"
+        "path": "output/nebula-processing/m8-vista-union-coverage/result.json"
       },
       "previousReceipt": {
-        "path": "output/nebula-processing/m8-vista-star-coverage/result.json",
-        "sha256": "2ea90fd5a5f3a07e0bfff0032bcb70bfcfca45c9231b51abe40a749cfb96398f"
+        "path": "output/nebula-processing/m8-vista-star-coverage/result.json"
       },
       "previousUnrepresentedTop100": 90,
       "currentUnrepresentedTop100": 17
     },
     "localOpticalAudit": {
       "receipt": {
-        "path": "output/nebula-processing/m8-union-local.json",
-        "sha256": "b9e16456aac132029c0889284963b632218e7e294733da8da319d153bcb9b787"
+        "path": "output/nebula-processing/m8-union-local.json"
       },
       "interpretation": "Two earlier optical proof positions remain exact. Broad peak eso-optical-36962 loses the fixed budget after common aperture ownership; nearby measured VISTA maxima at 6.23/8.10 arcsec remain outside the 3 arcsec matching tolerance. These are unresolved saturation/halo maxima, not qualified separate stellar identities."
     },

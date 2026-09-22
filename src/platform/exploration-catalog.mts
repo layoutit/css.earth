@@ -23,7 +23,7 @@ export interface MissionRecord {
   readonly status?: Cited<{ readonly value: 'active' | 'completed' | 'planned' | 'lost'; readonly asOf: string }>;
   readonly imageId?: string; readonly emblemId?: string;
 }
-export interface Agency { readonly name: string; readonly sourceUrl: string; readonly src?: string; readonly assetUrl?: string; readonly sha256?: string; readonly bytes?: number; }
+export interface Agency { readonly name: string; readonly sourceUrl: string; readonly src?: string; readonly assetUrl?: string; readonly bytes?: number; }
 export interface ExplorationCatalog {
   readonly schema: 'cssearth-facility-catalog@4';
   readonly facilities: readonly FacilityRecord[]; readonly missions: readonly MissionRecord[];
@@ -106,15 +106,15 @@ function dateBounds(value: string): readonly [number, number] {
 export function parseAgencies(input: unknown): Readonly<Record<string, Agency>> {
   return Object.freeze(Object.fromEntries(Object.entries(explorationRecord(input)).map(([id, raw]) => {
     if (!/^[A-Z][A-Z0-9-]*$/.test(id)) throw new TypeError('Invalid agency ID.');
-    const value = explorationRecord(raw, ['name', 'sourceUrl', 'src', 'assetUrl', 'sha256', 'bytes']);
+    const value = explorationRecord(raw, ['name', 'sourceUrl', 'src', 'assetUrl', 'bytes']);
     const base = { name: explorationText(value.name), sourceUrl: explorationUrl(value.sourceUrl) };
     if (value.src === undefined) {
-      if (['assetUrl', 'sha256', 'bytes'].some(key => value[key] !== undefined)) throw new TypeError('Incomplete agency logo.');
+      if (['assetUrl', 'bytes'].some(key => value[key] !== undefined)) throw new TypeError('Incomplete agency logo.');
       return [id, Object.freeze(base)];
     }
-    const src = explorationText(value.src), sha256 = explorationText(value.sha256), bytes = value.bytes;
-    if (!src.startsWith('/shell/agency-logos/') || !/^[a-f0-9]{64}$/.test(sha256) || typeof bytes !== 'number' || !Number.isSafeInteger(bytes) || bytes <= 0) throw new TypeError('Invalid agency logo identity.');
-    return [id, Object.freeze({ ...base, src, assetUrl: explorationUrl(value.assetUrl), sha256, bytes })];
+    const src = explorationText(value.src), bytes = value.bytes;
+    if (!src.startsWith('/shell/agency-logos/') || typeof bytes !== 'number' || !Number.isSafeInteger(bytes) || bytes <= 0) throw new TypeError('Invalid agency logo identity.');
+    return [id, Object.freeze({ ...base, src, assetUrl: explorationUrl(value.assetUrl), bytes })];
   })));
 }
 export function parseExplorationCatalog(input: unknown, agencies: Readonly<Record<string, Agency>>, sources: SourceResolver): ExplorationCatalog {

@@ -5,56 +5,48 @@
       "originalPath": "labs/nebula/models/lmc/particles/source/provenance.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/lmc/source/evidence/lmc/particles/source/provenance.json",
-      "sha256": "024cbd58275980986b15b6204e4fa9257d1e367271f88b918d4e61c7d4c4a7a8",
       "bytes": 2969
     },
     {
       "originalPath": "labs/nebula/models/lmc/stars/source/catalogue.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/lmc/source/evidence/lmc/stars/source/catalogue.json",
-      "sha256": "49c1eb40446ea782d34beba3f2ad85f6a2a042387c1821b04912d0f9d171f8b8",
       "bytes": 2527
     },
     {
       "originalPath": "labs/nebula/models/image-candidates.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/lmc/source/evidence/image-candidates.json",
-      "sha256": "a8b7554a9919b5fcd65290d6715572ff1a63d7ab41f263637a93b6f881766583",
       "bytes": 9320
     },
     {
       "originalPath": "labs/nebula/models/lmc/bake.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/lmc/source/evidence/lmc/bake.json",
-      "sha256": "82e44aebd5dc80e3f44c5258c51040f778a6cfa1f0c105b4b23ef8dcba6154b8",
       "bytes": 4432
     },
     {
       "originalPath": "labs/nebula/models/lmc/full-density/source/volume.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/lmc/source/compact/prior/volume.json",
-      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c",
       "bytes": 1370
     },
     {
       "originalPath": "labs/nebula/models/lmc/envelope/emission-envelope.json",
       "revision": "f8693d8cbc069895cfdac75af266e02714afb8e6",
       "path": "src/objects/lmc/source/evidence/lmc/envelope/emission-envelope.json",
-      "sha256": "a15784844e8188e01641280ef9fbef430afd93d56062644ef7d50fba58769e76",
       "bytes": 1291
     },
     {
       "originalPath": "labs/nebula/models/lmc/envelope/finite-lenses.json",
       "revision": "f8693d8cbc069895cfdac75af266e02714afb8e6",
       "path": "src/objects/lmc/source/evidence/lmc/envelope/finite-lenses.json",
-      "sha256": "e69f1eb5f9f3c9fe63c0a3ef703bbb875bb93e882f1fd25442b8d07718c8ff6e",
       "bytes": 8202
     },
     {
       "originalPath": "labs/nebula/models/lmc/candidates/source/alignment-report.json",
       "revision": "84957c50ea78f050f5493ea1f5b06d6f876616a9",
       "path": "src/objects/lmc/source/evidence/lmc/candidates/source/alignment-report.json",
-      "sha256": "c9da3dc239c365f10ec3527386b6081a4a74d1909b9d316395cfaa34d3471e98",
       "bytes": 8098
     }
   ]

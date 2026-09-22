@@ -4,8 +4,6 @@
     {
       "id": "hubble-opal-uranus-2025a-color",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
-      "expectedSha256": "854ba9d0b744c2d6e6b646d315847a3528b94b4f0b8970cc4285d71228e69c7b",
-      "expectedBytes": 787756,
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f657n-f547m-f467m_v1_globalmap.tif",
       "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
       "license": "CC BY 4.0",
@@ -39,8 +37,6 @@
     {
       "id": "hubble-opal-uranus-2025a-fq727n",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
-      "expectedSha256": "36ff34743fff69c09ec03b90b3d3e193d9b17e5dfdc41a3cacb2fae878d37c79",
-      "expectedBytes": 1045440,
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_fq727n_v1_globalmap.fits",
       "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
       "license": "CC BY 4.0",
@@ -73,8 +69,6 @@
     {
       "id": "hubble-opal-uranus-2025a-f845m",
       "path": "observations/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
-      "expectedSha256": "96afebec48e8da3b5b72a80909a0041ddd50255ce5101f51cab3ffda1e151ac8",
-      "expectedBytes": 1045440,
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle33/uranus/hlsp_opal_hst_wfc3-uvis_uranus-2025a_f845m_v1_globalmap.fits",
       "credit": "NASA, ESA, A.A. Simon, M.H. Wong",
       "license": "CC BY 4.0",
@@ -107,8 +101,6 @@
     {
       "id": "voyager-pia01361-uranus-moons",
       "path": "moons/pia01361-major-moons.jpg",
-      "expectedSha256": "146065b99164ce5554a24c7979e57ab12bffd5ebec2a8df0e9b3e43e739ab4e1",
-      "expectedBytes": 49428,
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/photojournal/pia/pia01/pia01361/PIA01361.tif?fit=clip&h=800&w=2537",
       "credit": "NASA/JPL, Voyager 2 Imaging Science Subsystem",
       "license": "NASA and JPL public media reuse policies",
@@ -131,8 +123,6 @@
     {
       "id": "nasa-pia18182-uranus-navigation-disc",
       "path": "navigation/uranus.jpg",
-      "expectedSha256": "3dcc83114f1a25caa1ae1a1436830fffaa15a3e429666dbf4c68bcf035e8932b",
-      "expectedBytes": 83489,
       "origin": "https://images-assets.nasa.gov/image/PIA18182/PIA18182~orig.jpg",
       "credit": "NASA/JPL-Caltech",
       "license": "NASA media usage guidelines",

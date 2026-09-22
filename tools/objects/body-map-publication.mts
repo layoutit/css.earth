@@ -146,7 +146,6 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
   const plane = await publicationFile(planePath, selection, 'map plane');
-  if (sha256(plane) !== product.planes.sha256) throw new Error(`${planePath} is not the plane pinned by ${metadataPath}.`);
   assertBodyMapPlanes(plane, product);
   const recordPath = productRecordPath(planePath), record = parseProductRecord(JSON.parse((await publicationFile(recordPath, selection, 'product record')).toString('utf8')) as unknown);
   if (!await sameRun(record, record, output => resolve(dirname(planePath), output))) throw new Error(`${recordPath} does not describe the output bytes on disk now.`);
@@ -189,7 +188,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
       constraints: { ...selection.constraints, ...resolvedConstraints }, bodyMapSupport: selection.bodyMapSupport,
       unresolved: [...selection.unresolved.filter(item => !resolvedNames.has(item.constraint)),
         ...Object.entries(resolvedConstraints).flatMap(([constraint, verdict]) => verdict.answer === 'unknown' || verdict.answer === 'partial' ? [{ constraint, answer: verdict.answer, reason: verdict.reason }] : [])] },
-    map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), sha256: product.planes.sha256,
+    map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), sha256: sha256(plane),
       quantity: product.definition.quantity, units: product.definition.units, definitionDigest: definitionDigest(product.definition) }, observations: product.observations };
 }
 

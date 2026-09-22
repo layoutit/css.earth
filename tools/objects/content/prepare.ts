@@ -57,7 +57,7 @@ export function prepareObjectContent(
   }
   // The prepared title carries what the page draws: the glyph path, its boxes and the font's name. The font pin and
   // the generator note stay in the object's title-mark source, whose bytes git records.
-  const { sourceSha256: _fontPin, sourceGenerator: _generator, xOrigin: _origin, ...titleSource } = source.title;
+  const { sourceGenerator: _generator, xOrigin: _origin, ...titleSource } = source.title;
   const title = {
     ...titleSource,
     ...createPreparedTitleLayout(source.title),

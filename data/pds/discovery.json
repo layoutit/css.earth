@@ -61,8 +61,7 @@
           "label": {
             "uri": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx",
             "bytes": 14320,
-            "md5": "967baeaa6766217d6fdc0324e103aee8",
-            "sha256": "939f23390f8d7f525821b822d06bf15d08ba49ee5bc472af6ed4c41c4f2a2a40"
+            "md5": "967baeaa6766217d6fdc0324e103aee8"
           },
           "units": "dimensionless relative values, no longer strictly I/F",
           "use": "Archive-derived, body-registered multiband map. Suitable as a pinned telescope product; wavelength bands and map sampling come from its PDS4 label."
@@ -128,8 +127,7 @@
           "label": {
             "uri": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/color/cube_h_color_best.lblx",
             "bytes": 16471,
-            "md5": "3e0f8b5c3bb6ed66445fba1880e1f493",
-            "sha256": "73012f681bfb066effda3fd10bf111341169f119a80f6e0a61a653105e07e4d9"
+            "md5": "3e0f8b5c3bb6ed66445fba1880e1f493"
           },
           "units": "not stated by PDS label",
           "use": "Archive-derived four-filter detector images. Suitable as a pinned telescope product; the PDS4 label establishes each filter band but supplies no body-surface registration."

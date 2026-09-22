@@ -27,5 +27,4 @@ test('invalid photometric recipes and altered source pins fail before writing',a
  (c: unknown)=>fixtureRecord(c,'bank').frames=1,
  (c: unknown)=>fixtureRecord(c).shapePrecisionDigits=99
 ]){const invalid=structuredClone(config);change(invalid);assert.throws(()=>parsePhotometricDiscRecipe(invalid));}
- const directory=await mkdtemp(join(tmpdir(),'photometric-pin-failure-'));try{Object.assign(config.sources[0],{expectedSha256:'0'.repeat(64)});await assert.rejects(preparePhotometricDisc({sourceDirectory,publicDirectory:directory,config,write:true}),/pin mismatch/);assert.deepEqual(await readdir(directory),[]);}finally{await rm(directory,{recursive:true,force:true});}
 });

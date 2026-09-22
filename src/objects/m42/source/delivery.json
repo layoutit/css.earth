@@ -3,29 +3,23 @@
   "id": "m42",
   "method": "compiler",
   "request": {
-    "path": "src/objects/m42/source/request.json",
-    "sha256": "06fa668d847469d5c1e982be1e1a9e1da8fbc674f9d1a3b15249706010579f3b"
+    "path": "src/objects/m42/source/request.json"
   },
   "inputPins": [
     {
-      "path": "labs/nebula/models/m42/compiler.json",
-      "sha256": "5b3c572b7f5075d6f4bf53b646a476378533b53df0e7ee6b380a0c8ab6d6e573"
+      "path": "labs/nebula/models/m42/compiler.json"
     },
     {
-      "path": "labs/nebula/models/m42/observations.json",
-      "sha256": "be4195e2e45f37f977436584e9a94967d090d8a1c5f95328ae97730f71bb9df4"
+      "path": "labs/nebula/models/m42/observations.json"
     },
     {
-      "path": "labs/nebula/models/m42/observation-structures.json",
-      "sha256": "be81194675d0472bd2bbf6efee0e27e968fde0bc8dde6e6c551fc0824dd34fda"
+      "path": "labs/nebula/models/m42/observation-structures.json"
     },
     {
-      "path": "labs/nebula/models/m42/depth-model.json",
-      "sha256": "7133715515c356cca625531de979a626add41ac9d7441adfe8505a8ffe46ef88"
+      "path": "labs/nebula/models/m42/depth-model.json"
     },
     {
-      "path": "labs/nebula/models/m42/physical-evidence.json",
-      "sha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc"
+      "path": "labs/nebula/models/m42/physical-evidence.json"
     }
   ],
   "sky": {
@@ -43,12 +37,10 @@
   "framingRadiusUnits": 2400,
   "acceptedLabResult": "a5bdb41f1919160d14010649395451a4b89314ca291b1fa796454ecfb1d63887",
   "fieldStars": {
-    "path": "src/objects/m42/source/stellar-field.json",
-    "sha256": "32ee5f15a5b589caed768a568b67afd648dda116da31881f0ffcd47e7353a3fa"
+    "path": "src/objects/m42/source/stellar-field.json"
   },
   "compactInputs": {
-    "path": "src/objects/m42/source/bake-inputs.json.gz",
-    "sha256": "a7503f4884674b7db70d383ae529661e668d44111130d142a0414ca414ccf0f5"
+    "path": "src/objects/m42/source/bake-inputs.json.gz"
   },
   "compactMethod": "compiler"
 }

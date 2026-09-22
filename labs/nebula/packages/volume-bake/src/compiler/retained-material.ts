@@ -2,7 +2,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative } from 'node:path';
 import type { Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import { containedPath, sha256, verifiedBytes } from '../compact-inputs/density-grid.ts';
+import { containedPath, sha256, sourceBytes } from '../compact-inputs/density-grid.ts';
 import { readVolumeLayerPlan, readVolumeSlabInterval, validateVolumeLayerSlices, type VolumeSlices, type VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
 import { recolorCloudSlices } from '../slices/material.ts';
 import { verifyCompilerAlphaIdentity, type BakeCompilerOptions, type CompilerLensInput } from './bake.ts';
@@ -82,15 +82,15 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
       typeof lens.label !== 'string' || !lens.label.trim() || typeof lens.sampleMaterial !== 'function' ||
       typeof options.sampleEmission !== 'function') throw new TypeError('Retained compiler material requires a 3D material sampler and emission sampler.');
   const scene = readCompilerBakeResult(options.scene), sourceDirectory = dirname(containedPath(root, scene.neutral.path));
-  if (!neutralSlicesPin || !path(neutralSlicesPin.path) || !digest(neutralSlicesPin.sha256) ||
+  if (!neutralSlicesPin || !path(neutralSlicesPin.path) ||
       containedPath(root, neutralSlicesPin.path) !== containedPath(sourceDirectory, 'volume-slices.json'))
-    throw new TypeError('Retained compiler slices must be pinned beside the original neutral bank.');
+    throw new TypeError('Retained compiler slices must sit beside the original neutral bank.');
   const output = containedPath(root, outputDirectory);
   if (output === sourceDirectory || sourceDirectory.startsWith(output + '/') || output.startsWith(sourceDirectory + '/'))
     throw new TypeError('Retained compiler material output must be separate from the neutral bank.');
-  const neutral = backend.readVolume(JSON.parse((await verifiedBytes(root, scene.neutral)).toString('utf8')));
+  const neutral = backend.readVolume(JSON.parse((await sourceBytes(root, scene.neutral)).toString('utf8')));
   backend.assertBankIdentity(neutral, scene);
-  const slices = readSlices(JSON.parse((await verifiedBytes(root, neutralSlicesPin)).toString('utf8')), scene);
+  const slices = readSlices(JSON.parse((await sourceBytes(root, neutralSlicesPin)).toString('utf8')), scene);
   const compile = (bank: VolumeSlices) => backend.compileVolume({ id: `compiler-${scene.volumeId ?? scene.id}`,
     frame: scene.frame, slices: scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? compilerPreparedSlices(bank) : bank });
   backend.assertLensGeometry(neutral, compile(slices), scene, {});
@@ -119,6 +119,6 @@ export async function prepareRetainedMaterialBank<Volume>(options: RetainedMater
   await writeFile(containedPath(output, 'volume-slices.json'), JSON.stringify(painted.slices) + '\n');
   await writeFile(containedPath(output, 'volume.json'), bytes);
   const { positiveAlphaTexels, recoloredTexels, outsideImageTexels } = painted.coverage;
-  return { id: lens.id, label: lens.label, volume: { path: relative(root, containedPath(output, 'volume.json')), sha256: sha256(bytes) },
+  return { id: lens.id, label: lens.label, volume: { path: relative(root, containedPath(output, 'volume.json')) },
     coverage: { positiveAlphaTexels, recoloredTexels, outsideImageTexels } };
 }

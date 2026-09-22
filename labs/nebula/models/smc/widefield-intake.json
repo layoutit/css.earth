@@ -4,11 +4,10 @@
     {
       "id": "smc-horalek-wide",
       "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
-      "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
       "bytes": 7080917,
       "sourcePageUrl": "https://noirlab.edu/public/images/iotw2615a/",
       "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2615a.jpg",
-      "credit": "NOIRLab/NSF/AURA/P. Hor\u00e1lek (Institute of Physics in Opava)",
+      "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
       "license": "CC BY 4.0; full credit required",
       "status": "inspection-only",
       "note": "Matched stars through VISTA to SMASH. 32,120 matches; held-out p90 1.53 native VISTA pixels. Verified only within matched hull (50.5%); outer field extrapolated. Display-stretched optical photo, not calibrated surface brightness."
@@ -16,7 +15,6 @@
     {
       "id": "smc-irida-optical",
       "path": ".local/nebula-lab/smc-intake/irida-smc.jpg",
-      "sha256": "88bb3e8363abb63ac7ba10dc1cb9f07236f94731f0d15a124ea6230e5c31cc9e",
       "bytes": 7605887,
       "sourcePageUrl": "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic.htm",
       "url": "https://irida-observatory.org/Namibia-Tivoli/SMC_ASA_8_frames_mosaic/SMC_ASA_8_mosaic_4000px.jpg",
@@ -28,7 +26,6 @@
     {
       "id": "smc-magellanic-deep-context",
       "path": ".local/nebula-lab/smc-intake/potw1630a.tif",
-      "sha256": "3a047bc569df7ac5199536869875662af5af62513fc7a6dd80e7da199085ceae",
       "bytes": 14714190,
       "dimensions": [
         3599,

@@ -10,26 +10,22 @@
     {
       "path": "landmarks.json",
       "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
-      "bytes": 3503,
-      "sha256": "c2a22b9e5cbd60d5d8b0332c92d4e6b56d06a71f7292d733e47ae72e2960246a"
+      "bytes": 3503
     },
     {
       "path": "image-registration.json",
       "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
-      "bytes": 56879,
-      "sha256": "5308b6cbff25b419b9dc89cf8d22e0d3b620da513377863bc35b21b48c8f3c1c"
+      "bytes": 56879
     },
     {
       "path": "control-measurements.json",
       "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
-      "bytes": 56004,
-      "sha256": "9adf195d756bd5b95bb39be59f1cf5956e8795d554d8775b57dec68c46cd9635"
+      "bytes": 56004
     },
     {
       "path": "evidence/image-landmarks.json",
       "origin": "Project image-control measurements and native XYZ lookup; Britt et al. (2004), Figs. 1 and 4; NASA/MICAS/USGS",
-      "bytes": 80209,
-      "sha256": "872724f5243c30c4e64fc1df8e4e55f899440e60d8282ec6ea35f4b991e95ba3"
+      "bytes": 80209
     }
   ]
 }

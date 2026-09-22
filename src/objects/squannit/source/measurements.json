@@ -22,7 +22,6 @@
     "qualification": "Measured radar inverse model, not visible-light terrain; source resolution is finite.",
     "url": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
     "bytes": 67298,
-    "sha256": "3d65690a33c5bb2ef1a7b2f40c0a6faf26f40bd87b0f6bc27a7f801d4ec50256",
     "metersPerUnit": 1000,
     "unitEvidence": "Original author page describes same 1148-vertex, 2292-facet model; numerical extents agree with published km values.",
     "expectedVertices": 1148,
@@ -52,7 +51,6 @@
         "url": "https://arxiv.org/pdf/1912.06456v2",
         "retrieved": "2026-09-08",
         "bytes": 23170114,
-        "sha256": "ebdc8ffac56d7a1707b29ee9a1e9c363eb03edd58ac8fc399f24469db11cb3f3",
         "locator": "Table 4, PDF page 13; interpretation on PDF pages 14–15",
         "title": "Scheirich et al. (2021), accepted 4 January 2021",
         "selection": "System visible geometric albedo 0.162 ± 0.034 (1 sigma). This is not radar albedo or Bond albedo."

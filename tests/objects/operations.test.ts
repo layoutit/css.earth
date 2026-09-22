@@ -8,7 +8,7 @@ import {containedPath,parseSourceManifest,verifySources,publishPinnedSource,coll
 import type {SourceEntry,SourceManifest} from '../../tools/objects/operations.js';
 import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
 const sha=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex');
-const entry=(path:string,data:Uint8Array):SourceEntry=>({path,expectedBytes:data.length,expectedSha256:sha(data)});
+const entry=(path:string,_data:Uint8Array):SourceEntry=>({path});
 const temporary=async(work:(root:string)=>Promise<void>)=>{const root=await mkdtemp(join(tmpdir(),'object-operations-'));try{await work(root);}finally{await rm(root,{recursive:true,force:true});}};
 test('source verification rejects byte drift, undeclared files and escaping paths',()=>temporary(async root=>{
  const data=Buffer.from('pinned source'),source=entry('sample.dat',data),manifest:SourceManifest={schema:'cssearth-authoritative-sources@2',inputs:[{...source,id:'sample',origin:'https://example.org/sample',consumers:['raster']}],generatedIntermediates:[],documents:[]};

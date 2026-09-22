@@ -65,7 +65,7 @@ export async function exportCompactSymmetry(
       ) + "\n",
     );
   await writeFile(resolve(root, path), bytes);
-  return { path, sha256: sha(bytes) };
+  return { path };
 }
 export function replayCompactSymmetry(root: string, pin: CompilerPin, outputDirectory: string) {
   return replay(root, pin, outputDirectory, {

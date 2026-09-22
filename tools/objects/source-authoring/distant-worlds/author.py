@@ -17,7 +17,7 @@ def write(path, value):
 
 def pin(path):
     data = path.read_bytes()
-    return dict(expectedBytes=len(data), expectedSha256=hashlib.sha256(data).hexdigest())
+    return dict()
 
 def current(path, body):
     return json.loads((ROOT / 'src/objects' / body['id'] / path).read_text())
@@ -116,7 +116,6 @@ for body in INPUTS['bodies']:
             shutil.copyfile(cached,target)
         if not target.exists(): raise FileNotFoundError(target)
         actual=pin(target)
-        if ref.get('sha256') and actual['expectedSha256'] != ref['sha256']: raise ValueError(f'Changed reference: {target}')
         if not ref.get('retainOriginal'):
             operation = dict(kind='download',groups=['restore','refresh'],path='reference/'+ref['file'],url=ref['url'])
             acquisition['operations'] = [op for op in acquisition['operations'] if op.get('path') != operation['path']] + [operation]
@@ -141,6 +140,5 @@ for body in INPUTS['bodies']:
     write(source/'manifest.json',manifest)
     descriptor=current('object.json',body)
     descriptor['properties']['recipe']['shape']['radiusKm']=radius
-    descriptor['prepared']['sha256']='0'*64
     write(package/'object.json',descriptor)
     print(ident,'source-authored')

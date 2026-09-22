@@ -45,8 +45,6 @@
     {
       "id": "nasa-venus-navigation-disc",
       "path": "navigation/venus.webp",
-      "expectedSha256": "59ff56b81de18402302f1e397384bd1d7fecff906d04ef229a64462fe516f42a",
-      "expectedBytes": 210095,
       "origin": "https://science.nasa.gov/wp-content/uploads/2023/05/688-venus-1200-jpg.webp",
       "credit": "NASA/JPL-Caltech",
       "license": "NASA media usage guidelines",
@@ -92,8 +90,6 @@
     {
       "id": "venus-venera-9-surface-panorama",
       "path": "venera/venera9.gif",
-      "expectedSha256": "7e7f45f24fd4ad2a7e51a4452973100d57751baf73815bfd852180a1bfa04bbd",
-      "expectedBytes": 162270,
       "origin": "https://pds-geosciences.wustl.edu/venera/GIF/venera9.gif",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
@@ -121,8 +117,6 @@
     {
       "id": "venus-venera-10-surface-panorama",
       "path": "venera/venera10.gif",
-      "expectedSha256": "97260c6e3a4f7ad90a05ff57cb9d5afd00873dad6f6868052bdf59ca96a7ef43",
-      "expectedBytes": 148505,
       "origin": "https://pds-geosciences.wustl.edu/venera/GIF/venera10.gif",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
@@ -150,8 +144,6 @@
     {
       "id": "venus-venera-13-surface-panorama",
       "path": "venera/venera13.jpg",
-      "expectedSha256": "5ed388cc2265f36eb96a0d6732ea5bb1ac8511dbaf12fa7514afcc3b973e8fa8",
-      "expectedBytes": 129960,
       "origin": "https://pds-geosciences.wustl.edu/venera/JPEG/venera13.jpg",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
@@ -179,8 +171,6 @@
     {
       "id": "venus-venera-14-surface-panorama",
       "path": "venera/venera14.jpg",
-      "expectedSha256": "c62d9f21e49122414f9ca71f02c247a58581316e8b85fb7a805b4f186a31d00a",
-      "expectedBytes": 159981,
       "origin": "https://pds-geosciences.wustl.edu/venera/JPEG/venera14.jpg",
       "credit": "Vernadsky Institute and Moscow Power Institute; distributed by the NASA PDS Geosciences Node",
       "license": "Public-domain automatic-camera scientific record; see venera/RIGHTS.md",
@@ -208,8 +198,6 @@
     {
       "id": "openspace-venus-clouds",
       "path": "surface/venus-clouds.jpg",
-      "expectedSha256": "da7f68195e552020a888db1758bb7a87506718971c6c9a455189d7b17ceda321",
-      "expectedBytes": 66303,
       "origin": "https://liu-se.cdn.openspaceproject.com/files/solarsystem/planets/venus/textures/2/venus_clouds.jpg",
       "credit": "OpenSpace Team",
       "license": "MIT, see ../LICENSE.OPENSPACE-MIT",
@@ -236,8 +224,6 @@
     {
       "id": "usgs-nasa-magellan-synthetic-color-wms",
       "path": "surface/venus-magellan-color-wms.png",
-      "expectedSha256": "7c818deccd69e99f3e0ebc5030979bbeb50f8b19afbd8f31c97d968a9f591588",
-      "expectedBytes": 5399293,
       "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_color, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
       "credit": "USGS Astrogeology Science Center and NASA",
       "license": "Public domain",
@@ -275,8 +261,6 @@
     {
       "id": "usgs-nasa-magellan-colorized-topography-wms",
       "path": "surface/venus-magellan-topography-wms.png",
-      "expectedSha256": "3b25ddd02af9214a64aed694ececd44754c2c3174900d78bbae3856042117974",
-      "expectedBytes": 5477203,
       "origin": "https://planetarymaps.usgs.gov/cgi-bin/mapserv MAGELLAN_topography, EPSG:4326, -180,-90,180,90, 2048x1024 PNG",
       "credit": "USGS Astrogeology Science Center and NASA",
       "license": "Public domain",
@@ -314,8 +298,6 @@
     {
       "id": "jaxa-akatsuki-uvi-l3b-365",
       "path": "akatsuki/uvi_20230830_100446_365_l3b_v21.nc",
-      "expectedSha256": "224bc32a4a21a2a020225fcd9bf962d33c2c428e8f9b24cc7ae8ce789262f191",
-      "expectedBytes": 11946389,
       "origin": "https://data.darts.isas.jaxa.jp/pub/pds3/extras/vco_uvi_l3_v1.1/vcouvi_7011/data/l3b/netcdf/r0257/uvi_20230830_100446_365_l3b_v21.nc",
       "credit": "ISAS/JAXA DARTS and the Akatsuki UVI team",
       "license": "CC BY 4.0",

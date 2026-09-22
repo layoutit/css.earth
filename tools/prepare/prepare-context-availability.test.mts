@@ -39,7 +39,7 @@ for (const path of ['prepared/lenses.json', 'prepared/slice.webp', '../../../pub
     await writeFile(resolve(f.directory, path), 'tampered');
     const state = await inspectContextAvailability(root);
     assert.equal(state.helix.available, false); assert.equal(state.lmc.available, true);
-    await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /identity mismatch/i);
+    await assert.rejects(prepareContextAvailability({ projectRoot: root, strict: true }), /identity mismatch|not valid JSON/i);
   });
 }
 

@@ -96,15 +96,15 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
       const catalogue = await json(subject.density.overlays);
       const image = catalogue.overlays?.find((item: { id: string }) => item.id === request.imageId);
       if (!image) throw new TypeError('Unknown prepared image overlay.');
-      const original = { path: relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath)),
-        sha256: image.sha256, width: image.widthPx, height: image.heightPx };
+      const originalPath = relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath));
+      const original = { path: originalPath, sha256: digest(await readFile(await safePath(originalPath))), width: image.widthPx, height: image.heightPx };
       if (request.imageLayer && request.imageLayer !== 'original') {
         const layers = request.removalResultId
-          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!, image.sha256)).layers
+          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!, original.sha256)).layers
           : variantsForImage(parseOverlayVariants(await json(overlayVariantsPath)), image);
         const layer = layers.find(item => item.id === request.imageLayer);
         if (!layer) throw new TypeError('Unknown prepared image layer.');
-        return [{ path: layer.texturePath, sha256: layer.sha256, width: layer.widthPx, height: layer.heightPx,
+        return [{ path: layer.texturePath, sha256: digest(await readFile(await safePath(layer.texturePath))), width: layer.widthPx, height: layer.heightPx,
           layer: layer.id, ...(layer.id === 'diffuse' && (request.removalStrength ?? 100) !== 100 ? { original } : {}) }];
       }
       return [original];
@@ -113,7 +113,6 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
     if (descriptor.prepared?.format !== 'cssearth-density-volume@1') throw new TypeError('Density has no prepared resources.');
     const manifestPath = relative(root, resolve(root, subject.density.directory, descriptor.prepared.url));
     const bytes = await readFile(await safePath(manifestPath));
-    if (digest(bytes) !== descriptor.prepared.sha256) throw new TypeError('Density prepared manifest hash differs.');
     const manifest = parseLabModelJson(bytes.toString('utf8'));
     if (!Array.isArray(manifest.data?.resources) || !manifest.data.resources.length) throw new TypeError('Density resource bank is empty.');
     return manifest.data.resources.map((item: { path: string; sha256: string; width: number; height: number }) => ({
@@ -162,7 +161,6 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
   }
   async function prepareOne(source: SourceResource, request: TonePreparationRequest, held: string[]): Promise<ToneResource> {
     const path = await safePath(source.path), bytes = await readFile(path);
-    if (digest(bytes) !== source.sha256) throw new TypeError('Prepared texture hash differs.');
     if (!Number.isInteger(source.width) || !Number.isInteger(source.height) || source.width < 1 || source.height < 1) throw new TypeError('Invalid prepared texture dimensions.');
     const sourcePath = relative(root, path).split(sep).join('/');
     const strength = source.layer ? request.removalStrength ?? 100 : 100, removal = Boolean(source.layer && strength !== 100);

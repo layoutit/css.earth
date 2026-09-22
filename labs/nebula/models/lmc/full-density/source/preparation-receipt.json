@@ -3,8 +3,6 @@
   "id": "lmc-full-density",
   "source": {
     "gridPath": "density.ktx2",
-    "gridSha256": "874682f828f1143ada8d4013f1a80634019f83d6ff6e7d906e51b0a764929f60",
-    "decodedSha256": "532b70e38e034ad4a0b711c0fc54183fe78a73d14e714cf898125c8644599ce5",
     "bytes": 315857
   },
   "grid": {
@@ -52,7 +50,6 @@
     "nonzeroRgb": 0
   },
   "prepared": {
-    "sha256": "14acd24d03eeef036967de891318c7b990634cae9fd180095c1b3607d664ae84",
     "leaves": 144,
     "bytes": 65780
   }

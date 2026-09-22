@@ -3,7 +3,7 @@ import {bakePaintedField} from '@cssearth/volume-bake/slices/painted-field';
 import { isAbsolute } from 'node:path';
 import sharp from 'sharp';
 import type { DensityVolumeFrame } from '@cssearth/objects';
-import { verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { compileCssVolume } from '../../../adapters/preparation/css-volume.ts';
 import { validatePreparedCssVolume } from '../../../adapters/renderer/volume-validation.ts';
 import type { GeometryMap } from '../../../features/observations/models/geometry-model.ts';
@@ -35,8 +35,8 @@ export async function bakeShapeCloud(input: {
   const field = createShapeCloudField(settings, image.width, image.height);
   const sampling = shapeCloudSampling(quality, field.bounds);
   cancellation(options.signal);
-  const sourceBytes = await verifiedBytes(root, source);
-  const { data: rgb, info } = await sharp(sourceBytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
+  const imageBytes = await sourceBytes(root, source);
+  const { data: rgb, info } = await sharp(imageBytes).removeAlpha().toColourspace('srgb').raw().toBuffer({ resolveWithObject: true });
   if (info.width !== image.width || info.height !== image.height || info.channels !== 3)
     throw new TypeError('Shape cloud source must retain the complete registered working-image pixels.');
   const result: ShapeCloudResult = { schema: 'cssearth-shape-cloud-result@1', id, imageId: image.id,

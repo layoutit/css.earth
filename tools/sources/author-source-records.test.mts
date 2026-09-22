@@ -13,9 +13,9 @@ async function fixture() {
   await writeFile(join(root, 'src/sources/source-rock-shape.json'), JSON.stringify({ id: 'source-rock-shape', kind: 'model', identityLevel: 'work', title: 'Rock · shape', identifiers: [], links: [{ role: 'landing', url: 'https://archive.example/rock.obj', label: 'Source' }],
     evidence: [{ path: 'src/objects/rock/source/manifest.json', locator: '/inputs/0' }], relations: [], statements: [] }, null, 2) + '\n');
   const manifest = { inputs: [
-    { id: 'shape', path: 'shape/rock.obj', expectedBytes: 1, expectedSha256: 'c'.repeat(64), sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'source-rock-shape', role: 'material', evidence: ENTRY_EVIDENCE }] } },
-    { id: 'frame-01', path: 'observations/frame-01.fits', expectedBytes: 2, expectedSha256: 'd'.repeat(64), origin: 'https://archive.example/frame-01.fits', productId: 'urn:x:frame-01::1.0', credit: 'Agency/Team', license: 'Public data; retain the citation.' },
-    { id: 'frame-01-label', path: 'observations/frame-01.xml', expectedBytes: 3, expectedSha256: 'e'.repeat(64), origin: 'https://archive.example/frame-01.xml', productId: 'urn:x:frame-01::1.0' }],
+    { id: 'shape', path: 'shape/rock.obj', sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'source-rock-shape', role: 'material', evidence: ENTRY_EVIDENCE }] } },
+    { id: 'frame-01', path: 'observations/frame-01.fits', origin: 'https://archive.example/frame-01.fits', productId: 'urn:x:frame-01::1.0', credit: 'Agency/Team', license: 'Public data; retain the citation.' },
+    { id: 'frame-01-label', path: 'observations/frame-01.xml', origin: 'https://archive.example/frame-01.xml', productId: 'urn:x:frame-01::1.0' }],
     generatedIntermediates: [], documents: [] };
   await writeFile(join(root, 'src/objects/rock/source/manifest.json'), JSON.stringify(manifest, null, 2) + '\n');
   return root;
@@ -47,7 +47,7 @@ test('a second pass changes nothing, and an input without an origin is refused',
     assert.deepEqual(await authorSourceRecords({ root, objectId: 'rock' }), { bindings: [], records: [] }, 'existing bindings and records are never rewritten');
     assert.equal(await readFile(manifestPath, 'utf8'), before);
     const current = JSON.parse(before);
-    current.inputs.push({ id: 'orphan', path: 'x/orphan.bin', expectedBytes: 1, expectedSha256: 'a'.repeat(64) });
+    current.inputs.push({ id: 'orphan', path: 'x/orphan.bin' });
     await writeFile(manifestPath, JSON.stringify(current, null, 2) + '\n');
     await assert.rejects(authorSourceRecords({ root, objectId: 'rock' }), /orphan has no origin URL/);
   } finally { await rm(root, { recursive: true, force: true }); }
@@ -57,7 +57,7 @@ test('a document that cites a missing catalogue record is refused', async () => 
   const root = await fixture();
   try {
     const manifestPath = join(root, 'src/objects/rock/source/manifest.json'), manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
-    manifest.documents.push({ path: 'photometry/model.json', expectedBytes: 1, expectedSha256: 'a'.repeat(64),
+    manifest.documents.push({ path: 'photometry/model.json',
       sourceBinding: { kind: 'catalogued', references: [{ catalogueId: 'doi-10-1000-rock', role: 'method', evidence: 'Table 2 prints the parameters.', locator: 'Table 2' }] } });
     await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
     const record = { id: 'doi-10-1000-rock', kind: 'publication', identityLevel: 'work', title: 'Rock photometry',

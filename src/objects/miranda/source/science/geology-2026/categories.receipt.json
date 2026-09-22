@@ -2,235 +2,189 @@
   "schema": "cssearth-geologic-conversion-receipt@1",
   "sourceArchive": {
     "path": "science/geology-2026/Miranda map 1.gdb.zip",
-    "bytes": 224923,
-    "sha256": "ba6f803f8bc7ca2abbd96369390302953ecae405f94f69305ff2aeb071c196a7"
+    "bytes": 224923
   },
   "registration": {
     "path": "science/geology-2026/registration.json",
-    "bytes": 3367,
-    "sha256": "e43c52d5af339a805b9a3c0152b6a02fe73c492b25e93e56353e3b4fdc6380e3"
+    "bytes": 3367
   },
   "supportingInputs": [
     {
       "path": "science/geology-2026/Ce linework.lyrx",
-      "bytes": 11915,
-      "sha256": "faecf6ebeb9256b51201808974f0f162afa6186e649c62db588c8481ed60093a"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Cf Linework.lyrx",
-      "bytes": 11870,
-      "sha256": "ee8ad626da25f9cb7837a3aa296171f2eea24b7bfcca73c30cb2e9b6b59db1f6"
+      "bytes": 11870
     },
     {
       "path": "science/geology-2026/Craters with dark streaks on walls.lyrx",
-      "bytes": 12407,
-      "sha256": "4ca458e13cd8bfb255c0d936b2e6781be95d941e10c86bf9a63e5195ac3dc77f"
+      "bytes": 12407
     },
     {
       "path": "science/geology-2026/MI linework.lyrx",
-      "bytes": 11915,
-      "sha256": "501dd424b1240134ad4e9ef7557902c7f21b8b1286789f93c325bf40becbf3c3"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Mantled Scarps .lyrx",
-      "bytes": 11891,
-      "sha256": "bf70ffe64f456197947722171576de56b57be1950bdea231ebe3660de3294549"
+      "bytes": 11891
     },
     {
       "path": "science/geology-2026/Mantled canyon rim.lyrx",
-      "bytes": 11945,
-      "sha256": "41b257626ef403012d70884c747b338b80c5804c11f6094d107c612e978ade8a"
+      "bytes": 11945
     },
     {
       "path": "science/geology-2026/Meranda geologic map.lyrx",
-      "bytes": 33058,
-      "sha256": "9cc601046b2fa83afc96614cf4e61cb24a4aa1ea5cfc784be014a5550a60a151"
+      "bytes": 33058
     },
     {
       "path": "science/geology-2026/Mh Linework.lyrx",
-      "bytes": 11915,
-      "sha256": "39dbf1c3881368fbb99876239665b66fe00de354638151be461e46b50a54ed40"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Miranda linework.lyrx",
-      "bytes": 11902,
-      "sha256": "bd15050d6d7d7faf485790aa5e69f037987fc789c3f1fd9c6b0ba5726a2b71f3"
+      "bytes": 11902
     },
     {
       "path": "science/geology-2026/Miranda surface.lyrx",
-      "bytes": 32166,
-      "sha256": "96887943327f7f59d5fa2c491f84d4aff9f6f3eb2df739ed6c6f5e50e66b8301"
+      "bytes": 32166
     },
     {
       "path": "science/geology-2026/Pd Linework.lyrx",
-      "bytes": 11903,
-      "sha256": "1aef7cf5ed1fc26b39500985e26714b8aafd3d72d17a1304e2a1cf02ff081cb2"
+      "bytes": 11903
     },
     {
       "path": "science/geology-2026/Pf Linework.lyrx",
-      "bytes": 11891,
-      "sha256": "9552c58c4d6a6ce79663df504c819f12c49f69e371d4bda2d57a377ff32730a6"
+      "bytes": 11891
     },
     {
       "path": "science/geology-2026/Pl Linework.lyrx",
-      "bytes": 11915,
-      "sha256": "d564e44bd987fbdae3ce9fa0ca78e4ad10ce6bd6f18e57d2531e0f2eb3c192fa"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Pm Linework.lyrx",
-      "bytes": 11902,
-      "sha256": "90af9f201255f483b4a112b3b6efb0cba78f64c35d21cd60442acfb8581d3eee"
+      "bytes": 11902
     },
     {
       "path": "science/geology-2026/Pn Linework.lyrx",
-      "bytes": 11868,
-      "sha256": "095aefe1c0c2e2211188efd6eee25df7d468fc812e74c1c5ebaf172e329c1bbe"
+      "bytes": 11868
     },
     {
       "path": "science/geology-2026/Prominent or Doubled Ridge.lyrx",
-      "bytes": 11954,
-      "sha256": "5c743ac28da7a18f96e0ba542264ceb45cea4543b8d9b0100c4640a7666af375"
+      "bytes": 11954
     },
     {
       "path": "science/geology-2026/Ps Linework.lyrx",
-      "bytes": 11868,
-      "sha256": "6b6dada51533dd768292617dcfe7001b99e43536b801d96c184f2a622efbe9f4"
+      "bytes": 11868
     },
     {
       "path": "science/geology-2026/Pv Linework.lyrx",
-      "bytes": 11901,
-      "sha256": "9b8e552d8c70320b402a6db755f4822baae3a9237de0dbeb90924a751a16b958"
+      "bytes": 11901
     },
     {
       "path": "science/geology-2026/Pw Linework.lyrx",
-      "bytes": 11915,
-      "sha256": "11cd42ad6c61ca8dfb0ecee2ed33aa13a2a75d3819db813b00edbbb0753fd3a5"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Rd Linework.lyrx",
-      "bytes": 12429,
-      "sha256": "08ffed47e1664a6537e4478193110ea4131f2493b77659b3c54403d4b3af3eb5"
+      "bytes": 12429
     },
     {
       "path": "science/geology-2026/Rf linework.lyrx",
-      "bytes": 11915,
-      "sha256": "d9eecfe664f0915fbba416ee9b01c7183f22c55b345347fcd7b953bfdd1474b0"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Rh Linework.lyrx",
-      "bytes": 11915,
-      "sha256": "6c746bd7f64359ff1eb844d8c7fe712bbbac55299738765a0f44480125b674b3"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Ri linework.lyrx",
-      "bytes": 11915,
-      "sha256": "618d719b4bf3015468f81086483f2dad683e0fd5780d1fe4d03052f506d226f7"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Rm Linework.lyrx",
-      "bytes": 11915,
-      "sha256": "7020d6fdf64f65c72fc8293da9a654ed0395be579edf42f42482d0a7e62d3e90"
+      "bytes": 11915
     },
     {
       "path": "science/geology-2026/Screenshot 2026-06-23 124237.png",
-      "bytes": 461407,
-      "sha256": "d4fcba5a94254fb103d98c2aa58155f313ebff92ff4fe0c551fc9bffc8647035"
+      "bytes": 461407
     },
     {
       "path": "science/geology-2026/chain craters.lyrx",
-      "bytes": 12814,
-      "sha256": "c36bf63cdb284fab83e403092241289b07dda6979222595143ec0d42c0a12624"
+      "bytes": 12814
     },
     {
       "path": "science/geology-2026/dark albedo canyon slope.lyrx",
-      "bytes": 12928,
-      "sha256": "0cc2a2116b30c01226ebb0729875ceb4b0c24dd1d529ae87f7daef6643f25efe"
+      "bytes": 12928
     },
     {
       "path": "science/geology-2026/dark material.lyrx",
-      "bytes": 12814,
-      "sha256": "1561206a2a806d35c7420b94a2d22bffa9f148abe260900b30a1906444186192"
+      "bytes": 12814
     },
     {
       "path": "science/geology-2026/flow material.lyrx",
-      "bytes": 12838,
-      "sha256": "4a7dfa6ef7978709db8dc63ce5ea5c7da1c8b6a7e19de5f554fc7dab562986b9"
+      "bytes": 12838
     },
     {
       "path": "science/geology-2026/fractured canyon floor.lyrx",
-      "bytes": 12866,
-      "sha256": "33599798ade470ef11fc6ac716a335f5897440461f4ee2b2347328e8a849d7e7"
+      "bytes": 12866
     },
     {
       "path": "science/geology-2026/fresh impact craters.lyrx",
-      "bytes": 12899,
-      "sha256": "b75af4ce09f5dfeb4fd74892611f082159c705a84f2620222b6730d26cb9cb4a"
+      "bytes": 12899
     },
     {
       "path": "science/geology-2026/heavily mantled cratered terrain.lyrx",
-      "bytes": 12921,
-      "sha256": "9e460834c973f33ceb425062d80bb096ff3566da860bfece8d1d85b0afb1ce50"
+      "bytes": 12921
     },
     {
       "path": "science/geology-2026/hummocky canyon floor.lyrx",
-      "bytes": 12858,
-      "sha256": "4c1f349225588b569b47bc3a1645b67a26fa0c8bbf590c5c1cedf1a8540f7423"
+      "bytes": 12858
     },
     {
       "path": "science/geology-2026/light albedo canyon.lyrx",
-      "bytes": 12848,
-      "sha256": "2017072aad215f108d8363d34bb627d46d8f83197b72fa18c2c8427714102f79"
+      "bytes": 12848
     },
     {
       "path": "science/geology-2026/light albedo material.lyrx",
-      "bytes": 12860,
-      "sha256": "2395e9920df7d563bfed69a7b64d109f95baeae8c806f5a798c6177572ebd8cb"
+      "bytes": 12860
     },
     {
       "path": "science/geology-2026/lightly mantled cratered terrain.lyrx",
-      "bytes": 12919,
-      "sha256": "33fe68f2f6af6ef9b81aab9921b9a96c28258b26965c085bdbd001508a1ddc61"
+      "bytes": 12919
     },
     {
       "path": "science/geology-2026/medium albedo canyon.lyrx",
-      "bytes": 12850,
-      "sha256": "2d913efed9e02bbd569c5e580dc1a9aad285ea997e3bb132315e7007ded5acfc"
+      "bytes": 12850
     },
     {
       "path": "science/geology-2026/medium albedo material.lyrx",
-      "bytes": 12936,
-      "sha256": "2716e9fddc93c0e056cd11568a330fabb57f369ba007e5a0bcd71075234ea6ff"
+      "bytes": 12936
     },
     {
       "path": "science/geology-2026/northern ridged plains.lyrx",
-      "bytes": 12863,
-      "sha256": "4acf482a7e6adf8bf24c551a148e2f3e774561bdaba378f5f8be065db333fc39"
+      "bytes": 12863
     },
     {
       "path": "science/geology-2026/preview-overlap-evidence.json",
-      "bytes": 3018,
-      "sha256": "189c60834771ecf35999fe7559eef38f8d254f128f243e8a627d3ee1343abc12"
+      "bytes": 3018
     },
     {
       "path": "science/geology-2026/southern ridged plains.lyrx",
-      "bytes": 12907,
-      "sha256": "7135c344357db01f2ba048d4ac1bb2c08ad06761887471d10cf314204d6d8386"
+      "bytes": 12907
     },
     {
       "path": "science/geology-2026/very dark albedo material.lyrx",
-      "bytes": 12924,
-      "sha256": "d119a8649f39031f4e1abfd23ddec95a236e50a906e422c9281780eaad5554f5"
+      "bytes": 12924
     },
     {
       "path": "science/geology-2026/wisp-like light material.lyrx",
-      "bytes": 12871,
-      "sha256": "aeff820b887abde6d983b04b1e4923bd9a59fb9ecb7c6cc5fe4c0786f79ff588"
+      "bytes": 12871
     }
   ],
   "output": {
     "path": "science/geology-2026/categories.tif",
-    "bytes": 35464,
-    "sha256": "29af000760d36c23883e88f4a5de39acbc45a9ed0c69a3e8747794b327a50fd8"
+    "bytes": 35464
   },
   "sourcePlanarPixelCounts": {
     "craterswithdarkstreaks": 6632,

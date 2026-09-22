@@ -5,56 +5,48 @@
       "originalPath": "labs/nebula/models/m45/physical-evidence.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/04-physical-evidence.json",
-      "sha256": "73ec8317dbd6e75b0e39184b2196011495a4ddf0e88571cc1719ec871d9385c4",
       "bytes": 15400
     },
     {
       "originalPath": "labs/nebula/models/m45/stellar-catalogue.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/06-stellar-catalogue.json",
-      "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
       "bytes": 1654998
     },
     {
       "originalPath": "labs/nebula/models/m45/compiler.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/01-compiler.json",
-      "sha256": "1800455c7fcb2d8915d9d6dff68aec5ec70c45335316ad0666b3e22878ead44e",
       "bytes": 1147
     },
     {
       "originalPath": "labs/nebula/models/m45/depth-model.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/02-depth-model.json",
-      "sha256": "81dcdc57f35def587304c69a3562cd5e052f44ecfe2b1b0543e2ef2ee8735305",
       "bytes": 3319
     },
     {
       "originalPath": "labs/nebula/models/m45/observation-structures.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/03-observation-structures.json",
-      "sha256": "86d89e8901a62ebad11ac6babb3e175a047bd3dbf5de66ac4fb6c223a6a711ee",
       "bytes": 423
     },
     {
       "originalPath": "labs/nebula/models/m45/processing-observations.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/05-processing-observations.json",
-      "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
       "bytes": 8832
     },
     {
       "originalPath": "labs/nebula/models/m45/optical-composite-observations.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/07-optical-composite-observations.json",
-      "sha256": "2fa3d672cb4c7d20aea35dc444393a4b9a0fe5b65d5a86fd8409b5a4332f6cfe",
       "bytes": 5257
     },
     {
       "originalPath": "labs/nebula/models/m45/optical-composite.json",
       "revision": "b899093cabe0d86177d7cc06a41e3337d8f0dc5c",
       "path": "src/objects/m45/source/bake-inputs/references/08-optical-composite.json",
-      "sha256": "2237970cf3a72f09ad43ea694a6cc40a4f8b0a692986f6d5b9eb20106ebb84fa",
       "bytes": 1320
     }
   ]

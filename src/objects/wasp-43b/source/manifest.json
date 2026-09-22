@@ -4,8 +4,6 @@
     {
       "id": "wasp-43b-challener-2024-deposit",
       "path": "science/challener-2024/wasp-43b.tar",
-      "expectedBytes": 1003520,
-      "expectedSha256": "a2dc0004e40fad053933156237d8aeb5defaeee68ef6981f667f503b96731138",
       "origin": "https://zenodo.org/api/records/12627524/files/wasp-43b.tar/content",
       "productId": "wasp-43b.tar",
       "version": "10.5281/zenodo.12627524",
@@ -119,8 +117,6 @@
     {
       "id": "wasp-43-bt-settl-cifist-4500",
       "path": "science/bt-settl-cifist/bt-settl-cifist-4500-4.5-0.0.xml",
-      "expectedBytes": 60684012,
-      "expectedSha256": "051cd254939481d11d4ac3b9277fb322cba82699968225dfd2051a7982e93323",
       "origin": "https://svo2.cab.inta-csic.es/theory/newov2/ssap.php?model=bt-settl-cifist&fid=269",
       "productId": "bt-settl-cifist fid 269",
       "version": "BT-Settl (CIFIST2011) through the SVO Theoretical Spectra service",
@@ -161,8 +157,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

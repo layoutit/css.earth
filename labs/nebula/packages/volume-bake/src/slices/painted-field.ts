@@ -6,7 +6,7 @@ import sharp from 'sharp';
 import type {Bounds3,Vector3} from '@cssearth/volume-core/contracts/volume-recipe';
 import type {DensityVolumeFrame} from '@cssearth/volume-core/contracts/volume-frame';
 import type {VolumeSlices} from '@cssearth/volume-core/contracts/volume-slices';
-import {containedPath,sha256,verifiedBytes} from '../compact-inputs/density-grid.ts';
+import {containedPath,sha256,sourceBytes} from '../compact-inputs/density-grid.ts';
 import {bakeMasterVolumeSlices} from './emission.ts';
 import {recolorCloudSlices} from './material.ts';
 import type {CompilerBakeBackend} from '../compiler/bake.ts';
@@ -35,7 +35,7 @@ async function inspectAlpha(directory: string, slices: VolumeSlices, options: Pa
   const transmission = projection ? new Float64Array(first.widthPx * first.heightPx).fill(1) : null;
   for (const quad of slices.quads) {
     cancellation(options.signal);
-    const input = await verifiedBytes(directory, { path: quad.texturePath, sha256: quad.sha256 });
+    const input = await sourceBytes(directory, { path: quad.texturePath });
     const { data, info } = await sharp(input).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
     if (info.width !== quad.widthPx || info.height !== quad.heightPx || info.channels !== 4)
       throw new Error('Shape cloud alpha inspection found changed slice dimensions.');

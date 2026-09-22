@@ -11,8 +11,7 @@ import { loadNativePhotograph, samplePhotographicTexel } from './native-photogra
 const radius = 180 / Math.PI;
 const projection = {type:'equirectangular', referenceRadiusMeters:radius, centerLongitude:180,
   longitudeDirection:'east-positive', latitudeType:'planetocentric'};
-const pin = (path:string, bytes:Buffer) => ({path, expectedBytes:bytes.length,
-  expectedSha256:createHash('sha256').update(bytes).digest('hex'), width:8, height:4, projection});
+const pin = (path:string, _bytes:Buffer) => ({path, width:8, height:4, projection});
 
 // Analytic byte grid, with Rhea's unusual 180–540 E extent. Values encode
 // source column and row, independently of the production coordinate code.

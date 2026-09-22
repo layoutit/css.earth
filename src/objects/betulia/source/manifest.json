@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 2695
       },
       "coverage": "The southern depression and overall irregular form are resolved unevenly. Fine surface material and photographic reflectance are not supplied by this model.",
-      "expectedBytes": 67284,
-      "expectedSha256": "9fcf177c2b17a52154b3bfb84948366300b54ed860927d4043f96c9045eb1a1a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1310882,
-      "expectedSha256": "9442b95d40d8e5526797fa57748d5f357a5f411940ee333f574cc17446efc3db",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

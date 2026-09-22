@@ -10,35 +10,28 @@
   },
   "pinnedFiles": [
     {
-      "path": "labs/nebula/src/validate-image-registration.py",
-      "sha256": "c618151fc317a19eba8308b24e28ee20ae1bcb6e1a2d3b107e80fcb5c8044e50"
+      "path": "labs/nebula/src/validate-image-registration.py"
     },
     {
-      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py",
-      "sha256": "dd8a7830d8bf1ea8611770eab27d1157f811b47883091712ffa08c6c8e54cf76"
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/check-wise-catalogue.py"
     },
     {
-      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/recipe.json",
-      "sha256": "0062dd19c0d5a102877262a4afc3a6bb492fc6ebe1722e297bf2f6736df25f0b"
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/recipe.json"
     },
     {
-      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/query.json",
-      "sha256": "27fce7a4d08d73abc62fa5e972a7acf995a7d68a24c095ff54954110b9f30fa1"
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/query.json"
     },
     {
-      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/protocol.json",
-      "sha256": "8f98d1b07d2aecf1356467dd17a77470cb566f3443be80748447cbc12c258ddb"
+      "path": "labs/nebula/models/lmc-candidates/source/wise-registration/protocol.json"
     }
   ],
   "inputs": [
     {
       "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-      "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
       "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg"
     },
     {
       "path": ".local/nebula-lab/image-candidates/wise-registration/catalogue-check/allwise-bright.csv",
-      "sha256": "57b77df8a37cb5cf9076f7b99c30c43674cea26ce44f48c02a74e360363f3e3d",
       "url": "https://irsa.ipac.caltech.edu/TAP/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+TOP+200000+designation%2Cra%2Cdec%2Cw1mpro%2Cw1snr%2Ccc_flags%2Cext_flg+FROM+allwise_p3as_psd+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C78.76%2C-69.19%2C17%29%29+AND+w1mpro+BETWEEN+8+AND+11+AND+w1snr%3E30+AND+ext_flg%3D0+AND+cc_flags+LIKE+%270%25%27&MAXREC=200000"
     }
   ],

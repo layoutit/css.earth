@@ -24,38 +24,31 @@
   "kernels": [
     {
       "path": "lsk/naif0012.tls",
-      "bytes": 5257,
-      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "bytes": 5257
     },
     {
       "path": "pck/pck00011.tpc",
-      "bytes": 131226,
-      "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "bytes": 131226
     },
     {
       "path": "sclk/JNO_SCLKSCET.00211.tsc",
-      "bytes": 42707,
-      "sha256": "8bbb70ddb8cd9d81d63834cab39f146ad485b048eb0bf454054d72b268b2642f"
+      "bytes": 42707
     },
     {
       "path": "fk/juno_v12.tf",
-      "bytes": 153074,
-      "sha256": "12a30da08609c1cd1b631b93910b4b6f4114380a761aafabbef077368860ef02"
+      "bytes": 153074
     },
     {
       "path": "ik/juno_junocam_v03.ti",
-      "bytes": 17535,
-      "sha256": "5dbbcefdf640829ebbb5430f6f9bc0b36481857b473459dc735954279708c7ab"
+      "bytes": 17535
     },
     {
       "path": "spk/spk_rec_220909_221019_221027.bsp",
-      "bytes": 2899968,
-      "sha256": "a3968a1bef92d61ab5787e1efb3c310591538cb555164c21998a47e68d705767"
+      "bytes": 2899968
     },
     {
       "path": "ck/juno_sc_rec_220925_221001_v01.bc",
-      "bytes": 38770688,
-      "sha256": "5f81d3eb2f19671c86a755609081dc2f585ddc68f06c6a8ca30b7b5f8c67dd81"
+      "bytes": 38770688
     }
   ],
   "images": [

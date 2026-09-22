@@ -6,7 +6,6 @@
   ],
   "mesh": {
     "path": "shape/tempel1_2012_plan.tab",
-    "sha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
     "grid": {
       "metersPerUnit": 1000,
       "expectedVertices": 16022,
@@ -14,8 +13,7 @@
     }
   },
   "solar": {
-    "path": "science/hrii/hriir_020601_2_0.tab",
-    "sha256": "8eab0a393b884c15567f3e8b634d4ec2c3e40658f006732c75c6d85aa6230d8a"
+    "path": "science/hrii/hriir_020601_2_0.tab"
   },
   "bodyToJ2000": [
     [
@@ -43,280 +41,240 @@
       "id": "hi05070405_9000036_001_r",
       "number": 1,
       "path": "science/hrii/hi05070405_9000036_001_r.fit",
-      "sha256": "28df49131bc824ea4803d97f0ee0135a4b3c95da9732cc0c733a3ee7173ba1e1",
       "startTime": "2005-07-04T05:31:57.004"
     },
     {
       "id": "hi05070405_9000036_002_r",
       "number": 2,
       "path": "science/hrii/hi05070405_9000036_002_r.fit",
-      "sha256": "9d4cd416bba953c98b04856caced1479e5bf9c5bab9d332fd7f6a4e51a25232a",
       "startTime": "2005-07-04T05:31:59.883"
     },
     {
       "id": "hi05070405_9000036_003_r",
       "number": 3,
       "path": "science/hrii/hi05070405_9000036_003_r.fit",
-      "sha256": "2a740848fcacf6bc951e4833ea4e9015370ec68003d6442ff86a5231bc161d60",
       "startTime": "2005-07-04T05:32:02.766"
     },
     {
       "id": "hi05070405_9000036_004_r",
       "number": 4,
       "path": "science/hrii/hi05070405_9000036_004_r.fit",
-      "sha256": "bb05ed63735f10a023f1e1bfdf92764105da4c20622481bd99334d719033ca81",
       "startTime": "2005-07-04T05:32:05.645"
     },
     {
       "id": "hi05070405_9000036_005_r",
       "number": 5,
       "path": "science/hrii/hi05070405_9000036_005_r.fit",
-      "sha256": "1443939a4a1f59a380a1c3d4e6ee15581447ca97f8de415671cf4bf0cadf733d",
       "startTime": "2005-07-04T05:32:08.528"
     },
     {
       "id": "hi05070405_9000036_006_r",
       "number": 6,
       "path": "science/hrii/hi05070405_9000036_006_r.fit",
-      "sha256": "643139d382cfc42cd6625683f1fd9184a0f6478ff4425605efc40b0e51a0907c",
       "startTime": "2005-07-04T05:32:11.406"
     },
     {
       "id": "hi05070405_9000036_007_r",
       "number": 7,
       "path": "science/hrii/hi05070405_9000036_007_r.fit",
-      "sha256": "59d633ffa95d2ff53f14c21512f3cdb5f9ee4601ffa4ce4544faf27c9ef42fa7",
       "startTime": "2005-07-04T05:32:14.289"
     },
     {
       "id": "hi05070405_9000036_008_r",
       "number": 8,
       "path": "science/hrii/hi05070405_9000036_008_r.fit",
-      "sha256": "a8c5ea9e198abd4042351a06b60e9aae8bd6cb2edb52144f5e4ead3e566e07f1",
       "startTime": "2005-07-04T05:32:17.168"
     },
     {
       "id": "hi05070405_9000036_009_r",
       "number": 9,
       "path": "science/hrii/hi05070405_9000036_009_r.fit",
-      "sha256": "0cb578453dc799c1c6e6acf392290d094e26d954c25ac08d77b92eff729f311d",
       "startTime": "2005-07-04T05:32:20.051"
     },
     {
       "id": "hi05070405_9000036_010_r",
       "number": 10,
       "path": "science/hrii/hi05070405_9000036_010_r.fit",
-      "sha256": "c07b33e824b95591701c38627c2f6b4c86308b38ab00fd88a992dd767b2f2818",
       "startTime": "2005-07-04T05:32:22.930"
     },
     {
       "id": "hi05070405_9000036_011_r",
       "number": 11,
       "path": "science/hrii/hi05070405_9000036_011_r.fit",
-      "sha256": "e5b315ac7ef057102639f4e5c4e3444ab1b1c55b62b8d2bd10295101a8c1457a",
       "startTime": "2005-07-04T05:32:25.813"
     },
     {
       "id": "hi05070405_9000036_012_r",
       "number": 12,
       "path": "science/hrii/hi05070405_9000036_012_r.fit",
-      "sha256": "1ca59eaa5ea58e425f79b4319d65108f949fa735085bb1f026bd495971435a62",
       "startTime": "2005-07-04T05:32:28.696"
     },
     {
       "id": "hi05070405_9000036_013_r",
       "number": 13,
       "path": "science/hrii/hi05070405_9000036_013_r.fit",
-      "sha256": "56fd379b566219f8df405ed4e59193df0f94c0d54052665c9d14dfe5b099cd15",
       "startTime": "2005-07-04T05:32:31.575"
     },
     {
       "id": "hi05070405_9000036_014_r",
       "number": 14,
       "path": "science/hrii/hi05070405_9000036_014_r.fit",
-      "sha256": "b7d4de67854e64d7adc5e1460038dbb9654276c5962619f7c5786a1b5afffef9",
       "startTime": "2005-07-04T05:32:34.457"
     },
     {
       "id": "hi05070405_9000036_015_r",
       "number": 15,
       "path": "science/hrii/hi05070405_9000036_015_r.fit",
-      "sha256": "bfddeddabec13ea47cd78c5a26fcf05d2732b8cd2b651f8803c6816aba3f0266",
       "startTime": "2005-07-04T05:32:37.336"
     },
     {
       "id": "hi05070405_9000036_016_r",
       "number": 16,
       "path": "science/hrii/hi05070405_9000036_016_r.fit",
-      "sha256": "4811101b70ee3014bb74e898f6bbf41b9479b8d193fbe81fa5bae324f93d34aa",
       "startTime": "2005-07-04T05:32:40.219"
     },
     {
       "id": "hi05070405_9000036_017_r",
       "number": 17,
       "path": "science/hrii/hi05070405_9000036_017_r.fit",
-      "sha256": "b411dec6bb4229d341adbc93a546afda1ba8bdc41adac73b9b7941a16b2cc96a",
       "startTime": "2005-07-04T05:32:43.098"
     },
     {
       "id": "hi05070405_9000036_018_r",
       "number": 18,
       "path": "science/hrii/hi05070405_9000036_018_r.fit",
-      "sha256": "7490ce73b2360f412307e2d623fe709f9969a39afb49dc948e8ea788903f9c60",
       "startTime": "2005-07-04T05:32:45.981"
     },
     {
       "id": "hi05070405_9000036_019_r",
       "number": 19,
       "path": "science/hrii/hi05070405_9000036_019_r.fit",
-      "sha256": "1abda541eecf93a2ec2e1622546050c19ed7999416c56b630532801e2dca2d59",
       "startTime": "2005-07-04T05:32:48.860"
     },
     {
       "id": "hi05070405_9000036_020_r",
       "number": 20,
       "path": "science/hrii/hi05070405_9000036_020_r.fit",
-      "sha256": "2052ba93a81c04aef722c6236cc1e051010eba08d5e8a56053a3e946c38f66d6",
       "startTime": "2005-07-04T05:32:51.743"
     },
     {
       "id": "hi05070405_9000036_021_r",
       "number": 21,
       "path": "science/hrii/hi05070405_9000036_021_r.fit",
-      "sha256": "e00d1421120d62d607b8dd82259a9c048679d167a1f82659e21cbd7a6d33c544",
       "startTime": "2005-07-04T05:32:54.622"
     },
     {
       "id": "hi05070405_9000036_022_r",
       "number": 22,
       "path": "science/hrii/hi05070405_9000036_022_r.fit",
-      "sha256": "09b50efcda07b41023b657cb245be6f257994ea500cac9cab959d472c075d981",
       "startTime": "2005-07-04T05:32:57.504"
     },
     {
       "id": "hi05070405_9000036_023_r",
       "number": 23,
       "path": "science/hrii/hi05070405_9000036_023_r.fit",
-      "sha256": "a1a784d89d26278bb1050b7de2202f237f2b4e078e24008e833ad266c6c91a55",
       "startTime": "2005-07-04T05:33:00.383"
     },
     {
       "id": "hi05070405_9000036_024_r",
       "number": 24,
       "path": "science/hrii/hi05070405_9000036_024_r.fit",
-      "sha256": "beaa0a2de1c31f1a2deec3373c2a87fc26f7e7d6280203b01ff93f1efc682dcd",
       "startTime": "2005-07-04T05:33:03.266"
     },
     {
       "id": "hi05070405_9000036_025_r",
       "number": 25,
       "path": "science/hrii/hi05070405_9000036_025_r.fit",
-      "sha256": "602e055ffd8976dc37952aae93b4b0b582a9f3fbfcf0507f73f9a1c87979626c",
       "startTime": "2005-07-04T05:33:06.145"
     },
     {
       "id": "hi05070405_9000036_026_r",
       "number": 26,
       "path": "science/hrii/hi05070405_9000036_026_r.fit",
-      "sha256": "8afa208030207aeae7f3f61bca0be7f47ae36a908ff3111ae989ff02c6e428f8",
       "startTime": "2005-07-04T05:33:09.028"
     },
     {
       "id": "hi05070405_9000036_027_r",
       "number": 27,
       "path": "science/hrii/hi05070405_9000036_027_r.fit",
-      "sha256": "966b459375ba4561e940e7ed18dea05ab457b06efb8019f975e6e6f6e83ece3b",
       "startTime": "2005-07-04T05:33:11.907"
     },
     {
       "id": "hi05070405_9000036_028_r",
       "number": 28,
       "path": "science/hrii/hi05070405_9000036_028_r.fit",
-      "sha256": "1c2e31d07bfbf88e313f1d6a534e533f697f18b55b4660afba2f72204280bf4f",
       "startTime": "2005-07-04T05:33:14.790"
     },
     {
       "id": "hi05070405_9000036_029_r",
       "number": 29,
       "path": "science/hrii/hi05070405_9000036_029_r.fit",
-      "sha256": "4bc3a97693304ddcc4b7edb9da833e02e39b21843e12b57f8adc617913cf4e07",
       "startTime": "2005-07-04T05:33:17.669"
     },
     {
       "id": "hi05070405_9000036_030_r",
       "number": 30,
       "path": "science/hrii/hi05070405_9000036_030_r.fit",
-      "sha256": "b86d4aac2b92c5804ebaebc5d90b3c6698894136d3b70c5fb5800a0f866cd19f",
       "startTime": "2005-07-04T05:33:20.551"
     },
     {
       "id": "hi05070405_9000036_031_r",
       "number": 31,
       "path": "science/hrii/hi05070405_9000036_031_r.fit",
-      "sha256": "02deb6c499e84700dd1e1c77c38feecfbbdfbd90a7e14f2f250eee8ab3646eef",
       "startTime": "2005-07-04T05:33:23.430"
     },
     {
       "id": "hi05070405_9000036_032_r",
       "number": 32,
       "path": "science/hrii/hi05070405_9000036_032_r.fit",
-      "sha256": "b7e21b1fd24bf926bef0e46616761a4bae27cac6a3c163bbdb5fa095d8be4bfe",
       "startTime": "2005-07-04T05:33:26.313"
     },
     {
       "id": "hi05070405_9000036_033_r",
       "number": 33,
       "path": "science/hrii/hi05070405_9000036_033_r.fit",
-      "sha256": "4c48e0f0bf1bff4e38d26680709c93a437594c386625c621d33dd81731238df3",
       "startTime": "2005-07-04T05:33:29.192"
     },
     {
       "id": "hi05070405_9000036_034_r",
       "number": 34,
       "path": "science/hrii/hi05070405_9000036_034_r.fit",
-      "sha256": "8167ec571fd6cf65d42198ec09983856488306ea2236ef9866f00118407718ac",
       "startTime": "2005-07-04T05:33:32.075"
     },
     {
       "id": "hi05070405_9000036_035_r",
       "number": 35,
       "path": "science/hrii/hi05070405_9000036_035_r.fit",
-      "sha256": "02497cceab09226946ce5dc745c88e3a7e4ee921014857cd773324f6921780b4",
       "startTime": "2005-07-04T05:33:34.954"
     },
     {
       "id": "hi05070405_9000036_036_r",
       "number": 36,
       "path": "science/hrii/hi05070405_9000036_036_r.fit",
-      "sha256": "cecbc26dc5486d5782e082368a21b03e19073a4df4151a680d0287639f3b5b4b",
       "startTime": "2005-07-04T05:33:37.837"
     },
     {
       "id": "hi05070405_9000036_037_r",
       "number": 37,
       "path": "science/hrii/hi05070405_9000036_037_r.fit",
-      "sha256": "2fac139ca71437fbcac991601f09bf5d2b872052a54370c63584c3a3de4a662b",
       "startTime": "2005-07-04T05:33:40.720"
     },
     {
       "id": "hi05070405_9000036_038_r",
       "number": 38,
       "path": "science/hrii/hi05070405_9000036_038_r.fit",
-      "sha256": "7cf38394e06daaf3f9697d3c5a40edbba6bb2620a9226e9f8f131e4d4dcfee1b",
       "startTime": "2005-07-04T05:33:43.599"
     },
     {
       "id": "hi05070405_9000036_039_r",
       "number": 39,
       "path": "science/hrii/hi05070405_9000036_039_r.fit",
-      "sha256": "2848cc8c90da78824dd3b366fb363c9a6e6117f95c2552fed19eed5105855910",
       "startTime": "2005-07-04T05:33:46.481"
     },
     {
       "id": "hi05070405_9000036_040_r",
       "number": 40,
       "path": "science/hrii/hi05070405_9000036_040_r.fit",
-      "sha256": "d9db939c0ef82072c5fffbceb4fa25a9f73c8e3a55e8f5108e26e4b1dc0ceedd",
       "startTime": "2005-07-04T05:33:49.360"
     }
   ],
@@ -387,10 +345,8 @@
   },
   "context": {
     "path": "science/hrii/hv05070405_9000844_001_r.fit",
-    "sha256": "62449ca95557872405544fae40cec5b7adc972dc1be27940e400b36b3588e109",
     "reference": {
-      "path": "photography/deep-impact/iv05070405_9000632_001_r.json",
-      "sha256": "2b145f846105a7b972360041c31a94d1f01fdb4e756520a88b8248c44fef4f51"
+      "path": "photography/deep-impact/iv05070405_9000632_001_r.json"
     },
     "offsetPixels": [
       -27.705813349455507,

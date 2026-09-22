@@ -56,13 +56,13 @@ export async function readPreparedReconstruction(root: string, resultId: string)
       result.subject?.id !== `reconstruction-${resultId}` || result.subject.directory !== directory)
     throw new TypeError('Saved reconstruction identity differs.');
   const descriptor = await json(root, `${directory}/object.json`);
-  if (descriptor.id !== result.subject.id || descriptor.type !== 'density-volume' || !token(descriptor.prepared?.sha256))
+  if (descriptor.id !== result.subject.id || descriptor.type !== 'density-volume' || typeof descriptor.prepared?.url !== 'string')
     throw new TypeError('Saved reconstruction descriptor differs.');
-  await pinned(root, `${directory}/${descriptor.prepared.url}`, descriptor.prepared.sha256);
+  await pinned(root, `${directory}/${descriptor.prepared.url}`);
   const provenancePin = descriptor.properties?.preparation;
-  if (!token(provenancePin?.sha256) || typeof provenancePin.source !== 'string')
+  if (typeof provenancePin?.source !== 'string')
     return { ...result, processing: reconstructionProcessingCapability(undefined) }; // Historical read-only results cannot gain a repaint capability.
-  const provenance = await json(root, `${directory}/${provenancePin.source}`, provenancePin.sha256);
+  const provenance = await json(root, `${directory}/${provenancePin.source}`);
   const processing = reconstructionProcessingCapability(provenance.method);
   if (result.finiteMaterial === undefined) return { ...result, processing };
   const finite = result.finiteMaterial;
@@ -203,13 +203,13 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       await pinned(root, nativePath, removal.artifactSha256[removal.applied.images.diffuse]);
       const cloudDirectory=subject.density!.directory,cloudPath=`${cloudDirectory}/object.json`;
       const cloudObject=await json(root,cloudPath),frame=cloudObject.properties.volume;
-      const cloudDescriptor={path:cloudPath,sha256:hash(await pinned(root,cloudPath))};
-      const densityRecipe={path:`${cloudDirectory}/${cloudObject.properties.preparation.source}`,sha256:cloudObject.properties.preparation.sha256};
-      await pinned(root,densityRecipe.path,densityRecipe.sha256);
-      const stars = subject.stars ? { path: subject.stars, sha256: hash(await pinned(root, subject.stars)) } : undefined;
+      await pinned(root,cloudPath);const cloudDescriptor={path:cloudPath};
+      const densityRecipe={path:`${cloudDirectory}/${cloudObject.properties.preparation.source}`};
+      await pinned(root,densityRecipe.path);
+      const stars = subject.stars ? { path: subject.stars } : undefined;
       const referenceId=subject.density!.reconstructionReferenceImageId;
       const referencePin=subject.density!.starAlignmentReference;
-      const coordinateReference=referencePin ? await json(root,referencePin.path,referencePin.sha256) : undefined;
+      const coordinateReference=referencePin ? await json(root,referencePin.path) : undefined;
       if(coordinateReference && coordinateReference.schema!=='cssearth-nebula-star-alignment@1')
         throw new TypeError('Invalid catalogue star alignment reference.');
       const referenceImage=coordinateReference??target.images.find((item:{id:string})=>item.id===referenceId);
@@ -234,8 +234,8 @@ export function createReconstructor(root: string, options: { runner?: Runner } =
       try {
         const work: ReconstructionWork = { schema: 'cssearth-nebula-reconstruction-work@1', id: `reconstruction-${resultId}`,
           imageId: image.id, name: image.label, outputDirectory: temporary, appearance: parseCloudAppearance(request.appearance),
-          source: { path: nativePath, sha256: removal.artifactSha256[removal.applied.images.diffuse], width: removal.nativeDimensions[0], height: removal.nativeDimensions[1] },
-          original: { path: image.path, sha256: image.sha256, removalResultId: request.removalResultId },
+          source: { path: nativePath, width: removal.nativeDimensions[0], height: removal.nativeDimensions[1] },
+          original: { path: image.path, removalResultId: request.removalResultId },
           overlay: { ...identity.overlay, placement: request.placement }, frame, stellarPrior: densityRecipe, stars, cloud,
           sourcePageUrl: image.sourcePageUrl, credit: image.credit };
         const finished = await run(work, signal, progress); signal.throwIfAborted();

@@ -4,7 +4,6 @@
     {
       "id": "itokawa",
       "sourcePath": "shape/ver128q.tab",
-      "sourceSha256": "e9d3a15129ec04b01064840a3425def21238e2fc818f127311b9d52fa52f5964",
       "origin": "Unmodified source triangle coordinates, metres. Whole-source independent NumPy plane/edge projection; inspect verify-source-surface.py.",
       "oldFirstRayHeight": 2.9540312441102685,
       "triangles": [
@@ -139,7 +138,6 @@
     {
       "id": "ryugu",
       "sourcePath": "shape/ryugu_shape_spc_200k_v20200323.obj.gz",
-      "sourceSha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "origin": "Unmodified source triangle coordinates, metres. Whole-source independent NumPy plane/edge projection; inspect verify-source-surface.py.",
       "oldFirstRayHeight": -32.94082159298455,
       "triangles": [
@@ -274,7 +272,6 @@
     {
       "id": "eros",
       "sourcePath": "shape/ver128q.tab",
-      "sourceSha256": "d0327a56eee5a923e81ad01286a32d3ee4e3e627db981059f982d57d2b06a458",
       "origin": "Unmodified source triangle coordinates, metres. Whole-source independent NumPy plane/edge projection; inspect verify-source-surface.py.",
       "oldFirstRayHeight": 4.914546338213157,
       "triangles": [
@@ -409,7 +406,6 @@
     {
       "id": "bennu",
       "sourcePath": "shape/g_00880mm_alt_ptm_0000n00000_v020.obj",
-      "sourceSha256": "815a7685113c9d77cd063e058b0da9cd9749dc07ad4bc54c04aace6ec28e1e7d",
       "origin": "Unmodified source triangle coordinates, metres. Whole-source independent NumPy plane/edge projection; inspect verify-source-surface.py.",
       "oldFirstRayHeight": -12.926213038949015,
       "triangles": [
@@ -587,7 +583,6 @@
     {
       "id": "toutatis",
       "sourcePath": "shape/4179toutatis2.tab",
-      "sourceSha256": "28c94e3c5c4fadab97c6f1fc78dbb3800a4248b86302681cf1c629e48df5f00a",
       "oldFirstRayHeight": 61.60656447048086,
       "triangles": [
         {
@@ -705,7 +700,6 @@
     {
       "id": "donaldjohanson",
       "sourcePath": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
-      "sourceSha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "oldFirstRayHeight": 542.5999039280537,
       "triangles": [
         {

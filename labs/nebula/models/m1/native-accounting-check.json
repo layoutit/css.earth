@@ -1,11 +1,9 @@
 {
   "schema": "cssearth-m1-native-accounting-check@1",
   "checkedAt": "2026-09-13",
-  "observationCatalogueSha256": "2e3863240f2f820eefed7ca3333d4fd9c844f8962e07873aa98abe4b645f9455",
   "checks": [
     {
       "id": "hubble-optical",
-      "sourceSha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
       "registration": "verified",
       "nativeRgbValues": 44791488,
       "maximumReconstructionErrorCodeValues": 0,
@@ -14,7 +12,6 @@
     },
     {
       "id": "webb-infrared",
-      "sourceSha256": "bb1b9a0023eb5424bb75a7c29e9c8a83a7e3c06601bb3019ab58c24beb02f8dd",
       "registration": "verified",
       "nativeRgbValues": 41796000,
       "maximumReconstructionErrorCodeValues": 0,
@@ -23,7 +20,6 @@
     },
     {
       "id": "webb-components",
-      "sourceSha256": "1ec85e2b0cf6a35d176af48a48e1f37c8922abadb60dc53866ee282855808a36",
       "registration": "verified",
       "nativeRgbValues": 22797306,
       "maximumReconstructionErrorCodeValues": 0,
@@ -32,7 +28,6 @@
     },
     {
       "id": "spitzer-infrared",
-      "sourceSha256": "0df6c12a08d63852a11e966495ad79660edd79978767072ffdf2552bceee75c8",
       "registration": "transferred",
       "nativeRgbValues": 83952300,
       "maximumReconstructionErrorCodeValues": 0,
@@ -41,7 +36,6 @@
     },
     {
       "id": "vla-radio",
-      "sourceSha256": "64eccbc054b905c11d1ebfd34cacc42a1dbb6a39ea48d67dd417875929cd451b",
       "registration": "transferred",
       "nativeRgbValues": 83952300,
       "maximumReconstructionErrorCodeValues": 0,
@@ -50,7 +44,6 @@
     },
     {
       "id": "chandra-xray",
-      "sourceSha256": "8647bce741a6eeb5c8595ec179cf75eaa0e43a026045057c1ce5f02362a19350",
       "registration": "transferred",
       "nativeRgbValues": 83952300,
       "maximumReconstructionErrorCodeValues": 0,

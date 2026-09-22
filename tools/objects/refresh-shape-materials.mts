@@ -62,11 +62,6 @@ export async function refreshShapeMaterialDescriptions(id: string) {
   }
   if (edited) {
     await pretty(contentPath, content);
-    const bytes = await readFile(contentPath), manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = await json(manifestPath);
-    for (const entry of records(manifest.documents)) if (entry.path === 'content/object.json') {
-      entry.expectedBytes = bytes.length; entry.expectedSha256 = sha256(bytes);
-    }
-    await pretty(manifestPath, manifest);
   }
   const readmePath = resolve(objectDirectory, 'README.md'), readme = await readFile(readmePath, 'utf8');
   // A body can also have photographed/scientific gaps. Only change sentences
@@ -115,7 +110,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     const alternate = alternativeForLens(config.geometry.radialTerrainAlternatives ?? [], view.id);
     const terrain = requireRecord(alternate ?? config.geometry.radialTerrain), radial = retainedShapeAtlas(scene, view.id);
     const sourceEntry = source.manifest.inputs.find(entry => entry.path === terrain.path && entry.consumers.includes(view.consumer));
-    if (!sourceEntry || requireRecord(old.source).sha256 !== sourceEntry.expectedSha256) throw new Error('Retained shape source binding changed.');
+    if (!sourceEntry) throw new Error('Retained shape source binding changed.');
     const { width, height } = config.raster, stem = `${id}-${view.id}`;
     const flat = sharp(shapeMaterialRaster(width, height), { raw: { width, height, channels: 3 } }).ensureAlpha();
     const surface: RadialMaterialSurface = { ...old, id: view.id,
@@ -131,8 +126,7 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
       const localSource = await access(resolve(sourceDirectory, requireString(terrain.path))).then(() => true, () => false);
       const lightingDirectory = !localSource && sourceRoot ? resolve(sourceRoot, 'src/objects', id, 'source') : sourceDirectory;
       const lightingSource = await createSourceManifest({ planetId: id, planetName: id, sourceRoot: lightingDirectory });
-      const reference = lightingSource.manifest.inputs.find(entry => entry.path === terrain.path);
-      if (reference?.expectedSha256 !== sourceEntry.expectedSha256) throw new Error('Source lighting mesh differs between checkouts.');
+      if (!lightingSource.manifest.inputs.some(entry => entry.path === terrain.path)) throw new Error('Source lighting mesh is not declared in that checkout.');
       grid = (await loadRadialTerrain({ config: { ...config, geometry: { ...config.geometry, radialTerrain: terrain } }, sourceDirectory: lightingDirectory, source: lightingSource }))?.grid;
     }
     await prepareRadialMaterials({ radial: { ...radial, grid }, surfaces: [surface],
@@ -175,7 +169,6 @@ export async function refreshShapeMaterials(id: string, sourceRoot?: string) {
     await mkdir(dirname(contextPath), { recursive: true });
     const stagedContext = resolve(stage, `context-${surface.id}.png`);
     await writeFile(stagedContext, png); await replaceAsset(stagedContext, contextPath);
-    entry.expectedBytes = png.length; entry.expectedSha256 = sha256(png);
     if (requireRecord(navigation.source).path === entry.path) contextRecord = entry;
   }
   if (contextRecord) {

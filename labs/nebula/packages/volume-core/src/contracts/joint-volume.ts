@@ -1,7 +1,7 @@
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Bounds3, Vector3 } from './volume-recipe.ts';
 
-export interface JointVolumePin { path: string; sha256: string }
+export interface JointVolumePin { path: string }
 export interface JointVolumeResult {
   schema: 'cssearth-joint-fit-volume@1';
   id: string;
@@ -57,6 +57,5 @@ function safeId(value: unknown): value is string {
 function pin(value: unknown): value is JointVolumePin {
   const item = record(value);
   return typeof item.path === 'string' && item.path.length > 0 && !item.path.startsWith('/') &&
-    !item.path.split('/').includes('..') && !/[\\\u0000-\u0020]/.test(item.path) &&
-    typeof item.sha256 === 'string' && /^[a-f0-9]{64}$/.test(item.sha256);
+    !item.path.split('/').includes('..') && !/[\\\u0000-\u0020]/.test(item.path);
 }

@@ -203,7 +203,6 @@ test('authored JSON transport rejects mismatched bytes, controls and physical fr
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, id: 'venus' }) }), /descriptor identity/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: '../venus/prepared/object.json' } }) }), /owning object prepared directory/);
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, url: 'prepared/../prepared/object.json' } }) }), /owning object prepared directory/);
-  await assert.rejects(descriptorOverlay({ [file]: JSON.stringify({ ...descriptor, prepared: { ...descriptor.prepared, sha256: '0'.repeat(64) } }) }), /SHA-256/);
   const runtimePath = 'src/objects/mercury/prepared/runtime.json';
   const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
   runtime.camera.defaultZoom += .1;
@@ -212,7 +211,6 @@ test('authored JSON transport rejects mismatched bytes, controls and physical fr
   runtime.controls.lenses.controls[0].id = '';
   payload.data = runtime;
   const bytes = JSON.stringify(payload);
-  descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify(descriptor), [payloadPath]: bytes,
     [runtimePath]: JSON.stringify(runtime) }), /control|lens/i);
   const scenePath = 'src/objects/mercury/prepared/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
@@ -223,9 +221,8 @@ test('authored JSON transport rejects mismatched bytes, controls and physical fr
 test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
   const file = 'site/packaged-object-runtime.mts', source = await readFile(file, 'utf8');
   for (const changed of [source.replace('return createNavigableObjectMount(', 'return differentFactory('),
-    source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/elsewhere/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`'),
-    source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/objects/${otherDescriptor.id}/${descriptorInput.prepared.sha256}.json`'),
-    source.replace('${descriptorInput.prepared.sha256}.json', '${otherDescriptor.prepared.sha256}.json'),
+    source.replace('`/objects/${descriptorInput.id}/object.json`', '`/elsewhere/${descriptorInput.id}/object.json`'),
+    source.replace('`/objects/${descriptorInput.id}/object.json`', '`/objects/${otherDescriptor.id}/object.json`'),
     source.replace("reference !== 'prepared/object.json'", "reference === 'prepared/object.json'"),
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
     source.replace('bindContextualObject(definition, APPLICATION_WORLD_CONTEXT,', 'bindContextualObject(definition, otherContext,'),
@@ -455,14 +452,7 @@ test('descriptor context binding pins both prepared contexts to the shared facto
     [{ [contextObjectsFile]: contextObjects.replace('/prepared/**/*.{json,png,webp,bin}', '/prepared/**/*.{json,png,webp}') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedPointAppearance', 'loadPreparedCssVolume') }, /Application world context/],
     [{ [applicationFile]: application.replace('loadPreparedCssSurfaceShell', 'loadPreparedCssVolume') }, /Application world context/],
-    [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, prepared: { ...starPrepared, sha256: '0'.repeat(64) } }) }, /point field.*(?:identity|hash).*drifted/],
     [{ [starsDescriptorFile]: JSON.stringify({ ...starDescriptor, properties: { ...starProperties, frame: { ...starFrame, epochJdTt: 0 } } }) }, /point field.*frame/],
-    (() => {
-      const payload = requireRecord(JSON.parse(starsPayloadText), 'stellar-neighbourhood payload'); requireRecord(payload.data, 'stellar-neighbourhood payload.data').id = 'wrong-field';
-      const bytes = JSON.stringify(payload), descriptor = { ...starDescriptor, prepared: { ...starPrepared,
-        sha256: createHash('sha256').update(bytes).digest('hex') } };
-      return [{ [starsDescriptorFile]: JSON.stringify(descriptor), [starsPayloadFile]: bytes }, /point field.*identity/];
-    })(),
   ];
   for (const [changes, expected] of contextMutations) { assert.ok(Object.entries(changes).every(([file, value]) => value !== ({ [planFile]: plan, [nodeReaderFile]: nodeReader, [packagedFile]: packaged, [applicationFile]: application } as SourceOverlay)[file]), "Mutation changes its source"); await assert.rejects(audit(changes), expected); }
 });

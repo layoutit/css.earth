@@ -1,14 +1,12 @@
 {
   "schema": "cssearth-filled-observation-evidence@1",
   "recipe": {
-    "path": "labs/nebula/models/lmc-clouds.json",
-    "sha256": "3fb1dc8119cd48667c893423fe1ced094eb33e74a21566e8f79033add75c1a95"
+    "path": "labs/nebula/models/lmc-clouds.json"
   },
   "photo": {
     "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
     "id": "noirlab2030a",
     "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
     "bytes": 264225774,
     "width": 6737,
     "height": 6536,
@@ -85,8 +83,7 @@
     "sourceDepthRetained": true,
     "meaning": "Trilinearly filtered encoded stellar support decoded after filtering, sampled on calibrated observer rays. Relative clipped/quantized density prior; no luminosities, dust, or measured star depths.",
     "source": {
-      "path": "labs/nebula/models/lmc-full-density/source/volume.json",
-      "sha256": "ec3242ff7875559a058ebc6f91a81e1c9299be6b98751825e8afafb6bb51ea4c"
+      "path": "labs/nebula/models/lmc-full-density/source/volume.json"
     },
     "boundsKpc": {
       "min": [
@@ -104,8 +101,7 @@
       96,
       96,
       116
-    ],
-    "sha256": "ce051c076499ffd6b5209446ed79849b5c0bf440597d93e5dbd51bd4bc71f5c5"
+    ]
   },
   "decomposition": {
     "inputSum": 136408.89028528583,
