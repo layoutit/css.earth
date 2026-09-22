@@ -1,7 +1,7 @@
 /** Offline mesh construction; runtime receives only retained transforms and source-derived normals. */
 import type { ShellRecipe } from './config.js';
 import { record, triple, type Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
-import { verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 
 export interface ShellMesh {
   positionsUnits: Vector3[];
@@ -34,7 +34,7 @@ export function parseIndexedShellMesh(value: unknown): ShellMesh {
   return { positionsUnits, radialNormals, triangles };
 }
 export async function loadShellMesh(sourceDirectory: string, recipe: ShellRecipe): Promise<ShellMesh> {
-  const bytes = await verifiedBytes(sourceDirectory, recipe.shape);
+  const bytes = await sourceBytes(sourceDirectory, recipe.shape);
   const input: unknown = JSON.parse(bytes.toString('utf8'));
   const mesh = recipe.shape.kind === 'gridded-surface' ? parseGriddedShellMesh(input) : parseIndexedShellMesh(input);
   return recipe.shape.displaySubdivision ? subdivideRadialMesh(mesh, recipe.shape.displaySubdivision.segmentsPerEdge) : mesh;

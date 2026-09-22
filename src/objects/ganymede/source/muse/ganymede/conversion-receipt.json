@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-muse-spectral-maps@1",
-  "preparerSha256": "2d8910aed38cd53a847448a912fe219db0314266da31d5d90d430a61050875f8",
   "target": "ganymede",
   "registration": {
     "mode": "author-grid-two-degree-nodes",
@@ -82,7 +81,6 @@
   "outputs": [
     {
       "input": "577.3nm_band_ganymede_night_1.fits",
-      "sourceSha256": "9354868840c81e85d65c6a0882ea71e3f01d7258860fdd679321e4e88aa956b8",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -104,7 +102,6 @@
         ]
       },
       "path": "ganymede/577.3nm_band-night-1.tif",
-      "sha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
       "bytes": 10416,
       "noData": -9999,
       "checked": {
@@ -121,7 +118,6 @@
     },
     {
       "input": "577.3nm_band_ganymede_night_2.fits",
-      "sourceSha256": "7b6e1a2c27bfc1418147e0a59a628c96d5b28d5fd1b71295f21d64c2d386ac8d",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -143,7 +139,6 @@
         ]
       },
       "path": "ganymede/577.3nm_band-night-2.tif",
-      "sha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
       "bytes": 10400,
       "noData": -9999,
       "checked": {
@@ -160,7 +155,6 @@
     },
     {
       "input": "577.3nm_band_ganymede_night_3.fits",
-      "sourceSha256": "30f997e41fb7f9f99f626c45121e4b6066e97c39bd1fe7bcd6f081e09dc60220",
       "sourceBytes": 132480,
       "fitsCards": {
         "SIMPLE": "T",
@@ -182,7 +176,6 @@
         ]
       },
       "path": "ganymede/577.3nm_band-night-3.tif",
-      "sha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
       "bytes": 10304,
       "noData": -9999,
       "checked": {

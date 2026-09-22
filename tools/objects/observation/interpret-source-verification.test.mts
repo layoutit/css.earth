@@ -7,7 +7,7 @@ import { test } from 'node:test';
 import { createSurfaceInterpreter } from './interpret.mts';
 
 const bytes = Buffer.from('pinned');
-const pin = (path: string) => ({path, expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex')});
+const pin = (path: string) => ({path});
 const input = (path: string, consumers: string[]) => ({...pin(path), id: path, origin: 'https://example.test/'+path,
   credit: 'Fixture', license: 'Fixture', acquisition: 'Fixture', redistribution: 'Fixture',
   sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers});

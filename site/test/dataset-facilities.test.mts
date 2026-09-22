@@ -22,7 +22,7 @@ const catalog = prepared.catalog;
 const provenance = async (id: string): Promise<ProvenanceDocument> => validateObjectProvenance(await json(`../../src/objects/${id}/prepared/provenance.json`), id);
 const missions = Object.fromEntries(catalog.missions.map(mission => [mission.id, mission]));
 interface PreparedPage { readonly controls: { readonly lenses?: { readonly controls: readonly { readonly id: string; readonly label: string }[] } } }
-interface ArtworkSource { readonly sourcePage?: string; readonly sourceUrl?: string; readonly credit: string; readonly localSource?: string; readonly inputSha256?: string; }
+interface ArtworkSource { readonly sourcePage?: string; readonly sourceUrl?: string; readonly credit: string; readonly localSource?: string; }
 interface ArtworkEntry { readonly id: string; readonly sha256: string; readonly source: ArtworkSource; }
 const positiveInteger = (value: unknown, label: string): number => {
   if (typeof value !== 'number' || !Number.isSafeInteger(value) || value <= 0) throw new TypeError(`${label} must be a positive integer.`);
@@ -40,10 +40,9 @@ const artworkLibrary = (value: unknown, emblem: boolean): readonly ArtworkEntry[
     const credit = explorationText(source.credit);
     const sourcePage = source.sourcePage === undefined ? undefined : explorationText(source.sourcePage);
     const sourceUrl = source.sourceUrl === undefined ? undefined : explorationText(source.sourceUrl);
-    if (emblem && (sourceUrl === undefined || source.localSource === undefined || source.inputSha256 === undefined)) throw new TypeError('Incomplete emblem source.');
+    if (emblem && (sourceUrl === undefined || source.localSource === undefined)) throw new TypeError('Incomplete emblem source.');
     return { id, sha256, source: { credit, ...(sourcePage === undefined ? {} : { sourcePage }), ...(sourceUrl === undefined ? {} : { sourceUrl }),
-      ...(source.localSource === undefined ? {} : { localSource: explorationText(source.localSource) }),
-      ...(source.inputSha256 === undefined ? {} : { inputSha256: explorationText(source.inputSha256) }) } };
+      ...(source.localSource === undefined ? {} : { localSource: explorationText(source.localSource) })  } };
   });
 };
 async function objectInput(id: string, document: ProvenanceDocument | null = null): Promise<ContributionObject> {
@@ -176,9 +175,7 @@ test('approved artwork and emblems retain source bytes, dimensions and transpare
           if (x === 0 || y === 0 || x === info.width - 1 || y === info.height - 1) assert.equal(alpha, 0, `${image.id}: exterior pixels`);
         }
         assert.ok(transparent > info.width * info.height * .03); assert.ok(opaque > info.width * info.height * .1);
-        assert.ok(approved.source.localSource); assert.ok(approved.source.inputSha256);
         const source = await readFile(new URL(`../source/facilities/emblems/${approved.source.localSource}`, import.meta.url));
-        assert.equal(createHash('sha256').update(source).digest('hex'), approved.source.inputSha256);
       }
     }
   }

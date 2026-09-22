@@ -53,26 +53,22 @@
     {
       "name": "z2cf0206t_c0f.fits",
       "uri": "mast:HST/product/z2cf0206t_c0f.fits",
-      "bytes": 112320,
-      "sha256": "de47336b2c8a3ac5134061bc183571b447b058fd251b33bcc476cb3fb7cdcefa"
+      "bytes": 112320
     },
     {
       "name": "z2cf0206t_c1f.fits",
       "uri": "mast:HST/product/z2cf0206t_c1f.fits",
-      "bytes": 80640,
-      "sha256": "3c41b26d2fd5d8653438e541e8c611d9fa2aed162b9568303b8d8b0a3d357447"
+      "bytes": 80640
     },
     {
       "name": "z2cf0206t_c2f.fits",
       "uri": "mast:HST/product/z2cf0206t_c2f.fits",
-      "bytes": 80640,
-      "sha256": "c06edb1b114741d6a6e1fb24d251e51531466f0125bda4e243f1e78668ce43c7"
+      "bytes": 80640
     },
     {
       "name": "z2cf0206t_cqf.fits",
       "uri": "mast:HST/product/z2cf0206t_cqf.fits",
-      "bytes": 80640,
-      "sha256": "c419fa5a939b75c55794fc90b284b1d13059c21eb9fbc6909c1af3fabdf3b99b"
+      "bytes": 80640
     }
   ],
   "note": "A 326 second G140L far-ultraviolet spectrum of Europa through the large science aperture on detector 1, programme 5376, 2 June 1994. Table 35.1 of the GHRS data handbook lists what calhrs produced: the calibrated wavelength solution (.c0h), the calibrated science data (.c1h), the propagated statistical error (.c2h) and the calibrated science data quality (.cqh), which are the four files pinned here. The archive also holds the calibrated special diodes (.c3h), their data quality (.c4h) and the subtracted background (.c5h), which this pin does not include. Each file is waivered FITS and keeps the exposure's four readouts as the second axis of one unit, so this product is four spectra of 2000 samples, not one of 8000; the wavelength array is double precision and the others single."

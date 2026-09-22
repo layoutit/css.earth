@@ -47,10 +47,6 @@ export async function loadPreparedCssImageLayers(input: unknown, transport: Prep
   const descriptor = parseImageLayerBankDescriptor(input);
   if (descriptor.prepared?.format !== 'cssearth-image-layer-bank@1') throw new TypeError('Image layers require a prepared bank.');
   const bytes = await transport.read(descriptor.prepared.url);
-  const hash = new Uint8Array(await crypto.subtle.digest('SHA-256', bytes));
-  if ([...hash].map(value => value.toString(16).padStart(2, '0')).join('') !== descriptor.prepared.sha256) {
-    throw new TypeError('Prepared image-layer digest mismatch.');
-  }
   const payload = validatePreparedImageLayerBank(JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(bytes)));
   if (payload.id !== descriptor.id || JSON.stringify(payload.frame) !== JSON.stringify(descriptor.frame)) {
     throw new TypeError('Prepared image-layer identity/frame mismatch.');

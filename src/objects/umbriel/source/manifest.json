@@ -4,12 +4,9 @@
     {
       "id": "schenk-2020-umbriel-normal",
       "path": "observations/uumap-cyl-180180.cub.gz",
-      "expectedBytes": 629366,
-      "expectedSha256": "d20a2962f9343736a2cb82f7b18b746fdc606bbe301bbde9c99fe8cef8da84ad",
       "origin": "https://repository.hou.usra.edu/bitstreams/c98739ae-8739-4065-85a3-8096a5500104/download",
       "catalog": "https://repository.hou.usra.edu/handle/20.500.11753/1687",
       "mirror": "https://earth-assets.lowpoly.cc/source-assets/d20a2962f9343736a2cb82f7b18b746fdc606bbe301bbde9c99fe8cef8da84ad/uumap-cyl-180180.cub.gz",
-      "upstreamSha256": "7b794c83fd37fd0b400dacbc4aa253441fe7e4355297741c14f5467c7e96123b",
       "upstreamBytes": 1976871,
       "encoding": "Lossless gzip of the original ISIS3 cube; no pixel changes.",
       "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
@@ -67,8 +64,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",

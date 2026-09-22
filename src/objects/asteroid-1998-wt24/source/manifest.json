@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 207.5
       },
       "coverage": "The published model has uneven latitude coverage, including an unseen region near the north pole. Its small depressions and rounded outline are radar-derived geometry; no measured optical surface texture is supplied.",
-      "expectedBytes": 248733,
-      "expectedSha256": "dade62d25e160a1d19099aae9b1e316946d034e7ae9d8cd234888c60387c37a8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1152440,
-      "expectedSha256": "38233a2a6b90f545a644f45508fba7256fad53ac570268fafdaad52cab2d2306",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

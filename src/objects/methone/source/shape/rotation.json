@@ -31,9 +31,7 @@
   ],
   "sourceKernel": {
     "file": "methone_mst2013.bpc",
-    "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/methone_mst2013.bpc",
-    "expectedBytes": 3156992,
-    "expectedSha256": "af307713f6b9585b1ff922247cd17e17e83472e9b0bfe9569c7d645bc76129bb"
+    "url": "https://naif.jpl.nasa.gov/pub/naif/CASSINI/kernels/pck/methone_mst2013.bpc"
   },
   "qualification": "Frozen source orientation at the Cassini observation epoch in 2012. The binary PCK covers 2004–2018 and cannot supply the current display epoch. This preserves a source-derived pose for illustration; it is not a current rotation-phase ephemeris. The arbitrary-display-phase tag identifies the display use, not an invented source orientation."
 }

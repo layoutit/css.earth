@@ -12,7 +12,6 @@ const source = Object.freeze({
   path: "M0 29V8.63H4.35Z",
   source: "Pinned font",
   sourceUrl: "https://example.test/font.ttf",
-  sourceSha256: "a".repeat(64),
   weight: 500,
   opticalSize: 28,
   fontSize: 28,

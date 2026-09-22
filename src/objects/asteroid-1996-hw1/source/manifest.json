@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 1010
       },
       "coverage": "The narrow neck and two lobes are constrained by radar and lightcurves, while weakly observed regions and facet-scale detail remain model-dependent. The published pole is uncertain by 5 degrees and the equivalent diameter by 8%. No resolved optical surface map is supplied.",
-      "expectedBytes": 83069,
-      "expectedSha256": "f40ee6ba66abccd5393f991fdfe240b54df49c31559e07a431760996024d2996",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 3069644,
-      "expectedSha256": "f75956f9f1cbfe74213979e71615a2a71ce8a280f4a189e02b210b826bda3129",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

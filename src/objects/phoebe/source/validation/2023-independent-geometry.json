@@ -2,8 +2,7 @@
   "schema": "cssearth-phoebe-independent-source-geometry@1",
   "source": {
     "path": "phoebe_128_o.obj",
-    "bytes": 17787240,
-    "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9"
+    "bytes": 17787240
   },
   "method": "Independent Python/NumPy ray-triangle intersections against every original OBJ triangle. No shared loader or prepared mesh used.",
   "vertices": 99846,

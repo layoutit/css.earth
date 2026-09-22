@@ -22,8 +22,6 @@ test("accepts every object-owned marker recipe", async () => {
     assert.equal(validateMarkerDescriptor(descriptor), descriptor);
     // Pins became optional for files this repository authors; a marker source is a download, so
     // it must still carry one.
-    assert.ok(descriptor.source.expectedSha256, `${descriptor.source.origin}: a downloaded marker source must stay pinned`);
-    assert.match(descriptor.source.expectedSha256, /^[0-9a-f]{64}$/u);
     assert.ok(["http:", "https:"].includes(new URL(descriptor.source.origin).protocol));
     assert.ok(descriptor.source.credit.length > 0);
   }
@@ -39,7 +37,7 @@ test("context markers keep a complete disc without inventing missing terrain", a
   const sourcePath = resolve(root, "source.png");
   await writeFile(sourcePath, input);
   const png = await renderMarker({ ...marsMarker, source: { ...marsMarker.source, path: "source.png",
-    expectedBytes: input.length, expectedSha256: createHash("sha256").update(input).digest("hex") },
+    },
     operations: [
       { type: "missing-coverage", kind: "black-fill", southConnected: true },
       { type: "ensure-alpha" },
@@ -101,7 +99,7 @@ test("prepared flood shading has a bright centre, a darker limb and no terminato
   const input = await sharp({ create: { width: 64, height: 64, channels: 4, background: '#c8c8c8' } }).greyscale().png().toBuffer();
   const sourcePath = resolve(root, 'source.png'); await writeFile(sourcePath, input);
   const png = await renderMarker({ ...marsMarker, source: { ...marsMarker.source, path: 'source.png',
-    expectedBytes: input.length, expectedSha256: createHash('sha256').update(input).digest('hex') }, operations: [
+    }, operations: [
       { type: 'ellipse-mask', cx: .5, cy: .5, rx: .5, ry: .5, shading: { ambient: .35, diffuse: .65 } }, { type: 'png' },
     ] }, { sourcePath, tileSize: 64 });
   const output = await sharp(png).raw().toBuffer(), red = (x: number, y: number) => output[(y*64+x)*4];

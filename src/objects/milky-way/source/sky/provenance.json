@@ -4,7 +4,6 @@
   "sourcePage": "https://svs.gsfc.nasa.gov/4851/",
   "source": {
     "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_8k.exr",
-    "sha256": "361d1961647af073b3b3e4aea4fca85f15b3c9d915e0c8c4befb02520dadd10a",
     "bytes": 137307727,
     "width": 8192,
     "height": 4096
@@ -29,8 +28,7 @@
     "photometricCalibration": false,
     "reference": {
       "path": "nasa-preview.jpg",
-      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg",
-      "sha256": "1ebe95804f5f0e6e23f77488aaa33fdb4aaef3fd336821fb41b261ddeaee2df0"
+      "url": "https://svs.gsfc.nasa.gov/vis/a000000/a004800/a004851/milkyway_2020_4k_print.jpg"
     },
     "measurement": "Before display attenuation, exposure 4.5 matches NASA preview mean RGB within 0.001 with RGB RMSE 0.01387 at 1024x512. Final display gain 0.12 dims bright and faint background regions alike. An additional smooth shadow floor suppresses faint texture grain: zero below display luminance 0.04, full contribution above 0.12. This suppresses faint image detail intentionally; source HDR pixels and white balance remain unchanged. Display calibration, not photometry.",
     "displayGain": 0.12,

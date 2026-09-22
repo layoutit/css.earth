@@ -22,5 +22,5 @@ export function readProcessingEnvironmentRecipe(value: unknown): ProcessingEnvir
   try { url = new URL(model.url); } catch { throw new TypeError('The pinned NOX model needs an HTTPS URL.'); }
   if (url.protocol !== 'https:' || !url.hostname || url.username || url.password) throw new TypeError('The pinned NOX model needs an HTTPS URL.');
   return { environment: { pythonVersions: [...environment.pythonVersions], packages: [...environment.packages] },
-    removal: { model: { path: model.path, sha256: model.sha256, url: model.url } } };
+    removal: { model: { path: model.path, url: model.url } } };
 }

@@ -212,7 +212,6 @@ test('authored JSON transport rejects mismatched bytes, controls and physical fr
   runtime.controls.lenses.controls[0].id = '';
   payload.data = runtime;
   const bytes = JSON.stringify(payload);
-  descriptor.prepared.sha256 = createHash('sha256').update(bytes).digest('hex');
   await assert.rejects(descriptorOverlay({ [file]: JSON.stringify(descriptor), [payloadPath]: bytes,
     [runtimePath]: JSON.stringify(runtime) }), /control|lens/i);
   const scenePath = 'src/objects/mercury/prepared/scene.json', scene = JSON.parse(await readFile(scenePath, 'utf8'));
@@ -223,9 +222,8 @@ test('authored JSON transport rejects mismatched bytes, controls and physical fr
 test('descriptor binding cannot bypass the shared factory or redirect the prepared inventory', async () => {
   const file = 'site/packaged-object-runtime.mts', source = await readFile(file, 'utf8');
   for (const changed of [source.replace('return createNavigableObjectMount(', 'return differentFactory('),
-    source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/elsewhere/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`'),
-    source.replace('`/objects/${descriptorInput.id}/${descriptorInput.prepared.sha256}.json`', '`/objects/${otherDescriptor.id}/${descriptorInput.prepared.sha256}.json`'),
-    source.replace('${descriptorInput.prepared.sha256}.json', '${otherDescriptor.prepared.sha256}.json'),
+    source.replace('`/objects/${descriptorInput.id}/object.json`', '`/elsewhere/${descriptorInput.id}/object.json`'),
+    source.replace('`/objects/${descriptorInput.id}/object.json`', '`/objects/${otherDescriptor.id}/object.json`'),
     source.replace("reference !== 'prepared/object.json'", "reference === 'prepared/object.json'"),
     source.replace('createNavigableObjectMount(descriptorInput,', 'createNavigableObjectMount(otherDescriptor,'),
     source.replace('bindContextualObject(definition, APPLICATION_WORLD_CONTEXT,', 'bindContextualObject(definition, otherContext,'),

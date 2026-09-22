@@ -12,8 +12,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 5086,
-      "expectedSha256": "cdbb9adc1addca89b8d14347c2ad13e1e4ade1798aa731ad015c1ffa9bc40463",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -36,8 +34,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 126143,
-      "expectedSha256": "59468328349aa730d18bf1f8d7e86efe6e40b75dfb921908f99321b3a7a701d2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +56,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 12876,
-      "expectedSha256": "f9c6da5412c7f13f3efe279d499b152a09b22de7c448158d1aebc42a5c6e69fd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -84,8 +78,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 29925,
-      "expectedSha256": "2b02a0df99995bb583260f10372f36a63fe51395d7ef5c12670627ca0f28f436",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -108,8 +100,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 86634,
-      "expectedSha256": "044cc99864397eb63e5aa857da4557d42d888d42ba05b13cd29e1f3f7d21f6be",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -132,8 +122,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 2731,
-      "expectedSha256": "35c4e3bad4c4409df815c4e2fede5eb00a7d415c17b49bd7b0b50e701f4f04d3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -156,8 +144,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 24213,
-      "expectedSha256": "575b49b02062e146c001d3a84fc89fa1fecb2366b78dd5e09f303ee8c060efa2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -180,8 +166,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 16788480,
-      "expectedSha256": "a20a7139da04cbc462454634918e9a9ca69127044e2cc9d4f9c16e238d2deedc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -204,8 +188,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 882688,
-      "expectedSha256": "5b0efd9277a574406726cf83c7c13017ef31f004b64a5eeff967cb08b5413c09",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -228,8 +210,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 56560640,
-      "expectedSha256": "4d35ad652a572423dc49881812891bc4bba2b6add736761eac5cc0edfa73f599",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -252,8 +232,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 59422720,
-      "expectedSha256": "819164383937314e1387f5b706d3fc33c1e1fd9c472a7ff7b6e9e4245b2a697d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -276,8 +254,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 361472,
-      "expectedSha256": "5e0b3695a4fb8ec3be3765f7d60f56cc0cbc7fa8ef0460b4a1504206d399a4d7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -300,8 +276,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 57028608,
-      "expectedSha256": "4cdf53b3f2ffb6e2de70c8907add74d4664346d1f34f59f020e4f6f4ef18970e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -324,8 +298,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 32164864,
-      "expectedSha256": "acd9f6e2ebe2235c0ffbe7c042de7ce3e5984899f65e433af111732a96ab68a3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -348,8 +320,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 46919680,
-      "expectedSha256": "8b3374e9bcc6396e1ed3bb53d1f9bd1fd0c2dff737fd37e5c2f7df31f024272d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -372,8 +342,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36289536,
-      "expectedSha256": "64a14eb904a3eacbe12060fcb61145702d21149a7b464acf10bc08fffb5cf334",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -396,8 +364,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35666944,
-      "expectedSha256": "24a28082483bd8b6e97d4b98b96cc7f65ddeb545a640622b6c916c6aee173134",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -420,8 +386,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 38759424,
-      "expectedSha256": "09b8af37a0323951fd11bae80e98f146d7d73160d64005603b48081d6019418d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -444,8 +408,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37482496,
-      "expectedSha256": "8dd446f3a66f8c21e58bd8da8769c78db364d9a6b20bdfc3d4a0c94ea96d0dcb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -468,8 +430,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36426752,
-      "expectedSha256": "5943c9d4f33e14ebc38d9422f616d2eea0181942c6def3d9cd87473f6730d043",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -492,8 +452,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 39846912,
-      "expectedSha256": "12231cd457fe84a37220b68239770f250ecdfcffe634a91d47cd3ca105c4bdf0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -516,8 +474,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37206016,
-      "expectedSha256": "26f5ccf6e191fc80946ddb7a150ea31dd10a66b44e696caffd1c69f51d3c1e31",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -540,8 +496,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 38078464,
-      "expectedSha256": "57d93a0d14d53786b27c69796b3093354d34912d6e5748adfe8ce6b16c78bc18",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -564,8 +518,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37692416,
-      "expectedSha256": "672e1e67ba052206434d3b3522248a3e03a8725c73a813c4434b5440e96efd72",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -588,8 +540,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 239616,
-      "expectedSha256": "e313bbdbf0abcd68c430d2e732e2dc5c5ebd326dddbf5d992d8ab56bd04e2afc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -612,8 +562,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 240640,
-      "expectedSha256": "ab6165104716429eb1398528ef1c2935f6efb392db6b72d1357e297e80b38f41",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -636,8 +584,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 239616,
-      "expectedSha256": "07b08fb9cf7802af4d262722d1e77b4349f63d4832bef7bb6588466c10306b15",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -660,8 +606,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 10240,
-      "expectedSha256": "4cbc4e7038f5808c82df196aa770fdc9b5f5551ab56fbbc80135b90e944a78ba",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -684,8 +628,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 245760,
-      "expectedSha256": "0a10cfc591238b34f35633653eea602627c5aa710baef4b527a8f65fb298a238",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -708,8 +650,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 256000,
-      "expectedSha256": "e2d5b4c6205f0192f550116671222e5ae5b7d3c27a43c724873bc41552f936cb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -732,8 +672,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 238592,
-      "expectedSha256": "d65323719e66d1fde19bb8ba5fe9645b6edfa8b484e88bbc789c2dc8ec87de0d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -756,8 +694,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 10240,
-      "expectedSha256": "6a46dad04440e08adabb3b5e5a0281ca746ecba00d536bd012f551291aa402f2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -780,8 +716,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 455680,
-      "expectedSha256": "2a1830a18df913a5928e7df58686dc4d96746f7a4fd757b502ef5b5a8bc645aa",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -804,8 +738,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 595968,
-      "expectedSha256": "faee66a81cbd53b754f6ba87d103adbd4a784e714445580fa43e81a130fdc74a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -828,8 +760,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 465920,
-      "expectedSha256": "18507fd3100ea62df15a767a55b209ac0d6d4f35bd5d1691269c85452682e832",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -852,8 +782,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 185344,
-      "expectedSha256": "fcee7ce8d409bdf673445163b53c3bf36f0c0aa49acedf0ed87d166e03285117",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -876,8 +804,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 627712,
-      "expectedSha256": "c9d1b9eba12851376bd7f38ab1477c995ab608bd70c2624b720cb621c1d1be14",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -900,8 +826,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 39064576,
-      "expectedSha256": "58789d925883aa10681f92f7c0d4edf1a9701db5e1a51a3055422f13f17e3e9e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -924,8 +848,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 41031680,
-      "expectedSha256": "e2d75ae359a4ef4d8abbc4fb407bad29d69f61243d8f5f91d4e2f0f6b366fe3e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -948,8 +870,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 38913024,
-      "expectedSha256": "4a3f59264bea0770b4efcb5d338bdd6f8edfd32e8d056cb0be9b4cfe090567d8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -972,8 +892,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 38045696,
-      "expectedSha256": "b1ea946b87b2a3f69b8b19927401f60b249b572bb8d9543caab85a0d7e884c52",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -996,8 +914,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35812352,
-      "expectedSha256": "39a74732a74a3035bdb5d8ba3201697362506686f9e6c008569fa8d0bb701c28",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1020,8 +936,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36817920,
-      "expectedSha256": "df5ef5ce4a4d44d7d0a82497a6d9f0215a66a51210e804b6160be9e7a30f6c70",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1044,8 +958,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35736576,
-      "expectedSha256": "c5febd5a4f5313728d3d43528e33288d5d053504ffb29c3d688b608197a6d5c6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1068,8 +980,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36724736,
-      "expectedSha256": "a8dc18187dc78488af02ef9c2d9439c1400d2e6b2876757a33ac0df540d6758a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1092,8 +1002,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 34750464,
-      "expectedSha256": "8228056f14321b2e5ac53eee17f9eb723d2f2f77a9042a151c11b39fea92b78b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1116,8 +1024,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37178368,
-      "expectedSha256": "d0d9c0517946c07b6e2b5ac69467635a30154466965bccaa0229ee18fb2a8232",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1140,8 +1046,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35834880,
-      "expectedSha256": "917dce29ce1f8233a24408c5fe7da08bf937ab9530b717919080a5ee5232456f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1164,8 +1068,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36846592,
-      "expectedSha256": "5291707b069d9f5492f3a0ff97d923d24e3cad13e603e2fcd08fffba58ab7414",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1188,8 +1090,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35856384,
-      "expectedSha256": "8797267322a9262d7b89e1c8ab853daaf5af88655476a3bd7a1980eff5aaa858",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1212,8 +1112,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37023744,
-      "expectedSha256": "b575d8869b8242f6304a8e3590ff9d073c38b2195d0ffef14b3d5cae7c754fdd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1236,8 +1134,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36252672,
-      "expectedSha256": "7724c044f06248fd23b00dc441ce9c4e125f5523a4388b579b1f7b5d9bacc29a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1260,8 +1156,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36388864,
-      "expectedSha256": "287eabce80cd8f231caee9f30fea257021d4cdf0fc2ea9651073079c7895f227",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1284,8 +1178,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 34386944,
-      "expectedSha256": "cfc2e91237b0d7695791b7468794ffd75d49316773952a806cc14484dac7ee4f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1308,8 +1200,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35483648,
-      "expectedSha256": "76e29a2b74e15da0dafac15d5b1a999cd07a58bacea25535fbc42a8950b4b616",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1332,8 +1222,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35821568,
-      "expectedSha256": "f0c2c79e72abc2dbe243454765f17717c5c9a377b353c4fae534f3d8b9f5a386",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1356,8 +1244,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35375104,
-      "expectedSha256": "61c8b15c20824eb9b943e5f154d8353dbb68ca27d0e24332cfda2ef335460925",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1380,8 +1266,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36921344,
-      "expectedSha256": "05f8fd6e4e54d391c61f36e0c2a689e89ec5d5aaa5181deb6309b232f7bab76b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1404,8 +1288,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35667968,
-      "expectedSha256": "f4837038f137bed21502d3a0aac6172c2300db1bc2f15e9a45f6c9f990fe95f5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1428,8 +1310,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36490240,
-      "expectedSha256": "b61795631e91a39a7c288d3d0ab78f839b74dbf41019a043d3d80429cbb03ded",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1452,8 +1332,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35376128,
-      "expectedSha256": "7fff977b706370603d5fb07f615fb97c32d13bf7fbba3699883e1a2d7a2cb6d7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1476,8 +1354,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36867072,
-      "expectedSha256": "5867da926ca8a4c84a81d8ddde60066f187cceb7fba329eb4d78e06bd3b06faa",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1500,8 +1376,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35130368,
-      "expectedSha256": "3c2d34b67d9502a3feb746ab3f2a409b86361cb9c6b8235ccb227ff1151c455e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1524,8 +1398,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37740544,
-      "expectedSha256": "70f75e78f9ce0dd25531a49109f10df272ce795d1c87135354beca503fe08ccc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1548,8 +1420,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36107264,
-      "expectedSha256": "de4cd8bb5c88627431f7b6a3d5e086085443a09e300a54e36be65461c57c566e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1572,8 +1442,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37379072,
-      "expectedSha256": "aaf1209537303f2f4a45cef15d11b64e8b38efd610e2354fde38b4e118523094",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1596,8 +1464,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 35338240,
-      "expectedSha256": "9988910db7dcba038706eea396b0152a0b9c20f8635587d04fe49a056c8f1849",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1620,8 +1486,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37171200,
-      "expectedSha256": "ec946e71abe15c2ec621fd26b9bef387124aabc01738c4b4e7b61b386b58161a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1644,8 +1508,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 28325888,
-      "expectedSha256": "3ce99d4ec95ea500728a2545085372819d600d3b68e93497418f3e7d27f8d0ae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1668,8 +1530,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 37365760,
-      "expectedSha256": "efca2da2ae18a0c983b69deb0e57911335d5236f4081b3ca06ca2f2f78f4e5b4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1692,8 +1552,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36294656,
-      "expectedSha256": "e8b24ed98bb37855986cf0f1e557e70d71f1425acbfb969c8969b7bed64c09ee",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1716,8 +1574,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 36789248,
-      "expectedSha256": "1a4822a43dfc7d46a771c870faa9e42204a6945ff4eef253b9149de29b872a85",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1740,8 +1596,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 34974720,
-      "expectedSha256": "a34cd96e692f81c7c6c5be24a46cc78ecb260f95729c90f9f289e367dee20071",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1764,8 +1618,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 70656,
-      "expectedSha256": "ada7f50c1c72992a268d33527ab17d850f4087332226afaf5f01f6412aac4cce",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1788,8 +1640,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 295936,
-      "expectedSha256": "bc83780c1478b171c53e38deb68fa3d233e75148d22ea21ec37de26dfbab260b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1812,8 +1662,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 347136,
-      "expectedSha256": "3f573502597e1d51b4e577998e950670052342d44b2e3fbe80f9ac78d91c0097",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1836,8 +1684,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 490496,
-      "expectedSha256": "252df0c7322d49c6140cbda1b990b8f1d8e8544b61a01cafea577e81430a46a5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1860,8 +1706,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 148480,
-      "expectedSha256": "beb2b426919d6e566b3a7d06bf0cae443d596df80aeade282e97461ea445fb10",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1884,8 +1728,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 1131520,
-      "expectedSha256": "ec379d64aa0a53fb44c770db92740d84afa0e6d72d4980a2cccf75fb46db4c9d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1908,8 +1750,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 385024,
-      "expectedSha256": "7c5641a8f794af1c5782f6f3e747c670a64d55a8febcb51679e7f2ef4d1fcddc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1932,8 +1772,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 236544,
-      "expectedSha256": "7bba045f857f2dcd244db05164778974d5d44d48e14eb8d6c5fb966aecb108ca",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1956,8 +1794,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 69632,
-      "expectedSha256": "216e3f6c3b3c93d05d095b0c998075ce41a1bdcddd3ebc57eb25b8c4e694a238",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1980,8 +1816,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 152576,
-      "expectedSha256": "4747e45d4bbf9f32ee02708c9de17964cb6b81516ab0f559c79d3a86b2bad326",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2004,8 +1838,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 1898496,
-      "expectedSha256": "ec982f68dbb61237c3114c061487f325528b60ef7ba7b801339a598c11195da0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2028,8 +1860,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 229562368,
-      "expectedSha256": "fb658899d0c136a1908f414ed6bd23760c26e11955f9b3d9a7fb12258d9a76d7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2052,8 +1882,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 74237952,
-      "expectedSha256": "536a55db8c6d3e574343d7d6403589a727de4023f8a629e09e5f6a28114e0c6f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2076,8 +1904,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 27710464,
-      "expectedSha256": "24316d106bd4cb2cf95fa149d8c52ed4a8271ed9648fc7e8365fea6ec5276f49",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2100,8 +1926,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 50168832,
-      "expectedSha256": "ca13bd83e49d786220fca28475af9aefcacca4a9d804fd11657e22dca79146ed",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2124,8 +1948,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 47158272,
-      "expectedSha256": "bc926323f7c94a3f60fd3aed934756acd5eb64737d5ba9d0152018fe564e91f2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2148,8 +1970,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 47258624,
-      "expectedSha256": "6784ce7b4d7a1a22c7c11d0641db388a4bb4ceabd29c7f59b6dbaa1ad47dfb06",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2172,8 +1992,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 43952128,
-      "expectedSha256": "3a3e2071dff3e2387a46e269f3d7d58a8fc5c7ada6949d872060dc4b7cee5401",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2196,8 +2014,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 113262592,
-      "expectedSha256": "62c3e2d902268b18d4aef14838e0f9168167e65842794ace2d0e1edccbd31498",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2220,8 +2036,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 21215232,
-      "expectedSha256": "e361cfb6969ee47d3e41f8844cc0933bd16c58243e9c01035e2476c3e45975b1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2244,8 +2058,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 20870144,
-      "expectedSha256": "9f5362537db55a2fc6602e594b28e0734a57b05860e804276f88512955dc4a43",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2268,8 +2080,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 22453248,
-      "expectedSha256": "7f7059c9128ac398a97fdf0ca1dfe2bd3d3e8da75159e0c2731795a06dadc217",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2292,8 +2102,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 23014400,
-      "expectedSha256": "92d77ff55b9bc95adbc783c53c9ce50f1ea477480c248c8e68a94583b67723c2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2316,8 +2124,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 22789120,
-      "expectedSha256": "5854904bb0db3fa8f7f8dc86fe02b41c234fe96f206cc0fa3ca177698b281088",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2340,8 +2146,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 21609472,
-      "expectedSha256": "aa684e8161520292208e6286c186b5e193206e97f6ea8ec1216de3c8419904a7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2364,8 +2168,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 21532672,
-      "expectedSha256": "cd5e67d0d7fd0226f7c9651b824107a89275b35e58ec0da383a4a94520782df4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2388,8 +2190,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 21622784,
-      "expectedSha256": "f06634a46c7c72906cf98efde790088a2e6fc0ddedd46d381fd3f95ee5ae2e31",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2412,8 +2212,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 22048768,
-      "expectedSha256": "4639e37cc7bf58551fab21bc0a6351913ce91fcbcf53d866c2f8dbca7197768c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2436,8 +2234,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 47232000,
-      "expectedSha256": "072f7387d0a1a7f9b1e0980faaa301683b0d4f830672de8ae9a25f46c61bac57",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2460,8 +2256,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 32757760,
-      "expectedSha256": "2f684740a8b2e9281b0c3f24ca784194bca378c80f265420ee0b9edd74edaa4f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2484,8 +2278,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 32546816,
-      "expectedSha256": "10160514be3be9ddb0fae41d4b91a25cb21eafc29eaae091b27da1130774e2e3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2508,8 +2300,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 40960,
-      "expectedSha256": "fd0c003962b2003d5023b156f5c10c50f3be8c6e3fb8dffa71ff3d0c7f51ca46",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2532,8 +2322,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 44032,
-      "expectedSha256": "5828f3733f1afe811747f134c6578742981e85f16ed6dd7fb09b74cb5da557ac",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2556,8 +2344,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 58368,
-      "expectedSha256": "ab8f7c7774c0bc20bef38e5ca9e82a59bdb1d41e42ad32cf5c3139b1921c69a0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2580,8 +2366,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 129024,
-      "expectedSha256": "b38c3cb83afe2a8aac6bc42ef100d8be4da494b62619b6895be46a6ea7305d33",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2604,8 +2388,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 134144,
-      "expectedSha256": "cfbbbc6905e482eb4d7418679cfa18ff64f2014527fb2ad410822cdda327b2df",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2628,8 +2410,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 41984,
-      "expectedSha256": "3c99894b805b473aa518c80c85470a55a6dc70ae332a0babce58782eab2975ca",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2652,8 +2432,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 32768,
-      "expectedSha256": "8c263f267fd10f6f8c933bc0868c0ace45d48c8ccc41dbab64040145183e0ac2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2676,8 +2454,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 48128,
-      "expectedSha256": "be9cf25cbbe51641d53b25c2df7fc8a6ebea9b9ae21c40c5955034f1cbe95f74",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2700,8 +2476,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 51200,
-      "expectedSha256": "06e3c1bae84a379815a0a76e6aa4c385e3c4fd613eb675cee0dff551ba1034ea",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2724,8 +2498,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 122880,
-      "expectedSha256": "ec6ba69380a6fdb2a5f730d89f1032fa6a24b51c4e2d6f9c2bc88a629618699e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2748,8 +2520,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 234496,
-      "expectedSha256": "41f4bf21e438445068849f212a5aad90efb34d50be8d90fa1c6417452abf0638",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2772,8 +2542,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 110592,
-      "expectedSha256": "37060048ba233dcfaa83e66f3d27446c0a6fa15407a432762ec7c287234bca22",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2796,8 +2564,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 110592,
-      "expectedSha256": "6674db102cae39a9df4af25b661de44eff48f94cb4728fbfbcb58ad88663349c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2820,8 +2586,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 110592,
-      "expectedSha256": "0d7da3a2a13ced144870094a3fd4c2f9ddbb629bff8106e9e67f619b5f2f66b8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2844,8 +2608,6 @@
       "consumers": [
         "spice"
       ],
-      "expectedBytes": 114799616,
-      "expectedSha256": "297b252ecd4ec28853ba825e2584278e14d443da215db9df1d72c311ab0d6da5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

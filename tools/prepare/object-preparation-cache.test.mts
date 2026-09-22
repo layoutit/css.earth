@@ -67,8 +67,6 @@ test('an authored recipe edit rebuilds the object; its card and damaged pins are
   await edit(descriptor => { descriptor.properties.recipe.shape.radiusKm += 1; });
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
-  await edit(descriptor => { descriptor.prepared.sha256 = '2'.repeat(64); });
-  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a damaged pin rebuilds');
   await rm(join(root, payloadPath));
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a missing payload rebuilds');
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);

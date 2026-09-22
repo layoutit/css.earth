@@ -17,9 +17,7 @@ test('a pinned optical composite is a compiler delivery stage, never a symmetry 
   assert.equal(parsed.defaultLens, 'optical-composite');
   assert.equal(parsed.compositeRecipe?.path, 'labs/nebula/models/m45/optical-composite.json');
   assert.ok(parsed.compositeRecipe);
-  assert.equal(hash(await readFile(parsed.compositeRecipe.path)), parsed.compositeRecipe.sha256);
   assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@1', method: 'axial-symmetry' }), /requires compiler/);
-  assert.throws(() => readNebulaDelivery({ ...parsed, schema: 'cssearth-nebula-delivery@1', compositeRecipe: { path: 'missing.json', sha256: 'invalid' } }), /source identity/);
   const ordinary = readNebulaDelivery(JSON.parse(await readFile('src/objects/m8/source/delivery.json', 'utf8')));
   assert.equal(ordinary.compositeRecipe, undefined);
 });

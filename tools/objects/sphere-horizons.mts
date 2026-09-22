@@ -147,21 +147,20 @@ const TABLES = {
 export function tableInput(objectId: string, kind: keyof typeof TABLES, path: string, bytes: Uint8Array) {
   return { id: `${objectId}-${TABLES[kind].suffix}`, path, origin: HORIZONS_API, credit: 'NASA/JPL-Caltech, Solar System Dynamics: JPL Horizons',
     license: 'Public ephemeris service output; cite JPL Horizons.',
-    acquisition: 'Pinned response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.',
-    redistribution: 'Public NASA/JPL output; retain the citation.', consumers: ['sphere-sighting-geometry'], coverage: TABLES[kind].coverage,
-    expectedBytes: bytes.length, expectedSha256: sha256(bytes) };
+    acquisition: 'Response from the JPL Horizons API for this target and observer code 309, Paranal, written by tools/objects/sphere-horizons.mts.',
+    redistribution: 'Public NASA/JPL output; retain the citation.', consumers: ['sphere-sighting-geometry'], coverage: TABLES[kind].coverage };
 }
 
-/** Write both tables and pin them: an existing input gets its new size and hash, a missing one is declared. */
+/** Write both tables; a table the manifest does not name yet is declared. */
 export async function writeHorizonsTables(objectId: string, sourceDirectory: string, paths: { observer: string; heliocentric: string }, tables: { observer: string; heliocentric: string }) {
   const manifestPath = resolve(sourceDirectory, 'manifest.json'), manifest = requireRecord(JSON.parse(await readFile(manifestPath, 'utf8')), 'source manifest');
   const inputs = requireArray(manifest.inputs, 'manifest inputs'), declared: string[] = [];
   for (const kind of ['observer', 'heliocentric'] as const) {
     const bytes = Buffer.from(tables[kind]);
     await writeFile(resolve(sourceDirectory, paths[kind]), bytes);
-    const entry = inputs.map(value => requireRecord(value, 'manifest input')).find(input => input.path === paths[kind]);
-    if (entry) { entry.expectedBytes = bytes.length; entry.expectedSha256 = sha256(bytes); }
-    else { inputs.push(tableInput(objectId, kind, paths[kind], bytes)); declared.push(paths[kind]); }
+    if (!inputs.map(value => requireRecord(value, 'manifest input')).some(input => input.path === paths[kind])) {
+      inputs.push(tableInput(objectId, kind, paths[kind], bytes)); declared.push(paths[kind]);
+    }
   }
   await writeFile(manifestPath, JSON.stringify(manifest, null, 2) + '\n');
   return declared;

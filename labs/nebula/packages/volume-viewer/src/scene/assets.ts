@@ -8,7 +8,7 @@ export async function loadBank<Bank, Publication>(backend: CompilerViewerBackend
   const directory = reference.path.slice(0, reference.path.lastIndexOf('/') + 1), textures = new Map<string, string>(), urls: string[] = [];
   const queue = [...backend.resources(payload)], settled = await Promise.allSettled(Array.from({ length: Math.min(6, queue.length) }, async () => {
     while (queue.length) {
-      const resource = queue.shift()!, content = await readPinned({ path: `${directory}${resource.path}`, sha256: resource.sha256 }, resolvePath, signal);
+      const resource = queue.shift()!, content = await readPinned({ path: `${directory}${resource.path}` }, resolvePath, signal);
       if (content.byteLength !== resource.bytes) throw new Error(`Compiler texture byte length differs: ${resource.path}`);
       const blob = new Blob([content]), url = URL.createObjectURL(blob); urls.push(url);
       let image: ImageBitmap;
@@ -33,11 +33,9 @@ export async function loadStarAtlas(result: CompilerBakeResult, resolvePath: (pa
   signal?.throwIfAborted(); return URL.createObjectURL(blob);
 }
 async function readPinned(reference: CompilerPin, resolvePath: (path: string) => string, signal?: AbortSignal): Promise<ArrayBuffer> {
-  if (!reference || !relativePath(reference.path) || !/^[a-f0-9]{64}$/.test(reference.sha256)) throw new TypeError('Compiler resource pin is invalid.');
+  if (!reference || !relativePath(reference.path)) throw new TypeError('Compiler resource path is invalid.');
   const response = await fetch(resolvePath(reference.path), { signal }); if (!response.ok) throw new Error(`Compiler resource failed to load: ${reference.path} (${response.status})`);
-  const bytes = await response.arrayBuffer(), digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))]
-    .map(value => value.toString(16).padStart(2, '0')).join('');
-  if (digest !== reference.sha256) throw new Error(`Compiler resource SHA-256 differs: ${reference.path}`); return bytes;
+  return response.arrayBuffer();
 }
 export function requiredTexture<Bank>(bank: LoadedBank<Bank>, path: string) { const value = bank.textures.get(path); if (!value) throw new Error(`Compiler texture was not decoded: ${path}`); return value; }
 export function release(bank: { urls: string[] }) {

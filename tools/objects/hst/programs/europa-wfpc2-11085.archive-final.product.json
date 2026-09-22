@@ -6,14 +6,12 @@
     {
       "role": "science",
       "identity": "mast:HST/product/u9xe010cm_c0m.fits",
-      "bytes": 10307520,
-      "sha256": "d64a2a8f9f9694f01f0a55800bc3b6c34a0e35d766b88b540cb43d002368abe6"
+      "bytes": 10307520
     },
     {
       "role": "quality",
       "identity": "mast:HST/product/u9xe010cm_c1m.fits",
-      "bytes": 5178240,
-      "sha256": "7540ed7b956593440313df17cde93a8c4192d7312563cfcd91a0ac18c44b573b"
+      "bytes": 5178240
     }
   ],
   "parameters": {
@@ -168,13 +166,11 @@
     {
       "path": "u9xe010cm_c0m.fits",
       "bytes": 10307520,
-      "sha256": "d64a2a8f9f9694f01f0a55800bc3b6c34a0e35d766b88b540cb43d002368abe6",
       "units": "COUNTS"
     },
     {
       "path": "u9xe010cm_c1m.fits",
-      "bytes": 5178240,
-      "sha256": "7540ed7b956593440313df17cde93a8c4192d7312563cfcd91a0ac18c44b573b"
+      "bytes": 5178240
     }
   ],
   "evidence": [

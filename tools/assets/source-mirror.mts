@@ -7,13 +7,13 @@ import { pipeline } from 'node:stream/promises';
 import { RUNTIME_ASSET_ORIGIN } from './asset-origin.mts';
 export { RUNTIME_ASSET_ORIGIN };
 
-/** `source-cache/<sha256>/<filename>`, percent-encoding the filename segment (it can carry spaces or other
- * reserved characters; the key must still be a single valid URL path segment). */
-export function sourceCacheKey(sha256Digest: string, filename: string): string {
-  return `source-cache/${sha256Digest}/${encodeURIComponent(filename)}`;
+/** `source-cache/<object id>/<manifest path>`: the mirror of one object's downloaded source input, addressed the way
+ * its manifest names it. Each path segment is percent-encoded (a name can carry spaces or other reserved characters). */
+export function sourceCacheKey(objectId: string, path: string): string {
+  return `source-cache/${objectId}/${path.split('/').map(segment => encodeURIComponent(segment)).join('/')}`;
 }
-export function sourceCacheUrl(origin: string, sha256Digest: string, filename: string): string {
-  return `${origin}/${sourceCacheKey(sha256Digest, filename)}`;
+export function sourceCacheUrl(origin: string, objectId: string, path: string): string {
+  return `${origin}/${sourceCacheKey(objectId, path)}`;
 }
 
 /** Relays `source` through a fresh PassThrough, destroying it if no chunk arrives within `idleMs` of the last one

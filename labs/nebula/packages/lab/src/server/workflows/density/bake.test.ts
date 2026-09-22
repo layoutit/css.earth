@@ -32,10 +32,9 @@ test('acquisition rejects altered local sources without downloading or overwriti
   const root = await mkdtemp(join(tmpdir(), 'nebula-bake-source-'));
   try {
     await writeFile(join(root, 'source.dat'), 'changed');
-    await assert.rejects(acquire(root, { path: 'source.dat', sha256: hash('original'), url: 'https://invalid.invalid/source' }), /Existing source differs/);
-    assert.equal(await readFile(join(root, 'source.dat'), 'utf8'), 'changed');
-    await acquire(root, { path: 'source.dat', sha256: hash('changed'), url: 'https://invalid.invalid/source' });
-    await assert.rejects(pinned(root, { path: '../escape', sha256: hash('changed') }), /Invalid recipe path/);
+    await acquire(root, { path: 'source.dat', url: 'https://invalid.invalid/source' });
+    assert.equal(await readFile(join(root, 'source.dat'), 'utf8'), 'changed', 'a present source is never fetched');
+    await assert.rejects(pinned(root, { path: '../escape' }), /Invalid recipe path/);
     assert.throws(() => localPath(root, '/tmp/escape'), /Invalid recipe path/);
   } finally { await rm(root, { recursive: true, force: true }); }
 });

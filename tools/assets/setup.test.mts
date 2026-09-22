@@ -53,7 +53,7 @@ test("allow-missing (deploy only) skips a genuinely missing R2 file so the objec
     await rm(file);
     const asset = { id: "helix", key: "helix/lenses.json", location: "prepared" as const, filename: "lenses.json", file,
       url: "https://example.invalid/helix/lenses.json", bytes: bankBytes.length,
-      sha256: helix.descriptor.prepared.sha256 };
+      sha256: createHash("sha256").update(bankBytes).digest("hex") };
     const fetcher = async () => new Response(null, { status: 404 });
 
     // Allow-missing tolerates the 404: no install, no throw, the file stays absent.

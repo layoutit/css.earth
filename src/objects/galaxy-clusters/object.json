@@ -4,13 +4,11 @@
   "type": "galaxy-cluster-catalog",
   "properties": {
     "preparation": {
-      "source": "source/catalogue.json",
-      "sha256": "50cb87f39ef3736c247eeeda5c3c4ae520dc2e9a811980953d0cecb80d4b4ee7"
+      "source": "source/catalogue.json"
     }
   },
   "prepared": {
     "format": "cssearth-cluster-catalog@1",
-    "url": "prepared/catalogue.json",
-    "sha256": "0685a83533e32ab31d0eb36ad3f02df8afa3a53bffa39df709f1e54b4f0b95c3"
+    "url": "prepared/catalogue.json"
   }
 }

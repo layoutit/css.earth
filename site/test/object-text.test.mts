@@ -48,8 +48,8 @@ test('text shown together may not repeat a sentence or a six-word phrase, includ
 });
 
 test('published text keeps the authored blocks and names the input it was checked from', () => {
-  const prepared = parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', sourceSha256: 'a'.repeat(64), ...blocks }, 'saturn');
+  const prepared = parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', ...blocks }, 'saturn');
   assert.equal(prepared.introduction.text, blocks.introduction.text);
-  assert.throws(() => parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', sourceSha256: 'a'.repeat(64), ...blocks }, 'titan'), /belongs to saturn/u);
+  assert.throws(() => parsePreparedText({ schema: PREPARED_TEXT_SCHEMA, objectId: 'saturn', ...blocks }, 'titan'), /belongs to saturn/u);
   assert.throws(() => parsePreparedText({ schema: OBJECT_TEXT_SCHEMA, objectId: 'saturn', ...blocks }), /prepared text schema/u);
 });

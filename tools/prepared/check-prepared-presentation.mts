@@ -147,7 +147,6 @@ async function readAuthoredRuntime({ root, objectId, descriptor, readText }: {ro
     if (relative(directory, path).startsWith('../')) throw new TypeError('Authored source escapes its object package.');
     const record = records.find(entry => `source/${String(entry.path)}` === source.path);
     if (!record) throw new TypeError(`Authored source is not declared in the manifest: ${source.path}.`);
-    if (record.expectedSha256 !== undefined && sha256(await readText(path)) !== record.expectedSha256) throw new TypeError(`Source digest drifted: ${source.path}.`);
   }
   const preparedDirectory = resolve(directory, 'prepared');
   const payloadPath = resolve(directory, reference.url);

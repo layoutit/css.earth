@@ -54,21 +54,15 @@ const triple = (v: unknown): [number, number, number] => {
 };
 const pin = (v: unknown): CompilerPin => {
   const p = object(v);
-  return { path: text(p.path), sha256: text(p.sha256) };
+  return { path: text(p.path) };
 };
 async function pinned(root: string, p: CompilerPin) {
-  if (
-    !/^[a-f0-9]{64}$/.test(p.sha256) ||
-    p.path.startsWith("/") ||
-    p.path.split("/").includes("..")
-  )
-    throw new Error("Invalid compact pin");
+  if (p.path.startsWith("/") || p.path.split("/").includes(".."))
+    throw new Error("Invalid compact source path");
   const actual = await realpath(resolve(root, p.path));
   const offset = relative(await realpath(root), actual);
   if (offset === ".." || offset.startsWith("../") || isAbsolute(offset)) throw new Error("Compact pin escapes root");
-  const b = await readFile(actual);
-  if (geometrySha(b) !== p.sha256) throw new Error("Compact pin differs");
-  return b;
+  return readFile(actual);
 }
 async function json(root: string, path: string) {
   return JSON.parse(await readFile(resolve(root, path), "utf8")) as unknown;

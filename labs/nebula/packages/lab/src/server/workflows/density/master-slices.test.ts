@@ -105,13 +105,13 @@ test('delivery reads pinned PNG masters, averages premultiplied color and maps c
   }
   // The real compiler and runtime validator accept both derived physical banks.
   const recipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1',
-    grid: { path: 'unused.gz', sha256: '0'.repeat(64), decodedSha256: '0'.repeat(64), dimensions: [1, 1, 1],
+    grid: { path: 'unused.gz', dimensions: [1, 1, 1],
       encoding: 'linear-density-unorm8', bounds: config.boundsKpc },
     material: { emission: [{ channel: 0, color: [1, 1, 1], strength: 1 }], absorption: [], intensityScale: 1,
       stepScale: 1, exposureGain: 1, emissionTransfer: 'shared-opacity' },
     bake: { sliceCounts: config.sliceCounts, unitsPerSourceUnit: 1, imageWidth: 4,
       samplesPerSlab: 2, cropTransparent: true, opticalWeight: 1 }, anchors: [],
-    provenance: { path: 'provenance.json', sha256: '0'.repeat(64) } };
+    provenance: { path: 'provenance.json' } };
   for (const bank of banks) {
     const prepared = compileCssVolume({ id: 'optical-test', slices: bank.slices, recipe,
       frame: { referenceFrame: 'icrf-j2000', epochJdTt: 2451545, originM: [0, 0, 0],

@@ -137,7 +137,7 @@ export interface Candidate {
       readonly centralWavelengthMicrometres?: number;
       readonly wavelengthIntervalMicrometres?: readonly [number, number]; readonly wavelengthIntervalsMicrometres?: readonly (readonly [number, number])[];
       readonly surfaceResolutionKm?: number; readonly kind?: ProductKind; readonly use?: string; readonly units?: string;
-      readonly qualification?: { readonly verified: boolean; readonly receipt: string; readonly problem?: string; readonly limitations: readonly string[] }; readonly requestSatisfaction?: RequestSatisfaction; readonly sourceProductId?: string; readonly sourceFiles?: readonly { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[] }[] } | null;
+      readonly qualification?: { readonly verified: boolean; readonly receipt: string; readonly problem?: string; readonly limitations: readonly string[] }; readonly requestSatisfaction?: RequestSatisfaction; readonly sourceProductId?: string; readonly sourceFiles?: readonly { readonly role: string; readonly path: string; readonly origin: string }[] }[] } | null;
   readonly programmes: readonly string[];
   readonly meetsConstraints: Readonly<Record<string, ConstraintVerdict>>;
   readonly toolkitSupport: ToolkitSupport;
@@ -579,8 +579,7 @@ function pdsModes(value: unknown, target: string): TargetMode[] {
     const productLidvid = row.lidvid === undefined ? undefined : requireString(row.lidvid, 'PDS lidvid');
     const archiveProductId = row.archiveProductId === undefined ? undefined : requireString(row.archiveProductId, 'PDS archive product id');
     const sourceFiles = row.sourceFiles === undefined ? undefined : requireArray(row.sourceFiles, 'PDS source files').map(rawFile => { const file = requireRecord(rawFile, 'PDS source file'); return {
-      role: requireString(file.role, 'PDS source file role'), path: requireString(file.path, 'PDS source file path'), origin: requireString(file.origin, 'PDS source file origin'),
-      bytes: requireFiniteNumber(file.bytes, 'PDS source file bytes'), sha256: requireString(file.sha256, 'PDS source file sha256') }; });
+      role: requireString(file.role, 'PDS source file role'), path: requireString(file.path, 'PDS source file path'), origin: requireString(file.origin, 'PDS source file origin') }; });
     const filter = row.filter === undefined ? (row.filters === undefined ? undefined : requireArray(row.filters, 'PDS filters').map(value => requireString(value, 'PDS filter')).join(', ')) : requireString(row.filter, 'PDS filter');
     return { id: requireString(row.id, 'PDS observation id'), programme: requireString(row.program ?? row.lidvid, 'PDS program'), startIso: requireString(row.startIso ?? row.registryStartIso, 'PDS start'),
       endIso: requireString(row.endIso ?? row.registryStopIso, 'PDS end'), ...(filter === undefined ? {} : { filter }), archiveTarget: requireString(row.targetName, 'PDS target name'),

@@ -1,5 +1,4 @@
 import { existsSync } from 'node:fs';
-import { sha256 } from '../../src/platform/sha256.mts';
 import {requireRecord} from '../sources/source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -35,12 +34,9 @@ export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id),
     if (restoredOnly && !existsSync(runtimePath)) { skipped++; continue; }
     const runtime: unknown = JSON.parse(await readFile(runtimePath, 'utf8'));
     const payload = serializeObjectJson(descriptor, runtime);
-    if (sha256(payload) !== reference.sha256) {
-      throw new Error(`${id}: checked-in runtime does not reproduce its prepared JSON pin.`);
-    }
     if (await writePreparedText(resolve(directory, reference.url), payload)) written++;
     // The page's assets and controls come from the same runtime, so a checkout never carries a stale copy.
-    await writePreparedText(resolve(directory, 'prepared/page.json'), preparePageMetadata(id, reference.sha256, runtime).text);
+    await writePreparedText(resolve(directory, 'prepared/page.json'), preparePageMetadata(id, runtime).text);
   }
   return { objects: ids.length, written, skipped, reused: ids.length - written - skipped };
 }

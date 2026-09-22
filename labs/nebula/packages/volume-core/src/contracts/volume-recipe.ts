@@ -12,9 +12,9 @@ export interface RadialEmission {
 }
 export interface VolumeRecipe {
   schema: 'cssearth-volume-recipe@1';
-  grid: { path: string; sha256: string; decodedSha256: string; dimensions: Vector3;
+  grid: { path: string; dimensions: Vector3;
     encoding: 'sqrt-density-unorm8' | 'linear-density-unorm8'; bounds: Bounds3;
-    acquisition?: { path: string; sha256: string }; };
+    acquisition?: { path: string }; };
   material: { emission: DensityChannel[]; absorption: DensityChannel[]; radialEmission?: RadialEmission;
     intensityScale: number; stepScale: number; exposureGain: number;
     /** Shared opacity preserves constant RGB ratios through ordinary source-over; no extinction. */
@@ -23,8 +23,8 @@ export interface VolumeRecipe {
   bake: { sliceCounts: Record<Axis, number>; unitsPerSourceUnit: number; imageWidth: number;
     samplesPerSlab: number; cropTransparent: boolean; opticalWeight: number; imageEncoding?: VolumeImageEncoding; };
   anchors: { id: string; referencePositionM: Vector3 }[];
-  provenance: { path: string; sha256: string };
-  sky?: { path: string; sha256: string };
+  provenance: { path: string };
+  sky?: { path: string };
 }
 export function record(value: unknown, at: string): Record<string, unknown> {
   if (!value || typeof value !== 'object' || Array.isArray(value)) throw new TypeError(`${at} must be an object.`);
@@ -132,9 +132,8 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
       radialTaper: interval(c.radialTaper, 'radialTaper'), verticalTaper: interval(c.verticalTaper, 'verticalTaper') };
     if (radialEmission.radialTaper[1] !== 1) throw new TypeError('Abel radial profile support must end at unit radius.');
   }
-  return { schema: r.schema, grid: { path: sourcePath(g.path), sha256: digest(g.sha256, 'grid digest'),
-    decodedSha256: digest(g.decodedSha256, 'decoded digest'), dimensions, encoding: g.encoding, bounds: { min, max },
-    ...(acquisition ? { acquisition: { path: sourcePath(acquisition.path), sha256: digest(acquisition.sha256, 'acquisition digest') } } : {}) },
+  return { schema: r.schema, grid: { path: sourcePath(g.path), dimensions, encoding: g.encoding, bounds: { min, max },
+    ...(acquisition ? { acquisition: { path: sourcePath(acquisition.path) } } : {}) },
     material: { emission, absorption,
       ...(radialEmission ? { radialEmission } : {}), ...(cylinderSupport ? { cylinderSupport } : {}),
       ...(m.displayColorMatrix === undefined ? {} : { displayColorMatrix: displayColorMatrix(m.displayColorMatrix) }),
@@ -145,6 +144,6 @@ export function parseVolumeRecipe(value: unknown): VolumeRecipe {
       unitsPerSourceUnit: positive(b.unitsPerSourceUnit, 'unitsPerSourceUnit'), imageWidth: positive(b.imageWidth, 'imageWidth', true),
       samplesPerSlab: positive(b.samplesPerSlab, 'samplesPerSlab', true), cropTransparent: b.cropTransparent,
       opticalWeight: positive(b.opticalWeight, 'opticalWeight'), ...(imageEncoding ? { imageEncoding } : {}) }, anchors,
-    provenance: { path: sourcePath(p.path), sha256: digest(p.sha256, 'provenance digest') },
-    ...(sky ? { sky: { path: sourcePath(sky.path), sha256: digest(sky.sha256, 'sky recipe digest') } } : {}) };
+    provenance: { path: sourcePath(p.path) },
+    ...(sky ? { sky: { path: sourcePath(sky.path) } } : {}) };
 }

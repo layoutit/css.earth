@@ -15,7 +15,7 @@ async function deliveryFiles(root: string, delivery: BakeDelivery) {
   assert.ok(images.length > 0, 'Delivery manifest has no cloud textures.');
   for (const [path, pin] of Object.entries(manifest.outputs) as [string, {sha256: string}][]) {
     if (images.some(([imagePath]) => imagePath === path)) continue;
-    await pinned(root, { path: `${delivery.directory}/${path}`, sha256: pin.sha256 });
+    await pinned(root, { path: `${delivery.directory}/${path}` });
   }
   return images;
 }
@@ -24,7 +24,7 @@ export async function deliveryReady(root: string, delivery: BakeDelivery) {
   const images = await deliveryFiles(root, delivery);
   let ready = true;
   for (const [path, pin] of images) {
-    try { await pinned(root, { path: `${delivery.directory}/${path}`, sha256: pin.sha256 }); }
+    try { await pinned(root, { path: `${delivery.directory}/${path}` }); }
     catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; ready = false; }
   }
   return ready;
@@ -40,7 +40,7 @@ export async function restoreDelivery(root: string, delivery: BakeDelivery, resu
     assert.ok(selected.length, `Delivery does not contain ${result.imageId}.`);
     for (const [path, pin] of selected) {
       // Retain even accepted transparent slabs: the reference manifest still names them.
-      const bytes = await pinned(root, { path: `${sourceDirectory}/${path.slice(prefix.length)}`, sha256: pin.sha256 });
+      const bytes = await pinned(root, { path: `${sourceDirectory}/${path.slice(prefix.length)}` });
       assert.equal(bytes.length, pin.bytes);
       writes.push({ path: localPath(root, `${delivery.directory}/${path}`), bytes });
     }
@@ -58,8 +58,7 @@ async function restoreAtlasDelivery(root: string, delivery: BakeDelivery, result
   assert.equal(inputs.schema, 'cssearth-volume-atlas-inputs@1');
   assert.ok(Array.isArray(inputs.lenses));
   const manifest = JSON.parse((await pinned(root, delivery.manifest)).toString());
-  const envelope = JSON.parse((await pinned(root, { path: `${delivery.directory}/prepared/lenses.json`,
-    sha256: manifest.outputs['prepared/lenses.json'].sha256 })).toString());
+  const envelope = JSON.parse((await pinned(root, { path: `${delivery.directory}/prepared/lenses.json` })).toString());
   const bank = validatePreparedVolumeLenses(envelope.data);
   const writes: {path: string; bytes: Buffer}[] = [];
   for (const result of results) {
@@ -79,7 +78,7 @@ async function restoreAtlasDelivery(root: string, delivery: BakeDelivery, result
         assert.ok(path.startsWith(`${result.imageId}/`));
         const resource = volume.resources.find(value => value.path === path);
         assert.ok(resource);
-        return pinned(root, {path: `${sourceDirectory}/${path.slice(result.imageId.length + 1)}`, sha256: resource.sha256});
+        return pinned(root, {path: `${sourceDirectory}/${path.slice(result.imageId.length + 1)}`});
       },
       writeResource: async (path, bytes) => {
         const expected = images.find(([name]) => name === `prepared/${path}`)?.[1];

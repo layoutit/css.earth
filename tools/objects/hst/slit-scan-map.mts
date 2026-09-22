@@ -627,7 +627,7 @@ export const scanMeasurement = (definition: SlitScanDefinition, direction: Acros
     solarReference: { name: definition.reference.name, sha256: definition.reference.sha256 }, reduction: definition.reduction, acrossSlitDirection: direction } });
 
 export const scanFrame = (definition: SlitScanDefinition, rotationSha256: string): BodyMapFrame =>
-  ({ body: definition.target.toLowerCase(), radiusKm: definition.bodyRadiusKm, rotation: { model: definition.orientation.path, sha256: rotationSha256, bodyCode: definition.orientation.body } });
+  ({ body: definition.target.toLowerCase(), radiusKm: definition.bodyRadiusKm, rotation: { model: definition.orientation.path, bodyCode: definition.orientation.body } });
 
 /** Across the scan one resolution element is the slit's width; along the slit it is two detector pixels. Hubble's own blur is
  * not removed and is not counted here. */
@@ -647,7 +647,7 @@ export function scanBodyMapRecord(definition: SlitScanDefinition, run: SlitScanR
     return scanObservation(definition, entry, frame.plateScaleArcsec, frame.programme); });
   return { schema: 'cssearth-body-map@1', definition: scanMeasurement(definition, run.direction), frame: scanFrame(definition, rotationSha256),
     grid: { width: run.combined.map.width, height: run.combined.map.height, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-    planes: { file: fileName, sha256: digestOf(fits), value: definition.band.quantity, uncertainty: `${definition.band.quantity} ERROR` }, mask: { maximumEmissionDegrees: definition.grid.maximumEmissionDegrees, missing: 'NaN' }, observations,
+    planes: { file: fileName, value: definition.band.quantity, uncertainty: `${definition.band.quantity} ERROR` }, mask: { maximumEmissionDegrees: definition.grid.maximumEmissionDegrees, missing: 'NaN' }, observations,
     ...(observations.length > 1 ? { combination: SCAN_COMBINATION } : {}) };
 }
 

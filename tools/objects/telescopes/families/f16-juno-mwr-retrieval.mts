@@ -315,15 +315,14 @@ export function describeJunoMwrRetrieval(input:{readonly id:string;readonly retr
   return value;
 }
 
-export interface PinnedJunoMwrFile {readonly path:string;readonly bytes:number;readonly sha256:string}
-/** Copy the pinned archive files unchanged into a new directory, after re-pinning every one. */
+export interface PinnedJunoMwrFile {readonly path:string}
+/** Copy the archive files unchanged into a new directory, measuring every one. */
 export async function exportJunoMwrRetrievalNative(pins:readonly PinnedJunoMwrFile[],output:string):Promise<readonly {readonly path:string;readonly bytes:number;readonly sha256:string}[]>{
   if(!pins.length)throw new TypeError('Native Juno MWR export needs the pinned archive files.');
   const directory=resolve(output);await mkdir(directory,{recursive:true});
   const written:{path:string;bytes:number;sha256:string}[]=[];
   for(const pin of pins){
     const actual=await pinFile(pin.path);
-    if(actual.bytes!==pin.bytes||actual.sha256!==pin.sha256)throw new Error(`Juno MWR pin changed: ${pin.path}.`);
     const destination=resolve(directory,basename(pin.path));
     if(written.some(entry=>entry.path===destination))throw new TypeError(`Native Juno MWR export would overwrite ${basename(pin.path)}.`);
     await copyFile(pin.path,destination);written.push({path:destination,...actual});

@@ -3,7 +3,6 @@
   "id": "lmc",
   "source": {
     "path": "source.jpg",
-    "sha256": "68cce2d2ebd9d43839c66f513df4819365e920fa4e6added41cc054f78739d58",
     "dimensions": [
       3000,
       2911
@@ -123,7 +122,6 @@
     "diffuseSigmaPixels": 2
   },
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "a59b8dfda8bcd82e65244cb32a7e3483ceedde33217013e6fbec039cb8ad56a8"
+    "path": "provenance.json"
   }
 }

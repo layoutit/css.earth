@@ -170,11 +170,9 @@
     1e-06
   ],
   "detectorQualityPolicy": "pds3-ir-adc-background-and-filter-dependencies@1",
-  "detectorQualityPreparerSha256": "e02acd15b1af115d3482a6272ba78d79071db2757d45854fb0d0527681dc314e",
   "registrationEvidence": {
     "file": "evidence/registration.md",
-    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Selected Cassini regions use released native navigation. Independent registration to the separate fixed normal-map control is not established; there is no resolved Odysseus-center claim.",
-    "sha256": "942fdb6592821e810983962c922ee447ba3d9effcc1b4e2c7357c6efa837bd74"
+    "qualification": "Native source-camera center reconstruction and independent dense aperture checks qualify physical detector support. A conservative angular inset guards tested between-pose boundary motion. Selected Cassini regions use released native navigation. Independent registration to the separate fixed normal-map control is not established; there is no resolved Odysseus-center claim."
   },
   "width": 1024,
   "height": 512,

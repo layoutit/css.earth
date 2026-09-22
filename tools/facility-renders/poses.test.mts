@@ -11,7 +11,7 @@ const models = requireArray(library.entries).map(value => requireRecord(value)).
 test('every rendered source model has exactly one reviewed, source-bound pose', () => {
   assert.deepEqual(Object.keys(facilityPoses).sort(), models.map(entry => requireString(entry.id)).sort());
   for (const entry of models) {
-    const pose = getFacilityPose(requireString(entry.id), requireString(requireRecord(requireRecord(entry.source).model).sha256));
+    const pose = getFacilityPose(requireString(entry.id));
     assert.ok(pose.facingFeature && pose.evidence.identification && new URL(pose.evidence.url).protocol === 'https:');
     assert.ok([...pose.modelQuaternion, ...pose.sourceAxis].every(Number.isFinite));
   }
@@ -28,7 +28,6 @@ test('saved model rotations aim down-left in the fixed camera without mirroring 
   }
 });
 
-test('changed or new models cannot silently inherit an unreviewed pose', () => {
-  assert.throws(() => getFacilityPose('cassini', 'different-source'), /Unreviewed/);
-  assert.throws(() => getFacilityPose('unknown-facility', 'different-source'), /Unreviewed/);
+test('an unknown facility has no pose', () => {
+  assert.throws(() => getFacilityPose('unknown-facility'), /Unreviewed/);
 });

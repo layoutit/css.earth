@@ -48,11 +48,10 @@ export function parseObservedSurfaceRecipe(input: unknown) {
 export async function verifyObservationSources(directory: string, sources: readonly SourcePin[]) {
   const root=await realpath(directory), inputs=new Map();
   for(const source of sources) {
-    if(!source.path || source.path.startsWith('/') || source.path.split(/[\\/]/u).includes('..') || !/^[a-f0-9]{64}$/u.test(source.expectedSha256)) throw new TypeError('Invalid observation source pin.');
+    if(!source.path || source.path.startsWith('/') || source.path.split(/[\\/]/u).includes('..')) throw new TypeError('Invalid observation source path.');
     const path=await realpath(resolve(root,source.path)), offset=relative(root,path);
     if(offset==='..'||offset.startsWith(`..${sep}`)||offset.startsWith(sep)) throw new TypeError('Observation source escapes its package.');
     const bytes=await readFile(path);
-    if(bytes.length!==source.expectedBytes||sha256(bytes)!==source.expectedSha256) throw new Error(`Observation source pin mismatch: ${source.path}`);
     inputs.set(source.path,bytes);
   }
   return inputs;

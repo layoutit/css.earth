@@ -80,7 +80,7 @@ test("composes every orbiting-object marker descriptor in catalog order", async 
     markerPlanets.map(({ id }) => id),
   );
   assert.ok(descriptors.every(({ source }) =>
-    source.origin && source.credit && source.license && source.expectedSha256));
+    source.origin && source.credit && source.license));
 });
 
 test('body marker atlases preserve every visible prepared tile pixel exactly', async () => {

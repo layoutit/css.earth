@@ -3,7 +3,6 @@
   "target": "103P/HARTLEY 2",
   "mesh": {
     "path": "shape/hartley2_2012_plan.tab",
-    "sha256": "0553bcaf1733d520efa30abf3832f6af6ba3c93b4d146fa373e8e81f03e21940",
     "grid": {
       "metersPerUnit": 1000,
       "expectedVertices": 16022,
@@ -11,8 +10,7 @@
     }
   },
   "solar": {
-    "path": "science/hrii/hriir_020601_2_0.tab",
-    "sha256": "8eab0a393b884c15567f3e8b634d4ec2c3e40658f006732c75c6d85aa6230d8a"
+    "path": "science/hrii/hriir_020601_2_0.tab"
   },
   "bodyToJ2000": [
     [
@@ -40,399 +38,342 @@
       "id": "hi10110413_5001004_111_rr",
       "number": 111,
       "path": "science/hrii/hi10110413_5001004_111_rr.fit",
-      "sha256": "94821cf5def3e1016be73d92447ecbb7cb1a893f35e43dc01297aee5cbb95b7b",
       "startTime": "2010-11-04T13:55:23.438"
     },
     {
       "id": "hi10110413_5001004_112_rr",
       "number": 112,
       "path": "science/hrii/hi10110413_5001004_112_rr.fit",
-      "sha256": "bdb3b11e8355055d19d27523d3cd1a5f9659083b16ab75993b7e088086d8b890",
       "startTime": "2010-11-04T13:55:24.156"
     },
     {
       "id": "hi10110413_5001004_113_rr",
       "number": 113,
       "path": "science/hrii/hi10110413_5001004_113_rr.fit",
-      "sha256": "2b1a97a825326d4df8b1c8bc6d414255544aa80cbb66cae892668cc09457a9bb",
       "startTime": "2010-11-04T13:55:24.879"
     },
     {
       "id": "hi10110413_5001004_114_rr",
       "number": 114,
       "path": "science/hrii/hi10110413_5001004_114_rr.fit",
-      "sha256": "fa050bcb562ae5bbd08943e765d12986f4a7d0264c371247f0b9ce3d258cb7a3",
       "startTime": "2010-11-04T13:55:25.598"
     },
     {
       "id": "hi10110413_5001004_115_rr",
       "number": 115,
       "path": "science/hrii/hi10110413_5001004_115_rr.fit",
-      "sha256": "b7688602754c3191bedba909a796a319f84ab2f5a0288195434c46fd38a7b122",
       "startTime": "2010-11-04T13:55:26.321"
     },
     {
       "id": "hi10110413_5001004_116_rr",
       "number": 116,
       "path": "science/hrii/hi10110413_5001004_116_rr.fit",
-      "sha256": "d3db1bc92cd1a314ae414d28a506e40c21c35104e71602b4bf4ddd312e40bdcf",
       "startTime": "2010-11-04T13:55:27.039"
     },
     {
       "id": "hi10110413_5001004_117_rr",
       "number": 117,
       "path": "science/hrii/hi10110413_5001004_117_rr.fit",
-      "sha256": "2ae66df0149ad5d12a18eeec33d15cbe0c3007798970e42631bcd6d6c1585fa2",
       "startTime": "2010-11-04T13:55:27.762"
     },
     {
       "id": "hi10110413_5001004_118_rr",
       "number": 118,
       "path": "science/hrii/hi10110413_5001004_118_rr.fit",
-      "sha256": "0a9d08d62fe886e03fb54b4bdc74220491a49f5f3ccde75aa28fecdce7cf4cba",
       "startTime": "2010-11-04T13:55:28.481"
     },
     {
       "id": "hi10110413_5001004_119_rr",
       "number": 119,
       "path": "science/hrii/hi10110413_5001004_119_rr.fit",
-      "sha256": "fdea2958f98cc3de9c7d5047d83231e7ceb7b19f43a70f3b7f8e1610c180182f",
       "startTime": "2010-11-04T13:55:29.203"
     },
     {
       "id": "hi10110413_5001004_120_rr",
       "number": 120,
       "path": "science/hrii/hi10110413_5001004_120_rr.fit",
-      "sha256": "0b5e902ece7bbf6c62f4f95b0b6b8c4b004e5a87668faaa92ae30227490fe6c8",
       "startTime": "2010-11-04T13:55:29.922"
     },
     {
       "id": "hi10110413_5001004_121_rr",
       "number": 121,
       "path": "science/hrii/hi10110413_5001004_121_rr.fit",
-      "sha256": "b54cf5323ceafa29992e990e5f73f20ceb23f88272dbc4d638e68ebb419ac07b",
       "startTime": "2010-11-04T13:55:30.645"
     },
     {
       "id": "hi10110413_5001004_122_rr",
       "number": 122,
       "path": "science/hrii/hi10110413_5001004_122_rr.fit",
-      "sha256": "4cd04ce4dc96694641e164765f7b0b9d86a6f1830b8a2e91376175cc6e9caae2",
       "startTime": "2010-11-04T13:55:31.364"
     },
     {
       "id": "hi10110413_5001004_123_rr",
       "number": 123,
       "path": "science/hrii/hi10110413_5001004_123_rr.fit",
-      "sha256": "253e355c2d01c97c7b2058833d487d745c076679d0ec367542a86d2ed83ab45b",
       "startTime": "2010-11-04T13:55:32.086"
     },
     {
       "id": "hi10110413_5001004_124_rr",
       "number": 124,
       "path": "science/hrii/hi10110413_5001004_124_rr.fit",
-      "sha256": "6f0e5dd04ccc5d9f660be70fdf5ef9595cec740d99282fe5620a127eb93b2684",
       "startTime": "2010-11-04T13:55:32.805"
     },
     {
       "id": "hi10110413_5001004_125_rr",
       "number": 125,
       "path": "science/hrii/hi10110413_5001004_125_rr.fit",
-      "sha256": "c9e9e7307cfab941411b5fdc8bd827bd1027ff101996b26acb38ba0cc1f4de87",
       "startTime": "2010-11-04T13:55:33.528"
     },
     {
       "id": "hi10110413_5001004_126_rr",
       "number": 126,
       "path": "science/hrii/hi10110413_5001004_126_rr.fit",
-      "sha256": "90eec07cbce2a7f6718c39e2adbb52a5bba9471764afb558b859308c19e97160",
       "startTime": "2010-11-04T13:55:34.246"
     },
     {
       "id": "hi10110413_5001004_127_rr",
       "number": 127,
       "path": "science/hrii/hi10110413_5001004_127_rr.fit",
-      "sha256": "1ca6b477c6b30324b1d3b5d9b979e12486e4be4a9e748393c7f8f8bb6512080f",
       "startTime": "2010-11-04T13:55:34.969"
     },
     {
       "id": "hi10110413_5001004_128_rr",
       "number": 128,
       "path": "science/hrii/hi10110413_5001004_128_rr.fit",
-      "sha256": "cc3e7a5df8f1a0ae4d58b66e67fcf85d716458eca515864a156d446ee38ca1a3",
       "startTime": "2010-11-04T13:55:35.688"
     },
     {
       "id": "hi10110413_5001004_129_rr",
       "number": 129,
       "path": "science/hrii/hi10110413_5001004_129_rr.fit",
-      "sha256": "d7038c1e12cbb2d54bb5696a0715ccda9e06901ccc19de492261307dc27de7c0",
       "startTime": "2010-11-04T13:55:36.411"
     },
     {
       "id": "hi10110413_5001004_130_rr",
       "number": 130,
       "path": "science/hrii/hi10110413_5001004_130_rr.fit",
-      "sha256": "209efd41fac777eb6ad2dc766937521385ca9d225088423ffdfcc67dc3caf447",
       "startTime": "2010-11-04T13:55:37.129"
     },
     {
       "id": "hi10110413_5001004_131_rr",
       "number": 131,
       "path": "science/hrii/hi10110413_5001004_131_rr.fit",
-      "sha256": "8927eaed2999af0733b0c92f463ba38c8e1dbfe9f8803174099c348d444688e3",
       "startTime": "2010-11-04T13:55:37.852"
     },
     {
       "id": "hi10110413_5001004_132_rr",
       "number": 132,
       "path": "science/hrii/hi10110413_5001004_132_rr.fit",
-      "sha256": "e4d5d1f5523c0967d8a956378e17687005ebaa5c5b959a4c682d513aa3208dd8",
       "startTime": "2010-11-04T13:55:38.571"
     },
     {
       "id": "hi10110413_5001004_133_rr",
       "number": 133,
       "path": "science/hrii/hi10110413_5001004_133_rr.fit",
-      "sha256": "bd4d2492468253288af3084071ca3b5f3b4ff771a9250a4466e7e1d8dee593c9",
       "startTime": "2010-11-04T13:55:39.289"
     },
     {
       "id": "hi10110413_5001004_134_rr",
       "number": 134,
       "path": "science/hrii/hi10110413_5001004_134_rr.fit",
-      "sha256": "e89fbed012b2b22c658dd02932c025228e98bcc2852ad72577667846d9b61fde",
       "startTime": "2010-11-04T13:55:40.012"
     },
     {
       "id": "hi10110413_5001004_135_rr",
       "number": 135,
       "path": "science/hrii/hi10110413_5001004_135_rr.fit",
-      "sha256": "bdae57b43aa521d0905e7f61b721b02b7198cc4809fedc937313f7fab0ab60c1",
       "startTime": "2010-11-04T13:55:40.731"
     },
     {
       "id": "hi10110413_5001004_136_rr",
       "number": 136,
       "path": "science/hrii/hi10110413_5001004_136_rr.fit",
-      "sha256": "f9fd07a52a66c1b25672e7d862a8b94fa2d32b90c8ec50e60f8cc6621562dd9c",
       "startTime": "2010-11-04T13:55:41.454"
     },
     {
       "id": "hi10110413_5001004_137_rr",
       "number": 137,
       "path": "science/hrii/hi10110413_5001004_137_rr.fit",
-      "sha256": "c20ede43ae29b596b9c8600450fcb593e38438da6cee2b5c6d40c3545b2219fd",
       "startTime": "2010-11-04T13:55:42.172"
     },
     {
       "id": "hi10110413_5001004_138_rr",
       "number": 138,
       "path": "science/hrii/hi10110413_5001004_138_rr.fit",
-      "sha256": "44134102568422bf4eca30af290f12022013eb752fc15a49d860d693a7b9c0b0",
       "startTime": "2010-11-04T13:55:42.895"
     },
     {
       "id": "hi10110413_5001004_139_rr",
       "number": 139,
       "path": "science/hrii/hi10110413_5001004_139_rr.fit",
-      "sha256": "a819dcfc6bf98e561071660e20e903b3f826893a43b6f7d7446664576f2cc318",
       "startTime": "2010-11-04T13:55:43.614"
     },
     {
       "id": "hi10110413_5001004_140_rr",
       "number": 140,
       "path": "science/hrii/hi10110413_5001004_140_rr.fit",
-      "sha256": "5977957759af217be74315856776b3827e3a980bc1f7c1db2b8bf653c71d1e2f",
       "startTime": "2010-11-04T13:55:44.336"
     },
     {
       "id": "hi10110413_5001004_141_rr",
       "number": 141,
       "path": "science/hrii/hi10110413_5001004_141_rr.fit",
-      "sha256": "a064ff969428428641cc49b134d3eb063d06eda7966cd78706f952343da1be22",
       "startTime": "2010-11-04T13:55:45.055"
     },
     {
       "id": "hi10110413_5001004_142_rr",
       "number": 142,
       "path": "science/hrii/hi10110413_5001004_142_rr.fit",
-      "sha256": "4f2ef79dc8c4d56177f525f14094ebb8d0ca532d45a33b5cb8dc1d251c681806",
       "startTime": "2010-11-04T13:55:45.778"
     },
     {
       "id": "hi10110413_5001004_143_rr",
       "number": 143,
       "path": "science/hrii/hi10110413_5001004_143_rr.fit",
-      "sha256": "cb3ad5769369f9a1574078013e74939e40a02ec4d40c56a562482a92082e4ddb",
       "startTime": "2010-11-04T13:55:46.497"
     },
     {
       "id": "hi10110413_5001004_144_rr",
       "number": 144,
       "path": "science/hrii/hi10110413_5001004_144_rr.fit",
-      "sha256": "49853a73f47462de6e50b00078afb5ff26a2ba1f660921fd801ecaa4289be89e",
       "startTime": "2010-11-04T13:55:47.219"
     },
     {
       "id": "hi10110413_5001004_145_rr",
       "number": 145,
       "path": "science/hrii/hi10110413_5001004_145_rr.fit",
-      "sha256": "8504c37ca4b42585a67148589a289ac26756d995d40f5af8b505c192e6a2a592",
       "startTime": "2010-11-04T13:55:47.938"
     },
     {
       "id": "hi10110413_5001004_146_rr",
       "number": 146,
       "path": "science/hrii/hi10110413_5001004_146_rr.fit",
-      "sha256": "621b9ed572399ed15b97795b8cbd914c5bddfdf8f966f19e1370bb730c2f02d4",
       "startTime": "2010-11-04T13:55:48.661"
     },
     {
       "id": "hi10110413_5001004_147_rr",
       "number": 147,
       "path": "science/hrii/hi10110413_5001004_147_rr.fit",
-      "sha256": "674df7c69a5ecb4f1a50aa5fb8795c2b430fcf635c635ba719e80f41d94481ed",
       "startTime": "2010-11-04T13:55:49.379"
     },
     {
       "id": "hi10110413_5001004_148_rr",
       "number": 148,
       "path": "science/hrii/hi10110413_5001004_148_rr.fit",
-      "sha256": "326fba6e892afaa941bd22d9780cf7e96c2ca5a72357d319353900cecc9e122d",
       "startTime": "2010-11-04T13:55:50.102"
     },
     {
       "id": "hi10110413_5001004_149_rr",
       "number": 149,
       "path": "science/hrii/hi10110413_5001004_149_rr.fit",
-      "sha256": "07515b0c02c25a176ff31107515e204a20d62f217eb46dbcf4dfa632e70cd10f",
       "startTime": "2010-11-04T13:55:50.821"
     },
     {
       "id": "hi10110413_5001004_150_rr",
       "number": 150,
       "path": "science/hrii/hi10110413_5001004_150_rr.fit",
-      "sha256": "5dbfa14340444ee2359947dbac02a23f173bc44eb4c23db8819b15485d592c55",
       "startTime": "2010-11-04T13:55:51.544"
     },
     {
       "id": "hi10110413_5001004_151_rr",
       "number": 151,
       "path": "science/hrii/hi10110413_5001004_151_rr.fit",
-      "sha256": "e655c5b1860b9961f96cec64177698410dd0dc28824136353a95ea9090afe14d",
       "startTime": "2010-11-04T13:55:52.262"
     },
     {
       "id": "hi10110413_5001004_152_rr",
       "number": 152,
       "path": "science/hrii/hi10110413_5001004_152_rr.fit",
-      "sha256": "e7a728c0e2333b361eb3875adbae5e30a419f67c8690e029b3e0b3fcb6d34363",
       "startTime": "2010-11-04T13:55:52.985"
     },
     {
       "id": "hi10110413_5001004_153_rr",
       "number": 153,
       "path": "science/hrii/hi10110413_5001004_153_rr.fit",
-      "sha256": "6f3726d6dce0300a9c470093b082097ea91ad20403903346ba60cf157bd464bc",
       "startTime": "2010-11-04T13:55:53.704"
     },
     {
       "id": "hi10110413_5001004_154_rr",
       "number": 154,
       "path": "science/hrii/hi10110413_5001004_154_rr.fit",
-      "sha256": "3a14941b71ba695cd500cd5e79033546b9152eed52d42216c73010c5a8fc7d16",
       "startTime": "2010-11-04T13:55:54.426"
     },
     {
       "id": "hi10110413_5001004_155_rr",
       "number": 155,
       "path": "science/hrii/hi10110413_5001004_155_rr.fit",
-      "sha256": "aae705ed46ed8cb86046021552df544e0de12d41c48f6961017e158582d514de",
       "startTime": "2010-11-04T13:55:55.145"
     },
     {
       "id": "hi10110413_5001004_156_rr",
       "number": 156,
       "path": "science/hrii/hi10110413_5001004_156_rr.fit",
-      "sha256": "9e7d317ab870bbd36a538d4ea4f63dee8bce0c96ba7e8b6d27d65194b231407d",
       "startTime": "2010-11-04T13:55:55.868"
     },
     {
       "id": "hi10110413_5001004_157_rr",
       "number": 157,
       "path": "science/hrii/hi10110413_5001004_157_rr.fit",
-      "sha256": "902494632a53f273bd53f35e02c9996414c99a9962a412f5429a6a4253633813",
       "startTime": "2010-11-04T13:55:56.587"
     },
     {
       "id": "hi10110413_5001004_158_rr",
       "number": 158,
       "path": "science/hrii/hi10110413_5001004_158_rr.fit",
-      "sha256": "fa426c2161a12ca53fa77e35bfbe1aa31f1850e9fb89db89a6947c2e27a26d2b",
       "startTime": "2010-11-04T13:55:57.309"
     },
     {
       "id": "hi10110413_5001004_159_rr",
       "number": 159,
       "path": "science/hrii/hi10110413_5001004_159_rr.fit",
-      "sha256": "eee0bd1e8d584c487f262dd65baa723e51eba7f230efa75bb5d835bde5205109",
       "startTime": "2010-11-04T13:55:58.028"
     },
     {
       "id": "hi10110413_5001004_160_rr",
       "number": 160,
       "path": "science/hrii/hi10110413_5001004_160_rr.fit",
-      "sha256": "da4bf94df943d74acd9044a22e632d54cb9bab9e0d05fbd763edb41e4e42dc03",
       "startTime": "2010-11-04T13:55:58.751"
     },
     {
       "id": "hi10110413_5001004_161_rr",
       "number": 161,
       "path": "science/hrii/hi10110413_5001004_161_rr.fit",
-      "sha256": "736b08f8aaa13f545d73947042dcbcf2da6200e5c4b1338b6cc2f77793f67b45",
       "startTime": "2010-11-04T13:55:59.469"
     },
     {
       "id": "hi10110413_5001004_162_rr",
       "number": 162,
       "path": "science/hrii/hi10110413_5001004_162_rr.fit",
-      "sha256": "d148859db06f64f5123aa39d783cb2593b43e78cf40d93106446bac021628680",
       "startTime": "2010-11-04T13:56:00.192"
     },
     {
       "id": "hi10110413_5001004_163_rr",
       "number": 163,
       "path": "science/hrii/hi10110413_5001004_163_rr.fit",
-      "sha256": "4492d83b69f8fc585e8f582a99974019ba9f51e7a77ead264de8bf44bdfb24e0",
       "startTime": "2010-11-04T13:56:00.911"
     },
     {
       "id": "hi10110413_5001004_164_rr",
       "number": 164,
       "path": "science/hrii/hi10110413_5001004_164_rr.fit",
-      "sha256": "366dc9a17a2b17c091d76920d03e089bcc90c859770a36495fce0045965291db",
       "startTime": "2010-11-04T13:56:01.634"
     },
     {
       "id": "hi10110413_5001004_165_rr",
       "number": 165,
       "path": "science/hrii/hi10110413_5001004_165_rr.fit",
-      "sha256": "bffc6fad6a487887678cf7ca574707beaae2766f5ea8194b4dc066854b1e63c9",
       "startTime": "2010-11-04T13:56:02.352"
     },
     {
       "id": "hi10110413_5001004_166_rr",
       "number": 166,
       "path": "science/hrii/hi10110413_5001004_166_rr.fit",
-      "sha256": "6c28792230d10753883d1d21dd1c3b0328e92738fc52af34eb1e0fcab90b011e",
       "startTime": "2010-11-04T13:56:03.075"
     },
     {
       "id": "hi10110413_5001004_167_rr",
       "number": 167,
       "path": "science/hrii/hi10110413_5001004_167_rr.fit",
-      "sha256": "ea782bc517106fbf6859032c0c8bbd0790d5e5602a0120d47579b49ee56dc7de",
       "startTime": "2010-11-04T13:56:03.794"
     }
   ],
@@ -503,10 +444,8 @@
   },
   "context": {
     "path": "science/hrii/hv10110413_5002068_001_d050.fit",
-    "sha256": "47d74830d4ef2e0ba5165033ac816ae6ec2e00bdb9f5ef1d034594f77c283099",
     "reference": {
-      "path": "photography/hri/hv10110413_5004004_001_d050.json",
-      "sha256": "2f7da2da6c90bec0582475a86df202a4a662c037d3a9f2f9eeb986209cde2fbc"
+      "path": "photography/hri/hv10110413_5004004_001_d050.json"
     },
     "offsetPixels": [
       -20.817884567525567,

@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "vega-calspec-stis",
       "path": "photometry/alpha_lyr_stis_012.fits",
-      "expectedBytes": 288000,
-      "expectedSha256": "7201cd8566d53d384430c3d5fd2ae8d8122e9a7f765711748b49336f63237672",
       "origin": "https://archive.stsci.edu/hlsps/reference-atlases/cdbs/current_calspec/alpha_lyr_stis_012.fits",
       "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21",
       "license": "HST archive data: public, with acknowledgement",
@@ -255,8 +251,6 @@
     {
       "id": "vega-crosscheck-spectrum",
       "path": "photometry/crosscheck-table5.dat",
-      "expectedBytes": 935951,
-      "expectedSha256": "9deaea527750d81f89d9f61476ae3fd6a40166da8f401071ff6b2d5c9aea6e88",
       "origin": "https://cdsarc.cds.unistra.fr/ftp/III/201/table5.dat",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

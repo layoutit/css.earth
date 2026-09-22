@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -132,14 +130,10 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/sedna-gaudi-2005.pdf",
-      "expectedBytes": 95262,
-      "expectedSha256": "7ec1bc5110ad945d48fa8c86f929ec6aad066e84ac884a21c811659f009523bd"
+      "path": "reference/sedna-gaudi-2005.pdf"
     },
     {
-      "path": "reference/sedna-pal-2012.pdf",
-      "expectedBytes": 379111,
-      "expectedSha256": "762181442ff374c35e500b6d7a916ebe8e9a63d5ba7fee68546c5f00ee535b08"
+      "path": "reference/sedna-pal-2012.pdf"
     },
     {
       "path": "reference/sbdb.json",

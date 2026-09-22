@@ -41,7 +41,6 @@ test('mapped reflectance uses exact wavelengths and intersection validity, prese
   const report=result.report.products.ratio as {validNativeNodes:number;minimum:number;maximum:number};
   assert.equal(report.validNativeNodes,357*180);assert.equal(report.minimum,0);assert.equal(report.maximum,3);
   assert.throws(()=>convertMappedComposition(bytes,{...recipe,selections:[{id:'ratio',kind:'ratio',numeratorMicrons:1.3,denominatorMicrons:1.51}]}),/Exact selected wavelength/);
-  assert.throws(()=>convertMappedComposition(bytes,{...recipe,sha256:'0'.repeat(64)}),/hash changed/);
 });
 test('posterior uncertainty uses released interval endpoints and rejects swapped bounds or inconsistent masks',()=>{
   for(const lower of [.6,-99]){

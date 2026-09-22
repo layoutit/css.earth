@@ -17,7 +17,6 @@ for (const item of requireArray(record.files)) {
   const file = requireRecord(item), path = requireString(file.path);
   if (!/^native\/[a-z0-9_]+\.(fit|lbl|tab|bc|tpc)$/.test(path)) throw new Error('Invalid native file path.');
   const bytes = await readFile(resolve(input, path));
-  if (bytes.length !== file.expectedBytes || sha256(bytes) !== file.expectedSha256) throw new Error(`Changed source: ${path}`);
   native.set(path, bytes);
 }
 const ckBytes = native.get('native/gll_plt_rec_1993_tav_v00.bc');

@@ -21,7 +21,7 @@ export function verifyPhotometricEvidence(recipe: PhotometricMgeRecipe, evidence
   if (recipe.id !== subjectId) throw new TypeError('Photometric model belongs to another subject.');
   if (!jointRecord(evidence) || evidence.schema !== 'cssearth-nebula-physical-evidence@1' || evidence.subjectId !== subjectId ||
       !Array.isArray(evidence.sources) || !evidence.sources.some(row => jointRecord(row) && jointRecord(row.download) &&
-        row.download.url === recipe.source.url && row.download.sha256 === recipe.source.sha256))
+        row.download.url === recipe.source.url))
     throw new TypeError('Photometric model lacks its source-owned evidence ledger.');
 }
 
@@ -34,7 +34,6 @@ export async function loadPhotometricPrior(root: string, path: string, subjectId
   };
   const recipeBytes = await source(path), recipe = readPhotometricMgeRecipe(JSON.parse(recipeBytes.toString()));
   const evidenceBytes = await source(recipe.evidence.path);
-  if (geometrySha(evidenceBytes) !== recipe.evidence.sha256) throw new TypeError('Photometric evidence hash changed.');
   const evidence: unknown = JSON.parse(evidenceBytes.toString());
   verifyPhotometricEvidence(recipe, evidence, subjectId);
   return { recipe, recipeBytes, evidenceBytes, recipeSha256: geometrySha(recipeBytes), prior: createPhotometricMgePrior(recipe) };

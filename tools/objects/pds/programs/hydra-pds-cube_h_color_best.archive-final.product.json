@@ -6,14 +6,12 @@
     {
       "role": "label",
       "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/color/cube_h_color_best.lblx",
-      "bytes": 16471,
-      "sha256": "73012f681bfb066effda3fd10bf111341169f119a80f6e0a61a653105e07e4d9"
+      "bytes": 16471
     },
     {
       "role": "science",
       "identity": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/color/cube_h_color_best.fit",
-      "bytes": 233280,
-      "sha256": "2eee194315573d6bd5e1276d9e07d55b285f1e1fcc37e31ca4ebb8ee6f34969b"
+      "bytes": 233280
     }
   ],
   "parameters": {
@@ -154,13 +152,11 @@
   "outputs": [
     {
       "path": "cube_h_color_best.lblx",
-      "bytes": 16471,
-      "sha256": "73012f681bfb066effda3fd10bf111341169f119a80f6e0a61a653105e07e4d9"
+      "bytes": 16471
     },
     {
       "path": "cube_h_color_best.fit",
       "bytes": 233280,
-      "sha256": "2eee194315573d6bd5e1276d9e07d55b285f1e1fcc37e31ca4ebb8ee6f34969b",
       "units": "not stated by PDS label",
       "conventions": {
         "filters": "Blue: 0.4 to 0.55 micrometres; Red: 0.54 to 0.7 micrometres; NIR: 0.78 to 0.975 micrometres; CH4: 0.86 to 0.91 micrometres",

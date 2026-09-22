@@ -99,7 +99,7 @@ class InitialNode {
 function initialTree() {
   const tree: PreparedTree = { camera: 0, scene: 1, properties: [], stageClasses: [],
     nodes: [-1, 0, 0, 1].map(parent => ({ parent, tag: 'div', className: null, style: '', properties: [], attributes: {} })) };
-  const stage = new InitialNode(); stage.dataset = { objectId: 'fixture', preparedObject: 'fixture', preparedSha256: 'pinned' };
+  const stage = new InitialNode(); stage.dataset = { objectId: 'fixture', preparedObject: 'fixture' };
   const nodes = tree.nodes.map((record, index) => { const node = new InitialNode(); node.dataset.preparedNode = String(index); return node; });
   tree.nodes.forEach((record, index) => (record.parent === -1 ? stage : nodes[record.parent]).append(nodes[index]));
   return { tree, stage, nodes, element: stage as unknown as HTMLElement };
@@ -110,7 +110,6 @@ test('adoption preserves every existing node even when prepared order differs fr
   const adopted = adoptPreparedTree(f.tree, f.element, cleanup => cleanups.push(cleanup));
   expect(adopted?.nodes).toEqual(f.nodes);
   expect(f.stage.dataset.preparedObject).toBeUndefined();
-  expect(f.stage.dataset.preparedSha256).toBeUndefined();
   expect(cleanups).toHaveLength(1);
   cleanups[0]();
   expect(f.stage.children).toEqual([]);

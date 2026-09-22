@@ -8,7 +8,7 @@ import { pathToFileURL } from 'node:url';
 import { parseDensityVolumeObjectDescriptor } from '@cssearth/objects';
 import type { DensityVolumeFrame } from '@cssearth/objects';
 import type { Vector3, VolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
-import { decodeDensityKtx2, sha256, verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { decodeDensityKtx2, sha256, sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { prepareVolumeSlices } from '@cssearth/volume-bake/slices/density';
 import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { convertParticlesToDensityVolume } from '../../server/workflows/stars/particles.ts';
@@ -40,8 +40,8 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
       !Array.isArray(config.targets) || !config.targets.length) throw new TypeError('Invalid full-density recipe.');
   for (const target of config.targets) {
     const [particleBytes, importBytes, objectBytes] = await Promise.all([
-      verifiedBytes(root, target.centeredParticles), verifiedBytes(root, target.importReceipt),
-      verifiedBytes(root, target.sourceObject),
+      sourceBytes(root, target.centeredParticles), sourceBytes(root, target.importReceipt),
+      sourceBytes(root, target.sourceObject),
     ]);
     if (target.centeredParticles.bytes !== undefined && particleBytes.length !== target.centeredParticles.bytes) {
       throw new TypeError(`Pinned particle byte length changed for ${target.id}.`);
@@ -105,13 +105,12 @@ export async function prepareFullParticleDensity(configPath: string): Promise<vo
     const provenanceBytes = Buffer.from(JSON.stringify(provenance, null, 2) + '\n');
     await writeFile(resolve(sourceDirectory, 'provenance.json'), provenanceBytes);
     const volumeRecipe: VolumeRecipe = { schema: 'cssearth-volume-recipe@1',
-      grid: { path: 'density.ktx2', sha256: converted.outputs.gridSha256,
-        decodedSha256: converted.outputs.decodedSha256, dimensions: plan.dimensions,
+      grid: { path: 'density.ktx2', dimensions: plan.dimensions,
         encoding: config.grid.encoding, bounds: plan.boundsKpc },
       material: { emission: [{ channel: 3, color: [1, 1, 1], strength: config.material.strength }],
         absorption: [], intensityScale: 1, stepScale: 1, stepMetric: 'source',
         exposureGain: config.material.exposureGain, emissionTransfer: 'shared-opacity' },
-      bake: config.bake, anchors: [], provenance: { path: 'provenance.json', sha256: sha256(provenanceBytes) } };
+      bake: config.bake, anchors: [], provenance: { path: 'provenance.json' } };
     const volumeRecipeBytes = Buffer.from(JSON.stringify(volumeRecipe, null, 2) + '\n');
     await writeFile(resolve(sourceDirectory, 'volume.json'), volumeRecipeBytes);
     const frame = { ...descriptor.volume, boundsUnits: plan.boundsKpc };

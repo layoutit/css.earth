@@ -150,9 +150,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
       const scientific = surface.science?.scientific;
       if (sourceVerification === 'selected-surfaces' && plainRecord(scientific) && typeof scientific.labelPath === 'string') {
         const labelPath = surface.source.slice(0, surface.source.lastIndexOf('/') + 1) + scientific.labelPath;
-        const entry = [...source.manifest.inputs, ...source.manifest.documents].find(entry => entry.path === labelPath);
-        if (!entry) throw new Error(`Scientific label has no source pin: ${labelPath}`);
-        source.assertBytes(entry, await readFile(resolve(sourceDirectory, labelPath)));
+        await source.validatePath(labelPath);
       }
     }
     return source;

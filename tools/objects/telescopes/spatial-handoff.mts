@@ -31,12 +31,11 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     const bytes=await readFile(file);checked.set(path,{bytes,pin:{role:'physical object input',identity:file,sha256:sha256(bytes),bytes:bytes.length}});return bytes;
   }
   const recipePath=requireString(preparation.source),recipeBytes=await read(recipePath);
-  if(sha256(recipeBytes)!==requireString(preparation.sha256))throw new Error('Spatial preparation recipe pin mismatch');
   const recipe=requireRecord(JSON.parse(recipeBytes.toString()));
   // Retain the original recipe, credits and licence. Large source datasets are not part of this render handoff.
   for(const key of ['provenance','license'])if(recipe[key]){
     const pin=requireRecord(recipe[key]),path=relative(root,resolve(root,dirname(recipePath),requireString(pin.path)));
-    if(sha256(await read(path))!==requireString(pin.sha256))throw new Error(`Spatial ${key} pin mismatch`);
+    await read(path);
   }
   if(kind==='volume-lens-bank')for(const path of ['README.md','prepared/provenance.json','prepared/presentation.json','LICENSE.md','NOTICE.md']){
     try{await read(path);}catch(error){if(!(error instanceof Error&&'code'in error&&(error as NodeJS.ErrnoException).code==='ENOENT'))throw error;}

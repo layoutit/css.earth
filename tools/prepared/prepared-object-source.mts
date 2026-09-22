@@ -249,7 +249,6 @@ export async function requireAuthoredSourcePins({ objectId, descriptor, root, so
     const record = records.find(entry => `source/${String(entry.path)}` === reference.path);
     if (!record) throw new TypeError(`Authored source is not declared in the manifest: ${reference.path}.`);
     const bytes = await source(path);
-    if (record.expectedSha256 !== undefined && sha256(bytes) !== record.expectedSha256) throw new TypeError(`Source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
   return recipe;
@@ -275,8 +274,8 @@ export async function readDescriptorDefinition({ objectId, descriptorFile, root,
     !descriptor.properties || isArray(descriptor.properties) || typeof descriptor.properties !== 'object' ||
     Object.keys(descriptor).some(key => !['schema', 'id', 'type', 'properties', 'prepared'].includes(key))) throw new TypeError('Registered JSON descriptor identity or shape is invalid.');
   const reference = requireRecord(descriptor.prepared);
-  if (reference?.format !== PREPARED_CSS_OBJECT_FORMAT || !/^[a-f0-9]{64}$/.test(typeof reference.sha256 === 'string' ? reference.sha256 : '') ||
-    typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url', 'sha256'].includes(key))) throw new TypeError('JSON descriptor requires its pinned prepared CSS artifact.');
+  if (reference?.format !== PREPARED_CSS_OBJECT_FORMAT ||
+    typeof reference.url !== 'string' || Object.keys(reference).some(key => !['format', 'url'].includes(key))) throw new TypeError('JSON descriptor requires its prepared CSS artifact.');
   const descriptorDirectory = dirname(descriptorPath);
   const payloadPath = resolve(descriptorDirectory, reference.url);
   if (reference.url !== 'prepared/object.json' || payloadPath !== resolve(descriptorDirectory, 'prepared/object.json')) {

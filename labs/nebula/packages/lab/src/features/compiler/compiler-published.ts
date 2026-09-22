@@ -27,6 +27,11 @@ export function readPublishedCompiler(value: unknown, recipePath: string): Publi
   return { recipePath, result, inputs };
 }
 type FetchLocal = (path: string) => Promise<Response>;
+async function localBytes(path: string, fetchLocal: FetchLocal): Promise<Uint8Array> {
+  const response = await fetchLocal(path);
+  if (!response.ok) throw new Error(`Prepared compiler input is missing: ${path}`);
+  return new Uint8Array(await response.arrayBuffer());
+}
 async function checkedBytes(source: Pin, fetchLocal: FetchLocal): Promise<Uint8Array> {
   const response = await fetchLocal(source.path);
   if (!response.ok) throw new Error(`Prepared compiler input is missing: ${source.path}`);
@@ -67,7 +72,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   const result = readCompilerResult(JSON.parse(new TextDecoder().decode(await checkedBytes(publication.result, fetchLocal))));
   if (publication.result.path !== `.local/nebula-lab/compiler/${result.id}/result.json` || result.defaultSourceId !== recipe.defaultSourceId)
     throw new Error('Prepared nebula result does not match its configured recipe.');
-  const method: unknown = JSON.parse(new TextDecoder().decode(await checkedBytes(result.method, fetchLocal)));
+  const method: unknown = JSON.parse(new TextDecoder().decode(await localBytes(result.method.path, fetchLocal)));
   if (!record(method) || method.recipeSha256 !== publication.inputs.find(source => source.path === recipePath)!.sha256 || !Array.isArray(method.implementation))
     throw new Error('Prepared nebula method does not match its current recipe.');
   if (recipe.photometricPriorRecipe) {
@@ -90,8 +95,8 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     for (const owner of sampledOwnerPins(method, recipe.sampledRecipe)) if (!publication.inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256))
       throw new Error('Prepared spatial model is missing a source or implementation pin.');
     const sampled = readSampledRecipe(JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.sampledRecipe)![1])));
-    if (sampled.id !== recipe.id || !publication.inputs.some(p => p.path === sampled.source.path && p.sha256 === sampled.source.sha256) ||
-        !publication.inputs.some(p => p.path === sampled.evidence.path && p.sha256 === sampled.evidence.sha256))
+    if (sampled.id !== recipe.id || !publication.inputs.some(p => p.path === sampled.source.path) ||
+        !publication.inputs.some(p => p.path === sampled.evidence.path))
       throw new Error('Prepared spatial model uses different qualified sources.');
     verifySampledEvidence(sampled, JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === sampled.evidence.path)![1])));
   }

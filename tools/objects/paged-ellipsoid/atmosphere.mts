@@ -53,7 +53,6 @@ async function readAtmosphereModel() {
     schema: "cssearth-atmosphere-model-source@1",
     authority: "repository-authored cssearth-atmosphere-model@1 record",
     sourceId: source.id,
-    sourceSha256: source.expectedSha256,
     planetRadiusKm,
     atmosphereHeightKm: outerRadiusKm - innerRadiusKm,
     outerRadiusRatio: outerRadiusKm / planetRadiusKm,

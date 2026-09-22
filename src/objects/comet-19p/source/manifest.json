@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -31,8 +29,6 @@
     {
       "id": "usgs-dem",
       "path": "shape/usgsdem.tab",
-      "expectedBytes": 3521224,
-      "expectedSha256": "88643dbc92765eae3ca00e87166e25b33ad18b268f43e28537bd7c6ed5c387ef",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/usgsdem.tab",
       "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
       "license": "Scientific archive data; preserve source attribution",
@@ -62,8 +58,6 @@
     {
       "id": "dlr-dem",
       "path": "shape/dlrdem.tab",
-      "expectedBytes": 67770,
-      "expectedSha256": "e2e6ebc47dcff737d830391e4f8457d809c2e85c5fd8aff7e514dc089e002091",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-5-borrelly-dem-v1.0/data/dlrdem.tab",
       "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
       "license": "Scientific archive data; preserve source attribution",
@@ -91,8 +85,6 @@
     {
       "id": "micas-x",
       "path": "micas/dem_x_component.cub",
-      "expectedBytes": 704000,
-      "expectedSha256": "3c415666d9ca641371c8579f659171273e36abfc4d1407a150f3900f67e8bf1e",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_x_component.cub",
       "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
       "license": "Scientific archive data; preserve source attribution",
@@ -121,8 +113,6 @@
     {
       "id": "micas-y",
       "path": "micas/dem_y_component.cub",
-      "expectedBytes": 704000,
-      "expectedSha256": "237a7f02e7ea4b64a92640abc2e69054218f4eb44b0710cce4ca6f81bd9f7e54",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_y_component.cub",
       "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
       "license": "Scientific archive data; preserve source attribution",
@@ -151,8 +141,6 @@
     {
       "id": "micas-z",
       "path": "micas/dem_z_component.cub",
-      "expectedBytes": 704000,
-      "expectedSha256": "ebda490e2e50e974406cda51fdba84859894e5d232a3a66ef4e0e14684705bc6",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/dem_z_component.cub",
       "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
       "license": "Scientific archive data; preserve source attribution",
@@ -181,8 +169,6 @@
     {
       "id": "micas-orthophoto",
       "path": "micas/ccd_near_1_ortho.cub",
-      "expectedBytes": 704512,
-      "expectedSha256": "19912df4bac7177bafe5556bebbcd4dd178dd1ea57d94c5f3ecfd2f60c8cccd1",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ds1-c-micas-3-rdr-visccd-borrelly-v1.0/document/derived/topo/ccd_near_1_ortho.cub",
       "credit": "NASA/JPL/MICAS; USGS Astrogeology; DLR stereo team",
       "license": "Scientific archive data; preserve source attribution",

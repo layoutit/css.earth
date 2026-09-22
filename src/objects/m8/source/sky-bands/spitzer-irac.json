@@ -12,17 +12,14 @@
   "bands": [
     {
       "band": "IRAC4",
-      "sha256": "27eb42fdb50c7602fad80040acfbf66f91e6936e551097dd220c4cca5658b09f",
       "bytes": 9961920
     },
     {
       "band": "IRAC2",
-      "sha256": "9931b69c77274f22e2695613fbc8ad4f20ab2999202aa7ecb350a58a298eb7d4",
       "bytes": 9961920
     },
     {
       "band": "IRAC1",
-      "sha256": "d2fcde9c0036bbf1eae5d26215041671e73bf15c076834120e0d543e357a26dc",
       "bytes": 9961920
     }
   ],

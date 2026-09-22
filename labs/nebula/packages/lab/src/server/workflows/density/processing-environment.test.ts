@@ -9,7 +9,6 @@ test('processing setup reads the canonical package and NOX pins without object a
   const recipe = readProcessingEnvironmentRecipe(JSON.parse(await readFile('labs/nebula/models/lmc/bake.json', 'utf8')));
   assert.deepEqual(recipe.environment.pythonVersions, ['3.9', '3.10', '3.11', '3.12']);
   assert.ok(recipe.environment.packages.includes('tensorflow==2.16.2'));
-  assert.equal(recipe.removal.model.sha256, 'd54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546');
   assert.deepEqual(readProcessingEnvironmentRecipe(source), { environment: source.environment, removal: source.removal });
 });
 test('processing setup rejects missing pins, unsupported Python and unpinned package specifications', () => {

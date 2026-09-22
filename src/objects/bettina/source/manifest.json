@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -118,9 +116,7 @@
       "path": "reference/1850-IAUspin.txt"
     },
     {
-      "path": "reference/AcuA_V1.txt.gz",
-      "expectedBytes": 120256,
-      "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
+      "path": "reference/AcuA_V1.txt.gz"
     },
     {
       "path": "reference/ReadMe.AcuA.txt"
@@ -145,9 +141,7 @@
       "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/viikinkoski-2017.pdf",
-      "expectedBytes": 2041673,
-      "expectedSha256": "1481bbfedf57255394a527c4c609b1dbb0762b5b77ab2473638e875b42ada8f3"
+      "path": "reference/viikinkoski-2017.pdf"
     }
   ]
 }

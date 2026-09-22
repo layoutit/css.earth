@@ -69,7 +69,7 @@ async function currentBindings(context:Awaited<ReturnType<typeof refreshContext>
   return {scene:{bytes:context.sceneBytes.length,sha256:sha256(context.sceneBytes)},recipe,
     sourceManifest:await fingerprint(resolve(context.sourceDirectory,'manifest.json')),
     descriptor:await fingerprint(resolve(context.objectDirectory,'object.json')),
-    inputs:context.selected.map(({lensId,input})=>({lensId,path:requireString(input.path),expectedBytes:requireFiniteNumber(input.expectedBytes),expectedSha256:requireString(input.expectedSha256)}))};
+    inputs:context.selected.map(({lensId,input})=>({lensId,path:requireString(input.path)}))};
 }
 
 function stableAssets(context:Awaited<ReturnType<typeof refreshContext>>, results:Map<string,Record<string,unknown>>) {
@@ -157,12 +157,6 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   for(const [path,document] of documents)await save(path,document);
   inventory.assets=assets.map(asset=>asset.location==='public'&&newAssets.has(requireString(asset.filename))?{...asset,...newAssets.get(requireString(asset.filename))}:asset);
   await save(resolve(context.objectDirectory,'inventory.json'),inventory);
-  const recipeBytes=await readFile(resolve(context.sourceDirectory,'preparation/terrestrial.json'));
-  for(const entry of records(context.source.documents))if(entry.path==='preparation/terrestrial.json') {
-    entry.expectedBytes=recipeBytes.length;entry.expectedSha256=sha256(recipeBytes);
-  }
-  for(const reference of records(requireRecord(requireRecord(context.descriptor.properties).recipe).sources))if(reference.id==='terrestrial')reference.sha256=sha256(recipeBytes);
-  await save(resolve(context.sourceDirectory,'manifest.json'),context.source);await save(resolve(context.objectDirectory,'object.json'),context.descriptor);
   await prepareObjectProvenance({objectDirectory:context.objectDirectory,publicDirectory:context.publicDirectory,outputDirectory:context.outputDirectory,basis:'recovered'});
   if(sha256(await readFile(resolve(context.outputDirectory,'scene.json')))!==sha256(context.sceneBytes))throw new Error('Photographic refresh changed the retained scene.');
   return results;

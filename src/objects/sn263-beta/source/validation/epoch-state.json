@@ -23,14 +23,12 @@
   },
   "source": {
     "path": "source/orbit/published-parameters.json",
-    "bytes": 3267,
-    "sha256": "c5806510c9b9c2350265ea3207d2cc2c805ffb768a088d57966bb618018c9bc8"
+    "bytes": 3267
   },
   "parentHeliocentricSource": {
     "path": "source/orbit/parent-heliocentric.txt",
     "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=153591%3B&OBJ_DATA=YES&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=3&VEC_CORR=NONE&CSV_FORMAT=YES",
     "bytes": 8527,
-    "sha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8",
     "target": 153591,
     "targetKind": "numbered-asteroid",
     "center": 10,

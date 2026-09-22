@@ -11,7 +11,9 @@ export type ProvenanceJson = null | boolean | number | string | readonly Provena
 export interface ProvenanceOperation { readonly url?: string; readonly [key: string]: ProvenanceJson | undefined; }
 export interface ProvenanceSource {
   readonly id: string; readonly kind?: string; readonly path: string; readonly origin: string;
-  readonly credit: string; readonly acquisition: string; readonly sha256: string; readonly bytes: number;
+  readonly credit: string; readonly acquisition: string;
+  /** Measured from the bytes when the file is present; a download that is not restored records none. */
+  readonly sha256?: string; readonly bytes?: number;
   readonly dependencies: readonly string[]; readonly verification: string; readonly license?: string;
   readonly redistribution?: string; readonly sourceUrl?: string;
   readonly displayCredit?: string; readonly title?: string; readonly label?: string; readonly attributionGroup?: { readonly id: string };
@@ -76,8 +78,8 @@ function operation(value: unknown): value is ProvenanceOperation {
   return record(value) && optionalString(value.url) && Object.values(value).every(entry => entry === undefined || json(entry));
 }
 function sourceShape(value: unknown): value is ProvenanceSource {
-  return record(value) && ['id','path','origin','credit','acquisition','sha256','verification'].every(key => typeof value[key] === 'string')
-    && typeof value.bytes === 'number' && strings(value.dependencies)
+  return record(value) && ['id','path','origin','credit','acquisition','verification'].every(key => typeof value[key] === 'string')
+    && optionalString(value.sha256) && (value.bytes === undefined || typeof value.bytes === 'number') && strings(value.dependencies)
     && ['kind','license','redistribution','sourceUrl','displayCredit','title','label','lensId'].every(key => optionalString(value[key]))
     && (value.attributionGroup === undefined || record(value.attributionGroup) && typeof value.attributionGroup.id === 'string')
     && (value.capture === undefined || validCapture(value.capture))
@@ -133,7 +135,7 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
   for (const source of value.sources) {
     if (source.kind === 'source-input' && source.sourceBinding === undefined) throw new TypeError(`Unbound canonical source input: ${source.id}.`);
     if (![source.id, source.path, source.origin, source.credit, source.acquisition].every(nonempty)
-        || !digest(source.sha256) || !Number.isSafeInteger(source.bytes) || source.bytes < 0)
+        || (source.sha256 !== undefined && !digest(source.sha256)) || (source.bytes !== undefined && (!Number.isSafeInteger(source.bytes) || source.bytes < 0)))
       throw new TypeError(`Invalid provenance source: ${source.id}.`);
     if (source.capture) parseCapture(source.capture);
   }

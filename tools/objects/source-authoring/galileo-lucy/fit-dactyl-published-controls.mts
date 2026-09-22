@@ -19,7 +19,7 @@ const numbers = (v: unknown) => requireArray(v).map(n => requireFiniteNumber(n))
 function pixel(v: unknown): Pixel {const n = numbers(v); if (n.length !== 2) throw new Error('Expected pixel pair.'); return [n[0], n[1]];}
 function integer(v: unknown) {const n = requireFiniteNumber(v); if (!Number.isSafeInteger(n) || n < 0) throw new Error('Expected nonnegative integer.'); return n;}
 function verify(b: Buffer, record: Record<string, unknown>) {
-  if (b.length !== integer(record.expectedBytes) || sha256(b) !== requireString(record.expectedSha256)) throw new Error('Source bytes differ from the pinned input.');
+  if (b.length !== integer(record.expectedBytes)) throw new Error('Source bytes differ from the recorded input.');
 }
 const configBytes = await readFile(base + 'published-controls.json'), config = requireRecord(JSON.parse(configBytes.toString()));
 if (config.schema !== 'cssearth-dactyl-published-control-input@1' || config.objectId !== 'dactyl') throw new Error('Wrong control input.');

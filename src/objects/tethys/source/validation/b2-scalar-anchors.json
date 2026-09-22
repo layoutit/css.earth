@@ -4,7 +4,6 @@
     {
       "path": "science/b2-intake/tethys_eqalbedo_g.tif",
       "expectedBytes": 6044029,
-      "expectedSha256": "57e0a23ea94acc47b3eb1d2d62d108a90f4d1a345b38b9b800abf19ebb16b73f",
       "minimum": 0.7566499710083008,
       "maximum": 1.229728102684021,
       "anchors": [
@@ -34,7 +33,6 @@
     {
       "path": "science/b2-intake/tethys_npalbedo_g.tif",
       "expectedBytes": 790789,
-      "expectedSha256": "0047f9474973b09588f5aec6c549d6bc2dd4c70cd06600fab8d3a579aa03c610",
       "minimum": 0.7440137267112732,
       "maximum": 1.2568637132644653,
       "anchors": [
@@ -64,7 +62,6 @@
     {
       "path": "science/b2-intake/tethys_spalbedo_g.tif",
       "expectedBytes": 790789,
-      "expectedSha256": "f2d4bcf46ea64f2d389e530567a7518da40841d34f88bd68384fafb991ea4808",
       "minimum": 0.6824865937232971,
       "maximum": 1.2451194524765015,
       "anchors": [

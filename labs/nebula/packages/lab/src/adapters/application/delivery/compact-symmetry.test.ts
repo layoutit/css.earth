@@ -18,7 +18,7 @@ test("retained symmetry fields replay accepted slices without source photographs
     const bytes = await readFile(join(root, path));
     const result = await replayCompactSymmetry(
       root,
-      { path, sha256: sha(bytes) },
+      { path },
       "prepared",
     );
     assert.equal(result.volume.resources.length, 144);
@@ -38,7 +38,7 @@ test("retained symmetry fields replay accepted slices without source photographs
       corrupt,
     );
     await assert.rejects(
-      replayCompactSymmetry(root, { path, sha256: sha(bytes) }, "broken"),
+      replayCompactSymmetry(root, { path }, "broken"),
       /pin differs/,
     );
   } finally {

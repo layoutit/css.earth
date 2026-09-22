@@ -49,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -118,9 +116,7 @@
       "path": "reference/943-IAUspin.txt"
     },
     {
-      "path": "reference/AcuA_V1.txt.gz",
-      "expectedBytes": 120256,
-      "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
+      "path": "reference/AcuA_V1.txt.gz"
     },
     {
       "path": "reference/ReadMe.AcuA.txt"
@@ -136,14 +132,10 @@
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/hanus-2016.pdf",
-      "expectedBytes": 344980,
-      "expectedSha256": "f1d036a9b14443c85b74cd745f32c76064ad9b982992a0766abf2f1b72d02d81"
+      "path": "reference/hanus-2016.pdf"
     },
     {
-      "path": "reference/hanus-2021.pdf",
-      "expectedBytes": 1398918,
-      "expectedSha256": "3ee7a470b01d8e8087b7a8119ca9b1de1048fc3d5fb44b64a8ae46ca287cf604"
+      "path": "reference/hanus-2021.pdf"
     },
     {
       "path": "reference/horizons-elements.txt"

@@ -143,7 +143,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const pagePath = `${base}/prepared/page.json`;
     if (restoredOnly && !existsSync(resolve(root, pagePath))) continue;
     const page = explorationRecord(await json(pagePath));
-    if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id || page.sceneSha256 !== explorationRecord(descriptor.prepared).sha256) throw new Error(`Stale prepared controls for ${object.id}.`);
+    if (page.schema !== 'cssearth-object-page@1' || page.id !== object.id) throw new Error(`Stale prepared controls for ${object.id}.`);
     const controls = explorationRecord(page.controls);
     const lenses = controls.lenses === null ? [] : explorationArray(explorationRecord(controls.lenses).controls, raw => {
       const control = explorationRecord(raw); return { id: explorationText(control.id), label: explorationText(control.label) };

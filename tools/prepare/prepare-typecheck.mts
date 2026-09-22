@@ -139,7 +139,6 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   const initial = uniqueAssets([...await typecheckAssetsForPaths([...imports, starManifest], root), ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
   const manifestBytes = await readFile(starManifest);
-  if (sha256(manifestBytes) !== reference.sha256) throw new TypeError('The minimap star manifest differs from its descriptor pin.');
   const manifest = readPreparedObject(JSON.parse(manifestBytes.toString('utf8')), descriptor, parsePreparedCssPointFieldManifest).data;
   const bank = await typecheckAssetsForPaths([resolve(dirname(starManifest), manifest.bank.path)], root);
   if (bank.length !== 1 || bank[0]!.sha256 !== manifest.bank.sha256 || bank[0]!.bytes !== manifest.bank.bytes)

@@ -4232,7 +4232,6 @@
     "queryUrl": "https://dc.zah.uni-heidelberg.de/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT+TOP+8000+source_id%2Cra%2Cdec%2Cpmra%2Cpmdec%2Cparallax%2Cparallax_error%2Cphot_g_mean_mag%2Cphot_bp_mean_mag%2Cphot_rp_mean_mag%2Cruwe%2Cr_med_geo%2Cr_lo_geo%2Cr_hi_geo+FROM+gedr3dist.litewithdist+WHERE+1%3DCONTAINS%28POINT%28%27ICRS%27%2Cra%2Cdec%29%2CCIRCLE%28%27ICRS%27%2C83.6334511837%2C22.0151236394%2C1.4325437375665075%29%29+AND+r_med_geo+BETWEEN+1950+AND+2050+AND+phot_g_mean_mag%3C16+AND+ruwe%3C1.4+AND+parallax%3E5*parallax_error+ORDER+BY+phot_g_mean_mag%2Csource_id",
     "query": "SELECT TOP 8000 source_id,ra,dec,pmra,pmdec,parallax,parallax_error,phot_g_mean_mag,phot_bp_mean_mag,phot_rp_mean_mag,ruwe,r_med_geo,r_lo_geo,r_hi_geo FROM gedr3dist.litewithdist WHERE 1=CONTAINS(POINT('ICRS',ra,dec),CIRCLE('ICRS',83.6334511837,22.0151236394,1.4325437375665075)) AND r_med_geo BETWEEN 1950 AND 2050 AND phot_g_mean_mag<16 AND ruwe<1.4 AND parallax>5*parallax_error ORDER BY phot_g_mean_mag,source_id",
     "cache": ".local/nebula-lab/stellar-fields/m1-00548f9a439b.csv",
-    "sha256": "fb9db6cbd917d3e891d3701bc9e9583b3fc17a8049ae5ef6b585996231759904",
     "bytes": 69267,
     "retrievedAt": "2026-09-13T21:47:31.814Z",
     "queryRows": 406,

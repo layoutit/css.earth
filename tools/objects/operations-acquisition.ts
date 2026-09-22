@@ -1,8 +1,8 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import sharp from 'sharp';
-import { readFile, mkdir, rename, rm } from 'node:fs/promises';
+import { lstat, readFile, mkdir, rename, rm } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
-import { resolve } from 'node:path';
+import { basename, dirname, resolve } from 'node:path';
 import { Readable } from 'node:stream';
 import { pipeline } from 'node:stream/promises';
 import { execFile } from 'node:child_process';
@@ -24,9 +24,9 @@ interface OperationBase { groups:string[]; }
 interface Download extends OperationBase {kind:'download';path:string;url:string;headers?:Record<string,string>;encoding?:'gzip'|'pretty-json';expectedJsonFields?:Record<string,unknown>;}
 interface RequestDownload extends OperationBase {kind:'request-download';path:string;url:string;form:Record<string,string>;fileSource?:string;trimEnd?:boolean;appendText?:string;headers?:Record<string,string>;replacements?:{pattern:string;flags?:string;replacement:string}[];requiredPrefix?:string;requiredText?:string[];numericLineCount?:number;}
 interface JsonDocument extends OperationBase {kind:'json-document';path:string;value:Record<string,unknown>;}
-interface ZipMember extends OperationBase {kind:'zip-member';path:string;url:string;archiveSha256:string;archiveBytes:number;member:string;}
+interface ZipMember extends OperationBase {kind:'zip-member';path:string;url:string;member:string;}
 interface SatelliteCatalog extends OperationBase {kind:'satellite-catalog';path:string;recipePath:string;headers?:Record<string,string>;}
-interface VerifyDownload extends OperationBase {kind:'verify-download';url:string;sha256:string;}
+interface VerifyDownload extends OperationBase {kind:'verify-download';url:string;}
 interface Mosaic extends OperationBase {kind:'tile-mosaic';path:string;url:string;tileSize:number;columns:number;rows:number;dataWidth:number;dataHeight:number;width:number;height:number;forceRgb:boolean;concurrency:number;}
 interface RequestCheck extends OperationBase {kind:'verify-request';url:string;form:Record<string,string>;fileSource?:string;expectedPath:string;selector:'trim'|'numeric-lines'|'before-marker';marker?:string;rowCount?:number;headers?:Record<string,string>;}
 interface JsonCheck extends OperationBase {kind:'verify-json';url:string;expectedPath:string;fields:Record<string,string>;}
@@ -45,7 +45,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   for(const key of ['path','expectedPath','fileSource','recipePath','member'])if(step[key]!==undefined){if(typeof step[key]!=='string')throw new TypeError('Invalid acquisition path.');containedPath('.',step[key]);}
   if(['download','request-download','json-document','dsk-mesh','hrii-facets','spectral-band-maps','mapped-composition','zip-member','satellite-catalog','tile-mosaic','horizons-time-list'].includes(String(step.kind)))if(typeof step.path!=='string')throw new TypeError('Acquisition destination is missing.');
   if(step.kind==='horizons-time-list'){const parameters=record(step.parameters);if(Object.values(parameters).some(value=>typeof value!=='string')||'TLIST' in parameters||!Array.isArray(step.epochs)||!step.epochs.length||step.epochs.some(epoch=>typeof epoch!=='number'||!Number.isFinite(epoch)))throw new TypeError('Invalid Horizons time list.');}
-  if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.archiveSha256!=='string'||!/^[a-f0-9]{64}$/.test(step.archiveSha256)||!Number.isSafeInteger(step.archiveBytes)||Number(step.archiveBytes)<=0||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
+  if(step.kind==='zip-member'&&(typeof step.url!=='string'||!/^https:\/\//.test(step.url)||typeof step.member!=='string'||!/^[A-Za-z0-9_./-]+$/.test(step.member)||step.member.startsWith('-')))throw new TypeError('Invalid ZIP member.');
   if(step.headers!==undefined){const headers=record(step.headers);if(Object.values(headers).some(value=>typeof value!=='string'))throw new TypeError('Acquisition headers must be text.');}
   if(step.kind==='request-download'||step.kind==='verify-request'){const form=record(step.form);if(Object.values(form).some(value=>typeof value!=='string'))throw new TypeError('Acquisition form values must be text.');}
   if(step.kind==='request-download'&&(step.trimEnd!==undefined&&typeof step.trimEnd!=='boolean'||step.appendText!==undefined&&typeof step.appendText!=='string'))throw new TypeError('Invalid response text transformation.');
@@ -58,7 +58,6 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
   if(['spectral-band-maps','mapped-composition'].includes(String(step.kind))&&(typeof step.recipePath!=='string'||typeof step.product!=='string'||!/^[a-z][a-z0-9-]*$/.test(step.product)))throw new TypeError('Invalid numeric-map acquisition.');
   if(step.kind==='dsk-mesh')validateDskMeshRecipe(step.recipe);
   if(step.kind==='satellite-catalog'&&typeof step.recipePath!=='string')throw new TypeError('Satellite catalog recipe is missing.');
-  if(step.kind==='verify-download')if(typeof step.sha256!=='string'||!/^[a-f0-9]{64}$/.test(step.sha256))throw new TypeError('Acquisition integrity hash is missing.');
   if(step.kind==='tile-mosaic')for(const key of ['tileSize','columns','rows','dataWidth','dataHeight','width','height','concurrency'])if(typeof step[key]!=='number'||!Number.isSafeInteger(step[key])||step[key]<=0)throw new TypeError(`Invalid mosaic ${key}.`);
   if(step.kind==='verify-request'){record(step.form);if(typeof step.expectedPath!=='string'||!['trim','numeric-lines','before-marker'].includes(String(step.selector)))throw new TypeError('Invalid source response comparator.');if(step.selector==='before-marker'&&typeof step.marker!=='string')throw new TypeError('Source marker is missing.');}
   if(step.kind==='verify-json')record(step.fields);
@@ -71,7 +70,7 @@ export function parseAcquisitionPlan(value:unknown):AcquisitionPlan {
 // real request to the production mirror URL, which a narrowly-scoped mock's URL assertion then rejects.
 const rangeHeaders=(entry:SourceEntry,headers?:Record<string,string>)=>entry.range?{...headers,Range:rangeRequestHeader(entry.range)}:headers;
 const rangedEntry=(manifest:SourceManifest,path:string)=>[...manifest.inputs,...manifest.generatedIntermediates,...manifest.documents].some(entry=>entry.path===path&&entry.range!==undefined);
-export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null}) {
+export async function executeAcquisition({sourceRoot,manifest,plan,group='refresh',transport={fetch},mirrorOrigin=null,objectId=basename(dirname(sourceRoot))}:{sourceRoot:string;manifest:SourceManifest;plan:AcquisitionPlan;group?:string;transport?:AcquisitionTransport;mirrorOrigin?:string|null;objectId?:string}) {
  const selected=plan.operations.filter(step=>step.groups.includes(group));if(!selected.length)throw new Error(`Acquisition group ${group} is undeclared.`);
  const request=async(url:string,init?:RequestInit)=>{const response=await transport.fetch(url,init);if(!response.ok)throw new Error(`Source request failed ${response.status}: ${url}.`);return response;};
  const bytes=async(url:string)=>new Uint8Array(await(await request(url)).arrayBuffer());
@@ -93,11 +92,10 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
     // stays the recorded provenance either way. Streaming (not buffering) means a >20 MB input costs no more memory
     // here than the publisher path already does.
     let usedMirror=false;
-    // The mirror is addressed by the pin, so only a pinned download can come from it.
-    if(mirrorOrigin&&entry.expectedSha256!==undefined){
-     const filename=step.path.split('/').at(-1)!;
+    // The mirror is addressed by object and manifest path.
+    if(mirrorOrigin){
      try{
-      const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,entry.expectedSha256,filename));
+      const response=await transport.fetch(sourceCacheUrl(mirrorOrigin,objectId,step.path));
       if(response.ok&&response.body){
        await publishPinnedSourceStream({sourceRoot,entry,stream:withIdleTimeout(Readable.fromWeb(response.body as never),8000)});
        usedMirror=true;
@@ -119,13 +117,12 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
   }
   else if(step.kind==='zip-member'){
    const cache=resolve('.local/source-archives');await mkdir(cache,{recursive:true});
-   const archivePath=resolve(cache,`${step.archiveSha256}.zip`);
-   const verifyArchive=async(path:string)=>{const hash=createHash('sha256');let size=0;for await(const chunk of createReadStream(path)){hash.update(chunk);size+=chunk.length;}if(size!==step.archiveBytes||hash.digest('hex')!==step.archiveSha256)throw new Error('ZIP source pin differs.');};
-   try{await verifyArchive(archivePath);}catch(error){
-    if((error as NodeJS.ErrnoException).code!=='ENOENT')throw error;
+   // The archive is cached by its URL; a complete download is kept until the cache is cleared.
+   const archivePath=resolve(cache,`${sha256(new TextEncoder().encode(step.url))}.zip`);
+   if(!await lstat(archivePath).then(info=>info.isFile()&&info.size>0,()=>false)){
     const response=await request(step.url);if(!response.body)throw new Error('ZIP download has no body.');
     const temporary=`${archivePath}.partial-${process.pid}`;
-    try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await verifyArchive(temporary);await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
+    try{await pipeline(Readable.fromWeb(response.body as never),createWriteStream(temporary));await rename(temporary,archivePath);}finally{await rm(temporary,{force:true});}
    }
    const {stdout}=await promisify(execFile)('unzip',['-p',archivePath,step.member],{encoding:'buffer',maxBuffer:512*1024*1024});
    await publish(step.path,stdout);
@@ -170,7 +167,7 @@ export async function executeAcquisition({sourceRoot,manifest,plan,group='refres
    const pinned=horizonsRows(await readFile(containedPath(sourceRoot,step.path),'utf8'));
    if(asked.length!==pinned.length||asked.some((row,index)=>row!==pinned[index]))throw new Error(`Horizons rows drifted from ${step.path}.`);
   }
-  else if(step.kind==='verify-download'){if(sha256(await bytes(step.url))!==step.sha256)throw new Error(`Pinned upstream bytes drifted: ${step.url}.`);}
+  else if(step.kind==='verify-download'){if(!(await bytes(step.url)).length)throw new Error(`Upstream source is empty: ${step.url}.`);}
   else if(step.kind==='verify-json'){const expected=record(JSON.parse(await readFile(containedPath(sourceRoot,step.expectedPath),'utf8')) as unknown),actual=record(await(await request(step.url)).json());for(const [remote,local] of Object.entries(step.fields))if(actual[remote]!==expected[local])throw new Error(`Source identity field ${remote} drifted.`);}
   else if(step.kind==='verify-request'){
    const form={...step.form};if(step.fileSource)form.file=await readFile(containedPath(sourceRoot,step.fileSource),'utf8');

@@ -7,7 +7,6 @@
     "id": "opo9738a",
     "pageUrl": "https://esahubble.org/images/opo9738a/",
     "url": "https://esahubble.org/media/archives/images/original/opo9738a.tif",
-    "sha256": "19461467d05e71c491c432527a9ba0edd8d240ea45bda4077cbbf75f9b570f6e",
     "bytes": 4715326,
     "width": 2769,
     "height": 1540,
@@ -34,7 +33,6 @@
   "acceptedImage": {
     "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
     "pageUrl": "https://apod.nasa.gov/apod/ap040201.html",
-    "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
     "width": 800,
     "height": 525,
     "crop": { "left": 6, "top": 6, "width": 788, "height": 438 },
@@ -76,7 +74,6 @@
       "authors": "Sánchez Contreras et al.",
       "publication": "A&A 692, A151 (2024)",
       "url": "https://arxiv.org/html/2411.03825v1",
-      "sha256": "47fdfa2b606d326fad313386626a80c3a1d22075ed32b8a41db73307e6bc1f99",
       "bytes": 589208,
       "contentType": "text/html",
       "evidenceLocation": "Section 2, distance paragraph; Table 3 adopted distance",
@@ -89,7 +86,6 @@
       "publication": "A&A 529, A43 (2011)",
       "url": "https://arxiv.org/abs/1102.5634",
       "doi": "https://doi.org/10.1051/0004-6361/201016361",
-      "sha256": "a2ce236067a2d27953c9bbf74d4701d74fdf9abd2945d3af759e2e3f1dbbf58e",
       "bytes": 45010,
       "contentType": "text/html",
       "evidenceLocation": "Author abstract, dusty-blob proper-motion distance"

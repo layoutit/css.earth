@@ -51,7 +51,6 @@ test('saved clouds remain inspectable after producer code changes without rewrit
   const historicalHash = digest('original producer');
   method.implementation = [{ name: 'old-producer.ts', sha256: historicalHash }];
   fixture.data.set(methodPath, JSON.stringify(method));
-  fixture.result.method.sha256 = digest(fixture.data.get(methodPath)!);
   fixture.data.set(fixture.receipt.result.path, JSON.stringify(fixture.result));
   fixture.receipt.result.sha256 = digest(fixture.data.get(fixture.receipt.result.path)!);
   fixture.receipt.inputs.push({ path: owner, sha256: historicalHash });
@@ -174,7 +173,6 @@ test('relocated producer closures restore without fetching current code or chang
   method.implementation = historicalOwners;
   const saveMethod = () => {
     fixture.data.set(fixture.result.method.path, JSON.stringify(method));
-    fixture.result.method.sha256 = digest(fixture.data.get(fixture.result.method.path)!);
     fixture.data.set(fixture.receipt.result.path, JSON.stringify(fixture.result));
     fixture.receipt.result.sha256 = digest(fixture.data.get(fixture.receipt.result.path)!);
   };

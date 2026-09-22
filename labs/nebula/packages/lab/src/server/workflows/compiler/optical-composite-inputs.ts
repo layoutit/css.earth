@@ -10,10 +10,9 @@ import { compilerLayersReady, runCompilerSourceCommand, type CompilerProgress } 
 import type { CompilerPin } from '@cssearth/volume-core/contracts/compiler-bake';
 
 const missing = (error: unknown) => error instanceof Error && 'code' in error && error.code === 'ENOENT';
-function pin(path: unknown, sha256: unknown): CompilerPin {
-  if (!jointPath(path) || typeof sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(sha256))
-    throw new TypeError('Missing native composite source pin.');
-  return { path, sha256 };
+function pin(path: unknown): CompilerPin {
+  if (!jointPath(path)) throw new TypeError('Missing native composite source path.');
+  return { path };
 }
 export interface CompositeSourceRecipe { observationRecipe: string; observationCatalogue: string; detailSourceId: string; wideSourceId: string }
 
@@ -32,8 +31,7 @@ export async function opticalCompositeSourcePins(root: string, recipe: Composite
         catalogue.images.some(image => !planned.some(source => source.id === image.id && source.sha256 === image.source.sha256 &&
           source.width === image.source.width && source.height === image.source.height))) throw new TypeError('Composite catalogue differs from its pinned source recipe.');
     if (!await compilerLayersReady(root, raw)) return undefined;
-    const pins: CompilerPin[] = [{ path: recipe.observationRecipe, sha256: geometrySha(recipeBytes) },
-      { path: recipe.observationCatalogue, sha256: geometrySha(catalogueBytes) }];
+    const pins: CompilerPin[] = [{ path: recipe.observationRecipe }, { path: recipe.observationCatalogue }];
     if (observationsRecipe.nativeSeparationCache) pins.push(observationsRecipe.nativeSeparationCache.recipe);
     for (const value of raw.images) {
       if (!jointRecord(value) || !jointRecord(value.source) || !jointRecord(value.removal) || !jointRecord(value.removal.settings)) return undefined;
@@ -43,11 +41,9 @@ export async function opticalCompositeSourcePins(root: string, recipe: Composite
       if (!jointRecord(settings.model) || settings.scriptSha256 !== observationsRecipe.nativeRemoval.scriptSha256 ||
           settings.model.sha256 !== observationsRecipe.nativeRemoval.model.sha256)
         throw new TypeError('Composite native separation differs from its configured NOX model or code.');
-      pins.push(pin(source.path, source.sha256), pin(`${settings.directory}/result.json`, removal.receiptSha256),
-        pin(`${settings.directory}/diffuse.png`, removal.diffuseSha256), pin(`${settings.directory}/stars.png`, removal.residualSha256));
+      pins.push(pin(source.path), pin(`${settings.directory}/result.json`), pin(`${settings.directory}/diffuse.png`), pin(`${settings.directory}/stars.png`));
     }
-    for (const source of pins) if (geometrySha(await readFile(resolve(root, source.path))) !== source.sha256)
-      throw new Error(`Registered resource changed: ${source.path}`);
+    for (const source of pins) await readFile(resolve(root, source.path));
     return pins;
   } catch (error) { if (missing(error)) return undefined; throw error; }
 }

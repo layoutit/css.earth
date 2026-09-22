@@ -6,14 +6,14 @@
  */
 import { resolve, dirname } from 'node:path';
 import { fieldToPhysical, angularScale } from '@cssearth/volume-core/coordinates/observer-tangent';
-import { loadVolumeSource, sampleEncoded, verifiedBytes, sha256 } from './density-grid.ts';
+import { loadVolumeSource, sampleEncoded, sourceBytes, sha256 } from './density-grid.ts';
 import { channelDensity } from '../slices/density.ts';
 import { parseVolumeRecipe } from '@cssearth/volume-core/contracts/volume-recipe';
 import type { SimulationDepthPrior } from '@cssearth/volume-core/contracts/simulation-prior';
 
-interface Pin { path: string; sha256: string }
+interface Pin { path: string }
 const isPin = (value: unknown): value is Pin => !!value && typeof value === 'object' &&
-  typeof (value as { path?: unknown }).path === 'string' && typeof (value as { sha256?: unknown }).sha256 === 'string';
+  typeof (value as { path?: unknown }).path === 'string';
 
 export async function loadSimulationPrior(root: string, cloudProvenance: unknown, distanceKpc: number, tangentBoundsKpc: { min: number[]; max: number[] },
   options: {
@@ -25,12 +25,12 @@ export async function loadSimulationPrior(root: string, cloudProvenance: unknown
      */
     identityPin?: unknown;
   } = {}): Promise<SimulationDepthPrior> {
-  if (!isPin(cloudProvenance)) throw new TypeError('Reconstruction request has no pinned simulation provenance.');
+  if (!isPin(cloudProvenance)) throw new TypeError('Reconstruction request names no simulation provenance.');
   const identityPin = options.identityPin === undefined ? cloudProvenance : options.identityPin;
-  if (!isPin(identityPin)) throw new TypeError('Depth prior identity must be a pinned path and digest.');
+  if (!isPin(identityPin)) throw new TypeError('Depth prior identity must be a source path.');
   if (![...tangentBoundsKpc.min, ...tangentBoundsKpc.max].every(Number.isFinite) || tangentBoundsKpc.min.length < 2 || tangentBoundsKpc.max.length < 2)
     throw new TypeError('Invalid tangent bounds.');
-  const text = (await verifiedBytes(root, cloudProvenance)).toString();
+  const text = (await sourceBytes(root, cloudProvenance)).toString();
   const recipe = parseVolumeRecipe(options.reviveJson ? options.reviveJson(text) : JSON.parse(text));
   const source = await loadVolumeSource(dirname(resolve(root, cloudProvenance.path)), recipe), A = angularScale(distanceKpc), encoded: [number, number, number, number] = [0, 0, 0, 0];
   return {

@@ -45,166 +45,139 @@
         {
           "path": "primary/acisf06431_001N003_bpix1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/acisf06431_001N003_bpix1.fits.gz",
-          "bytes": 33104,
-          "sha256": "1be470fe25b0dce10dd248b3a7c749da8ef6139459fbc6dad3a6c7ee807369a9"
+          "bytes": 33104
         },
         {
           "path": "primary/acisf06431_001N003_fov1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/acisf06431_001N003_fov1.fits.gz",
-          "bytes": 7773,
-          "sha256": "5fd3cc58ed406ad73a01b4b0f706630427ee73516f99ca5517f2e232b71e6f3f"
+          "bytes": 7773
         },
         {
           "path": "primary/orbitf255701101N001_eph1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/orbitf255701101N001_eph1.fits.gz",
-          "bytes": 288707,
-          "sha256": "1912125d5ef0e31e1d68f9d833fefb2efbca9167b66750ff9b8608945bd7ff97"
+          "bytes": 288707
         },
         {
           "path": "primary/pcadf06431_001N001_asol1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/pcadf06431_001N001_asol1.fits.gz",
-          "bytes": 2561327,
-          "sha256": "bc6892d2d6a297ba486aa8a80b0fcb0bd5c75ab0ed2ca79862924e678e0f91c4"
+          "bytes": 2561327
         },
         {
           "path": "secondary/acisf06431_001N003_evt1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf06431_001N003_evt1.fits.gz",
-          "bytes": 27219853,
-          "sha256": "3f2907503379ed837ced03fcbc979608d2540aac4c57c74e07870d11c8dfcbfe"
+          "bytes": 27219853
         },
         {
           "path": "secondary/acisf06431_001N003_flt1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf06431_001N003_flt1.fits.gz",
-          "bytes": 6844,
-          "sha256": "4a6f504e81183220ece6b21a531cad14ddbe4855e5942b81e83c7dbdd4043a8e"
+          "bytes": 6844
         },
         {
           "path": "secondary/acisf06431_001N003_msk1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf06431_001N003_msk1.fits.gz",
-          "bytes": 5154,
-          "sha256": "fc96406f7f688bfb9e668051845a927f907829654c3da052a739282e74658dcc"
+          "bytes": 5154
         },
         {
           "path": "secondary/acisf06431_001N003_mtl1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf06431_001N003_mtl1.fits.gz",
-          "bytes": 427982,
-          "sha256": "c5873cc356e1aad17935abafb6fc75df0ba4e947b8a2a0bc92c5fad4c7465daf"
+          "bytes": 427982
         },
         {
           "path": "secondary/acisf06431_001N003_stat1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf06431_001N003_stat1.fits.gz",
-          "bytes": 370446,
-          "sha256": "c87ca7722fe9a25775c0b750030f0c3941a562cfc3b2d18c2fd700119942b728"
+          "bytes": 370446
         },
         {
           "path": "secondary/acisf255834377N003_0_bias0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255834377N003_0_bias0.fits.gz",
-          "bytes": 454866,
-          "sha256": "11147b83a7d6859b12e5af2d7d06f82661a061cb87f54fed736001e5e42b49af"
+          "bytes": 454866
         },
         {
           "path": "secondary/acisf255834377N003_1_bias0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255834377N003_1_bias0.fits.gz",
-          "bytes": 508549,
-          "sha256": "b8ffd71aabfca6b89fdd694a28f5dc126994c9b0b112e6950e5b43874ef53f96"
+          "bytes": 508549
         },
         {
           "path": "secondary/acisf255834377N003_2_bias0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255834377N003_2_bias0.fits.gz",
-          "bytes": 444728,
-          "sha256": "328e7c1a1ebc4e1325aad1dad21d1a61fc9c0097a57741aceb319254eb996c65"
+          "bytes": 444728
         },
         {
           "path": "secondary/acisf255834377N003_3_bias0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255834377N003_3_bias0.fits.gz",
-          "bytes": 449827,
-          "sha256": "aaa2bd6e58e95f228693b9958d064ac11bfd0596f961bb2ac46c5d582d8efe2b"
+          "bytes": 449827
         },
         {
           "path": "secondary/acisf255834377N003_4_bias0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255834377N003_4_bias0.fits.gz",
-          "bytes": 449864,
-          "sha256": "959e93799716adae2f3282d74466ef853940b2732104fbce35b91c6920406be4"
+          "bytes": 449864
         },
         {
           "path": "secondary/acisf255834377N003_5_bias0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255834377N003_5_bias0.fits.gz",
-          "bytes": 446745,
-          "sha256": "f8b5c3b50b49539090af4c8de61988e9ca4d0f0bf1eb465d544b5c7620d27044"
+          "bytes": 446745
         },
         {
           "path": "secondary/acisf255835689N003_pbk0.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/acisf255835689N003_pbk0.fits.gz",
-          "bytes": 4010,
-          "sha256": "ec72ee13ac893f98041354b9629397547310d247ede6428e9ed1a27dba7f0e63"
+          "bytes": 4010
         },
         {
           "path": "secondary/aspect/pcadf255833893N003_osol1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/aspect/pcadf255833893N003_osol1.fits.gz",
-          "bytes": 20056,
-          "sha256": "9489fd381566d1e15bf3e43282e8c54a1bb7699ad3598ec072ec88140487ee1b"
+          "bytes": 20056
         },
         {
           "path": "secondary/aspect/pcadf255834155N003_osol1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/aspect/pcadf255834155N003_osol1.fits.gz",
-          "bytes": 368814,
-          "sha256": "f964871589a6706532f201190cef92414a8e40e8c6082d3af3cfc57e95e9399d"
+          "bytes": 368814
         },
         {
           "path": "secondary/aspect/pcadf255834660N003_aqual1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/aspect/pcadf255834660N003_aqual1.fits.gz",
-          "bytes": 175898,
-          "sha256": "5b0cbe0537825e3d1c8ad2e09dd41755d1999e25287870d9580dbc8317151007"
+          "bytes": 175898
         },
         {
           "path": "secondary/aspect/pcadf255840715N003_osol1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/aspect/pcadf255840715N003_osol1.fits.gz",
-          "bytes": 302699,
-          "sha256": "f0c2f18ebb29fc58e8dafec15a4b3b44c6584750a8d17192f9e879aed3d1a824"
+          "bytes": 302699
         },
         {
           "path": "secondary/aspect/pcadf255846160N003_osol1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/aspect/pcadf255846160N003_osol1.fits.gz",
-          "bytes": 375467,
-          "sha256": "0279c38d18bdc9e8d1884fb4f70b93929b594ee0b59b1eed4b635c3a321e8b0a"
+          "bytes": 375467
         },
         {
           "path": "secondary/ephem/anglesf06431_001N003_eph1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/ephem/anglesf06431_001N003_eph1.fits.gz",
-          "bytes": 6961,
-          "sha256": "fd9081e221e5529d3466d75f4bf235efa6788346bc82f74cc0a28801be610c1f"
+          "bytes": 6961
         },
         {
           "path": "secondary/ephem/lunarf255701101N001_eph1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/ephem/lunarf255701101N001_eph1.fits.gz",
-          "bytes": 281397,
-          "sha256": "bad956afcae223545104e39b3ebade80ff69fe228f5765296c9914d443eebc4a"
+          "bytes": 281397
         },
         {
           "path": "secondary/ephem/solarf255701101N001_eph1.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/secondary/ephem/solarf255701101N001_eph1.fits.gz",
-          "bytes": 259671,
-          "sha256": "ed1ee66a49d19be87ba005df88075668c21129b5ef2587a4608483b400e4a6d3"
+          "bytes": 259671
         }
       ],
       "products": [
         {
           "path": "primary/acisf06431N003_cntr_img2.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/acisf06431N003_cntr_img2.fits.gz",
-          "bytes": 23331,
-          "sha256": "9d377affd45da22b1b6bbe5a4261c2ff64947bc4bf1a3f0c8770d360168c2277"
+          "bytes": 23331
         },
         {
           "path": "primary/acisf06431N003_evt2.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/acisf06431N003_evt2.fits.gz",
-          "bytes": 2486220,
-          "sha256": "14d5d8da4fcf108a7ec6d3d5ee8db31ed7e641ba8f66a52f7671322b928ce0e5"
+          "bytes": 2486220
         },
         {
           "path": "primary/acisf06431N003_full_img2.fits.gz",
           "url": "https://cxc.cfa.harvard.edu/cdaftp/byobsid/1/6431/primary/acisf06431N003_full_img2.fits.gz",
-          "bytes": 33443,
-          "sha256": "af8747bcfc651efe1b878844351eaf91f6826e252cf73973a2ac3184a8fc998b"
+          "bytes": 33443
         }
       ]
     }

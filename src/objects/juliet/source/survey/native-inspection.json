@@ -1,8 +1,6 @@
 {
   "opusId": "vg-iss-2-u-c2673225",
   "sourceUrl": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26732XX/C2673225_GEOMED.IMG",
-  "expectedBytes": 2002000,
-  "expectedSha256": "5abfcacdeb0828cf5d3ef5ca2823c92bdf81b33328c57a3340e2fc28d801de74",
   "product": "Geometrically corrected calibrated reflectivity; LSB signed integer16, 1000×1000 samples, 2000-byte header, scale0.00001",
   "nativeCenterResolutionKm": 46.28754,
   "maximumLongDiameterNativePixels": 3.2406129165645874,

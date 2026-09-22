@@ -8,7 +8,6 @@ export interface TitleSource {
   path: string;
   source: string;
   sourceUrl: string;
-  sourceSha256: string;
   weight: number;
   opticalSize: number;
   fontSize: number;
@@ -141,7 +140,7 @@ export interface Fact {
 
 export interface PreparedObjectContent {
   objectId: string;
-  title: Omit<TitleSource, "sourceSha256" | "sourceGenerator" | "xOrigin"> & {
+  title: Omit<TitleSource, "sourceGenerator" | "xOrigin"> & {
     renderViewBox: string;
     renderWidth: number;
     renderHeight: number;

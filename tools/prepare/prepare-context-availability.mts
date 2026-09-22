@@ -52,7 +52,7 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
       const outputs = provenance.products.flatMap(product => product.outputs);
       const bankUrl = `src/objects/${id}/${descriptor.prepared!.url}`;
       const bankPin = outputs.find(output => output.url === bankUrl);
-      if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
+      if (!bankPin) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
       await verify(projectRoot, bankUrl, bankPin);
       const published = publicAssets === 'manifest'
         ? requireInventory(id, JSON.parse((await read(directory, 'inventory.json')).toString()))

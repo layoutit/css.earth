@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 365
       },
       "coverage": "Released global SPC model; smooth regions have no resolved image coverage. Approximately 14 m uncertainty in x/y/z and 3.3 percent volume uncertainty; see pinned SIS and collection metadata.",
-      "expectedBytes": 3616200,
-      "expectedSha256": "b5349374186d254ca21b7b00ddd9f6dea7e2762ca6bbff13f43151ee448e3f20",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -51,8 +49,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -75,8 +71,6 @@
       "consumers": [
         "albedo"
       ],
-      "expectedBytes": 1189440,
-      "expectedSha256": "eeaaefa6031372e2ade0be010ff77bd85f0402a845ce1c8125f1b135ca7b7b69",
       "lensId": "albedo",
       "projection": {
         "kind": "source-triangle-facet-field",
@@ -151,8 +145,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 67132800,
-      "expectedSha256": "e3a24cd1589987b2454f95dbb7c557e1fe2eb2b0e9c04a378d6768091b69750e",
       "observationDate": "2022-09-26T23:12:49.930Z",
       "width": 1024,
       "height": 1024,
@@ -207,8 +199,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 67132800,
-      "expectedSha256": "3290224e1f16b41abe2999763a8416c781d41657c81b02b749571f953dfdd04f",
       "observationDate": "2022-09-26T23:11:46.381Z",
       "width": 1024,
       "height": 1024,
@@ -263,8 +253,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "d840ec3e3f6ff328a5de3ec899f2855543bdd47d278d91dfee6e9b1ed8f9c378",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -324,8 +312,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "ebc62596740bcbabc4b36c88388384310dc59127b7c2aafc1d7a79001733f881",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -385,8 +371,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "e8a8f9da7ab7dc03642b7651ae6de01f93cca7a6268e9b1fdb295396ecceec99",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -446,8 +430,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "1115f0f7ddaec8cf93d561881ee51e2c9a6b574b4a6b7369d8c9f314242c3a5c",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -507,8 +489,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "f8889481ab8b3d0304c34b1c299dec6bc041cae8c8165a1d24eac505dce6e249",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -568,8 +548,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "4a255693967e768535493364fde13554ffaec1fe8634aa1c5a22a31e4977df79",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -629,8 +607,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "2cc1724ca485205a636e3c61951b8f8c3483c1e550e0035c6337b60b7c68fdea",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",
@@ -690,8 +666,6 @@
         "luke-photograph"
       ],
       "coverage": "Calibrated LICIACube/LUKE frame: three planes of radiance, the detector's red, green and blue bands, 2048 x 1088 each. Bad, missing and saturated pixels carry the header's stated sentinel values.",
-      "expectedBytes": 26749440,
-      "expectedSha256": "968799c6048912c7e7da7ea07b21e1aca1f955919cfe564f002f6b61d43e744f",
       "width": 2048,
       "height": 1088,
       "lensId": "luke",

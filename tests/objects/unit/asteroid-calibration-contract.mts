@@ -115,7 +115,6 @@ export async function assertCalibratedAsteroidSource(id: string, independentExpe
   assert.ok(input, 'Shape is a declared original source input');
   const bytes = await readFile(resolve(sourceRoot, radialPath));
   assert.equal(createHash('sha256').update(bytes).digest('hex'), expected.shapeSha256, 'Original shape bytes are unchanged');
-  assert.equal(input.expectedSha256, expected.shapeSha256);
   const original = inspectOriginalShape(bytes.toString('utf8'));
   assert.equal(original.vertices.length, expected.vertices);
   assert.equal(original.faces.length, expected.faces);

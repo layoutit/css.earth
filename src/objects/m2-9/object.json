@@ -32,13 +32,11 @@
       }
     },
     "preparation": {
-      "source": "source/delivery.json",
-      "sha256": "6bbc8f16e48fdccaea6ef70057952e60ad47000255eb4e0b0e89c53e9ee07be8"
+      "source": "source/delivery.json"
     }
   },
   "prepared": {
     "format": "cssearth-volume-lenses@1",
-    "url": "prepared/lenses.json",
-    "sha256": "a1c233e309280ebf4509971e0f58a43808f255f4d7f9fa19125380e566b8816a"
+    "url": "prepared/lenses.json"
   }
 }

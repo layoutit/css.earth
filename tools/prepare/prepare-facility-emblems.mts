@@ -6,12 +6,11 @@ import { requireRecord, requireArray, requireString } from '../sources/source-va
 const root=path.resolve(import.meta.dirname,'../../site/source/facilities/emblems');
 const output=path.resolve(import.meta.dirname,'../../public/shell/facility-emblems');
 
-const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-records.json'),'utf8'))).map(value=>{const entry=requireRecord(value);return {...entry,id:requireString(entry.id),localSource:requireString(entry.localSource),inputSha256:entry.inputSha256,sourceSha256:entry.sourceSha256};});
+const records=requireArray(JSON.parse(await fs.readFile(path.join(root,'source-records.json'),'utf8'))).map(value=>{const entry=requireRecord(value);return {...entry,id:requireString(entry.id),localSource:requireString(entry.localSource)};});
 await fs.mkdir(output,{recursive:true});
 const entries=[],layers=[];
 for(const e of records){
  const input=await fs.readFile(path.join(root,e.localSource));
- if(sha256(input)!==(e.inputSha256??e.sourceSha256))throw Error('Pinned emblem input changed: '+e.id);
  // Juno's vector uses negative space for the white features shown in the raster
  // insignia. Retain that white inside the circular badge, with no outer square.
  const renderInput=e.id==='juno'?Buffer.from(input.toString().replace('<path','<circle cx="513.75" cy="513.75" r="498.5" fill="white"/><path')):input;

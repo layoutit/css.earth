@@ -244,9 +244,8 @@ export async function restorePinnedInputs(objectId: string) {
   const restored: string[] = [], missing: string[] = [];
   for (const value of [...requireArray(manifest.inputs), ...(Array.isArray(manifest.documents) ? manifest.documents : [])]) {
     const input = requireRecord(value), path = requireString(input.path);
-    if (input.expectedSha256 === undefined) continue;
     if (await access(resolve(source, path)).then(() => true, () => false)) continue;
-    const bytes = await localCopy(objectId, path, { bytes: Number(input.expectedBytes), sha256: requireString(input.expectedSha256) });
+    const bytes = await localCopy(objectId, path);
     if (!bytes) { missing.push(path); continue; }
     await mkdir(dirname(resolve(source, path)), { recursive: true });
     await writeFile(resolve(source, path), bytes);

@@ -34,7 +34,6 @@
       "referenceFrame": "ICRF",
       "source": "https://doi.org/10.1038/s41586-024-07378-0",
       "sourcePath": "src/objects/selam/source/orbit/published-parameters.json",
-      "sha256": "b0320fd5cf6ae56cffed5d03920b522e2c574c8630be0d2e61a53a163cc25324",
       "timeQualification": "An illustrative zero mean anomaly is assigned at the shared TT scene epoch. This is not a propagation of a measured encounter phase or a prediction of present position.",
       "limitations": [
         "Approximate orbital placement. The 3.11 km separation and 52.67-hour period are measured; circular equatorial motion and synchronous orientation are approximations. The present orbital phase is illustrative.",
