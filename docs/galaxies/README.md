@@ -59,7 +59,7 @@ For the accepted LMC bank and an app capture, from the repository root with supp
 ```sh
 pnpm install --frozen-lockfile
 pnpm setup:assets --object=sun
-pnpm lab:nebula:bake
+node --experimental-strip-types labs/nebula/run.mts bake-nebula
 pnpm dev
 # In another terminal, from the same repository root:
 node tools/capture-galaxies.mts http://127.0.0.1:4210
