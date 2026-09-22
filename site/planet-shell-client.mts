@@ -754,11 +754,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     : ({ 'milky-way': 'Milky Way', 'local-group': 'Local Group', 'nearby-universe': 'Nearby Universe' })[overviewScope];
   let visibleObjects = 0;
   let visibleOverviews = 0;
-  let visibleDestinations = 0, visibleFeatures = 0;
-  const updateEmpty = () => { setEmptyHidden(visibleObjects + visibleDestinations + visibleFeatures > 0); };
+  let visibleFeatures = 0;
+  const updateEmpty = () => { setEmptyHidden(visibleObjects + visibleFeatures > 0); };
   const destinations = createDestinationBrowser({
     documentTarget,
-    onResults(count) { visibleDestinations = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
     onReset() { render(false); },
   });
@@ -767,7 +766,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
     onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
-    ownPlacesSearched: () => destinations?.bound() ?? false,
     selectOwnPlace: id => destinations?.selectById(id) ?? Promise.resolve(),
   });
   lifetime.onDispose(() => features?.destroy());
@@ -857,7 +855,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       visibleObjects = 1;
       empty.hidden = true;
       void navigation?.filter(null);
-      void destinations?.search(''); void features?.search('');
+      void features?.search('');
       return;
     }
     const result = searchObjects(searchLabels, query, activeCategory, { illustrations: illustrationModelsEnabled });
@@ -865,7 +863,6 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     markCategory(classification);
     filteredClassification = classification;
     visibleObjects = 0;
-    void destinations?.search(classification || systemName || showAll ? "" : query);
     void features?.search(classification || systemName || showAll ? "" : query);
     if (query.length === 0) {
       for (const item of items) item.hidden = true;
@@ -889,7 +886,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
     // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
-    setEmptyHidden(visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll));
+    setEmptyHidden(visibleObjects !== 0 || Boolean(features && !classification && !showAll));
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
     publishSourceContext();
@@ -1123,7 +1120,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       render(editing);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) {
-      destinations?.bind(provider, SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell)?.name);
+      const body = SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell);
+      destinations?.bind(provider, body ? { id: body.id, name: body.name } : undefined);
     },
     selectPlace(id: string) { return destinations?.selectById(id) ?? Promise.resolve(); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { features?.bind(provider); },

@@ -115,7 +115,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       navigate: camera => { stopMotion(); alignMotionFrame(); return getOrbit().flyToState(camera, { surfaceTarget: true }); },
       reset: () => orbit?.flyToState({ controlPitch: definition.camera.defaultControlPitchDegrees,
         controlYaw: definition.camera.defaultControlYawDegrees, zoom: getOrbit().initialResponsiveZoom() }),
-      ...(definition.assetOrigin ? { assetOrigin: definition.assetOrigin } : {}),
     }) : null;
     const preparedEpochJdTt = worldFrame?.epochJdTt ?? null;
     let restoreVersion = 0;

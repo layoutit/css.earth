@@ -1,5 +1,5 @@
 import { record } from './browser-types.mts';
-import { normalizeDestinationQuery, searchDestinations } from './destination-search.mts';
+import { searchDestinations } from './destination-search.mts';
 
 /** A row of the prepared cross-body feature index: enough to list, navigate and select. */
 export interface IndexedFeature { readonly objectId: string; readonly id: string; readonly name: string; readonly type: string; readonly diameterKm: number; readonly searchNames: readonly string[]; readonly searchContext: string;
@@ -7,7 +7,9 @@ export interface IndexedFeature { readonly objectId: string; readonly id: string
   readonly context?: string; }
 /** The id a place is selected by: `city-` and its catalogue id. */
 export const PLACE_FEATURE_PREFIX = 'city-';
-export interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly lensIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; }
+/** A body's places catalogue (Earth's GeoNames cities): the search function reads it, no browser does. */
+export interface PlacePin { readonly objectId: string; readonly type: string; readonly url: string; readonly assetUrl: string; readonly bytes: number; readonly sha256: string; readonly count: number; readonly duplicates: readonly (readonly [string, string])[]; }
+export interface FeatureIndex { readonly objects: readonly { readonly id: string; readonly name: string; readonly route: string; readonly count: number; readonly lensIds?: readonly string[] }[]; readonly features: readonly IndexedFeature[]; readonly places: readonly PlacePin[]; }
 export interface FeatureIndexPin { readonly url: string; readonly bytes: number; readonly sha256: string; readonly count: number; }
 
 export const kilometres = new Intl.NumberFormat('en', { maximumFractionDigits: 0 });
@@ -20,19 +22,11 @@ export function parseFeaturePin(source: string | undefined): FeatureIndexPin | n
   return { url: value.url, bytes: Number(value.bytes), sha256: value.sha256, count: Number(value.count) };
 }
 export function parseFeatureIndex(value: unknown, pin: FeatureIndexPin): FeatureIndex {
-  if (!record(value) || value.schema !== 'cssearth-prepared-feature-index@2' || !Array.isArray(value.objects) || !Array.isArray(value.features) || !Array.isArray(value.places)) throw new TypeError('Feature index is incompatible.');
-  // Places arrive as one table per body; each row becomes a feature of that body.
-  const places: IndexedFeature[] = [];
-  for (const table of value.places as unknown[]) {
-    if (!record(table) || typeof table.objectId !== 'string' || typeof table.type !== 'string' || !Array.isArray(table.rows)) throw new TypeError('Feature index places are invalid.');
-    for (const row of table.rows as unknown[]) {
-      if (!Array.isArray(row) || row.length !== 3 || !row.every(cell => typeof cell === 'string' && cell) || !/^[0-9]+$/u.test(row[0])) throw new TypeError('Feature index place is invalid.');
-      const [id, name, context] = row as [string, string, string];
-      places.push({ objectId: table.objectId, id: `${PLACE_FEATURE_PREFIX}${id}`, name, type: table.type, diameterKm: 0,
-        searchNames: [normalizeDestinationQuery(name)], searchContext: normalizeDestinationQuery(context), context });
-    }
+  if (!record(value) || value.schema !== 'cssearth-prepared-feature-index@2' || !Array.isArray(value.objects) || !Array.isArray(value.features) || !Array.isArray(value.places) || value.features.length !== pin.count) throw new TypeError('Feature index is incompatible.');
+  for (const place of value.places as unknown[]) {
+    if (!record(place) || ['objectId', 'type', 'url', 'assetUrl', 'sha256'].some(key => typeof place[key] !== 'string') || !/^[a-f0-9]{64}$/u.test(String(place.sha256)) ||
+        !Number.isSafeInteger(place.bytes) || !Number.isSafeInteger(place.count) || !Array.isArray(place.duplicates) || !place.duplicates.every(pair => Array.isArray(pair) && pair.length === 2 && pair.every(id => typeof id === 'string'))) throw new TypeError('Feature index places pin is invalid.');
   }
-  if (value.features.length + places.length !== pin.count) throw new TypeError('Feature index count differs from its pin.');
   for (const feature of value.features as unknown[]) {
     if (!record(feature) || ['objectId', 'id', 'name', 'type', 'searchContext'].some(key => typeof feature[key] !== 'string') || typeof feature.diameterKm !== 'number' ||
         !Array.isArray(feature.searchNames) || !feature.searchNames.every(name => typeof name === 'string')) throw new TypeError('Feature index row is invalid.');
@@ -41,7 +35,27 @@ export function parseFeatureIndex(value: unknown, pin: FeatureIndexPin): Feature
     if (!record(object) || ['id', 'name', 'route'].some(key => typeof object[key] !== 'string')) throw new TypeError('Feature index object is invalid.');
     if (object.lensIds !== undefined && (!Array.isArray(object.lensIds) || !object.lensIds.length || !object.lensIds.every(id => typeof id === 'string' && id.length > 0))) throw new TypeError('Feature index datasets are invalid.');
   }
-  return { objects: value.objects as unknown as FeatureIndex['objects'], features: [...value.features as unknown as IndexedFeature[], ...places] };
+  return value as unknown as FeatureIndex;
+}
+
+/** A pinned places catalogue's places as features of their body: every alternate name is searched. A place a named
+ * feature of the body already carries (Natural Earth's New York City) is not listed again; its alternate names ("nueva
+ * york", "big apple") are returned for that feature instead. */
+export function placeFeatures(pin: PlacePin, catalog: unknown): { features: IndexedFeature[]; aliases: Map<string, readonly string[]> } {
+  if (!record(catalog) || catalog.schema !== 'cssearth-prepared-destinations@1' || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${pin.objectId}: places catalogue differs from its pin.`);
+  const duplicates = new Map(pin.duplicates.map(([placeId, featureId]) => [placeId, featureId]));
+  const features: IndexedFeature[] = [], aliases = new Map<string, readonly string[]>();
+  for (const place of catalog.places as unknown[]) {
+    if (!record(place) || typeof place.name !== 'string' || typeof place.context !== 'string' || typeof place.searchContext !== 'string' ||
+        !Array.isArray(place.names) || !place.names.every(name => typeof name === 'string')) throw new TypeError(`${pin.objectId}: place record is invalid.`);
+    const id = String(place.id);
+    if (!/^[0-9]+$/u.test(id)) throw new TypeError(`${pin.objectId}: place id is invalid.`);
+    const feature = duplicates.get(id);
+    if (feature !== undefined) { aliases.set(feature, [...aliases.get(feature) ?? [], ...place.names as string[]]); continue; }
+    features.push({ objectId: pin.objectId, id: `${PLACE_FEATURE_PREFIX}${id}`, name: place.name, type: pin.type, diameterKm: 0,
+      searchNames: place.names as string[], searchContext: place.searchContext, context: place.context });
+  }
+  return { features, aliases };
 }
 
 // Built once per loaded index: rebuilding it lowercased every body name for every feature on each keystroke.
@@ -55,19 +69,8 @@ function featureCandidates(index: FeatureIndex) {
   }
   return candidates;
 }
-// Without the places of one body: that body's own catalogue searches every place and alternate name while it is on screen.
-const candidatesWithoutPlaces = new WeakMap<FeatureIndex, Map<string, ReturnType<typeof featureCandidates>>>();
-function candidatesFor(index: FeatureIndex, withoutPlacesOf: string | null) {
-  if (withoutPlacesOf === null) return featureCandidates(index);
-  let byObject = candidatesWithoutPlaces.get(index);
-  if (!byObject) candidatesWithoutPlaces.set(index, byObject = new Map());
-  let candidates = byObject.get(withoutPlacesOf);
-  if (!candidates) byObject.set(withoutPlacesOf, candidates = featureCandidates(index)
-    .filter(({ feature }) => feature.objectId !== withoutPlacesOf || feature.context === undefined));
-  return candidates;
-}
-export function matchFeatures(index: FeatureIndex, query: string, objectId: string, limit = 8, { ownPlaces = true }: { ownPlaces?: boolean } = {}) {
-  const ranked = searchDestinations(candidatesFor(index, ownPlaces ? null : objectId), query, limit).map(match => match.feature);
+export function matchFeatures(index: FeatureIndex, query: string, objectId: string, limit = 8) {
+  const ranked = searchDestinations(featureCandidates(index), query, limit).map(match => match.feature);
   return [...ranked.filter(feature => feature.objectId === objectId), ...ranked.filter(feature => feature.objectId !== objectId)];
 }
 export function featureResult(feature: IndexedFeature, index: FeatureIndex, objectId: string) {
