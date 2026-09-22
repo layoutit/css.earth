@@ -56,7 +56,7 @@ export async function publishPreparedObject({ id, stage, objectDirectory, public
   id: string; stage: string; objectDirectory: string; publicDirectory: string; outputDirectory: string; projectRoot: string;
 }) {
   const data = resolve(stage, 'prepared'), outputs = await readPreparedJsonOutputs(data);
-  const { parseRuntimeManifest } = await import('./dist/operations.js');
+  const { parseRuntimeManifest } = await import('#preparation/operations');
   const manifest = parseRuntimeManifest(await optionalJson(resolve(data, 'inventory.json')), id);
   const current = await readInventory(id, objectDirectory);
   const previous = current === null ? null : parseRuntimeManifest(current, id);
