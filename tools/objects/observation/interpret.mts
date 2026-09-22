@@ -24,7 +24,7 @@ import { loadScienceSurface, paintScienceSurface, prepareObservedColor, validate
 import { validateGeologyProfile } from '../terrestrial-layers/categorical-geology.mts';
 import { validatePds4ObservationPolicy } from '../terrestrial-layers/observed-pds4.mts';
 import { preparePdsByteMosaic } from '../terrestrial-layers/pds-byte-mosaic.mts';
-import { prepareControlledOrthographicMosaic, prepareControlledOrthographicColor } from '../terrestrial-layers/controlled-orthographic-mosaic.mts';
+import { prepareControlledOrthographicMosaic } from '../terrestrial-layers/controlled-orthographic-mosaic.mts';
 import { loadControlledObservationGeometry, matchObservedColorLevels } from '../terrestrial-layers/photometric-observations.mts';
 import { validateCategoricalGrid } from '../terrestrial-layers/index.mts';
 import { parseSolidScience, parseSurfaceSource, parseSolidObservation, parseColorPhotometry } from '../terrestrial-layers/solid-source.mts';
@@ -239,6 +239,28 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
     return pending;
   };
 
+  /** A controlled mosaic at one density, cached, so a colour lens can use it as its monochrome base. */
+  const mosaics = new Map<string, Promise<{ rgb: Uint8Array; missing: Uint8Array }>>();
+  const mosaic = (surface: Surface, width: number, height: number) => {
+    const key = `${surface.id}@${width}x${height}`;
+    let pending = mosaics.get(key);
+    if (!pending) {
+      pending = (async () => {
+        const plan = shape({ format: text, consumer: text })(surface.science);
+        const source = await manifest;
+        const tiles = await source.validateGroup(plan.consumer);
+        const photometry = requireRecord(surface.science).photometry as { consumer?: string } | undefined;
+        if (photometry?.consumer) await source.validateGroup(photometry.consumer);
+        return plan.format === 'controlled-orthographic'
+          ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, surface.science, width, height)
+          : plan.format === 'pds3-byte-equirectangular' ? await preparePdsByteMosaic(sourceDirectory, tiles, width, height)
+          : (() => { throw new TypeError(`${objectId}/${surface.id}: mosaic format ${plan.format} is a radial-terrain format.`); })();
+      })();
+      mosaics.set(key, pending);
+    }
+    return pending;
+  };
+
   return async (surface, width, height, density = 1) => {
     if (surface.science.synoptic !== undefined) {
       if (!solar) throw new TypeError(`Surface ${surface.id} declares a synoptic map but the raster recipe has no emission block.`);
@@ -310,16 +332,7 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         return recipe.emission ? { ...painted, plates: transparentPlates(recipe.emission.offLimbSize * density, recipe.emission.limbSize * density) } : painted;
       }
       case 'terrestrial-mosaic': {
-        const plan = shape({ format: text, consumer: text })(surface.science);
-        const source = await manifest;
-        const tiles = await source.validateGroup(plan.consumer);
-        const photometry = requireRecord(surface.science).photometry as { consumer?: string } | undefined;
-        if (photometry?.consumer) await source.validateGroup(photometry.consumer);
-        const { rgb, missing } = plan.format === 'controlled-orthographic'
-          ? await prepareControlledOrthographicMosaic(sourceDirectory, tiles, surface.science, width, height)
-          : plan.format === 'controlled-orthographic-color' ? await prepareControlledOrthographicColor(sourceDirectory, tiles, surface.science, width, height)
-          : plan.format === 'pds3-byte-equirectangular' ? await preparePdsByteMosaic(sourceDirectory, tiles, width, height)
-          : (() => { throw new TypeError(`${objectId}/${surface.id}: mosaic format ${plan.format} is a radial-terrain format.`); })();
+        const { rgb, missing } = await mosaic(surface, width, height);
         return rgb3(rgb, missing, width, height, false, recipe.missingCoverage);
       }
       case 'terrestrial-observed-color': {
@@ -331,9 +344,11 @@ export async function createSurfaceInterpreter({ objectId, displayName, sourceDi
         const color = await prepareObservedColor({ sourceDirectory, entries: await source.validateGroup(plan.consumer), profile: recipe.profile, width, height, photometry });
         const baseSurface = surfaces.get(plan.monochromeBase);
         if (!baseSurface?.science) throw new TypeError(`${objectId}/${surface.id}: colour base ${plan.monochromeBase} is not a science surface.`);
-        const base = await observation({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height);
+        const base = baseSurface.science.kind === 'terrestrial-mosaic' ? await mosaic({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height)
+          : await observation({ id: baseSurface.id, source: baseSurface.source, science: baseSurface.science }, width, height);
         if (photometry && !('owners' in color)) throw new Error('Corrected color has no observation ownership.');
-        const levels = photometryRecipe && 'owners' in color ? matchObservedColorLevels(color, base, { width, height, ...photometryRecipe.levels }) : undefined;
+        // Observations already carried onto one calibration (band levels) take one pooled brightness gain, never one each.
+        const levels = photometryRecipe && 'owners' in color ? matchObservedColorLevels(color, base, { width, height, ...photometryRecipe.levels, pooled: photometryRecipe.profile.bandLevels !== undefined }) : undefined;
         const rgb = color.rgb instanceof Uint8Array ? color.rgb : encodeBandColor(color.rgb,color.missing,color.display);
         for (let i = 0; i < color.missing.length; i++) if (color.missing[i] && !base.missing[i]) { rgb.set(base.rgb.subarray(i * 3, i * 3 + 3), i * 3); color.missing[i] = 0; }
         return {...rgb3(rgb, color.missing, width, height, false, missingCoverage),report:{colorDisplay:color.colorDisplay,sourceIds:color.sourceIds,

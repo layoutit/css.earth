@@ -77,10 +77,22 @@ this color repair does not promote its unresolved registration cases:
   the lens selects. Level matching scales the three bands by one gain, so their
   measured ratios stay. The bands remain floating through the shared footprint,
   photometry and surface transfer; the same encoder finishes them.
-- `terrestrial-observed-color`: Europa's Galileo I/F bands. Photometry and
-  common brightness matching run before the final encoding. The already prepared
-  monochrome base is decoded only as a display reference for that matching;
-  its brightness does not establish natural color or new radiometric calibration.
+- `terrestrial-observed-color`: Europa's Galileo I/F bands and Triton's Voyager
+  ISS bands. Photometry and common brightness matching run before the final
+  encoding. The already prepared monochrome base is decoded only as a display
+  reference for that matching; its brightness does not establish natural color
+  or new radiometric calibration. Two profile policies are recipe choices, not
+  defaults: `withheld: "next-observation"` lets the next densest observation own
+  a texel the densest one views or lights too steeply, for observations from
+  one encounter (Europa's orbits keep the default, `monochrome`, so no other
+  date's color fills a withheld footprint); `bandLevels` scales each
+  observation's bands onto one named reference observation through the median
+  ratios where their corrected footprints overlap, solved by weighted least
+  squares over every overlapping pair on a coarse grid, and records the pairs
+  and gains in the photometry report; the brightness match to the base is
+  then one pooled gain for the lens, clamped so 99.9 % of texels encode
+  without clipping, instead of one gain per observation. The reference is chosen from evidence
+  recorded in the body README, never by preference for a look.
 - `pds4-float-rgb`: Charon's archive-produced, pan-sharpened MVIC composite.
   Its values are derived band values, not untouched I/F. The reader validates
   the archived wavelengths and applies its explicit common display range once.

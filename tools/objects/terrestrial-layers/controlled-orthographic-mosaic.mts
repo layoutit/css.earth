@@ -1,4 +1,4 @@
-import {parseControlledMosaic,parseControlledColorMosaic,parseControlledMetadata,numericRasterBands} from './source-records.mts';
+import {parseControlledMosaic,parseControlledMetadata,numericRasterBands} from './source-records.mts';
 import {execFile} from 'node:child_process';
 import {mkdtemp, writeFile, rm} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
@@ -25,19 +25,7 @@ export async function prepareControlledOrthographicMosaic(sourceDirectory: strin
       ![profile.maximumIncidenceDegrees, profile.maximumEmissionDegrees].every(v => v > 0 && v < 90)) {
     throw new Error('Invalid controlled mosaic correction.');
   }
-  const {values, missing, statistics} = await correctedFilterMosaic(resolve(sourceDirectory, entries[0].path), recipe, sourceDirectory, width, height);
-  const rgb=Buffer.alloc(width*height*3);
-  for(let i=0;i<values.length;i++){
-    const v=Math.round(255*Math.min(1,values[i]/profile.displayMaximum)**(1/profile.gamma));
-    rgb.fill(v,i*3,i*3+3);
-  }
-  return {rgb,missing,grid:{model:'controlled-orthographic-photometric-mosaic',profile,frames:statistics}};
-}
-
-type ControlledMosaicRecipe = ReturnType<typeof parseControlledMosaic>;
-/** One filter's photometrically corrected mosaic: finest frames win, each exposure matched to what is already placed. */
-export async function correctedFilterMosaic(archive: string, recipe: Pick<ControlledMosaicRecipe,'directory'|'imageIds'|'filter'|'photometry'>, sourceDirectory: string, width: number, height: number) {
-  const profile = recipe.photometry;
+  const archive = resolve(sourceDirectory, entries[0].path);
   const extract = async (name: string) => (await run('unzip', ['-p', archive, name], {encoding:'buffer',maxBuffer:128*1024*1024})).stdout;
   const vectors = await readObservationVectors(sourceDirectory, profile.vectors);
   const frames = [];
@@ -97,40 +85,10 @@ export async function correctedFilterMosaic(archive: string, recipe: Pick<Contro
       }finally{await file.close();}
     }
   }finally{await rm(directory,{recursive:true,force:true});}
-  return {values, missing, statistics};
-}
-
-/** Red, green and blue from three corrected filter mosaics, each stretched to its own percentile where all three observed. */
-export async function prepareControlledOrthographicColor(sourceDirectory: string, entries: readonly {path:string}[], value: unknown, width: number, height: number) {
-  const recipe = parseControlledColorMosaic(value);
-  if (entries.length !== 1 || recipe.channels.length !== 3 || !(recipe.stretchPercentile > 0.5 && recipe.stretchPercentile < 1) ||
-      [...recipe.channels, recipe.monochrome].some(set => !set.imageIds.length || set.imageIds.some(id => !/^c\d+$/.test(id)))) {
-    throw new Error('Controlled colour mosaic requires one pinned archive, three filters and exact frame identities.');
+  const rgb=Buffer.alloc(width*height*3);
+  for(let i=0;i<values.length;i++){
+    const v=Math.round(255*Math.min(1,values[i]/profile.displayMaximum)**(1/profile.gamma));
+    rgb.fill(v,i*3,i*3+3);
   }
-  const archive = resolve(sourceDirectory, entries[0].path), profile = recipe.photometry;
-  const channels: Awaited<ReturnType<typeof correctedFilterMosaic>>[] = [];
-  for (const set of recipe.channels) channels.push(await correctedFilterMosaic(archive, {directory: recipe.directory, photometry: profile, ...set}, sourceDirectory, width, height));
-  const mono = await correctedFilterMosaic(archive, {directory: recipe.directory, photometry: profile, ...recipe.monochrome}, sourceDirectory, width, height);
-  const colored = (i: number) => channels.every(channel => !channel.missing[i]);
-  const stretch = channels.map(channel => {
-    const values = [];
-    for (let i = 0; i < channel.values.length; i++) if (colored(i)) values.push(channel.values[i]!);
-    if (!values.length) throw new Error('Controlled colour mosaic has no pixel observed in all three filters.');
-    values.sort((a, b) => a - b);
-    return values[Math.min(values.length - 1, Math.floor(values.length * recipe.stretchPercentile))]!;
-  });
-  const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-  let colorPixels = 0, monochromePixels = 0;
-  for (let i = 0; i < width * height; i++) {
-    if (colored(i)) {
-      colorPixels++;
-      for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.round(255 * Math.min(1, channels[c]!.values[i]! / stretch[c]!) ** (1 / profile.gamma));
-    } else if (!mono.missing[i]) {
-      monochromePixels++;
-      rgb.fill(Math.round(255 * Math.min(1, mono.values[i]! / profile.displayMaximum) ** (1 / profile.gamma)), i * 3, i * 3 + 3);
-    } else missing[i] = 1;
-  }
-  return {rgb, missing, grid: {model: 'controlled-orthographic-photometric-color', profile,
-    channels: recipe.channels.map((set, c) => ({filter: set.filter, stretch: stretch[c], frames: channels[c]!.statistics})),
-    colorPixels, monochromePixels}};
+  return {rgb,missing,grid:{model:'controlled-orthographic-photometric-mosaic',profile,frames:statistics}};
 }
