@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Astropy world coordinates for tools/fits-sky.mts skyImageAxes and skyDisplayRaster.
+"""Astropy world coordinates for tools/fits/fits-sky.mts skyImageAxes and skyDisplayRaster.
 Run with the pinned oracle environment; never imports the TypeScript helper.
 Each case is a WCS header for a 3 x 2 image. Astropy's pixel-to-world transform at the reference pixel says which way right ascension and
 declination run along columns and rows; the expected display raster puts the northern row first and the eastern column first.

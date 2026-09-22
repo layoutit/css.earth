@@ -3,8 +3,8 @@ import { readInventory, mergeInventory, inventoryText } from '../../src/platform
 import type { RuntimeManifest } from './operations.ts';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../source-values.mts';
-import { writePreparedSet, type PreparedOutput } from '../write-prepared-set.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
+import { writePreparedSet, type PreparedOutput } from '../prepared/write-prepared-set.mts';
 
 
 const safe = (name: unknown): name is string => typeof name === 'string' && /^[a-z0-9][a-z0-9@._-]*$/u.test(name);

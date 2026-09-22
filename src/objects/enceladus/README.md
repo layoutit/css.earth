@@ -53,7 +53,7 @@ exceed the threshold; most photographic changes are subtle. Inspection shows
 finer fracture texture. These counts do not measure sharpness or registration
 accuracy.
 The four input crops and three diffs are retained beside their reports. Reproduce
-a comparison with `node tools/compare-visual-evidence.mts <reference.png>
+a comparison with `node tools/investigations/compare-visual-evidence.mts <reference.png>
 <result.png> <diff.png> <report.json>` from the repository root.
 
 - The formal pinned Python environment reproduced the exact ZIP hash (see [docs/moons/b2-preparation/enceladus-dsk-reproduction.json](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/moons/b2-preparation/enceladus-dsk-reproduction.json)).

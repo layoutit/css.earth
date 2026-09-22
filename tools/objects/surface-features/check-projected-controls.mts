@@ -5,7 +5,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { readFitsPrimary } from '../observation/fits.mts';
 import { loadObjShape } from '../terrestrial-layers/obj-shape.mts';
 import { matrixCamera } from '../surface-observations/cameras.mts';

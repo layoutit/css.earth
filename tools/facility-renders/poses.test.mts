@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { Quaternion, Vector3 } from 'three';
 import { getFacilityPose, inwardDirection, facilityPoses } from './poses.mts';
-import { requireArray, requireRecord, requireString } from '../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 
 const library = requireRecord(JSON.parse(await readFile(new URL('../../site/source/facilities/render-library.json', import.meta.url), 'utf8')));
 const models = requireArray(library.entries).map(value => requireRecord(value)).filter(entry => requireRecord(entry.source).kind === 'model-render');

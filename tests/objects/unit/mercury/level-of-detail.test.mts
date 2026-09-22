@@ -1,6 +1,6 @@
 import {parsePreparedObjectRuntime} from '../../../../src/renderers/css/dist/index.js';
 const runtimeDefinition=parsePreparedObjectRuntime(runtimeSource);
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeSource from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};

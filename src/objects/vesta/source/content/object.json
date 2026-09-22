@@ -92,7 +92,7 @@
           "id": "dlr-hamo-natural-color",
           "path": "../manifest.json"
         },
-        "notes": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Gray grid marks identified missing coverage; local shadows and channel-registration artifacts may remain.",
+        "notes": "DLR natural-color composite from Dawn’s 650, 550, and 430 nm filters, calibrated and photometrically corrected. Very bright terrain is clipped to white in the published image. Where the color mosaic has no coverage, the HAMO clear-filter mosaic shows in gray. Local shadows and channel-registration artifacts may remain.",
         "noData": true
       },
       {
@@ -105,7 +105,20 @@
           "id": "dlr-vesta-lamo-clear",
           "path": "../manifest.json"
         },
-        "notes": "Dawn low-altitude clear-filter photographs in the published DLR mosaic. Sunlit crater walls, shadows and mosaic seams belong to the observations. The source is 20 m/pixel; this simplified display is coarser. Gray grid marks missing coverage and exact black pixels withheld by the fill heuristic.",
+        "notes": "Dawn low-altitude clear-filter photographs in the published DLR mosaic. Sunlit crater walls, shadows and mosaic seams belong to the observations. The source is 20 m/pixel; this simplified display is coarser. The north, which the low orbit never saw lit, takes the 60 m/pixel HAMO mosaic; exact black pixels are withheld by the fill heuristic and drawn as the gray grid.",
+        "noData": true
+      },
+      {
+        "id": "hamo",
+        "label": "HAMO photography",
+        "thumbnail": "/scenes/vesta/vesta-hamo-thumbnail.webp",
+        "surface": "vesta-hamo-surface@2x.webp",
+        "poles": "vesta-hamo-surface@2x.webp",
+        "source": {
+          "id": "dlr-vesta-hamo-clear",
+          "path": "../manifest.json"
+        },
+        "notes": "Dawn high-altitude clear-filter photographs in the published DLR mosaic of May 2013, HAMO-1 for the south (2011) and HAMO-2 for the north (June to July 2012). It is the only Dawn product that reaches the north pole, photographed under low northern-spring sun, so the northernmost band is dim. Original illumination and seams remain; exact black is withheld and drawn as the gray grid.",
         "noData": true
       },
       {

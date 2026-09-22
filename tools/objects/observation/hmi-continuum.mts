@@ -7,8 +7,8 @@
  * FITS columns do. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readRiceCompressedImage } from '../../fits-rice.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { readRiceCompressedImage } from '../../fits/fits-rice.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 
 export interface HmiContinuumSource {
   readonly kind: 'hmi-continuum-mosaic';

@@ -16,7 +16,7 @@ Original images, meshes and labels
 
 | Step | Implementation |
 | --- | --- |
-| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/restore-source-inputs.mts) |
+| Restore missing inputs; reject changed bytes | [Acquisition](../tools/objects/operations.ts) and [checkout restoration](../tools/assets/restore-source-inputs.mts) |
 | Read PDS metadata without guessing empty or ambiguous fields | [PDS label helpers and limits](pds-labels.md) |
 | Reproduce authored ellipsoid tables from pinned measurements | [Source table tools](../tools/objects/source-authoring/README.md) |
 | Read the authored recipe and dispatch its capabilities | [prepareAuthoredObject](../tools/objects/prepare-authored.ts) |
@@ -156,11 +156,11 @@ identifies the cubes and processing behind this illustration.
 ## FITS support
 
 FITS decoding happens during preparation, never in the browser. The shared
-[reader](../tools/fits.mts) preserves native pixel/axis order and physical numeric
+[reader](../tools/fits/fits.mts) preserves native pixel/axis order and physical numeric
 values. Every other FITS reader in `tools/` reads headers and HDU bounds through it.
 Product adapters still own units, quality masks, camera registration,
 spectral selection, missing-data policies and display transforms. Sky images do not
-own their orientation: [fits-sky.mts](../tools/fits-sky.mts) reads it from the WCS. An axis-aligned image is flipped into
+own their orientation: [fits-sky.mts](../tools/fits/fits-sky.mts) reads it from the WCS. An axis-aligned image is flipped into
 display order; a rotated gnomonic (TAN) image is resampled through `skyProjection`, which refuses distortion terms and frames
 other than ICRS or FK5 and is checked against Astropy in both directions.
 
@@ -216,8 +216,8 @@ no Pallas body recipe or surface output changes here.
 `pnpm test:fits --unit` runs the offline subset, including small checked-in
 Astropy-generated FITS files. CI runs this subset. It does not prove that the
 large archive files are available or that complete body preparation passed.
-Regenerate the small reference fixtures with `pnpm oracles:setup`, then
-`pnpm oracles:run fits/core`; normal tests need no Python environment.
+Regenerate the small reference fixtures with `node tools/oracles/setup.mts`, then
+`node tools/oracles/run.mts fits/core`; normal tests need no Python environment.
 
 For missing real inputs, run `pnpm build:preparation`, then
 `pnpm test:fits --restore`. Restoration is sequential and limited to the suite's
@@ -485,7 +485,7 @@ surface geometry.
 
 The common compiler prepares this during normal object finalization. To refresh
 only this metadata from existing local assets, run
-`node tools/prepare-interior-fills.mts --all` (or supply object ids). The command
+`node tools/prepare/prepare-interior-fills.mts --all` (or supply object ids). The command
 preserves surface assets, motion, lighting and depth partitions, and re-pins the
 scene and page metadata. Source graphs are retained only after checking that
 their inputs changed solely in those scene references.

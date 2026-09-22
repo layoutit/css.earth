@@ -54,7 +54,7 @@ separate selection owner, so mounting never replaces it with an intermediate car
 
 ## Explicit native motion
 
-`tools/prepared-presentation-bindings.mts` reads each object's imported authored CSS
+`tools/prepared/prepared-presentation-bindings.mts` reads each object's imported authored CSS
 in offline Chromium and compiles transform-only native motion, including dataset
 specific durations. Both `prepared/runtime.json` and the pinned `prepared/object.json`
 contain these bindings. Unsupported keyframes, timing or changing motion membership

@@ -8,7 +8,7 @@ async function workspace(start: string, explicit: boolean): Promise<string> {
   for (;;) {
     try {
       await access(resolve(root, 'tools/objects/telescopes/cli.mts'));
-      await access(resolve(root, 'tools/run-typed-module.mjs'));
+      await access(resolve(root, 'tools/cli/run-typed-module.mjs'));
       const pkg: unknown = JSON.parse(await readFile(resolve(root, 'package.json'), 'utf8'));
       if (pkg && typeof pkg === 'object' && 'scripts' in pkg && pkg.scripts && typeof pkg.scripts === 'object' && 'telescope:query' in pkg.scripts) return root;
     } catch { /* Try the parent directory unless the caller named an exact workspace. */ }
@@ -29,7 +29,7 @@ try {
   else if (args.length === 1 && args[0] === '--version') process.stdout.write('0.1.0\n');
   else {
     const root = await workspace(location ?? process.cwd(), Boolean(location));
-    const child = spawn(process.execPath, [resolve(root, 'tools/run-typed-module.mjs'), resolve(root, 'tools/objects/telescopes/cli.mts'), ...args], { stdio: 'inherit', env: {
+    const child = spawn(process.execPath, [resolve(root, 'tools/cli/run-typed-module.mjs'), resolve(root, 'tools/objects/telescopes/cli.mts'), ...args], { stdio: 'inherit', env: {
       ...process.env,
       CSSEARTH_TELESCOPE_STDIN_TTY: process.stdin.isTTY ? '1' : '0',
       CSSEARTH_TELESCOPE_STDOUT_TTY: process.stdout.isTTY ? '1' : '0',

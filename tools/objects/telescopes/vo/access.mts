@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile, copyFile, rename, rm } from 'node:fs/promis
 import { randomUUID } from 'node:crypto';
 import { pinFile, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../../product-record.mts';
 import { astroquery } from '../../astronomy-packages/client.mts';
-import { requireRecord } from '../../../source-values.mts';
+import { requireRecord } from '../../../sources/source-values.mts';
 import { extractVoPackage } from './package.mts';
 import { inspectVoFits, type VoContentProfile } from './content.mts';
 import { acquisitionKey, canonical, digest, jsonValue, parseLimits, productKey, type DiscoverySnapshot, type Json, type MetadataResponse, type Pin, type Resource, type TransferLimits } from './contracts.mts';

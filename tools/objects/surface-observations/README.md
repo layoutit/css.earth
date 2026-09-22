@@ -288,7 +288,7 @@ with `main` at `3785f09de`:
   committed: the repository ignores `captures/` folders, and no copy remains.
   The sheets above are the kept visual evidence.
 
-`tools/compare-visual-evidence.mts` made each diff from the exact committed
+`tools/investigations/compare-visual-evidence.mts` made each diff from the exact committed
 bytes, with threshold 0.1 and anti-aliasing included. A mismatch count only
 locates change. The sheets were inspected against `main` at native resolution,
 and the body READMEs record what that found.

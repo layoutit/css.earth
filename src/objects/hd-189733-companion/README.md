@@ -29,7 +29,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 **Navigation marker.** A uniform disc in the spectrum's colour, rendered by [author.mts](../../../tools/objects/source-authoring/hd-189733/author.mts) (`--check` recomputes it).
 
-**On the map.** B has no surface image and hosts no planet, but its colour comes from its own spectrum. Preparation marks its discovery `sourceColor` ([prepare-object-discovery.mts](../../../tools/prepare-object-discovery.mts)), and `discoveryVisibility` keeps such a star visible.
+**On the map.** B has no surface image and hosts no planet, but its colour comes from its own spectrum. Preparation marks its discovery `sourceColor` ([prepare-object-discovery.mts](../../../tools/prepare/prepare-object-discovery.mts)), and `discoveryVisibility` keeps such a star visible.
 
 **In the system.** The pair is bound: El-Badry, Rix & Heintz (2021, MNRAS 506, 2269) list it in their Gaia EDR3 wide-binary catalogue with a chance-alignment probability of 1.3e-4. B's astrometry record states that with `boundTo`, and preparation carries it into the world context with the pair's **centre of mass**, 19.3% of the way from A to B for masses 0.807 and 0.193 solar, 44 au from A. The system's members come from the prepared orbit chains and that bound pair ([object-systems.mts](../../../site/object-systems.mts)), so B's breadcrumb and card are the system's. It frames nothing: the system view still frames the planet's 0.031 AU orbit, and B's own page keeps its scene until the camera leaves B as well as the system ([overview-selection.mts](../../../site/overview-selection.mts)).
 
@@ -39,7 +39,7 @@ An earlier version of this package drew 24 of those orbits, dashed. Each of them
 
 ## Evidence
 
-Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733-companion` prepared the package.
+Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-189733-companion` prepared the package.
 
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) reads the pinned XP spectrum and checks the colour 255, 201, 123.
 - [`source.test.mts`](../../../tests/objects/unit/hd-189733-companion/source.test.mts) verifies the pins and acquisitions, that radius and GM are the catalogue's, that the distance is A's, and that the prepared world positions of A and B are 11.44 arcsec apart as seen from the Sun.
@@ -47,7 +47,7 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733-compa
 - [`object-systems.test.mts`](../../../site/test/object-systems.test.mts) checks that the HD 189733 system's members are the planet and B, and that its exit distance scales the Sun's 100 au.
 - [`rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/hd-189733-companion/` in headless Chrome, no console errors.
 - Driven in a real browser from the planet outwards (1440 by 900, headless Chrome): where both stars are on screen, the pair's centre of mass sits 2 px from the centre of the view with A 35 px to one side and B to the other, and it stays within 1 px of the centre as the view widens further. Before this change A sat exactly at the centre and B swept in from the corner.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffc97b is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffc97b is the colour lens's prepared colour.
 
 ## Known problems
 

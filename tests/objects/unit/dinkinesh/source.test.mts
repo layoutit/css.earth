@@ -7,7 +7,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadRadialModels,combineRadialModels} from '../../../../tools/objects/terrestrial-layers/radial-models.mts';
 import {prepareSolidRasters} from '../../../../tools/objects/terrestrial-layers/solid-raster.mts';
 import {parseTerrestrialProfile} from '../../../../tools/objects/terrestrial-layers/index.mts';
-import {requireRecord,requireArray,requireString} from '../../../../tools/source-values.mts';
+import {requireRecord,requireArray,requireString} from '../../../../tools/sources/source-values.mts';
 
 test('Dinkinesh keeps both source shapes and their provenance separate',async()=>{
  const sourceDirectory=resolve('src/objects/dinkinesh/source');

@@ -35,11 +35,11 @@ The 299 MB pipeline image is never downloaded. The archive's cutout service retu
 
 ## Evidence
 
-Run of 2026-09-19 (this version): `node tools/prepare-object.mts haumea` took 1 min 26 s and added the sidebar picture (`haumea-alma-2023-07.webp`, 8,234 bytes); the prepared scene is unchanged. `node --test tools/objects/content/fits-gallery-image.test.mts` passes: north-up orientation, linear clipping, whole-pixel enlargement, refusals, and that Haumea's window is centred on the cutout's brightest pixel with only that pixel reaching white. The section was checked in the running app with headless Chrome at 1440 × 900.
+Run of 2026-09-19 (this version): `node tools/prepare/prepare-object.mts haumea` took 1 min 26 s and added the sidebar picture (`haumea-alma-2023-07.webp`, 8,234 bytes); the prepared scene is unchanged. `node --test tools/objects/content/fits-gallery-image.test.mts` passes: north-up orientation, linear clipping, whole-pixel enlargement, refusals, and that Haumea's window is centred on the cutout's brightest pixel with only that pixel reaching white. The section was checked in the running app with headless Chrome at 1440 × 900.
 
 Run of 2026-09-18: the shape-model route now takes one surface per lens, and preparation added the Illustration lens. The Color lens images are byte-identical to the previous pins under per-lens names (`surface.webp` and `poles.webp` became `surface-color.webp` and `poles-color.webp`). Discovery is unchanged: no imagery, not illustration-only. Measured this session, the illustration's area-weighted mean colour is sRGB 112, 102, 96 (#706660) against the measured #bcbdbf; its linear luminance is about 27% of the measured colour's.
 
-Run of 2026-09-16: `node tools/prepare-object.mts haumea` prepared the package with the Color lens. `node --test tools/objects/observation/disc-integrated-color.test.mts tests/objects/unit/haumea/shape.test.mts site/test/object-discovery.test.mts` passes.
+Run of 2026-09-16: `node tools/prepare/prepare-object.mts haumea` prepared the package with the Color lens. `node --test tools/objects/observation/disc-integrated-color.test.mts tests/objects/unit/haumea/shape.test.mts site/test/object-discovery.test.mts` passes.
 
 Measured sensitivity, with the same method: each published colour uncertainty moves an sRGB channel by at most 2 of 255 (B−V ± 0.025 moves blue from 191 to 189–193), and the albedo uncertainty moves every channel by 3. The [MBOSS](https://doi.org/10.26093/cds/vizier.35460115) three-epoch mean (B−V 0.631, V−R 0.370, V−I 0.687) gives 190, 189, 191. The Herschel and Spitzer albedo of 0.804 that Ortiz et al. (2017) replace would give 230, 232, 234.
 

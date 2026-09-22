@@ -1,6 +1,6 @@
 import type {RadialSimplification} from './radial-meshoptimizer.mts';
 import type {Decoder} from './source-records.mts';
-import {requireRecord} from '../../source-values.mts';
+import {requireRecord} from '../../sources/source-values.mts';
 import {shape,number,text,optional,boolean} from './source-records.mts';
 
 export const parseRadialSimplification:Decoder<RadialSimplification> = shape({method:optional(text),targetFaces:number,maximumErrorMeters:number,regularize:optional(boolean),prune:optional(boolean)});

@@ -3,7 +3,7 @@ import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { test } from "node:test";
 import { array, number, optional, shape, text } from "../../../../tools/objects/terrestrial-layers/source-records.mts";
-import { required } from "../../../../tools/test-values.mts";
+import { required } from "../../../../tools/contract/test-values.mts";
 import { parseInterpreterRecipe } from "../../../../tools/objects/observation/interpret.mts";
 import { colorForValue, loadScienceSurface, paintScienceSurface, terrainBrightness as shadeTerrain } from "../../../../tools/objects/terrestrial-layers/scientific-raster.mts";
 import type { SourceScalar } from "../../../../tools/objects/terrestrial-layers/contracts.mts";

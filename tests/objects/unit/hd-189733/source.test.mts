@@ -7,7 +7,7 @@ import { createSourceManifest } from '../../../../src/platform/source-manifest.m
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import { readAuthoredRotation } from '../../../../tools/objects/authored-rotation.mts';
 import { loadStellarPhotometricColor } from '../../../../tools/objects/observation/stellar-photometric-color.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../../tools/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../../tools/sources/source-values.mts';
 
 const body = resolve(import.meta.dirname, '../../../../src/objects/hd-189733'), root = resolve(body, 'source');
 const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;

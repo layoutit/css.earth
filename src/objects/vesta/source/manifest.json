@@ -213,6 +213,53 @@
       }
     },
     {
+      "id": "dlr-vesta-hamo-clear",
+      "path": "maps/vesta-hamo-clear.png",
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.png",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "acquisition": "Unmodified 8-bit PNG from the DLR Dawn HAMO clear-filter release of 29 May 2013, which joins HAMO-1 (southern hemisphere, 2011) and HAMO-2 (northern hemisphere, June to July 2012). Companion PDS label preserved in reference/hamo-clear.lbl.",
+      "redistribution": "Prepared display derivatives with the source credit and scientific limitations.",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "hamo",
+      "label": "HAMO clear-filter mosaic",
+      "falseColor": false,
+      "width": 26703,
+      "height": 13351,
+      "projection": {
+        "kind": "simple-cylindrical",
+        "latitudeType": "planetocentric",
+        "longitudeDirection": "east",
+        "coordinateSystem": "Dawn Claudia",
+        "referenceRadiusMeters": 255000
+      },
+      "coverage": "Published high-altitude mosaic at 60 m/pixel with original illumination. HAMO-2 reaches the north pole under low northern-spring sun, so the northernmost band is dim but photographed; exact black is treated as fill.",
+      "expectedBytes": 98995479,
+      "expectedSha256": "d812c3a831f68ce27c5bc3f890e17fbe1ba28fa6b06436f1f87e23443c6c5b89",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "dawn",
+            "missionId": "dawn",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.png"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dlr-hamo-clear",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
       "id": "dlr-vesta-lamo-clear",
       "path": "maps/vesta-lamo-clear.png",
       "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/LAMO/clear/Vesta_mosaic_LAMO_global.png",
@@ -1566,6 +1613,24 @@
           }
         ]
       }
+    },
+    {
+      "path": "reference/hamo-clear.lbl",
+      "purpose": "Unmodified attached PDS metadata for the released HAMO-1-2 clear grid: native size, planetocentric east-positive Claudia projection and pixel offsets.",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-vesta-dlr-hamo-clear",
+            "role": "reference",
+            "evidence": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.pds.zip"
+          }
+        ]
+      },
+      "origin": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.pds.zip",
+      "credit": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "license": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "acquisition": "Extracted unmodified from the released PDS zip archive beside the pinned mosaic."
     }
   ]
 }

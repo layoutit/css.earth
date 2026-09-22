@@ -1,7 +1,7 @@
 /** The only cssEarth process boundary into the pinned astronomy packages. Operations are explicit rather than extensible:
  * Astroquery and PyVO own supported remote protocols; the caller owns validation and scientific meaning. */
 import { spawn } from 'node:child_process';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { astroqueryToolchain } from './toolchain.mts';
 import { parseMetadata, parsePin, type Json, type Pin, type MetadataResponse } from '../telescopes/vo/contracts.mts';
 export class ArchiveTransportError extends Error {}

@@ -6,7 +6,7 @@ import { isisMetadata, pdsMetadata, parseNativeMetadata, type NativeMetadata } f
 import { calibrationDependencies, verifyCalibrationDependencies } from './calibration-dependencies.mts';
 import { parseProductFacts } from './qualified-observations.mts';
 import { pinFile } from '../product-record.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { decodeIsis3Core } from '../terrestrial-layers/isis3-raster.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 export interface ScienceProduct { readonly file:string; readonly format:'fits'|'isis3'|'pds'; readonly target:string; readonly label?:string; readonly decoded?:unknown; readonly region?: import('./vo/contracts.mts').IcrsCircle }

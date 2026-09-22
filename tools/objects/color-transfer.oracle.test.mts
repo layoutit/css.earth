@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
-import { readFitsImage } from '../fits.mts';
+import { readFitsImage } from '../fits/fits.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '../sources/source-values.mts';
 import { asinhBandDisplay, encodeAsinhBands } from './color-transfer.mts';
 
 const fixture = await readOracleFixture('fits/lupton-asinh.json');

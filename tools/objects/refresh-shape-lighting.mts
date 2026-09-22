@@ -4,7 +4,7 @@ import { readFile, writeFile, mkdir, copyFile, rename } from 'node:fs/promises';
 import { resolve, basename } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString } from '../source-values.mts';
+import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';

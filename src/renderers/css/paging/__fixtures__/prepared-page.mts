@@ -1,6 +1,6 @@
 import {parsePreparedPagePlan} from '../capabilities.js';
-import {requireRecord} from '../../../../../tools/source-values.mts';
-import {requireObjectRuntimeDefinition} from '../../../../../tools/object-runtime-contract.mts';
+import {requireRecord} from '../../../../../tools/sources/source-values.mts';
+import {requireObjectRuntimeDefinition} from '../../../../../tools/contract/object-runtime-contract.mts';
 import { readFile } from 'node:fs/promises';
 
 // Paging is an optional authored capability. Exercise the retained, source-backed

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsImage } from '../../fits.mts';
+import { readFitsImage } from '../../fits/fits.mts';
 import { controlledShapeCamera } from '../terrestrial-layers/shape-camera-mosaic.mts';
 import { decodeFitsImageMap } from '../terrestrial-layers/fits-image-map.mts';
 import { paintScienceSurface } from '../terrestrial-layers/scientific-raster.mts';

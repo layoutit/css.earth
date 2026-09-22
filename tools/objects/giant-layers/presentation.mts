@@ -4,19 +4,19 @@ import {bandedGeometryRecipe} from './geometry-contract.mts';
 import type {prepareBandedEllipsoid} from './geometry.mts';
 import {parseObservedSurfaceRecipe} from '../observed-surfaces/index.mts';
 import {parseEllipsoidMaterialRecipe} from './materials.mts';
-import type {PreparedNode} from '../../prepared-node-tree.mts';
-import type {MaterialSourceTrack} from '../../prepare-materials.mts';
+import type {PreparedNode} from '../../prepared/prepared-node-tree.mts';
+import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import type {PreparedCubicSkyPlan} from '../../../src/platform/cubic-sky-contract.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
 import type {PreparedProjectiveTextureLeaf} from '../../../src/renderers/css/prepared-data/projective-layout.ts';
 import {createPolyCamera,buildPolyCameraSceneTransform,buildPolyMeshTransform} from '@layoutit/polycss';
 import {preparedResourcePool} from '../../../src/platform/prepared-object-assets.mts';
 import {PREPARED_PRESENTATION_SCHEMA} from '../../../src/platform/prepared-presentation-contract.mts';
-import {prepareCssomDeclarationReads} from '../../prepared-cssom.mts';
-import {createPreparedNodeTree} from '../../prepared-node-tree.mts';
+import {prepareCssomDeclarationReads} from '../../prepared/prepared-cssom.mts';
+import {createPreparedNodeTree} from '../../prepared/prepared-node-tree.mts';
 import {prepareFixedSpanMaterialPlane} from './geometry.mts';
 import {rasterEllipsoidMaterial} from './materials.mts';
-import {prepareMaterialTracks} from '../../prepare-materials.mts';
+import {prepareMaterialTracks} from '../../prepare/prepare-materials.mts';
 
 const url=(prefix:string,filename:string)=>`${prefix}${filename}`;
 function authoredTransform(config:LayeredPresentationRecipe['meshTransform']|LayeredPresentationRecipe['systemTransform']){return config.kind==='literal'?config.value:`transform:${config.rotations.map(rotation=>buildPolyMeshTransform({rotation})).join(' ')}`;}

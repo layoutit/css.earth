@@ -5,7 +5,7 @@
  * adds its selection and level matching. A format adds only its own frame inputs and lens blocks. A key the format does not
  * declare is refused, so a misspelt field fails validation instead of being silently ignored.
  */
-import { requireRecord } from '../../source-values.mts';
+import { requireRecord } from '../../sources/source-values.mts';
 import { array, number, optional, shape, text } from '../terrestrial-layers/source-records.mts';
 import { MAXIMUM_SEPARATION_FOOTPRINTS } from './limits.mts';
 

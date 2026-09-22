@@ -5,7 +5,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { acquireGalaxyFieldSources } from './acquire.mts';
-import { sourceCacheUrl } from '../source-mirror.mts';
+import { sourceCacheUrl } from '../assets/source-mirror.mts';
 
 const MIRROR_ORIGIN = 'https://mirror.example';
 

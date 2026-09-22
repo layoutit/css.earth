@@ -8,7 +8,7 @@ import sharp from "sharp";
 import { PREPARED_NAVIGATION_MARKERS } from "../../site/prepared-navigation-markers.mjs";
 import { contextMarkerSprite } from "./marker-presentation.mts";
 
-import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "../../tools/prepare-navigation.mts";
+import { loadMarkerDescriptors, loadObjectMarkerDescriptor } from "../../tools/prepare/prepare-navigation.mts";
 import {
   validateMarkerDescriptor,
   validateMarkerSourceBytes,

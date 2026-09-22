@@ -1,5 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
+import {requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
 import {shape,text,number,optional,array,dictionary} from '../terrestrial-layers/source-records.mts';
 const parseOrbit=shape({identity:text,document:optional(text),radiusPattern:optional(text),semiMajorAxisKm:optional(number),sourceRecord:text,parameterQualification:text});
 const parseRecipe=shape({schema:text,outputSchema:text,retrievedAt:text,expectedDiscoveryCount:number,expectedElementCount:number,gravitationalParameterKm3PerS2:number,sources:dictionary(text),discoverySection:shape({start:text,end:text}),elementPrimary:text,ringFrame:text,discoveryOnly:array(parseOrbit),authority:(value:unknown)=>value});

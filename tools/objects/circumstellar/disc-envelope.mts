@@ -18,8 +18,8 @@
  *
  * One image cannot say which side of an inclined ring is nearer the observer: the tilt's sign is a stated convention
  * (`nearSide`), never a measurement. */
-import { readFitsFileHdus, readFitsFileRegion } from '../../fits.mts';
-import { skyProjection } from '../../fits-sky.mts';
+import { readFitsFileHdus, readFitsFileRegion } from '../../fits/fits.mts';
+import { skyProjection } from '../../fits/fits-sky.mts';
 
 const DEG = Math.PI / 180;
 

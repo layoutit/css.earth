@@ -1,6 +1,6 @@
 import {parseCitySource,parseCatalogPin} from '../../../../tools/objects/geographic-pages/source-records.mts';
 import {validateSourceManifest, type SourceEntry} from '../../../../src/platform/source-manifest.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { createServer } from "node:http";

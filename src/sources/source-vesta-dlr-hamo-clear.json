@@ -1,0 +1,35 @@
+{
+  "id": "source-vesta-dlr-hamo-clear",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Vesta · dlr vesta hamo clear",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://dawngis.dlr.de/data/Vesta/mosaics/HAMO/clear/Vesta_mosaic_HAMO-1-2_global.png",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/vesta/source/manifest.json",
+      "locator": "/inputs/7"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL-Caltech/UCLA/MPS/DLR/IDA",
+      "scope": "The dlr vesta hamo clear input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public Dawn scientific image mosaic; attribution required. See NOTICE.md.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

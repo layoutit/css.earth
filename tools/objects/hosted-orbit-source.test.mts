@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { test } from 'node:test';
 
 import { readHostedOrbitRecord } from '../../packages/astronomy/tools/lib/generator-records.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const source = resolve(root, 'tests/fixtures/hosted-orbits/trappist-1f-agol2021');

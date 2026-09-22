@@ -24,7 +24,7 @@ test('a sampled publication cannot silently drop or relabel its qualified source
 });
 
 test('the shared FITS decoder is a pinned preparation owner, not an arbitrary tools path', () => {
-  const shared = method(); shared.extraImplementation.push(pin('tools/fits.mts'));
+  const shared = method(); shared.extraImplementation.push(pin('tools/fits/fits.mts'));
   assert.equal(sampledOwnerPins(shared, recipe).length, 5);
   shared.extraImplementation[1]!.path = 'tools/other.mts';
   assert.throws(() => sampledOwnerPins(shared, recipe), /owner|path/);

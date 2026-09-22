@@ -8,7 +8,7 @@
  * measures the mesh (signed volume, closure, extents, radial range), converts the ecliptic pole to the equatorial one,
  * and writes the package in the layout of the existing DAMIT bodies (Achilles, Ajax). It then renders the marker
  * snapshot and pins the source manifest. The astronomy record is written without elements; run
- * `node packages/astronomy/tools/generate-asteroids.mts --object=<ids>` next, then `node tools/prepare-object.mts <id>`.
+ * `node packages/astronomy/tools/generate-asteroids.mts --object=<ids>` next, then `node tools/prepare/prepare-object.mts <id>`.
  */
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
@@ -17,7 +17,7 @@ import { sha256 } from '../../../../src/platform/sha256.mts';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { paintMissingCoverage } from '../../../../src/platform/prepare-missing-coverage.mts';
 import { elementsUrl, vectorsUrl } from '../../../../packages/astronomy/tools/lib/horizons.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { loadPdsPlateShape } from '../../terrestrial-layers/obj-shape.mts';
 import { loadRadialTerrain, requireTerrainMesh, simplifyRadialShape } from '../../terrestrial-layers/radial-terrain.mts';
 import { renderRadialSnapshot } from '../../terrestrial-layers/radial-snapshot.mts';

@@ -1,4 +1,4 @@
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { runtimeDefinition } from "../../unit/earth/prepared-fixture.mts";

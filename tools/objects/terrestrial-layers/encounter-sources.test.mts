@@ -1,5 +1,5 @@
-import { required, fixtureRecord } from '../../test-values.mts';
-import {requireArray} from '../../source-values.mts';
+import { required, fixtureRecord } from '../../contract/test-values.mts';
+import {requireArray} from '../../sources/source-values.mts';
 import {shape,array,text,number,nullable} from './source-records.mts';
 import {test} from 'node:test';
 import assert from 'node:assert/strict';

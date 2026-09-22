@@ -126,7 +126,7 @@ the credits. It copies missing pinned inputs from sibling checkouts by hash and
 moves scene files no inventory owns into `output/stale-public/<id>/`. Then:
 
 ```bash
-node tools/prepare-object.mts <id>
+node tools/prepare/prepare-object.mts <id>
 ```
 
 ```bash

@@ -37,7 +37,7 @@ to rewrite. Author the current source manifest and its canonical bindings before
 extracting a new body; the extractor does not infer source identities.
 The six later models use [outer-worlds/inputs.json](../outer-worlds/inputs.json).
 An input file may set `referenceDirectory` for its downloaded originals.
-After new astronomy records are built, run `node tools/prepare-solar-geometry.mts`
+After new astronomy records are built, run `node tools/prepare/prepare-solar-geometry.mts`
 before preparing their surfaces. The shared transport refresh helper is only
 needed when the binding format changes; ordinary additions prepare their own body.
 

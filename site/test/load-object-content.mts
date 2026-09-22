@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import { requireArray, requireRecord, requireString } from "../../tools/source-values.mts";
+import { requireArray, requireRecord, requireString } from "../../tools/sources/source-values.mts";
 
 interface SourceReference {
   readonly id: string;

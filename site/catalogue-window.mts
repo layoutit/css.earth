@@ -13,7 +13,7 @@ const THUMBNAIL_SCALE = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKE
 
 interface RowView { readonly item: HTMLLIElement; readonly anchor: HTMLAnchorElement; index: number; }
 
-/** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare-search-thumbnails.mts`). */
+/** The prepared search thumbnail of a scene object with a context sprite (`tools/prepare/prepare-search-thumbnails.mts`). */
 export function searchPreviewUrl(objectId: string): string | null {
   return PREPARED_NAVIGATION_MARKERS[objectId]?.context ? `/navigation/search/${objectId}@2x.webp` : null;
 }

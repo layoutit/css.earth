@@ -226,7 +226,7 @@ test('catalogue refresh preserves the existing Helix core identities, matching t
   const cache = join(root, '.local/nebula-lab/stellar-fields'); await mkdir(cache, { recursive: true });
   await writeFile(join(cache, `helix-${sha(query).slice(0, 12)}.csv`), `${columns.join(',')}\n${cells.join(',')}\n`);
   const refreshed = spawnSync(process.execPath, ['--experimental-strip-types',
-    join(process.cwd(), 'tools/prepare-nebula-field-catalogues.mts'), 'helix'], { cwd: root, encoding: 'utf8', timeout: 3000 });
+    join(process.cwd(), 'tools/prepare/prepare-nebula-field-catalogues.mts'), 'helix'], { cwd: root, encoding: 'utf8', timeout: 3000 });
   assert.equal(refreshed.status, 0, `${refreshed.error?.message ?? ''}\n${refreshed.stdout}\n${refreshed.stderr}`);
   assert.match(refreshed.stdout, /NEBULA_FIELD_CATALOGUES_COMPLETE/);
   const next = JSON.parse(await readFile(join(owner, 'stellar-field.json'), 'utf8'));

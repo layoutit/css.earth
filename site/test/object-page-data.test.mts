@@ -6,7 +6,7 @@ import {resolve} from 'node:path';
 import {createHash} from 'node:crypto';
 import {loadObjectPageData,readPreparedObjectBytes} from '../object-page-data.mts';
 import {objectPageStyles} from '../object-page-contract.mts';
-import {preparePageMetadata} from '../../tools/prepared-page-metadata.mts';
+import {preparePageMetadata} from '../../tools/prepared/prepared-page-metadata.mts';
 import {SCENE_OBJECTS} from '../objects.mts';
 
 test('page metadata is bound to its scene by the scene pin, without needing scene bytes during page emission',async t=>{

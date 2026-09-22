@@ -8,9 +8,9 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { observerCamera, type BodyOrientation } from '../../../../tools/objects/terrestrial-layers/observer-camera.mts';
-import { readFitsImage } from '../../../../tools/fits.mts';
-import { skyImageAxes } from '../../../../tools/fits-sky.mts';
-import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../../tools/source-values.mts';
+import { readFitsImage } from '../../../../tools/fits/fits.mts';
+import { skyImageAxes } from '../../../../tools/fits/fits-sky.mts';
+import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../../tools/sources/source-values.mts';
 
 const BODY = resolve(import.meta.dirname, '../../../../src/objects/pi1-gruis');
 const ASTRONOMY = resolve(import.meta.dirname, '../../../../packages/astronomy/data/bodies/pi1-gruis.json');

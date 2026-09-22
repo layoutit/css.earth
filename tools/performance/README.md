@@ -3,7 +3,7 @@
 Run from the cssEarth checkout:
 
 ```sh
-pnpm perf:trace /path/to/Trace.json.gz
+node tools/performance/trace-brief.mts /path/to/Trace.json.gz
 ```
 
 The same command is used by the agent. Sending a raw trace is sufficient; users
@@ -14,7 +14,7 @@ V8's single-string limit remains usable. Every event is retained for analysis;
 memory still grows with event count. For a multi-million-event recording:
 
 ```sh
-NODE_OPTIONS=--max-old-space-size=6144 pnpm perf:trace /path/to/Trace.json.gz
+NODE_OPTIONS=--max-old-space-size=6144 node tools/performance/trace-brief.mts /path/to/Trace.json.gz
 ```
 
 Run large reports sequentially. The loader validates JSON/gzip completion and
@@ -78,9 +78,9 @@ it does not identify the exact statement executing between samples.
 Useful options:
 
 ```sh
-pnpm perf:trace /path/to/Trace.json.gz --url 4243 --build output/playwright/world-bank-site-v2
-pnpm perf:trace /path/to/Trace.json.gz --out /tmp/trace-report
-pnpm perf:trace /path/to/next-trace.json.gz --label "After change" \
+node tools/performance/trace-brief.mts /path/to/Trace.json.gz --url 4243 --build output/playwright/world-bank-site-v2
+node tools/performance/trace-brief.mts /path/to/Trace.json.gz --out /tmp/trace-report
+node tools/performance/trace-brief.mts /path/to/next-trace.json.gz --label "After change" \
   --compare output/performance/trace-briefs/previous/agent-brief.json
 ```
 

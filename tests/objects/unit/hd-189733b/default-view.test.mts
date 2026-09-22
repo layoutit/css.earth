@@ -6,7 +6,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { angularSeparationDegrees, defaultViewGeometry } from '../../../../tools/objects/default-view.mts';
 import { requireBodyFixedToIcrf } from '../../../../src/platform/solar-geometry.mts';
-import { requireArray, requireRecord } from '../../../../tools/source-values.mts';
+import { requireArray, requireRecord } from '../../../../tools/sources/source-values.mts';
 
 const BODY = resolve(import.meta.dirname, '../../../../src/objects/hd-189733b');
 const json = async (path: string) => JSON.parse(await readFile(resolve(BODY, path), 'utf8')) as unknown;

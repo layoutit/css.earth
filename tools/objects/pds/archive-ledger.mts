@@ -3,7 +3,7 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseProductRecord } from '../product-record.mts';
 import { PDS_ARCHIVE_FINAL_SCHEMA, PDS_PROGRAMS } from './archive-final.mts';
 

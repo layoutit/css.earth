@@ -1,7 +1,7 @@
 import { parseAuthoredObjectDescriptor, parseObjectDescriptor } from '@cssearth/objects';
 import { parsePreparedObjectRuntime } from '../../src/renderers/css/validation/index.js';
-import { requireRecord, requireArray, requireFiniteNumber, hasErrorCode } from '../source-values.mts';
-import { required } from '../test-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, hasErrorCode } from '../sources/source-values.mts';
+import { required } from '../contract/test-values.mts';
 import { readFile, readdir, mkdir, mkdtemp, writeFile, rm } from 'node:fs/promises';
 import { resolve, dirname } from 'node:path';
 import { tmpdir } from 'node:os';

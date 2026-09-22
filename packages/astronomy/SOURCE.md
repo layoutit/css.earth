@@ -17,7 +17,7 @@ record sections behind the same `ASTEROID_FIXTURES` export. Run
 `node tools/generate-asteroids.mts --format-only` from this package to repartition
 the retained records without downloading or changing their source values.
 
-`node tools/sync-upstream.mts` from the root refreshes mirrored astronomy files
+`node tools/ci/sync-upstream.mts` from the root refreshes mirrored astronomy files
 and scientific catalogues. It does not replace the locally maintained catalog
 package. Dirty upstream sources are rejected unless --allow-dirty is requested.
 

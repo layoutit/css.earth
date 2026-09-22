@@ -4,9 +4,9 @@ import { createHash } from 'node:crypto';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { flagValue } from '../../cli-arguments.mts';
+import { flagValue } from '../../cli/cli-arguments.mts';
 import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { normalizeDiscoveredPdsProduct, type DiscoveredPdsProduct } from './archive-final.mts';
 import { sourcePds3Observations } from './source-observations.mts';
@@ -161,7 +161,7 @@ export async function pdsTarget(root: string, id: string) {
   return { id, lid: targets[0]!.lid, name: targets[0]!.name };
 }
 
-export const DISCOVER_HELP = 'Usage: pnpm telescope:discover --archive pds --target TARGET [--write]';
+export const DISCOVER_HELP = 'Usage: node tools/cli/run-typed-module.mjs tools/objects/pds/discover.mts --archive pds --target TARGET [--write]';
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
   const args = process.argv.slice(2), archive = flagValue(args, '--archive'), target = flagValue(args, '--target');
   if (args.includes('--help') || args.includes('-h')) process.stdout.write(`${DISCOVER_HELP}\n`);

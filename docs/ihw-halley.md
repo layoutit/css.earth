@@ -25,5 +25,5 @@ a body map.
 To regenerate the ledger from the downloaded PDS index:
 
 ```sh
-pnpm exec node tools/run-typed-module.mjs tools/objects/ihw/archive-ledger.mts FILELIST.TAB --write
+pnpm exec node tools/cli/run-typed-module.mjs tools/objects/ihw/archive-ledger.mts FILELIST.TAB --write
 ```

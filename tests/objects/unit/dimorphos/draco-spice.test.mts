@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { decodePds4GeometryCube } from '../../../../tools/objects/terrestrial-layers/pds4-geometry-cube.mts';
 import { loadSurfaceObservation, validateSurfaceObservation } from '../../../../tools/objects/surface-observations/index.mts';
 import { fitBackplaneCamera } from '../../../../tools/objects/surface-observations/cameras.mts';
-import { fixtureRecord } from '../../../../tools/test-values.mts';
+import { fixtureRecord } from '../../../../tools/contract/test-values.mts';
 import { decodeSpiceCameraFrame } from '../../../../tools/objects/terrestrial-layers/spice-camera.mts';
 import { project } from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
 import { parseRadialLoaderConfig } from '../../../../tools/objects/terrestrial-layers/radial-source.mts';

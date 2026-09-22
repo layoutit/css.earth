@@ -4,7 +4,7 @@ import { mkdtemp, writeFile, readFile, rm, symlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { createHash } from 'node:crypto';
-import { requireArray, requireRecord } from '../source-values.mts';
+import { requireArray, requireRecord } from '../sources/source-values.mts';
 import { createCostIndex, diagnoseCosts } from './trace-costs.mts';
 import { chartIdleGaps, averageFrames, renderAverageChart, validateSeries } from './trace-chart.mts';
 import { alignRecorder, readCapture, compareCaptures } from './trace-capture.mts';

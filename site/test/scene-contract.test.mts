@@ -1,4 +1,4 @@
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
+import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";

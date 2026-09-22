@@ -7,7 +7,7 @@ import type { SourceRange } from '../../src/platform/source-manifest.mts';
 import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
 export { executeAcquisition, parseAcquisitionPlan };
-import { RUNTIME_ASSET_ORIGIN } from '../source-mirror.mts';
+import { RUNTIME_ASSET_ORIGIN } from '../assets/source-mirror.mts';
 import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/renderers/css/prepared-data/prepared-block-transport.js';
 import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';

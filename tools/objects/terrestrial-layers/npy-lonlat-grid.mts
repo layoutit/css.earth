@@ -9,7 +9,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseSpinState, spinOrientation, type SpinState } from './observer-camera.mts';
 import { readNpyHeader } from './npy-pickle.mts';
 

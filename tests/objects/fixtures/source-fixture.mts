@@ -3,7 +3,7 @@ import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {array, boolean, dictionary, number, optional, shape, text} from '../../../tools/objects/terrestrial-layers/source-records.mts';
 import {parseRadialSource} from '../../../tools/objects/terrestrial-layers/radial-source.mts';
-import {requireRecord} from '../../../tools/source-values.mts';
+import {requireRecord} from '../../../tools/sources/source-values.mts';
 
 const acquisition = shape({operations:array(shape({path:text,kind:optional(text),url:optional(text)}))});
 const damit = shape({modelId:number,fields:dictionary(text)});

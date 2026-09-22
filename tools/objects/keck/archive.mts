@@ -21,9 +21,9 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { flagValue, positionalArguments } from '../../cli-arguments.mts';
-import { readFitsFileHdus } from '../../fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
+import { readFitsFileHdus } from '../../fits/fits.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { INSTRUMENT_TABLES, instrumentTable, koaCalibrations, koaDownload, koaProducts, koaQuery, lev0Url, lev1Url,
   type InstrumentTable } from './koa.mts';
 

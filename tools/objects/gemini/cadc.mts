@@ -17,7 +17,7 @@ import { createReadStream } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { requireString } from '../../source-values.mts';
+import { requireString } from '../../sources/source-values.mts';
 import { tapRows } from '../astronomy-packages/client.mts';
 
 export const CADC_TAP = 'https://ws.cadc-ccda.hia-iha.nrc-cnrc.gc.ca/argus';

@@ -2,7 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import type { ProductKind } from '../query.mts';
-import { requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { canonical, digest, jsonValue, parseMetadata, recordKey, type DiscoverySnapshot, type Json, type TransferLimits } from './contracts.mts';
 import { mapIvoaProductType, type ProductTypeMapping } from '../product-type.mts';
 import type { FamilyId } from '../product-descriptor.mts';

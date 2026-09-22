@@ -28,7 +28,7 @@ export const APPLICATION_WORLD_PLANNER_SOURCE = Object.freeze({ summaryUrl: sour
 async function readPreparedWorldContext(): Promise<unknown> {
   // Node tools, tests and the prerender build read the checked-in file directly.
   if (source.protocol === 'file:') {
-    const { nodeProjectFileUrl } = await import('../tools/prepared-world-context-node-source.mts');
+    const { nodeProjectFileUrl } = await import('../tools/prepared/prepared-world-context-node-source.mts');
     return (await import(/* @vite-ignore */ nodeProjectFileUrl(import.meta.url, 'src/objects/sun/prepared/world-context-summary.json'), { with: { type: 'json' } })).default;
   }
   const response = await fetch(source);

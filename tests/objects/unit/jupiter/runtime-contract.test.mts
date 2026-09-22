@@ -1,4 +1,4 @@
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/index.js";
@@ -6,7 +6,7 @@ import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/te
 import { runtimeDefinition } from "./prepared-fixture.mts";
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
 test("Jupiter's actual import closure has no private runtime owner", async () => {

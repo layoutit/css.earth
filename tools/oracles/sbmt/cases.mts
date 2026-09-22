@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { ORACLE_ROOT } from '../fixture.mts';
 
 export const orientations = ['identity', 'flip-x', 'flip-y', 'rotate-90', 'rotate-180', 'rotate-270'] as const;

@@ -7,7 +7,7 @@
  */
 import type { LoadContext, ObservationFrame, ObservationImage, ObservationPhotometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
 import { array, boolean, decodeProfile, number, optional, shape, text, parseLevelMatching, parseSurfaceGeometry, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord } from '../../../source-values.mts';
+import { requireArray, requireRecord } from '../../../sources/source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet, type KernelSet } from '../../../spice/kernel-set.mts';

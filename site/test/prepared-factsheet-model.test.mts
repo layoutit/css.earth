@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import { orderFacts } from "../fact-order.mts";
-import { requireArray, requireRecord, requireString } from "../../tools/source-values.mts";
+import { requireArray, requireRecord, requireString } from "../../tools/sources/source-values.mts";
 
 import PREPARED_EARTH_PANEL from "../../src/objects/earth/prepared/content.json" with { type: "json" };
 import PREPARED_CERES_PANEL from "../../src/objects/ceres/prepared/content.json" with { type: "json" };

@@ -7,7 +7,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRecord, requireString, requireFiniteNumber, requireArray } from '../source-values.mts';
+import { requireRecord, requireString, requireFiniteNumber, requireArray } from '../sources/source-values.mts';
 import { assertDiskModel, type DiskModel } from './disk.mts';
 import { assertPhaseModel, type PhaseModel } from './phase.mts';
 import { assertHapkeModel, type HapkeModel, type ParticlePhaseFunction, type HFunctionApproximation } from './hapke.mts';

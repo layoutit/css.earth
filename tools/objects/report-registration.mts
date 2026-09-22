@@ -8,7 +8,7 @@
  */
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 import { COMPARISON_SPEC_FILE, parseComparisonSpec } from './surface-observations/published-comparison.mts';
 import { offsetAgreementDegrees, VERDICT_DEGREES } from './surface-observations/registration.mts';
 import { OBSERVER_CAMERAS_FILE, parseObserverCameras } from './terrestrial-layers/observer-cameras.mts';

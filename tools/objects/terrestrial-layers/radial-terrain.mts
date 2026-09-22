@@ -1,9 +1,9 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { isArray } from '../../../src/platform/is-array.mts';
-import {matchesPreparationGenerator} from '../../preparation-generator.mts';
+import {matchesPreparationGenerator} from '../../prepare/preparation-generator.mts';
 import type {SolidSurface,RadialState,RadialMaterialConfig,RadialMaterialSurface} from './solid-contract.mts';
 import {parseRadialSnapshot} from './radial-source.mts';
-import {requireArray,requireString} from '../../source-values.mts';
+import {requireArray,requireString} from '../../sources/source-values.mts';
 interface ObservationTransfer {
   interiorTexels: number; counts: Record<string, number>; sources?: Record<string, number>;
   maximumSourceDistanceMeters: number; maximumPixelSeparationMeters: number; maximumPhotometricGain: number; method: string;
@@ -12,7 +12,7 @@ import type {SourceMesh, SourceScalar} from './contracts.mts';
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {SimplifierFlags} from 'meshoptimizer/simplifier';
 import type {RadialSimplification} from './radial-meshoptimizer.mts';
-import {requireRecord,requireFiniteNumber} from '../../source-values.mts';
+import {requireRecord,requireFiniteNumber} from '../../sources/source-values.mts';
 import {parseRadialSource} from './radial-source.mts';
 export interface TerrainMesh extends SourceMesh {
   coverage?: Record<string, unknown>; lockedPositions?: readonly number[][]; imagePlaneCoordinates?: number[][];

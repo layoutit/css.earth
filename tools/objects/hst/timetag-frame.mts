@@ -19,15 +19,15 @@
  * `timetag-frame.test.mts`. This module reads the event list, asks Horizons, writes the image and writes the record. Events
  * are streamed in blocks: an exposure of this kind holds tens of millions of them, and none is kept after it is counted.
  *
- * The image carries a real sky WCS about the target's position at the middle of the exposure, so `tools/fits-sky.mts`
+ * The image carries a real sky WCS about the target's position at the middle of the exposure, so `tools/fits/fits-sky.mts`
  * reads its orientation like any other sky image. That is a statement about the grid's axes, not about the sky standing
  * still: the target moved, and the WCS says where it was at one instant. */
 import { mkdir, open, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsFileHdus, type FitsFileHdu } from '../../fits.mts';
-import { skyImageAxes } from '../../fits-sky.mts';
-import { positionalArguments } from '../../cli-arguments.mts';
+import { readFitsFileHdus, type FitsFileHdu } from '../../fits/fits.mts';
+import { skyImageAxes } from '../../fits/fits-sky.mts';
+import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
 import { assertInputPins, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';

@@ -4,7 +4,7 @@ import { readFile, writeFile, mkdir, copyFile, readdir } from 'node:fs/promises'
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString } from '../source-values.mts';
+import { requireRecord, requireArray, requireString } from '../sources/source-values.mts';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
@@ -12,9 +12,9 @@ import { loadRadialTerrain, prepareRadialMaterials } from './terrestrial-layers/
 import { prepareSolidRasters, prepareSolidSurfacePoles } from './terrestrial-layers/solid-raster.mts';
 import { lensBillboardColors } from './content/billboard-colors.mts';
 import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
-import { prepareSurfaceMinimaps } from '../prepare-surface-minimaps.mts';
+import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
-import { repinObjectJson } from '../prepare-object-json.mts';
+import { repinObjectJson } from '../prepare/prepare-object-json.mts';
 
 
 const json = async (path: string) => requireRecord(JSON.parse(await readFile(path, 'utf8')));

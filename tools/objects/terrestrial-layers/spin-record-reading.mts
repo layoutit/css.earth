@@ -10,7 +10,7 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord } from '../../source-values.mts';
+import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 import { parseSpinState, type SpinState } from './observer-camera.mts';
 
 export const READING = {

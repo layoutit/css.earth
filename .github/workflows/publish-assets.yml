@@ -97,7 +97,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
       - name: Restore the pinned preparation inputs
-        run: node tools/restore-source-inputs.mts "--object=$OBJECT"
+        run: node tools/assets/restore-source-inputs.mts "--object=$OBJECT"
       - name: Bake
         env:
           NODE_OPTIONS: --max-old-space-size=6144
@@ -138,9 +138,9 @@ jobs:
             # global feature index is a tracked catalogue, not an asset needed by this job.
             pnpm prepare:catalog
             pnpm build:astronomy
-            node tools/prepare-solar-geometry.mts
+            node tools/prepare/prepare-solar-geometry.mts
             pnpm build:catalog
-            node tools/prepare-planets.mts "--object=$OBJECT"
+            node tools/prepare/prepare-planets.mts "--object=$OBJECT"
           fi
       - name: Check the rebake reproduces the committed inventory
         # Early contributor feedback. The trusted publish job independently checks the frozen inventory;
@@ -220,14 +220,14 @@ jobs:
           name: prepared-${{ inputs.object }}
           path: ${{ runner.temp }}/prepared-artifact
       - name: Verify the frozen inventories and stage only their bytes
-        run: node tools/stage-published-assets.mts "$RUNNER_TEMP/prepared-artifact" "$GITHUB_WORKSPACE/pull-request" "$OBJECT"
+        run: node tools/assets/stage-published-assets.mts "$RUNNER_TEMP/prepared-artifact" "$GITHUB_WORKSPACE/pull-request" "$OBJECT"
       - name: Publish
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: node tools/publish-runtime-assets.mts "--object=$OBJECT"
+        run: node tools/assets/publish-runtime-assets.mts "--object=$OBJECT"
       - name: Confirm every inventoried key is live
-        run: node tools/check-assets-published.mts "--object=$OBJECT"
+        run: node tools/assets/check-assets-published.mts "--object=$OBJECT"
       - name: Report
         env:
           NUMBER: ${{ inputs.pull_request }}

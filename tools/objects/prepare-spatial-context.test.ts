@@ -7,7 +7,7 @@ import test from 'node:test';
 import { SCENE_SATELLITE_IDS, SMALL_BODY_IDS, asteroidPositionKm, COMET_IDS, cometPositionKm, BODIES, DWARF_PLANET_IDS, dwarfPlanetPositionKm, moonPositionRelativeToPlanetKm,
   systemBarycentreHeliocentricAu, M_PER_AU, STAR_IDS, starStateKm, HOSTED_PLANET_IDS, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
 import type { SmallBodyId, CometId, BodyId, DwarfPlanetId, Vsop87BodyKey, StarId, HostedPlanetId } from '@cssearth/astronomy';
-import { readCatalog } from '../prepare-catalog.mts';
+import { readCatalog } from '../prepare/prepare-catalog.mts';
 import { parseSpatialContextCommand, prepareSpatialContext } from './prepare-spatial-context.js';
 
 const root = process.cwd();

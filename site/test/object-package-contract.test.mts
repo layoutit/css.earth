@@ -9,13 +9,13 @@ import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { planetInformationSource, validatePlanetEditorial } from "../../tools/planet-information-sources.mts";
+import { planetInformationSource, validatePlanetEditorial } from "../../tools/sources/planet-information-sources.mts";
 import {
   objectPackagePaths,
   validateObjectPackageFiles,
   validatePlanetData,
   validateInventory,
-} from "../../tools/object-package-contract.mts";
+} from "../../tools/contract/object-package-contract.mts";
 
 const implemented = SCENE_OBJECTS;
 

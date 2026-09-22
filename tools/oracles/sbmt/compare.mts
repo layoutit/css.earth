@@ -1,8 +1,8 @@
 import { resolve } from 'node:path';
-import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber, requireString } from '../../sources/source-values.mts';
 import { readOracleFixture, readOracleInput, ORACLE_ROOT, verifyOracleBytes } from '../fixture.mts';
 import { parsePdsVertexFacetShape } from '../../objects/terrestrial-layers/obj-shape.mts';
-import { readFitsImage } from '../../fits.mts';
+import { readFitsImage } from '../../fits/fits.mts';
 import { readPointing, camera } from './candidate.mts';
 import { cases, parseCase, vector, assertQueryCoverage, orientations } from './cases.mts';
 import { runtimeLock, hashFile, generatorFingerprint } from './runtime.mts';

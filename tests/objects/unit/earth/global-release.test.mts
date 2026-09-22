@@ -1,6 +1,6 @@
 import {validateSourceManifest} from '../../../../src/platform/source-manifest.mts';
 import {parseWmtsRelease,parseBlockReference,shape,array,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import test from "node:test";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";

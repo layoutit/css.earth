@@ -4,8 +4,8 @@ import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
-import { finalizeObjectJson } from '../../tools/prepare-object-json.mts';
-import { requireRecord } from '../../tools/source-values.mts';
+import { finalizeObjectJson } from '../../tools/prepare/prepare-object-json.mts';
+import { requireRecord } from '../../tools/sources/source-values.mts';
 import { requireInventory, verifyInventory } from '../../src/platform/runtime-asset-closure.mts';
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 async function snapshot(objectDirectory: string) {

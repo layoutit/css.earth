@@ -4,8 +4,8 @@
  * window is shown as the sky is seen from Earth, north up and east left, in a linear grey scale. Every source pixel becomes a
  * square of equal output pixels; nothing is smoothed, sharpened, interpolated or normalised. */
 import sharp from 'sharp';
-import { readFitsImage } from '../../fits.mts';
-import { skyDisplayRaster, skyImageAxes } from '../../fits-sky.mts';
+import { readFitsImage } from '../../fits/fits.mts';
+import { skyDisplayRaster, skyImageAxes } from '../../fits/fits-sky.mts';
 
 export interface FitsGalleryImageRecipe {
   /** The window's first column and first stored row, counted from 1 as FITS viewers do, and its size in source pixels. */

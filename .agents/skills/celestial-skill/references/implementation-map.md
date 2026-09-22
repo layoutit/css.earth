@@ -37,8 +37,8 @@ The [documentation contract](../../../../docs/provenance/CONTRACT.md) explains
 where body docs and evidence go. Every file under `source/` needs a manifest
 entry. Keep test logs and browser screenshots outside it.
 
-Use `tools/object-package-contract.mts` for actual required files. Its authored
-branch is selected through `tools/authored-object.mts`; the legacy branch still
+Use `tools/contract/object-package-contract.mts` for actual required files. Its authored
+branch is selected through `tools/sources/authored-object.mts`; the legacy branch still
 mentions `runtime/client.mjs`, package Astro pages, and per-body tools. Those
 fallback requirements are not the current authored-package template.
 
@@ -46,22 +46,22 @@ fallback requirements are not the current authored-package template.
 
 | Change | Source owners |
 | --- | --- |
-| Identity, route, lazy loading | Body `object.json` → `tools/prepare-catalog.mts` → `site/objects.mts`; `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
+| Identity, route, lazy loading | Body `object.json` → `tools/prepare/prepare-catalog.mts` → `site/objects.mts`; `site/object-adapter.mts`, `site/packaged-object-runtime.mts` |
 | Physical data, orbit records and acquisition choices | `packages/astronomy/data/bodies/<id>.json`, `packages/astronomy/tools/body-records.mts` |
 | Authored and prepared object contracts | `packages/objects/src/descriptor.ts`, `packages/objects/src/authored.ts`, `src/renderers/css/validation/` |
-| Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare-object-json.mts` |
+| Preparation dispatch and publication | `tools/objects/prepare-authored.ts`, `tools/objects/publication.mts`, `tools/prepare/prepare-object-json.mts` |
 | Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mts`, `site/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
 | Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/PlanetLayout.astro` |
-| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare-planet-title-sources.mts`, `tools/prepare-surface-minimaps.mts` |
-| Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
+| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-planet-title-sources.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
+| Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
 
 Minimap preparation accepts authored source paths and prepared source records.
 For a prepared surface, `map.url` identifies the preview image; its `source`
 object records provenance and must not be treated as a file path. The parser
-lives in `tools/surface-preview-source.mts`.
+lives in `tools/prepare/surface-preview-source.mts`.
 
 For an unbound body, use the shared prepared hyperbolic path with explicit open
 endpoints and an epoch vertex. Do not wrap its anomaly, close its last edge or
@@ -83,7 +83,7 @@ the shared world camera.
 
 Navigation marker appearance comes from each authored package's
 `source/preparation/navigation.json`, which names its source image by path;
-the pins and attribution are the source manifest's record. `tools/prepare-navigation.mts` generates
+the pins and attribution are the source manifest's record. `tools/prepare/prepare-navigation.mts` generates
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
 images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
@@ -203,8 +203,8 @@ supports a requested handoff, not an automatic stop for authorized implementatio
 | A wide companion whose orbit is not measured | An `orbit-family` source naming a LOFTI results file (`tools/objects/binary-orbits/lofti-fit.py`, `tools/objects/binary-orbit-family.mts`); preparation draws its first `displayed` orbits around the primary as the body's `orbit` and `additionalOrbits`, with `placement: candidate-orbits`. The body keeps its own astrometric position, which lies on none of them, and the candidates frame no system view | HD 189733 B around HD 189733 A (Gaia DR3 astrometry, no published orbit) | `tools/objects/binary-orbit-family.test.mts` (each candidate reproduces the measured separation and position angle), `src/preparation/spatial-context.test.ts`, `tools/objects/prepare-spatial-context.test.ts` | Drawn dashed and only once the whole family fits the view; a rerun of the fit draws a different sample |
 | A placed star whose spin axis is measured against its planet's orbit | `cssearth-measured-obliquity-pole@1` (projected obliquity, stellar inclination, true obliquity checked against them, equatorial period; `tools/objects/authored-rotation.mts`) or `cssearth-orbit-aligned-pole@1` when only an aligned projected angle is measured | HD 189733 A (Cristo et al. 2024); WASP-43 (aligned) | `tools/objects/authored-rotation.test.mts`, `tests/objects/unit/hd-189733/source.test.mts` | The axis's position angle on the sky follows the orbit's display convention |
 | An eclipse map deposited without grid arrays or covering unobserved longitudes | `npy-dictionary-map` with `gridLayout: pixel-centres` and `visibleLongitudes` (ThERESA's rule from the deposit's own observation times) | HD 189733b `temperature` (Lally et al. 2025, output_E.npy) | `tools/objects/terrestrial-layers/npy-pickle.test.mts`, `tests/objects/unit/hd-189733b/eclipse-map.test.mts` | Unobserved columns are missing data, as in the authors' figures |
-| A placed star with no measured rotation axis | `cssearth-display-orientation@1` rotation record with the pole set to sky north in the plane of the sky and `displayMeridianDegrees` facing the Earth; star record `presentationUp: display-axis` (`packages/astronomy/src/stars.ts`, read by `tools/prepare-solar-geometry.mts`) so the presentation frame and the camera orbit use that axis instead of the ecliptic pole | π¹ Gruis `pionier`: Paladini's image-ready PIONIER OIFITS from the OiDB read as is, `tools/objects/interferometry/oifits-rows.mts` for the per-channel fit | `tests/objects/unit/pi1-gruis/{camera,default-view}.test.mts` | The axis is a labelled convention; a star far from the ecliptic would otherwise never face its sub-Earth point |
-| A default camera angle, a body orientation or an off-limb plate turn | Nothing authored: `src/platform/default-camera.mts` derives the camera (photograph frames, a self-luminous body facing the Sun, or the lit design pose); the world-navigation stage solves the system node so the drawn body is in the ecliptic presentation frame; `prepareSkyNorthScreenAngleDegrees` turns the plate. Recipes that state `initialScenePitchDegrees`, `defaultControlYawDegrees` or `offLimb.rotationDegrees` are refused | Amalthea (photo mosaic), Betelgeuse (star and plate), Callisto (lit pose) | `tools/objects/default-view.mts` measures the result through the runtime camera math | The world-navigation stage owns the pose: `node tools/prepare-object-json.mts --keep-bindings` re-applies a rule change to every object in seconds; the five planet lanes bake lighting at the rule's pitch and re-bake only when it changes |
+| A placed star with no measured rotation axis | `cssearth-display-orientation@1` rotation record with the pole set to sky north in the plane of the sky and `displayMeridianDegrees` facing the Earth; star record `presentationUp: display-axis` (`packages/astronomy/src/stars.ts`, read by `tools/prepare/prepare-solar-geometry.mts`) so the presentation frame and the camera orbit use that axis instead of the ecliptic pole | π¹ Gruis `pionier`: Paladini's image-ready PIONIER OIFITS from the OiDB read as is, `tools/objects/interferometry/oifits-rows.mts` for the per-channel fit | `tests/objects/unit/pi1-gruis/{camera,default-view}.test.mts` | The axis is a labelled convention; a star far from the ecliptic would otherwise never face its sub-Earth point |
+| A default camera angle, a body orientation or an off-limb plate turn | Nothing authored: `src/platform/default-camera.mts` derives the camera (photograph frames, a self-luminous body facing the Sun, or the lit design pose); the world-navigation stage solves the system node so the drawn body is in the ecliptic presentation frame; `prepareSkyNorthScreenAngleDegrees` turns the plate. Recipes that state `initialScenePitchDegrees`, `defaultControlYawDegrees` or `offLimb.rotationDegrees` are refused | Amalthea (photo mosaic), Betelgeuse (star and plate), Callisto (lit pose) | `tools/objects/default-view.mts` measures the result through the runtime camera math | The world-navigation stage owns the pose: `node tools/prepare/prepare-object-json.mts --keep-bindings` re-applies a rule change to every object in seconds; the five planet lanes bake lighting at the rule's pitch and re-bake only when it changes |
 | The default camera of a photograph lens on the planet route | `tools/objects/default-view.mts` (`assertDefaultViewFacesLens`, run by `prepare-authored` for every `surface-observation` lens) | Betelgeuse `default-view.test.mts` | The runtime's scene matrix and `worldCameraFromPresentation` give the sub-camera point and the screen angle of any direction without a browser | Preparation refuses a default view more than 25 degrees from the lens's sub-observer point; the test pins the browser-measured angles |
 
 For `controlled-shape-color`, each band set is one observing triplet. A point is
@@ -228,7 +228,7 @@ with `node tools/spice/kernel-bank.mts`, and name the bank with `spice.kernelSet
 
 A star other than the Sun is a placed body. `packages/astronomy` carries its
 catalogue astrometry (`star` record: ICRS position and epoch, distance, proper
-motion, radial velocity, each with its source), `tools/prepare-solar-geometry.mts`
+motion, radial velocity, each with its source), `tools/prepare/prepare-solar-geometry.mts`
 places it by that state instead of an orbit, the Sun's world context lists it
 with a position and no trajectory (`orbitStyle: none`), navigation reads its
 distance in parsecs, and the overview rule that opens the Solar System when the
@@ -359,14 +359,14 @@ if a third attached-label, pointer-addressed PDS3 geometry archive appears.
 
 The pipeline derives nothing from an oracle; an oracle recomputes what the
 pipeline computed so a test can compare. `tools/oracles/` holds them with a
-pinned Python environment (`pnpm oracles:setup`, `tools/oracles/requirements.txt`),
+pinned Python environment (`node tools/oracles/setup.mts`, `tools/oracles/requirements.txt`),
 and each writes a fixture under `tests/oracles/` that names its versions and the
 sha256 of every input. Existing decoder references include
 SpiceyPy for `tools/spice/` (a microsecond in time, a millimetre in position, a
 nanoradian in rotation); pds4_tools for the PDS4 geometry cube; pvl and numpy for
 the OSIRIS geometry, OSIRIS reflectance, AMICA and ISIS2 readers; astropy for
 the L'LORRI reader and its TAN-SIP distortion and for the three encounter FITS
-layouts. Comparing tests sit beside each reader, and `tools/oracle-fixtures.test.mts`
+layouts. Comparing tests sit beside each reader, and `tools/contract/oracle-fixtures.test.mts`
 refuses a fixture from an unpinned environment or unpinned inputs. A new scientific
 source-format parser, decoder or interpretation algorithm needs independent reference evidence.
 Use the existing pinned oracle framework for new decoding behavior; do not use
@@ -401,11 +401,11 @@ purposes; run those needed for the task, not every preparation step by default.
 | Restore missing source pins and verify existing bytes | `node tools/objects/dist/operations.js acquire <id>` |
 | Verify source closure without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only` |
 | Prepare selected objects through the cache and shared steps | `pnpm prepare:planets -- --object=<id>` |
-| Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, then `pnpm oracles:run [group/name ...]` |
+| Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, then `node tools/oracles/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
-| Prepare one authored object end to end, resumable by step | `node tools/prepare-object.mts <id> [--from <step>] [--presentation-only]` (the last reuses a paged-ellipsoid body's published heavy outputs): stale builds, pins, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
-| Say which build a run would read stale | `node tools/check-stale-builds.mts` |
-| Adopt a new download's first pin. Authored, generated and tool-written files that git tracks carry no pin | `node tools/pin-object-documents.mts <id> --adopt-downloads [--check]` |
+| Prepare one authored object end to end, resumable by step | `node tools/prepare/prepare-object.mts <id> [--from <step>] [--presentation-only]` (the last reuses a paged-ellipsoid body's published heavy outputs): stale builds, pins, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
+| Say which build a run would read stale | `node tools/ci/check-stale-builds.mts` |
+| Adopt a new download's first pin. Authored, generated and tool-written files that git tracks carry no pin | `node tools/sources/pin-object-documents.mts <id> --adopt-downloads [--check]` |
 | Re-prepare only the content record after a credit or provenance edit | `node tools/objects/refresh-content.mts <id> ...` (refuses if any other prepared file would change) |
 | Find what the literature published for a resolved-star candidate | `node tools/objects/star-candidates.mts "<SIMBAD identifier>"`: OiDB calibration levels, VizieR image deposits from the star's own papers, and the route that worked for the placed stars; archive leads (`tools/objects/archive-search.mts`) from the JMDC measured diameter, ALMA projects with beams across the disc, ESO interferometer and adaptive-optics frames, HST and JWST imaging, and DataCite deposits of the star's papers |
 | Image a star from one raw season and decide whether it may be cast | `node tools/objects/interferometry/image-star.mts <season dir> <work> [--raw <dir>]`: a `seasons/<id>/season.json` pin; calibrates, selects, fits the disc, reconstructs the season, halves and spotless twins with SQUEEZE, writes `verdict.json` and compares with the author's file and image; see [Interferometric imaging](../../../../docs/interferometric-imaging.md#one-command-per-star) |
@@ -421,18 +421,18 @@ purposes; run those needed for the task, not every preparation step by default.
 | Reduce a JWST time series from raw exposures | `node tools/objects/jwst/reduce-tso.mts tools/objects/jwst/programs/<id> <work> [--raw <dir>]`: Eureka! stages 1-4 in memory-safe batches, light curves exported to CSV with the author's deposit; then `compare-light-curves.mts`; see [Eclipse mapping](../../../../docs/eclipse-mapping.md) |
 | Find whether an archive holds finer frames than a body ships | `node tools/objects/imagery-candidates.mts [<id> ...] [--minimum-pixels 50] [--json]`: OPUS's finest body-centre image resolution per covered body against the finest frame its photograph lenses cast, with pixels across and phase; advisory, since a frame still needs a camera, registration and reuse terms. `--archives <id> ...` searches ALMA, ESO raw frames and MAST under the body's catalogue name and SBDB designations, and DataCite for deposits of the papers it already cites |
 | Set up a VLT/SPHERE survey body's photograph lens and measure it against the survey figure | `node tools/objects/sphere-survey/setup.mts <id>` in scratch, then `node tools/objects/sphere-survey/install.mts <id>` into the package; see [SPHERE survey photographs](sphere-survey-photographs.md) |
-| Write a ground-based lens's two Horizons tables | `node tools/objects/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and pinned in the manifest; a table the manifest does not name yet is declared for `pnpm author:sources` |
-| Measure a ground-based lens against its paper's comparison figure | `node tools/objects/published-comparison.mts <id> [--write]`: reads the figure from the pinned PDF (`tools/pdf-image.mts`), writes `evidence/published-comparison.json` and its image; a new record's zero pixel digest is adopted on the first `--write` |
+| Write a ground-based lens's two Horizons tables | `node tools/objects/sphere-horizons.mts <id> [--write]`: Paranal rows at each frame's exposure start and heliocentric vectors one light time earlier, asked in batches of 25 and pinned in the manifest; a table the manifest does not name yet is declared for `node tools/sources/author-source-records.mts` |
+| Measure a ground-based lens against its paper's comparison figure | `node tools/objects/published-comparison.mts <id> [--write]`: reads the figure from the pinned PDF (`tools/fits/pdf-image.mts`), writes `evidence/published-comparison.json` and its image; a new record's zero pixel digest is adopted on the first `--write` |
 | Scaffold a placed star from its astronomy record | `node tools/objects/new-star.mts <id> --name ... --temperature <K> --temperature-source <citation with URL> --paper ...`: every number derived, the catalogue colour from the cited effective temperature through the star field's colour fit, prose marked `TODO(new-star)`, then `prepare-object` |
 | Restore sources before root preparation | `pnpm prepare:checkout` |
 | Build the site and assemble declared runtime files | `pnpm build` |
 
 Default acquisition restores missing pins from `source/preparation/acquisition.json`
-and fails on changed existing bytes. `tools/restore-source-inputs.mts` delegates
+and fails on changed existing bytes. `tools/assets/restore-source-inputs.mts` delegates
 selected objects to shared acquisition; it also restores Earth's pinned WMTS
 inputs. `setup:assets` installs prepared files independently of source preparation.
 
-`tools/run-implemented-planets.mts` discovers registered objects and selects the
+`tools/cli/run-implemented-planets.mts` discovers registered objects and selects the
 authored commands. It routes `test:planets` to `tests/objects/unit/<id>/` plus the shared contract runners in `tests/objects/unit/*.test.mts`, scoped to one body through `CSSEARTH_TEST_OBJECTS`.
 `pnpm test` currently runs packages, renderer, platform and shell checks;
 `test:planets` and `test:preparation` are separate commands.

@@ -2,7 +2,7 @@
 import { readFile,writeFile,mkdir,rm,rmdir,rename,realpath } from 'node:fs/promises';
 import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { requireArray,requireRecord,requireString,requireFiniteNumber } from '../../source-values.mts';
+import { requireArray,requireRecord,requireString,requireFiniteNumber } from '../../sources/source-values.mts';
 import { pinFile,parseProductRecord,sameRun,type ProductInput } from '../product-record.mts';
 import { parseBodyMapProduct } from '../body-map-product.mts';
 import { assertBodyMapPlanes,bodyMapProductRecord,formatProductRecord } from '../body-map-publication.mts';

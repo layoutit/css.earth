@@ -18,7 +18,7 @@ import { linearToSrgb } from '../../color-transfer.mts';
 import { loadStellarPhotometricColor, quadraticIntensity } from '../../observation/stellar-photometric-color.mts';
 import { loadNpyDictionaryMap } from '../../terrestrial-layers/npy-dictionary-map.mts';
 import { colorForValue } from '../../terrestrial-layers/scientific-raster.mts';
-import { requireArray, requireRecord } from '../../../source-values.mts';
+import { requireArray, requireRecord } from '../../../sources/source-values.mts';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 export const MARKER_PATH = 'presentation/context.png';

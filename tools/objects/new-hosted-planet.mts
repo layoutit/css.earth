@@ -9,12 +9,12 @@
  * circular synchronous rotation the orbit implies and the light direction its star gives. The package starts shape-only, in the
  * shared neutral gray, lit by its own star: no colour of these planets is measured. Prose the scaffold cannot know
  * (reader text, README, credits, ledger) carries the marker TODO(new-hosted-planet).
- * Then run: node tools/prepare-object.mts <id> */
+ * Then run: node tools/prepare/prepare-object.mts <id> */
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { hostedPlanetStateRelativeKm, starStateFromAstrometryKm } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 
 export const TODO = 'TODO(new-hosted-planet)';
 const AU_M = 149597870700, BODY_RADIUS_UNITS = 248;
@@ -192,5 +192,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   await copyFile(resolve(root, license), resolve(presentation, 'LICENSE.INTER-OFL'));
   await writeFile(resolve(presentation, 'context.png'), await neutralDiscMarker());
   await copyFile(resolve(root, font), resolve(presentation, 'InterVariable.ttf'));
-  console.log(`${files.size + 3} files written. Replace every ${TODO}, then: node tools/prepare-object.mts ${id}`);
+  console.log(`${files.size + 3} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
 }
