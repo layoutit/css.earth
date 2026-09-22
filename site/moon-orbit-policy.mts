@@ -7,6 +7,11 @@ const majorByParent = new Map(sourceArray(source.systems, input => {
   return [sourceId(system.id), new Set(ids)] as const;
 }));
 
+/** Every planet's major moons, from the sourced groups. */
+export function majorMoonIds(): string[] {
+  return [...majorByParent.values()].flatMap(moons => [...moons]);
+}
+
 export function minorMoonOrbitIds(bodies: readonly { id: string; orbit?: { centerBodyId: string } }[]): string[] {
   return bodies.filter(body => {
     const major = body.orbit && majorByParent.get(body.orbit.centerBodyId);

@@ -25,7 +25,7 @@ export interface WorldPlannerSource {
 export function createWorldContextPlannerClient(plan: PreparedWorldContext,
   createWorker: () => WorldPlannerWorker = () => new Worker(new URL('./world-context-planner-worker.js', import.meta.url),
     { type: 'module', name: 'cssearth-world-planner' }),
-  annotationPriorities: Readonly<Record<string, number>> = {}, source?: WorldPlannerSource) {
+  annotationPriorities: Readonly<Record<string, number>> = {}, source?: WorldPlannerSource, annotationLandmarks: readonly string[] = []) {
   const worker = createWorker();
   let resolveReady!: () => void, rejectReady!: (error: Error) => void;
   const ready = new Promise<void>((resolve, reject) => { resolveReady = resolve; rejectReady = reject; });
@@ -47,8 +47,8 @@ export function createWorldContextPlannerClient(plan: PreparedWorldContext,
     const complete = pending; pending = null; complete.resolve(data.frame);
   };
   worker.onerror = event => destroy(new Error(event.message));
-  if (source) worker.postMessage({ source, annotationPriorities });
-  else worker.postMessage({ plan: worldContextGeometry(plan), annotationPriorities });
+  if (source) worker.postMessage({ source, annotationPriorities, annotationLandmarks });
+  else worker.postMessage({ plan: worldContextGeometry(plan), annotationPriorities, annotationLandmarks });
   return { async plan(view: WorldContextView): Promise<WorldContextFrame> {
     await ready;
     if (destroyed) throw new Error('World frame planner was destroyed.');

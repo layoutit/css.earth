@@ -542,13 +542,14 @@ export function preparedVolumeOpacity(distanceM: number, profile?: PreparedVolum
 }
 
 /** Existing retained segment/sprite rendering, driven by the same observer as the detailed body. */
-export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationOpacities = {}, distantNavigation, opacityClock, orbitRenderer: initialOrbitRenderer = 'bars' }: {
+export function mountPreparedWorldContext({ host, presentationHost = host, before, plan, sprites, requestPublication, annotationPriorities = {}, annotationLandmarks = [], annotationOpacities = {}, distantNavigation, opacityClock, orbitRenderer: initialOrbitRenderer = 'bars' }: {
   host: HTMLElement; before: Element; plan: PreparedWorldContext; sprites: Readonly<Record<string, SpriteWithUrl>>;
   /** Which retained paint owner draws the prepared orbit lines. */
   /** Presentation may live outside the input host's changing CSS scope. */
   presentationHost?: HTMLElement;
   requestPublication?: () => boolean;
   annotationPriorities?: Readonly<Record<string, number>>;
+  annotationLandmarks?: readonly string[];
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
   opacityClock?: OpacityClock;
@@ -665,7 +666,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   // The app plans every frame in the worker. Only a caller that publishes without a
   // prepared frame plans here, and that needs the full context with its orbit paths.
   let syncPlanner: ReturnType<typeof createWorldContextPlanner> | undefined;
-  const planWorld = (view: WorldContextView) => (syncPlanner ??= createWorldContextPlanner(worldContextGeometry(plan), annotationPriorities))(view);
+  const planWorld = (view: WorldContextView) => (syncPlanner ??= createWorldContextPlanner(worldContextGeometry(plan), annotationPriorities, annotationLandmarks))(view);
   const systemFade = createSystemFade(plan);
   const windowTarget = host.ownerDocument.defaultView!;
   const ownClock = opacityClock ?? createOpacityClock(windowTarget);

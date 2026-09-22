@@ -161,7 +161,11 @@ export function createSystemFade(plan: Pick<PreparedWorldContext, 'focus' | 'bod
   });
 }
 
-export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {}) {
+/** `annotationLandmarks`: moons named across their star's system, like the orientation references (a sourced list of
+ * each planet's major moons). */
+export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, annotationPriorities: Readonly<Record<string, number>> = {},
+  annotationLandmarks: readonly string[] = []) {
+  const landmarkMoonIds = new Set(annotationLandmarks);
   const points = [plan.focus, ...plan.bodies];
   const byId = new Map(points.map(point => [point.id, point]));
   const systemFade = createSystemFade(plan);
@@ -403,8 +407,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // altitude is much larger than the orbital radius framed on screen, so
         // the prepared system handoff—not a literal 50 AU camera distance—owns
         // this lifetime. The annotation stands alone once its orbit is subpixel.
+        // A landmark moon follows the same rule beside its planet: its circle while that clears the planet's
+        // locator, its caption alone once its orbit collapses into it.
+        const landmarkMoon = satellite && landmarkMoonIds.has(body.id);
         const referenceAnnotationOnly = focusDistanceM <= plan.system.fadeOutStartDistanceM &&
-          (annotationPriorities[body.id] ?? 0) >= 4 && !resolvedDisc &&
+          ((annotationPriorities[body.id] ?? 0) >= 4 || landmarkMoon) && !resolvedDisc &&
           labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
         // The retained DOM leaf shares this opacity between its sprite and both
         // annotation pseudos. A reference whose physical marker has faded must
@@ -423,7 +430,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
             alpha <= (entry.labelShown ? .5 : .5 + ANNOTATION_ENTRY_MARGIN) ||
-            (!targeted && !resolvedDisc && (!inContext || unrelatedMinor)));
+            (!targeted && !resolvedDisc && !referenceAnnotationOnly && (!inContext || unrelatedMinor)));
         if (referenceAnnotationOnly) { projected.orbitVisibility = 0; projected.segments = []; }
         // A presentation setting removes the body from annotation admission;
         // final admission below retires an on-screen context orbit with the caption.

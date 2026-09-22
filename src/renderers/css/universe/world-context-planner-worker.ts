@@ -6,7 +6,7 @@ import type { WorldPlannerSource } from './world-context-planner-client.js';
 import { createWorldContextFrameEncoder, contextFrameTransfers } from './world-context-frame.js';
 import { unpackWorldBodies } from './world-context-view-transport.js';
 
-type Initialise = { annotationPriorities?: Readonly<Record<string, number>> } &
+type Initialise = { annotationPriorities?: Readonly<Record<string, number>>; annotationLandmarks?: readonly string[] } &
   ({ plan: PreparedWorldContextGeometry } | { source: WorldPlannerSource });
 const scope = globalThis as unknown as {
   onmessage: (event: MessageEvent<Initialise | { id: number; view: Omit<WorldContextView, 'bodies'>; bodies: Float64Array }>) => void;
@@ -29,17 +29,17 @@ async function load(source: WorldPlannerSource) {
   if (digest !== plan.orbitBank?.sha256) throw new Error('Prepared orbit bank differs from its summary pin.');
   return decodeWorldOrbits(plan, orbits);
 }
-function initialise(plan: PreparedWorldContextGeometry, annotationPriorities?: Readonly<Record<string, number>>) {
+function initialise(plan: PreparedWorldContextGeometry, annotationPriorities?: Readonly<Record<string, number>>, annotationLandmarks?: readonly string[]) {
   encode = createWorldContextFrameEncoder();
-  calculate = createWorldContextPlanner(plan, annotationPriorities);
+  calculate = createWorldContextPlanner(plan, annotationPriorities, annotationLandmarks);
   scope.postMessage({ ready: true });
 }
 scope.onmessage = ({ data }) => {
   try {
     if ('source' in data) {
-      void load(data.source).then(plan => initialise(plan, data.annotationPriorities)).catch(report);
+      void load(data.source).then(plan => initialise(plan, data.annotationPriorities, data.annotationLandmarks)).catch(report);
     } else if ('plan' in data) {
-      initialise(data.plan, data.annotationPriorities);
+      initialise(data.plan, data.annotationPriorities, data.annotationLandmarks);
     } else {
       const view: WorldContextView = { ...data.view, bodies: unpackWorldBodies(data.bodies) };
       const frame: PlannedWorldContext = calculate(view);
