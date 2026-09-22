@@ -260,7 +260,7 @@ export async function prepareNebulaObject(root: string, directory: string, ifMis
     await mkdir(resolve(directory,'prepared'),{recursive:true});
     for (const entry of await readdir(staging)) { await rm(resolve(directory,'prepared',entry),{recursive:true,force:true}); await rename(resolve(staging,entry),resolve(directory,'prepared',entry)); }
     await put(resolve(directory,'object.json'),json({schema:'cssearth-object@1',id:recipe.id,type:'volume-lens-bank',properties:{frame:lenses[0]!.volume.frame,
-      preparation:{source:'source/delivery.json',sha256:sha256(recipeBytes)}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json',sha256:sha256(envelope)}}));
+      preparation:{source:'source/delivery.json'}},prepared:{format:'cssearth-volume-lenses@1',url:'prepared/lenses.json'}}));
     return { id:recipe.id,status:'prepared',sourceResult,lenses:lenses.map(l=>({id:l.id,stars:l.stars.points.length,leaves:l.volume.resources.length})) };
   } finally { await rm(staging,{recursive:true,force:true}); }
 }

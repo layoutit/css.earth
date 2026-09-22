@@ -83,7 +83,9 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
       (preparedPhysical ? -star.positionUnits[2] : star.positionUnits[2]) + origin[2]] })), progress }, backend);
   assert.equal(scene.alphaSha256, old.alphaSha256, 'Compact replay changed neutral opacity.');
   assert.deepEqual(scene.sampling, old.sampling, 'Compact replay changed sampling.');
-  assert.equal(scene.starSprites?.atlas.path, old.starSprites?.atlas.path, 'Compact replay changed stellar sprites.');
+  // Output locations change with every bake; the sprite content may not.
+  const spriteContent = (sprites: typeof scene.starSprites) => sprites && { ...sprites, atlas: undefined, profile: undefined };
+  assert.deepEqual(spriteContent(scene.starSprites), spriteContent(old.starSprites), 'Compact replay changed stellar sprites.');
   const banks = [{ id: 'neutral', volume: scene.neutral }, ...scene.lenses];
   for (const [index, bank] of banks.entries()) {
     const volume = backend.readVolume(JSON.parse((await pinned(root, bank.volume)).toString()));
