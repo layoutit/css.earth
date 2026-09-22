@@ -35,7 +35,7 @@
           {
             "catalogueId": "source-pluto-surface-pluto-color-mosaic-jpg",
             "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -72,7 +72,7 @@
           {
             "catalogueId": "source-pluto-lenses-pluto-monochrome-tif",
             "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -109,7 +109,7 @@
           {
             "catalogueId": "source-pluto-lenses-pluto-dem-tif",
             "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -137,7 +137,7 @@
           {
             "catalogueId": "source-pluto-editorial-nasa-pluto-json",
             "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -164,7 +164,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -191,7 +191,7 @@
           {
             "catalogueId": "source-pluto-lenses-pluto-dem-lbl",
             "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -219,7 +219,7 @@
           {
             "catalogueId": "source-pluto-orbit-jpl-physical-values",
             "role": "material",
-            "evidence": "src/planets/pluto/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -251,8 +251,6 @@
     {
       "id": "pluto-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "ed793e267093321adfc265114b968db229e5010c7a541695b27be8431a6e9e39",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -269,8 +267,6 @@
     {
       "id": "pluto-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1180,
-      "expectedSha256": "bc8a0b48502cd5a5bf020cad3dea7f103afdea45c33b153badf7183239d61b10",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -287,8 +283,6 @@
     {
       "id": "pluto-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "8a14c713df0b84ed59656ba16775028465bcbf7ff3390d169a08204c6fc08078",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -305,8 +299,6 @@
     {
       "id": "pluto-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedSha256": "03f26565f31a88b5cc73d4f16d4fb1fd6737ef8c689ab26a1d4ee1e48844d1c6",
-      "expectedBytes": 205,
       "origin": "Repository-authored physical scene recipe; mean radius 1188.3 km from the pinned JPL record and the shared camera plan (defaultZoom 1.1, initial pitch 40°) carried over from the retired static-surface geometry",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -326,8 +318,6 @@
     {
       "id": "pluto-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedSha256": "13e4cb36e7f93b98cd0f734012e0c77776fbb44e1d64bd836ac54cee361bbcf9",
-      "expectedBytes": 14681,
       "origin": "Repository-authored Pluto raster preparation recipe (generic sphere lane) carrying the science interpretation blocks of the retired static recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -345,8 +335,6 @@
     {
       "id": "pluto-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedSha256": "c47d90754003634cfdb94a3f5a00fc375dcb060cc577e1b25e746e35b92b5b75",
-      "expectedBytes": 1605,
       "origin": "Repository-authored Pluto CSS geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -364,8 +352,6 @@
     {
       "id": "pluto-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
-      "expectedBytes": 108,
       "origin": "Repository-authored Pluto sky, sun, and marker recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -384,8 +370,6 @@
     {
       "id": "pluto-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedSha256": "a38367a5b81d5a7d41cfb9a6ad6b30164549d30bdf106d8c4040d32e5d5f686e",
-      "expectedBytes": 101,
       "origin": "Repository-authored Pluto presentation capability recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -402,8 +386,6 @@
     {
       "id": "pluto-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedSha256": "1613b1056144cc9364fdc8df4d60234abc2f65cdf9faf3705e4c77d8f648cec7",
-      "expectedBytes": 743,
       "origin": "Repository-authored Pluto navigation asset recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -420,8 +402,6 @@
     {
       "id": "pluto-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedSha256": "c566e1566d60357ec1f71ad9e2fad80648848d0307aa68fcf4e8b9fa74a3f2a2",
-      "expectedBytes": 1759,
       "origin": "Repository-authored Pluto acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -439,8 +419,6 @@
     {
       "id": "pluto-object-content",
       "path": "content/object.json",
-      "expectedSha256": "c79481e15b286e098344f470cfbf26d6cf4e085dd959beaae45f5fc215117326",
-      "expectedBytes": 15500,
       "origin": "Repository-authored Pluto panel, lens, legend and provenance data (replaces content/static.json)",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -547,15 +525,11 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1665,
-      "expectedSha256": "50a49b41120574d94c80f2f073a5e86ca8e40ceeb0644cac6c774f8d7fad73c8"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "pluto-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 9813,
-      "expectedSha256": "8e438858ec41b74b18d40dd15dd32cdf951b487abc28a187fc0f6ed9815b0477",
       "origin": "Repository-pinned English Wikipedia lead summaries for 21 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -576,8 +550,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 2765,
-      "expectedSha256": "01716a7c26875fe0445b37624d2b2b82b4019f96ac2f779854178e6b223a5de3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

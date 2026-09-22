@@ -23,7 +23,7 @@
           {
             "catalogueId": "source-earth-geonames-cities15000-zip",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -50,7 +50,7 @@
           {
             "catalogueId": "source-earth-geonames-countryinfo-txt",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -77,7 +77,7 @@
           {
             "catalogueId": "source-earth-geonames-admin1codesascii-txt",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -104,7 +104,7 @@
           {
             "catalogueId": "source-earth-geonames-readme-geonames-txt",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -131,7 +131,7 @@
           {
             "catalogueId": "source-earth-nasa-earth-navigation-globe",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -170,7 +170,7 @@
           {
             "catalogueId": "source-earth-nasa-blue-marble-december",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -209,7 +209,7 @@
           {
             "catalogueId": "source-earth-nasa-blue-marble-july",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -247,7 +247,7 @@
           {
             "catalogueId": "source-earth-nasa-blue-marble-july-bathymetry",
             "role": "material",
-            "evidence": "src/objects/earth/source/manifest.json@0000000000000000000000000000000000000000#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -274,7 +274,7 @@
           {
             "catalogueId": "source-earth-nasa-blue-marble-clouds",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -311,7 +311,7 @@
           {
             "catalogueId": "source-earth-nasa-black-marble-2016",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -340,7 +340,7 @@
           {
             "catalogueId": "source-earth-nasa-earth-editorial-record",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -396,8 +396,6 @@
     {
       "id": "earth-atmosphere-model",
       "path": "atmosphere/model.json",
-      "expectedSha256": "84a50abbc0dcb1b68f8b396c99ceac4dbb7946bf6c8dac4e6e22e6f91de34825",
-      "expectedBytes": 1741,
       "origin": "Repository-authored atmosphere parameter record (cssearth-atmosphere-model@1); its values and their citations are stated inside the file",
       "credit": "cssEarth; parameter values adapted from the OpenSpace Team’s RenderableAtmosphere tuning (MIT)",
       "license": "Repository-authored record; adapted values credited inside the file",
@@ -414,8 +412,6 @@
     {
       "id": "google-earth-pro-atmosphere-presentation-response",
       "path": "atmosphere/google-earth-pro-presentation-response.json",
-      "expectedSha256": "32a3ae4b6a55041d034f475c49b6bc7f915f783357e0047a9596a33ff18fc77c",
-      "expectedBytes": 2061,
       "origin": "Google Earth Pro 7.3.7.1327 linked shader and headless isolated-layer captures recorded locally on 2026-09-02",
       "credit": "Google Earth Pro presentation reference; measurements recorded by this project",
       "license": "Repository-authored factual measurements; no Google pixels or shader bytes redistributed",
@@ -451,7 +447,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -479,7 +475,7 @@
           {
             "catalogueId": "source-earth-buenos-aires-noise-source",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -507,7 +503,7 @@
           {
             "catalogueId": "source-earth-buenos-aires-noise-pin",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -534,7 +530,7 @@
           {
             "catalogueId": "source-earth-worldcover-wmts-release",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -561,7 +557,7 @@
           {
             "catalogueId": "source-earth-worldcover-geographic-rebind",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -588,7 +584,7 @@
           {
             "catalogueId": "source-earth-noaa-coraltemp-anomaly",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -615,7 +611,7 @@
           {
             "catalogueId": "source-earth-noaa-coraltemp-checksum",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -651,8 +647,6 @@
       "id": "nasa-mur-gibs-receipt",
       "path": "science/mur-gibs-receipt.json",
       "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
-      "expectedSha256": "c5cafbea0d3627a3e0cf3956de4b0450141877212021de809c390fe615fb5d2d",
-      "expectedBytes": 1376974,
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
@@ -690,7 +684,7 @@
           {
             "catalogueId": "gibs-mur-sst-anomalies",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -717,7 +711,7 @@
           {
             "catalogueId": "source-earth-nasa-mur-gibs-colormap",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -744,7 +738,7 @@
           {
             "catalogueId": "source-earth-nasa-mur-gibs-description",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -771,7 +765,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-elevation",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -798,7 +792,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-01",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -825,7 +819,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-02",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -852,7 +846,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-03",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -879,7 +873,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-04",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -906,7 +900,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-05",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -933,7 +927,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-06",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -960,7 +954,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-07",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -987,7 +981,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-08",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/40"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1014,7 +1008,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-09",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/41"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1041,7 +1035,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-10",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/42"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1068,7 +1062,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-11",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/43"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1095,7 +1089,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-12",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/44"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1122,7 +1116,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-13",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/45"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1149,7 +1143,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-14",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/46"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1176,7 +1170,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-15",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/47"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1203,7 +1197,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-16",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/48"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1230,7 +1224,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-17",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/49"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1257,7 +1251,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-18",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/50"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1284,7 +1278,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-latitude-19",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/51"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1311,7 +1305,7 @@
           {
             "catalogueId": "source-earth-gebco-2026-metadata",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/52"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1339,7 +1333,7 @@
           {
             "catalogueId": "source-earth-glad-m35-vsv",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/53"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1367,7 +1361,7 @@
           {
             "catalogueId": "source-earth-nasa-black-marble-2025-public-radiance",
             "role": "material",
-            "evidence": "src/planets/earth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/54"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1533,9 +1527,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored transcription of Wikidata coordinates for the default landmark list."
-      },
-      "expectedBytes": 28537,
-      "expectedSha256": "646efc2ea52249c099c264ad961f4fe8339b468afbd3467368b46b27c56b2794"
+      }
     }
   ],
   "generatedIntermediates": [
@@ -1572,44 +1564,30 @@
   "documents": [
     {
       "path": "places/manifest.json",
-      "expectedSha256": "1dc6c7bc7c74a497c9de76245d6f1b10f979507cee0b940a4722001ab3d97099",
-      "expectedBytes": 1359,
       "purpose": "Pinned GeoNames place catalogue snapshot, license and source hashes; not imagery coverage"
     },
     {
       "path": "city/catalog-pin.json",
-      "expectedSha256": "48ffd4c2edf268f6c629f066615751f2b6c49419554b412e5c91e2b7c9d4c4da",
-      "expectedBytes": 861,
       "purpose": "Observation date, hash and qualification of the complete WorldCover RGBNIR object inventory"
     },
     {
       "path": "city/worldcover-rgbnir-2021.json.gz",
-      "expectedSha256": "a3bce0d3857d7845b59fb12cf067068cd15db7638df8e497a755e989f43b28bc",
-      "expectedBytes": 628807,
       "purpose": "Preparation-only global source tile availability and publisher object pins; not pixel or runtime coverage"
     },
     {
       "path": "city/manifest.json",
-      "expectedSha256": "7058cb9d1c2cb2ac1aa4d16073d2a5b6ef71fe0c778423cf765972fe6a690326",
-      "expectedBytes": 6531,
       "purpose": "Pinned WorldCover source tiles, extracted-pixel hashes, RGB recipe, delivery origin and representative paging scope"
     },
     {
       "path": "city/r2-cors.json",
-      "expectedSha256": "4d9db512d4308ee0e738c28f34d836b361eb0e8a74fbef3f3246fcc7376cd956",
-      "expectedBytes": 504,
       "purpose": "Read-only cross-origin delivery policy with exact range response headers for the canonical R2 asset bucket"
     },
     {
       "path": "city/provenance.json",
-      "expectedSha256": "de3e2092f53de90d2611a9f1e0af6af3aa22b2a45705dca60abadbe5779b0c5b",
-      "expectedBytes": 22261,
       "purpose": "Verified source GeoTIFF metadata, geographic extraction windows, nodata counts and pixel hashes"
     },
     {
       "path": "interior/earth-interior.json",
-      "expectedSha256": "26c32ab22618b14d98c582dcf2e924e5a52d20f8715447a6bd1a60475d7d1c4a",
-      "expectedBytes": 1106,
       "purpose": "Source-qualified schematic Earth interior presentation specification",
       "kind": "authored-document",
       "sourceBinding": {
@@ -1619,50 +1597,34 @@
     },
     {
       "path": "presentation/LICENSE.INTER-OFL",
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88",
-      "expectedBytes": 4370,
       "purpose": "Exact Inter pinned-commit SIL OFL 1.1 redistribution license"
     },
     {
       "path": "city/published-coverage.json.gz",
-      "expectedSha256": "6f22eccaf59696d8b9e1e195e9d94b36cf1e7bbc8f9bf961bf5c8249724dc229",
-      "expectedBytes": 139459,
       "purpose": "Verified publication receipts, source-window provenance and immutable index heads for integrated geographic coverage"
     },
     {
       "path": "city/r2-cache-rule.json",
-      "expectedSha256": "6f661ba270eec5e578ad7939305b2bf6c38d5d1d00c4a98231bbc94972772b65",
-      "expectedBytes": 489,
       "purpose": "Narrow immutable geometry cache rule deployed to the public asset domain"
     },
     {
-      "path": "preparation/paged-ellipsoid.json",
-      "expectedBytes": 14036,
-      "expectedSha256": "7b38f6519ddaa24974a5977d0c7ec39a21d0ba6111a11c09dac5670cd8471106"
+      "path": "preparation/paged-ellipsoid.json"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 16588,
-      "expectedSha256": "2bad651780b1ecf521a53c733a4165f0b464479c5154cb49425ddaae1a50e69b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "content/lens-bindings.json",
-      "expectedBytes": 6108,
-      "expectedSha256": "c2c8ee97c9edc1242bbd64d0d1fcf58f5360a9f25997dda9e8886154f6d8f7b0"
+      "path": "content/lens-bindings.json"
     },
     {
-      "path": "content/charts.json",
-      "expectedBytes": 3429,
-      "expectedSha256": "521b6a287e04cae5daf6dfa2922b543d3eeaed1c96329f6c09aeb18cfd02c0fa"
+      "path": "content/charts.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2626,
-      "expectedSha256": "96c7300cb79cfa3ac27f15952b87cbdf7973a6f9c42fc7b16c5ba905b3e4cb3a"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "editorial/earth.json",
@@ -1671,40 +1633,28 @@
     },
     {
       "path": "preparation/navigation.json",
-      "expectedBytes": 493,
-      "expectedSha256": "dbf42f9718b5028e77fa31fb98649cd10ca8e2d6b5a10c2754efc4bfa505a1a1",
       "purpose": "Source-owned navigation marker recipe consumed by shared navigation preparation."
     },
     {
       "path": "preparation/acquisition.json",
-      "expectedBytes": 31331,
-      "expectedSha256": "3677ced95d3166a4585b80bb94a18726aed54e03b7cb3889b8554f1e0a8378e9",
       "purpose": "Authored source acquisition and exact pinned derived-record restoration."
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1222,
-      "expectedSha256": "bfb96ae17afec52f4f872930edf7b0a64734e408987c524f93150eb777b003f7"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "interior/tomography.json",
-      "purpose": "Authored GLAD-M35 Vsv extraction, coordinates, palette and interpretation.",
-      "expectedBytes": 2201,
-      "expectedSha256": "b0b06aae3a042ca407a554fe0d6b0e6433bab0c3195d8bec1531171eb3175288"
+      "purpose": "Authored GLAD-M35 Vsv extraction, coordinates, palette and interpretation."
     },
     {
       "path": "interior/glad-m35-metadata.geojson",
-      "purpose": "EarthScope metadata for the pinned GLAD-M35 r0.1 model.",
-      "expectedBytes": 7181,
-      "expectedSha256": "adc1aa1c4641459c035d9c7f738d13df11a693ecab38d7ad9ed3cbf8ab484581"
+      "purpose": "EarthScope metadata for the pinned GLAD-M35 r0.1 model."
     },
     {
       "path": "interior/glad-m35-catalog.json",
-      "purpose": "EarthScope catalog, citations and model revision history.",
-      "expectedBytes": 8464,
-      "expectedSha256": "f996e2ca9eee380309ccd1f9fec00f7a35d66505088fb67b6102040e52c5cb4e"
+      "purpose": "EarthScope catalog, citations and model revision history."
     },
     {
       "path": "science/night-lights-2025/provenance.json",
@@ -1720,8 +1670,6 @@
     {
       "id": "earth-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 11435,
-      "expectedSha256": "e6c0502b45556f22b894f2feab9dd9453605007f311936c518773eafa967439e",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -1738,8 +1686,6 @@
     {
       "id": "earth-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 3083,
-      "expectedSha256": "5af7f2ad08a7306a46aa29df8c7d125a2563f2ecce7b0998fa66d6f33204f384",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -1756,8 +1702,6 @@
     {
       "id": "earth-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 209,
-      "expectedSha256": "4019d8783f0b712d5182e46db58c5516e4b69ce2e309a9164ee4f15334b2acd6",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",

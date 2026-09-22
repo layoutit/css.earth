@@ -42,8 +42,6 @@
     {
       "id": "wasp-43b-miri-white",
       "path": "science/jwst-1366-miri/white-5.0-10.5um.csv",
-      "expectedBytes": 1382127,
-      "expectedSha256": "a116e36fe13b7818b5d90155aec445c888d47e54c6103b88160b1a52d6bd442d",
       "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
       "productId": "5.0-10.5 um white light curve",
       "title": "WASP-43b MIRI phase curve, 5.0-10.5 um white light curve",
@@ -67,8 +65,6 @@
     {
       "id": "wasp-43b-miri-stellar-counts",
       "path": "science/jwst-1366-miri/stellar-counts.csv",
-      "expectedBytes": 12671,
-      "expectedSha256": "6f3780d764b85027e7a0cce2df65c36ac23f814995182af477c044487e15d5c3",
       "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=1366",
       "productId": "median extracted stellar spectrum",
       "title": "WASP-43 median optimal-extraction counts per MIRI/LRS detector column",
@@ -151,8 +147,6 @@
     {
       "id": "wasp-43b-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1298,
-      "expectedSha256": "e40b4e2a076fb4c4b447ecc6820a1d9580d8bae5490e072a3f66902a40357b50",
       "origin": "https://arxiv.org/abs/2406.10207",
       "credit": "Challener et al. (2024), ApJL 969, L32",
       "license": "Factual numerical measurements; source attribution retained",
@@ -188,7 +182,7 @@
           {
             "catalogueId": "source-wasp-43b-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/wasp-43b/source/manifest.json@0000000000000000000000000000000000000000#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -196,8 +190,6 @@
     {
       "id": "wasp-43b-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 5714,
-      "expectedSha256": "1120b632f0a77c9413d9de08afdd0e491c426c618ca93cf3e02190e928bc4dc3",
       "origin": "Repository-authored raster recipe: the deposited temperature map on the reference sphere, false colour, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -215,8 +207,6 @@
     {
       "id": "wasp-43b-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1778,
-      "expectedSha256": "910be18094f36eea75e1aa6652dfae32219927fef7c03d56a71f82814d7037fc",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -234,8 +224,6 @@
     {
       "id": "wasp-43b-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: no directional Sun for a self-luminous map",
       "sourceBinding": {
         "kind": "local",
@@ -252,8 +240,6 @@
     {
       "id": "wasp-43b-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 103,
-      "expectedSha256": "0d1a3347aeb604691620938ba0d9de7c3797ef16fd225edbd149656059a577d9",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -270,8 +256,6 @@
     {
       "id": "wasp-43b-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 217,
-      "expectedSha256": "455ffffd6d38e00ccd32ca2cfd1e54f553948b8436b37e8a39d7b9e7f3c6c618",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -290,8 +274,6 @@
     {
       "id": "nirspec-map-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 59650,
-      "expectedSha256": "aa2eb13c0c569269a67b258c3cef952182732f8618a43db04c50902a5691f326",
       "origin": "https://zenodo.org/records/12627524",
       "credit": "The Challener et al. (2024) NIRSpec brightness-temperature map seen from the host star (substellar point centred, north up, east right) in the lens palette; rendered by tools/objects/source-authoring/wasp-43/author.mts",
       "license": "Project-authored display derivative.",
@@ -315,42 +297,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6219,
-      "expectedSha256": "0f1cc1130b33b3fe6ff363d91f5b9f19469ecfeb4c47c76a75d5bb5589ebfdf6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 836,
-      "expectedSha256": "992a2e161f2b06d4e78550e3eb617dbae430e9255b61f5f2cf917629d9d0bc4c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "ce796a7b18ed72e8df5579af154a4c92e3f10eedede438540bc6281f321864cb"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 789,
-      "expectedSha256": "b5dcafd9eb536157f2d8ab80bc2685109af50f2ebd16d3f3fcadf56ba25292ae"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4515,
-      "expectedSha256": "d76b8411b90b087c4cecc7de9a66fda223c7735c25dfb5d7cec09c2fe78d94c1"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/lens-comparison.png",
-      "expectedBytes": 289073,
-      "expectedSha256": "f5ae7fa8b0b1a2ceeae58445c5105fb81e5f9f216f94b68f31caa8be0db16afb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence image: the six prepared lens previews (prepared/minimaps) side by side with sharp, labelled, 2026-09-17 after preparation."
@@ -358,8 +326,6 @@
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 327868,
-      "expectedSha256": "2fb1f5796c56799626814f62a6ddf0fc1d3d4346142778119dbd0ee041191fb0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /wasp-43b/ with the default camera, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-16 after preparation."
@@ -367,8 +333,6 @@
     },
     {
       "path": "reference/theresa-reruns.md",
-      "expectedBytes": 5335,
-      "expectedSha256": "0ccffc3c89dabfaa0c1305ba60936a9dce8b5a85a84f8978a835e5dd93f13d50",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence record: reruns of the authors' public mapping code on the pinned deposit, 2026-09-16; the scratch environment is described, not kept."

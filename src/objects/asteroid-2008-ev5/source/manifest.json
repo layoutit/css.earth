@@ -52,7 +52,7 @@
           {
             "catalogueId": "source-asteroid-2008-ev5-asteroid-2008-ev5-shape",
             "role": "material",
-            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -79,7 +79,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -125,7 +125,7 @@
           {
             "catalogueId": "source-asteroid-2008-ev5-asteroid-2008-ev5-research-2008ev5",
             "role": "method",
-            "evidence": "src/planets/asteroid-2008-ev5/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -141,8 +141,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 42662,
-      "expectedSha256": "610165f1f8769a4f801644433cf0413bdd1d56e8a0739229d0964b880cf47f56",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -161,68 +159,44 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10802,
-      "expectedSha256": "b5ded703f35fb0b71658020ae207a794113e268691e7f6625d7fef96b426a58f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 760,
-      "expectedSha256": "d649e19194d57ee1e59f8fdeb27b5cbf68b61d98a119e14191e5ce355e759ecd"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 454,
-      "expectedSha256": "95bf37af69eda4c2c72c985846114c99d7fe091b0c6bf6c6f1202ebe43430a44"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 898,
-      "expectedSha256": "02afcc1d97d972b1570f5963396c131ca3c10c4ed7b66799649b3b4a28a03e5f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2868,
-      "expectedSha256": "02f52198774d03ce61055180e05489358c2d9d12f4faa1e0f862d0617eb6c58f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4409,
-      "expectedSha256": "a39471283797d4e8ce2c3179483546cc818766539e9b8893d4c1b1374fb5668a"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7757,
-      "expectedSha256": "6a11a69f261ca4f5063e5089117ec34e05e703c0a324af8399948c8310b94a35"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1758,
-      "expectedSha256": "2fb98a95d1cb97e87e84acdb09c74c4f2d59cbc8cbec567a8cbe8db18731d5ec"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 7047,
-      "expectedSha256": "301c5b2144cac129b0f39e0307053a1aa7e508ee4aff1ee30f047c9f4fb0fb2b"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 1989,
-      "expectedSha256": "68dd3ac59416dfa8cdaf6288b293871202e983157ec7420f7db30279f52cbca3"
+      "path": "reference/model-properties.json"
     },
     {
       "path": "reference/source-survey.json",
-      "purpose": "Bounded source alternatives and scientific limitations.",
-      "expectedBytes": 2246,
-      "expectedSha256": "81508d487c0d1d781939d8e42119ac3016172160cca6c9468ac3887bfd2da14f"
+      "purpose": "Bounded source alternatives and scientific limitations."
     }
   ]
 }

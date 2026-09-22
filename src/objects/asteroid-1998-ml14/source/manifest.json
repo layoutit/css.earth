@@ -47,7 +47,7 @@
           {
             "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-shape",
             "role": "material",
-            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -74,7 +74,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -115,7 +115,7 @@
           {
             "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-research-ml14",
             "role": "method",
-            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -140,7 +140,7 @@
           {
             "catalogueId": "source-asteroid-1998-ml14-asteroid-1998-ml14-warner-2014",
             "role": "method",
-            "evidence": "src/planets/asteroid-1998-ml14/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -156,8 +156,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 47086,
-      "expectedSha256": "cc82038abdd59fadeee74a450704a32d6fbd39e8535d05ae0dc9dcc4ab16ce8a",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -176,62 +174,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 11151,
-      "expectedSha256": "78b9ab6d051bd8062145bf0cdc00e5c7f2f06e7d94bf7049344beff60d7fd90c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 957,
-      "expectedSha256": "2df6e5e24a1a954e69420cdc2d63bc226b6b370e4d0f19c057da6a9b8eb48568"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 455,
-      "expectedSha256": "14e834a24b6fc68e2446f3af39a453c43cf985771b278e74a6bf414c8b26f4e4"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 791,
-      "expectedSha256": "d9dfaf03615a224421c83c28f3c7ffd4a2bb2b3c0eb598635d5811017dfa5113"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3195,
-      "expectedSha256": "559863c772e183a4e6a25727e6483d9b01ca47ad5af638f4b2dd4bd36c0c48c2"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4784,
-      "expectedSha256": "7cd54b18f532cf2ed0c7fe597b7c17bdfdffd7e378e3396bfb34d73f79a8c433"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7356,
-      "expectedSha256": "9568133bb6f81f0f9e4449fabc0df1d9a100d041fac1d29b3832ff9056121708"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1431,
-      "expectedSha256": "42648e4bc60dd0b3d570856c0bf98e6102e602f5d56704faeaffdfa410f33018"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6646,
-      "expectedSha256": "c02628962436e4562ab0abcbd89eea64a490ddf40ac765a50a89802ad4f3b089"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2872,
-      "expectedSha256": "9b1b93b0db321d1c97322c7bdff246d5d2cf42eb2ad9f8bd0e2f865eb69ebdb0"
+      "path": "reference/model-properties.json"
     }
   ]
 }

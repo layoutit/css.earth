@@ -41,7 +41,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137317-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -79,7 +79,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137317-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -124,7 +124,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11389xx-c1138920-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -162,7 +162,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11389xx-c1138920-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -199,7 +199,7 @@
           {
             "catalogueId": "source-proteus-stooke-shape",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -226,7 +226,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -271,7 +271,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137328-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -309,7 +309,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137328-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -354,7 +354,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137339-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -392,7 +392,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137339-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -437,7 +437,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137350-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -475,7 +475,7 @@
           {
             "catalogueId": "pds-resource-holdings-volumes-vgiss-8xxx-vgiss-8207-data-c11373xx-c1137350-geomed",
             "role": "material",
-            "evidence": "src/planets/proteus/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -505,107 +505,69 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 163673,
-      "expectedSha256": "8575a1a13d346acaa316f0d5322af6311f5cb59ea136f867c078604a746d9acc"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5589,
-      "expectedSha256": "c07fe7e3fa598d7b9bf57a1b7f65111a6429bf7951cd855d19029f085878ad78",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "geometry/c1137317-opus.json",
-      "expectedBytes": 11743,
-      "expectedSha256": "d3d1a5645feab5ac03bc94cc3bdb1e1890da0d417211c1b19bde01c150b5014f"
+      "path": "geometry/c1137317-opus.json"
     },
     {
-      "path": "geometry/c1138920-opus.json",
-      "expectedBytes": 11754,
-      "expectedSha256": "6cc522851f17565b1fb25a10f609294718e68538ee704fcdec405c38b65a01cb"
+      "path": "geometry/c1138920-opus.json"
     },
     {
-      "path": "geometry/naif0012.tls",
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "geometry/naif0012.tls"
     },
     {
-      "path": "geometry/registration.json",
-      "expectedBytes": 2833,
-      "expectedSha256": "0583bb7518dfa54371efd062949d8cbce57b38d1874553d1344e4cb1ea16b7de"
+      "path": "geometry/registration.json"
     },
     {
-      "path": "geometry/vg200051.tsc",
-      "expectedBytes": 108191,
-      "expectedSha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac"
+      "path": "geometry/vg200051.tsc"
     },
     {
-      "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc",
-      "expectedBytes": 885760,
-      "expectedSha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11"
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc"
     },
     {
-      "path": "geometry/vg2_nep_version1_type1_iss_sedr.txt",
-      "expectedBytes": 5575,
-      "expectedSha256": "8bce7257eea9a974b3b6a488bb248c662048459c8669d19c1e1b3259a7fbfab7"
+      "path": "geometry/vg2_nep_version1_type1_iss_sedr.txt"
     },
     {
-      "path": "geometry/vg2_v02.tf",
-      "expectedBytes": 12008,
-      "expectedSha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb"
+      "path": "geometry/vg2_v02.tf"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3972,
-      "expectedSha256": "6db3d84b19a89d677baa8736a95eabe87b3160ceb622acd76921994408a3fda9"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "8026383927782bfdec13001cb5bbceac1b6911c7e4f60315ff10df677fc4a443"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 9695,
-      "expectedSha256": "19675beda599841e90dead741b65c0e5ef904be744b5c1a7b1c6639dbc8b53d1"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3829,
-      "expectedSha256": "2250fdbf3fb69cc02158364b864a01a80e113d5842acd2a1697948010cb3df6c"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/bundle_description.txt",
-      "expectedBytes": 5105,
-      "expectedSha256": "edb4b13a8da09a0dbe1321c7cae338e3ed1c5909ebe627fba996407c4adf50f2"
+      "path": "shape/bundle_description.txt"
     },
     {
-      "path": "shape/n8proteus.xml",
-      "expectedBytes": 6278,
-      "expectedSha256": "2db42d2c7238b54cbde71e813f189c72b8cb1b1b91a82db184b9d6948a89b886"
+      "path": "shape/n8proteus.xml"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2359,
-      "expectedSha256": "169aabd3de5448159f6c666144f0d3cb9e5009dd8687cc8b5db50b3174b3f120"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "geometry/c1137328-opus.json",
@@ -627,9 +589,7 @@
     },
     {
       "path": "geometry/color-background.json",
-      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
-      "expectedBytes": 1750,
-      "expectedSha256": "89404347728a5e47cd3fb06c4f8cb9670289e036533baa39a60b497e33f67f53"
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence."
     },
     {
       "path": "observations/PROCESSING.TXT",
@@ -639,15 +599,11 @@
     },
     {
       "path": "preparation/register-voyager-color.py",
-      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
-      "expectedBytes": 11432,
-      "expectedSha256": "b7f136cef203ce1aefd9ce2687fdd1f30c98b83318ced8a242adda3594766aca"
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence."
     },
     {
       "path": "geometry/color-registration.json",
-      "purpose": "Reproducible full-source-mesh camera registration with reserved image sectors and initialization sensitivity.",
-      "expectedBytes": 83989,
-      "expectedSha256": "fda7547cb70e8464119219afe492a633a5aff77c4287816200f3c6ed42343bd0"
+      "purpose": "Reproducible full-source-mesh camera registration with reserved image sectors and initialization sensitivity."
     }
   ]
 }

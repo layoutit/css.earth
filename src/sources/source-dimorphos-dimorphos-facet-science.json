@@ -19,14 +19,10 @@
   "evidence": [
     {
       "path": "src/objects/dimorphos/source/manifest.json",
-      "revision": "8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf",
-      "sha256": "6eae21ce420d8fe6af683c7013a139b8c8326c1162125167eef93c3a891564d8",
       "locator": "/inputs/3"
     },
     {
       "path": "src/objects/dimorphos/source/science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
-      "revision": "c601cd5a54414fe6e500aba9b3c95c48b8870a30",
-      "sha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
       "locator": "/Product_Observational/Identification_Area"
     }
   ],

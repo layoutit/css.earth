@@ -36,7 +36,7 @@
           {
             "catalogueId": "source-neptune-hubble-opal-neptune-visible",
             "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -74,7 +74,7 @@
           {
             "catalogueId": "source-neptune-hubble-opal-neptune-fq619n",
             "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -112,7 +112,7 @@
           {
             "catalogueId": "source-neptune-hubble-opal-neptune-f845m",
             "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -138,7 +138,7 @@
           {
             "catalogueId": "source-neptune-hubble-opal-neptune-readme",
             "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -167,7 +167,7 @@
           {
             "catalogueId": "source-neptune-ras-oxford-neptune-true-colour-reference",
             "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -192,7 +192,7 @@
           {
             "catalogueId": "source-neptune-nasa-science-neptune-editorial",
             "role": "material",
-            "evidence": "src/planets/neptune/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -251,8 +251,6 @@
     {
       "id": "neptune-authored-preparation-rings",
       "path": "preparation/rings.json",
-      "expectedBytes": 3750,
-      "expectedSha256": "579c953e09d74b799390f9b25ec7150af45c92a96073948be85084976482d1f7",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -269,8 +267,6 @@
     {
       "id": "neptune-authored-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 818,
-      "expectedSha256": "90a8eecbcfb6d1640f9067dc484a96cbf3a41e08b163a8236f93463593b68c42",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -287,8 +283,6 @@
     {
       "id": "neptune-authored-content-object",
       "path": "content/object.json",
-      "expectedBytes": 14376,
-      "expectedSha256": "60a7ad73652c2636c65193e29903dd1ac5e070580143dfd8146a4a272e053b12",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "cssEarth and the institutional sources identified inside the JSON",
       "license": "Project-authored specification; referenced observations retain their source terms",
@@ -305,8 +299,6 @@
     {
       "id": "neptune-authored-presentation-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3984,
-      "expectedSha256": "266002458603e019c52d3d3fdd998a59b36c5f6ad619a1320a233c8bfb748e68",
       "origin": "Checked authored preparation data extracted without changing the accepted source interpretation",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -348,8 +340,6 @@
     {
       "id": "neptune-authored-observations",
       "path": "preparation/observations.json",
-      "expectedBytes": 14459,
-      "expectedSha256": "242cecc0bc8c07d5032204faaba3205008b41e4bda11013fe54dc2a304879304",
       "origin": "Checked source-observation preparation parameters, preserving the accepted scientific interpretation",
       "credit": "cssEarth and the institutional sources identified in the recipe",
       "license": "Project-authored specification; observation source terms retained",
@@ -366,8 +356,6 @@
     {
       "id": "neptune-authored-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1529,
-      "expectedSha256": "740f94552024b46374917bf014bbc6a364c7bf4b4a1966c8c528df9465630d93",
       "origin": "Checked oblate tessellation and retained texture presentation conventions",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -384,8 +372,6 @@
     {
       "id": "neptune-authored-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 103,
-      "expectedSha256": "891417623620dd516736824ef9f11165ef97af0964bf26a879dc9cf2b93b0459",
       "origin": "Checked retained scene composition, physical presentation and material residency policy",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -402,8 +388,6 @@
     {
       "id": "neptune-authored-charts",
       "path": "content/charts.json",
-      "expectedBytes": 3648,
-      "expectedSha256": "b924bf227bdced8c394dd79184f903627f2e8ed1293b10cc8b69a0a05dabe42e",
       "origin": "Checked source-dependent chart axes and source/provenance declarations",
       "credit": "cssEarth and NASA GSFC Planetary Spectrum Generator",
       "license": "Project-authored scientific specification with cited authority",
@@ -445,8 +429,6 @@
     {
       "id": "neptune-authored-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 2646,
-      "expectedSha256": "b675fa7f8133bce1cdc5b724db7c8398b9528a397a5803e16c80deff156ebc5a",
       "origin": "Checked source restoration and verification operations",
       "credit": "cssEarth with original source credits preserved per input",
       "license": "Project-authored acquisition specification",
@@ -463,8 +445,6 @@
     {
       "id": "neptune-authored-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2024,
-      "expectedSha256": "7b9a848ed39aa6dc0a2d42ed331b6414b892b53363a1e75ba3f48c65c1b5e835",
       "origin": "Checked lighting bank parameters for the shared sphere lane",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -481,8 +461,6 @@
     {
       "id": "neptune-authored-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Project-authored sky and Sun composition for the shared lane",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -499,8 +477,6 @@
     {
       "id": "neptune-authored-solar-system",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 208,
-      "expectedSha256": "54e87f13a6658dbe96d330f90541d66076fb2c786764d2586bf343a6e5a3efb9",
       "origin": "Project-authored physical scene scale",
       "credit": "cssEarth",
       "license": "Project-authored specification",
@@ -520,14 +496,10 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/planets/approx_pos.html",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 1340,
-      "expectedSha256": "f44e1f69eadcbc9d132e594f75013934416a5044bf5b71b120fb191d72c05c6f"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "presentation/overview.json",
-      "expectedBytes": 39,
-      "expectedSha256": "7f08503fc83aac60a0584ca706b5b6cb4868c9f20d2743cca87426f6772163d2",
       "purpose": "Repository-authored classification label consumed by the shared body overview during site preparation."
     }
   ]

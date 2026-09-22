@@ -4,8 +4,6 @@
     {
       "id": "k2-18-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1546,
-      "expectedSha256": "273d5db1b6e0a1df96e2d1d62ad4d09aa70733f7805cc839845b7a7ef4c14cbc",
       "origin": "https://arxiv.org/abs/1805.00830",
       "credit": "Sarkis, Henning, Kürster et al., \"The CARMENES search for exoplanets around M dwarfs: A low-mass planet in the temperate zone of the nearby K2-18\", AJ 155, 257 (2018), arXiv:1805.00830",
       "license": "Factual numerical measurements; source attribution retained",
@@ -41,7 +39,7 @@
           {
             "catalogueId": "source-k2-18-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/k2-18/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,8 +47,6 @@
     {
       "id": "k2-18-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2670,
-      "expectedSha256": "ff654210e1ef4279f653a407267d35f6ea8f4f64499ffe51e9e7415fb6e92fa0",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "k2-18-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1676,
-      "expectedSha256": "a8b176d770122a73e30edfb1a7dc8ca9d938831621e2186b25ebbcf4e9a6387b",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "k2-18-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "k2-18-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 100,
-      "expectedSha256": "5c5dc541709c07242ccb6750bdeceb8bcd2cb4c8625f7f090dc57ff0d371d186",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "k2-18-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 209,
-      "expectedSha256": "3543418ea5e9f39257c746392fbf18913ef633bd82963a305ad313e94e4f8c13",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -285,8 +273,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 49802,
-      "expectedSha256": "122eee080f3061577b5e25d8e00673d0d184e24d49586b0434e7d8aebe62b302",
       "origin": "https://www.lamost.org/dr11/v2.0/",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -313,42 +299,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3112,
-      "expectedSha256": "433ee62175aad14fbccb7d209c4095985c84c19e528fd1aec348477ea2ffda30",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1627,
-      "expectedSha256": "799c7942e8a42575e5f113190a14a73df4dd5a9397c0ab45abe97dacce3e02d6"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "402eaabefcb5e9419741048a0ee9b89d5d542d2b15d835f8bbe1fddc5f3b3760"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "d5172f89e672bc978cf6fe5108dbae992db7641c4a3899fe24ee7678c0951979"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 2588,
-      "expectedSha256": "d2c68ed58dcff719c734906316bb7ac94c51a2477518ef9723a677e66c5b2211"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-system.png",
-      "expectedBytes": 536071,
-      "expectedSha256": "26d03b850a0974cefd18f1caf07ab408ab9b784e635adb8c2aa955634dcc1707",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture of the opened planetary system, cited by the README; declared now that the reference folder holds a pinned input."

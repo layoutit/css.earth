@@ -32,7 +32,7 @@
           {
             "catalogueId": "damit-shape-895",
             "role": "material",
-            "evidence": "src/objects/datura/source/manifest.json@5c4324b3c3cacb15a5ba75debc2cee87cd2b6111#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -59,7 +59,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/objects/datura/source/manifest.json@5c4324b3c3cacb15a5ba75debc2cee87cd2b6111#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -75,8 +75,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 30003,
-      "expectedSha256": "c5a51085273db8ff9a4ece8020f19edb7ad7597cd6d5b8e957ead093824f303f",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
         "inputs": [
@@ -95,92 +93,58 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5756,
-      "expectedSha256": "16e68a292ca7cec9532536a7d3721d9a2eb1e29dbad93e3cdcd7d0663e040182",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 547,
-      "expectedSha256": "060efe32a53e8820436d29140a07a3e9a106c23e009159b5123da239ccfad30e"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "60b003a1f79d42b4fb7bdb166fdebb46ed8105fa3af9e0d24962e39f8b5d539e"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 641,
-      "expectedSha256": "b6cb738b79c0bdf38c62132d14cd97aecb34bc0b6aa4aa935810577d9a95767a"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2908,
-      "expectedSha256": "08d78ecc5e11811d2865ca3236cfe50afcc2a659ffc8372796f412287f8271e4"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3924,
-      "expectedSha256": "25d8a67a596880f60197c9346b0fccd7fbb18ae842a31429469c5bebc47e6d2e"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/266-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "8ed08cf46f0e68a4bb5c5fd45915e29c3ed5c9a704cf7f6bc38cea8d27eb62ad"
+      "path": "reference/266-IAUspin.txt"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 2065,
-      "expectedSha256": "aadee67857a820c5507a9d7c1c2e5d6e25d1015dabbdf74daed8e0675e915bd5"
+      "path": "reference/calibration.json"
     },
     {
-      "path": "reference/damit-model.json",
-      "expectedBytes": 1278,
-      "expectedSha256": "474a7505b1f80dc29d933edd2eb55df04860453e379a0b5db489ed1f936324d2"
+      "path": "reference/damit-model.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "6515127638cc659b83098411c5f25e0310f467ee7c45dfb03ac7ff906fc86b47"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1395,
-      "expectedSha256": "fe9027681b24354ad2cc4f7890d8d2cc5c5b64aff97ed495b60412762181a602"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "e5846bc44f742404b4fccfb7488f00bf0a9a509705f0ead83d140b6299d6d421"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 3926,
-      "expectedSha256": "b689b6f6c8ddb124c61b30d5ddb251c63c09a38c50c6e05ab11890a9383ab8fd"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/neowise-query.txt",
-      "expectedBytes": 143,
-      "expectedSha256": "4c88ae060c3bcc033c363aaf2823009feb14f03c1c50326d293cfa2ef1a9e430"
+      "path": "reference/neowise-query.txt"
     },
     {
-      "path": "reference/neowise-selected.csv",
-      "expectedBytes": 423,
-      "expectedSha256": "8c62eca7cc1eb853222eae95f0bb0676207bb58334420c01b24aa61a7575db5f"
+      "path": "reference/neowise-selected.csv"
     },
     {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 3865,
-      "expectedSha256": "72dfd1c52c52bec997030ba0aeaffb406908c29b820c68bb7d5d6237bba9773b"
+      "path": "reference/sbdb.json"
     }
   ]
 }

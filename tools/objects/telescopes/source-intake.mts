@@ -33,7 +33,8 @@ export async function intakeSources(root:string,target:string,existing:readonly 
  const source=`src/objects/${target}/source`,manifest=await readFile(resolve(root,source,'manifest.json'),'utf8').then(text=>requireRecord(JSON.parse(text))).catch(error=>{if(hasErrorCode(error,'ENOENT'))return undefined;throw error;});
  if(!manifest)return [];
  const entries=[...requireArray(manifest.inputs),...requireArray(manifest.documents??[]),...requireArray(manifest.generatedIntermediates??[])];
- const files=entries.map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:p.origin===undefined?`repository:${source}/${path}`:requireString(p.origin),bytes:requireFiniteNumber(p.expectedBytes),sha256:requireString(p.expectedSha256)};});
+ // Science products are downloads, and downloads are pinned. Files authored here carry no pin and are not products.
+ const files=entries.filter(raw=>requireRecord(raw).expectedSha256!==undefined).map(raw=>{const p=requireRecord(raw),path=requireString(p.path);return {id:p.id===undefined?`source-${sha256(path).slice(0,16)}`:requireString(p.id),role:'science',path:`${source}/${path}`,origin:p.origin===undefined?`repository:${source}/${path}`:requireString(p.origin),bytes:requireFiniteNumber(p.expectedBytes),sha256:requireString(p.expectedSha256)};});
  const products:SourceProduct[]=[];const used=new Set(existing.flatMap(p=>p.files.map(f=>f.path)));
  for(const file of files.filter(f=>/\.(?:fits?|img|cub|qub|lbl|xml)$/iu.test(f.path)&&!used.has(f.path)).sort((a,b)=>(/\.xml$/iu.test(a.path)?0:/\.lbl$/iu.test(a.path)?1:2)-(/\.xml$/iu.test(b.path)?0:/\.lbl$/iu.test(b.path)?1:2))) {
   try {

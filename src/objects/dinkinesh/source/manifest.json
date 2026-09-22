@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/dinkinesh/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,7 +49,7 @@
           {
             "catalogueId": "source-dinkinesh-shape-model",
             "role": "method",
-            "evidence": "src/planets/dinkinesh/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -157,91 +157,59 @@
         "ambient": 0.45,
         "diffuse": 0.55,
         "lensId": "shape"
-      },
-      "expectedBytes": 40479,
-      "expectedSha256": "17d1cb94d18203fd008ab037a3d6ad81df02b99a34738a2b7b814b907d3e5fe3"
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4759,
-      "expectedSha256": "754b1d31c1402b5cf21e621125ec61a85a855fefc9a526855f21407ed4a8483a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1647,
-      "expectedSha256": "a6c5f409213feb2721bdeb2976e59d581a41a6dae75661ad9e0227b9a61b4b5a"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1141,
-      "expectedSha256": "57f58a9808ee86a3b54385e02a738dfdb85586ce550ccd30b6a8e5f67945f13b"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "15c16e596ccca90fef1c53629de4f851d31ed752c35029ef11c79c78e72d3315"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/photometry.json",
-      "expectedBytes": 525,
-      "expectedSha256": "3ed3215366cced5b6c8fa1037b57c685f2cd2273fa38f5fbe1badb9ca7a41657"
+      "path": "preparation/photometry.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 502,
-      "expectedSha256": "b2c56e934ae3152b4188c7755e84101dee3e8ea2a346f4c8a740ce650ff464a5"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2791,
-      "expectedSha256": "aefbfa2609dc5f099d3b9efbb04b49ae1ac6f5e0029eedd78f7ca8859a3abef3"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4063,
-      "expectedSha256": "e22fa67c086c632aa0cb23c657fcd3a2b99775d2219d032554023fb44803e5e5"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7356,
-      "expectedSha256": "925cc736f8282bc8cc2421fd56c09c27f3324321be3ff130142d5c3bac7894e5"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6646,
-      "expectedSha256": "19c8fd9edfab12112470d412503de057e6ba3cbdbe82f3c23a439c0b9c9159bc"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "shape/dinkinesh.cmod",
-      "expectedBytes": 2855080,
-      "expectedSha256": "8dc8a6d9fc9f4138cfc44f896ca7732fdfdd9d44b10d6fb49fd43f80fa2e1b2f"
+      "path": "shape/dinkinesh.cmod"
     },
     {
-      "path": "shape/dinkinesh.cmod.license",
-      "expectedBytes": 115,
-      "expectedSha256": "bc9088a82989ceb3f12e46f66426e6b699273c095fbc68783c766f47a648b39b"
+      "path": "shape/dinkinesh.cmod.license"
     },
     {
-      "path": "shape/model.json",
-      "expectedBytes": 2376,
-      "expectedSha256": "9f397effcb9d94423f96b7a55dbde9e5e16d828f9db06c8ae65ffdbe2193d1d1"
+      "path": "shape/model.json"
     },
     {
       "id": "dinkinesh-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1319,
-      "expectedSha256": "031d0052c8559b803bccaa617d03b0885da1fc88a8b5ee85a9c9a4fb84fa8320",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -258,8 +226,6 @@
     {
       "id": "dinkinesh-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1039,
-      "expectedSha256": "312370414eb69e74a4b7bc4657906cd4d3b9102d7db0ea2a8a5eebd0044bc225",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -276,8 +242,6 @@
     {
       "id": "dinkinesh-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "03641c6bd9fcf54d622719eb53bc698db7cfe922bc8523e7e90d31b4c9a26dfd",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -294,8 +258,6 @@
     {
       "id": "dinkinesh-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -316,8 +278,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3532,
-      "expectedSha256": "4f25f51e2b4677d24e6e374d976013c9bc21a9c015eff674b0af6f33970fff07",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

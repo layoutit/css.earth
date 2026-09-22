@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/chariklo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "doi-10-1051-0004-6361-202141543",
             "role": "method",
-            "evidence": "src/planets/chariklo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -94,7 +94,7 @@
           {
             "catalogueId": "doi-10-1051-0004-6361-202141543",
             "role": "method",
-            "evidence": "src/planets/chariklo/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,57 +103,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4859,
-      "expectedSha256": "1789e087372a95787640d9771c4690338f4ffb3757a8772d18651a130afd14bf",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 3835,
-      "expectedSha256": "185cfa1df35704c5bb4b2aaba701da2d4f8b53ec737cb951963e0814a34a99a7"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "a30492b3bbba34e721de3da80330b3c7afe7a0eaaec6389b01a164d74d735a4d"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 821,
-      "expectedSha256": "be7c381006ffd092f59d858b6cea2085125d9aaed793f16b940072901bebb7b2"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 4116,
-      "expectedSha256": "2c9404136ac7f36678975fa46c20de42113d043751785f3408cd528ec5da36af"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3938,
-      "expectedSha256": "bbb80c83a11977b6695f134f3db4f52264fd102135b714de5568b14e41fcba26"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "rings/occultation-2022.json",
-      "expectedBytes": 1862,
-      "expectedSha256": "4ea83e2dcb08fdefb3f2b13625b711e21fdc1cb7fb40f9f8926b9252d2254d3f"
+      "path": "rings/occultation-2022.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3833,
-      "expectedSha256": "824ab9bd3a1453c49c4d73e400392ddce53c3f5e82cb0558c2950353e9608e89",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -189,9 +169,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 71194,
-      "expectedSha256": "4ff32db8171e71e146d15007850cb082efb6bfcf6380ee9f03372376bd690c1d"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

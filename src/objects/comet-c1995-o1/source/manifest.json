@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/comet-c1995-o1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -31,8 +31,6 @@
     {
       "id": "shape-parameters",
       "path": "shape/model.json",
-      "expectedSha256": "4647ac204ae7e561dc60fe3f1ec161db13e86bead5f0fef3aab5bd92696d026a",
-      "expectedBytes": 995,
       "origin": "https://doi.org/10.1088/0004-637X/761/1/8",
       "credit": "Szabó et al. (2012), ApJ 761, 8",
       "license": "Factual measurement transcribed from the cited publication; no text or figures reproduced",
@@ -51,8 +49,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 13402,
-      "expectedSha256": "a791d00b72357b1033e6ed3809f7bfb3188b96645644b504c96a524a017f79b0",
       "origin": "https://doi.org/10.1088/0004-637X/761/1/8",
       "credit": "Szabó et al. (2012), ApJ 761, 8",
       "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
@@ -79,67 +75,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3786,
-      "expectedSha256": "850fd3876988791e914577272ce09d9c43893240138f403a2a9353adbf0fc81c",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 451,
-      "expectedSha256": "30ca22ec9570da66d1680ee6119f371a5f86aae6686b4e004cbf7b6caf399d56"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 336,
-      "expectedSha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2743,
-      "expectedSha256": "56e2ca499887968e7e0071b20d806c10ce5de3c5f2a3ab44eb382417268f523a"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5151,
-      "expectedSha256": "07afd13cbdaa7b5e69cd6ea89ff9c5f7a3a280fcdb80c68d0765b519596b0817"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7294,
-      "expectedSha256": "ce73f7a41349a22565e8a02cd1d61294ab31e49e7b21080b67cf523936e15bbe"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-elements-1997.txt",
-      "expectedBytes": 7294,
-      "expectedSha256": "89f0e6de663797b6a725043d7feee30688db6fe8dfea89c32cc0a610c0ef28da"
+      "path": "reference/horizons-elements-1997.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6584,
-      "expectedSha256": "959e556e70f4beef5f26a84b9b4014baf53c7ed24797ea00e7aa3293e5b5099b"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/source-record.json",
-      "expectedBytes": 2747,
-      "expectedSha256": "68d096c106155c17c5ad3355f984e0b17cc8f968438d313d1a2173ea13fb80c8"
+      "path": "reference/source-record.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 2771,
-      "expectedSha256": "afe177d5a07f7f485a4694a6f717a416acfe828a30fb36d0ef6a3073ca833810",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

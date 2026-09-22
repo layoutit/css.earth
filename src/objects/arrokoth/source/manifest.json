@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/arrokoth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "source-arrokoth-published-shape",
             "role": "material",
-            "evidence": "src/planets/arrokoth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -90,7 +90,7 @@
           {
             "catalogueId": "source-arrokoth-lorri-albedo-model",
             "role": "material",
-            "evidence": "src/planets/arrokoth/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -98,8 +98,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -234,8 +232,6 @@
         "kind": "local",
         "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
       },
-      "expectedBytes": 3096,
-      "expectedSha256": "e09c96c5b6e7228713c8d56c94acbe67e95d01095a6037e1ad5889d0a09546cb",
       "redistribution": "Retain the original source attribution and notices with published derivatives."
     },
     {
@@ -252,8 +248,6 @@
         "kind": "local",
         "reason": "Camera calculated from the original TAN-SIP WCS, inertial vectors and fitted mesh attitude; inputs are bound by hashes."
       },
-      "expectedBytes": 3104,
-      "expectedSha256": "5992738be4a7607b8ed2ccfe60643c7aab465f046cd674972c27efa2b426a263",
       "redistribution": "Retain the original source attribution and notices with published derivatives."
     },
     {
@@ -269,8 +263,6 @@
         "kind": "local",
         "reason": "Fitted body attitude and image offsets with disjoint limb residuals for the Porter2024 shape."
       },
-      "expectedBytes": 4505,
-      "expectedSha256": "ba4d45cb602d95a96e83a18f4fe3ec5d918f9f7fc3317397c953d0fc3aafa0cb",
       "redistribution": "Retain the original source attribution and notices with published derivatives.",
       "acquisition": "Pinned local source input retained with the body package."
     },
@@ -385,9 +377,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera transferred from the qualified CA05 LORRI image through the fitted MVIC similarity; native inputs and source mesh are hash bound."
-      },
-      "expectedBytes": 5767,
-      "expectedSha256": "8b4f7ef786172c6d928ab7bf3145e1876c6264d916609f4ed3f40235fdccede1"
+      }
     },
     {
       "id": "lorri-independent-fit",
@@ -441,47 +431,31 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 5972,
-      "expectedSha256": "11b3468898c01da5670e40d1883166806f9b8dc8fe2bd150105284a06d273e04",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2053,
-      "expectedSha256": "c75b116ae470369f0be7756a4b713b98adf2dbcf5e0775dedad04aa9314ba3f2"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 4866,
-      "expectedSha256": "ca21ee0b651a7e5096080085efa0b8d24471f96e080467dc18d67e54d50d6896"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "412d9759b87bd0d68bbd4c7e846cfdd64ee66bcf7e524a6046a1ea078d11e0fb"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 440,
-      "expectedSha256": "7a8f48363057c21782ce822396c1c75f66e795b981dfb2ee8e55f25dd36489ea"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 5862,
-      "expectedSha256": "b7b902d2b447788fbad2421452dbee473136dd9b911982bff8f307d4c8caef12"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3356,
-      "expectedSha256": "e58b93ac7ee5768044b3fc78455aa5c0a393e688533aea3fa890e8a2e49c786a"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/arrokoth_porter_2024.lblx",
@@ -489,19 +463,13 @@
       "expectedSha256": "37da4085415e94d419b0b092dca3b8d527aa6adc1560a9a433d63965aa5172bd"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "1119b0da44e266b21b9443210ae42feccfe92904d18b5b77fdb4fc543522a8bb"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "24e1c644a36f7fe82ae671cb64d825f6ea5066760c5895f200c428fa82545e94"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/numeric-audit.json",
-      "expectedBytes": 3781,
-      "expectedSha256": "a015b67c3dab173381b3e92fdf9a31fd9c75fb600a6e5f1b37faa9c17f23081f"
+      "path": "reference/numeric-audit.json"
     },
     {
       "path": "reference/overview.txt",
@@ -538,8 +506,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3253,
-      "expectedSha256": "1602ff08113817c90faf5594fda5596c5f2aa7724e6c76d0e2443a91ff2a6463",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -575,9 +541,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 53076,
-      "expectedSha256": "a9107c3a96dc51dd575d0ca8ee2393d6640b564cb5e40f5ad4ac30db14677922"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

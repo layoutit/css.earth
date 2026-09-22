@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ymir/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "source-ymir-shape-approximation",
             "role": "material",
-            "evidence": "src/planets/ymir/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -94,7 +94,7 @@
           {
             "catalogueId": "source-ymir-model-surface",
             "role": "material",
-            "evidence": "src/planets/ymir/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,52 +103,34 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2741,
-      "expectedSha256": "526c6c92d9161350a3ee09ef092c5d170a5a6580dc5c3a5729c843ab9650fe52",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1874,
-      "expectedSha256": "a7d2d96150adc19b29ac5aaae679368869b405abe42887187c13588f0a6b0e04"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "644a1e4d05cf1955d627089665138cdad6bad2aa536bc65bf6121ee6259bde04"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 659,
-      "expectedSha256": "2e1b4c9a14e36e74728fbd408c61d3427c7659cbe125eb6fb24c65cd301eae77"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2230,
-      "expectedSha256": "0ab86d7d27ad22ccea97f4a193078eb46aa29924017462dc0f74a4113b3723de"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 1922,
-      "expectedSha256": "9483bd05883177e5978a1e4e00fd1baac19edf2573622cf86a5b2fcf9c6a6fd9"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1462,
-      "expectedSha256": "71428046c75625fcfe7bc88f00aa047ac16bd798f50bf83c571a29db66864b98",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -178,9 +160,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 53926,
-      "expectedSha256": "2472425206653b9c0efbbdcbd09761f43c2ad7df46e7d59fc3b9d6013d7fc68e"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

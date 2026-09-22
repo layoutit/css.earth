@@ -56,7 +56,7 @@
           {
             "catalogueId": "source-mimas-cassini-iss-2017-mimas",
             "role": "material",
-            "evidence": "src/planets/mimas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -115,7 +115,7 @@
           {
             "catalogueId": "source-mimas-cassini-iss-2014-mimas-color",
             "role": "material",
-            "evidence": "src/planets/mimas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -172,7 +172,7 @@
           {
             "catalogueId": "source-mimas-cassini-spc-2025-elevation",
             "role": "material",
-            "evidence": "src/planets/mimas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -216,7 +216,7 @@
           {
             "catalogueId": "source-mimas-cassini-spc-2025-shape",
             "role": "material",
-            "evidence": "src/planets/mimas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -243,7 +243,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/mimas/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -275,8 +275,6 @@
     {
       "id": "mimas-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "65137b88ab2c9016e6ad318e0b95d1f2639b1bb17d0c3586a8694902b62f6631",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -293,8 +291,6 @@
     {
       "id": "mimas-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1120,
-      "expectedSha256": "d998f0a8d9a52e33d5c60f9dfe057fbe63ead3574376faecefa232164c35c8c2",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -311,8 +307,6 @@
     {
       "id": "mimas-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 184,
-      "expectedSha256": "3564f60af78d6387e050953d7fef74c860c6903d660d3513f46f64b526be4729",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -329,72 +323,50 @@
   ],
   "documents": [
     {
-      "path": "observations/catalog.json",
-      "expectedBytes": 2827,
-      "expectedSha256": "366487e3f887ca4c9080a6727400197dd46143cfeb620d03581c36e1abc38eab"
+      "path": "observations/catalog.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3829,
-      "expectedSha256": "84e46dff3cc71dd031ac27914f446903ed96a2ce983385392c2c75cccf2b2108"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "42c2792b12fed3f6cbc6224f37f697da2d498837db155bf0c31eac79a99dcc01"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1645,
-      "expectedSha256": "1be9563ea8d5c6db4bc63675f92b1493ec70ffebdeca7568da73b6c584180925"
+      "path": "preparation/acquisition.json"
     },
     {
       "path": "content/object.json",
-      "expectedBytes": 10502,
-      "expectedSha256": "459ed1a722c2fdfccaa43f57acbba95b0624a3914a12dfe12c36e9eb9d0c8b5f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3868,
-      "expectedSha256": "0a3a20c115b49280f396bb2ec4e1ff688211dc993d4729a806e90e961c8367f9"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "observations/mimas_radius_g.xml",
-      "expectedBytes": 8719,
-      "expectedSha256": "def4b065852f8789c86a9dda0aa8ae5af7f542cf351a467c92f4ad8a2b1354c3",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_radius_g.xml",
       "purpose": "PDS source label: radial units, reference sphere, geotransform and missing constant."
     },
     {
       "path": "shape/mimas_128_o.xml",
       "purpose": "Original PDS label: OBJ dimensions, kilometer units and source resolution.",
-      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.xml",
-      "expectedBytes": 9380,
-      "expectedSha256": "35701c4db77166430bf6a77cf8c6f1ddf1227798a50aed8d34bcc8587b20fceb"
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/data/mimas_128_o.xml"
     },
     {
       "path": "shape/bundle_description.txt",
       "purpose": "Original PDS bundle description: global shape coverage and source limitations.",
-      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/document/bundle_description.txt",
-      "expectedBytes": 4013,
-      "expectedSha256": "0c25741e86bdc1385dca69b020e1b3b65eeb45ac7d59c296fa87c71d49799d42"
+      "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-mimas.cassini.shape-models-maps/document/bundle_description.txt"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2329,
-      "expectedSha256": "436a8c9f95ef4c8920529efed5fd48c0bfff10bedf3b9dfdc37e0f9958f69621"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "mimas-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 1391,
-      "expectedSha256": "28297a1c7b8eff50e9860d2894ba2c820b8facbaa623dbd7e031e688ead480c5",
       "origin": "Repository-pinned English Wikipedia lead summaries for 2 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -437,9 +409,7 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 221018,
-      "expectedSha256": "078d41eef18a92fec177620eec8c1b153a3b578cf07b560fc67eab12b3b6a9f5"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

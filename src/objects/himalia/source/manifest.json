@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/himalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -57,7 +57,7 @@
           {
             "catalogueId": "doi-10-1126-science-1079462",
             "role": "method",
-            "evidence": "src/planets/himalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -96,7 +96,7 @@
           {
             "catalogueId": "doi-10-1126-science-1079462",
             "role": "method",
-            "evidence": "src/planets/himalia/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -105,72 +105,46 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3524,
-      "expectedSha256": "3b464cbaadd7e24dcd4e7a2d848623bed0b81732262dcc118895772d49e3acc4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1687,
-      "expectedSha256": "e3799542be0294613e82ed862435fe6ff3f56073149a80499d3fd19fc8e14e31"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "5230f6c64a7efc13eac2932c228f790c5cd9c56624004b246424be348a96b0ba"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 493,
-      "expectedSha256": "25c97889e2e5b0ccdfd4dda40064c18186ad02786bdc3a03c082c123926ae57f"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2283,
-      "expectedSha256": "335d89abd2ec1282d37e58728faef524c217705a3d8c43ed0fde355d4846bb2f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3885,
-      "expectedSha256": "56ea115eeb3846245b1606376363db72ac6d9708203beadc5bcaf06ac0790c65"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "survey/N1355869401_2_CALIB.LBL",
-      "expectedBytes": 3590,
-      "expectedSha256": "6db884b694117da284d9885cb0aaf9de877a9f83c09900bbecfe539efd129b89"
+      "path": "survey/N1355869401_2_CALIB.LBL"
     },
     {
-      "path": "survey/native-inspection.json",
-      "expectedBytes": 1045,
-      "expectedSha256": "802c72ed2168407de025fb0d0cd11402750abf0e01e075c676ab2d11645743f4"
+      "path": "survey/native-inspection.json"
     },
     {
-      "path": "survey/opus.json",
-      "expectedBytes": 1889,
-      "expectedSha256": "78cb5c79af7d162d837fdc03eaca6b7dbfae08acd85fe4f90831d586190e3055"
+      "path": "survey/opus.json"
     },
     {
-      "path": "survey/shape-evidence.json",
-      "expectedBytes": 1537,
-      "expectedSha256": "4af11f4c47db1cf5747cc5b7a0bce658688325dfa95365bf877a558f9344b5e3"
+      "path": "survey/shape-evidence.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1772,
-      "expectedSha256": "d3f8649d70fbfcd0562784cd5b251685ed086a371974c4fe34bdeebc61a4aa53",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -200,9 +174,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 77911,
-      "expectedSha256": "04696bd4e23691a1158553438aff5ad971e11a6ffb08d48d93b0b9512a816aed"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

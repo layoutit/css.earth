@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/comet-c1956-r1/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -31,8 +31,6 @@
     {
       "id": "shape-parameters",
       "path": "shape/model.json",
-      "expectedSha256": "d13ab5abee32e7c0d24ac81159aaced31e84bc486073cce4eea47c0ad9502441",
-      "expectedBytes": 1003,
       "origin": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=C%2F1956%20R1&phys-par=true",
       "credit": "Repository assumption; no published nucleus size",
       "license": "Repository-authored assumption stated in the record",
@@ -51,8 +49,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 13190,
-      "expectedSha256": "a0468d9cd83bad0b9949162f32108494b04f635c81f680ffde168f6ef5267399",
       "origin": "https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=C%2F1956%20R1&phys-par=true",
       "credit": "Repository assumption; no published nucleus size",
       "license": "Prepared from the repository-authored shape record; independent cssEarth preparation code MIT",
@@ -79,62 +75,40 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3053,
-      "expectedSha256": "c850deb5f331739e8922500fc1c49ea361690d29f5e3cb18dc8b8489c159f4be",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 304,
-      "expectedSha256": "f06aa1150837cb1205c6a9805d5f0cd85954a9ed185d343d74c29a53ca0a7b18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 451,
-      "expectedSha256": "7fefc9ecc737af3d034b0f531923add1539f696a9e44f6228e66551f14330e4b"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 336,
-      "expectedSha256": "77ed8ddd53e491dff19c9b93fb14ae424d6c53620f787fce787e1b891a2642a3"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2748,
-      "expectedSha256": "5338efe1cf99143c73b2d1d7052cdd10ae33105724abf0b4d86858a69ed12b98"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 41,
-      "expectedSha256": "ed3839a6997e7eff25caf1dc7d6bd949afe7d466aa04ac1c860bab2b3703dd68"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 6151,
-      "expectedSha256": "e6117f92074b8ca8590d40b05d48d45f0e4ac7ae09e8857bb82cf8bba8d39883"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7292,
-      "expectedSha256": "fd07d011636c7ccc1ca8317ccc340772cf5812391d8b7760421467aa3c5e6e05"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6582,
-      "expectedSha256": "8ba2a30d1e1a163d7ad273d78ea613cd4847e8c4d15d8222586673b94526a72c"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/source-record.json",
-      "expectedBytes": 2593,
-      "expectedSha256": "5a35a88d3d4c027e7dcdac99d57f2c82a3f52c4d159df7ae39a0a5da30a3f58c"
+      "path": "reference/source-record.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 1988,
-      "expectedSha256": "4abb0952de7e042ba4b6f30a9ffd6cb2ddeeb709c924f1bb081d8ee6b58864ae",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

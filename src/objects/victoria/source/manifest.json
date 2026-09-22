@@ -41,7 +41,7 @@
           {
             "catalogueId": "source-victoria-victoria-shape",
             "role": "material",
-            "evidence": "src/planets/victoria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -68,7 +68,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/victoria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,7 +103,7 @@
           {
             "catalogueId": "vernazza-2021-survey",
             "role": "method",
-            "evidence": "src/planets/victoria/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -119,8 +119,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 35455,
-      "expectedSha256": "9bb6115f57a3757568458f91b9dd11bbceed50195076def13d816fbcb6b666c9",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -139,67 +137,43 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 8924,
-      "expectedSha256": "3fd4e8b95834b0ca66273cbe189d75c241e774bdb3a9200c41a31db3c5694557",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 921,
-      "expectedSha256": "c5550237fcb922b71af783c79f0189d145b61c71c9a222c5e0b70089a9138c18"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 445,
-      "expectedSha256": "72a9b86a2d8ad7794e16f6827a2c3754f0597b36bc54d8c8aad1f5ffdd038084"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 673,
-      "expectedSha256": "0df8d459d73ff31fb620dfd03cbb214497b59645a11c60c3d8cf6850b92a9daf"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2739,
-      "expectedSha256": "f970895d067e07c5f1636d75ba05d7b623df771ec5b0d6bc823e946731b7ffcb"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4107,
-      "expectedSha256": "471ac5db01b511fe753829e1465fbe449af9d49108b49ecf35665bf46cc0cb12"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7353,
-      "expectedSha256": "dc0df6296f5d5552848cb8d0ace8f2527fe73afa2fdda144ec2b03bce4ea5823"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1388,
-      "expectedSha256": "8afa7bdc2a782ecb58e6374029f805b32056d27e3883e350f3396e87456fa468"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6643,
-      "expectedSha256": "1ccaf8a8668640a8a1d6325997656cae090410eb84fb592dc73428583e405863"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 1701,
-      "expectedSha256": "6c746e042a0616f3e56fa72b08da1f4de0cda163b0e54e657b1e5a635c589765"
+      "path": "reference/model-properties.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 5492,
-      "expectedSha256": "a7c4a77f22479d6394516e4827e11934b241b596b8ad6d13d4e64c7d0a57f89b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

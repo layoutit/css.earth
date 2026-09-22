@@ -65,7 +65,7 @@
           {
             "catalogueId": "source-io-usgs-enhanced-global-1km",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -135,7 +135,7 @@
           {
             "catalogueId": "source-io-usgs-normal-global-1km",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -162,7 +162,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -170,8 +170,6 @@
     {
       "id": "io-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 181,
-      "expectedSha256": "57b9261689b479463ea12838d5639c51da7ebf870db2ba8d9194854fdc8780b9",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -210,7 +208,7 @@
           {
             "catalogueId": "source-io-usgs-sim3168-io-geounits-dbf",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -238,7 +236,7 @@
           {
             "catalogueId": "source-io-usgs-sim3168-io-geounits-prj",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -284,7 +282,7 @@
           {
             "catalogueId": "source-io-usgs-sim3168-geologic-units",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -322,7 +320,7 @@
           {
             "catalogueId": "source-io-io-muse-original-485nm-slope-1",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -360,7 +358,7 @@
           {
             "catalogueId": "source-io-io-muse-original-485nm-slope-2",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -398,7 +396,7 @@
           {
             "catalogueId": "source-io-io-muse-original-485nm-slope-3",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -436,7 +434,7 @@
           {
             "catalogueId": "source-io-io-muse-original-560nm-band-1",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -474,7 +472,7 @@
           {
             "catalogueId": "source-io-io-muse-original-560nm-band-2",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -512,7 +510,7 @@
           {
             "catalogueId": "source-io-io-muse-original-560nm-band-3",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -570,7 +568,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -628,7 +626,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -686,7 +684,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -744,7 +742,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -802,7 +800,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -860,7 +858,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -890,7 +888,7 @@
           {
             "catalogueId": "source-io-usgs-gazetteer-nomenclature-center-pts",
             "role": "material",
-            "evidence": "src/planets/io/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+            "evidence": "src/objects/io/source/features/manifest.json#/inputs/0"
           }
         ]
       }
@@ -898,8 +896,6 @@
     {
       "id": "io-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 985,
-      "expectedSha256": "f928ea4502983b8137f168d63b0f5012258e7685b9848bc3292e12c2e4cccd85",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -916,8 +912,6 @@
     {
       "id": "io-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1166,
-      "expectedSha256": "30ee803bc616c989f623fae0df92f81f94ba07cd2f4100cb3e1d5325dcfa3338",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -953,7 +947,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/io/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -961,8 +955,6 @@
     {
       "id": "io-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 200,
-      "expectedSha256": "9f7ebf9ef3f5f6574590cda82433869b68721b7f9fac3eea6197b5a222d95f0b",
       "origin": "Repository-authored Io solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -982,8 +974,6 @@
     {
       "id": "io-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 15303,
-      "expectedSha256": "c8cb672ee9273569da8721100cf7404eebf8ff22b07317aa056a28e0a2efb46b",
       "origin": "Repository-authored Io raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1001,8 +991,6 @@
     {
       "id": "io-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1571,
-      "expectedSha256": "517e264e379e75562bf3d7bfb8f3086ff85c6d8ecfef9c2a25ed5cab7221ce0e",
       "origin": "Repository-authored Io geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1020,8 +1008,6 @@
     {
       "id": "io-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Io celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1040,8 +1026,6 @@
     {
       "id": "io-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 337,
-      "expectedSha256": "8fbc994711fc3f155f07356751e52734dcf6536ccd5242289c9bd051f6cb48a6",
       "origin": "Repository-authored Io presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1058,8 +1042,6 @@
     {
       "id": "io-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 394,
-      "expectedSha256": "8b9e9ce983f62002c6e82370fe5e93af51a0fb7dc0f57f81dd6f30504ff72658",
       "origin": "Repository-authored Io navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1076,8 +1058,6 @@
     {
       "id": "io-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3463,
-      "expectedSha256": "0395c10d5c5eff84e3210ec0f0e7aad0ea80d6c2c4733b2b47f7b05e7a3b3997",
       "origin": "Repository-authored Io acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1095,8 +1075,6 @@
     {
       "id": "io-object-content",
       "path": "content/object.json",
-      "expectedBytes": 18920,
-      "expectedSha256": "d1ca5b545c97d55c37a301091e89e9ecce973d45f852325e0b4f453d39c78e60",
       "origin": "Repository-authored Io object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -1146,8 +1124,6 @@
       "consumers": [
         "volcanic-heat"
       ],
-      "expectedBytes": 1036800,
-      "expectedSha256": "84f2671acc566a7e52e71f977b2391d5a240cc9617bc8774c45ec685a963381b",
       "recipe": {
         "generator": "tools/objects/juno/jiram-mosaic.mts",
         "inputs": [
@@ -1175,8 +1151,6 @@
       "consumers": [
         "volcanic-heat"
       ],
-      "expectedBytes": 1307,
-      "expectedSha256": "efb8da37d9c03e37cef8fc44b95f9d8c5da9fccdf99b7c2d39218fe0a9351504",
       "recipe": {
         "generator": "tools/objects/juno/jiram-mosaic.mts",
         "inputs": [
@@ -1204,8 +1178,6 @@
       "consumers": [
         "volcanic-heat"
       ],
-      "expectedBytes": 27895,
-      "expectedSha256": "b65931d8970ff1c4c68d3c8c45e939767fc391a9af5baf7d44b60068b1184cda",
       "recipe": {
         "generator": "tools/objects/juno/jiram-mosaic.mts",
         "inputs": [
@@ -1229,15 +1201,11 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2794,
-      "expectedSha256": "048d8bc71a3ca5a734b9de4d2a2a42e68c78eb9b48630da79a16e1201290b594"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "usgs-sim3168-io-geology-metadata-txt",
       "path": "science/geology-sim3168/Io_geology_metadata.txt",
-      "expectedBytes": 13879,
-      "expectedSha256": "82ccc4b03c378f5923cc559eb223c147b34dea2ad1b792d309fe6c5c7c0d8d3f",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1255,8 +1223,6 @@
     {
       "id": "usgs-sim3168-io-diffusedeposits-dbf",
       "path": "science/geology-sim3168/Io_DiffuseDeposits.dbf",
-      "expectedBytes": 36774,
-      "expectedSha256": "612e1954802f7e63a9b899f28424451eae2f8431ac1621eac7ef492eb30f2eb4",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1274,8 +1240,6 @@
     {
       "id": "usgs-sim3168-io-diffusedeposits-prj",
       "path": "science/geology-sim3168/Io_DiffuseDeposits.prj",
-      "expectedBytes": 149,
-      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1293,8 +1257,6 @@
     {
       "id": "usgs-sim3168-io-diffusedeposits-shp",
       "path": "science/geology-sim3168/Io_DiffuseDeposits.shp",
-      "expectedBytes": 208672,
-      "expectedSha256": "bba9d25bf947e074ecbad2394832b07d669bdb84c2788a12272888552791022f",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1312,8 +1274,6 @@
     {
       "id": "usgs-sim3168-io-diffusedeposits-shp-xml",
       "path": "science/geology-sim3168/Io_DiffuseDeposits.shp.xml",
-      "expectedBytes": 15229,
-      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1331,8 +1291,6 @@
     {
       "id": "usgs-sim3168-io-diffusedeposits-shx",
       "path": "science/geology-sim3168/Io_DiffuseDeposits.shx",
-      "expectedBytes": 2812,
-      "expectedSha256": "db4be3599357c56488cd71bae1d8e3a431b0f13336eb06d32c6a52fe61a32966",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1350,8 +1308,6 @@
     {
       "id": "usgs-sim3168-io-geology-metadata-xml",
       "path": "science/geology-sim3168/Io_geology_metadata.xml",
-      "expectedBytes": 15229,
-      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1369,8 +1325,6 @@
     {
       "id": "usgs-sim3168-io-geounits-shp-xml",
       "path": "science/geology-sim3168/Io_GeoUnits.shp.xml",
-      "expectedBytes": 15229,
-      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1388,8 +1342,6 @@
     {
       "id": "usgs-sim3168-io-geounits-shx",
       "path": "science/geology-sim3168/Io_GeoUnits.shx",
-      "expectedBytes": 12116,
-      "expectedSha256": "d7a25a6c6a53bc66025dd920922babc2b4fcefb0b5ffb29d896a4f7d3e7ced64",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1407,8 +1359,6 @@
     {
       "id": "usgs-sim3168-io-geounitspoints-dbf",
       "path": "science/geology-sim3168/Io_GeoUnitsPoints.dbf",
-      "expectedBytes": 121662,
-      "expectedSha256": "2037f44e54a96092a61f28298f455b0e5824257e64c0a1c97cbf438359459c12",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1426,8 +1376,6 @@
     {
       "id": "usgs-sim3168-io-geounitspoints-prj",
       "path": "science/geology-sim3168/Io_GeoUnitsPoints.prj",
-      "expectedBytes": 149,
-      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1445,8 +1393,6 @@
     {
       "id": "usgs-sim3168-io-geounitspoints-shp",
       "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp",
-      "expectedBytes": 42100,
-      "expectedSha256": "7e7c9117de8c61ee6aa6af3501e2b290ed278d30dc71ae32518467e7f6c4789a",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1464,8 +1410,6 @@
     {
       "id": "usgs-sim3168-io-geounitspoints-shp-xml",
       "path": "science/geology-sim3168/Io_GeoUnitsPoints.shp.xml",
-      "expectedBytes": 15229,
-      "expectedSha256": "73c8d983bd98d6ed00d521444b46484a4b8df66f067ed4bd33c51e9c67f103e8",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1483,8 +1427,6 @@
     {
       "id": "usgs-sim3168-io-geounitspoints-shx",
       "path": "science/geology-sim3168/Io_GeoUnitsPoints.shx",
-      "expectedBytes": 12100,
-      "expectedSha256": "31848764354273ec382a463229a746f2a9a78d699348fe6f2f8a67a4e3905e02",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1502,8 +1444,6 @@
     {
       "id": "usgs-sim3168-io-diffusedeposits-lyr",
       "path": "science/geology-sim3168/Io_DiffuseDeposits.lyr",
-      "expectedBytes": 10752,
-      "expectedSha256": "4ae1dfcc5151fd8ea90987fb061a976717586e5d5f7e335f89eff89e941d0929",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1521,8 +1461,6 @@
     {
       "id": "usgs-sim3168-io-geounits-lyr",
       "path": "science/geology-sim3168/Io_GeoUnits.lyr",
-      "expectedBytes": 11776,
-      "expectedSha256": "68fb956b941c08c4a638dac9c55a258178936b5e90a613b69df74a1b7f82f5a2",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1540,8 +1478,6 @@
     {
       "id": "sim3168-archive-index-json",
       "path": "science/geology-sim3168/archive-index.json",
-      "expectedBytes": 66757,
-      "expectedSha256": "2e8c8515b68c2e09dc690bee4b783d05b831268c459d02a74cd3a090c317e5b9",
       "origin": "https://pubs.usgs.gov/sim/3168/",
       "credit": "USGS source data; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
@@ -1555,8 +1491,6 @@
     {
       "id": "sim3168-intake-downloads-json",
       "path": "science/geology-sim3168/intake-downloads.json",
-      "expectedBytes": 10763,
-      "expectedSha256": "d3c06ea5a067784ecaf38e28d4bdafd975b982ddae6663f1cfa5fa58116b0112",
       "origin": "https://pubs.usgs.gov/sim/3168/",
       "credit": "USGS source data; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
@@ -1570,8 +1504,6 @@
     {
       "id": "sim3168-display-categories-json",
       "path": "science/geology-sim3168/display-categories.json",
-      "expectedBytes": 1545,
-      "expectedSha256": "00ab4b24f2d97f365316c03bc8834e865bcf25c54a9327dbd68f25bd42e8215f",
       "origin": "https://pubs.usgs.gov/sim/3168/",
       "credit": "USGS source data; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
@@ -1585,8 +1517,6 @@
     {
       "id": "sim3168-registration-anchors",
       "path": "science/geology-sim3168/registration-anchors.json",
-      "expectedBytes": 3542,
-      "expectedSha256": "0a38893d6bda62544ac8a05541d51a28d3de1e6787cb8a37754a6635566c4daf",
       "origin": "https://pubs.usgs.gov/sim/3168/",
       "credit": "USGS point and polygon layers; cssEarth comparison",
       "license": "Repository-authored validation metadata of public domain GIS data",
@@ -1599,39 +1529,27 @@
     },
     {
       "path": "muse/source-qualification.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 12663,
-      "expectedSha256": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/INTERPRETATION.md",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 3857,
-      "expectedSha256": "b9b6c93400a3a29fc36ae858eac736618301f1e094278519ef086027b5f5ad25"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/io-recipe.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 2175,
-      "expectedSha256": "a0dce284117c01ed762a05ab1a2f25af626bd9e73733daaddb4f327749073d81"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/datacite-license.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 5096,
-      "expectedSha256": "18391de14b9f22cfa4f83a08f9d26992f6aa1616b302c68025cee1d1784b368a"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/io/conversion-receipt.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 10483,
-      "expectedSha256": "9640accaa31acef0af9cb9008cb914815d86f47db2f219163d2c0c32a7d1a231"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "id": "io-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 20887,
-      "expectedSha256": "5ee5548c6506d98946b9615277ac2a03111239eb9f8d1353d8c84451cb934282",
       "origin": "Repository-pinned English Wikipedia lead summaries for 44 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -1660,9 +1578,7 @@
     {
       "path": "science/mura-2024/table3-m-band.json",
       "origin": "https://www.frontiersin.org/journals/astronomy-and-space-sciences/articles/10.3389/fspas.2024.1369472/full",
-      "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks the Volcanic heat map against them.",
-      "expectedBytes": 14176,
-      "expectedSha256": "90ad29f2e09ce3a2db70081810d21aba3b65c8ca137fa9d76a7d880cd07631ce"
+      "purpose": "Mura et al. (2024) Table 3 M-band hot-spot outputs with Table 2 positions (CC BY 4.0), transcribed from the article. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks the Volcanic heat map against them."
     }
   ]
 }

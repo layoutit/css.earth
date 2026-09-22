@@ -47,7 +47,7 @@
           {
             "catalogueId": "source-mithra-mithra-shape",
             "role": "material",
-            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -74,7 +74,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -115,7 +115,7 @@
           {
             "catalogueId": "source-mithra-mithra-research-mithra",
             "role": "method",
-            "evidence": "src/planets/mithra/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -131,8 +131,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 39925,
-      "expectedSha256": "d1d6974ba2a184783337ff3e6c70615a10c62b3662f284e6d08c44dcc708f46a",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -151,73 +149,47 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9299,
-      "expectedSha256": "8833d26cfc1d36c8a30b828d724558e0fac5823c2cc586aa951fbeb352bf3b66",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 801,
-      "expectedSha256": "15190bc0ad823293559390615588c195a810899d8535822f9bf7e39dd194570a"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "17f1ba5a8fe95f805fe9f37460479465ac87e201b8629bab0432342e1cad14dc"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 998,
-      "expectedSha256": "030d18c509e894a484c140b63a1f6821fec2b790dc90c33b32d8e7b9fb19009d"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2842,
-      "expectedSha256": "4c986da61146fcb70a799a4da6219e54dbae51b8c7f5c69728ec984bcf9edd05"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3450,
-      "expectedSha256": "0ed90568bbff11ecb7e0ecf771400c05d75bacf123b7078b8c9bb82a0cee5451"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "c1abd074b138c5c08077802d28559668769477257b72035c44fd75928774e3d5"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1427,
-      "expectedSha256": "0a1dc884316072f29a8d970a3542bd42790c8f962a40d5306398bd3b9a5cb449"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "b620af3a25ee2b627fb858a845dfceceaefb5c4432c51214ea2316a56f7f444a"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2033,
-      "expectedSha256": "bcb1e8fc34f242e8213ad4ee3b78f0cd338018d76aabc2bde8eb526274da620f"
+      "path": "reference/model-properties.json"
     },
     {
       "path": "reference/scalar-anchors.json",
-      "purpose": "Independent full-source scalar correspondence anchors and coverage checks.",
-      "expectedBytes": 5838,
-      "expectedSha256": "367269a04ce85ee859172b2deca2e044f5c8ce1dcaed86c2a1d0eb284a29d9bc"
+      "purpose": "Independent full-source scalar correspondence anchors and coverage checks."
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4211,
-      "expectedSha256": "736d27ae0647d77af6c74f0b5083c43474da6ba278a6d1cca21d75e515871c05",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

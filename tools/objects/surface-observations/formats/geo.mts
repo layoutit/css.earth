@@ -1,3 +1,4 @@
+import { sha256 } from '../../../../src/platform/sha256.mts';
 /**
  * Georeferenced photographs: archive backplanes (OSIRIS GEO, AMICA Gaskell, PDS4 geometry cubes), archived camera closures
  * (OSIRIS reflectance, L'LORRI, New Horizons LORRI and MVIC) and cameras derived from SPICE kernels. GEO_SCHEMAS states what
@@ -179,10 +180,15 @@ async function loadGeoFrame(recipe: GeoLens, frame: GeoFrame, { sourceDirectory,
   const closure = schemaOf(recipe.format).camera === 'archived-closure' ? parseGeoCameraClosure(JSON.parse((await read(frame.cameraPath)).toString('utf8'))) : null;
   if (closure) {
     const pins = source.manifest?.inputs;
-    if (!pins || closure.meshSha256 !== pins.find(e => e.path === config.geometry.radialTerrain.path)?.expectedSha256 ||
+    // The camera was solved against exact bytes. A download is named by its manifest pin; a file authored here by its own bytes.
+    const digest = async (path: string) => {
+      const pin = pins?.find(e => e.path === path);
+      return pin === undefined ? undefined : pin.expectedSha256 ?? sha256(await read(path));
+    };
+    if (!pins || closure.meshSha256 !== await digest(config.geometry.radialTerrain.path) ||
         !Array.isArray(closure.provenance) || closure.provenance.length < 3) throw new Error('Camera lacks its exact source-mesh closure.');
     for (const entry of closure.provenance) {
-      if (!safePath(entry.path) || !pins.some(e => e.path === entry.path && e.expectedSha256 === entry.sha256)) throw new Error('Camera source provenance changed.');
+      if (!safePath(entry.path) || await digest(entry.path) !== entry.sha256) throw new Error('Camera source provenance changed.');
       await source.validatePath(entry.path);
     }
   }

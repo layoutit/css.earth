@@ -4,8 +4,6 @@
     {
       "id": "kepler-452-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1484,
-      "expectedSha256": "d1f2c58e6f5623c3938d271dfe978d58c43b0cc46c4c4db522c438a01bf1e104",
       "origin": "https://arxiv.org/abs/1507.06723",
       "credit": "J. M. Jenkins et al., \"Discovery and Validation of Kepler-452b: A 1.6 R⊕ Super Earth Exoplanet in the Habitable Zone of a G2 Star\", AJ 150, 56 (2015), arXiv:1507.06723",
       "license": "Factual numerical measurements; source attribution retained",
@@ -41,7 +39,7 @@
           {
             "catalogueId": "source-kepler-452-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/kepler-452/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,8 +47,6 @@
     {
       "id": "kepler-452-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2716,
-      "expectedSha256": "027d81568ceac73b310850cdcae749643d2d97b41515b0887117df0e1af940b7",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "kepler-452-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1711,
-      "expectedSha256": "a56d0000d3f9436b4c61e5146d4f592b51e7f85d55cb35d77f1986f3b0e6ba53",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "kepler-452-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "kepler-452-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 105,
-      "expectedSha256": "ad0c4faa9430fa5306b2080082c592e275643c91b5636391d0fa0a292261c91f",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "kepler-452-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 219,
-      "expectedSha256": "388f9f83bcc85256a130a7379b1431b490cf066296295cdb7969d3b40a08b3cc",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -285,8 +273,6 @@
     {
       "id": "stellar-color-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 48368,
-      "expectedSha256": "b57c7776c890bcf2f60f74543d34dd2d4a6d153be77aed3bc219af61c6809b30",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "Photosphere colour from the measured spectrum as a uniform disc; rendered by tools/objects/source-authoring/stellar-spectra/author.mts",
       "license": "Project-authored display derivative.",
@@ -313,42 +299,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3038,
-      "expectedSha256": "d560a91619e937e716a8f77827171d3c83c22266fdb866e4089cdc78c0c879f9",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1702,
-      "expectedSha256": "6cee9e47b746b221e3d31b9a742368f1c3f3d13cc2b0243d962872dd626fc307"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "99242d09376a6c9ff561441dbdd15e2d18c14f0d945233a0278c93dc3b760d08"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 923,
-      "expectedSha256": "a37a585a90a877986339c622f3bfdac7f7ce265b89e1750946b45ffc97979dcf"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4666,
-      "expectedSha256": "a4ca04840d0cf4eaa6c421b36f958684003ef4647d895c69d7e228df384d8faa"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-system.png",
-      "expectedBytes": 462276,
-      "expectedSha256": "da9beb83517172c12b79d4ea4db3899cc09166ec4247c4d45802a219a55d054e",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture of the opened planetary system, cited by the README; declared now that the reference folder holds a pinned input."

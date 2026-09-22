@@ -4,8 +4,6 @@
     {
       "id": "trappist-1h-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1493,
-      "expectedSha256": "b414fca7af9c5c453d69b0a6e03fee6a61f75d7c9ed735165bb6a27270099b1a",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
       "license": "Factual numerical measurements; source attribution retained",
@@ -41,7 +39,7 @@
           {
             "catalogueId": "source-trappist-1h-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/trappist-1h/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,8 +47,6 @@
     {
       "id": "trappist-1h-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2390,
-      "expectedSha256": "ec57190fabecb02d22821b1e5a75b916aeaafd428573f2a64ec0beee2cc3b27b",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, lit by the host star",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "trappist-1h-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1666,
-      "expectedSha256": "66cdda4ed36f2fde58917fb7ba5196afe0cfe7391f74dd432aaa61e1b8a53075",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, lit material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "trappist-1h-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored celestial recipe: astrometric sky registration and the host star as the light",
       "sourceBinding": {
         "kind": "local",
@@ -106,8 +98,6 @@
     {
       "id": "trappist-1h-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 107,
-      "expectedSha256": "7403a0d374f64347374f22923557cc50d122290f80a508d0c8e9aac4f9911216",
       "origin": "Repository-authored presentation profile: composite mode",
       "sourceBinding": {
         "kind": "local",
@@ -124,8 +114,6 @@
     {
       "id": "trappist-1h-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 219,
-      "expectedSha256": "cec6aad2eeb669bf5bd5ea3f89480f38cf52c5f6dfae04a365ffaec6d3cc3b88",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -144,8 +132,6 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-hosted-planet.mts",
       "license": "Project-authored display derivative.",
@@ -168,37 +154,25 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3812,
-      "expectedSha256": "53bd2f3a7be60004c1b2b7d81767808624c238264523df73b662377c7121ed20",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 448,
-      "expectedSha256": "4166899a7e4cc1a337ae1ebe715219d5ec8221ed2c13e608ba6e16b593ef2325"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 863,
-      "expectedSha256": "047ac0e9a197bfe578c64983fcdb1036b1dbe02b55fd0e4d46561a445b31686e"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3643,
-      "expectedSha256": "124e47208352e113ec78d665caa671710159392530baf41738cd068d3bf7e8e5"
+      "path": "presentation/title-mark.json"
     }
   ]
 }

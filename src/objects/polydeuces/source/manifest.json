@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "arxiv-1912-09192",
             "role": "method",
-            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -104,7 +104,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2023-data-1526963400-1527153972-n1527002576-1-calib",
             "role": "material",
-            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -147,7 +147,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2023-data-1526963400-1527153972-n1527002576-1-calib",
             "role": "material",
-            "evidence": "src/planets/polydeuces/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -156,22 +156,16 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4078,
-      "expectedSha256": "d625786fed47ab20a77896e20b576eba1cc1617a4e0c8ba73ab86a10eddac9e1",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63"
+      "path": "material/neutral.png"
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 902,
-      "expectedSha256": "ec7178eadcc0a056d0b56acac3e41a4254b3258559aa60d823e4825fcd988c58"
+      "path": "measurements.json"
     },
     {
       "path": "observations/N1527002576_1.IMG",
@@ -184,54 +178,34 @@
       "expectedSha256": "0de76b3cd905ea76c8100273e8845f8db7313d91c92431e405ad57b21660349d"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1386,
-      "expectedSha256": "65a52c1049e278545602a9b954e7fc2f61e89bae2be8c634bf59ca3bb12e0ceb"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "a984d7d6b9c29ac2a8be6d13c7e19dd2dfe7b56fb2e289654daf96d6759c0f28"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 441,
-      "expectedSha256": "0d5aee87b41eff1a6e6c53ad82fd2d5583fd92abe89d58ad8502c6812a67650b"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3465,
-      "expectedSha256": "8ed54437e598a52ea7e9c6cca128f0b2d05da067ffc2c4bf6a35e2632de1a07c"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5936,
-      "expectedSha256": "23d5f1acedf85a02bfc4132cf21ebdb0e84f6bac62436de3748c9353515a70bd"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "survey/camera.json",
-      "expectedBytes": 841,
-      "expectedSha256": "bab0a8113ddf6442621a18ec4ca0968ef155c721edad6b2a3cce24cee3a98de9"
+      "path": "survey/camera.json"
     },
     {
-      "path": "survey/native-inspection.json",
-      "expectedBytes": 1576,
-      "expectedSha256": "560245b59f65a4c7e7e1149c249d206da08fb7e51393015ebfc669bf6908495d"
+      "path": "survey/native-inspection.json"
     },
     {
-      "path": "survey/opus.json",
-      "expectedBytes": 1213,
-      "expectedSha256": "71b1e934394a09e04ac17c47b972adab9d76f1d1828631793a401cce9a780913"
+      "path": "survey/opus.json"
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1417,
-      "expectedSha256": "593a13ad72eff98c865fccc18fdf03dce3e355c92a9f8bdd4537b49289490297",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -262,9 +236,7 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 75830,
-      "expectedSha256": "a4c9bc4400599ef467d616b260ee76a76222ac603c3211d8619343ac400bb5e2"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

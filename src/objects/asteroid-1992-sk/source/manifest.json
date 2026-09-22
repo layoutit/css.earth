@@ -41,7 +41,7 @@
           {
             "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-shape",
             "role": "material",
-            "evidence": "src/planets/asteroid-1992-sk/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -68,7 +68,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/asteroid-1992-sk/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,7 +103,7 @@
           {
             "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk",
             "role": "method",
-            "evidence": "src/planets/asteroid-1992-sk/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -128,7 +128,7 @@
           {
             "catalogueId": "source-asteroid-1992-sk-asteroid-1992-sk-research-sk-spin-2022",
             "role": "method",
-            "evidence": "src/planets/asteroid-1992-sk/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -144,8 +144,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 32437,
-      "expectedSha256": "1fd6bea0d2922f1cd0d7774425ef6cdbced7ff78536e744ccae25de9c3a4acea",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -164,99 +162,63 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 10564,
-      "expectedSha256": "9e6644bc578f83fed6bceed649615449f269aed5d61d37a457169f6ac3597473",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 972,
-      "expectedSha256": "b60a34667a6f21565fa8329407c9b1efb66e1075c26a1efd4dcef4196c068893"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 453,
-      "expectedSha256": "2196f8b569d68da6e2e7c47885ded70839444e0e2036456a6a88b271975769bf"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1067,
-      "expectedSha256": "54a599021d6f788cdd090f896721ced094e0e2a27478a325979b04bca2cd1756"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2849,
-      "expectedSha256": "050a50d7e4e5f29f6d50f52d307801c235ad0f2db9ec14063e126791f84cf1eb"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4215,
-      "expectedSha256": "05db7726268c2ac4fb38ebf3115e935bad9eb028202ee36612ba90299bd7486e"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7756,
-      "expectedSha256": "f338ed08c1ceb41e5d1412a617b715592d793057ea32bce614850db5a0f1f07b"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1756,
-      "expectedSha256": "b2fafb2e5b53651590973df16f92d8f12c8c07a900a23eb19a1f848bd3b036b9"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 7046,
-      "expectedSha256": "dbe9cb48e999242ba05dec48a90dfed13b6dd472aa70a71c57324dc4b7d2c971"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2042,
-      "expectedSha256": "489f1d245a9867f555a81b1e45934e4b3011896020bba2b9ff6651cb959aec1d"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/pds-a10115_1992sk.xml",
-      "expectedBytes": 10498,
-      "expectedSha256": "4d34e1414d5967dddcfe1ec0cb9a41fb21979c7cee84fef3ac865409502f57e4"
+      "path": "reference/pds-a10115_1992sk.xml"
     },
     {
-      "path": "reference/pds-a10115_spin_state.csv",
-      "expectedBytes": 59,
-      "expectedSha256": "15b92e611bcb38cc70023f881e9d06bddb3323a2fda532324013acc50fe6982f"
+      "path": "reference/pds-a10115_spin_state.csv"
     },
     {
-      "path": "reference/pds-a10115_spin_state.xml",
-      "expectedBytes": 10589,
-      "expectedSha256": "760fe679856e426ac44fd2f383696fccbf1e3abdb97c2bf347b52bf3cd48368a"
+      "path": "reference/pds-a10115_spin_state.xml"
     },
     {
-      "path": "reference/pds-bundle_description.txt",
-      "expectedBytes": 7530,
-      "expectedSha256": "e60fe2bc0a6364689d1cf4e8b467e808dec7177a23d2f0bb26e62dada8f052ef"
+      "path": "reference/pds-bundle_description.txt"
     },
     {
       "path": "reference/scalar-anchors.json",
-      "purpose": "Independent NumPy source-surface scalar anchors; measured against every original triangle.",
-      "expectedBytes": 8378,
-      "expectedSha256": "e2b830c74b49eb8553cc16db1b36524b594dc6b628c2d35c9cbf9765071e8c0c"
+      "purpose": "Independent NumPy source-surface scalar anchors; measured against every original triangle."
     },
     {
       "path": "reference/pds-mesh-comparison.json",
-      "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart.",
-      "expectedBytes": 169,
-      "expectedSha256": "6110d922a3f9dccefc720c4dc109d11a481f2ddfae249e7c538adcc053f5a3c3"
+      "purpose": "Independent parsed-coordinate and connectivity comparison with the PDS archive counterpart."
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4800,
-      "expectedSha256": "6a42a37fbbcd4ba037c054065bf7ae65288ea5639abfa2bfe1dbeff5eb8da210",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

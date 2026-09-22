@@ -18,7 +18,7 @@ const matching = shape({patchRadius:number,searchRadius:number,gridStride:number
 const transfer = shape({maximumSourceDistanceMeters:number,maximumSeparationMeters:number,visibilityToleranceMeters:number,maximumEmissionDegrees:number});
 const parseRecipe = shape({schema:text,shapeSha256:text,bodyId:number,target:optional(text),kernels:array(text),margin:number,maximumRmsPixels:number,maximumResidualPixels:number,transfer,
   frames:array(shape({image:text,label:text,referenceImage:text,referenceCamera:text,output:text,matching}))});
-const parseManifest = shape({inputs:array(shape({path:text,expectedBytes:number,expectedSha256:text}))});
+const parseManifest = shape({inputs:array(shape({path:text,expectedBytes:optional(number),expectedSha256:optional(text)}))});
 const parseGeometry = shape({geometry:shape({radialTerrain:shape({path:text,grid:parseMeshProfile})})});
 
 const json = async(path:string):Promise<unknown> => JSON.parse(await readFile(path,'utf8'));
@@ -30,7 +30,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
   const pinned=async(path:string) => {
     assert.ok(!path.startsWith('/')&&!path.split('/').includes('..'));
     const pin=manifest.inputs.find(p=>p.path===path); assert.ok(pin,`Missing pin: ${path}`);
-    const bytes=await readFile(resolve(source,path)); assert.equal(bytes.length,pin.expectedBytes,path); assert.equal(sha256(bytes),pin.expectedSha256,path); return bytes;
+    const bytes=await readFile(resolve(source,path)); if(pin.expectedSha256!==undefined){assert.equal(bytes.length,pin.expectedBytes,path); assert.equal(sha256(bytes),pin.expectedSha256,path);} return bytes;
   };
   const recipePath='preparation/llorri-overlap.json',recipe=parseRecipe(JSON.parse((await pinned(recipePath)).toString('utf8')));
   assert.equal(recipe.schema,'cssearth-llorri-overlap@1');
@@ -81,7 +81,7 @@ export async function prepareLlorriOverlap(sourceDirectory:string, write=false) 
     const bytes=Buffer.from(JSON.stringify(result,null,2)+'\n');
     if(write) {
       await writeFile(resolve(source,entry.output),bytes);
-      const pin=manifest.inputs.find(p=>p.path===entry.output);assert.ok(pin); pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);
+      const pin=manifest.inputs.find(p=>p.path===entry.output);assert.ok(pin); if(pin.expectedSha256!==undefined){pin.expectedBytes=bytes.length;pin.expectedSha256=sha256(bytes);}
     } else assert.equal((await pinned(entry.output)).toString('utf8'),bytes.toString('utf8'),`Camera not reproducible: ${entry.output}`);
     reports.push({image:entry.image,offsetPixels:match.offsetPixels,stats});
   }

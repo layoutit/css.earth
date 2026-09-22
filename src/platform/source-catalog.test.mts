@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { parseSourceCatalog, sourceResolver, parseSourceBinding, parseSourceCitation } from './source-catalog.mts';
 const record = (id = 'work') => ({id,title:'Published work',kind:'data-product',identityLevel:'work',identifiers:[],links:[{role:'landing',url:'https://example.org/product',label:'Provider'}],
-  evidence:[{path:'source/record.json',revision:'a'.repeat(40),sha256:'b'.repeat(64),locator:'/product'}],relations:[],statements:[]});
+  evidence:[{path:'source/record.json',locator:'/product'}],relations:[],statements:[]});
 const catalog = () => ({schema:'cssearth-source-catalog@1',records:[record()]});
 test('canonical identity, releases and claim-local citations remain distinct', () => {
   const c = parseSourceCatalog({...catalog(),records:[record(),{...record('release'),identityLevel:'release',version:'2',relations:[{kind:'version-of',catalogueId:'work',evidence:'Provider release statement'}]}]});

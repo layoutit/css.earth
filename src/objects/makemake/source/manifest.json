@@ -20,7 +20,7 @@
           {
             "catalogueId": "source-makemake-nasa-makemake-size",
             "role": "material",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           },
           {
             "catalogueId": "hromakina-2019-makemake",
@@ -168,7 +168,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/makemake/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -176,8 +176,6 @@
     {
       "id": "makemake-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 208,
-      "expectedSha256": "bd2bc531f2c34808920774b3c40b228a76ce62a72a3a7e6cc1e3518891b63517",
       "origin": "Repository-authored Makemake solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -197,8 +195,6 @@
     {
       "id": "makemake-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2718,
-      "expectedSha256": "33da6a34827806221b45783bf74b8a1f4ffdde5076ceae7e706ce12484b24582",
       "origin": "Repository-authored Makemake raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -216,8 +212,6 @@
     {
       "id": "makemake-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1611,
-      "expectedSha256": "0619cf2990aba74e2af6bd3ca12693e8a7391bcfec5ab025dd22a0a03af790ed",
       "origin": "Repository-authored Makemake geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -235,8 +229,6 @@
     {
       "id": "makemake-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Makemake celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -255,8 +247,6 @@
     {
       "id": "makemake-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 104,
-      "expectedSha256": "b000947f608a7b4be5d513987c4a17b1a3a354e74007522a10454396b8fe4c9b",
       "origin": "Repository-authored Makemake presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -273,8 +263,6 @@
     {
       "id": "makemake-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 389,
-      "expectedSha256": "9b977c96e2e15ac7126825f49d4c6a2bb60c2911aec24fce6861fb4bf4ea4f30",
       "origin": "Repository-authored Makemake navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -291,8 +279,6 @@
     {
       "id": "makemake-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 294,
-      "expectedSha256": "2c63113739abbfb89e513b065c3f25fca9a31a79471b0f74922764fa69f93f2e",
       "origin": "Repository-authored Makemake acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -310,8 +296,6 @@
     {
       "id": "makemake-preparation-rotation",
       "path": "preparation/rotation.json",
-      "expectedBytes": 391,
-      "expectedSha256": "7de294c96ac9f9914b71cd6aef7bc3b4e3de750016d61b5c085ff36ac0d79644",
       "origin": "Repository-authored Makemake rotation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -328,8 +312,6 @@
     {
       "id": "makemake-object-content",
       "path": "content/object.json",
-      "expectedBytes": 10448,
-      "expectedSha256": "63a5f14f0e85899f07b20ff053f448bd0e3baefbd1519c7f81a46f6ec3998193",
       "origin": "Repository-authored Makemake object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -348,16 +330,12 @@
   "documents": [
     {
       "path": "presentation/navigation-marker.svg",
-      "expectedBytes": 137,
-      "expectedSha256": "64bbd76cef2b4f01d7574331cbdc90827ca3413632107eae7b0023bb23877f04",
       "id": "makemake-schematic-marker",
       "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
       "credit": "cssEarth schematic; fill is the measured whole-disc colour",
       "license": "MIT, cssEarth authored schematic"
     },
     {
-      "expectedBytes": 304417,
-      "expectedSha256": "b294ca41fa5cf460d0e1dc3b6013a84757c66c106893bacc1c8e4aeb583da471",
       "path": "reference/rendered-default-view.png",
       "sourceBinding": {
         "kind": "local",
@@ -366,8 +344,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3255,
-      "expectedSha256": "96109a6a97f9b0c41e89326aca24f7ad4af11a7da104b7c2702bf420e93fc01c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -32,7 +32,7 @@
           {
             "catalogueId": "damit-shape-10219",
             "role": "material",
-            "evidence": "src/planets/aglaja/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -59,7 +59,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/aglaja/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -75,8 +75,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 34155,
-      "expectedSha256": "40b3a6ac5e0ffdfc2f29beecec051cc34c2b987d3061bc71e1163ccaed2b8b14",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -95,47 +93,31 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9856,
-      "expectedSha256": "e32173d79e06dae9d87d0b163df54e87f0dc0cb1b7674fcacf81771fe7be6e0f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 803,
-      "expectedSha256": "04c9a847ba125ff282667e976f6cb14907b281bfed333676f49288ea1b179732"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 443,
-      "expectedSha256": "cf2aeeed20a7714e29b79dc5911c12d88b89bc43979fa002624aec92e80dc65b"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 597,
-      "expectedSha256": "ae61fce538ae16f214a3224dffd7c45b44e2e61fa8d4777fafb0b93442c78dce"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2898,
-      "expectedSha256": "9ef7cd92d80e8c5572a8bac9b47d3d508b19bda46280b3149e6650ec213273fc"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4200,
-      "expectedSha256": "0b717ebc98acebabfdcae319223790e7628478f43b9984533980ae86ce9208a8"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/3233-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "aa2be1b5a933b539322761fe4fba0591a69bd2b280f7722a2ec1a4d1be9fe0df"
+      "path": "reference/3233-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -143,38 +125,26 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 2239,
-      "expectedSha256": "e12735bdffd83f4d9f939e5758fa9b9a4895e444a752b48370cefa2a149e0f67"
+      "path": "reference/calibration.json"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 5416,
-      "expectedSha256": "3fefc0aa117fe3d75e956707de5a39f690f10d15f5672fa16fb3e4c95d4d059d",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3233",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7353,
-      "expectedSha256": "798d80c9c458c8bff205cc8fdbf2a718e4709f8cfa7a03de0d9ccfa26713e16c"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6643,
-      "expectedSha256": "10795f8b65b1129dc50c364871064718c85a20c5682f72b8a47ed1e660e44c99"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 4567,
-      "expectedSha256": "d5cd0c5bdb161e5f181d988912a35a7304d7472de136f9f280a709749249d2a4"
+      "path": "reference/model-properties.json"
     }
   ]
 }

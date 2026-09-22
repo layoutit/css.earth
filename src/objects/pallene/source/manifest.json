@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/pallene/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -59,7 +59,7 @@
           {
             "catalogueId": "doi-10-1016-j-icarus-2013-07-022",
             "role": "method",
-            "evidence": "src/planets/pallene/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -107,7 +107,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2012-data-1496877151-1496974774-n1496910582-1-calib",
             "role": "material",
-            "evidence": "src/planets/pallene/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -150,7 +150,7 @@
           {
             "catalogueId": "pds-resource-holdings-calibrated-coiss-2xxx-coiss-2012-data-1496877151-1496974774-n1496910582-1-calib",
             "role": "material",
-            "evidence": "src/planets/pallene/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -159,8 +159,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 4416,
-      "expectedSha256": "708341c0c9bd48c430cba51c8682c77b1a8df77c9fa6e862c9c8d64fb8ca0c36",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -212,9 +210,7 @@
       "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 879,
-      "expectedSha256": "27ba9b9042f0037815795ffcfdd9cff0ea442bdf3bd39a77023e7a7a4cfed93c"
+      "path": "measurements.json"
     },
     {
       "path": "observations/N1496910582_1.IMG",
@@ -247,165 +243,101 @@
       "expectedSha256": "ad9c86e876d841f94012beaefbbe871bf97760d96b66b34001113b0e8cba10e5"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 4356,
-      "expectedSha256": "9260a68843f1562252aa002efe377525c9fa93939bcbfc570d7e476d6338d1d9"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "9b9d6ef0ac7d69ff3a6ff84e0e6fac79fa2be94f1ed348cac59c1579b53da4bc"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 709,
-      "expectedSha256": "3105cd84de33cb0d0e9c89cc0d26b526c5cc027f09f57abe644f4f369e07bcee"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 3541,
-      "expectedSha256": "37fedf9279998ef2abc7b83080b29e2d53a646d216a3ac2dc177ffb9ec469200"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3741,
-      "expectedSha256": "71a18da5f3d889201726239f4813046927483c77ff53c504149ee610f51f20fd"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "survey/2011-trial.json",
-      "expectedBytes": 864,
-      "expectedSha256": "352604377aebd0f9b54d2daa1d9bc1006c07d5d5898295f3baac2c7c24181e55"
+      "path": "survey/2011-trial.json"
     },
     {
-      "path": "survey/2011-two-pixel-inset.json",
-      "expectedBytes": 601,
-      "expectedSha256": "3a3999356e66675a7d305aed319c707b90f7bc256348e149f994c5addd7b438b"
+      "path": "survey/2011-two-pixel-inset.json"
     },
     {
-      "path": "survey/N1665947247_1_CALIB.LBL",
-      "expectedBytes": 3853,
-      "expectedSha256": "ad9c86e876d841f94012beaefbbe871bf97760d96b66b34001113b0e8cba10e5"
+      "path": "survey/N1665947247_1_CALIB.LBL"
     },
     {
-      "path": "survey/N1694657087-metadata.json",
-      "expectedBytes": 12017,
-      "expectedSha256": "80d458c7ff4f463650afb7205c79adf095eb86cf98200535ac5da9decf18976c"
+      "path": "survey/N1694657087-metadata.json"
     },
     {
-      "path": "survey/N1694657087_CALIB.LBL",
-      "expectedBytes": 3857,
-      "expectedSha256": "30dfd6c9006c036b89a386e6ced1e9d64a5476e56d96b67025794ea4f91df0c2"
+      "path": "survey/N1694657087_CALIB.LBL"
     },
     {
-      "path": "survey/N1694661188_1_CALIB.LBL",
-      "expectedBytes": 3858,
-      "expectedSha256": "e6e03c57970473748ce28a94fa743ae73a43915161795648a8e5536b1d672628"
+      "path": "survey/N1694661188_1_CALIB.LBL"
     },
     {
-      "path": "survey/camera-fit-0.08.json",
-      "expectedBytes": 404,
-      "expectedSha256": "c4b64c483a2422b3f77a4a4cd99fabec2ceec14e129e1c99b8426aa671f5392a"
+      "path": "survey/camera-fit-0.08.json"
     },
     {
-      "path": "survey/camera-fit-0.12.json",
-      "expectedBytes": 405,
-      "expectedSha256": "61964398b54d3b0456c11164859b8a9765b1b91bfee22bdb716ae2833fcb5d7c"
+      "path": "survey/camera-fit-0.12.json"
     },
     {
-      "path": "survey/camera-fit-0.16.json",
-      "expectedBytes": 406,
-      "expectedSha256": "4bbde6f449a234807ee3bda54934e631a337baa1376a68aa92ca77215215627d"
+      "path": "survey/camera-fit-0.16.json"
     },
     {
-      "path": "survey/camera-fit-0.2.json",
-      "expectedBytes": 405,
-      "expectedSha256": "216081a6a5a4dc3b7f4bcb0efb67a014c694fd356a1c2e0b5798a81089f2c752"
+      "path": "survey/camera-fit-0.2.json"
     },
     {
-      "path": "survey/camera-fit-2010.json",
-      "expectedBytes": 407,
-      "expectedSha256": "b67f6c13a4f8539fed21de684ce480f45343fd0343ceabe2c27bf442bf208aca"
+      "path": "survey/camera-fit-2010.json"
     },
     {
-      "path": "survey/camera-fit-2011-0.012.json",
-      "expectedBytes": 407,
-      "expectedSha256": "3269948b1438420e87875394054b3ccc1bb8167c1dbf6eee4396426067a312af"
+      "path": "survey/camera-fit-2011-0.012.json"
     },
     {
-      "path": "survey/n1496910582-camera.json",
-      "expectedBytes": 709,
-      "expectedSha256": "f95a89cf3a01eba104b327d0925da172a8a30af6510cfd1a1ef2f0d3131204bc"
+      "path": "survey/n1496910582-camera.json"
     },
     {
-      "path": "survey/n1496910582-files.json",
-      "expectedBytes": 8509,
-      "expectedSha256": "9f2c4cb93a8448c687cb60c6e14a5e4fccdeb71137c178a7d0f9c4e22a47ce4b"
+      "path": "survey/n1496910582-files.json"
     },
     {
-      "path": "survey/n1496910582-metadata.json",
-      "expectedBytes": 12061,
-      "expectedSha256": "db4ee0ca408fbcab5b5d946f225aa94103b5842cef8fa0b62cbf8c78e19e9071"
+      "path": "survey/n1496910582-metadata.json"
     },
     {
-      "path": "survey/n1665947247-camera.json",
-      "expectedBytes": 708,
-      "expectedSha256": "741bdfacb468442061f295a76932b7c246e46bc4690f0c039c369a9cbbac5b10"
+      "path": "survey/n1665947247-camera.json"
     },
     {
-      "path": "survey/n1665947247-files.json",
-      "expectedBytes": 8511,
-      "expectedSha256": "7848d59f0c6b2eb04a048f0a2c9e7581644a76f097958059bdaedac74dbc7514"
+      "path": "survey/n1665947247-files.json"
     },
     {
-      "path": "survey/n1665947247-metadata.json",
-      "expectedBytes": 12096,
-      "expectedSha256": "6fdd271e810de0ef3dc65e4eca5c85dedeb9ae75797ce2d3f12695f1ba99d979"
+      "path": "survey/n1665947247-metadata.json"
     },
     {
-      "path": "survey/n1694661188-camera.json",
-      "expectedBytes": 710,
-      "expectedSha256": "796debb0c3e39c11078cfa560a0b2e9b4d56380543272526dfb980e39cceee86"
+      "path": "survey/n1694661188-camera.json"
     },
     {
-      "path": "survey/n1694661188-metadata.json",
-      "expectedBytes": 12088,
-      "expectedSha256": "fd37f56dccc4d2cf578f55bc8c00c70c4714a1c83f6cae32a2d3f2ba46a28e94"
+      "path": "survey/n1694661188-metadata.json"
     },
     {
-      "path": "survey/observed-pole.json",
-      "expectedBytes": 431,
-      "expectedSha256": "9db95de52fa3c7721c8b589b1534d06e984eacfcc9da74cfbede22b0ba8c8b5a"
+      "path": "survey/observed-pole.json"
     },
     {
-      "path": "survey/opus-resolved.json",
-      "expectedBytes": 3271,
-      "expectedSha256": "a218fafb44f146cb86a9cbe54737d542cfc6c6455f7ba2df33d8997343536f08"
+      "path": "survey/opus-resolved.json"
     },
     {
-      "path": "survey/qualification.json",
-      "expectedBytes": 5348,
-      "expectedSha256": "1d6fe0023a3d49a64ef7fb509692ee6c9705ce6c7237bda39eb957d6ca6a85ac"
+      "path": "survey/qualification.json"
     },
     {
-      "path": "survey/radial-error.json",
-      "expectedBytes": 300,
-      "expectedSha256": "27ffbc964efd12edd5a301b54cb593e5e8f7ed3e5d2447cb382d45d8600da4b1"
+      "path": "survey/radial-error.json"
     },
     {
       "path": "survey/registration-attempt-2026-09-10.json",
-      "expectedBytes": 1743,
-      "expectedSha256": "ceb946de0fdbc3a5751106493e5737379271b0f2424c72b66e0edf069a406a90",
       "purpose": "Direct source-level check of whether the selected Pallene image contains an independent surface control suitable for image-to-shape registration."
     },
     {
       "path": "editorial/factsheet-review.json",
-      "expectedBytes": 1407,
-      "expectedSha256": "c61e02fca51303ef5ae0cd91fcbbda6a3445fef21de942fb310c93f26dc5793d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-recorded source review rows for factsheet citations."
@@ -436,9 +368,7 @@
         "diffuse": 0.55,
         "lensId": "normal"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 68759,
-      "expectedSha256": "51bb500fe134d11f05b95a411188df06143b8fb108ed8ae66d416f99f1956583"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

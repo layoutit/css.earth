@@ -59,7 +59,7 @@
           {
             "catalogueId": "source-ariel-schenk-2020-ariel-normal",
             "role": "material",
-            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -121,7 +121,7 @@
           {
             "catalogueId": "source-ariel-schenk-2020-ariel-elevation",
             "role": "material",
-            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -148,7 +148,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -180,8 +180,6 @@
     {
       "id": "ariel-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1000,
-      "expectedSha256": "c3d77603c5fa77cff3567e76151f8c8d320f2b328f1af08c3dcd16668ee77d73",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -198,8 +196,6 @@
     {
       "id": "ariel-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1104,
-      "expectedSha256": "db1a314e74729c0dcfe0ea988dabad695075d2f19ede28a7e2aee26af9eda441",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -216,8 +212,6 @@
     {
       "id": "ariel-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 186,
-      "expectedSha256": "45de784f4080171cffa9306cc6a172cc0d9c6306ae87b2565176080c26fd508b",
       "origin": "Repository-authored map axes for the prepared body mesh: the shared mesh convention of the raster lanes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -253,7 +247,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ariel/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -261,8 +255,6 @@
     {
       "id": "ariel-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 204,
-      "expectedSha256": "737dfecc7d7c17d46fd511d2730916553450e29ae0e81b82e8dfcf1a46f874b6",
       "origin": "Repository-authored Ariel solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -282,8 +274,6 @@
     {
       "id": "ariel-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 4787,
-      "expectedSha256": "6f60227965750c71b8718e3cc03ea13c25b6f8e3d9dc20740ec382da425ffd89",
       "origin": "Repository-authored Ariel raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -301,8 +291,6 @@
     {
       "id": "ariel-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1591,
-      "expectedSha256": "142f44d808d872044ba78202dcca27b205f532cb4a05f3ada71d6a36ad51d750",
       "origin": "Repository-authored Ariel geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -320,8 +308,6 @@
     {
       "id": "ariel-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Ariel celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -340,8 +326,6 @@
     {
       "id": "ariel-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 101,
-      "expectedSha256": "1ee353b0d92170be9865cd4437945232eec6ab57178b5063eed3e1c557152022",
       "origin": "Repository-authored Ariel presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -358,8 +342,6 @@
     {
       "id": "ariel-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 1342,
-      "expectedSha256": "545815996d662d758fa3c42e005a0c7608e9c8fb23f909ee1c1b4a00fe8f868f",
       "origin": "Repository-authored Ariel navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -376,8 +358,6 @@
     {
       "id": "ariel-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 1135,
-      "expectedSha256": "7b0795b4488c591469dc7f50d95cfb284f06d50995a5233175d6f1aa803bff9d",
       "origin": "Repository-authored Ariel acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -395,8 +375,6 @@
     {
       "id": "ariel-object-content",
       "path": "content/object.json",
-      "expectedBytes": 7773,
-      "expectedSha256": "4ec5efcd0ae7bd3cc20398f11c031907ba936ee2bc67bcdb5ae6d075a5d05d27",
       "origin": "Repository-authored Ariel object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -415,27 +393,19 @@
   "generatedIntermediates": [],
   "documents": [
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "observations/aaReadMe_uranian_MAP_DEM.txt",
-      "expectedBytes": 2426,
-      "expectedSha256": "655661b4e4d5f5ada71d7b4b797afffefc2e908ae63b51d9d1fe3fca964d51a3"
+      "path": "observations/aaReadMe_uranian_MAP_DEM.txt"
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2308,
-      "expectedSha256": "f1e41fbaa58389c9d4e4d0ff4fdb42d740c15e0acdfb3e1fc60216712264f69a"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "ariel-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 2600,
-      "expectedSha256": "aa8ea37a21b17f98d4a0c4603d4e9c487295f3e51d6a7b2d85e2cea2cd14b7d5",
       "origin": "Repository-pinned English Wikipedia lead summaries for 5 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",

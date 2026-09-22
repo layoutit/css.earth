@@ -20,7 +20,7 @@
           {
             "catalogueId": "doi-10-1038-nature24051",
             "role": "method",
-            "evidence": "src/planets/haumea/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -171,7 +171,7 @@
           {
             "catalogueId": "source-haumea-alma-image-july-2023",
             "role": "material",
-            "evidence": "src/objects/haumea/source/manifest.json@12a0eb6e2711580c710f2b39eb977a7bf09ee6cd#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -180,8 +180,6 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 6807,
-      "expectedSha256": "3369f0823fe98f7da7577bd67416a049906b604c775d05709593b3872897d2ba",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
@@ -189,8 +187,6 @@
     },
     {
       "path": "content/charts.json",
-      "expectedBytes": 210,
-      "expectedSha256": "12c2bb55c22d9e02158eb80a710f04966d97bc138633fc1e6260b350c558acdb",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored pointer from the shared content step to the telescope-image gallery."
@@ -198,42 +194,28 @@
     },
     {
       "path": "alma/gallery.json",
-      "expectedBytes": 1878,
-      "expectedSha256": "12d6b337c0bc9348daee1419450c4454e2b9e5b38f8bbbc17de1a12cc40725e8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored gallery record: the pixel window, grey range, enlargement and reader text of the ALMA picture."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 623,
-      "expectedSha256": "23c46219264b269d24fbfc9471f7d995822933104b90924cb785e4f3f3aeda31"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 417,
-      "expectedSha256": "1a8dea075c8f33eddda26b738ebfaf449b48a538a75b2fcdf73e50b20762dd83"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/shape-model.json",
-      "expectedBytes": 1433,
-      "expectedSha256": "ffb01ca8a6488d4f1d0b60e7b0f8b32a1c76051bb1b3ede8ac67e8e8ee57e50d"
+      "path": "preparation/shape-model.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4414,
-      "expectedSha256": "1f635c92818e5ff839af6a183994e5f1ea75c77031f1198ad29b00059190de5e"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 387,
-      "expectedSha256": "1b5c91ed4056ceeaa542c9c1d9b16835564052714db1239fa10b8cafe5c8cc6f"
+      "path": "preparation/navigation.json"
     },
     {
       "path": "presentation/navigation-marker.svg",
-      "expectedBytes": 127,
-      "expectedSha256": "e9daecf9471089082ec1a3463283ece2f3315d6c3c25b09f6eb51dcd38f9876e",
       "id": "haumea-shape-marker",
       "origin": "https://doi.org/10.1038/nature24051",
       "credit": "cssEarth schematic using Ortiz et al. (2017) semiaxis ratio",
@@ -242,32 +224,24 @@
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://science.nasa.gov/dwarf-planets/haumea/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 272,
-      "expectedSha256": "10122d07da9668df1bea395c8b5f4db9e76e66c34451a92767c5989ff523c1a1"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "path": "reference/rendered-default-view.jpg",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /haumea/ with the default camera and Color lens, Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-16 after preparation."
-      },
-      "expectedBytes": 95850,
-      "expectedSha256": "816be54f9c2fd31c66471ada80dec5922c15c6ea267b14d37c0b72e45fa61b29"
+      }
     },
     {
       "path": "reference/rendered-telescope-images.jpg",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /haumea/ with the Telescope images section opened, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide, JPEG quality 90), taken 2026-09-19 after preparation at commit 12a0eb6e27."
-      },
-      "expectedBytes": 150434,
-      "expectedSha256": "c3cda702263bb6d85fa213779294394c4617a31cc6880cebb0293b158d4fd2b9"
+      }
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4594,
-      "expectedSha256": "811890fe816dd7f4974caf416e112b764ce27b8b5a0668075b4c85ff2ea58d51",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/asteroid-2001-sn263/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -68,7 +68,7 @@
           {
             "catalogueId": "source-asteroid-2001-sn263-radar-shape",
             "role": "material",
-            "evidence": "src/planets/asteroid-2001-sn263/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -96,125 +96,79 @@
         "ambient": 0.45,
         "diffuse": 0.55,
         "lensId": "shape"
-      },
-      "expectedBytes": 41951,
-      "expectedSha256": "b514f8d4b707d337f994b0c0245fe525d9eef43a588b1a3baefd3e3cedd0ea9c"
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3356,
-      "expectedSha256": "5a810a3d2f825e8b40595b89724cdd28cf7d3bb23c6ff57f6815ae5c7d95af93",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1170,
-      "expectedSha256": "1ea19937a26b6c6142b1d75d0ba968ee6ddea6e5628aa85bc6883acccd46019d"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/heliocentric-elements.txt",
-      "expectedBytes": 7056,
-      "expectedSha256": "19173391b55d7fd244e4bf59648a2f51f4e3c24926f8e6d8bc66dd1022de1edc"
+      "path": "orbit/heliocentric-elements.txt"
     },
     {
-      "path": "orbit/heliocentric-vectors.txt",
-      "expectedBytes": 6343,
-      "expectedSha256": "2557db5240bd35609e006a78c8236dc0956972b6717260582466df30b15de837"
+      "path": "orbit/heliocentric-vectors.txt"
     },
     {
-      "path": "orbit/parent-heliocentric.txt",
-      "expectedBytes": 8527,
-      "expectedSha256": "dc7498210ab08f4123ae3a3ebcfcea42ebd8655b0819a187b39bbd31a168dcb8"
+      "path": "orbit/parent-heliocentric.txt"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 580,
-      "expectedSha256": "25253eb5eb5d25ba3cda5fa039b0a746d8c4d6bcfb401590ee8d3dfc9df74411"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 456,
-      "expectedSha256": "dd581a288bc6d2d996d56e7014766c9d581f34cd43310661806b95e1bc0d57de"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/photometry.json",
-      "expectedBytes": 422,
-      "expectedSha256": "cb0f8c9076100a817cc61c276ef8ccf7faffb64f19934013824d605b9194f90f"
+      "path": "preparation/photometry.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 530,
-      "expectedSha256": "461a40761ba4ecde4a5dd1a899d99bc2e8b031a69e3ae62d96c2664624d4448d"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2041,
-      "expectedSha256": "e7106747aa9210fa7e740a6a3b22e2759c80ca6fb8baa6e62b0f30ce4b5cf635"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 8665,
-      "expectedSha256": "ac3d9c671712c2451e8815e04d3a425239aa0d73a161e2715680c47c04ff0447"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/a153591alpha.xml",
-      "expectedBytes": 29592,
-      "expectedSha256": "635e3781b863cd6e97a5f958c1660d11d8ce672b5b1e1f967e7cefa7a6cffc2e"
+      "path": "reference/a153591alpha.xml"
     },
     {
-      "path": "reference/a153591alpha_unseen.tab",
-      "expectedBytes": 576,
-      "expectedSha256": "b58a8d6842690ad0c3f1a4df7cd4cd69fe56df59f13fc3daad08436acdb3fd0d"
+      "path": "reference/a153591alpha_unseen.tab"
     },
     {
-      "path": "reference/a153591alpha_unseen.xml",
-      "expectedBytes": 20997,
-      "expectedSha256": "b9ddea178f4fa42684d9157888485a0abff0d98038a2c5697c1485b3769aa3dc"
+      "path": "reference/a153591alpha_unseen.xml"
     },
     {
-      "path": "reference/a153591pole.tab",
-      "expectedBytes": 84,
-      "expectedSha256": "351db44d8b38b61f83d3331af12ef539d4b46f1c1cefb2c56f5071d505356776"
+      "path": "reference/a153591pole.tab"
     },
     {
-      "path": "reference/a153591pole.xml",
-      "expectedBytes": 22479,
-      "expectedSha256": "3704ead299350319f5a2ff41cb7bb7f7ecbe828521d9387bf88edb59fe0b1eb3"
+      "path": "reference/a153591pole.xml"
     },
     {
-      "path": "reference/a153591rot.tab",
-      "expectedBytes": 114,
-      "expectedSha256": "f0b3b3ebd457a001a4de0019a440c50777672bcc9389f59aa8930ae98c886cd8"
+      "path": "reference/a153591rot.tab"
     },
     {
-      "path": "reference/a153591rot.xml",
-      "expectedBytes": 21828,
-      "expectedSha256": "a41a80203fe71a9dca9ee80c87d989892b1b64eebe4e63bff644998c85512239"
+      "path": "reference/a153591rot.xml"
     },
     {
-      "path": "reference/archive-readme.txt",
-      "expectedBytes": 3941,
-      "expectedSha256": "cf69ba80b23c703c3e56efc465c4ca80b37abdbbdc1f7f01529301e26a0d5bdb"
+      "path": "reference/archive-readme.txt"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 3482,
-      "expectedSha256": "c2916adf2a5cce3a484968e15cd04289147a98357d377815f9a8c5b23367f573"
+      "path": "validation/epoch-state.json"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 2991,
-      "expectedSha256": "19bf5d26cb75f18f37bd3231e725005c3c526b463ed7be044e8c036b5222c4b5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

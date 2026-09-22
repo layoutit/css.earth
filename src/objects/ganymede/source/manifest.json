@@ -65,7 +65,7 @@
           {
             "catalogueId": "source-ganymede-usgs-voyager-galileo-mono",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -133,7 +133,7 @@
           {
             "catalogueId": "source-ganymede-usgs-voyager-galileo-color",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -160,7 +160,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -168,8 +168,6 @@
     {
       "id": "ganymede-surface-minimap-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 189,
-      "expectedSha256": "213c3755aebd880b38acea124fc382efba1cb65ace7ad4ff0dd077c173693876",
       "origin": "Repository-authored mapping between the existing prepared surface texture and body presentation axes",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation metadata",
@@ -208,7 +206,7 @@
           {
             "catalogueId": "source-ganymede-usgs-sim3237-geologyunits-dbf",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -236,7 +234,7 @@
           {
             "catalogueId": "source-ganymede-usgs-sim3237-geologyunits-prj",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -282,7 +280,7 @@
           {
             "catalogueId": "source-ganymede-usgs-sim3237-geologic-units",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -320,7 +318,7 @@
           {
             "catalogueId": "source-ganymede-ganymede-muse-original-577-3nm-band-1",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -358,7 +356,7 @@
           {
             "catalogueId": "source-ganymede-ganymede-muse-original-577-3nm-band-2",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -396,7 +394,7 @@
           {
             "catalogueId": "source-ganymede-ganymede-muse-original-577-3nm-band-3",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -454,7 +452,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -512,7 +510,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -570,7 +568,7 @@
           {
             "catalogueId": "doi-10-5281-zenodo-11402374",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -600,7 +598,7 @@
           {
             "catalogueId": "source-ganymede-usgs-gazetteer-nomenclature-center-pts",
             "role": "material",
-            "evidence": "src/planets/ganymede/source/features/manifest.json@01bd7bd566517f8b80cc21bd138e7f5901bca24e#/inputs/0"
+            "evidence": "src/objects/ganymede/source/features/manifest.json#/inputs/0"
           }
         ]
       }
@@ -608,8 +606,6 @@
     {
       "id": "ganymede-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1015,
-      "expectedSha256": "aa68afb9c4bf6afd5099ffabc503b92228a890bef38c59646986e4d430cbaac6",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -626,8 +622,6 @@
     {
       "id": "ganymede-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1163,
-      "expectedSha256": "ef8db9880fad391feb11463e1e7f5a0e20d79a7567a32f85850e67dd61d50154",
       "origin": "Repository-authored surface feature recipe: archive members, map longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -663,7 +657,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/ganymede/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -671,8 +665,6 @@
     {
       "id": "ganymede-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 211,
-      "expectedSha256": "a2bc864d2db5e6719c87c7348415fd817ba19efa452e28098c6955228aa498cd",
       "origin": "Repository-authored Ganymede solar-system recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -692,8 +684,6 @@
     {
       "id": "ganymede-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 10988,
-      "expectedSha256": "e27869b3bb82ed1abe6b13f58cf11dd7d6308866130f072ddea21183bc2ced9d",
       "origin": "Repository-authored Ganymede raster recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -711,8 +701,6 @@
     {
       "id": "ganymede-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1614,
-      "expectedSha256": "e8ba45ad028229c1c1c4cedbf7b21895f3d1367bcb3e675c5620c075f5295929",
       "origin": "Repository-authored Ganymede geometry recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -730,8 +718,6 @@
     {
       "id": "ganymede-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 108,
-      "expectedSha256": "bae3a5a805f60786025e0e806420d72d04f1f5f9e6a1411fbedda23209b564a8",
       "origin": "Repository-authored Ganymede celestial recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -750,8 +736,6 @@
     {
       "id": "ganymede-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 235,
-      "expectedSha256": "24cb6f3b2e1d8f21a0d14f86b3f8fb2aa86f194e6a8559267e3829a2e6f7a406",
       "origin": "Repository-authored Ganymede presentation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -768,8 +752,6 @@
     {
       "id": "ganymede-preparation-navigation",
       "path": "preparation/navigation.json",
-      "expectedBytes": 400,
-      "expectedSha256": "87947c8364d628aec6b6a336948100908b0b33f13317a9bcd5086e6c5f2df667",
       "origin": "Repository-authored Ganymede navigation recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -786,8 +768,6 @@
     {
       "id": "ganymede-preparation-acquisition",
       "path": "preparation/acquisition.json",
-      "expectedBytes": 3620,
-      "expectedSha256": "3db4c10275bd163af170544063b9454199549616ea567662a6355210cf82e581",
       "origin": "Repository-authored Ganymede acquisition recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -805,8 +785,6 @@
     {
       "id": "ganymede-object-content",
       "path": "content/object.json",
-      "expectedBytes": 17872,
-      "expectedSha256": "115e59f56a30b7a4947fc915d0db704046957ea24bd105531ebd06bdfe208880",
       "origin": "Repository-authored Ganymede object recipe",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -961,40 +939,28 @@
   "documents": [
     {
       "path": "mono.isis.lbl",
-      "expectedBytes": 1770,
-      "expectedSha256": "a6c670ac7648264cd074b23ae9400ea51e66edc2a9830b07fe85687281ae8736",
       "purpose": "USGS published GeoTIFF mapping and pixel metadata."
     },
     {
       "path": "mono.pds.lbl",
-      "expectedBytes": 2181,
-      "expectedSha256": "6a6c0e5430a2fc5c1330e866add82b42294024c8a046b72cd565c2fd4e12ff08",
       "purpose": "USGS published GeoTIFF mapping and pixel metadata."
     },
     {
       "path": "color.isis.lbl",
-      "expectedBytes": 1885,
-      "expectedSha256": "60a5465ceab0bd739ebd71d1df8b4e5180ee933d14f9a16e6efc36581a6234cf",
       "purpose": "USGS published GeoTIFF mapping and pixel metadata."
     },
     {
       "path": "color.pds.lbl",
-      "expectedBytes": 2557,
-      "expectedSha256": "d1a2d221f025e18e4cba756c3187c44447e65ff3fb00537dff009cd5011698c7",
       "purpose": "USGS published GeoTIFF mapping and pixel metadata."
     },
     {
       "path": "editorial/factsheet-review.json",
       "origin": "https://ssd.jpl.nasa.gov/sats/phys_par/",
-      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged.",
-      "expectedBytes": 2825,
-      "expectedSha256": "6a71d3a818b0ef3d5cb6616d44ed98692196808c497949112038c20651169174"
+      "purpose": "Pinned factsheet reference values, measurement definitions and review date. Original mission inputs remain unchanged."
     },
     {
       "id": "usgs-sim3237-geologyunitpoints-dbf",
       "path": "science/geology-sim3237/GeologyUnitPoints.dbf",
-      "expectedBytes": 324794,
-      "expectedSha256": "f666df0ffa6b2b6444b0ce0d44114aac66ddfcde9845396732cff4f56f8f35a2",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1012,8 +978,6 @@
     {
       "id": "usgs-sim3237-geologyunitpoints-prj",
       "path": "science/geology-sim3237/GeologyUnitPoints.prj",
-      "expectedBytes": 167,
-      "expectedSha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1031,8 +995,6 @@
     {
       "id": "usgs-sim3237-geologyunitpoints-shp",
       "path": "science/geology-sim3237/GeologyUnitPoints.shp",
-      "expectedBytes": 109636,
-      "expectedSha256": "bee27c8ebe94211ce1e4c03406d7681dc9152a84fd1c5c2bd7160af86314ffae",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1050,8 +1012,6 @@
     {
       "id": "usgs-sim3237-geologyunitpoints-shp-xml",
       "path": "science/geology-sim3237/GeologyUnitPoints.shp.xml",
-      "expectedBytes": 5467,
-      "expectedSha256": "b756852dea03c66abe16dd6baaa3458d0df38f85a101041bc2ca208497e6f5e3",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1069,8 +1029,6 @@
     {
       "id": "usgs-sim3237-geologyunitpoints-shx",
       "path": "science/geology-sim3237/GeologyUnitPoints.shx",
-      "expectedBytes": 31396,
-      "expectedSha256": "3729633106fc63da4be42e5d8a9d6308d9f4ebb1a9f7da4acdc841585f27559b",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1088,8 +1046,6 @@
     {
       "id": "usgs-sim3237-geologyunits-shp-xml",
       "path": "science/geology-sim3237/GeologyUnits.shp.xml",
-      "expectedBytes": 8992,
-      "expectedSha256": "2d7b7143de029e30842f98d7675733f473ea1a3b288b2ddbee9423178236abd2",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1107,8 +1063,6 @@
     {
       "id": "usgs-sim3237-geologyunits-shx",
       "path": "science/geology-sim3237/GeologyUnits.shx",
-      "expectedBytes": 24468,
-      "expectedSha256": "70961567d7de135e40d1f907ca817445e84b183727e75716c02e94e57dd1149f",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1126,8 +1080,6 @@
     {
       "id": "usgs-sim3237-sim3237-ganymede-metadata-txt",
       "path": "science/geology-sim3237/sim3237_Ganymede_metadata.txt",
-      "expectedBytes": 15950,
-      "expectedSha256": "fdf37dff08b6bd0349bff8956b0b6140ac689b1672bf1ccf7645cbbb4a81a9d7",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1145,8 +1097,6 @@
     {
       "id": "usgs-sim3237-sim3237-ganymede-readme-txt",
       "path": "science/geology-sim3237/sim3237_Ganymede_readme.txt",
-      "expectedBytes": 5871,
-      "expectedSha256": "ae3d4df8d2bd98b9ce06d50cf47690db8060fed055222c69bc65708fbc53bea2",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -1164,8 +1114,6 @@
     {
       "id": "sim3237-archive-index-json",
       "path": "science/geology-sim3237/archive-index.json",
-      "expectedBytes": 77087,
-      "expectedSha256": "ea2cced4be58f9f694c0b4f36aa07bfab1b83d58a4fc7999b4694d01a36ca5c0",
       "origin": "https://pubs.usgs.gov/sim/3237/",
       "credit": "USGS source data; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
@@ -1179,8 +1127,6 @@
     {
       "id": "sim3237-intake-downloads-json",
       "path": "science/geology-sim3237/intake-downloads.json",
-      "expectedBytes": 7061,
-      "expectedSha256": "4dfa5788ffc797c99001473513f5d04bf67bdc0d273b00ceb38249951d5ec47b",
       "origin": "https://pubs.usgs.gov/sim/3237/",
       "credit": "USGS source data; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
@@ -1194,8 +1140,6 @@
     {
       "id": "sim3237-display-categories-json",
       "path": "science/geology-sim3237/display-categories.json",
-      "expectedBytes": 2513,
-      "expectedSha256": "d0a9aaa943d6a587a6a272d90b4e714a586ea4dde13bd234e5fd0946b7f331ad",
       "origin": "https://pubs.usgs.gov/sim/3237/",
       "credit": "USGS source data; cssEarth intake record",
       "license": "Repository-authored metadata of public domain USGS source",
@@ -1209,8 +1153,6 @@
     {
       "id": "sim3237-registration-anchors",
       "path": "science/geology-sim3237/registration-anchors.json",
-      "expectedBytes": 3178,
-      "expectedSha256": "37bd44758db3994be7168a6e5fc4739e67a54f360a7f859a6e7ec9c9e7f3d1fb",
       "origin": "https://pubs.usgs.gov/sim/3237/",
       "credit": "USGS point and polygon layers; cssEarth comparison",
       "license": "Repository-authored validation metadata of public domain GIS data",
@@ -1223,39 +1165,27 @@
     },
     {
       "path": "muse/source-qualification.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 12663,
-      "expectedSha256": "7fdd00cb2530b888a832fb8e7c2af61a7983389e555e3f85bc7dbc6f071b4bde"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/INTERPRETATION.md",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 3943,
-      "expectedSha256": "30f102ac00ecc7a59d7cd74d2f0b7d3c840d145f18f9761d780db23dd5c7ea66"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/datacite-license.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 5096,
-      "expectedSha256": "18391de14b9f22cfa4f83a08f9d26992f6aa1616b302c68025cee1d1784b368a"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/ganymede-recipe.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 1503,
-      "expectedSha256": "c2dc147d0db95b7284949ce31b664374f652eadab4b9b4b3d48b5b12e5f15968"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "path": "muse/ganymede/conversion-receipt.json",
-      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt.",
-      "expectedBytes": 6015,
-      "expectedSha256": "fa2dd36f754ea0d2c1b39011236daa09d5ca08cd00652c9f7c040dc2d0f9e84a"
+      "purpose": "Surface chemistry preparation recipe, source review or conversion receipt."
     },
     {
       "id": "ganymede-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 29441,
-      "expectedSha256": "a03c02bec7d24eaaf480dfd0e31a78a0e244afbd99b4eb68e175e9d31f9285a8",
       "origin": "Repository-pinned English Wikipedia lead summaries for 68 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -1285,8 +1215,6 @@
     },
     {
       "path": "composition/model-recipe.json",
-      "expectedBytes": 880,
-      "expectedSha256": "3484816c073e6addb01bb505b779bc3fb1034e3152318d1756bbfe36054d6afd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored selection of exact published numerical fields, wavelengths and output coordinates."

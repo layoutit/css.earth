@@ -40,7 +40,7 @@
           {
             "catalogueId": "source-itokawa-itokawa-shape",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -64,7 +64,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep24-path",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -88,7 +88,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep24-labelpath",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -112,7 +112,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep24-originalpath",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -136,7 +136,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep26-path",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -160,7 +160,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep26-labelpath",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -184,7 +184,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep26-originalpath",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -208,7 +208,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep29-path",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -232,7 +232,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep29-labelpath",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -256,7 +256,7 @@
           {
             "catalogueId": "source-itokawa-amica-sep29-originalpath",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -280,7 +280,7 @@
           {
             "catalogueId": "source-itokawa-amica-v-flat",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -304,7 +304,7 @@
           {
             "catalogueId": "source-itokawa-amica-v-flat-label",
             "role": "material",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -328,7 +328,7 @@
           {
             "catalogueId": "arxiv-0912-4797",
             "role": "method",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -352,7 +352,7 @@
           {
             "catalogueId": "source-itokawa-amica-photometry-paper",
             "role": "method",
-            "evidence": "src/planets/itokawa/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -384,8 +384,6 @@
     {
       "id": "itokawa-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1009,
-      "expectedSha256": "b57556ffe5028a8041de33852d8239fe1900eb05d47caa8748bc97212e52b891",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -402,8 +400,6 @@
     {
       "id": "itokawa-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1084,
-      "expectedSha256": "4aa630c57ddb806702bfc568757d9ce46a3535fb9c65b1b433ea56526c1c70d6",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -420,8 +416,6 @@
     {
       "id": "itokawa-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 186,
-      "expectedSha256": "bdac1cc9d50c238e5ef5ee1c467bf00ad7b33bb968191fadf3085a6d00e395e5",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -982,8 +976,6 @@
       "origin": "https://sbnarchive.psi.edu/pds4/non_mission/gaskell.ast-itokawa.shape-model/data/vertex/ver128q.tab",
       "credit": "JAXA/ISAS/Hayabusa AMICA; R. Gaskell and colleagues",
       "license": "Public mission scientific data; retain attribution and source notices.",
-      "expectedBytes": 188484,
-      "expectedSha256": "ce0b9e63e348a9d4a8f1c807b26a94e14df8a978bc1fd0c3f2ec3f41454b917c",
       "consumers": [
         "navigation"
       ],
@@ -1005,58 +997,38 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9062,
-      "expectedSha256": "a8586cf3a42b0499fde71d9264705fb48d57be34d55da6c69997407583d51ccd",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 10265,
-      "expectedSha256": "1ac7591f85caa74f1546e834b9ffe93485636e2e3408b025d6ca8d84c74aec0a"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "76406008b817cb8a8230572fd5a76ddead13afb0c9c6f265bc585d5d01137953"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 344,
-      "expectedSha256": "616eb07ddbac529ff5d9ae9141544031730f616c61a32ed1e6a7a82ac1d2af49"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 7353,
-      "expectedSha256": "bdae77c888dec3f8e9977ac77439e2ca99b41d8b42edf47036c311afaf769ea5"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4211,
-      "expectedSha256": "1007450a9cd24da50a2dd8d0d122f48380defb5ff91a2a5b862c1a98b5b7c3f4"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/bundle_description.txt",
-      "expectedBytes": 15441,
-      "expectedSha256": "f1ad5dacd8bcd36d10211a18f119e7ca9a17ba516242cfb51c468090cf362249"
+      "path": "reference/bundle_description.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1654,
-      "expectedSha256": "773fe759e079fefcaec834bcbf7326a600bee612134d0839b04f03961638e164"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/ver128q.xml",
-      "expectedBytes": 9864,
-      "expectedSha256": "dc81556c9ccb2ccf7efa32ea76621a3c0a8289f4f98920e0007e65ce5b354d45"
+      "path": "reference/ver128q.xml"
     },
     {
       "id": "itokawa-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -1095,8 +1067,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 6352,
-      "expectedSha256": "f2ac66f140a6d41e02466b82a6d26f962b6af73a30f1e379374994b29e02769b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

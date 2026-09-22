@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/selam/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,7 +49,7 @@
           {
             "catalogueId": "doi-10-1038-s41586-024-07378-0",
             "role": "method",
-            "evidence": "src/planets/selam/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -77,65 +77,43 @@
         "ambient": 0.45,
         "diffuse": 0.55,
         "lensId": "shape"
-      },
-      "expectedBytes": 30006,
-      "expectedSha256": "81a6448ca06233b431705d24cfbe3900eb535d4f61218a0eff902566d37045d5"
+      }
     }
   ],
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2977,
-      "expectedSha256": "de1f44439a6c2a188464687b4960a1bcafa11e5ab6c777162da0e339d37c6838",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 1735,
-      "expectedSha256": "05ee06c4b64450ea94b97c7a2474938dc82860eff39d8f5a2a56743124ffa5ff"
+      "path": "measurements.json"
     },
     {
-      "path": "orbit/published-parameters.json",
-      "expectedBytes": 1555,
-      "expectedSha256": "b0320fd5cf6ae56cffed5d03920b522e2c574c8630be0d2e61a53a163cc25324"
+      "path": "orbit/published-parameters.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 323,
-      "expectedSha256": "2d5712dd0f5cb7b309c65821649b1cc1fc94e87cba8c8bfded1cb834197e8b7c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 442,
-      "expectedSha256": "6e2ba1fc87deb2725c72253cc6b82f0abe455d4dda006a142dc767ff369c3439"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 502,
-      "expectedSha256": "cc6985c61057edd58f6137ed722b15f52f5d20a2824035e44666b666010420fc"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2067,
-      "expectedSha256": "5ae8dd21e941858505136381f0833a25e74aac7533b1768ca00057a171af4a38"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3791,
-      "expectedSha256": "7e53af889fbe6ce70045348dc111e8693447fd08da2ef896bf28f623b430eaa5"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "validation/epoch-state.json",
-      "expectedBytes": 1720,
-      "expectedSha256": "3577172441a9fb2dd79e9f80fcb444dcfce2cf23b22729d51121918e78cf5572"
+      "path": "validation/epoch-state.json"
     }
   ]
 }

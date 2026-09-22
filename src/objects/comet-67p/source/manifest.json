@@ -23,7 +23,7 @@
           {
             "catalogueId": "source-comet-67p-mtp019",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/0"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -31,8 +31,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 174,
-      "expectedSha256": "df95f3ee3fbe5bac0c94424822fd8c202719a087d300e134ff8412eab4519d8b",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth neutral model material",
       "license": "MIT",
@@ -82,7 +80,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -111,7 +109,7 @@
           {
             "catalogueId": "source-comet-67p-navcam-20150720",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -142,7 +140,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140805-geo",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -173,7 +171,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140805-quality",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -204,7 +202,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140805-2344-geo",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -235,7 +233,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140805-2344-quality",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -266,7 +264,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140806-0244-geo",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -297,7 +295,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140806-0244-quality",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/10"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -328,7 +326,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140806-0520-geo",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/11"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -359,7 +357,7 @@
           {
             "catalogueId": "source-comet-67p-osiris-20140806-0520-quality",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/12"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -386,7 +384,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-format",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/13"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -413,7 +411,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-bibliography",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/14"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -440,7 +438,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-shap5-info-asc",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/15"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -467,7 +465,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-cg-spc-shap5-097k-cart-lbl",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/16"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -494,7 +492,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-cg-spc-shap5-097k-cart-wrl",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/17"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -544,7 +542,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-albedo",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/18"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -571,7 +569,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-albedo-label",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/19"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -621,7 +619,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-slope",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/20"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -648,7 +646,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-slope-label",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/21"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -698,7 +696,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-absorption",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/22"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -725,7 +723,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-absorption-label",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/23"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -775,7 +773,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-ice",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/24"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -802,7 +800,7 @@
           {
             "catalogueId": "source-comet-67p-virtis-ice-label",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/25"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -836,7 +834,7 @@
           {
             "catalogueId": "source-comet-67p-shap7-region-cells",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/26"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -863,7 +861,7 @@
           {
             "catalogueId": "source-comet-67p-sbmt-geological-paths",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/27"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -890,7 +888,7 @@
           {
             "catalogueId": "source-comet-67p-sbmt-geological-locations",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/28"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -917,7 +915,7 @@
           {
             "catalogueId": "source-comet-67p-sbmt-regional-boundaries",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/29"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -944,7 +942,7 @@
           {
             "catalogueId": "source-comet-67p-sbmt-region-order",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/30"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -971,7 +969,7 @@
           {
             "catalogueId": "source-comet-67p-geomap-guide",
             "role": "method",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/31"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1002,7 +1000,7 @@
           {
             "catalogueId": "source-comet-67p-n20151026-125938-path",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/32"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1033,7 +1031,7 @@
           {
             "catalogueId": "source-comet-67p-n20151026-125938-qualitypath",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/33"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1064,7 +1062,7 @@
           {
             "catalogueId": "source-comet-67p-n20151031-234514-path",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/34"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1095,7 +1093,7 @@
           {
             "catalogueId": "source-comet-67p-n20151031-234514-qualitypath",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/35"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1126,7 +1124,7 @@
           {
             "catalogueId": "source-comet-67p-n20151104-112633-path",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/36"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1157,7 +1155,7 @@
           {
             "catalogueId": "source-comet-67p-n20151104-112633-qualitypath",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/37"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1188,7 +1186,7 @@
           {
             "catalogueId": "source-comet-67p-n20151115-050650-path",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/38"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1219,7 +1217,7 @@
           {
             "catalogueId": "source-comet-67p-n20151115-050650-qualitypath",
             "role": "material",
-            "evidence": "src/planets/comet-67p/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/39"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -1251,8 +1249,6 @@
     {
       "id": "comet-67p-features-manifest",
       "path": "features/manifest.json",
-      "expectedBytes": 1075,
-      "expectedSha256": "fee7f80d11b9ddb05f0bb2e050276eb7c78c14b67e44f34be31bfdc0de8e47ab",
       "origin": "Byte pins and source qualifications for the surface-place compilation.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1269,8 +1265,6 @@
     {
       "id": "comet-67p-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1028,
-      "expectedSha256": "f82cb3d1b332a74d8ae2bcdf753e1055f45493db331bd06e2159ce31412011b7",
       "origin": "Object-owned selection of surface-place source records, datasets and label policy.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1287,8 +1281,6 @@
     {
       "id": "comet-67p-presentation-surface-map",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 188,
-      "expectedSha256": "c1809f985fa9a8d801bb3122b3a948bacc53c1072200a86fbe18fe06da05b6e0",
       "origin": "Prepared radial mesh mapping from native XYZ to CSS axes.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1459,8 +1451,6 @@
     {
       "id": "prepared-radial-context",
       "path": "presentation/context.png",
-      "expectedBytes": 97023,
-      "expectedSha256": "d8d3b35ca214168bf1c46f4d2fc754ae56c2d40d2f07a6e10528d9d9995c8295",
       "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_ESA/MTP019/CSHP_DV_130_01_LORES_OBJ.OBJ",
       "credit": "ESA/Rosetta/NAVCAM; ESA/RMOC",
       "license": "CC BY-SA 3.0 IGO",
@@ -1491,220 +1481,154 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 19009,
-      "expectedSha256": "aadb2fdb3c96bb15e1a43a8bdf06672dab57681f76efa859606ce0a230554396",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 10430,
-      "expectedSha256": "3c15dd60c0c8ee7092be725d323403b6c9c50de804bdbbf2a8c3a8f7eb23b764"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 446,
-      "expectedSha256": "0da3965735bd3032f2eb27aebc2e53d7cbb6ee25d4c947e3f3537d648ad6d817"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 373,
-      "expectedSha256": "d613eb532ebaef00c4383d40c6fbc1504e40a54189be9cb11df06560c58d0e23"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 20603,
-      "expectedSha256": "18fa98d68649768e460ee40b309b79a5bf0e81a2012ea73b08f0335f38c57a12"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 33,
-      "expectedSha256": "52d70435e15a859e8654ab7f16e7a0bd10bcae3a8a6dfadf67c714d3895bd831"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 1891,
-      "expectedSha256": "0c0128fe1e9725ed171c686769fd0ee04628b1c24f34cbf4e90907976e3ece7d"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/esa-model-info.asc",
-      "expectedBytes": 6720,
-      "expectedSha256": "37225e4dc3d91371f4d46648b15ff44ee5b75ab508a1dd4ad81430db0c68e535"
+      "path": "reference/esa-model-info.asc"
     },
     {
-      "path": "shape/mtp019.lbl",
-      "expectedBytes": 12320,
-      "expectedSha256": "0150d1b50e42f381a4d09d5e5e767039214a384cdd0821122e348357f43b6ea9"
+      "path": "shape/mtp019.lbl"
     },
     {
       "path": "reference/osiris-georeference.json",
-      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 5755,
-      "expectedSha256": "adf0283d1ae3a7280b008f89a0fac76b36428f96023b9ff23cdb6a7ecaa68cec"
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history."
     },
     {
       "path": "reference/osiris-20140805-geo.lbl",
-      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 33792,
-      "expectedSha256": "d479fbfe3c391bb0b11369737cd875c968c07aea16a25913901eae39156fe723"
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history."
     },
     {
       "path": "reference/osiris-20140805-quality.lbl",
-      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 28160,
-      "expectedSha256": "68effede222e8cec0b5f4ac14e148e155b24ad535716761d488fb04db59735f5"
+      "purpose": "OSIRIS observation interpretation or original attached label, including calibration history."
     },
     {
       "path": "reference/osiris-20140805-2344-geo.lbl",
-      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
-      "expectedBytes": 33792,
-      "expectedSha256": "8ceeb3596a550b7dbcf70652ea863a4e55a27fdbb5c03781074765ad8dfcef9e"
+      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte."
     },
     {
       "path": "reference/osiris-20140805-2344-quality.lbl",
-      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
-      "expectedBytes": 28160,
-      "expectedSha256": "741dd882ccc75d2e15d86858a5717a1d51f0982ada804feec6296e48145224c3"
+      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte."
     },
     {
       "path": "reference/osiris-20140806-0244-geo.lbl",
-      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
-      "expectedBytes": 33792,
-      "expectedSha256": "dd2e0860ff271b2ef8a5961ffd449745a366258bce70b1ed068b2ade8fc76e98"
+      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte."
     },
     {
       "path": "reference/osiris-20140806-0244-quality.lbl",
-      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
-      "expectedBytes": 28160,
-      "expectedSha256": "13f0567ce203ddb06226589e0c5761624e3052c8c4bf2bf8fea665e3178f028c"
+      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte."
     },
     {
       "path": "reference/osiris-20140806-0520-geo.lbl",
-      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
-      "expectedBytes": 33792,
-      "expectedSha256": "3d4140e71b974df957c90a183797dd10c807d7ac5165cba256c2bcde2f20d83d"
+      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte."
     },
     {
       "path": "reference/osiris-20140806-0520-quality.lbl",
-      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte.",
-      "expectedBytes": 28160,
-      "expectedSha256": "cd1586a932de008940e1bff0b59fec1132a7d851ff6ab0cf3f525849a04cee9b"
+      "purpose": "Original attached OSIRIS label and calibration history, preserved byte-for-byte."
     },
     {
       "path": "reference/osiris-trial.json",
-      "expectedBytes": 1965,
-      "expectedSha256": "e4692ad79d705fef757c77f964abe30ed605c5ef9a221f8e5b4074485ab1f25d",
       "purpose": "Preserved historical OSIRIS trial policy and credits; not a runtime input."
     },
     {
       "path": "reference/OSIRIS-TRIAL-NOTICE.md",
-      "expectedBytes": 1116,
-      "expectedSha256": "4c700a22a98131fff3093fa55d3c3b7d14e01b883e5cddb275fc945712187ebf",
       "purpose": "Preserved historical OSIRIS trial policy and credits; not a runtime input."
     },
     {
       "path": "reference/n20140913-200612-geo.lbl",
       "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 29696,
-      "expectedSha256": "43f6d167ab7d0932c84e3a44ce1eed7584ce9d6dae37d84eef1d81b505844609",
       "id": "n20140913-200612-path-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140913t200612355id50f22.img"
     },
     {
       "path": "reference/n20140913-200612-quality.lbl",
       "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 23552,
-      "expectedSha256": "659ff0e798b94deb7eb67f2c19f3cdac7236b3aea484f5b8feb531b270baa2f1",
       "id": "n20140913-200612-qualityPath-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140913t200612355id40f22.img"
     },
     {
       "path": "reference/n20140920-133916-geo.lbl",
       "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 29696,
-      "expectedSha256": "ba48fca94499f1be5b338ab8a0ac9624cd4d309971cc3dcae0bd13919e28dfd9",
       "id": "n20140920-133916-path-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-prl-67p-m07-geo-v1.0/data/img/n20140920t133916351id50f22.img"
     },
     {
       "path": "reference/n20140920-133916-quality.lbl",
       "purpose": "OSIRIS observation interpretation or original attached label, including calibration history.",
-      "expectedBytes": 23552,
-      "expectedSha256": "517ce88eaf0cd01425d86e538a299f7319ed7907178cc37424749010a13bd52a",
       "id": "n20140920-133916-qualityPath-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-prl-67pchuryumov-m07-v2.0/data/img/n20140920t133916351id40f22.img"
     },
     {
       "path": "reference/n20151026t125938783id40f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 23552,
-      "expectedSha256": "9adfb183fb687bf10a4d52e4c1830f55e4274503dd8edd9dd93e64c4595a38e5",
       "id": "n20151026t125938783id40f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151026t125938783id40f22.img"
     },
     {
       "path": "reference/n20151026t125938783id50f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 29184,
-      "expectedSha256": "4bda41d769dc514e6b60e3c05434f796b23ca65961d8d8efcc34d639a97c3b88",
       "id": "n20151026t125938783id50f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151026t125938783id50f22.img"
     },
     {
       "path": "reference/n20151031t234514781id40f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 23552,
-      "expectedSha256": "77cd3096a4a0280df43bd0d5bf3318bebaeced6a9ef1495845dbb1384f8e677f",
       "id": "n20151031t234514781id40f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151031t234514781id40f22.img"
     },
     {
       "path": "reference/n20151031t234514781id50f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 29696,
-      "expectedSha256": "576cfcd39d652aacf36bec6ee4f55c644fed75b11043383ea7e1c13ebf3e131e",
       "id": "n20151031t234514781id50f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151031t234514781id50f22.img"
     },
     {
       "path": "reference/n20151104t112633715id40f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 23552,
-      "expectedSha256": "e19e03dfdd5101274779a89e8719abb317fd3bd0b71978285349b6fdf7b4580d",
       "id": "n20151104t112633715id40f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151104t112633715id40f22.img"
     },
     {
       "path": "reference/n20151104t112633715id50f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 29184,
-      "expectedSha256": "effe3b48ea51e9bb7df8f8b888d16be3d547458352d4484329041e2e659d364a",
       "id": "n20151104t112633715id50f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151104t112633715id50f22.img"
     },
     {
       "path": "reference/n20151115t050650703id40f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 23552,
-      "expectedSha256": "872da8d8f53591e6da78c134f3a964c1eec07164e9b4d111015cf65457ab15ac",
       "id": "n20151115t050650703id40f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-4-esc4-67pchuryumov-m22-v2.0/data/img/n20151115t050650703id40f22.img"
     },
     {
       "path": "reference/n20151115t050650703id50f22.lbl",
       "purpose": "Original attached OSIRIS image label; calibration HISTORY remains in the pinned full image.",
-      "expectedBytes": 29184,
-      "expectedSha256": "28ed1096c24f89c3bd3e8506dc491345206097205ef78889c212c05d5c0a7e7c",
       "id": "n20151115t050650703id50f22-label",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ro-c-osinac-5-esc4-67p-m22-geo-v1.0/data/img/n20151115t050650703id50f22.img"
     },
     {
       "id": "comet-67p-surface-sites",
       "path": "features/sites.json",
-      "expectedBytes": 3141,
-      "expectedSha256": "798271a08d700552ec826c7225da3edbe3dc12d1a77850730decbbcdcf746448",
       "origin": "Repository-authored compilation of landing, touchdown and impact sites: each coordinate quotes the NASA NSSDCA, PDS, LROC, agency or paper page it was read from (URL, publisher and rights recorded per site), retrieved 2026-09-12",
       "credit": "NASA NSSDCA; NASA PDS; LROC; ESA; JAXA; cited authors",
       "license": "Repository-authored factual compilation; quoted sentences remain the cited publishers' text",
@@ -1723,8 +1647,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4473,
-      "expectedSha256": "bfd38f6f4dff45e66fdbdd7bd874ae93d37d0330d43e1a67840273cff4f8abe0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1739,8 +1661,6 @@
     {
       "path": "observations.json",
       "purpose": "Telescope API observation descriptors derived from the pinned comet 67P archive inputs and their native metadata; scientific limitations remain explicit per observation.",
-      "expectedBytes": 4868,
-      "expectedSha256": "83ba8b387db2040c9c3886fc9bb7287fe799f8b55a4e2d9a987d90b3f9fc6970",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored normalized observation records derived only from the exact inputs pinned by this manifest."

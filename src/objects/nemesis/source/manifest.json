@@ -41,7 +41,7 @@
           {
             "catalogueId": "source-nemesis-nemesis-shape",
             "role": "material",
-            "evidence": "src/planets/nemesis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -68,7 +68,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/nemesis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -103,7 +103,7 @@
           {
             "catalogueId": "vernazza-2021-survey",
             "role": "method",
-            "evidence": "src/planets/nemesis/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -119,8 +119,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 38504,
-      "expectedSha256": "4cae387a95fcfaba0435f4ec612828c21324f66ef4de8b9b9dd7a3b03ddd7bf3",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -139,72 +137,46 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 9471,
-      "expectedSha256": "8aa486c4a65c4c06c7a4f12a3640abed06a9b4906b4c5d93ca7c73c9120a4812",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 921,
-      "expectedSha256": "e29179b31a43d2c012e0a95e938be2d48a7443cf36157fa84470b8a5c1c9d468"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 444,
-      "expectedSha256": "f0bc6f18721b9c2c926f130f34d0db8a66c96d012867de5a073e323cc5ad5f36"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 672,
-      "expectedSha256": "f145529f2408a27377bef85738c65a6f1a538603c50a7bd81bddf4fd41812e85"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2736,
-      "expectedSha256": "7948aef7c0703764ac36d133ab32dc6ad13509e27e8d3a50fbac9b096782a7b8"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 4654,
-      "expectedSha256": "0f274c3e1fd24012b04af9bee325c94799e541d92b71277c705008cbb848199a"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7354,
-      "expectedSha256": "0fb26afa496342aadfccb2335fd85f3e50b7045a50ce3b18376230a14de867ad"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1391,
-      "expectedSha256": "59e855461aacb07a92abed3d6ad551dde58a317698c171d5e5d118a03dc86ff2"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6644,
-      "expectedSha256": "2c64be46161d523533aac3f30c4f5c3ace517510309e0b26e2ae06d80aef7618"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 1838,
-      "expectedSha256": "c11b787f2ebd769c5e7950f3077cc253f150f7e7958e50cb4487f49ecdd23bd2"
+      "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/release-parameters.txt",
-      "expectedBytes": 40,
-      "expectedSha256": "237b83ad9032f428594d6fa2ddc313597df7b809cb73f364901a8a9abe11e8cd"
+      "path": "reference/release-parameters.txt"
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4576,
-      "expectedSha256": "e6007f5f6486725fd7bc6977b655e4f40a9d4e149b7dd3e141913f6ce47c5f36",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

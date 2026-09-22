@@ -23,7 +23,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/asteroid-2002-tx300/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -56,7 +56,7 @@
           {
             "catalogueId": "doi-10-1051-0004-6361-201732564",
             "role": "method",
-            "evidence": "src/planets/asteroid-2002-tx300/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://github.com/layoutit/cssEarth",
       "credit": "cssEarth missing-coverage grid",
       "license": "MIT",
@@ -94,57 +92,37 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 2873,
-      "expectedSha256": "7c5afea06313907abcb88b8d88a70c22b1e2eebf92f5a169d39c9a04c04feab4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "measurements.json",
-      "expectedBytes": 2524,
-      "expectedSha256": "294c04681585323e1dd6f59c9029c305fe96527c787082be311954039be77ef4"
+      "path": "measurements.json"
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 525,
-      "expectedSha256": "11b46138a39f747f9e84c84391691baed3a8d4a8aac672e88b3bfc897908ecc7"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 456,
-      "expectedSha256": "5286722d9ca209bdca36aaf737ad12e16c76290559a96a0d4636e5d2bbbcaf81"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 417,
-      "expectedSha256": "a9ed5628b91af2c8cf29bfb50eb87e13afa00ec0dfeb3ccfe0f3ab438e65019c"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2701,
-      "expectedSha256": "ccb0c1c3f6200ef0aeb7368c049c939bc6003eced39100a8a8de633121d6291f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/minimap.json",
-      "expectedBytes": 34,
-      "expectedSha256": "51932d6f752f3c38391c279b2e79df59066e71ac8e1d7d6d14df7e399183977a"
+      "path": "presentation/minimap.json"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 5581,
-      "expectedSha256": "413d2ffa787b9f6c01d4fb9a181502685f5ef6aadfd84658d47d4bf6448658e9"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "38d9c200824a3d2993ec9f17f30f19bdfc1a965bbb29e4c079c4b5ec257d3380"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "e3d8301d26245046ed0a58f815d6c3073eafae4727078c06ce9b60df19bc5eb3"
+      "path": "reference/horizons-vectors.txt"
     },
     {
       "path": "reference/tx300-vilenius-2018.pdf",
@@ -153,8 +131,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3023,
-      "expectedSha256": "a6e9e8ffacae26e357ad2e608dacb2ca7a2c9ce44a1b23440f488aa2f6261dd5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -190,9 +166,7 @@
         "diffuse": 0.55,
         "lensId": "model"
       },
-      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
-      "expectedBytes": 78618,
-      "expectedSha256": "8dcb080bfa371bed58c544a4879a1e1fffd3cea9af51eb79915d6d0fbf4ed2e6"
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs"
     }
   ]
 }

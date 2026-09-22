@@ -32,7 +32,7 @@
           {
             "catalogueId": "damit-shape-3796",
             "role": "material",
-            "evidence": "src/planets/eva/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -59,7 +59,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/eva/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -75,8 +75,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 35312,
-      "expectedSha256": "67b414ba7cea8a5dd469a1d59ca08d9a2a69f7ff21502a26d7a46af4bfe2c13a",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -95,42 +93,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 7517,
-      "expectedSha256": "920dabf2927390cbe196247cf52ce84091ab3336cb1fd3e473a4caf75b897d28",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1684,
-      "expectedSha256": "4e008f28491586657c697b8ff3ff9624550e16a1f1a812c30f2074de0630aa0c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 440,
-      "expectedSha256": "84c4ff872e9570e185f1e6add643339161724d8c74e040eaea30bfc79d956dcf"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 595,
-      "expectedSha256": "4868c0d1dcbda93c201ac50756b4de0ed1928958181272f849ff2885f2c386ea"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 2873,
-      "expectedSha256": "53e26d5e8ebb9aec1454b9029624ad49afdf7fcef5dbf6203bbefef87d24698f"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 1908,
-      "expectedSha256": "2945badeee63c90bcaf70aa984d1c037ca5167391936dcc6319cab8dafde698c"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/1021-IAUspin.txt",
@@ -148,15 +132,11 @@
       "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
     },
     {
-      "path": "reference/calibration.json",
-      "expectedBytes": 2316,
-      "expectedSha256": "0de2f7990ba6e0777a72c0fab177a9c6b462c275f5c95e093eb38c19b1133666"
+      "path": "reference/calibration.json"
     },
     {
       "path": "reference/damit-model.json",
       "purpose": "Selected DAMIT model fields and independently calculated source-mesh measurements.",
-      "expectedBytes": 11863,
-      "expectedSha256": "85e93e678825ac4223b54cf38404372c36e0c4d447db673bcb4134407503b323",
       "origin": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1021",
       "credit": "Published model fields: DAMIT, Charles University and the cited model authors. Mesh measurements and selection notes: cssEarth.",
       "acquisition": "Values recorded from the identified DAMIT model table; original shape and spin files are pinned separately. Mesh measurements are calculated from the unchanged source geometry."
@@ -172,19 +152,13 @@
       "expectedSha256": "3ee7a470b01d8e8087b7a8119ca9b1de1048fc3d5fb44b64a8ae46ca287cf604"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7354,
-      "expectedSha256": "fbb579ac6d62e311fe493589223612b6ca49317b551ab9e3b7731110d74c683e"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6644,
-      "expectedSha256": "21ea95d823e7ecf95568702a81f1faee8bda4802e289f9dfe6e16fa16f29f640"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 4769,
-      "expectedSha256": "c6e0b85bdb1147c698881cdaba1b939780bda6e29493e52a446d6b10f2feb69f"
+      "path": "reference/model-properties.json"
     }
   ]
 }

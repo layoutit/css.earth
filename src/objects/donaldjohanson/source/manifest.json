@@ -30,7 +30,7 @@
           {
             "catalogueId": "lucy-donaldjohanson-k548-v10",
             "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -57,7 +57,7 @@
           {
             "catalogueId": "inter-9221beed3",
             "role": "method",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/2"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -81,7 +81,7 @@
           {
             "catalogueId": "lucy-donaldjohanson-k548-v10",
             "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/3"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -106,7 +106,7 @@
           {
             "catalogueId": "source-donaldjohanson-donaldjohanson-research-donaldjohanson-2026",
             "role": "method",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/4"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -132,7 +132,7 @@
           {
             "catalogueId": "source-donaldjohanson-donaldjohanson-research-coordinate-system",
             "role": "method",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/5"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -156,7 +156,7 @@
           {
             "catalogueId": "source-donaldjohanson-donaldjohanson-observations-lor-0798443290-04598-00035-1x1-sci-03-fit",
             "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/6"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -180,7 +180,7 @@
           {
             "catalogueId": "naif-leapseconds-0012",
             "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/7"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -204,7 +204,7 @@
           {
             "catalogueId": "source-donaldjohanson-donaldjohanson-reference-donaldjohanson-v12-tpc",
             "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/8"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -228,7 +228,7 @@
           {
             "catalogueId": "source-donaldjohanson-donaldjohanson-reference-lor-0798443290-04598-00035-1x1-sci-03-xml",
             "role": "material",
-            "evidence": "src/planets/donaldjohanson/source/manifest.json@8d2f45b58b5ea9a0b69a81242c51aa6e6d6ebcdf#/inputs/9"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -244,8 +244,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 1041,
-      "expectedSha256": "3d3955788f72b830eeefa708f02243f148cfd7d98e02ec0c54fe46255d603aa4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored camera solution for the source image; the file records the camera parameters and the image it registers."
@@ -262,8 +260,6 @@
       "consumers": [
         "llorri-observation"
       ],
-      "expectedBytes": 9023,
-      "expectedSha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac",
       "sourceBinding": {
         "kind": "local",
         "reason": "Camera geometry calculated from the pinned image and mission kernels for DONALDJOHANSON at 2025-04-20T17:50:14.018."
@@ -352,8 +348,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 1138,
-      "expectedSha256": "d5a7330117679c90185ad02c2a286854d8d6f7a9803d5151db1e8d9598ff3b3b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reproducible camera translation from native image overlap with disjoint fit and holdout controls."
@@ -370,8 +364,6 @@
       "consumers": [
         "llorri-observation"
       ],
-      "expectedBytes": 276961,
-      "expectedSha256": "b0b13261ce3adcd46636d9ece1bfcca4567423d90b08f3046358430773e47003",
       "sourceBinding": {
         "kind": "local",
         "reason": "Reproducible camera translation from native image overlap with disjoint fit and holdout controls."
@@ -388,8 +380,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 29690,
-      "expectedSha256": "b24f4167c0960cea7b4af21f2819c09604f08d96b0d5ff238113d3bb3b004748",
       "recipe": {
         "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
         "inputs": [
@@ -408,78 +398,50 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 16595,
-      "expectedSha256": "cc227d474e17c8a04a5b20067bdff5b35f848bab78e573dd37816d18d3a40f9b",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 3282,
-      "expectedSha256": "806eddaa5b537dd08037f17f1dd44523a369c59ee7dc8f839cd5b2363ade4e4c"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 451,
-      "expectedSha256": "bdcdc4afd1270457765d2edff47dc360792051a757c6f6c0ddd4079b7518377a"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 732,
-      "expectedSha256": "918b3e0abdbef4a3f392ae495a8b2ecdea847c9343ecf80974fa934672352d2a"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "expectedBytes": 5099,
-      "expectedSha256": "43c5f6d0df0faa08c54ce4c13f49ca2b1863cada66c5c563300d319a55a68fb8"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 8276,
-      "expectedSha256": "b1d4b3007fe7d1c1b550a08c4b59ca77d3fa4dd66e5c714f29b5dc63ce974cfb"
+      "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/dsk-inspection.json",
-      "expectedBytes": 4312,
-      "expectedSha256": "7ca9a01c5546d5fad5c4309636659273bfb724442b9134712331cdb1ebfb7f2d"
+      "path": "reference/dsk-inspection.json"
     },
     {
-      "path": "reference/horizons-elements.txt",
-      "expectedBytes": 7355,
-      "expectedSha256": "4bfe5b715d3bedac4752615eb42cdadddb45209b3a092d59632414ff28e5c362"
+      "path": "reference/horizons-elements.txt"
     },
     {
-      "path": "reference/horizons-physical.txt",
-      "expectedBytes": 1394,
-      "expectedSha256": "9851a6c38b4a8075178e08a8c5768cf4df6c9aa64dd1835cae02600b1a709155"
+      "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/horizons-vectors.txt",
-      "expectedBytes": 6645,
-      "expectedSha256": "92efa5d792482e8da2b2a5fb65f56b89fc092c156d112887391151804be0fcd2"
+      "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/lcy_donj_k548_iso20m_v10.xml",
-      "expectedBytes": 3537,
-      "expectedSha256": "85d6b2958a3e57960762a69d8b02cba6aca53075f6cc1b1b7c488fcc5fd1ba29"
+      "path": "reference/lcy_donj_k548_iso20m_v10.xml"
     },
     {
-      "path": "reference/model-properties.json",
-      "expectedBytes": 2262,
-      "expectedSha256": "d32794459cf610399bb933a030ba21a894c12af6e28ee713951d08e1144c9960"
+      "path": "reference/model-properties.json"
     },
     {
       "id": "donaldjohanson-surface-features-source",
       "path": "features/manifest.json",
-      "expectedBytes": 1339,
-      "expectedSha256": "48f72a6c18e11aaa3a42b48db885d38f9da418d86f0f758d57dc282277867b3c",
       "origin": "Repository-authored pin of the Gazetteer snapshot: source page, date, license evidence and byte identity",
       "credit": "cssEarth contributors",
       "license": "Repository-authored factual metadata",
@@ -496,8 +458,6 @@
     {
       "id": "donaldjohanson-preparation-features",
       "path": "preparation/features.json",
-      "expectedBytes": 1078,
-      "expectedSha256": "72d37ca42c7c3402201d5c033b40707c70b776fbc86e398708c99318c16e96e3",
       "origin": "Repository-authored surface feature recipe: archive members, body-frame longitude origin, label kinds, exclusions and label policy",
       "credit": "cssEarth contributors",
       "license": "Repository-authored preparation parameters",
@@ -514,8 +474,6 @@
     {
       "id": "donaldjohanson-surface-map-frame",
       "path": "presentation/surface-map.json",
-      "expectedBytes": 193,
-      "expectedSha256": "2baf4d4af169d4af154ec6c846c5ece03a52af6f3e29fd288bc9d57bb51c1b75",
       "origin": "Repository-authored map axes for the prepared body mesh: the body-fixed frame of the radial terrain sampler",
       "credit": "cssEarth contributors",
       "license": "Repository-authored presentation parameters",
@@ -532,8 +490,6 @@
     {
       "id": "donaldjohanson-surface-feature-notes",
       "path": "features/notes.json",
-      "expectedBytes": 478,
-      "expectedSha256": "e527e663083e08c19b451d2329fb47628dcaffd8bdb0b3b3991bbf0e4da75d49",
       "origin": "Repository-pinned English Wikipedia lead summaries for 0 named features, joined to the Gazetteer ids through Wikidata property P2824 (query recorded in the document), retrieved 2026-09-12",
       "credit": "Wikipedia contributors; Wikidata contributors",
       "license": "CC BY-SA 4.0 (text); CC0 (Wikidata statements)",
@@ -554,8 +510,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 3117,
-      "expectedSha256": "352689e9b203a7e87a4d851d0828f0746abbe78bfd529f881a9f55becdcbc673",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

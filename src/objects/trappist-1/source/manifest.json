@@ -4,8 +4,6 @@
     {
       "id": "trappist-1-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1343,
-      "expectedSha256": "59ad0b7f0cd29d219d48f3a54a3d6650c208d2853ac85e9576f3ece2fbe0d08a",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "E. Agol et al. (2021), Refining the Transit-timing and Photometric Analysis of TRAPPIST-1, PSJ 2, 1",
       "license": "Factual numerical measurements; source attribution retained",
@@ -41,7 +39,7 @@
           {
             "catalogueId": "source-trappist-1-inter-title-font",
             "role": "material",
-            "evidence": "src/objects/trappist-1/source/manifest.json@0000000000000000000000000000000000000000#/inputs/1"
+            "evidence": "Origin and product identifier recorded on this manifest entry."
           }
         ]
       }
@@ -49,8 +47,6 @@
     {
       "id": "trappist-1-preparation-raster",
       "path": "preparation/raster.json",
-      "expectedBytes": 2076,
-      "expectedSha256": "1357a732d27d619b44bda659154205c2765245a12811ec369ce23e2d0d8bdf54",
       "origin": "Repository-authored raster recipe: the shared neutral gray on the reference sphere, transparent plates",
       "sourceBinding": {
         "kind": "local",
@@ -68,8 +64,6 @@
     {
       "id": "trappist-1-preparation-geometry",
       "path": "preparation/geometry.json",
-      "expectedBytes": 1711,
-      "expectedSha256": "e56e0b5d3f7517c5a0ee423274b464ef4f62de99febd2b498d71f118eea8bd34",
       "origin": "Repository-authored CSS geometry profile: 248-unit sphere, 16 x 32 leaves, emissive material",
       "sourceBinding": {
         "kind": "local",
@@ -87,8 +81,6 @@
     {
       "id": "trappist-1-preparation-celestial",
       "path": "preparation/celestial.json",
-      "expectedBytes": 135,
-      "expectedSha256": "4ad56ba2a58a8767e7e9d764c8fe05a2c39b52bf78b62d2ec314ff1a66b30510",
       "origin": "Repository-authored celestial recipe: astrometric sky registration for the placed star, no directional Sun",
       "sourceBinding": {
         "kind": "local",
@@ -105,8 +97,6 @@
     {
       "id": "trappist-1-preparation-presentation",
       "path": "preparation/presentation.json",
-      "expectedBytes": 105,
-      "expectedSha256": "1392f252ad6e9fdb6ff26ef5c3a13aa6a8c628fee63c75e7ce843318fdc8db39",
       "origin": "Repository-authored presentation profile: emissive mode",
       "sourceBinding": {
         "kind": "local",
@@ -123,8 +113,6 @@
     {
       "id": "trappist-1-physical-solar-system-recipe",
       "path": "presentation/solar-system.json",
-      "expectedBytes": 221,
-      "expectedSha256": "43c71da4f9a50d879dc217fcb511be612f7e1e54cfe9b50942557f5ce6aea729",
       "origin": "Repository-authored scene recipe: published radius, camera plan",
       "sourceBinding": {
         "kind": "local",
@@ -249,8 +237,6 @@
     {
       "id": "trappist-1-miri-3077-white",
       "path": "science/jwst-3077/white-15um.csv",
-      "expectedBytes": 800442,
-      "expectedSha256": "0735af0fbda80458572ef15045d6dafb1928fd0fb470306847febad7656c6364",
       "origin": "https://mast.stsci.edu/search/ui/#/jwst/results?proposal_id=3077",
       "productId": "15 um white light curve, program 3077 visit 1",
       "title": "TRAPPIST-1 MIRI/F1500W phase-curve light curve, 59 hours",
@@ -274,8 +260,6 @@
     {
       "id": "trappist-1-chart-assets",
       "path": "content/charts.json",
-      "expectedSha256": "0172365249efb4f0725dcb2218b7042e6a32211274d30fb04c718df1b2a68f10",
-      "expectedBytes": 1318,
       "origin": "Repository-authored TRAPPIST-1 chart asset recipe bound to scientific source records.",
       "credit": "cssEarth project",
       "license": "Repository-authored factual data",
@@ -292,8 +276,6 @@
     {
       "id": "trappist-1-agol-2024-transit-forecast",
       "path": "science/agol-2024/forecast-2025-2027.csv",
-      "expectedBytes": 110262,
-      "expectedSha256": "cbd826a53a6357673bb8e5a6e803773909693579e0e30e474650a6a8afb8fb83",
       "origin": "https://arxiv.org/e-print/2409.11620",
       "credit": "E. Agol, N. H. Allen, B. Benneke, L. Delrez et al. (2024), Updated forecast for TRAPPIST-1 times of transit for all seven exoplanets incorporating JWST data, arXiv:2409.11620",
       "license": "Data behind the paper's Figure 1, published with the arXiv e-print; factual forecast times, source attribution retained",
@@ -312,8 +294,6 @@
     {
       "id": "neutral-disc-context-marker",
       "path": "presentation/context.png",
-      "expectedBytes": 6339,
-      "expectedSha256": "2d0a4001205266b9d3ab6a5dc8c013b405ac45a01b7a42347ebc004a920ff3cd",
       "origin": "https://doi.org/10.3847/PSJ/abd022",
       "credit": "Sphere of the published radius; marker written by tools/objects/new-star.mts",
       "license": "Project-authored display derivative.",
@@ -335,8 +315,6 @@
     {
       "id": "trappist-1-gaia-dr3-xp-sampled",
       "path": "photometry/gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 15429,
-      "expectedSha256": "ba0f9bc5ffba217c60d6654983ef1d6c3fc08b2f38ecc8d317c863e65c7c4e0e",
       "origin": "https://doi.org/10.5281/zenodo.6674521",
       "credit": "Sampled from the Gaia DR3 continuous spectrum with GaiaXPy (Ruz-Mieres 2022); external calibration by Montegriffo et al. (2023), A&A 674, A3",
       "license": "Project-generated from the archived Gaia spectrum; Gaia acknowledgement retained.",
@@ -360,42 +338,28 @@
   "documents": [
     {
       "path": "content/object.json",
-      "expectedBytes": 3929,
-      "expectedSha256": "48d549414aea559390972a792711f5cce3ed7a5fd6dca412f5b6f00061c4ebcc",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipe and legend."
       }
     },
     {
-      "path": "preparation/acquisition.json",
-      "expectedBytes": 1486,
-      "expectedSha256": "dd1931e0d8e61ffe01f76f310976e08f6311c73bebe586cb06e5ddc13baefafe"
+      "path": "preparation/acquisition.json"
     },
     {
-      "path": "preparation/navigation.json",
-      "expectedBytes": 447,
-      "expectedSha256": "db0bf2dae2ac0856b8c7c5abf037a59803f721b4ac0cf217f6ec082e1c110567"
+      "path": "preparation/navigation.json"
     },
     {
-      "path": "preparation/rotation.json",
-      "expectedBytes": 1090,
-      "expectedSha256": "943c287be0486b6192f1d07f2b29862b50bb354740feefcc9138f075c489dcac"
+      "path": "preparation/rotation.json"
     },
     {
-      "path": "presentation/LICENSE.INTER-OFL",
-      "expectedBytes": 4370,
-      "expectedSha256": "a2cbcad90928f43b2a19e4638b4555f788c2162baf7939051f16b4177889ba88"
+      "path": "presentation/LICENSE.INTER-OFL"
     },
     {
-      "path": "presentation/title-mark.json",
-      "expectedBytes": 3267,
-      "expectedSha256": "597e5077a374082c31c0a6f65a168ac608e24c22b1f53cc65ce2a260055019f6"
+      "path": "presentation/title-mark.json"
     },
     {
       "path": "reference/rendered-default-view.png",
-      "expectedBytes": 335213,
-      "expectedSha256": "22b960a91cfc8ab296fe5dbd6d9067f1117a5f5cca5d27a7c22ccbadc1169eb0",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the branch's dev server at /trappist-1/ with the default camera, headless Chrome via Playwright at 1440 by 900 (DPR 2, downscaled to 1440 wide), taken 2026-09-17 after preparation, no console errors: the star's disc in the colour of its own Gaia spectrum, with the planets' orbits edge-on across it."
@@ -403,8 +367,6 @@
     },
     {
       "path": "reference/rendered-system.png",
-      "expectedBytes": 309265,
-      "expectedSha256": "d48de830f5e0c3bad16a4b2b390fac415fcd7db33d9467f012d49ddc8a639fb2",
       "sourceBinding": {
         "kind": "local",
         "reason": "Evidence capture: the same server at /trappist-1/?overview=system, turned about 60 degrees off the arrival angle by a drag, same browser and size: the seven orbits as nested ellipses with their planets labelled. The default arrival angle shows them edge-on, which is how they are seen from Earth and why these planets transit."

@@ -247,9 +247,9 @@ export async function requireAuthoredSourcePins({ objectId, descriptor, root, so
     const path = resolve(directory, reference.path);
     if (relative(directory, path).startsWith('../')) throw new TypeError(`Authored source escapes its object package: ${reference.path}.`);
     const record = records.find(entry => `source/${String(entry.path)}` === reference.path);
-    if (!record) throw new TypeError(`Authored source is not pinned by the manifest: ${reference.path}.`);
+    if (!record) throw new TypeError(`Authored source is not declared in the manifest: ${reference.path}.`);
     const bytes = await source(path);
-    if (sha256(bytes) !== record.expectedSha256) throw new TypeError(`Authored source digest drifted: ${reference.path}.`);
+    if (record.expectedSha256 !== undefined && sha256(bytes) !== record.expectedSha256) throw new TypeError(`Source digest drifted: ${reference.path}.`);
     closure.add(path);
   }
   return recipe;
