@@ -79,7 +79,7 @@ export function parseCli(args: readonly string[]): CliOptions {
     for(let i=1;i<args.length;i++){
       const arg=args[i];if(!arg.startsWith('-')){positional.push(arg);continue;}
       if(['--json','--verbose'].includes(arg)){if(flags.has(arg))throw new TypeError(`Repeated option ${arg}`);flags.add(arg);continue;}
-      if(!(command==='outputs'?['--structure']:command==='project'?['--geometry','--out']:['--output','--hdu','--structure','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty','--geometry']).includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
+      if(!(command==='outputs'?['--structure']:command==='project'?['--geometry','--out']:['--output','--hdu','--structure','--plane','--pixel','--out','--band','--aperture','--background','--continuum','--uncertainty','--geometry','--figure-background']).includes(arg)||values.has(arg))throw new TypeError(`Unknown or repeated ${command} option ${arg}`);
       const value=args[++i];if(!value||value.startsWith('--'))throw new TypeError(`Missing value for ${arg}`);values.set(arg,value);
     }
     if(positional.length!==1)throw new TypeError(`Use telescope ${command} ARTIFACT_JSON`);
@@ -99,7 +99,7 @@ export function parseCli(args: readonly string[]): CliOptions {
     const selection:OutputRequest={kind,hdu,...(values.has('--structure')?{structure:values.get('--structure')!}:{}),...(plane===undefined?{}:{plane}),...(pixel?{pixel}:{}),
       ...(values.has('--band')?{band:numbers('--band')}:{}),...(values.has('--aperture')?{aperture:numbers('--aperture')}:{}),
       ...(values.has('--background')?{background:values.get('--background')==='none'?'none':numbers('--background')}:{}),
-      ...(values.has('--continuum')?{continuum:numbers('--continuum')}:{}),...(uncertainty?{uncertainty}:{})};
+      ...(values.has('--continuum')?{continuum:numbers('--continuum')}:{}),...(uncertainty?{uncertainty}:{}),...(values.has('--figure-background')?{figureBackground:values.get('--figure-background') as OutputRequest['figureBackground']}:{})};
     validateOutputRequest(selection);
     return {command,...common,directory:resolve(directory),selection};
   }

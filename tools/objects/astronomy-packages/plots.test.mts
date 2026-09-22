@@ -3,6 +3,7 @@ import { mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
+import { PNG } from 'pngjs';
 import { plotNumericPreview } from './plots.mts';
 
 const root=resolve(import.meta.dirname,'../../..');
@@ -33,5 +34,19 @@ test('scatter-ellipses draws k-sigma covariance contours that match the closed-f
       assert.ok(Math.abs(ellipse.width-2*k*major)<1e-9&&Math.abs(ellipse.height-2*k*minor)<1e-9,`axes at ${k}σ`);assert.ok(Math.abs(((ellipse.angleDeg-angle)%180+180)%180)<1e-9||Math.abs(((ellipse.angleDeg-angle)%180+180)%180-180)<1e-9,`angle ${ellipse.angleDeg} vs ${angle}`);}
     await assert.rejects(plotNumericPreview(resolve(directory,'singular'),{kind:'scatter-ellipses',title:'Singular',xLabel:'x',yLabel:'y',points:[{x:0,y:0,label:'s',covariance:[1,1,1]}]}),/positive-definite/u);
     await assert.rejects(plotNumericPreview(resolve(directory,'levels'),{kind:'scatter-ellipses',title:'Levels',xLabel:'x',yLabel:'y',sigmaLevels:[2,1],points:[{x:0,y:0}]}),/increasing/u);
+  } finally { await rm(directory,{recursive:true,force:true}); }
+});
+
+/** The top-left pixel of a PNG and the fill of the SVG figure patch: the two places a figure background shows. */
+export async function figureBackgroundPixels(png:string,svg:string){const image=PNG.sync.read(await readFile(png)),svgText=await readFile(svg,'utf8'),patch=/<g id="patch_1">\s*<path[^>]*style="fill: ?([^;"]+)/u.exec(svgText);return{rgba:[...image.data.subarray(0,4)],svgFill:patch?.[1]??'absent'};}
+test('numeric previews are transparent by default and opaque on request, in both PNG and SVG',async()=>{
+  const directory=await mkdtemp(resolve(tmpdir(),'family-background-'));
+  try {
+    const preview={kind:'histogram' as const,title:'Counts',xLabel:'x',yLabel:'n',edges:[0,1,2],counts:[3,4]};
+    const clear=await plotNumericPreview(resolve(directory,'clear'),preview),solid=await plotNumericPreview(resolve(directory,'solid'),preview,{figureBackground:'opaque'});
+    assert.equal(clear.figureBackground,'transparent');assert.equal(solid.figureBackground,'opaque');
+    const a=await figureBackgroundPixels(resolve(directory,'clear','preview.png'),resolve(directory,'clear','preview.svg')),b=await figureBackgroundPixels(resolve(directory,'solid','preview.png'),resolve(directory,'solid','preview.svg'));
+    assert.equal(a.rgba[3],0);assert.notEqual(a.svgFill,'#ffffff');assert.deepEqual(b.rgba,[255,255,255,255]);assert.equal(b.svgFill,'#ffffff');
+    await assert.rejects(plotNumericPreview(resolve(directory,'bad'),preview,{figureBackground:'white' as never}),/transparent or opaque/u);
   } finally { await rm(directory,{recursive:true,force:true}); }
 });

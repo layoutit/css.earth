@@ -119,9 +119,11 @@ with (out/'values.csv').open('w',newline='') as file:
   writer.writerow(['wavelength_um','value','standard_deviation'])
   for w,v,e in zip(wave,values,sigma):writer.writerow([w,number(v),number(e)])
  else:raise ValueError('Unknown plot kind')
-presentation['png']={'background':'transparent','bounds':'tight','gutterInches':0.12}
-fig.savefig(out/'figure.png',dpi=160,transparent=True,bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope selections'})
-fig.savefig(out/'figure.svg',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope selections'})
+background=r['selection'].get('figureBackground','transparent')
+if background not in ('transparent','opaque'): raise ValueError('figureBackground must be transparent or opaque')
+presentation['png']={'background':background,'bounds':'tight','gutterInches':0.12}
+fig.savefig(out/'figure.png',dpi=160,transparent=background=='transparent',bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope selections'})
+fig.savefig(out/'figure.svg',transparent=background=='transparent',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope selections'})
 plt.close(fig)
 json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':files,'presentation':presentation,'usable':int(np.isfinite(values).sum())},sys.stdout)
 `;
@@ -143,6 +145,10 @@ export async function plotProduct(directory:string,target:string,data:Record<str
  * units and Matplotlib owns the rendered figure; callers retain selection,
  * calibration and scientific interpretation in their family receipts.
  */
+/** Figure background for PNG and SVG outputs: transparent, or opaque in the figure's own face colour. */
+export type FigureBackground='transparent'|'opaque';
+export interface FigureOptions {readonly figureBackground?:FigureBackground}
+export function figureBackground(value:unknown):FigureBackground{if(value!=='transparent'&&value!=='opaque')throw new TypeError('figureBackground must be transparent or opaque.');return value;}
 /** A point with an optional 2×2 covariance packed as [xx, xy, yy] in the squared axis unit. */
 export interface EllipsePoint {readonly x:number;readonly y:number;readonly label?:string;readonly covariance?:readonly [number,number,number]}
 /** One drawn contour: k times the 1σ covariance ellipse, full axis lengths, major-axis angle in degrees from +x toward +y. */
@@ -164,7 +170,9 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 
-r=json.load(sys.stdin); d=r['preview']; out=Path(r['directory']); out.mkdir(parents=True,exist_ok=True)
+r=json.load(sys.stdin); d=r['preview']; out=Path(r['directory']); background=r['figureBackground']
+if background not in ('transparent','opaque'): raise ValueError('figureBackground must be transparent or opaque')
+out.mkdir(parents=True,exist_ok=True)
 kind=d['kind']; fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
 if kind=='series':
  for s in d['series']:
@@ -225,13 +233,14 @@ elif kind=='raster':
  fig.colorbar(shown,ax=ax,label=d['colorLabel'])
 else: raise ValueError('Unknown numeric preview kind')
 ax.set_title(d['title'],fontsize=10);ax.set_xlabel(d['xLabel']);ax.set_ylabel(d['yLabel'])
-fig.savefig(out/'preview.png',dpi=160,transparent=True,bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope family preview'})
-fig.savefig(out/'preview.svg',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope family preview'})
+fig.savefig(out/'preview.png',dpi=160,transparent=background=='transparent',bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope family preview'})
+fig.savefig(out/'preview.svg',transparent=background=='transparent',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope family preview'})
 plt.close(fig)
-json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':['preview.png','preview.svg'],'kind':kind,**({'ellipses':drawn} if kind=='scatter-ellipses' else {})},sys.stdout)
+json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':['preview.png','preview.svg'],'kind':kind,'figureBackground':background,**({'ellipses':drawn} if kind=='scatter-ellipses' else {})},sys.stdout)
 `;
 
-export async function plotNumericPreview(directory:string,preview:NumericPreview):Promise<{readonly astropy:string;readonly matplotlib:string;readonly files:readonly string[];readonly kind:NumericPreview['kind'];readonly ellipses?:readonly DrawnEllipse[]}> {
+export async function plotNumericPreview(directory:string,preview:NumericPreview,options:FigureOptions={}):Promise<{readonly astropy:string;readonly matplotlib:string;readonly files:readonly string[];readonly kind:NumericPreview['kind'];readonly figureBackground:FigureBackground;readonly ellipses?:readonly DrawnEllipse[]}> {
+  const background=figureBackground(options.figureBackground??'transparent');
   const tc=await astroqueryToolchain();
   return new Promise((accept,reject)=>{
     const child=spawn(tc.python,['-c',NUMERIC_PREVIEW_PYTHON],{env:{...process.env,...tc.env,MPLBACKEND:'Agg'},stdio:['pipe','pipe','pipe']});
@@ -244,9 +253,9 @@ export async function plotNumericPreview(directory:string,preview:NumericPreview
         const files=requireArray(result.files).map((value,index)=>requireString(value,`plot file ${index}`));
         const number=(value:unknown,label:string)=>{if(typeof value!=='number'||!Number.isFinite(value))throw new TypeError(`${label} must be finite.`);return value;};
         const ellipses=result.ellipses===undefined?undefined:requireArray(result.ellipses).map((value,index)=>{const row=requireRecord(value);return{label:requireString(row.label,`ellipse ${index} label`),sigma:number(row.sigma,'ellipse sigma'),x:number(row.x,'ellipse x'),y:number(row.y,'ellipse y'),width:number(row.width,'ellipse width'),height:number(row.height,'ellipse height'),angleDeg:number(row.angleDeg,'ellipse angle')};});
-        accept({astropy:requireString(result.astropy),matplotlib:requireString(result.matplotlib),files,kind:preview.kind,...(ellipses?{ellipses}:{})});
+        accept({astropy:requireString(result.astropy),matplotlib:requireString(result.matplotlib),files,kind:preview.kind,figureBackground:figureBackground(result.figureBackground),...(ellipses?{ellipses}:{})});
       }catch(error){reject(error);}
     });
-    child.stdin.end(JSON.stringify({directory,preview}));
+    child.stdin.end(JSON.stringify({directory,preview,figureBackground:background}));
   });
 }
