@@ -148,7 +148,11 @@ Moon heat anomalies 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, midnight
 temperature 13.98 → 13.74 MB, Ceres ammonium band 13.11 → 12.65 MB, mean channel
 error 0.14 to 0.34 of 255 and no texel off by more than 8. Relief shading
 multiplies the looked-up colour afterwards, so shaded lenses keep their wider
-colour range.
+colour range. Pixelmatch (threshold 0.1) against the previous bake finds no
+differing pixel in 78 of the 80 changed files; the largest visible change is a
+lossy-encoder shift of up to 58 on atlas band edges of Miranda's elevation
+([Moon heat anomalies](illustrations/palette-steps/moon-heat-anomalies-pixelmatch.png),
+[Miranda worst crop](illustrations/palette-steps/miranda-elevation-worst-crop.png)).
 
 Validity comes from the selected product's mask, alpha or no-data rule. Numeric
 bilinear sampling rejects a footprint containing an invalid neighbor. Categorical
