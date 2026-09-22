@@ -34,6 +34,10 @@ export const CI_ONLY_CONDITIONS=["needs.lint.result != 'success'",'failure()'];
  * local run has no such cache to consult, so — like LOCAL_EXPRESSION_SUBSTITUTIONS below — it substitutes the
  * always-correct answer (never skip) instead of failing: the condition is stripped and the step always runs. */
 const CACHE_HIT_CONDITION=/^steps\.[\w-]+\.outputs\.cache-hit(?:-\w+)? != 'true'$/u;
+/** `!cancelled()` makes a step run even after an earlier one failed, so the advisory audit reports all of its
+ * findings instead of stopping at the first. A local run has nothing to cancel and already runs every step it
+ * reaches, so the condition is stripped and the step runs. */
+const ALWAYS_RUN_CONDITION=/^\$\{\{ !cancelled\(\) \}\}$/u;
 const MATRIX_LANE='${{ matrix.lane }}';
 const SUPPORTED_MATRICES=[
  {aggregate:'universe',job:'universe-checks',laneEnv:'CI_UNIVERSE_LANE',output:'run_universe'},
@@ -105,7 +109,8 @@ function readJobSteps(workflow:Record<string,unknown>,job:Record<string,unknown>
   // failed prerequisite to report and no parallel job to cancel.
   if(step.if!==undefined&&CI_ONLY_CONDITIONS.includes(String(step.if).trim()))return [];
   const cacheGated=step.if!==undefined&&CACHE_HIT_CONDITION.test(String(step.if).trim());
-  if((step.if!==undefined&&!cacheGated)||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
+  const alwaysRun=step.if!==undefined&&ALWAYS_RUN_CONDITION.test(String(step.if).trim());
+  if((step.if!==undefined&&!cacheGated&&!alwaysRun)||step['working-directory']!==undefined||step['continue-on-error']!==undefined||step.shell!==undefined)
    throw new Error('Local CI needs explicit support for this step execution policy.');
   const result={name:requireString(step.name),run:requireString(step.run),env:{...inherited,...decodeEnvironment(step.env)}};
   if(JSON.stringify(result).includes('${{'))throw new Error('Local CI cannot evaluate GitHub expressions.');
