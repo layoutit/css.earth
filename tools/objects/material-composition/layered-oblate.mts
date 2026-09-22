@@ -1952,11 +1952,8 @@ async function prepareNormalMaterialMasters() {
       })];
     }),
   ));
-  const defaultFixedMaterialRawSha256 = createHash("sha256")
-    .update(defaultFixedMaterial.output)
-    .digest("hex");
   const approvedReferenceMatchesDefault =
-    defaultFixedMaterialRawSha256 === approvedReferenceFixedMaterialRawSha256;
+    Buffer.compare(defaultFixedMaterial.output, approvedReferenceFixedMaterial) === 0;
   const orbitMaterialAtlas = preparedMaterialModes.full.orbitAtlas;
   const interiorAtmosphereAtlas = preparedMaterialModes.full.interiorAtlas;
   await Promise.all([
@@ -2030,7 +2027,6 @@ async function prepareNormalMaterialMasters() {
     optimizePreparedQ75Webp(PLANET_POLAR_TEXTURE_PATH),
   ]);
   const phaseMetadata = {
-    approvedReferenceFixedMaterialRawSha256,
     approvedReferenceAsset: {
       byteLength: approvedFixedMaterialAsset.byteLength,
       sha256: sha256(approvedFixedMaterialAsset),
@@ -2038,7 +2034,6 @@ async function prepareNormalMaterialMasters() {
     initialObjectView,
     defaultFixedMaterial: materialMetadata(defaultFixedMaterial),
     defaultInteriorMaterial: materialMetadata(defaultInteriorMaterial),
-    defaultFixedMaterialRawSha256,
     approvedReferenceMatchesDefault,
     orbitMaterialAtlas: materialMetadata(orbitMaterialAtlas),
   };
@@ -2053,9 +2048,9 @@ function materialMetadata<T extends {output:Uint8Array}>({ output, ...metadata }
 }
 
 async function composePlanetTextures({
-  approvedReferenceFixedMaterialRawSha256, approvedReferenceAsset,
+  approvedReferenceAsset,
   initialObjectView, defaultFixedMaterial,
-  defaultInteriorMaterial, defaultFixedMaterialRawSha256,
+  defaultInteriorMaterial,
   approvedReferenceMatchesDefault, orbitMaterialAtlas,
 }:Awaited<ReturnType<typeof prepareNormalMaterialMasters>>) {
   const interiorLensMaterialAtlases = Object.freeze(Object.fromEntries(
@@ -2379,9 +2374,6 @@ async function composePlanetTextures({
       tileWidth: PLANET_FIXED_MATERIAL_SIZE,
       tileHeight: PLANET_FIXED_MATERIAL_SIZE,
       defaultViewDegrees: CAMERA_ROTATION_X_DEGREES,
-      defaultFrameRawSha256: defaultFixedMaterialRawSha256,
-      approvedReferenceFrameRawSha256:
-        approvedReferenceFixedMaterialRawSha256,
       approvedReferenceMatchesDefault,
       defaultAsset: Object.freeze({
         preparationPath: config.labels.label012,
@@ -2414,7 +2406,6 @@ async function composePlanetTextures({
         sourcePath: config.labels.label013,
         assetBytes: approvedReferenceAsset.byteLength,
         assetSha256: approvedReferenceAsset.sha256,
-        rawSha256: approvedReferenceFixedMaterialRawSha256,
         embeddedInOrbitAtlas: false,
       }),
       presentationScale: PLANET_FIXED_MATERIAL_COVERAGE_SCALE,

@@ -74,7 +74,6 @@ export interface KeckFile {
   readonly filehand: string;
   readonly url: string;
   readonly bytes: number;
-  readonly sha256: string;
   /** What KOA calls the frame: `object` for science, `bias`, `arclamp` and the rest for calibrations, absent for a product. */
   readonly imageType?: string;
   /** For an archive product, the level KOA ingested it at (`lev1`, `lev2`) and how KOA describes the stage. */
@@ -232,8 +231,8 @@ export async function assertDetectorCard(table: InstrumentTable, directory: stri
 /** Fetch a file and record it as the program pins it. */
 async function pin(directory: string, koaid: string, filehand: string, url: string, extra: Partial<KeckFile> = {}): Promise<KeckFile> {
   const name = nameOf(filehand);
-  const { sha256, bytes } = await koaDownload(url, resolve(directory, name));
-  return { koaid, name, filehand, url, bytes, sha256, ...extra };
+  const { bytes } = await koaDownload(url, resolve(directory, name));
+  return { koaid, name, filehand, url, bytes, ...extra };
 }
 
 /** The nights a KOA id can be on: the science frame's own UT date, and `nights` days either side of it. KOA files a frame

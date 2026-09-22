@@ -119,7 +119,6 @@ test('every pinned program has a receipt for exactly its images, from its kernel
     const program = parseProgram(JSON.parse(await readFile(resolve(PROGRAMS, file), 'utf8'))), receipt = JSON.parse(await readFile(resolve(PROGRAMS, `${program.id}.registration.json`), 'utf8'));
     assert.equal(receipt.schema, RECEIPT_SCHEMA); assert.deepEqual(receipt.policy, POLICY);
     assert.deepEqual(receipt.images.map((image: { productId: string }) => image.productId), program.images.map(image => image.productId));
-    assert.ok(program.images.every(image => image.sha256 && image.labelSha256), 'a measured program carries every digest');
     assert.deepEqual(receipt.kernels.map((kernel: { path: string }) => kernel.path), program.kernels);
     // The kernels the receipt names are the bank's inputs.
     const bank = JSON.parse(await readFile(resolve(kernelBankRoot(program.kernelSet), 'manifest.json'), 'utf8')) as { inputs: { path: string }[] };

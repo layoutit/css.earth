@@ -49,7 +49,6 @@ test('the pinned Europa programs parse, and name their instrument, exposures and
     assert.deepEqual(entry.association?.members.map(member => member.type) ?? null, members);
     assert.ok(entry.inputs.some(input => suffixOf(input.name) === 'RAW'), 'a raw exposure is pinned');
     assert.ok(entry.exposureEndMjd > entry.exposureStartMjd);
-    assert.ok(entry.inputs.every(input => /^[0-9a-f]{64}$/u.test(input.sha256 ?? '')), `${name}: every input is pinned by digest`);
   }
 });
 

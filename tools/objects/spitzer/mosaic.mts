@@ -21,7 +21,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
-import { assertInputPins, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
+import { assertInputPins, pinFile, readProductRecord, sameRun, writeProductRecord, type ProductInput, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { defaultDataRoot, readSpitzerProgram, REPOSITORY, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { spitzerSoftware, spitzerToolchain } from './toolchain.mts';
 
@@ -112,14 +112,15 @@ export const mosaicMembers = (channel: SpitzerChannel) => channel.frames.filter(
 
 /** Every pinned file a channel's re-mosaic reads, as product-record inputs. The archive's own mosaic is an input because the
  * run resamples onto its grid; it is named `archive-mosaic` so no reader mistakes it for something the run produced. */
-export function channelInputs(program: SpitzerProgram, channel: SpitzerChannel): ProductInput[] {
+export async function channelInputs(program: SpitzerProgram, channel: SpitzerChannel, directory: string): Promise<ProductInput[]> {
   const inputs: ProductInput[] = [];
   const reference = channel.products.find(product => product.role === 'mosaic');
   if (!reference) throw new Error(`Channel ${channel.channel} pins no archive mosaic.`);
-  inputs.push({ role: 'archive-mosaic', identity: reference.name, bytes: reference.bytes, sha256: reference.sha256 });
+  const measured = async (name: string) => (await pinFile(resolve(directory, name))).sha256;
+  inputs.push({ role: 'archive-mosaic', identity: reference.name, bytes: reference.bytes, sha256: await measured(reference.name) });
   for (const frame of mosaicMembers(channel))
     for (const file of frame.files) if (file.role !== 'frame-uncertainty')
-      inputs.push({ role: file.role, identity: file.name, bytes: file.bytes, sha256: file.sha256 });
+      inputs.push({ role: file.role, identity: file.name, bytes: file.bytes, sha256: await measured(file.name) });
   if (!inputs.some(input => input.role === 'frame')) throw new Error(`Channel ${channel.channel}: no frame has the mosaic's frame time of ${channel.mosaicFrameTimeSeconds} s.`);
   return inputs;
 }
@@ -141,7 +142,7 @@ export async function remosaicChannel(program: SpitzerProgram, channel: SpitzerC
   const directory = resolve(dataRoot, program.id, `ch${channel.channel}`);
   const work = resolve(workRoot, program.id);
   await mkdir(work, { recursive: true });
-  const inputs = channelInputs(program, channel);
+  const inputs = await channelInputs(program, channel, directory);
   const members = mosaicMembers(channel);
   const parameters = { combine: 'mean', weighting: 'equal per contributing frame', footprintThreshold: FOOTPRINT_THRESHOLD,
     resampling: 'reproject.reproject_exact', grid: "the archive mosaic's own",

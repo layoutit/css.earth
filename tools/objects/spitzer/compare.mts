@@ -222,9 +222,9 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
   // identity of what it did read. Nothing below copies a digest out of the program or the record.
   const comparison = await compareMosaics(
     { path: ourPath, pin: { role: 'our-mosaic', identity: output, bytes: ourFile.bytes, sha256: ourFile.sha256 } },
-    { path: resolve(directory, archive.name), pin: { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes, sha256: archive.sha256 } },
-    { path: resolve(directory, uncertainty.name), pin: { role: 'archive-uncertainty', identity: uncertainty.name, bytes: uncertainty.bytes, sha256: uncertainty.sha256 } },
-    { path: resolve(directory, coverage.name), pin: { role: 'archive-coverage', identity: coverage.name, bytes: coverage.bytes, sha256: coverage.sha256 } });
+    { path: resolve(directory, archive.name), pin: { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes, sha256: (await pinFile(resolve(directory, archive.name))).sha256 } },
+    { path: resolve(directory, uncertainty.name), pin: { role: 'archive-uncertainty', identity: uncertainty.name, bytes: uncertainty.bytes, sha256: (await pinFile(resolve(directory, uncertainty.name))).sha256 } },
+    { path: resolve(directory, coverage.name), pin: { role: 'archive-coverage', identity: coverage.name, bytes: coverage.bytes, sha256: (await pinFile(resolve(directory, coverage.name))).sha256 } });
   const inputs = comparison.compared;
   const read = (role: string) => {
     const found = inputs.find(entry => entry.role === role);

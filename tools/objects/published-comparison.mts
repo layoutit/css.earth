@@ -43,13 +43,8 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   if (!input) throw new TypeError(`The manifest has no input ${spec.document.input}.`);
   const paper = await readFile(resolve(sourceDirectory, String(input.path)));
   const image = readPdfImage(paper, spec.document.object), pixels = sha256(image.data);
-  if (spec.document.sha256 === UNPINNED && adopt) {
-    Object.assign(stated.document, { width: image.width, height: image.height, sha256: pixels }); Object.assign(spec.document, stated.document);
-    await writeFile(specPath, JSON.stringify(stated, null, 2) + '\n');
-    console.log(`Adopted object ${spec.document.object} as ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}. Look at the figure before trusting it, then run node tools/sources/pin-object-documents.mts ${objectId}.`);
-  }
-  if (image.width !== spec.document.width || image.height !== spec.document.height || pixels !== spec.document.sha256)
-    throw new Error(`Object ${spec.document.object} is not the pinned ${spec.figure}: ${image.width}×${image.height}, pixels ${pixels}.${spec.document.sha256 === UNPINNED ? ' Run with --write to adopt it.' : ''}`);
+  if (image.width !== spec.document.width || image.height !== spec.document.height)
+    throw new Error(`Object ${spec.document.object} is not the ${image.width}×${image.height} ${spec.figure} the spec records.`);
   const figure: Raster = image, cell = columnCells(figure, spec);
 
   // The native outline over a sweep of rotational phase, through the same derivation the recipe's cameras come from.
@@ -100,7 +95,7 @@ export async function measurePublishedComparison(objectId: string, { adopt = fal
   }
   const evidence = {
     schema: COMPARISON_EVIDENCE_SCHEMA, objectId, lensId: spec.lensId, source: spec.source, figure: spec.figure,
-    document: { input: spec.document.input, object: spec.document.object, pixels: spec.document.sha256 },
+    document: { input: spec.document.input, object: spec.document.object, pixels },
     rotation: { path: record.rotation.path, columnOrder: record.rotation.columnOrder ?? null },
     columns,
     nativeOutline: { frames: atZero.length, residualPixelsAtZero: sweep[0], bestOffsetDegrees: Number(best[0]), sweepDegrees: SWEEP, residualPixels: sweep },

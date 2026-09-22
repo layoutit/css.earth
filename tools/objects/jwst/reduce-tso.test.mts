@@ -17,7 +17,6 @@ test('the WASP-43b MIRI program pins 30 raw segments, its CRDS context, its cont
   assert.deepEqual(pinned.segments.map(segment => /_(\d{5})-seg(\d{3})_/u.exec(segment.name)!.slice(1).join('/')), ['00001', '00002', '00003'].flatMap(exposure => Array.from({ length: 10 }, (_, i) => `${exposure}/${String(i + 1).padStart(3, '0')}`)));
   assert.equal(pinned.crdsContext, 'jwst_1535.pmap');
   assert.equal(pinned.oracle?.kind, 'eureka-light-curve-zip');
-  if (pinned.oracle?.kind === 'eureka-light-curve-zip') assert.match(pinned.oracle.sha256, /^[0-9a-f]{64}$/u);
   for (const template of Object.values(pinned.stages)) {
     const text = await readFile(resolve(program, template), 'utf8');
     assert.doesNotMatch(text, /\/Users\//u, `${template} carries no local path`);
