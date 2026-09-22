@@ -1,0 +1,55 @@
+{
+  "id": "gaia-dr3-beta-pictoris",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Gaia DR3 gaia_source and astrophysical_parameters rows and XP sampled spectrum for Beta Pictoris (source_id 4792774797545800832)",
+  "identifiers": [
+    {
+      "type": "Gaia DR3 source_id",
+      "value": "4792774797545800832"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://gea.esac.esa.int/archive/",
+      "label": "Gaia Archive"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/202243940",
+      "label": "Gaia Collaboration (2023), Gaia DR3 summary"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20ref_epoch%2C%20ra%2C%20dec%2C%20parallax%2C%20parallax_error%2C%20pmra%2C%20pmdec%2C%20radial_velocity%2C%20radial_velocity_error%2C%20phot_g_mean_mag%2C%20bp_rp%2C%20teff_gspphot%2C%20has_xp_sampled%2C%20ruwe%20FROM%20gaiadr3.gaia_source%20WHERE%20source_id%20%3D%204792774797545800832",
+      "checkedOn": "2026-09-22",
+      "locator": "gaiadr3.gaia_source at epoch 2016.0: ra 86.82123452009108, dec -51.066136257823345, parallax 50.930690628822894 +/- 0.14821085 mas, pmra 5.160196860824648, pmdec 84.0405295978282 mas/yr, radial_velocity 16.84059 +/- 0.33607236 km/s, G 3.8232, RUWE 3.07, has_xp_sampled true"
+    },
+    {
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync?REQUEST=doQuery&LANG=ADQL&FORMAT=csv&QUERY=SELECT%20source_id%2C%20radius_flame%2C%20mass_flame%2C%20radius_gspphot%2C%20teff_gspphot%2C%20logg_gspphot%20FROM%20gaiadr3.astrophysical_parameters%20WHERE%20source_id%20%3D%204792774797545800832",
+      "checkedOn": "2026-09-22",
+      "locator": "gaiadr3.astrophysical_parameters: radius_flame 1.5682815, mass_flame 1.6754763, radius_gspphot 1.5744, teff_gspphot 7938.053 K, logg_gspphot 4.2095"
+    },
+    {
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4792774797545800832&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
+      "checkedOn": "2026-09-22",
+      "locator": "XP sampled mean spectrum: 343 fluxes from 336 to 1020 nm in 2 nm steps, W m^-2 nm^-1"
+    },
+    {
+      "path": "src/objects/beta-pictoris/text.json",
+      "locator": "/introduction/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "This work has made use of data from the European Space Agency (ESA) mission Gaia (https://www.cosmos.esa.int/gaia), processed by the Gaia Data Processing and Analysis Consortium (DPAC).",
+      "scope": "citation",
+      "evidence": "src/objects/beta-pictoris/text.json#/introduction/sources/1"
+    }
+  ],
+  "publisher": "ESA / Gaia DPAC"
+}

@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-2405-18422",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Kammerer et al. (2024): JWST-TST High Contrast: JWST/NIRCam observations of the young giant planet beta Pic b",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2405.18422"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad5f19"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2405.18422",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad5f19",
+      "label": "The Astronomical Journal 168, 51"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2405.18422",
+      "checkedOn": "2026-09-22",
+      "locator": "Table 2: planet b photometry and contrast in six NIRCam filters (MCRDI): F210M 6.10e-3 Jy at 9.08 mag contrast, F335M 7.85e-3 Jy at 7.91, F444W 6.06e-3 Jy at 7.68, the contrasts computed against a stellar model atmosphere of beta Pic"
+    },
+    {
+      "path": "src/objects/beta-pictoris/investigations.json",
+      "locator": "/entries/4"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "J. Kammerer",
+    "K. Lawson",
+    "M. D. Perrin",
+    "I. Rebollido",
+    "C. V. Stark"
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "beta-pictoris-b",
+  "radiusKm": 103663.4,
+  "radiusSource": "Radius 1.45 +/- 0.02 Jupiter radii from Morzinski et al. (2015, ApJ 815, 108; arXiv:1511.02894), hot-start evolutionary tracks at the measured bolometric luminosity and an age of 23 +/- 3 Myr (model-dependent errors not included): 103,663 km at 71,492 km per Jupiter radius. Not a measured diameter: the planet is unresolved. GM from the dynamical mass 11.90 +2.93/-3.04 Jupiter masses of Lacour et al. (2021, Table 2) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+  "orbitalPeriodDays": 8591,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the published semi-major axis 9.93 +/- 0.03 au and the fitted masses of Lacour et al. (2021, Table 2, RV + b and c astrometry): the star 1.75, planet b 11.90 and planet c 8.89 Jupiter masses in Jacobi coordinates (b orbits the star-and-c barycentre), 1.769846 solar masses in all: sqrt(9.93^3 / 1.769846) = 23.521 yr = 8591.0 d. The paper prints no period for b.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the model radius in the shared neutral gray, self-luminous. No image, visible colour, map or oblateness of Beta Pictoris b is measured; its size comes from its luminosity and models, its mass and orbit from astrometry."
+  },
+  "effectiveTemperatureK": 1742,
+  "effectiveTemperatureSource": "1742 +/- 10 K, GRAVITY Collaboration (2020, A&A 633, A110; arXiv:1912.04651), the Exo-REM fit to the GRAVITY and GPI spectra (as cited by Ortiz Ceballos et al. 2026, Extended Data Table 3).",
+  "radio": {
+    "facility": "MeerKAT",
+    "frequencyGHz": [
+      0.85,
+      3.5
+    ],
+    "brightestBurstMicroJy": 307,
+    "quiescentSBandMicroJy": 48,
+    "circularPolarizationPercent": [
+      40,
+      70
+    ],
+    "magneticFieldKilogaussAtLeast": 1.25,
+    "epochs": [
+      "2025-02-15",
+      "2025-05-31",
+      "2026-02-20",
+      "2026-05-02"
+    ]
+  },
+  "radioSource": "Ortiz Ceballos, Berger and Cendes (2026, arXiv:2609.16720): rapid, recurring, 40-70% circularly polarised bursts and persistent emission at 0.856-3.5 GHz over four MeerKAT epochs (Extended Data Table 1), localised to planet b against Gaia quasars (4.4 sigma from the star); electron cyclotron maser emission at the highest observed frequency, 3.5 GHz, implies a field of at least 1.25 kG at the emission site. The radio source is unresolved: it places nothing on the sphere.",
+  "semiMajorAxisSource": "Lacour et al. (2021, Table 2): a 9.93 +/- 0.03 au at their parallax 51.44 mas, kept as the angular size 510.80 mas and placed at the Gaia DR3 distance: 10.029 au, 1388.04 radii of the star's 1,080,920 km; inclination 89.00 +/- 0.01 degrees.",
+  "massSource": "Radius 1.45 +/- 0.02 Jupiter radii from Morzinski et al. (2015, ApJ 815, 108; arXiv:1511.02894), hot-start evolutionary tracks at the measured bolometric luminosity and an age of 23 +/- 3 Myr (model-dependent errors not included): 103,663 km at 71,492 km per Jupiter radius. Not a measured diameter: the planet is unresolved. GM from the dynamical mass 11.90 +2.93/-3.04 Jupiter masses of Lacour et al. (2021, Table 2) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured."
+}

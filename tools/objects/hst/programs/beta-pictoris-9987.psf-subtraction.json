@@ -1,0 +1,99 @@
+{
+  "schema": "cssearth-hst-psf-subtraction@1",
+  "id": "beta-pictoris-9987",
+  "program": "beta-pictoris-9987",
+  "target": "BETA-PIC",
+  "reference": "ALF-PIC",
+  "bands": [
+    {
+      "band": "F435W",
+      "science": [
+        {
+          "roll": "1",
+          "long": "j8qj15060",
+          "short": "j8qj15050"
+        },
+        {
+          "roll": "2",
+          "long": "j8qj16060",
+          "short": "j8qj16050"
+        }
+      ],
+      "reference": {
+        "long": "j8qj17030",
+        "short": "j8qj17020"
+      },
+      "fluxRatio": {
+        "referenceOverScience": 1.65,
+        "relativeUncertainty": 0.02
+      }
+    },
+    {
+      "band": "F606W",
+      "science": [
+        {
+          "roll": "1",
+          "long": "j8qj15030",
+          "short": "j8qj15020"
+        },
+        {
+          "roll": "2",
+          "long": "j8qj16030",
+          "short": "j8qj16020"
+        }
+      ],
+      "reference": {
+        "long": "j8qj17060",
+        "short": "j8qj17050"
+      },
+      "fluxRatio": {
+        "referenceOverScience": 1.75,
+        "relativeUncertainty": 0.02
+      }
+    },
+    {
+      "band": "F814W",
+      "science": [
+        {
+          "roll": "1",
+          "long": "j8qj15090",
+          "short": "j8qj15080"
+        },
+        {
+          "roll": "2",
+          "long": "j8qj16090",
+          "short": "j8qj16080"
+        }
+      ],
+      "reference": {
+        "long": "j8qj17090",
+        "short": "j8qj17080"
+      },
+      "fluxRatio": {
+        "referenceOverScience": 1.9,
+        "relativeUncertainty": 0.02
+      }
+    }
+  ],
+  "fit": {
+    "annulusArcsec": [
+      2.0,
+      7.0
+    ],
+    "excludeStrip": {
+      "positionAngleDeg": 29.6,
+      "halfWidthArcsec": 3.0
+    },
+    "occulterArcsec": 0.9,
+    "shiftSearchPixels": 2.0,
+    "centre": {
+      "annulusArcsec": [
+        1.0,
+        3.0
+      ],
+      "excludeHalfWidthArcsec": 0.8
+    }
+  },
+  "source": "HST programme 9987 (PI H. Ford), the ACS/HRC coronagraph run of Golimowski et al. (2006, AJ 131, 3109): beta Pictoris at two telescope rolls about 10 degrees apart and alpha Pictoris, the A7IV reference star with colours like beta Pic's, in the orbit before, through F435W, F606W and F814W behind the 1.8 arcsecond occulting spot. The shift is fitted over the annulus 2 to 7 arcseconds with a 3 arcsecond half-width strip left out around the disc's midplane (position angle 29.6 degrees, Rebollido et al. 2024), so the disc stays out of it; inside 0.9 arcseconds is the occulter.",
+  "fluxRatioSource": "Golimowski et al. (2006, AJ 131, 3109; arXiv:astro-ph/0602292, Section 2.2): synthetic flux ratios F_alpha/F_beta of 1.65, 1.75 and 1.90 in F435W, F606W and F814W from Synphot, with the spectra of theta1 Serpentis and Praesepe 154 standing in for beta Pic and HD 165475B for alpha Pic, V of 3.27 and 3.86, matching the Cousins BVRI of Bessell (1990); uncertain by 2 percent in each band. The reference is divided by the ratio; only the shift is fitted."
+}

@@ -1,0 +1,161 @@
+{
+  "schema": "cssearth-volume-presentation-source@1",
+  "objectId": "beta-pictoris-disc",
+  "name": "Beta Pictoris debris disc",
+  "defaultLens": "visible",
+  "bank": {
+    "path": "src/objects/beta-pictoris-disc/prepared/lenses.json",
+    "sha256": "d919a671d3ee163fa78c6d7bfc787eb538d67c61809fc2262fedc945917a3011",
+    "bytes": 971854
+  },
+  "recipes": [
+    {
+      "id": "visible",
+      "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
+      "sha256": "047c9166273edbcf96b64c8315015ec4c57704bdc45a9b8ff2f7577035a1d435",
+      "bytes": 1680
+    },
+    {
+      "id": "contrast",
+      "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json",
+      "sha256": "d654229030198f7db82ca0638e071158b5a0c70dfda7e6355a95bc8fa60bd333",
+      "bytes": 1681
+    },
+    {
+      "id": "colour",
+      "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
+      "sha256": "822d14231379ba0a1c7405fd755feea95c56e272103efc1ab7e4717448ce3f4c",
+      "bytes": 1678
+    }
+  ],
+  "sharedInputs": [],
+  "inputEvidence": [],
+  "lenses": [
+    {
+      "id": "visible",
+      "label": "HST/STIS · debris disc, visible light",
+      "title": "The edge-on debris disc of Beta Pictoris in visible light, from Hubble's STIS coronagraph",
+      "description": "Hubble's STIS camera imaged Beta Pictoris behind its coronagraph at 0.58 micrometres in 1997, 2012 and 2013, and Ren et al. (2023) combined those observations into one image of the disc, which they deposited with their paper. It reaches closer to the star than the JWST images, down to 0.8 arcseconds (16 au), so the disc is drawn where planet d orbits, 26 au out; planets b and c, at 10 and 2.7 au, orbit inside the part no image reaches. The image is shown in grey, brightness only, one visible filter. The deposit carries no sky coordinates: the star is at its centre, its pixels are 50.72 mas, and it is north up and east left, which this project checked against the registered JWST image. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. The light seen near the star is placed on the far parts of the disc it passes through, not stacked along the sight line. Close to the star the subtraction leaves some starlight off the disc, which is drawn with it.",
+      "summary": "The edge-on disc of dust 16 to 82 au from the star in visible light, where planet d orbits, as Hubble imaged it.",
+      "detail": "in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923), 50.7 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "HST/STIS behind its coronagraph, in 1997, 2012 and 2013 (HST programmes 7125, 12551 and 12923): stis-50ccd"
+        },
+        {
+          "id": "colour",
+          "label": "Colour",
+          "value": "Brightness only: one filter (50CCD, clear, centred on 0.58 micrometres) in every channel, in the deposit's counts per pixel per second"
+        },
+        {
+          "id": "midplane",
+          "label": "Midplane measured here",
+          "value": "Position angle 29.6° (published 29.6°); the north-east side is 0.91 times as bright as the south-west"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "16 to 135 au; the light reaches the noise at 102 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its north-west side by convention"
+        }
+      ],
+      "input": "visible-stis-50ccd",
+      "preview": {
+        "path": "src/objects/beta-pictoris-disc/source/previews/visible.png",
+        "sha256": "87e1f642660c55a774dc3e62a97d49cb771d80f6098c11031b16f099b8afd3b0",
+        "bytes": 11180,
+        "authoredFrom": "visible-stis-50ccd"
+      }
+    },
+    {
+      "id": "contrast",
+      "label": "JWST/NIRCam · debris disc, 2.1 and 4.1 µm",
+      "title": "The edge-on debris disc of Beta Pictoris in its contrast to the star at 2.1 and 4.1 micrometres",
+      "description": "JWST/NIRCam imaged Beta Pictoris for 16 hours on 21 and 22 March 2025 behind the MASK335R coronagraph, which blocks the star, to time the rotation of its planet b (programme 4758, Zhou et al. 2026). The same images show the disc of dust around the star edge-on. These are MAST's own coronagraphy products, from the first of the observation's two coronagraph visits; the star is placed in each by planet b, whose orbit is known to a milliarcsecond, because the mosaics' own pointing misses it by 80 to 90 mas. Each filter is divided by the star's own brightness in it, which leaves the disc's contrast to the star; F210M is drawn blue, F410M red and their mean green, and empty sky fades out below three times its noise. The disc comes out nearly white: its contrast at 4.1 micrometres is within 15% of its contrast at 2.1. These are infrared colours, not what an eye would see. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. The light seen near the star is placed on the far parts of the disc it passes through, not stacked along the sight line. Nothing is drawn within 2.5 arcseconds (49 au) of the star, where the starlight left after subtraction outweighs the disc; the planets are their own spheres.",
+      "summary": "The edge-on disc of dust 49 to 126 au from the star, from two JWST filters, in the colour of its contrast to the star.",
+      "detail": "2025-03-21, 62.4 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "JWST/NIRCam behind the MASKA335R coronagraph, 2025-03-21: F410M, F210M"
+        },
+        {
+          "id": "colour",
+          "label": "Colour",
+          "value": "Reflectance: each filter over the star's own flux, red F410M, green F210M + F410M, blue F210M"
+        },
+        {
+          "id": "midplane",
+          "label": "Midplane measured here",
+          "value": "Position angle 30.7° (published 29.6°); the north-east side is 1.15 times as bright as the south-west"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "49 to 135 au; the light reaches the noise at 124 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its north-west side by convention"
+        }
+      ],
+      "input": "contrast-f410m",
+      "preview": {
+        "path": "src/objects/beta-pictoris-disc/source/previews/contrast.png",
+        "sha256": "7abd538758e526049bdd00c42913dde51e16a8cb4011605543a4ae3a7fd9d872",
+        "bytes": 14488,
+        "authoredFrom": "contrast-f410m"
+      }
+    },
+    {
+      "id": "colour",
+      "label": "HST/ACS · debris disc, colour 0.43 to 0.81 µm",
+      "title": "The edge-on debris disc of Beta Pictoris in its colour against the star, from Hubble's ACS coronagraph",
+      "description": "Hubble's ACS camera imaged Beta Pictoris behind its coronagraph on 1 October 2003 through blue, visible and near-infrared filters (F435W, F606W and F814W), at two telescope rolls, with the star alpha Pictoris as a reference for the starlight (programme 9987, Golimowski et al. 2006). Here the raw exposures were calibrated again, alpha Pic's light was scaled by the brightness ratio the paper states and subtracted, and each result was put on the sky north up. Each filter is then divided by the star's own brightness in it, so the colour is the disc's against the star's: a disc that scattered like the star shines would look white. F435W is drawn blue, F606W green and F814W red, and empty sky fades out below three times its noise. The paper's scaling leaves some of the star's glow beside the disc, which is drawn with it. The image has no third axis, so the depth is reconstructed: the disc is taken to be symmetric about its own axis, tilted 1 degree from edge-on with its north-west side nearer, and the emission of each ring of radius and height is solved so the volume reprojects to the image. Nothing is drawn within 1.5 arcseconds (29 au) of the star, where the paper finds the subtraction too uncertain; planets b and c orbit inside that.",
+      "summary": "The edge-on disc of dust 29 to 135 au from the star in three visible filters, in its colour against the star's.",
+      "detail": "2003-10-01, 25.0 mas pixels",
+      "facts": [
+        {
+          "id": "instrument",
+          "label": "Instrument",
+          "value": "HST/ACS/HRC behind its 1.8 arcsecond occulting spot, on 1 October 2003 (HST programme 9987): F435W, F606W, F814W"
+        },
+        {
+          "id": "colour",
+          "label": "Colour",
+          "value": "Reflectance: each filter over the star's own flux, red F814W, green F606W, blue F435W"
+        },
+        {
+          "id": "midplane",
+          "label": "Midplane measured here",
+          "value": "Position angle 29.9° (published 29.6°); the north-east side is 1.00 times as bright as the south-west"
+        },
+        {
+          "id": "extent",
+          "label": "Drawn extent",
+          "value": "29 to 135 au; the light reaches the noise at 135 au"
+        },
+        {
+          "id": "depth",
+          "label": "Depth",
+          "value": "Not measured; reconstructed from the image by axial symmetry about the disc's normal, tilted toward its north-west side by convention"
+        }
+      ],
+      "input": "colour-f435w-roll1",
+      "preview": {
+        "path": "src/objects/beta-pictoris-disc/source/previews/colour.png",
+        "sha256": "85d12f68b5d40ce80da37a108565772d2238763d0e95d27ece324a21be8286cf",
+        "bytes": 58940,
+        "authoredFrom": "colour-f435w-roll1"
+      }
+    }
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "beta-pictoris-b",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Beta Pictoris b",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 103663.4
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/beta-pictoris-b-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Beta Pictoris b",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 4049955.8,
+      "description": "Super-Jupiter 10 au from Beta Pictoris, imaged directly; the first exoplanet heard in radio.",
+      "systemName": "Beta Pictoris system",
+      "order": 1210,
+      "context": {
+        "order": 1210
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        21111815538811344,
+        380156487661042400,
+        -471282762993468740
+      ],
+      "presentationToReference": [
+        0.019630641606863203,
+        0.8718756802932865,
+        -0.4893336653278841,
+        0.6210464527526403,
+        0.37292077225348663,
+        0.689370293198964,
+        -0.7835278817205329,
+        0.3174317182245371,
+        0.5341546244595778
+      ],
+      "orbitUpReference": [
+        -0.8718756802932865,
+        -0.37292077225348663,
+        -0.3174317182245371
+      ],
+      "metersPerUnit": 334398.06451612903,
+      "bodyRadiusM": 103663400
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "7565ef63eea1d7b14218edfc9f5222e02eb690b34f6ee4e384c9aba60216e1fe"
+  }
+}

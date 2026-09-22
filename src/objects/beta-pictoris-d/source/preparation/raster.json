@@ -1,0 +1,62 @@
+{
+  "schema": "cssearth-raster-recipe@1",
+  "publicBase": "/scenes/beta-pictoris-d/",
+  "sourceWidth": 1024,
+  "sourceHeight": 512,
+  "width": 1024,
+  "height": 512,
+  "latitudeBands": 16,
+  "polarTile": 256,
+  "resample": "density-before-pack",
+  "polarProjection": "orthographic-bilinear",
+  "polesCombined": false,
+  "polesOutput": "beta-pictoris-d-poles-{id}{suffix}.webp",
+  "surfaceMetadata": {
+    "schema": "cssbeta-pictoris-d-prepared-assets@1"
+  },
+  "thumbnail": {
+    "size": 64,
+    "quality": 88,
+    "centerLongitudeDegrees": 0
+  },
+  "surfaces": [
+    {
+      "id": "shape",
+      "output": "beta-pictoris-d-surface-{id}{suffix}.webp",
+      "thumbnail": "beta-pictoris-d-lens-{id}.webp",
+      "source": "measurements.json",
+      "falseColor": false,
+      "science": {
+        "kind": "neutral-shape",
+        "qualification": "Shared neutral gray display convention for a self-luminous planet with no image or measured visible colour in this package; a sphere of the published radius that glows with its own heat (600 K), so no lighting."
+      }
+    }
+  ],
+  "emission": {
+    "offLimbSize": 600,
+    "limbSize": 512,
+    "bodyDiameter": 496,
+    "offLimbOutput": "beta-pictoris-d-context-{id}{suffix}.webp",
+    "limbOutput": "beta-pictoris-d-limb-{id}{suffix}.webp",
+    "metadata": {
+      "schema": "cssbeta-pictoris-d-prepared-emission@1",
+      "presentation": "prepared-emissive-surface-with-stationary-off-limb-context-and-limb-plate",
+      "offLimbContext": {
+        "logicalSize": 600,
+        "source": "none: no observation, a transparent plate",
+        "composition": "transparent",
+        "rotation": "none",
+        "runtimeAlphaProcessing": false
+      },
+      "limbMaterial": {
+        "logicalSize": 496,
+        "composition": "transparent: the sphere's own silhouette is the limb; the light just outside it is on the off-limb plate",
+        "surfaceReplacement": false,
+        "runtimeAlphaProcessing": false
+      },
+      "lighting": false,
+      "shadows": false,
+      "runtimeLighting": false
+    }
+  }
+}
