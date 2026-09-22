@@ -6,7 +6,7 @@ import { initializeShapeCloud } from '../../../features/shape-cloud/model.ts';
 import { readShapeCloudPreset, validateShapeCloudPreset } from './presets.ts';
 const geometry: GeometryMap = { width: 192, height: 160, groups: [], candidates: [{ id: 'ellipse-1', center: [90, 70], radii: [40, 30],
   angleRadians: .3, score: .8, coverage: .8, supportedArcs: [{ startRadians: 0, endRadians: Math.PI }] }] };
-const image: StructureImage = { id: 'source', label: 'Source', sourceSha256: 'a'.repeat(64), mapSha256: 'b'.repeat(64),
+const image: StructureImage = { id: 'source', label: 'Source', sourceSha256: 'a'.repeat(64), sourceUrl: 'https://example.org/source.png', mapSha256: 'b'.repeat(64),
   geometry: { file: 'geometry.json', sha256: 'c'.repeat(64) }, nativeWidth: 192, nativeHeight: 160, width: 192, height: 160,
   imageToFrame: [1,0,0,1,0,0], directory: '.local/nebula-lab/test', credit: 'Test', page: 'https://example.com' };
 function fixture() { return { schema: 'cssearth-shape-cloud-fit@1', id: 'tuned', label: 'Tuned', note: 'Authored depth',

@@ -34,7 +34,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
   const drag = useRef<{ id: number; x: number; y: number; view: CloudView; pan: boolean } | null>(null);
   const scene = result?.scene;
   const inspectionKey = inspectionFrame ? JSON.stringify(inspectionFrame) : fieldOfViewArcsec ?? 'scene';
-  const key = scene ? `${scene.neutral.sha256}:${scene.lenses.map(item => item.volume.sha256).join(':')}:${inspectionKey}` : '';
+  const key = scene ? `${scene.neutral.path}:${scene.lenses.map(item => item.volume.path).join(':')}:${inspectionKey}` : '';
   useEffect(() => () => { renderer.current?.destroy(); renderer.current = null; committedKey.current = ''; }, []);
   useEffect(() => {
     if (!result || !scene || !host.current || committedKey.current === key) return;
@@ -127,7 +127,7 @@ export function CompilerStage({ result, lensId, mode, stars, showOriginal, view,
       onDoubleClick={() => onView(earthCompilerView)} onKeyDown={event => { if (event.key === 'Home') { event.preventDefault(); onView(earthCompilerView); } }}>
       <div className="shape-cloud-render-host" ref={host} data-compiler-host="true" data-compiler-result={visible?.id ?? ''}
         style={{ width: '100%', height: '100%' }} />
-      {showOriginal && source && <img src={`${localFile(source.original.path)}?v=${source.original.sha256}`} alt="" aria-hidden="true"
+      {showOriginal && source && <img src={localFile(source.original.path)} alt="" aria-hidden="true"
         data-compiler-original-source={source.id} style={originalStyle} />}
       {(error || result && !ready) && <p className="shape-cloud-empty" role={error ? 'alert' : 'status'}>{error || 'Preparing compiled cloud…'}</p>}
     </div>

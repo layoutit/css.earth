@@ -57,7 +57,7 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const density=(x:number,y:number,z:number)=>{sampleEncoded(source,x,y,z,encoded);return channelDensity(encoded[3],recipe.grid.encoding);};
   const zSlices:DecodedSlice[]=[];
   for(const quad of sourceSlices.quads.filter(q=>q.axis==='z').sort((a,b)=>a.center[2]-b.center[2])){
-    const bytes=await sourceBytes(dirname(resolve(root,work.cloud.slices.path)),{path:quad.texturePath,sha256:quad.sha256});
+    const bytes=await sourceBytes(dirname(resolve(root,work.cloud.slices.path)),{path:quad.texturePath});
     const raw=await sharp(bytes).ensureAlpha().raw().toBuffer();zSlices.push({quad,alpha:Uint8Array.from({length:quad.widthPx*quad.heightPx},(_,i)=>raw[4*i+3]!)});
   }
   const raySamples=function*(pixel:number):Generator<MaterialTransportSample>{

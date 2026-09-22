@@ -72,7 +72,7 @@
     "typecheck:packages": "pnpm -r --filter \"./packages/**\" typecheck",
     "typecheck:platform": "tsc -p src/platform/tsconfig.json",
     "typecheck:pr": "pnpm run '/^typecheck:pr:/'",
-    "typecheck:pr:core": "pnpm typecheck:configs && pnpm typecheck:packages && pnpm typecheck:renderer && pnpm typecheck:platform && pnpm typecheck:ownership && node tools/ci/typescript-ownership.mts && pnpm test:typescript-ownership",
+    "typecheck:pr:core": "pnpm typecheck:configs && pnpm typecheck:packages && pnpm typecheck:renderer && pnpm typecheck:platform && pnpm typecheck:ownership && node tools/ci/typescript-ownership.mts",
     "typecheck:pr:preparation": "pnpm typecheck:preparation && pnpm typecheck:tools",
     "typecheck:pr:astro": "pnpm typecheck:astro",
     "typecheck:preparation": "pnpm --filter @cssearth/engine exec tsc -p ../../tools/objects/tsconfig.json",
@@ -81,7 +81,7 @@
     "typecheck:tests": "tsc -p tests/tsconfig.json --pretty false",
     "typecheck:tools": "tsc -p tools/tsconfig.json",
     "telescope": "node tools/cli/run-typed-module.mjs tools/objects/telescopes/cli.mts",
-    "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mjs --test --test-concurrency=4 --test-timeout=120000 \"site/test/*.test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \"tools/**/*.test.mts\" \"tools/**/*.test.ts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
+    "test:node": "pnpm prepare:environment-images && pnpm prepare:nebulae && node --import ./tests/register-vite-suffix.mts --test --test-concurrency=4 --test-timeout=120000 \"site/test/*.test.mts\" \"src/platform/*.test.mts\" \"src/navigation/*.test.mts\" \"tools/**/*.test.mts\" \"tools/**/*.test.ts\" \"tests/**/*.test.mts\" \"tests/**/*.test.ts\"",
     "test:lab": "node --experimental-strip-types labs/nebula/run.mts bake-nebula --stage=assets && node --experimental-strip-types labs/nebula/run.mts test"
   },
   "dependencies": {

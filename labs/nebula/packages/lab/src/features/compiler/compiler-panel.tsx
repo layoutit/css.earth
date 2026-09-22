@@ -87,7 +87,7 @@ function CompilerSession({ recipePath, cataloguePath, observationManifest, publi
   }, [cataloguePath, observationManifest, recipePath]);
   const registration = useMemo(() => {
     if (catalogue) return { frame: catalogue.frame, images: catalogue.images.map(image => ({ id: image.id, imageToFrame: image.imageToFrame,
-      source: { width: image.nativeWidth, height: image.nativeHeight, sha256: image.sourceSha256 } })) };
+      source: { width: image.nativeWidth, height: image.nativeHeight, url: image.sourceUrl } })) };
     return observations;
   }, [catalogue, observations]);
   const matrices = useMemo(() => registration ? Object.fromEntries(registration.images.map(image => [image.id,
