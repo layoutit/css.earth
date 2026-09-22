@@ -143,8 +143,10 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
       if (presentationOnly) {
         // The carried provenance describes the published images, so the run must publish exactly those images.
+        // Public JSON catalogues (places, features) are derived from the scene and may be regenerated here.
         // The staged inventory holds the run's public entries; the object's also holds its prepared entries.
-        const published = async (path: string) => JSON.stringify((JSON.parse(await readFile(path, 'utf8')) as { assets: { location: string }[] }).assets.filter(asset => asset.location === 'public'));
+        const published = async (path: string) => JSON.stringify((JSON.parse(await readFile(path, 'utf8')) as { assets: { location: string; filename: string }[] }).assets
+          .filter(asset => asset.location === 'public' && !asset.filename.endsWith('.json')));
         if (await published(resolve(stagedData, 'inventory.json')) !== await published(resolve(objectDirectory, 'inventory.json')))
           throw new Error(`${id}: the presentation changed the published image set; run the full preparation.`);
       } else {

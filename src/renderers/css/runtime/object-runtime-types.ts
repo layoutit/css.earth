@@ -4,7 +4,7 @@ import type { CameraPlan } from "../navigation/types.js";
 import type { OrbitPublication, OrbitStateUpdate, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { RuntimePolicy } from "../navigation/runtime-policy.js";
 import type { PreparedAssets } from "../rendering/prepared-residency.js";
-import type { PreparedPresentationDefinition, mountPreparedPresentation } from "../rendering/prepared-presentation.js";
+import type { PreparedPresentationDefinition } from "../rendering/prepared-presentation.js";
 import type { CubicSkyPlan } from "../solar-system/cubic-sky-runtime.js";
 import type { DirectionalSunPlan } from "../solar-system/directional-sun-coordinate.js";
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
@@ -29,19 +29,12 @@ export interface ObjectRuntimeDefinition extends PreparedPresentationDefinition 
   readonly assetOrigin?: PreparedAssetOrigin;
 }
 export interface ObjectRuntimeView extends OrbitPublication { readonly reference: OrbitPublication; readonly previous: OrbitPublication | null; readonly revision: number; }
-export type PageLayerStats = ReturnType<ReturnType<typeof import('../paging/city-pages.js').mountPreparedMapPages>['stats']>;
-export interface PageLayerRuntime {
-  setPlaying(value: boolean): void; setLens(selection: { id: string | null }): void; publish(view: ObjectRuntimeView): void; stats(): PageLayerStats;
-}
 export interface PreparedDestinationRuntime {
   load(signal?: AbortSignal): Promise<unknown>;
   select(place: unknown): Promise<unknown>;
   reset(): unknown;
 }
 export interface ObjectRuntimeCapabilities {
-  mountPages?(options: NonNullable<ReturnType<typeof mountPreparedPresentation>["pageLayers"]>[number] & {
-    stage: HTMLElement; scene: HTMLElement; camera: HTMLElement; own(cleanup: () => void): void; onError(error: unknown): void;
-  }): PageLayerRuntime;
   createDestinations?(options: { plan: unknown; ready: Promise<void>; lifetime: SceneLifetime;
     selectLens(id: string): Promise<boolean>; navigate(camera: Parameters<RetainedCubicSkyOrbit["flyToState"]>[0]): ReturnType<RetainedCubicSkyOrbit["flyToState"]>;
     reset(): ReturnType<RetainedCubicSkyOrbit["flyToState"]> | undefined;

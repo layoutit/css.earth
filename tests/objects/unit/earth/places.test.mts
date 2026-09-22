@@ -1,4 +1,4 @@
-import {shape,array,text,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {shape,array,text,number} from '../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import test from "node:test";
 import assert from "node:assert/strict";
@@ -7,8 +7,8 @@ import { createHash } from "node:crypto";
 import { searchDestinations } from "../../../../site/destination-search.mts";
 import { PREPARED_EARTH_PLACES } from "../../unit/earth/prepared-fixture.mts";
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mts";
-import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/geographic-pages/page-geometry.mts";
-import { pageCoordinates, prepareLocationPoint } from "../../../../tools/objects/geographic-pages/prepare-location.mts";
+import { prepareCityPageGeometry, createCityGeographicSampler } from "../../../../tools/objects/paged-ellipsoid/geographic/page-geometry.mts";
+import { pageCoordinates, prepareLocationPoint } from "../../../../tools/objects/paged-ellipsoid/geographic/prepare-location.mts";
 
 const bytes = await readFile(new URL("../../../../public/scenes/earth/earth-places.json", import.meta.url));
 const { places } = shape({places:array(shape({id:text,names:array(text),searchContext:text,context:text,coverage:text,camera:shape({controlPitch:number,controlYaw:number,zoom:number})}))})(JSON.parse(bytes.toString('utf8')));
@@ -36,15 +36,6 @@ test("city search supports accents, aliases, duplicate names and country disambi
   assert.deepEqual(searchDestinations(places, ""), []);
   assert.deepEqual(searchDestinations(places, "qqqzzzimpossiblecity"), []);
   assert.ok(searchDestinations(places, "san").length <= 8);
-});
-
-test("city destinations use source coverage to choose detail or overview", () => {
-  const buenosAires = required(places.find(place => place.id === "3435910"));
-  const tokyo = required(searchDestinations(places, "Tokyo")[0]);
-  assert.equal(buenosAires.coverage, "detail");
-  assert.equal(buenosAires.camera.zoom, 1024);
-  assert.equal(tokyo.coverage, "detail");
-  assert.equal(tokyo.camera.zoom, 1024);
 });
 
 test("prepared location inverse agrees with the imagery projection across face boundaries", () => {

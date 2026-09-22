@@ -1,7 +1,7 @@
 import { expect, test } from 'vitest';
 import { readFile } from 'node:fs/promises';
 import { preparedScenePitch } from '@cssearth/engine';
-import { prepareLocationPoint, prepareLocationCamera } from '../../../../tools/objects/geographic-pages/prepare-location.mts';
+import { prepareLocationPoint, prepareLocationCamera } from '../../../../tools/objects/paged-ellipsoid/geographic/prepare-location.mts';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
 
 const apply = (matrix: readonly number[], point: readonly number[]) => [0, 1, 2].map(row =>

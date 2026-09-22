@@ -5,9 +5,7 @@ import type { PreparedCubicSkyPlan } from '../../../src/platform/cubic-sky-contr
 import type { PreparedDirectionalSunPlan } from '../../../src/platform/directional-sun-contract.mts';
 import type { ShellObjectControls } from '../../../site/shell-contract-types.mts';
 import type { preparePagedEllipsoidScene } from './scene.mts';
-import type { preparePlaces } from '../geographic-pages/places.mts';
-import type { prepareVectorOverlay } from '../geographic-pages/vector-overlay.mts';
-import type { preparePinnedGlobalWmts } from '../geographic-pages/pinned-hierarchy.mts';
+import type { preparePlaces } from './geographic/places.mts';
 import type { CameraPlan } from '../../../src/renderers/css/navigation/types.ts';
 import type { SurfaceBankLenses } from './contracts.mts';
 import { requireRecord, requireString } from '../../sources/source-values.mts';
@@ -19,8 +17,7 @@ interface PresentationConfiguration { textureLevels?: TextureLevelConfiguration;
   destinations: {statuses: {detail: string; overview: string}}; }
 export interface PagedPresentationInput { config: PresentationConfiguration; plan: PagedPlan; lenses: {defaultLens: string; controls: readonly PagedLens[]};
   textureLevels?: Awaited<ReturnType<typeof prepareTextureLevels>>; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan; controls: ShellObjectControls;
-  catalog?: Awaited<ReturnType<typeof preparePlaces>>; city?: NonNullable<Awaited<ReturnType<typeof preparePinnedGlobalWmts>>['plan']>;
-  noise?: Awaited<ReturnType<typeof prepareVectorOverlay>>; }
+  catalog?: Awaited<ReturnType<typeof preparePlaces>>; }
 const materialIds: readonly MaterialId[] = ['lighting', 'atmosphere'];
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
@@ -29,7 +26,7 @@ import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 import { prepareMaterialTracks } from "../../prepare/prepare-materials.mts";
 import { surfaceBankInventory } from "./surface-banks.mts";
 
-export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, city, noise, textureLevels, controls }: PagedPresentationInput) {
+export async function preparePagedEllipsoidPresentation({ config, plan, lenses, sky, sun, catalog, textureLevels, controls }: PagedPresentationInput) {
   if (Boolean(config.textureLevels) !== Boolean(textureLevels)) throw new TypeError('Prepared texture levels must match the authored recipe.');
  const cameraPlan=config.camera;
   const bodyFrame=requireRecord(plan[config.sceneBodyKey], 'paged body frame');
@@ -40,7 +37,6 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
   if (!shadowlessAssets || !shadowlessPresentation) throw new TypeError('Paged lighting requires a prepared shadowless material.');
   const defaultLens=lenses.controls.find(lens=>lens.id===lenses.defaultLens);
   if (!defaultLens) throw new TypeError('Paged presentation requires its declared default lens.');
-  if (city && !noise) throw new TypeError('Paged city presentation requires its noise layer.');
   const banks=surfaceBankInventory(plan,lenses,config.publicBase);
   const bankId=(lens: PagedLens,shadows=false)=>lens.view==="interior"&&shadows?`${lens.id}-lit`:lens.surfaceBankId??lens.id;
   const pageKeys=(lens: PagedLens,shadows=false)=>{
@@ -167,9 +163,7 @@ export async function preparePagedEllipsoidPresentation({ config, plan, lenses, 
       startup:[...pageKeys(defaultLens).map(initialResource),"poles:normal","shadowless:lighting","default:lighting","default:atmosphere",
         ...plan.material.atmosphere.transport.initialWarmRows.map(row=>`atmosphere:${row}`)]},
     tree,variants,materials:tracks,viewBindings:[{kind:"counter-rotation",target:index(materialCounter),systemTransform:null}],animations:[],
-    motionFrame:[index(system),index(body.surface[0])],
-    pageLayers:(city?[{id:"city",plan:city,lensIds:["normal","buenos-aires-noise"]},{id:"noise",plan:noise,lensIds:["buenos-aires-noise"]}]:[])
-      .map(layer=>({...layer,plan:{...layer.plan,schema:"cssearth-prepared-map-pages@1",assetPath:config.publicBase},carrier:index(body.surface[0]),system:index(system),className:`${config.namespace}-city-page`,textureClassName:`${config.namespace}-api-texture`}))};
+    motionFrame:[index(system),index(body.surface[0])]};
  return {...prepared, schema:'cssearth-object-runtime@4', id:config.namespace, controls,
  materials:prepareMaterialTracks(prepared), variants:prepared.variants.map(variant=>({...variant,materials:variant.materials.map(material=>({...material,mode:material.mode==='default-pose'?'frames':material.mode}))}))};
 }

@@ -5,7 +5,6 @@ import type { PreparedVariant, PreparedViewBinding, PreparedPresentationDefiniti
 import type { PreparedMaterialTrack } from '../rendering/prepared-material.js';
 import type { ObjectControls } from '../runtime/object-contract.js';
 import type { CameraPlan } from '../navigation/types.js';
-import { parsePreparedPagePlan } from '../paging/capabilities.js';
 
 export { requireTextureLevels } from '../../../platform/prepared-texture-levels.mts';
 
@@ -166,18 +165,6 @@ export function requireOptionalPresentation(plan: Record<string, unknown>, tree:
   if (plan.motionFrame !== undefined) {
     const frame = array(plan.motionFrame, 'motion frame'); if (!frame.length) fail('motion frame is empty'); unique(frame, 'motion frame');
     for (const value of frame) if (!ancestor(nodeReference(value, tree), tree.scene, tree)) fail('motion frame must belong to scene');
-  }
-  if (plan.pageLayers !== undefined) {
-    const layers = array(plan.pageLayers, 'page layers'); unique(layers.map(value => record(value, 'page layer').id), 'page layers');
-    for (const input of layers) {
-      const layer = record(input, 'page layer', ['id', 'plan', 'carrier', 'system', 'className', 'textureClassName', 'lensIds']);
-      for (const key of ['id', 'className', 'textureClassName']) text(layer[key], `page layer ${key}`);
-      const carrier = nodeReference(layer.carrier, tree), system = nodeReference(layer.system, tree);
-      if (!ancestor(carrier, tree.scene, tree) || !ancestor(system, tree.scene, tree) || !ancestor(carrier, system, tree)) fail('page carrier must belong to scene and system');
-      const lenses = array(layer.lensIds, 'page lenses').map(id => text(id, 'page lens'));
-      if (!lenses.length || lenses.some(id => !lensIds.includes(id))) fail('page layer requires declared lenses');
-      parsePreparedPagePlan(layer.plan, { lensIds: lenses });
-    }
   }
   if (plan.destinations !== undefined) {
     const destinations = record(plan.destinations, 'destinations', ['catalog', 'defaultLens', 'statuses']), catalog = record(destinations.catalog, 'destination catalog');

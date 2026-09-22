@@ -453,116 +453,6 @@
       }
     },
     {
-      "id": "buenos-aires-noise-source",
-      "path": "noise/buenos-aires-day-2025.geojson.gz",
-      "expectedSha256": "eb58201a66c8c531155035eb57e574a790db4830d6309cc8dff4262ba44c3370",
-      "expectedBytes": 33858376,
-      "origin": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/mapa-ruido/medicion_de_ruido_diurno.geojson",
-      "credit": "Buenos Aires APrA",
-      "license": "CC-BY-2.5-AR",
-      "licenseEvidence": [
-        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-        "https://creativecommons.org/licenses/by/2.5/ar/"
-      ],
-      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
-      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
-      "consumers": [
-        "noise-lens"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-buenos-aires-noise-source",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "buenos-aires-noise-pin",
-      "path": "noise/manifest.json",
-      "expectedSha256": "6bbfdee5d1c9213b8916034c98136e69f41b1078839a2452e23a2cb62e86155e",
-      "expectedBytes": 1165,
-      "origin": "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-      "credit": "Buenos Aires APrA",
-      "license": "CC-BY-2.5-AR",
-      "licenseEvidence": [
-        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-        "https://creativecommons.org/licenses/by/2.5/ar/"
-      ],
-      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
-      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
-      "consumers": [
-        "noise-lens"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-buenos-aires-noise-pin",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "worldcover-wmts-release",
-      "path": "city/wmts-release.json",
-      "expectedSha256": "779c9cc235f444a14ced20582a340c32921719028995814fa56509294842bf6c",
-      "expectedBytes": 2897443,
-      "origin": "https://esa-worldcover.org/en/data-access",
-      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://esa-worldcover.org/en/data-access"
-      ],
-      "acquisition": "Generated geometry release inventory from the pinned WorldCover source footprints and accepted Earth scene; no imagery copied",
-      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
-      "consumers": [
-        "city-wmts"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-worldcover-wmts-release",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "worldcover-geographic-rebind",
-      "path": "city/geographic-rebind.json",
-      "expectedSha256": "6da869e304c7a969727897017dc52deadafd2d9c65f2d59b1db0e45ae14e9ea4",
-      "expectedBytes": 659,
-      "origin": "https://esa-worldcover.org/en/data-access",
-      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://esa-worldcover.org/en/data-access"
-      ],
-      "acquisition": "Verified byte-identical geographic frames when integrating the PR2 affine raster representation; complete pack hashes rechecked",
-      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
-      "consumers": [
-        "city-wmts"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-worldcover-geographic-rebind",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "noaa-coraltemp-anomaly",
       "path": "science/coraltemp-latest.nc",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
@@ -1567,26 +1457,6 @@
       "purpose": "Pinned GeoNames place catalogue snapshot, license and source hashes; not imagery coverage"
     },
     {
-      "path": "city/catalog-pin.json",
-      "purpose": "Observation date, hash and qualification of the complete WorldCover RGBNIR object inventory"
-    },
-    {
-      "path": "city/worldcover-rgbnir-2021.json.gz",
-      "purpose": "Preparation-only global source tile availability and publisher object pins; not pixel or runtime coverage"
-    },
-    {
-      "path": "city/manifest.json",
-      "purpose": "Pinned WorldCover source tiles, extracted-pixel hashes, RGB recipe, delivery origin and representative paging scope"
-    },
-    {
-      "path": "city/r2-cors.json",
-      "purpose": "Read-only cross-origin delivery policy with exact range response headers for the canonical R2 asset bucket"
-    },
-    {
-      "path": "city/provenance.json",
-      "purpose": "Verified source GeoTIFF metadata, geographic extraction windows, nodata counts and pixel hashes"
-    },
-    {
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
       "kind": "authored-document",
@@ -1598,14 +1468,6 @@
     {
       "path": "presentation/LICENSE.INTER-OFL",
       "purpose": "Exact Inter pinned-commit SIL OFL 1.1 redistribution license"
-    },
-    {
-      "path": "city/published-coverage.json.gz",
-      "purpose": "Verified publication receipts, source-window provenance and immutable index heads for integrated geographic coverage"
-    },
-    {
-      "path": "city/r2-cache-rule.json",
-      "purpose": "Narrow immutable geometry cache rule deployed to the public asset domain"
     },
     {
       "path": "preparation/paged-ellipsoid.json"

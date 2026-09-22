@@ -6,7 +6,7 @@ import { parseSurfaceAxes, parseSurfaceFeaturesConfig, prepareSurfaceFeatures } 
 import type { SurfaceFeaturePreparationContext, SurfaceFeaturesConfig } from './index.js';
 import { ellipsoidSurfaceCast, parseEllipsoidSemiAxes, renderedEllipsoidSampler } from './ellipsoid.js';
 import type { SurfaceSampler } from './ellipsoid.js';
-import type { GeographicScene } from '../geographic-pages/contracts.mts';
+import type { GeographicScene } from '../paged-ellipsoid/geographic/contracts.mts';
 import { authoredPresentationBasis } from '../world-navigation-sources.js';
 
 export interface FeatureContent { readonly searchLabel: string; readonly description: string; }
@@ -74,7 +74,7 @@ export async function pagedEllipsoidSurface({ descriptor, paged, recipe, sourceD
   const semiAxes = parseEllipsoidSemiAxes({ equatorial: meshRadiusUnits, polar: meshRadiusUnits * shape.polarRadiusKm / shape.radiusKm });
   const axes = parseSurfaceAxes(JSON.parse(await readFile(resolve(sourceDirectory, recipe.surfaceMap), 'utf8')));
   const scene = geographicScene(JSON.parse(await readFile(resolve(outputDirectory, 'scene.json'), 'utf8')));
-  const { prepareLocationPoint } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/geographic-pages/prepare-location.mts')).href) as typeof import('../geographic-pages/prepare-location.mts');
+  const { prepareLocationPoint } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/paged-ellipsoid/geographic/prepare-location.mts')).href) as typeof import('../paged-ellipsoid/geographic/prepare-location.mts');
   const sampler = renderedEllipsoidSampler(axes, axes.mapLeftEdgeLongitudeDeg, semiAxes, (longitudeDeg, latitudeDeg) => {
     // The lane maps signed longitudes; the catalogue keeps positive-east 0–360°.
     const point = prepareLocationPoint(scene, longitudeDeg > 180 ? longitudeDeg - 360 : longitudeDeg, latitudeDeg);

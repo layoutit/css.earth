@@ -31,7 +31,7 @@ export async function inspectMeasurementSphere(root:string,target:string){
   const recipe = parseRasterRecipe(await json(resolve(object, 'source/preparation/raster.json')));
   await pinned(resolve(object, 'inventory.json'));
   const original = parsePreparedObjectRuntime(await json(resolve(object, 'prepared/runtime.json')));
-  if (original.id !== id || original.pageLayers?.length || original.destinations)
+  if (original.id !== id || original.destinations)
     throw new Error('This sphere requires application capabilities that cannot be exported');
   const lensId = original.controls.lenses?.defaultLens;
   const surface = recipe.surfaces.find(item => item.id === lensId);
