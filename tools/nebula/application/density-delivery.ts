@@ -13,9 +13,10 @@ async function deliveryFiles(root: string, delivery: BakeDelivery) {
   assert.equal(manifest.schema, 'cssearth-volume-lens-manifest@1');
   const images = Object.entries(manifest.outputs).filter(([path]) => /^prepared\/[a-z][a-z0-9-]*\/(?:slices\/[xyz]\/\d+|atlases\/[a-z0-9-]+)\.webp$/.test(path)) as [string, {sha256: string; bytes: number}][];
   assert.ok(images.length > 0, 'Delivery manifest has no cloud textures.');
-  for (const [path, pin] of Object.entries(manifest.outputs) as [string, {sha256: string}][]) {
+  for (const [path, pin] of Object.entries(manifest.outputs) as [string, {bytes: number}][]) {
     if (images.some(([imagePath]) => imagePath === path)) continue;
-    await pinned(root, { path: `${delivery.directory}/${path}` });
+    const bytes = await pinned(root, { path: `${delivery.directory}/${path}` });
+    assert.equal(bytes.length, pin.bytes, `Artifact size differs: ${path}`);
   }
   return images;
 }
@@ -24,7 +25,7 @@ export async function deliveryReady(root: string, delivery: BakeDelivery) {
   const images = await deliveryFiles(root, delivery);
   let ready = true;
   for (const [path, pin] of images) {
-    try { await pinned(root, { path: `${delivery.directory}/${path}` }); }
+    try { assert.equal((await pinned(root, { path: `${delivery.directory}/${path}` })).length, pin.bytes, `Artifact size differs: ${path}`); }
     catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; ready = false; }
   }
   return ready;

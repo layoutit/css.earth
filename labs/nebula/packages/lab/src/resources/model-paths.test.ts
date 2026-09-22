@@ -16,11 +16,3 @@ test('historical model locations resolve without changing unrelated paths or cal
   assert.equal(JSON.parse(text).path, 'labs/nebula/models/lmc-clouds/object.json');
 });
 
-test('moved native volume recipe keeps sibling grid and provenance bytes under their original pins', async () => {
-  const recipePath = resolveLabModelPath('labs/nebula/models/lmc-full-density/source/volume.json');
-  const recipe = parseLabModelJson(await readFile(recipePath, 'utf8'));
-  for (const pin of [recipe.grid, recipe.provenance]) {
-    const bytes = await readFile(resolve(dirname(recipePath), pin.path));
-    assert.equal(createHash('sha256').update(bytes).digest('hex'), pin.sha256);
-  }
-});

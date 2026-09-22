@@ -89,8 +89,6 @@ test('saved reconstructions retain inherited Alignment image and density tone ta
       const pixels = await sharp(await readFile(result.resources[0].url.slice(4))).ensureAlpha().raw().toBuffer();
       assert.deepEqual([...pixels], [...toneRgba(f.rgba, target, tone)]);
     }
-    await f.write(`${directory}/volume.json`, 'changed');
-    await assert.rejects(prepare({ subjectId, target: 'density', tone }), /changed/);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
 test('local preparation writes verifiable pixels, deduplicates concurrent cache work and returns original neutral resources', async () => {

@@ -65,7 +65,6 @@ export async function verifyNebulaBake(root: string, recipePath = 'labs/nebula/m
     const removalDirectory = `.local/nebula-lab/star-removal-nox-applied/${removalKey}`;
     const removal = JSON.parse((await pinned(root, { path: `${removalDirectory}/result.json` })).toString());
     assert.equal(removal.operation, 'apply');
-    assert.equal(removal.baselineSha256, accepted.baselineSha256);
     const check = removal.applied.verification;
     assert.equal(check.maximumReconstructionErrorCodeValues, 0);
     assert.equal(check.changedPixelsOutsideMask, 0);

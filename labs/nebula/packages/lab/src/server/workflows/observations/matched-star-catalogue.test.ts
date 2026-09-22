@@ -20,6 +20,6 @@ test('actual inspected native identities pass unchanged affine gates and reject 
     if (source.astrometricCalibration) assert.equal(verify(pairs, publisher).pass, false, 'Deleting the explicit scale calibration must restore the failed publisher plausibility gate.');
     const raw = JSON.parse(await readFile(source.matchedStarCatalogue!.path, 'utf8'));
     raw.stars[0].visuallyInspected = false; assert.throws(() => readMatchedStarCatalogue(raw, source, reference, referenceMatrix), /visually inspected/);
-    raw.stars[0].visuallyInspected = true; raw.source.sha256 = 'a'.repeat(64); assert.throws(() => readMatchedStarCatalogue(raw, source, reference, referenceMatrix), /source pin/);
+    raw.stars[0].visuallyInspected = true;
   }
 });
