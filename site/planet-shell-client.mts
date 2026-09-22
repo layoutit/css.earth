@@ -524,7 +524,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   lifetime.onDispose(() => navigation?.destroy());
   const selectNavigation = (current: string) => {
     if (!navigationRoot) return;
-    navigationRoot.hidden = false;
+    // A selection change (a flight arriving) must not bring the tree back over typed results.
+    navigationRoot.hidden = showingSearchResults;
     void navigation?.select(current);
   };
   const tabs = [...browser.querySelectorAll<HTMLElement>('[data-object-tab]')];
@@ -884,15 +885,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     const nextCategory = searching ? (classification ? result.category : 'all') : initialCategory ?? result.category;
     initialCategory = null;
     selectTab(nextCategory, { resetScroll: false });
-    const navigationIds = [
-      ...result.matches.flatMap(match => {
-        const id = match.item?.dataset.navigationObjectId ?? match.entry?.id;
-        return id ? [id] : [];
-      }),
-      ...[...browser.querySelectorAll<HTMLElement>('[data-search-overview]:not([hidden])')]
-        .map(row => row.dataset.navigationObjectId),
-    ].filter((id): id is string => Boolean(id));
-    void navigation?.filter(navigationIds);
+    // Typed results are a flat list with the tree hidden, so the tree is not filtered per keystroke.
     setEmptyHidden(visibleObjects !== 0 || Boolean((destinations || features) && !classification && !showAll));
   };
   const render = (next: boolean, { resetQuery = false } = {}) => {
