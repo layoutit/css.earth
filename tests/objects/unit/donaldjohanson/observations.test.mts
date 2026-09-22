@@ -1,5 +1,6 @@
-import { sourceTest } from '../../source-test.mts';
-const test = sourceTest('donaldjohanson');
+import { restoredSources, sourceTest } from '../../source-test.mts';
+const sources = restoredSources('donaldjohanson', 'observations/lor_0798443290_04598_00035_1x1_sci_03.fit');
+const test = sourceTest('donaldjohanson', sources);
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -7,7 +8,7 @@ import {decodeLlorri,bindSipCamera,sipPixel} from '../../../../tools/objects/ter
 import {readFitsPrimary} from '../../../../tools/objects/observation/fits.mts';
 const root='src/objects/donaldjohanson/source/';
 const camera=JSON.parse((await readFile(root+'observations/llorri-camera.json')).toString('utf8'));
-const bytes=await readFile(root+'observations/lor_0798443290_04598_00035_1x1_sci_03.fit');
+const bytes=sources.skip ? Buffer.alloc(0) : await readFile(root+'observations/lor_0798443290_04598_00035_1x1_sci_03.fit');
 test('Lucy TAN-SIP agrees with disjoint Astropy coordinates and the published withheld landmark',()=>{
   const f=bindSipCamera(camera);
   for(const a of camera.checks.astropyProjectionAnchors){
