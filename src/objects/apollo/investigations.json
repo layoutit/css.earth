@@ -1,0 +1,53 @@
+{
+  "schema": "cssearth-investigation-ledger@1",
+  "objectId": "apollo",
+  "entries": [
+    {
+      "id": "selected-shape-and-spin",
+      "subject": "DAMIT 273: selected shape and spin",
+      "status": "included",
+      "finding": "DAMIT model 273, version 2007-08-29, pole (48°, -72°), period 3.065448 h, taken unchanged from the archive.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/273",
+        "https://damit.cuni.cz/projects/damit/exports/table/asteroid_models"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
+        }
+      ]
+    },
+    {
+      "id": "selected-physical-scale",
+      "subject": "Physical scale",
+      "status": "included",
+      "finding": "1.68 ± 0.09 km, thermophysical effective diameter fitted with this shape model. Table 2 lists the fitted shape as 1022 vertices and 2040 facets with pole (48°, −72°) and period 3.065448 h from Ďurech et al. (2008a), the same counts, pole and period as DAMIT model 273. Table 3 gives 1.68 ± 0.09 km for this 'Original' shape. The paper notes that this size overestimates the radar maximum equatorial diameter (2.07 ± 0.07 km) by a factor of 1.17 and prefers a reshaped variant at 1.55 ± 0.07 km; that variant mesh is not archived.",
+      "evidence": [
+        "https://arxiv.org/abs/1305.3109"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
+        }
+      ]
+    },
+    {
+      "id": "surface-imagery",
+      "subject": "Resolved surface imagery",
+      "status": "unresolved",
+      "finding": "No spacecraft or resolved ground-based image of this asteroid was found in the archives searched for this package.",
+      "revisitWhen": "A resolved image or a registered surface map of this asteroid is published.",
+      "evidence": [
+        "https://damit.cuni.cz/projects/damit/asteroid_models/view/273"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-21",
+          "commit": "5c4324b3c3cacb15a5ba75debc2cee87cd2b6111"
+        }
+      ]
+    }
+  ]
+}

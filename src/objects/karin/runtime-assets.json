@@ -1,0 +1,40 @@
+{
+  "schema": "csskarin-runtime-assets@1",
+  "assets": [
+    {
+      "filename": "karin-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "filename": "karin-elevation-shadow@2x.webp",
+      "bytes": 190828,
+      "sha256": "1865fa601cb8fb0cdef60494c8a659242e2cd042d78a73d1b0d87c8909557a4f"
+    },
+    {
+      "filename": "karin-elevation-surface@2x.webp",
+      "bytes": 305046,
+      "sha256": "674dca2983d456ed64cc2e3e78279695e643de6d78d3706efcc5d75b9cb837d4"
+    },
+    {
+      "filename": "karin-elevation-thumbnail.webp",
+      "bytes": 5206,
+      "sha256": "a23e75653f1ee59a0faf08c9d4606c7089f860109002243d88243d51dca93614"
+    },
+    {
+      "filename": "karin-shape-shadow@2x.webp",
+      "bytes": 84448,
+      "sha256": "890932d72726515397d6a0ab730f69b337f4ff5261a49117a41f444265393b61"
+    },
+    {
+      "filename": "karin-shape-surface@2x.webp",
+      "bytes": 71744,
+      "sha256": "b4a8bc93eced536582ce54a37db7f22a1fb24e0980b372533232b6855d158688"
+    },
+    {
+      "filename": "karin-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "shape/model-167.txt",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/448/shape.txt"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "reference/167-occ_2005-12-13.pdf",
+      "url": "https://damit.cuni.cz/projects/damit/stored_files/open/446/occ_2005-12-13.pdf"
+    }
+  ]
+}

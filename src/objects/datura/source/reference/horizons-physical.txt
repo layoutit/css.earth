@@ -1,0 +1,27 @@
+# https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%271270%3B%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                1270 Datura (1930 YE)          2026-Sep-21 14:41:34
+Rec #:    1270 (+COV) Soln.date: 2026-Jun-05_04:44:24   # obs: 6510 (1930-2026)
+ 
+IAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):
+ 
+  EPOCH=  2458339.5 ! 2018-Aug-09.00 (TDB)         Residual RMS= .24594
+   EC= .2086404056138016   QR= 1.7679700627815     TP= 2457785.8465761198
+   OM= 97.80199249957219   W=  258.962235225878    IN= 5.985944273240594
+   A= 2.234091903760627    MA= 163.4144707920271   ADIST= 2.700213744739755
+   PER= 3.33933            N= .295156616           ANGMOM= .025145915
+   DAN= 2.22575            DDN= 2.05476            L= 356.7052125
+   B= -5.8748181           MOID= .77455997         TP= 2017-Feb-01.3465761198
+ 
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= n.a.                RAD= 4.1015             ROTPER= 3.359
+   H= 12.52                G= .150                 B-V= n.a.
+                           ALBEDO= .288            STYP= n.a.
+
+ASTEROID comments: 
+1: soln ref.= JPL#111, OCC=0
+2: source=ORB
+*******************************************************************************

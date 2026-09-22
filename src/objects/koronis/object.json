@@ -1,0 +1,130 @@
+{
+  "id": "koronis",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Koronis",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 19
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        -120812763967.38422,
+        361312150923.74335,
+        155358628258.6035
+      ],
+      "presentationToReference": [
+        -0.2936389871105902,
+        5.551115123125783e-17,
+        0.9559163903023459,
+        0.8770361409403251,
+        0.39777715593191376,
+        0.26940850339813016,
+        0.38024170304316834,
+        -0.9174820620691817,
+        0.11680288116357851
+      ],
+      "orbitUpReference": [
+        -5.551115123125783e-17,
+        -0.39777715593191376,
+        0.9174820620691817
+      ],
+      "metersPerUnit": 82.6086956521739,
+      "bodyRadiusM": 19000
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/koronis-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "e4697684a4b19052d287504f6666114845bd7a8cb2510be8bacc5e556cd2d51d"
+      }
+    },
+    "catalog": {
+      "name": "Koronis",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.8696310690098166,
+      "description": "Main-belt asteroid found in 1876.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "f66563cb47c88bb109673029ff06d514b09668ccd56c5e1f75c83ff1abe01a84"
+  }
+}

@@ -503,7 +503,7 @@ test.each(['ryugu', 'saturn'])('%s selection dimming relaxes at system scale, in
   }
 });
 
-test.each(['saturn', 'jupiter', 'uranus'])('%s retains projected orbit paths past the close-detail fade threshold', id => {
+test.each(['saturn', 'jupiter', 'uranus'])('%s: its own orbit fades out close up while the other orbits keep their floor', id => {
   const calculate = createWorldContextPlanner(plan), input = view();
   const index = [plan.focus, ...plan.bodies].findIndex(body => body.id === id);
   const selected = plan.bodies[index - 1]!;
@@ -513,11 +513,16 @@ test.each(['saturn', 'jupiter', 'uranus'])('%s retains projected orbit paths pas
       2 * input.viewport.focalPixels * selected.radiusM / (1236 * discHeightShare));
     input.world.pose.positionM = [selected.positionM[0], selected.positionM[1], selected.positionM[2] + distance];
     const frame = calculate(input);
-    const orbit = frame.projectedBodies.find(body => body.index === index)!;
-    expect(orbit.segments.length, `${discHeightShare} viewport height`).toBeGreaterThan(0);
-    expect(orbit.orbitVisibility).toBeGreaterThan(.29);
-    expect(orbit.segments.every(segment => segment.every(Number.isFinite))).toBe(true);
-    if (discHeightShare >= .3) expect(orbit.orbitVisibility).toBeCloseTo(.3, 2);
+    const own = frame.projectedBodies.find(body => body.index === index)!;
+    // Below the fade the path is drawn; from the fade's end (30% of the viewport height) it is gone.
+    if (discHeightShare < .3) {
+      expect(own.segments.length, `${discHeightShare} viewport height`).toBeGreaterThan(0);
+      expect(own.orbitVisibility).toBeGreaterThan(0);
+      expect(own.segments.every(segment => segment.every(Number.isFinite))).toBe(true);
+    } else expect(own.orbitVisibility, `${discHeightShare} viewport height`).toBe(0);
+    // Every other orbit keeps the close-up floor.
+    const others = frame.projectedBodies.filter(body => body.index !== index && body.orbitVisibility > 0);
+    if (discHeightShare >= .3) expect(others.every(body => body.orbitVisibility <= .3 + 1e-9)).toBe(true);
   }
   input.bodies[index]!.orbitHidden = true;
   expect(calculate(input).projectedBodies.find(body => body.index === index)!.orbitVisibility).toBe(0);

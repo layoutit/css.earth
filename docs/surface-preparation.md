@@ -336,7 +336,7 @@ declares a seam outset, preparation writes two corrections instead:
   `1 + outset × scale`. From a 16-pixel disc to the closest zoom, every step adds
   0.38–0.6 CSS pixels on each edge. The runtime only selects a prepared step.
 
-[surface-seams-browser.mts](../site/test/surface-seams-browser.mts) measures the
+[surface-seams-browser.mts](../site/test/rendered-page.test.mts) measures the
 result at saved Venus radar views. It renders each view over a black and then a
 white backdrop to find pixels that let the backdrop through, and it compares the
 brightness profile across each seam with parallel lines inside both leaves.

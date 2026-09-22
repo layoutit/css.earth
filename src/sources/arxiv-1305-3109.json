@@ -1,0 +1,34 @@
+{
+  "id": "arxiv-1305-3109",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "A thermophysical analysis of the (1862) Apollo Yarkovsky and YORP effects",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1305.3109"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/1305.3109",
+      "label": "Rozitis et al. (2013), A&A 555, A20, Table 3 ('Original' shape variant)"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/apollo/source/content/object.json",
+      "locator": "/panel/facts/0/source"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "B. Rozitis, S. R. Duddy, S. F. Green, S. C. Lowry",
+      "scope": "citation",
+      "evidence": "src/objects/apollo/source/content/object.json#/panel/facts/0/source"
+    }
+  ]
+}

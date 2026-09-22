@@ -1,0 +1,149 @@
+{
+  "schema": "csskoronis-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "koronis-shape",
+      "path": "shape/model-167.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/448/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Koronis model 167; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 1000.0000140344165,
+        "referenceRadiusMeters": 19000
+      },
+      "coverage": "Published convex light-curve model 167. Occultation-calibrated volume-equivalent diameter: 38 ± 5 km. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "expectedBytes": 82708,
+      "expectedSha256": "3fd76bf9793db0a4c5783a8887c528375b372fed374f8c0a1524076e3f77e387",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-448",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/448/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Koronis model 167; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "koronis-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/terrestrial.json"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL"
+    },
+    {
+      "path": "presentation/title-mark.json"
+    },
+    {
+      "path": "reference/167-IAUspin.txt"
+    },
+    {
+      "path": "reference/167-occ_2005-12-13.pdf",
+      "expectedBytes": 5248,
+      "expectedSha256": "2efd4a2730a3b0da724e8c0c908d24479ce5c3671e0da7c21a198956489397c0"
+    },
+    {
+      "path": "reference/calibration.json"
+    },
+    {
+      "path": "reference/damit-model.json"
+    },
+    {
+      "path": "reference/horizons-elements.txt"
+    },
+    {
+      "path": "reference/horizons-physical.txt"
+    },
+    {
+      "path": "reference/horizons-vectors.txt"
+    },
+    {
+      "path": "reference/model-properties.json"
+    },
+    {
+      "path": "reference/sbdb.json"
+    }
+  ]
+}
