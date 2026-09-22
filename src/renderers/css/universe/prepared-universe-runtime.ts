@@ -45,7 +45,7 @@ type PreparedImageLayerBank = { payload: PreparedCssImageLayers; resolveResource
 type PreparedCatalogBank = { payload: unknown; galaxySample?: unknown; nebulae?: unknown; fadeStartDistanceM: number; fullDistanceM: number;
   clusters?: { payload: unknown; fadeStartDistanceM: number; fullDistanceM: number } };
 
-export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: {
+export function createPreparedUniverse({ context, volume, pointAppearance, resolvePointResource, resolveResource, sprites, shells = [], imageLayers = [], imageLayerBanks = [], loadImageLayer, volumeLensBanks = [], loadVolumeLens, warmVolumeLensDomNodeBudget = WARM_VOLUME_LENS_DOM_NODE_BUDGET, backgroundPointManifest, backgroundPointCloud, backgroundPointSha256, environmentLinks, catalog, catalogBank, loadCatalog, annotationPriorities, annotationLandmarks, annotationOpacities, plannerSource, distantNavigation, lensVisibility = DEFAULT_POINT_VISIBILITY, lensBillboards, sky = true }: {
   backgroundPointManifest?: string; backgroundPointCloud?: string; backgroundPointSha256?: string;
   context: unknown; volume: PreparedCssVolume; pointAppearance: PreparedPointAppearance;
   /** The same prepared context as files the planner worker reads itself. */
@@ -53,6 +53,8 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
   resolvePointResource(path: string): string; resolveResource(path: string): string;
   sprites: Readonly<Record<string, SpriteWithUrl>>;
   annotationPriorities?: Readonly<Record<string, number>>;
+  /** Moons named across their star's system; see `createWorldContextPlanner`. */
+  annotationLandmarks?: readonly string[];
   annotationOpacities?: Readonly<Record<string, { line: number; label: number }>>;
   distantNavigation?: { readonly afterDistanceM: number; readonly nonNavigableIds: readonly string[] };
   /** Projected size at which any lens bank (nebula, cluster, galaxy or accompanying cloud) is fetched and drawn.
@@ -150,7 +152,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
     .map(entry => entry.url);
   const galaxyPrefetchDistanceM = (plan.volume.opacityProfile?.fadeStartDistanceM ?? plan.volume.fadeStartDistanceM) * GALAXY_PREFETCH_RATIO;
   return Object.freeze({ assets,
-    createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities, plannerSource),
+    createFramePlanner: () => createWorldContextPlannerClient(plan, undefined, annotationPriorities, plannerSource, annotationLandmarks),
     mount(stage: HTMLElement, { onSelectGalaxy, requestPublication, presentationHost = stage }: {
       onSelectGalaxy?: (object: PreparedCatalogObject) => void; requestPublication?: () => boolean;
       /** Stationary world presentation, outside the selected detail's CSS scope. */
@@ -429,7 +431,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
         for (const shell of shells) shellLayers.push(mountPreparedCssSurfaceShell({ host: root, before: end, ...shell }));
         // Picking and navigation stay on the detail stage's input owner. Billboards
         // share its viewport and depth band from outside its changing CSS scope.
-        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' });
+        spatial = mountPreparedWorldContext({ host: stage, presentationHost, before: root, plan, sprites, requestPublication, annotationPriorities, annotationLandmarks, annotationOpacities, distantNavigation, opacityClock, orbitRenderer: 'strokes' });
         const bodyAnnotations = spatial.inspect();
         focusPoint = mountWorldContextPointSource({ host: root, before: end, plan, field: pointAppearance, resolveResource: resolvePointResource, pickingHost: stage });
         environmentLabels = mountEnvironmentLabels({ host: root, before: end, volume: payload, shells: shells.map(shell => shell.payload), links: environmentLinks, pickingHost: stage, opacityClock });
