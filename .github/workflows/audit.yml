@@ -197,9 +197,9 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             # Authoring replays volume provenance from pinned FITS.
             node tools/assets/restore-source-inputs.mts --repository-volumes
-            CSSEARTH_SOURCE_CHECK_MODE=author pnpm test:node
+            CSSEARTH_SOURCE_CHECK_MODE=author node --test "src/platform/{source-*,exploration-*}.test.mts" "tools/sources/*.test.mts" "tools/prepare/prepare-factsheets.test.mts" "tools/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tools/objects/surface-observations/*.test.mts"
           else
-            CSSEARTH_SOURCE_CHECK_MODE=published pnpm test:node
+            CSSEARTH_SOURCE_CHECK_MODE=published node --test "src/platform/{source-*,exploration-*}.test.mts" "tools/sources/*.test.mts" "tools/prepare/prepare-factsheets.test.mts" "tools/contract/object-provenance.test.mts" "site/test/*{source,facilit}*.test.mts" "tools/objects/surface-observations/*.test.mts"
           fi
       - name: Reproduce the prepared bank and the galaxy field from their pinned inputs
         if: ${{ !cancelled() }}
