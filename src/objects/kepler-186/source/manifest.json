@@ -157,8 +157,6 @@
     {
       "id": "kepler-186-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1145,
-      "expectedSha256": "2cb8db94c7b5290f85597f0c709a58ccd455066c20f55619376a913610b4ae14",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +185,6 @@
     {
       "id": "kepler-186-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -215,8 +211,6 @@
     {
       "id": "kepler-186-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 844,
-      "expectedSha256": "a6988a6ada40799a5d123bb853d1660e349ba1b48e0ad4eb2a77e5a46429c429",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

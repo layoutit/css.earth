@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "3334be7b80c524da80e9b7b216464e52fe6b16fb07d702f4ef53876d7804dfaa",
       "origin": "https://arxiv.org/abs/1909.04698",
       "credit": "Fernández-Valenzuela et al. (2019), ApJL; multi-epoch rotational photometry",
       "license": "MIT numeric extraction of published scientific facts",

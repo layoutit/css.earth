@@ -29,18 +29,18 @@
   ],
   "rayMatrix": [
     [
-      1.3525425378400452e-05,
-      -6.161630112772746e-05,
+      0.000013525425378400452,
+      -0.00006161630112772746,
       -0.7617703994329743
     ],
     [
-      -2.105600809921017e-05,
-      7.406740412436335e-05,
+      -0.00002105600809921017,
+      0.00007406740412436335,
       -0.6465841688388407
     ],
     [
-      9.63001699003621e-05,
-      2.484887146722675e-05,
+      0.0000963001699003621,
+      0.00002484887146722675,
       -0.04749176208510128
     ]
   ],
@@ -63,47 +63,36 @@
       249.0942,
       -24.4294
     ],
-    "maximumBoresightResidualDegrees": 3.974174774157291e-06,
+    "maximumBoresightResidualDegrees": 0.000003974174774157291,
     "quaternionConvention": "SC scalar-first verified against independent archive boresight; use released camera FK."
   },
-  "imageSha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
-  "meshSha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff",
   "provenance": [
     {
-      "path": "preparation/camera.json",
-      "sha256": "e6710af8ae266103c46eec3a9fd47f37c407bcc711f3f15e55c00648a3889c10"
+      "path": "preparation/camera.json"
     },
     {
-      "path": "observations/w20080905t183606461id4df17.img",
-      "sha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6"
+      "path": "observations/w20080905t183606461id4df17.img"
     },
     {
-      "path": "reference/naif0012.tls",
-      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "reference/naif0012.tls"
     },
     {
-      "path": "reference/ROS_V33.TF",
-      "sha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1"
+      "path": "reference/ROS_V33.TF"
     },
     {
-      "path": "reference/ROS_OSIRIS_V15.TI",
-      "sha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587"
+      "path": "reference/ROS_OSIRIS_V15.TI"
     },
     {
-      "path": "reference/ROS_STEINS_V05.TPC",
-      "sha256": "cfdc8738633af838008c6f67c23019c5179c4fc7888a5653f06b7a3dfbc846c1"
+      "path": "reference/ROS_STEINS_V05.TPC"
     },
     {
-      "path": "reference/osiris-boresight.pdf",
-      "sha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318"
+      "path": "reference/osiris-boresight.pdf"
     },
     {
-      "path": "reference/osiris-photometry.pdf",
-      "sha256": "6b47bcb9c9f810e1a2e8136aa6d0c83e2862edc0619d233de0135fd6fcaa8dac"
+      "path": "reference/osiris-photometry.pdf"
     },
     {
-      "path": "shape/steins_cart.wrl",
-      "sha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff"
+      "path": "shape/steins_cart.wrl"
     }
   ]
 }

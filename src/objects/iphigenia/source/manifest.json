@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 35530
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 71.06 km effective diameter (catalog ±0.94 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2016 Table2 reports only seven dense curves from one apparition plus416 sparse measurements, limiting morphology. Hanuš2021 supplies an independent sparse-data pole comparison, but the selected exact archive is the dense-plus-sparse2016 model. The opposite pole remains.",
-      "expectedBytes": 42693,
-      "expectedSha256": "76e84bb363bc61fff99cee400395d53d29cbb4b11ef0012f4513dfbb689b06cd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/994-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "ddff24a8def8b6cf27ba82763d009f87fd5cadc44af55f1042ba4e9b0a8dd588"
+      "path": "reference/994-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

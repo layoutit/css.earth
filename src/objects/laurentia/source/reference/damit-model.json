@@ -81,8 +81,8 @@
   ],
   "id": "laurentia",
   "displayName": "Laurentia",
-  "lambda": 139.0,
-  "beta": 64.0,
+  "lambda": 139,
+  "beta": 64,
   "periodHours": 11.86917,
   "version": "2011-04-21",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1195/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1193/IAUspin.txt",
-  "shapeSha256": "cf67b568322176e7a97e90964912e0100a8e9a552dfd757c9eac2686078cb864",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 6.109447177322854e-08
+    "minimumTriangleAreaSourceUnitsSquared": 6.109447177322854e-8
   },
   "anchors": [
     {

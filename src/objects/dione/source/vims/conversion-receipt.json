@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-cassini-vims@1",
-  "recipeSha256": "110495fa28aca3d2520759c4790f5a18c689df0765732bd082639e3a29bef7da",
   "preparerSha256": "09354b3cc859b90017582071f39527371a7c71c40ad17af1515d0017b77f8233",
   "source": {
     "target": "dione",
@@ -9,8 +8,8 @@
     "bands": 256,
     "fileName": "dione_notnorm_pc_modified_2.img",
     "fileBytes": 66355200,
-    "noData": -999.0,
-    "radiusMeters": 561400.0,
+    "noData": -999,
+    "radiusMeters": 561400,
     "publishedOriginMeters": [
       -1754584.96,
       874759.02
@@ -45,7 +44,7 @@
     9798.278420696166,
     -9798.278420696166
   ],
-  "referenceRadiusMeters": 561400.0,
+  "referenceRadiusMeters": 561400,
   "rgb": {
     "bands": [
       69,
@@ -109,7 +108,7 @@
     "12": {
       "validPixels": 51884,
       "missingPixels": 12916,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.6301000118255615,
       "percentiles": {
         "1": 0.22340319633483888,
@@ -122,7 +121,7 @@
     "43": {
       "validPixels": 62158,
       "missingPixels": 2642,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.49790000915527344,
       "percentiles": {
         "1": 0.15873000025749207,
@@ -135,7 +134,7 @@
     "58": {
       "validPixels": 63790,
       "missingPixels": 1010,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.6624000072479248,
       "percentiles": {
         "1": 0.20531000196933746,
@@ -148,7 +147,7 @@
     "69": {
       "validPixels": 63790,
       "missingPixels": 1010,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.3546999990940094,
       "percentiles": {
         "1": 0.12233890131115914,
@@ -161,7 +160,7 @@
     "70": {
       "validPixels": 63790,
       "missingPixels": 1010,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.353300005197525,
       "percentiles": {
         "1": 0.11989560283720493,
@@ -174,7 +173,7 @@
     "81": {
       "validPixels": 63790,
       "missingPixels": 1010,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.6288999915122986,
       "percentiles": {
         "1": 0.1974222990870476,

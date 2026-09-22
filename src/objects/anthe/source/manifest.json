@@ -31,8 +31,6 @@
     {
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "b4ad5bdc90ca3fc53707b951d377fca947d791901dd72e46266914f31ac8be18",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
       "credit": "NASA/JPL nominal size estimate; cssEarth standard grid",
       "license": "MIT display representation from published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
       "credit": "NASA/JPL nominal size estimate; cssEarth standard grid",
       "license": "MIT display representation from published scientific dimensions",

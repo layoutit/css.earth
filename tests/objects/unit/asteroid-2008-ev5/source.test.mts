@@ -32,7 +32,6 @@ test('2008 EV5 keeps a closed source-connected mesh within the retained raster b
 test('2008 EV5 radius colors match independent full-source projections',async()=>{
  const {terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json')),mesh=await loadObjShape(resolve(root,p.path),p.grid),sample=createShapeSurfaceSampler(mesh,lens);
  const anchors=requireProjectionAnchors(JSON.parse(await readFile(new URL('./scalar-anchors.json',import.meta.url),'utf8')));
- const manifest=requireRecord(await read('manifest.json'),'2008 EV5 manifest'),inputs=requireArray(manifest.inputs,'2008 EV5 manifest inputs').map((input,index)=>{const entry=requireRecord(input,`2008 EV5 manifest input ${index}`);return {path:requireString(entry.path,`2008 EV5 manifest input ${index} path`),expectedSha256:requireString(entry.expectedSha256,`2008 EV5 manifest input ${index} hash`)};}),source=inputs.find(input=>input.path===p.path);assert.ok(source);assert.equal(anchors.sourceSha256,source.expectedSha256);
  for(const check of anchors.checks){const value=sample.samplePoint(check.query);if(!check.withinTransferLimit){assert.equal(value,null);continue;}assert.ok(value,check.kind);assert.ok(Math.abs(value.value-check.expectedValue)<1e-9,check.kind);assert.ok(Math.abs(value.radius-check.expectedRadiusMeters)<1e-6,check.kind);assert.ok(value.point.every((n,i)=>Math.abs(n-check.point[i])<1e-6),check.kind);}
 
 });

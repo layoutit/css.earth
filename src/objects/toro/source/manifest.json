@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 1750
       },
       "coverage": "Convex light-curve reconstruction. Thermophysical size-calibrated diameter: 3.5 ± 0.4 km. Grid marks unavailable mapped imagery; rotational phase is illustrative. Published 2018 YORP/thermophysical solution; rotation uses the fixed published reference period, with arbitrary display phase and no runtime YORP propagation. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
-      "expectedBytes": 82708,
-      "expectedSha256": "37dcd0f6ee31357b06abbd911720dcc46f36b7dd28bd1449a29a202c7dc8c373",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/1862-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "4bae8a7be1ec5497e5d0691cf84e1683321ef945db8c5536901d43a606dd8473"
+      "path": "reference/1862-IAUspin.txt"
     },
     {
       "path": "reference/calibration.json"

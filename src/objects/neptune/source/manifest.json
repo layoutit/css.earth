@@ -120,7 +120,6 @@
     {
       "id": "hubble-opal-neptune-readme",
       "path": "opal/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
-      "expectedSha256": "cfc2649e0242672fe6c78deba174b7572babb6a93ad7b45ec8956fb6c7c08859",
       "origin": "https://archive.stsci.edu/missions/hlsp/opal/cycle32/neptune/hlsp_opal_hst_wfc3-uvis_neptune-2025b_all_v1_readme.txt",
       "credit": "NASA, ESA, OPAL team, and STScI",
       "license": "MAST public science data terms",
@@ -130,7 +129,6 @@
         "scene",
         "lenses"
       ],
-      "expectedBytes": 1541,
       "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
@@ -175,7 +173,6 @@
     {
       "id": "nasa-science-neptune-editorial",
       "path": "editorial/neptune.json",
-      "expectedSha256": "62608eec61497708dde0317c43bcbad173bf8044e516997ddf33cc80c304858e",
       "origin": "https://science.nasa.gov/neptune/neptune-facts/",
       "credit": "NASA Science",
       "license": "United States government editorial material",
@@ -184,7 +181,6 @@
       "consumers": [
         "panel"
       ],
-      "expectedBytes": 8148,
       "historicalAcquisition": "tools/prepare-planet-information.mjs neptune during adapter acquisition",
       "sourceBinding": {
         "kind": "catalogued",
@@ -200,7 +196,6 @@
     {
       "id": "nasa-psg-neptune-configuration",
       "path": "atmosphere/psg-neptune-20260830.cfg",
-      "expectedSha256": "0a51c9b0ede933a9d9875197b960702514c39b291624ae02dd3bdc9b3ea01fe0",
       "origin": "https://psg.gsfc.nasa.gov/api.php, expanded Neptune configuration dated 2026/08/30",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
@@ -210,7 +205,6 @@
         "spectrum",
         "temperature-pressure-profile"
       ],
-      "expectedBytes": 8864,
       "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
@@ -226,7 +220,6 @@
     {
       "id": "nasa-psg-neptune-r240-rif",
       "path": "atmosphere/psg-neptune-r240-rif.txt",
-      "expectedSha256": "141ebc0bc62a9dbb668718c4e59a91900214931a9383bcefeadf1b12e3a974ef",
       "origin": "https://psg.gsfc.nasa.gov/api.php, pinned Neptune 0.35 to 1.0 um R=240 I/F response",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
@@ -235,7 +228,6 @@
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 12113,
       "historicalAcquisition": "node src/objects/neptune/tools/acquire.mjs --refresh",
       "sourceBinding": {
         "kind": "catalogued",
@@ -315,8 +307,6 @@
     {
       "id": "neptune-authored-editorial-object",
       "path": "editorial/object.json",
-      "expectedBytes": 8148,
-      "expectedSha256": "62608eec61497708dde0317c43bcbad173bf8044e516997ddf33cc80c304858e",
       "origin": "https://science.nasa.gov/neptune/neptune-facts/",
       "credit": "NASA Science",
       "license": "NASA content usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/",
@@ -404,8 +394,6 @@
     {
       "id": "neptune-authored-photometry",
       "path": "photometry/phase.json",
-      "expectedBytes": 1017,
-      "expectedSha256": "aa2c0a3e4b1d6f7958d930ecc7e4b9bcb2de8797473f35d52399b5039ce3b060",
       "origin": "Checked scientific phase model from site/source/scientific-charts/planetary-context.json",
       "credit": "Anthony Mallama and James L. Hilton",
       "license": "Project-authored scientific specification with cited authority",

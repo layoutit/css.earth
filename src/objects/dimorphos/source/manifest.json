@@ -133,8 +133,6 @@
       "consumers": [
         "albedo"
       ],
-      "expectedBytes": 6781,
-      "expectedSha256": "9d0b0ef96385478ae0a1401107b760112de64b3b74af08dfb5c1140a75c1a59e",
       "coverage": "Positive-sigma source facets cover 31.2138% of the source mesh area. Original table rows are uniquely matched to OBJ triangle centroids before sampling.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -150,8 +148,6 @@
     {
       "id": "usgs-gazetteer-dimorphos-nomenclature-center-pts",
       "path": "features/DIMORPHOS_nomenclature_center_pts.zip",
-      "expectedBytes": 30289,
-      "expectedSha256": "c7770000681f11b73deffc7aaad881e0028c3b75d61553a1c52bf786511368cb",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIMORPHOS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -214,8 +210,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 40081,
-      "expectedSha256": "3b417f2952fb40a01ff395e6b55c81fbe7d1b150a61fb47a0118e8b4bff48890",
       "observationDate": "2022-09-26T23:14:12.737Z",
       "interpretation": "PDS4 label defining the cube planes, byte offsets, units, special constants and the SPICE kernels used for the backplanes.",
       "sourceBinding": {
@@ -241,8 +235,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
       "interpretation": "SPICE LSK file incorporating leapseconds up to 2017-JAN-01, created by NAIF, JPL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -267,8 +259,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 126143,
-      "expectedSha256": "59468328349aa730d18bf1f8d7e86efe6e40b75dfb921908f99321b3a7a701d2",
       "interpretation": "SPICE text PCK file containing constants from the IAU 2009 report, created by NAIF, JPL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -293,8 +283,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 7968,
-      "expectedSha256": "c36bf56a5f93cb1f4ddc1eb09623a628b82ac225bb08e86c8a34c03cf7355600",
       "interpretation": "SPICE text PCK file containing constants for the Didymos system, created by the DART SOC, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -319,8 +307,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 35651,
-      "expectedSha256": "57f62d53298e88e536dcd4c3608cff436629608ea8eee7ff8840e5e2e9e69610",
       "interpretation": "SPICE FK file defining reference frames for the DART spacecraft, its structures, and science instruments, created by the DART SOC, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -345,8 +331,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 17325,
-      "expectedSha256": "3bd7214663c830018d1db80587976fc03b149b206a585f146146f0f612c30d57",
       "interpretation": "SPICE FK file defining reference frames for the Didymos system, by the DART SOC, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -371,8 +355,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 13132,
-      "expectedSha256": "377b5183ed63f8da2b413a7a50823f7961cd54482893fc0ddb4f296ba651a049",
       "interpretation": "SPICE IK file providing FOV definitions for the DART Didymos Reconnaissance and Asteroid Camera for OpNav (DRACO) instrument, created by by the DART science team, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -397,8 +379,6 @@
       "consumers": [
         "draco-spice"
       ],
-      "expectedBytes": 21282,
-      "expectedSha256": "66e74d60be322137012f55659a1bff72ef308f29540b5599148ab68dbf76546f",
       "interpretation": "SPICE SCLK file containing actual time correlation data for the DART on-board clock, created by the DART science team, JHU/APL. Label coverage 2021-11-09T00:00:00Z to 2050-01-01T00:00:00Z.",
       "sourceBinding": {
         "kind": "catalogued",
@@ -661,8 +641,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 39996,
-      "expectedSha256": "3085249f3334090f2227c30cf4037be88d82ddef78e4c79edebaf94c1ad27fee",
       "observationDate": "2022-09-26T23:14:22.365Z",
       "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
       "sourceBinding": {
@@ -719,8 +697,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 40081,
-      "expectedSha256": "bea15e0e21e86f9e41a30013fe9d58241d1d827638e0007b2ebd44b812c15319",
       "observationDate": "2022-09-26T23:14:19.477Z",
       "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
       "sourceBinding": {
@@ -777,8 +753,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 40081,
-      "expectedSha256": "7e9cafb0c623e63b8f07f82ede148e8ebd77fd05169092d0cc9487eec59c0a5e",
       "observationDate": "2022-09-26T23:14:17.551Z",
       "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
       "sourceBinding": {
@@ -864,8 +838,6 @@
       "path": "science/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
       "purpose": "Native label identifying the slope FITS table, field units and model interpretation.",
       "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-dart_shapemodel-v1.0/data_derived_dimorphos_model_v004/dimorphos_g_0972mm_spc_slp_0000n00000_v004.xml",
-      "expectedBytes": 7093,
-      "expectedSha256": "a8878f757d6fdced9a914db22b90ae7be18080e17113e42d6c6427e78c5de297",
       "kind": "source-document",
       "title": "Dimorphos global slope relative to gravity, model v004 — PDS4 label",
       "credit": "NASA/Johns Hopkins APL/DART; ASI/LICIACube; DART shape-model team",

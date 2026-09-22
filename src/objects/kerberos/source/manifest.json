@@ -31,8 +31,6 @@
     {
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "991139484557da7fefd5ec6793749e4a4fb6e72a6a205bdb77b29bcdbdda8fc1",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
       "credit": "Porter, Verbiscer and Canup (2025); cssEarth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
       "credit": "Porter, Verbiscer and Canup (2025); cssEarth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",

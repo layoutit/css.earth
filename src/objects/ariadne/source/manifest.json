@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 30000
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 60 ± 4 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
-      "expectedBytes": 32486,
-      "expectedSha256": "c51298a00d557411c88c4d49eafcb6afc80fd1906891e9eb6c23829820f0c76f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

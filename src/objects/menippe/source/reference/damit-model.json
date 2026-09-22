@@ -81,8 +81,8 @@
   ],
   "id": "menippe",
   "displayName": "Menippe",
-  "lambda": 32.0,
-  "beta": 48.0,
+  "lambda": 32,
+  "beta": 48,
   "periodHours": 11.97647,
   "version": "2011-04-21",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1204/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1202/IAUspin.txt",
-  "shapeSha256": "6edbc9d49a54ef72199ed7da9d5827c133f1aa1c2170e2ee8c65e747454c8077",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 4.1517675753590085e-09
+    "minimumTriangleAreaSourceUnitsSquared": 4.1517675753590085e-9
   },
   "anchors": [
     {
@@ -274,8 +273,8 @@
     "sourceLabel": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
     "sourceFile": "hanus-2018.pdf",
     "publishedPoleEclipticDegrees": [
-      32.0,
-      48.0
+      32,
+      48
     ],
     "publishedPeriodHours": 11.9765,
     "scaleKmPerSourceUnit": 28.4516578727117,
@@ -308,8 +307,8 @@
     "sourceLabel": "Hanuš et al. (2018), VS-TPM size study, Table A.3",
     "sourceFile": "hanus-2018.pdf",
     "publishedPoleEclipticDegrees": [
-      32.0,
-      48.0
+      32,
+      48
     ],
     "publishedPeriodHours": 11.9765,
     "scaleKmPerSourceUnit": 28.4516578727117,

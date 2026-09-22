@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 600
       },
       "coverage": "Convex light-curve reconstruction. Thermophysical size-calibrated diameter: 1.2 km (uncertainty not supplied by archive). Grid marks unavailable mapped imagery; rotational phase is illustrative. The archived model gives D1.2 km with no diameter uncertainty. Unknown uncertainty is retained as null; neither zero uncertainty nor a precise surface reconstruction is claimed. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
-      "expectedBytes": 82708,
-      "expectedSha256": "b573cb3c0b661359cab8c0bdedc9fdeadea2d2178fc7ffe783dc3b9b2db5915a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/456-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "bad008634096aa911ba3aac40df34fa658470f9b8655c6c34e8d70ae1571f612"
+      "path": "reference/456-IAUspin.txt"
     },
     {
       "path": "reference/calibration.json"

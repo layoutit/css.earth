@@ -76,25 +76,24 @@
   ],
   "id": "hedda",
   "displayName": "Hedda",
-  "lambda": 264.0,
-  "beta": -48.0,
+  "lambda": 264,
+  "beta": -48,
   "periodHours": 30.105,
   "version": "2019-10-23",
   "nonconvex": false,
   "calibrated": false,
   "diameterKm": 63.91,
-  "uncertaintyKm": 1.0,
+  "uncertaintyKm": 1,
   "akari": {
     "number": 207,
     "name": "Hedda",
     "diameterKm": 63.91,
-    "uncertaintyKm": 1.0,
+    "uncertaintyKm": 1,
     "detections": 6,
     "originalRow": "207    Hedda                          9.92  0.15  6   63.91  1.00 0.047 0.002"
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/54367/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/54365/IAUspin",
-  "shapeSha256": "2960870d9b24a38294260667c205abc1a2d88ca5b62af00ff47a50747cf67838",
   "shapeBytes": 44637,
   "vertices": 552,
   "faces": 1100,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 1100,
-    "minDoubleTriangleAreaSourceUnits2": 1.2425207299677563e-07
+    "minDoubleTriangleAreaSourceUnits2": 1.2425207299677563e-7
   },
   "independentAnchors": [
     {
@@ -269,8 +268,8 @@
   "calibration": {
     "method": "thermal-effective-diameter-as-volume-approximation",
     "diameterKm": 63.91,
-    "uncertaintyKm": 1.0,
-    "reportedUncertaintyKm": 1.0,
+    "uncertaintyKm": 1,
+    "reportedUncertaintyKm": 1,
     "uncertaintyKind": "Formal catalog uncertainty; excludes extra shape, spin and thermal-model systematics. It is not the total uncertainty of displayed physical scale.",
     "systematicUncertaintyFraction": null,
     "additionalSystematics": "Usui2011 section2.3 omits unquantified shape, spin and thermal-model effects. Rotation can add a few to about10% in size, especially for few detections; no invented total error bar is assigned.",
@@ -282,7 +281,7 @@
       "number": 207,
       "name": "Hedda",
       "diameterKm": 63.91,
-      "uncertaintyKm": 1.0,
+      "uncertaintyKm": 1,
       "detections": 6,
       "originalRow": "207    Hedda                          9.92  0.15  6   63.91  1.00 0.047 0.002"
     },
@@ -302,8 +301,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2457358.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2457358,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

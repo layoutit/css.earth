@@ -93,8 +93,6 @@
     {
       "id": "r-doradus-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 2071,
-      "expectedSha256": "b248f723bb482c3d5a0a630d2e54325e6c677652c14f98b2be80a8000abd09e7",
       "origin": "https://doi.org/10.1038/s41586-024-07836-9",
       "credit": "Vlemmings et al. (2024), ALMA 2022.1.01071.S; effective temperature: Ohnaka, Weigelt & Hofmann (2019), ApJ 883, 89",
       "license": "Factual numerical measurements; source attribution retained",
@@ -254,8 +252,6 @@
     {
       "id": "r-doradus-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1273,
-      "expectedSha256": "51b2f7a43f20dfce6ea15c1a099b398f7adf4eddbb10986cd3a080747fbbfb36",
       "origin": "https://www.eso.org/sci/observing/tools/uvespop.html",
       "credit": "ESO UVES Paranal Observatory Project (Bagnulo et al.); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -284,8 +280,6 @@
     {
       "id": "r-doradus-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

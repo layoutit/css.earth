@@ -77,8 +77,8 @@
   ],
   "id": "phaedra",
   "displayName": "Phaedra",
-  "lambda": 266.0,
-  "beta": 5.0,
+  "lambda": 266,
+  "beta": 5,
   "periodHours": 5.750249,
   "version": "2011-02-18",
   "nonconvex": false,
@@ -95,7 +95,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1091/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1089/IAUspin.txt",
-  "shapeSha256": "1805d5dbef19e6956892f348a8f2bfea20036c710c9641352aebd224cde62acd",
   "shapeBytes": 80763,
   "vertices": 998,
   "faces": 1992,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 1.1349965889397731e-07
+    "minimumTriangleAreaSourceUnitsSquared": 1.1349965889397731e-7
   },
   "anchors": [
     {

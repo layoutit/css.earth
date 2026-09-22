@@ -80,8 +80,8 @@
   ],
   "id": "aschera",
   "displayName": "Aschera",
-  "lambda": 123.0,
-  "beta": -37.0,
+  "lambda": 123,
+  "beta": -37,
   "periodHours": 6.8337,
   "version": "2016-01-12",
   "nonconvex": false,
@@ -98,7 +98,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5059/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5057/IAUspin.txt",
-  "shapeSha256": "425c5eaa458c41fc0ecd53191819cd902e7f242a38b77aa0d4860b788d403674",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2040,
-    "minDoubleTriangleAreaSourceUnits2": 2.766710863146748e-09
+    "minDoubleTriangleAreaSourceUnits2": 2.766710863146748e-9
   },
   "independentAnchors": [
     {
@@ -306,8 +305,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2450888.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2450888,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

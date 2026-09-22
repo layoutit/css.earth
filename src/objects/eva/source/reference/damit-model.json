@@ -76,8 +76,8 @@
   ],
   "id": "eva",
   "displayName": "Eva",
-  "lambda": 54.0,
-  "beta": -10.0,
+  "lambda": 54,
+  "beta": -10,
   "periodHours": 13.6638,
   "version": "2016-01-04",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3796/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3794/IAUspin.txt",
-  "shapeSha256": "c9f55273db249c8adb0a08784259e0967e93a8f1876f48dd6afe7d7f634ad87d",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 2.1166753147621162e-07
+    "minimumTriangleAreaSourceUnitsSquared": 2.1166753147621162e-7
   },
   "anchors": [
     {

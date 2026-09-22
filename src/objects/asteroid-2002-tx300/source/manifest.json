@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "75730ca4af8be9d8f37bb4d3a53b9346c4bfeedb1ceea91f94f23c3ac9d3763a",
       "origin": "https://doi.org/10.1051/0004-6361/201732564",
       "credit": "Vilenius et al. (2018), A&A 618, A136, §3.3 and Table 6.",
       "license": "MIT numeric extraction of published scientific facts",

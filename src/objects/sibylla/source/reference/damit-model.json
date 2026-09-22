@@ -76,8 +76,8 @@
   ],
   "id": "sibylla",
   "displayName": "Sibylla",
-  "lambda": 108.0,
-  "beta": -62.0,
+  "lambda": 108,
+  "beta": -62,
   "periodHours": 47.015,
   "version": "2022-02-14",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65441/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/65439/IAUspin",
-  "shapeSha256": "f156336a2048015bfabaf6dc2be0d5a06683cdce4662d02c7e71931b33bbbb79",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 7.562074261406398e-08
+    "minimumTriangleAreaSourceUnitsSquared": 7.562074261406398e-8
   },
   "anchors": [
     {

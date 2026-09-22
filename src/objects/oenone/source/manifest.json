@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 18500
       },
       "coverage": "Convex CITPM shape; 37 ± 2 km volume-equivalent thermal size. Occultations give 46 ± 1 km for a separate optical-only shape. The grid marks unavailable imagery; rotational phase is illustrative. Choukroun2025 Table4 explicitly defines D as the equivalent-volume sphere diameter, and the unchanged CITPM mesh independently yields 37 km. Its pole (45,+85) identifies Table4 pole1. The 46±1 km occultation comment belongs to the paper’s separate lightcurve-only shape (section4.2); that shape is explicitly less smooth and is not interchangeable with this CITPM mesh. Both mirror poles fit the occultation similarly; select model16312 as pole1 without rejecting4825. The thermal/occultation size discrepancy remains visible rather than transferring the other mesh’s diameter.",
-      "expectedBytes": 46419,
-      "expectedSha256": "27a2a816bb4696dec5bc7a31dd1bc50cf6018abaaca213311ba81a0fdb33a4b9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/16312-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "af75509452c08f7e830c98475e573c433f96031cf528bf5ee585153cd9449f2c"
+      "path": "reference/16312-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

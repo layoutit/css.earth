@@ -35,11 +35,8 @@
   },
   "registration": {
     "method": "registered-image-feature-translation",
-    "sourceShapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
     "reference": {
-      "id": "iv05070405-9000680-001-r",
-      "imageSha256": "8cf1f35342c0caec7a22e6a610d66b2d8a91f866d70b4c0f5a9a41de6b799a70",
-      "controlSha256": "75faeb131deaf390f5931556db492878570eb94fb72d185b6ef55d70fb69c7b1"
+      "id": "iv05070405-9000680-001-r"
     },
     "nominalPixelScaleMeters": 3.123,
     "maximumRmsMeters": 3.123,

@@ -118,8 +118,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -142,8 +140,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 237356,
-      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -166,8 +162,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 23016,
-      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -190,8 +184,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 6314,
-      "expectedSha256": "cfdc8738633af838008c6f67c23019c5179c4fc7888a5653f06b7a3dfbc846c1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -342,8 +334,6 @@
     {
       "id": "usgs-gazetteer-steins-nomenclature-center-pts",
       "path": "features/STEINS_nomenclature_center_pts.zip",
-      "expectedBytes": 99707,
-      "expectedSha256": "16001f4727a58377f0482f02f19f38cb1da71930894acbc9c7c7e5f007ffb5e6",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/STEINS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

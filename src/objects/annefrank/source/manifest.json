@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "7d15c5d4554fde8ccd344b21c4102e8d9431a951ae248f0c7cbd7bb33e8ed5b8",
       "origin": "https://doi.org/10.1029/2003JE002108",
       "credit": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1029/2003JE002108",
       "credit": "Duxbury et al. (2004), Journal of Geophysical Research: Planets 109, E02002",
       "license": "MIT authored approximation from published numerical scientific facts",

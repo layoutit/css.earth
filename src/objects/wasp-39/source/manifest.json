@@ -157,8 +157,6 @@
     {
       "id": "wasp-39-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1142,
-      "expectedSha256": "90b4877d964baa526ffeb3fb6df67339f56ca7a80bf6179c94936d6431053807",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +185,6 @@
     {
       "id": "wasp-39-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

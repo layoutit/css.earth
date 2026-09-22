@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-muse-spectral-maps@1",
-  "recipeSha256": "c2dc147d0db95b7284949ce31b664374f652eadab4b9b4b3d48b5b12e5f15968",
   "preparerSha256": "2d8910aed38cd53a847448a912fe219db0314266da31d5d90d430a61050875f8",
   "target": "ganymede",
   "registration": {
@@ -113,7 +112,7 @@
         "missingNativeNodes": 12639,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3365,
-        "maximumFloat32Error": 5.959679660882955e-08
+        "maximumFloat32Error": 5.959679660882955e-8
       },
       "finiteNativeRange": [
         0.990427624237225,
@@ -152,7 +151,7 @@
         "missingNativeNodes": 12635,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3369,
-        "maximumFloat32Error": 5.960131987947648e-08
+        "maximumFloat32Error": 5.960131987947648e-8
       },
       "finiteNativeRange": [
         0.9836718982194164,
@@ -191,7 +190,7 @@
         "missingNativeNodes": 12635,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3369,
-        "maximumFloat32Error": 5.960125282200579e-08
+        "maximumFloat32Error": 5.960125282200579e-8
       },
       "finiteNativeRange": [
         0.9889256543885226,

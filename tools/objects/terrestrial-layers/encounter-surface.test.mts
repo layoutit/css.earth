@@ -37,19 +37,17 @@ test('detector edges never interpolate missing contributors',()=>{
 test('registration recomputes holdouts and cannot be approved by changing declared RMS',()=>{
  const camera={project:(p: readonly number[])=>[p[0],p[1],10],report:{nominalPixelScaleMeters:1}};
  const controls=Array.from({length:12},(_,i)=>({id:String(i),partition:i<6?'fit':'holdout',sourcePointMeters:[i,i%3,0],sourcePixel:[i,i%3]}));
- const r={method:'source-topography-feature-translation',sourceShapeSha256:'a'.repeat(64),controls,maximumRmsMeters:1,maximumResidualMeters:2,nominalPixelScaleMeters:1,limitations:'Image feature residuals; no absolute geodetic accuracy claim.'};
- assert.equal(required(validateEncounterControls(camera,r,r.sourceShapeSha256).holdout).rmsPixels,0);
+ const r={method:'source-topography-feature-translation',controls,maximumRmsMeters:1,maximumResidualMeters:2,nominalPixelScaleMeters:1,limitations:'Image feature residuals; no absolute geodetic accuracy claim.'};
+ assert.equal(required(validateEncounterControls(camera,r).holdout).rmsPixels,0);
  Object.assign(r,{holdout:{rmsPixels:0,maximumPixels:0}});r.controls[11].sourcePixel[0]+=20;
- assert.throws(()=>Reflect.apply(validateEncounterControls, undefined, [camera, r, r.sourceShapeSha256]),/budget/);
- assert.throws(()=>Reflect.apply(validateEncounterControls, undefined, [camera, r, 'b'.repeat(64)]),/source-bound/);
+ assert.throws(()=>Reflect.apply(validateEncounterControls, undefined, [camera, r]),/budget/);
 });
 test('image overlap controls require the pinned earlier reference and visible source points',()=>{
- const sha='a'.repeat(64),reference={id:'reference',imageSha256:sha,controlSha256:sha,camera:{positionMeters:[0,0,10],project:(p: readonly number[])=>[p[0],p[1],10]},sample:()=>({})};
- const control={registration:{method:'registered-image-feature-translation',reference:{id:'reference',imageSha256:sha,controlSha256:sha},controls:[{referencePixel:[0,0],sourcePointMeters:[0,0,0]}]}};
+ const reference={id:'reference',camera:{positionMeters:[0,0,10],project:(p: readonly number[])=>[p[0],p[1],10]},sample:()=>({})};
+ const control={registration:{method:'registered-image-feature-translation',reference:{id:'reference'},controls:[{referencePixel:[0,0],sourcePointMeters:[0,0,0]}]}};
  const mesh={intersect:()=>({radius:10})};
  validateEncounterImageReference(control,reference,mesh);
  assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, undefined, mesh]),/earlier qualified/);
- assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, {...reference,controlSha256:'b'.repeat(64)}, mesh]),/source hashes/);
  assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, {...reference,sample:()=>({reason:'bad-source-pixel'})}, mesh]),/qualified reference pixel/);
  assert.throws(()=>Reflect.apply(validateEncounterImageReference, undefined, [control, reference, {intersect:()=>({radius:5})}]),/occluded/);
  control.registration.controls[0].referencePixel=[3,4];

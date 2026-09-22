@@ -81,8 +81,8 @@
   ],
   "id": "protogeneia",
   "displayName": "Protogeneia",
-  "lambda": 90.0,
-  "beta": 14.0,
+  "lambda": 90,
+  "beta": 14,
   "periodHours": 7.85227,
   "version": "2013-02-11",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2196/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2194/IAUspin.txt",
-  "shapeSha256": "903c54800b229e30bd4b5b7aed8a99f3bef189f87ccf99d29fdce35aea38979c",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 2.8774267758690953e-07
+    "minimumTriangleAreaSourceUnitsSquared": 2.8774267758690953e-7
   },
   "anchors": [
     {

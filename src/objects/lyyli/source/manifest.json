@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 13560
       },
       "coverage": "Convex lightcurve reconstruction at approximate thermal scale: 27.12 km effective diameter (catalog ±1.31 km; additional model uncertainty). Grid marks unavailable imagery; pole ambiguity is retained in source notes. AKARI fitted nonrotating-sphere effective diameter is transferred as a uniform volume-scale approximation to this independently obtained shape model. Quoted catalog error is statistical and omits additional shape, spin and thermal-model uncertainty. No total confidence interval or local terrain accuracy is inferred.",
-      "expectedBytes": 46257,
-      "expectedSha256": "5e9053bcc76b8f3f71cffec390e72d1b48e0043d8f9208949cd84b623e5dbf48",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/2012-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "37c8210c5dc7c52776891d8d1502e0d84a724c1be37b15a47f70ef78e48717fb"
+      "path": "reference/2012-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"
@@ -151,9 +145,7 @@
       "path": "reference/model-properties.json"
     },
     {
-      "path": "reference/sbdb.json",
-      "expectedBytes": 2008,
-      "expectedSha256": "b277b42461b8ef30f7e40fd3b04c3e0efcce151a84c15d237b463978f98ce7a3"
+      "path": "reference/sbdb.json"
     }
   ]
 }

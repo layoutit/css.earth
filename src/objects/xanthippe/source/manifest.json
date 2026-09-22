@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 57745
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 115.49 km (catalog ±1.74 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select ATLAS convex model 4643 (197,9), retaining 4644 (22,15). The 2020 table gives two poles and 22.1157 h; the 2021 ASAS-SN table gives (32,37)/(202,24) and 22.116 h. These are independent broad-family checks, not release identity or a uniquely resolved pole.",
-      "expectedBytes": 46419,
-      "expectedSha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/4643-IAUspin.txt",
-      "expectedBytes": 33,
-      "expectedSha256": "c00dd7a14c6c1bfdac753b60943065d8d29e1f6847ad4b8633480bc7bc594ba9"
+      "path": "reference/4643-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

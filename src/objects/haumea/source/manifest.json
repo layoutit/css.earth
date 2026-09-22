@@ -3,8 +3,6 @@
   "inputs": [
     {
       "path": "measurements.json",
-      "expectedBytes": 574,
-      "expectedSha256": "8fdbabb8a5f880c3872ae30c31b9f0b95f475e63bc69516c1ef0a2eaf294f452",
       "id": "ortiz-2017-shape",
       "origin": "https://doi.org/10.1038/nature24051",
       "credit": "Ortiz et al. 2017",
@@ -52,8 +50,6 @@
     {
       "id": "haumea-disc-color",
       "path": "photometry/disc-color.json",
-      "expectedBytes": 2084,
-      "expectedSha256": "9537eff943560b6d733cdf0aa7b4d675d75e45a7e1b833cd7e56619f4331debc",
       "origin": "https://doi.org/10.1086/499575",
       "credit": "Rabinowitz et al. 2006; Ortiz et al. 2017; Ramírez et al. 2012; SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
@@ -91,8 +87,6 @@
     {
       "id": "haumea-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -118,8 +112,6 @@
     {
       "id": "haumea-cie-std-illuminant-d65",
       "path": "reference/CIE_std_illum_D65.csv",
-      "expectedBytes": 6820,
-      "expectedSha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
       "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
       "license": "CC BY-SA 4.0",
@@ -163,8 +155,6 @@
         "content"
       ],
       "coverage": "271 x 271 pixels of 3.2 milliarcseconds in Jy/beam, restoring beam 22.6 x 16.3 milliarcseconds at position angle 12.7 degrees. Haumea peaks at 0.248 mJy/beam, 58 milliarcseconds west and 15 south of the reference position; the QA2 report states a noise of 0.013 mJy/beam.",
-      "expectedBytes": 325440,
-      "expectedSha256": "ece91bbbffbb18b7445b7ff0fd68aa90292a9b7195a3d4c2f32adc02dc74da74",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

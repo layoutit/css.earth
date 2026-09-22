@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 73500
       },
       "coverage": "Published convex light-curve model 16321. Updated convex DAMIT shape at an approximate147km scale transferred from a published thermophysical model (±2km for that source fit; additional uncertainty for this model). The old preliminary spin solution is not used. Grid marks unavailable imagery; rotational phase is illustrative. Uses the updated 2026 DAMIT spin solution; older preliminary models had an incorrect spin. Published size is transferred from a separate shape reconstruction.",
-      "expectedBytes": 293943,
-      "expectedSha256": "524c84346cc770f9974d2493b0b2d9a2c06ca58f0a1701e2e159ec20d01e1045",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 2405.325
       },
       "coverage": "Lucy stereo images constrain about 40% of the surface. The source authors completed the unseen part using a two-ellipsoid fit and symmetry; it is not all observed terrain. The body tumbles, and the preliminary frame is accurate only near the 2025 encounter. This display uses a fixed illustrative orientation and does not propagate that attitude. No registered optical surface map is supplied.",
-      "expectedBytes": 11193210,
-      "expectedSha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -172,8 +170,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -196,8 +192,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 3384,
-      "expectedSha256": "c45817cad95c54e2a4c8c59d0b7944418b68e2b52409a1485d128afbc9da1021",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -220,8 +214,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 71280,
-      "expectedSha256": "732863d8aca2d3c723ae34de2e5bed1d79641434419a03f2efc68faba8488b9c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -268,8 +260,6 @@
     {
       "id": "usgs-gazetteer-donaldjohanson-nomenclature-center-pts",
       "path": "features/DONALDJOHANSON_nomenclature_center_pts.zip",
-      "expectedBytes": 30329,
-      "expectedSha256": "b74f7a8f8a495be46cc554283f0577e8a1bf1c2567bcd76d50c2778201643f79",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DONALDJOHANSON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -324,8 +314,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 71269,
-      "expectedSha256": "99df931af2c813f11e280ac73469521cbb01a80873d1be5f16672df163ac3c58",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

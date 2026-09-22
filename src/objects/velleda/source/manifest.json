@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 21970
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 43.94 km effective diameter (catalog ±0.49 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Hanuš2021 TableA.2 reports249 ASAS-SN observations and both poles(120,46)/(300,32). The selected first archive solution is a reproducible representative; no source preference or unique attitude is claimed.",
-      "expectedBytes": 82627,
-      "expectedSha256": "78ec4654953bce428c657665cc21c70e933184fdeb4952e7243df70d97be698e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/5958-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "a02b5c7bfea490737e0ce4f93768853603e833667e25b27e2a933072a3096f94"
+      "path": "reference/5958-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

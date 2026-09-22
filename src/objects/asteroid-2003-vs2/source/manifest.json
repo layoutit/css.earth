@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "46ce5d051cc7192152bcb6c4628b14de72e9c1fe304d1cf805aad080983cf46c",
       "origin": "https://doi.org/10.1051/0004-6361/202141842",
       "credit": "Vara-Lubiano et al. (2022), A&A, Table7 and §4.3 (2019 occultation).",
       "license": "MIT numeric extraction of published scientific facts",

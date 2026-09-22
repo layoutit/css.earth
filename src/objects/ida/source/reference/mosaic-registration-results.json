@@ -68,7 +68,7 @@
         0
       ],
       "correlation": 0.8527365625046575,
-      "residualPixels": 0.0
+      "residualPixels": 0
     },
     {
       "rectangle": [
@@ -96,61 +96,48 @@
         -1
       ],
       "correlation": 0.8769627921176004,
-      "residualPixels": 1.0
+      "residualPixels": 1
     }
   ],
   "provenance": [
     {
-      "path": "observations/0202560500rcal_gre.fit",
-      "sha256": "1ff454dd43d90c53bb0523dd258f7870e0d1f9cf2d5de41b6002fa6f2bd59886"
+      "path": "observations/0202560500rcal_gre.fit"
     },
     {
-      "path": "observations/0202560500rcal_gre.xml",
-      "sha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df"
+      "path": "observations/0202560500rcal_gre.xml"
     },
     {
-      "path": "observations/i0500.fit",
-      "sha256": "b8c6440f6e2b96ab139e9093ed2a88b6a7e41d1ff3b531405b5f2880e942d4a1"
+      "path": "observations/i0500.fit"
     },
     {
-      "path": "observations/i0500.lbl",
-      "sha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c"
+      "path": "observations/i0500.lbl"
     },
     {
-      "path": "observations/idabad.tab",
-      "sha256": "bb373b59c8fd72325d61167cf7af67f1e69d3dea7c8b8919ee9ba1b07cb7cb47"
+      "path": "observations/idabad.tab"
     },
     {
-      "path": "observations/idabad.lbl",
-      "sha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441"
+      "path": "observations/idabad.lbl"
     },
     {
-      "path": "reference/243idaimg.tab",
-      "sha256": "af8478f44f435e9e38c2cf82de05a910082aef34f730c503a9eb2236b4dc413a"
+      "path": "reference/243idaimg.tab"
     },
     {
-      "path": "reference/243idaimg.xml",
-      "sha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13"
+      "path": "reference/243idaimg.xml"
     },
     {
-      "path": "reference/gll36001.ti",
-      "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+      "path": "reference/gll36001.ti"
     },
     {
-      "path": "shape/243ida.tab",
-      "sha256": "44a3a6752ce6bd34a4796485144429dc3d7cd9d2c7a6409636348f30876c95df"
+      "path": "shape/243ida.tab"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "sha256": "0951113d2fde4f212face8867951d7f1a6d805e26f25581a9a33157a945d160c"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "reference/registration-202560500.json",
-      "sha256": "8fe19fc97c0a2677ddaea051f6ed4cdd174097f9724b789cf7085062f239f4d4"
+      "path": "reference/registration-202560500.json"
     },
     {
-      "path": "maps/243idam.fit",
-      "sha256": "f54c5cb55c6b6577dcfa64befa50367c3d3a6e0e75be6c2405495678a09559d7"
+      "path": "maps/243idam.fit"
     }
   ]
 }

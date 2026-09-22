@@ -1,51 +1,6 @@
 {
   "schema": "cssearth-halley-encounter-registration@1",
   "interpretation": "Approximate placement of original illuminated photographs from different dates and filters. Not albedo or simultaneous coverage.",
-  "shapeSha256": "e9437ac850060a4c527d1045e028ac28f58bfe0386fc1da0bf50405b8128b824",
-  "sourcePins": [
-    {
-      "path": "vega/t11190.hdr",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.hdr",
-      "bytes": 5760,
-      "sha256": "e6e43ac52b037d69cf5f12cb6a1e5a0f0ad79e30e11a96353dd2e73dfa1a5904"
-    },
-    {
-      "path": "vega/t11190.lbl",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.lbl",
-      "bytes": 1920,
-      "sha256": "ea1f4083f2030845cff45f988800b935af6bd69f87759211ab5793a923b920ee"
-    },
-    {
-      "path": "vega/t11190.img",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.img",
-      "bytes": 264960,
-      "sha256": "17b1aa86cdb268f4ae6e9aff3dda6c2059a015885cf0ce6eb7e2c60fcb2a9e9d"
-    },
-    {
-      "path": "vega/t11194.hdr",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.hdr",
-      "bytes": 5760,
-      "sha256": "d8756d103854206ff497dc2d4ba2c582bd839a08c647177a6a488a3828310021"
-    },
-    {
-      "path": "vega/t11194.lbl",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.lbl",
-      "bytes": 1920,
-      "sha256": "55a0ae640f1c47743720cc2bee2ccc7ca1871768873f164121e01b982f7e066d"
-    },
-    {
-      "path": "vega/t11194.img",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.img",
-      "bytes": 264960,
-      "sha256": "627a11052348a8e5ab01f69fadd7d81d59f6b9dbd4ec79b25f9ee72bedc1130e"
-    },
-    {
-      "path": "vega/tvs_proc.doc",
-      "url": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc",
-      "bytes": 10160,
-      "sha256": "e0b5281528b3b2266b43a84b2ba230b38966b5cb3410e6622b849f5e5ebcf7fd"
-    }
-  ],
   "geometrySources": [
     "giotto/rotation-2004.tab",
     "giotto/vega2-flyby.txt",

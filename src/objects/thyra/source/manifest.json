@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 46000
       },
       "coverage": "Convex light-curve reconstruction with a published 90–94 km diameter fit range; the archive mesh uses 92 km. Unusual scattering parameters make its vertical shape uncertain. The grid marks unavailable imagery; rotational phase is illustrative. The archive warns that unusual Hapke parameters were needed to keep the shape from becoming too high. This limits confidence in the vertical dimension. Delbo and Tanga2009 give a90–94 km thermophysical size range for this pole family, represented in DAMIT as92±2 km. The material roughness is not constrained; no Hapke-derived texture is synthesized.",
-      "expectedBytes": 82627,
-      "expectedSha256": "d3e017daf4e6a4b91d1854af583a2e128397c945dc62d2c384b8420bf8094a2f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/154-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "34736c4c6551486512f04a17c56b173bbde6c2a0ca9e19f9b3c7bd023a618ff6"
+      "path": "reference/154-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

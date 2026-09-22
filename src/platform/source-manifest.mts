@@ -30,6 +30,7 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
   // A lens may read an acquired input or a file this repository generates from one, such as a spectrum sampled here from the
   // archive's coefficients. Both are pinned the same way, and both are verified by their bytes before they are read.
   const inputsByPath = new Map<string, SourceEntry>([
+    ...manifest.documents.map((entry) => [entry.path, entry] as const),
     ...manifest.generatedIntermediates.map((entry) => [entry.path, entry] as const),
     ...manifest.inputs.map((entry) => [entry.path, entry] as const),
   ]);
@@ -57,6 +58,17 @@ export async function createSourceManifest({ planetId, planetName, sourceRoot }:
       if (!entry) throw new Error(`${planetName} source is not declared: ${normalized}.`);
       await validateSourceEntry({ entry, planetName, sourceRoot });
       return entry;
+    },
+    /** The one way a preparation reads a source file: a download is verified against its manifest pin, a file
+     * authored here is read as it is. Nothing else needs to remember a hash. */
+    async readSource(sourcePath: string): Promise<Buffer> {
+      const normalized = sourcePath.replaceAll("\\", "/");
+      if (normalized.startsWith("/") || normalized.split("/").includes("..")) throw new Error(`${planetName} source path escapes the package: ${normalized}.`);
+      const entry = inputsByPath.get(normalized);
+      if (!entry) throw new Error(`${planetName} source is not declared: ${normalized}.`);
+      const bytes = await readFile(resolve(sourceRoot, normalized));
+      assertSourceBytes({ entry, bytes, planetName });
+      return bytes;
     },
     assertBytes(entry: SourceEntry, bytes: Uint8Array) {
       return assertSourceBytes({ entry, bytes, planetName });

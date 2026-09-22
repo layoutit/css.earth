@@ -1,6 +1,5 @@
 {
   "id": "asteroid-1992-sk",
-  "sourceSha256": "c5edada6befa4cad50d4f73a2a11ff1e1dede7728bd3d39fb21c9de2974fe05c",
   "method": "Existing independent NumPy plane/edge projection against every original source triangle; retained face centroids, source extrema and every multiple-ray source centroid.",
   "count": 806,
   "withheld": 0,

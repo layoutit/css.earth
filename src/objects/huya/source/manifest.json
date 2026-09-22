@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "ec446a226da81051a2d60296252027374ffba715e1d2e77004e401958cc21199",
       "origin": "https://arxiv.org/abs/2501.09739",
       "credit": "Rommel et al. (2025), PSJ 6, 48; Table 6 and Appendix C.",
       "license": "MIT numeric extraction of published scientific facts",

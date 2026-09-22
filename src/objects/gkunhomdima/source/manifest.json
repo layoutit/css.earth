@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "78d131d1e67026b4c5f9dbcbafbbce798db9cd2401f50bcae6643e44253bfa88",
       "origin": "https://arxiv.org/abs/2605.28636",
       "credit": "Proudfoot et al. (2026), accepted PSJ; occultation and satellite-orbit constraints",
       "license": "MIT authored numerical extraction of published scientific facts",

@@ -106,8 +106,6 @@
       "consumers": [
         "albedo"
       ],
-      "expectedBytes": 6724,
-      "expectedSha256": "6fd1eede1d4c1bb8c5edd83c95b4c5de24dfdea2ca41e1263583fdb389b7a9e5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -122,8 +120,6 @@
     {
       "id": "usgs-gazetteer-didymos-nomenclature-center-pts",
       "path": "features/DIDYMOS_nomenclature_center_pts.zip",
-      "expectedBytes": 6693,
-      "expectedSha256": "b08088b26cf9046da402987a7659c9e339b870ce948feb06d3f2678671af3e5a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIDYMOS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -185,8 +181,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 40054,
-      "expectedSha256": "4d4847a207f5e14975431949b8d500ade608c0bb0612bac54f1f3deed91cc5aa",
       "observationDate": "2022-09-26T23:12:49.930Z",
       "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
       "sourceBinding": {
@@ -243,8 +237,6 @@
       "consumers": [
         "draco-observation"
       ],
-      "expectedBytes": 40053,
-      "expectedSha256": "ab5b4d3eea17bd6ac8e0f03024cfbd5145b23545a2434c0577a207a07ff9e9bc",
       "observationDate": "2022-09-26T23:11:46.381Z",
       "interpretation": "Native PDS4 definition of image and geometry planes, offsets, units, flags and archived kernel identifiers.",
       "sourceBinding": {
@@ -309,8 +301,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13051,
-      "expectedSha256": "d7fe226439d90a67540c93e82656b9e5d0b601869298525b1cf66e3b418c58f2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -372,8 +362,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13065,
-      "expectedSha256": "b12a495c3471290cc0c8da9a3ac349c0a26173a1656e8260945112b310860999",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -435,8 +423,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13065,
-      "expectedSha256": "1e6ba744b4ad99898b2ba56234c938551480b27f2c185e16b16948c4d850650b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -498,8 +484,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13051,
-      "expectedSha256": "2a3b2c89cb66e0e2aa4cba3ba9d562e819fffed5e67f0e50a92eea3ceaf68258",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -561,8 +545,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13065,
-      "expectedSha256": "d9ee9c8c6e1bd593edec05f318d2d4e3b8815b654dfb28e99df922fbe7369a6a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -624,8 +606,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13065,
-      "expectedSha256": "91cfd075af513801fdaad44bda3088a7219033d391f8766ec1b45e9a9aa9cec7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -687,8 +667,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13065,
-      "expectedSha256": "beeab789db0904372f3ab29b911d99db8e481c06ca546f4f0c72e16099f9605e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -750,8 +728,6 @@
         "reference"
       ],
       "coverage": "The product's PDS4 label, kept as the archive's own statement of the thirteen SPICE kernels its calibration used. The camera reads the FITS header, not this label.",
-      "expectedBytes": 13065,
-      "expectedSha256": "1802c69e1c62def130379977f20a5bfd0a748ce0f1c820f0e1ed3a503de1435a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

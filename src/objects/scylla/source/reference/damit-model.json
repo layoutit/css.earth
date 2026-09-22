@@ -76,8 +76,8 @@
   ],
   "id": "scylla",
   "displayName": "Scylla",
-  "lambda": 356.0,
-  "beta": 53.0,
+  "lambda": 356,
+  "beta": 53,
   "periodHours": 7.95879,
   "version": "2016-01-04",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3479/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3477/IAUspin.txt",
-  "shapeSha256": "6ee6620929ec650a72d7f2133a74f796fd91c07e8b3e24463808f878170adab2",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 2.4354808811607697e-08
+    "minimumTriangleAreaSourceUnitsSquared": 2.4354808811607697e-8
   },
   "anchors": [
     {

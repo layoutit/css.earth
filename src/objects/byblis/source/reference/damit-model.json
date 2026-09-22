@@ -81,8 +81,8 @@
   ],
   "id": "byblis",
   "displayName": "Byblis",
-  "lambda": 165.0,
-  "beta": 9.0,
+  "lambda": 165,
+  "beta": 9,
   "periodHours": 5.22063,
   "version": "2013-02-26",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1990/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1988/IAUspin.txt",
-  "shapeSha256": "3482d76fa479e2335f9e524abeaa2a38a9f0d974298a2520006bfa807d2cd056",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -143,7 +142,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2040,
-    "minDoubleTriangleAreaSourceUnits2": 1.33976369787398e-06
+    "minDoubleTriangleAreaSourceUnits2": 0.00000133976369787398
   },
   "independentAnchors": [
     {
@@ -307,8 +306,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2450965.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2450965,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

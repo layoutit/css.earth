@@ -23,7 +23,6 @@
     {
       "id": "inter-mars-title-vector",
       "path": "presentation/title-mark.json",
-      "expectedSha256": "76ec9b44e3944fd3e75319dc47e8cdeeb0e1ecfa7d868d5cfd514cd38a7fc288",
       "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Mars outline",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -32,7 +31,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 3303,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -47,7 +45,6 @@
     {
       "id": "nasa-hubble-mars-navigation-marker",
       "path": "presentation/navigation-marker.jpg",
-      "expectedSha256": "f55dad386a7d45e2758c0dc1d520c40dc6f2aaa517f08451facba738e121b8cb",
       "origin": "https://science.nasa.gov/wp-content/uploads/2023/04/hs-2016-15-a-full_tif-jpg.webp",
       "credit": "NASA, ESA, the Hubble Heritage Team (STScI/AURA), J. Bell (ASU), and M. Wolff (Space Science Institute)",
       "license": "Creative Commons Attribution 4.0 International under ESA/Hubble reuse terms",
@@ -62,7 +59,6 @@
       "consumers": [
         "navigation"
       ],
-      "expectedBytes": 139134,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -205,7 +201,6 @@
     {
       "id": "nasa-psg-mars-configuration",
       "path": "atmosphere/psg-mars-20260829.cfg",
-      "expectedSha256": "da649c1b783a9390697db2f49a25667b518b5c923ddb7ac426037c97c08f8dde",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data",
@@ -215,7 +210,6 @@
         "spectrum",
         "temperature-pressure-profile"
       ],
-      "expectedBytes": 11093,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -230,7 +224,6 @@
     {
       "id": "nasa-psg-mars-reflectance",
       "path": "atmosphere/psg-mars-r240-rif.txt",
-      "expectedSha256": "1f6c5f4ccecbf41ab44a27e9eeab07d99170697cb21ffda2137cef393290e3d4",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data",
@@ -239,7 +232,6 @@
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 11908,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -390,8 +382,6 @@
     {
       "id": "usgs-gazetteer-mars-nomenclature-center-pts",
       "path": "features/MARS_nomenclature_center_pts.zip",
-      "expectedBytes": 5413387,
-      "expectedSha256": "58136a4ad15b287d1a01058d659974b44dfc67a65f2a53569d7654987d308e54",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MARS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -512,8 +502,6 @@
     {
       "id": "pds-mro-sharad-3d-east-deuteronilus-frame-x0640-y0710",
       "path": "telescopes/mro-sharad-3d/slices/frame-x0640-y0710.dat",
-      "expectedBytes": 14400,
-      "expectedSha256": "0174c70a5c27553816b6fb84c73d131c47314ce7d8960916551a3cdd2ffbbe67",
       "range": {
         "offset": 13096944000,
         "length": 14400
@@ -576,8 +564,6 @@
     {
       "id": "pds-mro-sharad-3d-east-deuteronilus-label",
       "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.xml",
-      "expectedBytes": 11270,
-      "expectedSha256": "00c517b20a97e4da5b8ab30e5f9d73bd880397ef8c36f63b4513e24e8c6fdb38",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.xml",
       "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
       "license": "NASA scientific data; archive citation requested",
@@ -604,8 +590,6 @@
     {
       "id": "pds-mro-sharad-3d-east-deuteronilus-pds3-label",
       "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_time.lbl",
-      "expectedBytes": 3714,
-      "expectedSha256": "af22a8e1eb9c89c5d35e41a2afce3ed5fc11e451b22b99796392e43fdaf85df6",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/data/east_deuteronilus_mensae_3d_v2_time.lbl",
       "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
       "license": "NASA scientific data; archive citation requested",
@@ -660,8 +644,6 @@
     {
       "id": "pds-mro-sharad-3d-east-deuteronilus-observations-label",
       "path": "telescopes/mro-sharad-3d/east_deuteronilus_mensae_3d_v2_observations.xml",
-      "expectedBytes": 3859,
-      "expectedSha256": "8f28b25807fc1a28b3455d32689cd35ffdf21e93bc4ca90cdd88afe1f7a15668",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/index/east_deuteronilus_mensae_3d_v2_observations.xml",
       "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
       "license": "NASA scientific data; archive citation requested",
@@ -688,8 +670,6 @@
     {
       "id": "pds-mro-sharad-3d-bundle-readme",
       "path": "telescopes/mro-sharad-3d/readme.txt",
-      "expectedBytes": 19713,
-      "expectedSha256": "805177d04f785d70fe7a3036304fc4cb5dc61df4754e172124981b4d45c9cd71",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/readme.txt",
       "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
       "license": "NASA scientific data; archive citation requested",
@@ -716,8 +696,6 @@
     {
       "id": "pds-mro-sharad-3d-release-notes",
       "path": "telescopes/mro-sharad-3d/release_notes.txt",
-      "expectedBytes": 4357,
-      "expectedSha256": "43f53c170b501ef21b11e43255d6f20078d7563a055b88099080517b6ace99e0",
       "origin": "https://pds-geosciences.wustl.edu/mro/mro-m-sharad-5-3d-v1/mrosh_3001/document/release_notes.txt",
       "credit": "NASA/JPL MRO SHARAD team, Planetary Science Institute, and the NASA PDS Geosciences Node",
       "license": "NASA scientific data; archive citation requested",

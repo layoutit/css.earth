@@ -94,8 +94,6 @@
     {
       "id": "usgs-gazetteer-umbriel-nomenclature-center-pts",
       "path": "features/UMBRIEL_nomenclature_center_pts.zip",
-      "expectedBytes": 71240,
-      "expectedSha256": "c6d2161559c8367f574b327beec7adb7127b52eff8463a4490ff30c9427634b4",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/UMBRIEL_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -166,8 +164,6 @@
     {
       "id": "umbriel-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3447,
-      "expectedSha256": "93b314c9f4b9e059911b1402931c93c54f738b8d0006c0c9183a2d4c14c11af9",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",

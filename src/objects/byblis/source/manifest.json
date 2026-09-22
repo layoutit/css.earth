@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 27325
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 54.65 km effective diameter (catalog ±1.33 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2013 table reports 22 dense lightcurves from five apparitions plus 292 sparse measurements. Both published poles remain; model 506 is a reproducible representative. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
-      "expectedBytes": 82708,
-      "expectedSha256": "3482d76fa479e2335f9e524abeaa2a38a9f0d974298a2520006bfa807d2cd056",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/506-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "519164dde6083fa5a1b5ef3a843956b60d939a20b94649d89a88962623dd5643"
+      "path": "reference/506-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

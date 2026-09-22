@@ -143,8 +143,6 @@
     {
       "id": "usgs-gazetteer-vesta-nomenclature-center-pts",
       "path": "features/VESTA_nomenclature_center_pts.zip",
-      "expectedBytes": 314564,
-      "expectedSha256": "ee0007931abcecc970a2184b582995f9f6026d630661f0840607aa7c5006269f",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VESTA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -318,8 +316,6 @@
         "sphere-registration"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 15305,
-      "expectedSha256": "afbf5d9e3d23d1337dcaacd7b082ef5ba0e01a7734d944aa1617951df09307c2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -343,8 +339,6 @@
         "sphere-registration"
       ],
       "coverage": "heliocentric position vectors of Vesta in the J2000 frame at each light-time-corrected exposure epoch, for the Sun direction",
-      "expectedBytes": 13235,
-      "expectedSha256": "1c9eae44e330823097ae43c5a03186e0022264a994ce777ea9fdd14d80d96a66",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

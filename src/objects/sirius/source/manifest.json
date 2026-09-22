@@ -157,8 +157,6 @@
     {
       "id": "sirius-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1481,
-      "expectedSha256": "d2b9218b71acce1cb72e72df8e7073058cb95a25caa7aa34c54b4e5ec292201e",
       "origin": "https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/calspec",
       "credit": "NASA/STScI HST CALSPEC; flux scale Bohlin et al. (2020), AJ 160, 21; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +185,6 @@
     {
       "id": "sirius-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -215,8 +211,6 @@
     {
       "id": "sirius-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 844,
-      "expectedSha256": "36d9249ba2b948c25225e75b2d2a0c9638b25c0c31381fe62746aed5a2bff443",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

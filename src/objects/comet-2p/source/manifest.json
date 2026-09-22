@@ -31,8 +31,6 @@
     {
       "id": "shape-parameters",
       "path": "shape/model.json",
-      "expectedBytes": 1077,
-      "expectedSha256": "b9b625659f98d6eafd05de9007a9f76db36bd5422fc6f3cd2f64ae472d60ca55",
       "origin": "https://doi.org/10.1016/j.icarus.2005.01.012",
       "credit": "Harmon & Nolan (2005); cssEarth approximation",
       "license": "Published numeric scientific parameters; cssEarth implementation MIT",

@@ -76,8 +76,8 @@
   ],
   "id": "hersilia",
   "displayName": "Hersilia",
-  "lambda": 250.0,
-  "beta": 43.0,
+  "lambda": 250,
+  "beta": 43,
   "periodHours": 11.11129,
   "version": "2019-05-07",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/10171/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/10169/IAUspin.txt",
-  "shapeSha256": "8e2c5f76b6378e942e105825b60568612becb8902a67d2c7c4dfc34d92b31b2f",
   "shapeBytes": 46419,
   "vertices": 574,
   "faces": 1144,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 1144,
-    "minDoubleTriangleAreaSourceUnits2": 7.065968960624186e-07
+    "minDoubleTriangleAreaSourceUnits2": 7.065968960624186e-7
   },
   "independentAnchors": [
     {
@@ -289,8 +288,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2451087.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2451087,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
