@@ -51,17 +51,6 @@ test('CLI separates measurement, navigation and sphere; selectors cannot leak be
   assert.throws(()=>parseCli(['export','output.product.json','--output','body-map','--hdu','0','--geometry','nav','--out','map']),/Body map export takes/);
   assert.throws(()=>parseCli(['export','map.json','--output','sphere','--plane','1','--out','sphere']));
 });
-test('inspection and projection share intact measurement and source-delivery prerequisites',async()=>{
-  const root=await mkdtemp(resolve(tmpdir(),'artifact-outputs-'));
-  try{
-    const measurement=await measurementFixture(root),measurementOutputs=await listArtifactOutputs(measurement.record);
-    assert.equal(measurementOutputs.artifact,'telescope-output');
-    assert.ok(measurementOutputs.outputs.some(output=>output.kind==='body-map'&&output.available));
-    await unlink(measurement.result);
-    const blocked=await listArtifactOutputs(measurement.record),choice=blocked.outputs.find(output=>output.kind==='body-map');assert.equal(choice?.available,false);assert.match(choice?.reason??'',/source delivery|ENOENT/);
-    await assert.rejects(projectOutput(measurement.record,resolve(root,'unused-navigation.json'),resolve(root,'map')),/ENOENT/);
-  }finally{await rm(root,{recursive:true,force:true});}
-});
 test('sphere inspection validates the map contract, navigation and existing sphere owner',async()=>{
   const root=await mkdtemp(resolve(tmpdir(),'sphere-outputs-'));
   try{

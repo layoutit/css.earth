@@ -6,7 +6,6 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { rememberQualification, loadQualifiedObservations } from './qualified-observations.mts';
 import { writeProductRecord, productRecordPath } from '../product-record.mts';
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { PROFILE_ASSUMPTIONS } from '../resolution-evidence.mts';
 import { assessRequest } from './request-satisfaction.mts';
 test('qualification readback binds facts to the exact output, receipt and producing record', async () => {
@@ -23,7 +22,7 @@ test('qualification readback binds facts to the exact output, receipt and produc
     assert.equal(loaded.length, 1); assert.equal(loaded[0]!.product, 'cube.fits');
     assert.deepEqual(loaded[0]!.facts.wavelengthIntervalsMicrometres, [[2.2, 2.4]]);
     assert.equal(loaded[0]!.facts.angularResolutionBound!.receipt, 'resolution.json');
-    assert.deepEqual(loaded[0]!.facts.resolutionEvidence, [{ kind: 'measured', receipt: { file: 'resolution.json', sha256: sha256('{}') } }]);
+    assert.deepEqual(loaded[0]!.facts.resolutionEvidence, [{ kind: 'measured', receipt: { file: 'resolution.json' } }]);
     const request = { target: 'test', wavelengthMicrometres: [2.2, 2.4] as const, time: { any: true as const }, kind: 'cube' as const, result: 'telescope-product' as const };
     assert.equal(assessRequest({ ...request, angularResolutionArcsec: 1 }, loaded[0]!.facts).status, 'unresolved');
     assert.equal(assessRequest({ ...request, angularResolutionArcsec: 1, acceptedAssumptions: [PROFILE_ASSUMPTIONS[0]!] }, loaded[0]!.facts).status, 'unresolved');

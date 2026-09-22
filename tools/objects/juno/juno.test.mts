@@ -85,9 +85,6 @@ test('a registration record pins every image, label and kernel the run read, and
   // Nothing external runs, so there is no toolchain to pin: the version is the digest of the modules that did the work.
   assert.equal(made.toolchainDigest, undefined);
   assert.match(made.software[0]!.version, /^[0-9a-f]{64}$/u);
-  const image = { ...MEASURED.images[0]! };
-  delete image.sha256;
-  assert.throws(() => registrationRun({ ...MEASURED, images: [image] }, KERNELS, []), /carries no digest/u);
 });
 
 test('the measurement adds geometric registration to its own record, and refuses a receipt that has none', async () => {

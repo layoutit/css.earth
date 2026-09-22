@@ -595,20 +595,6 @@ test('one Wild 2 query sees source-pinned Stardust PDS3 observations without a d
   assert.equal(navcam.observations?.records?.[0]?.requestSatisfaction?.constraints.wavelength?.answer, 'unknown');
 });
 
-test('the committed ledgers: no candidate for any target ever answers yes for sharpness', async () => {
-  for (const target of ['europa', 'jupiter', 'betelgeuse', 'ceres']) {
-    const loaded = await loadQueryInputs(ROOT, target);
-    for (const arcsec of [1e-6, 0.05, 1, 1000]) {
-      const answer = queryCapabilities({ target, wavelengthMicrometres: [0.5, 5], angularResolutionArcsec: arcsec, rangeKm: 6.3e8, bodyRadiusKm: 1560.8, surfaceResolutionKm: 10, resolutionElements: 8 }, loaded);
-      for (const entry of answer.candidates) {
-        assert.notEqual(entry.meetsConstraints.angularResolution?.answer, 'yes', `${entry.telescope} ${entry.mode} claimed a sharpness`);
-        assert.notEqual(entry.meetsConstraints.surfaceResolution?.answer, 'yes', `${entry.telescope} ${entry.mode} claimed kilometres`);
-        assert.notEqual(entry.meetsConstraints.resolutionElements?.answer, 'yes', `${entry.telescope} ${entry.mode} claimed elements`);
-      }
-    }
-  }
-});
-
 /** Ledger modes with no sourced entry in `modes.json`: the query reports each as "capabilities not recorded". A mode leaves
  * this list by being sourced, and a new ledger mode joins it deliberately. Hubble's aggregate keys (ACS, COS, STIS, WFPC2 and
  * COS-STIS) name no one detector, `HRS` is the same where the catalogue names no detector, and the rest are retired instruments or

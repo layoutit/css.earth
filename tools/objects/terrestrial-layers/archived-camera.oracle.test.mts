@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
+import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisReflectance } from './archived-camera.mts';
@@ -9,15 +8,19 @@ import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '
 import { requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 
 /** pvl and numpy as the oracle for the OSIRIS level-4 reflectance reader behind the archived-camera route (Steins). */
-const fixture = await readOracleFixture('pds3/osiris-reflectance.json');
-const [input] = fixture.inputs;
-const source = resolve(ORACLE_ROOT, 'src/objects/steins/source');
-const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
-const recipe = config.raster.surfaceObservations[0], frameRecipe = recipe.frames.find((frame: { path: string }) => input.path.endsWith(frame.path));
-const camera = JSON.parse(await readFile(resolve(source, frameRecipe.cameraPath), 'utf8'));
-const frame = decodeOsirisReflectance(await readFile(resolve(ORACLE_ROOT, input.path)), camera, recipe.allowLossy);
-const planes = requireRecord(fixture.cases.planes);
-
+const loaded = await sourceLoad(async () => {
+  const fixture = await readOracleFixture('pds3/osiris-reflectance.json');
+  const [input] = fixture.inputs;
+  const source = resolve(ORACLE_ROOT, 'src/objects/steins/source');
+  const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
+  const recipe = config.raster.surfaceObservations[0], frameRecipe = recipe.frames.find((frame: { path: string }) => input.path.endsWith(frame.path));
+  const camera = JSON.parse(await readFile(resolve(source, frameRecipe.cameraPath), 'utf8'));
+  const frame = decodeOsirisReflectance(await readFile(resolve(ORACLE_ROOT, input.path)), camera, recipe.allowLossy);
+  const planes = requireRecord(fixture.cases.planes);
+  return { fixture, input, source, config, recipe, frameRecipe, camera, frame, planes };
+});
+const test = sourceTest(null, loaded);
+const { fixture, input, source, config, recipe, frameRecipe, camera, frame, planes } = loaded.values;
 test('the fixture is bound to the pinned Steins product and its label identity', async () => {
   await assertPinnedInputs(fixture.inputs);
   const identity = requireRecord(fixture.cases.identity);

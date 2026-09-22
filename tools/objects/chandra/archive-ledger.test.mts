@@ -40,7 +40,7 @@ test('a receipt naming the first observation reproduces that mode alone, and the
 test('a receipt that cannot be read, states another schema or names an obsid nothing pins reproduces nothing and is reported', async () => {
   const receipt = await read('polaris-vfaint.acisf06431N003_evt2.reproduction.json');
   for (const [why, value] of [['unreadable', '{ "schema": "cssearth-chandra-repro'], ['another schema', { ...receipt, schema: 'cssearth-chandra-nothing@1' }],
-    ['another obsid', { ...receipt, obsid: 99999 }], ['no digest', { ...receipt, archive: { ...(receipt.archive as object), sha256: 'not a digest' } }],
+    ['another obsid', { ...receipt, obsid: 99999 }],
     ['another size', { ...receipt, archive: { ...(receipt.archive as object), bytes: 1 } }],
     ['another mode', { ...receipt, dataMode: 'TIMED/FAINT' }]] as const) {
     const directory = await scratch({ 'polaris-vfaint.acisf06431N003_evt2.reproduction.json': value });
@@ -65,7 +65,7 @@ test('a receipt whose file name is not the program and product it states is repo
 test('a receipt is read as the external value it is', () => {
   assert.throws(() => parseChandraReceipt({ schema: 'other' }, 'x.json'), /is not a reproduction receipt/u);
   assert.throws(() => parseChandraReceipt({ schema: 'cssearth-chandra-reproduction@1' }, 'x.json'), /archive file/u);
-  assert.throws(() => parseChandraReceipt({ schema: 'cssearth-chandra-reproduction@1', archive: { path: 'p', bytes: 1, sha256: 'z' } }, 'x.json'), /not a sha256/u);
+  assert.throws(() => parseChandraReceipt({ schema: 'cssearth-chandra-reproduction@1', archive: { path: 'p' } }, 'x.json'), /program/u);
 });
 
 test('every receipt beside the pinned programs is accepted', async () => {

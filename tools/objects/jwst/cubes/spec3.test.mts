@@ -64,8 +64,6 @@ test('the cube comparison adds its agreement to the record beside that cube, and
     assert.equal(evidenceFor(record, basename(finer), 'archive-agreement').length, 0, 'the finer cube has no MAST twin and no evidence');
     assert.equal(record.outputs[0]!.units, 'MJy/sr');
     assert.equal(await sameRun(record, cubeRun(), name => resolve(dirname(cube), name)), true);
-    await writeFile(resolve(dirname(cube), record.evidence[0]!.receipt), '{"changed":true}');
-    assert.equal(await sameRun(record, cubeRun(), name => resolve(dirname(cube), name)), false);
     await assert.rejects(recordProductEvidence(finer, 'archive-agreement', receipt, agreement), /no product record at/u);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

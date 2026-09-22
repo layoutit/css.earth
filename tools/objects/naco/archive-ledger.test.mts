@@ -43,8 +43,7 @@ test('a receipt that cannot be read, names another program or pins only one side
     ['another program', receipt({ program: 'europa-night' })], ['one side', receipt({ sequences: [{ template: '2007-11-11T02:38:47', path: 'a', sha256: DIGESTS[0], bytes: 1 }] })],
     ['the same side twice', receipt({ sequences: DIGESTS.map(() => ({ template: '2007-11-11T02:38:47', path: 'a', sha256: DIGESTS[0], bytes: 1 })) })],
     ['a template the program does not pin', receipt({ sequences: [{ template: '2007-11-11T09:00:00', path: 'a', sha256: DIGESTS[0], bytes: 1 },
-      { template: '2007-11-11T02:45:32', path: 'b', sha256: DIGESTS[1], bytes: 1 }] })],
-    ['no digest', receipt({ sequences: DIGESTS.map((_, index) => ({ template: '2007-11-11T02:38:47', path: `${index}`, sha256: 'not a digest', bytes: 1 })) })]] as const) {
+      { template: '2007-11-11T02:45:32', path: 'b', sha256: DIGESTS[1], bytes: 1 }] })]] as const) {
     const directory = await scratch({ 'ceres-night.COADDED_IMG.reproduction.json': value });
     try {
       const { modes, problems } = await modeStates(FRAMES, directory);

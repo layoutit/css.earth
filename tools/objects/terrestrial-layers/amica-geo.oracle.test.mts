@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
+import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeAmicaGeo } from './amica-geo.mts';
@@ -8,11 +7,15 @@ import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 
 /** pvl, numpy and astropy as the oracle for the AMICA Gaskell DDR reader (Itokawa). */
-const fixture = await readOracleFixture('pds3/amica-ddr.json');
-const [cube, label, original, flat] = fixture.inputs.map(input => resolve(ORACLE_ROOT, input.path));
-const frame = decodeAmicaGeo(await readFile(cube), await readFile(label, 'ascii'), await readFile(original), await readFile(flat));
-const planes = requireRecord(fixture.cases.planes), exposure = requireFiniteNumber(fixture.cases.exposure);
-
+const loaded = await sourceLoad(async () => {
+  const fixture = await readOracleFixture('pds3/amica-ddr.json');
+  const [cube, label, original, flat] = fixture.inputs.map(input => resolve(ORACLE_ROOT, input.path));
+  const frame = decodeAmicaGeo(await readFile(cube), await readFile(label, 'ascii'), await readFile(original), await readFile(flat));
+  const planes = requireRecord(fixture.cases.planes), exposure = requireFiniteNumber(fixture.cases.exposure);
+  return { fixture, cube, label, original, flat, frame, planes, exposure };
+});
+const test = sourceTest(null, loaded);
+const { fixture, cube, label, original, flat, frame, planes, exposure } = loaded.values;
 test('the fixture is bound to the pinned AMICA products and their label identity', async () => {
   await assertPinnedInputs(fixture.inputs);
   const identity = requireRecord(fixture.cases.identity);

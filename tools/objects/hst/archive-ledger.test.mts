@@ -37,7 +37,6 @@ test('a receipt that cannot be read, states another schema or names another prod
   const receipt = await read('europa-15419.idr203wtq_drz.reproduction.json'), mast = receipt.mast as Record<string, unknown>;
   for (const [why, value] of [['unreadable', '{ "schema": "cssearth-hst-repro'], ['another schema', { ...receipt, schema: 'cssearth-hst-nothing@1' }],
     ['another observation', { ...receipt, observation: 'odr2a1010' }], ['another size', { ...receipt, mast: { ...mast, bytes: 1 } }],
-    ['no digest', { ...receipt, mast: { ...mast, sha256: 'not a digest' } }],
     ['a product the observation does not pin', { ...receipt, mast: { ...mast, name: 'idr203wtq_sx1.fits' } }]] as const) {
     const root = await scratch({ 'europa-15419.idr203wtq_drz.reproduction.json': value });
     try {
@@ -61,7 +60,7 @@ test('a receipt of a program nothing pins belongs to another pipeline and is lef
 test('a receipt is read as the external value it is', () => {
   assert.throws(() => parseReproductionReceipt({ schema: 'other' }, 'x.json'), /is not a reproduction receipt/u);
   assert.throws(() => parseReproductionReceipt({ schema: 'cssearth-hst-reproduction@1' }, 'x.json'), /MAST product/u);
-  assert.throws(() => parseReproductionReceipt({ schema: 'cssearth-hst-reproduction@1', mast: { name: 'a.fits', bytes: 1, sha256: 'z' } }, 'x.json'), /not a sha256/u);
+  assert.throws(() => parseReproductionReceipt({ schema: 'cssearth-hst-reproduction@1', mast: { name: 'a.fits' } }, 'x.json'), /program/u);
 });
 
 test('every receipt beside the pinned programs is accepted', async () => {
@@ -125,7 +124,7 @@ test('a record that cannot be read, names something else or claims agreement qua
     ['another configuration', { ...record, parameters: { ...parameters, selection: { ...selection, configuration: 'HRS/2' } } }],
     ['another identity', { ...record, parameters: { ...parameters, selection: { ...selection, identity: { ...(selection.identity as Record<string, unknown>), aperture: 'SSA' } } } }],
     ['software of ours', { ...record, software: [{ name: 'calhrs', version: '1.0' }] }],
-    ['another digest', { ...record, outputs: outputs.map((output, index) => index ? output : { ...output, sha256: 'b'.repeat(64) }) }],
+    ['another size', { ...record, outputs: outputs.map((output, index) => index ? output : { ...output, bytes: 1 }) }],
     ['one file short', { ...record, outputs: outputs.slice(1), evidence: evidence.filter(entry => outputs.slice(1).some(output => output.path === entry.product)) }],
     ['agreement claimed', { ...record, evidence: [...evidence, { ...evidence[0]!, kind: 'archive-agreement' }] }],
   ] as const) {

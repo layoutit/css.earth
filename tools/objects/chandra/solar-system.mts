@@ -28,7 +28,6 @@
 import { mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { addProductEvidence, productRecordPath, readProductRecord, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun } from '../product-record.mts';
 import { astroqueryRows } from '../astronomy-packages/client.mts';
 import type { FitsHeader } from '../../fits/fits.mts';
@@ -135,7 +134,6 @@ const FROZEN_CONVENTIONS: Readonly<Record<string, string>> = {
 export function freezeRun(entry: ChandraObservation, files: { readonly archive: ChandraFile; readonly orbit: ChandraFile; readonly body: ChandraFile; readonly aspect: ChandraFile },
   options: { readonly versions: { ciao: string; caldb: string }; readonly toolchainDigest: string }): ProductRun {
   const pin = (role: string, file: ChandraFile): ProductInput => {
-    if (file.sha256 === undefined) throw new Error(`${file.path} is pinned without a digest; a record states every input by sha256.`);
     return { role, identity: file.url, bytes: file.bytes };
   };
   return { telescope: 'Chandra', stage: `sso-freeze/${entry.obsid}-${entry.instrument}`,
@@ -225,9 +223,9 @@ export async function freezeSolarSystem(id: string, obsid: number, work: string,
     observation: { start, stop, events: ours.table.rows },
     horizons: { ...horizons, angularRadiusSkyPixels: +bodyRadiusPixels.toFixed(3), skyPixelArcseconds: +(objectGrid.degreesPerPixel * 3600).toFixed(4) },
     // The body's centre is the reference pixel of the object-centred grid, so an offset here is the body missing that centre.
-    objectCentred: { file: written[0]!, columns: ['ocx', 'ocy'], by: 'chandra_repro', sha256: (await sha256File(ours.path)).sha256, ...measure(ours, 'ocx', 'ocy') },
+    objectCentred: { file: written[0]!, columns: ['ocx', 'ocy'], by: 'chandra_repro', ...measure(ours, 'ocx', 'ocy') },
     objectCentredFromArchive: { file: frozen.slice(frozen.lastIndexOf('/') + 1), columns: ['ocx', 'ocy'], by: 'sso_freeze on the archive\'s level-2 list',
-      sha256: (await sha256File(independent.path)).sha256, ...measure(independent, 'ocx', 'ocy') },
+      ...measure(independent, 'ocx', 'ocy') },
     // The control: in fixed sky coordinates the body drifts across the field during the observation.
     fixedSky: { file: written[0]!, columns: ['x', 'y'], ...measure(ours, 'x', 'y') },
   };
