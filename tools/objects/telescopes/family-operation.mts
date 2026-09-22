@@ -4,8 +4,8 @@ import {constants} from 'node:fs';
 import {copyFile,mkdir,readFile,rename,rm,stat,writeFile} from 'node:fs/promises';
 import {basename,dirname,isAbsolute,resolve} from 'node:path';
 import {fileURLToPath} from 'node:url';
-import {pinFile,writeProductRecord,type ProductInput} from '../product-record.mts';
-import {sha256} from '../../../src/platform/sha256.mts';
+import {fileSize,writeProductRecord,type ProductInput} from '../product-record.mts';
+import {sha256, sha256File} from '../../../src/platform/sha256.mts';
 import {operationsForDescriptor,type FamilyOperation} from './family-handlers.mts';
 import {parseProductDescriptor,type DescriptorMember,type ProductDescriptor} from './product-descriptor.mts';
 import {filterTableRows,inspectFitsTable,previewTableHistogram,previewTableScatter,readFitsTableRows,exportTableCsv,tableHistogram,tableScatterData,type TableFilter} from './families/f08-table.mts';
@@ -166,7 +166,7 @@ function executableOperation(descriptor:ProductDescriptor,id:string,componentId?
 const memberPath=(descriptorPath:string,path:string)=>isAbsolute(path)?resolve(path):resolve(dirname(descriptorPath),path);
 async function loadDescriptor(path:string){
   const file=resolve(path),bytes=await readFile(file),descriptor=parseProductDescriptor(JSON.parse(bytes.toString()));
-  const files=new Map<string,string>();for(const member of descriptor.members){const location=memberPath(file,member.path);await pinFile(location);files.set(member.id,location);}
+  const files=new Map<string,string>();for(const member of descriptor.members){const location=memberPath(file,member.path);await fileSize(location);files.set(member.id,location);}
   return{file,bytes,descriptor,files};
 }
 async function familyImplementation(operation:FamilyOperation){const root=resolve(import.meta.dirname,'../../..'),owner=isAbsolute(operation.owner.module)?operation.owner.module:resolve(root,operation.owner.module),graph=await implementationFingerprint(root,[fileURLToPath(new URL('family-operation.mts',import.meta.url)),owner]),toolchain=await readFile(resolve(root,'tools/objects/astronomy-packages/requirements.lock'));return{software:{name:`cssEarth family operation ${operation.handlerId}`,version:graph.sha256},toolchainDigest:sha256(toolchain)};}
@@ -236,7 +236,7 @@ async function customOutput(loaded:Awaited<ReturnType<typeof loadDescriptor>>,op
     }
     else throw new TypeError(`No custom executor for ${params.operationId}.`);
     const output=resolve(staging,name);if(params.operationId!=='radar-export')await writeFile(output,content,{flag:'wx'});
-    const descriptorPin={bytes:loaded.bytes.length,sha256:sha256(loaded.bytes)},inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,...descriptorPin},...await memberInputs(loaded)];
+    const descriptorPin={bytes:loaded.bytes.length},inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,...descriptorPin},...await memberInputs(loaded)];
     const implementation=await familyImplementation(operation),recordPath=resolve(staging,'output.product.json');
     await writeProductRecord(recordPath,{telescope:'cssEarth family operation',stage:FAMILY_OPERATION_STAGE,inputs,parameters:{dataset:loaded.descriptor.dataset.id,...(loaded.descriptor.dataset.target?{target:loaded.descriptor.dataset.target}:{}),operationId:params.operationId,handlerId:operation.handlerId,componentIds:[operation.componentId],arguments:params},software:[implementation.software,...ownedSoftware],toolchainDigest:implementation.toolchainDigest},[{path:name,file:output},...extraOutputs]);
     await rename(staging,destination);const finalRecord=resolve(destination,'output.product.json');await verifiedProduct(finalRecord);return{directory:destination,product:resolve(destination,name),record:finalRecord,operation};
@@ -260,7 +260,7 @@ async function previewOutput(loaded:Awaited<ReturnType<typeof loadDescriptor>>,o
       const events=inspectChandraEvents(bytes);
       rendered=params.operationId==='count-image-preview'?await previewCountImage(staging,title,nativeCountImage(events,params.image),figureOptions(params)):params.operationId==='energy-histogram-preview'?await previewEnergyHistogram(staging,title,energyHistogram(events,params.histogram),figureOptions(params)):params.operationId==='light-curve-preview'?await previewLightCurve(staging,title,gtiLightCurve(events,params.lightCurve),figureOptions(params)):(()=>{throw new TypeError(`No preview executor for ${(params as any).operationId}.`);})();
     }
-    const outputs=rendered.files.map(path=>({path,file:resolve(staging,path)})),inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length,sha256:sha256(loaded.bytes)},...await memberInputs(loaded)],implementation=await familyImplementation(operation);
+    const outputs=rendered.files.map(path=>({path,file:resolve(staging,path)})),inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length},...await memberInputs(loaded)],implementation=await familyImplementation(operation);
     await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'cssEarth family operation',stage:FAMILY_OPERATION_STAGE,inputs,parameters:{dataset:loaded.descriptor.dataset.id,...(loaded.descriptor.dataset.target?{target:loaded.descriptor.dataset.target}:{}),operationId:params.operationId,handlerId:operation.handlerId,componentIds:[operation.componentId],arguments:params},software:[implementation.software,{name:'Astropy',version:rendered.astropy},{name:'Matplotlib',version:rendered.matplotlib}],toolchainDigest:implementation.toolchainDigest},outputs);
     await rename(staging,destination);const record=resolve(destination,'output.product.json'),reopened=await verifiedProduct(record);return{directory:destination,product:resolve(destination,reopened.record.outputs[0]!.path),record,operation};
   }catch(error){await rm(staging,{recursive:true,force:true});throw error;}
@@ -270,9 +270,9 @@ async function calibrationBundleOutput(loaded:Awaited<ReturnType<typeof loadDesc
   const destination=resolve(outputDirectory),staging=`${destination}.${randomUUID()}.partial`;await absent(destination);await mkdir(dirname(destination),{recursive:true});await mkdir(staging);
   try{
     const outputs:{path:string;file:string}[]=[],manifest:{id:string;path:string;bytes:number;sha256:string;role:string}[]=[];
-    for(const [index,member] of loaded.descriptor.members.entries()){const path=`members/${String(index+1).padStart(4,'0')}-${member.id}-${basename(member.path)}`,file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await copyFile(loaded.files.get(member.id)!,file,constants.COPYFILE_EXCL);outputs.push({path,file});manifest.push({id:member.id,path,...await pinFile(file),role:member.role});}
+    for(const [index,member] of loaded.descriptor.members.entries()){const path=`members/${String(index+1).padStart(4,'0')}-${member.id}-${basename(member.path)}`,file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await copyFile(loaded.files.get(member.id)!,file,constants.COPYFILE_EXCL);outputs.push({path,file});manifest.push({id:member.id,path,...await sha256File(file),role:member.role});}
     const manifestPath='calibration-bundle.json',manifestFile=resolve(staging,manifestPath);await writeFile(manifestFile,json({schema:'cssearth-f17-calibration-export@1',dataset:loaded.descriptor.dataset.id,members:manifest}));outputs.push({path:manifestPath,file:manifestFile});
-    const inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length,sha256:sha256(loaded.bytes)},...await memberInputs(loaded)],implementation=await familyImplementation(operation);
+    const inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length},...await memberInputs(loaded)],implementation=await familyImplementation(operation);
     await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'cssEarth family operation',stage:FAMILY_OPERATION_STAGE,inputs,parameters:{dataset:loaded.descriptor.dataset.id,...(loaded.descriptor.dataset.target?{target:loaded.descriptor.dataset.target}:{}),operationId:'export-bundle',handlerId:operation.handlerId,componentIds:[operation.componentId]},software:[implementation.software],toolchainDigest:implementation.toolchainDigest},outputs);
     await rename(staging,destination);const record=resolve(destination,'output.product.json'),reopened=await verifiedProduct(record);return{directory:destination,product:resolve(destination,reopened.record.outputs.at(-1)!.path),record,operation};
   }catch(error){await rm(staging,{recursive:true,force:true});throw error;}
@@ -286,7 +286,7 @@ async function compoundOutput(loaded:Awaited<ReturnType<typeof loadDescriptor>>,
     const outputs:{path:string;file:string}[]=[];
     if(params.operationId==='enumerate-members'){const path='members.json',file=resolve(staging,path);await writeFile(file,json({dataset:loaded.descriptor.dataset.id,members:loaded.descriptor.members,dependencies:loaded.descriptor.dependencies}));outputs.push({path,file});}
     else for(const [index,id] of selected.entries()){const member=loaded.descriptor.members.find(item=>item.id===id)!,path=`members/${String(index+1).padStart(4,'0')}-${id}`,file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await copyFile(loaded.files.get(id)!,file,constants.COPYFILE_EXCL);outputs.push({path,file});}
-    const inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length,sha256:sha256(loaded.bytes)},...await memberInputs(loaded)],implementation=await familyImplementation(operation);
+    const inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length},...await memberInputs(loaded)],implementation=await familyImplementation(operation);
     await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'cssEarth family operation',stage:FAMILY_OPERATION_STAGE,inputs,parameters:{dataset:loaded.descriptor.dataset.id,...(loaded.descriptor.dataset.target?{target:loaded.descriptor.dataset.target}:{}),operationId:params.operationId,handlerId:operation.handlerId,componentIds:[operation.componentId],arguments:params},software:[implementation.software],toolchainDigest:implementation.toolchainDigest},outputs);
     await rename(staging,destination);const record=resolve(destination,'output.product.json');const reopened=await verifiedProduct(record);return{directory:destination,product:resolve(destination,reopened.record.outputs[0]!.path),record,operation};
   }catch(error){await rm(staging,{recursive:true,force:true});throw error;}
@@ -299,7 +299,7 @@ async function polarimetryOutput(loaded:Awaited<ReturnType<typeof loadDescriptor
     if(!intensityId||!dolpId||intensityId===dolpId)throw new TypeError('Polarimetry requires distinct intensity and DOLP members.');const intensityMember=loaded.descriptor.members.find(member=>member.id===intensityId)!,dolpMember=loaded.descriptor.members.find(member=>member.id===dolpId)!,intensityFile=loaded.files.get(intensityId)!,dolpFile=loaded.files.get(dolpId)!,intensity=await readFile(intensityFile),dolp=await readFile(dolpFile),inspection=inspectIntensityDolp(intensity,dolp),outputs:{path:string;file:string}[]=[];
     if(operationId==='polarimetry-inspect'){const path='polarimetry.json',file=resolve(staging,path);await writeFile(file,json({schema:'cssearth-f13-polarimetry-inspection@1',inspection,refusal:'DOLP is not a Stokes Q/U/V component and does not establish a polarization angle.'}));outputs.push({path,file});}
     else {for(const [path,file]of[['intensity.fits',intensityFile],['dolp.fits',dolpFile]]as const){const target=resolve(staging,path);await copyFile(file,target,constants.COPYFILE_EXCL);outputs.push({path,file:target});}const previewPath='dolp-preview.pgm',preview=resolve(staging,previewPath);await writeFile(preview,dolpPreview(dolp),{flag:'wx'});outputs.push({path:previewPath,file:preview});const receiptPath='polarimetry.json',receipt=resolve(staging,receiptPath);await writeFile(receipt,json({schema:'cssearth-f13-polarimetry-export@1',members:[intensityMember,dolpMember],inspection,refusal:'DOLP is retained as degree of linear polarization; no Stokes basis or angle is inferred.'}));outputs.push({path:receiptPath,file:receipt});}
-    const inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length,sha256:sha256(loaded.bytes)},...await memberInputs(loaded)],implementation=await familyImplementation(operation),componentIds=[intensityComponent.id,dolpComponent.id];
+    const inputs:ProductInput[]=[{role:'product descriptor',identity:loaded.file,bytes:loaded.bytes.length},...await memberInputs(loaded)],implementation=await familyImplementation(operation),componentIds=[intensityComponent.id,dolpComponent.id];
     await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'cssEarth family operation',stage:FAMILY_OPERATION_STAGE,inputs,parameters:{dataset:loaded.descriptor.dataset.id,...(loaded.descriptor.dataset.target?{target:loaded.descriptor.dataset.target}:{}),operationId,handlerId:operation.handlerId,componentIds,arguments:{operationId}},software:[implementation.software,{name:'cssEarth FITS image owner',version:sha256(await readFile(new URL('../fits.mts',import.meta.url)))}],toolchainDigest:implementation.toolchainDigest},outputs);
     await rename(staging,destination);const record=resolve(destination,'output.product.json'),reopened=await verifiedProduct(record);return{directory:destination,product:resolve(destination,reopened.record.outputs[0]!.path),record,operation};
   }catch(error){await rm(staging,{recursive:true,force:true});throw error;}
@@ -324,5 +324,5 @@ export async function verifiedExecutableFamilyOperations(path:string):Promise<re
 
 /** Every descriptor member as a receipt input, measured from the file the descriptor names. */
 async function memberInputs(loaded:{readonly descriptor:{readonly members:readonly DescriptorMember[]};readonly files:ReadonlyMap<string,string>}):Promise<ProductInput[]>{
-  return Promise.all(loaded.descriptor.members.map(async member=>({role:`descriptor ${member.role}: ${member.id}`,identity:loaded.files.get(member.id)!,...await pinFile(loaded.files.get(member.id)!)})));
+  return Promise.all(loaded.descriptor.members.map(async member=>({role:`descriptor ${member.role}: ${member.id}`,identity:loaded.files.get(member.id)!,...await fileSize(loaded.files.get(member.id)!)})));
 }

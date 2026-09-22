@@ -5,7 +5,7 @@ interface PoleRasterOptions extends SurfaceRasterOptions { tileSize?: number; ra
 interface SolidSurfaceOptions { id: string; radius?: number; polarRadius?: number; secondaryRadius?: number; mapUrl: string; polesUrl: string; latitudeSegments?: number; longitudeSegments?: number; sourceWidth?: number; sourceHeight?: number; poleTileSize?: number; seamOverlap?: number; gutter?: number; }
 type SurfacePolygon = Polygon & { latitudeIndex: number; longitudeIndex?: number; polar?: string; inner?: boolean; className?: string; textureImageSource: { url: string; width: number; height: number; sourceRect: RasterRect } };
 import { computeTextureAtlasPlanPublic, resolvePolyTextureLeafGeometry, formatCssLength } from "@layoutit/polycss";
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
+import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, polarCapRasterScale, prepareProjectiveTextureLayer } from "./projective-surface-raster.mts";
 
 // A latitude trapezoid uses projective UVs: tan(latitude), rather than latitude,
 // varies linearly down its texture. Bake the inverse mapping into each band so
@@ -258,7 +258,7 @@ export function prepareSolidBodySurface({ id, radius = 230, polarRadius = radius
         `--polycss-atlas-height:${fitted.leafHeight}px`,
       projectiveTextureLayer: prepareProjectiveTextureLayer(
         fitted.matrix,
-        4,
+        polygon.polar ? polarCapRasterScale(4, polygon.textureImageSource.sourceRect.width, fitted.leafWidth) : 4,
       ),
       polar: polygon.polar ?? null,
     });

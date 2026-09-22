@@ -20,11 +20,10 @@
  *
  * Which way the aperture's first axis lies on the sky is **not assumed**: `--mirror` runs the opposite choice as well and the
  * receipt reports what each one does to the agreement between visits that saw the same ground. */
-import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { requireFiniteNumber } from '../../sources/source-values.mts';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses, type HorizonsResponses } from './line-stack-ephemeris.mts';
@@ -145,7 +144,7 @@ export async function extractSlitRegionSpectrum(definition: SlitScanDefinition, 
   const path = resolve(options.directory, pinned.name), header = await readScanFrameHeader(path, pinned.name);
   if (header.programme !== pinned.programme || header.targetName !== pinned.targetName || header.aperture !== definition.aperture || header.opticalElement !== definition.opticalElement)
     throw new Error(`${pinned.name} does not match its pinned STIS scan identity.`);
-  if (options.verifyDigests ?? true) { const digest = await sha256File(path); if (digest.sha256 !== pinned.sha256) throw new Error(`${pinned.name}: the file on disk is not the pinned one.`); }
+  if (options.verifyDigests ?? true) { if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`); }
   const frame = header;
   if (options.row >= frame.height) throw new RangeError(`${options.frame} has ${frame.height} rows, not row ${options.row}.`);
   const visit = options.registration ?? (await (async () => {
@@ -230,8 +229,7 @@ export async function prepareFrames(definition: SlitScanDefinition, directory: s
     if (header.aperture !== definition.aperture || header.opticalElement !== definition.opticalElement)
       throw new Error(`${pinned.name}: the file is ${header.aperture} ${header.opticalElement}, the scan is ${definition.aperture} ${definition.opticalElement}.`);
     if (verifyDigests) {
-      const digest = await sha256File(path);
-      if (digest.sha256 !== pinned.sha256) throw new Error(`${pinned.name}: the file on disk is not the pinned one.`);
+      if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`);
     }
     headers.push(header);
   }
@@ -428,8 +426,7 @@ export async function runSlitScan(definition: SlitScanDefinition, options: SlitS
   log(`${used.length} of ${frames.length} frames used, ${frames.length - used.length} rejected`);
   const referencePath = resolve(options.directory, definition.reference.name);
   if (options.verifyDigests ?? true) {
-    const digest = await sha256File(referencePath);
-    if (digest.sha256 !== definition.reference.sha256) throw new Error(`${definition.reference.name} is not the pinned reference spectrum.`);
+    if ((await stat(referencePath)).size !== definition.reference.bytes) throw new Error(`${definition.reference.name} is not the recorded reference spectrum size.`);
   }
   const reference = readReferenceSpectrum(await readFile(referencePath), definition);
   const registration = await registerVisits(definition, options.directory, used);
@@ -542,7 +539,7 @@ export function scanReceipt(run: SlitScanRun) {
     band: { id: definition.band.id, quantity: definition.band.quantity, units: definition.band.units,
       bandAngstrom: definition.band.bandAngstrom, continuumWindowsAngstrom: definition.band.continuumWindowsAngstrom, continuumOrder: definition.band.continuumOrder,
       minimumBandCoverage: definition.band.minimumBandCoverage, maximumBandGapPixels: definition.band.maximumBandGapPixels,
-      reference: { name: definition.reference.name, url: definition.reference.url, sha256: definition.reference.sha256, note: definition.reference.note } },
+      reference: { name: definition.reference.name, url: definition.reference.url, note: definition.reference.note } },
     frames: { pinned: definition.frames.length, used: run.used.length, visits: run.registration.length,
       exposureSeconds: run.used.reduce((total, frame) => total + frame.exposureSeconds, 0),
       rejected: [...new Set(run.frames.filter(frame => frame.rejected).map(frame => frame.rejected))].map(reason =>
@@ -624,7 +621,7 @@ export const scanMeasurement = (definition: SlitScanDefinition, direction: Acros
   wavelengthIntervalsMicrometres: [[definition.band.bandAngstrom[0] / 10_000, definition.band.bandAngstrom[1] / 10_000]],
   source: definition.published[0]?.source ?? definition.reference.note,
   method: { kind: 'equivalent-width', bandAngstrom: definition.band.bandAngstrom, continuum: { model: 'polynomial', order: definition.band.continuumOrder, windowsAngstrom: definition.band.continuumWindowsAngstrom },
-    solarReference: { name: definition.reference.name, sha256: definition.reference.sha256 }, reduction: definition.reduction, acrossSlitDirection: direction } });
+    solarReference: { name: definition.reference.name }, reduction: definition.reduction, acrossSlitDirection: direction } });
 
 export const scanFrame = (definition: SlitScanDefinition, rotationSha256: string): BodyMapFrame =>
   ({ body: definition.target.toLowerCase(), radiusKm: definition.bodyRadiusKm, rotation: { model: definition.orientation.path, bodyCode: definition.orientation.body } });
@@ -665,11 +662,11 @@ export async function writeProducts(definition: SlitScanDefinition, run: SlitSca
   await writeFile(resolve(outputDirectory, `${name}.body-map.json`), metadata);
   await writeFile(resolve(outputDirectory, 'registration.json'), registration);
   const definitionBytes = await readFile(scanPath(definition.id)), responsesBytes = await readFile(resolve(PROGRAMS, definition.horizons.responses));
-  const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `tools/objects/hst/programs/${definition.id}.scan.json`, bytes: definitionBytes.byteLength, sha256: digestOf(definitionBytes) },
-    ...definition.frames.map(frame => ({ role: frame.rejected ? 'rejected archive frame' : 'archive rectified frame', identity: frame.uri, bytes: frame.bytes, sha256: frame.sha256 })),
-    { role: 'solar reference', identity: definition.reference.url, bytes: definition.reference.bytes, sha256: definition.reference.sha256 },
-    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, bytes: responsesBytes.byteLength, sha256: digestOf(responsesBytes) },
-    { role: 'rotation model', identity: definition.orientation.path, bytes: rotationBytes.byteLength, sha256: digestOf(rotationBytes) }];
+  const inputs: ProductInput[] = [{ role: 'slit-scan definition', identity: `tools/objects/hst/programs/${definition.id}.scan.json`, bytes: definitionBytes.byteLength },
+    ...definition.frames.map(frame => ({ role: frame.rejected ? 'rejected archive frame' : 'archive rectified frame', identity: frame.uri, bytes: frame.bytes })),
+    { role: 'solar reference', identity: definition.reference.url, bytes: definition.reference.bytes },
+    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, bytes: responsesBytes.byteLength },
+    { role: 'rotation model', identity: definition.orientation.path, bytes: rotationBytes.byteLength }];
   const software: ProductSoftware[] = [{ name: 'cssEarth slit-scan-map', version: '1' }, { name: 'node', version: process.versions.node }];
   const record = bodyMapProductRecord(product, fits, metadata, inputs, software, undefined, [{ path: 'registration.json', bytes: registration }]);
   await writeFile(resolve(outputDirectory, `${name}.product.json`), formatProductRecord(record));

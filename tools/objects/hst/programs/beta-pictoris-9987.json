@@ -1,0 +1,2169 @@
+{
+  "schema": "cssearth-hst-program@1",
+  "id": "beta-pictoris-9987",
+  "programme": "9987",
+  "target": "BETA-PIC",
+  "crdsContext": "hst_1358.pmap",
+  "observations": [
+    {
+      "observation": "j8qj15050",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F435W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.55987807,
+      "exposureEndMjd": 52913.5662239,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj15051",
+        "members": [
+          {
+            "rootname": "j8qj15vhq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15viq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj15050_asn.fits",
+          "uri": "mast:HST/product/j8qj15050_asn.fits",
+          "bytes": 11520,
+          "sha256": "c67b0959f0bc24a34c7ba222149a2a265cda713c2df9f3ad15962c988bdfca18"
+        },
+        {
+          "name": "j8qj15051_jit.fits",
+          "uri": "mast:HST/product/j8qj15051_jit.fits",
+          "bytes": 43200,
+          "sha256": "97df1d8ed9c9af61946f7e6f05972f222e71f057885227ccf3fd375f7eae02ba"
+        },
+        {
+          "name": "j8qj15051_spt.fits",
+          "uri": "mast:HST/product/j8qj15051_spt.fits",
+          "bytes": 86400,
+          "sha256": "94086f951cc2dd85540a7ab73c13c3073f49de9077a8d429411d64f65fc297ce"
+        },
+        {
+          "name": "j8qj15vhq_raw.fits",
+          "uri": "mast:HST/product/j8qj15vhq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "cdf318757e8e0bce2b8c2d6f23c8297805b26ff88212a445a238cf27f868b953"
+        },
+        {
+          "name": "j8qj15vhq_spt.fits",
+          "uri": "mast:HST/product/j8qj15vhq_spt.fits",
+          "bytes": 57600,
+          "sha256": "c9889719afd5d630a4c81aa62bff58735f26a6a6c1ab88f84fc9611f63337060"
+        },
+        {
+          "name": "j8qj15viq_raw.fits",
+          "uri": "mast:HST/product/j8qj15viq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "21d5c6f967fc4dfa0b4cc12cf693f2c40c63d7e4bb92910ce01476a1ce4c7d13"
+        },
+        {
+          "name": "j8qj15viq_spt.fits",
+          "uri": "mast:HST/product/j8qj15viq_spt.fits",
+          "bytes": 57600,
+          "sha256": "fcc1b1a7264e9718728c1d00c15b6d39248a85c40c30cefaddaf2d1c521ae596"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj15051_crj.fits",
+          "uri": "mast:HST/product/j8qj15051_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj15051_drz.fits",
+          "uri": "mast:HST/product/j8qj15051_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj15vhq_flt.fits",
+          "uri": "mast:HST/product/j8qj15vhq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15viq_flt.fits",
+          "uri": "mast:HST/product/j8qj15viq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj15060",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F435W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.56675288,
+      "exposureEndMjd": 52913.59052946,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj15061",
+        "members": [
+          {
+            "rootname": "j8qj15vjq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15vkq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15vlq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj15060_asn.fits",
+          "uri": "mast:HST/product/j8qj15060_asn.fits",
+          "bytes": 11520,
+          "sha256": "c3906c356cb3a0b6bd2ce1f6460b0417d801fb413dcc6a7f87c4a292064258e2"
+        },
+        {
+          "name": "j8qj15061_jit.fits",
+          "uri": "mast:HST/product/j8qj15061_jit.fits",
+          "bytes": 106560,
+          "sha256": "d5b6dd91f0ca2a9cb1e6b7f86d05c98da996e482d69aef167dc3209994750028"
+        },
+        {
+          "name": "j8qj15061_spt.fits",
+          "uri": "mast:HST/product/j8qj15061_spt.fits",
+          "bytes": 115200,
+          "sha256": "b757a5e840d869d7a1bd05d4c99d2bcf3075edd3396240e2e0d1233dfe0dc829"
+        },
+        {
+          "name": "j8qj15vjq_raw.fits",
+          "uri": "mast:HST/product/j8qj15vjq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "55d0c4f6ac7efe4ade269b6618149cbc839c81b8723ddcd866982a075e7d36e9"
+        },
+        {
+          "name": "j8qj15vjq_spt.fits",
+          "uri": "mast:HST/product/j8qj15vjq_spt.fits",
+          "bytes": 57600,
+          "sha256": "5aa03b530c666a1024d98e23449613741740096b3da425c3ef621f02724141cb"
+        },
+        {
+          "name": "j8qj15vkq_raw.fits",
+          "uri": "mast:HST/product/j8qj15vkq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "7827ae3c81d024a57f5d47a8e0b5302220c0073b2d71880a85e38e9948647fc2"
+        },
+        {
+          "name": "j8qj15vkq_spt.fits",
+          "uri": "mast:HST/product/j8qj15vkq_spt.fits",
+          "bytes": 57600,
+          "sha256": "33c0d57902038fe2f273af132069e99addc35702f348339343637eb705b99d2a"
+        },
+        {
+          "name": "j8qj15vlq_raw.fits",
+          "uri": "mast:HST/product/j8qj15vlq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "06b3bc94d4b16653dab6116e0dbf7d9ac635d20790cbf4725a5410cda68f64ce"
+        },
+        {
+          "name": "j8qj15vlq_spt.fits",
+          "uri": "mast:HST/product/j8qj15vlq_spt.fits",
+          "bytes": 57600,
+          "sha256": "672c9bca2722d897e1ecf4d890c7efe6dd32e703fb76d7daa70bb436afb756df"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj15061_crj.fits",
+          "uri": "mast:HST/product/j8qj15061_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj15061_drz.fits",
+          "uri": "mast:HST/product/j8qj15061_drz.fits",
+          "bytes": 15992640
+        },
+        {
+          "name": "j8qj15vjq_flt.fits",
+          "uri": "mast:HST/product/j8qj15vjq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15vkq_flt.fits",
+          "uri": "mast:HST/product/j8qj15vkq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15vlq_flt.fits",
+          "uri": "mast:HST/product/j8qj15vlq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj15020",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F606W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.49743584,
+      "exposureEndMjd": 52913.50035575,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj15021",
+        "members": [
+          {
+            "rootname": "j8qj15uwq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15uxq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj15020_asn.fits",
+          "uri": "mast:HST/product/j8qj15020_asn.fits",
+          "bytes": 11520,
+          "sha256": "144d6aaad12a935afd3254e38a91cc6b717e47d47cc77e875fe7afb69bdac931"
+        },
+        {
+          "name": "j8qj15021_jit.fits",
+          "uri": "mast:HST/product/j8qj15021_jit.fits",
+          "bytes": 31680,
+          "sha256": "a45e9c92a7de3312d44df16c8967fe05a05e53729332c6a3a0da1b7f7c2f2395"
+        },
+        {
+          "name": "j8qj15021_spt.fits",
+          "uri": "mast:HST/product/j8qj15021_spt.fits",
+          "bytes": 86400,
+          "sha256": "0f49881461e06f838aeb7e23c3bfb06bf845bc39b9f514a374eabdfcaaf970b7"
+        },
+        {
+          "name": "j8qj15uwq_raw.fits",
+          "uri": "mast:HST/product/j8qj15uwq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "025fd8d4b827e432ff5240cad0f62dda0d4e714169de2d53aeec17cda451be6a"
+        },
+        {
+          "name": "j8qj15uwq_spt.fits",
+          "uri": "mast:HST/product/j8qj15uwq_spt.fits",
+          "bytes": 57600,
+          "sha256": "4ef5919e86467d1854a43fb307028da749911c1c72182bfcb087a79b389d65cc"
+        },
+        {
+          "name": "j8qj15uxq_raw.fits",
+          "uri": "mast:HST/product/j8qj15uxq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "5c21eaf5484d042a53672c8bff76cd851422595b13f6872342c504e0e5d02d70"
+        },
+        {
+          "name": "j8qj15uxq_spt.fits",
+          "uri": "mast:HST/product/j8qj15uxq_spt.fits",
+          "bytes": 57600,
+          "sha256": "6a8630799c95234010b9fe07f0f49a39aaae3a4cc7f46f76d19119c7a99484e1"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj15021_crj.fits",
+          "uri": "mast:HST/product/j8qj15021_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj15021_drz.fits",
+          "uri": "mast:HST/product/j8qj15021_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj15uwq_flt.fits",
+          "uri": "mast:HST/product/j8qj15uwq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15uxq_flt.fits",
+          "uri": "mast:HST/product/j8qj15uxq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj15030",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F606W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.50090807,
+      "exposureEndMjd": 52913.52711501,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj15031",
+        "members": [
+          {
+            "rootname": "j8qj15uyq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15uzq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15v0q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15v1q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15v2q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15v3q",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj15030_asn.fits",
+          "uri": "mast:HST/product/j8qj15030_asn.fits",
+          "bytes": 11520,
+          "sha256": "7304b6075180c4f1f21a054dd0c681224893e492286ef979dcc611f7556d7388"
+        },
+        {
+          "name": "j8qj15031_jit.fits",
+          "uri": "mast:HST/product/j8qj15031_jit.fits",
+          "bytes": 141120,
+          "sha256": "a9a777a45107e33d5f3a67397c47c29e90af613062a4f723ce6801f785fc87de"
+        },
+        {
+          "name": "j8qj15031_spt.fits",
+          "uri": "mast:HST/product/j8qj15031_spt.fits",
+          "bytes": 201600,
+          "sha256": "bb46973cd353e8797574ca2d2300208c3e37cf56fa53c90ccde033f2a526b86c"
+        },
+        {
+          "name": "j8qj15uyq_raw.fits",
+          "uri": "mast:HST/product/j8qj15uyq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "d3a92b7fd162d4ce6bc60eec58016e5afc36e6d971e88685ab233ab260c00720"
+        },
+        {
+          "name": "j8qj15uyq_spt.fits",
+          "uri": "mast:HST/product/j8qj15uyq_spt.fits",
+          "bytes": 57600,
+          "sha256": "c32027e52f596a18ddda7755b4e50ff1a91e96ac867f86e1dca40de8cea1c567"
+        },
+        {
+          "name": "j8qj15uzq_raw.fits",
+          "uri": "mast:HST/product/j8qj15uzq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "0adcdbf28c3f1d84f824be4e8368dee672827fa7fa7175dff9ad87d54c3309f8"
+        },
+        {
+          "name": "j8qj15uzq_spt.fits",
+          "uri": "mast:HST/product/j8qj15uzq_spt.fits",
+          "bytes": 57600,
+          "sha256": "72ea500b4b664bbafb9a965386a9444721365b8d1d2f95c7bb3609dbd142e540"
+        },
+        {
+          "name": "j8qj15v0q_raw.fits",
+          "uri": "mast:HST/product/j8qj15v0q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "7239d4286386db5c79c4e6e3f51d51b3a0e20a5589755436b29a2f55e84508e8"
+        },
+        {
+          "name": "j8qj15v0q_spt.fits",
+          "uri": "mast:HST/product/j8qj15v0q_spt.fits",
+          "bytes": 57600,
+          "sha256": "d30f0cc76b35c84d0d37fb7f9c2d8c1201e8f917b2d5040238dc332f047b9a86"
+        },
+        {
+          "name": "j8qj15v1q_raw.fits",
+          "uri": "mast:HST/product/j8qj15v1q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "3ade136dbc536a1d43901b4338c9f13c24c3b1885f9d0ce8ec8937d098575395"
+        },
+        {
+          "name": "j8qj15v1q_spt.fits",
+          "uri": "mast:HST/product/j8qj15v1q_spt.fits",
+          "bytes": 57600,
+          "sha256": "97653cb35e098cd8d767568206d6be4ade048dcc331eeabd86d060ade73a0c6b"
+        },
+        {
+          "name": "j8qj15v2q_raw.fits",
+          "uri": "mast:HST/product/j8qj15v2q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "7c55165b74bf2dad31e0dc66bbf2f4057f05f8962a82c7cc469df4700e996ce8"
+        },
+        {
+          "name": "j8qj15v2q_spt.fits",
+          "uri": "mast:HST/product/j8qj15v2q_spt.fits",
+          "bytes": 57600,
+          "sha256": "f9f30cdb5a204983a8e17b2d3c6839fe33fc15cc587c0f4aba922516e2dd5391"
+        },
+        {
+          "name": "j8qj15v3q_raw.fits",
+          "uri": "mast:HST/product/j8qj15v3q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "4f5a372f22771bb6c5574554511fbc3abf8b34872c09e6a2cb45bc9095eba2a9"
+        },
+        {
+          "name": "j8qj15v3q_spt.fits",
+          "uri": "mast:HST/product/j8qj15v3q_spt.fits",
+          "bytes": 57600,
+          "sha256": "869077fa46424d46fb466c43d98a03523a82c2be60b7ee4bde5590c9aafe9711"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj15031_crj.fits",
+          "uri": "mast:HST/product/j8qj15031_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj15031_drz.fits",
+          "uri": "mast:HST/product/j8qj15031_drz.fits",
+          "bytes": 16004160
+        },
+        {
+          "name": "j8qj15uyq_flt.fits",
+          "uri": "mast:HST/product/j8qj15uyq_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj15uzq_flt.fits",
+          "uri": "mast:HST/product/j8qj15uzq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15v0q_flt.fits",
+          "uri": "mast:HST/product/j8qj15v0q_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj15v1q_flt.fits",
+          "uri": "mast:HST/product/j8qj15v1q_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15v2q_flt.fits",
+          "uri": "mast:HST/product/j8qj15v2q_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj15v3q_flt.fits",
+          "uri": "mast:HST/product/j8qj15v3q_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj15080",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F814W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.62409103,
+      "exposureEndMjd": 52913.63043686,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj15081",
+        "members": [
+          {
+            "rootname": "j8qj15w9q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15waq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj15080_asn.fits",
+          "uri": "mast:HST/product/j8qj15080_asn.fits",
+          "bytes": 11520,
+          "sha256": "480ff54886ab9f0ca521ac968b16802e7e46aa6ba4e2ae59b07cd82f585c0190"
+        },
+        {
+          "name": "j8qj15081_jit.fits",
+          "uri": "mast:HST/product/j8qj15081_jit.fits",
+          "bytes": 43200,
+          "sha256": "517790dc691f9fe2404d80c29efbee49a9ecab3267d35918037c55b642d965f9"
+        },
+        {
+          "name": "j8qj15081_spt.fits",
+          "uri": "mast:HST/product/j8qj15081_spt.fits",
+          "bytes": 86400,
+          "sha256": "0d3657dd542c99c7910eaf61c0640c8d2b30ea31deab4b6d4289b65c8c811256"
+        },
+        {
+          "name": "j8qj15w9q_raw.fits",
+          "uri": "mast:HST/product/j8qj15w9q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "3f27c6392aa5a7e6e28b8ab35ef224c80f2e1ef81ada33a75f11671183a65738"
+        },
+        {
+          "name": "j8qj15w9q_spt.fits",
+          "uri": "mast:HST/product/j8qj15w9q_spt.fits",
+          "bytes": 57600,
+          "sha256": "dd524fc2c99c9c02bd5cbc97effd8754cbcc510ebfc932051b2a979ff64c6d45"
+        },
+        {
+          "name": "j8qj15waq_raw.fits",
+          "uri": "mast:HST/product/j8qj15waq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "acb6b50a34f1da9f65ebec39d0acadbce0b7dc9d9af92e6f7e02ff088383110f"
+        },
+        {
+          "name": "j8qj15waq_spt.fits",
+          "uri": "mast:HST/product/j8qj15waq_spt.fits",
+          "bytes": 57600,
+          "sha256": "4abbd9f6716988d23a6ce5da63e9bb5c16ed023087414d01362c1266e916e346"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj15081_crj.fits",
+          "uri": "mast:HST/product/j8qj15081_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj15081_drz.fits",
+          "uri": "mast:HST/product/j8qj15081_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj15w9q_flt.fits",
+          "uri": "mast:HST/product/j8qj15w9q_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15waq_flt.fits",
+          "uri": "mast:HST/product/j8qj15waq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj15090",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F814W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.63096584,
+      "exposureEndMjd": 52913.65446464,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj15091",
+        "members": [
+          {
+            "rootname": "j8qj15wbq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15wcq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj15wdq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj15090_asn.fits",
+          "uri": "mast:HST/product/j8qj15090_asn.fits",
+          "bytes": 11520,
+          "sha256": "30688c741c82a93bf183b2529d7ae7a9844b6d05ee4af376001eb7e5d521ad61"
+        },
+        {
+          "name": "j8qj15091_jit.fits",
+          "uri": "mast:HST/product/j8qj15091_jit.fits",
+          "bytes": 106560,
+          "sha256": "9036e17e833ab015aa3a32305b855c45e0a9c04934d55748b05fa03631db8624"
+        },
+        {
+          "name": "j8qj15091_spt.fits",
+          "uri": "mast:HST/product/j8qj15091_spt.fits",
+          "bytes": 115200,
+          "sha256": "360c26176f6843aca0f4cbf94e91ac315a0b6f33bbfbd3460a28ae3b38859205"
+        },
+        {
+          "name": "j8qj15wbq_raw.fits",
+          "uri": "mast:HST/product/j8qj15wbq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "aa4e4fd702d5b839362cad4bea08e65820f4ad43d777499c7204150f95e70e35"
+        },
+        {
+          "name": "j8qj15wbq_spt.fits",
+          "uri": "mast:HST/product/j8qj15wbq_spt.fits",
+          "bytes": 57600,
+          "sha256": "237a0b0a5e7c7550d66641bf5e3a15788ed1d587cb33ff4f977aa163e161e2ff"
+        },
+        {
+          "name": "j8qj15wcq_raw.fits",
+          "uri": "mast:HST/product/j8qj15wcq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "dba502bb16d784d601e8b1e2d2e6043fb134153fae81e41978cf1cf1c26a2bd5"
+        },
+        {
+          "name": "j8qj15wcq_spt.fits",
+          "uri": "mast:HST/product/j8qj15wcq_spt.fits",
+          "bytes": 57600,
+          "sha256": "b2c40b27e725fec8be6887cf5c8448bce6562f6046786e58584f29d3fd75299c"
+        },
+        {
+          "name": "j8qj15wdq_raw.fits",
+          "uri": "mast:HST/product/j8qj15wdq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "eae7521cb0880d32e8f31b32520ba494b08915ed6194045d96b8bbf28cd3154d"
+        },
+        {
+          "name": "j8qj15wdq_spt.fits",
+          "uri": "mast:HST/product/j8qj15wdq_spt.fits",
+          "bytes": 57600,
+          "sha256": "3dfbff977e679085ed17185c68aa527f8330bc93eb9a0d293ce1877c6de19ad5"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj15091_crj.fits",
+          "uri": "mast:HST/product/j8qj15091_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj15091_drz.fits",
+          "uri": "mast:HST/product/j8qj15091_drz.fits",
+          "bytes": 15992640
+        },
+        {
+          "name": "j8qj15wbq_flt.fits",
+          "uri": "mast:HST/product/j8qj15wbq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15wcq_flt.fits",
+          "uri": "mast:HST/product/j8qj15wcq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj15wdq_flt.fits",
+          "uri": "mast:HST/product/j8qj15wdq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj16050",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F435W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.75994733,
+      "exposureEndMjd": 52913.76629316,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj16051",
+        "members": [
+          {
+            "rootname": "j8qj16x3q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16x4q",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj16050_asn.fits",
+          "uri": "mast:HST/product/j8qj16050_asn.fits",
+          "bytes": 11520,
+          "sha256": "7fafa16e356377d25c451e896da33bcd9431e8cafb983ced45d0473f8ea9bd08"
+        },
+        {
+          "name": "j8qj16051_jit.fits",
+          "uri": "mast:HST/product/j8qj16051_jit.fits",
+          "bytes": 43200,
+          "sha256": "08533e0efcc96c0d60d379fbcdc4ed0745455d27dd8f85d1d23cae452257c479"
+        },
+        {
+          "name": "j8qj16051_spt.fits",
+          "uri": "mast:HST/product/j8qj16051_spt.fits",
+          "bytes": 86400,
+          "sha256": "d7d9fb93b3c7f01114afbef7804e5875b6613e71489a1d89b163c58bb4287346"
+        },
+        {
+          "name": "j8qj16x3q_raw.fits",
+          "uri": "mast:HST/product/j8qj16x3q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "fef79e3ff6fe093c77057f596a41326f7ae0ea7fcf0106d0406a1986da4594d8"
+        },
+        {
+          "name": "j8qj16x3q_spt.fits",
+          "uri": "mast:HST/product/j8qj16x3q_spt.fits",
+          "bytes": 57600,
+          "sha256": "e80046243974f548bb09e2f154ba46059215ae63842480b3ed316a88a240c201"
+        },
+        {
+          "name": "j8qj16x4q_raw.fits",
+          "uri": "mast:HST/product/j8qj16x4q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "6cb74accad1ce223abf53597e3f63f30becd923c6dbf1401fb149cbccd811bc8"
+        },
+        {
+          "name": "j8qj16x4q_spt.fits",
+          "uri": "mast:HST/product/j8qj16x4q_spt.fits",
+          "bytes": 57600,
+          "sha256": "20f94ca9c8e95c5f0af78e55a95e26847b462634738afbc133504c9b25afda7c"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj16051_crj.fits",
+          "uri": "mast:HST/product/j8qj16051_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj16051_drz.fits",
+          "uri": "mast:HST/product/j8qj16051_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj16x3q_flt.fits",
+          "uri": "mast:HST/product/j8qj16x3q_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj16x4q_flt.fits",
+          "uri": "mast:HST/product/j8qj16x4q_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj16060",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F435W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.76682251,
+      "exposureEndMjd": 52913.79059909,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj16061",
+        "members": [
+          {
+            "rootname": "j8qj16x5q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16x6q",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16x7q",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj16060_asn.fits",
+          "uri": "mast:HST/product/j8qj16060_asn.fits",
+          "bytes": 11520,
+          "sha256": "98c1d76220f68d04ebe4654562d5d141bc880490f13099a9d58dda0c6db5cb09"
+        },
+        {
+          "name": "j8qj16061_jit.fits",
+          "uri": "mast:HST/product/j8qj16061_jit.fits",
+          "bytes": 106560,
+          "sha256": "bab56b6a8e2b16a1f5366ffddf8dcf3634bf3b656de00d480aa3471f3f9b2e5d"
+        },
+        {
+          "name": "j8qj16061_spt.fits",
+          "uri": "mast:HST/product/j8qj16061_spt.fits",
+          "bytes": 115200,
+          "sha256": "c1ad948480c31e882e3f8f9705ca1c38c4fd3413635c42244c409a47d3ceb498"
+        },
+        {
+          "name": "j8qj16x5q_raw.fits",
+          "uri": "mast:HST/product/j8qj16x5q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "662baedcd849cf40b915ea2a94502d3185bbf7120cb3e61191750d925e1e038c"
+        },
+        {
+          "name": "j8qj16x5q_spt.fits",
+          "uri": "mast:HST/product/j8qj16x5q_spt.fits",
+          "bytes": 57600,
+          "sha256": "be49be57608a800ef6e850267011b0054631c7245c8f2517804dae9dcc0b234d"
+        },
+        {
+          "name": "j8qj16x6q_raw.fits",
+          "uri": "mast:HST/product/j8qj16x6q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "ea603068cbfa8ebad92c9c0900626ba4c1699b82ba84155510fd21a388fd78f0"
+        },
+        {
+          "name": "j8qj16x6q_spt.fits",
+          "uri": "mast:HST/product/j8qj16x6q_spt.fits",
+          "bytes": 57600,
+          "sha256": "8bfcfe53bc8960aca4cb00fe31710825a6db6a4a332cd6f599fc7d87beecc942"
+        },
+        {
+          "name": "j8qj16x7q_raw.fits",
+          "uri": "mast:HST/product/j8qj16x7q_raw.fits",
+          "bytes": 2257920,
+          "sha256": "1618b1ae486cfdbb2d3dbf3b65b58c951a4cf7fcf0f7d937b61d637df8253775"
+        },
+        {
+          "name": "j8qj16x7q_spt.fits",
+          "uri": "mast:HST/product/j8qj16x7q_spt.fits",
+          "bytes": 57600,
+          "sha256": "277314f55e42d07c697c028efe8f469199dc98df831faa72d424af047c8db7b2"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj16061_crj.fits",
+          "uri": "mast:HST/product/j8qj16061_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj16061_drz.fits",
+          "uri": "mast:HST/product/j8qj16061_drz.fits",
+          "bytes": 15992640
+        },
+        {
+          "name": "j8qj16x5q_flt.fits",
+          "uri": "mast:HST/product/j8qj16x5q_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16x6q_flt.fits",
+          "uri": "mast:HST/product/j8qj16x6q_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16x7q_flt.fits",
+          "uri": "mast:HST/product/j8qj16x7q_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj16020",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F606W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.69779473,
+      "exposureEndMjd": 52913.70071464,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj16021",
+        "members": [
+          {
+            "rootname": "j8qj16wrq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16wsq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj16020_asn.fits",
+          "uri": "mast:HST/product/j8qj16020_asn.fits",
+          "bytes": 11520,
+          "sha256": "bcd014b671f7e74bcfca6ead2c37b78950be8a593ef2c088edd63094169bd494"
+        },
+        {
+          "name": "j8qj16021_jit.fits",
+          "uri": "mast:HST/product/j8qj16021_jit.fits",
+          "bytes": 31680,
+          "sha256": "88e834c6263daa3827be4bed29ef2e45b1a52aca54ff546bf7cc0a80d24bdcf0"
+        },
+        {
+          "name": "j8qj16021_spt.fits",
+          "uri": "mast:HST/product/j8qj16021_spt.fits",
+          "bytes": 86400,
+          "sha256": "db72e2be0c584334ad45f6d40d6b109f51bf57e334933750e1c281ee1eb11e90"
+        },
+        {
+          "name": "j8qj16wrq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wrq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "ca1d40c3de4437db1cec2bbe19156b3da3724bdf46b58bb87273d1a632fa7bc3"
+        },
+        {
+          "name": "j8qj16wrq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wrq_spt.fits",
+          "bytes": 57600,
+          "sha256": "3bda7fe66f953069e11d5d126c693d38e2034fed6915f88ee6efa07f09057704"
+        },
+        {
+          "name": "j8qj16wsq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wsq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "5d79809e0df98a426f532c623f6c29c18d22207db5862d5078de414c33e0d470"
+        },
+        {
+          "name": "j8qj16wsq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wsq_spt.fits",
+          "bytes": 57600,
+          "sha256": "1b4ba672baa61376d7eb0e50c436c0d201bfb5a941388f679bd95b0b312297e7"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj16021_crj.fits",
+          "uri": "mast:HST/product/j8qj16021_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj16021_drz.fits",
+          "uri": "mast:HST/product/j8qj16021_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj16wrq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wrq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16wsq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wsq_flt.fits",
+          "bytes": 10716480
+        }
+      ]
+    },
+    {
+      "observation": "j8qj16030",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F606W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.70126696,
+      "exposureEndMjd": 52913.7274739,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj16031",
+        "members": [
+          {
+            "rootname": "j8qj16wtq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16wuq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16wvq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16wwq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16wxq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16wyq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj16030_asn.fits",
+          "uri": "mast:HST/product/j8qj16030_asn.fits",
+          "bytes": 11520,
+          "sha256": "edcb7a2ec8a17afa8e64d4fe737246fe0dfff09f508b53e3123a596799798cff"
+        },
+        {
+          "name": "j8qj16031_jit.fits",
+          "uri": "mast:HST/product/j8qj16031_jit.fits",
+          "bytes": 141120,
+          "sha256": "8d99d58af6d24c838d08b2bd93a5f64df1fe95c9329dbd3f1664b8914cacda80"
+        },
+        {
+          "name": "j8qj16031_spt.fits",
+          "uri": "mast:HST/product/j8qj16031_spt.fits",
+          "bytes": 201600,
+          "sha256": "09feceb4acda69376194ee25e9d4e004d384c6dd5e26aa84947c681906a92bf4"
+        },
+        {
+          "name": "j8qj16wtq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wtq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "f486674e680352853bb4f1fbcad970f6589fe757acd393f3ce36a1a8162d1b82"
+        },
+        {
+          "name": "j8qj16wtq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wtq_spt.fits",
+          "bytes": 57600,
+          "sha256": "bb0f38c851f1710aead64d2dd2833166a4e9e14b15794bbcfaa9dddd85523de5"
+        },
+        {
+          "name": "j8qj16wuq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wuq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "814e8f60cfc0feb6ea16c80cc2158e201d7a923f6623f05efae76ed713622c0b"
+        },
+        {
+          "name": "j8qj16wuq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wuq_spt.fits",
+          "bytes": 57600,
+          "sha256": "38d0d0cc1452717bfcff2621c03d688ce1ad0f7591eba3305a2a04e736519da6"
+        },
+        {
+          "name": "j8qj16wvq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wvq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "d98bc5f8260c7bd2497e2141f42c2508ec621ccbbacd0dbbb12d8f16e6b15087"
+        },
+        {
+          "name": "j8qj16wvq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wvq_spt.fits",
+          "bytes": 57600,
+          "sha256": "e5036f6bb525e2deca31f2e3eb1337b0f0f922db47325c94102c7baa1149a395"
+        },
+        {
+          "name": "j8qj16wwq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wwq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "6c4465d523ee4072c35b9569a34c84b00365c10d1e618a0bf6cacb9656b1305b"
+        },
+        {
+          "name": "j8qj16wwq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wwq_spt.fits",
+          "bytes": 57600,
+          "sha256": "d567c86442b44eecbe19e3052f0bb9d94ed085cadf765b4afa4b64c2838e6449"
+        },
+        {
+          "name": "j8qj16wxq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wxq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "46d70980915849932538d362406657094158592b976e7b136517c6d0c213d7a7"
+        },
+        {
+          "name": "j8qj16wxq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wxq_spt.fits",
+          "bytes": 57600,
+          "sha256": "3ed29b0450ebfd90be539a0b3fe5dcf64e0938337b05dc27df3c9645f0556376"
+        },
+        {
+          "name": "j8qj16wyq_raw.fits",
+          "uri": "mast:HST/product/j8qj16wyq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "66a16e338385bfcb67adb4a193a59ddaeccd3afa14f4d05ac2bd688d31d339a1"
+        },
+        {
+          "name": "j8qj16wyq_spt.fits",
+          "uri": "mast:HST/product/j8qj16wyq_spt.fits",
+          "bytes": 57600,
+          "sha256": "9f5069565b250eadfc3f6a13e904a06b08b8d384ef117f8276c586a75e9c5e16"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj16031_crj.fits",
+          "uri": "mast:HST/product/j8qj16031_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj16031_drz.fits",
+          "uri": "mast:HST/product/j8qj16031_drz.fits",
+          "bytes": 16004160
+        },
+        {
+          "name": "j8qj16wtq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wtq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16wuq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wuq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16wvq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wvq_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj16wwq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wwq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16wxq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wxq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16wyq_flt.fits",
+          "uri": "mast:HST/product/j8qj16wyq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj16080",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F814W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.82631325,
+      "exposureEndMjd": 52913.83265872,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj16081",
+        "members": [
+          {
+            "rootname": "j8qj16xnq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16xoq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj16080_asn.fits",
+          "uri": "mast:HST/product/j8qj16080_asn.fits",
+          "bytes": 11520,
+          "sha256": "c60c14dd2102a71e0db91c06118bc7ff7ea1938aab2b2655ad0905de8c23398c"
+        },
+        {
+          "name": "j8qj16081_jit.fits",
+          "uri": "mast:HST/product/j8qj16081_jit.fits",
+          "bytes": 43200,
+          "sha256": "eb8e446e1686d39804d1c688b247fb929a291723313f1b88e6025a30e52917c9"
+        },
+        {
+          "name": "j8qj16081_spt.fits",
+          "uri": "mast:HST/product/j8qj16081_spt.fits",
+          "bytes": 86400,
+          "sha256": "4ea635655a0766a0b2304cb885fb705910e25b9df16d2b29f08053b41e7db712"
+        },
+        {
+          "name": "j8qj16xnq_raw.fits",
+          "uri": "mast:HST/product/j8qj16xnq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "073061819f818a272c6e3ad41369344a7e97a0749d9606a085b23a3e0f309cb9"
+        },
+        {
+          "name": "j8qj16xnq_spt.fits",
+          "uri": "mast:HST/product/j8qj16xnq_spt.fits",
+          "bytes": 57600,
+          "sha256": "7f42ed7414ab3f0324c6a8cdcbf59155bfdcd9787c4c67c8e94ed9f92e0a5412"
+        },
+        {
+          "name": "j8qj16xoq_raw.fits",
+          "uri": "mast:HST/product/j8qj16xoq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "1c10ee4bd4cdb9b166f3791320ffcd8e423106371667e04d788630760826cbcb"
+        },
+        {
+          "name": "j8qj16xoq_spt.fits",
+          "uri": "mast:HST/product/j8qj16xoq_spt.fits",
+          "bytes": 57600,
+          "sha256": "6f70fc19af0d8d99300b33ad2406ccb1a2a58b390f900523d7274ae20f3f9086"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj16081_crj.fits",
+          "uri": "mast:HST/product/j8qj16081_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj16081_drz.fits",
+          "uri": "mast:HST/product/j8qj16081_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj16xnq_flt.fits",
+          "uri": "mast:HST/product/j8qj16xnq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16xoq_flt.fits",
+          "uri": "mast:HST/product/j8qj16xoq_flt.fits",
+          "bytes": 10716480
+        }
+      ]
+    },
+    {
+      "observation": "j8qj16090",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F814W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.83318807,
+      "exposureEndMjd": 52913.85668686,
+      "targetName": "BETA-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj16091",
+        "members": [
+          {
+            "rootname": "j8qj16xpq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16xqq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj16xrq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj16090_asn.fits",
+          "uri": "mast:HST/product/j8qj16090_asn.fits",
+          "bytes": 11520,
+          "sha256": "0c63b4f707d02976e11ec846e71e73bd037f80093ddd2ca79010ad732f7daf09"
+        },
+        {
+          "name": "j8qj16091_jit.fits",
+          "uri": "mast:HST/product/j8qj16091_jit.fits",
+          "bytes": 106560,
+          "sha256": "e2d534029a3d59a6634444cbd213c5f05fcc977346e98698657efd240012c47c"
+        },
+        {
+          "name": "j8qj16091_spt.fits",
+          "uri": "mast:HST/product/j8qj16091_spt.fits",
+          "bytes": 115200,
+          "sha256": "ecc990b752d07b4ff321e078b35dd2256f84683b158e406df0611b5db02322b6"
+        },
+        {
+          "name": "j8qj16xpq_raw.fits",
+          "uri": "mast:HST/product/j8qj16xpq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "72a1dd7c1c2bda71a85d54cc1a20c3e72c010217fadce309dba84e96429c9a0a"
+        },
+        {
+          "name": "j8qj16xpq_spt.fits",
+          "uri": "mast:HST/product/j8qj16xpq_spt.fits",
+          "bytes": 57600,
+          "sha256": "b66c49ee6fb414ab2ac792861f7245eda3670716d8c4268c6d6e9e33bf619182"
+        },
+        {
+          "name": "j8qj16xqq_raw.fits",
+          "uri": "mast:HST/product/j8qj16xqq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "276465034bdb63ac413f8da60fa6bb3dd590f21119e324770b3bf0d2f9b5fb19"
+        },
+        {
+          "name": "j8qj16xqq_spt.fits",
+          "uri": "mast:HST/product/j8qj16xqq_spt.fits",
+          "bytes": 57600,
+          "sha256": "e7049e495f7241747ae6656b3905a57d755f8bf1ca5460a04d7d8275914a7328"
+        },
+        {
+          "name": "j8qj16xrq_raw.fits",
+          "uri": "mast:HST/product/j8qj16xrq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "7c69fad84506fc8926eb77e6046229310f7e7ef35e2933a6c0428e11cd5b91ef"
+        },
+        {
+          "name": "j8qj16xrq_spt.fits",
+          "uri": "mast:HST/product/j8qj16xrq_spt.fits",
+          "bytes": 57600,
+          "sha256": "a7fcf7c6e32d72e5a619ca7d73a48eccab283c6a236cc83290a516103a0982d6"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj16091_crj.fits",
+          "uri": "mast:HST/product/j8qj16091_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj16091_drz.fits",
+          "uri": "mast:HST/product/j8qj16091_drz.fits",
+          "bytes": 15992640
+        },
+        {
+          "name": "j8qj16xpq_flt.fits",
+          "uri": "mast:HST/product/j8qj16xpq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16xqq_flt.fits",
+          "uri": "mast:HST/product/j8qj16xqq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj16xrq_flt.fits",
+          "uri": "mast:HST/product/j8qj16xrq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj17020",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F435W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.4321351,
+      "exposureEndMjd": 52913.43505464,
+      "targetName": "ALF-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj17021",
+        "members": [
+          {
+            "rootname": "j8qj17ubq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj17ucq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj17020_asn.fits",
+          "uri": "mast:HST/product/j8qj17020_asn.fits",
+          "bytes": 11520,
+          "sha256": "214b95d63a0bfe2c9884154ec5dee734618acdfa64e34902151ad12ddb3f5420"
+        },
+        {
+          "name": "j8qj17021_jit.fits",
+          "uri": "mast:HST/product/j8qj17021_jit.fits",
+          "bytes": 31680,
+          "sha256": "214a87496128d4387ecf8523c01ba40e7c7527fc38714fcf052c0b15f79a8806"
+        },
+        {
+          "name": "j8qj17021_spt.fits",
+          "uri": "mast:HST/product/j8qj17021_spt.fits",
+          "bytes": 86400,
+          "sha256": "4445ecedac0f6983f28a27898a501bda77c68f6d497ffc4361645d251e1ae7ce"
+        },
+        {
+          "name": "j8qj17ubq_raw.fits",
+          "uri": "mast:HST/product/j8qj17ubq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "457ae6b9f9ab902ca094ed95bd91b29a978f8f58b8a4c263c681808f40441918"
+        },
+        {
+          "name": "j8qj17ubq_spt.fits",
+          "uri": "mast:HST/product/j8qj17ubq_spt.fits",
+          "bytes": 57600,
+          "sha256": "6c2576a8cd9d66b84b9cce2f2907e318408b51b7b04e677541ef3c7181fa7017"
+        },
+        {
+          "name": "j8qj17ucq_raw.fits",
+          "uri": "mast:HST/product/j8qj17ucq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "2cc87a0362957f195cba58061be02cb30839442fc3a4c4af09405dfa7f2d2f14"
+        },
+        {
+          "name": "j8qj17ucq_spt.fits",
+          "uri": "mast:HST/product/j8qj17ucq_spt.fits",
+          "bytes": 57600,
+          "sha256": "7c80c9ee49b46a2ecc3adf4b004f7a4547d365848386ceba9ef7f3cf75a37036"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj17021_crj.fits",
+          "uri": "mast:HST/product/j8qj17021_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj17021_drz.fits",
+          "uri": "mast:HST/product/j8qj17021_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj17ubq_flt.fits",
+          "uri": "mast:HST/product/j8qj17ubq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj17ucq_flt.fits",
+          "uri": "mast:HST/product/j8qj17ucq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj17030",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F435W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.43560733,
+      "exposureEndMjd": 52913.44137427,
+      "targetName": "ALF-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj17031",
+        "members": [
+          {
+            "rootname": "j8qj17udq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj17ueq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj17030_asn.fits",
+          "uri": "mast:HST/product/j8qj17030_asn.fits",
+          "bytes": 11520,
+          "sha256": "1a7449a8175562085766b27ea1b339ec56c1f8fb33e32724fbd3dc7ac4badd10"
+        },
+        {
+          "name": "j8qj17031_jit.fits",
+          "uri": "mast:HST/product/j8qj17031_jit.fits",
+          "bytes": 43200,
+          "sha256": "5a9b312f47e33ad03953fff5849c5f2bcf6a54bd5c15e9b684ab35266e03dc30"
+        },
+        {
+          "name": "j8qj17031_spt.fits",
+          "uri": "mast:HST/product/j8qj17031_spt.fits",
+          "bytes": 86400,
+          "sha256": "d92aad918bbaef3d1c463d55dbd848392b6681fc698a682a0f34d80b39b67958"
+        },
+        {
+          "name": "j8qj17udq_raw.fits",
+          "uri": "mast:HST/product/j8qj17udq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "868753e4f177439f6e02985dbd34f797a5fbb84a5c0df6d6cc36cbecd9e6d79f"
+        },
+        {
+          "name": "j8qj17udq_spt.fits",
+          "uri": "mast:HST/product/j8qj17udq_spt.fits",
+          "bytes": 57600,
+          "sha256": "f5bc8f1b130500d9915b7ae19924e29c310aafce5d7112c972f0e6140d81287d"
+        },
+        {
+          "name": "j8qj17ueq_raw.fits",
+          "uri": "mast:HST/product/j8qj17ueq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "95dfa614f603bb360b412c526d61b338cb4239d1f00e2a53c69f3ee6bd98b497"
+        },
+        {
+          "name": "j8qj17ueq_spt.fits",
+          "uri": "mast:HST/product/j8qj17ueq_spt.fits",
+          "bytes": 57600,
+          "sha256": "3634701f53c3786b263b5639cbcab54321dd5ccf3531d4fc4a0f478ed37240d9"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj17031_crj.fits",
+          "uri": "mast:HST/product/j8qj17031_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj17031_drz.fits",
+          "uri": "mast:HST/product/j8qj17031_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj17udq_flt.fits",
+          "uri": "mast:HST/product/j8qj17udq_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj17ueq_flt.fits",
+          "uri": "mast:HST/product/j8qj17ueq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj17050",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F606W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.44323436,
+      "exposureEndMjd": 52913.44499686,
+      "targetName": "ALF-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj17051",
+        "members": [
+          {
+            "rootname": "j8qj17ugq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj17uhq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj17050_asn.fits",
+          "uri": "mast:HST/product/j8qj17050_asn.fits",
+          "bytes": 11520,
+          "sha256": "8e4a7605ba08b79bdd6be68244557179ea1ef7d681da1b627e92c5c5d685b74a"
+        },
+        {
+          "name": "j8qj17051_jit.fits",
+          "uri": "mast:HST/product/j8qj17051_jit.fits",
+          "bytes": 25920,
+          "sha256": "095f50c0c1088ae84c759faa0d8bd861f2506a947a237c18c54a5e573e4a2855"
+        },
+        {
+          "name": "j8qj17051_spt.fits",
+          "uri": "mast:HST/product/j8qj17051_spt.fits",
+          "bytes": 86400,
+          "sha256": "d7ecb8730c99ef7ca0bea93888ddc71e67dd84cac0a3ae0b9fb5bb68e245c4ac"
+        },
+        {
+          "name": "j8qj17ugq_raw.fits",
+          "uri": "mast:HST/product/j8qj17ugq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "002bdf302ec57362d8bb1d62e7918464d98c98985e0c00685008110aa371c899"
+        },
+        {
+          "name": "j8qj17ugq_spt.fits",
+          "uri": "mast:HST/product/j8qj17ugq_spt.fits",
+          "bytes": 57600,
+          "sha256": "eb472beb977ac2dd408a159bee78bef2a1156d186f649301ce39470858d9f372"
+        },
+        {
+          "name": "j8qj17uhq_raw.fits",
+          "uri": "mast:HST/product/j8qj17uhq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "ed09d332d326c5dbef066d1995951150a5ceff8e6fbb58abbd1dad75d1aee8da"
+        },
+        {
+          "name": "j8qj17uhq_spt.fits",
+          "uri": "mast:HST/product/j8qj17uhq_spt.fits",
+          "bytes": 57600,
+          "sha256": "b4b0d46cd52f95603cea62110369ad499f0351f23f778b254a2c5ba47f2911aa"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj17051_crj.fits",
+          "uri": "mast:HST/product/j8qj17051_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj17051_drz.fits",
+          "uri": "mast:HST/product/j8qj17051_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj17ugq_flt.fits",
+          "uri": "mast:HST/product/j8qj17ugq_flt.fits",
+          "bytes": 10716480
+        },
+        {
+          "name": "j8qj17uhq_flt.fits",
+          "uri": "mast:HST/product/j8qj17uhq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj17060",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F606W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.44554918,
+      "exposureEndMjd": 52913.4507376,
+      "targetName": "ALF-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj17061",
+        "members": [
+          {
+            "rootname": "j8qj17uiq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj17ujq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj17060_asn.fits",
+          "uri": "mast:HST/product/j8qj17060_asn.fits",
+          "bytes": 11520,
+          "sha256": "f766b8616ec4294e76c6b9640c8b6f617ac7c0ea569a979e34c81621e26e3de8"
+        },
+        {
+          "name": "j8qj17061_jit.fits",
+          "uri": "mast:HST/product/j8qj17061_jit.fits",
+          "bytes": 37440,
+          "sha256": "1b061bdbf42b8604e26863a641b7653879814dd6d62dccc61a4b946d2e424952"
+        },
+        {
+          "name": "j8qj17061_spt.fits",
+          "uri": "mast:HST/product/j8qj17061_spt.fits",
+          "bytes": 86400,
+          "sha256": "fd8ca8c49ef7e3539ec218e41d741e115b912737895fdbd7c402e9a42145c8e3"
+        },
+        {
+          "name": "j8qj17uiq_raw.fits",
+          "uri": "mast:HST/product/j8qj17uiq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "d63c776503ef5e9760265636c906b0a914d0e0f19171210bab2639b50bb3ed5c"
+        },
+        {
+          "name": "j8qj17uiq_spt.fits",
+          "uri": "mast:HST/product/j8qj17uiq_spt.fits",
+          "bytes": 57600,
+          "sha256": "2c770b5ab50414d43997e5cf392cb6a4865da454ddde09a40e6f70dda8707249"
+        },
+        {
+          "name": "j8qj17ujq_raw.fits",
+          "uri": "mast:HST/product/j8qj17ujq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "93258606d5d9fd334cdbbf580a23871a0218d51782a335069c2b04fb515db780"
+        },
+        {
+          "name": "j8qj17ujq_spt.fits",
+          "uri": "mast:HST/product/j8qj17ujq_spt.fits",
+          "bytes": 57600,
+          "sha256": "783d9f8d679807ccc25677c4e433763d0e4a523bc48b82964f73a1cefa17693e"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj17061_crj.fits",
+          "uri": "mast:HST/product/j8qj17061_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj17061_drz.fits",
+          "uri": "mast:HST/product/j8qj17061_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj17uiq_flt.fits",
+          "uri": "mast:HST/product/j8qj17uiq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj17ujq_flt.fits",
+          "uri": "mast:HST/product/j8qj17ujq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj17080",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F814W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.45296844,
+      "exposureEndMjd": 52913.45588797,
+      "targetName": "ALF-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj17081",
+        "members": [
+          {
+            "rootname": "j8qj17ulq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj17umq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj17080_asn.fits",
+          "uri": "mast:HST/product/j8qj17080_asn.fits",
+          "bytes": 11520,
+          "sha256": "5f89b46035b0b02c7e3f0cc72748a532bb9d290e23ecd6044e7236b2d096cf04"
+        },
+        {
+          "name": "j8qj17081_jit.fits",
+          "uri": "mast:HST/product/j8qj17081_jit.fits",
+          "bytes": 31680,
+          "sha256": "aa3abaa437daf5626a6e66a038cb09d3753bf0228174d464a9a7353e4ef3932f"
+        },
+        {
+          "name": "j8qj17081_spt.fits",
+          "uri": "mast:HST/product/j8qj17081_spt.fits",
+          "bytes": 86400,
+          "sha256": "7de11f9420d6c352c98f6f51e6f7dccce9f8d9e5eeb1750d7f1c2b1d7047e0ca"
+        },
+        {
+          "name": "j8qj17ulq_raw.fits",
+          "uri": "mast:HST/product/j8qj17ulq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "d002ac1132ff55729ca98833d0ac6c011a0d8db53dd1215fc04665856527af65"
+        },
+        {
+          "name": "j8qj17ulq_spt.fits",
+          "uri": "mast:HST/product/j8qj17ulq_spt.fits",
+          "bytes": 57600,
+          "sha256": "88997aa892dac1c148c2f3cbede84e36e0e3d23eaff38a694d37d701c834c229"
+        },
+        {
+          "name": "j8qj17umq_raw.fits",
+          "uri": "mast:HST/product/j8qj17umq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "af8127bcdbb25f2ff880d8a3067aa4190a69f1302335454421a2b37653da415d"
+        },
+        {
+          "name": "j8qj17umq_spt.fits",
+          "uri": "mast:HST/product/j8qj17umq_spt.fits",
+          "bytes": 57600,
+          "sha256": "f54615a4ee4e018dd2f70f3dad080edf270012af384ed2436485f0fac3a8287f"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj17081_crj.fits",
+          "uri": "mast:HST/product/j8qj17081_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj17081_drz.fits",
+          "uri": "mast:HST/product/j8qj17081_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj17ulq_flt.fits",
+          "uri": "mast:HST/product/j8qj17ulq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj17umq_flt.fits",
+          "uri": "mast:HST/product/j8qj17umq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    },
+    {
+      "observation": "j8qj17090",
+      "instrument": "ACS",
+      "detector": "HRC",
+      "opticalElement": "F814W",
+      "aperture": "HRC-CORON1.8",
+      "exposureStartMjd": 52913.45644066,
+      "exposureEndMjd": 52913.46162872,
+      "targetName": "ALF-PIC",
+      "calibrationSwitches": {
+        "DQICORR": "PERFORM",
+        "ATODCORR": "OMIT",
+        "BLEVCORR": "PERFORM",
+        "BIASCORR": "PERFORM",
+        "FLSHCORR": "OMIT",
+        "CRCORR": "PERFORM",
+        "EXPSCORR": "PERFORM",
+        "SHADCORR": "OMIT",
+        "PCTECORR": "OMIT",
+        "DARKCORR": "PERFORM",
+        "FLATCORR": "PERFORM",
+        "PHOTCORR": "PERFORM",
+        "RPTCORR": "OMIT",
+        "DRIZCORR": "PERFORM",
+        "SINKCORR": "OMIT"
+      },
+      "association": {
+        "product": "j8qj17091",
+        "members": [
+          {
+            "rootname": "j8qj17unq",
+            "type": "EXP-CRJ"
+          },
+          {
+            "rootname": "j8qj17uoq",
+            "type": "EXP-CRJ"
+          }
+        ]
+      },
+      "inputs": [
+        {
+          "name": "j8qj17090_asn.fits",
+          "uri": "mast:HST/product/j8qj17090_asn.fits",
+          "bytes": 11520,
+          "sha256": "d6bd0b715787662c71096168aefe717627c9018ef3d14691cabef35d34588c0d"
+        },
+        {
+          "name": "j8qj17091_jit.fits",
+          "uri": "mast:HST/product/j8qj17091_jit.fits",
+          "bytes": 37440,
+          "sha256": "ebc6b2b4a24b7008a43bc449e9b1b8d3b51cd12c71ba0695edcfd44976f90520"
+        },
+        {
+          "name": "j8qj17091_spt.fits",
+          "uri": "mast:HST/product/j8qj17091_spt.fits",
+          "bytes": 86400,
+          "sha256": "c2067d6cecee6ffcdd93805895b8d7417926d15c5c97b21f914ed048b5abbdc2"
+        },
+        {
+          "name": "j8qj17unq_raw.fits",
+          "uri": "mast:HST/product/j8qj17unq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "178ee11b70941eaa77c24301bb7a75fcb898437f73c2255568b876bc15fc47ba"
+        },
+        {
+          "name": "j8qj17unq_spt.fits",
+          "uri": "mast:HST/product/j8qj17unq_spt.fits",
+          "bytes": 57600,
+          "sha256": "470914a7599a1b54ff867987f07c6a5fedfd0d887c8952e39a062dafce0cad9d"
+        },
+        {
+          "name": "j8qj17uoq_raw.fits",
+          "uri": "mast:HST/product/j8qj17uoq_raw.fits",
+          "bytes": 2257920,
+          "sha256": "33d91a0bb83d4ac6917106676c23970271758e19cfda424ff6b2787ba022a7d0"
+        },
+        {
+          "name": "j8qj17uoq_spt.fits",
+          "uri": "mast:HST/product/j8qj17uoq_spt.fits",
+          "bytes": 57600,
+          "sha256": "6b37304b2f99c28ffc2fb3f65bcfb3ff3c1e602d468a5e48dc39cdc378088e37"
+        }
+      ],
+      "products": [
+        {
+          "name": "j8qj17091_crj.fits",
+          "uri": "mast:HST/product/j8qj17091_crj.fits",
+          "bytes": 10535040
+        },
+        {
+          "name": "j8qj17091_drz.fits",
+          "uri": "mast:HST/product/j8qj17091_drz.fits",
+          "bytes": 15989760
+        },
+        {
+          "name": "j8qj17unq_flt.fits",
+          "uri": "mast:HST/product/j8qj17unq_flt.fits",
+          "bytes": 10762560
+        },
+        {
+          "name": "j8qj17uoq_flt.fits",
+          "uri": "mast:HST/product/j8qj17uoq_flt.fits",
+          "bytes": 10762560
+        }
+      ]
+    }
+  ]
+}

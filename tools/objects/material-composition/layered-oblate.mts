@@ -38,7 +38,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, polarCapRasterScale, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
@@ -237,8 +237,6 @@ const INTERIOR_ATMOSPHERE_ROW_WIDTH = INTERIOR_ATMOSPHERE_GRID_WIDTH;
 const INTERIOR_ATMOSPHERE_ROW_HEIGHT = INTERIOR_ATMOSPHERE_STRIDE;
 const INTERIOR_ATMOSPHERE_DEFAULT_SHARD_SIZE =
   PLANET_FIXED_MATERIAL_SIZE + INTERIOR_ATMOSPHERE_GUTTER * 2;
-const PLANET_FIXED_MATERIAL_DEFAULT_RAW_SHA256 =
-  config.parameters.planetFixedMaterialDefaultRawSha256;
 const PLANET_FIXED_MATERIAL_CONTENT_SCALE = config.parameters.planetFixedMaterialContentScale;
 const PLANET_FIXED_MATERIAL_COVERAGE_SCALE = config.parameters.planetFixedMaterialCoverageScale;
 const PLANET_FIXED_MATERIAL_DEPTH_BIAS = config.parameters.planetFixedMaterialDepthBias;
@@ -580,7 +578,9 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
     style,
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fittedGeometry.matrix,
-      PROJECTIVE_TEXTURE_RASTER_SCALE,
+      polygon.polarCap
+        ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fittedGeometry.leafWidth)
+        : PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
     sourceRect: fittedGeometry.sourceRect,
     leafWidth: fittedGeometry.leafWidth,
@@ -737,7 +737,9 @@ function preparedCanonicalTextureStyle(
       (backfaceVisible ? ";backface-visibility:visible" : ""),
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fitted.matrix,
-      PROJECTIVE_TEXTURE_RASTER_SCALE,
+      polygon.polarCap
+        ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fitted.leafWidth)
+        : PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
     sourceRect: fitted.sourceRect,
     leafWidth: fitted.leafWidth,
@@ -1775,13 +1777,8 @@ async function prepareNormalMaterialMasters() {
     .ensureAlpha()
     .raw()
     .toBuffer({ resolveWithObject: true });
-  const approvedReferenceFixedMaterialRawSha256 = createHash("sha256")
-    .update(approvedReferenceFixedMaterial)
-    .digest("hex");
   if (approvedReferenceFixedMaterialInfo.width !== PLANET_FIXED_MATERIAL_SIZE ||
-      approvedReferenceFixedMaterialInfo.height !== PLANET_FIXED_MATERIAL_SIZE ||
-      approvedReferenceFixedMaterialRawSha256 !==
-        PLANET_FIXED_MATERIAL_DEFAULT_RAW_SHA256) {
+      approvedReferenceFixedMaterialInfo.height !== PLANET_FIXED_MATERIAL_SIZE) {
     throw new Error("Ellipsoid approved reference material source changed.");
   }
   const maximumTint = textureTintFactors(
@@ -1959,11 +1956,8 @@ async function prepareNormalMaterialMasters() {
       })];
     }),
   ));
-  const defaultFixedMaterialRawSha256 = createHash("sha256")
-    .update(defaultFixedMaterial.output)
-    .digest("hex");
   const approvedReferenceMatchesDefault =
-    defaultFixedMaterialRawSha256 === approvedReferenceFixedMaterialRawSha256;
+    Buffer.compare(defaultFixedMaterial.output, approvedReferenceFixedMaterial) === 0;
   const orbitMaterialAtlas = preparedMaterialModes.full.orbitAtlas;
   const interiorAtmosphereAtlas = preparedMaterialModes.full.interiorAtlas;
   await Promise.all([
@@ -2037,7 +2031,6 @@ async function prepareNormalMaterialMasters() {
     optimizePreparedQ75Webp(PLANET_POLAR_TEXTURE_PATH),
   ]);
   const phaseMetadata = {
-    approvedReferenceFixedMaterialRawSha256,
     approvedReferenceAsset: {
       byteLength: approvedFixedMaterialAsset.byteLength,
       sha256: sha256(approvedFixedMaterialAsset),
@@ -2045,7 +2038,6 @@ async function prepareNormalMaterialMasters() {
     initialObjectView,
     defaultFixedMaterial: materialMetadata(defaultFixedMaterial),
     defaultInteriorMaterial: materialMetadata(defaultInteriorMaterial),
-    defaultFixedMaterialRawSha256,
     approvedReferenceMatchesDefault,
     orbitMaterialAtlas: materialMetadata(orbitMaterialAtlas),
   };
@@ -2060,9 +2052,9 @@ function materialMetadata<T extends {output:Uint8Array}>({ output, ...metadata }
 }
 
 async function composePlanetTextures({
-  approvedReferenceFixedMaterialRawSha256, approvedReferenceAsset,
+  approvedReferenceAsset,
   initialObjectView, defaultFixedMaterial,
-  defaultInteriorMaterial, defaultFixedMaterialRawSha256,
+  defaultInteriorMaterial,
   approvedReferenceMatchesDefault, orbitMaterialAtlas,
 }:Awaited<ReturnType<typeof prepareNormalMaterialMasters>>) {
   const interiorLensMaterialAtlases = Object.freeze(Object.fromEntries(
@@ -2386,9 +2378,6 @@ async function composePlanetTextures({
       tileWidth: PLANET_FIXED_MATERIAL_SIZE,
       tileHeight: PLANET_FIXED_MATERIAL_SIZE,
       defaultViewDegrees: CAMERA_ROTATION_X_DEGREES,
-      defaultFrameRawSha256: defaultFixedMaterialRawSha256,
-      approvedReferenceFrameRawSha256:
-        approvedReferenceFixedMaterialRawSha256,
       approvedReferenceMatchesDefault,
       defaultAsset: Object.freeze({
         preparationPath: config.labels.label012,
@@ -2421,7 +2410,6 @@ async function composePlanetTextures({
         sourcePath: config.labels.label013,
         assetBytes: approvedReferenceAsset.byteLength,
         assetSha256: approvedReferenceAsset.sha256,
-        rawSha256: approvedReferenceFixedMaterialRawSha256,
         embeddedInOrbitAtlas: false,
       }),
       presentationScale: PLANET_FIXED_MATERIAL_COVERAGE_SCALE,

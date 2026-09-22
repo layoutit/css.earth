@@ -2,7 +2,8 @@ import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.
 import { prepareFrameLookup } from "../../tools/prepare/prepare-materials.mts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialFrame } from '../renderers/css/dist/testing.js';
 import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection } from '../renderers/css/dist/testing.js';

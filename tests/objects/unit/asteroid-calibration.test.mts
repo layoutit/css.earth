@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../source-test.mts';
+const test = sourceTest();
 import { assertCalibratedAsteroidSource } from './asteroid-calibration-contract.mts';
 import { anchorTable, numberList, selectedObjectIds } from './anchor-table.mts';
 import { requireFiniteNumber, requireRecord, requireString } from '../../../tools/sources/source-values.mts';
@@ -12,7 +13,6 @@ const entries = anchorTable(table, 'asteroid calibration anchors', (entry, id) =
     name: expected.name === undefined ? undefined : requireString(expected.name, `${label} name`),
     modelId: requireFiniteNumber(expected.modelId, `${label} modelId`),
     modelVersion: expected.modelVersion === undefined ? undefined : requireString(expected.modelVersion, `${label} modelVersion`),
-    shapeSha256: requireString(expected.shapeSha256, `${label} shapeSha256`),
     vertices: requireFiniteNumber(expected.vertices, `${label} vertices`),
     faces: requireFiniteNumber(expected.faces, `${label} faces`),
     firstVertex: numberList(expected.firstVertex, `${label} firstVertex`),

@@ -19,7 +19,7 @@ for (const image of inputs.observations.images) {
   console.log(`OBSERVATION_STRUCTURE_SOURCE ${image.id}; cached native ${image.source.stellarTreatment === 'preserve' ? 'preserved map' : 'NOX'} only`);
   const input = await loadObservationDiffuse(inputs.recipe, image, config.workingWidth);
   const analysisIdentity = { recipeSha256: sha(recipeBytes), observationRecipeSha256: inputs.observationRecipeSha256,
-    catalogueSha256: inputs.catalogueSha256, sourceSha256: input.source.sha256, nativeDiffuseSha256: input.native.diffuseSha256,
+    catalogueSha256: inputs.catalogueSha256, sourceSha256: input.sourceSha256, nativeDiffuseSha256: input.native.diffuseSha256,
     settings: config.settings, dimensions: { width: input.width, height: input.height }, implementation };
   const analysisSha256 = sha(Buffer.from(JSON.stringify(analysisIdentity))), parent = resolve(directory, image.id);
   const destination = resolve(parent, analysisSha256.slice(0, 16)), staging = resolve(parent, `.staging-${process.pid}`);
@@ -43,7 +43,7 @@ for (const image of inputs.observations.images) {
   try { await rename(destination, `${destination}-previous-${Date.now()}`); }
   catch (error) { if ((error as NodeJS.ErrnoException).code !== 'ENOENT') throw error; }
   await rename(staging, destination);
-  images.push({ id: image.id, label: image.label, sourceSha256: input.source.sha256,
+  images.push({ id: image.id, label: image.label, sourceSha256: input.sourceSha256, sourceUrl: input.source.url,
     credit: input.source.credit, page: input.source.page, nativeWidth: input.source.width, nativeHeight: input.source.height,
     width: input.width, height: input.height, imageToFrame: image.imageToFrame,
     directory: relative(process.cwd(), destination), mapSha256: sha(mapBytes), analysisSha256 });

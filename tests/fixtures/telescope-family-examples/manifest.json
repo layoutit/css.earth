@@ -10,13 +10,11 @@
       },
       "source": {
         "path": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum-squeeze.fits",
-        "url": "https://doi.org/10.1051/0004-6361/202244693",
-        "bytes": 141120
+        "url": "https://doi.org/10.1051/0004-6361/202244693"
       },
       "command": "telescope export output/product-science/random-survey-16/betelgeuse/pick-1/result.json --output image --hdu 0 --out example-output/F01",
       "artifact": {
-        "path": "artifacts/F01.csv",
-        "bytes": 320309
+        "path": "artifacts/F01.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/product-science.test.mts",
@@ -37,13 +35,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
-        "url": "https://rm-lite.readthedocs.io/en/stable/examples/rmsynth_3d.html",
-        "bytes": 5760
+        "url": "https://rm-lite.readthedocs.io/en/stable/examples/rmsynth_3d.html"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F02.json nd-spectrum --params tests/fixtures/telescope-family-examples/params/F02.json --out example-output/F02",
       "artifact": {
-        "path": "artifacts/F02.json",
-        "bytes": 2462
+        "path": "artifacts/F02.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/families/f02-mixed-nd.test.mts",
@@ -62,13 +58,11 @@
       },
       "source": {
         "path": "src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json",
-        "url": "https://zenodo.org/records/7433033",
-        "bytes": 13609
+        "url": "https://zenodo.org/records/7433033"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F03.json spectrum-export --out example-output/F03",
       "artifact": {
-        "path": "artifacts/F03.csv",
-        "bytes": 10007
+        "path": "artifacts/F03.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -87,13 +81,11 @@
       },
       "source": {
         "path": "tools/objects/hst/programs/europa-salt-map.scan.reproduction.json",
-        "url": "https://doi.org/10.1126/sciadv.aaw7123",
-        "bytes": 21487
+        "url": "https://doi.org/10.1126/sciadv.aaw7123"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F04.json slit-scan-inspect --out example-output/F04",
       "artifact": {
-        "path": "artifacts/F04.json",
-        "bytes": 2739
+        "path": "artifacts/F04.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -112,13 +104,11 @@
       },
       "source": {
         "path": "src/objects/haumea/source/photometry/disc-color.json",
-        "url": "https://doi.org/10.1038/s41586-017-1784-8",
-        "bytes": 2084
+        "url": "https://doi.org/10.1038/s41586-017-1784-8"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F05.json photometry-export --out example-output/F05",
       "artifact": {
-        "path": "artifacts/F05.csv",
-        "bytes": 151
+        "path": "artifacts/F05.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -137,13 +127,11 @@
       },
       "source": {
         "path": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
-        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
-        "bytes": 1944000
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F06.json time-series-select --params tests/fixtures/telescope-family-examples/params/F06.json --out example-output/F06",
       "artifact": {
-        "path": "artifacts/F06.csv",
-        "bytes": 343
+        "path": "artifacts/F06.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -162,13 +150,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/wind-rad1/wi_l2_wav_rad1_20200101_v01.cdf",
-        "url": "https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf",
-        "bytes": 423932
+        "url": "https://spdf.gsfc.nasa.gov/pub/data/wind/waves/rad1_l2/2020/wi_l2_wav_rad1_20200101_v01.cdf"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F07.json dynamic-spectrum-export --params tests/fixtures/telescope-family-examples/params/F07.json --out example-output/F07",
       "artifact": {
-        "path": "artifacts/F07.csv",
-        "bytes": 354
+        "path": "artifacts/F07.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -187,13 +173,11 @@
       },
       "source": {
         "path": "src/objects/hd-189733/source/photometry/tess/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
-        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits",
-        "bytes": 1944000
+        "url": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:TESS/product/tess2021204101404-s0041-0000000256364928-0212-s_lc.fits"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F08.json table-inspect --out example-output/F08",
       "artifact": {
-        "path": "artifacts/F08.json",
-        "bytes": 3227
+        "path": "artifacts/F08.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -212,13 +196,11 @@
       },
       "source": {
         "path": "src/objects/m1/source/stellar-field.json",
-        "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist",
-        "bytes": 128434
+        "url": "https://dc.zah.uni-heidelberg.de/tableinfo/gedr3dist.litewithdist"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F09.json astrometry-export --out example-output/F09",
       "artifact": {
-        "path": "artifacts/F09.csv",
-        "bytes": 30969
+        "path": "artifacts/F09.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -237,13 +219,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/chandra-events/acisf06431N003_evt2.fits.gz",
-        "url": "https://cda.cfa.harvard.edu/chaser/startViewer.do?menuItem=details&obsid=6431",
-        "bytes": 2486220
+        "url": "https://cda.cfa.harvard.edu/chaser/startViewer.do?menuItem=details&obsid=6431"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F10.json selected-events --params tests/fixtures/telescope-family-examples/params/F10.json --out example-output/F10",
       "artifact": {
-        "path": "artifacts/F10.csv",
-        "bytes": 1234502
+        "path": "artifacts/F10.csv"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -265,13 +245,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/f11-vla-uvfits/day2_TDEM0003_10s_norx_1src_1spw.uvfits",
-        "url": "https://github.com/RadioAstronomySoftwareGroup/pyuvdata/tree/main/pyuvdata/data",
-        "bytes": 4253760
+        "url": "https://github.com/RadioAstronomySoftwareGroup/pyuvdata/tree/main/pyuvdata/data"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F11.json uvfits-visibility-export --params tests/fixtures/telescope-family-examples/params/F11.json --out example-output/F11",
       "artifact": {
-        "path": "artifacts/F11.json",
-        "bytes": 1816
+        "path": "artifacts/F11.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -290,13 +268,11 @@
       },
       "source": {
         "path": "src/objects/betelgeuse/source/observations/betelgeuse-matisse-2020-02-continuum.oifits",
-        "url": "https://doi.org/10.1051/0004-6361/202244693",
-        "bytes": 135360
+        "url": "https://doi.org/10.1051/0004-6361/202244693"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F12.json v2-diagnostics --out example-output/F12",
       "artifact": {
-        "path": "artifacts/F12.json",
-        "bytes": 153585
+        "path": "artifacts/F12.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -318,13 +294,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/f13-stokes/rm-lite-documented-full-stokes.fits",
-        "url": "https://rm-lite.readthedocs.io/en/stable/examples/rmsynth_3d.html",
-        "bytes": 5760
+        "url": "https://rm-lite.readthedocs.io/en/stable/examples/rmsynth_3d.html"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F13.json stokes-spectrum --params tests/fixtures/telescope-family-examples/params/F13.json --out example-output/F13",
       "artifact": {
-        "path": "artifacts/F13.json",
-        "bytes": 537
+        "path": "artifacts/F13.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/families/f13-polarimetry.test.mts",
@@ -345,13 +319,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/f14-healpix/bayestar.fits.gz",
-        "url": "https://github.com/astropy/reproject/blob/main/reproject/healpix/tests/data/bayestar.fits.gz",
-        "bytes": 102936
+        "url": "https://github.com/astropy/reproject/blob/main/reproject/healpix/tests/data/bayestar.fits.gz"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F14.json healpix-select --params tests/fixtures/telescope-family-examples/params/F14.json --out example-output/F14",
       "artifact": {
-        "path": "artifacts/F14.json",
-        "bytes": 528
+        "path": "artifacts/F14.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/families/f14-healpix.test.mts",
@@ -370,13 +342,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/geographos-radar/ge007.fit",
-        "url": "https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_GST_3_RDR_GEOGRAPHOS_RADAR_V1_1/data/ge007.fit",
-        "bytes": 72000
+        "url": "https://sbnarchive.psi.edu/pds3/non_mission/EAR_A_GST_3_RDR_GEOGRAPHOS_RADAR_V1_1/data/ge007.fit"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F15.json radar-profile --params tests/fixtures/telescope-family-examples/params/F15.json --out example-output/F15",
       "artifact": {
-        "path": "artifacts/F15.json",
-        "bytes": 235
+        "path": "artifacts/F15.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -395,13 +365,11 @@
       },
       "source": {
         "path": "src/objects/stellar-neighbourhood/object.json",
-        "url": "https://codeberg.org/astronexus/hyg",
-        "bytes": 906
+        "url": "https://codeberg.org/astronexus/hyg"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F16.json spatial-inspect --out example-output/F16",
       "artifact": {
-        "path": "artifacts/F16.json",
-        "bytes": 399
+        "path": "artifacts/F16.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -423,13 +391,11 @@
       },
       "source": {
         "path": "tests/fixtures/telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
-        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit",
-        "bytes": 535680
+        "url": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.fit"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F17.json near-msi-inspect --out example-output/F17",
       "artifact": {
-        "path": "artifacts/F17.json",
-        "bytes": 850
+        "path": "artifacts/F17.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",
@@ -448,13 +414,11 @@
       },
       "source": {
         "path": "tools/objects/pds/programs/charon-pds-nh_charon_color_mosaic.archive-final.product.json",
-        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx",
-        "bytes": 4820
+        "url": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:plutosystem_composition-v1.0/mosaic/nh_charon_color_mosaic.lblx"
       },
       "command": "telescope family-run tests/fixtures/telescope-family-examples/descriptors/F18.json enumerate-members --out example-output/F18",
       "artifact": {
-        "path": "artifacts/F18.json",
-        "bytes": 1150
+        "path": "artifacts/F18.json"
       },
       "productRecordReadback": {
         "test": "tools/objects/telescopes/family-operation.test.mts",

@@ -1,6 +1,7 @@
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
 import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture, preparedSelectionFixture } from "./test/object-runtime-package.mts";

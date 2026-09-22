@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { binaryTable, binaryTableHdu, numbers, primaryHdu, readFitsHdus, tableColumn } from './fits-table.mts';
 import { subsetOifits } from './oifits-concat.mts';
 

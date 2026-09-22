@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {parsePdsImage} from './pds-image.mts';
 
 function fixture({rock=false, values}: {rock?: boolean; values?: readonly number[]} = {}) {

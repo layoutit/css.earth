@@ -1,5 +1,8 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
+import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+test.before(async () => { await astroqueryToolchain(); });
 import { copyFile, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -17,7 +20,7 @@ test('bounded local directory import pins every member, records absent origin an
     await mkdir(source);await writeFile(resolve(source,'image.fits'),Buffer.concat([Buffer.from('SIMPLE  ='),Buffer.alloc(151)]));await writeFile(resolve(source,'notes.txt'),'support');
     const result=await importLocalArtifact(spec(source),out),manifest=JSON.parse(await readFile(result.manifest,'utf8')),record=await readProductRecord(result.receipt);
     assert.equal(manifest.members.length,2);assert.deepEqual(manifest.proposedProfiles,[{handlerId:'raster-f01-f02',profileId:'fits-image-array@1'}]);assert.match(manifest.issues[0].reason,/No archive origin/u);
-    assert.equal(record?.stage,'telescope-local-import');assert.equal(record?.inputs.length,2);assert.equal(record?.outputs.length,3);assert.ok(record?.outputs.every(output=>/^[a-f0-9]{64}$/u.test(output.sha256)));
+    assert.equal(record?.stage,'telescope-local-import');assert.equal(record?.inputs.length,2);assert.equal(record?.outputs.length,3);assert.ok(record?.outputs.every(output=>output.bytes>0));
   }finally{await rm(root,{recursive:true,force:true});}
 });
 

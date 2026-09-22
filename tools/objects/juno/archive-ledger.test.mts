@@ -1,7 +1,8 @@
 /** What a JunoCam registration receipt has to say for the images it names to count as measured. Everything here runs against a
  * scratch copy of the pinned program, so nothing asks the PDS anything. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';

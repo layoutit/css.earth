@@ -3,7 +3,7 @@ import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
 import {requireArray,requireFiniteNumber,requireRecord,requireString} from '../../../sources/source-values.mts';
 import {astroqueryToolchain} from '../../astronomy-packages/toolchain.mts';
-import {pinFile} from '../../product-record.mts';
+import {fileSize} from '../../product-record.mts';
 import type {FamilyHandler,FamilyOperation} from '../family-handlers.mts';
 import {
   PLANETARY_AXIS_ROLES,
@@ -116,7 +116,7 @@ async function run(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext,ope
 const contextFromQualification=(qualification:PlanetaryGridQualification):PlanetaryGridExecutionContext=>({quantity:qualification.quantity.name,unit:qualification.quantity.unit,axes:qualification.axes.map(axis=>({role:axis.role,physicalType:axis.physicalType,unit:axis.unit,reference:axis.reference}))});
 export const inspectPlanetaryDepthGrid=(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext|PlanetaryGridQualification):Promise<PlanetaryDepthInspection>=>run(pin,'schema'in context?contextFromQualification(context):context,'inspect');
 export const slicePlanetaryDepthGrid=(pin:PinnedDepthFile,context:PlanetaryGridExecutionContext,axis:string,index:number):Promise<PlanetaryDepthSlice>=>run(pin,context,'slice',axis,index);
-export async function exportPlanetaryDepthNative(pin:PinnedDepthFile,output:string){await copyFile(pin.path,output);return{path:output,...await pinFile(output)};}
+export async function exportPlanetaryDepthNative(pin:PinnedDepthFile,output:string){await copyFile(pin.path,output);return{path:output,...await fileSize(output)};}
 
 const resolveRoleMembers=(ids:readonly string[],members:readonly DescriptorMember[])=>ids.flatMap(value=>value.startsWith('role:')?members.filter(member=>member.role===value.slice(5)).map(member=>member.id):[value]);
 export function contextFromPlanetaryDepthDescriptor(product:ProductDescriptor):PlanetaryGridExecutionContext{const component=product.components.find(value=>value.id==='planetary-grid');if(!component)throw new TypeError('Planetary grid descriptor lacks its scientific component.');assertPlanetaryProductSemantics(component);if(!component.quantity.unit)throw new TypeError('Planetary grid quantity unit is absent.');const axes=[...component.axes].sort((a,b)=>a.index-b.index).map(axis=>{if(axis.coordinates.kind!=='linear'||!axis.unit||!axis.reference||!axis.physicalType)throw new TypeError(`Planetary grid axis ${axis.id} is not a qualified linear physical coordinate.`);return{role:axis.role,physicalType:axis.physicalType as PlanetaryAxisPhysicalType,unit:axis.unit,reference:axis.reference,length:axis.length,referenceValue:axis.coordinates.referenceValue,referenceIndex:axis.coordinates.referenceIndex,increment:axis.coordinates.increment};});return{quantity:component.quantity.name,unit:component.quantity.unit,axes};}

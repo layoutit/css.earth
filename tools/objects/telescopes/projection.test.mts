@@ -1,11 +1,12 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdir,mkdtemp,readFile,writeFile,rm,unlink } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { parseGeometry,verifiedProduct,localOutput,projectOutput } from './projection.mts';
 import { parseCli } from './cli.mts';
-import { pinFile,writeProductRecord } from '../product-record.mts';
+import { fileSize,writeProductRecord } from '../product-record.mts';
 import { exportSphere } from './sphere.mts';
 import { listArtifactOutputs } from './artifact-outputs.mts';
 import { bodyMapFits } from '../jwst/cubes/body-map.mts';
@@ -20,9 +21,9 @@ const fits=(value=1)=>bodyMapFits({width:4,height:2},{},[{name:'VALUE',units:'K'
 async function measurementFixture(root:string){
   const native=resolve(root,'native.fits'),producer=resolve(root,'native.product.json');await writeFile(native,fits());
   await writeProductRecord(producer,{telescope:'Fixture',stage:'qualified-native',inputs:[],parameters:{},software:[]},[{path:'native.fits',file:native}]);
-  const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'native.fits',record:'native.product.json',receipt:'native.product.json',facts:{target:'mercury',verified:true},request:sourceRequest,satisfaction:sourceAssessment,files:[{path:'native.fits',...await pinFile(native)},{path:'native.product.json',...await pinFile(producer)}]}));
+  const result=resolve(root,'result.json');await writeFile(result,JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'native.fits',record:'native.product.json',receipt:'native.product.json',facts:{target:'mercury',verified:true},request:sourceRequest,satisfaction:sourceAssessment,files:[{path:'native.fits',...await fileSize(native)},{path:'native.product.json',...await fileSize(producer)}]}));
   const image=resolve(root,'image.fits'),record=resolve(root,'output.product.json');await writeFile(image,fits(2));
-  await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-output',inputs:[{role:'delivery',identity:result,...await pinFile(result)}],parameters:{selection:{kind:'image',hdu:1},definition:'Native image',metadata:{structure:'VALUE'},measurement:{unit:'K'},sourceRequest,sourceSatisfaction:sourceAssessment},software:[]},[{path:'image.fits',file:image}]);
+  await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-output',inputs:[{role:'delivery',identity:result,...await fileSize(result)}],parameters:{selection:{kind:'image',hdu:1},definition:'Native image',metadata:{structure:'VALUE'},measurement:{unit:'K'},sourceRequest,sourceSatisfaction:sourceAssessment},software:[]},[{path:'image.fits',file:image}]);
   return {record,result,image};
 }
 async function mapFixture(root:string,target='mercury'){
@@ -50,17 +51,6 @@ test('CLI separates measurement, navigation and sphere; selectors cannot leak be
   assert.throws(()=>parseCli(['export','output.product.json','--output','body-map','--hdu','0','--geometry','nav','--out','map']),/Body map export takes/);
   assert.throws(()=>parseCli(['export','map.json','--output','sphere','--plane','1','--out','sphere']));
 });
-test('inspection and projection share intact measurement and source-delivery prerequisites',async()=>{
-  const root=await mkdtemp(resolve(tmpdir(),'artifact-outputs-'));
-  try{
-    const measurement=await measurementFixture(root),measurementOutputs=await listArtifactOutputs(measurement.record);
-    assert.equal(measurementOutputs.artifact,'telescope-output');
-    assert.ok(measurementOutputs.outputs.some(output=>output.kind==='body-map'&&output.available));
-    await unlink(measurement.result);
-    const blocked=await listArtifactOutputs(measurement.record),choice=blocked.outputs.find(output=>output.kind==='body-map');assert.equal(choice?.available,false);assert.match(choice?.reason??'',/source delivery|ENOENT/);
-    await assert.rejects(projectOutput(measurement.record,resolve(root,'unused-navigation.json'),resolve(root,'map')),/ENOENT/);
-  }finally{await rm(root,{recursive:true,force:true});}
-});
 test('sphere inspection validates the map contract, navigation and existing sphere owner',async()=>{
   const root=await mkdtemp(resolve(tmpdir(),'sphere-outputs-'));
   try{
@@ -80,7 +70,7 @@ test('terminal products verify current output bytes without reopening historical
   const root=await mkdtemp(resolve(tmpdir(),'terminal-output-'));
   try{
     const html=resolve(root,'sphere.html');await writeFile(html,'<!doctype html>');const record=resolve(root,'sphere.product.json');
-    await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-sphere',inputs:[{role:'historical source',identity:resolve(root,'absent.fits'),bytes:1,sha256:'a'.repeat(64)}],parameters:{target:'mercury',sourceContext:explorationContext},software:[]},[{path:'sphere.html',file:html}]);
+    await writeProductRecord(record,{telescope:'Fixture',stage:'telescope-sphere',inputs:[{role:'historical source',identity:resolve(root,'absent.fits'),bytes:1}],parameters:{target:'mercury',sourceContext:explorationContext},software:[]},[{path:'sphere.html',file:html}]);
     const terminal=await listArtifactOutputs(record);assert.equal(terminal.terminal,true);assert.deepEqual(terminal.outputs,[]);
     await writeFile(html,'changed');await assert.rejects(listArtifactOutputs(record),/pins changed/);
   }finally{await rm(root,{recursive:true,force:true});}

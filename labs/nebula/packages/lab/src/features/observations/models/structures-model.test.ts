@@ -6,7 +6,7 @@ import { readDecisions, readReviewMap, readStructureCatalogue, reviewStorageKey,
 function fixture() {
   const catalogue = readStructureCatalogue({ schema: 'cssearth-observation-structures@1',
     frame: { width: 1024, height: 1024, fieldArcminutes: [60, 60], centerIcrsDegrees: [12, -20], northUp: true },
-    images: [{ id: 'source-a', label: 'Source A', sourceSha256: 'a'.repeat(64), mapSha256: 'b'.repeat(64),
+    images: [{ id: 'source-a', label: 'Source A', sourceSha256: 'a'.repeat(64), sourceUrl: 'https://example.org/source-a.png', mapSha256: 'b'.repeat(64),
       nativeWidth: 6000, nativeHeight: 4000, width: 600, height: 400, imageToFrame: [.12, .04, -.04, .12, 170, 50],
       directory: '.local/structures/a', page: 'https://example.org/source', credit: 'Source credit' }] });
   const image = catalogue.images[0]!;

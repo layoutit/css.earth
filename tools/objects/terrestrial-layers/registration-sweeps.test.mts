@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { rotate } from '../../spice/frames.mts';
 import { controlledShapeCamera, type CameraImage } from './shape-camera-mosaic.mts';

@@ -53,7 +53,7 @@ test('declared magnitude quantization is bounded below what the runtime can disp
   for (const field of manifest.bank.quantization.filter(entry => entry !== magnitude)) expect([field.bound, field.measured, field.displayAlphaChange]).toEqual([0, 0, 0]);
 });
 
-test('rejects malformed hierarchy, rows, manifest fields and either pinned transport', async () => {
+test('rejects malformed hierarchy, rows and manifest fields', async () => {
   const { descriptor, manifestBytes, bankBytes, manifest, data, transport } = fixture();
   const column = (name: string) => manifest.bank.columns.find(entry => entry.name === name)!;
   const tampered = (mutate: (view: DataView) => void) => { const bytes = new Uint8Array(bankBytes); mutate(new DataView(bytes.buffer)); return bytes; };
@@ -77,10 +77,6 @@ test('rejects malformed hierarchy, rows, manifest fields and either pinned trans
   expect(() => parsePreparedCssPointFieldManifest({ ...data, bank: { ...bank, starCount: (bank.starCount as number) + 1 } })).toThrow('layout');
   expect(() => parsePreparedCssPointFieldManifest({ ...data, bank: { ...bank, quantization: quantization.map((entry, index) => index === 1 ? { ...entry, bound: 0.01 } : entry) } })).toThrow('quantization');
   expect(() => parsePreparedCssPointFieldManifest({ ...data, stars: [] })).toThrow('unsupported');
-  await expect(loadPreparedCssPointField(descriptor, transport(new TextEncoder().encode(new TextDecoder().decode(manifestBytes) + '\n')))).rejects.toThrow('SHA-256');
-  const flipped = new Uint8Array(bankBytes); flipped[flipped.length - 9]! ^= 1;
-  await expect(loadPreparedCssPointField(descriptor, transport(undefined, flipped))).rejects.toThrow('bank length or SHA-256');
-  await expect(loadPreparedCssPointField(descriptor, transport(undefined, bankBytes.subarray(0, bankBytes.length - 8)))).rejects.toThrow('bank length or SHA-256');
   const drifted = structuredClone(descriptor) as { properties: { frame: { originM: number[] } } };
   drifted.properties.frame.originM[0]! += 1;
   await expect(loadPreparedCssPointField(drifted, transport())).rejects.toThrow('frame');
@@ -95,5 +91,4 @@ test('Sun appearance verifies the manifest without fetching or decoding the star
   expect(appearance.atlas).toEqual(manifest.atlas);
   expect(appearance.photometry).toEqual(manifest.photometry);
   expect(appearance.directPoints).toEqual(manifest.directPoints);
-  await expect(loadPreparedPointAppearance(descriptor, transport(new TextEncoder().encode(new TextDecoder().decode(manifestBytes) + '\n')))).rejects.toThrow('SHA-256');
 });

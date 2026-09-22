@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseHTML } from 'linkedom';
 import { createNavigationTreeController } from '../navigation-tree-client.mts';
 import { NAVIGATION_TREE_SCHEMA, type NavigationTreePayload } from '../../src/navigation/navigation-tree-schema.mts';

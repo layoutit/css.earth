@@ -361,6 +361,12 @@ const searchCategories = [
           introduction={system.id === SOLAR_SYSTEM_ID ? "The Sun and the objects bound to it by gravity: eight planets, their moons, dwarf planets, asteroids, trans-Neptunian objects and comets." : star.description}>
           <PlanetBreadcrumbs scope="system" systemId={system.id} />
         </PlanetCardHeader>)}
+        {/* A dataset that draws something the whole system shares, like a debris disc, belongs to the system, not to its star:
+            the shell moves those options here while the system is the selection, and back to the body card when it is not. */}
+        <div class="planet-lenses planet-system-datasets" data-system-datasets hidden>
+          <nav class="planet-observation-controls" aria-label="Datasets" data-system-dataset-options></nav>
+          <div class="planet-lens-details" data-system-dataset-details></div>
+        </div>
         <div data-solar-system-facts>
           <InformationTabs idPrefix={`${objectId}-solar-system`} group="solar-system"
             label="Solar System information" tabs={[{ id: 'factsheet', label: 'Factsheet' }]} />

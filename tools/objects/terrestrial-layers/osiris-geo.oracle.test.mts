@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { decodeOsirisGeo, decodeOsirisQuality, acceptOsirisQuality } from './osiris-geo.mts';
@@ -7,12 +7,16 @@ import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '
 import { requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 
 /** pvl and numpy as the oracle for the OSIRIS level-5 geometry and level-4 quality readers (67P). */
-const fixture = await readOracleFixture('pds3/osiris-geo.json');
-const [geoInput, qualityInput] = fixture.inputs;
-const geo = decodeOsirisGeo(await readFile(resolve(ORACLE_ROOT, geoInput.path)));
-const quality = decodeOsirisQuality(await readFile(resolve(ORACLE_ROOT, qualityInput.path)), geo);
-const planes = (group: string) => requireRecord(fixture.cases[group]);
-
+const loaded = await sourceLoad(async () => {
+  const fixture = await readOracleFixture('pds3/osiris-geo.json');
+  const [geoInput, qualityInput] = fixture.inputs;
+  const geo = decodeOsirisGeo(await readFile(resolve(ORACLE_ROOT, geoInput.path)));
+  const quality = decodeOsirisQuality(await readFile(resolve(ORACLE_ROOT, qualityInput.path)), geo);
+  const planes = (group: string) => requireRecord(fixture.cases[group]);
+  return { fixture, geoInput, qualityInput, geo, quality, planes };
+});
+const test = sourceTest(null, loaded);
+const { fixture, geoInput, qualityInput, geo, quality, planes } = loaded.values;
 test('the fixture is bound to the pinned OSIRIS products and their label identity', async () => {
   await assertPinnedInputs(fixture.inputs);
   const identity = requireRecord(fixture.cases.identity);

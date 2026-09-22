@@ -13,7 +13,9 @@ export function labelEligible(facts: { named?: boolean; notable?: boolean }): bo
 /** A prepared orientation reference (the Sun, then Earth) outranks every classification tier. */
 export function labelImportance(kind: string, major = false, orientationReference = 0): number {
   if (orientationReference > 0) return orientationReference;
-  if (['star', 'planet', 'environment', 'galaxy-cluster'].includes(kind)) return 3;
+  // A planet of another star is a planet of its system: the tier is the body's role in the system it belongs to, not whether
+  // that system is the Sun's. Without this an imaged exoplanet loses its caption at the scale that frames its own orbit.
+  if (['star', 'planet', 'exoplanet', 'environment', 'galaxy-cluster'].includes(kind)) return 3;
   if (major || kind === 'dwarf-planet') return 2;
   if (kind === 'asteroid') return 0;
   return 1;

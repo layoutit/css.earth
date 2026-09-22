@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
-import { test, before, after } from 'node:test';
+import { after } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest(), { before } = test;
 import { mkdtemp, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -7,7 +9,7 @@ import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
 import { requireArray, requireRecord } from '../../sources/source-values.mts';
-import { pinFile, writeProductRecord } from '../product-record.mts';
+import { fileSize, writeProductRecord } from '../product-record.mts';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli.mts';
 let root:string;
@@ -45,7 +47,7 @@ fits.HDUList([fits.PrimaryHDU(),h,table]).writeto(root/'tab.fits')
 `,root],{env:{...process.env,...tc.env}});
   const file=resolve(root,'cube.fits'),record=resolve(root,'input.product.json');
   await writeProductRecord(record,{telescope:'Fixture',stage:'fixture',inputs:[],parameters:{},software:[]},[{path:'cube.fits',file}]);
-  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},request:sourceRequest,satisfaction:sourceAssessment,files:[{path:'cube.fits',...await pinFile(file)},{path:'input.product.json',...await pinFile(record)}]}));
+  await writeFile(resolve(root,'result.json'),JSON.stringify({schema:'cssearth-telescope-delivery@1',product:'cube.fits',record:'input.product.json',receipt:'input.product.json',facts:{target:'fixture',verified:true},request:sourceRequest,satisfaction:sourceAssessment,files:[{path:'cube.fits',...await fileSize(file)},{path:'input.product.json',...await fileSize(record)}]}));
 });
 after(async()=>{await rm(root,{recursive:true,force:true});});
 async function extract(selection:OutputRequest,file='cube.fits'){

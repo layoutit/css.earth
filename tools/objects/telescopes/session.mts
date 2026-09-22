@@ -3,7 +3,7 @@ import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
-import { pinFile, readProductRecord, type ProductRecord } from '../product-record.mts';
+import { fileSize, readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
   type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';
 import { matchingProduct, loadQualifiedObservations, type QualifiedObservation } from './qualified-observations.mts';
@@ -139,7 +139,7 @@ function readSavedChoice(value: unknown, pick: number) {
   return { args, ...(choice.acquisitionKey === undefined ? {} : { selectedObservation: requireString(choice.observation) }), target: requireString(session.target, 'saved target'), key: choiceKey({ ...(choice.acquisitionKey === undefined ? {} : { acquisitionKey: requireString(choice.acquisitionKey) }), telescope: requireString(choice.telescope), mode: requireString(choice.mode),
     observation: requireString(choice.observation), program: requireString(choice.program) }) };
 }
-interface FilePin { readonly bytes: number; readonly sha256: string }
+interface FilePin { readonly bytes: number }
 interface ExportFile extends FilePin { readonly path: string; readonly original: string }
 interface Artifact {
   readonly file: string; readonly receipt: string; readonly record: string; readonly outputRoot: string;
@@ -169,9 +169,9 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
   if (!expected.has(artifact.file)) throw new Error('The chosen file is not a qualified output.');
   for (const evidence of record.evidence) {
     const path = resolve(artifact.outputRoot, evidence.receipt);
-    expected.set(path, evidence.receiptPin ?? await pinFile(path));
+    expected.set(path, await fileSize(path));
   }
-  for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await pinFile(path));
+  for (const path of [artifact.record, artifact.receipt, ...artifact.extraEvidence]) if (!expected.has(path)) expected.set(path, await fileSize(path));
   const files: ExportFile[] = [], realRoot = await realpath(root);
   for (const [file, pin] of expected) {
     relativeFile(realRoot, await realpath(file));
@@ -180,8 +180,8 @@ async function exportArtifact(root: string, destination: string, artifact: Artif
     progress(`${reuse ? 'Verifying' : 'Copying'} ${basename(file)} (${(pin.bytes / 1e6).toFixed(1)} MB)`);
     if (!reuse) await copyFile(file, target);
     relativeFile(await realpath(destination), await realpath(target));
-    const copied = await pinFile(target);
-    if (copied.sha256 !== pin.sha256 || copied.bytes !== pin.bytes) throw new Error(`Artifact changed or did not match its qualification: ${original}`);
+    const copied = await fileSize(target);
+    if (copied.bytes !== pin.bytes) throw new Error(`Artifact changed or did not match its qualification: ${original}`);
     files.push({ path, original, ...copied });
   }
   return { files, record };

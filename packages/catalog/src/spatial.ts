@@ -15,7 +15,6 @@ export function spatialPublicationId(reference: string): string {
 }
 
 export interface SpatialCatalogSource extends SpatialCitation {
-  readonly sha256: string;
   readonly bytes: number;
   /** Bibliographic entries transcribed from this pinned source; their URLs are not byte pins. */
   readonly references?: readonly SpatialCitation[];
@@ -85,7 +84,6 @@ export function parsePreparedGalaxyCatalog(input: unknown): PreparedGalaxyCatalo
     const source = record(item, 'source'), id = text(source.id, 'source id');
     unique(sourceIds, id, 'source');
     if (!/^https?:\/\//.test(text(source.url, 'source URL'))) throw new TypeError('Invalid catalogue source URL.');
-    if (!/^[a-f0-9]{64}$/.test(text(source.sha256, 'source digest'))) throw new TypeError('Invalid catalogue source digest.');
     if (!Number.isSafeInteger(positive(source.bytes, 'source byte count'))) throw new TypeError('Invalid source byte count.');
     text(source.citation, 'source citation');
     for (const value of source.references === undefined ? [] : array(source.references, 'source references')) {

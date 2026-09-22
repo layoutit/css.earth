@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "beta-pictoris-c",
+  "card": {
+    "text": "Giant planet 2.7 au from Beta Pictoris, found by radial velocity and confirmed by interferometry.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2010-04442",
+        "url": "https://arxiv.org/abs/2010.04442",
+        "label": "Nowak et al. 2020",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "first direct confirmation of a planet discovered through radial velocity"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Beta Pictoris c is a giant planet 2.7 au from its star, found by radial velocity and confirmed by GRAVITY. It is nine Jupiter masses on an eccentric 1,221-day orbit.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2010-04442",
+        "url": "https://arxiv.org/abs/2010.04442",
+        "label": "Nowak et al. 2020",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "first direct confirmation of a planet discovered through radial velocity"
+      },
+      {
+        "catalogueId": "arxiv-2109-10671",
+        "url": "https://arxiv.org/abs/2109.10671",
+        "label": "Lacour et al. 2021",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "a period of 1221 +/- 15 days, and an eccentricity of 0.32"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Model radius",
+      "summary": "A sphere of the model radius, glowing its own heat. No surface, colour or spin is measured."
+    }
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "beta-pictoris-b",
+  "card": {
+    "text": "Super-Jupiter 10 au from Beta Pictoris, imaged directly; the first exoplanet heard in radio.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-16720",
+        "url": "https://arxiv.org/abs/2609.16720",
+        "label": "Ortiz Ceballos et al. 2026",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "the first direct detection of auroral radio emission from an exoplanet"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Beta Pictoris b is a young super-Jupiter 10 au from its star, glowing at 1,740 K. MeerKAT heard its auroral radio bursts in 2025 and 2026, the first from any exoplanet.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-16720",
+        "url": "https://arxiv.org/abs/2609.16720",
+        "label": "Ortiz Ceballos et al. 2026",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "the first direct detection of auroral radio emission from an exoplanet"
+      },
+      {
+        "catalogueId": "arxiv-2109-10671",
+        "url": "https://arxiv.org/abs/2109.10671",
+        "label": "Lacour et al. 2021",
+        "checked": "2026-09-22",
+        "locator": "Table 2",
+        "quote": "a_b 9.93 au"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Model radius",
+      "summary": "A sphere of the model radius, glowing its own heat. No surface or colour is imaged; the spin is measured."
+    }
+  }
+}

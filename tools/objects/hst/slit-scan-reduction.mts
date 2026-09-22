@@ -23,14 +23,14 @@ export type AcrossSlitDirection = (typeof ACROSS_SLIT_DIRECTIONS)[number];
 export const acrossSlitSign = (direction: AcrossSlitDirection) => direction === 'ORIENTAT+90' ? 1 : -1;
 
 export interface ScanFrame {
-  readonly name: string; readonly uri: string; readonly bytes: number; readonly sha256: string;
+  readonly name: string; readonly uri: string; readonly bytes: number;
   readonly programme: string; readonly targetName: string;
   /** Why this frame takes no part, empty when it does. A rejection is pinned, so a run that disagrees is an error. */
   readonly rejected?: string;
 }
 /** A spectrum pinned beside the scan and divided into every extracted row to turn it into reflectance. */
 export interface ScanReference {
-  readonly name: string; readonly url: string; readonly bytes: number; readonly sha256: string;
+  readonly name: string; readonly url: string; readonly bytes: number;
   readonly wavelengthColumn: string; readonly fluxColumn: string; readonly note: string;
 }
 export interface ScanHorizons {
@@ -133,10 +133,10 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
 
   const referenceRow = requireRecord(row.reference, 'reference');
   const reference: ScanReference = { name: requireString(referenceRow.name, 'reference name'), url: requireString(referenceRow.url, 'reference url'),
-    bytes: requireFiniteNumber(referenceRow.bytes, 'reference bytes'), sha256: requireString(referenceRow.sha256, 'reference sha256'),
+    bytes: requireFiniteNumber(referenceRow.bytes, 'reference bytes'),
     wavelengthColumn: requireString(referenceRow.wavelengthColumn, 'wavelengthColumn'), fluxColumn: requireString(referenceRow.fluxColumn, 'fluxColumn'),
     note: requireString(referenceRow.note, 'reference note') };
-  if (!/^https:\/\//u.test(reference.url) || !/^[0-9a-f]{64}$/u.test(reference.sha256)) throw new TypeError('The reference spectrum is pinned by https URL and sha256.');
+  if (!/^https:\/\//u.test(reference.url)) throw new TypeError('The reference spectrum names an https URL.');
 
   const bandRow = requireRecord(row.band, 'band');
   const readWindowAngstrom = window(bandRow.readWindowAngstrom, 'readWindowAngstrom');
@@ -184,10 +184,10 @@ export function parseSlitScan(value: unknown): SlitScanDefinition {
     const frame = requireRecord(entry, 'frame'), name = requireString(frame.name, 'frame name');
     if (!/^[a-z0-9]+_x2d\.fits$/u.test(name)) throw new TypeError(`${name} is not a rectified STIS product.`);
     if (frame.uri !== `mast:HST/product/${name}`) throw new TypeError(`${name} is pinned by its own MAST URI.`);
-    const bytes = requireFiniteNumber(frame.bytes, 'frame bytes'), sha256 = requireString(frame.sha256, 'frame sha256');
-    if (!Number.isSafeInteger(bytes) || bytes < 1 || !/^[0-9a-f]{64}$/u.test(sha256)) throw new TypeError(`${name} is pinned by byte count and sha256.`);
+    const bytes = requireFiniteNumber(frame.bytes, 'frame bytes');
+    if (!Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`${name} carries its byte count.`);
     const rejected = frame.rejected === undefined ? undefined : requireString(frame.rejected, 'frame rejected');
-    return { name, uri: frame.uri, bytes, sha256, programme: requireString(frame.programme, 'programme'), targetName: requireString(frame.targetName, 'targetName'),
+    return { name, uri: frame.uri, bytes, programme: requireString(frame.programme, 'programme'), targetName: requireString(frame.targetName, 'targetName'),
       ...rejected === undefined ? {} : { rejected } };
   });
   if (!frames.length) throw new TypeError('A scan pins at least one frame.');

@@ -149,7 +149,7 @@ export async function runSpec3(id: string, band: string, work: string, options: 
   const steps = spec3Steps(setting, fine, cubeInterval), cubeSettings = steps.cube_build ?? {};
   const label = options.wavelengthMicrometres ? `-${options.wavelengthMicrometres.join('-')}` : '';
   const output = resolve(work, fine === undefined ? `spec3${label}` : `spec3${label}-${fine}`), crfAssociation = resolve(work, `${entry.observation}${label}_crf_asn.json`);
-  const crfInputs: ProductInput[] = crfRecord.outputs.map(item => ({ role: 'outlier-corrected exposure', identity: `product:${id}/spec3-crf/${item.path}`, bytes: item.bytes, sha256: item.sha256 }));
+  const crfInputs: ProductInput[] = crfRecord.outputs.map(item => ({ role: 'outlier-corrected exposure', identity: `product:${id}/spec3-crf/${item.path}`, bytes: item.bytes }));
   const run: ProductRun = { telescope: 'JWST', stage: 'spec3-cube', inputs: [...crfInputs, ...(archiveGridInput ? [archiveGridInput] : [])],
     parameters: { program: program.id, band: entry.band, observation: entry.observation, crdsContext: program.crdsContext, steps,
       ...(options.wavelengthMicrometres ? { requestedWavelengthMicrometres: options.wavelengthMicrometres } : {}) },
@@ -218,7 +218,7 @@ export async function compareCubeWithMast(id: string, band: string, local: strin
   const record = await recordProductEvidence(local, 'archive-agreement', path, `These level-2 exposures, this CRDS context and this pinned pipeline reproduce ${scope} ` +
     `level-3 cube of this observation, compared sample by sample on aligned wavelength planes; the receipt holds the coverage, the identical share and the correlation. It establishes that ` +
     `MAST's software was run the way MAST ran it, and nothing about the body the cube shows.`);
-  const evidence = record.evidence.findLast(entry => entry.kind === 'archive-agreement' && entry.receiptPin?.sha256)!;
+  const evidence = record.evidence.findLast(entry => entry.kind === 'archive-agreement')!;
   return { path: resolve(dirname(local), evidence.receipt), receipt, record };
 }
 

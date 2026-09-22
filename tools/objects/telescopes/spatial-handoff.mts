@@ -28,7 +28,7 @@ async function validateSpatialObject(objectPath:string,expected:SpatialKind|unde
     if(lexical==='..'||lexical.startsWith('../'))throw new Error('Spatial resource escapes its object package');
     const rel=relative(rootReal,await realpath(file));
     if(isAbsolute(path)||rel==='..'||rel.startsWith('../')||!rel)throw new Error('Spatial resource escapes its object package');
-    const bytes=await readFile(file);checked.set(path,{bytes,pin:{role:'physical object input',identity:file,sha256:sha256(bytes),bytes:bytes.length}});return bytes;
+    const bytes=await readFile(file);checked.set(path,{bytes,pin:{role:'physical object input',identity:file,bytes:bytes.length}});return bytes;
   }
   const recipePath=requireString(preparation.source),recipeBytes=await read(recipePath);
   const recipe=requireRecord(JSON.parse(recipeBytes.toString()));
@@ -74,11 +74,11 @@ export async function exportSpatialObject(objectPath:string,kind:SpatialKind,out
     const {source,bytes,descriptor,checked,payload,compiled}=value;
     const outputs=[{path:'object.json',file:resolve(staging,'object.json')}];await writeFile(outputs[0].file,bytes);
     for(const [path,item] of checked){const file=resolve(staging,path);await mkdir(dirname(file),{recursive:true});await writeFile(file,item.bytes);outputs.push({path,file});}
-    for(const item of checked.values())if(sha256(await readFile(item.pin.identity))!==item.pin.sha256)throw new Error('Spatial source changed during export');
+    for(const item of checked.values())if((await readFile(item.pin.identity)).length!==item.pin.bytes)throw new Error('Spatial source changed during export');
     if(sha256(await readFile(source))!==sha256(bytes))throw new Error('Spatial descriptor changed during export');
     const implementation=sha256(Buffer.concat([await readFile(new URL('spatial-handoff.mts',import.meta.url)),...await Promise.all(Object.keys(compiled.metafile.inputs).sort().map(file=>readFile(file)))]));
     const frame=value.kind==='volume-lens-bank'?requireRecord(requireRecord(descriptor.properties).frame,'physical frame'):value.payload.frame;
-    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,sha256:sha256(bytes),bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance:payload.provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:implementation}]},outputs);
+    await writeProductRecord(resolve(staging,'output.product.json'),{telescope:'css.earth physical source package',stage:'telescope-spatial-handoff',inputs:[{role:'physical descriptor',identity:source,bytes:bytes.length},...Array.from(checked.values(),item=>item.pin)],parameters:{kind,target:descriptor.id,frame,provenance:payload.provenance,...(value.kind==='volume-lens-bank'?{attachedTo:value.payload.attachedTo??null,defaultLens:value.payload.defaultLens,lenses:value.payload.lenses.map(lens=>lens.id)}:{}),interpretation:'Existing prepared physical object; no new depth inference, reconstruction or qualification of an observation.',scope:'Portable renderer resources, source recipe and credits; raw source datasets are referenced, not bundled.'},software:[{name:'css.earth existing physical object loader',version:implementation}]},outputs);
     await rmdir(destination);await rename(staging,destination);
     return {directory:destination,object:resolve(destination,'object.json'),receipt:resolve(destination,'output.product.json'),kind};
   }catch(error){await rm(staging,{recursive:true,force:true});await rmdir(destination).catch(()=>{});throw error;}

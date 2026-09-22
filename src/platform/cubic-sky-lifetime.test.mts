@@ -1,6 +1,7 @@
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { Surface, orbitFixture } from "./test/orbit-fixture.mts";
 import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";
 import { errorMessage, type TrackballMetrics } from "../renderers/css/navigation/types.ts";

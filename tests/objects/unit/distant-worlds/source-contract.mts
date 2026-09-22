@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { parseSourceManifest, verifySources } from '../../../../tools/objects/dist/operations.js';

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { repairImageDemDiagonals, measureImageDemReduction } from './image-dem-reduction.mts';
 import { createIndexedShape } from './obj-shape.mts';
 import { validateObservedReduction } from './open-surface.mts';

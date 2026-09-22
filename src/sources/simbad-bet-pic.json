@@ -1,0 +1,35 @@
+{
+  "id": "simbad-bet-pic",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "SIMBAD basic record for * bet Pic (Beta Pictoris, HIP 27321, HD 39060)",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP+27321",
+      "label": "SIMBAD"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/beta-pictoris/text.json",
+      "locator": "/card/sources/0"
+    },
+    {
+      "url": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync?request=doQuery&lang=adql&format=json&query=SELECT+b.main_id,b.ra,b.dec,b.coo_bibcode,b.plx_value,b.plx_bibcode,b.pmra,b.pmdec,b.rvz_radvel,b.sp_type,b.sp_bibcode+FROM+basic+b+JOIN+ident+i+ON+i.oidref=b.oid+WHERE+i.id='*+bet+Pic'",
+      "checkedOn": "2026-09-22",
+      "locator": "A6V (Gray et al. 2006, AJ 132, 161); ICRS 86.82119870875, -51.066511426388885 (van Leeuwen 2007); parallax 50.9307 +/- 0.1482 mas, proper motion 5.16, 84.041 mas/yr (Gaia DR3); radial velocity 16.84 +/- 0.34 km/s (Gaia DR3)"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "CDS, Strasbourg; spectral type, astrometry and radial velocity with the references SIMBAD lists",
+      "scope": "citation",
+      "evidence": "src/objects/beta-pictoris/text.json#/card/sources/0"
+    }
+  ],
+  "publisher": "Centre de Données astronomiques de Strasbourg"
+}

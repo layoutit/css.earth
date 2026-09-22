@@ -41,7 +41,7 @@ const DEGREE = Math.PI / 180;
 
 // ---- the pinned definition ----------------------------------------------------------------------------------------
 /** One file the stage reads, pinned by where the archive keeps it and by what it is. */
-export interface TimeTagFile { readonly role: string; readonly uri: string; readonly name: string; readonly bytes: number; readonly sha256: string }
+export interface TimeTagFile { readonly role: string; readonly uri: string; readonly name: string; readonly bytes: number }
 /** The requests that place the target, and the file beside the definition that holds the raw text they returned. */
 export interface TimeTagHorizons {
   readonly observer: string; readonly target: string; readonly quantities: string; readonly responses: string;
@@ -133,10 +133,9 @@ export function parseTimeTagDefinition(value: unknown): TimeTagDefinition {
   const id = requireString(row.id, 'Definition id');
   if (!NAME.test(id)) throw new TypeError(`${id} is not a definition id.`);
   const files = requireArray(row.files, 'Files').map(raw => {
-    const file = requireRecord(raw, 'File'), sha256 = requireString(file.sha256, 'File sha256');
-    if (!HEX64.test(sha256)) throw new TypeError('A pinned file carries a sha256.');
+    const file = requireRecord(raw, 'File');
     return { role: requireString(file.role, 'File role'), uri: requireString(file.uri, 'File uri'), name: requireString(file.name, 'File name'),
-      bytes: wholeNumber(file.bytes, 'File bytes'), sha256 };
+      bytes: wholeNumber(file.bytes, 'File bytes') };
   });
   if (!files.some(file => file.role === 'events')) throw new TypeError('A TIME-TAG definition pins the events file.');
   const horizonsRow = requireRecord(row.horizons, 'Horizons');

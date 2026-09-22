@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readOracleFixture } from '../../oracles/fixture.mts';
 import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 import { eigencurveBasis } from './eigenmap-fit.mts';

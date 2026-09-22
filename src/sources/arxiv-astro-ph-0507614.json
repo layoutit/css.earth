@@ -1,0 +1,45 @@
+{
+  "id": "arxiv-astro-ph-0507614",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sirianni et al. (2005): The Photometric Performance and Calibration of the HST Advanced Camera for Surveys",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0507614"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/444553"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0507614",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/444553",
+      "label": "Publications of the Astronomical Society of the Pacific 117, 1049"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0507614",
+      "checkedOn": "2026-09-22",
+      "locator": "Table 11, synthetic zeropoints for HRC, VEGAMAG: F435W 25.185, F606W 25.893, F814W 24.849; Section 7: ACSmag = -2.5 log(total count rate in e-/s) + Zpt, for the count rate in an infinite aperture"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "M. Sirianni",
+    "M. J. Jee",
+    "N. Benitez",
+    "J. P. Blakeslee",
+    "A. R. Martel"
+  ]
+}

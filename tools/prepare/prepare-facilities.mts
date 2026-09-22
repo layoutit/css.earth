@@ -129,7 +129,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       restoreMissing: path => restoreFactsheetEvidence({ objectDirectory, path, manifest, transport: sourceTransport }),
     });
     // The published facts in prepared/content.json are written from this same panel by prepare:factsheets, which
-    // prepare:object-json runs first; tools/prepare/prepare-factsheets.test.mts proves the committed copy is current.
+    // prepare:object-json runs first.
     metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
     factsheets.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);

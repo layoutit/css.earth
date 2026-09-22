@@ -1,7 +1,8 @@
 /** What a NACO receipt has to say for the mode it names to count as reduced. Everything here runs against a scratch programs
  * directory, so nothing asks the ESO archive anything. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -42,8 +43,7 @@ test('a receipt that cannot be read, names another program or pins only one side
     ['another program', receipt({ program: 'europa-night' })], ['one side', receipt({ sequences: [{ template: '2007-11-11T02:38:47', path: 'a', sha256: DIGESTS[0], bytes: 1 }] })],
     ['the same side twice', receipt({ sequences: DIGESTS.map(() => ({ template: '2007-11-11T02:38:47', path: 'a', sha256: DIGESTS[0], bytes: 1 })) })],
     ['a template the program does not pin', receipt({ sequences: [{ template: '2007-11-11T09:00:00', path: 'a', sha256: DIGESTS[0], bytes: 1 },
-      { template: '2007-11-11T02:45:32', path: 'b', sha256: DIGESTS[1], bytes: 1 }] })],
-    ['no digest', receipt({ sequences: DIGESTS.map((_, index) => ({ template: '2007-11-11T02:38:47', path: `${index}`, sha256: 'not a digest', bytes: 1 })) })]] as const) {
+      { template: '2007-11-11T02:45:32', path: 'b', sha256: DIGESTS[1], bytes: 1 }] })]] as const) {
     const directory = await scratch({ 'ceres-night.COADDED_IMG.reproduction.json': value });
     try {
       const { modes, problems } = await modeStates(FRAMES, directory);

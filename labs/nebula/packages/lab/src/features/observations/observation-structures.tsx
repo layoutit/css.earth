@@ -22,7 +22,7 @@ const defaults: Filters = { scale: 2, area: 12, contrast: 0, elongation: 1, morp
 const emptyIds = new Set<string>();
 const title = (value: string) => value.charAt(0).toUpperCase() + value.slice(1);
 const registered = (image: StructureImage) => ({ imageToFrame: image.imageToFrame, source: { width: image.nativeWidth, height: image.nativeHeight } });
-const identity = (image: StructureImage) => ({ id: image.id, source: { sha256: image.sourceSha256 } });
+const identity = (image: StructureImage) => ({ id: image.id, source: { url: image.sourceUrl } });
 const asset = (image: StructureImage, file: string, hash = image.mapSha256) => `${localFile(`${image.directory}/${file}`)}?v=${hash}`;
 
 const StructurePlane = memo(function StructurePlane({ image, map, matrix, active, layer, visibleIds, selectedId, highlights, onSelect, onError,

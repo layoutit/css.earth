@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-linear-rotation@1",
+  "rightAscensionDegrees": 203.1574813737809,
+  "declinationDegrees": -18.507676987880423,
+  "referenceEpochJdTt": 2461286.5,
+  "primeMeridianDegrees": 0,
+  "spinRateDegreesPerDay": 960.0,
+  "source": "https://arxiv.org/abs/2607.13133",
+  "qualification": "Rotation period 9.00 +/- 0.13 h from the joint sinusoidal fit to JWST/NIRCam F210M and F410M photometry of the planet over 16.2 h (Zhou et al. 2026, arXiv:2607.13133): 360 / (9.00 / 24) = 960 degrees per day. The pole is the orbit normal of packages/astronomy/data/bodies/beta-pictoris-b.json, spinning prograde: Zhou et al. find the spin axis near equator-on with no evidence of misalignment from the orbit (i_p > 62 degrees), and Kraus et al. (2020) align the star's spin with the orbit to 3 +/- 4 degrees; the planet's own axis direction on the sky and its spin sense are not measured. The prime meridian is arbitrary: no surface feature is mapped."
+}

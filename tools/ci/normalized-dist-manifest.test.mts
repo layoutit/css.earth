@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { buildNormalizedDistManifest, normalizeViteHashes } from './normalized-dist-manifest.mts';
 
 async function withDistDir(files: Record<string, string>, run: (dir: string) => Promise<void>) {

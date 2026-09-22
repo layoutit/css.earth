@@ -1,6 +1,7 @@
 import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
 import { SCENE_OBJECTS } from '../objects.mts';

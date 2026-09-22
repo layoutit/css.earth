@@ -80,7 +80,7 @@ and the View more/View less disclosure.
 ## Checks
 
 ```sh
-pnpm test:sources
+pnpm test:node
 ```
 
 For changes to ordering or display, also run the affected factsheet and shell

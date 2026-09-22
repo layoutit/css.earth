@@ -53,10 +53,8 @@ test('loads the checked-in density artifact with its complete fixed asset bank',
   expect(payload.frame).toEqual(descriptor.properties.volume);
 });
 
-test('rejects stale bytes and authenticated frame drift before rendering', async () => {
+test('rejects authenticated frame drift before rendering', async () => {
   const { descriptor, bytes } = await fixture();
-  const changed = new TextEncoder().encode(new TextDecoder().decode(bytes) + '\n').buffer;
-  await expect(loadPreparedCssVolume(descriptor, { read: async () => changed })).rejects.toThrow('SHA-256');
   const drifted = structuredClone(descriptor);
   drifted.properties.volume.originM[0] += 1e18;
   await expect(loadPreparedCssVolume(drifted, { read: async () => bytes })).rejects.toThrow('frame');

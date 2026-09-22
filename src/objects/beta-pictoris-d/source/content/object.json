@@ -1,0 +1,130 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "beta-pictoris-d",
+  "displayName": "Beta Pictoris d",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.26 Jupiter radii (model)",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://arxiv.org/abs/2606.23801",
+          "label": "Sutlieff et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "about a century",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://arxiv.org/abs/2606.23801",
+          "label": "Sutlieff et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "26 au",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://arxiv.org/abs/2606.23801",
+          "label": "Sutlieff et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "2.4 Jupiter masses (model)",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://arxiv.org/abs/2606.23801",
+          "label": "Sutlieff et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "600 K",
+        "source": {
+          "catalogueId": "arxiv-2606-23801",
+          "url": "https://arxiv.org/abs/2606.23801",
+          "label": "Sutlieff et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "beta-pictoris-d-lens-shape.webp",
+        "surface": "beta-pictoris-d-surface-shape@2x.webp",
+        "poles": "beta-pictoris-d-poles-shape@2x.webp",
+        "source": {
+          "id": "beta-pictoris-d-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2109.10671"
+        },
+        "falseColor": false,
+        "notes": "No image of this planet's surface exists: it is a faint point 1.1 arcseconds from its star in the 2025 images. Its size, 1.26 Jupiter radii, and its mass are evolutionary-model estimates from its photometry (see the ledger). Its orbit here is circular at the published semi-major axis, phased to the six measured positions, a display approximation of a still poorly constrained orbit. No spin is measured; the display axis is its orbit normal."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lacour et al. (2021), A&A 654, L2: orbits and masses of planets b and c from GRAVITY astrometry and radial velocities",
+      "href": "https://arxiv.org/abs/2109.10671"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Sutlieff, Bonse et al. (2026), arXiv:2606.23801: the direct-imaging discovery of planet d",
+      "href": "https://arxiv.org/abs/2606.23801"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2606.23801",
+      "credit": "Sutlieff, Bonse et al. (2026), arXiv:2606.23801"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/beta-pictoris-d.json",
+      "credit": "Model radius and mass from photometry (Sutlieff et al. 2026); published semi-major axis, inclination and node with a circular display orbit phased to the measured positions; no measured rotation (display convention)"
+    }
+  }
+}

@@ -154,7 +154,7 @@ After changing either kind of attribution, use the
 For source bindings or product-lineage changes, run:
 
 ```sh
-pnpm test:sources
+pnpm test:node
 ```
 The suite checks tampered inputs/outputs/recipes, recovery semantics, compound
 Mercury coverage, Saturn material dependencies, Earth noise identity, preview

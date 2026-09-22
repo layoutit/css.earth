@@ -1,0 +1,91 @@
+{
+  "schema": "cssearth-acquisition-plan@1",
+  "operations": [
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "presentation/InterVariable.ttf",
+      "url": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-source.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, ref_epoch, ra, dec, parallax, parallax_error, pmra, pmdec, radial_velocity, radial_velocity_error, phot_g_mean_mag, bp_rp, teff_gspphot, has_xp_sampled, ruwe FROM gaiadr3.gaia_source WHERE source_id = 4792774797545800832"
+      },
+      "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-astrophysical-parameters.csv",
+      "url": "https://gea.esac.esa.int/tap-server/tap/sync",
+      "form": {
+        "REQUEST": "doQuery",
+        "LANG": "ADQL",
+        "FORMAT": "csv",
+        "QUERY": "SELECT source_id, teff_gspphot, teff_gspphot_lower, teff_gspphot_upper, radius_gspphot, radius_gspphot_lower, radius_gspphot_upper, mass_flame, mass_flame_lower, mass_flame_upper, radius_flame, radius_flame_lower, radius_flame_upper, lum_flame FROM gaiadr3.astrophysical_parameters WHERE source_id = 4792774797545800832"
+      },
+      "requiredPrefix": "source_id,"
+    },
+    {
+      "kind": "download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/gaia-dr3-xp-sampled.csv",
+      "url": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=4792774797545800832&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3"
+    },
+    {
+      "kind": "request-download",
+      "groups": [
+        "restore",
+        "refresh"
+      ],
+      "path": "photometry/claret-2011-v-quadratic.tsv",
+      "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
+      "form": {
+        "-source": "J/A+A/529/A75/table-af",
+        "-out.max": "500",
+        "Teff": "8000..8250",
+        "logg": "4.0..4.5",
+        "Z": "=0",
+        "xi": "=2",
+        "Filt": "V",
+        "Met": "L",
+        "Mod": "A",
+        "-out": "logg,Teff,Z,xi,a,b,Filt,Met,Mod"
+      },
+      "requiredText": [
+        "logg\tTeff"
+      ],
+      "replacements": [
+        {
+          "pattern": "^#.*\\n",
+          "flags": "gm",
+          "replacement": ""
+        },
+        {
+          "pattern": "^\\s*\\n",
+          "flags": "gm",
+          "replacement": ""
+        }
+      ]
+    }
+  ]
+}

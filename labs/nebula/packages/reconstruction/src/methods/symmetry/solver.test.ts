@@ -34,3 +34,44 @@ test('a projected hollow cylindrical shell recovers radial depth instead of a ph
   const extrusion = inferEmission({ grid, prior, image, tau: 0, iterations: 10 });
   assert.equal(extrusion.volume[(12 * grid.height + 12) * grid.width + 5], extrusion.volume[(20 * grid.height + 12) * grid.width + 5]);
 });
+
+test('a pixel with no weight does not pull the voxels it sees to zero: the symmetry groups fill them from the rest', () => {
+  // A ring about the x axis, projected; then the image is blanked (written as zero) over one band of rows, as a coronagraph mask
+  // would be. Weighted, the ring's voxels seen only through that band are recovered from the ring's other voxels; unweighted,
+  // the zeros are fitted as data and pull them down.
+  const grid = { width: 12, height: 25, depth: 25 };
+  const prior = { axis: [1, 0, 0] as const, center: [5.5, 12, 12] as const, binWidth: 1 };
+  const truth = new Float32Array(grid.width * grid.height * grid.depth);
+  for (let z = 0; z < grid.depth; z++) for (let y = 0; y < grid.height; y++) for (let x = 2; x < 10; x++) {
+    const radius = Math.hypot(y - 12, z - 12);
+    if (radius >= 7 && radius < 9) truth[(z * grid.height + y) * grid.width + x] = 0.3;
+  }
+  const image = projectEmission(truth, grid), weights = new Float32Array(image.length).fill(1);
+  for (let y = 10; y <= 14; y++) for (let x = 0; x < grid.width; x++) { image[y * grid.width + x] = 0; weights[y * grid.width + x] = 0; }
+  // The ring's near and far walls on the line of sight through the blanked centre row.
+  const hidden = (volume: Float32Array) => volume[(20 * grid.height + 12) * grid.width + 5]! + volume[(4 * grid.height + 12) * grid.width + 5]!;
+  const weighted = inferEmission({ grid, prior, image, weights, tau: 0.001, iterations: 150 });
+  const unweighted = inferEmission({ grid, prior, image, tau: 0.001, iterations: 150 });
+  assert.ok(hidden(weighted.volume) > 0.3, `weighted hidden walls ${hidden(weighted.volume)}`);
+  assert.ok(hidden(weighted.volume) > 3 * hidden(unweighted.volume), `weighted ${hidden(weighted.volume)}, unweighted ${hidden(unweighted.volume)}`);
+});
+
+test('only voxels of fillable pixels are filled: beyond the footprint the volume stays empty', () => {
+  const grid = { width: 12, height: 25, depth: 25 };
+  const prior = { axis: [1, 0, 0] as const, center: [5.5, 12, 12] as const, binWidth: 1 };
+  const truth = new Float32Array(grid.width * grid.height * grid.depth);
+  for (let z = 0; z < grid.depth; z++) for (let y = 0; y < grid.height; y++) for (let x = 2; x < 10; x++) {
+    const radius = Math.hypot(y - 12, z - 12);
+    if (radius >= 7 && radius < 9) truth[(z * grid.height + y) * grid.width + x] = 0.3;
+  }
+  const image = projectEmission(truth, grid), weights = new Float32Array(image.length).fill(1), fillable = new Uint8Array(image.length);
+  // Rows 10-14 are a blank centre (fillable); rows 0-3 lie beyond the footprint (not fillable).
+  for (let x = 0; x < grid.width; x++) {
+    for (let y = 10; y <= 14; y++) { image[y * grid.width + x] = 0; weights[y * grid.width + x] = 0; fillable[y * grid.width + x] = 1; }
+    for (let y = 0; y <= 3; y++) { image[y * grid.width + x] = 0; weights[y * grid.width + x] = 0; }
+  }
+  const result = inferEmission({ grid, prior, image, weights, fillable, tau: 0.001, iterations: 150 });
+  const column = (y: number) => { let total = 0; for (let z = 0; z < grid.depth; z++) total += result.volume[(z * grid.height + y) * grid.width + 5]!; return total; };
+  assert.ok(column(12) > 0.3, `blank centre filled: ${column(12)}`);
+  assert.equal(column(2), 0, 'beyond the footprint nothing is filled');
+});

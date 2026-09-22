@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -120,7 +121,7 @@ test('the comparison record names its paper, figure pixels, rows and frames', as
   assert.equal(spec.lensId, 'zimpol'); assert.equal(spec.columns.filter(column => column.frame).length, 4);
   for (const [change, message] of [
     [{ schema: 'other' }, /schema/], [{ source: 'https://example.org/paper' }, /DOI/],
-    [{ document: { ...iris.document, sha256: 'abc' } }, /SHA-256/], [{ rows: { image: 1, model: 1, count: 3 } }, /distinct rows/],
+    [{ rows: { image: 1, model: 1, count: 3 } }, /distinct rows/],
     [{ columns: iris.columns.map((column: object) => ({ ...column, frame: null })) }, /At least one figure column/],
     [{ columns: iris.columns.map((column: object, index: number) => ({ ...column, band: index === 0 ? 1 : 0 })) }, /band by band/],
     [{ columns: iris.columns.map((column: object) => ({ ...column, band: -1 })) }, /whole number/],

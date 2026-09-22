@@ -43,7 +43,8 @@ export function scanFitsCards(bytes: Buffer, start: number, visit: (key: string,
       return end;
     }
     if (key === 'HIERARCH') { pending = [esoHierarchy(card).key, card, []]; continue; }
-    if (card[8] === '=') {
+    // COMMENT and HISTORY are commentary whatever follows them (FITS 4.0, section 4.4.2.4): drizzlepac writes rules of `=`.
+    if (card[8] === '=' && key !== 'COMMENT' && key !== 'HISTORY') {
       // Released SDO synoptic ORIGIN/TELESCOP cards put the opening quote in
       // column 10. Preserve this bounded archive exception without losing it.
       if (!/^[A-Z0-9_-]{1,8}$/u.test(key) || (card[9] !== ' ' && card[9] !== "'")) throw new Error('Invalid FITS value card.');

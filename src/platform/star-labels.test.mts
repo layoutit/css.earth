@@ -1,6 +1,7 @@
 import {requireRecord} from '../../tools/sources/source-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createExposure, screenFactor, starPresentation } from "./star-photometry.mts";
 import { STAR_LABEL_POLICY, selectStarLabel } from "./star-labels.mts";
 

@@ -83,6 +83,50 @@ export async function readSkyPlane(mosaic: string, request: SkyPlaneRequest): Pr
   return { size, halfUnits, step, plane, background, noise, backgroundPixels: samples.length, mosaicArcsecPerPixel: arcsecPerPixel, starPixel: [star[0], star[1]], unit };
 }
 
+/** A deposited image with no sky coordinates, read about its star onto the same sky plane as `readSkyPlane`: an author's
+ * reduced array whose README states the star's pixel, the plate scale and the orientation. `north-up-east-left` means row
+ * index grows north and column index grows west, as a sky image shown with north up and east left. */
+export interface ArrayPlaneRequest {
+  readonly pixelArcsec: number; readonly orientation: 'north-up-east-left' | 'north-down-east-left' | 'north-up-east-right' | 'north-down-east-right';
+  /** The star's pixel, zero-based (x column, y row); an array centre is ((width - 1) / 2, (height - 1) / 2). */
+  readonly starPixel: readonly [number, number] | 'array-centre';
+  readonly arcsecPerUnit: number; readonly halfUnits: number; readonly size: number; readonly backgroundAnnulusArcsec: readonly [number, number];
+}
+export async function readArrayPlane(path: string, request: ArrayPlaneRequest): Promise<SkyPlane> {
+  const { size, halfUnits, arcsecPerUnit, pixelArcsec } = request;
+  if (!(size >= 16 && Number.isInteger(size)) || !(halfUnits > 0) || !(arcsecPerUnit > 0) || !(pixelArcsec > 0)) throw new RangeError('Invalid array plane request.');
+  const hdus = await readFitsFileHdus(path), image = hdus.find(hdu => hdu.dimensions.length === 2);
+  if (!image) throw new Error(`${path} has no two-dimensional image.`);
+  const [width, height] = image.dimensions as [number, number];
+  const { values } = await readFitsFileRegion(path, image, { x0: 0, y0: 0, width, height }, 1024 ** 3);
+  const star = request.starPixel === 'array-centre' ? [(width - 1) / 2, (height - 1) / 2] as const : request.starPixel;
+  // Sky plane x grows west, y north; the orientation says which way the array's axes run on the sky.
+  const westSign = request.orientation.endsWith('east-left') ? 1 : -1, northSign = request.orientation.startsWith('north-up') ? 1 : -1;
+  const pixelOf = (xArcsecWest: number, yArcsecNorth: number) => [star[0] + westSign * xArcsecWest / pixelArcsec, star[1] + northSign * yArcsecNorth / pixelArcsec] as const;
+  const samples: number[] = [];
+  for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
+    const r = Math.hypot(x - star[0], y - star[1]) * pixelArcsec, v = values[y * width + x]!;
+    if (r >= request.backgroundAnnulusArcsec[0] && r < request.backgroundAnnulusArcsec[1] && Number.isFinite(v)) samples.push(v);
+  }
+  if (samples.length < 100) throw new Error(`Only ${samples.length} pixels lie in the background annulus.`);
+  samples.sort((a, b) => a - b);
+  const background = quantile(samples, 0.5);
+  const deviations = samples.map(v => Math.abs(v - background)).sort((a, b) => a - b), noise = 1.4826 * quantile(deviations, 0.5);
+  const bilinear = (x: number, y: number) => {
+    const ix = Math.floor(x), iy = Math.floor(y);
+    if (ix < 0 || iy < 0 || ix + 1 >= width || iy + 1 >= height) return NaN;
+    const a = x - ix, b = y - iy, o = iy * width + ix;
+    return (1 - a) * (1 - b) * values[o]! + a * (1 - b) * values[o + 1]! + (1 - a) * b * values[o + width]! + a * b * values[o + width + 1]!;
+  };
+  const plane = new Float32Array(size * size), step = 2 * halfUnits / size;
+  for (let j = 0; j < size; j++) for (let i = 0; i < size; i++) {
+    const [px, py] = pixelOf((-halfUnits + (i + 0.5) * step) * arcsecPerUnit, (-halfUnits + (j + 0.5) * step) * arcsecPerUnit);
+    plane[j * size + i] = bilinear(px, py) - background;
+  }
+  const unit = typeof image.header.BUNIT === 'string' ? image.header.BUNIT : '';
+  return { size, halfUnits, step, plane, background, noise, backgroundPixels: samples.length, mosaicArcsecPerPixel: pixelArcsec, starPixel: [star[0], star[1]], unit };
+}
+
 export interface RingGeometry {
   /** Ridge samples: azimuth (degrees east of north), radius of peak brightness (units) and that peak over the noise. */
   readonly ridge: readonly { readonly azimuthDeg: number; readonly radiusUnits: number; readonly peakOverNoise: number }[];

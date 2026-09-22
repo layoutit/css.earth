@@ -1,0 +1,175 @@
+{
+  "schema": "cssearth-object-content@1",
+  "version": 1,
+  "id": "beta-pictoris-b",
+  "displayName": "Beta Pictoris b",
+  "panel": {
+    "facts": [
+      {
+        "id": "radius",
+        "label": "Radius",
+        "value": "1.45 Jupiter radii",
+        "source": {
+          "catalogueId": "arxiv-1511-02894",
+          "url": "https://arxiv.org/abs/1511.02894",
+          "label": "Morzinski et al. 2015",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "radiusKm; radiusSource"
+        }
+      },
+      {
+        "id": "period",
+        "label": "Year",
+        "value": "23.5 years",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "orbitalPeriodDays; orbitalPeriodSource"
+        }
+      },
+      {
+        "id": "distance",
+        "label": "Distance from its star",
+        "value": "10.0 au",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "semiMajorAxisSource"
+        }
+      },
+      {
+        "id": "mass",
+        "label": "Mass",
+        "value": "11.9 Jupiter masses",
+        "source": {
+          "catalogueId": "arxiv-2109-10671",
+          "url": "https://arxiv.org/abs/2109.10671",
+          "label": "Lacour et al. 2021",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "massSource"
+        }
+      }
+    ],
+    "moreFacts": [
+      {
+        "id": "temperature",
+        "label": "Temperature",
+        "value": "1,740 K",
+        "source": {
+          "catalogueId": "arxiv-1912-04651",
+          "url": "https://arxiv.org/abs/1912.04651",
+          "label": "GRAVITY Collaboration 2020",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "effectiveTemperatureK; effectiveTemperatureSource"
+        }
+      },
+      {
+        "id": "rotation",
+        "label": "Day",
+        "value": "9.00 hours",
+        "source": {
+          "catalogueId": "arxiv-2607-13133",
+          "url": "https://arxiv.org/abs/2607.13133",
+          "label": "Zhou et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/preparation/rotation.json",
+          "locator": "spinRateDegreesPerDay; qualification"
+        }
+      },
+      {
+        "id": "magnetic-field",
+        "label": "Magnetic field",
+        "value": "at least 1.25 kilogauss",
+        "source": {
+          "catalogueId": "arxiv-2609-16720",
+          "url": "https://arxiv.org/abs/2609.16720",
+          "label": "Ortiz Ceballos et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "radio; radioSource"
+        }
+      },
+      {
+        "id": "radio",
+        "label": "Radio bursts",
+        "value": "0.85 to 3.5 GHz, up to 307 µJy",
+        "source": {
+          "catalogueId": "arxiv-2609-16720",
+          "url": "https://arxiv.org/abs/2609.16720",
+          "label": "Ortiz Ceballos et al. 2026",
+          "checked": "2026-09-22",
+          "path": "source/measurements.json",
+          "locator": "radio; radioSource"
+        }
+      }
+    ]
+  },
+  "lenses": {
+    "titleKey": "lenses",
+    "defaultLens": "shape",
+    "controls": [
+      {
+        "id": "shape",
+        "label": "Shape",
+        "qualification": "A sphere of the model radius, glowing with its own heat; the neutral gray is a display convention, not a measured colour.",
+        "thumbnail": "beta-pictoris-b-lens-shape.webp",
+        "surface": "beta-pictoris-b-surface-shape@2x.webp",
+        "poles": "beta-pictoris-b-poles-shape@2x.webp",
+        "source": {
+          "id": "beta-pictoris-b-observational-measurements",
+          "path": "../manifest.json",
+          "url": "https://arxiv.org/abs/2109.10671"
+        },
+        "falseColor": false,
+        "notes": "No image of this planet's surface exists: it is an unresolved point in every telescope, seen by its own infrared glow at 1,740 K, some 3 arcseconds' worth of orbit from its star at most. Its size, 1.45 Jupiter radii, comes from its measured luminosity through evolutionary models, not from a measured disc (see the ledger). The sphere turns once every 9.00 hours, the period JWST measured from its brightness changes, about an axis on its orbit normal, where its spin is measured to point. The gray marks an unresolved surface."
+      }
+    ]
+  },
+  "settings": {
+    "titleKey": "settings",
+    "controls": []
+  },
+  "charts": [],
+  "resources": [
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Lacour et al. (2021), A&A 654, L2: orbits and masses of planets b and c from GRAVITY astrometry and radial velocities",
+      "href": "https://arxiv.org/abs/2109.10671"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Ortiz Ceballos, Berger and Cendes (2026), arXiv:2609.16720: radio emission from Beta Pictoris b with MeerKAT",
+      "href": "https://arxiv.org/abs/2609.16720"
+    },
+    {
+      "label": "Research",
+      "role": "facts",
+      "description": "Zhou et al. (2026), arXiv:2607.13133: the 9.00-hour rotation period from JWST/NIRCam photometry",
+      "href": "https://arxiv.org/abs/2607.13133"
+    }
+  ],
+  "provenance": {
+    "title": {
+      "path": "../presentation/title-mark.json"
+    },
+    "editorial": {
+      "url": "https://arxiv.org/abs/2609.16720",
+      "credit": "Ortiz Ceballos, Berger and Cendes (2026), arXiv:2609.16720"
+    },
+    "physical": {
+      "path": "../../../../../packages/astronomy/data/bodies/beta-pictoris-b.json",
+      "credit": "Model radius from the measured luminosity (Morzinski et al. 2015); dynamical mass and GRAVITY orbit (Lacour et al. 2021); rotation period from JWST photometry (Zhou et al. 2026) about the orbit normal (Kraus et al. 2020)"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { cutDisc } from './author-thermal-maps.mts';
 import { ALMA, observerQuery } from '../sphere-horizons.mts';
 

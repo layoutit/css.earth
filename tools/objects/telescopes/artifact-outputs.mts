@@ -1,8 +1,9 @@
 /** Inspect a verified artifact and name only the next outputs its present facts can support. */
 import { readFile } from 'node:fs/promises';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
-import { pinFile, PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
+import { fileSize, PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
 import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
 import { validateProjectionSource, verifiedProduct } from './projection.mts';
 import { validateSphereSource } from './sphere.mts';
@@ -22,7 +23,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const declarations=raw.declarations===undefined?undefined:requireRecord(raw.declarations,'import declarations');
     const profiles=requireArray(raw.proposedProfiles,'proposed profiles').map(value=>{const row=requireRecord(value,'proposed profile');return {handlerId:requireString(row.handlerId,'handler id'),profileId:requireString(row.profileId,'profile id')};});
     const issues=requireArray(raw.issues,'import issues').map(value=>requireString(requireRecord(value,'import issue').reason,'import issue reason'));
-    if(raw.descriptor!==undefined){const descriptor=requireRecord(raw.descriptor,'qualified import descriptor'),relativePath=requireString(descriptor.path,'qualified descriptor path');if(relativePath!=='descriptor.json'||!Number.isSafeInteger(descriptor.bytes)||typeof descriptor.sha256!=='string')throw new TypeError('Qualified import descriptor pin is invalid.');const path=resolve(artifact,'..',relativePath),pin=await pinFile(path);if(pin.bytes!==descriptor.bytes||pin.sha256!==descriptor.sha256)throw new Error('Qualified import descriptor pin changed.');return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:path,outputs:[],profiles,issues,familyOperations:await verifiedExecutableFamilyOperations(path)};}
+    if(raw.descriptor!==undefined){const descriptor=requireRecord(raw.descriptor,'qualified import descriptor'),relativePath=requireString(descriptor.path,'qualified descriptor path');if(relativePath!=='descriptor.json'||!Number.isSafeInteger(descriptor.bytes)||typeof descriptor.sha256!=='string')throw new TypeError('Qualified import descriptor pin is invalid.');const path=resolve(artifact,'..',relativePath),pin=await sha256File(path);if(pin.bytes!==descriptor.bytes||pin.sha256!==descriptor.sha256)throw new Error('Qualified import descriptor pin changed.');return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:path,outputs:[],profiles,issues,familyOperations:await verifiedExecutableFamilyOperations(path)};}
     return {artifact:'local-import',...(typeof declarations?.target==='string'?{target:declarations.target}:{}),source:artifact,outputs:[],terminal:true,profiles,issues};
   }
   if(raw.schema==='cssearth-telescope-product-descriptor@1'){
@@ -34,7 +35,7 @@ export async function listArtifactOutputs(path:string,structure?:string):Promise
     const listed=await listDeliveryOutputs(artifact,structure),delivered=await delivery(artifact),descriptorOutputs=delivered.producing.outputs.filter(output=>output.path.endsWith('/descriptor.json')||output.path==='descriptor.json');
     if(!descriptorOutputs.length)return{...listed,artifact:'delivery'};
     if(descriptorOutputs.length!==1)throw new TypeError('Delivery has an ambiguous family descriptor.');
-    const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.sha256===output.sha256&&file.bytes===output.bytes&&file.path.endsWith('/descriptor.json'));
+    const output=descriptorOutputs[0]!,matches=delivered.files.filter(file=>file.bytes===output.bytes&&file.path.endsWith('/descriptor.json'));
     if(matches.length!==1)throw new TypeError('Delivery family descriptor is absent or ambiguous.');
     const descriptorPath=resolve(delivered.directory,matches[0]!.path);
     return{...listed,artifact:'delivery',source:descriptorPath,familyOperations:await verifiedExecutableFamilyOperations(descriptorPath)};

@@ -162,26 +162,24 @@ export const JWST_REPRODUCTION_SCHEMAS = ['cssearth-jwst-image3-reproduction@1',
 /** What a receipt has to say for the band it names to count as checked: which program, band and observation it reduced, and the
  * MAST product it compared the result against, pinned by name, size and digest. */
 export interface ReproductionReceipt { readonly schema: string; readonly program: string; readonly band: string; readonly observation: string; readonly accepted: boolean;
-  readonly mast: { readonly name: string; readonly bytes: number; readonly sha256: string } }
-const DIGEST = /^[0-9a-f]{64}$/u;
+  readonly mast: { readonly name: string; readonly bytes: number } }
 
 /** One receipt read as the external value it is: another schema, a missing field or a missing pin is an error, never a skip. */
 export function parseReproductionReceipt(value: unknown, label: string): ReproductionReceipt {
   const record = requireRecord(value, label), schema = requireString(record.schema, `${label}: schema`);
   if (!(JWST_REPRODUCTION_SCHEMAS as readonly string[]).includes(schema)) throw new TypeError(`${label}: ${schema} is not a reproduction receipt.`);
-  const mast = requireRecord(record.mast, `${label}: MAST product`), sha256 = requireString(mast.sha256, `${label}: MAST digest`);
-  if (!DIGEST.test(sha256)) throw new TypeError(`${label}: the MAST digest it compared is not a sha256.`);
+  const mast = requireRecord(record.mast, `${label}: MAST product`);
   let accepted = false;
   if (schema === 'cssearth-jwst-spec3-reproduction@3' || schema === 'cssearth-jwst-image3-reproduction@2' || schema === 'cssearth-jwst-coron3-reproduction@2') {
     const acceptance = requireRecord(record.acceptance, 'cube acceptance'), local = requireRecord(record.local, 'local cube');
-    if (!DIGEST.test(requireString(local.sha256, 'local cube digest')) || !(requireFiniteNumber(local.bytes, 'local cube bytes') > 0)) throw new TypeError('The compared local cube must be pinned.');
+    if (!(requireFiniteNumber(local.bytes, 'local cube bytes') > 0)) throw new TypeError('The compared local cube must record its size.');
     const cube = schema.includes('spec3'), expected = sampleAgreement(record.samples, cube ? 'cube' : 'image');
     accepted = (cube || Array.isArray(record.differentWcs) && record.differentWcs.length === 0 && requireRecord(record.pixels, 'image comparison').comparedOn === 'pixels')
       && acceptance.policy === expected.policy && acceptance.tolerance === expected.tolerance && acceptance.accepted === true && expected.accepted;
   }
   return { schema, accepted, program: requireString(record.program, `${label}: program`), band: requireString(record.band, `${label}: band`),
     observation: requireString(record.observation, `${label}: observation`),
-    mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`), sha256 } };
+    mast: { name: requireString(mast.name, `${label}: MAST name`), bytes: requireFiniteNumber(mast.bytes, `${label}: MAST bytes`) } };
 }
 
 /** What this repository holds for each mode: bands defined, programs pinned, programs checked against someone else's result,

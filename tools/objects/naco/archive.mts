@@ -5,7 +5,7 @@
  *
  * NACO is `NAOS+CONICA` in the ESO archive's raw table, not `NACO`; `instrument = 'NACO'` returns nothing. A program records
  * one night's science exposures and, from the archive's own calibration association tree, the darks and flats ESO associates
- * with them. Every file is recorded by its `dp_id`, its byte count and, once it has been downloaded, its sha256.
+ * with them. Every file is recorded by its `dp_id` and its byte count.
  *
  * The night is grouped by observing template (`tpl_start`), because that is how NACO was commanded and it is not the same as
  * the night: the Ceres night of 11 November 2007 is three templates — two of twenty object frames each and one of nine sky
@@ -89,10 +89,6 @@ export interface NacoFrame {
    * separate templates, so this is what groups a jitter sequence, not the night. */
   readonly template: string;
   readonly bytes: number;
-  /** The digest of the FITS file on disk, once a run has downloaded it. It is written by the run that consumes the frame
-   * (`pinnedInputs` and `pinFrames` in reduce.mts), which refuses a file that is not this frame before any recipe reads it,
-   * so one owner both checks the fact and records it. Nothing here measures a downloaded frame a second time. */
-  readonly sha256?: string;
 }
 
 export interface NacoProgram {
@@ -354,7 +350,6 @@ export async function readProgram(program: string): Promise<NacoProgram> {
       ndit: requireFiniteNumber(frame.ndit, 'ndit'), exposure: requireFiniteNumber(frame.exposure, 'exposure'),
       start: requireString(frame.start, 'start'), template: requireString(frame.template, 'template'),
       bytes: requireFiniteNumber(frame.bytes, 'bytes'),
-      ...(frame.sha256 === undefined ? {} : { sha256: requireString(frame.sha256, 'sha256') }),
     };
   });
   const pipeline = requireRecord(record.pipeline, 'pipeline');

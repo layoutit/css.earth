@@ -2,8 +2,9 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, stat } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
 import { PNG } from 'pngjs';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { plotNumericPreview } from './plots.mts';
 
 const root=resolve(import.meta.dirname,'../../..');

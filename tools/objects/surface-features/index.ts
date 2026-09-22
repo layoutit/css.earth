@@ -84,7 +84,7 @@ export interface SurfaceFeaturesSourceManifest {
   readonly schema: typeof SURFACE_FEATURES_SOURCE_SCHEMA;
   readonly source: string; readonly snapshotDate: string; readonly sourcePage: string; readonly license: string; readonly licenseEvidence: string;
   readonly qualification: string;
-  readonly inputs: readonly { readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }[];
+  readonly inputs: readonly { readonly path: string; readonly origin: string; readonly bytes: number }[];
 }
 export interface PreparedSurfaceFeature {
   readonly id: string; readonly name: string; readonly kind: SurfaceFeatureKind; readonly type: string; readonly code: string;
@@ -236,9 +236,7 @@ export function parseSurfaceFeaturesSourceManifest(value: unknown): SurfaceFeatu
   if (!Array.isArray(input.inputs) || !input.inputs.length) throw new TypeError('features source manifest needs pinned inputs.');
   const inputs = input.inputs.map((item, index) => {
     const entry = record(item, `inputs[${index}]`);
-    const sha256 = text(entry.sha256, `inputs[${index}].sha256`);
-    if (!/^[a-f0-9]{64}$/u.test(sha256)) throw new TypeError(`inputs[${index}].sha256 must be a SHA-256 digest.`);
-    return Object.freeze({ path: relativePath(entry.path, `inputs[${index}].path`), origin: text(entry.origin, `inputs[${index}].origin`), bytes: integer(entry.bytes, `inputs[${index}].bytes`, 1), sha256 });
+    return Object.freeze({ path: relativePath(entry.path, `inputs[${index}].path`), origin: text(entry.origin, `inputs[${index}].origin`), bytes: integer(entry.bytes, `inputs[${index}].bytes`, 1) });
   });
   const snapshotDate = text(input.snapshotDate, 'features source snapshotDate');
   if (!/^\d{4}-\d{2}-\d{2}$/u.test(snapshotDate)) throw new TypeError('features source snapshotDate must be an ISO date.');
@@ -407,7 +405,7 @@ async function loadTraces(sourceDirectory: string, config: SurfaceFeatureTracesC
   const manifest = parseSurfaceFeaturesSourceManifest(JSON.parse(await readFile(resolve(directory, 'manifest.json'), 'utf8')));
   for (const entry of manifest.inputs) {
     const bytes = await readFile(resolve(directory, entry.path));
-    if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Trace source snapshot drifted: ${entry.path}`);
+    if (bytes.length !== entry.bytes) throw new Error(`Trace source snapshot drifted: ${entry.path}`);
   }
   if (!manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Trace archive is not pinned by its source manifest.');
   const archive = resolve(directory, config.archive);
@@ -471,7 +469,7 @@ export async function prepareSurfaceFeatures(context: SurfaceFeaturePreparationC
   const manifest = parseSurfaceFeaturesSourceManifest(JSON.parse(await readFile(resolve(directory, 'manifest.json'), 'utf8')));
   for (const entry of manifest.inputs) {
     const bytes = await readFile(resolve(directory, entry.path));
-    if (bytes.length !== entry.bytes || sha256(bytes) !== entry.sha256) throw new Error(`Gazetteer source snapshot drifted: ${entry.path}`);
+    if (bytes.length !== entry.bytes) throw new Error(`Gazetteer source snapshot drifted: ${entry.path}`);
   }
   if (config.naturalEarth) { for (const layer of config.naturalEarth.layers) if (!manifest.inputs.some(entry => entry.path === layer.archive)) throw new TypeError(`Natural Earth layer ${layer.id} is not pinned by its source manifest.`); }
   else if (config.archive !== null && !manifest.inputs.some(entry => entry.path === config.archive)) throw new TypeError('Surface feature archive is not pinned by its source manifest.');

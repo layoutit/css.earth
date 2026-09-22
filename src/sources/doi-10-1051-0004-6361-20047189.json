@@ -1,0 +1,42 @@
+{
+  "id": "doi-10-1051-0004-6361-20047189",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Di Folco et al. (2004): VLTI near-IR interferometric observations of Vega-like stars. Radius and age of alpha PsA, beta Leo, beta Pic, epsilon Eri and tau Cet",
+  "identifiers": [
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361:20047189"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361:20047189",
+      "label": "Astronomy & Astrophysics 426, 601"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://doi.org/10.1051/0004-6361:20047189",
+      "checkedOn": "2026-09-22",
+      "locator": "Table 3: beta Pic limb-darkened angular diameter 0.736 +/- 0.015 +/- 0.012 mas from VLTI/VINCI K-band visibilities; the star is 14% resolved"
+    },
+    {
+      "path": "src/objects/beta-pictoris/source/content/object.json",
+      "locator": "/panel/facts/0"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "Astronomy & Astrophysics 426, 601",
+  "creators": [
+    "E. Di Folco",
+    "F. Thévenin",
+    "P. Kervella",
+    "A. Domiciano de Souza",
+    "V. Coudé du Foresto",
+    "D. Ségransan",
+    "P. Morel"
+  ]
+}

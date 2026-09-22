@@ -22,8 +22,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   const files = ['mur-gibs-tiles.tar.gz', 'mur-gibs-receipt.json', 'mur-gibs-layer.xml', 'mur-gibs-colormap.xml', 'mur-gibs-description.md', 'mur-gibs.png'];
   const updates = new Map<string, Buffer>();
   for (const name of files) updates.set(`science/${name}`, await readFile(join(acquiredDirectory, name)));
-  if (sha256(requireUpdateBytes(updates, 'science/mur-gibs-tiles.tar.gz')) !== receipt.archiveSha256 ||
-      sha256(requireUpdateBytes(updates, 'science/mur-gibs.png')) !== receipt.mosaic.sha256) throw new Error('MUR acquisition hashes differ.');
+  if (requireUpdateBytes(updates, 'science/mur-gibs-tiles.tar.gz').length !== receipt.archiveBytes) throw new Error('MUR acquisition size differs.');
   const savedAdvisory = requireRecord(map.scientific.advisory);
   let advisory = { date: requireString(savedAdvisory.date), status: requireString(savedAdvisory.status), url: requireString(savedAdvisory.url) };
   try { advisory = parseEnsoAdvisory(await readFile(join(acquiredDirectory, 'enso-advisory.html'), 'utf8')); }
