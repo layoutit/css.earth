@@ -31,21 +31,18 @@
       "id": "raw",
       "path": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p.fit",
       "role": "science",
-      "bytes": 273600,
       "mediaType": "application/fits"
     },
     {
       "id": "calibrated",
       "path": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.fit",
       "role": "science",
-      "bytes": 535680,
       "mediaType": "application/fits"
     },
     {
       "id": "label",
       "path": "../../telescope-families/f17-mathilde-near-msi/m0042826360f0_2p_iof.xml",
       "role": "label",
-      "bytes": 15271,
       "mediaType": "application/xml"
     }
   ],

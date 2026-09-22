@@ -1,4 +1,5 @@
-import assert from 'node:assert/strict'; import test from 'node:test';
+import assert from 'node:assert/strict'; import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { describeCalibrationBundle, F17_CALIBRATION_HANDLER, MATHILDE_NEAR_MSI_42826360 } from './f17-calibration.mts';
 const source=MATHILDE_NEAR_MSI_42826360;
 const member=(entry:{id:string;path:string},role:'science'|'calibration'|'label')=>({id:entry.id,path:entry.path,role});

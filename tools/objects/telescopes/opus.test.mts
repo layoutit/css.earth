@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { bodyMeanRadiusKm, fetchOpus, searchOpus, type OpusFetch } from './opus.mts';
 
 const fixture = async (name: string) => readFile(new URL(`../../../tests/fixtures/telescope-opus/${name}`, import.meta.url), 'utf8');

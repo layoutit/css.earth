@@ -28,7 +28,7 @@ import { measureSource, readContinuumImage } from './alma-image.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { pinFile, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { fileSize, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 
 const RADIANS_PER_MAS = Math.PI / (180 * 3.6e6);
 const ASTRONOMICAL_UNIT_KM = 149_597_870.7;
@@ -534,9 +534,9 @@ export async function ephemerisDistanceAu(visibilities: string, scratch: string,
  * fields, windows and execution) do not. Their bytes are the identity: another observation, or another split of this one,
  * has other tables. */
 export async function measurementSetIdentity(path: string): Promise<ProductInput> {
-  const hashes: string[] = []; let bytes = 0;
-  for (const table of ['OBSERVATION/table.f0', 'FIELD/table.f0', 'SPECTRAL_WINDOW/table.f0', 'ANTENNA/table.f0']) { const pin = await pinFile(resolve(path, table)); hashes.push(`${table}:${pin.sha256}`); bytes += pin.bytes; }
-  return { role: 'visibilities (observation, field, window and antenna tables)', identity: path, bytes, sha256: sha256(hashes.join('\n')) };
+  let bytes = 0;
+  for (const table of ['OBSERVATION/table.f0', 'FIELD/table.f0', 'SPECTRAL_WINDOW/table.f0', 'ANTENNA/table.f0']) bytes += (await fileSize(resolve(path, table))).bytes;
+  return { role: 'visibilities (observation, field, window and antenna tables)', identity: path, bytes };
 }
 
 export async function discSelfCalibrate(options: DiscSelfCalibrationOptions) {

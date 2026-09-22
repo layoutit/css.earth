@@ -1,7 +1,8 @@
 import { fixtureSource } from '../test-source-fixture.mts';
 import { required } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import sharp from 'sharp';
 import { parsePdsPlanetocentricShape } from './obj-shape.mts';
 import { preparePdsConstraintMap } from './pds-constraint-map.mts';

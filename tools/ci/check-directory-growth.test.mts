@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { buildBaseline, countModules, growth, isExempt, trackedFiles, FREE_ALLOWANCE } from './check-directory-growth.mts';
 
 /** Stand in for `git ls-files`, so a unit test owns its file list instead of a repository. */

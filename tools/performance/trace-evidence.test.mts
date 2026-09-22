@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { collectSamples, sampledHotspots, correlateEvidence, navigationSpans } from './trace-evidence.mts';
 import type { EvidenceInput } from './trace-evidence.mts';
 import type { JsonRecord, TraceEvent } from './trace-model.mts';

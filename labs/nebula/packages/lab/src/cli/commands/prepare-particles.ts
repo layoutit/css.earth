@@ -102,8 +102,8 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
       ...(target.extraction ? { extraction: target.extraction } : {}) };
     await json(resolve(sourceDirectory, 'provenance.json'), provenance);
     const volume: VolumeRecipe = { schema: 'cssearth-volume-recipe@1',
-      grid: { path: 'density.ktx2', sha256: converted.outputs.gridSha256,
-        decodedSha256: converted.outputs.decodedSha256, dimensions: target.dimensions,
+      grid: { path: 'density.ktx2',
+        dimensions: target.dimensions,
         encoding: 'sqrt-density-unorm8', bounds: target.boundsKpc },
       material: { emission: [0, 1, 2].map(channel => ({ channel,
         color: [Number(channel === 0), Number(channel === 1), Number(channel === 2)] as Vector3,
@@ -112,7 +112,7 @@ export async function prepareParticleExperiments(recipePath: string, archivePath
         ...(converted.emission ? { emissionTransfer: 'shared-opacity' as const } : {}) },
       bake: { sliceCounts: { x: 64, y: 64, z: 64 }, unitsPerSourceUnit: 1, imageWidth: 512,
         samplesPerSlab: 2, cropTransparent: true, opticalWeight: 1, imageEncoding: { format: 'webp', quality: 90 } },
-      anchors: [], provenance: { path: 'provenance.json', sha256: await fileDigest(resolve(sourceDirectory, 'provenance.json')) } };
+      anchors: [], provenance: { path: 'provenance.json' } };
     await json(resolve(sourceDirectory, 'volume.json'), volume);
     const reference = parseLabModelJson(await readFile(target.referenceObject, 'utf8'));
     const frame = { ...reference.properties.frame, boundsUnits: target.boundsKpc };

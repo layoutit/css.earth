@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { INVESTIGATION_LEDGER_SCHEMA, type InvestigationLedger } from './investigation-ledger.mts';
 import { investigationOptions, investigationReport, formatInvestigationReport } from './report-investigations.mts';
 

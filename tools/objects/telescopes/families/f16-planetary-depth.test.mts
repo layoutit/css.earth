@@ -1,5 +1,5 @@
 import assert from'node:assert/strict';
-import test from'node:test';
+import{sourceTest}from'../../../../tests/objects/source-test.mts';import{astroqueryToolchain}from'../../astronomy-packages/toolchain.mts';const test=sourceTest();test.before(async()=>{await astroqueryToolchain();});
 import{mkdtemp,readFile,rm,writeFile}from'node:fs/promises';
 import{tmpdir}from'node:os';
 import{resolve}from'node:path';

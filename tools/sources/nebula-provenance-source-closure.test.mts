@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseSourceCatalog, sourceObject, sourceArray, sourceText } from '../../src/platform/source-catalog.mts';
 
 const root = resolve(import.meta.dirname, '../..');

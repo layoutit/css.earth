@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {intersectViewRayWithEllipsoid,rotateSequence,convexHull2d,prepareProjectedEllipsoidSilhouetteCoverage,planetographicRowsToMeshLatitude} from '../../tools/objects/material-composition/ellipsoid.mts';

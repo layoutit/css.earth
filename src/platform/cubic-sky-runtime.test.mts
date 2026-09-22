@@ -1,6 +1,7 @@
 import * as runtimePolicy from "../../site/runtime-policy.mts";
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 
 import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "../renderers/css/dist/platform/camera-layout.js";
 import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";

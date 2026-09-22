@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 
 import { readHostedOrbitRecord } from '../../packages/astronomy/tools/lib/generator-records.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';

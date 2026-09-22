@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { access, readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import * as fontkit from "fontkit";
 
 import { SCENE_OBJECTS } from "../../site/objects.mts";

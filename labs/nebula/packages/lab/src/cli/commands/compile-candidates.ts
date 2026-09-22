@@ -78,10 +78,10 @@ for (const candidate of selected) {
       const sampledOwners = recipe.sampledRecipe ? sampledOwnerPins(method, recipe.sampledRecipe) : [];
       inputPaths.push(...sampledOwners.map(owner => owner.path));
       if (depth && (!jointRecord(method.physicalDepth) || !jointRecord(method.physicalDepth.recipe) || !jointRecord(method.physicalDepth.evidence) ||
-          method.physicalDepth.recipe.sha256 !== depth.recipeSha256 || method.physicalDepth.evidence.sha256 !== depth.recipe.evidence.sha256))
+          method.physicalDepth.recipe.sha256 !== depth.recipeSha256 || method.physicalDepth.evidence.sha256 !== (await pin(depth.recipe.evidence.path)).sha256))
         throw new TypeError('Compiled depth sources differ from the configured recipe or evidence.');
       if (photometric && (!jointRecord(method.photometricPrior) || !jointRecord(method.photometricPrior.recipe) || !jointRecord(method.photometricPrior.evidence) ||
-          method.photometricPrior.recipe.sha256 !== photometric.recipeSha256 || method.photometricPrior.evidence.sha256 !== photometric.recipe.evidence.sha256))
+          method.photometricPrior.recipe.sha256 !== photometric.recipeSha256 || method.photometricPrior.evidence.sha256 !== (await pin(photometric.recipe.evidence.path)).sha256))
         throw new TypeError('Compiled photometric sources differ from the configured model or evidence.');
       for (const owner of method.implementation) {
         if (!jointRecord(owner) || !jointPath(owner.path) || typeof owner.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(owner.sha256))
@@ -93,11 +93,9 @@ for (const candidate of selected) {
       const inputs = await Promise.all(inputPaths.map(pin));
       if (sampledOwners.some(owner => !inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256)))
         throw new TypeError('Sampled inputs changed during preparation. Compile again.');
-      if (depth && (inputs.find(source => source.path === depth.recipePath)?.sha256 !== depth.recipeSha256 ||
-          inputs.find(source => source.path === depth.recipe.evidence.path)?.sha256 !== depth.recipe.evidence.sha256))
+      if (depth && inputs.find(source => source.path === depth.recipePath)?.sha256 !== depth.recipeSha256)
         throw new TypeError('Depth inputs changed during publication. Compile again.');
-      if (photometric && (inputs.find(source => source.path === recipe.photometricPriorRecipe)?.sha256 !== photometric.recipeSha256 ||
-          inputs.find(source => source.path === photometric.recipe.evidence.path)?.sha256 !== photometric.recipe.evidence.sha256))
+      if (photometric && inputs.find(source => source.path === recipe.photometricPriorRecipe)?.sha256 !== photometric.recipeSha256)
         throw new TypeError('Photometric inputs changed during publication. Compile again.');
       await save(resolve(published, `${candidate.id}.json`), { schema: 'cssearth-nebula-compiler-published@1', recipePath: candidate.compilerRecipe,
         result: resultPin, inputs });

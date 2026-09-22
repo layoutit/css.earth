@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { cropAroundBrightest, nacoSkyRegistration, relativeIntensity } from './author-body-map.mts';
 
 const header = { CTYPE1: 'RA---TAN', CTYPE2: 'DEC--TAN', CD1_1: -0.00000368611, CD1_2: 0, CD2_1: 0, CD2_2: 0.00000368611, 'ESO ADA POSANG': 0 };

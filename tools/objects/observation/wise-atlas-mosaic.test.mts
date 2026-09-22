@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { gzipSync } from 'node:zlib';
 import { card } from '../../../tests/fixtures/fits/helpers.mts';
 import { binWiseAtlasTile, matchTileBackgrounds, mosaicTiles, parseTilePins, wiseAtlasUrl } from './wise-atlas-mosaic.mts';

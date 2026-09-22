@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { deliveryContext, parseDeliveryContext, sourceContext } from './delivery-context.mts';
 
 const request = { target: 'fixture', wavelengthMicrometres: [1, 2], kind: 'cube', time: { any: true }, angularResolutionArcsec: 1, result: 'telescope-product' };

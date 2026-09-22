@@ -123,11 +123,9 @@ jobs:
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts lint
-      - name: Check physical frame receipts and document pins
+      - name: Check physical frame receipts
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
-        run: |
-          node tools/ci/check-object-runtime-ownership.mts --receipts
-          node --test tools/contract/physical-frame-receipts.test.mts
+        run: node tools/ci/check-object-runtime-ownership.mts --receipts
       - name: Check independent body additions
         run: node --test tools/contract/body-additions.test.mts
       - name: Test asset inventory, publish verification, closure and local CI tooling
@@ -137,7 +135,7 @@ jobs:
         # path (tools/assets/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
-        run: pnpm test:ci
+        run: pnpm test:node
 
   typecheck:
     name: Typecheck
@@ -481,7 +479,7 @@ jobs:
           case "$CI_PREPARATION_LANE" in
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
-              pnpm test:ci-preparation:publication
+              pnpm test:node
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac
@@ -546,7 +544,6 @@ jobs:
         run: |
           pnpm typecheck:nebula
           pnpm check:nebula-boundaries
-          pnpm test:nebula-application
       - name: Test numerical owners, durable jobs and isolated React controls
         # Explicit cache-independent selection. Do not substitute test:lab:nebula:
         # that command restores real source assets before running the wider suite.

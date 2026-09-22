@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { binaryTable, binaryTableHdu, headerBlock, numbers, padBlock, primaryHdu, readFitsHdus, tableColumn, writeComplexCell } from './fits-table.mts';
 import { differentialPhaseChi2, type ImagePlane } from './image-fit.mts';
 import { readChannelRows } from './oifits-rows.mts';

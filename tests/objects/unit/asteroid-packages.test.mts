@@ -1,4 +1,5 @@
-import { test } from 'node:test';
+import { sourceTest } from '../source-test.mts';
+const test = sourceTest();
 import { assertAsteroidPackage } from './asteroid-contract.mts';
 import { anchorTable, selectedObjectIds, stringList } from './anchor-table.mts';
 import { requireFiniteNumber } from '../../../tools/sources/source-values.mts';

@@ -1,7 +1,8 @@
 import {requireObjectRuntimeDefinition} from '../../tools/contract/object-runtime-contract.mts';
 import {shape,array,text,number,optional} from '../../tools/objects/terrestrial-layers/source-records.mts';
 import {required} from '../../tools/contract/test-values.mts';
-import test from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parseAuthoredObjectDescriptor} from '@cssearth/objects';

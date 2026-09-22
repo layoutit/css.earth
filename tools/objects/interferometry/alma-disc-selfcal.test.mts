@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {
   angularDiameterRadians, besselJ0, beamSolidAngle, brightnessTemperatureKelvin, discProfileExpression,
   discSelfCalibrationScript, fitLimbDarkenedDisc, limbDarkenedDiscVisibility, planckIntensity, PUBLISHED_ROUNDS,

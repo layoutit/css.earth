@@ -1,8 +1,9 @@
 /** Select one exact product/operation. Never turn a failed cutout into a whole-product download. */
 import { dirname, resolve } from 'node:path';
 import { mkdir, readFile, writeFile, copyFile, rename, rm } from 'node:fs/promises';
+import { sha256File } from '../../../../src/platform/sha256.mts';
 import { randomUUID } from 'node:crypto';
-import { pinFile, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../../product-record.mts';
+import { fileSize, readProductRecord, sameRun, writeProductRecord, type ProductRun } from '../../product-record.mts';
 import { astroquery } from '../../astronomy-packages/client.mts';
 import { requireRecord } from '../../../sources/source-values.mts';
 import { extractVoPackage } from './package.mts';
@@ -102,7 +103,7 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   await mkdir(evidenceDirectory, { recursive: true });
   const snapshotFile = resolve(evidenceDirectory, `${digest(snapshot)}.snapshot.json`);
   await writeFile(snapshotFile, canonical(snapshot));
-  const snapshotPin = { path: snapshotFile, ...await pinFile(snapshotFile) };
+  const snapshotPin = { path: snapshotFile, ...await sha256File(snapshotFile) };
   if (observation.target.status !== 'confirmed') return { products, issues: ['The archive record has no confirmed target association.'] };
   if (!supportedKind(observation.kind))
     return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
@@ -172,7 +173,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
   if (spec.implementation !== await implementation() || spec.key !== acquisitionKey(spec.productKey, jsonValue({ operation: spec.operation, request: spec.request }), jsonValue(spec.descriptor), spec.limits, spec.implementation))
     throw new Error('VO acquisition identity or implementation changed; query again.');
   for (const pin of spec.metadata) {
-    const actual = await pinFile(pin.path);
+    const actual = await sha256File(pin.path);
     if (actual.sha256 !== pin.sha256 || actual.bytes !== pin.bytes) throw new Error('VO metadata evidence changed.');
   }
   if (spec.operation.kind === 'soda-sync') {
@@ -182,7 +183,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
   } else if (spec.request.region || spec.request.spectralFrame) throw new Error('Subset requests cannot acquire a direct product.');
   const destination = resolve(root, 'output/telescopes/vo/acquired', spec.key), recordPath = resolve(destination, 'acquisition.json');
   const run: ProductRun = { telescope: spec.observation.service, stage: 'archive-acquisition',
-    inputs: spec.metadata.map(pin => ({ identity: pin.sha256, role: 'archive metadata response', bytes: pin.bytes, sha256: pin.sha256 })),
+    inputs: spec.metadata.map(pin => ({ identity: pin.sha256, role: 'archive metadata response', bytes: pin.bytes })),
     parameters: { acquisition: spec.key, parent: spec.observation.identities, operation: spec.operation, format: spec.format, limits: spec.limits },
     software: [{ name: 'cssEarth VO acquisition', version: spec.implementation }, { name: 'PyVO', version: '1.9.1' }] };
   const previous = await readProductRecord(recordPath);
@@ -199,7 +200,7 @@ export async function acquireVoProduct(root: string, spec: AcquisitionSpec) {
       const path = `${pin.sha256}${pin.path.endsWith('.json') ? '.json' : '.xml'}`;
       if (metadata.some(m => m.path === path)) continue;
       const file = resolve(staging, path); await copyFile(pin.path, file);
-      const actual = await pinFile(file);
+      const actual = await sha256File(file);
       if (actual.sha256 !== pin.sha256 || actual.bytes !== pin.bytes) throw new Error('Metadata changed while copying.');
       metadata.push({ path, file });
     }

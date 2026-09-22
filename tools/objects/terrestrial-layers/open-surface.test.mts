@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { inspectOpenSurface, orientObservedSurface, validateObservedReduction } from './open-surface.mts';
 
 const positions = [[0,0,1],[-1,-1,0],[1,-1,0],[1,1,0],[-1,1,0]];

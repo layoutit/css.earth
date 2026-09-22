@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { Ephemeris, stelab, SPEED_OF_LIGHT_KM_S } from './geometry.mts';
 import type { SpkSegment } from './spk.mts';
 

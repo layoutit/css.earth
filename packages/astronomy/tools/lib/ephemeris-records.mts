@@ -11,7 +11,7 @@ const bodyFields = { id: string, centerBodyId: string, epochJdTt: number, refere
   correction: string, runtimeExtrapolation: boolean, limitations: array(string), ...stateFields,
   gravitationalParametersKm3PerS2: shape({ body: number, parent: number, combined: number }) };
 const projectionFields = { epochJdTt: number, geocentricLightTimeDays: number };
-const comparison = shape({ ...projectionFields, sourcePins: array(string), responseTableJd: number,
+const comparison = shape({ ...projectionFields, responseTableJd: number,
   miriadePositionMas: array(number), publishedModelPositionMas: array(number), differenceMagnitudeMas: number });
 const historicalComparison = shape({ ...projectionFields, line: number, sourceRow: string, jdUtc: number,
   reportedModelPositionMas: array(number), publishedPrintedElementsPositionMas: array(number) });

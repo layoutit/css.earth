@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { computePruneCandidates, currentlyInventoriedKeys, listRuntimeAssetKeys } from './prune-runtime-assets.mts';
 import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 

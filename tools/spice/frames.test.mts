@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseTextKernel } from './text-kernel.mts';
 import { pckRotation, rotation, rotate, tkFrameRotation, frameDefinition } from './frames.mts';
 import { apply, multiply, transpose } from './ck.mts';

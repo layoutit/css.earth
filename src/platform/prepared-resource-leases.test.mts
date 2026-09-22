@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createPreparedImageStore } from '../renderers/css/dist/testing.js';
 import type { PreparedImage } from '../renderers/css/rendering/prepared-image-store.ts';
 type ImageLease = ReturnType<ReturnType<typeof createPreparedImageStore>["createLease"]>;

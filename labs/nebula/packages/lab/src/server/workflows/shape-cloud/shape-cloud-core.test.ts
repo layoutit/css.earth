@@ -118,7 +118,7 @@ test('actual XYZ bake paints the exact neutral alpha and geometry, records pins,
   await sharp(rgb, { raw: { width, height, channels: 3 } }).png().toFile(resolve(root, path));
   const source = { path, sha256: sha256(await readFile(resolve(root, path))) };
   const image: StructureImage = { id: 'fixture', label: 'Fixture', width, height, nativeWidth: width, nativeHeight: height,
-    sourceSha256: '1'.repeat(64), mapSha256: '2'.repeat(64), directory: relative(root, directory), imageToFrame: [1, 0, 0, 1, 0, 0], credit: 'Synthetic', page: 'https://example.org' };
+    sourceSha256: '1'.repeat(64), sourceUrl: 'https://example.org/fixture.png', mapSha256: '2'.repeat(64), directory: relative(root, directory), imageToFrame: [1, 0, 0, 1, 0, 0], credit: 'Synthetic', page: 'https://example.org' };
   const map: GeometryMap = { width, height, groups: [], candidates: [{ ...candidate('a'), center: [20, 18], radii: [14, 9], angleRadians: .4 }] };
   const settings = initializeShapeCloud(map), progress: string[] = [];
   const input = { root, id: '0'.repeat(64), image, geometry: map, geometrySha256: '3'.repeat(64), settings, source,

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {gzipSync} from 'node:zlib';
 import {decodeIsis3Raster} from './isis3-raster.mts';
 import {scienceMapPoint} from './scientific-raster.mts';

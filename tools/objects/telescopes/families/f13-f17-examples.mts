@@ -1,13 +1,13 @@
 /** Restore and prove the two bounded public family examples; archive bytes are deliberately not committed. */
 import { mkdir, readFile, writeFile } from 'node:fs/promises'; import { resolve } from 'node:path'; import { fileURLToPath } from 'node:url';
-import { pinFile } from '../../product-record.mts'; import { BETELGEUSE_ZIMPOL_V, exportIntensityDolp } from './f13-polarimetry.mts'; import { MATHILDE_NEAR_MSI_42826360, exportCalibrationBundle, inspectNearMsiBundle } from './f17-calibration.mts';
+import { fileSize } from '../../product-record.mts'; import { BETELGEUSE_ZIMPOL_V, exportIntensityDolp } from './f13-polarimetry.mts'; import { MATHILDE_NEAR_MSI_42826360, exportCalibrationBundle, inspectNearMsiBundle } from './f17-calibration.mts';
 type Source={readonly id:string;readonly url:string;readonly path:string;readonly file:string;readonly role:'science'|'label'};
 const sources:readonly Source[]=[
   {...BETELGEUSE_ZIMPOL_V.intensity,file:'zimpol-intensity.fits',role:'science'},{...BETELGEUSE_ZIMPOL_V.dolp,file:'zimpol-dolp.fits',role:'science'},
   {...MATHILDE_NEAR_MSI_42826360.raw,file:'mathilde-raw.fit',role:'science'},{...MATHILDE_NEAR_MSI_42826360.calibrated,file:'mathilde-iof.fit',role:'science'},{...MATHILDE_NEAR_MSI_42826360.label,file:'mathilde-label.xml',role:'label'},
 ];
 const member=(source:Source)=>({id:source.id,path:source.path,role:source.role});
-async function verify(file:string,source:Source){const pin=await pinFile(file);if(!pin.bytes)throw new Error(`${source.id} is empty.`);}
+async function verify(file:string,source:Source){const pin=await fileSize(file);if(!pin.bytes)throw new Error(`${source.id} is empty.`);}
 /** Download every public member to `directory`, rejecting an empty archive response. */
 export async function restoreF13F17Examples(directory:string){await mkdir(directory,{recursive:true});for(const source of sources){const file=resolve(directory,source.file);const response=await fetch(source.url);if(!response.ok)throw new Error(`Archive download failed for ${source.id}: HTTP ${response.status}.`);await writeFile(file,Buffer.from(await response.arrayBuffer()));await verify(file,source);}return Object.fromEntries(sources.map(source=>[source.id,resolve(directory,source.file)]));}
 /** Reopen the restored bytes through the public family operations and leave bounded receipts/previews. */

@@ -4,7 +4,7 @@ import { resolve } from 'node:path';
 import { composeSkyBandPng, skyBandGridWcs, verifySkyBandRecipe } from '../../../adapters/sources/sky-bands.ts';
 import type { ImageWcs } from '@cssearth/volume-core/coordinates/overlay-wcs';
 
-export interface SkyBandSource { id: string; width: number; height: number; wcs: ImageWcs; skyBands: { path: string; sha256: string } }
+export interface SkyBandSource { id: string; width: number; height: number; wcs: ImageWcs; skyBands: { path: string } }
 
 /** Verify the pinned recipe (and every tile list) and that the source record's grid is exactly the recipe grid.
  * Callers run this before trusting a cached composite, so a warm cache fails the same way as a cold one. */

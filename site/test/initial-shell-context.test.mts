@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { parseHTML } from 'linkedom';
 import { deferInitialShellContext, initialShellContextBootstrap } from '../initial-shell-context.mts';

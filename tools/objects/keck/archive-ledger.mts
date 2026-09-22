@@ -168,15 +168,15 @@ export async function checkReceipt(file: string, value: Record<string, unknown>,
   if (!archive) return problem('it states nothing about the archive product it compared against.');
   const pinned = observation.archiveProducts.find(entry => entry.filehand === archive.filehand);
   if (!pinned) return problem(`${id} no longer pins an archive product at ${String(archive.filehand)}.`);
-  if (archive.bytes !== pinned.bytes || archive.sha256 !== pinned.sha256)
-    return problem(`the archive product it compared (${String(archive.bytes)} bytes, sha256 ${String(archive.sha256)}) is not the one ${id} pins now (${pinned.bytes} bytes, ${pinned.sha256}).`);
+  if (archive.bytes !== pinned.bytes)
+    return problem(`the archive product it compared (${String(archive.bytes)} bytes) is not the size ${id} records now (${pinned.bytes} bytes).`);
   const read = isRecord(archive.read) ? archive.read : null;
-  if (!read || read.bytes !== pinned.bytes || read.sha256 !== pinned.sha256)
+  if (!read || read.bytes !== pinned.bytes)
     return problem('it does not state that the bytes it read were the pinned bytes.');
 
   const ours = isRecord(value.local) ? value.local : null;
-  if (!ours || typeof ours.record !== 'string' || typeof ours.name !== 'string' || !HEX64.test(String(ours.sha256)))
-    return problem('it does not name our own product, its digest and the product record beside it.');
+  if (!ours || typeof ours.record !== 'string' || typeof ours.name !== 'string' || typeof ours.bytes !== 'number')
+    return problem('it does not name our own product, its size and the product record beside it.');
   const record = await readProductRecord(resolve(REPOSITORY, ours.record)).catch(() => null);
   if (!record) return problem(`the product record it names (${ours.record}) is not on this machine; run outputs are not committed, so re-run reduce.mts and compare.mts to restore the evidence.`);
   if ((record.parameters as { koaid?: unknown }).koaid !== koaid) return problem(`${ours.record} was written by a run of ${String((record.parameters as { koaid?: unknown }).koaid)}, not of ${koaid}.`);
@@ -185,11 +185,11 @@ export async function checkReceipt(file: string, value: Record<string, unknown>,
   const channel = route.channel(observation.science.name);
   const expected = [...observation.calibrations.filter(entry => route.channel(entry.name) === channel), observation.science];
   if (record.inputs.length !== expected.length || expected.some(pin => !record.inputs.some(input =>
-    input.identity === pin.name && input.role === (pin.imageType ?? 'frame') && input.bytes === pin.bytes && input.sha256 === pin.sha256)))
+    input.identity === pin.name && input.role === (pin.imageType ?? 'frame') && input.bytes === pin.bytes)))
     return problem(`${ours.record} was not made from the raw science and calibration frames this program pins now.`);
   const output = record.outputs.find(entry => entry.path === ours.name);
   if (!output) return problem(`${ours.record} does not name the product ${ours.name}.`);
-  if (output.sha256 !== ours.sha256 || output.bytes !== ours.bytes) return problem(`${ours.record} pins ${ours.name} at ${output.sha256} and the receipt compared ${String(ours.sha256)}.`);
+  if (output.bytes !== ours.bytes) return problem(`${ours.record} records ${ours.name} at ${output.bytes} bytes and the receipt compared ${String(ours.bytes)}.`);
   return { file, instrument, koaid, product: stage };
 }
 

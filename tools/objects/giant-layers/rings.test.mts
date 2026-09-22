@@ -1,7 +1,8 @@
 import { fixtureRecord } from '../../contract/test-values.mts';
 import type { SourcePin } from './radial-contract.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';

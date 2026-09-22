@@ -41,7 +41,7 @@ import {
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
 import { requireArray, requireString } from '../../sources/source-values.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { addProductEvidence, pinFile, productRecordPath, readProductRecord, sameRun, writeProductRecord,
+import { addProductEvidence, fileSize, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 
 /** The imaging a manual delivery performed, read from the two scripts it ships instead of a command log. Both set their
@@ -328,11 +328,11 @@ const run = (command: string, args: readonly string[], cwd: string) => {
  * reads is a file of its own. */
 export async function manualDeliveryPins(files: { readonly asdm: string; readonly calibrationScript: string; readonly imagingScript: string;
   readonly preparationScript: string; readonly log: string; readonly tables: string; readonly mask: string | null }): Promise<ProductInput[]> {
-  const hashes: string[] = []; let bytes = 0;
-  for (const table of ['ASDM.xml', 'ExecBlock.xml', 'Main.xml', 'Antenna.xml']) { const pin = await pinFile(resolve(files.asdm, table)); hashes.push(`${table}:${pin.sha256}`); bytes += pin.bytes; }
-  const pin = async (role: string, path: string): Promise<ProductInput> => ({ role, identity: basename(path), ...(await pinFile(path)) });
+  let bytes = 0;
+  for (const table of ['ASDM.xml', 'ExecBlock.xml', 'Main.xml', 'Antenna.xml']) bytes += (await fileSize(resolve(files.asdm, table))).bytes;
+  const pin = async (role: string, path: string): Promise<ProductInput> => ({ role, identity: basename(path), ...(await fileSize(path)) });
   return [
-    { role: 'raw ASDM (ASDM, ExecBlock, Main and Antenna tables)', identity: basename(files.asdm), bytes, sha256: sha256(hashes.join('\n')) },
+    { role: 'raw ASDM (ASDM, ExecBlock, Main and Antenna tables)', identity: basename(files.asdm), bytes },
     await pin('manual reduction script', files.calibrationScript),
     await pin('imaging script', files.imagingScript),
     await pin('imaging preparation script', files.preparationScript),

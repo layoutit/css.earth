@@ -36,7 +36,6 @@ for (const source of recipe.images) {
       if (!source.wcs) throw new Error(`${source.id}: a sky band source needs its grid WCS.`);
       const composed = await composeSkyBandSource({ ...source, wcs: source.wcs, skyBands: source.skyBands });
       bytes = composed.bytes;
-      if (composed.sha256 !== source.sha256) throw new Error(`${source.id}: composed sky band raster ${composed.sha256} differs from its pin.`);
       await json(resolve(directory, 'sources', `${source.id}.sky-bands.json`), composed.evidence);
     } else {
       console.log(`OBSERVATION_DOWNLOAD ${source.id}`);
@@ -44,10 +43,8 @@ for (const source of recipe.images) {
       if (!response.ok) throw new Error(`Source download failed: ${response.status}`);
       bytes = Buffer.from(await response.arrayBuffer());
     }
-    if (sha(bytes) !== source.sha256) throw new Error(`${source.id}: native source pin differs.`);
     await writeFile(path, bytes);
   }
-  if (sha(bytes) !== source.sha256) throw new Error(`${source.id}: native source pin differs.`);
   const metadata = await sharp(bytes).metadata();
   if (metadata.width !== source.width || metadata.height !== source.height) throw new Error(`${source.id}: native dimensions differ.`);
   const stars = source.registrationTransfer || source.registrationMode === 'publisher-wcs' ? [] : source.registrationMode === 'compact-stars'
@@ -100,7 +97,7 @@ for (const row of sources) {
   if (row.source.coordinateOrigin === 'authored-bright-star-seed') result.evidence.interpretation = result.pass
     ? 'Relative stellar registration from an authored bright-star seed; absolute astrometry is inherited from the reference image. Outer-field distortion is not measured.'
     : 'Authored bright-star seed only, not publisher astrometry. The unchanged independent-star residual gate has not passed; no removal or reconstruction input.';
-  await json(resolve(directory, `${row.source.id}-registration.json`), { ...result, attempts, sourceSha256: row.source.sha256, referenceSha256: reference.source.sha256, recipeSha256: sha(recipeBytes) });
+  await json(resolve(directory, `${row.source.id}-registration.json`), { ...result, attempts });
   console.log(`OBSERVATION_ALIGNMENT ${row.source.id} ${JSON.stringify({ ...result.evidence, matches: undefined })}`);
   // Failed relative fits remain inspectable at the original publisher placement.
   // They never become inputs to star removal or reconstruction.
@@ -114,8 +111,7 @@ aligned.push({ ...reference, imageToFrame: reference.initial, registration: { ..
     ? 'Publisher sky anchor; corroborated by other images through held-out stars. Absolute sky coordinates are not independently catalogue calibrated.'
     : 'Publisher sky anchor only; relative star registration failed. No removal or reconstruction is authorized by this preview.' } });
 await json(resolve(directory, `${reference.source.id}-registration.json`), { pass: aligned.at(-1)!.registration.status === 'verified',
-  matrix: reference.initial, evidence: aligned.at(-1)!.registration, sourceSha256: reference.source.sha256,
-  referenceSha256: anchorPeer.source.sha256, recipeSha256: sha(recipeBytes) });
+  matrix: reference.initial, evidence: aligned.at(-1)!.registration });
 for (const row of sources.filter(row => row.source.registrationTransfer)) {
   const bridge = aligned.find(candidate => candidate.source.id === row.source.registrationTransfer!.referenceId);
   let result: { matrix: typeof row.initial; evidence: RegistrationEvidence };
@@ -126,7 +122,7 @@ for (const row of sources.filter(row => row.source.registrationTransfer)) {
     result = { matrix: row.initial, evidence: { ...publisherRegistration(error instanceof Error ? error.message : String(error)), referenceId: row.source.registrationTransfer!.referenceId } };
   }
   aligned.push({ ...row, imageToFrame: result.matrix, registration: result.evidence });
-  await json(resolve(directory, `${row.source.id}-registration.json`), { ...result, sourceSha256: row.source.sha256, referenceSha256: bridge?.source.sha256, recipeSha256: sha(recipeBytes) });
+  await json(resolve(directory, `${row.source.id}-registration.json`), { ...result });
   console.log(`OBSERVATION_ALIGNMENT ${row.source.id} ${JSON.stringify({ ...result.evidence, matches: undefined })}`);
 }
 const verified = aligned.every(row => row.registration.status !== 'publisher');

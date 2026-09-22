@@ -1,8 +1,9 @@
 /** Exact recorded dependencies. Retrieval does not establish calibration accuracy. */
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
+import { sha256File } from '../../../src/platform/sha256.mts';
 import { dirname, resolve, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
-import { pinFile } from '../product-record.mts';
+import { fileSize } from '../product-record.mts';
 import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { readFitsFileHdus } from '../../fits/fits.mts';
 export interface CalibrationDependency {
@@ -23,7 +24,7 @@ export function parseCalibrationDependencies(raw: unknown): CalibrationDependenc
 }
 export async function verifyCalibrationDependencies(root:string, rows:readonly CalibrationDependency[]):Promise<boolean> {
   for(const row of rows)if(row.status==='pinned'){
-    const actual=await pinFile(resolve(root,row.file!)).catch(()=>null);
+    const actual=await sha256File(resolve(root,row.file!)).catch(()=>null);
     if(!actual||actual.sha256!==row.sha256||actual.bytes!==row.bytes)return false;
   }
   return true;
@@ -46,7 +47,7 @@ export async function calibrationDependencies(root:string, references:readonly {
     const key=createHash('sha256').update(origin).digest('hex'), dir=resolve(root,'output/telescopes/calibration',key), file=resolve(dir,basename(new URL(origin).pathname)), manifest=resolve(dir,'pin.json');
     try{
       const saved=await readFile(manifest,'utf8').then(t=>requireRecord(JSON.parse(t)),()=>undefined);
-      if(saved){const current=await pinFile(file);if(current.sha256!==saved.sha256||current.bytes!==saved.bytes||saved.origin!==origin)throw new Error('Calibration cache integrity mismatch');}
+      if(saved){const current=await fileSize(file);if(current.bytes!==saved.bytes||saved.origin!==origin)throw new Error('Calibration cache integrity mismatch');}
       else {
         const fetcher=options.fetcher??fetch;
         const response=await fetcher(origin,{signal:AbortSignal.timeout(30_000)});
@@ -57,9 +58,9 @@ export async function calibrationDependencies(root:string, references:readonly {
         for await(const chunk of response.body){n+=chunk.length;if(n>maxFile||downloaded+n>maxTotal)throw new Error('Dependency exceeds calibration download budget');chunks.push(chunk);if(n>=mark){process.stderr.write(`${basename(file)}: ${(n/1e6).toFixed(1)} MB\n`);mark+=10_000_000;}}
         if(!n)throw new Error('Empty calibration file');
         await mkdir(dir,{recursive:true});const tmp=`${file}.${process.pid}.partial`;await writeFile(tmp,Buffer.concat(chunks));await rename(tmp,file);
-        const pin=await pinFile(file);await writeFile(manifest,JSON.stringify({...pin,origin}));downloaded+=n;
+        const pin=await fileSize(file);await writeFile(manifest,JSON.stringify({...pin,origin}));downloaded+=n;
       }
-      const pin=await pinFile(file);let applicability:CalibrationDependency['applicability']='recorded',reason='Exact file named by the product; archive bytes pinned. Calibration accuracy is not independently verified.';
+      const pin=await fileSize(file);let applicability:CalibrationDependency['applicability']='recorded',reason='Exact file named by the product; archive bytes pinned. Calibration accuracy is not independently verified.';
       if(/\.fits$/iu.test(file)){
         const h=(await readFitsFileHdus(file))[0].header;let checked=0,conflict=false;
         for(const key of ['INSTRUME','DETECTOR','FILTER','GRATING','PUPIL']){

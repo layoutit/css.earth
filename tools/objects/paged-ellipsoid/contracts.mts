@@ -11,7 +11,7 @@ export interface NightLightGrid extends Dimensions {cellDegrees: number; bounds:
 export interface NightLightDisplay {missing: readonly number[]; softening: number; maximum: number;}
 export interface NightLightRecipe {
   kind: string; member: string; year: number; product: string; band: string; units: string;
-  archiveBytes: number; archiveSha256: string; grid: NightLightGrid; display: NightLightDisplay;
+  archiveBytes: number; grid: NightLightGrid; display: NightLightDisplay;
 }
 export interface MapSource<T> {path: string; scientific: T;}
 export interface EnsoRecipe {date: string; baseline: string; checked: string; advisory: {status: string; date: string};}
@@ -22,7 +22,7 @@ export interface SurfaceBankPlan {
   interior: {outerAssets: {surface: {one: string; two: string; oneUrls: readonly string[]; twoUrls: readonly string[]}; litSurface: {urls: readonly string[]}}};
 }
 export interface SurfaceBankLenses {defaultLens: string; controls: readonly {id: string; surfaceBankId?: string; view?: string; surfaceUrls?: readonly string[]; surfaceUrl?: string}[];}
-export interface MurTile {row: number; col: number; url: string; actualTime: string | null; actualLayer: string | null; empty: boolean; bytes: number; sha256: string;}
+export interface MurTile {row: number; col: number; url: string; actualTime: string | null; actualLayer: string | null; empty: boolean; bytes: number;}
 export interface MurInventory {date: string; complete: boolean; grid: {level: number}; tiles: readonly MurTile[];}
-export interface MurMosaic {width: number; height: number; sourceWidth: number; sourceHeight: number; sampling: string; covered: number; missing: number; sha256: string;}
-export interface MurReceipt extends MurInventory {schema: string; checked: string; baseline: string; sourceBytes: number; archiveSha256: string; archiveBytes: number; mosaic: MurMosaic;}
+export interface MurMosaic {width: number; height: number; sourceWidth: number; sourceHeight: number; sampling: string; covered: number; missing: number;}
+export interface MurReceipt extends MurInventory {schema: string; checked: string; baseline: string; sourceBytes: number; archiveBytes: number; mosaic: MurMosaic;}

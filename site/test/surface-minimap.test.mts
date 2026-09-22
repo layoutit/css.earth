@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import type { PositionM } from '@cssearth/engine';
 import type { WorldCameraPose } from '../../src/renderers/css/navigation/world-camera.ts';
 import type { WorldRotation } from '../../src/renderers/css/navigation/world-camera-math.ts';
