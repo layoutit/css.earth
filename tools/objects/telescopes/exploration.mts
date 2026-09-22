@@ -1,5 +1,5 @@
 /** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
-import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyTarget } from './sky-target.mts';
+import { parseSkyTarget, resolveSkyTarget, skyCatalogueEntry, skyRegion, type SkyResolution, type SkyTarget } from './sky-target.mts';
 import { flagValue } from '../../cli/cli-arguments.mts';
 import { PRODUCT_KINDS, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
   type ProductKind, type QueryInputs, type TargetCoverage } from './query.mts';
@@ -45,6 +45,8 @@ export interface ExplorationAnswer {
   readonly target: string; readonly targetResolution: TargetResolution;
   readonly choices: readonly ExplorationChoice[]; readonly unresolved: readonly ExplorationIssue[]; readonly unsupported: readonly ExplorationIssue[];
   readonly issues: readonly ExplorationIssue[]; readonly services: readonly (VoInputs['services'][number] | OpusService)[]; readonly coverage: readonly TargetCoverage[];
+  /** The pinned SIMBAD answers a target outside the catalogue was resolved from in this run. */
+  readonly skyResolution?: SkyResolution['evidence'];
 }
 
 const numberFlag = (args: readonly string[], flag: string): number | undefined => {
@@ -175,10 +177,11 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
  * A name the catalogue does not know is resolved by SIMBAD; the search then uses SIMBAD's identifiers and, unless the
  * request gives its own circle, SIMBAD's position with its position error as the radius. A saved sky target is reused.
  */
-export async function skyTargetRequest(root: string, request: ExplorationRequest, resolveSky: typeof resolveSkyTarget = resolveSkyTarget): Promise<{ readonly request: ExplorationRequest; readonly simbadMiss: boolean }> {
+export async function skyTargetRequest(root: string, request: ExplorationRequest, resolveSky: typeof resolveSkyTarget = resolveSkyTarget): Promise<{ readonly request: ExplorationRequest; readonly simbadMiss: boolean; readonly evidence?: SkyResolution['evidence'] }> {
   const withRegion = (sky: SkyTarget): ExplorationRequest => {
-    const region = request.region ?? skyRegion(sky);
-    return { ...request, target: sky.id, skyTarget: sky, ...region ? { region } : {} };
+    // SIMBAD's position and error select footprints; they never become a cutout, which only --icrs-circle asks for.
+    const footprint = skyRegion(sky);
+    return { ...request, target: sky.id, skyTarget: sky, ...footprint ? { footprint } : {} };
   };
   if (request.skyTarget) {
     const sky = parseSkyTarget(request.skyTarget);
@@ -186,8 +189,8 @@ export async function skyTargetRequest(root: string, request: ExplorationRequest
     return { request: withRegion(sky), simbadMiss: false };
   }
   if (resolveTarget(request.target, await loadTargetCatalogue(root)).status !== 'unknown') return { request, simbadMiss: false };
-  const sky = await resolveSky(root, request.target);
-  return sky ? { request: withRegion(sky), simbadMiss: false } : { request, simbadMiss: true };
+  const resolution = await resolveSky(root, request.target);
+  return resolution ? { request: withRegion(resolution.target), simbadMiss: false, evidence: resolution.evidence } : { request, simbadMiss: true };
 }
 
 export async function loadExplorationInputs(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationInputs> {
@@ -200,6 +203,7 @@ export async function loadExplorationInputs(root: string, request: ExplorationRe
 
 export async function exploreTarget(root: string, request: ExplorationRequest, selectedObservation?: string): Promise<ExplorationAnswer> {
   const sky = await skyTargetRequest(root, request), answer = explorationAnswer(sky.request, await loadExplorationInputs(root, sky.request, selectedObservation));
+  if (sky.evidence) return { ...answer, skyResolution: sky.evidence };
   if (!sky.simbadMiss) return answer;
   return { ...answer, issues: answer.issues.map(issue => issue.scope === 'target' ? { ...issue, reason: `${issue.reason} SIMBAD resolves no object by that name either.` } : issue) };
 }

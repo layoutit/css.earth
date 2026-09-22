@@ -27,7 +27,8 @@ telescope explore "Sgr A*" --kind cube --instrument ERIS
 ```
 
 A name the catalogue does not ship, like the last one, is resolved by SIMBAD. The search then uses SIMBAD's identifiers and a
-circle of SIMBAD's position error around its position (`--icrs-circle` replaces that circle). Archive records whose footprint
+circle of SIMBAD's position error around its position to select records; products are not cut to it. `--icrs-circle` is a
+cutout: it cuts the product and the search uses it instead. Archive records whose footprint
 intersects the circle under another name are listed as in the field, not as the target.
 
 In a terminal, `explore` shows the actual observations, unknown metadata, unsupported records and

@@ -3,11 +3,12 @@
  * The catalogue names what cssEarth ships; a search should not need a package first. SIMBAD owns object names and
  * positions, so a name the catalogue does not know is resolved there, through the pinned PyVO TAP client, and the search
  * then uses SIMBAD's identifiers and its position. The resolution travels in the request and is saved with the
- * exploration, so a later `get` reuses the same identity. */
+ * exploration, so a later `get` reuses the same identity. The pinned SIMBAD answers are evidence beside the request, not
+ * part of it: SIMBAD names each result table after the request time, so its bytes differ on every call. */
 import { resolve } from 'node:path';
 import { astroquery } from '../astronomy-packages/client.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
-import type { IcrsCircle, MetadataResponse } from './vo/contracts.mts';
+import type { IcrsCircle, MetadataResponse, Pin } from './vo/contracts.mts';
 import type { TargetCatalogueEntry } from './targets.mts';
 
 export const SIMBAD_TAP = 'https://simbad.cds.unistra.fr/simbad/sim-tap';
@@ -25,9 +26,11 @@ export interface SkyTarget {
   readonly positionErrorMas: number | null;
   readonly positionBibcode: string | null;
   readonly objectType: string | null;
-  /** The two queries and the pinned raw responses they returned. */
-  readonly resolver: { readonly service: typeof SIMBAD_TAP; readonly queries: readonly { readonly query: string; readonly raw: { readonly path: string; readonly bytes: number; readonly sha256: string } }[] };
+  /** The queries that named and placed the target; their pinned answers are `SkyResolution.evidence`. */
+  readonly resolver: { readonly service: typeof SIMBAD_TAP; readonly queries: readonly string[] };
 }
+/** A resolution and the SIMBAD answers it was read from, pinned. */
+export interface SkyResolution { readonly target: SkyTarget; readonly evidence: readonly { readonly query: string; readonly raw: Pin }[] }
 
 const literal = (value: string): string => {
   if (!value.trim() || /[\u0000-\u001f]/u.test(value)) throw new TypeError('Invalid SIMBAD identifier.');
@@ -51,7 +54,7 @@ const unit = (response: MetadataResponse, name: string): string | null => {
 };
 
 /** Read SIMBAD's two answers: the object row (position in degrees, error in mas) and its identifiers. */
-export function readSkyTarget(object: MetadataResponse, identifiers: MetadataResponse, queries: SkyTarget['resolver']['queries']): SkyTarget | undefined {
+export function readSkyTarget(object: MetadataResponse, identifiers: MetadataResponse, queries: readonly string[]): SkyTarget | undefined {
   for (const response of [object, identifiers]) if (response.queryStatus !== 'OK') throw new Error(`SIMBAD query status ${response.queryStatus}.`);
   if (!object.rows.length) return undefined;
   if (object.rows.length > 1) throw new TypeError('SIMBAD resolved the name to more than one object.');
@@ -71,7 +74,7 @@ export function readSkyTarget(object: MetadataResponse, identifiers: MetadataRes
     objectType: typeof row.otype === 'string' && row.otype ? row.otype : null, resolver: { service: SIMBAD_TAP, queries } };
 }
 
-export async function resolveSkyTarget(root: string, name: string, run: typeof astroquery = astroquery): Promise<SkyTarget | undefined> {
+export async function resolveSkyTarget(root: string, name: string, run: typeof astroquery = astroquery): Promise<SkyResolution | undefined> {
   const directory = resolve(root, 'output/telescopes/simbad');
   const tap = async (query: string) => {
     const response = (await run({ operation: 'vo-tap', service: SIMBAD_TAP, query, maxrec: 1000, directory, byteLimit: SIMBAD_BYTES })).vo;
@@ -79,9 +82,11 @@ export async function resolveSkyTarget(root: string, name: string, run: typeof a
     return response;
   };
   const objectQuery = simbadObjectQuery(name), object = await tap(objectQuery);
-  if (!object.rows.length) return readSkyTarget(object, object, []);
+  if (object.queryStatus !== 'OK') throw new Error(`SIMBAD query status ${object.queryStatus}.`);
+  if (!object.rows.length) return undefined;
   const oid = requireFiniteNumber(object.rows[0]!.oid, 'SIMBAD oid'), identifiersQuery = simbadIdentifiersQuery(oid), identifiers = await tap(identifiersQuery);
-  return readSkyTarget(object, identifiers, [{ query: objectQuery, raw: object.raw }, { query: identifiersQuery, raw: identifiers.raw }]);
+  const target = readSkyTarget(object, identifiers, [objectQuery, identifiersQuery])!;
+  return { target, evidence: [{ query: objectQuery, raw: object.raw }, { query: identifiersQuery, raw: identifiers.raw }] };
 }
 
 /** The catalogue entry a sky target contributes: SIMBAD's identifiers, matched exactly against archive target names. */
@@ -106,8 +111,5 @@ export function parseSkyTarget(value: unknown): SkyTarget {
     raDegrees: requireFiniteNumber(record.raDegrees, 'SIMBAD ra'), decDegrees: requireFiniteNumber(record.decDegrees, 'SIMBAD dec'),
     positionErrorMas: optionalNumber(record.positionErrorMas, 'SIMBAD position error'), positionBibcode: optionalString(record.positionBibcode, 'SIMBAD position bibcode'),
     objectType: optionalString(record.objectType, 'SIMBAD object type'),
-    resolver: { service: SIMBAD_TAP, queries: requireArray(resolver.queries, 'SIMBAD queries').map(raw => {
-      const entry = requireRecord(raw, 'SIMBAD query'), pin = requireRecord(entry.raw, 'SIMBAD raw pin');
-      return { query: requireString(entry.query, 'SIMBAD query text'), raw: { path: requireString(pin.path, 'pin path'), bytes: requireFiniteNumber(pin.bytes, 'pin bytes'), sha256: requireString(pin.sha256, 'pin sha256') } };
-    }) } };
+    resolver: { service: SIMBAD_TAP, queries: requireArray(resolver.queries, 'SIMBAD queries').map(query => requireString(query, 'SIMBAD query text')) } };
 }

@@ -6,7 +6,8 @@ import { mkdtemp, readFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroquery } from '../../astronomy-packages/client.mts';
-import { fileSize } from '../../product-record.mts';
+// VO acquisition keeps the digests it computes for its own untracked responses (PR #531), so its pins are checked by hash.
+import { sha256File } from '../../../../src/platform/sha256.mts';
 import { loadVoInputs } from './bridge.mts';
 import { SERVICES } from './discovery.mts';
 import { jsonValue, type DiscoverySnapshot } from './contracts.mts';
@@ -34,7 +35,7 @@ test('PyVO sends descriptor-bound DataLink parameters and retains the exact resp
     assert.equal(answer.queryStatus, 'OK');
     assert.ok(answer.bindings.some(binding => binding.url?.includes('/soda/sync')));
     assert.deepEqual(await readFile(answer.raw.path), xml);
-    assert.deepEqual(await fileSize(answer.raw.path), { bytes: answer.raw.bytes, sha256: answer.raw.sha256 });
+    assert.deepEqual(await sha256File(answer.raw.path), { bytes: answer.raw.bytes, sha256: answer.raw.sha256 });
   } finally {
     server.closeAllConnections();
     await new Promise<void>(done => server.close(() => done()));
@@ -79,7 +80,7 @@ test('public VO query follows a descriptor-bound nested DataLink service', async
     assert.equal(products.length, 1);
     assert.equal(products[0]!.operation.url, `${service}/science.fits`);
     assert.equal(products[0]!.metadata.length, 4); // Discovery bytes, snapshot, and both DataLink responses.
-    for (const pin of products[0]!.metadata) assert.deepEqual(await fileSize(pin.path), { bytes: pin.bytes, sha256: pin.sha256 });
+    for (const pin of products[0]!.metadata) assert.deepEqual(await sha256File(pin.path), { bytes: pin.bytes, sha256: pin.sha256 });
   } finally {
     server.closeAllConnections();
     await new Promise<void>(done => server.close(() => done()));
