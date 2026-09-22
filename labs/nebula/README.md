@@ -45,7 +45,7 @@ labs/nebula/
 └── nebula_lab_refactor.md # Verified progress and remaining migration work
 ```
 
-Reprocess the saved LMC research recipe with **`pnpm lab:nebula:bake --research`**, then check its native artifacts with **`pnpm lab:nebula:verify`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
+Reprocess the saved LMC research recipe with **`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research`**, then check its native artifacts with **`node --experimental-strip-types labs/nebula/run.mts verify-nebula`**. See [baking](docs/baking.md) for prerequisites, stages, saved settings and outputs.
 
 The five packages are private workspace owners, with explicit public exports. See [package boundaries and validation](docs/internal-packages.md) for the dependency graph, CI scope and isolated replay gates. Ordinary application preparation enters through `tools/nebula/prepare.mts` (`pnpm prepare:nebulae`); it does not invoke the research CLI or fit observations.
 

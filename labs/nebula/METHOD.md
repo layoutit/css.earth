@@ -1,6 +1,6 @@
 # Nebula image processing method
 
-This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches. The native LMC research workflow is executable with `pnpm lab:nebula:bake --research`; [baking.md](docs/baking.md) defines the clean-start command, stage inputs and reproducibility boundary.
+This is the repeatable workflow for bringing observed images into the lab, separating compact light, and coloring a spatial model. Source-specific settings belong in recipes, never in algorithm branches. The native LMC research workflow is executable with `node --experimental-strip-types labs/nebula/run.mts bake-nebula --research`; [baking.md](docs/baking.md) defines the clean-start command, stage inputs and reproducibility boundary.
 
 **Material qualification is now stricter:** a real density field painted with one XY photograph at every depth still extrudes the photograph's structures. New accepted clouds require color attached to finite 3D emitters, depth-aware mixing, a regression that rejects the old projected painter, and front/oblique/side inspection. Preserving a front photograph while smearing it sideways fails; averaging away its details also fails. The historical density/symmetry/shape recipes documented below remain reproducible inspection baselines, not proof of this new gate. Requalify their material method before new promotion; do not silently change previously pinned app assets.
 
