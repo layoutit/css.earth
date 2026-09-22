@@ -1,12 +1,12 @@
 import { parsePreparedObjectRuntime } from "../renderers/css/dist/index.js";
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { SCENE_OBJECTS } from "../../site/objects.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition('moon'));
 const objectControls = moonDefinition.controls;
 import { initialObjectSelection, reduceObjectSelection, requireObjectAction } from '../renderers/css/dist/testing.js';
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
 
 function definition(overrides: Record<string, unknown> = {}) {
   return { ...moonDefinition, assets: structuredClone(moonDefinition.assets), ...overrides };

@@ -1,7 +1,7 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { BODIES, HOSTED_PLANET_IDS, STAR_IDS, type BodyId } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 import type { ScenePreparationAdapters } from '../../src/renderers/css/preparation/scene/index.js';
 
 /** Validate external scene records, then call the native TypeScript owners. */

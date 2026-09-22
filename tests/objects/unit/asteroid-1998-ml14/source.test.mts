@@ -7,7 +7,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireMl14Content,requireObjectRotationReference,requireRadialTestConfig} from '../radial-fixture.mts';
-import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/source-values.mts';
+import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-1998-ml14/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('1998 ML14 retains original source pins and acquisition closure',async()=>{

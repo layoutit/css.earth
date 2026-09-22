@@ -1,12 +1,12 @@
 import {parsePreparedObjectRuntime, type PreparedView} from '../renderers/css/dist/index.js';
-import {requireRecord,requireArray,requireFiniteNumber} from '../../tools/source-values.mts';
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import {requireRecord,requireArray,requireFiniteNumber} from '../../tools/sources/source-values.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createPreparedMaterialPublisher, preparedMaterialState } from '../renderers/css/dist/testing.js';
 import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection } from '../renderers/css/dist/testing.js';
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
 import { retainedPresentationFixture } from "./test/object-runtime-package.mts";
 const mars = parsePreparedObjectRuntime(await loadObjectTestDefinition('mars'));
 import { viewSunDirectionToPreparedLightDirection } from "./directional-sun-coordinate.mts";

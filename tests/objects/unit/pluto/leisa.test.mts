@@ -3,7 +3,7 @@ import test from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { array, shape, text, number, nullable } from '../../../../tools/objects/terrestrial-layers/source-records.mts';
-import { requireRecord } from '../../../../tools/source-values.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
 import { decodeFitsImageMap } from '../../../../tools/objects/terrestrial-layers/fits-image-map.mts';
 import { loadScienceSurface } from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';
 import { pinnedOracleVersions } from '../../../../tools/oracles/fixture.mts';

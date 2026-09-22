@@ -124,8 +124,8 @@ builds disable them. Keep the built assets unchanged throughout the matrix.
 Choose checks for the changed behavior after building and preparing its inputs:
 
 ```sh
-node --test tools/prepared-activation-registry.test.mts
-node --test tools/prepared-activation-transport.test.mts
+node --test tools/prepared/prepared-activation-registry.test.mts
+node --test tools/prepared/prepared-activation-transport.test.mts
 HOPS=30 ORIGIN=http://127.0.0.1:4221 `pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
 ORIGIN=http://127.0.0.1:4221 `pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)
 DPR=2 ORIGIN=http://127.0.0.1:4221 `pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`)

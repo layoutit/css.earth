@@ -69,8 +69,8 @@ Run `pnpm prepare:moon-labels` to reproduce the ignored
 context. `pnpm prepare:world-context` runs this step after preparing the world.
 The browser only projects these fixed positions; it performs no ephemeris work.
 
-To refresh the sources, run `node tools/acquire-moon-catalogues.mts --refresh`
-then `node tools/prepare-moon-labels.mts --refresh`. Horizons requests are
+To refresh the sources, run `node tools/sources/acquire-moon-catalogues.mts --refresh`
+then `node tools/prepare/prepare-moon-labels.mts --refresh`. Horizons requests are
 sequential and cached in `output/moon-horizons/`. Review changes in totals,
 identity and ephemeris coverage before accepting refreshed inputs. Do not reuse
 cached replies for a different epoch or reference frame.

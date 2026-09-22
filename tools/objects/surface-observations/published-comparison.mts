@@ -8,7 +8,7 @@
  * rotational phase, the spin axis on the sky, and the photographs' own outlines in native pixels over a phase sweep.
  * Every number is reported; none of them is a gate. The lens's observer-cameras record names the result.
  */
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 
 export const COMPARISON_SPEC_SCHEMA = 'cssearth-published-comparison@1';
 export const COMPARISON_EVIDENCE_SCHEMA = 'cssearth-published-comparison-evidence@1';

@@ -1,22 +1,22 @@
-import type {MaterialSourceTrack} from '../../prepare-materials.mts';
+import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import {parse} from './data-schema.mts';
 import {layeredPresentationRecipe} from './presentation-recipe.mts';
 import {parseLayeredLenses,parseLayeredAtlas} from './presentation-source.mts';
-import {requireString} from '../../source-values.mts';
+import {requireString} from '../../sources/source-values.mts';
 import type {createLayeredOblatePreparation} from './layered-oblate.mts';
 import type {prepareLayeredLeafLayouts} from './leaf-layouts.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import type {preparePlanetCubicSky} from '../../../src/platform/prepare-cubic-sky-source.mts';
 import type {preparePlanetDirectionalSun} from '../../../src/platform/prepare-directional-sun.mts';
-import type {PreparedNode} from '../../prepared-node-tree.mts';
+import type {PreparedNode} from '../../prepared/prepared-node-tree.mts';
 type LayeredScene = Awaited<ReturnType<Awaited<ReturnType<typeof createLayeredOblatePreparation>>['prepareLayeredScene']>>['runtimeScene'];
 import { prepareAtlasRows } from './atlas-rows.mts';
 
 import { canonicalPreparedAsset, preparedResourcePool } from "../../../src/platform/prepared-object-assets.mts";
 import { PREPARED_PRESENTATION_SCHEMA } from "../../../src/platform/prepared-presentation-contract.mts";
 import { multiplyPreparedMatrix4, preparedRotationMatrix4, readPreparedMatrix4 } from "../../../src/renderers/css/dist/preparation.js";
-import { prepareCssomDeclarationReads } from "../../prepared-cssom.mts";
-import { createPreparedNodeTree } from "../../prepared-node-tree.mts";
+import { prepareCssomDeclarationReads } from "../../prepared/prepared-cssom.mts";
+import { createPreparedNodeTree } from "../../prepared/prepared-node-tree.mts";
 
 const identity = () => [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 function prepareTransform(value:string|null|undefined) {

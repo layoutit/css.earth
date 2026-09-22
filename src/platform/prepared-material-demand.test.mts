@@ -1,6 +1,6 @@
 import { parsePreparedObjectRuntime } from '../renderers/css/dist/index.js';
 import {parsePhotometricDiscRecipe} from '../../tools/objects/giant-layers/photometric-disc.mts';
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { SCENE_OBJECTS as OBJECTS } from "../../site/objects.mts";

@@ -4,7 +4,7 @@ import { createHash, randomBytes } from 'node:crypto';
 import { readFile, writeFile, mkdir, access, readdir, stat } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireRecord, requireString } from '../../sources/source-values.mts';
 import { loadSourceProducts, type LoadedSourceProduct } from './source-products.mts';
 import { loadQualifiedObservations } from './qualified-observations.mts';
 import { qualifySourceProduct } from './qualify-source.mts';

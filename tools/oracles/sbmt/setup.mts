@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { mkdir, copyFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { base, hashFile, runtimeLock, verifyFiles } from './runtime.mts';
-import { requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { restoreInputs } from './restore.mts';
 
 const { lock, files, bridgeFiles } = await runtimeLock();
@@ -24,4 +24,4 @@ for (const name of ['package.json', 'package-lock.json']) await copyFile(resolve
 run('npm', ['ci', '--prefix', bridge, '--ignore-scripts', '--no-audit', '--no-fund'], 120_000);
 await verifyFiles(base, bridgeFiles);
 await restoreInputs();
-console.log('SBMT ready. Regenerate with pnpm oracles:run sbmt/projection (one bounded, headless process at a time).');
+console.log('SBMT ready. Regenerate with node tools/oracles/run.mts sbmt/projection (one bounded, headless process at a time).');

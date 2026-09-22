@@ -1,5 +1,5 @@
 /** Product metadata, never catalogue capabilities. Deliberately bounded format support. */
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 
 export interface NativeMetadata {

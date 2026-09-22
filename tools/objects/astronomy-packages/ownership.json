@@ -178,7 +178,7 @@
     },
     {
       "mechanic": "streaming FITS and in-process WCS reads",
-      "implementation": "tools/fits.mts and tools/objects/interferometry/fits-table.mts",
+      "implementation": "tools/fits/fits.mts and tools/objects/interferometry/fits-table.mts",
       "reason": "Existing in-process consumers retain subregion streaming. Astropy owns scientific metadata qualification through science.mts; those consumers do not implement that qualification contract."
     },
     {

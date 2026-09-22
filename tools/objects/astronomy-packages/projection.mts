@@ -1,7 +1,7 @@
 /** PlanetMapper owns navigation and resampling; no interactive viewer is started. */
 import { spawn } from 'node:child_process';
 import { astroqueryToolchain } from './toolchain.mts';
-import { requireRecord } from '../../source-values.mts';
+import { requireRecord } from '../../sources/source-values.mts';
 
 export const PROJECTION_PYTHON = String.raw`
 import json,sys,warnings

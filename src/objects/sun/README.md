@@ -22,7 +22,7 @@ the planets, moons, asteroids and comets in the [shared world](source/presentati
 not just the solar maps above. Each body keeps its imagery, shape, measurements
 and full acknowledgments in its [own object package](../).
 
-The [shared orbital preparation](../../../tools/prepare-solar-geometry.mts)
+The [shared orbital preparation](../../../tools/prepare/prepare-solar-geometry.mts)
 combines analytical models with retained Horizons states. These prepared
 positions and orbit paths use the displayed scene epoch; they are not live
 ephemerides. The footer's provider list combines the existing prepared source
@@ -63,7 +63,7 @@ Photosphere and longitude review (this PR, measured on `main` at 11ac994699):
   to 1.08 → (255, 178, 37), with a tight 10–90% spread (≤ 16 levels). Below
   0.56 sunspots are only a few JPEG pixels wide and the table is not
   measurable; the palette ramps linearly to black there.
-- The JSOC segments are Rice tile-compressed FITS. `tools/fits-rice.mts`
+- The JSOC segments are Rice tile-compressed FITS. `tools/fits/fits-rice.mts`
   decodes them; on the full 13 May frame every one of the 16.8 million samples
   equals astropy's raw integer through BSCALE/BZERO, with BLANK samples in the
   same places. The [oracle table](../../../tools/oracles/README.md) lists the
@@ -171,7 +171,7 @@ native products through `telescope:query`: 28 HMI continuum frames, the HMI radi
 AIA 171/304 synoptic maps. No solar branch is required in the shared query or qualification code.
 
 ```sh
-pnpm telescope:query --target sun --wavelength 0.0170,0.0172 \
+node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target sun --wavelength 0.0170,0.0172 \
   --any-time --min-arcsec 2 --kind image --result telescope-product --json
 ```
 

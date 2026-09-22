@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { loadObjectContent } from './load-object-content.mts';
 import { prepareObjectContent } from '../../tools/objects/dist/content/prepare.js';
-import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
 import type { ObjectContentSource } from '../../tools/objects/content/types.ts';
 
 const preparedObject = (value: unknown): { readonly data: { readonly lenses: { readonly controls: readonly Record<string, unknown>[] } } } => {

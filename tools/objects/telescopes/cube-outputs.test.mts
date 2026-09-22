@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import { execFileSync } from 'node:child_process';
 import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
 import { sciencePackage } from '../astronomy-packages/science.mts';
-import { requireArray, requireRecord } from '../../source-values.mts';
+import { requireArray, requireRecord } from '../../sources/source-values.mts';
 import { pinFile, writeProductRecord } from '../product-record.mts';
 import { exportOutput, listOutputs, validateOutputRequest, type OutputRequest } from './outputs.mts';
 import { parseCli } from './cli.mts';

@@ -8,7 +8,7 @@ import { readWorldCoverCatalog, sourceTilesForBounds, worldCoverSourceEntry,
 
 import type { GeographicBounds, WorldCoverEntry, WorldCoverSource, CitySourceWindow } from '../contracts.mts';
 import { shape, text, parseWorldCoverSource } from '../source-records.mts';
-import { hasErrorCode } from '../../../source-values.mts';
+import { hasErrorCode } from '../../../sources/source-values.mts';
 interface RegionInput extends Partial<WorldCoverSource> { id: string; sources?: WorldCoverSource[]; unavailableTiles?: string[] }
 interface RegionOptions { offline?: boolean; verifyOnly?: boolean; maximumReceivedBytes?: number; catalogDirectory?: URL }
 interface AbsentSource { catalogSha256: string; tiles: string[]; pixels: number }

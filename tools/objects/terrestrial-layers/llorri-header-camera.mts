@@ -1,7 +1,7 @@
 /** Native FITS TAN-SIP camera seed. Surface registration remains a separate requirement. */
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { scanFitsCards, fitsCardValue } from '../observation/fits.mts';
-import { requireFiniteNumber } from '../../source-values.mts';
+import { requireFiniteNumber } from '../../sources/source-values.mts';
 import type { KernelSet } from '../../spice/kernel-set.mts';
 import { pckRotation } from '../../spice/frames.mts';
 import { utcToEt } from '../../spice/lsk.mts';

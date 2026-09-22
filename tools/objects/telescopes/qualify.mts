@@ -8,10 +8,10 @@ import { rememberQualification } from './qualified-observations.mts';
 import { readProductScience } from './product-science.mts';
 import { pdsPackages } from '../astronomy-packages/pds-client.mts';
 import { measureCubeResolution } from '../jwst/cubes/resolution.mts';
-import { readFitsFileHdus, type FitsHeader } from '../../fits.mts';
+import { readFitsFileHdus, type FitsHeader } from '../../fits/fits.mts';
 import type { ProductFacts } from './request-satisfaction.mts';
 import { pathToFileURL } from 'node:url';
-import { flagValue } from '../../cli-arguments.mts';
+import { flagValue } from '../../cli/cli-arguments.mts';
 import { compareCubeWithMast, runSpec3 } from '../jwst/cubes/spec3.mts';
 import { DEFAULT_CRDS_CONTEXT, pinImagingProgram } from '../jwst/imaging/archive.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
@@ -218,7 +218,7 @@ export async function recordQualification(root: string, result: QualificationRes
   return qualified;
 }
 
-export const QUALIFY_HELP = `Usage: pnpm telescope:qualify --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
+export const QUALIFY_HELP = `Usage: node tools/cli/run-typed-module.mjs tools/objects/telescopes/qualify.mts --target TARGET --telescope NAME --mode MODE --observation ID ROUTE_OPTIONS
 
 Route options are emitted by telescope:query. Registered routes currently use --channel N, --band ID --wavelength FROM,TO,
 --archive-programme ID --archive-target NAME --night YYYY-MM-DD, --source-product ID, or the exact --pds-target-lid/--pds-target-name/--pds-lidvid identity.`;

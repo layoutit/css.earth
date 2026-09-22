@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { loadStellarPhotometricColor } from '../../observation/stellar-photometric-color.mts';
 import { MARKER_PATH, starMarker } from '../wasp-43/author.mts';
-import { requireArray, requireRecord, requireString } from '../../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../../sources/source-values.mts';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 /** Stars whose default lens is the measured-spectrum colour: marker, catalogue and surface colours. */

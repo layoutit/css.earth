@@ -6,7 +6,7 @@ import type { SurfaceAxes } from '../surface-minimap-math.mts';
 import { required, position } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { cesiumMinimapExcerpts } from '../../tools/prepare-cesium-minimap.mts';
+import { cesiumMinimapExcerpts } from '../../tools/prepare/prepare-cesium-minimap.mts';
 import { directionOnMap, mapDirection, orbitMapCamera } from '../surface-minimap-math.mts';
 import { rotateWorldPosition, worldRotationFromQuaternion } from '../../src/renderers/css/dist/navigation.js';
 import Camera from '@cesium/engine/Source/Scene/Camera.js';

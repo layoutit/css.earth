@@ -3,8 +3,8 @@ import type {Polygon,Vec3} from '@layoutit/polycss';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
 import type {ShapeModelConfig} from './source.mts';
 import {parseShapeModelConfig,parseShapeContent} from './source.mts';
-import {requireRecord,requireString} from '../../source-values.mts';
-import {requireObjectRuntimeDefinition} from '../../object-runtime-contract.mts';
+import {requireRecord,requireString} from '../../sources/source-values.mts';
+import {requireObjectRuntimeDefinition} from '../../contract/object-runtime-contract.mts';
 interface ShapeContext {descriptor:AuthoredObjectDescriptor;sources:ReadonlyMap<string,{value:unknown}>;objectDirectory:string;publicDirectory:string;outputDirectory:string;prepareContent:typeof prepareObjectContentAssets;}
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
@@ -19,8 +19,8 @@ import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cu
 import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '../solar-system-scene.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
-import { createPreparedNodeTree } from '../../prepared-node-tree.mts';
-import { prepareCssomDeclarationReads } from '../../prepared-cssom.mts';
+import { createPreparedNodeTree } from '../../prepared/prepared-node-tree.mts';
+import { prepareCssomDeclarationReads } from '../../prepared/prepared-cssom.mts';
 import { prepareModelRasters, prepareRingRaster, prepareSphereLighting } from './raster.mts';
 import { prepareShapeLighting } from './lighting.mts';
 import { prepareCoplanarColorRaster } from '../material-composition/coplanar-raster.mts';

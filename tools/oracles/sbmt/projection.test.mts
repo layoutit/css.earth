@@ -78,5 +78,5 @@ test('orientation, origin and units mutations exceed the acceptance criteria',as
 
 test('reference generator does not import candidate projection, mesh or FITS implementations',async()=>{
   const source=await readFile(resolve(import.meta.dirname,'projection.mts'),'utf8');
-  for(const owner of ['candidate.mts','obj-shape.mts','osiris-geo.mts','tools/fits.mts','compare.mts'])assert.ok(!source.includes(owner),owner);
+  for(const owner of ['candidate.mts','obj-shape.mts','osiris-geo.mts','tools/fits/fits.mts','compare.mts'])assert.ok(!source.includes(owner),owner);
 });

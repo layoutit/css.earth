@@ -3,11 +3,11 @@ import { isisGeometryBands } from './native-metadata.mts';
 import { sourceHeaders } from './source-transfer.mts';
 import { isis3CoreHeader } from '../terrestrial-layers/isis3-raster.mts';
 import { open, readFile, mkdir, writeFile } from 'node:fs/promises';
-import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../source-mirror.mts';
+import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
 import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../source-values.mts';
-import { readFitsHeader } from '../../fits.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber, hasErrorCode } from '../../sources/source-values.mts';
+import { readFitsHeader } from '../../fits/fits.mts';
 import { pds4ProductIdentity, pds4Blocks, pds4Elements, pds4Field, pds3Keyword, pds3Values, pds3TimeIso } from '../pds-labels.mts';
 import { inside, type SourceFile, type SourceProduct } from './source-products.mts';
 export interface SourceIntakeIssue { readonly path: string; readonly state: 'unavailable' | 'unsupported' | 'incomplete'; readonly reason: string }

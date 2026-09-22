@@ -6,7 +6,7 @@ import { accessSync, readFileSync } from 'node:fs';
 import { mkdir, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 export const ASTROQUERY_ROOT = resolve(repository, 'output/toolchains/astroquery');

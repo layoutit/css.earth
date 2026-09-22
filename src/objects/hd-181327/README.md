@@ -14,7 +14,7 @@ Catalogue colour: the swatch that search, the catalogue and the minimap show is 
 
 - `tests/objects/unit/hd-181327/source.test.mts`: the manifest verifies; the astronomy record repeats the archived Gaia row; radius and GM are the FLAME values; the colour is (238, 237, 255); the limb law is the Claret (2017) grid at the archived Gaia temperature and gravity.
 - `tests/objects/unit/hd-181327/default-view.test.mts`: the default camera looks at the Earth-facing hemisphere with the display axis up.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #eeedff is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #eeedff is the colour lens's prepared colour.
 
 ## Known problems
 

@@ -11,10 +11,10 @@ test('sampled cache verifies its shared FITS decoder without admitting arbitrary
   try {
     await mkdir(join(root,'tools'));
     const bytes = Buffer.from('fixture decoder');
-    await writeFile(join(root,'tools/fits.mts'),bytes);
+    await writeFile(join(root,'tools/fits/fits.mts'),bytes);
     const sha256 = createHash('sha256').update(bytes).digest('hex');
-    assert.deepEqual(await readSourcePin(root,{path:'tools/fits.mts',sha256}),bytes);
+    assert.deepEqual(await readSourcePin(root,{path:'tools/fits/fits.mts',sha256}),bytes);
     await assert.rejects(readSourcePin(root,{path:'tools/other.mts',sha256}),/Invalid sampled source pin/);
-    await assert.rejects(readSourcePin(root,{path:'tools/fits.mts',sha256:'a'.repeat(64)}),/changed/);
+    await assert.rejects(readSourcePin(root,{path:'tools/fits/fits.mts',sha256:'a'.repeat(64)}),/changed/);
   } finally { await rm(root,{recursive:true,force:true}); }
 });

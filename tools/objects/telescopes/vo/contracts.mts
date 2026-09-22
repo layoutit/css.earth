@@ -1,6 +1,6 @@
 /** Archive metadata is evidence, not a qualified scientific product. */
 import { createHash } from 'node:crypto';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 
 export type Json = null | boolean | number | string | readonly Json[] | { readonly [key: string]: Json };
 export function jsonValue(value: unknown): Json {

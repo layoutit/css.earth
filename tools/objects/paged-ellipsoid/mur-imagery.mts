@@ -1,5 +1,5 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
-import {readJsonSource, requireString} from '../../source-values.mts';
+import {readJsonSource, requireString} from '../../sources/source-values.mts';
 import {parseMurReceipt} from './source-contract.mts';
 import type {EnsoRecipe, MurInventory, MurMosaic, MurTile} from './contracts.mts';
 interface AcquiredMurInventory extends MurInventory {

@@ -24,7 +24,7 @@ import { access, readdir, readFile, writeFile } from 'node:fs/promises';
 import { relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import type { FitsHeader } from '../../fits.mts';
+import type { FitsHeader } from '../../fits/fits.mts';
 import { addProductEvidence, productRecordPath, readProductRecord, runDigest, type ProductEvidence, type ProductRecord } from '../product-record.mts';
 import { chandraFile, observationMode, PROGRAMS, type ChandraFile } from './archive.mts';
 import { column, eventColumn, eventTable, gunzipFile, requireEventColumn, scalar, type EventTable } from './events.mts';

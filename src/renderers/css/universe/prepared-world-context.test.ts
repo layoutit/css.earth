@@ -1,6 +1,6 @@
 import type { OrientationXyzw, PhysicalCameraPose } from '@cssearth/engine';
 import type { WorldCameraPose } from '../navigation/world-camera.js';
-import { required } from '../../../../tools/test-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import { expect, test, vi } from 'vitest';
@@ -601,7 +601,7 @@ test('context alignment accepts observed Linux roundoff but rejects detached ori
 
 test('accepts the generated Sun context and rejects detached or malformed prepared data', async () => {
   const source = JSON.parse(await readFile(fileURLToPath(new URL('../../../objects/sun/prepared/world-context.json', import.meta.url)), 'utf8')) as Record<string, unknown>;
-  const { readCatalog } = await import('../../../../tools/prepare-catalog.mts');
+  const { readCatalog } = await import('../../../../tools/prepare/prepare-catalog.mts');
   const contextEntries = (await readCatalog()).filter(body => body.context && body.id !== 'sun')
     .sort((a, b) => (a.context!.order ?? Number.MAX_SAFE_INTEGER) - (b.context!.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en'));
   expect(parsePreparedWorldContext(source).bodies.map(body => body.id)).toEqual(contextEntries.map(body => body.id));

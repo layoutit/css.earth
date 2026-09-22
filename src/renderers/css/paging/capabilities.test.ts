@@ -1,4 +1,4 @@
-import { requireRecord, requireArray } from '../../../../tools/source-values.mts';
+import { requireRecord, requireArray } from '../../../../tools/sources/source-values.mts';
 import { test } from 'vitest';
 import assert from 'node:assert/strict';
 import { preparedPagingFixture as runtime } from './__fixtures__/prepared-page.mts';

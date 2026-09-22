@@ -89,7 +89,7 @@ reduction software, and what was run from it. Every facility ledger answers the
 sweep first, one entry each for `archive-access`, `data-policy` and
 `reduction-software`, so facilities compare side by side. Use the facility
 catalogue's id when the facility has a page record; a facility without one keeps
-its ledger all the same. `node tools/report-investigations.mts --facilities` counts
+its ledger all the same. `node tools/investigations/report-investigations.mts --facilities` counts
 the catalogue's ground facilities that have ledgers and lists the open decisions.
 
 Give distinct source decisions their own entries. `included` means selected for
@@ -115,9 +115,9 @@ no such source, and that count may only fall.
 Read the ledger before investigating an object, starting from the open-work index
 ([`docs/provenance/investigation-index.md`](investigation-index.md)), which
 groups every unresolved and deferred decision by what it waits on. Refresh it
-with `pnpm investigations:index`; a test refuses a stale copy. Reopen an excluded, unresolved or
+with `node tools/investigations/report-investigations.mts --index --write`; a test refuses a stale copy. Reopen an excluded, unresolved or
 deferred entry only when its `revisitWhen` condition is met, and say which.
-`node tools/report-investigations.mts` lists every open entry across objects.
+`node tools/investigations/report-investigations.mts` lists every open entry across objects.
 Use `--summary` for catalogue coverage and `--classification` to select an
 existing object classification. Filter decisions with `--status=deferred,unresolved`
 and `--search=registration`, or export with `--json`. Filters select detail rows;

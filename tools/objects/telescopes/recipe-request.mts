@@ -1,6 +1,6 @@
 /** Band depth has three input windows. Keep their enclosing reduction range out of the measurement's band identity. */
 import type { CapabilityRequest } from './query.mts';
-import { requireArray, requireFiniteNumber } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber } from '../../sources/source-values.mts';
 export function inputWavelengths(request: CapabilityRequest): readonly [number,number] {
   if (!request.continuumMicrometres) return request.wavelengthMicrometres;
   if (request.kind && request.kind !== 'cube') throw new TypeError('Band-depth continuum windows require a cube.');

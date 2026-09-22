@@ -27,7 +27,7 @@
   "include": [
     "**/*.mts",
     "../navigation/**/*.mts",
-    "../../tools/prepare-solar-geometry.mts"
+    "../../tools/prepare/prepare-solar-geometry.mts"
   ],
   "exclude": [
     "test",

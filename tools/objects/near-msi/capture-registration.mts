@@ -3,7 +3,7 @@ import sharp from 'sharp';
 import {parsePdsRadiusTable} from '../terrestrial-layers/obj-shape.mts';
 import {matrixCamera} from '../surface-observations/cameras.mts';
 import {decodeNearMsi} from '../terrestrial-layers/near-msi.mts';
-import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../source-values.mts';
+import {requireRecord,requireArray,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
 const root='src/objects/mathilde',source=`${root}/source`,out=`${root}/evidence/near-msi`;
 const body=requireRecord(JSON.parse(await readFile(`${root}/prepared/surfaces.json`,'utf8')));
 const surface=requireArray(body.surfaces).map(v=>requireRecord(v)).find(s=>s.id==='near-msi');if(!surface)throw Error('Missing NEAR preparation');

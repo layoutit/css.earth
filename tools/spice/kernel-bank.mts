@@ -19,7 +19,7 @@ import { lstat, mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises'
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord, requireString } from '../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 
 export const KERNEL_BANK_ROOT = resolve(import.meta.dirname, '../../src/spice');
 const SET_ID = /^[a-z][a-z0-9-]*$/u;

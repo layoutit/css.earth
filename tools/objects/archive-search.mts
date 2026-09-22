@@ -16,7 +16,7 @@
  * the imaging collections exist, so an empty answer would mislead), CHARA data not deposited in the OiDB, and journal supplements
  * that no DataCite record describes.
  */
-import { requireArray, requireRecord } from '../source-values.mts';
+import { requireArray, requireRecord } from '../sources/source-values.mts';
 import { astroqueryRows, tapRows } from './astronomy-packages/client.mts';
 import { mastRequest } from './astronomy-packages/mast.mts';
 

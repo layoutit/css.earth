@@ -17,7 +17,7 @@ interface SolidMaterialConfig {
   lighting: LambertAttenuationParameters & {logicalSize: number};
 }
 import type {Sharp,WebpOptions} from 'sharp';
-import {hasErrorCode,requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
+import {hasErrorCode,requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
 import {parseDimensions} from './source-records.mts';
 export interface SolidRasterGrid {width:number;height:number;bandCount:number;gutter:number;poleSize:number;}
 export interface TextureGridLens {textureScale?:number;monochromeBase?:string;previewGrid?:{width:number;height:number};surfaceSampling?:unknown;format?:string;}

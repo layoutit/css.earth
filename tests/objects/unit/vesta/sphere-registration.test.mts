@@ -13,7 +13,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsHdu } from '../../../../tools/fits.mts';
+import { readFitsHdu } from '../../../../tools/fits/fits.mts';
 import { decodeCalibratedCamera } from '../../../../tools/objects/terrestrial-layers/shape-camera-mosaic.mts';
 import { pckOrientation, type BodyOrientation } from '../../../../tools/objects/terrestrial-layers/observer-camera.mts';
 import { horizonsRows, zimpolExposure } from '../../../../tools/objects/terrestrial-layers/observer-cameras.mts';
@@ -22,7 +22,7 @@ import { loadPdsScalarGrid } from '../../../../tools/objects/terrestrial-layers/
 import { loadNativePhotograph } from '../../../../tools/objects/terrestrial-layers/native-photograph-source.mts';
 import { parseTextKernel } from '../../../../tools/spice/text-kernel.mts';
 import { parseLeapSeconds } from '../../../../tools/spice/lsk.mts';
-import { requireArray, requireRecord, requireString } from '../../../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../../../tools/sources/source-values.mts';
 
 const ROOT = resolve(import.meta.dirname, '../../../..'), SOURCE = resolve(ROOT, 'src/objects/vesta/source');
 const DEGREE = Math.PI / 180, VESTA = 2000004;

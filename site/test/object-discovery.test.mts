@@ -4,7 +4,7 @@ import { mkdtemp, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { SCENE_OBJECTS, requireSceneObject } from '../objects.mts';
-import { deriveObjectDiscovery, prepareObjectDiscovery } from '../../tools/prepare-object-discovery.mts';
+import { deriveObjectDiscovery, prepareObjectDiscovery } from '../../tools/prepare/prepare-object-discovery.mts';
 import { discoveryVisibility, isDefaultContextFeature, parseObjectDiscovery, showsDefaultContextOrbit } from '../object-discovery.mts';
 import { parseArrivalView } from '../arrival-view.mts';
 import { record } from '../browser-types.mts';

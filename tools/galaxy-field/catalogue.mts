@@ -1,6 +1,6 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
-import { requireRecord, requireString } from '../source-values.mts';
+import { requireRecord, requireString } from '../sources/source-values.mts';
 export interface Point { x:number; y:number; z:number; absoluteMagnitude:number|null; morphology:string }
 export type CataloguePoint = Point & { pgc: number; distance: {
   valueMpc: number; method: 'cosmicflows-4-distance-modulus' | 'hyperleda-hi-hubble-law';

@@ -1,7 +1,7 @@
 // A uniform surface colour from published whole-disc photometry: colour indices relative to the Sun give reflectance at
 // each filter's effective wavelength, a piecewise-linear spectrum joins them, and the CIE 1931 observer under D65 turns
 // it into linear sRGB scaled so the V reflectance is the published geometric albedo. No map, terrain or variation is implied.
-import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { linearToSrgb } from '../color-transfer.mts';
 
 const BANDS = ['B', 'V', 'R', 'I'] as const;

@@ -1,4 +1,4 @@
-import { required } from '../../test-values.mts';
+import { required } from '../../contract/test-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
 import assert from 'node:assert/strict';

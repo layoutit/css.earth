@@ -1,4 +1,4 @@
-import {fixtureRecord, required} from '../../../../tools/test-values.mts';
+import {fixtureRecord, required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';

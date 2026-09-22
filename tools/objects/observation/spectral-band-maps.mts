@@ -2,7 +2,7 @@ import { sha256 } from '../../../src/platform/sha256.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { writeArrayBuffer } from 'geotiff';
-import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
+import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
 import { shape, text, number, array } from '../terrestrial-layers/source-records.mts';
 
 const windowSchema = shape({ minimum: number, maximum: number, minimumChannels: number });

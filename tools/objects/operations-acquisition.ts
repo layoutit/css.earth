@@ -13,7 +13,7 @@ import { containedPath, publishPinnedSource, publishPinnedSourceStream } from '.
 import type { SourceManifest } from './operations.js';
 import { assertRangeResponse, rangeRequestHeader } from '../../src/platform/source-manifest.mts';
 import type { SourceEntry } from './operations.js';
-import { sourceCacheUrl, withIdleTimeout } from '../source-mirror.mts';
+import { sourceCacheUrl, withIdleTimeout } from '../assets/source-mirror.mts';
 import {prepareSatelliteCatalog,validateSatelliteCatalogRecipe} from './acquisition/satellite-catalog.mts';
 import {prepareDskMesh,validateDskMeshRecipe} from './acquisition/dsk-mesh.mts';
 interface HriiFacets extends OperationBase {kind:'hrii-facets';path:string;recipePath:string;product:'fields'|'report';}

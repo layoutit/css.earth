@@ -1,6 +1,6 @@
 import {choice} from "../../../../tools/objects/terrestrial-layers/source-records.mts";
-import {required} from "../../../../tools/test-values.mts";
-import {hasErrorCode} from "../../../../tools/source-values.mts";
+import {required} from "../../../../tools/contract/test-values.mts";
+import {hasErrorCode} from "../../../../tools/sources/source-values.mts";
 import {shape,array,number,boolean,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";

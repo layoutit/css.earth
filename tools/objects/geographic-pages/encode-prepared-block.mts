@@ -1,7 +1,7 @@
 import { isArray } from '../../../src/platform/is-array.mts';
 import { PREPARED_BLOCK_SCHEMA, PREPARED_BLOCK_LIMITS } from "../../../src/platform/prepared-map/prepared-block.mts";
 
-import { requireRecord, requireArray, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireArray, requireFiniteNumber } from '../../sources/source-values.mts';
 import type { WmtsPage } from './contracts.mts';
 // Galaxy's independent field streams and second differences, applied to the
 // bits of finished doubles. Unlike fixed-point quantization, this is lossless.

@@ -11,7 +11,7 @@ import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { convolveGaussian, readReconstruction, writeReconstruction } from '../../interferometry/beam-convolve.mts';
 import { readChannelRows } from '../../interferometry/oifits-rows.mts';
-import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../source-values.mts';
+import { requireArray, requireRecord, requireFiniteNumber, requireString } from '../../../sources/source-values.mts';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/pi1-gruis/source');

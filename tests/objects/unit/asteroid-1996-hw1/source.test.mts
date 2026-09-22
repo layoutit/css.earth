@@ -1,6 +1,6 @@
 import {array,number,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import {requireClosedTerrain} from '../../fixtures/source-fixture.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';

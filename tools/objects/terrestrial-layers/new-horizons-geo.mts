@@ -1,6 +1,6 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { pds4Blocks, pds4Elements } from '../pds-labels.mts';
-import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
+import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
 import { archivedCameraFields, array, dimensions, number, shape, sipCameraFields, text } from './source-records.mts';
 import { bindSipCamera, sipPixel } from './llorri-geo.mts';

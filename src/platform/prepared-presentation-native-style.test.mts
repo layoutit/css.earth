@@ -1,11 +1,11 @@
 import { parsePreparedObjectRuntime } from "../renderers/css/dist/index.js";
-import {loadObjectTestDefinition} from '../../tools/object-test-data.mts';
+import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { SCENE_OBJECTS as OBJECTS } from '../../site/objects.mts';
 import { retainedPresentationFixture } from './test/object-runtime-package.mts';
 import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';
-import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mts';
+import { requireObjectRuntimeDefinition } from '../../tools/contract/object-runtime-contract.mts';
 
 for (const object of OBJECTS) {
   const runtimeDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition(object.id));

@@ -1,5 +1,5 @@
 import {shape,array,text,number} from '../../tools/objects/terrestrial-layers/source-records.mts';
-import {required} from '../../tools/test-values.mts';
+import {required} from '../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile, readdir } from 'node:fs/promises';

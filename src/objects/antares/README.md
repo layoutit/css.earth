@@ -21,7 +21,7 @@ Antares is the nearest red supergiant. Its package holds the placement, the publ
 - `tests/objects/unit/antares/default-view.test.mts` derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, the display axis and celestial north straight up.
 - `site/test/object-discovery.test.mts` checks that Antares is hidden from the map under every discovery setting while the imaged stars stay visible.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/antares/` with the default camera.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffc595 is the star field's colour at the cited 3660 K.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffc595 is the star field's colour at the cited 3660 K.
 
 ## Known problems
 

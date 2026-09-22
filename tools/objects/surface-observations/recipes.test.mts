@@ -2,7 +2,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readdir, readFile } from 'node:fs/promises';
-import { fixtureRecord } from '../../test-values.mts';
+import { fixtureRecord } from '../../contract/test-values.mts';
 import { parseTerrestrialProfile } from '../terrestrial-layers/index.mts';
 
 const planets = new URL('../../../src/objects/', import.meta.url);

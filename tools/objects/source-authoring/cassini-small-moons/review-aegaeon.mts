@@ -2,7 +2,7 @@ import { sha256 } from '../../../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { basename, resolve } from 'node:path';
 import sharp, { type OverlayOptions } from 'sharp';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { decodeCalibratedCamera } from '../../terrestrial-layers/shape-camera-mosaic.mts';
 import { pds3Keyword } from '../../pds-labels.mts';
 

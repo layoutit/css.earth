@@ -1,6 +1,6 @@
 import {parsePreparedObjectRuntime} from '../../../../src/renderers/css/dist/index.js';
 const runtimeDefinition=parsePreparedObjectRuntime(runtimeSource);
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import assert from "node:assert/strict";
 import test from "node:test";

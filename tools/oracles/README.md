@@ -21,15 +21,15 @@ are older standalone audits; the groups below are fixture oracles.
 | pvl, numpy, astropy | `amica-geo.mts`: the Hayabusa AMICA Gaskell DDR cube, detector FITS and flat field (Itokawa) | `pds3/amica-ddr.py` | `amica-geo.oracle.test.mts` |
 | astropy | `llorri-geo.mts`: the Lucy L'LORRI HDUs and the TAN-SIP distortion through `astropy.wcs` (Donaldjohanson) | `fits/llorri.py` | `llorri-geo.oracle.test.mts` |
 | astropy | `encounter-fits.mts`: Deep Impact ITS (Tempel 1), Stardust NAVCAM (Wild 2) and MRI (Hartley 2) planes, identity and accept or reject counts | `fits/encounter.py` | `encounter-fits.oracle.test.mts` |
-| astropy | Shared FITS numeric decoding, scaling, missing values, cube planes, image extensions and CONTINUE long strings | `fits/core.py` | `tools/fits.oracle.test.mts` |
-| astropy | `fits-rice.mts`: RICE_1 tile-compressed images (8-, 16- and 32-bit; constant, small-difference and directly coded blocks; JSOC's BSCALE, BZERO and table BLANK) and `hmi-continuum.mts` HMI pixels under CROTA2 through `astropy.wcs` | `fits/rice.py` | `tools/fits-rice.oracle.test.mts` |
+| astropy | Shared FITS numeric decoding, scaling, missing values, cube planes, image extensions and CONTINUE long strings | `fits/core.py` | `tools/fits/fits.oracle.test.mts` |
+| astropy | `fits-rice.mts`: RICE_1 tile-compressed images (8-, 16- and 32-bit; constant, small-difference and directly coded blocks; JSOC's BSCALE, BZERO and table BLANK) and `hmi-continuum.mts` HMI pixels under CROTA2 through `astropy.wcs` | `fits/rice.py` | `tools/fits/fits-rice.oracle.test.mts` |
 | astropy | `observation/wise-atlas-mosaic.mts`: AllWISE atlas SIN tile pixels to the hips2fits-convention TAN grid, near the centre and at a 24° field corner | `fits/wise-atlas-projection.py` | `observation/wise-atlas-mosaic.oracle.test.mts` |
-| astropy | `fits-sky.mts`: which way RA and Dec run along columns and rows at the reference pixel (CDELT, CD, PC and CROTA2; linear and zenithal axes; SQUEEZE, hips2fits and ZIMPOL headers), the north-up east-left display raster, and refusal of rotated or skewed images | `fits/sky-orientation.py` | `tools/fits-sky.oracle.test.mts` |
-| astropy | `fits-sky.mts` `skyProjection` and `fits.mts` `readFitsFileRegion`: pixel to ICRS and back for rotated, skewed and near-pole TAN headers, including a JWST NIRCam level-3 mosaic's WCS; refusal of SIP, TPV, SIN and FK4; one image region read from disk | `fits/sky-projection.py` | `tools/fits-sky-projection.oracle.test.mts` |
+| astropy | `fits-sky.mts`: which way RA and Dec run along columns and rows at the reference pixel (CDELT, CD, PC and CROTA2; linear and zenithal axes; SQUEEZE, hips2fits and ZIMPOL headers), the north-up east-left display raster, and refusal of rotated or skewed images | `fits/sky-orientation.py` | `tools/fits/fits-sky.oracle.test.mts` |
+| astropy | `fits-sky.mts` `skyProjection` and `fits.mts` `readFitsFileRegion`: pixel to ICRS and back for rotated, skewed and near-pole TAN headers, including a JWST NIRCam level-3 mosaic's WCS; refusal of SIP, TPV, SIN and FK4; one image region read from disk | `fits/sky-projection.py` | `tools/fits/fits-sky-projection.oracle.test.mts` |
 | astropy | `interferometry/fits-table.mts`: every OIFITS column type including complex C and M, TNULL read as NaN, HIERARCH keys, and refusal of TSCAL/TZERO-scaled columns | `fits/binary-table.py` | `interferometry/fits-table.oracle.test.mts` |
 | astropy | `color-transfer.mts` asinh band display: every byte of `make_lupton_rgb` (Lupton et al. 2004) for colour and one-band cases | `fits/lupton-asinh.py` | `tools/objects/color-transfer.oracle.test.mts` |
-| astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tools/fits-pallas.test.mts` |
-| astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tools/fits-products.test.mts` |
+| astropy | Every ESO HIERARCH value and every pixel of four released Pallas SPHERE images; no camera or surface qualification | `fits/pallas.py` | `tools/fits/fits-pallas.test.mts` |
+| astropy | Sun synoptic and Jupiter HST/OPAL images, including archived header conventions | `fits/synoptic.py` | `tools/fits/fits-products.test.mts` |
 | astropy, numpy | `observation/spectral-band-maps.mts`: Charon LEISA spectra, per-pixel wavelengths, archived coordinates and ice-band estimators near Organa | `fits/charon-leisa.py` | `observation/spectral-band-maps.test.mts` |
 | pvl, numpy | `isis2-qube.mts`: the Deep Space 1 MICAS orthographic image and DEM component cubes and their special pixels (Borrelly) | `isis2/borrelly-micas.py` | `isis2-qube.oracle.test.mts` |
 | numpy | `npy-lonlat-grid.mts`: the `.npy` arrays of the Cambioni et al. (2022) ALMA maps of Psyche and nearest-node lookup, including both half-cells at the antimeridian | `npy/psyche-alma.py` | `npy-lonlat-grid.oracle.test.mts` |
@@ -44,7 +44,7 @@ same group and name, and the comparing tests beside the code they check (under
 - A fixture is evidence. It records the oracle and interpreter versions and the
   sha256 of every input it read. An input from outside the repository, such as
   another project's test data, is a reference: its URL names a commit, and the
-  fixture records its sha256 and size. `tools/oracle-fixtures.test.mts`, part of
+  fixture records its sha256 and size. `tools/contract/oracle-fixtures.test.mts`, part of
   `pnpm test:platform`, refuses a fixture whose tool versions differ from
   `requirements.txt`, whose inputs are not the bodies' manifest input/document pins
   or the hashed checked-in test files and test-only archive acquisition record
@@ -66,15 +66,15 @@ same group and name, and the comparing tests beside the code they check (under
 
 ## Setup and use
 
-SBMT is an opt-in native backend: `pnpm oracles:setup sbmt`, then
-`pnpm oracles:run sbmt/projection`. It uses the same fixture envelope with a
+SBMT is an opt-in native backend: `node tools/oracles/setup.mts sbmt`, then
+`node tools/oracles/run.mts sbmt/projection`. It uses the same fixture envelope with a
 pinned executable/software lock and generator digest. `pnpm test:sbmt --unit`
 runs offline in CI; `pnpm test:sbmt --restore` restores only its selected inputs
 and runs all cases. See its [coverage and known differences](sbmt/README.md).
 The commands below operate on the Python backends.
 
 ```bash
-pnpm oracles:setup
+node tools/oracles/setup.mts
 ```
 
 creates `.local/oracles/venv` from `tools/oracles/requirements.txt`, which pins
@@ -82,11 +82,11 @@ every package, transitive ones included (Python 3.12; set `ORACLE_PYTHON` for
 another interpreter). Then regenerate every fixture, or name some:
 
 ```bash
-pnpm oracles:run
+node tools/oracles/run.mts
 ```
 
 ```bash
-pnpm oracles:run fits/llorri spice/dart-draco
+node tools/oracles/run.mts fits/llorri spice/dart-draco
 ```
 
 The inputs must be restored first (`node tools/objects/dist/operations.js acquire <id>`).

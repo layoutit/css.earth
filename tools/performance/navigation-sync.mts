@@ -5,7 +5,7 @@ import { createInterface } from 'node:readline';
 import { execFileSync } from 'node:child_process';
 import { pathToFileURL } from 'node:url';
 import { resolve } from 'node:path';
-import { readJsonSource, requireArray, requireRecord } from '../source-values.mts';
+import { readJsonSource, requireArray, requireRecord } from '../sources/source-values.mts';
 import type { JsonRecord } from './trace-model.mts';
 import { recordOf } from './trace-model.mts';
 
