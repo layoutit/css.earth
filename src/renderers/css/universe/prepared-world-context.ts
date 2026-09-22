@@ -585,7 +585,8 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     marker.dataset.contextIndicatorVisible = 'false';
     marker.dataset.contextLabelVisible = 'false';
     marker.dataset.contextAnnotationsAnimate = 'false';
-    marker.style.cssText = 'position:absolute;inset:0;pointer-events:none;text-decoration:none;transform-origin:0 0;visibility:hidden';
+    // Visibility and opacity belong to the mover; the marker and its pseudos inherit them.
+    marker.style.cssText = 'position:absolute;inset:0;pointer-events:none;text-decoration:none;transform-origin:0 0';
     // The sprite scales alone. Scaling the marker made its ring and caption pseudos counter-scale through an inherited
     // custom property, which re-resolved the marker and both pseudos for every moving body on every frame.
     const spriteLeaf = host.ownerDocument.createElement('i');
@@ -610,7 +611,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const mover = host.ownerDocument.createElement('b');
     // A fixed-size box with layout and size containment is a relayout boundary: a
     // marker's visibility or cue change lays out these three boxes, not the document.
-    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size`;
+    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size;visibility:hidden`;
     mover.appendChild(marker);
     root.appendChild(mover);
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
@@ -908,7 +909,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     publicationStats: () => ({ skippedPublications, bodyPublications, depthPublications, paintedBodies: paintedBodies.size }),
     inspect() {
       return Object.freeze(bodies.map(entry => Object.freeze({
-        id: entry.body.id, billboard: entry.marker,
+        id: entry.body.id, billboard: entry.marker, mover: entry.mover,
         get markerShown() { return entry.markerShown; },
         get indicatorShown() { return entry.indicatorShown; },
         get labelShown() { return entry.labelShown; },
@@ -1070,7 +1071,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const animateAnnotations = String(animatedAnnotations.has(entry));
         if (marker.dataset.contextAnnotationsAnimate !== animateAnnotations) marker.dataset.contextAnnotationsAnimate = animateAnnotations;
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
-        fader.visible(marker, billboardShown);
+        fader.visible(entry.mover, billboardShown);
         // The mover is hidden with its marker: a visible, transformed mover with nothing to draw still becomes a layer.
         if (entry.billboardShown !== billboardShown) marker.style.visibility = entry.mover.style.visibility = billboardShown ? '' : 'hidden';
         entry.billboardShown = billboardShown;
@@ -1099,8 +1100,10 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.indicatorHovered = entry.hovered;
             marker.dataset.contextIndicatorHovered = String(entry.hovered);
           }
-          if (policyChanged || !wasShown || hoverChanged) fader.multiply(marker, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
-          fader.set(marker, markerOpacity);
+          // Opacity lives on the mover, which has no pseudos: WebKit re-resolves an element's ::before and ::after with
+          // every restyle of it, so a per-frame opacity on the marker restyled its ring and caption every frame.
+          if (policyChanged || !wasShown || hoverChanged) fader.multiply(entry.mover, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
+          fader.set(entry.mover, markerOpacity);
           const transform = `translate(${width / 2 + x}px,${height / 2 + y}px) translate(-50%,-50%)`;
           // CSSOM serializes commas/spacing differently from the published
           // string. Compare against our last write, not its browser readback.
