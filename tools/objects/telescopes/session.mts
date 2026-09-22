@@ -272,6 +272,18 @@ const explorationContext = (target: string, reference: Record<string, unknown>):
   assessment: { status: 'not-requested' },
 });
 
+/**
+ * The saved choice in a fresh exploration. An archive choice keeps its observation and acquisition identity across runs, but
+ * its reference also names the response snapshot it was seen in, and services such as ALMA stamp every answer with the
+ * query time. Such a choice is found by its identity; the saved reference still records the snapshot it was chosen from.
+ */
+export function savedChoice(choices: readonly ExplorationChoice[], saved: { readonly key: string; readonly reference: Readonly<Record<string, unknown>> }): ExplorationChoice | undefined {
+  const exact = choices.find(entry => entry.key === saved.key);
+  if (exact || saved.reference.kind !== 'vo-acquisition') return exact;
+  const matches = choices.filter(entry => entry.reference.kind === 'vo-acquisition' && entry.reference.observation === saved.reference.observation
+    && entry.reference.acquisitionKey === saved.reference.acquisitionKey);
+  return matches.length === 1 ? matches[0] : undefined;
+}
 async function getExplorationSession(root: string, directory: string, pick: number, progress: (text: string) => void = () => {}, api: SessionServices = services, options: { readonly offline?: boolean } = {}) {
   return locked(directory, async () => {
     const saved = readExplorationChoice(JSON.parse(await readFile(resolve(directory, 'explore.json'), 'utf8')), pick), request = parseExplorationArguments(saved.args);
@@ -286,7 +298,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
     progress('Revalidating the saved observation');
     let answer = await exploreForRequest(api, root, request, saved.observation);
     if (answer.target !== saved.target) throw new Error('Target identity changed since the saved exploration. Save a new exploration.');
-    let choice = answer.choices.find(entry => entry.key === saved.key);
+    let choice = savedChoice(answer.choices, saved);
     if (!choice) throw new Error('The saved observation is no longer available for this exploration. Explore again to inspect current blockers.');
     if (choice.state === 'qualify') {
       if (!choice.configuration) throw new Error('No current qualification action.');
@@ -294,7 +306,7 @@ async function getExplorationSession(root: string, directory: string, pick: numb
       progress(`Qualifying ${choice.telescope} ${choice.mode}: ${choice.observation}`);
       await locked(resolve(root, 'output/telescopes'), () => api.qualify(root, { target: answer.target, telescope: qualifying.telescope, mode: qualifying.mode, observation: qualifying.observation, configuration: qualifying.configuration! }));
       answer = await exploreForRequest(api, root, { ...request, target: answer.target, ...answer.request.skyTarget ? { skyTarget: answer.request.skyTarget } : {} }, saved.observation);
-      choice = answer.choices.find(entry => entry.key === saved.key);
+      choice = savedChoice(answer.choices, saved);
       if (!choice || choice.state !== 'ready') throw new Error('Qualification did not produce a selectable artifact for the original exploration. Explore again for the current result.');
     }
     const artifact = await resolveExplorationArtifact(root, choice), context = explorationContext(answer.target, saved.reference);

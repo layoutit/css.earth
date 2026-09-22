@@ -156,6 +156,15 @@ test('multiple science links stay distinct, previews are excluded, cycles are bo
   assert.equal(plan.products[0]!.operation.url, 'https://example.org/one.fits');
   assert.equal((await planAccess(root, obs, saved, { ...request, region: circle }, async () => response)).products.length, 0);
 });
+test('a malformed advertised MIME is read as DataLink at its access URL, and refused if it does not answer as one', async () => {
+  const base = await almaPromise(), saved = snapshot(base), row = normalizeSnapshot(saved, profile, target, [target])[0]!;
+  const obs = { ...row, kind: 'image', target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: 'https://example.org/links', mime: 'applicati', estimatedKilobytes: null } };
+  const response = { ...base, bindings: [], rows: [{ semantics: '#this', access_url: 'one.fits', content_type: 'image/fits' }] };
+  const read = await planAccess(root, obs, saved, request, async () => response);
+  assert.equal(read.products.length, 1); assert.match(read.issues.join('\n'), /"applicati" is malformed; the access URL was read as a DataLink service/u);
+  const refused = await planAccess(root, obs, saved, request, async () => { throw new Error('not a VOTable'); });
+  assert.equal(refused.products.length, 0); assert.match(refused.issues.join('\n'), /DataLink transport or parsing failed/u);
+});
 test('archive product kind only proposes a family route; tables and events remain acquirable', async () => {
   const base = await almaPromise(), saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
   for (const kind of ['table', 'events'] as const) {
