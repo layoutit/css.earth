@@ -1,5 +1,6 @@
 import { requireRecord, requireArray } from "../../tools/sources/source-values.mts";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { preparedObjectCapabilities } from '../renderers/css/dist/index.js';

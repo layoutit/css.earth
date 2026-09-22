@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { prepareText } from './prepare-text.mts';
 
 test('every registered object has publishable reader text, and its published copies are current', async () => {

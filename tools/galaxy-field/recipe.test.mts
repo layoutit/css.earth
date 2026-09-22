@@ -4,7 +4,8 @@ import { spawnSync } from 'node:child_process';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseFieldRecipe } from './recipe.mts';
 
 const input: unknown = JSON.parse(await readFile(new URL('../../src/objects/nearby-universe/source/preparation/field.json', import.meta.url), 'utf8'));

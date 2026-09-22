@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseResolutionEvidence, parseAcceptedAssumptions, supportsMeasuredResolution, PROFILE_ASSUMPTIONS } from './resolution-evidence.mts';
 import { requestFromArguments } from './telescopes/query.mts';
 test('evidence and explicit acceptance are validated without inferring meaning from prose', () => {

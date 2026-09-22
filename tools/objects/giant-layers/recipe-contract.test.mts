@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {type Guard, parse} from '../material-composition/data-schema.mts';
 import {layeredRecipe} from '../material-composition/layered-recipe.mts';
 import {radialMotionRecipe} from '../material-composition/radial-motion-recipe.mts';

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { LENS_LABELS, prepareLensLabels } from "../prepare-lens-labels.mts";
 
 test("names arbitrary lens IDs without changing source data or assuming a fixed set of concepts", () => {

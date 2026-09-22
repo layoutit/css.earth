@@ -3,7 +3,8 @@ import * as applicationPolicy from "../../site/runtime-policy.mts";
 // wheel tests separately exercise the application policy with release inertia.
 const runtimePolicy = { ...applicationPolicy, WHEEL_ZOOM_INERTIA: null };
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import type { CameraDelta, CameraUpdate } from '../renderers/css/navigation/types.ts';
 function cameraFixture(distance = 1) {
   const state = { zoom: 1, distance, rotX: 0, rotY: 0 };

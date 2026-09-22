@@ -1,6 +1,7 @@
 /** Every authored photograph lens validates against its format's recipe schema, and a lens refuses what its format does not declare. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readdir, readFile } from 'node:fs/promises';
 import { fixtureRecord } from '../../contract/test-values.mts';
 import { parseTerrestrialProfile } from '../terrestrial-layers/index.mts';

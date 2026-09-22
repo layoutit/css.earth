@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { inputWavelengths } from './recipe-request.mts';
 import { requestFromArguments, type CapabilityRequest } from './query.mts';
 import { qualificationActionsFor } from './qualification-routes.mts';

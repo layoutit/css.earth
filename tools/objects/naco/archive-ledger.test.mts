@@ -1,7 +1,8 @@
 /** What a NACO receipt has to say for the mode it names to count as reduced. Everything here runs against a scratch programs
  * directory, so nothing asks the ESO archive anything. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';

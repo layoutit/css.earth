@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 
 import { auditObjectRuntimeOwnership } from "../../tools/ci/check-object-runtime-ownership.mts";
 import { loadObjectContent } from "./load-object-content.mts";

@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { copyFile, mkdir, mkdtemp, readFile, readdir, rm, symlink, unlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import sharp from "sharp";
 
 import { SCENE_OBJECTS } from "../objects.mts";

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { placeResolvedDisc } from './resolved-disc-map.mts';
 
 const size = 41, radius = 8, values = new Float64Array(size * size), uncertainty = new Float64Array(size * size).fill(0.02);

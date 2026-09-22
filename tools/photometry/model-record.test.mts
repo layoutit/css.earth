@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parsePhotometricModelRecord, parsePhotometryReference, PHOTOMETRIC_MODEL_SCHEMA } from './model-record.mts';
 import { createNormalization } from './normalization.mts';
 

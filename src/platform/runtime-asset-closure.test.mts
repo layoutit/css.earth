@@ -3,7 +3,8 @@ import { createHash } from "node:crypto";
 import { mkdir, mkdtemp, readFile, readdir, rm, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 
 import {
   assembleRuntimeAssetClosure, inventoryPreparedAssets, inventoryPublicAssets, normalizeRuntimeAssetUrls,

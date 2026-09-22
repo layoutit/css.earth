@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { diskGain, diskValue, assertDiskModel, NORMAL_GEOMETRY, type DiskModel } from './disk.mts';
 import { phaseGain } from './phase.mts';
 

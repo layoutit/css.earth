@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import contextInput from '../../src/objects/sun/prepared/world-context.json' with { type: 'json' };
 import { STELLAR_SYSTEMS, SYSTEM_FRAMING_RADII, SYSTEM_VIEWS, systemFramingRadii, systemFramingRect, systemViewTarget } from '../system-framing.mts';

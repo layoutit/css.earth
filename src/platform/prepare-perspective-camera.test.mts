@@ -2,7 +2,8 @@ import { requireObjectRuntimeDefinition } from '../../tools/contract/object-runt
 import { requireRecord, requireString, requireFiniteNumber } from '../../tools/sources/source-values.mts';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
-import { test } from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { preparePerspectiveCamera } from "./prepare-perspective-camera.mts";
 import PREPARED_MERCURY_SCENE from "../../src/objects/mercury/prepared/scene.json" with { type: "json" };
 import mercury from "../../src/objects/mercury/prepared/runtime.json" with { type: "json" };

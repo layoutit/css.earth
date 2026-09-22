@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { normalizeDiscoveredPdsProduct } from './archive-final.mts';
 
 test('PDS discovery retains the complete label and data dependency set', () => {

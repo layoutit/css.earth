@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { hydrateTargetAssociation, parseTargetAssociationSources, TARGET_ASSOCIATIONS_SCHEMA } from '../telescopes/target-associations.mts';
 
 const source = () => parseTargetAssociationSources({ schema: TARGET_ASSOCIATIONS_SCHEMA, associations: [{ target: 'nix', archive: 'mast', collection: 'HST',

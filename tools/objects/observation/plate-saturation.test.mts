@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { maskSaturatedStars, PLATE_PREPARATION } from './plate-saturation.mts';
 
 const W = 200, H = 200;

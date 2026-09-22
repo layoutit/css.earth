@@ -3,7 +3,8 @@ import { createHash } from 'node:crypto';
 import { mkdtemp, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { obliquitySpinAxis, readAuthoredRotation } from './authored-rotation.mts';
 
 test('a measured meridian advances from its source epoch, including retrograde spin', async () => {

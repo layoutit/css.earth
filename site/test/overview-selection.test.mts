@@ -1,6 +1,7 @@
 import { testDistance } from './navigation-test-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { selectionAtCamera, watchOverviewSelection } from '../overview-selection.mts';
 import { systemById } from '../object-systems.mts';
 import { worldCameraFromCenteredPresentation } from '../../src/renderers/css/dist/navigation.js';

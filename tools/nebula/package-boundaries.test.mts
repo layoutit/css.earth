@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { checkNebulaBoundaries, nebulaPackages } from './package-boundaries.mts';
 
 test('actual illegal imports, missing exports and line overflows fail the package guard', () => {

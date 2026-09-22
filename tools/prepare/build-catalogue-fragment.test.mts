@@ -4,7 +4,8 @@ import { createHash } from 'node:crypto';
 import { mkdir, mkdtemp, readFile, rm, stat, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { buildCatalogueFragment } from './build-catalogue-fragment.mts';
 
 const FRAGMENT_HTML = '<ul class="planet-object-list"><li class="planet-object-item">Saturn</li></ul>';

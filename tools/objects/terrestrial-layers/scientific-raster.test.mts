@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { LOSSLESS_PALETTE_STEPS, LOSSY_PALETTE_STEPS, paletteLookup, colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mts';
 import { lambertAttenuationAtlas } from './solid-raster.mts';

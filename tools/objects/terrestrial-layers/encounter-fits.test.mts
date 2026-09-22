@@ -1,5 +1,6 @@
 import { required } from '../../contract/test-values.mts';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readEncounterHdus, decodeEncounterFits } from './encounter-fits.mts';
 import { encounterCamera, validateBodyFrame } from './encounter-camera.mts';

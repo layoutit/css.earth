@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { archiveProfileFamilyEvidence, productKindFamilyEvidence } from './observation-families.mts';
 
 const owner = { kind: 'archive-adapter' as const, id: 'fixture', evidence: 'fixture ledger' };

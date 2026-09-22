@@ -1,4 +1,5 @@
-import {test} from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {alignCameraBands} from './band-alignment.mts';
 import {requireRecord,requireArray,requireFiniteNumber} from '../../sources/source-values.mts';

@@ -2,7 +2,8 @@
  * an archive product: the synthetic exposure below is a few thousand events around a dark disc that drifts, written into a
  * FITS file with the same two tables a STIS TIME-TAG product carries. */
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, readFile, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';

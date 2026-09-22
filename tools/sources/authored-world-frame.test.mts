@@ -1,7 +1,8 @@
 import { fixtureRecord } from '../contract/test-values.mts';
 import { requireArray, requireFiniteNumber } from './source-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile, type FileHandle } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { SCENE_OBJECTS } from '../../site/objects.mts';

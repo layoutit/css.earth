@@ -2,7 +2,8 @@ import { requireRecord, requireFiniteNumber } from '../../tools/sources/source-v
 import { readFile } from 'node:fs/promises';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import PREPARED_MERCURY_SUN from "../../src/objects/mercury/prepared/sun.json" with {type: "json"};
 import PREPARED_VENUS_SUN from "../../src/objects/venus/prepared/sun.json" with {type: "json"};
 import {
