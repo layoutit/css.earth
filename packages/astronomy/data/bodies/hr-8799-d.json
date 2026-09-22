@@ -1,0 +1,36 @@
+{
+ "id": "hr-8799-d",
+ "classification": "exoplanet",
+ "order": 1218,
+ "physical": {
+  "name": "HR 8799 d",
+  "horizonsCode": null,
+  "meanRadiusKm": 85790.4,
+  "gravitationalParameterKm3PerS2": 1164248569.39,
+  "parent": "hr-8799"
+ },
+ "physicalNotes": "Radius 1.2 Jupiter radii, the model radius Marois et al. (2008, Science 322, 1348) adopt for the companions and the NASA Exoplanet Archive carries as the default for this planet: 85,790 km at 71,492 km per Jupiter radius. Not a measured diameter: the planet is unresolved. GM from the dynamical mass 9.19 Jupiter masses of Zurlo et al. (2022, A&A 666, A133, Table 3 model 1) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+ "hostedOrbit": {
+  "periodDays": 41021.8,
+  "semiMajorAxisStellarRadii": 3960.27,
+  "inclinationDegrees": 26.8734271,
+  "eccentricity": 0.1146003,
+  "argumentOfPeriapsisDegrees": 209.0595,
+  "epochDefinition": "periastron",
+  "transitTimeBmjdTdb": 44260.2,
+  "ascendingNodePositionAngleDegrees": 62.1852189,
+  "prediction": {
+   "tool": "whereistheplanet",
+   "planet": "hr8799d",
+   "reference": "whereistheplanet (Wang et al. 2021) distributes a GRAVITY orbit fit for the four planets, not yet published; it is what Sallum et al. (2026, arXiv:2609.10507) predict these planets with."
+  },
+  "sources": {
+   "period": "Derived: Kepler's third law with the semi-major axis below and the fitted masses of Zurlo et al. (2022 et al. (2022, Table 3 model 1): the star 1.47 and this planet 9.19 Jupiter masses, 41021.8 d.",
+   "shape": "Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. a 26.5206 au at their parallax, kept as the angular size 648.75 mas and placed at the Gaia DR3 distance: 3960.27 radii of the star's 1,001,808 km; inclination 26.8734 degrees.",
+   "eccentricity": "Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. e 0.1146003.",
+   "argumentOfPeriapsis": "Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. omega 29.0595 degrees, the planet's argument of periastron; stored as the star's, 209.0595 degrees.",
+   "phase": "Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. mean anomaly at that epoch, MJD 51117.157, turned into the periastron passage MJD 44260.2 with the period above.",
+   "orientation": "Zurlo et al. (2022, A&A 666, A133; arXiv:2207.10684), Table 3 model 1: the four-planet fit at stellar mass 1.47 solar masses and parallax 24.525662 mas, osculating heliocentric elements at epoch 1998.83. the common ascending node 62.1852 degrees east of north."
+  }
+ }
+}

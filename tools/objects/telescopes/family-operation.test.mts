@@ -10,7 +10,7 @@ import{describeStandaloneSpectrum}from'./families/f03-spectrum.mts';
 import{describePhotometry}from'./families/f05-photometry.mts';
 import{describeTimeSeries}from'./families/f06-time-series.mts';
 import{describeWindRad1,WIND_RAD1_FIXTURE}from'./families/f07-dynamic-spectrum.mts';
-import{describeAstrometry}from'./families/f09-astrometry.mts';
+import{describeAstrometry,readAstrometryCsv}from'./families/f09-astrometry.mts';
 import{describeCompound}from'./families/f18-compound.mts';
 import{readTessLightCurve}from'../eclipse-map/transit-limb-darkening.mts';
 import{describeDelayDoppler}from'./families/f15-radar.mts';
