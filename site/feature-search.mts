@@ -28,10 +28,19 @@ export function parseFeatureIndex(value: unknown, pin: FeatureIndexPin): Feature
   return value as unknown as FeatureIndex;
 }
 
+// Built once per loaded index: rebuilding it lowercased every body name for every feature on each keystroke.
+const candidatesByIndex = new WeakMap<FeatureIndex, readonly { feature: IndexedFeature; names: readonly string[]; searchContext: string }[]>();
+function featureCandidates(index: FeatureIndex) {
+  let candidates = candidatesByIndex.get(index);
+  if (!candidates) {
+    const names = new Map(index.objects.map(object => [object.id, object.name.toLocaleLowerCase('en')]));
+    candidates = index.features.map(feature => ({ feature, names: feature.searchNames, searchContext: `${feature.searchContext} ${names.get(feature.objectId) ?? ''}` }));
+    candidatesByIndex.set(index, candidates);
+  }
+  return candidates;
+}
 export function matchFeatures(index: FeatureIndex, query: string, objectId: string, limit = 8) {
-  const names = new Map(index.objects.map(object => [object.id, object.name]));
-  const ranked = searchDestinations(index.features.map(feature => ({ feature, names: feature.searchNames,
-    searchContext: `${feature.searchContext} ${names.get(feature.objectId)?.toLocaleLowerCase('en') ?? ''}` })), query, limit).map(match => match.feature);
+  const ranked = searchDestinations(featureCandidates(index), query, limit).map(match => match.feature);
   return [...ranked.filter(feature => feature.objectId === objectId), ...ranked.filter(feature => feature.objectId !== objectId)];
 }
 export function featureResult(feature: IndexedFeature, index: FeatureIndex, objectId: string) {
