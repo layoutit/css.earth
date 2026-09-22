@@ -2414,6 +2414,22 @@
   background-image: url("/scenes/triton/triton-poles-enhanced@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="triton"][data-lens="ultraviolet"] .polycss-scene s:not(.triton-polar) {
+  background-image: url("/scenes/triton/triton-ultraviolet@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="triton"][data-lens="ultraviolet"] .polycss-scene s.triton-polar {
+  background-image: url("/scenes/triton/triton-poles-ultraviolet@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="triton"][data-lens="voyager-color"] .polycss-scene s:not(.triton-polar) {
+  background-image: url("/scenes/triton/triton-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="triton"][data-lens="voyager-color"] .polycss-scene s.triton-polar {
+  background-image: url("/scenes/triton/triton-poles-voyager-color@2x.webp") !important;
+}
+
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .planet-stage[data-object-id="triton"] .triton-fixed-material {

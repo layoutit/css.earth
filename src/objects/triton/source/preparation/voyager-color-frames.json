@@ -1,0 +1,324 @@
+{
+  "schema": "cssearth-voyager-color-frames@1",
+  "kernelSet": "voyager",
+  "kernels": [
+    "lsk/naif0012.tls",
+    "pck/pck00010.tpc",
+    "sclk/vg200051.tsc",
+    "fk/vg2_v02.tf",
+    "ik/vg2_issna_v02.ti",
+    "spk/vgr2_nep097.bsp",
+    "ck/vg2_nep_version1_type1_iss_sedr.bc"
+  ],
+  "ckToleranceSeconds": 3,
+  "route": {
+    "observer": -32,
+    "target": 801,
+    "bodyFrame": "IAU_TRITON",
+    "instrument": -32101,
+    "frame": "VG2_ISSNA",
+    "aberration": "LT+S",
+    "radiusKm": 1352.6,
+    "datumShiftDegrees": {
+      "longitude": 0.78,
+      "latitude": -0.8
+    },
+    "maximumEmissionDegrees": 60,
+    "maximumIncidenceDegrees": 60
+  },
+  "cellDegrees": 0.1,
+  "wavelengthsMicrometers": {
+    "VIOLET": 0.4,
+    "GREEN": 0.585,
+    "UV": 0.325
+  },
+  "rotation": {
+    "PoleRa": [
+      299.36,
+      0.0,
+      0.0
+    ],
+    "PoleDec": [
+      41.17,
+      0.0,
+      0.0
+    ],
+    "PrimeMeridian": [
+      296.53,
+      -61.2572637,
+      0.0
+    ],
+    "PoleRaNutPrec": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      -32.35,
+      0.0,
+      -6.28,
+      -2.08,
+      -0.74,
+      -0.28,
+      -0.11,
+      -0.07,
+      -0.02,
+      -0.01
+    ],
+    "PoleDecNutPrec": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      22.55,
+      0.0,
+      2.1,
+      0.55,
+      0.16,
+      0.05,
+      0.02,
+      0.01,
+      0.0,
+      0.0
+    ],
+    "PmNutPrec": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      22.25,
+      0.0,
+      6.73,
+      2.05,
+      0.74,
+      0.28,
+      0.11,
+      0.05,
+      0.02,
+      0.01
+    ],
+    "SysNutPrec0": [
+      357.85,
+      323.92,
+      220.51,
+      354.27,
+      75.31,
+      35.36,
+      142.61,
+      177.85,
+      647.84,
+      355.7,
+      533.55,
+      711.4,
+      889.25,
+      1067.1,
+      1244.95,
+      1422.8,
+      1600.65
+    ],
+    "SysNutPrec1": [
+      52.316,
+      62606.6,
+      55064.2,
+      46564.5,
+      26109.4,
+      14325.4,
+      2824.6,
+      52.316,
+      125213.2,
+      104.632,
+      156.948,
+      209.264,
+      261.58,
+      313.896,
+      366.212,
+      418.528,
+      470.844
+    ]
+  },
+  "controlledArchive": "observations/fully_processed.zip",
+  "controlledDirectory": "fully_processed",
+  "output": {
+    "frames": "observations/voyager-color",
+    "labels": "photometry/voyager-color",
+    "report": "reference/voyager-color-placement.json"
+  },
+  "observations": [
+    {
+      "id": "bland-2024-color",
+      "frames": [
+        {
+          "id": "c1139257",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139259",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139305",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139307",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139309",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139311",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139313",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139315",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139317",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139319",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139321",
+          "kind": "controlled-ortho"
+        },
+        {
+          "id": "c1139323",
+          "kind": "controlled-ortho"
+        }
+      ]
+    },
+    {
+      "id": "approach-4-7km",
+      "frames": [
+        {
+          "id": "c1138703",
+          "kind": "geomed",
+          "path": "observations/voyager/C1138703_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1138703_GEOMED.LBL"
+        },
+        {
+          "id": "c1138657",
+          "kind": "geomed",
+          "path": "observations/voyager/C1138657_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1138657_GEOMED.LBL"
+        },
+        {
+          "id": "c1138715",
+          "kind": "geomed",
+          "path": "observations/voyager/C1138715_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1138715_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "approach-8-6km",
+      "frames": [
+        {
+          "id": "c1137721",
+          "kind": "geomed",
+          "path": "observations/voyager/C1137721_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1137721_GEOMED.LBL"
+        },
+        {
+          "id": "c1137715",
+          "kind": "geomed",
+          "path": "observations/voyager/C1137715_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1137715_GEOMED.LBL"
+        },
+        {
+          "id": "c1137727",
+          "kind": "geomed",
+          "path": "observations/voyager/C1137727_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1137727_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "approach-10-6km",
+      "frames": [
+        {
+          "id": "c1137221",
+          "kind": "geomed",
+          "path": "observations/voyager/C1137221_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1137221_GEOMED.LBL"
+        },
+        {
+          "id": "c1137159",
+          "kind": "geomed",
+          "path": "observations/voyager/C1137159_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1137159_GEOMED.LBL"
+        },
+        {
+          "id": "c1137245",
+          "kind": "geomed",
+          "path": "observations/voyager/C1137245_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1137245_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "approach-23km",
+      "frames": [
+        {
+          "id": "c1133859",
+          "kind": "geomed",
+          "path": "observations/voyager/C1133859_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1133859_GEOMED.LBL"
+        },
+        {
+          "id": "c1133848",
+          "kind": "geomed",
+          "path": "observations/voyager/C1133848_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1133848_GEOMED.LBL"
+        },
+        {
+          "id": "c1133923",
+          "kind": "geomed",
+          "path": "observations/voyager/C1133923_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1133923_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "approach-30km",
+      "frames": [
+        {
+          "id": "c1132134",
+          "kind": "geomed",
+          "path": "observations/voyager/C1132134_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1132134_GEOMED.LBL"
+        },
+        {
+          "id": "c1132400",
+          "kind": "geomed",
+          "path": "observations/voyager/C1132400_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1132400_GEOMED.LBL"
+        },
+        {
+          "id": "c1132141",
+          "kind": "geomed",
+          "path": "observations/voyager/C1132141_GEOMED.IMG",
+          "labelPath": "observations/voyager/C1132141_GEOMED.LBL"
+        }
+      ]
+    }
+  ]
+}

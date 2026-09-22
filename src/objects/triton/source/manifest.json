@@ -416,6 +416,2486 @@
         "kind": "local",
         "reason": "Project-authored factsheet, dataset recipes and legends."
       }
+    },
+    {
+      "credit": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "license": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "licenseEvidence": [
+        "https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7"
+      ],
+      "acquisition": "Restore the byte-identical R2 mirror through source/preparation/acquisition.json; the LPI repository answers scripted requests with a browser challenge.",
+      "redistribution": "Retain Paul Schenk/LPI and NASA/JPL Voyager credits; the original JPEG is mirrored byte-for-byte.",
+      "id": "voyager-triton-uv-color",
+      "path": "observations/tnmap-cyl-KH-obu.jpg",
+      "origin": "https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7",
+      "catalog": "https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7",
+      "mirror": "https://earth-assets.lowpoly.cc/source-cache/559ad925fc6b3aa03c666f82456096fffb5aa5158c07eee580f5a5276806c24e/tnmap-cyl-KH-obu.jpg",
+      "consumers": [
+        "surfaces"
+      ],
+      "lensId": "ultraviolet",
+      "label": "Ultraviolet color",
+      "falseColor": true,
+      "width": 14165,
+      "height": 7083,
+      "projection": {
+        "type": "equirectangular",
+        "longitudeDegrees": [
+          -180,
+          180
+        ],
+        "latitudeDegrees": [
+          90,
+          -90
+        ],
+        "longitudeDirection": "east-positive",
+        "referenceRadiusMeters": 1352600
+      },
+      "coverage": "Schenk et al. (2021) global mosaic of Voyager 2 orange, blue and ultraviolet filter images. The north was not illuminated by Voyager and stays missing. Local source resolution varies.",
+      "expectedBytes": 20274685,
+      "expectedSha256": "559ad925fc6b3aa03c666f82456096fffb5aa5158c07eee580f5a5276806c24e",
+      "capture": {
+        "attributions": [
+          {
+            "kind": "facility",
+            "facilityId": "voyager-2",
+            "missionId": "voyager-2",
+            "evidence": "https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7"
+          }
+        ]
+      },
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-triton-uv-color",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1138703-geomed-frame",
+      "path": "observations/voyager/C1138703_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "4afb8cc5ccf14ab879d47397fb2aef38767d3f0c3a7e7f6acab36eae091897c2",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11387XX/C1138703_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1138703-geomed-label",
+      "path": "observations/voyager/C1138703_GEOMED.LBL",
+      "expectedBytes": 3340,
+      "expectedSha256": "6fea84e87f0be02f31c9a51eaf9fa31842e7fd22384ea8e5630ba43c79eb04e1",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11387XX/C1138703_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1138657-geomed-frame",
+      "path": "observations/voyager/C1138657_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "9b26f44a318c0557168787572dce9198b8bcd9711fd93cd3a3353dc7cc887648",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11386XX/C1138657_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1138657-geomed-label",
+      "path": "observations/voyager/C1138657_GEOMED.LBL",
+      "expectedBytes": 3341,
+      "expectedSha256": "44af3e806fd9aef5e17f1575e8146d7995dab0c224b4dfe5e32c1e90b0598b1d",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11386XX/C1138657_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1138715-geomed-frame",
+      "path": "observations/voyager/C1138715_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "92d91bdff255fef17af5fa7996713bb81d1e75df3d571f4af58d036e9a80daec",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11387XX/C1138715_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1138715-geomed-label",
+      "path": "observations/voyager/C1138715_GEOMED.LBL",
+      "expectedBytes": 3338,
+      "expectedSha256": "f0190412a6c3824b3dbb3b63a7909fd818e39c2be9400605e4ce1e3f60335a5b",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11387XX/C1138715_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137721-geomed-frame",
+      "path": "observations/voyager/C1137721_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "e3597cda715541649bd9e710c13d56546d932b72071d6ae54fd8fe770926c4de",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137721_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137721-geomed-label",
+      "path": "observations/voyager/C1137721_GEOMED.LBL",
+      "expectedBytes": 3321,
+      "expectedSha256": "a889a0fabfb0c3f30e201b18d8c5a825e5f31631bc39d0cb13d90ecd108b5fd0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137721_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137715-geomed-frame",
+      "path": "observations/voyager/C1137715_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "4d5ad8fbf63292a0cc898bbb20443bb14d9caccd29754407ae96b1fefde01fc6",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137715_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137715-geomed-label",
+      "path": "observations/voyager/C1137715_GEOMED.LBL",
+      "expectedBytes": 3322,
+      "expectedSha256": "2c8a95b085e9b7bfe4c6b7480fd3b3d15a56a4d6317608920c89c5451b5ea608",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137715_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137727-geomed-frame",
+      "path": "observations/voyager/C1137727_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "8fdb176665542f1eb3045c576a1d65b76243658c35b8d15426acffb68bfedb7c",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137727_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137727-geomed-label",
+      "path": "observations/voyager/C1137727_GEOMED.LBL",
+      "expectedBytes": 3302,
+      "expectedSha256": "e5cb09a5f2263aeedbe56fbdc3e1603de231d7d714596c414e321b77e8987a2a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11377XX/C1137727_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137221-geomed-frame",
+      "path": "observations/voyager/C1137221_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "5029028a30834c28e8954fc08ee40336033abe0d1125e6b9da6df09273dad27a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11372XX/C1137221_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137221-geomed-label",
+      "path": "observations/voyager/C1137221_GEOMED.LBL",
+      "expectedBytes": 3317,
+      "expectedSha256": "4e27df7381a7ddf4b039231e32dc5d2a092c72473a5e0fe320ac4649fcd13f59",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11372XX/C1137221_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137159-geomed-frame",
+      "path": "observations/voyager/C1137159_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "4e70e8ae9c030255e2422b29dfe26d67f6505364cfaa002e4ff1ad01c525a48a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11371XX/C1137159_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137159-geomed-label",
+      "path": "observations/voyager/C1137159_GEOMED.LBL",
+      "expectedBytes": 3318,
+      "expectedSha256": "eeaa75267611e3f1da04c6c78f68a4e6ed4d3ffe072caa7d13916e143cfc1f4b",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11371XX/C1137159_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137245-geomed-frame",
+      "path": "observations/voyager/C1137245_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "94ea88b4c5f5d7359d76e098c6dcb58cf6af586467dc6c7a64faf7056a3978fd",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11372XX/C1137245_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1137245-geomed-label",
+      "path": "observations/voyager/C1137245_GEOMED.LBL",
+      "expectedBytes": 3314,
+      "expectedSha256": "a5f8dd76b044b1fc566cb9d812cc953bb9b640f9fd79c97dfad00a747633d7d0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11372XX/C1137245_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1133859-geomed-frame",
+      "path": "observations/voyager/C1133859_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "1af5ddb1cfd451ec46f12e3afd9c450ccedcc374641eee41640619ba1b1720a4",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133859_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1133859-geomed-label",
+      "path": "observations/voyager/C1133859_GEOMED.LBL",
+      "expectedBytes": 3301,
+      "expectedSha256": "dae20f927c396ff15500c72b06105c4fc6deac782ad38fb4291a7d42c23ab7d0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133859_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1133848-geomed-frame",
+      "path": "observations/voyager/C1133848_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "6b81e0b5b9b6e899f8b583cbc1bd01511284a274571b48cf56aab241e94cd3d6",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133848_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1133848-geomed-label",
+      "path": "observations/voyager/C1133848_GEOMED.LBL",
+      "expectedBytes": 3318,
+      "expectedSha256": "f6f3d6e2f036ec587fa1267fa4755e57afc92489b70c500d17663b572a4af97a",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11338XX/C1133848_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1133923-geomed-frame",
+      "path": "observations/voyager/C1133923_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "65dcdd3bb0edcd7440da6714014932e1e5a9f54d2c9f596b1696fe16753a64f7",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11339XX/C1133923_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1133923-geomed-label",
+      "path": "observations/voyager/C1133923_GEOMED.LBL",
+      "expectedBytes": 3315,
+      "expectedSha256": "a8d5db97c0426b80dd216bce3466305fb9b5aa8c03a5507c23dbb12ee9a18b8d",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11339XX/C1133923_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1132134-geomed-frame",
+      "path": "observations/voyager/C1132134_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "0dbf52293bb10385707b16332c8afb2ef5ca7002205dd771a856d41ff8215c7b",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11321XX/C1132134_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1132134-geomed-label",
+      "path": "observations/voyager/C1132134_GEOMED.LBL",
+      "expectedBytes": 3316,
+      "expectedSha256": "3ba8b68cec898055acbfb0e1020ee684f788697aae2e8ca1de822d5f8c7049ac",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11321XX/C1132134_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1132400-geomed-frame",
+      "path": "observations/voyager/C1132400_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "78a7c52ccfb78ff14074cee4a022ea168e7ee398caa878fc756e0935e48d69a0",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11324XX/C1132400_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1132400-geomed-label",
+      "path": "observations/voyager/C1132400_GEOMED.LBL",
+      "expectedBytes": 3303,
+      "expectedSha256": "c80a7772b6d7d8225e44ad90e636feeeaadd291a7946b6b2120f62b7dc1bfd63",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11324XX/C1132400_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1132141-geomed-frame",
+      "path": "observations/voyager/C1132141_GEOMED.IMG",
+      "expectedBytes": 2002000,
+      "expectedSha256": "c565b511db7a8e3798eded51150557500fa9993846b4e1d5f36234db7d81cc37",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11321XX/C1132141_GEOMED.IMG",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-c1132141-geomed-label",
+      "path": "observations/voyager/C1132141_GEOMED.LBL",
+      "expectedBytes": 3314,
+      "expectedSha256": "82f5ed763bf88da53b12a5ed998642bf5f7807ad42a62dbecb24203748629a71",
+      "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11321XX/C1132141_GEOMED.LBL",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "licenseEvidence": [
+        "https://pds-rings.seti.org/voyager/iss/"
+      ],
+      "acquisition": "Download the PDS Ring-Moon Systems Node GEOMED product and its label.",
+      "redistribution": "Public mission data; original excluded from Git, restored from its PDS origin.",
+      "consumers": [
+        "voyager-color-frames"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-voyager-iss-geomed",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-color-observer-vectors",
+      "path": "photometry/horizons-observer-voyager-color.json",
+      "expectedBytes": 11639,
+      "expectedSha256": "a8bfba96c2b967b6c2f024e897b9448e7859a4c6f9b9f1d228b6bd2bda8d6c1a",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447761.373948875%0A2447761.377837764%0A2447761.455059986%0A2447761.948393319%0A2447761.954504430%0A2447761.967837763%0A2447763.054504430%0A2447763.066726652%0A2447763.080059986%0A2447763.230059986%0A2447763.233393319%0A2447763.236726652%0A2447763.553393319%0A2447763.556726652%0A2447763.563393319%0A2447763.753363481%0A2447763.754474592%0A2447763.757807925%0A2447763.758919036%0A2447763.759996803%0A2447763.761107914%0A2447763.762196803%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.767774580%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons",
+      "license": "Public JPL Horizons ephemeris service output.",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "acquisition": "Query the recorded JPL Horizons API URL.",
+      "redistribution": "Recorded API response retained with its query.",
+      "consumers": [
+        "voyager-color-vectors"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-horizons-voyager-color",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-color-sun-vectors",
+      "path": "photometry/horizons-sun-voyager-color.json",
+      "expectedBytes": 10118,
+      "expectedSha256": "216db97f3787ea5cebf44d34865fc95ba3bd6f37aa0a878bff5e9428a9d642ba",
+      "origin": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%2710%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447761.373948875%0A2447761.377837764%0A2447761.455059986%0A2447761.948393319%0A2447761.954504430%0A2447761.967837763%0A2447763.054504430%0A2447763.066726652%0A2447763.080059986%0A2447763.230059986%0A2447763.233393319%0A2447763.236726652%0A2447763.553393319%0A2447763.556726652%0A2447763.563393319%0A2447763.753363481%0A2447763.754474592%0A2447763.757807925%0A2447763.758919036%0A2447763.759996803%0A2447763.761107914%0A2447763.762196803%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.767774580%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "credit": "NASA/JPL Solar System Dynamics, Horizons",
+      "license": "Public JPL Horizons ephemeris service output.",
+      "licenseEvidence": [
+        "https://ssd.jpl.nasa.gov/horizons/"
+      ],
+      "acquisition": "Query the recorded JPL Horizons API URL.",
+      "redistribution": "Recorded API response retained with its query.",
+      "consumers": [
+        "voyager-color-vectors"
+      ],
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "source-triton-horizons-voyager-color",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "voyager-color-c1139257-1",
+      "path": "observations/voyager-color/c1139257-1.equi.tif",
+      "expectedBytes": 1884008,
+      "expectedSha256": "39a574fbe79dcc6c1f1e48746f09e20e597aaa3ff4c2640d9f5fff872956c667",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/39a574fbe79dcc6c1f1e48746f09e20e597aaa3ff4c2640d9f5fff872956c667/c1139257-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:03:54.420Z",
+      "width": 752,
+      "height": 626,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139257-1-geometry",
+      "path": "photometry/voyager-color/c1139257-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/204bfd5212d8782231f6cdc1a511f6420c55f661186810f8850c182fd1a0029a/c1139257-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139257-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139257-2",
+      "path": "observations/voyager-color/c1139257-2.equi.tif",
+      "expectedBytes": 21032,
+      "expectedSha256": "b192389bb62ea8fad090eb0d50ffad46dc7cc9fd4e32fe8b37c8a02e43eb54c7",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b192389bb62ea8fad090eb0d50ffad46dc7cc9fd4e32fe8b37c8a02e43eb54c7/c1139257-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:03:54.420Z",
+      "width": 8,
+      "height": 626,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139257-2-geometry",
+      "path": "photometry/voyager-color/c1139257-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/204bfd5212d8782231f6cdc1a511f6420c55f661186810f8850c182fd1a0029a/c1139257-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139257-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139259-1",
+      "path": "observations/voyager-color/c1139259-1.equi.tif",
+      "expectedBytes": 1763132,
+      "expectedSha256": "c4824ab0497d55acd6636f5e612d09e50097f19a3acdb55d05910a71e57fd9f5",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/c4824ab0497d55acd6636f5e612d09e50097f19a3acdb55d05910a71e57fd9f5/c1139259-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:05:30.420Z",
+      "width": 733,
+      "height": 601,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139259-1-geometry",
+      "path": "photometry/voyager-color/c1139259-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/d6d1ec4145c96c031214a41c89874247b415fd964406dd178b4e35eda9699a0a/c1139259-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139259-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139259-2",
+      "path": "observations/voyager-color/c1139259-2.equi.tif",
+      "expectedBytes": 27444,
+      "expectedSha256": "4fccb2ba31ec283268de18ee51175c2ca2bc5997ecff083af405226e676ca834",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/4fccb2ba31ec283268de18ee51175c2ca2bc5997ecff083af405226e676ca834/c1139259-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:05:30.420Z",
+      "width": 11,
+      "height": 601,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139259-2-geometry",
+      "path": "photometry/voyager-color/c1139259-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/d6d1ec4145c96c031214a41c89874247b415fd964406dd178b4e35eda9699a0a/c1139259-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139259-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139305-1",
+      "path": "observations/voyager-color/c1139305-1.equi.tif",
+      "expectedBytes": 1321704,
+      "expectedSha256": "b85b583e614eb8da3a4d5ac2749006e9a115ccbdf4df85121030a8b898d609f8",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b85b583e614eb8da3a4d5ac2749006e9a115ccbdf4df85121030a8b898d609f8/c1139305-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:10:18.420Z",
+      "width": 469,
+      "height": 704,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139305-1-geometry",
+      "path": "photometry/voyager-color/c1139305-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/07f70ae8eb812a437fd4d7fda3df8e7cd1b11f1853fdbdb9b35223a50f9ad736/c1139305-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139305-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139305-2",
+      "path": "observations/voyager-color/c1139305-2.equi.tif",
+      "expectedBytes": 2005992,
+      "expectedSha256": "e04a4e52b7486a1e59e71506fe74c16ea2d803e5c99f84cde7cfc4966ca032ae",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/e04a4e52b7486a1e59e71506fe74c16ea2d803e5c99f84cde7cfc4966ca032ae/c1139305-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:10:18.420Z",
+      "width": 712,
+      "height": 704,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139305-2-geometry",
+      "path": "photometry/voyager-color/c1139305-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/07f70ae8eb812a437fd4d7fda3df8e7cd1b11f1853fdbdb9b35223a50f9ad736/c1139305-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139305-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139307-1",
+      "path": "observations/voyager-color/c1139307-1.equi.tif",
+      "expectedBytes": 1197048,
+      "expectedSha256": "92c201596dcd0525b4fac26ce85d8761d89c86d9a6f6e3263f0aa774cb3aac58",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/92c201596dcd0525b4fac26ce85d8761d89c86d9a6f6e3263f0aa774cb3aac58/c1139307-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:11:54.420Z",
+      "width": 413,
+      "height": 724,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139307-1-geometry",
+      "path": "photometry/voyager-color/c1139307-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/4d28b1aac31db67daed933a743fe526698fed58ca5bf3055aa3828f2ea5e7a80/c1139307-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139307-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139307-2",
+      "path": "observations/voyager-color/c1139307-2.equi.tif",
+      "expectedBytes": 2248296,
+      "expectedSha256": "2abfbaf8f90a50b68d346df67b58f2b076e595d6df561f2b07149a243f2671d7",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/2abfbaf8f90a50b68d346df67b58f2b076e595d6df561f2b07149a243f2671d7/c1139307-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:11:54.420Z",
+      "width": 776,
+      "height": 724,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139307-2-geometry",
+      "path": "photometry/voyager-color/c1139307-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/4d28b1aac31db67daed933a743fe526698fed58ca5bf3055aa3828f2ea5e7a80/c1139307-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139307-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139309",
+      "path": "observations/voyager-color/c1139309.equi.tif",
+      "expectedBytes": 1166824,
+      "expectedSha256": "02ca91f94ec481c50b124d1b3d2d01ec762276e8fac08d04b4c515d835151a27",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/02ca91f94ec481c50b124d1b3d2d01ec762276e8fac08d04b4c515d835151a27/c1139309.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:13:27.539Z",
+      "width": 506,
+      "height": 576,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139309-geometry",
+      "path": "photometry/voyager-color/c1139309.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b77021db1100843571dde1dd5b83da2e9a7055cf63cd2c0f09e554e3a6a31817/c1139309.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139309",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139311",
+      "path": "observations/voyager-color/c1139311.equi.tif",
+      "expectedBytes": 1103880,
+      "expectedSha256": "4d2c24bad72e47b7e62f4fb0498ea514b860cdcd4fd38ff80cf3b8f84df2ecae",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/4d2c24bad72e47b7e62f4fb0498ea514b860cdcd4fd38ff80cf3b8f84df2ecae/c1139311.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:15:03.539Z",
+      "width": 488,
+      "height": 565,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139311-geometry",
+      "path": "photometry/voyager-color/c1139311.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/1aab9c265d632e2770e3cb3ca0c6ce30e27031d4c815bd579ef0f3784b27e506/c1139311.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139311",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139313",
+      "path": "observations/voyager-color/c1139313.equi.tif",
+      "expectedBytes": 2232904,
+      "expectedSha256": "5985b194355edc90c1f05a69ee2e44fee246467f0244a79007e02b3347919a98",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/5985b194355edc90c1f05a69ee2e44fee246467f0244a79007e02b3347919a98/c1139313.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-25T06:16:37.619Z",
+      "width": 804,
+      "height": 694,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139313-geometry",
+      "path": "photometry/voyager-color/c1139313.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/d91387d5a15ae0cced6b044931a207c491445d08c092465befb50eb3c0e127e6/c1139313.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139313",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139315-1",
+      "path": "observations/voyager-color/c1139315-1.equi.tif",
+      "expectedBytes": 2212048,
+      "expectedSha256": "9df1e3edd87fbbe557e76b95462ca60d4023c1b30e99fb9b5af1b5712320727d",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/9df1e3edd87fbbe557e76b95462ca60d4023c1b30e99fb9b5af1b5712320727d/c1139315-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:18:15.539Z",
+      "width": 738,
+      "height": 749,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139315-1-geometry",
+      "path": "photometry/voyager-color/c1139315-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/fb4d4ae0a91c0c305a0dbe888579cf3ed369c9a0cdea3a0038a984aa3a368514/c1139315-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139315-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139315-2",
+      "path": "observations/voyager-color/c1139315-2.equi.tif",
+      "expectedBytes": 399468,
+      "expectedSha256": "786f4df0374089cb5fccbc512b4ac752c4cef7e41723250d96292acbfd60e171",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/786f4df0374089cb5fccbc512b4ac752c4cef7e41723250d96292acbfd60e171/c1139315-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:18:15.539Z",
+      "width": 133,
+      "height": 749,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139315-2-geometry",
+      "path": "photometry/voyager-color/c1139315-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/fb4d4ae0a91c0c305a0dbe888579cf3ed369c9a0cdea3a0038a984aa3a368514/c1139315-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139315-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139317-1",
+      "path": "observations/voyager-color/c1139317-1.equi.tif",
+      "expectedBytes": 1942192,
+      "expectedSha256": "a18c782cb95010d2ff13ceb7dd6afae9c0a8a3586bce12931c33d6dcf88c3e7b",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/a18c782cb95010d2ff13ceb7dd6afae9c0a8a3586bce12931c33d6dcf88c3e7b/c1139317-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:19:51.539Z",
+      "width": 594,
+      "height": 817,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139317-1-geometry",
+      "path": "photometry/voyager-color/c1139317-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/afab55910c8c5f84faafd23206bdbe44bfde7f05a7718b5bda8068b54dab97b7/c1139317-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139317-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139317-2",
+      "path": "observations/voyager-color/c1139317-2.equi.tif",
+      "expectedBytes": 1066368,
+      "expectedSha256": "c18e96180c1e4360db3e85282d13f8d739757ba14cc244879bc6f98f1889e536",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/c18e96180c1e4360db3e85282d13f8d739757ba14cc244879bc6f98f1889e536/c1139317-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:19:51.539Z",
+      "width": 326,
+      "height": 817,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139317-2-geometry",
+      "path": "photometry/voyager-color/c1139317-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/afab55910c8c5f84faafd23206bdbe44bfde7f05a7718b5bda8068b54dab97b7/c1139317-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139317-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139319-1",
+      "path": "observations/voyager-color/c1139319-1.equi.tif",
+      "expectedBytes": 1126588,
+      "expectedSha256": "3eb3c89936cc1867409069a52093c268fd8c024d29e05df5ae4387bd6f921ed3",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/3eb3c89936cc1867409069a52093c268fd8c024d29e05df5ae4387bd6f921ed3/c1139319-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-25T06:21:25.619Z",
+      "width": 291,
+      "height": 967,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139319-1-geometry",
+      "path": "photometry/voyager-color/c1139319-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/5749dfbfee2ee094aa99ab1d70a7b3558f0eadb74d9685a35990d79d62e8c29d/c1139319-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139319-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139319-2",
+      "path": "observations/voyager-color/c1139319-2.equi.tif",
+      "expectedBytes": 2325668,
+      "expectedSha256": "249a292bf4652b70942714f68cb91ce75096b5837f016f2cfde740fffbf3e340",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/249a292bf4652b70942714f68cb91ce75096b5837f016f2cfde740fffbf3e340/c1139319-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-25T06:21:25.619Z",
+      "width": 601,
+      "height": 967,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139319-2-geometry",
+      "path": "photometry/voyager-color/c1139319-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/5749dfbfee2ee094aa99ab1d70a7b3558f0eadb74d9685a35990d79d62e8c29d/c1139319-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139319-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139321-1",
+      "path": "observations/voyager-color/c1139321-1.equi.tif",
+      "expectedBytes": 381224,
+      "expectedSha256": "b380b5cf4e6e4799788ddcaa8f86bbf6b54e999e8661c4e0c784d30755c3b7b4",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b380b5cf4e6e4799788ddcaa8f86bbf6b54e999e8661c4e0c784d30755c3b7b4/c1139321-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:23:03.539Z",
+      "width": 104,
+      "height": 914,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139321-1-geometry",
+      "path": "photometry/voyager-color/c1139321-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/7f59164c8f5a98703e7a9d71866b54f8b219ce4278484299bad0d4ff96239a53/c1139321-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139321-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139321-2",
+      "path": "observations/voyager-color/c1139321-2.equi.tif",
+      "expectedBytes": 2812464,
+      "expectedSha256": "b837f4a5566cabf55df42e8b395f05f23961708664a91dbfa19ad20a501f9378",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b837f4a5566cabf55df42e8b395f05f23961708664a91dbfa19ad20a501f9378/c1139321-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T06:23:03.539Z",
+      "width": 769,
+      "height": 914,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139321-2-geometry",
+      "path": "photometry/voyager-color/c1139321-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/7f59164c8f5a98703e7a9d71866b54f8b219ce4278484299bad0d4ff96239a53/c1139321-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139321-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139323",
+      "path": "observations/voyager-color/c1139323.equi.tif",
+      "expectedBytes": 2683260,
+      "expectedSha256": "b3388d205ce9dfb3b2c3be604802afe7d033296223e9d007d3b6f4890f74ff69",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b3388d205ce9dfb3b2c3be604802afe7d033296223e9d007d3b6f4890f74ff69/c1139323.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T06:24:39.539Z",
+      "width": 833,
+      "height": 805,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1139323-geometry",
+      "path": "photometry/voyager-color/c1139323.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/0579f0701243c29c46b58d1e2d7b3a4286ab74ee630952e8842713b2dff972b6/c1139323.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; Bland et al. (2024) USGS controlled orthophoto",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1139323",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138703-1",
+      "path": "observations/voyager-color/c1138703-1.equi.tif",
+      "expectedBytes": 2216500,
+      "expectedSha256": "84f58e686317de6d207398e6a80935d32a15eae8bd462edaa371a5bb06bd7833",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/84f58e686317de6d207398e6a80935d32a15eae8bd462edaa371a5bb06bd7833/c1138703-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-4-7km",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T01:20:44.998Z",
+      "width": 633,
+      "height": 875,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138703-1-geometry",
+      "path": "photometry/voyager-color/c1138703-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/cd7bbd25800a3e05c180ed1f7a9e85569c9ad52a31a4067fae276d4cc5e31827/c1138703-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1138703-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138703-2",
+      "path": "observations/voyager-color/c1138703-2.equi.tif",
+      "expectedBytes": 1894500,
+      "expectedSha256": "021025337e486b093c348b4decc5e034e84ba0fc7a1098a3cefcb3bca606ca78",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/021025337e486b093c348b4decc5e034e84ba0fc7a1098a3cefcb3bca606ca78/c1138703-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-4-7km",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-25T01:20:44.998Z",
+      "width": 541,
+      "height": 875,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138703-2-geometry",
+      "path": "photometry/voyager-color/c1138703-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/cd7bbd25800a3e05c180ed1f7a9e85569c9ad52a31a4067fae276d4cc5e31827/c1138703-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1138703-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138657-1",
+      "path": "observations/voyager-color/c1138657-1.equi.tif",
+      "expectedBytes": 2237176,
+      "expectedSha256": "8df0f5a0014ec783dd393a42cf9bc58299a1d400ea636d593cdea0678615fbc6",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/8df0f5a0014ec783dd393a42cf9bc58299a1d400ea636d593cdea0678615fbc6/c1138657-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-4-7km",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T01:15:56.998Z",
+      "width": 636,
+      "height": 879,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138657-1-geometry",
+      "path": "photometry/voyager-color/c1138657-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/2b1a45d6fcbcfd005abcee45dc9bda29c20e52aca003c23e61ac9d1554e897fd/c1138657-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1138657-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138657-2",
+      "path": "observations/voyager-color/c1138657-2.equi.tif",
+      "expectedBytes": 2128180,
+      "expectedSha256": "1293877bfaccb71bfabbd41c1b0b6ffd4905471efd24dc0e6ff5ddf0def53811",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/1293877bfaccb71bfabbd41c1b0b6ffd4905471efd24dc0e6ff5ddf0def53811/c1138657-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-4-7km",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-25T01:15:56.998Z",
+      "width": 605,
+      "height": 879,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138657-2-geometry",
+      "path": "photometry/voyager-color/c1138657-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/2b1a45d6fcbcfd005abcee45dc9bda29c20e52aca003c23e61ac9d1554e897fd/c1138657-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1138657-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138715-1",
+      "path": "observations/voyager-color/c1138715-1.equi.tif",
+      "expectedBytes": 2181416,
+      "expectedSha256": "868c8e734f22809581d92b670b8d23e628632b3594b087ba44b4d0d9bb9ecb6d",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/868c8e734f22809581d92b670b8d23e628632b3594b087ba44b4d0d9bb9ecb6d/c1138715-1.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-4-7km",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-25T01:30:20.998Z",
+      "width": 628,
+      "height": 868,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138715-1-geometry",
+      "path": "photometry/voyager-color/c1138715-1.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/f77150ba42ba6c014d5ae530ec44c261d723c39ddd4609fe55078ce0790193fe/c1138715-1.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1138715-1",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138715-2",
+      "path": "observations/voyager-color/c1138715-2.equi.tif",
+      "expectedBytes": 2087672,
+      "expectedSha256": "df357fecfcd5bb3d48e73148b148a78b9ff6f41ff7847475493bd71428a3bfb9",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/df357fecfcd5bb3d48e73148b148a78b9ff6f41ff7847475493bd71428a3bfb9/c1138715-2.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-4-7km",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-25T01:30:20.998Z",
+      "width": 601,
+      "height": 868,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1138715-2-geometry",
+      "path": "photometry/voyager-color/c1138715-2.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/f77150ba42ba6c014d5ae530ec44c261d723c39ddd4609fe55078ce0790193fe/c1138715-2.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1138715-2",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137721",
+      "path": "observations/voyager-color/c1137721.equi.tif",
+      "expectedBytes": 6644200,
+      "expectedSha256": "901498028089c991fa80696a425d733e36c749e9ad33269dc35fe0a9c27c3f36",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/901498028089c991fa80696a425d733e36c749e9ad33269dc35fe0a9c27c3f36/c1137721.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-8-6km",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-24T17:35:08.998Z",
+      "width": 2400,
+      "height": 692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137721-geometry",
+      "path": "photometry/voyager-color/c1137721.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/33fc586e07dabf7013c724447c74bdcf7b8009eee4aad103cecff3b7b68a643c/c1137721.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1137721",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137715",
+      "path": "observations/voyager-color/c1137715.equi.tif",
+      "expectedBytes": 6644200,
+      "expectedSha256": "1b01ed0ec50502b58b12f81a2405a0bba16044bdfd5ae45ef01ce7e19623b05d",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/1b01ed0ec50502b58b12f81a2405a0bba16044bdfd5ae45ef01ce7e19623b05d/c1137715.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-8-6km",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-24T17:30:20.998Z",
+      "width": 2400,
+      "height": 692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137715-geometry",
+      "path": "photometry/voyager-color/c1137715.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/5942049fdc0b5bb3c56e68b44cf5ad44977d77bb8e1c8efc8f55a670c5a9b0e0/c1137715.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1137715",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137727",
+      "path": "observations/voyager-color/c1137727.equi.tif",
+      "expectedBytes": 6644200,
+      "expectedSha256": "9538c82af761f20d490488be2cfd13940e17173152b4ce0ecf2a619e417d3f7f",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/9538c82af761f20d490488be2cfd13940e17173152b4ce0ecf2a619e417d3f7f/c1137727.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-8-6km",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-24T17:39:56.998Z",
+      "width": 2400,
+      "height": 692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137727-geometry",
+      "path": "photometry/voyager-color/c1137727.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/259c35ed23d8ca19ac5bfcc4c17f237a6ffecc23f22c328998ef204aace1e05a/c1137727.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1137727",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137221",
+      "path": "observations/voyager-color/c1137221.equi.tif",
+      "expectedBytes": 6644200,
+      "expectedSha256": "169cf97866377d04fd957772931b90ac19212452e7d7c42cc1e12992e418a74b",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/169cf97866377d04fd957772931b90ac19212452e7d7c42cc1e12992e418a74b/c1137221.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-10-6km",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-24T13:35:08.998Z",
+      "width": 2400,
+      "height": 692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137221-geometry",
+      "path": "photometry/voyager-color/c1137221.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/2de7a6be29042dabb6c4bc2c1de0622cc194326c18e0d4787c5bf7abdfb14592/c1137221.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1137221",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137159",
+      "path": "observations/voyager-color/c1137159.equi.tif",
+      "expectedBytes": 6644200,
+      "expectedSha256": "91357fd193d9b03ed799adddc197bafdfd8a8020ab579374c93c5073a4d6139f",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/91357fd193d9b03ed799adddc197bafdfd8a8020ab579374c93c5073a4d6139f/c1137159.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-10-6km",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-24T13:17:32.998Z",
+      "width": 2400,
+      "height": 692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137159-geometry",
+      "path": "photometry/voyager-color/c1137159.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/a9c52acc9912cb144f80d5714afde46cb2103f12a723820e14e1716908b4b809/c1137159.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1137159",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137245",
+      "path": "observations/voyager-color/c1137245.equi.tif",
+      "expectedBytes": 6644200,
+      "expectedSha256": "a5d8856edb9c184d200a6e232efbd97e63f21113c3f6c8b06e424b79c41feeee",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/a5d8856edb9c184d200a6e232efbd97e63f21113c3f6c8b06e424b79c41feeee/c1137245.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-10-6km",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-24T13:54:20.998Z",
+      "width": 2400,
+      "height": 692,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1137245-geometry",
+      "path": "photometry/voyager-color/c1137245.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/3b5bceb5707d554faa2262a51d314ac39f02d8d826376102948c6b1ccfba7945/c1137245.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1137245",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1133859",
+      "path": "observations/voyager-color/c1133859.equi.tif",
+      "expectedBytes": 879400,
+      "expectedSha256": "317bffd51d586cb523046126a145e895d2ed7124b8fec4982454dd3c63a40021",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/317bffd51d586cb523046126a145e895d2ed7124b8fec4982454dd3c63a40021/c1133859.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-23km",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-23T10:53:32.998Z",
+      "width": 900,
+      "height": 244,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1133859-geometry",
+      "path": "photometry/voyager-color/c1133859.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/1105cb3e4d5b6638fd547cd6c14b5f497a4f6c48aab7f6787288d981bb8c723f/c1133859.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1133859",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1133848",
+      "path": "observations/voyager-color/c1133848.equi.tif",
+      "expectedBytes": 879400,
+      "expectedSha256": "b5cd37042d65d57120ea63f421ff6e291e2a1f19a1fc47d1e0e6a6b2b207ee04",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b5cd37042d65d57120ea63f421ff6e291e2a1f19a1fc47d1e0e6a6b2b207ee04/c1133848.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-23km",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-23T10:44:44.998Z",
+      "width": 900,
+      "height": 244,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1133848-geometry",
+      "path": "photometry/voyager-color/c1133848.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/cb86a44ca3f6f086345f0755a868f2e1133cb4bd7eaf75b7553183f02180d378/c1133848.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1133848",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1133923",
+      "path": "observations/voyager-color/c1133923.equi.tif",
+      "expectedBytes": 879400,
+      "expectedSha256": "ec4b035ede69c3ba196a91d7d2e338ff5c184c542837fa2ad2f49b1461516fb1",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/ec4b035ede69c3ba196a91d7d2e338ff5c184c542837fa2ad2f49b1461516fb1/c1133923.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-23km",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-23T11:12:44.998Z",
+      "width": 900,
+      "height": 244,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1133923-geometry",
+      "path": "photometry/voyager-color/c1133923.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/744f8241de5743e8b65a5906275b9f6f002b65c981466db738255baaebd3f41e/c1133923.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1133923",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1132134",
+      "path": "observations/voyager-color/c1132134.equi.tif",
+      "expectedBytes": 548200,
+      "expectedSha256": "4c978b10fbd1cc817978c782a0f9c7fd01e8f7f2de61ebf8247da3d3c00629ce",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/4c978b10fbd1cc817978c782a0f9c7fd01e8f7f2de61ebf8247da3d3c00629ce/c1132134.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-30km",
+      "filter": "GREEN",
+      "wavelengthMicrometers": 0.585,
+      "observedAt": "1989-08-22T20:57:32.998Z",
+      "width": 720,
+      "height": 190,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1132134-geometry",
+      "path": "photometry/voyager-color/c1132134.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/b5f1f4070e32bbd2a6de73f7e39dda6b6ee701ac10e1355ced2fd1880e61c800/c1132134.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1132134",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1132400",
+      "path": "observations/voyager-color/c1132400.equi.tif",
+      "expectedBytes": 548200,
+      "expectedSha256": "f33ee035548002b909e667c8d094e906d559b23c4e50bf4100ad3101f4f94884",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/f33ee035548002b909e667c8d094e906d559b23c4e50bf4100ad3101f4f94884/c1132400.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-30km",
+      "filter": "VIOLET",
+      "wavelengthMicrometers": 0.4,
+      "observedAt": "1989-08-22T22:54:20.998Z",
+      "width": 720,
+      "height": 190,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1132400-geometry",
+      "path": "photometry/voyager-color/c1132400.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/d53daaf62f90eb63f5e5714c7b1ee8ced8afe01e711beb063de3dc587e3f43a1/c1132400.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1132400",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1132141",
+      "path": "observations/voyager-color/c1132141.equi.tif",
+      "expectedBytes": 548200,
+      "expectedSha256": "4c4dad172f02101b212313aa35e422dd7bab0c036d1451a66e03d4107defe517",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/4c4dad172f02101b212313aa35e422dd7bab0c036d1451a66e03d4107defe517/c1132141.equi.tif",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color"
+      ],
+      "observation": "approach-30km",
+      "filter": "UV",
+      "wavelengthMicrometers": 0.325,
+      "observedAt": "1989-08-22T21:03:08.998Z",
+      "width": 720,
+      "height": 190,
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
+    },
+    {
+      "id": "voyager-color-c1132141-geometry",
+      "path": "photometry/voyager-color/c1132141.equi.lbl",
+      "origin": "https://earth-assets.lowpoly.cc/source-cache/5e9d2e2ca2293a08e5fbb0b066c059e532ff78869f0a8f7a25168cddd568a86d/c1132141.equi.lbl",
+      "credit": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node; placed by limb fit on ISS SEDR pointing",
+      "license": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "acquisition": "Regenerate byte-identically with node tools/objects/voyager-iss/author-color-frames.mts triton --write from the pinned inputs, or restore the R2 mirror.",
+      "redistribution": "Derived product of public mission data; mirrored on R2 and excluded from Git.",
+      "consumers": [
+        "voyager-color-photometry"
+      ],
+      "imageId": "voyager-color-c1132141",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Generated byte-identically by tools/objects/voyager-iss/author-color-frames.mts from the pinned GEOMED frames, Bland et al. (2024) orthophotos and Voyager kernel bank."
+      }
     }
   ],
   "documents": [
@@ -449,6 +2929,30 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Catalogued once the shared Wikipedia source record cites this pinned document."
+      }
+    },
+    {
+      "path": "preparation/voyager-color-frames.json",
+      "purpose": "Recipe for the Voyager colour frames: kernel bank, route, measured datum shift, and the frames of each observation.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored for the Voyager colour lens; the report is regenerated by tools/objects/voyager-iss/author-color-frames.mts."
+      }
+    },
+    {
+      "path": "reference/voyager-color-placement.json",
+      "purpose": "Placement evidence written by the authoring tool: each frame's limb fit (edge points, RMS, pointing shift), verdict and tiles.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored for the Voyager colour lens; the report is regenerated by tools/objects/voyager-iss/author-color-frames.mts."
+      }
+    },
+    {
+      "path": "reference/voyager-color-oracle.json",
+      "purpose": "Placement oracle written by tools/objects/voyager-iss/oracle.mts: each controlled colour frame placed by our limb fit against Bland et al.'s orthophoto of the same frame, its residual, and the mean the recipe's datum shift reproduces.",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Authored for the Voyager colour lens; the report is regenerated by tools/objects/voyager-iss/oracle.mts."
       }
     }
   ],
