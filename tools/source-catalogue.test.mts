@@ -1,5 +1,5 @@
 import { sourceTestContexts as prepareContextProvenance, sourceTestVolumes as prepareVolumeProvenance,
-  prepareTestFacilities as prepareFacilities, sourceTestGeneratedPaths, sourceCheckMode } from './source-test-inputs.mts';
+  prepareTestFacilities as prepareFacilities, sourceTestGeneratedPaths, inventoriedPreparedPaths, sourceCheckMode } from './source-test-inputs.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm, readdir } from 'node:fs/promises';
@@ -208,12 +208,12 @@ test('an undeclared fact citation leaves both published catalogues intact', asyn
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-facilities.json'];
-  // Declared metadata and bounded preview inputs suffice; no baked body/volume assets or downloads.
+  // Declared metadata, inventoried R2 files and bounded preview inputs suffice; no undeclared downloads.
   const records = new Set((await promisify(execFile)('git', ['ls-files', '--cached', '--others', '--exclude-standard', '-z'], { maxBuffer: 16 * 1024 * 1024 })).stdout.split('\0'));
   const declared = new Set(['site/prepared-object-catalog.mts', 'site/prepared-object-distances.json', 'site/prepared-focus-objects.json',
-    ...await sourceTestGeneratedPaths(), ...await volumeSourceInputs()]);
+    ...await sourceTestGeneratedPaths(), ...await inventoriedPreparedPaths(), ...await volumeSourceInputs()]);
   assert.deepEqual(Object.keys(prepared.closure).filter(path => !records.has(path) && !declared.has(path)), [],
-    'Sources use tracked records plus declared generated or volume-source metadata, never undeclared downloads');
+    'Sources use tracked records plus declared generated, inventoried or volume-source metadata, never undeclared downloads');
   for (const path of [...Object.keys(prepared.closure), ...outputs, ...await volumePreviewInputs()]) {
     const target = join(root, path);
     await mkdir(join(target, '..'), { recursive: true });

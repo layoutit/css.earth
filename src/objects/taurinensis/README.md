@@ -24,7 +24,7 @@ Recorded five-body results retain their [original build identities](https://gith
 - The scale transfer is approximate. Catalog error omits additional shape, spin and thermal-model uncertainty; sampled simplification error does not establish terrain accuracy.
 - No registered surface imagery is available. Grid marks the gap; Elevation is shape-derived radius relative to a sphere, not gravitational height. Rotation phase is arbitrary.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods
 

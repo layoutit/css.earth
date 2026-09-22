@@ -3,6 +3,41 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 2287,
+      "sha256": "067a98a9a4907ad97c79907bb7cfebfca3071ae8b7424a695558a165eb38b7dd"
+    },
+    {
+      "filename": "authored-preparation.json",
+      "bytes": 1544,
+      "sha256": "c9f1ecb824e9835f2b96a966101d8b1006a99ddc8059e1e598ffd0991b8b7070"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 6374,
+      "sha256": "57eb9a806679cbe339c4e88ebea2160226414ba384f19200ef00e1956f3422b2"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 354,
+      "sha256": "3000b7097b6c039ef607bbcae6695c746b089159d3a1d3ef18f33bb341a6292a"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 1144,
+      "sha256": "b63145dbe0aeb5eb47bff3c4a59486155ac2796d4fb9f14e5dedf0d38778103f"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 82,
+      "sha256": "4ced2100d4ed8015b0566ad92ec4245ec6389385ef405fecc9d8536c6a29974f"
+    },
+    {
+      "filename": "minimaps/color.webp",
+      "bytes": 442,
+      "sha256": "690b9c6a790253228e78eb7daa6803eda3d55e3c64d83e5194f819bbdf73c005"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 353286,
       "sha256": "70559115dbd10b1e567512bf0d54e93098dd96701aa4812ae12d62216ae1d186"
@@ -11,6 +46,26 @@
       "filename": "scene.json",
       "bytes": 343796,
       "sha256": "1a3f4f54bc4fea9b02ac1186794a7d9dd1c7044a7b048289da895b1867e5ccad"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1059,
+      "sha256": "d70ca28424e283f97f53d486a53820e066978d826fa952f3ad3a441a0d407712"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 5,
+      "sha256": "38e0b9de817f645c4bec37c0d4a3e58baecccb040f5718dc069a72c7385a0bed"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 1016,
+      "sha256": "05209bf78c347cb8489cb0b7196032742a0ed13a8b7b4828627c65e371ad0d7a"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1174,
+      "sha256": "1242a8cf37b7708ebd1b196110a3652d22a7c0d987b1ae0d5fe20c49bd485cb0"
     }
   ]
 }

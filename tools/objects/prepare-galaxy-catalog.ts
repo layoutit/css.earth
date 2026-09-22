@@ -53,7 +53,8 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     sourceRows: rows.length, objects: data.objects.length, exclusions: data.exclusions.length,
     localGroup: data.objects.filter(row => row.membership.group === 'local-group').length,
     confirmedLocalGroup: data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length };
-  await writeFile(resolve(outputDirectory, 'manifest.json'), JSON.stringify(receipt, null, 2) + '\n');
+  // The receipt is the context's tracked output inventory and lives beside object.json; nothing under prepared/ is tracked.
+  await writeFile(resolve(outputDirectory, '..', 'prepared-receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
       properties: { preparation: { source: 'source/catalogue.json', sha256: sha256(recipeBytes) } },

@@ -25,7 +25,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | normal | 11520 × 5760 | 11.13 → 15.20 MB |
 | enhanced | 13467 × 6734 | 13.56 → 19.02 MB |
 
-Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/tethys/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 16000 pixels, with 2000 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/tethys/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 The [B9 qualification report](https://github.com/layoutit/cssEarth/blob/8666462797772dc50bbebecd8618014f5e7bd16c/docs/moons/b9-cassini-ice-surfaces/QUALIFICATION.md) records exact source-map replay and selected package and interaction checks.
 
@@ -34,7 +34,7 @@ The [Tethys visual review](https://github.com/layoutit/cssEarth/blob/cc01831f595
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -56,7 +56,7 @@ Feature notes: 6 of the labelled names carry a caption note, the lead summary of
 - Photographic seams, coarse inserts, residual shading and local control-network differences remain. Enhanced-color hemisphere differences can reflect real dust/radiation alteration. The display does not inpaint gaps, repeat polar data or synthesize color.
 - The approximately 1.5 km SPC map spacing and the source's one-to-two-grid-spacing error estimate do not provide independently measured per-cell uncertainty. SPC sigma measures internal maplet agreement, not absolute height uncertainty; Tethys used uncalibrated ISS images. Numeric height datums, photographic projection radii and simplified geometry remain separate.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="tethys-sources-and-preparation"></a>
 <a id="photographic-lenses"></a>

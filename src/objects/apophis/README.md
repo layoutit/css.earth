@@ -22,7 +22,7 @@ The weak 2012–2013 radar data admit multiple shapes; the 2026 PDS release pres
 
 The PDS spin label corrects two mistakes in the paper supplement: P2 is in hours, and the epoch is 2012-12-23 04:14:00 UTC. The archived epoch is preserved as evidence, without using it to invent a tumbling propagator.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="apophis-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>

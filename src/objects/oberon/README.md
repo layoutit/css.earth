@@ -51,7 +51,7 @@ registration, but does not qualify a second lens for this package. Further work
 would need better inter-band registration and a sharper, validated reconstruction;
 the existing observed-color candidate is no longer merely a missing-download issue.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="surface-and-coverage"></a>
 <a id="dataset-survey"></a>

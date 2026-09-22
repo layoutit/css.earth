@@ -94,7 +94,7 @@ Feature notes: 44 of the labelled names carry a caption note, the lead summary o
 - **Peaks are lower than the paper's.** Mura et al. stack frames with a super-resolution method and correct the smear; we take a median of registered frames. The total output of each hot spot agrees (above), but a hot spot's light is spread over more cells, so its peak is lower, most for small spots near the limb. A hot spot is usually far smaller than one pixel (13.5 to 27 km).
 - **Volcanic heat mixes dates.** Each cell comes from the orbit that saw it sharpest, between April 2022 and March 2023, and hot spots change: Mura et al. find single hot spots varying by about 40% between these orbits.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -137,7 +137,7 @@ This is a conservative geographic cut based on the published approximate coverag
 
 The shared raster lane now samples the original 11,445 × 5,723 photographs into
 one 8,192 × 4,096 map before packing, the only density shipped
-([asset record](prepared/assets.json)). That map has roughly
+(asset record (`prepared/assets.json`)). That map has roughly
 1.4 km equatorial texel spacing; source areas coarser than that remain coarse.
 Pole sprite dimensions, geometry, scientific maps and lighting are unchanged.
 Canonical assets are selected once per mount, independently of DPR. Runtime only

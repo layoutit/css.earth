@@ -3,6 +3,61 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 1320,
+      "sha256": "864a8ceececc1018aa243c4814a1cfd19fdeb71ca6e9a425c24874ae1ba25542"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 5736,
+      "sha256": "1db986652947cbf095cf96385625ef3dd8ac6cdcd9a0f321defd67b6c3a28ee5"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 1715,
+      "sha256": "38c5663245d307f6c5e2fc5c21b2d66ac64bbf3809077e10828f7cbd776501a7"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 3465,
+      "sha256": "02e82d7a018a1162627742fce7ed90e6ebf66efa89fb1822c97eb76716f529ff"
+    },
+    {
+      "filename": "material.json",
+      "bytes": 441426,
+      "sha256": "6683798a4e1d27efae92c8db401683a9ab72e7f3af27dd6846ba3fc059847066"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 416,
+      "sha256": "f6bac8b5f28966a07e6b87ab738275736e06db7932991101a845cfa9f26a92b6"
+    },
+    {
+      "filename": "minimaps/dielectric-constant.webp",
+      "bytes": 25266,
+      "sha256": "49a0cfd911809081f860fbcd8104b0933e2198ccb9f23e2f6feb765fa1a5718b"
+    },
+    {
+      "filename": "minimaps/elevation.webp",
+      "bytes": 10276,
+      "sha256": "acab088ef9a5379b6e4219f0ffc465dd230c718e4c7ecda2b77223d2ca61bff5"
+    },
+    {
+      "filename": "minimaps/shape.webp",
+      "bytes": 422,
+      "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62"
+    },
+    {
+      "filename": "minimaps/thermal-inertia.webp",
+      "bytes": 38350,
+      "sha256": "3d6f56964645808d7e590db6941f1cb37428c7cb2cb00e0900d80a739c031feb"
+    },
+    {
+      "filename": "minimaps/zimpol.webp",
+      "bytes": 5992,
+      "sha256": "a6a120fac9bf0a7e1d66cc34f61de227af8add1aa59a673e4c6fb798f1c6c206"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 1383739,
       "sha256": "7218a102c8e39e219f1e0999d8f3a752d8650f9cdd71b2aa3ba930eefc58e9f7"
@@ -11,6 +66,31 @@
       "filename": "scene.json",
       "bytes": 1342842,
       "sha256": "bbc3c1ca436953e01da4b9f628ba6bdf196fada3ad14ad6ec5c6b236b05980a5"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1040,
+      "sha256": "45b2effa0cf68c0191c2f3d40bbb09e365999eb1602509dc9b43add3867a94c5"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 685,
+      "sha256": "4c937a8bed28dd8907e3a4a307f3cd04c93cc7cdb8a5f2c4b4af3debddbb9179"
+    },
+    {
+      "filename": "surfaces.json",
+      "bytes": 441430,
+      "sha256": "c515a0c997d1774ec168bb6ab3fa6c43f5844494228f6011201e2e1f3ed21c5d"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 2470,
+      "sha256": "af4808bf5fb92885a59e4120e95cd08a6efcf83dae50c01cd0b6ded4a7f93f70"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1217,
+      "sha256": "abf99ecac523eb89292a25ab6d7dd859b263db7228cbe43192898028597eb4d1"
     }
   ]
 }

@@ -138,6 +138,20 @@ async function writeManifestAtomically(manifestPath: string | URL, manifest: unk
  * `preparedRoot` minus `exclude` (a context/nebula object with no `runtime-assets.json`, such as a nebula bake or
  * milky-way/heliosphere/stellar-neighbourhood/lmc).
  */
+/**
+ * Files under a body's `prepared/` that a checkout regenerates itself, so they are never inventoried or published:
+ * the JSON transport and page written from the restored runtime, the provenance record generated from the manifest,
+ * and the radial-terrain reports and source-index rasters that only the audits read.
+ */
+export function isRegeneratedPreparedFile(filename: string): boolean {
+  return ['object.json', 'page.json', 'provenance.json'].includes(filename) || /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
+}
+
+/** Every baked file under a body's `prepared/`: what the inventory publishes and `setup:prepared` restores. */
+export async function bakedPreparedFiles(preparedRoot: string, planetId: string): Promise<string[]> {
+  return (await runtimeFiles(preparedRoot, planetId, true)).filter(name => !isRegeneratedPreparedFile(name));
+}
+
 export async function preparePreparedAssetManifest({
   planetId,
   preparedRoot,

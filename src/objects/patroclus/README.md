@@ -20,7 +20,7 @@ No dated test report is cited in the existing source notes.
 
 - The existing Menoetius package supplies the retained primary-specific heliocentric state; the system barycentre is not substituted for Patroclus.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="shape-scale-and-orientation"></a>
 <a id="source-survey"></a>

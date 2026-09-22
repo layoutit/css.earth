@@ -61,7 +61,7 @@ The shape remains the same 1,000 triangles. No shared renderer changes or extra 
 
 - The 1991 mismatch does not reject the revised model reported in 1995. The present projection uses the later long-axis state, with the limitations above. [Reitsema, Delamere & Keller (1989)](https://doi.org/10.1016/0273-1177(89)90244-5) supplies a separate catalog of 21 bright features and eight morphological regions that may support independent registration checks; its reference frame must first be matched to the chosen model.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

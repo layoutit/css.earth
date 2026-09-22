@@ -25,4 +25,4 @@ Run of 2026-09-21 (this version):
 
 Alpha Centauri is a triple system; this package is component A only. No mass or gravitational parameter is adopted, and the pair's mutual orbit is not drawn.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

@@ -1,11 +1,28 @@
 /** The same catalogue assertions run against published records on PRs and reproduced packages in authoring
  * audits. This selects real inputs, never suppresses assertions or invents prepared data. */
-import { relative } from 'node:path';
+import { relative, resolve } from 'node:path';
+import { readFile, readdir } from 'node:fs/promises';
 import { prepareFacilities } from './prepare-facilities.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance } from './prepare-volume-provenance.mts';
 import { prepareContextProvenance } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from './read-prepared-context-provenance.mts';
 import { SCENE_OBJECTS } from '../site/objects.mts';
+
+/** Every prepared file an inventory restores from R2 (`src/objects/<id>/prepared/<filename>`): nothing under prepared/ is tracked. */
+export async function inventoriedPreparedPaths(root = process.cwd()): Promise<string[]> {
+  const paths: string[] = [];
+  for (const folder of await readdir(resolve(root, 'src/objects'), { withFileTypes: true })) {
+    if (!folder.isDirectory()) continue;
+    for (const name of ['prepared-assets.json', 'runtime-assets.json']) {
+      const text = await readFile(resolve(root, 'src/objects', folder.name, name), 'utf8').catch(() => null);
+      if (text === null) continue;
+      const inventory = JSON.parse(text) as { resourceRoot?: string; assets?: { filename: string }[] };
+      if (inventory.resourceRoot !== 'prepared') continue;
+      for (const asset of inventory.assets ?? []) paths.push(`src/objects/${folder.name}/prepared/${asset.filename}`);
+    }
+  }
+  return paths;
+}
 
 /** Each body's page.json is written from its restored runtime by prepare:object-json and is never tracked. */
 const bodyPages = () => SCENE_OBJECTS.map(object => `src/objects/${object.id}/prepared/page.json`);
