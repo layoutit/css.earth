@@ -7,6 +7,7 @@ import { objectSearchLabels, searchObjects } from '../object-search.mts';
 import { matchesObjectCategory } from '../object-categories.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
 import { createFeatureBrowser } from '../feature-browser.mts';
+import { handleFindRequest } from '../find.mts';
 
 const origin = 'https://preview.example.test';
 const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
@@ -186,7 +187,8 @@ test('named features share the results panel, start collapsed, and disappear whe
 });
 
 test('live feature results retain their rows and disclosure until the query changes', async context => {
-  context.mock.method(globalThis, 'fetch', async () => new Response(index));
+  // The browser asks the find API; the real handler answers it from this index.
+  context.mock.method(globalThis, 'fetch', async (input: string | URL) => handleFindRequest(new Request(String(input)), pin, async () => new Response(index)));
   const { document } = parseHTML(html);
   const root = document.querySelector<HTMLElement>('.planet-feature-results')!;
   const row = root.querySelector('.planet-destination-result');
