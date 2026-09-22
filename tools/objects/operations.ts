@@ -124,8 +124,8 @@ export async function prepareRuntimeManifest({id,publicRoot,objectDirectory,valu
  await verifyAssetFiles(publicRoot,manifest,!allowPreparationArtifacts);
  return manifest;
 }
-export async function assembleRuntimeAssets({id,manifest,productionRoot}:{id:string;manifest:RuntimeManifest;productionRoot:string}) {
- parseRuntimeManifest(manifest,id);
+export async function assembleRuntimeAssets({id,inventory,productionRoot}:{id:string;inventory:unknown;productionRoot:string}) {
+ const manifest=parseRuntimeManifest(inventory,id);
  // Verify required assets before deleting build leftovers: a failed assembly retains its evidence.
  await verifyAssetFiles(productionRoot,manifest,false);
  const expected=new Set(manifest.assets.map(asset=>asset.filename)),entries=await readdir(productionRoot,{withFileTypes:true});
@@ -167,7 +167,7 @@ export async function runOperations(mode:string,id:string,argumentsList:string[]
   // ASSET_ORIGIN builds never populate dist/scenes (astro.config.mts removes the publicDir
   // copy once the build finishes): nothing here needs verifying or pruning.
   if(process.env.ASSET_ORIGIN?.trim()&&!(await lstat(productionRoot).catch(()=>null))?.isDirectory())return parseRuntimeManifest(JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,id);
-  return assembleRuntimeAssets({id,manifest:parseRuntimeManifest(JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,id),productionRoot});
+  return assembleRuntimeAssets({id,inventory:JSON.parse(await readFile(inventoryPath,'utf8')) as unknown,productionRoot});
  }
  throw new TypeError(`Unknown object operation: ${mode}.`);
 }

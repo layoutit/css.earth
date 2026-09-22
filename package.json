@@ -9,8 +9,8 @@
     "node": "^22.18.0 || >=24.0.0"
   },
   "scripts": {
-    "build": "astro build && node tools/prepare/build-catalogue-fragment.mts && pnpm assemble:planets",
-    "build:deploy": "pnpm build:tools && pnpm setup:asset-data && node tools/assets/restore-object-json.mts && node tools/prepare/prepare-factsheets.mts --quiet && node tools/prepare/prepare-provenance.mts --objects-only && node tools/prepare/prepare-feature-index.mts && pnpm prepare:environment-images && node tools/nebula/prepare.mts --if-missing && pnpm prepare:minimap && node tools/prepare/prepare-facilities.mts --catalog-only && astro build && node tools/prepare/build-catalogue-fragment.mts && pnpm assemble:planets",
+    "build": "astro build && node tools/prepare/build-catalogue-fragment.mts && node tools/cli/run-implemented-planets.mts assemble",
+    "build:deploy": "pnpm build:tools && pnpm setup:asset-data && node tools/assets/restore-object-json.mts && node tools/prepare/prepare-factsheets.mts --quiet && node tools/prepare/prepare-provenance.mts --objects-only && node tools/prepare/prepare-feature-index.mts && pnpm prepare:environment-images && node tools/nebula/prepare.mts --if-missing && pnpm prepare:minimap && node tools/prepare/prepare-facilities.mts --catalog-only && astro build && node tools/prepare/build-catalogue-fragment.mts && node tools/cli/run-implemented-planets.mts assemble",
     "build:astronomy": "pnpm --filter @cssearth/astronomy build",
     "build:catalog": "pnpm --filter @cssearth/catalog build",
     "build:objects": "pnpm --filter @cssearth/objects build",
