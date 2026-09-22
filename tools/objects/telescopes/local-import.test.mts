@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
+import { astroqueryToolchain } from '../astronomy-packages/toolchain.mts';
+test.before(async () => { await astroqueryToolchain(); });
 import { copyFile, mkdtemp, mkdir, readFile, rm, symlink, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';

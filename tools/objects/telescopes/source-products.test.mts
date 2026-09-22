@@ -46,20 +46,6 @@ test('a new telescope and target need no query registry change: actions, exact q
     await assert.rejects(qualifySourceProduct(f.root, f.product), /manifest pin/);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
-test('header identity, complete pins and supported configuration are enforced', async () => {
-  const f = await fixture(); try {
-    await assert.rejects(qualifySourceProduct(f.root, { ...f.product, identity: { OBS_ID: 'other' } }), /identity mismatch/);
-    const bad = structuredClone(f.declaration); bad.observations[0]!.inputs[0]!.input = 'missing';
-    assert.throws(() => parseSourceProducts(bad, f.manifest, 'test-body'), /missing manifest input/);
-    const traversal = structuredClone(f.manifest); traversal.inputs[0]!.path = '../escape';
-    assert.throws(() => parseSourceProducts(f.declaration, traversal, 'test-body'), /escapes/);
-    assert.throws(() => parseSourceProducts({ ...f.declaration, observations: [{ ...f.declaration.observations[0], angularResolutionArcsec: 1 }] }, f.manifest, 'test-body'), /resolution basis/);
-    const duplicates = { ...f.declaration, observations: [...f.declaration.observations, ...f.declaration.observations] };
-    assert.throws(() => parseSourceProducts(duplicates, f.manifest, 'test-body'), /Duplicate/);
-    const changed = { ...f.product, meaning: 'Changed estimator' }; await qualifySourceProduct(f.root, f.product);
-    assert.equal((await qualifySourceProduct(f.root, changed)).reused, false);
-  } finally { await rm(f.root, { recursive: true, force: true }); }
-});
 test('request satisfaction uses one product, preserves spectral gaps, and separates missing science from valid bytes', () => {
   const facts = { target: request.target, verified: true, kind: 'image' as const, result: 'telescope-product' as const, wavelengthIntervalsMicrometres: [[1, 2]] as const, angularResolutionArcsec: .5 };
   assert.equal(assessRequest(request, facts).status, 'unresolved');

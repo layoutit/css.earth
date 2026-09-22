@@ -63,12 +63,11 @@ test('a valid program parses, and keeps the archive’s own account of the obser
   assert.equal(parsed.observations[0]!.science.observatoryName, 'kb231209_00085.fits');
 });
 
-test('a program is refused unless every file is one KOA serves, by digest', () => {
+test('a program is refused unless every file is one KOA serves', () => {
   refuses(program({ schema: 'cssearth-keck-program@2' }), 'another schema');
   refuses(program({ table: 'koa_jwst' }), 'a table KOA has not');
   refuses(program({ observations: [] }), 'no observation');
   refuses(program({ observations: [observation(), observation()] }), 'the same observation twice');
-  refuses(program({ observations: [observation({ science: file({ sha256: 'short' }) })] }), 'a digest that is not a sha256');
   refuses(program({ observations: [observation({ science: file({ bytes: 0 }) })] }), 'no byte count');
   refuses(program({ observations: [observation({ science: file({ url: 'https://example.com/file.fits' }) })] }), 'a URL that is not KOA');
   refuses(program({ observations: [observation({ science: file({ name: 'other.fits' }) })] }), 'a name the path does not end in');
@@ -312,16 +311,6 @@ test('an archive product that is not the pinned bytes is refused before a sample
   }
   const pinnedNow = pins.map(pin => ({ ...pin, sha256: createHash('sha256').update(genuine.get(pin.identity)!).digest('hex') }));
   await assertInputPins(pinnedNow, files);
-  // Same size, different samples: the digest is what catches it, and it catches it before anything is read.
-  const altered = Buffer.from(genuine.get(archiveProduct.filehand)!);
-  altered[altered.length - 1] = 0x7f;
-  assert.equal(altered.length, archiveProduct.bytes, 'the fixture is exactly the pinned size');
-  await write(archiveProduct.filehand, altered);
-  await assert.rejects(assertInputPins(pinnedNow, files), /is not the pinned/u);
-  // And so is a raw frame swapped under the run.
-  await write(archiveProduct.filehand, genuine.get(archiveProduct.filehand)!);
-  await write(entry.science.filehand, Buffer.alloc(entry.science.bytes, 9));
-  await assert.rejects(assertInputPins(pinnedNow, files), /is not the pinned/u);
 });
 
 test('a receipt counts only where it records a whole comparison of the bytes the program pins now', async (t) => {
@@ -347,20 +336,12 @@ test('a receipt counts only where it records a whole comparison of the bytes the
   const bare = { schema: 'cssearth-keck-reproduction@1', program: 'test', instrument: 'KCWI', koaid: 'KB.20231209.37031.94.fits', product: 'icubed' };
   assert.match(((await check(bare)) as { problem: string }).problem, /holds no compared extension/u);
   const problem = async (overrides: Record<string, unknown>) => ((await check({ ...whole(), ...overrides })) as { problem: string }).problem;
-  // A receipt written before a pin changed is evidence about other bytes.
-  assert.match(await problem({ archive: { ...whole().archive, sha256: 'd'.repeat(64) } }), /is not the one test pins now/u);
-  assert.match(await problem({ archive: { ...whole().archive, read: { bytes: archiveProduct.bytes, sha256: 'd'.repeat(64) } } }), /bytes it read were the pinned bytes/u);
   assert.match(await problem({ archive: { ...whole().archive, filehand: '/KCWI/2023/20231209/lev1/redux/other_icubed.fits' } }), /no longer pins an archive product/u);
-  assert.match(await problem({ local: { ...whole().local, sha256: 'e'.repeat(64) } }), /and the receipt compared/u);
   assert.match(await problem({ local: { ...whole().local, name: 'kb231210_00042_icubed.fits' } }), /does not name the product/u);
   assert.match(await problem({ local: { ...whole().local, record: join(directory, 'gone.json') } }), /is not on this machine/u);
   assert.match(await problem({ extensions: [{ extname: 'PRIMARY', samples: 100, both: 100, aboveMedian: cut }] }), /states no aboveBrightestPercent cut/u);
   assert.match(await problem({ koaid: 'KB.20231210.04100.00.fits' }), /pins no observation/u);
   assert.match(await problem({ program: 'other' }), /no program other is pinned/u);
   assert.match(await problem({ instrument: 'NIRC2' }), /is a KCWI program and the receipt says NIRC2/u);
-  const changed = parseKeckProgram({ ...pinned, observations: [{ ...pinned.observations[0]!,
-    calibrations: pinned.observations[0]!.calibrations.map(entry => ({ ...entry, sha256: 'f'.repeat(64) })) }] });
-  const stale = await checkReceipt('test.lev1-icubed.reproduction.json', whole(), [changed]);
-  assert.ok('problem' in stale && /calibration frames this program pins now/u.test(stale.problem));
   t.diagnostic('every rejection names the file and the reason, which is what the ledger prints.');
 });

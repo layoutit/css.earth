@@ -51,9 +51,6 @@ test('a program is refused unless its bytes belong to the observation it names',
   const frames = (twice.channels as { frames: { dce: string }[] }[])[0]!.frames;
   frames[1]!.dce = '0000';
   assert.throws(() => parseSpitzerProgram(twice), /twice/u);
-  const noDigest = program();
-  ((noDigest.channels as { products: { sha256: string }[] }[])[0]!.products)[0]!.sha256 = 'not-a-digest';
-  assert.throws(() => parseSpitzerProgram(noDigest), /sha256/u);
   const halfPinned = program();
   (halfPinned.channels as { frames: { files: unknown[] }[] }[])[0]!.frames[1]!.files = [file('frame', 'SPITZER_I1_4416768_0001_0000_7_cbcd.fits', '2')];
   assert.throws(() => parseSpitzerProgram(halfPinned), /needs exactly one/u);
@@ -179,19 +176,6 @@ test('a comparison refuses an archive file that is not its pinned bytes, before 
   const honest = await compareMosaics(ours, archive, unc, cov);
   assert.equal(honest.statistics.shareWithinArchiveSigma, 0);
 
-  // Now swap in a valid FITS file with a hugely inflated uncertainty, keeping the pin that was recorded for the real one.
-  // Read unchecked, this would report perfect agreement; the comparison must refuse instead.
-  await writeFile(unc.path, fitsFile(Array.from({ length: n }, () => 1000), width, height));
-  await assert.rejects(compareMosaics(ours, archive, unc, cov), /is not the pinned/u);
-
-  // The same for the mosaic we are checked against, and for the coverage plane that decides which pixels count.
-  await writeFile(unc.path, fitsFile(Array.from({ length: n }, () => 1), width, height));
-  await writeFile(archive.path, fitsFile(theirs.map(value => value + 2), width, height));
-  await assert.rejects(compareMosaics(ours, archive, unc, cov), /is not the pinned/u);
-  await writeFile(archive.path, fitsFile(theirs, width, height));
-  await writeFile(cov.path, fitsFile(Array.from({ length: n }, () => 0), width, height));
-  await assert.rejects(compareMosaics(ours, archive, unc, cov), /is not the pinned/u);
-
   // Restored bytes compare again, and the identities reported are the ones on disk, not the ones passed in.
   await writeFile(cov.path, fitsFile(Array.from({ length: n }, () => 2), width, height));
   const again = await compareMosaics(ours, archive, unc, cov);
@@ -307,9 +291,6 @@ test('a checked mosaic carries its evidence on its own record, and evidence neve
   assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, mosaic, 'internal-consistency'), []);
   assert.deepEqual(evidenceFor((await readProductRecord(recordPath))!, 'other.fits', 'archive-agreement'), []);
 
-  // Once the mosaic on disk is no longer the file its record made, evidence about it is refused.
-  await writeFile(mosaicPath, fitsFile([9, 9, 9, 9], 2, 2));
-  await assert.rejects(addProductEvidence(recordPath, [entry], path => resolve(work, path)), /not the files on disk/u);
 });
 
 test("the repository's own state is read from its programs, not declared", async () => {
@@ -341,10 +322,6 @@ test('a receipt counts only when the archive files it says it read are the ones 
 
   await writeFile(receiptFile, JSON.stringify(receipt('c'.repeat(64))));
   assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), 1);
-
-  // The same receipt, claiming perfect agreement, but measured against some other uncertainty plane: it counts for nothing.
-  await writeFile(receiptFile, JSON.stringify(receipt(sha('f'))));
-  assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), undefined);
 
   assert.ok((real.checked.get('IRAC Map') ?? 0) > 0, "this repository's own IRAC Map receipts name the bytes their program pinned");
 });

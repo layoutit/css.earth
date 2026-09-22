@@ -1,6 +1,8 @@
 import assert from 'node:assert/strict';
 import { sourceTest } from '../../../../tests/objects/source-test.mts';
 const test = sourceTest();
+import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
+test.before(async () => { await astroqueryToolchain(); });
 import { mkdtemp, readFile, writeFile, readdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -16,13 +18,14 @@ const target = { id: 'betelgeuse', names: ['Betelgeuse'], classification: 'star'
 const request = { target: target.id, wavelengthMicrometres: [0.78, 0.85] as const, kind: 'image' as const, result: 'telescope-product' as const };
 const circle = { frame: 'icrs' as const, shape: 'circle' as const, raDegrees: 88.792938, decDegrees: 7.407063, radiusDegrees: 0.3 / 3600 };
 const parse = async (file: string) => (await astroquery({ operation: 'vo-parse', file: resolve(fixtures, file), url: 'https://example.org/links', byteLimit: 1e6, timeFormat: 'mjd', timeScale: 'utc' })).vo!;
-const almaPromise = parse('alma-obscore.xml'), esoPromise = parse('eso-links.xml');
+const lazy = (file: string) => { let loading: ReturnType<typeof parse> | undefined; return () => loading ??= parse(file); };
+const almaPromise = lazy('alma-obscore.xml'), esoPromise = lazy('eso-links.xml');
 function snapshot(response: MetadataResponse): DiscoverySnapshot { return { schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
   request, query: 'SELECT TOP 2 * FROM ivoa.obscore', scope: 'two-row sample', sampleLimit: 2, response, completeness: 'bounded-sample' }; }
 function esoDescriptor(response: MetadataResponse) { return response.resources.find(r => r.parameters.some(p => p.value === 'ivo://ivoa.net/std/SODA#sync-1.0'))!; }
 
 test('metadata preserves raw evidence, nulls, field widths and distinct observations sharing one dataset', async () => {
-  const response = await almaPromise, saved = snapshot(response);
+  const response = await almaPromise(), saved = snapshot(response);
   assert.equal(response.queryStatus, 'OK'); assert.equal(response.rows.length, 2);
   assert.equal(response.raw.sha256, 'ea9d3eda733a4299d5b98fb2110b2f0cf26e410fafc0fcbbeb5b84621f49226f');
   assert.equal(response.fields.find(f => f.name === 'access_format')!.arraysize, '9');
@@ -65,7 +68,7 @@ test('target association respects catalogue class collisions and does not equate
   assert.equal(associateTarget('Jupiter', null, moon, [moon]).status, 'unmatched');
 });
 test('normalization retains unknown time and malformed MIME without promoting archive flags', async () => {
-  const response = await almaPromise, saved = snapshot(response), row = response.rows[0]!;
+  const response = await almaPromise(), saved = snapshot(response), row = response.rows[0]!;
   const t = { id: 'test', names: [String(row.target_name)] };
   const result = normalizeSnapshot(saved, profile, t, [t])[0]!;
   assert.ok(result.issues.some(i => i.includes('Malformed'))); assert.equal(result.access.mime, 'applicati');
@@ -74,7 +77,7 @@ test('normalization retains unknown time and malformed MIME without promoting ar
   assert.equal(normalizeSnapshot(snapshot(noTimes), profile, t, [t])[0]!.startIso, null);
 });
 test('EPN frequency bounds reverse, body coordinates remain body coordinates, and missing bounds remain null', async () => {
-  const base = await almaPromise;
+  const base = await almaPromise();
   const values = { spectral_range_min: 1e14, spectral_range_max: 2e14, target_name: 'Betelgeuse', target_class: 'star', spatial_frame_type: 'body', c1min: 350, c1max: 10, granule_uid: 'Case:1', dataproduct_type: 'im' };
   const fields = Object.keys(values).map(name => ({ name, id: name, datatype: name.includes('spectral') ? 'double' : 'char', arraysize: null, unit: name.includes('spectral') ? 'Hz' : null, ucd: null, utype: null, xtype: null, ref: null }));
   const response = { ...base, fields, rows: [values], times: [{}], bindings: [] };
@@ -99,14 +102,14 @@ test('live-captured ESO and PSA scalar masks decode without losing the response'
   }
 });
 test('ESO fixed-ID and CIRCLE resolve via PyVO; a nonexistent BAND capability is refused', async () => {
-  const eso = await esoPromise, descriptor = esoDescriptor(eso), binding = eso.bindings.find(b => b.serviceId === descriptor.id)!;
+  const eso = await esoPromise(), descriptor = esoDescriptor(eso), binding = eso.bindings.find(b => b.serviceId === descriptor.id)!;
   assert.equal(binding.error, null); assert.equal(binding.parameters.ID, 'ivo://eso.org/ID?ADP.2026-08-19T13:19:07.647');
   assert.deepEqual(sodaParameters(descriptor, { ...request, region: circle }, binding.parameters).CIRCLE, [circle.raDegrees, circle.decDegrees, circle.radiusDegrees]);
   assert.throws(() => sodaParameters(descriptor, { ...request, spectralFrame: 'barycentric' }, binding.parameters), /BAND/u);
   assert.throws(() => sodaParameters({ ...descriptor, groups: [] }, { ...request, region: circle }, binding.parameters), /missing/u);
 });
 test('BAND includes continuum support and requires the explicit spectral frame', async () => {
-  const descriptor = esoDescriptor(await esoPromise);
+  const descriptor = esoDescriptor(await esoPromise());
   const band: Resource = { ...descriptor, groups: descriptor.groups.map(g => ({ ...g, parameters: [...g.parameters, { name: 'BAND', id: null, datatype: 'double', arraysize: '2', unit: 'm', ucd: 'em.wl;stat.interval', utype: null, xtype: 'interval', ref: null, value: null }] })) };
   const r = { ...request, kind: 'cube' as const, wavelengthMicrometres: [2.30, 2.34] as const, continuumMicrometres: [[2.2, 2.25], [2.4, 2.45]] as const };
   assert.throws(() => sodaParameters(band, r, { ID: 'opaque' }), /explicit/u);
@@ -115,7 +118,7 @@ test('BAND includes continuum support and requires the explicit spectral frame',
   assert.ok(Math.abs(Number(values[0]) - 2.2e-6) < 1e-20); assert.ok(Math.abs(Number(values[1]) - 2.45e-6) < 1e-20);
 });
 test('multiple science links stay distinct, previews are excluded, cycles are bounded, and subsets never become direct access', async () => {
-  const base = await almaPromise, saved = snapshot(base), obs = { ...normalizeSnapshot(saved, profile, target, [target])[0]!, kind: 'image', target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: 'https://example.org/links', mime: 'application/x-votable+xml;content=datalink', estimatedKilobytes: null } };
+  const base = await almaPromise(), saved = snapshot(base), obs = { ...normalizeSnapshot(saved, profile, target, [target])[0]!, kind: 'image', target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: 'https://example.org/links', mime: 'application/x-votable+xml;content=datalink', estimatedKilobytes: null } };
   const response = { ...base, bindings: [], rows: [
     { semantics: '#this', access_url: 'one.fits', content_type: 'image/fits' },
     { semantics: '#this', access_url: 'two.fits', content_type: 'image/fits' },
@@ -129,7 +132,7 @@ test('multiple science links stay distinct, previews are excluded, cycles are bo
   assert.equal((await planAccess(root, obs, saved, { ...request, region: circle }, async () => response)).products.length, 0);
 });
 test('archive product kind only proposes a family route; tables and events remain acquirable', async () => {
-  const base = await almaPromise, saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
+  const base = await almaPromise(), saved = snapshot(base), normalized = normalizeSnapshot(saved, profile, target, [target])[0]!;
   for (const kind of ['table', 'events'] as const) {
     const observation = { ...normalized, kind, target: { status: 'confirmed' as const, target: target.id, reason: 'fixture' }, access: { url: `https://example.org/${kind}.fits`, mime: 'application/fits', estimatedKilobytes: 1 } };
     const plan = await planAccess(root, observation, saved, { ...request, kind });

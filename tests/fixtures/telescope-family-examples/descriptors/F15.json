@@ -31,14 +31,12 @@
       "id": "image",
       "path": "../../telescope-families/geographos-radar/ge007.fit",
       "role": "science",
-      "bytes": 72000,
       "mediaType": "application/fits"
     },
     {
       "id": "label",
       "path": "../../telescope-families/geographos-radar/ge007.lbl",
       "role": "label",
-      "bytes": 3600,
       "mediaType": "text/plain"
     }
   ],

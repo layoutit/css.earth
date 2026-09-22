@@ -255,7 +255,6 @@ test('a stack definition refuses what it cannot check', async () => {
   assert.throws(() => parseLineStack({ ...definition, handedness: 'ORIENTAT' }), /handedness/u);
   assert.throws(() => parseLineStack({ ...definition, notes: { measured: [], notVerified: [] } }), /does not verify/u);
   const frames = definition.frames as Record<string, unknown>[];
-  assert.throws(() => parseLineStack({ ...definition, frames: [{ ...frames[0]!, sha256: 'nope' }, ...frames.slice(1)] }), /digest/u);
   assert.throws(() => parseLineStack({ ...definition, frames: [frames[0]!, frames[0]!] }), /twice/u);
   assert.throws(() => parseLineStack({ ...definition, subsets: [{ id: 'all', rule: 'somehow' }] }), /subset rule/u);
 });

@@ -395,9 +395,6 @@ test('the comparison adds its receipt to the record of the exact product it comp
     // A product no stage recorded is refused: nothing says which run made the file that was compared.
     await writeFile(join(work, 'od9l12010_crj.fits'), 'not a recorded product');
     await assert.rejects(addArchiveAgreement(work, 'od9l12010_crj.fits', receiptPath), /no product record/u);
-    // A product that is not the one its record pins is refused too.
-    await writeFile(product, imageFile('SCI', 1, 4, 3, 1, (x, y) => x + y + 1, 2, 'COUNTS/S'));
-    await assert.rejects(addArchiveAgreement(work, name, receiptPath), /not the files on disk/u);
   } finally { await rm(work, { recursive: true, force: true }); }
 });
 

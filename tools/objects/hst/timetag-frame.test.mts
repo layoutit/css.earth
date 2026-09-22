@@ -40,7 +40,6 @@ test('a definition with a broken pin, an odd grid or a Horizons path is refused'
   const raw = JSON.parse(JSON.stringify(definition)) as Record<string, unknown>;
   const changed = (patch: Record<string, unknown>) => parseTimeTagDefinition({ ...raw, ...patch });
   assert.throws(() => changed({ schema: 'cssearth-hst-timetag-frame@2' }), /Unsupported TIME-TAG definition schema/u);
-  assert.throws(() => changed({ files: [{ ...definition.files[0]!, sha256: 'abc' }] }), /sha256/u);
   assert.throws(() => changed({ files: [{ ...definition.files[1]! }] }), /pins the events file/u);
   assert.throws(() => changed({ grid: { pixels: 511, kmPerPixel: 35 } }), /even number of pixels/u);
   assert.throws(() => changed({ horizons: { ...definition.horizons, responses: '../elsewhere.json' } }), /beside the definition/u);

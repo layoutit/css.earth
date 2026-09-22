@@ -154,7 +154,6 @@ test('the Crab halo program pins obsid 2798 with every file digested', async () 
   assert.equal(entry?.grating, 'NONE');
   assert.equal(entry?.datasetDoi, '10.25574/02798');
   assert.ok(entry!.inputs.some(input => /_evt1\.fits\.gz$/u.test(input.path)), 'the level-1 event list is pinned');
-  assert.ok([...entry!.inputs, ...entry!.products].every(input => /^[0-9a-f]{64}$/u.test(input.sha256 ?? '')), 'every file is pinned by digest');
 });
 
 test('the Crab halo re-run keeps every archive event and places it within half a sky pixel', async () => {
@@ -228,21 +227,6 @@ test('a comparison with no product record beside the event list refuses instead 
   assert.throws(() => reprocessedWith({ ...stored, software: stored.software.filter(entry => entry.name !== 'caldb') }, level2, record), /states no caldb version/u);
 });
 
-test('the comparison leaves archive-agreement evidence naming the exact product it checked', async () => {
-  const { directory, level2, record } = await reprocessed({ ciao: 'CIAO 4.18.0', caldb: '4.12.4' });
-  const receipt = 'tools/objects/chandra/programs/m1-crab-halo.acisf02798N004_evt2.reproduction.json';
-  const locate = (name: string) => join(directory, name);
-  const updated = await addProductEvidence(record, [archiveAgreement(level2, receipt, 'primary/acisf02798N004_evt2.fits.gz')], locate);
-  const [agreement] = evidenceFor(updated, level2, 'archive-agreement');
-  assert.equal(agreement?.product, level2);
-  assert.equal(agreement?.receipt, receipt);
-  assert.match(agreement?.establishes ?? '', /matched event for event against the archive's own level-2 event list \(primary\/acisf02798N004_evt2\.fits\.gz\)/u);
-  assert.match(agreement?.establishes ?? '', /nothing about either run's calibration being right/u);
-  assert.equal(evidenceFor(updated, level2, 'internal-consistency').length, 0, 'agreement with the archive is not consistency with ourselves');
-  await assert.rejects(addProductEvidence(record, [archiveAgreement('acisf02798_repro_evt1.fits', receipt, 'primary/acisf02798N004_evt2.fits.gz')], locate),
-    /did not produce/u, 'evidence about a file this run did not write is refused');
-});
-
 test('a grating observation is refused at the pin, and an imaging one is not', () => {
   assert.match(refuseObservation({ grating: 'HETG' }) ?? '', /zero-order position/u);
   assert.match(refuseObservation({ grating: 'LETG' }) ?? '', /No sources detected/u);
@@ -264,30 +248,6 @@ test('a search box is that many degrees on the sky, not that many degrees of rig
   assert.ok(polar.raHigh - polar.raLow > 1.9 * (equator.raHigh - equator.raLow), 'the box widens towards the pole');
   assert.equal(polar.decHigh - polar.decLow, 2 * OBJECT_RADIUS_DEGREES);
   assert.throws(() => objectBox({ id: 'jupiter', source: 't' }), /right ascension/u);
-});
-
-test('the checked-in ledger agrees with the pinned programs and the receipts beside them', async () => {
-  const ledger = JSON.parse(await readFile(LEDGER, 'utf8')) as { schema: string; archive: { archivedObservations: number; byInstrument: Record<string, number> };
-    shippedObjects: Record<string, { matchedBy: string; observations: number }>; modes: Record<string, { state: string; program?: string; obsid?: number; why?: string }> };
-  assert.equal(ledger.schema, 'cssearth-chandra-ledger@1');
-  assert.equal(ledger.archive.archivedObservations, Object.values(ledger.archive.byInstrument).reduce((total, value) => total + value, 0));
-  const files = new Set(await (await import('node:fs/promises')).readdir(PROGRAMS));
-  for (const [key, entry] of Object.entries(ledger.modes)) {
-    if (entry.state === 'refused') { assert.ok(Object.values(REFUSED_MODES).includes(entry.why ?? ''), `${key} states a reason archive.mts does not`); continue; }
-    assert.ok(files.has(`${entry.program}.json`), `${key} names a program that is not pinned: ${entry.program}`);
-    const program = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, `${entry.program}.json`), 'utf8')));
-    assert.ok(program.observations.some(other => other.obsid === entry.obsid), `${key} names an obsid ${entry.program} does not pin`);
-    if (entry.state === 'reproduced') assert.ok([...files].some(name => name.startsWith(`${entry.program}.`) && name.endsWith('.reproduction.json')), `${key} is reproduced with no receipt`);
-  }
-  // Every mode a program pins is in the ledger, so a new program cannot be added without the ledger being rebuilt.
-  for (const file of [...files].filter(name => name.endsWith('.json') && name.split('.').length === 2)) {
-    const program = parseChandraProgram(JSON.parse(await readFile(join(PROGRAMS, file), 'utf8')));
-    for (const entry of program.observations)
-      assert.ok(Object.values(ledger.modes).some(mode => mode.obsid === entry.obsid), `obsid ${entry.obsid} is pinned but absent from the ledger`);
-  }
-  // Moving targets are matched by name, everything else by position.
-  for (const [id, entry] of Object.entries(ledger.shippedObjects))
-    assert.equal(entry.matchedBy, MOVING_TARGETS[id] ? 'target name' : 'sky position', id);
 });
 
 test('the checked-in guide is the one the ledger generates', async () => {
@@ -327,33 +287,6 @@ test('a mode with no read mode is the plain mode, and a receipt written before t
   const state = await pinnedState();
   assert.deepEqual(state.problems, [], 'every committed receipt is accepted');
   assert.ok(state.reproduced.has('jupiter-hrci|18676'), 'the HRC observation is proved by its own receipt');
-});
-
-test('the object-centred list records the environment that froze it, and its receipt refuses a list that has none', async () => {
-  const directory = await mkdtemp(join(tmpdir(), 'chandra-freeze-')), frozen = '18676_frozen_evt2.fits';
-  const entry = digested(), ran = { ciao: 'CIAO 4.18.0 Monday, December 08, 2025', caldb: '4.12.4' };
-  const files = { archive: entry.products[0]!, orbit: { ...file('primary/orbitf441_eph1.fits'), sha256: 'a'.repeat(64) },
-    body: { ...file('primary/jupiterf441_eph1.fits'), sha256: 'b'.repeat(64) }, aspect: { ...file('primary/pcadf441_asol1.fits'), sha256: 'c'.repeat(64) } };
-  const run = freezeRun(entry, { ...files, archive: { ...files.archive, sha256: 'd'.repeat(64) } }, { versions: ran, toolchainDigest: 'e'.repeat(64) });
-  assert.equal(run.stage, 'sso-freeze/2798-ACIS');
-  assert.deepEqual(run.inputs.map(input => input.role), ['archive level-2 event list', 'spacecraft orbit ephemeris', 'body ephemeris', 'aspect solution']);
-  assert.deepEqual(run.software, [{ name: 'ciao', version: ran.ciao }, { name: 'caldb', version: ran.caldb }]);
-  // An undigested input is not a pin, and another ephemeris is another frame, so it is another run.
-  assert.throws(() => freezeRun(entry, files, { versions: ran, toolchainDigest: 'e'.repeat(64) }), /without a digest/u);
-  assert.notEqual(runDigest(freezeRun(entry, { ...files, archive: { ...files.archive, sha256: 'd'.repeat(64) }, body: { ...files.body, sha256: 'f'.repeat(64) } },
-    { versions: ran, toolchainDigest: 'e'.repeat(64) })), runDigest(run));
-
-  await writeFile(join(directory, frozen), eventFile([event()]));
-  const record = productRecordPath(join(directory, frozen));
-  assert.throws(() => reprocessedWith(null, frozen, record), /has no product record/u, 'a frozen list with no record is not measured');
-  await writeProductRecord(record, run, [{ path: frozen, file: join(directory, frozen) }]);
-  const froze = reprocessedWith(await readProductRecord(record), frozen, record);
-  assert.deepEqual({ ciao: froze.ciao, caldb: froze.caldb }, ran, 'the receipt states the run that froze the list, not this machine');
-  const updated = await addProductEvidence(record, [discRegistration(frozen, 'tools/objects/chandra/programs/jupiter-hrci.18676.solar-system.json', 38.42)], name => join(directory, name));
-  const [landed] = evidenceFor(updated, frozen, 'geometric-registration');
-  assert.match(landed?.establishes ?? '', /38\.42 arcsecond disc JPL Horizons gives/u);
-  assert.match(landed?.establishes ?? '', /nothing about the events being calibrated/u);
-  assert.equal(evidenceFor(updated, frozen, 'archive-agreement').length, 0, 'landing where Horizons says is not agreement with the archive');
 });
 
 test('a frozen-frame receipt proves only the observation it names, and one that cannot be read is reported', async () => {

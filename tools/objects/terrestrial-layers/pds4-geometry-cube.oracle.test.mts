@@ -1,6 +1,5 @@
 import assert from 'node:assert/strict';
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
+import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
@@ -14,18 +13,22 @@ import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '
  * DRACO cube from its byte offset and samples values; the decoder must
  * reproduce them exactly, after its declared unit conversions.
  */
-const fixture = await readOracleFixture('pds/dart-draco-cube.json');
-const planes = requireRecord(fixture.cases.planes);
-const source = resolve(ORACLE_ROOT, 'src/objects/dimorphos/source');
-const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
-const mosaic = config.raster.surfaceObservations.find((entry: { id: string }) => entry.id === 'draco');
-const recipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };
-const name = 'dart_0401930040_12262_01_geo.fits';
-const bytes = await readFile(resolve(source, recipe.path)), xml = await readFile(resolve(source, recipe.labelPath), 'utf8');
-const cube = decodePds4GeometryCube(bytes, xml, { fileName: name, cube: recipe.cube, filter: recipe.filter });
-const samples = (plane: string) => sampleList(requireRecord(planes[plane]).samples);
-const flagged = (value: number) => !Number.isFinite(value) || Math.abs(value) >= 1e8 || value === -999;
-
+const loaded = await sourceLoad(async () => {
+  const fixture = await readOracleFixture('pds/dart-draco-cube.json');
+  const planes = requireRecord(fixture.cases.planes);
+  const source = resolve(ORACLE_ROOT, 'src/objects/dimorphos/source');
+  const config = JSON.parse(await readFile(resolve(source, 'preparation/terrestrial.json'), 'utf8'));
+  const mosaic = config.raster.surfaceObservations.find((entry: { id: string }) => entry.id === 'draco');
+  const recipe = { ...mosaic, ...mosaic.frames.find((frame: { id: string }) => frame.id === 't-minus-11s') };
+  const name = 'dart_0401930040_12262_01_geo.fits';
+  const bytes = await readFile(resolve(source, recipe.path)), xml = await readFile(resolve(source, recipe.labelPath), 'utf8');
+  const cube = decodePds4GeometryCube(bytes, xml, { fileName: name, cube: recipe.cube, filter: recipe.filter });
+  const samples = (plane: string) => sampleList(requireRecord(planes[plane]).samples);
+  const flagged = (value: number) => !Number.isFinite(value) || Math.abs(value) >= 1e8 || value === -999;
+  return { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged };
+});
+const test = sourceTest(null, loaded);
+const { fixture, planes, source, config, mosaic, recipe, name, bytes, xml, cube, samples, flagged } = loaded.values;
 test('the fixture was generated from the pinned cube and label by a named PDS4 reader', async () => {
   assert.equal(fixture.oracle, 'pds4_tools');
   assert.equal(requireString(fixture.tool.pds4_tools), '1.4');

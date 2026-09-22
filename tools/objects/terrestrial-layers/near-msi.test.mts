@@ -1,14 +1,17 @@
-import { sourceTest } from '../../../tests/objects/source-test.mts';
-const test = sourceTest();
+import { sourceLoad, sourceTest } from '../../../tests/objects/source-test.mts';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { decodeNearMsi, mathildeImageCamera, readMathildeImageGeometry } from './near-msi.mts';
 import { matrixCamera } from '../surface-observations/cameras.mts';
 
-const table = readFileSync(new URL('../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8');
-const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
-
+const loaded = await sourceLoad(async () => {
+  const table = readFileSync(new URL('../../../src/objects/mathilde/source/reference/253mathimg.tab', import.meta.url), 'utf8');
+  const digest = (bytes: Buffer) => createHash('sha256').update(bytes).digest('hex');
+  return { table, digest };
+});
+const test = sourceTest(null, loaded);
+const { table, digest } = loaded.values;
 test('released Mathilde table selects a reconstructed camera and rejects missing or ambiguous images', () => {
   const g = readMathildeImageGeometry(table, 42826360);
   assert.equal(g.latitude, 84.87); assert.equal(g.longitudeWest, 63.77); assert.equal(g.rangeKm, 1209.73);

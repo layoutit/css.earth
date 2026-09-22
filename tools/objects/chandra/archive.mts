@@ -7,7 +7,7 @@
  * processing reads (the level-1 event list, the aspect solution and its quality, bad pixels, the mask, the mission timeline and
  * the good-time and status filters, the parameter block, the bias maps, the ephemerides) and the level-2 products the archive's
  * own run produced (the level-2 event list, the binned images, a grating spectrum when there is one), each by URL, byte count
- * and, once downloaded, sha256. Nothing is renamed: a file keeps the archive's own path under the obsid directory, so
+ * and nothing more. Nothing is renamed: a file keeps the archive's own path under the obsid directory, so
  * reprocess.mts can lay the tree out again as the CIAO tools expect it.
  *
  * Alongside them it records what the observation is: instrument, detector, grating, read and data mode, target, proposal and
@@ -25,7 +25,6 @@ import { spawn } from 'node:child_process';
 import { mkdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { tapRows } from '../astronomy-packages/client.mts';
@@ -64,7 +63,6 @@ export interface ChandraFile {
   readonly path: string;
   readonly url: string;
   readonly bytes: number;
-  readonly sha256?: string;
 }
 /** The mode an observation was taken in, as a receipt and the ledger both name it: the read mode and the data mode, and the
  * data mode alone for a detector that states no read mode (HRC states none). */
@@ -115,8 +113,7 @@ const archiveFile = (obsid: number) => (value: unknown): ChandraFile => {
   const directory = path.slice(0, path.lastIndexOf('/')), name = path.slice(path.lastIndexOf('/') + 1);
   if (!(DIRECTORIES as readonly string[]).includes(directory) || !NAME.test(name) || !FITS.test(name)) throw new TypeError(`Invalid archive file: ${path}`);
   if (url !== `${obsidDirectory(obsid)}/${path}` || !Number.isSafeInteger(bytes) || bytes < 1) throw new TypeError(`Invalid archive file: ${path}`);
-  if (row.sha256 !== undefined && !/^[0-9a-f]{64}$/u.test(requireString(row.sha256))) throw new TypeError(`Invalid ${path} sha256.`);
-  return { path, url, bytes, ...(row.sha256 === undefined ? {} : { sha256: row.sha256 as string }) };
+  return { path, url, bytes };
 };
 
 export function parseChandraProgram(value: unknown): ChandraProgram {
@@ -166,7 +163,6 @@ export async function chandraFile(file: ChandraFile, directory: string, sources:
     await new Promise<void>(done => { spawn('curl', ['-s', '-L', '-C', '-', '--speed-limit', '200000', '--speed-time', '60', '-o', target, file.url], { stdio: 'inherit' }).on('close', () => done()); });
   }
   if (await sizeOf(target) !== file.bytes) throw new Error(`${file.path} did not download to its pinned ${file.bytes} bytes.`);
-  if (file.sha256 !== undefined && (await sha256File(target)).sha256 !== file.sha256) throw new Error(`${file.path} differs from its pinned sha256.`);
   return target;
 }
 
@@ -297,7 +293,7 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     // Digests recorded by an earlier download stay with their file.
     const keep = (list: readonly ChandraFile[], previous: readonly ChandraFile[] = []) => list.map(file => {
       const before = previous.find(other => other.path === file.path && other.bytes === file.bytes);
-      return before?.sha256 ? { ...file, sha256: before.sha256 } : file;
+      return file;
     });
     const index = entries.findIndex(other => other.obsid === entry.obsid);
     const withDigests = { ...entry, inputs: keep(entry.inputs, entries[index]?.inputs), products: keep(entry.products, entries[index]?.products) };

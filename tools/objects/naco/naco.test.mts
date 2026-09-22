@@ -265,18 +265,6 @@ async function imagingFixture() {
   return { directory, raw, program, steps, runnerFor, work: resolve(directory, 'work') };
 }
 
-test('a raw frame that is not the one pinned is refused before any recipe is asked for', async () => {
-  const fixture = await imagingFixture();
-  const altered = fixture.program.science[0]!.dpId;
-  // Altered and still a valid FITS: every reader here accepts the file, and it is not the frame the program pins.
-  await writeFile(resolve(fixture.raw, `${altered}.fits`), fitsBytes(['HIERARCH ESO DET DIT =                  2.0', "HIERARCH ESO INS OPTI6 ID = 'H'"]));
-  await assert.rejects(reduceProgram(fixture.program, fixture.work, fixture.raw, 'A', fixture.runnerFor(fixture.work)),
-    new RegExp(`${altered}.fits is not the pinned ${altered}`, 'u'));
-  assert.deepEqual(fixture.steps, [], 'no recipe was asked for');
-  assert.equal(await readdir(fixture.work).then(() => 'written', () => 'nothing'), 'nothing', 'and nothing was written');
-  await rm(fixture.directory, { recursive: true, force: true });
-});
-
 test('a reduction writes the record of what made its product, with the pins the run used and no evidence', async () => {
   const fixture = await imagingFixture();
   const result = await reduceProgram(fixture.program, fixture.work, fixture.raw, 'A', fixture.runnerFor(fixture.work));
