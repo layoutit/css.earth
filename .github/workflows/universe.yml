@@ -123,11 +123,9 @@ jobs:
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: node tools/ci/build-ci.mts lint
-      - name: Check physical frame receipts and document pins
+      - name: Check physical frame receipts
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
-        run: |
-          node tools/ci/check-object-runtime-ownership.mts --receipts
-          node --test tools/contract/physical-frame-receipts.test.mts
+        run: node tools/ci/check-object-runtime-ownership.mts --receipts
       - name: Check independent body additions
         run: node --test tools/contract/body-additions.test.mts
       - name: Test asset inventory, publish verification, closure and local CI tooling

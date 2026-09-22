@@ -25,8 +25,8 @@ test('element-budget executes all 9 typed application cases', async t => {
   if (result.error) throw result.error;
   const output = result.stdout + result.stderr;
   assert.equal(result.status, 0, output);
-  assert.match(output, /# tests 9\b/, output);
-  assert.match(output, /# pass 9\b/, output);
-  assert.match(output, /# fail 0\b/, output);
+  assert.match(output, /(?:#|ℹ) tests 9\b/, output);
+  assert.match(output, /(?:#|ℹ) pass 9\b/, output);
+  assert.match(output, /(?:#|ℹ) fail 0\b/, output);
   console.log(output);
 });

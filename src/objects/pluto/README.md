@@ -49,7 +49,7 @@ elevation and composition share the existing geometry, camera and lighting bank.
 
 The retained notes point to [unit checks](../../../tests/objects/unit/pluto) and the shared browser conformance harness, and mentions separate capture/Saturn reports. They do not identify a dated report here; test definitions are not passing-run evidence.
 
-Pinned inputs are checked by the shared [source closure test](../../../tests/objects/source-closure.test.mts).
+Declared inputs are checked by the shared source manifest coverage check.
 
 ## Known problems
 
