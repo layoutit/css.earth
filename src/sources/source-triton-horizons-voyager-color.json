@@ -1,0 +1,35 @@
+{
+  "id": "source-triton-horizons-voyager-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Triton · voyager color observer vectors",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=json&COMMAND=%27-32%27&CENTER=%27500%40801%27&MAKE_EPHEM=%27YES%27&EPHEM_TYPE=%27VECTORS%27&TLIST=%272447761.373948875%0A2447761.377837764%0A2447761.455059986%0A2447761.948393319%0A2447761.954504430%0A2447761.967837763%0A2447763.054504430%0A2447763.066726652%0A2447763.080059986%0A2447763.230059986%0A2447763.233393319%0A2447763.236726652%0A2447763.553393319%0A2447763.556726652%0A2447763.563393319%0A2447763.753363481%0A2447763.754474592%0A2447763.757807925%0A2447763.758919036%0A2447763.759996803%0A2447763.761107914%0A2447763.762196803%0A2447763.763330136%0A2447763.764441247%0A2447763.765530136%0A2447763.766663469%0A2447763.767774580%27&REF_PLANE=%27FRAME%27&REF_SYSTEM=%27ICRF%27&OUT_UNITS=%27KM-S%27&VEC_TABLE=%271%27&VEC_CORR=%27NONE%27&CSV_FORMAT=%27YES%27&OBJ_DATA=%27YES%27",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/triton/source/manifest.json",
+      "locator": "/inputs/49"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL Solar System Dynamics, Horizons",
+      "scope": "The voyager color observer vectors input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public JPL Horizons ephemeris service output.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

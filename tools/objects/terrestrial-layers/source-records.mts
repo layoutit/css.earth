@@ -186,12 +186,6 @@ export const parseControlledMosaic = shape({directory:text,imageIds:array(text),
  weight:number,maximumGain:number,phaseNormalization:boolean,matchStride:number,minimumLevel:number,maximumLevel:number,
  referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,
  minimumMatchSamples:number,vectors:shape({sun:text,observer:text})})});
-/** A three-filter composite: each channel is its own corrected filter mosaic; the monochrome mosaic fills where colour is missing. */
-export const parseControlledColorMosaic = shape({directory:text,photometry:shape({radiusKm:number,gamma:number,displayMaximum:number,
- weight:number,maximumGain:number,phaseNormalization:boolean,matchStride:number,minimumLevel:number,maximumLevel:number,
- referenceIncidenceDegrees:number,referenceEmissionDegrees:number,maximumIncidenceDegrees:number,maximumEmissionDegrees:number,
- minimumMatchSamples:number,vectors:shape({sun:text,observer:text})}),channels:array(shape({filter:text,imageIds:array(text)})),
- stretchPercentile:number,monochrome:shape({filter:text,imageIds:array(text)})});
 export const parseControlledMetadata = shape({IsisCube:shape({BandBin:shape({FilterName:text}),Mapping:shape({PixelResolution:shape({value:number}),
  CenterLongitude:number,CenterLatitude:number,MaximumLatitude:number,MinimumLatitude:number,MaximumLongitude:number,MinimumLongitude:number})}),Table_BodyRotation:shape({CkTableStartTime:number})});
 

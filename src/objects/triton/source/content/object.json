@@ -151,6 +151,20 @@
         },
         "falseColor": true,
         "notes": "Ultraviolet color: Schenk et al. (2021) mosaic of Voyager 2 orange, blue and ultraviolet filters shown as red, green and blue. Brightness in ultraviolet shows up as blue. The north was not lit by Voyager and stays unavailable."
+      },
+      {
+        "id": "voyager-color",
+        "label": "Voyager color",
+        "thumbnail": "triton-lens-voyager-color.webp",
+        "surface": "triton-voyager-color@2x.webp",
+        "poles": "triton-poles-voyager-color@2x.webp",
+        "source": {
+          "id": "voyager-color-c1139313",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        },
+        "falseColor": true,
+        "notes": "Voyager color: Voyager 2 green, violet and ultraviolet frames as red, green and blue over the monochrome map. Near closest approach the frames are Bland et al. (2024) controlled images; the approach frames, 4 to 25 km per pixel, are placed here by fitting Triton's limb. Every frame set is scaled band by band onto the PDS Ring-Moon Systems Node calibration of the 4.7 km approach set where they overlap, and a surface the closest frames view too steeply takes the next approach set's color. The north was not lit and stays unavailable."
       }
     ]
   },

@@ -1,0 +1,287 @@
+{
+  "schema": "cssearth-voyager-color-oracle@1",
+  "objectId": "triton",
+  "method": "Recorded pointing plus limb fit, no datum shift; high-passed detail cross-correlated against the controlled orthophoto over ±3° at 0.05° cells.",
+  "stepDegrees": 0.05,
+  "searchCells": 60,
+  "framesDirectory": "PDS Ring-Moon Systems Node GEOMED products of the controlled release's own colour frames (not pinned; same volume as the pinned approach frames)",
+  "recipeDatumShiftDegrees": {
+    "longitude": 0.78,
+    "latitude": -0.8
+  },
+  "meanResidualDegrees": {
+    "longitude": 0.739,
+    "latitude": -0.817
+  },
+  "residualSpreadKm": 5.25,
+  "comparedFrames": 9,
+  "frames": [
+    {
+      "id": "c1139257",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.63,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 140,
+        "rmsPixels": 0.756,
+        "sedrShiftPixels": [
+          45,
+          -22.59
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.62,
+      "correlation": 0.458,
+      "samples": 126384,
+      "residualDegrees": {
+        "longitude": 0.6,
+        "latitude": -1.1
+      },
+      "residualKm": 28.73
+    },
+    {
+      "id": "c1139259",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.616,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 137,
+        "rmsPixels": 0.72,
+        "sedrShiftPixels": [
+          91.96,
+          -41.36
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.607,
+      "correlation": 0.358,
+      "samples": 118337,
+      "residualDegrees": {
+        "longitude": 0.7,
+        "latitude": -0.85
+      },
+      "residualKm": 24.36
+    },
+    {
+      "id": "c1139305",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.575,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 108,
+        "rmsPixels": 1,
+        "sedrShiftPixels": [
+          -51.83,
+          64.61
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.565,
+      "correlation": 0.105,
+      "samples": 198927,
+      "residualDegrees": {
+        "longitude": 0.8,
+        "latitude": -0.85
+      },
+      "residualKm": 24.87
+    },
+    {
+      "id": "c1139307",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.561,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 107,
+        "rmsPixels": 0.959,
+        "sedrShiftPixels": [
+          -109.86,
+          52.07
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.551,
+      "correlation": 0.094,
+      "samples": 207499,
+      "residualDegrees": {
+        "longitude": 0.9,
+        "latitude": -0.8
+      },
+      "residualKm": 25.23
+    },
+    {
+      "id": "c1139309",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.547,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 69,
+        "rmsPixels": 0.612,
+        "sedrShiftPixels": [
+          -17.67,
+          98.44
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.54,
+      "correlation": 0.439,
+      "samples": 64381,
+      "residualDegrees": {
+        "longitude": 0.8,
+        "latitude": -0.85
+      },
+      "residualKm": 27.38
+    },
+    {
+      "id": "c1139311",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.533,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 78,
+        "rmsPixels": 0.52,
+        "sedrShiftPixels": [
+          -12.3,
+          202.5
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.527,
+      "correlation": 0.532,
+      "samples": 60615,
+      "residualDegrees": {
+        "longitude": 1.15,
+        "latitude": -0.6
+      },
+      "residualKm": 30.24
+    },
+    {
+      "id": "c1139313",
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "pixelScaleKm": 1.52,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 60,
+        "rmsPixels": 0.936,
+        "sedrShiftPixels": [
+          -14.6,
+          147.25
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.511,
+      "correlation": 0.207,
+      "samples": 149435,
+      "residualDegrees": {
+        "longitude": 0.6,
+        "latitude": -0.85
+      },
+      "residualKm": 24.54
+    },
+    {
+      "id": "c1139315",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.506,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 66,
+        "rmsPixels": 0.46,
+        "sedrShiftPixels": [
+          -2.3,
+          138.87
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.496,
+      "correlation": 0.582,
+      "samples": 192680,
+      "residualDegrees": {
+        "longitude": 0.75,
+        "latitude": -0.7
+      },
+      "residualKm": 24.21
+    },
+    {
+      "id": "c1139317",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.492,
+      "limb": {
+        "accepted": false,
+        "edgePoints": 2,
+        "rmsPixels": 0,
+        "sedrShiftPixels": [
+          247.45,
+          -167.88
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c1139319",
+      "observation": "bland-2024-color",
+      "filter": "UV",
+      "pixelScaleKm": 1.479,
+      "limb": {
+        "accepted": false,
+        "edgePoints": 1,
+        "rmsPixels": 0.5,
+        "sedrShiftPixels": [
+          0,
+          0
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c1139321",
+      "observation": "bland-2024-color",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.465,
+      "limb": {
+        "accepted": false,
+        "edgePoints": 25,
+        "rmsPixels": 1.419,
+        "sedrShiftPixels": [
+          -206.99,
+          -34.72
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c1139323",
+      "observation": "bland-2024-color",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.451,
+      "limb": {
+        "accepted": true,
+        "edgePoints": 66,
+        "rmsPixels": 0.6,
+        "sedrShiftPixels": [
+          1.5,
+          39.23
+        ]
+      },
+      "compared": true,
+      "controlledPixelKm": 1.442,
+      "correlation": 0.143,
+      "samples": 173861,
+      "residualDegrees": {
+        "longitude": 0.35,
+        "latitude": -0.75
+      },
+      "residualKm": 19.33
+    }
+  ]
+}
