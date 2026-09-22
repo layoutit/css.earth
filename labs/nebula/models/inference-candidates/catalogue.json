@@ -5,21 +5,62 @@
     "provider": "CDS SIMBAD",
     "retrievedAt": "2026-09-12",
     "path": "labs/nebula/models/inference-candidates/source/simbad.json",
-    "sha256": "8e2dafc6dd33fe40a1ea9b340aba97243be2bc123b9ad1e41dd0609fc89e9455",
     "bytes": 1394,
     "endpoint": "https://simbad.cds.unistra.fr/simbad/sim-tap/sync",
     "query": "SELECT ident.id,basic.main_id,basic.ra,basic.dec,basic.otype,basic.coo_bibcode FROM basic JOIN ident ON basic.oid=ident.oidref WHERE ident.id IN ('M 42','M 8','NGC 3372','NGC 6357','M 78','Barnard 33')",
-    "parameters": { "request": "doQuery", "lang": "adql", "format": "json" },
+    "parameters": {
+      "request": "doQuery",
+      "lang": "adql",
+      "format": "json"
+    },
     "reference": "https://doi.org/10.1051/aas:2000332",
     "interpretation": "Six selected catalogue identities, not a full all-sky catalogue. ICRS/J2000 object centres identify the target; image registration uses the publisher's image WCS. SIMBAD classifies the M8 and NGC6357 entries as open clusters; the ESO images depict their surrounding nebular complexes. Preserve this distinction."
   },
   "method": "Image-only positive relative-emission fit with conditional depth; no planetary expansion or Helix geometry prior is transferred.",
   "candidates": [
-    { "id": "m42", "label": "Orion · M42", "catalogueId": "M  42", "imageContent": "H II region", "compilerRecipe": "labs/nebula/models/m42/compiler.json" },
-    { "id": "m8", "label": "Lagoon · M8", "catalogueId": "M   8", "imageContent": "H II complex surrounding an open cluster", "compilerRecipe": "labs/nebula/models/m8/compiler.json" },
-    { "id": "carina", "label": "Carina", "catalogueId": "NGC  3372", "imageContent": "H II and dust complex", "compilerRecipe": "labs/nebula/models/carina/compiler.json" },
-    { "id": "ngc6357", "label": "Lobster · NGC6357", "catalogueId": "NGC  6357", "imageContent": "H II complex surrounding open clusters", "compilerRecipe": "labs/nebula/models/ngc6357/compiler.json" },
-    { "id": "m78", "label": "M78", "catalogueId": "M  78", "imageContent": "Reflection nebula and obscuring dust", "compilerRecipe": "labs/nebula/models/m78/compiler.json", "limitation": "Positive display-emission approximation does not model illumination-dependent scattering." },
-    { "id": "horsehead", "label": "Horsehead + Flame", "catalogueId": "NAME Horsehead Nebula", "imageContent": "Dark nebula against surrounding emission", "compilerRecipe": "labs/nebula/models/horsehead/compiler.json", "limitation": "Absorption stress test: a positive emission field cannot recover the obscuring Horsehead material from its silhouette." }
+    {
+      "id": "m42",
+      "label": "Orion · M42",
+      "catalogueId": "M  42",
+      "imageContent": "H II region",
+      "compilerRecipe": "labs/nebula/models/m42/compiler.json"
+    },
+    {
+      "id": "m8",
+      "label": "Lagoon · M8",
+      "catalogueId": "M   8",
+      "imageContent": "H II complex surrounding an open cluster",
+      "compilerRecipe": "labs/nebula/models/m8/compiler.json"
+    },
+    {
+      "id": "carina",
+      "label": "Carina",
+      "catalogueId": "NGC  3372",
+      "imageContent": "H II and dust complex",
+      "compilerRecipe": "labs/nebula/models/carina/compiler.json"
+    },
+    {
+      "id": "ngc6357",
+      "label": "Lobster · NGC6357",
+      "catalogueId": "NGC  6357",
+      "imageContent": "H II complex surrounding open clusters",
+      "compilerRecipe": "labs/nebula/models/ngc6357/compiler.json"
+    },
+    {
+      "id": "m78",
+      "label": "M78",
+      "catalogueId": "M  78",
+      "imageContent": "Reflection nebula and obscuring dust",
+      "compilerRecipe": "labs/nebula/models/m78/compiler.json",
+      "limitation": "Positive display-emission approximation does not model illumination-dependent scattering."
+    },
+    {
+      "id": "horsehead",
+      "label": "Horsehead + Flame",
+      "catalogueId": "NAME Horsehead Nebula",
+      "imageContent": "Dark nebula against surrounding emission",
+      "compilerRecipe": "labs/nebula/models/horsehead/compiler.json",
+      "limitation": "Absorption stress test: a positive emission field cannot recover the obscuring Horsehead material from its silhouette."
+    }
   ]
 }

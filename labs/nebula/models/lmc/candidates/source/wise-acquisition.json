@@ -1,7 +1,7 @@
 {
   "schema": "cssearth-nebula-wide-survey-receipt@1",
   "id": "allwise-color-lmc-24deg-6000",
-  "label": "AllWISE infrared \u00b7 24\u00b0 LMC field",
+  "label": "AllWISE infrared · 24° LMC field",
   "survey": {
     "id": "CDS/P/allWISE/color",
     "doi": "10.26093/cds/aladin/35rf-zj",
@@ -17,11 +17,11 @@
       "W2": 6.4,
       "W4": 12
     },
-    "resolutionCaveat": "IRSA states atlas-image point source profiles are sqrt(2) broader than the native single-exposure values. The 6000px 24\u00b0 resampling further limits detail.",
+    "resolutionCaveat": "IRSA states atlas-image point source profiles are sqrt(2) broader than the native single-exposure values. The 6000px 24° resampling further limits detail.",
     "rgb": {
-      "red": "WISE W4 22\u00b5m",
-      "green": "WISE W2 4.6\u00b5m",
-      "blue": "WISE W1 3.4\u00b5m"
+      "red": "WISE W4 22µm",
+      "green": "WISE W2 4.6µm",
+      "blue": "WISE W1 3.4µm"
     },
     "hipsRgbStretch": {
       "hips_rgb_red": "w4 [102.0 151.0 200.0 Log]",
@@ -41,20 +41,18 @@
       "dec": -69.19
     },
     "serviceDocumentationUrl": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits",
-    "dimensionLimit": "8192\u00b2 request rejected: service maximum50000000pixels; acquired6000\u00b2 instead."
+    "dimensionLimit": "8192² request rejected: service maximum50000000pixels; acquired6000² instead."
   },
   "artifacts": [
     {
       "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
       "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
-      "bytes": 1942085,
-      "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a"
+      "bytes": 1942085
     },
     {
       "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.fits",
       "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
-      "bytes": 144002880,
-      "sha256": "33cd09d02bcf3c3d3b1b0aeaeec3244400136bc19280c67ef54ab3693e932a7f"
+      "bytes": 144002880
     }
   ],
   "wcs": {
@@ -65,8 +63,8 @@
       6000
     ],
     "referencePixel": [
-      3000.0,
-      3000.0
+      3000,
+      3000
     ],
     "referenceValueDeg": [
       78.76,
@@ -88,8 +86,8 @@
       "NAXIS2": 6000,
       "NAXIS3": 4,
       "WCSAXES": 2,
-      "CRPIX1": 3000.0,
-      "CRPIX2": 3000.0,
+      "CRPIX1": 3000,
+      "CRPIX2": 3000,
       "CDELT1": -0.0040595312971682,
       "CDELT2": 0.0040595312971682,
       "CUNIT1": "deg",
@@ -98,9 +96,9 @@
       "CTYPE2": "DEC--TAN",
       "CRVAL1": 78.76,
       "CRVAL2": -69.19,
-      "LONPOLE": 180.0,
+      "LONPOLE": 180,
       "LATPOLE": -69.19,
-      "MJDREF": 0.0,
+      "MJDREF": 0,
       "RADESYS": "ICRS",
       "CPYRIGHT": "IPAC/NASA - http://wise2.ipac.caltech.edu/docs/release/allsky/"
     }
@@ -108,7 +106,7 @@
   "verification": {
     "alphaMin": 254,
     "alphaMax": 255,
-    "alphaNonzeroFraction": 1.0,
+    "alphaNonzeroFraction": 1,
     "fullyBlankRows": 0,
     "fullyBlankColumns": 0,
     "exactBlackRgbFraction": 0.0004616111111111111,

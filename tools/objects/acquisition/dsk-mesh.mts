@@ -1,7 +1,7 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import {requireRecord} from '../../sources/source-values.mts';
 import {shape,text,number} from '../terrestrial-layers/source-records.mts';
-const parseRecipe=shape({inputPath:text,inputSha256:text,member:text,spiceypyVersion:text,cspiceVersion:text,inputBytes:number,targetId:number,frameId:number,surfaceId:number,sourceVertices:number,sourceFaces:number,weldedVertices:number});
+const parseRecipe=shape({inputPath:text,member:text,spiceypyVersion:text,cspiceVersion:text,inputBytes:number,targetId:number,frameId:number,surfaceId:number,sourceVertices:number,sourceFaces:number,weldedVertices:number});
 import {readFile, mkdtemp, rm} from 'node:fs/promises';
 import {resolve, isAbsolute, sep} from 'node:path';
 import {tmpdir} from 'node:os';
@@ -14,10 +14,9 @@ export function validateDskMeshRecipe(value:unknown) {
   if (!recipe || typeof recipe !== 'object' || Array.isArray(recipe) ||
       typeof recipe.inputPath !== 'string' || !recipe.inputPath || isAbsolute(recipe.inputPath) ||
       recipe.inputPath.includes('\\') || recipe.inputPath.split('/').some(p => !p || p === '.' || p === '..') ||
-      typeof recipe.inputSha256 !== 'string' || !/^[a-f0-9]{64}$/.test(recipe.inputSha256) ||
       !/^[a-z0-9][a-z0-9_-]*\.obj$/.test(recipe.member) ||
       recipe.spiceypyVersion !== '6.0.3' || recipe.cspiceVersion !== 'CSPICE_N0067') {
-    throw new TypeError('Invalid pinned DSK mesh conversion recipe.');
+    throw new TypeError('Invalid DSK mesh conversion recipe.');
   }
   for (const key of ['inputBytes', 'targetId', 'frameId', 'surfaceId', 'sourceVertices', 'sourceFaces', 'weldedVertices'] as const) {
     if (!Number.isSafeInteger(recipe[key]) || recipe[key] <= 0) throw new TypeError(`Invalid DSK ${key}.`);
@@ -33,8 +32,8 @@ export async function prepareDskMesh({sourceRoot, recipe:recipeValue}:{sourceRoo
   const root = resolve(sourceRoot), path = resolve(root, recipe.inputPath);
   if (!path.startsWith(root + sep)) throw new TypeError('DSK source escapes source root.');
   const source = await readFile(path);
-  if (source.length !== recipe.inputBytes || sha256(source) !== recipe.inputSha256) {
-    throw new Error('Pinned DSK source bytes differ.');
+  if (source.length !== recipe.inputBytes) {
+    throw new Error('DSK source length differs from its recipe.');
   }
   const python = process.env.CSSEARTH_SPICE_PYTHON ?? 'python3';
   // Name the requirement before the conversion runs; a bare ModuleNotFoundError

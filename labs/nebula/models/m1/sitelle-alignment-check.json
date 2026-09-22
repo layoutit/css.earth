@@ -4,14 +4,12 @@
   "source": {
     "id": "sitelle-deep",
     "path": ".local/nebula-lab/intake/m1/physical/m1.deep_frame.fits",
-    "sha256": "b1515f62eb6d9e402e93a756609848de86a193b9156fa1a2e47794ca569946c7",
     "bytes": 16917120,
     "width": 2048,
     "height": 2064
   },
   "reference": {
     "id": "hubble-optical",
-    "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
     "width": 3864,
     "height": 3864
   },

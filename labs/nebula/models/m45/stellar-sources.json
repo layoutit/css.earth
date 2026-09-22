@@ -4,7 +4,6 @@
   "asOf": "2026-09-13",
   "catalogue": {
     "path": "labs/nebula/models/m45/stellar-catalogue.json",
-    "sha256": "725466bded167e153b071941c63584313bc73503db6a61ed9aa57649a0ce6ac7",
     "records": 2105
   },
   "selection": {
@@ -38,29 +37,23 @@
   "inputs": [
     {
       "path": ".local/nebula-lab/stellar-catalogues/m45/hipparcos.tsv",
-      "sha256": "5fcb44ae421ba086684b2933381ff7a0f280ae017bf02c41b661258118400463",
       "bytes": 19620,
       "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2f239%2fhip_main&-c=56.75+24.1167&-c.r=255&-c.u=arcmin&-out=HIP%2cRAICRS%2cDEICRS%2cVmag%2cB-V%2ce_B-V%2cPlx%2ce_Plx%2cpmRA%2cpmDE%2ce_pmRA%2ce_pmDE&-out.max=10000&-sort=Vmag",
-      "kind": "hipparcos",
-      "dataSha256": "d6b71b22490ab69561c927206b503acecb5cc9580e447d33931baba43d28e6df"
+      "kind": "hipparcos"
     },
     {
       "path": ".local/nebula-lab/stellar-catalogues/m45/tycho2.tsv",
-      "sha256": "419d0b3e314ec5a176a6726eca1458dc5554c0d951d5b0f5997ee01eaecff51d",
       "bytes": 205933,
       "url": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=I%2f259%2ftyc2&-c=56.75+24.1167&-c.r=255&-c.u=arcmin&-out=TYC1%2cTYC2%2cTYC3%2cRAmdeg%2cDEmdeg%2cpmRA%2cpmDE%2ce_pmRA%2ce_pmDE%2cBTmag%2ce_BTmag%2cVTmag%2ce_VTmag%2cHIP&-out.max=20000&VTmag=%3c12&-sort=VTmag",
-      "kind": "tycho2",
-      "dataSha256": "4169e6f2e801cc46c7f32876ac9463127989c1bf3d38d7b1da26cc58b62c3839"
+      "kind": "tycho2"
     },
     {
       "path": "output/m45-stars-diagnosis/hipparcos-readme.txt",
-      "sha256": "7a7d54903d16460a76c240f07c41b019d57becfd27b5dfa2908e828f52f90c27",
       "bytes": 69036,
       "url": "https://cdsarc.cds.unistra.fr/ftp/I/239/ReadMe"
     },
     {
       "path": "output/m45-stars-diagnosis/tycho2-readme.txt",
-      "sha256": "4c0bf3114eb0f4666acd6e5d20bc0cefa21bdc8279084de25973745874e29548",
       "bytes": 16801,
       "url": "https://cdsarc.cds.unistra.fr/ftp/I/259/ReadMe"
     }
@@ -68,8 +61,7 @@
   "preparation": {
     "method": "HIP rows preferred by explicit Tycho HIP cross-ID; no spatial deduplication of possible resolved companions. First-order proper motion advances Hipparcos 1991.25 to epoch2000. Native coordinates and motions remain preserved per record.",
     "implementation": {
-      "path": "labs/nebula/src/stars/acquire-field-catalogue.ts",
-      "sha256": "cb29765d4ca026428e2dd10aa9de8bbc0ffed7081a80bfb91408f55821c96633"
+      "path": "labs/nebula/src/stars/acquire-field-catalogue.ts"
     },
     "skipped": [
       {

@@ -5,7 +5,7 @@ export interface AuthoredObjectFixtureOptions {
 export function authoredObjectFixture(id: string, { path = "source/surface.json" }: AuthoredObjectFixtureOptions = {}) {
   return {
     schema: "cssearth-object@1", id, type: "layered-body",
-    prepared: { format: "fixture@1", url: `/scenes/${id}/object.json`, sha256: "b".repeat(64) },
+    prepared: { format: "fixture@1", url: `/scenes/${id}/object.json` },
     properties: { recipe: {
       schema: "cssearth-authored-object@1",
       sources: [{ id: "surface", path }],

@@ -10,7 +10,6 @@
           "id": "vista-infrared",
           "label": "ESO VISTA · infrared, star-aligned",
           "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
-          "sha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
           "url": "https://cdn.eso.org/images/publicationtiff10k/eso1914a.tif",
           "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
           "credit": "ESO/VMC Survey",
@@ -38,7 +37,6 @@
           },
           "wcsSource": {
             "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-            "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
             "description": "Sky anchor is SMASH publisher AVM. Exact native-pixel homography is verified against discrete matched star fields, with held-out residuals and negative controls in source/vista-direction-gate.json. Original VISTA WCS is retained as provenance but not used for geometry."
           },
           "registrationNote": "8954 × 10000 ESO Y/J/Ks image; about 7.7° × 8.6°. Image-to-image scale, rotation and handedness fitted to 16,020 SMASH stars; 5,340 held out, P90 error 0.67 SMASH pixels (~3.3 arcsec), matched hull 83%. Corrected the publisher placement; corners outside the matched hull are extrapolated. The same saved user-authored model fit as SMASH is then applied for display, not as scientific size or simulation registration. Infrared display colors; still partial density coverage. Selected for a full-footprint 2D separation trial; the current 3D reconstruction is unchanged.",
@@ -73,8 +71,8 @@
               0.1190037618003177,
               0.596664958469161,
               -1479.567248000351,
-              -2.639112449735194e-06,
-              -1.2871658418376004e-06,
+              -0.000002639112449735194,
+              -0.0000012871658418376004,
               1
             ]
           },
@@ -85,7 +83,6 @@
           "id": "horalek-widefield",
           "label": "Horálek · optical wide field",
           "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
-          "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
           "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg",
           "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
           "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
@@ -121,15 +118,14 @@
               -0.4729033967977122,
               -0.9970462494720148,
               5409.185308143818,
-              2.3045914082800085e-07,
-              -4.331845136939875e-07,
+              2.3045914082800085e-7,
+              -4.331845136939875e-7,
               1
             ]
           },
           "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied. The same saved image-to-density visual fit is applied as for SMASH. Import and alignment preview only; cloud processing awaits explicit approval. Selected for a full-footprint 2D separation trial; compact residual and diffuse light remain inspectable before a new volume bake.",
           "wcsSource": {
             "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-            "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
             "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
           },
           "wcs": {
@@ -159,7 +155,6 @@
           "id": "wise-wide-infrared",
           "label": "NASA WISE · 24° infrared candidate",
           "path": ".local/nebula-lab/image-candidates/wise-wide/allwise-color-lmc-24deg-6000.jpg",
-          "sha256": "9231819aa5182ce5cdf3c94fbc6fb146653f2d75bbe807c7bf4ed03d78ef5f8a",
           "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
           "sourcePageUrl": "https://irsa.ipac.caltech.edu/onlinehelp/wise/wise/overview.html",
           "credit": "IPAC/NASA; color HiPS by CDS (CNRS/Unistra)",
@@ -187,7 +182,6 @@
           },
           "wcsSource": {
             "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
-            "sha256": "33cd09d02bcf3c3d3b1b0aeaeec3244400136bc19280c67ef54ab3693e932a7f",
             "description": "Exact ICRS TAN WCS from matching CDS HiPS2FITS; JPEG/FITS raster orientation verified. NASA/IPAC data, CDS W4/W2/W1 display-color composition."
           },
           "registrationNote": "24° NASA/IPAC WISE field rendered by CDS as W4/W2/W1 RGB, 6000 × 6000 (~14.6 arcsec/pixel). Fixed publisher WCS verified against 34,811 independently retrieved AllWISE W1 catalogue positions; 11,604 reserved checks, P90 0.632 native WISE pixels, 99.3% matched hull. No geometry correction fitted. This checks position, not diffuse photometry or visible atlas seams. The shared user-authored SMASH model fit is applied separately for display. Selected for a full-footprint 2D separation trial.",
@@ -195,8 +189,7 @@
         }
       ],
       "alignment": {
-        "path": "labs/nebula/models/lmc/overlays/source/manual-placement.json",
-        "sha256": "f51f97c5976dfb7a6d2e094c144c876a57c3ac6339e9ba50238bb56151635783"
+        "path": "labs/nebula/models/lmc/overlays/source/manual-placement.json"
       }
     }
   ]

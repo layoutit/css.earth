@@ -1,26 +1,21 @@
 {
   "schema": "cssearth-density-placement-evidence@1",
   "placement": {
-    "path": "labs/nebula/models/smc/model-placement.json",
-    "sha256": "c3f2949f21c6c64ac759623f407ebec95d3601d14e99c16a9e9825d53a502767"
+    "path": "labs/nebula/models/smc/model-placement.json"
   },
   "reproduce": "node labs/nebula/run.mts fit-density-placement labs/nebula/models/smc/placement-fit.json",
   "settings": {
-    "path": "labs/nebula/models/smc/placement-fit.json",
-    "sha256": "3e40f148cedbcf8a4458a98d0bd3ff4e8f9018e19b45fe8dbabc53be626a8512"
+    "path": "labs/nebula/models/smc/placement-fit.json"
   },
   "implementation": {
     "path": "labs/nebula/packages/lab/src/cli/commands/fit-density-placement.ts",
-    "sha256": "be4ecb96612b380f7a152b0a2e2db4e07c8c6bfc9be408c077a70bb10bad903a",
     "algorithm": {
-      "path": "labs/nebula/packages/reconstruction/src/registration/density-similarity.ts",
-      "sha256": "357be7e57c2183f4b2d9b1fb27016f10c5dd36516721043b104c902ba537152b"
+      "path": "labs/nebula/packages/reconstruction/src/registration/density-similarity.ts"
     }
   },
   "independentBandCheck": {
     "image": {
       "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
-      "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
       "registration": {
         "referenceWcs": {
           "referenceDimension": [
@@ -76,12 +71,10 @@
   },
   "images": [
     {
-      "path": ".local/nebula-lab/smc-placement/before-observation-after.png",
-      "sha256": "cd7f18982adf72f8bd83a79f6e9f4305c97fa6ead36963c88c205c6ace826f80"
+      "path": ".local/nebula-lab/smc-placement/before-observation-after.png"
     },
     {
-      "path": ".local/nebula-lab/smc-placement/vista-fixed-before-observation-after.png",
-      "sha256": "0cda980d68e658542cf30363da9b0eac9bb3a49cf5cf8c2c2fbd5f5e6c29cc31"
+      "path": ".local/nebula-lab/smc-placement/vista-fixed-before-observation-after.png"
     }
   ],
   "limits": [

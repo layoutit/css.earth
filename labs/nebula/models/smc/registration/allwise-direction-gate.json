@@ -3,10 +3,8 @@
   "status": "fail",
   "pass": false,
   "cloudProcessingPerformed": false,
-  "imageSha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
   "source": {
     "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.jpg",
-    "sha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
     "nativeDimensions": [
       4000,
       4000
@@ -39,7 +37,6 @@
   },
   "reference": {
     "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
-    "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
     "nativeDimensions": [
       4000,
       3540

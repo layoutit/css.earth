@@ -16,8 +16,8 @@ export function readProcessingEnvironmentRecipe(value: unknown): ProcessingEnvir
       new Set(environment.packages.map(spec => spec.split('==')[0]!.toLowerCase().replace(/[-_.]+/g, '-'))).size !== environment.packages.length)
     throw new TypeError('Processing packages need unique exact name==version pins.');
   if (typeof model.path !== 'string' || !model.path.startsWith('.local/open-star-removal/') || /[\\:?#]/.test(model.path) ||
-      model.path.split('/').some(part => !part || part === '.' || part === '..') || typeof model.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(model.sha256) ||
-      typeof model.url !== 'string') throw new TypeError('Invalid local NOX model path or SHA-256 pin.');
+      model.path.split('/').some(part => !part || part === '.' || part === '..') ||
+      typeof model.url !== 'string') throw new TypeError('Invalid local NOX model path.');
   let url: URL;
   try { url = new URL(model.url); } catch { throw new TypeError('The pinned NOX model needs an HTTPS URL.'); }
   if (url.protocol !== 'https:' || !url.hostname || url.username || url.password) throw new TypeError('The pinned NOX model needs an HTTPS URL.');

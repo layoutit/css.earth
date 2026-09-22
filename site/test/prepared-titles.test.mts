@@ -5,7 +5,6 @@ import { resolve } from "node:path";
 import test from "node:test";
 
 import { loadObjectContent } from "./load-object-content.mts";
-import { sha256 } from "../../src/platform/sha256.mts";
 import { PLANET_TITLE_STANDARD, createPreparedTitleLayout } from "../../src/platform/prepared-title.mts";
 import { PLANET_TITLE_RECIPE } from
   "../../src/platform/planet-title-recipe.mts";
@@ -40,7 +39,6 @@ test("generates all shared title assets once from checked source vectors", async
     ));
     assert.deepEqual(await readFile(resolve(publicRoot, descriptor.file)), source);
     const prepared = requireRecord(Reflect.get(PREPARED_SHELL_TITLES, descriptor.key), 'prepared shell title');
-    assert.equal(prepared.inputSha256, sha256(source));
     assert.equal(prepared.fontSize, 17);
   }
 });

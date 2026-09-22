@@ -9,7 +9,6 @@
       "source": {
         "path": ".local/nebula-lab/intake/m45/widefield/iau-usama.tif",
         "url": "https://iauarchive.eso.org/static/archives/images/original/ann22042ab.tif",
-        "sha256": "7df5986e086ea3f332ae1f8d07b56c7de5ec1c1a34d0309a000cf4a43ed77bd9",
         "width": 3365,
         "height": 2234,
         "bytes": 13318250
@@ -83,7 +82,6 @@
         ],
         "reference": {
           "id": "noirlab-optical",
-          "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
           "width": 4000,
           "height": 2920
         },
@@ -105,7 +103,6 @@
       "coverageLimit": "Nominal tangent-plane footprint inferred from the small common central field; distortion and geometry in the outer cloud remain unmeasured.",
       "registrationReceipt": {
         "path": ".local/nebula-lab/observations/m45/iau-usama-widefield-registration.json",
-        "sha256": "ba5336e2fdce4340b11067841279cf0bde1a0e85dcb3cc5ce5d725e308e172eb",
         "pass": false,
         "matchedStars": 0,
         "attempts": [
@@ -122,8 +119,7 @@
         ]
       },
       "fullFootprintCapture": {
-        "path": "output/m45-widefield/iau-usama-widefield-full-footprint.png",
-        "sha256": "1a643a7e35774fd232ed8a0a0a23aee6d37aafea08da021e339cfca8a1f938b1"
+        "path": "output/m45-widefield/iau-usama-widefield-full-footprint.png"
       }
     },
     {
@@ -131,7 +127,6 @@
       "source": {
         "path": ".local/nebula-lab/intake/m45/widefield/andreo-pleiades.jpg",
         "url": "https://apod.nasa.gov/apod/image/0910/pleiades_andreo_big.jpg",
-        "sha256": "be7518ac9f74e4ac31aef6704511190c4ca6eb87d5e32800fe56feed27a94d68",
         "width": 2200,
         "height": 1567,
         "bytes": 1607314
@@ -235,7 +230,6 @@
         ],
         "reference": {
           "id": "noirlab-optical",
-          "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
           "width": 4000,
           "height": 2920
         },
@@ -257,7 +251,6 @@
       "coverageLimit": "Nominal tangent-plane footprint inferred from the small common central field; distortion and geometry in the outer cloud remain unmeasured.",
       "registrationReceipt": {
         "path": ".local/nebula-lab/observations/m45/andreo-widefield-registration.json",
-        "sha256": "014913a8d25bf72eb690f629e2ee19f266b1b68190831bb58dca1497fb81f5a2",
         "pass": false,
         "matchedStars": 0,
         "attempts": [
@@ -274,8 +267,7 @@
         ]
       },
       "fullFootprintCapture": {
-        "path": "output/m45-widefield/andreo-widefield-full-footprint.png",
-        "sha256": "f776d10f6619e9efa81ec86f47235b9eb9767b6d1b58a61c078cf74b8bcd21d1"
+        "path": "output/m45-widefield/andreo-widefield-full-footprint.png"
       }
     },
     {
@@ -283,7 +275,6 @@
       "source": {
         "path": ".local/nebula-lab/intake/m45/widefield/niittee-pleiades.jpg",
         "url": "https://upload.wikimedia.org/wikipedia/commons/5/53/Plejades.jpg",
-        "sha256": "96c04d4db1cd317544bd616fe41ce337f32aa1dac2fcd69702419f29c426e5aa",
         "width": 8000,
         "height": 5199,
         "bytes": 16654428
@@ -322,10 +313,8 @@
           611.163717693123
         ],
         "evidencePath": "output/m45-source-research/niittee-registration-native.json",
-        "evidenceSha256": "96c487c4f97d4f8720a9933bc4242ac459a866bebd418b73fe6f9fd17b9e7d15",
         "preparationReplay": {
           "path": ".local/nebula-lab/observations/m45/niittee-widefield-registration.json",
-          "sha256": "3d4787df1d6199a91d5f8b2a9670e50e22325046691ea34073a148a614af109e",
           "pass": true,
           "matchedStars": 295,
           "heldOutStars": 99,
@@ -352,32 +341,27 @@
   ],
   "validation": {
     "recipe": {
-      "path": "labs/nebula/models/m45/observations.json",
-      "sha256": "264dc99377e33d7afdf2751c73b5897c5f692200c6158fc9e9e3ec1a1432ecd8"
+      "path": "labs/nebula/models/m45/observations.json"
     },
     "catalogue": {
-      "path": ".local/nebula-lab/observations/m45/observations.json",
-      "sha256": "4839603bb1f8b168d9887071d60f5df2eb4506df3a62e5ec759c8a16abb295e0"
+      "path": ".local/nebula-lab/observations/m45/observations.json"
     },
     "alignment": "NEBULA_ALIGNMENT_READY; eight original views and four reused completed native diffuse/residual pairs. No new native star removal.",
     "browser": {
       "path": ".local/nebula-lab/source-candidates-browser/result.json",
-      "sha256": "22b224edd564361c0672f179e57f0ee86a701c031294587690225af8d2f006fa",
       "visibleImageCount": 6,
       "verifiedImageCount": 4,
       "unverifiedImageCount": 2,
       "errors": [],
       "writes": [],
       "implementation": {
-        "path": "labs/nebula/src/browser/browser-source-candidates.ts",
-        "sha256": "91c40d53fc441957ccec3f18c19852ad1ef7d692693cc110847f3fb2ef7238d1"
+        "path": "labs/nebula/src/browser/browser-source-candidates.ts"
       },
       "preparedLayerClicks": 8,
       "newCandidateRemovalViewsDisabled": true
     },
     "completeFootprints": {
       "path": "output/m45-widefield/fit-browser.json",
-      "sha256": "59a9be931c429993e32aa00a8da6d1c0ad385ba5352343ffdf82d6dc6887443f",
       "errors": [],
       "writes": [],
       "applicability": "Prior full-footprint captures remain applicable: both new original rasters, their authored bright-star seeds and their image placements were unchanged by the native-cache handoff."
@@ -391,55 +375,42 @@
     ],
     "processingUnchanged": [
       {
-        "path": "labs/nebula/models/m45/processing-observations.json",
-        "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705"
+        "path": "labs/nebula/models/m45/processing-observations.json"
       },
       {
-        "path": "labs/nebula/models/m45/compiler.json",
-        "sha256": "6192347247b7d0892811e4a36c8cf277f0713c674c83db6b982937e22bb0249f"
+        "path": "labs/nebula/models/m45/compiler.json"
       },
       {
-        "path": "labs/nebula/models/m45/physical-evidence.json",
-        "sha256": "73ec8317dbd6e75b0e39184b2196011495a4ddf0e88571cc1719ec871d9385c4"
+        "path": "labs/nebula/models/m45/physical-evidence.json"
       }
     ],
     "nativeCacheHandoff": {
       "recipe": {
         "recipe": {
-          "path": "labs/nebula/models/m45/processing-observations.json",
-          "sha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705"
+          "path": "labs/nebula/models/m45/processing-observations.json"
         }
       },
       "preparationLog": {
-        "path": "output/m45-widefield/cache-reuse-alignment.log",
-        "sha256": "7dda702bb3ff4bd44224c8d43fb67e78c72c180979e84709bf95bd183ec784d8"
+        "path": "output/m45-widefield/cache-reuse-alignment.log"
       },
       "tests": {
-        "path": "output/m45-widefield/cache-reuse-tests.log",
-        "sha256": "260c56e215e5948e736a2eef8ba9cdf41b8b617152f14686cd1649e3efd1821e"
+        "path": "output/m45-widefield/cache-reuse-tests.log"
       },
       "nativeProcessingLaunched": false,
       "intakeNoxRequests": 0,
       "reused": [
         {
           "id": "noirlab-optical",
-          "originalSha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
           "nativeDimensions": [
             4000,
             2920
           ],
           "nativeReceipt": {
-            "path": ".local/nebula-lab/observations/m45-processing/noirlab-optical/native-nox/result.json",
-            "sha256": "06f82c6df05860a78e3f76a82e1589249193ac0dec5801178bf0bb185b6a9474"
+            "path": ".local/nebula-lab/observations/m45-processing/noirlab-optical/native-nox/result.json"
           },
-          "normalizedRgbSha256": "52030751f515518f3ba20ec5726d2aa71bdf1516388aebd7fa27b9c15145814c",
-          "diffuseSha256": "301b9cb7b7c96b795f7dd9f74dae5b4974f029d09765000aba8d0a84036c109a",
-          "residualSha256": "25007ef29fe308aa2465a9498c34a85472c73ba5c1dd0b63aad35ead0646b01f",
           "model": {
-            "path": ".local/open-star-removal/noxGeneratorColor.pb",
-            "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+            "path": ".local/open-star-removal/noxGeneratorColor.pb"
           },
-          "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
           "imageToFrame": [
             -0.001896920768961536,
             -0.13951662608693488,
@@ -462,23 +433,16 @@
         },
         {
           "id": "spitzer-irac",
-          "originalSha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
           "nativeDimensions": [
             2855,
             2855
           ],
           "nativeReceipt": {
-            "path": ".local/nebula-lab/observations/m45-processing/spitzer-irac/native-nox/result.json",
-            "sha256": "df9a400b6047d390b002d83e3b1fc186dbc091a724c22618203df822d41dee87"
+            "path": ".local/nebula-lab/observations/m45-processing/spitzer-irac/native-nox/result.json"
           },
-          "normalizedRgbSha256": "09b2c9e3327f4682e83767d45ece0d9d0171ee264dd462726f6291e7210c3009",
-          "diffuseSha256": "64948da4af369c380c5e792cb2cd00f26ca9d3b028920068e5476f67ed64301c",
-          "residualSha256": "616ab3bd61a3e6f3f3f4b5f2651637bea712e67a89c2957c8b792f1962c881eb",
           "model": {
-            "path": ".local/open-star-removal/noxGeneratorColor.pb",
-            "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+            "path": ".local/open-star-removal/noxGeneratorColor.pb"
           },
-          "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
           "imageToFrame": [
             -0.03370469632570783,
             0.161773091775943,
@@ -501,23 +465,16 @@
         },
         {
           "id": "spitzer-irac-mips",
-          "originalSha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
           "nativeDimensions": [
             2855,
             2855
           ],
           "nativeReceipt": {
-            "path": ".local/nebula-lab/observations/m45-processing/spitzer-irac-mips/native-nox/result.json",
-            "sha256": "552360f50de20c974d67e0be9baf8343a37ae3584d443b422f7ec5e5dbb46953"
+            "path": ".local/nebula-lab/observations/m45-processing/spitzer-irac-mips/native-nox/result.json"
           },
-          "normalizedRgbSha256": "e98fac37faf388a4ae22e798df5c2af1f2e46ebf968734c8b580c2f14056d2c0",
-          "diffuseSha256": "4fa899295ee5c4983e996ac0e1268497836bae24824ce0944416ec497d784c65",
-          "residualSha256": "d2ea35fb22536eb7ba4104f365f772e536c3a73d16da4c97d71d5ceb0be2943c",
           "model": {
-            "path": ".local/open-star-removal/noxGeneratorColor.pb",
-            "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+            "path": ".local/open-star-removal/noxGeneratorColor.pb"
           },
-          "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
           "imageToFrame": [
             -0.03370426301712204,
             0.1617780737557237,
@@ -540,23 +497,16 @@
         },
         {
           "id": "wise-four-band",
-          "originalSha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
           "nativeDimensions": [
             4007,
             3061
           ],
           "nativeReceipt": {
-            "path": ".local/nebula-lab/observations/m45-processing/wise-four-band/native-nox/result.json",
-            "sha256": "97eaac5aa82920d33fcc04de05886909ffbb3144d0c233b2594402c288bd09d3"
+            "path": ".local/nebula-lab/observations/m45-processing/wise-four-band/native-nox/result.json"
           },
-          "normalizedRgbSha256": "f726d31c3e570614a92328160db7cbbabcf5d999e4b53e40be411fddb9f080ed",
-          "diffuseSha256": "1d8040b4293ed2292a644f544bba006f366a9ca9bd18812fc128bb5e8fa62e87",
-          "residualSha256": "30b7b6cefeaded1114609e5284e0964dad45b76a566ac39c12904d6837da2906",
           "model": {
-            "path": ".local/open-star-removal/noxGeneratorColor.pb",
-            "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
+            "path": ".local/open-star-removal/noxGeneratorColor.pb"
           },
-          "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
           "imageToFrame": [
             -0.3715587385534483,
             0.0005052451548939185,
@@ -584,20 +534,16 @@
     "checkedAt": "2026-09-13",
     "scope": "Alignment candidate only; no star removal or volume baking",
     "recipe": {
-      "path": "labs/nebula/models/m45/observations.json",
-      "sha256": "1a90116f1977f7a76b123db79c3567c128b5d63a91b7ac59d5b05ead1b280057"
+      "path": "labs/nebula/models/m45/observations.json"
     },
     "catalog": {
-      "path": ".local/nebula-lab/observations/m45/observations.json",
-      "sha256": "b542d2db51c80fb9d65d4e216fe0ef1966f0ff0c62188ab8de74b79d549a4789"
+      "path": ".local/nebula-lab/observations/m45/observations.json"
     },
     "registration": {
-      "path": ".local/nebula-lab/observations/m45/niittee-widefield-registration.json",
-      "sha256": "3d4787df1d6199a91d5f8b2a9670e50e22325046691ea34073a148a614af109e"
+      "path": ".local/nebula-lab/observations/m45/niittee-widefield-registration.json"
     },
     "preparationLog": {
-      "path": "output/m45-source-research/alignment.log",
-      "sha256": "f1f13d5b5b059352a0c5542855861f350b3adf3b1d8c28966adeaee0c2d51e94"
+      "path": "output/m45-source-research/alignment.log"
     },
     "positiveSignals": [
       "NEBULA_ALIGNMENT_READY",
@@ -608,40 +554,27 @@
       {
         "id": "noirlab-optical",
         "sourceUnchanged": true,
-        "placementUnchanged": true,
-        "originalPreviewSha256": "81a76dac30a6f4efe124a50752d0a20d88f6f13c9628135db5134486f80f1ceb",
-        "diffusePreviewSha256": "7d9ea4e15e17a2267503a3ef890b04774b835df86b72289b121dcf86494cd141",
-        "residualPreviewSha256": "23bb3f023f10c16118626e2696b0bd9b0e531028bd3741c8f6a5c4d8075a0fff"
+        "placementUnchanged": true
       },
       {
         "id": "spitzer-irac",
         "sourceUnchanged": true,
-        "placementUnchanged": true,
-        "originalPreviewSha256": "205f1cb9aab7b1ef9ded6277b6cb94469f2406c41d8f1346c89c28891fb60958",
-        "diffusePreviewSha256": "1460c7eccc2af400b24919745e3ea4ed5f7c33c1560b9df91094c5aed8b0341c",
-        "residualPreviewSha256": "82166da06a1660364d8d58ed03b4ccd9844b7d1faf329d7de1b1531c1cd32f48"
+        "placementUnchanged": true
       },
       {
         "id": "spitzer-irac-mips",
         "sourceUnchanged": true,
-        "placementUnchanged": true,
-        "originalPreviewSha256": "eff413b38a2c4c9dc68b7f0b73b48beb795d0bb69798a6aa56e848de5d48113b",
-        "diffusePreviewSha256": "600a3c343fc2e99927fb9188ac7cefa8c66be9e2fe90c7973c87c70d1a237cd4",
-        "residualPreviewSha256": "749e01d22254ea5ca826dbcc7db2a55d7cae50d1c6eb6988298bef5b2ca6addb"
+        "placementUnchanged": true
       },
       {
         "id": "wise-four-band",
         "sourceUnchanged": true,
-        "placementUnchanged": true,
-        "originalPreviewSha256": "963b8177aec1af35a548a160e7dad4212009ac782222d403c9a6c8f27b60ba6a",
-        "diffusePreviewSha256": "a5569ca80256bb9e8973afb0af09cbfbd21f4c7896d4b75e073a8056cfd68aa3",
-        "residualPreviewSha256": "db41e79c3177eb41dd6df8cd965bbc48ae4b4b9c8de76db8ac984b21607a9183"
+        "placementUnchanged": true
       }
     ],
     "checks": {
       "targetedTests": 10,
-      "log": "output/m45-source-research/tests.log",
-      "sha256": "618d43e7499d53f648f0ec5b4526a7ed335dfbc36a376aef53ac7a926c59a2d8"
+      "log": "output/m45-source-research/tests.log"
     },
     "processingRecipeUnchanged": true,
     "usamaBridge": {

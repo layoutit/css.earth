@@ -56,8 +56,8 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
         interpretation: sourceObject(value.interpretation), limitations: [...sourceArray(value.limitations, sourceText)], outputs });
     }
     const provenance = validateObjectProvenance({ schema: 'cssearth-object-provenance@3', objectId: id, basis: 'recovered',
-      manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
-      generator: { path: contextProvenanceCompilerClosure[0], sha256: sha256(generator), bindingsSha256: sha256(JSON.stringify(sources.map(source => source.sourceBinding))) },
+      manifest: { path: 'source/manifest.json' },
+      generator: { path: contextProvenanceCompilerClosure[0] },
       sources, recipes, products, coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved: [
         'Byte and lineage checks do not establish scientific completeness or visual qualification.'
       ] } }, id);

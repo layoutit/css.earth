@@ -25,7 +25,7 @@ const excerpt = [
   ' 455    0   50.6 14.3 -24.5 5.022e11 6.696e-8',
 ].join('\n') + '\n';
 const sha = (text: string) => createHash('sha256').update(text).digest('hex');
-const recipe: MolecularRecipe = { ...originalRecipe, table: { ...originalRecipe.table, records: 10, bytes: Buffer.byteLength(excerpt), sha256: sha(excerpt) },
+const recipe: MolecularRecipe = { ...originalRecipe, table: { ...originalRecipe.table, records: 10, bytes: Buffer.byteLength(excerpt) },
   expectedCounts: { rows: 10, pointings: 8, detectedComponents: 7, detectedPointings: 5, upperLimits: 3 } };
 
 test('published offset signs and exact origin are retained without a second cosine factor or hidden recentering', () => {
@@ -109,7 +109,7 @@ test('explicit acquisition verifies actual side effects, then replay uses the so
   assert.equal(await readFile(resolve(root, local.table.cachePath), 'utf8'), excerpt);
   globalThis.fetch = async () => { throw new Error('Cache replay must not fetch.'); };
   const loaded = await loadMolecularCatalogue(root, recipePath);
-  assert.equal(loaded.sourceSha256, sha(excerpt)); assert.deepEqual(loaded.points, parseMolecularTable(excerpt, recipe).points);
+  assert.deepEqual(loaded.points, parseMolecularTable(excerpt, recipe).points);
   const replay = await acquireMolecularSources(root, recipePath);
   assert.ok(replay.sources.every(source => source.status === 'verified'));
   await writeFile(resolve(root, local.table.cachePath), excerpt.replace('-25.5', '-24.5'));

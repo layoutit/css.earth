@@ -3,21 +3,57 @@
   "id": "m2-9-inferred",
   "source": {
     "url": "https://apod.nasa.gov/apod/image/0402/m2-9_hst_big.jpg",
-    "sha256": "29b1575bff3bb8dbbe8cb9934ef214676c98d49fcf488df488576e3723049e71",
     "width": 800,
     "height": 525,
     "publisher": "https://apod.nasa.gov/apod/ap040201.html",
     "credit": "B. Balick (University of Washington), V. Icke (Leiden University), G. Mellema (Stockholm University), NASA / HST / WFPC2. 1997 false-color composite, distributed by NASA APOD."
   },
-  "crop": { "left": 6, "top": 6, "width": 788, "height": 438 },
+  "crop": {
+    "left": 6,
+    "top": 6,
+    "width": 788,
+    "height": 438
+  },
   "pointMasks": [
-    { "x": 391, "y": 235, "radius": 19 },
-    { "x": 307, "y": 151, "radius": 12 },
-    { "x": 180, "y": 44, "radius": 6 },
-    { "x": 653, "y": 317, "radius": 5 }
+    {
+      "x": 391,
+      "y": 235,
+      "radius": 19
+    },
+    {
+      "x": 307,
+      "y": 151,
+      "radius": 12
+    },
+    {
+      "x": 180,
+      "y": 44,
+      "radius": 6
+    },
+    {
+      "x": 653,
+      "y": 317,
+      "radius": 5
+    }
   ],
-  "grid": { "width": 144, "height": 80, "depth": 80 },
-  "prior": { "axis": [0.906307787, -0.422618262, 0], "center": [69.8553, 41.3265, 39.5], "binWidth": 1 },
+  "grid": {
+    "width": 144,
+    "height": 80,
+    "depth": 80
+  },
+  "prior": {
+    "axis": [
+      0.906307787,
+      -0.422618262,
+      0
+    ],
+    "center": [
+      69.8553,
+      41.3265,
+      39.5
+    ],
+    "binWidth": 1
+  },
   "tau": 0.001,
   "iterations": 100,
   "blackLevel": 0.035,

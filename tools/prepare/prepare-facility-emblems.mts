@@ -1,4 +1,3 @@
-import { sha256 } from '../../src/platform/sha256.mts';
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import sharp from 'sharp';
@@ -40,7 +39,7 @@ for(const e of records){
  if(transparent<288*288*.03)throw Error('Missing actual transparency: '+e.id);
  for(let y=0;y<288;y++)for(let x=0;x<288;x++)if(x===0||y===0||x===287||y===287)if(raw[(y*288+x)*4+3]!==0)throw Error('Opaque frame edge: '+e.id);
  await fs.writeFile(path.join(output,e.id+'.png'),png);
- entries.push({id:e.id,src:'/shell/facility-emblems/'+e.id+'.png',width:288,height:288,bytes:png.length,sha256:sha256(png),source:{...e,inputSha256:sha256(input),inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent}});
+ entries.push({id:e.id,src:'/shell/facility-emblems/'+e.id+'.png',width:288,height:288,bytes:png.length,source:{...e,inputBytes:input.length},preparation:{method:e.id==='juno'?'Rasterize source vector over a white circle to retain the original raster badge appearance; exterior remains transparent.':removed?'Remove only edge-connected white background; preserve original artwork RGB.':'Preserve source transparency.',removedBackgroundPixels:removed,crop:{left,top,width:right-left+1,height:bottom-top+1},outputPadding:2,transparentPixels:transparent}});
  const index=entries.length-1,x=index%6*160,y=Math.floor(index/6)*186;
  layers.push({input:await sharp(png).resize(128,128).png().toBuffer(),left:x+16,top:y+8});
  layers.push({input:Buffer.from(`<svg width="160" height="28"><text x="8" y="18" fill="#ccc" font-family="Arial" font-size="12">${e.id}</text></svg>`),left:x,top:y+147});

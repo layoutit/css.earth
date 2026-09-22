@@ -21,8 +21,7 @@
       "url": "https://doi.org/10.1086/175123",
       "fullTextUrl": "https://articles.adsabs.harvard.edu/pdf/1995ApJ...438..784W",
       "locator": "Abstract; geometric reconstruction method",
-      "access": "original scanned PDF retrieved; first page visually inspected",
-      "sha256": "7e327ec1c998252837379bd4b5aeb48f1b93bf101e1586470b040ddad29628de"
+      "access": "original scanned PDF retrieved; first page visually inspected"
     },
     {
       "id": "henney-2005",
@@ -167,7 +166,7 @@
       ],
       "quantity": "front/flow fit",
       "value": {
-        "starToFrontCm": 4.7e+17,
+        "starToFrontCm": 470000000000000000,
         "flowAxisWestDegrees": 15,
         "curvatureTimesDistance": 0.5
       },
@@ -195,7 +194,7 @@
       ],
       "quantity": "northern-arm reference",
       "value": {
-        "radiusCm": 2e+17,
+        "radiusCm": 200000000000000000,
         "fractionalThickness": 0.28,
         "opening": "west-southwest"
       },
@@ -228,7 +227,7 @@
       ],
       "quantity": "separate embedded cloud",
       "value": {
-        "projectedDiameterCm": 2.8e+17,
+        "projectedDiameterCm": 280000000000000000,
         "depthRelation": "in front of continuous MIF; near star depth"
       },
       "unit": "mixed units named in keys",
@@ -247,7 +246,7 @@
           75,
           25
         ],
-        "lineOfSightThicknessCm": 1e+18,
+        "lineOfSightThicknessCm": 1000000000000000000,
         "direction": "east-southeast from Trapezium"
       },
       "unit": "mixed units named in keys",

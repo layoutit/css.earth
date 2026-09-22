@@ -142,7 +142,7 @@ test('composite source readiness distinguishes missing native input from changed
   await assert.rejects(opticalCompositeSourcePins(f.root, f.recipe), /Registered resource changed/);
   await writeFile(join(f.root, source.path), original);
   const originalCatalogue = structuredClone(f.catalogue);
-  f.catalogue.images[0]!.removal.settings.model.sha256 = 'f'.repeat(64);
+  f.catalogue.images[0]!.removal.settings.model.path = '.local/open-star-removal/other-model.pth';
   await f.save(f.recipe.observationCatalogue, f.catalogue);
   await assert.rejects(opticalCompositeSourcePins(f.root, f.recipe), /configured NOX model or code/);
   Object.assign(f.catalogue, originalCatalogue);

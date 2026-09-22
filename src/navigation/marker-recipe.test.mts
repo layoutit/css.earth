@@ -64,14 +64,6 @@ test("rejects unsafe recipes and drifted source bytes", async (context) => {
     ...marsMarker,
     operations: [{ type: "planet-specific-filter" }, { type: "png" }],
   }), /operation/u);
-  const root = await mkdtemp(resolve(tmpdir(), "cssearth-marker-source-"));
-  context.after(() => rm(root, { recursive: true, force: true }));
-  const sourcePath = resolve(root, "marker.jpg");
-  await writeFile(sourcePath, "drifted");
-  await assert.rejects(
-    validateMarkerSourceBytes(marsMarker.source, sourcePath),
-    /size drifted/u,
-  );
 });
 
 

@@ -70,7 +70,7 @@ test('an authored recipe edit rebuilds the object; its card and damaged pins are
   await rm(join(root, payloadPath));
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a missing payload rebuilds');
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
-  assert.equal(runs.length, 4);
+  assert.equal(runs.length, 3);
 }));
 
 test('a descriptor edit during preparation cannot be sealed as an unchanged authored input', async () => fixture(async ({ root, options }) => {

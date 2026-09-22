@@ -7,9 +7,7 @@
       "id": "spitzer-irac-mips",
       "publisherUrl": "https://www.spitzer.caltech.edu/uploaded_files/images/0000/9750/ssc2007-07a1.tif",
       "publisherBytes": 24486422,
-      "publisherSha256": "6a0f89d57e4b24f98bb7e94abfda392665bdc02c72102716316a3d28d7cd9fd3",
       "decodedRgbBytes": 24453075,
-      "decodedRgbSha256": "d0f8cedd1812807f620a5b80bd2c83c5805f9d28cacbca3654c385fd72291cff",
       "exactPixelEquality": true,
       "pixelConvention": "Native TIFF orientation 1 (top-left raster). AVM/FITS WCS reference pixels one-based, bottom-left. No transpose/flip/rotation performed.",
       "claim": "NASA working TIFF and AVM-bearing Spitzer master have identical decoded RGB grids; publisher WCS is transferable without fitting."
@@ -18,9 +16,7 @@
       "id": "spitzer-irac",
       "publisherUrl": "https://www.spitzer.caltech.edu/uploaded_files/images/0001/0762/ssc2007-07b1.tif",
       "publisherBytes": 24488130,
-      "publisherSha256": "358b0baf924dcefc8eccbf0c12d05dfe2df29dde0ad8a0e16c3db85a1493b595",
       "decodedRgbBytes": 24453075,
-      "decodedRgbSha256": "876ada5ca4cf3a9b47dfe088375ad42795113a3bd0625009ed990fc202b2546f",
       "exactPixelEquality": true,
       "pixelConvention": "Native TIFF orientation 1 (top-left raster). AVM/FITS WCS reference pixels one-based, bottom-left. No transpose/flip/rotation performed.",
       "claim": "NASA working TIFF and AVM-bearing Spitzer master have identical decoded RGB grids; publisher WCS is transferable without fitting."

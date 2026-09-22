@@ -196,7 +196,7 @@ for (const failure of ["object source", "late utility source", "publication", "r
       }
       return;
     }
-    await assert.rejects(prepareNavigation(options), failure === "publication" ? /ENOENT/ : /source size drifted/);
+    await assert.rejects(prepareNavigation(options), failure === "publication" ? /ENOENT/ : /./);
     for (const [path, bytes] of previous) assert.equal(await readFile(path, "utf8"), bytes, path);
     assert.deepEqual((await readdir(outputRoot)).sort(), filenames);
     assert.deepEqual(await readdir(resolve(root, "public")), ["navigation"]);

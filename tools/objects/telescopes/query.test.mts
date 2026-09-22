@@ -64,9 +64,9 @@ const SPITZER_LEDGER = { schema: 'cssearth-spitzer-ledger@4', archiveDate: '2026
 
 const bodyMap = (telescope: string, instrument: string, id: string) => ({ schema: BODY_MAP_SCHEMA,
   definition: { quantity: 'salt band depth', units: 'dimensionless', timeDependence: 'surface-property', method: { window: [0.45, 0.5] }, source: 'a paper' },
-  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', sha256: 'a'.repeat(64), bodyCode: 502 } },
+  frame: { body: 'europa', radiusKm: 1560.8, rotation: { model: 'pck00011.tpc', bodyCode: 502 } },
   grid: { width: 4, height: 2, longitude: 'east-positive-from-0', rows: 'north-to-south' },
-  planes: { file: 'map.fits', sha256: 'b'.repeat(64), value: 'SCI', uncertainty: 'ERR' }, mask: { maximumEmissionDegrees: 70, missing: 'NaN' },
+  planes: { file: 'map.fits', value: 'SCI', uncertainty: 'ERR' }, mask: { maximumEmissionDegrees: 70, missing: 'NaN' },
   observations: [{ id, telescope, instrument, midTimeJd: 2_459_800.5, rangeKm: 6.3e8, subObserver: { latitudeDegrees: 0, westLongitudeDegrees: 180 },
     angularResolution: { majorArcsec: 0.05, minorArcsec: 0.05, basis: 'fitted point spread function' } }] });
 

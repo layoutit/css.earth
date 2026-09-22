@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-import { sha256 } from '../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from "node:fs/promises";
 import { dirname, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
@@ -53,7 +52,6 @@ export async function prepareShellTitles({
       source: SHELL_TITLE_SOURCES.font.source,
       sourceUrl: SHELL_TITLE_SOURCES.font.sourceUrl,
       fontSize: SHELL_TITLE_SOURCES.recipe.fontSize,
-      inputSha256: sha256(bytes),
       generator: "tools/prepare/prepare-shell-titles.mts",
     });
   }

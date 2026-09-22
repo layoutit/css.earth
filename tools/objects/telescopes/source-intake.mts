@@ -2,7 +2,7 @@ import { isisGeometryBands } from './native-metadata.mts';
 /** Inventory native products already pinned by a body package. Header reads are discovery only; qualification verifies whole-file pins. */
 import { sourceHeaders } from './source-transfer.mts';
 import { isis3CoreHeader } from '../terrestrial-layers/isis3-raster.mts';
-import { open, readFile, mkdir, writeFile } from 'node:fs/promises';
+import {open, readFile, mkdir, writeFile, stat } from 'node:fs/promises';
 import { sourceCacheUrl, RUNTIME_ASSET_ORIGIN } from '../../assets/source-mirror.mts';
 import { resolve, dirname, basename } from 'node:path';
 import { sha256 } from '../../../src/platform/sha256.mts';
@@ -78,7 +78,8 @@ export async function intakeSources(root:string,target:string,existing:readonly 
       const pointer=pds3Values(label,key),name=pointer?.[0];if(!name)throw new Error(`Unreadable ${key} pointer.`);
       if(/^\d+(?:\s*<BYTES>)?$/u.test(name)){
         const recordBytes=Number(pds3Keyword(label,'RECORD_BYTES',[])??1),offset=(Number(name.split(/\s/u)[0])-1)*(name.includes('<BYTES>')?1:recordBytes);
-        if(!Number.isSafeInteger(offset)||offset<0)throw new Error(`Attached ${key} pointer is invalid; an extracted label is not the complete observation.`);
+        const size=await stat(resolve(root,file.path)).then(s=>s.size,()=>undefined);
+        if(!Number.isSafeInteger(offset)||offset<0||(size!==undefined&&offset>=size))throw new Error(`Attached ${key} pointer lies outside the local file; an extracted label is not the complete observation.`);
         if(!/HISTORY|HEADER|STRUCTURE/u.test(key))science=file;continue;
       }
       const wanted=resolve(dirname(file.path),name).toLowerCase(),dependency=files.find(f=>resolve(f.path).toLowerCase()===wanted);

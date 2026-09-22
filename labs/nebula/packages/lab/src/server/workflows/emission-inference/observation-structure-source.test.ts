@@ -22,7 +22,7 @@ test('structure input cannot silently rerun star removal when a native receipt i
       centerIcrsDegrees: [20, 20] as [number, number], northRightDegrees: 0 };
     const recipe: ObservationRecipe = { schema: 'cssearth-nebula-observation-recipe@1', id: basename(directory), referenceId: 'test',
       frame: { width: 1024, height: 1024, fieldArcminutes: [60, 60], centerIcrsDegrees: [20, 20], northUp: true }, images: [source],
-      nativeRemoval: { model: { path: modelPath, sha256: sha(model) }, scriptSha256: sha(await readFile('labs/nebula/packages/reconstruction/src/star-removal/star-removal.py')) } };
+      nativeRemoval: { model: { path: modelPath } } };
     const image: Observation = { id: 'test', label: 'Test', source, layers: { original: { path: 'source.tif', width: 8, height: 8 } },
       imageToFrame: [1, 0, 0, 1, 0, 0], registration: { status: 'verified', matchedStars: 50, rmsPixels: .1, maxResidualPixels: .3, matches: [] } };
     await assert.rejects(loadObservationDiffuse(recipe, image, 64), /cannot start NOX/);

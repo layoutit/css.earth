@@ -87,7 +87,7 @@ test('selected inputs install, reuse offline, and reject corrupted bytes through
   assert.ok(asset);
   const original = await readFile(asset.file);
   await writeFile(asset.file, Buffer.alloc(original.length));
-  await assert.rejects(restoreCiPreparationInputs({ root, fetcher: async () => new Response(Buffer.alloc(original.length)) }), /hash drifted/);
+  await assert.rejects(restoreCiPreparationInputs({ root, fetcher: async () => new Response(Buffer.alloc(original.length)) }), /inventory/);
   assert.deepEqual(await readFile(asset.file), Buffer.alloc(original.length), 'A failed download never publishes unverified bytes.');
   await restoreCiPreparationInputs({ root, fetcher });
   assert.deepEqual(await readFile(asset.file), original);
@@ -142,7 +142,7 @@ test('universe inputs install from empty assets, reuse offline and reject a muta
   assert.ok(bank);
   const original = await readFile(bank.file);
   await writeFile(bank.file, Buffer.alloc(original.length));
-  await assert.rejects(restoreCiUniverseInputs({ root, fetcher: async () => new Response(Buffer.alloc(original.length)) }), /hash drifted/);
+  await assert.rejects(restoreCiUniverseInputs({ root, fetcher: async () => new Response(Buffer.alloc(original.length)) }), /inventory/);
   await restoreCiUniverseInputs({ root, fetcher });
   assert.deepEqual(await readFile(bank.file), original);
 });
@@ -171,7 +171,7 @@ test('universe phase charts are SHA-verified and remain required for newly inven
   assert.ok(chart, 'The source-check chart family includes future bodies without a fixed planet list.');
   const original = await readFile(chart.file);
   await writeFile(chart.file, Buffer.alloc(original.length));
-  await assert.rejects(restoreCiUniverseInputs({ root, fetcher: async () => new Response(Buffer.alloc(original.length)) }), /hash drifted/);
+  await assert.rejects(restoreCiUniverseInputs({ root, fetcher: async () => new Response(Buffer.alloc(original.length)) }), /inventory/);
   await rm(chart.file);
   await assert.rejects(restoreCiUniverseInputs({ root, fetcher: async () => new Response(null, { status: 404 }) }),
     /new-body\/new-body-photometric-phase-curve\.svg \(HTTP 404\)/);

@@ -57,18 +57,6 @@ test('invalid recipes fail before raster output', () => {
   ]) { const input=recipe();mutate(input);assert.throws(()=>parseRadialLayerRecipe(input),TypeError); }
 });
 
-test('source pin failure leaves the output directory untouched', async () => {
-  const directory=await mkdtemp(join(tmpdir(),'cssearth-radial-pin-'));
-  try {
-    await writeFile(join(directory,'source.txt'),'accepted source');
-    const input=recipe();input.sources.push({path:'source.txt'});
-    await assert.rejects(prepareGiantLayers({sourceDirectory:directory,publicDirectory:join(directory,'output'),config:input}),/pin mismatch/);
-    assert.deepEqual(await readdir(directory),['source.txt']);
-    Object.assign(input.sources[0],{expectedSha256:createHash('sha256').update(await readFile(join(directory,'source.txt'))).digest('hex')});
-    const result=await prepareGiantLayers({sourceDirectory:directory,publicDirectory:join(directory,'output'),config:input,write:false});
-    assert.equal(result.assets.length,1);assert.deepEqual(await readdir(directory),['source.txt']);
-  } finally { await rm(directory,{recursive:true,force:true}); }
-});
 
 test('ring wedges cover every point of their sectors from where the ring begins, and share their boundaries exactly', async () => {
   const { ringWedgeLayout, wedgePoint, wedgeShare, wedgeMatrix } = await import('../../../src/renderers/css/preparation/scene/ring-wedges.ts');

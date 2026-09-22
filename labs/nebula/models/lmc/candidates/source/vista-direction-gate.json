@@ -11,11 +11,9 @@
     "identityCountOver5xScrambledControls": true,
     "allWrongTransformsMedianOver100ReferencePixels": true
   },
-  "imageSha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
   "coordinateConvention": "Zero-based top-left raster pixel centres; edges at -.5 and size-.5. Resize: x_native=(x_work+.5)*native_width/work_width-.5, likewise y. AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. Row-major homography maps source native centres to reference native centres.",
   "source": {
     "path": ".local/nebula-lab/image-candidates/vista/eso1914a-10k.tif",
-    "sha256": "a2bc24fb17bc92f87482504789ef82a13fb1a5ef78aab622f3c24d83cf14fc0a",
     "nativeDimensions": [
       8954,
       10000
@@ -48,7 +46,6 @@
   },
   "reference": {
     "path": ".local/nebula-lab/source-originals/noirlab2030a.tif",
-    "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
     "nativeDimensions": [
       6737,
       6536
@@ -146,9 +143,9 @@
       0.1190037618003177,
       0.596664958469161,
       -1479.567248000351,
-      -2.639112449735194e-06,
-      -1.2871658418376004e-06,
-      1.0
+      -0.000002639112449735194,
+      -0.0000012871658418376004,
+      1
     ]
   },
   "localScaleReferencePixelsPerSourcePixel": [

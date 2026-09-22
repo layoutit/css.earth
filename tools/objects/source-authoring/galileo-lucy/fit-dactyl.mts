@@ -1,5 +1,4 @@
 /** Dactyl source/registration diagnostic. Never writes a preparation recipe or scene. */
-import { sha256 } from '../../../../src/platform/sha256.mts';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -236,8 +235,7 @@ await sharp({ create: { width: 800, height: 490, channels: 3, background: '#1519
 
 const dependencies = ['tools/objects/terrestrial-layers/shape-camera-mosaic.mts', 'tools/objects/observation/fits.mts', 'tools/spice/ck.mts', 'tools/spice/daf.mts', 'tools/spice/sclk.mts', 'tools/spice/lsk.mts', 'tools/spice/text-kernel.mts'];
 const report = { schema: 'cssearth-dactyl-registration-result@1', qualifiedSurface: false,
-  baseCommit: input.baseCommit, inputSha256: sha256(inputBytes), generatorSha256: sha256(await readFile(new URL(import.meta.url))),
-  dependencySha256: await Promise.all(dependencies.map(async path => ({ path, sha256: sha256(await readFile(path)) }))),
+  baseCommit: input.baseCommit, dependencies,
   runtime: { node: process.version, sharp: sharp.versions.sharp },
   originalDetector: { orientation, vicarPixelOffset: original.offset, width: 800, height: 800, originalLabelUtc: field(bytes('vicar-label').toString('ascii'), 'IMAGE_TIME') },
   pointing, oracleComparison: { oracle: oracle.tool, matrixMaxAbsoluteError: matrixError, etErrorSeconds: etError, clockErrorTicks: ticksError,
@@ -297,8 +295,7 @@ if (checkLimbExtent) {
     .png().toFile(resolve(output, 'limb-extent.png'));
   const extent = {
     schema: 'cssearth-dactyl-limb-extent@1', qualifiedSurface: false,
-    inputSha256: report.inputSha256, generatorSha256: report.generatorSha256,
-    dependencySha256: report.dependencySha256, thresholdDN: threshold, capScans,
+    thresholdDN: threshold, capScans,
     selection: 'Each case minimizes the same limb-and-Acmon objective across the same 576 starts; Celmis is never used to rank these cases.',
     limitations: [
       'Analyst-selected bright-outline crossings, not a published control network; cap samples are added cumulatively and are not equal arc-length samples.',

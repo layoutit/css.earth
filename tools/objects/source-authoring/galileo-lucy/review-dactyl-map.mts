@@ -1,5 +1,4 @@
 /** Inspect the printed map and corroborate an existing pose; never fit or prepare a scene. */
-import { sha256 } from '../../../../src/platform/sha256.mts';
 import {mkdir, readFile, writeFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import sharp from 'sharp';
@@ -19,8 +18,8 @@ function integer(v: unknown) {const n = requireFiniteNumber(v); if (!Number.isSa
 function verify(b: Buffer, record: Record<string, unknown>) {
   if (b.length !== integer(record.expectedBytes)) throw new Error('Changed source bytes.');
 }
-const pins: {path: string; sha256: string}[] = [];
-async function retained(path: string) {const b = await readFile(path); pins.push({path, sha256: sha256(b)}); return b;}
+const pins: {path: string}[] = [];
+async function retained(path: string) {const b = await readFile(path); pins.push({path}); return b;}
 const configBytes = await retained(base + 'published-controls.json'), config = requireRecord(JSON.parse(configBytes.toString()));
 if (config.schema !== 'cssearth-dactyl-published-control-input@1' || config.objectId !== 'dactyl') throw new Error('Wrong control input.');
 const paper = requireRecord(config.paper), pdf = await readFile(paperPath); verify(pdf, paper);
@@ -66,7 +65,6 @@ for (const lon of [0, 360]) {
   gridChecks.push({longitude: lon, latitude: 0, axis: 'line', predicted: p[1], measured: candidates[0].position, residual: candidates[0].position-p[1]});
 }
 const previousBytes = await retained(requireString(config.previousInputPath));
-if (sha256(previousBytes) !== config.previousInputSha256) throw new Error('Changed original input record.');
 const previous = requireRecord(JSON.parse(previousBytes.toString()));
 async function input(id: string) {
   const record = requireArray(previous.files).map(v => requireRecord(v)).find(p => p.id === id);
@@ -80,11 +78,6 @@ const distortion = kernelNumber(instrument, 'INS-77036_DISTORTION_COEFF'), cente
 const axes = numbers(requireRecord(JSON.parse((await input('shape')).toString())).semiaxesKm).map(n => n*1000);
 if (axes.length !== 3 || axes.some(n => n <= 0) || center.length !== 2) throw new Error('Invalid geometry input.');
 const poseReport = requireRecord(JSON.parse((await retained(base + 'published-control-fit.json')).toString()));
-if (poseReport.inputSha256 !== sha256(configBytes)) throw new Error('Pose belongs to a different input revision.');
-for (const value of requireArray(poseReport.dependencies)) {
-  const dependency = requireRecord(value), b = await retained(requireString(dependency.path));
-  if (sha256(b) !== dependency.sha256) throw new Error('Pose dependency changed; assess the earlier result before reuse.');
-}
 const geometry = requireRecord(poseReport.geometry), fit = requireRecord(requireArray(geometry.fits)[0]);
 if (fit.useAcmon !== true || fit.limbResidualDivisor !== 1 || JSON.stringify(geometry.axesMetres) !== JSON.stringify(axes)) throw new Error('Unexpected baseline fit.');
 const pose = numbers(requireRecord(fit.best).pose), rangeKm = requireFiniteNumber(config.rangeKm);
@@ -120,8 +113,7 @@ for (const lat of [-20, 10]) for (const lon of [140, 170, 200]) {
   patches.push({longitude:lon,latitude:lat,unshiftedCorrelation:ncc(0,0),best,alternative,shiftPixels:Math.hypot(best.dx,best.dy),atSearchBoundary:Math.abs(best.dx)===4||Math.abs(best.dy)===4});
 }
 const report = {
-  schema:'cssearth-dactyl-map-review@1',qualifiedSurface:false,date:'2026-09-14',paperSha256:sha256(pdf),mapSha256:sha256(jpeg),
-  generatorSha256:sha256(await readFile(new URL(import.meta.url))),inputs:pins,
+  schema:'cssearth-dactyl-map-review@1',qualifiedSurface:false,date:'2026-09-14',inputs:pins,
   grid:{corners,checks:gridChecks,rmsPixels:Math.sqrt(gridChecks.reduce((s,p)=>s+p.residual**2,0)/gridChecks.length),maximumPixels:Math.max(...gridChecks.map(p=>Math.abs(p.residual))),
     interpretation:'Agreement checks printed plot digitization only. It does not establish the latitude definition, reference shape, geographic accuracy or photographic coverage.'},
   fixedPose:{pose,axesMetres:axes,rangeKm,patchHalfSpanDegrees:8,patchStepDegrees:2,searchRadiusNativePixels:4,searchStepNativePixels:.25,patches,

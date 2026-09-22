@@ -9,6 +9,7 @@
   "galaxioHeadCommitDate": "2026-09-05T22:30:48+02:00",
   "upstreamManifest": {
     "path": "data/manifest.json",
+    "sha256": "5b9878197008daeaa8e543b7c3e9668bec3507900cd3f013d32c39eaf54ca251",
     "bytes": 122369,
     "version": 1
   },
@@ -20,6 +21,7 @@
     "stars-hyg": {
       "key": "catalogs/stars-hyg",
       "current": "stars-hyg/v1/stars-hyg.gxct",
+      "currentSha256": "d1574537361ac78d67f32ddf30ac0122e9d52115851f1519cb91bed26dcf8e74",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/stars.py",
       "manifestEntry": {
@@ -54,6 +56,7 @@
     "constellations-iau": {
       "key": "catalogs/constellations-iau",
       "current": "constellations-iau/v1/constellations-iau.gxct",
+      "currentSha256": "159675aed931b9fde8c7ea14901dae2bcdd4a428d39b98a853d698cedde601ca",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/constellations.py",
       "manifestEntry": {
@@ -75,6 +78,7 @@
     "deepsky": {
       "key": "catalogs/deepsky",
       "current": "deepsky/v2/deepsky.gxct",
+      "currentSha256": "477cc9c6e75ca90fdd5febd72b2dba87b3b2e83ce8927a203a7d0f69e52b7100",
       "supersededVersions": [
         "deepsky/v1/deepsky.gxct"
       ],
@@ -113,6 +117,7 @@
     "globulars": {
       "key": "catalogs/globulars",
       "current": "globulars/v1/globulars.gxct",
+      "currentSha256": "157a96f292234bb4b0fc1f9fcbea831d4cbde61ff28ac41b59cd87667a741749",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/globulars.py",
       "manifestEntry": {
@@ -137,6 +142,7 @@
     "nebulae-planetary": {
       "key": "catalogs/nebulae-planetary",
       "current": "nebulae-planetary/v1/nebulae-planetary.gxct",
+      "currentSha256": "e621f0efc1aeb2757f8567e84a77e52171d45c48c13c7bb2aaddc9aa44d0e630",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/nebulae.py",
       "manifestEntry": {
@@ -164,6 +170,7 @@
     "snr": {
       "key": "catalogs/snr",
       "current": "snr/v1/snr.gxct",
+      "currentSha256": "bc1352157cd863bdfb573a76c69a06b10b10125b71724d07ae8800f48b497732",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/snr.py",
       "manifestEntry": {
@@ -192,6 +199,7 @@
     "hii-regions": {
       "key": "catalogs/hii-regions",
       "current": "hii-regions/v1/hii-regions.gxct",
+      "currentSha256": "e66bf3056e9cd6f20ec33db6167a977867a0cb6cc95b5298bb18ae6158f45fde",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/hii.py",
       "manifestEntry": {
@@ -218,6 +226,7 @@
     "exoplanets": {
       "key": "catalogs/exoplanets",
       "current": "exoplanets/v1/exoplanets.gxct",
+      "currentSha256": "53998dd505350bd993475c5f69d76b6c8ff772ce9710986266daed7d16dd0f56",
       "supersededVersions": [],
       "builder": "pipeline/galaxio_pipeline/builders/exoplanets.py",
       "manifestEntry": {
@@ -276,30 +285,39 @@
   "byteCount": 7109104,
   "files": {
     "stars-hyg/v1/stars-hyg.gxct": {
+      "sha256": "d1574537361ac78d67f32ddf30ac0122e9d52115851f1519cb91bed26dcf8e74",
       "bytes": 4818664
     },
     "constellations-iau/v1/constellations-iau.gxct": {
+      "sha256": "159675aed931b9fde8c7ea14901dae2bcdd4a428d39b98a853d698cedde601ca",
       "bytes": 51040
     },
     "deepsky/v1/deepsky.gxct": {
+      "sha256": "47c6c51cb9c3bde3f62d30e048a42e6012d626994de6fbff1f7672c1018d97a1",
       "bytes": 565768
     },
     "deepsky/v2/deepsky.gxct": {
+      "sha256": "477cc9c6e75ca90fdd5febd72b2dba87b3b2e83ce8927a203a7d0f69e52b7100",
       "bytes": 927952
     },
     "globulars/v1/globulars.gxct": {
+      "sha256": "157a96f292234bb4b0fc1f9fcbea831d4cbde61ff28ac41b59cd87667a741749",
       "bytes": 5208
     },
     "nebulae-planetary/v1/nebulae-planetary.gxct": {
+      "sha256": "e621f0efc1aeb2757f8567e84a77e52171d45c48c13c7bb2aaddc9aa44d0e630",
       "bytes": 32080
     },
     "snr/v1/snr.gxct": {
+      "sha256": "bc1352157cd863bdfb573a76c69a06b10b10125b71724d07ae8800f48b497732",
       "bytes": 16800
     },
     "hii-regions/v1/hii-regions.gxct": {
+      "sha256": "e66bf3056e9cd6f20ec33db6167a977867a0cb6cc95b5298bb18ae6158f45fde",
       "bytes": 336888
     },
     "exoplanets/v1/exoplanets.gxct": {
+      "sha256": "53998dd505350bd993475c5f69d76b6c8ff772ce9710986266daed7d16dd0f56",
       "bytes": 354704
     }
   }

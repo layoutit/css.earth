@@ -2,15 +2,11 @@
   "schema": "cssearth-nebula-intake-registration-evidence@1",
   "objectId": "omega-centauri",
   "checkedAt": "2026-09-20",
-  "recipeSha256": "5954f0098ffe25ad48ff22b581f6d47cbc67e7d902e5d1f5ac19822c0612b9c2",
-  "implementationSha256": "bcd06a8e7432a0998cd97d6b52af5876a2edc06d5824ba9f6421fb1331cd799e",
   "method": "Exact native AVM WCS; automatic reciprocal field-star constellations, unchanged RANSAC affine and spatial holdout gates. Full native source pixels, bounded 8000-pixel detection only.",
   "source": {
     "id": "eso0844a",
-    "sha256": "384d1cfc31e6a2b78e5c7018f9eaecfe49a1014630bcb1bd8dceb563d69e6429",
     "width": 8040,
     "height": 7560,
-    "avmSha256": "a440afd39241f5b40cb280e1a3ab511769265a55f8679baa75613f553940e1a5",
     "wcs": {
       "projection": "TAN",
       "coordinateFrame": "ICRS",
@@ -35,10 +31,8 @@
   },
   "reference": {
     "id": "eso1119b",
-    "sha256": "8df2e2ad462b9dc5b7437320fb2c6fd247c11746b4b2ffd3da95846b9083cad6",
     "width": 14540,
     "height": 14540,
-    "avmSha256": "6bcf0b5435aca887af71e8aff3107a654256fc4aaded598bb1db5419176cdeed",
     "wcs": {
       "projection": "TAN",
       "coordinateFrame": "ICRS",
@@ -134,8 +128,7 @@
     }
   },
   "fullReceipt": {
-    "path": "output/omega-centauri-registration/native-registration-full.json",
-    "sha256": "b6287c7a5d548903a47f7ac1c8687d1d359f395214c6fdf8a42576b88b9f07aa"
+    "path": "output/omega-centauri-registration/native-registration-full.json"
   },
   "limits": "Relative alignment only; publisher absolute astrometry is not independently catalogue calibrated. WFI includes publisher-declared DSS gap fill. No depth, membership or photometric calibration is established."
 }

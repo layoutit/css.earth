@@ -3,10 +3,8 @@
   "status": "fail",
   "pass": false,
   "cloudProcessingPerformed": false,
-  "imageSha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
   "source": {
     "path": ".local/nebula-lab/smc-intake/iotw2615a.jpg",
-    "sha256": "b203e9aa207198c91a5e98268cc69e1ed64bdec44111c8fe580282d40d2708a6",
     "nativeDimensions": [
       6069,
       4045
@@ -39,7 +37,6 @@
   },
   "reference": {
     "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-    "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
     "nativeDimensions": [
       3827,
       3190

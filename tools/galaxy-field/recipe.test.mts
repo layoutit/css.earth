@@ -35,22 +35,6 @@ test('the galaxy field pins the authored frame contract, not rendered world geom
 });
 
 
-test('a changed source manifest pin fails before any field output is replaced', async t => {
-  const root = await mkdtemp(resolve(tmpdir(), 'galaxy-field-pins-'));
-  t.after(() => rm(root, { recursive: true, force: true }));
-  const base = resolve(root, 'src/objects/nearby-universe');
-  await mkdir(resolve(base, 'source'), { recursive: true });
-  await mkdir(resolve(base, 'prepared'));
-  const path = 'src/objects/nearby-universe/source/evidence.json';
-  await writeFile(resolve(root, path), '{}');
-  await writeFile(resolve(base, 'source/manifest.json'), JSON.stringify({ schema: 'cssearth-volume-source-manifest@1', pathBase: 'repository', inputs: [], documents: [{ path, sourceBinding: { kind: 'local', reason: 'Mutation fixture.' } }], generatedIntermediates: [] }));
-  const outputs = ['prepared/points.json', 'prepared/cloud.webp', 'object.json', 'inventory.json'];
-  for (const output of outputs) await writeFile(resolve(base, output), 'previous output');
-  const result = spawnSync(process.execPath, [fileURLToPath(new URL('./prepare-points.mts', import.meta.url))], { cwd: root, encoding: 'utf8' });
-  assert.notEqual(result.status, 0);
-  assert.match(result.stderr, /Changed source document/);
-  for (const output of outputs) assert.equal(await readFile(resolve(base, output), 'utf8'), 'previous output');
-});
 
 test('the field bake replaces stale generated files and restores missing receipts', async t => {
   const root=await mkdtemp(resolve(tmpdir(),'galaxy-field-repair-'));

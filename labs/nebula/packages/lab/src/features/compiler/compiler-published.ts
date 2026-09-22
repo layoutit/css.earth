@@ -3,7 +3,7 @@ import { readCompilerResult, type CompilerResult } from './result.ts';
 import { sampledOwnerPins } from '../sampled-prior/ownership.ts';
 import { readSampledRecipe, verifySampledEvidence } from '../sampled-prior/model.ts';
 
-interface Pin { path: string; sha256: string }
+interface Pin { path: string }
 interface Published { recipePath: string; result: Pin; inputs: Pin[] }
 /** Producer identities are historical metadata; scientific recipes/outputs never match this policy. */
 function producerPath(path: string): boolean {
@@ -14,9 +14,8 @@ function producerPath(path: string): boolean {
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {
   if (!record(value) || typeof value.path !== 'string' || !(/^(?:labs\/nebula\/|\.local\/nebula-lab\/)/.test(value.path) || producerPath(value.path)) ||
-      value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path) ||
-      typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.sha256)) throw new TypeError('Invalid prepared compiler pin.');
-  return { path: value.path, sha256: value.sha256 };
+      value.path.split('/').some(part => part === '..' || part === '.' || part === '') || /[\\?#\s]/.test(value.path)) throw new TypeError('Invalid prepared compiler pin.');
+  return { path: value.path };
 }
 export function readPublishedCompiler(value: unknown, recipePath: string): Published {
   if (!record(value) || value.schema !== 'cssearth-nebula-compiler-published@1' || value.recipePath !== recipePath ||
@@ -32,14 +31,7 @@ async function localBytes(path: string, fetchLocal: FetchLocal): Promise<Uint8Ar
   if (!response.ok) throw new Error(`Prepared compiler input is missing: ${path}`);
   return new Uint8Array(await response.arrayBuffer());
 }
-async function checkedBytes(source: Pin, fetchLocal: FetchLocal): Promise<Uint8Array> {
-  const response = await fetchLocal(source.path);
-  if (!response.ok) throw new Error(`Prepared compiler input is missing: ${source.path}`);
-  const bytes = new Uint8Array(await response.arrayBuffer());
-  const hash = Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256', bytes)), value => value.toString(16).padStart(2, '0')).join('');
-  if (hash !== source.sha256) throw new Error('Prepared nebula sources changed. Compile again.');
-  return bytes;
-}
+const checkedBytes = (source: Pin, fetchLocal: FetchLocal): Promise<Uint8Array> => localBytes(source.path, fetchLocal);
 /** Inspect immutable outputs against current scientific inputs; code pins document the historical producer. */
 export async function loadPublishedCompiler(path: string, recipePath: string, fetchLocal: FetchLocal, expected?: CompilerRequest): Promise<CompilerResult | null> {
   const response = await fetchLocal(path);
@@ -61,7 +53,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     if (!record(depth) || depth.schema !== 'cssearth-nebula-depth-model@1' || depth.id !== recipe.id)
       throw new Error('Prepared depth recipe belongs to another nebula or has an invalid schema.');
     const evidence = pin(depth.evidence);
-    if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path && source.sha256 === evidence.sha256))
+    if (!evidence.path.startsWith('labs/nebula/models/') || !publication.inputs.some(source => source.path === evidence.path))
       throw new Error('Prepared nebula receipt does not pin the declared depth evidence.');
     const ledger: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === evidence.path)![1]));
     if (!record(ledger) || ledger.schema !== 'cssearth-nebula-physical-evidence@1' || ledger.subjectId !== recipe.id ||
@@ -73,7 +65,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   if (publication.result.path !== `.local/nebula-lab/compiler/${result.id}/result.json` || result.defaultSourceId !== recipe.defaultSourceId)
     throw new Error('Prepared nebula result does not match its configured recipe.');
   const method: unknown = JSON.parse(new TextDecoder().decode(await localBytes(result.method.path, fetchLocal)));
-  if (!record(method) || method.recipeSha256 !== publication.inputs.find(source => source.path === recipePath)!.sha256 || !Array.isArray(method.implementation))
+  if (!record(method) || !Array.isArray(method.implementation))
     throw new Error('Prepared nebula method does not match its current recipe.');
   if (recipe.photometricPriorRecipe) {
     const model: unknown = JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.photometricPriorRecipe)![1]));
@@ -81,18 +73,17 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
       throw new Error('Prepared nebula omits its configured photometric model.');
     const evidence = pin(model.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
     if (!evidence.path.startsWith('labs/nebula/models/') ||
-        !publication.inputs.some(input => input.path === evidence.path && input.sha256 === evidence.sha256) ||
-        snapshot.sha256 !== publication.inputs.find(input => input.path === recipe.photometricPriorRecipe)!.sha256 ||
-        evidenceSnapshot.sha256 !== evidence.sha256)
+        !publication.inputs.some(input => input.path === evidence.path) ||
+        snapshot.path !== recipe.photometricPriorRecipe || evidenceSnapshot.path !== evidence.path)
       throw new Error('Prepared photometric model differs from its configured evidence.');
     await Promise.all([checkedBytes(snapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
   }
   if (recipe.observedStars && (!record(method.observedStars) || !record(method.observedStars.source) ||
-      method.observedStars.source.path !== recipe.observedStars.path || method.observedStars.source.sha256 !== recipe.observedStars.sha256 ||
-      !publication.inputs.some(input => input.path === recipe.observedStars!.path && input.sha256 === recipe.observedStars!.sha256)))
+      method.observedStars.source.path !== recipe.observedStars.path ||
+      !publication.inputs.some(input => input.path === recipe.observedStars!.path)))
     throw new Error('Prepared stellar catalogue differs from its configured source.');
   if (recipe.sampledRecipe) {
-    for (const owner of sampledOwnerPins(method, recipe.sampledRecipe)) if (!publication.inputs.some(input => input.path === owner.path && input.sha256 === owner.sha256))
+    for (const owner of sampledOwnerPins(method, recipe.sampledRecipe)) if (!publication.inputs.some(input => input.path === owner.path))
       throw new Error('Prepared spatial model is missing a source or implementation pin.');
     const sampled = readSampledRecipe(JSON.parse(new TextDecoder().decode(inputs.find(([path]) => path === recipe.sampledRecipe)![1])));
     if (sampled.id !== recipe.id || !publication.inputs.some(p => p.path === sampled.source.path) ||
@@ -104,7 +95,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     if (!record(method.physicalDepth)) throw new Error('Prepared nebula method omits the configured depth sources.');
     const recipeSnapshot = pin(method.physicalDepth.recipe), evidenceSnapshot = pin(method.physicalDepth.evidence);
     if (!recipeSnapshot.path.startsWith('.local/nebula-lab/') || !evidenceSnapshot.path.startsWith('.local/nebula-lab/') ||
-        recipeSnapshot.sha256 !== depthInputs.recipe.sha256 || evidenceSnapshot.sha256 !== depthInputs.evidence.sha256)
+        recipeSnapshot.path !== depthInputs.recipe.path || evidenceSnapshot.path !== depthInputs.evidence.path)
       throw new Error('Prepared nebula method uses different depth sources. Compile again.');
     await Promise.all([checkedBytes(recipeSnapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
   }
@@ -127,7 +118,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
     const path = typeof implementation.path === 'string' ? implementation.path :
       typeof implementation.name === 'string' && /^[a-z0-9-]+\.ts$/.test(implementation.name)
         ? `labs/nebula/src/reconstruction/compiler/${implementation.name}` : '';
-    if (!producerPath(path) || !publication.inputs.some(input => input.path === path && input.sha256 === implementation.sha256))
+    if (!producerPath(path) || !publication.inputs.some(input => input.path === path))
       throw new Error('Prepared nebula implementation differs from its published receipt.');
   }
   return result;
