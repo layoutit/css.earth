@@ -1,5 +1,4 @@
 ---
-import { discoveryDescription, isDiscoveryAnchor } from '../object-discovery.mts';
 import type { ObjectEntry } from '../object-schema.mts';
 interface Props { object: ObjectEntry; activeObjectId?: string; hidden?: boolean; }
 import { objectClassificationLabel } from "../planet-search-objects.mts";
@@ -7,14 +6,16 @@ import PlanetNavigationMarker from "./PlanetNavigationMarker.astro";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
 import { distanceDescription } from '../navigation-distance.mts';
 import { sourceDocumentation } from '../source-documentation.mts';
+import { searchPreviewUrl } from '../catalogue-window.mts';
 
 const { object, activeObjectId, hidden = false } = Astro.props;
 const source = sourceDocumentation(object.id, object.name);
-const contentDescription = isDiscoveryAnchor(object) ? null : discoveryDescription(object.discovery);
 // Fit the disks together so relative sizes survive without rings shrinking them.
 const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKERS).map(
   ({ presentation }) => presentation.size,
 ));
+const preview = searchPreviewUrl(object.id);
+const classification = objectClassificationLabel(object.classification);
 ---
 
 <li class="planet-object-item" role="listitem" hidden={hidden} data-navigation-object-id={object.id} data-object-name={object.name.toLocaleLowerCase("en")}
@@ -28,14 +29,14 @@ const thumbnailScale = 14 / Math.max(...Object.values(PREPARED_NAVIGATION_MARKER
       data-source-subject={`object:${object.name}`} data-source-document={source.href} data-source-label={source.label}
       aria-current={object.id === activeObjectId ? "page" : undefined}>
       <span class="planet-lens-icon">
-        <PlanetNavigationMarker planetId={object.id} color={object.color} scale={thumbnailScale} />
+        {preview ? <img class="planet-search-preview" src={preview} width="40" height="40" alt="" loading="lazy" decoding="async" />
+          : <PlanetNavigationMarker planetId={object.id} color={object.color} scale={thumbnailScale} />}
       </span>
       <span class="planet-object-name planet-lens-label">{object.name}</span>
-      <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={contentDescription ?? `${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
-        {contentDescription ? <span>{contentDescription}</span> : <>
+      <span class="planet-object-distance planet-lens-detail" title={distanceDescription(object.distance)} aria-label={`${Number(object.distance.value.toFixed(3))} ${object.distance.unit}. ${distanceDescription(object.distance)}`}>
+        <span class="planet-object-kind">{classification.charAt(0).toLocaleUpperCase('en') + classification.slice(1)} · </span>
         <span class="planet-object-distance-value">{Number(object.distance.value.toFixed(3))}</span>{" "}
         <span class="planet-object-distance-unit">{object.distance.unit}</span>
-        </>}
       </span>
     </a>
 </li>

@@ -1034,6 +1034,11 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     browsing = true;
     render(true, { resetQuery: true });
   }, { signal: events.signal });
+  // Pressing or wheeling the scene leaves the search: the results close and the typed query stays for reopening.
+  const sceneInput = documentTarget.querySelector<HTMLElement>('.planet-input-surface');
+  for (const type of ['pointerdown', 'wheel'] as const) {
+    sceneInput?.addEventListener(type, () => { if (open) { render(false); search.blur(); } }, { signal: events.signal, passive: true });
+  }
   documentTarget.addEventListener("pointerdown", (event) => {
     if (documentTarget.activeElement !== search ||
         !(event.target instanceof windowTarget.Node) ||
