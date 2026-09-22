@@ -250,7 +250,9 @@ export function createSceneRouter({
       if (featureId !== null) {
         featureUrl.searchParams.delete('feature');
         session.url = featureUrl.href;
-        if (mount.features && /^[0-9]+$/u.test(featureId)) { shell.setMotionEnabled?.(false); session.wait(mount.features.select(featureId)).catch(error => { if (scenes.isCurrent(session)) report(error); }); }
+        const place = /^city-([0-9]+)$/u.exec(featureId);
+        if (place && mount.destinations) { shell.setMotionEnabled?.(false); session.wait(shell.selectPlace?.(place[1]!) ?? Promise.resolve()).catch(error => { if (scenes.isCurrent(session)) report(error); }); }
+        else if (mount.features && /^[0-9]+$/u.test(featureId)) { shell.setMotionEnabled?.(false); session.wait(mount.features.select(featureId)).catch(error => { if (scenes.isCurrent(session)) report(error); }); }
       }
       if (!session.commit()) return false;
       if (mount.datasets) {

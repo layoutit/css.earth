@@ -36,7 +36,8 @@ export type Step =
   | { readonly type: string }
   | { readonly drag: { readonly from: readonly [number, number]; readonly to: readonly [number, number]; readonly seconds: number } }
   | { readonly wait: number }
-  | { readonly screenshot: string };
+  | { readonly screenshot: string }
+  | { readonly probe: string };
 
 const point = (value: unknown, label: string): [number, number] => {
   const list = requireArray(value, label);
@@ -52,6 +53,11 @@ export function parseSteps(value: unknown): Step[] {
     if ('tap' in step) return { tap: point(step.tap, label) };
     if ('type' in step) return { type: requireString(step.type, label) };
     if ('wait' in step) return { wait: requireFiniteNumber(step.wait, label) };
+    if ('probe' in step) {
+      const name = requireString(step.probe, label);
+      if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: probe names are lowercase words and dashes.`);
+      return { probe: name };
+    }
     if ('screenshot' in step) {
       const name = requireString(step.screenshot, label);
       if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: screenshot names are lowercase words and dashes.`);
@@ -65,11 +71,23 @@ export function parseSteps(value: unknown): Step[] {
   });
 }
 
-async function perform(steps: readonly Step[], udid: string, out: string, marks: { label: string; at: number }[], started: number) {
+/** What a probe step reads from the page: the scene router's state and the size of the document. */
+const PROBE_EXPRESSION = `(() => {
+  const app = window.__cssEarth, read = key => { try { return app ? app[key] : undefined; } catch (error) { return 'unreadable'; } };
+  const error = read('error');
+  return { path: location.pathname, ready: read('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
+    overview: read('overview'), mountedObjectCount: read('mountedObjectCount'), lifecycle: read('lifecycle'),
+    error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
+})()`;
+
+async function perform(steps: readonly Step[], udid: string, out: string, marks: { label: string; at: number; value?: unknown }[], started: number,
+  evaluate: (expression: string) => Promise<unknown>) {
   for (const step of steps) {
     const label = JSON.stringify(step);
-    marks.push({ label, at: Date.now() - started });
-    if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
+    const mark: { label: string; at: number; value?: unknown } = { label, at: Date.now() - started };
+    marks.push(mark);
+    if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    else if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
     else if ('type' in step) await run('axe', ['type', step.type, '--udid', udid]);
     else if ('wait' in step) await wait(step.wait * 1000);
     else if ('screenshot' in step) await run('axe', ['screenshot', '--output', resolve(out, `${step.screenshot}.png`), '--udid', udid]);
@@ -592,8 +610,12 @@ export async function captureIosMoment(args: readonly string[]) {
   recording = true;
   await session.send('CPUProfiler.startTracking');
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
-  const started = Date.now(), marks: { label: string; at: number }[] = [];
-  if (steps.length) await perform(steps, udid, out, marks, started);
+  const started = Date.now(), marks: { label: string; at: number; value?: unknown }[] = [];
+  const evaluate = async (expression: string) => {
+    const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true });
+    return isRecord(reply.result) && isRecord(reply.result.result) ? reply.result.result.value : null;
+  };
+  if (steps.length) await perform(steps, udid, out, marks, started, evaluate);
   else { marks.push({ label: `manual ${option.seconds} s`, at: 0 }); await wait((option.seconds ?? 0) * 1000); }
   const durationMs = Date.now() - started;
   await session.send('Timeline.stop');
@@ -669,10 +691,12 @@ type ReadmeInput = { name: string; url: string; durationMs: number; memoryMb: { 
   initiators: Record<string, { label: string; count: number }[]>; layers: unknown;
   javascript: Record<string, ReturnType<typeof summariseSamples>>; timeline: ReturnType<typeof summariseTimeline>; cpu: ReturnType<typeof summariseCpu>;
   console: readonly { level: string; text: string }[]; network: { requests: number; bytes: number }; native: ReturnType<typeof summariseTimeProfile> | { error: string };
-  pixels: Awaited<ReturnType<typeof compareScreenshots>> | null };
+  pixels: Awaited<ReturnType<typeof compareScreenshots>> | null; steps: readonly { label: string; at: number; value?: unknown }[] };
 function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
+    ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
+      .map(step => `- ${JSON.parse(step.label).probe} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
     ...(r.pixels ? ['## Pixels against ' + r.pixels.baseline, '', ...r.pixels.screenshots.map(shot => shot.differing === null
       ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`), ''] : []),
     `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
