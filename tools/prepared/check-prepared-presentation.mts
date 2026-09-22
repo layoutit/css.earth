@@ -200,8 +200,6 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
           sceneNodes: definition.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
           camera: definition.camera,
           viewBindings: definition.viewBindings, animations: definition.animations.map(({ id, mode, target }) => ({ id, mode, target })),
-          pageLayers: (definition.pageLayers ?? []).map(({ lensIds, plan: layer }) => ({ lensIds, schema: layer.schema,
-            roots: 'roots' in layer && isArray(layer.roots) ? layer.roots.length : 0, poolSize: 'poolSize' in layer ? layer.poolSize : null })),
           destinations: definition.destinations ? { defaultLens: definition.destinations.defaultLens, catalog: definition.destinations.catalog } : null,
           features: definition.features ? { target: definition.features.target, lensIds: definition.features.lensIds, catalog: definition.features.catalog } : null });
         continue;
@@ -230,8 +228,6 @@ export async function auditPreparedPresentations({ root = process.cwd(), objects
         sceneNodes: plan.tree.nodes.filter(node => /(?:^|\s)polycss-scene(?:\s|$)/.test(node.className ?? "")).length,
         camera: plan.camera,
         viewBindings: plan.viewBindings, animations: plan.animations.map(({ id, mode, target }) => ({ id, mode, target })),
-        pageLayers: (plan.pageLayers ?? []).map(({ lensIds, plan: layer }) => ({ lensIds, schema: layer.schema,
-          roots: 'roots' in layer && isArray(layer.roots) ? layer.roots.length : 0, poolSize: 'poolSize' in layer ? layer.poolSize : null })),
         destinations: plan.destinations ? { defaultLens: plan.destinations.defaultLens, catalog: plan.destinations.catalog } : null });
     } catch (error) { entries.push({ id: object.id, complete: false, error: error instanceof Error ? error.message : String(error) }); }
   }

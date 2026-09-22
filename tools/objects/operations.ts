@@ -8,8 +8,6 @@ import { fileURLToPath } from 'node:url';
 import { executeAcquisition, parseAcquisitionPlan, type AcquisitionPlan, type AcquisitionTransport } from './operations-acquisition.js';
 export { executeAcquisition, parseAcquisitionPlan };
 import { RUNTIME_ASSET_ORIGIN } from '../assets/source-mirror.mts';
-import { isPreparedBlockReference, PREPARED_BLOCK_ENCODING } from '../../src/renderers/css/prepared-data/prepared-block-transport.js';
-import type { PreparedReference } from '../../src/renderers/css/paging/types.js';
 import { createHash, randomUUID } from 'node:crypto';
 import { mkdir, readFile, readdir, rename, rm, writeFile, unlink, lstat } from 'node:fs/promises';
 import { createReadStream, createWriteStream } from 'node:fs';
@@ -128,13 +126,6 @@ export function collectRuntimeAssetUrls(id:string,...values:unknown[]):string[] 
    if(value!==prefix&&value.startsWith(prefix)&&!/[\s;()"']/.test(value))add(value);
    for(const match of value.matchAll(/url\(\s*["']?(\/scenes\/[^\s)"']+)["']?\s*\)/g))add(match[1]);
   }else if(Array.isArray(value))value.forEach(visit);else if(value&&typeof value==='object'){
-   // Range-addressed geometry is delivered by the pinned paging release, not
-   // the flat image directory. Its integrity is carried in the reference and
-   // verified by both source preparation and the runtime transport.
-   if((value as Record<string,unknown>).encoding===PREPARED_BLOCK_ENCODING){
-    if(!isPreparedBlockReference(value as PreparedReference,prefix))throw new TypeError('Invalid prepared geometry reference.');
-    return;
-   }
    Object.values(value).forEach(visit);
   }
  };values.forEach(visit);return [...urls].sort();

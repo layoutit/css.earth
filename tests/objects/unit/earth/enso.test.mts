@@ -1,4 +1,4 @@
-import {shape,array,text,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {shape,array,text,number} from '../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts';
 // A no-data witness records a null interval.
 const nullableText = (value: unknown): string | null => value === null ? null : text(value);
 import {parseMurReceipt} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';

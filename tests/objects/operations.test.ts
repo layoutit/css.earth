@@ -69,10 +69,3 @@ test('missing-source restoration transfers only the missing pin; a stale existin
  assert.equal(transfers,1);assert.deepEqual(await readFile(join(root,'two.txt')),missing);assert.deepEqual(await readFile(join(root,'one.txt')),Buffer.from('modified'));
  await assert.rejects(verifySources({sourceRoot:root,manifest}),/hash drifted/);
 }));
-test('image inventory separates valid range-addressed geometry and rejects malformed references',()=>{
- const reference={encoding:'gzip-cssearth-prepared-columns@1',url:'/scenes/open-body/wmts-0123456789abcdef/5-7-1.pack',offset:0,bytes:128,decodedBytes:256,sha256:'a'.repeat(64),decodedSha256:'b'.repeat(64)};
- assert.deepEqual(collectRuntimeAssetUrls('open-body',{image:'/scenes/open-body/one.webp',directory:reference}),['/scenes/open-body/one.webp']);
- for(const mutation of [{sha256:'bad'},{offset:-1},{url:'/scenes/other/wmts-0123456789abcdef/5-7-1.pack'},{url:'/scenes/open-body/../../secret'}])
-  assert.throws(()=>collectRuntimeAssetUrls('open-body',{...reference,...mutation}),/Invalid prepared geometry reference/);
- assert.throws(()=>collectRuntimeAssetUrls('open-body',reference.url),/Unsafe runtime asset/);
-});

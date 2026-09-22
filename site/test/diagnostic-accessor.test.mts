@@ -31,7 +31,7 @@ function publisher(target: Window & typeof globalThis, id: string) {
     playback: boundary<ObjectDiagnosticsOptions['playback']>({ stats: unused }),
     lifetime: boundary<ObjectDiagnosticsOptions['lifetime']>({ stats: unused }),
     context: { density: 2, own: disposer => disposers.push(disposer) }, initialSelection: { lensId: 'test' },
-    startupDecodedAssets: 0, pageLayers: new Map(), getCurrentView: () => null,
+    startupDecodedAssets: 0, getCurrentView: () => null,
   };
   return { diagnostics: publishObjectDiagnostics(options), dispose() { for (const dispose of disposers) dispose(); } };
 }

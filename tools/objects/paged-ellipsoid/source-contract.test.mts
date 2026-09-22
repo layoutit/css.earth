@@ -18,10 +18,9 @@ test('Earth preparation boundaries preserve every source and provenance field', 
   }
 });
 
-test('Earth profile rejects invalid geometry, decoder variants and geographic budgets', async () => {
+test('Earth profile rejects invalid geometry and decoder variants', async () => {
   for (const mutate of [(value: unknown) => { fixtureRecord(value,'geometry').EQUATORIAL_RADIUS = '230'; },
 (value: unknown) => { fixtureRecord(value,'surface','maps',0).scientific = {kind: 'gebco-elevation'}; },
-(value: unknown) => { fixtureRecord(value,'geographic','pages','presentation').maximumDecodedBytes = null; },
 (value: unknown) => { fixtureRecord(value,'camera','responsiveFit').minimumZoom = Infinity; }]) {
     const value = await read('preparation/paged-ellipsoid.json'); mutate(value);
     assert.throws(() => parsePagedProfile(value), TypeError);

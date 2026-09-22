@@ -29,7 +29,7 @@ export { cssCameraAxesFromOrientation, cssViewFromOrientation, validateWorldRefl
 export type { PreparedWorldCameraFrame, WorldCameraPose } from './navigation/world-camera.js';
 export type { ObjectWorldNavigation, ObjectWorldNavigationListener } from './runtime/world-navigation-types.js';
 export { createWorldSelectionTarget } from './navigation/selection-target.js';
-export { preparedObjectCapabilities } from './paging/capabilities.js';
+export { preparedObjectCapabilities } from './runtime/capabilities.js';
 export { mountSurfaceFeatureLabels } from './labels/surface-feature-labels.js';
 export { labelOcclusionFor } from './labels/label-occlusion.js';
 export { createOpacityFader } from './stars/opacity-fader.js';

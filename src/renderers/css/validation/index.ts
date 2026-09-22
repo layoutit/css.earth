@@ -17,7 +17,7 @@ export function parsePreparedObjectRuntime(value: unknown, { parsedJson = false 
 function requireDefinition(value: unknown, parsedJson: boolean): asserts value is ObjectRuntimeDefinition {
   if (!parsedJson || !parsedJsonNumbersFinite(value)) requireJsonData(value);
   const plan = record(value, 'runtime plan', ['schema', 'id', 'controls', 'camera', 'sky', 'sun', 'assets', 'tree', 'variants', 'materials',
-    'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'pageLayers', 'surfaceHit', 'textureLevels', 'features']);
+    'viewBindings', 'animations', 'motion', 'facing', 'depthPartitions', 'resourceOrder', 'destinations', 'motionFrame', 'surfaceHit', 'textureLevels', 'features']);
   if (plan.schema !== 'cssearth-object-runtime@4') fail('runtime schema is incompatible');
   const id = text(plan.id, 'object id'); if (!/^[a-z][a-z0-9-]*$/.test(id)) fail('object identity is invalid');
   requireControls(plan.controls); requireCamera(plan.camera); requireSky(plan.sky);
