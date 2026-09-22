@@ -14,6 +14,37 @@ export interface ObjectNavigationTarget extends EventTarget {
   removeAttribute(name: string): void;
 }
 
+// On iOS every element with a pointer listener is a touch target, and WebKit recomputes each target's region (a walk
+// of its subtree with its transforms) on every rendering update. A listener on every marker cost about a fifth of the
+// page's rendering during flights. One press listener per document stops presses on bound, navigable targets instead:
+// a document listener covers the whole page without a walk.
+const MARKER_PRESS = '[data-object-navigate][data-object-navigate-activation]';
+const pressDelegates = new WeakMap<EventTarget, { readonly stop: (event: Event) => void; bindings: number }>();
+function stopMarkerPress(event: Event) {
+  const target = event.target;
+  if (typeof Element !== 'undefined' && target instanceof Element && target.closest(MARKER_PRESS)) event.stopPropagation();
+}
+function delegatedPresses(element: ObjectNavigationTarget): EventTarget | null {
+  const owner = 'ownerDocument' in element ? element.ownerDocument : null;
+  if (!owner || typeof EventTarget === 'undefined' || !(owner instanceof EventTarget)) return null;
+  let delegate = pressDelegates.get(owner);
+  if (!delegate) {
+    delegate = { stop: stopMarkerPress, bindings: 0 };
+    owner.addEventListener('pointerdown', delegate.stop);
+    owner.addEventListener('mousedown', delegate.stop);
+    pressDelegates.set(owner, delegate);
+  }
+  delegate.bindings++;
+  return owner;
+}
+function releaseDelegatedPresses(owner: EventTarget) {
+  const delegate = pressDelegates.get(owner);
+  if (!delegate || --delegate.bindings > 0) return;
+  owner.removeEventListener('pointerdown', delegate.stop);
+  owner.removeEventListener('mousedown', delegate.stop);
+  pressDelegates.delete(owner);
+}
+
 export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host: EventTarget,
   { activation = 'click', pointerTarget = true }: { activation?: 'click' | 'dblclick';
     /** False when a stage picker owns hits: the target keeps no pointer or cursor style. */
@@ -33,8 +64,12 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
   };
   element.setAttribute('role', 'button');
   element.dataset.objectNavigateActivation = activation;
-  element.addEventListener('pointerdown', stopPointer);
-  element.addEventListener('mousedown', stopPointer);
+  // A real document delegates presses; a target without one (a test double) listens itself.
+  const pressOwner = delegatedPresses(element);
+  if (!pressOwner) {
+    element.addEventListener('pointerdown', stopPointer);
+    element.addEventListener('mousedown', stopPointer);
+  }
   element.addEventListener('dblclick', activation === 'dblclick' ? activate : stopPointer);
   element.addEventListener('click', activation === 'click' ? activate : stopPointer);
   element.addEventListener('keydown', keyboard);
@@ -60,8 +95,11 @@ export function bindObjectNavigationTarget(element: ObjectNavigationTarget, host
   update(null);
   return Object.freeze({ update, destroy() {
     update(null);
-    element.removeEventListener('pointerdown', stopPointer);
-    element.removeEventListener('mousedown', stopPointer);
+    if (pressOwner) releaseDelegatedPresses(pressOwner);
+    else {
+      element.removeEventListener('pointerdown', stopPointer);
+      element.removeEventListener('mousedown', stopPointer);
+    }
     delete element.dataset.objectNavigateActivation;
     element.removeEventListener('dblclick', activation === 'dblclick' ? activate : stopPointer);
     element.removeEventListener('click', activation === 'click' ? activate : stopPointer);

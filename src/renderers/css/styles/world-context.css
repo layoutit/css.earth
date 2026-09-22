@@ -18,7 +18,7 @@
   pointer-events: none;
 }
 
-/* One retained leaf: prepared sprite background, ring before, caption after.
+/* One retained leaf: ring before, caption after, and one sprite child that alone scales with the body.
    The neutral default sits on the shared root, below every per-body swatch
    rule, so swatch colours win regardless of stylesheet order. */
 .prepared-world-context,
@@ -26,7 +26,7 @@
 .prepared-context-marker {
   color: #dfdfdf;
 }
-.prepared-world-context [data-context-body-visible="false"] {
+.prepared-world-context [data-context-body-visible="false"] > i {
   background-image: none !important;
 }
 .prepared-world-context [data-context-body]::before,
@@ -35,9 +35,9 @@
   inset: 0 auto auto 0;
   transform-origin: 0 0;
   translate: 8px 8px;
-  /* Confined to this childless leaf. Camera scale never gets transitioned. Custom properties, not typed attr():
-     WebKit drops a typed attr() declaration entirely, which left iPhone markers at their camera scale. */
-  scale: calc(var(--context-inverse-scale, 1) * var(--context-annotation-scale, 1));
+  /* The marker never scales (its sprite child does), so the ring and caption keep their size without a per-frame
+     counter-scale. The annotation scale is a device setting. */
+  scale: var(--context-annotation-scale, 1);
   pointer-events: none;
   visibility: hidden;
 }

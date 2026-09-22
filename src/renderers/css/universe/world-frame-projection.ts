@@ -21,6 +21,12 @@ export function createWorldFrameProjection(focus: WorldPoint, selected: WorldPoi
   const spheres = new Map<string, ReturnType<typeof sphere>>();
   function sphere(point: WorldPoint) {
     const center = eye(point);
+    // The ray from the eye to a point in front of it (z < 0) never reaches z > 0, so a sphere wholly behind the eye plane
+    // hides nothing there. Chords reach the chord test only after near clipping, so none of them can meet it either.
+    // Without this, the Sun behind the camera on a sunlit view sent every chord of every drawn orbit through the
+    // detailed split.
+    if (center[2] - point.radiusM > 0) return { id: point.id, mayOcclude: () => false,
+      hidden: (target: Vector3) => target[2] > 0 && rayHitsSphereBefore(target, center, point.radiusM) };
     return { id: point.id,
       hidden: (target: Vector3) => rayHitsSphereBefore(target, center, point.radiusM),
       mayOcclude: createSphereChordTest(center, point.radiusM, project) };

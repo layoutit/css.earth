@@ -19,7 +19,7 @@ test('one view shares body eyes and parent shadow bounds without retaining anoth
     first.eye(parent);
   }
   expect(transforms).toBe(2);
-  expect(projections).toBe(16); // Eight corners of each unique occluder.
+  expect(projections).toBe(8); // Four tangent directions of each unique occluder.
   expect(common.hidden([0, 0, -110])).toBe(true);
   expect(common.hidden([0, 0, -110], focus.id)).toBe(false);
   const next = createWorldFrameProjection(focus, parent,
@@ -28,6 +28,21 @@ test('one view shares body eyes and parent shadow bounds without retaining anoth
   expect(next.occlusion(null).hidden([0, 0, -110])).toBe(false);
   expect(next.occlusion(parent)).toBe(next.occlusion(null));
   expect(first.eye(focus)).toEqual([0, 0, -100]);
+});
+
+test('a sphere wholly behind the eye plane hides nothing and sends no chord to the detailed split', () => {
+  const behind = { id: 'sun', positionM: [0, 0, 50] as Vector3, radiusM: 10 };
+  const front = { id: 'earth', positionM: [0, 0, -100] as Vector3, radiusM: 10 };
+  const project = (point: Vector3) => [800 * point[0] / -point[2], 800 * point[1] / -point[2]];
+  const frame = createWorldFrameProjection(behind, front, point => [...point] as Vector3, project);
+  const occlusion = frame.occlusion(null);
+  // The front sphere still hides what lies behind it; the one behind the eye hides nothing, exactly as the ray test says.
+  expect(occlusion.hidden([0, 0, -200])).toBe(true);
+  expect(occlusion.hidden([30, 0, -200])).toBe(false);
+  for (const target of [[30, 0, -200], [0, 5, -1e6], [-1, 1, -0.5]] as Vector3[]) expect(rayHitsSphereBefore(target, [0, 0, 50], 10)).toBe(false);
+  const lone = createWorldFrameProjection(behind, behind, point => [...point] as Vector3, project).occlusion(null);
+  expect(lone.mayOcclude([-400, 0], [400, 0])).toBe(false);
+  expect(lone.hidden([0, 0, -200])).toBe(false);
 });
 
 // 180 views x 3 scales of ring projection is CPU-heavy; measured 1-3.6s, close enough to vitest's 5s default to flake on a loaded runner.

@@ -14,7 +14,7 @@ import { array, finite, numbers, positive, record, text, unique } from '../valid
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
 import { cssViewFromOrientation, validateWorldRotation } from '../navigation/world-camera-math.js';
 import type { LevelOfDetailPlan, OrbitLineFade } from '../navigation/types.js';
-import { applySprite, applySpriteImage } from '../solar-system/heliocentric-sprites.js';
+import { applySpriteImage } from '../solar-system/heliocentric-sprites.js';
 import { mountPreparedOrbitLines, ORBIT_RENDERER_LOD_PIXELS, type OrbitRenderer } from '../solar-system/prepared-orbit-lines.js';
 import type { PreparedOrbitStrokes } from '../solar-system/prepared-orbit-strokes.js';
 import { orbitProjectionCapacity } from '../solar-system/prepared-ring-projection.js';
@@ -585,8 +585,14 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     marker.dataset.contextIndicatorVisible = 'false';
     marker.dataset.contextLabelVisible = 'false';
     marker.dataset.contextAnnotationsAnimate = 'false';
-    marker.style.cssText = 'position:absolute;inset:0;pointer-events:none;background-repeat:no-repeat;text-decoration:none;transform-origin:0 0;visibility:hidden';
-    applySprite(marker, sprite);
+    // Visibility and opacity belong to the mover; the marker and its pseudos inherit them.
+    marker.style.cssText = 'position:absolute;inset:0;pointer-events:none;text-decoration:none;transform-origin:0 0';
+    // The sprite scales alone. Scaling the marker made its ring and caption pseudos counter-scale through an inherited
+    // custom property, which re-resolved the marker and both pseudos for every moving body on every frame.
+    const spriteLeaf = host.ownerDocument.createElement('i');
+    spriteLeaf.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;background-repeat:no-repeat;transform-origin:50% 50%;pointer-events:none`;
+    applySpriteImage(spriteLeaf, sprite);
+    marker.appendChild(spriteLeaf);
     const approximate = 'placement' in body && body.placement === 'approximate';
     if (approximate) {
       marker.dataset.contextPlacement = 'approximate';
@@ -605,7 +611,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     const mover = host.ownerDocument.createElement('b');
     // A fixed-size box with layout and size containment is a relayout boundary: a
     // marker's visibility or cue change lays out these three boxes, not the document.
-    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size`;
+    mover.style.cssText = `position:absolute;left:0;top:0;width:${BILLBOARD_SIZE}px;height:${BILLBOARD_SIZE}px;transform-origin:0 0;pointer-events:none;contain:layout size;visibility:hidden`;
     mover.appendChild(marker);
     root.appendChild(mover);
     const orbit = 'orbit' in body ? (body as PreparedContextBody).orbit : null;
@@ -624,7 +630,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     // carry keyboard and accessibility state, never pointer or cursor styles.
     const navigation = bindObjectNavigationTarget(marker, host, { pointerTarget: false });
     const orbitNavigation = orbit ? bindObjectNavigationTarget(orbitRoot, host, { pointerTarget: false }) : null;
-    return { index, body, sprite, marker, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
+    return { index, body, sprite, marker, spriteLeaf, mover, orbit, orbitRoot, parent: orbit ? points.get(orbit.centerBodyId) ?? null : null, pieces, piecePool, navigation, orbitNavigation,
       closedOrbit: orbit?.fullTrail === true,
       indicatorRadius: BODY_INDICATOR_DIAMETER / 2,
       indicatorHovered: false,
@@ -637,7 +643,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
       labelPickTarget: null as (ScreenPickTarget & { shape: { kind: 'rect'; left: number; top: number; right: number; bottom: number } }) | null,
       labelRectTarget: null as { left: number; top: number; right: number; bottom: number } | null,
       markerShown: undefined as boolean | undefined, markerDiameter: 0, billboardShown: undefined as boolean | undefined, spriteDetail: false,
-      center: [0, 0] as [number, number], markerTransform: '', orbitTransform: '', labelOffset: '', inverseScale: 0,
+      center: [0, 0] as [number, number], markerTransform: '', spriteTransform: '', orbitTransform: '', labelOffset: '',
       labelRect: null as LabelScreenRect | null,
       orbitBounds: null as LabelScreenRect | null,
       indicatorPick: null as ScreenPickTarget | null,
@@ -903,7 +909,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
     publicationStats: () => ({ skippedPublications, bodyPublications, depthPublications, paintedBodies: paintedBodies.size }),
     inspect() {
       return Object.freeze(bodies.map(entry => Object.freeze({
-        id: entry.body.id, billboard: entry.marker,
+        id: entry.body.id, billboard: entry.marker, mover: entry.mover,
         get markerShown() { return entry.markerShown; },
         get indicatorShown() { return entry.indicatorShown; },
         get labelShown() { return entry.labelShown; },
@@ -1065,7 +1071,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
         const animateAnnotations = String(animatedAnnotations.has(entry));
         if (marker.dataset.contextAnnotationsAnimate !== animateAnnotations) marker.dataset.contextAnnotationsAnimate = animateAnnotations;
         if (!billboardShown && !entry.hovered) entry.indicatorRadius = BODY_INDICATOR_DIAMETER / 2;
-        fader.visible(marker, billboardShown);
+        fader.visible(entry.mover, billboardShown);
         // The mover is hidden with its marker: a visible, transformed mover with nothing to draw still becomes a layer.
         if (entry.billboardShown !== billboardShown) marker.style.visibility = entry.mover.style.visibility = billboardShown ? '' : 'hidden';
         entry.billboardShown = billboardShown;
@@ -1086,7 +1092,7 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
           if (detail) {
             const spriteDetail = markerDiameter >= detail.fromDiameterPixels ||
               (entry.spriteDetail && markerDiameter >= detail.fromDiameterPixels * SPRITE_DETAIL_RETURN);
-            if (spriteDetail !== entry.spriteDetail) { entry.spriteDetail = spriteDetail; applySpriteImage(marker, spriteDetail ? detail : entry.sprite); }
+            if (spriteDetail !== entry.spriteDetail) { entry.spriteDetail = spriteDetail; applySpriteImage(entry.spriteLeaf, spriteDetail ? detail : entry.sprite); }
           }
           if (entry.mover.style.zIndex !== zIndex) entry.mover.style.zIndex = zIndex;
           if (marker.dataset.contextSelected !== selection) marker.dataset.contextSelected = selection;
@@ -1094,18 +1100,19 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
             entry.indicatorHovered = entry.hovered;
             marker.dataset.contextIndicatorHovered = String(entry.hovered);
           }
-          if (policyChanged || !wasShown || hoverChanged) fader.multiply(marker, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
-          fader.set(marker, markerOpacity);
-          const transform = `translate(${width / 2 + x}px,${height / 2 + y}px) scale(${markerDiameter / BILLBOARD_SIZE}) translate(-50%,-50%)`;
+          // Opacity lives on the mover, which has no pseudos: WebKit re-resolves an element's ::before and ::after with
+          // every restyle of it, so a per-frame opacity on the marker restyled its ring and caption every frame.
+          if (policyChanged || !wasShown || hoverChanged) fader.multiply(entry.mover, emphasis, animatedAnnotations.has(entry) ? 120 : 0);
+          fader.set(entry.mover, markerOpacity);
+          const transform = `translate(${width / 2 + x}px,${height / 2 + y}px) translate(-50%,-50%)`;
           // CSSOM serializes commas/spacing differently from the published
           // string. Compare against our last write, not its browser readback.
           if (entry.markerTransform !== transform) {
             entry.mover.style.transform = transform; entry.markerTransform = transform;
           }
-          const inverseScale = BILLBOARD_SIZE / markerDiameter;
-          if (entry.inverseScale !== inverseScale) {
-            marker.style.setProperty('--context-inverse-scale', String(inverseScale));
-            entry.inverseScale = inverseScale;
+          const spriteTransform = `scale(${markerDiameter / BILLBOARD_SIZE})`;
+          if (entry.spriteTransform !== spriteTransform) {
+            entry.spriteLeaf.style.transform = spriteTransform; entry.spriteTransform = spriteTransform;
           }
           entry.center = [x, y];
         }

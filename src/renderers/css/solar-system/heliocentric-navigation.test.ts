@@ -85,3 +85,21 @@ test('reused captions select their new prepared object ID and keyboard repeats d
   assert.equal(element.attributes.get('aria-label'), 'Go to Future object');
   target.destroy();
 });
+
+test('targets in a document share one press listener pair, removed with the last binding', () => {
+  const owner = new EventTarget(), added: string[] = [], removed: string[] = [];
+  const add = owner.addEventListener.bind(owner), remove = owner.removeEventListener.bind(owner);
+  owner.addEventListener = (type: string, listener: EventListenerOrEventListenerObject | null) => { added.push(type); add(type, listener); };
+  owner.removeEventListener = (type: string, listener: EventListenerOrEventListenerObject | null) => { removed.push(type); remove(type, listener); };
+  const markers = Array.from({ length: 3 }, () => Object.assign(new Target(), { ownerDocument: owner }));
+  const own = markers.map(marker => { const listening: string[] = [], base = marker.addEventListener.bind(marker);
+    marker.addEventListener = (type: string, listener: EventListenerOrEventListenerObject | null) => { listening.push(type); base(type, listener); }; return listening; });
+  const bindings = markers.map(marker => bindObjectNavigationTarget(marker, new EventTarget()));
+  assert.deepEqual(added, ['pointerdown', 'mousedown']);
+  // No marker is a pointer target of its own: on iOS each would be a touch region recomputed every frame.
+  for (const listening of own) assert.deepEqual(listening.filter(type => type.startsWith('pointer') || type === 'mousedown'), []);
+  bindings[0]!.destroy(); bindings[1]!.destroy();
+  assert.deepEqual(removed, []);
+  bindings[2]!.destroy();
+  assert.deepEqual(removed, ['pointerdown', 'mousedown']);
+});
