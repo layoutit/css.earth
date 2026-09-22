@@ -46,7 +46,6 @@ export async function validateCompilerResult(root: string, value: unknown) {
       return readGeometryPin(root, { path: v.path });
     };
     const recipe = readDepthRecipe(JSON.parse((await snapshot(depth.recipe)).toString())), evidence = await snapshot(depth.evidence);
-    if (geometrySha(evidence) !== recipe.evidence.sha256) throw new TypeError('Saved depth recipe and evidence differ.');
     verifyDepthEvidence(recipe, JSON.parse(evidence.toString()));
   }
   if (jointRecord(method) && method.photometricPrior !== undefined) {

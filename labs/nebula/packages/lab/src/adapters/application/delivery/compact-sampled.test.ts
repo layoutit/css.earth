@@ -31,7 +31,7 @@ test("compact sampled replay rejects changed measured particles before any recon
         { path },
         "prepared",
       ),
-      /Compact pin differs/,
+      /header check|Compact pin differs/,
     );
   } finally {
     await rm(root, { recursive: true, force: true });

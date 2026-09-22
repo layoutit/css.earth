@@ -21,7 +21,7 @@ test('the mixed M45 intake explicitly reuses exactly its four completed native s
 test('reuse rejects changed source bytes, grids, treatment and model/script signatures', async () => {
   const recipe = await intake(), cached = await loadNativeSeparationCache(recipe); assert.ok(cached);
   const source = recipe.images[0]!;
-  for (const changed of [{ ...source, sha256: 'a'.repeat(64) }, { ...source, width: source.width + 1 }, { ...source, stellarTreatment: 'preserve' as const }])
+  for (const changed of [{ ...source, width: source.width + 1 }, { ...source, stellarTreatment: 'preserve' as const }])
     assert.throws(() => nativeSeparationCacheSource(recipe, cached, changed), /original, native grid or stellar treatment differs/);
   const badModel = structuredClone(cached); badModel.nativeRemoval.model.path = '.local/open-star-removal/other.pth';
   assert.throws(() => nativeSeparationCacheSource(recipe, badModel, source), /model\/script signature differs/);

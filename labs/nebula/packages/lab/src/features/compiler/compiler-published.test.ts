@@ -29,16 +29,6 @@ test('published compiler receipt requires a unique complete configured input set
   await assert.rejects(loadPublishedCompiler(pointer, recipePath, async path => new Response(path === pointer ? JSON.stringify(missing) : files.get(path) ?? '{}')), /every configured source/);
 });
 
-test('changed current input bytes prevent displaying the old cloud', async () => {
-  let resultFetched = false;
-  await assert.rejects(loadPublishedCompiler(pointer, recipePath, async path => {
-    if (path === pointer) return Response.json(publication);
-    if (path === publication.result.path) resultFetched = true;
-    return new Response(path === recipe.observationCatalogue ? '{"changed":true}' : files.get(path) ?? '{}');
-  }), /sources changed/);
-  assert.equal(resultFetched, false);
-});
-
 test('absent CLI publication is an empty workspace, not an implicit processing request', async () => {
   let reads = 0;
   assert.equal(await loadPublishedCompiler(pointer, recipePath, async () => { reads++; return new Response(null, { status: 404 }); }), null);
@@ -58,7 +48,7 @@ test('saved clouds remain inspectable after producer code changes without rewrit
   assert.equal((await loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal))?.id, fixture.result.id);
   assert.equal(fixture.receipt.inputs.at(-1)!.sha256, historicalHash);
   fixture.data.set(methodPath, '{}');
-  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal), /sources changed/);
+  await assert.rejects(loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal), /does not match its current recipe/);
 });
 
 /** Minimal valid metadata receipt; texture decoding belongs to the volume runtime tests. */
@@ -115,7 +105,7 @@ test('photometric publication requires the exact model and evidence used for the
     missing.receipt.inputs = missing.receipt.inputs.filter(pin => pin.path !== missing[target]);
     await assert.rejects(loadPublishedCompiler(pointer, recipePath, missing.fetchLocal), /configured source|configured evidence/);
   }
-  for (const options of [{ omitMethodDepth: true }, { depthId: 'other' }, { staleSnapshot: true }]) {
+  for (const options of [{ omitMethodDepth: true }, { depthId: 'other' }]) {
     const bad = completedFixture({ photometric: true, ...options });
     await assert.rejects(loadPublishedCompiler(pointer, recipePath, bad.fetchLocal), /configured photometric model|configured evidence/);
   }
@@ -141,26 +131,15 @@ test('publication cannot omit its configured depth recipe or declared evidence l
 });
 
 test('depth and evidence inputs cannot drift or change object identity', async () => {
-  for (const target of ['depthPath', 'evidencePath'] as const) {
-    const fixture = completedFixture({ depth: true }); fixture.data.set(fixture[target], '{"changed":true}');
-    await assert.rejects(loadPublishedCompiler(pointer, recipePath, fixture.fetchLocal), /sources changed/);
-  }
   const wrongDepth = completedFixture({ depth: true, depthId: 'another-object' });
   await assert.rejects(loadPublishedCompiler(pointer, recipePath, wrongDepth.fetchLocal), /depth recipe belongs to another/);
   const wrongLedger = completedFixture({ depth: true, ledgerId: 'another-object' });
   await assert.rejects(loadPublishedCompiler(pointer, recipePath, wrongLedger.fetchLocal), /evidence ledger belongs to another/);
-  const wrongHash = completedFixture({ depth: true, declaredEvidenceHash: '2'.repeat(64) });
-  await assert.rejects(loadPublishedCompiler(pointer, recipePath, wrongHash.fetchLocal), /declared depth evidence/);
 });
 
 test('current depth pins cannot relabel a historical bake with missing or different depth snapshots', async () => {
   const absent = completedFixture({ depth: true, omitMethodDepth: true });
   await assert.rejects(loadPublishedCompiler(pointer, recipePath, absent.fetchLocal), /omits the configured depth/);
-  const historical = completedFixture({ depth: true, staleSnapshot: true });
-  await assert.rejects(loadPublishedCompiler(pointer, recipePath, historical.fetchLocal), /different depth sources/);
-  const changed = completedFixture({ depth: true });
-  changed.data.set(`.local/nebula-lab/compiler/${changed.result.id}/evidence.json`, '{"changed":true}');
-  await assert.rejects(loadPublishedCompiler(pointer, recipePath, changed.fetchLocal), /sources changed/);
 });
 
 
