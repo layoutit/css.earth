@@ -1,7 +1,7 @@
 /** The surface-observation route: one validator and one loader for every photograph format. See README.md. */
 import type { SurfaceOptions } from '../terrestrial-layers/contracts.mts';
 import type { SurfaceObservationFormat } from './contract.mts';
-import { requireRecord, requireString } from '../../source-values.mts';
+import { requireRecord, requireString } from '../../sources/source-values.mts';
 import { GEO_FORMATS, geoFormat } from './formats/geo.mts';
 import { encounterFormat } from './formats/encounter.mts';
 import { orthographicFormat } from './formats/orthographic.mts';

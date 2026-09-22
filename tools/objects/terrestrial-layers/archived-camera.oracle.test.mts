@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { decodeOsirisReflectance } from './archived-camera.mts';
 import { acceptOsirisQuality } from './osiris-geo.mts';
 import { readOracleFixture, assertPinnedInputs, sampleList, ORACLE_ROOT } from '../../oracles/fixture.mts';
-import { requireRecord, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 
 /** pvl and numpy as the oracle for the OSIRIS level-4 reflectance reader behind the archived-camera route (Steins). */
 const fixture = await readOracleFixture('pds3/osiris-reflectance.json');

@@ -7,7 +7,7 @@ import { preparedSceneMatrix } from '../../../src/renderers/css/navigation/prepa
 import { serializePreparedMatrix4 } from '../../../src/renderers/css/prepared-data/prepared-ellipsoid-projection.js';
 import { distanceForSilhouetteRadius } from '../../../src/renderers/css/solar-system/heliocentric-geometry.js';
 import { addNativeSolarContext, solarMaximumDistanceM } from './context.mts';
-import { serializePreparedScene } from '../../serialize-prepared-scene.mts';
+import { serializePreparedScene } from '../../prepared/serialize-prepared-scene.mts';
 import { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.js';
 import { addNativeResizeInput } from './resize-input.mts';
 import { addNativeCamera } from './native-camera.mts';

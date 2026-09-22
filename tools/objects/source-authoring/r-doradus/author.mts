@@ -13,10 +13,10 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsImage } from '../../../fits.mts';
+import { readFitsImage } from '../../../fits/fits.mts';
 import { headerBlock, padBlock } from '../../interferometry/fits-table.mts';
 import { readReconstruction } from '../../interferometry/beam-convolve.mts';
-import { requireFiniteNumber, requireString } from '../../../source-values.mts';
+import { requireFiniteNumber, requireString } from '../../../sources/source-values.mts';
 import { authorUniformDiscSphere, contextMarker } from '../betelgeuse/author.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/r-doradus/source');

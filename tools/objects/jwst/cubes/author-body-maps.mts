@@ -22,7 +22,7 @@ import type { ObservationSelection } from '../../telescopes/query.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
+import { hasErrorCode, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 import { horizonsTables } from '../../sphere-horizons.mts';
 import { horizonsRows, loadOrientation, observerRowValues, rowJd } from '../../terrestrial-layers/observer-cameras.mts';
 import { placeResolvedDisc } from '../../resolved-disc-map.mts';

@@ -29,8 +29,8 @@ import { parseAcceptedAssumptions, type ResolutionAssumption } from '../resoluti
  * is reported as "capabilities not recorded" rather than guessed. */
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { flagValue } from '../../cli-arguments.mts';
-import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { flagValue } from '../../cli/cli-arguments.mts';
+import { hasErrorCode, readJsonSource, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseBodyMapProduct, resolutionElementsAcrossDisc, surfaceResolutionKm, type BodyMapObservation } from '../body-map-product.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import type { SourceIntakeIssue } from './source-intake.mts';
@@ -1184,7 +1184,7 @@ const numberFlag = (args: readonly string[], flag: string): number | undefined =
 
 const shellWord = (value: string): string => /^[A-Za-z0-9_./,:@+-]+$/u.test(value) ? value : `'${value.replaceAll("'", "'\\''")}'`;
 
-export const QUERY_HELP = `Usage: pnpm telescope:query --target TARGET --wavelength MIN,MAX [options]
+export const QUERY_HELP = `Usage: node tools/cli/run-typed-module.mjs tools/objects/telescopes/query.mts --target TARGET --wavelength MIN,MAX [options]
 
 Required for an explicit workflow verdict:
   --continuum LEFT_FROM,LEFT_TO,RIGHT_FROM,RIGHT_TO (optional band-depth inputs)

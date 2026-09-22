@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { resolve } from 'node:path';
 import { decodeNpyLonLatGrid, readNpy } from './npy-lonlat-grid.mts';
 import { readOracleFixture, assertPinnedInputs, readOracleInput, sampleList } from '../../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 
 /** numpy as the oracle for the .npy reader and nearest-node lookup over Psyche's ALMA thermal-inertia grid. */
 const fixture = await readOracleFixture('npy/psyche-alma.json');

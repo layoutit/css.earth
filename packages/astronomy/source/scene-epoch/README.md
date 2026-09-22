@@ -32,7 +32,7 @@ Normal preparation is offline. To deliberately refresh the same nineteen request
 run `node packages/astronomy/tools/acquire-scene-ephemeris.mts`, review the changed
 raw responses and manifest, then run `pnpm prepare:solar-geometry` and regenerate
 the affected prepared world frames and world context with
-`node tools/refresh-scene-ephemeris.mts`. This also updates the retained surface
+`node tools/prepare/refresh-scene-ephemeris.mts`. This also updates the retained surface
 carrier and sky/Sun registration using the same numeric preparation owner;
 surface geometry and image assets are reused unchanged. Changing the scene epoch
 requires a new source snapshot and review of the UTC offset, not extrapolation

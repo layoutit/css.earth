@@ -6,7 +6,7 @@ import { readFile, writeFile, mkdir, rename, copyFile, readdir, access } from 'n
 import { resolve, basename, dirname } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
 import { createSourceManifest } from '../../src/platform/source-manifest.mts';
 import { requireBodyFixedSunDirection } from '../../src/platform/solar-geometry.mts';
 import { parseSolidPreparationSource } from './terrestrial-layers/profile-source.mts';
@@ -15,12 +15,12 @@ import { loadRadialTerrain, prepareRadialMaterials } from './terrestrial-layers/
 import { SHAPE_MATERIAL, shapeMaterialRaster } from './terrestrial-layers/shape-material.mts';
 import { retainedPhotographicAtlas } from './refresh-terrain-photographs.mts';
 import { refreshObservationControls } from './refresh-surface-observations.mts';
-import { prepareSurfaceMinimaps } from '../prepare-surface-minimaps.mts';
+import { prepareSurfaceMinimaps } from '../prepare/prepare-surface-minimaps.mts';
 import { prepareObjectProvenance } from './provenance.mts';
 import type { RadialMaterialSurface } from './terrestrial-layers/solid-contract.mts';
 import { renderRadialSnapshot } from './terrestrial-layers/radial-snapshot.mts';
 import { parseRadialSnapshot } from './terrestrial-layers/radial-source.mts';
-import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare-navigation.mts';
+import { loadObjectMarkerDescriptor, prepareBodyMarkers } from '../prepare/prepare-navigation.mts';
 import { validateMarkerDescriptor, renderMarker } from '../../src/navigation/marker-recipe.mts';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 

@@ -19,9 +19,9 @@ import { access, open, readFile, writeFile, type FileHandle } from 'node:fs/prom
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { positionalArguments } from '../../cli-arguments.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
+import { positionalArguments } from '../../cli/cli-arguments.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { assertInputPins, addProductEvidence, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 

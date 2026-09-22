@@ -8,7 +8,7 @@ several products and published sources.
 
 Every registered scene package uses the same `prepared/provenance.json` contract,
 `cssearth-object-provenance@3`. It connects local inputs to prepared outputs.
-The file is a build output. `tools/prepare-provenance.mts` generates it from the
+The file is a build output. `tools/prepare/prepare-provenance.mts` generates it from the
 source manifest, the recipes and the prepared inventory during `predev` and
 `prebuild`, and it is not committed. To change what it says, change those files.
 The [Sources catalogue](sources-catalogue.md) supplies the published identities

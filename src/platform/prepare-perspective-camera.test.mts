@@ -1,6 +1,6 @@
-import { requireObjectRuntimeDefinition } from '../../tools/object-runtime-contract.mts';
-import { requireRecord, requireString, requireFiniteNumber } from '../../tools/source-values.mts';
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { requireObjectRuntimeDefinition } from '../../tools/contract/object-runtime-contract.mts';
+import { requireRecord, requireString, requireFiniteNumber } from '../../tools/sources/source-values.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import { test } from "node:test";
 import { preparePerspectiveCamera } from "./prepare-perspective-camera.mts";

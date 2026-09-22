@@ -10,7 +10,7 @@ import { WORLDCOVER_BUCKET, WORLDCOVER_PREFIX, parseWorldCoverInventory,
   worldCoverTileBounds } from "../worldcover-catalog.mts";
 
 import { parseCatalogPin } from '../source-records.mts';
-import { hasErrorCode } from '../../../source-values.mts';
+import { hasErrorCode } from '../../../sources/source-values.mts';
 const root=context.projectRoot;
 const output=resolve(root,`.local/${context.objectId}-city-source/catalog`);
 const snapshotPath=resolve(output,"worldcover-rgbnir-2021.json.gz");

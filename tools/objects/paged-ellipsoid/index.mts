@@ -3,7 +3,7 @@ import { readAuthoredSources } from '../authored-sources.ts';
 import {requireObjectControls} from '../../../site/scene-contract.mts';
 import type {AuthoredObjectDescriptor} from '@cssearth/objects';
 import type {prepareObjectContentAssets} from '../content/prepare.ts';
-import {readJsonSource, requireFiniteNumber, requireRecord} from '../../source-values.mts';
+import {readJsonSource, requireFiniteNumber, requireRecord} from '../../sources/source-values.mts';
 import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe} from './profile-source.mts';
 import {parseInteriorSource} from './source-contract.mts';

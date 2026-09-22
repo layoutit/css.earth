@@ -3,7 +3,7 @@
 import { sha256 } from '../../../src/platform/sha256.mts';
 import {readFile,writeFile} from 'node:fs/promises';
 import {dirname,resolve} from 'node:path';
-import {requireRecord,requireString} from '../../source-values.mts';
+import {requireRecord,requireString} from '../../sources/source-values.mts';
 import {array,parseCameraFrame,shape,text} from './source-records.mts';
 import {loadCameraShape,controlledShapeCamera,decodeCalibratedCamera} from './shape-camera-mosaic.mts';
 import {alignCameraBands,BAND_ALIGNMENT_CRITERIA,BAND_ALIGNMENT_METHOD,BAND_ALIGNMENT_SETTINGS} from './band-alignment.mts';

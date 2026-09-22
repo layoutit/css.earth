@@ -1,7 +1,7 @@
 import {parseEarthScene} from './prepared-schema.mts';
 import {parsePagedProfile} from '../../../../tools/objects/paged-ellipsoid/profile-source.mts';
 import {parseInteriorSource} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import { readFile } from 'node:fs/promises';

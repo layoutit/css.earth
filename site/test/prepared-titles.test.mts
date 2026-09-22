@@ -10,11 +10,11 @@ import { PLANET_TITLE_STANDARD, createPreparedTitleLayout } from "../../src/plat
 import { PLANET_TITLE_RECIPE } from
   "../../src/platform/planet-title-recipe.mts";
 import { SCENE_OBJECTS } from "../objects.mts";
-import { prepareShellTitles } from "../../tools/prepare-shell-titles.mts";
+import { prepareShellTitles } from "../../tools/prepare/prepare-shell-titles.mts";
 import { PREPARED_SHELL_TITLES } from "../prepared-shell-titles.mjs";
 import { SHELL_TITLE_SOURCES } from "../source/titles/manifest.mts";
 
-import { requireRecord, requireString, requireFiniteNumber } from '../../tools/source-values.mts';
+import { requireRecord, requireString, requireFiniteNumber } from '../../tools/sources/source-values.mts';
 const projectRoot = resolve(import.meta.dirname, "../..");
 
 test("generates all shared title assets once from checked source vectors", async (context) => {

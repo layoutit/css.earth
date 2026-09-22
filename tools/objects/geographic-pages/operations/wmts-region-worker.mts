@@ -4,7 +4,7 @@ import { mkdir, readFile, writeFile, rename, statfs } from "node:fs/promises";
 
 import { coverageLookup, prepareRegionPack} from "../prepare-wmts-tree.mts";
 import { parseGeographicScene, parseCoverage, parseRegionReceipt, shape, array, text, number } from '../source-records.mts';
-import { hasErrorCode } from '../../../source-values.mts';
+import { hasErrorCode } from '../../../sources/source-values.mts';
 const {scene,assetPath,directory,levels,dataset,version,lastLevel,reserveBytes}=shape({scene:parseGeographicScene,assetPath:text,directory:text,levels:array(parseCoverage),dataset:text,version:text,lastLevel:number,reserveBytes:number})(workerData);
 if (!parentPort) throw new Error('WMTS region worker requires a parent port');
 const port=parentPort;

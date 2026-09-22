@@ -5,8 +5,8 @@ import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
 import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmts-local-server.mts";
 import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
-import { searchServer } from './tools/search-server.mts';
-import { prepareContextAvailability } from "./tools/prepare-context-availability.mts";
+import { searchServer } from './tools/cli/search-server.mts';
+import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
 import { assetOrigin } from "./site/asset-origin.mts";
 
 function cssEarthVersion() {

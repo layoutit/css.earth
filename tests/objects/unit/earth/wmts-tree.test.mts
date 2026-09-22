@@ -1,4 +1,4 @@
-import {required} from "../../../../tools/test-values.mts";
+import {required} from "../../../../tools/contract/test-values.mts";
 import {pagePlanFixture,pageNodesFixture} from "./page-plan-fixture.mts";
 import {parseBlockReference} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import assert from "node:assert/strict";

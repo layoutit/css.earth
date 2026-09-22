@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test } from 'vitest';
 import { parsePreparedObjectRuntime } from './index.js';
-import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
+import { prepareActivationGroups } from '../../../../tools/prepared/prepared-activation-groups.mts';
 
 // The mutable fixture keeps the parsed-JSON shape the mutations below rely on.
 const source: ReturnType<typeof JSON.parse> = JSON.parse(await readFile(new URL('../../../objects/deimos/prepared/object.json', import.meta.url), 'utf8')).data;

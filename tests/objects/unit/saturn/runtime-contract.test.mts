@@ -3,7 +3,7 @@ import test from "node:test";
 import { readPreparedFixture } from "../../fixtures.mts";
 import { objectRuntimePackageTests } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 const runtimeDefinition = await readPreparedFixture('saturn', 'runtime');
 objectRuntimePackageTests(runtimeDefinition);
 test("Saturn's actual import closure has only shared runtime owners", async () => {

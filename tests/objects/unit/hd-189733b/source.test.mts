@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { BODIES, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { requireBodyFixedToIcrf, requireBodyOrbit } from '../../../../src/platform/solar-geometry.mts';
-import { requireArray, requireRecord } from '../../../../tools/source-values.mts';
+import { requireArray, requireRecord } from '../../../../tools/sources/source-values.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/hd-189733b/source');
 const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;

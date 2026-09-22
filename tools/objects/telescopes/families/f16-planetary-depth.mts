@@ -1,7 +1,7 @@
 /** Source-qualified planetary coordinate grids. This adapter validates and exports bytes; it owns no inversion physics. */
 import {spawn} from 'node:child_process';
 import {copyFile} from 'node:fs/promises';
-import {requireArray,requireFiniteNumber,requireRecord,requireString} from '../../../source-values.mts';
+import {requireArray,requireFiniteNumber,requireRecord,requireString} from '../../../sources/source-values.mts';
 import {astroqueryToolchain} from '../../astronomy-packages/toolchain.mts';
 import {pinFile} from '../../product-record.mts';
 import type {FamilyHandler,FamilyOperation} from '../family-handlers.mts';

@@ -25,7 +25,7 @@ preview`; the build first runs `setup:assets` itself, which only downloads
 files that are missing or changed.
 
 Maintainer flow after baking a body or a context object: bake locally, `node
-tools/publish-runtime-assets.mts --object=<id>` to publish every file its
+tools/assets/publish-runtime-assets.mts --object=<id>` to publish every file its
 `runtime-assets.json` and/or `prepared-assets.json` inventory (both kinds;
 see [Publishing prepared assets](#publishing-prepared-assets-maintainers)),
 then commit the refreshed inventory — never the baked files themselves.
@@ -53,12 +53,12 @@ inventory; R2 holds the bytes.
 1. Bake the object. `pnpm prepare:planets --object=<id>` for a body,
    `pnpm prepare:volume src/objects/<id>` for a volume field. From a clean
    checkout, `pnpm prepare:checkout` restores the pinned source downloads first.
-2. Publish the bytes: `node tools/publish-runtime-assets.mts --object=<id>`.
+2. Publish the bytes: `node tools/assets/publish-runtime-assets.mts --object=<id>`.
    Safe to repeat — keys are content-addressed, so it uploads only what is
    missing.
 3. Commit the refreshed `runtime-assets.json` and/or `prepared-assets.json`.
    **Never commit the baked files themselves**; they are gitignored.
-4. Confirm before pushing: `node tools/check-assets-published.mts --object=<id>`.
+4. Confirm before pushing: `node tools/assets/check-assets-published.mts --object=<id>`.
    **Run this yourself.** No pull-request check contacts R2 any more, so nothing
    between your keyboard and production will notice a missing key until the
    nightly sweep does.
@@ -93,18 +93,18 @@ Prepared runtime files are served from an R2 bucket, content-addressed as `runti
 After baking, publish and commit the refreshed inventory:
 
 ```sh
-node tools/publish-runtime-assets.mts --object=<id>
+node tools/assets/publish-runtime-assets.mts --object=<id>
 ```
 
 Omit `--object` to publish everything under `src/objects/`. The publisher is incremental: it checks every key first, uploads only the missing ones, then checks every key again, retries anything the bulk upload dropped, and byte-verifies every JSON key plus a sample of the rest. A publish that reports success has confirmed the files are live. JSON keys upload as `application/json`; everything else as `application/octet-stream`.
 
-`node tools/check-assets-published.mts [--object=<id> ...]` checks both inventories without uploading. It retries a miss before reporting it: longest (about two minutes, two at a time) for a network error, which it reports by its socket code. With `--added-since=<git ref>` it checks only the keys the branch's inventories add; `--added-since-last-green` compares with the last green `main` run. Only a real 404 fails it; other answers and unverified (network) keys are warnings, and `--report-only` never fails. A nightly workflow checks every key; pull requests check none.
+`node tools/assets/check-assets-published.mts [--object=<id> ...]` checks both inventories without uploading. It retries a miss before reporting it: longest (about two minutes, two at a time) for a network error, which it reports by its socket code. With `--added-since=<git ref>` it checks only the keys the branch's inventories add; `--added-since-last-green` compares with the last green `main` run. Only a real 404 fails it; other answers and unverified (network) keys are warnings, and `--report-only` never fails. A nightly workflow checks every key; pull requests check none.
 
-A second cache, `source-cache/<sha256>/<filename>`, mirrors pinned publisher inputs from fragile upstreams, such as a facility volume preview or a USGS Gazetteer export, so a build never depends on a third party's uptime. `node tools/publish-source-cache.mts --object=<id>` publishes every pin it can find for that object; run `node tools/restore-source-inputs.mts --object=<id>` first. `--file=<path> --sha256=<hex> --bytes=<n>` publishes one file directly. It verifies after publishing in the same way. The three pinned VizieR galaxy-field catalogues (`src/objects/nearby-universe/source/catalogue.json`) are mirrored the same way with `--file=...`; `pnpm prepare:galaxy-field` tries that mirror first and only queries VizieR live on a miss, so an ordinary clean build never depends on VizieR's uptime.
+A second cache, `source-cache/<sha256>/<filename>`, mirrors pinned publisher inputs from fragile upstreams, such as a facility volume preview or a USGS Gazetteer export, so a build never depends on a third party's uptime. `node tools/assets/publish-source-cache.mts --object=<id>` publishes every pin it can find for that object; run `node tools/assets/restore-source-inputs.mts --object=<id>` first. `--file=<path> --sha256=<hex> --bytes=<n>` publishes one file directly. It verifies after publishing in the same way. The three pinned VizieR galaxy-field catalogues (`src/objects/nearby-universe/source/catalogue.json`) are mirrored the same way with `--file=...`; `pnpm prepare:galaxy-field` tries that mirror first and only queries VizieR live on a miss, so an ordinary clean build never depends on VizieR's uptime.
 
 Both scripts need an authenticated `wrangler`. Neither ever deletes a key.
 
-`node tools/prune-runtime-assets.mts --dry-run` reports, and never deletes, the `runtime-assets/<sha256>/...` keys that are live in R2 but referenced by no current inventory. It never lists or reports on `scenes/` or `source-cache/`. It needs a separate read-only R2 API token, because `wrangler` cannot list a bucket's objects; the comment at the top of that file explains how to get and set one.
+`node tools/assets/prune-runtime-assets.mts --dry-run` reports, and never deletes, the `runtime-assets/<sha256>/...` keys that are live in R2 but referenced by no current inventory. It never lists or reports on `scenes/` or `source-cache/`. It needs a separate read-only R2 API token, because `wrangler` cannot list a bucket's objects; the comment at the top of that file explains how to get and set one.
 
 ## Check your change
 
@@ -157,7 +157,7 @@ documentation audits. Skip it once with `git push --no-verify` or
 `CSSEARTH_SKIP_HOOKS=1`; remove it with `git config --unset core.hooksPath`.
 
 Reference implementations live under `tools/oracles/` with their own pinned
-Python environment (`pnpm oracles:setup`); their fixtures under `tests/oracles/`
+Python environment (`node tools/oracles/setup.mts`); their fixtures under `tests/oracles/`
 are committed evidence, and the comparing tests run without Python. See
 [tools/oracles/README.md](tools/oracles/README.md) before adding or regenerating
 one. When an archive product has no reader, route or kernel bank yet, open an
@@ -167,12 +167,12 @@ GitHub Actions always runs Contract lint and the Object-scope gate. It also
 always runs Typecheck, the prepared-universe tests, the prepared-universe
 preparation and galaxy field job, and the nebula and renderer tests on every push
 to `main`; on a pull request it runs only the ones `.github/ci-areas.json` maps
-your changed paths to (`tools/ci-affected.mts`, computed by the "Classify
+your changed paths to (`tools/ci/ci-affected.mts`, computed by the "Classify
 changes" job) — a job it skips still reports success, never failure, so it never
 blocks merging. When in doubt about what a change affects, it runs everything. A
 nightly workflow checks that every inventoried asset is still published.
 
-`node tools/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
+`node tools/ci/check-object-runtime-ownership.mts --all` needs `prepare:object-json`'s prerequisites in place first
 (it reads every body's prepared JSON); run `pnpm setup:assets` (which restores `prepared/runtime.json` and
 `prepared/scene.json`, no longer committed) before it, or it fails on missing files rather than ownership defects.
 

@@ -1,4 +1,4 @@
-import { flagValue } from '../../cli-arguments.mts';
+import { flagValue } from '../../cli/cli-arguments.mts';
 import { JWST_CUBE_COVERAGE } from '../jwst/imaging/bands.mts';
 import { bandOfFilters } from '../jwst/imaging/archive.mts';
 import { queryCapabilities, type CapabilityRequest } from './query.mts';

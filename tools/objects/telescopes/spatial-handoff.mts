@@ -4,7 +4,7 @@ import { resolve,dirname,relative,isAbsolute } from 'node:path';
 import { randomUUID } from 'node:crypto';
 import { pathToFileURL } from 'node:url';
 import { build } from 'esbuild';
-import { requireRecord,requireString } from '../../source-values.mts';
+import { requireRecord,requireString } from '../../sources/source-values.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { writeProductRecord,type ProductInput } from '../product-record.mts';
 

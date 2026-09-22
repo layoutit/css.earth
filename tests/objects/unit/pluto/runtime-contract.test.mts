@@ -1,7 +1,7 @@
 // Draft replacement for the static-lane Pluto unit tests (preparation.test.mts, runtime-contract.test.mts,
 // scientific.test.mts / source.test.mts, surface-raster.test.mts, missing-coverage.test.mts retire with the lane).
 // Modelled on tests/objects/unit/venus/runtime-contract.test.mts and the Mars generic-lane draft.
-import { required } from '../../../../tools/test-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/objects/pluto/prepared/runtime.json" with { type: "json" };
@@ -12,7 +12,7 @@ import lenses from "../../../../src/objects/pluto/prepared/lenses.json" with { t
 import controls from "../../../../src/objects/pluto/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
 const LENS_IDS = ['surface', 'topography', 'monochrome', 'methane-ice', 'nitrogen-ice', 'water-ice'];
 

@@ -1,4 +1,4 @@
-import {requireRecord} from "../../../../tools/source-values.mts";
+import {requireRecord} from "../../../../tools/sources/source-values.mts";
 import {parsePagedProfile} from "../../../../tools/objects/paged-ellipsoid/profile-source.mts";
 import {parseCitySource} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import {parseCityFixtureManifest} from "./city-fixture-schema.mts";

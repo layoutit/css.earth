@@ -27,7 +27,7 @@ records exact equality of frame, point and cloud data against PR #215's initial
 commit. A prior cold-cache acquisition reproduced the two runtime assets
 byte-for-byte; it is an acquisition/reproduction check, not scientific acceptance.
 
-[Context provenance tests](../../../tools/context-provenance.test.mts) verify
+[Context provenance tests](../../../tools/contract/context-provenance.test.mts) verify
 output and inventory pins and reject changed bytes.
 [Catalogue tests](../../../tools/galaxy-field/catalogue.test.mts) check distance
 modulus scale and Cartesian axes. Runtime setup tests exercise installation,

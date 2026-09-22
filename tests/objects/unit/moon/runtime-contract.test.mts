@@ -1,8 +1,8 @@
 // Draft replacement for the static-lane Moon unit tests (preparation.test.mts, runtime-contract.test.mts,
 // scientific.test.mts / source.test.mts, surface-raster.test.mts, missing-coverage.test.mts retire with the lane).
 // Modelled on tests/objects/unit/venus/runtime-contract.test.mts and the Mars generic-lane draft.
-import { requireRecord } from '../../../../tools/source-values.mts';
-import { required } from '../../../../tools/test-values.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/objects/moon/prepared/runtime.json" with { type: "json" };
@@ -13,7 +13,7 @@ import text from "../../../../src/objects/moon/prepared/text.json" with { type: 
 import controls from "../../../../src/objects/moon/prepared/controls.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
 const LENS_IDS = ['surface', 'midnight-temperature', 'heat-anomalies', 'rock-abundance', 'topography', 'crust', 'silicate-signature', 'geology'];
 

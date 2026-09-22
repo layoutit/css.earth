@@ -13,7 +13,7 @@
  * kind enters through one small interface, a caster that can be turned about the body's pole, so the same
  * measurement serves a computed observer camera and a spacecraft kernel camera alike.
  */
-import { requireFiniteNumber } from '../../source-values.mts';
+import { requireFiniteNumber } from '../../sources/source-values.mts';
 import { rotate } from '../../spice/frames.mts';
 import { multiply } from '../../spice/ck.mts';
 import { createIndexedShape } from './obj-shape.mts';

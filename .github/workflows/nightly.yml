@@ -41,7 +41,7 @@ jobs:
         id: classify
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
+            node tools/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
           else
             echo "run_production=true" >> "$GITHUB_OUTPUT"
           fi
@@ -61,7 +61,7 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Generate the object registry
-        # `tools/prepare-catalog.mts` reaches `tools/prepare-object-discovery.mts`, which imports the built
+        # `tools/prepare/prepare-catalog.mts` reaches `tools/prepare/prepare-object-discovery.mts`, which imports the built
         # `src/renderers/css/dist/navigation.js`; `build:astronomy` alone never produces it, so the catalog step
         # died with ERR_MODULE_NOT_FOUND. `build:packages` + `build:renderer` are the two steps of `build:tools`
         # that produce it, without the preparation bundles this job never reads.
@@ -137,7 +137,7 @@ jobs:
           pnpm build:deploy
           pnpm check:deploy-assets
       - name: Check no page references a same-origin /scenes/ address
-        run: node tools/check-asset-origin-scenes.mts dist
+        run: node tools/assets/check-asset-origin-scenes.mts dist
       - name: Check production navigation loads content-addressed assets
         env:
           CSSEARTH_TEST_ORIGIN: http://127.0.0.1:4212

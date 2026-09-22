@@ -8,14 +8,14 @@ import sharp from "sharp";
 
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { optimizePreparedQ75Webp } from "../../tools/prepared-webp.mts";
+import { optimizePreparedQ75Webp } from "../../tools/prepared/prepared-webp.mts";
 import {
   BODY_MARKER_ATLAS_PAGE_SIZE,
   loadMarkerDescriptors,
   moveNavigationFile,
   prepareBodyMarkers,
   prepareNavigation,
-} from "../../tools/prepare-navigation.mts";
+} from "../../tools/prepare/prepare-navigation.mts";
 
 const projectRoot = resolve(import.meta.dirname, "../..");
 // Sidebar thumbnails share the directory but belong to prepare-sidebar-thumbnails, whose manifest lists them.

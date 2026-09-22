@@ -1,6 +1,6 @@
 import {shape,dictionary,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import {validateSourceManifest, type SourceEntry} from '../../../../src/platform/source-manifest.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test, { after, before } from "node:test";
 import { mkdtemp, mkdir, readFile, rename, rm, writeFile } from "node:fs/promises";

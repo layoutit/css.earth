@@ -10,7 +10,7 @@ import { ckSegments } from '../../../spice/ck.mts';
 import { parseTextKernel, number as kernelNumber, numbers as kernelNumbers } from '../../../spice/text-kernel.mts';
 import { parseSpacecraftClock, encodeClock, clockToEt, etToClock } from '../../../spice/sclk.mts';
 import { parseLeapSeconds, utcToEt, etToUtc } from '../../../spice/lsk.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../sources/source-values.mts';
 
 type Pixel = [number, number];
 type Vector = [number, number, number];

@@ -1,4 +1,4 @@
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};

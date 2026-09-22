@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Astropy pixel <-> world for tools/fits-sky.mts skyProjection, and region values for tools/fits.mts readFitsFileRegion.
+"""Astropy pixel <-> world for tools/fits/fits-sky.mts skyProjection, and region values for tools/fits/fits.mts readFitsFileRegion.
 Run with the pinned oracle environment; never imports the TypeScript helper.
 Each case is a TAN header, rotated or not. For deterministic sky points near the reference, Astropy's all_world2pix (origin 0)
 gives the expected zero-based pixels, and all_pix2world the expected directions of deterministic pixels. Headers marked `from`

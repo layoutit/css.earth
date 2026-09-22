@@ -23,9 +23,9 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsFileHdus, readFitsHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
+import { readFitsFileHdus, readFitsHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { requireFiniteNumber } from '../../source-values.mts';
+import { requireFiniteNumber } from '../../sources/source-values.mts';
 import { PROGRAMS } from './archive.mts';
 import { horizonsColumn, horizonsResponse, matchHorizonsEpochs, parseHorizonsTable, readHorizonsResponses, writeHorizonsResponses, type HorizonsResponses } from './line-stack-ephemeris.mts';
 import { observerCamera, type BodyOrientation } from '../terrestrial-layers/observer-camera.mts';

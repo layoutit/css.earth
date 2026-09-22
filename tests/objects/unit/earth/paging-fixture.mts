@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
-import { requireRecord } from '../../../../tools/source-values.mts';
-import { requireObjectRuntimeDefinition } from '../../../../tools/object-runtime-contract.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
+import { requireObjectRuntimeDefinition } from '../../../../tools/contract/object-runtime-contract.mts';
 
 // Optional paging conformance uses the retained prepared city/noise plans.
 // The current Earth registry intentionally mounts its fixed global dataset.

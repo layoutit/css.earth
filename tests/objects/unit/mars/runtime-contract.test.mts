@@ -1,6 +1,6 @@
 // Draft replacement for the affine-lane Mars unit tests. Modelled on
 // tests/objects/unit/venus/runtime-contract.test.mts and mercury/runtime-contract.test.mts.
-import { required } from '../../../../tools/test-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import runtimeDefinition from "../../../../src/objects/mars/prepared/runtime.json" with { type: "json" };
@@ -9,7 +9,7 @@ import scene from "../../../../src/objects/mars/prepared/scene.json" with { type
 import lenses from "../../../../src/objects/mars/prepared/lenses.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
 objectRuntimePackageTests(runtimeDefinition);
 

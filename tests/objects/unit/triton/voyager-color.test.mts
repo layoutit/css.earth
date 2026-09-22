@@ -7,8 +7,8 @@ import manifest from "../../../../src/objects/triton/source/manifest.json" with 
 import oracle from "../../../../src/objects/triton/source/reference/voyager-color-oracle.json" with { type: "json" };
 import raster from "../../../../src/objects/triton/source/preparation/raster.json" with { type: "json" };
 import assets from "../../../../src/objects/triton/prepared/assets.json" with { type: "json" };
-import { requireRecord } from "../../../../tools/source-values.mts";
-import { required } from "../../../../tools/test-values.mts";
+import { requireRecord } from "../../../../tools/sources/source-values.mts";
+import { required } from "../../../../tools/contract/test-values.mts";
 
 const frames = placement.frames as { id: string; observation: string; filter: string; kind: string; placed: boolean; pixelScaleKm: number;
   limb?: { accepted: boolean; rmsPixels: number; edgePoints: number; shiftPixels: number[] }; tiles?: { framePath: string; labelPath: string }[] }[];

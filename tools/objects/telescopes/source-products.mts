@@ -3,7 +3,7 @@ import { intakeSources, type SourceIntakeIssue } from './source-intake.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
-import { hasErrorCode, requireArray, requireRecord, requireString, requireFiniteNumber } from '../../source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
 import { pinFile, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import type { ProductKind } from './query.mts';

@@ -3,7 +3,7 @@ import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../../../tools/sources/source-values.mts';
 import { neutralDiscMarker } from '../../../../tools/objects/new-star.mts';
 
 const root = resolve(import.meta.dirname, '../../../../src/objects/polaris/source');

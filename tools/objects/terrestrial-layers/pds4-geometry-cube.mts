@@ -1,5 +1,5 @@
 import { pds4Blocks, pds4Elements, pds4Field } from '../pds-labels.mts';
-import { readFitsHdu, type FitsHeader } from '../../fits.mts';
+import { readFitsHdu, type FitsHeader } from '../../fits/fits.mts';
 import type { GeometryCubeDeclaration } from './source-records.mts';
 
 /**

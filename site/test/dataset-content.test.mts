@@ -4,7 +4,7 @@ import test from 'node:test';
 import { SCENE_OBJECTS } from '../objects.mts';
 import { validateDatasetText } from '../dataset-content.mts';
 import { parsePreparedText } from '../object-text.mts';
-import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
 
 const read = async (path: string): Promise<unknown> => JSON.parse(await readFile(new URL(path, import.meta.url), 'utf8'));
 

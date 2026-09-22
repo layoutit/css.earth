@@ -1,6 +1,6 @@
-import {requireRecord} from '../../../../tools/source-values.mts';
+import {requireRecord} from '../../../../tools/sources/source-values.mts';
 import {shape,text} from '../../../../tools/objects/geographic-pages/source-records.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from 'node:crypto';
@@ -10,7 +10,7 @@ import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/te
 import { initialObjectSelection } from "../../../../src/renderers/css/dist/testing.js";
 import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 objectRuntimePackageTests(runtimeDefinition);
 test('diagnostic page substitutions preserve the real renderer and verified prepared envelope',async()=>{
   const plan={...PREPARED_EARTH_CITY_PAGES,qualification:'Test-only prepared page substitution'};

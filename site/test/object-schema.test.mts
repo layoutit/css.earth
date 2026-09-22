@@ -15,7 +15,7 @@ import {
   discoverPlanetTests,
   resolvePlanetAssembly,
   resolvePlanetCommand,
-} from "../../tools/run-implemented-planets.mts";
+} from "../../tools/cli/run-implemented-planets.mts";
 
 const loadScene = async () => () => { throw new Error('Registry fixture does not mount a scene.'); };
 const fixture = Object.freeze({

@@ -1,8 +1,8 @@
 import { sha256 } from '../../../../src/platform/sha256.mts';
-import {refreshSourceRecord} from '../../../source-authoring-templates.mts';
+import {refreshSourceRecord} from '../../../sources/source-authoring-templates.mts';
 import { readFile, writeFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { parseAuthoringManifest, parseAuthoringDescriptor } from '../../../source-authoring-templates.mts';
+import { parseAuthoringManifest, parseAuthoringDescriptor } from '../../../sources/source-authoring-templates.mts';
 import { bodies } from './catalog.mts';
 const read = async (p: string): Promise<unknown> => JSON.parse(await readFile(p, 'utf8'));
 const write = async (p: string, value: unknown) => writeFile(p, JSON.stringify(value, null, 2) + '\n');

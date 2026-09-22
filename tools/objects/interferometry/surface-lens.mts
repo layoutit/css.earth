@@ -18,7 +18,7 @@
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsImage } from '../../fits.mts';
+import { readFitsImage } from '../../fits/fits.mts';
 import { headerBlock, padBlock, primaryHdu } from './fits-table.mts';
 
 const DEGREE = Math.PI / 180;

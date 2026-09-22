@@ -49,7 +49,7 @@ the mid-times this project's joint fit of the ten visits gives. [TRAPPIST-1b](..
 - Driven in a real browser: the system view draws the seven orbits, markers and labels around the star. The orbits are inclined
   89.7 to 89.9 degrees with the node at celestial north, so from the default angle they project onto a single line — the geometry
   that makes these planets transit.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffcd6a is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffcd6a is the colour lens's prepared colour.
 
 ## Known problems
 

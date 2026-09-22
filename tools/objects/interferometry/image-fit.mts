@@ -1,7 +1,7 @@
 /** Squared visibilities and closure phases an image predicts, and the reduced chi-squared against measured rows. The transform is
  * the optical-interferometry convention: V(u,v) = sum I(x,y) exp(-2 pi i (u alpha + v delta) / lambda) with alpha toward east
  * (decreasing column when east is on the left) and delta toward north (increasing row from the bottom in FITS order). */
-import type { SkyImageAxes } from '../../fits-sky.mts';
+import type { SkyImageAxes } from '../../fits/fits-sky.mts';
 
 export interface ImagePlane { readonly width: number; readonly height: number; readonly values: ArrayLike<number>; readonly pixelMas: number; readonly eastLeft: boolean }
 const MAS_RAD = Math.PI / 180 / 3.6e6;

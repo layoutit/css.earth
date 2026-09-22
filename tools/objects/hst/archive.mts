@@ -24,10 +24,10 @@
 import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsHeader, type FitsHeader } from '../../fits.mts';
+import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
 import { binaryTable, numbers, tableColumn, text as cell } from '../interferometry/fits-table.mts';
 import { readRepeatingHeader } from './product-file.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { MAST_CACHE, mastDownloadUrl, mastFile, mastRequest, type MastFile } from '../astronomy-packages/mast.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');

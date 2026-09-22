@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../../../tools/source-values.mts';
+import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../../../../tools/sources/source-values.mts';
 import { bindSipCamera, decodeLlorri } from '../../../../tools/objects/terrestrial-layers/llorri-geo.mts';
 import { llorriHeaderCamera } from '../../../../tools/objects/terrestrial-layers/llorri-header-camera.mts';
 import { loadKernelSet } from '../../../../tools/spice/kernel-set.mts';

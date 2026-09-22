@@ -3,7 +3,7 @@ import test from 'node:test';
 import { mkdtemp, mkdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { readPreparedFocusObjects } from '../../tools/prepare-navigation-destinations.mts';
+import { readPreparedFocusObjects } from '../../tools/prepare/prepare-navigation-destinations.mts';
 import { searchObjects } from '../object-search.mts';
 
 test('a source-owned globular cluster is discovered, classified and searched through the shared focus route', async () => {
