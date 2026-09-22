@@ -21,6 +21,7 @@ class FakeElement {
   constructor(ownerDocument: FakeDocument, localName = 'div') { this.ownerDocument = ownerDocument; this.localName = localName;
     Object.defineProperty(this.style, 'setProperty', { value: (name: string, value: string) => { this.style[name] = value; } });
   }
+  getAttributeNames(): string[] { return []; }
   append(child: FakeElement): void { this.insertBefore(child, null); }
   insertBefore(child: FakeElement, before: FakeElement | null): void {
     if (before && before.parentNode !== this) throw new TypeError('Invalid insertion point');
@@ -276,13 +277,13 @@ test('distant prepared images suspend the retained slice renderer and hand off b
   const sceneNodes = () => descendants(root).filter(node => node.className === 'css-volume-scene');
   expect(descendants(root).filter(node => node.style.backgroundImage)).toHaveLength(0);
   // While only impostors contribute, the slice renderer is not built at all.
-  expect(sceneNodes()).toHaveLength(0);
+  expect(sceneNodes().length).toBe(0);
   runtime.publish(publication(100));
   expect(descendants(root).filter(node => node.style.backgroundImage && !node.dataset.volumeImpostor)).toHaveLength(0);
   expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block');
   expect(distant.dataset.activeViews).toBe('1');
   runtime.publish(publication(50));
-  expect(sceneNodes()).toHaveLength(0);
+  expect(sceneNodes().length).toBe(0);
   runtime.publish(publication(200 / 24));
   const scenes = sceneNodes(), built = descendants(root);
   expect(scenes).toHaveLength(3);
@@ -393,4 +394,50 @@ test('native mounts build every node at mount, as the server-rendered DOM they a
   expect([count(lazyRoot, leaves), count(lazyRoot, points)]).toEqual([0, 0]);
   expect([count(eagerRoot, leaves), count(eagerRoot, points)]).toEqual([90, 3]);
   expect(count(eagerRoot, node => node.dataset.volumeImpostor !== undefined)).toBe(26);
+});
+
+test('a phone hands an impostor-sized cloud to its billboards instead of fading a live slice volume', () => {
+  const f = dom(), original = payload(), lens = original.lenses[0]!;
+  const directions = [
+    { id: 'front', back: [0, 0, 1] as const, right: [1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'back', back: [0, 0, -1] as const, right: [-1, 0, 0] as const, down: [0, -1, 0] as const },
+    { id: 'right', back: [1, 0, 0] as const, right: [0, 0, -1] as const, down: [0, -1, 0] as const },
+    { id: 'left', back: [-1, 0, 0] as const, right: [0, 0, 1] as const, down: [0, -1, 0] as const },
+  ];
+  const impostors = { schema: 'cssearth-volume-impostors@1' as const, radiusUnits: 1,
+    fullBelowDiameterPixels: 16, volumeAboveDiameterPixels: 32,
+    views: directions.map(view => ({ ...view, texturePath: `${view.id}.png` })) };
+  const data = { ...original, lenses: [{ ...lens, volume: { ...lens.volume, impostors,
+    resources: [...lens.volume.resources, ...impostors.views.map(view => ({ path: view.texturePath, sha256: 'b'.repeat(64), bytes: 1, width: 1, height: 1 }))] } }] };
+  // A responsive mount resolves its focal length in CSS. The fade reads the same resolved length, so the runtime can
+  // tell an invisible presentation from a contributing one instead of keeping both displayed.
+  const runtime = createPreparedVolumeLenses({ payload: data, resolveResource: path => `/prepared/${path}` })
+    .mount({ ...f.options, nativeFocalCss: '1000px' });
+  const reads: string[] = [];
+  Object.defineProperty(f.document, 'defaultView', { configurable: true, value: {
+    CSS: { registerProperty: () => {} },
+    getComputedStyle: (element: FakeElement) => { reads.push(element.localName);
+      return { getPropertyValue: (name: string) => element.style[name] ?? '' }; },
+  } });
+  const root = runtime.root as unknown as FakeElement, initial = descendants(root);
+  const detail = initial.find(node => node.className === 'css-volume-detail')!;
+  const distant = initial.find(node => node.className === 'css-volume-impostors')!;
+  const sceneNodes = () => descendants(root).filter(node => node.className === 'css-volume-scene');
+
+  // 1000px focal over a 100px prepared focal: at this distance the cloud covers 5 resolved pixels, below the
+  // 16px impostor threshold, so the slice volume leaves rendering and the billboards carry it.
+  runtime.publish(publication(400));
+  expect(detail.style.display).toBe('none'); expect(distant.style.display).toBe('block');
+  // A native mount adopts server-rendered nodes, so the slices exist; what changes is that they leave rendering.
+  expect(sceneNodes().length).toBe(3);
+  runtime.publish(publication(100));
+  expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('block');
+  expect(sceneNodes().length).toBe(3);
+  runtime.publish(publication(20));
+  expect(detail.style.display).toBe('block'); expect(distant.style.display).toBe('none');
+  const resolved = reads.length;
+  runtime.publish(publication(30)); runtime.publish(publication(500));
+  expect(reads.length).toBe(resolved);
+  expect(detail.style.display).toBe('none');
+  runtime.destroy();
 });
