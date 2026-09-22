@@ -369,7 +369,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const bodyLod = levelOfDetailFor(plan.camera.presentation.levelOfDetail, diameter);
         // An explicit category names bodies even when their orbits are subpixel.
         // The shared system fade and annotation collision budget still apply.
-        const proxyOpacity = highlighted ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
+        // A planet of a placed star is the whole of its system on screen: its circle does not fade with the size of its orbit,
+        // or the inner planet disappears at the very range that frames the system. The world's own focus keeps its rules: its
+        // planets are measured against the focus distance, below, as they always were.
+        const hostedPlanet = entry.orbit !== null && entry.orbit.centerBodyId !== plan.focus.id &&
+          systemFade.isSystemStar(entry.orbit.centerBodyId) && (annotationPriorities[body.id] ?? 0) >= 3;
+        const proxyOpacity = highlighted || hostedPlanet ? 1 : 1 - bodyLod.markerOpacity * (1 - appearance.opacity);
         const flightDestination = navigationInFlight && body.id === emphasizedId;
         const markerOpacity = (flightDestination ? bodyLod.proxyOpacity : isSelected ? lod.proxyOpacity : 1) *
           (isLocator ? 1 : systemOpacity * (isSelected || flightDestination ? 1 : proxyOpacity));
@@ -406,6 +411,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const { body, labelSize: size } = entry;
         const stablePlanet = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
           (annotationPriorities[body.id] ?? 0) >= 3;
+        const bodySystemOpacity = systemFade.of(entry.index);
         // An edge-on orbit can briefly drive the shared proxy alpha to zero.
         // During rotation, a planet locator that is already on stays on.
         if (stablePlanet && (rotationActive || preserveCommittedAnnotations) && entry.indicatorShown) projected.markerOpacity = 1;
@@ -428,9 +434,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // A landmark moon follows the same rule beside its planet: its circle while that clears the planet's
         // locator, its caption alone once its orbit collapses into it.
         const landmarkMoon = satellite && landmarkMoonIds.has(body.id);
-        const referenceAnnotationOnly = focusDistanceM <= plan.system.fadeOutStartDistanceM &&
-          ((annotationPriorities[body.id] ?? 0) >= 4 || landmarkMoon) && !resolvedDisc &&
-          labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
+        // A planet of a system star follows the same rule as a prepared reference: inside its own system it keeps its caption
+        // once its orbit is too small to carry a name, which is how an inner planet stays visible at the scale that frames
+        // the outer ones.
+        // The prepared references are measured against the world's own focus. A planet of another star is measured against
+        // that star instead, or it could never qualify: the camera is parsecs from the Sun whenever such a system is framed.
+        const hostedPlanet = stablePlanet && entry.orbit!.centerBodyId !== plan.focus.id;
+        const referenceAnnotationOnly = (focusDistanceM <= plan.system.fadeOutStartDistanceM &&
+            ((annotationPriorities[body.id] ?? 0) >= 4 || landmarkMoon) || hostedPlanet && bodySystemOpacity > 0) &&
+          !resolvedDisc && labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;
         // The retained DOM leaf shares this opacity between its sprite and both
         // annotation pseudos. A reference whose physical marker has faded must
         // still publish non-zero leaf opacity; `visible` keeps the sprite itself
@@ -443,7 +455,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
           circle = projected.circle = false;
         }
         // The destination stays named through the whole flight, across its preview fade.
-        const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc ? 1 : labelExtentOpacity(localExtent));
+        // A planet of the framed system keeps its name whatever its orbit measures on screen. The extent fade is for bodies
+        // read as neighbourhood: an inner planet is not less part of its system because the camera frames the outer one.
+        const alpha = flightDestination || referenceAnnotationOnly ? 1 : targeted ? markerOpacity : Math.min(markerOpacity, resolvedDisc || hostedPlanet ? 1 : labelExtentOpacity(localExtent));
         // Naming policy, decided before any slot is contested: suppressed, unresolved, too faint
         // or out of context here, and the body is not one this camera names at all.
         projected.nameable = !(entry.labelSuppressed || !annotationVisible || size.width === 0 ||
@@ -515,7 +529,16 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         }
         return admitted;
       })() : admitStableLabels(otherCandidates, labelBudget);
-      const accepted = [...acceptedLandmarks, ...acceptedOthers];
+      // Another star's planets are its whole system on screen, and one whose orbit lies inside the star's caption has no free
+      // slot to win. Each is named after every other candidate has chosen, on a budget of its own: it takes no slot from
+      // anything else, and it accepts sitting beside its star's caption rather than going unnamed.
+      const acceptedSet = new Set([...acceptedLandmarks, ...acceptedOthers].map(item => item.candidate));
+      const hostedPlanets = candidates.filter(candidate => !acceptedSet.has(candidate) &&
+        candidate.projected.entry.orbit !== null && candidate.projected.entry.orbit.centerBodyId !== plan.focus.id &&
+        systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
+        (candidate.tier ?? 0) >= 3 && candidate.projected.nameable);
+      const acceptedSystemPlanets = hostedPlanets.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
+      const accepted = [...acceptedLandmarks, ...acceptedOthers, ...acceptedSystemPlanets];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;

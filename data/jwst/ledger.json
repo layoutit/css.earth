@@ -1,11 +1,11 @@
 {
  "schema": "cssearth-jwst-ledger@2",
- "archiveDate": "2026-09-19",
+ "archiveDate": "2026-09-22",
  "modes": [
   {
    "mode": "NIRCAM/IMAGE",
-   "observations": 19388,
-   "targets": 2040,
+   "observations": 19434,
+   "targets": 2058,
    "movingObservations": 480,
    "tool": "tools/objects/jwst/imaging/image3.mts",
    "bands": 7,
@@ -13,7 +13,7 @@
     "ngc-3132-2733"
    ],
    "checked": [],
-   "shippedObjects": 21
+   "shippedObjects": 24
   },
   {
    "mode": "NIRCAM/CORON",
@@ -23,11 +23,12 @@
    "tool": "tools/objects/jwst/imaging/coron3.mts",
    "bands": 75,
    "programs": [
+    "beta-pictoris-4758",
     "hd-181327-2780",
     "hip-65426-1386"
    ],
    "checked": [],
-   "shippedObjects": 1
+   "shippedObjects": 5
   },
   {
    "mode": "NIRCAM/GRISM",
@@ -38,13 +39,13 @@
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 1
+   "shippedObjects": 3
   },
   {
    "mode": "MIRI/IMAGE",
-   "observations": 6850,
-   "targets": 2111,
-   "movingObservations": 174,
+   "observations": 6879,
+   "targets": 2132,
+   "movingObservations": 173,
    "tool": "tools/objects/jwst/imaging/image3.mts",
    "bands": 4,
    "programs": [
@@ -64,31 +65,31 @@
    "checked": [
     "trappist-1b-miri-3077"
    ],
-   "shippedObjects": 23
+   "shippedObjects": 27
   },
   {
    "mode": "MIRI/CORON",
-   "observations": 68,
+   "observations": 69,
    "targets": 41,
    "movingObservations": 0,
    "tool": null,
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 1
+   "shippedObjects": 4
   },
   {
    "mode": "MIRI/IFU",
-   "observations": 25596,
-   "targets": 1428,
-   "movingObservations": 1936,
+   "observations": 25668,
+   "targets": 1432,
+   "movingObservations": 1932,
    "tool": "tools/objects/jwst/cubes/spec3.mts",
    "bands": 12,
    "programs": [
     "europa-1250"
    ],
    "checked": [],
-   "shippedObjects": 36
+   "shippedObjects": 37
   },
   {
    "mode": "MIRI/SLIT",
@@ -99,7 +100,7 @@
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 8
+   "shippedObjects": 14
   },
   {
    "mode": "MIRI/SLITLESS",
@@ -118,12 +119,12 @@
     "hd-189733b-miri-2021-011",
     "wasp-43b-miri-1366"
    ],
-   "shippedObjects": 2
+   "shippedObjects": 5
   },
   {
    "mode": "NIRSPEC/IFU",
-   "observations": 2229,
-   "targets": 1256,
+   "observations": 2233,
+   "targets": 1257,
    "movingObservations": 637,
    "tool": "tools/objects/jwst/cubes/spec3.mts",
    "bands": 9,
@@ -141,21 +142,19 @@
     "sn-1987a-1232",
     "sn-1987a-3131"
    ],
-   "checked": [
-    "makemake-jw01254-o004_t001_nirspec_g235m-f170lp"
-   ],
-   "shippedObjects": 68
+   "checked": [],
+   "shippedObjects": 81
   },
   {
    "mode": "NIRSPEC/SLIT",
-   "observations": 3015,
-   "targets": 535,
+   "observations": 3016,
+   "targets": 536,
    "movingObservations": 42,
    "tool": null,
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 6
+   "shippedObjects": 9
   },
   {
    "mode": "NIRSPEC/MSA",
@@ -177,7 +176,7 @@
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 1
+   "shippedObjects": 2
   },
   {
    "mode": "NIRISS/SOSS",
@@ -188,7 +187,7 @@
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 1
+   "shippedObjects": 3
   },
   {
    "mode": "NIRISS/WFSS",
@@ -203,14 +202,14 @@
   },
   {
    "mode": "NIRISS/IMAGE",
-   "observations": 1745,
+   "observations": 1747,
    "targets": 373,
    "movingObservations": 17,
    "tool": null,
    "bands": 0,
    "programs": [],
    "checked": [],
-   "shippedObjects": 1
+   "shippedObjects": 2
   }
  ],
  "timeSeries": [
@@ -220,6 +219,9 @@
    "targets": 105,
    "shippedObjects": [
     "hd-189733b",
+    "hd-209458",
+    "k2-18",
+    "wasp-39",
     "wasp-43"
    ],
    "programs": [
@@ -235,7 +237,7 @@
   },
   {
    "exposure": "MIR_IMAGE",
-   "visits": 62,
+   "visits": 63,
    "targets": 17,
    "shippedObjects": [
     "trappist-1",
@@ -259,10 +261,13 @@
   },
   {
    "exposure": "NRS_BRIGHTOBJ",
-   "visits": 289,
-   "targets": 129,
+   "visits": 290,
+   "targets": 130,
    "shippedObjects": [
+    "k2-18",
     "trappist-1",
+    "wasp-39",
+    "wasp-39b",
     "wasp-43"
    ],
    "programs": [],
@@ -273,7 +278,9 @@
    "visits": 145,
    "targets": 66,
    "shippedObjects": [
-    "trappist-1"
+    "k2-18",
+    "trappist-1",
+    "wasp-39"
    ],
    "programs": [],
    "checked": []
@@ -283,7 +290,9 @@
    "visits": 99,
    "targets": 45,
    "shippedObjects": [
-    "hd-189733"
+    "hd-189733",
+    "hd-209458",
+    "wasp-39"
    ],
    "programs": [],
    "checked": []
@@ -293,7 +302,9 @@
    "visits": 101,
    "targets": 47,
    "shippedObjects": [
-    "hd-189733"
+    "hd-189733",
+    "hd-209458",
+    "wasp-39"
    ],
    "programs": [],
    "checked": []
@@ -305,7 +316,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o032_t008_nirspec_prism-clear",
@@ -316,8 +326,65 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "altair",
+   "observations": {
+    "NIRCAM/CORON": 4
+   },
+   "records": [],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4534",
+    "8507"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "amycus",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw01273-o006_t004_nirspec_prism-clear",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-04-21T06:07:05.015Z",
+     "endIso": "2023-04-21T06:20:56.563Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1273"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "ananke",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o004_t003_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-31T21:18:28.351Z",
+     "endIso": "2024-01-31T22:19:49.056Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
    ],
    "drawn": []
   },
@@ -326,7 +393,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01786-o005_t001_nirspec_g395m-f290lp",
@@ -345,6 +411,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1786"
    ],
@@ -355,7 +422,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02418-o013_t012_nirspec_prism-clear",
@@ -366,6 +432,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2418"
    ],
@@ -376,7 +443,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01191-o007_t006_nirspec_prism-clear",
@@ -387,6 +453,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1191"
    ],
@@ -397,7 +464,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw08782-o015_t001_nirspec_g235h-f170lp",
@@ -416,10 +482,62 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "8782"
    ],
    "drawn": []
+  },
+  {
+   "id": "beta-pictoris",
+   "observations": {
+    "MIRI/CORON": 4,
+    "MIRI/IFU": 52,
+    "MIRI/IMAGE": 6,
+    "NIRCAM/CORON": 5,
+    "NIRISS/AMI": 3,
+    "NIRSPEC/IFU": 3
+   },
+   "records": [
+    {
+     "id": "jw01563-o001_t001_nirspec_prism-clear",
+     "programme": "1563",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-12-07T09:00:34.485Z",
+     "endIso": "2023-12-07T10:45:37.501Z",
+     "filter": "CLEAR;PRISM"
+    },
+    {
+     "id": "jw12518-o001_t001_nirspec_g395h-f290lp",
+     "programme": "12518",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-03-29T14:27:15.968Z",
+     "endIso": "2026-03-29T15:29:00.311Z",
+     "filter": "F290LP;G395H"
+    },
+    {
+     "id": "jw12518-o002_t001_nirspec_g395h-f290lp",
+     "programme": "12518",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2026-03-29T15:50:30.963Z",
+     "endIso": "2026-03-29T16:52:15.306Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1241",
+    "1294",
+    "1411",
+    "1563",
+    "2297",
+    "4758",
+    "5298",
+    "12518"
+   ],
+   "drawn": [
+    "NIRCAM/CORON"
+   ]
   },
   {
    "id": "bienor",
@@ -428,8 +546,8 @@
     "MIRI/IMAGE": 1,
     "MIRI/SLIT": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "2820"
    ],
@@ -440,7 +558,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o005_t005_nirspec_prism-clear",
@@ -451,6 +568,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -462,7 +580,6 @@
     "MIRI/IFU": 24,
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02060-o003_t001_nirspec_g395h-f290lp",
@@ -489,9 +606,32 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2060",
     "4687"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "carme",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o008_t005_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-25T03:26:50.544Z",
+     "endIso": "2024-01-25T04:09:31.826Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
    ],
    "drawn": []
   },
@@ -501,7 +641,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01244-o001_t001_nirspec_g235h-f170lp",
@@ -520,6 +659,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1244"
    ],
@@ -533,7 +673,6 @@
     "MIRI/SLIT": 1,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01272-o006_t003_nirspec_prism-clear",
@@ -552,6 +691,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1272",
     "2820"
@@ -566,7 +706,6 @@
     "MIRI/SLIT": 1,
     "NIRSPEC/IFU": 15
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01191-o003_t001_nirspec_g140h-f100lp",
@@ -689,9 +828,64 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1191",
     "1658"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "chiron",
+   "observations": {
+    "NIRSPEC/IFU": 5
+   },
+   "records": [
+    {
+     "id": "jw01273-o008_t006_nirspec_g140m-f100lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-12T09:25:58.643Z",
+     "endIso": "2023-07-12T09:34:29.265Z",
+     "filter": "F100LP;G140M"
+    },
+    {
+     "id": "jw01273-o008_t006_nirspec_g235m-f170lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-12T09:39:50.241Z",
+     "endIso": "2023-07-12T09:55:38.511Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw01273-o008_t006_nirspec_g395m-f290lp",
+     "programme": "1273",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-07-12T10:00:44.930Z",
+     "endIso": "2023-07-12T10:21:54.190Z",
+     "filter": "F290LP;G395M"
+    },
+    {
+     "id": "jw04621-o001_t001_nirspec_g235m-f170lp",
+     "programme": "4621",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-09T02:31:39.079Z",
+     "endIso": "2024-01-09T02:59:36.840Z",
+     "filter": "F170LP;G235M"
+    },
+    {
+     "id": "jw04621-o001_t001_nirspec_g395h-f290lp",
+     "programme": "4621",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-09T03:04:57.866Z",
+     "endIso": "2024-01-09T03:54:19.461Z",
+     "filter": "F290LP;G395H"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1273",
+    "4621"
    ],
    "drawn": []
   },
@@ -701,7 +895,6 @@
     "MIRI/IFU": 32,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw05094-o002_t002_nirspec_prism-clear",
@@ -720,6 +913,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "5094",
     "9442"
@@ -731,8 +925,8 @@
    "observations": {
     "NIRCAM/IMAGE": 2
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "8527"
    ],
@@ -745,8 +939,8 @@
     "NIRCAM/IMAGE": 24,
     "NIRSPEC/SLIT": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "1245"
    ],
@@ -757,7 +951,6 @@
    "observations": {
     "NIRSPEC/IFU": 4
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o018_t003_nirspec_g235h-f170lp",
@@ -792,8 +985,31 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "elara",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o014_t008_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-18T21:57:58.922Z",
+     "endIso": "2024-01-18T22:28:01.548Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
    ],
    "drawn": []
   },
@@ -805,7 +1021,6 @@
     "NIRCAM/IMAGE": 6,
     "NIRSPEC/IFU": 9
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01250-o006_t002_nirspec_g140h-f100lp",
@@ -880,6 +1095,7 @@
      "filter": "F170LP;G235H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1250",
     "4320",
@@ -892,7 +1108,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw08782-o008_t007_nirspec_g235m-f170lp",
@@ -911,6 +1126,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "8782"
    ],
@@ -921,7 +1137,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01247-o414_t611_nirspec_prism-clear",
@@ -932,6 +1147,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1247"
    ],
@@ -944,7 +1160,6 @@
     "NIRCAM/IMAGE": 6,
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01191-o019_t002_nirspec_g140m-f100lp",
@@ -971,6 +1186,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1191",
     "6064"
@@ -985,7 +1201,6 @@
     "NIRCAM/IMAGE": 6,
     "NIRSPEC/IFU": 13
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01250-o002_t001_nirspec_g140h-f100lp",
@@ -1092,6 +1307,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1250",
     "4023",
@@ -1109,7 +1325,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02574-o002_t002_nirspec_g395m-f290lp",
@@ -1128,8 +1343,27 @@
      "filter": "F170LP;G235M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2574"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "fomalhaut",
+   "observations": {
+    "MIRI/CORON": 2,
+    "MIRI/IMAGE": 2,
+    "NIRCAM/CORON": 8,
+    "NIRCAM/IMAGE": 32
+   },
+   "records": [],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1193",
+    "3925",
+    "5557",
+    "9079"
    ],
    "drawn": []
   },
@@ -1138,7 +1372,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o006_t006_nirspec_prism-clear",
@@ -1157,6 +1390,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -1168,7 +1402,6 @@
     "MIRI/IFU": 24,
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01373-o028_t001_nirspec_g395h-f290lp",
@@ -1195,6 +1428,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1373"
    ],
@@ -1207,7 +1441,6 @@
     "MIRI/SLIT": 2,
     "NIRSPEC/IFU": 8
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01273-o002_t001_nirspec_g140m-f100lp",
@@ -1274,6 +1507,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1273"
    ],
@@ -1286,7 +1520,6 @@
     "NIRCAM/CORON": 12,
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01563-o005_t003_nirspec_prism-clear",
@@ -1297,6 +1530,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1563",
     "2780",
@@ -1311,11 +1545,11 @@
    "observations": {
     "NIRCAM/GRISM": 4
    },
+   "records": [],
    "timeSeriesVisits": {
     "NRC_TSGRISM": 4,
     "NRC_TSIMAGE": 4
    },
-   "records": [],
    "programmes": [
     "1185",
     "1274",
@@ -1328,10 +1562,10 @@
    "observations": {
     "MIRI/SLITLESS": 4
    },
+   "records": [],
    "timeSeriesVisits": {
     "MIR_LRS-SLITLESS": 4
    },
-   "records": [],
    "programmes": [
     "2001",
     "2021"
@@ -1342,11 +1576,28 @@
    ]
   },
   {
+   "id": "hd-209458",
+   "observations": {
+    "MIRI/SLITLESS": 1,
+    "NIRCAM/GRISM": 2
+   },
+   "records": [],
+   "timeSeriesVisits": {
+    "MIR_LRS-SLITLESS": 1,
+    "NRC_TSGRISM": 2,
+    "NRC_TSIMAGE": 2
+   },
+   "programmes": [
+    "1274",
+    "2667"
+   ],
+   "drawn": []
+  },
+  {
    "id": "hektor",
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01244-o010_t006_nirspec_prism-clear",
@@ -1357,6 +1608,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1244"
    ],
@@ -1368,8 +1620,8 @@
     "MIRI/IFU": 12,
     "NIRCAM/IMAGE": 6
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "1239",
     "6557"
@@ -1383,7 +1635,6 @@
     "MIRI/IMAGE": 2,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03760-o003_t002_nirspec_g235m-f170lp",
@@ -1402,6 +1653,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3760"
    ],
@@ -1413,7 +1665,6 @@
     "MIRI/SLIT": 1,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04028-o001_t001_nirspec_g395m-f290lp",
@@ -1432,6 +1683,7 @@
      "filter": "F170LP;G235M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4028"
    ],
@@ -1442,7 +1694,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02418-o003_t002_nirspec_prism-clear",
@@ -1453,6 +1704,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2418"
    ],
@@ -1464,8 +1716,8 @@
     "MIRI/IFU": 24,
     "MIRI/IMAGE": 3
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "5018"
    ],
@@ -1477,7 +1729,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01244-o006_t003_nirspec_g235h-f170lp",
@@ -1496,6 +1747,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1244"
    ],
@@ -1506,7 +1758,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o022_t005_nirspec_g235h-f170lp",
@@ -1525,6 +1776,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
    ],
@@ -1535,7 +1787,6 @@
    "observations": {
     "NIRSPEC/IFU": 4
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o024_t006_nirspec_g235h-f170lp",
@@ -1570,6 +1821,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
    ],
@@ -1582,7 +1834,6 @@
     "NIRISS/AMI": 1,
     "NIRSPEC/IFU": 6
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01373-o016_t007_nirspec_g140h-f100lp",
@@ -1633,6 +1884,7 @@
      "filter": "F100LP;G140H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1373",
     "4078",
@@ -1651,7 +1903,6 @@
     "NIRISS/IMAGE": 4,
     "NIRSPEC/IFU": 45
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01022-o013_t001_nirspec_g140h-f100lp",
@@ -2014,6 +2265,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1022",
     "1246",
@@ -2024,11 +2276,29 @@
    "drawn": []
   },
   {
+   "id": "k2-18",
+   "observations": {
+    "MIRI/SLITLESS": 2,
+    "NIRISS/SOSS": 1,
+    "NIRSPEC/SLIT": 6
+   },
+   "records": [],
+   "timeSeriesVisits": {
+    "MIR_LRS-SLITLESS": 2,
+    "NIS_SOSS": 1,
+    "NRS_BRIGHTOBJ": 6
+   },
+   "programmes": [
+    "2372",
+    "2722"
+   ],
+   "drawn": []
+  },
+  {
    "id": "kleopatra",
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01444-o001_t001_nirspec_g395m-f290lp",
@@ -2039,6 +2309,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1444"
    ],
@@ -2049,7 +2320,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o008_t007_nirspec_prism-clear",
@@ -2068,6 +2338,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -2079,8 +2350,8 @@
     "MIRI/IFU": 12,
     "MIRI/IMAGE": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "11793"
    ],
@@ -2092,7 +2363,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02574-o004_t005_nirspec_g395m-f290lp",
@@ -2111,6 +2381,7 @@
      "filter": "F170LP;G235M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2574"
    ],
@@ -2122,10 +2393,32 @@
     "MIRI/IFU": 12,
     "MIRI/IMAGE": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "11793"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "lysithea",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o010_t006_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-25T21:51:34.049Z",
+     "endIso": "2024-01-25T22:56:48.160Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
    ],
    "drawn": []
   },
@@ -2136,8 +2429,8 @@
     "MIRI/IMAGE": 10,
     "NIRCAM/IMAGE": 2
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "1714"
    ],
@@ -2149,8 +2442,8 @@
     "MIRI/IMAGE": 4,
     "NIRCAM/IMAGE": 8
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "2128",
     "3436"
@@ -2165,7 +2458,6 @@
     "NIRCAM/IMAGE": 37,
     "NIRSPEC/IFU": 32
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01288-c1005_t014_nirspec_g395h-f290lp",
@@ -2424,6 +2716,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1228",
     "1256",
@@ -2441,8 +2734,8 @@
    "observations": {
     "NIRSPEC/SLIT": 3
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "7929"
    ],
@@ -2453,8 +2746,8 @@
    "observations": {
     "NIRCAM/IMAGE": 2
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "8527"
    ],
@@ -2467,7 +2760,6 @@
     "MIRI/SLIT": 1,
     "NIRSPEC/IFU": 11
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01254-o004_t001_nirspec_g140m-f100lp",
@@ -2558,6 +2850,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1254",
     "9453"
@@ -2572,8 +2865,8 @@
     "NIRCAM/IMAGE": 14,
     "NIRSPEC/SLIT": 9
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "1415",
     "2787"
@@ -2585,7 +2878,6 @@
    "observations": {
     "NIRSPEC/IFU": 4
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o001_t001_nirspec_g235h-f170lp",
@@ -2620,6 +2912,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
    ],
@@ -2630,7 +2923,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o014_t003_nirspec_g235m-f170lp",
@@ -2649,6 +2941,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -2662,7 +2955,6 @@
     "NIRCAM/IMAGE": 4,
     "NIRSPEC/IFU": 45
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01249-o005_t001_nirspec_g395h-f290lp",
@@ -3025,6 +3317,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1249",
     "1604",
@@ -3038,7 +3331,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o012_t009_nirspec_prism-clear",
@@ -3049,6 +3341,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -3059,7 +3352,6 @@
    "observations": {
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01786-o008_t004_nirspec_g395m-f290lp",
@@ -3086,9 +3378,61 @@
      "filter": "F170LP;G235H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1786",
     "7813"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "okyrhoe",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw02418-o028_t031_nirspec_prism-clear",
+     "programme": "2418",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2022-11-03T11:32:30.869Z",
+     "endIso": "2022-11-03T12:06:04.166Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2418"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "omega-centauri",
+   "observations": {
+    "MIRI/IMAGE": 5,
+    "NIRCAM/IMAGE": 16,
+    "NIRISS/IMAGE": 2,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw05137-o001_t001_nirspec_g235h-f170lp",
+     "programme": "5137",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2025-06-10T06:48:45.183Z",
+     "endIso": "2025-06-10T17:02:27.744Z",
+     "filter": "F170LP;G235H"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1478",
+    "4343",
+    "5137",
+    "6154",
+    "6625",
+    "6632",
+    "8322"
    ],
    "drawn": []
   },
@@ -3098,7 +3442,6 @@
     "NIRCAM/IMAGE": 6,
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01231-o001_t001_nirspec_prism-clear",
@@ -3125,6 +3468,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1231",
     "6064"
@@ -3137,7 +3481,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02574-o003_t004_nirspec_g395m-f290lp",
@@ -3156,6 +3499,7 @@
      "filter": "F170LP;G235M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2574"
    ],
@@ -3167,7 +3511,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01244-o005_t002_nirspec_g235h-f170lp",
@@ -3186,6 +3529,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1244"
    ],
@@ -3196,7 +3540,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01247-o318_t633_nirspec_prism-clear",
@@ -3207,6 +3550,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1247"
    ],
@@ -3217,7 +3561,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01247-o312_t617_nirspec_prism-clear",
@@ -3228,8 +3571,30 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1247"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "pasiphae",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o006_t004_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-25T23:30:48.987Z",
+     "endIso": "2024-01-26T00:00:37.020Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
    ],
    "drawn": []
   },
@@ -3239,7 +3604,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02574-o001_t001_nirspec_g395m-f290lp",
@@ -3266,6 +3630,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1244",
     "2574"
@@ -3278,8 +3643,8 @@
     "MIRI/IFU": 4,
     "MIRI/IMAGE": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "1449"
    ],
@@ -3292,8 +3657,8 @@
     "NIRCAM/IMAGE": 2,
     "NIRSPEC/SLIT": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "1245"
    ],
@@ -3304,7 +3669,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o026_t007_nirspec_g235h-f170lp",
@@ -3323,6 +3687,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
    ],
@@ -3337,7 +3702,6 @@
     "NIRCAM/IMAGE": 24,
     "NIRSPEC/IFU": 15
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01191-o003_t001_nirspec_g140h-f100lp",
@@ -3460,6 +3824,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1191",
     "1658"
@@ -3472,7 +3837,6 @@
     "MIRI/IFU": 12,
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw02574-o005_t003_nirspec_g395m-f290lp",
@@ -3491,6 +3855,7 @@
      "filter": "F170LP;G235M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "2574"
    ],
@@ -3501,7 +3866,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o002_t002_nirspec_prism-clear",
@@ -3512,6 +3876,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -3522,7 +3887,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o011_t008_nirspec_prism-clear",
@@ -3541,6 +3905,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -3553,7 +3918,6 @@
     "MIRI/IMAGE": 2,
     "NIRSPEC/IFU": 12
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01731-c1006_t001_nirspec_g140h-f100lp",
@@ -3652,6 +4016,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1731"
    ],
@@ -3662,7 +4027,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o001_t001_nirspec_prism-clear",
@@ -3673,6 +4037,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -3684,7 +4049,6 @@
     "NIRCAM/IMAGE": 6,
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01273-o004_t002_nirspec_g140m-f100lp",
@@ -3711,6 +4075,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1273",
     "6064"
@@ -3722,7 +4087,6 @@
    "observations": {
     "NIRSPEC/IFU": 4
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o020_t004_nirspec_g235h-f170lp",
@@ -3757,6 +4121,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
    ],
@@ -3767,7 +4132,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01191-o016_t004_nirspec_prism-clear",
@@ -3778,6 +4142,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1191"
    ],
@@ -3790,7 +4155,6 @@
     "NIRCAM/IMAGE": 8,
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw05308-o001_t001_nirspec_g395h-f290lp",
@@ -3801,6 +4165,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1247",
     "5308"
@@ -3812,7 +4177,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01272-o008_t004_nirspec_prism-clear",
@@ -3823,8 +4187,31 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1272"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "sinope",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o012_t007_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-21T14:50:17.734Z",
+     "endIso": "2024-01-21T15:32:44.423Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
    ],
    "drawn": []
   },
@@ -3833,7 +4220,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw04645-o004_t004_nirspec_prism-clear",
@@ -3852,6 +4238,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "4645"
    ],
@@ -3863,8 +4250,8 @@
     "MIRI/IFU": 12,
     "MIRI/IMAGE": 1
    },
-   "timeSeriesVisits": {},
    "records": [],
+   "timeSeriesVisits": {},
    "programmes": [
     "11793"
    ],
@@ -3875,7 +4262,6 @@
    "observations": {
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01247-o319_t613_nirspec_prism-clear",
@@ -3886,6 +4272,7 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1247"
    ],
@@ -3896,7 +4283,6 @@
    "observations": {
     "NIRSPEC/IFU": 4
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw03716-o016_t002_nirspec_g235h-f170lp",
@@ -3931,8 +4317,52 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "3716"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "themisto",
+   "observations": {
+    "MIRI/SLIT": 1,
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw04028-o002_t002_nirspec_prism-clear",
+     "programme": "4028",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2024-01-31T05:15:38.701Z",
+     "endIso": "2024-01-31T06:51:31.081Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "4028"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "thereus",
+   "observations": {
+    "NIRSPEC/IFU": 1
+   },
+   "records": [
+    {
+     "id": "jw02418-o008_t011_nirspec_prism-clear",
+     "programme": "2418",
+     "mode": "NIRSPEC/IFU",
+     "startIso": "2023-01-17T01:30:31.674Z",
+     "endIso": "2023-01-17T01:54:36.042Z",
+     "filter": "CLEAR;PRISM"
+    }
+   ],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "2418"
    ],
    "drawn": []
   },
@@ -3943,7 +4373,6 @@
     "NIRCAM/IMAGE": 54,
     "NIRSPEC/IFU": 13
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01251-o004_t002_nirspec_g140h-f070lp",
@@ -4050,6 +4479,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1251",
     "2760",
@@ -4062,7 +4492,6 @@
    "observations": {
     "NIRSPEC/IFU": 3
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01786-o007_t003_nirspec_g395m-f290lp",
@@ -4089,6 +4518,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1786"
    ],
@@ -4100,12 +4530,12 @@
     "NIRISS/SOSS": 9,
     "NIRSPEC/SLIT": 29
    },
+   "records": [],
    "timeSeriesVisits": {
     "MIR_IMAGE": 10,
     "NIS_SOSS": 9,
     "NRS_BRIGHTOBJ": 29
    },
-   "records": [],
    "programmes": [
     "1201",
     "1331",
@@ -4126,10 +4556,10 @@
   {
    "id": "trappist-1b",
    "observations": {},
+   "records": [],
    "timeSeriesVisits": {
     "MIR_IMAGE": 10
    },
-   "records": [],
    "programmes": [
     "1177",
     "1279"
@@ -4145,7 +4575,6 @@
     "MIRI/IMAGE": 8,
     "NIRSPEC/IFU": 6
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01272-o003_t001_nirspec_g140h-f100lp",
@@ -4196,6 +4625,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1272"
    ],
@@ -4206,7 +4636,6 @@
    "observations": {
     "NIRSPEC/IFU": 2
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01786-o002_t002_nirspec_g395m-f290lp",
@@ -4225,6 +4654,7 @@
      "filter": "F290LP;G395M"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1786"
    ],
@@ -4238,7 +4668,6 @@
     "NIRCAM/IMAGE": 36,
     "NIRSPEC/IFU": 49
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01248-o002_t001_nirspec_g395h-f290lp",
@@ -4633,6 +5062,7 @@
      "filter": "F290LP;G395H"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1248",
     "2739",
@@ -4652,7 +5082,6 @@
     "NIRCAM/IMAGE": 12,
     "NIRSPEC/IFU": 1
    },
-   "timeSeriesVisits": {},
    "records": [
     {
      "id": "jw01254-o006_t002_nirspec_prism-clear",
@@ -4663,9 +5092,62 @@
      "filter": "CLEAR;PRISM"
     }
    ],
+   "timeSeriesVisits": {},
    "programmes": [
     "1254",
     "4541"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "vega",
+   "observations": {
+    "MIRI/CORON": 2,
+    "MIRI/IMAGE": 2,
+    "NIRCAM/CORON": 6,
+    "NIRCAM/IMAGE": 5
+   },
+   "records": [],
+   "timeSeriesVisits": {},
+   "programmes": [
+    "1193"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "wasp-39",
+   "observations": {
+    "MIRI/SLITLESS": 1,
+    "NIRCAM/GRISM": 1,
+    "NIRISS/SOSS": 1,
+    "NIRSPEC/SLIT": 3
+   },
+   "records": [],
+   "timeSeriesVisits": {
+    "MIR_LRS-SLITLESS": 2,
+    "NIS_SOSS": 1,
+    "NRC_TSGRISM": 1,
+    "NRC_TSIMAGE": 1,
+    "NRS_BRIGHTOBJ": 3
+   },
+   "programmes": [
+    "1366",
+    "2783",
+    "5634"
+   ],
+   "drawn": []
+  },
+  {
+   "id": "wasp-39b",
+   "observations": {
+    "NIRSPEC/SLIT": 2
+   },
+   "records": [],
+   "timeSeriesVisits": {
+    "NRS_BRIGHTOBJ": 2
+   },
+   "programmes": [
+    "8017"
    ],
    "drawn": []
   },
@@ -4675,11 +5157,11 @@
     "MIRI/SLITLESS": 1,
     "NIRSPEC/SLIT": 1
    },
+   "records": [],
    "timeSeriesVisits": {
     "MIR_LRS-SLITLESS": 1,
     "NRS_BRIGHTOBJ": 1
    },
-   "records": [],
    "programmes": [
     "1224",
     "1366"

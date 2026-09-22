@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-1905-12545",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Zwintz et al. (2019): Revisiting the pulsational characteristics of the exoplanet host star beta Pictoris",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "1905.12545"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1051/0004-6361/201834744"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/1905.12545",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1051/0004-6361/201834744",
+      "label": "Astronomy & Astrophysics 627, A28"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/1905.12545",
+      "checkedOn": "2026-09-22",
+      "locator": "Table 4: Teff 8090 +/- 59 K and radius 1.497 +/- 0.025 solar radii from the seismic model; radius 1.538 +/- 0.040 deduced from the parallax and the interferometric diameter; the average spectroscopic temperature 8143 +/- 67 K"
+    },
+    {
+      "path": "src/objects/beta-pictoris/source/content/object.json",
+      "locator": "/panel/facts/3"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "K. Zwintz",
+    "D. R. Reese",
+    "C. Neiner",
+    "A. Pigulski",
+    "R. Kuschnig"
+  ]
+}

@@ -2,7 +2,7 @@
 
 Hubble images and spectra reach this project as MAST products. This guide describes how one archive observation is pinned, re-calibrated here from its raw exposure on Hubble's own software, and checked against the archive's own product. The route is the one [JWST imaging](jwst-imaging.md) and [interferometric imaging](interferometric-imaging.md) follow: pin, re-run, compare, write a receipt. What the archive holds, and how much of it this route reaches, is the [Hubble ledger](hubble-ledger.md).
 
-Nothing is drawn from Hubble data yet. What exists is the toolkit, its proof on five Europa observations across three instruments, two measurements made from the archive's own products, [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame, and [bands mapped from a slit scanned across a body](#bands-mapped-from-a-slit-scanned-across-a-body), one stage that goes back behind those products to the photons themselves, [an exposure rebuilt in a moving target's frame](#an-exposure-rebuilt-in-a-moving-targets-frame), and one that makes nothing at all, [the archive's own final products of the instruments whose calibration is frozen](#archive-final-products-of-retired-instruments).
+One Hubble dataset is drawn: [Beta Pictoris's debris disc](#a-coronagraphs-starlight-removed) in three ACS/HRC filters. What exists beside it is the toolkit, its proof on five Europa observations across three instruments, two measurements made from the archive's own products, [line images of a moving target](#line-images-of-a-moving-target), stacked in the target's frame, and [bands mapped from a slit scanned across a body](#bands-mapped-from-a-slit-scanned-across-a-body), one stage that goes back behind those products to the photons themselves, [an exposure rebuilt in a moving target's frame](#an-exposure-rebuilt-in-a-moving-targets-frame), and one that makes nothing at all, [the archive's own final products of the instruments whose calibration is frozen](#archive-final-products-of-retired-instruments).
 
 ## Stages
 
@@ -191,6 +191,38 @@ Four things are worth knowing before re-using it. The good-time table matters: a
 - **Half a pixel of registration moves these numbers, which is the whole point of the argument.** Correcting the rounding described above, a shift of about 0.7 pixels on this grid, took the 5x5 bin from 3.53 to 3.10 and its mirrored twin from 2.96 to 2.01, and took the 7x7 bin the other way, from 3.08 to 3.96 (**measured**, the same events reduced twice). Giono et al. name exactly this: a misalignment of a pixel distorts the limb statistics. In both reductions the darkest bin stays under twice the limb annulus's own scatter.
 - **Not verified, and the reason the numbers above are not a reproduction of anyone's.** Neither model the paper builds is built here: not the Jovian background accumulated from one-second slices in Jupiter's own rest frame with Europa's path masked out, and not the Europa model from the USGS Galileo mosaic with an Oren-Nayar illumination function and a composite TinyTim point-spread function. A degree-3 polynomial fitted outside 1.6 Europa radii and the azimuthal average of the data stand in for them, and Jupiter's belts survive that fit. Geometric distortion is not corrected either. What is comparable with the paper is where the darkest bin lies and how much the statistics really scatter, not the significance itself.
 
+## A coronagraph's starlight removed
+
+A coronagraph blocks a star's core, but the light it diffracts and scatters is still far brighter than a debris disc beside it. The archive stops there: MAST's ACS/HRC coronagraph products still carry the star. [`psf-subtract.mts`](../tools/objects/hst/psf-subtract.mts) is the stage that removes it, by reference-star differential imaging: a star of similar colour, observed behind the same occulter in the orbits next to the science target, carries the same pattern of starlight, and scaled and shifted onto the science star it cancels it.
+
+A subtraction is a record, `programs/<id>.psf-subtraction.json`: the pinned program, and for each filter the science associations at each telescope roll and the reference star's, each a long exposure and a shorter one. Every association is re-calibrated from raw by `calibrate.mts`, with the coronagraphic spot flat CRDS selects. Then, per filter and roll:
+
+1. Each star's long and short CR-rejected frames are put in electrons per second and merged. A pixel the long frame flags as saturated is taken from the short frame.
+2. Each star is found as the point about which its PSF is most nearly symmetric under a half turn, over an annulus with the disc's strip left out. The brightest pixel near the core is not the star: the long frames saturate and bleed there.
+3. The reference is divided by the two stars' flux ratio in the band, **a published value the record cites**, and shifted onto the science star by cubic spline. Only the shift is fitted, by least squares over an annulus about the star with the disc's strip left out. The scale a free fit would choose there is reported beside it as a check and not used, because a paper's number outranks one fitted here.
+4. The shifted reference is subtracted, and the occulter and every flagged pixel are left blank. stwcs writes the distortion model into the frame's WCS, and AstroDrizzle puts it on the sky north up, with the kernel and scale of the archive's own drizzled product of that observation.
+
+Each drizzled result has its [product record](../tools/objects/product-record.mts) beside it: the four calibrated frames at their digests, the flux ratio and its source, the fitted shift, the free-fit check, the residual before and after, and the star's sky position. `psf-subtract.test.mts` checks that every association a subtraction names is pinned in its program through its band, on the star it says, and that a missing or impossible flux ratio is refused.
+
+### Beta Pictoris, programme 9987
+
+[`beta-pictoris-9987.psf-subtraction.json`](../tools/objects/hst/programs/beta-pictoris-9987.psf-subtraction.json) is the run of Golimowski et al. (2006, AJ 131, 3109): Beta Pictoris behind the 1.8 arcsecond spot on 1 October 2003 through F435W, F606W and F814W at two rolls, and alpha Pictoris, the reference, in the orbit before. The flux ratios are theirs, from Synphot (Section 2.2): alpha Pic over beta Pic is 1.65, 1.75 and 1.90, each uncertain by 2%. Measured on 22 September 2026 at CRDS context `hst_1358.pmap`.
+
+| band, roll | fitted shift (pixels) | scale used | free-fit scale | residual before, after (e⁻/s) |
+|---|---|---|---|---|
+| F435W, roll 1 | (-0.38, +0.62) | 0.606 | 1.02 | 2.06, 1.26 |
+| F435W, roll 2 | (-0.32, +0.55) | 0.606 | 1.04 | 2.16, 1.30 |
+| F606W, roll 1 | (-0.76, +0.38) | 0.571 | 1.09 | 4.53, 3.19 |
+| F606W, roll 2 | (-0.67, +0.28) | 0.571 | 1.12 | 4.78, 3.28 |
+| F814W, roll 1 | (-0.62, +0.37) | 0.526 | 0.87 | 2.47, 1.48 |
+| F814W, roll 2 | (-0.69, -0.50) | 0.526 | 0.87 | 2.60, 1.52 |
+
+**The shifts agree with the paper.** Golimowski et al. found the two stars 0.8 pixel apart; the shifts here are 0.6 to 0.9 pixel. The two rolls agree to 0.1 pixel in F435W and F606W. In F814W the second roll's vertical shift is 0.9 pixel from the first's, which is **not explained**.
+
+**The scale does not.** A free fit would scale alpha Pic's light 1.7 to 2.0 times higher than the paper's ratio allows. The fit annulus holds disc light, so some of that is expected, but not all of it: 9 to 12 arcseconds out and more than 6 arcseconds off the midplane, where the disc is faint, beta Pic's raw halo in F435W is 0.81 of alpha Pic's in both the long and the short frames, where the paper's ratio predicts 0.61. The paper refined its normalisation by eye and does not print the final factors. So the stated ratios are used, and what they leave, about a quarter of beta Pic's own halo far from the disc, stays in the image.
+
+**The disc's colour does not match the paper's.** Divided by the star's brightness from the paper's magnitudes and Sirianni et al.'s (2005) zero points, the midplane 40 to 100 au out gives F606W/F435W 0.94 and F814W/F435W 0.92: slightly bluer than the star. Golimowski et al. measure it redder, F435W−F606W about +0.07 magnitude before deconvolution, a ratio near 1.07. The light the subtraction leaves beside the disc, 15 to 35 au off the midplane, is 16 to 19% of the midplane there, and it is bluer than the star (F606W/F435W 0.81, F814W/F435W 0.77), because the paper's ratios leave a different share of the halo in each band. That pulls the midplane toward blue. How much of the difference it explains is **not measured**.
+
 ## Archive-final products of retired instruments
 
 WFPC2, the Faint Object Spectrograph and the Goddard High Resolution Spectrograph cannot be re-calibrated here: their pipelines are retired and are not in `hstcal`. That is a fact about this repository, and it is not the same fact as whether their observations are usable. STScI says what happened to them: "Data from HST legacy instruments are preserved in a static form, and there are no plans to regularly reprocess these data... For ACS/HRC, FOC, FOS, GHRS, NICMOS, and WFPC2, no further improvements in the calibration for these instruments are expected. The user is provided with a copy of the raw and final calibrated data from the archive once a request is made." ([Archive overview](https://hst-docs.stsci.edu/hstdhb/1-obtaining-hst-data/1-1-archive-overview), section 1.1.1.) The calibration is frozen, not missing, and nearly three hundred thousand public observations sit behind it.
@@ -231,13 +263,13 @@ An instrument with no qualified dataset keeps its archive products listed in the
 
 - No COS, WFPC2, NICMOS, FOC, FOS, GHRS, WFPC, HSP or FGS observation can be **re-calibrated** here: `calcos` is not installed, and the rest of those pipelines are retired and not in `hstcal`. For WFPC2, the FOS and the GHRS the archive's own final products are pinned and read instead ([above](#archive-final-products-of-retired-instruments)); for the others nothing is pinned. The [ledger](hubble-ledger.md) says how much of the archive each of those is.
 - The archive-final route pins one observation per program and makes nothing. It does not re-calibrate, it does not compare, and it does not establish that the archive's calibration is right. Nothing was measured about where Europa is on the sky in any of these three products, and no ephemeris was consulted: the picture's disc is where the light is, not where a body was.
-- WFC3/IR, STIS/NUV-MAMA and ACS/WFC and /HRC are handled by pipelines that are installed here, and no exposure of any of them has been run. Whether they reproduce is **not verified**.
+- ACS/HRC has been run on programme 9987: calacs reproduces the archive's combined product of `j8qj15060` with 72% of samples bit-identical and the largest relative difference 1.5e-5. WFC3/IR, STIS/NUV-MAMA and ACS/WFC are handled by pipelines that are installed here, and no exposure of any of them has been run. Whether they reproduce is **not verified**.
 - The comparison reads two- and three-axis image extensions and binary tables. A four-axis extension is reported as uncomparable, not sampled. No image extension over 64 million samples and no table file over 64 MiB is read.
 - The re-run trusts the raw files and the support files as the archive stores them. Nothing upstream of `_raw` is reproduced.
 - The relative difference is taken over samples above the median level. On a rectified image whose median level is zero that admits near-empty pixels, so the quantiles matter more than the largest value.
 - Only a single-image drizzle is attempted, and its weight image is not reproduced (above).
 - The ledger pass asks MAST about fifty times and takes half an hour or more; the cone searches are the slow part, and one of them once stopped answering altogether. Each request has a four-minute deadline and three attempts; a cone search that still will not answer is recorded as unanswered rather than throwing the pass away. `--local` rewrites only the pinned-and-checked columns, from the ledger already on disk.
-- Nothing here is drawn. No Hubble observation has been turned into a lens or an object dataset.
+- Only the Beta Pictoris disc is drawn. The PSF subtraction handles one reference star per band and fits only a shift; it does not use several references or a principal-component model.
 
 ## Re-running
 

@@ -1,0 +1,151 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "beta-pictoris-d",
+  "type": "layered-body",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Beta Pictoris d",
+      "steps": [
+        "verify-sources",
+        "title",
+        "assets",
+        "panel-content",
+        "lenses",
+        "starfield",
+        "system-markers",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "schema": "cssearth-authored-object@1",
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "geometry",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "emission"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "sphere",
+        "radiusKm": 90079.92
+      },
+      "materials": [
+        {
+          "id": "emission",
+          "source": "raster",
+          "model": "emissive"
+        }
+      ],
+      "sources": [
+        {
+          "id": "raster",
+          "path": "source/preparation/raster.json"
+        },
+        {
+          "id": "geometry",
+          "path": "source/preparation/geometry.json"
+        },
+        {
+          "id": "celestial",
+          "path": "source/preparation/celestial.json"
+        },
+        {
+          "id": "presentation",
+          "path": "source/preparation/presentation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "solar-system",
+          "path": "source/presentation/solar-system.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ],
+      "emission": {
+        "source": "raster",
+        "material": "emission"
+      }
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/planet-surfaces.css",
+        "src/renderers/css/styles/beta-pictoris-d-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json"
+      }
+    },
+    "catalog": {
+      "name": "Beta Pictoris d",
+      "classification": "exoplanet",
+      "color": "#9a9a9a",
+      "distanceAu": 4049937,
+      "description": "Giant planet 26 au from Beta Pictoris, imaged with VLT/ERIS and JWST in 2026.",
+      "systemName": "Beta Pictoris system",
+      "order": 1212,
+      "context": {
+        "order": 1212
+      }
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        21113984518228664,
+        380151409155598000,
+        -471283148441853600
+      ],
+      "presentationToReference": [
+        0.05019579703299151,
+        -0.8789826639016066,
+        0.4742044480186346,
+        0.6334686462886946,
+        -0.3390563823413356,
+        -0.6955273134556074,
+        -0.7721384954329057,
+        -0.3353061976075617,
+        -0.5397887528622354
+      ],
+      "orbitUpReference": [
+        0.8789826639016066,
+        0.3390563823413356,
+        0.3353061976075617
+      ],
+      "metersPerUnit": 290580.3870967742,
+      "bodyRadiusM": 90079920
+    }
+  },
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "7b1fa71bb936c2368c53cc570a887bae57fd5eaf5438efa6535f527b540adc66"
+  }
+}

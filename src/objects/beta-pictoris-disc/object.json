@@ -1,0 +1,44 @@
+{
+  "schema": "cssearth-object@1",
+  "id": "beta-pictoris-disc",
+  "type": "volume-lens-bank",
+  "properties": {
+    "frame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        21112473235951410,
+        380154975400486800,
+        -471282792847974660
+      ],
+      "localToReferenceXyzw": [
+        0.026150604506501703,
+        0.9424705366270727,
+        0.3331365954701011,
+        0.009243496763260849
+      ],
+      "metersPerUnit": 149597870700,
+      "boundsUnits": {
+        "min": [
+          -135,
+          -135,
+          -135
+        ],
+        "max": [
+          135,
+          135,
+          135
+        ]
+      }
+    },
+    "preparation": {
+      "source": "source/delivery.json",
+      "sha256": "127142d234cd012af0a98b7eb7ba6de30a57a76e0cc5298318a36ecd5dbf508d"
+    }
+  },
+  "prepared": {
+    "format": "cssearth-volume-lenses@1",
+    "url": "prepared/lenses.json",
+    "sha256": "d919a671d3ee163fa78c6d7bfc787eb538d67c61809fc2262fedc945917a3011"
+  }
+}

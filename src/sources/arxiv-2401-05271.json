@@ -1,0 +1,49 @@
+{
+  "id": "arxiv-2401-05271",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Rebollido et al. (2024): JWST-TST High Contrast: Asymmetries, dust populations and hints of a collision in the beta Pictoris disk with NIRCam and MIRI",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2401.05271"
+    },
+    {
+      "type": "DOI",
+      "value": "10.3847/1538-3881/ad1759"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/2401.05271",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.3847/1538-3881/ad1759",
+      "label": "The Astronomical Journal 167, 69"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2401.05271",
+      "checkedOn": "2026-09-22",
+      "locator": "Section 4.1 and Table 3: main-disc position angle 29.1 +/- 1.1 degrees in the NIRCam short-wavelength channel and 29.6 +/- 1.4 in the long, counterclockwise from north; Apai et al. (2015) 29.1 +/- 0.1; the NW side of the main disc is nearer to us; the secondary disc is tilted about 5-6 degrees; the cat's tail extends to the SW"
+    },
+    {
+      "path": "src/objects/beta-pictoris/investigations.json",
+      "locator": "/entries/4"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "I. Rebollido",
+    "C. C. Stark",
+    "J. Kammerer",
+    "M. D. Perrin",
+    "K. Lawson"
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "schema": "cssearth-hst-reproduction@1",
+  "program": "beta-pictoris-9987",
+  "observation": "j8qj15060",
+  "product": "j8qj15vkq_flt",
+  "instrument": "ACS/HRC",
+  "opticalElement": "F435W",
+  "toolchain": "tools/objects/hst/toolchain.json",
+  "crdsContext": "hst_1358.pmap",
+  "mast": {
+    "name": "j8qj15vkq_flt.fits",
+    "uri": "mast:HST/product/j8qj15vkq_flt.fits",
+    "bytes": 10762560,
+    "sha256": "63ac8087fdf7faafb65ca91678c3140e7332b6db74715123d3fa8d420c2b3bab",
+    "CAL_VER": "10.4.1 (08-Aug-2025)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61188.09491898,
+    "FILENAME": "j8qj15vkq_flt.fits",
+    "DATE": "2026-05-28"
+  },
+  "local": {
+    "sha256": "dd3b8ec9ac4e138f4191afa7dc8ee00dc8efb87b15fed060d51cdf973359930e",
+    "CAL_VER": "10.4.1 (08-Aug-2025)",
+    "OPUS_VER": "HSTDP 2026_1",
+    "PROCTIME": 61188.09491898,
+    "FILENAME": "j8qj15vkq_flt.fits",
+    "DATE": "2026-09-22"
+  },
+  "differentSettings": {},
+  "differentGrid": [
+    "HDRLET,1: the re-run product has no such extension",
+    "HDRLET,2: the re-run product has no such extension",
+    "HDRLET,3: the re-run product has no such extension",
+    "WCSCORR,1: the re-run product has no such extension",
+    "WCSDVARR,1: the re-run product has no such extension",
+    "WCSDVARR,2: the re-run product has no such extension",
+    "HDRLET,4: the re-run product has no such extension"
+  ],
+  "repeatedCards": [
+    "DP1",
+    "DP2"
+  ],
+  "extensions": [
+    {
+      "extname": "SCI",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 1035971,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.9879789352416992,
+      "medianLevel": 99.54098510742188,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 524288,
+        "correlation": 0.999999999999999,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 9.101805886757575e-8,
+          "largest": 2.587846381629788e-7
+        }
+      }
+    },
+    {
+      "extname": "ERR",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 997351,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.9511480331420898,
+      "medianLevel": 100.5683822631836,
+      "medianAbsoluteDifferenceOverMedian": 0,
+      "aboveMedian": {
+        "samples": 524288,
+        "correlation": 1,
+        "relativeDifference": {
+          "median": 0,
+          "p99": 1.6933023516685353e-7,
+          "largest": 6.21521394350566e-7
+        }
+      }
+    },
+    {
+      "extname": "DQ",
+      "extver": 1,
+      "kind": "image",
+      "shape": [
+        1024,
+        1024
+      ],
+      "samples": 1048576,
+      "both": 1048576,
+      "identical": 1007861,
+      "onlyLocal": 0,
+      "onlyMast": 0,
+      "identicalShare": 0.9611711502075195,
+      "medianLevel": 0,
+      "medianAbsoluteDifferenceOverMedian": null,
+      "aboveMedian": {
+        "samples": 60643,
+        "correlation": 0.37236972403796426,
+        "relativeDifference": {
+          "median": 0.6666666865348816,
+          "p99": 1,
+          "largest": 2048
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "cssearth-hosted-planet@1",
+  "id": "beta-pictoris-d",
+  "radiusKm": 90079.92,
+  "radiusSource": "Radius 1.26 +/- 0.03 Jupiter radii, the estimate Sutlieff et al. (2026, arXiv:2606.23801, Table 2) derive from the planet's photometry with evolutionary models (ATMO and Sonora-Bobcat, 23 +/- 8 Myr): a model radius, not a measured diameter, 90,080 km at 71,492 km per Jupiter radius. GM from their model mass 2.4 +/- 0.6 Jupiter masses times Jupiter's GM 126686531.9 km^3/s^2; no dynamical mass is measured. A sphere.",
+  "orbitalPeriodDays": 36374.8,
+  "orbitalPeriodSource": "Derived: Kepler's third law with the published semi-major axis 26.0 +2.2/-6.1 au (Sutlieff et al. 2026, Table 2, non-orbit-crossing posteriors) and the system mass 1.75 solar masses (Lacour et al. 2021) plus the three planets' 11.90, 8.89 and 2.4 Jupiter masses: 99.59 yr = 36374.8 d. The paper's own period posterior is 91 +18/-27 yr; a free circular fit to its six epochs gives 94.5 yr.",
+  "shape": {
+    "kind": "sphere",
+    "qualification": "A sphere at the model radius in the shared neutral gray, self-luminous. No image, visible colour, map or oblateness of Beta Pictoris d is measured; its size comes from its luminosity and models, its mass and orbit from astrometry."
+  },
+  "effectiveTemperatureK": 600,
+  "effectiveTemperatureSource": "600 +45/-60 K, Sutlieff et al. (2026, arXiv:2606.23801, Table 2), estimated from the photometry with evolutionary models.",
+  "semiMajorAxisSource": "Sutlieff et al. (2026, Table 2): a 26.0 +2.2/-6.1 au at 19.63 pc (1324.2 mas), 3598.36 radii of the star's 1,080,920 km; inclination 89.0 +0.7/-0.6 degrees. Eccentricity is set to 0: the paper bounds it below 0.44 (2 sigma) without a median, so this record is a circular display approximation, not the paper's orbital solution.",
+  "massSource": "Radius 1.26 +/- 0.03 Jupiter radii, the estimate Sutlieff et al. (2026, arXiv:2606.23801, Table 2) derive from the planet's photometry with evolutionary models (ATMO and Sonora-Bobcat, 23 +/- 8 Myr): a model radius, not a measured diameter, 90,080 km at 71,492 km per Jupiter radius. GM from their model mass 2.4 +/- 0.6 Jupiter masses times Jupiter's GM 126686531.9 km^3/s^2; no dynamical mass is measured. A sphere."
+}

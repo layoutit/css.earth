@@ -1,0 +1,18 @@
+{
+  "schema": "cssearth-uniform-disc-star@1",
+  "id": "beta-pictoris",
+  "angularDiameterMas": 0.736,
+  "angularDiameterSource": "Limb-darkened angular diameter 0.736 +/- 0.015 (statistical) +/- 0.012 (systematic) mas, VLTI/VINCI in the K band, Di Folco et al. (2004, A&A 426, 601; doi:10.1051/0004-6361:20047189), Table 3; the star is only 14% resolved, the least resolved of their five stars.",
+  "distanceParsecs": 19.6345266018065,
+  "distanceSource": "Gaia DR3 parallax 50.9307 +/- 0.1482 mas (same row; RUWE 3.07, the star is bright for Gaia): 1000/50.930690628822894 = 19.6345 pc, no zero-point correction. Lacour et al. (2021) fitted their orbits at the Gaia DR2 parallax 51.44 +/- 0.12 mas; the hosted orbits keep their angular sizes and are placed at this distance.",
+  "radiusKm": 1080920.28,
+  "radiusSource": "Radius: the VLTI/VINCI limb-darkened angular diameter 0.736 +/- 0.015 (statistical) +/- 0.012 (systematic) mas of Di Folco et al. (2004, A&A 426, 601, Table 3) at the Gaia DR3 distance 19.6345 pc: 1,080,920 km, 1.5537 solar radii at 695700 km per solar radius (Zwintz et al. 2019 derive 1.538 +/- 0.040 from the same diameter at the Hipparcos parallax; their seismic model gives 1.497 +/- 0.025). GM from the dynamical stellar mass 1.75 +/- 0.03 solar masses of Lacour et al. (2021, A&A 654, L2, Table 2, RV + b and c astrometry) times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis is aligned with the disc and the planets' orbits to 3 +/- 4 degrees on the sky (Kraus et al. 2020) but its period is not adopted here.",
+  "effectiveTemperatureK": 8090,
+  "effectiveTemperatureSource": "Effective temperature 8090 +/- 59 K from Zwintz et al. 2019 (A&A 627, A28; https://arxiv.org/abs/1905.12545), Table 4, their seismic model fit; the average of earlier spectroscopic determinations they list is 8143 +/- 67 K",
+  "shape": {
+    "kind": "uniform-disc-sphere",
+    "qualification": "A sphere at the published radius, coloured from the star's Gaia DR3 spectrum (photometry/stellar-color.json), because no image of the photosphere exists (see investigations.json). A star's limb is not a sharp surface."
+  },
+  "surfaceGravityLogg": 4.3,
+  "surfaceGravitySource": "log g from the dynamical mass 1.75 +/- 0.03 solar masses of Lacour et al. (2021, A&A 654, L2, Table 2) and the package radius, log10(GM/R^2) in cgs: 4.30 (Gaia DR3 GSP-Phot gives 4.21)."
+}

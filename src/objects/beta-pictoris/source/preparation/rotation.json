@@ -1,0 +1,10 @@
+{
+  "schema": "cssearth-display-orientation@1",
+  "rightAscensionDegrees": 86.82123452009108,
+  "declinationDegrees": 38.933863742176655,
+  "displayMeridianDegrees": 90,
+  "phase": "arbitrary-display-phase",
+  "source": "No rotation period is adopted. Kraus et al. (2020, ApJ 897, L8) measure the star's spin axis on the sky with VLTI/GRAVITY, aligned with the disc and planet b's orbit to 3 +/- 4 degrees, and Zwintz et al. (2019) fit a near equator-on inclination and a rotation rate of about 27% of break-up from its pulsations; neither is a rotation period, so the display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.",
+  "coordinateSystem": "ICRF/J2000. +Z is the display axis: the sky-north direction at the star, in the plane of the sky. +X is the display meridian, set so that grid longitude 0 faces the Sun and Earth at the scene epoch; east longitude. No spin is propagated.",
+  "qualification": "Display convention, not a measurement: the spin axis is measured only in projection (Kraus et al. 2020) and no period is adopted, so the axis shown is where celestial north lies on the sky."
+}
