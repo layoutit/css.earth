@@ -135,7 +135,9 @@ jobs:
         # path (tools/assets/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
-        run: pnpm test:node
+        run: |
+          node --test "tools/ci/*.test.mts" "tools/assets/*.test.mts" tools/prepare/prepare-ci-inputs.test.mts \
+            "src/platform/runtime-asset-*.test.mts" "site/minimap/*.test.mts"
 
   typecheck:
     name: Typecheck
