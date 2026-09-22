@@ -263,7 +263,7 @@ test('inactive annotations retain emphasis until their reveal publication', () =
   layer.publish(world, viewport);
   clock.advance(1000);
   layer.publish(world, viewport);
-  const shown = layer.inspect().filter(body => body.billboard.style.visibility !== 'hidden');
+  const shown = layer.inspect().filter(body => body.mover.style.visibility !== 'hidden');
   expect(shown.length).toBeGreaterThan(0);
   // Emphasis is two-state. The overview emphasizes nobody, so the Sun that was
   // selected before the bodies were culled must publish 'false' on its reveal.
@@ -286,14 +286,14 @@ test('a culled indicator with retained alpha is dormant, then gets current empha
   layer.publish(world, { ...viewport, widthPixels: 800, heightPixels: 600 });
   expect(group.dataset.contextSelected).toBe('true');
   layer.publish(world, viewport); clock.advance(1000);
-  expect(mercury.billboard.style.visibility).toBe('hidden');
-  expect(Number(mercury.billboard.style.opacity)).toBe(0);
+  expect(mercury.mover.style.visibility).toBe('hidden');
+  expect(Number(mercury.mover.style.opacity)).toBe(0);
   const retained = group.dataset.contextSelected;
   expect(retained).toBe('true');
   layer.setOverview(true); layer.publish(world, viewport);
   expect(group.dataset.contextSelected).toBe(retained);
   layer.publish(world, { ...viewport, widthPixels: 800, heightPixels: 600 });
-  expect(mercury.billboard.style.visibility).toBe('');
+  expect(mercury.mover.style.visibility).toBe('');
   expect(group.dataset.contextSelected).toBe('false');
   layer.destroy();
 });
@@ -323,13 +323,13 @@ test('camera viewport snapshots drive clipping and resize without reading host l
     pose: { positionM: [0, 0, 1_000], orientationXyzw: [0, 0, 0, 1] },
   }, { focalPixels: 400, principalOffsetPixels: [30, -20], widthPixels, heightPixels });
   publish(800, 600);
-  expect(mercury.billboard.style.visibility).toBe('');
+  expect(mercury.mover.style.visibility).toBe('');
   publish(40, 600);
-  expect(mercury.billboard.style.visibility).toBe('hidden');
+  expect(mercury.mover.style.visibility).toBe('hidden');
   publish(800, 600);
-  expect(mercury.billboard.style.visibility).toBe('');
+  expect(mercury.mover.style.visibility).toBe('');
   publish(800, 10);
-  expect(mercury.billboard.style.visibility).toBe('hidden');
+  expect(mercury.mover.style.visibility).toBe('hidden');
   layer.destroy();
 });
 
@@ -667,8 +667,8 @@ test('the Earth reference remains painted when its physical marker has faded at 
   const earth = layer.inspect().find(body => body.id === 'earth')!;
   expect(annotationVisibility(earth.billboard, 'indicator')).toBe('hidden');
   expect(annotationVisibility(earth.billboard, 'label')).toBe('');
-  expect(earth.billboard.style.visibility).toBe('');
-  expect(Number(earth.billboard.style.opacity)).toBeGreaterThan(0);
+  expect(earth.mover.style.visibility).toBe('');
+  expect(Number(earth.mover.style.opacity)).toBeGreaterThan(0);
   expect(earth.orbit.some(paintedOrbitLeaf)).toBe(false);
   layer.destroy();
 });
@@ -717,7 +717,7 @@ test.each(['bars', 'strokes'] as const)('%s gives the selected moon family full 
     const line = orbitRenderer === 'bars'
       ? Number(find(layer.root as unknown as FakeElement, 'contextOrbit', id).style.opacity)
       : Math.max(...body.orbit.filter(piece => piece.getAttribute('points')).map(piece => Number(piece.style.strokeOpacity)));
-    return { marker: Number(body.billboard.style.opacity), line };
+    return { marker: Number(body.mover.style.opacity), line };
   };
   const baseline = new Map(context.bodies.map(body => [body.id, opacity(body.id)]));
   for (const id of [parent.id, 'moon-a', 'moon-b']) {
@@ -813,8 +813,8 @@ test('initial Jupiter system framing makes the four large moons and their labels
   layer.publish(target, viewport); document.defaultView.advance(200);
   for (const id of ['io', 'europa', 'ganymede', 'callisto']) {
     const moon = layer.inspect().find(body => body.id === id)!;
-    expect(moon.billboard.style.visibility, `${id} circle`).toBe('');
-    expect(moon.billboard.style.visibility, `${id} label`).toBe('');
+    expect(moon.mover.style.visibility, `${id} circle`).toBe('');
+    expect(moon.mover.style.visibility, `${id} label`).toBe('');
     expect(moon.orbit.some(paintedOrbitLeaf), `${id} orbit`).toBe(true);
   }
   layer.destroy();
@@ -990,7 +990,7 @@ test('orbit chords stop at the circular indicator on both sides of the centered 
     pose: { positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1] } },
     { focalPixels: 400, principalOffsetPixels: [30, -20] });
   const mercury = layer.inspect().find(body => body.id === 'mercury')!;
-  expect(mercury.billboard.style.visibility).toBe('');
+  expect(mercury.mover.style.visibility).toBe('');
   expect(mercury.billboard.style.width).toBe('16px');
   expect(mercury.center).toEqual([70, -20]);
   expect(mover(mercury.billboard).style.transform).toContain('translate(470px,280px)');
@@ -1019,11 +1019,11 @@ test('body circles fade with apparent size, remain clickable, and reuse their no
   expect(annotationVisibility(indicator, 'indicator')).toBe('hidden');
   expect(indicator.style.pointerEvents).toBe('none');
   publish(140);
-  expect(Number(indicator.style.opacity)).toBeGreaterThan(0);
-  expect(Number(indicator.style.opacity)).toBeLessThan(1);
+  expect(Number(indicator.parentNode!.style.opacity)).toBeGreaterThan(0);
+  expect(Number(indicator.parentNode!.style.opacity)).toBeLessThan(1);
   publish(200);
-  expect(Number(indicator.style.opacity)).toBeGreaterThan(0.98);
-  expect(Number(indicator.style.opacity)).toBeLessThanOrEqual(1);
+  expect(Number(indicator.parentNode!.style.opacity)).toBeGreaterThan(0.98);
+  expect(Number(indicator.parentNode!.style.opacity)).toBeLessThanOrEqual(1);
   expect(indicator.dataset.objectNavigate).toBe('mercury');
   const selections: string[] = [];
   root.parentNode!.addEventListener('objectnavigate', event => selections.push((event as CustomEvent<{ objectId: string }>).detail.objectId));
@@ -1149,10 +1149,10 @@ test.each([
   const distances = Array.from({ length: 61 }, (_, index) => 400 + index * 20);
   for (const distance of [...distances, ...distances.toReversed()]) {
     publish(distance);
-    expect(major.billboard.style.visibility).toBe('');
-    expect(major.billboard.style.visibility).toBe('');
+    expect(major.mover.style.visibility).toBe('');
+    expect(major.mover.style.visibility).toBe('');
     for (const body of [minor, major]) {
-      expect(body.billboard.style.visibility).toBe('');
+      expect(body.mover.style.visibility).toBe('');
       // Ranking decides captions and circles; a named body always keeps the path beside it.
       if (body.labelShown) expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
       expect(body.indicatorShown).toBe(body.labelShown);
@@ -1171,7 +1171,7 @@ test.each([
   expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
   expect(annotationVisibility(minor.billboard, 'indicator')).toBe('');
   layer.previewSelection(null); publish(1000);
-  expect(major.billboard.style.visibility).toBe('');
+  expect(major.mover.style.visibility).toBe('');
   expectRetained(root, nodes);
   layer.destroy();
 });
@@ -1191,7 +1191,7 @@ test('the Sun circle and label remain visible after all planetary context fades 
       { focalPixels: 400, principalOffsetPixels: [30, -20] });
     expect(root.hidden).toBe(false);
     expect(find(root, 'contextBody', 'sun').style.visibility).toBe('');
-    expect(find(root, 'contextBody', 'sun').style.opacity).toBe('1');
+    expect(find(root, 'contextBody', 'sun').parentNode!.style.opacity).toBe('1');
     expect(find(root, 'contextLabel', 'sun').style.visibility).toBe('');
     expect(find(root, 'contextLabel', 'sun').dataset.objectNavigate).toBe('sun');
     expect(find(root, 'contextBody', 'mercury').style.visibility).toBe('hidden');
@@ -1229,7 +1229,7 @@ test('retired bodies stop receiving zoom writes and resume with current picking 
   // when the controls are re-enabled at galaxy distance.
   layer.setNavigationInFlight(true); publish(1e31); publish(2e31);
   layer.setNavigationInFlight(false);
-  expect(mercury.billboard.style.visibility).toBe('hidden');
+  expect(mercury.mover.style.visibility).toBe('hidden');
   expect(mercury.orbit.every(piece => piece.style.visibility === 'hidden')).toBe(true);
   // A flight holds keyboard and accessibility state instead of disabling and
   // restoring every body, so the retired marker keeps the target it committed
@@ -1482,7 +1482,7 @@ test('switching to the Solar System card immediately reveals the Sun ring withou
   layer.setOverview(true);
   expect(annotationVisibility(ring, 'indicator')).toBe('');
   expect(ring.dataset.objectNavigate).toBe('sun');
-  expect(ring.style.opacity).toBe('1');
+  expect(ring.parentNode!.style.opacity).toBe('1');
   layer.setOverview(false);
   expect(annotationVisibility(ring, 'indicator')).toBe('hidden');
   layer.destroy();
@@ -1506,18 +1506,18 @@ test.each([true, false])('crowding retires complete annotations and their orbits
     pose: {positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1]}}, {focalPixels: 400, principalOffsetPixels: [0, 0]});
   publish(2000);
   const entries = layer.inspect();
-  expect(entries[0].billboard.style.visibility).toBe('');
+  expect(entries[0].mover.style.visibility).toBe('');
   for (const body of entries.slice(1)) {
     expect(body.indicatorShown).toBe(false);
     expect(body.labelShown).toBe(false);
-    expect(body.billboard.style.visibility).toBe('');
+    expect(body.mover.style.visibility).toBe('');
     expect(body.billboard.style.pointerEvents).toBe('none');
     // Too far for this camera to name any of them: no captions, and no unidentified paths.
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(false);
   }
   publish(100);
   for (const body of entries.slice(1)) {
-    expect(body.billboard.style.visibility).toBe('');
+    expect(body.mover.style.visibility).toBe('');
     if (body.labelShown) expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
   }
   layer.destroy();
@@ -1544,7 +1544,7 @@ test.each([true, false])('admitted annotations retain physical alpha while orbit
       pose: {positionM: [0, 0, 40000 / extent], orientationXyzw: [0, 0, 0, 1]}},
       {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 5000, heightPixels: 5000});
     // Culled indicators retain their last paint values; visible fades still match exactly.
-    expect(Number(body.billboard.style.opacity)).toBeGreaterThanOrEqual(Number(orbitRoot.style.opacity));
+    expect(Number(body.mover.style.opacity)).toBeGreaterThanOrEqual(Number(orbitRoot.style.opacity));
     expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(body.labelShown && extent > 12);
     // Body-parent separation is five times this fixture's tiny orbit extent.
     // Indicator readability follows that separation, independently of orbit paint.
@@ -1572,7 +1572,7 @@ test('an offscreen context body keeps the ring the camera crosses; explicit sele
     pose: {positionM: [0, 0, 1000], orientationXyzw: [0, 0, 0, 1]}},
     {focalPixels: 400, principalOffsetPixels: [0, 0], widthPixels: 800, heightPixels: 600});
   const body = layer.inspect().find(entry => entry.id === 'mercury')!;
-  expect(body.billboard.style.visibility).toBe('hidden');
+  expect(body.mover.style.visibility).toBe('hidden');
   // The body is off screen and cannot own an annotation, but its path still crosses
   // the viewport and remains useful in the ordinary context view.
   expect(body.orbit.some(piece => piece.style.visibility === '')).toBe(true);
@@ -1636,7 +1636,7 @@ test('one retained focus label and locator survive system retirement at their ph
   for (const [distance, locatorOpacity, captionVisible] of [[50, 0, false], [Math.sqrt(1000 * 10000), 1, true], [8000, 1, true], [1e21, 1, true], [50, 0, false]] as const) {
     layer.publish(camera(distance!), viewport);
     document.defaultView.advance(200);
-    if (locatorOpacity) expect(Number(locator.style.opacity)).toBeCloseTo(1);
+    if (locatorOpacity) expect(Number(locator.parentNode!.style.opacity)).toBeCloseTo(1);
     expect(annotationVisibility(locator, 'indicator')).toBe(locatorOpacity! > 0 ? '' : 'hidden');
     expect(annotationVisibility(label, 'label')).toBe(captionVisible ? '' : 'hidden');
     expectRetained(host, retained);
@@ -1645,10 +1645,10 @@ test('one retained focus label and locator survive system retirement at their ph
   distant.pose.positionM = [-1e20, 5e19, 1e21];
   layer.publish(distant, viewport);
   document.defaultView.advance(200);
-  expect(layer.inspect().filter(body => body.id !== 'anchor').every(body => body.billboard.style.visibility === 'hidden')).toBe(true);
+  expect(layer.inspect().filter(body => body.id !== 'anchor').every(body => body.mover.style.visibility === 'hidden')).toBe(true);
   expect(mover(label).hidden).toBe(false); expect(mover(label).parentNode!.hidden).toBe(false);
-  expect(annotationVisibility(label, 'label')).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(1);
-  expect(annotationVisibility(locator, 'indicator')).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(1);
+  expect(annotationVisibility(label, 'label')).toBe(''); expect(Number(label.parentNode!.style.opacity)).toBeCloseTo(1);
+  expect(annotationVisibility(locator, 'indicator')).toBe(''); expect(Number(locator.parentNode!.style.opacity)).toBeCloseTo(1);
   expect(billboardCenter(locator)).toEqual([70, 0]);
   expect(captionPosition(label)).toEqual([52, -26]);
   expect(locator.dataset.objectNavigate).toBe('anchor');
@@ -1724,10 +1724,10 @@ test('resolved body labels remain visible alongside faint close-up orbit lines',
     pose: { positionM: [0, 0, 40], orientationXyzw: [0, 0, 0, 1] } },
   { focalPixels: 400, principalOffsetPixels: [0, 0] });
   const body = layer.inspect().find(body => body.id === 'mercury')!;
-  expect(body.billboard.style.visibility).toBe('');
+  expect(body.mover.style.visibility).toBe('');
   expect(body.orbit.some(paintedOrbitLeaf)).toBe(true);
   expect(Number(find(layer.root as unknown as FakeElement, 'contextOrbit', 'mercury').style.opacity)).toBeGreaterThan(0);
-  expect(body.billboard.style.visibility).toBe('');
+  expect(body.mover.style.visibility).toBe('');
   expect(body.billboard.dataset.objectNavigate).toBe('mercury');
   const [labelX, labelY] = captionPosition(body.billboard);
   expect(labelX + 'Mercury'.length * 6 / 2).toBeCloseTo(140);
@@ -1775,7 +1775,7 @@ test('a background star label inside the orbit footprint is excluded even outsid
   const backgroundText = { left: -10, top: 20, right: 10, bottom: 30 };
   expect(layer.labelExclusionRects().every(rect => !labelRectsOverlap(backgroundText, rect))).toBe(true);
   expect(layer.backgroundExclusionRects().some(rect => labelRectsOverlap(backgroundText, rect))).toBe(true);
-  expect(layer.inspect().find(body => body.id === 'sun')!.billboard.style.visibility).toBe('');
+  expect(layer.inspect().find(body => body.id === 'sun')!.mover.style.visibility).toBe('');
   // Close orbits clip the viewport; they must not claim the entire background.
   layer.publish({ ...camera, pose: { ...camera.pose, positionM: [0, 0, 50] } }, viewport);
   expect(layer.backgroundExclusionRects()).toEqual(layer.labelExclusionRects());
@@ -1792,7 +1792,7 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   expect(element.children.map(child => child.tagName)).toEqual(['i']); expect(element.textContent).toBe('');
   expect(element.dataset.contextName).toBe('Mercury');
   expect(element.dataset.contextLabelVisible).toBe('true');
-  expect(Number(element.style.opacity)).toBeGreaterThan(0);
+  expect(Number(element.parentNode!.style.opacity)).toBeGreaterThan(0);
   expect(clock.timers.size).toBe(0); expect(layer.opacityStats().active).toBe(0);
   publish(1e31);
   expect(element.style.visibility).toBe('hidden');
@@ -1807,11 +1807,11 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
 test('suppression retires the whole annotation while flight preserves admission and disables picking', () => {
   const root = mount(1), layer = mounted.get(root)!, clock = root.ownerDocument.defaultView;
   const element = layer.inspect().find(body => body.id === 'mercury')!.billboard;
-  const opacity = element.style.opacity;
+  const opacity = element.parentNode!.style.opacity;
   layer.setSuppressedLabels(['mercury']);
   expect(annotationVisibility(element, 'label')).toBe('hidden');
   expect(annotationVisibility(element, 'indicator')).toBe('hidden');
-  expect(element.style.opacity).toBe(opacity); expect(clock.timers.size).toBe(0);
+  expect(element.parentNode!.style.opacity).toBe(opacity); expect(clock.timers.size).toBe(0);
   layer.setSuppressedLabels([]);
   expect(annotationVisibility(element, 'label')).toBe('');
   layer.previewSelection('venus');
@@ -1853,8 +1853,8 @@ test('the Sun locator stays visible across galactic observer rotations while res
       orientationXyzw: [0, Math.sin(angle / 2), 0, Math.cos(angle / 2)],
     } }, viewport);
     document.defaultView.advance(200);
-    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.style.opacity)).toBeCloseTo(1);
-    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.style.opacity)).toBeCloseTo(1);
+    expect(annotationVisibility(label, 'label'), `${degrees} degrees`).toBe(''); expect(Number(label.parentNode!.style.opacity)).toBeCloseTo(1);
+    expect(annotationVisibility(locator, 'indicator'), `${degrees} degrees`).toBe(''); expect(Number(locator.parentNode!.style.opacity)).toBeCloseTo(1);
   }
   layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1, pose: {
     positionM: [3e12 + 1e8, 0, 0], orientationXyzw: [0, Math.SQRT1_2, 0, Math.SQRT1_2],
@@ -1960,8 +1960,8 @@ test('flights keep admitted annotations and orbit projection live with shared se
   const measurements = nodes.reduce((sum, node) => sum + node.measurements, 0);
   expect(annotationVisibility(sun.billboard, 'label')).toBe('');
   expect(annotationVisibility(sun.billboard, 'indicator')).toBe('');
-  expect(Number(mercury.billboard.style.opacity)).toBeGreaterThan(0);
-  expect(mercury.billboard.style.opacity).not.toBe('0');
+  expect(Number(mercury.mover.style.opacity)).toBeGreaterThan(0);
+  expect(mercury.mover.style.opacity).not.toBe('0');
   const orbitRoot = find(root, 'contextOrbit', 'mercury');
   expect(orbitRoot.style.opacity).not.toBe('0');
   // Keyboard targets hold through the flight; only the stage picker is cleared.
@@ -1977,8 +1977,8 @@ test('flights keep admitted annotations and orbit projection live with shared se
   expect(orbitRoot.style.opacity).not.toBe('0');
   layer.setNavigationInFlight(false);
   root.ownerDocument.defaultView.advance(200);
-  expect(Number(sun.billboard.style.opacity)).toBeGreaterThan(0);
-  expect(sun.billboard.style.opacity).not.toBe('0');
+  expect(Number(sun.mover.style.opacity)).toBeGreaterThan(0);
+  expect(sun.mover.style.opacity).not.toBe('0');
   expect(orbitRoot.dataset.objectNavigate).toBe('mercury');
   expectRetained(root, nodes);
   layer.destroy();
@@ -2006,7 +2006,7 @@ test('one retained flight caption survives the sprite fade through arrival', () 
     expect(circle.style.visibility).toBe(diameter < 20 ? '' : 'hidden');
     if (diameter < 20) expect(Number(circle.style.opacity)).toBeGreaterThan(0);
     expect(annotationVisibility(marker, 'indicator')).toBe('hidden');
-    if (diameter >= 20) expect(marker.style.opacity).toBe('0');
+    if (diameter >= 20) expect(marker.parentNode!.style.opacity).toBe('0');
   }
   layer.setNavigationInFlight(false); layer.publish(world(300), viewport);
   expect(caption!.style.visibility).toBe('hidden');
@@ -2019,16 +2019,16 @@ test.each([null, 'venus'])('flights to %s retain system annotations and orbit cu
   const nodes = all(root);
   layer.previewSelection(null);
   const picking = screenPicking(root.parentNode! as unknown as HTMLElement);
-  const before = layer.inspect().map(entry => ({ id: entry.id, label: entry.billboard.style.opacity,
-    indicator: entry.billboard.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })),
+  const before = layer.inspect().map(entry => ({ id: entry.id, label: entry.mover.style.opacity,
+    indicator: entry.mover.style.opacity, orbit: entry.orbit.map(node => ({ ...node.style })),
     navigate: entry.billboard.dataset.objectNavigate }));
   expect(picking.pick(30, -20)).not.toBeNull();
   layer.previewSelection(destination);
   layer.setNavigationInFlight(true);
   for (const previous of before) {
     const entry = layer.inspect().find(entry => entry.id === previous.id)!;
-    expect(entry.billboard.style.opacity).toBe(previous.label);
-    expect(entry.billboard.style.opacity).toBe(previous.label);
+    expect(entry.mover.style.opacity).toBe(previous.label);
+    expect(entry.mover.style.opacity).toBe(previous.label);
     expect(entry.orbit.map(node => ({ ...node.style }))).toEqual(previous.orbit);
     // Keyboard state holds through the flight; the stage picker owns every hit
     // and is the one thing the flight clears, so nothing becomes pickable.
@@ -2074,7 +2074,7 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   layer.setOverview(true);
   root.ownerDocument.defaultView.advance(200);
   neutral();
-  const normalOpacity = Number(sprite.style.opacity);
+  const normalOpacity = Number(sprite.parentNode!.style.opacity);
   expect(normalOpacity).toBeGreaterThan(0);
 
   // Selection changes immediately without dimming surrounding landmarks.
@@ -2082,28 +2082,28 @@ test('the Solar System overview has no body selection until the Sun is explicitl
   root.ownerDocument.defaultView.advance(120);
   expect(sun.dataset.contextSelected).toBe('true');
   expect(mercury.dataset.contextSelected).toBe('false');
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
+  expect(Number(sprite.parentNode!.style.opacity)).toBeCloseTo(normalOpacity);
   layer.setOverview(false);
   layer.previewSelection();
   expect(sun.dataset.contextSelected).toBe('true');
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
+  expect(Number(sprite.parentNode!.style.opacity)).toBeCloseTo(normalOpacity);
 
   // Returning to the overview keeps that same weight.
   layer.previewSelection(null);
   root.ownerDocument.defaultView.advance(120);
   neutral();
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
+  expect(Number(sprite.parentNode!.style.opacity)).toBeCloseTo(normalOpacity);
   layer.setOverview(true);
   layer.previewSelection();
   neutral();
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
+  expect(Number(sprite.parentNode!.style.opacity)).toBeCloseTo(normalOpacity);
 
   // A cancelled object selection restores the overview, not a Sun selection.
   layer.previewSelection('mercury');
   expect(mercury.dataset.contextSelected).toBe('true');
   layer.previewSelection();
   neutral();
-  expect(Number(sprite.style.opacity)).toBeCloseTo(normalOpacity);
+  expect(Number(sprite.parentNode!.style.opacity)).toBeCloseTo(normalOpacity);
   expectRetained(root, nodes);
   layer.destroy();
 });
