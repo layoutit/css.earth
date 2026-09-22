@@ -8,12 +8,13 @@ import { objectSearchLabels, searchObjects } from '../object-search.mts';
 import { matchesObjectCategory } from '../object-categories.mts';
 import searchRoute from '../../netlify/edge-functions/search-route.ts';
 import { createFeatureBrowser } from '../feature-browser.mts';
+import { handleFindRequest } from '../find.mts';
 
 const origin = 'https://preview.example.test';
-const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@1',
+const index = JSON.stringify({ schema: 'cssearth-prepared-feature-index@2',
   objects: [{ id: 'moon', name: 'Moon', route: '/moon/', count: 1 }],
   features: [{ objectId: 'moon', id: 'tycho', name: 'Tycho', type: 'Crater', diameterKm: 85,
-    searchNames: ['tycho'], searchContext: 'crater' }] });
+    searchNames: ['tycho'], searchContext: 'crater' }], places: [] });
 const pin = { url: '/features/index.json', bytes: Buffer.byteLength(index), sha256: createHash('sha256').update(index).digest('hex'), count: 1 };
 const row = (name: string, classification: string, aliases: string[] = []) => `<li class="planet-object-item" data-object-name="${name.toLowerCase()}"
   data-object-classification="${classification}" data-object-classification-name="${classification}" data-object-system-name="solar system"
@@ -187,7 +188,8 @@ test('named features share the results panel, start collapsed, and disappear whe
 });
 
 test('live feature results retain their rows and disclosure until the query changes', async context => {
-  context.mock.method(globalThis, 'fetch', async () => new Response(index));
+  // The browser asks the find API; the real handler answers it from this index.
+  context.mock.method(globalThis, 'fetch', async (input: string | URL) => handleFindRequest(new Request(String(input)), pin, async () => new Response(index)));
   const { document } = parseHTML(html);
   const root = document.querySelector<HTMLElement>('.planet-feature-results')!;
   const row = root.querySelector('.planet-destination-result');
