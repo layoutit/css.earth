@@ -481,7 +481,9 @@ jobs:
           case "$CI_PREPARATION_LANE" in
             publication)
               pnpm exec playwright install --with-deps --only-shell chromium
-              pnpm test:node
+              node --test --test-concurrency=1 tests/objects/publication.test.mts \
+                tools/prepared/write-prepared-set.test.mts tools/prepare/preparation-cache.test.mts \
+                tools/prepare/prepare-planets.test.mts
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac
