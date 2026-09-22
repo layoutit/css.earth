@@ -77,9 +77,11 @@ pnpm -s telescope papers io --instrument JIRAM
 pnpm -s telescope papers io --instrument JIRAM --json --out output/io-papers
 ```
 
-`papers` resolves the target name the same way as `explore`, then asks OpenAlex for articles,
+`papers` resolves a catalogue name the same way as `explore`; any other name is searched as written. It then asks OpenAlex for articles,
 reviews, letters and preprints whose title or abstract names the target and, if given, the
-instrument. It keeps up to 20, open access first, then by OpenAlex relevance, then newest first.
+instrument. A body on a hosted orbit is searched together with any one of its host's names, so a short name such as a star's
+"S2" is not matched to papers about the Drosophila S2 cell line. For a name outside the catalogue, `--host NAME` adds the host by hand: `papers S301 --host "Sgr A*"`. A `*` in a name, as in Sagittarius A*, is dropped from the query because
+OpenAlex rejects it. It keeps up to 20, open access first, then by OpenAlex relevance, then newest first.
 Each work shows its title, year, DOI, first three authors, licence and open-access link.
 
 For each open copy the command makes one plain request and reports the result:
