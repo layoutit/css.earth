@@ -39,6 +39,12 @@
     },
     {
       "location": "public",
+      "filename": "titania-lens-voyager-color.webp",
+      "bytes": 280,
+      "sha256": "63b8cf28a61d88be664dbaf978d6b5364d2d140e3bcf953ce1be46577ed5b3dd"
+    },
+    {
+      "location": "public",
       "filename": "titania-lighting-2x-billboard.webp",
       "bytes": 115740,
       "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
@@ -260,16 +266,28 @@
       "sha256": "35085d439b6c609c4f69f16252f17fad3a7667c7fb7ad599643be090ac58a289"
     },
     {
+      "location": "public",
+      "filename": "titania-poles-voyager-color@2x.webp",
+      "bytes": 83322,
+      "sha256": "91c3645676a897689438aee99d3a5cf3662ee49dac8fdb58ec10964993c6dcbe"
+    },
+    {
+      "location": "public",
+      "filename": "titania-voyager-color@2x.webp",
+      "bytes": 264486,
+      "sha256": "b22343d544b604fad593ebafa732df8019279fe48fe90bbf28ed0996a82a6e0e"
+    },
+    {
       "location": "prepared",
       "filename": "assets.json",
-      "bytes": 93945,
-      "sha256": "75487a6dbc4f9307b4016b2209b5982bac798d52d3e8fd9731bf88cd10ecd415"
+      "bytes": 98901,
+      "sha256": "c5b707fd25402eee29d65b2958e0f3f7f1a359197e7ddec12eb80beb912ebb54"
     },
     {
       "location": "prepared",
       "filename": "authored-preparation.json",
       "bytes": 1558,
-      "sha256": "6e59a544dddbfbaf28c05e5be332b8c1984fd05d33d33a0cae53a70dc0107738"
+      "sha256": "575b9c6fec3853dda1524caee5d5e1a4ab9a1e2c58c7fbea64559c93bc84e8f5"
     },
     {
       "location": "prepared",
@@ -280,8 +298,8 @@
     {
       "location": "prepared",
       "filename": "controls.json",
-      "bytes": 3252,
-      "sha256": "cbd2c60202ca59ea7beef7c5cf40c5e7692bb67675a9261dd906a18735aa1792"
+      "bytes": 3364,
+      "sha256": "758faa90d60428df601d90d82c2efe5d6ac0fec67f58aeadad2077ec096a421d"
     },
     {
       "location": "prepared",
@@ -292,8 +310,8 @@
     {
       "location": "prepared",
       "filename": "lenses.json",
-      "bytes": 4302,
-      "sha256": "4f6d042543ad9bb2ed0c321e59588021bc0158c2da73ef661e548482db09b653"
+      "bytes": 4830,
+      "sha256": "6f232abc398e65fd9c75642c552b08402a73743327cc9898170db57214962cf6"
     },
     {
       "location": "prepared",
@@ -304,8 +322,8 @@
     {
       "location": "prepared",
       "filename": "minimaps.json",
-      "bytes": 234,
-      "sha256": "b92886891ce47ae4fd47de9639417d61272f4c0a606476300eaf38802c7d97a2"
+      "bytes": 319,
+      "sha256": "e262a61bc6b39f223b19bc97d196ee775ae4dc6ddf6e1f5bfea2df7f979c2781"
     },
     {
       "location": "prepared",
@@ -327,21 +345,27 @@
     },
     {
       "location": "prepared",
+      "filename": "minimaps/voyager-color.webp",
+      "bytes": 14188,
+      "sha256": "617649b34b59596aa33c7a997af488feeca8abe0fc75be5a4e9aad4621ce0534"
+    },
+    {
+      "location": "prepared",
       "filename": "runtime.json",
-      "bytes": 523642,
-      "sha256": "3e2dc13ff4143eef60f5e201aab36022a70c7673a8027a37002fb28662d9ead6"
+      "bytes": 525051,
+      "sha256": "0fa2c05b0a64ad7cdb3a69008314a1a1d342209c79eb862322092545b7d968aa"
     },
     {
       "location": "prepared",
       "filename": "scene.json",
-      "bytes": 377945,
-      "sha256": "dba0d35b5d3324ec4bea84610943ae8e4518d78c80feed862d0ed9d3d2b5cd23"
+      "bytes": 378003,
+      "sha256": "c6f5d4b6785b99560e797d358eb43651e6162be404e5ba9f70dd4960a51b726f"
     },
     {
       "location": "prepared",
       "filename": "sky.json",
-      "bytes": 1031,
-      "sha256": "dcfe998e7bbb3d7896fa0d6159654beea5c2ab1f97179e7c69db7ae5803eb8c0"
+      "bytes": 1181,
+      "sha256": "c71ecc4a892714c3c9325619db741fc3b2cff7a1d5b4b1d6dfc1c33bd6ddebbe"
     },
     {
       "location": "prepared",
@@ -358,8 +382,8 @@
     {
       "location": "prepared",
       "filename": "text.json",
-      "bytes": 1223,
-      "sha256": "929a2c14a5b6622434067f0c658b6fcd3ab443c85576e83dd234a98e0de3b437"
+      "bytes": 1426,
+      "sha256": "973bb26f778b1b7d64c668ccb786a4a74eab82abf84163a3f11e22a7a5b38838"
     },
     {
       "location": "prepared",

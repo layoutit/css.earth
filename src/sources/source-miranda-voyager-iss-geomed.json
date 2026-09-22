@@ -1,0 +1,35 @@
+{
+  "id": "source-miranda-voyager-iss-geomed",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Miranda · voyager c2676339 geomed frame",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26763XX/C2676339_GEOMED.IMG",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/miranda/source/manifest.json",
+      "locator": "/inputs/60"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "scope": "The voyager c2676339 geomed frame input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

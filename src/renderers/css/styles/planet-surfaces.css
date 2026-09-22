@@ -2430,6 +2430,46 @@
   background-image: url("/scenes/triton/triton-poles-voyager-color@2x.webp") !important;
 }
 
+.planet-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s:not(.miranda-polar) {
+  background-image: url("/scenes/miranda/miranda-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s.miranda-polar {
+  background-image: url("/scenes/miranda/miranda-poles-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ariel"][data-lens="voyager-color"] .polycss-scene s:not(.ariel-polar) {
+  background-image: url("/scenes/ariel/ariel-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="ariel"][data-lens="voyager-color"] .polycss-scene s.ariel-polar {
+  background-image: url("/scenes/ariel/ariel-poles-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="umbriel"][data-lens="voyager-color"] .polycss-scene s:not(.umbriel-polar) {
+  background-image: url("/scenes/umbriel/umbriel-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="umbriel"][data-lens="voyager-color"] .polycss-scene s.umbriel-polar {
+  background-image: url("/scenes/umbriel/umbriel-poles-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="titania"][data-lens="voyager-color"] .polycss-scene s:not(.titania-polar) {
+  background-image: url("/scenes/titania/titania-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="titania"][data-lens="voyager-color"] .polycss-scene s.titania-polar {
+  background-image: url("/scenes/titania/titania-poles-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="oberon"][data-lens="voyager-color"] .polycss-scene s:not(.oberon-polar) {
+  background-image: url("/scenes/oberon/oberon-voyager-color@2x.webp") !important;
+}
+
+.planet-stage[data-object-id="oberon"][data-lens="voyager-color"] .polycss-scene s.oberon-polar {
+  background-image: url("/scenes/oberon/oberon-poles-voyager-color@2x.webp") !important;
+}
+
 /* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
    background-image / background-position / background-size come from the material track. */
 .planet-stage[data-object-id="triton"] .triton-fixed-material {

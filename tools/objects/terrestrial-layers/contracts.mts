@@ -34,10 +34,13 @@ export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:nu
 /** Per-band level solving between observations: each observation's bands are scaled onto the reference observation's calibration
  * through the median ratios where their corrected footprints overlap, measured on a coarse grid of `cellDegrees`. */
 export interface BandLevelPolicy {reference:string;cellDegrees:number;minimumOverlapPixels:number}
+/** Whole-footprint band ratios tied to a published whole-disc colour: each band named in `ratios` is scaled so its mean over the
+ * composed footprint, divided by the reference band's mean, equals the published ratio. `source` names the record in the manifest. */
+export interface BandRatioPolicy {reference:string;ratios:Record<string,number>;source:string}
 export interface PhotometryProfile {radiusKm:number;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;referenceIncidenceDegrees:number;referenceEmissionDegrees:number;observationWeights:Record<string,number>;
   /** A pixel one observation views or lights too steeply: `monochrome` (default) keeps it for the base so no other date's colour fills it;
    * `next-observation` lets the next densest observation with acceptable geometry own it, for observations from one encounter. */
-  withheld?:'monochrome'|'next-observation';bandLevels?:BandLevelPolicy}
+  withheld?:'monochrome'|'next-observation';bandLevels?:BandLevelPolicy;bandRatios?:BandRatioPolicy}
 export interface ObservedColorContext {groups:ReadonlyMap<string,ColorBand[]>;profile:ObservedColorProfile;width:number;height:number;sourceIds?:string[]}
 export interface PhasePhotometry {model:string;asymmetry:number;amplitude:number;width:number;minimumDegrees:number;maximumDegrees:number;referenceDegrees:number;maximumGain:number}
 export interface DiskPhotometry {phaseCorrection?:PhasePhotometry;model?:string;maximumIncidenceDegrees:number;maximumEmissionDegrees:number;maximumGain:number;coefficient?:number;phaseCoefficientPerDegree?:number;weight?:number}

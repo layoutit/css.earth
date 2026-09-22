@@ -77,8 +77,8 @@ this color repair does not promote its unresolved registration cases:
   the lens selects. Level matching scales the three bands by one gain, so their
   measured ratios stay. The bands remain floating through the shared footprint,
   photometry and surface transfer; the same encoder finishes them.
-- `terrestrial-observed-color`: Europa's Galileo I/F bands and Triton's Voyager
-  ISS bands. Photometry and common brightness matching run before the final
+- `terrestrial-observed-color`: Europa's Galileo I/F bands and the Voyager
+  ISS bands of Triton and the five classical Uranian moons. Photometry and common brightness matching run before the final
   encoding. The already prepared monochrome base is decoded only as a display
   reference for that matching; its brightness does not establish natural color
   or new radiometric calibration. Two profile policies are recipe choices, not
@@ -92,7 +92,14 @@ this color repair does not promote its unresolved registration cases:
   and gains in the photometry report; the brightness match to the base is
   then one pooled gain for the lens, clamped so 99.9 % of texels encode
   without clipping, instead of one gain per observation. The reference is chosen from evidence
-  recorded in the body README, never by preference for a look.
+  recorded in the body README, never by preference for a look. `bandRatios` ties the
+  composed footprint's whole-disc band ratios to a published whole-disc colour
+  named in the recipe (the Uranian moons use Bell and McCord 1991): each named
+  band takes one gain so its cosine-weighted mean against the reference band's
+  mean equals the published ratio, and the report carries the measured ratios,
+  the published ones and the gains. It answers a documented filter-calibration
+  defect of the archive product, never a preference for a look; spatial colour
+  differences stay the observation's own.
 - `pds4-float-rgb`: Charon's archive-produced, pan-sharpened MVIC composite.
   Its values are derived band values, not untouched I/F. The reader validates
   the archived wavelengths and applies its explicit common display range once.

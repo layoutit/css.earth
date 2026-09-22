@@ -84,3 +84,20 @@ test('pooled level matching gives every observation one gain from all boundary s
   assert.ok(pooled[0]!.gain > 1.9 && pooled[0]!.gain < 2.3, `the pooled gain follows the boundary median, ${pooled[0]!.gain}`);
   assert.ok(pooled.every(level => level.pooled && level.clippedPixels! >= 1 && level.clippedPixels! < 5), 'only the outlier clips');
 });
+
+test('a band sample at or below zero is sky or a frame border, so the texel is never coloured', () => {
+  const dark = new Map<string, ColorBand[]>([observation('fine', [0, 180], [0.5, 0.5, -0.01], 0, 1), observation('coarse', [0, 180], [0.5, 0.5, 0.5], 90, 2)]);
+  const result = compose(dark);
+  assert.equal(result.photometry.observations.fine!.correctedPixels, 0, 'the fine observation has no complete positive sample');
+  assert.ok(ownerAt(result, 100) === 2, 'the coarse observation owns the texel instead');
+});
+
+test('band ratios scale the named bands so the footprint means meet the published whole-disc colour, and report both', () => {
+  const result = compose(new Map<string, ColorBand[]>([observation('fine', [0, 180], [0.5, 0.4, 0.45], 0, 1)]),
+    { bandRatios: { reference: FILTERS[0]!, ratios: { [FILTERS[1]!]: 1.0, [FILTERS[2]!]: 0.92 }, source: 'published' } });
+  const tie = result.photometry.bandRatios!;
+  assert.equal(tie.measured[FILTERS[1]!], 0.8); assert.equal(tie.measured[FILTERS[2]!], 0.9);
+  assert.deepEqual(tie.gains, [1, 1.25, +(0.92 / 0.9).toFixed(4)]);
+  const i = ownerAt(result, 30) ? 18 * 72 + 6 : -1; assert.ok(i >= 0);
+  assert.ok(Math.abs(result.rgb[i * 3 + 1]! / result.rgb[i * 3]! - 1.0) < 1e-3 && Math.abs(result.rgb[i * 3 + 2]! / result.rgb[i * 3]! - 0.92) < 1e-3);
+});

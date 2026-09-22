@@ -85,6 +85,11 @@
               "id": "elevation",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "voyager-color",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -152,6 +157,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "fda5f45640d24278e48568fd0fbcdc0d91eed4ea2f974d443c0a61c6b275b02c"
+    "sha256": "f6bdcfde45ee1e53b62f0aa6c4b9bd8f7689edc998706920bd7d56e05233287e"
   }
 }
