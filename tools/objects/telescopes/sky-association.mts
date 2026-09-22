@@ -253,7 +253,7 @@ export async function previewAssociation(directory: string, association: Associa
   return plotNumericPreview(directory, {
     kind: 'scatter-ellipses', layout: 'publication',
     title: `${association.system} · ${m.id} · closest ${association.closest} (R ${closest.mahalanobis.toFixed(2)})${outside.length ? `, outside the frame: ${outside.map(candidate => candidate.id).join(', ')}` : ''}`,
-    xLabel: 'Δα cos δ from star (mas)', yLabel: 'Δδ from star (mas)', invertX: true, sigmaLevels: [1, 2, 3], origin: { label: set.system },
+    xLabel: 'ΔRA (mas)', yLabel: 'ΔDec (mas)', invertX: true, sigmaLevels: [1, 2, 3], origin: { label: set.system },
     points: [
       ...inside.map(candidate => ({ x: candidate.eastMas, y: candidate.northMas, label: candidate.id, mark: mark(set.system, candidate.id), series: candidate.id, role: 'candidate' as const, ...(covarianceOf(candidate) ? { covariance: covarianceOf(candidate)! } : {}) })),
       { x: m.eastMas, y: m.northMas, label: m.id, role: 'measurement' as const, series: association.closest, covariance: m.covariance! },
@@ -268,7 +268,7 @@ export async function previewAssociation(directory: string, association: Associa
  */
 export async function previewSystem(directory: string, system: string, set: CandidateSet, associations: readonly Association[], options: FigureOptions = {}) {
   return plotNumericPreview(directory, {
-    kind: 'scatter-ellipses', layout: 'publication', title: '', xLabel: 'Δα cos δ from star (mas)', yLabel: 'Δδ from star (mas)',
+    kind: 'scatter-ellipses', layout: 'publication', title: '', xLabel: 'ΔRA (mas)', yLabel: 'ΔDec (mas)',
     invertX: true, sigmaLevels: [1, 2, 3], origin: { label: system }, measurementLabel: 'measured, with 1–3σ ellipses',
     points: [
       ...set.candidates.filter(candidate => candidate.kind === 'planet').map(candidate => ({ x: candidate.eastMas, y: candidate.northMas, label: candidate.id, mark: mark(system, candidate.id), series: candidate.id, role: 'candidate' as const, ...(covarianceOf(candidate) ? { covariance: covarianceOf(candidate)! } : {}) })),
@@ -303,7 +303,7 @@ export async function runCandidates(system: string, epoch: number, directory: st
   await refuseExisting(directory);
   const set = await candidatesAtEpoch(system, epoch, { orbitDraws: options.orbitDraws ?? 1 });
   await writeJson(resolve(directory, 'candidates.json'), { schema: 'cssearth-sky-candidates@1', ...set, limits: LIMITS });
-  await plotNumericPreview(directory, { kind: 'scatter-ellipses', layout: 'publication', title: '', xLabel: 'Δα cos δ from star (mas)', yLabel: 'Δδ from star (mas)', invertX: true, sigmaLevels: [1, 2, 3], origin: { label: system },
+  await plotNumericPreview(directory, { kind: 'scatter-ellipses', layout: 'publication', title: '', xLabel: 'ΔRA (mas)', yLabel: 'ΔDec (mas)', invertX: true, sigmaLevels: [1, 2, 3], origin: { label: system },
     points: set.candidates.filter(candidate => candidate.kind === 'planet').map(candidate => ({ x: candidate.eastMas, y: candidate.northMas, label: candidate.id, mark: mark(system, candidate.id), series: candidate.id, role: 'candidate' as const, ...(covarianceOf(candidate) ? { covariance: covarianceOf(candidate)! } : {}) })),
     tracks: set.tracks.map(track => ({ label: track.id, series: track.id, points: track.points })) }, options);
   return { directory, set };
