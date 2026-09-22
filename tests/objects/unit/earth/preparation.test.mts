@@ -68,7 +68,7 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
   const source = await readEarthAtmosphereModel();
   const atmosphere = PREPARED_EARTH_SCENE.material.atmosphere;
   assert.equal(atmosphere.model,
-    "prepared-openspace-atmosphere-with-google-directional-response-bank");
+    "prepared-model-atmosphere-with-google-directional-response-bank");
   assert.deepEqual(atmosphere.source, source);
   assert.equal(source.atmosphereHeightKm, 70);
   assert.equal(source.planetRadiusKm, 6377);
