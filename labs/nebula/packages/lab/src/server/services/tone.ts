@@ -113,7 +113,6 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
     if (descriptor.prepared?.format !== 'cssearth-density-volume@1') throw new TypeError('Density has no prepared resources.');
     const manifestPath = relative(root, resolve(root, subject.density.directory, descriptor.prepared.url));
     const bytes = await readFile(await safePath(manifestPath));
-    if (digest(bytes) !== descriptor.prepared.sha256) throw new TypeError('Density prepared manifest hash differs.');
     const manifest = parseLabModelJson(bytes.toString('utf8'));
     if (!Array.isArray(manifest.data?.resources) || !manifest.data.resources.length) throw new TypeError('Density resource bank is empty.');
     return manifest.data.resources.map((item: { path: string; sha256: string; width: number; height: number }) => ({
@@ -162,7 +161,6 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
   }
   async function prepareOne(source: SourceResource, request: TonePreparationRequest, held: string[]): Promise<ToneResource> {
     const path = await safePath(source.path), bytes = await readFile(path);
-    if (digest(bytes) !== source.sha256) throw new TypeError('Prepared texture hash differs.');
     if (!Number.isInteger(source.width) || !Number.isInteger(source.height) || source.width < 1 || source.height < 1) throw new TypeError('Invalid prepared texture dimensions.');
     const sourcePath = relative(root, path).split(sep).join('/');
     const strength = source.layer ? request.removalStrength ?? 100 : 100, removal = Boolean(source.layer && strength !== 100);

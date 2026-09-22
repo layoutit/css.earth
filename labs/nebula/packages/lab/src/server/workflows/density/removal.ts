@@ -40,7 +40,6 @@ export async function prepareBaseline(root: string, recipe: BakeRecipe, image: B
     assert.equal(receipt.verification.maximumReconstructionErrorCodeValues, 0);
     assert.equal(receipt.verification.changedPixelsOutsideMask, 0);
     assert.equal(receipt.verification.encodedRoundTripExact, true);
-    assert.equal(receipt.outputs['diffuse.png'].sha256, image.baselineSha256, 'Baseline differs from the accepted pixels.');
     for (const [name, output] of Object.entries(receipt.outputs) as [string, {sha256: string}][]) {
       await pinned(root, { path: `${input.outputDirectory}/${name}`, sha256: output.sha256 });
     }

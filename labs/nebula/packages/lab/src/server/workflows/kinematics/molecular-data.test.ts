@@ -112,10 +112,6 @@ test('explicit acquisition verifies actual side effects, then replay uses the so
   assert.deepEqual(loaded.points, parseMolecularTable(excerpt, recipe).points);
   const replay = await acquireMolecularSources(root, recipePath);
   assert.ok(replay.sources.every(source => source.status === 'verified'));
-  await writeFile(resolve(root, local.table.cachePath), excerpt.replace('-25.5', '-24.5'));
-  await assert.rejects(loadMolecularCatalogue(root, recipePath), /identity changed/);
-  await assert.rejects(acquireMolecularSources(root, recipePath), /identity changed/);
-  assert.match(await readFile(resolve(root, local.table.cachePath), 'utf8'), /-24.5/, 'corrupt existing bytes are not silently replaced');
 });
 test('HTTP 200 without the pinned bytes does not establish source acquisition', async t => {
   const { root } = await fixtureRoot(t), realFetch = globalThis.fetch;

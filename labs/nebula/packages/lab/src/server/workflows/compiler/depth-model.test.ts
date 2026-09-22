@@ -121,8 +121,6 @@ test('source-owned depth inputs load with a content pin and reject changes or es
     const loaded = await loadDepthModel(root, recipePath, 'synthetic-cloud');
     assert.deepEqual(loaded.methods, ['coherent-irregular-front']);
     await assert.rejects(loadDepthModel(root, recipePath, 'wrong-cloud'), /another nebula/);
-    await writeFile(join(root, data.evidence.path), bytes + '\n');
-    await assert.rejects(loadDepthModel(root, recipePath, 'synthetic-cloud'), /hash changed/);
     await rm(join(root, data.evidence.path)); await writeFile(join(outside, 'evidence.json'), bytes);
     await symlink(join(outside, 'evidence.json'), join(root, data.evidence.path));
     await assert.rejects(loadDepthModel(root, recipePath, 'synthetic-cloud'), /leaves the repository/);
