@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import {polarZeroCoverage,resizeObservedRgb,prepareMeasuredPolarAtlas} from '../../tools/objects/observed-coverage.mts';
 import {measureScalarCoverage,finitePercentiles} from '../../tools/objects/giant-observations/scalar-coverage.mts';
 

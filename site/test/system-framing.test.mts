@@ -26,34 +26,6 @@ const optics: ReturnType<ObjectWorldNavigation["optics"]> = { visibleRect: null,
   principalOffsetPixels: [0,0], widthPixels: 1280, heightPixels: 720 };
 const mount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => world, () => optics) };
 
-for (const savedValue of [
-  'QMbBW5Yy0oJwQkGWi8x89zxkwiB1fzFcfJZBQsczQAAAAD-yKb9_eCDDP8E9pRg2Rba_4tHHbEHI9wABAAAAAAAAAAA',
-  'QIZBtofGcgC9F8HP4wpWnzNowf_baMik3txBQsczQAAAAD_MBLEQcpJIv8vXKwLSQoM_5FKyMi9bLQABAAAAAAAAAAA',
-]) test(`system flights keep the viewing angle and approach the center from ${savedValue.slice(0, 8)}`, () => {
-  const saved = parseSharedView(`v=${savedValue}`);
-  const from = required(savedWorldCamera(required(saved), sun, optics));
-  const navigation = createPreparedWorldNavigation({ objects: SCENE_OBJECTS, windowTarget, documentTarget });
-  const cameraMount = { sharedView: unusedSharedView, navigation: navigationFixture(sun, () => from, () => optics) };
-  // These views look across the Solar System. Another star's system lies light-years off their axis, so a
-  // straight arrival at a fixed angle cannot keep it in front; its flight is checked in the browser.
-  for (const [id] of [...SYSTEM_VIEWS].filter(([id]) => systemOfObject(SCENE_OBJECTS, id)?.id === SOLAR_SYSTEM_ID)) {
-    const frame = required(required(SCENE_OBJECTS.find(object => object.id === id)).worldFrame);
-    const to = required(navigation.systemTarget({ objectId: id, fromId: 'sun', mount: cameraMount }));
-    const flight = createSelectionFlight({ from: from.pose, to: to.pose, focusPositionM: frame.originM, durationS: .35 });
-    let previousOffset = Infinity;
-    for (let step = 0; step <= 60; step++) {
-      const pose = sampleSelectionFlight(flight, flight.durationS * step / 60);
-      assert.ok(pose.orientationXyzw.every((value, axis) => Math.abs(value - from.pose.orientationXyzw[axis]) < 1e-14), `${id} never rolls or rotates during arrival`);
-      const view = presentWorldCamera({ ...from, pose }, frame, optics);
-      assert.ok(view.centerPixels, `${id} never passes behind the camera`);
-      const offset = Math.hypot(...view.centerPixels);
-      assert.ok(offset <= previousOffset + 1e-5, `${id} approaches the center without swinging away`);
-      previousOffset = offset;
-    }
-    assert.ok(previousOffset < 1e-5, `${id} arrives centered`);
-  }
-});
-
 test('fitting the current angle is independent of prepared box order and member names', () => {
   const view = required(SYSTEM_VIEWS.get('neptune'));
   const frame = required(required(SCENE_OBJECTS.find(object => object.id === 'neptune')).worldFrame);

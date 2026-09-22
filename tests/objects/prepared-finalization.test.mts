@@ -3,7 +3,8 @@ import { copyFile, mkdtemp, mkdir, readFile, readdir, rm } from 'node:fs/promise
 import { createHash } from 'node:crypto';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import { finalizeObjectJson } from '../../tools/prepare/prepare-object-json.mts';
 import { requireRecord } from '../../tools/sources/source-values.mts';
 import { requireInventory, verifyInventory } from '../../src/platform/runtime-asset-closure.mts';

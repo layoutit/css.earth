@@ -1,13 +1,14 @@
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import {readFile,writeFile,mkdtemp,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
 import {gunzipSync} from 'node:zlib';
-import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
+import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/dist/operations.js';
 import {prepareSatelliteCatalog} from '../../tools/objects/acquisition/satellite-catalog.mts';
-import type {SourceManifest,SourceEntry} from '../../tools/objects/operations.js';
+import type {SourceManifest,SourceEntry} from '../../tools/objects/dist/operations.js';
 const digest=(bytes:Uint8Array|string)=>createHash('sha256').update(bytes).digest('hex');
 const entry=(path:string,_bytes:Uint8Array):SourceEntry=>({path});
 const temporary=async(work:(root:string)=>Promise<void>)=>{const root=await mkdtemp(join(tmpdir(),'catalog-acquisition-'));try{await work(root);}finally{await rm(root,{recursive:true,force:true});}};
