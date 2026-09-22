@@ -31,7 +31,7 @@ import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu } from '../../fits/fits.mts';
 import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
-import { addProductEvidence, assertInputPins, pinFile, readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
+import { addProductEvidence, assertInputPins, fileSize, readProductRecord, writeProductRecord, type ProductInput, type ProductRun } from '../product-record.mts';
 import { defaultDataRoot, PROGRAMS, readSpitzerProgram, type SpitzerChannel, type SpitzerProgram } from './archive.mts';
 import { defaultWorkRoot, mosaicMembers, mosaicName, STAGE, TELESCOPE } from './mosaic.mts';
 
@@ -89,7 +89,7 @@ export async function compareMosaics(ours: ComparedFile, archive: ComparedFile, 
     throw new Error('The four compared files must be four different pinned files.');
   await assertInputPins(entries.map(entry => entry.pin), new Map(entries.map(entry => [entry.pin.identity, entry.path])));
   const compared: ProductInput[] = [];
-  for (const entry of entries) compared.push({ role: entry.pin.role, identity: entry.pin.identity, ...await pinFile(entry.path) });
+  for (const entry of entries) compared.push({ role: entry.pin.role, identity: entry.pin.identity, ...await fileSize(entry.path) });
 
   const files = entries.map(entry => entry.path);
   const hdus = await Promise.all(files.map(async path => imageHdu(await readFitsFileHdus(path), path)));
@@ -143,12 +143,12 @@ export interface SpitzerReproduction {
   readonly channel: number;
   readonly wavelength: string;
   /** What made the product we compare against, and what made ours. The first is the observatory's; the second is not. */
-  readonly archiveProduct: { readonly name: string; readonly bytes: number; readonly sha256: string; readonly pipeline: string };
-  readonly ourProduct: { readonly name: string; readonly bytes: number; readonly sha256: string; readonly stage: string; readonly software: readonly { readonly name: string; readonly version: string }[]; readonly toolchainDigest: string };
+  readonly archiveProduct: { readonly name: string; readonly bytes: number; readonly pipeline: string };
+  readonly ourProduct: { readonly name: string; readonly bytes: number; readonly stage: string; readonly software: readonly { readonly name: string; readonly version: string }[]; readonly toolchainDigest: string };
   /** The two archive planes the headline numbers are measured against, as they were on disk when they were read. The share
    * inside "the archive's own uncertainty" means nothing without saying which uncertainty file that was. */
-  readonly archiveUncertainty: { readonly name: string; readonly bytes: number; readonly sha256: string };
-  readonly archiveCoverage: { readonly name: string; readonly bytes: number; readonly sha256: string };
+  readonly archiveUncertainty: { readonly name: string; readonly bytes: number };
+  readonly archiveCoverage: { readonly name: string; readonly bytes: number };
   readonly framesCombined: readonly string[];
   readonly frameTimeSeconds: number;
   readonly statistics: ComparisonStatistics;
@@ -168,7 +168,7 @@ export function parseReproduction(value: unknown): SpitzerReproduction {
   if (row.schema !== SCHEMA) throw new TypeError(`Unsupported Spitzer reproduction schema ${String(row.schema)}.`);
   const product = (raw: unknown, label: string) => {
     const entry = requireRecord(raw, label);
-    return { name: requireString(entry.name, `${label} name`), bytes: requireFiniteNumber(entry.bytes, `${label} bytes`), sha256: requireString(entry.sha256, `${label} sha256`) };
+    return { name: requireString(entry.name, `${label} name`), bytes: requireFiniteNumber(entry.bytes, `${label} bytes`) };
   };
   const archiveProduct = { ...product(row.archiveProduct, 'archive product'), pipeline: requireString(requireRecord(row.archiveProduct, 'archive product').pipeline, 'archive pipeline') };
   const ourRecord = requireRecord(row.ourProduct, 'our product');
@@ -221,10 +221,10 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
   // them. compareMosaics refuses every one of them that is not its pinned bytes before it reads a sample, and gives back the
   // identity of what it did read. Nothing below copies a digest out of the program or the record.
   const comparison = await compareMosaics(
-    { path: ourPath, pin: { role: 'our-mosaic', identity: output, bytes: ourFile.bytes, sha256: ourFile.sha256 } },
-    { path: resolve(directory, archive.name), pin: { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes, sha256: (await pinFile(resolve(directory, archive.name))).sha256 } },
-    { path: resolve(directory, uncertainty.name), pin: { role: 'archive-uncertainty', identity: uncertainty.name, bytes: uncertainty.bytes, sha256: (await pinFile(resolve(directory, uncertainty.name))).sha256 } },
-    { path: resolve(directory, coverage.name), pin: { role: 'archive-coverage', identity: coverage.name, bytes: coverage.bytes, sha256: (await pinFile(resolve(directory, coverage.name))).sha256 } });
+    { path: ourPath, pin: { role: 'our-mosaic', identity: output, bytes: ourFile.bytes } },
+    { path: resolve(directory, archive.name), pin: { role: 'archive-mosaic', identity: archive.name, bytes: archive.bytes } },
+    { path: resolve(directory, uncertainty.name), pin: { role: 'archive-uncertainty', identity: uncertainty.name, bytes: uncertainty.bytes } },
+    { path: resolve(directory, coverage.name), pin: { role: 'archive-coverage', identity: coverage.name, bytes: coverage.bytes } });
   const inputs = comparison.compared;
   const read = (role: string) => {
     const found = inputs.find(entry => entry.role === role);
@@ -234,10 +234,10 @@ export async function compareChannel(program: SpitzerProgram, channel: SpitzerCh
   const readArchive = read('archive-mosaic'), readOurs = read('our-mosaic');
   const reproduction = parseReproduction({
     schema: SCHEMA, program: program.id, aorKey: program.aorKey, target: program.target, channel: channel.channel, wavelength: channel.wavelength,
-    archiveProduct: { name: readArchive.identity, bytes: readArchive.bytes, sha256: readArchive.sha256, pipeline: channel.mosaic.creator },
-    ourProduct: { name: readOurs.identity, bytes: readOurs.bytes, sha256: readOurs.sha256, stage: record.stage, software: record.software, toolchainDigest: record.toolchainDigest ?? '' },
-    archiveUncertainty: { name: read('archive-uncertainty').identity, bytes: read('archive-uncertainty').bytes, sha256: read('archive-uncertainty').sha256 },
-    archiveCoverage: { name: read('archive-coverage').identity, bytes: read('archive-coverage').bytes, sha256: read('archive-coverage').sha256 },
+    archiveProduct: { name: readArchive.identity, bytes: readArchive.bytes, pipeline: channel.mosaic.creator },
+    ourProduct: { name: readOurs.identity, bytes: readOurs.bytes, stage: record.stage, software: record.software, toolchainDigest: record.toolchainDigest ?? '' },
+    archiveUncertainty: { name: read('archive-uncertainty').identity, bytes: read('archive-uncertainty').bytes },
+    archiveCoverage: { name: read('archive-coverage').identity, bytes: read('archive-coverage').bytes },
     framesCombined: mosaicMembers(channel).map(frame => frame.dce), frameTimeSeconds: channel.mosaicFrameTimeSeconds,
     statistics: comparison.statistics, limits: LIMITS,
   });

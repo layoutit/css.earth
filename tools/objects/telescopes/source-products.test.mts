@@ -63,7 +63,7 @@ test('header identity, complete pins and supported configuration are enforced', 
 test('request satisfaction uses one product, preserves spectral gaps, and separates missing science from valid bytes', () => {
   const facts = { target: request.target, verified: true, kind: 'image' as const, result: 'telescope-product' as const, wavelengthIntervalsMicrometres: [[1, 2]] as const, angularResolutionArcsec: .5 };
   assert.equal(assessRequest(request, facts).status, 'unresolved');
-  assert.equal(assessRequest(request, { ...facts, resolutionEvidence: [{ kind: 'measured', receipt: { file: 'fit.json', sha256: 'a'.repeat(64) } }] }).status, 'fulfilled');
+  assert.equal(assessRequest(request, { ...facts, resolutionEvidence: [{ kind: 'measured', receipt: { file: 'fit.json' } }] }).status, 'fulfilled');
   assert.equal(assessRequest(request, { ...facts, wavelengthIntervalsMicrometres: [[1, 1.2], [1.8, 2]] }).status, 'unresolved');
   assert.equal(assessRequest(request, { ...facts, wavelengthIntervalsMicrometres: [[3, 4]] }).status, 'refused');
   assert.equal(assessRequest(request, { ...facts, angularResolutionArcsec: undefined }).constraints.angularResolution!.answer, 'unknown');

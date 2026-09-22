@@ -68,8 +68,8 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
   for (const raw of requireArray(record.maps, 'maps')) {
     const entry = requireRecord(raw, 'map'), mapId = requireString(entry.id, 'map id'), grid = requireRecord(entry.grid, 'grid'), limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees');
     const margin = requireFiniteNumber(entry.cutoutRadii, 'cutoutRadii'), placed: BodyMap[] = [], sessions: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [], frequencies: number[] = [];
-    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: `src/objects/${id}/source/preparation/alma-thermal-maps.json`, bytes: recipeBytes.byteLength, sha256: sha256(recipeBytes) },
-      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength, sha256: sha256(rotationBytes) }];
+    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: `src/objects/${id}/source/preparation/alma-thermal-maps.json`, bytes: recipeBytes.byteLength },
+      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength }];
     for (const rawSession of requireArray(entry.sessions, 'sessions')) {
       const stated = requireRecord(rawSession, 'session'), sessionId = requireString(stated.id, 'session id'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris'), cutoutPath = resolve(source, requireString(stated.image, 'session image'));
       let bytes: Buffer | null = await readFile(cutoutPath).catch(() => null);
@@ -89,7 +89,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         written.set(cutoutPath, bytes);
       }
       if (!bytes) throw new Error(`${id} ${mapId}: no cutout for ${sessionId}.`);
-      inputs.push({ role: 'brightness-temperature cutout', identity: requireString(stated.image, 'session image'), bytes: bytes.byteLength, sha256: sha256(bytes) });
+      inputs.push({ role: 'brightness-temperature cutout', identity: requireString(stated.image, 'session image'), bytes: bytes.byteLength });
       const primary = readFitsHeader(bytes).header as Record<string, unknown>, plane = readFitsImage(bytes, { start: 2880 });
       const cutout: ThermalCutout = { size: plane.width, arcsecPerPixel: cardNumber(primary, 'PIXSCALE'), midJd: cardNumber(primary, 'MJD-MID') + MJD_EPOCH_JD, rmsKelvin: cardNumber(primary, 'RMSK'), kelvin: plane.values };
       const paths = { observer: requireString(ephemeris.observer), heliocentric: requireString(ephemeris.heliocentric) };
@@ -100,7 +100,7 @@ export async function authorThermalMaps(id: string, options: { check?: boolean; 
         written.set(resolve(source, paths.observer), Buffer.from(tables.observer)); written.set(resolve(source, paths.heliocentric), Buffer.from(tables.heliocentric));
       }
       for (const [role, path, text] of [['observer ephemeris', paths.observer, tables.observer], ['heliocentric ephemeris', paths.heliocentric, tables.heliocentric]] as const) {
-        const value = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: value.byteLength, sha256: sha256(value) });
+        const value = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: value.byteLength });
       }
       const row = horizonsRows(tables.observer)[0]!;
       if (Math.abs(rowJd(row) - cutout.midJd) >= 2 / 86_400) throw new Error(`${paths.observer} has no row at the session's mid-time.`);

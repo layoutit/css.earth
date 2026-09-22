@@ -67,8 +67,8 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
     const recipe = { band: window(measure.band, 'band'), continuum: [window(requireArray(measure.continuum)[0], 'continuum'), window(requireArray(measure.continuum)[1], 'continuum')] as const };
     const limit = requireFiniteNumber(entry.maximumEmissionDegrees, 'maximumEmissionDegrees'), minimum = requireFiniteNumber(entry.minimumDiscPixels, 'minimumDiscPixels');
     const placed: BodyMap[] = [], cubes: Record<string, unknown>[] = [], observations: BodyMapObservation[] = [];
-    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: relative(REPOSITORY, recipePath), bytes: recipeBytes.byteLength, sha256: sha256(recipeBytes) },
-      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength, sha256: sha256(rotationBytes) }];
+    const inputs: ProductInput[] = [{ role: 'body-map recipe', identity: relative(REPOSITORY, recipePath), bytes: recipeBytes.byteLength },
+      { role: 'rotation model', identity: requireString(rotation.path), bytes: rotationBytes.byteLength }];
     for (const rawCube of requireArray(entry.cubes, 'cubes')) {
       const stated = requireRecord(rawCube, 'cube'), ephemeris = requireRecord(stated.ephemeris, 'ephemeris');
       const { program } = await readImagingProgram(requireString(stated.program)), band = program.bands.find(other => other.band === stated.band);
@@ -90,7 +90,7 @@ export async function authorBodyMaps(id: string, options: { check?: boolean; sou
         written.set(resolve(source, paths.observer), Buffer.from(tables.observer)); written.set(resolve(source, paths.heliocentric), Buffer.from(tables.heliocentric));
       }
       for (const [role, path, text] of [['observer ephemeris', paths.observer, tables.observer], ['heliocentric ephemeris', paths.heliocentric, tables.heliocentric]] as const) {
-        const bytes = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: bytes.byteLength, sha256: sha256(bytes) });
+        const bytes = Buffer.from(text); inputs.push({ role, identity: `src/objects/${id}/source/${path}`, bytes: bytes.byteLength });
       }
       if (!/\(-170\)/u.test(tables.observer)) throw new Error(`${paths.observer} was not asked for JWST as the observer.`);
       const row = horizonsRows(tables.observer)[0]!;

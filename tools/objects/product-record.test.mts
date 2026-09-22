@@ -4,10 +4,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { addProductEvidence, assertInputPins, evidenceFor, parseProductRecord, pinFile, productRecordPath, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductRun } from './product-record.mts';
+import { addProductEvidence, assertInputPins, evidenceFor, parseProductRecord, fileSize, productRecordPath, readProductRecord, runDigest, sameRun, writeProductRecord, type ProductRun } from './product-record.mts';
 
 const scratch = () => mkdtemp(join(tmpdir(), 'product-record-'));
-const run = (overrides: Partial<ProductRun> = {}): ProductRun => ({ telescope: 'ALMA', stage: 'disc-selfcal/final', inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3, sha256: 'a'.repeat(64) }],
+const run = (overrides: Partial<ProductRun> = {}): ProductRun => ({ telescope: 'ALMA', stage: 'disc-selfcal/final', inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3 }],
   parameters: { fluxScale: 0.907, robust: 0 }, software: [{ name: 'casatasks', version: '6.7.0' }], toolchainDigest: 'b'.repeat(64), ...overrides });
 
 test('a run digest ignores key and input order and changes with any value', () => {
@@ -16,7 +16,7 @@ test('a run digest ignores key and input order and changes with any value', () =
   assert.notEqual(runDigest(run({ parameters: { fluxScale: 1.015, robust: 0 } })), base);
   assert.notEqual(runDigest(run({ software: [{ name: 'casatasks', version: '6.6.0' }] })), base);
   assert.notEqual(runDigest(run({ toolchainDigest: 'c'.repeat(64) })), base);
-  assert.notEqual(runDigest(run({ inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 3, sha256: 'd'.repeat(64) }] })), base);
+  assert.notEqual(runDigest(run({ inputs: [{ role: 'visibilities', identity: 'uid://A002/X/1', bytes: 4 }] })), base);
 });
 
 test('an output is reused only when the same run made it and it is still that file', async () => {
@@ -30,13 +30,13 @@ test('an output is reused only when the same run made it and it is still that fi
   assert.equal(await sameRun(await readProductRecord(recordPath), run(), locate), false, 'a changed output is not the recorded product');
 });
 
-test('inputs that are not the pinned ones are refused before use', async () => {
+test('inputs that are not the recorded ones are refused before use', async () => {
   const directory = await scratch(), frame = join(directory, 'frame.fits');
   await writeFile(frame, 'raw frame');
-  const pin = { role: 'raw', identity: 'NACO.2012-01-01T00:00:00.000', ...(await pinFile(frame)) };
+  const pin = { role: 'raw', identity: 'NACO.2012-01-01T00:00:00.000', ...(await fileSize(frame)) };
   await assertInputPins([pin], new Map([[pin.identity, frame]]));
   await writeFile(frame, 'raw frame, altered but still valid');
-  await assert.rejects(assertInputPins([pin], new Map([[pin.identity, frame]])), /is not the pinned/u);
+  await assert.rejects(assertInputPins([pin], new Map([[pin.identity, frame]])), /is not the recorded/u);
   await assert.rejects(assertInputPins([pin], new Map()), /No file was given/u);
 });
 
@@ -76,7 +76,7 @@ test('evidence is added to the record of the run that made the product, and only
   await writeFile(image, 'another image');
   await assert.rejects(addProductEvidence(recordPath, [agreement], locate), /not the files on disk/u);
 });
-test('comparison receipts are immutable, pinned snapshots beside their exact product', async () => {
+test('comparison receipts are immutable snapshots beside their exact product', async () => {
   const directory = await scratch(), product = join(directory, 'cube.fits'), receipt = join(directory, 'latest.json');
   await writeFile(product, 'cube'); await writeFile(receipt, '{"slice":[2.2,2.4]}');
   const path = productRecordPath(product), locate = (name: string) => join(directory, name);
@@ -86,6 +86,4 @@ test('comparison receipts are immutable, pinned snapshots beside their exact pro
   await writeFile(receipt, '{"slice":[2.6,2.8]}');
   assert.match(await readFile(locate(snapshot.receipt), 'utf8'), /2.2/);
   assert.equal(await sameRun(record, run(), locate), true);
-  await writeFile(locate(snapshot.receipt), 'altered evidence');
-  assert.equal(await sameRun(record, run(), locate), false);
 });

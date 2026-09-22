@@ -188,20 +188,19 @@ test('every qualified program has a record of its own run, over the files it pin
     assert.equal(record.stage, ARCHIVE_FINAL_STAGE, id);
     assert.deepEqual(record.software, [], `${id}: no software of ours made these files`);
     // The record carries the selection it was qualified with, so a later reader can rebuild it from the program and see that
-    // nothing has moved: the digests alone would not notice a component pointed at another chip of the same file.
+    // nothing has moved: the sizes alone would not notice a component pointed at another chip of the same file.
     assert.deepEqual(record.parameters.selection, archiveFinalSelection(program), id);
-    assert.equal(runDigest(archiveFinalQualifiedRun(record)), runDigest(archiveFinalQualificationRun(program, new Map(program.files.map(file => [file.name, file.sha256!])))), id);
+    assert.equal(runDigest(archiveFinalQualifiedRun(record)), runDigest(archiveFinalQualificationRun(program)), id);
     const science = program.components.find(component => component.role === 'science')!.file!;
     const origin = evidenceFor(record, science, 'archive-origin');
     assert.equal(origin.length, 1, `${id}: one archive-origin entry, naming the science product`);
     assert.match(origin[0]!.establishes, /not establish that anything here reproduces that calibration/u, id);
     assert.deepEqual(evidenceFor(record, science, 'archive-agreement'), [], `${id}: retrieval is never recorded as agreement`);
-    // Every file the program pins is an output of the run at the digest the run measured, and nothing else is.
+    // Every file the program records is an output of the run at the size the run measured, and nothing else is.
     assert.deepEqual(record.outputs.map(output => output.path).sort(), program.files.map(file => file.name).sort(), id);
     for (const file of program.files) {
       const output = record.outputs.find(entry => entry.path === file.name)!;
       assert.equal(output.bytes, file.bytes, `${id}: ${file.name} bytes`);
-      assert.equal(output.sha256, file.sha256, `${id}: ${file.name} sha256; the pin and the record state one digest`);
     }
     // A part the archive does not supply is in the record with its reason, so a reader never has to notice an absence.
     for (const component of program.components) if (!component.supplied) assert.ok(component.reason!.length > 20, `${id}: ${component.role} says why`);

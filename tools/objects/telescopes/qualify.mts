@@ -19,7 +19,7 @@ import { refreshLocalLedger as refreshJwstLedger } from '../jwst/archive-ledger.
 import { PROGRAMS as NACO_PROGRAMS, pinProgram as pinNacoProgram, writeProgram as writeNacoProgram } from '../naco/archive.mts';
 import { refreshLocalLedger as refreshNacoLedger } from '../naco/archive-ledger.mts';
 import { compareTemplates } from '../naco/compare.mts';
-import { pinFrames, reduceProgram as reduceNacoProgram } from '../naco/reduce.mts';
+import { reduceProgram as reduceNacoProgram } from '../naco/reduce.mts';
 import { qualifyPdsArchiveProduct } from '../pds/archive-final.mts';
 import { buildPdsLedger } from '../pds/archive-ledger.mts';
 import { productRecordPath, readProductRecord, sameRun } from '../product-record.mts';
@@ -110,7 +110,6 @@ async function qualifyNacoImaging(root: string, request: QualificationRequest): 
       if (!record) throw new Error(`${product} has no product record; the run that makes it writes one beside it.`);
       return record;
     }));
-  await writeNacoProgram(pinFrames(program, records.flatMap(record => record.inputs)));
   await compareTemplates(programId, work, templates);
   await refreshNacoLedger();
   return { schema: QUALIFICATION_SCHEMA, target: answer.target, telescope: request.telescope, mode: request.mode, observation: request.observation,
@@ -211,7 +210,7 @@ export async function recordQualification(root: string, result: QualificationRes
     const headers = await readFitsFileHdus(result.product), header = headers[0]!.header;
     facts = { ...facts, ...fitsObservationInterval(header) };
   }
-  const evidence = record?.evidence.findLast(entry => entry.receiptPin !== undefined);
+  const evidence = record?.evidence.findLast(entry => entry.kind === 'archive-agreement' || entry.kind === 'internal-consistency' || entry.kind === 'geometric-registration' || entry.kind === 'published-value');
   const qualified = { ...result, receipt: evidence ? resolve(dirname(result.product), evidence.receipt) : result.receipt };
   if(!await sameRun(record,record,path=>resolve(dirname(result.product),path)))throw new Error('Producing outputs changed during qualification');
   await rememberQualification(root, { ...qualified, facts, productRecord: result.configuration.kind === 'pds-product' ? result.receipt : productRecordPath(result.product), outputRoot: dirname(result.product) });

@@ -6,7 +6,7 @@ import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { astroqueryToolchain } from '../../astronomy-packages/toolchain.mts';
-import { pinFile, readProductRecord } from '../../product-record.mts';
+import { fileSize, readProductRecord } from '../../product-record.mts';
 import { executeFamilyOperation } from '../family-operation.mts';
 import { executableFamilyOperations } from '../family-operation.mts';
 import { member } from './common.mts';
@@ -24,7 +24,7 @@ r=np.linspace(1.5,4,51)[:,None,None];lat=np.radians(np.arange(-90,91))[None,:,No
 a=(1e6/r**2)*(1+.2*np.cos(2*lon)*np.cos(lat)**2);a[:,:,360]=a[:,:,0]
 h=fits.Header();h['CTYPE1']='CRLN';h['CRPIX1']=1.;h['CRVAL1']=0.;h['CDELT1']=1.;h['CUNIT1']='deg';h['CTYPE2']='CRLT';h['CRPIX2']=91.;h['CRVAL2']=0.;h['CDELT2']=1.;h['CUNIT2']='deg';h['CTYPE3']='HECR';h['CRPIX3']=1.;h['CRVAL3']=1.5;h['CDELT3']=.05;h['CUNIT3']='solRad';h['BUNIT']='cm^-3';h['INSTRUME']='SECCHI';h['DATE-AVG']='2007-02-11T14:13:00.012';fits.PrimaryHDU(a.astype('>f4'),header=h).writeto(sys.argv[1])`, file], { env: { ...process.env, ...toolchain.env }, encoding: 'utf8' });
     assert.equal(made.status, 0, made.stderr);
-    const bytes = await readFile(file), pin = { path: file, ...await pinFile(file) }, inspection = await inspectPhysicalSphericalGrid(pin, context);
+    const bytes = await readFile(file), pin = { path: file, ...await fileSize(file) }, inspection = await inspectPhysicalSphericalGrid(pin, context);
     assert.deepEqual(inspection.shape, [51, 181, 361]); assert.equal(inspection.seamMaximumDifference, 0); assert.ok(inspection.epochJdTt > 2454000);
     const descriptor = describePhysicalSphericalGrid({ id: 'cor1-fixture', target: 'sun', member: member('electron-density-fits', 'corona.fits', 'science', bytes, 'application/fits'), context, inspection, producingRecord: 'qualification.product.json' }), descriptorPath = resolve(work, 'descriptor.json'); await writeFile(descriptorPath, JSON.stringify(descriptor));
     assert.deepEqual(executableFamilyOperations(descriptor).map(operation => operation.id), ['spherical-grid-inspect', 'spherical-grid-prepare-volume']);

@@ -17,7 +17,7 @@ test('qualification readback binds facts to the exact output, receipt and produc
     await writeProductRecord(productRecordPath(product), { telescope: 'JWST', stage: 'spec3-cube', inputs: [], software: [], parameters: {} }, [{ path: 'cube.fits', file: product }]);
     await rememberQualification(root, { ...{ schema: 'cssearth-telescope-qualification@2' }, target: 'test', telescope: 'JWST', mode: 'NIRSPEC/IFU', observation: 'obs', program: 'test-obs', product, receipt, productRecord: productRecordPath(product), outputRoot: root,
       facts: { target: 'test', verified: true, kind: 'cube', result: 'telescope-product', wavelengthIntervalsMicrometres: [[2.2, 2.4]],
-        resolutionEvidence: [{ kind: 'measured', receipt: { file: resolution, sha256: sha256('{}') } }],
+        resolutionEvidence: [{ kind: 'measured', receipt: { file: resolution } }],
         angularResolutionBound: { arcsec: .4, method: 'jwst-point-source-profile@1', receipt: resolution } } });
     const loaded = await loadQualifiedObservations(root, 'test');
     assert.equal(loaded.length, 1); assert.equal(loaded[0]!.product, 'cube.fits');

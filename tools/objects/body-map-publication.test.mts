@@ -5,7 +5,6 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { sha256 } from '../../src/platform/sha256.mts';
 import { formatBodyMapProduct, type BodyMapProduct } from './body-map-product.mts';
 import { bindMapResolution, bodyMapProductRecord, formatProductRecord, qualifyBodyMap } from './body-map-publication.mts';
 import type { ObservationSelection } from './telescopes/query.mts';
@@ -30,7 +29,7 @@ async function fixture(value = product(), measured = true) {
   if (bound) value = bound.product;
   const directory = await mkdtemp(resolve(tmpdir(), 'body-map-publication-')), planePath = resolve(directory, value.planes.file), mapPath = `${planePath}.body-map.json`;
   const metadata = Buffer.from(formatBodyMapProduct(value)), record = bodyMapProductRecord(value, plane, metadata,
-    [{ role: 'spectral cube', identity: 'mast:JWST/product/jw01250-o002_s3d.fits', bytes: 12, sha256: 'b'.repeat(64) }],
+    [{ role: 'spectral cube', identity: 'mast:JWST/product/jw01250-o002_s3d.fits', bytes: 12 }],
     [{ name: 'cssEarth author-body-maps', version: '1' }], undefined, bound ? [bound.output] : []);
   if (bound) await writeFile(resolve(directory, bound.output.path), bound.output.bytes);
   await writeFile(planePath, plane); await writeFile(mapPath, metadata); await writeFile(`${planePath}.product.json`, formatProductRecord(record));
@@ -138,7 +137,7 @@ test('exact UTC request edges agree with their Julian dates',async()=>{
 });
 
 test('publication establishes input kind only from a current qualified artifact with matching input bytes',async()=>{
- const {writeProductRecord,productRecordPath,pinFile}=await import('./product-record.mts');
+ const {writeProductRecord,productRecordPath,fileSize}=await import('./product-record.mts');
  const {rememberQualification,loadQualifiedObservations}=await import('./telescopes/qualified-observations.mts');
  const f=await fixture(),root=f.directory,cube=resolve(root,'selected.fits'),receipt=resolve(root,'comparison.json');
  await writeFile(cube,'verified cube fixture');await writeFile(receipt,'{}');
@@ -146,7 +145,7 @@ test('publication establishes input kind only from a current qualified artifact 
  await rememberQualification(root,{target:'europa',telescope:'JWST',mode:'NIRSPEC/IFU',program:selection.programme,observation:'jw01250-o002',product:cube,productRecord:productRecordPath(cube),receipt,outputRoot:root,facts:{target:'europa',verified:true,kind:'cube',result:'telescope-product'}});
  const selected={...selection,product:(await loadQualifiedObservations(root,'europa'))[0]!};
  await assert.rejects(qualifyBodyMap(f.mapPath,selected,root),/did not consume/);
- const record=JSON.parse(await readFile(`${f.planePath}.product.json`,'utf8'));record.inputs.push({role:'qualified scientific product',identity:'selected.fits',...await pinFile(cube)});
+ const record=JSON.parse(await readFile(`${f.planePath}.product.json`,'utf8'));record.inputs.push({role:'qualified scientific product',identity:'selected.fits',...await fileSize(cube)});
  await writeFile(`${f.planePath}.product.json`,JSON.stringify(record));
  assert.equal((await qualifyBodyMap(f.mapPath,selected,root)).satisfaction.status,'fulfilled');
  assert.equal((await qualifyBodyMap(f.mapPath,selected,root)).satisfaction.status,'fulfilled');

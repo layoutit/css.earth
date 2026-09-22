@@ -363,9 +363,9 @@ test('a calibration record pins the observation’s own files, the context that 
     const record = (await readProductRecord(productRecordPath(product)))!;
     assert.equal(record.telescope, 'HST');
     assert.equal(record.stage, 'calibrate');
-    // Every input the run read, at the size and digest it read, named by the archive product it is.
-    assert.deepEqual(record.inputs.map(input => [input.role, input.identity, input.bytes, input.sha256]),
-      [['raw', 'mast:HST/product/od9l12010_raw.fits', 2000, 'a'.repeat(64)], ['wav', 'mast:HST/product/od9l12010_wav.fits', 1000, 'b'.repeat(64)]]);
+    // Every input the run read, at the size it read, named by the archive product it is.
+    assert.deepEqual(record.inputs.map(input => [input.role, input.identity, input.bytes]),
+      [['raw', 'mast:HST/product/od9l12010_raw.fits', 2000], ['wav', 'mast:HST/product/od9l12010_wav.fits', 1000]]);
     assert.equal(record.parameters.crdsContext, 'hst_1358.pmap');
     assert.equal(record.parameters.pipeline, 'calstis');
     assert.deepEqual(record.parameters.references, { 'od9l12010_raw.fits': { DARKFILE: 'oref$n7p1032ao_drk.fits' } });
@@ -387,7 +387,7 @@ test('the comparison adds its receipt to the record of the exact product it comp
     const record = await addArchiveAgreement(work, name, receiptPath);
     const agreement = evidenceFor(record, name, 'archive-agreement');
     assert.equal(agreement.length, 1);
-    assert.ok(agreement[0]!.receiptPin);
+    assert.ok(agreement[0]!.receipt.endsWith('.evidence.json'));
     assert.match(agreement[0]!.establishes, /reproduces what MAST distributes/u);
     assert.equal(evidenceFor(record, name, 'internal-consistency').length, 0, 'agreement with the archive is not consistency of our own');
     // The same comparison run again says the same thing once, rather than twice.

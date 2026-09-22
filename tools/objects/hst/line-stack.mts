@@ -29,13 +29,13 @@
  * tools/objects/product-record.mts): the frames that went into that set at their pinned digests, the definition and Horizons
  * responses that placed them, and the settings of the line and subset. With `--receipt` the receipt's two checks are added to
  * those records as what they are: agreement with a published value, and the consistency of our own two handednesses. */
-import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, readdir, stat, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
-import { sha256, sha256File } from '../../../src/platform/sha256.mts';
-import { addProductEvidence, pinFile, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { sha256 } from '../../../src/platform/sha256.mts';
+import { addProductEvidence, fileSize, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { PROGRAMS } from './archive.mts';
 import {
   accumulatedImage, addSample, clippedMean, discMetrics, gridPoint, inSubset, limbFallOff, median, newAccumulator, parseLineStack,
@@ -258,9 +258,7 @@ export async function prepareFrames(definition: LineStackDefinition, directory: 
     if (header.programme !== pinned.programme || header.targetName !== pinned.targetName)
       throw new Error(`${pinned.name}: the file is programme ${header.programme} target ${header.targetName}, the pin says ${pinned.programme} ${pinned.targetName}.`);
     if (verifyDigests) {
-      const digest = await sha256File(path);
-      if (digest.bytes !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`);
-      measuredFrameDigests.set(pinned.name, digest.sha256);
+      if ((await stat(path)).size !== pinned.bytes) throw new Error(`${pinned.name}: the file on disk is not the recorded size.`);
     }
     headers.push(header);
   }
@@ -446,14 +444,12 @@ export async function stackRun(definition: LineStackDefinition, line: StackLine,
   software: readonly ProductSoftware[]): Promise<ProductRun> {
   const pinned = new Map(definition.frames.map(frame => [frame.name, frame]));
   const inputs: ProductInput[] = [
-    { role: 'stack definition', identity: `tools/objects/hst/programs/${definition.id}.stack.json`, ...await pinFile(stackPath(definition.id)) },
-    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, ...await pinFile(resolve(PROGRAMS, definition.horizons.responses)) },
+    { role: 'stack definition', identity: `tools/objects/hst/programs/${definition.id}.stack.json`, ...await fileSize(stackPath(definition.id)) },
+    { role: 'Horizons responses', identity: `tools/objects/hst/programs/${definition.horizons.responses}`, ...await fileSize(resolve(PROGRAMS, definition.horizons.responses)) },
     ...[...frames].sort().map(name => {
       const frame = pinned.get(name);
       if (!frame) throw new Error(`${name} went into the stack but is not a frame the definition pins.`);
-      const sha256 = measuredFrameDigests.get(name);
-      if (!sha256) throw new Error(`${name} was stacked without its frame digest being measured.`);
-      return { role: `frame, programme ${frame.programme}`, identity: frame.uri, bytes: frame.bytes, sha256 };
+      return { role: `frame, programme ${frame.programme}`, identity: frame.uri, bytes: frame.bytes };
     }),
   ];
   return {

@@ -28,7 +28,7 @@ import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { mastFile } from '../astronomy-packages/mast.mts';
 import { freeMemoryPercent, toolchainPython } from '../jwst/mast.mts';
-import { pinFile, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
+import { fileSize, productRecordPath, writeProductRecord, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { suffixOf, type HstObservation, type HstProgram } from './archive.mts';
 import { hstSoftware, hstToolchainDigest, MEMORY_GUARD, PIPELINES, readHstProgram, REFERENCE_FILES } from './calibrate.mts';
 import { hstToolchain } from './toolchain.mts';
@@ -120,9 +120,9 @@ export async function runDrizzle(id: string, observation: string, work: string, 
     const software = hstSoftware(reported.software);
     // What went in, each at the bytes this run read: our own exposure, and the archive files its settings and sky came from.
     const inputs: ProductInput[] = [
-      { role: 'calibrated exposure, this run\'s own product', identity: name, ...await pinFile(image) },
-      { role: 'archive drizzled product, read for the settings of the run that made it', identity: product.uri, ...await pinFile(theirs) },
-      { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: exposure.uri, ...await pinFile(theirExposure) },
+      { role: 'calibrated exposure, this run\'s own product', identity: name, ...await fileSize(image) },
+      { role: 'archive drizzled product, read for the settings of the run that made it', identity: product.uri, ...await fileSize(theirs) },
+      { role: 'archive calibrated exposure, read for the sky its drizzle subtracted', identity: exposure.uri, ...await fileSize(theirExposure) },
     ];
     const made = drizzleRun(program, entry, inputs, settings, sky, software, await hstToolchainDigest());
     await writeProductRecord(productRecordPath(resolve(output, product.name)), made, [{ path: product.name, file: resolve(output, product.name), units: settings.units,

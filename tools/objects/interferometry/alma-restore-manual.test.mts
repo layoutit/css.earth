@@ -140,7 +140,7 @@ test('a manual restore is identified by the delivery it replays, the script it g
       'scriptForImaging.py', 'scriptForImagingPrep.py', 'casapy.log', 'uid___A002_Xad2439_Xee6.calibration.tgz', 'calibrated_final_cont.mask.tgz']);
     // The ASDM is identified by the tables that say what was observed, not by the tens of gigabytes of visibilities beside them.
     assert.equal(pins[0]!.bytes, Object.values(XML).join('').length);
-    assert.ok(pins.every(pin => /^[0-9a-f]{64}$/u.test(pin.sha256)), 'every input is pinned by digest');
+    assert.ok(pins.every(pin => pin.bytes > 0), 'every input is recorded by size');
     const run = manualRestoreRun(pins, { target: 'Europa', script: script(), mask: files.mask }, casa, 'f'.repeat(64));
     assert.equal(run.telescope, 'ALMA');
     assert.equal(run.stage, 'restore-manual');
@@ -168,7 +168,7 @@ test('the archive comparison is written beside the restored image and added to i
       difference: { peakRatio: 1.03, diameterDifferenceMas: 1.2, correlation: 0.9981, beamRatio: 1.004, samples: 12_064 } };
     // The restore writes the record; the comparison only adds what it established, so an image no run recorded is refused.
     await assert.rejects(recordArchiveComparison(image, archive, comparison), /no product record at/u);
-    const run = manualRestoreRun([{ role: 'raw ASDM (ASDM, ExecBlock, Main and Antenna tables)', identity: 'uid___A002_Xad2439_Xee6.asdm.sdm', bytes: 36, sha256: 'b'.repeat(64) }],
+    const run = manualRestoreRun([{ role: 'raw ASDM (ASDM, ExecBlock, Main and Antenna tables)', identity: 'uid___A002_Xad2439_Xee6.asdm.sdm', bytes: 36 }],
       { target: 'Europa', script: script(), mask: null }, casa, 'f'.repeat(64));
     await writeProductRecord(productRecordPath(image), run, [{ path: basename(image), file: image, units: 'Jy/beam' }]);
     const receipt = await recordArchiveComparison(image, archive, comparison);
@@ -182,7 +182,7 @@ test('the archive comparison is written beside the restored image and added to i
     assert.deepEqual(record.inputs, run.inputs, 'the comparison leaves the run facts the restore recorded');
     const evidence = evidenceFor(record, basename(image), 'archive-agreement');
     assert.equal(evidence.length, 1);
-    assert.ok(evidence[0]!.receiptPin);
+    assert.ok(evidence[0]!.receipt.endsWith('.evidence.json'));
     assert.match(evidence[0]!.establishes, /reproduces the reduction that was delivered/u);
     // Agreement with the archive places nothing and publishes nothing.
     assert.equal(evidenceFor(record, basename(image), 'geometric-registration').length, 0);

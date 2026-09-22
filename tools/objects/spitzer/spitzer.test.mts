@@ -7,7 +7,7 @@ const test = sourceTest();
 import { archiveUrl, DATA, frameSibling, parseSpitzerProgram, type SpitzerProgram } from './archive.mts';
 import { buildLedger, ledgerGuide, naifIdFromHorizonsCode, observationRecords, parseLedger, repositoryState, type ShippedObject } from './archive-ledger.mts';
 import { archiveAgreement, compareMosaics, LIMITS, parseReproduction } from './compare.mts';
-import { addProductEvidence, evidenceFor, pinFile, readProductRecord, writeProductRecord } from '../product-record.mts';
+import { addProductEvidence, evidenceFor, fileSize, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { channelInputs, FATAL_IMASK_BITS, fatalImaskMask, mosaicMembers, parseMosaicSummary } from './mosaic.mts';
 
 const sha = (seed: string) => seed.repeat(64).slice(0, 64);
@@ -116,7 +116,7 @@ function fitsFile(values: readonly number[], width: number, height: number) {
 }
 
 async function pinned(path: string, role: string) {
-  return { path, pin: { role, identity: path.slice(path.lastIndexOf('/') + 1), ...await pinFile(path) } };
+  return { path, pin: { role, identity: path.slice(path.lastIndexOf('/') + 1), ...await fileSize(path) } };
 }
 
 test('two mosaics are compared only on one grid, and agreement is measured against the archive uncertainty', async () => {
@@ -198,7 +198,7 @@ test('a comparison refuses an archive file that is not its pinned bytes, before 
   assert.equal(again.statistics.shareWithinArchiveSigma, 0);
   for (const entry of again.compared) {
     const source = [ours, archive, unc, cov].find(file => file.pin.identity === entry.identity)!;
-    assert.equal(entry.sha256, source.pin.sha256);
+    assert.equal(entry.bytes, source.pin.bytes);
   }
 });
 
@@ -300,7 +300,6 @@ test('a checked mosaic carries its evidence on its own record, and evidence neve
   await addProductEvidence(recordPath, [entry], path => resolve(work, path));
   const checked = evidenceFor((await readProductRecord(recordPath))!, mosaic, 'archive-agreement');
   assert.equal(checked.length, 1);
-  assert.ok(checked[0]!.receiptPin);
   assert.ok(checked[0]!.receipt.endsWith('.evidence.json'));
   assert.match(checked[0]!.establishes, /NON-official/u);
   assert.match(checked[0]!.establishes, /MOPEX did not run here/u);
@@ -327,10 +326,10 @@ test('a receipt counts only when the archive files it says it read are the ones 
   const receipt = (uncertaintySha256: string) => ({
     schema: 'cssearth-spitzer-reproduction@1', program: pinnedProgram.id, aorKey: pinnedProgram.aorKey, target: pinnedProgram.target,
     channel: channel.channel, wavelength: channel.wavelength,
-    archiveProduct: { name: plane('mosaic').name, bytes: plane('mosaic').bytes, sha256: plane('mosaic').sha256, pipeline: 'S18.25.0' },
+    archiveProduct: { name: plane('mosaic').name, bytes: plane('mosaic').bytes, sha256: 'a'.repeat(64), pipeline: 'S18.25.0' },
     ourProduct: { name: 'remosaic.fits', bytes: 100, sha256: sha('b'), stage: 'open-remosaic', toolchainDigest: sha('c'), software: [{ name: 'reproject', version: '0.21.0' }] },
     archiveUncertainty: { name: plane('mosaic-uncertainty').name, bytes: plane('mosaic-uncertainty').bytes, sha256: uncertaintySha256 },
-    archiveCoverage: { name: plane('mosaic-coverage').name, bytes: plane('mosaic-coverage').bytes, sha256: plane('mosaic-coverage').sha256 },
+    archiveCoverage: { name: plane('mosaic-coverage').name, bytes: plane('mosaic-coverage').bytes, sha256: 'b'.repeat(64) },
     framesCombined: ['0001', '0003'], frameTimeSeconds: 30,
     statistics: { comparedPixels: 10, archiveCoveredPixels: 12, bitIdenticalShare: 0, medianRatio: 1, medianLevel: 0.07,
       medianAbsoluteDifferenceOverLevel: 0.003, differenceInArchiveSigma: { median: 0.02, p95: 0.25, p99: 2.3, max: 40 },
@@ -340,7 +339,7 @@ test('a receipt counts only when the archive files it says it read are the ones 
   await writeFile(resolve(scratch, `${pinnedProgram.id}.json`), JSON.stringify(program()));
   const receiptFile = resolve(scratch, `${pinnedProgram.id}.ch1.remosaic.reproduction.json`);
 
-  await writeFile(receiptFile, JSON.stringify(receipt(plane('mosaic-uncertainty').sha256)));
+  await writeFile(receiptFile, JSON.stringify(receipt('c'.repeat(64))));
   assert.equal((await repositoryState(scratch)).checked.get('IRAC Map'), 1);
 
   // The same receipt, claiming perfect agreement, but measured against some other uncertainty plane: it counts for nothing.
