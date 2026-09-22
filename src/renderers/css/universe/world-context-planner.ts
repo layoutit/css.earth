@@ -1,7 +1,7 @@
 import type { PositionM } from '@cssearth/engine';
 import type { PreparedWorldContext, PreparedWorldContextGeometry } from './prepared-world-context.js';
 import type { WorldCameraPose, WorldCameraViewport } from '../navigation/world-camera.js';
-import { cssViewFromOrientation, rotateWorldPosition } from '../navigation/world-camera-math.js';
+import { cssViewFromOrientation } from '../navigation/world-camera-math.js';
 import { levelOfDetailFor } from '../navigation/perspective-dolly.js';
 import { contextOrbitOpacity, focusOwnOrbitOpacity, selectedOrbitDepthFade } from './context-presentation-policy.js';
 import { rayHitsSphereBefore } from '../solar-system/heliocentric-geometry.js';
@@ -212,8 +212,15 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       world.pose.positionM[2] - plan.focus.positionM[2],
     );
     const rotation = cssViewFromOrientation(world.pose.orientationXyzw);
-      const toEye = (position: readonly number[]): PositionM => rotateWorldPosition(rotation, [
-        position[0] - world.pose.positionM[0], position[1] - world.pose.positionM[1], position[2] - world.pose.positionM[2]]);
+      // The camera rotation applied to the camera-relative position, fused: one array per point instead of two, the same
+      // arithmetic in the same order. toEyeAt reads a prepared vertex without building an input array.
+      const [cx, cy, cz] = world.pose.positionM;
+      const [r0, r1, r2, r3, r4, r5, r6, r7, r8] = rotation as readonly [number, number, number, number, number, number, number, number, number];
+      const toEyeAt = (px: number, py: number, pz: number): PositionM => {
+        const x = px - cx, y = py - cy, z = pz - cz;
+        return [r0 * x + r1 * y + r2 * z, r3 * x + r4 * y + r5 * z, r6 * x + r7 * y + r8 * z];
+      };
+      const toEye = (position: readonly number[]): PositionM => toEyeAt(position[0]!, position[1]!, position[2]!);
       const emphasizedId = selectionPreview === undefined ? (overview ? null : selectedId) : selectionPreview;
       const [ox, oy] = viewport.principalOffsetPixels;
       const focal = viewport.focalPixels;
@@ -244,6 +251,18 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
       // the orbit's nearest depth with the off-axis perspective margin. Selection
       // depends on this view alone; a change between banks is below 0.1 px.
       const pixelsPerMeterAtUnitDepth = focal + Math.hypot(width / 2 + Math.abs(ox), height / 2 + Math.abs(oy));
+      // A projector keeps no state between rings, so bodies sharing an occlusion share one for this frame. The selected
+      // orbit's depth fade gives it its own.
+      const projectors = new Map<ReturnType<typeof frame.occlusion>, ReturnType<typeof createPreparedRingProjector>>();
+      const projectorFor = (occlusion: ReturnType<typeof frame.occlusion>) => {
+        let projector = projectors.get(occlusion);
+        if (!projector) {
+          projector = createPreparedRingProjector({ toEye, toEyeAt, project, hidden: occlusion.hidden, mayOcclude: occlusion.mayOcclude,
+            near, clipX: width / 2, clipY: height / 2 });
+          projectors.set(occlusion, projector);
+        }
+        return projector;
+      };
       const detailLevel = (entry: (typeof bodies)[number]) => {
         const lod = entry.orbit?.lod;
         if (!lod) return 0;
@@ -322,10 +341,9 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         let segments: readonly OrbitSegment[] = [], measuredExtent: number | null = null;
         if (entry.orbit && systemOpacity > 0 && bodyOrbitOpacity > 0 &&
             (!bounds || orbitBoundsMayContribute(boundsEye!, bounds.radiusM, focal, [ox, oy], near, width / 2, height / 2, ORBIT_FADE_START_PIXELS))) {
-          const projector = createPreparedRingProjector({ toEye, project, hidden: occlusion.hidden,
-            mayOcclude: occlusion.mayOcclude,
-            ...(isSelected ? { depthFade: selectedOrbitDepthFade(Math.hypot(...eye)) } : {}),
-            near, clipX: width / 2, clipY: height / 2 });
+          const projector = isSelected ? createPreparedRingProjector({ toEye, toEyeAt, project, hidden: occlusion.hidden,
+            mayOcclude: occlusion.mayOcclude, depthFade: selectedOrbitDepthFade(Math.hypot(...eye)),
+            near, clipX: width / 2, clipY: height / 2 }) : projectorFor(occlusion);
           if (skipped || inactiveMoon) {
             // Hidden paths have no geometry consumer. Their proxies still need
             // the exact existing fade, which saturates at 48 CSS pixels. A moon

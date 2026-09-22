@@ -45,7 +45,9 @@ function changedValues(old: Body | undefined, body: Body): Partial<BodyValues> |
     if (old && (COMPARE[key] as (a: unknown, b: unknown) => boolean)(old[key], body[key])) continue;
     if (!old && body[key] === undefined) continue;
     const value = body[key];
-    (values ??= {} as Partial<BodyValues>)[key] = (value && typeof value === 'object' ? structuredClone(value) : value) as never;
+    // The object fields are a number list and flat records of numbers; a shallow copy detaches them exactly, without
+    // structuredClone's per-call cost on every moving body of every frame.
+    (values ??= {} as Partial<BodyValues>)[key] = (Array.isArray(value) ? value.slice() : value && typeof value === 'object' ? { ...value } : value) as never;
   }
   return values;
 }

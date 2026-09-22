@@ -1626,7 +1626,8 @@ test('one retained focus label and locator survive system retirement at their ph
   expect(label.dataset.contextName).toBe('Anchor');
   expect(mover(label).parentNode).toBe(root);
   expect(mover(label).children).toEqual([label]);
-  expect(label.children).toHaveLength(0); expect(label).toBe(locator);
+  // The only child is the sprite, which alone scales; the ring and caption stay pseudos of the unscaled marker.
+  expect(label.children.map(child => child.tagName)).toEqual(['i']); expect(label.children[0]!.children).toHaveLength(0); expect(label).toBe(locator);
   expect(all(host).filter(node => node.dataset.contextLabel === 'anchor')).toEqual([label]);
   const viewport = { focalPixels: 400, principalOffsetPixels: [30, -20] as const };
   const camera = (distance: number): {referenceFrame: string; epochJdTt: number; pose: {positionM: [number, number, number]; orientationXyzw: OrientationXyzw}} => ({ referenceFrame: context.frame.referenceFrame, epochJdTt: context.frame.epochJdTt,
@@ -1788,7 +1789,7 @@ test('billboard zoom alpha owns dot, circle and caption without per-label clocks
   const publish = (distance: number) => layer.publish({ referenceFrame: 'sun-icrf', epochJdTt: 1,
     pose: { positionM: [0, 0, distance], orientationXyzw: [0, 0, 0, 1] } }, { focalPixels: 400, principalOffsetPixels: [0, 0] });
   publish(1000);
-  expect(element.children).toHaveLength(0); expect(element.textContent).toBe('');
+  expect(element.children.map(child => child.tagName)).toEqual(['i']); expect(element.textContent).toBe('');
   expect(element.dataset.contextName).toBe('Mercury');
   expect(element.dataset.contextLabelVisible).toBe('true');
   expect(Number(element.style.opacity)).toBeGreaterThan(0);
