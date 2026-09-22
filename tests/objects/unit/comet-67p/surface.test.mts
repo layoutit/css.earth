@@ -11,7 +11,7 @@ const json = async (path: string) => JSON.parse((await readFile(resolve(root, pa
 test('67P retains original Cheops XYZ positions and a closed non-radial surface', async () => {
   const config = await json('source/preparation/terrestrial.json'), profile = config.geometry.radialTerrain;
   const source = await loadObjShape(resolve(root, 'source', profile.path), profile.grid);
-  const prepared = await json('prepared/terrain.json');
+  const prepared = await json('evidence/terrain.json');
   const metres = config.geometry.radiusKm * 1000 / config.geometry.radius;
   // Independent bounds of the released kilometre vertex table, in metres.
   for (let axis = 0; axis < 3; axis++) {

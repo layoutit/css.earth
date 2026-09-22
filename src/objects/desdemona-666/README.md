@@ -40,7 +40,7 @@ The linked optical light-curve, occultation and thermophysical source products c
 
 The selected model is associated with Marciniak et al., Properties of slowly rotating asteroids from the Convex Inversion Thermophysical Model (A&A 654, A87, 2021). Its thermophysical calibration does not turn the convex solution into resolved surface terrain.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

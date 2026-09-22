@@ -7,7 +7,7 @@ import { preparePreparedAssetManifest } from '../../../src/platform/runtime-asse
 import { applicationDeliveryKind } from './delivery-identity.ts';
 const args = process.argv.slice(2);
 if (args.some(arg=>arg !== '--if-missing' && arg !== '--allow-missing' && !/^--object=[a-z][a-z0-9-]*$/.test(arg)) || args.filter(arg=>arg.startsWith('--object=')).length > 1)
-  throw new TypeError('Usage: tools/nebula/prepare.mts [--if-missing] [--allow-missing] [--object=<id>]. Research: pnpm lab:nebula:bake --research.');
+  throw new TypeError('Usage: tools/nebula/prepare.mts [--if-missing] [--allow-missing] [--object=<id>]. Research: node --experimental-strip-types labs/nebula/run.mts bake-nebula --research.');
 const selected = args.find(arg=>arg.startsWith('--object='))?.slice(9);
 // Deploy builds only: a package missing from R2 (setup:assets/setup:prepared skipped a 404) reports unavailable
 // instead of triggering a from-scratch bake here, which needs a source acquisition service this build never runs.

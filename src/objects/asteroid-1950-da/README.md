@@ -22,7 +22,7 @@ This view uses the published 2007 retrograde reconstruction. The 2014 Yarkovsky 
 
 Prime-meridian display phase is arbitrary. Lighting does not claim an absolute current rotational attitude.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="1950-da-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>

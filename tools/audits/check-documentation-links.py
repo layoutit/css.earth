@@ -101,13 +101,24 @@ def local_links(file):
         path = posixpath.normpath(posixpath.join(posixpath.dirname(file), path)) if path else file
         yield target, path, unquote(parsed.fragment)
 
+# `prepared/provenance.json` and `prepared/page.json` are build outputs, never committed: the
+# contract in CLAUDE.md says `prepare-provenance.mts` and `restore-object-json.mts` write them in
+# `predev`/`prebuild`. A checkout therefore never holds one, so a body README that cites its own
+# generated contract file is describing the record correctly, not linking at nothing. Accept the
+# path only where the object's tracked `prepared/` directory proves the object exists.
+BUILD_OUTPUTS = {'prepared/provenance.json', 'prepared/page.json'}
+
+def build_output(path):
+    directory = posixpath.dirname(posixpath.dirname(path))
+    return path[len(directory) + 1:] in BUILD_OUTPUTS and f'{directory}/prepared-assets.json' in known
+
 errors, checked = [], 0
 markdown = sorted(path for path in (known if args.all else changed) if path.endswith('.md'))
 for file in markdown:
     for target, path, fragment in local_links(file):
         checked += 1
         directory = any(candidate.startswith(path.rstrip('/') + '/') for candidate in known)
-        if path not in known and not directory:
+        if path not in known and not build_output(path) and not directory:
             errors.append({'file': file, 'target': target, 'reason': 'missing repository path'})
         elif fragment and path.endswith('.md') and path in known:
             if fragment not in anchors(contents(path)):

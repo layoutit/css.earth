@@ -42,7 +42,7 @@ ISIS special pixels remain missing before interpolation. Gray grid marks unobser
 
 Geology’s sampled, cosine-weighted reference-sphere coverage is approximately 44.2%; unmapped northern terrain remains unknown.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="surface-interpretation"></a>
 <a id="historical-geology"></a>

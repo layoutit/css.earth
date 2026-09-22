@@ -22,7 +22,7 @@ photograph shadows remain when the application’s Shadows setting is off.
 Camera corrections are 0.039° and 0.068°. Disjoint limb holdouts retain 31/32 and
 74/76 controls, with RMS residuals of 1.24 and 1.69 native pixels; maximum residuals
 are 3.98 and 4.64 pixels. These validate silhouette alignment, not interior terrain
-accuracy. The [prepared report](prepared/surfaces.json) records cameras, source
+accuracy. The prepared report (`prepared/surfaces.json`) records cameras, source
 hashes, masking, overlap gains and area sampling. Decoder tests check native FITS
 signed storage, raw/calibrated identity and rejection of missing, saturated or
 invalid samples while retaining finite negative radiance.
@@ -56,7 +56,7 @@ The existing Monochrome and Elevation atlases remain 2048 × 6400 pixels on thei
 800-face display mesh. Their geometry and photographic sampling are retained
 from [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/mathilde/prepared).
 The new lens adds a second prepared model; only the selected model is visible.
-Sampling details and output hashes are in [the surface metadata](prepared/surfaces.json).
+Sampling details and output hashes are in the surface metadata (`prepared/surfaces.json`).
 
 The retained notes report a successful 35-asset bake, eight downloads restored, a verified 35-file source closure and three focused source tests. Original report paths are `output/asteroids-optical/mathilde/delivery.json` and `source-restoration.json`; those reports are not checked in. The generic body test, browser checks, fresh runtime installation and aggregate checks were still pending in that record.
 
@@ -65,7 +65,7 @@ The retained notes report a successful 35-asset bake, eight downloads restored, 
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -91,7 +91,7 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 
 The visible Stooke shape differs from the Thomas radii used for Elevation, especially in unseen areas and shadowed craters. Neither product establishes global measured terrain. The JPEG has no authoritative validity mask: a narrow edge-connected gray test estimates exterior fill, so ambiguous pixels can remain. Pole, phase and added directional lighting are illustrative.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="mathilde-sources-and-interpretation"></a>
 <a id="selected-products"></a>

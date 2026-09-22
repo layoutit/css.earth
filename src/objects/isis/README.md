@@ -33,7 +33,7 @@ Absolute phase is arbitrary; accelerated display spin is illustrative.
 
 The release supplies no registered surface imagery; neutral gray marks that gap. Alternative archive solutions: model 315, pole ['106', '40'], [Model 315](https://damit.cuni.cz/projects/damit/asteroid_models/view/315)
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

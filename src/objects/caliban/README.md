@@ -21,7 +21,7 @@ The minimum elongation assumes uniform reflectivity and an equator-on view. Equa
 
 The paper text mistakenly pairs half frequency with 4.9742 h. Table 4 supports the adopted doubled 9.948 h period (48/f0, with f0=4.8249 cycles/day).
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="caliban-source-model"></a>
 <a id="selected-geometry"></a>

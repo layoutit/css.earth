@@ -153,7 +153,7 @@ it is not a recovered calibrated albedo map. Local terrain shading, source
 resolution changes and some patch transitions remain. Frame-level correction
 and exposure receipts are generated in `prepared/surfaces.json`.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="monochrome"></a>
 <a id="enhanced-color"></a>

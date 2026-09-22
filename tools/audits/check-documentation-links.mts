@@ -159,6 +159,17 @@ export function localLinks(file: string, text: string): Link[] {
   return links;
 }
 
+// `prepared/provenance.json` and `prepared/page.json` are build outputs, never committed: the
+// contract in CLAUDE.md says `prepare-provenance.mts` and `restore-object-json.mts` write them in
+// `predev`/`prebuild`. A checkout therefore never holds one, so a body README that cites its own
+// generated contract file is describing the record correctly, not linking at nothing. Accept the
+// path only where the object's tracked `prepared/` directory proves the object exists.
+const BUILD_OUTPUTS = new Set(['prepared/provenance.json', 'prepared/page.json']);
+function buildOutput(path: string, known: ReadonlySet<string>): boolean {
+  const directory = posix.dirname(posix.dirname(path));
+  return BUILD_OUTPUTS.has(path.slice(directory.length + 1)) && known.has(`${directory}/prepared-assets.json`);
+}
+
 function audit(snapshot: Snapshot): Audit {
   const {known, contents} = snapshot;
   const errors: Finding[] = [];
@@ -173,7 +184,7 @@ function audit(snapshot: Snapshot): Audit {
   const headingAnchors = new Map<string, Set<string>>();
   for (const file of markdown) for (const {target, path, fragment} of links.get(file) ?? []) {
     localLinksChecked++;
-    if (!known.has(path) && !directories.has(path.replace(/\/$/, ''))) errors.push({file, target, reason: 'missing repository path'});
+    if (!known.has(path) && !buildOutput(path, known) && !directories.has(path.replace(/\/$/, ''))) errors.push({file, target, reason: 'missing repository path'});
     else if (fragment && path.endsWith('.md') && known.has(path)) {
       let found = headingAnchors.get(path);
       if (!found) {found = anchors(contents.get(path) ?? ''); headingAnchors.set(path, found);}

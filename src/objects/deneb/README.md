@@ -25,4 +25,4 @@ Run of 2026-09-21 (this version):
 
 The Hipparcos parallax is 2.31 ± 0.32 mas, a 14 percent uncertainty that carries straight into the radius. The limb-darkening correction is model dependent because Deneb has a wind. No mass is adopted.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

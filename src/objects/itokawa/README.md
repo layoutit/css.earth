@@ -182,7 +182,7 @@ The controlled-camera holdouts reached maximum residuals of 0.00000842/0.0000087
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -197,7 +197,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 Coverage is partial; the grid marks unavailable terrain. The lossy detector images lack a per-pixel quality plane. Disk normalization is approximate and does not restore stray light, temporal flat changes or shadowed terrain. Residual seams remain. Earlier browser checks found fine triangle-edge artifacts, particularly in Elevation; these are rendering defects, not terrain.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="itokawa-source-record"></a>
 <a id="selected-data-and-survey"></a>

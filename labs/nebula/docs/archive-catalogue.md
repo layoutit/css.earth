@@ -24,8 +24,8 @@ Run from the repository root with its supported Node version:
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
 node --experimental-strip-types labs/nebula/run.mts acquire-messier-presentation
-pnpm lab:nebula:catalogue
-pnpm lab:nebula:catalogue:enrich --object=m42 --max-images=3
+node --experimental-strip-types labs/nebula/run.mts acquire-messier
+node --experimental-strip-types labs/nebula/run.mts enrich-messier-catalogue --object=m42 --max-images=3
 pnpm lab:nebula
 ```
 

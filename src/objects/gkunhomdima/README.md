@@ -31,7 +31,7 @@ The recorded scene has 480 native body triangles, with Shadows and Orbit off.
   sidereal spin. The pole and arbitrary meridian do not establish a precision surface attitude.
 - No reconstructed surface texture is supplied; the smooth model does not resolve terrain.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods
 

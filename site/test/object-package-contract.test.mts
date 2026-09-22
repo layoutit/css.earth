@@ -56,9 +56,9 @@ test("derives the complete owned file contract from planet identity", () => {
   assert.ok(paths.requiredFiles.includes(
     `/project/site/pages/[id].astro`,
   ));
-  assert.ok(paths.backlogFiles.includes(
-    `/project/tests/objects/browser/${planet.id}/browser-profile.mts`,
-  ));
+  // #505 deleted the 547 browser profiles with the harness that read them, so the backlog
+  // this ratchet tracked is empty. It stays a ratchet for whatever earns one next.
+  assert.deepEqual(paths.backlogFiles, []);
   assert.ok(!paths.requiredFiles.includes(
     `/project/tests/objects/browser/${planet.id}/browser-profile.mts`,
   ));
@@ -96,14 +96,15 @@ test("requires every registered object package file", async () => {
     }),
     /is missing .*prepared\/content\.json/,
   );
+  // The backlog is empty since #505 deleted the browser profiles it tracked, so a missing file
+  // that used to be backlogged is now simply not asked for: it must not become a hard failure.
   const backlogged = await validateObjectPackageFiles(implemented[0], {
     accessFile: async (file) => {
       assert.ok(typeof file === "string", "Package validator passes filesystem paths");
       if (file.endsWith("browser-profile.mts")) throw new Error("ENOENT");
     },
   });
-  assert.equal(backlogged.missingBacklogFiles.length, 1);
-  assert.ok(backlogged.missingBacklogFiles[0]?.endsWith("browser-profile.mts"));
+  assert.deepEqual(backlogged.missingBacklogFiles, []);
 });
 
 test("validates local editorial identity and provenance", () => {

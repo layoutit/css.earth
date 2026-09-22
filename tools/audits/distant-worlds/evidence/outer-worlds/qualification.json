@@ -1,0 +1,210 @@
+{
+  "schema": "cssearth-distant-worlds-qualification@1",
+  "scope": "Selected body packages: complete source and runtime byte closures, scene/page binding, native triangle budgets, source topology and defaults. Browser evidence is reported separately.",
+  "bodies": [
+    {
+      "id": "ixion",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7022610,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 8833.226733522177,
+        "estimatedErrorMeters": 6008.3046875,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 179327707520534820
+        }
+      },
+      "pageMetadataSha256": "0acdbcd1bf0db732cdb0cd33ed4ef62c33e06d65a18130f2df2c49c9557b80a7",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "huya",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7018692,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 5183.755311464502,
+        "estimatedErrorMeters": 3978.208251953125,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 36196493807963544
+        }
+      },
+      "pageMetadataSha256": "89f1b1ee7b5e4fa42a3737dee8f360ea9e74500237fa7345b8ebaedff1d30552",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "asteroid-2003-vs2",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7021734,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 6552.373952536454,
+        "estimatedErrorMeters": 4484.662109375,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 73085008988554320
+        }
+      },
+      "pageMetadataSha256": "fb237cb325c86ef062afeae36f5ee8565a74bd383b5aedf83537fda755c33000",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "asteroid-2002-tc302",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7016964,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 6421.626257456744,
+        "estimatedErrorMeters": 4437.99072265625,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 68898391824169090
+        }
+      },
+      "pageMetadataSha256": "7076e7be3eda7b47fba1f1933a22be8b84320accc16c86d5228bc40f92d4cdd2",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "asteroid-2002-tx300",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7019322,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 4205.461975946583,
+        "estimatedErrorMeters": 2919.036376953125,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 19354097002513236
+        }
+      },
+      "pageMetadataSha256": "b73945ee26a765f7781ad5d9f640b89d1f8ade95e6e32562a9a056a638391658",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    },
+    {
+      "id": "deedee",
+      "assetCount": 31,
+      "sourceInputCount": 4,
+      "assetBytes": 7019132,
+      "faceCount": 480,
+      "simplification": {
+        "method": "source-meshoptimizer",
+        "version": "1.2.0",
+        "flags": [
+          "ErrorAbsolute"
+        ],
+        "sourceFaces": 5040,
+        "sourceVertices": 2522,
+        "weldedVertices": 2522,
+        "targetFaces": 480,
+        "outputFaces": 480,
+        "removedOppositeFaces": 0,
+        "maximumErrorMeters": 7937.5,
+        "estimatedErrorMeters": 5260.30126953125,
+        "topology": {
+          "vertices": 242,
+          "edges": 720,
+          "faces": 480,
+          "components": 1,
+          "eulerCharacteristic": 2,
+          "signedVolumeCubicMeters": 130080662909953280
+        }
+      },
+      "pageMetadataSha256": "4197feb613d3e972a1b743a34451c6e679bf49c14bae778c15187edb2c7ee88f",
+      "defaultLens": "model",
+      "shadows": false,
+      "orbit": false
+    }
+  ]
+}

@@ -28,8 +28,8 @@ git clone --depth 1 --single-branch https://github.com/layoutit/css.earth.git "$
 cd "$nebula_dir"
 pnpm install --frozen-lockfile --ignore-scripts
 pnpm build:packages
-pnpm lab:nebula:bake --research
-pnpm lab:nebula:verify
+node --experimental-strip-types labs/nebula/run.mts bake-nebula --research
+node --experimental-strip-types labs/nebula/run.mts verify-nebula
 ```
 
 `--ignore-scripts` avoids the repository-wide postinstall preparation. Building the shared packages supplies the libraries needed by the lab. Only shared packages and nebula assets are built; the bake runs without a browser or GPU server.
@@ -50,7 +50,7 @@ The command does not need the browser's localStorage, a running server or previo
 | Reconstruction | Shared density, catalogue/sky reference, saved placement and RGB controls | XYZ cloud banks plus the same 943 modeled catalogue stars for every image |
 | Lens bank | Saved cutoff, axis brightness, enabled cloud contributions, star exposure/size | A local three-lens repaint bank (historical; no longer the app delivery) |
 
-`models/lmc/bake.json` is the entry recipe. It records the accepted ESO VISTA, Horálek optical and NASA WISE placements and saturation, detail strength/scale, brightness and gamma. It references the existing source/alignment, baseline, catalogue and presentation recipes by hash. The historical result IDs in `app-lenses.json` are replaced with the newly produced IDs during replay; the recorded presentation settings remain unchanged. Re-running the full bake verifies and reuses completed stages, then refreshes its receipt. Re-running `pnpm lab:nebula:verify` checks the results without processing.
+`models/lmc/bake.json` is the entry recipe. It records the accepted ESO VISTA, Horálek optical and NASA WISE placements and saturation, detail strength/scale, brightness and gamma. It references the existing source/alignment, baseline, catalogue and presentation recipes by hash. The historical result IDs in `app-lenses.json` are replaced with the newly produced IDs during replay; the recorded presentation settings remain unchanged. Re-running the full bake verifies and reuses completed stages, then refreshes its receipt. Re-running `node --experimental-strip-types labs/nebula/run.mts verify-nebula` checks the results without processing.
 
 The accepted NOX images include an earlier compact-source baseline through a positive-residual union. This command **requires and reproduces that baseline**; omitting it would change the accepted pixels. The older interactive calibration UI is not restored. Reconstruction never runs star removal again.
 
@@ -60,7 +60,7 @@ The scalar grids and existing catalogue measurements are the pipeline's scientif
 
 Options with values use `--name=value`. Stages include their preceding dependencies and reuse verified completed results.
 
-Image-filtered bakes require `--research`, for example `pnpm lab:nebula:bake --research --image=wise-wide-infrared`. Without it, the command rejects the filter before reading recipes or starting processing. A full bake also requires `--research`: this recipe has no compact application delivery any more, so there is nothing to replay without processing.
+Image-filtered bakes require `--research`, for example `node --experimental-strip-types labs/nebula/run.mts bake-nebula --research --image=wise-wide-infrared`. Without it, the command rejects the filter before reading recipes or starting processing. A full bake also requires `--research`: this recipe has no compact application delivery any more, so there is nothing to replay without processing.
 
 | Option | Purpose |
 |---|---|

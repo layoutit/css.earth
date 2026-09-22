@@ -43,7 +43,7 @@ The alternative solutions are recorded, not blended. Selecting one shape for a s
 
 Absolute rotational phase is intentionally arbitrary; no present-day absolute attitude or source-epoch phase is claimed.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

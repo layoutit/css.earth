@@ -18,4 +18,4 @@ No dated test report exists for this body yet.
 
 JWST has measured this planet’s atmospheric spectrum; none of that is shown. Mancini et al. measure a sky-projected spin-orbit angle of 0 ± 11 degrees, which is not used. The package draws a neutral gray sphere of the measured radius.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

@@ -37,7 +37,7 @@ The local `labs/nebula/nebula_lab_refactor.md` plan records remaining migration 
 
 `pnpm prepare:nebulae` uses the application entrypoint and prepares source cards through the existing app command. It needs no lab server, native observation downloads, Python, NOX or scientific fitting. The [app guide](../../../docs/nebulae/README.md) gives the complete installation sequence.
 
-`pnpm lab:nebula:bake --research` selects the saved native LMC processing workflow. Lab startup and `pnpm test:lab:nebula` first run the assets stage, which can acquire missing original images. Those commands are therefore separate from the cache-independent CI job. See [baking](baking.md) for native prerequisites and [workflows](workflows.md) for the interactive app.
+`node --experimental-strip-types labs/nebula/run.mts bake-nebula --research` selects the saved native LMC processing workflow. Lab startup and `pnpm test:lab:nebula` first run the assets stage, which can acquire missing original images. Those commands are therefore separate from the cache-independent CI job. See [baking](baking.md) for native prerequisites and [workflows](workflows.md) for the interactive app.
 
 ## Application dependency boundary
 

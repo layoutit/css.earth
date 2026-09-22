@@ -18,4 +18,4 @@ No dated test report exists for this body yet.
 
 Hubble and JWST have measured this planet’s atmosphere; none of that is shown. The transit time is our own measurement from one JWST visit. The package draws a neutral gray sphere of the measured radius.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

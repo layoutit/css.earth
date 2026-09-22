@@ -117,8 +117,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, `pnpm oracles:run`; see `tools/oracles/README.md` |
 | Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
-| Shared DOM/browser checks | `pnpm test:browser <served-worktree-url> <id>` |
-| Extended behavior conformance | `pnpm test:browser:conformance <served-worktree-url> <id>` |
+| Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |
 
 Build the shared preparation tools before invoking their `dist/` entry points.
 Select checks using the [PR rules](../../docs/provenance/CONTRACT.md#pull-requests);

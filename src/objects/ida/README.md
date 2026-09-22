@@ -18,7 +18,7 @@ The photographic atlas now samples each pinned original grid directly with a 2 �
 | --- | --- | --- |
 | normal | 2520 × 1260 | 1.80 → 2.71 MB |
 
-Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ida/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in [the prepared surface metadata](prepared/surfaces.json). Source resolution, gaps and existing registration limitations still apply.
+Each atlas remains 2048 × 6400 pixels, with 800 retained faces. The scene bytes match [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ida/prepared). WebP quality is 95; decoded texture size is unchanged. Sampling details and output hashes are recorded in the prepared surface metadata (`prepared/surfaces.json`). Source resolution, gaps and existing registration limitations still apply.
 
 [The 9 September 2026 mosaic report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/README.md) records 107 focused tests, 60 browser conformance cases, DPR 1/2 production checks and fresh remote installation for the four-body change. [Validation](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/asteroids/evidence/spacecraft-mosaics/validation.json) identifies tested commit `8ded7a5` and base `1fb76e4`; these are historical results.
 
@@ -26,14 +26,14 @@ The broader preparation suite was not green (1,666/1,957 passed); global platfor
 
 ### Band alignment
 
-The false-colour lens composes three archived frames through their catalog cameras; preparation refits nothing. Each band is measured against the green reference 202561278 on separated control patches, half of them held out of the fit. Violet 202561313 lands at 0.37 px RMS over 17 held-out patches, worst 0.58 px; 0.89 µm 202561352 at 0.71 px RMS, worst 1.01 px. The 0.89 µm frame was chosen over the 0.76 µm one of the same set because it carries fewer dropped scan lines, and the archive-edge inset is 2 px, which the worst measured patch stays inside. ISIS fill and withheld values are read as missing at the SSI loader, so they neither enter the composite nor the alignment. Only the recorded strip of each frame covers Ida: equal-area samples over the retained triangles put the composed lens on 17.2% of the surface, and the grid marks the rest. The numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+The false-colour lens composes three archived frames through their catalog cameras; preparation refits nothing. Each band is measured against the green reference 202561278 on separated control patches, half of them held out of the fit. Violet 202561313 lands at 0.37 px RMS over 17 held-out patches, worst 0.58 px; 0.89 µm 202561352 at 0.71 px RMS, worst 1.01 px. The 0.89 µm frame was chosen over the 0.76 µm one of the same set because it carries fewer dropped scan lines, and the archive-edge inset is 2 px, which the worst measured patch stays inside. ISIS fill and withheld values are read as missing at the SSI loader, so they neither enter the composite nor the alignment. Only the recorded strip of each frame covers Ida: equal-area samples over the retained triangles put the composed lens on 17.2% of the surface, and the grid marks the rest. The numbers are read from `prepared/surfaces.json`, not typed.
 
 [Rendered false colour](evidence/filter-color/false-color-views.webp) at DPR 2, 2026-09-17: a close view of the covered strip, the whole body at the default distance, and a zoom into the dropped scan lines the archive left in the 0.89 µm frame. The colour it separates is mild — on the prepared minimap the red-minus-blue difference over covered pixels runs from −11 to 46 of 255 with a median of 0 — which is what these three filters record on Ida, not a display fault.
 
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -63,7 +63,7 @@ pixels alone do not qualify their projection onto this model.
 
 The Thomas mosaic is processed monochrome, with photographed shadows, local stretches and seams. Its exactly-zero gaps remain a grid. A conflicting PDS4 display-direction label is overridden by the north-up registration evidence below. Elevation is radius minus 16 km, not gravitational height.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="ida-source-record"></a>
 <a id="selected-release-and-interpretation"></a>

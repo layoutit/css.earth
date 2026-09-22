@@ -17,11 +17,11 @@ test('restores a missing transport from its pinned runtime without rebaking or r
     const descriptorBytes = await readFile(resolve(directory, 'object.json'));
     const descriptor = JSON.parse(descriptorBytes.toString('utf8'));
     const target = resolve(directory, descriptor.prepared.url);
-    assert.deepEqual(await restoreObjectJson(['thetis'], root), { objects: 1, written: 1, reused: 0 });
+    assert.deepEqual(await restoreObjectJson(['thetis'], root), { objects: 1, written: 1, skipped: 0, reused: 0 });
     const bytes = await readFile(target);
     assert.equal(createHash('sha256').update(bytes).digest('hex'), descriptor.prepared.sha256);
     await utimes(target, 1, 1);
-    assert.deepEqual(await restoreObjectJson(['thetis'], root), { objects: 1, written: 0, reused: 1 });
+    assert.deepEqual(await restoreObjectJson(['thetis'], root), { objects: 1, written: 0, skipped: 0, reused: 1 });
     assert.equal((await stat(target)).mtimeMs, 1000);
     const runtimePath = resolve(directory, 'prepared/runtime.json');
     const runtime = JSON.parse(await readFile(runtimePath, 'utf8'));
