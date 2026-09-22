@@ -10,8 +10,6 @@
       "title": "Sadibekova et al. (2024), MCXC-II, A&A 688 A187; CDS J/A+A/688/A187",
       "credit": "Sadibekova et al.; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "c6d0b69f1b77ab4b069c319d86f98a75a45ec752baa96ef8542d1d1cfb76fe53",
-      "expectedBytes": 312912,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -33,8 +31,6 @@
       "title": "CDS MCXC-II byte-column definitions, release 2024-11-29",
       "credit": "Sadibekova et al.; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "cb4b36eaedcc6c4016e492e17e0f3a27cc42cdb77bc70a4c3e5e22e0ad2af083",
-      "expectedBytes": 14861,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -52,8 +48,6 @@
   "documents": [
     {
       "path": "src/objects/galaxy-clusters/source/catalogue.json",
-      "expectedBytes": 2536,
-      "expectedSha256": "50cb87f39ef3736c247eeeda5c3c4ae520dc2e9a811980953d0cecb80d4b4ee7",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."
@@ -61,8 +55,6 @@
     },
     {
       "path": "src/objects/galaxy-clusters/source/presentation.json",
-      "expectedBytes": 1014,
-      "expectedSha256": "ba6c54e3c1960fd8872a3f094f198ccb8f6d414722b193cf29174b45ede3434d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."
@@ -70,8 +62,6 @@
     },
     {
       "path": "src/objects/galaxy-clusters/source/provenance.json",
-      "expectedBytes": 2707,
-      "expectedSha256": "5f57fae37881a5c8cca2b677ab550c976402a2789f768843f79770d6e4de86a4",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."

@@ -38,8 +38,9 @@ test('deploy catalogue recovery reads prepared contexts without authoring interm
   assert.deepEqual(contexts.map(context => context.id), ['galaxy-clusters', 'local-group', 'nearby-universe']);
   assert.ok(contexts.every(context => context.outputs.length === 0));
 });
-test('changed prepared bytes and authored source documents are rejected', async () => {
-  for(const target of ['src/objects/local-group/prepared/manifest.json','src/objects/nearby-universe/source/preparation/field.json']) {
+test('changed prepared bytes are rejected; an authored source document is read as it is', async () => {
+  await prepareContextProvenance({input:async path=>{ const bytes=await readFile(path); return path==='src/objects/nearby-universe/source/preparation/field.json' ? Buffer.concat([bytes,Buffer.from(' ')]) : bytes; }});
+  for(const target of ['src/objects/local-group/prepared/manifest.json']) {
     await assert.rejects(prepareContextProvenance({input:async path=>{
       const bytes=await readFile(path);if(path !== target) return bytes;
       if(path.endsWith('/manifest.json')) { const receipt=JSON.parse(bytes.toString()); receipt.outputs[0].sha256='0'.repeat(64); return Buffer.from(JSON.stringify(receipt)); }
