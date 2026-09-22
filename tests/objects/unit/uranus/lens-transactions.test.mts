@@ -1,7 +1,8 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('uranus');
 import { runtimeDefinition } from "./prepared-fixture.mts";
 import { preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 

@@ -1,7 +1,8 @@
 import {shape,array,dictionary,number,text,optional,boolean,parseIsis3Grid} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('phoebe');
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';

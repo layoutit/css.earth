@@ -1,6 +1,7 @@
 /** The WASP-39 system's packages verify against their source pins. The planet's radius and orbit are the astronomy records'
  * (packages/astronomy/data/bodies), which packages/astronomy/src/hostedOrbits.test.ts checks against the transit geometry. */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('wasp-39');
 import { resolve } from 'node:path';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 

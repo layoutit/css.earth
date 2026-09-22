@@ -4,7 +4,8 @@
 // lens replacement) are kept.
 import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('sun');
 import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import runtimeDefinition from "../../../../src/objects/sun/prepared/runtime.json" with { type: "json" };

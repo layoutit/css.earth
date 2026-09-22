@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('venus');
 import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/index.js";
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import runtimeDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};

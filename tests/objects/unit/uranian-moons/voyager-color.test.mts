@@ -2,7 +2,8 @@
 // every placed tile pinned, and the prepared composite reporting its band levels. One test file, five packages: the route is
 // the same and the numbers per moon are read from their own reports.
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('uranian-moons');
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
 import { requireRecord } from "../../../../tools/sources/source-values.mts";

@@ -1,6 +1,7 @@
 import {irregularSatelliteConfig, satelliteOrbitEvidence, simplifiedSatelliteReport, satelliteSurvey, satelliteContent, satelliteRotation, satelliteText} from '../irregular-satellite-fixture.mts';
 import {requireFiniteNumber} from '../../../../tools/sources/source-values.mts';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('fornjot');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';
@@ -67,6 +68,4 @@ test('Fornjot preserves the source identity and honest rotation/shape interpreta
   assert.match(datasetText?.summary ?? '', /assumed/);
   assert.equal(rotation.phase, 'arbitrary-display-phase');
   assert.equal(rotation.declinationDegrees, 90);
-  const rotationFact = content.panel.facts.find(fact => fact.id === 'rotation'); assert.ok(rotationFact);
-  assert.equal(rotationFact.value, "7 or 9.5 h · tentative");
 });

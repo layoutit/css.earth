@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { runtimeDefinition } from "../../unit/earth/prepared-fixture.mts";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 

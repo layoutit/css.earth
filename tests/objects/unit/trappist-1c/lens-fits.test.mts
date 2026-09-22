@@ -1,7 +1,8 @@
 /** c's temperature lens is a bare-rock model set by one measurement, its 15 µm eclipse depth. This check runs the recipe as shipped
  * and holds it to what it was measured to give. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('trappist-1c');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadBareRockEclipse } from '../../../../tools/objects/terrestrial-layers/eclipse-map-fit.mts';

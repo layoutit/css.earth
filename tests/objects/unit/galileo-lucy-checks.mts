@@ -1,5 +1,5 @@
 import {required} from '../../../tools/contract/test-values.mts';
-import test from 'node:test';
+import { sourceTest } from '../source-test.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -9,6 +9,7 @@ import { contactEllipsoidMesh } from '../../../tools/objects/terrestrial-layers/
 import { ellipsoidParameterMesh } from '../../../tools/objects/terrestrial-layers/ellipsoid-parameters.mts';
 
 export function checkGalileoLucy(id: string) {
+  const test = sourceTest(id);
   const sourceDirectory = resolve('src/objects', id, 'source');
   const read = async (path: string) => JSON.parse((await readFile(resolve(sourceDirectory, path))).toString('utf8'));
   test(`${id}: source closure and representation are consistent`, async () => {

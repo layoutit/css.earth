@@ -1,6 +1,7 @@
 import {shape,dictionary,number} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('comet-67p');
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
 import { gunzipSync } from 'node:zlib';

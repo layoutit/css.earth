@@ -1,7 +1,8 @@
 // A flight's destination holds its first-interaction catalogue load until the camera lands, so a body the camera only
 // passes (a flight another navigation replaces) never fetches it.
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('mars');
 import { parseHTML } from "linkedom";
 import { createSceneLifetime } from "@cssearth/engine";
 import runtimeDefinition from "../../../../src/objects/mars/prepared/runtime.json" with { type: "json" };

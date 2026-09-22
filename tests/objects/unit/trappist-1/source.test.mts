@@ -2,7 +2,8 @@
  * star and orbits it. The planets' radii, masses and orbits are the astronomy records' (packages/astronomy/data/bodies), which
  * packages/astronomy/src/hostedOrbits.test.ts checks against the transit geometry. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('trappist-1');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, hostedOrbit, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';

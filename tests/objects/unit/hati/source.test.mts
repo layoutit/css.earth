@@ -1,6 +1,7 @@
 import {irregularSatelliteConfig, satelliteOrbitEvidence, simplifiedSatelliteReport, satelliteSurvey, satelliteContent, satelliteRotation, satelliteText} from '../irregular-satellite-fixture.mts';
 import {requireFiniteNumber} from '../../../../tools/sources/source-values.mts';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('hati');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';

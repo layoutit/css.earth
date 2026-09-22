@@ -2,7 +2,8 @@ import {array,number,shape,text} from '../../../../tools/objects/terrestrial-lay
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('saturn');
 
 import { readPreparedFixture } from "../../fixtures.mts";
 const PREPARED_PRESENTATION = await readPreparedFixture('saturn', 'runtime');

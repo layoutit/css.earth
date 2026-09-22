@@ -1,7 +1,8 @@
 // Draft: keeps the unchanged Mars nomenclature recipe proven on the generic lane.
 // Modelled on tests/objects/unit/mercury/features.test.mts (without the tectonic traces).
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('mars');
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import runtimeDefinition from "../../../../src/objects/mars/prepared/runtime.json" with { type: "json" };

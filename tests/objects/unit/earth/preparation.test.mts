@@ -5,7 +5,8 @@ import assert from "node:assert/strict";
 import { execFile } from "node:child_process";
 import { promisify } from "node:util";
 import { resolve } from "node:path";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { readFile } from "node:fs/promises";
 import sharp from "sharp";
 import {

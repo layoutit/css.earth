@@ -2,7 +2,8 @@
  * shipped and holds it to what it was measured to give and to the published dayside and nightside temperatures; the deposit check
  * records how the published NIRSpec temperature maps were converted. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('wasp-43b');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { planckRadiance } from '../../../../tools/objects/eclipse-map/eigenmap-fit.mts';

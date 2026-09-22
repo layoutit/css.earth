@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('mercury');
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with { type: "json" };

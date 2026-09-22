@@ -3,7 +3,8 @@
 // Modelled on tests/objects/unit/venus/runtime-contract.test.mts and the Mars generic-lane draft.
 import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('pluto');
 import runtimeDefinition from "../../../../src/objects/pluto/prepared/runtime.json" with { type: "json" };
 import text from "../../../../src/objects/pluto/prepared/text.json" with { type: "json" };
 import assets from "../../../../src/objects/pluto/prepared/assets.json" with { type: "json" };

@@ -3,7 +3,8 @@ import {shape,array,text,number,dictionary,optional} from '../../../../tools/obj
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { PREPARED_EARTH_LENSES } from "../../unit/earth/prepared-fixture.mts";
 import { PREPARED_EARTH_PANEL } from "../../unit/earth/prepared-fixture.mts";
 

@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('aemilia');
 import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';

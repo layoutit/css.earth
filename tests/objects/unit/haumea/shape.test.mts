@@ -1,6 +1,7 @@
 import {requireRecord} from '../../../../tools/sources/source-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('haumea');
 import { readFile } from 'node:fs/promises';
 import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 const root = new URL('../../../../src/objects/haumea/', import.meta.url);

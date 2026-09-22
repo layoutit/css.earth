@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('hyperion');
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {resolve} from 'node:path';

@@ -2,7 +2,8 @@ import {parsePreparedObjectRuntime} from '../../../../src/renderers/css/dist/ind
 const runtimeDefinition=parsePreparedObjectRuntime(runtimeSource);
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('mercury');
 import runtimeSource from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
 import { resolvePreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";

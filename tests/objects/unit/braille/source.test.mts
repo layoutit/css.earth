@@ -1,5 +1,6 @@
 import {required} from '../../../../tools/contract/test-values.mts';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('braille');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { parsePdsRadiusTable } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';

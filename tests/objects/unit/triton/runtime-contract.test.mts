@@ -4,7 +4,8 @@
 import { requireRecord } from '../../../../tools/sources/source-values.mts';
 import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('triton');
 import runtimeDefinition from "../../../../src/objects/triton/prepared/runtime.json" with { type: "json" };
 import assets from "../../../../src/objects/triton/prepared/assets.json" with { type: "json" };
 import scene from "../../../../src/objects/triton/prepared/scene.json" with { type: "json" };

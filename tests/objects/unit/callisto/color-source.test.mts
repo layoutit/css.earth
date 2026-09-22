@@ -1,7 +1,8 @@
 import {array,shape,number,boolean} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('callisto');
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import sharp from 'sharp';

@@ -1,6 +1,7 @@
 import {observation} from '../observation.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('enceladus');
 import {fromFile} from 'geotiff';
 import sharp from 'sharp';
 

@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('mercury');
 
 import { prepareAstrometricSkySceneRegistration } from "../../../../src/platform/astrometric-sky-registration.mts";
 import {

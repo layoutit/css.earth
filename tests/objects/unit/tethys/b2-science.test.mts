@@ -1,6 +1,7 @@
 import {array,shape,text,number,nullable} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('tethys');
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';

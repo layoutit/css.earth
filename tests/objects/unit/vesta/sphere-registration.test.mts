@@ -9,7 +9,8 @@
  * which is the stated difference between the two prime meridians, so a kernel in the wrong longitude system is
  * caught by this test and not by any silhouette.
  */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('vesta');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

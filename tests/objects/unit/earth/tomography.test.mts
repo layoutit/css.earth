@@ -3,7 +3,8 @@ import {parsePagedProfile} from '../../../../tools/objects/paged-ellipsoid/profi
 import {parseInteriorSource} from '../../../../tools/objects/paged-ellipsoid/source-contract.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
 import sharp from 'sharp';

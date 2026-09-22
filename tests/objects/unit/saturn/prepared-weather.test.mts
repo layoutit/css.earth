@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('saturn');
 import {readPreparedFixture} from '../../fixtures.mts';
 const scene=await readPreparedFixture('saturn','scene');
 test('does not paste an authored weather texture over the visible dataset',async()=>{
