@@ -78,8 +78,6 @@
       "title": "Orion physical-evidence ledger",
       "credit": "Published Orion structure studies; authored extrapolation",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes. The byte-identical application evidence copy retains its original path and revision in source/provenance-references.json.",
-      "expectedSha256": "4a86d6d830b7753fe2af9c1ba30f35ebc4526095bb605939f66fba765d17a8cc",
-      "expectedBytes": 13110,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -115,8 +113,6 @@
       "title": "Orion adopted world placement",
       "credit": "Menten et al. (2007); cssEarth placement",
       "acquisition": "Checked-in model/evidence record. This hash identifies the metadata record, whose fields preserve the separately pinned scientific inputs and published references; it does not identify downloaded paper bytes.",
-      "expectedSha256": "9f8d67ff4de2ffeaf8e8f00da3d67460e1bdbd215fc39bda7247a875221048fe",
-      "expectedBytes": 2087,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -138,8 +134,6 @@
       "credit": "ESA/Gaia/DPAC; Bailer-Jones, Rybizki, Fouesneau, Demleitner and Andrae (2021); GAVO",
       "displayCredit": "ESA/Gaia/DPAC; Bailer-Jones et al.; GAVO",
       "acquisition": "Compact checked-in extract of Gaia DR3 and Bailer-Jones geometric distance estimates. Exact source response hash, queries, limits and epochs remain in this JSON; no photo boundaries or invented depths.",
-      "expectedSha256": "32ee5f15a5b589caed768a568b67afd648dda116da31881f0ffcd47e7353a3fa",
-      "expectedBytes": 1913911,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -177,8 +171,6 @@
     {
       "id": "document-1",
       "path": "src/objects/m42/source/delivery.json",
-      "expectedSha256": "9f8d67ff4de2ffeaf8e8f00da3d67460e1bdbd215fc39bda7247a875221048fe",
-      "expectedBytes": 2087,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -187,8 +179,6 @@
     {
       "id": "document-2",
       "path": "src/objects/m42/source/nebula.json",
-      "expectedSha256": "86b37fbb5b1ae90da4193df53d594e4ac12e15ad1fb462f302ca7aede06e3e4d",
-      "expectedBytes": 2168,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -197,8 +187,6 @@
     {
       "id": "document-3",
       "path": "src/objects/m42/source/presentation.json",
-      "expectedSha256": "9d830dd8c872d0e524ba949416ef0d502abb6136cbf5b696c159a54eb3fdcadf",
-      "expectedBytes": 5024,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -207,8 +195,6 @@
     {
       "id": "document-4",
       "path": "src/objects/m42/source/request.json",
-      "expectedSha256": "06fa668d847469d5c1e982be1e1a9e1da8fbc674f9d1a3b15249706010579f3b",
-      "expectedBytes": 724,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, presentation or preserved processing record; native published inputs are separately bound above."
@@ -217,8 +203,6 @@
     {
       "id": "retained-evidence-5",
       "path": "src/objects/m42/source/bake-inputs/references/01-compiler.json",
-      "expectedSha256": "5b3c572b7f5075d6f4bf53b646a476378533b53df0e7ee6b380a0c8ab6d6e573",
-      "expectedBytes": 1039,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -227,8 +211,6 @@
     {
       "id": "retained-evidence-6",
       "path": "src/objects/m42/source/bake-inputs/references/02-observations.json",
-      "expectedSha256": "be4195e2e45f37f977436584e9a94967d090d8a1c5f95328ae97730f71bb9df4",
-      "expectedBytes": 4085,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -237,8 +219,6 @@
     {
       "id": "retained-evidence-7",
       "path": "src/objects/m42/source/bake-inputs/references/03-observation-structures.json",
-      "expectedSha256": "be81194675d0472bd2bbf6efee0e27e968fde0bc8dde6e6c551fc0824dd34fda",
-      "expectedBytes": 401,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -247,8 +227,6 @@
     {
       "id": "retained-evidence-8",
       "path": "src/objects/m42/source/bake-inputs/references/04-depth-model.json",
-      "expectedSha256": "7133715515c356cca625531de979a626add41ac9d7441adfe8505a8ffe46ef88",
-      "expectedBytes": 3349,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -257,8 +235,6 @@
     {
       "id": "retained-evidence-9",
       "path": "src/objects/m42/source/provenance-references.json",
-      "expectedSha256": "11f85841d178f85868587fd13837a4abe1c67e639b438dffd6722804d23b20a3",
-      "expectedBytes": 1738,
       "sourceBinding": {
         "kind": "local",
         "reason": "Byte-identical historical research evidence retained by the application; original path, revision and byte pins are recorded in source/provenance-references.json."
@@ -267,8 +243,6 @@
     {
       "id": "retained-evidence-10",
       "path": "src/objects/m42/source/replay-references.json",
-      "expectedSha256": "678722eb6783aa3a3e843cc9a0cd73775f96178f6954b071bfcf0d2ef2042a9d",
-      "expectedBytes": 1239,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned replay reference map; original input paths and accepted byte pins remain preserved."
@@ -282,9 +256,7 @@
       "sourceBinding": {
         "kind": "local",
         "reason": "Accepted pre-slice density/emission, material, stars or replay settings. Original published inputs and methods remain bound in this manifest; compact input provenance preserves their processing lineage."
-      },
-      "expectedBytes": 240571,
-      "expectedSha256": "a7503f4884674b7db70d383ae529661e668d44111130d142a0414ca414ccf0f5"
+      }
     }
   ]
 }
