@@ -854,34 +854,50 @@ export async function auditObjectRuntimeOwnership({ root = process.cwd(), object
 
 /**
  * `--receipts`: every registered object's physical frame receipt (`prepared/world-navigation.json` against its
- * descriptor frame) and its recipe sources against the manifest, from tracked files only.
- * It needs no restored prepared scene or runtime, so the contract-lint job runs it minutes before `--all` could.
- * Every object is checked and every failure is reported together.
+ * descriptor frame) and its recipe sources against the manifest.
+ * The source half reads tracked files only, so it runs in any checkout. The receipt itself is baked and restored
+ * from R2, so an object whose `prepared/world-navigation.json` is absent is counted as unproven rather than failed;
+ * a receipt that IS present and disagrees with its descriptor still fails. Every failure is reported together.
  */
 export async function auditPhysicalFrameReceipts({ root = process.cwd(), objects = OBJECTS,
   readText = (path: string) => readFile(path, "utf8") }:
-  { root?: string; objects?: readonly AuditObject[]; readText?: RuntimeSourceReader } = {}): Promise<{ receipts: number; failures: string[] }> {
+  { root?: string; objects?: readonly AuditObject[]; readText?: RuntimeSourceReader } = {}): Promise<{ receipts: number; unrestored: number; failures: string[] }> {
   const failures: string[] = [];
-  let receipts = 0;
+  let receipts = 0, unrestored = 0;
   for (const object of objects) {
     const directory = resolve(root, "src/objects", object.id);
+    const receiptPath = resolve(directory, "prepared/world-navigation.json");
     try {
       const descriptor = requireRecord(JSON.parse(await readText(resolve(directory, "object.json"))), `${object.id} descriptor`);
       if (await requireAuthoredSourcePins({ objectId: object.id, descriptor, root, source: readText, closure: new Set() })) {
-        await requireAuthoredWorldFrameReceipt({ descriptor, directory, readText });
-        receipts++;
+        try {
+          await requireAuthoredWorldFrameReceipt({ descriptor, directory, readText });
+          receipts++;
+        } catch (error) {
+          // Only an absent receipt is unproven. Anything else, including a receipt that contradicts its
+          // descriptor, is a failure.
+          if (!isMissingFile(error, receiptPath)) throw error;
+          unrestored++;
+        }
       }
     } catch (error) { failures.push(`${object.id}: ${errorMessage(error)}`); }
   }
-  return { receipts, failures };
+  return { receipts, unrestored, failures };
+}
+
+/** True when `error` is this exact file being absent: the receipt is restored from R2, not tracked. */
+function isMissingFile(error: unknown, path: string): boolean {
+  return error instanceof Error && "code" in error && error.code === "ENOENT" &&
+    "path" in error && typeof error.path === "string" && resolve(error.path) === path;
 }
 
 if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href && process.argv.includes("--receipts")) {
   if (process.argv.length !== 3) throw new Error("--receipts checks every registered object and takes no other option.");
-  const { receipts, failures } = await auditPhysicalFrameReceipts();
+  const { receipts, unrestored, failures } = await auditPhysicalFrameReceipts();
   for (const failure of failures) console.error(failure);
   if (failures.length) process.exitCode = 1;
-  else console.log(`${OBJECTS.length} registered objects: ${receipts} physical frame receipt(s) and recipe sources are current.`);
+  else console.log(`${OBJECTS.length} registered objects: recipe sources are current; ${receipts} physical frame receipt(s) checked, ` +
+    `${unrestored} not restored here (node tools/assets/setup.mts --location=prepared).`);
 } else if (import.meta.url === pathToFileURL(process.argv[1] ?? "").href) {
   const args = process.argv.slice(2);
   // One or more `--object <id>` pairs scope the audit to those objects; each occurrence is collected, not just
