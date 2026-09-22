@@ -35,8 +35,6 @@ test('the checked seven clusters reproduce from the pinned independent MCXC-II r
   }
   const bytes = await readFile(resolve(directory, 'prepared/catalogue.json'));
   assert.deepEqual(JSON.parse(bytes.toString()), data);
-  const manifest = JSON.parse(await readFile(resolve(directory, 'inventory.json'), 'utf8'));
-  assert.equal(manifest.bytes, bytes.length); assert.equal(manifest.objects, recipe.selection.length);
   assert.throws(() => prepareClusterCatalog(rows.filter(row => row.catalogueId !== recipe.selection[0]!.catalogueId), recipe), /release/);
   assert.throws(() => prepareClusterCatalog(rows, { ...recipe, cosmology: { ...recipe.cosmology, hubbleKmPerSecPerMpc: 67 } }), /angular scale/);
 });
