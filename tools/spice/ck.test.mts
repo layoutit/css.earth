@@ -40,7 +40,7 @@ test('type 3 segments interpolate between records inside an interval and refuse 
 });
 
 test('type 1 discrete records need an exact or tolerated time; type 2 propagates a constant rate', () => {
-  const one = ck(1, [...zRotation(45), 0, 0, 0, 7, 0, 1], { rates: 1 }); // record, time, directory count, record count
+  const one = ck(1, [...zRotation(45), 0, 0, 0, 7, 1], { rates: 1 }); // record, time tag, record count (no directory epoch below 101 records)
   assert.equal(one.pointing(6), null); assert.ok(one.pointing(7)); assert.ok(one.pointing(9, 2));
   const rate = Math.PI / 180; // one degree per second about Z
   const two = ck(2, [...zRotation(0), 0, 0, rate, 1, 0, 100], { rates: 1 }); // record, start, stop: SPICE derives the count from the length

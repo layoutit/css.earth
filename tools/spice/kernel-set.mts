@@ -24,7 +24,8 @@ export interface KernelSet {
   readonly providers: FrameProviders;
 }
 
-export async function loadKernelSet(paths: readonly string[]): Promise<KernelSet> {
+/** `ckToleranceSeconds` lets a discrete (type 1) CK answer from its record nearest the requested time, within that many seconds. */
+export async function loadKernelSet(paths: readonly string[], { ckToleranceSeconds = 0 }: { ckToleranceSeconds?: number } = {}): Promise<KernelSet> {
   let pool: KernelPool = { variables: new Map(), sources: [] };
   const ephemeris = new Ephemeris(), cks: CkSegment[] = [], kernels: LoadedKernel[] = [], clocks = new Map<number, SpacecraftClock>();
   for (const path of paths) {
@@ -42,10 +43,11 @@ export async function loadKernelSet(paths: readonly string[]): Promise<KernelSet
     ck: (instrument, et) => {
       const sclkId = pool.variables.has(`CK_${instrument}_SCLK`) ? Number(pool.variables.get(`CK_${instrument}_SCLK`)?.[0]) : Math.trunc(instrument / 1000);
       const ticks = etToClock(clock(sclkId), leapSeconds, et);
+      const tolerance = ckToleranceSeconds > 0 ? etToClock(clock(sclkId), leapSeconds, et + ckToleranceSeconds) - ticks : 0;
       for (let i = cks.length - 1; i >= 0; i--) {
         const segment = cks[i];
-        if (segment.instrument !== instrument || ticks < segment.start || ticks > segment.stop) continue;
-        const pointing = segment.pointing(ticks);
+        if (segment.instrument !== instrument || ticks < segment.start - tolerance || ticks > segment.stop + tolerance) continue;
+        const pointing = segment.pointing(ticks, tolerance);
         if (pointing) return { cMatrix: pointing.cMatrix, reference: segment.reference };
       }
       return null;
