@@ -366,6 +366,12 @@
     border-radius: 0;
     background: var(--explorer-panel-background);
   }
+  /* Typed results replace the sidebar's card: its background, down to the sidebar's own bottom. */
+  body[data-object-shell] .planet-sidebar [data-search-results] #object-category-results {
+    max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-footer-height) - var(--explorer-panel-bottom-gap));
+    padding-bottom: 8px;
+    background: var(--explorer-panel-background);
+  }
 }
 
 @media (max-width: 960px) {
