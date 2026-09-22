@@ -238,7 +238,24 @@ def publication(d):
      if len(measured)<=2: labels.append((k,a,x-half_width(q['covariance'],k),y,2*half_width(q['covariance'],k),face))
    ax.plot([x],[y],ls='',marker='D',ms=5.5,mfc=face,mec='k',mew=.8,zorder=9)
  ax.set_aspect('equal',adjustable='datalim'); ax.autoscale_view()
+ # A square frame on whole ticks around what was drawn, so the reader lands on round numbers.
+ bounds=ax.dataLim
+ # With a reference at the origin the frame is centred on it, the way a chart of offsets from a star is read.
+ centred=d.get('origin') is not None
+ cx,cy=(0.,0.) if centred else ((bounds.x0+bounds.x1)/2,(bounds.y0+bounds.y1)/2)
+ half=max(abs(bounds.x0-cx),abs(bounds.x1-cx),abs(bounds.y0-cy),abs(bounds.y1-cy))*1.08 if centred else max(bounds.x1-bounds.x0,bounds.y1-bounds.y0)/2*1.08
+ magnitude=10**np.floor(np.log10(half)); step=next(v*magnitude for v in (.25,.5,1,2,2.5,5,10) if v*magnitude>=half/2.2)
+ half=np.ceil(half/step)*step
+ ax.set_xlim(cx-half,cx+half); ax.set_ylim(cy-half,cy+half)
+ ax.xaxis.set_major_locator(plt.MultipleLocator(step)); ax.yaxis.set_major_locator(plt.MultipleLocator(step))
+ ax.grid(True,which='major',color='0.85',lw=.8,zorder=0)
  if d.get('invertX'): ax.invert_xaxis()
+ if d.get('compass',True):
+  # North up, east left, drawn where the sky convention is read from.
+  ax.annotate('',xy=(.93,.20),xytext=(.93,.075),xycoords='axes fraction',arrowprops=dict(arrowstyle='-|>',color='k',lw=1.6))
+  ax.annotate('',xy=(.80,.075),xytext=(.93,.075),xycoords='axes fraction',arrowprops=dict(arrowstyle='-|>',color='k',lw=1.6))
+  ax.annotate('N',(.93,.215),xycoords='axes fraction',fontsize=15,ha='center',va='bottom')
+  ax.annotate('E',(.785,.075),xycoords='axes fraction',fontsize=15,ha='right',va='center')
  span=max(abs(ax.get_xlim()[1]-ax.get_xlim()[0]),1e-9)
  for k,a,lx,ly,width,face in labels:
   # A contour narrower than a fiftieth of the frame has no room for its own label; the legend still names the levels.
@@ -251,7 +268,7 @@ def publication(d):
  ax.tick_params(which='major',direction='in',length=14,width=.8,top=True,right=True,labelsize=18,pad=8)
  ax.tick_params(which='minor',direction='in',length=7,width=.6,top=True,right=True)
  ax.set_xlabel(d['xLabel'],fontsize=22); ax.set_ylabel(d['yLabel'],fontsize=22)
- if handles: ax.legend(handles=handles,frameon=False,fontsize=13,loc='best')
+ if handles: ax.legend(handles=handles,frameon=False,fontsize=13,loc='lower left')
  return fig,ax
 kind=d['kind']; drawn=[]; published=kind=='scatter-ellipses' and d.get('layout')=='publication'
 if published: fig,ax=publication(d)
