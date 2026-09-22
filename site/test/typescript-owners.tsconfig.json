@@ -12,8 +12,7 @@
   },
   "include": [
     "dataset-navigation-browser.mts",
-    "typescript-owners-browser.mts",
-    "../../src/renderers/css/paging/__fixtures__/prepared-page.mts"
+    "typescript-owners-browser.mts"
   ],
   "exclude": []
 }

@@ -31,8 +31,6 @@
     {
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "11129d8df0c5a62592e2f3a5ce65950352607cc0d4d7fd34d58c88c7de401b80",
       "origin": "https://arxiv.org/abs/2401.04634",
       "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://arxiv.org/abs/2401.04634",
       "credit": "Karkoschka (2001); French et al. (2024); cssEarth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
@@ -130,9 +126,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "shape/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "shape/pck00011.tpc"
     },
     {
       "path": "survey/best-files.json"

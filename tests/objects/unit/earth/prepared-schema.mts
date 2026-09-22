@@ -42,7 +42,7 @@ export const parseEarthScene=shape({schema:text,
       litSurface:shape({urls:array(text)}),litPoles:pair}),shells:array(shape({id:text,label:text,radiusScale:number,cutaway:boolean,className:text,leaves:array(leaf)})),
     sectionLeaves:array(leaf),leafCount:number,runtimeGeometry:boolean,runtimeRasterization:boolean}),
   counts:shape({surfaceLeafCount:number,cloudLeafCount:number,lightingLeafCount:number,atmosphereLeafCount:number,
-    interiorLeafCount:number,cityPageLeafCount:number,noisePageLeafCount:number,retainedLeafCount:number,
+    interiorLeafCount:number,retainedLeafCount:number,
     maximumRetainedLeafCount:number,runtimeGeometryPreparation:boolean,runtimeRasterization:boolean})});
 
 export const parseEarthLenses=shape({schema:text,defaultLens:text,runtimeFilters:boolean,runtimeRasterization:boolean,
@@ -53,8 +53,3 @@ const source=shape({url:text,label:text,checked:optional(text)});
 const fact=shape({id:text,label:text,value:text,source:optional(source)});
 export const parseEarthTitle=shape({label:text,viewBox:text,width:number,height:number,path:text});
 export const parseEarthPanel=shape({facts:array(fact),moreFacts:array(fact)});
-export const parseEarthPageMetadata=shape({schema:text,dataset:text,qualification:text,credit:text,sourcePage:text,assetOrigin:text,
-  rasterScale:number,poolSize:number,minimumZoom:number,decodedPageBytes:number,maximumDecodedBytes:number,maximumConcurrentLoads:number,
-  targetCssPixels:number,roots:array(requireRecord),initialLayer:requireRecord,index:shape({maximumDirectories:number,maximumBytes:number,
-    maximumDirectoryBytes:number,maximumConcurrentLoads:number}),geometryOrigin:optional(text),geometryVersion:optional(text),
-  camera:optional(shape({controlPitch:number,controlYaw:number,zoom:number})),topology:optional(text),pageTemplate:optional(text),maximumZoom:optional(number),canonicalDprIndependent:optional(boolean)});

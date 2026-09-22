@@ -21,7 +21,7 @@ The minimum elongation assumes uniform reflectivity and an equator-on view. Equa
 
 - K2 paper reports single-peaked photometric period 4.255 h; selected shape-driven full rotation doubles it, consistent with 2023 table. Not a uniquely established rotation period.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="setebos-source-model"></a>
 <a id="selected-geometry"></a>

@@ -29,7 +29,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | enhanced | 282.3 → 294.1 kB |
 | normal | 217.6 → 226.2 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ganymede/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/ganymede/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Earlier shared-lane migration (12 September 2026): the terrestrial solid-observation lane was retired for Ganymede; the same pinned inputs and the same decoders (`terrestrial-observation`, `terrestrial-scientific` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are now painted at one 8192 × 4096 density for every DPR (asset record (`prepared/assets.json`)). That migration's pull request records its package, source-closure, minimap and browser conformance checks; the nomenclature recipe and map edge were unchanged and the labels were re-drawn against the new atlas. The composition addition retains this geometry.
 
@@ -41,7 +41,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - Six distributed point anchors, exact input hashes, and decoder failure cases are tested.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ganymede) and the shared browser conformance harness.
+- Focused checks run from the shared runners in [tests/objects/unit](../../../tests/objects/unit/runtime-package.test.mts) (runtime package and feature catalogue, scoped with `CSSEARTH_TEST_OBJECTS=ganymede`) and the shared browser conformance harness.
 
 Composition conversion: the two withheld views consume posterior medians for `derived_total_ices` and `derived_total_synthetic`, respectively. The pinned 8,845,543-byte fit (`cd7843ce…9261c8e4`) contributes 38,473 valid and 26,327 missing native nodes to each lens. It is resampled only by reversing latitude, reordering east-positive longitudes and repeating the seam: no smoothing, gap fill, or abundance aggregation. [The conversion record](source/composition/model-conversion.json) pins the output hashes, value ranges and posterior-interval products.
 
@@ -65,7 +65,7 @@ Feature notes: 68 of the labelled names carry a caption note, the lead summary o
 
 - **Geology:** The separate point labels disagree with final polygon categories at 124 of 3,042 comparable locations; 870 ejecta labels are outside that comparison. The audit retains those disagreements.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

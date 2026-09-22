@@ -49,8 +49,6 @@
     {
       "id": "c0401759200-label",
       "path": "observations/C0401759200R.LBL",
-      "expectedBytes": 4728,
-      "expectedSha256": "1f7acc910ad56a93f93793058469f45f187ba3a58d60523cedd9bab8bef2260c",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401759200R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0401759200",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -132,8 +130,6 @@
     {
       "id": "c0401787200-label",
       "path": "observations/C0401787200R.LBL",
-      "expectedBytes": 4726,
-      "expectedSha256": "bc2c3a5bff07671c02a78b02ef0eb3357fb419b0af053847a7e338bca15b4aff",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401787200R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0401787200",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -215,8 +211,6 @@
     {
       "id": "c0420691700-label",
       "path": "observations/C0420691700R.LBL",
-      "expectedBytes": 5008,
-      "expectedSha256": "87433c93a50af1a69e93ca78c69384dfbc162abf53cebb3f9fa92bf2a7a95a2f",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420691700R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420691700",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -298,8 +292,6 @@
     {
       "id": "c0532888400-label",
       "path": "observations/C0532888400R.LBL",
-      "expectedBytes": 5035,
-      "expectedSha256": "98ff130c32ced368c35dd93c2ccf00469d0203b34d7cd1ff7b319fc465e521b0",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888400R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888400",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -400,8 +392,6 @@
     {
       "id": "usgs-gazetteer-thebe-nomenclature-center-pts",
       "path": "features/THEBE_nomenclature_center_pts.zip",
-      "expectedBytes": 39755,
-      "expectedSha256": "d2be31bf0d2f433219d73345aa7be659964d2c2a0421796728244c45c0846cea",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/THEBE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

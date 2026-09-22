@@ -1292,8 +1292,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 13623,
-      "expectedSha256": "ad4210249a6429039e10ac0f82721b3cad70b6c3bcde7ddd4f97467d42139919",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1317,8 +1315,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 10284,
-      "expectedSha256": "4bf536f3e48a05909885a11e97a2d079f59b312b99102aae47bb9b4ac6c2ba1a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -81,8 +81,8 @@
   ],
   "id": "medusa",
   "displayName": "Medusa",
-  "lambda": 173.0,
-  "beta": -78.0,
+  "lambda": 173,
+  "beta": -78,
   "periodHours": 26.0455,
   "version": "2013-02-11",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2248/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2246/IAUspin.txt",
-  "shapeSha256": "ac8826e64a7f1eb168ab78c9ed24005a668817f2f32137eecf417ce94a9ee6c0",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 6.546401002842716e-08
+    "minimumTriangleAreaSourceUnitsSquared": 6.546401002842716e-8
   },
   "anchors": [
     {

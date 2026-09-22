@@ -12,7 +12,7 @@ import { parseSkyRecipe } from '../sky/config.js';
 import { acquireSkySource } from '../sky/source.js';
 import { loadSkyStarSprites, prepareSkyFaces } from '../sky/bake.js';
 import { compileCssSky } from '../../renderers/css/preparation/sky.js';
-import { preparePreparedAssetManifest } from '../../platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '../../platform/runtime-asset-closure.mts';
 
 export async function prepareDensityVolumeObject(options: { objectDirectory: string; outputDirectory?: string; acquisitionCache?: string }) {
   const objectDirectory = resolve(options.objectDirectory), outputDirectory = resolve(options.outputDirectory ?? resolve(objectDirectory, 'prepared'));
@@ -48,9 +48,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   }
   await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    // milky-way has no runtime-assets.json, so the whole bake is the R2 inventory.
-    await preparePreparedAssetManifest({ planetId: descriptor.id, preparedRoot: outputDirectory,
-      manifestPath: resolve(objectDirectory, 'prepared-assets.json') });
+    await inventoryPreparedAssets({ planetId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   const decodedBytes = data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0);
   console.log(`PREPARED ${descriptor.id}: ${slices.quads.length} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);

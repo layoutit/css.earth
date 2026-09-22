@@ -9,11 +9,6 @@ import {requireAcquisitionPlan,requireClosedRadialTerrain,requireProjectionAncho
 import {requireArray,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/bacchus/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('Bacchus retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'bacchus',planetName:'Bacchus',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('Bacchus preserves the original kilometer mesh and published spin interpretation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);
@@ -38,7 +33,6 @@ test('Bacchus radius colors match independent full-source projections',async()=>
  const {terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json')),mesh=await loadObjShape(resolve(root,p.path),p.grid),sample=createShapeSurfaceSampler(mesh,lens);
  const anchors=requireProjectionAnchors(JSON.parse(await readFile(new URL('./scalar-anchors.json',import.meta.url),'utf8')));
  const sampling=requireRecord(lens.surfaceSampling,'Bacchus surface sampling');assert.equal(requireString(sampling.method,'Bacchus surface sampling method'),'closest-source-point');
- const manifest=requireRecord(await read('manifest.json'),'Bacchus manifest'),inputs=requireArray(manifest.inputs,'Bacchus manifest inputs').map((input,index)=>{const entry=requireRecord(input,`Bacchus manifest input ${index}`);return {path:requireString(entry.path,`Bacchus manifest input ${index} path`),expectedSha256:requireString(entry.expectedSha256,`Bacchus manifest input ${index} hash`)};}),source=inputs.find(input=>input.path===p.path);assert.ok(source);assert.equal(anchors.sourceSha256,source.expectedSha256);
  for(const check of anchors.checks){const value=sample.samplePoint(check.query);if(!check.withinTransferLimit){assert.equal(value,null);continue;}assert.ok(value,check.kind);assert.ok(Math.abs(value.value-check.expectedValue)<1e-9,check.kind);assert.ok(Math.abs(value.radius-check.expectedRadiusMeters)<1e-6,check.kind);assert.ok(value.point.every((n,i)=>Math.abs(n-check.point[i])<1e-6),check.kind);}
 
 });

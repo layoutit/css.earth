@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "68f4de64f78c822fbdf51eb2c361f91c6830f4361d958d01c1a341dcbe698865",
       "origin": "https://doi.org/10.3847/2041-8213/aa64d8",
       "credit": "Gerdes et al. (2017), ApJ Letters 839, L15, Table 1 and §4 (arXiv:1702.00731v2 pp.6,9–10).",
       "license": "MIT numeric extraction of published scientific facts",

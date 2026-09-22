@@ -251,8 +251,6 @@
     {
       "id": "usgs-gazetteer-mimas-nomenclature-center-pts",
       "path": "features/MIMAS_nomenclature_center_pts.zip",
-      "expectedBytes": 147178,
-      "expectedSha256": "5fc3398feafe7379934e6a6b3b145450f96088981cf4a150bb1cadf072036836",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MIMAS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

@@ -81,11 +81,11 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   if (contentEntry) contentEntry.kind = 'authored-content';
   const [lenses, assets, stagedInventory, acquisition, minimaps] = await Promise.all([
     optionalJson(resolve(outputDirectory, 'lenses.json')), optionalJson(resolve(outputDirectory, 'assets.json')),
-    optionalJson(resolve(outputDirectory, 'runtime-assets.json')), optionalJson(resolve(sourceDirectory, 'preparation/acquisition.json')),
+    optionalJson(resolve(outputDirectory, 'inventory.json')), optionalJson(resolve(sourceDirectory, 'preparation/acquisition.json')),
     optionalJson(resolve(outputDirectory, 'minimaps.json')),
   ]);
-  const inventory = stagedInventory ?? await json(resolve(objectDirectory, 'runtime-assets.json'));
-  const outputPins = new Map<string, Identity>(records(inventory.assets).map(asset => [`/scenes/${id}/${text(asset.filename)}`, identity(asset)]));
+  const inventory = stagedInventory ?? await json(resolve(objectDirectory, 'inventory.json'));
+  const outputPins = new Map<string, Identity>(records(inventory.assets).filter(asset => asset.location === 'public').map(asset => [`/scenes/${id}/${text(asset.filename)}`, identity(asset)]));
   for (const [filename, value] of Object.entries(record(assets?.hashes ?? {}))) {
     const pin = identity(value);
     const url = `/scenes/${id}/${filename}`, existing = outputPins.get(url);

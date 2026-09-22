@@ -23,8 +23,6 @@
         "referenceRadiusMeters": 42500
       },
       "coverage": "Calibrated convex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
-      "expectedBytes": 82627,
-      "expectedSha256": "0a169c305b444f8163b677a60de14d126a71717887f51bbbe980befd42279262",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

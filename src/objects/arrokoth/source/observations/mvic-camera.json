@@ -3,32 +3,24 @@
   "width": 300,
   "height": 300,
   "startTime": "2019-01-01T05:12:55.280",
-  "imageSha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e",
-  "meshSha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
   "provenance": [
     {
-      "path": "shape/arrokoth_porter_2024_v01.obj",
-      "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5"
+      "path": "shape/arrokoth_porter_2024_v01.obj"
     },
     {
-      "path": "preparation/photography.json",
-      "sha256": "ba4d45cb602d95a96e83a18f4fe3ec5d918f9f7fc3317397c953d0fc3aafa0cb"
+      "path": "preparation/photography.json"
     },
     {
-      "path": "observations/ca05-camera.json",
-      "sha256": "e09c96c5b6e7228713c8d56c94acbe67e95d01095a6037e1ad5889d0a09546cb"
+      "path": "observations/ca05-camera.json"
     },
     {
-      "path": "observations/ca05_mvic_cube.lblx",
-      "sha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5"
+      "path": "observations/ca05_mvic_cube.lblx"
     },
     {
-      "path": "observations/mvic-overview.pdf",
-      "sha256": "1735825bf49c291c9119ea90565bb1090ff160ab5f8b58e416a658333a550097"
+      "path": "observations/mvic-overview.pdf"
     },
     {
-      "path": "observations/lor_0408625591_0x630_sci.fit",
-      "sha256": "164bbbda8a7f43a18e75f3ed17922efa3217904e6885a470c6192d97b82447b9"
+      "path": "observations/lor_0408625591_0x630_sci.fit"
     }
   ],
   "matrix": [
@@ -80,7 +72,6 @@
   ],
   "referenceCamera": {
     "schema": "cssearth-archived-camera@1",
-    "imageSha256": "164bbbda8a7f43a18e75f3ed17922efa3217904e6885a470c6192d97b82447b9",
     "width": 1024,
     "height": 1024,
     "target": "ASTEROID 486958 (2014 MU69)",
@@ -217,27 +208,21 @@
         0
       ]
     },
-    "meshSha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
     "provenance": [
       {
-        "path": "shape/arrokoth_porter_2024_v01.obj",
-        "sha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5"
+        "path": "shape/arrokoth_porter_2024_v01.obj"
       },
       {
-        "path": "preparation/photography.json",
-        "sha256": "ba4d45cb602d95a96e83a18f4fe3ec5d918f9f7fc3317397c953d0fc3aafa0cb"
+        "path": "preparation/photography.json"
       },
       {
-        "path": "reference/porteretal2024b.pdf",
-        "sha256": "e6fdeb2acd50283c3a75efe971c389f27cc09e4e31704a74a2b6eb76fb980aa0"
+        "path": "reference/porteretal2024b.pdf"
       },
       {
-        "path": "observations/lor_0408625591_0x630_sci.lbl",
-        "sha256": "50ff4ab807e32a2190b4b32c11e4c45d2fee4a0d42127ed649a03306df59c6e6"
+        "path": "observations/lor_0408625591_0x630_sci.lbl"
       },
       {
-        "path": "observations/lor_0408626332_0x636_sci.lbl",
-        "sha256": "4a48b38a489c772a5eea1098abcd9efbb0402aac3424c017adbd1001a156d082"
+        "path": "observations/lor_0408626332_0x636_sci.lbl"
       }
     ]
   },

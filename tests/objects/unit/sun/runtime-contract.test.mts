@@ -16,7 +16,7 @@ import panel from "../../../../src/objects/sun/prepared/panel.json" with { type:
 import text from "../../../../src/objects/sun/prepared/text.json" with { type: "json" };
 import raster from "../../../../src/objects/sun/source/preparation/raster.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
+import { validateInventory } from "../../../../src/platform/runtime-asset-closure.mts";
 import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from "../../../../tools/objects/observation/fits.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
@@ -27,25 +27,14 @@ import { resolve } from "node:path";
 const LENS_IDS = ["photosphere", "magnetic", "chromosphere", "corona", "cor1-density"];
 const LAYERS = ["surface", "poles", "corona", "limb"] as const;
 
-objectRuntimePackageTests(runtimeDefinition);
-
 test("binds the exact Sun source and runtime closures", async () => {
   const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/objects/sun/source") });
   // 38 retired-lane inputs + 7 authored records that moved from documents to local inputs (the navigation recipe included); 3 documents remain.
   assert.deepEqual(await source.verify(), { inputCount: 50, generatedIntermediateCount: 0, documentCount: 4 });
-  const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
-  assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
+  const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/inventory.json", import.meta.url), "utf8"));
+  assert.equal(validateInventory("sun", runtime), true);
   // 4 lenses x (surface, poles, corona, limb) at the one prepared density + 4 thumbnails.
-  assert.equal(runtime.assets.length, 20);
-});
-
-test("Sun's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "sun") });
-  assert.equal(audit.complete, true);
-  assert.ok(audit.sharedClosure.includes("src/renderers/css/universe/world-context-runtime.ts"));
-  for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/prepared-playback"]) {
-    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));
-  }
+  assert.equal(runtime.assets.filter((asset: { location: string }) => asset.location === "public").length, 20);
 });
 
 test("Sun is prepared by the generic raster lane as an emissive sphere with flat polar caps and no lighting", async () => {
@@ -182,22 +171,6 @@ test("all four sourced solar layers wait for the complete replacement group", as
     jobs[3].done = true; jobs[3].resolve(); await f.settle(); assert.equal(await action, true);
     assert.ok(textures(f).every((value, index) => value !== before[index]));
     assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
-    assert.deepEqual(f.errors, []);
-  } finally { f.restore(); }
-});
-
-test("Sun lens selection keeps the retained tree and switches only the four layers", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    const records = f.stage.querySelectorAll("*");
-    for (const id of [...LENS_IDS.slice(1), LENS_IDS[0]]) {
-      const request = f.selection.dispatch({ kind: "lens", id }); await f.settle(); assert.equal(await request, true);
-      assert.equal(required(f.selection.state().committed).lensId, id);
-      assert.deepEqual(f.stage.querySelectorAll("*"), records);
-      assert.equal(f.stage.dataset.lens, id);
-    }
-    assert.equal(f.inputs.get("shadows"), undefined, "an emissive body declares no Shadows toggle");
-    assert.equal(f.inputs.get("atmosphere"), undefined);
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });

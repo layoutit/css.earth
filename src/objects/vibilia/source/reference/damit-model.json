@@ -82,14 +82,14 @@
   ],
   "id": "vibilia",
   "displayName": "Vibilia",
-  "lambda": 251.0,
-  "beta": 63.0,
+  "lambda": 251,
+  "beta": 63,
   "periodHours": 13.82517,
   "version": "2017-06-16",
   "nonconvex": true,
   "calibrated": true,
-  "diameterKm": 143.0,
-  "uncertaintyKm": 3.0,
+  "diameterKm": 143,
+  "uncertaintyKm": 3,
   "akari": {
     "number": 144,
     "name": "Vibilia",
@@ -100,7 +100,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4039/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4037/IAUspin.txt",
-  "shapeSha256": "7ad4f599bff34a11ba1ead1d48effff2f784a32ac0d456e695fff177d625ba64",
   "shapeBytes": 32486,
   "vertices": 402,
   "faces": 800,
@@ -145,9 +144,9 @@
   },
   "declaredDiameterComparison": {
     "sourceVolumeEquivalentDiameter": 143.02843435119865,
-    "declaredDiameterKm": 143.0,
+    "declaredDiameterKm": 143,
     "relativeDifference": 0.00019884161677374834,
-    "scaledDiameterKm": 143.0
+    "scaledDiameterKm": 143
   },
   "alternatives": [
     {
@@ -262,8 +261,8 @@
   ],
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
-    "diameterKm": 143.0,
-    "uncertaintyKm": 3.0,
+    "diameterKm": 143,
+    "uncertaintyKm": 3,
     "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
     "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1824",

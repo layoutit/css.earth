@@ -14,7 +14,7 @@ import {
   objectPackagePaths,
   validateObjectPackageFiles,
   validatePlanetData,
-  validateRuntimeAssetManifest,
+  validateInventory,
 } from "../../tools/contract/object-package-contract.mts";
 
 const implemented = SCENE_OBJECTS;
@@ -24,7 +24,7 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   context.after(() => rm(projectRoot, { recursive: true, force: true }));
   const object = { id: "local-body", name: "LocalBody" };
   const paths = objectPackagePaths(object, projectRoot, true);
-  for (const file of [...paths.requiredFiles, ...paths.backlogFiles]) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
+  for (const file of paths.requiredFiles) { await mkdir(dirname(file), { recursive: true }); await writeFile(file, "fixture\n"); }
   const bytes = Buffer.from("owned prepared bytes");
   const hash = createHash("sha256").update(bytes).digest("hex");
   const body = authoredObjectFixture(object.id, { path: "source/local-data.bin" });
@@ -34,11 +34,11 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   await mkdir(paths.publicAssets, { recursive: true });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
-  await writeFile(paths.runtimeAssets, JSON.stringify({ schema: "csslocal-body-runtime-assets@1", assets: [{ filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
+  await writeFile(paths.inventory, JSON.stringify({ schema: "cssearth-inventory@1", assets: [{ location: "public", filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
   await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@2", inputs: [{ id: "local", path: "local-data.bin", expectedSha256: hash, expectedBytes: bytes.length, origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
   assert.deepEqual(await validatePlanetData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), "corrupt");
-  await assert.rejects(validatePlanetData(object, { projectRoot }), /runtime asset drifted/);
+  await assert.rejects(validatePlanetData(object, { projectRoot }), /public asset drifted/);
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "undeclared.bin"), "hidden source");
   await assert.rejects(validatePlanetData(object, { projectRoot }), /undeclared|Undeclared|closure/);
@@ -56,9 +56,6 @@ test("derives the complete owned file contract from planet identity", () => {
   assert.ok(paths.requiredFiles.includes(
     `/project/site/pages/[id].astro`,
   ));
-  // #505 deleted the 547 browser profiles with the harness that read them, so the backlog
-  // this ratchet tracked is empty. It stays a ratchet for whatever earns one next.
-  assert.deepEqual(paths.backlogFiles, []);
   assert.ok(!paths.requiredFiles.includes(
     `/project/tests/objects/browser/${planet.id}/browser-profile.mts`,
   ));
@@ -96,15 +93,13 @@ test("requires every registered object package file", async () => {
     }),
     /is missing .*prepared\/content\.json/,
   );
-  // The backlog is empty since #505 deleted the browser profiles it tracked, so a missing file
-  // that used to be backlogged is now simply not asked for: it must not become a hard failure.
-  const backlogged = await validateObjectPackageFiles(implemented[0], {
+  // A file the contract no longer asks for (the retired browser profiles) must not become a hard failure.
+  await validateObjectPackageFiles(implemented[0], {
     accessFile: async (file) => {
       assert.ok(typeof file === "string", "Package validator passes filesystem paths");
       if (file.endsWith("browser-profile.mts")) throw new Error("ENOENT");
     },
   });
-  assert.deepEqual(backlogged.missingBacklogFiles, []);
 });
 
 test("validates local editorial identity and provenance", () => {
@@ -142,26 +137,27 @@ test("validates local editorial identity and provenance", () => {
 test("validates runtime asset manifest entries", () => {
   const planetId = "fixture";
   const valid = {
-    schema: `css${planetId}-runtime-assets@1`,
+    schema: 'cssearth-inventory@1',
     assets: [{
+      location: "public",
       filename: "surface.webp",
       bytes: 42,
       sha256: "a".repeat(64),
     }],
   };
-  assert.equal(validateRuntimeAssetManifest(planetId, valid), true);
+  assert.equal(validateInventory(planetId, valid), true);
   assert.throws(
-    () => validateRuntimeAssetManifest(planetId, {
+    () => validateInventory(planetId, {
       ...valid,
       assets: [...valid.assets, ...valid.assets],
     }),
-    /repeats runtime asset/,
+    /repeats inventory entry/,
   );
   assert.throws(
-    () => validateRuntimeAssetManifest(planetId, {
+    () => validateInventory(planetId, {
       ...valid,
       assets: [{ ...valid.assets[0], filename: "../escape.webp" }],
     }),
-    /invalid runtime asset entry/,
+    /invalid inventory entry/,
   );
 });

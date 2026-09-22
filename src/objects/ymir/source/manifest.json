@@ -31,8 +31,6 @@
     {
       "id": "shape-approximation",
       "path": "shape/model.tab",
-      "expectedBytes": 59863,
-      "expectedSha256": "2fdb8e55a019f95bee8e6f5f301dafc6bd99377729db01e12b34ff5461a75888",
       "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
       "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
       "license": "MIT authored approximation from cited scientific constraints",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://tilmanndenk.de/outersaturnianmoons/ymir/",
       "credit": "Denk et al. model constraints; cssEarth approximate envelope and standard grid",
       "license": "MIT authored approximation from cited scientific constraints",

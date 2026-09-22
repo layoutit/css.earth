@@ -1,6 +1,6 @@
 import {required} from "../../../../tools/contract/test-values.mts";
 import {requireRecord} from "../../../../tools/sources/source-values.mts";
-import {shape,array,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
+import {shape,array,text} from "../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts";
 import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/index.js";
 import assert from 'node:assert/strict';
 import test from 'node:test';
@@ -30,15 +30,13 @@ test('Earth mount and delivery contain the authored globe views, without geograp
   const descriptor=shape({properties:shape({recipe:requireRecord})})(await read('src/objects/earth/object.json'));
   const content=requireRecord(await read('src/objects/earth/prepared/content.json'));
   assert.equal(descriptor.properties.recipe.paging,undefined);
-  assert.equal(descriptor.properties.recipe.destinations,undefined);
-  assert.equal(runtimeDefinition.destinations,undefined);
-  assert.equal(content.destinations,undefined);
-  assert.deepEqual(runtimeDefinition.pageLayers,[]);
-  assert.equal(PREPARED_EARTH_SCENE.counts.cityPageLeafCount,0);
-  assert.equal(PREPARED_EARTH_SCENE.counts.noisePageLeafCount,0);
+  assert.deepEqual(descriptor.properties.recipe.destinations,{source:"places",maxEntries:40000});
+  // The city catalogue is the one geographic capability the globe keeps: a search that flies to a place's coordinates.
+  assert.ok(runtimeDefinition.destinations);
+  assert.ok(content.destinations);
   assert.deepEqual(required(runtimeDefinition.controls.lenses).controls.map(lens=>lens.id),['normal','clouds','topography','night-lights','enso','cross-section','mantle-tomography']);
   assert.doesNotMatch(JSON.stringify(content),/WorldCover|GeoNames|Buenos Aires/);
-  const assets=shape({assets:array(shape({filename:text}))})(await read('src/objects/earth/runtime-assets.json'));
-  assert.equal(assets.assets.some((asset: { filename: string; })=>/noise|places|city|wmts/.test(asset.filename)),false);
+  const assets=shape({assets:array(shape({filename:text}))})(await read('src/objects/earth/inventory.json'));
+  assert.equal(assets.assets.some((asset: { filename: string; })=>/noise|city|wmts/.test(asset.filename)),false);
   for(const kind of ['surface','topography','night-lights','interior','atmosphere']) assert.ok(assets.assets.some((asset: { filename: string|string[]; })=>asset.filename.includes(kind)),kind);
 });

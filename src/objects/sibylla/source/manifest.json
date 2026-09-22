@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 73240
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 146.48 km (catalog ±1.74 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select the 2022 archive release of Hanuš et al. (2021) ASAS-SN model 6009. The paper table gives (108,-62), 47.015 h, and 348 photometric measurements. This is a complete convex model; ATLAS 2020 also reports a partial model with unconstrained longitude, which does not supersede it. AKARI scaling remains approximate.",
-      "expectedBytes": 82708,
-      "expectedSha256": "f156336a2048015bfabaf6dc2be0d5a06683cdce4662d02c7e71931b33bbbb79",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/6009-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "ce71c4201053f717014cd8087bf858fa44af7594bc296a91a0f1040c6f3102f8"
+      "path": "reference/6009-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

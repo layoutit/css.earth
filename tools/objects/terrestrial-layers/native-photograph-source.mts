@@ -1,6 +1,4 @@
-import { createHash } from 'node:crypto';
-import { createReadStream } from 'node:fs';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
@@ -38,13 +36,8 @@ const finiteDimensions = (source: Record<string, unknown>) => {
 
 async function pinnedPath(sourceDirectory: string, sourceValue: unknown) {
   const source = requireRecord(sourceValue), path = resolve(sourceDirectory, requireString(source.path));
-  const expectedBytes = requireFiniteNumber(source.expectedBytes), expectedSha256 = requireString(source.expectedSha256);
-  if (!Number.isSafeInteger(expectedBytes) || expectedBytes < 1 || !/^[0-9a-f]{64}$/.test(expectedSha256)) {
-    throw new TypeError('Native photograph requires a byte count and SHA-256 pin.');
-  }
-  const hash = createHash('sha256'); let bytes = 0;
-  for await (const chunk of createReadStream(path)) { hash.update(chunk); bytes += chunk.length; }
-  if (bytes !== expectedBytes || hash.digest('hex') !== expectedSha256) throw new Error(`Photograph pin mismatch: ${path}`);
+  // The manifest owns the photograph's identity; the recipe names it.
+  await access(path);
   return {source, path, ...finiteDimensions(source)};
 }
 

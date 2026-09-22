@@ -23,7 +23,7 @@ import { SCENE_OBJECTS } from "../../site/objects.mts";
 import { availableMemoryBytes, defaultPreparationConcurrency, preparationPeakBytes, runObjectCommand, runPreparationObjects } from "../cli/run-implemented-planets.mts";
 import { readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import { PREPARATION_TRACE_VARIABLE } from './preparation-trace-format.mts';
-import { preparePreparedAssetManifest } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 
 const sharedSteps = ["prepare-shell-titles.mts", "prepare-wordmark-rail.mts",
   "prepare-planet-title-sources.mts", "prepare-scientific-charts.mts"];
@@ -120,18 +120,10 @@ export async function preparePlanets({ projectRoot = process.cwd(), force = fals
     const navigation = await runObjectCommand({ command: process.execPath,
       argumentsList: [resolve(root, "tools/prepare/prepare-navigation.mts"), ...objectIds], cwd: root });
     assert.equal(navigation.exitCode, 0, "Navigation preparation failed"); assert.equal(navigation.signal, null);
-    // Refresh the prepared/runtime.json + prepared/scene.json inventory for every prepared body, even when
-    // `prepare:object-json` does not run afterward (e.g. `prepare:checkout`).
+    // Inventory every prepared body's baked prepared/ files, even when `prepare:object-json` does not run afterward.
     for (const id of objectIds) {
-      const preparedDirectory = resolve(root, "src/objects", id, "prepared");
-      const inventoried: string[] = [];
-      for (const filename of ["runtime.json", "scene.json"]) {
-        if (await access(resolve(preparedDirectory, filename)).then(() => true, () => false)) inventoried.push(filename);
-      }
-      if (inventoried.length) {
-        await preparePreparedAssetManifest({ planetId: id, preparedRoot: preparedDirectory,
-          manifestPath: resolve(preparedDirectory, "..", "prepared-assets.json"), filenames: inventoried });
-      }
+      const objectDirectory = resolve(root, "src/objects", id);
+      if (await access(resolve(objectDirectory, "prepared")).then(() => true, () => false)) await inventoryPreparedAssets({ planetId: id, objectDirectory });
     }
     const totalReport = { ...report, totalElapsedMilliseconds: performance.now() - start };
     await writeFile(resolve(root, cacheRoot, "latest-run.json"), JSON.stringify(totalReport, null, 2) + "\n");

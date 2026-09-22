@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-muse-spectral-maps@1",
-  "recipeSha256": "a0dce284117c01ed762a05ab1a2f25af626bd9e73733daaddb4f327749073d81",
   "preparerSha256": "2d8910aed38cd53a847448a912fe219db0314266da31d5d90d430a61050875f8",
   "target": "io",
   "registration": {
@@ -149,7 +148,7 @@
         "missingNativeNodes": 12651,
         "edgeNodesWithheld": 194,
         "retainedNativeNodes": 3355,
-        "maximumFloat32Error": 2.3831169482235737e-07
+        "maximumFloat32Error": 2.3831169482235737e-7
       },
       "finiteNativeRange": [
         4.431492551340688,
@@ -185,7 +184,7 @@
         "missingNativeNodes": 12637,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3367,
-        "maximumFloat32Error": 2.3834897966423796e-07
+        "maximumFloat32Error": 2.3834897966423796e-7
       },
       "finiteNativeRange": [
         4.406837284088966,
@@ -221,7 +220,7 @@
         "missingNativeNodes": 12631,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3373,
-        "maximumFloat32Error": 2.383757218282767e-07
+        "maximumFloat32Error": 2.383757218282767e-7
       },
       "finiteNativeRange": [
         4.5964302505975265,
@@ -260,7 +259,7 @@
         "missingNativeNodes": 12651,
         "edgeNodesWithheld": 194,
         "retainedNativeNodes": 3355,
-        "maximumFloat32Error": 1.8617122288233645e-09
+        "maximumFloat32Error": 1.8617122288233645e-9
       },
       "finiteNativeRange": [
         0.018299136826765094,
@@ -299,7 +298,7 @@
         "missingNativeNodes": 12637,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3367,
-        "maximumFloat32Error": 1.8610779584093962e-09
+        "maximumFloat32Error": 1.8610779584093962e-9
       },
       "finiteNativeRange": [
         0.018922585982052653,
@@ -338,7 +337,7 @@
         "missingNativeNodes": 12631,
         "edgeNodesWithheld": 196,
         "retainedNativeNodes": 3373,
-        "maximumFloat32Error": 1.862100473815076e-09
+        "maximumFloat32Error": 1.862100473815076e-9
       },
       "finiteNativeRange": [
         0.017667182716590624,

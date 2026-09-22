@@ -1,0 +1,149 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "datasets/0cec667580d4a717b2bd321254edecc56db534eb13e9b6a69728f9fde9c83d51.webp",
+      "bytes": 122612,
+      "sha256": "0cec667580d4a717b2bd321254edecc56db534eb13e9b6a69728f9fde9c83d51"
+    },
+    {
+      "location": "public",
+      "filename": "datasets/55c76e39df1bc3bff4e281bd40c226209ad3e84b7b3abd5657c4f03278915419.webp",
+      "bytes": 146784,
+      "sha256": "55c76e39df1bc3bff4e281bd40c226209ad3e84b7b3abd5657c4f03278915419"
+    },
+    {
+      "location": "public",
+      "filename": "datasets/7bf1a8ca6879e31e2bbc1bb9aa861500da789f8959dd394f395fffe3e4251816.webp",
+      "bytes": 144654,
+      "sha256": "7bf1a8ca6879e31e2bbc1bb9aa861500da789f8959dd394f395fffe3e4251816"
+    },
+    {
+      "location": "public",
+      "filename": "datasets/88fe72355ae9fa10885a07f4945b813b1cceaeab1b1abb55b67ec57181826c7a.webp",
+      "bytes": 95850,
+      "sha256": "88fe72355ae9fa10885a07f4945b813b1cceaeab1b1abb55b67ec57181826c7a"
+    },
+    {
+      "location": "public",
+      "filename": "datasets/f20ed053c18ac36006fb9da0374140a9ede1265f65277493dd15bdc1e6fad332.webp",
+      "bytes": 18022,
+      "sha256": "f20ed053c18ac36006fb9da0374140a9ede1265f65277493dd15bdc1e6fad332"
+    },
+    {
+      "location": "prepared",
+      "filename": "delivery.json",
+      "bytes": 251332,
+      "sha256": "a6584a50593e99fa3623bd1db7cedab98c3a86ef26492702698a118415cb61ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 5825147,
+      "sha256": "560403477633ebcb5317292ca6ba06a0b93ff25d88211458b2cb47b86b2039ee"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 8145,
+      "sha256": "fc6e20b0e9a08c2889f4a9076742e2311ef92af34b4b586ea62e2f33ec1bf23a"
+    },
+    {
+      "location": "prepared",
+      "filename": "provenance.json",
+      "bytes": 70119,
+      "sha256": "639cd37c904a13e39cd12e00f63ef339a4b64791906ca895acb7b232e08a4b6b"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-allwise-wide/atlases/x.webp",
+      "bytes": 354550,
+      "sha256": "5cdfa0ae73819a70c7b9eeabc6da0f468359653bf4ded44b61e81bbff8b919bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-allwise-wide/atlases/y.webp",
+      "bytes": 359010,
+      "sha256": "fd8f652d8236c46b2c6333a3b59fc342347338cdfc11bbd1fc2fab900411f4bd"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-allwise-wide/atlases/z.webp",
+      "bytes": 356956,
+      "sha256": "f3408af0fab5c2c2054d8def7fd999276ed4eeae0613c42ad0a09847a67a6ade"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-dss2/atlases/x.webp",
+      "bytes": 342006,
+      "sha256": "0cd1d8dd844ede31b568321bc047855c1482b89ba7737b2cb75367a3edc60add"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-dss2/atlases/y.webp",
+      "bytes": 347000,
+      "sha256": "c9242c67bd0aced094cfe039493ce239ba282057c3b811324c14d76413039546"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-dss2/atlases/z.webp",
+      "bytes": 340330,
+      "sha256": "7a0d2de404bd960e8b15a701d1668fa022a9a03a3f567545d6d0ffc4233343b1"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-horalek-wide/atlases/x.webp",
+      "bytes": 339814,
+      "sha256": "f5809308b354e87c0881dac17f882ff45a93f8a0acf9412e0066ca1a09f8fa03"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-horalek-wide/atlases/y.webp",
+      "bytes": 345100,
+      "sha256": "330d710ffc508d49a71b4072adf387ed03aef320ff71e90115120eaf4e0fc6c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-horalek-wide/atlases/z.webp",
+      "bytes": 338176,
+      "sha256": "fa6b7c29d91d2e08612a217ad9afb16d5f91b406f5a305a8abb5588a4149f42c"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-smash/atlases/x.webp",
+      "bytes": 338448,
+      "sha256": "f388e6eff388d4ea3a45f213b909060f99b10becfd531d4189c043fda305cc0f"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-smash/atlases/y.webp",
+      "bytes": 344564,
+      "sha256": "89d09cd7a953039f75529692ee9cf0f94a9ade7d26e729bcc54318e9c3f81a53"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-smash/atlases/z.webp",
+      "bytes": 337348,
+      "sha256": "bb838a96e1b56d13c964c51615e465fa7ebbba4118ab0c11adafc80d4b398922"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-vista/atlases/x.webp",
+      "bytes": 340756,
+      "sha256": "b9f5c4285c865d91d181b1440906015931d574344a6c96596f9ef4399e01b4e1"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-vista/atlases/y.webp",
+      "bytes": 345878,
+      "sha256": "016ae7422273ac1d33bbb972af41eb6816d132e85f09140f2ab2069d0c7ad108"
+    },
+    {
+      "location": "prepared",
+      "filename": "smc-vista/atlases/z.webp",
+      "bytes": 339820,
+      "sha256": "ddcded85143268793c9813a8787be96cb12dd1cccee69b56257810ac02f88329"
+    }
+  ]
+}

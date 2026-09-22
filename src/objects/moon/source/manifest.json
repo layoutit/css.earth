@@ -79,8 +79,6 @@
     {
       "id": "prepared-moon-facts",
       "path": "orbit/moon.json",
-      "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",
-      "expectedBytes": 745,
       "origin": "https://ssd.jpl.nasa.gov/sats/",
       "credit": "NASA JPL Solar System Dynamics",
       "license": "United States government factual data",
@@ -107,8 +105,6 @@
     {
       "id": "moon-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedSha256": "7e207c0a32f4a879c1767d2c2634505bb8b1639e937d7b4d7382165f1ae06101",
-      "expectedBytes": 2810,
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -200,8 +196,6 @@
     {
       "id": "lro-diviner-christiansen-feature",
       "path": "science/diviner-cf-2021-georeferenced.tif",
-      "expectedSha256": "adc63e4654a70093f5c060069f6394311aec52d6bdffd3eec1165173734f6632",
-      "expectedBytes": 3801047,
       "origin": "https://zenodo.org/records/4558194",
       "credit": "Lucey, Greenhagen, Donaldson Hanna, Bowles, Flom and Paige (2021)",
       "license": "CC-BY-4.0",
@@ -230,8 +224,6 @@
     {
       "id": "usgs-moon-geologic-units-grid",
       "path": "geology/moon-geologic-units.tif",
-      "expectedBytes": 430857,
-      "expectedSha256": "16be1f099526cb91493e6004fa330b850b26f8ed72cd3a40dadcc5c427480bc5",
       "origin": "https://astrogeology.usgs.gov/search/map/unified_geologic_map_of_the_moon_1_5m_2020",
       "credit": "USGS; Fortezzo, Spudis and Harrel (2020)",
       "license": "USGS public-domain scientific mapping; preserve author citation",
@@ -440,8 +432,6 @@
     {
       "id": "diviner-ghrm-tbol_m-compact",
       "path": "science/diviner-ghrm/tbol_m-compact.tif",
-      "expectedSha256": "63bd05458e3b24d02bebe14dce7345b3b88f07db6233601eccc0f7afecfd6e57",
-      "expectedBytes": 9832777,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img",
       "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
       "license": "CC0 1.0 author dataset; NASA PDS scientific data",
@@ -501,8 +491,6 @@
     {
       "id": "diviner-ghrm-tbol_anom-compact",
       "path": "science/diviner-ghrm/tbol_anom-compact.tif",
-      "expectedSha256": "009a700af3d4b25d3ee7454ea6d97b96eb2e7f513f00081f96f4001b7a50c1c6",
-      "expectedBytes": 9522044,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
       "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
       "license": "CC0 1.0 author dataset; NASA PDS scientific data",
@@ -562,8 +550,6 @@
     {
       "id": "diviner-ghrm-ra_sam-compact",
       "path": "science/diviner-ghrm/ra_sam-compact.tif",
-      "expectedSha256": "2d87312b2b5cf7caa6a949f2d63e7fe1b0db8d5a7cb57822ba1af89281757ca3",
-      "expectedBytes": 9311218,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img",
       "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
       "license": "CC0 1.0 author dataset; NASA PDS scientific data",
@@ -595,8 +581,6 @@
     {
       "id": "usgs-gazetteer-moon-nomenclature-center-pts",
       "path": "features/MOON_nomenclature_center_pts.zip",
-      "expectedBytes": 23842450,
-      "expectedSha256": "3cf4d02e87f7ab896f668acb8caed93ea9f36136a756c6e6c69b01b20e6e2671",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MOON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -907,8 +891,6 @@
     {
       "id": "apollo-pse-stationxml",
       "path": "telescopes/apollo-pse/stationxml.xa.0.sxml",
-      "expectedBytes": 181458,
-      "expectedSha256": "c712de6a38934ec4e82b08fefe8cc8cb10475c49c164ebc8ae2801f8caef88cb",
       "origin": "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/data/xa/metadata/stationxml.xa.0.sxml",
       "credit": "NASA PDS Geosciences Node; Apollo Passive Seismic Experiment archive (Nunn, Weber and Bahia, 2022)",
       "license": "NASA PDS archive data; no licence text is published, citation of the most granular product is expected",
@@ -935,8 +917,6 @@
     {
       "id": "apollo-pse-stationxml-label",
       "path": "telescopes/apollo-pse/stationxml.xa.0.xml",
-      "expectedBytes": 8990,
-      "expectedSha256": "e96464245c87e9ce98d19691ad3081ed32240ca0ac941c79ebfc6d35d101cffe",
       "origin": "https://pds-geosciences.wustl.edu/lunar/urn-nasa-pds-apollo_pse/data/xa/metadata/stationxml.xa.0.xml",
       "credit": "NASA PDS Geosciences Node; Apollo Passive Seismic Experiment archive (Nunn, Weber and Bahia, 2022)",
       "license": "NASA PDS archive data; no licence text is published, citation of the most granular product is expected",
@@ -993,9 +973,7 @@
       "purpose": "Independent raw-DN coordinate/coverage/unit anchors and full-grid numeric source statistics."
     },
     {
-      "path": "geology/GeoUnits.prj",
-      "expectedBytes": 393,
-      "expectedSha256": "4473b61e75ee5e9c120f4c342b4ab85276a0c69090a2c9d7771b4b88ba835fd4"
+      "path": "geology/GeoUnits.prj"
     },
     {
       "path": "science/prepare-cf-map.json"
@@ -1015,20 +993,14 @@
     },
     {
       "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.xml",
-      "expectedSha256": "15ca35c0a6c3c82114683b2465c5387524a79c3ff90fd662506bbd8284fb6579",
-      "expectedBytes": 7992,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.xml",
-      "expectedSha256": "eb7dc4cd2d81833def81c61fe51a54870724d7ac88b0d2845b53653cc60a0b10",
-      "expectedBytes": 8014,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {
       "path": "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.xml",
-      "expectedSha256": "1d221419b090c0deeb1541e9707b6427ae1401bcdb726c9598ac328421083fe7",
-      "expectedBytes": 7985,
       "purpose": "Diviner GHRM source identity, cartography, bounded preparation and numerical receipt"
     },
     {

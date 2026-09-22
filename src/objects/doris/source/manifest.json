@@ -23,8 +23,6 @@
         "referenceRadiusMeters": 105000
       },
       "coverage": "Calibrated nonconvex ground-based reconstruction. The grid is an explicit no-imagery treatment; no small-scale surface detail is inferred.",
-      "expectedBytes": 32486,
-      "expectedSha256": "f0adb78ace9a78951e51b9ab2a9b2618d4c09faca0b886d5ed798a00cdf6f671",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -506,8 +504,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 11189,
-      "expectedSha256": "c457bc457c1dd417787df72602337fb9c0b5bc72a3aa4197b1b91758405350f9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -531,8 +527,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 7717,
-      "expectedSha256": "bb34e246394c32a497fd901fcf71664f7fab466bb1c37f9f29532932fea7e695",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 448
       },
       "coverage": "Released global model; detailed geometry is simplified for the display.",
-      "expectedBytes": 3150352,
-      "expectedSha256": "da62f1d56deab22343b301d7972a1a8a14867c1714c626411617698a78e32595",
       "capture": {
         "attributions": [
           {
@@ -236,8 +234,6 @@
     {
       "id": "usgs-gazetteer-ryugu-nomenclature-center-pts",
       "path": "features/RYUGU_nomenclature_center_pts.zip",
-      "expectedBytes": 35497,
-      "expectedSha256": "2f8750d2111c299eede63799d6898f5169717978b1c66546aeb7cb2a7d71898b",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/RYUGU_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -577,8 +573,6 @@
     },
     {
       "path": "reference/hyb2_onc_20181003_MSC_l3dm_v06.lblx",
-      "expectedBytes": 17208,
-      "expectedSha256": "98730c7e8f0eee92f290b0369c8adf2754b43601eff6e8ba6efb639da7878c32",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

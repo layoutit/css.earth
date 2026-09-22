@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 50465
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 100.93 km effective diameter (catalog ±1.4 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Gaia DR2 plus Lowell inversion; publication table gives 520 Lowell and 26 Gaia points. The two published poles remain; select model 4072 as a reproducible representative, without rejecting model 4073. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
-      "expectedBytes": 46419,
-      "expectedSha256": "74994217a690be9e8736a7709f52c8e70c80a0f63c0d7160f73e7cd9924ec078",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/4072-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "e8c7d27f15d2ecc632886128e4f083d4760422036f72f5cbe2b7a80db58176cc"
+      "path": "reference/4072-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

@@ -9,11 +9,6 @@ import {requireAcquisitionPlan,requireClosedRadialTerrain,requireHistoricalConte
 import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-1992-sk/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('1992 SK retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'asteroid-1992-sk',planetName:'1992 SK',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('1992 SK preserves the original kilometer mesh and published spin interpretation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

@@ -166,8 +166,6 @@
           }
         ]
       },
-      "expectedBytes": 44000,
-      "expectedSha256": "50ff4ab807e32a2190b4b32c11e4c45d2fee4a0d42127ed649a03306df59c6e6",
       "redistribution": "Retain the original source attribution and notices with published derivatives."
     },
     {
@@ -214,8 +212,6 @@
           }
         ]
       },
-      "expectedBytes": 44000,
-      "expectedSha256": "4a48b38a489c772a5eea1098abcd9efbb0402aac3424c017adbd1001a156d082",
       "redistribution": "Retain the original source attribution and notices with published derivatives."
     },
     {
@@ -335,9 +331,7 @@
             "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
           }
         ]
-      },
-      "expectedBytes": 18710,
-      "expectedSha256": "46565f1d4ecee1a836351365700d8acc01e150ebcece4ec69b39536fd1af36e5"
+      }
     },
     {
       "id": "mvic-method",
@@ -359,9 +353,7 @@
             "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
           }
         ]
-      },
-      "expectedBytes": 170651,
-      "expectedSha256": "1735825bf49c291c9119ea90565bb1090ff160ab5f8b58e416a658333a550097"
+      }
     },
     {
       "id": "mvic-camera",
@@ -423,9 +415,7 @@
             "evidence": "An adjacent exposure reserved for the frozen camera prediction; native label identifies the product."
           }
         ]
-      },
-      "expectedBytes": 44000,
-      "expectedSha256": "3e7cc8cec31aa90305ca1b91fe96ffae85f42038a472b6401fac02c6b7e59f73"
+      }
     }
   ],
   "documents": [
@@ -458,9 +448,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/arrokoth_porter_2024.lblx",
-      "expectedBytes": 20227,
-      "expectedSha256": "37da4085415e94d419b0b092dca3b8d527aa6adc1560a9a433d63965aa5172bd"
+      "path": "reference/arrokoth_porter_2024.lblx"
     },
     {
       "path": "reference/horizons-elements.txt"
@@ -472,14 +460,10 @@
       "path": "reference/numeric-audit.json"
     },
     {
-      "path": "reference/overview.txt",
-      "expectedBytes": 952,
-      "expectedSha256": "d52fbfac22fd740459d80a541be02753d3e82ca274fe90d7ec5eace2c4f5f0bd"
+      "path": "reference/overview.txt"
     },
     {
       "path": "science/albedo_arrokoth4_fp36h2_masked1.lblx",
-      "expectedBytes": 9529,
-      "expectedSha256": "e752e5dd5eac25d65ccfe07b31cad02a4f47d158f80d4e14e12e17ef99e54af4",
       "purpose": "Native label identifying the albedo map, its FITS array and released UV projection.",
       "kind": "source-document",
       "title": "Arrokoth Albedo Map — PDS4 label",

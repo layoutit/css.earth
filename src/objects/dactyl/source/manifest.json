@@ -41,8 +41,6 @@
         "shape"
       ],
       "coverage": "A smooth ellipsoid at the dimensions measured from Galileo images: 1.6 × 1.4 × 1.2 km. Craters and surface imagery are not represented; the grid marks missing imagery.",
-      "expectedBytes": 163,
-      "expectedSha256": "ad79a5bea948b73c0f842a3609939da15914a0dbb1d88ecc8f371ffefe50c2b4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -57,8 +55,6 @@
     {
       "id": "usgs-gazetteer-dactyl-nomenclature-center-pts",
       "path": "features/DACTYL_nomenclature_center_pts.zip",
-      "expectedBytes": 42071,
-      "expectedSha256": "3767bbd27912607abf5ac0496988a6ac7bd79cfbb8d4f550045524717e2bc941",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DACTYL_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

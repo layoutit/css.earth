@@ -82,14 +82,14 @@
   ],
   "id": "antigone",
   "displayName": "Antigone",
-  "lambda": 205.0,
-  "beta": 63.0,
+  "lambda": 205,
+  "beta": 63,
   "periodHours": 4.95716,
   "version": "2017-06-14",
   "nonconvex": true,
   "calibrated": true,
-  "diameterKm": 126.0,
-  "uncertaintyKm": 3.0,
+  "diameterKm": 126,
+  "uncertaintyKm": 3,
   "akari": {
     "number": 129,
     "name": "Antigone",
@@ -100,7 +100,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/401/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/399/IAUspin.txt",
-  "shapeSha256": "e011dbcecac18acc61b6cb82327ee948983b348ccc3b7c20b2c4ba11078318cf",
   "shapeBytes": 32486,
   "vertices": 402,
   "faces": 800,
@@ -145,9 +144,9 @@
   },
   "declaredDiameterComparison": {
     "sourceVolumeEquivalentDiameter": 126.19542450380722,
-    "declaredDiameterKm": 126.0,
+    "declaredDiameterKm": 126,
     "relativeDifference": 0.001550988125454067,
-    "scaledDiameterKm": 126.0
+    "scaledDiameterKm": 126
   },
   "alternatives": [
     {
@@ -270,8 +269,8 @@
   ],
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
-    "diameterKm": 126.0,
-    "uncertaintyKm": 3.0,
+    "diameterKm": 126,
+    "uncertaintyKm": 3,
     "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
     "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1810",

@@ -186,8 +186,6 @@
     {
       "id": "usgs-sim3237-geologyunits-dbf",
       "path": "science/geology-sim3237/GeologyUnits.dbf",
-      "expectedBytes": 387036,
-      "expectedSha256": "253e766034de1e6d8b7fe179506e237cfea6454be6948fad0e1f4862a97580a1",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -214,8 +212,6 @@
     {
       "id": "usgs-sim3237-geologyunits-prj",
       "path": "science/geology-sim3237/GeologyUnits.prj",
-      "expectedBytes": 167,
-      "expectedSha256": "627995c07e5d5c303e6ddb64e5e75c50938c4f5b6a39dc79e2e2128248c3bd83",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -242,8 +238,6 @@
     {
       "id": "usgs-sim3237-geologic-units",
       "path": "science/geology-sim3237/GeologyUnits.shp",
-      "expectedBytes": 2282348,
-      "expectedSha256": "67251406577abdb683e3f58616572cf4544aef9334406b48deade61a38ba7740",
       "origin": "https://pubs.usgs.gov/sim/3237/downloads/Ganymede_SIM3237_Database.zip",
       "credit": "Collins et al. (2013), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -402,8 +396,6 @@
     {
       "id": "ganymede-muse-oxygen-signature-night-1",
       "path": "muse/ganymede/577.3nm_band-night-1.tif",
-      "expectedBytes": 10416,
-      "expectedSha256": "c70ba9a513711fe715f44e26ff174d171e8fd60b1ae081c86e9fcfc849d6924f",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -460,8 +452,6 @@
     {
       "id": "ganymede-muse-oxygen-signature-night-2",
       "path": "muse/ganymede/577.3nm_band-night-2.tif",
-      "expectedBytes": 10400,
-      "expectedSha256": "b5e2ecac431126c5d531e7b37945dbfd9abf5b30b2c632befb5f02e764d81efa",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -518,8 +508,6 @@
     {
       "id": "ganymede-muse-oxygen-signature-night-3",
       "path": "muse/ganymede/577.3nm_band-night-3.tif",
-      "expectedBytes": 10304,
-      "expectedSha256": "f9eb0690f659507fdcfe7e124f29702dfd22a08000c8283136c2c7f49e12351a",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -576,8 +564,6 @@
     {
       "id": "usgs-gazetteer-ganymede-nomenclature-center-pts",
       "path": "features/GANYMEDE_nomenclature_center_pts.zip",
-      "expectedBytes": 550727,
-      "expectedSha256": "75e6f837380cab4635d939ba9205f7832f85e10772878140197a67c2d082f561",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GANYMEDE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -638,8 +624,6 @@
     {
       "id": "ganymede-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 5805,
-      "expectedSha256": "ad14deb360ace57ed760248ef68c7976066eeab0942acfadb2b7ff7f94e1ef76",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -1206,8 +1190,6 @@
     },
     {
       "path": "composition/model-conversion.json",
-      "expectedBytes": 3166,
-      "expectedSha256": "8fbb836e3504a2165d747a78091edf1081117d0167c42309ef13ebc74635d37a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Conversion receipt identifying native numerical input, selected fields, coordinate mapping and unchanged coverage."

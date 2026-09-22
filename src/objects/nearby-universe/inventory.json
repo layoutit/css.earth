@@ -1,0 +1,29 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "cloud.webp",
+      "bytes": 1706,
+      "sha256": "ddfc2751343e42bb8c63c4347218b1ee1934274f3b19dec1e2ac73bcc41f5d4c"
+    },
+    {
+      "location": "prepared",
+      "filename": "points.json",
+      "bytes": 675907,
+      "sha256": "654a27747c21f8f9296f14cb0f74e5dcbf334d617f4607629f41b81334d87d73"
+    },
+    {
+      "location": "prepared",
+      "filename": "presentation.json",
+      "bytes": 490,
+      "sha256": "224e620caa689a95820bb15ad87bc37e7c7a6c2489db2136a441096246b10889"
+    },
+    {
+      "location": "prepared",
+      "filename": "provenance.json",
+      "bytes": 10354,
+      "sha256": "ce5217e5ce2b99e1694323e2833537f5a794db7da9aade78962ff661bf56c40c"
+    }
+  ]
+}

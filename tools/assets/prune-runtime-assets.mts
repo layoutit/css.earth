@@ -1,5 +1,5 @@
 // Scoped prune, dry-run only. Lists every `runtime-assets/<sha256>/...` key live in R2 and reports which ones are
-// absent from every current inventory (both runtime-assets.json and prepared-assets.json, across all objects) —
+// absent from every current inventory (every inventory.json, across all objects) —
 // i.e. bytes an old commit published that nothing checked in today still references. It never lists, computes
 // against, or reports on `scenes/` or `source-cache/` keys, and there is no delete path: this tool only ever
 // prints a report.
@@ -22,7 +22,7 @@
 import { createHash, createHmac } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { inventoriedAssets, inventoriedObjectIds } from './runtime-assets.mts';
+import { inventoryAssets, inventoriedObjectIds } from './runtime-assets.mts';
 
 export const BUCKET = 'cssearth-assets';
 export const PRUNE_PREFIX = 'runtime-assets/';
@@ -44,9 +44,9 @@ export function computePruneCandidates(liveKeys: readonly LiveKey[], inventoried
   return { candidates, bytes: candidates.reduce((sum, { bytes }) => sum + bytes, 0) };
 }
 
-/** Every key any current inventory (runtime-assets.json or prepared-assets.json, every object) still references. */
+/** Every key any current inventory (inventory.json, every object) still references. */
 export async function currentlyInventoriedKeys(root: string): Promise<Set<string>> {
-  const assets = await inventoriedAssets(root, inventoriedObjectIds([], root));
+  const assets = await inventoryAssets(root, inventoriedObjectIds([], root));
   return new Set(assets.map(asset => asset.key));
 }
 

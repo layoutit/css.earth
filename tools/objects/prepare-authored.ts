@@ -143,8 +143,11 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
       if (presentationOnly) {
         // The carried provenance describes the published images, so the run must publish exactly those images.
-        const inventory = async (path: string) => JSON.stringify(JSON.parse(await readFile(path, 'utf8')));
-        if (await inventory(resolve(stagedData, 'runtime-assets.json')) !== await inventory(resolve(objectDirectory, 'runtime-assets.json')))
+        // Public JSON catalogues (places, features) are derived from the scene and may be regenerated here.
+        // The staged inventory holds the run's public entries; the object's also holds its prepared entries.
+        const published = async (path: string) => JSON.stringify((JSON.parse(await readFile(path, 'utf8')) as { assets: { location: string; filename: string }[] }).assets
+          .filter(asset => asset.location === 'public' && !asset.filename.endsWith('.json')));
+        if (await published(resolve(stagedData, 'inventory.json')) !== await published(resolve(objectDirectory, 'inventory.json')))
           throw new Error(`${id}: the presentation changed the published image set; run the full preparation.`);
       } else {
         const { prepareObjectProvenance } = await import(pathToFileURL(resolve(projectRoot, 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
@@ -182,7 +185,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     if (attached.features) { await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`); await writeFeatureContent(outputDirectory, attached.features); }
     const definition = attached.definition as typeof prepared.definition;
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
-      manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+      objectDirectory: write ? objectDirectory : outputDirectory,
       allowPreparationArtifacts: true,
       values: [definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, definition);
@@ -193,7 +196,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     const { prepareLayeredGiantObject } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/giant-layers/object.mts')).href) as typeof import('./giant-layers/object.mts');
     const prepared = await prepareLayeredGiantObject({ objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
-      manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+      objectDirectory: write ? objectDirectory : outputDirectory,
       values: [prepared.raster, prepared.celestial, prepared.scene, prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
     return Object.freeze({ ...prepared });
@@ -202,7 +205,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     genericLaneOnly();
     const { prepareShapeModel } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/shape-model/index.mts')).href) as typeof import('./shape-model/index.mts');
     const prepared = await prepareShapeModel({ descriptor, sources, objectDirectory, publicDirectory, outputDirectory, prepareContent: prepareObjectContentAssets });
-    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, manifestPath: resolve(outputDirectory, 'runtime-assets.json'), allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
+    await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory, objectDirectory: outputDirectory, allowPreparationArtifacts: true, values: [prepared.definition, prepared.content] });
     return Object.freeze({ descriptor, sources, ...prepared });
   }
   if (source(sources, 'terrestrial')) {
@@ -218,7 +221,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
     }
     const prepared = { ...terrestrialPrepared, definition: terrestrialAttached.definition as typeof terrestrialPrepared.definition };
     await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
-      manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+      objectDirectory: write ? objectDirectory : outputDirectory,
       allowPreparationArtifacts: true,
       values: [prepared.definition, prepared.content] });
     if (write) await writePreparedObject(descriptor.id, prepared.definition);
@@ -270,7 +273,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
   if (attached.features) await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(runtime)}\n`);
   await prepareRuntimeManifest({ id: descriptor.id, publicRoot: publicDirectory,
-    manifestPath: write ? resolve(objectDirectory, 'runtime-assets.json') : resolve(outputDirectory, 'runtime-assets.json'),
+    objectDirectory: write ? objectDirectory : outputDirectory,
     values: [raster, celestial, scene, runtime, content,
       // Observed surfaces and radial layers publish their own files; the manifest reads them by url, as it reads every other asset.
       ...[observed, radial].filter(entry => entry !== null).map(entry => {

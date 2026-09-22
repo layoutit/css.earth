@@ -80,8 +80,8 @@
   ],
   "id": "eos",
   "displayName": "Eos",
-  "lambda": 289.0,
-  "beta": -23.0,
+  "lambda": 289,
+  "beta": -23,
   "periodHours": 10.44212,
   "version": "2017-03-31",
   "nonconvex": false,
@@ -98,7 +98,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5968/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/5966/IAUspin.txt",
-  "shapeSha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2040,
-    "minDoubleTriangleAreaSourceUnits2": 2.3716436732587054e-07
+    "minDoubleTriangleAreaSourceUnits2": 2.3716436732587054e-7
   },
   "independentAnchors": [
     {
@@ -306,8 +305,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2443716.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2443716,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

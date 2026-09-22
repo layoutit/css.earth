@@ -76,8 +76,8 @@
   ],
   "id": "weringia",
   "displayName": "Weringia",
-  "lambda": 284.0,
-  "beta": -14.0,
+  "lambda": 284,
+  "beta": -14,
   "periodHours": 11.14849,
   "version": "2016-01-04",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3957/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3955/IAUspin.txt",
-  "shapeSha256": "b5ea3c7a8dacc9eb8d62f5ea85376eeeec1d1d521461ea669a201a5f7d97646b",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2040,
-    "minDoubleTriangleAreaSourceUnits2": 1.5457764528229033e-07
+    "minDoubleTriangleAreaSourceUnits2": 1.5457764528229033e-7
   },
   "independentAnchors": [
     {
@@ -289,8 +288,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2444424.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2444424,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

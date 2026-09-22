@@ -26,7 +26,7 @@ The supplement states that about 25% of the surface was unobserved or seen above
 
 The bounded JPL/PDS/paper survey found no calibrated registered optical mosaic, independent elevation measurement or composition map for this package. Failed archive requests do not establish dataset absence.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="yorp-sources-and-preparation"></a>
 <a id="model-identity-coordinates-and-spin"></a>

@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-archived-camera@1",
-  "imageSha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b",
   "width": 1024,
   "height": 1024,
   "target": "HYDRA",
@@ -137,23 +136,18 @@
       0
     ]
   },
-  "meshSha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163",
   "provenance": [
     {
-      "path": "shape/hydra_shf1k3_hipoly.stl.gz",
-      "sha256": "8bbfce67597caf2bfef95e3f526f66cac7d967e9b425cb183a1088fc0e97d163"
+      "path": "shape/hydra_shf1k3_hipoly.stl.gz"
     },
     {
-      "path": "observations/lor_0299165548_0x630_sci.fit",
-      "sha256": "7b225229428505208024279bf86104381ce24617e56be89a1cc89236ad17e91b"
+      "path": "observations/lor_0299165548_0x630_sci.fit"
     },
     {
-      "path": "geometry/nh_pcnh_010.tpc",
-      "sha256": "cf79342b3cc13d8dab485ce87ebfb2d74d12e3f79039de260e730aaaefffce01"
+      "path": "geometry/nh_pcnh_010.tpc"
     },
     {
-      "path": "preparation/photography.json",
-      "sha256": "94b0b7cb224efcdc07d0dbf536056c8b86b8d7c7f2dc4f96e4536c091e136760"
+      "path": "preparation/photography.json"
     }
   ]
 }

@@ -1,7 +1,6 @@
 {
   "body": "helene",
   "mode": "feature-fit",
-  "recipeSha256": "427defe52d787506f5aaa192837a5fd6f74750f6273ff0a2f720c6eeac71d534",
   "referenceCamera": {
     "id": "n1687120033_1",
     "path": "observations/N1687120033_1_CALIB.IMG",
@@ -18,7 +17,6 @@
     ],
     "pixelAngleMicroradians": 5.989697719921734
   },
-  "implementationSha256": "9dc69d6f9855b0fde596a6a1a75a2f105106ea0de3be1eb190dfca3974cdf333",
   "mesh": {
     "path": "shape/helene_30k_plt.tab",
     "sha256": "d8fbff19525bca341bb3e4bde205ae77d8d05096f5244b77405ab27ebfd83e23"

@@ -148,7 +148,7 @@ export async function projectEncounterLandmarks(objectId: string, write = false)
   const cameraControl = record(JSON.parse(get(configuration.cameraControlId).toString('utf8')), 'encounter camera control');
   const decoded = decodeEncounterFits(get(configuration.nativeImageId), cameraControl.observation);
   const camera = encounterCamera(decoded.header, cameraControl.camera);
-  const shapeBytes = get(configuration.shapeId), registration = validateEncounterControls(camera, cameraControl.registration, sha256(shapeBytes));
+  const shapeBytes = get(configuration.shapeId), registration = validateEncounterControls(camera, cameraControl.registration);
   const shapeInput = configuration.inputs.find(input => input.id === configuration.shapeId)!;
   const shape = await loadPdsPlateShape(shapeInput.absolute, configuration.shapeProfile);
   const stageFits = configuration.stages.map((stage, index) => {

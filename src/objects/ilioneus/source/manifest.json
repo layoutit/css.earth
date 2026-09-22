@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 30355.5
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 60.711 km effective diameter (fit ±0.982 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; grid marks unavailable imagery. Disk-integrated NEOWISE thermal flux constrains an effective spherical diameter, not this mesh volume or a surface map. Transferring that diameter uniformly to mesh volume is approximate. The quoted fit error is not a total uncertainty and does not measure local shape accuracy. Absolute rotational phase is illustrative.",
-      "expectedBytes": 46419,
-      "expectedSha256": "b54d7b440a854975313c728a91ae70b2e400b891081f1a510224ed50504c91a6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -142,9 +140,7 @@
       "path": "reference/neowise-query.txt"
     },
     {
-      "path": "reference/neowise-selected.csv",
-      "expectedBytes": 1863,
-      "expectedSha256": "b00d8dbb43af567677bfcf6030d45fcebd21322b4352b35ca6a6e741ea101169"
+      "path": "reference/neowise-selected.csv"
     }
   ]
 }

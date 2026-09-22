@@ -3,28 +3,6 @@
   "namespace": "saturn",
   "publicPrefix": "/scenes/saturn/",
   "sourceSubdirectory": "lenses",
-  "sourcePins": [
-    {
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f225w_v1_globalmap.fits",
-      "expectedSha256": "501c88e880a65a009fea9d86b66fe4b824abc0a07a56c0f382abe593cc08f314",
-      "expectedBytes": 6482880
-    },
-    {
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_f225w_v1_globalmap.fits",
-      "expectedSha256": "0a1e41e4f4de7bb0a026d29b303dfbcf55f902382c2e621dfd522d95881c75d3",
-      "expectedBytes": 6482880
-    },
-    {
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025a_fq889n_v1_globalmap.fits",
-      "expectedSha256": "2913da896d5e33c292d8c7a95a699cee606067b743b0bb2cab06ce51be90af53",
-      "expectedBytes": 6482880
-    },
-    {
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_saturn-2025b_fq889n_v1_globalmap.fits",
-      "expectedSha256": "709166ace6d89028ef8ab884323f0d886281054dac2378584f82ce2c5f90e459",
-      "expectedBytes": 6482880
-    }
-  ],
   "parameters": {
     "bodyWidth": 2880,
     "bodyHeight": 1440,

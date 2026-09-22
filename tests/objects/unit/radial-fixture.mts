@@ -150,5 +150,5 @@ export function requireProjectionAnchors(value: unknown) {
     if (typeof check.withinTransferLimit !== 'boolean') throw new TypeError(`Projection anchor ${index} transfer limit must be boolean.`);
     return { query, point, withinTransferLimit: check.withinTransferLimit, kind: requireString(check.kind, `Projection anchor ${index} kind`), expectedValue: requireFiniteNumber(check.expectedValue, `Projection anchor ${index} expected value`), expectedRadiusMeters: requireFiniteNumber(check.expectedRadiusMeters, `Projection anchor ${index} expected radius`) };
   });
-  return { sourceSha256: requireString(source.sourceSha256, 'Projection anchor source hash'), checks };
+  return { checks };
 }

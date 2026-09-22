@@ -76,8 +76,8 @@
   ],
   "id": "hypatia",
   "displayName": "Hypatia",
-  "lambda": 261.0,
-  "beta": 45.0,
+  "lambda": 261,
+  "beta": 45,
   "periodHours": 8.87273,
   "version": "2019-05-07",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/12046/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/12044/IAUspin.txt",
-  "shapeSha256": "61b02e21efc8fa19b782a3c1828b46bd1d1bfdf2c35ad352fd995ec9b0aae399",
   "shapeBytes": 46419,
   "vertices": 574,
   "faces": 1144,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 1144,
-    "minDoubleTriangleAreaSourceUnits2": 1.4013708120551082e-06
+    "minDoubleTriangleAreaSourceUnits2": 0.0000014013708120551082
   },
   "independentAnchors": [
     {
@@ -293,8 +292,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2450996.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2450996,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

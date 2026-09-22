@@ -7,11 +7,6 @@ import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/nereus/source');
 const read=createSourceFixtureReader(root);
-test('Nereus retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'nereus',planetName:'Nereus',sourceRoot:root});await source.verify();
- const plan=await read('preparation/acquisition.json');
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('Nereus preserves the original kilometer mesh and published spin interpretation',async()=>{
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain;
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

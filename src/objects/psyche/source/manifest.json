@@ -173,8 +173,6 @@
         "dielectric-constant"
       ],
       "coverage": "Rotation record: pole latitude, pole longitude and sidereal period, then the phase epoch and phase. Read longitude-first, established against a published pole.",
-      "expectedBytes": 43,
-      "expectedSha256": "dc98dd3e5123d1da9ee5a6d9329ec51385717c02250f62a49a1478735fd50677",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -198,8 +196,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 17634,
-      "expectedSha256": "53033f6668acb984bbb4bde3c4b3f5c69572e05b5931815351d373cc2e863291",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -223,8 +219,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 14464,
-      "expectedSha256": "14cc293a672d0425280b06699b48db15f697b3a492bca3ffb763fb911a20eee5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -263,8 +257,6 @@
         "stepDegrees": 5
       },
       "coverage": "Best-fit thermal inertia (J m-2 K-1 s-1/2) per 5-degree node from ALMA 1.3 mm thermal emission imaged on 2019 June 19 at about 30 km resolution; nodes with a reduced chi-squared above 10 or three or fewer observations are NaN and shown as missing. Model values, not a photograph.",
-      "expectedBytes": 21736,
-      "expectedSha256": "869ac19ed10168a25d83749d16df095fb8032145f414df914d5168895161f179",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -308,8 +300,6 @@
         "stepDegrees": 5
       },
       "coverage": "Best-fit dielectric constant (dimensionless) per 5-degree node from ALMA 1.3 mm thermal emission imaged on 2019 June 19 at about 30 km resolution; nodes with a reduced chi-squared above 10 or three or fewer observations are NaN and shown as missing. Model values, not a photograph.",
-      "expectedBytes": 21736,
-      "expectedSha256": "7c7be079837b29f26f3f464a64904127e442d1230adc7a44687480f4a8068abd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -342,8 +332,6 @@
         "dielectric-constant"
       ],
       "coverage": "Node longitudes, -180 to 180 degrees east in 5-degree steps (73 nodes).",
-      "expectedBytes": 712,
-      "expectedSha256": "0795daf24637ad406a927b4a385a678765d43608999427606b04110387739245",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -376,8 +364,6 @@
         "dielectric-constant"
       ],
       "coverage": "Node latitudes, -90 to 90 degrees in 5-degree steps (37 nodes); array row 0 is -90.",
-      "expectedBytes": 424,
-      "expectedSha256": "72dbcca412048092d3c1b755ce612ed1a6aadc3553129126a0799cf798421b2b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -54,7 +54,7 @@ the map's existence does not qualify a surface texture here.
 
 - Neither the arbitrary display pole nor its zero meridian is an observed physical orientation.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="shape-scale-and-orientation"></a>
 <a id="source-survey"></a>

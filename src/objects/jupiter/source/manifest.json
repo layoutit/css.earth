@@ -289,7 +289,6 @@
     {
       "id": "jupiter-moon-catalog",
       "path": "moons/jupiter-moons.json",
-      "expectedSha256": "2b2b221a145f841c0c00924e6f963786d34304510b400765cd636b4d2d8a8d79",
       "origin": "normalized facts from JPL Solar System Dynamics discovery and mean-elements tables; only source URLs and hashes are retained",
       "credit": "NASA/JPL Solar System Dynamics",
       "license": "NASA/JPL United States government data",
@@ -302,7 +301,6 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 87703,
       "historicalAcquisition": "node src/objects/jupiter/tools/acquire-moon-catalog.mjs validates the pinned snapshot; explicit refresh must pass all authority hashes",
       "sourceBinding": {
         "kind": "catalogued",
@@ -373,7 +371,6 @@
     {
       "id": "hubble-opal-jupiter-minnaert",
       "path": "atmosphere/hubble-opal-minnaert.json",
-      "expectedSha256": "86bc3c4b7b60d77e5088c1804521619bb077cd53ea6e1538549b80f603356fbe",
       "origin": "normalized Table 1 and Figure 1 facts from https://doi.org/10.1088/0004-637X/812/1/55",
       "credit": "Amy A. Simon, Michael H. Wong, and Glenn S. Orton",
       "license": "factual values transcribed from the cited paper",
@@ -386,7 +383,6 @@
         "atmosphere",
         "lighting"
       ],
-      "expectedBytes": 1228,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -402,7 +398,6 @@
     {
       "id": "nasa-psg-jupiter-configuration",
       "path": "atmosphere/psg-jupiter-20260830.cfg",
-      "expectedSha256": "8878d1d05c0973a4c4d501542810b20242d9cee0f2964cd01cb48c19ec785d33",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data",
@@ -413,7 +408,6 @@
         "lighting",
         "spectrum"
       ],
-      "expectedBytes": 8813,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh expands a pinned Jupiter ephemeris seed",
       "sourceBinding": {
         "kind": "catalogued",
@@ -429,7 +423,6 @@
     {
       "id": "nasa-psg-jupiter-reflectance",
       "path": "atmosphere/psg-jupiter-r240-rif.txt",
-      "expectedSha256": "b2da904d4a929b7e84b355de383394d0bf50ee6c720db2c5f9f95b32355e71bb",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government generated data",
@@ -438,7 +431,6 @@
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 11912,
       "historicalAcquisition": "tools/acquire-sources.mjs --refresh requests I/F at R 240 from the pinned configuration",
       "sourceBinding": {
         "kind": "catalogued",
@@ -518,8 +510,6 @@
     {
       "id": "jupiter-authored-editorial-object",
       "path": "editorial/object.json",
-      "expectedBytes": 12801,
-      "expectedSha256": "305413d1b1edea39bfe58254b959af6df378ce20e08f63bdcf097a92f1c63e8b",
       "origin": "https://science.nasa.gov/jupiter/jupiter-facts/",
       "credit": "NASA Science",
       "license": "NASA content usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/",
@@ -623,8 +613,6 @@
     {
       "id": "jupiter-authored-photometry",
       "path": "photometry/phase.json",
-      "expectedBytes": 1302,
-      "expectedSha256": "3df5f516dc2b6cdd61bdfc9193f06749d9426205cfa8c73d724e5ac8af732ede",
       "origin": "Checked source-dependent scientific and presentation parameters",
       "credit": "cssEarth and the scientific authorities cited by this source",
       "license": "Project-authored scientific specification with cited authority",

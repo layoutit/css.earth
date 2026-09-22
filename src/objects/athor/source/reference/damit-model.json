@@ -77,8 +77,8 @@
   ],
   "id": "athor",
   "displayName": "Athor",
-  "lambda": 350.0,
-  "beta": -6.0,
+  "lambda": 350,
+  "beta": -6,
   "periodHours": 7.280086,
   "version": "2012-09-25",
   "nonconvex": false,
@@ -95,7 +95,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1801/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/1799/IAUspin.txt",
-  "shapeSha256": "bb13c3b5a03f3f095adfface5145e8780cf80bc7e1ad0d48172c367cb669c4fd",
   "shapeBytes": 81574,
   "vertices": 1008,
   "faces": 2012,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 1.9566539065429504e-08
+    "minimumTriangleAreaSourceUnitsSquared": 1.9566539065429504e-8
   },
   "anchors": [
     {

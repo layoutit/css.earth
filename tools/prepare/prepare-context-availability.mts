@@ -9,7 +9,7 @@ import type { ContextAvailability } from '../../src/platform/context-availabilit
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';
 import { readContextObjects } from './prepare-catalog.mts';
 import { hasErrorCode } from '../sources/source-values.mts';
-import { requireRuntimeAssetManifest } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 type PublicAssetAvailability = 'local' | 'manifest';
@@ -55,7 +55,7 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
       if (!bankPin || bankPin.sha256 !== descriptor.prepared!.sha256) throw new TypeError(`Unbound prepared bank: ${bankUrl}.`);
       await verify(projectRoot, bankUrl, bankPin);
       const published = publicAssets === 'manifest'
-        ? requireRuntimeAssetManifest(id, JSON.parse((await read(directory, 'runtime-assets.json')).toString()))
+        ? requireInventory(id, JSON.parse((await read(directory, 'inventory.json')).toString()))
         : null;
       for (const lens of presentation.controls) for (const url of new Set([lens.thumbnailUrl, lens.texture?.url])) {
         if (!url?.startsWith(`/scenes/${id}/`)) throw new TypeError(`Invalid dataset preview URL: ${url}.`);
@@ -63,8 +63,7 @@ export async function inspectContextAvailability(projectRoot = root, { publicAss
         if (!pin) throw new TypeError(`Unpinned dataset preview: ${url}.`);
         if (published) {
           const filename = url.slice(`/scenes/${id}/`.length);
-          const asset = published.assets.find(candidate => candidate.filename === filename &&
-            (published.resourceRoot !== 'prepared' || candidate.location === 'public'));
+          const asset = published.assets.find(candidate => candidate.filename === filename && candidate.location === 'public');
           if (!asset || asset.sha256 !== pin.sha256 || asset.bytes !== pin.bytes)
             throw new TypeError(`Unpublished dataset preview: ${url}.`);
         } else await verify(resolve(projectRoot, 'public'), url.slice(1), pin);

@@ -131,9 +131,9 @@ test('deleting a target catches unchanged inbound Markdown and HTML links', t =>
 
 test('a body README may cite its generated provenance and page contract files', t => {
   const f = fixture(t);
-  // `prepared-assets.json` is the tracked file that proves the object exists; the two build
+  // `inventory.json` is the tracked file that proves the object exists; the two build
   // outputs beside it are written by `predev`/`prebuild` and never committed.
-  f.write('src/objects/mimas/prepared-assets.json', '{}\n');
+  f.write('src/objects/mimas/inventory.json', '{}\n');
   f.write('src/objects/mimas/README.md',
     '[Provenance](prepared/provenance.json)\n[Page](prepared/page.json)\n[Absent](prepared/scene.json)\n');
   f.commit();

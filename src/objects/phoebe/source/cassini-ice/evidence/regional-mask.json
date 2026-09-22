@@ -14,16 +14,16 @@
     "maximumEmissionDegrees": 60,
     "surface": "Unchanged3500-face prepared2023Phoebe terrain; closest positive hit; source Sun vector and terrain self-shadow test.",
     "exposureFractions": [
-      0.0,
+      0,
       0.25,
       0.5,
       0.75,
-      1.0
+      1
     ],
     "sensitivityOffsetsRadians": [
       [
-        0.0,
-        0.0
+        0,
+        0
       ],
       [
         -0.00013388234694667876,
@@ -1028,8 +1028,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1039,7 +1039,7 @@
       "sampledMaximumIncidenceDegrees": 57.27129150959984,
       "sampledMaximumEmissionDegrees": 50.21452553321644,
       "sampledFullExposureGroundMotionKm": 0.19040727030352292,
-      "sampledFullExposureCenterRayMotionRadians": 3.423157094505146e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003423157094505146,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.548322871828747,
       "nativePhocubeResolutionMeters": 9554.0771484375
     },
@@ -1071,8 +1071,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1082,7 +1082,7 @@
       "sampledMaximumIncidenceDegrees": 55.95657756621115,
       "sampledMaximumEmissionDegrees": 49.30700146728726,
       "sampledFullExposureGroundMotionKm": 0.22989018957137655,
-      "sampledFullExposureCenterRayMotionRadians": 3.42301495375816e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.0000342301495375816,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.929840077360301,
       "nativePhocubeResolutionMeters": 9541.0849609375
     },
@@ -1114,8 +1114,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1125,7 +1125,7 @@
       "sampledMaximumIncidenceDegrees": 56.65560454565347,
       "sampledMaximumEmissionDegrees": 49.30832121879512,
       "sampledFullExposureGroundMotionKm": 0.20122675484921004,
-      "sampledFullExposureCenterRayMotionRadians": 3.422967975321325e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003422967975321325,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.247256875390512,
       "nativePhocubeResolutionMeters": 9537.8466796875
     },
@@ -1157,8 +1157,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1168,7 +1168,7 @@
       "sampledMaximumIncidenceDegrees": 56.028974026791026,
       "sampledMaximumEmissionDegrees": 32.22357287789185,
       "sampledFullExposureGroundMotionKm": 0.14273911589564514,
-      "sampledFullExposureCenterRayMotionRadians": 3.403685092337548e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003403685092337548,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.57844017648241,
       "nativePhocubeResolutionMeters": 9508.8349609375
     },
@@ -1200,8 +1200,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1211,7 +1211,7 @@
       "sampledMaximumIncidenceDegrees": 55.88009252285912,
       "sampledMaximumEmissionDegrees": 59.73445855844969,
       "sampledFullExposureGroundMotionKm": 0.13918778931350664,
-      "sampledFullExposureCenterRayMotionRadians": 3.40365796111379e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.0000340365796111379,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.234843212768483,
       "nativePhocubeResolutionMeters": 9505.732421875
     },
@@ -1243,8 +1243,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1254,7 +1254,7 @@
       "sampledMaximumIncidenceDegrees": 38.730517032461805,
       "sampledMaximumEmissionDegrees": 58.3332824411646,
       "sampledFullExposureGroundMotionKm": 0.18720731881991853,
-      "sampledFullExposureCenterRayMotionRadians": 3.4176883234389075e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034176883234389075,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 7.213301002552653,
       "nativePhocubeResolutionMeters": 9492.9365234375
     },
@@ -1286,8 +1286,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1297,7 +1297,7 @@
       "sampledMaximumIncidenceDegrees": 39.46644367570197,
       "sampledMaximumEmissionDegrees": 58.33324748678936,
       "sampledFullExposureGroundMotionKm": 0.18196426990656062,
-      "sampledFullExposureCenterRayMotionRadians": 3.4176832095354655e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034176832095354655,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 7.1828504591090185,
       "nativePhocubeResolutionMeters": 9487.9404296875
     },
@@ -1329,8 +1329,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1340,7 +1340,7 @@
       "sampledMaximumIncidenceDegrees": 53.67791072508497,
       "sampledMaximumEmissionDegrees": 59.79567065753376,
       "sampledFullExposureGroundMotionKm": 0.1363543747669123,
-      "sampledFullExposureCenterRayMotionRadians": 3.4176644331637225e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034176644331637225,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.859364152929961,
       "nativePhocubeResolutionMeters": 9473.7421875
     },
@@ -1372,8 +1372,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1383,7 +1383,7 @@
       "sampledMaximumIncidenceDegrees": 59.40069902150612,
       "sampledMaximumEmissionDegrees": 51.945996348212596,
       "sampledFullExposureGroundMotionKm": 0.05577718421834978,
-      "sampledFullExposureCenterRayMotionRadians": 3.746025635414723e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003746025635414723,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.572612671375788,
       "nativePhocubeResolutionMeters": 9464.25390625
     },
@@ -1415,8 +1415,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1426,7 +1426,7 @@
       "sampledMaximumIncidenceDegrees": 42.95938604793489,
       "sampledMaximumEmissionDegrees": 58.38991017545965,
       "sampledFullExposureGroundMotionKm": 0.16949269691600843,
-      "sampledFullExposureCenterRayMotionRadians": 3.4061566248588e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034061566248588,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.3181946004384955,
       "nativePhocubeResolutionMeters": 9457.3193359375
     },
@@ -1458,8 +1458,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1469,7 +1469,7 @@
       "sampledMaximumIncidenceDegrees": 52.76125030940103,
       "sampledMaximumEmissionDegrees": 52.96879822061265,
       "sampledFullExposureGroundMotionKm": 0.14831077093746114,
-      "sampledFullExposureCenterRayMotionRadians": 3.406151892984745e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003406151892984745,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.772646486980255,
       "nativePhocubeResolutionMeters": 9453.1103515625
     },
@@ -1501,8 +1501,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1512,7 +1512,7 @@
       "sampledMaximumIncidenceDegrees": 43.74719817090238,
       "sampledMaximumEmissionDegrees": 52.610067170248705,
       "sampledFullExposureGroundMotionKm": 0.14444031420359013,
-      "sampledFullExposureCenterRayMotionRadians": 3.4061471710808324e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034061471710808324,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.437718493918888,
       "nativePhocubeResolutionMeters": 9449.4150390625
     },
@@ -1544,8 +1544,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1555,7 +1555,7 @@
       "sampledMaximumIncidenceDegrees": 58.971645393915885,
       "sampledMaximumEmissionDegrees": 52.61218196687556,
       "sampledFullExposureGroundMotionKm": 0.1261208441797545,
-      "sampledFullExposureCenterRayMotionRadians": 3.40614285431172e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.0000340614285431172,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.454837956437738,
       "nativePhocubeResolutionMeters": 9446.1123046875
     },
@@ -1587,8 +1587,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1598,7 +1598,7 @@
       "sampledMaximumIncidenceDegrees": 53.5987331431053,
       "sampledMaximumEmissionDegrees": 42.66901229567202,
       "sampledFullExposureGroundMotionKm": 0.1346078428181047,
-      "sampledFullExposureCenterRayMotionRadians": 3.406137757147068e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003406137757147068,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.9596028491406265,
       "nativePhocubeResolutionMeters": 9443.125
     },
@@ -1630,8 +1630,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1641,7 +1641,7 @@
       "sampledMaximumIncidenceDegrees": 58.83002202773377,
       "sampledMaximumEmissionDegrees": 42.66121583769481,
       "sampledFullExposureGroundMotionKm": 0.12918417520571693,
-      "sampledFullExposureCenterRayMotionRadians": 3.406133065136217e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003406133065136217,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.881111865058883,
       "nativePhocubeResolutionMeters": 9440.4033203125
     },
@@ -1673,8 +1673,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1684,7 +1684,7 @@
       "sampledMaximumIncidenceDegrees": 58.82774563927124,
       "sampledMaximumEmissionDegrees": 51.586015716858554,
       "sampledFullExposureGroundMotionKm": 0.12605973041164426,
-      "sampledFullExposureCenterRayMotionRadians": 3.4061283830498646e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034061283830498646,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.792505968533165,
       "nativePhocubeResolutionMeters": 9437.912109375
     },
@@ -1716,8 +1716,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1727,7 +1727,7 @@
       "sampledMaximumIncidenceDegrees": 34.23171526730804,
       "sampledMaximumEmissionDegrees": 59.843552759251075,
       "sampledFullExposureGroundMotionKm": 0.10927073175386569,
-      "sampledFullExposureCenterRayMotionRadians": 3.615847643371285e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003615847643371285,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.5112858283160655,
       "nativePhocubeResolutionMeters": -3.4028226550889045e+38
     },
@@ -1759,8 +1759,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1770,7 +1770,7 @@
       "sampledMaximumIncidenceDegrees": 34.92892394543367,
       "sampledMaximumEmissionDegrees": 55.23650119690764,
       "sampledFullExposureGroundMotionKm": 0.10733734453176905,
-      "sampledFullExposureCenterRayMotionRadians": 3.615841736769089e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003615841736769089,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.403150094928562,
       "nativePhocubeResolutionMeters": 9445.2978515625
     },
@@ -1802,8 +1802,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1813,7 +1813,7 @@
       "sampledMaximumIncidenceDegrees": 43.39232914630097,
       "sampledMaximumEmissionDegrees": 55.23928499307572,
       "sampledFullExposureGroundMotionKm": 0.10866263430937678,
-      "sampledFullExposureCenterRayMotionRadians": 3.615835838490598e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003615835838490598,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.51786451838914,
       "nativePhocubeResolutionMeters": 9437.2197265625
     },
@@ -1845,8 +1845,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1856,7 +1856,7 @@
       "sampledMaximumIncidenceDegrees": 46.33845334246036,
       "sampledMaximumEmissionDegrees": 52.0746293077559,
       "sampledFullExposureGroundMotionKm": 0.10826904240312034,
-      "sampledFullExposureCenterRayMotionRadians": 3.61583034351222e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.0000361583034351222,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.076014530139076,
       "nativePhocubeResolutionMeters": 9431.384765625
     },
@@ -1888,8 +1888,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1899,7 +1899,7 @@
       "sampledMaximumIncidenceDegrees": 46.33645431116298,
       "sampledMaximumEmissionDegrees": 53.13891406088176,
       "sampledFullExposureGroundMotionKm": 0.10659495034949534,
-      "sampledFullExposureCenterRayMotionRadians": 3.615824066261608e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003615824066261608,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.764941082306805,
       "nativePhocubeResolutionMeters": 9426.6103515625
     },
@@ -1931,8 +1931,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1942,7 +1942,7 @@
       "sampledMaximumIncidenceDegrees": 45.31812018733654,
       "sampledMaximumEmissionDegrees": 53.142038576476374,
       "sampledFullExposureGroundMotionKm": 0.12165704092939147,
-      "sampledFullExposureCenterRayMotionRadians": 3.6158181924264114e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000036158181924264114,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.798140717711731,
       "nativePhocubeResolutionMeters": 9422.50390625
     },
@@ -1974,8 +1974,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -1985,7 +1985,7 @@
       "sampledMaximumIncidenceDegrees": 45.31540351670859,
       "sampledMaximumEmissionDegrees": 50.32967528200197,
       "sampledFullExposureGroundMotionKm": 0.0952729141390593,
-      "sampledFullExposureCenterRayMotionRadians": 3.6158127219169507e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000036158127219169507,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.4049980950188425,
       "nativePhocubeResolutionMeters": 9418.876953125
     },
@@ -2017,8 +2017,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2028,7 +2028,7 @@
       "sampledMaximumIncidenceDegrees": 47.30061048480639,
       "sampledMaximumEmissionDegrees": 50.33278846538698,
       "sampledFullExposureGroundMotionKm": 0.08921306622794471,
-      "sampledFullExposureCenterRayMotionRadians": 3.61580646916957e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.0000361580646916957,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.208431843862682,
       "nativePhocubeResolutionMeters": 9415.62109375
     },
@@ -2060,8 +2060,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2071,7 +2071,7 @@
       "sampledMaximumIncidenceDegrees": 58.85250419074362,
       "sampledMaximumEmissionDegrees": 45.75906885195992,
       "sampledFullExposureGroundMotionKm": 0.08093978083496364,
-      "sampledFullExposureCenterRayMotionRadians": 3.615800619791721e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003615800619791721,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.904138834436597,
       "nativePhocubeResolutionMeters": 9412.666015625
     },
@@ -2103,8 +2103,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2114,7 +2114,7 @@
       "sampledMaximumIncidenceDegrees": 43.33787536878267,
       "sampledMaximumEmissionDegrees": 53.32865940791185,
       "sampledFullExposureGroundMotionKm": 0.16437179551258335,
-      "sampledFullExposureCenterRayMotionRadians": 3.4168395660244675e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034168395660244675,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.883887536076155,
       "nativePhocubeResolutionMeters": -3.4028226550889045e+38
     },
@@ -2146,8 +2146,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2157,7 +2157,7 @@
       "sampledMaximumIncidenceDegrees": 49.82233085244915,
       "sampledMaximumEmissionDegrees": 46.959606992082854,
       "sampledFullExposureGroundMotionKm": 0.1409450861006798,
-      "sampledFullExposureCenterRayMotionRadians": 3.416834754180325e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003416834754180325,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.21935524166305,
       "nativePhocubeResolutionMeters": 9417.923828125
     },
@@ -2189,8 +2189,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2200,7 +2200,7 @@
       "sampledMaximumIncidenceDegrees": 49.81724798988853,
       "sampledMaximumEmissionDegrees": 44.80890744446539,
       "sampledFullExposureGroundMotionKm": 0.14243565602223454,
-      "sampledFullExposureCenterRayMotionRadians": 3.456590242161093e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003456590242161093,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.736558993732605,
       "nativePhocubeResolutionMeters": 9402.529296875
     },
@@ -2232,8 +2232,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2243,7 +2243,7 @@
       "sampledMaximumIncidenceDegrees": 49.814706436852276,
       "sampledMaximumEmissionDegrees": 44.78053249478282,
       "sampledFullExposureGroundMotionKm": 0.10819646069827998,
-      "sampledFullExposureCenterRayMotionRadians": 3.621538646988289e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003621538646988289,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.825082271337952,
       "nativePhocubeResolutionMeters": 9397.5478515625
     },
@@ -2275,8 +2275,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2286,7 +2286,7 @@
       "sampledMaximumIncidenceDegrees": 47.68918698398105,
       "sampledMaximumEmissionDegrees": 51.61889584821355,
       "sampledFullExposureGroundMotionKm": 0.1475876464023584,
-      "sampledFullExposureCenterRayMotionRadians": 3.621520273066101e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003621520273066101,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.921257261064405,
       "nativePhocubeResolutionMeters": 9393.3017578125
     },
@@ -2318,8 +2318,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2329,7 +2329,7 @@
       "sampledMaximumIncidenceDegrees": 44.78889097239878,
       "sampledMaximumEmissionDegrees": 56.68811658287522,
       "sampledFullExposureGroundMotionKm": 0.11300151107347671,
-      "sampledFullExposureCenterRayMotionRadians": 3.621501897638697e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003621501897638697,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.423440992094611,
       "nativePhocubeResolutionMeters": 9389.5673828125
     },
@@ -2361,8 +2361,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2372,7 +2372,7 @@
       "sampledMaximumIncidenceDegrees": 58.641380039503815,
       "sampledMaximumEmissionDegrees": 52.66105483828878,
       "sampledFullExposureGroundMotionKm": 0.14010689920709107,
-      "sampledFullExposureCenterRayMotionRadians": 3.6214839166070355e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000036214839166070355,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.527159376522834,
       "nativePhocubeResolutionMeters": 9386.2236328125
     },
@@ -2404,8 +2404,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2415,7 +2415,7 @@
       "sampledMaximumIncidenceDegrees": 58.63887014188984,
       "sampledMaximumEmissionDegrees": 38.92886924145473,
       "sampledFullExposureGroundMotionKm": 0.09971585912272088,
-      "sampledFullExposureCenterRayMotionRadians": 3.621465142626721e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003621465142626721,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 4.6357714939146595,
       "nativePhocubeResolutionMeters": 9383.193359375
     },
@@ -2447,8 +2447,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2458,7 +2458,7 @@
       "sampledMaximumIncidenceDegrees": 52.898492511833,
       "sampledMaximumEmissionDegrees": 57.487076118157546,
       "sampledFullExposureGroundMotionKm": 0.19748677377096416,
-      "sampledFullExposureCenterRayMotionRadians": 3.4158372461359525e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000034158372461359525,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.702707093768897,
       "nativePhocubeResolutionMeters": 9298.3271484375
     },
@@ -2490,8 +2490,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2501,7 +2501,7 @@
       "sampledMaximumIncidenceDegrees": 57.928765383353436,
       "sampledMaximumEmissionDegrees": 58.97333038419155,
       "sampledFullExposureGroundMotionKm": 0.17347161138521325,
-      "sampledFullExposureCenterRayMotionRadians": 3.415827645602258e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003415827645602258,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.970281801329254,
       "nativePhocubeResolutionMeters": 9292.3369140625
     },
@@ -2533,8 +2533,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2544,7 +2544,7 @@
       "sampledMaximumIncidenceDegrees": 56.846232214872785,
       "sampledMaximumEmissionDegrees": 56.69038354135161,
       "sampledFullExposureGroundMotionKm": 0.12391666088045124,
-      "sampledFullExposureCenterRayMotionRadians": 3.465403139523337e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003465403139523337,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 5.986570635603256,
       "nativePhocubeResolutionMeters": 9290.86328125
     },
@@ -2576,8 +2576,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2587,7 +2587,7 @@
       "sampledMaximumIncidenceDegrees": 51.143637162119795,
       "sampledMaximumEmissionDegrees": 58.12445656707987,
       "sampledFullExposureGroundMotionKm": 0.10043050196694014,
-      "sampledFullExposureCenterRayMotionRadians": 3.606297423187986e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003606297423187986,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.295999205021035,
       "nativePhocubeResolutionMeters": 9279.263671875
     },
@@ -2619,8 +2619,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2630,7 +2630,7 @@
       "sampledMaximumIncidenceDegrees": 46.39113414271736,
       "sampledMaximumEmissionDegrees": 58.127520808570026,
       "sampledFullExposureGroundMotionKm": 0.12305209956694237,
-      "sampledFullExposureCenterRayMotionRadians": 3.6062701765183834e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000036062701765183834,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 8.088484178712557,
       "nativePhocubeResolutionMeters": 9274.9921875
     },
@@ -2662,8 +2662,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2673,7 +2673,7 @@
       "sampledMaximumIncidenceDegrees": 59.51009107335427,
       "sampledMaximumEmissionDegrees": 53.74967156606858,
       "sampledFullExposureGroundMotionKm": 0.09649466052520028,
-      "sampledFullExposureCenterRayMotionRadians": 3.606159396300107e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.00003606159396300107,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.357695046966998,
       "nativePhocubeResolutionMeters": 9262.2451171875
     },
@@ -2705,8 +2705,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2716,7 +2716,7 @@
       "sampledMaximumIncidenceDegrees": 53.292853432686194,
       "sampledMaximumEmissionDegrees": 57.68258213834098,
       "sampledFullExposureGroundMotionKm": 0.09707368691574886,
-      "sampledFullExposureCenterRayMotionRadians": 3.6061318465626245e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000036061318465626245,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.726384989449768,
       "nativePhocubeResolutionMeters": 9259.7587890625
     },
@@ -2748,8 +2748,8 @@
         "shadow": false,
         "exposureFraction": 0.5,
         "angularOffsetPerturbation": [
-          0.0,
-          0.0
+          0,
+          0
         ]
       },
       "longitudeLatitudeDegrees": [
@@ -2759,7 +2759,7 @@
       "sampledMaximumIncidenceDegrees": 52.2208581748706,
       "sampledMaximumEmissionDegrees": 58.79188148130587,
       "sampledFullExposureGroundMotionKm": 0.09424930881628667,
-      "sampledFullExposureCenterRayMotionRadians": 3.6129934712087305e-05,
+      "sampledFullExposureCenterRayMotionRadians": 0.000036129934712087305,
       "sampledSensitivityMaximumCenterGroundDisplacementKm": 6.821993077299763,
       "nativePhocubeResolutionMeters": 9230.65625
     }
@@ -3105,22 +3105,6 @@
   "terrainSha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
   "cameraModuleSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
   "sunTableSha256": "8782f309aa719c988df6c4441e96c02e88bca8ffdb2d82ea02c37407a298205b",
-  "sourcePins": [
-    {
-      "file": "C1465671822_1_ir.cub",
-      "url": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
-      "resolvedUrl": "https://vims.univ-nantes.fr/cube/C1465671822_1_ir.cub",
-      "bytes": 1090377,
-      "sha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee"
-    },
-    {
-      "file": "N1465671822_1_ir.cub",
-      "url": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
-      "resolvedUrl": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
-      "bytes": 226310,
-      "sha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3"
-    }
-  ],
   "maximumSampledFullExposureGroundMotionKm": 0.22989018957137655,
   "maximumSampledFullExposureRayMotionFastSamples": 0.1513545711278676,
   "maximumSampledSensitivityCenterDisplacementKm": 8.088484178712557,

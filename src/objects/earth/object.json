@@ -2,7 +2,7 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "24597fabb3cf195699b6f0197945172d723af112c440c704380476530e461e1d"
+    "sha256": "fb30487e215feab541760da6643829095c74de536f7fa23f0c0f2379c8afbefd"
   },
   "id": "earth",
   "properties": {
@@ -59,6 +59,10 @@
         {
           "id": "features",
           "path": "source/preparation/features.json"
+        },
+        {
+          "id": "places",
+          "path": "source/places/manifest.json"
         }
       ],
       "shape": {
@@ -134,6 +138,10 @@
       "features": {
         "source": "features",
         "maxEntries": 8000
+      },
+      "destinations": {
+        "source": "places",
+        "maxEntries": 40000
       }
     },
     "worldFrame": {

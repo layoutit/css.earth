@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 46500
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 93 ± 3 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
-      "expectedBytes": 46743,
-      "expectedSha256": "aa9daa8b781ee63a11e7a9efe3519ced4c1582ba90c9be3fd366ebaa6e177e76",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1092,8 +1090,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 13111,
-      "expectedSha256": "c93a99a8a361b91265012d25c3ccae770e7bef43e28f2f28ca08d27e5cc58459",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1117,8 +1113,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 9744,
-      "expectedSha256": "10f5b218824577ada39b1dd0069ea2b00fa66737095cbddb87cefd0b4e0742e4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

@@ -184,8 +184,6 @@
     {
       "id": "hd-189733-companion-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1154,
-      "expectedSha256": "2ef24b7ef289e30144c7df523de1c07da3fa23048f1b7b69b9e1b8af3f4333fe",
       "origin": "https://doi.org/10.1051/0004-6361/202243880",
       "credit": "Gaia DR3 XP sampled spectrum (Montegriffo et al. 2023); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -214,8 +212,6 @@
     {
       "id": "hd-189733-companion-tic-8-2",
       "path": "photometry/tic-8.2.tsv",
-      "expectedBytes": 248,
-      "expectedSha256": "ed87a8d7ea41287adb9f873afc24d64683134b1078ef8086d6974050d3682aac",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "K. G. Stassun et al. (2019), AJ 158, 138; VizieR IV/39 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -241,8 +237,6 @@
     {
       "id": "hd-189733-companion-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

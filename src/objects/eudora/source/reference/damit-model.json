@@ -76,8 +76,8 @@
   ],
   "id": "eudora",
   "displayName": "Eudora",
-  "lambda": 135.0,
-  "beta": -25.0,
+  "lambda": 135,
+  "beta": -25,
   "periodHours": 25.2626,
   "version": "2019-05-07",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/12508/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/12506/IAUspin.txt",
-  "shapeSha256": "0f268a3c1e9d6d8999666bcfc41159f50c0fd0f023a7df1765a672442da2b183",
   "shapeBytes": 45609,
   "vertices": 564,
   "faces": 1124,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 1124,
-    "minDoubleTriangleAreaSourceUnits2": 6.54484535722975e-08
+    "minDoubleTriangleAreaSourceUnits2": 6.54484535722975e-8
   },
   "independentAnchors": [
     {
@@ -289,8 +288,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2451133.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2451133,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",
