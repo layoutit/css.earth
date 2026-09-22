@@ -203,13 +203,14 @@ def publication(d):
   key=item.get('series')
   if key and key not in order: order.append(key)
  colour={key:palette[index%len(palette)] for index,key in enumerate(order)}
- navy='#000080'; handles=[]; labels=[]
+ navy='#000080'; handles=[]; labels=[]; extent=[]
  def half_width(c,k): det=c[0]*c[2]-c[1]**2; return k*np.sqrt(det/c[2])
  def ellipse(x,y,c,k,**kw):
   c=np.asarray(c,dtype=float)
   if c.shape!=(3,) or not np.isfinite(c).all() or c[0]<=0 or c[2]<=0 or c[0]*c[2]-c[1]**2<=0: raise ValueError('Covariance is not a positive-definite 2x2 block')
   w,v=np.linalg.eigh(np.array([[c[0],c[1]],[c[1],c[2]]])); ang=float(np.degrees(np.arctan2(v[1,1],v[0,1])))
   ax.add_patch(Ellipse((x,y),2*k*np.sqrt(w[1]),2*k*np.sqrt(w[0]),angle=ang,fill=False,**kw))
+  reach=k*np.sqrt(max(w)); extent.append((x-reach,x+reach,y-reach,y+reach))
   drawn.append({'label':'','sigma':float(k),'x':x,'y':y,'width':float(2*k*np.sqrt(w[1])),'height':float(2*k*np.sqrt(w[0])),'angleDeg':ang})
  bundle={}
  for t in d.get('tracks',[]): bundle[t.get('series') or t['label']]=bundle.get(t.get('series') or t['label'],0)+1
@@ -224,7 +225,7 @@ def publication(d):
   ax.plot([0],[0],ls='',marker='*',ms=19.7,mfc='#6baed6',mec='k',mew=1,zorder=6)
  measured=[q for q in d['points'] if q.get('role')!='candidate']
  for q in d['points']:
-  x,y=float(q['x']),float(q['y']); face=colour.get(q.get('series'),'#800000' if q.get('role')=='candidate' else navy)
+  x,y=float(q['x']),float(q['y']); face=colour.get(q.get('series'),'#800000' if q.get('role')=='candidate' else navy); extent.append((x,x,y,y))
   if q.get('role')=='candidate':
    if 'covariance' in q:
     for k,a in zip(levels,alphas): ellipse(x,y,q['covariance'],k,lw=1,color=face,alpha=a*.8,zorder=3)
@@ -239,11 +240,15 @@ def publication(d):
    ax.plot([x],[y],ls='',marker='D',ms=5.5,mfc=face,mec='k',mew=.8,zorder=9)
  ax.set_aspect('equal',adjustable='datalim'); ax.autoscale_view()
  # A square frame on whole ticks around what was drawn, so the reader lands on round numbers.
- bounds=ax.dataLim
- # With a reference at the origin the frame is centred on it, the way a chart of offsets from a star is read.
+ # The frame holds the measured and predicted positions; orbit draws are context behind them and never set it,
+ # so one badly constrained draw cannot push the bodies into a speck at the middle.
+ if extent:
+  x0=min(e[0] for e in extent); x1=max(e[1] for e in extent); y0=min(e[2] for e in extent); y1=max(e[3] for e in extent)
+ else:
+  bounds=ax.dataLim; x0,x1,y0,y1=bounds.x0,bounds.x1,bounds.y0,bounds.y1
  centred=d.get('origin') is not None
- cx,cy=(0.,0.) if centred else ((bounds.x0+bounds.x1)/2,(bounds.y0+bounds.y1)/2)
- half=max(abs(bounds.x0-cx),abs(bounds.x1-cx),abs(bounds.y0-cy),abs(bounds.y1-cy))*1.08 if centred else max(bounds.x1-bounds.x0,bounds.y1-bounds.y0)/2*1.08
+ cx,cy=(0.,0.) if centred else ((x0+x1)/2,(y0+y1)/2)
+ half=max(abs(x0-cx),abs(x1-cx),abs(y0-cy),abs(y1-cy))*1.12
  magnitude=10**np.floor(np.log10(half)); step=next(v*magnitude for v in (.25,.5,1,2,2.5,5,10) if v*magnitude>=half/2.2)
  half=np.ceil(half/step)*step
  ax.set_xlim(cx-half,cx+half); ax.set_ylim(cy-half,cy+half)
