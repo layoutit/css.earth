@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";
-import { test } from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('io');
 import { required } from "../../../../tools/contract/test-values.mts";
 import { parseInterpreterRecipe } from "../../../../tools/objects/observation/interpret.mts";
 import { loadPdsFloatMap } from "../../../../tools/objects/terrestrial-layers/pds-float-map.mts";

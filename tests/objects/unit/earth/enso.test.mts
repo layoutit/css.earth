@@ -5,7 +5,8 @@ import {parseMurReceipt} from '../../../../tools/objects/paged-ellipsoid/source-
 import {earthPreparationConfig as config} from './prepared-fixture.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import sharp from 'sharp';
 import { sha256 } from '../../../../src/platform/sha256.mts';
 import { murEnsoContent, murEnsoText, parseMurCapabilities, parseMurColors, verifyMurTile } from '../../../../tools/objects/paged-ellipsoid/mur-imagery.mts';

@@ -5,7 +5,8 @@
  * white light), this repository's fit with their time constant returns their systematics and their offset; the data prefer the
  * fast ramp. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('wasp-43b');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, hostedOrbit, starAstrometry, type HostedOrbit } from '@cssearth/astronomy';

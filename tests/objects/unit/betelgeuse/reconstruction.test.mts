@@ -4,7 +4,8 @@
  * reported. This is the proof that the photograph lens is an image of the data, not of the regulariser alone. The merged
  * visibilities are themselves recomputed from the pinned MATISSE files when those are present.
  */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('betelgeuse');
 import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

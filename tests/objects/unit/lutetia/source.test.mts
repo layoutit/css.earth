@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('lutetia');
 import {createSourceFixtureReader,requireClosedTerrain} from '../../fixtures/source-fixture.mts';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../../src/platform/source-manifest.mts';

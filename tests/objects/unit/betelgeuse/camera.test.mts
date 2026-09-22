@@ -4,7 +4,8 @@
  * sub-observer and sub-solar points, the range, and the north azimuth. What is measured from the reconstruction, and so is
  * not derived: the disc centre (its flux centroid) and the sky threshold.
  */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('betelgeuse');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

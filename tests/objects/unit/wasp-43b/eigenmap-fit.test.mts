@@ -2,7 +2,8 @@
  * in source/reference/theresa-reruns.md for the corrected axis (the fit's own geometry always spins about the orbit normal):
  * degree 3, 6 eigencurves, positive emission. It shares no code with starry or ThERESA, so agreement checks both. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('wasp-43b');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';

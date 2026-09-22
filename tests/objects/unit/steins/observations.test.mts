@@ -1,4 +1,5 @@
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('steins');
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {decodeOsirisReflectance} from '../../../../tools/objects/terrestrial-layers/archived-camera.mts';

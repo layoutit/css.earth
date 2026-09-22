@@ -3,7 +3,8 @@ import {requireRecord} from "../../../../tools/sources/source-values.mts";
 import {shape,array,text} from "../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts";
 import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/index.js";
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { readFile } from 'node:fs/promises';
 import { runtimeDefinition, PREPARED_EARTH_SCENE } from './prepared-fixture.mts';
 

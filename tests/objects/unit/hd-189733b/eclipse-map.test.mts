@@ -2,7 +2,8 @@
  * whether the map, turned by this package's own orbit and synchronous rotation, fits the deposited MIRI eclipses better than a
  * uniform planet and than its own east-west mirror. Like the authors' ThERESA configuration, the geometry has no light travel time. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('hd-189733b');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('neptune');
 import sharp from 'sharp';
 import {fileURLToPath} from 'node:url';
 

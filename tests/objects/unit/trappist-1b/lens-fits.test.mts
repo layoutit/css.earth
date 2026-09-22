@@ -1,7 +1,8 @@
 /** The MIRI lens is fitted at preparation time from its recipe in source/preparation/raster.json. This check runs the recipe as
  * shipped and holds it to what it was measured to give. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('trappist-1b');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadBareRockFit, loadEclipseMapFit, readCsvColumns } from '../../../../tools/objects/terrestrial-layers/eclipse-map-fit.mts';

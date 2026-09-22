@@ -1,6 +1,7 @@
 import {shape,array,text,number,optional,boolean} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('comet-19p');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';

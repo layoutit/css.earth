@@ -4,7 +4,8 @@
  * visibilities and closure phases about as well as SQUEEZE reported. The beam-convolved image the lens shows is recomputed
  * from the raw one, and the authoring tool's outputs are recomputed byte for byte.
  */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('pi1-gruis');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

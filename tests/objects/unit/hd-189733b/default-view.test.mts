@@ -1,6 +1,7 @@
 /** What the default camera shows, from the runtime's camera math and the pinned records, with no browser: the substellar point,
  * with the orbit normal up. The atlas is painted with longitude 0 at its first column, as the mesh places every atlas. */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('hd-189733b');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

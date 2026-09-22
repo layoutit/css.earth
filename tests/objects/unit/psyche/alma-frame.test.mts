@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('psyche');
 import { access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';

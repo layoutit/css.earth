@@ -5,7 +5,8 @@ import {shape,array,number,boolean,text} from "../../../../tools/objects/paged-e
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { PREPARED_EARTH_SCENE } from "../../unit/earth/prepared-fixture.mts";
 import {
   EARTH_SURFACE_ATLAS,

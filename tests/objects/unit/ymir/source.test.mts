@@ -1,5 +1,6 @@
 import {required} from '../../../../tools/contract/test-values.mts';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('ymir');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import sharp from 'sharp';

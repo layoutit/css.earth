@@ -1,7 +1,8 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import {array,shape,text} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('titania');
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
 import {loadScienceSurface} from '../../../../tools/objects/terrestrial-layers/scientific-raster.mts';

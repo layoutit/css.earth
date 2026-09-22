@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import {readFile} from 'node:fs/promises';
 import sharp from 'sharp';
 import { cutInteriorPoles } from '../../../../tools/objects/paged-ellipsoid/interior-poles.mts';

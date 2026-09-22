@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('mercury');
 import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.json" with {type: "json"};
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 const rows = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>) => f.residency.stats().pools.find((pool: { id: string; }) => pool.id === "lighting");

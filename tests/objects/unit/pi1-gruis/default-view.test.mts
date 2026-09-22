@@ -1,7 +1,8 @@
 /** What the default camera shows, from the runtime's camera math and the pinned records, with no browser. The star's
  * presentation frame puts its display axis up and the default camera is derived to face the Sun, where Earth observes the star
  * from, so the default view is the sub-Earth point. */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('pi1-gruis');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

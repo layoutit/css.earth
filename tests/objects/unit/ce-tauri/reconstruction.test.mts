@@ -4,7 +4,8 @@
  * pipeline's automated calibration, not the paper's reduction, so the fit is poorer than the paper's; what the test pins is that
  * each image is the right epoch in the right orientation: mirrored or turned, it fits several times worse.
  */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('ce-tauri');
 import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';

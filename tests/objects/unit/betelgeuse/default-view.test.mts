@@ -1,6 +1,7 @@
 /** What the default camera shows, from the runtime's camera math and the pinned records, with no browser. The presentation puts the
  * ALMA pole up, so the camera orbit lies in the star's equator, which contains the line of sight from Earth. */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('betelgeuse');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

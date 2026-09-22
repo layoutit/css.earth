@@ -2,7 +2,8 @@
  * light curve; the same map mirrored east-west must not. This ties the lens's longitudes, the orbit's phase and the rotation's
  * sense to the observation rather than to the map file's own labels. North and south are not decidable from photometry. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('wasp-43b');
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { BODIES, hostedOrbit, starAstrometry } from '@cssearth/astronomy';

@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('gaspra');
 import {readFile} from 'node:fs/promises';
 import {loadPdsRadialTable} from '../../../../tools/objects/terrestrial-layers/pds-radial-table.mts';
 import {prepareFitsObservation} from '../../../../tools/objects/terrestrial-layers/observed-fits.mts';

@@ -1,7 +1,8 @@
 // Triton's Voyager colour lens: the limb placement evidence its authoring tool wrote, the manifest pins the lens reads, and the
 // photometry the preparation reported (withheld policy, band levels onto the Rings Node calibration).
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('triton');
 import placement from "../../../../src/objects/triton/source/reference/voyager-color-placement.json" with { type: "json" };
 import manifest from "../../../../src/objects/triton/source/manifest.json" with { type: "json" };
 import oracle from "../../../../src/objects/triton/source/reference/voyager-color-oracle.json" with { type: "json" };

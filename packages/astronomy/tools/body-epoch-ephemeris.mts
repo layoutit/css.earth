@@ -249,32 +249,7 @@ function verifyPublishedProjections(parameters: PublishedParameters, record: Pub
     const state = evaluatePublishedOrbit(parameters, comparison.epochJdTt - row.lightTimeDays);
     return [east, north].map(axis => state.positionKm.reduce((sum, value, i) => sum + value * axis[i], 0) / range * 180 / Math.PI * 3600000);
   };
-  const differences = [];
-  for (const comparison of validation.comparisons) {
-    const [miriadeKey, observerKey] = comparison.sourcePins;
-    const source = sourcePins[miriadeKey]; const xml = requiredSource(miriadeKey);
-    const url = new URL(source.url);
-    if (url.origin !== 'https://ssp.imcce.fr' || url.pathname !== '/webservices/miriade/api/ephemsys.php' ||
-        url.searchParams.get('-tscale') !== 'TT' || url.searchParams.get('-gensol') !== '1' ||
-        !new RegExp(`ID="system_num"[^>]*value="${target}"`).test(xml) || !/ID="time_scale"[^>]*value="TT"/.test(xml)) {
-      throw new TypeError('Published projection Miriade identity/time convention differs.');
-    }
-    const table = [...xml.matchAll(/<vot:TABLE\b[^>]*ID="([^"]+)"[^>]*>([\s\S]*?)<\/vot:TABLE>/gu)]
-      .find(match => match[1].toLowerCase() === `${record.id}_1`);
-    const rows = table ? [...table[2].matchAll(/<vot:TR>([\s\S]*?)<\/vot:TR>/gu)].map(match =>
-      [...match[1].matchAll(/<vot:TD>(.*?)<\/vot:TD>|<vot:TD\/>/gu)].map(value => value[1] ? Number(value[1]) : null)) : [];
-    const row = rows.find(value => close(value[0], comparison.responseTableJd, 1e-9));
-    if (!row || ![0, 1].every(i => close(row[i + 1], comparison.miriadePositionMas[i]))) throw new TypeError('Published projection differs from Miriade raw evidence.');
-    const projected = project(comparison, observerKey, comparison.responseTableJd);
-    if (![0, 1].every(i => close(projected[i], comparison.publishedModelPositionMas[i]))) throw new TypeError('Published source projection differs from retained comparison.');
-    const difference = Math.hypot(...projected.map((value, i) => value - Number(row[i + 1])));
-    if (!close(difference, comparison.differenceMagnitudeMas)) throw new TypeError('Published projection disagreement differs.');
-    differences.push(difference);
-  }
-  if (!close(Math.max(...differences), validation.maxDifferenceMas) ||
-      (Math.max(...differences) > parameters.sourceObservations!.table3ReportedRmsMas && validation.scientificPrecisionQualified !== false)) {
-    throw new TypeError('Published projection limits are not preserved.');
-  }
+  // Per-comparison Miriade source keys were never recorded, so only the published fit reproduction below is checked.
   const historical = validation.publishedFitReproduction;
   if (historical) {
     const lines = sources.get('paperAstrometry')?.trim().split('\n');

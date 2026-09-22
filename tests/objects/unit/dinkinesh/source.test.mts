@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('dinkinesh');
 import assert from 'node:assert/strict';
 import {readFile,mkdtemp,rm} from 'node:fs/promises';
 import {resolve} from 'node:path';

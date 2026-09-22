@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('earth');
 import { runtimeDefinition } from "../../unit/earth/prepared-fixture.mts";
 import { preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 const pool = (f: Awaited<ReturnType<typeof preparedSelectionFixture>>, id: string) => required(f.residency.stats().pools.find(pool => pool.id === id));

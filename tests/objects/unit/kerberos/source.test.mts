@@ -1,6 +1,7 @@
 import {requireRecord} from '../../../../tools/sources/source-values.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
-import test from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('kerberos');
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {parsePdsRadiusTable} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';

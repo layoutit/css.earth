@@ -1,7 +1,8 @@
 /** What the default camera shows, from the runtime's camera math and the pinned records, with no browser. The star's presentation
  * frame puts its measured spin axis up, so the camera orbit lies in its equator and the default view sits one degree from the
  * sub-Earth point. */
-import { test } from 'node:test';
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('hd-189733');
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

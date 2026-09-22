@@ -1,7 +1,8 @@
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import { sourceTest } from '../../source-test.mts';
+const test = sourceTest('comet-9p');
 import { parsePreparedObjectRuntime, parsePreparedSurfaceFeatureCatalog } from "../../../../src/renderers/css/dist/index.js";
 
 const root = new URL("../../../../", import.meta.url);
