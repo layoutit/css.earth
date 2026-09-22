@@ -113,3 +113,20 @@ test('the HR 8799 measurements match their own planets, and the candidate fifth 
     assert.deepEqual(within, PAPER_AGREES_WITHIN[association.closest], `${association.measurement.id} per-axis agreement`);
   }
 });
+
+test('the system chart carries the orbit draws, the archival astrometry and the newest predictions', async () => {
+  const work = await temporary();
+  try {
+    const result = await runAssociation(HR_8799, 'hr-8799', resolve(work, 'run'), { orbitDraws: 4, fitAstrometry: true });
+    const record = JSON.parse(await readFile(resolve(work, 'run', 'association.json'), 'utf8'));
+    assert.equal(record.chart, 'system/preview.png');
+    assert.equal((await readFile(resolve(work, 'run', 'system', 'preview.png'))).subarray(1, 4).toString(), 'PNG');
+    // The tool ships the astrometry its own fit was made from: 74 rows over 2004 to 2022, of which 65 are offsets.
+    // The other nine are separation and position angle, which this route refuses to convert.
+    const archival = result.rows.filter(row => row.association.measurement.body !== undefined);
+    assert.equal(archival.length, 65);
+    assert.ok(archival.every(row => row.association.closest === row.association.measurement.body), 'every archival row matches the planet it was measured for');
+    const epochs = result.rows.map(row => row.association.measurement.epochMjd);
+    assert.ok(Math.min(...epochs) < 54000 && Math.max(...epochs) === 60159);
+  } finally { await rm(work, { recursive: true, force: true }); }
+});

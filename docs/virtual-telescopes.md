@@ -449,6 +449,12 @@ The chart is a view of that result: the star at the origin, each candidate as a 
 ellipses, the measurement with its 1σ, 2σ and 3σ ellipses, orbits behind them, and east to the left, as
 [Ortiz Ceballos, Berger and Cendes (2026)](https://arxiv.org/abs/2609.16720) print it for the radio detection of β Pictoris b.
 
+`associate` also draws one chart of the whole system, with every measurement in the colour of the body it is closest to.
+`--orbit-draws N` traces N draws of each planet's posterior instead of one line, so the spread of the orbit itself shows,
+and `--fit-astrometry` adds the astrometry the published fit was made from, which the prediction tool distributes beside
+its draws. Together those make the figure a system paper prints: every epoch, every orbit, and the predictions at the
+newest epoch.
+
 Both halves of this route are checked against one paper that publishes both. *A Candidate Innermost Fifth Planet in the
 HR 8799 System* ([arXiv:2609.10507](https://arxiv.org/abs/2609.10507)) measures the four known planets and a candidate fifth
 source with JWST on 2023 August 3, and prints the whereistheplanet prediction it judged them against. `candidates` returns
