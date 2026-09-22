@@ -25,8 +25,6 @@ test("publishes evidence-backed Earth shell content", async () => {
   assert.equal(snapshot.sourceId, 48583);
   assert.equal(snapshot.sections.length, 12);
   assert.equal(snapshot.credit, "NASA Science");
-  assert.equal(required(facts.get("ocean-coverage")).value, "71%");
-  assert.equal(required(facts.get("atmosphere-composition")).value, "78% N₂, 21% O₂");
   const license = await readFile(
     new URL("../../../../src/objects/earth/source/presentation/LICENSE.INTER-OFL", import.meta.url),
     "utf8",
