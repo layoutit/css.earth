@@ -47,7 +47,8 @@ function beneath(root:string,path:string):string {
 export async function delivery(resultPath:string){
   const path=resolve(resultPath),directory=dirname(path),bytes=await readFile(path),record=requireRecord(JSON.parse(bytes.toString('utf8')));
   const context=deliveryContext(record);
-  const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw);return {path:requireString(f.path),sha256:requireString(f.sha256),bytes:requireFiniteNumber(f.bytes)};});
+  // A delivery names each copied file by path and size, as product records do; the delivery record itself is hashed below.
+  const files=requireArray(record.files).map(raw=>{const f=requireRecord(raw);return {path:requireString(f.path),bytes:requireFiniteNumber(f.bytes)};});
   if(!files.length||new Set(files.map(f=>f.path)).size!==files.length)throw new Error('Delivery files must be unique and pinned');
   const realDirectory=await realpath(directory);
   for(const expected of files){
@@ -97,7 +98,9 @@ export async function listOutputs(resultPath:string,structure?:string){
     const input=await nativeFigureInput(d,scratch,structure);
     const metadata=await sciencePackage({operation:'fits',path:input.file});
     const structures=requireArray(metadata.structures).map(s=>parseNativeMetadata(s));
-    return {target:d.target,source:d.product,sourceContext:d.context,outputs:choices(structures),...(input.native?{native:input.native}: {})};
+    // A FITS product is exported by --hdu alone; only a decoded native product also takes --structure.
+    const outputs=input.native?choices(structures):choices(structures).map(({structure:_structure,...choice})=>choice);
+    return {target:d.target,source:d.path,sourceContext:d.context,outputs,...(input.native?{native:input.native}: {})};
   }finally{await rm(scratch,{recursive:true,force:true});}
 }
 export async function exportOutput(resultPath:string,request:OutputRequest,outputDirectory:string){
@@ -117,7 +120,7 @@ export async function exportOutput(resultPath:string,request:OutputRequest,outpu
     const fresh=await delivery(resultPath);if(fresh.pin.sha256!==d.pin.sha256)throw new Error('Delivery changed while producing output');
     const softwareFiles=['outputs.mts','native-figure.mts','native-metadata.mts','../astronomy-packages/pds-client.mts','../terrestrial-layers/isis3-raster.mts','../astronomy-packages/science.mts','../astronomy-packages/plots.mts','../astronomy-packages/cube-outputs.mts','../astronomy-packages/requirements.lock'];
     const implementation=sha256(Buffer.concat(await Promise.all(softwareFiles.map(name=>readFile(new URL(name,import.meta.url))))));
-    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,...d.pin},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),sha256:f.sha256,bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
+    const run={telescope:d.telescope,stage:'telescope-output',inputs:[{role:'delivery',identity:d.path,bytes:d.pin.bytes},...d.files.map(f=>({role:'qualified input',identity:resolve(d.directory,f.path),bytes:f.bytes}))],parameters:{selection:request,...(input.native?{native:input.native}:{}),definition:data.definition??(request.kind==='image'?'Native sampled image plane; not a registered surface map.':'Single-pixel spectrum; no spatial integration.'),measurement:{unit:data.unit,arithmetic:data.arithmetic??'native samples',uncertaintyPolicy:data.uncertaintyPolicy??'recorded',maskPolicy:data.maskPolicy??'native sample mask'},sourceContext:d.context,metadata:parseNativeMetadata(found[0]),software:plotted},software:[{name:'cssEarth telescope outputs',version:implementation},{name:'Astropy',version:'8.0.1'},{name:'Matplotlib',version:'3.11.2'},...Object.entries(input.native?.packages??{}).map(([name,version])=>({name,version}))]};
     const names=requireArray(plotted.files).map(v=>requireString(v));
     await writeProductRecord(resolve(staging,'output.product.json'),run,names.map(path=>({path,file:beneath(staging,path)})));
     await rm(resolve(staging,'arrays'),{recursive:true,force:true});await rm(resolve(staging,'native'),{recursive:true,force:true});

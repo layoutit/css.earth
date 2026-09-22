@@ -36,7 +36,8 @@ test('independent discovery outcomes retain empty, overflow-unsupported, and fai
     });
     assert.deepEqual(inputs.services.map(service => service.state), ['empty-in-scope', 'overflow', 'unavailable']);
     assert.equal(inputs.records.length, 1); assert.equal(inputs.records[0]!.products.length, 0);
-    assert.match(inputs.records[0]!.issues.join('\n'), /No native decoder/u);
+    // Spectra are acquirable since family coverage; this row stops because ALMA truncates its MIME to "applicati".
+    assert.match(inputs.records[0]!.issues.join('\n'), /No supported decoder for applicati\./u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 

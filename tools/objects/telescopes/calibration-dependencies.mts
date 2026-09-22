@@ -1,6 +1,5 @@
 /** Exact recorded dependencies. Retrieval does not establish calibration accuracy. */
 import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { dirname, resolve, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import { fileSize } from '../product-record.mts';
@@ -8,7 +7,8 @@ import { requireArray, requireRecord, requireString, requireFiniteNumber } from 
 import { readFitsFileHdus } from '../../fits/fits.mts';
 export interface CalibrationDependency {
   readonly field: string; readonly reference: string; readonly status: 'pinned' | 'unresolved'; readonly reason: string;
-  readonly file?: string; readonly sha256?: string; readonly bytes?: number; readonly origin?: string;
+  /** A pinned dependency is named by its cached file and size, like every product record (no hashes, PR #531). */
+  readonly file?: string; readonly bytes?: number; readonly origin?: string;
   readonly applicability: 'recorded' | 'matched' | 'contradicted' | 'unknown';
 }
 export function parseCalibrationDependencies(raw: unknown): CalibrationDependency[] {
@@ -17,15 +17,15 @@ export function parseCalibrationDependencies(raw: unknown): CalibrationDependenc
     if(!['pinned','unresolved'].includes(status)||!['recorded','matched','contradicted','unknown'].includes(applicability))throw new Error('Invalid calibration dependency status');
     const row={field:requireString(r.field),reference:requireString(r.reference),status:status as CalibrationDependency['status'],reason:requireString(r.reason),applicability:applicability as CalibrationDependency['applicability']};
     if(status==='unresolved')return row;
-    const sha256=requireString(r.sha256),bytes=requireFiniteNumber(r.bytes),file=requireString(r.file);
-    if(!/^[a-f0-9]{64}$/u.test(sha256)||!Number.isSafeInteger(bytes)||bytes<1||file.startsWith('/')||file.split('/').includes('..'))throw new Error('Invalid calibration pin');
-    return {...row,sha256,bytes,file,origin:requireString(r.origin)};
+    const bytes=requireFiniteNumber(r.bytes),file=requireString(r.file);
+    if(!Number.isSafeInteger(bytes)||bytes<1||file.startsWith('/')||file.split('/').includes('..'))throw new Error('Invalid calibration pin');
+    return {...row,bytes,file,origin:requireString(r.origin)};
   });
 }
 export async function verifyCalibrationDependencies(root:string, rows:readonly CalibrationDependency[]):Promise<boolean> {
   for(const row of rows)if(row.status==='pinned'){
-    const actual=await sha256File(resolve(root,row.file!)).catch(()=>null);
-    if(!actual||actual.sha256!==row.sha256||actual.bytes!==row.bytes)return false;
+    const actual=await fileSize(resolve(root,row.file!)).catch(()=>null);
+    if(!actual||actual.bytes!==row.bytes)return false;
   }
   return true;
 }
