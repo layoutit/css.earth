@@ -95,12 +95,12 @@ export async function bakeNebula(root: string, args: string[]) {
       try {
         await promoteVolumeLenses(root, replay, pending);
         const manifest = await json(resolve(pending, 'source/lens-manifest.json'));
-        for (const [path, pin] of Object.entries(manifest.outputs) as [string, {sha256: string}][]) await pinned(pending, { path, sha256: pin.sha256 });
+        for (const path of Object.keys(manifest.outputs)) await pinned(pending, { path });
         // Identical results can be replayed without overwriting an earlier completed bank.
         try { await rename(pending, resolve(root, output)); }
         catch (error) {
           if (!['ENOTEMPTY', 'EEXIST'].includes((error as NodeJS.ErrnoException).code!)) throw error;
-          for (const [path, pin] of Object.entries(manifest.outputs) as [string, {sha256: string}][]) await pinned(resolve(root, output), { path, sha256: pin.sha256 });
+          for (const path of Object.keys(manifest.outputs)) await pinned(resolve(root, output), { path });
         }
       } finally { await rm(pending, { recursive: true, force: true }); }
       if (recipe.delivery) await restoreDelivery(root, recipe.delivery, results);

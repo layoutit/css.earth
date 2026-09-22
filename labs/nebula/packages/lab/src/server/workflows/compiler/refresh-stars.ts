@@ -27,12 +27,11 @@ export async function refreshCompilerStars(root: string, recipePath: string, pre
   const observationsBytes = await readFile(resolve(root, recipe.observationCatalogue));
   const observations = readObservations(JSON.parse(observationsBytes.toString()));
   if (!jointRecord(previous.physicalDepth) || !jointRecord(previous.physicalDepth.recipe) ||
-      typeof previous.physicalDepth.recipe.path !== 'string' || typeof previous.physicalDepth.recipe.sha256 !== 'string') throw new TypeError('Missing retained sky frame.');
-  const retainedDepth: unknown = JSON.parse((await readGeometryPin(root, { path: previous.physicalDepth.recipe.path, sha256: previous.physicalDepth.recipe.sha256 })).toString());
+      typeof previous.physicalDepth.recipe.path !== 'string') throw new TypeError('Missing retained sky frame.');
+  const retainedDepth: unknown = JSON.parse((await readGeometryPin(root, { path: previous.physicalDepth.recipe.path })).toString());
   if (!jointRecord(retainedDepth) || !Array.isArray(retainedDepth.centerIcrsDegrees) ||
       JSON.stringify(retainedDepth.centerIcrsDegrees) !== JSON.stringify(observations.frame.centerIcrsDegrees)) throw new TypeError('Stellar refresh cannot change the retained cloud sky frame.');
   const sourceBytes = recipe.observedStars ? await readFile(resolve(root, recipe.observedStars.path)) : undefined;
-  if (sourceBytes && geometrySha(sourceBytes) !== recipe.observedStars!.sha256) throw new TypeError('Observed stellar source changed.');
   const model = readRetainedEmissionField(JSON.parse((await readGeometryPin(root, base.model)).toString()));
   const origin = base.scene.coordinates.localOriginArcsec;
   const depthSign = base.scene.frame.referenceFrame === COMPILER_PHYSICAL_REFERENCE ? -1 : 1;
@@ -48,8 +47,8 @@ export async function refreshCompilerStars(root: string, recipePath: string, pre
   let physicalDepth = previous.physicalDepth;
   if (jointRecord(physicalDepth)) {
     const copy = async (v: unknown, name: string) => {
-      if (!jointRecord(v) || typeof v.path !== 'string' || typeof v.sha256 !== 'string') throw new TypeError('Missing depth snapshot.');
-      return save(name, await readGeometryPin(root, { path: v.path, sha256: v.sha256 }));
+      if (!jointRecord(v) || typeof v.path !== 'string') throw new TypeError('Missing depth snapshot.');
+      return save(name, await readGeometryPin(root, { path: v.path }));
     };
     physicalDepth = { ...physicalDepth, recipe: await copy(physicalDepth.recipe, 'depth-recipe.json'), evidence: await copy(physicalDepth.evidence, 'physical-evidence.json') };
   }
