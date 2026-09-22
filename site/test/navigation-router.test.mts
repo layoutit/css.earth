@@ -201,7 +201,7 @@ const cssToReference = [1,0,0,0,-1,0,0,0,1] as const;
 const cameraFrame = (originM: readonly [number, number, number], bodyRadiusM: number): PreparedWorldCameraFrame => ({
   originM, bodyRadiusM, referenceFrame: 'test', epochJdTt: 1, presentationToReference: cssToReference, metersPerUnit: 1,
 });
-const catalogueSources: SpatialCatalogSource[] = ['catalogue', 'paper'].map(id => ({ id, citation: id, url: `https://example.test/${id}`, bytes: 1, sha256: '0'.repeat(64) }));
+const catalogueSources: SpatialCatalogSource[] = ['catalogue', 'paper'].map(id => ({ id, citation: id, url: `https://example.test/${id}`, bytes: 1 }));
 const galaxyRecord = (id: string): PreparedGalaxyRecord => ({id, name: id, aliases: [], status: 'confirmed', positionM: [1e20,0,0],
   skyPosition: {raDeg: 0, decDeg: 0, sourceRef: 'catalogue:coordinates'}, distance: {valuePc: 1, method: 'fixture', sourceRef: 'paper'},
   membership: {group: 'local-group', subgroup: 'field', basis: 'fixture', sourceRef: 'catalogue:membership'}});
@@ -293,7 +293,7 @@ test('focused lens state reaches the retained shell without replacing its detail
   }; } };
   const h = harness({ persistentWorldContext: context });
   await h.router.settled;
-  const record = galaxyRecord('catalogue:galaxy'), sources: SpatialCatalogSource[] = [{ id: 'source', citation: 'fixture', url: 'https://example.test', bytes: 1, sha256: '0'.repeat(64) }];
+  const record = galaxyRecord('catalogue:galaxy'), sources: SpatialCatalogSource[] = [{ id: 'source', citation: 'fixture', url: 'https://example.test', bytes: 1 }];
   const first: PreparedFocusPresentation = { objectId: 'prepared-galaxy', id: 'first', defaultLens: 'first', selectedLens: 'first', lenses: [], starsVisible: true, selectLens() {} };
   required(contentChanged)(record, sources, first);
   assert.equal(h.shells[0].focusPresentation, first);

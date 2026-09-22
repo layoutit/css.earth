@@ -87,9 +87,9 @@ function fixture({ object = {}, imageLayerFrames = {}, volumeLensFrames = {}, vo
         redshift: { value: .01, type: 'spectroscopic', sourceRef: 'positions:row' },
         aperture: { definition: 'R500', properRadiusM: 1e22, comovingRadiusM: 1e22, sourceRef: 'positions:row' } };
     } } satisfies Pick<ContextLayer, 'ensureVolumeLens' | 'imageLayerFrames' | 'volumeLensFrames' | 'selectVolumeLens' | 'subscribeVolumeLens' | 'selectGalaxy' | 'resolveGalaxy'> & { volumeLensState(id: string): PreparedVolumeLensState | null };
-  const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', sha256: '0'.repeat(64), bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
-    { id: 'membership', url: 'https://example.test/membership', sha256: '0'.repeat(64), bytes: 1, citation: 'Published membership' },
-    { id: 'unrelated', url: 'https://example.test/unrelated', sha256: '0'.repeat(64), bytes: 1, citation: 'Unused audit input' }];
+  const sources: SpatialCatalogSource[] = [{ id: 'positions', url: 'https://example.test/positions', bytes: 1, citation: 'Published positions', references: [{ id: 'PublishedBibliographicKey', url: 'https://example.test/paper', citation: 'Distance paper' }] },
+    { id: 'membership', url: 'https://example.test/membership', bytes: 1, citation: 'Published membership' },
+    { id: 'unrelated', url: 'https://example.test/unrelated', bytes: 1, citation: 'Unused audit input' }];
   // Narrow test doubles intentionally expose only this controller's browser/runtime surface.
   const controller = createPreparedContextNavigation({ layer: layer as unknown as ContextLayer, windowTarget: windowTarget as unknown as Window, onError: error => { assert.ok(error instanceof Error); errors.push(error); },
     sources, unavailableObjectIds, presentation: { metersPerParsec: 3e16, defaultFocusRadiusM: 1e18, minimumDistanceRadii: .01, maximumDistanceM: 1e23 } });

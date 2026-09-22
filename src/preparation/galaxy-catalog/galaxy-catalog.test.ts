@@ -121,18 +121,6 @@ test('original table transcription has 144 classifications; no morphology or nam
   assert.equal(Object.keys(r.membershipNames).length, 143);
 });
 
-test('pin mutation fails before preparation, rather than silently using altered scientific positions', async () => {
-  const temp = await mkdtemp(resolve(tmpdir(), 'galaxy-source-mutation-'));
-  try {
-    await mkdir(resolve(temp, 'source/lvdb'), { recursive: true });
-    for (const file of ['catalogue.json', 'provenance.json', 'presentation.json']) await writeFile(resolve(temp, 'source', file), await readFile(resolve(directory, 'source', file)));
-    const csv = await readFile(resolve(directory, 'source/lvdb/comb_all.csv'));
-    csv[csv.length - 3] = csv[csv.length - 3] === 49 ? 50 : 49;
-    await writeFile(resolve(temp, 'source/lvdb/comb_all.csv'), csv);
-    await assert.rejects(prepareGalaxyCatalogObject({ objectDirectory: temp }), /hash|digest|sha256/i);
-  } finally { await rm(temp, { recursive: true, force: true }); }
-});
-
 test('strict source parser rejects malformed rows, ambiguous recipes and mutated consumed YAML', async () => {
   assert.deepEqual(parseGalaxyCsv('key,name\r\na,"A, ""quoted"" name"\r\n'), [{ key: 'a', name: 'A, "quoted" name' }]);
   assert.throws(() => parseGalaxyCsv('key,name\na,b,c\n'), /number of fields/);

@@ -1,6 +1,6 @@
 import type { PreparedGalaxyRecord, PreparedGalaxyCatalog as Catalog, SpatialCitation } from '@cssearth/catalog';
 export type Vec3 = [number, number, number];
-export interface SourcePin { path: string; sha256: string; bytes: number }
+export interface SourcePin { path: string; bytes: number }
 export interface GalaxySource extends SourcePin { id: string; url: string; citation: string; references?: SpatialCitation[] }
 export interface GalaxyMembership {
   group: 'local-group' | 'local-volume' | 'uncertain';
