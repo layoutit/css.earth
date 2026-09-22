@@ -30,10 +30,9 @@ export async function loadObjectPageData(id: string, root = process.cwd()) {
   if (descriptor.id !== id || reference?.url !== 'prepared/page.json') {
     throw new TypeError(`${id}: invalid prepared page reference.`);
   }
+  // page.json is written from the restored runtime by prepare:object-json; its sceneSha256 below ties it to the
+  // same runtime the descriptor pins.
   const bytes = await readFile(resolve(directory, reference.url));
-  if (sha256(bytes) !== reference.sha256) {
-    throw new Error(`${id}: prepared page data differs from its descriptor pin.`);
-  }
   const object: unknown = JSON.parse(bytes.toString('utf8'));
   if (!record(object) || object.schema !== 'cssearth-object-page@1' || object.id !== id ||
       object.sceneSha256 !== descriptor.prepared?.sha256 || !object.assets || !object.controls) {

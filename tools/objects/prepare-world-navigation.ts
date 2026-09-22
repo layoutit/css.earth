@@ -191,7 +191,8 @@ export async function writeWorldNavigationArtifacts(outputDirectory: string, res
   for (const name of ['sky', 'sun'] as const) {
     const canonical = result.definition[name];
     if (!canonical) continue;
-    const keys = name === 'sky' ? ['sceneRegistration', 'sceneRegistrationModel', 'sceneRegistrationEpoch', 'cameraContract']
+    // The chain names the registration model in words; without it here, every bake dropped the line from sky.json.
+    const keys = name === 'sky' ? ['sceneRegistration', 'sceneRegistrationModel', 'sceneRegistrationChain', 'sceneRegistrationEpoch', 'cameraContract']
       : ['localDirection', 'referenceViewDirection'];
     const registration = Object.fromEntries(keys.filter(key => canonical[key] !== undefined).map(key => [key, canonical[key]]));
     const existing = nextScene?.[name];

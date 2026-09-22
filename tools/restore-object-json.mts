@@ -5,6 +5,7 @@ import { resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 import { SCENE_OBJECTS } from '../site/objects.mts';
 import { serializeObjectJson } from './prepare-object-json.mts';
+import { preparePageMetadata } from './prepared-page-metadata.mts';
 import { writePreparedText } from './write-prepared-text.mts';
 import { PREPARED_CSS_OBJECT_FORMAT } from '../src/renderers/css/dist/index.js';
 
@@ -30,6 +31,8 @@ export async function restoreObjectJson(ids = SCENE_OBJECTS.map(({ id }) => id),
       throw new Error(`${id}: checked-in runtime does not reproduce its prepared JSON pin.`);
     }
     if (await writePreparedText(resolve(directory, reference.url), payload)) written++;
+    // The page's assets and controls come from the same runtime, so a checkout never carries a stale copy.
+    await writePreparedText(resolve(directory, 'prepared/page.json'), preparePageMetadata(id, reference.sha256, runtime).text);
   }
   return { objects: ids.length, written, reused: ids.length - written };
 }

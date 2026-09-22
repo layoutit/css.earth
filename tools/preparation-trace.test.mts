@@ -113,7 +113,7 @@ test('descriptor views leave the card out and keep each owner apart', () => {
   const edit = (change: (value: typeof base) => void) => { const value = structuredClone(base); change(value); return value; };
   const card = edit(value => { value.properties.catalog.description = 'New card'; });
   const recipe = edit(value => { value.properties.recipe.radius = 2; });
-  const pins = edit(value => { value.prepared.sha256 = 'c'; value.properties.page.metadata.sha256 = 'd'; });
+  const pins = edit(value => { value.prepared.sha256 = 'c'; });
   const frame = edit(value => { value.properties.worldFrame.radius = 2; });
   const name = edit(value => { value.properties.catalog.name = 'Luna'; });
   for (const view of ['registry', 'recipe', 'pins'] as const) assert.equal(digest(card, view), digest(base, view), `${view} ignores the card`);

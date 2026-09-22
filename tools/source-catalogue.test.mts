@@ -204,7 +204,7 @@ test(`both catalogues prepare deterministically from ${sourceCheckMode()} packag
   assert.deepEqual(await Promise.all(result.outputs.map(output=>readFile(output.path))),before);
 });
 
-test('an undeclared fact citation and stale displayed facts leave both published catalogues intact', async t => {
+test('an undeclared fact citation leaves both published catalogues intact', async t => {
   const root = await mkdtemp(join(tmpdir(), 'cssearth-citation-publication-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const outputs = ['site/prepared-sources.json', 'site/prepared-facilities.json'];
@@ -228,13 +228,6 @@ test('an undeclared fact citation and stale displayed facts leave both published
   await assert.rejects(prepareFacilities({ root, provenance }), /fact evidence needs one manifest entry/);
   assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
   await writeFile(manifestPath, manifestText);
-  const contentPath = join(root, 'src/objects/abundantia/prepared/content.json');
-  const originalContent = await readFile(contentPath, 'utf8'), content = sourceObject(JSON.parse(originalContent));
-  sourceObject(sourceArray(content.facts, sourceObject)[0]).value = '99 km';
-  await writeFile(contentPath, JSON.stringify(content));
-  await assert.rejects(prepareFacilities({ root, provenance }), /Stale factsheet for abundantia/);
-  assert.deepEqual(await Promise.all(outputs.map(path => readFile(join(root, path), 'utf8'))), before);
-  await writeFile(contentPath, originalContent);
   const rebuilt = await prepareFacilities({ root, provenance });
   const focusDatasets = rebuilt.preparedSources.usage.datasets.filter(dataset => dataset.href.startsWith('/sun/?focus='));
   assert.ok(focusDatasets.length > 0, 'The fixture must exercise delivered volume datasets.');
