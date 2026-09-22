@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "6d876936b4cf3d44aa70cb3f5e7ea4eda7cef728e7a060dd54fbb7db64376a4d",
       "origin": "https://doi.org/10.5194/epsc-dps2025-905",
       "credit": "Kiss et al. (2025), EPSC-DPS conference thermal-model result; Collyer et al. (2025), synchronous rotation.",
       "license": "MIT numeric extraction of published scientific facts",

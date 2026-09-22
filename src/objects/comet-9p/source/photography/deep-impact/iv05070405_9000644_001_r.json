@@ -724,7 +724,6 @@
       }
     ],
     "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain.",
-    "sourceShapeSha256": "2174b6448b482f65feb64a745b0c617802b0bbc274af116692d4fc2d9fa00777",
     "maximumRmsMeters": 100,
     "maximumResidualMeters": 200,
     "nominalPixelScaleMeters": 23.669

@@ -2,8 +2,6 @@
   "schema": "csspi1-gruis-authoritative-sources@2",
   "inputs": [
     {
-      "expectedBytes": 135360,
-      "expectedSha256": "a0740cb08cf5a984e85a1411403427760eeccf5760cd1e63880ff3481d461cc8",
       "id": "pi1-gruis-pionier-2014-09",
       "path": "observations/pi1-gruis-pionier-2014-09-2.1mas.fits",
       "origin": "https://github.com/fabienbaron/squeeze/tree/4d34e877606f16be73e7689fcb517d0b72d9d455",
@@ -253,8 +251,6 @@
     {
       "id": "pi1-gruis-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1369,
-      "expectedSha256": "d8048427c6d6d03ae725200a6fe12b97e0772812ad592e45a5e74ab233a27a05",
       "origin": "https://gea.esac.esa.int/archive/",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -283,8 +279,6 @@
     {
       "id": "pi1-gruis-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

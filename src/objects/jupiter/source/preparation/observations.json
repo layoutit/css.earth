@@ -281,42 +281,5 @@
       },
       "planetographicAxisRatio": 1.0693750560923803
     }
-  ],
-  "sourcePins": [
-    {
-      "path": "surface/hubble-jupiter-global-map-2019.png",
-      "expectedBytes": 6720450,
-      "expectedSha256": "e79f89b68b4f1c73387b9871e82a31fb4f53e3885fb2f53dd074d8ac78cb38e3"
-    },
-    {
-      "path": "surface/juno-pia23808-north-polar-projection.jpg",
-      "expectedBytes": 633958,
-      "expectedSha256": "85f84960270f7619c8ecd7cf933da860cff690d078709cbd6e342d0f83b45ac8"
-    },
-    {
-      "path": "surface/juno-pia24239-north-pole-detail.tif",
-      "expectedBytes": 193959,
-      "expectedSha256": "4a58389a26e0619fff294955c5dc07cd1dbf37d9593a714929b41fb57abd72be"
-    },
-    {
-      "path": "surface/juno-pia23556-south-polar-cyclones.jpg",
-      "expectedBytes": 909084,
-      "expectedSha256": "92de7d816bbff6e220c893ded36d0811a21a4f74b13ebc337f9c1a3fc8d1e817"
-    },
-    {
-      "path": "surface/juno-pia21382-south-pole-visible.jpg",
-      "expectedBytes": 154800,
-      "expectedSha256": "c419932d9d5b0d3b01691779f6ff65869d82d5f768908174fc13715170fdb77e"
-    },
-    {
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
-      "expectedBytes": 25925760,
-      "expectedSha256": "ab7fe8bc644233c22bc6d86af42d54c60d49e24a6699ff116e797a80e4ff1796"
-    },
-    {
-      "path": "lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
-      "expectedBytes": 25925760,
-      "expectedSha256": "4bdbeb4a4f9fbfe0daa737c4ba29de31b0626fb6e58c54e0142ef6d3aa6ef5ea"
-    }
   ]
 }

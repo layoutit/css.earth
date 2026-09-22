@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "8908711d5c8dcf07fe1724cfba74134c1e566611e46ad3f89f8189bdb7cdba56",
       "origin": "https://doi.org/10.1016/j.icarus.2019.03.013",
       "credit": "Kiss et al. (2019), thermophysical modeling with Hubble satellite-orbit constraints.",
       "license": "MIT numeric extraction of published scientific facts",

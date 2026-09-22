@@ -31,8 +31,6 @@
     {
       "id": "pck-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 13447,
-      "expectedSha256": "d9b3466827f7dd7ebe80fbc16885035f635257cadaaba8f6b43adc302732dc88",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
       "credit": "IAU/WGCCRE ellipsoid dimensions; cssEarth authored neutral model",
       "license": "MIT display representation from public NASA/NAIF scientific parameters",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 135,
-      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
       "credit": "IAU/WGCCRE ellipsoid dimensions; cssEarth standard no-coverage grid",
       "license": "MIT display representation from public NASA/NAIF scientific parameters",

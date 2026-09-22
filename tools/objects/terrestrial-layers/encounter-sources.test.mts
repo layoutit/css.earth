@@ -21,7 +21,7 @@ for(const body of ['comet-81p','comet-9p','comet-103p'])test(`${body}: real sour
   const decoded=decodeEncounterFits(bytes,control.observation);
   assert.equal(decoded.width,reference.width);assert.equal(decoded.height,reference.height);assert.equal(decoded.units,reference.units);
   for(const p of reference.anchors){const i=p.y*decoded.width+p.x;assert.equal(decoded.quality[i],p.quality);if(p.radiance===null)assert.ok(!Number.isFinite(decoded.values[i]));else assert.equal(decoded.values[i],p.radiance);}
-  const camera=encounterCamera(decoded.header,control.camera),report=validateEncounterControls(camera,control.registration,String(shape.expectedSha256));
+  const camera=encounterCamera(decoded.header,control.camera),report=validateEncounterControls(camera,control.registration);
   assert.ok(required(report.fit).count>=6&&required(report.holdout).count>=6);
  }
 });

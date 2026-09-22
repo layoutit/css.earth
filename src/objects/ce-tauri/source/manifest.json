@@ -890,8 +890,6 @@
     {
       "id": "ce-tauri-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1842,
-      "expectedSha256": "eeb7ed20e2528dfe83daa9f43c2328c7d001bf6275e6fc0fcf5ddc1a154b9642",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/126",
       "credit": "Burnashev (1985), Abastumani Astrophys. Obs. Bull. 59, 83; VizieR III/126 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -920,8 +918,6 @@
     {
       "id": "ce-tauri-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

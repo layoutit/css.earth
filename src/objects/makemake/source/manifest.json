@@ -3,8 +3,6 @@
   "inputs": [
     {
       "path": "measurements.json",
-      "expectedBytes": 916,
-      "expectedSha256": "6f90191be7ed33e7a2f5a84f5b1b9cb36ab971219c8831b2236af69b4f651dfa",
       "id": "nasa-makemake-size",
       "origin": "https://science.nasa.gov/dwarf-planets/makemake/",
       "credit": "NASA Science; rotation period Hromakina et al. (2019); projected size comparison Ortiz et al. (2012)",
@@ -58,8 +56,6 @@
     {
       "id": "makemake-disc-color",
       "path": "photometry/disc-color.json",
-      "expectedBytes": 1728,
-      "expectedSha256": "678b1a18faa3ff0e1440356ac08c6882fb4023ffd60139f6d7bbb83df5838cc2",
       "origin": "https://doi.org/10.1051/0004-6361/201935274",
       "credit": "Hromakina et al. (2019), A&A 625, A46; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
@@ -93,8 +89,6 @@
     {
       "id": "makemake-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -121,8 +115,6 @@
     {
       "id": "makemake-cie-std-illuminant-d65",
       "path": "reference/CIE_std_illum_D65.csv",
-      "expectedBytes": 6820,
-      "expectedSha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
       "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
       "license": "CC BY-SA 4.0",
@@ -149,8 +141,6 @@
     {
       "id": "makemake-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 5764,
-      "expectedSha256": "bb3cead01202fec51e67c135c2ee6c170de285ebace0e18701aefffac1d1ef1f",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",

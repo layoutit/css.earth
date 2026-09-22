@@ -31,8 +31,6 @@
     {
       "id": "karkoschka-belinda-prolate",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "57e10512cfd4c062ea672fdfa28e3ae0ca1a06c1862cd6e3545b49421f675c82",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
       "credit": "Karkoschka (2001), Table IV; French et al. (2024), Table 3; cssEarth analytic sampling",
       "license": "Factual measurements; MIT implementation",
@@ -66,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
       "credit": "cssEarth standard no-coverage visualization",
       "license": "MIT",
@@ -111,14 +107,10 @@
       }
     },
     {
-      "path": "kernels/naif0012.tls",
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "kernels/naif0012.tls"
     },
     {
-      "path": "kernels/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "kernels/pck00011.tpc"
     },
     {
       "path": "measurements.json"

@@ -76,8 +76,8 @@
   ],
   "id": "xanthippe",
   "displayName": "Xanthippe",
-  "lambda": 197.0,
-  "beta": 9.0,
+  "lambda": 197,
+  "beta": 9,
   "periodHours": 22.1157,
   "version": "2019-10-23",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53182/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53180/IAUspin",
-  "shapeSha256": "422ea5874855df00a405ee696a57cf05421b5b30f4118f016eed543675e3855a",
   "shapeBytes": 46419,
   "vertices": 574,
   "faces": 1144,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 3.974823464318576e-08
+    "minimumTriangleAreaSourceUnitsSquared": 3.974823464318576e-8
   },
   "anchors": [
     {

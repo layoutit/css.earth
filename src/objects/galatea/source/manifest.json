@@ -31,8 +31,6 @@
     {
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 67525,
-      "expectedSha256": "880268acd131560411d7771635192b22afd7e56396598a5f6543397d47479023",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
       "credit": "Karkoschka (2003); cssEarth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 135,
-      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
       "credit": "Karkoschka (2003); cssEarth standard no-coverage visualization",
       "license": "MIT display representation from published scientific dimensions",

@@ -1,5 +1,4 @@
 {
-  "sourceSha256": "b38955afe05b2e941d5d8306fc5b644e09f3b125fbb493c8d25326f5d5b81b7e",
   "method": "Existing independent NumPy plane/edge projection against every original source triangle; retained face centroids, source extrema and every multiple-ray source centroid.",
   "fullCheckCount": 811,
   "fullWithheldCount": 1,
@@ -51,7 +50,7 @@
         309.60266666666666
       ],
       "value": 0.09342630443489452,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 5224
     },
@@ -68,7 +67,7 @@
         282.63033333333334
       ],
       "value": 0.13238863799235745,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 5225
     },
@@ -85,7 +84,7 @@
         359.4286666666667
       ],
       "value": 0.03723012817499427,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 5296
     },
@@ -102,7 +101,7 @@
         -34.588
       ],
       "value": 0.28558009663888906,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 2591
     },
@@ -119,7 +118,7 @@
         54.217
       ],
       "value": 0.5173804303108587,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 2483
     },
@@ -136,7 +135,7 @@
         -105.99
       ],
       "value": 0.17908793006118362,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 2789
     },
@@ -153,7 +152,7 @@
         174.10500000000002
       ],
       "value": 0.11043022963741322,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 2015
     },
@@ -170,7 +169,7 @@
         -697.1270000000001
       ],
       "value": -0.01617729847391347,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 4730
     },
@@ -187,7 +186,7 @@
         739.178
       ],
       "value": 0.029374720854280056,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 355
     },

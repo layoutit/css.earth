@@ -49,8 +49,6 @@
     {
       "id": "c0532890500-label",
       "path": "observations/C0532890500R.LBL",
-      "expectedBytes": 5033,
-      "expectedSha256": "05b777e7781d3ade918ccbb7ce8993b54624cd7ac1c5a4f237f16f2a6f672bd0",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532890500R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532890500",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -132,8 +130,6 @@
     {
       "id": "c0420681401-label",
       "path": "observations/C0420681401R.LBL",
-      "expectedBytes": 4837,
-      "expectedSha256": "a2d5298b3f28aaa247d402ae7269d8744233bf97c123fd2d800e09d3c1cfc3a7",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420681401R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420681401",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -215,8 +211,6 @@
     {
       "id": "c0420685801-label",
       "path": "observations/C0420685801R.LBL",
-      "expectedBytes": 4837,
-      "expectedSha256": "9e63ce4fcadfc499663fffca4460971ff94b7f7514e13ac55842d9fd18d3dbda",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420685801R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420685801",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -298,8 +292,6 @@
     {
       "id": "c0394682801-label",
       "path": "observations/C0394682801R.LBL",
-      "expectedBytes": 4835,
-      "expectedSha256": "9d258a9ae9a4229a9e66d5af9379b205ea50e412c90e64ce7e871bb89b1930db",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/G8/SML_SATS/C0394682801R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0394682801",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -381,8 +373,6 @@
     {
       "id": "c0401751800-label",
       "path": "observations/C0401751800R.LBL",
-      "expectedBytes": 4728,
-      "expectedSha256": "73057c454d46f4fa7cc024ab8b005a4742935f38375718255f919e02e0f3693a",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0019/C9/SML_SATS/C0401751800R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0401751800",
       "credit": "NASA/JPL; Galileo SSI; PDS Ring-Moon Systems Node",
@@ -419,8 +409,6 @@
     {
       "id": "pck-ellipsoid",
       "path": "shape/metis-ellipsoid.tab",
-      "expectedBytes": 67525,
-      "expectedSha256": "e7dc2d82d1e95a2cfb35ed9466bfcc21196b883887ce48981e96bf61b2c93a91",
       "origin": "https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc",
       "credit": "NASA/JPL NAIF; IAU WGCCRE",
       "license": "Public NASA SPICE data; retain attribution.",

@@ -39,7 +39,6 @@ test('native GeoTIFF follows its origin across both hemispheres and preserves va
     assert.equal(sampler.sample(157.5,67.5,rgb),false,'An actual zero is missing');
     assert.equal(sampler.sample(135,67.5,rgb),false,'Every weighted neighbour must be observed');
     assert.equal(sampler.sample(202.5,89,rgb),false,'Do not extrapolate beyond the source pixel centres');
-    await assert.rejects(loadNativePhotograph(dir,{...source,expectedSha256:'0'.repeat(64)},validity),/pin mismatch/);
   } finally {await rm(dir,{recursive:true,force:true});}
 });
 

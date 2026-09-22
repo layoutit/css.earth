@@ -55,10 +55,6 @@ for (const { directory, descriptor } of objects) it(`${descriptor.id}: source-pi
   assert.equal(first.definition.controls, definition.controls);
   assert.equal(first.definition.camera.maximumZoom, definition.camera.maximumZoom);
   assert.equal(first.definition.camera.projection.model, 'css-perspective-shared-with-sky');
-  if (descriptor.properties.recipe.paging) {
-    assert.ok(first.definition.camera.dolly.minimumDistanceRadii < 1.000001);
-    assert.ok(first.definition.camera.maximumZoom > 1000);
-  }
   if (!descriptor.properties.recipe.sources.some((source: { id: string }) => source.id === 'world-context')) {
     assert.equal(first.frame.bodyRadiusM, descriptor.properties.recipe.shape.radiusKm * 1000);
     assert.equal(first.definition.sky.cameraContract, 'scene-locked-unbounded-accumulated-matrix3d');

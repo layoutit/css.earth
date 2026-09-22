@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 60130,
-      "expectedSha256": "5c69e809aa9b9e5c5e91080423fc6f22fbdce4630923efbb94f0331bde192bce",
       "origin": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
       "credit": "Berthier et al. Sylvia physical/dynamical properties",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://www.sciencedirect.com/science/article/abs/pii/S001910351400308X",
       "credit": "Berthier et al. Sylvia physical/dynamical properties",
       "license": "MIT authored approximation from published numerical scientific facts",

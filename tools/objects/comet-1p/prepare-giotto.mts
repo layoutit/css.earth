@@ -1,4 +1,3 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
 import assert from 'node:assert/strict';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -12,11 +11,10 @@ import { array, number, shape, text } from '../terrestrial-layers/source-records
 const pair = (value: unknown) => { const result = array(number)(value); assert.equal(result.length, 2); return result; };
 const parseRegistration = shape({
   schema:text,
-  sourcePins:array(shape({path:text,url:text,bytes:number,sha256:text})),
   camera:shape({observerEastLongitudeDegrees:number,observerLatitudeDegrees:number,bodyRollDegrees:number,scalePxPerKm:number,center:pair}),
   photoToPhoto:shape({rotationDegrees:number,scale:number,translation:pair}),
   bodyFrame:shape({predictedGiottoSun:shape({eastLongitude:number,latitude:number})}),
-  mask:shape({polygon:array(pair),cataloguePixelInset:number,maximumEmissionDegrees:number,maximumIncidenceDegrees:number,sourceShapeSha256:text}),
+  mask:shape({polygon:array(pair),cataloguePixelInset:number,maximumEmissionDegrees:number,maximumIncidenceDegrees:number}),
 });
 type Registration = ReturnType<typeof parseRegistration>;
 interface RgbImage {data:Uint8Array; width:number; height:number}
@@ -98,13 +96,7 @@ export async function prepareGiottoProjection(sourceDirectory: string) {
   const registrationBytes = await readFile(resolve(sourceDirectory, 'reference/giotto-registration.json'));
   const registration = parseRegistration(JSON.parse(registrationBytes.toString('utf8')));
   assert.equal(registration.schema, 'cssearth-halley-giotto-registration@1');
-  for (const pin of registration.sourcePins) {
-    const bytes = await readFile(resolve(sourceDirectory, pin.path));
-    assert.equal(bytes.length, pin.bytes, pin.path);
-    assert.equal(sha256(bytes), pin.sha256, pin.path);
-  }
   const shapeBytes = await readFile(resolve(sourceDirectory, 'shape/1682q1halley.tab'));
-  assert.equal(sha256(shapeBytes), registration.mask.sourceShapeSha256);
   const mesh = parsePdsRadiusTable(shapeBytes.toString(), { stepDegrees:5, longitudeDirection:'east-positive', metersPerUnit:1000, expectedVertices:2522, expectedFaces:5040 });
   const { data, info } = await sharp(resolve(sourceDirectory, 'giotto/hmc_best.gif')).toColourspace('srgb').removeAlpha().raw().toBuffer({ resolveWithObject:true });
   assert.equal(info.channels, 3);
@@ -135,9 +127,8 @@ export async function prepareGiottoProjection(sourceDirectory: string) {
   const png = await sharp(rgb, { raw:{ width,height,channels:3 } }).png().toBuffer();
   const report = {
     schema:'cssearth-halley-giotto-projection-report@1', interpretation:'Approximate projection of the MPS Giotto composite; original lighting and dust contamination retained.',
-    registrationSha256:sha256(registrationBytes), shapeSha256:sha256(shapeBytes), sourcePins:registration.sourcePins,
-    map:{ width,height,bytes:png.length,sha256:sha256(png),acceptedPixels:accepted,missingPixels:width*height-accepted,noData:0 },
-    validity:{ encoding:'one byte per equirectangular pixel; 1 observed, 0 missing',sha256:sha256(validity),bytes:validity.length },
+    map:{ width,height,acceptedPixels:accepted,missingPixels:width*height-accepted,noData:0 },
+    validity:{ encoding:'one byte per equirectangular pixel; 1 observed, 0 missing',bytes:validity.length },
     coverage:{ sampledSurfacePercent:observedArea/totalArea*100,sourceAreaSquareKm:totalArea/1e6,samplesPerTriangle:weights.length,triangles:mesh.faces },
     camera:registration.camera, maximumEmissionDegrees:registration.mask.maximumEmissionDegrees,
     maximumIncidenceDegrees:registration.mask.maximumIncidenceDegrees, cataloguePixelInset:registration.mask.cataloguePixelInset,

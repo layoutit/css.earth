@@ -170,8 +170,6 @@
     {
       "id": "usgs-gazetteer-mathilde-nomenclature-center-pts",
       "path": "features/MATHILDE_nomenclature_center_pts.zip",
-      "expectedBytes": 97468,
-      "expectedSha256": "d042bf056ae40cd5a3f0c846412ba7a42c48b0bb1aa9893473b267b80be47bc2",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MATHILDE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -300,8 +298,6 @@
     {
       "id": "mathilde-near-msi-42826360-label",
       "path": "observations/near-msi/m0042826360f0_2p_iof.xml",
-      "expectedBytes": 15271,
-      "expectedSha256": "399ced8980cad90e87bb692aedeac32759d8a1ebea5c9ba4ece579d7d467d52d",
       "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826360f0_2p_iof.xml",
       "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
       "license": "Public mission scientific data; retain source labels and attribution.",
@@ -382,8 +378,6 @@
     {
       "id": "mathilde-near-msi-42826370-label",
       "path": "observations/near-msi/m0042826370f0_2p_iof.xml",
-      "expectedBytes": 15269,
-      "expectedSha256": "ce4333af158ac7c3bcc7574ceadd69107e9e9f224b1b5ceb830e5fb0ed96c877",
       "origin": "https://sbnarchive.psi.edu/pds4/near/near.msi_v1.0/data_calibrated/mathilde/1997/178/iof/m0042826370f0_2p_iof.xml",
       "credit": "NASA/JHUAPL/NEAR MSI team; NASA PDS Small Bodies Node",
       "license": "Public mission scientific data; retain source labels and attribution.",
@@ -477,8 +471,6 @@
     },
     {
       "path": "reference/253mathimg.xml",
-      "expectedBytes": 9040,
-      "expectedSha256": "a23e17406a9bdc3221cd5ac678432242ba13ea4fea03a98e5fb66afd61b12995",
       "id": "mathilde-near-msi-253mathimg-xml",
       "consumers": [
         "near-msi-camera"
@@ -501,8 +493,6 @@
     },
     {
       "path": "reference/stooke-253mathilde.xml",
-      "expectedBytes": 8533,
-      "expectedSha256": "1490838df80d8b5c21f985d459d13b7dacde9f7934044db6d696303c2297ab14",
       "id": "mathilde-near-msi-stooke-253mathilde-xml",
       "consumers": [
         "near-msi-camera"
@@ -598,9 +588,7 @@
       "path": "reference/horizons-physical.txt"
     },
     {
-      "path": "reference/matcyl2.jpg",
-      "expectedBytes": 625699,
-      "expectedSha256": "962f006af83d8c7da373baea829b6e4c4bce843b2778c61fb58b2eb05caac4f5"
+      "path": "reference/matcyl2.jpg"
     },
     {
       "path": "reference/stooke-bundle-description.txt"

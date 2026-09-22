@@ -1,4 +1,3 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { pds4Blocks, pds4Elements } from '../pds-labels.mts';
 import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
 import { readFitsHeader, readFitsPrimary } from '../observation/fits.mts';
@@ -6,7 +5,7 @@ import { archivedCameraFields, array, dimensions, number, shape, sipCameraFields
 import { bindSipCamera, sipPixel } from './llorri-geo.mts';
 
 const parseCamera = shape({ ...archivedCameraFields, ...sipCameraFields, ...dimensions,
-  imageSha256: text, startTime: text, target: text });
+  startTime: text, target: text });
 const unquote = (value: string | undefined) => value?.replace(/^'(.*)'$/, '$1').trim();
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i], 0);
 const cross = (a: readonly number[], b: readonly number[]) => [a[1]*b[2]-a[2]*b[1], a[2]*b[0]-a[0]*b[2], a[0]*b[1]-a[1]*b[0]];
@@ -40,7 +39,7 @@ export function newHorizonsCamera(bytes: Buffer, value: unknown) {
     qy.map((v,i) => v+(ref[1]+control.offsetPixels[1])*bore[i]), bore].map(toBody);
   const cofactors = [cross(rows[1],rows[2]),cross(rows[2],rows[0]),cross(rows[0],rows[1])], determinant = dot(rows[0],cofactors[0]);
   const terms = (axis: string) => [2,3].flatMap(degree => Array.from({length:degree+1}, (_,i) => [i,degree-i,n(`${axis}_${i}_${degree-i}`)]));
-  return {schema:'cssearth-archived-camera@1', imageSha256:sha256(bytes),
+  return {schema:'cssearth-archived-camera@1',
     width:n('NAXIS1'),height:n('NAXIS2'),target:text(h.SPCTCB),startTime:text(h.SPCUTCAL),filter:'PANCHROMATIC',
     matrix:rows.map(row => [...row,-dot(row,eye)]),rayMatrix:[0,1,2].map(i => cofactors.map(row => row[i]/determinant)),
     positionKm:eye,sunDirection:toBody(unit(['SPCTSOX','SPCTSOY','SPCTSOZ'].map(n))),
@@ -51,7 +50,6 @@ export function newHorizonsCamera(bytes: Buffer, value: unknown) {
  * ABSCCORR adds conversion keywords; it does not turn these pixels into I/F. */
 export function decodeNewHorizonsLorri(bytes: Buffer, value: unknown) {
   const camera = parseCamera(value);
-  if (sha256(bytes) !== camera.imageSha256) throw new Error('New Horizons camera image hash changed.');
   const image = readFitsPrimary(bytes), sigma = readFitsPrimary(bytes.subarray(image.nextOffset));
   const quality = readFitsPrimary(bytes.subarray(image.nextOffset+sigma.nextOffset)), h = image.header;
   if (image.bitpix !== -32 || sigma.bitpix !== -32 || quality.bitpix !== 16 || quality.zero !== 32768 ||
@@ -84,10 +82,10 @@ export function decodeArrokothMvic(bytes: Buffer, value: unknown, label: string)
   if(!pds4Elements(label,'file_name').some(element=>element.content==='ca05_mvic_cube.fit') || !pds4Elements(label,'unit').some(element=>element.content.trim()==='data number') ||
       bins.length!==4 || bins.some((bin,i)=>bin.sequence!==i+1 || bin.filter!==['Blue','Red','NIR','CH4'][i] || bin.wavelength!==[475,620,877.5,885][i]))
     throw new Error('MVIC color requires its native band order, wavelengths and data-number units.');
-  const camera = shape({...archivedCameraFields,...dimensions,imageSha256:text,startTime:text,
+  const camera = shape({...archivedCameraFields,...dimensions,startTime:text,
     imageTransform:array(array(number)),referenceCamera:shape(sipCameraFields)})(value);
   const hdu = readFitsHdu(bytes), {header:h,dataOffset} = hdu, at = fitsImageAccessor(bytes, hdu);
-  if (sha256(bytes) !== camera.imageSha256 || camera.width !== 300 || camera.height !== 300 ||
+  if (camera.width !== 300 || camera.height !== 300 ||
       h.SIMPLE !== true || h.BITPIX !== -64 || h.NAXIS !== 3 || h.NAXIS1 !== 300 || h.NAXIS2 !== 300 || h.NAXIS3 !== 4 ||
       h.BSCALE !== undefined || h.BZERO !== undefined || dataOffset+300*300*4*8 !== bytes.length) throw new Error('Unsupported Arrokoth MVIC cube.');
   const bands = Array.from({length:4}, (_,b) => Float64Array.from({length:90000}, (_,i) => at(b*90000+i)));

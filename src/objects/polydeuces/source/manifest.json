@@ -31,8 +31,6 @@
     {
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "529125f91d71589dda0a4ae68991fc1dace4448dd3bf768bcb13015d19fd053b",
       "origin": "https://arxiv.org/abs/1912.09192",
       "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
       "license": "MIT display representation from published scientific dimensions",
@@ -112,8 +110,6 @@
     {
       "id": "cassini-n1527002576-label",
       "path": "observations/N1527002576_1_CALIB.LBL",
-      "expectedBytes": 3858,
-      "expectedSha256": "e97f2e076e4d3e41d9197c51ad4c52ad08f18165d2185404440a5e30914e5555",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2023/data/1526963400_1527153972/N1527002576_1_CALIB.LBL",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
       "license": "NASA/PDS scientific data",
@@ -173,9 +169,7 @@
       "expectedSha256": "5052d1c5f20c840e61f94c751f2969415edcee28283f2ce11acd7ef4bb5c1f00"
     },
     {
-      "path": "observations/N1527002576_1.LBL",
-      "expectedBytes": 3667,
-      "expectedSha256": "0de76b3cd905ea76c8100273e8845f8db7313d91c92431e405ad57b21660349d"
+      "path": "observations/N1527002576_1.LBL"
     },
     {
       "path": "preparation/acquisition.json"

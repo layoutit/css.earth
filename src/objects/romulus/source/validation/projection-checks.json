@@ -28,11 +28,7 @@
         "differenceMagnitudeMas": 60.285211145778106,
         "skyPlaneDifferenceKm": 105.54826223231301,
         "projectionPositionAngleDifferenceDegrees": -8.465361131481927,
-        "miriadeUncertaintyAvailable": false,
-        "sourcePins": [
-          "miriade2018",
-          "geocentric2018"
-        ]
+        "miriadeUncertaintyAvailable": false
       },
       {
         "label": "2018",
@@ -55,11 +51,7 @@
         "differenceMagnitudeMas": 23.46220402986625,
         "skyPlaneDifferenceKm": 41.03896609571223,
         "projectionPositionAngleDifferenceDegrees": -1.6279865551974524,
-        "miriadeUncertaintyAvailable": false,
-        "sourcePins": [
-          "miriade2018",
-          "geocentric2018"
-        ]
+        "miriadeUncertaintyAvailable": false
       },
       {
         "label": "2018",
@@ -82,11 +74,7 @@
         "differenceMagnitudeMas": 62.89019101858323,
         "skyPlaneDifferenceKm": 109.91338155835678,
         "projectionPositionAngleDifferenceDegrees": -13.847674445033476,
-        "miriadeUncertaintyAvailable": false,
-        "sourcePins": [
-          "miriade2018",
-          "geocentric2018"
-        ]
+        "miriadeUncertaintyAvailable": false
       },
       {
         "label": "2026",
@@ -109,11 +97,7 @@
         "differenceMagnitudeMas": 42.24865212115579,
         "skyPlaneDifferenceKm": 140.46489586095691,
         "projectionPositionAngleDifferenceDegrees": -4.698901610897309,
-        "miriadeUncertaintyAvailable": false,
-        "sourcePins": [
-          "miriade2026",
-          "geocentric2026"
-        ]
+        "miriadeUncertaintyAvailable": false
       },
       {
         "label": "2026",
@@ -136,11 +120,7 @@
         "differenceMagnitudeMas": 48.171040345932866,
         "skyPlaneDifferenceKm": 159.9125767990217,
         "projectionPositionAngleDifferenceDegrees": -5.636304776926664,
-        "miriadeUncertaintyAvailable": false,
-        "sourcePins": [
-          "miriade2026",
-          "geocentric2026"
-        ]
+        "miriadeUncertaintyAvailable": false
       },
       {
         "label": "2026",
@@ -163,11 +143,7 @@
         "differenceMagnitudeMas": 53.34231109546691,
         "skyPlaneDifferenceKm": 176.80490926748044,
         "projectionPositionAngleDifferenceDegrees": -7.422898542697709,
-        "miriadeUncertaintyAvailable": false,
-        "sourcePins": [
-          "miriade2026",
-          "geocentric2026"
-        ]
+        "miriadeUncertaintyAvailable": false
       }
     ],
     "maxDifferenceMas": 62.89019101858323,
@@ -181,7 +157,7 @@
           "jdUtc": 2452401.900722454,
           "observedMas": [
             -595.9,
-            -1.0
+            -1
           ],
           "reportedObservedMinusComputedMas": [
             -1.7,
@@ -217,7 +193,7 @@
           "ttMinusUtcSeconds": 64.184,
           "geocentricLightTimeDays": 0.01410548495471672,
           "reportedModelPositionMas": [
-            -4.0,
+            -4,
             -254.39999999999998
           ],
           "publishedPrintedElementsPositionMas": [
@@ -232,7 +208,7 @@
           "sourceRow": "2010-08-15 08:37:36.90 Gemini NIRI   Kp  684.0 -289.9  16.8  -8.1 21.9  5.8 0.00",
           "jdUtc": 2455423.859454861,
           "observedMas": [
-            684.0,
+            684,
             -289.9
           ],
           "reportedObservedMinusComputedMas": [
@@ -258,19 +234,19 @@
           "sourceRow": "2011-12-16 04:30:16.20 Keck   NIRC2  H   396.0  -38.2  20.0  -0.2 10.0  6.2 0.10",
           "jdUtc": 2455911.6876875,
           "observedMas": [
-            396.0,
+            396,
             -38.2
           ],
           "reportedObservedMinusComputedMas": [
-            20.0,
+            20,
             -0.2
           ],
           "epochJdTt": 2455911.6884535183,
           "ttMinusUtcSeconds": 66.184,
           "geocentricLightTimeDays": 0.01634371965540465,
           "reportedModelPositionMas": [
-            376.0,
-            -38.0
+            376,
+            -38
           ],
           "publishedPrintedElementsPositionMas": [
             369.10895967841697,

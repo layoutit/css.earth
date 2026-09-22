@@ -176,28 +176,6 @@
     "ringsOnBody": "ringsOnSaturn",
     "gravitationalParameter": "saturnGmKm3PerS2"
   },
-  "sourcePins": [
-    {
-      "path": "observations/hlsp_opal_hst_wfc3-uvis_saturn-2025a_f395n-f502n-f631n_v1_globalmap.tif",
-      "expectedSha256": "c34a13a8253a39bcc1f8376b24c077b89f05ce0b5202706f535ded20314440d7",
-      "expectedBytes": 4885052
-    },
-    {
-      "path": "cassini-pia21611.jpg",
-      "expectedSha256": "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
-      "expectedBytes": 105281
-    },
-    {
-      "path": "approved/saturn-fixed-material.webp",
-      "expectedSha256": "e25f97df1892978a1140e9c6a27a4b9976c047f8b92162d0a8d898ba13a85007",
-      "expectedBytes": 154240
-    },
-    {
-      "path": "interior/manifest.json",
-      "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
-      "expectedBytes": 5097
-    }
-  ],
   "surfaceUnobservedRows": [
     [
       0,

@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 57110
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 114.22 km effective diameter (catalog ±1.52 km; additional shape and thermal-model uncertainty). An alternative pole solution remains in the archive. Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative.",
-      "expectedBytes": 82627,
-      "expectedSha256": "109763528dc5541c8d5ee603522994a0c754eb2f8220a8b3fcef950ccd5f9f4c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

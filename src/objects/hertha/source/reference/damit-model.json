@@ -82,14 +82,14 @@
   ],
   "id": "hertha",
   "displayName": "Hertha",
-  "lambda": 276.0,
-  "beta": 53.0,
+  "lambda": 276,
+  "beta": 53,
   "periodHours": 8.4006,
   "version": "2017-06-14",
   "nonconvex": true,
   "calibrated": true,
-  "diameterKm": 79.0,
-  "uncertaintyKm": 2.0,
+  "diameterKm": 79,
+  "uncertaintyKm": 2,
   "akari": {
     "number": 135,
     "name": "Hertha",
@@ -100,7 +100,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/427/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/425/IAUspin.txt",
-  "shapeSha256": "78a7b01400fb50944ee01a4cfcd1a7c3b4b12ecbc7b83861081a49aebb565a6c",
   "shapeBytes": 32486,
   "vertices": 402,
   "faces": 800,
@@ -145,9 +144,9 @@
   },
   "declaredDiameterComparison": {
     "sourceVolumeEquivalentDiameter": 79.12225461678173,
-    "declaredDiameterKm": 79.0,
+    "declaredDiameterKm": 79,
     "relativeDifference": 0.0015475267947053784,
-    "scaledDiameterKm": 79.0
+    "scaledDiameterKm": 79
   },
   "alternatives": [
     {
@@ -266,8 +265,8 @@
   ],
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
-    "diameterKm": 79.0,
-    "uncertaintyKm": 2.0,
+    "diameterKm": 79,
+    "uncertaintyKm": 2,
     "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
     "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/1799",

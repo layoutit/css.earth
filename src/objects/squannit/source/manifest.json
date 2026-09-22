@@ -64,8 +64,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://echo.jpl.nasa.gov/asteroids/shapes/kw4b.obj",
       "credit": "Ostro et al.(2006), JPL radar team; original1999 KW4 Beta model",
       "license": "MIT authored approximation from published numerical scientific facts",

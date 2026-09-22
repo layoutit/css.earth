@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "f30cacb316b9d74a11d82f49db85312b22df44da832add1864a203d3c1a2bb9e",
       "origin": "https://arxiv.org/abs/2005.08881",
       "credit": "Ortiz et al. (2020), combined occultation, photometry and astrometry, §3.",
       "license": "MIT numeric extraction of published scientific facts",

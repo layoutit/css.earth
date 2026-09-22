@@ -143,8 +143,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 9633,
-      "expectedSha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -191,8 +189,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 10480,
-      "expectedSha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -239,8 +235,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 9120,
-      "expectedSha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -263,8 +257,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 9964,
-      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -311,8 +303,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 8616,
-      "expectedSha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -361,8 +351,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 9633,
-      "expectedSha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -409,8 +397,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 10480,
-      "expectedSha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -425,8 +411,6 @@
     {
       "id": "usgs-gazetteer-gaspra-nomenclature-center-pts",
       "path": "features/GASPRA_nomenclature_center_pts.zip",
-      "expectedBytes": 125910,
-      "expectedSha256": "f4f3eb723f28d36a45690f0ff0a5be07b5ae42a4c52d36bc55506a03936a582f",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/GASPRA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

@@ -39,7 +39,6 @@
     {
       "id": "cassini-pia21611-polar-map",
       "path": "cassini-pia21611.jpg",
-      "expectedSha256": "2e9765b2ffada33d74bfbe0443ea0bbf59bb15f27a128b7ba99160fdeb78f177",
       "origin": "https://science.nasa.gov/photojournal/saturns-hexagon-as-summer-solstice-approaches/",
       "credit": "NASA/JPL-Caltech/Space Science Institute/Hampton University",
       "license": "NASA and JPL public media reuse policies; the source page carries no separate copyright restriction",
@@ -53,7 +52,6 @@
       "consumers": [
         "scene"
       ],
-      "expectedBytes": 105281,
       "capture": {
         "attributions": [
           {
@@ -94,7 +92,6 @@
     {
       "id": "nasa-psg-saturn-expanded-configuration",
       "path": "atmosphere/psg-saturn-20260829.cfg",
-      "expectedSha256": "93165938d49f7682b5b9bf9b23537a1ed3a0c3f91fc6cec4f4af9e2274d9682e",
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/29 12:00, OBJECT-NAME=Saturn",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
@@ -104,7 +101,6 @@
         "spectrum",
         "temperature-pressure-profile"
       ],
-      "expectedBytes": 8260,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -119,7 +115,6 @@
     {
       "id": "nasa-psg-saturn-r240-rif-response",
       "path": "atmosphere/psg-saturn-r240-rif.txt",
-      "expectedSha256": "7908cd301b19cbeba2e08a29457f621296860b29ea5f021dea4dea2041fbf1b6",
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned expanded configuration, 0.35 to 1.0 um, R=240, rif",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
@@ -128,7 +123,6 @@
       "consumers": [
         "spectrum"
       ],
-      "expectedBytes": 11913,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -159,7 +153,6 @@
     {
       "id": "saturn-moon-catalog",
       "path": "moons/saturn-moons.json",
-      "expectedSha256": "5dcb5b297e06026d3b150de94484274cd5a34e4e10dfdcdb97e74664d3eb56c5",
       "origin": "normalized facts from JPL Solar System Dynamics discovery and mean-elements tables plus one orbital radius from MPC MPEC 2026-M19; only source URLs and hashes are retained",
       "credit": "NASA/JPL Solar System Dynamics and the Minor Planet Center",
       "license": "NASA/JPL United States government data; the MPC circular is cited but not redistributed",
@@ -173,7 +166,6 @@
       "consumers": [
         "moons"
       ],
-      "expectedBytes": 226054,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -382,8 +374,6 @@
     {
       "id": "saturn-authored-editorial-object",
       "path": "editorial/object.json",
-      "expectedBytes": 8643,
-      "expectedSha256": "f8edb3a3a3f5d88b9865fa526080baed5fe5260bedd8f491dca084646404fe29",
       "origin": "https://science.nasa.gov/saturn/facts/",
       "credit": "NASA Science",
       "license": "NASA content usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/",
@@ -586,8 +576,6 @@
     {
       "id": "cassini-uvis-alpvir-2006-285-occultation-label",
       "path": "rings/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
-      "expectedSha256": "64858a36470a3d52df1056bb07df5f5aa4396b78924fa07c9861c9a67500b49c",
-      "expectedBytes": 12013,
       "origin": "https://pds-rings.seti.org/holdings/volumes/COUVIS_8xxx/COUVIS_8001/data/UVIS_HSP_2006_285_ALPVIR_I_TAU01KM.LBL",
       "credit": "Colwell, J.E., R.G. Jerousek, T.M. Becker and L.W. Esposito; Cassini UVIS; NASA Planetary Data System, Ring-Moon Systems Node",
       "license": "NASA PDS archive data, CO-SR-UVIS-HSP-2/4-OCC-V3.0; not copyrighted, cite the data set",
@@ -622,9 +610,7 @@
   "generatedIntermediates": [
     {
       "path": "lenses/manifest.json",
-      "expectedSha256": "4fe757b1e66df8328b15951f8488accac0717f0208da155a2b05cbc2365a3403",
-      "generator": "tools/objects/operations-acquisition.ts json-document operation in preparation/acquisition.json",
-      "expectedBytes": 2316
+      "generator": "tools/objects/operations-acquisition.ts json-document operation in preparation/acquisition.json"
     }
   ],
   "documents": [

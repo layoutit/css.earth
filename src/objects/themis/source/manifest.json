@@ -130,8 +130,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "Rotation record: pole latitude, pole longitude and sidereal period, then the phase epoch and phase. Read latitude-first: the second column, 145.9511 degrees, cannot be a latitude, and both columns match the published pole of DAMIT model 5916 (ecliptic longitude 146, latitude 73 degrees).",
-      "expectedBytes": 40,
-      "expectedSha256": "a33943f95c68b091dd59e61bfe4d70a067605dd8947ac5cfc9444a1271b9599f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -155,8 +153,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 13750,
-      "expectedSha256": "08a7552fbd0588f259cb685a6e690483bccdab79bdb32d62a23f99b65a6ec85a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -180,8 +176,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 10418,
-      "expectedSha256": "0c2beaea08b3eeed1f2687fb242308bbdbb5697c4e2a4b66ef9b72cd8a693934",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

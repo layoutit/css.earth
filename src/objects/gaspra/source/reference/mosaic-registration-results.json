@@ -101,56 +101,43 @@
   ],
   "provenance": [
     {
-      "path": "observations/107318313rcal_clr.fit",
-      "sha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e"
+      "path": "observations/107318313rcal_clr.fit"
     },
     {
-      "path": "observations/107318313rcal_clr.xml",
-      "sha256": "cd2bf7b4bee1f6e2896082dfb78eabe574d62b6880d3fef2d8ec85dd3647c59b"
+      "path": "observations/107318313rcal_clr.xml"
     },
     {
-      "path": "observations/e8313.fit",
-      "sha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00"
+      "path": "observations/e8313.fit"
     },
     {
-      "path": "observations/e8313.lbl",
-      "sha256": "f411a08eb9d4a918e4f9feb6a5929366ffd51cee0654c5de3ccc61be184bf9f3"
+      "path": "observations/e8313.lbl"
     },
     {
-      "path": "observations/gaspbad.tab",
-      "sha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654"
+      "path": "observations/gaspbad.tab"
     },
     {
-      "path": "observations/gaspbad.lbl",
-      "sha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9"
+      "path": "observations/gaspbad.lbl"
     },
     {
-      "path": "reference/951gaspimg.tab",
-      "sha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6"
+      "path": "reference/951gaspimg.tab"
     },
     {
-      "path": "reference/951gaspimg.xml",
-      "sha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee"
+      "path": "reference/951gaspimg.xml"
     },
     {
-      "path": "reference/gll36001.ti",
-      "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+      "path": "reference/gll36001.ti"
     },
     {
-      "path": "shape/951gaspra.tab",
-      "sha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0"
+      "path": "shape/951gaspra.tab"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "sha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "reference/registration-107318313.json",
-      "sha256": "06cc9dffa163a79f446e48e913b6d56baa9388c55e4358e1ea45dce3c5f88d02"
+      "path": "reference/registration-107318313.json"
     },
     {
-      "path": "maps/951gaspram.fit",
-      "sha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1"
+      "path": "maps/951gaspram.fit"
     }
   ]
 }

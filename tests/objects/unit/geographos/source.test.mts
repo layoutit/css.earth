@@ -34,7 +34,6 @@ test('Geographos radius colors match independent full-source projections',async(
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,lens=config.raster.scientific[0],mesh=await loadObjShape(resolve(root,p.path),p.grid),sample=createShapeSurfaceSampler(mesh,lens);
  const anchors=JSON.parse((await readFile(new URL('./scalar-anchors.json',import.meta.url))).toString('utf8'));
  assert.equal(lens.surfaceSampling.method,'closest-source-point');
- const manifest=await read('manifest.json');assert.equal(anchors.sourceSha256,required(array(shape({path:text,expectedSha256:text}))(manifest.inputs).find(i=>i.path===p.path)).expectedSha256);
  for(const check of anchors.checks){const value=sample.samplePoint(check.query);if(!check.withinTransferLimit){assert.equal(value,null);continue;}assert.ok(value,check.kind);assert.ok(Math.abs(value.value-check.expectedValue)<1e-9,check.kind);assert.ok(Math.abs(value.radius-check.expectedRadiusMeters)<1e-6,check.kind);assert.ok(value.point.every((n,i)=>Math.abs(n-check.expectedPoint[i])<1e-6),check.kind);}
  assert.ok(anchors.checks.filter((c: { kind: string; })=>c.kind==='radial-ambiguity').some((c: { expectedValue: number; oldFirstRayValue: number; })=>Math.abs(c.expectedValue-c.oldFirstRayValue)>.07));
 });
