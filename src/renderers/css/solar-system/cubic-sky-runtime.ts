@@ -16,19 +16,19 @@ export function mountRetainedCubicSky({
     throw new TypeError("Retained cubic sky mount arguments are invalid.");
   }
   const root = document.createElement("div");
-  root.className = `planet-cubic-sky ${objectId}-skybox`;
+  root.className = `object-cubic-sky ${objectId}-skybox`;
   root.ariaHidden = "true";
   if (plan.projection?.cssPerspective) {
     root.style.setProperty(
-      "--planet-cubic-sky-camera-distance",
+      "--object-cubic-sky-camera-distance",
       plan.projection.cssPerspective,
     );
   }
   const cube = document.createElement("div");
-  cube.className = `planet-cubic-sky-cube ${objectId}-skybox-cube`;
+  cube.className = `object-cubic-sky-cube ${objectId}-skybox-cube`;
   const orientation = document.createElement("div");
   orientation.className =
-    `planet-cubic-sky-orientation ${objectId}-skybox-orientation`;
+    `object-cubic-sky-orientation ${objectId}-skybox-orientation`;
   cube.appendChild(orientation);
   root.appendChild(cube);
   host.prepend(root);
@@ -50,7 +50,7 @@ export function mountRetainedCubicSky({
       const zoomScale = 1 + plan.cameraZoomResponse *
         (zoom / defaultZoom - 1);
       if (zoomScale !== publishedZoomScale) {
-        root.style.setProperty("--planet-cubic-sky-zoom", String(zoomScale));
+        root.style.setProperty("--object-cubic-sky-zoom", String(zoomScale));
         publishedZoomScale = zoomScale;
       }
     },

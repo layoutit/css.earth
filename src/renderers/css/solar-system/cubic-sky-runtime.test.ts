@@ -21,16 +21,16 @@ test('an object sky keeps retained orientation handles and draws no sky images o
   const sky = mountRetainedCubicSky({ host: host as unknown as HTMLElement, plan, objectId: 'mercury' });
   const node = (element: HTMLElement) => element as unknown as Element;
   expect(host.children).toEqual([sky.root]);
-  expect(sky.root.className).toBe('planet-cubic-sky mercury-skybox');
+  expect(sky.root.className).toBe('object-cubic-sky mercury-skybox');
   expect(node(sky.root).children).toEqual([sky.cube]);
   expect(node(sky.cube).children).toEqual([sky.orientation]);
   expect(node(sky.orientation).children).toEqual([]);
-  expect(properties(sky.root.style)).toEqual({ '--planet-cubic-sky-camera-distance': plan.projection?.cssPerspective });
+  expect(properties(sky.root.style)).toEqual({ '--object-cubic-sky-camera-distance': plan.projection?.cssPerspective });
   for (const zoom of [1, .5, 3]) {
     const view = { matrix: `rotateY(${zoom * 30}deg)`, zoom, defaultZoom: 1 };
     sky.setOrientation(view);
     expect(sky.orientation.style).toMatchObject({ transform: view.matrix });
-    expect(sky.root.style).toMatchObject({ '--planet-cubic-sky-zoom': String(1 + plan.cameraZoomResponse * (zoom - 1)) });
+    expect(sky.root.style).toMatchObject({ '--object-cubic-sky-zoom': String(1 + plan.cameraZoomResponse * (zoom - 1)) });
   }
   expect(() => sky.setOrientation({ matrix: 'none', zoom: Number.NaN, defaultZoom: 1 })).toThrow(TypeError);
   sky.destroy();

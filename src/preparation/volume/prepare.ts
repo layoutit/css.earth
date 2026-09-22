@@ -48,7 +48,7 @@ export async function prepareDensityVolumeObject(options: { objectDirectory: str
   }
   await retireVolumeTextures(outputDirectory, previousTextures, slices.quads.map(quad => quad.texturePath));
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
-    await inventoryPreparedAssets({ planetId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
+    await inventoryPreparedAssets({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   const decodedBytes = data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0);
   console.log(`PREPARED ${descriptor.id}: ${slices.quads.length} PolyCSS leaves; ${decodedBytes} decoded RGBA bytes; ${outputPath}`);

@@ -1,5 +1,5 @@
 ---
-import type { Props as ShellProps } from '../planet-shell-types';
+import type { Props as ShellProps } from '../object-shell-types';
 import DatasetLegend from './DatasetLegend.astro';
 import DatasetDescription from './DatasetDescription.astro';
 import { sidebarThumbnail } from '../sidebar-thumbnails.mts';
@@ -23,16 +23,16 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
   return JSON.stringify(lender.legend) === JSON.stringify(lens.legend) ? undefined : lender;
 };
 ---
-<section id={`${objectId}-lenses`} class="planet-lenses">
+<section id={`${objectId}-lenses`} class="object-lenses">
   <form id={`${objectId}-datasets`} action={route} method="get" data-dataset-form data-focus-form={focus || undefined} hidden>
     {['v', 'overview', 'focus', focus ? 'dataset' : 'focusLens', 'feature'].map(name => <input type="hidden" name={name} data-view-context disabled />)}
   </form>
-  <div id={`${objectId}-layers-menu`} class="planet-layers-menu">
-    <nav class="planet-observation-controls" aria-label="Datasets">
+  <div id={`${objectId}-layers-menu`} class="object-layers-menu">
+    <nav class="object-observation-controls" aria-label="Datasets">
       {lenses.controls.map((lens) => (
-        <div class="planet-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}>
+        <div class="object-observation-option" data-lens-option data-lens-volume={lens.volume ? lens.id : undefined}>
           <button
-            class="planet-observation-control planet-thumbnail-leading"
+            class="object-observation-control object-thumbnail-leading"
             type="submit"
             form={`${objectId}-datasets`}
             name={controlName}
@@ -42,9 +42,9 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
             aria-controls={`${objectId}-${lens.id}-details`}
             title={lens.title}
           >
-            <img class="planet-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" />
-            <span class="planet-lens-label">{lens.label}</span>
-            {lens.detail && <span class="planet-lens-detail">{lens.detail}</span>}
+            <img class="object-lens-icon" src={sidebarThumbnail(thumbnailObjectId, lens.id)?.url2x ?? lens.thumbnailUrl} width="14" height="14" alt="" />
+            <span class="object-lens-label">{lens.label}</span>
+            {lens.detail && <span class="object-lens-detail">{lens.detail}</span>}
           </button>
         </div>
       ))}
@@ -53,9 +53,9 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
 </section>
 <section
   id={`${objectId}-surface-lens`}
-  class="planet-lens-details"
+  class="object-lens-details"
 >
-  <div class="planet-lens-details-body" aria-live="polite" aria-atomic="true">
+  <div class="object-lens-details-body" aria-live="polite" aria-atomic="true">
     {lenses.controls.map((lens) => (
       <div
         id={`${objectId}-${lens.id}-details`}
@@ -66,14 +66,14 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
       >
         <DatasetDescription {lens}>
           {lens.texture && <div
-            class="planet-surface-minimap"
+            class="object-surface-minimap"
             data-surface-minimap={lens.texture.minimap ? JSON.stringify(lens.texture.minimap) : undefined}
             role={lens.texture.minimap ? "group" : undefined}
             tabindex={lens.texture.minimap ? 0 : undefined}
             aria-label={lens.texture.minimap ? `${lens.label} surface map. Drag or use arrow keys to look around; scroll or use plus and minus to zoom.` : undefined}
           >
             <img
-              class="planet-lens-texture"
+              class="object-lens-texture"
               src={lens.texture.url}
               data-surface-preview-src={lens.texture.url}
               width={lens.texture.width}
@@ -85,7 +85,7 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
             />
             {lens.texture.minimap && <>
               {[-1, 0, 1].map(() => <span
-                class="planet-minimap-viewport"
+                class="object-minimap-viewport"
                 aria-hidden="true"
                 hidden
               ></span>)}
@@ -94,12 +94,12 @@ const borrowedLegend = (lens: NonNullable<ShellProps['lenses']>['controls'][numb
           {borrowedLegend(lens) && <DatasetLegend {objectId} lens={borrowedLegend(lens)!} owner={lens.id} />}
           <DatasetLegend {objectId} {lens} />
         </DatasetDescription>
-        {!focus && lens.facts && lens.facts.length > 0 && <details class="planet-lens-facts">
+        {!focus && lens.facts && lens.facts.length > 0 && <details class="object-lens-facts">
           <summary>Dataset details</summary>
-          <ul class="planet-facts" aria-label={`${lens.label} facts`}>
+          <ul class="object-facts" aria-label={`${lens.label} facts`}>
             {lens.facts.map((fact) => <li>
-              <span class="planet-fact-label">{fact.label}</span>{" "}
-              <span class="planet-fact-value">{fact.value}</span>
+              <span class="object-fact-label">{fact.label}</span>{" "}
+              <span class="object-fact-value">{fact.value}</span>
             </li>)}
           </ul>
         </details>}

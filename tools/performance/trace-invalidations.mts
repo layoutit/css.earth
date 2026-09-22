@@ -11,7 +11,7 @@ const ownerRules: [string, (a: Record<string, unknown>) => boolean][] = [
   ['world indicators', a => 'data-context-indicator' in a],
   ['world billboards', a => 'data-context-body' in a],
   ['minimap', a => classes(a.class).includes('space-minimap')],
-  ['readout', a => classes(a.class).includes('planet-view-readout')],
+  ['readout', a => classes(a.class).includes('object-view-readout')],
 ];
 // DOMSnapshot tables index strings and nodes by number.
 const at = (list: readonly unknown[] | undefined, index: unknown) => typeof index === 'number' ? list?.[index] : undefined;

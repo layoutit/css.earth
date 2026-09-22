@@ -308,7 +308,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const diameter = depth > body.radiusM ? 2 * focal * body.radiusM / Math.sqrt(depth * depth - body.radiusM ** 2) : Infinity;
         const isAnchor = body.id === plan.focus.id;
         const isLocator = isAnchor || entry.orbit === null;
-        const stablePlanet = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
+        const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
           (annotationPriorities[body.id] ?? 0) >= 3;
         const inFrame = depth > body.radiusM && Math.abs(bodyX) < width / 2 && Math.abs(bodyY) < height / 2;
         const visible = inFrame && !occlusion.hidden(eye, body.id);
@@ -316,11 +316,11 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // sprites. Keep them through occultation and pin an off-screen planet to
         // the nearest stage edge; the body sprite itself remains truthful below.
         const locatorMargin = BODY_INDICATOR_DIAMETER / 2 + 4;
-        const x = stablePlanet ? Math.max(-width / 2 + locatorMargin, Math.min(bodyX, width / 2 - locatorMargin)) : bodyX;
-        const y = stablePlanet ? Math.max(-height / 2 + locatorMargin, Math.min(bodyY, height / 2 - locatorMargin)) : bodyY;
+        const x = prominentOrbiter ? Math.max(-width / 2 + locatorMargin, Math.min(bodyX, width / 2 - locatorMargin)) : bodyX;
+        const y = prominentOrbiter ? Math.max(-height / 2 + locatorMargin, Math.min(bodyY, height / 2 - locatorMargin)) : bodyY;
         // The retained locator indicators (the anchor and placed stars) are also the galactic locators.
         // Unresolved foreground points cannot occlude this annotation; physical sprites keep exact occlusion.
-        const annotationVisible = stablePlanet ? depth > body.radiusM : isLocator ? inFrame && !(selectedId !== body.id &&
+        const annotationVisible = prominentOrbiter ? depth > body.radiusM : isLocator ? inFrame && !(selectedId !== body.id &&
           focusDiameter >= plan.camera.presentation.levelOfDetail.markerFullDiscPixels &&
           rayHitsSphereBefore(eye, selectedEye, selected.radiusM)) : visible;
         const hovered = entry.hovered, highlighted = entry.highlighted === true;
@@ -409,12 +409,12 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         const { entry, x, y, diameter, annotationVisible, hovered, priority } = projected;
         let { circle } = projected;
         const { body, labelSize: size } = entry;
-        const stablePlanet = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
+        const prominentOrbiter = entry.orbit !== null && systemFade.isSystemStar(entry.orbit.centerBodyId) &&
           (annotationPriorities[body.id] ?? 0) >= 3;
         const bodySystemOpacity = systemFade.of(entry.index);
         // An edge-on orbit can briefly drive the shared proxy alpha to zero.
         // During rotation, a planet locator that is already on stays on.
-        if (stablePlanet && (rotationActive || preserveCommittedAnnotations) && entry.indicatorShown) projected.markerOpacity = 1;
+        if (prominentOrbiter && (rotationActive || preserveCommittedAnnotations) && entry.indicatorShown) projected.markerOpacity = 1;
         const markerOpacity = projected.markerOpacity;
         const satellite = entry.parent !== null && !systemFade.isSystemStar(entry.parent.id);
         const resolvedDisc = diameter >= plan.camera.presentation.levelOfDetail.markerFadeStartDiscPixels;
@@ -439,7 +439,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         // the outer ones.
         // The prepared references are measured against the world's own focus. A planet of another star is measured against
         // that star instead, or it could never qualify: the camera is parsecs from the Sun whenever such a system is framed.
-        const hostedPlanet = stablePlanet && entry.orbit!.centerBodyId !== plan.focus.id;
+        const hostedPlanet = prominentOrbiter && entry.orbit!.centerBodyId !== plan.focus.id;
         const referenceAnnotationOnly = (focusDistanceM <= plan.system.fadeOutStartDistanceM &&
             ((annotationPriorities[body.id] ?? 0) >= 4 || landmarkMoon) || hostedPlanet && bodySystemOpacity > 0) &&
           !resolvedDisc && labelExtentOpacity(localExtent) <= .5 + ANNOTATION_ENTRY_MARGIN;

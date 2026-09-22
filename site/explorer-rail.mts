@@ -6,12 +6,12 @@ export function createExplorerRailController(documentTarget: Document, windowTar
   const explore = documentTarget.querySelector<HTMLElement>(".explorer-rail-explore");
   const about = documentTarget.querySelector<HTMLElement>(".explorer-rail-about");
   const panel = documentTarget.querySelector<HTMLElement>(".explorer-about-panel");
-  const drawer = documentTarget.querySelector<HTMLElement>(".planet-drawer-content");
-  const searchCard = documentTarget.querySelector<HTMLElement>(".planet-sidebar-search-card");
-  const search = documentTarget.querySelector<HTMLElement>(".planet-sidebar-search");
-  const settings = documentTarget.querySelector<HTMLElement>(".planet-settings-action");
-  const settingsPanel = documentTarget.querySelector<HTMLElement>(".planet-settings-panel");
-  const aside = documentTarget.querySelector<HTMLElement>(".planet-sidebar");
+  const drawer = documentTarget.querySelector<HTMLElement>(".object-drawer-content");
+  const searchCard = documentTarget.querySelector<HTMLElement>(".object-sidebar-search-card");
+  const search = documentTarget.querySelector<HTMLElement>(".object-sidebar-search");
+  const settings = documentTarget.querySelector<HTMLElement>(".object-settings-action");
+  const settingsPanel = documentTarget.querySelector<HTMLElement>(".object-settings-panel");
+  const aside = documentTarget.querySelector<HTMLElement>(".object-sidebar");
   if (!(explore instanceof windowTarget.HTMLButtonElement) || !(settings instanceof windowTarget.HTMLButtonElement)
       || (about !== null && !(about instanceof windowTarget.HTMLButtonElement))
       || !(panel instanceof windowTarget.HTMLElement) || !(settingsPanel instanceof windowTarget.HTMLElement)
@@ -49,7 +49,7 @@ export function createExplorerRailController(documentTarget: Document, windowTar
   search.addEventListener("keydown", (event) => {
     if (event.key === "Enter" || event.key === "ArrowDown") showSearch();
   }, { capture: true, signal: events.signal });
-  documentTarget.querySelector<HTMLElement>(".planet-sidebar-view-all")?.addEventListener("click", showSearch, { signal: events.signal });
+  documentTarget.querySelector<HTMLElement>(".object-sidebar-view-all")?.addEventListener("click", showSearch, { signal: events.signal });
   documentTarget.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
     // The native popover owns Escape and focus restoration, even before JS.

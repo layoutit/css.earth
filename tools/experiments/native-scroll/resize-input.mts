@@ -1,7 +1,7 @@
 /** Native dimensions hold drag displacement. A separate, fixed-size scrollport
  * observes them so wheel zoom cannot change the X/Y signal. */
 export function addNativeResizeInput(document: Document): string {
-  const surface = document.querySelector('.planet-input-surface');
+  const surface = document.querySelector('.object-input-surface');
   if (!surface) throw new TypeError('The shared scene input surface is missing.');
   const frame = document.createElement('div');
   frame.className = 'native-drag-frame';
@@ -20,7 +20,7 @@ export function addNativeResizeInput(document: Document): string {
   // must reach the same native zoom scroller while clicks still navigate.
   const links = document.createElement('div');
   links.className = 'native-drag-links';
-  const context = document.querySelector('.planet-scene-overlays > .prepared-world-context');
+  const context = document.querySelector('.object-scene-overlays > .prepared-world-context');
   if (context) links.append(context);
   const spacer = document.createElement('span');
   spacer.className = 'native-zoom-spacer';
@@ -37,9 +37,9 @@ export function addNativeResizeInput(document: Document): string {
 @property --native-pitch { syntax: '*'; inherits: false; }
 @keyframes native-drag-x { from { --native-drag-x-progress:0 } to { --native-drag-x-progress:1 } }
 @keyframes native-drag-y { from { --native-drag-y-progress:0 } to { --native-drag-y-progress:1 } }
-.planet-viewport { --native-yaw:0deg; --native-pitch:0deg }
+.object-viewport { --native-yaw:0deg; --native-pitch:0deg }
 @supports (animation-timeline: view()) and selector(::-webkit-resizer) {
-  .planet-viewport {
+  .object-viewport {
     --native-zoom-rail-width: 0px;
     timeline-scope: --native-zoom, --native-drag-width, --native-drag-height;
     animation: native-scroll-distance linear both, native-drag-x linear both, native-drag-y linear both;
@@ -49,7 +49,7 @@ export function addNativeResizeInput(document: Document): string {
     --native-yaw: calc(var(--native-drag-x) * .3deg);
     --native-pitch: calc(var(--native-drag-y) * -.3deg);
   }
-  .planet-input-surface::before { display:none }
+  .object-input-surface::before { display:none }
   .native-zoom-spacer { display:block; height:400px; pointer-events:none }
   .native-drag-frame {
     position:sticky; top:0; height:100%; width:calc(100% - var(--native-zoom-rail-width)); margin-bottom:-100cqh;
@@ -68,7 +68,7 @@ export function addNativeResizeInput(document: Document): string {
   .native-drag-links { position:sticky; top:0; height:100%; margin-bottom:-100cqh; overflow:clip; contain:strict; pointer-events:none; z-index:2 }
   .native-touch-zoom { display:none }
   @media (pointer:coarse) {
-    .planet-viewport { --native-zoom-rail-width:44px }
+    .object-viewport { --native-zoom-rail-width:44px }
     .native-touch-zoom {
       position:sticky; top:0; display:flex; height:100%; width:44px;
       margin-left:auto; margin-bottom:-100cqh; align-items:center; justify-content:center;

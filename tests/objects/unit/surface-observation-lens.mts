@@ -13,7 +13,7 @@ export async function loadLens(body: string, lensId: string, change: (recipe: Re
   const recipe = requireArray(requireRecord(requireRecord(file).raster).surfaceObservations).map(value => requireRecord(value)).find(lens => lens.id === lensId);
   if (!recipe) throw new Error(`${body} has no ${lensId} lens.`);
   change(recipe);
-  const source = await createSourceManifest({ planetId: body, planetName: body, sourceRoot: sourceDirectory });
+  const source = await createSourceManifest({ objectId: body, objectName: body, sourceRoot: sourceDirectory });
   const radial = await loadRadialTerrain({ config: parseRadialLoaderConfig(file), sourceDirectory, source });
   if (!radial) throw new Error(`${body} has no radial terrain.`);
   return loadSurfaceObservation({ sourceDirectory, source, recipe, radial: { grid: requireTerrainMesh(radial.grid), faces: radial.faces },

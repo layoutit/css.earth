@@ -62,7 +62,7 @@ jobs:
         # those authoring outputs must be published explicitly before a deploy is allowed to reference them.
         # ASSET_ORIGIN points every texture, scene JSON and startup preload at the published R2
         # bucket instead of bundling public/scenes (1.44 GB) into the deploy; astro.config.mts
-        # removes dist/scenes once the build finishes and assemble:planets tolerates its absence.
+        # removes dist/scenes once the build finishes and the assemble step tolerates its absence.
         env:
           NODE_OPTIONS: --max-old-space-size=6144
           CSSEARTH_ALLOW_MISSING_ASSETS: "1"

@@ -197,7 +197,7 @@ jobs:
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -271,7 +271,7 @@ jobs:
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -341,7 +341,7 @@ jobs:
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -455,7 +455,7 @@ jobs:
         with:
           # prepare:shell downloads the pinned title font when it is absent and verifies its SHA-256 either way.
           path: src/objects/earth/source/presentation/InterVariable.ttf
-          key: title-font-${{ hashFiles('src/platform/planet-title-recipe.mts') }}
+          key: title-font-${{ hashFiles('src/platform/object-title-recipe.mts') }}
       - name: Build shared packages and affected entry points
         env:
           CI_PACKAGE_CACHE_HIT: ${{ steps.package-cache.outputs.cache-hit }}
@@ -483,7 +483,7 @@ jobs:
               pnpm exec playwright install --with-deps --only-shell chromium
               node --test --test-concurrency=1 tests/objects/publication.test.mts \
                 tools/prepared/write-prepared-set.test.mts tools/prepare/preparation-cache.test.mts \
-                tools/prepare/prepare-planets.test.mts
+                tools/prepare/prepare-objects.test.mts
               ;;
             *) echo "Unknown preparation lane" >&2; exit 1 ;;
           esac

@@ -57,7 +57,7 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     // The catalogue's outputs are the context's prepared inventory; the provenance step adds its record and presentation.
     const current = await readInventory(basename(objectDirectory), objectDirectory);
     const kept = current?.assets.filter(asset => asset.location === 'prepared' && !receipt.outputs.some(output => output.path === asset.filename)) ?? [];
-    await updateInventory({ planetId: basename(objectDirectory), objectDirectory, location: 'prepared',
+    await updateInventory({ objectId: basename(objectDirectory), objectDirectory, location: 'prepared',
       assets: [...kept, { filename: 'catalogue.json', bytes: bytes.length, sha256: sha256(bytes) }, { filename: 'display-sample.json', bytes: displayBytes.length, sha256: sha256(displayBytes) }] });
     const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
       properties: { preparation: { source: 'source/catalogue.json' } },

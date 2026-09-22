@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="herculina"]) > :is(.herculina-sun-camera, .herculina-camera, .herculina-material-root) {
+.object-stage:where([data-object-id="herculina"]) > :is(.herculina-sun-camera, .herculina-camera, .herculina-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-sun-camera, :where(.planet-stage[data-object-id="herculina"]) .herculina-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-body > u {
+:where(.object-stage[data-object-id="herculina"]) .herculina-sun-camera, :where(.object-stage[data-object-id="herculina"]) .herculina-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="herculina"]) .herculina-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="herculina"]) .herculina-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="herculina"]) .herculina-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--herculina-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-body > .herculina-polar { background-image: var(--herculina-poles-image); }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-material-root { z-index: 3; --herculina-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-material, :where(.planet-stage[data-object-id="herculina"]) .herculina-billboard {
+:where(.object-stage[data-object-id="herculina"]) .herculina-body > .herculina-polar { background-image: var(--herculina-poles-image); }
+:where(.object-stage[data-object-id="herculina"]) .herculina-material-root { z-index: 3; --herculina-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="herculina"]) .herculina-material, :where(.object-stage[data-object-id="herculina"]) .herculina-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-material { background-repeat: no-repeat; transform: rotate(var(--herculina-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="herculina"]) .herculina-billboard { border-radius: 50%; background-color: var(--herculina-billboard-color); opacity: var(--herculina-billboard-opacity); }
-.planet-stage:where([data-object-id="herculina"])[data-lod="billboard"] .herculina-scene, .planet-stage:where([data-object-id="herculina"])[data-lod="marker"] .herculina-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="herculina"])[data-lod="marker"] .herculina-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="herculina"]) .herculina-material { background-repeat: no-repeat; transform: rotate(var(--herculina-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="herculina"]) .herculina-billboard { border-radius: 50%; background-color: var(--herculina-billboard-color); opacity: var(--herculina-billboard-opacity); }
+.object-stage:where([data-object-id="herculina"])[data-lod="billboard"] .herculina-scene, .object-stage:where([data-object-id="herculina"])[data-lod="marker"] .herculina-scene { visibility: hidden; }
+.object-stage:where([data-object-id="herculina"])[data-lod="marker"] .herculina-billboard { opacity: 0; }
 

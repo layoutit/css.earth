@@ -51,14 +51,14 @@ export async function selectCamera(page: Page, camera: BrowserCamera, lens: stri
 }
 
 export const SCENE_ONLY_STYLE = `
-  body > *:not(.planet-viewport):not(script),
-  .planet-viewport > *:not(.planet-stage) { visibility: hidden !important; }
+  body > *:not(.object-viewport):not(script),
+  .object-viewport > *:not(.object-stage) { visibility: hidden !important; }
 `;
 export async function hideShell(page: Page): Promise<string[]> {
   await page.addStyleTag({ content: SCENE_ONLY_STYLE });
   await settlePaint(page);
   return page.evaluate(() => [...document.body.children]
-    .filter((element) => !element.matches(".planet-viewport, script") &&
+    .filter((element) => !element.matches(".object-viewport, script") &&
       getComputedStyle(element).visibility !== "hidden" && getComputedStyle(element).display !== "none" &&
       element.getBoundingClientRect().width > 0 && element.getBoundingClientRect().height > 0)
     .map((element) => element.tagName.toLowerCase()));
@@ -71,8 +71,8 @@ export async function readRuntime(page: Page) {
   const stats = record(await diagnostic(page, ["camera", "stats"], []), "Camera stats");
   const dom = record(await diagnostic(page, ["dom"]), "Runtime DOM");
   const animations = await page.evaluate(() => ({
-    canvasCount: document.querySelectorAll(".planet-stage canvas").length,
-    svgCount: document.querySelectorAll(".planet-stage svg").length,
+    canvasCount: document.querySelectorAll(".object-stage canvas").length,
+    svgCount: document.querySelectorAll(".object-stage svg").length,
     animations: document.getAnimations().map((animation) => ({ playState: animation.playState, currentTime: typeof animation.currentTime === "number" || animation.currentTime === null ? animation.currentTime : String(animation.currentTime) })),
   }));
   return {

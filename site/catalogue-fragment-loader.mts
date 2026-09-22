@@ -8,7 +8,7 @@ type FetchPage = (url: string) => Promise<Response>;
 
 /**
  * Fetches the shared object catalogue fragment, verifies its bytes against
- * the pin embedded on the page, and returns the parsed `<ul class="planet-object-list">`.
+ * the pin embedded on the page, and returns the parsed `<ul class="object-list">`.
  * The caller inserts it in place of the empty placeholder list.
  */
 export async function loadCatalogueFragment(pin: CatalogueFragmentPin, { windowTarget, fetchPage = url => windowTarget.fetch(url) }: {
@@ -23,7 +23,7 @@ export async function loadCatalogueFragment(pin: CatalogueFragmentPin, { windowT
   if (digest !== pin.sha256) throw new Error('Object catalogue identity drifted.');
   const html = new windowTarget.TextDecoder().decode(buffer);
   const source = new windowTarget.DOMParser().parseFromString(html, 'text/html');
-  const rows = source.querySelector('ul.planet-object-list');
+  const rows = source.querySelector('ul.object-list');
   if (!(rows instanceof windowTarget.HTMLUListElement)) throw new Error('Object catalogue content is missing its list.');
   return rows;
 }

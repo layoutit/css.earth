@@ -1,0 +1,2713 @@
+/* Shared prepared CSS object presentation. Capability selectors remain object-prefixed
+   until the renderer capability variables replace their legacy names. */
+/* Root dimensions are defaults; the shared shell positions every render root
+   around its dock, including the camera, material and heliocentric overlays. */
+:where(.object-stage > :is(
+  .mercury-sun-camera,
+  .mercury-camera,
+  .mercury-material-root,
+  .venus-material-composite,
+  .mars-material-composite,
+  .moon-material-composite,
+  .pluto-material-composite,
+  .ariel-material-composite,
+  .callisto-material-composite,
+  .ceres-material-composite,
+  .charon-material-composite,
+  .eris-material-composite,
+  .europa-material-composite,
+  .ganymede-material-composite,
+  .iapetus-material-composite,
+  .io-material-composite,
+  .makemake-material-composite,
+  .miranda-material-composite,
+  .oberon-material-composite,
+  .titan-material-composite,
+  .titania-material-composite,
+  .triton-material-composite,
+  .umbriel-material-composite,
+  .sun-corona-layer,
+  .sun-limb-layer,
+  .polycss-camera
+)) {
+  position: absolute;
+  inset: 0;
+  transform-origin: 50% 50%;
+  pointer-events: none;
+}
+
+/* A true perspective camera: the eye sits at the sky's vanishing point, 0.866
+   of the stage width in front of the stage (a 60 degree horizontal field of
+   view), the same camera the sky cube was prepared for. The shared orbit
+   writes the perspective from the prepared camera plan and the perspective
+   origin so the eye stays on the sky's axis wherever the shell lays the root
+   out, and frames by dolly; the roots are never scaled. The Sun's root shares
+   the eye and paints first, beneath the body. */
+.mercury-sun-camera,
+.mercury-camera {
+  z-index: 1;
+  transform-style: preserve-3d;
+}
+
+.polycss-scene {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: none;
+}
+
+.polycss-mesh {
+  position: absolute;
+  transform-style: preserve-3d;
+  transform-origin: 0 0 0;
+}
+
+.mercury-body {
+  transform-style: preserve-3d;
+  animation-name: mercury-body-spin;
+  animation-duration: 72s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.mercury-body > s,
+.mercury-cutaway-body > s,
+.mercury-interior-core > s,
+.mercury-interior-sections > s {
+  position: absolute;
+  display: block;
+  width: var(--polycss-atlas-width, 64px);
+  height: var(--polycss-atlas-height, 64px);
+  margin: 0;
+  padding: 0;
+  transform-origin: 0 0;
+  backface-visibility: hidden;
+  background-image: var(--mercury-surface-image);
+  background-repeat: no-repeat;
+  background-origin: border-box;
+  background-clip: border-box;
+  pointer-events: none;
+}
+
+.mercury-body > .mercury-polar,
+.mercury-cutaway-body > .mercury-polar {
+  background-image: var(--mercury-poles-image);
+}
+
+.mercury-cutaway,
+.mercury-cutaway-body,
+.mercury-interior-core,
+.mercury-interior-sections {
+  transform-style: preserve-3d;
+}
+
+/* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
+.mercury-cutaway {
+  display: none;
+  visibility: hidden;
+}
+
+.mercury-cutaway-body > s:not(.mercury-polar) {
+  background-image: var(--mercury-interior-outer-image);
+}
+
+.mercury-cutaway-body > .mercury-polar {
+  background-image: var(--mercury-interior-outer-poles-image);
+}
+
+.mercury-interior-core > s:not(.mercury-interior-pole) {
+  background-image: url("/scenes/mercury/mercury-interior-core@2x.webp");
+}
+
+.mercury-interior-core > .mercury-interior-pole {
+  background-image:
+    url("/scenes/mercury/mercury-interior-core-poles@2x.webp");
+}
+
+.mercury-interior-sections > s {
+  background-image: url("/scenes/mercury/mercury-interior-section@2x.webp");
+}
+
+/* The combined pole atlas is prepared at rasterScale 4: six 1024 px tiles (normal, enhanced, topography; north then south). */
+.object-stage[data-lens="enhanced"] .mercury-polar-north {
+  --mercury-pole-position: -2048px 0px !important;
+}
+
+.object-stage[data-lens="enhanced"] .mercury-polar-south {
+  --mercury-pole-position: -3072px 0px !important;
+}
+
+.object-stage[data-lens="topography"] .mercury-polar-north {
+  --mercury-pole-position: -4096px 0px !important;
+}
+
+.object-stage[data-lens="topography"] .mercury-polar-south {
+  --mercury-pole-position: -5120px 0px !important;
+}
+
+/* The terminator overlay follows the body's silhouette: the runtime writes
+   its scale from the projected silhouette diameter on every publication. */
+.mercury-material-root {
+  --mercury-disc-size: 460px;
+  --mercury-billboard-opacity: 0;
+  z-index: 3;
+}
+
+/* Level of detail (the stage is `data-lod` on the stage element, the
+   opacities are written per publication):
+     geometry   the retained leaves, the overlay on top;
+     crossfade  the billboard disc fades in over the geometry, beneath the
+                overlay, which now draws from the billboard lighting atlas;
+     billboard  the geometry is hidden beneath the opaque disc;
+     marker     the navigation sprite has faded in over the disc, which hides.
+   The finer stage always stays painted until the coarser one is opaque. */
+.mercury-billboard {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: var(--mercury-disc-size);
+  height: var(--mercury-disc-size);
+  margin: calc(var(--mercury-disc-size) / -2) 0 0
+    calc(var(--mercury-disc-size) / -2);
+  border-radius: 50%;
+  background-color: var(--mercury-billboard-color, #484848);
+  opacity: var(--mercury-billboard-opacity);
+  pointer-events: none;
+}
+
+.object-stage[data-lod="billboard"] .mercury-scene,
+.object-stage[data-lod="marker"] .mercury-scene {
+  visibility: hidden;
+}
+
+/* At the marker stage the flat disc gives way to the navigation sprite, but
+   the lighting overlay stays alive over it (floored to the sprite's size by
+   the runtime) so the marker keeps the phase and never steps up to a fully
+   lit sprite brighter than the body it replaces. The material root paints
+   above the orbit overlay for that reason. */
+.object-stage[data-lod="marker"] .mercury-billboard {
+  visibility: hidden;
+}
+
+.mercury-material {
+  position: absolute;
+  display: block;
+  top: 50%;
+  left: 50%;
+  width: var(--mercury-disc-size);
+  height: var(--mercury-disc-size);
+  margin: calc(var(--mercury-disc-size) / -2) 0 0
+    calc(var(--mercury-disc-size) / -2);
+  background-repeat: no-repeat;
+  transform: rotate(var(--mercury-light-roll, 0deg));
+  pointer-events: none;
+}
+
+.object-stage.mercury-hide-shadows .mercury-material {
+  transform: none;
+}
+
+/* The orbit toggle hides the line only; the body marker shares the overlay
+   and stays. */
+.object-stage.mercury-hide-orbit .object-heliocentric-orbit-piece {
+  visibility: hidden;
+}
+
+.object-stage[data-view="interior"] .mercury-body,
+.object-stage[data-view="interior"][data-lod="geometry"] .mercury-material-root {
+  visibility: hidden;
+}
+
+/* The cutaway carries no overlay; from afar it is the exterior billboard, so
+   the overlay fades in with the disc. */
+.object-stage[data-view="interior"] .mercury-material {
+  opacity: var(--mercury-billboard-opacity);
+}
+
+.object-stage[data-view="interior"]:not([data-lod="billboard"]):not([data-lod="marker"])
+  .mercury-cutaway {
+  display: block;
+  visibility: visible;
+}
+
+@keyframes mercury-body-spin {
+  from {
+    transform: rotateZ(-118deg);
+  }
+
+  to {
+    transform: rotateZ(-478deg);
+  }
+}
+
+/* VENUS */
+.object-stage[data-object-id="venus"] > :is(.polycss-camera, .venus-material-composite) {
+  --venus-scene-side-padding: 16px;
+  --venus-reference-width: 1920px;
+  --venus-reference-height: 1080px;
+  --venus-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--venus-scene-side-padding) - var(--venus-scene-side-padding)) /
+        var(--venus-reference-width)
+    ),
+    calc(100cqh / var(--venus-reference-height))
+  );
+}
+
+.object-stage[data-object-id="venus"] .polycss-camera,
+.object-stage[data-object-id="venus"] .venus-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="venus"] .venus-body {
+  transform-style: preserve-3d;
+  animation-name: venus-body-spin;
+  animation-duration: 36s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="venus"][data-lens="radar"] .venus-body,
+.object-stage[data-object-id="venus"][data-lens="elevation"] .venus-body {
+  animation-duration: 96s;
+}
+
+.object-stage[data-object-id="venus"] .polycss-scene s,
+.object-stage[data-object-id="venus"] .venus-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="venus"] .polycss-scene s:not(.venus-polar) {
+  background-image: url("/scenes/venus/venus-clouds@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"] .polycss-scene s.venus-polar {
+  background-image: url("/scenes/venus/venus-poles-clouds@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"][data-lens="radar"] .polycss-scene s:not(.venus-polar) {
+  background-image: url("/scenes/venus/venus-radar@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"][data-lens="radar"] .polycss-scene s.venus-polar {
+  background-image: url("/scenes/venus/venus-poles-radar@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s:not(.venus-polar) {
+  background-image: url("/scenes/venus/venus-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"][data-lens="elevation"] .polycss-scene s.venus-polar {
+  background-image:
+    url("/scenes/venus/venus-poles-elevation@2x.webp") !important;
+}
+
+/* Akatsuki's ultraviolet view is of the cloud tops, so it keeps the cloud deck's
+   36s rotation above rather than the 96s solid-body rate the radar lenses use. */
+.object-stage[data-object-id="venus"][data-lens="ultraviolet"]
+  .polycss-scene
+  s:not(.venus-polar) {
+  background-image:
+    url("/scenes/venus/venus-ultraviolet@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"][data-lens="ultraviolet"]
+  .polycss-scene
+  s.venus-polar {
+  background-image:
+    url("/scenes/venus/venus-poles-ultraviolet@2x.webp") !important;
+}
+
+.object-stage[data-object-id="venus"] .venus-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 512px;
+  height: 512px;
+  background-image: url("/scenes/venus/venus-material@2x.webp");
+  background-size: 4096px 2048px;
+  transform: translate(-50%, -50%) rotate(var(--venus-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="venus"][data-lens="radar"] .venus-fixed-material,
+.object-stage[data-object-id="venus"][data-lens="elevation"] .venus-fixed-material {
+  background-image: url("/scenes/venus/venus-observation-material@2x.webp");
+}
+
+.object-stage[data-object-id="venus"].venus-hide-atmosphere .venus-fixed-material {
+  background-image: url("/scenes/venus/venus-lighting@2x.webp");
+}
+
+@keyframes venus-body-spin {
+  from { transform: rotateZ(-118deg); }
+  to { transform: rotateZ(-478deg); }
+}
+
+/* Retained sizing previously installed as a side effect of createPolyScene.
+   Scene preparation and the common camera now own this presentation. */
+.object-stage[data-object-id="venus"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="venus"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="venus"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+/* MARS */
+.object-stage[data-object-id="mars"] > :is(.polycss-camera, .mars-material-composite) {
+  --mars-scene-side-padding: 16px;
+  --mars-reference-width: 1920px;
+  --mars-reference-height: 1080px;
+  --mars-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--mars-scene-side-padding) - var(--mars-scene-side-padding)) /
+        var(--mars-reference-width)
+    ),
+    calc(100cqh / var(--mars-reference-height))
+  );
+}
+
+.object-stage[data-object-id="mars"] .polycss-camera,
+.object-stage[data-object-id="mars"] .mars-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="mars"] .mars-body {
+  transform-style: preserve-3d;
+  animation-name: mars-body-spin;
+  animation-duration: 48s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="mars"] .polycss-scene s,
+.object-stage[data-object-id="mars"] .mars-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="mars"] .polycss-scene s:not(.mars-polar) {
+  background-image: url("/scenes/mars/mars-surface-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="mars"] .polycss-scene s.mars-polar {
+  background-image: url("/scenes/mars/mars-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="mars"][data-lens="elevation"] .polycss-scene s:not(.mars-polar) {
+  background-image: url("/scenes/mars/mars-surface-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="mars"][data-lens="elevation"] .polycss-scene s.mars-polar {
+  background-image: url("/scenes/mars/mars-poles-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="mars"][data-lens="thermal"] .polycss-scene s:not(.mars-polar) {
+  background-image: url("/scenes/mars/mars-surface-thermal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="mars"][data-lens="thermal"] .polycss-scene s.mars-polar {
+  background-image: url("/scenes/mars/mars-poles-thermal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="mars"] .mars-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 512px;
+  height: 512px;
+  background-image: url("/scenes/mars/mars-material@2x.webp");
+  background-size: 4096px 2048px;
+  transform: translate(-50%, -50%) rotate(var(--mars-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="mars"][data-lens="elevation"] .mars-fixed-material,
+.object-stage[data-object-id="mars"][data-lens="thermal"] .mars-fixed-material {
+  background-image: url("/scenes/mars/mars-observation-material@2x.webp");
+}
+
+.object-stage[data-object-id="mars"].mars-hide-atmosphere .mars-fixed-material {
+  background-image: url("/scenes/mars/mars-lighting@2x.webp");
+}
+
+@keyframes mars-body-spin {
+  from { transform: rotateZ(-145deg); }
+  to { transform: rotateZ(-505deg); }
+}
+
+.object-stage[data-object-id="mars"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="mars"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="mars"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+/* MOON */
+.object-stage[data-object-id="moon"] > :is(.polycss-camera, .moon-material-composite) {
+  --moon-scene-side-padding: 16px;
+  --moon-reference-width: 1920px;
+  --moon-reference-height: 1080px;
+  --moon-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--moon-scene-side-padding) - var(--moon-scene-side-padding)) /
+        var(--moon-reference-width)
+    ),
+    calc(100cqh / var(--moon-reference-height))
+  );
+}
+
+.object-stage[data-object-id="moon"] .polycss-camera,
+.object-stage[data-object-id="moon"] .moon-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="moon"] .moon-body {
+  transform-style: preserve-3d;
+  animation-name: moon-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="moon"] .polycss-scene s,
+.object-stage[data-object-id="moon"] .moon-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="moon"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-surface@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-surface@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="midnight-temperature"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-midnight-temperature@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="midnight-temperature"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-midnight-temperature@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="heat-anomalies"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-heat-anomalies@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="heat-anomalies"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-heat-anomalies@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="rock-abundance"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-rock-abundance@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="rock-abundance"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-rock-abundance@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="topography"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-topography@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="topography"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-topography@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="crust"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-crust@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="crust"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-crust@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="silicate-signature"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-silicate-signature@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="silicate-signature"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-silicate-signature@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="geology"] .polycss-scene s:not(.moon-polar) {
+  background-image: url("/scenes/moon/moon-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="moon"][data-lens="geology"] .polycss-scene s.moon-polar {
+  background-image: url("/scenes/moon/moon-poles-geology@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="moon"] .moon-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--moon-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="moon"].moon-hide-shadows .moon-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes moon-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(-360deg); }
+}
+
+.object-stage[data-object-id="moon"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="moon"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="moon"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+/* PLUTO */
+.object-stage[data-object-id="pluto"] > :is(.polycss-camera, .pluto-material-composite) {
+  --pluto-scene-side-padding: 16px;
+  --pluto-reference-width: 1920px;
+  --pluto-reference-height: 1080px;
+  --pluto-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--pluto-scene-side-padding) - var(--pluto-scene-side-padding)) /
+        var(--pluto-reference-width)
+    ),
+    calc(100cqh / var(--pluto-reference-height))
+  );
+}
+
+.object-stage[data-object-id="pluto"] .polycss-camera,
+.object-stage[data-object-id="pluto"] .pluto-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="pluto"] .pluto-body {
+  transform-style: preserve-3d;
+  animation-name: pluto-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="pluto"] .polycss-scene s,
+.object-stage[data-object-id="pluto"] .pluto-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="pluto"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-surface@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-surface@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="topography"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-topography@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="topography"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-topography@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="monochrome"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-monochrome@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="monochrome"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-monochrome@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="methane-ice"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-methane-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="methane-ice"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-methane-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="nitrogen-ice"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-nitrogen-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="nitrogen-ice"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-nitrogen-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="water-ice"] .polycss-scene s:not(.pluto-polar) {
+  background-image: url("/scenes/pluto/pluto-water-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="pluto"][data-lens="water-ice"] .polycss-scene s.pluto-polar {
+  background-image: url("/scenes/pluto/pluto-poles-water-ice@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="pluto"] .pluto-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--pluto-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="pluto"].pluto-hide-shadows .pluto-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes pluto-body-spin {
+  from { transform: rotateZ(180deg); }
+  to { transform: rotateZ(540deg); }
+}
+
+.object-stage[data-object-id="pluto"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="pluto"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="pluto"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="ariel"] > :is(.polycss-camera, .ariel-material-composite) {
+  --ariel-scene-side-padding: 16px;
+  --ariel-reference-width: 1920px;
+  --ariel-reference-height: 1080px;
+  --ariel-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--ariel-scene-side-padding) - var(--ariel-scene-side-padding)) /
+        var(--ariel-reference-width)
+    ),
+    calc(100cqh / var(--ariel-reference-height))
+  );
+}
+
+.object-stage[data-object-id="ariel"] .polycss-camera,
+.object-stage[data-object-id="ariel"] .ariel-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="ariel"] .ariel-body {
+  transform-style: preserve-3d;
+  animation-name: ariel-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="ariel"] .polycss-scene s,
+.object-stage[data-object-id="ariel"] .ariel-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="ariel"] .polycss-scene s:not(.ariel-polar) {
+  background-image: url("/scenes/ariel/ariel-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ariel"] .polycss-scene s.ariel-polar {
+  background-image: url("/scenes/ariel/ariel-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ariel"][data-lens="elevation"] .polycss-scene s:not(.ariel-polar) {
+  background-image: url("/scenes/ariel/ariel-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ariel"][data-lens="elevation"] .polycss-scene s.ariel-polar {
+  background-image: url("/scenes/ariel/ariel-poles-elevation@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="ariel"] .ariel-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--ariel-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="ariel"].ariel-hide-shadows .ariel-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes ariel-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="ariel"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="ariel"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="ariel"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="callisto"] > :is(.polycss-camera, .callisto-material-composite) {
+  --callisto-scene-side-padding: 16px;
+  --callisto-reference-width: 1920px;
+  --callisto-reference-height: 1080px;
+  --callisto-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--callisto-scene-side-padding) - var(--callisto-scene-side-padding)) /
+        var(--callisto-reference-width)
+    ),
+    calc(100cqh / var(--callisto-reference-height))
+  );
+}
+
+.object-stage[data-object-id="callisto"] .polycss-camera,
+.object-stage[data-object-id="callisto"] .callisto-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="callisto"] .callisto-body {
+  transform-style: preserve-3d;
+  animation-name: callisto-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="callisto"] .polycss-scene s,
+.object-stage[data-object-id="callisto"] .callisto-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="callisto"] .polycss-scene s:not(.callisto-polar) {
+  background-image: url("/scenes/callisto/callisto-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="callisto"] .polycss-scene s.callisto-polar {
+  background-image: url("/scenes/callisto/callisto-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="callisto"][data-lens="enhanced"] .polycss-scene s:not(.callisto-polar) {
+  background-image: url("/scenes/callisto/callisto-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="callisto"][data-lens="enhanced"] .polycss-scene s.callisto-polar {
+  background-image: url("/scenes/callisto/callisto-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="callisto"][data-lens="infrared"] .polycss-scene s:not(.callisto-polar) {
+  background-image: url("/scenes/callisto/callisto-infrared@2x.webp") !important;
+}
+
+.object-stage[data-object-id="callisto"][data-lens="infrared"] .polycss-scene s.callisto-polar {
+  background-image: url("/scenes/callisto/callisto-poles-infrared@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="callisto"] .callisto-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--callisto-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="callisto"].callisto-hide-shadows .callisto-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes callisto-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="callisto"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="callisto"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="callisto"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="ceres"] > :is(.polycss-camera, .ceres-material-composite) {
+  --ceres-scene-side-padding: 16px;
+  --ceres-reference-width: 1920px;
+  --ceres-reference-height: 1080px;
+  --ceres-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--ceres-scene-side-padding) - var(--ceres-scene-side-padding)) /
+        var(--ceres-reference-width)
+    ),
+    calc(100cqh / var(--ceres-reference-height))
+  );
+}
+
+.object-stage[data-object-id="ceres"] .polycss-camera,
+.object-stage[data-object-id="ceres"] .ceres-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="ceres"] .ceres-body {
+  transform-style: preserve-3d;
+  animation-name: ceres-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="ceres"] .polycss-scene s,
+.object-stage[data-object-id="ceres"] .ceres-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="ceres"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="enhanced"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="enhanced"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="elevation"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="elevation"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-clay-band@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="clay-band"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-clay-band@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s:not(.ceres-polar) {
+  background-image: url("/scenes/ceres/ceres-ammonium-band@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ceres"][data-lens="ammonium-band"] .polycss-scene s.ceres-polar {
+  background-image: url("/scenes/ceres/ceres-poles-ammonium-band@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="ceres"] .ceres-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--ceres-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="ceres"].ceres-hide-shadows .ceres-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes ceres-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="ceres"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="ceres"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="ceres"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="charon"] > :is(.polycss-camera, .charon-material-composite) {
+  --charon-scene-side-padding: 16px;
+  --charon-reference-width: 1920px;
+  --charon-reference-height: 1080px;
+  --charon-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--charon-scene-side-padding) - var(--charon-scene-side-padding)) /
+        var(--charon-reference-width)
+    ),
+    calc(100cqh / var(--charon-reference-height))
+  );
+}
+
+.object-stage[data-object-id="charon"] .polycss-camera,
+.object-stage[data-object-id="charon"] .charon-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="charon"] .charon-body {
+  transform-style: preserve-3d;
+  animation-name: charon-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="charon"] .polycss-scene s,
+.object-stage[data-object-id="charon"] .charon-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="charon"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="enhanced-color"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-enhanced-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="enhanced-color"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-enhanced-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="elevation"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="elevation"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="albedo"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-albedo@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="albedo"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-albedo@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="water-ice"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-water-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="water-ice"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-water-ice@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="ammonia"] .polycss-scene s:not(.charon-polar) {
+  background-image: url("/scenes/charon/charon-ammonia@2x.webp") !important;
+}
+
+.object-stage[data-object-id="charon"][data-lens="ammonia"] .polycss-scene s.charon-polar {
+  background-image: url("/scenes/charon/charon-poles-ammonia@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="charon"] .charon-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--charon-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="charon"].charon-hide-shadows .charon-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes charon-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="charon"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="charon"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="charon"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="eris"] > :is(.polycss-camera, .eris-material-composite) {
+  --eris-scene-side-padding: 16px;
+  --eris-reference-width: 1920px;
+  --eris-reference-height: 1080px;
+  --eris-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--eris-scene-side-padding) - var(--eris-scene-side-padding)) /
+        var(--eris-reference-width)
+    ),
+    calc(100cqh / var(--eris-reference-height))
+  );
+}
+
+.object-stage[data-object-id="eris"] .polycss-camera,
+.object-stage[data-object-id="eris"] .eris-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="eris"] .eris-body {
+  transform-style: preserve-3d;
+  animation-name: eris-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="eris"] .polycss-scene s,
+.object-stage[data-object-id="eris"] .eris-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="eris"] .polycss-scene s:not(.eris-polar) {
+  background-image: url("/scenes/eris/eris-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="eris"] .polycss-scene s.eris-polar {
+  background-image: url("/scenes/eris/eris-poles-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s:not(.eris-polar) {
+  background-image: url("/scenes/eris/eris-illustration@2x.webp") !important;
+}
+
+.object-stage[data-object-id="eris"][data-lens="illustration"] .polycss-scene s.eris-polar {
+  background-image: url("/scenes/eris/eris-poles-illustration@2x.webp") !important;
+}
+
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="eris"] .eris-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--eris-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="eris"].eris-hide-shadows .eris-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes eris-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="eris"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="eris"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="eris"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="europa"] > :is(.polycss-camera, .europa-material-composite) {
+  --europa-scene-side-padding: 16px;
+  --europa-reference-width: 1920px;
+  --europa-reference-height: 1080px;
+  --europa-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--europa-scene-side-padding) - var(--europa-scene-side-padding)) /
+        var(--europa-reference-width)
+    ),
+    calc(100cqh / var(--europa-reference-height))
+  );
+}
+
+.object-stage[data-object-id="europa"] .polycss-camera,
+.object-stage[data-object-id="europa"] .europa-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="europa"] .europa-body {
+  transform-style: preserve-3d;
+  animation-name: europa-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="europa"] .polycss-scene s,
+.object-stage[data-object-id="europa"] .europa-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="europa"] .polycss-scene s:not(.europa-polar) {
+  background-image: url("/scenes/europa/europa-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"] .polycss-scene s.europa-polar {
+  background-image: url("/scenes/europa/europa-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="enhanced"] .polycss-scene s:not(.europa-polar) {
+  background-image: url("/scenes/europa/europa-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="enhanced"] .polycss-scene s.europa-polar {
+  background-image: url("/scenes/europa/europa-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="elevation"] .polycss-scene s:not(.europa-polar) {
+  background-image: url("/scenes/europa/europa-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="elevation"] .polycss-scene s.europa-polar {
+  background-image: url("/scenes/europa/europa-poles-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="geology"] .polycss-scene s:not(.europa-polar) {
+  background-image: url("/scenes/europa/europa-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="geology"] .polycss-scene s.europa-polar {
+  background-image: url("/scenes/europa/europa-poles-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="infrared"] .polycss-scene s:not(.europa-polar) {
+  background-image: url("/scenes/europa/europa-infrared@2x.webp") !important;
+}
+
+.object-stage[data-object-id="europa"][data-lens="infrared"] .polycss-scene s.europa-polar {
+  background-image: url("/scenes/europa/europa-poles-infrared@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="europa"] .europa-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--europa-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="europa"].europa-hide-shadows .europa-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes europa-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="europa"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="europa"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="europa"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="ganymede"] > :is(.polycss-camera, .ganymede-material-composite) {
+  --ganymede-scene-side-padding: 16px;
+  --ganymede-reference-width: 1920px;
+  --ganymede-reference-height: 1080px;
+  --ganymede-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--ganymede-scene-side-padding) - var(--ganymede-scene-side-padding)) /
+        var(--ganymede-reference-width)
+    ),
+    calc(100cqh / var(--ganymede-reference-height))
+  );
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-camera,
+.object-stage[data-object-id="ganymede"] .ganymede-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="ganymede"] .ganymede-body {
+  transform-style: preserve-3d;
+  animation-name: ganymede-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-scene s,
+.object-stage[data-object-id="ganymede"] .ganymede-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-scene s:not(.ganymede-polar) {
+  background-image: url("/scenes/ganymede/ganymede-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-scene s.ganymede-polar {
+  background-image: url("/scenes/ganymede/ganymede-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"][data-lens="enhanced"] .polycss-scene s:not(.ganymede-polar) {
+  background-image: url("/scenes/ganymede/ganymede-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"][data-lens="enhanced"] .polycss-scene s.ganymede-polar {
+  background-image: url("/scenes/ganymede/ganymede-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"][data-lens="geology"] .polycss-scene s:not(.ganymede-polar) {
+  background-image: url("/scenes/ganymede/ganymede-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"][data-lens="geology"] .polycss-scene s.ganymede-polar {
+  background-image: url("/scenes/ganymede/ganymede-poles-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"][data-lens="oxygen-signature"] .polycss-scene s:not(.ganymede-polar) {
+  background-image: url("/scenes/ganymede/ganymede-oxygen-signature@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ganymede"][data-lens="oxygen-signature"] .polycss-scene s.ganymede-polar {
+  background-image: url("/scenes/ganymede/ganymede-poles-oxygen-signature@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="ganymede"] .ganymede-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--ganymede-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="ganymede"].ganymede-hide-shadows .ganymede-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes ganymede-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="ganymede"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="iapetus"] > :is(.polycss-camera, .iapetus-material-composite) {
+  --iapetus-scene-side-padding: 16px;
+  --iapetus-reference-width: 1920px;
+  --iapetus-reference-height: 1080px;
+  --iapetus-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--iapetus-scene-side-padding) - var(--iapetus-scene-side-padding)) /
+        var(--iapetus-reference-width)
+    ),
+    calc(100cqh / var(--iapetus-reference-height))
+  );
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-camera,
+.object-stage[data-object-id="iapetus"] .iapetus-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="iapetus"] .iapetus-body {
+  transform-style: preserve-3d;
+  animation-name: iapetus-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-scene s,
+.object-stage[data-object-id="iapetus"] .iapetus-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-scene s:not(.iapetus-polar) {
+  background-image: url("/scenes/iapetus/iapetus-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-scene s.iapetus-polar {
+  background-image: url("/scenes/iapetus/iapetus-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"][data-lens="enhanced"] .polycss-scene s:not(.iapetus-polar) {
+  background-image: url("/scenes/iapetus/iapetus-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"][data-lens="enhanced"] .polycss-scene s.iapetus-polar {
+  background-image: url("/scenes/iapetus/iapetus-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"][data-lens="infrared"] .polycss-scene s:not(.iapetus-polar) {
+  background-image: url("/scenes/iapetus/iapetus-infrared@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"][data-lens="infrared"] .polycss-scene s.iapetus-polar {
+  background-image: url("/scenes/iapetus/iapetus-poles-infrared@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"][data-lens="ice-absorption"] .polycss-scene s:not(.iapetus-polar) {
+  background-image: url("/scenes/iapetus/iapetus-ice-absorption@2x.webp") !important;
+}
+
+.object-stage[data-object-id="iapetus"][data-lens="ice-absorption"] .polycss-scene s.iapetus-polar {
+  background-image: url("/scenes/iapetus/iapetus-poles-ice-absorption@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="iapetus"] .iapetus-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--iapetus-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="iapetus"].iapetus-hide-shadows .iapetus-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes iapetus-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="iapetus"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="io"] > :is(.polycss-camera, .io-material-composite) {
+  --io-scene-side-padding: 16px;
+  --io-reference-width: 1920px;
+  --io-reference-height: 1080px;
+  --io-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--io-scene-side-padding) - var(--io-scene-side-padding)) /
+        var(--io-reference-width)
+    ),
+    calc(100cqh / var(--io-reference-height))
+  );
+}
+
+.object-stage[data-object-id="io"] .polycss-camera,
+.object-stage[data-object-id="io"] .io-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="io"] .io-body {
+  transform-style: preserve-3d;
+  animation-name: io-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="io"] .polycss-scene s,
+.object-stage[data-object-id="io"] .io-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="io"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="enhanced"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="enhanced"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="geology"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="geology"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="spectral-slope"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-spectral-slope@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="spectral-slope"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-spectral-slope@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="visible-absorption"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-visible-absorption@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="visible-absorption"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-visible-absorption@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s:not(.io-polar) {
+  background-image: url("/scenes/io/io-volcanic-heat@2x.webp") !important;
+}
+
+.object-stage[data-object-id="io"][data-lens="volcanic-heat"] .polycss-scene s.io-polar {
+  background-image: url("/scenes/io/io-poles-volcanic-heat@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="io"] .io-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--io-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="io"].io-hide-shadows .io-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes io-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="io"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="io"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="io"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="makemake"] > :is(.polycss-camera, .makemake-material-composite) {
+  --makemake-scene-side-padding: 16px;
+  --makemake-reference-width: 1920px;
+  --makemake-reference-height: 1080px;
+  --makemake-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--makemake-scene-side-padding) - var(--makemake-scene-side-padding)) /
+        var(--makemake-reference-width)
+    ),
+    calc(100cqh / var(--makemake-reference-height))
+  );
+}
+
+.object-stage[data-object-id="makemake"] .polycss-camera,
+.object-stage[data-object-id="makemake"] .makemake-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="makemake"] .makemake-body {
+  transform-style: preserve-3d;
+  animation-name: makemake-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="makemake"] .polycss-scene s,
+.object-stage[data-object-id="makemake"] .makemake-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="makemake"] .polycss-scene s:not(.makemake-polar) {
+  background-image: url("/scenes/makemake/makemake-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="makemake"] .polycss-scene s.makemake-polar {
+  background-image: url("/scenes/makemake/makemake-poles-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="makemake"][data-lens="illustration"] .polycss-scene s:not(.makemake-polar) {
+  background-image: url("/scenes/makemake/makemake-illustration@2x.webp") !important;
+}
+
+.object-stage[data-object-id="makemake"][data-lens="illustration"] .polycss-scene s.makemake-polar {
+  background-image: url("/scenes/makemake/makemake-poles-illustration@2x.webp") !important;
+}
+
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="makemake"] .makemake-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--makemake-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="makemake"].makemake-hide-shadows .makemake-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes makemake-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="makemake"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="makemake"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="makemake"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="miranda"] > :is(.polycss-camera, .miranda-material-composite) {
+  --miranda-scene-side-padding: 16px;
+  --miranda-reference-width: 1920px;
+  --miranda-reference-height: 1080px;
+  --miranda-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--miranda-scene-side-padding) - var(--miranda-scene-side-padding)) /
+        var(--miranda-reference-width)
+    ),
+    calc(100cqh / var(--miranda-reference-height))
+  );
+}
+
+.object-stage[data-object-id="miranda"] .polycss-camera,
+.object-stage[data-object-id="miranda"] .miranda-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="miranda"] .miranda-body {
+  transform-style: preserve-3d;
+  animation-name: miranda-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="miranda"] .polycss-scene s,
+.object-stage[data-object-id="miranda"] .miranda-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="miranda"] .polycss-scene s:not(.miranda-polar) {
+  background-image: url("/scenes/miranda/miranda-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"] .polycss-scene s.miranda-polar {
+  background-image: url("/scenes/miranda/miranda-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"][data-lens="elevation"] .polycss-scene s:not(.miranda-polar) {
+  background-image: url("/scenes/miranda/miranda-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"][data-lens="elevation"] .polycss-scene s.miranda-polar {
+  background-image: url("/scenes/miranda/miranda-poles-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"][data-lens="geology"] .polycss-scene s:not(.miranda-polar) {
+  background-image: url("/scenes/miranda/miranda-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"][data-lens="geology"] .polycss-scene s.miranda-polar {
+  background-image: url("/scenes/miranda/miranda-poles-geology@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="miranda"] .miranda-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--miranda-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="miranda"].miranda-hide-shadows .miranda-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes miranda-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="miranda"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="miranda"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="miranda"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="oberon"] > :is(.polycss-camera, .oberon-material-composite) {
+  --oberon-scene-side-padding: 16px;
+  --oberon-reference-width: 1920px;
+  --oberon-reference-height: 1080px;
+  --oberon-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--oberon-scene-side-padding) - var(--oberon-scene-side-padding)) /
+        var(--oberon-reference-width)
+    ),
+    calc(100cqh / var(--oberon-reference-height))
+  );
+}
+
+.object-stage[data-object-id="oberon"] .polycss-camera,
+.object-stage[data-object-id="oberon"] .oberon-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="oberon"] .oberon-body {
+  transform-style: preserve-3d;
+  animation-name: oberon-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="oberon"] .polycss-scene s,
+.object-stage[data-object-id="oberon"] .oberon-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="oberon"] .polycss-scene s:not(.oberon-polar) {
+  background-image: url("/scenes/oberon/oberon-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="oberon"] .polycss-scene s.oberon-polar {
+  background-image: url("/scenes/oberon/oberon-poles-normal@2x.webp") !important;
+}
+
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="oberon"] .oberon-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--oberon-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="oberon"].oberon-hide-shadows .oberon-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes oberon-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="oberon"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="oberon"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="oberon"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="titan"] > :is(.polycss-camera, .titan-material-composite) {
+  --titan-scene-side-padding: 16px;
+  --titan-reference-width: 1920px;
+  --titan-reference-height: 1080px;
+  --titan-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--titan-scene-side-padding) - var(--titan-scene-side-padding)) /
+        var(--titan-reference-width)
+    ),
+    calc(100cqh / var(--titan-reference-height))
+  );
+}
+
+.object-stage[data-object-id="titan"] .polycss-camera,
+.object-stage[data-object-id="titan"] .titan-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="titan"] .titan-body {
+  transform-style: preserve-3d;
+  animation-name: titan-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="titan"] .polycss-scene s,
+.object-stage[data-object-id="titan"] .titan-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="titan"] .polycss-scene s:not(.titan-polar) {
+  background-image: url("/scenes/titan/titan-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"] .polycss-scene s.titan-polar {
+  background-image: url("/scenes/titan/titan-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="radar"] .polycss-scene s:not(.titan-polar) {
+  background-image: url("/scenes/titan/titan-radar@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="radar"] .polycss-scene s.titan-polar {
+  background-image: url("/scenes/titan/titan-poles-radar@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="topography"] .polycss-scene s:not(.titan-polar) {
+  background-image: url("/scenes/titan/titan-topography@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="topography"] .polycss-scene s.titan-polar {
+  background-image: url("/scenes/titan/titan-poles-topography@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="interpolated"] .polycss-scene s:not(.titan-polar) {
+  background-image: url("/scenes/titan/titan-interpolated@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="interpolated"] .polycss-scene s.titan-polar {
+  background-image: url("/scenes/titan/titan-poles-interpolated@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="coverage-distance"] .polycss-scene s:not(.titan-polar) {
+  background-image: url("/scenes/titan/titan-coverage-distance@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="coverage-distance"] .polycss-scene s.titan-polar {
+  background-image: url("/scenes/titan/titan-poles-coverage-distance@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="geology"] .polycss-scene s:not(.titan-polar) {
+  background-image: url("/scenes/titan/titan-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titan"][data-lens="geology"] .polycss-scene s.titan-polar {
+  background-image: url("/scenes/titan/titan-poles-geology@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="titan"] .titan-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--titan-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="titan"].titan-hide-shadows .titan-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes titan-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="titan"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="titan"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="titan"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="titania"] > :is(.polycss-camera, .titania-material-composite) {
+  --titania-scene-side-padding: 16px;
+  --titania-reference-width: 1920px;
+  --titania-reference-height: 1080px;
+  --titania-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--titania-scene-side-padding) - var(--titania-scene-side-padding)) /
+        var(--titania-reference-width)
+    ),
+    calc(100cqh / var(--titania-reference-height))
+  );
+}
+
+.object-stage[data-object-id="titania"] .polycss-camera,
+.object-stage[data-object-id="titania"] .titania-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="titania"] .titania-body {
+  transform-style: preserve-3d;
+  animation-name: titania-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="titania"] .polycss-scene s,
+.object-stage[data-object-id="titania"] .titania-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="titania"] .polycss-scene s:not(.titania-polar) {
+  background-image: url("/scenes/titania/titania-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"] .polycss-scene s.titania-polar {
+  background-image: url("/scenes/titania/titania-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"][data-lens="elevation"] .polycss-scene s:not(.titania-polar) {
+  background-image: url("/scenes/titania/titania-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"][data-lens="elevation"] .polycss-scene s.titania-polar {
+  background-image: url("/scenes/titania/titania-poles-elevation@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"][data-lens="geology"] .polycss-scene s:not(.titania-polar) {
+  background-image: url("/scenes/titania/titania-geology@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"][data-lens="geology"] .polycss-scene s.titania-polar {
+  background-image: url("/scenes/titania/titania-poles-geology@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="titania"] .titania-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--titania-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="titania"].titania-hide-shadows .titania-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes titania-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="titania"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="titania"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="titania"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="triton"] > :is(.polycss-camera, .triton-material-composite) {
+  --triton-scene-side-padding: 16px;
+  --triton-reference-width: 1920px;
+  --triton-reference-height: 1080px;
+  --triton-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--triton-scene-side-padding) - var(--triton-scene-side-padding)) /
+        var(--triton-reference-width)
+    ),
+    calc(100cqh / var(--triton-reference-height))
+  );
+}
+
+.object-stage[data-object-id="triton"] .polycss-camera,
+.object-stage[data-object-id="triton"] .triton-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="triton"] .triton-body {
+  transform-style: preserve-3d;
+  animation-name: triton-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="triton"] .polycss-scene s,
+.object-stage[data-object-id="triton"] .triton-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="triton"] .polycss-scene s:not(.triton-polar) {
+  background-image: url("/scenes/triton/triton-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"] .polycss-scene s.triton-polar {
+  background-image: url("/scenes/triton/triton-poles-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"][data-lens="enhanced"] .polycss-scene s:not(.triton-polar) {
+  background-image: url("/scenes/triton/triton-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"][data-lens="enhanced"] .polycss-scene s.triton-polar {
+  background-image: url("/scenes/triton/triton-poles-enhanced@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"][data-lens="ultraviolet"] .polycss-scene s:not(.triton-polar) {
+  background-image: url("/scenes/triton/triton-ultraviolet@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"][data-lens="ultraviolet"] .polycss-scene s.triton-polar {
+  background-image: url("/scenes/triton/triton-poles-ultraviolet@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"][data-lens="voyager-color"] .polycss-scene s:not(.triton-polar) {
+  background-image: url("/scenes/triton/triton-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="triton"][data-lens="voyager-color"] .polycss-scene s.triton-polar {
+  background-image: url("/scenes/triton/triton-poles-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s:not(.miranda-polar) {
+  background-image: url("/scenes/miranda/miranda-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="miranda"][data-lens="voyager-color"] .polycss-scene s.miranda-polar {
+  background-image: url("/scenes/miranda/miranda-poles-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ariel"][data-lens="voyager-color"] .polycss-scene s:not(.ariel-polar) {
+  background-image: url("/scenes/ariel/ariel-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="ariel"][data-lens="voyager-color"] .polycss-scene s.ariel-polar {
+  background-image: url("/scenes/ariel/ariel-poles-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="umbriel"][data-lens="voyager-color"] .polycss-scene s:not(.umbriel-polar) {
+  background-image: url("/scenes/umbriel/umbriel-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="umbriel"][data-lens="voyager-color"] .polycss-scene s.umbriel-polar {
+  background-image: url("/scenes/umbriel/umbriel-poles-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"][data-lens="voyager-color"] .polycss-scene s:not(.titania-polar) {
+  background-image: url("/scenes/titania/titania-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="titania"][data-lens="voyager-color"] .polycss-scene s.titania-polar {
+  background-image: url("/scenes/titania/titania-poles-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="oberon"][data-lens="voyager-color"] .polycss-scene s:not(.oberon-polar) {
+  background-image: url("/scenes/oberon/oberon-voyager-color@2x.webp") !important;
+}
+
+.object-stage[data-object-id="oberon"][data-lens="voyager-color"] .polycss-scene s.oberon-polar {
+  background-image: url("/scenes/oberon/oberon-poles-voyager-color@2x.webp") !important;
+}
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="triton"] .triton-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--triton-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="triton"].triton-hide-shadows .triton-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes triton-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(-360deg); }
+}
+
+.object-stage[data-object-id="triton"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="triton"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="triton"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+.object-stage[data-object-id="umbriel"] > :is(.polycss-camera, .umbriel-material-composite) {
+  --umbriel-scene-side-padding: 16px;
+  --umbriel-reference-width: 1920px;
+  --umbriel-reference-height: 1080px;
+  --umbriel-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--umbriel-scene-side-padding) - var(--umbriel-scene-side-padding)) /
+        var(--umbriel-reference-width)
+    ),
+    calc(100cqh / var(--umbriel-reference-height))
+  );
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-camera,
+.object-stage[data-object-id="umbriel"] .umbriel-material-composite {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="umbriel"] .umbriel-body {
+  transform-style: preserve-3d;
+  animation-name: umbriel-body-spin;
+  animation-duration: 84s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-scene s,
+.object-stage[data-object-id="umbriel"] .umbriel-fixed-material {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  backface-visibility: hidden;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-scene s:not(.umbriel-polar) {
+  background-image: url("/scenes/umbriel/umbriel-normal@2x.webp") !important;
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-scene s.umbriel-polar {
+  background-image: url("/scenes/umbriel/umbriel-poles-normal@2x.webp") !important;
+}
+
+
+/* Lambert lighting overlay: 460 px = presentationSize of the lighting bank = logical body diameter.
+   background-image / background-position / background-size come from the material track. */
+.object-stage[data-object-id="umbriel"] .umbriel-fixed-material {
+  z-index: 1;
+  top: 50%;
+  left: 50%;
+  width: 460px;
+  height: 460px;
+  transform: translate(-50%, -50%) rotate(var(--umbriel-light-roll, 0deg));
+  transform-origin: 50% 50%;
+}
+
+.object-stage[data-object-id="umbriel"].umbriel-hide-shadows .umbriel-fixed-material {
+  transform: translate(-50%, -50%);
+}
+
+@keyframes umbriel-body-spin {
+  from { transform: rotateZ(0deg); }
+  to { transform: rotateZ(360deg); }
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="umbriel"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}
+
+/* SUN */
+.object-stage[data-object-id="sun"] > :is(.polycss-camera, .sun-corona-layer, .sun-limb-layer) {
+  --sun-scene-side-padding: 16px;
+  --sun-reference-width: 1920px;
+  --sun-reference-height: 1080px;
+  --sun-shell-scale: min(
+    1,
+    calc(
+      (100cqw - var(--sun-scene-side-padding) - var(--sun-scene-side-padding)) /
+        var(--sun-reference-width)
+    ),
+    calc(100cqh / var(--sun-reference-height))
+  );
+}
+
+/* Paint order carried from the retired sun-surfaces.css: off-limb context behind the sphere, limb plate above it. */
+.object-stage[data-object-id="sun"] .sun-corona-layer {
+  z-index: 0;
+}
+
+.object-stage[data-object-id="sun"] .polycss-camera {
+  z-index: 1;
+}
+
+.object-stage[data-object-id="sun"] .sun-limb-layer {
+  z-index: 2;
+}
+
+.object-stage[data-object-id="sun"] .sun-body {
+  transform-style: preserve-3d;
+  animation-name: sun-body-spin;
+  animation-duration: 72s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-play-state: paused;
+}
+
+.object-stage[data-object-id="sun"] .polycss-scene s {
+  position: absolute;
+  display: block;
+  transform-origin: 0 0;
+  margin: 0;
+  padding: 0;
+  line-height: 0;
+  text-decoration: none;
+  background-repeat: no-repeat;
+  pointer-events: none;
+}
+
+/* Emissive leaves keep the retired lane's visibility: full-band leaves stay visible from behind so the overlapped
+   seams never open; polar cap leaves hide their back faces. */
+.object-stage[data-object-id="sun"] .polycss-scene s:not(.sun-polar) {
+  backface-visibility: visible;
+  background-image: var(--sun-surface-image) !important;
+}
+
+.object-stage[data-object-id="sun"] .polycss-scene s.sun-polar {
+  backface-visibility: hidden;
+  background-image: var(--sun-poles-image) !important;
+}
+
+/* Off-limb context: 768 px = raster.json emission.offLimbSize = the plate's logical size at zoom 1, times the sphere's
+   solar-system.json geometryScale (1.25) so the plate stays registered to the enlarged sphere. */
+.object-stage[data-object-id="sun"] .sun-corona-layer {
+  background-image: var(--sun-corona-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(768px * 1.25 * var(--sun-camera-zoom, 1))
+    calc(768px * 1.25 * var(--sun-camera-zoom, 1));
+}
+
+/* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale (1.25), the size
+   the sphere is drawn at, so the plate's edge is the sphere's outline. */
+.object-stage[data-object-id="sun"] .sun-limb-layer {
+  background-image: var(--sun-limb-image);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size:
+    calc(496px * 1.25 * var(--sun-camera-zoom, 1))
+    calc(496px * 1.25 * var(--sun-camera-zoom, 1));
+}
+
+/* Spin origin carried from the retired sun-surfaces.css (Carrington longitude 0 faces the default yaw). */
+@keyframes sun-body-spin {
+  from { transform: rotateZ(-90deg); }
+  to { transform: rotateZ(-450deg); }
+}
+
+.object-stage[data-object-id="sun"] .polycss-camera {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.object-stage[data-object-id="sun"] .polycss-scene {
+  will-change: transform;
+}
+
+.object-stage[data-object-id="sun"] .polycss-scene s {
+  width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
+  height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
+  transform-style: preserve-3d;
+  font: inherit;
+  font-weight: normal;
+  font-style: normal;
+  line-height: 0;
+}

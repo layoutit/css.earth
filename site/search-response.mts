@@ -22,15 +22,15 @@ export function parseSearchPin(value: unknown): SearchPin {
 interface Result { name: string; context: string; label: string; href: string; }
 function publishResults(root: HTMLElement, results: readonly Result[], hint: string) {
   root.hidden = false;
-  requiredElement(root, '.planet-destination-hint').textContent = hint;
-  for (const [index, anchor] of [...root.querySelectorAll<HTMLAnchorElement>('.planet-destination-result')].entries()) {
+  requiredElement(root, '.object-destination-hint').textContent = hint;
+  for (const [index, anchor] of [...root.querySelectorAll<HTMLAnchorElement>('.object-destination-result')].entries()) {
     const result = results[index];
     anchor.parentElement!.hidden = !result;
     if (!result) continue;
     anchor.setAttribute('href', result.href);
     anchor.setAttribute('aria-label', result.label);
-    requiredElement(anchor, '.planet-destination-result-name').textContent = result.name;
-    requiredElement(anchor, '.planet-destination-result-context').textContent = result.context;
+    requiredElement(anchor, '.object-destination-result-name').textContent = result.name;
+    requiredElement(anchor, '.object-destination-result-context').textContent = result.context;
   }
 }
 
@@ -43,7 +43,7 @@ function publishResults(root: HTMLElement, results: readonly Result[], hint: str
  * failed feature index degrades below. */
 async function ensureCatalogueRows(document: Document, browser: HTMLElement, origin: string, fetcher: typeof fetch): Promise<boolean> {
   const resultsPanel = requiredElement<HTMLElement>(browser, '#object-category-results');
-  if (resultsPanel.querySelector('.planet-object-item')) return true;
+  if (resultsPanel.querySelector('.object-item')) return true;
   const pin = readCatalogueFragmentPin(resultsPanel);
   if (!pin) return true;
   try {
@@ -54,7 +54,7 @@ async function ensureCatalogueRows(document: Document, browser: HTMLElement, ori
     const digest = [...new Uint8Array(await crypto.subtle.digest('SHA-256', bytes))].map(value => value.toString(16).padStart(2, '0')).join('');
     if (digest !== pin.sha256) throw new Error('Object catalogue fragment identity drifted.');
     const fragment = parseHTML(`<html><body>${new TextDecoder().decode(bytes)}</body></html>`).document;
-    const rows = fragment.querySelector('ul.planet-object-list');
+    const rows = fragment.querySelector('ul.object-list');
     if (!rows) throw new Error('Object catalogue fragment content is missing its list.');
     requiredElement(resultsPanel, '[data-catalogue-list]').replaceWith(document.importNode(rows, true));
     const loading = resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]');
@@ -76,10 +76,10 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   const start = html.indexOf(startMarker) + startMarker.length, end = html.indexOf(endMarker);
   if (start < startMarker.length || end < start) throw new Error('Prepared search shell is missing.');
   const { document } = parseHTML(`<html><body>${html.slice(start, end)}</body></html>`);
-  const form = requiredElement<HTMLFormElement>(document, '.planet-sidebar-search-card');
+  const form = requiredElement<HTMLFormElement>(document, '.object-sidebar-search-card');
   const objectId = form.dataset.searchObject;
   if (!objectId || !/^[a-z][a-z0-9-]*$/u.test(objectId)) throw new Error('Prepared search object is invalid.');
-  const search = requiredElement<HTMLInputElement>(form, '.planet-sidebar-search');
+  const search = requiredElement<HTMLInputElement>(form, '.object-sidebar-search');
   const focusCard = document.querySelector<HTMLElement>('[data-prepared-focus-card][data-prepared-focus-id]');
   const value = (url.searchParams.get('browse') ?? url.searchParams.get('q') ?? (focusCard ? search.getAttribute('value') : '') ?? '').slice(0, SEARCH_QUERY_LIMIT).trim();
   const searching = url.searchParams.has('q');
@@ -91,8 +91,8 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   }
   // Native searches and dataset submits carry the same declared object settings.
   if (url.searchParams.get('settings') === '1') {
-    const names = ['settings', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)];
-    for (const form of document.querySelectorAll<HTMLFormElement>('[data-dataset-form], .planet-sidebar-search-card')) {
+    const names = ['settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)];
+    for (const form of document.querySelectorAll<HTMLFormElement>('[data-dataset-form], .object-sidebar-search-card')) {
       for (const name of new Set(names)) {
         const value = url.searchParams.get(name);
         if (value === null) continue;
@@ -104,17 +104,17 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
   }
   const clear = new URL(`/${objectId}/`, url.origin);
-  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.planet-settings input[form][name]')].map(input => input.name)]) {
+  for (const name of ['v', 'overview', 'focus', 'focusLens', 'dataset', 'feature', 'settings', ...[...document.querySelectorAll<HTMLInputElement>('.object-settings input[form][name]')].map(input => input.name)]) {
     const value = url.searchParams.get(name);
     if (value) clear.searchParams.set(name, value.slice(0, 2048));
   }
   // Clearing the search keeps the view context, normalized the way the router resolves it.
   withOverviewScope(clear, overviewScopeFromUrl(url));
-  document.querySelector('.planet-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
-  const browser = requiredElement<HTMLElement>(document, '.planet-object-browser');
-  const information = requiredElement<HTMLElement>(document, '.planet-information-panel');
-  const selectedContent = requiredElement<HTMLElement>(document, '.planet-selected-content');
-  const context = document.querySelector<HTMLElement>('.planet-object-context') ?? browser;
+  document.querySelector('.object-sidebar-search-clear')?.setAttribute('href', clear.pathname + clear.search);
+  const browser = requiredElement<HTMLElement>(document, '.object-browser');
+  const information = requiredElement<HTMLElement>(document, '.object-information-panel');
+  const selectedContent = requiredElement<HTMLElement>(document, '.object-selected-content');
+  const context = document.querySelector<HTMLElement>('.object-context') ?? browser;
   const sharedLegacyContext = context === browser;
   const selectedOverview = overviewScopeFromUrl(url);
   const showingContext = Boolean(focusCard || selectedOverview);
@@ -124,7 +124,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   information.toggleAttribute('hidden', showingContext);
   if (!sharedLegacyContext) context.toggleAttribute('hidden', !showingContext);
   if (focusCard) focusCard.removeAttribute('hidden');
-  if (searching) requiredElement(document, '.planet-sheet-handle').setAttribute('checked', '');
+  if (searching) requiredElement(document, '.object-sheet-handle').setAttribute('checked', '');
   form.toggleAttribute('data-search-submitted', searching);
   browser.setAttribute('aria-label', searching ? 'Search results' : 'Celestial objects');
   const galaxy = context.querySelector<HTMLElement>('[data-galactic-overview]');
@@ -142,7 +142,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
   }
   if (searching) {
     const catalogueLoaded = await ensureCatalogueRows(document, browser, url.origin, fetcher);
-    const items = [...browser.querySelectorAll<HTMLElement>('.planet-object-item')];
+    const items = [...browser.querySelectorAll<HTMLElement>('.object-item')];
     const labels = items.map(item => ({ ...objectSearchLabels(item), item }));
     const requestedCategory = url.searchParams.get('category');
     const category = OBJECT_CATEGORIES.some(([id]) => id === requestedCategory) ? requestedCategory! : undefined;
@@ -156,23 +156,23 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
     }
     const order = items.toSorted((a, b) => selected === 'planet' && (a.dataset.objectClassification === 'planet') !== (b.dataset.objectClassification === 'planet')
       ? a.dataset.objectClassification === 'planet' ? -1 : 1 : Number(a.dataset.objectDistanceAu) - Number(b.dataset.objectDistanceAu));
-    for (const [index, chunk] of [...browser.querySelectorAll<HTMLElement>('.planet-object-chunk')].entries()) {
+    for (const [index, chunk] of [...browser.querySelectorAll<HTMLElement>('.object-chunk')].entries()) {
       const rows = order.slice(index * 16, (index + 1) * 16);
-      requiredElement(chunk, '.planet-object-chunk-list').append(...rows);
+      requiredElement(chunk, '.object-chunk-list').append(...rows);
       const visible = rows.filter(item => !item.hidden).length;
       chunk.hidden = visible === 0;
       chunk.style.containIntrinsicBlockSize = `${Math.max(0, visible * 28 - 8)}px`;
     }
     for (const tab of browser.querySelectorAll<HTMLElement>('[data-object-tab]')) {
       tab.setAttribute('aria-selected', String(tab.dataset.objectTab === selected));
-      requiredElement(tab, '.planet-object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
+      requiredElement(tab, '.object-tab-count').textContent = `(${objectCategoryCount(classifications, tab.dataset.objectTab)})`;
     }
     presentSearchResults(browser, true, selected);
     const overviewCount = presentOverviewResults(browser, value);
-    for (const pill of document.querySelectorAll<HTMLElement>('.planet-search-category')) {
+    for (const pill of document.querySelectorAll<HTMLElement>('.object-search-category')) {
       pill.setAttribute('aria-pressed', String(pill.dataset.searchClassification === result.classification));
     }
-    const featureRoot = document.querySelector<HTMLElement>('.planet-feature-results');
+    const featureRoot = document.querySelector<HTMLElement>('.object-feature-results');
     let detailCount = 0;
     if (result.detailQuery && featureRoot) {
       try {
@@ -189,7 +189,7 @@ export async function renderSearchResponse(html: string, url: URL, fetcher: type
         detailCount = 1;
       }
     }
-    requiredElement<HTMLElement>(browser, '.planet-object-empty').hidden = !catalogueLoaded || items.some(item => !item.hidden) || detailCount + overviewCount > 0;
+    requiredElement<HTMLElement>(browser, '.object-empty').hidden = !catalogueLoaded || items.some(item => !item.hidden) || detailCount + overviewCount > 0;
   }
   browser.dataset.sourceFocus = focusCard?.dataset.preparedFocusId ?? '';
   const overview = selectedOverview ?? '';

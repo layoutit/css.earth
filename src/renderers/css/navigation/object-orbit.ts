@@ -41,7 +41,7 @@ import { directAngularDegreesPerTrackballRadius, interactionTrackball, directPit
 import { createPreparedWheelZoomControls } from "./prepared-wheel-zoom.js";
 import { createCubicSkyCameraOrientation } from "./camera-orientation.js";
 import { preparedScenePitch, clamp } from "@cssearth/engine";
-import { selectPreparedResponsiveZoom, measureRetainedPlanetTrackball } from "./camera-layout.js";
+import { selectPreparedResponsiveZoom, measureRetainedObjectTrackball } from "./camera-layout.js";
 import { createUnboundedMatrixDragControls } from "./camera-input.js";
 
 const nativeServices = { createPolyCamera, createCubicSkyCameraOrientation, selectPreparedResponsiveZoom, createUnboundedMatrixDragControls, createPreparedWheelZoomControls, createPerspectiveDolly };
@@ -337,7 +337,7 @@ export function createRetainedCubicSkyOrbit({
     runtimePolicy,
     onError: retireFailure,
     camera: safeCamera,
-    trackballMetrics: () => perspective ? preparedFocus!.trackball(perspective.trackball()) : measureRetainedPlanetTrackball({
+    trackballMetrics: () => perspective ? preparedFocus!.trackball(perspective.trackball()) : measureRetainedObjectTrackball({
       stage,
       cameraElement,
       logicalBodyDiameter: cameraPlan.logicalBodyDiameter,

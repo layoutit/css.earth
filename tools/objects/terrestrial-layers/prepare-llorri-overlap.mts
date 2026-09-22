@@ -25,7 +25,7 @@ const json = async(path:string):Promise<unknown> => JSON.parse(await readFile(pa
 /** Fixed camera intrinsics, attitude and full source mesh; only detector translation
  * is fitted. Grid membership precedes matching and no residuals are discarded. */
 export async function prepareLlorriOverlap(sourceDirectory:string, write=false) {
-  const source=resolve(sourceDirectory), sources=await createSourceManifest({planetId:basename(resolve(source,'..')),planetName:basename(resolve(source,'..')),sourceRoot:source});
+  const source=resolve(sourceDirectory), sources=await createSourceManifest({objectId:basename(resolve(source,'..')),objectName:basename(resolve(source,'..')),sourceRoot:source});
   const pinned=(path:string)=>sources.readSource(path);
   const recipePath='preparation/llorri-overlap.json',recipe=parseRecipe(JSON.parse((await pinned(recipePath)).toString('utf8')));
   assert.equal(recipe.schema,'cssearth-llorri-overlap@1');

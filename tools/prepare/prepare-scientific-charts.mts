@@ -27,22 +27,22 @@ export async function prepareScientificCharts({
   const availablePlanetIds = Object.keys(context.planets);
   const selectedPlanetIds = planetIds ?? availablePlanetIds;
   if (!isArray(selectedPlanetIds) || selectedPlanetIds.length === 0 ||
-      selectedPlanetIds.some((planetId) => !availablePlanetIds.includes(planetId))) {
+      selectedPlanetIds.some((objectId) => !availablePlanetIds.includes(objectId))) {
     throw new TypeError("Scientific chart planet selection is incompatible.");
   }
   const outputs = [];
-  for (const planetId of selectedPlanetIds) {
-    const planet = context.planets[planetId];
-    const outputDirectory = resolve(outputRoot, planetId);
+  for (const objectId of selectedPlanetIds) {
+    const planet = context.planets[objectId];
+    const outputDirectory = resolve(outputRoot, objectId);
     await mkdir(outputDirectory, { recursive: true });
     const phasePoints = samplePhaseCurve(planet.phase);
     const phaseSvg = renderPhotometricPhaseChart({
-      id: planetId,
-      title: `${titleCase(planetId)} photometric phase curve`,
-      description: `V-band dimming of ${titleCase(planetId)} as phase angle increases from zero to ${planet.phase.maximumAngleDegrees} degrees.`,
+      id: objectId,
+      title: `${titleCase(objectId)} photometric phase curve`,
+      description: `V-band dimming of ${titleCase(objectId)} as phase angle increases from zero to ${planet.phase.maximumAngleDegrees} degrees.`,
       metadata: {
         source: context.sources.photometricPhase,
-        planetId,
+        objectId,
         samples: phasePoints.length,
         maximumAngleDegrees: planet.phase.maximumAngleDegrees,
         qualification: planet.phase.qualification ?? null,
@@ -52,7 +52,7 @@ export async function prepareScientificCharts({
     });
     const phaseOutput = resolve(
       outputDirectory,
-      `${planetId}-photometric-phase-curve.svg`,
+      `${objectId}-photometric-phase-curve.svg`,
     );
     await writeFile(phaseOutput, phaseSvg);
     outputs.push(phaseOutput);
@@ -105,8 +105,8 @@ export function validateScientificChartsContext(value: unknown) {
       !context.sources?.photometricPhase) {
     throw new TypeError("Planetary scientific context is incompatible.");
   }
-  for (const planetId of requiredPlanets) {
-    const planet = context.planets[planetId];
+  for (const objectId of requiredPlanets) {
+    const planet = context.planets[objectId];
     validatePhase(planet.phase);
   }
   return context;

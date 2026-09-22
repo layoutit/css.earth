@@ -3,8 +3,8 @@ import { pathToFileURL } from 'node:url';
 
 type Sky = typeof import('../../../src/platform/prepare-cubic-sky-source.mts');
 type Sun = typeof import('../../../src/platform/prepare-directional-sun.mts');
-export type StarfieldPlan = ReturnType<Sky['preparePlanetCubicSky']>;
-export type SunPlan = ReturnType<Sun['preparePlanetDirectionalSun']>;
+export type StarfieldPlan = ReturnType<Sky['prepareCubicSky']>;
+export type SunPlan = ReturnType<Sun['prepareDirectionalSun']>;
 export interface SolarSource {
   readonly bodyId: string;
   readonly displayName: string;
@@ -20,6 +20,6 @@ export async function loadCelestialAdapters() {
     import(path('src/platform/cubic-sky-contract.mts')) as Promise<typeof import('../../../src/platform/cubic-sky-contract.mts')>,
     import(path('tools/objects/solar-system-scene.mts')) as Promise<typeof import('../solar-system-scene.mts')>,
   ]);
-  return { requireSceneObject: objects.requireSceneObject, preparePlanetCubicSky: sky.preparePlanetCubicSky, preparePlanetDirectionalSun: sun.preparePlanetDirectionalSun,
+  return { requireSceneObject: objects.requireSceneObject, prepareCubicSky: sky.prepareCubicSky, prepareDirectionalSun: sun.prepareDirectionalSun,
     prepareSolarSystemSunPresentation: scene.prepareSolarSystemSunPresentation, cubicSkyCamera: contract.CUBIC_SKY_CAMERA_PRESENTATION_STANDARD };
 }

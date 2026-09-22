@@ -280,7 +280,7 @@ async function authorBody(body: Body) {
   ];
   await write(resolve(src, 'preparation/acquisition.json'), json({ schema: 'cssearth-acquisition-plan@1', operations }));
   const navigation = requireRecord(JSON.parse(await readFile(resolve(template, 'source/preparation/navigation.json'), 'utf8')));
-  await write(resolve(src, 'preparation/navigation.json'), json({ ...navigation, planetId: id }));
+  await write(resolve(src, 'preparation/navigation.json'), json({ ...navigation, objectId: id }));
   await write(resolve(src, 'presentation/LICENSE.INTER-OFL'), await readFile(resolve(template, 'source/presentation/LICENSE.INTER-OFL')));
   await write(resolve(src, 'presentation/InterVariable.ttf'), await download(FONT_URL, 'InterVariable.ttf'));
   await write(resolve(pkg, '.gitignore'), await readFile(resolve(template, '.gitignore')));
@@ -407,7 +407,7 @@ async function authorBody(body: Body) {
   };
   await write(resolve(src, 'manifest.json'), json(manifest));
   await pinDocuments(src, manifest);
-  const source = await createSourceManifest({ planetId: id, planetName: name, sourceRoot: src });
+  const source = await createSourceManifest({ objectId: id, objectName: name, sourceRoot: src });
   const radial = await loadRadialTerrain({ config: { ...terrestrial, geometry: { ...terrestrial.geometry, radius: geometryRadius, radiusKm } }, sourceDirectory: src, source });
   if (!radial) throw new TypeError(`${id}: the marker snapshot requires a radial terrain.`);
   const recipeRecord = { generator: 'tools/objects/terrestrial-layers/radial-snapshot.mts', inputs: [shapeId], size: 512, longitudeDegrees: 0, latitudeDegrees: 35, ambient: 0.45, diffuse: 0.55, lensId: 'shape' };

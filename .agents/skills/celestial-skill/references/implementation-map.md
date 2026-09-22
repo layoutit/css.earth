@@ -53,9 +53,9 @@ fallback requirements are not the current authored-package template.
 | Source acquisition, verification and runtime inventory | `tools/objects/operations.ts`, `tools/objects/operations-acquisition.ts`, package source manifests and acquisition JSON |
 | Retained scene, selection, resources and lifecycle | `src/renderers/css/runtime/object-runtime.ts`, `src/renderers/css/rendering/`, `site/scene-contract.mts`, `site/scene-router.mts` |
 | Shared input, world camera and physical registration | `site/runtime-policy.mts`, `src/renderers/css/navigation/`, `src/renderers/css/rendering/prepared-camera-runtime.ts`, `tools/objects/world-navigation.ts` |
-| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/PlanetLayout.astro` |
-| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-planet-title-sources.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
-| Search and marker presentation | `site/planet-search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
+| Shared page and content presentation | `site/pages/[id].astro`, `site/components/ObjectPage.astro`, `site/object-page-data.mts`, `site/object-page-contract.mts`, `site/layouts/ObjectLayout.astro` |
+| Content, lens labels, title and minimap preparation | `tools/objects/content/`, `site/prepare-lens-labels.mts`, `tools/prepare/prepare-object-title-sources.mts`, `tools/prepare/prepare-surface-minimaps.mts` |
+| Search and marker presentation | `site/search-objects.mts`, `tools/prepare/prepare-navigation.mts`, `src/navigation/marker-presentation.mts` |
 | Open hyperbolic trajectories | `packages/astronomy/src/kepler.ts`, `src/platform/prepare-hyperbolic-path.mts`, shared world-context preparation and orbit validation/projector |
 
 Minimap preparation accepts authored source paths and prepared source records.
@@ -76,7 +76,7 @@ requires behavior the existing capability cannot express.
 
 `site/pages/[id].astro` derives routes from `OBJECTS` and passes the selected id
 to `ObjectPage.astro`. That component loads the body's prepared page and content,
-applies its declared stylesheets, and uses the shared head/panel and `PlanetLayout`.
+applies its declared stylesheets, and uses the shared head/panel and `ObjectLayout`.
 `site/objects.mts` loads descriptors through `loadPackagedObject`. Preserve one
 registry, generic adapter, shared shell and active object scene; navigation uses
 the shared world camera.
@@ -86,7 +86,7 @@ Navigation marker appearance comes from each authored package's
 the pins and attribution are the source manifest's record. `tools/prepare/prepare-navigation.mts` generates
 individual `public/navigation/body-<id>.webp` images and their 2x counterparts.
 Builds assemble the ignored `site/prepared-navigation-markers.mjs` from those
-images and recipes; `PlanetNavigationMarker.astro` consumes it. Follow the
+images and recipes; `ObjectNavigationMarker.astro` consumes it. Follow the
 [registration steps](../../../../src/objects/README.md#register-a-body-without-editing-shared-lists)
 instead of editing a shared list or atlas position.
 
@@ -400,7 +400,7 @@ purposes; run those needed for the task, not every preparation step by default.
 | Install already published prepared files | `pnpm setup:assets --object=<id>` |
 | Restore missing source pins and verify existing bytes | `node tools/objects/dist/operations.js acquire <id>` |
 | Verify source closure without acquiring | `node tools/objects/dist/operations.js acquire <id> --verify-only` |
-| Prepare selected objects through the cache and shared steps | `pnpm prepare:planets -- --object=<id>` |
+| Prepare selected objects through the cache and shared steps | `pnpm prepare:objects -- --object=<id>` |
 | Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, then `node tools/oracles/run.mts [group/name ...]` |
 | Invoke authored preparation directly | `node tools/objects/dist/prepare-authored.js <id> --write` |
 | Prepare one authored object end to end, resumable by step | `node tools/prepare/prepare-object.mts <id> [--from <step>] [--presentation-only]` (the last reuses a paged-ellipsoid body's published heavy outputs): stale builds, pins, catalogue, title, geometry, write mode, discovery, source records, page, text, markers, world context, provenance for this object only |
@@ -432,7 +432,7 @@ and fails on changed existing bytes. `tools/assets/restore-source-inputs.mts` de
 selected objects to shared acquisition; it also restores Earth's pinned WMTS
 inputs. `setup:assets` installs prepared files independently of source preparation.
 
-`tools/cli/run-implemented-planets.mts` discovers registered objects and selects the
+`tools/cli/run-implemented-objects.mts` discovers registered objects and selects the
 authored commands. It routes `test:planets` to `tests/objects/unit/<id>/` plus the shared contract runners in `tests/objects/unit/*.test.mts`, scoped to one body through `CSSEARTH_TEST_OBJECTS`.
 `pnpm test` currently runs packages, renderer, platform and shell checks;
 `test:planets` and `test:preparation` are separate commands.

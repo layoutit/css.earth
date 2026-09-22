@@ -60,7 +60,7 @@ export function createNavigationFragments({ windowTarget, fetchPage = url => win
   };
   function parse(id: string, html: string) {
     const source = new windowTarget.DOMParser().parseFromString(html, 'text/html');
-    if (source.body.dataset.objectShell !== id || source.querySelector<HTMLElement>('.planet-stage')?.dataset.objectId !== id) {
+    if (source.body.dataset.objectShell !== id || source.querySelector<HTMLElement>('.object-stage')?.dataset.objectId !== id) {
       throw new Error('Object route content does not match its registry identity.');
     }
     return source;

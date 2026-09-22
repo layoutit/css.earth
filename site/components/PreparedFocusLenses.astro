@@ -1,7 +1,7 @@
 ---
 import DatasetLenses from './DatasetLenses.astro';
 import DatasetContextPanels from './DatasetContextPanels.astro';
-import PlanetFactsheet from './PlanetFactsheet.astro';
+import ObjectFactsheet from './ObjectFactsheet.astro';
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
 import { validateObjectProvenance } from '../../src/platform/object-provenance.mts';
 import type { PreparedVolumeLensBank } from '../../src/renderers/css/volume/prepared-volume-lenses';
@@ -41,17 +41,17 @@ const banks = await Promise.all(Object.entries(descriptors).filter(([, descripto
 ---
 {banks.map(({ bank, presentation, directSourceIdsByLens, descriptor, resources }) => factsOnly ? <div data-focus-facts-bank={bank.id} hidden>
   {presentation.controls.map(lens => <div data-focus-lens-details={lens.id} hidden={lens.id !== presentation.defaultLens}>
-    <PlanetFactsheet id={`focus-${bank.id}-${lens.id}`} facts={[
+    <ObjectFactsheet id={`focus-${bank.id}-${lens.id}`} facts={[
       { id: 'dataset', label: 'Dataset', value: lens.label },
       ...(lens.facts ?? []),
     ]} embedded />
   </div>)}
-</div> : <div class="planet-dataset-content" data-focus-lens-bank={bank.id} hidden>
+</div> : <div class="object-dataset-content" data-focus-lens-bank={bank.id} hidden>
   <script is:inline type="application/json" data-focus-resources set:html={JSON.stringify({ descriptor, resources }).replace(/</g, '\\u003c')}></script>
   <DatasetLenses objectId={`focus-${bank.id}`} thumbnailObjectId={bank.id} route={`/${objectId}/`} lenses={presentation} controlName="focusLens" />
   <DatasetContextPanels objectId={bank.id} lenses={presentation} {directSourceIdsByLens} />
 </div>)}
 {/* The one shell-level 3D-stars setting owns every 3D point layer, including catalogue points inside prepared volumes. */}
 <style is:inline>
-  .planet-ui-layer:has(.planet-three-d-stars-setting:not(:checked)) ~ .planet-viewport .prepared-catalogue-points { display: none !important; }
+  .object-ui-layer:has(.object-three-d-stars-setting:not(:checked)) ~ .object-viewport .prepared-catalogue-points { display: none !important; }
 </style>

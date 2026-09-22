@@ -22,7 +22,7 @@ const json=async(p:string):Promise<unknown>=>JSON.parse(await readFile(p,'utf8')
  * Camera attitude/intrinsics and the full 2012 mesh stay fixed; fit translation
  * from one checkerboard partition and evaluate every remaining control. */
 export async function prepareCloseups(sourceDirectory:string,write=false) {
-  const source=resolve(sourceDirectory),sources=await createSourceManifest({planetId:'comet-9p',planetName:'Tempel 1',sourceRoot:source}),recipe=parseRecipe(await json(resolve(source,'preparation/closeups.json'))),geometry=parseGeometry(await json(resolve(source,'preparation/terrestrial.json'))).geometry.radialTerrain;
+  const source=resolve(sourceDirectory),sources=await createSourceManifest({objectId:'comet-9p',objectName:'Tempel 1',sourceRoot:source}),recipe=parseRecipe(await json(resolve(source,'preparation/closeups.json'))),geometry=parseGeometry(await json(resolve(source,'preparation/terrestrial.json'))).geometry.radialTerrain;
   assert.equal(recipe.schema,'cssearth-tempel-closeup-registration@1');
   assert.ok(recipe.maximumRmsPixels>0&&recipe.maximumRmsPixels<=1&&recipe.maximumResidualPixels>=recipe.maximumRmsPixels&&recipe.maximumResidualPixels<=2);
   const pinned=(path:string)=>sources.readSource(path);

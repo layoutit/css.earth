@@ -12,7 +12,7 @@ export interface DirectionalSunPreparationOptions {
 
 /** Prepare the Sun directions an object's camera and materials read. The shared universe draws the visible Sun, so
  * the object bakes no Sun image. */
-export function preparePlanetDirectionalSun({
+export function prepareDirectionalSun({
   presentation = DIRECTIONAL_SUN_PRESENTATION_STANDARD,
   planMetadata = Object.freeze({}),
 }: DirectionalSunPreparationOptions = {}): PreparedDirectionalSunPlan {

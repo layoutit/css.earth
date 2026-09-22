@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="ajax"]) > :is(.ajax-sun-camera, .ajax-camera, .ajax-material-root) {
+.object-stage:where([data-object-id="ajax"]) > :is(.ajax-sun-camera, .ajax-camera, .ajax-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-sun-camera, :where(.planet-stage[data-object-id="ajax"]) .ajax-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-body > u {
+:where(.object-stage[data-object-id="ajax"]) .ajax-sun-camera, :where(.object-stage[data-object-id="ajax"]) .ajax-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="ajax"]) .ajax-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="ajax"]) .ajax-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="ajax"]) .ajax-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--ajax-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-body > .ajax-polar { background-image: var(--ajax-poles-image); }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-material-root { z-index: 3; --ajax-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-material, :where(.planet-stage[data-object-id="ajax"]) .ajax-billboard {
+:where(.object-stage[data-object-id="ajax"]) .ajax-body > .ajax-polar { background-image: var(--ajax-poles-image); }
+:where(.object-stage[data-object-id="ajax"]) .ajax-material-root { z-index: 3; --ajax-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="ajax"]) .ajax-material, :where(.object-stage[data-object-id="ajax"]) .ajax-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-material { background-repeat: no-repeat; transform: rotate(var(--ajax-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="ajax"]) .ajax-billboard { border-radius: 50%; background-color: var(--ajax-billboard-color); opacity: var(--ajax-billboard-opacity); }
-.planet-stage:where([data-object-id="ajax"])[data-lod="billboard"] .ajax-scene, .planet-stage:where([data-object-id="ajax"])[data-lod="marker"] .ajax-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="ajax"])[data-lod="marker"] .ajax-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="ajax"]) .ajax-material { background-repeat: no-repeat; transform: rotate(var(--ajax-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="ajax"]) .ajax-billboard { border-radius: 50%; background-color: var(--ajax-billboard-color); opacity: var(--ajax-billboard-opacity); }
+.object-stage:where([data-object-id="ajax"])[data-lod="billboard"] .ajax-scene, .object-stage:where([data-object-id="ajax"])[data-lod="marker"] .ajax-scene { visibility: hidden; }
+.object-stage:where([data-object-id="ajax"])[data-lod="marker"] .ajax-billboard { opacity: 0; }
 

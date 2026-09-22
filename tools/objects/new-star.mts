@@ -26,9 +26,9 @@ export interface StarScaffold { readonly id: string; readonly name: string; read
 
 /** The star stylesheet: the Sun's emissive presentation scoped to one object id, with its off-limb plate size. */
 export function starStylesheet(id: string, name: string, offLimbSize: number, plateNote: string, spinNote = 'No spin: the rotation axis and period are unmeasured.', geometryScale = GEOMETRY_SCALE) {
-  const s = `.planet-stage[data-object-id="${id}"]`;
-  return `/* ${name}: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. ${spinNote} ${plateNote} */
+  const s = `.object-stage[data-object-id="${id}"]`;
+  return `/* ${name}: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. ${spinNote} ${plateNote} */
 ${s} > :is(.polycss-camera, .${id}-corona-layer, .${id}-limb-layer) {
   --${id}-scene-side-padding: 16px;
   --${id}-reference-width: 1920px;
@@ -43,7 +43,7 @@ ${s} > :is(.polycss-camera, .${id}-corona-layer, .${id}-limb-layer) {
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
 ${s} > :is(.${id}-corona-layer, .${id}-limb-layer) {
   position: absolute;
   inset: 0;
@@ -162,7 +162,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
-    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
+    page: { stylesheets: ['src/renderers/css/styles/body-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: 'star', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },
@@ -186,7 +186,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
       axialTiltNote: "the star has no measured rotation axis; the object's rotation record places a display axis along celestial north in the plane of the sky, and this profile's tilt is not used for the frame" } } });
   put(`${o}/source/preparation/celestial.json`, { schema: 'cssearth-celestial-preparation@2', sources: ['presentation/solar-system.json'], directionalSun: false });
   put(`${o}/source/preparation/presentation.json`, { schema: 'cssearth-css-presentation-profile@1', namespace: id, mode: 'emissive' });
-  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@1', planetId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
+  put(`${o}/source/preparation/navigation.json`, { schema: 'cssearth-navigation-marker@2', objectId: id, owner: 'object', presentation: { size: 5 }, source: { path: 'presentation/context.png' },
     operations: [{ type: 'resize', width: 'tile', height: 'tile', fit: 'cover', position: 'centre', kernel: 'lanczos3' }, { type: 'png' }], context: { pixels: 512 } });
   put(`${o}/source/preparation/rotation.json`, { schema: 'cssearth-display-orientation@1', ...orientation, phase: 'arbitrary-display-phase',
     source: `No measured rotation axis or period (${TODO}: name the literature checked). The display axis is celestial north at the catalogue position, placed in the plane of the sky; computed by skyPlaneOrientation in @cssearth/astronomy.`,

@@ -36,7 +36,7 @@ async function preparedPlaces(root: string, objectId: string, settlements: reado
   if (radiusM === null) throw new TypeError(`${objectId}: places need the body's radius.`);
   if (!record(pin) || !Number.isSafeInteger(pin.count)) throw new TypeError(`${objectId}: prepared places descriptor is invalid.`);
   const url = text(pin.url, `${objectId} places url`), bytes = await readFile(resolve(root, 'public', url.replace(/^\//u, '')));
-  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${objectId}: the public places catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
+  if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${objectId}: the public places catalogue does not match its prepared descriptor; run pnpm prepare:objects.`);
   const catalog: unknown = JSON.parse(bytes.toString('utf8'));
   if (!record(catalog) || !Array.isArray(catalog.places) || catalog.places.length !== pin.count) throw new TypeError(`${objectId}: places catalogue count differs from its descriptor.`);
   const duplicates: (readonly [string, string])[] = [];
@@ -77,7 +77,7 @@ export async function prepareFeatureIndex({ root = process.cwd() }: { root?: str
     for (const pin of pins) {
       const url = text(pin.url, `${object.id} catalogue url`), file = url.split('/').at(-1)!;
       const bytes = await readFile(resolve(root, 'public/scenes', object.id, file));
-      if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:planets.`);
+      if (bytes.length !== pin.bytes || sha256(bytes) !== pin.sha256) throw new Error(`${object.id}: the public feature catalogue does not match its prepared descriptor; run pnpm prepare:objects.`);
       const part: unknown = JSON.parse(bytes.toString('utf8'));
       if (!record(part) || !Array.isArray(part.features) || part.features.length !== pin.count) throw new TypeError(`${object.id}: feature catalogue count differs from its descriptor.`);
       catalog ??= part;

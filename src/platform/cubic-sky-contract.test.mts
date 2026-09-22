@@ -72,7 +72,7 @@ test("every planet package prepares its sky for the shared camera without privat
 
 test("the retained sky stylesheet keeps no private Sun or catalogue stars", async () => {
   const css = await readFile(new URL("./cubic-sky.css", import.meta.url), "utf8");
-  assert.doesNotMatch(css, /planet-directional-sun|planet-cubic-sky-star/u);
+  assert.doesNotMatch(css, /object-directional-sun|object-cubic-sky-star/u);
   assert.doesNotMatch(css,
     /filter\s*:|mask(?:-image)?\s*:|clip-path\s*:|mix-blend-mode\s*:|gradient\(/u);
 });

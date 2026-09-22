@@ -61,7 +61,7 @@ export async function prepareLayeredSurfacePresentation({config:input,geometryCo
     if(config.ariaHiddenEveryElement){const leaf=element('s',className??null,record.style);leaf.style.backgroundImage=`url(${assetUrl})`;return leaf;}
     const leaf=b.leaf(record);if(className)leaf.className=[leaf.className,className].filter(Boolean).join(' ');return leaf;
   };
-  const camera=element('div','polycss-camera planet-render-root','perspective:1000000px');
+  const camera=element('div','polycss-camera object-render-root','perspective:1000000px');
   let sceneStyle='';if(config.initialScene==='quantized-camera'){
     const controlPitch=Math.round(cameraPlan.defaultControlPitchDegrees*100)/100,pitch=cameraPlan.maximumScenePitchDegrees*(1-controlPitch/cameraPlan.maximumControlPitchDegrees);
     sceneStyle=`transform:${buildPolyCameraSceneTransform(createPolyCamera({zoom:cameraPlan.defaultZoom,rotX:pitch,rotY:0,target:[0,0,0]}).state)}`;

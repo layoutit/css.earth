@@ -41,9 +41,9 @@ export async function prepareCelestialAssets({ sourceDirectory, publicDirectory,
   const options = profile(config); await verifySources(sourceDirectory, options.sources);
   const solar = solarSource(JSON.parse(await readFile(resolve(sourceDirectory, 'presentation/solar-system.json'), 'utf8'))); const api = await loadCelestialAdapters(); api.requireSceneObject(solar.bodyId);
   await mkdir(outputDirectory, { recursive: true });
-  const sky = json(api.preparePlanetCubicSky({ objectId: solar.bodyId, cameraContract: api.cubicSkyCamera }));
+  const sky = json(api.prepareCubicSky({ objectId: solar.bodyId, cameraContract: api.cubicSkyCamera }));
   // A star has no directional Sun; sun.json records null so the runtime contract sees the absence explicitly.
-  const sun = options.directionalSun ? json(api.preparePlanetDirectionalSun({ presentation: api.prepareSolarSystemSunPresentation(solar) })) : null;
+  const sun = options.directionalSun ? json(api.prepareDirectionalSun({ presentation: api.prepareSolarSystemSunPresentation(solar) })) : null;
   await Promise.all([writeFile(resolve(outputDirectory, 'sky.json'), `${JSON.stringify(sky)}\n`), writeFile(resolve(outputDirectory, 'sun.json'), `${JSON.stringify(sun)}\n`)]);
   return Object.freeze({ sky, sun });
 }

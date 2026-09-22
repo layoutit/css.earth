@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="belinda"]) > :is(.belinda-sun-camera, .belinda-camera, .belinda-material-root) {
+.object-stage:where([data-object-id="belinda"]) > :is(.belinda-sun-camera, .belinda-camera, .belinda-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-sun-camera, :where(.planet-stage[data-object-id="belinda"]) .belinda-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-body > u {
+:where(.object-stage[data-object-id="belinda"]) .belinda-sun-camera, :where(.object-stage[data-object-id="belinda"]) .belinda-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="belinda"]) .belinda-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="belinda"]) .belinda-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="belinda"]) .belinda-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--belinda-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-body > .belinda-polar { background-image: var(--belinda-poles-image); }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-material-root { z-index: 3; --belinda-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-material, :where(.planet-stage[data-object-id="belinda"]) .belinda-billboard {
+:where(.object-stage[data-object-id="belinda"]) .belinda-body > .belinda-polar { background-image: var(--belinda-poles-image); }
+:where(.object-stage[data-object-id="belinda"]) .belinda-material-root { z-index: 3; --belinda-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="belinda"]) .belinda-material, :where(.object-stage[data-object-id="belinda"]) .belinda-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-material { background-repeat: no-repeat; transform: rotate(var(--belinda-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="belinda"]) .belinda-billboard { border-radius: 50%; background-color: var(--belinda-billboard-color); opacity: var(--belinda-billboard-opacity); }
-.planet-stage:where([data-object-id="belinda"])[data-lod="billboard"] .belinda-scene, .planet-stage:where([data-object-id="belinda"])[data-lod="marker"] .belinda-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="belinda"])[data-lod="marker"] .belinda-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="belinda"]) .belinda-material { background-repeat: no-repeat; transform: rotate(var(--belinda-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="belinda"]) .belinda-billboard { border-radius: 50%; background-color: var(--belinda-billboard-color); opacity: var(--belinda-billboard-opacity); }
+.object-stage:where([data-object-id="belinda"])[data-lod="billboard"] .belinda-scene, .object-stage:where([data-object-id="belinda"])[data-lod="marker"] .belinda-scene { visibility: hidden; }
+.object-stage:where([data-object-id="belinda"])[data-lod="marker"] .belinda-billboard { opacity: 0; }
 

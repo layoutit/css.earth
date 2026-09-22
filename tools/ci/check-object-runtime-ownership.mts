@@ -27,7 +27,7 @@ const objectPackageIds: ReadonlySet<string> = new Set(OBJECTS.map(object => obje
 const objectPackage = (file: string) => file.startsWith('src/objects/') && objectPackageIds.has(file.split('/')[2] ?? '');
 // These are the application's common shell entry points. Their dependencies are
 // discovered from the real Astro AST, including template expressions and scripts.
-const shellEntries = ["site/layouts/PlanetLayout.astro", "site/components/PlanetShell.astro"];
+const shellEntries = ["site/layouts/ObjectLayout.astro", "site/components/ObjectShell.astro"];
 const astroCompiler = requireRecord(createRequire(import.meta.resolve("astro/package.json"))("@astrojs/compiler-rs"));
 function parseAstro(source: string): { ast: unknown; diagnostics: { severity: unknown; text: string; labels: {start: number}[] }[] } {
   if (typeof astroCompiler.parse !== "function") throw new Error("Astro parser is unavailable.");
@@ -39,7 +39,7 @@ const privateFactories = new Set(["createSceneLifetime",
   "createPreparedImageStore", "decodePreparedImage", "releasePreparedImage",
   "createRetainedCubicSkyOrbit", "createPolyOrbitControls", "bindResponsiveOrbitPolicy",
   "mountRetainedCubicSky", "mountRetainedDirectionalSun", "bindSpeedControl",
-  "createPlanetFeatureControls", "createPreparedPlayback", "createPreparedResidency",
+  "createObjectFeatureControls", "createPreparedPlayback", "createPreparedResidency",
   "createObjectSelectionRuntime", "createObjectControlBinding", "bindObjectControls"]);
 const nativeOwners = new Set(["Image", "Promise", "AbortController", "Worker",
   "fetch", "setTimeout", "setInterval", "requestAnimationFrame", "queueMicrotask"]);

@@ -134,7 +134,7 @@ export function parseSynopticRecipe(value: unknown): SynopticRecipe {
  * prepared densities decode each source once. */
 export async function createSurfaceInterpreter({ objectId, displayName, sourceDirectory, recipe, sourceVerification = 'complete' }: Options): Promise<ObservationInterpretation> {
   const solar = recipe.emission ? createSolarSynopticInterpreter({ sourceDirectory, emission: recipe.emission }) : null;
-  const manifest = createSourceManifest({ planetId: objectId, planetName: displayName, sourceRoot: sourceDirectory }).then(async source => {
+  const manifest = createSourceManifest({ objectId: objectId, objectName: displayName, sourceRoot: sourceDirectory }).then(async source => {
     if (sourceVerification === 'complete') await source.verify();
     else for (const surface of recipe.surfaces) {
       const kind = surface.science?.kind ?? 'static-observation';

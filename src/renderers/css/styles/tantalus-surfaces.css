@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="tantalus"]) > :is(.tantalus-sun-camera, .tantalus-camera, .tantalus-material-root) {
+.object-stage:where([data-object-id="tantalus"]) > :is(.tantalus-sun-camera, .tantalus-camera, .tantalus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-sun-camera, :where(.planet-stage[data-object-id="tantalus"]) .tantalus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-body > u {
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-sun-camera, :where(.object-stage[data-object-id="tantalus"]) .tantalus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--tantalus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-body > .tantalus-polar { background-image: var(--tantalus-poles-image); }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-material-root { z-index: 3; --tantalus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-material, :where(.planet-stage[data-object-id="tantalus"]) .tantalus-billboard {
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-body > .tantalus-polar { background-image: var(--tantalus-poles-image); }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-material-root { z-index: 3; --tantalus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-material, :where(.object-stage[data-object-id="tantalus"]) .tantalus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-material { background-repeat: no-repeat; transform: rotate(var(--tantalus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="tantalus"]) .tantalus-billboard { border-radius: 50%; background-color: var(--tantalus-billboard-color); opacity: var(--tantalus-billboard-opacity); }
-.planet-stage:where([data-object-id="tantalus"])[data-lod="billboard"] .tantalus-scene, .planet-stage:where([data-object-id="tantalus"])[data-lod="marker"] .tantalus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="tantalus"])[data-lod="marker"] .tantalus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-material { background-repeat: no-repeat; transform: rotate(var(--tantalus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="tantalus"]) .tantalus-billboard { border-radius: 50%; background-color: var(--tantalus-billboard-color); opacity: var(--tantalus-billboard-opacity); }
+.object-stage:where([data-object-id="tantalus"])[data-lod="billboard"] .tantalus-scene, .object-stage:where([data-object-id="tantalus"])[data-lod="marker"] .tantalus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="tantalus"])[data-lod="marker"] .tantalus-billboard { opacity: 0; }
 

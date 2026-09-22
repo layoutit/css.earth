@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="elektra"]) > :is(.elektra-sun-camera, .elektra-camera, .elektra-material-root) {
+.object-stage:where([data-object-id="elektra"]) > :is(.elektra-sun-camera, .elektra-camera, .elektra-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-sun-camera, :where(.planet-stage[data-object-id="elektra"]) .elektra-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-body > u {
+:where(.object-stage[data-object-id="elektra"]) .elektra-sun-camera, :where(.object-stage[data-object-id="elektra"]) .elektra-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="elektra"]) .elektra-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="elektra"]) .elektra-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="elektra"]) .elektra-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--elektra-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-body > .elektra-polar { background-image: var(--elektra-poles-image); }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-material-root { z-index: 3; --elektra-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-material, :where(.planet-stage[data-object-id="elektra"]) .elektra-billboard {
+:where(.object-stage[data-object-id="elektra"]) .elektra-body > .elektra-polar { background-image: var(--elektra-poles-image); }
+:where(.object-stage[data-object-id="elektra"]) .elektra-material-root { z-index: 3; --elektra-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="elektra"]) .elektra-material, :where(.object-stage[data-object-id="elektra"]) .elektra-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-material { background-repeat: no-repeat; transform: rotate(var(--elektra-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="elektra"]) .elektra-billboard { border-radius: 50%; background-color: var(--elektra-billboard-color); opacity: var(--elektra-billboard-opacity); }
-.planet-stage:where([data-object-id="elektra"])[data-lod="billboard"] .elektra-scene, .planet-stage:where([data-object-id="elektra"])[data-lod="marker"] .elektra-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="elektra"])[data-lod="marker"] .elektra-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="elektra"]) .elektra-material { background-repeat: no-repeat; transform: rotate(var(--elektra-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="elektra"]) .elektra-billboard { border-radius: 50%; background-color: var(--elektra-billboard-color); opacity: var(--elektra-billboard-opacity); }
+.object-stage:where([data-object-id="elektra"])[data-lod="billboard"] .elektra-scene, .object-stage:where([data-object-id="elektra"])[data-lod="marker"] .elektra-scene { visibility: hidden; }
+.object-stage:where([data-object-id="elektra"])[data-lod="marker"] .elektra-billboard { opacity: 0; }
 

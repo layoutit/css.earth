@@ -1,0 +1,13 @@
+---
+import type { prepareBodyRelations } from '../prepare-body-moons.mts';
+import ObjectResult from './ObjectResult.astro';
+import MoonList from './MoonList.astro';
+interface Props { relations: NonNullable<ReturnType<typeof prepareBodyRelations>>; }
+const { relations } = Astro.props;
+---
+{relations.parent && <ul class="object-list" aria-label="Parent body">
+  <ObjectResult object={relations.parent} />
+</ul>}
+{relations.moons.length > 0 && <div aria-label={relations.parent ? 'Other moons' : 'Moons'}>
+  <MoonList moons={relations.moons} />
+</div>}

@@ -1,5 +1,5 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="saturn"]) > .polycss-camera {
+.object-stage:where([data-object-id="saturn"]) > .polycss-camera {
   --saturn-scene-side-padding: 16px;
   --saturn-reference-width: 1920px;
   --saturn-reference-height: 1080px;
@@ -17,13 +17,13 @@
   );
   position: absolute;
   inset: 0;
-  scale: calc(var(--saturn-shell-scale) / var(--planet-viewport-zoom-divisor));
+  scale: calc(var(--saturn-shell-scale) / var(--object-viewport-zoom-divisor));
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene {
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -33,13 +33,13 @@
   transform-style: preserve-3d;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .polycss-mesh {
+:where(.object-stage[data-object-id="saturn"]) .polycss-mesh {
   position: absolute;
   transform-style: preserve-3d;
   transform-origin: 0 0 0;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-body {
+:where(.object-stage[data-object-id="saturn"]) .saturn-body {
   transform-style: preserve-3d;
   animation-name: saturn-body-spin;
   animation-duration: 72s;
@@ -48,43 +48,43 @@
   animation-play-state: paused;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-cutaway,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-interior-shell,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-interior-sections {
+:where(.object-stage[data-object-id="saturn"]) .saturn-cutaway,
+:where(.object-stage[data-object-id="saturn"]) .saturn-interior-shell,
+:where(.object-stage[data-object-id="saturn"]) .saturn-interior-sections {
   transform-style: preserve-3d;
 }
 
 /* Out of the layer tree until the interior view: hidden 3D leaves still cost a composited layer each. */
-:where(.planet-stage[data-object-id="saturn"]) .saturn-cutaway {
+:where(.object-stage[data-object-id="saturn"]) .saturn-cutaway {
   display: none;
   visibility: hidden;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-interior-material {
+:where(.object-stage[data-object-id="saturn"]) .saturn-interior-material {
   visibility: hidden;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-cutaway-body {
+:where(.object-stage[data-object-id="saturn"]) .saturn-cutaway-body {
   animation: none;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-cutaway {
+.object-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-cutaway {
   display: block;
   visibility: visible;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-interior-material {
+.object-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-interior-material {
   visibility: visible;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-system > .saturn-body,
-.planet-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-exterior-material {
+.object-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-system > .saturn-body,
+.object-stage:where([data-object-id="saturn"])[data-view="interior"] .saturn-exterior-material {
   visibility: hidden;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene b,
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene s,
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene u {
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene b,
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene s,
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene u {
   position: absolute;
   display: block;
   transform-origin: 0 0;
@@ -97,21 +97,21 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene b {
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene b {
   width: calc(var(--saturn-point-size) / var(--saturn-shell-scale));
   height: calc(var(--saturn-point-size) / var(--saturn-shell-scale));
   background: currentColor;
   backface-visibility: visible;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene s {
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene s {
   width: var(--polycss-atlas-width, 64px);
   height: var(--polycss-atlas-height, 64px);
   background-origin: border-box;
   background-clip: border-box;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .polycss-scene u {
+:where(.object-stage[data-object-id="saturn"]) .polycss-scene u {
   width: 0;
   height: 0;
   box-sizing: content-box;
@@ -120,118 +120,118 @@
   border-width: 0 16px 32px 16px;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-orbit > s {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-orbit > s {
   backface-visibility: visible;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-body:not(.saturn-body-polar) > s {
+:where(.object-stage[data-object-id="saturn"]) .saturn-body:not(.saturn-body-polar) > s {
   --polycss-projective-texture-image:
     url("/scenes/saturn/saturn-surface-body.jpg");
   background-image: var(--polycss-projective-texture-image);
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-interior-metallic-shell > s:not(.saturn-interior-pole) {
+:where(.object-stage[data-object-id="saturn"]) .saturn-interior-metallic-shell > s:not(.saturn-interior-pole) {
   background-image: url("/scenes/saturn/saturn-interior-metallic@2x.webp");
   background-size: 1024px 512px;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-interior-core-shell > s:not(.saturn-interior-pole) {
+:where(.object-stage[data-object-id="saturn"]) .saturn-interior-core-shell > s:not(.saturn-interior-pole) {
   background-image: url("/scenes/saturn/saturn-interior-core@2x.webp");
   background-size: 1024px 512px;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"]
+.object-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"]
   .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
   --polycss-projective-texture-image:
     url("/scenes/saturn/saturn-surface-ultraviolet@2x.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="methane"]
+.object-stage:where([data-object-id="saturn"])[data-lens="methane"]
   .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
   --polycss-projective-texture-image:
     url("/scenes/saturn/saturn-surface-methane@2x.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="thermal"]
+.object-stage:where([data-object-id="saturn"])[data-lens="thermal"]
   .saturn-body:not(.saturn-body-polar):not(.saturn-cutaway-polar-band) > s {
   --polycss-projective-texture-image:
     url("/scenes/saturn/saturn-surface-thermal@2x.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"]
+.object-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"]
   .saturn-body-polar > s {
   background-image: url("/scenes/saturn/saturn-poles-ultraviolet.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="methane"]
+.object-stage:where([data-object-id="saturn"])[data-lens="methane"]
   .saturn-body-polar > s {
   background-image: url("/scenes/saturn/saturn-poles-methane.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="thermal"]
+.object-stage:where([data-object-id="saturn"])[data-lens="thermal"]
   .saturn-body-polar > s {
   background-image: url("/scenes/saturn/saturn-poles-thermal.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"]
+.object-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"]
   .saturn-cutaway-polar-band > s {
   background-image: url(
     "/scenes/saturn/saturn-interior-outer-poles-ultraviolet@2x.webp"
   ) !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="methane"]
+.object-stage:where([data-object-id="saturn"])[data-lens="methane"]
   .saturn-cutaway-polar-band > s {
   background-image: url(
     "/scenes/saturn/saturn-interior-outer-poles-methane@2x.webp"
   ) !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="thermal"]
+.object-stage:where([data-object-id="saturn"])[data-lens="thermal"]
   .saturn-cutaway-polar-band > s {
   background-image: url(
     "/scenes/saturn/saturn-interior-outer-poles-thermal@2x.webp"
   ) !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"] .saturn-ring-plane > s {
+.object-stage:where([data-object-id="saturn"])[data-lens="ultraviolet"] .saturn-ring-plane > s {
   background-image:
     url("/scenes/saturn/saturn-rings-ultraviolet@2x.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="methane"] .saturn-ring-plane > s {
+.object-stage:where([data-object-id="saturn"])[data-lens="methane"] .saturn-ring-plane > s {
   background-image: url("/scenes/saturn/saturn-rings-methane@2x.webp") !important;
 }
 
-.planet-stage:where([data-object-id="saturn"])[data-lens="thermal"] .saturn-ring-plane > s {
+.object-stage:where([data-object-id="saturn"])[data-lens="thermal"] .saturn-ring-plane > s {
   background-image: url("/scenes/saturn/saturn-rings-thermal@2x.webp") !important;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-orbit > s,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-shadow > s,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-surface b,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-billboard b {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-orbit > s,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-shadow > s,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-surface b,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-billboard b {
   border-radius: 50%;
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-billboard b {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-billboard b {
   rotate: z 128deg;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-flat {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-flat {
   transform-style: flat;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-shadow > s,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-orbit > s {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-shadow > s,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-plane > s,
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-orbit > s {
   backface-visibility: visible;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-orbit {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-orbit {
   animation-name: saturn-ring-orbit;
   animation-duration: 101.873s;
   animation-timing-function: linear;
@@ -239,11 +239,11 @@
   animation-play-state: paused;
 }
 
-:where(.planet-stage[data-object-id="saturn"]) .saturn-ring-plane {
+:where(.object-stage[data-object-id="saturn"]) .saturn-ring-plane {
   animation-name: none;
 }
 
-.planet-stage:where([data-object-id="saturn"]).saturn-hide-rings :is(
+.object-stage:where([data-object-id="saturn"]).saturn-hide-rings :is(
   .saturn-ring-plane,
   .saturn-ring-orbit,
   .saturn-ring-billboard,
@@ -252,7 +252,7 @@
   visibility: hidden;
 }
 
-.planet-stage:where([data-object-id="saturn"]).saturn-hide-shadows .saturn-ring-shadow {
+.object-stage:where([data-object-id="saturn"]).saturn-hide-shadows .saturn-ring-shadow {
   visibility: hidden;
 }
 

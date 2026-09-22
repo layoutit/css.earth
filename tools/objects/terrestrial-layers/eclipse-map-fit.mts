@@ -113,15 +113,15 @@ async function loadLightCurveInputs(root: string, recipe: ReturnType<typeof bare
 
   const band = await loadBand(read, recipe);
 
-  const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
-  if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
-  const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
+  const objectId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
+  if (!objectId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
+  const radiusRatio = BODIES[objectId].meanRadiusKm / BODIES[hostId].meanRadiusKm;
   // Eclipse timing moves longitude (about 0.04 degrees per second for WASP-43b, 0.5 for HD 189733b), so a recipe can take the transit
   // time from its own light curve instead of an ephemeris propagated to the visit; light time across the orbit is always modelled.
   // A package orbit carries one reference transit and period; transit-timing variations move a planet's events by hours over the
   // years since (TRAPPIST-1b's osculating elements of 2015 put its 2022 eclipses two hours early). A recipe can give the linear
   // ephemeris of its own observations instead; the shape of the orbit stays the package's.
-  let orbit = hostedOrbit(planetId), transitShiftSeconds = 0, transitFit: ReturnType<typeof measureTransitShift> | null = null;
+  let orbit = hostedOrbit(objectId), transitShiftSeconds = 0, transitFit: ReturnType<typeof measureTransitShift> | null = null;
   if (recipe.ephemeris) {
     if (!(recipe.ephemeris.periodDays > 0) || !Number.isFinite(recipe.ephemeris.transitTimeBmjdTdb)) throw new TypeError('An ephemeris needs a transit time and a positive period.');
     orbit = { ...orbit, transitTimeBmjdTdb: recipe.ephemeris.transitTimeBmjdTdb, periodDays: recipe.ephemeris.periodDays };
@@ -200,9 +200,9 @@ export async function loadBareRockEclipse(root: string, value: unknown) {
   if (record.schema !== 'cssearth-eclipse-depth@1' || record.planet !== recipe.planet) throw new TypeError(`${recipe.path} is not an eclipse depth of ${recipe.planet}.`);
   const { low, high } = record.eclipseDepthPpm;
   if (!(low > 0 && high >= low)) throw new TypeError('An eclipse depth range needs 0 < low <= high.');
-  const planetId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
-  if (!planetId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
-  const radiusRatio = BODIES[planetId].meanRadiusKm / BODIES[hostId].meanRadiusKm, band = await loadBand(read, recipe), table = bandTemperatureTable(band, { minimumK: 20 });
+  const objectId = HOSTED_PLANET_IDS.find(id => id === recipe.planet), hostId = STAR_IDS.find(id => id === recipe.host);
+  if (!objectId || !hostId) throw new TypeError(`${recipe.planet} is not a hosted planet or ${recipe.host} is not a placed star.`);
+  const radiusRatio = BODIES[objectId].meanRadiusKm / BODIES[hostId].meanRadiusKm, band = await loadBand(read, recipe), table = bandTemperatureTable(band, { minimumK: 20 });
   const at = (ppm: number) => bareRockFromEclipseDepth(ppm * 1e-6, table, radiusRatio);
   const substellarK = at((low + high) / 2), lowerK = at(low), upperK = at(high);
   return {

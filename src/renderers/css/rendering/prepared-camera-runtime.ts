@@ -41,7 +41,7 @@ export function createPreparedCameraPublisher({
     if (zoom !== publishedZoom) {
       cameraElement.style.scale =
         `calc(var(--${objectId}-shell-scale) / (` +
-        `var(--planet-viewport-zoom-divisor) / ${zoom / defaultZoom}))`;
+        `var(--object-viewport-zoom-divisor) / ${zoom / defaultZoom}))`;
       cameraZoomScales.set(cameraElement, zoom / defaultZoom);
       publishedZoom = zoom;
     }
