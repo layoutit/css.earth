@@ -1,6 +1,7 @@
 import {required} from '../../../../tools/contract/test-values.mts';
-import { sourceTest } from '../../source-test.mts';
-const test = sourceTest('lutetia');
+import { restoredSources, sourceTest } from '../../source-test.mts';
+const sources = restoredSources('lutetia', 'observations/n20100710t154047674id4df22.img');
+const test = sourceTest('lutetia', sources);
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {createHash} from 'node:crypto';
@@ -8,7 +9,7 @@ import {decodeOsirisReflectance} from '../../../../tools/objects/terrestrial-lay
 import {project,diskGain} from '../../../../tools/objects/terrestrial-layers/osiris-geo.mts';
 const root='src/objects/lutetia/source/';
 const camera=JSON.parse((await readFile(root+'observations/osiris-camera.json')).toString('utf8'));
-const bytes=await readFile(root+'observations/n20100710t154047674id4df22.img');
+const bytes=sources.skip ? Buffer.alloc(0) : await readFile(root+'observations/n20100710t154047674id4df22.img');
 
 test('Lutetia preserves an independent original reflectance sample and rejects CCD/observation drift',()=>{
   const f=decodeOsirisReflectance(bytes,camera,true),i=1200*2048+1023;
