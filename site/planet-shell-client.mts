@@ -237,6 +237,7 @@ export function mountPlanetShell({
       mountContent(content.id, motion);
     },
     setDestinations(provider: PreparedDestinationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setDestinations(provider); },
+    selectPlace(id: string) { return lifetime.disposed ? Promise.resolve() : objectBrowser.selectPlace(id); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { if (!lifetime.disposed) objectBrowser.setFeatures(provider); },
     setPreparedFocus(record: PreparedCatalogObject | null, sources: readonly SpatialCitation[] = [], presentation: PreparedFocusPresentation | null = null) {
       if (lifetime.disposed) return;
@@ -766,6 +767,8 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     documentTarget, objectId: documentTarget.body.dataset.objectShell ?? '',
     onResults(count) { visibleFeatures = count; updateEmpty(); },
     onSelected() { render(false); search.blur(); },
+    ownPlacesSearched: () => destinations?.bound() ?? false,
+    selectOwnPlace: id => destinations?.selectById(id) ?? Promise.resolve(),
   });
   lifetime.onDispose(() => features?.destroy());
   let open = searchCard.hasAttribute('data-search-submitted');
@@ -1119,7 +1122,10 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       destinations?.bind(null); features?.bind(null);
       render(editing);
     },
-    setDestinations(provider: PreparedDestinationRuntime | null | undefined) { destinations?.bind(provider); },
+    setDestinations(provider: PreparedDestinationRuntime | null | undefined) {
+      destinations?.bind(provider, SCENE_OBJECTS.find(object => object.id === documentTarget.body.dataset.objectShell)?.name);
+    },
+    selectPlace(id: string) { return destinations?.selectById(id) ?? Promise.resolve(); },
     setFeatures(provider: SurfaceFeatureNavigationRuntime | null | undefined) { features?.bind(provider); },
     setPreparedFocus(record: PreparedCatalogObject | null) {
       if (preparedFocus === record) return;
