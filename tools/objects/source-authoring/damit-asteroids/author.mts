@@ -370,7 +370,7 @@ async function authorBody(body: Body) {
       recipe: { ...recipe, shape: { kind: 'radial-terrain', radiusKm } },
       worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: EPOCH_JD, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],
         metersPerUnit: radiusMeters / geometryRadius, bodyRadiusM: radiusMeters },
-      page: { stylesheets: [`src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json', sha256: '0'.repeat(64) } },
+      page: { stylesheets: [`src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
       catalog: { name, classification: 'asteroid', color: '#aaaaaa', distanceAu: semiMajorAxisAu, description: body.text.card, systemName: 'Solar System', context: {} },
     },
     schema: descriptor.schema, type: descriptor.type,

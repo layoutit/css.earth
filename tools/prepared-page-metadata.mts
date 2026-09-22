@@ -2,6 +2,8 @@ import { sha256 } from '../src/platform/sha256.mts';
 import { requireRecord } from './source-values.mts';
 
 /** Emitted from the same finalized definition as the hash-addressed scene. */
+/** The page's share of the runtime: assets and controls beside the scene pin. It is a build output that
+ * restore-object-json writes from the restored runtime, never committed, and the descriptor names it by path only. */
 export function preparePageMetadata(id: string, sceneSha256: string, input: unknown) {
   const definition = requireRecord(input);
   if (definition.id !== id || !/^[a-f0-9]{64}$/u.test(sceneSha256) || !definition.assets || !definition.controls) {
@@ -9,7 +11,7 @@ export function preparePageMetadata(id: string, sceneSha256: string, input: unkn
   }
   const text = JSON.stringify({ schema: 'cssearth-object-page@1', id, sceneSha256,
     assets: definition.assets, controls: definition.controls });
-  return { text, reference: { url: 'prepared/page.json', sha256: sha256(text) } };
+  return { text, reference: { url: 'prepared/page.json' } };
 }
 
 /** Scene-only changes do not change source citations. Reuse the source graph
@@ -22,9 +24,7 @@ export async function refreshSourceScenePins(before: ReadonlyMap<string, string>
   const shape = (path: string, text: string) => {
     const value = requireRecord(JSON.parse(text));
     if (path.endsWith('/prepared/page.json')) return { ...value, sceneSha256: null };
-    const properties = requireRecord(value.properties), page = requireRecord(properties.page);
-    return { ...value, prepared: { ...requireRecord(value.prepared), sha256: null },
-      properties: { ...properties, page: { ...page, metadata: { ...requireRecord(page.metadata), sha256: null } } } };
+    return { ...value, prepared: { ...requireRecord(value.prepared), sha256: null } };
   };
   const outputs = [];
   for (const path of ['site/prepared-sources.json']) {

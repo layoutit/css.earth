@@ -60,7 +60,7 @@ export function scaffoldHostedPlanetFiles(spec: HostedPlanetScaffold, bodyRecord
       sources: ['raster', 'geometry', 'celestial', 'presentation'].map(source => ({ id: source, path: `source/preparation/${source}.json` })).concat([
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]) },
-    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css'], metadata: { url: 'prepared/page.json', sha256: '0'.repeat(64) } },
+    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css'], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: 'exoplanet', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10,
       description: spec.description, systemName: spec.system, order, context: { order } },
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1],

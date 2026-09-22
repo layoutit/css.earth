@@ -8,7 +8,7 @@ import type { SourceUse, SourceUsageObject } from '../src/platform/source-usage.
 import { parsePreparedSources, sourceCatalogDigest } from '../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from './read-source-catalogue.mts';
 import { sourceInventory, metadataCitations, factsheetCitations } from './source-catalogue-inputs.mts';
-import { parseFactsheet, verifyFactsheetSources } from './factsheet-sources.mts';
+import { verifyFactsheetSources } from './factsheet-sources.mts';
 import { sourcePath, sourceDigest } from '../src/platform/source-catalog.mts';
 import type { SourceInventoryEntry } from './source-catalogue-inputs.mts';
 import { readFile } from 'node:fs/promises';
@@ -127,8 +127,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       read: path => input(`${base}/${path}`),
       restoreMissing: path => restoreFactsheetEvidence({ objectDirectory, path, manifest, transport: sourceTransport }),
     });
-    const published = explorationRecord(await json(`${base}/prepared/content.json`));
-    if (published.objectId !== object.id || JSON.stringify(parseFactsheet(published)) !== JSON.stringify(panel)) throw new Error(`Stale factsheet for ${object.id}; run pnpm prepare:factsheets -- ${object.id}.`);
+    // The published facts in prepared/content.json are written from this same panel by prepare:factsheets, which
+    // prepare:object-json runs first; tools/prepare-factsheets.test.mts proves the committed copy is current.
     metadata.push(...factsheetCitations(panel, `${base}/${contentPath}`, object));
     factsheets.facts += panel.facts.length + panel.moreFacts.length;
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);

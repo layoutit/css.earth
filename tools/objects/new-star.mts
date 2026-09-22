@@ -162,7 +162,7 @@ export function scaffoldStarFiles(spec: StarScaffold, bodyRecord: unknown, epoch
         { id: 'content', path: 'source/content/object.json' }, { id: 'solar-system', path: 'source/presentation/solar-system.json' }, { id: 'rotation', path: 'source/preparation/rotation.json' },
         { id: 'title', path: 'source/presentation/title-mark.json' }, { id: 'navigation', path: 'source/preparation/navigation.json' }, { id: 'acquisition', path: 'source/preparation/acquisition.json' }]),
       emission: { source: 'raster', material: 'emission' } },
-    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json', sha256: '0'.repeat(64) } },
+    page: { stylesheets: ['src/renderers/css/styles/planet-surfaces.css', `src/renderers/css/styles/${id}-surfaces.css`], metadata: { url: 'prepared/page.json' } },
     catalog: { name, classification: 'star', color, distanceAu: Math.round(Math.hypot(...originM) / AU_M * 10) / 10, description: spec.description, systemName: spec.system, order: spec.order ?? 1100, context: { order: (spec.order ?? 1100) - 3 } },
     // A first frame for the catalogue; preparation replaces it with the prepared presentation frame.
     worldFrame: { referenceFrame: 'sun-icrf', epochJdTt, originM, presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 0, 1], metersPerUnit: radiusKm * 1000 / BODY_RADIUS_UNITS, bodyRadiusM: radiusKm * 1000 } },

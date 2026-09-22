@@ -16,7 +16,8 @@ test('source input mode remains explicit and unknown modes cannot suppress asser
 test('published closure exceptions allow only consumed provenance metadata, never other inventoried assets', async () => {
   const paths = await sourceTestGeneratedPaths('published');
   assert.ok(paths.length > 0, 'The real prepared source packages must be consumed.');
-  for (const path of paths) assert.match(path, /^src\/objects\/[^/]+\/prepared\/(provenance|presentation)\.json$/u);
+  // A body's page.json is written from its restored runtime on every checkout; a package's two metadata records are the other consumed generated inputs.
+  for (const path of paths) assert.match(path, /^src\/objects\/[^/]+\/prepared\/(page|provenance|presentation)\.json$/u);
 });
 
 async function fixture(t: TestContext) {
