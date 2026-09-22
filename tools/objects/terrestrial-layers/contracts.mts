@@ -27,7 +27,7 @@ export interface LinearTransform {scale:number;offset:number}
 export interface ScalarGrid {width:number;height:number;noData?:number|null;specialValueMagnitude?:number}
 export interface ScienceProjection {referenceRadiusMeters:number;coordinates?:string;projection?:string;poleLatitude?:number;centerLongitude:number;longitudeRange?:number[];wrapLongitude?:boolean}
 export interface Relief {referenceRadiusMeters:number;lightDirection:number[];ambient:number;heightToMeters?:number}
-export type SciencePalette = ({categories:{color:string}[];minimum?:number;maximum?:number;colors?:string[]} | {categories?:undefined;minimum:number;maximum:number;colors:string[]}) & {relief?:Relief;outputLongitudeOrigin?:number};
+export type SciencePalette = ({categories:{color:string}[];minimum?:number;maximum?:number;colors?:string[]} | {categories?:undefined;minimum:number;maximum:number;colors:string[]}) & {relief?:Relief;outputLongitudeOrigin?:number;displaySampling?:string};
 export interface ObservationGeometry {sun:number[];observer:number[]}
 export interface ColorBand extends ScalarGrid {data:ArrayLike<number>;origin:number[];resolution:number[];filter:string;capture?:ObservationGeometry}
 export interface ObservedColorProfile {filters:string[];referenceRadiusMeters:number;centerLongitude:number;displayRange?:readonly number[]}
