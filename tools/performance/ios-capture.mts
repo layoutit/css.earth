@@ -350,8 +350,18 @@ export async function captureIosMoment(args: readonly string[]) {
   const session = inspector(page.webSocketDebuggerUrl);
   await session.ready;
   const events: Message[] = [], workers = new Map<string, string>();
+  let recording = false;
   session.listen((source, message) => {
-    if (message.method === 'Worker.workerCreated' && isRecord(message.params)) workers.set(requireString(message.params.workerId, 'worker'), requireString(message.params.url, 'worker url').split('/').pop() ?? '');
+    if (message.method === 'Worker.workerCreated' && isRecord(message.params)) {
+      const worker = requireString(message.params.workerId, 'worker');
+      workers.set(worker, requireString(message.params.url, 'worker url').split('/').pop() ?? '');
+      // With the Worker domain on, WebKit holds each new worker paused until Worker.initialized ("required to allow
+      // execution in the worker", Worker.json). Profile it first when a recording is running, then let it run.
+      void (async () => {
+        if (recording) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
+        await session.send('Worker.initialized', { workerId: worker });
+      })();
+    }
     events.push({ ...message, source });
   });
   // Page.enable starts the inspector stopwatch every timestamp reads (WebKit InspectorPageAgent::enable); without it all are 0.
@@ -375,6 +385,7 @@ export async function captureIosMoment(args: readonly string[]) {
 
   await session.send('ScriptProfiler.startTracking', { includeSamples: true });
   for (const worker of workers.keys()) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
+  recording = true;
   await session.send('CPUProfiler.startTracking');
   await session.send('Timeline.start', { maxCallStackDepth: 8 });
   const started = Date.now(), marks: { label: string; at: number }[] = [];
