@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readFile } from 'node:fs/promises';
-import { colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mts';
+import { PALETTE_STEPS, paletteLookup, colorForValue, terrainBrightness, scienceMapPoint, sampleScienceGrid, sampleColorBand, composeObservedColor, sourceSurfaceBrightness } from './scientific-raster.mts';
 import { lambertAttenuationAtlas } from './solid-raster.mts';
 import { parseTerrestrialProfile } from './index.mts';
 
@@ -164,4 +164,13 @@ test('a declared output meridian shifts presentation without changing source coo
   assert.deepEqual(seen.slice(0,4).map(p=>p[0]),[-135,-45,45,135]);
   assert.deepEqual(seen.filter((_,i)=>i%4===0).map(p=>p[1]),[45,-45]);
   assert.throws(()=>paintScienceSurface(source,{...lens,outputLongitudeOrigin:NaN},4,2),TypeError);
+});
+
+test('a numeric palette resolves through 256 steps: monotonic along the range, bounded to that many colours, ends exact', () => {
+  const lens = { minimum: -1, maximum: 1, colors: ['#000000', '#ff0000', '#ffffff'] } as never;
+  const lookup = paletteLookup(lens), seen = new Set<string>();
+  let previous = -1;
+  for (let i = 0; i <= 4000; i++) { const c = lookup(-1 + 2 * i / 4000); const key = c.join(','); seen.add(key); const rank = c[0]! * 2 + c[1]!; assert.ok(rank >= previous - 1e-9, 'colour never runs backwards'); previous = rank; }
+  assert.ok(seen.size <= PALETTE_STEPS, `${seen.size} colours`);
+  assert.deepEqual(lookup(-5), [0, 0, 0]); assert.deepEqual(lookup(5), [255, 255, 255]); for (const [c, exact] of lookup(0).map((v, i) => [v, colorForValue(0, lens)[i]!] as const)) assert.ok(Math.abs(c - exact) <= 2, 'a step lands within two of the exact colour');
 });

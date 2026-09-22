@@ -139,6 +139,16 @@ also fits and validates cameras and applies photometric corrections.
 keeps numeric values available for sampling. Unit conversion, palette and
 optional relief follow that sampling. The displayed RGB value is therefore a
 presentation of the source quantity; it cannot replace the original numeric input.
+A numeric palette is looked up through 256 steps across its declared range
+(`PALETTE_STEPS`): finer than any legend stop and than the 8-bit channels the
+surface is encoded in, and it bounds an unshaded numeric surface to 256 colours.
+Lossless WebP pays for entropy rather than colour count, so the saving is the
+noise between steps: baked on 2026-09-22 against the earlier 1024-step lookup,
+Moon heat anomalies 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, midnight
+temperature 13.98 → 13.74 MB, Ceres ammonium band 13.11 → 12.65 MB, mean channel
+error 0.14 to 0.34 of 255 and no texel off by more than 8. Relief shading
+multiplies the looked-up colour afterwards, so shaded lenses keep their wider
+colour range.
 
 Validity comes from the selected product's mask, alpha or no-data rule. Numeric
 bilinear sampling rejects a footprint containing an invalid neighbor. Categorical

@@ -214,10 +214,25 @@ export function sourceSurfaceBrightness({ point, normal }: {point:readonly numbe
     (relief.ambient + (1 - relief.ambient) * relief.lightDirection[2]);
 }
 
+/**
+ * A numeric palette is looked up through this many steps across its declared range. 256 steps are finer than any legend
+ * stop and finer than the 8-bit channels the surface is encoded in, and they bound a numeric surface to 256 colours, which
+ * trims its lossless encoding by the noise between steps (baked 2026-09-22 against the 1024-step lookup: Moon heat anomalies
+ * 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, midnight temperature 13.98 → 13.74 MB, Ceres ammonium band 13.11 → 12.65 MB;
+ * mean channel error 0.14 to 0.34 of 255, no texel off by more than 8). Relief shading multiplies these colours afterwards.
+ */
+export const PALETTE_STEPS = 256;
+export function paletteLookup(lens: SciencePalette) {
+  const { minimum, maximum } = lens;
+  if (minimum === undefined || maximum === undefined || !(maximum > minimum)) throw new TypeError('A numeric palette needs a declared range.');
+  const palette = Array.from({ length: PALETTE_STEPS }, (_, i) => colorForValue(minimum + i / (PALETTE_STEPS - 1) * (maximum - minimum), lens));
+  return (value: number) => palette[Math.round(Math.max(0, Math.min(1, (value - minimum) / (maximum - minimum))) * (PALETTE_STEPS - 1))]!;
+}
+
 export function createSourceSurfacePainter(lens: SciencePalette) {
-  const palette = lens.categories ? null : Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
+  const palette = lens.categories ? null : paletteLookup(lens);
   return (sample: {value:number;point:readonly number[];normal:readonly number[]}) => {
-    const color = lens.categories ? categoryColorForValue(sample.value, lens) : palette![Math.round(Math.max(0, Math.min(1, (sample.value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
+    const color = lens.categories ? categoryColorForValue(sample.value, lens) : palette!(sample.value);
     const brightness = sourceSurfaceBrightness(sample, lens.relief);
     return color.map(c => Math.max(0, Math.min(255, Math.round(c * brightness))));
   };
@@ -227,12 +242,12 @@ export function paintScienceSurface(source: SourceScalar, lens: SciencePalette, 
   const origin = lens.outputLongitudeOrigin ?? 0;
   if (!Number.isFinite(origin) || origin < -180 || origin >= 360) throw new TypeError('Invalid scientific output longitude origin.');
   const rgb = Buffer.alloc(width * height * 3), missing = new Uint8Array(width * height);
-  const palette = lens.categories ? null : Array.from({ length: 1024 }, (_, i) => colorForValue(lens.minimum + i / 1023 * (lens.maximum - lens.minimum), lens));
+  const palette = lens.categories ? null : paletteLookup(lens);
   for (let y = 0; y < height; y++) for (let x = 0; x < width; x++) {
     const longitude = origin + (x + 0.5) / width * 360, latitude = 90 - (y + 0.5) / height * 180;
     const i = y * width + x, value = source.sample(longitude, latitude);
     if (value === null) { missing[i] = 1; continue; }
-    const color = lens.categories ? categoryColorForValue(value, lens) : palette![Math.round(Math.max(0, Math.min(1, (value - lens.minimum) / (lens.maximum - lens.minimum))) * 1023)];
+    const color = lens.categories ? categoryColorForValue(value, lens) : palette!(value);
     const brightness = lens.relief ? terrainBrightness(source, longitude, latitude, 360 / width, lens.relief) : 1;
     for (let c = 0; c < 3; c++) rgb[i * 3 + c] = Math.min(255, Math.round(color[c] * brightness));
   }
