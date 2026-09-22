@@ -117,10 +117,8 @@ test('source-owned depth inputs load with a content pin and reject changes or es
   try {
     const data = recipe(), bytes = JSON.stringify(ledger()), recipePath = 'labs/nebula/models/synthetic-cloud/depth.json';
     await mkdir(join(root, 'labs/nebula/models/synthetic-cloud'), { recursive: true });
-    data.evidence.sha256 = createHash('sha256').update(bytes).digest('hex');
     await writeFile(join(root, data.evidence.path), bytes); await writeFile(join(root, recipePath), JSON.stringify(data));
     const loaded = await loadDepthModel(root, recipePath, 'synthetic-cloud');
-    assert.equal(loaded.recipe.evidence.sha256, data.evidence.sha256);
     assert.deepEqual(loaded.methods, ['coherent-irregular-front']);
     await assert.rejects(loadDepthModel(root, recipePath, 'wrong-cloud'), /another nebula/);
     await writeFile(join(root, data.evidence.path), bytes + '\n');

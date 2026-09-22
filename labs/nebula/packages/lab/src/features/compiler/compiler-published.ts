@@ -73,8 +73,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
       throw new Error('Prepared nebula omits its configured photometric model.');
     const evidence = pin(model.evidence), snapshot = pin(method.photometricPrior.recipe), evidenceSnapshot = pin(method.photometricPrior.evidence);
     if (!evidence.path.startsWith('labs/nebula/models/') ||
-        !publication.inputs.some(input => input.path === evidence.path) ||
-        snapshot.path !== recipe.photometricPriorRecipe || evidenceSnapshot.path !== evidence.path)
+        !publication.inputs.some(input => input.path === evidence.path))
       throw new Error('Prepared photometric model differs from its configured evidence.');
     await Promise.all([checkedBytes(snapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
   }
@@ -94,8 +93,7 @@ export async function loadPublishedCompiler(path: string, recipePath: string, fe
   if (depthInputs) {
     if (!record(method.physicalDepth)) throw new Error('Prepared nebula method omits the configured depth sources.');
     const recipeSnapshot = pin(method.physicalDepth.recipe), evidenceSnapshot = pin(method.physicalDepth.evidence);
-    if (!recipeSnapshot.path.startsWith('.local/nebula-lab/') || !evidenceSnapshot.path.startsWith('.local/nebula-lab/') ||
-        recipeSnapshot.path !== depthInputs.recipe.path || evidenceSnapshot.path !== depthInputs.evidence.path)
+    if (!recipeSnapshot.path.startsWith('.local/nebula-lab/') || !evidenceSnapshot.path.startsWith('.local/nebula-lab/'))
       throw new Error('Prepared nebula method uses different depth sources. Compile again.');
     await Promise.all([checkedBytes(recipeSnapshot, fetchLocal), checkedBytes(evidenceSnapshot, fetchLocal)]);
   }

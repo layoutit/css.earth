@@ -61,7 +61,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   if (!['author', 'published'].includes(packageMode) || publish === 'catalogues' && packageMode !== 'published')
     throw new TypeError('Catalogue-only publication requires published package inputs.');
   const closure = new Set<string>();
-  const input = (path: string) => { closure.add(path); return readFile(resolve(root, path)); };
+  const input = async (path: string) => { const bytes = await readFile(resolve(root, path)); closure.add(path); return bytes; };
   const json = async (path: string): Promise<unknown> => JSON.parse((await input(path)).toString('utf8'));
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));

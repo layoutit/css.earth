@@ -202,7 +202,7 @@ test('sky band previews read their recipe with a warm cache and compose from the
   const temporary = await mkdtemp(resolve(tmpdir(), 'sky-preview-'));
   try {
     const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid: { width: 16, height: 16, fovDeg: 0.01, centerIcrsDegrees: [270.9, -24.4] },
-      bands: [{ band: 'IRAC4', sha256: 'a'.repeat(64), bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
+      bands: [{ band: 'IRAC4', bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
     const composite = await sharp({ create: { width: 16, height: 16, channels: 3, background: '#400' } }).png().toBuffer();
     const directory = '.local/nebula-lab/observations/m8-processed/sources', recipePath = 'src/objects/m8/source/sky-bands/spitzer-irac.json';
     await mkdir(resolve(temporary, directory), { recursive: true });
@@ -241,7 +241,7 @@ test('a sky band preview is served by the object mirror instead of the survey ar
   const temporary = await mkdtemp(resolve(tmpdir(), 'sky-mirror-preview-'));
   t.after(() => rm(temporary, { recursive: true, force: true }));
   const recipe = Buffer.from(JSON.stringify({ schema: 'cssearth-sky-band-composite@1', grid: { width: 16, height: 16, fovDeg: 0.01, centerIcrsDegrees: [270.9, -24.4] },
-    bands: [{ band: 'IRAC4', sha256: 'a'.repeat(64), bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
+    bands: [{ band: 'IRAC4', bytes: 2880 }], backgroundPercentile: 1, peakPercentile: 99.9, display: { minimum: 0, stretch: 0.1, softening: 8 } }));
   const directory = '.local/nebula-lab/observations/m8-processed/sources', recipePath = 'src/objects/m8/source/sky-bands/spitzer-irac.json';
   const input = async (path: string) => { if (path !== recipePath) throw new Error(`Missing recipe ${path}`); return recipe; };
   const pinFor = (name: string) => ({ path: `${directory}/${name}.png`, skyBands: { path: recipePath } });

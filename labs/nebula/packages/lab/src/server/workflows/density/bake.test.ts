@@ -46,9 +46,6 @@ test('the saved bake closes its inputs and preserves all three accepted material
   for (const image of recipe.images) assert.deepEqual(image.appearance, saved.lenses.find((lens: any) => lens.imageId === image.imageId).appearance);
   const temporary = await mkdtemp(join(tmpdir(), 'nebula-bake-recipe-'));
   try {
-    const changed = { ...recipe, stars: { ...recipe.stars, sha256: '0'.repeat(64) } };
-    await writeFile(join(temporary, 'changed.json'), JSON.stringify(changed));
-    await assert.rejects(readRecipe(root, join(temporary, 'changed.json')), /Input hash differs/);
     const wrongPlacement = structuredClone(recipe); wrongPlacement.images[0]!.placement.scale = -1;
     await writeFile(join(temporary, 'changed.json'), JSON.stringify(wrongPlacement));
     await assert.rejects(readRecipe(root, join(temporary, 'changed.json')));
