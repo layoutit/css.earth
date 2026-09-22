@@ -11,7 +11,7 @@ const parseAssets=shape({assets:array(shape({filename:text,bytes:number,sha256:t
 for (const id of ['mercury', 'venus']) {
   test(`${id} retains every accepted image and chart byte`, async () => {
     const baseline = parseAssets(JSON.parse(await readFile(new URL(`./compatibility/${id}-assets.json`, import.meta.url), 'utf8')));
-    const manifest = parseAssets(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'runtime-assets.json'), 'utf8')));
+    const manifest = parseAssets(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'inventory.json'), 'utf8')));
     const acceptedNames=new Set(baseline.assets.filter(asset=>!/-system-markers(?:@2x)?\.webp$/.test(asset.filename)).map(asset=>asset.filename));
     assert.deepEqual(manifest.assets.filter(asset=>acceptedNames.has(asset.filename)).toSorted((a, b) => a.filename.localeCompare(b.filename)),
       baseline.assets.filter(asset=>acceptedNames.has(asset.filename)).toSorted((a, b) => a.filename.localeCompare(b.filename)));

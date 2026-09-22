@@ -18,7 +18,7 @@ const json = async (path: string) => requireRecord(JSON.parse(await readFile(pat
 const records = (value: unknown) => requireArray(value).map(value => requireRecord(value));
 const save = (path: string, value: unknown) => writeFile(path, JSON.stringify(value, null, 2) + '\n');
 const files = ['prepared/scene.json', 'prepared/surfaces.json', 'prepared/material.json',
-  'runtime-assets.json', 'object.json', 'source/manifest.json',
+  'inventory.json', 'object.json', 'source/manifest.json',
   'source/preparation/terrestrial.json'];
 const generators = ['tools/objects/terrestrial-layers/shape-material.mts', 'tools/objects/refresh-shape-lighting.mts'];
 
@@ -31,7 +31,7 @@ async function stageShapeLighting(id: string) {
   const scene = await json(resolve(directory, 'prepared/scene.json'));
   const surfaces = await json(resolve(directory, 'prepared/surfaces.json'));
   const material = await json(resolve(directory, 'prepared/material.json'));
-  const inventory = await json(resolve(directory, 'runtime-assets.json'));
+  const inventory = await json(resolve(directory, 'inventory.json'));
   const views = config.raster.shapeViews ?? [];
   const replacements = new Map<string, Record<string, unknown>>();
   const changed = new Map<string, { filename: string; bytes: number; sha256: string }>();
@@ -62,8 +62,8 @@ async function stageShapeLighting(id: string) {
     document.surfaces = records(document.surfaces).map(surface => replacements.get(requireString(surface.id)) ?? surface);
   await save(resolve(stage, 'surfaces.json'), surfaces);
   await save(resolve(stage, 'material.json'), material);
-  await save(resolve(stage, 'runtime-assets.json'), { ...inventory,
-    assets: records(inventory.assets).map(asset => changed.get(requireString(asset.filename)) ?? asset) });
+  await save(resolve(stage, 'inventory.json'), { ...inventory,
+    assets: records(inventory.assets).map(asset => asset.location === 'public' && changed.has(requireString(asset.filename)) ? { ...asset, ...changed.get(requireString(asset.filename)) } : asset) });
   await save(resolve(stage, 'receipt.json'), { id, originals, generatorPins, baselineAssets: inventory.assets,
     lensIds: views.map(view => view.id), changedAssets: [...changed.values()] });
 }
@@ -90,9 +90,9 @@ async function publishShapeLighting(id: string) {
     await copyFile(resolve(stage, filename), temporary);
     await rename(temporary, destination);
   }
-  for (const file of ['surfaces.json', 'material.json', 'runtime-assets.json']) {
+  for (const file of ['surfaces.json', 'material.json', 'inventory.json']) {
     const value = await json(resolve(stage, file));
-    if (file === 'runtime-assets.json') await save(resolve(directory, file), value);
+    if (file === 'inventory.json') await save(resolve(directory, file), value);
     else await writeFile(resolve(directory, 'prepared', file), JSON.stringify(value) + '\n');
   }
   await prepareObjectProvenance({ objectDirectory: directory, publicDirectory: resolve('public/scenes', id),

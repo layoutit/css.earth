@@ -6,7 +6,7 @@ import { chromium } from "playwright";
 import sharp from "sharp";
 import { SCENE_OBJECTS } from "../site/objects.mts";
 import { previewSite } from "./preview.mts";
-import { setupObjectIds } from "./runtime-assets.mts";
+import { inventoriedObjectIds } from "./runtime-assets.mts";
 
 // Plain captures of the built CSS scenes: no added artwork, text, or branding.
 // Card captures use the shared sidebar background and omit the surrounding sky.
@@ -15,7 +15,7 @@ const { values } = parseArgs({ options: {
   "base-url": { type: "string" },
   object: { type: "string", multiple: true, default: [] },
 } });
-const ids = setupObjectIds((values.object ?? []).map(id => `--object=${id}`));
+const ids = inventoriedObjectIds((values.object ?? []).map(id => `--object=${id}`));
 const outputDirectory = values.card ? "public/overview" : "public/social";
 await mkdir(outputDirectory, { recursive: true });
 const server = values["base-url"] ? null : await previewSite({ port: 4266 });

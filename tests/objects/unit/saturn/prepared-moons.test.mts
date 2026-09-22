@@ -29,7 +29,7 @@ test('retains every pinned moon source image and catalog byte',async()=>{
 });
 test('keeps dormant moon billboards, orbit guides and shadow banks outside the parent runtime',async()=>{
  const [definition,scene]=await Promise.all([readPreparedFixture('saturn','runtime'),readPreparedFixture('saturn','scene')]);
- const assets=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/runtime-assets.json',import.meta.url),'utf8'));
+ const assets=JSON.parse(await readFile(new URL('../../../../src/objects/saturn/inventory.json',import.meta.url),'utf8'));
  assert.doesNotMatch(JSON.stringify(definition),/saturn-moon|PREPARED_SATURN_MOON|mountPreparedOrbitGuide|createPreparedOrbitGuideInteraction/);
  assert.ok(assets.assets.every((asset: { filename: string|string[]; })=>!asset.filename.includes('moon')));
  assert.ok(Object.keys(scene.counts).every(key=>!key.startsWith('moon')));

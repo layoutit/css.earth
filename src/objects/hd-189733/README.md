@@ -45,4 +45,4 @@ Run of 2026-09-17 (this version): `node tools/prepare-object.mts hd-189733` prep
 
 **The star is spotted, and no spot map is drawn.** SIMBAD classes HD 189733 A as a BY Draconis variable, a star whose brightness changes as spots rotate with it. Spots crossed during a transit are single strips at single moments, not a map.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

@@ -1,9 +1,8 @@
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { inventoriedAssets, inventoriedObjectIds, preparedAssetObjectIds, preparedAssets, runtimeAssets } from './runtime-assets.mts';
+import { inventoryAssets, inventoriedObjectIds, volumeMetadataAssets } from './runtime-assets.mts';
 import type { RuntimeAssetLocation } from './runtime-assets.mts';
 import { installRuntimeAssets } from './setup.mts';
-import { preparedVolumeMetadataAssets } from './setup-volume-metadata.mts';
 
 const projectRoot = resolve(import.meta.dirname, '..');
 
@@ -22,11 +21,10 @@ export function requireCiInputMode(args: readonly string[]): CiInputMode {
  * other bodies' public texture banks are not inputs to this job. This is a test-fixture selection, not a registry.
  * No transports are serialized here: preparation tests read runtime.json directly or finalize into temp dirs. */
 export async function ciPreparationInputs(root = projectRoot): Promise<RuntimeAssetLocation[]> {
-  const preparedIds = preparedAssetObjectIds([], root);
-  const metadata = await preparedVolumeMetadataAssets(root);
+  const metadata = await volumeMetadataAssets(root);
   const assets = [
-    ...await preparedAssets(root, preparedIds),
-    ...await runtimeAssets(root, ['mimas']),
+    ...await inventoryAssets(root, inventoriedObjectIds([], root), { location: 'prepared' }),
+    ...await inventoryAssets(root, ['mimas'], { location: 'public' }),
     ...metadata.assets,
   ];
   return uniqueCiInputs(assets);
@@ -57,7 +55,7 @@ function uniqueCiInputs(assets: readonly RuntimeAssetLocation[]): RuntimeAssetLo
  * The caller must generate minimap data with --data-only and compile catalogues from restored provenance.
  */
 export async function ciUniverseInputs(root = projectRoot): Promise<RuntimeAssetLocation[]> {
-  const assets = await inventoriedAssets(root, inventoriedObjectIds([], root));
+  const assets = await inventoryAssets(root, inventoriedObjectIds([], root));
   return uniqueCiInputs(assets.filter(asset => {
     if (asset.filename.endsWith('.json')) return true;
     if (asset.filename.endsWith('-photometric-phase-curve.svg')) return true;

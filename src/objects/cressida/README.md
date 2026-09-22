@@ -22,7 +22,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - The shared display then advances the secular spin rate -776.581632°/day and freezes the small periodic correction. This is not a complete long-term rotation ephemeris or landmark registration.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

@@ -82,7 +82,7 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
 // Repository-volume restoration runs before the generated site catalogue exists in the nebula CI lane.
 // Keep the body registry lazy: that mode discovers its packages directly from src/objects instead.
 const ids = repositoryVolumeMode ? await repositoryVolumeObjectIds() :
-  (await import('./runtime-assets.mts')).setupObjectIds(argumentsList);
+  (await import('./runtime-assets.mts')).inventoriedObjectIds(argumentsList);
 for (const id of ids) {
   const volumeSource = resolve(projectRoot, 'src/objects', id, 'source');
   if (repositoryVolumeMode) {
@@ -109,7 +109,7 @@ for (const id of ids) {
         finally { await rm(cache, { recursive:true, force:true }); }
       }
       if (recipe.sky) {
-        const [{ parseSkyRecipe }, { installRuntimeAssets }, { preparedAssets }] = await Promise.all([
+        const [{ parseSkyRecipe }, { installRuntimeAssets }, { inventoryAssets }] = await Promise.all([
           import('../src/preparation/sky/config.ts'), import('./setup.mts'), import('./runtime-assets.mts'),
         ]);
         const skyRecipe = parseSkyRecipe(JSON.parse((await verifiedBytes(volumeSource, recipe.sky)).toString('utf8')) as unknown);
@@ -119,7 +119,7 @@ for (const id of ids) {
           if (sha256(descriptorBytes) !== skyRecipe.stars.sha256) {
             throw new TypeError(`Sky stars descriptor digest mismatch: ${skyRecipe.stars.object}`);
           }
-          const assets = await preparedAssets(projectRoot, [skyRecipe.stars.object]);
+          const assets = await inventoryAssets(projectRoot, [skyRecipe.stars.object], { location: 'prepared' });
           const result = await installRuntimeAssets(assets);
           console.log(`${id}: ${skyRecipe.stars.object} prepared dependency restored (${result.installed} downloaded, ${result.reused} reused)`);
         }

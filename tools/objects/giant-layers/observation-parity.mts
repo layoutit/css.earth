@@ -10,7 +10,7 @@ export async function assertObservationPreparationParity(id: string) {
   if(!/^[a-z][a-z0-9-]*$/u.test(id))throw new TypeError('Unsafe object identity.');
   const directory=resolve(projectRoot,'src/objects',id);
   const config: unknown=JSON.parse(await readFile(resolve(directory,'source/preparation/observations.json'),'utf8'));
-  const manifest=parse(JSON.parse(await readFile(resolve(directory,'runtime-assets.json'),'utf8')), runtimeAssetManifest, 'runtime asset manifest');
+  const manifest=parse({assets:(JSON.parse(await readFile(resolve(directory,'inventory.json'),'utf8')) as {assets:{location:string}[]}).assets.filter(asset=>asset.location==='public')}, runtimeAssetManifest, 'runtime asset manifest');
   const result=await prepareObservedSurfaces({sourceDirectory:resolve(directory,'source'),config,write:false});
   for(const {filename,bytes,sha256,data} of result.assets){
     const expected=manifest.assets.find(asset=>asset.filename===filename);assert.ok(expected,`Unaccepted observation asset ${filename}`);

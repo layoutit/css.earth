@@ -144,7 +144,7 @@ test('real owner map routes defects to their test lane, not the unrelated lab', 
   const preparation = classifyAffectedPaths(['src/renderers/css/preparation/volume.ts'], config);
   assert.equal(preparation.jobs.has('universePreparation'), true);
   assert.equal(preparation.jobs.has('nebula'), false);
-  const object = classifyAffectedPaths(['src/objects/mars/prepared-assets.json'], config);
+  const object = classifyAffectedPaths(['src/objects/mars/inventory.json'], config);
   assert.equal(object.jobs.has('universe'), true, 'changed package integrity must be exercised');
   assert.equal(classifyAffectedPaths(['tools/new-unmapped-owner.mts'], config).shared, true);
 });

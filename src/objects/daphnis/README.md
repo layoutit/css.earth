@@ -42,7 +42,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - **Orbit:** Its model is fitted only to 2005–2018; the 2026 scene extrapolates that fit and has no validated current-epoch position accuracy. Its display uses an approximate Saturn-equatorial pole and explicitly arbitrary meridian because this package does not include the binary Cassini attitude kernel.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## False color preparation
 

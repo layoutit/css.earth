@@ -1,0 +1,197 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "mars-features.json",
+      "bytes": 6046258,
+      "sha256": "ef2cd04dd50b1cfbd15f16d2a7b038ade8bbd03f940b5c4e8888176c8da8fd78"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-elevation.webp",
+      "bytes": 1662,
+      "sha256": "c5cf318000c6b1349f870c42c28900b323aee17181f46c1484e10cea7dce5bd1"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-normal.webp",
+      "bytes": 664,
+      "sha256": "c18b375dd5e4032d5dc8cc1b5cc75c982ac0b76abf893ef72ed4eed47d349f16"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lens-thermal.webp",
+      "bytes": 140,
+      "sha256": "7126fb082cf201a4ad13091732305e2c31b1dac36109889e4ad0e7e5643f495a"
+    },
+    {
+      "location": "public",
+      "filename": "mars-lighting@2x.webp",
+      "bytes": 169690,
+      "sha256": "1369a6e9d5f4005a14996ebdafc3051121d9d5ca89c14bec8a7cb00a0e7eb4f7"
+    },
+    {
+      "location": "public",
+      "filename": "mars-material@2x.webp",
+      "bytes": 1130242,
+      "sha256": "9820c485430e70a6ac0aabe78c1737edd99e9cac2fc10c24bfb7983e2443241e"
+    },
+    {
+      "location": "public",
+      "filename": "mars-observation-material@2x.webp",
+      "bytes": 453296,
+      "sha256": "c1e091a34aff9427840f6a8a27dc920d95d0b54dc68bd4b5faa6b49dd7536bc6"
+    },
+    {
+      "location": "public",
+      "filename": "mars-photometric-phase-curve.svg",
+      "bytes": 4492,
+      "sha256": "46b2aacc1daa5c632189cce9d04879611096e471c652410ed30a68c8c4538752"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-elevation@2x.webp",
+      "bytes": 461358,
+      "sha256": "c271fb2ac24ff3d1dbdc8b73e2f2fd47856416323df24cf23102988d334d7741"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-normal@2x.webp",
+      "bytes": 524794,
+      "sha256": "384fa36bdb1c4a30c5c6e470489bdc3c9667ba8d1072b556a9b67d118271120c"
+    },
+    {
+      "location": "public",
+      "filename": "mars-poles-thermal@2x.webp",
+      "bytes": 240764,
+      "sha256": "2de1715ab6991bb1926906b430b5ffbe25739e3007e41f905d05e29f4624a339"
+    },
+    {
+      "location": "public",
+      "filename": "mars-reflectance-spectrum.svg",
+      "bytes": 5843,
+      "sha256": "6140a667a2b109fbfbb8907bf7e058607e98c464688031d033d9d3187ed35811"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-elevation@2x.webp",
+      "bytes": 4284386,
+      "sha256": "aa991949a64c18d89cab197d91ea119bb8a2e52f5ee564463f43b1675776f310"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-normal@2x.webp",
+      "bytes": 2996430,
+      "sha256": "5cd225ec4de592bb2a9ab199248506eddb71f9149ca823e9cf48a466bfc15c39"
+    },
+    {
+      "location": "public",
+      "filename": "mars-surface-thermal@2x.webp",
+      "bytes": 4811674,
+      "sha256": "d5e91b15aa8e441f7aae2467ecfd2e8a5b0fb2cfe8b665b44c821087d5dbd285"
+    },
+    {
+      "location": "public",
+      "filename": "mars-temperature-pressure-profile.svg",
+      "bytes": 2423,
+      "sha256": "3b4ae81fbfe5f6ffc2ab534b00a869387cad3376e1c3a3fa2a5e56c3204a875d"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 3051,
+      "sha256": "4f666e15f724ad0d36f6d12b426ed5c78bd94a619b02865aebfd710d1aea3f44"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1683,
+      "sha256": "58b1b0a4d7ab43291deeef76a224169e562138bda4c92f2849bb446cd3d6d9be"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 8091,
+      "sha256": "470298fffd18cabbc47b22dd4301a496f5a692846f8802f692de2f8c7dade0cc"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 2101,
+      "sha256": "9d4cee2d8363cb48e2dfd0867f284bd0a03c03656e720d291bbb3040b9f3e507"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 827,
+      "sha256": "e0bc262814fe5d3b27755bb968bde2661ea2db472a1ec4e2ebe59a87fb9f93fe"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 3560,
+      "sha256": "aa73d91c64ebe5fb59cec110c6ba7796422d849590d861087851c3c64111b5d2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 234,
+      "sha256": "145c63ec83c6eda131d52a0ec87e530e3798f208c3d2cf7ad461309282117e70"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 72982,
+      "sha256": "46d28712588b9cd8265b1dff86bb6ed8cbb6730d99060ce207ee2b0070ef377c"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 58950,
+      "sha256": "c8b43c183333d97f4a6c40136b880b317db065f5f535fb12a26254b91c272482"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/thermal.webp",
+      "bytes": 59152,
+      "sha256": "4c6256812cd848ba24e8e4b4034d0e39428725f32f355433a5e814563e16559f"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 445154,
+      "sha256": "4a4c4f4f72e8dc62ac0a9354be9d79537e7f8c713c402574cf2711f10fc0f0a8"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 381624,
+      "sha256": "0163d989e9b568300b08b6f2d35daf5e690a9163d2ab156f703e9428dcf07af7"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1026,
+      "sha256": "ff78c468b8157b281e71a217d4eb976c50471c80d5d26b1fb135eb67f538e0b2"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 612,
+      "sha256": "ccdebb2f07eecda118c8f8586bc4ad7bf709447cc142d718c19293508c1b1f1a"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1205,
+      "sha256": "2fad67132e77be34966a3602be3d12dd4905978b31d8f96a51201e180c906446"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1217,
+      "sha256": "3524ba368f18215f01ec65d75a41594f2f0bc52c2d01613504c264094f716d89"
+    }
+  ]
+}

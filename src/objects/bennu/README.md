@@ -39,7 +39,7 @@ The spectral composite covers approximately ±65°; its 250 m cartographic radiu
 
 The zero-phase albedo map covers about 55° S–55° N and leaves poles missing. The differently normalized PolyCam mosaic remains separate. The publisher’s 0.002–0.007 albedo stretch is retained.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="bennu-source-record"></a>
 <a id="selected-data-and-survey"></a>

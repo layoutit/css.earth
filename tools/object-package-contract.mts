@@ -4,11 +4,7 @@ import { resolve } from "node:path";
 import type { ObjectEntry } from "../site/object-schema.mts";
 import { authoredObject } from './authored-object.mts';
 
-import {
-  validateRuntimeAssetManifest,
-  requireRuntimeAssetManifest,
-  verifyRuntimeAssetClosure,
-} from "../src/platform/runtime-asset-closure.mts";
+import { validateInventory, requireInventory, verifyInventory } from "../src/platform/runtime-asset-closure.mts";
 import {
   validateSourceManifest,
   verifySourceManifest,
@@ -22,7 +18,7 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       resolve(root, "README.md"),
       resolve(root, "NOTICE.md"),
       resolve(root, "source", "manifest.json"),
-      resolve(root, "runtime-assets.json"),
+      resolve(root, "inventory.json"),
       ...(authored ? [resolve(root, 'object.json'), resolve(root, 'prepared/runtime.json'),
         resolve(root, 'prepared/content.json'), resolve(root, 'text.json'), resolve(root, 'prepared/text.json')] : [
       resolve(root, "runtime", "client.mjs"),
@@ -44,7 +40,7 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
     // gate (see docs/ci-cd.md). Empty since #505 retired the browser harness and its 547
     // per-object profiles; the ratchet stays for the next backlog that earns one.
     backlogFiles: Object.freeze<readonly string[]>([]),
-    runtimeAssets: resolve(root, "runtime-assets.json"),
+    inventory: resolve(root, "inventory.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
     sourceRoot: resolve(root, "source"),
     publicAssets: resolve(projectRoot, "public", "scenes", objectRecord.id),
@@ -78,7 +74,7 @@ export async function validateObjectPackageFiles(
   return Object.freeze({ ...paths, missingBacklogFiles: Object.freeze(missingBacklogFiles) });
 }
 
-export { validateRuntimeAssetManifest };
+export { validateInventory };
 
 export async function validatePlanetData(
   planet: Pick<ObjectEntry, "id" | "name">,
@@ -86,23 +82,19 @@ export async function validatePlanetData(
 ) {
   const paths = await validateObjectPackageFiles(planet, { projectRoot });
   const [runtimeInput, sourceInput] = await Promise.all([
-    readJson(paths.runtimeAssets),
+    readJson(paths.inventory),
     readJson(paths.sourceManifest),
   ]);
-  const runtimeAssets = requireRuntimeAssetManifest(planet.id, runtimeInput);
+  const inventory = requireInventory(planet.id, runtimeInput);
   const sourceManifest = validateSourceManifest(planet.id, sourceInput);
-  await verifyRuntimeAssetClosure({
-    planetId: planet.id,
-    manifest: runtimeAssets,
-    root: paths.publicAssets,
-  });
+  await verifyInventory({ planetId: planet.id, inventory, publicRoot: paths.publicAssets, locations: ['public'] });
   await verifySourceManifest({
     manifest: sourceManifest,
     planetName: planet.name,
     sourceRoot: paths.sourceRoot,
   });
   return Object.freeze({
-    assetCount: runtimeAssets.assets.length,
+    assetCount: inventory.assets.filter(asset => asset.location === "public").length,
     sourceInputCount: sourceManifest.inputs.length,
   });
 }

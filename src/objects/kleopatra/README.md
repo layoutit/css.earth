@@ -71,7 +71,7 @@ No unannotated, registered global optical, geological or compositional map was e
 
 The SPHERE photograph is photographed illumination from the survey's deconvolved frames, with matched relative frame levels, each apparition placed through the surface it shares with another, averaged where frames overlap, each fading out toward its disc edge. It is not albedo or colour. The frames see Kleopatra from 37° south to 32° north, so surface the survey did not see keeps the missing-imagery grid.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="kleopatra-source-record"></a>
 <a id="presentation-and-limitations"></a>
@@ -102,6 +102,6 @@ Meshoptimizer 1.2.0 uses ErrorAbsolute and RegularizeLight with an authored 1,50
 
 Each display face is a native PolyCSS `u` raster triangle with a 128 px cell. Existing preparation owns source sampling, atlases, normal interpolation, lighting, retained leaves, shape targeting and context imagery. Runtime consumes prepared state. The context image uses this exact reduced mesh at 90°E, 35°N with full-phase ambient 0.45 and diffuse 0.55. Geometry's display radius of 110 CSS units frames the long body; its physical reference radius remains 59.1 km.
 
-Restore with `node tools/objects/dist/operations.js acquire kleopatra`; verify with `acquire kleopatra --verify-only`; prepare with `node tools/objects/dist/prepare-authored.js kleopatra --write`. The public LAM site returns a JavaScript cookie interstitial; the download operation carries that ordinary cookie explicitly. The original OBJ, complete Marchis research paper and Inter font are direct pinned downloads; other documentation, title and generated context are checked-in source pins. The 22 MB paper stays intact and ignored by the body-owned .gitignore. Runtime installation is separate through `runtime-assets.json`.
+Restore with `node tools/objects/dist/operations.js acquire kleopatra`; verify with `acquire kleopatra --verify-only`; prepare with `node tools/objects/dist/prepare-authored.js kleopatra --write`. The public LAM site returns a JavaScript cookie interstitial; the download operation carries that ordinary cookie explicitly. The original OBJ, complete Marchis research paper and Inter font are direct pinned downloads; other documentation, title and generated context are checked-in source pins. The 22 MB paper stays intact and ignored by the body-owned .gitignore. Runtime installation is separate through `inventory.json`.
 
 </details>

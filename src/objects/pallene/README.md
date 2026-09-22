@@ -36,7 +36,7 @@ This approximate local illumination normalization omits a phase function, multip
 
 The finer 2010/2011 frame trials below were excluded for saturation, high phase or too little reliable coverage. Their limits were not relaxed to add pixels.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 <a id="pallene-sources-and-interpretation"></a>
 <a id="measured-shape"></a>

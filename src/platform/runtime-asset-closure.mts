@@ -1,22 +1,28 @@
 import { sha256 } from './sha256.mts';
 import { isArray } from './is-array.mts';
-export interface RuntimeAsset { filename: string; bytes: number; sha256: string; location?: 'public'; }
-export interface RuntimeAssetManifest { schema: string; resourceRoot?: 'prepared'; assets: readonly RuntimeAsset[]; }
-/** `runtime-assets` covers public scene textures (and, via the `prepared` resourceRoot, a handful of legacy
- * context bundles). `prepared-assets` inventories baked `prepared/*` outputs that git no longer tracks: either an
- * explicit small filename list (`runtime.json`/`scene.json` for a body prepared through the runtime pipeline) or
- * the full nested closure of a context/nebula object's `prepared/` directory. Both kinds share one schema shape,
- * validator and closure verifier; only the schema suffix differs. */
-export type AssetManifestKind = 'runtime-assets' | 'prepared-assets';
 import { execFile } from 'node:child_process';
 import { randomUUID } from 'node:crypto';
-import { readFile, readdir, rename, rm, stat, lstat, unlink, writeFile } from "node:fs/promises";
+import { readFile, readdir, rename, rm, lstat, unlink, writeFile } from "node:fs/promises";
 import { basename, resolve } from "node:path";
-import { fileURLToPath } from "node:url";
 import { promisify } from "node:util";
+
+/**
+ * One inventory per object, `src/objects/<id>/inventory.json`: every baked file the object ships that git does not
+ * hold, with the bytes and hash R2 serves it under. A `public` asset lives at `public/scenes/<id>/<filename>`; a
+ * `prepared` asset lives at `src/objects/<id>/prepared/<filename>` and may be nested. The inventory is the only
+ * thing a bake commits; `setup:assets` restores from it and `publish:runtime-assets` uploads from it. The R2 key
+ * is `runtime-assets/<sha256>/<filename>`, whichever location the file has.
+ */
+export type AssetLocation = 'public' | 'prepared';
+export interface InventoryAsset { location: AssetLocation; filename: string; bytes: number; sha256: string; }
+export interface Inventory { schema: typeof INVENTORY_SCHEMA; assets: readonly InventoryAsset[]; }
+export const INVENTORY_SCHEMA = 'cssearth-inventory@1';
+export const INVENTORY_FILE = 'inventory.json';
+export const ASSET_LOCATIONS: readonly AssetLocation[] = ['public', 'prepared'];
 
 const execFileAsync = promisify(execFile);
 const SAFE_FILENAME = /^[a-z0-9][a-z0-9@._-]*$/u;
+const SHA256 = /^[0-9a-f]{64}$/u;
 
 let cachedRepoRoot: Promise<string | null> | undefined;
 function repoRoot(): Promise<string | null> {
@@ -25,11 +31,8 @@ function repoRoot(): Promise<string | null> {
 }
 
 /**
- * Which of these absolute paths git currently tracks, batched into one `git ls-files` call regardless of how many
- * paths are checked. Fails open (reports nothing tracked) when there is no git repository to ask — an isolated
- * test fixture, or tooling run outside a checkout — rather than making every prepare/publish step depend on git
- * being available; the writers below still call this by default, and remain the read backstop everywhere a real
- * checkout runs them.
+ * Which of these absolute paths git currently tracks, batched into one `git ls-files` call. Fails open (reports
+ * nothing tracked) when there is no git repository to ask, such as an isolated test fixture.
  */
 async function defaultGitTrackedPaths(paths: readonly string[]): Promise<Set<string>> {
   if (!paths.length) return new Set();
@@ -40,26 +43,14 @@ async function defaultGitTrackedPaths(paths: readonly string[]): Promise<Set<str
   return new Set(paths.filter(path => tracked.has(resolve(path))));
 }
 
-/**
- * Guard shared by both manifest writers below (the P2 gap that let a git-tracked file — e.g. a body's
- * `prepared/provenance.json` — end up inside a `runtime-assets.json`/`prepared-assets.json` inventory: `setup:assets`
- * would then silently overwrite a contributor's tracked, committed bytes with whatever R2 happens to hold).
- */
+/** A tracked file in an inventory is a bug: `setup:assets` would overwrite a contributor's committed bytes with R2's. */
 async function rejectGitTrackedAssets(planetId: string, root: string, filenames: readonly string[],
   gitTrackedPaths: (paths: readonly string[]) => Promise<Set<string>>): Promise<void> {
-  const absolute = filenames.map(name => resolve(root, name));
-  const tracked = await gitTrackedPaths(absolute);
+  const tracked = await gitTrackedPaths(filenames.map(name => resolve(root, name)));
   if (!tracked.size) return;
   const trackedNames = filenames.filter(name => tracked.has(resolve(root, name)));
   if (!trackedNames.length) return;
-  throw new TypeError(`Planet ${planetId} inventory includes git-tracked file(s), which setup:assets/setup:prepared ` +
-    `would silently overwrite: ${trackedNames.join(", ")}.`);
-}
-
-const SHA256 = /^[0-9a-f]{64}$/u;
-
-function manifestSchema(kind: AssetManifestKind, planetId: string): string {
-  return `css${planetId}-${kind}@1`;
+  throw new TypeError(`Planet ${planetId} inventory includes git-tracked file(s), which setup:assets would silently overwrite: ${trackedNames.join(", ")}.`);
 }
 
 export function normalizeRuntimeAssetUrls({ planetId, urls }: { planetId: string; urls: readonly string[] }) {
@@ -87,57 +78,101 @@ export function normalizeRuntimeAssetUrls({ planetId, urls }: { planetId: string
   return Object.freeze(filenames.sort((left, right) => left.localeCompare(right)));
 }
 
-export async function prepareRuntimeAssetManifest({
-  planetId,
-  urls,
-  publicRoot,
-  manifestPath,
-  allowPreparationArtifacts = false,
-}: { planetId: string; urls: readonly string[]; publicRoot: string; manifestPath: string | URL; allowPreparationArtifacts?: boolean }) {
-  const filenames = normalizeRuntimeAssetUrls({ planetId, urls });
-  // Offline baking may emit intermediate densities. They are not shipped;
-  // production assembly and verification still enforce exact closure. Unlike prepared-assets.json below, a
-  // handful of legacy context bundles (e.g. m31, galaxy-clusters) intentionally list git-tracked files here
-  // under the `prepared` resourceRoot, so this writer does not reject a tracked path the way that one does.
-  if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, planetId);
-  const assets = [];
-  for (const filename of filenames) {
-    if (!(await lstat(resolve(publicRoot, filename))).isFile()) throw new Error(`Runtime asset is not a regular file: ${filename}.`);
-    const bytes = await readFile(resolve(publicRoot, filename));
-    assets.push(Object.freeze({
-      filename,
-      bytes: bytes.byteLength,
-      sha256: sha256(bytes),
-    }));
-  }
-  const manifest = Object.freeze({
-    schema: `css${planetId}-runtime-assets@1`,
-    assets: Object.freeze(assets),
-  });
-  await writeManifestAtomically(manifestPath, manifest);
-  return manifest;
+/** A relative path of safe components. A body's textures are flat; a volume's dataset previews sit under `datasets/`. */
+function safeAssetPath(_location: AssetLocation, filename: string): boolean {
+  return filename.split('/').every(component => SAFE_FILENAME.test(component));
 }
 
-async function writeManifestAtomically(manifestPath: string | URL, manifest: unknown): Promise<void> {
-  const outputPath = manifestPath instanceof URL
-    ? fileURLToPath(manifestPath)
-    : manifestPath;
-  const temporary = `${outputPath}.partial-${process.pid}-${randomUUID()}`;
+const order = (left: InventoryAsset, right: InventoryAsset) =>
+  left.location === right.location ? left.filename.localeCompare(right.filename) : left.location === 'public' ? -1 : 1;
+
+export function validateInventory(planetId: string, input: unknown): true {
+  const inventory = input as Inventory;
+  if (!inventory || typeof inventory !== "object" || isArray(inventory) || inventory.schema !== INVENTORY_SCHEMA ||
+      !isArray(inventory.assets) || inventory.assets.length === 0) {
+    throw new TypeError(`Planet ${planetId} inventory is incompatible.`);
+  }
+  const seen = new Set<string>();
+  for (const asset of inventory.assets) {
+    if (!asset || typeof asset !== "object" || !ASSET_LOCATIONS.includes(asset.location) || typeof asset.filename !== "string" ||
+        !safeAssetPath(asset.location, asset.filename) || !Number.isSafeInteger(asset.bytes) || asset.bytes <= 0 || !SHA256.test(asset.sha256 ?? "")) {
+      throw new TypeError(`Planet ${planetId} has an invalid inventory entry.`);
+    }
+    const key = `${asset.location}/${asset.filename}`;
+    if (seen.has(key)) throw new TypeError(`Planet ${planetId} repeats inventory entry ${key}.`);
+    seen.add(key);
+  }
+  return true;
+}
+
+export function requireInventory(planetId: string, input: unknown): Readonly<Inventory> {
+  validateInventory(planetId, input);
+  return input as Inventory;
+}
+
+/** The object's inventory, or null when it ships nothing baked. */
+export async function readInventory(planetId: string, objectDirectory: string): Promise<Readonly<Inventory> | null> {
+  const text = await readFile(resolve(objectDirectory, INVENTORY_FILE), 'utf8').catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error;
+  });
+  return text === null ? null : requireInventory(planetId, JSON.parse(text));
+}
+
+/** The inventory with one location's entries replaced; the other location's entries are kept as they were. */
+export function mergeInventory(current: Readonly<Inventory> | null, location: AssetLocation,
+  assets: readonly { filename: string; bytes: number; sha256: string }[]): Readonly<Inventory> {
+  const kept = (current?.assets ?? []).filter(asset => asset.location !== location);
+  const next = [...kept, ...assets.map(asset => ({ location, filename: asset.filename, bytes: asset.bytes, sha256: asset.sha256 }))].sort(order);
+  return Object.freeze({ schema: INVENTORY_SCHEMA, assets: Object.freeze(next) });
+}
+
+export const inventoryText = (inventory: Readonly<Inventory>) => `${JSON.stringify(inventory, null, 2)}\n`;
+
+/**
+ * Record one location's baked files in the object's inventory. The bake's stages call this independently: the
+ * scene stage for `public` textures, finalization for `prepared/`. With no assets left in either location the
+ * inventory file is removed; the object ships nothing baked.
+ */
+export async function updateInventory({ planetId, objectDirectory, location, assets }: {
+  planetId: string; objectDirectory: string; location: AssetLocation; assets: readonly { filename: string; bytes: number; sha256: string }[];
+}): Promise<Readonly<Inventory> | null> {
+  const merged = mergeInventory(await readInventory(planetId, objectDirectory), location, assets);
+  const path = resolve(objectDirectory, INVENTORY_FILE);
+  if (!merged.assets.length) { await rm(path, { force: true }); return null; }
+  validateInventory(planetId, merged);
+  const temporary = `${path}.partial-${process.pid}-${randomUUID()}`;
   try {
-    await writeFile(temporary, `${JSON.stringify(manifest, null, 2)}\n`, { flag: "wx" });
-    await rename(temporary, outputPath);
+    await writeFile(temporary, inventoryText(merged), { flag: "wx" });
+    await rename(temporary, path);
   } finally {
     await rm(temporary, { force: true });
   }
+  return merged;
 }
 
-/**
- * Write the `prepared-assets.json` inventory for one object: either an explicit `filenames` list (a body's
- * `prepared/runtime.json` + `prepared/scene.json`, whichever exist — every other `prepared/*` file stays a
- * tracked contract file, not part of this inventory) or, when `filenames` is omitted, the full nested closure of
- * `preparedRoot` minus `exclude` (a context/nebula object with no `runtime-assets.json`, such as a nebula bake or
- * milky-way/heliosphere/stellar-neighbourhood/lmc).
- */
+async function hashedAssets(root: string, filenames: readonly string[], planetId: string) {
+  const assets = [];
+  for (const filename of filenames) {
+    if (!(await lstat(resolve(root, filename)).catch(() => undefined))?.isFile()) throw new Error(`Inventoried asset is not a regular file: ${planetId}/${filename}.`);
+    const bytes = await readFile(resolve(root, filename));
+    assets.push(Object.freeze({ filename, bytes: bytes.byteLength, sha256: sha256(bytes) }));
+  }
+  return assets;
+}
+
+/** Inventory the object's public scene textures from the URLs its runtime references. */
+export async function inventoryPublicAssets({ planetId, objectDirectory, urls, publicRoot, allowPreparationArtifacts = false,
+  gitTrackedPaths = defaultGitTrackedPaths }: {
+  planetId: string; objectDirectory: string; urls: readonly string[]; publicRoot: string; allowPreparationArtifacts?: boolean;
+  gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
+}) {
+  const filenames = normalizeRuntimeAssetUrls({ planetId, urls });
+  // Offline baking may emit intermediate densities. They are not shipped; production assembly still enforces closure.
+  if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, planetId);
+  await rejectGitTrackedAssets(planetId, publicRoot, filenames, gitTrackedPaths);
+  return updateInventory({ planetId, objectDirectory, location: 'public', assets: await hashedAssets(publicRoot, filenames, planetId) });
+}
+
 /**
  * Files under a body's `prepared/` that a checkout regenerates itself, so they are never inventoried or published:
  * the JSON transport and page written from the restored runtime, the provenance record generated from the manifest,
@@ -147,161 +182,60 @@ export function isRegeneratedPreparedFile(filename: string): boolean {
   return ['object.json', 'page.json', 'provenance.json'].includes(filename) || /^terrain(-[a-z0-9-]+)?\.json$/u.test(filename) || /-source-index\.json$/u.test(filename);
 }
 
-/** Every baked file under a body's `prepared/`: what the inventory publishes and `setup:prepared` restores. */
+/** Every baked file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. */
 export async function bakedPreparedFiles(preparedRoot: string, planetId: string): Promise<string[]> {
   return (await runtimeFiles(preparedRoot, planetId, true)).filter(name => !isRegeneratedPreparedFile(name));
 }
 
-export async function preparePreparedAssetManifest({
-  planetId,
-  preparedRoot,
-  manifestPath,
-  filenames,
-  exclude = [],
-  gitTrackedPaths = defaultGitTrackedPaths,
-}: { planetId: string; preparedRoot: string; manifestPath: string | URL; filenames?: readonly string[]; exclude?: readonly string[];
-  gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>> }): Promise<Readonly<RuntimeAssetManifest>> {
-  let names: string[];
-  if (filenames) {
-    names = [...filenames];
-    for (const name of names) {
-      if (!(await lstat(resolve(preparedRoot, name)).catch(() => undefined))?.isFile()) {
-        throw new Error(`Prepared asset is not a regular file: ${planetId}/${name}.`);
-      }
-    }
-  } else {
-    const excluded = new Set(exclude);
-    names = (await runtimeFiles(preparedRoot, planetId, true)).filter(name => !excluded.has(name));
-  }
-  if (names.length === 0) throw new TypeError(`Planet ${planetId} has no prepared assets to inventory.`);
-  names.sort((left, right) => left.localeCompare(right));
-  for (const name of names) {
-    if (!name.split("/").every(component => SAFE_FILENAME.test(component))) {
-      throw new TypeError(`Planet ${planetId} has an unsafe prepared asset path: ${name}.`);
-    }
-  }
+/** Inventory the object's baked `prepared/` files: an explicit list, or everything baked under `preparedRoot`. */
+export async function inventoryPreparedAssets({ planetId, objectDirectory, preparedRoot = resolve(objectDirectory, 'prepared'), filenames,
+  exclude = [], gitTrackedPaths = defaultGitTrackedPaths }: {
+  planetId: string; objectDirectory: string; preparedRoot?: string; filenames?: readonly string[]; exclude?: readonly string[];
+  gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
+}) {
+  const excluded = new Set(exclude);
+  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, planetId)).filter(name => !excluded.has(name)))]
+    .sort((left, right) => left.localeCompare(right));
+  for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Planet ${planetId} has an unsafe prepared asset path: ${name}.`);
   if (new Set(names).size !== names.length) throw new TypeError(`Planet ${planetId} repeats a prepared asset path.`);
   await rejectGitTrackedAssets(planetId, preparedRoot, names, gitTrackedPaths);
-  const assets = [];
-  for (const filename of names) {
-    const bytes = await readFile(resolve(preparedRoot, filename));
-    assets.push(Object.freeze({ filename, bytes: bytes.byteLength, sha256: sha256(bytes) }));
-  }
-  const manifest = Object.freeze({
-    schema: `css${planetId}-prepared-assets@1`,
-    resourceRoot: "prepared" as const,
-    assets: Object.freeze(assets),
-  });
-  await writeManifestAtomically(manifestPath, manifest);
-  return manifest;
+  return updateInventory({ planetId, objectDirectory, location: 'prepared', assets: await hashedAssets(preparedRoot, names, planetId) });
 }
 
-export async function assembleRuntimeAssetClosure({
-  planetId,
-  manifestPath,
-  productionRoot,
-}: { planetId: string; manifestPath: string | URL; productionRoot: string }) {
-  const manifest: RuntimeAssetManifest = JSON.parse(await readFile(manifestPath, "utf8"));
-  validateRuntimeAssetManifest(planetId, manifest);
-  if (manifest.resourceRoot === "prepared") throw new TypeError("Prepared resources cannot be assembled by the public-scene asset assembler.");
-  const expected = new Set(manifest.assets.map(({ filename }) => filename));
-  const entries = await runtimeFiles(productionRoot, planetId, false);
-  for (const name of entries) if (!expected.has(name)) await unlink(resolve(productionRoot, name));
-  await verifyRuntimeAssetClosure({ planetId, manifest, root: productionRoot });
-  return manifest;
+/** Production assembly: the public scene directory holds exactly the inventoried public textures. */
+export async function assembleRuntimeAssetClosure({ planetId, objectDirectory, productionRoot }: {
+  planetId: string; objectDirectory: string; productionRoot: string;
+}) {
+  const inventory = await readInventory(planetId, objectDirectory);
+  const expected = new Set((inventory?.assets ?? []).filter(asset => asset.location === 'public').map(({ filename }) => filename));
+  for (const name of await runtimeFiles(productionRoot, planetId, false)) if (!expected.has(name)) await unlink(resolve(productionRoot, name));
+  if (inventory) await verifyInventory({ planetId, inventory, publicRoot: productionRoot, locations: ['public'] });
+  return inventory;
 }
 
 /**
- * `closure` (default true) asserts the target directory contains exactly the manifest's files (plus `exclude`,
- * which may be present on disk without being declared — used for files that stay outside this inventory, such
- * as a sibling context object's own `manifest.json`, or pre-existing local drift called out by name). Body
- * manifests that only cover a subset of `prepared/` (`runtime.json`/`scene.json` beside tracked contract files)
- * pass `closure: false`: every listed file must exist and match its hash, but undeclared neighbors are expected.
+ * Every inventoried file exists with its bytes and hash. With `closure` (default true) a location's directory
+ * holds exactly the inventoried files plus `exclude`; without it, undeclared neighbours are expected (a body's
+ * `prepared/` also holds the files a checkout regenerates).
  */
-export async function verifyAssetClosure(kind: AssetManifestKind, { planetId, manifest, root, publicRoot, closure = true, exclude = [] }: {
-  planetId: string; manifest: RuntimeAssetManifest; root: string; publicRoot?: string; closure?: boolean; exclude?: readonly string[];
+export async function verifyInventory({ planetId, inventory, preparedRoot, publicRoot, locations = ASSET_LOCATIONS, closure = true, exclude = [] }: {
+  planetId: string; inventory: Readonly<Inventory>; preparedRoot?: string; publicRoot?: string; locations?: readonly AssetLocation[];
+  closure?: boolean; exclude?: readonly string[];
 }) {
-  validateAssetManifest(kind, planetId, manifest);
-  const publicAssets = manifest.assets.filter(asset => asset.location === "public");
-  if (publicAssets.length && !publicRoot) throw new TypeError("Public runtime assets require an explicit publicRoot for verification.");
-  const prepared = manifest.resourceRoot === "prepared";
-  if (closure) {
-    await assertDirectoryClosure(root, manifest.assets.filter(asset => asset.location !== "public").map(({ filename }) => filename), planetId, prepared,
-      prepared ? [...exclude, "manifest.json"] : exclude);
-    if (publicAssets.length) await assertDirectoryClosure(publicRoot!, publicAssets.map(({ filename }) => filename), planetId, true);
-  } else {
-    for (const asset of manifest.assets.filter(asset => asset.location !== "public")) {
-      const target = resolve(root, asset.filename);
-      if (!(await lstat(target).catch(() => undefined))?.isFile()) {
-        throw new Error(`Planet ${planetId} ${kind} closure mismatch. Missing: ${asset.filename}.`);
-      }
-    }
-  }
-  for (const asset of manifest.assets) {
-    const bytes = await readFile(resolve(asset.location === "public" ? publicRoot! : root, asset.filename));
-    const digest = sha256(bytes);
-    if (bytes.byteLength !== asset.bytes || digest !== asset.sha256) {
-      throw new Error(`Planet ${planetId} ${kind === "prepared-assets" ? "prepared" : "runtime"} asset drifted: ${asset.filename}.`);
+  validateInventory(planetId, inventory);
+  for (const location of locations) {
+    const assets = inventory.assets.filter(asset => asset.location === location);
+    if (!assets.length) continue;
+    const root = location === 'public' ? publicRoot : preparedRoot;
+    if (!root) throw new TypeError(`Verifying ${location} inventory entries needs their directory.`);
+    if (closure) await assertDirectoryClosure(root, assets.map(({ filename }) => filename), planetId, location === 'prepared', exclude);
+    for (const asset of assets) {
+      const bytes = await readFile(resolve(root, asset.filename)).catch(() => null);
+      if (!bytes) throw new Error(`Planet ${planetId} inventory closure mismatch. Missing: ${asset.filename}.`);
+      if (bytes.byteLength !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Planet ${planetId} ${location} asset drifted: ${asset.filename}.`);
     }
   }
   return true;
-}
-
-export async function verifyRuntimeAssetClosure(args: { planetId: string; manifest: RuntimeAssetManifest; root: string; publicRoot?: string }) {
-  return verifyAssetClosure("runtime-assets", args);
-}
-
-export async function verifyPreparedAssetClosure(args: { planetId: string; manifest: RuntimeAssetManifest; root: string; closure?: boolean; exclude?: readonly string[] }) {
-  return verifyAssetClosure("prepared-assets", args);
-}
-
-export function validateAssetManifest(kind: AssetManifestKind, planetId: string, input: unknown): true {
-  const manifest = input as RuntimeAssetManifest;
-  if (!manifest || typeof manifest !== "object" || isArray(manifest) ||
-      manifest.schema !== manifestSchema(kind, planetId) ||
-      (manifest.resourceRoot !== undefined && manifest.resourceRoot !== "prepared") ||
-      !isArray(manifest.assets) || manifest.assets.length === 0) {
-    throw new TypeError(`Planet ${planetId} ${kind} manifest is incompatible.`);
-  }
-  const filenames = new Set();
-  for (const asset of manifest.assets) {
-    if (!asset || typeof asset !== "object" ||
-        typeof asset.filename !== "string" ||
-        (asset.location !== undefined && (manifest.resourceRoot !== "prepared" || asset.location !== "public")) ||
-        !(manifest.resourceRoot === "prepared"
-          ? asset.filename.split("/").every(component => SAFE_FILENAME.test(component))
-          : SAFE_FILENAME.test(asset.filename)) ||
-        !Number.isSafeInteger(asset.bytes) || asset.bytes <= 0 ||
-        !SHA256.test(asset.sha256 ?? "")) {
-      throw new TypeError(`Planet ${planetId} has an invalid runtime asset entry.`);
-    }
-    if (filenames.has(asset.filename)) {
-      throw new TypeError(`Planet ${planetId} repeats runtime asset ${asset.filename}.`);
-    }
-    filenames.add(asset.filename);
-  }
-  return true;
-}
-
-export function validateRuntimeAssetManifest(planetId: string, input: unknown): true {
-  return validateAssetManifest("runtime-assets", planetId, input);
-}
-
-export function validatePreparedAssetManifest(planetId: string, input: unknown): true {
-  return validateAssetManifest("prepared-assets", planetId, input);
-}
-
-export function requireAssetManifest(kind: AssetManifestKind, planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
-  validateAssetManifest(kind, planetId, input);
-  return input as RuntimeAssetManifest;
-}
-
-export function requireRuntimeAssetManifest(planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
-  return requireAssetManifest("runtime-assets", planetId, input);
-}
-
-export function requirePreparedAssetManifest(planetId: string, input: unknown): Readonly<RuntimeAssetManifest> {
-  return requireAssetManifest("prepared-assets", planetId, input);
 }
 
 async function runtimeFiles(root: string, planetId: string, nested: boolean, prefix = ""): Promise<string[]> {
@@ -316,21 +250,14 @@ async function runtimeFiles(root: string, planetId: string, nested: boolean, pre
   return files;
 }
 
-async function assertDirectoryClosure(root: string, filenames: readonly string[], planetId: string, nested = false, metadata: readonly string[] = []) {
-  const actual = (await runtimeFiles(root, planetId, nested)).filter(filename => !metadata.includes(filename) || filenames.includes(filename));
+async function assertDirectoryClosure(root: string, filenames: readonly string[], planetId: string, nested = false, exclude: readonly string[] = []) {
+  const excluded = new Set(exclude);
+  const actual = (await runtimeFiles(root, planetId, nested)).filter(filename => !excluded.has(filename) || filenames.includes(filename));
   const expected = [...filenames].sort((left, right) => left.localeCompare(right));
   actual.sort((left, right) => left.localeCompare(right));
   if (expected.join("\0") !== actual.join("\0")) {
-    const expectedSet = new Set(expected);
-    const actualSet = new Set(actual);
-    const missing = expected.filter((filename) => !actualSet.has(filename));
-    const undeclared = actual.filter((filename) => !expectedSet.has(filename));
-    throw new Error(
-      `Planet ${planetId} runtime asset closure mismatch. Missing: ${missing.join(", ") || "none"}. Undeclared: ${undeclared.join(", ") || "none"}.`,
-    );
-  }
-  for (const filename of actual) {
-    const fileStat = await stat(resolve(root, filename));
-    if (!fileStat.isFile()) throw new Error(`Planet ${planetId} runtime asset is not a file: ${filename}.`);
+    const expectedSet = new Set(expected), actualSet = new Set(actual);
+    const missing = expected.filter(filename => !actualSet.has(filename)), undeclared = actual.filter(filename => !expectedSet.has(filename));
+    throw new Error(`Planet ${planetId} inventory closure mismatch. Missing: ${missing.join(", ") || "none"}. Undeclared: ${undeclared.join(", ") || "none"}.`);
   }
 }

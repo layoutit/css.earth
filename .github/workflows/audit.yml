@@ -134,7 +134,7 @@ jobs:
           path: |
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
-          key: prepared-json-v1-${{ hashFiles('src/objects/*/prepared-assets.json') }}
+          key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         if: ${{ !cancelled() }}

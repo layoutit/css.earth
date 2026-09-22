@@ -38,4 +38,4 @@
 
 **Self-luminous, so no lighting.** The star is drawn by the emissive material, the same as the Sun and Betelgeuse: the leaves carry the reconstruction's own brightness and no light direction or shadow is applied.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

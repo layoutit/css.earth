@@ -13,7 +13,7 @@ test('context provenance binds every declared output and installs one complete i
   const contexts=await prepareContextProvenance();
   assert.deepEqual(contexts.map(c=>c.id),['galaxy-clusters','local-group','nearby-universe']);
   for(const context of contexts){
-    const inventories=context.outputs.filter(o=>o.path.endsWith('/runtime-assets.json'));
+    const inventories=context.outputs.filter(o=>o.path.endsWith('/inventory.json'));
     assert.equal(inventories.length,1,'the inventory is published once, at the body root');
     const inventory=JSON.parse(inventories[0]!.text);
     for(const product of context.provenance.products)for(const output of product.outputs){
@@ -40,26 +40,26 @@ test('deploy catalogue recovery reads prepared contexts without authoring interm
 });
 test('changed prepared bytes are rejected; an authored source document is read as it is', async () => {
   await prepareContextProvenance({input:async path=>{ const bytes=await readFile(path); return path==='src/objects/nearby-universe/source/preparation/field.json' ? Buffer.concat([bytes,Buffer.from(' ')]) : bytes; }});
-  for(const target of ['src/objects/local-group/prepared-receipt.json']) {
+  for(const target of ['src/objects/local-group/inventory.json']) {
     await assert.rejects(prepareContextProvenance({input:async path=>{
       const bytes=await readFile(path);if(path !== target) return bytes;
-      if(path.endsWith('prepared-receipt.json')) { const receipt=JSON.parse(bytes.toString()); receipt.outputs[0].sha256='0'.repeat(64); return Buffer.from(JSON.stringify(receipt)); }
+      if(path.endsWith('inventory.json')) { const receipt=JSON.parse(bytes.toString()); receipt.outputs[0].sha256='0'.repeat(64); return Buffer.from(JSON.stringify(receipt)); }
       return Buffer.concat([bytes,Buffer.from(' ')]);
     }}),/Unpinned context output|Changed source document|Changed prepared descriptor bank/);
   }
 });
 
-test('committed runtime-assets.json matches what context provenance currently generates', async () => {
+test('committed inventory.json matches what context provenance currently generates', async () => {
   const contexts=await prepareContextProvenance();
   for(const context of contexts){
-    const generated=context.outputs.find(o=>o.path.endsWith('/runtime-assets.json'));
+    const generated=context.outputs.find(o=>o.path.endsWith('/inventory.json'));
     assert.ok(generated,`${context.id}: missing generated inventory`);
-    const committed=await readFile(`${context.base}/runtime-assets.json`,'utf8');
-    assert.equal(committed,generated!.text,`${context.id}: committed runtime-assets.json is stale; run prepare:provenance and publish:runtime-assets`);
+    const committed=await readFile(`${context.base}/inventory.json`,'utf8');
+    assert.equal(committed,generated!.text,`${context.id}: committed inventory.json is stale; run prepare:provenance and publish:runtime-assets`);
   }
 });
 
-test('committed image-layer-bank runtime-assets.json matches what volume provenance currently generates', async t => {
+test('committed image-layer-bank inventory.json matches what volume provenance currently generates', async t => {
   // Only image-layer banks publish a body-root inventory. Build them in isolation so the check
   // needs no other volume's installed previews.
   const ids:string[]=[];
@@ -80,10 +80,10 @@ test('committed image-layer-bank runtime-assets.json matches what volume provena
   const volumes=await prepareVolumeProvenance({root});
   assert.deepEqual(volumes.map(v=>v.id).sort(),[...ids].sort());
   for(const volume of volumes){
-    const generated=volume.outputs.find(o=>o.path===join(root,volume.base,'runtime-assets.json'));
+    const generated=volume.outputs.find(o=>o.path===join(root,volume.base,'inventory.json'));
     assert.ok(generated,`${volume.id}: missing generated inventory`);
-    const committed=await readFile(`${volume.base}/runtime-assets.json`,'utf8');
-    assert.equal(committed,String(generated!.text),`${volume.id}: committed runtime-assets.json is stale; run prepare:facilities and publish:runtime-assets`);
+    const committed=await readFile(`${volume.base}/inventory.json`,'utf8');
+    assert.equal(committed,String(generated!.text),`${volume.id}: committed inventory.json is stale; run prepare:facilities and publish:runtime-assets`);
   }
 });
 
@@ -95,7 +95,7 @@ test('offline context recovery is independent of installed generated images and 
     await mkdir(join(root,base,'prepared'),{recursive:true});
     await cp(`${base}/source`,join(root,base,'source'),{recursive:true});
     await copyFile(`${base}/object.json`,join(root,base,'object.json'));
-    await copyFile(`${base}/prepared-receipt.json`,join(root,base,'prepared-receipt.json'));
+    await copyFile(`${base}/inventory.json`,join(root,base,'inventory.json'));
   }
   await mkdir(join(root,'src/objects/sun/source/navigation'),{recursive:true});
   await copyFile(

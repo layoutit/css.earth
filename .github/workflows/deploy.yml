@@ -54,8 +54,8 @@ jobs:
             public/scenes
             src/objects/*/prepared/runtime.json
             src/objects/*/prepared/scene.json
-          key: prepared-assets-v1-${{ hashFiles('src/objects/*/runtime-assets.json', 'src/objects/*/prepared-assets.json') }}
-          restore-keys: prepared-assets-v1-
+          key: inventory-v1-${{ hashFiles('src/objects/*/inventory.json') }}
+          restore-keys: inventory-v1-
       - name: Build the site
         # The deploy build regenerates its ignored source/facility catalogues from committed inputs and the restored
         # R2 closure. Its catalog-only preparation does not publish preview bytes or rewrite asset inventories;

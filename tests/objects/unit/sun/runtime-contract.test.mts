@@ -16,7 +16,7 @@ import panel from "../../../../src/objects/sun/prepared/panel.json" with { type:
 import text from "../../../../src/objects/sun/prepared/text.json" with { type: "json" };
 import raster from "../../../../src/objects/sun/source/preparation/raster.json" with { type: "json" };
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
-import { validateRuntimeAssetManifest } from "../../../../src/platform/runtime-asset-closure.mts";
+import { validateInventory } from "../../../../src/platform/runtime-asset-closure.mts";
 import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from "../../../../tools/objects/observation/fits.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
@@ -33,8 +33,8 @@ test("binds the exact Sun source and runtime closures", async () => {
   const source = await createSourceManifest({ planetId: "sun", planetName: "Sun", sourceRoot: resolve(projectRoot, "src/objects/sun/source") });
   // 38 retired-lane inputs + 7 authored records that moved from documents to local inputs (the navigation recipe included); 3 documents remain.
   assert.deepEqual(await source.verify(), { inputCount: 50, generatedIntermediateCount: 0, documentCount: 4 });
-  const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/runtime-assets.json", import.meta.url), "utf8"));
-  assert.equal(validateRuntimeAssetManifest("sun", runtime), true);
+  const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/inventory.json", import.meta.url), "utf8"));
+  assert.equal(validateInventory("sun", runtime), true);
   // 4 lenses x (surface, poles, corona, limb) at the one prepared density + 4 thumbnails.
   assert.equal(runtime.assets.length, 20);
 });

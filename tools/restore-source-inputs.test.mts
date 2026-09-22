@@ -7,12 +7,12 @@ import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import type { AddressInfo } from 'node:net';
-import { setupObjectIds } from './runtime-assets.mts';
+import { inventoriedObjectIds } from './runtime-assets.mts';
 import { validateObjectPackageFiles } from './object-package-contract.mts';
 import { compareObjectPackageBacklog, loadObjectPackageBacklog } from './object-package-backlog.mts';
 import { requireArray, requireRecord, requireString } from './source-values.mts';
 import { parseAcquisitionPlan } from './objects/dist/operations.js';
-import { requirePreparedAssetManifest } from '../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '../src/platform/runtime-asset-closure.mts';
 
 const project = resolve(import.meta.dirname, '..');
 const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
@@ -57,9 +57,9 @@ async function runScan(): Promise<Scan> {
     cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   }).split('\0'));
   const missingSources: string[] = [], missingBacklog: string[] = [];
-  for (const id of setupObjectIds([])) {
+  for (const id of inventoriedObjectIds([])) {
     // prepared/runtime.json is no longer git-tracked for any body; a clean checkout restores it from R2 via
-    // the object's prepared-assets.json inventory instead. Every other required file keeps the original
+    // the object's inventory.json inventory instead. Every other required file keeps the original
     // "must be tracked" proof.
     const preparedRuntimePath = relative(project, resolve(project, 'src/objects', id, 'prepared/runtime.json'));
     const paths = await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
@@ -67,8 +67,8 @@ async function runScan(): Promise<Scan> {
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
         const relativePath = relative(project, path);
         if (relativePath === preparedRuntimePath) {
-          const manifest = requirePreparedAssetManifest(id, JSON.parse(
-            await readFile(resolve(project, 'src/objects', id, 'prepared-assets.json'), 'utf8')));
+          const manifest = requireInventory(id, JSON.parse(
+            await readFile(resolve(project, 'src/objects', id, 'inventory.json'), 'utf8')));
           assert.ok(manifest.assets.some(asset => asset.filename === 'runtime.json'), path);
           return;
         }
@@ -221,7 +221,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   await json(resolve(prepared, 'content.json'), { charts: [{ src: url('chart') }] });
   await json(resolve(prepared, 'surfaces.json'), { intermediateMap: url('source-map') });
   await run(root, ['tools/objects/dist/operations.js', 'manifest', 'titan']);
-  const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/runtime-assets.json'), 'utf8'));
+  const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/inventory.json'), 'utf8'));
   const manifest = requireRecord(manifestInput);
   assert.deepEqual(requireArray(manifest.assets).map(asset => requireString(requireRecord(asset).filename)), ['chart.webp', 'surface.webp', 'thumbnail.webp']);
   assert.equal(await readFile(resolve(root, 'public/scenes/titan/source-map.webp'), 'utf8'), 'source-map');

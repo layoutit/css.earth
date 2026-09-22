@@ -167,7 +167,7 @@ export function localLinks(file: string, text: string): Link[] {
 const BUILD_OUTPUTS = new Set(['prepared/provenance.json', 'prepared/page.json']);
 function buildOutput(path: string, known: ReadonlySet<string>): boolean {
   const directory = posix.dirname(posix.dirname(path));
-  return BUILD_OUTPUTS.has(path.slice(directory.length + 1)) && known.has(`${directory}/prepared-assets.json`);
+  return BUILD_OUTPUTS.has(path.slice(directory.length + 1)) && known.has(`${directory}/inventory.json`);
 }
 
 function audit(snapshot: Snapshot): Audit {

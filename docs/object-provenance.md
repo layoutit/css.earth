@@ -168,10 +168,10 @@ Catalogue fields and image-layer galaxies use the same version-3 provenance
 schema without becoming independently mounted scenes. Their source manifests,
 recipes and prepared receipts feed the shared Sources compiler.
 
-Their root `runtime-assets.json` declares `resourceRoot: "prepared"`. Asset
-filenames may contain safe relative subdirectories; they resolve below the
-object's `prepared/` directory. An asset with `location: "public"` instead
-resolves below `public/scenes/<id>/`, for shared dataset previews. Absolute paths,
+Their root `inventory.json` lists every baked file with its location. A
+`prepared` entry's filename may contain safe relative subdirectories and
+resolves below the object's `prepared/` directory; a `public` entry resolves
+below `public/scenes/<id>/`, for shared dataset previews. Absolute paths,
 parent traversal and symlink installation paths are rejected. Inventories list
 byte counts and SHA-256 values for both locations; the prepared mirror must
 match the root inventory. Prepared-directory verification preserves the root metadata receipts and

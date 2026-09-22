@@ -15,6 +15,7 @@ import type { ProvenanceDocument, ProvenanceSource, ProvenanceJson } from '../sr
 import { parseSourceBinding, sourceArray, sourceDigest, sourceId, sourceObject, sourcePath, sourceText, sourceUnique, sourceUrl } from '../src/platform/source-catalog.mts';
 import { hasErrorCode } from './source-values.mts';
 import { writePreparedSet } from './write-prepared-set.mts';
+import { readInventory, mergeInventory, inventoryText } from '../src/platform/runtime-asset-closure.mts';
 import { manifestSources } from './context-source-records.mts';
 import { composeSkyBandPng, skyBandCompositeFile, verifySkyBandRecipe } from './objects/observation/sky-band-composite.mts';
 import { RUNTIME_ASSET_ORIGIN, fetchWithRetry, sourceCacheUrl } from './source-mirror.mts';
@@ -341,27 +342,20 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
       const bytes = Buffer.from(output.text);
       return { filename: output.path.slice(publicPrefix.length), location: 'public' as const, bytes: bytes.length, sha256: sha256(bytes) };
     });
-    if (descriptor.type === 'image-layer-bank') {
-      const prefix = `${base}/prepared/`;
-      const assets = [
-        { filename: bankPath.slice(prefix.length), bytes: bankBytes, sha256: bankSha256 },
-        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })),
-        ...outputs.filter(output => output.path.startsWith(resolve(root, prefix) + '/')).map(output => {
-          const bytes = Buffer.from(output.text);
-          return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
-        }),
-        ...publicAssets,
-      ];
-      const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets });
-      outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory });
-    } else if (publicAssets.length) {
-      // A volume-lens-bank object's baked volume field is inventoried separately by prepared-assets.json
-      // (its `prepared/*` closure); it has no image-layer bank of its own here. Its lens dataset previews above
-      // are still public `/scenes/<id>/datasets/*.webp` addresses, so `resolvePreparedAssetUrl` needs a
-      // filename -> sha256 map for them once ASSET_ORIGIN is set — give them their own runtime-assets.json.
-      const inventory = stringify({ schema: `css${record.objectId}-runtime-assets@1`, resourceRoot: 'prepared', assets: publicAssets });
-      outputs.push({ path: resolve(root, `${base}/runtime-assets.json`), text: inventory });
-    }
+    // The lens previews are the object's public entries. An image-layer bank's prepared entries are its bank, layers,
+    // record and presentation; a volume-lens bank's prepared entries were written by its own bake and are kept.
+    const current = await readInventory(record.objectId, resolve(root, base));
+    const prefix = `${base}/prepared/`;
+    const preparedOutputs = outputs.filter(output => output.path.startsWith(resolve(root, prefix) + '/')).map(output => {
+      const bytes = Buffer.from(output.text);
+      return { filename: output.path.slice(resolve(root, prefix).length + 1), bytes: bytes.length, sha256: sha256(bytes) };
+    });
+    const preparedAssets = descriptor.type === 'image-layer-bank'
+      ? [{ filename: bankPath.slice(prefix.length), bytes: bankBytes ?? 0, sha256: bankSha256 },
+        ...layerOutputs.map(output => ({ filename: output.url.slice(prefix.length), bytes: output.bytes, sha256: output.sha256 })), ...preparedOutputs]
+      : [...(current?.assets.filter(asset => asset.location === 'prepared' && !preparedOutputs.some(output => output.filename === asset.filename)) ?? []), ...preparedOutputs];
+    const next = mergeInventory(mergeInventory(current, 'public', publicAssets), 'prepared', preparedAssets);
+    outputs.push({ path: resolve(root, `${base}/inventory.json`), text: inventoryText(next) });
     const hostedBy = await hostedDatasets(root, base, record.objectId, record.lenses.map(lens => lens.id), input);
     results.push({ id: record.objectId, name: record.name, route: hostedBy?.route ?? `/sun/?focus=${record.objectId}`, base, controls, defaultLens: record.defaultLens, provenance, outputs,
       ...(hostedBy === undefined ? {} : { hostedBy }) });

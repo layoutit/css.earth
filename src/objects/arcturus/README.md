@@ -25,4 +25,4 @@ Run of 2026-09-21 (this version):
 
 The cited paper images Arcturus’s limb darkening; this package shows a neutral sphere and does not cast that image. No mass is adopted.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

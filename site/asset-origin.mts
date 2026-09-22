@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireRuntimeAssetManifest } from '../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '../src/platform/runtime-asset-closure.mts';
 import { resolvePreparedAssetUrl, type PreparedAssetOrigin } from '../src/renderers/css/dist/index.js';
 import type { ObjectDescriptor } from '@cssearth/objects';
 export type { PreparedAssetOrigin };
@@ -21,21 +21,20 @@ export function assetOrigin(env: NodeJS.ProcessEnv = process.env): string | null
 const manifestCache = new Map<string, Promise<Readonly<Record<string, string>>>>();
 
 /** The `filename -> sha256` map published for one object's `public/scenes/<id>/*`
- * assets (its tracked `runtime-assets.json`), cached per build process. */
+ * assets (the public entries of its tracked `inventory.json`), cached per build process. */
 export function assetShaMap(id: string, root = process.cwd()): Promise<Readonly<Record<string, string>>> {
   let cached = manifestCache.get(id);
   if (!cached) {
     cached = (async () => {
       let bytes: string;
-      try { bytes = await readFile(resolve(root, 'src/objects', id, 'runtime-assets.json'), 'utf8'); }
+      try { bytes = await readFile(resolve(root, 'src/objects', id, 'inventory.json'), 'utf8'); }
       catch (error) {
-        // An object with no public scene assets (e.g. a context object that only has
-        // prepared-assets.json) has nothing to resolve against the asset origin.
+        // An object that ships nothing baked has nothing to resolve against the asset origin.
         if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return Object.freeze({});
         throw error;
       }
-      const manifest = requireRuntimeAssetManifest(id, JSON.parse(bytes) as unknown);
-      return Object.freeze(Object.fromEntries(manifest.assets.map(asset => [asset.filename, asset.sha256])));
+      const inventory = requireInventory(id, JSON.parse(bytes) as unknown);
+      return Object.freeze(Object.fromEntries(inventory.assets.filter(asset => asset.location === 'public').map(asset => [asset.filename, asset.sha256])));
     })();
     manifestCache.set(id, cached);
   }

@@ -1,0 +1,221 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "comet-103p-constraints-shadow@2x.webp",
+      "bytes": 155282,
+      "sha256": "b4ca021579bff318963e7924f8cf6be63af65ad5eab54914da0875b82ddc2610"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-constraints-surface@2x.webp",
+      "bytes": 154970,
+      "sha256": "6d13b17245b069aad0a55cf6a0a960c61380374bce19bddbcb3765c729c8f373"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-constraints-thumbnail.webp",
+      "bytes": 3992,
+      "sha256": "341701a2f2525447e784400ffc4abc61604f140d73afe6849192fbb2a1379ece"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-features.json",
+      "bytes": 4224,
+      "sha256": "20d4aea41222a4202710f5c682914725e445357c66c72df72f00f5073589aee5"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-model-shadow@2x.webp",
+      "bytes": 125906,
+      "sha256": "0b320f08052284c74bbcf20bb112e0ea72e743e6cb51f457f71f6179fae599be"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-model-surface@2x.webp",
+      "bytes": 123122,
+      "sha256": "dd3386c1892f521cb8545b2a8164376027b938d94c9a86cc22a817f1bd83e22e"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-model-thumbnail.webp",
+      "bytes": 3052,
+      "sha256": "bbf96a7b1d8ea7c2cd69ad9e41e837348912db104a566734a195d2f1f9195fc1"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-mri-surface@2x.webp",
+      "bytes": 266000,
+      "sha256": "58ec401e2e56d372d739fee40237f2b676285c17466716ebf5053c5b3797229a"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-mri-thumbnail.webp",
+      "bytes": 1074,
+      "sha256": "a00a5663fe4182a3dde072be1e85debf43c82442ebacff0bc0aeefc7ff7e0ae5"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-spectral-slope-legend.webp",
+      "bytes": 216,
+      "sha256": "75f78a9fb427025d52d42a20babc213536b0ca7078732ebf02a6259bef773e21"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-spectral-slope-shadow@2x.webp",
+      "bytes": 486514,
+      "sha256": "30bbad85f2cd5dd0064587b421ea9970b3cbf949e048bcdc1b7a006c347a585e"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-spectral-slope-surface@2x.webp",
+      "bytes": 272024,
+      "sha256": "32b106cd4730394eda3533f52b2f3bcec5201b7646dd63e0618d9ef9c2d98f3b"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-spectral-slope-thumbnail.webp",
+      "bytes": 360,
+      "sha256": "4770259459eb0c029a102a018087500c0e315747631da35dee54b4f669b7e8ef"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-temperature-legend.webp",
+      "bytes": 256,
+      "sha256": "fed1fff6e42a0d0432207516c339c0340ab3d15d3b6267a3d00e104de110dd37"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-temperature-shadow@2x.webp",
+      "bytes": 487570,
+      "sha256": "2fbad4bc527d61a91304f13c249f8cd1433e8eb19ed9b4dc82ac8b723fdc898d"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-temperature-surface@2x.webp",
+      "bytes": 272078,
+      "sha256": "2eb9bf9aa76249728d49b46dc1e39b3347c5df305d329dd51371c485be4335dd"
+    },
+    {
+      "location": "public",
+      "filename": "comet-103p-temperature-thumbnail.webp",
+      "bytes": 350,
+      "sha256": "6918395d9d3c067f91ebf66599f20f6a82aa373e3ef90a5d6221e3139143dd7e"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 1430,
+      "sha256": "e67a7ada76d2513b25f69e1a640e5781c6911556ffbe61bba9bbc9c5f21f47ae"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 6117,
+      "sha256": "1a42228b2b112a0377c6e0300ae8c3753f33adeaf15f871109f66d242418c52a"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 2388,
+      "sha256": "19c47a8e3f3607b5abbb414dfc0684649acb6dec8f52df43fac8683833db40c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 695,
+      "sha256": "1d7fce7a0d2156443987ac183c56b6cd56f2fed8fd11d1ec451d62d2339df282"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 4624,
+      "sha256": "c75db7ae4498aa050e8b4cce6ad806051c95cb75f0c6d3855c7de755a7ef5516"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 31567,
+      "sha256": "e34787636870b720f8bd2b880deb391662a96b0fe7565e9f31b22fdcab3f1804"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 326,
+      "sha256": "a779208dda6316fddc8c9c043af4cc70d55cd65d8d35388aa3bff44e1e484a15"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/constraints.webp",
+      "bytes": 9838,
+      "sha256": "ed560b6faff52eb114ff11747b4e372d44d861560d3949de567fb17497193d54"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/mri.webp",
+      "bytes": 2768,
+      "sha256": "b5db15a236bef34470b7af433397bc724b39cfae1a71049f4b0bf903f120b9c2"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/spectral-slope.webp",
+      "bytes": 3182,
+      "sha256": "044694bb4fb12dd78c4f87e569f0de7d215917c29d728befc29f3b67123876cb"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/temperature.webp",
+      "bytes": 3074,
+      "sha256": "5c2f266e96181d2aa781a3a6965bb1b3196f1cfef6175a05dac4cde434d7f5f3"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 943772,
+      "sha256": "2e636fc317ac85f14c9c71758bbc21c73003e80db21bc104148c490f45813d7c"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 776543,
+      "sha256": "4b3ba5bc4a241349642448f65f35848d2175fe3a31a227dd21c675244a02af42"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1044,
+      "sha256": "476e166d57da7205a38adb7541aafa56c7d7b009f8411537c8e33d60fb7a2358"
+    },
+    {
+      "location": "prepared",
+      "filename": "source-lighting.json",
+      "bytes": 408,
+      "sha256": "9f325d5dd1ec429fe0d2f284113d90e924267ff75ea326311eb8bf8699d57f46"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 1200,
+      "sha256": "de986a01d6caec88f428a6792a8d01e27e565008e4f7b8525b3cd25772ef422d"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 31575,
+      "sha256": "91b180a0e006d7031df09fd0b3ffba4bb3694e8499be0dee4195504f0a720a37"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 2500,
+      "sha256": "3b264ffac1321f0c34db96601876990a601496b3a303f43841330fd1077c8e40"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1225,
+      "sha256": "1f3516d9910e86de5a08e3eb15681eb853c26002456efb57fd1e78a9e222e18d"
+    }
+  ]
+}

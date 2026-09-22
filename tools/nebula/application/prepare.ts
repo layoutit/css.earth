@@ -3,7 +3,7 @@ import { readdir, access, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareNebulaObject } from './objects.ts';
 import { prepareCompactDensityObject } from './density-object.ts';
-import { preparePreparedAssetManifest } from '../../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '../../../src/platform/runtime-asset-closure.mts';
 import { applicationDeliveryKind } from './delivery-identity.ts';
 const args = process.argv.slice(2);
 if (args.some(arg=>arg !== '--if-missing' && arg !== '--allow-missing' && !/^--object=[a-z][a-z0-9-]*$/.test(arg)) || args.filter(arg=>arg.startsWith('--object=')).length > 1)
@@ -34,11 +34,10 @@ for (const entry of (await readdir(objects,{withFileTypes:true})).filter(entry=>
   // An unavailable object's `prepared/` output is incomplete by definition: no manifest to write, and the
   // shared context-availability check (astro.config.mts) is what reports it, not this inventory.
   if (result.status === 'unavailable') continue;
-  // This object has no runtime-assets.json, so its whole `prepared/` bake (this loop's only output) is the R2
+  // Its whole `prepared/` bake (this loop's only output) is the R2
   // inventory — a full nested closure, no exclusions needed since `object.json` and the `.prepared-<pid>`
   // staging directory both live outside `prepared/`.
-  await preparePreparedAssetManifest({ planetId: entry.name, preparedRoot: resolve(directory,'prepared'),
-    manifestPath: resolve(directory,'prepared-assets.json') });
+  await inventoryPreparedAssets({ planetId: entry.name, objectDirectory: directory });
 }
 if (selected && !results.length) throw new TypeError(`No nebula delivery is registered for ${selected}.`);
 console.log(`NEBULA_OBJECTS_COMPLETE ${JSON.stringify(results)}`);

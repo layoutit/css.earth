@@ -1,4 +1,5 @@
 import { sha256 } from '../../src/platform/sha256.mts';
+import { readInventory, mergeInventory, inventoryText } from '../../src/platform/runtime-asset-closure.mts';
 import { sourceObject } from '../../src/platform/source-catalog.mts';
 import { readFieldRecipe } from './recipe.mts';
 import { parseDensityVolumeFrame } from '@cssearth/objects';
@@ -51,12 +52,15 @@ const prepared = JSON.stringify({ schema: 'cssearth-galaxy-points@1', frame: fra
 
 const recipeBytes=await readFile('src/objects/nearby-universe/source/preparation/field.json');
 const descriptor=JSON.stringify({schema:'cssearth-object@1',id:'nearby-universe',type:'galaxy-point-field',properties:{preparation:{source:'source/preparation/field.json',sha256:sha256(recipeBytes)}},prepared:{format:'cssearth-galaxy-points@1',url:'prepared/points.json',sha256:sha256(prepared)}},null,2)+'\n';
-const receipt=JSON.stringify({schema:'cssearth-galaxy-points@1',outputs:[{path:'points.json',sha256:sha256(prepared),bytes:Buffer.byteLength(prepared)},resource]},null,2)+'\n';
+const outputs=[{filename:'points.json',sha256:sha256(prepared),bytes:Buffer.byteLength(prepared)},{filename:resource.path,sha256:resource.sha256,bytes:resource.bytes}];
+const current=await readInventory('nearby-universe','src/objects/nearby-universe');
+const kept=current?.assets.filter(asset=>asset.location==='prepared'&&!outputs.some(output=>output.filename===asset.filename))??[];
+const inventory=inventoryText(mergeInventory(current,'prepared',[...kept,...outputs]));
 
 await writePreparedSet([
   {path:'src/objects/nearby-universe/prepared/points.json',text:prepared},
   {path:'src/objects/nearby-universe/prepared/cloud.webp',text:cloudBytes},
   {path:'src/objects/nearby-universe/object.json',text:descriptor},
-  {path:'src/objects/nearby-universe/prepared-receipt.json',text:receipt},
+  {path:'src/objects/nearby-universe/inventory.json',text:inventory},
 ]);
 console.log(`CLOUDS: ${clouds.length}; POINTS PREPARED: ${points.length}/${catalogue.points.length}`);

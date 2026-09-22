@@ -13,13 +13,10 @@ export async function inventoriedPreparedPaths(root = process.cwd()): Promise<st
   const paths: string[] = [];
   for (const folder of await readdir(resolve(root, 'src/objects'), { withFileTypes: true })) {
     if (!folder.isDirectory()) continue;
-    for (const name of ['prepared-assets.json', 'runtime-assets.json']) {
-      const text = await readFile(resolve(root, 'src/objects', folder.name, name), 'utf8').catch(() => null);
-      if (text === null) continue;
-      const inventory = JSON.parse(text) as { resourceRoot?: string; assets?: { filename: string }[] };
-      if (inventory.resourceRoot !== 'prepared') continue;
-      for (const asset of inventory.assets ?? []) paths.push(`src/objects/${folder.name}/prepared/${asset.filename}`);
-    }
+    const text = await readFile(resolve(root, 'src/objects', folder.name, 'inventory.json'), 'utf8').catch(() => null);
+    if (text === null) continue;
+    const inventory = JSON.parse(text) as { assets?: { location: string; filename: string }[] };
+    for (const asset of inventory.assets ?? []) if (asset.location === 'prepared') paths.push(`src/objects/${folder.name}/prepared/${asset.filename}`);
   }
   return paths;
 }

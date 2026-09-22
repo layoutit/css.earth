@@ -9,9 +9,9 @@ import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { sha256 } from '../src/platform/sha256.mts';
 import { parsePreparedCssPointFieldManifest } from '../src/renderers/css/dist/index.js';
 import { SCENE_OBJECTS } from '../site/objects.mts';
-import { preparedAssets, runtimeAssets, type RuntimeAssetLocation } from './runtime-assets.mts';
+import { type RuntimeAssetLocation, inventoryAssets } from './runtime-assets.mts';
 import { installRuntimeAssets } from './setup.mts';
-import { preparedVolumeMetadataAssets } from './setup-volume-metadata.mts';
+import { volumeMetadataAssets } from './runtime-assets.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from './source-values.mts';
 
 const exec = promisify(execFile);
@@ -75,10 +75,7 @@ export async function typecheckAssetsForPaths(paths: readonly string[], root = p
   const assets: RuntimeAssetLocation[] = [];
   for (const [id, names] of groups) {
     const filenames = [...names], base = resolve(root, 'src/objects', id);
-    const candidates = [
-      ...existsSync(resolve(base, 'prepared-assets.json')) ? await preparedAssets(root, [id], { filenames }) : [],
-      ...existsSync(resolve(base, 'runtime-assets.json')) ? await runtimeAssets(root, [id], { filenames }) : [],
-    ];
+    const candidates = existsSync(resolve(base, 'inventory.json')) ? await inventoryAssets(root, [id], { filenames }) : [];
     for (const filename of filenames) {
       const file = resolve(base, 'prepared', filename);
       const matches = candidates.filter(asset => asset.file === file);
@@ -116,7 +113,7 @@ export async function typecheckFeatureAssets(root = projectRoot, ids = SCENE_OBJ
     for (const [index, pin] of pins.entries()) {
       const url = requireString(pin.url), prefix = `/scenes/${id}/`;
       if (!url.startsWith(prefix) || !/^[a-zA-Z0-9._-]+\.json$/u.test(url.slice(prefix.length))) throw new TypeError(`Invalid feature catalogue URL: ${url}`);
-      const matches = await runtimeAssets(root, [id], { filenames: [url.slice(prefix.length)] });
+      const matches = await inventoryAssets(root, [id], { location: 'public', filenames: [url.slice(prefix.length)] });
       const asset = matches[0];
       if (matches.length !== 1 || !asset || asset.file !== resolve(root, `public${url}`) || asset.sha256 !== pin.sha256 || asset.bytes !== pin.bytes)
         throw new TypeError(`The feature catalogue must match its published descriptor and inventory: ${id}`);
@@ -137,7 +134,7 @@ export async function restoreTypecheckInputs({ root = projectRoot, fetcher = fet
   if (descriptor.id !== 'stellar-neighbourhood' || !reference || !reference.url.startsWith('prepared/') || !reference.url.endsWith('.json'))
     throw new TypeError('Invalid prepared minimap star manifest path.');
   const starManifest = resolve(starDirectory, reference.url);
-  const catalogue = await preparedVolumeMetadataAssets(root);
+  const catalogue = await volumeMetadataAssets(root);
   const features = await typecheckFeatureAssets(root);
   const initial = uniqueAssets([...await typecheckAssetsForPaths([...imports, starManifest], root), ...catalogue.assets, ...features.assets]);
   const first = await installRuntimeAssets(initial, { fetcher });
