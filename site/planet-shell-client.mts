@@ -520,6 +520,31 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const system = context.querySelector<HTMLElement>('[data-system-results]');
   const systemHeaders = [...(system?.querySelectorAll<HTMLElement>('[data-system-header]') ?? [])];
   const solarSystemFacts = system?.querySelector<HTMLElement>('[data-solar-system-facts]');
+  // A dataset that draws what a whole system shares, a debris disc around its star, is the system's, not the body's. Its
+  // option and its details move to the system card while that system is the selection, and return to the body card after.
+  const systemDatasets = system?.querySelector<HTMLElement>('[data-system-datasets]') ?? null;
+  const systemDatasetOptions = systemDatasets?.querySelector<HTMLElement>('[data-system-dataset-options]') ?? null;
+  const systemDatasetDetails = systemDatasets?.querySelector<HTMLElement>('[data-system-dataset-details]') ?? null;
+  const volumeOptions = [...documentTarget.querySelectorAll<HTMLElement>('.planet-information-panel [data-lens-volume]')]
+    .map(option => ({ option, home: option.parentElement, next: option.nextElementSibling,
+      details: documentTarget.querySelector<HTMLElement>(`.planet-information-panel [data-lens-volume-details="${option.dataset.lensVolume ?? ''}"]`) }))
+    .map(entry => ({ ...entry, detailsHome: entry.details?.parentElement ?? null, detailsNext: entry.details?.nextElementSibling ?? null }));
+  const placeVolumeDatasets = (onSystemCard: boolean) => {
+    if (!systemDatasets || !systemDatasetOptions || !systemDatasetDetails || !volumeOptions.length) return;
+    for (const entry of volumeOptions) {
+      const optionTarget = onSystemCard ? systemDatasetOptions : entry.home;
+      if (optionTarget && entry.option.parentElement !== optionTarget) {
+        if (onSystemCard) optionTarget.append(entry.option);
+        else optionTarget.insertBefore(entry.option, entry.next);
+      }
+      const detailsTarget = onSystemCard ? systemDatasetDetails : entry.detailsHome;
+      if (entry.details && detailsTarget && entry.details.parentElement !== detailsTarget) {
+        if (onSystemCard) detailsTarget.append(entry.details);
+        else detailsTarget.insertBefore(entry.details, entry.detailsNext);
+      }
+    }
+    systemDatasets.hidden = !onSystemCard;
+  };
   const navigationRoot = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   const navigation = navigationRoot ? createNavigationTreeController(navigationRoot, windowTarget) : null;
   lifetime.onDispose(() => navigation?.destroy());
@@ -817,6 +842,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
     if (galaxy) setPanelHidden(galaxy, !galactic);
     const systemSelected = !focused && overview && overviewScope === 'system';
     if (system) setPanelHidden(system, !systemSelected);
+    placeVolumeDatasets(systemSelected);
     const showContext = focused || galactic || Boolean(largeScale) || systemSelected;
     setPanelHidden(information, showContext);
     if (!sharedLegacyContext) setPanelHidden(context, !showContext);

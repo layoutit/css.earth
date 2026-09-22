@@ -2,6 +2,7 @@ import { keplerStateKm } from './kepler.js'
 import { describe, expect, it } from 'vitest'
 import { hostedKeplerElements, hostSkyFrame, hostedOrbit, hostedOrbitApoapsisKm, hostedOrbitPhase, hostedOrbitPhaseBmjdTdb, hostedOrbitStateRelativeBmjdTdb, hostedOrbitStateRelativeKm, hostedPlanetStateRelativeKm, HOSTED_PLANET_IDS, type HostedOrbit } from './hostedOrbits.js'
 import { directionFromRaDec, skyBasis, starAstrometry } from './stars.js'
+import { PARSEC_KM } from './index.js'
 import { BODIES, EXOPLANET_IDS } from './bodies.js'
 
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, v, i) => sum + v * b[i]!, 0)
@@ -22,9 +23,9 @@ const eccentricOrbit: HostedOrbit = {
 describe('hosted orbits', () => {
   it('compiles each exoplanet hosted by its placed star', () => {
     const trappist = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h']
-    expect(EXOPLANET_IDS).toEqual(['hd-189733b', 'hd-209458b', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
+    expect(EXOPLANET_IDS).toEqual(['beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hd-189733b', 'hd-209458b', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', ...trappist, 'wasp-39b', 'wasp-43b'])
     // Hosted orbits keep the order the records were compiled in, which is the order their packages were added.
-    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b'])
+    expect(HOSTED_PLANET_IDS).toEqual(['wasp-43b', 'hd-189733b', ...trappist, 'beta-pictoris-b', 'beta-pictoris-c', 'beta-pictoris-d', 'hr-8799-b', 'hr-8799-c', 'hr-8799-d', 'hr-8799-e', 'k2-18b', 'kepler-186f', 'kepler-452b', 'wasp-39b', 'hd-209458b'])
     for (const id of trappist) expect(BODIES[id as keyof typeof BODIES].parent).toBe('trappist-1')
     expect(BODIES['wasp-43b'].parent).toBe('wasp-43')
     expect(BODIES['hd-189733b'].parent).toBe('hd-189733')
@@ -165,6 +166,37 @@ describe('hosted orbits', () => {
       const back = hostedOrbitStateRelativeBmjdTdb(eccentricOrbit, host, hostRadiusKm, epoch - step).positionKm
       for (let axis = 0; axis < 3; axis++) expect((ahead[axis]! - back[axis]!) / (2 * step) / state.velocityKmPerDay[axis]!).toBeCloseTo(1, 5)
     }
+  })
+  it('places the imaged planets of Beta Pictoris where GRAVITY and the discovery astrometry measured them', () => {
+    // Lacour et al. (2021, A&A 654, L2), Table 1: relative astrometry of b and c in mas (dRA, dDec) at MJD; Sutlieff et al. (2026,
+    // arXiv:2606.23801), Table 1: separation and position angle of d. The records store the orbitize! elements (Blunt et al. 2020)
+    // with the planet's omega as the star's; the positions below are the paper's own measurements, so they check that mapping.
+    const star = starAstrometry('beta-pictoris'), radiusKm = BODIES['beta-pictoris'].meanRadiusKm
+    const { east, north } = skyBasis(star.rightAscensionDegrees, star.declinationDegrees)
+    const distanceKm = star.distanceParsecs * PARSEC_KM
+    const skyMas = (id: 'beta-pictoris-b' | 'beta-pictoris-c' | 'beta-pictoris-d', mjd: number) => {
+      const p = hostedOrbitStateRelativeKm(hostedOrbit(id), star, radiusKm, mjd + 2400000.5).positionKm
+      return [dot(p, east), dot(p, north)].map(v => v / distanceKm * 206264.80624709636 * 1000)
+    }
+    const gravity = {
+      'beta-pictoris-b': [[58383.378, 68.47, 126.38], [58796.170, 145.51, 248.59], [58798.356, 145.65, 249.21], [58855.065, 155.41, 264.33], [58889.139, 160.96, 273.41], [59221.238, 211.59, 352.62], [59453.395, 240.63, 397.89]],
+      'beta-pictoris-c': [[58889.140, -67.36, -112.59], [58891.065, -67.67, -113.20], [58916.043, -71.88, -119.60], [59220.163, -52.00, -80.86]],
+    } as const
+    for (const [id, points] of Object.entries(gravity) as [keyof typeof gravity, readonly (readonly [number, number, number])[]][]) {
+      let sum = 0
+      for (const [mjd, dra, ddec] of points) { const [x, y] = skyMas(id, mjd); sum += (x! - dra) ** 2 + (y! - ddec) ** 2 }
+      // The medians of a posterior reproduce the fitted points to a few milliarcseconds, against orbits 140 to 510 mas across.
+      expect(Math.sqrt(sum / points.length), id).toBeLessThan(3)
+    }
+    const mjdOf = (iso: string) => Date.parse(`${iso}T00:00:00Z`) / 86400000 + 40587
+    const d = [['2014-12-08', 375, 208.0, 20, 2.0], ['2019-03-11', 719, 209.6, 12, 1.0], ['2020-02-08', 784, 209.4, 15, 1.0], ['2023-03-18', 1012, 210.4, 20, 1.0], ['2025-03-22', 1104, 211.1, 20, 1.0], ['2025-12-03', 1126.9, 210.35, 3.9, 0.22]] as const
+    let chi2 = 0
+    for (const [date, separation, positionAngle, sigmaSeparation, sigmaAngle] of d) {
+      const [x, y] = skyMas('beta-pictoris-d', mjdOf(date)), sep = Math.hypot(x!, y!), pa = ((Math.atan2(x!, y!) * 180 / Math.PI) + 360) % 360
+      chi2 += ((sep - separation) / sigmaSeparation) ** 2 + ((pa - positionAngle) / sigmaAngle) ** 2
+    }
+    // A circular display orbit at the published semi-major axis, node and inclination, phased to the six epochs: chi-squared 12.5 for 11 degrees of freedom.
+    expect(chi2).toBeLessThan(14)
   })
   it('rejects incomplete or non-finite eccentric inputs', () => {
     const star = starAstrometry('wasp-43')

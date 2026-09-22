@@ -1,0 +1,27 @@
+{
+  "id": "beta-pictoris-d",
+  "classification": "exoplanet",
+  "order": 1212,
+  "physical": {
+    "name": "Beta Pictoris d",
+    "horizonsCode": null,
+    "meanRadiusKm": 90079.92,
+    "gravitationalParameterKm3PerS2": 304047676.56,
+    "parent": "beta-pictoris"
+  },
+  "physicalNotes": "Radius 1.26 +/- 0.03 Jupiter radii, the estimate Sutlieff et al. (2026, arXiv:2606.23801, Table 2) derive from the planet's photometry with evolutionary models (ATMO and Sonora-Bobcat, 23 +/- 8 Myr): a model radius, not a measured diameter, 90,080 km at 71,492 km per Jupiter radius. GM from their model mass 2.4 +/- 0.6 Jupiter masses times Jupiter's GM 126686531.9 km^3/s^2; no dynamical mass is measured. A sphere.",
+  "hostedOrbit": {
+    "periodDays": 36374.8,
+    "semiMajorAxisStellarRadii": 3598.36,
+    "inclinationDegrees": 89.0,
+    "eccentricity": 0,
+    "transitTimeBmjdTdb": 55161.7,
+    "ascendingNodePositionAngleDegrees": 210.8,
+    "sources": {
+      "period": "Derived: Kepler's third law with the published semi-major axis 26.0 +2.2/-6.1 au (Sutlieff et al. 2026, Table 2, non-orbit-crossing posteriors) and the system mass 1.75 solar masses (Lacour et al. 2021) plus the three planets' 11.90, 8.89 and 2.4 Jupiter masses: 99.59 yr = 36374.8 d. The paper's own period posterior is 91 +18/-27 yr; a free circular fit to its six epochs gives 94.5 yr.",
+      "shape": "Sutlieff et al. (2026, Table 2): a 26.0 +2.2/-6.1 au at 19.63 pc (1324.2 mas), 3598.36 radii of the star's 1,080,920 km; inclination 89.0 +0.7/-0.6 degrees. Eccentricity is set to 0: the paper bounds it below 0.44 (2 sigma) without a median, so this record is a circular display approximation, not the paper's orbital solution.",
+      "phase": "Derived: the least-squares phase of the circular orbit over the six published astrometric epochs of Sutlieff et al. (2026, Table 1: VLT/SPHERE 2014-12-08, 2019-03-11, 2020-02-08; JWST/NIRCam 2023-03-18, 2025-03-22; VLT/ERIS 2025-12-03), chi-squared 12.5 for 11 degrees of freedom, residuals within 35 mas. Its ascending-node passage falls at MJD 46068.0, so the inferior conjunction this record's epoch names is a quarter orbit later, MJD 55161.7 (2009-11-24); checked in packages/astronomy/src/hostedOrbits.test.ts.",
+      "orientation": "Sutlieff et al. (2026, Table 2): Omega_d 210.8 +0.6/-0.4 degrees, the position angle of the ascending node east of celestial north (orbitize! conventions of Blunt et al. 2020, as for planets b and c), prior-independent; entered as published, with the same mapping the GRAVITY astrometry of b and c confirms."
+    }
+  }
+}

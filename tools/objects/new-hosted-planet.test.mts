@@ -9,5 +9,5 @@ test('the hosted-planet scaffold refuses to invent a uniform synchronous rotatio
     { id: 'test-planet', physical: { parent: 'test-star' }, hostedOrbit: { eccentricity: .1 } },
     { id: 'test-star' },
     2451545,
-  ), /explicit authored rotation law/);
+  ), /--rotation unmeasured/);
 });

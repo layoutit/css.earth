@@ -1,0 +1,36 @@
+{
+  "id": "beta-pictoris-b",
+  "classification": "exoplanet",
+  "order": 1210,
+  "physical": {
+    "name": "Beta Pictoris b",
+    "horizonsCode": null,
+    "meanRadiusKm": 103663.4,
+    "gravitationalParameterKm3PerS2": 1507569729.61,
+    "parent": "beta-pictoris"
+  },
+  "physicalNotes": "Radius 1.45 +/- 0.02 Jupiter radii from Morzinski et al. (2015, ApJ 815, 108; arXiv:1511.02894), hot-start evolutionary tracks at the measured bolometric luminosity and an age of 23 +/- 3 Myr (model-dependent errors not included): 103,663 km at 71,492 km per Jupiter radius. Not a measured diameter: the planet is unresolved. GM from the dynamical mass 11.90 +2.93/-3.04 Jupiter masses of Lacour et al. (2021, Table 2) times Jupiter's GM 126686531.9 km^3/s^2. A sphere: no oblateness is measured.",
+  "hostedOrbit": {
+    "periodDays": 8591.0,
+    "semiMajorAxisStellarRadii": 1388.04,
+    "inclinationDegrees": 89.0,
+    "eccentricity": 0.103,
+    "argumentOfPeriapsisDegrees": 19.3,
+    "epochDefinition": "periastron",
+    "transitTimeBmjdTdb": 65177.0,
+    "ascendingNodePositionAngleDegrees": 31.79,
+    "prediction": {
+      "tool": "whereistheplanet",
+      "planet": "betapicb",
+      "reference": "Lacour et al. (2021, A&A 654, L2; arXiv:2109.10671), the RV + b and c astrometry fit, as distributed with whereistheplanet (Wang et al. 2021)."
+    },
+    "sources": {
+      "period": "Derived: Kepler's third law with the published semi-major axis 9.93 +/- 0.03 au and the fitted masses of Lacour et al. (2021, Table 2, RV + b and c astrometry): the star 1.75, planet b 11.90 and planet c 8.89 Jupiter masses in Jacobi coordinates (b orbits the star-and-c barycentre), 1.769846 solar masses in all: sqrt(9.93^3 / 1.769846) = 23.521 yr = 8591.0 d. The paper prints no period for b.",
+      "shape": "Lacour et al. (2021, Table 2): a 9.93 +/- 0.03 au at their parallax 51.44 mas, kept as the angular size 510.80 mas and placed at the Gaia DR3 distance: 10.029 au, 1388.04 radii of the star's 1,080,920 km; inclination 89.00 +/- 0.01 degrees.",
+      "eccentricity": "Lacour et al. (2021, Table 2): e 0.103 +/- 0.003.",
+      "argumentOfPeriapsis": "Lacour et al. (2021, Table 2): omega_b 199.3 +2.8/-3.1 degrees, the planet's argument of periastron; stored as the star's, 19.3 degrees.",
+      "phase": "Lacour et al. (2021, Table 2): tau_b 0.719 +0.008/-0.010, the fraction of a period after MJD 59000 at which periastron falls: 59000 + 0.719 x 8591.0 = MJD 65177.0 (the paper's MJD scale, taken as BMJD_TDB; the difference is about a minute on a 23-year orbit).",
+      "orientation": "Lacour et al. (2021, A&A 654, L2; arXiv:2109.10671), Table 2, column 'RV + b and c astrometry' (posterior medians), in the orbitize! conventions of Blunt et al. (2020): Omega is the position angle of the ascending node east of celestial north and omega the planet's argument of periastron. This record stores omega in the hosted-orbit convention (the star's argument, the planet's plus 180 degrees); the node position angle is entered as published. The mapping is checked against the paper's GRAVITY astrometry in packages/astronomy/src/hostedOrbits.test.ts."
+    }
+  }
+}

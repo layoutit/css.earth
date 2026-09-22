@@ -38,7 +38,7 @@ import { readFile, writeFile, mkdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
-import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
+import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, polarCapRasterScale, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
 import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
@@ -578,7 +578,9 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
     style,
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fittedGeometry.matrix,
-      PROJECTIVE_TEXTURE_RASTER_SCALE,
+      polygon.polarCap
+        ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fittedGeometry.leafWidth)
+        : PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
     sourceRect: fittedGeometry.sourceRect,
     leafWidth: fittedGeometry.leafWidth,
@@ -735,7 +737,9 @@ function preparedCanonicalTextureStyle(
       (backfaceVisible ? ";backface-visibility:visible" : ""),
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fitted.matrix,
-      PROJECTIVE_TEXTURE_RASTER_SCALE,
+      polygon.polarCap
+        ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fitted.leafWidth)
+        : PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
     sourceRect: fitted.sourceRect,
     leafWidth: fitted.leafWidth,

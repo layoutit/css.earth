@@ -1,0 +1,92 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "beta-pictoris",
+  "card": {
+    "text": "A-type star 19.6 parsecs away with an edge-on debris disc and three imaged giant planets.",
+    "sources": [
+      {
+        "catalogueId": "simbad-bet-pic",
+        "url": "https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP+27321",
+        "label": "SIMBAD",
+        "checked": "2026-09-22",
+        "locator": "Basic data",
+        "quote": "Spectral type: A6V"
+      },
+      {
+        "catalogueId": "arxiv-2606-23801",
+        "url": "https://arxiv.org/abs/2606.23801",
+        "label": "Sutlieff et al. 2026",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "We report the direct imaging discovery of a third exoplanet in the beta Pictoris system"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Beta Pictoris is a young A-type star 19.6 parsecs away, seen through its own edge-on disc of dust. Its planet b is the first exoplanet heard in radio.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2609-16720",
+        "url": "https://arxiv.org/abs/2609.16720",
+        "label": "Ortiz Ceballos et al. 2026",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "the first direct detection of auroral radio emission from an exoplanet (beta Pictoris b), with the MeerKAT array"
+      },
+      {
+        "catalogueId": "gaia-dr3-beta-pictoris",
+        "url": "https://gea.esac.esa.int/archive/",
+        "label": "Gaia DR3",
+        "checked": "2026-09-22",
+        "locator": "gaiadr3.gaia_source, source_id 4792774797545800832",
+        "quote": "parallax 50.9307 mas"
+      }
+    ]
+  },
+  "datasets": {
+    "color": {
+      "title": "Photosphere colour",
+      "detail": "From its Gaia spectrum",
+      "summary": "The colour of Gaia's spectrum of the star. No surface picture exists."
+    },
+    "debris-disc": {
+      "title": "Debris disc, 2.1 and 4.1 µm",
+      "detail": "21 March 2025, two filters",
+      "summary": "The edge-on disc of dust in its contrast to the star, from two JWST filters. Its depth is reconstructed from the image.",
+      "sources": [
+        {
+          "catalogueId": "source-beta-pictoris-disc-contrast-f210m",
+          "url": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+          "label": "MAST JWST programme 4758, NIRCam coronagraph mosaics in two filters",
+          "checked": "2026-09-22"
+        }
+      ]
+    },
+    "debris-disc-visible": {
+      "title": "Debris disc, visible light",
+      "detail": "Hubble STIS, 1997 to 2013",
+      "summary": "The edge-on disc 16 to 82 au out, where planet d orbits, in visible light. Its depth is reconstructed from the image.",
+      "sources": [
+        {
+          "catalogueId": "source-beta-pictoris-disc-visible-stis-50ccd",
+          "url": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/672/A114",
+          "label": "Ren et al. (2023), HST/STIS image of the disc, VizieR J/A+A/672/A114",
+          "checked": "2026-09-22"
+        }
+      ]
+    },
+    "debris-disc-colour": {
+      "title": "Debris disc, colour",
+      "detail": "Hubble ACS, 2003",
+      "summary": "The edge-on disc 29 to 135 au out in three Hubble filters, in its colour against the star. Its depth is reconstructed.",
+      "sources": [
+        {
+          "catalogueId": "source-beta-pictoris-disc-colour-f435w-roll1",
+          "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+          "label": "HST programme 9987, ACS/HRC coronagraph images in three filters, starlight removed here",
+          "checked": "2026-09-22"
+        }
+      ]
+    }
+  }
+}

@@ -1,7 +1,7 @@
 import type { FamilyHandler, FamilyOperation } from '../family-handlers.mts';
 import type { DescriptorMember, ProductDescriptor } from '../product-descriptor.mts';
 import { csv, descriptor, finite, stable } from './common.mts';
-import { plotNumericPreview } from '../../astronomy-packages/plots.mts';
+import{ plotNumericPreview ,type FigureOptions}from'../../astronomy-packages/plots.mts';
 
 export interface SpectrumSample {readonly id?:string;readonly wavelength:number;readonly value:number;readonly uncertainty?:number;readonly upperLimit?:boolean;readonly segment?:string}
 export interface SpectrumDescription {readonly id:string;readonly target?:string;readonly member:DescriptorMember;readonly samples:readonly SpectrumSample[];readonly wavelengthUnit:string;readonly valueName:string;readonly valueUnit?:string;readonly spectralFrame?:string;readonly producingRecord:string;readonly calibrationBasis:readonly string[]}
@@ -26,9 +26,9 @@ export function exportSpectrumCsv(samples:readonly SpectrumSample[]):string{
 export function selectSpectrumRange(samples:readonly SpectrumSample[],range:{readonly from:number;readonly to:number}){validateSpectrum(samples);if(!Number.isFinite(range.from)||!Number.isFinite(range.to)||range.to<range.from)throw new TypeError('Spectrum range must be finite and ordered.');return samples.filter(sample=>sample.wavelength>=range.from&&sample.wavelength<=range.to);}
 /** Plot-ready native coordinates, including censored values, for the existing figure owner. */
 export function spectrumChartData(samples:readonly SpectrumSample[]){validateSpectrum(samples);return samples.map((sample,index)=>({id:sample.id??String(index),segment:sample.segment??'0',wavelength:sample.wavelength,value:sample.value,...(sample.uncertainty===undefined?{}:{uncertainty:sample.uncertainty}),upperLimit:sample.upperLimit===true}));}
-export async function previewSpectrum(out:string,title:string,samples:readonly SpectrumSample[],wavelengthLabel='Wavelength',valueLabel='Value'){
+export async function previewSpectrum(out:string,title:string,samples:readonly SpectrumSample[],wavelengthLabel='Wavelength',valueLabel='Value',options:FigureOptions={}){
   const groups=new Map<string,SpectrumSample[]>();for(const sample of validateSpectrum(samples)){const key=sample.segment??'0';groups.set(key,[...(groups.get(key)??[]),sample]);}
-  return plotNumericPreview(out,{kind:'series',title,xLabel:wavelengthLabel,yLabel:valueLabel,series:[...groups].map(([label,points])=>({label,x:points.map(point=>point.wavelength),y:points.map(point=>point.value),uncertainty:points.map(point=>point.uncertainty??null),upperLimit:points.map(point=>point.upperLimit===true)}))});
+  return plotNumericPreview(out,{kind:'series',title,xLabel:wavelengthLabel,yLabel:valueLabel,series:[...groups].map(([label,points])=>({label,x:points.map(point=>point.wavelength),y:points.map(point=>point.value),uncertainty:points.map(point=>point.uncertainty??null),upperLimit:points.map(point=>point.upperLimit===true)}))},options);
 }
 
 export function describeStandaloneSpectrum(input:SpectrumDescription):ProductDescriptor{

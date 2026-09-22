@@ -10,8 +10,8 @@ export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: numbe
   sources: { position: string; distance: string; properMotion: string; radialVelocity: string; binary?: string } }
 
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
-  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction';
-  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number;
+  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'periastron';
+  transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number; prediction?: HostedOrbitPredictionRecord;
   sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string } }
 
 export function objectValue(value: unknown, label = 'record'): Record<string, unknown> {
@@ -73,18 +73,30 @@ export function readStarRecord(value: unknown): StarRecord {
 }
 
 /** Preserve the selected published solution. Eccentric orbits need a sourced planet-centric periapsis and an explicit epoch convention. */
+/** The published orbit this planet is predicted from, named as the upstream prediction tool knows it. */
+export interface HostedOrbitPredictionRecord { tool: 'whereistheplanet'; planet: string; reference: string }
+function readPredictionRecord(value: unknown): HostedOrbitPredictionRecord {
+  const record = objectValue(value, 'hosted orbit prediction');
+  for (const key of Object.keys(record)) if (!['tool', 'planet', 'reference'].includes(key)) throw new TypeError(`Unknown hosted orbit prediction field ${key}.`);
+  if (record.tool !== 'whereistheplanet') throw new TypeError('The only hosted orbit prediction tool is whereistheplanet.');
+  const planet = stringValue(record.planet);
+  if (!/^[a-z0-9+_-]+$/u.test(planet)) throw new TypeError('A whereistheplanet planet name is lowercase and unspaced.');
+  return { tool: 'whereistheplanet', planet, reference: stringValue(record.reference) };
+}
 export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   const record = objectValue(value), sources = objectValue(record.sources, 'hosted orbit sources');
   const eccentricity = numberValue(record.eccentricity, 'hosted eccentricity');
   if (!(eccentricity >= 0 && eccentricity < 1)) throw new TypeError('Hosted eccentricity must be in [0, 1).');
-  if (record.epochDefinition !== undefined && record.epochDefinition !== 'inferior-conjunction') throw new TypeError('Unsupported hosted orbit epoch definition.');
-  if (eccentricity > 0 && (record.argumentOfPeriapsisDegrees === undefined || record.epochDefinition !== 'inferior-conjunction' ||
-      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs planet-centric periapsis, an inferior-conjunction epoch and sources for both eccentricity and periapsis.');
+  const epochDefinition = record.epochDefinition;
+  if (epochDefinition !== undefined && epochDefinition !== 'inferior-conjunction' && epochDefinition !== 'periastron') throw new TypeError('Unsupported hosted orbit epoch definition.');
+  if (eccentricity > 0 && (record.argumentOfPeriapsisDegrees === undefined || epochDefinition === undefined ||
+      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs a periapsis argument, an epoch definition (inferior-conjunction or periastron) and sources for both eccentricity and periapsis.');
   const orbit: HostedOrbitRecord = { periodDays: numberValue(record.periodDays), semiMajorAxisStellarRadii: numberValue(record.semiMajorAxisStellarRadii),
     inclinationDegrees: numberValue(record.inclinationDegrees), eccentricity, transitTimeBmjdTdb: numberValue(record.transitTimeBmjdTdb),
     ...(record.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: numberValue(record.argumentOfPeriapsisDegrees) }),
-    ...(record.epochDefinition === undefined ? {} : { epochDefinition: 'inferior-conjunction' }),
+    ...(epochDefinition === undefined ? {} : { epochDefinition }),
     ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
+    ...(record.prediction === undefined ? {} : { prediction: readPredictionRecord(record.prediction) }),
     sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation),
       ...(sources.eccentricity === undefined ? {} : { eccentricity: stringValue(sources.eccentricity) }),
       ...(sources.argumentOfPeriapsis === undefined ? {} : { argumentOfPeriapsis: stringValue(sources.argumentOfPeriapsis) }) } };

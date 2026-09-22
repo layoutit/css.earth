@@ -1,0 +1,35 @@
+{
+  "id": "source-beta-pictoris-disc-colour-f606w-roll1",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Beta Pictoris Disc · colour f606w roll1",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://www.stsci.edu/cgi-bin/get-proposal-info?id=9987&observatory=HST",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/beta-pictoris-disc/source/manifest.json",
+      "locator": "/inputs/5"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/ESA HST/ACS, programme 9987 (PI H. Ford); MAST (STScI); PSF subtraction here following Golimowski et al. 2006, AJ 131, 3109",
+      "scope": "The colour f606w roll1 input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "HST data served by MAST are public once their exclusive access period ends and carry no copyright; STScI asks that the mission, the programme and MAST be credited.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

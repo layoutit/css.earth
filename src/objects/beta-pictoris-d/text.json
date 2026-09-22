@@ -1,0 +1,37 @@
+{
+  "schema": "cssearth-object-text@1",
+  "objectId": "beta-pictoris-d",
+  "card": {
+    "text": "Giant planet 26 au from Beta Pictoris, imaged with VLT/ERIS and JWST in 2026.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2606-23801",
+        "url": "https://arxiv.org/abs/2606.23801",
+        "label": "Sutlieff et al. 2026",
+        "checked": "2026-09-22",
+        "locator": "Abstract",
+        "quote": "We report the direct imaging discovery of a third exoplanet in the beta Pictoris system"
+      }
+    ]
+  },
+  "introduction": {
+    "text": "Beta Pictoris d is a cool giant planet 26 au from its star, found in 2026 after a decade of hide-and-seek. Its orbit takes about a century.",
+    "sources": [
+      {
+        "catalogueId": "arxiv-2606-23801",
+        "url": "https://arxiv.org/abs/2606.23801",
+        "label": "Sutlieff et al. 2026",
+        "checked": "2026-09-22",
+        "locator": "Abstract and Table 2",
+        "quote": "We report the direct imaging discovery of a third exoplanet in the beta Pictoris system"
+      }
+    ]
+  },
+  "datasets": {
+    "shape": {
+      "title": "Shape only",
+      "detail": "Model radius",
+      "summary": "A sphere of the model radius, glowing its own heat. No surface, colour or spin is measured; the orbit is circular here."
+    }
+  }
+}
