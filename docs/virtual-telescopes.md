@@ -449,6 +449,14 @@ The chart is a view of that result: the star at the origin, each candidate as a 
 ellipses, the measurement with its 1σ, 2σ and 3σ ellipses, orbits behind them, and east to the left, as
 [Ortiz Ceballos, Berger and Cendes (2026)](https://arxiv.org/abs/2609.16720) print it for the radio detection of β Pictoris b.
 
+Both halves of this route are checked against one paper that publishes both. *A Candidate Innermost Fifth Planet in the
+HR 8799 System* ([arXiv:2609.10507](https://arxiv.org/abs/2609.10507)) measures the four known planets and a candidate fifth
+source with JWST on 2023 August 3, and prints the whereistheplanet prediction it judged them against. `candidates` returns
+that prediction to within 0.1 mas, `associate` puts every measured planet on itself and every other body beyond R 25, and
+the candidate fifth source is beyond R 6 from all four known planets, which is the paper's claim. See the
+[fixture](../tests/fixtures/telescope-families/sky-association-hr-8799/README.md) for the one cell of its table that does not
+follow from its own numbers.
+
 What it does not do: it compares offsets from a host star, and converts no absolute sky position into one. whereistheplanet
 reports a spread per axis and no correlation, so a candidate's ellipse has none. The verdict is a distance, not a detection
 claim: a measurement can sit closest to a body it does not belong to.

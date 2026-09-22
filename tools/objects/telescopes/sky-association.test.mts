@@ -67,3 +67,49 @@ test('the association command writes its rows, its limits and a chart for each m
     await assert.rejects(runAssociation(fixture, 'beta-pictoris', resolve(work, 'run')), /already exists/u);
   } finally { await rm(work, { recursive: true, force: true }); }
 });
+
+/**
+ * The oracle: *A Candidate Innermost Fifth Planet in the HR 8799 System Revealed by JWST NIRISS Aperture Masking
+ * Interferometry* (arXiv:2609.10507) publishes both halves of a sky association. Its Table 2 measures the four known
+ * planets and a candidate fifth source on 2023 August 3; its Table 3 predicts the known planets for that date with
+ * whereistheplanet and judges each axis against the measurement's own error bars.
+ */
+const HR_8799 = resolve(root, 'tests/fixtures/telescope-families/sky-association-hr-8799/niriss-ami-2023.csv');
+const PAPER_PREDICTION = { 'hr-8799-b': [1635.41, 532.42], 'hr-8799-c': [-288.59, 909.70], 'hr-8799-d': [-606.14, -345.32], 'hr-8799-e': [-231.65, 325.88] } as Record<string, [number, number]>;
+/**
+ * Table 3's checks: how many of its own sigma the paper needs before each axis agrees. Its declination cell for e is
+ * marked outside 2σ, but its own printed values give 302.2 ± 13.3 against 325.88, which is 1.78σ, so this expects the
+ * arithmetic of the table rather than the mark.
+ */
+const PAPER_AGREES_WITHIN = { 'hr-8799-b': [1, 1], 'hr-8799-c': [1, 1], 'hr-8799-d': [3, 2], 'hr-8799-e': [1, 2] } as Record<string, [number, number]>;
+
+test('the HR 8799 predictions this repository returns are the ones its discovery paper printed', async () => {
+  const set = await candidatesAtEpoch('hr-8799', 60159);
+  for (const [id, [east, north]] of Object.entries(PAPER_PREDICTION)) {
+    const candidate = set.candidates.find(item => item.id === id)!;
+    assert.ok(Math.abs(candidate.eastMas - east) < 0.15, `${id} east ${candidate.eastMas} vs published ${east}`);
+    assert.ok(Math.abs(candidate.northMas - north) < 0.15, `${id} north ${candidate.northMas} vs published ${north}`);
+    assert.ok(candidate.sigmaEastMas! < 3 && candidate.sigmaNorthMas! < 3, `${id} prediction error above the paper's stated 2 mas`);
+  }
+  assert.equal(set.candidates.filter(candidate => candidate.kind === 'planet').length, 4);
+});
+
+test('the HR 8799 measurements match their own planets, and the candidate fifth source matches none of them', async () => {
+  const measurements = readRelativeAstrometryCsv(await readFile(HR_8799, 'utf8'));
+  const { associations } = await associate(measurements, 'hr-8799');
+  for (const association of associations) {
+    const letter = association.measurement.id[0]!, closest = association.tests.find(test => test.id === association.closest)!;
+    if (letter === 'f') {
+      // The paper's candidate planet: every known companion has to be far from it, or it would be one of them.
+      for (const test of association.tests) if (test.id !== 'hr-8799') assert.ok(test.mahalanobis > 6, `candidate f sits R ${test.mahalanobis} from ${test.id}`);
+      continue;
+    }
+    assert.equal(association.closest, `hr-8799-${letter}`);
+    assert.ok(closest.mahalanobis < 3, `${association.measurement.id} R ${closest.mahalanobis}`);
+    for (const test of association.tests) if (test.id !== association.closest) assert.ok(test.mahalanobis > 25, `${association.measurement.id} vs ${test.id} R ${test.mahalanobis}`);
+    // Table 3's per-axis verdict, by the rule the paper states: its own error bars, without the prediction errors.
+    const covariance = association.measurement.covariance!, sigma = [Math.sqrt(covariance[0]), Math.sqrt(covariance[2])];
+    const within = closest.offsetMas.map((offset, axis) => Math.ceil(Math.abs(offset) / sigma[axis]!));
+    assert.deepEqual(within, PAPER_AGREES_WITHIN[association.closest], `${association.measurement.id} per-axis agreement`);
+  }
+});
