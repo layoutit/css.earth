@@ -61,7 +61,6 @@ export interface SpitzerFile {
   readonly name: string;
   readonly url: string;
   readonly bytes: number;
-  readonly sha256: string;
   /** The archive's own MD5, where its catalogue publishes one. Absent for the ancillary planes, which it does not list. */
   readonly archiveMd5?: string;
 }
@@ -210,13 +209,13 @@ export async function pinFile(role: FileRole, url: string, directory: string, ar
   const name = url.slice(url.lastIndexOf('/') + 1);
   if (!/^[A-Za-z0-9._-]+\.fits$/u.test(name)) throw new TypeError(`Not an archive FITS name: ${name}`);
   const path = resolve(directory, name);
-  const { bytes, sha256 } = await download(url, path);
+  const { bytes } = await download(url, path);
   if (archiveMd5 !== undefined) {
     if (!HEX32.test(archiveMd5)) throw new TypeError(`${name}: the archive's checksum is not an MD5 (${archiveMd5}).`);
     const found = await md5File(path);
     if (found !== archiveMd5) throw new Error(`${name} does not match the archive's own MD5: got ${found}, the catalogue says ${archiveMd5}.`);
   }
-  return { role, name, url, bytes, sha256, ...(archiveMd5 === undefined ? {} : { archiveMd5 }) };
+  return { role, name, url, bytes, ...(archiveMd5 === undefined ? {} : { archiveMd5 }) };
 }
 
 const card = (header: FitsHeader, key: string, label: string): string => {

@@ -81,7 +81,7 @@ test('a lens that ships on its published comparison has its figure, its measurem
     assert.ok(existsSync(prepared) && (JSON.parse(readFileSync(prepared, 'utf8')) as { surfaces: { id: string }[] }).surfaces.some(lens => lens.id === spec.lensId), `${id}: the ${spec.lensId} lens is prepared`);
     const evidence = JSON.parse(readFileSync(resolve(OBJECTS, id, 'evidence/published-comparison.json'), 'utf8')) as Record<string, any>;
     assert.equal(evidence.schema, COMPARISON_EVIDENCE_SCHEMA);
-    assert.deepEqual([evidence.lensId, evidence.source, evidence.figure, evidence.document?.object, evidence.document?.pixels], [spec.lensId, spec.source, spec.figure, spec.document.object, spec.document.sha256],
+    assert.deepEqual([evidence.lensId, evidence.source, evidence.figure, evidence.document?.object], [spec.lensId, spec.source, spec.figure, spec.document.object],
       `${id}: evidence/published-comparison.json measures the figure the spec names; run node tools/objects/published-comparison.mts ${id} --write`);
     assert.equal(evidence.columns?.length, spec.columns.filter(column => column.frame !== null).length, `${id}: every figure column with a lens frame is measured`);
     const ledger = JSON.parse(readFileSync(resolve(OBJECTS, id, 'investigations.json'), 'utf8')) as { entries: { id: string; status: string; evidence?: string[] }[] };

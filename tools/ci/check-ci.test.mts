@@ -24,7 +24,7 @@ test('local CI reads the actual workflow jobs in order, including strict TypeScr
  assert.ok(audit.some(step=>step.run.includes('source-closure.test.mts')));
  // The pins behind published assets stay on the gate: they are part of what this project ships.
  assert.ok(lint.some(step=>step.run.includes('check-object-runtime-ownership.mts --receipts')));
- assert.ok(lint.some(step=>step.run.includes('pnpm test:ci')),'published-asset closure and inventory stay blocking');
+ assert.ok(lint.some(step=>step.run.includes('pnpm test:node')),'published-asset closure and inventory stay blocking');
  // No pull-request job may contact R2: the merge gate is compile, build and behave, with no network dependency
  // to be slow or flaky. Publication proof lives at deploy time and in the nightly sweep instead.
  const workflowJobs=requireRecord(requireRecord(parse(workflow)).jobs);

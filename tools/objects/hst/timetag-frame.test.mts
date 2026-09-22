@@ -333,7 +333,7 @@ function runOf(pixels: number, kmPerPixel: number, positionAngleDegrees: number,
   const radiusDetectorPixels = place.angularDiameterArcsec / 2 / patched.plateScaleArcsec;
   const empty = new Float64Array(pixels * pixels);
   return {
-    definition: patched, place, radiusDetectorPixels, radiusGridPixels: patched.bodyRadiusKm / kmPerPixel,
+    definition: patched, inputs: [], place, radiusDetectorPixels, radiusGridPixels: patched.bodyRadiusKm / kmPerPixel,
     file: { path: '', rootname: patched.rootname, aperture: patched.aperture, opticalElement: patched.opticalElement,
       exposureSeconds: 100, startMjd: 56683.76083348, endMjd: 56683.78984969, positionAngleDegrees,
       events: 0, rowBytes: 10, dataStart: 0, tickSeconds: patched.tickSeconds, intervals: [[0, 100]] },

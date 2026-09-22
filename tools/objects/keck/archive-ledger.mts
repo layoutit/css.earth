@@ -168,10 +168,10 @@ export async function checkReceipt(file: string, value: Record<string, unknown>,
   if (!archive) return problem('it states nothing about the archive product it compared against.');
   const pinned = observation.archiveProducts.find(entry => entry.filehand === archive.filehand);
   if (!pinned) return problem(`${id} no longer pins an archive product at ${String(archive.filehand)}.`);
-  if (archive.bytes !== pinned.bytes || archive.sha256 !== pinned.sha256)
-    return problem(`the archive product it compared (${String(archive.bytes)} bytes, sha256 ${String(archive.sha256)}) is not the one ${id} pins now (${pinned.bytes} bytes, ${pinned.sha256}).`);
+  if (archive.bytes !== pinned.bytes)
+    return problem(`the archive product it compared (${String(archive.bytes)} bytes) is not the size ${id} records now (${pinned.bytes} bytes).`);
   const read = isRecord(archive.read) ? archive.read : null;
-  if (!read || read.bytes !== pinned.bytes || read.sha256 !== pinned.sha256)
+  if (!read || read.bytes !== pinned.bytes)
     return problem('it does not state that the bytes it read were the pinned bytes.');
 
   const ours = isRecord(value.local) ? value.local : null;
@@ -185,7 +185,7 @@ export async function checkReceipt(file: string, value: Record<string, unknown>,
   const channel = route.channel(observation.science.name);
   const expected = [...observation.calibrations.filter(entry => route.channel(entry.name) === channel), observation.science];
   if (record.inputs.length !== expected.length || expected.some(pin => !record.inputs.some(input =>
-    input.identity === pin.name && input.role === (pin.imageType ?? 'frame') && input.bytes === pin.bytes && input.sha256 === pin.sha256)))
+    input.identity === pin.name && input.role === (pin.imageType ?? 'frame') && input.bytes === pin.bytes)))
     return problem(`${ours.record} was not made from the raw science and calibration frames this program pins now.`);
   const output = record.outputs.find(entry => entry.path === ours.name);
   if (!output) return problem(`${ours.record} does not name the product ${ours.name}.`);

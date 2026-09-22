@@ -13,7 +13,7 @@ const groups = Object.keys(scripts).filter(name => name.startsWith('typecheck:pr
 // remains an existing native package script with its own complete roots, configuration and assertions.
 const required = ['typecheck:configs', 'typecheck:packages', 'typecheck:renderer', 'typecheck:platform',
   'typecheck:preparation', 'typecheck:tools', 'typecheck:astro', 'typecheck:ownership',
-  'check:typescript-ownership', 'test:typescript-ownership'];
+  'check:typescript-ownership'];
 
 test('three native groups retain every existing compiler program and ownership gate exactly once', () => {
   assert.equal(groups.length, 3);

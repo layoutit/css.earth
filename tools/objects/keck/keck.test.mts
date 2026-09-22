@@ -96,7 +96,7 @@ test('only the instruments whose pipeline is installed here can be re-run', () =
   assert.ok(!REDUCIBLE.OSIRIS, 'the OSIRIS DRP is IDL and is not installed');
   // The KCWI DRP reads a night by the observatory's own naming, so that is the name a frame is staged under.
   assert.equal(stagedName(parseKeckProgram(program()).observations[0]!.science), 'kb231209_00085.fits');
-  assert.equal(stagedName({ koaid: 'x', name: 'OS.20110918.33029.lev1.fits.gz', filehand: '', url: '', bytes: 1, sha256: digest }), 'OS.20110918.33029.lev1.fits.gz');
+  assert.equal(stagedName({ koaid: 'x', name: 'OS.20110918.33029.lev1.fits.gz', filehand: '', url: '', bytes: 1 }), 'OS.20110918.33029.lev1.fits.gz');
 });
 
 test('a product is matched to the archive’s by the stage it ends in, not by its file name', () => {
@@ -132,7 +132,6 @@ test('the shipped M42 program pins the frames the archive associates, and KOA’
   for (const kind of ['bias', 'contbars', 'arclamp', 'flatlamp']) assert.ok(entry.calibrations.some(file => file.imageType === kind), `${kind} is pinned`);
   assert.ok(entry.archiveProducts.some(product => stageOf(product.name) === 'icubed'), 'KOA’s own cube is pinned to compare against');
   for (const file of [entry.science, ...entry.calibrations, ...entry.archiveProducts]) {
-    assert.match(file.sha256, /^[0-9a-f]{64}$/u, `${file.name} is pinned by digest`);
     assert.ok(file.bytes > 0 && file.url.startsWith(KOA), `${file.name} is pinned by URL and size`);
   }
 });
@@ -209,7 +208,7 @@ test('every instrument KOA serves has a stated reduction state, and only the ins
 
 test('the reduction record names the frames it read, the channel, and the two settings it changed', () => {
   const parsed = parseKeckProgram(program());
-  const inputs = [parsed.observations[0]!.science].map(pinnedInput);
+  const inputs = [parsed.observations[0]!.science].map(file => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256: digest }));
   const made = reductionRun(parsed, parsed.observations[0]!, inputs,
     { channel: 'KB', command: ['kcwiReduce', '-g', '-b'], configuration: { source: 'kcwidrp/configs/kcwi.cfg', sha256: 'b'.repeat(64), changed: { enable_bokeh: { shipped: 'True', used: 'False' } } } },
     [{ name: 'kcwidrp', version: '1.3.1' }], 'c'.repeat(64));
@@ -278,7 +277,7 @@ test('a product with no record, or a record of another observation, is refused r
   assert.equal(await runProduct(redux, archiveProduct, ['kb231210_00042_icubed.fits'], pinned), null, 'another night is simply absent');
   await assert.rejects(runProduct(redux, archiveProduct, [name], pinned), /has no product record beside it/u);
   const record = (overrides: Record<string, unknown> = {}) => ({ schema: 'cssearth-telescope-product@1', telescope: 'Keck', stage: 'kcwi-drp-group',
-    inputs: [{ role: 'object', identity: pinned.science.name, bytes: pinned.science.bytes, sha256: pinned.science.sha256 }],
+    inputs: [{ role: 'object', identity: pinned.science.name, bytes: pinned.science.bytes, sha256: digest }],
     parameters: { koaid: pinned.koaid }, software: [{ name: 'kcwidrp', version: '1.3.1' }],
     outputs: [{ path: name, bytes: 17, sha256: 'b'.repeat(64) }], evidence: [], ...overrides });
   const put = async (value: unknown) => writeFile(`${cube}.product.json`, JSON.stringify(value));
@@ -296,7 +295,7 @@ test('an archive product that is not the pinned bytes is refused before a sample
   const pinned = parseKeckProgram(program({ observations: [observation({ archiveProducts: [product()] })] }));
   const entry = pinned.observations[0]!, archiveProduct = entry.archiveProducts[0]!;
   const downloads = await mkdtemp(join(tmpdir(), 'keck-pins-'));
-  const { pins, files } = comparisonPins(pinned.id, entry, archiveProduct, downloads);
+  const { pins, files } = await comparisonPins(pinned.id, entry, archiveProduct, downloads);
   assert.deepEqual(pins.map(pin => pin.role), ['archive product', 'object', 'bias'], 'the archive product and our inputs are pinned');
   assert.equal(pins.length, new Set(pins.map(pin => pin.identity)).size, 'each file is pinned once, by its archive path');
   const write = async (identity: string, bytes: Buffer) => {
@@ -332,15 +331,15 @@ test('a receipt counts only where it records a whole comparison of the bytes the
   const recordPath = join(directory, 'kb231209_00085_icubed.fits.product.json');
   const ourDigest = 'c'.repeat(64);
   await writeFile(recordPath, JSON.stringify({ schema: 'cssearth-telescope-product@1', telescope: 'Keck', stage: 'kcwi-drp-group',
-    inputs: [pinned.observations[0]!.science, ...pinned.observations[0]!.calibrations].map(pinnedInput),
+    inputs: [pinned.observations[0]!.science, ...pinned.observations[0]!.calibrations].map(file => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256: digest })),
     parameters: { koaid: 'KB.20231209.37031.94.fits' }, software: [{ name: 'kcwidrp', version: '1.3.1' }],
     outputs: [{ path: 'kb231209_00085_icubed.fits', bytes: 117411840, sha256: ourDigest }], evidence: [] }));
   const cut = { samples: 10, correlation: 0.99, relativeDifference: { median: 0, p99: 0, largest: 0 } };
   const whole = () => ({ schema: 'cssearth-keck-reproduction@1', program: 'test', koaid: 'KB.20231209.37031.94.fits',
     product: 'icubed', instrument: 'KCWI',
     extensions: [{ extname: 'PRIMARY', samples: 100, both: 100, identicalShare: 1, aboveMedian: cut, aboveBrightestPercent: cut }],
-    archive: { filehand: archiveProduct.filehand, bytes: archiveProduct.bytes, sha256: archiveProduct.sha256,
-      read: { bytes: archiveProduct.bytes, sha256: archiveProduct.sha256 } },
+    archive: { filehand: archiveProduct.filehand, bytes: archiveProduct.bytes, sha256: digest,
+      read: { bytes: archiveProduct.bytes, sha256: digest } },
     local: { name: 'kb231209_00085_icubed.fits', bytes: 117411840, sha256: ourDigest, record: recordPath } });
   const check = (value: Record<string, unknown>) => checkReceipt('test.lev1-icubed.reproduction.json', value, [pinned]);
   assert.deepEqual(await check(whole()), { file: 'test.lev1-icubed.reproduction.json', instrument: 'KCWI', koaid: 'KB.20231209.37031.94.fits', product: 'icubed' });

@@ -59,10 +59,12 @@ test('a program is refused unless its bytes belong to the observation it names',
   assert.throws(() => parseSpitzerProgram(halfPinned), /needs exactly one/u);
 });
 
-test('only the frames the archive mosaicked are combined, which in HDR mode is half of them', () => {
+test('only the frames the archive mosaicked are combined, which in HDR mode is half of them', async () => {
   const pinned = parseSpitzerProgram(program()), channel = pinned.channels[0]!;
   assert.deepEqual(mosaicMembers(channel).map(frame => frame.dce), ['0001', '0003']);
-  const inputs = channelInputs(pinned, channel);
+  const directory = await mkdtemp(resolve(tmpdir(), 'spitzer-inputs-'));
+  for (const name of [...channel.products.map(product => product.name), ...channel.frames.flatMap(frame => frame.files.map(file => file.name))]) await writeFile(resolve(directory, name), 'x');
+  const inputs = await channelInputs(pinned, channel, directory);
   assert.deepEqual(inputs.filter(input => input.role === 'frame').map(input => input.identity),
     ['SPITZER_I1_4416768_0001_0000_7_cbcd.fits', 'SPITZER_I1_4416768_0003_0000_7_cbcd.fits']);
   assert.equal(inputs.filter(input => input.role === 'archive-mosaic').length, 1);

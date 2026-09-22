@@ -96,6 +96,7 @@ export async function stageFrames(program: KeckProgram, observation: KeckObserva
     const source = resolve(DOWNLOADS, program.id, 'lev0', file.name);
     const digest = await sha256File(source).catch(() => null);
     if (!digest) throw new Error(`${file.name} is not downloaded: node tools/objects/keck/archive.mts ${program.id} ${program.instrument} ${observation.koaid}`);
+    measuredDigests.set(file.name, digest.sha256);
     const name = stagedName(file);
     await copyFile(source, resolve(directory, name));
     staged.push(name);
@@ -104,7 +105,13 @@ export async function stageFrames(program: KeckProgram, observation: KeckObserva
   return { staged, files, inputs: [...wanted, observation.science].map(pinnedInput) };
 }
 
-export const pinnedInput = (file: KeckFile): ProductInput => ({ role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256: file.sha256 });
+/** Digests measured while the frames were staged; a receipt names what was actually read, not a pin. */
+const measuredDigests = new Map<string, string>();
+export const pinnedInput = (file: KeckFile): ProductInput => {
+  const sha256 = measuredDigests.get(file.name);
+  if (!sha256) throw new Error(`${file.name} was not staged before its receipt was written.`);
+  return { role: file.imageType ?? 'frame', identity: file.name, bytes: file.bytes, sha256 };
+};
 
 /** What identifies one reduction: the pinned frames it read, the channel and configuration it ran with, and the installed
  * pipeline. The same frames through the same pipeline at the same settings are the same run. */
