@@ -21,6 +21,11 @@ test('an instrument and a region reach the archive query as instrument_name and 
   assert.throws(() => targetQuery(SERVICES[0]!, ['x'], 50, { target: 'x', instrument: "ERIS\u0000" }), /Invalid instrument/u);
 });
 
+test('a bounded archive sample is taken in the service\'s declared identity order', () => {
+  assert.match(targetQuery(SERVICES[0]!, ['Eris'], 50, { target: 'eris' }), / ORDER BY obs_publisher_did, obs_id$/u);
+  assert.match(targetQuery(SERVICES[2]!, ['Eris'], 50, { target: 'eris' }), / ORDER BY granule_uid$/u);
+});
+
 test('wavelength-only exploration remains exploratory rather than becoming a strict capability request', () => {
   const request = parseExplorationArguments(['eris','--wavelength','2.2,2.4']);
   assert.deepEqual(request, { target: 'eris', wavelengthMicrometres: [2.2, 2.4] });

@@ -9,7 +9,7 @@ import { loadSourceProducts, parseSourceProducts, sourceRun, SOURCE_PRODUCTS_SCH
 import { qualifySourceProduct } from './qualify-source.mts';
 import { queryCapabilities, selectObservation, type QueryInputs } from './query.mts';
 import { selectedProductInput } from './selected-product.mts';
-import { saveSession, saveExploration, getSession, sessionRequest, observationChoices, type SessionServices } from './session.mts';
+import { saveSession, saveExploration, getSession, sessionRequest, observationChoices, savedChoice, type SessionServices } from './session.mts';
 import { explorationAnswer } from './exploration.mts';
 import { parseCli } from './cli.mts';
 
@@ -162,4 +162,17 @@ test('CLI rejects typos and ambiguous arguments before archive access', () => {
   assert.equal(parsed.command, 'query'); if (parsed.command === 'query') assert.equal(sessionRequest(parsed.requestArgs).result, 'telescope-product');
   assert.throws(() => parseCli(['query', 'eris', '--wavelength', '1,2', '--kind', 'cube', '--any-time', '--min-arcsec', '1', '--result', 'body-map', '--out', 'x']), /retrieve native products/);
   assert.throws(() => sessionRequest(['--target', 'eris', '--wavelength', '1,2', '--result', 'telescope-product']), /State --kind/);
+});
+
+test('get finds a saved archive choice by its identity when the service stamps each answer with the query time', () => {
+  const choice = (acquisitionKey: string, observation: string, snapshot: string) => {
+    const reference = { kind: 'vo-acquisition' as const, acquisitionKey, observation, snapshot };
+    return { key: JSON.stringify(reference), reference } as unknown as Parameters<typeof savedChoice>[0][number];
+  };
+  const saved = choice('acq-1', 'obs-1', 'response-at-10:00'), fresh = [choice('acq-1', 'obs-1', 'response-at-10:05'), choice('acq-2', 'obs-2', 'response-at-10:05')];
+  assert.equal(savedChoice(fresh, saved), fresh[0]);
+  assert.equal(savedChoice([choice('acq-9', 'obs-1', 'response-at-10:05')], saved), undefined, 'another acquisition of the observation is not the saved choice');
+  assert.equal(savedChoice([...fresh, choice('acq-1', 'obs-1', 'response-at-10:06')], saved), undefined, 'an ambiguous identity is refused');
+  const indexed = { key: 'indexed', reference: { kind: 'indexed-observation' } };
+  assert.equal(savedChoice(fresh, indexed), undefined, 'indexed observations still match by their exact key');
 });

@@ -142,13 +142,15 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
       limitations: [...row.qualification?.limitations ?? [], ...filters] });
   }
   for (const entry of inputs.vo?.records ?? []) {
+    // Parse warnings about the whole response are reported once with its service, not repeated in every row's reason.
+    const responseIssues = new Set(entry.snapshot.response.issues), rowIssues = entry.observation.issues.filter(issue => !responseIssues.has(issue));
     const observation = entry.observation, ranges = observation.wavelengthsMicrometres[0] === null || observation.wavelengthsMicrometres[1] === null ? [] : [observation.wavelengthsMicrometres as readonly [number, number]];
     const assessment=filterAssessment(canonicalRequest,{kind:observation.kind,familyEvidence:observation.familyEvidence,startIso:observation.startIso,endIso:observation.endIso,wavelengths:ranges}),filters=filterReasons(assessment);
     const identity = `${observation.service} / ${observation.key}`, inField = observation.target.status === 'in-field';
     const located = observation.target.status === 'confirmed' || inField;
     if(located&&filterState(assessment)==='unresolved'){unresolved.push({scope:'observation',code:'filter-unresolved',identity,reason:filters.join(' ')});continue;}
     if (!located || filterState(assessment)==='mismatch' || !entry.products.length) {
-      unsupported.push({ scope: 'observation', code: 'unsupported-observation', identity, reason: [observation.target.status === 'confirmed' ? '' : observation.target.reason, ...filters, ...observation.issues, ...entry.issues].filter(Boolean).join(' ') || 'No supported exact access operation.' });
+      unsupported.push({ scope: 'observation', code: 'unsupported-observation', identity, reason: [observation.target.status === 'confirmed' ? '' : observation.target.reason, ...filters, ...rowIssues, ...entry.issues].filter(Boolean).join(' ') || 'No supported exact access operation.' });
       continue;
     }
     for (const spec of entry.products) {
@@ -159,7 +161,7 @@ export function explorationAnswer(request: ExplorationRequest, inputs: Explorati
           wavelengthsMicrometres: observation.wavelengthsMicrometres, advertisedKilobytes: observation.access.estimatedKilobytes, metadataBasis: ready ? 'qualified' : 'advertised' },
         ...(ready ? { product: ready } : { configuration: { kind: 'archive-acquisition', key: spec.key, request: canonicalRequest } as const }),
         reason: ready ? 'Existing qualified artifact; pins will be revalidated before use.' : 'Exact archive access operation is available; selecting it retrieves and qualifies this identity.',
-        limitations: ['Archive metadata is advertised, not verified product science.', ...inField ? [observation.target.reason] : [], ...filters, ...observation.issues, ...entry.issues] });
+        limitations: ['Archive metadata is advertised, not verified product science.', ...inField ? [observation.target.reason] : [], ...filters, ...rowIssues, ...entry.issues] });
     }
   }
   choices.sort((a, b) => (a.state === 'ready' ? 0 : 1) - (b.state === 'ready' ? 0 : 1) || a.key.localeCompare(b.key));
