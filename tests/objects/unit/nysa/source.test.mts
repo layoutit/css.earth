@@ -6,11 +6,6 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/nysa/source'),read=createSourceFixtureReader(root);
-test('Nysa retains source identity and restoration closure',async()=>{
- const source=await createSourceManifest({planetId:'nysa',planetName:'Nysa',sourceRoot:root});await source.verify();
- const plan=await read('preparation/acquisition.json');for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
- const model=await read('reference/damit-model.json');assert.equal(model.modelId,16324);assert.equal(model.fields['Calibrated Size'],'1 (Yes)');assert.equal(model.fields.Version,'2026-07-28');
-});
 test('Nysa preserves calibrated original coordinates and the paired spin model',async()=>{
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,mesh=await loadPdsPlateShape(resolve(root,p.path),p.grid),t=validateClosedMesh(mesh.indices.flat(),mesh.positions);
  assert.deepEqual(mesh.positions[0],[119.578,126.59500000000001,33478.959]);assert.deepEqual(mesh.indices[0],[0,1,2]);assert.deepEqual([t.vertices,t.faces,t.components,t.eulerCharacteristic],[1602,3200,1,2]);

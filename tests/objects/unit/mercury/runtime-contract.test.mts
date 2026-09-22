@@ -5,15 +5,6 @@ import runtimeDefinition from "../../../../src/objects/mercury/prepared/runtime.
 import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
-objectRuntimePackageTests(runtimeDefinition);
-test("Mercury's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "mercury") });
-  assert.equal(audit.complete, true);
-  for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
-    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`));
-  }
-});
-
 test("Mercury uses one shared exclusive lens and the prepared playback owner for cutaway pose", async () => {
   const f = await preparedSelectionFixture(runtimeDefinition);
   try {

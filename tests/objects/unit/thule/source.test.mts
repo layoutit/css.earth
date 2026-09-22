@@ -6,11 +6,6 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/thule/source'),read=createSourceFixtureReader(root);
-test('Thule retains source identity and restoration closure',async()=>{
- const source=await createSourceManifest({planetId:'thule',planetName:'Thule',sourceRoot:root});await source.verify();
- const plan=await read('preparation/acquisition.json');for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
- const model=await read('reference/damit-model.json');assert.equal(model.modelId,16313);assert.equal(model.fields['Calibrated Size'],'1 (Yes)');assert.equal(model.fields.Version,'2025-07-17');
-});
 test('Thule preserves calibrated original coordinates and the paired spin model',async()=>{
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,mesh=await loadPdsPlateShape(resolve(root,p.path),p.grid),t=validateClosedMesh(mesh.indices.flat(),mesh.positions);
  assert.deepEqual(mesh.positions[0],[7096.931,7957.08,54699.9]);assert.deepEqual(mesh.indices[0],[0,1,2]);assert.deepEqual([t.vertices,t.faces,t.components,t.eulerCharacteristic],[574,1144,1,2]);

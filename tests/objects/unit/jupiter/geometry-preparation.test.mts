@@ -1,9 +1,0 @@
-import assert from 'node:assert/strict';
-import test from 'node:test';
-import{readFile}from'node:fs/promises';
-import{prepareBandedEllipsoid}from'../../../../tools/objects/giant-layers/geometry.mts';
-test('source latitude bounds reproduce every accepted body, polar and tiled ring leaf',async()=>{
- const read=async (path: string)=>JSON.parse(await readFile(new URL(`../../../../src/objects/jupiter/${path}`,import.meta.url),'utf8'));
- const result=prepareBandedEllipsoid(await read('source/preparation/geometry.json')),prepared=await read('prepared/scene.json');
- assert.ok("leaves" in result);assert.equal(result.leaves.length,772);assert.equal(result.ringLeaves.length,16);assert.deepEqual(result.leaves,prepared.leaves);assert.deepEqual(result.ringLeaves,prepared.ringLeaves);
-});

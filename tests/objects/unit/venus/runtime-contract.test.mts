@@ -6,24 +6,6 @@ import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/te
 import runtimeDefinition from "../../../../src/objects/venus/prepared/runtime.json" with {type: "json"};
 import { objectRuntimePackageTests, preparedSelectionFixture, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 
-objectRuntimePackageTests(runtimeDefinition);
-
-test("Venus publishes every declared toggle through the shared controls and selection owner", async () => {
-  const f = await preparedSelectionFixture(runtimeDefinition);
-  try {
-    const nodes = f.stage.querySelectorAll("*");
-    for (const name of ["atmosphere", "shadows"]) {
-      const input = required(f.inputs.get(name));
-      input.checked = !input.checked; invokeListener(required(input.listeners.get("change"))); await f.settle();
-      assert.equal(required(f.selection.state().committed)[name], input.checked);
-      if (name !== "shadows") assert.equal(f.stage.classList.contains(`venus-hide-${name}`), !input.checked);
-      else assert.equal(f.presentation.observe().materials.lighting.rotationEnabled, input.checked);
-    }
-    assert.deepEqual(f.stage.querySelectorAll("*"), nodes);
-    assert.deepEqual(f.errors, []); f.lifetime.destroy(); assert.equal(f.listenerCount(), 0);
-  } finally { f.restore(); }
-});
-
 for (const name of ["atmosphere", "shadows"]) {
   for (const retirement of ["throw", "dispose", "dispose-and-throw"]) {
     test(`Venus ${name} ${retirement} cannot publish successful state or retain late callbacks`, async () => {

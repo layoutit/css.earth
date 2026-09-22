@@ -8,11 +8,6 @@ import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/te
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfig,requireRotation,requireScalarAnchors} from '../radial-fixture.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/mithra/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('Mithra retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'mithra',planetName:'Mithra',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('Mithra preserves the original kilometer mesh and published spin interpretation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

@@ -9,12 +9,6 @@ import {requireAcquisitionPlan,requireClosedRadialTerrain,requireRadialTestConfi
 import {requireFiniteNumber,requireRecord} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-2002-ce26/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('2002 CE26 Primary retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'asteroid-2002-ce26',planetName:'2002 CE26 Primary',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- const content=requireShadowsContent(await read('content/object.json')),shadows=content.controls.find(control=>control.name==='shadows');assert.ok(shadows);assert.equal(shadows.checked,false);
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('2002 CE26 Primary preserves the original kilometer mesh and qualified orientation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

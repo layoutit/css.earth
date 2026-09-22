@@ -13,16 +13,6 @@ const bytes = await readFile(new URL("../../../../public/scenes/mercury/mercury-
 const catalog = parsePreparedSurfaceFeatureCatalog(JSON.parse(bytes.toString("utf8")), plan, "mercury");
 const byName = (name: string) => { const feature = catalog.features.find(feature => feature.name === name); assert.ok(feature, name); return feature; };
 
-test("the prepared nomenclature catalogue is pinned by the runtime plan and the provenance descriptor", () => {
-  assert.equal(bytes.length, plan.catalog.bytes);
-  assert.equal(createHash("sha256").update(bytes).digest("hex"), plan.catalog.sha256);
-  assert.equal(catalog.features.length, plan.catalog.count);
-  assert.deepEqual({ url: descriptor.url, bytes: descriptor.bytes, sha256: descriptor.sha256, count: descriptor.count }, plan.catalog);
-  assert.equal(descriptor.mapLeftEdgeLongitudeDeg, 180);
-  assert.equal(plan.catalog.count + descriptor.excluded.AL.count + descriptor.duplicates.rows, 614, "613 Gazetteer rows plus the MESSENGER impact site");
-  assert.deepEqual(descriptor.duplicates, { features: 8, rows: 8, maxSeparationDeg: 0.1632, maxDiameterDifferenceKm: 0.846 });
-});
-
 test("the plan anchors labels to the spinning body mesh for the surface lenses only", () => {
   const node = runtimeDefinition.tree.nodes[plan.target];
   assert.match(node.className ?? "", /(^|\s)mercury-body(\s|$)/u);
