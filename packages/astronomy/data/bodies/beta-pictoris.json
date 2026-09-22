@@ -1,0 +1,30 @@
+{
+  "id": "beta-pictoris",
+  "classification": "star",
+  "order": 1209,
+  "physical": {
+    "name": "Beta Pictoris",
+    "horizonsCode": null,
+    "meanRadiusKm": 1080920.28,
+    "gravitationalParameterKm3PerS2": 232246770073.39392,
+    "parent": null
+  },
+  "physicalNotes": "Radius: the VLTI/VINCI limb-darkened angular diameter 0.736 +/- 0.015 (statistical) +/- 0.012 (systematic) mas of Di Folco et al. (2004, A&A 426, 601, Table 3) at the Gaia DR3 distance 19.6345 pc: 1,080,920 km, 1.5537 solar radii at 695700 km per solar radius (Zwintz et al. 2019 derive 1.538 +/- 0.040 from the same diameter at the Hipparcos parallax; their seismic model gives 1.497 +/- 0.025). GM from the dynamical stellar mass 1.75 +/- 0.03 solar masses of Lacour et al. (2021, A&A 654, L2, Table 2, RV + b and c astrometry) times the JPL solar GM 132712440041.93938 km^3/s^2. presentationUp: the display axis (celestial north at the star) is up; the star's spin axis is aligned with the disc and the planets' orbits to 3 +/- 4 degrees on the sky (Kraus et al. 2020) but its period is not adopted here.",
+  "star": {
+    "rightAscensionDegrees": 86.82123452009108,
+    "declinationDegrees": -51.066136257823345,
+    "positionEpochJulianYear": 2016,
+    "distanceParsecs": 19.6345266018065,
+    "properMotionRaMasPerYear": 5.160196860824648,
+    "properMotionDecMasPerYear": 84.0405295978282,
+    "radialVelocityKmPerS": 16.84059,
+    "sources": {
+      "position": "Gaia DR3 source 4792774797545800832 (Gaia Collaboration 2023, A&A 674, A1), ICRS at epoch J2016.0, from the archived row src/objects/beta-pictoris/source/photometry/gaia-dr3-source.csv; cross-identification HIP 27321, HD 39060: https://simbad.cds.unistra.fr/simbad/sim-id?Ident=HIP%2027321",
+      "distance": "Gaia DR3 parallax 50.9307 +/- 0.1482 mas (same row; RUWE 3.07, the star is bright for Gaia): 1000/50.930690628822894 = 19.6345 pc, no zero-point correction. Lacour et al. (2021) fitted their orbits at the Gaia DR2 parallax 51.44 +/- 0.12 mas; the hosted orbits keep their angular sizes and are placed at this distance.",
+      "properMotion": "Gaia DR3 (same row): 5.160, 84.041 mas/yr",
+      "radialVelocity": "Gaia DR3 (same row): 16.84 +/- 0.34 km/s"
+    },
+    "presentationUp": "display-axis",
+    "hipparcosId": 27321
+  }
+}

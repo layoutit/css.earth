@@ -1,0 +1,55 @@
+{
+  "id": "arxiv-astro-ph-0602292",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Golimowski et al. (2006): HST/ACS Multiband Coronagraphic Imaging of the Debris Disk around Beta Pictoris",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "astro-ph/0602292"
+    },
+    {
+      "type": "DOI",
+      "value": "10.1086/503801"
+    }
+  ],
+  "links": [
+    {
+      "role": "archive",
+      "url": "https://arxiv.org/abs/astro-ph/0602292",
+      "label": "arXiv preprint"
+    },
+    {
+      "role": "landing",
+      "url": "https://doi.org/10.1086/503801",
+      "label": "The Astronomical Journal 131, 3109"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0602292",
+      "checkedOn": "2026-09-22",
+      "locator": "Section 2.2: HST programme 9987, ACS/HRC behind the 1.8 arcsecond occulting spot in F435W, F606W and F814W at two rolls, with alpha Pic (A7IV) as the reference; synthetic flux ratios F_alpha/F_beta of 1.65, 1.75 and 1.90 in F435W, F606W and F814W from Synphot, assuming V of 3.27 and 3.86, uncertain by 2% in each band; the two stars' positions differ by about 0.8 pixel"
+    },
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0602292",
+      "checkedOn": "2026-09-22",
+      "locator": "Section 2.2 and its footnote on calibrated surface brightnesses: Vega magnitudes of beta Pic from Synphot, F435W 4.05, F606W 3.81, F814W 3.68, with zero-point errors under 2% (Sirianni et al. 2005); the residuals of the PSF subtraction preclude accurate photometry within 1.5 arcseconds (about 30 au) of the star and along the occulting finger"
+    },
+    {
+      "url": "https://arxiv.org/abs/astro-ph/0602292",
+      "checkedOn": "2026-09-22",
+      "locator": "Section 3.3.1 and Figure 17: the F606W/F435W and F814W/F435W flux ratios of the disc relative to the star are nonuniform and asymmetric about both projected axes"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "D. A. Golimowski",
+    "D. R. Ardila",
+    "J. E. Krist",
+    "M. Clampin",
+    "H. C. Ford"
+  ]
+}

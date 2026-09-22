@@ -1,0 +1,76 @@
+{
+  "schema": "cssearth-nebula-delivery@1",
+  "id": "beta-pictoris-disc",
+  "method": "density-grid",
+  "request": {
+    "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
+    "sha256": "047c9166273edbcf96b64c8315015ec4c57704bdc45a9b8ff2f7577035a1d435"
+  },
+  "inputPins": [
+    {
+      "path": "src/objects/beta-pictoris-disc/source/provenance.json",
+      "sha256": "05ae072725f58c5b1fcc05f39eecb79ebd38c449e6a709c26657bc44f0aecb05"
+    },
+    {
+      "path": "src/objects/beta-pictoris-disc/source/density-visible.ktx2",
+      "sha256": "e212977a3b8c8bdc0b7a48482733d09e6ecdb583e30740282b6f12f1db23eefd"
+    },
+    {
+      "path": "src/objects/beta-pictoris-disc/source/density-contrast.ktx2",
+      "sha256": "adbc47ccd93f8971b3ddc0d6586534465de2b703c54a3c5c2fd2ddff6dc44394"
+    },
+    {
+      "path": "src/objects/beta-pictoris-disc/source/density-colour.ktx2",
+      "sha256": "45d5d304f0ad4901d3f5d8614266726faf84cb7f849d1ade0b0be57e5aa47c61"
+    }
+  ],
+  "sky": {
+    "centerIcrsDegrees": [
+      86.82125885900825,
+      -51.06588715530487
+    ],
+    "distancePc": 19.634710385537517,
+    "imageRotationDegrees": 0,
+    "arcsecPerUnit": 0.050930213910187205
+  },
+  "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+  "description": "The edge-on debris disc around Beta Pictoris in two views: in visible light from Hubble's STIS coronagraph, 16 to 82 au from the star, and at 2.1 and 4.1 micrometres from JWST/NIRCam behind its MASK335R coronagraph on 21 March 2025 (programme 4758), 49 to 126 au. One unit is one astronomical unit; the disc's depth is reconstructed from each image by assuming it is symmetric about its own axis, not measured.",
+  "defaultLens": "visible",
+  "framingRadiusUnits": 135,
+  "attachedTo": "beta-pictoris",
+  "acceptedLabResult": "beta-pictoris-disc-density-grids",
+  "compactInputs": {
+    "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
+    "sha256": "047c9166273edbcf96b64c8315015ec4c57704bdc45a9b8ff2f7577035a1d435"
+  },
+  "compactMethod": "density-grid",
+  "grids": [
+    {
+      "id": "visible",
+      "label": "HST/STIS · debris disc, visible light",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "recipe": {
+        "path": "src/objects/beta-pictoris-disc/source/volume-visible.json",
+        "sha256": "047c9166273edbcf96b64c8315015ec4c57704bdc45a9b8ff2f7577035a1d435"
+      }
+    },
+    {
+      "id": "contrast",
+      "label": "JWST/NIRCam · debris disc, 2.1 and 4.1 µm",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "recipe": {
+        "path": "src/objects/beta-pictoris-disc/source/volume-contrast.json",
+        "sha256": "d654229030198f7db82ca0638e071158b5a0c70dfda7e6355a95bc8fa60bd333"
+      }
+    },
+    {
+      "id": "colour",
+      "label": "HST/ACS · debris disc, colour 0.43 to 0.81 µm",
+      "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/4758.pdf",
+      "recipe": {
+        "path": "src/objects/beta-pictoris-disc/source/volume-colour.json",
+        "sha256": "822d14231379ba0a1c7405fd755feea95c56e272103efc1ab7e4717448ce3f4c"
+      }
+    }
+  ]
+}

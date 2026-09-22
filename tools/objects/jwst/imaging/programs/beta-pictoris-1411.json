@@ -1,0 +1,43 @@
+{
+  "schema": "cssearth-jwst-imaging-program@1",
+  "id": "beta-pictoris-1411",
+  "programme": "1411",
+  "target": "BETA-PIC",
+  "crdsContext": "jwst_1535.pmap",
+  "bands": [
+    {
+      "band": "NIRCAM-F182M-MASK210R",
+      "observation": "jw01411-c1011_t001_nircam_f182m-maskrnd-sub640a210r",
+      "level3": {
+        "name": "jw01411-c1011_t001_nircam_f182m-maskrnd-sub640a210r_i2d.fits",
+        "uri": "mast:JWST/product/jw01411-c1011_t001_nircam_f182m-maskrnd-sub640a210r_i2d.fits",
+        "bytes": 26579520
+      },
+      "association": {
+        "name": "jw01411-c1011_20260715t154652_coron3_00001_asn.json",
+        "uri": "mast:JWST/product/jw01411-c1011_20260715t154652_coron3_00001_asn.json",
+        "bytes": 3406
+      },
+      "stage": "coron3",
+      "members": [
+        {
+          "name": "jw01411022001_05101_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw01411022001_05101_00001_nrca2_calints.fits",
+          "bytes": 886501440
+        },
+        {
+          "name": "jw01411023001_05101_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw01411023001_05101_00001_nrca2_calints.fits",
+          "bytes": 886501440
+        }
+      ],
+      "references": [
+        {
+          "name": "jw01411021001_03103_00001_nrca2_calints.fits",
+          "uri": "mast:JWST/product/jw01411021001_03103_00001_nrca2_calints.fits",
+          "bytes": 100068480
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "id": "arxiv-2606-23801",
+  "kind": "publication",
+  "identityLevel": "work",
+  "title": "Sutlieff, Bonse et al. (2026): Direct Imaging Discovery of Giant Exoplanet beta Pictoris d: A Decade-Long Game of Hide-and-Seek",
+  "identifiers": [
+    {
+      "type": "arXiv",
+      "value": "2606.23801"
+    }
+  ],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://arxiv.org/abs/2606.23801",
+      "label": "arXiv preprint"
+    }
+  ],
+  "evidence": [
+    {
+      "url": "https://arxiv.org/abs/2606.23801",
+      "checkedOn": "2026-09-22",
+      "locator": "Table 1: astrometry of planet d at six epochs (VLT/SPHERE 2014-12-08 375 +/- 20 mas at 208.0 deg; 2019-03-11 719 +/- 12 at 209.6; 2020-02-08 784 +/- 15 at 209.4; JWST/NIRCam 2023-03-18 1012 +/- 20 at 210.4; 2025-03-22 1104 +/- 20 at 211.1; VLT/ERIS 2025-12-03 1126.9 +/- 3.9 at 210.35); Table 2: a 26.0 +2.2/-6.1 au, P 91 +18/-27 yr, e < 0.44, i 89.0, Omega 210.8, mass 2.4 +/- 0.6 Mjup, Teff 600 K, radius 1.26 +/- 0.03 Rjup (estimated)"
+    },
+    {
+      "path": "src/objects/beta-pictoris/text.json",
+      "locator": "/card/sources/1"
+    }
+  ],
+  "relations": [],
+  "statements": [],
+  "publisher": "arXiv preprint",
+  "creators": [
+    "B. J. Sutlieff",
+    "M. J. Bonse"
+  ]
+}
