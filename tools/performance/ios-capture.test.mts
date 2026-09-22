@@ -73,3 +73,8 @@ test('pixel comparison counts differing pixels, 0 for identical screenshots', ()
   assert.deepEqual({ ...comparePixels(a, b, 2, 2), diff: undefined }, { differing: 1, total: 4, diff: undefined });
   assert.throws(() => comparePixels(a, b.subarray(4), 2, 2), /size/);
 });
+
+test('a probe step records the page state under a name', () => {
+  assert.deepEqual(parseSteps([{ probe: 'after-flight' }]), [{ probe: 'after-flight' }]);
+  assert.throws(() => parseSteps([{ probe: 'After Flight' }]), /lowercase/);
+});
