@@ -2221,6 +2221,9 @@ test('the main thread draws worker frames from the orbit summary exactly as from
     }
     expect(JSON.stringify(drawing(layers[1]!.root))).toBe(JSON.stringify(drawing(layers[0]!.root)));
   }
+  // A flight or a selection preview with no worker publication to request (an interrupted flight's queue holds no current
+  // request) waits for the next worker frame instead of planning paths the summary does not carry.
+  expect(() => { layers[1]!.layer.setNavigationInFlight(true); layers[1]!.layer.previewSelection('venus'); }).not.toThrow();
   // Without a worker frame the layer would have to project paths the summary does not carry.
   expect(() => layers[1]!.layer.publish({ ...world, pose: { ...world.pose, positionM: [0, 0, 700] } }, viewport)).toThrow(/full prepared world context/);
 });
