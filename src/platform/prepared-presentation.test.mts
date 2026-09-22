@@ -130,3 +130,23 @@ test("unmount retires delayed prepared selection without late DOM publication", 
     assert.deepEqual(f.errors, []);
   } finally { f.restore(); }
 });
+test("a silhouette-fitted overlay rises with the camera root the phone layout lifts above the sheet", () => {
+  const f = retainedPresentationFixture(runtimeDefinition);
+  try {
+    const presentation = mountPreparedPresentation(f.stage, f.context, runtimeDefinition);
+    const binding = runtimeDefinition.viewBindings.find(candidate => candidate.kind === 'silhouette-fit');
+    if (binding?.kind !== 'silhouette-fit') throw new Error('The Moon publishes no fitted overlay.');
+    const className = runtimeDefinition.tree.nodes[binding.target]?.className;
+    const overlay = [...f.stage.querySelectorAll<HTMLElement>('*')].find(node => node.className === className);
+    if (!overlay) throw new Error('The fitted overlay is not mounted.');
+    const silhouette = { centre: [10, 20], radial: [1, 0], radialSemiAxis: 300, tangentialSemiAxis: 280 };
+    presentation.commitSelection({ selection: initial, resources: f.resources });
+    presentation.publishFrame({ selection: initial, resources: f.resources, view: { ...f.view, zoom: 1.8, body: { visible: true, silhouette } } });
+    assert.match(overlay.style.transform, /^translate\(10px, 20px\)/u);
+    // The silhouette is measured from the camera root's centre; the overlay sits on the stage, 61 px lower than a
+    // lifted root, so without the shift the lighting disc hangs below the planet.
+    presentation.publishFrame({ selection: initial, resources: f.resources, view: { ...f.view, zoom: 1.7, principalOffset: [0, 0],
+      stageViewport: { principalOffsetPixels: [0, -61] }, body: { visible: true, silhouette } } });
+    assert.match(overlay.style.transform, /^translate\(10px, -41px\)/u);
+  } finally { f.restore(); }
+});
