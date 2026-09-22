@@ -301,7 +301,11 @@ async function layerTree(session: ReturnType<typeof inspector>) {
   const layers = isRecord(reply.result) && Array.isArray(reply.result.layers) ? reply.result.layers.filter(isRecord) : [];
   const memory = (layer: Record<string, unknown>) => typeof layer.memory === 'number' ? layer.memory : 0;
   const reasons = new Map<string, number>();
-  const largest = [...layers].sort((a, b) => memory(b) - memory(a)).slice(0, 12);
+  const paints = (layer: Record<string, unknown>) => typeof layer.paintCount === 'number' ? layer.paintCount : 0;
+  // The largest by backing memory, then the most repainted: a layer repainted every frame is re-sent every frame.
+  const byMemory = [...layers].sort((a, b) => memory(b) - memory(a)).slice(0, 12);
+  const byPaints = [...layers].sort((a, b) => paints(b) - paints(a)).filter(layer => !byMemory.includes(layer)).slice(0, 8);
+  const largest = [...byMemory, ...byPaints];
   // Reasons for a sample of layers across the list, so the count by reason describes the whole tree.
   const sample = layers.filter((_, index) => index % Math.max(1, Math.ceil(layers.length / 300)) === 0);
   for (const layer of sample) {
