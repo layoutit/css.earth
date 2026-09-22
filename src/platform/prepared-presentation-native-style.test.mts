@@ -1,7 +1,8 @@
 import { parsePreparedObjectRuntime } from "../renderers/css/dist/index.js";
 import {loadObjectTestDefinition} from '../../tools/contract/object-test-data.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SCENE_OBJECTS as OBJECTS } from '../../site/objects.mts';
 import { retainedPresentationFixture } from './test/object-runtime-package.mts';
 import { mountPreparedPresentation } from '../renderers/css/dist/testing.js';

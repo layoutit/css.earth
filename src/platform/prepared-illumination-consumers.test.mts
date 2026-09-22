@@ -1,7 +1,8 @@
 import {parsePreparedObjectRuntime} from '../renderers/css/dist/index.js';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 const mars = parsePreparedObjectRuntime(await loadObjectTestDefinition('mars'));
 const earth = parsePreparedObjectRuntime(await loadObjectTestDefinition('earth'));
 import { preparedSelectionFixture } from "./test/object-runtime-package.mts";

@@ -1,7 +1,8 @@
 /** What a Hubble receipt has to say for the configuration it names to count as re-calibrated. Everything here runs against a
  * scratch copy of the pinned programs, so nothing asks MAST anything. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdir, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';

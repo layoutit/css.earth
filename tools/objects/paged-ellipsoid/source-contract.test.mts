@@ -1,7 +1,8 @@
 import { fixtureRecord, required } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {parsePagedProfile, parsePagedLensBindings} from './profile-source.mts';
 import {parseInteriorSource, parseAtmosphereResponse} from './source-contract.mts';
 import {readMapConfiguration, readRefreshContent, readRefreshBindings, readRefreshManifest} from './refresh-source.mts';

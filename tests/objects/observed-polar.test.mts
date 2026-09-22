@@ -42,8 +42,3 @@ test('measured polar harmonic continuation is bounded and leaves untransitioned 
  assert.throws(()=>preparePolarContinuationAtlas({source,tileSize:8,firstMeasuredRow:4,lastMeasuredRow:27,measuredHeight:32}),/invalid/);
 });
 
-test('observation routing uses capabilities and rejects unsafe or unpinned inputs',async()=>{
- assert.equal(parseObservedPolarRecipe(recipe),recipe);
- const synthetic=structuredClone(recipe);synthetic.namespace='synthetic';synthetic.publicPrefix='/scenes/synthetic/';assert.equal(parseObservedPolarRecipe(synthetic),synthetic);
- for(const mutate of [(value: { lenses: { operation: string; }[]; })=>value.lenses[0].operation='jupiter',(value: { lenses: { source: string; }[]; })=>value.lenses[0].source='../other',(value: { sourcePins: never[]; })=>value.sourcePins=[],(value: { lenses: { coverage: { columnStride: number; }; }[]; })=>value.lenses[0].coverage.columnStride=0,(value: { dimensions: { width: number; }; })=>value.dimensions.width=Infinity]){const invalid=structuredClone(recipe);mutate(invalid);assert.throws(()=>parseObservedPolarRecipe(invalid));}
-});

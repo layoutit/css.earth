@@ -3,7 +3,8 @@ import { shape, array, text, number, optional, parseShapeLens } from './source-r
 import { requireArray, requireRecord } from '../../sources/source-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';

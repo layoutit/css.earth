@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SCENE_OBJECTS } from '../objects.mts';
 import { validateDatasetText } from '../dataset-content.mts';
 import { parsePreparedText } from '../object-text.mts';

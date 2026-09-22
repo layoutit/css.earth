@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { access, readdir, readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { compareLightCurves, parseLightCurve, type LightCurve } from './compare-light-curves.mts';

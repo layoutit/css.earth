@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {readdir,readFile,stat} from 'node:fs/promises';
 import {resolve} from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {executableFamilyOperations} from './family-operation.mts';
 import {parseProductDescriptor} from './product-descriptor.mts';
 

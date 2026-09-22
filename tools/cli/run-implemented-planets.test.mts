@@ -4,7 +4,8 @@ import { mkdtemp, readdir, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
 import { setImmediate } from "node:timers/promises";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import type { ObjectCommandOutcome, PreparationCommand, PreparationEvent, PreparationReport } from './run-implemented-planets.mts';
 
 import { SCENE_OBJECTS } from "../../site/objects.mts";

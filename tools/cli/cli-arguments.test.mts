@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { flagValue, positionalArguments } from './cli-arguments.mts';
 
 test('an absent value flag does not swallow the first positional argument', () => {

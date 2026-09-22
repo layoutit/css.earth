@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { resolve } from "node:path";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SourceEvidence } from "./source-evidence-values.mts";
 
 import { sha256 } from "../../src/platform/sha256.mts";

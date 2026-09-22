@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { orderFacts } from "../fact-order.mts";
 import { requireArray, requireRecord, requireString } from "../../tools/sources/source-values.mts";
 

@@ -22,8 +22,8 @@ export function parseObservedPolarRecipe(input: unknown) {
   const finite=(value: unknown)=>{if(typeof value==='number'&&!Number.isFinite(value))throw new TypeError('Observed polar parameters must be finite.');if(value&&typeof value==='object')Object.values(value).forEach(finite);};finite(config);
   for(const value of Object.values(config.dimensions))if(!Number.isSafeInteger(value)||value<16)throw new TypeError('Invalid observed polar raster dimensions.');
   latitudeRasterBands(config.packing.latitudeBoundsDegrees,config.dimensions.height);
-  const ids=new Set(),outputs=new Set();
-  const source=(path: string)=>{validateRelativePath(path);};
+  const ids=new Set(),outputs=new Set(),sourcePaths=new Set<string>();
+  const source=(path: string)=>{validateRelativePath(path);sourcePaths.add(path);};
   for(const lens of config.lenses) {
     if(!/^[a-z][a-z0-9-]*$/.test(lens.id)||ids.has(lens.id)||!['rgb-polar-structure','scalar-observed-gaps'].includes(lens.operation))throw new TypeError('Invalid observed polar lens operation.');
     ids.add(lens.id);source(lens.source);
@@ -32,7 +32,7 @@ export function parseObservedPolarRecipe(input: unknown) {
     if(lens.operation==='rgb-polar-structure'&&(!Number.isInteger(lens.coverage.columnStride)||lens.coverage.columnStride<1))throw new TypeError('Invalid observed RGB coverage stride.');
     if(lens.operation==='scalar-observed-gaps'&&(!Array.isArray(lens.palette)||lens.palette.length<2||lens.scalar.noData!==0||lens.scalar.coverage!=='polar-connected-zero'||Object.keys(lens.polarDetails??{}).length>0))throw new TypeError('Invalid measured scalar parameters.');
   }
-  return config;
+  return {...config,sourcePins:[...sourcePaths].map(path=>({path}))};
 }
 
 /** Observed RGB/scalar maps, projective band packing, and source-structured poles.

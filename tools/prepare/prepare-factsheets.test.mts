@@ -3,7 +3,8 @@ import { mkdtemp, readFile, writeFile, mkdir, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { prepareFactsheet } from './prepare-factsheets.mts';
 

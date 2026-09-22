@@ -2,7 +2,8 @@ import {parsePreparedObjectRuntime, type PreparedView} from '../renderers/css/di
 import {requireRecord,requireArray,requireFiniteNumber} from '../../tools/sources/source-values.mts';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createPreparedMaterialPublisher, preparedMaterialState } from '../renderers/css/dist/testing.js';
 import { selectedPreparedVariant } from '../renderers/css/dist/testing.js';
 import { initialObjectSelection } from '../renderers/css/dist/testing.js';

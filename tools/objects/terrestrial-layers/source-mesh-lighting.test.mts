@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseObjShape } from './obj-shape.mts';
 import { createSourceMeshLighting } from './source-mesh-lighting.mts';
 const recipe = { maximumDistanceMeters: 2, rayOffsetMeters: .001, ambient: .2, diffuse: .8,

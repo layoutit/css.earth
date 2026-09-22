@@ -3,7 +3,8 @@ import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contr
 import { shape, text } from './terrestrial-layers/source-records.mts';
 import { required } from '../contract/test-values.mts';
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { prepareSolarSystemCamera, prepareSolarSystemScene } from "./solar-system-scene.mts";

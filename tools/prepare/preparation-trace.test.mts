@@ -3,7 +3,8 @@ import { spawnSync } from 'node:child_process';
 import { mkdir, mkdtemp, readdir, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, relative } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readPreparationTraces } from './preparation-cache.mts';
 import { PREPARATION_TRACE_SCHEMA, PREPARATION_TRACE_VARIABLE, descriptorDigest, type PreparationTrace } from './preparation-trace-format.mts';
 

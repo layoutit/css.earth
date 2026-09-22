@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { llorriFieldTargets, requireLlorriTarget } from './llorri-geo.mts';
 

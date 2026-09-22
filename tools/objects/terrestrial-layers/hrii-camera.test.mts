@@ -1,4 +1,5 @@
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {hriiCamera,hriiControlResidual} from './hrii-camera.mts';
 const header={GEOMSTAT:'OK',GEOMQUAL:'RECONSTRUCTED',INSTRUME:'HRIIR',DNAXIS1:'+WAVELENGTH',DNAXIS2:'UP, -Yinstr',TARSCRX:10,TARSCRY:0,TARSCRZ:0,TARSUNRX:149597870.7,TARSUNRY:0,TARSUNRZ:0,BORERA:180,BOREDEC:0,CELESTN:0,PXLSCALE:10,TARSCR:10,NAXIS2:64};

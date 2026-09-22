@@ -3,7 +3,8 @@ import {parseObjectContentFixture, parseTitleFixture} from './object-content-fix
 import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mts";
 import { prepareObjectContent } from "../../tools/objects/dist/content/prepare.js";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { OBJECTS } from "../objects.mts";
 
 import {

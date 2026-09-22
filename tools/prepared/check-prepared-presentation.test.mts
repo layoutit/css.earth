@@ -2,7 +2,8 @@ import { fixtureRecord, required } from "../contract/test-values.mts";
 import { requireArray, requireFiniteNumber } from "../sources/source-values.mts";
 import { requireObjectRuntimeDefinition } from "../contract/object-runtime-contract.mts";
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from "node:fs/promises";
 import { preparedObjectOverlay } from '../contract/test-prepared-object-overlay.mts';
 import { readPreparedPresentationModule, readPreparedJsonExports, requirePreparedDefinitionSource,

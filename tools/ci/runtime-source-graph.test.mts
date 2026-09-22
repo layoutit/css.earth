@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseRuntimeSource, resolveRuntimeSource } from './runtime-source-graph.mts';
 
 test('runtime closure excludes type-only dependencies and retains executable imports', () => {

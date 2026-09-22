@@ -2,7 +2,8 @@
  * number: a star without a measured axis has its display axis on sky north (position angle 0); a star with a measured
  * position angle (Betelgeuse's ALMA axis) has that angle, and in both the display meridian turns longitude 0 to the Earth. */
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { directionFromRaDec, skyBasis, skyPlaneOrientation } from '@cssearth/astronomy';

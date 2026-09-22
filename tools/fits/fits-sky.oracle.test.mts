@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFitsHdus } from './fits.mts';
 import { skyDisplayRaster, skyImageAxes } from './fits-sky.mts';
 import { readOracleFixture, readOracleInput } from '../oracles/fixture.mts';

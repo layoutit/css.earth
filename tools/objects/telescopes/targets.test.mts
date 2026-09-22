@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { resolveTarget } from './targets.mts';
 
 const catalogue = [{ id: 'emilylakdawalla', name: 'Emilylakdawalla', aliases: ['274860', '2009 RE26', '(274860) Emilylakdawalla'] }];

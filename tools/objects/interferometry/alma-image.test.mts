@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { compareImages, measureSource, readContinuumImage } from './alma-image.mts';
 
 /** A synthetic ALMA-shaped continuum image: a limb-darkened disc of a stated size through a stated Gaussian beam. */

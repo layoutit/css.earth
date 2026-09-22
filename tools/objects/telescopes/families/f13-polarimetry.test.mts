@@ -1,4 +1,5 @@
-import test from 'node:test'; import assert from 'node:assert/strict';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest(); import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises'; import { tmpdir } from 'node:os'; import { resolve } from 'node:path'; import {spawn} from 'node:child_process'; import {createHash} from 'node:crypto';
 import { headerBlock, padBlock } from '../../interferometry/fits-table.mts'; import { member } from './common.mts';
 import { BETELGEUSE_ZIMPOL_V, describeDegreeLinearPolarization, describeStokesFits, exportIntensityDolp, extractStokesFits, inspectIntensityDolp, inspectStokesFits } from './f13-polarimetry.mts'; import {astroqueryToolchain} from '../../astronomy-packages/toolchain.mts';import{executeFamilyOperation}from'../family-operation.mts';

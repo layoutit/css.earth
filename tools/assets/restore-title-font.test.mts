@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { PLANET_TITLE_RECIPE as recipe } from '../../src/platform/planet-title-recipe.mts';
 import { restoreTitleFont } from './restore-title-font.mts';
 

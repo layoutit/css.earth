@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { hFunction, particlePhase, shadowHidingFactor, coherentBackscatterFactor, hapkeRadianceFactor, assertHapkeModel, type HapkeModel, type ParticlePhaseFunction } from './hapke.mts';
 import { hapkeRoughness } from './roughness.mts';
 

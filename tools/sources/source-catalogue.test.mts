@@ -1,7 +1,8 @@
 import { sourceTestContexts as prepareContextProvenance, sourceTestVolumes as prepareVolumeProvenance,
   prepareTestFacilities as prepareFacilities, sourceTestGeneratedPaths, inventoriedPreparedPaths, sourceCheckMode } from './source-test-inputs.mts';
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm, readdir } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
