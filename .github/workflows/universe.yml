@@ -82,6 +82,36 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          # Body source and evidence data (images, archives, cubes, video: about 790 of 1,070 MB) is never read by
+          # these jobs, so fetch only the blobs the sparse tree needs. Nebula keeps the full tree: it verifies
+          # volume packages' tracked previews.
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: &code-and-text |
+            /*
+            !/src/objects/**/*.gz
+            !/src/objects/**/*.png
+            !/src/objects/**/*.zst
+            !/src/objects/**/*.zip
+            !/src/objects/**/*.ktx2
+            !/src/objects/**/*.webp
+            !/src/objects/**/*.tif
+            !/src/objects/**/*.jpg
+            !/src/objects/**/*.pdf
+            !/src/objects/**/*.cub
+            !/src/objects/**/*.webm
+            !/src/objects/**/*.nc
+            !/src/objects/**/*.obj
+            !/src/objects/**/*.shp
+            !/src/objects/**/*.gxct
+            !/src/objects/**/*.tpc
+            !/src/objects/**/*.qub
+            !/src/objects/**/*.wrl
+            !/src/objects/**/*.cmod
+            !/src/objects/**/*.fit
+            !/src/objects/**/*.fits
+            !/src/objects/**/*.bc
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -148,6 +178,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -226,6 +260,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -305,6 +343,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
@@ -419,6 +461,10 @@ jobs:
       contents: read
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          filter: blob:none
+          sparse-checkout-cone-mode: false
+          sparse-checkout: *code-and-text
       - uses: pnpm/action-setup@f40ffcd9367d9f12939873eb1018b921a783ffaa # v4
       - uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
