@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import type { AddressInfo } from 'node:net';
-import { inventoriedObjectIds } from './runtime-assets.mts';
+import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
 import { compareObjectPackageBacklog, loadObjectPackageBacklog } from '../contract/object-package-backlog.mts';
 import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
@@ -21,7 +21,7 @@ const json = (path: string, value: unknown): Promise<void> => writeFile(path, JS
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['tools/objects/dist', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
+  for (const dir of ['tools/assets', 'tools/sources', 'tools/objects/dist', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await copyFile(resolve(project, 'tools/assets/restore-source-inputs.mts'), resolve(root, 'tools/assets/restore-source-inputs.mts'));
@@ -57,19 +57,19 @@ async function runScan(): Promise<Scan> {
     cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   }).split('\0'));
   const missingSources: string[] = [], missingBacklog: string[] = [];
-  for (const id of inventoriedObjectIds([])) {
-    // prepared/runtime.json is no longer git-tracked for any body; a clean checkout restores it from R2 via
-    // the object's inventory.json inventory instead. Every other required file keeps the original
-    // "must be tracked" proof.
-    const preparedRuntimePath = relative(project, resolve(project, 'src/objects', id, 'prepared/runtime.json'));
+  for (const id of SCENE_OBJECTS.map(object => object.id)) {
+    // Nothing under prepared/ is git-tracked: a clean checkout restores the baked files from R2 via the object's
+    // inventory.json. Every other required file keeps the original "must be tracked" proof.
+    const preparedPrefix = `src/objects/${id}/prepared/`;
     const paths = await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
       accessFile: async path => {
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
         const relativePath = relative(project, path);
-        if (relativePath === preparedRuntimePath) {
-          const manifest = requireInventory(id, JSON.parse(
+        if (relativePath.startsWith(preparedPrefix)) {
+          const filename = relativePath.slice(preparedPrefix.length);
+          const inventory = requireInventory(id, JSON.parse(
             await readFile(resolve(project, 'src/objects', id, 'inventory.json'), 'utf8')));
-          assert.ok(manifest.assets.some(asset => asset.filename === 'runtime.json'), path);
+          assert.ok(inventory.assets.some(asset => asset.location === 'prepared' && asset.filename === filename), path);
           return;
         }
         assert.ok(tracked.has(relativePath), path);

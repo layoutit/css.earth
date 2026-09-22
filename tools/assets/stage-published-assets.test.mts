@@ -14,7 +14,7 @@ const inventoryPath = `${base}/inventory.json`;
 const assetPath = `${base}/prepared/levels/data.json`;
 const bytes = Buffer.from('{"prepared":true}');
 const manifest = { schema: 'cssearth-inventory@1',
-  assets: [{ filename: 'levels/data.json', bytes: bytes.length, sha256: sha256(bytes) }] };
+  assets: [{ location: 'prepared', filename: 'levels/data.json', bytes: bytes.length, sha256: sha256(bytes) }] };
 
 async function put(root: string, path: string, content: string | Buffer): Promise<void> {
   await mkdir(dirname(resolve(root, path)), { recursive: true });
@@ -43,12 +43,11 @@ test('stages pinned nested bytes and inventories without importing arbitrary art
   assert.equal(await readFile(resolve(options.root, inventoryPath), 'utf8'), JSON.stringify(manifest));
   assert.equal(await readFile(resolve(options.root, 'tools/assets/publish-runtime-assets.mts'), 'utf8'), 'trusted publisher');
   await assert.rejects(readFile(resolve(options.root, 'package.json')), { code: 'ENOENT' });
-  await assert.rejects(readFile(resolve(options.root, `${base}/inventory.json`)), { code: 'ENOENT' });
 });
 
 test('stages runtime public assets as well as prepared bytes', async t => {
   const options = await fixture(t);
-  const runtime = { schema: 'cssearth-inventory@1', assets: [{ ...manifest.assets[0], filename: 'surface.webp' }] };
+  const runtime = { schema: 'cssearth-inventory@1', assets: [manifest.assets[0], { ...manifest.assets[0], location: 'public', filename: 'surface.webp' }] };
   for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, `${base}/inventory.json`, JSON.stringify(runtime));
   await put(options.artifactRoot, 'public/scenes/fixture/surface.webp', bytes);
   assert.equal(await stagePublishedAssets(options), 2);
@@ -82,7 +81,7 @@ test('rejects traversal in committed inventories and object ids', async t => {
   const options = await fixture(t);
   for (const root of [options.artifactRoot, options.sourceRoot]) await put(root, inventoryPath,
     JSON.stringify({ ...manifest, assets: [{ ...manifest.assets[0], filename: '../../../../tools/assets/publish-runtime-assets.mts' }] }));
-  await assert.rejects(stagePublishedAssets(options), /invalid runtime asset entry/);
+  await assert.rejects(stagePublishedAssets(options), /invalid inventory entry/);
   await assert.rejects(stagePublishedAssets({ ...options, objectId: '../other' }), /Unsafe object id/);
 });
 

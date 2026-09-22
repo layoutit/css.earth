@@ -34,6 +34,16 @@ export function inventoriedObjectIds(args: readonly string[], root = resolve(imp
   return selected;
 }
 
+/** `--object=<id>` names any object package (its sources may precede a first bake); the default is every inventoried object. */
+export function selectedObjectIds(args: readonly string[], root = resolve(import.meta.dirname, "../..")): string[] {
+  const ids = parseObjectArgs(args);
+  if (!ids.length) return inventoriedObjectIds([], root);
+  if (new Set(ids).size !== ids.length || ids.some(id => !/^[a-z][a-z0-9-]*$/u.test(id) || !existsSync(resolve(root, `src/objects/${id}/object.json`)))) {
+    throw new Error("Choose an existing object package with --object=<id>.");
+  }
+  return ids;
+}
+
 /** Where an inventoried file lives in this checkout. */
 export function assetRoot(root: string, id: string, location: AssetLocation): string {
   return location === 'public' ? resolve(root, `public/scenes/${id}`) : resolve(root, `src/objects/${id}/prepared`);

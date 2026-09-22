@@ -68,7 +68,12 @@ test('the field bake replaces stale generated files and restores missing receipt
   const result=spawnSync(process.execPath,[fileURLToPath(new URL('./prepare-points.mts',import.meta.url))],{cwd:root,encoding:'utf8'});
   assert.equal(result.status,0,result.stderr);
   assert.match(result.stdout,/POINTS PREPARED: 1800/);
-  for(const path of ['prepared/points.json','prepared/cloud.webp','inventory.json','object.json']) {
+  for(const path of ['prepared/points.json','prepared/cloud.webp','object.json']) {
     assert.deepEqual(await readFile(resolve(root,base,path)),await readFile(resolve(base,path)));
   }
+  // The bake inventories its two outputs; the checkout's inventory also carries the record and presentation.
+  const baked=JSON.parse(await readFile(resolve(root,base,'inventory.json'),'utf8')).assets;
+  const committed=JSON.parse(await readFile(resolve(base,'inventory.json'),'utf8')).assets;
+  assert.deepEqual(baked.map((a:{filename:string})=>a.filename),['cloud.webp','points.json']);
+  for(const asset of baked) assert.deepEqual(committed.find((a:{location:string;filename:string})=>a.location===asset.location&&a.filename===asset.filename),asset);
 });
