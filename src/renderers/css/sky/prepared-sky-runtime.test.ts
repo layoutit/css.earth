@@ -198,7 +198,11 @@ test.each([
   expect(volumeRoot.style.background).toBe('#000');
   expect(volumeRoot.style.transformStyle).toBe('flat');
   expect(volumeImage.style.transformStyle).toBe('flat');
-  const axes = volumeImage.children.filter(node => node.className === 'css-volume-projection');
+  // The galaxy is mounted through its level of detail: the slice stack sits under the detail container, beside the
+  // billboard views that present it from outside the galaxy.
+  const detailHost = volumeImage.children.find(node => node.className === 'css-volume-detail')!;
+  expect(volumeImage.children.some(node => node.className === 'css-volume-impostors')).toBe(true);
+  const axes = detailHost.children.filter(node => node.className === 'css-volume-projection');
   expect(axes).toHaveLength(3);
   for (const axis of axes) {
     expect(axis.children[0]!.style.opacity).toBeUndefined();

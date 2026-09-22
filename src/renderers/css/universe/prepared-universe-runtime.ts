@@ -1,7 +1,7 @@
 import type { LabelScreenRect } from '../labels/screen-label-layout.js';
 import { mountBackgroundPoints } from './background-points.js';
 import { createOpacityClock } from '../stars/opacity-clock.js';
-import { mountPreparedCssVolume } from '../volume/prepared-volume-runtime.js';
+import { mountPreparedVolumeLod } from '../volume/prepared-volume-lod.js';
 import { validatePreparedCssVolume } from '../volume/validation.js';
 import type { PreparedCssVolume, VolumeCameraPublication } from '../volume/types.js';
 import type { SpriteWithUrl } from '../solar-system/heliocentric-sprites.js';
@@ -198,7 +198,7 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       volumeHost.appendChild(volumeImage);
       const volumeEnd = document.createElement('span'); volumeEnd.hidden = true; volumeImage.appendChild(volumeEnd);
       const additionalPoints = mountBackgroundPoints(root, end, backgroundPointManifest, backgroundPointCloud);
-      let volumeLayer: ReturnType<typeof mountPreparedCssVolume> | null = null;
+      let volumeLayer: ReturnType<typeof mountPreparedVolumeLod> | null = null;
       let skyLayer: ReturnType<typeof mountPreparedCssSky> | null = null;
       let stellarPoints: ReturnType<typeof mountStellarPoints> = null;
       let stellarPointsEnabled = true;
@@ -417,7 +417,11 @@ export function createPreparedUniverse({ context, volume, pointAppearance, resol
       try {
         if (sky && payload.sky) skyLayer = mountPreparedCssSky({ host: root, before: volumeHost, payload: payload.sky, resources: payload.resources, resolveResource });
         stellarPoints = mountStellarPoints({ host: root, before: volumeHost, field: pointAppearance });
-        volumeLayer = mountPreparedCssVolume({ host: volumeImage, before: volumeEnd, payload, resolveResource });
+        // The galaxy carries one flat image per viewing direction. While it is small on screen those images are the
+        // presentation and its slice planes leave rendering, so the compositor stops committing 1,368 of them from
+        // outside the galaxy. They stay in the document, as every other retained scene node does. The completed cloud
+        // is already graded by this host's opacity.
+        volumeLayer = mountPreparedVolumeLod({ host: volumeImage, before: volumeEnd, payload, resolveResource }, () => 1);
         for (const [index, bank] of declaredImageLayers.entries()) if (initialImageLayers.has(bank.id)) void ensureImageLayerLoaded(index);
         // Image and volume lens banks mount lazily; far layers have no payload or DOM until admitted.
         let galaxyPrefetched = false;
