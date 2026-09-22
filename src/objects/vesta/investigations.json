@@ -180,14 +180,14 @@
       "status": "included",
       "finding": "The only Dawn product that photographs Vesta's north pole: HAMO-2 (June to July 2012) imaged the northern hemisphere under low northern-spring sun after LAMO and the color HAMO mosaics had left it dark. Measured on the released PNG, the LAMO clear mosaic covers 84 % of the map and none of the band above 75° N; the HAMO-1-2 clear mosaic covers every band, with the 90–75° N band dim (mean 7 of 255) but photographed. It is added as the HAMO photography lens and as the fallback base of the natural-color and LAMO lenses.",
       "evidence": [
-        "src/objects/vesta/README.md",
+        "https://github.com/layoutit/css.earth/blob/b947d53638c5b4dc36e2b390f1941962e843d536/src/objects/vesta/README.md",
         "https://dawngis.dlr.de/data/Vesta/mosaic_vesta.php",
-        "src/objects/vesta/source/reference/hamo-clear.lbl"
+        "https://github.com/layoutit/css.earth/blob/b947d53638c5b4dc36e2b390f1941962e843d536/src/objects/vesta/source/reference/hamo-clear.lbl"
       ],
       "checked": [
         {
           "date": "2026-09-22",
-          "commit": "0000000000000000000000000000000000000000"
+          "commit": "b947d53638c5b4dc36e2b390f1941962e843d536"
         }
       ]
     }
