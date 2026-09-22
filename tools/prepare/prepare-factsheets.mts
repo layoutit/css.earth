@@ -13,6 +13,7 @@ import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { orderFacts } from '../../site/fact-order.mts';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
+import { refreshPreparedInventory } from './prepare-object-json.mts';
 
 
 /** Re-publish authored facts without rebaking imagery or changing scene state. Reader text has its own publisher, prepare-text. */
@@ -32,11 +33,12 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
   const ordered = orderFacts(facts, moreFacts);
   const content = await read('prepared/content.json');
   assert.equal(content.objectId, descriptor.id);
+  let written = false;
   const publish = async (path:string, value:unknown) => {
     if (check) assert.deepEqual(await read(path), value, `${descriptor.id}: stale ${path}`);
     else {
       const original = await readFile(resolve(objectDirectory, path), 'utf8');
-      await writePreparedText(resolve(objectDirectory, path), `${JSON.stringify(value, null, original.startsWith('{\n') ? 2 : 0)}\n`);
+      if (await writePreparedText(resolve(objectDirectory, path), `${JSON.stringify(value, null, original.startsWith('{\n') ? 2 : 0)}\n`)) written = true;
     }
   };
   await publish('prepared/content.json', { ...content, facts, moreFacts,
@@ -52,6 +54,8 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
         sources: requireArray(receipt.sources).map(value => {const source=requireRecord(value);return source.id === 'content' && source.sha256 !== undefined ? { ...source, sha256: sha256(bytes) } : source;}) });
     } catch (error) { if (!hasErrorCode(error,'ENOENT')) throw error; }
   }
+  // Nothing under prepared/ is tracked: a changed fact panel is recorded by the inventory and still has to be published.
+  if (written) await refreshPreparedInventory(descriptor.id, resolve(objectDirectory, '../../..'));
   return { id: descriptor.id, count: ordered.length, preview: ordered.slice(0, 4).map(fact => fact.id) };
 }
 

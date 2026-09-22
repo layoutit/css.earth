@@ -85,6 +85,16 @@
               "id": "enhanced",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "ultraviolet",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "voyager-color",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -152,6 +162,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "75109bb9a29443d8bba5a89d3ac5ab5ef28db87737386a1afb5b97faaeac06ee"
+    "sha256": "28610345fb1411a76e0772d1be9b99f43f6eba4ba7549d388bd22e00f7883c5d"
   }
 }

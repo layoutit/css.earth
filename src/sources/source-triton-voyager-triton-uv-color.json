@@ -1,0 +1,35 @@
+{
+  "id": "source-triton-voyager-triton-uv-color",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Triton · voyager triton uv color",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/triton/source/manifest.json",
+      "locator": "/inputs/18"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "Paul Schenk/LPI/USRA; NASA/JPL Voyager 2",
+      "scope": "The voyager triton uv color input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public LPI scientific data release; retain author and mission credit. No explicit license asserted by the release.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

@@ -15,6 +15,7 @@ import { sourceResolver } from '../../src/platform/source-catalog.mts';
 import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
 import { hasErrorCode, requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 import { writePreparedText } from '../prepared/write-prepared-text.mts';
+import { refreshPreparedInventory } from './prepare-object-json.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const readJson = async (path: string): Promise<unknown> => JSON.parse(await readFile(path, 'utf8'));
@@ -87,13 +88,15 @@ export async function prepareText({ ids = [] as readonly string[], check = false
   }
   const selected = bodies.filter(body => !ids.length || ids.includes(body.id));
   const planned = await Promise.all(selected.map(async body => outputs(body, requireRecord(await readJson(resolve(body.directory, 'object.json'))))));
-  const stale: string[] = [];
-  for (const [path, text] of planned.flat()) {
+  const stale: string[] = [], rewritten = new Set<string>();
+  for (const [body, outputs] of selected.map((body, index) => [body, planned[index]!] as const)) for (const [path, text] of outputs) {
     const current = await readFile(path, 'utf8').catch((error: unknown) => { if (hasErrorCode(error, 'ENOENT')) return undefined; throw error; });
     if (current === text) continue;
     if (check) stale.push(path.slice(projectRoot.length + 1));
-    else await writePreparedText(path, text);
+    else { await writePreparedText(path, text); if (path.includes('/prepared/')) rewritten.add(body.id); }
   }
+  // Nothing under prepared/ is tracked: a rewritten text.json is recorded by the body's inventory and still has to be published.
+  for (const id of rewritten) await refreshPreparedInventory(id, projectRoot);
   if (stale.length) throw new Error(`Stale reader text; run pnpm prepare:text:\n  ${stale.join('\n  ')}`);
   return { objects: selected.length, warnings, composition };
 }

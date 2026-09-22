@@ -1,5 +1,5 @@
 import {requireRecord} from '../../sources/source-values.mts';
-import {shape,number,text,optional,boolean,array,dictionary,parseSciencePalette} from './source-records.mts';
+import {shape,number,text,optional,boolean,array,dictionary,choice,parseSciencePalette} from './source-records.mts';
 import {parseNativePhotographicSampling} from './native-photograph.mts';
 
 const texture = {textureScale:optional(number),monochromeBase:optional(text),
@@ -18,7 +18,9 @@ export function parseSolidScience(value: unknown) {
     qualityMasks:optional(array(sourcePath)),additionalGrids:optional(array(sourcePath))})(value));
 }
 export const parseColorPhotometry = shape({consumer:text,profile:shape({radiusKm:number,maximumIncidenceDegrees:number,
-  maximumEmissionDegrees:number,referenceIncidenceDegrees:number,referenceEmissionDegrees:number,observationWeights:dictionary(number)}),
+  maximumEmissionDegrees:number,referenceIncidenceDegrees:number,referenceEmissionDegrees:number,observationWeights:dictionary(number),
+  withheld:optional(choice('monochrome','next-observation')),
+  bandLevels:optional(shape({reference:text,cellDegrees:number,minimumOverlapPixels:number}))}),
   vectors:shape({sun:text,observer:text}),levels:shape({boundaryPixels:number,luminance:array(number)})});
 export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
   geometry:optional(shape({radius:number,radiusKm:number,radialTerrain:optional(shape({path:text}))})),

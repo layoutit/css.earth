@@ -137,6 +137,34 @@
           "url": "https://www.lpi.usra.edu/icy_moons/neptune/triton/"
         },
         "notes": "Enhanced color: Photometrically corrected 2014 map in orange/green/blue. Northern black background was not illuminated by Voyager; original JPEG fill remains missing. Local source resolution varies."
+      },
+      {
+        "id": "ultraviolet",
+        "label": "Ultraviolet color",
+        "thumbnail": "triton-lens-ultraviolet.webp",
+        "surface": "triton-ultraviolet@2x.webp",
+        "poles": "triton-poles-ultraviolet@2x.webp",
+        "source": {
+          "id": "voyager-triton-uv-color",
+          "path": "../manifest.json",
+          "url": "https://repository.hou.usra.edu/items/bcb44bc8-5140-48eb-b561-12326d7bb6e7"
+        },
+        "falseColor": true,
+        "notes": "Ultraviolet color: Schenk et al. (2021) mosaic of Voyager 2 orange, blue and ultraviolet filters shown as red, green and blue. Brightness in ultraviolet shows up as blue. The north was not lit by Voyager and stays unavailable."
+      },
+      {
+        "id": "voyager-color",
+        "label": "Voyager color",
+        "thumbnail": "triton-lens-voyager-color.webp",
+        "surface": "triton-voyager-color@2x.webp",
+        "poles": "triton-poles-voyager-color@2x.webp",
+        "source": {
+          "id": "voyager-color-c1139313",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        },
+        "falseColor": true,
+        "notes": "Voyager color: Voyager 2 green, violet and ultraviolet frames as red, green and blue over the monochrome map. Near closest approach the frames are Bland et al. (2024) controlled images; the approach frames, 4 to 25 km per pixel, are placed here by fitting Triton's limb. Every frame set is scaled band by band onto the PDS Ring-Moon Systems Node calibration of the 4.7 km approach set where they overlap, and a surface the closest frames view too steeply takes the next approach set's color. The north was not lit and stays unavailable."
       }
     ]
   },

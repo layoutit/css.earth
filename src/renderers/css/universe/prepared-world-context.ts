@@ -721,8 +721,11 @@ export function mountPreparedWorldContext({ host, presentationHost = host, befor
   windowTarget.addEventListener('pointerdown', beginCameraInput, { capture: true });
   windowTarget.addEventListener('wheel', beginCameraInput, { capture: true, passive: true });
   let latest: { world: WorldCameraPose; viewport: WorldCameraViewport } | null = null;
+  // Without a worker publication, only a layer holding the full context can plan here. A summary-only layer waits for
+  // the next worker frame: after an interrupted flight the queue holds no current request, and planning the summary throws.
+  const planOnThread = plan.schema === 'cssearth-world-context@1';
   const refresh = () => {
-    if (latest && !requestPublication?.()) layer.publish(latest.world, latest.viewport);
+    if (latest && !requestPublication?.() && planOnThread) layer.publish(latest.world, latest.viewport);
   };
   const invalidateLabelSizes = () => { presentationRevision++; policyRevision++; for (const entry of bodies) entry.labelSize.width = 0; };
   const fonts = host.ownerDocument.fonts;
