@@ -143,8 +143,8 @@ export async function preparePhotoMaster(recipePath: string) {
     await writeFile(resolve(directory, 'prepared/volume.json'), bytes);
     await json(resolve(directory, 'object.json'), { schema: 'cssearth-object@1', id: bank.id,
       type: 'density-volume', properties: { volume: frame,
-        preparation: { source: 'source/master.json', sha256: await fileSha(resolve(sourceDirectory, 'master.json')) } },
-      prepared: { format: prepared.format, url: 'prepared/volume.json', sha256: sha(bytes) } });
+        preparation: { source: 'source/master.json' } },
+      prepared: { format: prepared.format, url: 'prepared/volume.json' } });
     console.log(`PHOTO_MASTER_PREPARED ${bank.id}: ${data.resources.length} leaves, ` +
       `${(data.resources.reduce((sum, resource) => sum + resource.bytes, 0) / 1e6).toFixed(2)} MB, ` +
       `${(data.resources.reduce((sum, resource) => sum + resource.width * resource.height * 4, 0) / 1e6).toFixed(1)} MB decoded`);

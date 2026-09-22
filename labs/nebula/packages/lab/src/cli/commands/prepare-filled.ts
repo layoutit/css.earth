@@ -144,7 +144,7 @@ for (const variant of selected) {
   await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@1', id: variant.id, type: 'density-volume',
     properties: { volume: outputFrame, preparation: { source: 'source/provenance.json',
       sha256: sha256(await readFile(resolve(variant.directory, 'source/provenance.json'))) } },
-    prepared: { format: prepared.format, url: 'prepared/volume.json', sha256: sha256(preparedBytes) } });
+    prepared: { format: prepared.format, url: 'prepared/volume.json' } });
   console.log(`FILLED_PREPARED ${variant.id} ${data.resources.length} images ${data.resources.reduce((s, r) => s + r.bytes, 0)} bytes`);
 }
 console.log('FILLED_EXPERIMENT_COMPLETE');

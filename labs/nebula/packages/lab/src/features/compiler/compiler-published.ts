@@ -9,7 +9,9 @@ interface Published { recipePath: string; result: Pin; inputs: Pin[] }
 function producerPath(path: string): boolean {
   return /^labs\/nebula\/(?:src\/.+\.[cm]?tsx?|packages\/(?:lab|volume-core|volume-bake|reconstruction)\/(?:src\/.+\.[cm]?tsx?|package\.json))$/.test(path) ||
     /^src\/(?:preparation|renderers|platform)\/.+\.[cm]?ts$/.test(path) ||
-    /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path);
+    // The flat names are pre-reorganization pins, kept because a recorded producer identity is history, not a path
+    // that still has to resolve; `tools/fits/` and `tools/sources/` are where those owners live now.
+    /^tools\/(?:(?:fits|fits-sky|source-values)\.mts|(?:fits|sources)\/.+\.[cm]?ts|(?:nebula\/application|objects)\/.+\.[cm]?ts)$/.test(path);
 }
 const record = (value: unknown): value is Record<string, unknown> => value !== null && typeof value === 'object' && !Array.isArray(value);
 function pin(value: unknown): Pin {

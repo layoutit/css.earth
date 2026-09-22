@@ -144,11 +144,11 @@ up through 256 steps across its declared range, finer than any legend stop and
 than the 8-bit channels. Lossless WebP pays for the noise between steps, so this
 trims those files: baked on 2026-09-22 against 1024 steps, Moon heat anomalies
 9.35 → 7.52 MB, rock abundance 9.02 → 7.87 MB, Titan interpolated 2.59 → 1.19 MB,
-and pixelmatch finds no differing pixel ([Moon heat anomalies](illustrations/palette-steps/moon-heat-anomalies-pixelmatch.png)).
+and pixelmatch finds no differing pixel ([Moon heat anomalies](images/moon-heat-anomalies-pixelmatch.png)).
 A lossy surface keeps 1024 steps. Its size does not depend on colour count, and a
 coarser ramp's flat one-level steps raised the quality-88 encoder's own error on
 Miranda's elevation from 41 to 66 at the worst texel although the raw pixels
-differed by at most 2 ([Miranda worst crop](illustrations/palette-steps/miranda-elevation-worst-crop.png)).
+differed by at most 2 ([Miranda worst crop](images/miranda-elevation-worst-crop.png)).
 Relief shading multiplies the looked-up colour afterwards.
 
 Validity comes from the selected product's mask, alpha or no-data rule. Numeric

@@ -578,7 +578,7 @@ function textureStyle(polygon:LayeredPolygon, index:number, seamEdges?:ComputeTe
     style,
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fittedGeometry.matrix,
-      polygon.polarCap
+      polygon.polarCap && polygon.textureImageSource.sourceRect
         ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fittedGeometry.leafWidth)
         : PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),
@@ -737,7 +737,7 @@ function preparedCanonicalTextureStyle(
       (backfaceVisible ? ";backface-visibility:visible" : ""),
     projectiveTextureLayer: prepareProjectiveTextureLayer(
       fitted.matrix,
-      polygon.polarCap
+      polygon.polarCap && polygon.textureImageSource.sourceRect
         ? polarCapRasterScale(PROJECTIVE_TEXTURE_RASTER_SCALE, polygon.textureImageSource.sourceRect.width, fitted.leafWidth)
         : PROJECTIVE_TEXTURE_RASTER_SCALE,
     ),

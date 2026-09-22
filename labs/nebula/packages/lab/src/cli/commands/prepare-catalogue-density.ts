@@ -111,8 +111,8 @@ export async function prepareCatalogueDensity(configPath: string) {
     const preparedBytes = Buffer.from(JSON.stringify(envelope) + '\n');
     await writeFile(resolve(prepared, 'volume.json'), preparedBytes);
     await json(resolve(output, 'object.json'), { schema: 'cssearth-object@1', id: config.id, type: 'density-volume',
-        properties: { volume: frame, preparation: { source: 'source/volume.json', sha256: sha256(recipeBytes) } },
-        prepared: { format: envelope.format, url: 'prepared/volume.json', sha256: sha256(preparedBytes) } });
+        properties: { volume: frame, preparation: { source: 'source/volume.json' } },
+        prepared: { format: envelope.format, url: 'prepared/volume.json' } });
     await json(resolve(output, 'receipt.json'), { ...provenance, prepared: { sha256: sha256(preparedBytes), leaves: data.resources.length,
             bytes: data.resources.reduce((sum, r) => sum + r.bytes, 0) } });
     console.log(`CATALOGUE_DENSITY_READY ${config.id}: ${count} tracers, ${data.resources.length} leaves`);

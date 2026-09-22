@@ -85,13 +85,13 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   await json(resolve(output,'prepared/volume-slices.json'),painted.slices);
   const data=compileCssVolume({id,frame,slices:painted.slices,recipe:{anchors:[]}}),prepared={schema:'cssearth-prepared-object@1',id,type:'density-volume',format:'cssearth-density-volume@1',data};
   const volumeSha=await json(resolve(output,'prepared/volume.json'),prepared);
-  const descriptor={schema:'cssearth-object@1',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json',sha256:provenanceSha}},prepared:{format:prepared.format,url:'prepared/volume.json',sha256:volumeSha}};
+  const descriptor={schema:'cssearth-object@1',id,type:'density-volume',properties:{volume:frame,preparation:{source:'source/provenance.json'}},prepared:{format:prepared.format,url:'prepared/volume.json'}};
   await json(resolve(output,'object.json'),descriptor);
   const referenceLeafIds=data.stacks.flatMap(s=>s.leaves.map(l=>l.id)),partLeafIds=referenceLeafIds.map(id=>'all-light::'+id);
   const inspection={...prepared,data:{...data,stacks:data.stacks.map(s=>({...s,leaves:s.leaves.flatMap(l=>[l,{...l,id:'all-light::'+l.id}])}))}};
   const inspectionSha=await json(resolve(output,'prepared/inspection.json'),inspection);
   const partsSha=await json(resolve(output,'source/cloud-parts.json'),{schema:'cssearth-cloud-parts@1',id,parts:[{id:'all-light',label:'Finite-region material experiment',kind:'extended',signalFraction:1,defaultEnabled:true,leafIds:partLeafIds}],referenceLeafIds,composition:'Unchanged density and alpha; authored finite XYZ material regions.'});
-  await json(resolve(output,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json',sha256:partsSha}},prepared:{format:prepared.format,url:'prepared/inspection.json',sha256:inspectionSha}});
+  await json(resolve(output,'inspection-object.json'),{...descriptor,properties:{...descriptor.properties,preparation:{source:'source/cloud-parts.json'}},prepared:{format:prepared.format,url:'prepared/inspection.json'}});
   const local=relative(root,output),oldLocal=relative(root,baseline);
   const subject=JSON.parse(JSON.stringify(oldResult.subject).replaceAll(oldLocal,local));subject.id=id;subject.name+=' · finite regions';subject.directory=local;subject.reconstructionImage={...subject.reconstructionImage,label:subject.reconstructionImage.label+' · finite regions',note:receipt.qualification.reason};
   await json(resolve(output,'result.json'),{...oldResult,resultId,subject});

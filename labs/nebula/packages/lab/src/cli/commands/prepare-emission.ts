@@ -103,8 +103,8 @@ const preparedBytes = Buffer.from(JSON.stringify({ schema: 'cssearth-prepared-ob
 await writeFile(resolve(preparedDirectory, 'volume.json'), preparedBytes);
 await writeFile(resolve(staging, 'experiment.json'), recipeBytes);
 const descriptor = { schema: 'cssearth-object@1', id: recipe.id, type: 'density-volume',
-  properties: { volume: frame, preparation: { source: 'experiment.json', sha256: hash(recipeBytes) } },
-  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json', sha256: hash(preparedBytes) } };
+  properties: { volume: frame, preparation: { source: 'experiment.json' } },
+  prepared: { format: 'cssearth-density-volume@1', url: 'prepared/volume.json' } };
 parseDensityVolumeObjectDescriptor(descriptor);
 await json(resolve(staging, 'object.json'), descriptor);
 for (let c = 0; c < 3; c++) {

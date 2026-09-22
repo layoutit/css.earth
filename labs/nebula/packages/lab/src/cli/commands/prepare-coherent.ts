@@ -128,7 +128,7 @@ for (const variant of selected) {
   await json(resolve(variant.directory, 'object.json'), { schema: 'cssearth-object@1', id: variant.id, type: 'density-volume',
     properties: { volume: frame, preparation: { source: 'source/experiment.json',
       sha256: digest(await readFile(resolve(sourceDirectory, 'experiment.json'))) } },
-    prepared: { format: prepared.format, url: 'prepared/volume.json', sha256: digest(bytes) } });
+    prepared: { format: prepared.format, url: 'prepared/volume.json' } });
   console.log(`COHERENT_PREPARED ${variant.id}: ${data.resources.length} images, ` +
     `${(data.resources.reduce((sum, item) => sum + item.bytes, 0) / 1e6).toFixed(2)} MB, ` +
     `${(data.resources.reduce((sum, item) => sum + item.width * item.height * 4, 0) / 1e6).toFixed(1)} MB decoded`);
