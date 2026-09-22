@@ -36,7 +36,7 @@ The [browser preview](evidence/photography/browser-preview.png) was captured on 
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -51,7 +51,7 @@ The PDS image header’s body-fixed convenience fields are unavailable, but that
 
 The lens has one LORRI view. It does not establish global coverage, a photometric correction, natural color, or scientific surface units. There is no color lens: New Horizons' only MVIC color scan of Nix resolves it across 24 × 17 pixels at 1.99 km per pixel, too coarse to register or to show its red region (see the [investigation ledger](investigations.json)). The published model is an image-constrained shape fit, not a global measured elevation raster.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 <details>
 <summary>Method and source details</summary>

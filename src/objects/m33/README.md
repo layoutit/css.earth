@@ -16,7 +16,7 @@ The [manifest](source/manifest.json) records byte identities, complete credits, 
 ## Evidence
 
 - The generated [runtime inventory](runtime-assets.json) contains 96 layer images, the bank, presentation, provenance and one dataset preview (100 assets). Its staging copy is identical; the preview stays at its existing public location.
-- The [prepared bank](prepared/image-layers.json) and [object descriptor](object.json) identify the accepted delivery; the [presentation](source/presentation.json) binds its input and recipe pins.
+- The prepared bank (`prepared/image-layers.json`) and [object descriptor](object.json) identify the accepted delivery; the [presentation](source/presentation.json) binds its input and recipe pins.
 - This metadata review examined revision `e4dfae5485b0aeeb88485531387366e886f43ef4` plus the accompanying manifest, presentation and documentation edits. It does not establish a cold replay, inspected browser result or independent scientific qualification.
 
 ## Known problems

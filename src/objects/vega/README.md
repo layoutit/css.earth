@@ -27,4 +27,4 @@ Run of 2026-09-21 (this version):
 
 Vega is seen almost pole-on, so its outline is nearly round and the round limb plate fits it. The paper warns that the pole's position angle is fragile: fits to different nights differ by up to 90°. Because the pole faces us, that angle only turns the faint equatorial belt around the edge.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

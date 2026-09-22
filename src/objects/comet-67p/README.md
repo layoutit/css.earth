@@ -49,7 +49,7 @@ separates those results from the comet checks. Earlier runs are retained below.
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -74,7 +74,7 @@ Neither set supplies IAU feature nomenclature.
 - The matched browser crops compare atlas versions; they do not establish pixel
   matching with native photographs.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -112,7 +112,7 @@ A connected triangle mesh preserves overhangs at the neck. The `radial-terrain` 
 
 meshoptimizer 1.2.0 reduces the released mesh to 1,000 closed, consistently wound triangles. It
 preserves both lobes, the neck and recessed surfaces without a radial resample.
-`prepared/terrain.json` records topology and the simplifier's estimated error; that estimate is
+[`evidence/terrain.json`](evidence/terrain.json) records topology and the simplifier's estimated error; that estimate is
 not a Hausdorff bound or the source measurement uncertainty.
 
 #### Shape model material
@@ -169,7 +169,7 @@ The fit uses 64 samples per triangle. An independent set of 63 disjoint samples
 produces gains within 0.8% of those values. [Calibration check](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/comets/evidence/67p-southern/calibration.json).
 These residual adjustments follow the disk and phase corrections below.
 
-The lossless source-index raster identified by `prepared/osiris-source-index.json`
+The lossless source-index raster identified by [`evidence/osiris-source-index.json`](evidence/osiris-source-index.json)
 binds every atlas texel to its exposure, with zero for no accepted observation.
 It is an inspection output, not a browser asset.
 

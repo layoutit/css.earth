@@ -22,7 +22,7 @@ All fifteen filtered cameras pass disjoint holdouts and checks against a separat
 
 [False color](evidence/filter-color/color-dpr1.png) · [DPR 2](evidence/filter-color/color-dpr2.png) · [Oblique with Shadows](evidence/filter-color/oblique-shadows-dpr1.png) · [Mobile](evidence/filter-color/mobile.png). These captures were refreshed on 2026-09-13 after integrating main’s shared observation pipeline at `0636327ba`. The record pins the tested recipe, runtime, display transfer and loaded image bytes, and compares retained geometry with `8cc1a2fae`.
 
-- The expanded False color map contains 2,271,627 valid samples out of 8,388,608 (27.1%), up from 907,090 (10.8%) with one pointing: 2.50× the mapped coverage. The per-triplet contributions are recorded in [prepared/surfaces.json](prepared/surfaces.json). These are equirectangular raster counts, not equal-area surface fractions.
+- The expanded False color map contains 2,271,627 valid samples out of 8,388,608 (27.1%), up from 907,090 (10.8%) with one pointing: 2.50× the mapped coverage. The per-triplet contributions are recorded in `prepared/surfaces.json`. These are equirectangular raster counts, not equal-area surface fractions.
 
 - The prepared 4096 × 2048 Monochrome map contains 6,836,406 valid output samples out of 8,388,608 (81.5% of equirectangular pixels). This is raster coverage, not an equal-area surface fraction.
 
@@ -31,7 +31,7 @@ All fifteen filtered cameras pass disjoint holdouts and checks against a separat
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -61,7 +61,7 @@ fits on screen; facing and overlap still control display.
 
 - No public release of the newer 2025 mosaic and DEM was located; see the [investigation ledger](investigations.json).
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Filter camera registration
 

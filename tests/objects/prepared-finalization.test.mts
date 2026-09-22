@@ -69,21 +69,22 @@ test('--keep-bindings finalizes an unedited copy of Mimas normally', async () =>
   } finally { await rm(stage, { recursive: true, force: true }); }
 });
 
-test('finalization writes a prepared-assets.json inventory covering only runtime.json and scene.json', async () => {
+test('finalization inventories every baked prepared file and leaves out what a checkout regenerates', async () => {
   const root = resolve(import.meta.dirname, '../..'), objectDirectory = resolve(root, 'src/objects/mimas');
   const runtime: unknown = JSON.parse(await readFile(resolve(objectDirectory, 'prepared/runtime.json'), 'utf8'));
   const stage = await mkdtemp(resolve(tmpdir(), 'cssearth-finalization-prepared-assets-'));
   try {
     const preparedDirectory = resolve(stage, 'prepared'); await mkdir(preparedDirectory);
     await copyFile(resolve(objectDirectory, 'prepared/scene.json'), resolve(preparedDirectory, 'scene.json'));
-    // A tracked contract file that must stay out of the inventory.
+    // provenance.json is regenerated on every checkout, so never inventoried; sky.json and the frame receipt are baked files and are.
     await copyFile(resolve(objectDirectory, 'prepared/provenance.json'), resolve(preparedDirectory, 'provenance.json'));
+    await copyFile(resolve(objectDirectory, 'prepared/sky.json'), resolve(preparedDirectory, 'sky.json'));
     await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
       descriptorPath: resolve(stage, 'object.json') });
     const manifest = requirePreparedAssetManifest('mimas', JSON.parse(await readFile(resolve(stage, 'prepared-assets.json'), 'utf8')));
     assert.equal(manifest.schema, 'cssmimas-prepared-assets@1');
     assert.equal(manifest.resourceRoot, 'prepared');
-    assert.deepEqual(manifest.assets.map(a => a.filename).sort(), ['runtime.json', 'scene.json']);
+    assert.deepEqual(manifest.assets.map(a => a.filename).sort(), ['runtime.json', 'scene.json', 'sky.json', 'world-navigation.json']);
     assert.equal(await verifyPreparedAssetClosure({ planetId: 'mimas', manifest, root: preparedDirectory, closure: false }), true);
     // Mutation check: corrupting an inventoried file must fail verification even though provenance.json (not
     // inventoried) is untouched, proving the writer records real hashes rather than trusting its file list.

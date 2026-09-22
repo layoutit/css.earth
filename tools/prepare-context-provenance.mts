@@ -21,7 +21,8 @@ export async function prepareContextProvenance({ root = process.cwd(), input = (
     const manifestBytes = await input(`${base}/source/manifest.json`), manifest = sourceObject(JSON.parse(manifestBytes.toString()));
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError(`Invalid context manifest: ${id}`);
     const sources = await manifestSources(manifest, root, input);
-    const receipt = sourceObject(JSON.parse((await input(`${base}/prepared/manifest.json`)).toString()));
+    // The receipt is the context's own output inventory, tracked beside object.json; runtime-assets.json is derived from it below.
+    const receipt = sourceObject(JSON.parse((await input(`${base}/prepared-receipt.json`)).toString()));
     const pins = sourceArray(receipt.outputs, sourceObject);
     const descriptorPath = `${base}/object.json`;
     const descriptorBytes = await readFile(resolve(root, descriptorPath)).catch((error: unknown) => { if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error; });

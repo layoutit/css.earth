@@ -36,4 +36,4 @@ CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here
 
 **The sky is the Sun's.** The star field behind CE Tauri is the shared cube baked from the Sun's position.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

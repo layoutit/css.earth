@@ -22,7 +22,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - This remains an approximate orbit preview, not precision tracking or a guaranteed error bound.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

@@ -42,4 +42,4 @@ Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43` prepar
 
 **The axis is measured only on the sky.** The Rossiter–McLaughlin effect gives the axis's angle on the sky; its tilt along the line of sight is assumed to equal the orbit's. The orbit's own orientation on the sky is a display convention (ascending node at position angle 0), so the axis shares it.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)

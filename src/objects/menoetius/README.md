@@ -20,7 +20,7 @@ Menoetius uses the JPL#82 system ephemeris and its own matching primary center. 
 
 Published full axes are halved to construct the ellipsoid. The 2024 orbital pole approximates a synchronous spin axis; current longitude is unknown. Discrepant negative occultation chords and ambiguous, unarchived tapes do not establish a crater.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="menoetius-source-model"></a>
 <a id="selected-geometry"></a>

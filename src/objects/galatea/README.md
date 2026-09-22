@@ -20,7 +20,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - The pole and rotation follow that pinned IAU/NAIF PCK; aligning the long ellipsoid axis toward Neptune is a synchronous model assumption, not a resolved cartographic control network.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

@@ -3,6 +3,41 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 97466,
+      "sha256": "9ce4fad280c4be63d385240549651e293b0308ce41266a74a5793a0555ea72ac"
+    },
+    {
+      "filename": "authored-preparation.json",
+      "bytes": 1546,
+      "sha256": "f2795c426a91f737503f5f0106719e28876bcbbd7965ab33a85b3a787ca2a3c6"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 5364,
+      "sha256": "85b130e4f429066ab55acd18d8e0e5e68ff98298eab8acd5f3f5c8fba267d81a"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 426,
+      "sha256": "7c40659cb631271cbacff5398c63e5374f078750da3e84a7ed4e2bbfbad487b6"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 874,
+      "sha256": "9427e80bfc6806394a0d463987b7d4c100b261357d2fc63fdbe6418991740ffd"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 82,
+      "sha256": "b209edc4f0c1a0cb82f05765652e7e3caec79da375793d88d7d7b3b56afb1238"
+    },
+    {
+      "filename": "minimaps/shape.webp",
+      "bytes": 422,
+      "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 443249,
       "sha256": "a9c496e0b70a113f52243ce3775c0e17f64bc093b492bdbc124ac15d668836c4"
@@ -11,6 +46,26 @@
       "filename": "scene.json",
       "bytes": 344990,
       "sha256": "03c7c2370af2d153b4243e01cf0fc3c899269c235207bc364751b1e0c0de50fd"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1061,
+      "sha256": "8013c916a54be525de1e0482f0117c1d4805ceefc954f65893d96e10cc96a9b8"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 662,
+      "sha256": "87830fc5ef6f8d86d1fc17f8b5535d03e7fefc70ac4cfd8bec367b7af79f6b98"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 1178,
+      "sha256": "6e1081ab2be15c8a57eecbc2ca9d894086cb5ccdd8ed14032062ecee0584943b"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1157,
+      "sha256": "7b3990a90f68e852de1b29a2aaf03affdd5e3a7b0d1edac91e261e4b3ba05a12"
     }
   ]
 }

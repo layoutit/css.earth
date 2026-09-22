@@ -20,7 +20,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 ## Evidence
 
-The 14 September 2026 **Monochrome** update inserts 301 equirectangular products and 31 products whose inspected STAC records list only polar GeoTIFFs. The shipped 8,192 × 4,096 geographic preparation, the one image density, receives controlled photographs over **15.224% of the sphere**, with 330 contributing images ([asset record](prepared/assets.json)). Outside those footprints, the published global mosaic stays visible. The update did not change the other datasets.
+The 14 September 2026 **Monochrome** update inserts 301 equirectangular products and 31 products whose inspected STAC records list only polar GeoTIFFs. The shipped 8,192 × 4,096 geographic preparation, the one image density, receives controlled photographs over **15.224% of the sphere**, with 330 contributing images (asset record (`prepared/assets.json`)). Outside those footprints, the published global mosaic stays visible. The update did not change the other datasets.
 
 [Before and after in the running app](evidence/galileo/browser.json) · [Surface and delivery checks](evidence/galileo/delivery.json) · [Two-product fresh restoration](evidence/galileo/restoration.json). All 332 original GeoTIFFs contribute to the source lineage; the asset record retains the selected area and fitted display gain for each image at each level.
 
@@ -107,7 +107,7 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. The three composition views are therefore withheld: they have no lens, surface recipe or dataset text, and no composition asset is published. The pinned sources, conversion records and evidence stay so the views can return once explicit reuse terms exist.
 
-[Inputs](source/manifest.json) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

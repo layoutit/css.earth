@@ -22,7 +22,7 @@ Nonconvex SAGE light-curve reconstruction with a published occultation volume-eq
 
 No registered global reflectance mosaic is supplied by these releases. The neutral gray marks missing imagery. Fine relief and albedo are unresolved.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="159-aemilia-source-and-interpretation"></a>
 <a id="shape-and-scale"></a>

@@ -71,7 +71,7 @@ pole atlas. The fixed direct-segment, bilinear-wrapped projection remains four
 projection and retained 722-leaf scene; it does not establish a new geographic
 registration or recover unobserved polar features.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="neptune-source-record"></a>
 <a id="planet-surface-and-observation-lenses"></a>

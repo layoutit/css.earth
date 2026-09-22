@@ -96,7 +96,7 @@ show mapped southern detail separately.
 ### Registration
 
 <!-- registration-report:begin -->
-Measured by the registration stage when the body was last prepared; the numbers are read from [`prepared/surfaces.json`](prepared/surfaces.json), not typed.
+Measured by the registration stage when the body was last prepared; the numbers are read from `prepared/surfaces.json`, not typed.
 
 | Lens | Frames | Scored | Limb RMS | Noise floor | Systematic | Reference | Decisive | Median offset | Relief | Refined | Seams | Verdict |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -121,7 +121,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
   340 m native resolution. The image-space registration approximates the small
   geometry changes during the TDI scan; it is not a new geometric backplane product.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation/terrestrial.json) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods
 

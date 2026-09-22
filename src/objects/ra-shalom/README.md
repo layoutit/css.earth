@@ -26,7 +26,7 @@ Prime-meridian display phase is arbitrary. Lighting does not claim an absolute c
 
 The sampled display-to-source maximum (29.433514 m) exceeds the 24 m authored transfer cap. Meshoptimizer’s estimate is not a distance bound. The cap is retained: out-of-range Elevation samples remain the shared missing-data grid. No threshold was enlarged to hide this limit.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · [Provenance](prepared/provenance.json) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
 
 <a id="ra-shalom-sources-and-preparation"></a>
 <a id="frame-and-appearance"></a>

@@ -37,7 +37,7 @@ It is model-derived radial relief, not an independent DEM, gravitational height 
 
 Published alternate pole solutions remain plausible: model 6122: λ=325°, β=36°, P=1049.2 h. The selected first archived solution is not asserted to be uniquely correct.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · [Provenance](prepared/provenance.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation](source/preparation/) · Provenance (`prepared/provenance.json`) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

@@ -3,6 +3,86 @@
   "resourceRoot": "prepared",
   "assets": [
     {
+      "filename": "assets.json",
+      "bytes": 93322,
+      "sha256": "32cb784ad0108951b3d601e8a158722c68416091a5861d5a3a14015f27b0ec77"
+    },
+    {
+      "filename": "authored-preparation.json",
+      "bytes": 1555,
+      "sha256": "97f6e777c9db80a9920817fea708173192fe56595cfbbf86c4261fc735324b8e"
+    },
+    {
+      "filename": "content.json",
+      "bytes": 6605,
+      "sha256": "6e44349776f82308377e9889649fbbcd1c92bc54881daf1e4ea83c91ab2eaaa5"
+    },
+    {
+      "filename": "controls.json",
+      "bytes": 13957,
+      "sha256": "ccfe90c54514641f5c5ab82c9745306288aeebf05272b9b071ee3c19ec9d5e5d"
+    },
+    {
+      "filename": "features.json",
+      "bytes": 845,
+      "sha256": "c2d2767e49e1a6e7d89f601a05aa230f1b065971b5b3bec9a56a8a7145cd4dcc"
+    },
+    {
+      "filename": "lenses.json",
+      "bytes": 18872,
+      "sha256": "e3e7e6445de3cdd89c59d9c303e1514436454817e84ff0e46223f9ba51fad0e6"
+    },
+    {
+      "filename": "minimaps.json",
+      "bytes": 675,
+      "sha256": "4844263349fc83425ed83bbd561c7658b9899601c77175f969a95e422f29b0d4"
+    },
+    {
+      "filename": "minimaps/crust.webp",
+      "bytes": 94746,
+      "sha256": "6d741960c81fe1c0fd0381da27bcdb486dd9a127d3b954005e72c3faffff5055"
+    },
+    {
+      "filename": "minimaps/geology.webp",
+      "bytes": 41424,
+      "sha256": "21b4b8557143ab8e038a83556fb97c091c35df438d830ab3d3a3a5e74f868693"
+    },
+    {
+      "filename": "minimaps/heat-anomalies.webp",
+      "bytes": 154546,
+      "sha256": "db6ed25b6070748497bce43d84c4a6df65e2e69c8aa2cfd15723d3004e7bd35a"
+    },
+    {
+      "filename": "minimaps/midnight-temperature.webp",
+      "bytes": 254338,
+      "sha256": "7f009e60659213000526f04116ee646705ed43e48512937abb1c702012d63dd1"
+    },
+    {
+      "filename": "minimaps/rock-abundance.webp",
+      "bytes": 148582,
+      "sha256": "b0484ff3194749147252e3a2702521979f8e54905daed63194c635bcfba22d03"
+    },
+    {
+      "filename": "minimaps/silicate-signature.webp",
+      "bytes": 249986,
+      "sha256": "c52ff3465734125abb22a2441ec5144afa2f396f5dfaf5cd817e9624bd9383dc"
+    },
+    {
+      "filename": "minimaps/surface.webp",
+      "bytes": 67242,
+      "sha256": "c948c0c7002351d20dcc44e71e27ad4481e78a1fa5cf9c123a328144f49d52f0"
+    },
+    {
+      "filename": "minimaps/topography.webp",
+      "bytes": 233096,
+      "sha256": "47175bf0085d6c831cad75382ddb2016aa885014d67e8432980ba66656cb560f"
+    },
+    {
+      "filename": "panel.json",
+      "bytes": 2659,
+      "sha256": "e558d186276240a5a13d79e3a186dc2286bf4614f8a62ac117668f7220eb62db"
+    },
+    {
       "filename": "runtime.json",
       "bytes": 464748,
       "sha256": "2a7f1f6b28d68fd9eb455df69f01a053fe6b07b10c2845800bf2dea679474056"
@@ -11,6 +91,31 @@
       "filename": "scene.json",
       "bytes": 335099,
       "sha256": "9725764641d10012fc0fa7ecec1b7406e460b2b077ed1080687e37115c00029c"
+    },
+    {
+      "filename": "sky.json",
+      "bytes": 1031,
+      "sha256": "440d9709ed5f90e5b1456c9ebe193430c958d8022b47742bf438901d128ffadf"
+    },
+    {
+      "filename": "sun.json",
+      "bytes": 620,
+      "sha256": "c3771b34efaa47d93cec8a42dbd859e3fe135f1b0e9ba3a698c9c95664e07f00"
+    },
+    {
+      "filename": "text.json",
+      "bytes": 2307,
+      "sha256": "9f26f45e5ae520816634d989213a30b44b1f896fdf7a0503d405e9739a6f7432"
+    },
+    {
+      "filename": "title.json",
+      "bytes": 2979,
+      "sha256": "bbf0fe1b96b49d27c020d61fd957d1f1886bfd422e4d568f710dad8b2aea28d5"
+    },
+    {
+      "filename": "world-navigation.json",
+      "bytes": 1231,
+      "sha256": "6be4cf399fda49fce7657c92f91f3cf48cdeb407a1489eb5015b64d4f0d3c1f7"
     }
   ]
 }
