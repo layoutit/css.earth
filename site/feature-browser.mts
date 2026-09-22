@@ -1,3 +1,4 @@
+import { nextFrame } from "./next-frame.mts";
 import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { requiredElement } from './browser-types.mts';
 import { presentFeatureResults } from './search-results-presentation.mts';
@@ -43,6 +44,9 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
     try {
       pending ??= load().catch(error => { pending = null; throw error; });
       index ??= await pending;
+      // Typing faster than the page draws queues one search per keystroke; each scans every name. Wait for the next
+      // frame, by which time every queued keystroke has arrived, and search only the newest text.
+      await nextFrame(documentTarget);
       if (destroyed || request !== revision) return;
       matches = matchFeatures(index, value, currentObjectId(), buttons.length);
       for (const [row, button] of buttons.entries()) {

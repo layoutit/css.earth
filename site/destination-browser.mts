@@ -1,3 +1,4 @@
+import { nextFrame } from "./next-frame.mts";
 import type { PreparedDestinationRuntime } from '../src/renderers/css/runtime/object-runtime-types.js';
 import { record, requiredElement } from './browser-types.mts';
 export interface DestinationPlace extends Readonly<Record<string, unknown>> { name: string; names: readonly string[]; context: string; searchContext: string; coverage: string; }
@@ -53,6 +54,9 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
     try {
       pending ??= provider.load(events.signal).then(destinationCatalog).catch(error => { pending = null; throw error; });
       catalog ??= await pending;
+      // Typing faster than the page draws queues one search per keystroke; each scans every name. Wait for the next
+      // frame, by which time every queued keystroke has arrived, and search only the newest text.
+      await nextFrame(documentTarget);
       if (destroyed || request !== revision) return;
       matches = searchDestinations(catalog.places, value, buttons.length);
       for (const [index, button] of buttons.entries()) {
