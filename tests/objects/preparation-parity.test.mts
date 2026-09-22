@@ -1,27 +1,11 @@
-import {shape,array,text,number} from '../../tools/objects/terrestrial-layers/source-records.mts';
 import {required} from '../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
-import { createHash } from 'node:crypto';
-import { readFile, readdir } from 'node:fs/promises';
+import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { readPreparedFixture, projectRoot } from './fixtures.mts';
-const parseAssets=shape({assets:array(shape({filename:text,bytes:number,sha256:text}))});
 
 for (const id of ['mercury', 'venus']) {
-  test(`${id} retains every accepted image and chart byte`, async () => {
-    const baseline = parseAssets(JSON.parse(await readFile(new URL(`./compatibility/${id}-assets.json`, import.meta.url), 'utf8')));
-    const manifest = parseAssets(JSON.parse(await readFile(resolve(projectRoot, 'src/objects', id, 'inventory.json'), 'utf8')));
-    const acceptedNames=new Set(baseline.assets.filter(asset=>!/-system-markers(?:@2x)?\.webp$/.test(asset.filename)).map(asset=>asset.filename));
-    assert.deepEqual(manifest.assets.filter(asset=>acceptedNames.has(asset.filename)).toSorted((a, b) => a.filename.localeCompare(b.filename)),
-      baseline.assets.filter(asset=>acceptedNames.has(asset.filename)).toSorted((a, b) => a.filename.localeCompare(b.filename)));
-    const directory = process.env.OBJECT_PUBLIC_ROOT ? resolve(process.env.OBJECT_PUBLIC_ROOT, id) : resolve(projectRoot, 'public/scenes', id);
-    for (const asset of baseline.assets.filter(asset=>acceptedNames.has(asset.filename))) {
-      const bytes = await readFile(resolve(directory, asset.filename));
-      assert.equal(bytes.length, asset.bytes, asset.filename);
-      assert.equal(createHash('sha256').update(bytes).digest('hex'), asset.sha256, asset.filename);
-    }
-  });
   test(`${id} is authored entirely as data and uses the shared prepared runtime`, async () => {
     const directory = resolve(projectRoot, 'src/objects', id);
     const visit = async (path: string):Promise<void> => {

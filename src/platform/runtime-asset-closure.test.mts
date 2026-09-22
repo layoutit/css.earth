@@ -99,10 +99,10 @@ test("a git-tracked file is refused, in a fixture and against the real checkout"
   const inventory = await inventoryPreparedAssets({ planetId: "fixture", objectDirectory, filenames: ["runtime.json"],
     gitTrackedPaths: async () => new Set([resolve(preparedRoot, "some-other-tracked-file.json")]) });
   assert.deepEqual(inventory?.assets.map(asset => asset.filename), ["runtime.json"]);
-  // The default lookup asks this checkout's git: a tracked README next to prepared/ must be refused.
+  // The default lookup asks this checkout's git: the tracked object.json next to prepared/ must be refused.
   const mimas = resolve(import.meta.dirname, "../../src/objects/mimas");
   const scratch = await mkdtemp(resolve(tmpdir(), "inventory-tracked-real-"));
   context.after(() => rm(scratch, { recursive: true, force: true }));
-  await assert.rejects(inventoryPreparedAssets({ planetId: "mimas", objectDirectory: scratch, preparedRoot: mimas, filenames: ["README.md"] }), /git-tracked.*README\.md/);
-  assert.equal(JSON.stringify(await readFile(resolve(mimas, "..", "mimas", "inventory.json"), "utf8")).length > 0, true);
+  await assert.rejects(inventoryPreparedAssets({ planetId: "mimas", objectDirectory: scratch, preparedRoot: mimas, filenames: ["object.json"] }), /git-tracked.*object\.json/);
+  assert.equal(JSON.stringify(await readFile(resolve(mimas, "inventory.json"), "utf8")).length > 0, true);
 });

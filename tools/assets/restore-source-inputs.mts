@@ -82,7 +82,7 @@ async function restoreRepositoryVolumeInputs(id: string, sourceRoot: string): Pr
 // Repository-volume restoration runs before the generated site catalogue exists in the nebula CI lane.
 // Keep the body registry lazy: that mode discovers its packages directly from src/objects instead.
 const ids = repositoryVolumeMode ? await repositoryVolumeObjectIds() :
-  (await import('./runtime-assets.mts')).inventoriedObjectIds(argumentsList);
+  (await import('./runtime-assets.mts')).selectedObjectIds(argumentsList);
 for (const id of ids) {
   const volumeSource = resolve(projectRoot, 'src/objects', id, 'source');
   if (repositoryVolumeMode) {

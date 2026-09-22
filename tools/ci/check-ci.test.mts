@@ -73,7 +73,7 @@ test('the deploy consumes installed assets, rebuilds only catalogues and rejects
  assert.doesNotMatch(packageFile.scripts['build:deploy']??'',/pnpm prepare:galaxy-field:data/);
  assert.match(packageFile.scripts['build:deploy']??'',/node tools\/prepare\/prepare-facilities\.mts --catalog-only/);
  assert.match(packageFile.scripts['setup:assets']??'',/pnpm setup:asset-data/);
- assert.match(packageFile.scripts['setup:asset-data']??'',/node tools\/assets\/setup-volume-metadata\.mts/);
+ assert.equal(packageFile.scripts['setup:asset-data'],'node tools/assets/setup.mts');
  assert.doesNotMatch(packageFile.scripts['build:deploy']??'',/prepare:(?:facilities|provenance|nebulae)(?:\s|$)/);
 });
 test('nebula application discovery runs new test filenames in place and propagates failures',async t=>{

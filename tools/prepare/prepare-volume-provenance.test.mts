@@ -168,7 +168,6 @@ test('image-layer deliveries retain authored documents and every layer in matchi
       assert.ok(rootInventory, 'the inventory is published once, at the body root');
       assert.ok(!entry.outputs.some(output => output.path.endsWith('prepared/inventory.json')));
       const inventory = sourceObject(JSON.parse(String(rootInventory.text)));
-      assert.equal(inventory.resourceRoot, 'prepared');
       assert.ok(Array.isArray(inventory.assets));
       assert.equal(inventory.assets.length, bank.resources.length + 4);
       assert.equal(inventory.assets.filter(raw => sourceObject(raw).location === 'public').length, 1);

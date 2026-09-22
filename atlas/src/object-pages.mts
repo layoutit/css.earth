@@ -60,7 +60,7 @@ function articleData(object: ObjectRecord, discovery: unknown) {
   const minimaps = readJson(resolve(directory, 'prepared/minimaps.json'));
   const ledger = readJson(resolve(directory, 'investigations.json'));
   const manifest = readJson(resolve(directory, 'source/manifest.json'));
-  const runtime = readJson(resolve(directory, 'runtime-assets.json'));
+  const runtime = readJson(resolve(directory, 'inventory.json'));
   const facts = (isRecord(content) ? [...list(content.facts), ...list(content.moreFacts)] : []).filter(isRecord)
     .flatMap(fact => { const label = text(fact.label), value = text(fact.value); return label && value ? [{ label, value }] : []; });
   const parsedDiscovery = discovery === undefined ? null : parseObjectDiscovery(discovery);
@@ -78,7 +78,7 @@ function articleData(object: ObjectRecord, discovery: unknown) {
       openQuestions: list(isRecord(ledger) ? ledger.entries : null).filter(entry => isRecord(entry) && entry.status === 'unresolved').length,
       sourceFiles: sources.length,
       sourceSize: formatBytes(sources.reduce((sum, input) => sum + (typeof input.expectedBytes === 'number' ? input.expectedBytes : 0), 0)),
-      runtimeSize: formatBytes(list(isRecord(runtime) ? runtime.assets : null).filter(isRecord)
+      runtimeSize: formatBytes(list(isRecord(runtime) ? runtime.assets : null).filter(isRecord).filter(asset => asset.location === 'public')
         .reduce((sum, asset) => sum + (typeof asset.bytes === 'number' ? asset.bytes : 0), 0)),
       appUrl: object.catalogued ? `${SITE_ORIGIN}/${object.id}/` : undefined,
       // The viewer is the app's own scene for this object, shown without its shell.

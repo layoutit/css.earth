@@ -36,7 +36,7 @@ test("binds the exact Sun source and runtime closures", async () => {
   const runtime = JSON.parse(await readFile(new URL("../../../../src/objects/sun/inventory.json", import.meta.url), "utf8"));
   assert.equal(validateInventory("sun", runtime), true);
   // 4 lenses x (surface, poles, corona, limb) at the one prepared density + 4 thumbnails.
-  assert.equal(runtime.assets.length, 20);
+  assert.equal(runtime.assets.filter((asset: { location: string }) => asset.location === "public").length, 20);
 });
 
 test("Sun's actual import closure has only shared runtime owners", async () => {
