@@ -18,7 +18,7 @@ export function prepareDirectionalSun({
 }: DirectionalSunPreparationOptions = {}): PreparedDirectionalSunPlan {
   validateDirectionalSunPresentationStandard(presentation);
   if (planMetadata === null || typeof planMetadata !== "object") {
-    throw new TypeError("Planet directional Sun preparation is invalid.");
+    throw new TypeError("Directional Sun preparation is invalid.");
   }
   return validateDirectionalSunPlan(Object.freeze({
     schema: PREPARED_DIRECTIONAL_SUN_SCHEMA,

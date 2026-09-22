@@ -72,15 +72,15 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
   const value = input as SourceManifest;
   if (!value || typeof value !== "object" || isArray(value) ||
       value.schema !== `css${objectId}-authoritative-sources@2`) {
-    throw new TypeError(`Planet ${objectId} source manifest is incompatible.`);
+    throw new TypeError(`Object ${objectId} source manifest is incompatible.`);
   }
   for (const collection of COLLECTIONS) {
     if (!isArray(value[collection])) {
-      throw new TypeError(`Planet ${objectId} source manifest ${collection} is missing.`);
+      throw new TypeError(`Object ${objectId} source manifest ${collection} is missing.`);
     }
   }
   if (value.inputs.length === 0) {
-    throw new TypeError(`Planet ${objectId} source manifest inputs are empty.`);
+    throw new TypeError(`Object ${objectId} source manifest inputs are empty.`);
   }
 
   const ids = new Set<string>();
@@ -97,7 +97,7 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
       "redistribution",
     ] as const) {
       if (!nonEmpty(input[field])) {
-        throw new TypeError(`Planet ${objectId} source ${input.path} has no ${field}.`);
+        throw new TypeError(`Object ${objectId} source ${input.path} has no ${field}.`);
       }
     }
     if (input.licenseEvidence !== undefined &&
@@ -105,17 +105,17 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
          new Set(input.licenseEvidence).size !== input.licenseEvidence.length ||
          input.licenseEvidence.some((evidence) => !nonEmpty(evidence)))) {
       throw new TypeError(
-        `Planet ${objectId} source ${input.path} has invalid license evidence.`,
+        `Object ${objectId} source ${input.path} has invalid license evidence.`,
       );
     }
     if (ids.has(input.id)) {
-      throw new TypeError(`Planet ${objectId} repeats source id ${input.id}.`);
+      throw new TypeError(`Object ${objectId} repeats source id ${input.id}.`);
     }
     ids.add(input.id);
     if (!isArray(input.consumers) || input.consumers.length === 0 ||
         new Set(input.consumers).size !== input.consumers.length ||
         input.consumers.some((consumer) => !nonEmpty(consumer))) {
-      throw new TypeError(`Planet ${objectId} source ${input.path} has invalid consumers.`);
+      throw new TypeError(`Object ${objectId} source ${input.path} has invalid consumers.`);
     }
   }
 
@@ -124,7 +124,7 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
     validateEntryBase(objectId, generated, "generated intermediate", paths);
     if (!nonEmpty(generated.generator)) {
       throw new TypeError(
-        `Planet ${objectId} generated intermediate ${generated.path} has no generator.`,
+        `Object ${objectId} generated intermediate ${generated.path} has no generator.`,
       );
     }
   }
@@ -133,7 +133,7 @@ export function validateSourceManifest(objectId: string, input: unknown): Readon
     if (document.sourceBinding) parseSourceBinding(document.sourceBinding);
     validateEntryBase(objectId, document, "document", paths);
     if (document.purpose !== undefined && !nonEmpty(document.purpose)) {
-      throw new TypeError(`Planet ${objectId} document ${document.path} has an empty purpose.`);
+      throw new TypeError(`Object ${objectId} document ${document.path} has an empty purpose.`);
     }
   }
   return Object.freeze(value);
@@ -192,12 +192,12 @@ async function validateSourceEntry({ entry, objectName, sourceRoot }: SourceVeri
 function validateEntryBase(objectId: string, entry: SourceEntry, kind: string, paths: Set<string>) {
   if (!entry || typeof entry !== "object" || isArray(entry) ||
       !safeRelativePath(entry.path)) {
-    throw new TypeError(`Planet ${objectId} has an invalid source ${kind}.`);
+    throw new TypeError(`Object ${objectId} has an invalid source ${kind}.`);
   }
   if (paths.has(entry.path)) {
-    throw new TypeError(`Planet ${objectId} repeats source path ${entry.path}.`);
+    throw new TypeError(`Object ${objectId} repeats source path ${entry.path}.`);
   }
-  assertSourceRange(entry, `Planet ${objectId} source ${kind} ${entry.path}`);
+  assertSourceRange(entry, `Object ${objectId} source ${kind} ${entry.path}`);
   paths.add(entry.path);
 }
 

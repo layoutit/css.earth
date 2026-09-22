@@ -304,8 +304,8 @@ export async function publishObjectInformation(
 async function publishCompleteBatch(snapshots: readonly SerializedSnapshot[], outputDirectory: string, operations: FileOperations) {
   const parent = dirname(outputDirectory);
   await operations.mkdir(parent, { recursive: true });
-  const staging = await operations.mkdtemp(resolve(parent, ".planets-staging-"));
-  const backup = resolve(parent, `.planets-backup-${randomUUID()}`);
+  const staging = await operations.mkdtemp(resolve(parent, ".object-information-staging-"));
+  const backup = resolve(parent, `.object-information-backup-${randomUUID()}`);
   let previousMoved = false;
   try {
     for (const snapshot of snapshots) {
@@ -328,7 +328,7 @@ async function publishCompleteBatch(snapshots: readonly SerializedSnapshot[], ou
           await operations.rename(backup, outputDirectory);
         } catch (restoreError) {
           throw new Error(
-            `Planet information publication failed and the previous batch could not be restored from ${backup}.`,
+            `Object information publication failed and the previous batch could not be restored from ${backup}.`,
             { cause: new AggregateError([error, restoreError]) },
           );
         }

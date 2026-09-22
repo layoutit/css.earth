@@ -29,7 +29,7 @@ export function createExplorerRailController(documentTarget: Document, windowTar
     searchCard.hidden = false;
     explore.ariaPressed = String(next === "explore");
     if (about) about.ariaPressed = String(next === "about");
-    aside.ariaLabel = next === "about" ? "About cssEarth" : "Planet information";
+    aside.ariaLabel = next === "about" ? "About cssEarth" : "Object information";
   };
   const show = (next: "explore" | "about") => {
     onShowPanel();

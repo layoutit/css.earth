@@ -45,36 +45,36 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   await assert.rejects(validateObjectData(object, { projectRoot }), /undeclared|Undeclared|closure/);
 });
 
-test("derives the complete owned file contract from planet identity", () => {
-  const planet = implemented[0];
-  const paths = objectPackagePaths(planet, "/project", true);
+test("derives the complete owned file contract from object identity", () => {
+  const first = implemented[0];
+  const paths = objectPackagePaths(first, "/project", true);
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${planet.id}/prepared/content.json`,
+    `/project/src/objects/${first.id}/prepared/content.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${planet.id}/prepared/runtime.json`,
+    `/project/src/objects/${first.id}/prepared/runtime.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
     `/project/site/pages/[id].astro`,
   ));
   assert.ok(!paths.requiredFiles.includes(
-    `/project/tests/objects/browser/${planet.id}/browser-profile.mts`,
+    `/project/tests/objects/browser/${first.id}/browser-profile.mts`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${planet.id}/object.json`,
+    `/project/src/objects/${first.id}/object.json`,
   ));
   assert.ok(paths.requiredFiles.includes(
-    `/project/src/objects/${planet.id}/source/manifest.json`,
+    `/project/src/objects/${first.id}/source/manifest.json`,
   ));
   assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/object-information/')));
   assert.ok(paths.requiredFiles.every(file => !/src\/objects\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
 });
 
 test("requires every registered object package file", async () => {
-  for (const planet of implemented) {
-    await validateObjectPackageFiles(planet);
-    const controls = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${planet.id}/prepared/controls.json`, import.meta.url), 'utf8')));
-    assert.ok(controls.child('lenses').rows('controls').length > 0, `${planet.id}: the displayed surface needs an identified dataset`);
+  for (const entry of implemented) {
+    await validateObjectPackageFiles(entry);
+    const controls = SourceEvidence.parse(JSON.parse(await readFile(new URL(`../../src/objects/${entry.id}/prepared/controls.json`, import.meta.url), 'utf8')));
+    assert.ok(controls.child('lenses').rows('controls').length > 0, `${entry.id}: the displayed surface needs an identified dataset`);
   }
   await assert.rejects(
     validateObjectPackageFiles(implemented[0], {
@@ -104,12 +104,12 @@ test("requires every registered object package file", async () => {
 });
 
 test("validates local editorial identity and provenance", () => {
-  const planet = required(implemented.find(object => object.id === "sun"));
-  const source = required(objectInformationSource(planet.id));
+  const sun = required(implemented.find(object => object.id === "sun"));
+  const source = required(objectInformationSource(sun.id));
   const valid = {
     schemaVersion: 1,
-    id: planet.id,
-    planet: planet.name,
+    id: sun.id,
+    planet: sun.name,
     title: source.expectedTitle,
     sourceId: source.sourceId,
     sourceUrl: source.sourceUrl,
@@ -124,13 +124,13 @@ test("validates local editorial identity and provenance", () => {
       paragraphs: ["Prepared paragraph."],
     })),
   };
-  assert.equal(validateObjectEditorial(planet, valid), true);
+  assert.equal(validateObjectEditorial(sun, valid), true);
   assert.throws(
-    () => validateObjectEditorial(planet, { ...valid, id: "wrong" }),
+    () => validateObjectEditorial(sun, { ...valid, id: "wrong" }),
     /editorial snapshot is incompatible/,
   );
   assert.throws(
-    () => validateObjectEditorial(planet, { ...valid, sourceUrl: "not a URL" }),
+    () => validateObjectEditorial(sun, { ...valid, sourceUrl: "not a URL" }),
     /editorial snapshot is incompatible/,
   );
 });

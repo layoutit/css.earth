@@ -25,7 +25,7 @@ export function objectInformationSource(id: string) {
   const entry = SOURCES_BY_ID.get(id);
   if (!entry) {
     throw new RangeError(
-      `Unknown planet ${JSON.stringify(id)}. Expected one of: ${
+      `Unknown object ${JSON.stringify(id)}. Expected one of: ${
         [...SOURCES_BY_ID.keys()].join(", ")}.`,
     );
   }
@@ -33,11 +33,11 @@ export function objectInformationSource(id: string) {
 }
 
 export function validateObjectInformationSnapshot(input: unknown): ObjectInformationSource {
-  const snapshot = requireRecord(input, "Planet information snapshot");
+  const snapshot = requireRecord(input, "Object information snapshot");
   if (!snapshot || typeof snapshot !== "object" || Array.isArray(snapshot)) {
-    throw new TypeError("Planet information snapshot must be an object.");
+    throw new TypeError("Object information snapshot must be an object.");
   }
-  const sourceEntry = objectInformationSource(requireString(snapshot.id, "Planet information identity"));
+  const sourceEntry = objectInformationSource(requireString(snapshot.id, "Object information identity"));
   if (snapshot.schemaVersion !== 1 || snapshot.planet !== sourceEntry.name ||
       snapshot.title !== sourceEntry.expectedTitle ||
       snapshot.sourceId !== sourceEntry.sourceId ||
@@ -50,7 +50,7 @@ export function validateObjectInformationSnapshot(input: unknown): ObjectInforma
       snapshot.introduction.length === 0 || !Array.isArray(snapshot.sections) ||
       snapshot.sections.length < 8) {
     throw new TypeError(
-      `Planet ${sourceEntry.id} editorial snapshot is incompatible.`,
+      `Object ${sourceEntry.id} editorial snapshot is incompatible.`,
     );
   }
   for (const value of requireArray(snapshot.sections)) {
@@ -60,7 +60,7 @@ export function validateObjectInformationSnapshot(input: unknown): ObjectInforma
         (section.paragraphs as unknown[]).some((paragraph) =>
           typeof paragraph !== "string" || paragraph.length === 0)) {
       throw new TypeError(
-        `Planet ${sourceEntry.id} editorial section is incompatible.`,
+        `Object ${sourceEntry.id} editorial section is incompatible.`,
       );
     }
   }
@@ -91,16 +91,16 @@ export function requireObjectInformationSnapshot(input: unknown): ObjectInformat
 }
 
 // This NASA snapshot rule belongs to this provider, not the generic object package.
-export function validateObjectEditorial(planet: {id: string; name: string}, input: unknown) {
+export function validateObjectEditorial(entry: {id: string; name: string}, input: unknown) {
   let editorial: ObjectInformationSnapshot;
-  const source = objectInformationSource(planet.id);
+  const source = objectInformationSource(entry.id);
   try {
     editorial = requireObjectInformationSnapshot(input);
   } catch (cause) {
-    throw new TypeError(`Planet ${planet.id} editorial snapshot is incompatible.`);
+    throw new TypeError(`Object ${entry.id} editorial snapshot is incompatible.`);
   }
-  if (planet.name !== source.name || editorial.planet !== planet.name) {
-    throw new TypeError(`Planet ${planet.id} editorial snapshot is incompatible.`);
+  if (entry.name !== source.name || editorial.planet !== entry.name) {
+    throw new TypeError(`Object ${entry.id} editorial snapshot is incompatible.`);
   }
   return true;
 }

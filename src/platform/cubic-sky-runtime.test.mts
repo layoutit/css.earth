@@ -158,10 +158,10 @@ test("release publishes both launch steps once and leaves no idle clock", (t) =>
   assert.equal(controls.stats().projection,"screen-plane-orbit");
   surface.emit("pointermove",330,720); tick(720);
   assert.equal(controls.stats().projection,"screen-plane-orbit",
-    "crossing onto the planet does not switch a sky-start gesture to sphere drag");
+    "crossing onto the body does not switch a sky-start gesture to sphere drag");
   surface.emit("pointerup",330,850);
   assert.equal(publications.length,beforeSkyPress+1,
-    "a sky-start gesture continues onto the planet");
+    "a sky-start gesture continues onto the body");
   assert.equal(pending.size,0,"a paused sky release leaves no callback");
   surface.emit("pointerdown",skyX,750);
   surface.emit("pointermove",skyX+1,760); tick(760);
@@ -403,7 +403,7 @@ test("retains the separately fitted fly-to target envelope", () => {
   });
 });
 
-test("measures the planet trackball independently of screen roll", () => {
+test("measures the object trackball independently of screen roll", () => {
   const stage = {
     getBoundingClientRect: () => ({ width: 1411, height: 959 }),
   };
