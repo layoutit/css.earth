@@ -31,7 +31,8 @@ node tools/performance/ios-capture.mts --name by-hand --seconds 15
 
 It needs Xcode, `ios_webkit_debug_proxy` and AXe (`brew install cameroncooke/axe/axe`). Steps are a JSON list of
 `{ "tap": [x, y] }`, `{ "type": "text" }`, `{ "drag": { "from": [x, y], "to": [x, y], "seconds": 1.5 } }`,
-`{ "wait": seconds }` and `{ "screenshot": "name" }`, in simulator points, sent as real touch input. `--open` loads the
+`{ "wait": seconds }` and `{ "screenshot": "name" }`, in simulator points, sent as real touch input. Safari keeps its cache
+as a visitor's would; `--no-cache` measures a cold load. `--open` loads the
 page in the visible tab first, so each capture starts from a fresh load. Check the screenshots before reading any
 numbers: a tap that lands on the wrong control records the wrong moment.
 
