@@ -23,7 +23,12 @@ Start with a target when you want to see what is available:
 ```sh
 telescope explore eris
 telescope explore eris --kind cube --wavelength 2.2,2.4 --out runs/eris
+telescope explore "Sgr A*" --kind cube --instrument ERIS
 ```
+
+A name the catalogue does not ship, like the last one, is resolved by SIMBAD. The search then uses SIMBAD's identifiers and a
+circle of SIMBAD's position error around its position (`--icrs-circle` replaces that circle). Archive records whose footprint
+intersects the circle under another name are listed as in the field, not as the target.
 
 In a terminal, `explore` shows the actual observations, unknown metadata, unsupported records and
 provider limits in its saved snapshot, then asks which observation to retrieve. It does not download

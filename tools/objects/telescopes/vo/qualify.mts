@@ -9,8 +9,10 @@ import { digest } from './contracts.mts';
 import { acquireVoProduct, type AcquisitionSpec } from './access.mts';
 
 export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Promise<QualifiedObservation> {
-  if (spec.observation.target.status !== 'confirmed' || spec.observation.target.target !== spec.request.target || typeof spec.observation.rawTarget !== 'string')
+  const inField = spec.observation.target.status === 'in-field';
+  if (spec.observation.target.status !== 'confirmed' && !inField || spec.observation.target.target !== spec.request.target || typeof spec.observation.rawTarget !== 'string')
     throw new Error('The selected archive record does not establish the requested target.');
+  if (inField && !spec.request.region) throw new Error('An in-field archive record is qualified only against the region that selected it.');
   const acquired = await acquireVoProduct(root, spec), outputRoot = dirname(acquired.record), acquisition = await readProductRecord(acquired.record);
   if (!acquisition) throw new Error('Acquisition record is missing.');
   const content = JSON.parse(await readFile(resolve(outputRoot, 'content.json'), 'utf8')) as { schema?: unknown; archiveProposal?: { kind?: unknown; decoder?: unknown }; legacyRasterMember?: unknown; members?: readonly { member?: unknown; profile?: unknown; state?: unknown; reason?: unknown }[] };
@@ -30,10 +32,13 @@ export async function qualifyVoProduct(root: string, spec: AcquisitionSpec): Pro
     throw new Error('ESO archive product identity disagrees with the FITS ARCFILE header.');
   const facts = { target: spec.request.target, verified: true, kind: spec.kind, result: 'telescope-product' as const,
     ...await readProductScience(root, { file: acquired.file, format: 'fits', target: spec.request.target, decoded, ...(spec.request.region ? { region: spec.request.region } : {}) }) };
+  // Field membership rests on the archive footprint until the product's own WCS puts usable pixels inside the circle.
+  if (inField && !(facts.regionCoverage && facts.regionCoverage.usablePixelCenters > 0))
+    throw new Error('The in-field product has no usable pixel centre inside the requested ICRS circle.');
   const receipt = resolve(outputRoot, 'qualification.json'), productRecord = resolve(outputRoot, 'qualified.product.json');
   await writeFile(receipt, `${JSON.stringify({ schema: 'cssearth-vo-qualification@1', acquisition: spec.key, artifact: pin, facts,
     identity: { target: spec.observation.target, headerObject: decoded.header.OBJECT, parent: spec.observation.identities },
-    acceptance: 'Pinned archive response, matching FITS OBJECT, supported native arrays and qualified product metadata. No local recalibration, full-parent equivalence or request fulfillment is implied.' }, null, 2)}\n`);
+    acceptance: `Pinned archive response, matching FITS OBJECT, supported native arrays and qualified product metadata.${inField ? ' The target is in the field: usable pixel centres of the product WCS lie inside the requested ICRS circle; the FITS OBJECT names the field, not the target.' : ''} No local recalibration, full-parent equivalence or request fulfillment is implied.` }, null, 2)}\n`);
   const run: ProductRun = { telescope: spec.observation.service, stage: 'native-product-qualification',
     inputs: [...acquisition.outputs.map(p => ({ role: 'acquired product and metadata', identity: p.path, bytes: p.bytes })),
       { role: 'acquisition record', identity: 'acquisition.json', ...await fileSize(acquired.record) }],
