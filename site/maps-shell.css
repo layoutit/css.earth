@@ -366,10 +366,10 @@
     border-radius: 0;
     background: var(--explorer-panel-background);
   }
-  /* Typed results replace the sidebar's card: its background, down to the sidebar's own bottom. */
+  /* Typed results replace the sidebar's card, with its background: six rows on the 56 px pitch below the 8 px top
+     padding, then the list scrolls. */
   body[data-object-shell] .planet-sidebar [data-search-results] #object-category-results {
-    max-height: calc(100dvh - var(--explorer-controls-top) - var(--explorer-footer-height) - var(--explorer-panel-bottom-gap));
-    padding-bottom: 8px;
+    max-height: calc(8px + 6 * 56px);
     background: var(--explorer-panel-background);
   }
 }
