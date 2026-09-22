@@ -158,7 +158,9 @@ export function targetQuery(profile: ServiceProfile, names: readonly string[], s
     const mjd = (iso: string) => Date.parse(iso) / 86_400_000 + 40_587;
     filters.push(`(t_min IS NULL OR t_min<=${mjd(request.time.toIso)})`, `(t_max IS NULL OR t_max>=${mjd(request.time.fromIso)})`);
   }
-  return `SELECT TOP ${sampleLimit} * FROM ${profile.table} WHERE ${filters.join(' AND ')}`;
+  // A bounded sample is only reproducible in a stated order: TOP without ORDER BY lets a service return different rows.
+  if (!profile.identityColumns.length || !profile.identityColumns.every(column => /^[A-Za-z_][A-Za-z0-9_]*$/u.test(column))) throw new TypeError('Unvalidated TAP identity columns.');
+  return `SELECT TOP ${sampleLimit} * FROM ${profile.table} WHERE ${filters.join(' AND ')} ORDER BY ${profile.identityColumns.join(', ')}`;
 }
 export function parseSnapshot(value: unknown): DiscoverySnapshot {
   const r = requireRecord(value);

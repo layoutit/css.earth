@@ -163,8 +163,14 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   }
   if (!observation.access.url) return { products, issues: ['No archive access URL.'] };
   const address = url(observation.access.url, snapshot.response.effectiveUrl), pins = [snapshot.response.raw, snapshotPin];
-  if (datalink(observation.access.mime)) await links(address, {}, 0, pins);
-  else direct(address, observation.access.mime, observation.access.estimatedKilobytes === null ? null : observation.access.estimatedKilobytes * 1000,
+  const advertised = observation.access.mime;
+  if (datalink(advertised)) await links(address, {}, 0, pins);
+  else if (advertised !== null && mediaType(advertised) === null) {
+    // A malformed access_format names no decoder (ALMA declares the column as char(9) and serves "applicati"). The access
+    // URL answers for itself: it is read as DataLink, and anything that does not parse as a DataLink response is refused.
+    issues.push(`Advertised access_format ${JSON.stringify(advertised)} is malformed; the access URL was read as a DataLink service.`);
+    await links(address, {}, 0, pins);
+  } else direct(address, observation.access.mime, observation.access.estimatedKilobytes === null ? null : observation.access.estimatedKilobytes * 1000,
     jsonValue({ url: address, identities: observation.identities }), pins);
   return { products, issues };
 }
