@@ -1,7 +1,7 @@
 import {choice} from "../../../../tools/objects/terrestrial-layers/source-records.mts";
 import {required} from "../../../../tools/contract/test-values.mts";
 import {hasErrorCode} from "../../../../tools/sources/source-values.mts";
-import {shape,array,number,boolean,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
+import {shape,array,number,boolean,text} from "../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";

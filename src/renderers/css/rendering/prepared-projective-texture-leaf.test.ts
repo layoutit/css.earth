@@ -1,8 +1,6 @@
 import { afterEach, expect, test, vi } from 'vitest';
 import { createPreparedProjectiveTextureLeaf } from './prepared-projective-texture-leaf.js';
 import { composePreparedProjectiveTransform } from '../prepared-data/projective-layout.js';
-import { publishPreparedPageTexture } from '../paging/page-texture.js';
-import type { PreparedPage } from '../paging/types.js';
 
 const identity = [1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1];
 const frame = Object.freeze([3, -1, .2, 0, 2, 4, -.1, 0, 0, 0, 1, 0, 20, 10, -100, 1]);
@@ -45,27 +43,6 @@ test('active renderer paints one retained leaf with the exact immutable prepared
   }
   expect(normalize(transform(frame, [128, 80, 0, 1])), 'removing the prepared projective factor must break the transport guarantee').not.toEqual(normalize(transform(actual, [128, 80, 0, 1])));
   expect(source.style).toContain('width:32px'); expect(source.projectiveTextureLayer.textureMatrix).toBe(texture);
-});
-
-test('retained page slots publish plain rasters directly and preserve authored image clipping when selected', () => {
-  const leaf = element() as unknown as HTMLElement, image = element() as unknown as HTMLElement;
-  const page = { frameMatrix: frame.join(','), textureMatrix: texture.join(','),
-    textureBackgroundSize: '256px 128px', textureBackgroundPosition: '-10px -20px' } as PreparedPage;
-  publishPreparedPageTexture(leaf, image, page, '/plain.webp', 4);
-  expect(leaf.style.transform).toBe(composePreparedProjectiveTransform(frame, texture));
-  expect(leaf.style.backgroundImage).toBe('url("/plain.webp")');
-  expect(leaf.style.backgroundSize).toBe('256px 128px'); expect(image.style.visibility).toBe('hidden');
-  const clipped = { ...page, imageMatrix: [...identity.slice(0, 12), -5, 8, 0, 1].join(',') };
-  publishPreparedPageTexture(leaf, image, clipped, '/clipped.webp', 4);
-  expect(leaf.style.overflow).toBe('hidden'); expect(leaf.style.transformStyle).toBe('flat');
-  expect(leaf.style.backgroundImage).toBe('none');
-  expect(image.style.transform).toBe(`matrix3d(${clipped.imageMatrix})`);
-  expect(image.style.backgroundImage).toBe('url("/clipped.webp")');
-  expect(image.style.backgroundPosition).toBe('-10px -20px');
-  publishPreparedPageTexture(leaf, image, page, '/next.webp', 4);
-  expect(leaf.style.overflow).toBe('visible'); expect(leaf.style.transformStyle).toBe('preserve-3d');
-  expect(image.style.backgroundImage).toBe('none'); expect(image.style.visibility).toBe('hidden');
-  expect(() => publishPreparedPageTexture(leaf, null, clipped, '/missing.webp', 4)).toThrow('clipping template');
 });
 
 test('prepared matrix transport rejects malformed or overflowing factors', () => {

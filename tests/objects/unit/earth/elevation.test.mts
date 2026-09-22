@@ -1,4 +1,4 @@
-import {shape,array,text,number} from '../../../../tools/objects/geographic-pages/source-records.mts';
+import {shape,array,text,number} from '../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts';
 import {earthPreparationConfig as config} from './prepared-fixture.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';

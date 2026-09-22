@@ -9,7 +9,6 @@
   "exclude": ["test"],
   "files": [
     "test/dataset-navigation-browser.mts",
-    "test/typescript-owners-browser.mts",
-    "../src/renderers/css/paging/__fixtures__/prepared-page.mts"
+    "test/typescript-owners-browser.mts"
   ]
 }

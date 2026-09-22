@@ -5,7 +5,7 @@ export type { ImageLayerBankDescriptor } from './image-layer-bank.js';
 export { parseDensityVolumeFrame, parseDensityVolumeObjectDescriptor } from './density-volume.js';
 export type { DensityVolumeFrame, DensityVolumeObjectDescriptor, DensityVolumePreparationReference, VolumeQuaternion, VolumeVector } from './density-volume.js';
 export { parseAuthoredObjectDescriptor, parseAuthoredRecipe } from './authored.js';
-export type { AuthoredObjectDescriptor, AuthoredRecipe, CutawayRecipe, DestinationsRecipe, FeaturesRecipe, FrameBankRecipe, LayerRecipe, LensRecipe, MaterialRecipe, MotionRecipe, PagingRecipe, ShapeKind, ShapeRecipe, SourceReference, SurfaceRecipe, WorldFrameRecipe } from './authored.js';
+export type { AuthoredObjectDescriptor, AuthoredRecipe, CutawayRecipe, DestinationsRecipe, FeaturesRecipe, FrameBankRecipe, LayerRecipe, LensRecipe, MaterialRecipe, MotionRecipe, ShapeKind, ShapeRecipe, SourceReference, SurfaceRecipe, WorldFrameRecipe } from './authored.js';
 export * from './baking/index.js';
 export * from './geometry/index.js';
 export { prepareObject, readPreparedObject } from './preparation.js';

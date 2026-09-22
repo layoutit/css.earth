@@ -42,14 +42,10 @@ export type PreparedViewBinding = { target: number } & (
   { kind: "zoom-property"; property: string } | { kind: "shell-scale"; variable: string; defaultZoom: number } |
   { kind: "counter-rotation"; systemTransform: string | null }
 );
-export interface PreparedPageLayer {
-  id: string; carrier: number; system: number; plan: unknown;
-  className: string; textureClassName: string; lensIds: string[];
-}
 export interface PreparedPresentationDefinition {
   textureLevels?: PreparedTextureLevels;
   camera: Parameters<typeof preparedScenePitch>[1]; tree: PreparedTree; variants: readonly PreparedVariant[]; materials: readonly PreparedMaterialTrack[];
-  resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[]; pageLayers?: readonly PreparedPageLayer[];
+  resourceOrder?: "materials-first" | "content-first"; viewBindings: readonly PreparedViewBinding[]; motionFrame?: readonly number[];
   animations: readonly { target: number; id: string; mode: "pose" | "motion"; keyframes: Keyframe[] | PropertyIndexedKeyframes; duration: number; sourceMinimum: number; millisecondsPerDegree: number }[];
   /** Authored infinite motion, resolved from source CSS during preparation. */
   motion?: readonly { target: number; id: string; keyframes: { offset: number; transform: string }[]; duration: number; timings: readonly { when: Readonly<Record<string, ObjectSelection[string]>>; duration: number }[] }[];
@@ -180,8 +176,6 @@ export function mountPreparedPresentation(stage: HTMLElement, context: PreparedP
     ...(definition.surfaceHit ? { surfaceHitTest: bindPreparedSurfaceHit(definition.surfaceHit, nodes[definition.surfaceHit.target], sceneElement, cameraElement, () => stage.dataset.lens) } : {}),
     ...(definition.motionFrame ? { motionFrame: Object.freeze(definition.motionFrame.map(index => nodes[index])) } : {}),
     ...(definition.features ? { featureTarget: nodes[definition.features.target] } : {}),
-    ...(definition.pageLayers ? { pageLayers: Object.freeze(definition.pageLayers.map(layer => Object.freeze({ ...layer,
-      carrier: nodes[layer.carrier], system: nodes[layer.system] }))) } : {}),
     commitSelection({ selection, resources, plan }: { selection: ObjectSelection; resources: PreparedResources; plan?: PreparedPresentationPlan; view?: PreparedView | null }) {
       const variant = selectedPreparedVariant(definition, selection);
       // Resolve the complete texture group before publishing any part of it.

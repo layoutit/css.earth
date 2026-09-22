@@ -151,10 +151,6 @@ for (const id of ids) {
   console.log(`${id}: source inputs restored and verified`);
 }
 
-if (ids.includes("earth")) await run(process.execPath, [
-  resolve(projectRoot, "tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mts"), "--object=earth",
-]);
-
 function run(command: string, argumentsList: string[]) {
   return new Promise<void>((resolvePromise, reject) => {
     const child = spawn(command, argumentsList, { cwd: projectRoot, stdio: "inherit" });

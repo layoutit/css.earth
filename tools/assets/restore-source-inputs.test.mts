@@ -170,7 +170,7 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
   const root = await fixture(t, 'earth'), source = resolve(root, 'src/objects/earth/source');
   const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
   const restore = resolve(root, 'tools/objects/paged-ellipsoid/mur-imagery.mts');
-  for (const dir of ['src/objects/earth/source/science', 'tools/objects/paged-ellipsoid', 'tools/objects/geographic-pages/operations']) {
+  for (const dir of ['src/objects/earth/source/science', 'tools/objects/paged-ellipsoid']) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await writeFile(restore, `
@@ -180,7 +180,6 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
     assert.equal(process.argv[2], 'restore');
     await writeFile(resolve(process.argv[3], 'mur-gibs.png'), 'pinned mosaic');
   `);
-  await writeFile(resolve(root, 'tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mts'), '');
   await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
   await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: [{
     ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso'],
