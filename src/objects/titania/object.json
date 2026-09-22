@@ -90,6 +90,11 @@
               "id": "geology",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "voyager-color",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -157,6 +162,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "7af4b203d5cab3e7077df2ec3af788af9975e18f398eff37df29791777425985"
+    "sha256": "6582460134512e266dd4bea0c3db142c55c8b01130328eae1cec86afa9cbb344"
   }
 }

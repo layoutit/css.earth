@@ -1,0 +1,257 @@
+{
+  "schema": "cssearth-voyager-color-oracle@1",
+  "objectId": "miranda",
+  "reference": "mosaic",
+  "method": "Recorded pointing plus limb fit; the controlled mosaic rendered through the fitted camera and cross-correlated with the frame's high-passed detail over ±30 detector pixels (box half-width 12 px).",
+  "stepDegrees": 0.05,
+  "searchCells": 60,
+  "framesDirectory": "Every limb-placed frame of the recipe, read from the pinned observations.",
+  "recipeDatumShiftDegrees": {
+    "longitude": 0,
+    "latitude": 0
+  },
+  "meanResidualDegrees": null,
+  "residualSpreadKm": null,
+  "meanResidualKm": 9.4,
+  "meanCorrelation": 0.36,
+  "comparedFrames": 3,
+  "frames": [
+    {
+      "id": "c2676339",
+      "observation": "set-19860121-2237",
+      "filter": "GREEN",
+      "pixelScaleKm": 28.363,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 15,
+        "rmsPixels": 0.935,
+        "sedrShiftPixels": [
+          -99.04,
+          -0.46
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2676351",
+      "observation": "set-19860121-2237",
+      "filter": "VIOLET",
+      "pixelScaleKm": 28.292,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 14,
+        "rmsPixels": 0.236,
+        "sedrShiftPixels": [
+          -105.58,
+          -11.14
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2676357",
+      "observation": "set-19860121-2237",
+      "filter": "UV",
+      "pixelScaleKm": 28.257,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 15,
+        "rmsPixels": 0.432,
+        "sedrShiftPixels": [
+          -104.21,
+          -0.24
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2678334",
+      "observation": "set-19860122-1433",
+      "filter": "VIOLET",
+      "pixelScaleKm": 22.298,
+      "limb": {
+        "accepted": false,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.378,
+        "sedrShiftPixels": [
+          -46.45,
+          -58.27
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2678340",
+      "observation": "set-19860122-1433",
+      "filter": "GREEN",
+      "pixelScaleKm": 22.267,
+      "limb": {
+        "accepted": false,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.449,
+        "sedrShiftPixels": [
+          -37.13,
+          -55.54
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2678346",
+      "observation": "set-19860122-1433",
+      "filter": "UV",
+      "pixelScaleKm": 22.236,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 28,
+        "rmsPixels": 0.862,
+        "sedrShiftPixels": [
+          -27.38,
+          -62.77
+        ]
+      },
+      "compared": false,
+      "reason": "limb not accepted"
+    },
+    {
+      "id": "c2679635",
+      "observation": "set-19860123-0058",
+      "filter": "GREEN",
+      "pixelScaleKm": 17.718,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.353,
+        "sedrShiftPixels": [
+          -71.6,
+          -68.43
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2679641",
+      "observation": "set-19860123-0058",
+      "filter": "VIOLET",
+      "pixelScaleKm": 17.68,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "rmsPixels": 0.37,
+        "sedrShiftPixels": [
+          -79.22,
+          -68.03
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2679647",
+      "observation": "set-19860123-0058",
+      "filter": "UV",
+      "pixelScaleKm": 17.641,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 25,
+        "rmsPixels": 0.82,
+        "sedrShiftPixels": [
+          -91.89,
+          -70.63
+        ]
+      },
+      "compared": false,
+      "reason": "too few overlapping pixels for a registration"
+    },
+    {
+      "id": "c2684411",
+      "observation": "set-19860124-1503",
+      "filter": "VIOLET",
+      "pixelScaleKm": 1.138,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 135,
+        "rmsPixels": 1.751,
+        "sedrShiftPixels": [
+          -305.77,
+          -58.55
+        ]
+      },
+      "compared": true,
+      "correlation": 0.437,
+      "samples": 25436,
+      "limbResidualPixels": [
+        3,
+        6
+      ],
+      "residualKm": 7.63,
+      "applied": true
+    },
+    {
+      "id": "c2684413",
+      "observation": "set-19860124-1503",
+      "filter": "GREEN",
+      "pixelScaleKm": 1.123,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 233,
+        "rmsPixels": 1.579,
+        "sedrShiftPixels": [
+          -304.73,
+          -63.38
+        ]
+      },
+      "compared": true,
+      "correlation": 0.433,
+      "samples": 26083,
+      "limbResidualPixels": [
+        1,
+        7
+      ],
+      "residualKm": 7.94,
+      "applied": true
+    },
+    {
+      "id": "c2684415",
+      "observation": "set-19860124-1503",
+      "filter": "UV",
+      "pixelScaleKm": 1.109,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 145,
+        "rmsPixels": 1.17,
+        "sedrShiftPixels": [
+          -316.73,
+          -97.5
+        ]
+      },
+      "compared": true,
+      "correlation": 0.209,
+      "samples": 26759,
+      "limbResidualPixels": [
+        -3,
+        11
+      ],
+      "residualKm": 12.64,
+      "applied": true
+    }
+  ]
+}

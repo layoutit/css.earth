@@ -275,6 +275,20 @@
         },
         "notes": "Eighteen historical geologic units digitized from Voyager-era mapping. Registration reconstructed from the published map grid; three independent crater checks differ by about 1.3–3.3° (5–14 km). Colors identify interpreted units, not measured composition. Gray grid marks unmapped or unresolved overlapping units; structural linework is not shown.",
         "noData": true
+      },
+      {
+        "id": "voyager-color",
+        "label": "Voyager color",
+        "thumbnail": "miranda-lens-voyager-color.webp",
+        "surface": "miranda-voyager-color@2x.webp",
+        "poles": "miranda-poles-voyager-color@2x.webp",
+        "source": {
+          "id": "voyager-color-c2684411",
+          "path": "../manifest.json",
+          "url": "https://pds-rings.seti.org/voyager/iss/"
+        },
+        "falseColor": true,
+        "notes": "Voyager color: Voyager 2 green, violet and ultraviolet frames as red, green and blue over the monochrome mosaic. Miranda's colour frames were taken from 1 to 1 km per pixel; each is placed by fitting the moon's limb, then registered to the mosaic. Every set is scaled band by band onto the 1 km set where they overlap, and ground the closest set views too steeply takes the next set's color. The archive's Voyager filter calibration leaves violet too dark against green and ultraviolet, so the whole-footprint band ratios are tied to the published whole-disc colour of Bell and McCord (1991, Fig. 2); spatial colour differences are Voyager's own. The north was in darkness during the 1986 flyby and stays unavailable."
       }
     ]
   },

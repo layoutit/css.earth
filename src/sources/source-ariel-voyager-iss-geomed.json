@@ -1,0 +1,35 @@
+{
+  "id": "source-ariel-voyager-iss-geomed",
+  "kind": "data-product",
+  "identityLevel": "work",
+  "title": "Ariel · voyager c2673243 geomed frame",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7205/DATA/C26732XX/C2673243_GEOMED.IMG",
+      "label": "Source"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/ariel/source/manifest.json",
+      "locator": "/inputs/16"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL Voyager 2 ISS; PDS Ring-Moon Systems Node",
+      "scope": "The voyager c2673243 geomed frame input.",
+      "evidence": "Manifest credit field."
+    },
+    {
+      "kind": "rights",
+      "text": "Public NASA mission data; retain the Voyager project and PDS Ring-Moon Systems Node credit.",
+      "scope": "Redistributed display derivatives.",
+      "evidence": "Manifest license field."
+    }
+  ]
+}

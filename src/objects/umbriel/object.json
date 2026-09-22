@@ -80,6 +80,11 @@
               "id": "normal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "voyager-color",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
@@ -147,6 +152,6 @@
   "prepared": {
     "format": "cssearth-css-object@5",
     "url": "prepared/object.json",
-    "sha256": "c45e8c5674b22a7e88504027ae4b118c366b315ff1887476ab396fb76dedc3b2"
+    "sha256": "23899bf23a3189ea506a486a36abd67fdab2298d0986268b1501d47c437b42aa"
   }
 }

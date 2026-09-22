@@ -1,0 +1,1236 @@
+{
+  "schema": "cssearth-voyager-color-placement@1",
+  "objectId": "titania",
+  "route": {
+    "observer": -32,
+    "target": 703,
+    "bodyFrame": "IAU_TITANIA",
+    "instrument": -32101,
+    "frame": "VG2_ISSNA",
+    "aberration": "LT+S",
+    "radiusKm": 788.9,
+    "datumShiftDegrees": {
+      "longitude": 0,
+      "latitude": 0
+    },
+    "maximumEmissionDegrees": 60,
+    "maximumIncidenceDegrees": 60
+  },
+  "cellDegrees": 0.1,
+  "frames": [
+    {
+      "id": "c2661757",
+      "observation": "set-19860117-0203",
+      "filter": "VIOLET",
+      "kind": "geomed",
+      "pixelScaleKm": 76.888,
+      "limb": {
+        "accepted": false,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.446,
+        "shiftPixels": [
+          -97.43,
+          -3.38
+        ],
+        "groundFloor": 0.0082
+      },
+      "placed": false
+    },
+    {
+      "id": "c2661809",
+      "observation": "set-19860117-0203",
+      "filter": "GREEN",
+      "kind": "geomed",
+      "pixelScaleKm": 76.826,
+      "limb": {
+        "accepted": false,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.352,
+        "shiftPixels": [
+          -105.35,
+          1.21
+        ],
+        "groundFloor": 0.0119
+      },
+      "placed": false
+    },
+    {
+      "id": "c2661815",
+      "observation": "set-19860117-0203",
+      "filter": "UV",
+      "kind": "geomed",
+      "pixelScaleKm": 76.795,
+      "limb": {
+        "accepted": false,
+        "seed": "centroid",
+        "edgePoints": 318,
+        "candidates": 320,
+        "rmsPixels": 0.88,
+        "shiftPixels": [
+          -91.89,
+          8.73
+        ],
+        "groundFloor": 0.0061
+      },
+      "placed": false
+    },
+    {
+      "id": "c2666557",
+      "observation": "set-19860118-1627",
+      "filter": "VIOLET",
+      "kind": "geomed",
+      "pixelScaleKm": 62.033,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.449,
+        "shiftPixels": [
+          -6.06,
+          -52.43
+        ],
+        "groundFloor": 0.0095
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": null,
+        "samples": 0,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": false
+      },
+      "placed": false,
+      "reason": "no frame of this set registered against the mosaic"
+    },
+    {
+      "id": "c2666609",
+      "observation": "set-19860118-1627",
+      "filter": "GREEN",
+      "kind": "geomed",
+      "pixelScaleKm": 61.971,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.409,
+        "shiftPixels": [
+          8.37,
+          -47.85
+        ],
+        "groundFloor": 0.0121
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": null,
+        "samples": 0,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": false
+      },
+      "placed": false,
+      "reason": "no frame of this set registered against the mosaic"
+    },
+    {
+      "id": "c2666615",
+      "observation": "set-19860118-1627",
+      "filter": "UV",
+      "kind": "geomed",
+      "pixelScaleKm": 61.939,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.678,
+        "shiftPixels": [
+          -0.74,
+          -49.48
+        ],
+        "groundFloor": 0.0085
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": null,
+        "samples": 0,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": false
+      },
+      "placed": false,
+      "reason": "no frame of this set registered against the mosaic"
+    },
+    {
+      "id": "c2672053",
+      "observation": "set-19860120-1224",
+      "filter": "VIOLET",
+      "kind": "geomed",
+      "pixelScaleKm": 44.063,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 318,
+        "candidates": 320,
+        "rmsPixels": 0.595,
+        "shiftPixels": [
+          -52.68,
+          -59.26
+        ],
+        "groundFloor": 0.0183
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": null,
+        "samples": 0,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": false
+      },
+      "placed": false,
+      "reason": "no frame of this set registered against the mosaic"
+    },
+    {
+      "id": "c2672105",
+      "observation": "set-19860120-1224",
+      "filter": "GREEN",
+      "kind": "geomed",
+      "pixelScaleKm": 43.994,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 54,
+        "candidates": 54,
+        "rmsPixels": 0.514,
+        "shiftPixels": [
+          -55.26,
+          -47.69
+        ],
+        "groundFloor": 0.0195
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": null,
+        "samples": 0,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": false
+      },
+      "placed": false,
+      "reason": "no frame of this set registered against the mosaic"
+    },
+    {
+      "id": "c2672111",
+      "observation": "set-19860120-1224",
+      "filter": "UV",
+      "kind": "geomed",
+      "pixelScaleKm": 43.96,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 304,
+        "candidates": 320,
+        "rmsPixels": 0.638,
+        "shiftPixels": [
+          -34.83,
+          -63.13
+        ],
+        "groundFloor": 0.0168
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": null,
+        "samples": 0,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": false
+      },
+      "placed": false,
+      "reason": "no frame of this set registered against the mosaic"
+    },
+    {
+      "id": "c2677624",
+      "observation": "set-19860122-0849",
+      "filter": "VIOLET",
+      "et": -439960170.8154598,
+      "kind": "geomed",
+      "pixelScaleKm": 24.388,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 89,
+        "candidates": 89,
+        "rmsPixels": 0.4,
+        "shiftPixels": [
+          -82.94,
+          15.01
+        ],
+        "groundFloor": 0.0117
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.365,
+        "samples": 636,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2677632",
+        "shiftPixels": [
+          0,
+          -2
+        ],
+        "correlation": 0.497,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.6,
+      "tiles": [
+        {
+          "id": "c2677624",
+          "framePath": "observations/voyager-color/c2677624.equi.tif",
+          "labelPath": "photometry/voyager-color/c2677624.equi.lbl",
+          "width": 600,
+          "height": 114,
+          "firstColumn": 0,
+          "firstRow": 186
+        }
+      ]
+    },
+    {
+      "id": "c2677630",
+      "observation": "set-19860122-0849",
+      "filter": "GREEN",
+      "et": -439959882.8154597,
+      "kind": "geomed",
+      "pixelScaleKm": 24.352,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 95,
+        "candidates": 95,
+        "rmsPixels": 0.431,
+        "shiftPixels": [
+          -78.16,
+          -9.37
+        ],
+        "groundFloor": 0.0124
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          -1
+        ],
+        "correlation": 0.369,
+        "samples": 640,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2677632",
+        "shiftPixels": [
+          -1,
+          -1
+        ],
+        "correlation": 0.476,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.6,
+      "tiles": [
+        {
+          "id": "c2677630",
+          "framePath": "observations/voyager-color/c2677630.equi.tif",
+          "labelPath": "photometry/voyager-color/c2677630.equi.lbl",
+          "width": 600,
+          "height": 114,
+          "firstColumn": 0,
+          "firstRow": 186
+        }
+      ]
+    },
+    {
+      "id": "c2677632",
+      "observation": "set-19860122-0849",
+      "filter": "UV",
+      "et": -439959786.81545967,
+      "kind": "geomed",
+      "pixelScaleKm": 24.34,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 299,
+        "candidates": 319,
+        "rmsPixels": 0.672,
+        "shiftPixels": [
+          -74.69,
+          18.51
+        ],
+        "groundFloor": 0.0076
+      },
+      "mosaic": {
+        "shiftPixels": [
+          1,
+          -1
+        ],
+        "correlation": 0.398,
+        "samples": 636,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2677632"
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.6,
+      "tiles": [
+        {
+          "id": "c2677632",
+          "framePath": "observations/voyager-color/c2677632.equi.tif",
+          "labelPath": "photometry/voyager-color/c2677632.equi.lbl",
+          "width": 600,
+          "height": 114,
+          "firstColumn": 0,
+          "firstRow": 186
+        }
+      ]
+    },
+    {
+      "id": "c2681459",
+      "observation": "set-19860123-1541",
+      "filter": "GREEN",
+      "et": -439849050.81542474,
+      "kind": "geomed",
+      "pixelScaleKm": 10.752,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 199,
+        "candidates": 199,
+        "rmsPixels": 0.46,
+        "shiftPixels": [
+          -85.42,
+          43.39
+        ],
+        "groundFloor": 0.0235
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          -1
+        ],
+        "correlation": 0.494,
+        "samples": 3213,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681505",
+        "shiftPixels": [
+          -1,
+          3
+        ],
+        "correlation": 0.31,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681459",
+          "framePath": "observations/voyager-color/c2681459.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681459.equi.lbl",
+          "width": 1200,
+          "height": 227,
+          "firstColumn": 0,
+          "firstRow": 373
+        }
+      ]
+    },
+    {
+      "id": "c2681505",
+      "observation": "set-19860123-1541",
+      "filter": "VIOLET",
+      "et": -439848762.8154246,
+      "kind": "geomed",
+      "pixelScaleKm": 10.718,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.42,
+        "shiftPixels": [
+          -101.63,
+          45.27
+        ],
+        "groundFloor": 0.0192
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.51,
+        "samples": 3235,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681505"
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681505",
+          "framePath": "observations/voyager-color/c2681505.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681505.equi.lbl",
+          "width": 1200,
+          "height": 226,
+          "firstColumn": 0,
+          "firstRow": 374
+        }
+      ]
+    },
+    {
+      "id": "c2681511",
+      "observation": "set-19860123-1541",
+      "filter": "UV",
+      "et": -439848474.81542456,
+      "kind": "geomed",
+      "pixelScaleKm": 10.684,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 315,
+        "candidates": 320,
+        "rmsPixels": 1.091,
+        "shiftPixels": [
+          -114.01,
+          66.66
+        ],
+        "groundFloor": 0.0203
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          -1
+        ],
+        "correlation": 0.424,
+        "samples": 3259,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681505",
+        "shiftPixels": [
+          0,
+          1
+        ],
+        "correlation": 0.337,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681511",
+          "framePath": "observations/voyager-color/c2681511.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681511.equi.lbl",
+          "width": 1200,
+          "height": 226,
+          "firstColumn": 0,
+          "firstRow": 374
+        }
+      ]
+    },
+    {
+      "id": "c2681658",
+      "observation": "set-19860123-1716",
+      "filter": "GREEN",
+      "et": -439843338.81542295,
+      "kind": "geomed",
+      "pixelScaleKm": 10.078,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 317,
+        "candidates": 320,
+        "rmsPixels": 0.427,
+        "shiftPixels": [
+          -95.87,
+          46.01
+        ],
+        "groundFloor": 0.0231
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.498,
+        "samples": 3662,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681704",
+        "shiftPixels": [
+          1,
+          -4
+        ],
+        "correlation": 0.39,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681658",
+          "framePath": "observations/voyager-color/c2681658.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681658.equi.lbl",
+          "width": 1200,
+          "height": 215,
+          "firstColumn": 0,
+          "firstRow": 385
+        }
+      ]
+    },
+    {
+      "id": "c2681704",
+      "observation": "set-19860123-1716",
+      "filter": "VIOLET",
+      "et": -439843050.81542283,
+      "kind": "geomed",
+      "pixelScaleKm": 10.044,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 69,
+        "candidates": 70,
+        "rmsPixels": 0.458,
+        "shiftPixels": [
+          -104.67,
+          46.38
+        ],
+        "groundFloor": 0.0184
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.519,
+        "samples": 3684,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681704"
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681704",
+          "framePath": "observations/voyager-color/c2681704.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681704.equi.lbl",
+          "width": 1200,
+          "height": 222,
+          "firstColumn": 0,
+          "firstRow": 378
+        }
+      ]
+    },
+    {
+      "id": "c2681710",
+      "observation": "set-19860123-1716",
+      "filter": "UV",
+      "et": -439842762.8154228,
+      "kind": "geomed",
+      "pixelScaleKm": 10.01,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 312,
+        "candidates": 320,
+        "rmsPixels": 1.047,
+        "shiftPixels": [
+          -119.62,
+          36.73
+        ],
+        "groundFloor": 0.0192
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          1
+        ],
+        "correlation": 0.358,
+        "samples": 3705,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681704",
+        "shiftPixels": [
+          1,
+          -1
+        ],
+        "correlation": 0.377,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681710",
+          "framePath": "observations/voyager-color/c2681710.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681710.equi.lbl",
+          "width": 1200,
+          "height": 222,
+          "firstColumn": 0,
+          "firstRow": 378
+        }
+      ]
+    },
+    {
+      "id": "c2681831",
+      "observation": "set-19860123-1831",
+      "filter": "GREEN",
+      "et": -439838874.8154215,
+      "kind": "geomed",
+      "pixelScaleKm": 9.554,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 319,
+        "candidates": 320,
+        "rmsPixels": 0.384,
+        "shiftPixels": [
+          -117.12,
+          31.74
+        ],
+        "groundFloor": 0.018
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.492,
+        "samples": 4070,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681837",
+        "shiftPixels": [
+          -3,
+          0
+        ],
+        "correlation": 0.505,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681831",
+          "framePath": "observations/voyager-color/c2681831.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681831.equi.lbl",
+          "width": 1200,
+          "height": 219,
+          "firstColumn": 0,
+          "firstRow": 381
+        }
+      ]
+    },
+    {
+      "id": "c2681837",
+      "observation": "set-19860123-1831",
+      "filter": "VIOLET",
+      "et": -439838586.81542146,
+      "kind": "geomed",
+      "pixelScaleKm": 9.521,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.419,
+        "shiftPixels": [
+          -133.67,
+          26.31
+        ],
+        "groundFloor": 0.0139
+      },
+      "mosaic": {
+        "shiftPixels": [
+          -1,
+          0
+        ],
+        "correlation": 0.516,
+        "samples": 4095,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681837"
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681837",
+          "framePath": "observations/voyager-color/c2681837.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681837.equi.lbl",
+          "width": 1200,
+          "height": 219,
+          "firstColumn": 0,
+          "firstRow": 381
+        }
+      ]
+    },
+    {
+      "id": "c2681843",
+      "observation": "set-19860123-1831",
+      "filter": "UV",
+      "et": -439838298.81542134,
+      "kind": "geomed",
+      "pixelScaleKm": 9.487,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 316,
+        "candidates": 320,
+        "rmsPixels": 0.652,
+        "shiftPixels": [
+          -154.92,
+          20.5
+        ],
+        "groundFloor": 0.0145
+      },
+      "mosaic": {
+        "shiftPixels": [
+          -1,
+          1
+        ],
+        "correlation": 0.451,
+        "samples": 4131,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2681837",
+        "shiftPixels": [
+          -2,
+          1
+        ],
+        "correlation": 0.492,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2681843",
+          "framePath": "observations/voyager-color/c2681843.equi.tif",
+          "labelPath": "photometry/voyager-color/c2681843.equi.lbl",
+          "width": 1200,
+          "height": 219,
+          "firstColumn": 0,
+          "firstRow": 381
+        }
+      ]
+    },
+    {
+      "id": "c2682040",
+      "observation": "set-19860123-2004",
+      "filter": "UV",
+      "kind": "geomed",
+      "pixelScaleKm": 8.834,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 18,
+        "candidates": 18,
+        "rmsPixels": 0.67,
+        "shiftPixels": [
+          -135.03,
+          14.24
+        ],
+        "groundFloor": 0.0129
+      },
+      "placed": false
+    },
+    {
+      "id": "c2682028",
+      "observation": "set-19860123-2004",
+      "filter": "GREEN",
+      "et": -439833258.8154198,
+      "kind": "geomed",
+      "pixelScaleKm": 8.901,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.45,
+        "shiftPixels": [
+          -106.57,
+          2.65
+        ],
+        "groundFloor": 0.0172
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.504,
+        "samples": 4683,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2682034",
+        "shiftPixels": [
+          -1,
+          -1
+        ],
+        "correlation": 0.422,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2682028",
+          "framePath": "observations/voyager-color/c2682028.equi.tif",
+          "labelPath": "photometry/voyager-color/c2682028.equi.lbl",
+          "width": 1200,
+          "height": 212,
+          "firstColumn": 0,
+          "firstRow": 388
+        }
+      ]
+    },
+    {
+      "id": "c2682034",
+      "observation": "set-19860123-2004",
+      "filter": "VIOLET",
+      "et": -439832970.8154197,
+      "kind": "geomed",
+      "pixelScaleKm": 8.868,
+      "limb": {
+        "accepted": true,
+        "seed": "prediction",
+        "edgePoints": 46,
+        "candidates": 46,
+        "rmsPixels": 0.437,
+        "shiftPixels": [
+          -122.11,
+          1.03
+        ],
+        "groundFloor": 0.0122
+      },
+      "mosaic": {
+        "shiftPixels": [
+          -1,
+          0
+        ],
+        "correlation": 0.517,
+        "samples": 4710,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2682034"
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.3,
+      "tiles": [
+        {
+          "id": "c2682034",
+          "framePath": "observations/voyager-color/c2682034.equi.tif",
+          "labelPath": "photometry/voyager-color/c2682034.equi.lbl",
+          "width": 1200,
+          "height": 215,
+          "firstColumn": 0,
+          "firstRow": 385
+        }
+      ]
+    },
+    {
+      "id": "c2682506",
+      "observation": "set-19860123-2347",
+      "filter": "GREEN",
+      "et": -439819914.81541556,
+      "kind": "geomed",
+      "pixelScaleKm": 7.377,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 320,
+        "candidates": 320,
+        "rmsPixels": 0.457,
+        "shiftPixels": [
+          -89.7,
+          -15.1
+        ],
+        "groundFloor": 0.0155
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          -1
+        ],
+        "correlation": 0.453,
+        "samples": 6806,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2682512",
+        "shiftPixels": [
+          0,
+          1
+        ],
+        "correlation": 0.464,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.585,
+      "cellDegrees": 0.25,
+      "tiles": [
+        {
+          "id": "c2682506",
+          "framePath": "observations/voyager-color/c2682506.equi.tif",
+          "labelPath": "photometry/voyager-color/c2682506.equi.lbl",
+          "width": 1440,
+          "height": 251,
+          "firstColumn": 0,
+          "firstRow": 469
+        }
+      ]
+    },
+    {
+      "id": "c2682512",
+      "observation": "set-19860123-2347",
+      "filter": "VIOLET",
+      "et": -439819626.8154155,
+      "kind": "geomed",
+      "pixelScaleKm": 7.345,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 319,
+        "candidates": 320,
+        "rmsPixels": 0.448,
+        "shiftPixels": [
+          -74.28,
+          -36.24
+        ],
+        "groundFloor": 0.0088
+      },
+      "mosaic": {
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "correlation": 0.494,
+        "samples": 6862,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2682512"
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.4,
+      "cellDegrees": 0.25,
+      "tiles": [
+        {
+          "id": "c2682512",
+          "framePath": "observations/voyager-color/c2682512.equi.tif",
+          "labelPath": "photometry/voyager-color/c2682512.equi.lbl",
+          "width": 1440,
+          "height": 251,
+          "firstColumn": 0,
+          "firstRow": 469
+        }
+      ]
+    },
+    {
+      "id": "c2682518",
+      "observation": "set-19860123-2347",
+      "filter": "UV",
+      "et": -439819338.8154154,
+      "kind": "geomed",
+      "pixelScaleKm": 7.312,
+      "limb": {
+        "accepted": true,
+        "seed": "centroid",
+        "edgePoints": 296,
+        "candidates": 318,
+        "rmsPixels": 1.346,
+        "shiftPixels": [
+          -87.62,
+          -23.73
+        ],
+        "groundFloor": 0.0081
+      },
+      "mosaic": {
+        "shiftPixels": [
+          -8,
+          5
+        ],
+        "correlation": 0.213,
+        "samples": 6918,
+        "searchPixels": 30,
+        "highPassPixels": 12,
+        "applied": true
+      },
+      "bands": {
+        "anchor": "c2682512",
+        "shiftPixels": [
+          0,
+          -1
+        ],
+        "correlation": 0.367,
+        "applied": true
+      },
+      "placed": true,
+      "wavelengthMicrometers": 0.325,
+      "cellDegrees": 0.25,
+      "tiles": [
+        {
+          "id": "c2682518",
+          "framePath": "observations/voyager-color/c2682518.equi.tif",
+          "labelPath": "photometry/voyager-color/c2682518.equi.lbl",
+          "width": 1440,
+          "height": 249,
+          "firstColumn": 0,
+          "firstRow": 471
+        }
+      ]
+    },
+    {
+      "id": "c2690508",
+      "observation": "set-19860126-1548",
+      "filter": "VIOLET",
+      "kind": "geomed",
+      "pixelScaleKm": 18.979,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 5,
+        "candidates": 19,
+        "rmsPixels": 0.364,
+        "shiftPixels": [
+          -9.1,
+          42.44
+        ],
+        "groundFloor": 0.0056
+      },
+      "placed": false
+    },
+    {
+      "id": "c2690520",
+      "observation": "set-19860126-1548",
+      "filter": "GREEN",
+      "kind": "geomed",
+      "pixelScaleKm": 19.037,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 0,
+        "candidates": 12,
+        "rmsPixels": null,
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "groundFloor": 0.0032
+      },
+      "placed": false
+    },
+    {
+      "id": "c2690526",
+      "observation": "set-19860126-1548",
+      "filter": "UV",
+      "kind": "geomed",
+      "pixelScaleKm": 19.065,
+      "limb": {
+        "accepted": false,
+        "seed": "prediction",
+        "edgePoints": 1,
+        "candidates": 10,
+        "rmsPixels": 0.5,
+        "shiftPixels": [
+          0,
+          0
+        ],
+        "groundFloor": 0.0045
+      },
+      "placed": false
+    }
+  ]
+}
