@@ -57,8 +57,10 @@ export function orbitBoundsMayContribute(center: Vector3, radius: number, focal:
 }
 
 /** Project prepared chords into a bounded retained line pool; never derive an orbit. */
-export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude, near, clipX, clipY, depthFade }: {
+export function createPreparedRingProjector({ toEye, toEyeAt, project, hidden, mayOcclude, near, clipX, clipY, depthFade }: {
   toEye(point: Vector3): Vector3;
+  /** The same transform from coordinates, sparing an input array per prepared vertex. */
+  toEyeAt?(x: number, y: number, z: number): Vector3;
   project(eye: Vector3): readonly number[];
   hidden(eye: Vector3): boolean;
   /** Conservative screen-space broad phase; absent means all chords need the detailed test. */
@@ -84,7 +86,8 @@ export function createPreparedRingProjector({ toEye, project, hidden, mayOcclude
     const chordCount = closed ? vertexCount : vertexCount - 1;
     const eyes: (Vector3 | undefined)[] = [];
     const screens: (readonly number[] | undefined)[] = [];
-    const eyeAt = (index: number) => eyes[index] ??= toEye([vertices[index * 3]!, vertices[index * 3 + 1]!, vertices[index * 3 + 2]!]);
+    const eyeAt = (index: number) => eyes[index] ??= toEyeAt ? toEyeAt(vertices[index * 3]!, vertices[index * 3 + 1]!, vertices[index * 3 + 2]!)
+      : toEye([vertices[index * 3]!, vertices[index * 3 + 1]!, vertices[index * 3 + 2]!]);
     // A prepared polyline shares vertices between neighbouring chords. Project
     // each endpoint once for this camera; only clipped/occluded endpoints need
     // new projections. These caches belong to one visit, never a stale view.
