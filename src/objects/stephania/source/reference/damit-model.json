@@ -81,8 +81,8 @@
   ],
   "id": "stephania",
   "displayName": "Stephania",
-  "lambda": 26.0,
-  "beta": -50.0,
+  "lambda": 26,
+  "beta": -50,
   "periodHours": 18.2087,
   "version": "2013-02-11",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2320/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2318/IAUspin.txt",
-  "shapeSha256": "1d751e789d79cdd53abcc6fdc6a78c1e78b560175824f814a41c5c41e8d28fc4",
   "shapeBytes": 81898,
   "vertices": 1012,
   "faces": 2020,
@@ -143,7 +142,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2020,
-    "minDoubleTriangleAreaSourceUnits2": 7.884136833542406e-08
+    "minDoubleTriangleAreaSourceUnits2": 7.884136833542406e-8
   },
   "independentAnchors": [
     {
@@ -307,8 +306,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2449217.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2449217,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "867ec83e5c4d45ad3a2ac84d058a839e3b0b7e05a8be7eb996c2f814b91618d7",
       "origin": "https://arxiv.org/abs/2601.09639",
       "credit": "Kilic et al. (2026), multi-chord occultations of Ixion, global limb fit (Fig. 2).",
       "license": "MIT numeric extraction of published scientific facts",

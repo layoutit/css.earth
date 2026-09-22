@@ -92,14 +92,14 @@
   ],
   "id": "lydia",
   "displayName": "Lydia",
-  "lambda": 149.0,
-  "beta": -55.0,
+  "lambda": 149,
+  "beta": -55,
   "periodHours": 10.9258,
   "version": "2009-02-26",
   "nonconvex": false,
   "calibrated": true,
-  "diameterKm": 91.0,
-  "uncertaintyKm": 1.0,
+  "diameterKm": 91,
+  "uncertaintyKm": 1,
   "akari": {
     "number": 110,
     "name": "Lydia",
@@ -110,7 +110,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/361/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/359/IAUspin.txt",
-  "shapeSha256": "ce4560318a58f130ddd60a01038a7fdb3bcc30554d3507ade899cda740975004",
   "shapeBytes": 129283,
   "vertices": 1597,
   "faces": 3190,
@@ -155,9 +154,9 @@
   },
   "declaredDiameterComparison": {
     "sourceVolumeEquivalentDiameter": 90.99999280864861,
-    "declaredDiameterKm": 91.0,
-    "relativeDifference": -7.902583942787089e-08,
-    "scaledDiameterKm": 91.0
+    "declaredDiameterKm": 91,
+    "relativeDifference": -7.902583942787089e-8,
+    "scaledDiameterKm": 91
   },
   "alternatives": [
     {
@@ -268,8 +267,8 @@
   ],
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
-    "diameterKm": 91.0,
-    "uncertaintyKm": 1.0,
+    "diameterKm": 91,
+    "uncertaintyKm": 1,
     "uncertaintyKind": "DAMIT represents the published 90–92 km thermophysical fit range as 91±1 km. This is a fit range, not an independently stated one-sigma Gaussian confidence interval or a local shape-accuracy bound.",
     "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/152",

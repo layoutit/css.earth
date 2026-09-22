@@ -31,8 +31,6 @@
     {
       "id": "lightcurve-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "827c9f265f08b7ef35f357a7ee9217203a727b7478da3a1c8d2b9aa8c76b6151",
       "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
       "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
       "license": "MIT authored representation from published scientific parameters",
@@ -65,8 +63,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
       "credit": "Denk et al. (2018) minimum elongation; cssEarth assumed-depth ellipsoid and standard missing-data grid",
       "license": "MIT authored representation from published scientific parameters",

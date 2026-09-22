@@ -54,8 +54,8 @@
           384
         ],
         "centre": [
-          288.0,
-          288.0
+          288,
+          288
         ],
         "offset": [
           0.377492219209671,
@@ -78,8 +78,8 @@
           384
         ],
         "centre": [
-          752.0,
-          288.0
+          752,
+          288
         ],
         "offset": [
           1.2026250809431076,
@@ -102,8 +102,8 @@
           848
         ],
         "centre": [
-          288.0,
-          752.0
+          288,
+          752
         ],
         "offset": [
           -2.4845826625823975,
@@ -126,8 +126,8 @@
           848
         ],
         "centre": [
-          752.0,
-          752.0
+          752,
+          752
         ],
         "offset": [
           -5.908833287656307,
@@ -167,8 +167,8 @@
           384
         ],
         "centre": [
-          288.0,
-          288.0
+          288,
+          288
         ],
         "offset": [
           -0.16440686583518982,
@@ -186,8 +186,8 @@
           384
         ],
         "centre": [
-          752.0,
-          288.0
+          752,
+          288
         ],
         "offset": [
           0.9847937803715467,
@@ -205,8 +205,8 @@
           848
         ],
         "centre": [
-          288.0,
-          752.0
+          288,
+          752
         ],
         "offset": [
           3.10289416462183,
@@ -224,8 +224,8 @@
           848
         ],
         "centre": [
-          752.0,
-          752.0
+          752,
+          752
         ],
         "offset": [
           0.11996334791183472,
@@ -305,53 +305,6 @@
         -144.5
       ],
       "pixelAngleMicroradians": 5.9896977199
-    }
-  ],
-  "sourcePins": [
-    {
-      "path": "observations/N1506391424_2_CALIB.IMG",
-      "bytes": 4202496,
-      "sha256": "b212dac15ff2cec9213da76d2f0a540a1d6dfb10646e727bc472db0a99e25669"
-    },
-    {
-      "path": "observations/N1506391424_2_CALIB.LBL",
-      "bytes": 3825,
-      "sha256": "0b98753adc1818c17392dc8590f90f6526ee576373589ffa4f871d3ade8b726c"
-    },
-    {
-      "path": "shape/hyperion_30k_plt.tab",
-      "bytes": 2195250,
-      "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
-    },
-    {
-      "path": "shape/hyperion_document.pdf",
-      "bytes": 79311,
-      "sha256": "8d1a549688360a8bee5971b2b4bfe11660a010d2225d910070a3c94be9477942"
-    },
-    {
-      "path": "observations/cas_iss_v10.ti",
-      "bytes": 31060,
-      "sha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
-    },
-    {
-      "path": "observations/N1506388174_2_CALIB.IMG",
-      "bytes": 4202496,
-      "sha256": "b255f7921c6a03784e0de245bca7b36477058ad6d4b57f3e82ff5c7121c83002"
-    },
-    {
-      "path": "observations/N1506388518_2_CALIB.IMG",
-      "bytes": 4202496,
-      "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80"
-    },
-    {
-      "path": "observations/N1506388840_2_CALIB.IMG",
-      "bytes": 4202496,
-      "sha256": "7fd3bb4d4c4fd1b8b26dfa6cf35c48a1f7711bfe5da307762720cb801a43f85e"
-    },
-    {
-      "path": "observations/N1506389178_2_CALIB.IMG",
-      "bytes": 4202496,
-      "sha256": "29ff6539441b348e70fe0d5327d5666275ace1a337f287afe2a93b92dd828854"
     }
   ],
   "limits": [

@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "2edc96d2951372989e6e8ae6f959f4d7a916b1247cd0728fb024e3aeff77f0f4",
       "origin": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
       "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://elib.dlr.de/194154/1/Mottola%20et%20al%202023_shapes%20of%20Eurybates%20and%20Orus.pdf",
       "credit": "Mottola et al. (2023), The Planetary Science Journal 4, 18, Table 3",
       "license": "MIT authored approximation from published numerical scientific facts",

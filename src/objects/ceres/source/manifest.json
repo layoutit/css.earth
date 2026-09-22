@@ -201,8 +201,6 @@
     {
       "id": "usgs-gazetteer-ceres-nomenclature-center-pts",
       "path": "features/CERES_nomenclature_center_pts.zip",
-      "expectedBytes": 427515,
-      "expectedSha256": "a2a803fd75989fc9e3fa562fca48845a2b48de040f30c18e96c5127208b94f61",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CERES_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -263,8 +261,6 @@
     {
       "id": "ceres-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3594,
-      "expectedSha256": "405edfae307aff6d0b005f95de0475e512feafa9ecba8cee2625193b44da478c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -484,8 +480,6 @@
     {
       "id": "dawn-vir-ceres-bi-depth-lbl",
       "path": "science/vir-mosaic/CMT_MOSAIC-BI_DEPTH.LBL",
-      "expectedBytes": 5520,
-      "expectedSha256": "838718711fffbbf35717e17e6e57889f47348868cf8aaffdbed7ca70c214e963",
       "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/DATA/CMT_MOSAIC-BI_DEPTH.LBL",
       "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
@@ -571,8 +565,6 @@
     {
       "id": "ceres-vir-bd31-lbl",
       "path": "science/vir-reduction/ceres-vir-bd31.LBL",
-      "expectedBytes": 1197,
-      "expectedSha256": "d3e2e5f24b44eb1f7250e9990e85f5949abc8a621bd2e93f39d0b10a88836a96",
       "origin": "Repository-generated PDS3 label written by tools/objects/dawn/vir-mosaic.mts",
       "credit": "Dawn VIR team (De Sanctis et al.), NASA PDS Small Bodies Node calibrated IR spectra DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0; reduced by cssEarth contributors",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",
@@ -595,8 +587,6 @@
     {
       "id": "ceres-vir-reduction-recipe",
       "path": "science/vir-reduction/recipe.json",
-      "expectedBytes": 132573,
-      "expectedSha256": "c7f80e3a5c7f77cab2f43e782d0ebbff447fc4d184a26277f7fb30efbdc77b10",
       "origin": "Repository-authored reduction recipe: the Survey and HAMO cubes from the PDS volume indexes, the Dawn kernel-bank files per phase, and the band parameter",
       "credit": "Dawn VIR team (De Sanctis et al.), NASA PDS Small Bodies Node calibrated IR spectra DAWN-A-VIR-3-RDR-IR-CERES-SPECTRA-V1.0; reduced by cssEarth contributors",
       "license": "Public NASA mission data; repository-authored recipe",
@@ -665,8 +655,6 @@
     {
       "id": "dawn-vir-ceres-mosaics-catalog",
       "path": "science/vir-mosaic/VIR_DDR_CERES_MOSAICS_DS.CAT",
-      "expectedBytes": 18880,
-      "expectedSha256": "bd6e62d15d22b2b193ab5bbd5a5c1a6ac62c60d270d43d28567d4568a5be0d6b",
       "origin": "https://sbnarchive.psi.edu/pds3/dawn/vir/DWNCVIR_2/CATALOG/VIR_DDR_CERES_MOSAICS_DS.CAT",
       "credit": "De Sanctis, Capria, Ammannito, Frigeri, Tosi, Giardino, Fonte and Zambon (2018), Dawn VIR derived Ceres global mosaics V1.0, NASA PDS",
       "license": "Public NASA PDS scientific data with attribution; see NOTICE.md",

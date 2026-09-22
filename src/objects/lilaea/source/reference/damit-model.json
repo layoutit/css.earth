@@ -76,8 +76,8 @@
   ],
   "id": "lilaea",
   "displayName": "Lilaea",
-  "lambda": 173.0,
-  "beta": 76.0,
+  "lambda": 173,
+  "beta": 76,
   "periodHours": 12.0395,
   "version": "2022-11-29",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/84844/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/84842/IAUspin",
-  "shapeSha256": "0086f2f76f18239a5345be68633ff70bec9e91ef0e30318c0157c07c72bfd27d",
   "shapeBytes": 46419,
   "vertices": 574,
   "faces": 1144,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 1144,
-    "minDoubleTriangleAreaSourceUnits2": 7.67278995411852e-07
+    "minDoubleTriangleAreaSourceUnits2": 7.67278995411852e-7
   },
   "independentAnchors": [
     {
@@ -289,8 +288,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2456959.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2456959,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

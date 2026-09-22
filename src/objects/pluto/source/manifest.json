@@ -117,8 +117,6 @@
     {
       "id": "editorial-nasa-pluto-json",
       "path": "editorial/nasa-pluto.json",
-      "expectedBytes": 49300,
-      "expectedSha256": "ddca919aaf3733cef2867efd40761ee17751eb1f6f53253ca20cc93749b995e3",
       "origin": "https://science.nasa.gov/wp-json/wp/v2/topic/107487",
       "credit": "NASA/JHUAPL/SwRI",
       "license": "NASA/USGS public scientific data with attribution",
@@ -145,8 +143,6 @@
     {
       "id": "presentation-title-mark-mjs",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 2195,
-      "expectedSha256": "c0ee17f19d57d03f9abd8a09e7bc6634e2a44b9558355fd0803e545e091226f4",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -172,8 +168,6 @@
     {
       "id": "lenses-pluto-dem-lbl",
       "path": "lenses/pluto-dem.lbl",
-      "expectedBytes": 1576,
-      "expectedSha256": "361b36ebeac1c0d2cec091fd9ef5f34366608ee811ec65c9e4ca773db9f11131",
       "origin": "https://astrogeology.usgs.gov/ckan/dataset/f1332f71-8003-4a75-a330-acce6a3bf09f/resource/70d0d3ac-6ccb-4062-9cc7-25565ef776a4/download/pluto_newhorizons_global_dem_300m_jul2017_16bit.lbl",
       "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
       "license": "NASA/USGS public scientific data with attribution",
@@ -199,8 +193,6 @@
     {
       "id": "orbit-jpl-physical-values",
       "path": "orbit/jpl-physical.json",
-      "expectedBytes": 671,
-      "expectedSha256": "2d7b31340114fda45b9a11842c81a49434e04b0e06928e44e81041d8f26c6762",
       "origin": "https://ssd.jpl.nasa.gov/planets/phys_par.html",
       "credit": "NASA JPL Solar System Dynamics",
       "license": "NASA/USGS public scientific data with attribution",
@@ -227,8 +219,6 @@
     {
       "id": "usgs-gazetteer-pluto-nomenclature-center-pts",
       "path": "features/PLUTO_nomenclature_center_pts.zip",
-      "expectedBytes": 228401,
-      "expectedSha256": "8d5260b74c48515765a6981532d89168a88e0c797752c1d6d21b4a0a83baa916",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PLUTO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

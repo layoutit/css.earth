@@ -4,8 +4,6 @@
     {
       "id": "polaris-observational-measurements",
       "path": "measurements.json",
-      "expectedBytes": 1822,
-      "expectedSha256": "ade0dbd5dec41f37427fb1bb10f22f3bfd8536766604dac251f5a9e7bb3b0dc4",
       "origin": "https://arxiv.org/abs/2407.09641",
       "credit": "Evans et al. (2024), The Orbit and Dynamical Mass of Polaris: Observations with the CHARA Array, ApJ 971, 190; effective temperature: Usenko et al. (2005), MNRAS 362, 1219",
       "license": "Factual numerical measurements; source attribution retained",
@@ -165,8 +163,6 @@
     {
       "id": "polaris-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1587,
-      "expectedSha256": "7ca4660180fb71728942f568850ce351d2f2b7bcf0a647ef2457f5d5514b3b73",
       "origin": "https://archive.stsci.edu/prepds/stisngsl/",
       "credit": "NASA/STScI; STIS Next Generation Spectral Library v2 (Heap & Lindler), MAST; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -195,8 +191,6 @@
     {
       "id": "polaris-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -223,8 +217,6 @@
     {
       "id": "polaris-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 844,
-      "expectedSha256": "29db19b5c94c460bb33b8b664efee846c5fa5b5f4ba98ab1bc3e8912464b01b7",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

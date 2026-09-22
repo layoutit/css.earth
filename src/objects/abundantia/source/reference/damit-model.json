@@ -76,8 +76,8 @@
   ],
   "id": "abundantia",
   "displayName": "Abundantia",
-  "lambda": 188.0,
-  "beta": 32.0,
+  "lambda": 188,
+  "beta": 32,
   "periodHours": 9.8643,
   "version": "2019-10-23",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53045/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53043/IAUspin",
-  "shapeSha256": "30c56d5b9f294437dfb49eec0cc71c4ff68980845df2ef72f0ccfed1bac61478",
   "shapeBytes": 46419,
   "vertices": 574,
   "faces": 1144,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 5.8245347118685996e-08
+    "minimumTriangleAreaSourceUnitsSquared": 5.8245347118685996e-8
   },
   "anchors": [
     {

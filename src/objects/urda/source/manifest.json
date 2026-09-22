@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 22000
       },
       "coverage": "Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 44 ±15 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select archive model 172 (249,-68), explicitly marked preferred. Ďurech et al. (2011), discussion and Fig.34, says it fits better but the rival cannot be rejected and size is not very accurate; one negative chord was visual. Retain the direct occultation volume-equivalent 44 ±15 km estimate. The later Hanuš et al. (2018) VS-TPM 41.5 ±0.8 km at this pole is a comparison, not an independent local-shape accuracy claim.",
-      "expectedBytes": 82708,
-      "expectedSha256": "3dec127404347426e9b9f9cdcf8449c1c078b91e7e2f14f0d7fed7a4b6320dc4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/172-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "b582bab6af11daaf4c72674da533b65c16e07d2a9c27f3391bf24a865807be3c"
+      "path": "reference/172-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

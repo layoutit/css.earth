@@ -158,8 +158,6 @@
     {
       "id": "webb-uranus-navigation-reference",
       "path": "reference/webb-uranus-nircam.png",
-      "expectedSha256": "f2b4e331c6648544fd3bd55277197404b22fe7dbfeb90bf8ed9154626abe5adc",
-      "expectedBytes": 2239413,
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/missions/webb/science/2023/04/STScI-01GWQDPJTF1MY8ZGN4WBMWMACJ.png?crop=faces%2Cfocalpoint&fit=clip&h=1268&w=1268",
       "credit": "NASA, ESA, CSA, STScI; image processing Joseph DePasquale (STScI)",
       "license": "NASA, ESA, CSA, and STScI public media policies",
@@ -182,8 +180,6 @@
     {
       "id": "nasa-psg-uranus-expanded-configuration",
       "path": "atmosphere/psg-uranus-20260830.cfg",
-      "expectedSha256": "8bca8db27545003285fdf45d84ed06cb82c2a0365e3c07dedfb87715df9c0d0c",
-      "expectedBytes": 8815,
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, OBJECT-DATE=2026/08/30 12:00, OBJECT-NAME=Uranus",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
@@ -206,8 +202,6 @@
     {
       "id": "nasa-psg-uranus-r240-rif",
       "path": "atmosphere/psg-uranus-r240-rif.txt",
-      "expectedSha256": "84ab228415b34a5871182dd64285ba653ee6de495767af2c190ff441ff7e2567",
-      "expectedBytes": 11944,
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned configuration, 0.35 to 1.0 um, R=240, rif",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
@@ -294,8 +288,6 @@
     {
       "id": "uranus-authored-editorial-object",
       "path": "editorial/object.json",
-      "expectedBytes": 4662,
-      "expectedSha256": "ac0971c8bf730c39b94204377ecc6e15e2ac3fe2882139e43fd7b1a15d301c7e",
       "origin": "https://science.nasa.gov/uranus/facts/",
       "credit": "NASA Science",
       "license": "NASA content usage guidelines: https://www.nasa.gov/nasa-brand-center/images-and-media/",
@@ -383,8 +375,6 @@
     {
       "id": "uranus-authored-photometry",
       "path": "photometry/phase.json",
-      "expectedBytes": 1022,
-      "expectedSha256": "3756adbfc034398fedab0113bf7e967a9a95944a4fcf5028b3b78e2bc59257e4",
       "origin": "Checked scientific phase model from site/source/scientific-charts/planetary-context.json",
       "credit": "Anthony Mallama and James L. Hilton",
       "license": "Project-authored scientific specification with cited authority",

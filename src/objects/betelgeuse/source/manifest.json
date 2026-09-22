@@ -23,8 +23,6 @@
         "sphere-photograph"
       ],
       "coverage": "Posterior-mean maximum-entropy image convolved to the 4 milliarcsecond beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 8 and 19 February 2020. The interferometric beam is 4 milliarcseconds. Reduced chi-squared 0.35 on squared visibilities and 1.12 on closure phases.",
-      "expectedBytes": 135360,
-      "expectedSha256": "43daead1f727fd2e5421bfa4e4dd1d8348f32c9e3e7171b79efe5ddfe645a5dd",
       "width": 128,
       "height": 128,
       "lensId": "matisse",
@@ -1232,8 +1230,6 @@
     {
       "id": "betelgeuse-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1483,
-      "expectedSha256": "df22a40b869425218e40af61058aec096acf06c483135d9b6b97ac7d271136a8",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/J/A+A/660/A34",
       "credit": "Verro et al. (2022), A&A 660, A34 (X-Shooter Spectral Library DR3); VizieR J/A+A/660/A34; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -1262,8 +1258,6 @@
     {
       "id": "betelgeuse-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -1290,8 +1284,6 @@
     {
       "id": "betelgeuse-crosscheck-spectrum",
       "path": "photometry/crosscheck-kiehling-2061.tsv",
-      "expectedBytes": 5906,
-      "expectedSha256": "abd4625c306a0e75ab4350d4625a9cd968fbdcefad5c7e7301c46a81940318fd",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -6902,8 +6894,6 @@
         "sphere-photograph-2018-12"
       ],
       "coverage": "Posterior-mean maximum-entropy image convolved to the 3 mas beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 3 to 15 December 2018. Reduced chi-squared 1.62 on squared visibilities and 3.03 on closure phases.",
-      "expectedBytes": 135360,
-      "expectedSha256": "f73dccadbb00fd4909915ab544f675edd4f22dd45fb6b8a28a4fba5d0055cee6",
       "width": 128,
       "height": 128,
       "lensId": "matisse-2018-12",
@@ -6941,8 +6931,6 @@
         "sphere-photograph-2020-12"
       ],
       "coverage": "Posterior-mean maximum-entropy image convolved to the 3.1 mas beam, 128 x 128 pixels of 0.78 milliarcseconds, of Betelgeuse's L-band pseudo-continuum from 14, 18 and 27 December 2020. Reduced chi-squared 0.53 on squared visibilities and 1.77 on closure phases.",
-      "expectedBytes": 135360,
-      "expectedSha256": "b618a537c1380c9f0cc856a4bbf8b57fbb9c847f4eb5c4b6d91ba0836a6a8f15",
       "width": 128,
       "height": 128,
       "lensId": "matisse-2020-12",

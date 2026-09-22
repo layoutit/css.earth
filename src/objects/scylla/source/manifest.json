@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 19605
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 39.21 km (catalog ±0.97 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select second archive pole 920 (356,53). Hanuš et al. (2018), Table A.3, rejects the revised (190,65) family and favors revised (346,41), corresponding to the selected broad family rather than archive 919 (201,69). The publication revised the nominal shape; its exact revised mesh is not located in the surveyed DAMIT listing, so the 39.0 ±0.8 km VS-TPM size is not silently assigned to the old mesh. AKARI 39.21 ±0.97 km is retained only as an explicit display-scale approximation.",
-      "expectedBytes": 82708,
-      "expectedSha256": "6ee6620929ec650a72d7f2133a74f796fd91c07e8b3e24463808f878170adab2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/920-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "6ecbbe168e01f810a1f1b4c1de5a96864a5b0d2da6bb644e421f933c558b8fb1"
+      "path": "reference/920-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

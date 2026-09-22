@@ -76,8 +76,8 @@
   ],
   "id": "nuwa",
   "displayName": "Nuwa",
-  "lambda": 359.0,
-  "beta": 25.0,
+  "lambda": 359,
+  "beta": 25,
   "periodHours": 8.13456,
   "version": "2016-01-04",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4296/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4294/IAUspin.txt",
-  "shapeSha256": "b576ef6ed10c1950eb578412561c1829d8d537c14ad28ac7ff30cb5ceb14135a",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 6.976424154606103e-08
+    "minimumTriangleAreaSourceUnitsSquared": 6.976424154606103e-8
   },
   "anchors": [
     {

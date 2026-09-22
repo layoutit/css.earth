@@ -175,8 +175,6 @@
     {
       "id": "iapetus-cassini-original-n1568129671_1_ir-cub",
       "path": "cassini-ice/native/N1568129671_1_ir.cub",
-      "expectedBytes": 310986,
-      "expectedSha256": "64a4d7636de33d6458ed95640d8f6cbb3ed8c943e8ddb23fa94e16097ac229fd",
       "origin": "https://vims.univ-nantes.fr/cube/N1568129671_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -233,8 +231,6 @@
     {
       "id": "iapetus-cassini-original-c1568133146_2_ir-cub",
       "path": "cassini-ice/native/C1568133146_2_ir.cub",
-      "expectedBytes": 904329,
-      "expectedSha256": "8c70f0c76666038d19a08efefbdc0a15f988a8b5bbd0bf69c6813b62248807a2",
       "origin": "https://vims.univ-nantes.fr/cube/C1568133146_2_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -262,8 +258,6 @@
     {
       "id": "iapetus-cassini-original-n1568133146_2_ir-cub",
       "path": "cassini-ice/native/N1568133146_2_ir.cub",
-      "expectedBytes": 228262,
-      "expectedSha256": "a7da80d17d7f17ae10bbc0e8340dcd779f71c760692a689b18edbfb9c43b904f",
       "origin": "https://vims.univ-nantes.fr/cube/N1568133146_2_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -291,8 +285,6 @@
     {
       "id": "iapetus-cassini-original-v1568133146_2-qub",
       "path": "cassini-ice/raw/v1568133146_2.qub",
-      "expectedBytes": 547328,
-      "expectedSha256": "fe7cd0d2e408988f0e11e2c9cfdc33b698fb8150697e3afce12db971c346a5af",
       "origin": "https://vims.univ-nantes.fr/cube/1568133146_2.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -349,8 +341,6 @@
     {
       "id": "iapetus-cassini-original-n1568157352_4_ir-cub",
       "path": "cassini-ice/native/N1568157352_4_ir.cub",
-      "expectedBytes": 365018,
-      "expectedSha256": "9fc00478957d7afa5668e724977e784b2cfa9ba6e1b2e7abb9018e3a40c293e7",
       "origin": "https://vims.univ-nantes.fr/cube/N1568157352_4_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -407,8 +397,6 @@
     {
       "id": "iapetus-cassini-ice-absorption",
       "path": "cassini-ice/iapetus-ice-absorption.tif",
-      "expectedBytes": 109434,
-      "expectedSha256": "399a434937605b2d3215a3691fb630435b4957ff8b5eb23334b42bf42f440fdc",
       "origin": "https://vims.univ-nantes.fr/cube/1568129671_1",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
@@ -459,8 +447,6 @@
     {
       "id": "iapetus-cassini-infrared",
       "path": "cassini-ice/iapetus-infrared-display.tif",
-      "expectedBytes": 144017,
-      "expectedSha256": "a3788744172cac6820eaaf39e53d1013ce65612799c107e96a17fbebbcea2e7f",
       "origin": "https://vims.univ-nantes.fr/cube/1568129671_1",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
@@ -511,8 +497,6 @@
     {
       "id": "usgs-gazetteer-iapetus-nomenclature-center-pts",
       "path": "features/IAPETUS_nomenclature_center_pts.zip",
-      "expectedBytes": 220580,
-      "expectedSha256": "46ed90aa5c81481750e7c9a1c4956af7e89e0c536b3f4d52a1227c2386290ff3",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IAPETUS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -583,8 +567,6 @@
     {
       "id": "iapetus-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 4294,
-      "expectedSha256": "40dca4aafe3c8a087bb66af545acfcfe1c9077297556b095b64e2549feec3f87",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",

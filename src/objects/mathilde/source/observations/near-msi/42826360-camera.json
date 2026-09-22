@@ -70,41 +70,30 @@
   "met": 42826360,
   "filter": "0",
   "startTime": "1997-06-27T12:55:52.496Z",
-  "imageSha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d",
-  "rawSha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c",
-  "meshSha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720",
   "provenance": [
     {
-      "path": "shape/stooke-253mathilde.tab",
-      "sha256": "fa5b9836c7085dcccfd9e579e225720c87aac53952626292bff6c74a260e0720"
+      "path": "shape/stooke-253mathilde.tab"
     },
     {
-      "path": "preparation/near-msi.json",
-      "sha256": "7a29c6b463d276b21286dda02890b8864d0011eff06722a05bec794aab69f30e"
+      "path": "preparation/near-msi.json"
     },
     {
-      "path": "reference/253mathimg.tab",
-      "sha256": "f0ad2894719b09efbcde47e27074fcdc68f3afddd7b852d920ea26d2e357b6b0"
+      "path": "reference/253mathimg.tab"
     },
     {
-      "path": "observations/near-msi/m0042826360f0_2p_iof.fit",
-      "sha256": "c852aeb4858a579821e724419c4cdebfb895749423c039e54e75b72986a8de8d"
+      "path": "observations/near-msi/m0042826360f0_2p_iof.fit"
     },
     {
-      "path": "observations/near-msi/m0042826360f0_2p.fit",
-      "sha256": "c0c16f2c972f1a2b0b12acc2a22244a5ba054cf50768fb1bade203d62d04a29c"
+      "path": "observations/near-msi/m0042826360f0_2p.fit"
     },
     {
-      "path": "observations/near-msi/m0042826360f0_2p_iof.xml",
-      "sha256": "399ced8980cad90e87bb692aedeac32759d8a1ebea5c9ba4ece579d7d467d52d"
+      "path": "observations/near-msi/m0042826360f0_2p_iof.xml"
     },
     {
-      "path": "reference/253mathimg.xml",
-      "sha256": "a23e17406a9bdc3221cd5ac678432242ba13ea4fea03a98e5fb66afd61b12995"
+      "path": "reference/253mathimg.xml"
     },
     {
-      "path": "reference/stooke-253mathilde.xml",
-      "sha256": "1490838df80d8b5c21f985d459d13b7dacde9f7934044db6d696303c2297ab14"
+      "path": "reference/stooke-253mathilde.xml"
     }
   ]
 }

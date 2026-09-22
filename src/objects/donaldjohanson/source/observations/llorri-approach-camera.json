@@ -136,7 +136,6 @@
       41.206968574934635
     ]
   },
-  "imageSha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284",
   "checks": {
     "status": "registered-image-overlap",
     "pointing": "Original FITS WCS plus detector translation from registered-image overlap; disjoint fit and holdout grids.",
@@ -11844,51 +11843,39 @@
       "limitations": "Relative overlap registration inherits the published-landmark reference and preliminary source-shape uncertainty. Relative residuals do not establish absolute surface accuracy."
     }
   },
-  "meshSha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
   "provenance": [
     {
-      "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit",
-      "sha256": "d7b06c7b8cb27ecb630d0b36b4c566adaeb272bfaea4b80ea55079627cdf8284"
+      "path": "observations/lor_0798443242_04596_00001_1x1_sci_03.fit"
     },
     {
-      "path": "reference/lor_0798443242_04596_00001_1x1_sci_03.xml",
-      "sha256": "99df931af2c813f11e280ac73469521cbb01a80873d1be5f16672df163ac3c58"
+      "path": "reference/lor_0798443242_04596_00001_1x1_sci_03.xml"
     },
     {
-      "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
-      "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557"
+      "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit"
     },
     {
-      "path": "observations/llorri-camera.json",
-      "sha256": "7acf747416aebcf252585d62d36b43aa98b299d308de5c7e1bb8fdf1b84e60ac"
+      "path": "observations/llorri-camera.json"
     },
     {
-      "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
-      "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7"
+      "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz"
     },
     {
-      "path": "reference/naif0012.tls",
-      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "reference/naif0012.tls"
     },
     {
-      "path": "reference/donaldjohanson_v12.tpc",
-      "sha256": "c45817cad95c54e2a4c8c59d0b7944418b68e2b52409a1485d128afbc9da1021"
+      "path": "reference/donaldjohanson_v12.tpc"
     },
     {
-      "path": "preparation/llorri-overlap.json",
-      "sha256": "d5a7330117679c90185ad02c2a286854d8d6f7a9803d5151db1e8d9598ff3b3b"
+      "path": "preparation/llorri-overlap.json"
     },
     {
-      "path": "preparation/camera.json",
-      "sha256": "3d3955788f72b830eeefa708f02243f148cfd7d98e02ec0c54fe46255d603aa4"
+      "path": "preparation/camera.json"
     },
     {
-      "path": "reference/lor_0798443290_04598_00035_1x1_sci_03.xml",
-      "sha256": "732863d8aca2d3c723ae34de2e5bed1d79641434419a03f2efc68faba8488b9c"
+      "path": "reference/lor_0798443290_04598_00035_1x1_sci_03.xml"
     },
     {
-      "path": "reference/coordinate-system.pdf",
-      "sha256": "744a6482837456a97cd1d59f1eda426660030e72f2a5bd646f6bd4136766c8e0"
+      "path": "reference/coordinate-system.pdf"
     }
   ]
 }

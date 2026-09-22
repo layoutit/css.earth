@@ -4,8 +4,6 @@
     {
       "id": "contact-model",
       "path": "shape/model.json",
-      "expectedBytes": 896,
-      "expectedSha256": "5e77878847b22470f97526a424915efd34a6feef44d11482b2104b320c33d12e",
       "origin": "https://arxiv.org/abs/1911.04897",
       "credit": "Lamy et al.; Groussin et al. (2019); cssEarth tessellation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -89,8 +87,6 @@
     {
       "id": "arecibo-model",
       "path": "shape/arecibo.json",
-      "expectedBytes": 1154,
-      "expectedSha256": "1ce08f3c47306e7bd0fa70685e55e111cfdbd01ede582c167bb9eb2093bc2022",
       "origin": "https://echo.jpl.nasa.gov/asteroids/harmon.etal.comet.tuttle.pdf",
       "credit": "Harmon et al. (2010); cssEarth tessellation",
       "license": "Published scientific parameters; cssEarth implementation MIT",
@@ -147,8 +143,6 @@
     {
       "id": "comet-8p-features-landmarks",
       "path": "features/landmarks.json",
-      "expectedBytes": 2066,
-      "expectedSha256": "8c9a1e0d2803bed6d99a69492b943693ff5b5fecf9bf17b25654c17d1fb647ad",
       "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",

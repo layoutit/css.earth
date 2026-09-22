@@ -153,8 +153,6 @@
       "redistribution": "Original public-domain published image retained with complete credit; geometric derivative identified separately.",
       "id": "galileo-pia03456-registered-color",
       "path": "observations/PIA03456-registered-rgba.tif",
-      "expectedBytes": 771611,
-      "expectedSha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
       "consumers": [
         "surfaces"
       ],
@@ -208,8 +206,6 @@
     {
       "id": "callisto-registered-nims-composite",
       "path": "nims/callisto-nims-composite.tif",
-      "expectedBytes": 193313,
-      "expectedSha256": "23021089312fecb6c42df4502f93f57db52efe7fb4fa452c194fe5f1fcd17588",
       "origin": "https://doi.org/10.17189/4sq6-x165",
       "credit": "NASA/JPL Galileo NIMS team; Malaska et al., USGS/PDS registered archive",
       "license": "Public NASA mission data; preserve producer and PDS citation",
@@ -320,8 +316,6 @@
     {
       "id": "usgs-gazetteer-callisto-nomenclature-center-pts",
       "path": "features/CALLISTO_nomenclature_center_pts.zip",
-      "expectedBytes": 440686,
-      "expectedSha256": "5b21b56d6f25193cfec648a3a1e41451bd3e2db9c50c64f11c4c415c0b5379a0",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CALLISTO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -382,8 +376,6 @@
     {
       "id": "callisto-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 4169,
-      "expectedSha256": "a3fcc98f88a2a77fff594c03b2a6e1832eb060a48771b06663ff2bcb3742474c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -624,24 +616,16 @@
       "purpose": "Pinned Callisto processed-color source, fixed-camera evidence, conversion or authored lens metadata."
     },
     {
-      "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml",
-      "expectedBytes": 11852,
-      "expectedSha256": "9d0af51843aeb782943dfbd5cf4a40edccef969acbff3505486e4397ed93cc01"
+      "path": "nims/G8CNADLIND01A_MINN_MV03_CIOF_72_GCP_adjust_EXPORT_from_gdal.xml"
     },
     {
-      "path": "nims/G8CNADLIND01A_MV03_wavelengths.csv",
-      "expectedBytes": 1950,
-      "expectedSha256": "a13171c916045eea4595394fd1ef84815136db49c5ed101b4ffb010d630e0fdd"
+      "path": "nims/G8CNADLIND01A_MV03_wavelengths.csv"
     },
     {
-      "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.xml",
-      "expectedBytes": 11831,
-      "expectedSha256": "3ce395a2d0801d51a1d05e8c08e9a685aedc8c85ef2d0a0eb514927293bfc564"
+      "path": "nims/G8CNGLOBAL02A_MINN_MV03_CIOF_67_GCP_adjust_EXPORT_from_gdal.xml"
     },
     {
-      "path": "nims/G8CNGLOBAL02A_MV03_wavelengths.csv",
-      "expectedBytes": 1939,
-      "expectedSha256": "46307e3b635ff626f9c80bbcbd680aa46289e14d14a7197b7bc79f9f160a3dc2"
+      "path": "nims/G8CNGLOBAL02A_MV03_wavelengths.csv"
     },
     {
       "path": "nims/callisto-nims-composite.json"

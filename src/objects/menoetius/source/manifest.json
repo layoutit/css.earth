@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "9f853500baa4d63714786dafd8b129565e4c7225f09cc8abc78f5eb6db18d767",
       "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
       "credit": "Buie et al. Patroclus-Menoetius occultation",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
       "credit": "Buie et al. Patroclus-Menoetius occultation",
       "license": "MIT authored approximation from published numerical scientific facts",

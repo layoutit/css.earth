@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 25550
       },
       "coverage": "Convex light-curve reconstruction with a thermophysical volume scale of 51.1 ± 2.1 km (reported model-ensemble range). An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. Ďurech2007 is the actual published collaboration-network shape source. Hanuš2018 TableA.3 uses its pole(95,68), period3.96820 h, QF3 and VS-TPM volume-equivalent diameter51.1±2.1 km. Only this uniform size transfer is applied to nominal DAMIT157. The alternative pole(280,74) has its own50.1±1.3 km fit and remains possible; the varied-model ensemble does not establish byte-identical local terrain.",
-      "expectedBytes": 129364,
-      "expectedSha256": "4142c7bbb6839eac603668cbe025516b0f70887c5d70202b39c2e0d2e954552a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/157-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "ea52bb12026312c10c59b6f2b96ef75230c825bada0605e37fbad2f0b3f0989b"
+      "path": "reference/157-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

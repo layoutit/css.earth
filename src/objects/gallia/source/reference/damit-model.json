@@ -76,8 +76,8 @@
   ],
   "id": "gallia",
   "displayName": "Gallia",
-  "lambda": 140.0,
-  "beta": -17.0,
+  "lambda": 140,
+  "beta": -17,
   "periodHours": 20.6636,
   "version": "2019-10-23",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/52991/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/52989/IAUspin",
-  "shapeSha256": "dfae149a3e1dd7938f6bb711488c8d230804ca7efe942f776479be14f138ab0a",
   "shapeBytes": 46257,
   "vertices": 572,
   "faces": 1140,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 2.9137716979037495e-08
+    "minimumTriangleAreaSourceUnitsSquared": 2.9137716979037495e-8
   },
   "anchors": [
     {

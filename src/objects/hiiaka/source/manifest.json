@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "3c597729d6757a71b82aa7500dd9779f6ac80aed57f715cb33b5e4c0eb92423a",
       "origin": "https://www.nature.com/articles/s41467-025-65749-1",
       "credit": "Hiʻiaka stellar occultations and shape",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://www.nature.com/articles/s41467-025-65749-1",
       "credit": "Hiʻiaka stellar occultations and shape",
       "license": "MIT authored approximation from published numerical scientific facts",

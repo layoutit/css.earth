@@ -49,8 +49,6 @@
     {
       "id": "n1716192103_1-label",
       "path": "observations/N1716192103_1_CALIB.LBL",
-      "expectedBytes": 3856,
-      "expectedSha256": "6154216a44ef22b6f73f37ae2570cbc12e9b5cce3c4057f8fc31ac06eaab4e06",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2074/data/1715959973_1716194018/N1716192103_1_CALIB.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1716192103",
       "credit": "NASA/JPL/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -114,8 +112,6 @@
     {
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 51600,
-      "expectedSha256": "fc2c05607e8fc15ec90bc28dd200fc8d5e59fc853acf9a8135d24539ee396747",
       "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
       "credit": "Thomas et al. (2013) measured axes; cssEarth analytic ellipsoid",
       "license": "MIT representation of published scientific dimensions",

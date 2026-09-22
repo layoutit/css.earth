@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 53870
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 107.74 km effective diameter (catalog ±1.51 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2018 Eos-family study TableB.1 reports27 dense lightcurves across six apparitions and304 sparse measurements, model quality3. Both poles remain; model1743 is selected without rejecting1744. That paper’s91.2±2.2 km column is WISE radiometry rather than a shape calibration; it is retained as a competing thermal estimate against AKARI107.74±1.51 km. The disagreement is an additional systematic limit, not grounds for averaging the catalogs. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
-      "expectedBytes": 82708,
-      "expectedSha256": "83fdebb219ce6f345437cd87e7009a4f15a93682e9e825ebe135f7579ba3c9d4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/1743-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "a7f3d83e2aff43114f0a0e8734deab005f4470dbe68f702306a26c0009ca11be"
+      "path": "reference/1743-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

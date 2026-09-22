@@ -6,26 +6,53 @@
     "id": "cassini-n1496910582",
     "image": "observations/N1496910582_1_CALIB.IMG",
     "label": "observations/N1496910582_1_CALIB.LBL",
-    "imageSha256": "66363342333486a6967427925416bdae1aa385de8efcc78e4e820b0447646143",
     "imageBytes": 4202496,
-    "dimensions": [1024, 1024],
+    "dimensions": [
+      1024,
+      1024
+    ],
     "encoding": "little-endian PC_REAL I/F after the pinned 8192-byte image header"
   },
   "registration": {
     "existingPointingFit": {
-      "center": [510.4075461657933, 511.810320506261],
+      "center": [
+        510.4075461657933,
+        511.810320506261
+      ],
       "northAzimuthDegrees": 269.7761048836602,
       "boundaryRmsPixels": 0.49798008248536413,
       "method": "Measured-axis illuminated limb and terminator fit with OPUS observer/Sun geometry; north fixed independently by Cassini CK/BPC"
     },
     "surfaceControlCheck": {
-      "thresholdsIF": [0.08, 0.12, 0.2],
+      "thresholdsIF": [
+        0.08,
+        0.12,
+        0.2
+      ],
       "brightDiscBoundsPixels": {
-        "0.08": [507, 506, 514, 518],
-        "0.12": [507, 506, 514, 518],
-        "0.2": [507, 506, 514, 517]
+        "0.08": [
+          507,
+          506,
+          514,
+          518
+        ],
+        "0.12": [
+          507,
+          506,
+          514,
+          518
+        ],
+        "0.2": [
+          507,
+          506,
+          514,
+          517
+        ]
       },
-      "brightDiscSpansPixels": [8, 13],
+      "brightDiscSpansPixels": [
+        8,
+        13
+      ],
       "result": "No independently identifiable surface feature survives within the approximately 8 by 13 pixel illuminated disc. The checked crop is a smooth limb-to-center brightness field; the available contrast is insufficient to fit a surface landmark or validate a model rotation/translation beyond the existing limb fit."
     }
   },

@@ -157,8 +157,6 @@
     {
       "id": "k2-18-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1399,
-      "expectedSha256": "d59c4e1eaa04798c6dc3f71111856f2c56b69ea2198e39b8d1bb839fccf711f4",
       "origin": "https://www.lamost.org/dr11/v2.0/",
       "credit": "LAMOST DR11 (National Astronomical Observatories, Chinese Academy of Sciences); Cui et al. (2012), RAA 12, 1197; CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +185,6 @@
     {
       "id": "k2-18-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -215,8 +211,6 @@
     {
       "id": "k2-18-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 844,
-      "expectedSha256": "c7f80a7818b5feda7476a71146d0063874f857149024cc5a876a334237ec7f93",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

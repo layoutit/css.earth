@@ -139,17 +139,17 @@ export function parseEllipsoidParameters(value: unknown) {
 export const parseContactModel = shape({schema:text,origin:text,lobes:array(shape({semiaxesKm:array(number)})),fluxScale:number,subdivisions:number});
 export function choice<const T extends readonly string[]>(...values: T): Decoder<T[number]> { return value => {const match=values.find(item=>item===value);if(match===undefined)throw new TypeError('Unsupported source choice');return match;}; }
 export const parseEncounterControl = shape({bodyToJ2000:array(array(number)),offsetPixels:array(number),maximumOffsetPixels:number});
-export const parseEncounterRegistration = shape({sourceShapeSha256:text,method:text,maximumRmsMeters:number,maximumResidualMeters:number,
-  reference:optional(shape({id:text,imageSha256:text,controlSha256:text})),
+export const parseEncounterRegistration = shape({method:text,maximumRmsMeters:number,maximumResidualMeters:number,
+  reference:optional(shape({id:text})),
   nominalPixelScaleMeters:number,limitations:text,controls:array(shape({id:text,partition:choice('fit','holdout'),sourcePointMeters:array(number),
     sourcePixel:array(number),referencePixel:optional(array(number)),projectionOffsetPixels:optional(array(number)),normal:optional(array(number))}))});
 export const sipCameraFields = {matrix:array(array(number)),sip:shape({referencePixel:array(number),a:array(array(number)),b:array(array(number)),offsetPixels:array(number)})};
 export const parseSipCamera = shape(sipCameraFields);
-export const parseLlorriCamera = shape({...sipCameraFields,target:text,imageSha256:text,startTime:text,width:number,height:number});
+export const parseLlorriCamera = shape({...sipCameraFields,target:text,startTime:text,width:number,height:number});
 
 export const archivedCameraFields = {schema:text,matrix:array(array(number)),rayMatrix:array(array(number)),positionKm:array(number),sunDirection:array(number)};
 export const parseArchivedCamera = shape(archivedCameraFields);
-export const parseReflectanceCamera = shape({...archivedCameraFields,...dimensions,target:text,startTime:text,filter:text,imageSha256:text,firstLine:number,firstSample:number});
+export const parseReflectanceCamera = shape({...archivedCameraFields,...dimensions,target:text,startTime:text,filter:text,firstLine:number,firstSample:number});
 
 export const controlledCameraFields = {observerLatitude:number,observerWestLongitude:number,sunLatitude:number,sunWestLongitude:number,
   rangeKm:number,northAzimuthDegrees:number,pixelAngleMicroradians:number,center:array(number)};
@@ -207,7 +207,7 @@ export const parseSpiceCamera = shape({kernels:array(text),kernelSet:optional(te
 export type SpiceCameraDeclaration = ReturnType<typeof parseSpiceCamera>;
 /** Pointing refinement of an archived or kernel camera against the retained mesh's lit limb, with its evidence budget. */
 export const parseLimbRefinement = shape({method:text,maximumCorrectionDegrees:number,maximumResidualPixels:number,minimumControls:number,threshold:optional(number),searchPixels:optional(number),maximumControls:optional(number),minimumSharpness:optional(number)});
-export const parseGeoCameraClosure = shape({...archivedCameraFields,meshSha256:text,provenance:array(shape({path:text,sha256:text}))});
+export const parseGeoCameraClosure = shape({...archivedCameraFields,provenance:array(shape({path:text}))});
 
 /** Only fields used to interpret science values; source-specific readers own their grids. */
 export function parseSciencePalette(value: unknown) {

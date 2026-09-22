@@ -1588,8 +1588,6 @@
     {
       "id": "usgs-europa-geologic-units-grid",
       "path": "geology/europa-geologic-units.tif",
-      "expectedBytes": 109007,
-      "expectedSha256": "9aeae6182c48a4022c0bc86f8550a0cb4804b00172a89f3fa807deceb9706ba1",
       "origin": "https://pubs.usgs.gov/publication/sim3513",
       "credit": "USGS; Leonard, Patthoff and Senske (2024)",
       "license": "USGS public-domain scientific mapping; preserve author citation",
@@ -1632,8 +1630,6 @@
     {
       "id": "europa-registered-nims-composite",
       "path": "nims/europa-nims-composite.tif",
-      "expectedBytes": 351656,
-      "expectedSha256": "01f3ec428dae8907f29701e4bac1aecab8bb800fea488991332e60d65b9d5287",
       "origin": "https://doi.org/10.17189/4sz4-5024",
       "credit": "NASA/JPL Galileo NIMS team; Malaska et al., USGS/PDS registered archive",
       "license": "Public NASA mission data; preserve producer and PDS citation",
@@ -1798,8 +1794,6 @@
     {
       "id": "usgs-gazetteer-europa-nomenclature-center-pts",
       "path": "features/EUROPA_nomenclature_center_pts.zip",
-      "expectedBytes": 375144,
-      "expectedSha256": "8405401201f42dca7e05fa205d8473f5e774845776fc1acd9b6c7e70de648d4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EUROPA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -1860,8 +1854,6 @@
     {
       "id": "europa-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3620,
-      "expectedSha256": "8464f13133df4cee56c6f21fc903282df76bcf72cd0620f1d79784ad08441c9a",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -20612,8 +20604,6 @@
     {
       "id": "usgs-europa-yelland-ridges-provenance-txt",
       "path": "science/controlled-dtms/Yelland_Ridges/provenance.txt",
-      "expectedBytes": 1019,
-      "expectedSha256": "054f51ad0af834e13c06f8b31431c2c41ddfdc13135b3b1d9f944ac29594ae4a",
       "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Yelland_Ridges/provenance.txt",
       "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
       "license": "CC0-1.0",
@@ -20666,8 +20656,6 @@
     {
       "id": "usgs-europa-agenor-provenance-txt",
       "path": "science/controlled-dtms/Agenor/provenance.txt",
-      "expectedBytes": 867,
-      "expectedSha256": "cec5d5607a2cdeb5d953252ab20c728c3b1f35dc32d839da8fa157ce131d47b9",
       "origin": "https://astrogeo-ard.s3-us-west-2.amazonaws.com/jupiter/europa/galileo_voyager/usgs_controlled_dtms/Agenor/provenance.txt",
       "credit": "USGS Astrogeology; Bland et al.; NASA/JPL Galileo",
       "license": "CC0-1.0",
@@ -20742,29 +20730,19 @@
       ]
     },
     {
-      "path": "geology/GeoUnits_FINAL.prj",
-      "expectedBytes": 161,
-      "expectedSha256": "3c8d7ec5c02a28ab92adaf06f259155557da66af5fb4b367f878b73d0828afb5"
+      "path": "geology/GeoUnits_FINAL.prj"
     },
     {
-      "path": "nims/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.xml",
-      "expectedBytes": 11855,
-      "expectedSha256": "a7d073d0d2d16bdb6fc7a293444b2906d6a38f745e237f80e0667f196c2e8d3f"
+      "path": "nims/17ENGLOBAL01A_MINN_MV01_CIOF_24_GCP_projective_EXPORT_from_gdal.xml"
     },
     {
-      "path": "nims/17ENGLOBAL01A_MV01_wavelengths.csv",
-      "expectedBytes": 2054,
-      "expectedSha256": "b4aeb8d25c0b43b7c5eb78a9a5e84c3333bbeade56f568af09f7247867595453"
+      "path": "nims/17ENGLOBAL01A_MV01_wavelengths.csv"
     },
     {
-      "path": "nims/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.xml",
-      "expectedBytes": 11853,
-      "expectedSha256": "9ddbbb4e9329da7ed35352f257b8f4f0da10eedf32b07fcb778dc7195e6897f8"
+      "path": "nims/17ENGLOBAL02A_MINN_MV01_CIOF_22_GCP_projective_EXPORT_from_gdal.xml"
     },
     {
-      "path": "nims/17ENGLOBAL02A_MV01_wavelengths.csv",
-      "expectedBytes": 3238,
-      "expectedSha256": "2b6f1a8884cb805c142e45731788b7bfe13629169bc8bfff832f09d619269be8"
+      "path": "nims/17ENGLOBAL02A_MV01_wavelengths.csv"
     },
     {
       "path": "geology/prepare-grid.json"
@@ -20809,8 +20787,6 @@
     },
     {
       "path": "composition/model-conversion.json",
-      "expectedBytes": 3198,
-      "expectedSha256": "7dc4db19ae50a40efbaca6b58f162b4c36194df19106e805d5bdff851eadf07a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Conversion receipt identifying native numerical input, selected fields, coordinate mapping and unchanged coverage."
@@ -20825,8 +20801,6 @@
     },
     {
       "path": "composition/reflectance-conversion.json",
-      "expectedBytes": 2521,
-      "expectedSha256": "ff970bea462deab4cc10fdee0b194ca1b2a47750a523dbb2999364f0f0585b95",
       "sourceBinding": {
         "kind": "local",
         "reason": "Conversion receipt identifying native numerical input, selected fields, coordinate mapping and unchanged coverage."

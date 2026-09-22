@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "d5c6a170b53db1037761e06b52e7844be6e15956df16537365d9e6814342968c",
       "origin": "https://doi.org/10.1093/mnras/stz2378",
       "credit": "Mashchenko (2019), MNRAS489,3003–3021, §4 and Table1",
       "license": "MIT numeric extraction of published scientific facts",

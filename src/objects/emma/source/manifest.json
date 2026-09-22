@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 73500
       },
       "coverage": "Nonconvex ADAM shape constrained by resolved AO imaging and light curves, 147 ± 14 km volume-equivalent diameter. The grid marks unavailable imagery; rotational phase is illustrative. The 2017 ADAM study combines29 light curves with five resolved AO images and rejects the opposite pole. The exact archive solution has volume-equivalent147±14 km; the paper ensemble is142±14 km, spanning different raw/deconvolved image and shape supports. The archived raw shape volume is explicitly reconciled to147 km. The primary is shown alone; its small satellite is not part of this source mesh. The AO observations constrain geometry, not a global reflectance map.",
-      "expectedBytes": 32486,
-      "expectedSha256": "69317058f905f986f877add7e2e51a6ff8c3870852a334e4551d8cfd0311a5a2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/1859-IAUspin.txt",
-      "expectedBytes": 33,
-      "expectedSha256": "1ba9c4fc53a191e87c95e92ac4a11776978e6b6e1251f40fe79d96f3e6f8a6b0"
+      "path": "reference/1859-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

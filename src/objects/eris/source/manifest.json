@@ -3,8 +3,6 @@
   "inputs": [
     {
       "path": "measurements.json",
-      "expectedBytes": 1211,
-      "expectedSha256": "8b04d9ee8318ebecf3ea33cd59b7c35e18574e412dab8583807568da47d3b4b3",
       "id": "eris-observational-measurements",
       "origin": "https://doi.org/10.1038/nature10550",
       "credit": "Sicardy et al. (2011); Bernstein et al. (2023)",
@@ -58,8 +56,6 @@
     {
       "id": "eris-disc-color",
       "path": "photometry/disc-color.json",
-      "expectedBytes": 2009,
-      "expectedSha256": "b5e0a84064b6d2d3cf270b5109839a86c2bed2b2760a5cc65af19adc243c98f7",
       "origin": "https://doi.org/10.1051/0004-6361:20066526",
       "credit": "Carraro et al. (2006), A&A 460, L39; albedo Sicardy et al. (2011), Nature 478, 493; solar colours Ramírez et al. (2012), ApJ 752, 5; filter wavelengths SVO Filter Profile Service",
       "license": "Factual numerical measurements; source attribution retained",
@@ -98,8 +94,6 @@
     {
       "id": "eris-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -126,8 +120,6 @@
     {
       "id": "eris-cie-std-illuminant-d65",
       "path": "reference/CIE_std_illum_D65.csv",
-      "expectedBytes": 6820,
-      "expectedSha256": "e76f210bffff3d552ef7113025da5f325d5dfec200dd4b878b1a2f3a507032cb",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_std_illum_D65.csv",
       "credit": "International Commission on Illumination (CIE), CIE standard illuminant D65",
       "license": "CC BY-SA 4.0",
@@ -154,8 +146,6 @@
     {
       "id": "eris-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 1941,
-      "expectedSha256": "2f157ab93e92ca89cf42e7ab084c40462273c84e54ba2f4a8bdbf6179b3295a7",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",

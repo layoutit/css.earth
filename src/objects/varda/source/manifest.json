@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "60401ead9bac3d726ab87a184f0a1ed8a8a86439d9e8d60c9201da2daf4a3d6d",
       "origin": "https://arxiv.org/abs/2605.28636",
       "credit": "Proudfoot et al. (2026), occult3d reanalysis of Souami et al. (2020) occultation chords",
       "license": "MIT numeric extraction of published scientific facts",

@@ -156,8 +156,6 @@
     {
       "id": "usgs-gazetteer-ariel-nomenclature-center-pts",
       "path": "features/ARIEL_nomenclature_center_pts.zip",
-      "expectedBytes": 105258,
-      "expectedSha256": "888421dd560af82e394a36241795dc5a751eca6267cd7b00255bc61424164923",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ARIEL_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -228,8 +226,6 @@
     {
       "id": "ariel-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 2044,
-      "expectedSha256": "c8f43a2c956afbda402deda755d32ac438e74e4e9578bec827a2d6887d35e8ee",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",

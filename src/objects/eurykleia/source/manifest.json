@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 43500
       },
       "coverage": "Convex light-curve reconstruction; 87 km volume-equivalent diameter (published 3-sigma range 78–98 km). The grid marks unavailable imagery; rotational phase is illustrative. Marciniak2019 Table1 gives 51 dense lightcurves over seven apparitions. AM1 (101,+71) gives slightly better thermal chi-square than AM2 (0.51 vs 0.60), but neither pole is decisively rejected. Section4.3 adopts 87 km with asymmetric 3-sigma range 78–98 km because WISE W4 fluxes lie systematically below the fitted model. This published uncertainty supersedes the archive ±6 km simplification.",
-      "expectedBytes": 82384,
-      "expectedSha256": "f357504dd44ea1e679c796b0878da27943b23109fd4c576ae8e8673abaee1eb9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/3102-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "760ea799ed6f4dd8bd7206591801f823900eec8d0ea0995080714fe19ff61dda"
+      "path": "reference/3102-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

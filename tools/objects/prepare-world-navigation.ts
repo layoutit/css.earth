@@ -54,7 +54,7 @@ export async function prepareWorldNavigationDefinition({ objectDirectory, defini
     physicalRadiusM: bodyRadiusM, renderedRadiusUnits });
   const alreadyPhysical = sources.has('shape-model') || sources.get('solar-system')?.schema === 'cssearth-solar-system-preparation@1' ||
     sources.get('terrestrial')?.kind === 'solid-observation-body';
-  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, descriptor.recipe.paging !== undefined);
+  const physical = alreadyPhysical ? oriented.camera : physicalCamera(oriented.camera, oriented.sky.projection, false);
   // The default camera has one owner: this stage derives it and rewrites every prepared value computed from it, so a rule change
   // re-runs this stage, not the lanes.
   const cameraModule = await import(pathToFileURL(resolve(projectRoot, 'src/platform/default-camera.mts')).href) as typeof import('../../src/platform/default-camera.mts');

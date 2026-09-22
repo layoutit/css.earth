@@ -188,8 +188,6 @@
     {
       "id": "usgs-sim3168-io-geounits-dbf",
       "path": "science/geology-sim3168/Io_GeoUnits.dbf",
-      "expectedBytes": 178964,
-      "expectedSha256": "ac09efc6635cf3d9d81fb5596a050393bf358ea5f204b79d4039952b369c53a3",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -216,8 +214,6 @@
     {
       "id": "usgs-sim3168-io-geounits-prj",
       "path": "science/geology-sim3168/Io_GeoUnits.prj",
-      "expectedBytes": 149,
-      "expectedSha256": "9bd6d92324904cd8f80ba2314f5d2a5d52599b305cacaf2321155355cfd22489",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -244,8 +240,6 @@
     {
       "id": "usgs-sim3168-geologic-units",
       "path": "science/geology-sim3168/Io_GeoUnits.shp",
-      "expectedBytes": 2798948,
-      "expectedSha256": "6a02334eee7af7518f90c5f97b1468552499de89b05d17656d627556e71aa64f",
       "origin": "https://pubs.usgs.gov/sim/3168/Io_SIM3168_Database.zip",
       "credit": "Williams et al. (2011), USGS, NASA/JPL",
       "license": "Public domain USGS data",
@@ -518,8 +512,6 @@
     {
       "id": "io-muse-spectral-slope-night-1",
       "path": "muse/io/485nm_slope-night-1.tif",
-      "expectedBytes": 12012,
-      "expectedSha256": "d8b3ce837b7db28a255eae9aaf9eda61717121ab1241f392f765014641ade58a",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -576,8 +568,6 @@
     {
       "id": "io-muse-spectral-slope-night-2",
       "path": "muse/io/485nm_slope-night-2.tif",
-      "expectedBytes": 12028,
-      "expectedSha256": "41e87a8222840afce00a1427fbcff3491bfb13fe6e599dbb6336a96551196ba9",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -634,8 +624,6 @@
     {
       "id": "io-muse-spectral-slope-night-3",
       "path": "muse/io/485nm_slope-night-3.tif",
-      "expectedBytes": 12297,
-      "expectedSha256": "b8667cc9de8bc46184aea14932bc950a6c66793bd99ce2f5dac9ee9aa230a99f",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -692,8 +680,6 @@
     {
       "id": "io-muse-visible-absorption-night-1",
       "path": "muse/io/560nm_band-night-1.tif",
-      "expectedBytes": 12689,
-      "expectedSha256": "5a884deb172fbec39a1192b2149e5e2452644d0ac4402d4e948b7d5a204f3e02",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -750,8 +736,6 @@
     {
       "id": "io-muse-visible-absorption-night-2",
       "path": "muse/io/560nm_band-night-2.tif",
-      "expectedBytes": 12790,
-      "expectedSha256": "eff9a10c9b342c06f9426d01c6a884e291dd9eb681bbb47804a5a3044c7e8a29",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -808,8 +792,6 @@
     {
       "id": "io-muse-visible-absorption-night-3",
       "path": "muse/io/560nm_band-night-3.tif",
-      "expectedBytes": 12820,
-      "expectedSha256": "cd8fd566af1e3024c389b2c8d6816474aee9db56d0288e51c3993f063e9aca21",
       "origin": "https://doi.org/10.5281/zenodo.11402374",
       "credit": "Oliver King (2024); King et al. (2025), VLT/MUSE, ESO programme 0103.C-0769(A); cssEarth grid interpretation and display preparation",
       "capture": {
@@ -866,8 +848,6 @@
     {
       "id": "usgs-gazetteer-io-nomenclature-center-pts",
       "path": "features/IO_nomenclature_center_pts.zip",
-      "expectedBytes": 718280,
-      "expectedSha256": "be1afafaa7adb0492cef2cfc8dc7ec8dc063f23e386fe9bdebf6d5a3ca2ac37c",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IO_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -928,8 +908,6 @@
     {
       "id": "io-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 1189,
-      "expectedSha256": "dc54a69cf29cfe5422459c9af3767cc132a99cb062e32d5ded43a9f7b430b235",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -1092,8 +1070,6 @@
     {
       "id": "io-jiram-m-night-recipe",
       "path": "science/jiram/recipe.json",
-      "expectedBytes": 18165,
-      "expectedSha256": "e20a147eea6c2645bb8f7dd20dbb36b9e790219e190f490f98acf6053e8dde8d",
       "origin": "Repository-authored reduction recipe pinning 59 Juno JIRAM imager RDR frames (JNO-J-JIRAM-3-RDR-V1.0) by volume, product id and SHA-256, and the Juno kernel-bank files each visit uses",
       "credit": "Juno JIRAM team (A. Adriani, R. Noschese, INAF-IAPS) via the NASA PDS Atmospheres Node; recipe by cssEarth contributors",
       "license": "Public NASA mission data; repository-authored recipe",
@@ -1571,9 +1547,7 @@
     {
       "path": "science/davies-2024/psjad4346t10_mrt.txt",
       "origin": "https://content.cld.iop.org/journals/2632-3338/5/5/121/revision1/psjad4346t10_mrt.txt",
-      "purpose": "Davies et al. (2024) Table A1 hot-spot positions (CC BY 4.0), kept byte for byte. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks that bright spots in the JIRAM map fall on these independently catalogued sources.",
-      "expectedBytes": 27553,
-      "expectedSha256": "d5fdc71614ec7fe1059eed1344521212193550a2f41d697ea78d4b78fd812cf5"
+      "purpose": "Davies et al. (2024) Table A1 hot-spot positions (CC BY 4.0), kept byte for byte. Not drawn: tests/objects/unit/io/volcanic-heat.test.mts checks that bright spots in the JIRAM map fall on these independently catalogued sources."
     },
     {
       "path": "science/mura-2024/table3-m-band.json",

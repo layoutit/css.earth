@@ -75,8 +75,6 @@
     {
       "id": "constraint-surface",
       "path": "material/constraints.png",
-      "expectedBytes": 7711,
-      "expectedSha256": "4d5d83e2c82109d4747de00e22df1ef50f862f85a66330ed7c5ce4d8873221dd",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dif-c-hriv_its_mri-5-tempel1-shape-v2.0/data/tempel1_2012_plan.tab",
       "credit": "Farnham, T.L. and Thomas, P.C. (2013); NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -181,8 +179,6 @@
     {
       "id": "iv05070405-9000632-001-r-labelPath",
       "path": "photography/deep-impact/iv05070405_9000632_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "fb1f2818491dc9044faedc2be1088d6400b13ff8e8549a9c905a610ceb5f5a90",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000632_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -254,8 +250,6 @@
     {
       "id": "iv05070405-9000639-001-r-labelPath",
       "path": "photography/deep-impact/iv05070405_9000639_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "00474e4d21fded4b78524f21f7b4e25b34c9496cf1d413e2dbf27de1d8538cc5",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000639_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -327,8 +321,6 @@
     {
       "id": "iv05070405-9000654-001-r-labelPath",
       "path": "photography/deep-impact/iv05070405_9000654_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "981707f100e66c0cb36c555ad2a9d269e18e19ddbf9a654fa0d2873c08dc98e1",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000654_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -400,8 +392,6 @@
     {
       "id": "n30036te02-rr-labelPath",
       "path": "photography/next/n30036te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "fa2b468b95fe75d16c432b42343168938f61f4b5785dbf9594579a7940373e92",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30036te02_rr.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -473,8 +463,6 @@
     {
       "id": "n30039te02-rr-labelPath",
       "path": "photography/next/n30039te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "99fb4fa6678e66610566b1137fbd62e120d5c6f58f6601066367191e1ba1a92c",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30039te02_rr.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -546,8 +534,6 @@
     {
       "id": "n30042te02-rr-labelPath",
       "path": "photography/next/n30042te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "bef821e9f2d607ed4ccf45722f0a5c854f73c9247e644bd6f2285f41ab7d7822",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30042te02_rr.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -619,8 +605,6 @@
     {
       "id": "iv05070405-9000644-001-r-labelPath",
       "path": "photography/deep-impact/iv05070405_9000644_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "454beb14950398f963f0b7db0595cbc259993420296ed81fee65bd79f80a60cb",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000644_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -692,8 +676,6 @@
     {
       "id": "iv05070405-9000673-001-r-labelPath",
       "path": "photography/deep-impact/iv05070405_9000673_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "c07fa63ecc2bdb86466e5927419c94a966f5d2defaf79576d735db1b217b9d1c",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000673_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -765,8 +747,6 @@
     {
       "id": "n30033te02-rr-labelPath",
       "path": "photography/next/n30033te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "99e77ed612f4323d72076ddbf82fde723dd5093f779acd33183eb63c1f2bd97a",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30033te02_rr.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -838,8 +818,6 @@
     {
       "id": "n30045te02-rr-labelPath",
       "path": "photography/next/n30045te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "73f982e326d08c0aa3b4c0921ad187ec5259187899eab514080534a5536ba408",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30045te02_rr.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -911,8 +889,6 @@
     {
       "id": "n30048te02-rr-labelPath",
       "path": "photography/next/n30048te02_rr.lbl",
-      "expectedBytes": 17520,
-      "expectedSha256": "8bbcfa09263bf4109e3fcb9e44557451ca64a5c6ef4a419b0aca10f860c19aa2",
       "origin": "https://pdssbn.astro.umd.edu/holdings/sdu-c_cal-navcam-3-next-tempel1-v1.0/data/tempel1/2011/02_15/n30048te02_rr.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -985,8 +961,6 @@
     {
       "id": "iv05070405_9000675_001_r-lbl",
       "path": "photography/deep-impact/iv05070405_9000675_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "72fa11fcdd26d2259f5bc1c0764cf7c651c8776b2658f543181d04c33ce671db",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000675_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1060,8 +1034,6 @@
     {
       "id": "iv05070405_9000680_001_r-lbl",
       "path": "photography/deep-impact/iv05070405_9000680_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "b74737563964f780b19367d8c9418498f7aa3a536f5407cb9401f16013472d40",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000680_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1135,8 +1107,6 @@
     {
       "id": "iv05070405_9000688_001_r-lbl",
       "path": "photography/deep-impact/iv05070405_9000688_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "be1f12db5f5bf473485a9c575d669a6b3274b6a6e524ebecf09307066cbd2d9f",
       "origin": "https://pdssbn.astro.umd.edu/holdings/dii-c-its-3_4-9p-encounter-v3.0/data/rad/2005/185/iv05070405_9000688_001_r.lbl",
       "credit": "NASA/JPL-Caltech, mission science team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1201,8 +1171,6 @@
     {
       "id": "comet-9p-features-landmarks",
       "path": "features/landmarks.json",
-      "expectedBytes": 4939,
-      "expectedSha256": "8a6244de19eeb4a33ad6b434a325817b658f51ab238e7dc05525d11577024f40",
       "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1278,8 +1246,6 @@
     {
       "id": "hrii-fields",
       "path": "science/hrii/fields.csv.gz",
-      "expectedBytes": 565733,
-      "expectedSha256": "fe10f264153ae3c3ee76b53e640331e9515bf080ba8249962c68c051a0456ea2",
       "origin": "object:source/science/hrii/fields.csv.gz",
       "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",
@@ -1326,8 +1292,6 @@
     {
       "id": "hrii-hi05070405-9000036-001-r-lbl",
       "path": "science/hrii/hi05070405_9000036_001_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "ea6fcd7f916474bf29759db4d0df2a8e252aeea783c24755f7f51b986f74c3d1",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_001_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1380,8 +1344,6 @@
     {
       "id": "hrii-hi05070405-9000036-002-r-lbl",
       "path": "science/hrii/hi05070405_9000036_002_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "a8c8ae985b97b58c09d465542e87255549d27a20584ca6d789d932baee9a2b66",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_002_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1434,8 +1396,6 @@
     {
       "id": "hrii-hi05070405-9000036-003-r-lbl",
       "path": "science/hrii/hi05070405_9000036_003_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "68a296d1fa40736dde6ab09bf0eba420f222b84eb2a1c10814ccacfc5060e769",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_003_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1488,8 +1448,6 @@
     {
       "id": "hrii-hi05070405-9000036-004-r-lbl",
       "path": "science/hrii/hi05070405_9000036_004_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "1f017f22d63da8e2a7299c4e3de0cd53f2ed6008c754c583087b3de351db24b5",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_004_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1542,8 +1500,6 @@
     {
       "id": "hrii-hi05070405-9000036-005-r-lbl",
       "path": "science/hrii/hi05070405_9000036_005_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "d8a769e505321ce4379669dd5eb78737474b8d0b954b494fa9554311012970d0",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_005_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1596,8 +1552,6 @@
     {
       "id": "hrii-hi05070405-9000036-006-r-lbl",
       "path": "science/hrii/hi05070405_9000036_006_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "0ce4863c390c2c68cf32d9788cc39e19c690ae34914ffee6f8161034c6bba09b",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_006_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1650,8 +1604,6 @@
     {
       "id": "hrii-hi05070405-9000036-007-r-lbl",
       "path": "science/hrii/hi05070405_9000036_007_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "4bf8414bb0f7cfa04c81a52b0976db0c04eef8289cdc9edd89f678f4654ce3ed",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_007_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1704,8 +1656,6 @@
     {
       "id": "hrii-hi05070405-9000036-008-r-lbl",
       "path": "science/hrii/hi05070405_9000036_008_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "a9cf2848a85899ab34e48e6e361eb78db238cb9dede82aa8ca3af9a1e7bb7893",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_008_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1758,8 +1708,6 @@
     {
       "id": "hrii-hi05070405-9000036-009-r-lbl",
       "path": "science/hrii/hi05070405_9000036_009_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "fa2a56e657c7c23c8c1bf45d93736b0d69a5059039abcc13c048604ef7723ad0",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_009_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1812,8 +1760,6 @@
     {
       "id": "hrii-hi05070405-9000036-010-r-lbl",
       "path": "science/hrii/hi05070405_9000036_010_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "00bf581c09575007de2accdc13cc072bdccb0ef387dadcbd2ce74c03ab76e876",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_010_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1866,8 +1812,6 @@
     {
       "id": "hrii-hi05070405-9000036-011-r-lbl",
       "path": "science/hrii/hi05070405_9000036_011_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "bf539e36246a766fe3668e89fbc435f8dc990dd2d83ed3a41090cb3506101ecb",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_011_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1920,8 +1864,6 @@
     {
       "id": "hrii-hi05070405-9000036-012-r-lbl",
       "path": "science/hrii/hi05070405_9000036_012_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "d26dab66dea53106dfd41bd18418bb50529c8122989404bc6b04843548047ff0",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_012_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -1974,8 +1916,6 @@
     {
       "id": "hrii-hi05070405-9000036-013-r-lbl",
       "path": "science/hrii/hi05070405_9000036_013_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "808bef2983226067996ff06250f32f3ee784bba788ffa45cb517892c4682ebd4",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_013_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2028,8 +1968,6 @@
     {
       "id": "hrii-hi05070405-9000036-014-r-lbl",
       "path": "science/hrii/hi05070405_9000036_014_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "42beea09a622f9efe2152404327ca195d87e01e00ee2f2efee8d5f49eb1bc17e",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_014_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2082,8 +2020,6 @@
     {
       "id": "hrii-hi05070405-9000036-015-r-lbl",
       "path": "science/hrii/hi05070405_9000036_015_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "9c510a84302c8b48ee74b937ccdc0df25b6d663600371fe984da878b64626ca1",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_015_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2136,8 +2072,6 @@
     {
       "id": "hrii-hi05070405-9000036-016-r-lbl",
       "path": "science/hrii/hi05070405_9000036_016_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "c7f6ea4a1fd0739da49d7827601d50720c9137e9f00fa273c184f6a797564eba",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_016_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2190,8 +2124,6 @@
     {
       "id": "hrii-hi05070405-9000036-017-r-lbl",
       "path": "science/hrii/hi05070405_9000036_017_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "61eac2a3cf9c5ace96f2f07899767d721fd8ae63b0234e634d845397081697e3",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_017_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2244,8 +2176,6 @@
     {
       "id": "hrii-hi05070405-9000036-018-r-lbl",
       "path": "science/hrii/hi05070405_9000036_018_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "ea81653e8d884947708e0e338a8cf42b19c40a5234ccf704409dd82e46fe8d2a",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_018_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2298,8 +2228,6 @@
     {
       "id": "hrii-hi05070405-9000036-019-r-lbl",
       "path": "science/hrii/hi05070405_9000036_019_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "6555b453ae4be2dbba7c414d816b1bbbcb48dd5a5803ecc6e8acd734220a3918",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_019_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2352,8 +2280,6 @@
     {
       "id": "hrii-hi05070405-9000036-020-r-lbl",
       "path": "science/hrii/hi05070405_9000036_020_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "b8a13e20e756e8724e14c85851f1b133410216289eedfc9ad20fdf7d39d51d2b",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_020_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2406,8 +2332,6 @@
     {
       "id": "hrii-hi05070405-9000036-021-r-lbl",
       "path": "science/hrii/hi05070405_9000036_021_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "c5c16549d5aeaf3f8aa5b60459efe9e94aa7eb15b7b8102840b1e46e71b9f1f6",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_021_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2460,8 +2384,6 @@
     {
       "id": "hrii-hi05070405-9000036-022-r-lbl",
       "path": "science/hrii/hi05070405_9000036_022_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "3ddbd8e7969aa28ada584b3ed9971c2feeabf8869247b20a25528b6aee6eaf3e",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_022_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2514,8 +2436,6 @@
     {
       "id": "hrii-hi05070405-9000036-023-r-lbl",
       "path": "science/hrii/hi05070405_9000036_023_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "a2ce2400650cde4aa640f240e36a2078fb275a9ad5e86044acb1da5faf2f8676",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_023_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2568,8 +2488,6 @@
     {
       "id": "hrii-hi05070405-9000036-024-r-lbl",
       "path": "science/hrii/hi05070405_9000036_024_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "3510a7e21cf254abd815455a60cbd389e5d6629716ae9d002f8165b307b7de92",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_024_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2622,8 +2540,6 @@
     {
       "id": "hrii-hi05070405-9000036-025-r-lbl",
       "path": "science/hrii/hi05070405_9000036_025_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "f21f9a9384d7f36015440231a46ca482aeb16649a0889c4f30856dcd2cc6508e",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_025_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2676,8 +2592,6 @@
     {
       "id": "hrii-hi05070405-9000036-026-r-lbl",
       "path": "science/hrii/hi05070405_9000036_026_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "babb3ae5eb52acc9802ab9e6820e3b396fbc71170a8eb2e4f57543c0ddd00b17",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_026_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2730,8 +2644,6 @@
     {
       "id": "hrii-hi05070405-9000036-027-r-lbl",
       "path": "science/hrii/hi05070405_9000036_027_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "8e922e9c39ce6c3f21cdcafa217ccc8d7116a356242dd23c4437d11c4edb69fc",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_027_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2784,8 +2696,6 @@
     {
       "id": "hrii-hi05070405-9000036-028-r-lbl",
       "path": "science/hrii/hi05070405_9000036_028_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "dfea58184130acf13cfe211f7d26b20795ee8eba3f77a000048e4b3b1e06b770",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_028_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2838,8 +2748,6 @@
     {
       "id": "hrii-hi05070405-9000036-029-r-lbl",
       "path": "science/hrii/hi05070405_9000036_029_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "b7c2e7e9fdbc6a495a9232caa305a1b0632662d41958d80f0924ac9e8cb1e67a",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_029_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2892,8 +2800,6 @@
     {
       "id": "hrii-hi05070405-9000036-030-r-lbl",
       "path": "science/hrii/hi05070405_9000036_030_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "6292124422b6b47e8fcf12f2a254e4d270a2d6b4a3dd5a27e45a53a499e51770",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_030_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -2946,8 +2852,6 @@
     {
       "id": "hrii-hi05070405-9000036-031-r-lbl",
       "path": "science/hrii/hi05070405_9000036_031_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "11ffb87bc63bbdeaef915c0cbef9fbd3be66012382b9ea2f35aefe2e477a1c45",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_031_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3000,8 +2904,6 @@
     {
       "id": "hrii-hi05070405-9000036-032-r-lbl",
       "path": "science/hrii/hi05070405_9000036_032_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "2acde8fb5b895a968f2da67753bdb6892a973dd3c59e7eb35d99ff3fd1ca8a41",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_032_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3054,8 +2956,6 @@
     {
       "id": "hrii-hi05070405-9000036-033-r-lbl",
       "path": "science/hrii/hi05070405_9000036_033_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "ce7cb7d726bcce2e753e7f6703eb4f12adfb46ae1190ea5ffed3ed706803c2e3",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_033_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3108,8 +3008,6 @@
     {
       "id": "hrii-hi05070405-9000036-034-r-lbl",
       "path": "science/hrii/hi05070405_9000036_034_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "2b34f018504bcbb88a82e2fa9f73d680669de8c7491014192139e9c5e5c6f96a",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_034_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3162,8 +3060,6 @@
     {
       "id": "hrii-hi05070405-9000036-035-r-lbl",
       "path": "science/hrii/hi05070405_9000036_035_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "855bf80f0631b9d1530bc78d0777b88da0431e157c140022c863006f8979f87d",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_035_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3216,8 +3112,6 @@
     {
       "id": "hrii-hi05070405-9000036-036-r-lbl",
       "path": "science/hrii/hi05070405_9000036_036_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "10684631374a62773ad0ca2fd4d30c0d555c2afc8d220533f84d7a9904bb34ed",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_036_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3270,8 +3164,6 @@
     {
       "id": "hrii-hi05070405-9000036-037-r-lbl",
       "path": "science/hrii/hi05070405_9000036_037_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "2bc50be0ae5e01fd1dd4224efd13bac97028b3316384f87a57821e2667b2a83b",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_037_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3324,8 +3216,6 @@
     {
       "id": "hrii-hi05070405-9000036-038-r-lbl",
       "path": "science/hrii/hi05070405_9000036_038_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "2ba43c599ad3941f0a4a7d5b7444547194ef713077d6900d2f956ae30867921a",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_038_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3378,8 +3268,6 @@
     {
       "id": "hrii-hi05070405-9000036-039-r-lbl",
       "path": "science/hrii/hi05070405_9000036_039_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "d79cb1a0059929a3a608e1e85ef01d4b436233f26c6bacac55fd6f74aee9df92",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_039_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3432,8 +3320,6 @@
     {
       "id": "hrii-hi05070405-9000036-040-r-lbl",
       "path": "science/hrii/hi05070405_9000036_040_r.lbl",
-      "expectedBytes": 35680,
-      "expectedSha256": "f6b1ce1c0d9d7a17e014dc696a77342bdd69ef2469b88f437909e350ac2c44c5",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/data/rad/2005/185/hi05070405_9000036_040_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3459,8 +3345,6 @@
     {
       "id": "hrii-hriir-020601-2-0-lbl",
       "path": "science/hrii/hriir_020601_2_0.lbl",
-      "expectedBytes": 4880,
-      "expectedSha256": "aa1ac9161cc5e0a006ad9e5cbc0b5083cfca8e7c45c24d368e8b4e07f6cc81a9",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hrii-3_4-9p-encounter-v3.0/calib/sunspec/hriir_020601_2_0.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3540,8 +3424,6 @@
     {
       "id": "hrii-hv05070405-9000844-001-r-lbl",
       "path": "science/hrii/hv05070405_9000844_001_r.lbl",
-      "expectedBytes": 32880,
-      "expectedSha256": "9336862b2ea27f993a3f6708b80555f8e1099789161eaadc806844b6a4f0cafc",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/dif-c-hriv-3_4-9p-encounter-v3.0/data/rad/2005/185/hv05070405_9000844_001_r.lbl",
       "credit": "NASA Deep Impact/EPOXI mission team; NASA Planetary Data System",
       "license": "PDS public scientific archive",
@@ -3567,8 +3449,6 @@
     {
       "id": "hrii-preparation-json",
       "path": "science/hrii/preparation.json",
-      "expectedBytes": 5227,
-      "expectedSha256": "cc27bff93bc7487e80b424317840e30de983cd7a25db658ff72fe2c7308eec86",
       "origin": "object:source/science/hrii/preparation.json",
       "credit": "cssEarth, derived from NASA Deep Impact/EPOXI HRI-IR and Farnham & Thomas shape models",
       "license": "MIT; underlying PDS scientific data",

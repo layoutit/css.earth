@@ -5,7 +5,6 @@
  * Usage: node --experimental-strip-types tools/objects/new-horizons/prepare-photographic-cameras.mts \
  *   src/objects/nix/source/preparation/photography.json
  */
-import { sha256 } from '../../../src/platform/sha256.mts';
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, resolve, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -33,20 +32,16 @@ const cross = (a: readonly number[], b: readonly number[]) => [a[1] * b[2] - a[2
 
 const crop = shape({ left: number, top: number, width: number, height: number });
 const recipeShape = shape({ schema: text, bodyId: text, naifBodyId: number,
-  mesh: shape({ path: text, sha256: text, compression: text, metersPerUnit: number, expectedVertices: number, expectedFaces: number }),
-  pck: shape({ path: text, sha256: text, timeMode: text }),
+  mesh: shape({ path: text, compression: text, metersPerUnit: number, expectedVertices: number, expectedFaces: number }),
+  pck: shape({ path: text, timeMode: text }),
   frames: array(shape({ id: text, imagePath: text, outputCameraPath: text, crop,
     independentExposure: value => value === undefined ? undefined : shape({ imagePath: text, crop })(value),
-    interiorValidations: optional(array(shape({ id: text, imagePath: text, sha256: text, crop, supersampling: number, reverse: optional(boolean) }))) })),
+    interiorValidations: optional(array(shape({ id: text, imagePath: text, crop, supersampling: number, reverse: optional(boolean) }))) })),
   outputEvidencePath: text,
 });
 type Recipe = ReturnType<typeof recipeShape>;
 type BoundFrame = ReturnType<typeof decodeNewHorizonsLorri> & ReturnType<typeof bindSipCamera>;
 type CandidateCamera = Pick<BoundFrame, 'camera' | 'rayPixel' | 'projectPoint'>;
-
-function requiredHash(bytes: Buffer, expected: string, path: string) {
-  if (!/^[a-f0-9]{64}$/u.test(expected) || sha256(bytes) !== expected) throw new Error(`Pinned SHA-256 changed: ${path}`);
-}
 
 function recipePath(root: string, path: string) {
   if (!path || path.startsWith('/') || path.split('/').includes('..')) throw new Error(`Recipe path must be source-relative: ${path}`);
@@ -162,8 +157,7 @@ async function prepare(recipeFile: string) {
   // closures, and evidence are all source-root-relative, like existing body
   // preparers; this also permits `evidence/...` without crossing a package.
   const source = dirname(dirname(recipeFile)), meshPath = recipePath(source, recipe.mesh.path), pckPath = recipePath(source, recipe.pck.path);
-  const [meshBytes, pckBytes, generatorBytes] = await Promise.all([readFile(meshPath), readFile(pckPath), readFile(GENERATOR_PATH)]);
-  requiredHash(meshBytes, recipe.mesh.sha256, recipe.mesh.path); requiredHash(pckBytes, recipe.pck.sha256, recipe.pck.path);
+  const [meshBytes, pckBytes] = await Promise.all([readFile(meshPath), readFile(pckPath)]);
   const kernel = parseTextKernel(pckBytes.toString('utf8'), recipe.pck.path);
   const mesh = await loadStlShape(meshPath, recipe.mesh);
   const normals = mesh.indices.map(face => { const [a, b, c] = face.map(index => mesh.positions[index]); return unit(cross(sub(b, a), sub(c, a))); });
@@ -186,17 +180,17 @@ async function prepare(recipeFile: string) {
     const fitted = fitOffset(fixedFitPoints, imageBytes, bodyToJ2000, mesh, normals), registered = makeCandidate(imageBytes, bodyToJ2000, fitted.offset);
     const fit = statistics(fixedFitPoints, registered, mesh, normals, 'fit'), holdout = statistics(usableHoldoutPoints, registered, mesh, normals, 'holdout');
     const provenance = [
-      { path: relative(source, meshPath), sha256: sha256(meshBytes) }, { path: relative(source, imagePath), sha256: sha256(imageBytes) },
-      { path: relative(source, pckPath), sha256: sha256(pckBytes) }, { path: relative(source, recipeFile), sha256: sha256(recipeBytes) },
+      { path: relative(source, meshPath) }, { path: relative(source, imagePath) },
+      { path: relative(source, pckPath) }, { path: relative(source, recipeFile) },
     ];
-    const camera = { ...registered.camera, meshSha256: sha256(meshBytes), provenance };
+    const camera = { ...registered.camera, provenance };
     await writeFile(recipePath(source, frameRecipe.outputCameraPath), JSON.stringify(camera, null, 2) + '\n');
     let independentExposure: unknown;
     if (frameRecipe.independentExposure) {
       const otherPath = recipePath(source, frameRecipe.independentExposure.imagePath), otherBytes = await readFile(otherPath);
       const otherHeader = readFitsHeader(otherBytes).header, otherReceiveEt = number(otherHeader.SPCSCET), otherRange = Math.hypot(...['SPCTSCX', 'SPCTSCY', 'SPCTSCZ'].map(key => number(otherHeader[key])));
       validateTargetIdentity(otherHeader, recipe.bodyId, frameRecipe.independentExposure.imagePath);
-      if (sha256(otherBytes) === sha256(imageBytes)) throw new Error(`Independent exposure must be a distinct FITS image: ${frameRecipe.id}`);
+      if (otherBytes.equals(imageBytes)) throw new Error(`Independent exposure must be a distinct FITS image: ${frameRecipe.id}`);
       const otherEmissionEt = otherReceiveEt - otherRange / SPEED_OF_LIGHT_KM_PER_SECOND;
       // A prediction transfers the fitted detector translation only.  Its PCK
       // attitude and source spacecraft/sun vectors are rebuilt for this image.
@@ -206,15 +200,14 @@ async function prepare(recipeFile: string) {
       const otherAccept = (index: number) => other.acceptPixel((otherCrop.top + Math.floor(index / otherCrop.width)) * other.width + otherCrop.left + index % otherCrop.width);
       const otherThreshold = limbThreshold(otherValues, otherAccept), otherPoints = partitions(observedLimb({ width: otherCrop.width, height: otherCrop.height, planes: { IMAGE: otherValues }, acceptPixel: otherAccept }, otherThreshold.threshold, 350, otherThreshold.bodyMean, .2)
         .map(point => ({ ...point, x: point.x + otherCrop.left, y: point.y + otherCrop.top })), otherCrop.top);
-      independentExposure = { imagePath: frameRecipe.independentExposure.imagePath, imageSha256: sha256(otherBytes), receiveEt: otherReceiveEt, emissionEt: otherEmissionEt,
+      independentExposure = { imagePath: frameRecipe.independentExposure.imagePath, receiveEt: otherReceiveEt, emissionEt: otherEmissionEt,
         holdout: (() => { const result = statistics(otherPoints, other, mesh, normals, 'holdout'); return { ...result, residual: undefined }; })() };
     }
     const interiorValidations: unknown[] = [];
     for (const validation of frameRecipe.interiorValidations ?? []) {
       if (!/^[a-z0-9-]+$/u.test(validation.id)) throw new Error("Invalid interior validation id.");
       const otherBytes = await readFile(recipePath(source, validation.imagePath));
-      requiredHash(otherBytes, validation.sha256, validation.imagePath);
-      if (sha256(otherBytes) === sha256(imageBytes)) throw new Error('Interior validation must use a distinct exposure.');
+      if (otherBytes.equals(imageBytes)) throw new Error('Interior validation must use a distinct exposure.');
       const otherHeader = readFitsHeader(otherBytes).header;
       validateTargetIdentity(otherHeader, recipe.bodyId, validation.imagePath);
       const otherReceiveEt = number(otherHeader.SPCSCET), otherRange = Math.hypot(...['SPCTSCX', 'SPCTSCY', 'SPCTSCZ'].map(key => number(otherHeader[key])));
@@ -252,14 +245,14 @@ async function prepare(recipeFile: string) {
         await writeInteriorComparison(reversed, resolve(dirname(illustrationPath), reverseIllustration));
         reverse = { ...reverseReport, illustration: reverseIllustration, referencePointingOffsetPixels: [pointing.offset[0] + comparison.fittedShift.dx, pointing.offset[1] + comparison.fittedShift.dy] };
       }
-      interiorValidations.push({ id: validation.id, imagePath: validation.imagePath, imageSha256: sha256(otherBytes), receiveEt: otherReceiveEt, emissionEt: otherEmissionEt,
+      interiorValidations.push({ id: validation.id, imagePath: validation.imagePath, receiveEt: otherReceiveEt, emissionEt: otherEmissionEt,
         observerDirectionDifferenceDegrees: separation, supersampling: validation.supersampling,
         initialPointingOffsetPixels: pointing.offset, ...report, illustration, reverse,
         method: 'Project native reference pixels through the unchanged mesh at the published PCK pose. Fit two relative detector translations on two diagonal interior quadrants; withhold the other two. Pixel membership is fixed for every trial. No attitude, shape, blur, or photometric model is fitted.',
         limits: 'The relative detector residual is not absolute surface position accuracy. Similar viewing directions may not constrain a model-frame error; source-frame qualification is a separate decision.' });
     }
-    evidence.push({ id: frameRecipe.id, imagePath: frameRecipe.imagePath, imageSha256: sha256(imageBytes), outputCameraPath: frameRecipe.outputCameraPath,
-      pck: { path: recipe.pck.path, sha256: sha256(pckBytes), naifBodyId: recipe.naifBodyId, receiveEt, emissionEt, lightTimeSeconds: receiveEt - emissionEt,
+    evidence.push({ id: frameRecipe.id, imagePath: frameRecipe.imagePath, outputCameraPath: frameRecipe.outputCameraPath,
+      pck: { path: recipe.pck.path, naifBodyId: recipe.naifBodyId, receiveEt, emissionEt, lightTimeSeconds: receiveEt - emissionEt,
         timeMode: recipe.pck.timeMode }, registration: { offsetPixels: fitted.offset, fit: { ...fit, residual: undefined }, holdout: { ...holdout, residual: undefined },
         beforeFit: { ...beforeFit, residual: undefined }, beforeHoldout: { ...beforeHoldout, residual: undefined }, threshold,
         fittingPointCount: fixedFitPoints.length, holdoutPointCount: usableHoldoutPoints.length,
@@ -271,11 +264,11 @@ async function prepare(recipeFile: string) {
   const output = evidencePath(source, recipe.outputEvidencePath);
   await mkdir(dirname(output), { recursive: true });
   await writeFile(output, JSON.stringify({ schema: 'cssearth-nh-lorri-registration-evidence@1', bodyId: recipe.bodyId,
-    generator: { path: 'tools/objects/new-horizons/prepare-photographic-cameras.mts', sha256: sha256(generatorBytes) },
+    generator: { path: 'tools/objects/new-horizons/prepare-photographic-cameras.mts' },
     helpers: await Promise.all(['compare-photographic-interiors.mts', 'render-interior-comparison.mts'].map(async name => ({
-      path: `tools/objects/new-horizons/${name}`, sha256: sha256(await readFile(resolve(dirname(GENERATOR_PATH), name))),
+      path: `tools/objects/new-horizons/${name}`,
     }))),
-    recipe: { path: relative(source, recipeFile), sha256: sha256(recipeBytes) }, mesh: recipe.mesh, frames: evidence }, null, 2) + '\n');
+    recipe: { path: relative(source, recipeFile) }, mesh: recipe.mesh, frames: evidence }, null, 2) + '\n');
 }
 
 const input = process.argv[2];

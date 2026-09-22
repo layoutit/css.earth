@@ -4,7 +4,7 @@
   "fitCount": 0,
   "checkCount": 4,
   "rmsResidualPixels": 0.8660254037844386,
-  "maximumResidualPixels": 1.0,
+  "maximumResidualPixels": 1,
   "limits": {
     "dogSigmaPixels": [
       1,
@@ -54,7 +54,7 @@
         0
       ],
       "correlation": 0.9538702116777044,
-      "residualPixels": 1.0
+      "residualPixels": 1
     },
     {
       "rectangle": [
@@ -68,7 +68,7 @@
         0
       ],
       "correlation": 0.9508490723115269,
-      "residualPixels": 1.0
+      "residualPixels": 1
     },
     {
       "rectangle": [
@@ -82,7 +82,7 @@
         0
       ],
       "correlation": 0.9338990050874469,
-      "residualPixels": 1.0
+      "residualPixels": 1
     },
     {
       "rectangle": [
@@ -96,61 +96,48 @@
         0
       ],
       "correlation": 0.8992437213473656,
-      "residualPixels": 0.0
+      "residualPixels": 0
     }
   ],
   "provenance": [
     {
-      "path": "observations/107318326rcal_clr.fit",
-      "sha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6"
+      "path": "observations/107318326rcal_clr.fit"
     },
     {
-      "path": "observations/107318326rcal_clr.xml",
-      "sha256": "53ef20427179844ab1bfc6fcc66395ba78e949244cd2b614a482ddf6fe1a3301"
+      "path": "observations/107318326rcal_clr.xml"
     },
     {
-      "path": "observations/e8326.fit",
-      "sha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d"
+      "path": "observations/e8326.fit"
     },
     {
-      "path": "observations/e8326.lbl",
-      "sha256": "dd3e14be6e822c73bd3efbda58e5cb586b0654dfde8da58e9a19c0d306c2e792"
+      "path": "observations/e8326.lbl"
     },
     {
-      "path": "observations/gaspbad.tab",
-      "sha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654"
+      "path": "observations/gaspbad.tab"
     },
     {
-      "path": "observations/gaspbad.lbl",
-      "sha256": "55be9710b892ce9a79464f42cf358bb2bc4e583231affa557e61a818b3ab6dc9"
+      "path": "observations/gaspbad.lbl"
     },
     {
-      "path": "reference/951gaspimg.tab",
-      "sha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6"
+      "path": "reference/951gaspimg.tab"
     },
     {
-      "path": "reference/951gaspimg.xml",
-      "sha256": "d9783210e82979d6f6f4743f653c0c7b50cb5cceeb8927bc34bdf97e5a2fadee"
+      "path": "reference/951gaspimg.xml"
     },
     {
-      "path": "reference/gll36001.ti",
-      "sha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652"
+      "path": "reference/gll36001.ti"
     },
     {
-      "path": "shape/951gaspra.tab",
-      "sha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0"
+      "path": "shape/951gaspra.tab"
     },
     {
-      "path": "preparation/terrestrial.json",
-      "sha256": "29b08ae5e797e176eaad614198d514adc6e4a2bc658598a359d4cb2a7314d0ed"
+      "path": "preparation/terrestrial.json"
     },
     {
-      "path": "reference/calibrated-registration.json",
-      "sha256": "61ad2efa7008f775b57e80b844595e755de6ae0c47b7250fce65412041ee56fb"
+      "path": "reference/calibrated-registration.json"
     },
     {
-      "path": "maps/951gaspram.fit",
-      "sha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1"
+      "path": "maps/951gaspram.fit"
     }
   ]
 }

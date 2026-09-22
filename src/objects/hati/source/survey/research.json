@@ -84,55 +84,5 @@
     "Some overview text uses 5.42 h; adopt the Table 3 and individual physical-page value 5.45 ± 0.04 h.",
     "Older 122-target overview nominal diameter 4.5 km differs from current Table 1C rounding/inputs. Adopt this row's body-page radius 2.4 km and retain quoted diameter range; do not mix them as precise measurements."
   ],
-  "sourcePins": [
-    {
-      "id": "denk2018",
-      "url": "https://tilmanndenk.de/wp-content/uploads/DenkEtAl2018_IrregularMoons.pdf",
-      "retrieved": "2026-09-08",
-      "expectedBytes": 2067178,
-      "sha256": "0b3ae2f7b63937649a45b6f4b522289eae99e8dfe7c6986f81f7c9d40b0d4add",
-      "purpose": "Primary Table 3 ratios/periods, §3.2 target limitations, Table 2 size assumptions; PDF page 8 is Table 3."
-    },
-    {
-      "id": "denk2026",
-      "url": "https://tilmanndenk.de/wp-content/uploads/2026_SSR_DenkEtAl_IoMinorMoons.pdf",
-      "retrieved": "2026-09-08",
-      "expectedBytes": 17218755,
-      "sha256": "1cde9dc8a49fd79c4694934c3d7720299788ea92af1323d9910072afe012d128",
-      "purpose": "Convex-inversion release status; footnote 47 papers in preparation, no native mesh assumed."
-    },
-    {
-      "id": "author-hati",
-      "url": "https://tilmanndenk.de/outersaturnianmoons/hati/",
-      "retrieved": "2026-09-08",
-      "expectedBytes": 76844,
-      "sha256": "6dc015d11d40c80fa7fb1c04205c53cbc2d5ffc74c34392b7163b55a829ca054",
-      "purpose": "Body Table 1C nominal radius/diameter, H, albedo and notes (1),(2),(4),(9); local HTML membership read individually."
-    },
-    {
-      "id": "jpl-discovery",
-      "url": "https://ssd.jpl.nasa.gov/sats/discovery.html",
-      "retrieved": "2026-09-08",
-      "expectedBytes": 116148,
-      "sha256": "4836d801269036704bcc685000d198d92a3eb36dc9622b298b3e7c94d8c0daa5",
-      "purpose": "Exact 293-row catalog identity and aliases."
-    },
-    {
-      "id": "jpl-elements",
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/",
-      "retrieved": "2026-09-08",
-      "expectedBytes": 580012,
-      "sha256": "1e5e52225cf636b78d0ac602eb5352c5648aa025ba45d61593d824e70779dfdd",
-      "purpose": "Exact 18 body IDs and SAT456 solution; mean elements are context, not a current runtime fit."
-    },
-    {
-      "id": "jpl-ephemerides",
-      "url": "https://ssd.jpl.nasa.gov/sats/ephem/sep.html",
-      "retrieved": "2026-09-08",
-      "expectedBytes": 137644,
-      "sha256": "da77b9ca6f71c72c52c01c697dd9fbe6d297571f3a534785165e1668533d3dcb",
-      "purpose": "Independent grouped solution/code mapping, including legacy Skadi spelling."
-    }
-  ],
   "scope": "Published numerical constraints only; full research papers/pages are not bundled or relabeled with the repository license."
 }

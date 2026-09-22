@@ -77,8 +77,8 @@
   ],
   "id": "una",
   "displayName": "Una",
-  "lambda": 125.0,
-  "beta": -33.0,
+  "lambda": 125,
+  "beta": -33,
   "periodHours": 11.03318,
   "version": "2009-05-29",
   "nonconvex": false,
@@ -95,7 +95,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/453/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/451/IAUspin.txt",
-  "shapeSha256": "69285eb63614042f0cdf3bf341190155b0785cda3399191b4393a002275c6c21",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 1.5214730519212516e-07
+    "minimumTriangleAreaSourceUnitsSquared": 1.5214730519212516e-7
   },
   "anchors": [
     {

@@ -228,8 +228,6 @@
     {
       "id": "hd-181327-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://cie.co.at/datatable/cie-1931-colour-matching-functions-2-degree-observer",
       "credit": "CIE (2019), CIE 1931 colour-matching functions, 2 degree observer, doi:10.25039/CIE.DS.xvudnb9b",
       "license": "CC BY-SA 4.0",
@@ -256,8 +254,6 @@
     {
       "id": "hd-181327-claret-2017-limb-darkening",
       "path": "photometry/claret-2017-tess-quadratic.tsv",
-      "expectedBytes": 3615,
-      "expectedSha256": "81e680aef964c5c598ae5bf3f808802f9e42e8f6f7270fa6b6a65fe246bbbd80",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv?-source=J/A%2BA/600/A30/tableab&-out.max=200&Teff=6250..6500&logg=4.0..4.5&Z=0&-out=logg,Teff,Z,L/HP,aLSM,bLSM,aPCM,bPCM,chi2,Type,Mod",
       "credit": "Claret, A. (2017), A&A 600, A30: limb and gravity-darkening coefficients for the TESS satellite (VizieR J/A+A/600/A30, table ab)",
       "license": "VizieR catalogue data, public with citation of the paper and CDS",

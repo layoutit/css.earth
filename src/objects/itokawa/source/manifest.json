@@ -80,8 +80,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "f6cf948ba2df7c3196732b02e414710e9a7e80a71fcb859c6a586b37cd6085e6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -152,8 +150,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "db3803da5a7ee636edf6e3282c679fb13788c97a64a2a2977f62aedd70733435",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -224,8 +220,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "d9cc5ecc1ca1e98103ed3acbfe8ec5d10bd04f5067d17a11c8bc2c7c3f24189f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -296,8 +290,6 @@
       "consumers": [
         "reference"
       ],
-      "expectedBytes": 4320,
-      "expectedSha256": "79d77d8c97aa7f9e250e95026fc92cd438ec90c16a70543553b657703e831765",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -360,8 +352,6 @@
     {
       "id": "usgs-gazetteer-itokawa-nomenclature-center-pts",
       "path": "features/ITOKAWA_nomenclature_center_pts.zip",
-      "expectedBytes": 81389,
-      "expectedSha256": "f26f0ede45114bcaaead6c875b6f8992bd0c52498affc647efe14ab059db38a1",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/ITOKAWA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -466,8 +456,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "953e823514e2fa1ade56cc353fac7265ec3fd5080049763db3bd2df93b3db9d4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -543,8 +531,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "c6a4671ee695d5a451c51c7a728cae8728c7f1acc767f3bdddfa6b5efaec6b09",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -620,8 +606,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "8cd89d023e484cbada0ece6173e256efe5235ea634e0fc7445c8ca6a9b2dfdb0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -697,8 +681,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "a9f15d06923aee52bcd48c3deaa8e48413c17906515068f85f3080e92c6fbd8c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -748,8 +730,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "b9a2926adf3fc22b5ccc88a9b4e9c2b743512f742e65a93bd3190a422b6a0db8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -825,8 +805,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "3526b3b396a1e1ce5d0548d9732c7092faa1fd14ade6961f711675a2e92fc9cc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -902,8 +880,6 @@
       "consumers": [
         "amica-observation"
       ],
-      "expectedBytes": 6640,
-      "expectedSha256": "21d38408acbf181edfc5f5a0451ebd703608c4f734f362d109763dea48f7ed36",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1049,8 +1025,6 @@
     },
     {
       "path": "observations/N2402987304.SUM",
-      "expectedBytes": 10449,
-      "expectedSha256": "a5c2ad8714f3442bd9a0495a58d09e178b47ed5badfcafdf4f8516c2e4670a87",
       "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/ITOKAWA/AMICA/sumfiles/N2402987304.SUM",
       "credit": "JAXA/Hayabusa and SBMT team",
       "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",

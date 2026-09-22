@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 66500
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 133 ± 7 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
-      "expectedBytes": 32486,
-      "expectedSha256": "ff1d83697f66dfc11511783c70c93f8cc5c44e88373e91d68b5103f19bfa5644",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

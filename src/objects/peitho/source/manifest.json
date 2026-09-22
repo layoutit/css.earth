@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 21995
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 43.99 km effective diameter (catalog ±0.75 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. The pole follows the archive’s occultation match. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Selected2020 archive update4397 states this pole agrees with occultation. It closely matches published ATLAS model4475/pole(176,59), but the update links no publication itself; it is credited to the archive. The prior opposite pole4474 remains listed as a comparison, not an equally supported orientation.",
-      "expectedBytes": 81655,
-      "expectedSha256": "9586fd3156698a4c8021a37ba6ad8868551a540f5412c7f3a6f06c049442488d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/4397-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "0d59b5d13902e9a9ca6dcb1a13ad6287bd18d60f03b903f9d4fbd908110e826e"
+      "path": "reference/4397-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

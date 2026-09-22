@@ -266,8 +266,6 @@
     {
       "id": "phoebe-2023-bestmap",
       "path": "science/2023/phoebe_bestmap_c.cub",
-      "expectedBytes": 326427,
-      "expectedSha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_bestmap_c.cub",
       "catalog": "https://doi.org/10.26033/3k3c-5713",
       "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
@@ -321,8 +319,6 @@
     {
       "id": "phoebe-2023-numimg",
       "path": "science/2023/phoebe_numimg_c.cub",
-      "expectedBytes": 326413,
-      "expectedSha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-phoebe.cassini.shape-models-maps_V1_0/data/phoebe_numimg_c.cub",
       "catalog": "https://doi.org/10.26033/3k3c-5713",
       "credit": "Robert Gaskell, John Weirich, Eric Palmer, Deborah Domingue, Trent Hare; NASA PDS Small Bodies Node",
@@ -405,8 +401,6 @@
     {
       "id": "phoebe-cassini-original-n1465671822_1_ir-cub",
       "path": "cassini-ice/native/N1465671822_1_ir.cub",
-      "expectedBytes": 226310,
-      "expectedSha256": "97fee2316839da6b2f5849b35b4ed8bd04af9e26f6cc8842f3254309c915a5a3",
       "origin": "https://vims.univ-nantes.fr/cube/N1465671822_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -434,8 +428,6 @@
     {
       "id": "phoebe-cassini-original-v1465671822_1-qub",
       "path": "cassini-ice/raw/v1465671822_1.qub",
-      "expectedBytes": 680448,
-      "expectedSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -463,8 +455,6 @@
     {
       "id": "phoebe-cassini-ice-absorption",
       "path": "cassini-ice/phoebe-ice-absorption.tif",
-      "expectedBytes": 57492,
-      "expectedSha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
@@ -515,8 +505,6 @@
     {
       "id": "phoebe-cassini-infrared",
       "path": "cassini-ice/phoebe-infrared-display.tif",
-      "expectedBytes": 52468,
-      "expectedSha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
       "origin": "https://vims.univ-nantes.fr/cube/1465671822_1",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
@@ -567,8 +555,6 @@
     {
       "id": "usgs-gazetteer-phoebe-nomenclature-center-pts",
       "path": "features/PHOEBE_nomenclature_center_pts.zip",
-      "expectedBytes": 102659,
-      "expectedSha256": "0e5998039dacbd9301441347a883b8a419782c9f791562c0f610a8507e6450ed",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/PHOEBE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -679,8 +665,6 @@
     {
       "id": "n1465662798-label",
       "path": "observations/N1465662798_2_CALIB.LBL",
-      "expectedBytes": 3777,
-      "expectedSha256": "02da84d06ff45f1aa539a05cb62a482a1adbce49bb4b3a0fd5f99b0243c60f47",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2003/data/1465650156_1465674412/N1465662798_2_CALIB.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1465662798",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",

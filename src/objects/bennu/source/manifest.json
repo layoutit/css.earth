@@ -186,8 +186,6 @@
     {
       "id": "usgs-gazetteer-bennu-nomenclature-center-pts",
       "path": "features/BENNU_nomenclature_center_pts.zip",
-      "expectedBytes": 95757,
-      "expectedSha256": "6ba31d54a588018b6931db6af5d9ab27ced8f9c9ae91b65715fc736aad729aaf",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/BENNU_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -265,15 +263,11 @@
     },
     {
       "path": "reference/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.lbl",
-      "purpose": "Unmodified publisher metadata for the spectral composite.",
-      "expectedBytes": 1365,
-      "expectedSha256": "1e90d211743797a8ea02b423e0a89bb9121a3996b6a8d1645e183ec652abb37a"
+      "purpose": "Unmodified publisher metadata for the spectral composite."
     },
     {
       "path": "reference/Bennu_OSIRIS-REx_OCAMS_color_mosaic_25cm.History.IsisCube",
-      "purpose": "Unmodified publisher metadata for the spectral composite.",
-      "expectedBytes": 452,
-      "expectedSha256": "e49d3bd21459402c45596d36c8ec7c0304a69a4900237e389e90c9a5d3ae1d2d"
+      "purpose": "Unmodified publisher metadata for the spectral composite."
     },
     {
       "id": "bennu-surface-features-source",

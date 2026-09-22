@@ -108,8 +108,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -132,8 +130,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 237356,
-      "expectedSha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -156,8 +152,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 23016,
-      "expectedSha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -180,8 +174,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 3482,
-      "expectedSha256": "b4d42ae56a08391ff72c7d6ac3a9f6f2c6ecddcdf3f081c862f0919e23ce0b6f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -204,8 +196,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 2041,
-      "expectedSha256": "88b7ad6e1bc04dd6ebca124c771c2780d6f33c348acd0f8aa914cca428056346",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -356,8 +346,6 @@
     {
       "id": "usgs-gazetteer-lutetia-nomenclature-center-pts",
       "path": "features/LUTETIA_nomenclature_center_pts.zip",
-      "expectedBytes": 134132,
-      "expectedSha256": "5feb1d89610b0dcc1be87d6f4d80d604e723c1be4ec310262951de0581a4fbf7",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/LUTETIA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

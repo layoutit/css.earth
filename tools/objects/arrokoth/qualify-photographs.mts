@@ -35,7 +35,7 @@ function audit(bytes:Buffer,control:unknown){
  const measured=points.map(p=>({partition:p.partition,...residual(p)}));
  const statistics=(partition:string)=>{const part=measured.filter(p=>p.partition===partition),lit=part.filter(p=>p.lit&&p.pixels!==undefined).map(p=>number(p.pixels));
   return{candidateEdges:part.length,matchedLitEdges:lit.length,unlitOrUnmatched:part.length-lit.length,rmsPixels:Math.sqrt(lit.reduce((s,v)=>s+v*v,0)/lit.length),maximumPixels:Math.max(...lit.map(Math.abs))};};
- return {imageSha256:camera.imageSha256,midpointUtc:camera.startTime,threshold,fit:statistics('fit'),holdout:statistics('holdout')};
+ return {midpointUtc:camera.startTime,threshold,fit:statistics('fit'),holdout:statistics('holdout')};
 }
 const reports=[];
 for(const frame of profile.frames){const bytes=await readFile(resolve(root,frame.image));reports.push({id:frame.id,path:frame.image,...audit(bytes,frame)});}

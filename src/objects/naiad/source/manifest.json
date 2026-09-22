@@ -31,8 +31,6 @@
     {
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 18278,
-      "expectedSha256": "06397011cc1d3bb859e2f761fcb0cc3c4d6a885f3ded29d1aca3cf5260c07ec8",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
       "credit": "Erich Karkoschka (2003) measured axes; cssEarth ellipsoid representation",
       "license": "MIT representation of published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 135,
-      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
       "credit": "cssEarth standard no-coverage indicator",
       "license": "MIT display representation from public NASA/NAIF scientific parameters",

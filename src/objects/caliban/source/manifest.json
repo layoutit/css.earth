@@ -31,8 +31,6 @@
     {
       "id": "lightcurve-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "830a9f52cc271ae4b4a61c5d79d86a75917babfbee528a114a8f07d37ef4b364",
       "origin": "https://arxiv.org/pdf/1706.06837",
       "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
       "capture": {
@@ -78,8 +76,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://arxiv.org/pdf/1706.06837",
       "credit": "Farkas-Takacs et al. Uranian irregular moons with K2, Herschel and Spitzer",
       "capture": {

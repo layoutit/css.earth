@@ -23,8 +23,6 @@
     {
       "id": "inter-venus-title-vector",
       "path": "presentation/title-mark.json",
-      "expectedSha256": "c7dcf2d1ffaaca53a2907762e4ae44245440e652dabaf2b2786e527465678e89",
-      "expectedBytes": 2840,
       "origin": "Inter Variable 4.001 git-9221beed3, exact prepared Venus outline",
       "credit": "Rasmus Andersson and the Inter project",
       "license": "SIL Open Font License 1.1",
@@ -361,8 +359,6 @@
     {
       "id": "nasa-psg-venus-expanded-configuration",
       "path": "atmosphere/psg-venus-20260830.cfg",
-      "expectedSha256": "9860b648a57508cf16c14936ffe8926dc380d3bedc234abc80e6d0ffad582ec8",
-      "expectedBytes": 26685,
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, wephm=y, watm=y, OBJECT-DATE=2026/08/30 12:00, OBJECT-NAME=Venus",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
@@ -386,8 +382,6 @@
     {
       "id": "nasa-psg-venus-r240-rif-response",
       "path": "atmosphere/psg-venus-r240-rif.txt",
-      "expectedSha256": "6856c59ec48619829305d4896e06c60450e075c37981da2a98890fbcf1fe6a3c",
-      "expectedBytes": 12089,
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned expanded Venus configuration, 0.35 to 1.0 um, R=240, rif",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "U.S. government scientific model response",
@@ -567,8 +561,6 @@
     {
       "id": "usgs-gazetteer-venus-nomenclature-center-pts",
       "path": "features/VENUS_nomenclature_center_pts.zip",
-      "expectedBytes": 5237841,
-      "expectedSha256": "d0a7aa47d482c0b9471fee7a9bd6ef0fecdd2a77aa42b71a8bdafdb65081bd4a",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/VENUS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

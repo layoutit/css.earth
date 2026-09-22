@@ -135,8 +135,6 @@
       "consumers": [
         "registration-reference"
       ],
-      "expectedBytes": 4375716,
-      "expectedSha256": "aedbdecc09a1f3cea1d7fa04baeceae646f69af48467502486c42176c91dc0ce",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -199,8 +197,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 12912,
-      "expectedSha256": "16cf058e26018e77098c2c3aca9ee92a25a8eeb029eba04c942051773a25bfed",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -249,8 +245,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 10480,
-      "expectedSha256": "35ea4cf95507fdf3d9c5de4f245c9494c69e6753bbb5168933993d6df3a51750",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -299,8 +293,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 9760,
-      "expectedSha256": "f2ff4a49703b6e1d9b8be59f866f149d5b5f9a926e239ee3a546215eb208f441",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -324,8 +316,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 9964,
-      "expectedSha256": "10ce4933ee84e1f8e5595e944f945b76064c528793972196ba5bda7895e64652",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -374,8 +364,6 @@
         "galileo-calibrated",
         "galileo-color"
       ],
-      "expectedBytes": 8830,
-      "expectedSha256": "7b95b9bb6272cce8d831ef8ac35f94d5dc2cd0413bba07de0bfda9d28587ba13",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -424,8 +412,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 12909,
-      "expectedSha256": "9f768a86363250f11a288cf587e2813df7b8df7273d32b6bbc60196caaa461df",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -472,8 +458,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 10480,
-      "expectedSha256": "2899b9d445d1947dc0ab1b852cf80a32d0198e6c59531ea8c885e17a4799a82c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -488,8 +472,6 @@
     {
       "id": "usgs-gazetteer-ida-nomenclature-center-pts",
       "path": "features/IDA_nomenclature_center_pts.zip",
-      "expectedBytes": 102286,
-      "expectedSha256": "0e34dd48b84100fdcac5380daa1351d482d6a3aba6babdec989215eafaeedf3b",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/IDA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -594,8 +576,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 12882,
-      "expectedSha256": "b0376ca65837f9ada841d5712631feb3bb586e4352daabf3e6c61c780240edcb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -642,8 +622,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 10480,
-      "expectedSha256": "a6a36ffeab8d42b591a12e2920b136c3eecc3d983d8b457640f11cd27a505aaa",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -692,8 +670,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 12885,
-      "expectedSha256": "bde2777526375d605cfd770c189d2244752a0a143ff2f7961a473c652817ebc3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -740,8 +716,6 @@
       "consumers": [
         "galileo-color"
       ],
-      "expectedBytes": 10480,
-      "expectedSha256": "8b33f93cce7daac9fc1ac6163b1cfd6702032fb50da392cf3315e948533ef061",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

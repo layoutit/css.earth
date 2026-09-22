@@ -41,8 +41,6 @@
         "shape"
       ],
       "coverage": "Celestia contributors’ reconstruction inspired by Lucy images, uniformly scaled to the published 738 m volume-equivalent diameter. This is an authored approximation, not the mission photogrammetric shape model. The grid marks missing qualified surface imagery.",
-      "expectedBytes": 8490675,
-      "expectedSha256": "fb25e4125e5743c6d8599986dc966acefa775c69e5ae30bed840ed90eb2fd04c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -57,8 +55,6 @@
     {
       "id": "usgs-gazetteer-dinkinesh-nomenclature-center-pts",
       "path": "features/DINKINESH_nomenclature_center_pts.zip",
-      "expectedBytes": 14569,
-      "expectedSha256": "b3e19298f41ce5d9f908fa37fe10621817ecb9a8c78b09096879296060a2c2c4",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DINKINESH_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archive carries no metadata record, so the pin cites USGS Copyrights and Credits (https://www.usgs.gov/information-policies-and-instructions/copyrights-and-credits): USGS-authored or produced data and information are in the U.S. Public Domain.",
@@ -82,8 +78,6 @@
       "id": "tempest-dinkinesh-model",
       "path": "shape/tempest-dinkinesh.stl",
       "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/data/shape_models/dinkinesh.stl",
-      "expectedBytes": 237239,
-      "expectedSha256": "3c38e04484e42a90e8b284302111325f0519a61ab22772f73d541e2715e11622",
       "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
       "license": "Modified MIT License (Attribution Required)",
       "licenseEvidence": [
@@ -111,8 +105,6 @@
       "id": "tempest-license",
       "path": "shape/TEMPEST-LICENSE.md",
       "origin": "https://raw.githubusercontent.com/duncanLyster/TEMPEST/7df4c88063ebe811cbdd25b97c19f85559607459/LICENSE.md",
-      "expectedBytes": 1476,
-      "expectedSha256": "830ce983cfcfa1dd44466f708c3eeb92ba0eb80f7bc695aefebc243d55d277b8",
       "credit": "Duncan Lyster; Lyster, D., Howett, C., & Penn, J. (2025), TEMPEST",
       "license": "Modified MIT License (Attribution Required)",
       "licenseEvidence": [

@@ -156,8 +156,6 @@
     {
       "id": "geology-2026-source-1",
       "path": "science/geology-2026/Titania surface.lyrx",
-      "expectedBytes": 32660,
-      "expectedSha256": "95c0a72b009403ee138407c775c4adcd33931a40d24b9d9ea2bd53f8697a749e",
       "origin": "https://zenodo.org/api/records/20819132/files/Titania%20surface.lyrx/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -184,8 +182,6 @@
     {
       "id": "geology-2026-source-2",
       "path": "science/geology-2026/Crater Materials .lyrx",
-      "expectedBytes": 149715,
-      "expectedSha256": "b3fa92f23f03b61629cbbacf9632fddef4cad3c651fc1f63475ba5936e19f9e2",
       "origin": "https://zenodo.org/api/records/20819132/files/Crater%20Materials%20.lyrx/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -212,8 +208,6 @@
     {
       "id": "geology-2026-source-3",
       "path": "science/geology-2026/Plains Materials .lyrx",
-      "expectedBytes": 74125,
-      "expectedSha256": "6abdeb1388377c3c858c604c935c802cd13d17c5d6c78fd70968953f3241b597",
       "origin": "https://zenodo.org/api/records/20819132/files/Plains%20Materials%20.lyrx/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -240,8 +234,6 @@
     {
       "id": "geology-2026-source-4",
       "path": "science/geology-2026/Titania Linework.lyrx",
-      "expectedBytes": 11867,
-      "expectedSha256": "43073f18b71601f52ba8c83e988f47bf985c45abe1b64b167139e5f6142cbae0",
       "origin": "https://zenodo.org/api/records/20819132/files/Titania%20Linework.lyrx/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -268,8 +260,6 @@
     {
       "id": "geology-2026-source-5",
       "path": "science/geology-2026/Titania geologic map .lyrx",
-      "expectedBytes": 33323,
-      "expectedSha256": "bd57952e22b1f479d8aa50c4f6060e6653ffbcc970b9648cd6cb37123969b5af",
       "origin": "https://zenodo.org/api/records/20819132/files/Titania%20geologic%20map%20.lyrx/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -296,8 +286,6 @@
     {
       "id": "geology-2026-source-6",
       "path": "science/geology-2026/Titania Map 2.gdb.zip",
-      "expectedBytes": 126593,
-      "expectedSha256": "6a2a2020440a3def8b9d014b95588badf9ac26d16a45251e4a93fd2da8632bbf",
       "origin": "https://zenodo.org/api/records/20819132/files/Titania%20Map%202.gdb.zip/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -324,8 +312,6 @@
     {
       "id": "geology-2026-source-7",
       "path": "science/geology-2026/Screenshot 2026-06-23 151155.png",
-      "expectedBytes": 383332,
-      "expectedSha256": "a98427ba99cd0e55440512f527daca2e7f1745229e22f7aca7f31f8b78a65319",
       "origin": "https://zenodo.org/api/records/20819132/files/Screenshot%202026-06-23%20151155.png/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -352,8 +338,6 @@
     {
       "id": "geology-2026-source-8",
       "path": "science/geology-2026/Additional Tectonic symbols.lyrx",
-      "expectedBytes": 15530,
-      "expectedSha256": "17e64bfef68ce942aafdda19c0636b291ef84e28c26111eaa2d1ddce25173028",
       "origin": "https://zenodo.org/api/records/20819132/files/Additional%20Tectonic%20symbols.lyrx/content",
       "catalog": "https://zenodo.org/records/20819132",
       "credit": "Bradley Thomson and Devon Baynham (2026); historical Voyager-era geologic map digitization",
@@ -380,8 +364,6 @@
     {
       "id": "geology-2026-categories",
       "path": "science/geology-2026/categories.tif",
-      "expectedBytes": 25962,
-      "expectedSha256": "fae52df10d453d09be1c98f7d000ff12ae56d0ffa3304190cb45f4fb838f038e",
       "width": 1440,
       "height": 720,
       "origin": "https://zenodo.org/records/20819132",
@@ -410,8 +392,6 @@
     {
       "id": "usgs-gazetteer-titania-nomenclature-center-pts",
       "path": "features/TITANIA_nomenclature_center_pts.zip",
-      "expectedBytes": 84339,
-      "expectedSha256": "3c81644e31444a9576203f2e9956f43bf09e0f670a25885eb19e0581101b6c91",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TITANIA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -482,8 +462,6 @@
     {
       "id": "titania-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3820,
-      "expectedSha256": "0801e9d717da2e92db9702fdafc807b3530f0df2e8b292d9b0898dedf6a2c07c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",

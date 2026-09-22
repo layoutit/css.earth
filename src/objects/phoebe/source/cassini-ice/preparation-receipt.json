@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-phoebe-registered-vims-surfaces@1",
-  "recipeSha256": "68162ebf0bc13325bf7d9ae295cf34903c1f100f3b13a7d35bd5d7db11689647",
   "preparerSha256": "47588d2471bcd76c895847ce8c549736cfe459ca21f3511c364de816a316faf1",
   "spectralHelperSha256": "b67682f3ea069c0e371bcedc8f440836dc591f95f9b202d39510ef89efabbf3a",
   "fixedMeshHelperSha256": "aae28318139cd4a3cc46838e905c46ae11cfb003def06acccbfd454241cf0020",
@@ -49,7 +48,6 @@
           "coreEndByteExclusive": 680320,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "df43d42c42ab29cf00eee62c6f22796d85631b60f6c8b4da56ba590cb01f3030",
         "calibratedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",

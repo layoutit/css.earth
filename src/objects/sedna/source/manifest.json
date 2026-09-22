@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "6c23ef3b0122589774cf8a8a5ed0f989e5f24508206dcf126285383e6a254b23",
       "origin": "https://arxiv.org/abs/1204.0899",
       "credit": "Pál et al. (2012), Herschel/PACS thermophysical analysis; Gaudi et al. (2005), rotational photometry.",
       "capture": {

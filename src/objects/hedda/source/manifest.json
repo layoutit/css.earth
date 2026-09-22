@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 31955
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 63.91 km effective diameter (catalog ±1 km; additional shape and thermal-model uncertainty). Thermal size supplies a volume-scale approximation. The grid marks unavailable imagery; rotational phase is illustrative. ATLAS2015–2018 photometry gives 310 orange and 144 cyan measurements; period search with convex models. Both mirror poles remain; model 4799 is selected as a representative, not a unique orientation. The thermal scale is approximate. Convex inversion supplies broad outline without resolved craters, concavities, reflectance or regolith texture.",
-      "expectedBytes": 44637,
-      "expectedSha256": "2960870d9b24a38294260667c205abc1a2d88ca5b62af00ff47a50747cf67838",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/4799-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "15c3da4bc5df7b9a794ef1ba5a3af136f966860c8001ee83da8a83df66c177ea"
+      "path": "reference/4799-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

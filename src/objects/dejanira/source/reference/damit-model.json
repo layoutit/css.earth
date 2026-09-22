@@ -81,8 +81,8 @@
   ],
   "id": "dejanira",
   "displayName": "Dejanira",
-  "lambda": 319.0,
-  "beta": -64.0,
+  "lambda": 319,
+  "beta": -64,
   "periodHours": 15.8287,
   "version": "2013-02-19",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2332/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2330/IAUspin.txt",
-  "shapeSha256": "9c67749dd7cb5a594927246b2f884cae7d17989b67e9f1c028793518705fdb65",
   "shapeBytes": 45285,
   "vertices": 560,
   "faces": 1116,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 1.0462234464997902e-09
+    "minimumTriangleAreaSourceUnitsSquared": 1.0462234464997902e-9
   },
   "anchors": [
     {
