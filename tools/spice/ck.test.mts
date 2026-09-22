@@ -43,7 +43,7 @@ test('type 1 discrete records need an exact or tolerated time; type 2 propagates
   const one = ck(1, [...zRotation(45), 0, 0, 0, 7, 0, 1], { rates: 1 }); // record, time, directory count, record count
   assert.equal(one.pointing(6), null); assert.ok(one.pointing(7)); assert.ok(one.pointing(9, 2));
   const rate = Math.PI / 180; // one degree per second about Z
-  const two = ck(2, [...zRotation(0), 0, 0, rate, 1, 0, 100, 1], { rates: 1 });
+  const two = ck(2, [...zRotation(0), 0, 0, rate, 1, 0, 100], { rates: 1 }); // record, start, stop: SPICE derives the count from the length
   const turned = two.pointing(30); assert.ok(turned);
   const expected = quaternionToMatrix(zRotation(30));
   for (let i = 0; i < 3; i++) for (let j = 0; j < 3; j++) assert.ok(Math.abs(turned.cMatrix[i][j] - expected[i][j]) < 1e-9, `type 2 propagation ${i}${j}`);

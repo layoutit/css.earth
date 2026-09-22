@@ -1,0 +1,29 @@
+{
+  "id": "cneos-neo-groups",
+  "kind": "reference-page",
+  "identityLevel": "work",
+  "title": "CNEOS NEO groups",
+  "identifiers": [],
+  "links": [
+    {
+      "role": "landing",
+      "url": "https://cneos.jpl.nasa.gov/about/neo_groups.html",
+      "label": "CNEOS NEO groups"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "src/objects/apollo/text.json",
+      "locator": "/card/sources/0"
+    }
+  ],
+  "relations": [],
+  "statements": [
+    {
+      "kind": "credit",
+      "text": "NASA/JPL Center for Near-Earth Object Studies",
+      "scope": "citation",
+      "evidence": "src/objects/apollo/text.json#/card/sources/0"
+    }
+  ]
+}

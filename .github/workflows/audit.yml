@@ -55,6 +55,11 @@ jobs:
           else
             node tools/audits/check-documentation-links.mts --all
           fi
+      - name: Lint every authored tree
+        # `tools`, `src` and `site` had no ESLint at all, so the size and boundary rules governed
+        # only the two smallest trees. Warnings are reported here; `lint:packages` still fails on
+        # any warning inside `packages/`, where the rules have always been enforced.
+        run: pnpm lint
       - name: Check that no directory grew past its baseline
         # Convention, not correctness: a flat directory cannot break the shipped site, so this
         # reports rather than gates (docs/ci-cd.md, "Gate on what ships"). Ratcheted, so existing

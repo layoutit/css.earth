@@ -1,0 +1,130 @@
+{
+  "id": "datura",
+  "properties": {
+    "preparation": {
+      "schema": "cssearth-object-preparation@1",
+      "label": "Datura",
+      "steps": [
+        "verify-sources",
+        "assets",
+        "starfield",
+        "sky-sun",
+        "scene",
+        "controls",
+        "presentation",
+        "runtime-assets"
+      ]
+    },
+    "recipe": {
+      "surfaces": [
+        {
+          "id": "body",
+          "source": "terrestrial",
+          "projection": "equirectangular",
+          "lenses": [
+            {
+              "id": "shape",
+              "source": "content",
+              "material": "lighting"
+            },
+            {
+              "id": "elevation",
+              "source": "content",
+              "material": "lighting"
+            }
+          ]
+        }
+      ],
+      "shape": {
+        "kind": "radial-terrain",
+        "radiusKm": 4.1015
+      },
+      "schema": "cssearth-authored-object@1",
+      "materials": [
+        {
+          "id": "lighting",
+          "source": "terrestrial",
+          "model": "lit"
+        }
+      ],
+      "sources": [
+        {
+          "id": "terrestrial",
+          "path": "source/preparation/terrestrial.json"
+        },
+        {
+          "id": "rotation",
+          "path": "source/preparation/rotation.json"
+        },
+        {
+          "id": "content",
+          "path": "source/content/object.json"
+        },
+        {
+          "id": "title",
+          "path": "source/presentation/title-mark.json"
+        },
+        {
+          "id": "navigation",
+          "path": "source/preparation/navigation.json"
+        },
+        {
+          "id": "acquisition",
+          "path": "source/preparation/acquisition.json"
+        }
+      ]
+    },
+    "worldFrame": {
+      "referenceFrame": "sun-icrf",
+      "epochJdTt": 2461286.5,
+      "originM": [
+        95769433926.63228,
+        -254889584850.40363,
+        -117026407418.85674
+      ],
+      "presentationToReference": [
+        0.32320636848826945,
+        -1.3877787807814457e-17,
+        -0.94632850710978,
+        -0.8682394300979315,
+        0.3977771559319137,
+        -0.2965360454345093,
+        -0.3764278621354221,
+        -0.9174820620691818,
+        -0.12856411003634588
+      ],
+      "orbitUpReference": [
+        1.3877787807814457e-17,
+        -0.3977771559319137,
+        0.9174820620691818
+      ],
+      "metersPerUnit": 17.832608695652173,
+      "bodyRadiusM": 4101.5
+    },
+    "page": {
+      "stylesheets": [
+        "src/renderers/css/styles/datura-surfaces.css"
+      ],
+      "metadata": {
+        "url": "prepared/page.json",
+        "sha256": "74f1f2b201a882df31f7e4c8ad349f5ac21558888b2304ebf0ff17473196bdf9"
+      }
+    },
+    "catalog": {
+      "name": "Datura",
+      "classification": "asteroid",
+      "color": "#aaaaaa",
+      "distanceAu": 2.234677504238297,
+      "description": "Largest body of the Datura family.",
+      "systemName": "Solar System",
+      "context": {}
+    }
+  },
+  "schema": "cssearth-object@1",
+  "type": "layered-body",
+  "prepared": {
+    "format": "cssearth-css-object@5",
+    "url": "prepared/object.json",
+    "sha256": "583045558638456da45c5acc0c12e764b678f321c5266002b74c85f0703cbec3"
+  }
+}

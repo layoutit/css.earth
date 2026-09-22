@@ -151,6 +151,8 @@ export function createPerspectiveDolly({
   canReveal,
 }: PerspectiveDollyOptions) {
   const cameraPlan = validatePerspectiveCameraPlan(unvalidatedCameraPlan);
+  // The shell's shared viewport; publication shadows the name with its own optics below.
+  const sharedViewport = viewport;
   if (!worldContext) throw new TypeError("Perspective dolly requires a prepared physical camera context.");
   const bodyRadius = worldContext.bodyRadiusUnits;
   const kilometersPerUnit = worldContext.kilometersPerUnit;
@@ -207,12 +209,18 @@ export function createPerspectiveDolly({
       focal = snapshot.focalPixels;
       viewportWidth = snapshot.bounds.width;
       viewportHeight = snapshot.bounds.height;
+      // Centre the focus on the scene area the shell leaves open (a phone's header and drawer cover the rest).
+      // The camera root moves there whole, so inside it the dolly stays on-axis; consumers in stage coordinates
+      // (world context, sky, volumes) read the same shift as the stage viewport's principal offset.
+      const open = snapshot.openArea;
+      const offsetY = open ? (open.top + open.bottom) / 2 - (snapshot.bounds.top + viewportHeight / 2) : 0;
       principalOffset = Object.freeze([0, 0]);
       stageViewport = Object.freeze({ focalPixels: focal, widthPixels: viewportWidth,
-        heightPixels: viewportHeight, principalOffsetPixels: [0, 0] as const });
+        heightPixels: viewportHeight, principalOffsetPixels: [0, offsetY] as const });
       visibleRect = Object.freeze({ left: -viewportWidth / 2, right: viewportWidth / 2,
-        top: -viewportHeight / 2, bottom: viewportHeight / 2 });
+        top: -viewportHeight / 2 - offsetY, bottom: viewportHeight / 2 - offsetY });
       cameraElement.style.perspectiveOrigin = '50% 50%';
+      cameraElement.style.translate = offsetY ? `0 ${formatNumber(offsetY)}px` : '';
       return;
     }
     const view = cameraElement.ownerDocument.defaultView;
@@ -373,7 +381,8 @@ export function createPerspectiveDolly({
       const viewport = { focalPixels: focal, principalOffsetPixels: [principalOffset[0], principalOffset[1]] as const };
       const genericPresentation = publishedWorld ? presentWorldCamera(publishedWorld, worldContext.frame, viewport) : null;
       const [bodyX, bodyY, bodyZ] = genericPresentation?.translateCssPixels ?? [0, 0, focal - distance];
-      if (publishedWorld) worldContext.onWorldPublish?.(publishedWorld, viewport);
+      if (publishedWorld) worldContext.onWorldPublish?.(publishedWorld, sharedViewport
+        ? { focalPixels: focal, principalOffsetPixels: stageViewport.principalOffsetPixels } : viewport);
       const genericBody = genericPresentation === null ? undefined : genericBodyProjection(
         genericPresentation, bodyRadius, focal,
       );

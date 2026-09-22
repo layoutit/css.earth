@@ -41,7 +41,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - Six distributed point anchors, exact input hashes, and decoder failure cases are tested.
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ganymede) and [browser profile](../../../tests/objects/browser/ganymede/browser-profile.mts).
+- Focused checks are defined in the [unit tests](../../../tests/objects/unit/ganymede) and the shared browser conformance harness.
 
 Composition conversion: the two withheld views consume posterior medians for `derived_total_ices` and `derived_total_synthetic`, respectively. The pinned 8,845,543-byte fit (`cd7843ce…9261c8e4`) contributes 38,473 valid and 26,327 missing native nodes to each lens. It is resampled only by reversing latitude, reordering east-positive longitudes and repeating the seam: no smoothing, gap fill, or abundance aggregation. [The conversion record](source/composition/model-conversion.json) pins the output hashes, value ranges and posterior-interval products.
 

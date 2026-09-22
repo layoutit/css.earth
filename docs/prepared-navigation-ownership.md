@@ -108,11 +108,11 @@ comparisons and the interpretation used for its model.
 
 - `pnpm test` and `pnpm typecheck:renderer`
 - `pnpm build`
-- `node site/test/prepared-bindings-browser.mts` — registry-derived Chrome DPR 1/2,
+- `node `site/test/rendered-page.test.mts` — registry-derived Chrome DPR 1/2,
   stable nodes and animations, native visual comparisons, actual pause/resume.
-- `node site/test/navigation-capacity-browser.mts` — real bank replacement and
+- `node `site/test/rendered-page.test.mts` — real bank replacement and
   flights, capacity limits, no resets and retained sidebar.
-- `node site/test/navigation-selection-browser.mts` — delayed package and input
+- `node `site/test/rendered-page.test.mts` — delayed package and input
   cancellation, immediate complete card, no intermediate card at mount.
 - [prepared-object-worker-client.test.ts](../src/renderers/css/prepared-object-worker-client.test.ts)
   in the renderer suite — persistent worker reuse, cancellation and disposal.

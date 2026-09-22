@@ -206,8 +206,8 @@ For changes to dataset selection or routing, also run the affected
 [router](../../site/test/navigation-router.test.mts) tests for cancellation and history.
 
 For dataset navigation or card presentation changes, run
-`pnpm test:browser:datasets <production-preview-url>` against an assembled build.
-The [browser regression](../../site/test/dataset-navigation-browser.mts)
+`pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) against an assembled build.
+The [browser regression](../../site/test/rendered-page.test.mts)
 uses the public shell and records its cases, browser version, requests and
 screenshots under `output/playwright/dataset-navigation/`. It checks direct,
 same-body and cross-body dataset navigation, manual selection and history,

@@ -69,8 +69,11 @@ function type1(daf: Daf, summary: DafSummary, hasRates: boolean): CkSegment['poi
 }
 
 function type2(daf: Daf, summary: DafSummary): CkSegment['pointing'] {
-  const count = daf.words(summary.endAddress, 1)[0];
-  if (!Number.isInteger(count) || count < 1) throw new Error(`Invalid type 2 CK trailer in ${summary.name}.`);
+  // Type 2 has no count word: N records of 8 doubles, N start times, N stop times, then one directory entry per 100 starts.
+  const length = summary.endAddress - summary.startAddress + 1;
+  let count = Math.floor(length / 10);
+  while (count > 0 && 10 * count + Math.floor((count - 1) / 100) > length) count--;
+  if (count < 1 || 10 * count + Math.floor((count - 1) / 100) !== length) throw new Error(`Invalid type 2 CK segment length in ${summary.name}.`);
   const starts = daf.words(summary.startAddress + count * 8, count), stops = daf.words(summary.startAddress + count * 9, count);
   return sclk => {
     const index = lastNotAfter(starts, sclk);

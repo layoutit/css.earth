@@ -1,0 +1,84 @@
+{
+  "source": "https://damit.cuni.cz/projects/damit/asteroid_models/view/273",
+  "modelId": 273,
+  "modelVersion": "2007-08-29",
+  "diameterKm": 1.68,
+  "diameterInterpretation": "Thermophysical effective diameter fitted to this mesh: 1.68 ± 0.09 km.",
+  "calibration": {
+    "method": "thermophysical-fit-to-this-mesh",
+    "diameterKm": 1.68,
+    "uncertaintyKm": 0.09,
+    "quantity": "thermophysical effective diameter fitted with this shape model",
+    "reference": "Rozitis et al. (2013), A&A 555, A20, Table 3 ('Original' shape variant)",
+    "referenceUrl": "https://arxiv.org/abs/1305.3109",
+    "notes": "Table 2 lists the fitted shape as 1022 vertices and 2040 facets with pole (48°, −72°) and period 3.065448 h from Ďurech et al. (2008a), the same counts, pole and period as DAMIT model 273. Table 3 gives 1.68 ± 0.09 km for this 'Original' shape. The paper notes that this size overestimates the radar maximum equatorial diameter (2.07 ± 0.07 km) by a factor of 1.17 and prefers a reshaped variant at 1.55 ± 0.07 km; that variant mesh is not archived.",
+    "scaleKmPerSourceUnit": 1.3540733504357094,
+    "sourceUrl": "https://arxiv.org/abs/1305.3109",
+    "sourceLabel": "Rozitis et al. (2013), A&A 555, A20, Table 3 ('Original' shape variant)",
+    "diameterSemantics": "thermophysical effective diameter fitted with this shape model",
+    "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. Table 2 lists the fitted shape as 1022 vertices and 2040 facets with pole (48°, −72°) and period 3.065448 h from Ďurech et al. (2008a), the same counts, pole and period as DAMIT model 273. Table 3 gives 1.68 ± 0.09 km for this 'Original' shape. The paper notes that this size overestimates the radar maximum equatorial diameter (2.07 ± 0.07 km) by a factor of 1.17 and prefers a reshaped variant at 1.55 ± 0.07 km; that variant mesh is not archived.",
+    "visibleDescription": "Thermophysical effective diameter fitted to this mesh: 1.68 ± 0.09 km."
+  },
+  "periodHours": 3.065448,
+  "poleEclipticJ2000Degrees": [
+    48,
+    -72
+  ],
+  "modelLimitations": "The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+  "shape": {
+    "source": "https://damit.cuni.cz/projects/damit/stored_files/open/920/shape.txt",
+    "vertices": 1022,
+    "faces": 2040,
+    "originalUnits": "uncalibrated source coordinates",
+    "metersPerUnit": 1354.0733504357095,
+    "firstVertexKm": [
+      0.19537653558766763,
+      0.023527024463820455,
+      0.5532432273009709
+    ],
+    "firstFaceZeroBased": [
+      0,
+      1,
+      2
+    ],
+    "extentsKm": [
+      2.0003481872783655,
+      2.3917782951289186,
+      1.1271374272694368
+    ],
+    "volumeCubicKm": 2.4827127095377115,
+    "volumeEquivalentRadiusKm": 0.84,
+    "radialRangeKm": [
+      0.5523823705337756,
+      1.3484231822577608
+    ]
+  },
+  "elevation": [
+    -0.5,
+    1
+  ],
+  "simplification": {
+    "method": "source-meshoptimizer",
+    "version": "1.2.0",
+    "flags": [
+      "ErrorAbsolute",
+      "RegularizeLight"
+    ],
+    "sourceFaces": 2040,
+    "sourceVertices": 1022,
+    "weldedVertices": 1022,
+    "targetFaces": 800,
+    "outputFaces": 800,
+    "removedOppositeFaces": 0,
+    "maximumErrorMeters": 16.8,
+    "estimatedErrorMeters": 6.349555969238281,
+    "topology": {
+      "vertices": 402,
+      "edges": 1200,
+      "faces": 800,
+      "components": 1,
+      "eulerCharacteristic": 2,
+      "signedVolumeCubicMeters": 2479147469.3101215
+    }
+  }
+}

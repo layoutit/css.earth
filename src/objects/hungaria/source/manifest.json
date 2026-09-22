@@ -1,0 +1,150 @@
+{
+  "schema": "csshungaria-authoritative-sources@2",
+  "inputs": [
+    {
+      "id": "hungaria-shape",
+      "path": "shape/model-1151.txt",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/4194/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hungaria model 1151; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0, DAMIT; retain original model and authors attribution.",
+      "acquisition": "Restore original uncalibrated counted triangle table through the pinned acquisition recipe.",
+      "redistribution": "Original and derived model data with CC-BY-4.0 attribution; see NOTICE.md.",
+      "consumers": [
+        "terrain",
+        "shape",
+        "elevation"
+      ],
+      "lensId": "elevation",
+      "projection": {
+        "kind": "body-fixed-cartesian-triangular-mesh",
+        "longitudeDirection": "east",
+        "latitudeType": "planetocentric",
+        "units": "uncalibrated source coordinates",
+        "metersPerUnit": 7200.76859036996,
+        "referenceRadiusMeters": 4467
+      },
+      "coverage": "Published convex light-curve model 1151. NEOWISE thermal diameter, applied approximately to the mesh volume: 8.9 ± 0.7 km. The convex inversion resolves the broad shape; craters and concavities are unresolved.",
+      "expectedBytes": 82708,
+      "expectedSha256": "431a00b9e363abeb8f02473cf904de1d5a2957b71a29da8d65072bf8ed721784",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "damit-shape-4194",
+            "role": "material",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    },
+    {
+      "id": "inter-title-font",
+      "path": "presentation/InterVariable.ttf",
+      "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
+      "credit": "Inter Project Authors / Rasmus Andersson",
+      "license": "SIL Open Font License 1.1",
+      "licenseEvidence": [
+        "presentation/LICENSE.INTER-OFL"
+      ],
+      "acquisition": "Restore exact Inter font pin through source/preparation/acquisition.json.",
+      "redistribution": "Permitted with the accompanying SIL Open Font License.",
+      "consumers": [
+        "title"
+      ],
+      "expectedBytes": 862936,
+      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
+      "sourceBinding": {
+        "kind": "catalogued",
+        "references": [
+          {
+            "catalogueId": "inter-9221beed3",
+            "role": "method",
+            "evidence": "Origin and product identifier recorded on this manifest entry."
+          }
+        ]
+      }
+    }
+  ],
+  "generatedIntermediates": [
+    {
+      "id": "prepared-radial-context",
+      "path": "presentation/context.png",
+      "origin": "https://damit.cuni.cz/projects/damit/stored_files/open/4194/shape.txt",
+      "credit": "DAMIT, Astronomical Institute of Charles University; Hungaria model 1151; original model authors identified in its pinned reference records.",
+      "license": "CC-BY-4.0",
+      "consumers": [
+        "navigation"
+      ],
+      "recipe": {
+        "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts",
+        "inputs": [
+          "hungaria-shape"
+        ],
+        "size": 512,
+        "longitudeDegrees": 0,
+        "latitudeDegrees": 35,
+        "ambient": 0.45,
+        "diffuse": 0.55,
+        "lensId": "shape"
+      },
+      "generator": "tools/objects/terrestrial-layers/radial-snapshot.mts"
+    }
+  ],
+  "documents": [
+    {
+      "path": "content/object.json",
+      "sourceBinding": {
+        "kind": "local",
+        "reason": "Project-authored factsheet, dataset recipes and legends."
+      }
+    },
+    {
+      "path": "preparation/acquisition.json"
+    },
+    {
+      "path": "preparation/navigation.json"
+    },
+    {
+      "path": "preparation/rotation.json"
+    },
+    {
+      "path": "preparation/terrestrial.json"
+    },
+    {
+      "path": "presentation/LICENSE.INTER-OFL"
+    },
+    {
+      "path": "presentation/title-mark.json"
+    },
+    {
+      "path": "reference/1151-IAUspin.txt"
+    },
+    {
+      "path": "reference/calibration.json"
+    },
+    {
+      "path": "reference/damit-model.json"
+    },
+    {
+      "path": "reference/horizons-elements.txt"
+    },
+    {
+      "path": "reference/horizons-physical.txt"
+    },
+    {
+      "path": "reference/horizons-vectors.txt"
+    },
+    {
+      "path": "reference/model-properties.json"
+    },
+    {
+      "path": "reference/neowise-query.txt"
+    },
+    {
+      "path": "reference/neowise-selected.csv"
+    },
+    {
+      "path": "reference/sbdb.json"
+    }
+  ]
+}

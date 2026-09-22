@@ -23,7 +23,8 @@ const anchors:Record<string,readonly (readonly [number,number,number|null])[]> =
   elevation: [[90 + 1 / 120, 30 - 1 / 120, 1552], [180 + 1 / 120, -1 / 120, 16202], [270 + 1 / 120, -30 - 1 / 120, 3813], [10, 80, null], [350, -80, null]],
   // Dawn VIR band depths, read independently from the big-endian archive bytes at the label's pixel centres.
   "clay-band": [[90, 30, 0.24399100244045258], [180, 0, 0.2446340024471283], [300, -45, 0.24745400249958038], [239.3, 19.8, null], [10, 70, null], [0.01, 0, null]],
-  "ammonium-band": [[90, 30, 0.06422939896583557], [180, 0, 0.05942070111632347], [300, -45, 0.07827109843492508], [239.3, 19.8, null], [10, 70, null], [0.01, 0, null]],
+  // Our VIR reduction (science/vir-reduction), read independently with Python from the gunzipped little-endian bytes.
+  "ammonium-band": [[90, 30, 0.11522030085325241], [180, 0, 0.1162446066737175], [300, -45, 0.1443149298429489], [239.3, 19.8, 0.07089750468730927], [10, 70, null], [0.01, 0, 0.11303388327360153]],
 
 };
 

@@ -76,7 +76,7 @@ Gazetteer rims drawn over the prepared equirectangular minimap at both candidate
 
 - Original files, STAC metadata, source processing, seven independently Pillow-decoded value anchors, and the exclusion evidence are retained under [source/science/controlled-dtms/](source/science/controlled-dtms/).
 
-- Focused checks are defined in the [unit tests](../../../tests/objects/unit/europa) and [browser profile](../../../tests/objects/browser/europa/browser-profile.mts).
+- Focused checks are defined in the [unit tests](../../../tests/objects/unit/europa) and the shared browser conformance harness.
 
 Composition conversion: **Ice signature** is the observed, photometrically corrected `1.30000 / 1.50263 µm` reflectance ratio. The numerator and denominator are exact released samples; “1.51 µm” is only the paper's rounded label. It has 19,644 valid native nodes. **Fine ice** and **Coarse ice** are separate posterior-median model components for crystalline 0.1–0.3 mm and 0.3–1 mm ice, each with 19,616 valid nodes. The pinned source hashes, output hashes, ranges and interval-width uncertainty fields are in the two conversion records; preparation only reorders coordinates, reverses latitude and repeats the periodic seam.
 

@@ -1,0 +1,15 @@
+{
+  "method": "occultation-scaled-mesh",
+  "diameterKm": 38,
+  "uncertaintyKm": 5,
+  "quantity": "occultation-constrained volume-equivalent diameter",
+  "reference": "DAMIT model 167 calibrated size, Ďurech et al. (2011), Icarus 214, 652",
+  "referenceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/167",
+  "notes": "DAMIT marks model 167 as size-calibrated (D = 38 km, σ = 5 km) and archives the 2005-12-13 occultation fit to this mesh. DAMIT labels the model 'preliminary'. NEOWISE lists 39.025 ± 0.462 km (Masiero et al. 2014), consistent within the quoted error.",
+  "scaleKmPerSourceUnit": 1.0000000140344165,
+  "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/167",
+  "sourceLabel": "DAMIT model 167 calibrated size, Ďurech et al. (2011), Icarus 214, 652",
+  "diameterSemantics": "occultation-constrained volume-equivalent diameter",
+  "limitations": "Uniform scale of the unchanged archived mesh by the adopted diameter and its quoted uncertainty. DAMIT marks model 167 as size-calibrated (D = 38 km, σ = 5 km) and archives the 2005-12-13 occultation fit to this mesh. DAMIT labels the model 'preliminary'. NEOWISE lists 39.025 ± 0.462 km (Masiero et al. 2014), consistent within the quoted error.",
+  "visibleDescription": "Occultation-calibrated volume-equivalent diameter: 38 ± 5 km."
+}

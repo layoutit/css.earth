@@ -44,12 +44,12 @@
     "clay-band": {
       "title": "Dawn VIR 2.7 µm band depth",
       "detail": "Clay absorption",
-      "summary": "Clay band depth on Frigeri et al.'s color scale. Archived values run higher than the paper's, and scan stripes remain."
+      "summary": "Clay band depth, colored over this map's own range. Deeper than Frigeri et al.'s, whose correction is unreleased."
     },
     "ammonium-band": {
       "title": "Dawn VIR 3.1 µm band depth",
       "detail": "Ammonium absorption",
-      "summary": "Ammonium band depth on Frigeri et al.'s color scale. Archived values run lower than the paper's; scan stripes remain."
+      "summary": "Ammonium band depth from our own reduction of Dawn VIR cubes: no stripes, 99% covered, colored over its own range."
     }
   }
 }
