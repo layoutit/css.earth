@@ -107,7 +107,7 @@ Read the current `package.json` and runner arguments before using commands:
 | Install published prepared assets for one body | `pnpm setup:assets --object=<id>` |
 | Start the shared development site | `pnpm dev` |
 | Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
-| Prepare one authored package | `pnpm prepare:planets -- --object=<id>` |
+| Prepare one authored package | `pnpm prepare:objects -- --object=<id>` |
 | Update source and mission catalogues | `pnpm prepare:sources` |
 | Give a new download its first pin | `node tools/sources/pin-object-documents.mts <id> --adopt-downloads` (`--check` only reports). Files authored here carry no pin; git records them |
 | Bind new inputs to catalogue records | `node tools/sources/author-source-records.mts <id>` |

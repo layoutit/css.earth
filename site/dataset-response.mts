@@ -33,7 +33,7 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const descriptor = parseObjectDescriptor(JSON.parse(requiredElement(descriptorRegion.document, 'script[data-prepared-descriptor]').textContent ?? ''));
   if (descriptor.id !== objectId || descriptor.prepared?.url !== 'prepared/object.json') throw new Error('Prepared dataset descriptor identity drifted.');
   const shell = region(html, 'search-shell');
-  const buttons = [...shell.document.querySelectorAll<HTMLButtonElement>('.planet-information-panel button[name="dataset"]')];
+  const buttons = [...shell.document.querySelectorAll<HTMLButtonElement>('.object-information-panel button[name="dataset"]')];
   if (lensId && !buttons.some(button => button.getAttribute('value') === lensId)) throw new RangeError('Dataset unavailable on this object.');
   const read = async (path: string) => {
     const response = await fetcher(new URL(path, url.origin), { redirect: 'error', signal: AbortSignal.timeout(15_000) });
@@ -63,12 +63,12 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
   const selected = serializePreparedScene(definition, lensId, settings);
   const activeLens = lensId ?? definition.controls.lenses?.defaultLens;
   const scene = region(html, 'prepared-scene');
-  const stage = requiredElement<HTMLElement>(scene.document, '.planet-stage');
+  const stage = requiredElement<HTMLElement>(scene.document, '.object-stage');
   if (stage.dataset.objectId !== objectId || stage.dataset.preparedObject !== objectId) throw new Error('Prepared scene identity drifted.');
   for (const name of stage.getAttributeNames()) {
     if (!['aria-label', 'data-object-id', 'data-prepared-object'].includes(name)) stage.removeAttribute(name);
   }
-  stage.className = ['planet-stage', 'example-stage', ...selected.classes].join(' ');
+  stage.className = ['object-stage', ...selected.classes].join(' ');
   for (const [name, value] of Object.entries(selected.attributes)) stage.setAttribute(name, value);
   stage.setAttribute('style', selected.style);
   if (activeLens) stage.dataset.preparedDataset = activeLens;
@@ -95,16 +95,16 @@ export async function renderDatasetResponse(html: string, url: URL, objectId: st
     stage.append(root);
   }
   for (const button of buttons) button.setAttribute('aria-pressed', String(button.getAttribute('value') === activeLens));
-  if (ids.length || featureIds.length || focusing) requiredElement(shell.document, '.planet-sheet-handle').setAttribute('checked', '');
+  if (ids.length || featureIds.length || focusing) requiredElement(shell.document, '.object-sheet-handle').setAttribute('checked', '');
   for (const details of shell.document.querySelectorAll<HTMLElement>('[data-lens-details]')) details.hidden = details.dataset.lensDetails !== activeLens;
-  for (const context of shell.document.querySelectorAll<HTMLElement>('.planet-information-panel [data-dataset-context]')) context.hidden = context.dataset.datasetContext !== activeLens;
-  for (const input of shell.document.querySelectorAll<HTMLInputElement>('.planet-settings input[name]')) {
+  for (const context of shell.document.querySelectorAll<HTMLElement>('.object-information-panel [data-dataset-context]')) context.hidden = context.dataset.datasetContext !== activeLens;
+  for (const input of shell.document.querySelectorAll<HTMLInputElement>('.object-settings input[name]')) {
     if (Object.hasOwn(settings, input.name)) {
       if (input.type === 'checkbox') input.toggleAttribute('checked', settings[input.name] === true);
       else input.setAttribute('value', String(settings[input.name]));
     }
   }
-  for (const tab of ids.length ? shell.document.querySelectorAll<HTMLInputElement>('.planet-information-panel > .planet-native-tabs > [data-information-tab]') : []) {
+  for (const tab of ids.length ? shell.document.querySelectorAll<HTMLInputElement>('.object-information-panel > .object-native-tabs > [data-information-tab]') : []) {
     tab.toggleAttribute('checked', tab.dataset.informationTab === 'dataset');
   }
   // Replace from the end so the original shell offsets remain valid.

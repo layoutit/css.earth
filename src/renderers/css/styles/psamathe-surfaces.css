@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="psamathe"]) > :is(.psamathe-sun-camera, .psamathe-camera, .psamathe-material-root) {
+.object-stage:where([data-object-id="psamathe"]) > :is(.psamathe-sun-camera, .psamathe-camera, .psamathe-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-sun-camera, :where(.planet-stage[data-object-id="psamathe"]) .psamathe-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-body > u {
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-sun-camera, :where(.object-stage[data-object-id="psamathe"]) .psamathe-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--psamathe-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-body > .psamathe-polar { background-image: var(--psamathe-poles-image); }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-material-root { z-index: 3; --psamathe-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-material, :where(.planet-stage[data-object-id="psamathe"]) .psamathe-billboard {
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-body > .psamathe-polar { background-image: var(--psamathe-poles-image); }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-material-root { z-index: 3; --psamathe-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-material, :where(.object-stage[data-object-id="psamathe"]) .psamathe-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-material { background-repeat: no-repeat; transform: rotate(var(--psamathe-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="psamathe"]) .psamathe-billboard { border-radius: 50%; background-color: var(--psamathe-billboard-color); opacity: var(--psamathe-billboard-opacity); }
-.planet-stage:where([data-object-id="psamathe"])[data-lod="billboard"] .psamathe-scene, .planet-stage:where([data-object-id="psamathe"])[data-lod="marker"] .psamathe-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="psamathe"])[data-lod="marker"] .psamathe-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-material { background-repeat: no-repeat; transform: rotate(var(--psamathe-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="psamathe"]) .psamathe-billboard { border-radius: 50%; background-color: var(--psamathe-billboard-color); opacity: var(--psamathe-billboard-opacity); }
+.object-stage:where([data-object-id="psamathe"])[data-lod="billboard"] .psamathe-scene, .object-stage:where([data-object-id="psamathe"])[data-lod="marker"] .psamathe-scene { visibility: hidden; }
+.object-stage:where([data-object-id="psamathe"])[data-lod="marker"] .psamathe-billboard { opacity: 0; }
 

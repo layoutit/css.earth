@@ -316,7 +316,7 @@ export function createPreparedFramePublisher(definition: PreparedPresentationDef
           }
         } else if (binding.kind === "zoom-property") { writeStyle(element, binding.property, String(view.zoom)); styleWrites++; }
         else if (binding.kind === "shell-scale") {
-          element.style.scale = `calc(var(${binding.variable}) / (var(--planet-viewport-zoom-divisor) / ${view.zoom / binding.defaultZoom}))`;
+          element.style.scale = `calc(var(${binding.variable}) / (var(--object-viewport-zoom-divisor) / ${view.zoom / binding.defaultZoom}))`;
           transformWrites++;
         } else {
           const counter = binding.systemTransform === null ? view.counterRotation : view.counterRotationFor(binding.systemTransform);

@@ -42,7 +42,7 @@ const objectId = selector, objectDirectory = resolve(ROOT, 'src/objects', object
 const config = requireRecord(JSON.parse(await readFile(resolve(sourceDirectory, 'preparation/terrestrial.json'), 'utf8')));
 const lenses = requireArray(requireRecord(config.raster).surfaceObservations ?? []).map(value => requireRecord(value));
 if (!lenses.length) { console.log(`${objectId}: no surface observation lens.`); process.exit(0); }
-const source = await createSourceManifest({ planetId: objectId, planetName: requireString(config.displayName), sourceRoot: sourceDirectory });
+const source = await createSourceManifest({ objectId: objectId, objectName: requireString(config.displayName), sourceRoot: sourceDirectory });
 await source.verify();
 const models = await loadRadialModels({ config: config as unknown as Parameters<typeof loadRadialModels>[0]['config'], sourceDirectory, source });
 

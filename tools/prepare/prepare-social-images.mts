@@ -40,15 +40,15 @@ try {
     assert.equal(response.status(), 200);
     await page.waitForFunction(() => document.documentElement.dataset.ready === "true", null, { timeout: 60000 });
     assert.equal(await page.locator(".polycss-camera").count(), 1);
-    const cardBackground = values.card ? await page.locator(".planet-card").first()
+    const cardBackground = values.card ? await page.locator(".object-card").first()
       .evaluate(element => getComputedStyle(element).backgroundColor) : null;
     if (values.card) assert.match(cardBackground ?? "", /^rgb\(\d+, \d+, \d+\)$/, "Card background must be opaque");
     await page.addStyleTag({ content: `
       body { --explorer-scene-offset: 0px !important; }
-      body > :not(.planet-stage, .planet-viewport) { display: none !important; }
+      body > :not(.object-stage, .object-viewport) { display: none !important; }
       ${values.card ? `
-        html, body, .planet-viewport, .planet-stage { background: ${cardBackground} !important; }
-        .planet-stage > :not(.planet-render-root) { display: none !important; }
+        html, body, .object-viewport, .object-stage { background: ${cardBackground} !important; }
+        .object-stage > :not(.object-render-root) { display: none !important; }
         .prepared-world-context, .catalogue-moon-labels { display: none !important; }
         .space-minimap { display: none !important; }
       ` : ""}

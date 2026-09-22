@@ -1,5 +1,5 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="uranus"]) > .polycss-camera {
+.object-stage:where([data-object-id="uranus"]) > .polycss-camera {
   --uranus-scene-side-padding: 16px;
   --uranus-reference-width: 1920px;
   --uranus-reference-height: 1080px;
@@ -16,13 +16,13 @@
   );
   position: absolute;
   inset: 0;
-  scale: calc(var(--uranus-shell-scale) / var(--planet-viewport-zoom-divisor));
+  scale: calc(var(--uranus-shell-scale) / var(--object-viewport-zoom-divisor));
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .polycss-scene {
+:where(.object-stage[data-object-id="uranus"]) .polycss-scene {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -32,14 +32,14 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .polycss-mesh {
+:where(.object-stage[data-object-id="uranus"]) .polycss-mesh {
   position: absolute;
   transform-style: preserve-3d;
   transform-origin: 0 0 0;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .polycss-scene b,
-:where(.planet-stage[data-object-id="uranus"]) .polycss-scene s {
+:where(.object-stage[data-object-id="uranus"]) .polycss-scene b,
+:where(.object-stage[data-object-id="uranus"]) .polycss-scene s {
   position: absolute;
   display: block;
   transform-origin: 0 0;
@@ -52,14 +52,14 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .polycss-scene s {
+:where(.object-stage[data-object-id="uranus"]) .polycss-scene s {
   width: var(--polycss-atlas-width, 64px);
   height: var(--polycss-atlas-height, 64px);
   background-origin: border-box;
   background-clip: border-box;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .uranus-body {
+:where(.object-stage[data-object-id="uranus"]) .uranus-body {
   animation-name: uranus-body-spin;
   animation-duration: 72s;
   animation-timing-function: linear;
@@ -67,29 +67,29 @@
   animation-play-state: paused;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .uranus-body:not(.uranus-body-polar) > .uranus-surface-face {
+:where(.object-stage[data-object-id="uranus"]) .uranus-body:not(.uranus-body-polar) > .uranus-surface-face {
   background-image: var(--uranus-surface-image);
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .uranus-body-polar > :is(.uranus-polar-surface, .uranus-polar-inner) {
+:where(.object-stage[data-object-id="uranus"]) .uranus-body-polar > :is(.uranus-polar-surface, .uranus-polar-inner) {
   background-image: var(--uranus-poles-image);
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .uranus-ring-orbit > s,
-:where(.planet-stage[data-object-id="uranus"]) .uranus-ring-shadow > s,
-:where(.planet-stage[data-object-id="uranus"]) .uranus-fixed-material > s {
+:where(.object-stage[data-object-id="uranus"]) .uranus-ring-orbit > s,
+:where(.object-stage[data-object-id="uranus"]) .uranus-ring-shadow > s,
+:where(.object-stage[data-object-id="uranus"]) .uranus-fixed-material > s {
   backface-visibility: visible;
 }
 
-:where(.planet-stage[data-object-id="uranus"]) .uranus-ring-orbit {
+:where(.object-stage[data-object-id="uranus"]) .uranus-ring-orbit {
   animation-name: uranus-ring-orbit;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
   animation-play-state: paused;
 }
 
-.planet-stage:where([data-object-id="uranus"]).uranus-hide-rings .uranus-ring-plane,
-.planet-stage:where([data-object-id="uranus"]).uranus-hide-shadows .uranus-ring-shadow {
+.object-stage:where([data-object-id="uranus"]).uranus-hide-rings .uranus-ring-plane,
+.object-stage:where([data-object-id="uranus"]).uranus-hide-shadows .uranus-ring-shadow {
   visibility: hidden;
 }
 

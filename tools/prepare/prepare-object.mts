@@ -27,7 +27,7 @@ export const PREPARATION_STEPS: readonly PreparationStep[] = Object.freeze<Prepa
   { name: 'builds', purpose: 'rebuild every package or bundle a later step would read stale', commands: async () =>
     (await staleBuilds()).filter(build => build.name !== 'solar geometry').map(build => build.command.split(' ')) },
   { name: 'catalogue', purpose: 'register the object; a never-prepared package is discoverable as shape only', commands: async () => [node('tools/prepare/prepare-catalog.mts')] },
-  { name: 'title', purpose: 'draw the title mark from the content display name', commands: async id => [node('tools/prepare/prepare-planet-title-sources.mts', id)] },
+  { name: 'title', purpose: 'draw the title mark from the content display name', commands: async id => [node('tools/prepare/prepare-object-title-sources.mts', id)] },
   { name: 'geometry', purpose: 'place a body with an astronomy record in the solar geometry the scene frame reads', commands: async id =>
     await exists(resolve('packages/astronomy/data/bodies', `${id}.json`)) ? [node('tools/prepare/prepare-solar-geometry.mts')] : [] },
   { name: 'prepare', purpose: 'prepare lenses, scene and presentation; refresh derived legend labels and the world frame', commands: async (id, { presentationOnly = false } = {}) =>

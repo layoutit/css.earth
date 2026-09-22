@@ -105,7 +105,7 @@ try {
   report.timeOrigin = timeOrigin;
   report.settings = await tab.locator('input:checked').evaluateAll(nodes => nodes.flatMap(n => n instanceof HTMLInputElement ? [{ name: n.name, value: n.value }] : []));
   await tab.evaluate(() => { Reflect.set(window, '__captureIdentity', [document.querySelector('.prepared-universe'),
-    document.querySelector('.planet-input-surface'), performance.timeOrigin]); });
+    document.querySelector('.object-input-surface'), performance.timeOrigin]); });
   if (videoEnabled) session.on('Page.screencastFrame', e => {
     const file = `frames/frame_${String(frames.length).padStart(5, '0')}.jpg`;
     // Arithmetic converts a missing timestamp exactly as Number() does.
@@ -164,7 +164,7 @@ try {
       if (node.ariaDisabled === 'true' || !node.checkVisibility({ opacityProperty: true, visibilityProperty: true })) continue;
       const r = node.getBoundingClientRect(), x = r.x + r.width / 2, y = r.y + r.height / 2;
       if (!r.width || !r.height || x < 390 || x > innerWidth - 40 || y < 80 || y > innerHeight - 60) continue;
-      if (!document.elementFromPoint(x, y)?.closest('.planet-input-surface')) continue;
+      if (!document.elementFromPoint(x, y)?.closest('.object-input-surface')) continue;
       return { x, y, kind: node.hasAttribute('data-context-label') ? 'label' : 'marker', text: node.textContent };
     } return null;
   });
@@ -281,9 +281,9 @@ try {
     };
     const identity: unknown = Reflect.get(window, '__captureIdentity');
     return { world: get(identity, 0) === document.querySelector('.prepared-universe'),
-      input: get(identity, 1) === document.querySelector('.planet-input-surface'),
+      input: get(identity, 1) === document.querySelector('.object-input-surface'),
       document: get(identity, 2) === performance.timeOrigin,
-      cameras: document.querySelectorAll('.planet-stage > .polycss-camera').length, selected: get(Reflect.get(window, '__cssEarth'), 'selectedObjectId') };
+      cameras: document.querySelectorAll('.object-stage > .polycss-camera').length, selected: get(Reflect.get(window, '__cssEarth'), 'selectedObjectId') };
   });
 } catch (error) { report.errors.push(recordOf(error)?.stack); }
 finally {

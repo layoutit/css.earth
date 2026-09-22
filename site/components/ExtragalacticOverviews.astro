@@ -1,8 +1,8 @@
 ---
-import '../planet-navigation-marker.css';
-import PlanetCard from './PlanetCard.astro';
-import PlanetCardHeader from './PlanetCardHeader.astro';
-import PlanetBreadcrumbs from './PlanetBreadcrumbs.astro';
+import '../object-navigation-marker.css';
+import ObjectCard from './ObjectCard.astro';
+import ObjectCardHeader from './ObjectCardHeader.astro';
+import ObjectBreadcrumbs from './ObjectBreadcrumbs.astro';
 import InformationTabs from './InformationTabs.astro';
 import ContextNavigationMarker from './ContextNavigationMarker.astro';
 import { OVERVIEW_TITLES } from '../prepared-overview-titles.mjs';
@@ -33,28 +33,28 @@ const groups = [
     objects: parsePreparedClusterCatalog(clusters).objects.map(object => ({ id: object.id, focusId: object.id, positionM: object.positionM, name: object.name, distancePc: object.distance.valuePc, href: '/sun/?focus=' + encodeURIComponent(object.id) })) },
 ];
 ---
-{groups.map(group => <PlanetCard class="planet-overview-card" data-large-scale-overview={group.id} data-large-scale-name={group.name} hidden>
-  <PlanetCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
-    <PlanetBreadcrumbs scope={group.id} />
-  </PlanetCardHeader>
+{groups.map(group => <ObjectCard class="object-overview-card" data-large-scale-overview={group.id} data-large-scale-name={group.name} hidden>
+  <ObjectCardHeader heading={false} title={OVERVIEW_TITLES[group.id]} introduction={group.introduction}>
+    <ObjectBreadcrumbs scope={group.id} />
+  </ObjectCardHeader>
   <InformationTabs idPrefix={group.id} group={group.id} label={`${group.name} information`} hidden
     tabs={[{ id: 'objects', label: group.section, count: group.objects.length }]} />
-  <div class="planet-object-results-scroll planet-card-tabpanel" id={`${group.id}-objects-content`} hidden
+  <div class="object-results-scroll object-card-tabpanel" id={`${group.id}-objects-content`} hidden
     role="region" aria-label={group.section}>
-    <ul class="planet-object-list">
+    <ul class="object-list">
       {group.objects.map(object => <li data-neighbor-id={object.id}
         data-neighbor-distances={JSON.stringify(Object.fromEntries(group.objects.map(origin => [origin.id,
           Math.hypot(...object.positionM.map((value, axis) => value - origin.positionM[axis])) / 3.085677581491367e16])))}>
 
-        <a class="planet-object-link planet-observation-control planet-thumbnail-leading" href={object.href} data-prepared-focus-id={object.focusId}>
-          <span class="planet-lens-icon"><ContextNavigationMarker objectId={object.id} /></span>
-          <span class="planet-object-name planet-lens-label">{object.name}</span>
-          <span class="planet-object-distance planet-lens-detail" title="Published catalogue distance from the Solar System">
-            <span class="planet-object-distance-value">≈{distance(object.distancePc ?? 0).value}</span>{" "}
-            <span class="planet-object-distance-unit">{distance(object.distancePc ?? 0).unit}</span>
+        <a class="object-link object-observation-control object-thumbnail-leading" href={object.href} data-prepared-focus-id={object.focusId}>
+          <span class="object-lens-icon"><ContextNavigationMarker objectId={object.id} /></span>
+          <span class="object-name object-lens-label">{object.name}</span>
+          <span class="object-distance object-lens-detail" title="Published catalogue distance from the Solar System">
+            <span class="object-distance-value">≈{distance(object.distancePc ?? 0).value}</span>{" "}
+            <span class="object-distance-unit">{distance(object.distancePc ?? 0).unit}</span>
           </span>
         </a>
       </li>)}
     </ul>
   </div>
-</PlanetCard>)}
+</ObjectCard>)}

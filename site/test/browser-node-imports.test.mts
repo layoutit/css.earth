@@ -6,7 +6,7 @@
  *
  * This walks the actual static-import closure from the site's real client entry
  * points — found the same way a browser finds them, from the one non-`is:inline`
- * `<script>` block Astro compiles into a client module (`site/layouts/PlanetLayout.astro`)
+ * `<script>` block Astro compiles into a client module (`site/layouts/ObjectLayout.astro`)
  * — and fails if any reachable module has a *static* `node:` import. A dynamic
  * `import()` is not followed past the two entry points: that is the documented,
  * legitimate escape hatch for Node-only code (guarded behind a runtime check that
@@ -80,7 +80,7 @@ async function findStaticNodeImports(entryFiles: readonly string[]): Promise<Vio
 }
 
 async function discoverClientEntryFiles(): Promise<string[]> {
-  const layout = await readFile(resolve(root, 'site/layouts/PlanetLayout.astro'), 'utf8');
+  const layout = await readFile(resolve(root, 'site/layouts/ObjectLayout.astro'), 'utf8');
   const specifiers = entrySpecifiers(layout);
   assert.ok(specifiers.length >= 2, 'The shell layout must still declare its client entry script.');
   const files = await Promise.all(specifiers.map(specifier => resolveRepoFile(resolve(root, 'site/layouts'), specifier)));

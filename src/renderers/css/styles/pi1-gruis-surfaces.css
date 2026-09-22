@@ -1,6 +1,6 @@
-/* π¹ Gruis: the Sun's emissive presentation (planet-surfaces.css, SUN block) scoped to this object, loaded after the shared
-   planet-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. The off-limb plate is the reconstruction's light outside the disc; the limb plate is transparent. */
-.planet-stage[data-object-id="pi1-gruis"] > :is(.polycss-camera, .pi1-gruis-corona-layer, .pi1-gruis-limb-layer) {
+/* π¹ Gruis: the Sun's emissive presentation (body-surfaces.css, SUN block) scoped to this object, loaded after the shared
+   body-surfaces.css base rules. No spin: the rotation axis and period are unmeasured. The off-limb plate is the reconstruction's light outside the disc; the limb plate is transparent. */
+.object-stage[data-object-id="pi1-gruis"] > :is(.polycss-camera, .pi1-gruis-corona-layer, .pi1-gruis-limb-layer) {
   --pi1-gruis-scene-side-padding: 16px;
   --pi1-gruis-reference-width: 1920px;
   --pi1-gruis-reference-height: 1080px;
@@ -14,8 +14,8 @@
   );
 }
 
-/* The shared stage rule (planet-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
-.planet-stage[data-object-id="pi1-gruis"] > :is(.pi1-gruis-corona-layer, .pi1-gruis-limb-layer) {
+/* The shared stage rule (body-surfaces.css) sizes the camera and the Sun's plates; this object's plates need the same box. */
+.object-stage[data-object-id="pi1-gruis"] > :is(.pi1-gruis-corona-layer, .pi1-gruis-limb-layer) {
   position: absolute;
   inset: 0;
   transform-origin: 50% 50%;
@@ -23,23 +23,23 @@
 }
 
 /* Paint order: off-limb context behind the sphere, limb plate above it. */
-.planet-stage[data-object-id="pi1-gruis"] .pi1-gruis-corona-layer {
+.object-stage[data-object-id="pi1-gruis"] .pi1-gruis-corona-layer {
   z-index: 0;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .polycss-camera {
+.object-stage[data-object-id="pi1-gruis"] .polycss-camera {
   z-index: 1;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .pi1-gruis-limb-layer {
+.object-stage[data-object-id="pi1-gruis"] .pi1-gruis-limb-layer {
   z-index: 2;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .pi1-gruis-body {
+.object-stage[data-object-id="pi1-gruis"] .pi1-gruis-body {
   transform-style: preserve-3d;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .polycss-scene s {
+.object-stage[data-object-id="pi1-gruis"] .polycss-scene s {
   position: absolute;
   display: block;
   transform-origin: 0 0;
@@ -53,18 +53,18 @@
 
 /* Emissive leaves: full-band leaves stay visible from behind so the overlapped seams never open; polar cap leaves
    hide their back faces. */
-.planet-stage[data-object-id="pi1-gruis"] .polycss-scene s:not(.pi1-gruis-polar) {
+.object-stage[data-object-id="pi1-gruis"] .polycss-scene s:not(.pi1-gruis-polar) {
   backface-visibility: visible;
   background-image: var(--pi1-gruis-surface-image) !important;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .polycss-scene s.pi1-gruis-polar {
+.object-stage[data-object-id="pi1-gruis"] .polycss-scene s.pi1-gruis-polar {
   backface-visibility: hidden;
   background-image: var(--pi1-gruis-poles-image) !important;
 }
 
 /* Off-limb context: 1398 px = raster.json emission.offLimbSize = the reconstruction's 51 mas field at the disc's 496 px. */
-.planet-stage[data-object-id="pi1-gruis"] .pi1-gruis-corona-layer {
+.object-stage[data-object-id="pi1-gruis"] .pi1-gruis-corona-layer {
   background-image: var(--pi1-gruis-corona-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -75,7 +75,7 @@
 
 /* Limb plate: 496 px = raster.json emission.bodyDiameter = camera.logicalBodyDiameter, times geometryScale, the size the
    sphere is drawn at, so the plate's edge is the sphere's outline. */
-.planet-stage[data-object-id="pi1-gruis"] .pi1-gruis-limb-layer {
+.object-stage[data-object-id="pi1-gruis"] .pi1-gruis-limb-layer {
   background-image: var(--pi1-gruis-limb-image);
   background-position: center;
   background-repeat: no-repeat;
@@ -84,17 +84,17 @@
     calc(496px * 1.25 * var(--pi1-gruis-camera-zoom, 1));
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .polycss-camera {
+.object-stage[data-object-id="pi1-gruis"] .polycss-camera {
   display: block;
   width: 100%;
   height: 100%;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .polycss-scene {
+.object-stage[data-object-id="pi1-gruis"] .polycss-scene {
   will-change: transform;
 }
 
-.planet-stage[data-object-id="pi1-gruis"] .polycss-scene s {
+.object-stage[data-object-id="pi1-gruis"] .polycss-scene s {
   width: var(--polycss-atlas-width, var(--polycss-atlas-size, 64px));
   height: var(--polycss-atlas-height, var(--polycss-atlas-size, 64px));
   transform-style: preserve-3d;

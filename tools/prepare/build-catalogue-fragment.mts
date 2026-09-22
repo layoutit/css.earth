@@ -6,7 +6,7 @@ import { fileURLToPath } from "node:url";
 
 /**
  * Every object page inlined the same ~1.65 MB object-browser catalogue.
- * `PlanetCatalogueRows.astro` now
+ * `CatalogueRows.astro` now
  * renders it exactly once, at the `catalogue-fragment` build target; this
  * script runs right after `astro build` to turn that one render into the
  * shared, content-addressed file every page actually ships, following the
@@ -19,7 +19,7 @@ import { fileURLToPath } from "node:url";
  *   2. Delete the generic `dist/catalogue-fragment/` build target: it is not
  *      content-addressed and would just be a second, unreferenced copy.
  *   3. Substitute the `__CATALOGUE_FRAGMENT_SHA__` / `__CATALOGUE_FRAGMENT_BYTES__`
- *      tokens `PlanetObjectResults.astro` left on every object page's
+ *      tokens `ObjectResults.astro` left on every object page's
  *      `#object-category-results` panel with the real pin, so the browser and
  *      the no-JS search function (`search-response.mts`) can fetch and verify
  *      the same bytes.
@@ -74,7 +74,7 @@ export async function buildCatalogueFragment(distDir: string): Promise<BuildCata
     pagesRewritten++;
   }
   if (pagesRewritten === 0) {
-    throw new Error("No page referenced the catalogue fragment token; PlanetObjectResults.astro may have drifted.");
+    throw new Error("No page referenced the catalogue fragment token; ObjectResults.astro may have drifted.");
   }
   return { sha256, bytes, url, pagesRewritten };
 }

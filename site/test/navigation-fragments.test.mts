@@ -8,7 +8,7 @@ import { bindNavigationIntent, createNavigationFragments, navigationFragments, t
 class FragmentDocument {
   body: { dataset: Record<string, string> }; stage: { dataset: Record<string, string> };
   constructor(shell: string, stage: string) { this.body = { dataset: { objectShell: shell } }; this.stage = { dataset: { objectId: stage } }; }
-  querySelector(selector: string) { return selector === '.planet-stage' ? this.stage : null; }
+  querySelector(selector: string) { return selector === '.object-stage' ? this.stage : null; }
 }
 class FragmentParser {
   parseFromString(text: string) { const [shell, stage = shell] = text.split('|'); return new FragmentDocument(shell, stage); }

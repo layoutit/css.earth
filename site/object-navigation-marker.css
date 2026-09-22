@@ -1,0 +1,38 @@
+.object-navigation-marker {
+  position: relative;
+  display: block;
+  width: 40px;
+  height: 34px;
+}
+
+.object-navigation-marker > i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  border-radius: 50%;
+  background: 0 center / 100% 100% no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.object-navigation-ring {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.catalog-navigation-marker { display: grid; place-items: center; }
+.catalog-navigation-marker::before {
+  content: "";
+  width: 16px;
+  height: 16px;
+  box-sizing: border-box;
+  border: 1px solid currentColor;
+  border-radius: 50%;
+}
+
+.context-navigation-thumbnail { display: grid; place-items: center; }
+.context-navigation-thumbnail img { width: 16px; height: 16px; }

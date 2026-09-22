@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="antonia"]) > :is(.antonia-sun-camera, .antonia-camera, .antonia-material-root) {
+.object-stage:where([data-object-id="antonia"]) > :is(.antonia-sun-camera, .antonia-camera, .antonia-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-sun-camera, :where(.planet-stage[data-object-id="antonia"]) .antonia-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-body > u {
+:where(.object-stage[data-object-id="antonia"]) .antonia-sun-camera, :where(.object-stage[data-object-id="antonia"]) .antonia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="antonia"]) .antonia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="antonia"]) .antonia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="antonia"]) .antonia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--antonia-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-body > .antonia-polar { background-image: var(--antonia-poles-image); }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-material-root { z-index: 3; --antonia-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-material, :where(.planet-stage[data-object-id="antonia"]) .antonia-billboard {
+:where(.object-stage[data-object-id="antonia"]) .antonia-body > .antonia-polar { background-image: var(--antonia-poles-image); }
+:where(.object-stage[data-object-id="antonia"]) .antonia-material-root { z-index: 3; --antonia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="antonia"]) .antonia-material, :where(.object-stage[data-object-id="antonia"]) .antonia-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-material { background-repeat: no-repeat; transform: rotate(var(--antonia-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="antonia"]) .antonia-billboard { border-radius: 50%; background-color: var(--antonia-billboard-color); opacity: var(--antonia-billboard-opacity); }
-.planet-stage:where([data-object-id="antonia"])[data-lod="billboard"] .antonia-scene, .planet-stage:where([data-object-id="antonia"])[data-lod="marker"] .antonia-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="antonia"])[data-lod="marker"] .antonia-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="antonia"]) .antonia-material { background-repeat: no-repeat; transform: rotate(var(--antonia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="antonia"]) .antonia-billboard { border-radius: 50%; background-color: var(--antonia-billboard-color); opacity: var(--antonia-billboard-opacity); }
+.object-stage:where([data-object-id="antonia"])[data-lod="billboard"] .antonia-scene, .object-stage:where([data-object-id="antonia"])[data-lod="marker"] .antonia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="antonia"])[data-lod="marker"] .antonia-billboard { opacity: 0; }
 

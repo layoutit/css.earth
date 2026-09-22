@@ -49,7 +49,7 @@ export function addNativeCamera(document: Document, definition: ObjectRuntimeDef
     // A portable measurement view stays on the prepared geometry lane. Its
     // bounded dolly never reaches the billboard/marker transition.
     if(options.surfaceOnly && binding.kind==='view-attribute') {
-      if(binding.source!=='level-of-detail-stage') (binding.target===-1?document.querySelector('.planet-stage')!:publication.nodes[binding.target]).removeAttribute(binding.property);
+      if(binding.source!=='level-of-detail-stage') (binding.target===-1?document.querySelector('.object-stage')!:publication.nodes[binding.target]).removeAttribute(binding.property);
       continue;
     }
     if(options.surfaceOnly && binding.kind==='view-property') { publication.nodes[binding.target].style.setProperty(binding.property,'0'); continue; }

@@ -9,7 +9,7 @@ import{verifySourceManifest,validateSourceManifest}from'../../../src/platform/so
 
 export async function assertAuthoredGiantSourceContract(id: string){
  const directory=resolve('src/objects',id),sourceRoot=resolve(directory,'source'),manifest=validateSourceManifest(id,JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')));
- await verifySourceManifest({manifest,planetName:id,sourceRoot});
+ await verifySourceManifest({manifest,objectName:id,sourceRoot});
  const descriptor=parseAuthoredObjectDescriptor(JSON.parse(await readFile(resolve(directory,'object.json'),'utf8')));
  // The reader parses object.json itself; it takes the file's value, not a parsed descriptor.
  await readAuthoredSources(directory);

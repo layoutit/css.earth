@@ -22,7 +22,7 @@ async function fixtureObject(root: string, id: string, sceneBytes = '12-byte-scn
   await writeFile(resolve(preparedDirectory, 'runtime.json'), '12-byte-run!');
   await writeFile(resolve(preparedDirectory, 'scene.json'), sceneBytes);
   for (const [index, name] of extra.entries()) await writeFile(resolve(preparedDirectory, name), `12-byte-x${String(index).padStart(2, '0')}!`);
-  await inventoryPreparedAssets({ planetId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory, filenames: ['runtime.json', 'scene.json', ...extra], gitTrackedPaths: async () => new Set() });
+  await inventoryPreparedAssets({ objectId: id, objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory, filenames: ['runtime.json', 'scene.json', ...extra], gitTrackedPaths: async () => new Set() });
 }
 
 async function fixtureRoot(extra: readonly string[] = []) {

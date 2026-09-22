@@ -10,11 +10,11 @@ import { required } from './navigation-test-values.mts';
 import { SourceEvidence } from './source-evidence-values.mts';
 import { SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { planetInformationSource, validatePlanetEditorial } from "../../tools/sources/planet-information-sources.mts";
+import { objectInformationSource, validateObjectEditorial } from "../../tools/sources/object-information-sources.mts";
 import {
   objectPackagePaths,
   validateObjectPackageFiles,
-  validatePlanetData,
+  validateObjectData,
   validateInventory,
 } from "../../tools/contract/object-package-contract.mts";
 
@@ -31,18 +31,18 @@ test("accepts a complete non-NASA package and still rejects corrupt or undeclare
   const body = authoredObjectFixture(object.id, { path: "source/local-data.bin" });
   const fixture = { ...body, properties: { ...body.properties, page: { stylesheets: ["src/body.css"] } } };
   await writeFile(resolve(paths.root, "object.json"), JSON.stringify(fixture));
-  for (const path of ["src/body.css", "site/planet-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }
+  for (const path of ["src/body.css", "site/object-shell.css"]) { await mkdir(dirname(resolve(projectRoot,path)), {recursive:true}); await writeFile(resolve(projectRoot,path), ""); }
   await mkdir(paths.publicAssets, { recursive: true });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "local-data.bin"), bytes);
   await writeFile(paths.inventory, JSON.stringify({ schema: "cssearth-inventory@1", assets: [{ location: "public", filename: "surface.webp", bytes: bytes.length, sha256: hash }] }));
   await writeFile(paths.sourceManifest, JSON.stringify({ schema: "csslocal-body-authoritative-sources@2", inputs: [{ id: "local", path: "local-data.bin", origin: "Project-authored test fixture", credit: "cssEarth", license: "MIT", acquisition: "Checked local fixture", redistribution: "MIT", sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ["scene"] }], generatedIntermediates: [], documents: [] }));
-  assert.deepEqual(await validatePlanetData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
+  assert.deepEqual(await validateObjectData(object, { projectRoot }), { assetCount: 1, sourceInputCount: 1 });
   await writeFile(resolve(paths.publicAssets, "surface.webp"), "corrupt");
-  await assert.rejects(validatePlanetData(object, { projectRoot }), /public asset drifted/);
+  await assert.rejects(validateObjectData(object, { projectRoot }), /public asset drifted/);
   await writeFile(resolve(paths.publicAssets, "surface.webp"), bytes);
   await writeFile(resolve(paths.sourceRoot, "undeclared.bin"), "hidden source");
-  await assert.rejects(validatePlanetData(object, { projectRoot }), /undeclared|Undeclared|closure/);
+  await assert.rejects(validateObjectData(object, { projectRoot }), /undeclared|Undeclared|closure/);
 });
 
 test("derives the complete owned file contract from planet identity", () => {
@@ -66,7 +66,7 @@ test("derives the complete owned file contract from planet identity", () => {
   assert.ok(paths.requiredFiles.includes(
     `/project/src/objects/${planet.id}/source/manifest.json`,
   ));
-  assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/planets/')));
+  assert.ok(paths.requiredFiles.every((file) => !file.includes('/data/object-information/')));
   assert.ok(paths.requiredFiles.every(file => !/src\/objects\/[^/]+\/(?:tools|test|site|runtime)\//u.test(file)));
 });
 
@@ -105,7 +105,7 @@ test("requires every registered object package file", async () => {
 
 test("validates local editorial identity and provenance", () => {
   const planet = required(implemented.find(object => object.id === "sun"));
-  const source = required(planetInformationSource(planet.id));
+  const source = required(objectInformationSource(planet.id));
   const valid = {
     schemaVersion: 1,
     id: planet.id,
@@ -124,19 +124,19 @@ test("validates local editorial identity and provenance", () => {
       paragraphs: ["Prepared paragraph."],
     })),
   };
-  assert.equal(validatePlanetEditorial(planet, valid), true);
+  assert.equal(validateObjectEditorial(planet, valid), true);
   assert.throws(
-    () => validatePlanetEditorial(planet, { ...valid, id: "wrong" }),
+    () => validateObjectEditorial(planet, { ...valid, id: "wrong" }),
     /editorial snapshot is incompatible/,
   );
   assert.throws(
-    () => validatePlanetEditorial(planet, { ...valid, sourceUrl: "not a URL" }),
+    () => validateObjectEditorial(planet, { ...valid, sourceUrl: "not a URL" }),
     /editorial snapshot is incompatible/,
   );
 });
 
 test("validates runtime asset manifest entries", () => {
-  const planetId = "fixture";
+  const objectId = "fixture";
   const valid = {
     schema: 'cssearth-inventory@1',
     assets: [{
@@ -146,16 +146,16 @@ test("validates runtime asset manifest entries", () => {
       sha256: "a".repeat(64),
     }],
   };
-  assert.equal(validateInventory(planetId, valid), true);
+  assert.equal(validateInventory(objectId, valid), true);
   assert.throws(
-    () => validateInventory(planetId, {
+    () => validateInventory(objectId, {
       ...valid,
       assets: [...valid.assets, ...valid.assets],
     }),
     /repeats inventory entry/,
   );
   assert.throws(
-    () => validateInventory(planetId, {
+    () => validateInventory(objectId, {
       ...valid,
       assets: [{ ...valid.assets[0], filename: "../escape.webp" }],
     }),

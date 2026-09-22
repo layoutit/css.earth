@@ -1,30 +1,30 @@
 /* The distant body card uses a centered portrait and shared information tabs. */
-.planet-card > .planet-selected-panel[data-body-overview] { padding-bottom: 12px; }
-.planet-selected-panel[data-body-overview][data-has-portrait] {
+.object-card > .object-selected-panel[data-body-overview] { padding-bottom: 12px; }
+.object-selected-panel[data-body-overview][data-has-portrait] {
   display: grid; grid-template-columns: minmax(0, 45%) 1fr;
 }
-.planet-selected-panel[data-body-overview][data-has-portrait]::after {
+.object-selected-panel[data-body-overview][data-has-portrait]::after {
   grid-column: 1 / -1; grid-row: 4;
 }
-.planet-selected-panel[data-body-overview][data-has-portrait] > .planet-breadcrumbs {
+.object-selected-panel[data-body-overview][data-has-portrait] > .object-breadcrumbs {
   grid-column: 1 / -1; grid-row: 1; margin-bottom: 4px;
 }
-.planet-selected-panel[data-body-overview][data-has-portrait] > .planet-title-row {
+.object-selected-panel[data-body-overview][data-has-portrait] > .object-title-row {
   grid-column: 1; grid-row: 2; z-index: 1; align-self: start; margin-top: 0;
 }
-.planet-overview-portrait {
+.object-overview-portrait {
   grid-column: 1 / -1; grid-row: 2; position: relative; aspect-ratio: 300 / 134; overflow: hidden;
 }
-.planet-overview-portrait > .planet-body-overview-image {
+.object-overview-portrait > .object-body-overview-image {
   position: absolute; top: 50%; width: 100%; height: auto; margin: 0;
   transform: translateY(-50%);
 }
-.planet-selected-panel[data-body-overview] > .planet-introduction {
+.object-selected-panel[data-body-overview] > .object-introduction {
   grid-column: 1 / -1; grid-row: 3; margin-top: 8px;
 }
-.planet-object-results-scroll.planet-card-tabpanel[data-body-overview] {
+.object-results-scroll.object-card-tabpanel[data-body-overview] {
   padding-inline-end: calc(var(--explorer-card-padding-inline-end) - var(--object-results-scrollbar-inset));
   padding-bottom: 0;
 }
-.planet-overview-spectrum { margin: 0; }
-.planet-overview-spectrum > img { display: block; width: 100%; height: auto; }
+.object-overview-spectrum { margin: 0; }
+.object-overview-spectrum > img { display: block; width: 100%; height: auto; }

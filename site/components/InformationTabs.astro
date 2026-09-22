@@ -13,16 +13,16 @@ const { idPrefix, group, label = group === 'overview' ? 'Body overview' : 'Objec
 // the running scene use these same controls and these same panels.
 // Only selection is generated here. All appearance stays in the shared tab rules.
 const selection = tabs.map(({id}) => `#${idPrefix}-${id}-${panelSuffix} { --information-panel-display: none; }
-.planet-native-tabs:has(> #${idPrefix}-${id}-tab:checked) ~ #${idPrefix}-${id}-${panelSuffix} { --information-panel-display: block; }`).join('\n');
+.object-native-tabs:has(> #${idPrefix}-${id}-tab:checked) ~ #${idPrefix}-${id}-${panelSuffix} { --information-panel-display: block; }`).join('\n');
 ---
-<div class:list={[group === 'overview' ? 'planet-object-tabs' : 'planet-card-tabs', 'planet-native-tabs']}
+<div class:list={[group === 'overview' ? 'object-tabs' : 'object-card-tabs', 'object-native-tabs']}
   data-body-overview={group === 'overview' ? true : undefined} role="radiogroup" aria-label={label} {hidden}>
   {tabs.map((tab, index) => <>
-    <input class="planet-native-tab" type="radio" name={`${idPrefix}-information`} id={`${idPrefix}-${tab.id}-tab`}
+    <input class="object-native-tab" type="radio" name={`${idPrefix}-information`} id={`${idPrefix}-${tab.id}-tab`}
       data-information-tab={tab.id} data-information-group={group} value={tab.id} aria-controls={`${idPrefix}-${tab.id}-${panelSuffix}`} checked={index === 0} />
-    <label class="planet-native-tab-label" for={`${idPrefix}-${tab.id}-tab`}>
+    <label class="object-native-tab-label" for={`${idPrefix}-${tab.id}-tab`}>
       {group === 'overview' ? <span>{tab.label}</span> : tab.label}
-      {tab.count !== undefined && <span class="planet-object-tab-count">({tab.count})</span>}
+      {tab.count !== undefined && <span class="object-tab-count">({tab.count})</span>}
     </label>
   </>)}
 </div>

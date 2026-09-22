@@ -15,11 +15,11 @@ test("binds phase charts to explicit primary-source provenance", async () => {
   assert.equal(context.schema, "cssearth-planetary-scientific-context@1");
   assert.deepEqual(Object.keys(context.planets), PLANET_IDS);
   assert.equal(context.sources.photometricPhase.arxiv, "1808.01973");
-  for (const planetId of PLANET_IDS) {
-    const planet = context.planets[planetId];
-    assert.ok(planet.phase.maximumAngleDegrees > 0, `${planetId} phase range`);
+  for (const objectId of PLANET_IDS) {
+    const planet = context.planets[objectId];
+    assert.ok(planet.phase.maximumAngleDegrees > 0, `${objectId} phase range`);
     await access(new URL(
-      `../../public/scenes/${planetId}/${planetId}-photometric-phase-curve.svg`,
+      `../../public/scenes/${objectId}/${objectId}-photometric-phase-curve.svg`,
       import.meta.url,
     ));
   }

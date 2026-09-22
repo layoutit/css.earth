@@ -30,7 +30,7 @@ for (const id of BODIES) {
     const document = await page(id);
     if (!document) return t.skip('no dist build; run pnpm build first');
 
-    const stage = document.querySelector('.planet-stage');
+    const stage = document.querySelector('.object-stage');
     assert.ok(stage, 'the page must carry a planet stage');
     assert.equal(document.querySelectorAll('.polycss-scene').length, 1, 'exactly one scene is mounted');
     assert.ok(document.querySelectorAll('.polycss-camera').length >= 1, 'the scene must place a camera');

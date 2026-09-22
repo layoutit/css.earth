@@ -119,7 +119,7 @@ async function verifyAssetFiles(root:string,manifest:RuntimeManifest,exact:boole
 }
 export async function prepareRuntimeManifest({id,publicRoot,objectDirectory,values,allowPreparationArtifacts=false}:{id:string;publicRoot:string;objectDirectory:string;values:unknown[];allowPreparationArtifacts?:boolean}) {
  const urls=collectRuntimeAssetUrls(id,...values);if(!urls.length)throw new Error('Prepared object has no runtime asset references.');
- const inventory=await inventoryPublicAssets({planetId:id,objectDirectory,urls,publicRoot,allowPreparationArtifacts});
+ const inventory=await inventoryPublicAssets({objectId:id,objectDirectory,urls,publicRoot,allowPreparationArtifacts});
  const manifest={assets:(inventory?.assets??[]).filter(asset=>asset.location==='public').map(({filename,bytes,sha256})=>({filename,bytes,sha256}))};
  await verifyAssetFiles(publicRoot,manifest,!allowPreparationArtifacts);
  return manifest;

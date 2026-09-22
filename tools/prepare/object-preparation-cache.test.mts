@@ -4,10 +4,10 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
-import { runCachedPreparationObjects } from './prepare-planets.mts';
-import type { CachedPreparationOptions } from './prepare-planets.mts';
-import { runObjectCommand } from '../cli/run-implemented-planets.mts';
-import type { PreparationCommand, PreparationReport } from '../cli/run-implemented-planets.mts';
+import { runCachedPreparationObjects } from './prepare-objects.mts';
+import type { CachedPreparationOptions } from './prepare-objects.mts';
+import { runObjectCommand } from '../cli/run-implemented-objects.mts';
+import type { PreparationCommand, PreparationReport } from '../cli/run-implemented-objects.mts';
 import { requireRecord } from '../sources/source-values.mts';
 
 const repository = resolve(import.meta.dirname, '../..'), descriptorPath = 'src/objects/mercury/object.json';

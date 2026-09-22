@@ -1,6 +1,6 @@
 import { requireControls } from '../src/renderers/css/dist/index.js';
 import { record } from './browser-types.mts';
-import type { Props, PlanetTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './planet-shell-types.js';
+import type { Props, ObjectTitle, PreparedTitle, Fact, Chart, Gallery, Lens, LensControl, DatasetReaderText } from './object-shell-types.js';
 
 const object = (value: unknown, label: string): Record<string, unknown> => {
   if (!record(value)) throw new TypeError(`Prepared ${label} must be an object.`);
@@ -27,7 +27,7 @@ function rasterTitle(value: unknown): PreparedTitle {
   const title = object(value, 'raster title');
   return { label: text(title.label, 'title label'), src: text(title.src, 'title image'), width: number(title.width, 'title width'), height: number(title.height, 'title height') };
 }
-function planetTitle(value: unknown): PlanetTitle {
+function objectTitle(value: unknown): ObjectTitle {
   const title = object(value, 'object title');
   return { label: text(title.label, 'title label'), path: text(title.path, 'title path'), viewBox: text(title.viewBox, 'title view box'),
     renderViewBox: text(title.renderViewBox, 'title render view box'), renderWidth: number(title.renderWidth, 'title width'), renderHeight: number(title.renderHeight, 'title height'),
@@ -107,7 +107,7 @@ export function parsePreparedPanelContent(value: unknown): Pick<Props, 'objectId
   if (content.schema !== 'cssearth-prepared-content@1') throw new TypeError('Prepared panel content schema is incompatible.');
   const destinations = content.destinations === undefined ? undefined : object(content.destinations, 'destinations');
   const features = content.features === undefined ? undefined : object(content.features, 'features');
-  return { objectId: text(content.objectId, 'object id'), title: planetTitle(content.title),
+  return { objectId: text(content.objectId, 'object id'), title: objectTitle(content.title),
     facts: facts(content.facts), moreFacts: facts(content.moreFacts), charts: array(content.charts, 'charts').map(chart), galleries: array(content.galleries, 'galleries').map(gallery),
     destinations: destinations ? { searchLabel: text(destinations.searchLabel, 'destination search label'), description: text(destinations.description, 'destination description') } : undefined,
     features: features ? { searchLabel: text(features.searchLabel, 'feature search label'), description: text(features.description, 'feature description') } : undefined };

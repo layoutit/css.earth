@@ -45,7 +45,7 @@ export async function prepareSurfaceShellObject(options: { objectDirectory: stri
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
     await writeFile(descriptorPath, JSON.stringify({ ...descriptor, prepared: { format: envelope.format,
       url: relative(objectDirectory, outputPath).split('\\').join('/'), sha256: sha256(bytes) } }, null, 2) + '\n');
-    await inventoryPreparedAssets({ planetId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
+    await inventoryPreparedAssets({ objectId: descriptor.id, objectDirectory, preparedRoot: outputDirectory });
   }
   console.log(`PREPARED ${descriptor.id}: ${data.faces.length} PolyCSS triangle leaves; ${atlas.width * atlas.height * 4} decoded RGBA bytes; ${outputPath}`);
   return envelope;

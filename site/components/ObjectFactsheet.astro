@@ -1,0 +1,49 @@
+---
+import type { Props as ObjectProps } from "../object-shell-types";
+import { PREPARED_SHELL_ICONS } from "../prepared-shell-icons.mjs";
+import { orderFacts } from "../fact-order.mts";
+
+interface Props {
+  id: string;
+  embedded?: boolean;
+  facts?: ObjectProps["facts"];
+  moreFacts?: ObjectProps["moreFacts"];
+}
+const { id, facts = [], moreFacts = [], embedded = false } = Astro.props;
+const Container = embedded ? "section" : "details";
+const allFacts = orderFacts(facts, moreFacts);
+const hasFacts = allFacts.length > 0;
+---
+
+{/* A body with no cited facts shows no factsheet, not an empty one. */}
+{hasFacts && <Container
+  id={`${id}-factsheet-panel`}
+  class="object-factsheet-section"
+  aria-label={embedded ? "Factsheet" : undefined}
+  aria-labelledby={embedded ? undefined : `${id}-factsheet-title`}
+>
+  {!embedded && <summary class="object-factsheet-header object-panel-summary">
+    <h2 id={`${id}-factsheet-title`} class="object-panel-heading">Factsheet</h2>
+    <img
+      class="object-panel-icon"
+      data-panel-icon="facts"
+      src={PREPARED_SHELL_ICONS.facts.src}
+      width={PREPARED_SHELL_ICONS.facts.width}
+      height={PREPARED_SHELL_ICONS.facts.height}
+      alt=""
+    />
+  </summary>}
+  <div class="object-factsheet-body">
+    <div class="object-facts">
+      <ul class="object-primary-facts">
+        {allFacts.map((fact) => (
+          <li data-fact-id={fact.id}>
+            <span class="object-fact-label">{fact.label}</span>
+            <span class="object-fact-value">{fact.value}</span>
+          </li>
+        ))}
+      </ul>
+
+    </div>
+  </div>
+</Container>}

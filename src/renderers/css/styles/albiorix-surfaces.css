@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="albiorix"]) > :is(.albiorix-sun-camera, .albiorix-camera, .albiorix-material-root) {
+.object-stage:where([data-object-id="albiorix"]) > :is(.albiorix-sun-camera, .albiorix-camera, .albiorix-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-sun-camera, :where(.planet-stage[data-object-id="albiorix"]) .albiorix-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-body > u {
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-sun-camera, :where(.object-stage[data-object-id="albiorix"]) .albiorix-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--albiorix-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-body > .albiorix-polar { background-image: var(--albiorix-poles-image); }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-material-root { z-index: 3; --albiorix-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-material, :where(.planet-stage[data-object-id="albiorix"]) .albiorix-billboard {
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-body > .albiorix-polar { background-image: var(--albiorix-poles-image); }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-material-root { z-index: 3; --albiorix-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-material, :where(.object-stage[data-object-id="albiorix"]) .albiorix-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-material { background-repeat: no-repeat; transform: rotate(var(--albiorix-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="albiorix"]) .albiorix-billboard { border-radius: 50%; background-color: var(--albiorix-billboard-color); opacity: var(--albiorix-billboard-opacity); }
-.planet-stage:where([data-object-id="albiorix"])[data-lod="billboard"] .albiorix-scene, .planet-stage:where([data-object-id="albiorix"])[data-lod="marker"] .albiorix-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="albiorix"])[data-lod="marker"] .albiorix-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-material { background-repeat: no-repeat; transform: rotate(var(--albiorix-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="albiorix"]) .albiorix-billboard { border-radius: 50%; background-color: var(--albiorix-billboard-color); opacity: var(--albiorix-billboard-opacity); }
+.object-stage:where([data-object-id="albiorix"])[data-lod="billboard"] .albiorix-scene, .object-stage:where([data-object-id="albiorix"])[data-lod="marker"] .albiorix-scene { visibility: hidden; }
+.object-stage:where([data-object-id="albiorix"])[data-lod="marker"] .albiorix-billboard { opacity: 0; }
 

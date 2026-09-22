@@ -6,7 +6,7 @@ import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
-import type { Lens } from '../../site/planet-shell-types.ts';
+import type { Lens } from '../../site/object-shell-types.ts';
 import { validateDatasetText } from '../../site/dataset-content.mts';
 import { parsePreparedVolumePresentation } from '../../site/volume-presentation.mts';
 import { parseCapture } from '../../src/platform/exploration-catalog.mts';

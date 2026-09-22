@@ -51,8 +51,8 @@ function harness(controls: ObjectControls = moonControls, mutate: HarnessMutatio
   const minimap = new Input({ name: "minimap" });
   settingInputs.push(motion, surfaceLabels, heliosphere, illustrationModels, minimap);
   const lensRoot = new Root(lensInputs), settingsRoot = new Root(settingInputs);
-  const information: InformationPanel = { querySelector: selector => selector === ".planet-lenses" ? lensRoot : null };
-  const document: HarnessDocument = { querySelector: selector => selector === ".planet-information-panel" ? information : selector === ".planet-lenses" ? lensRoot : settingsRoot };
+  const information: InformationPanel = { querySelector: selector => selector === ".object-lenses" ? lensRoot : null };
+  const document: HarnessDocument = { querySelector: selector => selector === ".object-information-panel" ? information : selector === ".object-lenses" ? lensRoot : settingsRoot };
   // The binding accepts an HTMLElement only to reach ownerDocument; this mock supplies that boundary.
   const stage = { ownerDocument: document as unknown as Document } as unknown as HTMLElement;
   const errors: unknown[] = [], actions: ObjectAction[] = []; let state = selectionState(initial);
@@ -201,7 +201,7 @@ test("a preceding focused galaxy lens bank cannot replace the mounted body's con
   const focusRoot = new Root([focusInput]);
   const h = harness(moonControls, ({ document }) => {
     const query = document.querySelector;
-    document.querySelector = selector => selector === ".planet-lenses" ? focusRoot : query(selector);
+    document.querySelector = selector => selector === ".object-lenses" ? focusRoot : query(selector);
   });
   h.ready();
   assert.ok(moonControls.lenses);

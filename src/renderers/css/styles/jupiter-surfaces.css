@@ -1,26 +1,26 @@
 /* Prepared scene presentation, scoped to its mounted object. */
 .jupiter-stage:where([data-object-id="jupiter"]) {
-  --planet-render-reference-width: 1280px;
-  --planet-render-reference-height: 720px;
-  --planet-render-side-padding: 16px;
+  --object-render-reference-width: 1280px;
+  --object-render-reference-height: 720px;
+  --object-render-side-padding: 16px;
 
 }
-.jupiter-stage:where([data-object-id="jupiter"]) > .planet-render-root {
+.jupiter-stage:where([data-object-id="jupiter"]) > .object-render-root {
   --jupiter-shell-scale: min(
     1,
     calc(
       (
         100cqw
-        - var(--planet-render-side-padding)
-        - var(--planet-render-side-padding)
-      ) / var(--planet-render-reference-width)
+        - var(--object-render-side-padding)
+        - var(--object-render-side-padding)
+      ) / var(--object-render-reference-width)
     ),
-    calc(100cqh / var(--planet-render-reference-height))
+    calc(100cqh / var(--object-render-reference-height))
   );
   position: absolute;
   inset: 0;
   scale: calc(
-    var(--jupiter-shell-scale) / var(--planet-viewport-zoom-divisor)
+    var(--jupiter-shell-scale) / var(--object-viewport-zoom-divisor)
   );
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
@@ -34,7 +34,7 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-material {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-material {
   position: absolute;
   top: 0;
   left: 0;
@@ -44,7 +44,7 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-material > s {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-material > s {
   position: absolute;
   top: 0;
   left: 0;
@@ -58,7 +58,7 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .polycss-scene {
+:where(.object-stage[data-object-id="jupiter"]) .polycss-scene {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -68,21 +68,21 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .polycss-mesh {
+:where(.object-stage[data-object-id="jupiter"]) .polycss-mesh {
   position: absolute;
   transform-style: preserve-3d;
   transform-origin: 0 0 0;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-body {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-body {
   animation: jupiter-body-spin 36s linear infinite paused;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-rings {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-rings {
   transform-style: preserve-3d;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-rings > s {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-rings > s {
   position: absolute;
   top: 0;
   left: 0;
@@ -99,7 +99,7 @@
   visibility: hidden;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-body > s {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-body > s {
   position: absolute;
   display: block;
   margin: 0;
@@ -113,7 +113,7 @@
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .jupiter-body > .jupiter-pole {
+:where(.object-stage[data-object-id="jupiter"]) .jupiter-body > .jupiter-pole {
   background-image: url("/scenes/jupiter/jupiter-poles@2x.webp");
 }
 
@@ -141,7 +141,7 @@
     url("/scenes/jupiter/jupiter-lens-methane-poles@2x.webp");
 }
 
-:where(.planet-stage[data-object-id="jupiter"]) .polycss-scene u {
+:where(.object-stage[data-object-id="jupiter"]) .polycss-scene u {
   width: 0;
   height: 0;
   box-sizing: content-box;

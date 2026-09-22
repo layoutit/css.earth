@@ -47,7 +47,7 @@ export async function prepareStarsObject(options: { objectDirectory: string; out
   await writeFile(outputPath,bytes);
   if (outputDirectory===resolve(objectDirectory,'prepared')) {
     await writeFile(descriptorPath,JSON.stringify({...descriptor,prepared:{format:envelope.format,url:relative(objectDirectory,outputPath).split('\\').join('/')}},null,2)+'\n');
-    await inventoryPreparedAssets({ planetId: id, objectDirectory, preparedRoot: outputDirectory });
+    await inventoryPreparedAssets({ objectId: id, objectDirectory, preparedRoot: outputDirectory });
   }
   const magnitude = encoded.bank.quantization.find(entry => entry.field === 'star.absoluteMagnitude')!;
   console.log(`PREPARED ${id}: ${encoded.bank.starCount} catalogue rows; ${encoded.bank.nodeCount} hierarchy nodes; ${bytes.length} manifest bytes; ${encoded.bytes.length} bank bytes; ${atlas.length} atlas bytes; magnitude error ${magnitude.measured} <= ${magnitude.bound} mag (pixel alpha <= ${magnitude.displayAlphaChange})`);

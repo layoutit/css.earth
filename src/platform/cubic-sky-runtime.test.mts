@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 
-import { measureRetainedPlanetTrackball, measureRetainedPlanetFlyToDisc, retainedPlanetUniformScale } from "../renderers/css/dist/platform/camera-layout.js";
+import { measureRetainedObjectTrackball, measureRetainedObjectFlyToDisc, retainedObjectUniformScale } from "../renderers/css/dist/platform/camera-layout.js";
 import { createUnboundedMatrixDragControls } from "../renderers/css/dist/platform/camera-input.js";
 import {
   createDragHistory,
@@ -372,10 +372,10 @@ test("wheel takes over a flight without leaving a camera callback", (t) => {
 });
 
 test("parses only positive retained camera scales", () => {
-  assert.equal(retainedPlanetUniformScale("1.25"), 1.25);
-  assert.equal(retainedPlanetUniformScale("1.25 0.75"), 0.75);
-  assert.equal(retainedPlanetUniformScale("none"), null);
-  assert.equal(retainedPlanetUniformScale("invalid"), null);
+  assert.equal(retainedObjectUniformScale("1.25"), 1.25);
+  assert.equal(retainedObjectUniformScale("1.25 0.75"), 0.75);
+  assert.equal(retainedObjectUniformScale("none"), null);
+  assert.equal(retainedObjectUniformScale("invalid"), null);
 });
 
 test("retains the separately fitted fly-to target envelope", () => {
@@ -392,7 +392,7 @@ test("retains the separately fitted fly-to target envelope", () => {
       height: 1645,
     }),
   };
-  assert.deepEqual(measureRetainedPlanetFlyToDisc({
+  assert.deepEqual(measureRetainedObjectFlyToDisc({
     stage: nativeElement(stage),
     cameraElement: nativeElement(cameraElement),
     logicalBodyDiameter: 460,
@@ -425,7 +425,7 @@ test("measures the planet trackball independently of screen roll", () => {
         height: bounds.bottom - bounds.top,
       }),
     };
-    return measureRetainedPlanetTrackball({
+    return measureRetainedObjectTrackball({
       stage: nativeElement(stage),
       cameraElement: nativeElement(cameraElement),
       logicalBodyDiameter: 460,
@@ -457,7 +457,7 @@ test("measures optical center separately from a translated and scaled body", () 
       ownerDocument: { defaultView: { getComputedStyle: () => ({ scale:String(scale),
         perspective:"42000px", perspectiveOrigin:"375px 315px" }) } },
     };
-    const metrics = measureRetainedPlanetTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
+    const metrics = measureRetainedObjectTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
       logicalBodyDiameter:460, sceneScale:.022 });
     assert.equal(metrics.centerX,120);
     assert.equal(metrics.centerY,240);
@@ -472,11 +472,11 @@ test("uses the rendered radius without changing the accepted throw envelope", ()
     getBoundingClientRect: () => ({ left: 0, right: 1408, top: 0, bottom: 959 }),
     ownerDocument: { defaultView: { getComputedStyle: () => ({ scale: "1.16792", perspective: "1000000px" }) } },
   };
-  const metrics = measureRetainedPlanetTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
+  const metrics = measureRetainedObjectTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
     logicalBodyDiameter: 460, sceneScale: 0.022 });
   assert.equal(metrics.radius, 268.6216);
   assert.ok(Math.abs(metrics.surfaceRadius - 295.48376 / Math.sqrt(1 - .0115 ** 2)) < 1e-9);
-  assert.throws(() => measureRetainedPlanetTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
+  assert.throws(() => measureRetainedObjectTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
     logicalBodyDiameter: 460, sceneScale: 0 }));
 });
 
@@ -489,7 +489,7 @@ test("input rays use the rendered perspective at different camera distances", ()
         getBoundingClientRect: () => ({ left: 0, right: 693, top: 0, bottom: 600 }),
         ownerDocument: { defaultView: { getComputedStyle: () => ({ scale: String(scale), perspective: `${perspective}px` }) } },
       };
-      const metrics = measureRetainedPlanetTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
+      const metrics = measureRetainedObjectTrackball({ stage: nativeElement(stage), cameraElement: nativeElement(cameraElement),
         logicalBodyDiameter: 460, sceneScale: .022 });
       assert.ok(Math.abs(Math.hypot(1, metrics.focalLength / metrics.surfaceRadius) - distance) < 1e-12);
     }
@@ -509,7 +509,7 @@ test("camera scaling keeps input rays on the prepared projection at every zoom",
         scale: String(scale), perspective: `${perspective}px`,
       }) } },
     };
-    const metrics = measureRetainedPlanetTrackball({
+    const metrics = measureRetainedObjectTrackball({
       stage: nativeElement(stage), cameraElement: nativeElement(cameraElement), logicalBodyDiameter: 460, sceneScale: 0.022,
     });
     const distance = Math.hypot(1, metrics.focalLength / metrics.surfaceRadius);

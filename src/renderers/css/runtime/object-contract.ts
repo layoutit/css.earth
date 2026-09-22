@@ -1,4 +1,4 @@
-import { PLANET_SPEED_STATES } from '../rendering/planet-feature-controls.js';
+import { OBJECT_SPEED_STATES } from '../rendering/object-feature-controls.js';
 
 export const OBJECT_RUNTIME_SCHEMA = 'cssearth-object-runtime@4';
 
@@ -80,7 +80,7 @@ export function selectedLensVolume(controls: ObjectControls, lensId: string | nu
 }
 
 export function objectCycleStates(control: CycleControl): readonly CycleState[] {
-  const states = control.states ?? (control.name === 'speed' ? PLANET_SPEED_STATES : null);
+  const states = control.states ?? (control.name === 'speed' ? OBJECT_SPEED_STATES : null);
   if (!Array.isArray(states) || !states.length || states.some(state => !nonempty(state.label) || !Number.isFinite(state.value)) ||
       new Set(states.map(state => state.label)).size !== states.length || new Set(states.map(state => state.value)).size !== states.length ||
       !states.some(state => state.label === control.state)) {

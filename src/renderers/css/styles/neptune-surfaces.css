@@ -1,18 +1,18 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="neptune"]) > .polycss-camera {
+.object-stage:where([data-object-id="neptune"]) > .polycss-camera {
   --neptune-scene-side-padding: 16px;
   --neptune-reference-width: 1920px;
   --neptune-reference-height: 1080px;
   --neptune-shell-scale: min(1, calc((100cqw - var(--neptune-scene-side-padding) * 2) / var(--neptune-reference-width)), calc(100cqh / var(--neptune-reference-height)));
   position: absolute;
   inset: 0;
-  scale: calc(var(--neptune-shell-scale) / var(--planet-viewport-zoom-divisor));
+  scale: calc(var(--neptune-shell-scale) / var(--object-viewport-zoom-divisor));
   transform-origin: 50% 50%;
   transform-style: preserve-3d;
   pointer-events: none;
 }
 
-:where(.planet-stage[data-object-id="neptune"]) .neptune-body {
+:where(.object-stage[data-object-id="neptune"]) .neptune-body {
   transform-style: preserve-3d;
   animation-name: neptune-body-spin;
   animation-timing-function: linear;
@@ -20,20 +20,20 @@
   animation-play-state: paused;
 }
 
-:where(.planet-stage[data-object-id="neptune"]) .polycss-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
-:where(.planet-stage[data-object-id="neptune"]) .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="neptune"]) .polycss-scene :is(b, i, s) { position: absolute; display: block; transform-origin: 0 0; margin: 0; padding: 0; line-height: 0; text-decoration: none; backface-visibility: hidden; background-repeat: no-repeat; pointer-events: none; }
-:where(.planet-stage[data-object-id="neptune"]) .polycss-scene s { width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); background-origin: border-box; background-clip: border-box; }
+:where(.object-stage[data-object-id="neptune"]) .polycss-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; pointer-events: none; }
+:where(.object-stage[data-object-id="neptune"]) .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="neptune"]) .polycss-scene :is(b, i, s) { position: absolute; display: block; transform-origin: 0 0; margin: 0; padding: 0; line-height: 0; text-decoration: none; backface-visibility: hidden; background-repeat: no-repeat; pointer-events: none; }
+:where(.object-stage[data-object-id="neptune"]) .polycss-scene s { width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px); background-origin: border-box; background-clip: border-box; }
 
-:where(.planet-stage[data-object-id="neptune"]) .neptune-body:not(.neptune-body-polar) > .neptune-surface-face {
+:where(.object-stage[data-object-id="neptune"]) .neptune-body:not(.neptune-body-polar) > .neptune-surface-face {
   background-image: var(--neptune-surface-image) !important;
 }
-:where(.planet-stage[data-object-id="neptune"]) .neptune-body-polar > s {
+:where(.object-stage[data-object-id="neptune"]) .neptune-body-polar > s {
   background-image: var(--neptune-poles-image) !important;
 }
 
-:where(.planet-stage[data-object-id="neptune"]) .neptune-ring-plane > s { backface-visibility: visible; }
-.planet-stage:where([data-object-id="neptune"]).neptune-hide-rings .neptune-ring-plane { visibility: hidden; }
+:where(.object-stage[data-object-id="neptune"]) .neptune-ring-plane > s { backface-visibility: visible; }
+.object-stage:where([data-object-id="neptune"]).neptune-hide-rings .neptune-ring-plane { visibility: hidden; }
 @keyframes neptune-body-spin {
   from { transform: rotateZ(-128deg); }
   to { transform: rotateZ(-488deg); }

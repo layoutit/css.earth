@@ -44,20 +44,20 @@ async function defaultGitTrackedPaths(paths: readonly string[]): Promise<Set<str
 }
 
 /** A tracked file in an inventory is a bug: `setup:assets` would overwrite a contributor's committed bytes with R2's. */
-async function rejectGitTrackedAssets(planetId: string, root: string, filenames: readonly string[],
+async function rejectGitTrackedAssets(objectId: string, root: string, filenames: readonly string[],
   gitTrackedPaths: (paths: readonly string[]) => Promise<Set<string>>): Promise<void> {
   const tracked = await gitTrackedPaths(filenames.map(name => resolve(root, name)));
   if (!tracked.size) return;
   const trackedNames = filenames.filter(name => tracked.has(resolve(root, name)));
   if (!trackedNames.length) return;
-  throw new TypeError(`Planet ${planetId} inventory includes git-tracked file(s), which setup:assets would silently overwrite: ${trackedNames.join(", ")}.`);
+  throw new TypeError(`Planet ${objectId} inventory includes git-tracked file(s), which setup:assets would silently overwrite: ${trackedNames.join(", ")}.`);
 }
 
-export function normalizeRuntimeAssetUrls({ planetId, urls }: { planetId: string; urls: readonly string[] }) {
-  if (!/^[a-z][a-z0-9-]*$/u.test(planetId) || !isArray(urls) || urls.length === 0) {
+export function normalizeRuntimeAssetUrls({ objectId, urls }: { objectId: string; urls: readonly string[] }) {
+  if (!/^[a-z][a-z0-9-]*$/u.test(objectId) || !isArray(urls) || urls.length === 0) {
     throw new TypeError("Runtime asset inventory is incompatible.");
   }
-  const prefix = `/scenes/${planetId}/`;
+  const prefix = `/scenes/${objectId}/`;
   const filenames = [];
   const seenUrls = new Set();
   const seenFilenames = new Set();
@@ -65,11 +65,11 @@ export function normalizeRuntimeAssetUrls({ planetId, urls }: { planetId: string
     if (typeof url !== "string" || !url.startsWith(prefix) ||
         url.slice(prefix.length) !== basename(url) ||
         !SAFE_FILENAME.test(basename(url))) {
-      throw new TypeError(`Planet ${planetId} has an unsafe runtime asset URL.`);
+      throw new TypeError(`Planet ${objectId} has an unsafe runtime asset URL.`);
     }
     const filename = basename(url);
     if (seenUrls.has(url) || seenFilenames.has(filename)) {
-      throw new TypeError(`Planet ${planetId} repeats runtime asset ${filename}.`);
+      throw new TypeError(`Planet ${objectId} repeats runtime asset ${filename}.`);
     }
     seenUrls.add(url);
     seenFilenames.add(filename);
@@ -86,36 +86,36 @@ function safeAssetPath(_location: AssetLocation, filename: string): boolean {
 const order = (left: InventoryAsset, right: InventoryAsset) =>
   left.location === right.location ? left.filename.localeCompare(right.filename) : left.location === 'public' ? -1 : 1;
 
-export function validateInventory(planetId: string, input: unknown): true {
+export function validateInventory(objectId: string, input: unknown): true {
   const inventory = input as Inventory;
   if (!inventory || typeof inventory !== "object" || isArray(inventory) || inventory.schema !== INVENTORY_SCHEMA ||
       !isArray(inventory.assets) || inventory.assets.length === 0) {
-    throw new TypeError(`Planet ${planetId} inventory is incompatible.`);
+    throw new TypeError(`Planet ${objectId} inventory is incompatible.`);
   }
   const seen = new Set<string>();
   for (const asset of inventory.assets) {
     if (!asset || typeof asset !== "object" || !ASSET_LOCATIONS.includes(asset.location) || typeof asset.filename !== "string" ||
         !safeAssetPath(asset.location, asset.filename) || !Number.isSafeInteger(asset.bytes) || asset.bytes <= 0 || !SHA256.test(asset.sha256 ?? "")) {
-      throw new TypeError(`Planet ${planetId} has an invalid inventory entry.`);
+      throw new TypeError(`Planet ${objectId} has an invalid inventory entry.`);
     }
     const key = `${asset.location}/${asset.filename}`;
-    if (seen.has(key)) throw new TypeError(`Planet ${planetId} repeats inventory entry ${key}.`);
+    if (seen.has(key)) throw new TypeError(`Planet ${objectId} repeats inventory entry ${key}.`);
     seen.add(key);
   }
   return true;
 }
 
-export function requireInventory(planetId: string, input: unknown): Readonly<Inventory> {
-  validateInventory(planetId, input);
+export function requireInventory(objectId: string, input: unknown): Readonly<Inventory> {
+  validateInventory(objectId, input);
   return input as Inventory;
 }
 
 /** The object's inventory, or null when it ships nothing baked. */
-export async function readInventory(planetId: string, objectDirectory: string): Promise<Readonly<Inventory> | null> {
+export async function readInventory(objectId: string, objectDirectory: string): Promise<Readonly<Inventory> | null> {
   const text = await readFile(resolve(objectDirectory, INVENTORY_FILE), 'utf8').catch((error: unknown) => {
     if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return null; throw error;
   });
-  return text === null ? null : requireInventory(planetId, JSON.parse(text));
+  return text === null ? null : requireInventory(objectId, JSON.parse(text));
 }
 
 /** The inventory with one location's entries replaced; the other location's entries are kept as they were. */
@@ -133,13 +133,13 @@ export const inventoryText = (inventory: Readonly<Inventory>) => `${JSON.stringi
  * scene stage for `public` textures, finalization for `prepared/`. With no assets left in either location the
  * inventory file is removed; the object ships nothing baked.
  */
-export async function updateInventory({ planetId, objectDirectory, location, assets }: {
-  planetId: string; objectDirectory: string; location: AssetLocation; assets: readonly { filename: string; bytes: number; sha256: string }[];
+export async function updateInventory({ objectId, objectDirectory, location, assets }: {
+  objectId: string; objectDirectory: string; location: AssetLocation; assets: readonly { filename: string; bytes: number; sha256: string }[];
 }): Promise<Readonly<Inventory> | null> {
-  const merged = mergeInventory(await readInventory(planetId, objectDirectory), location, assets);
+  const merged = mergeInventory(await readInventory(objectId, objectDirectory), location, assets);
   const path = resolve(objectDirectory, INVENTORY_FILE);
   if (!merged.assets.length) { await rm(path, { force: true }); return null; }
-  validateInventory(planetId, merged);
+  validateInventory(objectId, merged);
   const temporary = `${path}.partial-${process.pid}-${randomUUID()}`;
   try {
     await writeFile(temporary, inventoryText(merged), { flag: "wx" });
@@ -150,10 +150,10 @@ export async function updateInventory({ planetId, objectDirectory, location, ass
   return merged;
 }
 
-async function hashedAssets(root: string, filenames: readonly string[], planetId: string) {
+async function hashedAssets(root: string, filenames: readonly string[], objectId: string) {
   const assets = [];
   for (const filename of filenames) {
-    if (!(await lstat(resolve(root, filename)).catch(() => undefined))?.isFile()) throw new Error(`Inventoried asset is not a regular file: ${planetId}/${filename}.`);
+    if (!(await lstat(resolve(root, filename)).catch(() => undefined))?.isFile()) throw new Error(`Inventoried asset is not a regular file: ${objectId}/${filename}.`);
     const bytes = await readFile(resolve(root, filename));
     assets.push(Object.freeze({ filename, bytes: bytes.byteLength, sha256: sha256(bytes) }));
   }
@@ -161,16 +161,16 @@ async function hashedAssets(root: string, filenames: readonly string[], planetId
 }
 
 /** Inventory the object's public scene textures from the URLs its runtime references. */
-export async function inventoryPublicAssets({ planetId, objectDirectory, urls, publicRoot, allowPreparationArtifacts = false,
+export async function inventoryPublicAssets({ objectId, objectDirectory, urls, publicRoot, allowPreparationArtifacts = false,
   gitTrackedPaths = defaultGitTrackedPaths }: {
-  planetId: string; objectDirectory: string; urls: readonly string[]; publicRoot: string; allowPreparationArtifacts?: boolean;
+  objectId: string; objectDirectory: string; urls: readonly string[]; publicRoot: string; allowPreparationArtifacts?: boolean;
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
-  const filenames = normalizeRuntimeAssetUrls({ planetId, urls });
+  const filenames = normalizeRuntimeAssetUrls({ objectId, urls });
   // Offline baking may emit intermediate densities. They are not shipped; production assembly still enforces closure.
-  if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, planetId);
-  await rejectGitTrackedAssets(planetId, publicRoot, filenames, gitTrackedPaths);
-  return updateInventory({ planetId, objectDirectory, location: 'public', assets: await hashedAssets(publicRoot, filenames, planetId) });
+  if (!allowPreparationArtifacts) await assertDirectoryClosure(publicRoot, filenames, objectId);
+  await rejectGitTrackedAssets(objectId, publicRoot, filenames, gitTrackedPaths);
+  return updateInventory({ objectId, objectDirectory, location: 'public', assets: await hashedAssets(publicRoot, filenames, objectId) });
 }
 
 /**
@@ -183,33 +183,33 @@ export function isRegeneratedPreparedFile(filename: string): boolean {
 }
 
 /** Every baked file under an object's `prepared/`: what the inventory publishes and `setup:assets` restores. */
-export async function bakedPreparedFiles(preparedRoot: string, planetId: string): Promise<string[]> {
-  return (await runtimeFiles(preparedRoot, planetId, true)).filter(name => !isRegeneratedPreparedFile(name));
+export async function bakedPreparedFiles(preparedRoot: string, objectId: string): Promise<string[]> {
+  return (await runtimeFiles(preparedRoot, objectId, true)).filter(name => !isRegeneratedPreparedFile(name));
 }
 
 /** Inventory the object's baked `prepared/` files: an explicit list, or everything baked under `preparedRoot`. */
-export async function inventoryPreparedAssets({ planetId, objectDirectory, preparedRoot = resolve(objectDirectory, 'prepared'), filenames,
+export async function inventoryPreparedAssets({ objectId, objectDirectory, preparedRoot = resolve(objectDirectory, 'prepared'), filenames,
   exclude = [], gitTrackedPaths = defaultGitTrackedPaths }: {
-  planetId: string; objectDirectory: string; preparedRoot?: string; filenames?: readonly string[]; exclude?: readonly string[];
+  objectId: string; objectDirectory: string; preparedRoot?: string; filenames?: readonly string[]; exclude?: readonly string[];
   gitTrackedPaths?: (paths: readonly string[]) => Promise<Set<string>>;
 }) {
   const excluded = new Set(exclude);
-  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, planetId)).filter(name => !excluded.has(name)))]
+  const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId)).filter(name => !excluded.has(name)))]
     .sort((left, right) => left.localeCompare(right));
-  for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Planet ${planetId} has an unsafe prepared asset path: ${name}.`);
-  if (new Set(names).size !== names.length) throw new TypeError(`Planet ${planetId} repeats a prepared asset path.`);
-  await rejectGitTrackedAssets(planetId, preparedRoot, names, gitTrackedPaths);
-  return updateInventory({ planetId, objectDirectory, location: 'prepared', assets: await hashedAssets(preparedRoot, names, planetId) });
+  for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Planet ${objectId} has an unsafe prepared asset path: ${name}.`);
+  if (new Set(names).size !== names.length) throw new TypeError(`Planet ${objectId} repeats a prepared asset path.`);
+  await rejectGitTrackedAssets(objectId, preparedRoot, names, gitTrackedPaths);
+  return updateInventory({ objectId, objectDirectory, location: 'prepared', assets: await hashedAssets(preparedRoot, names, objectId) });
 }
 
 /** Production assembly: the public scene directory holds exactly the inventoried public textures. */
-export async function assembleRuntimeAssetClosure({ planetId, objectDirectory, productionRoot }: {
-  planetId: string; objectDirectory: string; productionRoot: string;
+export async function assembleRuntimeAssetClosure({ objectId, objectDirectory, productionRoot }: {
+  objectId: string; objectDirectory: string; productionRoot: string;
 }) {
-  const inventory = await readInventory(planetId, objectDirectory);
+  const inventory = await readInventory(objectId, objectDirectory);
   const expected = new Set((inventory?.assets ?? []).filter(asset => asset.location === 'public').map(({ filename }) => filename));
-  for (const name of await runtimeFiles(productionRoot, planetId, false)) if (!expected.has(name)) await unlink(resolve(productionRoot, name));
-  if (inventory) await verifyInventory({ planetId, inventory, publicRoot: productionRoot, locations: ['public'] });
+  for (const name of await runtimeFiles(productionRoot, objectId, false)) if (!expected.has(name)) await unlink(resolve(productionRoot, name));
+  if (inventory) await verifyInventory({ objectId, inventory, publicRoot: productionRoot, locations: ['public'] });
   return inventory;
 }
 
@@ -218,46 +218,46 @@ export async function assembleRuntimeAssetClosure({ planetId, objectDirectory, p
  * holds exactly the inventoried files plus `exclude`; without it, undeclared neighbours are expected (a body's
  * `prepared/` also holds the files a checkout regenerates).
  */
-export async function verifyInventory({ planetId, inventory, preparedRoot, publicRoot, locations = ASSET_LOCATIONS, closure = true, exclude = [] }: {
-  planetId: string; inventory: Readonly<Inventory>; preparedRoot?: string; publicRoot?: string; locations?: readonly AssetLocation[];
+export async function verifyInventory({ objectId, inventory, preparedRoot, publicRoot, locations = ASSET_LOCATIONS, closure = true, exclude = [] }: {
+  objectId: string; inventory: Readonly<Inventory>; preparedRoot?: string; publicRoot?: string; locations?: readonly AssetLocation[];
   closure?: boolean; exclude?: readonly string[];
 }) {
-  validateInventory(planetId, inventory);
+  validateInventory(objectId, inventory);
   for (const location of locations) {
     const assets = inventory.assets.filter(asset => asset.location === location);
     if (!assets.length) continue;
     const root = location === 'public' ? publicRoot : preparedRoot;
     if (!root) throw new TypeError(`Verifying ${location} inventory entries needs their directory.`);
-    if (closure) await assertDirectoryClosure(root, assets.map(({ filename }) => filename), planetId, location === 'prepared', exclude);
+    if (closure) await assertDirectoryClosure(root, assets.map(({ filename }) => filename), objectId, location === 'prepared', exclude);
     for (const asset of assets) {
       const bytes = await readFile(resolve(root, asset.filename)).catch(() => null);
-      if (!bytes) throw new Error(`Planet ${planetId} inventory closure mismatch. Missing: ${asset.filename}.`);
-      if (bytes.byteLength !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Planet ${planetId} ${location} asset drifted: ${asset.filename}.`);
+      if (!bytes) throw new Error(`Planet ${objectId} inventory closure mismatch. Missing: ${asset.filename}.`);
+      if (bytes.byteLength !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Planet ${objectId} ${location} asset drifted: ${asset.filename}.`);
     }
   }
   return true;
 }
 
-async function runtimeFiles(root: string, planetId: string, nested: boolean, prefix = ""): Promise<string[]> {
+async function runtimeFiles(root: string, objectId: string, nested: boolean, prefix = ""): Promise<string[]> {
   const files: string[] = [];
   for (const entry of await readdir(root, { withFileTypes: true })) {
     const name = `${prefix}${entry.name}`;
     if (entry.isFile()) files.push(name);
     else if (nested && entry.isDirectory() && SAFE_FILENAME.test(entry.name)) {
-      files.push(...await runtimeFiles(resolve(root, entry.name), planetId, true, `${name}/`));
-    } else throw new Error(`Unexpected ${planetId} asset directory: ${name}.`);
+      files.push(...await runtimeFiles(resolve(root, entry.name), objectId, true, `${name}/`));
+    } else throw new Error(`Unexpected ${objectId} asset directory: ${name}.`);
   }
   return files;
 }
 
-async function assertDirectoryClosure(root: string, filenames: readonly string[], planetId: string, nested = false, exclude: readonly string[] = []) {
+async function assertDirectoryClosure(root: string, filenames: readonly string[], objectId: string, nested = false, exclude: readonly string[] = []) {
   const excluded = new Set(exclude);
-  const actual = (await runtimeFiles(root, planetId, nested)).filter(filename => !excluded.has(filename) || filenames.includes(filename));
+  const actual = (await runtimeFiles(root, objectId, nested)).filter(filename => !excluded.has(filename) || filenames.includes(filename));
   const expected = [...filenames].sort((left, right) => left.localeCompare(right));
   actual.sort((left, right) => left.localeCompare(right));
   if (expected.join("\0") !== actual.join("\0")) {
     const expectedSet = new Set(expected), actualSet = new Set(actual);
     const missing = expected.filter(filename => !actualSet.has(filename)), undeclared = actual.filter(filename => !expectedSet.has(filename));
-    throw new Error(`Planet ${planetId} inventory closure mismatch. Missing: ${missing.join(", ") || "none"}. Undeclared: ${undeclared.join(", ") || "none"}.`);
+    throw new Error(`Planet ${objectId} inventory closure mismatch. Missing: ${missing.join(", ") || "none"}. Undeclared: ${undeclared.join(", ") || "none"}.`);
   }
 }

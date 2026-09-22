@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="tartaglia"]) > :is(.tartaglia-sun-camera, .tartaglia-camera, .tartaglia-material-root) {
+.object-stage:where([data-object-id="tartaglia"]) > :is(.tartaglia-sun-camera, .tartaglia-camera, .tartaglia-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-sun-camera, :where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-body > u {
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-sun-camera, :where(.object-stage[data-object-id="tartaglia"]) .tartaglia-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--tartaglia-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-body > .tartaglia-polar { background-image: var(--tartaglia-poles-image); }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-material-root { z-index: 3; --tartaglia-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-material, :where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-billboard {
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-body > .tartaglia-polar { background-image: var(--tartaglia-poles-image); }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-material-root { z-index: 3; --tartaglia-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-material, :where(.object-stage[data-object-id="tartaglia"]) .tartaglia-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-material { background-repeat: no-repeat; transform: rotate(var(--tartaglia-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="tartaglia"]) .tartaglia-billboard { border-radius: 50%; background-color: var(--tartaglia-billboard-color); opacity: var(--tartaglia-billboard-opacity); }
-.planet-stage:where([data-object-id="tartaglia"])[data-lod="billboard"] .tartaglia-scene, .planet-stage:where([data-object-id="tartaglia"])[data-lod="marker"] .tartaglia-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="tartaglia"])[data-lod="marker"] .tartaglia-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-material { background-repeat: no-repeat; transform: rotate(var(--tartaglia-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="tartaglia"]) .tartaglia-billboard { border-radius: 50%; background-color: var(--tartaglia-billboard-color); opacity: var(--tartaglia-billboard-opacity); }
+.object-stage:where([data-object-id="tartaglia"])[data-lod="billboard"] .tartaglia-scene, .object-stage:where([data-object-id="tartaglia"])[data-lod="marker"] .tartaglia-scene { visibility: hidden; }
+.object-stage:where([data-object-id="tartaglia"])[data-lod="marker"] .tartaglia-billboard { opacity: 0; }
 

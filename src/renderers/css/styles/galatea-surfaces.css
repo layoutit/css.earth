@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="galatea"]) > :is(.galatea-sun-camera, .galatea-camera, .galatea-material-root) {
+.object-stage:where([data-object-id="galatea"]) > :is(.galatea-sun-camera, .galatea-camera, .galatea-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-sun-camera, :where(.planet-stage[data-object-id="galatea"]) .galatea-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-body > u {
+:where(.object-stage[data-object-id="galatea"]) .galatea-sun-camera, :where(.object-stage[data-object-id="galatea"]) .galatea-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="galatea"]) .galatea-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="galatea"]) .galatea-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="galatea"]) .galatea-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--galatea-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-body > .galatea-polar { background-image: var(--galatea-poles-image); }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-material-root { z-index: 3; --galatea-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-material, :where(.planet-stage[data-object-id="galatea"]) .galatea-billboard {
+:where(.object-stage[data-object-id="galatea"]) .galatea-body > .galatea-polar { background-image: var(--galatea-poles-image); }
+:where(.object-stage[data-object-id="galatea"]) .galatea-material-root { z-index: 3; --galatea-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="galatea"]) .galatea-material, :where(.object-stage[data-object-id="galatea"]) .galatea-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-material { background-repeat: no-repeat; transform: rotate(var(--galatea-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="galatea"]) .galatea-billboard { border-radius: 50%; background-color: var(--galatea-billboard-color); opacity: var(--galatea-billboard-opacity); }
-.planet-stage:where([data-object-id="galatea"])[data-lod="billboard"] .galatea-scene, .planet-stage:where([data-object-id="galatea"])[data-lod="marker"] .galatea-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="galatea"])[data-lod="marker"] .galatea-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="galatea"]) .galatea-material { background-repeat: no-repeat; transform: rotate(var(--galatea-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="galatea"]) .galatea-billboard { border-radius: 50%; background-color: var(--galatea-billboard-color); opacity: var(--galatea-billboard-opacity); }
+.object-stage:where([data-object-id="galatea"])[data-lod="billboard"] .galatea-scene, .object-stage:where([data-object-id="galatea"])[data-lod="marker"] .galatea-scene { visibility: hidden; }
+.object-stage:where([data-object-id="galatea"])[data-lod="marker"] .galatea-billboard { opacity: 0; }
 

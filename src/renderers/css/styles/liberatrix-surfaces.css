@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="liberatrix"]) > :is(.liberatrix-sun-camera, .liberatrix-camera, .liberatrix-material-root) {
+.object-stage:where([data-object-id="liberatrix"]) > :is(.liberatrix-sun-camera, .liberatrix-camera, .liberatrix-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-sun-camera, :where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-body > u {
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-sun-camera, :where(.object-stage[data-object-id="liberatrix"]) .liberatrix-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--liberatrix-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-body > .liberatrix-polar { background-image: var(--liberatrix-poles-image); }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-material-root { z-index: 3; --liberatrix-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-material, :where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-billboard {
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-body > .liberatrix-polar { background-image: var(--liberatrix-poles-image); }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-material-root { z-index: 3; --liberatrix-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-material, :where(.object-stage[data-object-id="liberatrix"]) .liberatrix-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-material { background-repeat: no-repeat; transform: rotate(var(--liberatrix-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="liberatrix"]) .liberatrix-billboard { border-radius: 50%; background-color: var(--liberatrix-billboard-color); opacity: var(--liberatrix-billboard-opacity); }
-.planet-stage:where([data-object-id="liberatrix"])[data-lod="billboard"] .liberatrix-scene, .planet-stage:where([data-object-id="liberatrix"])[data-lod="marker"] .liberatrix-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="liberatrix"])[data-lod="marker"] .liberatrix-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-material { background-repeat: no-repeat; transform: rotate(var(--liberatrix-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="liberatrix"]) .liberatrix-billboard { border-radius: 50%; background-color: var(--liberatrix-billboard-color); opacity: var(--liberatrix-billboard-opacity); }
+.object-stage:where([data-object-id="liberatrix"])[data-lod="billboard"] .liberatrix-scene, .object-stage:where([data-object-id="liberatrix"])[data-lod="marker"] .liberatrix-scene { visibility: hidden; }
+.object-stage:where([data-object-id="liberatrix"])[data-lod="marker"] .liberatrix-billboard { opacity: 0; }
 

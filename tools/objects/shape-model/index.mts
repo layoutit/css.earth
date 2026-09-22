@@ -13,8 +13,8 @@ import { prepareRingLeaves } from './rings.mts';
 export { prepareRingLeaves } from './rings.mts';
 import { createSourceManifest } from '../../../src/platform/source-manifest.mts';
 import { prepareSolidBodySurface } from '../../../src/platform/prepare-solid-body-surface.mts';
-import { preparePlanetCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
-import { preparePlanetDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
+import { prepareCubicSky } from '../../../src/platform/prepare-cubic-sky-source.mts';
+import { prepareDirectionalSun } from '../../../src/platform/prepare-directional-sun.mts';
 import { CUBIC_SKY_CAMERA_PRESENTATION_STANDARD } from '../../../src/platform/cubic-sky-contract.mts';
 import { prepareSolarSystemScene, prepareSolarSystemSunPresentation } from '../solar-system-scene.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
@@ -50,7 +50,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   }
   const defaultLens = requireString(requireRecord(requireRecord(sources.get('content')?.value).lenses).defaultLens);
   if (!lenses.some(lens => lens.id === defaultLens)) throw new TypeError(`Shape model default lens ${defaultLens} is not authored.`);
-  const source = await createSourceManifest({ planetId: id, planetName: config.displayName, sourceRoot: sourceDirectory });
+  const source = await createSourceManifest({ objectId: id, objectName: config.displayName, sourceRoot: sourceDirectory });
   await source.verify();
   await Promise.all([mkdir(outputDirectory, { recursive: true }), mkdir(publicDirectory, { recursive: true })]);
   const modelLenses = await prepareModelRasters({ config, axes, publicDirectory, publicBase, sourceDirectory, lensIds: lenses.map(lens => lens.id),
@@ -66,13 +66,13 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const initial = modelLenses.find(lens => lens.id === defaultLens)!;
   const lightingUrl = await prepareSphereLighting({ publicDirectory, publicBase });
   const ringTexture = config.ring ? await prepareRingRaster({ config, publicDirectory, publicBase }) : null;
-  const sky = preparePlanetCubicSky({ objectId: id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
+  const sky = prepareCubicSky({ objectId: id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const cameraOptions = { bodyId: id, displayName: config.displayName };
   const rotation=sources.get('rotation');
   const observedPole = rotation && requireRecord(rotation.value).schema === 'cssearth-observed-pole@1';
   const sunPresentation = { ...prepareSolarSystemSunPresentation(cameraOptions), source: `JPL Kepler orbit and ${observedPole ? 'authored observed pole' : 'arbitrary display orientation'}; arbitrary display phase`,
     qualification: 'Sun direction is computed at the shared prepared epoch. The surface longitude origin is an arbitrary display phase, not a measured rotational ephemeris.' };
-  const sun = preparePlanetDirectionalSun({ presentation: sunPresentation });
+  const sun = prepareDirectionalSun({ presentation: sunPresentation });
   const astronomy=await loadAstronomyPackage();
   const bodyId=(Object.keys(astronomy.BODIES) as Array<keyof typeof astronomy.BODIES>).find(key=>key===id);
   if(!bodyId)throw new TypeError(`Shape model has no astronomical body ${id}`);
@@ -109,7 +109,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
   const pools = [preparedResourcePool('mounted', entries), ...(modelLenses.length > 1
     ? [preparedResourcePool('lenses', entries, { retention: 'selection', decoding: 'sync' })] : [])];
   const b = createPreparedNodeTree({ cssomReads: await prepareCssomDeclarationReads([...bodyLeaves, ...ringLeaves].map(leaf => leaf.style)) });
-  const camera = b.mesh(`polycss-camera shape-model-camera ${id}-camera planet-render-root`), root = b.mesh('polycss-scene');
+  const camera = b.mesh(`polycss-camera shape-model-camera ${id}-camera object-render-root`), root = b.mesh('polycss-scene');
   const system = b.mesh('shape-model-system', `transform:${scene.systemTransform}`), body = b.mesh('shape-model-body');
   const ring = ringTexture ? b.mesh('shape-model-ring') : null;
   b.append(null, camera); b.append(camera, root); b.append(root, system); b.append(system, body);
@@ -120,7 +120,7 @@ export async function prepareShapeModel({ descriptor, sources, objectDirectory, 
     b.append(body, node);
   }
   for (const leaf of ringLeaves) { const node = b.leaf(leaf); node.style.backgroundImage = 'var(--shape-ring)'; b.append(ring, node); }
-  const materialRoot = sphereLighting ? b.element('div', 'shape-model-material-root planet-render-root') : null;
+  const materialRoot = sphereLighting ? b.element('div', 'shape-model-material-root object-render-root') : null;
   const material = sphereLighting ? b.element('s', 'shape-model-material',
     `width:${scene.camera.logicalBodyDiameter}px;height:${scene.camera.logicalBodyDiameter}px;margin:${-scene.camera.logicalBodyDiameter / 2}px 0 0 ${-scene.camera.logicalBodyDiameter / 2}px`) : null;
   if (material && materialRoot) { b.append(null, materialRoot); b.append(materialRoot, material); }

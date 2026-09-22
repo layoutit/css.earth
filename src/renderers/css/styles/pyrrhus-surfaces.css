@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="pyrrhus"]) > :is(.pyrrhus-sun-camera, .pyrrhus-camera, .pyrrhus-material-root) {
+.object-stage:where([data-object-id="pyrrhus"]) > :is(.pyrrhus-sun-camera, .pyrrhus-camera, .pyrrhus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-sun-camera, :where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-body > u {
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-sun-camera, :where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--pyrrhus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-body > .pyrrhus-polar { background-image: var(--pyrrhus-poles-image); }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-material-root { z-index: 3; --pyrrhus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-material, :where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-billboard {
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-body > .pyrrhus-polar { background-image: var(--pyrrhus-poles-image); }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-material-root { z-index: 3; --pyrrhus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-material, :where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-material { background-repeat: no-repeat; transform: rotate(var(--pyrrhus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="pyrrhus"]) .pyrrhus-billboard { border-radius: 50%; background-color: var(--pyrrhus-billboard-color); opacity: var(--pyrrhus-billboard-opacity); }
-.planet-stage:where([data-object-id="pyrrhus"])[data-lod="billboard"] .pyrrhus-scene, .planet-stage:where([data-object-id="pyrrhus"])[data-lod="marker"] .pyrrhus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="pyrrhus"])[data-lod="marker"] .pyrrhus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-material { background-repeat: no-repeat; transform: rotate(var(--pyrrhus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="pyrrhus"]) .pyrrhus-billboard { border-radius: 50%; background-color: var(--pyrrhus-billboard-color); opacity: var(--pyrrhus-billboard-opacity); }
+.object-stage:where([data-object-id="pyrrhus"])[data-lod="billboard"] .pyrrhus-scene, .object-stage:where([data-object-id="pyrrhus"])[data-lod="marker"] .pyrrhus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="pyrrhus"])[data-lod="marker"] .pyrrhus-billboard { opacity: 0; }
 

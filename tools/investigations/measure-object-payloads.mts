@@ -112,10 +112,10 @@ export async function measureRoute<P extends PayloadPage>(browser: PayloadBrowse
     const documentResponse = await page.goto(new URL(route, baseUrl).href, { waitUntil: "networkidle", timeout: 120_000 });
     assert.equal(documentResponse?.status(), 200, `${id} document did not return HTTP 200`);
     await page.waitForFunction(expected => document.documentElement.dataset.ready === "true" &&
-      document.querySelector<HTMLElement>(".planet-stage")?.dataset.objectId === expected, id, { timeout: 120_000 });
+      document.querySelector<HTMLElement>(".object-stage")?.dataset.objectId === expected, id, { timeout: 120_000 });
     await page.waitForTimeout(500);
     result.dom = await page.evaluate(() => {
-      const stages = [...document.querySelectorAll<HTMLElement>(".planet-stage")], stage = stages[0];
+      const stages = [...document.querySelectorAll<HTMLElement>(".object-stage")], stage = stages[0];
       return { stageCount: stages.length, objectId: stage?.dataset.objectId ?? null,
         documentElements: document.querySelectorAll("*").length, sceneElements: stage?.querySelectorAll("*").length ?? 0,
         cameras: stage?.querySelectorAll(".polycss-camera").length ?? 0,

@@ -9,12 +9,12 @@
   white-space: nowrap;
 }
 
-.planet-wordmark {
+.object-wordmark {
   display: inline;
 }
 
 /* Both forms ship; the layout shows one. Wide layouts keep the single line. */
-.planet-wordmark-two-line {
+.object-wordmark-two-line {
   display: none;
   flex-direction: column;
   align-items: flex-start;
@@ -22,16 +22,16 @@
   line-height: 0;
 }
 
-.planet-wordmark-two-line > svg {
+.object-wordmark-two-line > svg {
   display: block;
   overflow: visible;
   fill: currentColor;
 }
 
-.planet-wordmark-two-line-css { font-size: 28px; }
-.planet-wordmark-two-line-earth { font-size: 28px; }
+.object-wordmark-two-line-css { font-size: 28px; }
+.object-wordmark-two-line-earth { font-size: 28px; }
 
-.planet-wordmark-svg {
+.object-wordmark-svg {
   /* Tight bounds: 85.64 x 16.27; source font: 22px; baseline: y=23. */
   display: inline-block;
   font-size: var(--explorer-wordmark-size, 38px);
@@ -41,8 +41,8 @@
   overflow: visible;
 }
 
-.planet-wordmark-css,
-.planet-wordmark-earth {
+.object-wordmark-css,
+.object-wordmark-earth {
   fill: currentColor;
 }
 

@@ -1,25 +1,25 @@
 /* Prepared scene presentation, scoped to its mounted object. */
-.example-stage:where([data-object-id="janus"]) > :is(.janus-sun-camera, .janus-camera, .janus-material-root) {
+.object-stage:where([data-object-id="janus"]) > :is(.janus-sun-camera, .janus-camera, .janus-material-root) {
   position: absolute; inset: 0; transform-origin: 50% 50%; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="janus"]) .janus-sun-camera, :where(.planet-stage[data-object-id="janus"]) .janus-camera { z-index: 1; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="janus"]) .janus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
-:where(.planet-stage[data-object-id="janus"]) .janus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
-:where(.planet-stage[data-object-id="janus"]) .janus-body > u {
+:where(.object-stage[data-object-id="janus"]) .janus-sun-camera, :where(.object-stage[data-object-id="janus"]) .janus-camera { z-index: 1; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="janus"]) .janus-scene { position: absolute; top: 50%; left: 50%; width: 0; height: 0; transform-style: preserve-3d; }
+:where(.object-stage[data-object-id="janus"]) .janus-camera .polycss-mesh { position: absolute; transform-style: preserve-3d; transform-origin: 0 0 0; }
+:where(.object-stage[data-object-id="janus"]) .janus-body > u {
   position: absolute; display: block; width: var(--polycss-atlas-width, 64px); height: var(--polycss-atlas-height, 64px);
   margin: 0; padding: 0; border: 0; transform-origin: 0 0; transform-style: preserve-3d; backface-visibility: hidden;
   border-top-left-radius: 50% 100%; border-top-right-radius: 50% 100%;
   corner-top-left-shape: bevel; corner-top-right-shape: bevel;
   background-image: var(--janus-surface-image); background-repeat: no-repeat;
 }
-:where(.planet-stage[data-object-id="janus"]) .janus-body > .janus-polar { background-image: var(--janus-poles-image); }
-:where(.planet-stage[data-object-id="janus"]) .janus-material-root { z-index: 3; --janus-billboard-opacity: 0; }
-:where(.planet-stage[data-object-id="janus"]) .janus-material, :where(.planet-stage[data-object-id="janus"]) .janus-billboard {
+:where(.object-stage[data-object-id="janus"]) .janus-body > .janus-polar { background-image: var(--janus-poles-image); }
+:where(.object-stage[data-object-id="janus"]) .janus-material-root { z-index: 3; --janus-billboard-opacity: 0; }
+:where(.object-stage[data-object-id="janus"]) .janus-material, :where(.object-stage[data-object-id="janus"]) .janus-billboard {
   position: absolute; display: block; left: 50%; top: 50%; width: 460px; height: 460px;
   margin: -230px 0 0 -230px; pointer-events: none;
 }
-:where(.planet-stage[data-object-id="janus"]) .janus-material { background-repeat: no-repeat; transform: rotate(var(--janus-light-roll, 0deg)); }
-:where(.planet-stage[data-object-id="janus"]) .janus-billboard { border-radius: 50%; background-color: var(--janus-billboard-color); opacity: var(--janus-billboard-opacity); }
-.planet-stage:where([data-object-id="janus"])[data-lod="billboard"] .janus-scene, .planet-stage:where([data-object-id="janus"])[data-lod="marker"] .janus-scene { visibility: hidden; }
-.planet-stage:where([data-object-id="janus"])[data-lod="marker"] .janus-billboard { opacity: 0; }
+:where(.object-stage[data-object-id="janus"]) .janus-material { background-repeat: no-repeat; transform: rotate(var(--janus-light-roll, 0deg)); }
+:where(.object-stage[data-object-id="janus"]) .janus-billboard { border-radius: 50%; background-color: var(--janus-billboard-color); opacity: var(--janus-billboard-opacity); }
+.object-stage:where([data-object-id="janus"])[data-lod="billboard"] .janus-scene, .object-stage:where([data-object-id="janus"])[data-lod="marker"] .janus-scene { visibility: hidden; }
+.object-stage:where([data-object-id="janus"])[data-lod="marker"] .janus-billboard { opacity: 0; }
 

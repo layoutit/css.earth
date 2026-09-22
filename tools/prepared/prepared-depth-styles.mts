@@ -23,7 +23,7 @@ export async function verifyDepthStyles(page: Page, source: PresentationSource, 
   return page.evaluate(({ source, compiled, pairs }) => {
     document.querySelector('main')?.remove();
     function mountPresentation(definition: MinimalPresentation) {
-      const stage = document.createElement('main'); stage.className = 'planet-stage example-stage';
+      const stage = document.createElement('main'); stage.className = 'object-stage';
       stage.dataset.objectId = definition.id; stage.classList.add(...definition.tree.stageClasses);
       document.body.append(stage);
       const nodes = definition.tree.nodes.map(record => {

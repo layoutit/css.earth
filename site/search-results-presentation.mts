@@ -16,11 +16,11 @@ export function presentSearchResults(browser: HTMLElement, searching: boolean, c
   if (searching) browser.setAttribute('data-search-results', '');
   else browser.removeAttribute('data-search-results');
   // One header per planetary system; the shell marks the current one.
-  for (const heading of browser.querySelectorAll<HTMLElement>('[data-system-results] > .planet-selected-panel')) heading.hidden = searching || category === 'nebula';
+  for (const heading of browser.querySelectorAll<HTMLElement>('[data-system-results] > .object-selected-panel')) heading.hidden = searching || category === 'nebula';
   // Typed results are a flat list; the tree stays for browsing, opened from the button beside the field.
   const navigation = browser.querySelector<HTMLElement>('[data-object-navigation-tree]');
   if (navigation) navigation.hidden = searching;
-  const tabs = browser.querySelector<HTMLElement>('[data-system-results] > .planet-object-tabs');
+  const tabs = browser.querySelector<HTMLElement>('[data-system-results] > .object-tabs');
   if (tabs) tabs.hidden = true;
   const results = requiredElement(browser, '#object-category-results');
   results.hidden = !searching;
@@ -36,9 +36,9 @@ export function presentSearchResults(browser: HTMLElement, searching: boolean, c
 
 export function presentFeatureResults(root: HTMLElement, count: number, message = '') {
   root.hidden = count === 0 && !message;
-  const counter = root.querySelector<HTMLElement>('.planet-panel-heading-count');
+  const counter = root.querySelector<HTMLElement>('.object-panel-heading-count');
   if (counter) counter.textContent = count ? `(${count})` : '';
-  const hint = requiredElement(root, '.planet-destination-hint');
+  const hint = requiredElement(root, '.object-destination-hint');
   hint.textContent = message;
   hint.hidden = !message;
 }

@@ -49,7 +49,7 @@ body {
   background: var(--shell-background);
 }
 
-.planet-viewport {
+.object-viewport {
   position: fixed;
   z-index: 0;
   inset: 0;
@@ -61,7 +61,7 @@ body {
   background: var(--shell-background);
 }
 
-.planet-world-stage {
+.object-world-stage {
   position: absolute;
   z-index: 0;
   inset: 0;
@@ -74,9 +74,9 @@ body {
   image-rendering: optimizeQuality;
 }
 
-.planet-stage {
+.object-stage {
   /* Divide fitted scales by 1 / .88 for consistent breathing room. */
-  --planet-viewport-zoom-divisor: 1.136364;
+  --object-viewport-zoom-divisor: 1.136364;
   position: absolute;
   z-index: 0;
   inset: 0;
@@ -92,14 +92,14 @@ body {
 
 /* The selected detail occupies depth band 0..3. Persistent world bodies sit
    before or after that band without inheriting its changing object selectors. */
-.planet-world-stage > .planet-stage { background-color: transparent; }
+.object-world-stage > .object-stage { background-color: transparent; }
 
-.planet-stage > .planet-render-root {
+.object-stage > .object-render-root {
   transform-origin: 50% 50%;
 }
 
-html:not([data-scene-presented="true"]) body.loading .planet-viewport::after,
-body.priming .planet-viewport::after {
+html:not([data-scene-presented="true"]) body.loading .object-viewport::after,
+body.priming .object-viewport::after {
   content: "";
   position: absolute;
   z-index: 120;
@@ -120,21 +120,21 @@ body.priming .planet-viewport::after {
 
 /* Initial loading hides unprepared content. A prepared scene handoff keeps the
    celestial view visible while incoming controls and materials settle. */
-html:not([data-scene-presented="true"]) .planet-world-stage { opacity: 0.001; }
+html:not([data-scene-presented="true"]) .object-world-stage { opacity: 0.001; }
 
-.planet-input-surface {
+.object-input-surface {
   position: absolute;
   z-index: 10;
   inset: 0;
   pointer-events: none;
   touch-action: none;
 }
-html[data-scene-presented="true"] .planet-input-surface { pointer-events: auto; }
+html[data-scene-presented="true"] .object-input-surface { pointer-events: auto; }
 /* Embedded scenes keep the shell in the DOM (the runtime binds to it) but out of layout, so camera framing ignores it. */
-html[data-embed] :is(.planet-ui-layer, .space-minimap) { display: none !important; }
-.planet-input-surface:focus { outline: none; }
+html[data-embed] :is(.object-ui-layer, .space-minimap) { display: none !important; }
+.object-input-surface:focus { outline: none; }
 
-.planet-scene-overlays {
+.object-scene-overlays {
   position: absolute;
   z-index: 20;
   inset: 0;
