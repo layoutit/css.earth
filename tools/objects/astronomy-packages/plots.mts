@@ -154,9 +154,13 @@ export interface EllipsePoint {readonly x:number;readonly y:number;readonly labe
   /** A measured position is drawn as a filled point with bold ellipses; a candidate as an open circle with thin ellipses. */
   readonly role?:'measurement'|'candidate';
   /** Short text drawn inside a candidate's disc in the publication layout, such as a planet's letter. */
-  readonly mark?:string}
+  readonly mark?:string;
+  /** Ties this point to a body so its colour matches that body's orbit and prediction. */
+  readonly series?:string}
 /** A polyline drawn behind the points, such as a predicted orbit; it never sets the plot limits. */
-export interface PreviewTrack {readonly label:string;readonly points:readonly (readonly [number,number])[]}
+export interface PreviewTrack {readonly label:string;readonly points:readonly (readonly [number,number])[];
+  /** Ties this line to a body so its colour matches that body's points; several lines may share one series. */
+  readonly series?:string}
 /** One drawn contour: k times the 1σ covariance ellipse, full axis lengths, major-axis angle in degrees from +x toward +y. */
 export interface DrawnEllipse {readonly label:string;readonly sigma:number;readonly x:number;readonly y:number;readonly width:number;readonly height:number;readonly angleDeg:number}
 export type NumericPreview =
@@ -164,7 +168,7 @@ export type NumericPreview =
   | { readonly kind:'scatter'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly {readonly x:number;readonly y:number;readonly label?:string}[] }
   | { readonly kind:'scatter-ellipses'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly EllipsePoint[]; readonly origin?:{readonly label:string;readonly covariance?:readonly [number,number,number]}; readonly sigmaLevels?:readonly number[]; readonly invertX?:boolean; readonly tracks?:readonly PreviewTrack[];
       /** 'publication' draws the layout astrometry papers print; the default is the compact preview. */
-      readonly layout?:'preview'|'publication' }
+      readonly layout?:'preview'|'publication'; readonly measurementLabel?:string }
   | { readonly kind:'histogram'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly edges:readonly number[]; readonly counts:readonly number[] }
   | { readonly kind:'raster'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly width:number; readonly height:number; readonly values:readonly number[]; readonly colorLabel:string };
 
@@ -184,57 +188,70 @@ out.mkdir(parents=True,exist_ok=True)
 
 def publication(d):
  # The layout astrometry papers print: square equal-scale axes, a heavy frame with inward ticks on every side, no title,
- # the reference as a star, candidates as dark discs carrying a short mark, measurements with k-sigma ellipses labelled
- # beside them, and a frameless legend.
+ # the reference as a star, each body in its own colour for both its orbit draws and its predicted disc, measurements with
+ # k-sigma ellipses, and a frameless legend.
  from matplotlib.patches import Ellipse
  from matplotlib.lines import Line2D
  from matplotlib.ticker import AutoMinorLocator
- # One fixed page: a 600 pt figure with a square 520 pt axes box, the size a single-column astrometry figure prints at.
  W,H,L,B,AW,AH=640.,620.,108.,88.,510.,510.
  plt.rcParams.update({'font.family':'DejaVu Sans','mathtext.fontset':'dejavusans'})
  fig=plt.figure(figsize=(W/72,H/72)); fig.patch.set_facecolor('white'); ax=fig.add_axes([L/W,B/H,AW/W,AH/H])
  levels=np.asarray(d.get('sigmaLevels',[1,2,3]),dtype=float); alphas=[1,.55,.3,.2,.15][:len(levels)]
+ palette=['#1f77b4','#2ca02c','#ff7f0e','#d62728','#9467bd','#8c564b','#17becf','#7f7f7f']
+ order=[]
+ for item in list(d.get('tracks',[]))+list(d['points']):
+  key=item.get('series')
+  if key and key not in order: order.append(key)
+ colour={key:palette[index%len(palette)] for index,key in enumerate(order)}
  navy='#000080'; handles=[]; labels=[]
  def half_width(c,k): det=c[0]*c[2]-c[1]**2; return k*np.sqrt(det/c[2])
  def ellipse(x,y,c,k,**kw):
   c=np.asarray(c,dtype=float)
   if c.shape!=(3,) or not np.isfinite(c).all() or c[0]<=0 or c[2]<=0 or c[0]*c[2]-c[1]**2<=0: raise ValueError('Covariance is not a positive-definite 2x2 block')
   w,v=np.linalg.eigh(np.array([[c[0],c[1]],[c[1],c[2]]])); ang=float(np.degrees(np.arctan2(v[1,1],v[0,1])))
-  e=Ellipse((x,y),2*k*np.sqrt(w[1]),2*k*np.sqrt(w[0]),angle=ang,fill=False,**kw); ax.add_patch(e)
+  ax.add_patch(Ellipse((x,y),2*k*np.sqrt(w[1]),2*k*np.sqrt(w[0]),angle=ang,fill=False,**kw))
   drawn.append({'label':'','sigma':float(k),'x':x,'y':y,'width':float(2*k*np.sqrt(w[1])),'height':float(2*k*np.sqrt(w[0])),'angleDeg':ang})
+ bundle={}
+ for t in d.get('tracks',[]): bundle[t.get('series') or t['label']]=bundle.get(t.get('series') or t['label'],0)+1
  for t in d.get('tracks',[]):
-  q=np.asarray(t['points'],dtype=float); ax.plot(q[:,0],q[:,1],lw=1,color='0.6',zorder=1)
+  q=np.asarray(t['points'],dtype=float)
+  if q.ndim!=2 or q.shape[1]!=2 or not np.isfinite(q).all(): raise ValueError('Track '+t['label']+' is not a finite list of points')
+  key=t.get('series'); count=bundle.get(key or t['label'],1)
+  ax.plot(q[:,0],q[:,1],lw=1 if count==1 else .7,color=colour.get(key,'0.6'),alpha=1 if count==1 else max(.06,1.2/count),zorder=1)
  origin=d.get('origin')
  if origin is not None:
   ax.axhline(0,ls=':',lw=1.5,color='k',zorder=1); ax.axvline(0,ls=':',lw=1.5,color='k',zorder=1)
   ax.plot([0],[0],ls='',marker='*',ms=19.7,mfc='#6baed6',mec='k',mew=1,zorder=6)
+ measured=[q for q in d['points'] if q.get('role')!='candidate']
  for q in d['points']:
-  x,y=float(q['x']),float(q['y'])
+  x,y=float(q['x']),float(q['y']); face=colour.get(q.get('series'),'#800000' if q.get('role')=='candidate' else navy)
   if q.get('role')=='candidate':
    if 'covariance' in q:
-    for k,a in zip(levels,alphas): ellipse(x,y,q['covariance'],k,lw=1,color='#800000',alpha=a*.8,zorder=3)
-   ax.plot([x],[y],ls='',marker='o',ms=17.32-1.3,mfc='#800000',mec='k',mew=1.3,zorder=7)
+    for k,a in zip(levels,alphas): ellipse(x,y,q['covariance'],k,lw=1,color=face,alpha=a*.8,zorder=3)
+   ax.plot([x],[y],ls='',marker='o',ms=16,mfc=face,mec='k',mew=1.3,zorder=7)
    if q.get('mark'): ax.text(x,y,q['mark'],ha='center',va='center',fontsize=11,fontweight='bold',color='white',zorder=8)
   else:
    if 'covariance' in q:
-    c=q['covariance']
     for k,a in zip(levels,alphas):
-     ellipse(x,y,c,k,lw=2,color=navy,alpha=a,zorder=4)
-     labels.append((k,a,x-half_width(c,k),y,2*half_width(c,k)))
-   ax.plot([x],[y],ls='',marker='o',ms=6.69,mfc=navy,mec='white',mew=.8,zorder=9)
-   handles.append(Line2D([],[],ls='',marker='o',ms=6.69,mfc=navy,mec=navy,label=q.get('label','measured position')))
+     ellipse(x,y,q['covariance'],k,lw=2 if len(measured)<=2 else 1,color=face,alpha=a,zorder=4)
+     # Sigma labels are for a chart of one or two measurements; a run of epochs would bury the figure in them.
+     if len(measured)<=2: labels.append((k,a,x-half_width(q['covariance'],k),y,2*half_width(q['covariance'],k),face))
+   ax.plot([x],[y],ls='',marker='D',ms=5.5,mfc=face,mec='k',mew=.8,zorder=9)
  ax.set_aspect('equal',adjustable='datalim'); ax.autoscale_view()
  if d.get('invertX'): ax.invert_xaxis()
  span=max(abs(ax.get_xlim()[1]-ax.get_xlim()[0]),1e-9)
- for k,a,lx,ly,width in labels:
+ for k,a,lx,ly,width,face in labels:
   # A contour narrower than a fiftieth of the frame has no room for its own label; the legend still names the levels.
-  if width>span/50: ax.annotate(f'{k:g}$\\sigma$',(lx,ly),xytext=(4,0),textcoords='offset points',fontsize=14,color=navy,alpha=a,va='center',ha='left')
+  if width>span/50: ax.annotate(f'{k:g}$\sigma$',(lx,ly),xytext=(4,0),textcoords='offset points',fontsize=14,color=face,alpha=a,va='center',ha='left')
+ for key in order: handles.append(Line2D([],[],ls='-',lw=1.2,marker='o',ms=8,mfc=colour[key],mec='k',color=colour[key],label=key))
+ if any(q.get('role')!='candidate' for q in d['points']): handles.append(Line2D([],[],ls='',marker='D',ms=5.5,mfc='0.35',mec='k',label=d.get('measurementLabel','measured, with 1–3σ ellipses')))
+ if origin is not None: handles.append(Line2D([],[],ls='',marker='*',ms=13,mfc='#6baed6',mec='k',label=origin['label']))
  for side in ax.spines.values(): side.set_linewidth(4)
  ax.xaxis.set_minor_locator(AutoMinorLocator(4)); ax.yaxis.set_minor_locator(AutoMinorLocator(4))
  ax.tick_params(which='major',direction='in',length=14,width=.8,top=True,right=True,labelsize=18,pad=8)
  ax.tick_params(which='minor',direction='in',length=7,width=.6,top=True,right=True)
  ax.set_xlabel(d['xLabel'],fontsize=22); ax.set_ylabel(d['yLabel'],fontsize=22)
- if handles: ax.legend(handles=handles,frameon=False,fontsize=15,loc='upper left')
+ if handles: ax.legend(handles=handles,frameon=False,fontsize=13,loc='best')
  return fig,ax
 kind=d['kind']; drawn=[]; published=kind=='scatter-ellipses' and d.get('layout')=='publication'
 if published: fig,ax=publication(d)
