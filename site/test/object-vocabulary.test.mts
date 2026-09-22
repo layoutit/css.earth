@@ -32,7 +32,7 @@ const PLANET_HYPHENATED = new Set(['planet-markers', 'planet-radius', 'planet-sp
 
 const tracked = (...paths: string[]) => execFileSync('git', ['ls-files', '-z', '--', ...paths], { cwd: root, encoding: 'utf8' })
   .split('\0').filter(path => path && !path.includes('/evidence/'));
-const code = tracked(...SERVES_EVERY_OBJECT).filter(path => /\.(?:ts|mts|mjs|js|astro|css)$/u.test(path));
+const code = tracked(...SERVES_EVERY_OBJECT).filter(path => /\.(?:ts|mts|mjs|js|astro|css)$/u.test(path) && path !== 'site/test/object-vocabulary.test.mts');
 const occurrences = (pattern: RegExp, keep: (name: string) => boolean) => code.flatMap(path =>
   [...readFileSync(resolve(root, path), 'utf8').matchAll(pattern)].map(match => match[0]).filter(name => !keep(name))
     .map(name => `${path}: ${name}`));
