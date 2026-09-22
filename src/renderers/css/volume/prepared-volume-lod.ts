@@ -1,7 +1,7 @@
 import { mountPreparedCssVolume } from './prepared-volume-runtime.js';
 import { projectVolumeImpostors } from './volume-impostor-projection.js';
 import type { PreparedVolumeMountOptions, PreparedVolumeRuntime, VolumeCameraPublication } from './types.js';
-import { nativeProjectedLength, nativeProjectedFade } from '../rendering/native-projection.js';
+import { nativeProjectedLength, nativeProjectedFade, nativeProjectedMix } from '../rendering/native-projection.js';
 import { validatePreparedCssVolume } from './validation.js';
 
 const AXES = ['x', 'y', 'z'] as const;
@@ -63,6 +63,28 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
   }
   const document = options.host.ownerDocument;
   const create = options.createElement ?? ((tag: string) => document.createElement(tag));
+  // The fade resolves the viewport in CSS, so the projected diameter alone does not say whether a presentation
+  // contributes. Resolving the focal length through a registered length property reads the value the fade uses,
+  // without a layout measurement, and only a viewport change can alter it.
+  const FOCAL_PROPERTY = '--native-volume-focal';
+  let focalKey = '', focalCssPixels = Number.NaN, focalProperty: boolean | null = null;
+  const resolveFocalPixels = (viewport: VolumeCameraPublication['viewport']): number => {
+    const view = document.defaultView;
+    if (options.nativeFocalCss === undefined || !view) return Number.NaN;
+    if (focalProperty === null) {
+      focalProperty = typeof view.CSS?.registerProperty === 'function';
+      // Another mount in the same document registers the same property; that throw means it is already available.
+      if (focalProperty) try { view.CSS.registerProperty({ name: FOCAL_PROPERTY, syntax: '<length>', inherits: false, initialValue: '0px' }); } catch { /* already registered */ }
+    }
+    if (!focalProperty) return Number.NaN;
+    const key = viewport.widthPixels + 'x' + viewport.heightPixels;
+    if (key !== focalKey) {
+      focalKey = key;
+      options.host.style.setProperty(FOCAL_PROPERTY, options.nativeFocalCss);
+      focalCssPixels = Number.parseFloat(view.getComputedStyle(options.host).getPropertyValue(FOCAL_PROPERTY));
+    }
+    return focalCssPixels;
+  };
   const full = create('div'), distant = create('div');
   full.className = 'css-volume-detail'; distant.className = 'css-volume-impostors';
   for (const node of [full, distant]) Object.assign(node.style, {
@@ -102,11 +124,18 @@ export function mountPreparedVolumeLod(options: PreparedVolumeMountOptions, comp
     if (options.host.dataset.volumeDetailMix !== mixHook) options.host.dataset.volumeDetailMix = mixHook;
     if (options.host.dataset.volumeDiameterPixels !== diameterHook) options.host.dataset.volumeDiameterPixels = diameterHook;
     const responsive = options.nativeFocalCss !== undefined && Number.isFinite(diameterPixels);
-    full.style.display = visible && (responsive || volumeMix > 0) ? 'block' : 'none';
-    distant.style.display = visible && (responsive || volumeMix < 1) ? 'block' : 'none';
+    // A presentation faded to zero still rasterises every node it keeps displayed: on an iPhone the full slice
+    // volume cost hundreds of milliseconds a frame while its CSS opacity was 0. An impostor-sized cloud now leaves
+    // rendering and its billboard views carry it. An unresolvable focal length keeps the earlier always-on behaviour.
+    const nativeMix = responsive ? nativeProjectedMix(diameterPixels, publication.viewport.focalPixels,
+      resolveFocalPixels(publication.viewport), bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels) : Number.NaN;
+    const mix = Number.isFinite(nativeMix) ? nativeMix : responsive ? Number.NaN : volumeMix;
+    const detailVisible = visible && (Number.isNaN(mix) || mix > 0), impostorsVisible = visible && (Number.isNaN(mix) || mix < 1);
+    full.style.display = detailVisible ? 'block' : 'none';
+    distant.style.display = impostorsVisible ? 'block' : 'none';
     if (responsive) options.host.style.setProperty('--native-volume-mix', nativeProjectedFade(diameterPixels,
       publication.viewport.focalPixels, options.nativeFocalCss!, bank.fullBelowDiameterPixels, bank.volumeAboveDiameterPixels));
-    if (visible && (responsive || volumeMix > 0)) {
+    if (detailVisible) {
       const volume = detail();
       volume.publish(publication);
       full.style.opacity = responsive ? `calc(var(--native-volume-mix) * ${completedOpacity(volume)})` : String(volumeMix * completedOpacity(volume));

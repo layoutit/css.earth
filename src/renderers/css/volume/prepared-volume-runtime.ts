@@ -45,7 +45,10 @@ export function mountPreparedCssVolume(options: PreparedVolumeMountOptions): Pre
     scene.style.willChange = 'transform';
     mesh.className = 'css-volume-mesh';
     root.style.opacity = '0';
-    root.style.display = 'block';
+    // A stack that has never been published, or one whose axis carries no weight, stays out of the layer tree. Hidden
+    // is not free: on an iPhone each unpublished stack kept its slices composited, and the compositor re-committed
+    // them on every camera change.
+    root.style.display = 'none';
     root.style.visibility = 'hidden';
     const copies = { nodes: [[], []] as HTMLElement[][], alpha: [NaN, NaN] };
     opticalCopies.push(copies);

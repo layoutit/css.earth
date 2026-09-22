@@ -37,7 +37,8 @@ export type Step =
   | { readonly drag: { readonly from: readonly [number, number]; readonly to: readonly [number, number]; readonly seconds: number } }
   | { readonly wait: number }
   | { readonly screenshot: string }
-  | { readonly probe: string };
+  | { readonly probe: string }
+  | { readonly script: string };
 
 const point = (value: unknown, label: string): [number, number] => {
   const list = requireArray(value, label);
@@ -53,6 +54,7 @@ export function parseSteps(value: unknown): Step[] {
     if ('tap' in step) return { tap: point(step.tap, label) };
     if ('type' in step) return { type: requireString(step.type, label) };
     if ('wait' in step) return { wait: requireFiniteNumber(step.wait, label) };
+    if ('script' in step) return { script: requireString(step.script, label) };
     if ('probe' in step) {
       const name = requireString(step.probe, label);
       if (!/^[a-z0-9-]+$/u.test(name)) throw new TypeError(`${label}: probe names are lowercase words and dashes.`);
@@ -86,7 +88,10 @@ async function perform(steps: readonly Step[], udid: string, out: string, marks:
     const label = JSON.stringify(step);
     const mark: { label: string; at: number; value?: unknown } = { label, at: Date.now() - started };
     marks.push(mark);
-    if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    // A scripted step changes the page to measure a change before it is prepared (a leaf's raster size, say). Its result
+    // is recorded beside the step, so a capture says what it did.
+    if ('script' in step) mark.value = await evaluate(step.script).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
+    else if ('probe' in step) mark.value = await evaluate(PROBE_EXPRESSION).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
     else if ('tap' in step) await run('axe', ['tap', '-x', String(step.tap[0]), '-y', String(step.tap[1]), '--udid', udid]);
     else if ('type' in step) await run('axe', ['type', step.type, '--udid', udid]);
     else if ('wait' in step) await wait(step.wait * 1000);
@@ -696,7 +701,7 @@ function readme(r: ReadmeInput): string {
   const lines = [`# ${r.name}`, '', `${r.url}, ${Math.round(r.durationMs / 100) / 10} s. Source maps for ${r.sourceMaps.mapped} scripts.`, '',
     `Memory (MB, after collection): before ${JSON.stringify(r.memoryMb.before)}, after ${JSON.stringify(r.memoryMb.after)}.`, '',
     ...(r.steps.some(step => 'value' in step) ? ['## Probes', '', ...r.steps.filter(step => 'value' in step)
-      .map(step => `- ${JSON.parse(step.label).probe} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
+      .map(step => `- ${JSON.parse(step.label).probe ?? 'script'} at ${Math.round(step.at / 100) / 10} s: ${JSON.stringify(step.value)}`), ''] : []),
     ...(r.pixels ? ['## Pixels against ' + r.pixels.baseline, '', ...r.pixels.screenshots.map(shot => shot.differing === null
       ? `- ${shot.name}: no baseline screenshot` : `- ${shot.name}: ${shot.differing} of ${shot.total} pixels differ`), ''] : []),
     `Rendering frames by work inside them: ${r.timeline.renderingFrames.count}, over 16.7 ms ${r.timeline.renderingFrames.over16ms}, over 50 ms ${r.timeline.renderingFrames.over50ms}, longest ${r.timeline.renderingFrames.longestMs} ms.`, '',
