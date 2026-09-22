@@ -177,6 +177,6 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   // the restored runtime. The two steps below read it, so it has to exist before they run.
   await run(projectRoot, ['tools/restore-object-json.mts']);
   await run(projectRoot, ['tools/prepare-feature-index.mts']);
-  await run(projectRoot, ['tools/prepare-facilities.mts', '--catalog-only']);
+  await run(projectRoot, ['tools/prepare-facilities.mts', '--catalog-only', '--restored-only']);
   console.log('Typecheck preparation complete: real minimap and source catalogues generated.');
 }
