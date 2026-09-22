@@ -5,6 +5,10 @@ import { prepareFacilities } from './prepare-facilities.mts';
 import { prepareVolumeProvenance, readPreparedVolumeProvenance } from './prepare-volume-provenance.mts';
 import { prepareContextProvenance } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from './read-prepared-context-provenance.mts';
+import { SCENE_OBJECTS } from '../site/objects.mts';
+
+/** Each body's page.json is written from its restored runtime by prepare:object-json and is never tracked. */
+const bodyPages = () => SCENE_OBJECTS.map(object => `src/objects/${object.id}/prepared/page.json`);
 
 export function sourceCheckMode(value = process.env.CSSEARTH_SOURCE_CHECK_MODE): 'author' | 'published' {
   if (value === undefined || value === 'author') return 'author';
@@ -22,8 +26,8 @@ export async function sourceTestGeneratedPaths(mode = sourceCheckMode()): Promis
     const packages = [...await readPreparedVolumeProvenance(), ...await readPreparedContextProvenance()];
     // These are the two metadata records consumed by each reader, not the object's whole asset inventory.
     // A newly introduced runtime, scene or image dependency must still fail the catalogue closure check.
-    return packages.flatMap(({ base }) => ['provenance.json', 'presentation.json'].map(file => `${base}/prepared/${file}`));
+    return [...bodyPages(), ...packages.flatMap(({ base }) => ['provenance.json', 'presentation.json'].map(file => `${base}/prepared/${file}`))];
   }
-  return [...await prepareVolumeProvenance(), ...await prepareContextProvenance()].flatMap(volume =>
-    volume.outputs.map(output => relative(process.cwd(), output.path)));
+  return [...bodyPages(), ...[...await prepareVolumeProvenance(), ...await prepareContextProvenance()].flatMap(volume =>
+    volume.outputs.map(output => relative(process.cwd(), output.path)))];
 }

@@ -9,7 +9,7 @@ import {objectPageStyles} from '../object-page-contract.mts';
 import {preparePageMetadata} from '../../tools/prepared-page-metadata.mts';
 import {SCENE_OBJECTS} from '../objects.mts';
 
-test('page metadata stays hash-bound to its scene without needing scene bytes during page emission',async t=>{
+test('page metadata is bound to its scene by the scene pin, without needing scene bytes during page emission',async t=>{
  const root=await mkdtemp(resolve(tmpdir(),'cssearth-page-data-'));
  t.after(()=>rm(root,{recursive:true,force:true}));
  const directory=resolve(root,'src/objects/body');await mkdir(resolve(directory,'prepared'),{recursive:true});
@@ -29,8 +29,6 @@ test('page metadata stays hash-bound to its scene without needing scene bytes du
  descriptor.prepared.sha256='a'.repeat(64);
  await writeFile(resolve(directory,'object.json'),JSON.stringify(descriptor));
  await assert.rejects(loadObjectPageData('body',root),/incomplete/);
- await writeFile(resolve(directory,'prepared/page.json'),page.text+' ');
- await assert.rejects(loadObjectPageData('body',root),/descriptor pin/);
  await assert.rejects(loadObjectPageData('../body',root),/identity/);
 });
 

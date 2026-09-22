@@ -56,12 +56,12 @@ export async function prepareFactsheet(objectDirectory:string, { check = false }
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {
-  const check = process.argv.includes('--check');
-  const ids = process.argv.slice(2).filter(id => !['--', '--check'].includes(id));
+  const check = process.argv.includes('--check'), quiet = process.argv.includes('--quiet');
+  const ids = process.argv.slice(2).filter(id => !['--', '--check', '--quiet'].includes(id));
   assert.ok(ids.every(id => SCENE_OBJECTS.some(object => object.id === id)), 'Unregistered factsheet target');
   const results = [];
   for (const object of SCENE_OBJECTS) if (!ids.length || ids.includes(object.id)) {
     results.push(await prepareFactsheet(resolve(import.meta.dirname, '../src/objects', object.id), { check }));
   }
-  console.log(JSON.stringify({ check, objects: results.length, facts: results.reduce((sum, body) => sum + body.count, 0), results }));
+  console.log(JSON.stringify({ check, objects: results.length, facts: results.reduce((sum, body) => sum + body.count, 0), ...(quiet ? {} : { results }) }));
 }
