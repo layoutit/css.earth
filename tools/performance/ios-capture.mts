@@ -537,12 +537,21 @@ export async function captureIosMoment(args: readonly string[]) {
   const cpu = summariseCpu(moment.filter(event => event.method === 'CPUProfiler.trackingUpdate' && isRecord(event.params)).map(event => (event.params as Message).event), workers);
   const consoleMessages = moment.filter(event => event.method === 'Console.messageAdded' && isRecord(event.params)).map(event => requireRecord((event.params as Message).message, 'console'))
     .map(message => ({ level: String(message.level), text: String(message.text).slice(0, 500), url: typeof message.url === 'string' ? message.url : null, line: message.line ?? null }));
-  const responses = new Map<string, { url: string; type: string; status: number; bytes: number }>();
+  const responses = new Map<string, { url: string; type: string; status: number; bytes: number; initiator?: string }>();
+  const requestStacks = new Map<string, Frame[]>();
   for (const event of moment) {
     if (!isRecord(event.params)) continue;
     const id = String(event.params.requestId);
+    // Who asked for it: the script stack WebKit attaches to the request.
+    if (event.method === 'Network.requestWillBeSent' && isRecord(event.params.initiator))
+      requestStacks.set(id, schedulingStacks([{ type: 'ScheduleLayout', stackTrace: event.params.initiator.stackTrace }])[0]?.frames ?? []);
     if (event.method === 'Network.responseReceived' && isRecord(event.params.response)) responses.set(id, { url: String(event.params.response.url), type: String(event.params.type), status: Number(event.params.response.status), bytes: 0 });
     if (event.method === 'Network.dataReceived' && responses.has(id)) responses.get(id)!.bytes += Number(event.params.dataLength) || 0;
+  }
+  await namer.prepare([...requestStacks.values()].flat());
+  for (const [id, response] of responses) {
+    const frames = requestStacks.get(id)?.filter(frame => frame.url) ?? [];
+    if (frames.length) response.initiator = frames.slice(0, 10).map(frame => namer.name(frame)).join(' < ');
   }
   const requests = [...responses.values()];
 

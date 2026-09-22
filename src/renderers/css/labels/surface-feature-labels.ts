@@ -134,23 +134,14 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   // Label picks are consumed by the shared picker before they bubble, so a click that
   // reaches the window from the input surface picked nothing: it clears the selection.
   let press: { x: number; y: number } | null = null;
-  // The catalogue (several MB on a mapped body) loads for the scene, not for the shell: a tap on search or a typed
-  // query during a flight used to fetch and parse it for a body the camera was only passing.
-  const onPress = (event: PointerEvent) => {
-    if (event.target === inputSurface) startLoading();
-    press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null;
-  };
+  const onPress = (event: PointerEvent) => { startLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
   const onWheel = () => { startLoading(); };
   const onSurfaceClick = (event: MouseEvent) => {
     if (pinnedIndex === null || event.target !== inputSurface || event.button !== 0) return;
     if (press && Math.hypot(event.clientX - press.x, event.clientY - press.y) > CLICK_SLOP_PIXELS) return;
     clearSelection();
   };
-  const onKey = (event: KeyboardEvent) => {
-    const typing = event.target instanceof windowTarget!.HTMLElement && (event.target.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/u.test(event.target.tagName));
-    if (!typing) startLoading();
-    if (event.key === 'Escape' && pinnedIndex !== null) clearSelection();
-  };
+  const onKey = (event: KeyboardEvent) => { startLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
   if (inputSurface) {
     windowTarget.addEventListener('pointerdown', onPress, { capture: true });
     inputSurface.addEventListener('wheel', onWheel, { passive: true });
@@ -247,8 +238,6 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     const projection = view?.projection;
     const range = zoomRange();
     zoomGate = passesZoomGate(view?.zoom, range.minimum, range.maximum, plan.policy);
-    // The first frame close enough for names loads them.
-    if (zoomGate && enabled) startLoading();
     // Each name carries its own discovery tier; names whose tier lies beyond the current zoom share wait for the camera.
     const currentShare = view?.zoom === undefined ? 0 : zoomShare(view.zoom, range.minimum, range.maximum);
     // The selected feature stays labelled at any zoom; the density gate applies to the rest.
