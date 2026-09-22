@@ -1,6 +1,0 @@
-{
-  "schemaVersion": 1,
-  "baselineCommit": "013bd573dba264ae00b2e38b2c9b19518793aaea",
-  "note": "Repository-completeness debt: files a registered body should carry that do not change what the application ships, so they are ratcheted, not gated. Empty since #505 retired the browser harness and the 547 per-object profiles this list tracked. This list may shrink, never grow; remove an entry in the same change that supplies its file.",
-  "missingPackageFiles": []
-}

@@ -9,7 +9,6 @@ import test, { type TestContext } from 'node:test';
 import type { AddressInfo } from 'node:net';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
-import { compareObjectPackageBacklog, loadObjectPackageBacklog } from '../contract/object-package-backlog.mts';
 import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 import { parseAcquisitionPlan } from '../objects/dist/operations.js';
 import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
@@ -48,7 +47,7 @@ async function run(root: string, args: readonly string[]): Promise<void> {
   });
 }
 
-type Scan = { missingSources: string[]; missingBacklog: string[] };
+type Scan = { missingSources: string[] };
 let scan: Promise<Scan> | undefined;
 const scanPackages = () => scan ??= runScan();
 
@@ -56,12 +55,12 @@ async function runScan(): Promise<Scan> {
   const tracked = new Set(execFileSync('git', ['ls-files', '--cached', '-z'], {
     cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   }).split('\0'));
-  const missingSources: string[] = [], missingBacklog: string[] = [];
+  const missingSources: string[] = [];
   for (const id of SCENE_OBJECTS.map(object => object.id)) {
     // Nothing under prepared/ is git-tracked: a clean checkout restores the baked files from R2 via the object's
     // inventory.json. Every other required file keeps the original "must be tracked" proof.
     const preparedPrefix = `src/objects/${id}/prepared/`;
-    const paths = await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
+    await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
       accessFile: async path => {
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
         const relativePath = relative(project, path);
@@ -74,7 +73,6 @@ async function runScan(): Promise<Scan> {
         }
         assert.ok(tracked.has(relativePath), path);
       } });
-    for (const file of paths.missingBacklogFiles) missingBacklog.push(relative(project, file));
     const source = `src/objects/${id}/source`;
     const inputs: unknown[] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
       .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
@@ -90,22 +88,12 @@ async function runScan(): Promise<Scan> {
       if (!tracked.has(path) && !restored.has(entryPath)) missingSources.push(path);
     }
   }
-  return { missingSources: missingSources.sort(), missingBacklog: missingBacklog.sort() };
+  return { missingSources: missingSources.sort() };
 }
 
 test('every registered body has a complete shipped closure with tracked or restorable sources', async () => {
   const { missingSources } = await scanPackages();
   assert.deepEqual(missingSources, [], 'Required source files must be tracked or have an acquisition operation.');
-});
-
-test('the object package backlog does not grow', async () => {
-  const { missingBacklog } = await scanPackages();
-  const backlog = await loadObjectPackageBacklog(project);
-  const { added, resolved } = compareObjectPackageBacklog(backlog.missingPackageFiles, missingBacklog);
-  console.log(`# object package backlog: ${missingBacklog.length} outstanding, baseline ${backlog.missingPackageFiles.length}`);
-  for (const path of missingBacklog) console.log(`# backlog: ${path}`);
-  assert.deepEqual(added, [], 'A new package file may not be left missing; supply it or it is new blocking debt.');
-  assert.deepEqual(resolved, [], 'Remove entries from tools/contract/object-package-backlog.json in the change that supplies their files.');
 });
 
 test('checkout restores a missing compressed observation without refreshing existing inputs', async t => {

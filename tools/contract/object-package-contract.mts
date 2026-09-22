@@ -35,11 +35,6 @@ export function objectPackagePaths(objectRecord: Pick<ObjectEntry, "id" | "name"
       // holds one and requiring it here only asserts that a generated file was generated.
       resolve(projectRoot, 'site/pages/[id].astro'),
     ]),
-    // These are repository-completeness files: their absence does not change what the
-    // application ships, so they are tracked as a ratcheted backlog rather than a merge
-    // gate (see docs/ci-cd.md). Empty since #505 retired the browser harness and its 547
-    // per-object profiles; the ratchet stays for the next backlog that earns one.
-    backlogFiles: Object.freeze<readonly string[]>([]),
     inventory: resolve(root, "inventory.json"),
     sourceManifest: resolve(root, "source", "manifest.json"),
     sourceRoot: resolve(root, "source"),
@@ -63,15 +58,7 @@ export async function validateObjectPackageFiles(
       });
     }
   }
-  const missingBacklogFiles: string[] = [];
-  for (const file of paths.backlogFiles) {
-    try {
-      await accessFile(file);
-    } catch {
-      missingBacklogFiles.push(file);
-    }
-  }
-  return Object.freeze({ ...paths, missingBacklogFiles: Object.freeze(missingBacklogFiles) });
+  return paths;
 }
 
 export { validateInventory };

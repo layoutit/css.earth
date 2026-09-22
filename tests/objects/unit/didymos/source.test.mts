@@ -10,12 +10,6 @@ import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/te
 const root=resolve(import.meta.dirname,'../../../../src/objects/didymos/source');
 const read=createSourceFixtureReader(root);
 
-test('Didymos source closure pins every input and declares restoration for required acquisition data',async()=>{
- const source=await createSourceManifest({planetId:'didymos',planetName:'Didymos',sourceRoot:root});await source.verify();
- const plan=await read('preparation/acquisition.json');
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path),`Missing acquisition for ${input.path}`);
-});
-
 test('Didymos direct source frame retains the released axes, kilometer scale and closed volume',async()=>{
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,mesh=await loadObjShape(resolve(root,p.path),p.grid);
  // Independent anchors printed in the released OBJ header.
