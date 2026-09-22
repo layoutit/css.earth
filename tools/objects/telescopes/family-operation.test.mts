@@ -87,9 +87,3 @@ test('F09 offset operations run on a real Gaia DR3 CSV and write data, chart and
   const opaque=await executeFamilyOperation(path,{operationId:'astrometry-offset-preview',reference,rows:shown,figureBackground:'opaque'},resolve(work,'chart-opaque')),opaqueRecord=await readProductRecord(opaque.record);assert.equal((opaqueRecord?.parameters.arguments as any).figureBackground,'opaque');assert.notDeepEqual(await readFile(opaque.product),await readFile(preview.product));
   await assert.rejects(executeFamilyOperation(path,{operationId:'astrometry-offset-data',reference,figureBackground:'opaque'},resolve(work,'data-opaque')),/draws no figure/u);await assert.rejects(executeFamilyOperation(path,{operationId:'astrometry-offset-preview',reference,figureBackground:'white' as never},resolve(work,'bad-background')),/transparent or opaque/u);
 }finally{await rm(work,{recursive:true,force:true});}});
-
-test('the committed F09 fixture descriptor and chart parameters reproduce the documented offset chart inputs',async()=>{const work=await temporary();try{
-  const base=resolve(root,'tests/fixtures/telescope-families/f09-gaia-hd-189733'),params=JSON.parse(await readFile(resolve(base,'offset-chart.params.json'),'utf8'));assert.equal(params.figureBackground,'opaque');
-  const data=JSON.parse(await readFile((await executeFamilyOperation(resolve(base,'descriptor.json'),{operationId:'astrometry-offset-data',reference:params.reference,rows:params.rows},resolve(work,'data'))).product,'utf8')),faint=data.rows.find((row:any)=>row.id===params.rows[0]);
-  assert.ok(Math.hypot(faint.eastMas,faint.northMas)>950&&Math.hypot(faint.eastMas,faint.northMas)<975);assert.equal(faint.covarianceSource,'errors-and-correlation');
-}finally{await rm(work,{recursive:true,force:true});}});

@@ -27,14 +27,6 @@ Each row carries `exampleProven: true` and `proposalBaseline.status: "complete"`
 
 F09 also draws the relative astrometry chart used in companion and direct-imaging papers. `astrometry-offset-preview` takes a reference row ID and optional row IDs. It plots gnomonic offsets in mas with east on the left and draws 1σ, 2σ and 3σ ellipses for every row that states a position covariance or RA and Dec errors. Tables load from the Gaia archive column names (`source_id`, `ra`, `dec`, `ra_error`, `dec_error`, `ra_dec_corr`, `pmra`, `pmdec`, `parallax`, `parallax_error`, `ref_epoch`). The [HD 189733 Gaia DR3 fixture](../../tests/fixtures/telescope-families/f09-gaia-hd-189733/manifest.json) exercises it on real rows.
 
-![Offset chart of a faint Gaia DR3 source 0.96 arcsec from a brighter one, with long tilted 1σ, 2σ and 3σ ellipses on a white background](astrometry-offset-chart.png)
-
-The chart above is the closest pair in that fixture. The faint source has a 34 mas declination error correlated 0.97 with its RA error, so its ellipses are long and tilted. Most Gaia errors are far smaller than a pixel on an arcsecond-scale chart; radio and imaging tables are where ellipses usually show. It was made with:
-
-```bash
-telescope family-run tests/fixtures/telescope-families/f09-gaia-hd-189733/descriptor.json astrometry-offset-preview --params tests/fixtures/telescope-families/f09-gaia-hd-189733/offset-chart.params.json --out astrometry-offset-chart
-```
-
 Every figure is transparent by default. Set `"figureBackground": "opaque"` in the parameters of any family operation that draws a figure, or pass `--figure-background opaque` to `telescope export`, to fill the PNG and SVG with the figure's own background colour.
 
 Descriptor member paths are relative to each descriptor, so the examples contain no checkout-specific absolute paths. Runtime `output.product.json` receipts are deliberately not copied here; the manifest points at focused tests that reopen and verify those records.
