@@ -529,16 +529,7 @@ export function createWorldContextPlanner(plan: PreparedWorldContextGeometry, an
         }
         return admitted;
       })() : admitStableLabels(otherCandidates, labelBudget);
-      // Another star's planets are its whole system on screen, and one whose orbit lies inside the star's caption has no free
-      // slot to win. Each is named after every other candidate has chosen, on a budget of its own: it takes no slot from
-      // anything else, and it accepts sitting beside its star's caption rather than going unnamed.
-      const acceptedSet = new Set([...acceptedLandmarks, ...acceptedOthers].map(item => item.candidate));
-      const hostedPlanets = candidates.filter(candidate => !acceptedSet.has(candidate) &&
-        candidate.projected.entry.orbit !== null && candidate.projected.entry.orbit.centerBodyId !== plan.focus.id &&
-        systemFade.isSystemStar(candidate.projected.entry.orbit.centerBodyId) &&
-        (candidate.tier ?? 0) >= 3 && candidate.projected.nameable);
-      const acceptedSystemPlanets = hostedPlanets.flatMap(candidate => admitStableLabels([candidate], worldLabelBudget()));
-      const accepted = [...acceptedLandmarks, ...acceptedOthers, ...acceptedSystemPlanets];
+      const accepted = [...acceptedLandmarks, ...acceptedOthers];
       for (const item of projectedBodies) { item.entry.labelShown = false; item.entry.indicatorShown = false; }
       for (const { candidate, placement, rect } of accepted) {
         const { projected } = candidate;
