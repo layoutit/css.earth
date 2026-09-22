@@ -10,6 +10,8 @@ import { fitsArchiveInputs } from './fits/archive-inputs.mts';
 import { requireRecord, requireArray, requireString, requireFiniteNumber } from '../sources/source-values.mts';
 
 export const ORACLE_ROOT = resolve(import.meta.dirname, '../..');
+/** The compiled acquisition operations. Loaded here because `sbmt/` is its own package scope, which cannot see the root `#preparation` imports. */
+export const acquisitionOperations = () => import('#preparation/operations');
 export interface OracleSample { index: number; value: number }
 
 export async function readOracleFixture(name: string) {

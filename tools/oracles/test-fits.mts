@@ -58,7 +58,7 @@ if (missing.length && !args.includes('--restore')) throw new Error(
   `${missing.length} missing FITS test inputs. ` +
   'Run pnpm build:preparation, then pnpm test:fits --restore. For the offline checks only, use pnpm test:fits --unit.\n' + missing.map(i => i.path).join('\n'));
 if (missing.length) {
-  const { executeAcquisition, parseAcquisitionPlan, parseSourceManifest } = await import('../objects/dist/operations.js');
+  const { executeAcquisition, parseAcquisitionPlan, parseSourceManifest } = await import('#preparation/operations');
   for (const input of missing) {
     if (input.path.startsWith('.local/fits-reference/')) {
       const pin = (await fitsArchiveInputs()).find(pin => pin.path === input.path);

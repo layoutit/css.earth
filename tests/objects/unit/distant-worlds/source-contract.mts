@@ -2,7 +2,7 @@ import { sourceTest } from '../../source-test.mts';
 const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { fileURLToPath } from 'node:url';
-import { parseSourceManifest, verifySources } from '../../../../tools/objects/dist/operations.js';
+import { parseSourceManifest, verifySources } from '#preparation/operations';
 
 // Each destination remains independently discoverable by the generic object
 // test runner. Verify actual source bytes through the shared package contract.
