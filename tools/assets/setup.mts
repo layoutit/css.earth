@@ -18,7 +18,14 @@ export function readAllowMissingFlag(args: readonly string[] = []) {
 
 // Install already prepared files. Source acquisition and geometry authoring
 // remain separate; setup needs neither a browser nor the worldwide mirror.
-export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = 8,
+//
+// Reads are latency-bound: thousands of small files, each one round trip. At 8 a CI universe lane spent 163 of
+// its 172-second restore fetching 16,143 files at about 100 a second. Timed on 1,200 files, 8 took 33.9s, 32 took
+// 8.4s and 64 took 4.3s; on 3,000 files 256 and 512 returned every request with 200, no 429 and no retry. The
+// assets are served from a custom domain, which R2 does not rate-limit (only r2.dev is), so the limit is the
+// client, and past 256 the gain was inside the noise of one connection.
+export const RUNTIME_ASSET_CONCURRENCY = 256;
+export async function installRuntimeAssets(assets: readonly RuntimeAssetLocation[], { fetcher = fetch, concurrency = RUNTIME_ASSET_CONCURRENCY,
   allowMissing = false, onProgress = () => {} }: {fetcher?: typeof fetch; concurrency?: number; allowMissing?: boolean;
   onProgress?: (progress: InstallProgress) => void} = {}) {
   let next = 0, installed = 0, reused = 0, skipped = 0;
