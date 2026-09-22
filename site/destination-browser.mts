@@ -114,9 +114,26 @@ export function createDestinationBrowser({ documentTarget, onSelected, onReset, 
     panel.hidden = true;
     onReset();
   }, { signal: events.signal });
+  /** Opens a place by its catalogue id: a search result from the cross-body index, or a `?feature=city-<id>` link. */
+  async function selectById(id: string) {
+    if (destroyed || !provider) return;
+    pending ??= provider.load(events.signal).then(destinationCatalog).catch(error => { pending = null; throw error; });
+    catalog ??= await pending;
+    const place = catalog.places.find(candidate => String(candidate.id) === id);
+    if (!place) throw new Error(`City ${id} is not in the prepared catalogue.`);
+    await select(place);
+  }
   return Object.freeze({
-    bind(next: PreparedDestinationRuntime | null | undefined) { if (destroyed) return; provider = next ?? null; if (query) void search(query); },
+    /** Binds the mounted body's places; the Back label names that body, which differs from the page's first body after a flight. */
+    bind(next: PreparedDestinationRuntime | null | undefined, bodyName?: string) {
+      if (destroyed) return;
+      provider = next ?? null;
+      if (provider && bodyName) requiredElement(panel, ".planet-destination-back").textContent = `← Back to ${bodyName}`;
+      if (query) void search(query);
+    },
+    bound: () => provider !== null,
     search,
+    selectById,
     setOpen(open: boolean) { if (destroyed) return; panel.hidden = open || !selection; },
     destroy() { if (destroyed) return; destroyed = true; revision++; selection = null; events.abort(); clearRows(); panel.hidden = true; },
   });

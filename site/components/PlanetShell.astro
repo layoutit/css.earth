@@ -279,7 +279,8 @@ const searchCategories = [
             </li>)}
           </ul>
         </PlanetAccordion>
-        {destinations && <section class="planet-destination-results" aria-label="Cities" hidden>
+        {/* Every page carries the city results and panel: a visit that starts elsewhere can fly to Earth. */}
+        <section class="planet-destination-results" aria-label="Cities" hidden>
           <p class="planet-destination-hint" role="status"></p>
           <ul class="planet-destination-list">
             {Array.from({ length: 8 }, () => <li hidden>
@@ -289,7 +290,7 @@ const searchCategories = [
               </button>
             </li>)}
           </ul>
-        </section>}
+        </section>
       </PlanetObjectResults>
     </nav>}
     <div class="planet-selected-content">
@@ -382,12 +383,12 @@ const searchCategories = [
           </div>
         </div>
       </PlanetCard></div>}
-    {destinations && <section class="planet-destination-panel" aria-label="Selected city" hidden>
+    <section class="planet-destination-panel" aria-label="Selected city" hidden>
       <button class="planet-destination-back" type="button">← Back to {activeObject?.name}</button>
       <h2 class="planet-destination-name"></h2>
       <p class="planet-destination-context"></p>
       <p class="planet-destination-status" role="status"></p>
-    </section>}
+    </section>
     <PlanetInformationPanel {...Astro.props} />
     {!navigation && <template data-object-card-preview>
       <section class="planet-selected-panel" data-card-preview>

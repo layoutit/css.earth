@@ -29,3 +29,17 @@ test('keystrokes queued before a frame run one city scan, for the newest text', 
   const shown = [...document.querySelectorAll('li')].filter(row => !row.hidden).map(row => row.querySelector('.planet-destination-result-name')?.textContent);
   assert.deepEqual(shown, ['Paris']);
 });
+
+test('a city opens by its catalogue id, and the Back label names the bound body', async () => {
+  const { document } = parseHTML(`<body><section class="planet-destination-results" hidden><p class="planet-destination-hint"></p><ul class="planet-destination-list"></ul></section>
+    <section class="planet-destination-panel" hidden><button class="planet-destination-back">← Back to Mars</button><h2 class="planet-destination-name"></h2><p class="planet-destination-context"></p><p class="planet-destination-status"></p></section></body>`);
+  const browser = createDestinationBrowser({ documentTarget: document, onSelected() {}, onReset() {}, onResults() {} })!;
+  const selected: unknown[] = [];
+  const rosario = { id: 1691490, name: 'Rosario', names: ['rosario'], context: 'Calabarzon, Philippines', searchContext: 'calabarzon philippines ph', coverage: 'overview' };
+  browser.bind({ load: async () => ({ places: [rosario] }), select: async place => { selected.push(place); return { status: 'Earth overview at this location.' }; }, reset() {} }, 'Earth');
+  await browser.selectById('1691490');
+  assert.deepEqual(selected, [rosario]);
+  assert.equal(document.querySelector('.planet-destination-name')?.textContent, 'Rosario');
+  assert.equal(document.querySelector('.planet-destination-back')?.textContent, '← Back to Earth');
+  await assert.rejects(browser.selectById('1'), /not in the prepared catalogue/);
+});

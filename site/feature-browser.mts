@@ -3,14 +3,18 @@ import type { SurfaceFeatureNavigationRuntime } from '../src/renderers/css/runti
 import { requiredElement } from './browser-types.mts';
 import { presentFeatureResults } from './search-results-presentation.mts';
 
-import { parseFeaturePin, parseFeatureIndex, matchFeatures, featureResult } from './feature-search.mts';
+import { parseFeaturePin, parseFeatureIndex, matchFeatures, featureResult, PLACE_FEATURE_PREFIX } from './feature-search.mts';
 import type { IndexedFeature, FeatureIndex } from './feature-search.mts';
 export type { IndexedFeature } from './feature-search.mts';
 
 /** Retained search rows over every body's prepared named features. Selecting a feature of the
  * mounted body asks its runtime to fly there; another body's feature navigates first, carrying
  * the feature in the URL so the router selects it once that body mounts. */
-export function createFeatureBrowser({ documentTarget, objectId, onSelected, onResults }: { documentTarget: Document; objectId: string; onSelected(feature: IndexedFeature): void; onResults(count: number): void }) {
+export function createFeatureBrowser({ documentTarget, objectId, onSelected, onResults, ownPlacesSearched = () => false, selectOwnPlace }: { documentTarget: Document; objectId: string; onSelected(feature: IndexedFeature): void; onResults(count: number): void;
+  /** The current body's own catalogue searches its places, so the index leaves them out. */
+  ownPlacesSearched?(): boolean;
+  /** Opens a place of the current body (its id without the `city-` prefix). */
+  selectOwnPlace?(id: string): Promise<unknown> }) {
   const candidate = documentTarget.querySelector<HTMLElement>('.planet-feature-results');
   if (!candidate) return null;
   const root = candidate;
@@ -48,7 +52,7 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
       // frame, by which time every queued keystroke has arrived, and search only the newest text.
       await nextFrame(documentTarget);
       if (destroyed || request !== revision) return;
-      matches = matchFeatures(index, value, currentObjectId(), buttons.length);
+      matches = matchFeatures(index, value, currentObjectId(), buttons.length, { ownPlaces: !ownPlacesSearched() });
       for (const [row, button] of buttons.entries()) {
         const feature = matches[row];
         button.parentElement!.hidden = !feature;
@@ -73,7 +77,8 @@ export function createFeatureBrowser({ documentTarget, objectId, onSelected, onR
     for (const button of buttons) button.ariaDisabled = 'true';
     try {
       onSelected(feature);
-      if (feature.objectId === currentObjectId() && provider) {
+      if (feature.objectId === currentObjectId() && feature.id.startsWith(PLACE_FEATURE_PREFIX) && selectOwnPlace) await selectOwnPlace(feature.id.slice(PLACE_FEATURE_PREFIX.length));
+      else if (feature.objectId === currentObjectId() && provider) {
         const lensIds = index?.objects.find(object => object.id === feature.objectId)?.lensIds;
         if (lensIds) {
           const lenses = [...documentTarget.querySelectorAll<HTMLButtonElement>('button[name="dataset"]')];
