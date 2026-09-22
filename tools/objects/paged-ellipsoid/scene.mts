@@ -27,7 +27,7 @@ import {
 } from "../../../src/platform/projective-surface-raster.mts";
 
 
-export function preparePagedEllipsoidScene({ config: profile, interiorSource, citySource, noise, atmosphereModel, atmosphere, raster, attitude }: {attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; citySource: {presentation: {poolSize: number}} | null; noise: {poolSize: number} | null; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
+export function preparePagedEllipsoidScene({ config: profile, interiorSource, atmosphereModel, atmosphere, raster, attitude }: {attitude: EllipsoidAttitude; config: PagedSceneProfile; interiorSource: InteriorSource; atmosphereModel: AtmosphereModel; atmosphere: AtmospherePreparation; raster: ReturnType<typeof createPagedSurfaceRaster>}) {
 const { BODY_LATITUDE_SEGMENTS, BODY_LONGITUDE_SEGMENTS, EQUATORIAL_RADIUS, TILE_SIZE, SEAM_BLEED, PLANET_SEAM_BLEED, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE, SURFACE_OVERLAP, POLAR_CAP_BAND_SPAN, POLAR_SURFACE_OVERLAP, POLAR_INNER_OVERLAP, POLAR_INNER_INSET, MESH_ROTATION_Z, CAMERA_ZOOM, CAMERA_MINIMUM_CONTROL_PITCH_DEGREES, CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES, CAMERA_MILLISECONDS_PER_CONTROL_DEGREE, INTERIOR_LATITUDE_SEGMENTS, INTERIOR_LONGITUDE_SEGMENTS } = profile.geometry;
 // The default pose is derived (src/platform/default-camera.mts): the Sun to the left of an ecliptic-up frame at the lit pitch.
 const CAMERA_SCENE_PITCH_DEGREES = LIT_DEFAULT_VIEW.initialScenePitchDegrees;
@@ -38,8 +38,6 @@ const ATMOSPHERE_MODEL = atmosphereModel;
 const POLAR_RADIUS = EQUATORIAL_RADIUS * profile.polarRadiusKm / profile.equatorialRadiusKm;
 const SURFACE_RASTER_OVERSCAN = 64 * SURFACE_OVERLAP;
 const CAMERA_MAXIMUM_ZOOM = profile.camera.maximumZoom;
-const cityPageLeafCount = citySource?.presentation.poolSize ?? 0;
-const noisePageLeafCount = noise?.poolSize ?? 0;
 const CAMERA_DURATION_MILLISECONDS = CAMERA_MAXIMUM_CONTROL_PITCH_DEGREES * CAMERA_MILLISECONDS_PER_CONTROL_DEGREE;
 const INTERIOR_CUTAWAY = { ...profile.geometry.interiorCutaway, qualification: interiorSource.qualification };
 const PLAN_OPTIONS = Object.freeze({
@@ -197,10 +195,8 @@ const scene = Object.freeze({
     lightingLeafCount: 1,
     atmosphereLeafCount: 1,
     interiorLeafCount: interior.leafCount,
-    cityPageLeafCount,
-    noisePageLeafCount,
-    retainedLeafCount: surfaceLeafCount + 2 + cityPageLeafCount + noisePageLeafCount,
-    maximumRetainedLeafCount: surfaceLeafCount + 2 + interior.leafCount + cityPageLeafCount + noisePageLeafCount,
+    retainedLeafCount: surfaceLeafCount + 2,
+    maximumRetainedLeafCount: surfaceLeafCount + 2 + interior.leafCount,
     runtimeGeometryPreparation: false,
     runtimeRasterization: false,
   }),

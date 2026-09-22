@@ -7,7 +7,7 @@ import {readJsonSource, requireFiniteNumber, requireRecord} from '../../sources/
 import {validateSourceManifest} from '../../../src/platform/source-manifest.mts';
 import {parsePagedProfile, parsePagedLensBindings, isPagedEllipsoidRecipe} from './profile-source.mts';
 import {parseInteriorSource} from './source-contract.mts';
-import {parseCitySource, parseBodyAttitude} from '../geographic-pages/source-records.mts';
+import {parseBodyAttitude} from './geographic/source-records.mts';
 export {isPagedEllipsoidRecipe} from './profile-source.mts';
 export interface PagedEllipsoidContext {
   objectDirectory: string; publicDirectory: string; outputDirectory: string; packDirectory?: string;
@@ -29,10 +29,8 @@ import { createPagedSurfaceRaster } from './surface-raster.mts';
 import { preparePagedEllipsoidScene } from './scene.mts';
 import { preparePagedEllipsoidAssets } from './assets.mts';
 import { preparePagedEllipsoidPresentation } from './presentation.mts';
-import { prepareLocationPoint, prepareLocationCamera } from '../geographic-pages/prepare-location.mts';
-import { prepareVectorOverlay } from '../geographic-pages/vector-overlay.mts';
-import { preparePlaces } from '../geographic-pages/places.mts';
-import { preparePinnedGlobalWmts } from '../geographic-pages/pinned-hierarchy.mts';
+import { prepareLocationPoint, prepareLocationCamera } from './geographic/prepare-location.mts';
+import { preparePlaces } from './geographic/places.mts';
 import { withFocusedCamera } from '../focused-camera.mts';
 
 import { prepareTextureLevels } from './texture-levels.mts';
@@ -69,9 +67,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const sun = preparePlanetDirectionalSun();
   const sky = preparePlanetCubicSky({ objectId: descriptor.id, cameraContract: CUBIC_SKY_CAMERA_PRESENTATION_STANDARD });
   const atmosphere = createAtmospherePreparation({ config, sourceDirectory, sourceManifest, sun }), atmosphereModel = await atmosphere.readAtmosphereModel(), raster = createPagedSurfaceRaster(config);
-  const paging = descriptor.recipe.paging, destinations = descriptor.recipe.destinations;
-  if (Boolean(paging) !== Boolean(destinations)) throw new TypeError('Geographic paging and destinations must be declared together.');
-  const citySource = paging ? parseCitySource(await json(resolve(sourceDirectory, config.cityPath))) : null;
+  const destinations = descriptor.recipe.destinations;
   // The scene needs the declared retained pool capacity, not a previously prepared overlay.
   const interiorSource = parseInteriorSource(await json(resolve(sourceDirectory, config.interiorPath)));
   requireFiniteNumber(interiorSource[config.interiorRadiusKey], config.interiorRadiusKey);
@@ -82,7 +78,7 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const surfaceMap = typeof features?.surfaceMap === 'string' ? await json(resolve(sourceDirectory, features.surfaceMap)) as { mapLeftEdgeLongitudeDeg?: unknown } : null;
   const attitude = prepareEllipsoidAttitude(descriptor.id, { meshRotationZDegrees: config.geometry.MESH_ROTATION_Z,
     mapLeftEdgeLongitudeDeg: surfaceMap ? requireFiniteNumber(surfaceMap.mapLeftEdgeLongitudeDeg, 'surface map left edge') : 0 });
-  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, citySource, noise: paging ? { poolSize: config.geographic.noise.poolSize } : null, atmosphereModel, atmosphere, raster, attitude });
+  const { scene, surfaceRasterPlan } = preparePagedEllipsoidScene({ config, interiorSource, atmosphereModel, atmosphere, raster, attitude });
   if (publishedPlan) for (const [name, value] of Object.entries({ scene, 'surface-raster-plan': surfaceRasterPlan })) {
     // World navigation adds the scene's worldFrame after this lane; the lane's own plan is everything else.
     const { worldFrame: _worldFrame, ...previous } = publishedPlan[name as 'scene'];
@@ -91,32 +87,14 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   const rasterAssets = presentationOnly ? await published('raster-assets') as unknown as Awaited<ReturnType<typeof preparePagedEllipsoidAssets>>
     : await preparePagedEllipsoidAssets({ config, sourceDirectory, publicDirectory, surfaceRasterPlan, atmosphere, atmosphereModel, raster, attitude });
   const context = { sourceDirectory, publicDirectory, config, scene };
-  let noise: Awaited<ReturnType<typeof prepareVectorOverlay>> | undefined;
-  let catalog: Awaited<ReturnType<typeof preparePlaces>> | undefined;
-  let city: NonNullable<Awaited<ReturnType<typeof preparePinnedGlobalWmts>>['plan']> | undefined;
-  let report: Awaited<ReturnType<typeof preparePinnedGlobalWmts>>['report'] | undefined;
-  // Geographic preparation is an authored capability, not a requirement of a globe.
-  if (paging) {
-    if (!destinations) throw new TypeError('Geographic paging requires destinations.');
-    noise = presentationOnly ? await published('noise') as unknown as NonNullable<typeof noise> : await prepareVectorOverlay(context);
-    catalog = presentationOnly ? await published('places') as unknown as NonNullable<typeof catalog> : await preparePlaces(context);
-    const geographic = presentationOnly ? { plan: await published('pages') as unknown as NonNullable<typeof city>, report: await published('page-preparation') as unknown as NonNullable<typeof report> } : await preparePinnedGlobalWmts({ sourceRoot: sourceDirectory, packDirectory, scene, namespace: descriptor.id, displayName: config.displayName, assetPath: config.publicBase, pages: config.geographic.pages });
-    if (!geographic.plan) throw new TypeError('Geographic preparation did not produce a page plan.');
-    city = geographic.plan; report = geographic.report;
-    if (paging.surface !== 'body' || paging.maxResidentPages !== city.poolSize ||
-        paging.maxResidentBytes !== city.maximumDecodedBytes || paging.maxConcurrentLoads !== city.maximumConcurrentLoads)
-      throw new TypeError('Authored page residency differs from the prepared hierarchy.');
-    if (catalog.count > destinations.maxEntries)
-      throw new TypeError('Prepared places exceed the authored destination capability.');
-  }
-  const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, cityZoom, overlayId, focus, ...lens }) => {
-    if (cityZoom && !citySource) throw new TypeError(`City lens ${lens.id} requires a city source.`);
-    if (overlayId === 'noise' && !noise) throw new TypeError(`Noise lens ${lens.id} requires its prepared overlay.`);
+  // The city catalogue is an authored capability (a search over GeoNames places on the globe), not a requirement of a globe.
+  // It reads only the scene geometry, so a presentation-only run rebuilds it as well.
+  const catalog = destinations ? await preparePlaces(context) : undefined;
+  if (catalog && destinations && catalog.count > destinations.maxEntries) throw new TypeError('Prepared places exceed the authored destination capability.');
+  const lenses = { ...bindingSource, controls: bindingSource.controls.map(({ surfacePagePrefix, focus, ...lens }) => {
     return { ...lens,
     ...(surfacePagePrefix ? { surfaceUrls: raster.surfacePageUrls(surfacePagePrefix, surfaceRasterPlan.pages.length) } : {}),
     ...(focus ? { camera: { ...prepareLocationCamera(scene, prepareLocationPoint(scene, focus.longitude, focus.latitude), focus.zoom, { body: parseBodyAttitude(scene[config.sceneBodyKey]), camera: config.camera, northUp: focus.northUp }), ...(focus.transition ? { transition: focus.transition } : {}) } } : {}),
-    ...(cityZoom && citySource ? { maximumZoom: citySource.presentation.maximumZoom } : {}),
-    ...(overlayId === 'noise' && noise ? { camera: noise.camera, legend: noise.legend, qualification: noise.qualification } : {}),
   }; }) };
   const preparedContent = await prepareContent({ sourceDirectory, publicDirectory, outputDirectory, config: { contentPath: 'content/object.json' } });
   const content = { ...preparedContent.content, ...(catalog ? { destinations: { searchLabel: config.destinations.searchLabel, description: `${catalog.count.toLocaleString('en')}${config.destinations.descriptionSuffix}` } } : {}) };
@@ -126,9 +104,9 @@ export async function preparePagedEllipsoidObject({ objectDirectory, publicDirec
   if (textureLevels) await write(outputDirectory, 'texture-levels', textureLevels);
   if (publishedPlan && canonical(publishedPlan.lenses) !== canonical(lenses)) throw new Error(`${descriptor.id}: lenses differ from the published preparation; run the full preparation.`);
   const controls = requireObjectControls(preparedContent.controls, descriptor.id);
-  const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, city, noise, textureLevels, controls });
+  const rawDefinition = await preparePagedEllipsoidPresentation({ config, plan: scene, lenses, sky, sun, catalog, textureLevels, controls });
   const definition = withFocusedCamera(rawDefinition, sky);
-  for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(paging ? { noise, places: catalog, pages: city, 'page-preparation': report } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
-  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true, geographicPages: Boolean(paging) } });
+  for (const [name, value] of Object.entries({ scene, 'raster-assets': rasterAssets, 'surface-raster-plan': surfaceRasterPlan, sky, sun, ...(catalog ? { places: catalog } : {}), lenses, content, runtime: definition })) await write(outputDirectory, name, value);
+  await write(outputDirectory, 'authored-preparation', { schema: 'cssearth-authored-preparation@1', id: descriptor.id, sources: entries.map(entry => entry.reference), lanes: { raster: true, celestial: true, geometry: true, content: true, presentation: true} });
   return { descriptor, sources, raster: rasterAssets, celestial: { sky, sun }, scene, definition, content };
 }

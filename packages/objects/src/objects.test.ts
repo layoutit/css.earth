@@ -24,7 +24,6 @@ const recipe = () => ({
   cutaway: { source: 'layers', surface: 'body', lens: 'normal' },
   atmosphere: { source: 'layers', frameBank: 'lighting' }, rings: { source: 'layers' }, emission: { source: 'layers' },
   motion: [{ id: 'spin', source: 'layers', target: 'body', durationMs: 89000 }, { id: 'ring-drift', source: 'layers', target: 'rings', durationMs: 42000 }],
-  paging: { source: 'raster', surface: 'body', maxResidentPages: 512, maxResidentBytes: 134217728, maxConcurrentLoads: 4 },
   destinations: { source: 'world', maxEntries: 34135 },
   worldFrame: { referenceFrame: 'sun-icrf', epochJdTt: 2461286.5, originM: [1, 2, 3], presentationToReference: [1, 0, 0, 0, -1, 0, 0, 0, 1], orbitUpReference: [0, 1, 0], metersPerUnit: 24402.58, bodyRadiusM: 6051800 },
 });
@@ -34,7 +33,6 @@ describe('object descriptor boundary', () => {
     const parsed = parseAuthoredRecipe(recipe());
     expect(parsed.surfaces[0]?.lenses[0]?.material).toBe('surface-lit');
     expect(parsed.frameBanks?.[0]).toMatchObject({ frames: 128, rows: 32, residentRows: 3 });
-    expect(parsed.paging).toMatchObject({ maxResidentPages: 512, maxResidentBytes: 134217728, maxConcurrentLoads: 4 });
     expect(parsed.destinations?.maxEntries).toBe(34135);
     const object = parseAuthoredObjectDescriptor({ ...descriptor(), properties: { recipe: recipe() } });
     expect(object.recipe.worldFrame?.referenceFrame).toBe('sun-icrf');
@@ -45,7 +43,6 @@ describe('object descriptor boundary', () => {
     ['unsafe source path', (value: ReturnType<typeof recipe>) => { value.sources[0]!.path = '../raster.json'; }],
     ['invalid frame budget', (value: ReturnType<typeof recipe>) => { value.frameBanks[0]!.residentRows = 33; }],
     ['unknown layer motion', (value: ReturnType<typeof recipe>) => { value.motion[1]!.target = 'atmosphere'; Reflect.set(value, 'atmosphere', undefined); }],
-    ['zero page budget', (value: ReturnType<typeof recipe>) => { value.paging.maxResidentPages = 0; }],
   ])('rejects %s rather than passing malformed capabilities to a baker', (_name, mutate) => {
     const value = recipe();
     mutate(value);

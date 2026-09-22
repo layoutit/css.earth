@@ -1,5 +1,5 @@
 import { createRetainedGeometrySnapshot } from '../rendering/retained-leaf-pool.js';
-import type { ObjectRuntimeDefinition, ObjectRuntimeView, PageLayerRuntime } from "./object-runtime-types.js";
+import type { ObjectRuntimeDefinition, ObjectRuntimeView } from "./object-runtime-types.js";
 import type { SurfaceFeatureLayerRuntime } from "../labels/surface-feature-types.js";
 import type { ObjectSelection } from "./object-contract.js";
 import type { SceneLifetime } from "@cssearth/engine";
@@ -15,7 +15,7 @@ export interface ObjectDiagnosticsOptions {
   selection: ReturnType<typeof createObjectSelectionRuntime>; controls: ReturnType<typeof createObjectControlBinding>;
   resources: ReturnType<typeof createPreparedResidency>; playback: ReturnType<typeof createPreparedPlayback>; lifetime: SceneLifetime;
   context: { density: number; own(cleanup: () => void): void }; initialSelection: ObjectSelection;
-  startupDecodedAssets: number; pageLayers: ReadonlyMap<string, PageLayerRuntime>; surfaceFeatures?: SurfaceFeatureLayerRuntime | null; getCurrentView(): ObjectRuntimeView | null;
+  startupDecodedAssets: number; surfaceFeatures?: SurfaceFeatureLayerRuntime | null; getCurrentView(): ObjectRuntimeView | null;
 }
 
 export type ObjectRuntimeDiagnostics = ReturnType<typeof publishObjectDiagnostics>;
@@ -27,7 +27,7 @@ export function readObjectDiagnostics(target: Window, id: string): ObjectRuntime
   return diagnostics && Reflect.get(target, `__${id}`) === diagnostics ? diagnostics : undefined;
 }
 
-export function publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures = null, getCurrentView }: ObjectDiagnosticsOptions) {
+export function publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, surfaceFeatures = null, getCurrentView }: ObjectDiagnosticsOptions) {
       const target = stage.ownerDocument.defaultView, key = `__${definition.id}`;
       if (!target) throw new Error("Object diagnostics require the mounted window.");
       const nodes = Object.freeze([...stage.querySelectorAll("*")]);
@@ -71,7 +71,6 @@ export function publishObjectDiagnostics({ stage, definition, mounted, orbit, se
         runtime: Object.freeze({ geometry: () => (geometry ??= createRetainedGeometrySnapshot(nodes))(), lifetime: lifetime.stats, resources: resources.stats, playback: playback.stats,
           selection: selection.state, controls: controls.stats, view: getCurrentView,
           presentation: () => Object.freeze({ ...observe().presentation }),
-          pages: () => Object.freeze(Object.fromEntries([...pageLayers].map(([id, layer]) => [id, layer.stats()]))),
           surfaceFeatures: () => surfaceFeatures?.stats() ?? null }),
         stableNodes: nodes,
         assertStableDomIdentity() {

@@ -1,5 +1,5 @@
 /// <reference types="vite/client" />
-import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView, PageLayerRuntime } from "./object-runtime-types.js";
+import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeView } from "./object-runtime-types.js";
 import type { ObjectSelectionState } from "../rendering/object-selection-runtime.js";
 import type { OrbitPublication, RetainedCubicSkyOrbit } from "../navigation/object-orbit.js";
 import type { SharedView } from "../navigation/view-url.js";
@@ -63,7 +63,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     delete stage.dataset.preparedDataset;
     delete stage.dataset.preparedSettings;
     if (definition.destinations && !capabilities.createDestinations) throw new TypeError("Prepared destinations require an injected runtime capability.");
-    if (definition.pageLayers?.length && !capabilities.mountPages) throw new TypeError("Prepared pages require an injected runtime capability.");
     if (definition.features && !capabilities.mountSurfaceFeatures) throw new TypeError("Prepared surface features require an injected runtime capability.");
     const lifetime = environment.createLifetime();
     let readyPublished = false, settled = false;
@@ -72,7 +71,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     ready.catch(() => {});
     let mounted: ReturnType<typeof mountPreparedPresentation> | null = null, orbit: RetainedCubicSkyOrbit | null = null;
     let currentView: ObjectRuntimeView | null = null, reference: OrbitPublication | null = null, previousPublication: OrbitPublication | null = null;
-    const pageLayers = new Map<string, PageLayerRuntime>();
     let surfaceFeatures: SurfaceFeatureLayerRuntime | null = null;
     let allowed = false, navigatedLens: string | null = null, maximumZoom = definition.camera.maximumZoom;
     const cameraPlan = Object.freeze({ ...definition.camera, get maximumZoom() { return maximumZoom; } });
@@ -234,7 +232,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     }
     function syncPagePlayback() {
       const running = allowed && (selection?.state().committed?.speed ?? initialSelection.speed ?? 1) !== 0;
-      for (const layer of pageLayers.values()) layer.setPlaying(running);
       surfaceFeatures?.setPlaying(running);
     }
     function setAllowed(value: boolean) { allowed = value; playback.setAllowed(value); syncPagePlayback(); }
@@ -284,7 +281,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       currentView = Object.freeze({ ...publication, reference, previous: previousPublication, revision: ++revision });
       previousPublication = publication;
       selection?.setView(currentView);
-      for (const layer of pageLayers.values()) layer.publish(currentView);
       surfaceFeatures?.publish(currentView);
       if (worldFrame && publication.focal !== undefined && publication.principalOffset &&
           publication.principalOffset.length === 2) {
@@ -326,13 +322,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (viewport && cameraPlan.projection) viewport.read(cameraPlan.projection.cssPerspective);
       mounted = mountPreparedPresentation(stage, context, definition, preparedTree, initialProjection, progressiveActivation);
       if (lifetime.disposed) return;
-      for (const layer of mounted.pageLayers ?? []) {
-        if (!capabilities.mountPages) throw new TypeError("Prepared pages require an injected runtime capability.");
-        const pages = capabilities.mountPages({ ...layer, stage, scene: mounted.sceneElement, camera: mounted.cameraElement,
-          own: context.own, onError: fatal });
-        pageLayers.set(layer.id, pages);
-        pages.setLens({ id: initialSelection.lensId });
-      }
       syncPagePlayback();
       // Presentation owns its roots immediately during construction, including
       // partial construction failures. The application-owned universe draws the
@@ -351,7 +340,6 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       selection = environment.createSelection({ definition, presentation: mounted, residency: resources, lifetime, deferTextureRefinement, initialLens, initialSettings,
         onCommit: next => {
           playback.setSelection(next);
-          for (const layer of pageLayers.values()) { layer.setLens({ id: next.lensId }); layer.setPlaying(allowed && (next.speed ?? 1) !== 0); }
           surfaceFeatures?.setLens({ id: next.lensId }); surfaceFeatures?.setPlaying(allowed && (next.speed ?? 1) !== 0);
         }, onFatalError: fatal,
         onChange: state => publishSelection(state),
@@ -404,7 +392,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       if (lifetime.disposed) return;
       controls.setReady();
       readyPublished = true;
-      if ((import.meta.env?.PROD !== true || import.meta.env?.MODE === 'performance') && diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, pageLayers, surfaceFeatures, getCurrentView: () => currentView });
+      if ((import.meta.env?.PROD !== true || import.meta.env?.MODE === 'performance') && diagnostics) publishObjectDiagnostics({ stage, definition, mounted, orbit, selection, controls, resources, playback, lifetime, context, initialSelection, startupDecodedAssets, surfaceFeatures, getCurrentView: () => currentView });
       settled = true;
       resolveReady();
       // First paint owns the small prepared bank. Refinement uses the same

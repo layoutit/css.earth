@@ -1,4 +1,4 @@
-import {shape,number} from "../../../../tools/objects/geographic-pages/source-records.mts";
+import {shape,number} from "../../../../tools/objects/paged-ellipsoid/geographic/source-records.mts";
 import {required} from "../../../../tools/contract/test-values.mts";
 import {parseInteriorSource} from "../../../../tools/objects/paged-ellipsoid/source-contract.mts";
 import assert from "node:assert/strict";

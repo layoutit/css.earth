@@ -1,9 +1,0 @@
-{
-  "schema": "cssearth-preparation-inputs@1",
-  "fileSets": [
-    {
-      "manifest": "src/objects/earth/source/city/wmts-release.json",
-      "directory": ".local/wmts-global"
-    }
-  ]
-}
