@@ -77,7 +77,7 @@ export function parseSteps(value: unknown): Step[] {
 const PROBE_EXPRESSION = `(() => {
   const app = window.__cssEarth, read = key => { try { return app ? app[key] : undefined; } catch (error) { return 'unreadable'; } };
   const error = read('error');
-  return { path: location.pathname, ready: read('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
+  return { path: location.pathname, ready: read('ready') ?? document.body.classList.contains('ready'), activeObjectId: read('activeObjectId'), selectedObjectId: read('selectedObjectId'),
     overview: read('overview'), mountedObjectCount: read('mountedObjectCount'), lifecycle: read('lifecycle'),
     error: error ? String(error.message ?? error) : null, elements: document.getElementsByTagName('*').length };
 })()`;
@@ -201,10 +201,12 @@ function inspector(socketUrl: string) {
   return { ready, send, listen: (listener: (source: string, message: Message) => void) => listeners.push(listener), close: () => socket.close() };
 }
 
-/** Waits until the page has loaded and the app reports its body ready (window.__cssEarth.ready, as the other capture tools
- * wait for) or failed. Evaluations during the navigation itself can fail; they count as not ready. */
+/** Waits until the page has loaded and the app reports itself ready or failed. The shell marks its own body, which is
+ * what the site's other checks read; the diagnostics hook is only present in builds that publish it. Evaluations
+ * during the navigation itself can fail; they count as not ready. */
 async function waitForApp(session: ReturnType<typeof inspector>, timeoutMs = 120_000): Promise<void> {
-  const expression = "document.readyState === 'complete' && Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error))";
+  const expression = "document.readyState === 'complete' && (document.body.classList.contains('ready') || " +
+    "document.body.classList.contains('error') || Boolean(window.__cssEarth && (window.__cssEarth.ready || window.__cssEarth.error)))";
   const deadline = Date.now() + timeoutMs;
   while (Date.now() < deadline) {
     const reply = await session.send('Runtime.evaluate', { expression, returnByValue: true }).catch(() => null);
