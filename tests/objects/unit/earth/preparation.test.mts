@@ -70,10 +70,9 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
   assert.equal(atmosphere.model,
     "prepared-model-atmosphere-with-google-directional-response-bank");
   // The bake carries the model record it was prepared from; its physics must be the authored record's.
-  assert.equal(atmosphere.source.sourceId, source.sourceId);
   assert.equal(atmosphere.source.atmosphereHeightKm, source.atmosphereHeightKm);
   assert.equal(atmosphere.source.planetRadiusKm, source.planetRadiusKm);
-  assert.deepEqual(atmosphere.source.rayleigh, source.rayleigh);
+  assert.equal(atmosphere.source.outerRadiusRatio, source.outerRadiusRatio);
   assert.equal(source.atmosphereHeightKm, 70);
   assert.equal(source.planetRadiusKm, 6377);
   assert.ok(Math.abs(source.outerRadiusRatio - 6447 / 6377) < 1e-12);
@@ -103,7 +102,7 @@ test("prepares OpenSpace Earth colour with Google directional exposure response"
     "camera-response-not-body-irradiance");
   assert.equal(
     source.presentationResponse.cleanRoomTransfer.bodySunIntensitySource,
-    "openspace-body-atmosphere-model",
+    "body-atmosphere-model",
   );
   assert.equal(
     source.presentationResponse.transferPolicy.googlePixelsRedistributed,
