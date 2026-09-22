@@ -170,9 +170,6 @@ jobs:
         # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
         # stay blocking in `Contract lint` (physical frame receipts and document pins).
         run: node --test tools/assets/restore-source-inputs.test.mts
-      - name: Check authored object directory layout
-        if: ${{ !cancelled() }}
-        run: node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
       - name: Reconcile the source catalogue, facility records and provenance receipts
         if: ${{ !cancelled() }}
         # Moved off the `Universe / sources` gate lane. These assert that every catalogue row, facility record

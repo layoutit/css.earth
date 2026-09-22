@@ -43,7 +43,7 @@ site/pages/[id].astro           one shared route for all body ids
 ```
 
 Use the current authored branch of `tools/contract/object-package-contract.mts` for
-required files and `tests/objects/source-closure.test.mts` for source ownership.
+required files; the source manifest's coverage check owns source ownership.
 The latter requires data-only body packages. Acquisition/preparation code lives
 in shared `tools/objects/` families; runtime and presentation behavior live in
 the shared renderer and shell. Do not copy private `runtime/`, `site/` or
