@@ -24,6 +24,9 @@ export interface DiscoveryRequest {
   /** Archive instrument name (ObsCore and EPN-TAP `instrument_name`), matched exactly by the service. */
   readonly instrument?: string;
   readonly region?: import('./contracts.mts').IcrsCircle;
+  /** A circle to search by footprint only, never a cutout (`region` is the cutout). A SIMBAD target supplies SIMBAD's
+   * position and position error here. */
+  readonly footprint?: import('./contracts.mts').IcrsCircle;
   /** A target outside the application catalogue, named and placed by SIMBAD (sky-target.mts). */
   readonly skyTarget?: import('../sky-target.mts').SkyTarget;
   readonly spectralFrame?: 'barycentric';
@@ -116,8 +119,8 @@ const regionClause = (region: IcrsCircle): string => {
 /** The region a snapshot's query selected by, if any: only ObsCore queries carry the footprint clause. */
 function regionQueried(snapshot: DiscoverySnapshot, profile: ServiceProfile): IcrsCircle | undefined {
   const request = snapshot.request;
-  if (profile.model !== 'obscore-1.1' || request === null || typeof request !== 'object' || !('region' in request)) return undefined;
-  const raw: unknown = request.region;
+  if (profile.model !== 'obscore-1.1' || request === null || typeof request !== 'object') return undefined;
+  const raw: unknown = 'region' in request && request.region !== undefined ? request.region : 'footprint' in request ? request.footprint : undefined;
   if (raw === undefined || raw === null) return undefined;
   // A snapshot saved before region queries existed carries the region in its request but not in its query: none of its rows
   // were selected by footprint, so none is in the field.
@@ -130,12 +133,15 @@ export function fieldAssociation(association: TargetAssociation, rawName: Json |
   const name = typeof rawName === 'string' && rawName.trim() ? `"${rawName}"` : 'no target';
   return { status: 'in-field', target: association.target, reason: `The archive names ${name}; its footprint intersects the ICRS circle (${region.raDegrees}, ${region.decDegrees}, radius ${region.radiusDegrees} deg). The target is in the field; field membership is not a target identity.` };
 }
+/** The circle a search selects footprints by: the explicit cutout if there is one, otherwise the footprint. */
+export const searchCircle = (request?: DiscoveryRequest): IcrsCircle | undefined => request?.region ?? request?.footprint;
 export function targetQuery(profile: ServiceProfile, names: readonly string[], sampleLimit = 50, request?: DiscoveryRequest): string {
   if (!/^[A-Za-z_][A-Za-z0-9_]*(?:\.[A-Za-z_][A-Za-z0-9_]*)?$/u.test(profile.table)) throw new TypeError('Unvalidated TAP table identifier.');
   if (!Number.isSafeInteger(sampleLimit) || sampleLimit < 1 || sampleLimit > 1000 || !names.length) throw new TypeError('A bounded TAP target-name query is required.');
   const literals = [...new Set(names)].map(n => { if (!n.trim() || /[\u0000-\u001f]/u.test(n)) throw new TypeError('Invalid target name.'); return `'${n.replaceAll("'", "''")}'`; });
   const byName = `target_name IN (${literals.join(',')})`;
-  const filters = [request?.region && profile.model === 'obscore-1.1' ? `(${byName} OR ${regionClause(request.region)})` : byName];
+  const circle = searchCircle(request);
+  const filters = [circle && profile.model === 'obscore-1.1' ? `(${byName} OR ${regionClause(circle)})` : byName];
   if (request?.instrument !== undefined) {
     if (!request.instrument.trim() || /[\u0000-\u001f]/u.test(request.instrument)) throw new TypeError('Invalid instrument name.');
     filters.push(`instrument_name='${request.instrument.replaceAll("'", "''")}'`);
@@ -172,7 +178,7 @@ export async function discover(root: string, profile: ServiceProfile, request: D
     timeFormat: profile.model === 'obscore-1.1' ? 'mjd' : 'jd', ...(profile.timeScale ? { timeScale: profile.timeScale } : {}),
     ...(profile.model === 'epn-tap-2.0' ? { timeModel: profile.model } : {}) })).vo!;
   const snapshot = parseSnapshot({ schema: 'cssearth-vo-discovery@1', service: profile.service, table: profile.table, model: profile.model,
-    request, query, sampleLimit, scope: `${request.region && profile.model === 'obscore-1.1' ? 'Exact target-name/alias search, plus records whose footprint intersects the requested ICRS circle (in the field, not identified as the target)' : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${request.region && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
+    request, query, sampleLimit, scope: `${searchCircle(request) && profile.model === 'obscore-1.1' ? 'Exact target-name/alias search, plus records whose footprint intersects the requested ICRS circle (in the field, not identified as the target)' : 'Exact target-name/alias search'}; bounded sample; incidental targets are not covered.${searchCircle(request) && profile.model !== 'obscore-1.1' ? ' This provider has no ICRS footprint; the region was not applied.' : ''}${request.wavelengthMicrometres && profile.model !== 'obscore-1.1' ? ' This provider did not apply the wavelength filter.' : ''}${request.time && !('any' in request.time) && (profile.model !== 'obscore-1.1' || profile.timeScale !== 'utc') ? ' This provider did not apply the time filter.' : ''}`, response,
     completeness: response.queryStatus === 'ERROR' ? 'failed' : response.queryStatus === 'OVERFLOW' ? 'overflow' : 'bounded-sample' });
   await writeFile(resolve(directory, `${digest(snapshot)}.json`), canonical(snapshot));
   return snapshot;

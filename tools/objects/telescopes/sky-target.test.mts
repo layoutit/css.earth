@@ -6,6 +6,7 @@ import { sourceTest } from '../../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { parseSkyTarget, readSkyTarget, resolveSkyTarget, simbadObjectQuery, skyCatalogueEntry, skyRegion, skyTargetId, type SkyTarget } from './sky-target.mts';
 import { skyTargetRequest } from './exploration.mts';
+import { SERVICES, searchCircle, targetQuery } from './vo/discovery.mts';
 import type { MetadataResponse } from './vo/contracts.mts';
 
 const field = (name: string, unit: string | null) => ({ name, id: null, datatype: 'char', arraysize: null, unit, ucd: null, utype: null, xtype: null, ref: null });
@@ -57,9 +58,13 @@ test('explore asks SIMBAD only for a name the catalogue does not know, and keeps
   const again = await skyTargetRequest(root, { target: 'Sgr A*', kind: 'cube' }, resolveSky);
   assert.deepEqual(again.request, found.request, 'the request, and so every snapshot and acquisition key, ignores which call SIMBAD answered');
   assert.notDeepEqual(again.evidence, found.evidence); assert.equal(found.evidence?.length, 2);
-  assert.equal(found.request.target, 'simbad-name-sgr-a'); assert.equal(found.request.skyTarget, target); assert.deepEqual(found.request.region, skyRegion(target));
+  assert.equal(found.request.target, 'simbad-name-sgr-a'); assert.equal(found.request.skyTarget, target); assert.deepEqual(found.request.footprint, skyRegion(target));
+  assert.equal(found.request.region, undefined, 'SIMBAD\'s circle selects records; it never becomes a cutout');
   const circle = { frame: 'icrs' as const, shape: 'circle' as const, raDegrees: 266.4, decDegrees: -29, radiusDegrees: 0.001 };
-  assert.deepEqual((await skyTargetRequest(root, { target: 'Sgr A*', region: circle }, resolveSky)).request.region, circle);
+  const cut = (await skyTargetRequest(root, { target: 'Sgr A*', region: circle }, resolveSky)).request;
+  assert.deepEqual(cut.region, circle); assert.deepEqual(cut.footprint, skyRegion(target));
+  assert.equal(searchCircle(cut), circle, 'an explicit cutout is also the circle the search selects by');
+  assert.match(targetQuery(SERVICES[0]!, ['x'], 50, found.request), /INTERSECTS/u, 'the footprint alone reaches the query');
   assert.deepEqual(await skyTargetRequest(root, { target: 'nothing' }, resolveSky), { request: { target: 'nothing' }, simbadMiss: true });
   const saved = await skyTargetRequest(root, { target: 'simbad-name-sgr-a', skyTarget: target }, resolveSky);
   assert.equal(saved.request.target, 'simbad-name-sgr-a');
