@@ -52,7 +52,9 @@ export async function prepareEmissive(input: PresentationInputs, adapters: Prese
   });
   return { schema: PREPARED_PRESENTATION_SCHEMA, camera: plan.camera, sky: plan.starfield, sun: null,
     assets: { entries, pools: [preparedResourcePool('material', entries, { retention: 'selection', capacity: 8, concurrency: 8 })],
-      startup: required(lenses.defaultLens) },
+      // The default dataset may be a companion volume, a disc around this star: it borrows a surface, and startup loads that
+      // one, the same resolution every variant makes. Asking for a surface named after the volume would find nothing.
+      startup: required(lenses.controls.find(lens => lens.id === lenses.defaultLens)?.volume?.surface ?? lenses.defaultLens) },
     tree, variants, materials: [],
     viewBindings: [
       ...[corona, limb].map(node => ({ kind: 'silhouette-fit' as const, target: index(node), minimumRadius: POINT_MIN_RADIUS_PX, unitScale: 2 / plan.camera.logicalBodyDiameter })),
