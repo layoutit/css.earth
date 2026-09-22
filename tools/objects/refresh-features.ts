@@ -51,7 +51,7 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   // their delivery pins, not rebaked: record recovered lineage instead of claiming a fresh
   // verification of every photographic source and terrain input in the object package.
   await prepareObjectProvenance({ objectDirectory, publicDirectory, outputDirectory, basis: 'recovered' });
-  const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mts')).href), 'prepared object writer');
+  const writer = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-object-json.mts')).href), 'prepared object writer');
   if (typeof writer.writeObjectJson !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (writer.writeObjectJson as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, attached.definition as Record<string, unknown>);
   return { count: Number(record(plan.catalog, 'catalog').count) +

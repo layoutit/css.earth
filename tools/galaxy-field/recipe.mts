@@ -1,5 +1,5 @@
 import { readFile } from 'node:fs/promises';
-import { requireRecord } from '../source-values.mts';
+import { requireRecord } from '../sources/source-values.mts';
 export async function readFieldRecipe() {
   return parseFieldRecipe(JSON.parse(await readFile('src/objects/nearby-universe/source/preparation/field.json','utf8')) as unknown);
 }

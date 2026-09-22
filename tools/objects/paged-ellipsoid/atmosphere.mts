@@ -1,7 +1,7 @@
 import type {SourceManifest} from '../../../src/platform/source-manifest.mts';
 import type {PreparedDirectionalSunPlan} from '../../../src/platform/directional-sun-contract.mts';
-import type {PreparedAtmosphereProfile} from '../../prepared-atmosphere.mts';
-import {readJsonSource, requireRecord, requireFiniteNumber} from '../../source-values.mts';
+import type {PreparedAtmosphereProfile} from '../../prepared/prepared-atmosphere.mts';
+import {readJsonSource, requireRecord, requireFiniteNumber} from '../../sources/source-values.mts';
 import {parseAtmosphereResponse} from './source-contract.mts';
 import {readAtmosphereModel as parseAtmosphereModelRecord} from '@cssearth/objects';
 export interface AtmosphereConfiguration {
@@ -9,7 +9,7 @@ export interface AtmosphereConfiguration {
     illumination: {frameCount: number; minimumLightViewZ: number; maximumLightViewZ: number; baseLightAzimuthDegrees: number}};
   atmosphere: {sourcePath: string; responsePath: string; sourceId: string; maximumOpacityKey: string};
 }
-import { prepareAtmosphereFrame } from "../../prepared-atmosphere.mts";
+import { prepareAtmosphereFrame } from "../../prepared/prepared-atmosphere.mts";
 import { viewSunDirectionToPreparedLightDirection } from "../../../src/platform/directional-sun-coordinate.mts";
 import { readFile } from "node:fs/promises";
 import { resolve } from "node:path";

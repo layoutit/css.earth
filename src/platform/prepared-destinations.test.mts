@@ -1,4 +1,4 @@
-import { requireRecord, requireArray } from "../../tools/source-values.mts";
+import { requireRecord, requireArray } from "../../tools/sources/source-values.mts";
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createHash } from "node:crypto";

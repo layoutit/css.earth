@@ -4,7 +4,7 @@ import { prepareRowBankCutaway } from './row-bank-cutaway.js';
 import { prepareComposite } from './composite.js';
 import { prepareEmissive } from './emissive.js';
 import type { PresentationInputs } from './types.js';
-import { prepareActivationGroups } from '../../../../../tools/prepared-activation-groups.mts';
+import { prepareActivationGroups } from '../../../../../tools/prepared/prepared-activation-groups.mts';
 export type { PresentationInputs } from './types.js';
 
 export interface PresentationProfile {

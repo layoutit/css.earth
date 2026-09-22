@@ -53,15 +53,15 @@ jobs:
         with:
           node-version: '22'
       - name: Classify what this change touched, and which heavy jobs it needs
-        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (tools/ci-affected.mts).
+        # .github/ci-areas.json maps changed paths to areas, and areas to the heavy jobs below (tools/ci/ci-affected.mts).
         # A push to main always runs every job regardless of this output (see each job's `if:`); only a pull request
         # can skip one. `docs_only` is kept for callers outside this workflow that still read it.
         id: classify
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            node tools/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
+            node tools/ci/ci-affected.mts pr "origin/$GITHUB_BASE_REF"
           else
-            node tools/ci-affected.mts push "${{ github.event.before }}"
+            node tools/ci/ci-affected.mts push "${{ github.event.before }}"
           fi
       - name: Scope the runtime ownership check
         id: ownership-scope
@@ -69,7 +69,7 @@ jobs:
         # universe and shared renderer" job's own checkout can stay shallow. A push to main always keeps --all.
         run: |
           if [ -n "${GITHUB_BASE_REF:-}" ]; then
-            echo "args=$(node tools/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
+            echo "args=$(node tools/ci/scope-runtime-ownership-check.mts "origin/$GITHUB_BASE_REF")" >> "$GITHUB_OUTPUT"
           else
             echo "args=--all" >> "$GITHUB_OUTPUT"
           fi
@@ -96,7 +96,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -122,19 +122,19 @@ jobs:
           CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/build-ci.mts lint
+        run: node tools/ci/build-ci.mts lint
       - name: Check physical frame receipts and document pins
         # Tracked files only; the full ownership audit (--all) runs in the prepared-universe job.
         run: |
-          node tools/check-object-runtime-ownership.mts --receipts
-          node --test tools/physical-frame-receipts.test.mts
+          node tools/ci/check-object-runtime-ownership.mts --receipts
+          node --test tools/contract/physical-frame-receipts.test.mts
       - name: Check independent body additions
-        run: node --test tools/body-additions.test.mts
+        run: node --test tools/contract/body-additions.test.mts
       - name: Test asset inventory, publish verification, closure and local CI tooling
         # Self-contained unit tests (temp-directory fixtures, injected fetchers/transports/git repos, no network, no
         # restored assets) for the inventory builders, the publish gate below, the object-scope gate (its own
         # workflow, object-scope.yml), the docs-only classifier (the `changes` job above), the deploy allow-missing
-        # path (tools/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
+        # path (tools/assets/setup.test.mts — the only place it ran before was the non-CI test:platform), the prune
         # dry-run report, and the runner behind `pnpm check:pr`. Deliberately not the wider `pnpm test:platform`,
         # which this workflow does not run. Native filename families include newly added CI/asset checks.
         run: pnpm test:ci
@@ -165,7 +165,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -206,7 +206,7 @@ jobs:
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/build-ci.mts full
+        run: node tools/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck shared code and enforce TypeScript ownership
@@ -241,7 +241,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -280,7 +280,7 @@ jobs:
           CI_RENDERER_DIGEST: ${{ steps.ci-cache-key.outputs.renderer_digest }}
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/build-ci.mts full
+        run: node tools/ci/build-ci.mts full
       - name: Restore only compiler inputs and generate real shell data
         run: pnpm prepare:typecheck
       - name: Typecheck test, fixture and capture files
@@ -320,7 +320,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -352,9 +352,9 @@ jobs:
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
         run: |
           if [ "$CI_UNIVERSE_LANE" = shell ]; then
-            node tools/build-ci.mts full
+            node tools/ci/build-ci.mts full
           else
-            CI_PREPARATION_DTS=false node tools/build-ci.mts full
+            CI_PREPARATION_DTS=false node tools/ci/build-ci.mts full
           fi
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
@@ -371,11 +371,11 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = "push" ]; then
             pnpm setup:asset-data
           else
-            node tools/prepare-ci-inputs.mts universe
+            node tools/prepare/prepare-ci-inputs.mts universe
           fi
-          node tools/restore-object-json.mts
-          node tools/prepare-provenance.mts --objects-only
-          node tools/prepare-feature-index.mts
+          node tools/assets/restore-object-json.mts
+          node tools/prepare/prepare-provenance.mts --objects-only
+          node tools/prepare/prepare-feature-index.mts
       - name: Prepare minimap data
         run: |
           node site/minimap/prepare.mts --data-only
@@ -386,7 +386,7 @@ jobs:
         run: |
           case "$CI_UNIVERSE_LANE" in
             runtime|shell|renderer)
-              node tools/prepare-facilities.mts --catalog-only
+              node tools/prepare/prepare-facilities.mts --catalog-only
               pnpm "test:universe:$CI_UNIVERSE_LANE"
               ;;
             *) echo "Unknown universe lane" >&2; exit 1 ;;
@@ -434,7 +434,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         id: package-cache
         with:
@@ -465,7 +465,7 @@ jobs:
           CI_PREPARATION_DTS: "false"
           CI_BUILD_CACHE_HIT: ${{ steps.build-tools-cache.outputs.cache-hit }}
           CI_BUILD_DIGEST: ${{ steps.ci-cache-key.outputs.build_digest }}
-        run: node tools/build-ci.mts full
+        run: node tools/ci/build-ci.mts full
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           # Only the baked JSON payloads, not texture banks. The following installer revalidates every pin.
@@ -475,7 +475,7 @@ jobs:
           key: prepared-json-v1-${{ hashFiles('src/objects/*/inventory.json') }}
           restore-keys: prepared-json-v1-
       - name: Restore only the inputs consumed by preparation tests
-        run: node tools/prepare-ci-inputs.mts universe-preparation
+        run: node tools/prepare/prepare-ci-inputs.mts universe-preparation
       - name: Test the selected preparation lane
         run: |
           case "$CI_PREPARATION_LANE" in
@@ -522,7 +522,7 @@ jobs:
         run: pnpm install --frozen-lockfile --ignore-scripts
       - name: Hash tracked build and compiler inputs
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         with:
           path: output/tsbuildinfo/nebula-*.tsbuildinfo
@@ -533,7 +533,7 @@ jobs:
       - name: Build shared TypeScript dependencies
         run: pnpm -r --filter "./packages/**" build
       - name: Restore repository volume inputs used by provenance closure
-        run: node tools/restore-source-inputs.mts --repository-volumes
+        run: node tools/assets/restore-source-inputs.mts --repository-volumes
       - name: Test the object registry and adapter packages
         # 802 tests, ~6 s local; never ran in CI before (output/TEST_AUDIT.md section 1.5). Needs only the build
         # above, so it runs here rather than adding another checkout+install in Contract lint.

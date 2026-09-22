@@ -24,7 +24,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseProductRecord, type EvidenceKind } from '../product-record.mts';
 import { PROGRAMS, parseGeminiProgram, type GeminiProgram } from './archive.mts';
 import { query } from './cadc.mts';

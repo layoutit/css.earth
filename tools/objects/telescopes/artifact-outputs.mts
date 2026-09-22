@@ -1,7 +1,7 @@
 /** Inspect a verified artifact and name only the next outputs its present facts can support. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { pinFile, PRODUCT_RECORD_SCHEMA } from '../product-record.mts';
 import { delivery, listOutputs as listDeliveryOutputs, type OutputChoice } from './outputs.mts';
 import { validateProjectionSource, verifiedProduct } from './projection.mts';

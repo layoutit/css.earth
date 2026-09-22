@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { hasErrorCode } from '../../../source-values.mts';
+import { hasErrorCode } from '../../../sources/source-values.mts';
 import { parseCitySource, parseGeographicScene } from '../source-records.mts';
 import {commandContext} from './context.mts';
 const context=commandContext();

@@ -2,7 +2,7 @@
 // former runtime-contract test). Modelled on tests/objects/unit/moon/runtime-contract.test.mts (generic lane); the
 // science assertions (FITS colours, magnetic polarity, legends, world context, forbidden render paths, four-layer
 // lens replacement) are kept.
-import { required } from '../../../../tools/test-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { readFile } from "node:fs/promises";
@@ -20,7 +20,7 @@ import { validateInventory } from "../../../../src/platform/runtime-asset-closur
 import { createSourceManifest } from "../../../../src/platform/source-manifest.mts";
 import { scientificFalseColor, prepareFitsMap, readFitsPrimary } from "../../../../tools/objects/observation/fits.mts";
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 import { projectRoot } from "../../fixtures.mts";
 import { resolve } from "node:path";
 

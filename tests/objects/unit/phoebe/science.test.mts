@@ -1,5 +1,5 @@
 import {shape,array,dictionary,number,text,optional,boolean,parseIsis3Grid} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
-import {required} from '../../../../tools/test-values.mts';
+import {required} from '../../../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';
 import {readFile} from 'node:fs/promises';

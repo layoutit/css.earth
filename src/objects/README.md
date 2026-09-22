@@ -42,7 +42,7 @@ tests/objects/browser/<id>/     profiles for the shared browser harness
 site/pages/[id].astro           one shared route for all body ids
 ```
 
-Use the current authored branch of `tools/object-package-contract.mts` for
+Use the current authored branch of `tools/contract/object-package-contract.mts` for
 required files and `tests/objects/source-closure.test.mts` for source ownership.
 The latter requires data-only body packages. Acquisition/preparation code lives
 in shared `tools/objects/` families; runtime and presentation behavior live in
@@ -109,12 +109,12 @@ Read the current `package.json` and runner arguments before using commands:
 | Acquire missing pins / verify present sources | `node tools/objects/dist/operations.js acquire <id>` / add `--verify-only` |
 | Prepare one authored package | `pnpm prepare:planets -- --object=<id>` |
 | Update source and mission catalogues | `pnpm prepare:sources` |
-| Give a new download its first pin | `pnpm pin:documents <id> --adopt-downloads` (`--check` only reports). Files authored here carry no pin; git records them |
-| Bind new inputs to catalogue records | `pnpm author:sources <id>` |
+| Give a new download its first pin | `node tools/sources/pin-object-documents.mts <id> --adopt-downloads` (`--check` only reports). Files authored here carry no pin; git records them |
+| Bind new inputs to catalogue records | `node tools/sources/author-source-records.mts <id>` |
 | Run body tests | `CSSEARTH_TEST_OBJECTS=<id> node --test tests/objects/unit/*.test.mts tests/objects/unit/<id>/*.test.mts` (a body covered only by a shared anchor table has no directory of its own); `pnpm test:objects` runs every body file |
 | Run shared package, renderer, platform and shell tests | `pnpm test` |
 | Check source identities, bindings and catalogue generation | `pnpm test:sources` |
-| Create the oracle environment and regenerate oracle fixtures | `pnpm oracles:setup`, `pnpm oracles:run`; see `tools/oracles/README.md` |
+| Create the oracle environment and regenerate oracle fixtures | `node tools/oracles/setup.mts`, `node tools/oracles/run.mts`; see `tools/oracles/README.md` |
 | Run a preparation test | `node --test tools/objects/<recipe>/<name>.test.mts` when the selected test uses Node |
 | Production build and assembly | `pnpm build` |
 | Rendered-page assertions over the built HTML | `node --test site/test/rendered-page.test.mts` |

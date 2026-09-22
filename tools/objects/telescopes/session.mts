@@ -2,7 +2,7 @@
 import { copyFile, mkdir, open, readFile, rename, rm, realpath, writeFile } from 'node:fs/promises';
 import { basename, dirname, isAbsolute, relative, resolve } from 'node:path';
 import { randomUUID } from 'node:crypto';
-import { hasErrorCode, requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { hasErrorCode, requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { pinFile, readProductRecord, type ProductRecord } from '../product-record.mts';
 import { loadQueryInputs, queryCapabilities, requestFromArguments, selectObservation, assessObservationSelection,
   type CapabilityAnswer, type CapabilityRequest, type QueryInputs } from './query.mts';

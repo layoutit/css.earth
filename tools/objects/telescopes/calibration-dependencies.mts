@@ -3,8 +3,8 @@ import { mkdir, readFile, writeFile, rename } from 'node:fs/promises';
 import { dirname, resolve, relative, basename } from 'node:path';
 import { createHash } from 'node:crypto';
 import { pinFile } from '../product-record.mts';
-import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../source-values.mts';
-import { readFitsFileHdus } from '../../fits.mts';
+import { requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
+import { readFitsFileHdus } from '../../fits/fits.mts';
 export interface CalibrationDependency {
   readonly field: string; readonly reference: string; readonly status: 'pinned' | 'unresolved'; readonly reason: string;
   readonly file?: string; readonly sha256?: string; readonly bytes?: number; readonly origin?: string;

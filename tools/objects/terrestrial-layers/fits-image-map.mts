@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readFitsHdu, fitsImageAccessor } from '../../fits.mts';
+import { readFitsHdu, fitsImageAccessor } from '../../fits/fits.mts';
 import { shape, text, number, array, optional, dictionary, parseTransform } from './source-records.mts';
 
 const plane = shape({ extension: number, name: text, units: text });

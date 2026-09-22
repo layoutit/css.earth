@@ -5,7 +5,7 @@
  */
 import type { LoadContext, ObservationCamera, ObservationFrame, ObservationImage, ObservationPhotometry, PixelGeometry, SurfaceObservationFormat, SurfacePolicy } from '../contract.mts';
 import { array, boolean, decodeProfile, number, optional, shape, text, parseCameraFrame, parseLevelMatching, parseSurfaceGeometry, publishedOr, surfaceTransfer } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord } from '../../../source-values.mts';
+import { requireArray, requireRecord } from '../../../sources/source-values.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { checkBandAlignment, controlledShapeCamera, framePaths, insetCoverage, loadShapeCameraImage, maskBackground, resolveCatalogCamera, type CameraImage } from '../../terrestrial-layers/shape-camera-mosaic.mts';

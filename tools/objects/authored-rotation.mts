@@ -1,6 +1,6 @@
 import { sha256 } from '../../src/platform/sha256.mts';
 import type { RotationElements } from "@cssearth/astronomy";
-import { requireRecord, requireFiniteNumber } from "../source-values.mts";
+import { requireRecord, requireFiniteNumber } from "../sources/source-values.mts";
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
 

@@ -39,7 +39,7 @@ import {
   type ManualApplication, type ManualCalibration, type ManualFlag, type PythonValue,
 } from './alma-manual-calibration.mts';
 import { toolchainDescriptor, toolchainPath } from './toolchain.mts';
-import { requireArray, requireString } from '../../source-values.mts';
+import { requireArray, requireString } from '../../sources/source-values.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import { addProductEvidence, pinFile, productRecordPath, readProductRecord, sameRun, writeProductRecord,
   type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';

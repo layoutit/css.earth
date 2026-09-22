@@ -6,7 +6,7 @@ This package supplies the command, not the observatory pipelines or catalogue. I
 
 ## Setup
 
-Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its documented dependencies. Archive discovery uses `pnpm telescope:setup-archives`; PDS decoding uses `pnpm telescope:setup-pds`. Some reduction routes require additional instrument toolchains described by their existing guides.
+Use Node 22.18+ (22.x) or Node 24+. Prepare a css.earth checkout with its documented dependencies. Archive discovery uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/toolchain.mts install`; PDS decoding uses `node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/pds-toolchain.mts install`. Some reduction routes require additional instrument toolchains described by their existing guides.
 
 The package has not been published by this PR. To test the distributable from the repository:
 

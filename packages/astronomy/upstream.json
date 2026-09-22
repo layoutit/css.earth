@@ -28,7 +28,7 @@
   },
   "rewrittenFiles": {},
   "excludedFiles": {},
-  "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mts (tools/prepare-solar-geometry.mts first). A catalog consumer would be wired the same way.",
+  "importNote": "The TypeScript source imports relative modules as `./x.js` while the files are `./x.ts` (the TS/ESM convention). Vite and Astro resolve that natively, so browser-side consumption works verbatim. Node does not: importing src/index.ts directly fails on the first `.js` specifier. Decision: a package is consumed through its own build step, never a specifier rewrite or a resolver hook, so the source stays byte-identical to its origin. For the astronomy package `pnpm build:astronomy` runs its tsup config into the gitignored dist/, which the workspace link resolves as `@cssearth/astronomy` (`pnpm install` runs it as postinstall); Node-side consumers go through src/platform/astronomy-package.mts (tools/prepare/prepare-solar-geometry.mts first). A catalog consumer would be wired the same way.",
   "fileCount": 19,
   "byteCount": 307088,
   "files": {

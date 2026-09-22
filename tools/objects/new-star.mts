@@ -9,12 +9,12 @@
  * (skyPlaneOrientation). The catalogue colour is the cited effective temperature through the star field's colour fit
  * (star-catalogue-color.mts). The package starts with the shape lens and stays off the map until a surface image is added.
  * Prose the scaffold cannot know (reader text, README, credits, ledger) is written with the marker TODO(new-star), which
- * tools/object-package-consistency.test.mts refuses. Then run: node tools/prepare-object.mts <id> */
+ * tools/contract/object-package-consistency.test.mts refuses. Then run: node tools/prepare/prepare-object.mts <id> */
 import { copyFile, mkdir, readFile, stat, writeFile } from 'node:fs/promises';
 import { dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { skyPlaneOrientation, starStateFromAstrometryKm } from '@cssearth/astronomy';
-import { requireFiniteNumber, requireRecord, requireString } from '../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../sources/source-values.mts';
 import { readStarTemperature, temperatureCatalogueColor } from './star-catalogue-color.mts';
 
 export const TODO = 'TODO(new-star)';
@@ -278,5 +278,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (!id || missing.length) throw new TypeError(`Usage: new-star <id> ${required.map(name => `--${name} <value>`).join(' ')} [--order <n>]; missing ${missing.join(', ') || 'id'}.`);
   const order = option('order');
   const written = await scaffoldStar({ id, name: option('name')!, system: option('system')!, temperatureK: Number(option('temperature')), temperatureSource: option('temperature-source')!, description: option('description')!, paper: option('paper')!, paperCredit: option('paper-credit')!, ...(order ? { order: Number(order) } : {}) });
-  console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare-object.mts ${id}`);
+  console.log(`${written.length} files written. Replace every ${TODO}, then: node tools/prepare/prepare-object.mts ${id}`);
 }

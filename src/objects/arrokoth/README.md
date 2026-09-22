@@ -171,7 +171,7 @@ node --test tools/objects/terrestrial-layers/new-horizons-geo.test.mts
 ```
 
 The Astropy fixture was captured with the repository's pinned Astropy 8.0.1 and
-NumPy 2.5.3 environment (`pnpm oracles:setup`) using
+NumPy 2.5.3 environment (`node tools/oracles/setup.mts`) using
 `fits.open` for each original HDU and `WCS.all_pix2world(pixels, 0)` for a 5×5
 detector grid. It records exact input hashes. The native files are restored by
 the acquisition recipe, not copied from rendered screenshots.

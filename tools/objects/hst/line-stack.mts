@@ -32,7 +32,7 @@
 import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits.mts';
+import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
 import { headerBlock, padBlock } from '../interferometry/fits-table.mts';
 import { sha256, sha256File } from '../../../src/platform/sha256.mts';
 import { addProductEvidence, pinFile, productRecordPath, writeProductRecord, type ProductEvidence, type ProductInput, type ProductRun, type ProductSoftware } from '../product-record.mts';

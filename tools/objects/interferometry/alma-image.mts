@@ -13,8 +13,8 @@
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { readFitsHeader, type FitsHeader } from '../../fits.mts';
-import { flagValue, positionalArguments } from '../../cli-arguments.mts';
+import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { flagValue, positionalArguments } from '../../cli/cli-arguments.mts';
 
 export interface ContinuumImage {
   readonly width: number; readonly height: number;

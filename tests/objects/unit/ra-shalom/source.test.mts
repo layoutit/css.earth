@@ -6,7 +6,7 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadObjShape,createShapeSurfaceSampler} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 import {requireAcquisitionPlan,requireClosedRadialTerrain,requireHistoricalContent,requireRadialTestConfig,requireScalarAnchors} from '../radial-fixture.mts';
-import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/source-values.mts';
+import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/ra-shalom/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
 test('Ra-Shalom retains original source pins and acquisition closure',async()=>{

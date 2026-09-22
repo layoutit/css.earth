@@ -1,4 +1,4 @@
-import type {createPreparedNodeTree,PreparedNode} from '../../prepared-node-tree.mts';
+import type {createPreparedNodeTree,PreparedNode} from '../../prepared/prepared-node-tree.mts';
 import type {PreparedMaterialTrack,PreparedMaterialSelection} from '../../../src/renderers/css/rendering/prepared-material.ts';
 import type {PreparedViewBinding} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 interface LightingContext {builder:ReturnType<typeof createPreparedNodeTree>;root:PreparedNode;axes:readonly number[];config:{displayRadius:number};scene:{systemTransform:string;camera:{initialScenePitchDegrees:number;defaultControlYawDegrees:number}};}

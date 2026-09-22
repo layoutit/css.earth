@@ -5,7 +5,7 @@ import { spawnSync } from 'node:child_process';
 import { access, mkdir, readFile, rm, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 
 const repository = resolve(import.meta.dirname, '../../..');
 export const PDS_TOOLCHAIN_ROOT = resolve(repository, 'output/toolchains/pds');
@@ -40,7 +40,7 @@ export interface PdsToolchain { readonly python: string; readonly digest: string
 export async function pdsToolchain(): Promise<PdsToolchain> {
   const { entry, digest } = await descriptor(), bin = resolve(PDS_TOOLCHAIN_ROOT, 'env/bin'), python = resolve(bin, 'python');
   const marker = await readFile(resolve(PDS_TOOLCHAIN_ROOT, 'installed.json'), 'utf8').then(text => requireRecord(JSON.parse(text) as unknown), () => null);
-  if (!marker) throw new Error('The PDS package toolchain is not installed: pnpm telescope:setup-pds');
+  if (!marker) throw new Error('The PDS package toolchain is not installed: node tools/cli/run-typed-module.mjs tools/objects/astronomy-packages/pds-toolchain.mts install');
   if (marker.pinsSha256 !== digest) throw new Error('The PDS package toolchain was installed from other pins; reinstall it.');
   if (!await access(python).then(() => true, () => false)) throw new Error(`The PDS package toolchain has no python at ${python}.`);
   return { python, digest, peppiVersion: requireString(entry.peppi), pdrVersion: requireString(entry.pdr),

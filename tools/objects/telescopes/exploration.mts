@@ -1,5 +1,5 @@
 /** Human discovery starts from a target and preserves omitted scientific filters as omitted. */
-import { flagValue } from '../../cli-arguments.mts';
+import { flagValue } from '../../cli/cli-arguments.mts';
 import { PRODUCT_KINDS, indexedTargetObservations, loadQueryInputs, loadTargetCatalogue,
   type ProductKind, type QueryInputs, type TargetCoverage } from './query.mts';
 import { resolveTarget, type TargetResolution } from './targets.mts';

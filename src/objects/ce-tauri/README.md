@@ -22,7 +22,7 @@ CE Tauri (119 Tau) is a red supergiant in Taurus and the fourth star placed here
 - `tests/objects/unit/ce-tauri/default-view.test.mts` derives the default camera from the runtime's camera math.
 - Preparation accepted 293 of 325 pixels with geometry in each image; 2.3 and 2.6 percent of the flux lies outside the disc and is drawn on the off-limb plate.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/ce-tauri/` with the default camera.
-- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffa64f is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
+- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffa64f is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
 
 ## Known problems
 

@@ -5,10 +5,10 @@ import type {preparePlanetDirectionalSun} from '../../../src/platform/prepare-di
 import type {prepareSolidMaterial,SolidRasterGrid} from './solid-raster.mts';
 import type {combineRadialModels} from './radial-models.mts';
 import type {createSourceManifest} from '../../../src/platform/source-manifest.mts';
-import type {MaterialSourceTrack} from '../../prepare-materials.mts';
+import type {MaterialSourceTrack} from '../../prepare/prepare-materials.mts';
 import type {PreparedVariant} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
 import type {PreparedPresentationDefinition} from '../../../src/renderers/css/rendering/prepared-presentation.ts';
-import {requireArray,requireRecord,requireString,requireFiniteNumber} from '../../source-values.mts';
+import {requireArray,requireRecord,requireString,requireFiniteNumber} from '../../sources/source-values.mts';
 import {requireObjectControls} from '../../../site/scene-contract.mts';
 export interface SolidSceneConfig {
   rings?:unknown;namespace:string;kind?:string;publicBase:string;
@@ -17,7 +17,7 @@ export interface SolidSceneConfig {
   presentation:{defaultLens:string};
 }
 type SolidCelestial={sky:PreparedCubicSkyPlan;sun:PreparedDirectionalSunPlan};
-type SolidScene=ReturnType<typeof import('../../prepared-replay-source.mts').parseSolidReplayScene>;
+type SolidScene=ReturnType<typeof import('../../prepared/prepared-replay-source.mts').parseSolidReplayScene>;
 import {prepareScientificNavigation} from './scientific-focus.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -30,14 +30,14 @@ import { photographDirections, prepareDefaultCameraAngles } from '../../../src/p
 import { loadAstronomyPackage } from '../../../src/platform/astronomy-package.mts';
 import { PREPARED_PRESENTATION_SCHEMA } from '../../../src/platform/prepared-presentation-contract.mts';
 import { preparedResourcePool } from '../../../src/platform/prepared-object-assets.mts';
-import { prepareCssomDeclarationReads } from '../../prepared-cssom.mts';
-import { createPreparedNodeTree } from '../../prepared-node-tree.mts';
-import { prepareMaterialTracks } from '../../prepare-materials.mts';
+import { prepareCssomDeclarationReads } from '../../prepared/prepared-cssom.mts';
+import { createPreparedNodeTree } from '../../prepared/prepared-node-tree.mts';
+import { prepareMaterialTracks } from '../../prepare/prepare-materials.mts';
 import { requirePreparedPresentation } from '../../../src/platform/prepared-presentation-contract.mts';
-import { requirePreparedResourceCatalog } from '../../object-runtime-contract.mts';
+import { requirePreparedResourceCatalog } from '../../contract/object-runtime-contract.mts';
 import { prepareSunReferenceViewDirection } from '../../../src/platform/prepare-sun-view-direction.mts';
 import { BODY_POSITION_PROVENANCE, SOLAR_GEOMETRY_EPOCH_LABEL } from '../../../src/platform/solar-geometry.mts';
-import { restoreDepthSource } from '../../prepared-depth-partitions.mts';
+import { restoreDepthSource } from '../../prepared/prepared-depth-partitions.mts';
 import { prepareTerrestrialRings } from './rings.mts';
 
 /** The terrestrial lane's default camera: the shared rule over the default lens's photograph frames. */

@@ -1,5 +1,5 @@
-import {required} from "../../../../tools/test-values.mts";
-import {requireRecord} from "../../../../tools/source-values.mts";
+import {required} from "../../../../tools/contract/test-values.mts";
+import {requireRecord} from "../../../../tools/sources/source-values.mts";
 import {shape,array,text} from "../../../../tools/objects/geographic-pages/source-records.mts";
 import {parsePreparedObjectRuntime} from "../../../../src/renderers/css/dist/index.js";
 import assert from 'node:assert/strict';

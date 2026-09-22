@@ -1,4 +1,4 @@
-import { readFitsHdu, assertUnscaledFitsTable } from '../../fits.mts';
+import { readFitsHdu, assertUnscaledFitsTable } from '../../fits/fits.mts';
 import type {SourceMesh} from './contracts.mts';
 import {parseFacetField,shape,text} from './source-records.mts';
 import { readFile } from 'node:fs/promises';

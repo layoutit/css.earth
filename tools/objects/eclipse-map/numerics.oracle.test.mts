@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { test } from 'node:test';
 import { readOracleFixture } from '../../oracles/fixture.mts';
-import { requireArray, requireFiniteNumber, requireRecord } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 import { bandBrightnessTemperature, brightnessTemperature, fitEigenmap, planckRadiance, sampleEigenmap } from './eigenmap-fit.mts';
 import { harmonicOrder, realSphericalHarmonics } from './spherical-harmonics.mts';
 

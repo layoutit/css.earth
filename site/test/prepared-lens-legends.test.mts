@@ -1,4 +1,4 @@
-import {requireRecord, requireArray} from '../../tools/source-values.mts';
+import {requireRecord, requireArray} from '../../tools/sources/source-values.mts';
 import {parseObjectContentFixture, parseTitleFixture} from './object-content-fixture.mts';
 import assert from "node:assert/strict";
 import { loadObjectContent } from "./load-object-content.mts";

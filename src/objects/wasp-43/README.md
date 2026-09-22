@@ -2,7 +2,7 @@
 
 ## Sources
 
-WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](../wasp-43b/README.md). Its package holds the placement, the published size and the record of what was checked for its surface. No image of the star exists: it is a sphere of the published size in the colour of its measured temperature, darkened toward its edge as its planet's transits measure, with its axis along the planet's orbit, as measured. Unlike Antares and Polaris it stays on the map, because a body with imagery orbits it: preparation marks its discovery `hostsImagery` ([prepare-catalog.mts](../../../tools/prepare-catalog.mts)) and `discoveryVisibility` keeps a planetary system's star visible. The Milky Way overview lists it under Systems.
+WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](../wasp-43b/README.md). Its package holds the placement, the published size and the record of what was checked for its surface. No image of the star exists: it is a sphere of the published size in the colour of its measured temperature, darkened toward its edge as its planet's transits measure, with its axis along the planet's orbit, as measured. Unlike Antares and Polaris it stays on the map, because a body with imagery orbits it: preparation marks its discovery `hostsImagery` ([prepare-catalog.mts](../../../tools/prepare/prepare-catalog.mts)) and `discoveryVisibility` keeps a planetary system's star visible. The Milky Way overview lists it under Systems.
 
 **Placement.** The ICRS position, parallax and proper motion are Gaia EDR3 values as SIMBAD gives them; the radial velocity, −3.7 ± 0.7 km/s, is Gaia DR2's. The distance is 1000 / 11.474 mas = 87.15 pc, with no parallax zero-point correction.
 
@@ -22,7 +22,7 @@ WASP-43 is a K7 dwarf in Sextans, the host star of the hot Jupiter [WASP-43b](..
 
 ## Evidence
 
-Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43` prepared the package.
+Run of 2026-09-16 (this version): `node tools/prepare/prepare-object.mts wasp-43` prepared the package.
 
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) reads the archived Gaia row, checks the colour 255, 220, 184 and that the temperature percentiles move no channel by more than 1, and that a Planck colour runs blue-white to orange as it cools.
 - [`stellar-photometric-color.test.mts`](../../../tools/objects/observation/stellar-photometric-color.test.mts) also reads the pinned limb-darkening row and checks that the plate is transparent outside the disc, black, undimmed at the centre, and dims the displayed luminance by the law within one 8-bit step at several radii.
@@ -30,7 +30,7 @@ Run of 2026-09-16 (this version): `node tools/prepare-object.mts wasp-43` prepar
 - [`object-discovery.test.mts`](../../../site/test/object-discovery.test.mts) checks that WASP-43 and WASP-43b stay on the map under every discovery setting while Antares and Polaris stay hidden.
 - [`default-view.test.mts`](../../../tests/objects/unit/wasp-43/default-view.test.mts) derives the default camera from the runtime's camera math: the sub-camera point one degree from the sub-Earth point, and the pole, identical to WASP-43b's orbit normal, up.
 - [`source/reference/rendered-default-view.png`](source/reference/rendered-default-view.png) is the branch's dev server at `/wasp-43/` with the default camera, no console errors.
-- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ffdcb8 is the colour lens's prepared colour.
+- Run of 2026-09-21: [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ffdcb8 is the colour lens's prepared colour.
 
 ## Known problems
 

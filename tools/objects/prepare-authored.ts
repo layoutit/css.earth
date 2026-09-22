@@ -53,7 +53,7 @@ function validateCapabilityComposition(descriptor: AuthoredObjectDescriptor, ras
   }
 }
 async function writePreparedObject(id: string, definition: Record<string, unknown>): Promise<void> {
-  const module = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-object-json.mts')).href), 'prepared object writer');
+  const module = record(await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-object-json.mts')).href), 'prepared object writer');
   const write = module.writeObjectJson;
   if (typeof write !== 'function') throw new TypeError('Prepared object writer is missing.');
   await (write as (objectId: string, runtime: Record<string, unknown>) => Promise<unknown>)(id, definition);
@@ -63,7 +63,7 @@ async function writePreparedObject(id: string, definition: Record<string, unknow
 export async function prepareAuthoredObject({ objectDirectory, publicDirectory, outputDirectory, write = false, replaceReviewedImages = write, presentationOnly = false }: AuthoredPreparationContext): Promise<AuthoredPreparationResult> {
   const result = await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, presentationOnly });
   if (write || !result.definition) return result;
-  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare-surface-minimaps.mts')).href);
+  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve(process.cwd(), 'tools/prepare/prepare-surface-minimaps.mts')).href);
   // Minimaps render from the raw imagery; a presentation-only stage already carries the published ones.
   if (!presentationOnly) await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory });
   const prepared = await prepareWorldNavigationDefinition({ objectDirectory, definition: result.definition as Record<string, unknown> });
@@ -138,7 +138,7 @@ async function prepareAuthoredStages({ objectDirectory, publicDirectory, outputD
         console.log(`refreshed legend labels ${legend.summary}`);
         return await prepareAuthoredStages({ objectDirectory, publicDirectory, outputDirectory, write, replaceReviewedImages, presentationOnly });
       }
-      const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
+      const { finalizeObjectJson } = await import(pathToFileURL(resolve(projectRoot, 'tools/prepare/prepare-object-json.mts')).href) as typeof import('../prepare/prepare-object-json.mts');
       const finalized = await finalizeObjectJson(id, result.definition, { projectRoot, objectDirectory, preparedDirectory: stagedData,
         descriptorPath: resolve(stage, 'object.json') }, { publicDirectory: stagedPublic });
       if (presentationOnly) {

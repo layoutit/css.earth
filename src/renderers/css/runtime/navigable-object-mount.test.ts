@@ -1,8 +1,8 @@
 import { readFile } from 'node:fs/promises';
 import { expect, test, vi } from 'vitest';
 import { createNavigableObjectMount } from './navigable-object-mount.js';
-import { prepareActivationGroups } from '../../../../tools/prepared-activation-groups.mts';
-import { requireObjectRuntimeDefinition } from '../../../../tools/object-runtime-contract.mts';
+import { prepareActivationGroups } from '../../../../tools/prepared/prepared-activation-groups.mts';
+import { requireObjectRuntimeDefinition } from '../../../../tools/contract/object-runtime-contract.mts';
 import { requirePreparedCssDescriptor } from '../prepared-object-decoder.js';
 import { parsePreparedWorldCameraFrame } from '../validation/world-frame.js';
 import { record } from '../validation/guards.js';

@@ -11,8 +11,8 @@ import { parseAuthoredObjectDescriptor } from '@cssearth/objects';
 import { parseRasterRecipe, prepareRasterAssets } from '../../src/preparation/raster/index.js';
 import { prepareObjectContentAssets } from './content/prepare.js';
 import { parseRuntimeManifest } from './operations.js';
-import { requireRecord, requireArray } from '../source-values.mts';
-import { requireString } from '../source-values.mts';
+import { requireRecord, requireArray } from '../sources/source-values.mts';
+import { requireString } from '../sources/source-values.mts';
 
 export async function refreshPhotographs(id: string, lensIds: readonly string[]) {
   if (!/^[a-z][a-z0-9-]*$/.test(id) || !lensIds.length || new Set(lensIds).size !== lensIds.length)
@@ -50,7 +50,7 @@ export async function refreshPhotographs(id: string, lensIds: readonly string[])
   for (const filename of replacements.keys()) await copyFile(resolve(stage, filename), resolve(publicDirectory, filename));
   await writeFile(resolve(outputDirectory, 'assets.json'), JSON.stringify(combined) + '\n');
   await updateInventory({ planetId: id, objectDirectory, location: 'public', assets: manifest.assets.map(asset => replacements.get(asset.filename) ?? asset) });
-  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare-surface-minimaps.mts')).href) as typeof import('../prepare-surface-minimaps.mts');
+  const { prepareSurfaceMinimaps } = await import(pathToFileURL(resolve('tools/prepare/prepare-surface-minimaps.mts')).href) as typeof import('../prepare/prepare-surface-minimaps.mts');
   await prepareSurfaceMinimaps({ objectDirectory, publicDirectory, outputDirectory, photographs: lensIds });
   await refreshSurfaceContent(id, lensIds);
   return { id, lenses: lensIds, assets: replacements.size, bytes: [...replacements.values()].reduce((sum, entry) => sum + entry.bytes, 0),
@@ -83,7 +83,7 @@ export async function refreshSurfaceContent(id: string, lensIds: readonly string
   }
   // Asset URLs and the scene are retained. The writer updates the descriptor/page transport from the new content.
   const runtime = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'runtime.json'), 'utf8')));
-  const { repinObjectJson } = await import(pathToFileURL(resolve('tools/prepare-object-json.mts')).href) as typeof import('../prepare-object-json.mts');
+  const { repinObjectJson } = await import(pathToFileURL(resolve('tools/prepare/prepare-object-json.mts')).href) as typeof import('../prepare/prepare-object-json.mts');
   const updatedControls = requireRecord(JSON.parse(await readFile(resolve(outputDirectory, 'controls.json'), 'utf8')));
   const labels = new Map(requireArray(requireRecord(updatedControls.lenses).controls).map(value => { const lens = requireRecord(value); return [requireString(lens.id), lens] as const; }));
   const controls = requireRecord(runtime.controls), lenses = requireRecord(controls.lenses);

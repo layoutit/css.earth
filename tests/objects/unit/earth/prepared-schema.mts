@@ -1,5 +1,5 @@
 import {array,boolean,dictionary,number,optional,shape,text,choice,nullable} from '../../../../tools/objects/terrestrial-layers/source-records.mts';
-import {requireRecord} from '../../../../tools/source-values.mts';
+import {requireRecord} from '../../../../tools/sources/source-values.mts';
 
 const dimensions={width:number,height:number};
 const pair=shape({one:text,two:text});

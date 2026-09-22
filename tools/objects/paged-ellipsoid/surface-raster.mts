@@ -1,5 +1,5 @@
 import { isArray } from '../../../src/platform/is-array.mts';
-import { isRecord } from '../../source-values.mts';
+import { isRecord } from '../../sources/source-values.mts';
 import type {ProjectiveGeometry} from '../../../src/platform/projective-surface-raster.mts';
 import type {RasterInfo} from '../observation/raster.mts';
 export interface PagedRasterConfiguration {publicBase: string; atlas: {density: number; gutter: number; pageSize: number; sourceWidth: number};}

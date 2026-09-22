@@ -26,7 +26,7 @@ import type {prepareRadialMotionAndShadow} from './radial-motion.mts';
 import type {prepareSpectralMaterialVariants} from './spectral-variants.mts';
 import type {prepareCutawayMaterials} from '../cutaway/materials.mts';
 import type {ReadonlyVector3} from './ellipsoid.mts';
-import {requireString,requireRecord} from '../../source-values.mts';
+import {requireString,requireRecord} from '../../sources/source-values.mts';
 type RadialPreparation = Awaited<ReturnType<typeof prepareRadialMotionAndShadow>>;
 interface LayeredInputs extends Omit<RadialPreparation,'ringGroups'> {
   ringGroups:PointGroup[];
@@ -39,7 +39,7 @@ import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { buildPolyCameraSceneTransform, buildPolyMeshTransform, buildSeamBleedPolygonEdges, computeSolidTrianglePlan, computeTextureAtlasPlanPublic, createPolyCamera, formatCssLength, resolvePolyTextureLeafGeometry, textureTintFactors, worldPositionToCss } from '@layoutit/polycss';
 import { createProjectiveSurfaceRasterPresentation, fitProjectiveTextureGeometryToStableLayout, packProjectiveSurfaceRaster, prepareProjectiveTextureLayer } from '../../../src/platform/projective-surface-raster.mts';
-import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared-webp.mts';
+import { optimizePreparedQ75Webp, PREPARED_Q75_WEBP_ENCODING } from '../../prepared/prepared-webp.mts';
 import { fitTextureGeometry, polarQuad } from './texture-geometry.mts';
 import { verifyObservationSources } from '../observed-surfaces/index.mts';
 import { extractRgbaBounds, visibleRgbaMatches } from './rgba.mts';

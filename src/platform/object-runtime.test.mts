@@ -1,5 +1,5 @@
 import type { PageLayerStats } from '../renderers/css/runtime/object-runtime-types.js';
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createObjectRuntime, parsePreparedObjectRuntime, preparedObjectCapabilities } from "../renderers/css/dist/index.js";
@@ -7,7 +7,7 @@ import type { ObjectRuntimeDefinition, ObjectMountOptions, ObjectRuntimeCapabili
 import type { PreparedImage } from "../renderers/css/rendering/prepared-image-store.js";
 import type { RuntimePolicy } from "../renderers/css/navigation/runtime-policy.js";
 import type { OrbitPublication } from "../renderers/css/navigation/object-orbit.js";
-import { requireObjectRuntimeDefinition } from "../../tools/object-runtime-contract.mts";
+import { requireObjectRuntimeDefinition } from "../../tools/contract/object-runtime-contract.mts";
 import { createPreparedResidency } from '../renderers/css/dist/testing.js';
 import { createPreparedPlayback } from '../renderers/css/dist/testing.js';
 import { createSceneLifetime } from "@cssearth/engine";

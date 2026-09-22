@@ -2,7 +2,7 @@ import assert from "node:assert/strict";
 import { readFile, readdir } from "node:fs/promises";
 import test from "node:test";
 
-import { auditObjectRuntimeOwnership } from "../../tools/check-object-runtime-ownership.mts";
+import { auditObjectRuntimeOwnership } from "../../tools/ci/check-object-runtime-ownership.mts";
 import { loadObjectContent } from "./load-object-content.mts";
 import { SCENE_OBJECTS } from "../objects.mts";
 import { required } from './navigation-test-values.mts';

@@ -5,7 +5,7 @@ import { resolve } from 'node:path';
 import { loadObjShape } from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import { spinOrientation } from '../../../../tools/objects/terrestrial-layers/observer-camera.mts';
 import { loadSpinFrameTransfer, readNpy } from '../../../../tools/objects/terrestrial-layers/npy-lonlat-grid.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../../tools/source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../../../tools/sources/source-values.mts';
 
 /**
  * The ALMA thermal maps are published in the Shepard et al. (2021) body frame; the lenses ride the ADAM mesh. Two

@@ -131,7 +131,7 @@ optimize coverage separately for every photograph.
 The world-navigation stage owns the default camera: it derives the pose and
 rewrites every prepared value computed from it (camera angles and state, the
 scene transform, the Sun's reference view direction). Changing the rule or a
-body's inputs needs only `node tools/prepare-object-json.mts --keep-bindings`,
+body's inputs needs only `node tools/prepare/prepare-object-json.mts --keep-bindings`,
 which re-runs that stage for every object in seconds. Earth, Saturn, Jupiter,
 Neptune and Uranus bake their lighting banks at the rule's pitch, so changing
 that pitch also re-bakes those five.

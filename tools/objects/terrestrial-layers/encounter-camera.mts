@@ -1,5 +1,5 @@
 import {parseEncounterControl,array,number} from './source-records.mts';
-import {requireRecord} from '../../source-values.mts';
+import {requireRecord} from '../../sources/source-values.mts';
 // Calibrated detector projection. J2000/body binding and measured pointing
 // corrections are authored preparation inputs; no cameras run in the browser.
 const dot = (a: readonly number[], b: readonly number[]) => a.reduce((sum, n, i) => sum + n * b[i], 0);

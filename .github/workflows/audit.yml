@@ -102,7 +102,7 @@ jobs:
       - name: Hash tracked build and compiler inputs
         if: ${{ !cancelled() }}
         id: ci-cache-key
-        run: node tools/ci-cache-key.mts
+        run: node tools/ci/ci-cache-key.mts
       - uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4
         if: ${{ !cancelled() }}
         id: package-cache
@@ -159,9 +159,9 @@ jobs:
         # read navigation, world context and title assets, so they need the same `full` build they had on the gate.
         run: |
           if [ "${GITHUB_EVENT_NAME:-}" = pull_request ] && [ "$CI_AUDIT_UNIVERSE" != true ] && [ "$CI_AUDIT_PREPARATION" != true ]; then
-            node tools/build-ci.mts lint
+            node tools/ci/build-ci.mts lint
           else
-            node tools/build-ci.mts full
+            node tools/ci/build-ci.mts full
           fi
       - name: Check every object's package files and source restoration plan
         if: ${{ !cancelled() }}
@@ -169,7 +169,7 @@ jobs:
         # (a declared input with neither a tracked copy nor an acquisition operation). Neither reaches the
         # deployed site: it serves the already-baked, sha256-pinned prepared bank from R2. The pins themselves
         # stay blocking in `Contract lint` (physical frame receipts and document pins).
-        run: node --test tools/restore-source-inputs.test.mts
+        run: node --test tools/assets/restore-source-inputs.test.mts
       - name: Check authored object directory layout
         if: ${{ !cancelled() }}
         run: node --test --test-name-pattern='authored object directory contains data and pinned sources only' tests/objects/source-closure.test.mts
@@ -191,15 +191,15 @@ jobs:
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             pnpm setup:asset-data
           else
-            node tools/prepare-ci-inputs.mts universe
+            node tools/prepare/prepare-ci-inputs.mts universe
           fi
-          node tools/restore-object-json.mts
-          node tools/prepare-provenance.mts --objects-only
-          node tools/prepare-feature-index.mts
+          node tools/assets/restore-object-json.mts
+          node tools/prepare/prepare-provenance.mts --objects-only
+          node tools/prepare/prepare-feature-index.mts
           node site/minimap/prepare.mts --data-only
           if [ "${GITHUB_EVENT_NAME:-}" = push ]; then
             # Authoring replays volume provenance from pinned FITS.
-            node tools/restore-source-inputs.mts --repository-volumes
+            node tools/assets/restore-source-inputs.mts --repository-volumes
             pnpm test:sources
           else
             pnpm test:sources:pr
@@ -218,9 +218,9 @@ jobs:
             echo "This change selects no preparation area; there is no bake to reproduce."
             exit 0
           fi
-          node tools/prepare-ci-inputs.mts universe-preparation
+          node tools/prepare/prepare-ci-inputs.mts universe-preparation
           # The galaxy writer finishes before world/provenance readers in this workspace.
-          node tools/restore-source-inputs.mts --repository-volumes
+          node tools/assets/restore-source-inputs.mts --repository-volumes
           pnpm test:galaxy-field
           pnpm test:ci-preparation:world
       - name: Explain that this job does not gate the merge

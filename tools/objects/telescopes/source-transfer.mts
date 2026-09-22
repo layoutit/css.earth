@@ -1,7 +1,7 @@
 /** Reuse the source package's acquisition declaration for native-file transport. */
 import { readFile } from 'node:fs/promises';
 import { resolve, relative } from 'node:path';
-import { hasErrorCode, requireRecord, requireArray, requireString } from '../../source-values.mts';
+import { hasErrorCode, requireRecord, requireArray, requireString } from '../../sources/source-values.mts';
 import type { SourceFile } from './source-products.mts';
 export async function sourceHeaders(root: string, file: SourceFile): Promise<Record<string, string>> {
   const boundary = file.path.indexOf('/source/');

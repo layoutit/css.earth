@@ -6,7 +6,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { angularSeparationDegrees, defaultViewGeometry } from '../../../../tools/objects/default-view.mts';
-import { requireFiniteNumber, requireRecord } from '../../../../tools/source-values.mts';
+import { requireFiniteNumber, requireRecord } from '../../../../tools/sources/source-values.mts';
 
 const BODY = resolve(import.meta.dirname, '../../../../src/objects/antares');
 const json = async (path: string) => JSON.parse(await readFile(resolve(BODY, path), 'utf8')) as unknown;

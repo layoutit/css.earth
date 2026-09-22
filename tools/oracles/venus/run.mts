@@ -97,7 +97,7 @@ function parseArguments(argumentsList: readonly string[]) {
       options.referenceInput = requiredValue(argumentsList, ++index, argument);
     } else {
       throw new TypeError(
-        "Usage: pnpm oracle:venus -- [--base-url URL] [--out PATH] " +
+        "Usage: node tools/oracles/venus/run.mts -- [--base-url URL] [--out PATH] " +
         "[--browser-channel chrome] [--reference-input PATH]",
       );
     }

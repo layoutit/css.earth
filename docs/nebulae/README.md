@@ -208,7 +208,7 @@ research processing remains an explicit lab operation.
 
 Routine provenance tests verify the retained current bytes, manifest coverage,
 revision syntax and portable links without requiring Git history. The separate
-`node tools/nebula-provenance-history.gate.mts` audit compares every retained copy
+`node tools/sources/nebula-provenance-history.gate.mts` audit compares every retained copy
 and historical source-record hash with its recorded Git revision. Run that audit
 from a checkout containing those revisions; it fails if history is missing rather
 than substituting current bytes or skipping verification.

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Astropy RICE_1 tile compression and helioprojective WCS for tools/fits-rice.mts and
+"""Astropy RICE_1 tile compression and helioprojective WCS for tools/fits/fits-rice.mts and
 tools/objects/observation/hmi-continuum.mts. Run with the pinned oracle environment; never imports
 the TypeScript readers. The compressed images are tiny, checked-in test data, not pipeline assets.
 """

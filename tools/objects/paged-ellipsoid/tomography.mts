@@ -1,4 +1,4 @@
-import {readJsonSource, requireFiniteNumber} from '../../source-values.mts';
+import {readJsonSource, requireFiniteNumber} from '../../sources/source-values.mts';
 import {parseTomographyRecipe} from './source-contract.mts';
 import type {TomographyRecipe} from './source-contract.mts';
 import type {Cutaway} from './contracts.mts';

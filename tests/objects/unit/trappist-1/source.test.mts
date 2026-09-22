@@ -8,7 +8,7 @@ import { resolve } from 'node:path';
 import { BODIES, hostedOrbit, hostedPlanetStateRelativeKm } from '@cssearth/astronomy';
 import { createSourceManifest } from '../../../../src/platform/source-manifest.mts';
 import { requireBodyFixedToIcrf, requireBodyOrbit } from '../../../../src/platform/solar-geometry.mts';
-import { requireRecord } from '../../../../tools/source-values.mts';
+import { requireRecord } from '../../../../tools/sources/source-values.mts';
 
 const objects = resolve(import.meta.dirname, '../../../../src/objects');
 const PLANETS = ['trappist-1b', 'trappist-1c', 'trappist-1d', 'trappist-1e', 'trappist-1f', 'trappist-1g', 'trappist-1h'] as const;

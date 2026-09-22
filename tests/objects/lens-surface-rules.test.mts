@@ -3,7 +3,7 @@ import { readFile, readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { projectRoot } from './fixtures.mts';
-import { requireArray, requireRecord, requireString } from '../../tools/source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../tools/sources/source-values.mts';
 
 /**
  * A raster body paints its globe from hand-written CSS: one base rule for the default lens, and one

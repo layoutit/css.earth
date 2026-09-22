@@ -26,8 +26,8 @@ import { mkdir, readFile, rm, stat, symlink, writeFile } from 'node:fs/promises'
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256File } from '../../../src/platform/sha256.mts';
-import { readFitsHeader, type FitsHeader } from '../../fits.mts';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { readFitsHeader, type FitsHeader } from '../../fits/fits.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { tapRows } from '../astronomy-packages/client.mts';
 
 export const PROGRAMS = resolve(import.meta.dirname, 'programs');

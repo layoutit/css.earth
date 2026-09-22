@@ -1,13 +1,13 @@
-import { requireRecord, requireString } from '../source-values.mts';
-import { requireObjectRuntimeDefinition } from '../object-runtime-contract.mts';
+import { requireRecord, requireString } from '../sources/source-values.mts';
+import { requireObjectRuntimeDefinition } from '../contract/object-runtime-contract.mts';
 import { shape, text } from './terrestrial-layers/source-records.mts';
-import { required } from '../test-values.mts';
+import { required } from '../contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import { prepareSolarSystemCamera, prepareSolarSystemScene } from "./solar-system-scene.mts";
-import { readJsonSource } from '../source-values.mts';
+import { readJsonSource } from '../sources/source-values.mts';
 import { loadAstronomyPackage } from "../../src/platform/astronomy-package.mts";
 import { SOLAR_GEOMETRY_EPOCH_JD_TT } from "../../src/platform/solar-geometry.mts";
 import type { Vec3 } from "@cssearth/astronomy";

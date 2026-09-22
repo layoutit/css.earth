@@ -27,7 +27,7 @@
 import { mkdir, readdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { isRecord, requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseSpitzerProgram, PROGRAMS, REPOSITORY, shaSearch, type ShaRow } from './archive.mts';
 import { parseReproduction } from './compare.mts';
 

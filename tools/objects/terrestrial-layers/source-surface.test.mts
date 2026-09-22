@@ -1,6 +1,6 @@
-import { required, fixtureRecord } from '../../test-values.mts';
+import { required, fixtureRecord } from '../../contract/test-values.mts';
 import { shape, array, text, number, optional, parseShapeLens } from './source-records.mts';
-import { requireArray, requireRecord } from '../../source-values.mts';
+import { requireArray, requireRecord } from '../../sources/source-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
 import { test } from 'node:test';

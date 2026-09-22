@@ -9,8 +9,8 @@
  * mean brightness in a window on each side and read at the band's centre. It is a ratio of brightnesses at neighbouring
  * wavelengths in one pixel, so it needs no solar spectrum, no distance and no albedo; its error is carried from ERR. */
 import { open } from 'node:fs/promises';
-import { readFitsFileHdus, type FitsFileHdu } from '../../../fits.mts';
-import { requireFiniteNumber } from '../../../source-values.mts';
+import { readFitsFileHdus, type FitsFileHdu } from '../../../fits/fits.mts';
+import { requireFiniteNumber } from '../../../sources/source-values.mts';
 
 export type Window = readonly [number, number];
 export interface SpectralCube {

@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
 import { fromFile } from 'geotiff';
-import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { blackFillCoverage } from '../../../src/platform/prepare-missing-coverage.mts';
 import { readFitsPrimary } from '../observation/fits.mts';
 import { numericRaster, numericRasterBands, parseByteObservationPolicy, parseFitsPolicy, parseFloatObservationPolicy,

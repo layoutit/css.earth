@@ -1,8 +1,8 @@
-import { requireRecord, requireString } from '../../../../tools/source-values.mts';
+import { requireRecord, requireString } from '../../../../tools/sources/source-values.mts';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { test } from 'node:test';
-import { required } from '../../../../tools/test-values.mts';
+import { required } from '../../../../tools/contract/test-values.mts';
 import { parseInterpreterRecipe } from '../../../../tools/objects/observation/interpret.mts';
 import { decodePds4Color, mapPds4Color } from '../../../../tools/objects/terrestrial-layers/observed-pds4.mts';
 

@@ -1,5 +1,5 @@
-import { required, fixtureRecord } from '../../test-values.mts';
-import { requireArray } from '../../source-values.mts';
+import { required, fixtureRecord } from '../../contract/test-values.mts';
+import { requireArray } from '../../sources/source-values.mts';
 import { parseGeologyLens,shape,array,number,text } from './source-records.mts';
 import assert from 'node:assert/strict';
 import {test} from 'node:test';

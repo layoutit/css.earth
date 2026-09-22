@@ -218,6 +218,6 @@ if (invoked) {
   await writeWorldNavigationArtifacts(outputDirectory, result, scene);
   const descriptorPath = resolve(objectDirectory, 'object.json'), descriptor = JSON.parse(await readFile(descriptorPath, 'utf8'));
   await writeFile(descriptorPath, `${JSON.stringify({ ...descriptor, properties: { ...descriptor.properties, worldFrame: result.frame } }, null, 2)}\n`);
-  const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../tools/prepare-object-json.mts')).href);
+  const { writeObjectJson } = await import(pathToFileURL(resolve(objectDirectory, '../../../tools/prepare/prepare-object-json.mts')).href);
   console.log(JSON.stringify(await writeObjectJson(descriptor.id, result.definition)));
 }

@@ -1,6 +1,6 @@
 /** Serialize the standard prepared sphere and its CSS camera at export time. */
 import { parseHTML } from 'linkedom';
-import { serializePreparedScene } from '../../serialize-prepared-scene.mts';
+import { serializePreparedScene } from '../../prepared/serialize-prepared-scene.mts';
 import { initialObjectSelection } from '../../../src/renderers/css/runtime/object-contract.ts';
 import { publishPreparedNativeView } from '../../../src/renderers/css/rendering/prepared-native-view.ts';
 import { preparedSceneMatrix } from '../../../src/renderers/css/navigation/prepared-camera-basis.ts';

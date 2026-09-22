@@ -45,7 +45,7 @@
     "normal": {
       "title": "FC natural-color composite",
       "detail": "Dawn HAMO",
-      "summary": "The 650, 550 and 430 nm bands approximate visible color; bright terrain clips to white."
+      "summary": "The 650, 550 and 430 nm bands approximate visible color; beyond its coverage the HAMO mosaic shows in gray."
     },
     "ratios": {
       "title": "Clementine-style color composite",
@@ -60,7 +60,12 @@
     "surface": {
       "title": "LAMO clear-filter mosaic",
       "detail": "Dawn FC · 20 m/pixel source",
-      "summary": "Low-altitude photographs reveal crater walls and troughs. Original illumination and seams remain; gray grid marks gaps."
+      "summary": "Low-altitude photographs of crater walls and troughs; the north LAMO never saw takes the HAMO mosaic in gray."
+    },
+    "hamo": {
+      "title": "HAMO clear-filter mosaic",
+      "detail": "Dawn FC · 60 m/pixel source",
+      "summary": "High-altitude photographs of the whole surface, north pole included under low sun; illumination and seams remain."
     }
   }
 }

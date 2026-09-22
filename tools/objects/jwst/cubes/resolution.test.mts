@@ -5,7 +5,7 @@ import { execFileSync } from 'node:child_process';
 import { resolve } from 'node:path';
 import { EUREKA_ROOT } from '../toolchain.mts';
 import { RESOLUTION_PYTHON } from './resolution.mts';
-import { requireArray, requireRecord, requireFiniteNumber } from '../../../source-values.mts';
+import { requireArray, requireRecord, requireFiniteNumber } from '../../../sources/source-values.mts';
 
 const python = resolve(EUREKA_ROOT, 'env/bin/python');
 test('Astropy measures both axes at every wavelength and refuses unsuitable profiles', { skip: !existsSync(python) && 'Install the pinned JWST toolchain to run numerical fits.' }, () => {

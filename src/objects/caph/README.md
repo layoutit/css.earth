@@ -21,7 +21,7 @@ Colour lens: the colour of Caph's spectrum as the Pulkovo spectrophotometric cat
 Run of 2026-09-21 (this version):
 
 - [`gravity-darkening.test.mts`](../../../tools/objects/observation/gravity-darkening.test.mts) checks the Roche model against the paper's equatorial radius and temperature.
-- [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #e5e9ff is the colour lens's prepared colour, that the limb-darkening law is read at the recorded temperature and gravity, and that the second spectrum agrees.
+- [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #e5e9ff is the colour lens's prepared colour, that the limb-darkening law is read at the recorded temperature and gravity, and that the second spectrum agrees.
 
 ## Known problems
 

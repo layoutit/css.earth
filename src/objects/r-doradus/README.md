@@ -51,7 +51,7 @@ sub-pixel: rounding it to the 5 mas archive grid inflates the residual from 3.1%
 
 **Independent of ours,** the authors conclude the structures are intrinsic to the star from their correspondence across
 epochs, including band 6 observations at 225 GHz fifteen days later, and measure a typical lifetime of at least three weeks.
-- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/object-package-consistency.test.mts) checks that the catalogue colour #ff6725 is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
+- Run of 2026-09-21 (this version): [`object-package-consistency.test.mts`](../../../tools/contract/object-package-consistency.test.mts) checks that the catalogue colour #ff6725 is the colour lens's prepared colour; `node tools/objects/source-authoring/stellar-spectra/author.mts --check` recomputes the colour from the pinned spectrum.
 
 ## Known problems
 

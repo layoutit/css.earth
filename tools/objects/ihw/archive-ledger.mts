@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /** Build the IHW/PDS near-nucleus Halley ledger from its fixed-width PDS file table.
  *
- *   pnpm exec node tools/run-typed-module.mjs tools/objects/ihw/archive-ledger.mts FILELIST.TAB --write
+ *   pnpm exec node tools/cli/run-typed-module.mjs tools/objects/ihw/archive-ledger.mts FILELIST.TAB --write
  *
  * The archive table is the index. This code preserves every observation identity and does not infer bandpasses from filter
  * names. The selected archive-final product is qualified only while its committed record agrees with the official pins. */
@@ -9,7 +9,7 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { sha256 } from '../../../src/platform/sha256.mts';
-import { requireArray, requireRecord, requireString } from '../../source-values.mts';
+import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { parseProductRecord } from '../product-record.mts';
 
 export const IHW_LEDGER_SCHEMA = 'cssearth-ihw-ledger@1';

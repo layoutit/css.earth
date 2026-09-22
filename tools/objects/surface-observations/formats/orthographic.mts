@@ -1,7 +1,7 @@
 /** A registered orthophoto on an image-plane DEM. Every image pixel names one released terrain post, so no camera is needed. */
 import type { ObservationFrame, SurfaceObservationFormat } from '../contract.mts';
 import { array, decodeProfile, dimensions, number, shape, text, parseSurfaceGeometry } from '../../terrestrial-layers/source-records.mts';
-import { requireArray, requireRecord } from '../../../source-values.mts';
+import { requireArray, requireRecord } from '../../../sources/source-values.mts';
 import { OPTIONAL_LENS_KEYS, checkKeys, displayBasis, parseDisplay, validateEnvelope } from '../recipe.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';

@@ -1,5 +1,5 @@
-import { loadObjectTestDefinition } from '../../tools/object-test-data.mts';
-import { prepareFrameLookup } from "../../tools/prepare-materials.mts";
+import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
+import { prepareFrameLookup } from "../../tools/prepare/prepare-materials.mts";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import test from "node:test";

@@ -7,9 +7,9 @@
  */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { requireFiniteNumber, requireRecord, requireString } from '../../source-values.mts';
+import { requireFiniteNumber, requireRecord, requireString } from '../../sources/source-values.mts';
 import { array, decodeProfile, number, optional, shape, text } from './source-records.mts';
-import { readFitsHdu } from '../../fits.mts';
+import { readFitsHdu } from '../../fits/fits.mts';
 import { parseTextKernel } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds } from '../../spice/lsk.mts';
 import { decodeCalibratedCamera } from './shape-camera-mosaic.mts';

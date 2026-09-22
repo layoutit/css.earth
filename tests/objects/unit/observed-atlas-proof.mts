@@ -1,6 +1,6 @@
 import {array,dictionary,number,optional,shape,text,numericRaster} from '../../../tools/objects/terrestrial-layers/source-records.mts';
-import {requireFiniteNumber} from '../../../tools/source-values.mts';
-import {required} from '../../../tools/test-values.mts';
+import {requireFiniteNumber} from '../../../tools/sources/source-values.mts';
+import {required} from '../../../tools/contract/test-values.mts';
 import type {GeoTIFFImage} from 'geotiff';
 import assert from 'node:assert/strict';
 import {readFile, type FileHandle} from 'node:fs/promises';
