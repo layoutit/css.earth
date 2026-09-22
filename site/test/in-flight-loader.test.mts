@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createInFlightLoader } from '../in-flight-loader.mts';
 
 test('in-flight loader shares concurrent work but releases successful values', async () => {

@@ -36,8 +36,8 @@ export interface LabSubjectRecord {
   reconstructionNeutral?: { descriptor: string };
   /** Saved results sharing this model identity differ only in prepared material banks. */
   materialGeometry?: string;
-  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; processingPlan?: string; modelPlacement?: { path: string; sha256: string }; candidateImageIds?: string[];
-    reconstructionReferenceImageId?: string; starAlignmentReference?: { path: string; sha256: string }; referenceFramingRadiusUnits?: number };
+  density?: { directory: string; modelNote: string; sourcePageUrl: string; credit: string; overlays?: string; processingPlan?: string; modelPlacement?: { path: string }; candidateImageIds?: string[];
+    reconstructionReferenceImageId?: string; starAlignmentReference?: { path: string }; referenceFramingRadiusUnits?: number };
 }
 const subjectRecords: readonly LabSubjectRecord[] = records;
 export const localFile = (path: string) => `/@fs${__NEBULA_REPO_ROOT__.replace(/\/$/, '')}/${path}`;

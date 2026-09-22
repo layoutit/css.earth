@@ -30,8 +30,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "USGS 2010 Cassini/Voyager mosaic. Preserve all nonzero source values; exactly zero is GeoTIFF no-data. Photographed shading and native resolution vary.",
-      "expectedBytes": 265490551,
-      "expectedSha256": "5c5d796c02e3c99fde5dd034e01dd1f25905699a4885843aed445ded955e08b5",
       "capture": {
         "attributions": [
           {
@@ -92,8 +90,6 @@
         "latitudeType": "planetocentric"
       },
       "coverage": "Published global rectangular display mosaic without a separate validity mask. Preserve all supplied pixels, including dark terrain, residual photographed shadows and coarse inserts.",
-      "expectedBytes": 10255303,
-      "expectedSha256": "5e885d0e3bac1e1ee36934063d5c9cdf609dc10ad44677cba31bc9e703b674ff",
       "capture": {
         "attributions": [
           {
@@ -144,8 +140,6 @@
       },
       "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
-      "expectedBytes": 6044025,
-      "expectedSha256": "08a2a6141d0095531da511468d4176577dd3ac8ce45c0d154ba5a655a9711617",
       "capture": {
         "attributions": [
           {
@@ -194,8 +188,6 @@
       },
       "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
-      "expectedBytes": 790785,
-      "expectedSha256": "f2a0bf4a4eba63ddfd566231fc02fc7f1f8aeaba0687e437d8669d8844f436ee",
       "capture": {
         "attributions": [
           {
@@ -244,8 +236,6 @@
       },
       "coverage": "PDS SPC radius model. Sample original equatorial and polar geotransforms within documented latitude limits. No extrapolation across source edges.",
       "units": "Center-relative radius in meters. Displayed height is radius/1000 minus 561.4 km.",
-      "expectedBytes": 790785,
-      "expectedSha256": "416107461ff452d07944f5391d3e9e5bdda8c6d7544379444778e6ec52c72970",
       "capture": {
         "attributions": [
           {
@@ -270,8 +260,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -311,8 +299,6 @@
       ],
       "units": "Native Cartesian coordinates in kilometres, +X at 0° longitude and +Z north; no height exaggeration.",
       "coverage": "Global Q128 SPC shape, 98,306 vertices and 196,608 faces; source mesh is simplified under a measured preparation error budget. Native image support and accuracy vary.",
-      "expectedBytes": 17694840,
-      "expectedSha256": "6fa66be6d8065fccb55bda4f9b272aefddbd2ddb1402ff284c00ca21e15df9ad",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -356,8 +342,6 @@
       "height": 679,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 6044025,
-      "expectedSha256": "e08ad608fd0786dd507f290a6df8d29fbad9f24631d21aafd91c2dc4732fdfb6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -401,8 +385,6 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 790785,
-      "expectedSha256": "3b809800678f9a21574bd4ea45dda127ce8f122e35d13d9881c823ab4c4b2a4d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -446,8 +428,6 @@
       "height": 444,
       "units": "Dimensionless SPC relative albedo, normalized around 1; not geometric albedo or calibrated reflectance.",
       "coverage": "Original independently projected global model grids. Actual raster bounds and exact special-pixel values are retained.",
-      "expectedBytes": 790785,
-      "expectedSha256": "10c4f91d0686b03e554e8da9f9bc44acf60dccefae2406c8351e6bf01852a3b8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -514,8 +494,6 @@
     {
       "id": "dione-vims-source-vims-wavelengths-ir-tab",
       "path": "vims/data/vims_wavelengths_ir.tab",
-      "expectedBytes": 2304,
-      "expectedSha256": "8cb35dca77944143d27db18860ddee6b5ee29369b0fd0e1441b246c90a89a449",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.tab",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -620,8 +598,6 @@
     {
       "id": "dione-vims-source-dione-notnorm-pc-modified-2-img",
       "path": "vims/data/dione/dione_notnorm_pc_modified_2.img",
-      "expectedBytes": 66355200,
-      "expectedSha256": "57eb3fcc82c5e2ac3e239008cde901c1ade5641d540088514a880c755de275e6",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.img",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -648,8 +624,6 @@
     {
       "id": "dione-vims-source-dione-phase-function-parameters-tab",
       "path": "vims/data/dione/dione_phase_function_parameters.tab",
-      "expectedBytes": 25549,
-      "expectedSha256": "4c598339ff2280f1a9e6901376aef02c84306bf6863d4ca6aabf9fa6b24c9736",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.tab",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -702,8 +676,6 @@
     {
       "id": "dione-vims-source-dione-vims-cubes-list-tab",
       "path": "vims/data/dione/dione_vims_cubes_list.tab",
-      "expectedBytes": 8694,
-      "expectedSha256": "ac179a7b2eded9b32f3d4c958e7ed0e69aed0eb66cdb0f40bed0d77ca3ea9248",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_vims_cubes_list.tab",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -1024,9 +996,7 @@
     {
       "path": "science/b2-intake/dioneshapeassessment.pdf",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneshapeassessment.pdf",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 13768156,
-      "expectedSha256": "dfb338cb8f816f08ec011423ec516241e78c1bbe0475eed38ed009b1779e46d1"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "validation/b2-scalar-anchors.json",

@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -123,9 +121,7 @@
       "path": "reference/horizons-vectors.txt"
     },
     {
-      "path": "reference/huya-rommel-2025.pdf",
-      "expectedBytes": 5003145,
-      "expectedSha256": "5f9dc9b853085da6b17c2bf3855dbf74e0839803d44e9475f4b753b30477bffe"
+      "path": "reference/huya-rommel-2025.pdf"
     },
     {
       "path": "reference/sbdb.json",

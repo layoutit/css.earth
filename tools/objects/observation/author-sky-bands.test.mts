@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { footprintReachesGrid } from './author-sky-bands.mts';
 
 const grid = { width: 4000, height: 4000, fovDeg: 10, centerIcrsDegrees: [13.19, -72.83] as [number, number] };

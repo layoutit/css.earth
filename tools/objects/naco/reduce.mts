@@ -32,7 +32,7 @@ import { basename, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { requireFiniteNumber, requireRecord } from '../../sources/source-values.mts';
 import { esoEnvironment, esoHeader, rawFrames, type EsoHeader, type SetOfFrames } from '../interferometry/eso-pipeline.mts';
-import { assertInputPins, pinFile, productRecordPath, readProductRecord, writeProductRecord,
+import { assertInputPins, fileSize, productRecordPath, readProductRecord, writeProductRecord,
   type ProductInput, type ProductRecord, type ProductRun, type ProductSoftware } from '../product-record.mts';
 import { readProgram, writeProgram, type NacoFrame, type NacoMode, type NacoProgram } from './archive.mts';
 import { nacoToolchainDescriptor, nacoToolchainPath } from './toolchain.mts';
@@ -231,9 +231,9 @@ export async function pinnedInputs(frames: readonly NacoFrame[], rawDirectory: s
   const file = (frame: NacoFrame) => resolve(rawDirectory, `${frame.dpId}.fits`);
   const inputs: ProductInput[] = [];
   for (const frame of frames) {
-    const found = await pinFile(file(frame)).catch(() => null);
+    const found = await fileSize(file(frame)).catch(() => null);
     if (!found) throw new Error(`${frame.dpId} is not in ${rawDirectory}: a run consumes the frames it downloaded.`);
-    inputs.push({ role: frame.tag, identity: frame.dpId, bytes: found.bytes, sha256: frame.sha256 ?? found.sha256 });
+    inputs.push({ role: frame.tag, identity: frame.dpId, bytes: found.bytes });
   }
   await assertInputPins(inputs, new Map(frames.map(frame => [frame.dpId, file(frame)])));
   return inputs;
@@ -241,12 +241,6 @@ export async function pinnedInputs(frames: readonly NacoFrame[], rawDirectory: s
 
 /** The program with the digests a run measured. A frame the program had pinned is unchanged, because the run was refused
  * unless the file on disk was that very frame; a frame it had not is pinned by the run that first downloaded it. */
-export function pinFrames(program: NacoProgram, inputs: readonly ProductInput[]): NacoProgram {
-  const measured = new Map(inputs.map(input => [input.identity, input.sha256]));
-  const pin = (frame: NacoFrame): NacoFrame => frame.sha256 !== undefined || !measured.has(frame.dpId)
-    ? frame : { ...frame, sha256: measured.get(frame.dpId)! };
-  return { ...program, science: program.science.map(pin), calibration: program.calibration.map(pin), standard: program.standard.map(pin) };
-}
 
 export interface ProductFacts { readonly software: readonly ProductSoftware[]; readonly units?: string; readonly conventions: Readonly<Record<string, string>> }
 
@@ -516,6 +510,5 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
       if (!record) throw new Error(`${product} has no product record; the run that makes a product writes one beside it.`);
       return record;
     }));
-  await writeProgram(pinFrames(program, records.flatMap(record => record.inputs)));
   console.log(`${result.combined}: ${result.objectFrames} object and ${result.skyFrames} sky frames through ${result.runs.length} recipes.`);
 }

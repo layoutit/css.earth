@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseTextKernel, numbers } from '../../spice/text-kernel.mts';
 import { parseLeapSeconds, utcToEt } from '../../spice/lsk.mts';
 import { FRAMELET_HEIGHT, FRAMELET_WIDTH, JUNOCAM_FILTERS, decodeJunocam, frameEpoch, frameletIndex, junocamPixelMapping, junocamStrip, readJunocamLabel } from './junocam.mts';

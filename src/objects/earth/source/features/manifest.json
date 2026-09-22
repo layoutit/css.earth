@@ -10,44 +10,37 @@
     {
       "path": "ne_10m_admin_0_countries.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_admin_0_countries.zip",
-      "bytes": 4930492,
-      "sha256": "ce1ac7036499a0edd641fbc093cd209a98f96a49d2eca8480aaacad35138a7f6"
+      "bytes": 4930492
     },
     {
       "path": "ne_10m_populated_places.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/cultural/ne_10m_populated_places.zip",
-      "bytes": 2811199,
-      "sha256": "cd149186f03d2603e0410da399b980a4357d0ac32d3a2305a49ed3dffcc41d7b"
+      "bytes": 2811199
     },
     {
       "path": "ne_10m_geography_regions_points.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_points.zip",
-      "bytes": 87372,
-      "sha256": "2cf54b21fc684f0f7023886379c7ae9c5c716d8bd4c3ead19050f3a7f53e4f7d"
+      "bytes": 87372
     },
     {
       "path": "ne_10m_geography_regions_polys.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_regions_polys.zip",
-      "bytes": 2038519,
-      "sha256": "cb7b9db200284ed1551f20eacc7f3333e9b5f311c19f7cb2670694529f688682"
+      "bytes": 2038519
     },
     {
       "path": "ne_10m_geography_marine_polys.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_geography_marine_polys.zip",
-      "bytes": 940563,
-      "sha256": "a2d3395904c41e718e02c3ec5bc988712164c524c236fad32d95d282ca303b2a"
+      "bytes": 940563
     },
     {
       "path": "ne_10m_rivers_lake_centerlines.zip",
       "origin": "https://naciscdn.org/naturalearth/10m/physical/ne_10m_rivers_lake_centerlines.zip",
-      "bytes": 2079507,
-      "sha256": "ded71b01870855ccfe19b51f2ec14c9bb48fae23c0e9f3c11974d426433b5c38"
+      "bytes": 2079507
     },
     {
       "path": "landmarks.json",
       "origin": "Wikidata items and coordinate location (P625), query.wikidata.org SPARQL retrieved 2026-09-15; cssEarth transcription.",
-      "bytes": 28537,
-      "sha256": "646efc2ea52249c099c264ad961f4fe8339b468afbd3467368b46b27c56b2794"
+      "bytes": 28537
     }
   ]
 }

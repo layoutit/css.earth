@@ -13,7 +13,6 @@ export interface MappedCompositionRecipe {
   target: string;
   referenceRadiusMeters: number;
   input: string;
-  sha256: string;
   observationName: string;
   selections: Selection[];
 }
@@ -47,11 +46,10 @@ export function parseMappedCompositionRecipe(value: unknown): MappedCompositionR
     throw new TypeError('Unknown mapped composition selection.');
   });
   if (new Set(selections.map(s => s.id)).size !== selections.length) throw new TypeError('Duplicate mapped composition product.');
-  const sha256 = text(r.sha256), input = text(r.input);
-  if (!/^[a-f0-9]{64}$/.test(sha256)) throw new TypeError('Mapped composition requires an exact source hash.');
+  const input = text(r.input);
   contained('.', input);
   return { schema: r.schema, target: text(r.target), referenceRadiusMeters: positive(r.referenceRadiusMeters),
-    input, sha256, observationName: text(r.observationName), selections };
+    input, observationName: text(r.observationName), selections };
 }
 function nodes(value: unknown, first: number, length: number): void {
   if (!Array.isArray(value) || value.length !== length || value.some((v, i) => v !== first + i))
@@ -86,7 +84,6 @@ export function encodeCompositionGrid(source: Grid, radius: number): Uint8Array 
   }));
 }
 export function convertMappedComposition(bytes: Uint8Array, recipe: MappedCompositionRecipe) {
-  if (sha256(bytes) !== recipe.sha256) throw new Error('Mapped composition source hash changed.');
   const document = record(JSON.parse(gunzipSync(bytes).toString('utf8'))), metadata = record(document.metadata);
   if (metadata.target !== recipe.target || metadata.observation_name !== recipe.observationName || metadata.nan_value !== -99)
     throw new TypeError('Mapped composition source identity changed.');
@@ -131,7 +128,7 @@ export function convertMappedComposition(bytes: Uint8Array, recipe: MappedCompos
   }
   const { latitudes, longitudes, ...sourceMetadata } = metadata;
   return { products, report: { schema: 'cssearth-mapped-composition-conversion@1', target: recipe.target,
-    source: { path: recipe.input, sha256: recipe.sha256, bytes: bytes.byteLength, metadata: sourceMetadata },
+    source: { path: recipe.input, sha256: sha256(bytes), bytes: bytes.byteLength, metadata: sourceMetadata },
     grid: { width: 361, height: 180, coordinates: 'degrees', centerLongitude: 0, referenceRadiusMeters: recipe.referenceRadiusMeters,
       origin: [-180.5, 89.5], resolution: [1, -1], wrapLongitude: true, noData: -99 },
     processing: 'Reverse latitude rows, reorder east-positive longitude nodes, repeat the periodic seam column, round values to float32. No spatial smoothing, gap fill or fitted abundance aggregation.',

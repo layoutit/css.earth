@@ -106,8 +106,7 @@
         "src/renderers/css/styles/abundantia-surfaces.css"
       ],
       "metadata": {
-        "url": "prepared/page.json",
-        "sha256": "ae4407e8eb6341f72eb3181f2a4db3a87d0ec9bcb1d9509a980a2740a3d29961"
+        "url": "prepared/page.json"
       }
     },
     "catalog": {
@@ -127,7 +126,6 @@
   "type": "layered-body",
   "prepared": {
     "format": "cssearth-css-object@5",
-    "url": "prepared/object.json",
-    "sha256": "d4694b1c1ccaca9be02e0cc43a0c7c88306aa4a04447c58eac1d80316857fd26"
+    "url": "prepared/object.json"
   }
 }

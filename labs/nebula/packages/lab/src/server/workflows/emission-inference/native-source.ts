@@ -7,8 +7,7 @@ export {nativeRemovalTimeoutMs} from '@cssearth/nebula-reconstruction/star-remov
 
 export interface NativeRemoval {
   directory: string;
-  model: { path: string; sha256: string };
-  scriptSha256: string;
+  model: { path: string };
 }
 const sha = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 export async function nativeStarless(source: Buffer, dimensions: [number, number], settings: NativeRemoval,
@@ -17,8 +16,6 @@ export async function nativeStarless(source: Buffer, dimensions: [number, number
   if (!relative(resolve(root, '.local/nebula-lab'), directory).match(/^(?!\.\.)(?!\/).+/))
     throw new TypeError('Native removal output must be inside the ignored lab cache.');
   const script = resolve(root, 'labs/nebula/packages/reconstruction/src/star-removal/star-removal.py');
-  if (sha(await readFile(script)) !== settings.scriptSha256 || sha(await readFile(settings.model.path)) !== settings.model.sha256)
-    throw new Error('Pinned NOX implementation/model is missing or changed.');
   await mkdir(directory, { recursive: true });
   const working = await prepareNativeRemovalSource(source, dimensions);
   const sourceSha = sha(working), input = resolve(dirname(directory), `nox-source-${sourceSha}.png`);
@@ -35,13 +32,12 @@ export async function nativeStarless(source: Buffer, dimensions: [number, number
     if (options.allowProcessing === false) throw new Error('Native separation is not prepared; this operation cannot start NOX.');
     const request: NativeRemovalRequest = { schema: 'cssearth-star-removal@1', operation: 'apply',
       source: { path: input, sha256: sourceSha, nativeDimensions: dimensions },
-      model: { ...settings.model, path: resolve(root, settings.model.path) }, outputDirectory: directory };
+      model: { path: resolve(root, settings.model.path) }, outputDirectory: directory };
     await writeFile(resolve(directory, 'request.json'), JSON.stringify(request, null, 2) + '\n');
     await runNativeRemoval(request,{executable:resolve(root,'.local/open-star-removal/venv/bin/python'),script,cwd:root});
     receipt = JSON.parse(await readFile(receiptPath, 'utf8'));
   }
   if (receipt.schema !== 'cssearth-nox-output@1' || receipt.operation !== 'apply' || receipt.sourceSha256 !== sourceSha ||
-      receipt.modelSha256 !== settings.model.sha256 || receipt.scriptSha256 !== settings.scriptSha256 ||
       receipt.baselineSha256 !== null || JSON.stringify(receipt.nativeDimensions) !== JSON.stringify(dimensions) ||
       receipt.applied?.verification?.maximumReconstructionErrorCodeValues !== 0 || !receipt.applied?.verification?.coverageComplete)
     throw new Error('Native NOX receipt does not match this source and configured model.');

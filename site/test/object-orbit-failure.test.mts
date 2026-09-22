@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { required } from './navigation-test-values.mts';
 import { materialOrbitFixture } from '../../src/platform/test/object-material-orbit-fixture.mts';
 

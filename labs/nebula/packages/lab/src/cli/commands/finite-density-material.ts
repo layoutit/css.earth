@@ -10,7 +10,7 @@ import { compileCssVolume } from '../../adapters/preparation/css-volume.ts';
 import { fitFiniteRegionMaterial, type MaterialTransportSample } from '@cssearth/nebula-reconstruction/methods/sampled/finite-region-material';
 import { compilerSlabMaterial } from '@cssearth/volume-core/materials/slab-material';
 import { recolorCloudSlices } from '@cssearth/volume-bake/slices/material';
-import { loadVolumeSource, sampleEncoded, verifiedBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { loadVolumeSource, sampleEncoded, sourceBytes, sha256, containedPath } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { channelDensity } from '@cssearth/volume-bake/slices/density';
 import { parseVolumeRecipe, type Vector3 } from '@cssearth/volume-core/contracts/volume-recipe';
 import type { VolumeSlices, VolumeSliceQuad } from '@cssearth/volume-core/contracts/volume-slices';
@@ -34,10 +34,10 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   await verifyFiniteMaterialArtifacts(baseline,`reconstruction-${baselineId}`);
   if(provenance.schema!=='cssearth-nebula-reconstruction-provenance@1'||oldResult.resultId!==baselineId||provenance.request.cloud.modelPlacement)throw Error('Expected an unplaced fixed-density reconstruction');
   const work=provenance.request,frame=work.frame;
-  const recipe=parseVolumeRecipe(parseLabModelJson((await verifiedBytes(root,work.cloud.provenance)).toString()));
+  const recipe=parseVolumeRecipe(parseLabModelJson((await sourceBytes(root,work.cloud.provenance)).toString()));
   if(recipe.material.emissionTransfer!=='shared-opacity'||recipe.material.absorption.length||recipe.material.emission.length!==1||recipe.material.emission[0].channel!==3)throw Error('Prototype requires scalar shared-opacity density');
   const source=await loadVolumeSource(dirname(resolve(root,work.cloud.provenance.path)),recipe);
-  const sourceSlices=parseLabModelJson((await verifiedBytes(root,work.cloud.slices)).toString()) as VolumeSlices;
+  const sourceSlices=parseLabModelJson((await sourceBytes(root,work.cloud.slices)).toString()) as VolumeSlices;
   if(JSON.stringify(sourceSlices.boundsUnits)!==JSON.stringify(recipe.grid.bounds))throw Error('Source frame mismatch');
   const settingsBytes=await readFile(settingsPath),settings=parseFiniteMaterialSettings(JSON.parse(settingsBytes.toString()));
   const pins=await implementationPins(root,['labs/nebula/packages/lab/src/cli/commands/finite-density-material.ts']);
@@ -57,7 +57,7 @@ export async function finiteDensityMaterial(baselineId:string,settingsPath:strin
   const density=(x:number,y:number,z:number)=>{sampleEncoded(source,x,y,z,encoded);return channelDensity(encoded[3],recipe.grid.encoding);};
   const zSlices:DecodedSlice[]=[];
   for(const quad of sourceSlices.quads.filter(q=>q.axis==='z').sort((a,b)=>a.center[2]-b.center[2])){
-    const bytes=await verifiedBytes(dirname(resolve(root,work.cloud.slices.path)),{path:quad.texturePath,sha256:quad.sha256});
+    const bytes=await sourceBytes(dirname(resolve(root,work.cloud.slices.path)),{path:quad.texturePath});
     const raw=await sharp(bytes).ensureAlpha().raw().toBuffer();zSlices.push({quad,alpha:Uint8Array.from({length:quad.widthPx*quad.heightPx},(_,i)=>raw[4*i+3]!)});
   }
   const raySamples=function*(pixel:number):Generator<MaterialTransportSample>{

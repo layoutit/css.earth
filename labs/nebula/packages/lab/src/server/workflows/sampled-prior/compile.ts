@@ -44,12 +44,10 @@ export async function prepareSampledSceneStars(root: string, outputDirectory: st
 
 export async function readSourcePin(root: string, pin: CompilerPin): Promise<Buffer> {
   if (!( /^(labs\/nebula\/(models|src)\/|\.local\/nebula-lab\/)/.test(pin.path) || pin.path === 'tools/fits/fits.mts') || /[\\?#\s]/.test(pin.path) ||
-      pin.path.split('/').some(p => !p || p === '..') || !/^[a-f0-9]{64}$/.test(pin.sha256)) throw new TypeError('Invalid sampled source pin.');
+      pin.path.split('/').some(p => !p || p === '..')) throw new TypeError('Invalid sampled source path.');
   const path = await realpath(resolve(root, pin.path)), offset = relative(await realpath(root), path);
   if (offset === '..' || offset.startsWith('../') || isAbsolute(offset)) throw new TypeError('Sampled source leaves the repository.');
-  const bytes = await readFile(path);
-  if (geometrySha(bytes) !== pin.sha256) throw new TypeError(`Qualified sampled input changed: ${pin.path}`);
-  return bytes;
+  return readFile(path);
 }
 
 async function validateSpatialArtifacts(root: string, result: CompilerResult) {
@@ -60,9 +58,9 @@ async function validateSpatialArtifacts(root: string, result: CompilerResult) {
   if (!Number.isSafeInteger(expectedBytes) || expectedBytes > 160e6) throw new TypeError('Prepared spatial field exceeds its supported grid.');
   for (const name of ['ejecta', 'wind']) {
     const pin = model[name];
-    if (!jointRecord(pin) || typeof pin.path !== 'string' || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`) || typeof pin.sha256 !== 'string')
-      throw new TypeError('Missing prepared spatial grid pin.');
-    const bytes = await readGeometryPin(root, { path: pin.path, sha256: pin.sha256 });
+    if (!jointRecord(pin) || typeof pin.path !== 'string' || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`))
+      throw new TypeError('Missing prepared spatial grid path.');
+    const bytes = await readGeometryPin(root, { path: pin.path });
     if (bytes.length !== expectedBytes) throw new TypeError('Prepared spatial grid size differs.');
   }
   if (model.emissionFits !== undefined) {
@@ -71,9 +69,9 @@ async function validateSpatialArtifacts(root: string, result: CompilerResult) {
       if (!jointRecord(fit) || typeof fit.sourceId !== 'string' || !result.sources.some(s => s.id === fit.sourceId)) throw new TypeError('Unknown fitted spectral source.');
       for (const name of ['grid', 'receipt']) {
         const pin = fit[name];
-        if (!jointRecord(pin) || typeof pin.path !== 'string' || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`) || typeof pin.sha256 !== 'string')
-          throw new TypeError('Missing spatial fit artifact pin.');
-        const bytes = await readGeometryPin(root, { path: pin.path, sha256: pin.sha256 });
+        if (!jointRecord(pin) || typeof pin.path !== 'string' || !pin.path.startsWith(`.local/nebula-lab/compiler/${result.id}/`))
+          throw new TypeError('Missing spatial fit artifact path.');
+        const bytes = await readGeometryPin(root, { path: pin.path });
         if (name === 'grid' && bytes.length !== expectedBytes) throw new TypeError('Fitted spatial grid size differs.');
       }
     }
@@ -99,7 +97,6 @@ export async function compileSampledNebula(root: string, request: CompilerReques
     const response = await fetch(sampled.source.url, { signal });
     if (!response.ok) throw new Error(`Qualified sample download failed: ${response.status}`);
     pointBytes = Buffer.from(await response.arrayBuffer());
-    if (geometrySha(pointBytes) !== sampled.source.sha256) throw new Error('Qualified sample hash differs.');
     const path = resolve(root, sampled.source.path); await mkdir(dirname(path), { recursive: true });
     await writeFile(`${path}.pending`, pointBytes); await rename(`${path}.pending`, path);
   }
@@ -117,8 +114,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   const implementation = await implementationPins(root, ['labs/nebula/packages/lab/src/server/workflows/sampled-prior/compile.ts']);
   const extraPaths = [...sampledImplementationOwners].sort();
   const extraImplementation = await Promise.all(extraPaths.map(async path => ({ path, sha256: geometrySha(await readFile(resolve(root, path))) })));
-  const inputPins = [{ path: recipe.sampledRecipe, sha256: geometrySha(sampledBytes) }, sampled.evidence,
-    { path: sampled.source.path, sha256: sampled.source.sha256 }];
+  const inputPins = [{ path: recipe.sampledRecipe, sha256: geometrySha(sampledBytes) }, sampled.evidence, { path: sampled.source.path }];
   const id = geometrySha(JSON.stringify({ version: COMPILER_VERSION, implementation, extraImplementation, inputPins,
     starProfile: geometrySha(await readFile(resolve(root, COMPILER_STAR_PROFILE_PATH))),
     recipeSha256: geometrySha(recipeBytes), request, sourceLayers: sourceData.images.map(image => [image.id, image.matrix, image.original.sha256, image.diffuse.sha256, image.stars.sha256]) }));
@@ -134,7 +130,7 @@ export async function compileSampledNebula(root: string, request: CompilerReques
   signal.throwIfAborted(); await mkdir(resolve(root, directory), { recursive: true });
   async function save(name: string, bytes: Uint8Array): Promise<CompilerPin> {
     signal.throwIfAborted(); const path = `${directory}/${name}`, target = resolve(root, path);
-    await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path, sha256: geometrySha(bytes) };
+    await writeFile(`${target}.pending`, bytes); await rename(`${target}.pending`, target); return { path };
   }
   const fits = decodeFits(pointBytes);
   if (fits.width !== sampled.source.width || fits.height !== sampled.source.height) throw new TypeError('Qualified sample FITS dimensions differ.');

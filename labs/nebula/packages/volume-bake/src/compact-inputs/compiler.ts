@@ -7,7 +7,7 @@ import { bakeCompiler, type CompilerBakeProgress, type CompilerBakeBackend, type
 import { readCompilerBakeResult, type CompilerBakeResult } from '@cssearth/volume-core/contracts/compiler-bake';
 import { createPhotometricEmission, readEnvelopeColors, type EnvelopeColors } from '@cssearth/volume-core/fields/photometric-emission';
 import { readRetainedEmissionField } from '@cssearth/volume-core/fields/retained-emission';
-import { pinned, type Pin } from './io.ts';
+import { hash as geometrySha, pinned, type Pin } from './io.ts';
 
 const record = (v: unknown): v is Record<string, unknown> => v !== null && typeof v === 'object' && !Array.isArray(v);
 const digest = (v: unknown): v is string => typeof v === 'string' && /^[a-f0-9]{64}$/.test(v);
@@ -83,18 +83,20 @@ export async function replayCompactCompiler(root: string, pin: Pin, outputDirect
       (preparedPhysical ? -star.positionUnits[2] : star.positionUnits[2]) + origin[2]] })), progress }, backend);
   assert.equal(scene.alphaSha256, old.alphaSha256, 'Compact replay changed neutral opacity.');
   assert.deepEqual(scene.sampling, old.sampling, 'Compact replay changed sampling.');
-  assert.equal(scene.starSprites?.atlas.sha256, old.starSprites?.atlas.sha256, 'Compact replay changed stellar sprites.');
+  // Output locations change with every bake; the sprite content may not.
+  const spriteContent = (sprites: typeof scene.starSprites) => sprites && { ...sprites, atlas: undefined, profile: undefined };
+  assert.deepEqual(spriteContent(scene.starSprites), spriteContent(old.starSprites), 'Compact replay changed stellar sprites.');
   const banks = [{ id: 'neutral', volume: scene.neutral }, ...scene.lenses];
   for (const [index, bank] of banks.entries()) {
     const volume = backend.readVolume(JSON.parse((await pinned(root, bank.volume)).toString()));
     assert.deepEqual(volume.resources, input.expected[index]!.resources, `Compact replay changed ${bank.id} texture bytes.`);
     for (const resource of volume.resources) {
-      const bytes = await pinned(root, { path: `${dirname(bank.volume.path)}/${resource.path}`, sha256: resource.sha256 });
+      const bytes = await pinned(root, { path: `${dirname(bank.volume.path)}/${resource.path}` });
       assert.equal(bytes.length, resource.bytes);
     }
   }
   // Preserve accepted stellar positions exactly; inverse origin arithmetic need not round-trip float bits.
   const retained: CompilerBakeResult = { ...scene, id: old.id, ...(old.volumeId ? { volumeId: old.volumeId } : {}), stars: old.stars };
   readCompilerBakeResult(retained);
-  return { id: old.id, scene: retained, sources: input.sources, objectId: input.objectId, inputSha256: pin.sha256 };
+  return { id: old.id, scene: retained, sources: input.sources, objectId: input.objectId, inputSha256: geometrySha(await pinned(root, pin)) };
 }

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { createSpaceMinimapSetting } from '../minimap/minimap-setting.mts';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from '../../src/renderers/css/navigation/world-camera.js';
 

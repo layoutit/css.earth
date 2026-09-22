@@ -80,16 +80,13 @@ export async function registrationSoftware(): Promise<ProductSoftware[]> {
  * digest, with the policy the fit was held to. */
 export function registrationRun(program: JunocamProgram, kernels: readonly { path: string; bytes: number; sha256: string }[],
   software: readonly ProductSoftware[]): ProductRun {
-  const pin = (role: string, identity: string, bytes: number, digest: string | undefined): ProductInput => {
-    if (!digest) throw new Error(`${identity} carries no digest; a record pins what the run read.`);
-    return { role, identity, bytes, sha256: digest };
-  };
+  const pin = (role: string, identity: string, bytes: number): ProductInput => ({ role, identity, bytes });
   return {
     telescope: 'Juno', stage: 'junocam-registration',
     inputs: [
-      ...program.images.flatMap(image => [pin(`image ${image.productId}`, image.url, image.bytes, image.sha256),
-        pin(`label ${image.productId}`, image.labelUrl, image.labelBytes, image.labelSha256)]),
-      ...kernels.map(kernel => pin('kernel', `${program.kernelSet}/${kernel.path}`, kernel.bytes, kernel.sha256)),
+      ...program.images.flatMap(image => [pin(`image ${image.productId}`, image.url, image.bytes),
+        pin(`label ${image.productId}`, image.labelUrl, image.labelBytes)]),
+      ...kernels.map(kernel => pin('kernel', `${program.kernelSet}/${kernel.path}`, kernel.bytes)),
     ],
     parameters: { volume: program.volume, target: program.target, observer: JUNO, bands: BANDS, aberration: 'LT+S',
       ellipsoidStepDegrees: STEP_DEGREES, policy: POLICY },

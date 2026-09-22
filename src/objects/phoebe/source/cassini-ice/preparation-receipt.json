@@ -1,9 +1,5 @@
 {
   "schema": "cssearth-phoebe-registered-vims-surfaces@1",
-  "preparerSha256": "47588d2471bcd76c895847ce8c549736cfe459ca21f3511c364de816a316faf1",
-  "spectralHelperSha256": "b67682f3ea069c0e371bcedc8f440836dc591f95f9b202d39510ef89efabbf3a",
-  "fixedMeshHelperSha256": "aae28318139cd4a3cc46838e905c46ae11cfb003def06acccbfd454241cf0020",
-  "terrainSha256": "a6eb3c92075986288ddfc6e59d85391891ca0d96dc0f2c427ea7fbab2e576178",
   "fixedMeshMapping": {
     "fixedFaces": 3500,
     "inwardRadialFaces": 1,
@@ -48,7 +44,6 @@
           "coreEndByteExclusive": 680320,
           "declaredMinusActualBytes": 512
         },
-        "calibratedSha256": "e3d284051d290a154a692a5fccc4388bcb33220fed68345991a9055b8d6228ee",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
         "adcPolicy": "Withhold ADC codes <0 and >=4095 plus original specials/invalid backgrounds; no C brightness threshold",
@@ -82,7 +77,6 @@
               218,
               455
             ],
-            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
             "directInvalidIndices": []
           },
           "44": {
@@ -101,7 +95,6 @@
               229,
               364
             ],
-            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
             "directInvalidIndices": []
           },
           "58": {
@@ -120,7 +113,6 @@
               157,
               260
             ],
-            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
             "directInvalidIndices": []
           },
           "70": {
@@ -139,7 +131,6 @@
               162,
               247
             ],
-            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
             "directInvalidIndices": []
           },
           "81": {
@@ -158,7 +149,6 @@
               154,
               251
             ],
-            "maskSha256": "821eb62fd7c75d025e6da260f7e66350edc66d630f627007e751f2e622472baf",
             "directInvalidIndices": []
           }
         },
@@ -173,25 +163,18 @@
         "limits": "Does not recover lost saturation, undo archive filtering, detect every noise defect, or establish absolute calibration/pointing."
       },
       "cameraSourceEvidence": {
-        "calibratedLabelSha256": "49d03b4b6ea98e07b828b648df5df5dcbd2cdc0698445bee637b53a9dc5cb95c",
-        "navigationLabelSha256": "1c70d3f515b7230f394884529f8323afc69a619a37f3de3228a5411b9da9e38a",
-        "navigationPlanesSha256": "2c2150317ca7bf0f4713477da2f91c219b031011074ff62f6d0cfce25579c814",
         "tables": {
           "InstrumentPointing": {
-            "sha256": "392e0ad3819bfb5db29686d8b91607e47cba98215f710b65d2aba22b9455128c",
             "bytes": 4096
           },
           "InstrumentPosition": {
-            "sha256": "f5a8e37adc835440e119ae804988e58099f83faa560f3b25d4e466dd630db8e4",
             "bytes": 168
           },
           "BodyRotation": {
-            "sha256": "ff33b12efbfe38e112e5bd1e6c80bfd7be3377c6804cd6d199c9bca00d416b78",
             "bytes": 128
           }
         }
       },
-      "regionSha256": "545127b529e97e3d0cd296cca6d826166ddc7fd0f025045f2550ed09a7d045fb",
       "fitOffsetsRadians": [
         0.000851639948572945,
         0.00010016632943198674
@@ -203,7 +186,6 @@
     {
       "kind": "depth",
       "file": "phoebe-ice-absorption.tif",
-      "sha256": "d4b6945058358ceb42460ef5966e1ece2a5e1eb6bf481847b25ab42ff835ca1b",
       "bytes": 57492,
       "areaFraction": 0.018385963801247792,
       "contributingDetectorApertures": {
@@ -214,19 +196,16 @@
       },
       "audit": [
         {
-          "file": "phoebe-ice-absorption-observation.tif",
-          "sha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+          "file": "phoebe-ice-absorption-observation.tif"
         },
         {
-          "file": "phoebe-ice-absorption-source-pixel.tif",
-          "sha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+          "file": "phoebe-ice-absorption-source-pixel.tif"
         }
       ]
     },
     {
       "kind": "rgb",
       "file": "phoebe-infrared-if.tif",
-      "sha256": "83d7e9574e3a52eda73590dbf0359b587003623140e2b2570528c3ecad0a7500",
       "bytes": 90215,
       "areaFraction": 0.018385963801247792,
       "contributingDetectorApertures": {
@@ -237,17 +216,14 @@
       },
       "audit": [
         {
-          "file": "phoebe-infrared-if-observation.tif",
-          "sha256": "f2a90d476eaa584fb9897b4defe05c2b170bd48824ff6a600c2196ca9c778147"
+          "file": "phoebe-infrared-if-observation.tif"
         },
         {
-          "file": "phoebe-infrared-if-source-pixel.tif",
-          "sha256": "e4afd786788e5f3a048e7404d3305db6b9d10a3aa630d97e67840027d88695a7"
+          "file": "phoebe-infrared-if-source-pixel.tif"
         }
       ],
       "display": {
         "file": "phoebe-infrared-display.tif",
-        "sha256": "f22812b0e21b9f448bd83482bd2a664cafe67ea6f8dc23e8c0e205dd0c3e2e8b",
         "bytes": 52468,
         "centerLongitudeDegrees": 180,
         "sourceColumnRoll": 720,

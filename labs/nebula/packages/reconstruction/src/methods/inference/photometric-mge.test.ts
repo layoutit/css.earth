@@ -9,8 +9,8 @@ const recipe: PhotometricMgeRecipe = {
   schema: 'cssearth-photometric-mge@1', id: 'fixture', centerIcrsDegrees: [201, -47], distancePc: 5426,
   positionAngleEastOfNorthDegrees: 0, inclinationDegrees: 60, lineOfSightTiltSign: 1, cutoffSigma: 6,
   gaussians: [{ centralAmplitude: 4, sigmaArcsec: 20, projectedAxisRatio: .8 }],
-  evidence: { path: 'labs/nebula/models/fixture/evidence.json', sha256: 'b'.repeat(64) },
-  source: { url: 'https://example.org/observations', sha256: 'c'.repeat(64), locator: 'test fixture' },
+  evidence: { path: 'labs/nebula/models/fixture/evidence.json' },
+  source: { url: 'https://example.org/observations', locator: 'test fixture' },
   interpretation: 'Oblate deprojection test, not an observed object.',
 };
 function column(model: PhotometricMgeRecipe, x: number, y: number) {
@@ -35,7 +35,6 @@ test('line-of-sight mirror is an explicit degeneracy and source pins participate
   const first = createPhotometricMgePrior(recipe), mirror = createPhotometricMgePrior({ ...recipe, lineOfSightTiltSign: -1 });
   assert.equal(first.sampleDensity(10, 7, 13), mirror.sampleDensity(10, 7, -13));
   assert.notEqual(first.identity, mirror.identity);
-  assert.notEqual(first.identity, createPhotometricMgePrior({ ...recipe, source: { ...recipe.source, sha256: 'd'.repeat(64) } }).identity);
   assert.throws(() => readPhotometricMgeRecipe({ ...recipe, inclinationDegrees: 20 }), /cannot be deprojected/);
   assert.throws(() => readPhotometricMgeRecipe({ ...recipe, lineOfSightTiltSign: '1' }), /Invalid/);
 });

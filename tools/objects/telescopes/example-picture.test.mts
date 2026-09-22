@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import sharp from 'sharp';
 import { binEventCounts, colourOf, displayOrder, examplePixels, northAndEastOnScreen, parseExampleRecipe, parseExampleRecipes, renderExamplePicture, stretchSample } from './example-picture.mts';
 
@@ -11,7 +12,7 @@ const base = {
   unit: 'K', window: { x: 1, y: 1, width: 3, height: 2 },
   orientation: { mode: 'first-row-bottom', note: 'The first stored row at the bottom.' },
   stretch: { kind: 'linear', black: 0, white: 1 }, colour: { kind: 'greys' }, enlarge: 2,
-  product: { sha256: 'a'.repeat(64), command: 'node tools/objects/probe.mts', definition: 'tools/objects/probe/programs/probe.json' },
+  product: { command: 'node tools/objects/probe.mts', definition: 'tools/objects/probe/programs/probe.json' },
   note: 'A probe.',
 };
 const recipe = parseExampleRecipe(base);
@@ -32,7 +33,7 @@ test('a recipe states everything a picture needs, and a malformed one is refused
     { ...base, orientation: { mode: 'sideways', note: 'n' } }, { ...base, source: { kind: 'jpeg', path: 'p' } },
     { ...base, colour: { kind: 'ramp', stops: [[0.2, '#000000'], [1, '#ffffff']] } },
     { ...base, colour: { kind: 'ramp', stops: [[0, '#000000'], [1, 'white']] } }, { ...base, enlarge: [2] }, { ...base, enlarge: [2, 0] },
-    { ...base, product: { ...base.product, sha256: 'abc' } }])
+    { ...base, product: { ...base.product, command: '' } }])
     assert.throws(() => parseExampleRecipe(bad), JSON.stringify(bad)?.slice(0, 120));
   assert.throws(() => parseExampleRecipes({ schema: 'other', examples: [base] }), /cssearth-telescope-examples@1/u);
   assert.throws(() => parseExampleRecipes({ schema: 'cssearth-telescope-examples@1', examples: [base, base] }), /ids repeat/u);
@@ -109,7 +110,7 @@ test('every source sample becomes a square of equal pixels in a lossless picture
 });
 
 test('three channels go straight into red, green and blue, each on its own stretch, and only on one grid', async () => {
-  const channel = (unit: string, white: number) => ({ label: unit, source: base.source, unit, stretch: { kind: 'linear', black: 0, white }, sha256: 'b'.repeat(64) });
+  const channel = (unit: string, white: number) => ({ label: unit, source: base.source, unit, stretch: { kind: 'linear', black: 0, white } });
   const three = parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },
     channels: [channel('keV-soft', 10), channel('keV-medium', 4), channel('keV-hard', 2)],
@@ -137,7 +138,7 @@ test('three channels go straight into red, green and blue, each on its own stret
   assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },
     channels: [channel('a', 1), channel('b', 1)], colour: { kind: 'channels', missing: '#4a4a4a' } }), /exactly three channels/u);
-  const events = (limits: readonly [number, number], binPixels = 2) => ({ label: 'band', unit: 'counts per bin', stretch: { kind: 'linear', black: 0, white: 1 }, sha256: 'b'.repeat(64),
+  const events = (limits: readonly [number, number], binPixels = 2) => ({ label: 'band', unit: 'counts per bin', stretch: { kind: 'linear', black: 0, white: 1 },
     source: { kind: 'fits-events', path: 'e.fits', columns: ['x', 'y'], binPixels, origin: [0, 0], size: [4, 4], band: { column: 'energy', limits } } });
   assert.throws(() => parseExampleRecipe({ ...base, source: undefined, unit: undefined, stretch: undefined,
     product: { command: base.product.command, definition: base.product.definition },

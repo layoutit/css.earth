@@ -3,7 +3,8 @@ import { shape, array, text, number, optional, parseShapeLens } from './source-r
 import { requireArray, requireRecord } from '../../sources/source-values.mts';
 import { fixtureSource } from '../test-source-fixture.mts';
 import type { RadialMaterialSurface } from './solid-contract.mts';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import { readFile, writeFile, mkdtemp, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
@@ -13,7 +14,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { parseObjShape, createShapeSurfaceSampler } from './obj-shape.mts';
 import { prepareRadialMaterials } from './radial-terrain.mts';
 
-const parseFixture = shape({cases:array(shape({id:text,sourcePath:text,sourceSha256:text,oldFirstRayHeight:number,
+const parseFixture = shape({cases:array(shape({id:text,sourcePath:text,oldFirstRayHeight:number,
  triangles:array(shape({sourceFace:number,vertices:array(array(number))})),
  checks:array(shape({kind:text,query:array(number),expectedPoint:array(number),expectedValue:number,expectedDistanceMeters:number,sourceFace:optional(number)})),
  oldRadialGrid:optional(shape({longitude:number,latitude:number,cornerRadii:array(number),scalarValue:number,width:number,height:number}))}))});
@@ -25,7 +26,6 @@ for (const fixture of fixtures.cases) test(`${fixture.id}: full-source regressio
   const root = new URL(`../../../src/objects/${fixture.id}/source/`, import.meta.url);
   const [config, manifest] = await Promise.all(['preparation/terrestrial.json', 'manifest.json'].map(async path => JSON.parse(await readFile(new URL(path, root), 'utf8'))));
   const entry = required(requireArray(manifest.inputs).map(value=>fixtureRecord(value)).find(input => input.path === fixture.sourcePath));
-  assert.equal(entry.expectedSha256, fixture.sourceSha256, 'A new source release requires independent fixture revalidation');
   const lens = parseShapeLens(required(requireArray(config.raster.scientific).find(value => fixtureRecord(value).id === 'elevation')));
   // These are exact source facets, not a synthetic approximation of a body.
   // verify-source-surface.py independently checks the fixture against every

@@ -12,44 +12,33 @@
     {
       "id": "agol2021-table2-trappist-1f",
       "path": "agol2021-table2.tex",
-      "expectedBytes": 1591,
-      "expectedSha256": "2b7d2e27150693343ceaa34d0ed4f38a64a3f0f388202d8c0cd0957f9d30b11d",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/tex/refining_trappist1_ttvs.tex",
       "upstreamPath": "tex/refining_trappist1_ttvs.tex",
       "upstreamExpectedBytes": 191498,
-      "upstreamExpectedSha256": "6400157811fb153ad961464d63642c069631aa97e20023ada1c25a348e66613f",
       "locator": "Table 2 caption, header, units, and planet-f row; upstream lines 917-940",
       "extraction": "Exact UTF-8 lines retained from the immutable upstream file; rows for planets other than f are omitted."
     },
     {
       "id": "agol2021-kepler-transit-convention",
       "path": "agol2021-kepler-transit.jl",
-      "expectedBytes": 540,
-      "expectedSha256": "e694ceb345de38915fe9d203dcbea5fbfab8e5cd36cbd9a0ecb60dd68326f106",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/src/NbodyGradient/src/kepler_init.jl",
       "upstreamPath": "src/NbodyGradient/src/kepler_init.jl",
       "upstreamExpectedBytes": 9197,
-      "upstreamExpectedSha256": "71e6bfa125fcf27afaad6f734f700331418432f3066fb6267c82fc5b8b923d91",
       "locator": "First kepler_init overload: element decoding through mean anomaly; upstream lines 24-54",
       "extraction": "The executable statements are exact UTF-8 lines from the immutable upstream file; two leading comments identify the excerpt locally."
     },
     {
       "id": "upstream-license",
       "path": "LICENSE",
-      "expectedBytes": 1066,
-      "expectedSha256": "8aa753de19a4ad88164adc473e73d7f8b2704b41ca97617bdece228626c9796e",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/LICENSE",
       "extraction": "Unmodified upstream license."
     },
     {
       "id": "agol2021-table5-geometry",
       "path": "agol2021-table5.tex",
-      "expectedBytes": 1478,
-      "expectedSha256": "cdcb3c5d9e070bfc11d0b91a3493ba2e98ee5858d1cca4f0db2041eb85301dbf",
       "origin": "https://raw.githubusercontent.com/ericagol/TRAPPIST1_Spitzer/0a417ab77425a016eed2b492efa8a556631ac152/tex/refining_trappist1_ttvs.tex",
       "upstreamPath": "tex/refining_trappist1_ttvs.tex",
       "upstreamExpectedBytes": 191498,
-      "upstreamExpectedSha256": "6400157811fb153ad961464d63642c069631aa97e20023ada1c25a348e66613f",
       "locator": "Table 5 planet header (line 1277), geometry rows and caption (lines 1283-1290).",
       "extraction": "Exact UTF-8 lines retained from the immutable upstream file."
     }

@@ -36,13 +36,13 @@ export interface ReconstructionWork {
   schema: 'cssearth-nebula-reconstruction-work@1';
   id: string; imageId: string; name: string; outputDirectory: string;
   appearance?: CloudAppearance;
-  source: { path: string; sha256: string; width: number; height: number };
-  original: { path: string; sha256: string; removalResultId: string };
+  source: { path: string; width: number; height: number };
+  original: { path: string; removalResultId: string };
   overlay: { widthPx: number; heightPx: number; transform: string; pivotCssPx: number[]; placement: OverlayPlacement };
   frame: DensityVolumeFrame;
-  stellarPrior: { path: string; sha256: string };
-  stars?: { path: string; sha256: string };
-  cloud?: { descriptor:{path:string;sha256:string}; slices:{path:string;sha256:string};
-    provenance:{path:string;sha256:string}; modelPlacement?:{path:string;sha256:string}; starAlignment?:ReconstructionStarsInput['reference'] };
+  stellarPrior: { path: string };
+  stars?: { path: string };
+  cloud?: { descriptor:{path:string}; slices:{path:string};
+    provenance:{path:string}; modelPlacement?:{path:string}; starAlignment?:ReconstructionStarsInput['reference'] };
   sourcePageUrl: string; credit: string;
 }

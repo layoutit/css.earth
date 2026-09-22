@@ -96,30 +96,22 @@
   ],
   "inputs": {
     "src/objects/milky-way/prepared/volume.json": {
-      "sha256": "d7ec931902e14ef950f2ebf1a550777972dcd54def1734213eff05106b980f19"
     },
     "src/objects/milky-way/prepared/volume-slices.json": {
-      "sha256": "8965724bc8e96017a6900e85f1fbebfb4a0722d6561bc5150ef8b15f69add819"
     },
     "src/objects/milky-way/source/volume.json": {
-      "sha256": "d9500d43f7ead97c36b2156dfed875a70593c8122852244f9a036351deba17e8"
     },
     "src/objects/milky-way/object.json": {
-      "sha256": "0d2d577bcc356ccd74a6e2aa1181dbeb41724f9ae736235218ce185f3b0849a1"
     },
     "src/objects/milky-way/source/sky/nasa-preview.jpg": {
-      "sha256": "1ebe95804f5f0e6e23f77488aaa33fdb4aaef3fd336821fb41b261ddeaee2df0"
     }
   },
   "localReproductionScripts": {
     ".local/calibrate-galaxy.mjs": {
-      "sha256": "1e858b335dc3033ae32fd2778922529d9ef2609de04d2adfe94e5532d537ecfd"
     },
     ".local/fit-galaxy-grade.py": {
-      "sha256": "ecd5ee29aca91ab990e3b15a29294b8cdbc77b00528b1cfed93cc664339ba030"
     },
     ".local/galaxy-calibration/final-receipt.py": {
-      "sha256": "0e37557b2fb4cccb05e08bc3418b99582fb6e9fa1084eae8969dfd0d8db2890c"
     }
   },
   "chosenDisplayBrightness": {

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { queryCapabilities, type CapabilityRequest, type QueryInputs } from './query.mts';
 const inputs: QueryInputs = { ledgers: [], capabilities: [], targetCatalogue: [{ id: 'test', name: 'Test', aliases: [] }], targetAssociations: [], bodyMaps: [] };
 const base: CapabilityRequest = { target: 'test', wavelengthMicrometres: [1, 2] };

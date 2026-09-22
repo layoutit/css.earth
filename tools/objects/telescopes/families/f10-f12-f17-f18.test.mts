@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { member } from './common.mts';
 import { describeEvents, F10_EVENTS_HANDLER } from './f10-events.mts';
 import { describeOifits, F12_OIFITS_HANDLER } from './f12-oifits.mts';

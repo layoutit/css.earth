@@ -32,13 +32,11 @@
       }
     },
     "preparation": {
-      "source": "source/shell.json",
-      "sha256": "6f70a944bebc83605ae01316bfee5d53562e0a54d87777d39044779b0398db42"
+      "source": "source/shell.json"
     }
   },
   "prepared": {
     "format": "cssearth-surface-shell@1",
-    "url": "prepared/shell.json",
-    "sha256": "611ba54416c1236392cef6e1e6e777fb778e4a0c62f4699a7385bd08b418939c"
+    "url": "prepared/shell.json"
   }
 }

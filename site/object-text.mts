@@ -28,8 +28,6 @@ export interface ObjectText {
 }
 export interface PreparedObjectText extends Omit<ObjectText, 'schema'> {
   readonly schema: typeof PREPARED_TEXT_SCHEMA;
-  /** The authored `text.json` this copy was checked and published from. */
-  readonly sourceSha256: string;
 }
 
 export type TextSlot = 'card' | 'introduction' | 'title' | 'detail' | 'summary';
@@ -100,10 +98,10 @@ export function parseObjectText(input: unknown, objectId?: string): ObjectText {
 }
 
 export function parsePreparedText(input: unknown, objectId?: string): PreparedObjectText {
-  const value = sourceObject(input, ['schema', 'objectId', 'sourceSha256', 'card', 'introduction', 'datasets']);
+  const value = sourceObject(input, ['schema', 'objectId', 'card', 'introduction', 'datasets']);
   if (value.schema !== PREPARED_TEXT_SCHEMA) throw new TypeError('Unsupported prepared text schema.');
   const id = identity(value, objectId, 'Prepared text');
-  return Object.freeze({ schema: PREPARED_TEXT_SCHEMA, ...blocks(value, id), sourceSha256: sourceDigest(value.sourceSha256) });
+  return Object.freeze({ schema: PREPARED_TEXT_SCHEMA, ...blocks(value, id) });
 }
 
 export interface TextFinding { readonly objectId: string; readonly slot: string; readonly rule: string; readonly detail: string }

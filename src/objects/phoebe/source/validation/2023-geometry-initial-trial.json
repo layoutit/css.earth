@@ -3,7 +3,6 @@
   "source": {
     "path": "/tmp/moons-b3-saturn/phoebe-2023/phoebe_128_o.obj",
     "bytes": 17787240,
-    "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9",
     "units": "km",
     "frame": "Released 2023 center-of-figure body-fixed XYZ; +X zero longitude, +Z positive pole",
     "boundsMeters": [
@@ -110,19 +109,16 @@
           "distanceMeters": 1423.4696255118486
         }
       },
-      "facesSha256": "3723a8ab750706a7f8e1ac6bc0a5704b0438a3ce419c747a3040863ca9a16d4f",
       "ok": false
     }
   ],
   "node": "v24.19.0",
   "toolchain": [
     {
-      "path": "tools/objects/terrestrial-layers/obj-shape.mjs",
-      "sha256": "2d4418becf30263cd0a4f6a16ee9fad24f0584a26297ec47cd2b7323b1d1ab86"
+      "path": "tools/objects/terrestrial-layers/obj-shape.mjs"
     },
     {
-      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs",
-      "sha256": "c1235063c390c69e9a20765e9d560e8381ff813ca59cda7847861e615205715b"
+      "path": "tools/objects/terrestrial-layers/radial-terrain.mjs"
     }
   ],
   "elapsedMs": 1195,

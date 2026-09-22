@@ -4,8 +4,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -31,8 +29,6 @@
     {
       "id": "published-shape",
       "path": "shape/arrokoth_porter_2024_v01.obj",
-      "expectedBytes": 3686921,
-      "expectedSha256": "be05f22df9c985d4bcaa87d2b62a761c100aa02750433d3cf03dc0c5f529f3b5",
       "origin": "https://pdssbn.astro.umd.edu/holdings/pds4-nh_derived:arrokoth_shapemodel_porter2024-v1.0/arrokoth_porter_2024_v01.obj",
       "credit": "Porter (2024), New Horizons Arrokoth shape model; NASA PDS",
       "license": "NASA PDS scientific data; retain attribution",
@@ -80,8 +76,6 @@
         "type": "source-obj-uv",
         "description": "Two south polar azimuthal equidistant projections; source UVs identify each lobe."
       },
-      "expectedBytes": 2882880,
-      "expectedSha256": "013c84b1ae333bff506527b4b1b60e3a8f1b619c6e287774b4939ccdb5a7cc39",
       "acquisition": "Reacquire the archive input through source/preparation/acquisition.json.",
       "redistribution": "Retain source attribution and model qualifications; upstream papers are not relicensed.",
       "sourceBinding": {
@@ -142,8 +136,6 @@
           }
         ]
       },
-      "expectedBytes": 10535040,
-      "expectedSha256": "164bbbda8a7f43a18e75f3ed17922efa3217904e6885a470c6192d97b82447b9",
       "redistribution": "Retain the original source attribution and notices with published derivatives."
     },
     {
@@ -188,8 +180,6 @@
           }
         ]
       },
-      "expectedBytes": 10532160,
-      "expectedSha256": "1fbb5124f417ea465db18cfdf5b7b8caee38cc30d8f1663b9939a648e27f0640",
       "redistribution": "Retain the original source attribution and notices with published derivatives."
     },
     {
@@ -281,8 +271,6 @@
           }
         ]
       },
-      "expectedBytes": 657187,
-      "expectedSha256": "e6fdeb2acd50283c3a75efe971c389f27cc09e4e31704a74a2b6eb76fb980aa0",
       "redistribution": "Retain the original source attribution and notices with published derivatives.",
       "acquisition": "Pinned local source input retained with the body package."
     },
@@ -306,9 +294,7 @@
             "evidence": "Native PDS4 label and collection overview identify the band cube and its preparation."
           }
         ]
-      },
-      "expectedBytes": 2882880,
-      "expectedSha256": "37d71a90bd10c2a7812af0b350db1e6cb770c1c3f0e0a26e35a67547efef640e"
+      }
     },
     {
       "id": "mvic-label",
@@ -391,9 +377,7 @@
             "evidence": "An adjacent exposure reserved for the frozen camera prediction; native label identifies the product."
           }
         ]
-      },
-      "expectedBytes": 10532160,
-      "expectedSha256": "3d1385a024126791e1a1aa9350577aabecbd68f42f5c447603d75390a09d76ac"
+      }
     },
     {
       "id": "lorri-independent-lbl",
@@ -484,9 +468,7 @@
       }
     },
     {
-      "path": "science/albedo_arrokoth4_fp36h2_masked1.png",
-      "expectedBytes": 200809,
-      "expectedSha256": "2b3a1a007c44c91572aba3d433267718340a7e5d322a05ed797ba0e8856eda0f"
+      "path": "science/albedo_arrokoth4_fp36h2_masked1.png"
     },
     {
       "path": "reference/sbdb.json",

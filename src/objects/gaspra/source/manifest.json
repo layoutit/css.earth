@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 6100
       },
       "coverage": "Published complete radial model at 2° spacing. Observational constraints vary; unseen regions are uncertain.",
-      "expectedBytes": 527072,
-      "expectedSha256": "ec751b328485ad20e9625395d7634e7f75c7167c615357b03cb8c94d3d6590b0",
       "capture": {
         "attributions": [
           {
@@ -71,8 +69,6 @@
         "registrationEvidence": "reference/registration.md"
       },
       "coverage": "High-pass filtered SSI observation mosaic at 2 px/degree, best native detail approximately55 m/px. Zero is poor or no coverage; 64.6022% of unweighted native map pixels are zero. Remaining imagery retains photographed illumination, not calibrated albedo.",
-      "expectedBytes": 262080,
-      "expectedSha256": "7dc37fa0ab91303f1875b2e4293aa420727d67d9479d63fc1e9e680e26ec02e1",
       "capture": {
         "attributions": [
           {
@@ -115,8 +111,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 2563200,
-      "expectedSha256": "5b6a64135b22c8431ec91f0b3cb8f2cb24e6509edcb2ad4df56bcabdfa07ccc6",
       "width": 800,
       "height": 800,
       "lensId": "calibrated",
@@ -165,8 +159,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 645120,
-      "expectedSha256": "ec66eee211c1b1f3de267375f976b01517365bacd7b22e4eb9842713c2e9541d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -211,8 +203,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 35828,
-      "expectedSha256": "d38c32fca409f5ceb2c51da96a9bc8fe58e3fcabe7168b52e23886fadcf71654",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -279,8 +269,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 1152,
-      "expectedSha256": "0cb9e6bccee046cc5838760072410efc2d2a665b39cce142577db4699647bea6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -325,8 +313,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 2563200,
-      "expectedSha256": "33c2768822732f79334f80fba161f86aacc27d3c70de3a4cce2315789b3d9f8e",
       "width": 800,
       "height": 800,
       "sourceBinding": {
@@ -373,8 +359,6 @@
       "consumers": [
         "galileo-calibrated"
       ],
-      "expectedBytes": 645120,
-      "expectedSha256": "89e3fe56ef9eddb0e7a2bd1af0a8be0d0ca6ebf92b661fbdf070283e1b6cab00",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

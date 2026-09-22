@@ -1,13 +1,11 @@
 {
   "schema": "cssearth-publisher-placement-correction@1",
   "source": {
-    "path": ".local/nebula-lab/smc-intake/ssc2010-02c.jpg",
-    "sha256": "d89b9ae4135941b92e2bd675c4d4750c48bb705f0b7f9562eccdf69a254c428e"
+    "path": ".local/nebula-lab/smc-intake/ssc2010-02c.jpg"
   },
   "publisher": {
     "url": "https://www.spitzer.caltech.edu/image/ssc2010-02c-dusty-little-galaxy",
     "cachedPagePath": ".local/nebula-lab/smc-intake/ssc2010-02c.html",
-    "cachedPageSha256": "2cc24c64e4dadeb852d3d4c09a9313ab108c746d29f11747c1d052352a1222dc",
     "statement": "North is 148.4 degrees left of vertical"
   },
   "before": {
@@ -76,7 +74,6 @@
   ],
   "visualCheck": {
     "path": ".local/nebula-lab/smc-registration/spitzer-orientation-comparison.png",
-    "sha256": "c5f3892da19597eec1ec4e67bb840e4a78466c9d9f31a021533eba27190eb090",
     "panelOrder": [
       "previous negative rotation",
       "corrected positive rotation",

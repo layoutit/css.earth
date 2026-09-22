@@ -39,8 +39,6 @@
         "referenceRadiusMeters": 500
       },
       "coverage": "The shared grid marks unavailable imagery over the historical 1998 radar reconstruction published in 2001. Its modeling period was later superseded, and no pole solution is attached to this archived mesh. Fixed arbitrary display axes and optional Shadows are illustrative, not a current rotational attitude.",
-      "expectedBytes": 29003,
-      "expectedSha256": "8166bb5a7f6d8baa5cc82cec22304c011202f1254a403be1ff19eba0abfe6abe",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -66,8 +64,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -107,8 +103,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 5047547,
-      "expectedSha256": "b304439c2fd6a8770ba70719c4b286117ab6cf6be1c1717e094f2f0c6770bb3e",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -132,8 +126,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 21762404,
-      "expectedSha256": "a2032ef0a45802f42038619c2ec531fc40d5a45a0a0337bb2c2501d7b174cc96",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

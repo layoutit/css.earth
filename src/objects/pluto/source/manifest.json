@@ -4,8 +4,6 @@
     {
       "id": "surface-pluto-color-mosaic-jpg",
       "path": "surface/pluto-color-mosaic.jpg",
-      "expectedBytes": 952315,
-      "expectedSha256": "1c13296bb0d2678224f3579033c4fe4cd302dc2a0afa02c94a0ff1baa56d53c9",
       "origin": "https://assets.science.nasa.gov/dynamicimage/assets/science/psd/solar/2023/09/p/l/pluto_color_mapmosaic.jpg?crop=faces%2Cfocalpoint&fit=clip&h=2963&w=5926",
       "credit": "NASA/JHUAPL/SwRI",
       "license": "NASA/USGS public scientific data with attribution",
@@ -43,8 +41,6 @@
     {
       "id": "lenses-pluto-monochrome-tif",
       "path": "lenses/pluto-monochrome.tif",
-      "expectedBytes": 309806463,
-      "expectedSha256": "592b7fb0f88cafa0bedf9f33bb71e983952a250ee8577edf2abfe814b473356b",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_Mosaic_300m_Jul2017_8bit.tif",
       "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
       "license": "NASA/USGS public scientific data with attribution",
@@ -80,8 +76,6 @@
     {
       "id": "lenses-pluto-dem-tif",
       "path": "lenses/pluto-dem.tif",
-      "expectedBytes": 619512743,
-      "expectedSha256": "259b3e962540285f9833b13b4ad28c6b38aadb68300a52d733990b4b8870a640",
       "origin": "https://planetarymaps.usgs.gov/mosaic/Pluto_NewHorizons_Global_DEM_300m_Jul2017_16bit.tif",
       "credit": "NASA/JHUAPL/SwRI/LPI via USGS",
       "license": "NASA/USGS public scientific data with attribution",
@@ -426,8 +420,6 @@
     {
       "id": "pluto-leisa-ice-fractions",
       "path": "science/leisa/params_ls.fits",
-      "expectedBytes": 22841280,
-      "expectedSha256": "eb8a44c51dcd0e2abd55aa8e85cae1814b2f0c1de840ea193ea28fcb9647ac95",
       "origin": "https://zenodo.org/api/records/18825240/files/params_ls.fits/content",
       "productId": "params_ls.fits",
       "version": "10.5281/zenodo.18825240",
@@ -469,8 +461,6 @@
     {
       "id": "pluto-leisa-fit-errors",
       "path": "science/leisa/params_ls_errors.fits",
-      "expectedBytes": 22841280,
-      "expectedSha256": "c50ee685c0ed18da5f4c12cc5df3ceb842cd0aeb6c86ce4d424697a686a162a1",
       "origin": "https://zenodo.org/api/records/18825240/files/params_ls_errors.fits/content",
       "productId": "params_ls_errors.fits",
       "version": "10.5281/zenodo.18825240",

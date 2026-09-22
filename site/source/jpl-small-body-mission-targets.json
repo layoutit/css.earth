@@ -4,8 +4,7 @@
     "url": "https://ssd.jpl.nasa.gov/sb/targets.html",
     "label": "JPL Solar System Dynamics: Small-Body Targets of Spacecraft Missions",
     "checked": "2026-09-20",
-    "locator": "Unique asteroid and minor-planet target rows",
-    "sha256": "8ae3e7afad84d6a7ae4daeea8c80a8cd06a49548e7378f0476ac0bd1fc32186d"
+    "locator": "Unique asteroid and minor-planet target rows"
   },
   "targets": [
     { "sbdbId": "a0000016", "name": "16 Psyche", "missions": ["Psyche"] },

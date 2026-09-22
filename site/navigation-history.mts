@@ -14,7 +14,7 @@ function closestAnchor(target: EventTarget | null): NavigationAnchor | null {
   return anchor as unknown as NavigationAnchor;
 }
 const navigationId = (event: Event): unknown => 'detail' in event && record(event.detail) ? event.detail.objectId : undefined;
-const navigationFeature = (event: Event): string | undefined => 'detail' in event && record(event.detail) && typeof event.detail.feature === 'string' && /^[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
+const navigationFeature = (event: Event): string | undefined => 'detail' in event && record(event.detail) && typeof event.detail.feature === 'string' && /^(?:city-)?[0-9]+$/u.test(event.detail.feature) ? event.detail.feature : undefined;
 import { overviewScopeFromUrl } from './navigation-scope.mts';
 
 /** Preserve exact departed views while object selections create history entries. */

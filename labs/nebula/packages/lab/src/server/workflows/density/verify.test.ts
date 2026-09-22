@@ -15,7 +15,7 @@ test('verification fails for missing or changed outputs and never repairs them',
     await writeFile(path, bytes);
     await verifyArtifacts(root, '.', manifest);
     await writeFile(path, 'changed image');
-    await assert.rejects(verifyArtifacts(root, '.', manifest), /Input hash differs/);
+    await assert.rejects(verifyArtifacts(root, '.', manifest), /Artifact size differs/);
     assert.equal(await readFile(path, 'utf8'), 'changed image');
     await writeFile(path, bytes);
     await assert.rejects(verifyArtifacts(root, '.', {'image.webp': {...manifest['image.webp'], bytes: 1}}), /Artifact size differs/);

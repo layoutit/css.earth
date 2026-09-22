@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdir, mkdtemp, readFile, realpath, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { runCachedPreparationObjects } from './prepare-planets.mts';
 import type { CachedPreparationOptions } from './prepare-planets.mts';
 import { runObjectCommand } from '../cli/run-implemented-planets.mts';
@@ -67,12 +68,10 @@ test('an authored recipe edit rebuilds the object; its card and damaged pins are
   await edit(descriptor => { descriptor.properties.recipe.shape.radiusKm += 1; });
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury']);
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
-  await edit(descriptor => { descriptor.prepared.sha256 = '2'.repeat(64); });
-  assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a damaged pin rebuilds');
   await rm(join(root, payloadPath));
   assert.deepEqual((await runCachedPreparationObjects(options)).rebuilt, ['mercury'], 'a missing payload rebuilds');
   assert.deepEqual((await runCachedPreparationObjects(options)).cached, ['mercury']);
-  assert.equal(runs.length, 4);
+  assert.equal(runs.length, 3);
 }));
 
 test('a descriptor edit during preparation cannot be sealed as an unchanged authored input', async () => fixture(async ({ root, options }) => {

@@ -58,7 +58,6 @@ export function adoptPreparedTree(tree: PreparedTree, stage: HTMLElement, own: O
   }
   for (const root of roots) own(() => root.remove());
   delete stage.dataset.preparedObject;
-  delete stage.dataset.preparedSha256;
   return { nodes: owned, roots };
 }
 

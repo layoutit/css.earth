@@ -11,7 +11,6 @@
   },
   "source": {
     "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-starforming.a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1.png",
-    "sha256": "a1ae7dfdc1f0b5286de5d405a0960289521d5b819f875688832f82b3bad40fa1",
     "nativeDimensions": [
       4000,
       4000
@@ -41,12 +40,10 @@
   },
   "catalogue": {
     "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
-    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941",
     "downloadedRows": 13220,
     "inFieldIsolatedCandidates": 7170,
     "query": {
-      "path": "labs/nebula/models/smc/registration/allwise-query.json",
-      "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
+      "path": "labs/nebula/models/smc/registration/allwise-query.json"
     }
   },
   "predeclaredProtocol": {
@@ -157,15 +154,12 @@
   ],
   "compositeBlueChannel": "AllWISE W1 atlas mosaic",
   "skyBands": {
-    "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming.json",
-    "sha256": "f0adaa3f9be4279e979fc77d60caa4d68872d763815ebe8dfc535cc6de62aaca"
+    "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-starforming.json"
   },
   "implementation": {
-    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
-    "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
+    "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts"
   },
   "matchedStars": {
-    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-wise-starforming/matched-stars.json",
-    "sha256": "6bb2d473290e24432a9698df7005a5134e2e1cea07fed1556037bfeb7dd06806"
+    "path": ".local/nebula-lab/smc-registration/sky-bands/smc-wise-starforming/matched-stars.json"
   }
 }

@@ -22,8 +22,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   const files = ['mur-gibs-tiles.tar.gz', 'mur-gibs-receipt.json', 'mur-gibs-layer.xml', 'mur-gibs-colormap.xml', 'mur-gibs-description.md', 'mur-gibs.png'];
   const updates = new Map<string, Buffer>();
   for (const name of files) updates.set(`science/${name}`, await readFile(join(acquiredDirectory, name)));
-  if (sha256(requireUpdateBytes(updates, 'science/mur-gibs-tiles.tar.gz')) !== receipt.archiveSha256 ||
-      sha256(requireUpdateBytes(updates, 'science/mur-gibs.png')) !== receipt.mosaic.sha256) throw new Error('MUR acquisition hashes differ.');
+  if (requireUpdateBytes(updates, 'science/mur-gibs-tiles.tar.gz').length !== receipt.archiveBytes) throw new Error('MUR acquisition size differs.');
   const savedAdvisory = requireRecord(map.scientific.advisory);
   let advisory = { date: requireString(savedAdvisory.date), status: requireString(savedAdvisory.status), url: requireString(savedAdvisory.url) };
   try { advisory = parseEnsoAdvisory(await readFile(join(acquiredDirectory, 'enso-advisory.html'), 'utf8')); }
@@ -53,7 +52,7 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   };
   for (const [name, origin] of Object.entries(origins)) {
     const path = `science/${name}`, id = name === 'mur-gibs-tiles.tar.gz' ? 'nasa-mur-gibs-tiles' : `nasa-${name.replace(/\.[^.]+$/, '')}`;
-    const record = { id, path, origin, expectedSha256: sha256(requireUpdateBytes(updates, path)), expectedBytes: requireUpdateBytes(updates, path).length,
+    const record = { id, path, origin,
       credit: 'NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS', license: 'NASA open Earth science imagery with attribution',
       licenseEvidence: ['https://www.earthdata.nasa.gov/engage/open-data-services-and-software/api/gibs'],
       acquisition: `Anonymous imagery acquisition ${receipt.checked}; all populated tiles attest ${receipt.date}. See per-tile dates and hashes in mur-gibs-receipt.json.`,
@@ -62,14 +61,10 @@ export async function installMurEnso(root: string, acquiredDirectory: string) {
   }
   const mosaic = { id: 'nasa-mur-gibs-mosaic', path: 'science/mur-gibs.png', origin: 'tools/objects/paged-ellipsoid/mur-imagery.mts',
     generator: 'tools/objects/paged-ellipsoid/mur-imagery.mts restore src/objects/earth/source/science',
-    expectedSha256: receipt.mosaic.sha256, expectedBytes: requireUpdateBytes(updates, 'science/mur-gibs.png').length,
     description: 'Prepared 16K pixel-center nearest mosaic from all 3,200 native NASA tiles; transparent pixels use the neutral gap color.',
     consumers: ['enso'] };
   const mi = manifest.generatedIntermediates.findIndex(e => e.id === mosaic.id);
   if (mi < 0) manifest.generatedIntermediates.push(mosaic); else manifest.generatedIntermediates[mi] = mosaic;
-  for (const collection of ['inputs', 'documents', 'generatedIntermediates'] as const) for (const entry of manifest[collection]) {
-    const bytes = updates.get(entry.path); if (bytes) Object.assign(entry, { expectedSha256: sha256(bytes), expectedBytes: bytes.length });
-  }
   for (const [path, bytes] of updates) await writeFile(join(source, path), bytes);
   await writeFile(join(source, 'manifest.json'), json(manifest));
   // The dated reader text lives beside object.json; pnpm prepare:text publishes it.

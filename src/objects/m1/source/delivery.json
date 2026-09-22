@@ -3,57 +3,44 @@
   "id": "m1",
   "method": "compiler",
   "request": {
-    "path": "src/objects/m1/source/request.json",
-    "sha256": "be165e321915a84edab90377ac43ae36d13582af2691d666da5dea109c457668"
+    "path": "src/objects/m1/source/request.json"
   },
   "inputPins": [
     {
-      "path": "labs/nebula/models/m1/chandra-xray-grid-transfer.json",
-      "sha256": "38b8dfe2e5f4bb6d0e75c1b65b845e57df80c1710429fd1322ef7822f61d0ee7"
+      "path": "labs/nebula/models/m1/chandra-xray-grid-transfer.json"
     },
     {
-      "path": "labs/nebula/models/m1/compiler.json",
-      "sha256": "e455c763a99a1b155fe3617b1e804ac90af25426f9cc368d6de2985bcbb59014"
+      "path": "labs/nebula/models/m1/compiler.json"
     },
     {
-      "path": "labs/nebula/models/m1/hubble-2017-bridge-matched-stars.json",
-      "sha256": "23d3be909bc6a07de74713efdabb957946d291d4b46f38ac3fbc11c4fc883501"
+      "path": "labs/nebula/models/m1/hubble-2017-bridge-matched-stars.json"
     },
     {
-      "path": "labs/nebula/models/m1/observation-structures.json",
-      "sha256": "bcb4bb8e2ba0e69b8e1056257d5fb2aa2a15b0595eadfc691021bd988a9d17e3"
+      "path": "labs/nebula/models/m1/observation-structures.json"
     },
     {
-      "path": "labs/nebula/models/m1/observations.json",
-      "sha256": "6adf56098e54344fe8615772b27c871e84aa86613a5bd50351f0b8168b3c94f7"
+      "path": "labs/nebula/models/m1/observations.json"
     },
     {
-      "path": "labs/nebula/models/m1/physical-evidence.json",
-      "sha256": "a03ec3e88e8d4aee345d89326da85e5d8cf93f6789ae54b18afe059e7963e1ff"
+      "path": "labs/nebula/models/m1/physical-evidence.json"
     },
     {
-      "path": "labs/nebula/models/m1/sampled.json",
-      "sha256": "b008424726e7c0cb520d05652c3f4b6b3d018505841d2a0bfb2af08597a92f0f"
+      "path": "labs/nebula/models/m1/sampled.json"
     },
     {
-      "path": "labs/nebula/models/m1/sitelle-alignment-check.json",
-      "sha256": "69e44977756ea8f730b8ee76b53816c5909ffd27c33423a20356f74245e14cf2"
+      "path": "labs/nebula/models/m1/sitelle-alignment-check.json"
     },
     {
-      "path": "labs/nebula/models/m1/spitzer-infrared-grid-transfer.json",
-      "sha256": "6515e56408db67572fe2a965ffad0ab716a75b53a7242902bde8ae70a126b6d8"
+      "path": "labs/nebula/models/m1/spitzer-infrared-grid-transfer.json"
     },
     {
-      "path": "labs/nebula/models/m1/vla-radio-grid-transfer.json",
-      "sha256": "446316324a90f0205a835cbac3cd4554e32682aaa9677e765f2677dd49acc2eb"
+      "path": "labs/nebula/models/m1/vla-radio-grid-transfer.json"
     },
     {
-      "path": "labs/nebula/models/m1/webb-components-astrometric-calibration.json",
-      "sha256": "0f84903f49281212aee3eeabe1d14ce936cc5509d5a61d1e169d9e6324861aaf"
+      "path": "labs/nebula/models/m1/webb-components-astrometric-calibration.json"
     },
     {
-      "path": "labs/nebula/models/m1/webb-components-matched-stars.json",
-      "sha256": "7b6da0c051926aecc4e4919ba5db0aeacdbc0ebe924149596c1f414af901f6f5"
+      "path": "labs/nebula/models/m1/webb-components-matched-stars.json"
     }
   ],
   "sky": {
@@ -71,12 +58,10 @@
   "framingRadiusUnits": 135.788986,
   "acceptedLabResult": "88f361d16d00cd3b33501883ae3353e3c7dac5d5da22897a75bb40b4c047c596",
   "fieldStars": {
-    "path": "src/objects/m1/source/stellar-field.json",
-    "sha256": "4b4502d725e6a4df12d46a6aa0339556140a82d8f0dde2df8b32db840ca2d177"
+    "path": "src/objects/m1/source/stellar-field.json"
   },
   "compactInputs": {
-    "path": "src/objects/m1/source/compact/model.json.gz",
-    "sha256": "19a8d6d41d35694861e2ce5db6414f2d8f2a59ad9ea6d0129c3dc1d628b60be5"
+    "path": "src/objects/m1/source/compact/model.json.gz"
   },
   "compactMethod": "sampled"
 }

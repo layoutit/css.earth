@@ -18,8 +18,7 @@
     "pixelAngleMicroradians": 5.989697719921734
   },
   "mesh": {
-    "path": "shape/helene_30k_plt.tab",
-    "sha256": "d8fbff19525bca341bb3e4bde205ae77d8d05096f5244b77405ab27ebfd83e23"
+    "path": "shape/helene_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -95,10 +94,8 @@
         "maximumPixels": 1.4838794309909764
       },
       "reference": {
-        "id": "n1687120497_1",
-        "sha256": "04949cea3f5ba86376826d377a7701367f6d76cfa6fbc5ff3093cdf016d772b2"
+        "id": "n1687120497_1"
       },
-      "targetSha256": "ed52bc69932ab8eb6298b45c065784da6a8bfd80871af1733fe7a6774307f61d",
       "controls": [
         {
           "partition": "fit",

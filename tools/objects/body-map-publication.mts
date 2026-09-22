@@ -9,7 +9,6 @@ import { assessRequest, summarizeSatisfaction, type RequestSatisfaction } from '
 import { readFile, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256 } from '../../src/platform/sha256.mts';
 import { flagValue } from '../cli/cli-arguments.mts';
 import { hasErrorCode, requireRecord, requireArray } from '../sources/source-values.mts';
 import { supportsMeasuredResolution } from './resolution-evidence.mts';
@@ -41,22 +40,22 @@ export function bodyMapProductRecord(product: BodyMapProduct, plane: Buffer, met
   extraOutputs: readonly { readonly path: string; readonly bytes: Buffer; readonly units?: string; readonly conventions?: Readonly<Record<string, string>> }[] = []): ProductRecord {
   const planeName = product.planes.file, metadataName = `${planeName}.body-map.json`;
   return parseProductRecord({ schema: 'cssearth-telescope-product@1', ...bodyMapRun(product, inputs, software, toolchainDigest),
-    outputs: [{ path: planeName, bytes: plane.byteLength, sha256: sha256(plane), units: product.definition.units },
-      { path: metadataName, bytes: metadata.byteLength, sha256: sha256(metadata), conventions: { schema: product.schema } },
-      ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength, sha256: sha256(output.bytes),
+    outputs: [{ path: planeName, bytes: plane.byteLength, units: product.definition.units },
+      { path: metadataName, bytes: metadata.byteLength, conventions: { schema: product.schema } },
+      ...extraOutputs.map(output => ({ path: output.path, bytes: output.bytes.byteLength,
         ...(output.units === undefined ? {} : { units: output.units }), ...(output.conventions === undefined ? {} : { conventions: output.conventions }) }))], evidence: [] });
 }
 
 export const formatProductRecord = (record: ProductRecord): string => `${JSON.stringify(parseProductRecord(record), null, 2)}\n`;
 
 /** Called after an author's actual fit or calibrated beam extraction. This receipt
- * is an output of the same run as the map, bound to the same input pins. */
+ * is an output of the same run as the map, bound to the same inputs. */
 export function bindMapResolution(product: BodyMapProduct, kind: 'measured' | 'calibrated', method: string, diagnostics: unknown) {
   const path = `${product.planes.file}.resolution.json`;
   const bytes = Buffer.from(`${JSON.stringify({ schema: 'cssearth-map-resolution@1', target: product.frame.body, kind, method,
     observations: product.observations.map(o => ({ id: o.id, majorArcsec: o.angularResolution.majorArcsec, minorArcsec: o.angularResolution.minorArcsec })), diagnostics }, null, 2)}\n`);
   return { product: { ...product, observations: product.observations.map(o => ({ ...o, angularResolution: { ...o.angularResolution,
-    evidence: { kind, receipt: { file: path, sha256: sha256(bytes) } } } })) }, output: { path, bytes } };
+    evidence: { kind, receipt: { file: path } } } })) }, output: { path, bytes } };
 }
 
 export function assertBodyMapPlanes(bytes: Buffer, product: BodyMapProduct): void {
@@ -86,7 +85,7 @@ export interface TelescopeLayer {
   readonly target: string;
   readonly request: ObservationSelection['request'];
   readonly selection: Pick<ObservationSelection, 'telescope' | 'mode' | 'programme' | 'toolkitLevel' | 'constraints' | 'bodyMapSupport' | 'unresolved'>;
-  readonly map: { readonly metadata: string; readonly productRecord: string; readonly plane: string; readonly sha256: string;
+  readonly map: { readonly metadata: string; readonly productRecord: string; readonly plane: string; readonly bytes: number;
     readonly quantity: string; readonly units: string; readonly definitionDigest: string };
   readonly observations: BodyMapProduct['observations'];
 }
@@ -146,7 +145,6 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   const planePath = resolve(dirname(metadataPath), product.planes.file), expectedMetadata = `${planePath}.body-map.json`;
   if (metadataPath !== expectedMetadata) throw new Error(`The body-map record belongs at ${expectedMetadata}, beside the plane it names.`);
   const plane = await publicationFile(planePath, selection, 'map plane');
-  if (sha256(plane) !== product.planes.sha256) throw new Error(`${planePath} is not the plane pinned by ${metadataPath}.`);
   assertBodyMapPlanes(plane, product);
   const recordPath = productRecordPath(planePath), record = parseProductRecord(JSON.parse((await publicationFile(recordPath, selection, 'product record')).toString('utf8')) as unknown);
   if (!await sameRun(record, record, output => resolve(dirname(planePath), output))) throw new Error(`${recordPath} does not describe the output bytes on disk now.`);
@@ -154,7 +152,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
   if (runDigest(record) !== runDigest(expectedRun)) throw new Error(`${recordPath} does not bind the current map definition, frame, observations and combination policy.`);
   for (const [path, bytes] of [[basename(planePath), plane], [basename(metadataPath), await readFile(metadataPath)]] as const) {
     const output = record.outputs.find(entry => entry.path === path);
-    if (!output || output.bytes !== bytes.byteLength || output.sha256 !== sha256(bytes)) throw new Error(`${recordPath} does not pin its ${path} output.`);
+    if (!output || output.bytes !== bytes.byteLength) throw new Error(`${recordPath} does not pin its ${path} output.`);
   }
   if (product.frame.body !== selection.request.target) throw new Error(`${metadataPath} maps ${product.frame.body}, not the selected target ${selection.request.target}.`);
   const matched = product.observations.filter(observation => observation.telescope === selection.telescope && observation.mode === selection.mode && observation.programme === selection.programme);
@@ -165,7 +163,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
     const evidence = observation.angularResolution.evidence;
     if (!supportsMeasuredResolution(evidence)) continue;
     const pin = evidence!.receipt!, output = record.outputs.find(entry => entry.path === pin.file);
-    if (!output || output.sha256 !== pin.sha256) throw new Error('Resolution evidence is not pinned as an output of this map run.');
+    if (!output) throw new Error('Resolution evidence is not recorded as an output of this map run.');
     const receipt = requireRecord(JSON.parse(await readFile(resolve(dirname(planePath), pin.file), 'utf8')));
     const row = requireArray(receipt.observations).map(value => requireRecord(value)).find(row => row.id === observation.id);
     if (receipt.schema !== 'cssearth-map-resolution@1' || receipt.target !== product.frame.body || receipt.kind !== evidence!.kind ||
@@ -173,7 +171,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
       throw new Error('Resolution receipt does not establish this observation and its beam axes.');
   }
   const selected = selection.product ? await selectedProductInput(root, selection) : undefined;
-  if (selected && !record.inputs.some(i => i.identity === selected.input.identity && i.sha256 === selected.input.sha256 && i.bytes === selected.input.bytes)) throw new Error('Map did not consume the exact selected qualified artifact.');
+  if (selected && !record.inputs.some(i => i.identity === selected.input.identity && i.bytes === selected.input.bytes)) throw new Error('Map did not consume the exact selected qualified artifact.');
   const resolvedConstraints = assertMapAnswersRequest(product, selection), resolvedNames = new Set(Object.keys(resolvedConstraints));
   const satisfaction = assessRequest(selection.request, { verified: true, target: product.frame.body, result: 'body-map', ...(selected?.facts.kind ? { kind: selected.facts.kind } : {}),
       wavelengthIntervalsMicrometres: product.definition.wavelengthIntervalsMicrometres,
@@ -189,7 +187,7 @@ export async function qualifyBodyMap(mapPath: string, selection: ObservationSele
       constraints: { ...selection.constraints, ...resolvedConstraints }, bodyMapSupport: selection.bodyMapSupport,
       unresolved: [...selection.unresolved.filter(item => !resolvedNames.has(item.constraint)),
         ...Object.entries(resolvedConstraints).flatMap(([constraint, verdict]) => verdict.answer === 'unknown' || verdict.answer === 'partial' ? [{ constraint, answer: verdict.answer, reason: verdict.reason }] : [])] },
-    map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), sha256: product.planes.sha256,
+    map: { metadata: basename(metadataPath), productRecord: basename(recordPath), plane: basename(planePath), bytes: plane.byteLength,
       quantity: product.definition.quantity, units: product.definition.units, definitionDigest: definitionDigest(product.definition) }, observations: product.observations };
 }
 

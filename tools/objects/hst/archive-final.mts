@@ -484,15 +484,11 @@ export const archiveFinalSelection = (program: ArchiveFinalProgram) => ({
   components: program.components.map(component => ({ ...component })),
 });
 
-/** The part of a run that a later reader can rebuild from the program alone: the pinned files at their digests, and the
+/** The part of a run that a later reader can rebuild from the program alone: the recorded files at their sizes, and the
  * selection above. `runDigest` over this is what says a record still describes the program beside it. What the run measured
  * stays out of it, because nothing can recompute that without the files. */
-export function archiveFinalQualificationRun(program: ArchiveFinalProgram, digests: ReadonlyMap<string, string>): ProductRun {
-  const inputs: ProductInput[] = program.files.map(file => {
-    const sha256 = digests.get(file.name);
-    if (sha256 === undefined) throw new Error(`${program.id}: ${file.name} has no digest, so nothing says which bytes were read.`);
-    return { role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes, sha256 };
-  });
+export function archiveFinalQualificationRun(program: ArchiveFinalProgram): ProductRun {
+  const inputs: ProductInput[] = program.files.map(file => ({ role: roleOf(program, file.name), identity: file.uri, bytes: file.bytes }));
   return { telescope: ARCHIVE_FINAL_TELESCOPE, stage: ARCHIVE_FINAL_STAGE, inputs, parameters: { selection: archiveFinalSelection(program) }, software: [] };
 }
 
@@ -502,7 +498,7 @@ export const archiveFinalQualifiedRun = (record: ProductRecord): ProductRun =>
   ({ telescope: record.telescope, stage: record.stage, inputs: record.inputs, parameters: { selection: record.parameters.selection }, software: record.software });
 
 export function archiveFinalRun(run: ArchiveFinalRun): ProductRun {
-  const pinned = archiveFinalQualificationRun(run.program, new Map(run.files.map(file => [file.name, file.sha256])));
+  const pinned = archiveFinalQualificationRun(run.program);
   return {
     ...pinned,
     parameters: {

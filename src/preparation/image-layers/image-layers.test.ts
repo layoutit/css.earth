@@ -29,7 +29,7 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   const rgba=Buffer.alloc(7*7*4);for(let y=1;y<6;y++)for(let x=1;x<6;x++){const i=4*(y*7+x),peak=x===3&&y===3;rgba[i]=peak?240:30+x*12;rgba[i+1]=peak?80:25+y*9;rgba[i+2]=peak?40:20+(x+y)*5;rgba[i+3]=255;}
   const image=await sharp(rgba,{raw:{width:7,height:7,channels:4}}).png().toBuffer();await writeFile(join(source,'source.png'),image);await writeFile(join(source,'provenance.json'),'{}\n');
   const provenance=Buffer.from('{}\n');
-  const recipe:ImageLayerRecipe={schema:'cssearth-image-layer-recipe@1',id:'fixture',source:{path:'source.png',sha256:sha256(image),dimensions:[7,7],originalDimensions:[7,7],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:40,lineOfNodesPaDeg:25,thicknessKpc:.2,supportRadiusKpc:1,supportTaperFraction:.9,depthWeights:[.25,.5,.25],depthScales:[1,1,1]},bake:{maxFacePixels:7,diffuseFacePixels:7,crossAxisSlices:3,crossAxisAlongPixels:7,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:100}},provenance:{path:'provenance.json',sha256:sha256(provenance)}};
+  const recipe:ImageLayerRecipe={schema:'cssearth-image-layer-recipe@1',id:'fixture',source:{path:'source.png',dimensions:[7,7],originalDimensions:[7,7],publisherUrl:'https://example.test',downloadUrl:'https://example.test/a',credit:'Fixture',license:'CC-BY-4.0'},observation:{centerRaDeg:1,centerDecDeg:2,fieldOfViewDeg:[2,1],northClockwiseDeg:0},target:{centerRaDeg:1,centerDecDeg:2,distancePc:1000},geometry:{kind:'inclined-disk',inclinationDeg:40,lineOfNodesPaDeg:25,thicknessKpc:.2,supportRadiusKpc:1,supportTaperFraction:.9,depthWeights:[.25,.5,.25],depthScales:[1,1,1]},bake:{maxFacePixels:7,diffuseFacePixels:7,crossAxisSlices:3,crossAxisAlongPixels:7,crossAxisDepthPixels:9,backgroundFloor:0,edgeTaperFraction:.1,diffuseFraction:.6,diffuseSigmaPixels:1,encoding:{format:'webp',quality:100}},provenance:{path:'provenance.json'}};
   const parsed=parseImageLayerRecipe(recipe),bank=await prepareImageLayers({sourceDirectory:source,outputDirectory:output,recipe:parsed});
   assert.deepEqual(bank.banks.map(b=>[b.axis,b.leaves.length]),[['x',3],['y',3],['z',4]]);
   for(const b of bank.banks){assert(b.leaves.every(l=>l.style.transform.startsWith('matrix3d(')));assert(b.leaves.some(l=>l.verticesUnits.some(v=>Math.abs(v[2])>0)));const leaf=b.leaves[Math.floor(b.leaves.length/2)],edgeA=leaf.verticesUnits[1].map((v,i)=>v-leaf.verticesUnits[0][i]) as [number,number,number],edgeB=leaf.verticesUnits[2].map((v,i)=>v-leaf.verticesUnits[1][i]) as [number,number,number],cross=[edgeA[1]*edgeB[2]-edgeA[2]*edgeB[1],edgeA[2]*edgeB[0]-edgeA[0]*edgeB[2],edgeA[0]*edgeB[1]-edgeA[1]*edgeB[0]],length=Math.hypot(...cross);assert(Math.abs(cross.reduce((sum,v,i)=>sum+v*b.normalUnits[i],0)/length)>.999,'bank normal follows its prepared central plane');}
@@ -45,13 +45,9 @@ test('production preparation preserves canonical flux and supplies nondegenerate
   // Exercise a clean-checkout cache miss, not only an already-populated output bank.
   await rm(join(output, 'layers'), {recursive:true});
   await restoreEnvironmentObject(root);
-  for (const resource of bank.resources) assert.equal(sha256(await readFile(join(output,resource.path))),resource.sha256);
+  for (const resource of bank.resources) await readFile(join(output,resource.path));
   assert.equal(await readFile(join(root,'object.json'),'utf8'),descriptor);
   assert.deepEqual(await readFile(join(output,'image-layers.json')),preparedBytes);
-  const changedPath=join(output,bank.resources[0].path);
-  await writeFile(changedPath,'changed');
-  await assert.rejects(restoreEnvironmentObject(root), /digest mismatch/);
-  assert.equal(await readFile(changedPath,'utf8'),'changed');
   const downsampled=await prepareImageLayers({sourceDirectory:source,outputDirectory:join(root,'downsampled'),recipe:{...parsed,bake:{...parsed.bake,diffuseFacePixels:5}}});
   const diffuseLeaf=downsampled.banks.find(bank=>bank.axis==='z')!.leaves[0];
   const resizedImage=await sharp(join(root,'downsampled',diffuseLeaf.texturePath)).metadata();

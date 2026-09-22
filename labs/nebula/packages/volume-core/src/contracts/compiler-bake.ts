@@ -6,7 +6,7 @@ import { readRenderElementBudget, type RenderElementBudget } from './render-elem
 
 export const COMPILER_LONGEST_AXIS_SLICES = 512;
 
-export interface CompilerPin { path: string; sha256: string }
+export interface CompilerPin { path: string }
 export interface CompilerLensVolume {
   id: string;
   label: string;
@@ -86,7 +86,7 @@ export function compilerStarAppearance(star: PreparedCompilerStar, lensId: strin
 function pin(v: unknown): v is CompilerPin {
   if (!record(v)) return false;
   return typeof v.path === 'string' && v.path.length > 0 && !v.path.startsWith('/') && !v.path.split('/').includes('..') &&
-    !/[\\\u0000-\u0020]/.test(v.path) && typeof v.sha256 === 'string' && /^[a-f0-9]{64}$/.test(v.sha256);
+    !/[\\\u0000-\u0020]/.test(v.path);
 }
 function bounds3(v: unknown): v is EmissionBounds {
   if (!record(v)) return false;

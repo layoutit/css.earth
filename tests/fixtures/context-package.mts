@@ -19,16 +19,16 @@ export async function writeContextPackage(root: string, id: string) {
     }] } };
   const bankBytes = JSON.stringify(bank), bankHash = hash(bankBytes), preview = `/scenes/${id}/preview.webp`;
   const descriptor = { schema: 'cssearth-object@1', id, type: 'volume-lens-bank', properties: { frame },
-    prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json', sha256: bankHash } };
+    prepared: { format: 'cssearth-volume-lenses@1', url: 'prepared/lenses.json' } };
   const provenance = { schema: 'cssearth-object-provenance@3', objectId: id, basis: 'recovered',
-    manifest: { path: 'source/manifest.json', sha256: digest }, generator: { path: 'fixture', sha256: digest, bindingsSha256: digest },
+    manifest: { path: 'source/manifest.json' }, generator: { path: 'fixture' },
     sources: [{ id: 'image', lensId: 'optical', path: 'source/image', origin: 'Fixture', credit: 'Fixture', acquisition: 'Fixture',
-      sha256: digest, bytes: image.length, dependencies: [], verification: 'manifest-pin' }],
+      sha256: digest, bytes: image.length, dependencies: [], verification: 'bytes-verified' }],
     recipes: [{ id: 'mapping', path: 'source/recipe.json', sha256: digest, parameters: {} }],
     products: [{ id: 'optical', lensIds: ['optical'], label: 'Optical', process: 'Fixture', recipe: 'mapping', selector: '', recipeDependencies: ['mapping'],
       inputs: ['image'], parents: [], outputs: [
-        { url: `src/objects/${id}/prepared/lenses.json`, sha256: bankHash, bytes: Buffer.byteLength(bankBytes), verification: 'descriptor-pin' },
-        { url: preview, sha256: digest, bytes: image.length, verification: 'descriptor-pin' },
+        { url: `src/objects/${id}/prepared/lenses.json`, sha256: bankHash, bytes: Buffer.byteLength(bankBytes), verification: 'bytes-verified' },
+        { url: preview, sha256: digest, bytes: image.length, verification: 'bytes-verified' },
       ] }], coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved: [] } };
   const presentation = { schema: 'cssearth-volume-presentation@1', objectId: id, defaultLens: 'optical', controls: [{
     id: 'optical', label: 'Optical', title: 'Fixture optical image', summary: 'Structural test fixture', thumbnailUrl: preview,

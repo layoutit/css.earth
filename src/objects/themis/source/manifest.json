@@ -33,8 +33,6 @@
         "referenceRadiusMeters": 104000
       },
       "coverage": "Closed MPCD shape from resolved VLT/SPHERE images and an ADAM starting model. Observational detail is nonuniform. The shared grid is an explicit no-imagery treatment.",
-      "expectedBytes": 357499,
-      "expectedSha256": "6a3b36dbee88acca8365d8b4baada532ec83ebedfd3c5ed2842ec4dd36889853",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -95,8 +91,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 25270498,
-      "expectedSha256": "85c45bbcf5705a5173fa1da7593aba777f3c083c61bb6a88ecf15a6513a7725f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -213,8 +207,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "71eb7fa5e4be9602c58242b8979a05320257fd53fba87351ad6609559e979522",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -252,8 +244,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "c367c877557b6df9adafaa3c61f761dc4816cb62b3aab81e2bdd4da68273bd59",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -291,8 +281,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "0159447f8ca69dba4fb95d180fdb23b1171cfe1e2aa5d293f080da6d9c71f1be",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -330,8 +318,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "f421a5eb1bc63219adf4c7ac34c1906095c61bb9275fffb51c322cbf70892e40",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -369,8 +355,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "267e6cf7e219c71fe2aaaf1022135fb7a41c136cda36c852f2388484c94b6de0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -408,8 +392,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "4f2a877b8896dcd3d28c676e57fc1748d44091f3b4d457b6015b6ceace4fb55d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -447,8 +429,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "40e2f1ba0c61fa6043e94d1ced6a8344d29f0468e71d9abc7b001208bab3b999",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -486,8 +466,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "028e97b337af40b33ea6bb1abce930d20530912af0bdc40afcb9bf01ff925548",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -525,8 +503,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "21f0539a85b644e688cf84ea3228df7fb45b21a4725edf553eef5fc59bd49155",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -564,8 +540,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "9d8740cab64eb99ab2cd183bda320ccd90da4b020568637128214deca47fe491",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -603,8 +577,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "25bcd3ddaec50b55ba52cf89817ac9c2410ed113ff94cce4c805cdc6b928192c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -642,8 +614,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "152b79845ede12708bbf416643653819d2d8b32f47f82602a84e311e200cb1e9",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -681,8 +651,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "987b92da898f1d31328ce0d1176cc9b052524895f7e66cd3917b5e7def531ed4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -720,8 +688,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "eb855d21324bd3aa376dbba13a925a8b63789a105b33dd529fab6b688c12b8d2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -759,8 +725,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "12f6e3eec25c015bded5f213ffdbd885091bff00f607a344368cec1ef2b8334f",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -798,8 +762,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "879984ccb3a52e571a1c6bc4b878fd771fac1d79227664cea174475b2e99ecb1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -837,8 +799,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "9f6cd2edd674fd23fe84bc871f3e6cec019b369ca743446bb02b6ec3fc6598b1",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -876,8 +836,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "bca79aec5aa696e4f2a7eff404a0fab67082e9de8588debe026a564a1bb81e43",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -915,8 +873,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "7969cf17454746e5b7cb94adf79057b7a10c6913080825cb8d41645188bdaa82",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -954,8 +910,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "234655c8c8268715719aa3a27817dcb383445f85cbe2dc6c02a8098d75c42775",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -993,8 +947,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "2a9e12281d74119a94040f36245a9883a06907db81f0687fec5ddfeb60e90c47",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1032,8 +984,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "29c5460d6eb6de14248fe237030aa25a13fc94ca7eb1680212204b5abcb87c11",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1071,8 +1021,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "26122e9b51968eb7fcba386ed498cf6b1356e91a36daa597b2b929d986557ce5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1110,8 +1058,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "e7668265c2a7e77fe5ba0d1891cfdb03472722e76a115d66da8c03a638d470e3",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1149,8 +1095,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "2a528140add26c87266e602e5d97dd7c4df7e58a364f2e0dbcdecd8dfd93319a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1188,8 +1132,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "d0463be849759b9e03d0c01e64351a0eb71247966e6e8307ecaba7973b101330",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1227,8 +1169,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "779ec56ac3749d9fd47291d8d027b30f23b39ff8b22e017722639ab0cd7e0748",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1266,8 +1206,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "2e987e6f8e9f24a50744ac1ad71ac4040a827db1d662c6026f39a037f18a84fc",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1305,8 +1243,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "c3d8eaf322e2f15213b35cafb1b34fb1b05ef42f63567dc4acbff70351111f8d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1344,8 +1280,6 @@
       "lensId": "zimpol",
       "label": "Deconvolved ZIMPOL frame",
       "coverage": "Deconvolved VLT/SPHERE/ZIMPOL intensity frame, camera 1. Derived from the ESO pipeline product named in its own header; the deconvolution is the survey’s and is not described in the file.",
-      "expectedBytes": 593280,
-      "expectedSha256": "4010f863ed4c6fc06245676e2c1e8234253abf62329508abbf157ce74066ad47",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

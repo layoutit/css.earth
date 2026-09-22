@@ -6,26 +6,22 @@
     {
       "role": "our-mosaic",
       "identity": "ngc3132-4416768.ch3.remosaic.fits",
-      "bytes": 9792000,
-      "sha256": "f5b60f8ffdd3f50b469ce210ab0f89a5f9c7f978c9e703bed670abd8fb7a6ecd"
+      "bytes": 9792000
     },
     {
       "role": "archive-mosaic",
       "identity": "SPITZER_I3_4416768_0000_7_E8349184_maic.fits",
-      "bytes": 9797760,
-      "sha256": "b1a24cd4114fd5019622b6b427e9e965090634936afb39aff395e5bf54fc7c99"
+      "bytes": 9797760
     },
     {
       "role": "archive-uncertainty",
       "identity": "SPITZER_I3_4416768_0000_7_A42448387_munc.fits",
-      "bytes": 9797760,
-      "sha256": "fdd26029deb249b32839c7effe93b81e89a15c23d3c9ed58fa6e6da7d1124ed5"
+      "bytes": 9797760
     },
     {
       "role": "archive-coverage",
       "identity": "SPITZER_I3_4416768_0000_7_A42448388_mcov.fits",
-      "bytes": 9797760,
-      "sha256": "6552fdfb609522a7d98edf86f97a66939e0e33bd3e1b56509b30004b78eb3275"
+      "bytes": 9797760
     }
   ],
   "parameters": {
@@ -43,7 +39,6 @@
     {
       "path": "ngc3132-4416768.ch3.remosaic.reproduction.json",
       "bytes": 3523,
-      "sha256": "6ab6a175ccdc7040406989700383c9bc57e1763dbe5a143dd2f151bc5a12899a",
       "units": "dimensionless shares and ratios"
     }
   ],

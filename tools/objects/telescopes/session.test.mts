@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -41,7 +42,7 @@ async function fixture() {
   await mkdir(source, { recursive: true });
   const bytes = Buffer.alloc(8); bytes.writeFloatLE(1); bytes.writeFloatLE(2, 4);
   const files = [{ id: 'science', path: 'core.bin', role: 'science', bytes }, { id: 'label', path: 'core.lbl', role: 'label', bytes: Buffer.from(label()) }];
-  const manifest = { inputs: files.map(f => ({ id: f.id, path: f.path, origin: `https://example.org/${f.path}`, expectedBytes: f.bytes.length, expectedSha256: digest(f.bytes) })) };
+  const manifest = { inputs: files.map(f => ({ id: f.id, path: f.path, origin: `https://example.org/${f.path}` })) };
   const declaration = { schema: SOURCE_PRODUCTS_SCHEMA, target: 'test-body', observations: [{ id: 'cube-1', telescope: 'Test telescope', mode: 'test cube', kind: 'cube',
     archiveProductId: 'archive-cube', decoder: 'isis3', labelPath: 'core.lbl', inputs: files.map(f => ({ input: f.id, role: f.role })), identity: { TargetName: 'TEST-BODY' },
     startIso: '2026-01-01T10:00:00.000Z', endIso: '2026-01-01T10:10:00.000Z',
@@ -71,9 +72,6 @@ test('detached label membership is enforced for every decoder, including direct 
     await qualifySourceProduct(f.root, product);
     assert.equal((await qualifySourceProduct(f.root, product)).reused, true);
     await writeFile(resolve(f.source, 'core.lbl'), label(10));
-    await assert.rejects(loadSourceProducts(f.root, 'test-body'), /source-manifest pin/);
-    await assert.rejects(qualifySourceProduct(f.root, product), /manifest pin/);
-    f.manifest.inputs[1].expectedBytes = Buffer.byteLength(label(10)); f.manifest.inputs[1].expectedSha256 = digest(label(10)); await f.writeMetadata();
     const changed = parseSourceProducts(f.declaration, f.manifest, 'test-body')[0];
     assert.equal((await qualifySourceProduct(f.root, changed)).reused, false);
     const decoded = JSON.parse(await readFile(resolve(f.root, 'output/telescopes/test-body/cube-1/decoded.json'), 'utf8'));

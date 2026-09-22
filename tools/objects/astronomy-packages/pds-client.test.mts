@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parsePdsPackageAnswer } from './pds-client.mts';
 
 test('the PDS boundary requires exact package versions and one exact product', () => {

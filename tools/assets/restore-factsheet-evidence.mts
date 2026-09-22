@@ -3,7 +3,7 @@ import { lstat, readFile, realpath } from 'node:fs/promises';
 import { dirname, relative, resolve } from 'node:path';
 import { sourcePath } from '../../src/platform/source-catalog.mts';
 import { hasErrorCode } from '../sources/source-values.mts';
-import { assertSourceBytes, assertSourceFile, containedPath, parseAcquisitionPlan, parseSourceManifest, restoreMissingSources } from '../objects/dist/operations.js';
+import { assertSourceFile, containedPath, parseAcquisitionPlan, parseSourceManifest, restoreMissingSources } from '../objects/dist/operations.js';
 export type FactsheetSourceTransport = NonNullable<Parameters<typeof restoreMissingSources>[0]['transport']>;
 
 /** Restore one missing cited document, without acquiring the body's other source assets. */
@@ -30,7 +30,6 @@ export async function restoreFactsheetEvidence({ objectDirectory, path, manifest
   const planFile = await realpath(containedPath(sourceRoot, planPath));
   assertContained(sourceRoot, planFile);
   const planBytes = await readFile(planFile);
-  assertSourceBytes(planEntry, planBytes);
   const raw: unknown = JSON.parse(planBytes.toString('utf8'));
   const plan = parseAcquisitionPlan(raw);
   const operations = plan.operations.filter(step => 'path' in step && step.path === sourceRelative);

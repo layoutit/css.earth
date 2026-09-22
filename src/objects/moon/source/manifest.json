@@ -4,8 +4,6 @@
     {
       "id": "nasa-lro-moon-color",
       "path": "surface/lroc-color-2k.jpg",
-      "expectedSha256": "f7130a1822681fa7512d7dcfd40db8c10b9ba4f06777910348698260ed7a2170",
-      "expectedBytes": 457942,
       "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004700/a004720/lroc_color_2k.jpg",
       "credit": "NASA SVS, LRO, LROC and LOLA",
       "license": "NASA media usage guidelines",
@@ -42,8 +40,6 @@
     {
       "id": "nasa-grail-crustal-thickness",
       "path": "lenses/grail-crustal-thickness-print.jpg",
-      "expectedSha256": "d791cb16b0e6ee74bda94ca5bc1577fc9589a9e7d70cdade255ad199f83a5e95",
-      "expectedBytes": 300978,
       "origin": "https://svs.gsfc.nasa.gov/vis/a000000/a004000/a004014/crustal_thickness_flat_print.jpg",
       "credit": "NASA GSFC Scientific Visualization Studio; GRAIL",
       "license": "NASA media usage guidelines",
@@ -130,8 +126,6 @@
     {
       "id": "lro-lola-ldem16-numeric",
       "path": "science/ldem_16.img",
-      "expectedSha256": "a511e40d7a3ea3275945b4da2a1df377133264fab0be94b7434b1cf8907254cb",
-      "expectedBytes": 33177600,
       "origin": "https://pds-geosciences.wustl.edu/lro/lro-l-lola-3-rdr-v1/lrolol_1xxx/data/lola_gdr/cylindrical/img/ldem_16.img",
       "credit": "David E. Smith and NASA GSFC LRO LOLA team; NASA PDS Geosciences Node",
       "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
@@ -168,8 +162,6 @@
     {
       "id": "lro-diviner-rock-abundance-numeric",
       "path": "science/dgdr_ra_avg_cyl_032_img.img",
-      "expectedSha256": "ee0ff6ddfcc9cb4bb2fe83992f3951471c468a169804f1fdb582dc2df99540e1",
-      "expectedBytes": 88473600,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_gdr_l3/cylindrical/img/dgdr_ra_avg_cyl_032_img.img",
       "credit": "Joshua Bandfield and UCLA LRO Diviner team; NASA PDS Geosciences Node",
       "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
@@ -265,8 +257,6 @@
     },
     {
       "path": "geology/GeoUnits.shp",
-      "expectedBytes": 126176440,
-      "expectedSha256": "122559104301f923cb75e48f5fadc87f31c3e1aeb354c499924b256c052770c1",
       "id": "mapped-science-geology-geounits-shp",
       "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
       "credit": "Fortezzo, Spudis and Harrel (2020), USGS",
@@ -292,8 +282,6 @@
     },
     {
       "path": "geology/GeoUnits.dbf",
-      "expectedBytes": 2670072,
-      "expectedSha256": "fd6c74b9545ff62a3d8382ec271825b0a4d5508263372cbe3f4d34d6ab0463c4",
       "id": "mapped-science-geology-geounits-dbf",
       "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Moon/Geology/Unified_Geologic_Map_of_the_Moon_GIS_v2.zip",
       "credit": "Fortezzo, Spudis and Harrel (2020), USGS",
@@ -319,8 +307,6 @@
     },
     {
       "path": "science/diviner_CF_space_weathering_corrected.tiff",
-      "expectedBytes": 206474632,
-      "expectedSha256": "350f6e1b9c3a12b18606182a0764985da4586875d99aa390ee2daf73b9097f52",
       "id": "mapped-science-science-diviner-cf-space-weathering-corrected-tiff",
       "origin": "https://zenodo.org/api/records/4558194/files/diviner_CF_space_weathering_corrected.tiff/content",
       "credit": "Lucey et al. (2021)",
@@ -347,8 +333,6 @@
     },
     {
       "path": "science/diviner_MI_latitude.tiff",
-      "expectedBytes": 206474614,
-      "expectedSha256": "f9fb1361f24f5d0d5b19e0a7a28fab8f5899bdc3123d8eae6daae568c081b276",
       "id": "mapped-science-science-diviner-mi-latitude-tiff",
       "origin": "https://zenodo.org/api/records/4558194/files/diviner_MI_latitude.tiff/content",
       "credit": "Lucey et al. (2021)",
@@ -375,8 +359,6 @@
     },
     {
       "path": "science/diviner_MI_longitude.tiff",
-      "expectedBytes": 206474614,
-      "expectedSha256": "eea24b573fca596791acfe6e5c74dee9eb39514ea00e585f47e0048609030229",
       "id": "mapped-science-science-diviner-mi-longitude-tiff",
       "origin": "https://zenodo.org/api/records/4558194/files/diviner_MI_longitude.tiff/content",
       "credit": "Lucey et al. (2021)",
@@ -404,8 +386,6 @@
     {
       "id": "diviner-ghrm-tbol_m-original",
       "path": "science/diviner-ghrm/dghrm_tbol_m_70s70n_img.img",
-      "expectedSha256": "c92932e837bdfca4b78605c52abe6b8e1f91f31508a315ce3321cb589ea1e12e",
-      "expectedBytes": 3303014400,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_m_70s70n_img.img",
       "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
       "license": "CC0 1.0 author dataset; NASA PDS scientific data",
@@ -463,8 +443,6 @@
     {
       "id": "diviner-ghrm-tbol_anom-original",
       "path": "science/diviner-ghrm/dghrm_tbol_anom_70s70n_img.img",
-      "expectedSha256": "37818f875e8455301789df3484356a907c6140b8fe864ef15d70f812f8319bfd",
-      "expectedBytes": 3303014400,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_tbol_anom_70s70n_img.img",
       "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
       "license": "CC0 1.0 author dataset; NASA PDS scientific data",
@@ -522,8 +500,6 @@
     {
       "id": "diviner-ghrm-ra_sam-original",
       "path": "science/diviner-ghrm/dghrm_ra_sam_70s70n_img.img",
-      "expectedSha256": "4a4128ecc652850af367bfc8bc553ba9064dd40ca4df9521731024da05b8a123",
-      "expectedBytes": 3303014400,
       "origin": "https://pds-geosciences.wustl.edu/lro/urn-nasa-pds-lro_diviner_derived1/data_derived_ghrm/img/dghrm_ra_sam_70s70n_img.img",
       "credit": "T. M. Powell and LRO Diviner team, UCLA; NASA PDS Geosciences Node",
       "license": "CC0 1.0 author dataset; NASA PDS scientific data",
@@ -788,8 +764,6 @@
     {
       "id": "moon-apollo-11-eva-traverse-path",
       "path": "features/traverses/APOLLO_11.ZIP",
-      "expectedBytes": 116096,
-      "expectedSha256": "b1f63da2a1764cb17d99c73206f3448a7cb8d36d70323563a80c200ec852f767",
       "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_11/APOLLO_11.ZIP",
       "credit": "NASA/GSFC/Arizona State University (LROC)",
       "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
@@ -812,8 +786,6 @@
     {
       "id": "moon-apollo-12-eva-traverse-path",
       "path": "features/traverses/APOLLO_12.ZIP",
-      "expectedBytes": 313003,
-      "expectedSha256": "f37d068ccc628226bff6068a48555722de659bedfc64b3fb994039a61f727591",
       "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/EXTRAS/SHAPEFILE/APOLLO_12/APOLLO_12.ZIP",
       "credit": "NASA/GSFC/Arizona State University (LROC)",
       "license": "PDS archive extras (NASA LRO); NASA content not subject to copyright, credit NASA/GSFC/Arizona State University",
@@ -836,8 +808,6 @@
     {
       "id": "lroc-wac-global-032p",
       "path": "surface/WAC_GLOBAL_E000N1800_032P.IMG",
-      "expectedBytes": 265466880,
-      "expectedSha256": "a15b60d0e0e4e5ad6a9e3dde04e798594511a13b061362ce02c8f69e2fb81c1a",
       "origin": "https://pds.lroc.im-ldi.com/data/LRO-L-LROC-5-RDR-V1.0/LROLRC_2001/DATA/BDR/WAC_GLOBAL/WAC_GLOBAL_E000N1800_032P.IMG",
       "credit": "NASA/GSFC/Arizona State University",
       "license": "Public domain PDS archive data",

@@ -45,8 +45,7 @@
       ],
       "referenceFramingRadiusUnits": 5,
       "starAlignmentReference": {
-        "path": "labs/nebula/models/lmc/stars/source/alignment.json",
-        "sha256": "d2213aeb75b7b0a9084a482a6baa361834360599320044c0b18e248043066d12"
+        "path": "labs/nebula/models/lmc/stars/source/alignment.json"
       },
       "processingPlan": "labs/nebula/models/lmc/star-separation/plan.json"
     },

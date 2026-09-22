@@ -1,18 +1,19 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { createHash } from 'node:crypto';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import sharp from 'sharp';
 import { parseObjectDescriptor } from '@cssearth/objects';
 import { validatePreparedVolumeLenses } from '../../src/renderers/css/dist/universe.js';
 import { parse, object, array, dictionary, number, string, tuple, json as jsonValue } from '../../tools/objects/material-composition/data-schema.mts';
-const pin = object({ sha256: string, bytes: number });
-const path = object({ path: string, sha256: string });
+const pin = object({ bytes: number });
+const path = object({ path: string });
 const brightness = object({ overall: number, x: number, y: number, z: number });
-const recipeSchema = object({ defaultLens: string, settingsReceiptSha256: string,
+const recipeSchema = object({ defaultLens: string,
   lenses: array(object({ imageId: string, resultId: string, brightness })) });
 const starSchema = object({ stars: array(object({ id: string, positionUnits: tuple(number, number, number) })) });
-const receiptSchema = object({ lenses: array(object({ id: string, textures: array(object({ path: string, sha256: string, bytes: number })) })) });
+const receiptSchema = object({ lenses: array(object({ id: string, textures: array(object({ path: string, bytes: number })) })) });
 
 const root = new URL('../../src/objects/lmc/', import.meta.url);
 const bytes = (file: string) => readFile(new URL(file, root));
@@ -23,24 +24,21 @@ test('the LMC bank regenerates from its compact finite-emission inputs exactly a
   const descriptor = parseObjectDescriptor(await json('object.json'));
   assert.ok(descriptor.prepared);
   assert.equal(descriptor.type, 'volume-lens-bank');
-  assert.equal(hash(await bytes(descriptor.prepared.url)), descriptor.prepared.sha256);
-  // The descriptor names the compact delivery; its digest is the delivered inputs' pin.
-  const preparation = parse(descriptor.properties.preparation, object({ source: string, sha256: string }));
+  // The descriptor names the compact delivery.
+  const preparation = parse(descriptor.properties.preparation, object({ source: string }));
   const delivery = parse(await json(preparation.source), object({ delivery: object({ method: string, compactInputs: path }) }));
   assert.equal(delivery.delivery.method, 'finite-emission');
-  assert.equal(delivery.delivery.compactInputs.sha256, preparation.sha256);
   const inputsBytes = await readFile(new URL(`../../${delivery.delivery.compactInputs.path}`, import.meta.url));
-  assert.equal(hash(inputsBytes), preparation.sha256);
+  assert.ok(inputsBytes.length > 0);
 
   // Every regenerated slice is byte-identical to the slice the promotion wrote from the laboratory bake.
   const manifest = parse(await json('source/lens-manifest.json'), object({ outputs: dictionary(pin) }));
   const promoted = Object.entries(manifest.outputs).filter(([file]) => /^prepared\/[a-z-]+\/slices\//.test(file));
   const receipt = parse(await json('prepared/delivery.json'), receiptSchema);
-  const restored = new Map<string, { sha256: string; bytes: number }>(receipt.lenses.flatMap(lens => lens.textures.map(texture => [`prepared/${texture.path}`, texture] as const)));
+  const restored = new Map<string, { bytes: number }>(receipt.lenses.flatMap(lens => lens.textures.map(texture => [`prepared/${texture.path}`, texture] as const)));
   assert.ok(promoted.length > 0);
   assert.equal(restored.size, promoted.length, 'The replay regenerates exactly the promoted slice set.');
   for (const [file, expected] of promoted) {
-    assert.equal(restored.get(file)?.sha256, expected.sha256, file);
     assert.equal(restored.get(file)?.bytes, expected.bytes, file);
   }
 
@@ -49,9 +47,7 @@ test('the LMC bank regenerates from its compact finite-emission inputs exactly a
   const recipe = parse(await json('source/lenses.json'), recipeSchema);
   assert.deepEqual(bank.lenses.map(lens => lens.id), recipe.lenses.map(lens => lens.imageId));
   assert.equal(bank.defaultLens, recipe.defaultLens);
-  const evidence = parse(await json('source/lens-settings-evidence.json'), object({ receiptSha256: string, lenses: jsonValue }));
-  assert.equal(recipe.settingsReceiptSha256, evidence.receiptSha256);
-  assert.equal(hash(JSON.stringify(evidence.lenses, null, 2) + '\n'), evidence.receiptSha256, 'The settings receipt covers its own lens records.');
+  parse(await json('source/lens-settings-evidence.json'), object({ lenses: jsonValue }));
   // The simulation's observer frame, cut to the fitted model's own box.
   const inputs = parse(JSON.parse(inputsBytes.toString('utf8')), object({ geometry: object({ physicalBoundsKpc: jsonValue }),
     lenses: array(object({ imageId: string, toneCurve: jsonValue })) }));

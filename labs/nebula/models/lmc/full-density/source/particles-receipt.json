@@ -2,7 +2,6 @@
   "schema": "cssearth-particle-volume-lab@1",
   "input": {
     "path": ".local/nebula-lab/full-density/lmc-full-density.f32",
-    "sha256": "c57e34ed2b7ba22574f2d5a47668538cb09cfe59bf6d883d63f8661610825740",
     "bytes": 25920000,
     "layout": "float32-le-xyzmass-kpc"
   },
@@ -56,8 +55,6 @@
   },
   "outputs": {
     "gridPath": "density.ktx2",
-    "gridSha256": "874682f828f1143ada8d4013f1a80634019f83d6ff6e7d906e51b0a764929f60",
-    "decodedSha256": "532b70e38e034ad4a0b711c0fc54183fe78a73d14e714cf898125c8644599ce5",
     "bytes": 315857
   },
   "interpretation": {

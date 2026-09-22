@@ -18,8 +18,7 @@
     "pixelAngleMicroradians": 5.9896977199
   },
   "mesh": {
-    "path": "shape/hyperion_30k_plt.tab",
-    "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"
+    "path": "shape/hyperion_30k_plt.tab"
   },
   "settings": {
     "patchRadiusPixels": 13,
@@ -97,10 +96,8 @@
         "maximumPixels": 1.3549174077785957
       },
       "reference": {
-        "id": "n1506388518",
-        "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80"
+        "id": "n1506388518"
       },
-      "targetSha256": "c55028bd80d803652ae620aff567f5389650f9de45fe8fca48f80b5b07b1d43e",
       "controls": [
         {
           "partition": "holdout",
@@ -2103,10 +2100,8 @@
         "maximumPixels": 1.3417540856406864
       },
       "reference": {
-        "id": "n1506388518",
-        "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80"
+        "id": "n1506388518"
       },
-      "targetSha256": "f6b345c405d61b7dc8d5716e5c4b7ef3ddf34a4ba501c247cabbe7b197ae7921",
       "controls": [
         {
           "partition": "holdout",
@@ -4109,10 +4104,8 @@
         "maximumPixels": 1.68891663332893
       },
       "reference": {
-        "id": "n1506388518",
-        "sha256": "049a41fa5fa30efa56bd3e5d929e60bccc2f8b3359f9a14329f8897f75461d80"
+        "id": "n1506388518"
       },
-      "targetSha256": "93c81f6e7ccd3ee294c2e6315169dff1848f1151576dadceb10f67b5c45bd199",
       "controls": [
         {
           "partition": "holdout",

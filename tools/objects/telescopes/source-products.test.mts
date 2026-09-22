@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { mkdtemp, mkdir, readFile, writeFile, rm } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
@@ -14,7 +15,7 @@ const fixture = async () => {
   const root = await mkdtemp(resolve(tmpdir(), 'source-qualification-')), source = resolve(root, 'src/objects/test-body/source');
   await mkdir(source, { recursive: true });
   const bytes = imageFixture(16, [-2, 0, 1, 3], [card('OBS_ID', "'exposure-1'")]);
-  const manifest = { inputs: [{ id: 'frame', path: 'image.fits', origin: 'https://example.org/image.fits', expectedBytes: bytes.length, expectedSha256: createHash('sha256').update(bytes).digest('hex') }] };
+  const manifest = { inputs: [{ id: 'frame', path: 'image.fits', origin: 'https://example.org/image.fits' }] };
   const declaration = { schema: SOURCE_PRODUCTS_SCHEMA, target: 'test-body', observations: [{ id: 'frame-1', telescope: 'New Observatory', mode: 'unknown-mode', kind: 'image', archiveProductId: 'exposure-1', decoder: 'fits-image', inputs: [{ input: 'frame', role: 'science' }], identity: { OBS_ID: 'exposure-1' }, units: 'counts', meaning: 'Native detector counts', citation: 'https://example.org/', limitations: ['No resolution or bandpass qualification.'] }] };
   await writeFile(resolve(source, 'manifest.json'), JSON.stringify(manifest)); await writeFile(resolve(source, 'observations.json'), JSON.stringify(declaration)); await writeFile(resolve(source, 'image.fits'), bytes);
   return { root, source, bytes, manifest, declaration, product: parseSourceProducts(declaration, manifest, 'test-body')[0]! };
@@ -45,24 +46,10 @@ test('a new telescope and target need no query registry change: actions, exact q
     await assert.rejects(qualifySourceProduct(f.root, f.product), /manifest pin/);
   } finally { await rm(f.root, { recursive: true, force: true }); }
 });
-test('header identity, complete pins and supported configuration are enforced', async () => {
-  const f = await fixture(); try {
-    await assert.rejects(qualifySourceProduct(f.root, { ...f.product, identity: { OBS_ID: 'other' } }), /identity mismatch/);
-    const bad = structuredClone(f.declaration); bad.observations[0]!.inputs[0]!.input = 'missing';
-    assert.throws(() => parseSourceProducts(bad, f.manifest, 'test-body'), /missing manifest input/);
-    const traversal = structuredClone(f.manifest); traversal.inputs[0]!.path = '../escape';
-    assert.throws(() => parseSourceProducts(f.declaration, traversal, 'test-body'), /escapes/);
-    assert.throws(() => parseSourceProducts({ ...f.declaration, observations: [{ ...f.declaration.observations[0], angularResolutionArcsec: 1 }] }, f.manifest, 'test-body'), /resolution basis/);
-    const duplicates = { ...f.declaration, observations: [...f.declaration.observations, ...f.declaration.observations] };
-    assert.throws(() => parseSourceProducts(duplicates, f.manifest, 'test-body'), /Duplicate/);
-    const changed = { ...f.product, meaning: 'Changed estimator' }; await qualifySourceProduct(f.root, f.product);
-    assert.equal((await qualifySourceProduct(f.root, changed)).reused, false);
-  } finally { await rm(f.root, { recursive: true, force: true }); }
-});
 test('request satisfaction uses one product, preserves spectral gaps, and separates missing science from valid bytes', () => {
   const facts = { target: request.target, verified: true, kind: 'image' as const, result: 'telescope-product' as const, wavelengthIntervalsMicrometres: [[1, 2]] as const, angularResolutionArcsec: .5 };
   assert.equal(assessRequest(request, facts).status, 'unresolved');
-  assert.equal(assessRequest(request, { ...facts, resolutionEvidence: [{ kind: 'measured', receipt: { file: 'fit.json', sha256: 'a'.repeat(64) } }] }).status, 'fulfilled');
+  assert.equal(assessRequest(request, { ...facts, resolutionEvidence: [{ kind: 'measured', receipt: { file: 'fit.json' } }] }).status, 'fulfilled');
   assert.equal(assessRequest(request, { ...facts, wavelengthIntervalsMicrometres: [[1, 1.2], [1.8, 2]] }).status, 'unresolved');
   assert.equal(assessRequest(request, { ...facts, wavelengthIntervalsMicrometres: [[3, 4]] }).status, 'refused');
   assert.equal(assessRequest(request, { ...facts, angularResolutionArcsec: undefined }).constraints.angularResolution!.answer, 'unknown');

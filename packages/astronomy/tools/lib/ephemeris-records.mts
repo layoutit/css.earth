@@ -1,7 +1,7 @@
 import { array, boolean, dictionary, literal, number, optional, shape, string, vector } from './source-validation.mts';
 import { objectValue } from './generator-records.mts';
 const stateFields = { positionKm: vector, velocityKmPerDay: vector };
-const pinFields = { path: string, sha256: string, bytes: number };
+const pinFields = { path: string, bytes: number };
 const urlPinFields = { ...pinFields, url: string };
 const horizonPinFields = { ...urlPinFields, target: number, center: number };
 const sourcePin = shape(urlPinFields);
@@ -11,7 +11,7 @@ const bodyFields = { id: string, centerBodyId: string, epochJdTt: number, refere
   correction: string, runtimeExtrapolation: boolean, limitations: array(string), ...stateFields,
   gravitationalParametersKm3PerS2: shape({ body: number, parent: number, combined: number }) };
 const projectionFields = { epochJdTt: number, geocentricLightTimeDays: number };
-const comparison = shape({ ...projectionFields, sourcePins: array(string), responseTableJd: number,
+const comparison = shape({ ...projectionFields, responseTableJd: number,
   miriadePositionMas: array(number), publishedModelPositionMas: array(number), differenceMagnitudeMas: number });
 const historicalComparison = shape({ ...projectionFields, line: number, sourceRow: string, jdUtc: number,
   reportedModelPositionMas: array(number), publishedPrintedElementsPositionMas: array(number) });
@@ -43,4 +43,4 @@ export type ProjectionSample = ReturnType<typeof comparison> | ReturnType<typeof
 export const parseSceneManifest = shape({ schema: literal('cssearth-scene-epoch-ephemeris@1'), epochJdTt: number,
   requestEpochJdUtc: number, ttMinusUtcSeconds: number, timeQualification: string, referenceFrame: string,
   units: string, correction: string, retrievedAt: string,
-  records: array(shape({ id: string, target: number, center: number, centerBodyId: string, path: string, sha256: string, url: string })) });
+  records: array(shape({ id: string, target: number, center: number, centerBodyId: string, path: string, url: string })) });

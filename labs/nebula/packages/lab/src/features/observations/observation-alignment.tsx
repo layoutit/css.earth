@@ -40,7 +40,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
       if (controller.signal.aborted) return;
       const prior = loadedManifest.current;
       setFits(previous => Object.fromEntries(next.images.map(image => [image.id,
-        refreshing && prior?.images.some(old => old.id === image.id && old.source.sha256 === image.source.sha256)
+        refreshing && prior?.images.some(old => old.id === image.id && old.source.url === image.source.url)
           ? previous[image.id] ?? savedObservationFit(manifestPath, image) : savedObservationFit(manifestPath, image)])));
       setSelected(refreshing && next.images.some(item => item.id === selected) ? selected : next.images[0]!.id);
       if (!refreshing) setLayer('original');
@@ -83,7 +83,7 @@ export function ObservationAlignment({ manifestPath, dossierPath, onOpenCompiler
     if (!data || !image) return; const revision = sourceRevision.current, imageId = image.id;
     try {
       await navigator.clipboard.writeText(JSON.stringify({ schema: 'cssearth-nebula-observation-fit@1', subjectId: data.id, manifest: manifestPath,
-        imageId, sourceSha256: image.source.sha256, adjustment: fit, imageToFrame: adjustedMatrix(image, data.frame, fit) }, null, 2));
+        imageId, sourceUrl: image.source.url, adjustment: fit, imageToFrame: adjustedMatrix(image, data.frame, fit) }, null, 2));
       if (revision === sourceRevision.current) setCopyStatus('Copied');
     } catch { if (revision === sourceRevision.current) setCopyStatus('Copy failed'); }
   }

@@ -23,8 +23,7 @@
         {
           "path": "julia-1.12.7-macaarch64.tar.gz",
           "url": "https://julialang-s3.julialang.org/bin/mac/aarch64/1.12/julia-1.12.7-macaarch64.tar.gz",
-          "bytes": 230457194,
-          "sha256": "af8fcedfb25b6b9c8c13d99695c38faa2d59bf0162b3f458c8b8b56f14c96919"
+          "bytes": 230457194
         }
       ],
       "registries": [
@@ -51,14 +50,12 @@
         {
           "path": "yorick-2.2.04-1.fc41.src.rpm",
           "url": "https://ftp.eso.org/pub/dfs/pipelines/repositories/stable/fedora/41/src/yorick/yorick-2.2.04-1.fc41.src.rpm",
-          "bytes": 2376245,
-          "sha256": "933607a6dcb02aee5e48afe3fbbfcf65954ef94cb60ebacacfb33d0e9d3dfa0c"
+          "bytes": 2376245
         },
         {
           "path": "pionier-kit-4.0.4-5.tar.gz",
           "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/pionier/pionier-kit-4.0.4-5.tar.gz",
-          "bytes": 138222771,
-          "sha256": "a773bb923517956692263d401902d35debc91f02221fb41f960bef0c27724fe2"
+          "bytes": 138222771
         }
       ],
       "yorickPatches": [
@@ -79,8 +76,7 @@
         {
           "path": "amber-kit-4.4.5-16.tar.gz",
           "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/amber/amber-kit-4.4.5-16.tar.gz",
-          "bytes": 47678236,
-          "sha256": "78ced7453b4da828b532604e1d2a4d0c58cd58a843be9127eef5905602e19c1f"
+          "bytes": 47678236
         }
       ],
       "repair": {
@@ -101,8 +97,7 @@
         {
           "path": "gravity-kit-1.11.0.tar.gz",
           "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/gravity/gravity-kit-1.11.0.tar.gz",
-          "bytes": 205462019,
-          "sha256": "00ac2ad2abb8c4393361064d4576ed7fca8acd0dbbe1a3afb6f7a21cad405d58"
+          "bytes": 205462019
         }
       ],
       "executable": "pipeline/bin/esorex"
@@ -116,20 +111,17 @@
         {
           "path": "matisse-kit-2.5.0.tar.gz",
           "url": "https://ftp.eso.org/pub/dfs/pipelines/instruments/matisse/matisse-kit-2.5.0.tar.gz",
-          "bytes": 138702676,
-          "sha256": "fe8101ec2ab21376b0d7615c820c954f56b6793370a84c87eddc4c3e5280a43a"
+          "bytes": 138702676
         },
         {
           "path": "openmp-20.1.8.src.tar.xz",
           "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/openmp-20.1.8.src.tar.xz",
-          "bytes": 1093976,
-          "sha256": "b21c04ee9cbe56e200c5d83823765a443ee6389bbc3f64154c96e94016e6cee9"
+          "bytes": 1093976
         },
         {
           "path": "cmake-20.1.8.src.tar.xz",
           "url": "https://github.com/llvm/llvm-project/releases/download/llvmorg-20.1.8/cmake-20.1.8.src.tar.xz",
-          "bytes": 8652,
-          "sha256": "3319203cfd1172bbac50f06fa68e318af84dcb5d65353310c0586354069d6634"
+          "bytes": 8652
         }
       ],
       "openmp": {

@@ -38,21 +38,15 @@ const triple = (v: unknown): [number, number, number] => {
 };
 const pin = (v: unknown): CompilerPin => {
   const p = object(v);
-  return { path: text(p.path), sha256: text(p.sha256) };
+  return { path: text(p.path) };
 };
 async function pinned(root: string, p: CompilerPin) {
-  if (
-    !/^[a-f0-9]{64}$/.test(p.sha256) ||
-    p.path.startsWith("/") ||
-    p.path.split("/").includes("..")
-  )
-    throw new Error("Invalid compact pin");
+  if (p.path.startsWith("/") || p.path.split("/").includes(".."))
+    throw new Error("Invalid compact source path");
   const actual = await realpath(resolve(root, p.path));
   const offset = relative(await realpath(root), actual);
   if (offset === ".." || offset.startsWith("../") || isAbsolute(offset)) throw new Error("Compact pin escapes root");
-  const b = await readFile(actual);
-  if (geometrySha(b) !== p.sha256) throw new Error("Compact pin differs");
-  return b;
+  return readFile(actual);
 }
 function colors(v: unknown): SampledColor[] {
   return array(v).map((c) => {
@@ -104,7 +98,6 @@ export async function prepareCompactSampledInputs(
       maxOutputLength: 100_000_000,
     }),
     values = backend.decodeFits(fits).values;
-  if (geometrySha(fits) !== recipe.source.sha256) throw new Error("Compact particles differ from the scientific source pin");
   const prepared = prepareSampledField(values, recipe, signal),
     lensInputs = array(m.lenses).map(object);
   const lensIds = lensInputs.map(lens => text(lens.id));

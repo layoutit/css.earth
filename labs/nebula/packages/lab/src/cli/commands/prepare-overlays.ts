@@ -33,7 +33,7 @@ async function skyBandBytes(input: InputImage) {
   const source = { id: input.id, width: input.wcs.referenceDimension[0], height: input.wcs.referenceDimension[1], wcs: input.wcs, skyBands: input.skyBands };
   // Always verify the recipe and grid first, so a warm composite cache cannot hide a changed or missing recipe.
   await verifySkyBandSource(source);
-  if (basename(input.path) !== skyBandCompositeFile(input.id, input.sha256)) throw new TypeError(`A sky band composite is cached under its own hash: ${input.id}`);
+  if (basename(input.path) !== skyBandCompositeFile(input.id)) throw new TypeError(`A sky band composite is cached under its own hash: ${input.id}`);
   let bytes = await readFile(input.path).catch((error: NodeJS.ErrnoException) => { if (error.code === 'ENOENT') return null; throw error; });
   if (!bytes) {
     console.log(`OVERLAY_COMPOSE ${input.id}`);

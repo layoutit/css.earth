@@ -10,27 +10,22 @@
  "inputs": [
   {
    "path": "src/objects/sun/source/hmi/CR2311-synopMr.fits",
-   "sha256": "d118b3b2c82315e397c147fa0e5706ffc78130ed7a3febc23abafd8fa4643ee3",
    "bytes": 1039680
   },
   {
    "path": "src/objects/sun/source/sdo/synoptic/AIA0304/CR2311.fits",
-   "sha256": "5ac6f520574f74b25c03da86791457eafcfd96d9bad80d2ab961fe5008d624ca",
    "bytes": 31106880
   },
   {
    "path": "src/objects/sun/source/sdo/synoptic/AIA0171/CR2311.fits",
-   "sha256": "af19f906ca278b25f137340bc1a89948fdc30a2f9cb8b6fe8e58ae98e467258a",
    "bytes": 31106880
   },
   {
    "path": "src/objects/jupiter/source/lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_f275w_v1_globalmap.fits",
-   "sha256": "ab7fe8bc644233c22bc6d86af42d54c60d49e24a6699ff116e797a80e4ff1796",
    "bytes": 25925760
   },
   {
    "path": "src/objects/jupiter/source/lenses/hlsp_opal_hst_wfc3-uvis_jupiter-2025a_fq889n_v1_globalmap.fits",
-   "sha256": "4bdbeb4a4f9fbfe0daa737c4ba29de31b0626fb6e58c54e0142ef6d3aa6ef5ea",
    "bytes": 25925760
   }
  ],

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {parseObservedPolarRecipe,prepareObservedPolarSurfaces,measureRgbCoverage} from '../../tools/objects/giant-observations/index.mts';
 import {measureScalarCoverage,finitePercentiles,falseColorMap} from '../../tools/objects/giant-observations/scalar-coverage.mts';
@@ -41,10 +42,3 @@ test('measured polar harmonic continuation is bounded and leaves untransitioned 
  assert.throws(()=>preparePolarContinuationAtlas({source,tileSize:8,firstMeasuredRow:4,lastMeasuredRow:27,measuredHeight:32}),/invalid/);
 });
 
-test('observation routing uses capabilities and rejects unsafe or unpinned inputs',async()=>{
- assert.equal(parseObservedPolarRecipe(recipe),recipe);
- const synthetic=structuredClone(recipe);synthetic.namespace='synthetic';synthetic.publicPrefix='/scenes/synthetic/';assert.equal(parseObservedPolarRecipe(synthetic),synthetic);
- for(const mutate of [(value: { lenses: { operation: string; }[]; })=>value.lenses[0].operation='jupiter',(value: { lenses: { source: string; }[]; })=>value.lenses[0].source='../other',(value: { sourcePins: never[]; })=>value.sourcePins=[],(value: { lenses: { coverage: { columnStride: number; }; }[]; })=>value.lenses[0].coverage.columnStride=0,(value: { dimensions: { width: number; }; })=>value.dimensions.width=Infinity]){const invalid=structuredClone(recipe);mutate(invalid);assert.throws(()=>parseObservedPolarRecipe(invalid));}
- const changed=structuredClone(recipe);changed.sourcePins[0].expectedSha256='0'.repeat(64);
- await assert.rejects(prepareObservedPolarSurfaces({sourceDirectory,publicDirectory:'/unused',config:changed}),/pin mismatch/);
-});

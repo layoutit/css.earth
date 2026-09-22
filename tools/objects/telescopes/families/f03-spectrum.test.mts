@@ -1,4 +1,5 @@
-import assert from 'node:assert/strict';import {test} from 'node:test';import {readFile} from 'node:fs/promises';import {resolve} from 'node:path';
+import assert from 'node:assert/strict';import { sourceTest } from '../../../../tests/objects/source-test.mts';
+const test = sourceTest();import {readFile} from 'node:fs/promises';import {resolve} from 'node:path';
 import {member} from './common.mts';import {describeStandaloneSpectrum,exportSpectrumCsv,F03_SPECTRUM_HANDLER,selectSpectrumRange,spectrumChartData} from './f03-spectrum.mts';
 const root=resolve(import.meta.dirname,'../../../..'),path='src/objects/mercury/source/spectrum/mascs-global-area-weighted-mean.json',bytes=await readFile(resolve(root,path));
 const source=JSON.parse(bytes.toString()) as {wavelengthNanometers:number[];reflectanceIOverF:number[];validCellCounts:number[]};

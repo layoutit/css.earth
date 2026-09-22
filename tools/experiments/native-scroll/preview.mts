@@ -85,9 +85,8 @@ createServer((request, response) => {
       const descriptor = parseObjectDescriptor(JSON.parse(descriptorNode.textContent ?? ''));
       const frame = parsePreparedWorldCameraFrame(descriptor.properties.worldFrame);
       if (!frame || !descriptor.prepared) throw new Error('The physical object frame is missing.');
-      const prepared = descriptor.prepared;
       const definition = await loadPreparedCssObject(descriptor, {
-        read: () => read(`/objects/${descriptor.id}/${prepared.sha256}.json`),
+        read: () => read(`/objects/${descriptor.id}/object.json`),
       });
       const viewToken = url.searchParams.get('v');
       let saved = parseSharedView(viewToken === null ? '' : new URLSearchParams({ v: viewToken }).toString());

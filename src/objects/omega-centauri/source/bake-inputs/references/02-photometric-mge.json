@@ -53,12 +53,10 @@
     }
   ],
   "evidence": {
-    "path": "labs/nebula/models/omega-centauri/physical-evidence.json",
-    "sha256": "6e88b6abe042cb66a104931cf1039fb3e6d685dd308b303226bdb6e530ac5b51"
+    "path": "labs/nebula/models/omega-centauri/physical-evidence.json"
   },
   "source": {
     "url": "https://wwwmpa.mpa-garching.mpg.de/mpa/publications/preprints/pp2013/MPA3537.pdf",
-    "sha256": "5701eed16944eb96e0d3e8dea258f909e99a1fa4a5a0305581e878909e70db92",
     "locator": "D\u2019Souza & Rix2013, Table1, manuscript page12 (PDF page12), eight projected MGE components; arcmin dispersions multiplied by60."
   },
   "interpretation": "Published oblate MGE conditioned integrated starlight, interpreted as relative display light. Inclination50 degrees and PA100 degrees follow the selected literature model; the near/far tilt sign and six-sigma cutoff are authored. Gaussian widths retain their published angular scale at adopted distance5426pc and the common observation center. This is not measured star-by-star depth, calibrated luminosity, an N-body simulation or a completed bake/registration acceptance.",

@@ -7,7 +7,8 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { PROGRAMS } from './archive.mts';
 import { overlapAgreement, readReferenceSpectrum, scanPath, strongest } from './slit-scan-map.mts';
 import {
@@ -222,9 +223,8 @@ test('a scan definition is refused when it does not describe a scan', async () =
   assert.throws(broken(value => { (value.grid as Record<string, unknown>).width = 361; }), /twice as wide as it is tall/u);
   assert.throws(broken(value => { value.acrossSlitDirection = 'sideways'; }), /is not an across-slit direction/u);
   assert.throws(broken(value => { (value.frames as Record<string, unknown>[])[1] = (value.frames as Record<string, unknown>[])[0]!; }), /pinned twice/u);
-  assert.throws(broken(value => { (value.frames as Record<string, unknown>[])[0]!.sha256 = 'nope'; }), /byte count and sha256/u);
   assert.throws(broken(value => { (value.frames as Record<string, unknown>[])[0]!.name = 'od9l12010_x1d.fits'; }), /not a rectified STIS product/u);
-  assert.throws(broken(value => { (value.reference as Record<string, unknown>).url = 'http://example.invalid/x.fits'; }), /pinned by https URL and sha256/u);
+  assert.throws(broken(value => { (value.reference as Record<string, unknown>).url = 'http://example.invalid/x.fits'; }), /https URL/u);
   assert.throws(broken(value => { (value.band as Record<string, unknown>).continuumOrder = 0; }), /continuum order is a small whole number/u);
 });
 

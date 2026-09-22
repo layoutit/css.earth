@@ -27,9 +27,8 @@ export function createNavigableObjectMount<Options extends DeferredMountOptions>
     return loading;
   }
   const mount = createDeferredObjectMount(load, definition => (stage: HTMLElement, options: Options) => {
-    if (stage.dataset?.preparedObject && (stage.dataset.preparedObject !== descriptor.id ||
-        stage.dataset.preparedSha256 !== descriptor.prepared?.sha256)) {
-      throw new TypeError('Initial view belongs to another prepared object revision.');
+    if (stage.dataset?.preparedObject && stage.dataset.preparedObject !== descriptor.id) {
+      throw new TypeError('Initial view belongs to another prepared object.');
     }
     return bind(definition)(stage, { ...options, ...(frame ? { worldFrame: frame } : {}) });
   });

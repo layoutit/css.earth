@@ -18,7 +18,7 @@ export function validateTransferEvidence(value: unknown, source: ObservationSour
   if (!transfer || row.schema !== 'cssearth-observation-grid-transfer@1') throw new TypeError('Unsupported registration transfer evidence.');
   for (const [key, image] of [['source', source], ['reference', reference]] as const) {
     const pin = record(row[key]);
-    if (pin.id !== image.id || pin.sha256 !== image.sha256 || pin.width !== image.width || pin.height !== image.height || pin.url !== image.url)
+    if (pin.id !== image.id || pin.width !== image.width || pin.height !== image.height || pin.url !== image.url)
       throw new Error(`Registration transfer ${key} pin differs.`);
   }
   if (transfer.referenceId !== reference.id || JSON.stringify(row.pixelToReference) !== JSON.stringify(transfer.pixelToReference) ||
@@ -29,7 +29,6 @@ export async function verifyTransferPins(source: ObservationSource, reference: O
   const transfer = source.registrationTransfer;
   if (!transfer) throw new Error('Registration transfer is not configured.');
   const bytes = await readFile(transfer.evidence.path);
-  if (createHash('sha256').update(bytes).digest('hex') !== transfer.evidence.sha256) throw new Error('Registration transfer evidence pin differs.');
   validateTransferEvidence(JSON.parse(bytes.toString()), source, reference);
 }
 export async function transferRegistration(source: ObservationSource, reference: ObservationSource,
@@ -40,7 +39,7 @@ export async function transferRegistration(source: ObservationSource, reference:
   await verifyTransferPins(source, reference);
   return { matrix: composeAffine(referenceMatrix, transfer.pixelToReference), evidence: {
     ...referenceEvidence, status: 'transferred', referenceId: reference.id, matchedStars: 0, matches: [],
-    bridgeMatchedStars: referenceEvidence.matchedStars, transferEvidenceSha256: transfer.evidence.sha256,
+    bridgeMatchedStars: referenceEvidence.matchedStars,
     interpretation: 'Publisher-documented shared native grid transferred through a directly star-verified bridge. Residuals and coverage describe bridge stars; this band has no independently measured stellar residuals. Band-to-band publisher calibration remains a limitation.'
   } };
 }

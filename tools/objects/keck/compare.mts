@@ -18,11 +18,10 @@
 import { access, open, readFile, writeFile, type FileHandle } from 'node:fs/promises';
 import { basename, relative, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { sha256File } from '../../../src/platform/sha256.mts';
 import { positionalArguments } from '../../cli/cli-arguments.mts';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { readFitsFileHdus, readFitsFileRegion, type FitsFileHdu, type FitsHeader } from '../../fits/fits.mts';
-import { assertInputPins, addProductEvidence, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
+import { assertInputPins, addProductEvidence, fileSize, productRecordPath, readProductRecord, type ProductEvidence, type ProductInput } from '../product-record.mts';
 import { DOWNLOADS, PROGRAMS, readKeckProgram, type KeckFile, type KeckObservation } from './archive.mts';
 
 const REPOSITORY = resolve(import.meta.dirname, '../../..');
@@ -215,7 +214,7 @@ export async function runProduct(redux: string, product: KeckFile, names: readon
   if (!record) throw new Error(`${match} has no product record beside it, so what it was made from is not known; re-run tools/objects/keck/reduce.mts, which writes one with every product.`);
   const made = (record.parameters as { koaid?: unknown }).koaid;
   if (made !== observation.koaid) throw new Error(`${match} was made from ${String(made)}, not from ${observation.koaid}.`);
-  if (!record.inputs.some(input => input.identity === observation.science.name && input.sha256 === observation.science.sha256))
+  if (!record.inputs.some(input => input.identity === observation.science.name && input.bytes === observation.science.bytes))
     throw new Error(`${match} was not made from the pinned raw frame ${observation.science.name}; its record names ${record.inputs.length} inputs and none of them is that file at the pinned digest.`);
   return path;
 }
@@ -226,16 +225,16 @@ export async function runProduct(redux: string, product: KeckFile, names: readon
  * These are checked before a single sample is read. A comparison that reads a file the program does not pin is not a
  * comparison against the archive, it is a comparison against whatever is on this disk under that name: a fixture of the same
  * size with altered samples read as 100% identical and earned archive-agreement evidence against the program's own pin. */
-export function comparisonPins(id: string, observation: KeckObservation, product: KeckFile, downloads = DOWNLOADS) {
+export async function comparisonPins(id: string, observation: KeckObservation, product: KeckFile, downloads = DOWNLOADS) {
   const lev0 = (file: KeckFile) => resolve(downloads, id, 'lev0', file.name);
   const pins: ProductInput[] = [], files = new Map<string, string>();
-  const add = (role: string, file: KeckFile, path: string) => {
-    pins.push({ role, identity: file.filehand, bytes: file.bytes, sha256: file.sha256 });
+  const add = async (role: string, file: KeckFile, path: string) => {
+    pins.push({ role, identity: file.filehand, bytes: file.bytes });
     files.set(file.filehand, path);
   };
-  add('archive product', product, resolve(downloads, id, 'products', product.level ?? 'lev1', product.name));
-  add('object', observation.science, lev0(observation.science));
-  for (const file of observation.calibrations) add(file.imageType ?? 'calibration', file, lev0(file));
+  await add('archive product', product, resolve(downloads, id, 'products', product.level ?? 'lev1', product.name));
+  await add('object', observation.science, lev0(observation.science));
+  for (const file of observation.calibrations) await add(file.imageType ?? 'calibration', file, lev0(file));
   return { pins, files };
 }
 
@@ -255,7 +254,7 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
     const archive = resolve(DOWNLOADS, id, 'products', product.level ?? 'lev1', product.name);
     // Before a sample is read or a word of evidence is written: every file this comparison will read is the file the program
     // pins, by byte count and sha256.
-    const { pins, files } = comparisonPins(id, observation, product);
+    const { pins, files } = await comparisonPins(id, observation, product);
     await assertInputPins(pins, files);
     const ourHdus = await readFitsFileHdus(local), theirHdus = await readFitsFileHdus(archive);
     const ourPrimary = ourHdus[0]!.header, theirPrimary = theirHdus[0]!.header;
@@ -265,21 +264,21 @@ export async function compareWithArchive(id: string, koaid: string, run: string)
     if (!extensions.length) throw new Error(`${product.name}: nothing was comparable (${differentGrid.join('; ') || 'no extensions with samples'}).`);
     // The bytes are read again after the samples, so the receipt states the file as it was for the whole comparison and not
     // only as it was when the check above ran.
-    const archiveRead = await sha256File(archive);
-    if (archiveRead.sha256 !== product.sha256 || archiveRead.bytes !== product.bytes)
-      throw new Error(`${product.name} changed while it was being compared: ${archiveRead.bytes} bytes, sha256 ${archiveRead.sha256}; the program pins ${product.bytes} bytes, ${product.sha256}.`);
+    const archiveRead = await fileSize(archive);
+    if (archiveRead.bytes !== product.bytes)
+      throw new Error(`${product.name} changed while it was being compared: ${archiveRead.bytes} bytes; the program records ${product.bytes} bytes.`);
     const receipt = {
       schema: 'cssearth-keck-reproduction@1', program: id, koaid, product: stageOf(product.name),
       instrument: program.instrument, configuration: observation.configuration, target: observation.targetName,
       toolchain: 'tools/objects/keck/toolchain.json',
-      // `bytes` and `sha256` are what the program pins; `read` is what was on disk when the samples were read. A receipt that
+      // `bytes` is what the program records; `read` is what was on disk when the samples were read. A receipt that
       // quietly replaced the first with the second would say a comparison was against the archive's product whatever bytes it
       // actually read, so both are written and the two have to be equal.
       archive: { ...product, read: archiveRead, ...cards(theirPrimary, RUN_CARDS), pipeline: theirPipeline,
         sampleBits: Math.abs(theirHdus[0]!.bitpix) },
-      // Our own product has no pin to be checked against: it is what this run made, and its digest is recorded so the
-      // receipt, the product record and the file on disk name the same bytes.
-      local: { name: basename(local), ...(await sha256File(local)), record: relative(REPOSITORY, productRecordPath(local)),
+      // Our own product has no pin to be checked against: it is what this run made, and its size is recorded so the
+      // receipt, the product record and the file on disk name the same file.
+      local: { name: basename(local), ...(await fileSize(local)), record: relative(REPOSITORY, productRecordPath(local)),
         ...cards(ourPrimary, RUN_CARDS), pipeline: ourPipeline, sampleBits: Math.abs(ourHdus[0]!.bitpix) },
       // The two runs are the same pipeline at different versions where the archive's product is old enough, and that is the
       // first thing a reader has to know before reading a difference as a failure to reproduce.

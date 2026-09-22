@@ -420,7 +420,7 @@ export async function checkAgainstArchive(program: GeminiProgram, work: string, 
 export function archiveMasterPin(master: GeminiProgram['calibrations'][number]['product']): ProductInput {
   if (master.sha256 === undefined)
     throw new Error(`${master.name} carries no sha256 yet. Download it once so the pin can be digested before it is compared against.`);
-  return { role: 'archive master', identity: master.name, bytes: master.bytes, sha256: master.sha256 };
+  return { role: 'archive master', identity: master.name, bytes: master.bytes };
 }
 
 /** What a stage's expected run needs to know, asked of the installed toolchain. Separated so a test can supply it instead. */

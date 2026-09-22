@@ -2,7 +2,7 @@ import { STAR_IDS, starAstrometry, starStateKm, PARSEC_KM } from '@cssearth/astr
 import { readCatalog } from '@cssearth/catalog';
 import type { Catalog } from '@cssearth/catalog';
 import type { PreparedStar, Rgb, StarsRecipe } from './types.js';
-import { verifiedBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
+import { sourceBytes } from '@cssearth/volume-bake/compact-inputs/density-grid';
 import { catalogueColor, nearestColor } from './color.js';
 function column(catalogue: Catalog, name: string): Float32Array {
   const value = catalogue.numeric(name);
@@ -10,7 +10,7 @@ function column(catalogue: Catalog, name: string): Float32Array {
   return value;
 }
 export async function loadStarSource(sourceDirectory: string, recipe: StarsRecipe, colors: readonly Rgb[], epochJdTt: number) {
-  const bytes = await verifiedBytes(sourceDirectory, recipe.catalogue);
+  const bytes = await sourceBytes(sourceDirectory, recipe.catalogue);
   const catalogue = readCatalog(Uint8Array.from(bytes).buffer);
   if (catalogue.count !== recipe.catalogue.count) throw new TypeError('Star catalogue count does not match its source pin.');
   const positions = column(catalogue, 'posPc'), magnitudes = column(catalogue, 'absMag'), temperatures = column(catalogue, 'teffK'), colorIndices = column(catalogue, 'colorIndexBv'), names = catalogue.strings('name');
@@ -47,8 +47,8 @@ export async function loadStarSource(sourceDirectory: string, recipe: StarsRecip
       colorIndex: nearestColor(catalogueColor(temperatures[i]!, colorIndices[i]!), colors), name: names[i] || null, coverageAnchor: false });
   }
   if (seen.size !== detailed.size) throw new TypeError('A detailed Hipparcos identity is absent from the pinned HYG catalogue.');
-  const provenanceBytes = await verifiedBytes(sourceDirectory, recipe.provenance);
-  await verifiedBytes(sourceDirectory, recipe.license);
+  const provenanceBytes = await sourceBytes(sourceDirectory, recipe.provenance);
+  await sourceBytes(sourceDirectory, recipe.license);
   const provenance: unknown = JSON.parse(provenanceBytes.toString('utf8'));
   return { stars: applyCoverageAnchors(stars, recipe.coverage.faceDivisions), provenance, catalogueMetadata: { ...catalogue.meta, epoch: 'ICRS/J2000.0 equinox and coordinate epoch' }, reconciliation: { sourceEpochDescription: catalogue.meta.epoch, epochJdTt, records: reconciliations, policy: 'Exact HIP identity join to detailed body astrometry; float32 parsec positions; preserve HYG apparent magnitude at the Sun. Unmatched rows remain at their catalogue epoch. The retained GXCT epoch description is legacy: HYG coordinates are J2000.0, not J1991.25.' } };
 }

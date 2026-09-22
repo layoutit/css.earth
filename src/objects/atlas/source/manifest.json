@@ -4,8 +4,6 @@
     {
       "id": "n1870699307",
       "path": "observations/N1870699307_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "6f353d4b6892e4c948b98261d810f6434cda7b697ece1889ab7b9be2b780b596",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870699307_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1870699307",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -44,8 +42,6 @@
     {
       "id": "n1870698933",
       "path": "observations/N1870698933_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "61f4c7f2d689aaac393c6f9c027a56b3ec678856d50dd18784ff4539a3fbd330",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870698933_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1870698933",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -84,8 +80,6 @@
     {
       "id": "n1870697721",
       "path": "observations/N1870697721_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "eaf0b0652f77e6288e0b7dadd892f240fed886378fe94ed0d559b697c4c7988b",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870697721_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1870697721",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -124,8 +118,6 @@
     {
       "id": "n1560303787",
       "path": "observations/N1560303787_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "44ec45e7383bd500d4e1c5e34ef8ade54272754db2e1c41fff7a4495936b7d3b",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2032/data/1560158734_1560303787/N1560303787_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1560303787",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -164,8 +156,6 @@
     {
       "id": "n1828131657",
       "path": "observations/N1828131657_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "14f7dea18dea0bd82de717cf5cd6873ed19253037ad649ccd785deff31214b02",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2100/data/1828129458_1828242442/N1828131657_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1828131657",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -204,8 +194,6 @@
     {
       "id": "thomas-2018-shape",
       "path": "shape/atlas_30k_plt.tab",
-      "expectedBytes": 2024400,
-      "expectedSha256": "2f0a73490aabcd2269082228100812ea8b4deea087816815d71acc9f8efde2ee",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/saturn_satellite_shape_models_V1_0/data/atlas_30k_plt.tab",
       "catalog": "https://sbn.psi.edu/pds/resource/saturnsatshapes.html",
       "credit": "Peter Thomas, Joe Joseph, Trey Ansty; NASA PDS Small Bodies Node",
@@ -252,8 +240,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -459,8 +445,6 @@
     {
       "id": "n1870699274",
       "path": "observations/N1870699274_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "464926050505f23ea78951f2f03d4e6210a007f7a91394561ffe0b25ce60c0e3",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870699274_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1870699274",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -541,8 +525,6 @@
     {
       "id": "n1870699208",
       "path": "observations/N1870699208_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "bfa0aae704bf12ca1cc9e34aad686e3828b14bd229cf19363c4c96927dfba585",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870699208_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1870699208",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -623,8 +605,6 @@
     {
       "id": "n1870699153",
       "path": "observations/N1870699153_1_CALIB.IMG",
-      "expectedBytes": 4202496,
-      "expectedSha256": "1421d7ec840d258e4ec8b36e92c3a57ff7bcca45727b6775f5b3324c492e927f",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2112/data/1870675158_1870722394/N1870699153_1_CALIB.IMG",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=co-iss-n1870699153",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",

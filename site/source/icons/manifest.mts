@@ -18,7 +18,6 @@ export const SHELL_ICON_SOURCES = Object.freeze({
       author: "Sarang",
       license: "Public domain",
       licenseUrl: "https://commons.wikimedia.org/wiki/File:U%2B25A6.svg#Licensing",
-      sourceSha256: "41ff10019ffc54e46f4d143ec531003e9629aaca8cabeafefbee064530781dd8",
     }),
     Object.freeze({
       key: "reflectance",
@@ -31,7 +30,6 @@ export const SHELL_ICON_SOURCES = Object.freeze({
       author: "Zorgit",
       license: "CC BY-SA 3.0",
       licenseUrl: "https://creativecommons.org/licenses/by-sa/3.0/",
-      sourceSha256: "13d329b1a0eedf3b04535cdb725c502530559aa42f0dddff67daec2e9103ea43",
     }),
     Object.freeze({
       key: "temperaturePressure",
@@ -44,7 +42,6 @@ export const SHELL_ICON_SOURCES = Object.freeze({
       author: "Philipp H. Poll; SVG by MS Sakib",
       license: "SIL Open Font License 1.1",
       licenseUrl: "https://openfontlicense.org/open-font-license-official-text/",
-      sourceSha256: "7f7f39cce5f6a6cae40d660a94dc88603542c2a2817801576f511d2291aa5972",
     }),
     Object.freeze({
       key: "photometricPhase",
@@ -57,7 +54,6 @@ export const SHELL_ICON_SOURCES = Object.freeze({
       author: "Sarang",
       license: "Public domain",
       licenseUrl: "https://commons.wikimedia.org/wiki/File:U%2B25D4.svg#Licensing",
-      sourceSha256: "9e82e45de344096d89812070dbeb206e3637e9a335adfcc5058e3b169ad9b515",
     }),
     Object.freeze({
       key: "lenses",
@@ -70,7 +66,6 @@ export const SHELL_ICON_SOURCES = Object.freeze({
       author: "Roman Czyborra / Unifoundry; SVG by MS Sakib",
       license: "SIL Open Font License 1.1",
       licenseUrl: "https://openfontlicense.org/open-font-license-official-text/",
-      sourceSha256: "a0be132b83f2b7b3a4ef3ec6f9ee159a707eae0d254a2f08db41e3c749bee0e8",
     }),
     Object.freeze({
       key: "resources",
@@ -83,7 +78,6 @@ export const SHELL_ICON_SOURCES = Object.freeze({
       author: "Philipp H. Poll; SVG by MS Sakib",
       license: "SIL Open Font License 1.1",
       licenseUrl: "https://openfontlicense.org/open-font-license-official-text/",
-      sourceSha256: "11e95dcbfcace65fb714d264032c772178ae1dfdfd1bfa31e10e12e2b6bc0556",
     }),
   ]),
 });

@@ -4,44 +4,36 @@
   "sources": [
     {
       "path": "ibex/NOTICE.md",
-      "sha256": "e0fd4a370544085c5544fcf6392ba5bc7038e404f625a7be49279683bc0f28b1",
       "bytes": 1816
     },
     {
       "path": "ibex/apjsabf658.tar.gz",
-      "sha256": "879656b96640a0fa98642884cf15ee120abcb89fbffaa1c2ab027b810412682d",
       "bytes": 17671
     },
     {
       "path": "ibex/apjsabf658f8_int.html.gz",
-      "sha256": "6f598f4576ad24a7b53930a4dd6ee92fd143aad32393c5d31f552e38b27bcb1e",
       "bytes": 1706239
     },
     {
       "path": "ibex/extract.py",
-      "sha256": "99036efdee49c9784ccb4afae791c16ae672ddaab8813f7f47fa6efed7c933a5",
       "bytes": 5644
     },
     {
       "path": "ibex/heliopause-grid.json",
-      "sha256": "dbae182236b56654eff4552d5f3530af5e556db4853a312c6dc87ba5704e5bb9",
       "bytes": 8670
     },
     {
       "path": "ibex/macropixels.json",
-      "sha256": "34da7cd1986a8e4db56c9911e1e47ad549200d72a4646643dd64a0010ced6f58",
       "bytes": 35861
     },
     {
       "path": "LICENSE.GALAXIO-MIT.txt",
-      "sha256": "cb2e341b0397f15586815e1f4c6ccf5395ed14cfe6abc8633677fedfd69516a3",
       "bytes": 1077,
       "role": "Original presentation software copyright and permission notice; unchanged bytes, not a license for IBEX data.",
       "origin": "galaxio/LICENSE"
     },
     {
       "path": "galaxio-heliosphereRenderer.ts.txt",
-      "sha256": "b2af28ae40714152e608e0cbd2952f6c95fd47ddcfda1bd03f18e3b0e691613d",
       "bytes": 4908,
       "origin": "galaxio/packages/engine/src/scene/heliosphereRenderer.ts",
       "role": "Original Galaxio rim-material software reference; active geometry and frame come from the published IBEX model."
@@ -71,18 +63,14 @@
   "originals": {
     "tableArchive": {
       "url": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658.tar.gz",
-      "sha256": "879656b96640a0fa98642884cf15ee120abcb89fbffaa1c2ab027b810412682d",
       "bytes": 17671,
       "workbook": "Table_heliosphere_dimensions_supplement.xlsx",
-      "workbookSha256": "29a5fd047ac9370eed6365e52542ec8f5dcc9a9d606144f221b292db13818e34",
       "workbookBytes": 19492
     },
     "figure": {
       "url": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658_int/apjsabf658f8_int.html",
       "archiveUrl": "https://content.cld.iop.org/journals/0067-0049/254/2/40/1/apjsabf658_int/apjsabf658_int.tar.gz",
-      "archiveSha256": "92c1da49a96aeb915b6a16ccc4331eaab94aafb182477b7854ba64d46dd6f08e",
       "archiveBytes": 14771200,
-      "originalHtmlSha256": "283cab7ada16be5d8e729f3d3799fd2fec3c0ef9f26b463c0a4fa9b45729b6cf",
       "originalHtmlBytes": 5379009,
       "compression": "Lossless gzip; original uncompressed HTML hash checked before extraction. Publisher JavaScript is never executed."
     }

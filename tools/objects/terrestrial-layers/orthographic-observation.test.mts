@@ -1,6 +1,7 @@
 import { required } from '../../contract/test-values.mts';
 import assert from 'node:assert/strict';
-import {test} from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {orthographicPoint} from './orthographic-observation.mts';
 import {sampleColorBand} from './scientific-raster.mts';
 

@@ -3,17 +3,14 @@
   "id": "hd-181327-disc",
   "method": "density-grid",
   "request": {
-    "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
-    "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32"
+    "path": "src/objects/hd-181327-disc/source/volume-reflectance.json"
   },
   "inputPins": [
     {
-      "path": "src/objects/hd-181327-disc/source/provenance.json",
-      "sha256": "9e849ced41f18e148638afabf0fd6641e4aa1ffc4b7b40b226d187e6fbfc8e16"
+      "path": "src/objects/hd-181327-disc/source/provenance.json"
     },
     {
-      "path": "src/objects/hd-181327-disc/source/density-reflectance.ktx2",
-      "sha256": "a18bcaff61ab9e7006d569e5452ed6ba47afee610ad42211f6ab40ebfc0ba371"
+      "path": "src/objects/hd-181327-disc/source/density-reflectance.ktx2"
     }
   ],
   "sky": {
@@ -32,8 +29,7 @@
   "attachedTo": "hd-181327",
   "acceptedLabResult": "hd-181327-disc-density-grids",
   "compactInputs": {
-    "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
-    "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32"
+    "path": "src/objects/hd-181327-disc/source/volume-reflectance.json"
   },
   "compactMethod": "density-grid",
   "grids": [
@@ -42,8 +38,7 @@
       "label": "JWST/NIRCam · debris ring, reflectance colour",
       "sourceUrl": "https://www.stsci.edu/jwst/phase2-public/2780.pdf",
       "recipe": {
-        "path": "src/objects/hd-181327-disc/source/volume-reflectance.json",
-        "sha256": "2b117c94957b04524be0e49d2a39b43bf287c88e07c6f6ba1c3cd6d115df3c32"
+        "path": "src/objects/hd-181327-disc/source/volume-reflectance.json"
       }
     }
   ]

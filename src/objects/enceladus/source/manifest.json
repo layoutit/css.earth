@@ -4,8 +4,6 @@
     {
       "id": "cassini-schenk-2024-normal",
       "path": "observations/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
-      "expectedBytes": 518340175,
-      "expectedSha256": "1738c5cf8e856c7ae262d858261af0fbb32503a68a524884d36194afb23afcc5",
       "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_mosaic_global_100m_schenk2024.tif",
       "credit": "NASA/JPL-Caltech/Space Science Institute; Paul M. Schenk and William B. McKinnon (2024), LPI/USRA",
       "license": "Public PDS archive; cite authors",
@@ -61,8 +59,6 @@
     {
       "id": "cassini-schenk-2024-elevation",
       "path": "observations/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
-      "expectedBytes": 129613723,
-      "expectedSha256": "7c08c46238cde6528c9143f0c667d42cd3bc6ac60c572595a7e6cad2d6775f91",
       "origin": "https://asc-astropedia.s3.us-west-2.amazonaws.com/Enceladus/Cassini/Enceladus_Cassini_DEM_global_200m_schenk2024.tif",
       "credit": "NASA/JPL-Caltech/Space Science Institute; Paul M. Schenk and William B. McKinnon (2024), LPI/USRA",
       "license": "Public PDS archive; cite authors",
@@ -117,8 +113,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -158,8 +152,6 @@
       ],
       "units": "Cartesian plate model kilometres in IAU_ENCELADUS, target 602/frame 10040/surface 20122.",
       "coverage": "Corrected v2 global Q256 DSK, 396,294 source vertices and 786,432 plates. Nominal model-family 500 m resolution is not a uniform accuracy claim for this Q256 member.",
-      "expectedBytes": 30258176,
-      "expectedSha256": "49913bbc117503f894bc7d127a582e1e8e4ac903e348a7021992f5aba7a18c98",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -188,8 +180,6 @@
       "origin": "https://naif.jpl.nasa.gov/pub/naif/pds/data/co-s_j_e_v-spice-6-v1.0/cosp_1000/data/dsk/cas_enceladus_ssd_spc_0256icq_v2.bds",
       "units": "Exact source Cartesian kilometres with exact duplicate vertices welded; original plate winding and complete mapping retained.",
       "coverage": "Global corrected v2 Q256 shape. Exact source coordinate conversion and welding; 393,218 output vertices and 786,432 triangles. The simplified displayed mesh is a separately qualified approximation.",
-      "expectedBytes": 10207923,
-      "expectedSha256": "0f7971cbf4bb493c17b9bbb640b3affa5f390f7c55c8db06d8e39faa3ad59b5c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -258,8 +248,6 @@
     {
       "id": "enceladus-vims-original-c1489049741_1_ir",
       "path": "vims-chemistry/native/C1489049741_1_ir.cub",
-      "expectedBytes": 1107563,
-      "expectedSha256": "df1b0ddb11694cde200398d4d153f180450a697606111a21a9d6aab3b7b2eb74",
       "origin": "https://vims.univ-nantes.fr/cube/C1489049741_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -314,8 +302,6 @@
     {
       "id": "enceladus-vims-original-c1702362997_1_ir",
       "path": "vims-chemistry/native/C1702362997_1_ir.cub",
-      "expectedBytes": 1170945,
-      "expectedSha256": "8d4c78ee7c7e4710965b21f971e68b5c801eaa31275f13a4b3cd6888b6e429cc",
       "origin": "https://vims.univ-nantes.fr/cube/C1702362997_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",

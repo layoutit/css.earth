@@ -23,7 +23,7 @@ export function JointFitStage({ result, fieldOfViewArcsec, view, onView }: Joint
   viewRef.current = view;
   useEffect(() => () => { renderer.current?.destroy(); renderer.current = null; committedPin.current = ''; }, []);
   useEffect(() => {
-    const key = result ? `${result.volume.sha256}:${fieldOfViewArcsec ?? 'bounds'}` : '';
+    const key = result ? `${result.volume.path}:${fieldOfViewArcsec ?? 'bounds'}` : '';
     if (!result || !host.current || committedPin.current === key) return;
     const controller = new AbortController(); let disposed = false; setError('');
     void createJointFitViewer({ host: host.current, result, fieldOfViewArcsec, deferCommit: true, signal: controller.signal }).then(scene => {

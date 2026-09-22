@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { parseHTML } from 'linkedom';
 import { readPreparedObjectBytes } from '../object-page-data.mts';
@@ -16,11 +17,11 @@ const html = `<!doctype html><html><head><style>u { color: red }</style></head><
 <div class="planet-native-tabs"><input type="radio" data-information-tab="dataset"><input type="radio" data-information-tab="factsheet" checked></div>
 ${['normal', 'ultraviolet', 'cross-section'].map(id => `<button type="submit" name="dataset" value="${id}" aria-pressed="${id === 'normal'}">${id}</button><div data-lens-details="${id}" ${id === 'normal' ? '' : 'hidden'}>${id}</div>`).join('')}
 </section><!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(scene.descriptor)}</script><!--prepared-descriptor:end-->
-<!--prepared-scene:start--><main class="planet-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" data-prepared-sha256="${scene.sha256}" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;
+<!--prepared-scene:start--><main class="planet-stage ${scene.classes.join(' ')}" data-object-id="saturn" data-prepared-object="saturn" aria-label="Saturn">${scene.html}</main><!--prepared-scene:end--><script src="/app.js"></script></body></html>`;
 const read: typeof fetch = async input => {
   const url = new URL(String(input));
   assert.equal(url.origin, origin);
-  assert.equal(url.pathname, `/objects/saturn/${scene.sha256}.json`, 'Only the pinned object request is allowed');
+  assert.equal(url.pathname, '/objects/saturn/object.json', 'Only the prepared object request is allowed');
   return new Response(prepared.bytes);
 };
 test('native selection replaces only the existing prepared presentation and selected controls', async () => {
@@ -65,7 +66,7 @@ test('a native search-only Earth selection fetches the base catalogue and exactl
   const transport: typeof fetch = async input => {
     const url = new URL(String(input));
     requests.push(url.pathname);
-    if (url.pathname === `/objects/earth/${earthScene.descriptor.prepared!.sha256}.json`) return new Response(earthPrepared.bytes);
+    if (url.pathname === '/objects/earth/object.json') return new Response(earthPrepared.bytes);
     if (url.pathname.startsWith('/scenes/earth/earth-features')) {
       return new Response(await readFile(new URL(`../../public${url.pathname}`, import.meta.url)));
     }
@@ -74,7 +75,7 @@ test('a native search-only Earth selection fetches the base catalogue and exactl
   const earthHtml = `<!doctype html><html><body><!--search-shell:start-->
     <input class="planet-sheet-handle" type="checkbox"><section class="planet-information-panel"></section>
     <!--search-shell:end--><!--prepared-descriptor:start--><script data-prepared-descriptor type="application/json">${JSON.stringify(earthScene.descriptor)}</script><!--prepared-descriptor:end-->
-    <!--prepared-scene:start--><main class="planet-stage ${earthScene.classes.join(' ')}" data-object-id="earth" data-prepared-object="earth" data-prepared-sha256="${earthScene.sha256}" aria-label="Earth">${earthScene.html}</main><!--prepared-scene:end--></body></html>`;
+    <!--prepared-scene:start--><main class="planet-stage ${earthScene.classes.join(' ')}" data-object-id="earth" data-prepared-object="earth" aria-label="Earth">${earthScene.html}</main><!--prepared-scene:end--></body></html>`;
   const result = await renderDatasetResponse(earthHtml, new URL('/earth/?feature=1159321043', origin), 'earth', transport);
   const document = parseHTML(result).document;
   assert.equal(document.querySelector('[data-feature-tooltip-name]')?.textContent, 'Monaco');

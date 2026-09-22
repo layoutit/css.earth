@@ -3,10 +3,9 @@
   "candidates": [
     {
       "id": "eso-vista",
-      "label": "ESO VISTA \u00b7 infrared",
+      "label": "ESO VISTA · infrared",
       "previewPath": ".local/nebula-lab/research/helix/widefield/eso1205a.jpg",
       "previewUrl": "https://cdn.eso.org/images/screen/eso1205a.jpg",
-      "previewSha256": "87ebde189ea4bc44ad19e01555cf18d4981a0fbda468d86d618d3beee9933425",
       "previewBytes": 503330,
       "sourcePageUrl": "https://www.eso.org/public/images/eso1205a/",
       "originalUrl": "https://cdn.eso.org/images/original/eso1205a.tif",
@@ -18,17 +17,16 @@
         37.51,
         37.51
       ],
-      "bands": "Near-infrared \u00b7 Y / J / K",
+      "bands": "Near-infrared · Y / J / K",
       "credit": "ESO/VISTA/J. Emerson. Acknowledgment: Cambridge Astronomical Survey Unit",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "note": "Wider square field with outer strands; infrared traces different emission than the optical image."
     },
     {
       "id": "eso-wfi",
-      "label": "ESO WFI \u00b7 optical detail",
+      "label": "ESO WFI · optical detail",
       "previewPath": ".local/nebula-lab/research/helix/widefield/eso0907a.jpg",
       "previewUrl": "https://cdn.eso.org/images/screen/eso0907a.jpg",
-      "previewSha256": "f67b522d9eb7f93fc308e96155f9b09385d53116c1e0f3174749a6dbcaa9f6d8",
       "previewBytes": 152243,
       "sourcePageUrl": "https://www.eso.org/public/images/eso0907a/",
       "originalUrl": "https://cdn.eso.org/images/original/eso0907a.tif",
@@ -40,17 +38,16 @@
         28.02,
         25.94
       ],
-      "bands": "Optical \u00b7 B / V / R",
+      "bands": "Optical · B / V / R",
       "credit": "ESO",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "note": "Sharper ring and outer arc, but the faint outer structures still have little margin."
     },
     {
       "id": "eso-wide",
-      "label": "ESO \u00b7 wider field",
+      "label": "ESO · wider field",
       "previewPath": ".local/nebula-lab/research/helix/widefield/eso-helix.jpg",
       "previewUrl": "https://cdn.eso.org/images/screen/helix.jpg",
-      "previewSha256": "6ef9e0f9059a6deebda52f72a50fbec8c4aaa452919756cdf8866000d34ddf79",
       "previewBytes": 135541,
       "sourcePageUrl": "https://www.eso.org/public/images/helix/",
       "originalUrl": "https://cdn.eso.org/images/original/helix.tif",
@@ -62,17 +59,16 @@
         48.82,
         33.92
       ],
-      "bands": "ESO 3.6 m \u00b7 filters not listed",
+      "bands": "ESO 3.6 m · filters not listed",
       "credit": "ESO",
       "termsUrl": "https://www.eso.org/public/outreach/copyright/",
       "note": "More margin around the optical nebula; outer emission is faint and the image is softer."
     },
     {
       "id": "hubble-ctio",
-      "label": "Hubble / CTIO \u00b7 current crop",
+      "label": "Hubble / CTIO · current crop",
       "previewPath": ".local/nebula-lab/research/helix/widefield/hubble-ctio.jpg",
       "previewUrl": "https://cdn.esahubble.org/archives/images/screen/opo0432b.jpg",
-      "previewSha256": "4ab07d67d0f3bd703be53a34a903c37ee7afb02096bdb98f86e953769e5b5d48",
       "previewBytes": 118267,
       "sourcePageUrl": "https://esahubble.org/images/opo0432b/",
       "originalUrl": "https://esahubble.org/media/archives/images/original/opo0432b.tif",
@@ -84,7 +80,7 @@
         20.96,
         13.86
       ],
-      "bands": "Optical \u00b7 HST + CTIO",
+      "bands": "Optical · HST + CTIO",
       "credit": "NASA, ESA, C.R. O'Dell (Vanderbilt University), and M. Meixner, P. McCullough, and G. Bacon (Space Telescope Science Institute).",
       "termsUrl": "https://esahubble.org/copyright/",
       "note": "Current processed source. The downloaded frame cuts off the wider nebula; full frame does not mean complete object."

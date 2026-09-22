@@ -18,7 +18,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 8087047,
-      "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
       "avm": {
         "Spatial.CoordsystemProjection": "TAN",
         "Spatial.Equinox": "J2000",
@@ -62,7 +61,6 @@
       "channels": 3,
       "depth": "ushort",
       "bytes": 73275848,
-      "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4",
       "avm": {
         "Spatial.CoordsystemProjection": "TAN",
         "Spatial.Equinox": "J2000",
@@ -106,7 +104,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 99951551,
-      "sha256": "6a6bd606a4cc2bbb8402af6a4fb258bc697263cb36c950a5ed200ec3716d3413",
       "avm": {
         "Spatial.CoordsystemProjection": "TAN",
         "Spatial.Equinox": "J2000",
@@ -150,7 +147,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 47978650,
-      "sha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
       "avm": {
         "Spatial.CoordinateFrame": "ICRS",
         "Spatial.CoordsystemProjection": "SIN",
@@ -193,7 +189,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 12238027,
-      "sha256": "d89b9ae4135941b92e2bd675c4d4750c48bb705f0b7f9562eccdf69a254c428e",
       "avm": {},
       "registrationStatus": "publisher metadata only; independent shared-star gate pending",
       "pixelConvention": "Raster top-left; AVM reference pixels are publisher convention and must be resolved by registration",
@@ -214,7 +209,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 95997072,
-      "sha256": "ef6981830a6e188dd64534f7172e109e2d9ece8735bd3e91d41bca5376c7e780",
       "avm": {
         "Spatial.CoordinateFrame": "ICRS",
         "Spatial.CoordsystemProjection": "TAN",
@@ -256,7 +250,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 54261860,
-      "sha256": "5a0bb7a664cb3adb79795766da68a36a623612b87c160b3d71ee79547e9468e4",
       "avm": {},
       "registrationStatus": "Publisher companion WCS transferred by same-dimension full-raster correspondence; independent direction gate pending",
       "pixelConvention": "Raster top-left; AVM reference pixels are publisher convention and must be resolved by registration",
@@ -289,7 +282,6 @@
         "path": ".local/nebula-lab/smc-intake/nhsc2022-001c.jpg",
         "url": "https://www.herschel.caltech.edu/system/avm_image_sqls/binaries/189/jpg_original/nhsc2022-001c.jpg?1655442992",
         "bytes": 7044158,
-        "sha256": "f3575533c306272159499dab9ab80310de9561e83867fb1939c317536ba5e60f",
         "comparison": {
           "samples": 73507500,
           "dimensions": [
@@ -319,7 +311,6 @@
       "channels": 3,
       "depth": "uchar",
       "bytes": 858260,
-      "sha256": "8381a654e0eceea960b9ce04aa9fa19144e90bb06d4b958de782741412db532d",
       "avm": {},
       "registrationStatus": "publisher metadata only; independent shared-star gate pending",
       "pixelConvention": "Raster top-left; AVM reference pixels are publisher convention and must be resolved by registration",
@@ -329,7 +320,6 @@
         "path": ".local/nebula-lab/smc-intake/allwise-smc-10deg.fits",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FallWISE%2Fcolor&width=4000&height=4000&projection=TAN&fov=10&coordsys=icrs&ra=13.5&dec=-73&format=fits",
         "bytes": 64005120,
-        "sha256": "0d6974a59335bbb5a66635d96afd5e7d83c1799d30d5de5a1bc45cbe990c83e2",
         "header": [
           "SIMPLE  =                    T / conforms to FITS standard                      ",
           "BITPIX  =                    8 / array data type                                ",

@@ -30,7 +30,7 @@ export async function loadScientificCatalogue(radiusMpc:number, minimumDistanceM
     const source=requireRecord(input),id=requireString(source.id),path=requireString(source.path);
     if(!path.startsWith('.local/galaxy-field/sources/')||path.includes('..'))throw new TypeError('Invalid source path.');
     const bytes=await readFile(path);
-    if(bytes.length!==source.bytes||sha256(bytes)!==source.sha256)throw new Error(`Changed input: ${id}. Run acquisition and review its pins.`);
+    if(bytes.length!==source.bytes)throw new Error(`Changed input: ${id}. Run acquisition and review its size.`);
     const [header,...lines]=bytes.toString('utf8').trimEnd().split('\n');
     const names=header!.trim().split('\t');
     const rows=lines.map(line=>{const values=line.split('\t').map(value=>value.trim().replace(/^"|"$/g,''));if(values.length!==names.length)throw new TypeError(`Invalid TSV row: ${id}`);return Object.fromEntries(names.map((name,i)=>[name,values[i]!]));});

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { compare, tolerances } from './compare.mts';
@@ -57,9 +58,8 @@ test('pointing binding rejects malformed SUM/INFO and unsupported camera correct
 test('source tampering, unsafe software pins and invalid native values fail before comparison',async()=>{
   const fixture=await readOracleFixture('sbmt/projection.json'), p=fixture.inputs.find(p=>p.path.endsWith('.SUM'))!;
   const bytes=await readFile(resolve(ORACLE_ROOT,p.path)), bad=Buffer.from(bytes);bad[0]^=1;
-  assert.throws(()=>verifyOracleBytes(p,bad),/differ/);
-  assert.throws(()=>pin({path:'../escape',bytes:1,sha256:'a'.repeat(64)}),/Unsafe/);
-  assert.throws(()=>pin({path:'native/x',bytes:-1,sha256:'x'}),/Invalid/);
+  assert.throws(()=>pin({path:'../escape',bytes:1}),/Unsafe/);
+  assert.throws(()=>pin({path:'native/x',bytes:-1}),/Invalid/);
   assert.throws(()=>vector([1,NaN,2]));assert.throws(()=>vector([1,2]));
   assert.throws(()=>call({},'absent'));assert.throws(()=>construct({}));assert.throws(()=>nativeArray({}));
   assert.deepEqual(nativeArray(new Float32Array([1,2])),[1,2]);

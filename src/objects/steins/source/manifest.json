@@ -22,8 +22,6 @@
         "referenceRadiusMeters": 2580
       },
       "coverage": "Closed published shape. Approximately60% was imaged; unseen areas are constrained by lightcurve inversion. Source contains an acknowledged artificial elevation step at the SPC/lightcurve seam.",
-      "expectedBytes": 2470000,
-      "expectedSha256": "4ef16c6d805336dc4dd878835e900b62c8ba4f0f8056da1ae18189cb6dc67aff",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -60,8 +58,6 @@
         "registrationEvidence": "reference/registration.md"
       },
       "coverage": "Visual-only Stooke mosaic controlled by Leyrat2010, with revised south-pole interpretation and photographed illumination. A north-edge connected0..2sRGB display-code heuristic identifies exterior gaps before resampling; isolated dark terrain is retained. This is not calibrated albedo.",
-      "expectedBytes": 725269,
-      "expectedSha256": "3362a9e73ddf7b4d11e9a4a2076e9c181d1c3e6e70a2ff71f742e27b6a96e9c9",
       "capture": {
         "attributions": [
           {
@@ -94,8 +90,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 615424,
-      "expectedSha256": "8bfed974937fd7efc870911d9d7c6c8e2938e56633f0987f51bcfbd1388678f6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -206,8 +200,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 801308,
-      "expectedSha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -230,8 +222,6 @@
       "consumers": [
         "camera-reference"
       ],
-      "expectedBytes": 2400378,
-      "expectedSha256": "6b47bcb9c9f810e1a2e8136aa6d0c83e2862edc0619d233de0135fd6fcaa8dac",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -302,8 +292,6 @@
       "consumers": [
         "osiris-observation"
       ],
-      "expectedBytes": 615424,
-      "expectedSha256": "f3c3f69503c25b4508d9d9b3fc37a602b0d25b8b7c843016c099c31d72e1791d",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

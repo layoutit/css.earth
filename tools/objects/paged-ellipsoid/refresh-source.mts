@@ -11,7 +11,7 @@ const content = object({lenses: object({controls: array(object({id: string}))}),
 export const readRefreshContent = async (path: string) => mutable(parse(await readJsonSource(path), content, 'ENSO content'));
 const bindings = object({controls: array(object({id: string, qualification: optional(string)}))});
 export const readRefreshBindings = async (path: string) => mutable(parse(await readJsonSource(path), bindings, 'ENSO bindings'));
-const entry = {path: string, expectedBytes: number, expectedSha256: string};
+const entry = {path: string};
 const manifest = object({inputs: array(object({...entry, id: string})), documents: array(object(entry)), generatedIntermediates: array(object({...entry, id: optional(string)}))});
 export async function readRefreshManifest(path: string) {
   const value = await readJsonSource(path); validateSourceManifest('earth', value);

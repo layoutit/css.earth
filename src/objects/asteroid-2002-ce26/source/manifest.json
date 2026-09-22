@@ -38,8 +38,6 @@
         "referenceRadiusMeters": 1730
       },
       "coverage": "The shared grid marks unavailable imagery over the published 2002 CE26 primary radar reconstruction. No secondary is included. The north polar region was hidden or observed above 60° radar incidence. The selected pole is approximate, and display phase is arbitrary.",
-      "expectedBytes": 67313,
-      "expectedSha256": "4b625ea6906aba4d5828836c44d733ca4ad8c2a501739dc74f305ef84bb42c12",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -65,8 +63,6 @@
       "consumers": [
         "title"
       ],
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -105,8 +101,6 @@
         "physical",
         "rotation"
       ],
-      "expectedBytes": 1256386,
-      "expectedSha256": "63e598717e6dc6f124d2bc564b07338253e04b51cc0d47024a668260a0f204b5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

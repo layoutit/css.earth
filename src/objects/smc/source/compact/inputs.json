@@ -75,34 +75,28 @@
   },
   "emissionField": {
     "path": "src/objects/smc/source/compact/emission-field.json.gz",
-    "sha256": "76b068eaf76190ebe1e939e750a1b3b50ac01f4adae04cd449f89184256df4be",
     "bytes": 21537
   },
   "envelope": {
     "path": "src/objects/smc/source/compact/envelope.json.gz",
-    "sha256": "81daa06385668c40455510e5cba528825edeb9ed0a778bf434815855d350f547",
     "bytes": 245417
   },
   "neutralSlices": {
     "path": "src/objects/smc/source/compact/neutral-slices.json.gz",
-    "sha256": "b479f5c8ae91b0b0e46528239f8234ae2db30ac643d5df02537bca535e9fd708",
     "bytes": 43001
   },
   "neutralTextures": "src/objects/smc/source/compact/neutral",
   "priorCloud": {
     "identityPin": {
-      "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json",
-      "sha256": "9ac62796fc36a98a92c5b0d9d8c30f44eb6d35005476937237488d345ae2382e"
+      "path": ".local/nebula-lab/smc-constrained/ellipsoid-volume/source/volume.json"
     },
     "recipe": {
       "path": "src/objects/smc/source/compact/prior/volume.json",
-      "sha256": "9ac62796fc36a98a92c5b0d9d8c30f44eb6d35005476937237488d345ae2382e",
       "bytes": 1369
     }
   },
   "stars": {
     "path": "src/objects/smc/source/compact/stars.json.gz",
-    "sha256": "f0da063073f7a34832c4d3d1123f1e1966a0826c221bcea9d1320248bc5b16b2",
     "bytes": 159252
   },
   "lenses": [
@@ -123,12 +117,10 @@
       "sourceDigest": "7160278899509d4e42de27b6dad25990c90aa60855761cee892e47bdb443486d",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-horalek-wide/registered.png",
-        "sha256": "60faabb0887bc1328513e354edeaaa138be42f5553c9d9027ec71b287647cf49",
         "bytes": 778199
       },
       "coverage": {
         "path": "src/objects/smc/source/compact/lenses/smc-horalek-wide/coverage.png",
-        "sha256": "dbe60fa45a44d004911c9f0ddbb74e7c234feda9a20cadc374edf1e9247184e2",
         "bytes": 9928
       },
       "densityFilter": {
@@ -176,12 +168,10 @@
       "sourceDigest": "bc23102e7f4e3ee90f72d8ea54c2e84780350a68402ccb3443589fc43a5a9366",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-vista/registered.png",
-        "sha256": "06b6423fbb9496656f3e96753a6d0a45e984e5d03b8cdedf0e85e0b1b4aa81bf",
         "bytes": 1639979
       },
       "coverage": {
         "path": "src/objects/smc/source/compact/lenses/smc-vista/coverage.png",
-        "sha256": "7d78e4d47e0d651cee43d468182a4009784a9061c2e250efe59e233719791245",
         "bytes": 7724
       },
       "densityFilter": {
@@ -229,12 +219,10 @@
       "sourceDigest": "a385045e34afe3d6a4a18ad3151a8f6aa5d00a9a4d80b13cf4b80175e8f781b7",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-smash/registered.png",
-        "sha256": "b323d4c98e7328f86ffd66ba12d10ec80fba943014b2815b459ec57754a3eee2",
         "bytes": 1274535
       },
       "coverage": {
         "path": "src/objects/smc/source/compact/lenses/smc-smash/coverage.png",
-        "sha256": "9d6c3ec9bdcae60aa4025ac497572fb53e9bc914275e04c4d98b95c75209ad5d",
         "bytes": 9582
       },
       "densityFilter": {
@@ -282,12 +270,10 @@
       "sourceDigest": "bc1ac92a3ebd661fdc75568d0371c2cf3ddd98ea5f78a143edc8505990dffd89",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-dss2/registered.png",
-        "sha256": "ad9bc277cba0ec96c37c405cefa3c9c2ade232d0421cff9eade5c4ce2d867dbc",
         "bytes": 1857412
       },
       "coverage": {
         "path": "src/objects/smc/source/compact/lenses/smc-dss2/coverage.png",
-        "sha256": "b45596e55ca398a37df3d7d265222d6ee390a43a8d2b25fa00519257e189a2e9",
         "bytes": 7133
       },
       "densityFilter": {
@@ -335,12 +321,10 @@
       "sourceDigest": "99eb45c9ab288b20a702e826f319a7aae3e5aabb79cac665eef6cdda52acac2a",
       "registered": {
         "path": "src/objects/smc/source/compact/lenses/smc-allwise-wide/registered.png",
-        "sha256": "5448bee5e391fcf5e6a69ea46a89f0c06ef36f868b8c9d69f9f63a9282d662a9",
         "bytes": 632401
       },
       "coverage": {
         "path": "src/objects/smc/source/compact/lenses/smc-allwise-wide/coverage.png",
-        "sha256": "d55fc06ba2718b9ee27771829b283b079e5e367b3f36e271598fe6dc5638e3dd",
         "bytes": 7938
       },
       "densityFilter": {

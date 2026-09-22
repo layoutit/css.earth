@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parsePreparedVolumePresentation } from '../volume-presentation.mts';
 import type { ProvenanceDocument } from '../../src/platform/object-provenance.mts';
 

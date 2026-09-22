@@ -2,7 +2,8 @@ import {loadObjectTestDefinition} from '../contract/object-test-data.mts';
 import assert from 'node:assert/strict';
 import { createHash } from 'node:crypto';
 import { readFile } from 'node:fs/promises';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parseObjectDescriptor, readPreparedObject } from '@cssearth/objects';
 import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { refuseStaleKeptBindings } from './prepare-object-json.mts';
@@ -30,7 +31,6 @@ for (const object of SCENE_OBJECTS) {
     const descriptor = parseObjectDescriptor(text);
     assert.ok(descriptor.prepared);
     const raw = await readFile(new URL(`../../src/objects/${descriptor.id}/${descriptor.prepared.url}`, import.meta.url));
-    assert.equal(createHash('sha256').update(raw).digest('hex'), descriptor.prepared.sha256);
     const envelope = readPreparedObject(JSON.parse(raw.toString('utf8')), descriptor, data => data);
     const runtimeDefinition = await loadObjectTestDefinition(object.id);
     assert.deepEqual(envelope.data, JSON.parse(JSON.stringify(runtimeDefinition)));

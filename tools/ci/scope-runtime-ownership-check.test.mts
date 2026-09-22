@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { scopeRuntimeOwnershipCheck, selectRuntimeOwnershipArgs } from './scope-runtime-ownership-check.mts';
 
 test('an object-only diff scopes to the touched objects, sorted and deduplicated', () => {

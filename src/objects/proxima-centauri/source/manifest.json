@@ -20,8 +20,6 @@
     {
       "id": "inter-title-font",
       "path": "presentation/InterVariable.ttf",
-      "expectedBytes": 862936,
-      "expectedSha256": "746431e950fd28d29b0189d708d4a5852a8458edb3184387eadcee9e5e34676c",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors / Rasmus Andersson",
       "license": "SIL Open Font License 1.1",
@@ -129,8 +127,6 @@
     {
       "id": "proxima-centauri-hst-lowlib",
       "path": "photometry/hlsp_lowlib_gj551.fits",
-      "expectedBytes": 518400,
-      "expectedSha256": "598ca9572c02db72e8d6097484fb39e92d248db5f39abea9fe14593acafde89a",
       "origin": "https://mast.stsci.edu/api/v0.1/Download/file?uri=mast:HLSP/lowlib/hlsp_lowlib_hst_stis_gj551_g230lb-g430l-g750l_v1.0_spect.fits",
       "credit": "NASA/STScI; HST Low Resolution Stellar Library (LowLib, Worthey), programme 13776",
       "license": "HST archive data: public, with acknowledgement",
@@ -211,8 +207,6 @@
     {
       "id": "proxima-centauri-crosscheck-spectrum",
       "path": "photometry/crosscheck-gaia-dr3-xp-sampled.csv",
-      "expectedBytes": 10240,
-      "expectedSha256": "f35d4042ec00aa66d80583c3182a5892752a86ec131349cfa9cd0e43e98917fa",
       "origin": "https://gea.esac.esa.int/data-server/data?RETRIEVAL_TYPE=XP_SAMPLED&ID=5853498713190525696&FORMAT=csv&DATA_STRUCTURE=RAW&RELEASE=Gaia+DR3",
       "credit": "ESA/Gaia/DPAC; Gaia Collaboration (2023), A&A 674, A1; De Angeli et al. (2023), A&A 674, A2; Montegriffo et al. (2023), A&A 674, A3",
       "license": "Gaia data terms: free use with acknowledgement",

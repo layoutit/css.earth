@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { parsePreparedObjectRuntime, type ObjectRuntimeDefinition } from '../renderers/css/dist/index.js';
 import type { PreparedResidencyOptions, PreparedResourcePool, PreparedResourceEntry, PreparedAssets } from '../renderers/css/dist/platform/prepared-residency.js';
 import type { PreparedImage } from '../renderers/css/dist/platform/prepared-image-store.js';

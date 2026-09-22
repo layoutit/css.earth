@@ -4,7 +4,7 @@ import { readFile } from 'node:fs/promises';
 import { resolve, relative, isAbsolute } from 'node:path';
 import { createHash } from 'node:crypto';
 import { hasErrorCode, requireArray, requireRecord, requireString, requireFiniteNumber } from '../../sources/source-values.mts';
-import { pinFile, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
+import { fileSize, readProductRecord, sameRun, type ProductRecord, type ProductRun } from '../product-record.mts';
 import { sourcePds3Observations } from '../pds/source-observations.mts';
 import type { ProductKind } from './query.mts';
 import { parseProductFacts, type QualifiedObservation } from './qualified-observations.mts';
@@ -13,7 +13,7 @@ import type { ProductFacts } from './request-satisfaction.mts';
 import { archiveProfileFamilyEvidence, productKindFamilyEvidence, type ObservationFamilyEvidence } from './observation-families.mts';
 
 export const SOURCE_PRODUCTS_SCHEMA = 'cssearth-source-observations@1';
-export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string; readonly bytes: number; readonly sha256: string }
+export interface SourceFile { readonly role: string; readonly path: string; readonly origin: string }
 export interface SourceProduct {
   readonly id: string; readonly target: string; readonly telescope: string; readonly mode: string; readonly kind: ProductKind;
   readonly archiveProductId: string; readonly decoder: 'fits-image' | 'pds-image' | 'pds-product' | 'isis3'; readonly labelPath?: string; readonly files: readonly SourceFile[];
@@ -63,12 +63,11 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
     const files = requireArray(row.inputs, 'observation inputs').map(rawFile => {
       const entry = requireRecord(rawFile, 'observation input'), inputId = requireString(entry.input, 'manifest input'), pin = inputs.get(inputId);
       if (!pin) throw new TypeError(`${id} references missing manifest input ${inputId}.`);
-      const bytes = requireFiniteNumber(pin.expectedBytes, 'input bytes'), sha256 = requireString(pin.expectedSha256, 'input digest'), path = requireString(pin.path, 'input path');
+      const path = requireString(pin.path, 'input path');
       inside('/package', path);
-      if (!Number.isSafeInteger(bytes) || bytes <= 0 || !HEX.test(sha256)) throw new TypeError(`${inputId} has an invalid pin.`);
       const origin = requireString(pin.origin, 'input origin');
       if (!/^https?:\/\//u.test(origin)) throw new TypeError(`${inputId} needs a retrievable archive origin.`);
-      return { role: requireString(entry.role, 'input role'), path: `src/objects/${target}/source/${relative('/package', inside('/package', path))}`, origin, bytes, sha256 };
+      return { role: requireString(entry.role, 'input role'), path: `src/objects/${target}/source/${relative('/package', inside('/package', path))}`, origin };
     });
     if (new Set(files.map(file => file.path)).size !== files.length || files.filter(file => file.role === 'science').length !== 1 || decoder === 'pds-image' && files.filter(file => file.role === 'label').length !== 1)
       throw new TypeError(`${id} needs one science input and, for PDS, one label, without duplicate files.`);
@@ -107,10 +106,11 @@ export function parseSourceProducts(value: unknown, manifestValue: unknown, targ
 export const sourceReceipt = (product: SourceProduct) => `output/telescopes/${product.target}/${product.id}/qualification.product.json`;
 export async function sourceRun(product: SourceProduct, dependencies: readonly CalibrationDependency[] = []): Promise<ProductRun> {
   assertPinnedLabel(product);
-  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits.mts', '../../fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
+  const sources = ['source-intake.mts', 'source-transfer.mts', '../operations-acquisition.ts', '../terrestrial-layers/isis3-raster.mts', 'source-products.mts', 'qualify-source.mts', 'observation-families.mts', 'product-descriptor.mts', 'families/common.mts', 'families/f16-spherical-grid.mts', 'native-metadata.mts', 'product-science.mts', 'calibration-dependencies.mts', '../astronomy-packages/science.mts', '../astronomy-packages/requirements.lock', 'qualified-observations.mts', 'request-satisfaction.mts', '../../fits/fits.mts', '../../fits/fits-rice.mts', '../pds3-labels.mts', '../pds/source-observations.mts', '../pds-labels.mts', '../product-record.mts', '../astronomy-packages/pds-client.mts', '../astronomy-packages/pds-toolchain.json'];
   const digest = createHash('sha256');
   for (const path of sources) digest.update(path).update(await readFile(resolve(import.meta.dirname, path)));
-  return { telescope: product.telescope, stage: 'source-qualification', inputs: product.files.map(file => ({ role: file.role, identity: file.origin, bytes: file.bytes, sha256: file.sha256 })).concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!,sha256:d.sha256!}))),
+  const inputs = await Promise.all(product.files.map(async file => ({ role: file.role, identity: file.origin, ...await fileSize(resolve(import.meta.dirname, '../../..', file.path)) })));
+  return { telescope: product.telescope, stage: 'source-qualification', inputs: inputs.concat(dependencies.filter(d=>d.status==='pinned').map(d=>({role:'calibration dependency',identity:d.origin!,bytes:d.bytes!,sha256:d.sha256!}))),
     parameters: { observation: product }, software: [{ name: 'cssEarth source qualification', version: digest.digest('hex') }, { name: 'Node.js', version: process.version }] };
 }
 export async function loadSourceProducts(root: string, target: string, issues: SourceIntakeIssue[] = []): Promise<LoadedSourceProduct[]> {
@@ -139,8 +139,8 @@ export async function loadSourceProducts(root: string, target: string, issues: S
     if (record) {
       qualified = sourceRecordComplete(record, product) && await sameRun(record, await sourceRun(product,savedFacts?.calibrationDependencies), path => inside(root, path));
       for (const file of product.files) {
-        const pin = await pinFile(inside(root, file.path)).catch(() => null);
-        qualified &&= pin !== null && pin.bytes === file.bytes && pin.sha256 === file.sha256;
+        const pin = await fileSize(inside(root, file.path)).catch(() => null);
+        qualified &&= pin !== null && record.outputs.some(output => output.path === file.path && output.bytes === pin.bytes);
       }
       qualified &&= await verifyCalibrationDependencies(root,savedFacts?.calibrationDependencies??[]);
       if (!qualified) receiptProblem = 'The qualification receipt is stale: inputs, parameters, implementation, runtime or output bytes changed.';
@@ -153,7 +153,7 @@ export async function loadSourceProducts(root: string, target: string, issues: S
 
 export function sourceRecordComplete(record: ProductRecord, product: SourceProduct): boolean {
   const science = product.files.find(file => file.role === 'science')!;
-  return product.files.every(file => record.outputs.some(output => output.path === file.path && output.bytes === file.bytes && output.sha256 === file.sha256))
+  return product.files.every(file => record.outputs.some(output => output.path === file.path))
     && record.outputs.some(output => output.path === sourceReceipt(product).replace('qualification.product.json', 'decoded.json'))
     && (product.familyEvidence?.profileId === undefined || record.outputs.some(output => output.path === sourceReceipt(product).replace('qualification.product.json', 'descriptor.json')))
     && record.evidence.some(entry => entry.kind === 'archive-origin' && entry.product === science.path && entry.receipt === sourceReceipt(product));
@@ -175,4 +175,11 @@ export function sourceQualifiedObservations(products: readonly LoadedSourceProdu
   return products.flatMap(product => product.qualified && product.facts ? [{ target: product.target, telescope: product.telescope, mode: product.mode,
     observation: product.id, program: product.id, product: product.files.find(file => file.role === 'science')!.path,
     receipt: product.receipt, productRecord: product.receipt, outputRoot: '.', facts: product.facts }] : []);
+}
+
+/** The object id and package-relative path that address a source file's mirror copy. */
+export function sourceCacheAddress(file: Pick<SourceFile, 'path'>): [string, string] {
+  const match = /^src\/objects\/([a-z0-9-]+)\/source\/(.+)$/u.exec(file.path);
+  if (!match) throw new TypeError(`${file.path} is not an object source path.`);
+  return [match[1]!, match[2]!];
 }

@@ -16,7 +16,6 @@
       "centerBodyId": "mars",
       "center": 499,
       "path": "phobos.txt",
-      "sha256": "c306965cbc1359dab6634a2a5ea3257eaee60222da82d3b4bd8577243758b99e",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=401&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40499&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -25,7 +24,6 @@
       "centerBodyId": "saturn",
       "center": 699,
       "path": "mimas.txt",
-      "sha256": "4c54cb7ebe558a0a9780595bf7f368cc202d845baa0981e1536e0660b1ef3379",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=601&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40699&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -34,7 +32,6 @@
       "centerBodyId": "saturn",
       "center": 699,
       "path": "janus.txt",
-      "sha256": "d431082b4004a9f4015a8fea620a069bd7748b1d09dc23951895c3593dd9035e",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=610&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40699&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -43,7 +40,6 @@
       "centerBodyId": "saturn",
       "center": 699,
       "path": "epimetheus.txt",
-      "sha256": "e838bab855cd87521fd30a59b6c405ba2e2b3440d87307e7272ad3414c074297",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=611&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40699&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -52,7 +48,6 @@
       "centerBodyId": "saturn",
       "center": 699,
       "path": "helene.txt",
-      "sha256": "b3abfaf55aca163a4c25ef633df0ec35e644c07ff7c33fc14a38144db9f94e35",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=612&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40699&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -61,7 +56,6 @@
       "centerBodyId": "neptune",
       "center": 899,
       "path": "triton.txt",
-      "sha256": "16ad1fe9981b12dbc8eedaea244814e0d38f755dbd97481f54eaa752d007e6f5",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=801&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40899&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -70,7 +64,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "earth.txt",
-      "sha256": "fe33f1d4adde6ba365f978bce8e5919e7ce70f4690abd99d878a202f42890d7d",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=399&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -79,7 +72,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "mercury.txt",
-      "sha256": "f636648619b3e6074a82868a5f19aa5e60eea84496be4930237734aefb268383",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=199&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -88,7 +80,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "venus.txt",
-      "sha256": "61086ebfff8b70e9f2c9a43ad84b22d7f6bf4df984308365404be93476a33304",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=299&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -97,7 +88,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "mars.txt",
-      "sha256": "17c0c737dfa05226e081a1cb806b402cfe1ca170b607406bd72fa8c4fa41b161",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=499&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -106,7 +96,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "jupiter.txt",
-      "sha256": "6c8d9538addb823e536b02b24d144fc3372aa2d4c7daa003c5cfc74168d1f7f9",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=599&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -115,7 +104,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "saturn.txt",
-      "sha256": "50d2b2283ddb2cd327c70f78d1a96696b1f5f70ee1c8003e283ac87a5ad945ee",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=699&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -124,7 +112,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "uranus.txt",
-      "sha256": "623c0ea65d1e733b09073be74b3e313a67e1fd9bcfb745826f3a7b9e55230f7a",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=799&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -133,7 +120,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "neptune.txt",
-      "sha256": "c1a329c0609ed35566daa5fb87b85b5fafb5a94664c969d450f0bc36512e5e8c",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=899&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -142,7 +128,6 @@
       "center": 10,
       "centerBodyId": "sun",
       "path": "pluto.txt",
-      "sha256": "8c61f07018b6b636b6253f8af4cd4fdf994ad90478773ff9cf53c62b21e9472b",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=999&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%4010&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -151,7 +136,6 @@
       "center": 399,
       "centerBodyId": "earth",
       "path": "moon.txt",
-      "sha256": "d1e1ba243dbf79a1766e240eddef3720423e1a77bf78d918c8000c3c4db8200e",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=301&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40399&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -160,7 +144,6 @@
       "center": 599,
       "centerBodyId": "jupiter",
       "path": "io.txt",
-      "sha256": "4fb56304fc90a3d033e8c7882e245fcbc40de18b95adcd39252ccccd83470941",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=501&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40599&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -169,7 +152,6 @@
       "center": 699,
       "centerBodyId": "saturn",
       "path": "titan.txt",
-      "sha256": "c70de32fb464cb53b179ba3987fb8a2a935b8a3ba4538af83b50c5bd1deab961",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=606&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40699&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     },
     {
@@ -178,7 +160,6 @@
       "center": 999,
       "centerBodyId": "pluto",
       "path": "charon.txt",
-      "sha256": "2e10214db9a9f9be0bd1ce8ec528f3a6836968643a723d11fb86ff1260a6e0bc",
       "url": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=901&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=500%40999&TLIST=2461286.499199259095&TLIST_TYPE=JD&TIME_TYPE=UT&OUT_UNITS=KM-D&REF_PLANE=FRAME&REF_SYSTEM=ICRF&VEC_TABLE=2&VEC_CORR=NONE&CSV_FORMAT=YES&VEC_LABELS=YES&TIME_DIGITS=FRACSEC"
     }
   ]

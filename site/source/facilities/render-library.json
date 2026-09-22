@@ -114,7 +114,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 37070,
-      "sha256": "f2bbefe509ab2041292f92b6271e20ecfa2dca30b863521c7aa1bcfd30bb8663",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -131,7 +130,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:ALMA_antennas_on_Chajnantor_(malin-dsc0027).jpg",
         "credit": "ESO/C. Malin",
         "license": "CC BY 4.0",
-        "sha256": "4cf4338bff764a96435e52c37cb925a61d37c02d2a420bc4fa48a7b164fbfe0f",
         "bytes": 4881446,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -150,7 +148,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 83284,
-      "sha256": "3adec33f5bafc740520468c134160efb9d6af145b8e89ff1f1f2e926977e7f75",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -167,7 +164,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:Arecibo_Observatory_Aerial_View.jpg",
         "credit": "H. Schweiker/WIYN and NOAO/AURA/NSF",
         "license": "CC BY 4.0",
-        "sha256": "df12a79eab50ab41b3d748f9d340430e2b7cf27e50ca8e52694a0be20ab356d6",
         "bytes": 157987,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -186,7 +182,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 19476,
-      "sha256": "0449286afbcbaf0b2852e98afd7516f14ab8023a8270e1554e642ac82a0c7c72",
       "source": {
         "kind": "model-render",
         "id": "cassini",
@@ -197,8 +192,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Cassini-Huygens%20(A)/Cassini-Huygens%20(A).glb",
           "path": "models/cassini/model.glb",
-          "bytes": 1660492,
-          "sha256": "f8bc110e23821021e99b88634843449cc8e98d86d0d8561c612c1cf0404e64e7"
+          "bytes": 1660492
         },
         "camera": {
           "direction": [
@@ -256,7 +250,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "f8bc110e23821021e99b88634843449cc8e98d86d0d8561c612c1cf0404e64e7",
           "facingFeature": "Radar / high-gain dish",
           "sourceAxis": [
             0,
@@ -294,7 +287,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 10966,
-      "sha256": "01bc4ed373bafe7940a341e27d633d33e338d1a3f541515901789f71f1659214",
       "source": {
         "kind": "model-render",
         "id": "dawn",
@@ -305,8 +297,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Dawn/Dawn.glb",
           "path": "models/dawn/model.glb",
-          "bytes": 927020,
-          "sha256": "411249aed791994b6a2014894ad6bd7ca0445dbcf6d5342af9edc5df988f04b7"
+          "bytes": 927020
         },
         "camera": {
           "direction": [
@@ -354,7 +345,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "411249aed791994b6a2014894ad6bd7ca0445dbcf6d5342af9edc5df988f04b7",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -392,7 +382,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 57642,
-      "sha256": "0647986992cd5288ccb4d1ac47418615ba12fa50370ca2d3b341df275f296717",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -409,7 +398,6 @@
         "sourcePage": "https://www.eso.org/public/images/eso1908d/",
         "credit": "ESA/ATG medialab; background image: ESO/S. Brunier",
         "license": "CC BY 4.0",
-        "sha256": "de1a96add15e5f8e0fbf848152945978e8a958fd0cd599840c0e0a0c779bb74b",
         "bytes": 2007483,
         "kind": "published-artwork",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -428,7 +416,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 16366,
-      "sha256": "9ccb0f91c1026ef97d2738f6dde8fc446b6ab9439d8f79b0a45872abd9807d9b",
       "source": {
         "kind": "model-render",
         "id": "galileo-v2",
@@ -439,62 +426,52 @@
         "model": {
           "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo.gltf",
           "path": "models/galileo-v2/model.gltf",
-          "sha256": "43943ada671c17c31d07ddb220a95c302e0ca5c3ded6abda7935df2bae634877",
           "bytes": 26732
         },
         "dependencies": [
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/foil_normal.png",
             "path": "models/galileo-v2/foil_normal.png",
-            "sha256": "2ac7f687a8d7c334158a9dc9934fb7be27bd524967eb1cd9a9451204123cee87",
             "bytes": 309641
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_02_normal.png",
             "path": "models/galileo-v2/galileo_02_normal.png",
-            "sha256": "90a4f58fd0d9639c6248d3590a0c91e4d5b405f64fff7ee6f156632ddf61105b",
             "bytes": 98243
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_02_albedo.png",
             "path": "models/galileo-v2/galileo_02_albedo.png",
-            "sha256": "8b7f999bfd5564b1eed7692aceb3cd6de6623d8fc44828a516a74554e7004d74",
             "bytes": 990891
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_02_pbr.jpg",
             "path": "models/galileo-v2/galileo_02_pbr.jpg",
-            "sha256": "c43de8f538e3102cfe8200f8b17f0c4d645db0af8f12e99569946044c0b87ce0",
             "bytes": 52403
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_01_normal.png",
             "path": "models/galileo-v2/galileo_01_normal.png",
-            "sha256": "2f1ec93d9ad76560b0ff11080db7b0fe41318fe649d239cd4933e821f6c01146",
             "bytes": 970855
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_01_albedo.png",
             "path": "models/galileo-v2/galileo_01_albedo.png",
-            "sha256": "ddf4aef4d9773593ea71b8aefcbed49aa31260ee5590e44c3aa97362ad9369b9",
             "bytes": 1288517
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_01_pbr.jpg",
             "path": "models/galileo-v2/galileo_01_pbr.jpg",
-            "sha256": "dbf1d044002ecb8388d7ffea1789861295e5219e4ba3ca41e54c0b1753a3a7c1",
             "bytes": 144102
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo_tex_02.png",
             "path": "models/galileo-v2/galileo_tex_02.png",
-            "sha256": "8b7f999bfd5564b1eed7692aceb3cd6de6623d8fc44828a516a74554e7004d74",
             "bytes": 990891
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_galileo/galileo.bin",
             "path": "models/galileo-v2/galileo.bin",
-            "sha256": "e70ae374a510ce9bf14b81936c22e9052d2fd68b4ee1d1e81634918083feb137",
             "bytes": 731820
           }
         ],
@@ -544,7 +521,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "43943ada671c17c31d07ddb220a95c302e0ca5c3ded6abda7935df2bae634877",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -582,7 +558,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 30506,
-      "sha256": "666a4e9cb61bf6f625a29cd3e44cd46d578a526edf05793c84bacff15f855972",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -599,7 +574,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:Goldstone_DSN_antenna.jpg",
         "credit": "NASA/JPL-Caltech",
         "license": "Public domain",
-        "sha256": "7d2e414851977038d44d5f0a21a26a4152e54d2127dcc11b42472d988dbaccde",
         "bytes": 219929,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -618,7 +592,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 20590,
-      "sha256": "b02103ff8a052a34c6eb1be4e2af76ae26d52bbfbae5ec60d5d790b007c8cd16",
       "source": {
         "kind": "model-render",
         "id": "grail",
@@ -629,57 +602,48 @@
         "model": {
           "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grail_b.gltf",
           "path": "models/grail/model.gltf",
-          "bytes": 27166,
-          "sha256": "5fd82bb248b085ac3b448077d77cbcd532516ad627268c2fde32c5db5392de53"
+          "bytes": 27166
         },
         "dependencies": [
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grail_b.bin",
             "path": "models/grail/grail_b.bin",
-            "bytes": 453372,
-            "sha256": "295d03ec1c5483555703d5bb7fdc6d00a4147f23b447aa338c0bf38d40d28ff5"
+            "bytes": 453372
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_ao.jpg",
             "path": "models/grail/grailb_ao.jpg",
-            "bytes": 131539,
-            "sha256": "e35531a1c0e62b9f749ab05995a95dc36ca65aacb97e51b6207a2888d738ba7e"
+            "bytes": 131539
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_2_ao.jpg",
             "path": "models/grail/grailb_2_ao.jpg",
-            "bytes": 110110,
-            "sha256": "bf38de9856b28cffc5ece1ddb985b7e3daa0ad0595516e4f71f0d09ed42338e8"
+            "bytes": 110110
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_hinges_ao.jpg",
             "path": "models/grail/grailb_hinges_ao.jpg",
-            "bytes": 119098,
-            "sha256": "18d479b871e815e74131948ba91b9f99c81325ec0e830daff52e785880be9b12"
+            "bytes": 119098
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/foil_normal.png",
             "path": "models/grail/foil_normal.png",
-            "bytes": 309641,
-            "sha256": "2ac7f687a8d7c334158a9dc9934fb7be27bd524967eb1cd9a9451204123cee87"
+            "bytes": 309641
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_tex_normal.png",
             "path": "models/grail/grailb_tex_normal.png",
-            "bytes": 771837,
-            "sha256": "e5149e1aff3538ec43d3846565ac6deb9209ca28f2fd1c05094704195ca2fc88"
+            "bytes": 771837
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_tex_albedo.jpg",
             "path": "models/grail/grailb_tex_albedo.jpg",
-            "bytes": 245910,
-            "sha256": "2ed90a703f35b3f641f122f579dfa89da142f92e94defe2ad574476254abb834"
+            "bytes": 245910
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_grail/grailb_tex_pbr.jpg",
             "path": "models/grail/grailb_tex_pbr.jpg",
-            "bytes": 280168,
-            "sha256": "eaea4461ec39afd2a3eca0e6e7ee0010bc5698dbf9f290c6ecbd9217f38982ff"
+            "bytes": 280168
           }
         ],
         "camera": {
@@ -728,7 +692,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "5fd82bb248b085ac3b448077d77cbcd532516ad627268c2fde32c5db5392de53",
           "facingFeature": "MoonKAM nadir deck",
           "sourceAxis": [
             0,
@@ -766,14 +729,12 @@
         "offsetXCssPixels": 32
       },
       "bytes": 14674,
-      "sha256": "68eb248179af4a37cb7239263909d85c1e4b7f4f95ef9b51a76e7daf838b4c68",
       "source": {
         "id": "hayabusa",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_1.png",
         "path": "artwork/hayabusa.png",
         "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
         "credit": "NASA spacecraft artwork collection",
-        "sha256": "1f6aed2ace5cc97fc65e3cc091431be85b8564c75bec42dc0c3ea72273f046a1",
         "bytes": 393166,
         "kind": "official-prerendered-artwork",
         "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
@@ -808,14 +769,12 @@
         "offsetXCssPixels": 32
       },
       "bytes": 11906,
-      "sha256": "00e9187c83de1c977e7c6561cffc1576dfb34855bbca58c1aedb6e8ff4dcb3eb",
       "source": {
         "id": "hayabusa2",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/05/hayabusa_2.png",
         "path": "artwork/hayabusa2.png",
         "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
         "credit": "NASA spacecraft artwork collection",
-        "sha256": "b3f9dfce8e1a3ab7f4b9f5ad252ff42ca225d3ef2838c52b99131da4fe080386",
         "bytes": 1195703,
         "kind": "official-prerendered-artwork",
         "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
@@ -850,7 +809,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 36466,
-      "sha256": "7b16384a09c08ef312b154884c5c0cc555eb2600798e1adf17e24162a502f3c7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -867,7 +825,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:Maquette_Herschel_salon_du_Bourget_2013_DSC_0217.JPG",
         "credit": "Pline (full-scale model, Paris Air Show 2013)",
         "license": "CC BY-SA 3.0",
-        "sha256": "fb6cfc07e50411fa6c7b1dcce909eeac9a01cd9a22726d3cd320d7b15e4db643",
         "bytes": 2350978,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -886,7 +843,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 19388,
-      "sha256": "7f50da8f38afe25e8ef033626891510146242a8b5cffffd9128855e79a240865",
       "source": {
         "kind": "model-render",
         "id": "hubble-v2",
@@ -897,7 +853,6 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Hubble%20Space%20Telescope%20(A)/Hubble%20Space%20Telescope%20(A).glb",
           "path": "models/hubble-v2/model.glb",
-          "sha256": "e5ba4de15c7d359ac8fa1ab7e286aff42dec09c0fadae3db99252587f39fa384",
           "bytes": 1694988
         },
         "dependencies": [],
@@ -947,7 +902,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "e5ba4de15c7d359ac8fa1ab7e286aff42dec09c0fadae3db99252587f39fa384",
           "facingFeature": "Telescope aperture",
           "sourceAxis": [
             0,
@@ -985,7 +939,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 31714,
-      "sha256": "63a59b968aae939b9c05e98523e27e944183ec5388c1eaa951392a45dadff5b2",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1002,7 +955,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:NASA_Infrared_Telescope_Facility_(MaunaKea_Summit_Dome).jpg",
         "credit": "NOIRLab/NSF/AURA/P. Horálek",
         "license": "CC BY 4.0",
-        "sha256": "06664b18a54f4763eff97d510b0f66e2ad4586bbe90793d546f92b551dc342f3",
         "bytes": 5308013,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -1021,7 +973,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 10742,
-      "sha256": "c9617addac15fa9a71bd333360fb15999d152906fda7db702b8a0a24f6c66247",
       "source": {
         "kind": "model-render",
         "id": "juno",
@@ -1032,8 +983,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Juno%20(A)/Juno%20(A).glb",
           "path": "models/juno/model.glb",
-          "bytes": 8999028,
-          "sha256": "13f6bd48ff830a1890b21ef6e0182bb1043926feebb77af9733e7374b050367a"
+          "bytes": 8999028
         },
         "camera": {
           "direction": [
@@ -1081,7 +1031,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "13f6bd48ff830a1890b21ef6e0182bb1043926feebb77af9733e7374b050367a",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -1119,7 +1068,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 21230,
-      "sha256": "44c40e815911e002dc83446f0298319fd4c92836bcc9a84e38fc13d55efb1657",
       "source": {
         "kind": "model-render",
         "id": "lro",
@@ -1130,8 +1078,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Lunar%20Reconnaissance%20Orbiter%20(B)/Lunar%20Reconnaissance%20Orbiter%20(B).glb",
           "path": "models/lro/model.glb",
-          "bytes": 2902744,
-          "sha256": "c868a65e36ed293476be3d05e7e60968778c5cf4b2a7aba8859fcc20242a0612"
+          "bytes": 2902744
         },
         "camera": {
           "direction": [
@@ -1179,7 +1126,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "c868a65e36ed293476be3d05e7e60968778c5cf4b2a7aba8859fcc20242a0612",
           "facingFeature": "Lunar observing instruments",
           "sourceAxis": [
             0,
@@ -1217,7 +1163,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 23216,
-      "sha256": "4857506a2bff5bf1678d6f72852e7cf5e3e1a76cdf9778078ec19b590e576f53",
       "source": {
         "kind": "model-render",
         "id": "magellan",
@@ -1228,8 +1173,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Magellan/Magellan.glb",
           "path": "models/magellan/model.glb",
-          "bytes": 3156768,
-          "sha256": "8a7f61e467309865fb2bb3fc3b2d3efbc0898d9e15eb6afb2fd743b7cd9f5084"
+          "bytes": 3156768
         },
         "camera": {
           "direction": [
@@ -1277,7 +1221,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "8a7f61e467309865fb2bb3fc3b2d3efbc0898d9e15eb6afb2fd743b7cd9f5084",
           "facingFeature": "Radar antenna",
           "sourceAxis": [
             0,
@@ -1315,7 +1258,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 13182,
-      "sha256": "a1e35c6c3ff8574efdcd98495ca9d57a783e37f3231858f8d68605f1f2170386",
       "source": {
         "kind": "model-render",
         "id": "mars-global-surveyor",
@@ -1326,8 +1268,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Global%20Surveyor/Mars%20Global%20Surveyor.glb",
           "path": "models/mars-global-surveyor/model.glb",
-          "bytes": 1921268,
-          "sha256": "8812c97f2c147e409e883d5196377d596df84de87c08c1453e9e3cfaf082052f"
+          "bytes": 1921268
         },
         "camera": {
           "direction": [
@@ -1375,7 +1316,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "8812c97f2c147e409e883d5196377d596df84de87c08c1453e9e3cfaf082052f",
           "facingFeature": "MOC/MOLA science deck",
           "sourceAxis": [
             0,
@@ -1413,7 +1353,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 13962,
-      "sha256": "bbd5accdf1b03fb1a80e524467793bc315c74dee17faaa293eac1baf0eb1c034",
       "source": {
         "kind": "model-render",
         "id": "messenger",
@@ -1424,8 +1363,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER)/MErcury%20Surface%2C%20Space%20ENvironment%2C%20GEochemistry%2C%20and%20Ranging%20(MESSENGER).glb",
           "path": "models/messenger/model.glb",
-          "bytes": 2673396,
-          "sha256": "c0268bfed0910e68a54c45925aea8edfc6e479d8131a849de7949252e01b9875"
+          "bytes": 2673396
         },
         "camera": {
           "direction": [
@@ -1473,7 +1411,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "c0268bfed0910e68a54c45925aea8edfc6e479d8131a849de7949252e01b9875",
           "facingFeature": "MDIS/MLA instrument deck",
           "sourceAxis": [
             0,
@@ -1511,7 +1448,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 18898,
-      "sha256": "f665c641a979c9d0c0846164a132f7ca520f873e7fa06694fabc28775c1a45e0",
       "source": {
         "kind": "model-render",
         "id": "mro",
@@ -1522,8 +1458,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A)/Mars%20Reconnaissance%20Orbiter%20(MRO)%20(A).glb",
           "path": "models/mro/model.glb",
-          "bytes": 2652460,
-          "sha256": "b195c566d227dec8e42ca2fafcc2a8cc26a127e04ed577e4b9515199d2002d9e"
+          "bytes": 2652460
         },
         "camera": {
           "direction": [
@@ -1571,7 +1506,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "b195c566d227dec8e42ca2fafcc2a8cc26a127e04ed577e4b9515199d2002d9e",
           "facingFeature": "HiRISE science deck",
           "sourceAxis": [
             0,
@@ -1609,7 +1543,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 13012,
-      "sha256": "cc4a20de076421d6aaac64f97eee092fb52195b33d2232c4920d1bd0bc827dc2",
       "source": {
         "kind": "model-render",
         "id": "near-shoemaker",
@@ -1620,8 +1553,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/NEAR%20Shoemaker/NEAR%20Shoemaker.glb",
           "path": "models/near-shoemaker/model.glb",
-          "bytes": 701808,
-          "sha256": "f3de2f87c97685b207be97e80d7cdca37d1567dd68204e1feb2d85f90e3adb0c"
+          "bytes": 701808
         },
         "camera": {
           "direction": [
@@ -1669,7 +1601,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "f3de2f87c97685b207be97e80d7cdca37d1567dd68204e1feb2d85f90e3adb0c",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -1707,7 +1638,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 18714,
-      "sha256": "d0326df9e12098d5c777204cb3364e0da65dfa17e1974f0d8bc1bcc9c1b64cc7",
       "source": {
         "kind": "model-render",
         "id": "new-horizons",
@@ -1718,8 +1648,7 @@
         "model": {
           "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/n/New_Horizons.glb",
           "path": "models/new-horizons/model.glb",
-          "bytes": 3293532,
-          "sha256": "cf152d8cea17c4a83711041cb0d29ca1d980bfafa084ada2656569ea92cdd73f"
+          "bytes": 3293532
         },
         "camera": {
           "direction": [
@@ -1767,7 +1696,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "cf152d8cea17c4a83711041cb0d29ca1d980bfafa084ada2656569ea92cdd73f",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -1805,7 +1733,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 16162,
-      "sha256": "65cf7be2b9a5a4753720dc5ca1abf1fd74a274caab48788d2b556630492fe8ce",
       "source": {
         "kind": "model-render",
         "id": "odyssey",
@@ -1816,8 +1743,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Mars%20Odyssey/Mars%20Odyssey.glb",
           "path": "models/odyssey/model.glb",
-          "bytes": 5801372,
-          "sha256": "ac0faa8dbfb54aabcbe3d06886c3d98dd29d120fd49b1c9fa6abbfbed22b049a"
+          "bytes": 5801372
         },
         "camera": {
           "direction": [
@@ -1865,7 +1791,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "ac0faa8dbfb54aabcbe3d06886c3d98dd29d120fd49b1c9fa6abbfbed22b049a",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             -1,
@@ -1903,7 +1828,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 18992,
-      "sha256": "77075614481090c0c36040e075f20ae2a90f8c36687c4475da43ba0694c6f603",
       "source": {
         "kind": "model-render",
         "id": "osiris-rex",
@@ -1914,8 +1838,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Origins%2C%20Spectral%20Interpretation%2C%20Resource%20Identification%2C%20and%20Security%20-%20Regolith%20Explorer%20(OSIRIS-REx)/OSIRIS-REx.glb",
           "path": "models/osiris-rex/model.glb",
-          "bytes": 1281308,
-          "sha256": "ef8e0429ee4dd8e918908923d5efdc6d3576b9216cc8e16533b50dd28c196bca"
+          "bytes": 1281308
         },
         "camera": {
           "direction": [
@@ -1963,7 +1886,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "ef8e0429ee4dd8e918908923d5efdc6d3576b9216cc8e16533b50dd28c196bca",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             1,
@@ -2001,7 +1923,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 20810,
-      "sha256": "a10543238ec56cf8a6f735f062b7a42e92bbbf08675c1f6b92a22c5bba5e3b3f",
       "source": {
         "kind": "model-render",
         "id": "rosetta-v2",
@@ -2012,62 +1933,52 @@
         "model": {
           "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosettaPhilae.gltf",
           "path": "models/rosetta-v2/model.gltf",
-          "sha256": "56b3325b9ff45da5a03ba0c13b548b59de979c83ec3738085183d7dd1029fb76",
           "bytes": 58896
         },
         "dependencies": [
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_tex_01_normal.png",
             "path": "models/rosetta-v2/rosetta_tex_01_normal.png",
-            "sha256": "36e3a22968781ee1304d53446e4da7bd3176d415ef10ab367e004dafe4128511",
             "bytes": 389294
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_tex_01_albedo.jpg",
             "path": "models/rosetta-v2/rosetta_tex_01_albedo.jpg",
-            "sha256": "c7368fe9f9b44aa95b1be44834e513aeb6cf0859b3ad23469e940f1b1ded654a",
             "bytes": 97243
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_tex_01_pbr.jpg",
             "path": "models/rosetta-v2/rosetta_tex_01_pbr.jpg",
-            "sha256": "e7fe0cf6cf5952cd594ba948df38329d6fdf8caf728bfffa3ac249495c6e2b91",
             "bytes": 168655
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_parts_ao.jpg",
             "path": "models/rosetta-v2/rosetta_parts_ao.jpg",
-            "sha256": "2f4f7a61e6da7ff684fe6c521f7a403576838ef9e22c4d93d66e683dee264cf7",
             "bytes": 192151
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_parts2_ao.jpg",
             "path": "models/rosetta-v2/rosetta_parts2_ao.jpg",
-            "sha256": "b00ef2e43399df611fc01596d5b46b3eba23328648c26700deb396642ffba45c",
             "bytes": 201717
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_parts3_ao.jpg",
             "path": "models/rosetta-v2/rosetta_parts3_ao.jpg",
-            "sha256": "c8e2f159945a64e1cb8738f88f2e04d7fddf5346879d6e9b9698c92358c3d1ce",
             "bytes": 328751
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta_dish_ao.jpg",
             "path": "models/rosetta-v2/rosetta_dish_ao.jpg",
-            "sha256": "5d1e5c252a7e95d235a643296456e192cdb4f22450733983e00b6182eba662ec",
             "bytes": 127593
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/foil_normal.png",
             "path": "models/rosetta-v2/foil_normal.png",
-            "sha256": "541c5998fcb208c50670dbe3dc29d31b7b903e75447a824d73afe5da1fc00a2a",
             "bytes": 257893
           },
           {
             "url": "https://eyes.nasa.gov/assets/static/models/sc_rosetta/rosetta-philae.bin",
             "path": "models/rosetta-v2/rosetta-philae.bin",
-            "sha256": "1c7755ead524b8238c3bb3cb809bdc7ddf074e36e36982c29509d38700164b41",
             "bytes": 1350420
           }
         ],
@@ -2117,7 +2028,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "56b3325b9ff45da5a03ba0c13b548b59de979c83ec3738085183d7dd1029fb76",
           "facingFeature": "OSIRIS science face",
           "sourceAxis": [
             0,
@@ -2155,7 +2065,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 13310,
-      "sha256": "2b6d2ceb0444f8f452c532091eec166350e26e8232197c45cc40eda8ac588eb1",
       "source": {
         "kind": "model-render",
         "id": "sdo",
@@ -2166,8 +2075,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Solar%20Dynamics%20Observatory/Solar%20Dynamics%20Observatory.glb",
           "path": "models/sdo/model.glb",
-          "bytes": 497844,
-          "sha256": "8ce4607bd65f098eee22f02717a182d6721610c940a961511dfbca832a3eda95"
+          "bytes": 497844
         },
         "camera": {
           "direction": [
@@ -2215,7 +2123,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "8ce4607bd65f098eee22f02717a182d6721610c940a961511dfbca832a3eda95",
           "facingFeature": "AIA telescope apertures",
           "sourceAxis": [
             0,
@@ -2253,7 +2160,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 32972,
-      "sha256": "39934aab7f9aedb22ed02f319fbf562c2227c5196d6e3c667cf0cd4cb01f36b0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2270,7 +2176,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:Spitzer_earth_trailing2.jpg",
         "credit": "NASA/JPL-Caltech",
         "license": "Public domain",
-        "sha256": "cca887b222fcf58f969e6d12a8042a58c138082905775268f255543ae25c0a0d",
         "bytes": 1638522,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -2289,7 +2194,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 12000,
-      "sha256": "2312f28e7592cb91d101c31b4626243a04eda3630051c1000a57feef6727e42d",
       "source": {
         "kind": "model-render",
         "id": "suomi-npp",
@@ -2300,8 +2204,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP)/Suomi%20National%20Polar-orbiting%20Partnership%20(Suomi%20NPP).glb",
           "path": "models/suomi-npp/model.glb",
-          "bytes": 2283576,
-          "sha256": "885278277ed8fa864368803b7da2046292754bff01033055d56fe86e8b951ee4"
+          "bytes": 2283576
         },
         "camera": {
           "direction": [
@@ -2349,7 +2252,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "885278277ed8fa864368803b7da2046292754bff01033055d56fe86e8b951ee4",
           "facingFeature": "Earth-facing instrument deck",
           "sourceAxis": [
             -1,
@@ -2387,7 +2289,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 18794,
-      "sha256": "8d4e2ce508a339bb131fd24b023c411469a664e45bbf4e4c1e52eb2fa7d9393a",
       "source": {
         "kind": "model-render",
         "id": "terra",
@@ -2398,8 +2299,7 @@
         "model": {
           "url": "https://raw.githubusercontent.com/nasa/NASA-3D-Resources/11ebb4ee043715aefbba6aeec8a61746fad67fa7/3D%20Models/Terra/Terra.glb",
           "path": "models/terra/model.glb",
-          "bytes": 2150600,
-          "sha256": "8794857595f7a7d416184fe926ecb50e11bf267dbe471d1cf2728a85e8d017fa"
+          "bytes": 2150600
         },
         "camera": {
           "direction": [
@@ -2447,7 +2347,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "8794857595f7a7d416184fe926ecb50e11bf267dbe471d1cf2728a85e8d017fa",
           "facingFeature": "Earth-facing instrument deck",
           "sourceAxis": [
             0,
@@ -2485,14 +2384,12 @@
         "offsetXCssPixels": 19
       },
       "bytes": 14206,
-      "sha256": "078a4c633f2384cc4332ae09e20bd4f3eb3c391edbd87035fc124f145ed2f2ae",
       "source": {
         "id": "viking",
         "url": "https://science.nasa.gov/wp-content/uploads/2023/10/Viking_Orbiter-2.png",
         "path": "artwork/viking.png",
         "sourcePage": "https://science.nasa.gov/multimedia/spacecraft-icons/",
         "credit": "NASA spacecraft artwork collection",
-        "sha256": "6209a4b6c521f1df66aa0bf9f943455e6b10c764b386309dee821059c4b3607c",
         "bytes": 342620,
         "kind": "official-prerendered-artwork",
         "preparation": "Retain the published angle and colors; trim transparent margins, fit inside the frame, composite onto sidebar #0d0d0d."
@@ -2527,7 +2424,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 63960,
-      "sha256": "2ec1a4727352a6f55f345910ed398b9c856c71d11d8d1a56c7b541e13976bab5",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2544,7 +2440,6 @@
         "sourcePage": "https://www.eso.org/public/images/vista_hz_02/",
         "credit": "ESO",
         "license": "CC BY 4.0",
-        "sha256": "d7332db87f3567bc8a71511f8f9194dc38a3ac218affebda6fe1b8c1918f56e9",
         "bytes": 3793201,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, mirror horizontally, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -2563,7 +2458,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 25324,
-      "sha256": "24e1c1f68be8831030abc8317d3d9b634369dd73ea1dde714b1186481084ab53",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2580,7 +2474,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:Very_Long_Baseline_Array_Dish_(3S8A8130).jpg",
         "credit": "Kitt Peak National Observatory/NOIRLab/NSF/AURA/P. Marenfeld",
         "license": "CC BY 4.0",
-        "sha256": "71a86756f440d89b5cc5a798aa2c204661e56e49904aed2faefc0d229a7e69a4",
         "bytes": 4932391,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -2599,7 +2492,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 31458,
-      "sha256": "390b79a9201c8abc3e1baffe767fdc2d81f267b8c8c99cdebd65f784db078c6b",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2616,7 +2508,6 @@
         "sourcePage": "https://commons.wikimedia.org/wiki/File:ESO%E2%80%99s_Very_Large_Telescope_(VLT)_observatory_at_Paranal.jpg",
         "credit": "ESO/Y. Beletsky",
         "license": "CC BY 4.0",
-        "sha256": "a6af073c1f272b3369f9514fed918d0ffa26d9b6e975068e22705a47443414b1",
         "bytes": 2381531,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."
@@ -2635,7 +2526,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 13080,
-      "sha256": "cb7f12f12024f716bc1db93135b4b4c54c3b70c6ab52d7beb49185f5a2fca9a6",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -2643,7 +2533,6 @@
         "credit": "NASA Visualization Technology Applications and Development (VTAD)",
         "model": {
           "path": "models/voyager-approved/model.usdz",
-          "sha256": "4f8c8299c7259a5870f009c401967cd667e2741640cbead4ccb15c774545b5f3",
           "bytes": 1229256
         },
         "sharedGeometry": "voyager",
@@ -2704,7 +2593,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "4f8c8299c7259a5870f009c401967cd667e2741640cbead4ccb15c774545b5f3",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -2742,7 +2630,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 13080,
-      "sha256": "cb7f12f12024f716bc1db93135b4b4c54c3b70c6ab52d7beb49185f5a2fca9a6",
       "source": {
         "kind": "model-render",
         "url": "https://assets.science.nasa.gov/content/dam/science/psd/solar/2023/09/v/Voyager.usdz",
@@ -2750,7 +2637,6 @@
         "credit": "NASA Visualization Technology Applications and Development (VTAD)",
         "model": {
           "path": "models/voyager-approved/model.usdz",
-          "sha256": "4f8c8299c7259a5870f009c401967cd667e2741640cbead4ccb15c774545b5f3",
           "bytes": 1229256
         },
         "sharedGeometry": "voyager",
@@ -2811,7 +2697,6 @@
           "rollDegrees": 0
         },
         "pose": {
-          "sourceSha256": "4f8c8299c7259a5870f009c401967cd667e2741640cbead4ccb15c774545b5f3",
           "facingFeature": "High-gain antenna dish",
           "sourceAxis": [
             0,
@@ -2849,7 +2734,6 @@
         "offsetXCssPixels": 0
       },
       "bytes": 54404,
-      "sha256": "b5414e461108870313185c792dd46c48edc5d55bbc112ecfde555e1b59880623",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -2866,7 +2750,6 @@
         "sourcePage": "https://www.eso.org/public/images/eso1119k/",
         "credit": "ESO/INAF-VST/OmegaCAM/G. Lombardi",
         "license": "CC BY 4.0",
-        "sha256": "09fdf087fe6f6de848c8638b1c5934bf7f35248a3fb040c376fb265972661239",
         "bytes": 6700160,
         "kind": "published-photograph",
         "preparation": "Centre-cover to 592x296 without upscaling, flatten onto sidebar #0d0d0d, encode WebP quality 90."

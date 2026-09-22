@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import catalogues from '../source/moon-catalogues.json' with { type: 'json' };
 import { parseMoonCatalogue, prepareBodyMoons, prepareBodyRelations } from '../prepare-body-moons.mts';
 const catalogue = catalogues.systems.find(system => system.id === 'saturn')!;

@@ -2,8 +2,6 @@
   "schema": "cssearth-volume-recipe@1",
   "grid": {
     "path": "density.ktx2",
-    "sha256": "18dfee0277ef35a1618f3c29aded4ddd25810def069109243d8a71394465cfb7",
-    "decodedSha256": "d6ccb207d3ec280034af02c087e93d486cfd4b1c2a64db9b19328415aeb4ccdc",
     "dimensions": [
       128,
       128,
@@ -77,7 +75,6 @@
   },
   "anchors": [],
   "provenance": {
-    "path": "provenance.json",
-    "sha256": "bb47733c76838994e2b6530d391b407e03051402ce01a5ad7980dbc3cac404d7"
+    "path": "provenance.json"
   }
 }

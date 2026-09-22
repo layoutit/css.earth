@@ -121,11 +121,11 @@ frame, and resolves the actual galaxy references. The bibliography tests reject
 conflicting keys and invalid locators. Contribution tests distinguish view
 counts from product counts and reject undeclared observation attribution.
 
-`pnpm test:shell:router` checks the router with injected scene and world-context
+`pnpm test:node` checks the router with injected scene and world-context
 owners. Its test preload rejects accidental use of application boot; it does
 not prove the Vite-generated context inventory or browser startup.
 
 Scene conformance remains derived from the scene capability filter. Run
-`pnpm test:shell` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) to check prepared-focus search, selection, saved links and retained
+`pnpm test:node` (the browser suites were retired; the shell invariants they asserted are checked from the built HTML in `site/test/rendered-page.test.mts`, and scene retention in `site/test/scene-session.test.mts`) to check prepared-focus search, selection, saved links and retained
 camera ownership. These checks do not establish the scientific accuracy of a
 catalogue measurement or a reconstructed volume.

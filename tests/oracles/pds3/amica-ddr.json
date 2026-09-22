@@ -11,22 +11,18 @@
  "inputs": [
   {
    "path": "src/objects/itokawa/source/observations/st_2402987304_v_ddr.img.gz",
-   "sha256": "f5fae5ef42a701c050693523d1d149a99b85b83da6e1c0c5ce58626decee1ca6",
    "bytes": 1861460
   },
   {
    "path": "src/objects/itokawa/source/observations/st_2402987304_v_ddr.lbl",
-   "sha256": "f6cf948ba2df7c3196732b02e414710e9a7e80a71fcb859c6a586b37cd6085e6",
    "bytes": 6640
   },
   {
    "path": "src/objects/itokawa/source/observations/st_2402987304_v.fit",
-   "sha256": "639a57f2daaf2bac9700307565449bcb9b540a714e223d1bf321ff0d4c4f1c32",
    "bytes": 1056960
   },
   {
    "path": "src/objects/itokawa/source/observations/flat_v.fit",
-   "sha256": "b68d5b25053f7a6574d876619cb4f00dd5f609392a861d1c3998976f9f8980d6",
    "bytes": 4199040
   }
  ],

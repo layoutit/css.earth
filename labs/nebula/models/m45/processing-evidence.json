@@ -3,12 +3,10 @@
   "subjectId": "m45",
   "asOf": "2026-09-13",
   "recipePath": "labs/nebula/models/m45/processing-observations.json",
-  "recipeSha256": "1efb9aabb1f52aa6e01a3b335ae4b02efee9e69201428483a3052300727b5705",
   "interpretation": "Exact native accounting and pinned artifacts; no clean-stellar-removal or physical-depth acceptance.",
   "images": [
     {
       "id": "noirlab-optical",
-      "sourceSha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
       "registration": {
         "status": "verified",
         "referenceId": "spitzer-irac",
@@ -19,19 +17,6 @@
         4000,
         2920
       ],
-      "modelSha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546",
-      "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
-      "workingSourceSha256": "52030751f515518f3ba20ec5726d2aa71bdf1516388aebd7fa27b9c15145814c",
-      "receiptSha256": "06f82c6df05860a78e3f76a82e1589249193ac0dec5801178bf0bb185b6a9474",
-      "artifactSha256": {
-        "comparison.webp": "f968603a8679561459ad8abebfbba186c52fe9e9cad77513a81fb6cea42fb13e",
-        "diffuse.png": "301b9cb7b7c96b795f7dd9f74dae5b4974f029d09765000aba8d0a84036c109a",
-        "diffuse.webp": "97c5c1832af7baab50ba14ae6de5462a5e367c946b852c37d3c296a0876a80ad",
-        "mask.png": "ade6d61372f6845a76324ab8c88edbb5791b5ddea0aae388048ac0e77b071df0",
-        "overview.webp": "907cfe8eb77745e88a7074ba3010ac16a4b65dc94eaad5b3166608ef627f4e54",
-        "stars.png": "25007ef29fe308aa2465a9498c34a85472c73ba5c1dd0b63aad35ead0646b01f",
-        "stars.webp": "000176898de90148de3ddc35e925ad4248f304aef68f4ea6a8373c7cdd2a8473"
-      },
       "verification": {
         "maximumReconstructionErrorCodeValues": 0,
         "changedPixelsOutsideMask": 0,
@@ -136,7 +121,6 @@
     },
     {
       "id": "spitzer-irac",
-      "sourceSha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
       "registration": {
         "status": "verified",
         "referenceId": "noirlab-optical",
@@ -147,19 +131,6 @@
         2855,
         2855
       ],
-      "modelSha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546",
-      "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
-      "workingSourceSha256": "09b2c9e3327f4682e83767d45ece0d9d0171ee264dd462726f6291e7210c3009",
-      "receiptSha256": "df9a400b6047d390b002d83e3b1fc186dbc091a724c22618203df822d41dee87",
-      "artifactSha256": {
-        "comparison.webp": "bc40f9e369e9ac1ecb427e5b6f2e14e73adfba29b8686b68ab27416c9bc45a1d",
-        "diffuse.png": "64948da4af369c380c5e792cb2cd00f26ca9d3b028920068e5476f67ed64301c",
-        "diffuse.webp": "4a831ee0672eaefb20f949ce1243dfa9e8b91ccfbb4a1b37b580366048573370",
-        "mask.png": "b38d46fdff16278c5d08d042f0f0aee6b18049a05793b08b9726f14ac0671281",
-        "overview.webp": "073583a1c9b458355cb951f5771304e17b77eb4aa2e0d40024792d55698894ad",
-        "stars.png": "616ab3bd61a3e6f3f3f4b5f2651637bea712e67a89c2957c8b792f1962c881eb",
-        "stars.webp": "35fd17d7ec5b3a5685c98bc7d2d6b31a040d5413c7239e0bae85d736207e2452"
-      },
       "verification": {
         "maximumReconstructionErrorCodeValues": 0,
         "changedPixelsOutsideMask": 0,
@@ -199,7 +170,6 @@
     },
     {
       "id": "spitzer-irac-mips",
-      "sourceSha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
       "registration": {
         "status": "verified",
         "referenceId": "noirlab-optical",
@@ -210,19 +180,6 @@
         2855,
         2855
       ],
-      "modelSha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546",
-      "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
-      "workingSourceSha256": "e98fac37faf388a4ae22e798df5c2af1f2e46ebf968734c8b580c2f14056d2c0",
-      "receiptSha256": "552360f50de20c974d67e0be9baf8343a37ae3584d443b422f7ec5e5dbb46953",
-      "artifactSha256": {
-        "comparison.webp": "e0eb480a619e2a5e7014ab68137c0f7d31342379529d8470ea656d3066f994a4",
-        "diffuse.png": "4fa899295ee5c4983e996ac0e1268497836bae24824ce0944416ec497d784c65",
-        "diffuse.webp": "9f2f14c7fec1950d4546c44d4c3e141ec9996ac5a4c525a5df83fe9702db96eb",
-        "mask.png": "ea2ec53eb9c6e72104bbf234fab9ed7d082e90897aec7e74e76000a75f349a72",
-        "overview.webp": "b046a01507c75f42574f0761f532f35c042b53df4bab5d17cbb8b660eed63127",
-        "stars.png": "d2ea35fb22536eb7ba4104f365f772e536c3a73d16da4c97d71d5ceb0be2943c",
-        "stars.webp": "7b62b02aea9e0db71e51ec59c00533e1f66a0c7233e8889094592ee93460adc8"
-      },
       "verification": {
         "maximumReconstructionErrorCodeValues": 0,
         "changedPixelsOutsideMask": 0,
@@ -275,7 +232,6 @@
     },
     {
       "id": "wise-four-band",
-      "sourceSha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
       "registration": {
         "status": "verified",
         "referenceId": "noirlab-optical",
@@ -286,19 +242,6 @@
         4007,
         3061
       ],
-      "modelSha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546",
-      "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752",
-      "workingSourceSha256": "f726d31c3e570614a92328160db7cbbabcf5d999e4b53e40be411fddb9f080ed",
-      "receiptSha256": "97eaac5aa82920d33fcc04de05886909ffbb3144d0c233b2594402c288bd09d3",
-      "artifactSha256": {
-        "comparison.webp": "54a8ec6efbc0f241f64cab2ac528b64e37e149b15f2b4f163fcf8688ad967d09",
-        "diffuse.png": "1d8040b4293ed2292a644f544bba006f366a9ca9bd18812fc128bb5e8fa62e87",
-        "diffuse.webp": "5ba38c1f981a4251e1df0ee5ef34142e707925a45f9f0bb1dd3f735524fe02a6",
-        "mask.png": "a8c523dce1f1f602f427e41e7192c3e39b2271b1062626fc954aa50c215d9f86",
-        "overview.webp": "f70c0d77228e33817a8a36f5edaa82700b199ae376810c49649ecab7b64ac5bd",
-        "stars.png": "30b7b6cefeaded1114609e5284e0964dad45b76a566ac39c12904d6837da2906",
-        "stars.webp": "01ccfd6bb280fb38e0d64cd474da7d2a90ca6dc4280b65538d5c04e1e2f9c049"
-      },
       "verification": {
         "maximumReconstructionErrorCodeValues": 0,
         "changedPixelsOutsideMask": 0,
@@ -325,19 +268,16 @@
     }
   ],
   "resultId": "a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8",
-  "resultSha256": "a8309d5c55d5cc25d4a0e4b15e21ef729535c42cacd9511c5ccc909a46a4a2b6",
   "integrationReplay": {
     "schema": "cssearth-compiler-integration-replay@1",
     "status": "passed",
     "subjectId": "m45",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d/result.json",
-      "sha256": "4bfa37a3912564484cd5683431776c09966c946368b4bf43c4f79dc68d4754f7"
+      "path": ".local/nebula-lab/compiler/ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640/result.json",
-      "sha256": "29f56dd6e378e658bb261c70d654000479b71e628381995118a31ba9eba70a5d"
+      "path": ".local/nebula-lab/compiler/93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640/result.json"
     },
     "previousResultId": "ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d",
     "currentResultId": "93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640",
@@ -364,68 +304,52 @@
         "missingSignalFraction": 0.09589171781806916,
         "excessSignalFraction": 0.09181339092936369
       },
-      "identicalAlphaSha256": "4531ee08d209e44ec9725f3b4ef20d0251ca79e10927e8757d552587c8b06466",
       "identicalBankResources": 4105,
       "identicalBankResourceBytes": 12571204,
       "banks": [
         {
           "id": "neutral",
-          "resources": 821,
-          "resourceManifestSha256": "11f05afec68453ee904f2e826326a0643c4b763395ebe2c8d4ef4fb4ffce5423"
+          "resources": 821
         },
         {
           "id": "noirlab-optical",
-          "resources": 821,
-          "resourceManifestSha256": "728bda9822f746849cb37f64abc396c2d90b30ab093912908a48ec7adf478212"
+          "resources": 821
         },
         {
           "id": "spitzer-irac",
-          "resources": 821,
-          "resourceManifestSha256": "f49fa01c1720b3735fb217780e54b730aad8762b3259785f8bfb666b50164718"
+          "resources": 821
         },
         {
           "id": "spitzer-irac-mips",
-          "resources": 821,
-          "resourceManifestSha256": "4f79b563b994907f840d68876f914dbe784872ebe6f5da122b3e3d476f394a43"
+          "resources": 821
         },
         {
           "id": "wise-four-band",
-          "resources": 821,
-          "resourceManifestSha256": "4e969344ffb17ca67e8cb4700baddafd0bc182ec0bf34e18fae7a7fb7412c417"
+          "resources": 821
         }
       ],
       "sourcePanels": [
         {
-          "id": "noirlab-optical",
-          "originalSha256": "1b4eac659f5070dbfbf69072bc91fec4a9611d43f3267d5a79d649cc3a987fb6",
-          "starlessSha256": "7778628f2c2d10db4dc67ca627b1fc7611fb667981fc491c5cc38377845a0bdd"
+          "id": "noirlab-optical"
         },
         {
-          "id": "spitzer-irac",
-          "originalSha256": "466509f5d9b81c4e59a050c268df1502d84a48d416b07539afa159f067235053",
-          "starlessSha256": "ff453d19f07e0a0ac96ae9de1f9f31a9435bd2c16e8ded9bf331f817269fecec"
+          "id": "spitzer-irac"
         },
         {
-          "id": "spitzer-irac-mips",
-          "originalSha256": "7948f12f460d880effc9b76a84a14ebbf967be50966f032324ff54df373f150a",
-          "starlessSha256": "7c86b38ec26efb0b00072d4f5a03b9c1b3ee19c1f38d24df5b87d0fbad2b2889"
+          "id": "spitzer-irac-mips"
         },
         {
-          "id": "wise-four-band",
-          "originalSha256": "34db2ed1b21c9a88f5cdb85283f9325830cbf0672ac4492d8da3179ace9bc19d",
-          "starlessSha256": "9d11b6cb0b91e74bdeffaa447037a11564ff316074c64dbd89da8bf6534a477c"
+          "id": "wise-four-band"
         }
       ]
     },
     "visualEvidenceReuse": "Prior front/oblique/side screenshots remain applicable to the model/material assessment because all bank texture bytes, geometry, stars, controls and source panels are identical. Their original result IDs and receipts are retained; this comparison is not a fresh browser interaction run.",
     "receipt": {
-      "path": "output/nebula-processing/m45-integration-replay.json",
-      "sha256": "ae00e61d335aca80ecaae97ed29a0bbe30a1848aab6a525d09da9f00ef99e997"
+      "path": "output/nebula-processing/m45-integration-replay.json"
     },
     "previousVisualEvidence": {
       "receipt": {
-        "path": "output/nebula-processing/m45-inspected-prior-receipt.json",
-        "sha256": "d7df392032b36f3d0552f9f4385d5548751b251ddfb6a11c6c41ad517525787b"
+        "path": "output/nebula-processing/m45-inspected-prior-receipt.json"
       },
       "resultId": "ec423626da931fb5a62af42c4a280793b2877afdba0e5712204b4fb9af7b381d",
       "archiveNote": "Receipt copied from the complete pre-replay file read captured before the browser script replaced the original inspection directory. That directory now contains the fresh current-result screenshots; first-trial screenshots remain in output/m45-inspection-round1/."
@@ -459,8 +383,7 @@
       "browser": "148.0.7778.96",
       "interpretation": "Interaction/source/pose tests only; screenshots require visual assessment.",
       "receipt": {
-        "path": "output/m45-inspection/receipt.json",
-        "sha256": "e57a2c9941dd4a4128b34f9b4cdbb9c79bc27b8a1f8b885b219ab93aa96c08be"
+        "path": "output/m45-inspection/receipt.json"
       },
       "screenshots": "output/m45-inspection/"
     }
@@ -471,12 +394,10 @@
     "subjectId": "m45",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640/result.json",
-      "sha256": "29f56dd6e378e658bb261c70d654000479b71e628381995118a31ba9eba70a5d"
+      "path": ".local/nebula-lab/compiler/93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4/result.json",
-      "sha256": "34d596705577e4147032e16850ac1af0e5eb2762c381a5daab602a5a5ee7c64c"
+      "path": ".local/nebula-lab/compiler/8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4/result.json"
     },
     "previousResultId": "93de5ac15c401ba3b09c8a1676dd281b100e55527c6012fb6fbe404b799a7640",
     "currentResultId": "8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4",
@@ -505,63 +426,48 @@
         "missingSignalFraction": 0.09589171781806916,
         "excessSignalFraction": 0.09181339092936369
       },
-      "identicalAlphaSha256": "4531ee08d209e44ec9725f3b4ef20d0251ca79e10927e8757d552587c8b06466",
       "identicalBankResources": 4105,
       "identicalBankResourceBytes": 12571204,
       "banks": [
         {
           "id": "neutral",
-          "resources": 821,
-          "resourceManifestSha256": "11f05afec68453ee904f2e826326a0643c4b763395ebe2c8d4ef4fb4ffce5423"
+          "resources": 821
         },
         {
           "id": "noirlab-optical",
-          "resources": 821,
-          "resourceManifestSha256": "728bda9822f746849cb37f64abc396c2d90b30ab093912908a48ec7adf478212"
+          "resources": 821
         },
         {
           "id": "spitzer-irac",
-          "resources": 821,
-          "resourceManifestSha256": "f49fa01c1720b3735fb217780e54b730aad8762b3259785f8bfb666b50164718"
+          "resources": 821
         },
         {
           "id": "spitzer-irac-mips",
-          "resources": 821,
-          "resourceManifestSha256": "4f79b563b994907f840d68876f914dbe784872ebe6f5da122b3e3d476f394a43"
+          "resources": 821
         },
         {
           "id": "wise-four-band",
-          "resources": 821,
-          "resourceManifestSha256": "4e969344ffb17ca67e8cb4700baddafd0bc182ec0bf34e18fae7a7fb7412c417"
+          "resources": 821
         }
       ],
       "sourcePanels": [
         {
-          "id": "noirlab-optical",
-          "originalSha256": "1b4eac659f5070dbfbf69072bc91fec4a9611d43f3267d5a79d649cc3a987fb6",
-          "starlessSha256": "7778628f2c2d10db4dc67ca627b1fc7611fb667981fc491c5cc38377845a0bdd"
+          "id": "noirlab-optical"
         },
         {
-          "id": "spitzer-irac",
-          "originalSha256": "466509f5d9b81c4e59a050c268df1502d84a48d416b07539afa159f067235053",
-          "starlessSha256": "ff453d19f07e0a0ac96ae9de1f9f31a9435bd2c16e8ded9bf331f817269fecec"
+          "id": "spitzer-irac"
         },
         {
-          "id": "spitzer-irac-mips",
-          "originalSha256": "7948f12f460d880effc9b76a84a14ebbf967be50966f032324ff54df373f150a",
-          "starlessSha256": "7c86b38ec26efb0b00072d4f5a03b9c1b3ee19c1f38d24df5b87d0fbad2b2889"
+          "id": "spitzer-irac-mips"
         },
         {
-          "id": "wise-four-band",
-          "originalSha256": "34db2ed1b21c9a88f5cdb85283f9325830cbf0672ac4492d8da3179ace9bc19d",
-          "starlessSha256": "9d11b6cb0b91e74bdeffaa447037a11564ff316074c64dbd89da8bf6534a477c"
+          "id": "wise-four-band"
         }
       ]
     },
     "visualEvidenceReuse": "The prior cloud/material assessment remains applicable because every bank texture byte, field and geometry matches. Star selection/photometry changed and requires the fresh browser receipt; historical captures remain tied to their original IDs.",
     "receipt": {
-      "path": "output/nebula-processing/m45-star-selection-replay.json",
-      "sha256": "20865e4502aebd5678c1eb819fd814a93cdc5adefee89510c5e7ea00c402d6e8"
+      "path": "output/nebula-processing/m45-star-selection-replay.json"
     },
     "freshBrowser": {
       "status": "passed",
@@ -592,93 +498,71 @@
       "browser": "148.0.7778.96",
       "interpretation": "Interaction/source/pose tests only; screenshots require visual assessment.",
       "receipt": {
-        "path": "output/nebula-processing/m45-stars-final-browser/receipt.json",
-        "sha256": "fb8081cac13e9bd7e77d109f95536b6cbcf8c541dd87d3edd3d4f51aa3f64a7a"
+        "path": "output/nebula-processing/m45-stars-final-browser/receipt.json"
       },
       "screenshots": [
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/neutral-north-side.png",
-          "sha256": "8dd593ae73c0ff72669642af4963a8d59e82862576b02bf5ad63ccdb24ce1258"
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/neutral-oblique.png",
-          "sha256": "899b869d0d5a4cb7390377eb3eedde9d5cd63d1baf0904407e110f0237a62d57"
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/neutral-west-side.png",
-          "sha256": "2a5fe7c01268a4d5c6e384d7ddfc3337ebd3a2930577674ba90e2e9fc637d959"
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-earth.png",
-          "sha256": "ebcb8940e6fbe644e7f63b6a05658fe040c2498ad333ffab6e6d846b9751c10e"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-north-side.png",
-          "sha256": "3ba764ec96f626f9456eb7af612537a9ea6728a71cc063487096787befc2daaa"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-oblique.png",
-          "sha256": "19c3e5708e4e2db486326f057df2f5856e6405fc483ee6e6c6e4ff43ba49dd0f"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-west-side.png",
-          "sha256": "672091bcd2044cf4a03ee0e0d288a25f4053cb5cc48c6e234972e1da0e8a37bd"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/original-overlay.png",
-          "sha256": "3773559977c01df0293ba77132ebe9af75cb844857180a56d4f628ca282dac95"
+          "path": "output/nebula-processing/m45-stars-final-browser/original-overlay.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-earth.png",
-          "sha256": "aedbe4b77d43ac6aa0ae35ea1137e4b741d71ab84390dd64cc45e437237ce081"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-earth.png",
-          "sha256": "c74212406d59150266300e434c1db341946aa10b5c1232a1686c936bb09fc273"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-north-side.png",
-          "sha256": "10f102cbcafbb90218cece83834d2230ac2a39d2b7db9bd5ecef83efd9186a47"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-oblique.png",
-          "sha256": "710914d03c99c0be731250950d3e153f200b61fa1da060f03b7e76085e8941d1"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-west-side.png",
-          "sha256": "01183b54a3ce68a72f0d942b4a23deff3ebe9364449ea0a814c0ac33a46b3b76"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-north-side.png",
-          "sha256": "0399c588eecd9d699689d4ef9073fa3fc1a5f74081d2493342c5abe6a3a312f6"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-oblique.png",
-          "sha256": "5fce820f9b99ae0af9f5eceafb43a487e2d29cf5d72d3f3ff537e48ebbbc5548"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-west-side.png",
-          "sha256": "ef6e847fafc196d98fb84579e3fe918aefc1fff88a7a4675d701d741f5f5b993"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-earth.png",
-          "sha256": "b12bb1bbef404060428ce8962e5fbc00a8ae5e6eedd53947b465cb2d3421c94d"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-north-side.png",
-          "sha256": "9fea80b75f039b5c77677a6f0da2620fc23a6683a390bfa539bce28f74459de2"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-oblique.png",
-          "sha256": "f7caaa4f32e0b79ef789bbdae752a7dd7bb941c9a947c13e7b5565d01d0ee62b"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-west-side.png",
-          "sha256": "8f3a5ba91fb01f3fe626a8df97f5da5d77de9208776decfb44d4aac5323f5b20"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-stars-earth.png",
-          "sha256": "58a41781f5c960c9d021c762425e7c6846f4f7fcff24712998d2d3b7a8575157"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-stars-earth.png"
         }
       ]
     },
@@ -690,12 +574,10 @@
     "subjectId": "m45",
     "date": "2026-09-13",
     "previous": {
-      "path": ".local/nebula-lab/compiler/8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4/result.json",
-      "sha256": "34d596705577e4147032e16850ac1af0e5eb2762c381a5daab602a5a5ee7c64c"
+      "path": ".local/nebula-lab/compiler/8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4/result.json"
     },
     "current": {
-      "path": ".local/nebula-lab/compiler/a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8/result.json",
-      "sha256": "a8309d5c55d5cc25d4a0e4b15e21ef729535c42cacd9511c5ccc909a46a4a2b6"
+      "path": ".local/nebula-lab/compiler/a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8/result.json"
     },
     "previousResultId": "8f36eed3d001b6c9acc6cb754640ced03366798edc374251069484c56726ccc4",
     "currentResultId": "a5c9a65dc905cf7bfea2b9b8045069fbd0b8abf5561d47fccb4c4a3e0f117ef8",
@@ -724,63 +606,48 @@
         "missingSignalFraction": 0.09589171781806916,
         "excessSignalFraction": 0.09181339092936369
       },
-      "identicalAlphaSha256": "4531ee08d209e44ec9725f3b4ef20d0251ca79e10927e8757d552587c8b06466",
       "identicalBankResources": 4105,
       "identicalBankResourceBytes": 12571204,
       "banks": [
         {
           "id": "neutral",
-          "resources": 821,
-          "resourceManifestSha256": "11f05afec68453ee904f2e826326a0643c4b763395ebe2c8d4ef4fb4ffce5423"
+          "resources": 821
         },
         {
           "id": "noirlab-optical",
-          "resources": 821,
-          "resourceManifestSha256": "728bda9822f746849cb37f64abc396c2d90b30ab093912908a48ec7adf478212"
+          "resources": 821
         },
         {
           "id": "spitzer-irac",
-          "resources": 821,
-          "resourceManifestSha256": "f49fa01c1720b3735fb217780e54b730aad8762b3259785f8bfb666b50164718"
+          "resources": 821
         },
         {
           "id": "spitzer-irac-mips",
-          "resources": 821,
-          "resourceManifestSha256": "4f79b563b994907f840d68876f914dbe784872ebe6f5da122b3e3d476f394a43"
+          "resources": 821
         },
         {
           "id": "wise-four-band",
-          "resources": 821,
-          "resourceManifestSha256": "4e969344ffb17ca67e8cb4700baddafd0bc182ec0bf34e18fae7a7fb7412c417"
+          "resources": 821
         }
       ],
       "sourcePanels": [
         {
-          "id": "noirlab-optical",
-          "originalSha256": "1b4eac659f5070dbfbf69072bc91fec4a9611d43f3267d5a79d649cc3a987fb6",
-          "starlessSha256": "7778628f2c2d10db4dc67ca627b1fc7611fb667981fc491c5cc38377845a0bdd"
+          "id": "noirlab-optical"
         },
         {
-          "id": "spitzer-irac",
-          "originalSha256": "466509f5d9b81c4e59a050c268df1502d84a48d416b07539afa159f067235053",
-          "starlessSha256": "ff453d19f07e0a0ac96ae9de1f9f31a9435bd2c16e8ded9bf331f817269fecec"
+          "id": "spitzer-irac"
         },
         {
-          "id": "spitzer-irac-mips",
-          "originalSha256": "7948f12f460d880effc9b76a84a14ebbf967be50966f032324ff54df373f150a",
-          "starlessSha256": "7c86b38ec26efb0b00072d4f5a03b9c1b3ee19c1f38d24df5b87d0fbad2b2889"
+          "id": "spitzer-irac-mips"
         },
         {
-          "id": "wise-four-band",
-          "originalSha256": "34db2ed1b21c9a88f5cdb85283f9325830cbf0672ac4492d8da3179ace9bc19d",
-          "starlessSha256": "9d11b6cb0b91e74bdeffaa447037a11564ff316074c64dbd89da8bf6534a477c"
+          "id": "wise-four-band"
         }
       ]
     },
     "visualEvidenceReuse": "The prior cloud/material assessment remains applicable because every bank texture byte, field and geometry matches. Star selection/photometry changed and requires the fresh browser receipt; historical captures remain tied to their original IDs.",
     "receipt": {
-      "path": "output/nebula-processing/m45-star-union-replay.json",
-      "sha256": "8bbc97f9c476d46929ebc33ad974dc8a06d76947534b0f22a7fe84d0b209a512"
+      "path": "output/nebula-processing/m45-star-union-replay.json"
     },
     "previousFullBrowser": {
       "status": "passed",
@@ -811,93 +678,71 @@
       "browser": "148.0.7778.96",
       "interpretation": "Interaction/source/pose tests only; screenshots require visual assessment.",
       "receipt": {
-        "path": "output/nebula-processing/m45-stars-final-browser/receipt.json",
-        "sha256": "fb8081cac13e9bd7e77d109f95536b6cbcf8c541dd87d3edd3d4f51aa3f64a7a"
+        "path": "output/nebula-processing/m45-stars-final-browser/receipt.json"
       },
       "screenshots": [
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/neutral-north-side.png",
-          "sha256": "8dd593ae73c0ff72669642af4963a8d59e82862576b02bf5ad63ccdb24ce1258"
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/neutral-oblique.png",
-          "sha256": "899b869d0d5a4cb7390377eb3eedde9d5cd63d1baf0904407e110f0237a62d57"
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/neutral-west-side.png",
-          "sha256": "2a5fe7c01268a4d5c6e384d7ddfc3337ebd3a2930577674ba90e2e9fc637d959"
+          "path": "output/nebula-processing/m45-stars-final-browser/neutral-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-earth.png",
-          "sha256": "ebcb8940e6fbe644e7f63b6a05658fe040c2498ad333ffab6e6d846b9751c10e"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-north-side.png",
-          "sha256": "3ba764ec96f626f9456eb7af612537a9ea6728a71cc063487096787befc2daaa"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-oblique.png",
-          "sha256": "19c3e5708e4e2db486326f057df2f5856e6405fc483ee6e6c6e4ff43ba49dd0f"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-west-side.png",
-          "sha256": "672091bcd2044cf4a03ee0e0d288a25f4053cb5cc48c6e234972e1da0e8a37bd"
+          "path": "output/nebula-processing/m45-stars-final-browser/noirlab-optical-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/original-overlay.png",
-          "sha256": "3773559977c01df0293ba77132ebe9af75cb844857180a56d4f628ca282dac95"
+          "path": "output/nebula-processing/m45-stars-final-browser/original-overlay.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-earth.png",
-          "sha256": "aedbe4b77d43ac6aa0ae35ea1137e4b741d71ab84390dd64cc45e437237ce081"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-earth.png",
-          "sha256": "c74212406d59150266300e434c1db341946aa10b5c1232a1686c936bb09fc273"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-north-side.png",
-          "sha256": "10f102cbcafbb90218cece83834d2230ac2a39d2b7db9bd5ecef83efd9186a47"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-oblique.png",
-          "sha256": "710914d03c99c0be731250950d3e153f200b61fa1da060f03b7e76085e8941d1"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-west-side.png",
-          "sha256": "01183b54a3ce68a72f0d942b4a23deff3ebe9364449ea0a814c0ac33a46b3b76"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-mips-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-north-side.png",
-          "sha256": "0399c588eecd9d699689d4ef9073fa3fc1a5f74081d2493342c5abe6a3a312f6"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-oblique.png",
-          "sha256": "5fce820f9b99ae0af9f5eceafb43a487e2d29cf5d72d3f3ff537e48ebbbc5548"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-west-side.png",
-          "sha256": "ef6e847fafc196d98fb84579e3fe918aefc1fff88a7a4675d701d741f5f5b993"
+          "path": "output/nebula-processing/m45-stars-final-browser/spitzer-irac-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-earth.png",
-          "sha256": "b12bb1bbef404060428ce8962e5fbc00a8ae5e6eedd53947b465cb2d3421c94d"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-earth.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-north-side.png",
-          "sha256": "9fea80b75f039b5c77677a6f0da2620fc23a6683a390bfa539bce28f74459de2"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-north-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-oblique.png",
-          "sha256": "f7caaa4f32e0b79ef789bbdae752a7dd7bb941c9a947c13e7b5565d01d0ee62b"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-oblique.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-west-side.png",
-          "sha256": "8f3a5ba91fb01f3fe626a8df97f5da5d77de9208776decfb44d4aac5323f5b20"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-four-band-west-side.png"
         },
         {
-          "path": "output/nebula-processing/m45-stars-final-browser/wise-stars-earth.png",
-          "sha256": "58a41781f5c960c9d021c762425e7c6846f4f7fcff24712998d2d3b7a8575157"
+          "path": "output/nebula-processing/m45-stars-final-browser/wise-stars-earth.png"
         }
       ]
     },

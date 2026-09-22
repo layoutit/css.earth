@@ -21,7 +21,6 @@
       "label": "NOIRLab · optical B / V / I",
       "url": "https://storage.noirlab.edu/media/archives/images/publicationtiff/noao-m45.tif",
       "page": "https://noirlab.edu/public/images/noao-m45/",
-      "sha256": "473b92b49bee00f7a7028c80d9d63ea8f384ae80e46eb470558fecf93b255544",
       "width": 4000,
       "height": 2920,
       "fieldArcminutes": [
@@ -65,7 +64,6 @@
         "url": "https://storage.noirlab.edu/media/archives/images/original/noao-m45.tif",
         "width": 9700,
         "height": 7080,
-        "sha256": "a7780281f9ef87ab815d1dbf93f6dd596a25d14f263d8d66fc6b82a17d758e91",
         "hashStatus": "publisher-published; original not downloaded"
       },
       "processingVariant": "Publisher 4K TIFF, complete 9700×7080 master footprint. Embedded AVM reference grid retained."
@@ -75,7 +73,6 @@
       "label": "Spitzer · IRAC 3.6–8 µm",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09262/PIA09262.tif",
       "page": "https://science.nasa.gov/photojournal/pink-pleiades/",
-      "sha256": "03ef667b77b49f79040e4e12b3d601efe34c02abcee0e5eb78464eeafaf63684",
       "width": 2855,
       "height": 2855,
       "fieldArcminutes": [
@@ -128,7 +125,6 @@
       "label": "Spitzer · IRAC + MIPS 4.5–24 µm",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia09/pia09263/PIA09263.tif",
       "page": "https://science.nasa.gov/photojournal/the-seven-sisters-pose-for-spitzer/",
-      "sha256": "16bc76835b046b48c6682bd169bd8f75cbcb1b49d5a45b78ba7f4e7c281d8c8e",
       "width": 2855,
       "height": 2855,
       "fieldArcminutes": [
@@ -181,7 +177,6 @@
       "label": "WISE · 3.4–22 µm wide field",
       "url": "https://assets.science.nasa.gov/content/dam/science/psd/photojournal/pia/pia13/pia13121/PIA13121.tif",
       "page": "https://science.nasa.gov/photojournal/seven-sisters-get-wise/",
-      "sha256": "641b6b6298a9c04d752e05f4b6d8986a377be3139df3f3cf915bd23d7559076c",
       "width": 4007,
       "height": 3061,
       "fieldArcminutes": [
@@ -232,10 +227,8 @@
   ],
   "nativeRemoval": {
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   },
   "intakeStatus": "Explicitly authorized selected-source processing recipe; full six-source catalogue remains observations.json. Exact publisher pixels and full frame preserved."
 }

@@ -1,12 +1,10 @@
 {
   "schema": "cssearth-nebula-overlay-provenance@1",
   "recipe": {
-    "path": "labs/nebula/models/image-overlays.json",
-    "sha256": "db0d13d217f6db0fe0a410d4a3cfd330bbaa7e5976260f465c279d479cdc827c"
+    "path": "labs/nebula/models/image-overlays.json"
   },
   "frame": {
-    "path": "labs/nebula/models/lmc-particles/object.json",
-    "sha256": "423c2444c51f62f69870f77c698ea68c487724688b6654877f0f683f7f35175a"
+    "path": "labs/nebula/models/lmc-particles/object.json"
   },
   "images": [
     {
@@ -14,7 +12,6 @@
         "id": "smash-original",
         "label": "SMASH · original full image",
         "path": "labs/nebula/sources/lmc-smash-full.webp",
-        "sha256": "7e29b020ac5de2634a909d9b1adc45eea8ca482dd5681464448b1fe26afbbcd0",
         "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
         "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
         "license": "CC-BY-4.0",
@@ -41,7 +38,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
         },
         "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing.",
@@ -77,7 +73,6 @@
         "texturePath": "prepared/smash-original.webp",
         "width": 2048,
         "height": 1987,
-        "sha256": "0aacd67cc1cff5f083827f8e70b2d12356169d97da20368dd86f4218e798ff9c",
         "bytes": 2113466
       }
     },
@@ -86,7 +81,6 @@
         "id": "dss2-wide-optical",
         "label": "DSS2 · 24° wide optical",
         "path": ".local/nebula-lab/wide-dss2/dss2-color-lmc-24deg-6000.jpg",
-        "sha256": "add16f9657563bde2b7e10320edc2cd12b419202624bcb192be2f5781797ce70",
         "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=jpg",
         "sourcePageUrl": "https://doi.org/10.26093/cds/aladin/ht9n-7r",
         "credit": "Digitized Sky Survey - STScI/NASA, Colored & Healpixed by CDS",
@@ -115,7 +109,6 @@
         },
         "wcsSource": {
           "url": "https://alasky.cds.unistra.fr/hips-image-services/hips2fits?hips=CDS%2FP%2FDSS2%2Fcolor&width=6000&height=6000&projection=TAN&fov=24&coordsys=icrs&ra=78.76&dec=-69.19&format=fits",
-          "sha256": "a72fa01bce7c3f05b7d17b6ec4eff58afd5a1302594e89a230bda45dc0b4c92d",
           "description": "Exact ICRS TAN WCS from the matching CDS HiPS2FITS color FITS; JPEG/FITS orientation verified. See source/dss2-wide-receipt.json."
         },
         "registrationNote": "Survey WCS placement across a 24° field. Photographic plate seams, foreground stars and uneven backgrounds remain; use for coverage comparison before reconstruction. This is not calibrated diffuse emission.",
@@ -151,7 +144,6 @@
         "texturePath": "prepared/dss2-wide-optical.webp",
         "width": 6000,
         "height": 6000,
-        "sha256": "32615b2bd3c035eb947b45d292365e6fe5424391423e8952e26f7e92ca2f87a6",
         "bytes": 3208688
       }
     },
@@ -160,7 +152,6 @@
         "id": "vista-infrared",
         "label": "VISTA · infrared Y/J/Ks",
         "path": ".local/nebula-lab/registration/eso1914a.jpg",
-        "sha256": "ffdd2aba1d3034f0d1be67bd45a6167e48ce49607aa343535b1c447fde7d1ee5",
         "url": "https://cdn.eso.org/images/publicationjpg/eso1914a.jpg",
         "sourcePageUrl": "https://www.eso.org/public/images/eso1914a/",
         "credit": "ESO/VMC Survey",
@@ -188,7 +179,6 @@
         },
         "wcsSource": {
           "url": "https://cdn.eso.org/images/publicationjpg/eso1914a.jpg",
-          "sha256": "ffdd2aba1d3034f0d1be67bd45a6167e48ce49607aa343535b1c447fde7d1ee5",
           "description": "Publisher AVM from the uncropped publication JPEG; reference dimensions describe the original mosaic."
         },
         "registrationNote": "Publisher WCS placement. Simulation correspondence is not fitted or verified; compare morphology and coverage before processing. Infrared stars need not resemble optical nebulosity.",
@@ -224,7 +214,6 @@
         "texturePath": "prepared/vista-infrared.webp",
         "width": 1833,
         "height": 2048,
-        "sha256": "d196a9de10c77de7219c6b35ff532f19c5bacac6f4169db62214b48904eb63a0",
         "bytes": 1802570
       }
     },
@@ -233,7 +222,6 @@
         "id": "smash-extracted",
         "label": "SMASH · previous extracted image",
         "path": "labs/nebula/models/lmc-particles/source/photo-diffuse.png",
-        "sha256": "573e4cfd8269b74e6cc348b8dff472850945bdb051aeef9c6f3d7e9a6da07812",
         "sourcePageUrl": "https://noirlab.edu/public/images/noirlab2030a/",
         "credit": "CTIO/NOIRLab/NSF/AURA/SMASH/D. Nidever; image processing: Travis Rector, Mahdi Zamani & Davide de Martin",
         "license": "CC-BY-4.0",
@@ -260,7 +248,6 @@
         },
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "ICRS TAN AVM fields extracted from the pinned publisher TIFF; original reference dimensions retained."
         },
         "registrationNote": "Previous extraction, using the same full-image WCS footprint. Toggle against the original to inspect removed or truncated signal; this is not an independent observation.",
@@ -296,7 +283,6 @@
         "texturePath": "prepared/smash-extracted.webp",
         "width": 2048,
         "height": 1987,
-        "sha256": "1ff8f2e24aba2e84b03f48ff3419a2ab3908ac41bdfdfe47a4d08d638c45446e",
         "bytes": 677286
       }
     },
@@ -305,7 +291,6 @@
         "id": "gaia-edr3-stars",
         "label": "Gaia EDR3 · foreground removed",
         "path": ".local/nebula-lab/new-references/gaia-lmc.png",
-        "sha256": "8f77da661a66fa11b2c162552fbce922ed2f96a87351b9eafecd82f1309603e4",
         "url": "https://upload.wikimedia.org/wikipedia/commons/4/4a/Large_Magellanic_Cloud_rendered_from_Gaia_EDR3_without_foreground_stars.png",
         "sourcePageUrl": "https://commons.wikimedia.org/wiki/File:Large_Magellanic_Cloud_rendered_from_Gaia_EDR3_without_foreground_stars.png",
         "credit": "Kevinmloch; ESA/Gaia/DPAC Gaia EDR3; rendered with bsrender",
@@ -349,7 +334,6 @@
         "registrationNote": "Measured registration to SMASH using 330 unique point sources; 110 held out of final fit, median 1.17 SMASH pixels and P90 2.09 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 17.8% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied.",
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
         },
         "maxPixels": 4096,
@@ -385,7 +369,6 @@
         "texturePath": "prepared/gaia-edr3-stars.webp",
         "width": 4096,
         "height": 4096,
-        "sha256": "f4fb5ade1035af9a4ddf044734a27aaf44958607431cea023e093bd9382f4030",
         "bytes": 5965610
       }
     },
@@ -394,7 +377,6 @@
         "id": "horalek-widefield",
         "label": "Horálek · optical wide field",
         "path": ".local/nebula-lab/new-references/iotw2547a.jpg",
-        "sha256": "c18df59c81b5f2449ff7e9786fbffe27553cfc031ac74f6f07ddae6c2a1015dd",
         "url": "https://storage.noirlab.edu/media/archives/images/large/iotw2547a.jpg",
         "sourcePageUrl": "https://noirlab.edu/public/images/iotw2547a/",
         "credit": "NOIRLab/NSF/AURA/P. Horálek (Institute of Physics in Opava)",
@@ -438,7 +420,6 @@
         "registrationNote": "Measured registration to SMASH using 592 unique point sources; 198 held out of final fit, median 0.59 SMASH pixels and P90 1.12 pixels (4.996 arcsec/pixel). Homography is an approximation; validated point hull covers 60.2% of source raster, outer area extrapolated. No per-pixel distances or simulation correspondence implied.",
         "wcsSource": {
           "url": "https://noirlab.edu/public/media/archives/images/original/noirlab2030a.tif",
-          "sha256": "6aa365263e05772590b42f90818d9b2128af16b5a8384ea96066fa5e5e4e81e0",
           "description": "Registered to discrete stars in the pinned full-size SMASH image, whose publisher ICRS TAN AVM supplies the sky anchor. Exact correspondences, held-out residuals and source hull recorded in registration receipt."
         },
         "wcs": {
@@ -495,7 +476,6 @@
         "texturePath": "prepared/horalek-widefield.webp",
         "width": 4096,
         "height": 2731,
-        "sha256": "ada2c5d4b6f75f24ca37f1446e6ccb98993e4c996ce6ab0da5d662722ec1d046",
         "bytes": 3353640
       }
     },
@@ -504,7 +484,6 @@
         "id": "tarantula-vst",
         "label": "ESO VST · Tarantula detail",
         "path": ".local/nebula-lab/new-references/tarantula-eso1816a-publication.jpg",
-        "sha256": "fe6453a8a9c471bd1bc1209593bc2054bcd0eb20a8608a8f77dcac5877cc03a0",
         "url": "https://cdn.eso.org/images/publicationjpg/eso1816a.jpg",
         "sourcePageUrl": "https://www.eso.org/public/images/eso1816a/",
         "credit": "ESO",
@@ -533,7 +512,6 @@
         },
         "wcsSource": {
           "url": "https://cdn.eso.org/images/publicationjpg/eso1816a.jpg",
-          "sha256": "fe6453a8a9c471bd1bc1209593bc2054bcd0eb20a8608a8f77dcac5877cc03a0",
           "description": "ICRS TAN AVM fields embedded in the downloaded publisher publication JPEG; original 16655 x 16719 reference dimensions retained."
         },
         "registrationNote": "Uncropped publisher full-frame proportional derivative at 3985 x 4000. Embedded AVM retains the original mosaic reference dimensions and is identical to the already pinned source registration. Publisher WCS placement is not independently star-fitted; verify matched-star residuals before composition.",
@@ -570,14 +548,12 @@
         "texturePath": "prepared/tarantula-vst.webp",
         "width": 3985,
         "height": 4000,
-        "sha256": "f17e886e5b86352e9def6a49c2e7f9cf1d4f1cf3d9d9bc8fec6b8f1c7bc732f1",
         "bytes": 8979790
       }
     }
   ],
   "alignment": {
-    "path": "labs/nebula/models/lmc-overlays/source/manual-placement.json",
-    "sha256": "f51f97c5976dfb7a6d2e094c144c876a57c3ac6339e9ba50238bb56151635783"
+    "path": "labs/nebula/models/lmc-overlays/source/manual-placement.json"
   },
   "method": "Publisher sky coordinates or matched-star homographies map full image edges to the observation tangent plane, compiled as fixed PolyCSS projective quads.",
   "limits": [

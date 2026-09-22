@@ -11,11 +11,9 @@
     "identityCountOver5xScrambledControls": true,
     "allWrongTransformsMedianOver100ReferencePixels": false
   },
-  "imageSha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
   "coordinateConvention": "Zero-based top-left raster pixel centres; edges at -.5 and size-.5. Resize: x_native=(x_work+.5)*native_width/work_width-.5, likewise y. AVM/FITS: x_fits=(x_native+.5)*reference_width/native_width+.5; y_fits=reference_height+.5-(y_native+.5)*reference_height/native_height. Row-major homography maps source native centres to reference native centres.",
   "source": {
     "path": ".local/nebula-lab/smc-intake/WISE2010-028.tiff",
-    "sha256": "f94c419cf288ce9af2dd4877e65afd2d74d8109037c8a2c390fc3528f06ebc25",
     "nativeDimensions": [
       5855,
       4596
@@ -46,7 +44,6 @@
   },
   "reference": {
     "path": ".local/nebula-lab/smc-intake/eso1714a.jpg",
-    "sha256": "c47545d7d2ae9a76389844e4e66cf30f91a332dbf0c18b9cf5d78e170daf2009",
     "nativeDimensions": [
       4000,
       3540
@@ -140,9 +137,9 @@
       -0.22452298853205527,
       0.4617731415577035,
       1419.0790214210458,
-      -2.1247650317963493e-06,
-      -7.096769683026757e-07,
-      1.0
+      -0.0000021247650317963493,
+      -7.096769683026757e-7,
+      1
     ]
   },
   "localScaleReferencePixelsPerSourcePixel": [

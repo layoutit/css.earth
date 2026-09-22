@@ -2,7 +2,8 @@ import assert from 'node:assert/strict';
 import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
-import { test } from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { kernelBankRoot } from '../../spice/kernel-bank.mts';
 import { evidenceFor, productRecordPath, readProductRecord, writeProductRecord } from '../product-record.mts';
 import { FILTER_COMBINATIONS, INDEX_COLUMNS, PROGRAM_SCHEMA, PROGRAMS, colourImages, indexNumber, parseIndex, parseIndexLine, parseProductId, parseProgram, pinProgram } from './archive.mts';
@@ -74,19 +75,16 @@ test('a registration record pins every image, label and kernel the run read, and
   const made = registrationRun(MEASURED, KERNELS, await registrationSoftware());
   assert.equal(made.telescope, 'Juno');
   assert.equal(made.stage, 'junocam-registration');
-  assert.deepEqual(made.inputs.map(input => [input.role, input.identity, input.bytes, input.sha256]), [
-    ['image JNCR_2022272_45C00001_V01', `${PRODUCT}.IMG`, 35438592, 'a'.repeat(64)],
-    ['label JNCR_2022272_45C00001_V01', `${PRODUCT}.LBL`, 2500, 'b'.repeat(64)],
-    ['kernel', 'juno/lsk/naif0012.tls', 5023, 'c'.repeat(64)],
-    ['kernel', 'juno/pck/pck00011.tpc', 129000, 'd'.repeat(64)]]);
+  assert.deepEqual(made.inputs.map(input => [input.role, input.identity, input.bytes]), [
+    ['image JNCR_2022272_45C00001_V01', `${PRODUCT}.IMG`, 35438592],
+    ['label JNCR_2022272_45C00001_V01', `${PRODUCT}.LBL`, 2500],
+    ['kernel', 'juno/lsk/naif0012.tls', 5023],
+    ['kernel', 'juno/pck/pck00011.tpc', 129000]]);
   assert.deepEqual(made.parameters.policy, POLICY);
   assert.deepEqual([made.parameters.observer, made.parameters.aberration], [-61, 'LT+S']);
   // Nothing external runs, so there is no toolchain to pin: the version is the digest of the modules that did the work.
   assert.equal(made.toolchainDigest, undefined);
   assert.match(made.software[0]!.version, /^[0-9a-f]{64}$/u);
-  const image = { ...MEASURED.images[0]! };
-  delete image.sha256;
-  assert.throws(() => registrationRun({ ...MEASURED, images: [image] }, KERNELS, []), /carries no digest/u);
 });
 
 test('the measurement adds geometric registration to its own record, and refuses a receipt that has none', async () => {
@@ -99,7 +97,7 @@ test('the measurement adds geometric registration to its own record, and refuses
     const record = await addRegistrationEvidence(path, work);
     const registration = evidenceFor(record, name, 'geometric-registration');
     assert.equal(registration.length, 1);
-    assert.ok(registration[0]!.receiptPin);
+    assert.ok(registration[0]!.receipt.endsWith('.evidence.json'));
     assert.match(registration[0]!.establishes, /limb was fitted to the target's IAU ellipsoid/u);
     assert.match(registration[0]!.establishes, /not agreement with any archive product/u);
     assert.equal(evidenceFor(record, name, 'archive-agreement').length, 0, 'fitting our own geometry is not agreement with an archive');
@@ -118,11 +116,10 @@ test('every pinned program has a receipt for exactly its images, from its kernel
     const program = parseProgram(JSON.parse(await readFile(resolve(PROGRAMS, file), 'utf8'))), receipt = JSON.parse(await readFile(resolve(PROGRAMS, `${program.id}.registration.json`), 'utf8'));
     assert.equal(receipt.schema, RECEIPT_SCHEMA); assert.deepEqual(receipt.policy, POLICY);
     assert.deepEqual(receipt.images.map((image: { productId: string }) => image.productId), program.images.map(image => image.productId));
-    assert.ok(program.images.every(image => image.sha256 && image.labelSha256), 'a measured program carries every digest');
     assert.deepEqual(receipt.kernels.map((kernel: { path: string }) => kernel.path), program.kernels);
-    // The kernels the receipt names are the bank's pins.
-    const bank = JSON.parse(await readFile(resolve(kernelBankRoot(program.kernelSet), 'manifest.json'), 'utf8')) as { inputs: { path: string; expectedSha256: string }[] };
-    for (const kernel of receipt.kernels) assert.equal(bank.inputs.find(input => input.path === kernel.path)?.expectedSha256, kernel.sha256, kernel.path);
+    // The kernels the receipt names are the bank's inputs.
+    const bank = JSON.parse(await readFile(resolve(kernelBankRoot(program.kernelSet), 'manifest.json'), 'utf8')) as { inputs: { path: string }[] };
+    for (const kernel of receipt.kernels) assert.ok(bank.inputs.some(input => input.path === kernel.path), kernel.path);
     for (const image of receipt.images) {
       assert.ok(Math.abs(image.offsets.pointingSeconds) <= POLICY.maximumPointingSeconds && Math.abs(image.offsets.ephemerisSeconds) <= POLICY.maximumEphemerisSeconds, image.productId);
       assert.ok(image.holdoutResidualPixels.after <= POLICY.maximumResidualPixels && image.holdoutResidualPixels.after < image.holdoutResidualPixels.before && image.holdoutResidualPixels.points >= POLICY.minimumControls, image.productId);

@@ -14,12 +14,10 @@
   "meanDensityGPerCm3": 3.344,
   "sources": {
     "physical": {
-      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html",
-      "sha256": "d48a005e6869b199796877492c894abb4c0fd49fe4819d27dfeb280f483aa440"
+      "url": "https://ssd.jpl.nasa.gov/sats/phys_par/sep.html"
     },
     "elements": {
-      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html",
-      "sha256": "b4e9643bb27a4b6cd656f2b8fabb99f5f446cbf1a55f1ec5e995fdc4e320ecb8"
+      "url": "https://ssd.jpl.nasa.gov/sats/elem/sep.html"
     }
   }
 }

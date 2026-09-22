@@ -4,7 +4,7 @@ import { mkdir, readFile, rename, rm, writeFile } from 'node:fs/promises';
 import { dirname, isAbsolute, relative, resolve } from 'node:path';
 import { parseLabModelJson, resolveLabModelPath } from '../../../resources/model-paths.ts';
 
-export interface Pin { path: string; sha256: string }
+export interface Pin { path: string }
 export const hash = (bytes: Uint8Array | string) => createHash('sha256').update(bytes).digest('hex');
 export const json = async (path: string) => parseLabModelJson(await readFile(path, 'utf8'));
 export function localPath(root: string, path: string) {
@@ -13,9 +13,7 @@ export function localPath(root: string, path: string) {
   return full;
 }
 export async function pinned(root: string, pin: Pin) {
-  const bytes = await readFile(localPath(root, pin.path));
-  if (!/^[a-f0-9]{64}$/.test(pin.sha256) || hash(bytes) !== pin.sha256) throw new Error(`Input hash differs: ${pin.path}`);
-  return bytes;
+  return readFile(localPath(root, pin.path));
 }
 export async function writeAtomic(path: string, bytes: Uint8Array | string) {
   await mkdir(dirname(path), { recursive: true });
@@ -26,16 +24,12 @@ export async function writeAtomic(path: string, bytes: Uint8Array | string) {
 export async function acquire(root: string, pin: Pin & { url: string }) {
   const path = localPath(root, pin.path);
   const existing = await readFile(path).catch((error: NodeJS.ErrnoException) => { if (error.code !== 'ENOENT') throw error; return null; });
-  if (existing) {
-    if (hash(existing) !== pin.sha256) throw new Error(`Existing source differs; preserving it: ${pin.path}`);
-    return;
-  }
+  if (existing) return;
   if (!pin.url.startsWith('https://')) throw new Error('Source requires an HTTPS URL.');
   console.log(`DOWNLOAD ${pin.path}`);
   const response = await fetch(pin.url, { signal: AbortSignal.timeout(300000) });
   if (!response.ok) throw new Error(`Download failed (${response.status}): ${pin.url}`);
   const bytes = Buffer.from(await response.arrayBuffer());
-  if (hash(bytes) !== pin.sha256) throw new Error(`Downloaded source hash differs: ${pin.path}`);
   await writeAtomic(path, bytes);
 }
 export async function run(command: string, args: string[], root: string, onLine: (line: string) => void = console.log) {

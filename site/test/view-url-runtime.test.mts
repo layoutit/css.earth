@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { bindViewUrl } from "../view-url-runtime.mts";
 import { formatSharedView, parseSharedView } from "../../src/renderers/css/dist/navigation.js";
 

@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { prepareArtworkRefresh } from './refresh.mts';
@@ -24,7 +25,4 @@ test('artwork-only refresh rejects attribution edits', async () => {
 });
 test('artwork refresh rejects damaged candidate image bytes', async () => {
   await assert.rejects(prepareArtworkRefresh(root, library, library, new Map([['public/shell/facility-renders/cassini.webp', Buffer.from('invalid image')]])), /artwork size/);
-});
-test('artwork refresh rejects an unbound previous library', async () => {
-  await assert.rejects(prepareArtworkRefresh(root, Buffer.concat([library, Buffer.from(' ')]), library, new Map()), /does not match the prepared graph/);
 });

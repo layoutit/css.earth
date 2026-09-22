@@ -2,20 +2,15 @@
   "schema": "cssearth-callisto-color-conversion-proof@1",
   "input": {
     "path": "observations/PIA03456-usgs.png",
-    "bytes": 821031,
-    "sha256": "7ff117911ea8d2ba3f9f3ab1aba9d17efc32aa4d44c6286b78a9fe46a70f8638"
+    "bytes": 821031
   },
   "registration": {
     "path": "validation/galileo-color-registration.json",
-    "bytes": 8943,
-    "sha256": "0cb2e52bb4bd1ab5680be022e80a9b7e14e72fa01da56f665bb5a7b869bcbaf9"
+    "bytes": 8943
   },
-  "generatorSha256": "9b16349842530308f75826ae398f2f6f721d17ee40d98cead6eb41d67bd6f8ea",
   "output": {
     "path": "observations/PIA03456-registered-rgba.tif",
     "bytes": 771611,
-    "sha256": "1b838efd6caffb313f90578222b4ac7015cdfd98bff6fe240b52047e740cde32",
-    "rgbaSha256": "bf82939f94ee958ebac7b153fb14e5e6e04ba9877cc55a5fb6061bd18a5c3b28",
     "width": 1440,
     "height": 720,
     "referenceRadiusMeters": 2410300,

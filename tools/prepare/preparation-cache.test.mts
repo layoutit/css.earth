@@ -2,7 +2,8 @@ import assert from "node:assert/strict";
 import { lstat, mkdir, mkdtemp, readFile, realpath, rm, symlink, writeFile } from "node:fs/promises";
 import { tmpdir } from "node:os";
 import { dirname, join } from "node:path";
-import test from "node:test";
+import { sourceTest } from '../../tests/objects/source-test.mts';
+const test = sourceTest();
 import { observePreparationPath, readPreparationReceipt, readPreparationTraces, writePreparationReceipt } from "./preparation-cache.mts";
 import type { PreparationTraces } from "./preparation-cache.mts";
 import { PREPARATION_TRACE_SCHEMA, REGISTRY_MODULE, descriptorDigest } from "./preparation-trace-format.mts";
@@ -78,7 +79,7 @@ test("a receipt verifies what preparation read, probed, listed and wrote, and no
 
 const descriptor = (id: string) => ({ schema: "cssearth-object@1", id, type: "moon",
   properties: { catalog: { name: id, description: "Card" }, recipe: { radius: 1 }, page: { metadata: { sha256: "a" } }, worldFrame: { radius: 1 } },
-  prepared: { sha256: "b" } });
+  prepared: { url: "prepared/b.json" } });
 type Descriptor = ReturnType<typeof descriptor>;
 async function editDescriptor(root: string, id: string, change: (value: Descriptor) => void) {
   const path = join(root, `src/objects/${id}/object.json`), value = JSON.parse(await readFile(path, "utf8"));
@@ -90,7 +91,7 @@ test("object descriptors count only the fields each owner can change", async () 
   for (const id of ["moon", "pluto"]) await put(root, `src/objects/${id}/object.json`, JSON.stringify(descriptor(id), null, 2));
   const traces = await observed(root, { "src/objects/moon/object.json": ["read", "write"], "src/objects/pluto/object.json": ["load"] },
     { catalogImporters: [join(root, REGISTRY_MODULE)] });
-  await editDescriptor(root, "moon", value => { value.prepared.sha256 = "c"; });
+  await editDescriptor(root, "moon", value => { value.prepared.url = "prepared/c.json"; });
   const { receipt, refusal } = await seal(root, traces);
   assert.equal(refusal, null);
   assert.deepEqual(evidence(receipt?.inputs ?? {}), { "src/objects/moon/object.json": "descriptor-recipe", "src/objects/pluto/object.json": "descriptor-registry" });
@@ -99,12 +100,12 @@ test("object descriptors count only the fields each owner can change", async () 
   await editDescriptor(root, "pluto", value => {
     value.properties.catalog.description = "Another card";
     value.properties.recipe.radius = 9;
-    value.prepared.sha256 = "e";
+    value.prepared.url = "prepared/e.json";
   });
   assert.ok(await readPreparationReceipt(receiptAt(root)), "cards and another object's recipe and pins leave the receipt valid");
   const changes: [string, string, (value: Descriptor) => void, (value: Descriptor) => void][] = [
     ["the object's recipe", "moon", value => { value.properties.recipe.radius = 2; }, value => { value.properties.recipe.radius = 1; }],
-    ["the object's preparation pins", "moon", value => { value.prepared.sha256 = "z"; }, value => { value.prepared.sha256 = "c"; }],
+    ["the object's preparation pins", "moon", value => { value.prepared.url = "prepared/z.json"; }, value => { value.prepared.url = "prepared/c.json"; }],
     ["another object's catalogue entry", "pluto", value => { value.properties.catalog.name = "Charon"; }, value => { value.properties.catalog.name = "pluto"; }],
     ["another object's world frame", "pluto", value => { value.properties.worldFrame.radius = 2; }, value => { value.properties.worldFrame.radius = 1; }],
   ];

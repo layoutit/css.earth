@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { test } from 'node:test';
+import { sourceLoad, sourceTest } from '../../tests/objects/source-test.mts';
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { loadKernelSet } from './kernel-set.mts';
@@ -17,21 +17,25 @@ import { readOracleFixture, assertPinnedInputs, ORACLE_ROOT } from '../oracles/f
  * fixture names the toolkit version and the sha256 of every kernel, so the
  * comparison is bound to exact inputs.
  */
-const fixture = await readOracleFixture('spice/dart-draco.json');
-const cases = fixture.cases;
-// The kernels in load order; the cube and label that supplied the intercepts follow them.
-const kernels = fixture.inputs.filter(entry => entry.path.includes('/source/spice/'));
-const numbers = (value: unknown) => requireArray(value).map(v => requireFiniteNumber(v));
-const set = await loadKernelSet(kernels.map(entry => resolve(ORACLE_ROOT, entry.path)));
-const clock = set.clock(-135);
-const close = (a: readonly number[], b: readonly number[], tolerance: number) => a.every((v, i) => Math.abs(v - b[i]) <= tolerance);
-
+const loaded = await sourceLoad(async () => {
+  const fixture = await readOracleFixture('spice/dart-draco.json');
+  const cases = fixture.cases;
+  // The kernels in load order; the cube and label that supplied the intercepts follow them.
+  const kernels = fixture.inputs.filter(entry => entry.path.includes('/source/spice/'));
+  const numbers = (value: unknown) => requireArray(value).map(v => requireFiniteNumber(v));
+  const set = await loadKernelSet(kernels.map(entry => resolve(ORACLE_ROOT, entry.path)));
+  const clock = set.clock(-135);
+  const close = (a: readonly number[], b: readonly number[], tolerance: number) => a.every((v, i) => Math.abs(v - b[i]) <= tolerance);
+  return { fixture, cases, kernels, numbers, set, clock, close };
+});
+const test = sourceTest(null, loaded);
+const { fixture, cases, kernels, numbers, set, clock, close } = loaded.values;
 test('the fixture was generated from the pinned kernels by a named SPICE toolkit', async () => {
   assert.equal(fixture.oracle, 'spiceypy');
   assert.match(requireString(fixture.tool.cspice), /^CSPICE_N\d{4}$/);
   await assertPinnedInputs(fixture.inputs);
   assert.equal(kernels.length, 15);
-  assert.deepEqual(set.kernels.map(kernel => kernel.sha256), kernels.map(entry => entry.sha256), 'the same kernels in the same order');
+  assert.deepEqual(set.kernels.map(kernel => kernel.path), kernels.map(entry => entry.path), 'the same kernels in the same order');
   assert.equal(fixture.inputs.length, 17, 'fifteen kernels, the cube and its label');
 });
 

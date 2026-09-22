@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
-import test from 'node:test';
+import { sourceTest } from '../../../tests/objects/source-test.mts';
+const test = sourceTest();
 import {readFile} from 'node:fs/promises';
 import {decodeHriiSolarTable,fitHriiContinuum,fitHriiThermal,fitHriiSpectrum,planckRadiance,solarIrradiance} from './hrii-spectra.mts';
 import {array,number,shape,text} from './source-records.mts';

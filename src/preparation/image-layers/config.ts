@@ -4,7 +4,7 @@ export type LayerAxis = 'x' | 'y' | 'z';
 export interface ImageLayerRecipe {
   schema: 'cssearth-image-layer-recipe@1';
   id: string;
-  source: { path: string; sha256: string; dimensions: [number, number]; originalDimensions: [number, number];
+  source: { path: string; dimensions: [number, number]; originalDimensions: [number, number];
     parentPixelWindow?: [number, number, number, number]; publisherUrl: string; downloadUrl: string; credit: string; license: 'CC-BY-4.0' };
   observation: { centerRaDeg: number; centerDecDeg: number; fieldOfViewDeg: [number, number]; northClockwiseDeg: number };
   target: { centerRaDeg: number; centerDecDeg: number; distancePc: number };
@@ -13,7 +13,7 @@ export interface ImageLayerRecipe {
   bake: { maxFacePixels: number; diffuseFacePixels: number; crossAxisSlices: number; crossAxisAlongPixels: number; crossAxisDepthPixels: number;
     backgroundFloor: number; edgeTaperFraction: number; diffuseFraction: number; diffuseSigmaPixels: number;
     encoding: { format: 'webp'; quality: number } };
-  provenance: { path: string; sha256: string };
+  provenance: { path: string };
 }
 
 const object = (v: unknown, at: string): Record<string, unknown> => {
@@ -72,7 +72,7 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
   const edgeTaperFraction=finite(b.edgeTaperFraction,'edgeTaperFraction');if(edgeTaperFraction<=0||edgeTaperFraction>.25)throw new TypeError('edgeTaperFraction must be in (0, .25].');
   const diffuseFraction=finite(b.diffuseFraction,'diffuseFraction');if(diffuseFraction<=0||diffuseFraction>=1)throw new TypeError('diffuseFraction must be in (0, 1).');
   const quality = positive(e.quality, 'quality', true); if (quality > 100) throw new TypeError('quality must be at most 100.');
-  return { schema: r.schema, id: text(r.id, 'id'), source: { path: path(s.path), sha256: digest(s.sha256, 'source.sha256'),
+  return { schema: r.schema, id: text(r.id, 'id'), source: { path: path(s.path),
     dimensions: pair(s.dimensions, 'source.dimensions', true), originalDimensions: pair(s.originalDimensions, 'source.originalDimensions', true),
     ...(s.parentPixelWindow===undefined?{}:{parentPixelWindow:window(s.parentPixelWindow)}),
     publisherUrl: text(s.publisherUrl, 'publisherUrl'), downloadUrl: text(s.downloadUrl, 'downloadUrl'), credit: text(s.credit, 'credit'), license: s.license },
@@ -84,5 +84,5 @@ export function parseImageLayerRecipe(value: unknown): ImageLayerRecipe {
       supportTaperFraction, depthWeights: weights, depthScales: scales },
     bake: { maxFacePixels: positive(b.maxFacePixels, 'maxFacePixels', true), diffuseFacePixels: positive(b.diffuseFacePixels,'diffuseFacePixels',true), crossAxisSlices: positive(b.crossAxisSlices, 'crossAxisSlices', true),
       crossAxisAlongPixels:positive(b.crossAxisAlongPixels,'crossAxisAlongPixels',true),crossAxisDepthPixels: positive(b.crossAxisDepthPixels, 'crossAxisDepthPixels', true), backgroundFloor,edgeTaperFraction,diffuseFraction,diffuseSigmaPixels:positive(b.diffuseSigmaPixels,'diffuseSigmaPixels'),
-      encoding: { format: 'webp', quality } }, provenance: { path: path(p.path), sha256: digest(p.sha256, 'provenance.sha256') } };
+      encoding: { format: 'webp', quality } }, provenance: { path: path(p.path) } };
 }

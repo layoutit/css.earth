@@ -134,14 +134,14 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   // Label picks are consumed by the shared picker before they bubble, so a click that
   // reaches the window from the input surface picked nothing: it clears the selection.
   let press: { x: number; y: number } | null = null;
-  const onPress = (event: PointerEvent) => { startLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
-  const onWheel = () => { startLoading(); };
+  const onPress = (event: PointerEvent) => { requestLoading(); press = event.target === inputSurface && event.isPrimary ? { x: event.clientX, y: event.clientY } : null; };
+  const onWheel = () => { requestLoading(); };
   const onSurfaceClick = (event: MouseEvent) => {
     if (pinnedIndex === null || event.target !== inputSurface || event.button !== 0) return;
     if (press && Math.hypot(event.clientX - press.x, event.clientY - press.y) > CLICK_SLOP_PIXELS) return;
     clearSelection();
   };
-  const onKey = (event: KeyboardEvent) => { startLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
+  const onKey = (event: KeyboardEvent) => { requestLoading(); if (event.key === 'Escape' && pinnedIndex !== null) clearSelection(); };
   if (inputSurface) {
     windowTarget.addEventListener('pointerdown', onPress, { capture: true });
     inputSurface.addEventListener('wheel', onWheel, { passive: true });
@@ -151,6 +151,16 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
   lifetime.onDispose(destroy);
   const occlusion = labelOcclusionFor(host.ownerDocument);
   lifetime.onDispose(occlusion.subscribe(() => refresh()));
+  // The catalogue (5.9 MB for Mars) loads on the first interaction, and typing the next search while a flight passes
+  // this body counts as one. A flight's destination mounts before the camera arrives, so while the flight is under way
+  // the load is held. It runs when the flight ends with this body on screen (it landed, or the visitor stopped it here);
+  // a flight another navigation replaces drops it, so a body the camera only passes never fetches it. Explicit requests
+  // (search, selection) load at once.
+  let navigationInFlight = false, loadHeld = false;
+  function requestLoading() {
+    if (navigationInFlight) { loadHeld = true; return; }
+    startLoading();
+  }
   function startLoading() {
     if (destroyed || loadStarted) return;
     loadStarted = true;
@@ -407,6 +417,13 @@ export function mountSurfaceFeatureLabels({ host, plan, objectId, target, scene,
     },
     catalog: () => catalog,
     loaded: () => { startLoading(); return loadedCatalog; },
+    setNavigationInFlight(active: boolean, landed = true) {
+      navigationInFlight = active;
+      if (active) return;
+      const held = loadHeld;
+      loadHeld = false;
+      if (held && landed) startLoading();
+    },
     async select(id: string) {
       startLoading(); await loadedCatalog;
       if (destroyed) return { completed: false };
