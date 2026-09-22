@@ -39,7 +39,13 @@ wrong control records the wrong moment.
 
 `--compare <capture dir>` pixelmatches each screenshot against the one with the same name in an earlier capture and
 writes `<name>.diff.png`; a change that should not show must report 0 differing pixels. Antialiased pixels count, and
-the status-bar clock is pinned to 9:41 during every capture so it never differs.
+the status-bar clock is pinned to 9:41 during every capture so it never differs. Take a screenshot only once the view
+has settled: one taken mid-flight differs with the flight's timing.
+
+The native trace records only the simulator's web content process holding the page (`--native page`, the default).
+`--native all` records every process on the Mac, for compositor and GPU questions; its trace is several times larger and
+its export alone takes about 14 s. `--native off` skips it. A recording that fails to stop within 30 s is killed and
+the report says so.
 
 For JavaScript names, build with source maps: `CSSEARTH_PERFORMANCE_SOURCEMAPS=1 pnpm build:renderer`, then
 `astro build --mode performance`, and pass that output as `--dist`. Output goes to

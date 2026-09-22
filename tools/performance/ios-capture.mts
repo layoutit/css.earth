@@ -4,7 +4,9 @@
 //   node tools/performance/ios-capture.mts --name saturn-flight --steps steps.json [--open <url>] [--dist dist] [--udid <udid>]
 //   node tools/performance/ios-capture.mts --name hand-drag --seconds 15        (record while someone uses the app)
 //
-// Native side: an Instruments Time Profiler trace of every process (`xcrun xctrace`), summarised for Safari's web content
+// Native side: an Instruments Time Profiler trace (`xcrun xctrace`) of the simulator's web content process holding the page
+// (`--native page`, the default), of every process on the Mac (`--native all`, for compositor and GPU questions) or none
+// (`--native off`), summarised for Safari's web content
 // process. Page side, through Safari's Web Inspector (`ios_webkit_debug_proxy`): JavaScript samples for the page and each
 // worker, named through the build's source maps; timeline records and rendering frames; CPU per thread; memory by
 // category, sampled after collection before and after the moment; console messages and network requests.
@@ -489,6 +491,41 @@ async function compareScreenshots(out: string, baseline: string, steps: readonly
   return { baseline: relative(root, baseline), screenshots };
 }
 
+// ---- Native trace ---------------------------------------------------------------------------------------------------
+
+function nativeMode(value: string) {
+  if (value !== 'page' && value !== 'all' && value !== 'off') throw new TypeError('--native is page, all or off.');
+  return value;
+}
+
+/** The simulator's web content process holding the page: the largest of Safari's in the simulator runtime. Recording only
+ * it keeps the trace a fraction of an every-process one, whose export alone took 14 s. */
+async function pageProcess(): Promise<number> {
+  const { stdout } = await run('ps', ['-Ao', 'pid=,rss=,args=']);
+  const candidates = stdout.split('\n').map(line => /^\s*(\d+)\s+(\d+)\s+(.*)$/u.exec(line))
+    .filter((match): match is RegExpExecArray => match !== null && match[3]!.includes('CoreSimulator') && match[3]!.includes('WebKit.WebContent'))
+    .map(match => ({ pid: Number(match[1]), rss: Number(match[2]) })).sort((a, b) => b.rss - a.rss);
+  if (!candidates[0]) throw new Error('No web content process runs in the simulator.');
+  return candidates[0].pid;
+}
+
+/** Stops a recording; xctrace has hung finalising, so after 30 s it is killed and the capture reports no native trace. */
+async function stopRecording(xctrace: ChildProcess): Promise<boolean> {
+  if (xctrace.exitCode !== null) return true;
+  const exited = new Promise<boolean>(done => xctrace.once('exit', () => done(true)));
+  xctrace.kill('SIGINT');
+  const stopped = await Promise.race([exited, wait(30_000).then(() => false)]);
+  if (!stopped) { xctrace.kill('SIGKILL'); await exited; }
+  return stopped;
+}
+
+async function exportTimeProfile(native: string): Promise<ReturnType<typeof summariseTimeProfile> | { error: string }> {
+  try {
+    const { stdout } = await run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 });
+    return summariseTimeProfile(stdout);
+  } catch (error) { return { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
+}
+
 // ---- Capture -------------------------------------------------------------------------------------------------------
 
 function options(args: readonly string[]) {
@@ -499,7 +536,7 @@ function options(args: readonly string[]) {
   if (!stepsFile === !seconds) throw new TypeError('Pass either --steps <file.json> or --seconds <n>.');
   return { name, stepsFile, seconds: seconds === null ? null : requireFiniteNumber(Number(seconds), '--seconds'),
     dist: value('--dist') ?? 'dist', udid: value('--udid'), port: Number(value('--port') ?? 9222), profile: value('--template') ?? 'Time Profiler',
-    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare') };
+    open: value('--open'), settle: Number(value('--settle') ?? 12), noCache: args.includes('--no-cache'), compare: value('--compare'), native: nativeMode(value('--native') ?? 'page') };
 }
 
 export async function captureIosMoment(args: readonly string[]) {
@@ -543,11 +580,12 @@ export async function captureIosMoment(args: readonly string[]) {
 
   // Instruments first, so the native trace covers the whole moment.
   const native = resolve(out, 'native.trace');
-  const xctrace = spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, '--all-processes', '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] });
+  const target = option.native === 'all' ? ['--all-processes'] : option.native === 'page' ? ['--attach', String(await pageProcess())] : null;
+  const xctrace = target ? spawn('xcrun', ['xctrace', 'record', '--template', option.profile, '--device', udid, ...target, '--output', native, '--no-prompt'], { stdio: ['ignore', 'pipe', 'pipe'] }) : null;
   const xctraceLog: string[] = [];
-  xctrace.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
-  xctrace.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
-  for (let attempt = 0; attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
+  xctrace?.stdout?.on('data', chunk => xctraceLog.push(String(chunk)));
+  xctrace?.stderr?.on('data', chunk => xctraceLog.push(String(chunk)));
+  for (let attempt = 0; xctrace && attempt < 60 && !xctraceLog.join('').includes('Starting recording'); attempt++) await wait(250);
 
   await session.send('ScriptProfiler.startTracking', { includeSamples: true });
   for (const worker of workers.keys()) await session.send('ScriptProfiler.startTracking', { includeSamples: true }, worker);
@@ -562,8 +600,10 @@ export async function captureIosMoment(args: readonly string[]) {
   await session.send('CPUProfiler.stopTracking');
   await session.send('ScriptProfiler.stopTracking');
   for (const worker of workers.keys()) await session.send('ScriptProfiler.stopTracking', {}, worker);
-  xctrace.kill('SIGINT');
-  await new Promise(done => xctrace.once('exit', done));
+  const recorded = xctrace ? await stopRecording(xctrace) : false;
+  // The export runs while the page side is read.
+  const nativeExport = !xctrace ? Promise.resolve({ error: 'Not recorded (--native off).' })
+    : recorded ? exportTimeProfile(native) : Promise.resolve({ error: 'xctrace did not finish its recording within 30 s.' });
   await wait(1500);
   const moment = events.slice(recordingStart);
   const layers = await layerTree(session).catch(error => ({ error: error instanceof Error ? error.message : String(error) }));
@@ -609,11 +649,7 @@ export async function captureIosMoment(args: readonly string[]) {
   const requests = [...responses.values()];
 
   // Native side.
-  let nativeSummary: ReturnType<typeof summariseTimeProfile> | { error: string };
-  try {
-    const { stdout } = await run('xcrun', ['xctrace', 'export', '--input', native, '--xpath', '/trace-toc/run[@number="1"]/data/table[@schema="time-profile"]'], { maxBuffer: 2 ** 31 });
-    nativeSummary = summariseTimeProfile(stdout);
-  } catch (error) { nativeSummary = { error: error instanceof Error ? error.message.slice(0, 500) : String(error) }; }
+  const nativeSummary = await nativeExport;
 
   const pixels = option.compare ? await compareScreenshots(out, resolve(option.compare), steps) : null;
   const report = {
