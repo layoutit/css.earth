@@ -104,7 +104,8 @@ export async function planAccess(root: string, observation: DiscoveredObservatio
   const snapshotFile = resolve(evidenceDirectory, `${digest(snapshot)}.snapshot.json`);
   await writeFile(snapshotFile, canonical(snapshot));
   const snapshotPin = { path: snapshotFile, ...await sha256File(snapshotFile) };
-  if (observation.target.status !== 'confirmed') return { products, issues: ['The archive record has no confirmed target association.'] };
+  if (observation.target.status !== 'confirmed' && observation.target.status !== 'in-field')
+    return { products, issues: ['The archive record has no confirmed target association and is not in the requested field.'] };
   if (!supportedKind(observation.kind))
     return { products, issues: [`No native profile route for advertised product kind ${observation.kind}.`] };
   const kind = observation.kind;

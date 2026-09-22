@@ -4,7 +4,7 @@
  * with a plain GET. A browser challenge is recorded as `blocked` and never worked around. For HTML full texts, figure
  * captions and table titles that describe maps or list observations are reported verbatim so a reader sees at once
  * whether the paper made the product and which frames it used. */
-import { mkdir, writeFile } from 'node:fs/promises';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { requireArray, requireRecord, requireString } from '../../sources/source-values.mts';
 import { loadTargetCatalogue } from './query.mts';
@@ -41,10 +41,14 @@ export interface PaperReport {
 export interface PaperSearch {
   readonly schema: typeof PAPERS_SCHEMA; readonly target: { readonly id: string; readonly name: string };
   readonly instrument: string | null; readonly query: string; readonly candidates: number; readonly requests: number;
+  /** Host names a work had to mention besides the target: present for a body on a hosted orbit. */
+  readonly hosts?: readonly string[];
   readonly works: readonly PaperReport[];
 }
 export interface PaperSearchOptions {
   readonly target: string; readonly instrument?: string; readonly directory?: string;
+  /** A host name the works must also mention, for a name outside the catalogue; a catalogue body's host is found itself. */
+  readonly host?: string;
   readonly progress?: (line: string) => void; readonly fetcher?: typeof fetch;
 }
 
@@ -106,8 +110,14 @@ export function rankWorks(works: readonly OpenAlexWork[], limit = MAX_WORKS): Op
     || order(right.relevance) - order(left.relevance) || order(right.year) - order(left.year)).slice(0, limit);
 }
 
-export function openAlexQuery(name: string, instrument?: string): string {
-  const search = [name, instrument].filter((part): part is string => Boolean(part)).join(' ').replace(/[,:|]/gu, ' ');
+/** Filter syntax (`,` `:` `|`) and the `*` wildcard, which OpenAlex rejects with HTTP 400 ("Sagittarius A*"), become spaces. */
+const searchText = (value: string): string => value.replace(/[,:|*"()]/gu, ' ').replace(/\s+/gu, ' ').trim();
+/** With host names, the search is boolean: the body and any one host name, so "S2" means the star at Sgr A*. */
+export function openAlexQuery(name: string, instrument?: string, hosts: readonly string[] = []): string {
+  const phrases = [...new Set(hosts.map(searchText).filter(Boolean))];
+  const search = phrases.length
+    ? [searchText(name), `(${phrases.map(phrase => `"${phrase}"`).join(' OR ')})`, ...instrument ? [searchText(instrument)] : []].join(' AND ')
+    : [name, instrument].filter((part): part is string => Boolean(part)).join(' ').replace(/[,:|*]/gu, ' ');
   const parameters = new URLSearchParams({
     filter: `title_and_abstract.search:${search},type:article|review|preprint|letter`,
     'per-page': String(CANDIDATE_PAGE),
@@ -241,21 +251,46 @@ async function readFullText(url: string, budget: Budget, fetcher: typeof fetch):
   return { access: { status: 'fetchable', reason: 'plain GET returned HTML', ...common }, html: body };
 }
 
-const displayName = (target: string, catalogue: Awaited<ReturnType<typeof loadTargetCatalogue>>): { readonly id: string; readonly name: string } => {
+/**
+ * The names of a hosted body's host: its body record's `physical.parent` when the record carries a `hostedOrbit`, so a short
+ * name such as "S2" is searched as the star orbiting Sgr A* rather than the cell line. Moons and planets keep a plain search.
+ */
+export async function hostNames(root: string, id: string, catalogue: Awaited<ReturnType<typeof loadTargetCatalogue>>): Promise<readonly string[]> {
+  const path = resolve(root, 'packages/astronomy/data/bodies', `${id}.json`);
+  const text = await readFile(path, 'utf8').catch((error: unknown) => {
+    if (error instanceof Error && 'code' in error && error.code === 'ENOENT') return undefined;
+    throw error;
+  });
+  if (text === undefined) return [];
+  const record = requireRecord(JSON.parse(text), `${id} body record`);
+  if (record.hostedOrbit === undefined) return [];
+  const parent = requireString(requireRecord(record.physical, `${id} physical`).parent, `${id} parent`);
+  const host = catalogue.find(entry => entry.id === parent);
+  if (!host) throw new TypeError(`${id}: host ${parent} is not in the target catalogue.`);
+  return [host.name, ...host.aliases];
+}
+
+/** A catalogue body is searched by its catalogue name; any other name is searched as written. The literature does not need a
+ * package, or even a SIMBAD identifier, to name a star ("S301"). */
+export const displayName = (target: string, catalogue: Awaited<ReturnType<typeof loadTargetCatalogue>>): { readonly id: string; readonly name: string } => {
   const resolution = resolveTarget(target, catalogue);
   if (resolution.status === 'resolved') return resolution.canonical;
   if (resolution.status === 'ambiguous') throw new TypeError(`Target is ambiguous: ${resolution.candidates.map(candidate => candidate.id).join(', ')}.`);
-  throw new TypeError(`Target is unknown.${resolution.suggestions.length ? ` Suggestions: ${resolution.suggestions.map(suggestion => suggestion.id).join(', ')}.` : ''}`);
+  const name = target.trim();
+  if (!name) throw new TypeError('Papers requires a target name.');
+  return { id: name, name };
 };
 
 export async function searchPapers(root: string, options: PaperSearchOptions): Promise<PaperSearch> {
   const fetcher = options.fetcher ?? fetch, progress = options.progress ?? (() => undefined), budget: Budget = { used: 0 };
-  const target = displayName(options.target, await loadTargetCatalogue(root)), instrument = options.instrument?.trim() || null;
-  const query = openAlexQuery(target.name, instrument ?? undefined);
+  const catalogue = await loadTargetCatalogue(root), target = displayName(options.target, catalogue), instrument = options.instrument?.trim() || null;
+  const hosts = options.host?.trim() ? [options.host.trim()] : await hostNames(root, target.id, catalogue);
+  const query = openAlexQuery(target.name, instrument ?? undefined, hosts);
   progress(`Searching OpenAlex for ${target.name}${instrument ? ` with ${instrument}` : ''}…`);
   const response = await politeFetch(query, budget, fetcher, 'application/json');
   if (!response.ok) throw new Error(`OpenAlex returned HTTP ${response.status}.`);
-  const candidates = parseOpenAlexResponse(await response.json()).filter(work => mentions(work, instrument ? [target.name, instrument] : [target.name]));
+  const candidates = parseOpenAlexResponse(await response.json()).filter(work => mentions(work, instrument ? [target.name, instrument] : [target.name])
+    && (!hosts.length || hosts.some(host => mentions(work, [host]))));
   const ranked = rankWorks(candidates);
   if (options.directory) await mkdir(resolve(options.directory, 'fulltext'), { recursive: true });
   const works: PaperReport[] = [];
@@ -276,13 +311,13 @@ export async function searchPapers(root: string, options: PaperSearchOptions): P
   const scored = works.map((work, index) => ({ work, index, score: evidenceScore(work, target.name, instrument) }))
     .sort((left, right) => right.score - left.score || left.index - right.index)
     .map(({ work, score }, index) => ({ ...work, rank: index + 1, evidence: score }));
-  const result: PaperSearch = { schema: PAPERS_SCHEMA, target, instrument, query, candidates: candidates.length, requests: budget.used, works: scored };
+  const result: PaperSearch = { schema: PAPERS_SCHEMA, target, instrument, ...hosts.length ? { hosts } : {}, query, candidates: candidates.length, requests: budget.used, works: scored };
   if (options.directory) await writeFile(resolve(options.directory, 'papers.json'), `${JSON.stringify(result, null, 2)}\n`);
   return result;
 }
 
 export function formatPapers(result: PaperSearch, directory?: string): string {
-  const lines = [`${result.target.name}${result.instrument ? ` · ${result.instrument}` : ''} · ${result.works.length} of ${result.candidates} matching works · ${result.requests} requests`, ''];
+  const lines = [`${result.target.name}${result.hosts ? ` at ${result.hosts[0]}` : ''}${result.instrument ? ` · ${result.instrument}` : ''} · ${result.works.length} of ${result.candidates} matching works · ${result.requests} requests`, ''];
   for (const work of result.works) {
     const authors = `${work.authors.join(', ')}${work.moreAuthors ? ' et al.' : ''}`;
     lines.push(`${work.rank}. ${work.title} (${work.year ?? 'year unknown'})${work.evidence ? ` · evidence ${work.evidence}` : ''}`, `   ${authors}`,

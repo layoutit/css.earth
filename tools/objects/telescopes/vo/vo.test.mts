@@ -9,7 +9,7 @@ import { resolve } from 'node:path';
 import { createServer } from 'node:http';
 import { astroquery, VoAccessError } from '../../astronomy-packages/client.mts';
 import { canonical, digest, parseMetadata, parseLimits, parseRegion, recordKey, acquisitionKey, type DiscoverySnapshot, type MetadataResponse, type Resource } from './contracts.mts';
-import { associateTarget, normalizeSnapshot, SERVICES, targetQuery } from './discovery.mts';
+import { associateTarget, fieldAssociation, normalizeSnapshot, SERVICES, targetQuery } from './discovery.mts';
 import { mediaType, planAccess, sodaParameters } from './access.mts';
 
 const root = resolve(import.meta.dirname, '../../../..'), fixtures = resolve(root, 'tests/fixtures/telescope-vo');
@@ -66,6 +66,31 @@ test('target association respects catalogue class collisions and does not equate
   assert.notEqual(associateTarget('Io', 'asteroid', moon, [moon, asteroid]).status, 'confirmed');
   assert.equal(associateTarget('Io#Europa', 'satellite', moon, [moon]).status, 'ambiguous');
   assert.equal(associateTarget('Jupiter', null, moon, [moon]).status, 'unmatched');
+});
+test('a region query adds the footprint clause to the name search on ObsCore only', () => {
+  const region = { target: 'betelgeuse', region: circle };
+  const obscore = targetQuery(profile, ['Betelgeuse'], 50, region);
+  assert.match(obscore, /\(target_name IN \('Betelgeuse'\) OR 1=INTERSECTS\(CIRCLE\('ICRS',88\.792938,7\.407063,[0-9.e-]+\),s_region\)\)/u);
+  const epn = SERVICES.find(service => service.model === 'epn-tap-2.0')!;
+  assert.doesNotMatch(targetQuery(epn, ['Betelgeuse'], 50, region), /INTERSECTS/u);
+  assert.doesNotMatch(targetQuery(profile, ['Betelgeuse'], 50, { target: 'betelgeuse' }), /INTERSECTS/u);
+});
+test('only an unmatched record selected by a region is in the field, and it is never confirmed', () => {
+  const unmatched = associateTarget('GC_IRS7', null, target, [target]), confirmed = associateTarget('Betelgeuse', 'star', target, [target]);
+  const inField = fieldAssociation(unmatched, 'GC_IRS7', circle);
+  assert.equal(inField.status, 'in-field'); assert.match(inField.reason, /"GC_IRS7"/u); assert.match(inField.reason, /not a target identity/u);
+  assert.equal(fieldAssociation(unmatched, 'GC_IRS7', undefined).status, 'unmatched');
+  assert.equal(fieldAssociation(confirmed, 'Betelgeuse', circle).status, 'confirmed');
+  const ambiguous = associateTarget('Io#Europa', null, target, [target]);
+  assert.equal(fieldAssociation(ambiguous, 'Io#Europa', circle).status, 'ambiguous');
+});
+test('normalization marks field rows only when the saved query selected by that region', async () => {
+  const response = await almaPromise(), other = { id: 'other', names: ['not an archive name'] };
+  const regionRequest = { ...request, region: circle }, query = targetQuery(profile, other.names, 2, regionRequest);
+  const selected = normalizeSnapshot({ ...snapshot(response), request: regionRequest, query }, profile, other, [other])[0]!;
+  assert.equal(selected.target.status, 'in-field');
+  const legacy = normalizeSnapshot({ ...snapshot(response), request: regionRequest }, profile, other, [other])[0]!;
+  assert.equal(legacy.target.status, 'unmatched', 'a saved query without the footprint clause selected nothing by region');
 });
 test('normalization retains unknown time and malformed MIME without promoting archive flags', async () => {
   const response = await almaPromise(), saved = snapshot(response), row = response.rows[0]!;
