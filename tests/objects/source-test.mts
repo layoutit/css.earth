@@ -26,9 +26,10 @@ export function missingSourceReason(error: unknown, objectId: string | null = nu
   if (code === 'ENOENT' && path && path.startsWith(objects)) {
     const [id, directory] = path.slice(objects.length).split(sep);
     if (directory === 'source' && (objectId === null || id === objectId)) return `${id}: ${path.slice(root.length + 1)} is not restored; run ${RESTORE(id)}`;
+    if (directory === 'prepared') return `${id}: ${path.slice(root.length + 1)} is not restored; run node tools/assets/setup.mts --object=${id}`;
   }
   if (code === 'ENOENT' && path && path.startsWith(local)) return `${path.slice(root.length + 1)} is not restored; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
-  if (/manifest coverage failed|source is missing|is not restored|not installed/u.test(error.message)) return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
+  if (/manifest coverage failed|source is missing|is not restored|not installed|toolchain is not installed/u.test(error.message)) return `${error.message.split('\n')[0]}; run ${objectId ? RESTORE(objectId) : 'pnpm setup:sources'}`;
   return null;
 }
 

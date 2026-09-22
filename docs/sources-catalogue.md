@@ -96,7 +96,7 @@ For source identities, bindings or catalogue code, run:
 
 ```sh
 pnpm install
-pnpm test:sources
+pnpm test:node
 ```
 
 This prepares the catalogues and checks identities, bindings, product dependencies,
