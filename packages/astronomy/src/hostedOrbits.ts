@@ -28,6 +28,15 @@ export interface HostedOrbit {
   readonly transitTimeBmjdTdb: number
   /** Position angle of the ascending node, degrees east of celestial north. */
   readonly ascendingNodePositionAngleDegrees: number
+  /**
+   * The published orbit this planet is predicted from, named as the prediction tool knows it. Tools call that owner for
+   * predicted positions and their uncertainty; the runtime never reads this.
+   */
+  readonly prediction?: {
+    readonly tool: 'whereistheplanet'
+    readonly planet: string
+    readonly reference: string
+  }
   readonly sources: {
     readonly period: string
     readonly shape: string

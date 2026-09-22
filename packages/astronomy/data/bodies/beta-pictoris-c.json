@@ -19,6 +19,11 @@
     "epochDefinition": "periastron",
     "transitTimeBmjdTdb": 59884.0,
     "ascendingNodePositionAngleDegrees": 31.06,
+    "prediction": {
+      "tool": "whereistheplanet",
+      "planet": "betapicc",
+      "reference": "Lacour et al. (2021, A&A 654, L2; arXiv:2109.10671), the RV + b and c astrometry fit, as distributed with whereistheplanet (Wang et al. 2021)."
+    },
     "sources": {
       "period": "Lacour et al. (2021, Section 5 and abstract): 1221 +/- 15 days.",
       "shape": "Lacour et al. (2021, Table 2, RV + b and c astrometry): a 2.68 +/- 0.02 au at their parallax 51.44 mas, kept as the angular size 137.86 mas and placed at the Gaia DR3 distance: 2.707 au, 374.62 radii of the star's 1,080,920 km; inclination 88.95 +0.09/-0.10 degrees.",

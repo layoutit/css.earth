@@ -421,6 +421,38 @@ A record carries no clock time, so the same run writes the same bytes. The run t
 what it actually used; nothing later rewrites those facts. Evidence is the one thing added afterwards, by the stage that did
 the checking, through `addProductEvidence`: it refuses unless the files on disk are still the ones the record pins.
 
+## Sky association
+
+A measured position on the sky raises one question: which body is it? The answer needs the bodies of a system placed at the
+observation's epoch, with their uncertainty, and a distance from the measurement to each one. This repository owns neither
+half of that science, and calls the tools that do.
+
+```sh
+telescope candidates beta-pictoris --epoch 2026-05-02T12:28:00 --out candidates
+telescope associate measurements.csv --system beta-pictoris --out association
+```
+
+`candidates` asks [whereistheplanet](https://github.com/semaphoreP/whereistheplanet) for each hosted planet of a star. That
+tool propagates the planet's published orbit posterior and reports the median offset from the star and its standard
+deviation per axis. Every planet names its own key in that tool in its orbit record, beside the published orbit the record's
+elements come from; a body whose record names none is left out of the candidates and listed as excluded rather than guessed.
+The orbit drawn behind each planet is the site's own display model of the same published orbit, not the posterior.
+
+`associate` reads relative astrometry in the [orbitize!](https://orbitize.readthedocs.io) CSV layout, which is how
+direct-imaging astrometry is published and fitted: `epoch` in MJD, `raoff` and `decoff` in mas from the host star, their
+errors and `radec_corr`. For every row it asks for the candidates at that row's epoch, and SciPy measures the Mahalanobis
+distance R from the measurement to each candidate under the two covariances summed, the chi-square tail p of R in two
+dimensions, and the one-sided normal σ with the same tail. Where a double cannot hold p, the record keeps SciPy's log of it
+and leaves σ null.
+
+The chart is a view of that result: the star at the origin, each candidate as a disc carrying its letter with its prediction
+ellipses, the measurement with its 1σ, 2σ and 3σ ellipses, orbits behind them, and east to the left, as
+[Ortiz Ceballos, Berger and Cendes (2026)](https://arxiv.org/abs/2609.16720) print it for the radio detection of β Pictoris b.
+
+What it does not do: it compares offsets from a host star, and converts no absolute sky position into one. whereistheplanet
+reports a spread per axis and no correlation, so a candidate's ellipse has none. The verdict is a distance, not a detection
+claim: a measurement can sit closest to a body it does not belong to.
+
 ## Two capabilities, never one
 
 What a repository can do with an instrument is two questions, and they have different answers:

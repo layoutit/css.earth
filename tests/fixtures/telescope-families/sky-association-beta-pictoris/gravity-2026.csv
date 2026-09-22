@@ -1,0 +1,7 @@
+# GRAVITY relative astrometry of beta Pictoris b and c, Table 1 of arXiv:2609.02708 (Hill sphere transits of beta Pictoris c).
+# Offsets from the star in mas; radec_corr is the paper's rho. Epochs are after the Lacour et al. 2021 orbit fit.
+id,object,epoch,raoff,raoff_err,decoff,decoff_err,radec_corr
+b-2022-01-25,beta-pictoris-b,59604.160,256.753,0.056,422.165,0.141,-0.499
+b-2022-08-18,beta-pictoris-b,59809.384,273.776,0.067,447.813,0.060,-0.770
+c-2022-08-18,beta-pictoris-c,59809.391,49.773,0.401,81.693,0.330,-0.717
+c-2025-09-05,beta-pictoris-c,60923.380,57.635,0.094,97.885,0.080,-0.227

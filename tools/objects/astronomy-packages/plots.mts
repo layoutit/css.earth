@@ -150,13 +150,21 @@ export type FigureBackground='transparent'|'opaque';
 export interface FigureOptions {readonly figureBackground?:FigureBackground}
 export function figureBackground(value:unknown):FigureBackground{if(value!=='transparent'&&value!=='opaque')throw new TypeError('figureBackground must be transparent or opaque.');return value;}
 /** A point with an optional 2×2 covariance packed as [xx, xy, yy] in the squared axis unit. */
-export interface EllipsePoint {readonly x:number;readonly y:number;readonly label?:string;readonly covariance?:readonly [number,number,number]}
+export interface EllipsePoint {readonly x:number;readonly y:number;readonly label?:string;readonly covariance?:readonly [number,number,number];
+  /** A measured position is drawn as a filled point with bold ellipses; a candidate as an open circle with thin ellipses. */
+  readonly role?:'measurement'|'candidate';
+  /** Short text drawn inside a candidate's disc in the publication layout, such as a planet's letter. */
+  readonly mark?:string}
+/** A polyline drawn behind the points, such as a predicted orbit; it never sets the plot limits. */
+export interface PreviewTrack {readonly label:string;readonly points:readonly (readonly [number,number])[]}
 /** One drawn contour: k times the 1σ covariance ellipse, full axis lengths, major-axis angle in degrees from +x toward +y. */
 export interface DrawnEllipse {readonly label:string;readonly sigma:number;readonly x:number;readonly y:number;readonly width:number;readonly height:number;readonly angleDeg:number}
 export type NumericPreview =
   | { readonly kind:'series'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly series:readonly {readonly label:string;readonly x:readonly number[];readonly y:readonly number[];readonly uncertainty?:readonly (number|null)[];readonly upperLimit?:readonly boolean[]}[] }
   | { readonly kind:'scatter'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly {readonly x:number;readonly y:number;readonly label?:string}[] }
-  | { readonly kind:'scatter-ellipses'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly EllipsePoint[]; readonly origin?:{readonly label:string;readonly covariance?:readonly [number,number,number]}; readonly sigmaLevels?:readonly number[]; readonly invertX?:boolean }
+  | { readonly kind:'scatter-ellipses'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly points:readonly EllipsePoint[]; readonly origin?:{readonly label:string;readonly covariance?:readonly [number,number,number]}; readonly sigmaLevels?:readonly number[]; readonly invertX?:boolean; readonly tracks?:readonly PreviewTrack[];
+      /** 'publication' draws the layout astrometry papers print; the default is the compact preview. */
+      readonly layout?:'preview'|'publication' }
   | { readonly kind:'histogram'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly edges:readonly number[]; readonly counts:readonly number[] }
   | { readonly kind:'raster'; readonly title:string; readonly xLabel:string; readonly yLabel:string; readonly width:number; readonly height:number; readonly values:readonly number[]; readonly colorLabel:string };
 
@@ -173,7 +181,64 @@ import matplotlib.pyplot as plt
 r=json.load(sys.stdin); d=r['preview']; out=Path(r['directory']); background=r['figureBackground']
 if background not in ('transparent','opaque'): raise ValueError('figureBackground must be transparent or opaque')
 out.mkdir(parents=True,exist_ok=True)
-kind=d['kind']; fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
+
+def publication(d):
+ # The layout astrometry papers print: square equal-scale axes, a heavy frame with inward ticks on every side, no title,
+ # the reference as a star, candidates as dark discs carrying a short mark, measurements with k-sigma ellipses labelled
+ # beside them, and a frameless legend.
+ from matplotlib.patches import Ellipse
+ from matplotlib.lines import Line2D
+ from matplotlib.ticker import AutoMinorLocator
+ # One fixed page: a 600 pt figure with a square 520 pt axes box, the size a single-column astrometry figure prints at.
+ W,H,L,B,AW,AH=640.,620.,108.,88.,510.,510.
+ plt.rcParams.update({'font.family':'DejaVu Sans','mathtext.fontset':'dejavusans'})
+ fig=plt.figure(figsize=(W/72,H/72)); fig.patch.set_facecolor('white'); ax=fig.add_axes([L/W,B/H,AW/W,AH/H])
+ levels=np.asarray(d.get('sigmaLevels',[1,2,3]),dtype=float); alphas=[1,.55,.3,.2,.15][:len(levels)]
+ navy='#000080'; handles=[]; labels=[]
+ def half_width(c,k): det=c[0]*c[2]-c[1]**2; return k*np.sqrt(det/c[2])
+ def ellipse(x,y,c,k,**kw):
+  c=np.asarray(c,dtype=float)
+  if c.shape!=(3,) or not np.isfinite(c).all() or c[0]<=0 or c[2]<=0 or c[0]*c[2]-c[1]**2<=0: raise ValueError('Covariance is not a positive-definite 2x2 block')
+  w,v=np.linalg.eigh(np.array([[c[0],c[1]],[c[1],c[2]]])); ang=float(np.degrees(np.arctan2(v[1,1],v[0,1])))
+  e=Ellipse((x,y),2*k*np.sqrt(w[1]),2*k*np.sqrt(w[0]),angle=ang,fill=False,**kw); ax.add_patch(e)
+  drawn.append({'label':'','sigma':float(k),'x':x,'y':y,'width':float(2*k*np.sqrt(w[1])),'height':float(2*k*np.sqrt(w[0])),'angleDeg':ang})
+ for t in d.get('tracks',[]):
+  q=np.asarray(t['points'],dtype=float); ax.plot(q[:,0],q[:,1],lw=1,color='0.6',zorder=1)
+ origin=d.get('origin')
+ if origin is not None:
+  ax.axhline(0,ls=':',lw=1.5,color='k',zorder=1); ax.axvline(0,ls=':',lw=1.5,color='k',zorder=1)
+  ax.plot([0],[0],ls='',marker='*',ms=19.7,mfc='#6baed6',mec='k',mew=1,zorder=6)
+ for q in d['points']:
+  x,y=float(q['x']),float(q['y'])
+  if q.get('role')=='candidate':
+   if 'covariance' in q:
+    for k,a in zip(levels,alphas): ellipse(x,y,q['covariance'],k,lw=1,color='#800000',alpha=a*.8,zorder=3)
+   ax.plot([x],[y],ls='',marker='o',ms=17.32-1.3,mfc='#800000',mec='k',mew=1.3,zorder=7)
+   if q.get('mark'): ax.text(x,y,q['mark'],ha='center',va='center',fontsize=11,fontweight='bold',color='white',zorder=8)
+  else:
+   if 'covariance' in q:
+    c=q['covariance']
+    for k,a in zip(levels,alphas):
+     ellipse(x,y,c,k,lw=2,color=navy,alpha=a,zorder=4)
+     labels.append((k,a,x-half_width(c,k),y,2*half_width(c,k)))
+   ax.plot([x],[y],ls='',marker='o',ms=6.69,mfc=navy,mec='white',mew=.8,zorder=9)
+   handles.append(Line2D([],[],ls='',marker='o',ms=6.69,mfc=navy,mec=navy,label=q.get('label','measured position')))
+ ax.set_aspect('equal',adjustable='datalim'); ax.autoscale_view()
+ if d.get('invertX'): ax.invert_xaxis()
+ span=max(abs(ax.get_xlim()[1]-ax.get_xlim()[0]),1e-9)
+ for k,a,lx,ly,width in labels:
+  # A contour narrower than a fiftieth of the frame has no room for its own label; the legend still names the levels.
+  if width>span/50: ax.annotate(f'{k:g}$\\sigma$',(lx,ly),xytext=(4,0),textcoords='offset points',fontsize=14,color=navy,alpha=a,va='center',ha='left')
+ for side in ax.spines.values(): side.set_linewidth(4)
+ ax.xaxis.set_minor_locator(AutoMinorLocator(4)); ax.yaxis.set_minor_locator(AutoMinorLocator(4))
+ ax.tick_params(which='major',direction='in',length=14,width=.8,top=True,right=True,labelsize=18,pad=8)
+ ax.tick_params(which='minor',direction='in',length=7,width=.6,top=True,right=True)
+ ax.set_xlabel(d['xLabel'],fontsize=22); ax.set_ylabel(d['yLabel'],fontsize=22)
+ if handles: ax.legend(handles=handles,frameon=False,fontsize=15,loc='upper left')
+ return fig,ax
+kind=d['kind']; drawn=[]; published=kind=='scatter-ellipses' and d.get('layout')=='publication'
+if published: fig,ax=publication(d)
+else: fig,ax=plt.subplots(figsize=(8,5),layout='constrained')
 if kind=='series':
  for s in d['series']:
   x=np.asarray(s['x'],dtype=float); y=np.asarray(s['y'],dtype=float)
@@ -192,19 +257,20 @@ elif kind=='scatter':
  p=d['points']; x=np.asarray([q['x'] for q in p],dtype=float); y=np.asarray([q['y'] for q in p],dtype=float)
  if x.shape!=y.shape or not np.isfinite(x).all() or not np.isfinite(y).all(): raise ValueError('Scatter coordinates are invalid')
  ax.scatter(x,y,s=16,alpha=.8)
+elif published: pass
 elif kind=='scatter-ellipses':
  from matplotlib.patches import Ellipse
  from matplotlib.lines import Line2D
  levels=np.asarray(d.get('sigmaLevels',[1,2,3]),dtype=float)
  if levels.ndim!=1 or not levels.size or not np.isfinite(levels).all() or np.any(levels<=0) or np.any(np.diff(levels)<=0): raise ValueError('Sigma levels must be positive and increasing')
  alphas=np.linspace(1,.35,len(levels))
- def contour(label,x,y,c):
+ def contour(label,x,y,c,role=None):
   c=np.asarray(c,dtype=float)
   if c.shape!=(3,) or not np.isfinite(c).all() or c[0]<=0 or c[2]<=0 or c[0]*c[2]-c[1]**2<=0: raise ValueError('Covariance of '+label+' is not a positive-definite 2x2 block')
   w,v=np.linalg.eigh(np.array([[c[0],c[1]],[c[1],c[2]]])); angle=float(np.degrees(np.arctan2(v[1,1],v[0,1])))
   for k,alpha in zip(levels,alphas):
    width=float(2*k*np.sqrt(w[1])); height=float(2*k*np.sqrt(w[0]))
-   ax.add_patch(Ellipse((x,y),width,height,angle=angle,fill=False,lw=1.2,color='C0',alpha=alpha))
+   ax.add_patch(Ellipse((x,y),width,height,angle=angle,fill=False,lw=.8 if role=='candidate' else 1.2,color='C3' if role=='candidate' else 'C0',alpha=alpha))
    drawn.append({'label':label,'sigma':float(k),'x':x,'y':y,'width':width,'height':height,'angleDeg':angle})
  drawn=[]; p=d['points']; x=np.asarray([q['x'] for q in p],dtype=float); y=np.asarray([q['y'] for q in p],dtype=float)
  if x.shape!=y.shape or not np.isfinite(x).all() or not np.isfinite(y).all(): raise ValueError('Scatter coordinates are invalid')
@@ -213,15 +279,33 @@ elif kind=='scatter-ellipses':
   ax.axhline(0,ls=':',lw=.8,color='0.45',zorder=1); ax.axvline(0,ls=':',lw=.8,color='0.45',zorder=1)
   if 'covariance' in origin: contour(origin['label'],0.,0.,origin['covariance'])
   ax.scatter([0],[0],marker='*',s=180,color='C1',edgecolors='0.2',linewidths=.6,zorder=4)
-  ax.annotate(origin['label'],(0,0),xytext=(7,-13),textcoords='offset points',fontsize=8)
+  ax.annotate(origin['label'],(0,0),xytext=(-9,-14),textcoords='offset points',fontsize=8,ha='right')
  for q in p:
-  if 'covariance' in q: contour(q.get('label',''),float(q['x']),float(q['y']),q['covariance'])
- ax.scatter(x,y,s=22,color='C3',edgecolors='0.2',linewidths=.6,zorder=4)
+  if 'covariance' in q: contour(q.get('label',''),float(q['x']),float(q['y']),q['covariance'],q.get('role'))
+ roles=np.asarray([q.get('role','') for q in p])
+ cand=roles=='candidate'; meas=roles=='measurement'; plain=~(cand|meas)
+ if cand.any(): ax.scatter(x[cand],y[cand],s=60,facecolors='C3',edgecolors='0.15',linewidths=.8,zorder=4)
+ if meas.any(): ax.scatter(x[meas],y[meas],s=26,color='C0',edgecolors='0.15',linewidths=.6,zorder=5)
+ if plain.any(): ax.scatter(x[plain],y[plain],s=22,color='C3',edgecolors='0.2',linewidths=.6,zorder=4)
  for q in p:
-  if q.get('label'): ax.annotate(q['label'],(q['x'],q['y']),xytext=(6,5),textcoords='offset points',fontsize=8)
+  if q.get('label'):
+   below=q.get('role')=='measurement'
+   ax.annotate(q['label'],(q['x'],q['y']),xytext=(-8,-12) if below else (8,6),textcoords='offset points',fontsize=8,ha='right' if below else 'left',color='C0' if below else '0.1')
  ax.set_aspect('equal',adjustable='datalim')
+ tracks=d.get('tracks',[])
+ if tracks:
+  ax.autoscale_view(); xl,yl=ax.get_xlim(),ax.get_ylim(); pad=.12*max(xl[1]-xl[0],yl[1]-yl[0])
+  for t in tracks:
+   q=np.asarray(t['points'],dtype=float)
+   if q.ndim!=2 or q.shape[1]!=2 or not np.isfinite(q).all(): raise ValueError('Track '+t['label']+' is not a finite list of points')
+   ax.plot(q[:,0],q[:,1],lw=.7,color='0.55',zorder=1)
+  ax.set_xlim(xl[0]-pad,xl[1]+pad); ax.set_ylim(yl[0]-pad,yl[1]+pad)
  if d.get('invertX'): ax.invert_xaxis()
- if drawn: ax.legend(handles=[Line2D([],[],color='C0',alpha=alpha,label=f'{k:g}σ') for k,alpha in zip(levels,alphas)],frameon=False,fontsize=8)
+ handles=[Line2D([],[],color='C0',alpha=alpha,label=f'{k:g}σ') for k,alpha in zip(levels,alphas)] if drawn else []
+ if meas.any(): handles.append(Line2D([],[],ls='',marker='o',ms=5,color='C0',markeredgecolor='0.15',label='measured, with its 1–3σ ellipses'))
+ if cand.any(): handles.append(Line2D([],[],ls='',marker='o',ms=7,color='C3',markeredgecolor='0.15',label='predicted, with ephemeris 1–3σ'))
+ if tracks: handles.append(Line2D([],[],color='0.55',lw=.7,label='predicted orbit'))
+ if handles: ax.legend(handles=handles,frameon=False,fontsize=8,loc='best')
 elif kind=='histogram':
  edges=np.asarray(d['edges'],dtype=float); counts=np.asarray(d['counts'],dtype=float)
  if len(edges)!=len(counts)+1 or not np.isfinite(edges).all() or np.any(np.diff(edges)<=0) or np.any(counts<0): raise ValueError('Histogram bins are invalid')
@@ -232,9 +316,11 @@ elif kind=='raster':
  shown=ax.imshow(np.ma.masked_invalid(values.reshape((height,width))),origin='lower',interpolation='nearest',cmap='viridis')
  fig.colorbar(shown,ax=ax,label=d['colorLabel'])
 else: raise ValueError('Unknown numeric preview kind')
-ax.set_title(d['title'],fontsize=10);ax.set_xlabel(d['xLabel']);ax.set_ylabel(d['yLabel'])
-fig.savefig(out/'preview.png',dpi=160,transparent=background=='transparent',bbox_inches='tight',pad_inches=.12,metadata={'Software':'Astropy / Matplotlib; css.earth telescope family preview'})
-fig.savefig(out/'preview.svg',transparent=background=='transparent',bbox_inches='tight',pad_inches=.12,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope family preview'})
+if not published: ax.set_title(d['title'],fontsize=10);ax.set_xlabel(d['xLabel']);ax.set_ylabel(d['yLabel'])
+tight={} if published else {'bbox_inches':'tight','pad_inches':.12}
+if published and background=='transparent': ax.set_facecolor('none')
+fig.savefig(out/'preview.png',dpi=d.get('canvas',{}).get('dpi',160),transparent=background=='transparent',**tight,metadata={'Software':'Astropy / Matplotlib; css.earth telescope family preview'})
+fig.savefig(out/'preview.svg',transparent=background=='transparent',**tight,metadata={'Date':None,'Creator':'Astropy / Matplotlib; css.earth telescope family preview'})
 plt.close(fig)
 json.dump({'astropy':astropy.__version__,'matplotlib':matplotlib.__version__,'files':['preview.png','preview.svg'],'kind':kind,'figureBackground':background,**({'ellipses':drawn} if kind=='scatter-ellipses' else {})},sys.stdout)
 `;
