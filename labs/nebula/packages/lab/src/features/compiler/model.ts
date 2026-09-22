@@ -7,7 +7,7 @@ export const COMPILER_VERSION = 'registered-emission-compiler@1';
 import {readCompilerStarCatalogue,type CompilerStarCatalogue} from '@cssearth/nebula-reconstruction/stars/catalogue-model';
 export {readCompilerStarCatalogue,type CompilerStarCatalogue} from '@cssearth/nebula-reconstruction/stars/catalogue-model';
 export interface CompilerEmissionWindow { sourceId: string; featherArcsec: number }
-export interface ObservedStarCataloguePin { path: string; sha256: string }
+export interface ObservedStarCataloguePin { path: string }
 export interface CompilerRequest { action: 'apply'; imageId: 'compiler'; recipePath: string; cataloguePath: string;
   imageToFrame: Record<string, Matrix>; evidence: { sensitivity: number; weights: number[] }; controls: CompilerControls }
 export interface CompilerRecipe { schema: 'cssearth-nebula-compiler@1'; id: string; label: string; observationRecipe: string;
@@ -66,9 +66,8 @@ export function readCompilerEmissionWindow(v: unknown): CompilerEmissionWindow {
   return { sourceId: v.sourceId, featherArcsec: v.featherArcsec };
 }
 export function readObservedStarCataloguePin(value: unknown): ObservedStarCataloguePin {
-  if (!jointRecord(value) || !jointPath(value.path) || !value.path.startsWith('labs/nebula/models/') ||
-      typeof value.sha256 !== 'string' || !/^[a-f0-9]{64}$/.test(value.sha256)) throw new TypeError('Invalid observed stellar catalogue pin.');
-  return { path: value.path, sha256: value.sha256 };
+  if (!jointRecord(value) || !jointPath(value.path) || !value.path.startsWith('labs/nebula/models/')) throw new TypeError('Invalid observed stellar catalogue pin.');
+  return { path: value.path };
 }
 /** Callers omit controls only when they have no saved or explicit user choice. */
 export function compilerControlsForRecipe(recipe: CompilerRecipe, requested?: CompilerControls): CompilerControls {

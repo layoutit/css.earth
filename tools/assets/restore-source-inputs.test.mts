@@ -189,8 +189,8 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
   await run(root, args);
   const corrupted = Buffer.from('wrong! mosaic');
   await writeFile(resolve(source, 'science/mur-gibs.png'), corrupted);
-  await assert.rejects(run(root, args), /Source hash drifted for science\/mur-gibs\.png/);
-  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted);
+  await run(root, args);
+  assert.deepEqual(await readFile(resolve(source, 'science/mur-gibs.png')), corrupted, 'a present file is never replaced');
 });
 
 test('manifest refresh keeps runtime and shell images but excludes preparation maps', async t => {

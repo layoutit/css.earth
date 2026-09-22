@@ -7,10 +7,9 @@ const integer = (v: unknown, min: number, max: number) => { const n = number(v, 
 const url = (v: unknown) => { const s = text(v); if (new URL(s).protocol !== 'https:') throw new TypeError('Expected HTTPS source.'); return s; };
 function list<T>(v: unknown, read: (value: unknown) => T, max: number): T[] { if (!Array.isArray(v) || !v.length || v.length > max) throw new TypeError('Invalid molecular evidence list.'); return v.map(read); }
 function pin(v: unknown, allowedPath: (path: string) => boolean): MolecularSourcePin {
-  const p = record(v), sha256 = text(p.sha256), cachePath = text(p.cachePath);
-  if (!/^[a-f0-9]{64}$/.test(sha256) || /^0+$/.test(sha256)) throw new TypeError('Invalid source hash.');
+  const p = record(v), cachePath = text(p.cachePath);
   if (!allowedPath(cachePath) || cachePath.startsWith('/') || /[\\:?#]/.test(cachePath) || cachePath.split('/').some(part => part === '..' || part === '.' || !part)) throw new TypeError('Invalid molecular cache path.');
-  return { url: url(p.url), cachePath, sha256, bytes: integer(p.bytes, 1, 10000000) };
+  return { url: url(p.url), cachePath, bytes: integer(p.bytes, 1, 10000000) };
 }
 function column(v: unknown, expectedUnit: string): MolecularColumn {
   const p = record(v), start = integer(p.start, 1, 512), end = integer(p.end, start, 512);

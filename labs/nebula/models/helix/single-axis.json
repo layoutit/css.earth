@@ -3,7 +3,6 @@
   "id": "helix-single-axis",
   "source": {
     "url": "https://esahubble.org/media/archives/images/original/opo0432b.tif",
-    "sha256": "3dfe0b4a06ff2d57c35324e76975565f253b78302eab7ec5ac4d2d2c47227165",
     "width": 4731,
     "height": 3129,
     "publisher": "https://esahubble.org/images/opo0432b/",
@@ -19,10 +18,8 @@
   "nativeRemoval": {
     "directory": ".local/nebula-lab/research/helix/nox",
     "model": {
-      "path": ".local/open-star-removal/noxGeneratorColor.pb",
-      "sha256": "d54bdca728d1d6db0b3eef41d4187d327909d1ec5cd2a71485bfa9d7924ba546"
-    },
-    "scriptSha256": "5db7c54230ba2032abb361cc2d59ef0e2e42114f27ef2036474c877058a6b752"
+      "path": ".local/open-star-removal/noxGeneratorColor.pb"
+    }
   },
   "grid": {
     "width": 144,
@@ -63,7 +60,6 @@
   },
   "modelReference": {
     "paper": "https://doi.org/10.1086/424621",
-    "pdfSha256": "6f3b712d794030b50812d1d530d03f04e6fabbdd15bd9cb847dc7cebc1e575f4",
     "sections": [
       "3.1",
       "4.6"

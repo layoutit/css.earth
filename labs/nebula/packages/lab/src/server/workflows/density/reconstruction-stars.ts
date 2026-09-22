@@ -8,7 +8,7 @@ import { rayToOverlayPlane, type ImageWcs } from '@cssearth/volume-core/coordina
 import { createAlignedObservationMapping, type ReconstructionAlignment } from '@cssearth/volume-core/coordinates/observation-mapping';
 import type { VolumeSource } from '@cssearth/volume-bake/compact-inputs/density-grid';
 
-type Pin = { path: string; sha256: string };
+type Pin = { path: string };
 export interface ReconstructionStarsInput {
   frame: DensityVolumeFrame;
   /** These catalogue/source/registration bytes are verified by the caller before parsing. */
@@ -19,7 +19,7 @@ export interface ReconstructionStarsInput {
   /** Common full-density observer-ray signal; no candidate image color/coverage. */
   sampleProjectedDensitySignal(x: number, y: number, z: number): number;
 }
-const validPin = (pin: Pin | undefined) => Boolean(pin?.path && /^[0-9a-f]{64}$/.test(pin.sha256));
+const validPin = (pin: Pin | undefined) => Boolean(pin?.path);
 
 /**
  * Measured sky ray → native reference-image UV → accepted image-to-model fit.

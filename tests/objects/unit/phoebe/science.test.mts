@@ -12,7 +12,7 @@ const sha=(b: string|NodeJS.ArrayBufferView<ArrayBufferLike>|NonSharedBuffer)=>c
 test('Phoebe paired cubes retain every native value and actual missing-maplet sentinel',async()=>{
  const proof=proofShape(JSON.parse((await readFile(resolve(root,'validation/2023-source-statistics.json'))).toString('utf8')));
  for(const [key,p] of Object.entries(proof.products)){
-  const bytes=await readFile(resolve(root,'science/2023',p.path));assert.equal(bytes.length,p.bytes);assert.equal(sha(bytes),p.sha256);
+  const bytes=await readFile(resolve(root,'science/2023',p.path));assert.equal(bytes.length,p.bytes);
   const {data,origin,resolution}=decodeIsis3Raster(bytes,p.grid);assert.equal(data.length,p.allPixels);assert.deepEqual(origin,p.grid.origin);assert.equal(resolution[0],p.grid.resolutionMeters);
   let low=Infinity,high=-Infinity,finite=0;const counts:Record<string,number>={};
   for(const v of data){if(Number.isFinite(v))finite++;low=Math.min(low,v);high=Math.max(high,v);if(p.histogram)counts[String(v)]=(counts[String(v)]??0)+1;}
@@ -41,4 +41,4 @@ test('Phoebe support policy rejects filled albedo at zero/few images or missing 
  assert.equal(accepted,57328);assert.equal(albedo.sample(360.1,0),null);assert.equal(albedo.sample(0,-90.1),null);
 });
 
-const proofShape=shape({products:dictionary(shape({path:text,bytes:number,sha256:text,grid:parseIsis3Grid,allPixels:number,finitePixels:number,minimum:number,maximum:number,histogram:optional(dictionary(number))})),fixtures:array(shape({longitudeDegrees:number,latitudeDegrees:number,imageCount:number,bestMapletMeters:number,rawAlbedo:number,accepted:boolean,kind:text}))});
+const proofShape=shape({products:dictionary(shape({path:text,bytes:number,grid:parseIsis3Grid,allPixels:number,finitePixels:number,minimum:number,maximum:number,histogram:optional(dictionary(number))})),fixtures:array(shape({longitudeDegrees:number,latitudeDegrees:number,imageCount:number,bestMapletMeters:number,rawAlbedo:number,accepted:boolean,kind:text}))});

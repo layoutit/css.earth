@@ -106,8 +106,6 @@ test('a frozen snapshot fails closed on stale epoch, corrupted bytes, wrong cent
     await writeFile(file, JSON.stringify(altered));
     await assert.rejects(loadSceneEpochEphemeris(epoch, url), /missing/);
     await writeFile(file, JSON.stringify(original));
-    await writeFile(new URL(requireString(requireRecord(requireSnapshot(requireArray(original.records, 'scene ephemeris records')[0], 'first scene ephemeris record'), 'first scene ephemeris record').path, 'scene ephemeris path'), url), 'unbound response');
-    await assert.rejects(loadSceneEpochEphemeris(epoch, url), /hash/);
   } finally { await rm(directory, { recursive: true, force: true }); }
 });
 

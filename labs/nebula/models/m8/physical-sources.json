@@ -8,7 +8,6 @@
       "url": "https://arxiv.org/pdf/astro-ph/0506552v2",
       "path": ".local/nebula-lab/physical/m8/papers/arias-2006-hourglass.pdf",
       "bytes": 690760,
-      "sha256": "fd44717272460be85de65d4391da3aff4bc92f15b5826c7abc6a954378d4ed9a",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     },
@@ -17,7 +16,6 @@
       "url": "https://arxiv.org/pdf/0706.2378v1",
       "path": ".local/nebula-lab/physical/m8/papers/barba-2007-geysers.pdf",
       "bytes": 191830,
-      "sha256": "6e80e17cb595fbe27a17e42dbf052f76be80c8f913a600f71236f3c8f90f5483",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     },
@@ -26,7 +24,6 @@
       "url": "https://arxiv.org/pdf/1903.12176v1",
       "path": ".local/nebula-lab/physical/m8/papers/wright-2019-kinematics.pdf",
       "bytes": 1808250,
-      "sha256": "5e632aee5684cb1c4ba65d5c09b3bceca4e032b0f47e94ba7f4a4202e45e05f7",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     },
@@ -35,7 +32,6 @@
       "url": "https://arxiv.org/pdf/2404.07920v2",
       "path": ".local/nebula-lab/physical/m8/papers/kahle-2024-clumps.pdf",
       "bytes": 26638936,
-      "sha256": "9a921af219875840e660349bcd4603f2a874d70661e2b2bc33e1172d79961b6f",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     },
@@ -44,7 +40,6 @@
       "url": "https://arxiv.org/pdf/2603.22382v1",
       "path": ".local/nebula-lab/physical/m8/papers/singh-2026-lvm.pdf",
       "bytes": 97055135,
-      "sha256": "e220dc9b798c7e74e07cea13b765d77508302b8ba6181165ce7b2f088098abbf",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     },
@@ -53,7 +48,6 @@
       "url": "https://arxiv.org/pdf/1803.10164v1",
       "path": ".local/nebula-lab/physical/m8/papers/tiwari-2018-pdr.pdf",
       "bytes": 5137832,
-      "sha256": "2789a2bf61c2bbea6e7187268f1ce3c94e876c3e9b126e0a8bc6642a9e8dddd6",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     },
@@ -62,7 +56,6 @@
       "url": "https://arxiv.org/pdf/2010.09365v1",
       "path": ".local/nebula-lab/physical/m8/papers/tiwari-2020-east.pdf",
       "bytes": 3340263,
-      "sha256": "49a624c9d472bbf73dfe76c5e4d5744fc0d696a392d42939313eeae874f49109",
       "access": "Complete author PDF downloaded unchanged; selected scientific sections inspected. No publisher figure or full paper committed.",
       "extraction": "pdftotext -layout; table values checked against page render where extracted."
     }

@@ -9,7 +9,6 @@
       "localPath": ".local/nebula-lab/intake/m1/hubble-optical.tif",
       "url": "https://esahubble.org/media/archives/images/original/heic0515a.tif",
       "page": "https://esahubble.org/images/heic0515a/",
-      "sha256": "8a4a08d56893e1a03339b2705dc41acb177693da75e21858800bdb584c5901c6",
       "bytes": 30692506,
       "nativeDimensions": [
         3864,
@@ -87,7 +86,6 @@
       "localPath": ".local/nebula-lab/intake/m1/webb-infrared.tif",
       "url": "https://esawebb.org/media/archives/images/publicationtiff/weic2326a.tif",
       "page": "https://esawebb.org/images/weic2326a/",
-      "sha256": "bb1b9a0023eb5424bb75a7c29e9c8a83a7e3c06601bb3019ab58c24beb02f8dd",
       "bytes": 27148280,
       "nativeDimensions": [
         4000,
@@ -175,7 +173,6 @@
       "localPath": ".local/nebula-lab/intake/m1/webb-components.tif",
       "url": "https://esawebb.org/media/archives/images/original/weic2417a.tif",
       "page": "https://esawebb.org/images/weic2417a/",
-      "sha256": "1ec85e2b0cf6a35d176af48a48e1f37c8922abadb60dc53866ee282855808a36",
       "bytes": 13141722,
       "nativeDimensions": [
         2958,
@@ -259,7 +256,6 @@
       "localPath": ".local/nebula-lab/intake/m1/spitzer-infrared-esahubble.tif",
       "url": "https://esahubble.org/media/archives/images/original/potw1720c.tif",
       "page": "https://esahubble.org/images/potw1720c/",
-      "sha256": "0df6c12a08d63852a11e966495ad79660edd79978767072ffdf2552bceee75c8",
       "bytes": 9291804,
       "nativeDimensions": [
         5290,
@@ -323,7 +319,6 @@
       "localPath": ".local/nebula-lab/intake/m1/vla-radio-esahubble.tif",
       "url": "https://esahubble.org/media/archives/images/original/potw1720b.tif",
       "page": "https://esahubble.org/images/potw1720b/",
-      "sha256": "64eccbc054b905c11d1ebfd34cacc42a1dbb6a39ea48d67dd417875929cd451b",
       "bytes": 8402348,
       "nativeDimensions": [
         5290,
@@ -387,7 +382,6 @@
       "localPath": ".local/nebula-lab/intake/m1/chandra-xray-esahubble.tif",
       "url": "https://esahubble.org/media/archives/images/original/potw1720f.tif",
       "page": "https://esahubble.org/images/potw1720f/",
-      "sha256": "8647bce741a6eeb5c8595ec179cf75eaa0e43a026045057c1ce5f02362a19350",
       "bytes": 8125068,
       "nativeDimensions": [
         5290,
@@ -454,7 +448,6 @@
         "url": "https://chandra.harvard.edu/photo/2017/crab/crab_xray.tif",
         "path": ".local/nebula-lab/intake/m1/chandra-xray.tif",
         "bytes": 10192896,
-        "sha256": "6f5452d168d4695499857fe85d42a8eef1549dd09bf58a53cd3f954d4c31e9ea",
         "width": 5290,
         "height": 5290,
         "format": "tiff",
@@ -512,7 +505,6 @@
         "url": "https://chandra.harvard.edu/photo/2017/crab/crab_ir.tif",
         "path": ".local/nebula-lab/intake/m1/spitzer-infrared.tif",
         "bytes": 15110708,
-        "sha256": "4c375c8da447a3e103335fed73882e09af4bd375141a3a99186117ff5b8465a8",
         "width": 5290,
         "height": 5290,
         "format": "tiff",
@@ -570,7 +562,6 @@
         "url": "https://chandra.harvard.edu/photo/2017/crab/crab_radio.tif",
         "path": ".local/nebula-lab/intake/m1/vla-radio.tif",
         "bytes": 13948440,
-        "sha256": "e268e1b71e5e4dbd6af48f2bfa410802e839ff4bcfc76801db8d396dd02c95c1",
         "width": 5290,
         "height": 5290,
         "format": "tiff",

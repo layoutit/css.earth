@@ -96,15 +96,15 @@ export function createTonePreparer(repositoryRoot: string, options: { maximumCac
       const catalogue = await json(subject.density.overlays);
       const image = catalogue.overlays?.find((item: { id: string }) => item.id === request.imageId);
       if (!image) throw new TypeError('Unknown prepared image overlay.');
-      const original = { path: relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath)),
-        sha256: image.sha256, width: image.widthPx, height: image.heightPx };
+      const originalPath = relative(root, resolve(root, dirname(subject.density.overlays), image.texturePath));
+      const original = { path: originalPath, sha256: digest(await readFile(await safePath(originalPath))), width: image.widthPx, height: image.heightPx };
       if (request.imageLayer && request.imageLayer !== 'original') {
         const layers = request.removalResultId
-          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!, image.sha256)).layers
+          ? (await resolveAppliedRemovalLayers(root, request.removalResultId, request.imageId!, original.sha256)).layers
           : variantsForImage(parseOverlayVariants(await json(overlayVariantsPath)), image);
         const layer = layers.find(item => item.id === request.imageLayer);
         if (!layer) throw new TypeError('Unknown prepared image layer.');
-        return [{ path: layer.texturePath, sha256: layer.sha256, width: layer.widthPx, height: layer.heightPx,
+        return [{ path: layer.texturePath, sha256: digest(await readFile(await safePath(layer.texturePath))), width: layer.widthPx, height: layer.heightPx,
           layer: layer.id, ...(layer.id === 'diffuse' && (request.removalStrength ?? 100) !== 100 ? { original } : {}) }];
       }
       return [original];

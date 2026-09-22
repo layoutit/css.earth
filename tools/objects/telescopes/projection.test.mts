@@ -12,7 +12,7 @@ import { bodyMapFits } from '../jwst/cubes/body-map.mts';
 import { formatBodyMapProduct,type BodyMapProduct } from '../body-map-product.mts';
 import { sha256 } from '../../../src/platform/sha256.mts';
 import sharp from 'sharp';
-const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',bytes:10,sha256:'a'.repeat(64),source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};
+const geometry={schema:'cssearth-navigation-input@1',observer:'JWST',kernels:[{file:'rotation.tpc',role:'rotation',source:'https://naif.jpl.nasa.gov/'}],registration:{method:'wcs',explanation:'Header WCS; no independently fitted centre'},width:360,height:180,maximumEmissionDegrees:65};
 const sourceRequest={target:'mercury',wavelengthMicrometres:[1,2],kind:'image',time:{any:true},angularResolutionArcsec:1,result:'telescope-product'};
 const sourceAssessment={status:'unresolved',acceptance:'all-requested-constraints',constraints:{wavelength:{answer:'unknown',reason:'Fixture assessment.'}}};
 const explorationContext={kind:'exploration',target:'mercury',discovery:{schema:'cssearth-telescope-exploration@1',observation:'observation',snapshot:'a'.repeat(64)},assessment:{status:'not-requested'}};

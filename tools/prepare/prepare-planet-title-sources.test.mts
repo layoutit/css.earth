@@ -87,7 +87,6 @@ test("regenerates every planet title from one pinned Saturn recipe", async () =>
           ["renderViewBox", "renderWidth", "renderHeight", "renderPathOffsetY"].includes(field))),
         `${planet.id}: prepared title layout`,
       );
-      assert.match(requireString(preparedTitle.inputSha256), /^[0-9a-f]{64}$/u, `${planet.id}: prepared title input digest`);
       assert.match(requireString(preparedTitle.generator), /prepare-content\.mjs$/u,
         `${planet.id}: prepared title generator`);
     }

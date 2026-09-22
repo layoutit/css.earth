@@ -116,9 +116,9 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
     if (visiting.has(path)) throw new Error(`Cyclic acquisition dependency: ${path}.`);
     if (sources.has(entry.id)) return entry.id;
     const { consumers, ...record } = entry;
-    // Every source is identified from the bytes in the checkout.
-    const measured = await fileIdentity(contained(sourceDirectory, path));
-    const pin = { sha256: measured.sha256, bytes: measured.bytes };
+    // A source present in the checkout is identified from its bytes; a download that is not restored is named by path.
+    const measured = await fileIdentity(contained(sourceDirectory, path)).catch((error: unknown) => { if ((error as NodeJS.ErrnoException).code === 'ENOENT') return null; throw error; });
+    const pin = measured ? { sha256: measured.sha256, bytes: measured.bytes } : {};
     const acquisitionOperation = acquisitionOperations.find(operation => operation.path === path) ?? null;
     const verificationOperations = acquisitionOperations.filter(operation => operation.expectedPath === path) ?? [];
     const dependencies = acquisitionOperation?.fileSource
@@ -135,7 +135,7 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
       dependencies.push(await bindSource(recipePath, ancestors), await bindSource(plan.input, ancestors));
     }
     sources.set(entry.id, { ...record, ...pin, dependencies,
-      verification: 'bytes-verified', acquisitionOperation, verificationOperations });
+      verification: measured ? 'bytes-verified' : 'download-not-present', acquisitionOperation, verificationOperations });
     return entry.id;
   };
   for (const binding of bindings) {
@@ -200,10 +200,8 @@ export async function prepareObjectProvenance({ objectDirectory, publicDirectory
   [...usedSources].forEach(includeDependencies);
   let document = validateObjectProvenance({
     schema: OBJECT_PROVENANCE_SCHEMA, objectId: id, basis,
-    manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
-    generator: { path: 'tools/objects/provenance.mts', sha256: sha256(await readFile(new URL('./provenance.mts', import.meta.url))),
-      // The bindings this body's products and gaps were derived from, not the whole rule module, so an unrelated rule edit leaves the record alone.
-      bindingsSha256: sha256(Buffer.from(JSON.stringify({ products: bindings, unresolved }))) },
+    manifest: { path: 'source/manifest.json' },
+    generator: { path: 'tools/objects/provenance.mts' },
     recipes: [...recipes.values()].filter(recipe => usedRecipes.has(recipe.id)),
     sources: [...sources.values()].filter(source => usedSources.has(source.id)), products,
     coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved },

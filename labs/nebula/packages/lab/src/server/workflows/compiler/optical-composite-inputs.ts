@@ -28,7 +28,7 @@ export async function opticalCompositeSourcePins(root: string, recipe: Composite
     const catalogue = readObservations(raw);
     if (!jointRecord(raw) || !jointRecord(raw.provenance) || raw.provenance.recipeSha256 !== geometrySha(recipeBytes)) return undefined;
     if (!Array.isArray(raw.images) || catalogue.id !== observationsRecipe.id || catalogue.images.length !== planned.length ||
-        catalogue.images.some(image => !planned.some(source => source.id === image.id && source.sha256 === image.source.sha256 &&
+        catalogue.images.some(image => !planned.some(source => source.id === image.id &&
           source.width === image.source.width && source.height === image.source.height))) throw new TypeError('Composite catalogue differs from its pinned source recipe.');
     if (!await compilerLayersReady(root, raw)) return undefined;
     const pins: CompilerPin[] = [{ path: recipe.observationRecipe }, { path: recipe.observationCatalogue }];
@@ -38,8 +38,7 @@ export async function opticalCompositeSourcePins(root: string, recipe: Composite
       const { source, removal } = value, settings = removal.settings;
       if (!jointRecord(settings) || !jointPath(settings.directory) || !settings.directory.startsWith('.local/nebula-lab/'))
         throw new TypeError('Missing composite native separation owner.');
-      if (!jointRecord(settings.model) || settings.scriptSha256 !== observationsRecipe.nativeRemoval.scriptSha256 ||
-          settings.model.sha256 !== observationsRecipe.nativeRemoval.model.sha256)
+      if (!jointRecord(settings.model) || settings.model.path !== observationsRecipe.nativeRemoval.model.path)
         throw new TypeError('Composite native separation differs from its configured NOX model or code.');
       pins.push(pin(source.path), pin(`${settings.directory}/result.json`), pin(`${settings.directory}/diffuse.png`), pin(`${settings.directory}/stars.png`));
     }

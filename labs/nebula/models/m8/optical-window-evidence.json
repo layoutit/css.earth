@@ -1,8 +1,7 @@
 {
   "resultId": "1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864",
   "model": {
-    "path": ".local/nebula-lab/compiler/1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864/field.json",
-    "sha256": "5ad889d4416f7c1712d9ce27ecc3e62008d99afd3cfc0a261227f9b24102c496"
+    "path": ".local/nebula-lab/compiler/1a5712d6722bc1b74d7b5b3d7411d8c2020105dc1129190d63dee7dda1c2d864/field.json"
   },
   "emissionWindow": {
     "sourceId": "eso-optical",
@@ -30,8 +29,7 @@
   "source": {
     "id": "eso-optical",
     "original": {
-      "path": ".local/nebula-lab/observations/m8-processed/eso-optical/original.png",
-      "sha256": "099f6d2c704df76c0acca473416e01ab2a588ac10044eccceb6f4a00111447c3"
+      "path": ".local/nebula-lab/observations/m8-processed/eso-optical/original.png"
     },
     "matrix": [
       0.18553422908428915,
@@ -57,7 +55,6 @@
     "spitzer-mid-infrared"
   ],
   "stars": 650,
-  "alphaSha256": "c61df1d8158e8f595c68c624a35cbbacd6cae98fed74279b42c4258149f9151a",
   "metrics": {
     "components": 442,
     "unconstrainedComponents": 442,
@@ -72,117 +69,89 @@
   "tested": "2026-09-13; d429e4b5b plus the optical-window implementation committed with this record. Screenshot and field result are the default recipe, Detail 90%, Faint 15%, Depth 1x.",
   "implementation": [
     {
-      "path": "labs/nebula/src/reconstruction/compiler/bake-types.ts",
-      "sha256": "a592c644dd02a4e109df837fdd814200b92a1548bbd7890d03ce01d820052759"
+      "path": "labs/nebula/src/reconstruction/compiler/bake-types.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/bake.ts",
-      "sha256": "4e1973e0140589d8251689acdfff815dc6ff809f68ec0a55481ef3c07359906b"
+      "path": "labs/nebula/src/reconstruction/compiler/bake.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/bank-validation.ts",
-      "sha256": "e881b295ae1b6c7554c15db8474432ee5e3f6dd8594eb71b6ea9b8245e0f1e41"
+      "path": "labs/nebula/src/reconstruction/compiler/bank-validation.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/catalogue-stars.ts",
-      "sha256": "ecf0c723d10d2e2453fd778268f0d002794ace63d3906d925d5feb2727f58397"
+      "path": "labs/nebula/src/reconstruction/compiler/catalogue-stars.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/compile.ts",
-      "sha256": "5b24fdcd8d4e70d1d15c9831783b2ddb72fdd721423a68cf821ec92adc80b1cb"
+      "path": "labs/nebula/src/reconstruction/compiler/compile.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/component-material.ts",
-      "sha256": "6eda6543ced43072cb02865823807c5ecf37ab6aa268662dae6d0484b656bb14"
+      "path": "labs/nebula/src/reconstruction/compiler/component-material.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/depth-model.ts",
-      "sha256": "b0a1c27b78346ff521932ab9f87b9a8faee8e1bcd946689ac14cd0ed66234e02"
+      "path": "labs/nebula/src/reconstruction/compiler/depth-model.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/emission-window.ts",
-      "sha256": "7bd334e0ba2abf7baa923eeca95dd12a4b6aea7a491cfa95e35e9009d8072f72"
+      "path": "labs/nebula/src/reconstruction/compiler/emission-window.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/field-model.ts",
-      "sha256": "f8ad8e0347e76470449c71da77e8575afefbe2ba7991e2850bb79cbefc780007"
+      "path": "labs/nebula/src/reconstruction/compiler/field-model.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/field-types.ts",
-      "sha256": "acb1ceb0b9e968343725c8c371b5e207b9131ae09280d53b92a6737b10d7102b"
+      "path": "labs/nebula/src/reconstruction/compiler/field-types.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/field.ts",
-      "sha256": "9ebbba2c9123ba5c04025393f0498af0d2f2009de8d533bc0f8d4f957947a4b3"
+      "path": "labs/nebula/src/reconstruction/compiler/field.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/fit.ts",
-      "sha256": "ce1b2536695ec446a4f4da7aa56316cab71898a6a1027f02557a629ba9b7b9c9"
+      "path": "labs/nebula/src/reconstruction/compiler/fit.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/images.ts",
-      "sha256": "18eeebb30a09f2699947f90b383dd48d7199ad5c54b3dfcf9b24607c338000a9"
+      "path": "labs/nebula/src/reconstruction/compiler/images.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/material.ts",
-      "sha256": "2c935bc95ea560ec80cb5fd5fb9ef028413ed3a6255397c0e3da8845f93f880a"
+      "path": "labs/nebula/src/reconstruction/compiler/material.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/model.ts",
-      "sha256": "0efc5b1b2ca201715306ca28825fe2cbf94b799ff25a7b5fba5316ba8de97470"
+      "path": "labs/nebula/src/reconstruction/compiler/model.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/optical-composite-preparation.ts",
-      "sha256": "bbc8603ccb927f6aed1c8b6e5319219ba72697780aa14fd40579a6090f88de20"
+      "path": "labs/nebula/src/reconstruction/compiler/optical-composite-preparation.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/optical-composite.ts",
-      "sha256": "7902b18f5a36812a2b3f641906608d7c46e00d4174e2020092d07ad41e524051"
+      "path": "labs/nebula/src/reconstruction/compiler/optical-composite.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/prerequisites.ts",
-      "sha256": "9d39607c620bfb0c1ee2cdbb644ec1fea34dd11829a828375419b82a5f8e63c6"
+      "path": "labs/nebula/src/reconstruction/compiler/prerequisites.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/refresh-stars.ts",
-      "sha256": "24cf7373ba0c4d05d96af1173fdab3b5800c25f209dc2298273d5168e56464e1"
+      "path": "labs/nebula/src/reconstruction/compiler/refresh-stars.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/result.ts",
-      "sha256": "3b27de61cea006402e49c3eecfccd6cdf9d67092248749b49533d18b2673a758"
+      "path": "labs/nebula/src/reconstruction/compiler/result.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/retained-material-bank.ts",
-      "sha256": "8b5ca5e720ce03ffdaa34545acb4e333c8fd28254729ab4c57846515e89387ce"
+      "path": "labs/nebula/src/reconstruction/compiler/retained-material-bank.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/server.ts",
-      "sha256": "ce9c2b591a3795aedba88e4730ebcbe9beaedfef3262bb74480cd6bbec0f8c4c"
+      "path": "labs/nebula/src/reconstruction/compiler/server.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/star-sprites.ts",
-      "sha256": "8396cd3458d16389c913fdc1269a1b084857a6a9bf9faa5aa683c95dd655d453"
+      "path": "labs/nebula/src/reconstruction/compiler/star-sprites.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/star-union.ts",
-      "sha256": "10cd9b68c6c237df00978ff1de9dc21346dd4bfe953d42761ec314d07c8dbb9a"
+      "path": "labs/nebula/src/reconstruction/compiler/star-union.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/stars.ts",
-      "sha256": "1b800e7cb6d4615530975a3ebef58efef3d803559f1ad8f97b693c0a2088ca45"
+      "path": "labs/nebula/src/reconstruction/compiler/stars.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/target.ts",
-      "sha256": "706df50a1b18651ec4609025b578899fde901cf761bbe8aa1673d2e38a363ab0"
+      "path": "labs/nebula/src/reconstruction/compiler/target.ts"
     },
     {
-      "path": "labs/nebula/src/reconstruction/compiler/worker.ts",
-      "sha256": "0e02653b8a160a31d899c05aa80f68299fa1aa382873af68261fc364e660194c"
+      "path": "labs/nebula/src/reconstruction/compiler/worker.ts"
     }
   ],
   "recipe": {
-    "path": "compiler.json",
-    "sha256": "4532a02e811169574bb6a8ef90bb192bbb64f8ca85d213c1f51d0dd0efccb337"
+    "path": "compiler.json"
   },
   "browser": {
     "status": "passed",
@@ -212,12 +181,10 @@
   "screenshots": [
     {
       "path": "evidence/optical-window-earth.png",
-      "sha256": "7b0df9696a8a3b886a00a61e81f000afbfef8581cfcfe4ab145bb10f864cf8de",
       "view": "earth"
     },
     {
       "path": "evidence/optical-window-west-side.png",
-      "sha256": "4533a87fe3daf1cb534ac9b45c170e7f94c294f660e26fefd738b68bb6704bc8",
       "view": "west-side"
     }
   ],

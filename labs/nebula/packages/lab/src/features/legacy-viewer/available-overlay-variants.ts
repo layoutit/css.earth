@@ -1,7 +1,6 @@
 /** A fresh checkout has recipe metadata but no extracted preview pixels yet. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { createHash } from 'node:crypto';
 import { parseLabModelJson } from '../../resources/model-paths.ts';
 import { overlayVariantsPath, parseOverlayVariants } from './overlay-variants.js';
 
@@ -16,7 +15,6 @@ export async function availableOverlayVariants(root: string) {
         return null;
       });
       if (!bytes) continue;
-      if (createHash('sha256').update(bytes).digest('hex') !== layer.sha256) throw new Error(`Prepared image hash differs: ${layer.texturePath}`);
       layers.push(layer);
     }
     if (layers.length) variants.push({ ...row, layers });

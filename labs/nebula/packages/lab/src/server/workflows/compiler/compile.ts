@@ -110,7 +110,6 @@ export async function compileNebula(root: string, request: CompilerRequest, sign
       imageToFrame: request.imageToFrame, evidence: { ...request.evidence, weights }, controls: defaultJointControls });
   }
   const observedStarsBytes = recipe.observedStars ? await readFile(resolve(root, recipe.observedStars.path)) : undefined;
-  if (observedStarsBytes && geometrySha(observedStarsBytes) !== recipe.observedStars!.sha256) throw new TypeError('Observed stellar source changed.');
   const sourceData = await loadCompilerImages(root, recipe.observationCatalogue, request, center);
   const source = sourceData.images.find(s => s.id === recipe.defaultSourceId); if (!source) throw new TypeError('Default compiler lens is unavailable.');
   const windowSource = recipe.emissionWindow && sourceData.images.find(image => image.id === recipe.emissionWindow!.sourceId);

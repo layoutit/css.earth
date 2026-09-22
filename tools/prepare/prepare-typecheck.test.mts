@@ -64,7 +64,7 @@ test('only imported pinned JSON is restored; an unrelated missing texture never 
   assert.deepEqual(requested, [`https://earth-assets.lowpoly.cc/runtime-assets/${sha256}/runtime.json`]);
   assert.deepEqual(await readFile(path), bytes);
   await write('src/objects/body/prepared/runtime.json', 'corrupt');
-  await assert.rejects(installRuntimeAssets(assets, { fetcher: async () => new Response('wrong bytes') }), /identity|expected|SHA|digest|size|bytes|length/iu);
+  await assert.rejects(installRuntimeAssets(assets, { fetcher: async () => new Response('wrong bytes') }), /identity|expected|SHA|digest|size|bytes|length|inventory/iu);
 });
 
 test('a missing JSON input without an inventory fails; paths outside object preparation are rejected', async t => {

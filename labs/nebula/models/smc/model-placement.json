@@ -14,18 +14,15 @@
     9.775346755981445
   ],
   "originalDensity": {
-    "path": "labs/nebula/models/smc/full-density/source/volume.json",
-    "sha256": "319358fc2ef89b273d1a369d7d43393eae64a6a2b49ffb99651b5735e3bb681f"
+    "path": "labs/nebula/models/smc/full-density/source/volume.json"
   },
   "fit": {
     "method": "Bounded perspective model-only XY similarity against smoothed original SMASH stellar light; uniform XYZ scale",
     "image": {
-      "path": ".local/nebula-lab/source-originals/noirlab2030b.tif",
-      "sha256": "d227ea3543cc17fce7797e9d3f424b129c07e5b9000ae5c07d4cba66a7cc1ca4"
+      "path": ".local/nebula-lab/source-originals/noirlab2030b.tif"
     },
     "particles": {
       "path": ".local/nebula-lab/full-density/smc-full-density.f32",
-      "sha256": "b99bebd44a18fdfd729ed6b0ed77f17ccd1a4671231927e4b13540ac95a6d0c4",
       "count": 225000
     },
     "observerDistanceKpc": 62.44,

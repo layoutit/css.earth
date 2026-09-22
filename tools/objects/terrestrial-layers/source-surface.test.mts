@@ -13,7 +13,7 @@ import { BASE_TILE } from '@layoutit/polycss';
 import { parseObjShape, createShapeSurfaceSampler } from './obj-shape.mts';
 import { prepareRadialMaterials } from './radial-terrain.mts';
 
-const parseFixture = shape({cases:array(shape({id:text,sourcePath:text,sourceSha256:text,oldFirstRayHeight:number,
+const parseFixture = shape({cases:array(shape({id:text,sourcePath:text,oldFirstRayHeight:number,
  triangles:array(shape({sourceFace:number,vertices:array(array(number))})),
  checks:array(shape({kind:text,query:array(number),expectedPoint:array(number),expectedValue:number,expectedDistanceMeters:number,sourceFace:optional(number)})),
  oldRadialGrid:optional(shape({longitude:number,latitude:number,cornerRadii:array(number),scalarValue:number,width:number,height:number}))}))});

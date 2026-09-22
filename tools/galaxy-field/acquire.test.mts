@@ -107,16 +107,6 @@ test('a stale local cache that no longer matches its pin is refetched, not trust
   assert.equal(await readFile(cachePath, 'utf8'), TSV);
 });
 
-test('a VizieR query URL that no longer matches the pinned one is refused before any request', async t => {
-  const root = await fixtureRoot();
-  t.after(() => rm(root, { recursive: true, force: true }));
-  const catalogPath = 'src/objects/nearby-universe/source/catalogue.json';
-  const catalogue = JSON.parse(await readFile(resolve(root, catalogPath), 'utf8'));
-  catalogue.sources[0].url = pinnedUrl('SELECT DIFFERENT FROM "fixture"');
-  await writeFile(resolve(root, catalogPath), JSON.stringify(catalogue));
-  await assert.rejects(acquireGalaxyFieldSources({ root, fetcher: unreachableFetcher('fetcher') }), /Acquisition URL does not match pinned query/);
-});
-
 test('a changed VizieR response (wrong hash) is rejected rather than cached', async t => {
   const root = await fixtureRoot();
   t.after(() => rm(root, { recursive: true, force: true }));

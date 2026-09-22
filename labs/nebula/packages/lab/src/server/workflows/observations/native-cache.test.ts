@@ -23,16 +23,15 @@ test('alignment-only missing or invalid receipt cannot launch NOX or create a wo
     const modelPath = resolve(directory, 'model.pb'), output = resolve(directory, 'native');
     await writeFile(modelPath, model);
     const source = await sharp({ create: { width: 8, height: 8, channels: 3, background: '#222222' } }).png().toBuffer();
-    const script = await readFile('labs/nebula/packages/reconstruction/src/star-removal/star-removal.py');
     await assert.rejects(nativeStarless(source, [16, 8], { directory: relative(process.cwd(), output),
-      model: { path: modelPath, sha256: sha(model) }, scriptSha256: sha(script) }), /source dimensions differ/);
+      model: { path: modelPath } }), /source dimensions differ/);
     await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });
     await assert.rejects(nativeStarless(source, [8, 8], { directory: relative(process.cwd(), output),
-      model: { path: modelPath, sha256: sha(model) }, scriptSha256: sha(script) }, { allowProcessing: false }), /cannot start NOX/);
+      model: { path: modelPath } }, { allowProcessing: false }), /cannot start NOX/);
     await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });
     await writeFile(resolve(output, 'result.json'), JSON.stringify({ schema: 'cssearth-nox-output@1', operation: 'apply', sourceSha256: 'wrong-source' }));
     await assert.rejects(nativeStarless(source, [8, 8], { directory: relative(process.cwd(), output),
-      model: { path: modelPath, sha256: sha(model) }, scriptSha256: sha(script) }, { allowProcessing: false }), /does not match/);
+      model: { path: modelPath } }, { allowProcessing: false }), /does not match/);
     await assert.rejects(stat(resolve(output, 'request.json')), { code: 'ENOENT' });
   } finally { await rm(directory, { recursive: true, force: true }); }
 });

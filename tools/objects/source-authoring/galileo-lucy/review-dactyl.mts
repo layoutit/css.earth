@@ -1,6 +1,4 @@
 /** Reproduce the native-frame review; this does not fit a camera or prepare a surface. */
-import { sha256 } from '../../../../src/platform/sha256.mts';
-import { createHash } from 'node:crypto';
 import { readFile, mkdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import sharp from 'sharp';
@@ -59,8 +57,8 @@ for (const item of requireArray(record.frames)) {
     finding: requireString(frame.finding) });
 }
 await writeFile(resolve(output, 'review.json'), JSON.stringify({
-  schema: 'cssearth-galileo-frame-review-result@1', inputSha256: createHash('sha256').update(await readFile(resolve(input, 'inputs.json'))).digest('hex'),
-  baseCommit: record.baseCommit, generatorSha256: createHash('sha256').update(await readFile(new URL(import.meta.url))).digest('hex'),
+  schema: 'cssearth-galileo-frame-review-result@1',
+  baseCommit: record.baseCommit,
   qualifiedSurface: false, coordinates: record.coordinateConvention, frames,
   scanPlatformKernel: { segments: ck.summaries.length, frameId: -77001, referenceFrame: 'B1950', type: 3, evaluatedAttitude: false },
   limitations: ['No radiometric or geometric calibration.', 'No camera fit, surface reprojection, or registration residual is claimed.',

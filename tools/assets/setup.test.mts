@@ -24,7 +24,7 @@ test("setup installs pinned files, reuses them offline, and repairs a corrupt fi
     await writeFile(asset.file, "outdated");
     await assert.rejects(installRuntimeAssets([asset], {
       fetcher: async () => new Response(Buffer.alloc(bytes.length)),
-    }), /hash drifted/);
+    }), /inventory/);
     assert.equal(await readFile(asset.file, "utf8"), "outdated");
     await installRuntimeAssets([asset], { fetcher });
     assert.deepEqual(await readFile(asset.file), bytes);

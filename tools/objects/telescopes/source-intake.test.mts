@@ -13,7 +13,7 @@ test('attached labels and detached tables become complete pinned products; unpin
   const inputs=[];for(const [path,bytes] of files){await writeFile(resolve(source,path!),bytes!);inputs.push({id:path!.replace('.','-'),path,origin:`https://example.org/${path}`});}
   await writeFile(resolve(source,'manifest.json'),JSON.stringify({inputs}));const issues:SourceIntakeIssue[]=[],products=await intakeSources(root,'test',[],issues);
   assert.equal(products.length,2);assert.equal(products.find(p=>p.kind==='image')!.labelPath,'src/objects/test/source/image.img');assert.equal(products.find(p=>p.kind==='image')!.files.length,1);
-  assert.equal(products.find(p=>p.kind==='table')!.kind,'table');assert.equal(products.find(p=>p.kind==='table')!.files.length,2);assert.ok(issues.some(i=>/Unpinned/.test(i.reason)));assert.ok(issues.some(i=>/outside the pinned/.test(i.reason)));
+  assert.equal(products.find(p=>p.kind==='table')!.kind,'table');assert.equal(products.find(p=>p.kind==='table')!.files.length,2);assert.ok(issues.some(i=>/outside the local file/.test(i.reason)));
  }finally{await rm(root,{recursive:true,force:true});}
 });
 

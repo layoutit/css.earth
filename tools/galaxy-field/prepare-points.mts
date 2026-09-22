@@ -51,7 +51,7 @@ const prepared = JSON.stringify({ schema: 'cssearth-galaxy-points@1', frame: fra
   appearance, resources:[resource], catalogueCount: catalogue.points.length, selection: 'Half spatially spread and half density-weighted deterministic sample; unknown luminosity uses authored count glyphs.', source: catalogue.lineage, clouds, cloudMeaning: 'Authored smoothed galaxy-count concentrations; not gas or measured matter density.', points });
 
 const recipeBytes=await readFile('src/objects/nearby-universe/source/preparation/field.json');
-const descriptor=JSON.stringify({schema:'cssearth-object@1',id:'nearby-universe',type:'galaxy-point-field',properties:{preparation:{source:'source/preparation/field.json',sha256:sha256(recipeBytes)}},prepared:{format:'cssearth-galaxy-points@1',url:'prepared/points.json',sha256:sha256(prepared)}},null,2)+'\n';
+const descriptor=JSON.stringify({schema:'cssearth-object@1',id:'nearby-universe',type:'galaxy-point-field',properties:{preparation:{source:'source/preparation/field.json'}},prepared:{format:'cssearth-galaxy-points@1',url:'prepared/points.json'}},null,2)+'\n';
 const outputs=[{filename:'points.json',sha256:sha256(prepared),bytes:Buffer.byteLength(prepared)},{filename:resource.path,sha256:resource.sha256,bytes:resource.bytes}];
 const current=await readInventory('nearby-universe','src/objects/nearby-universe');
 const kept=current?.assets.filter(asset=>asset.location==='prepared'&&!outputs.some(output=>output.filename===asset.filename))??[];

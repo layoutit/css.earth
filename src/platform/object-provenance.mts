@@ -38,8 +38,8 @@ export interface ProvenanceProduct {
 export interface ProvenanceDocument {
   readonly lastPreparation?: PreparationEvidence;
   readonly schema: string; readonly objectId: string; readonly basis: string;
-  readonly manifest: { readonly path: string; readonly sha256: string };
-  readonly generator: { readonly path: string; readonly sha256: string; readonly bindingsSha256: string };
+  readonly manifest: { readonly path: string };
+  readonly generator: { readonly path: string };
   readonly sources: readonly ProvenanceSource[]; readonly recipes: readonly ProvenanceRecipe[]; readonly products: readonly ProvenanceProduct[];
   readonly coverage: { readonly scope: string; readonly unresolved: readonly ProvenanceJson[] };
 }
@@ -109,8 +109,8 @@ function productShape(value: unknown): value is ProvenanceProduct {
 }
 function documentShape(value: unknown): value is ProvenanceDocument {
   return record(value) && ['schema','objectId','basis'].every(key => typeof value[key] === 'string')
-    && record(value.manifest) && typeof value.manifest.path === 'string' && typeof value.manifest.sha256 === 'string'
-    && record(value.generator) && typeof value.generator.path === 'string' && typeof value.generator.sha256 === 'string' && typeof value.generator.bindingsSha256 === 'string'
+    && record(value.manifest) && typeof value.manifest.path === 'string'
+    && record(value.generator) && typeof value.generator.path === 'string'
     && isArray(value.sources) && value.sources.every(sourceShape)
     && isArray(value.recipes) && value.recipes.every(recipeShape)
     && isArray(value.products) && value.products.every(productShape)
@@ -124,7 +124,6 @@ export function validateObjectProvenance(input: unknown, objectId?: string): Pro
   objectId ??= value.objectId;
   if (value?.schema !== OBJECT_PROVENANCE_SCHEMA || value.objectId !== objectId || !nonempty(objectId)
       || !['recovered', 'prepared'].includes(value.basis)
-      || !digest(value.manifest?.sha256) || !digest(value.generator?.sha256) || !digest(value.generator?.bindingsSha256)
       || !isArray(value.sources) || !isArray(value.recipes) || !isArray(value.products)
       || value.coverage?.scope !== 'object-datasets-and-bound-rendering-products'
       || !isArray(value.coverage?.unresolved)) throw new TypeError('Invalid object provenance document.');

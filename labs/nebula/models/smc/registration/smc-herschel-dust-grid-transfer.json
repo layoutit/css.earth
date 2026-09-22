@@ -9,15 +9,12 @@
   "source": {
     "id": "smc-herschel-dust",
     "path": ".local/nebula-lab/smc-intake/sky-bands/smc-herschel-dust.d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e.png",
-    "sha256": "d39508f7c48bbba4b6e29d1c9eb3ee24ec5eeb9d181737d34d96eae1a3d3597e",
     "skyBands": {
-      "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-herschel-dust.json",
-      "sha256": "516a8d7cf1d9eb94b4b77a20c94a09946731b28fda4904876cedd45c25096fee"
+      "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-herschel-dust.json"
     },
     "recipeFiles": [
       {
         "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-herschel-dust.json",
-        "sha256": "516a8d7cf1d9eb94b4b77a20c94a09946731b28fda4904876cedd45c25096fee",
         "bytes": 501
       }
     ]
@@ -25,14 +22,11 @@
   "reference": {
     "id": "smc-wise-stellar",
     "path": ".local/nebula-lab/smc-intake/sky-bands/smc-wise-stellar.a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc.png",
-    "sha256": "a46ec628b5f7c13c45e9bacc94dcb0625e0f07c3b14c6dc75354dc7479fceebc",
     "skyBands": {
-      "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar.json",
-      "sha256": "3906add8622692b7fca377cbb97c95ecfd3118e1bc117327c89dce1489c5e539"
+      "path": "labs/nebula/models/smc/candidates/source/sky-bands/smc-wise-stellar.json"
     },
     "catalogueGate": {
-      "path": "labs/nebula/models/smc/registration/smc-wise-stellar-catalogue-gate.json",
-      "sha256": "f5193b538703a503bbc43909ca2ded38629aede0c1893376c669943c1b03e583"
+      "path": "labs/nebula/models/smc/registration/smc-wise-stellar-catalogue-gate.json"
     }
   },
   "grid": {
@@ -67,16 +61,13 @@
   },
   "stars": {
     "query": {
-      "path": "labs/nebula/models/smc/registration/allwise-query.json",
-      "sha256": "50ccac83eb62b94ba98a93dde46008c2afa749593285f3d457570323328e6dda"
+      "path": "labs/nebula/models/smc/registration/allwise-query.json"
     },
-    "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv",
-    "sha256": "8197d7e7543ff7a78c9ebe14f724bda57d6302752c68a29ecd3fd0f0d3c29941"
+    "path": ".local/nebula-lab/smc-registration/catalogue/allwise-bright.csv"
   },
   "diagnostic": {
     "receipt": {
-      "path": "labs/nebula/models/smc/registration/smc-herschel-dust-catalogue-diagnostic.json",
-      "sha256": "c06a42b9e72cf7f390771563c313c543af5e45053d88ee65c8b82fb120cabb18"
+      "path": "labs/nebula/models/smc/registration/smc-herschel-dust-catalogue-diagnostic.json"
     },
     "pass": false,
     "gates": {
@@ -123,16 +114,13 @@
   },
   "implementation": [
     {
-      "path": "labs/nebula/packages/lab/src/cli/commands/sky-band-registration.ts",
-      "sha256": "e4ec9574aab7be49f1ee1a95e9e59be9d81ef98c8f3068809dbbfa89fc70a4e1"
+      "path": "labs/nebula/packages/lab/src/cli/commands/sky-band-registration.ts"
     },
     {
-      "path": "tools/objects/observation/sky-band-composite.mts",
-      "sha256": "3264252b9970c267f4324a340d5ceb5fd47b2001849485c9a42f9f0ab462705a"
+      "path": "tools/objects/observation/sky-band-composite.mts"
     },
     {
-      "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts",
-      "sha256": "b62eca42b7abad48f8865716ade4df92a1a9d97462742af3510c6835dae422b7"
+      "path": "labs/nebula/packages/reconstruction/src/registration/fixed-catalogue.ts"
     }
   ],
   "interpretation": "The composite is pinned to bytes that only the sky band compositor produces after checking every hips2fits band header against this exact TAN grid (no rotation, distortion or unit cards). The grid itself is qualified by the reference composite, which passed the unchanged fixed-WCS catalogue gate on the identical grid.",

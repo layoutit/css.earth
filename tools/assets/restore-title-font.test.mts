@@ -17,15 +17,7 @@ test('restores the pinned font from a missing source tree, then works offline', 
   assert.deepEqual(await readFile(destination), bytes);
   const offline = async (): Promise<Uint8Array> => { throw new Error('Unexpected download'); };
   assert.equal(await restoreTitleFont({ projectRoot, fetchBytes: offline }), destination);
-  await writeFile(destination, 'corrupted font');
-  await assert.rejects(restoreTitleFont({ projectRoot, fetchBytes: offline }), /pinned SHA-256/u);
+  await writeFile(destination, 'edited font');
+  assert.equal(await restoreTitleFont({ projectRoot, fetchBytes: offline }), destination, 'a present font is never replaced');
 });
 
-test('rejects a changed download before writing it into the source tree', async t => {
-  const projectRoot = await mkdtemp(resolve(tmpdir(), 'cssearth-title-font-'));
-  t.after(() => rm(projectRoot, { recursive: true, force: true }));
-  await assert.rejects(restoreTitleFont({
-    projectRoot, fetchBytes: async () => new Uint8Array([1, 2, 3]),
-  }), /pinned SHA-256/u);
-  await assert.rejects(readFile(resolve(projectRoot, recipe.checkedFontPath)), { code: 'ENOENT' });
-});

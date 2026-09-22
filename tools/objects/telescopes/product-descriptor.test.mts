@@ -3,7 +3,7 @@ import test from 'node:test';
 import { describeRasterCompatibility, familyCoverageLedger, familyProfile, operationsForDescriptor } from './family-handlers.mts';
 import { parseProductDescriptor } from './product-descriptor.mts';
 
-const pin=(id:string,role:'science'|'support')=>({id,path:`files/${id}.fits`,role,bytes:80,sha256:(id==='science'?'a':'b').repeat(64),mediaType:'application/fits'} as const);
+const pin=(id:string,role:'science'|'support')=>({id,path:`files/${id}.fits`,role,mediaType:'application/fits'} as const);
 const metadata={structure:'SCI',fitsHdu:1,shape:[1,3,4,5],quality:{policy:'finite zero DQ',samples:60,finite:60,usable:59,flagged:1,invalidUncertainty:0,mask:'DQ'},uncertainty:{status:'validated' as const,kind:'standard-deviation',structure:'ERR'},units:{value:'Jy',source:'BUNIT'},spectral:{axis:1,centersMicrometres:[2,2.1,2.2],binEdgesMicrometres:[1.95,2.05,2.15,2.25],source:'FITS WCS'},calibration:[{field:'CAL_VER',value:'1'}],limitations:['Beam evidence is absent.']};
 const descriptor=()=>describeRasterCompatibility({dataset:{id:'fixture',target:'eris',acquisition:{kind:'local-import',identity:'fixture-import'},producingRecord:'import.product.json',sourceClassifications:[{term:'cube',vocabulary:'IVOA product-type',version:'2026-01-15',status:'mapped'}]},profile:'fits-image-array@1',members:[pin('science','science'),pin('response','support')],scienceMemberId:'science',nativeMetadata:metadata,quantity:{name:'spectral flux density',semantics:'Calibrated sampled intensity.'},calibration:{state:'archive-calibrated',basis:['FITS calibration headers were retained.']},dependencies:[{id:'response',role:'response evidence',memberIds:['response'],componentIds:[],requiredFor:['physical-flux'],evidence:'response receipt'}]});
 

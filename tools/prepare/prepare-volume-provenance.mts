@@ -308,8 +308,8 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
           ...layerOutputs, { url: previewUrl, sha256: sha256(image.bytes), bytes: image.bytes.length, verification: 'bytes-verified' }] });
     }
     const provenance = validateObjectProvenance({ schema: 'cssearth-object-provenance@3', objectId: record.objectId, basis: 'recovered',
-      manifest: { path: 'source/manifest.json', sha256: sha256(manifestBytes) },
-      generator: { path: volumeProvenanceCompilerClosure[0], sha256: sha256(generatorBytes), bindingsSha256: sha256(stringify(sources.map(source => source.sourceBinding))) },
+      manifest: { path: 'source/manifest.json' },
+      generator: { path: volumeProvenanceCompilerClosure[0] },
       sources, recipes, products, coverage: { scope: 'object-datasets-and-bound-rendering-products', unresolved: [
         'Native source identities are recovered from checked-in pins; this metadata preparation does not rerun or scientifically validate the reconstruction.',
         ...(installedBank === null ? ['The current volume bank is not installed; only the source-preview outputs are represented.'] : [])

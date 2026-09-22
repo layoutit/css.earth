@@ -23,9 +23,8 @@ test('registration detector settings reject unbounded, noninteger and incompatib
   assert.throws(() => readObservationRecipe(raw), /direct field-star discovery/);
 });
 
-test('composed sky band sources cache under their hash; publisher sources keep their downloaded name', () => {
-  const hash = 'a'.repeat(64);
-  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', sha256: hash }), 'spitzer-mid-infrared.tif');
-  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', sha256: hash, skyBands: { path: 'src/objects/m8/source/sky-bands/spitzer-irac.json', sha256: 'b'.repeat(64) } }),
-    `spitzer-mid-infrared.${hash}.png`);
+test('composed sky band sources cache under their own name; publisher sources keep their downloaded name', () => {
+  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared' }), 'spitzer-mid-infrared.tif');
+  assert.equal(observationSourceFile({ id: 'spitzer-mid-infrared', skyBands: { path: 'src/objects/m8/source/sky-bands/spitzer-irac.json' } }),
+    'spitzer-mid-infrared.skybands.png');
 });

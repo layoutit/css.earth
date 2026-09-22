@@ -1,17 +1,14 @@
 {
   "schema": "cssearth-smc-registration-runs@1",
   "routine": {
-    "path": "labs/nebula/packages/reconstruction/src/registration/validate-image-registration.py",
-    "sha256": "5d839948880e2e37a00453621c69e7287004a763dc876b95eebd92916923a121"
+    "path": "labs/nebula/packages/reconstruction/src/registration/validate-image-registration.py"
   },
   "maximumWorkingDimension": 5000,
   "reports": [
     {
       "name": "vista",
       "receipt": "labs/nebula/models/smc/registration/vista-direction-gate.json",
-      "receiptSha256": "81b54d81b466ec327d32fe816adca4430bacdeda1bfe2ad6546ef99f2bd67662",
       "matchedStarsPath": ".local/nebula-lab/smc-registration/vista/matched-stars.json",
-      "matchedStarsSha256": "487c08bfa57dd3263a3b0a6151ae02b97f79c3be84d8b64fb3ebabe3d83ec46d",
       "heldOutArcseconds": {
         "median": 1.150366251426652,
         "p90": 2.8527160135888474,
@@ -21,9 +18,7 @@
     {
       "name": "smash",
       "receipt": "labs/nebula/models/smc/registration/smash-direction-gate.json",
-      "receiptSha256": "4304f6ee358059fb19715f37801b26dd390612b07c0840ec71915fd0c3e273b0",
       "matchedStarsPath": ".local/nebula-lab/smc-registration/smash/matched-stars.json",
-      "matchedStarsSha256": "1f7c9c273bf4f43fe14cba7c8d41fb55ed86fec1231363337970f731f2cc7b35",
       "heldOutArcseconds": {
         "median": 1.155680276912043,
         "p90": 2.8942385393387204,
@@ -33,9 +28,7 @@
     {
       "name": "dss2",
       "receipt": "labs/nebula/models/smc/registration/dss2-direction-gate.json",
-      "receiptSha256": "a6ea1e52244bd1a576d10ba3d99ebe02d6e692ffab06675b3dea5aa0db01b5ea",
       "matchedStarsPath": ".local/nebula-lab/smc-registration/dss2/matched-stars.json",
-      "matchedStarsSha256": "f3b8b0b4f72b574d774b403071e5e43164a3ec3896c469e479c155ba72c393e7",
       "heldOutArcseconds": {
         "median": 1.875597548613727,
         "p90": 3.763715005388882,

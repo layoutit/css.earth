@@ -6,13 +6,11 @@
     22.0151236394
   ],
   "evidence": {
-    "path": "labs/nebula/models/m1/physical-evidence.json",
-    "sha256": "a03ec3e88e8d4aee345d89326da85e5d8cf93f6789ae54b18afe059e7963e1ff"
+    "path": "labs/nebula/models/m1/physical-evidence.json"
   },
   "source": {
     "url": "https://raw.githubusercontent.com/thomasorb/M1_paper/af491d4a13d408464ffb3ea75e6a424f6ef5d140/3dmap_XYZflux.fits",
     "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZflux.fits",
-    "sha256": "da365348b258952cd9ea00292f5915c45785e1cb939ff580ad0b43ccf38d0f4e",
     "bytes": 6670080,
     "width": 4,
     "height": 416573,
@@ -180,19 +178,17 @@
   "qualification": {
     "pointGrid": "grid-to-sky-registration",
     "deepRegistration": {
-      "path": "labs/nebula/models/m1/sitelle-alignment-check.json",
-      "sha256": "69e44977756ea8f730b8ee76b53816c5909ffd27c33423a20356f74245e14cf2"
+      "path": "labs/nebula/models/m1/sitelle-alignment-check.json"
     },
     "spectralVelocitySource": {
       "path": ".local/nebula-lab/intake/m1/physical/3dmap_XYZvel.fits",
-      "sha256": "0d7fbdcda2da31ce39b6ef3880e5a107d04101cd46100695c45abebd56a9c605",
       "bytes": 6670080
     },
-    "rawZVelocityCorrelation": "Paired rows have identical XYZ values; radial velocity = -1116.0011622611532 \u00d7 rawZ km/s.",
+    "rawZVelocityCorrelation": "Paired rows have identical XYZ values; radial velocity = -1116.0011622611532 × rawZ km/s.",
     "internalCoordinateUncertaintyArcsec": 0.4,
     "unimplemented": "The complete 7.6 arcmin extended PWN lies beyond current selected image/field coverage. The fitted interior diffuse component has authored spatial support, not measured continuum depth; no calibrated radiative transfer."
   },
-  "resolutionNote": "SITELLE native sampling 0.32 arcsec; measured seeing FWHM 1.17 \u00b1 0.04 arcsec. The 256-cell angular volume has approximately 1.4 arcsec sampling and Gaussian sigma 0.5 cell (about 0.7 arcsec; FWHM 1.65 arcsec), hence remains coarser than the observation. Kernel width and peak optical depth 1.5 are authored display settings, not measured density or extinction.",
+  "resolutionNote": "SITELLE native sampling 0.32 arcsec; measured seeing FWHM 1.17 ± 0.04 arcsec. The 256-cell angular volume has approximately 1.4 arcsec sampling and Gaussian sigma 0.5 cell (about 0.7 arcsec; FWHM 1.65 arcsec), hence remains coarser than the observation. Kernel width and peak optical depth 1.5 are authored display settings, not measured density or extinction.",
   "emissionFit": {
     "sourceIds": [
       "hubble-optical",

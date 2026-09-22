@@ -1,11 +1,10 @@
-import { sha256 } from '../../src/platform/sha256.mts';
 import { prepareContextProvenance, contextProvenanceCompilerClosure } from './prepare-context-provenance.mts';
 import { readPreparedContextProvenance } from '../prepared/read-prepared-context-provenance.mts';
 import { spatialSourceCitations } from '../sources/spatial-source-citations.mts';
 import { sourceResolver, parseSourceBinding } from '../../src/platform/source-catalog.mts';
 import { compileSourceUsage } from '../../src/platform/source-usage.mts';
 import type { SourceUse, SourceUsageObject } from '../../src/platform/source-usage.mts';
-import { parsePreparedSources, sourceCatalogDigest } from '../../src/platform/prepared-sources.mts';
+import { parsePreparedSources } from '../../src/platform/prepared-sources.mts';
 import { readSourceCatalog } from '../sources/read-source-catalogue.mts';
 import { sourceInventory, metadataCitations, factsheetCitations } from '../sources/source-catalogue-inputs.mts';
 import { verifyFactsheetSources } from '../sources/factsheet-sources.mts';
@@ -61,10 +60,8 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   packageMode = publish === 'catalogues' ? 'published' : 'author' }: Options = {}) {
   if (!['author', 'published'].includes(packageMode) || publish === 'catalogues' && packageMode !== 'published')
     throw new TypeError('Catalogue-only publication requires published package inputs.');
-  const closure: Record<string, string> = {};
-  const input = async (path: string) => {
-    const bytes = await readFile(resolve(root, path)); closure[path] = sha256(bytes); return bytes;
-  };
+  const closure = new Set<string>();
+  const input = (path: string) => { closure.add(path); return readFile(resolve(root, path)); };
   const json = async (path: string): Promise<unknown> => JSON.parse((await input(path)).toString('utf8'));
   for (const path of explorationCompilerClosure) await input(path);
   const agencies = parseAgencies(await json('site/source/agency-logos.json'));
@@ -92,13 +89,13 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       for (const ref of binding.references) metadata.push({catalogueId:sources[ref.catalogueId].id,kind:'artwork',consumerKind:'artwork',consumerId:`${emblem ? 'emblem' : 'render'}/${id}`,
         consumerLabel:`${id} ${emblem ? 'emblem' : 'artwork'}`,ownerPath:file,locator:`/entries/${index}/sourceBinding`,evidence:ref.evidence,lensIds:[],limitations:[],credit:explorationText(source.credit)});
       return parseExplorationImage({ id: image.id, src: emblem ? image.src : image.url,
-        width: image.width, height: image.height, bytes: image.bytes, sha256: image.sha256,
+        width: image.width, height: image.height, bytes: image.bytes,
         kind: emblem ? 'emblem' : source.kind, sourceUrl: emblem ? source.sourceUrl : source.sourcePage, credit: source.credit,
         ...(image.subject === undefined ? {} : { subject: image.subject }) });
     });
     for (const image of entries) {
       const bytes = await input(`public${image.src}`);
-      if (bytes.length !== image.bytes || sha256(bytes) !== image.sha256) throw new Error(`Approved artwork identity changed: ${image.id}.`);
+      if (bytes.length !== image.bytes) throw new Error(`Approved artwork identity changed: ${image.id}.`);
       const metadata = await sharp(bytes).metadata();
       if (metadata.format !== (emblem ? 'png' : 'webp') || metadata.width !== image.width || metadata.height !== image.height || (emblem && !metadata.hasAlpha)) throw new Error(`Approved artwork format/dimensions changed: ${image.id}.`);
     }
@@ -108,7 +105,7 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
   const emblems: readonly ExplorationImage[] = await artwork('site/source/facilities/emblem-library.json', true);
   for (const agency of Object.values(agencies)) if (agency.src) {
     const bytes = await input(`public${agency.src}`);
-    if (sha256(bytes) !== agency.sha256 || bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
+    if (bytes.length !== agency.bytes) throw new Error(`Agency logo identity changed: ${agency.name}.`);
   }
   const objects: SourceUsageObject[] = [];
   const factsheets = { facts: 0 };
@@ -164,7 +161,6 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
     const document = validateObjectProvenance(volume.provenance, volume.id);
     const manifestPath = `${sourcePath(volume.base)}/${sourcePath(document.manifest.path)}`;
     const manifest = explorationRecord(await json(manifestPath));
-    if (document.manifest.sha256 !== closure[manifestPath]) throw new Error(`Provenance for ${volume.id} does not match its source manifest; run pnpm prepare:provenance.`);
     for (const source of explorationArray(manifest.inputs, explorationRecord)) if (source.capture !== undefined) validateCapture(parseCapture(source.capture), catalog);
     inventory.push(...sourceInventory(manifest, manifestPath, sources, new Set(document.sources.map(source => source.path))));
     objects.push(volume);
@@ -172,17 +168,16 @@ export async function prepareFacilities({ root = resolve(import.meta.dirname, '.
       // Generated lineage and presentation join the same atomic set as both graphs.
       const path = sourcePath(output.path.slice(resolve(root).length + 1));
       if (resolve(root, path) !== output.path) throw new TypeError('Volume output escapes its package.');
-      if (path.startsWith(`${volume.base}/prepared/`)) closure[path] = sha256(output.text);
-      else if (path === `${volume.base}/inventory.json`) closure[path] = sha256(output.text);
+      if (path.startsWith(`${volume.base}/prepared/`) || path === `${volume.base}/inventory.json`) closure.add(path);
       else if (!new RegExp(`^public/scenes/${volume.id}/datasets/[a-f0-9]{64}\\.webp$`).test(path)) throw new TypeError('Volume output escapes its package.');
     }
   }
   metadata.push(...await spatialSourceCitations(root, sources, input));
-  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,catalogSha256:sourceCatalogDigest(sourceCatalog),
-    usage:compileSourceUsage(objects,sources,metadata),inventory,closure};
+  const sourcePayload = {schema:'cssearth-prepared-sources@1',catalog:sourceCatalog,
+    usage:compileSourceUsage(objects,sources,metadata),inventory,closure:[...closure].sort()};
   const preparedSources = parsePreparedSources(sourcePayload);
   const payload = { schema: 'cssearth-prepared-exploration@3', catalog, agencies, images, emblems,
-    sourceCatalogSha256:preparedSources.catalogSha256,graph: compileContributions(objects, catalog) };
+    graph: compileContributions(objects, catalog) };
   const prepared = parsePreparedExploration(payload,sources);
   const output = { path: resolve(root, 'site/prepared-facilities.json'), text: JSON.stringify(payload, null, 2) + '\n' };
   const sourcesOutput = {path:resolve(root,'site/prepared-sources.json'),text:JSON.stringify(sourcePayload,null,2)+'\n'};
