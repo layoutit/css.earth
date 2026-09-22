@@ -113,7 +113,7 @@ export async function preparePlanets({ projectRoot = process.cwd(), force = fals
   const start = performance.now();
   try {
     for (const script of sharedSteps) {
-      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, "tools", script)], cwd: root });
+      const result = await runObjectCommand({ command: process.execPath, argumentsList: [resolve(root, "tools/prepare", script)], cwd: root });
       assert.equal(result.exitCode, 0, `${script} failed`); assert.equal(result.signal, null);
     }
     const report = await runCachedPreparationObjects({ projectRoot: root, force, objectIds, concurrency });
