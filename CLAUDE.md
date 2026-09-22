@@ -4,6 +4,7 @@
 - Saturn is the accepted visual-quality reference. Shared input policy belongs in `site/runtime-policy.mts`; browser conformance proves common interaction behavior. Keep object-specific rendering facts inside each object package. Do not fabricate fallback scenes for planned objects.
 - Keep one open-ended `OBJECTS` registry and one generic object adapter. The Sun, planets, and future moons, dwarf planets, asteroids, or other bodies use the same object contract. The fixed eight planet ids are a reporting filter, not a second registry or adapter.
 - Use one shared world camera and navigation contract for every prepared object. Menu membership never limits rendering; new object types extend prepared capabilities rather than introduce separate page-based scene owners.
+- The shared camera has two modes. Lock orbits the mounted object, and zooming out hands the view to its system overview. Free pans, turns and zooms with the J2000 ecliptic north held at a chosen elevation, and its distance never changes the scene. A mode changes input and orientation only; it never mounts anything or changes the projection.
 - Keep one shared application shell. Object packages supply content and supported capabilities, not shell markup, typography, navigation, or responsive behavior.
 - Keep runtime DOM retained and stable. Prepare textures, atlases, scene state, lighting, weather, and other static work ahead of runtime.
 - Runtime may decode and transport prepared state. It must not derive source data, geometry, charts, atlases, or scene assets.

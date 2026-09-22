@@ -135,6 +135,22 @@ const searchCategories = [
     ><MaterialSymbol name={category.icon} /><span>{category.label}</span></button>)}
   </div>
   <div class="planet-header-actions" role="group" aria-label="App actions">
+    <div class="planet-camera-mode" role="group" aria-label="Camera">
+      <div class="planet-camera-mode-options" role="radiogroup" aria-label="Camera mode">
+        <label class="planet-camera-mode-option" title="Keep the camera locked on the object">
+          <input class="planet-camera-mode-input" type="radio" name="camera-mode" value="orbit" checked disabled />
+          <span>Lock</span>
+        </label>
+        <label class="planet-camera-mode-option" title="Move freely at a chosen angle">
+          <input class="planet-camera-mode-input" type="radio" name="camera-mode" value="free" disabled />
+          <span>Free</span>
+        </label>
+      </div>
+      <label class="planet-camera-angle" title="Camera angle above the orbit plane" hidden>
+        <input class="planet-camera-angle-input" type="range" min="0" max="90" step="1" value="35" aria-label="Camera angle" disabled />
+        <output class="planet-camera-angle-value">35°</output>
+      </label>
+    </div>
     <a class="planet-header-link" href="https://github.com/layoutit/cssEarth" target="_blank" rel="noopener noreferrer" aria-label="GitHub" title="GitHub">
       <GitHubIcon />
     </a>

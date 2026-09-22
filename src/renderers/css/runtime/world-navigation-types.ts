@@ -13,6 +13,8 @@ export interface ObjectWorldNavigation {
   setPreparedFocus(focus: PreparedNavigationFocus | null): void;
   flyToPreparedFocus(focus: PreparedNavigationFocus, options?: PreparedFocusFlightOptions): Promise<{ completed: boolean }>;
   setZoomOutCentering?(enabled: boolean): void;
+  /** The shared camera's view mode; false when this object cannot take it. */
+  setViewMode?(mode: 'orbit' | 'free', elevationDegrees?: number): boolean;
   /** True once every prepared detail group is connected and painted. */
   detailActivated?(): boolean;
   optics(): WorldCameraViewport & { framingRadiusPixels: number;

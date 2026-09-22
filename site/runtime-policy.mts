@@ -1,5 +1,6 @@
 import type { RuntimePolicy } from "../src/renderers/css/navigation/runtime-policy.js";
 import type { AutomaticPlaybackInput, AutomaticPlaybackPolicy } from "./shell-contract-types.mts";
+import { OBLIQUITY_J2000_RAD } from "@cssearth/astronomy";
 
 export const MOBILE_VIEWPORT_MAX = 820;
 export const DESKTOP_VIEWPORT_MIN = MOBILE_VIEWPORT_MAX + 1;
@@ -9,6 +10,13 @@ export const MOBILE_VIEWPORT_QUERY =
 export const MOBILE_TOUCH_ACTION = "none";
 export { CANONICAL_PREPARED_IMAGE_DENSITY } from "../src/renderers/css/rendering/prepared-object-assets.ts";
 export const SKYBOX_DRAG_ENABLED = true;
+// The free camera holds one world vertical for every object, the J2000
+// ecliptic north, at the elevation the viewer chooses; it opens at 35 degrees.
+export const FREE_CAMERA = Object.freeze({
+  upReference: Object.freeze([0, -Math.sin(OBLIQUITY_J2000_RAD), Math.cos(OBLIQUITY_J2000_RAD)] as const),
+  elevationDegrees: 35,
+  turnDegreesPerPixel: 0.25,
+});
 export const CENTER_SELECTION_DURATION_SECONDS = 0.35;
 // A wheel during a fly-to, or a click, drag or key before the destination approach is drawn,
 // hurries the arrival by this factor instead of stopping the flight where it is, which stranded

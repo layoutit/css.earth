@@ -1,4 +1,6 @@
 import type { SceneState } from './shell-contract-types.mts';
+import type { CameraViewState as CameraView } from '../src/renderers/css/navigation/free-camera.js';
+import { FREE_CAMERA } from './runtime-policy.mts';
 import type { ObjectSceneLifecycle } from '../src/renderers/css/runtime/deferred-object-mount.js';
 import type { BrowserWindow, SceneFactory } from './browser-types.mts';
 import { errorMessage, record } from './browser-types.mts';
@@ -53,6 +55,8 @@ export function createSceneRouter({
   const scenes = createSceneSessions();
   let mountTask: Promise<boolean | undefined> | null = null;
   let motionEnabled = false;
+  // The shared camera's view survives navigation: every mount starts in its mode and free-camera elevation.
+  let cameraView: CameraView = Object.freeze({ mode: 'orbit', elevationDegrees: FREE_CAMERA.elevationDegrees });
   const preferences = createWorldPreferences(documentTarget);
   let hasPresented = false;
   const initialScene = retainInitialScene(stage);
@@ -129,6 +133,11 @@ export function createSceneRouter({
           onMotionChange(next) { if (shellOwner === owner && scenes.current) {
             motionEnabled = next === true; syncPlayback(); scenes.current?.viewUrl?.schedule();
           } },
+          cameraView,
+          onCameraViewChange(next) { if (shellOwner === owner && scenes.current) {
+            cameraView = next;
+            scenes.current.mount?.navigation?.setViewMode?.(next.mode, next.elevationDegrees);
+          } },
         });
       }
       const shell = shellOwner.shell!;
@@ -157,6 +166,13 @@ export function createSceneRouter({
         ...(worldContextMount ? { viewport: worldContextMount.viewport } : {}),
         ...(framePresenter ? { framePresenter } : {}),
         onMotionRequest: requestMotion,
+        viewMode: cameraView.mode,
+        freeElevationDegrees: cameraView.elevationDegrees,
+        onViewChange(view) {
+          if (!scenes.isCurrent(session)) return;
+          cameraView = view;
+          shellOwner?.shell?.setCameraView?.(view);
+        },
       }, handoff)) return false;
       const mount = session.mount;
       if (!mount) return false;
@@ -704,7 +720,8 @@ export function createSceneRouter({
       // A focus the URL names is a selection from the moment it is named, before
       // its prepared bank has loaded and the runtime can report it. The camera
       // scale must not deselect it during that window.
-      isAvailable: () => scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
+      // The free camera goes where the viewer takes it: its distance never selects another scene.
+      isAvailable: () => cameraView.mode !== 'free' && scenes.isCurrent(session) && scenes.state.kind === 'ready' && !requests.current
         && !owner.preparedFocus?.() && !preparedFocusFromUrl(windowTarget.location.href),
       windowTarget,
       onChange(next) {

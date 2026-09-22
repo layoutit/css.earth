@@ -259,6 +259,11 @@
 .explorer-settings-panel .planet-speed-setting {
   grid-column: 3;
   grid-row: 1;
+}
+
+/* One slider look across the shell: the playback speed and the header's camera angle. */
+.explorer-settings-panel .planet-speed-setting,
+.planet-camera-angle-input {
   width: 80px;
   height: 4px;
   margin: 0;
@@ -270,7 +275,8 @@
   cursor: pointer;
 }
 
-.explorer-settings-panel .planet-speed-setting::-webkit-slider-thumb {
+.explorer-settings-panel .planet-speed-setting::-webkit-slider-thumb,
+.planet-camera-angle-input::-webkit-slider-thumb {
   appearance: none;
   width: 14px;
   height: 14px;
@@ -279,7 +285,8 @@
   background: var(--shell-text);
 }
 
-.explorer-settings-panel .planet-speed-setting::-moz-range-thumb {
+.explorer-settings-panel .planet-speed-setting::-moz-range-thumb,
+.planet-camera-angle-input::-moz-range-thumb {
   width: 14px;
   height: 14px;
   border: 0;
@@ -287,7 +294,8 @@
   background: var(--shell-text);
 }
 
-.explorer-settings-panel .planet-speed-setting:focus-visible {
+.explorer-settings-panel .planet-speed-setting:focus-visible,
+.planet-camera-angle-input:focus-visible {
   outline: 2px solid var(--shell-focus);
   outline-offset: 2px;
 }
