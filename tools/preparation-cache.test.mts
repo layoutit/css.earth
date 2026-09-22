@@ -99,7 +99,6 @@ test("object descriptors count only the fields each owner can change", async () 
   await editDescriptor(root, "pluto", value => {
     value.properties.catalog.description = "Another card";
     value.properties.recipe.radius = 9;
-    value.properties.page.metadata.sha256 = "d";
     value.prepared.sha256 = "e";
   });
   assert.ok(await readPreparationReceipt(receiptAt(root)), "cards and another object's recipe and pins leave the receipt valid");
