@@ -51,6 +51,11 @@ export interface ObjectMountOptions {
   framePresenter?: import('../navigation/world-frame-presenter.js').WorldFramePresenter;
   viewport?: import('../navigation/camera-viewport.js').CameraViewport;
   initialWorldCamera?: WorldCameraPose;
+  /** The shared camera's view, set before the initial world camera so a handoff keeps its framing. */
+  viewMode?: 'orbit' | 'free';
+  freeElevationDegrees?: number;
+  /** Reports the view the viewer chose (mode and free-camera elevation), so the next mount can keep it. */
+  onViewChange?(view: import('../navigation/free-camera.js').CameraViewState): void;
   /** The router releases refinement after saved-view restoration or flight. */
   deferTextureRefinement?: boolean;
   /** The camera can accept the live application pose before surface activation completes. */

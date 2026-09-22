@@ -39,7 +39,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
   requireObjectRuntimeDefinition(definition);
   if (!Array.isArray(definition.motion)) throw new TypeError('Object motion bindings must be prepared before mount.');
   const environment = { ...nativeServices, ...services };
-  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
+  return function mountObject(stage: HTMLElement, { onError, onMotionRequest = () => {}, inputSurface, runtimePolicy, mobilePreviewElement = null, diagnostics = false, capabilities = {}, worldFrame, worldContext, framePresenter, viewport, preparedResources, preparedTree, initialWorldCamera, viewMode = 'orbit', freeElevationDegrees, onViewChange, initialProjection, onNavigationReady, progressiveActivation = false, arrivingByFlight = false, deferTextureRefinement = false }: ObjectMountOptions) {
     if (stage?.dataset?.objectId !== definition.id) throw new TypeError("Object runtime identity does not match the registered stage.");
     if (stage?.nodeType !== 1 || !stage.ownerDocument || typeof onError !== "function" || typeof onMotionRequest !== "function") {
       throw new TypeError("Object mount requires the registered stage and error owner.");
@@ -150,6 +150,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
     });
     const navigation: ObjectWorldNavigation | undefined = worldFrame ? Object.freeze({ frame: worldFrame,
       setZoomOutCentering(enabled: boolean) { if (!lifetime.disposed) getOrbit().setZoomOutCentering(enabled); },
+      setViewMode(mode: 'orbit' | 'free', elevationDegrees?: number) { return !lifetime.disposed && getOrbit().setViewMode(mode, elevationDegrees); },
       capture() { return getOrbit().captureWorldCamera(worldFrame); },
       apply(pose: Parameters<ObjectWorldNavigation['apply']>[0], options?: { signal: AbortSignal }) {
         if (lifetime.disposed) return options ? Promise.resolve(false) : undefined;
@@ -365,7 +366,8 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
         canReveal: () => selection?.state().plan?.deferredTextures !== true,
         cubicSky, skyPlan: definition.sky, directionalSunPlan: definition.sun ?? null, worldContext,
         cameraPlan, viewport, framePresenter, objectId: definition.id, requireSun: false, preparedSurfaceHitTest: mounted.surfaceHitTest,
-        mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal });
+        mobilePreviewElement, onPublish: publication => guarded(() => publish(publication)), onError: fatal,
+        ...(onViewChange ? { onViewChange } : {}) });
       context.own(() => orbit?.destroy());
       if (latestWorldPublication !== null) publishWorldSnapshot(latestWorldPublication);
       if (lifetime.disposed) return;
@@ -376,6 +378,7 @@ export function createObjectRuntime(definition: ObjectRuntimeDefinition, service
       startupDecodedAssets = resources.stats().decodes;
       // Seed the incoming view before an asynchronous material selection can
       // paint. The shared world remains visible throughout a scene handoff.
+      if (viewMode !== 'orbit') orbit.setViewMode(viewMode, freeElevationDegrees);
       if (initialWorldCamera) {
         if (!worldFrame) throw new TypeError('An initial world camera needs a prepared frame.');
         orbit.applyWorldCamera(initialWorldCamera, worldFrame);

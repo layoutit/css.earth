@@ -188,6 +188,9 @@ export function createPerspectiveDolly({
   let aliasZoom: number | null = null;
   let aliasDistance: number | null = null;
   let focal = 0;
+  // Free-camera zoom keeps the screen centre where it is: the body's sideways
+  // offset stays fixed in world units while its depth follows the distance.
+  let lateralZoom = false;
   let viewportWidth = 1;
   let viewportHeight = 1;
   // The eye sits at the sky's vanishing point; the shell lays the body's root
@@ -317,7 +320,7 @@ export function createPerspectiveDolly({
         aliasDistance = cameraState.distance;
       }
       if (bodyCenter !== null && cameraState.distance !== previousDistance) {
-        if (zoomOutCentering && cameraState.distance > previousDistance) {
+        if (lateralZoom || (zoomOutCentering && cameraState.distance > previousDistance)) {
           // Dolly back along the content-centre ray. Its perpendicular offset
           // stays fixed in world units, so the body drifts toward the centre
           // naturally as the user zooms out. There is no separate camera turn.
@@ -327,8 +330,12 @@ export function createPerspectiveDolly({
           if (along > 0) {
             const across: PositionM = [bodyCenter[0] - axis[0] * along,
               bodyCenter[1] - axis[1] * along, bodyCenter[2] - axis[2] * along];
-            const nextAlong = Math.sqrt(Math.max(0, cameraState.distance ** 2 - Math.hypot(...across) ** 2));
-            bodyCenter = [across[0] + axis[0] * nextAlong, across[1] + axis[1] * nextAlong, across[2] + axis[2] * nextAlong];
+            const nextAlongSquared = cameraState.distance ** 2 - Math.hypot(...across) ** 2;
+            // Zooming in past the sideways offset would put the body beside the eye: scale instead.
+            if (nextAlongSquared > (cameraState.distance / 2) ** 2) {
+              const nextAlong = Math.sqrt(nextAlongSquared);
+              bodyCenter = [across[0] + axis[0] * nextAlong, across[1] + axis[1] * nextAlong, across[2] + axis[2] * nextAlong];
+            } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
           } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
         } else bodyCenter = scaleWorldPosition(bodyCenter, cameraState.distance / previousDistance);
       }
@@ -449,6 +456,9 @@ export function createPerspectiveDolly({
     },
     bodyCenter: () => bodyCenter,
     setZoomOutCentering(enabled: boolean) { zoomOutCentering = enabled; },
+    setLateralZoom(enabled: boolean) { lateralZoom = enabled; },
+    /** Sideways reach of free-camera panning: the authored extent of the mounted system. */
+    maximumExtent: () => maximumExtent,
     setBodyCenter(next: PositionM) {
       validateWorldPosition(next);
       const distance = Math.hypot(...next);

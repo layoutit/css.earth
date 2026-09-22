@@ -17,6 +17,12 @@ export interface ResponsiveOrbitPolicyOptions {
   mediaQuery: MediaQueryList;
   onError?: ((error: unknown) => void) | null;
 }
+export interface FreeCameraPolicy {
+  /** The world's vertical, a unit direction in the shared reference frame. */
+  readonly upReference: readonly [number, number, number];
+  readonly elevationDegrees: number;
+  readonly turnDegreesPerPixel: number;
+}
 /** The application injects its authoritative policy; the engine owns no copy. */
 export interface RuntimePolicy {
   readonly MOBILE_VIEWPORT_QUERY: string;
@@ -31,6 +37,9 @@ export interface RuntimePolicy {
    * carries the platform's own momentum, so gliding it again compounds two
    * decays; leaving it out lets that gesture stop with its last event. */
   readonly WHEEL_ZOOM_INERTIA_INPUT_KINDS: readonly WheelInputKind[];
+  /** The free camera: `upReference` held at a chosen elevation (`elevationDegrees` by default), turned and tilted by
+   * `turnDegreesPerPixel` of drag. */
+  readonly FREE_CAMERA: FreeCameraPolicy;
   sceneCursor(state: { surface: boolean; pressed: boolean; enabled: boolean }): string;
   isOrbitDragStart(event: Pick<PointerEvent, 'isPrimary' | 'button'>): boolean;
   wheelZoomInputKind(event: Pick<WheelEvent, 'deltaMode' | 'ctrlKey' | 'deltaX' | 'deltaY' | 'timeStamp'>,

@@ -11,21 +11,24 @@ import type { PerspectiveDolly, PerspectiveWorldContext } from './perspective-do
 import type { PhysicalSharedCamera } from './view-url.js';
 import type { RetainedCubicSky } from '../solar-system/cubic-sky-runtime.js';
 import type { DirectionalSunPlan } from '../solar-system/directional-sun-coordinate.js';
-import { rotationFromMatrix3d } from '../solar-system/heliocentric-geometry.js';
+import { offAxisFrame, rotationFromMatrix3d } from '../solar-system/heliocentric-geometry.js';
+import { apply as applyRotation, blendOrientations, composeRotations, heldRotation, sceneUp, rotationsDiffer, transposeRotation, turnAboutUp } from './free-camera.js';
+import type { CameraViewState, ViewMode } from './free-camera.js';
+import { bindFreeCameraInput } from './free-camera-input.js';
 import { worldCameraFromCenteredPresentation, worldCameraFromPresentation } from './world-camera.js';
 import type { PreparedWorldCameraFrame, WorldCameraPose, WorldCameraViewport } from './world-camera.js';
 import type { PositionM } from '@cssearth/engine';
 import { bindWorldCameraPicking } from './world-camera-picking.js';
 import { hitsProjectedBody } from './world-camera-hit.js';
 import { prepareSurfaceTargetRotation } from './surface-target.js';
-import { worldRotationCss } from './world-camera-math.js';
+import { worldQuaternionFromRotation, worldRotationCss, worldRotationFromQuaternion } from './world-camera-math.js';
 import type { PhysicalProjection } from '../prepared-data/physical-projection.js';
 import { createPreparedFocusNavigation } from './prepared-focus.js';
 import type { PreparedNavigationFocus, PreparedFocusFlightOptions } from './prepared-focus.js';
 export interface OrbitStateUpdate { pitch?: number; controlPitch?: number; controlYaw?: number; zoom?: number; distance?: number; distanceKilometers?: number; bodyCenterKilometers?: PositionM; pose?: CameraPose; }
 export type OrbitState = { pitch: number; controlPitch: number; controlYaw: number; zoom: number; pose: CameraPose } & Partial<ReturnType<PerspectiveDolly['state']>>;
 export interface OrbitPublication extends CameraAngles { worldCamera?: WorldCameraPose; sceneMatrix: string; skyboxMatrix: string; sunViewDirection: Vector3 | null; skySunViewDirection: Vector3 | null; counterRotation: string; counterRotationFor(localMatrix: string | DOMMatrix | null): string; zoom: number; projection?: PhysicalProjection; distance?: number; focal?: number; viewportWidth?: number; viewportHeight?: number; stageViewport?: WorldCameraViewport; principalOffset?: readonly number[]; body?: ReturnType<PerspectiveDolly['publish']>['body']; levelOfDetail?: ReturnType<PerspectiveDolly['levelOfDetail']>; }
-export interface RetainedOrbitOptions { framePresenter?: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSunPlan?: DirectionalSunPlan | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import('./camera-viewport.js').CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; revealGroups?: readonly (readonly HTMLElement[])[];
+export interface RetainedOrbitOptions { framePresenter?: WorldFramePresenter; preparedSurfaceHitTest?: (clientX: number, clientY: number) => boolean; stage: HTMLElement; inputSurface: HTMLElement; runtimePolicy: RuntimePolicy; cameraElement: HTMLElement; sceneElement: HTMLElement; cubicSky: RetainedCubicSky; skyPlan: CameraSkyPlan; directionalSunPlan?: DirectionalSunPlan | null; worldContext?: PerspectiveWorldContext; cameraPlan: CameraPlan; viewport?: import('./camera-viewport.js').CameraViewport; objectId: string; mobilePreviewElement?: HTMLElement | null; onPublish?: (publication: OrbitPublication) => void; onViewChange?: (view: CameraViewState) => void; onInteractionStart?: () => void; onInteractionEnd?: () => void; onError(error: unknown): void; requireSun?: boolean; revealGroups?: readonly (readonly HTMLElement[])[];
   /** False while the mesh has no committed material; it stays hidden until then. */
   canReveal?: () => boolean; }
 export interface OrbitServices extends InteractionServices { createPolyCamera?: typeof createPolyCamera; createCubicSkyCameraOrientation?: typeof createCubicSkyCameraOrientation; bindResponsiveOrbitPolicy?: RuntimePolicy['bindResponsiveOrbitPolicy']; selectPreparedResponsiveZoom?: typeof selectPreparedResponsiveZoom; createPerspectiveDolly?: typeof createPerspectiveDolly; HTMLElement?: typeof HTMLElement; matchMedia?: (query: string) => MediaQueryList; MutationObserver?: typeof MutationObserver; }
@@ -68,6 +71,7 @@ export function createRetainedCubicSkyOrbit({
   objectId,
   mobilePreviewElement,
   onPublish = () => {},
+  onViewChange = () => {},
   onInteractionStart = () => {},
   onInteractionEnd = () => {},
   onError,
@@ -196,6 +200,7 @@ export function createRetainedCubicSkyOrbit({
     ? viewSunDirectionToPhysicalLightDirection
     : viewSunDirectionToPreparedLightDirection;
   let publications = 0;
+  let viewMode: ViewMode = 'orbit';
   let interactionStarts = 0;
   let interactionEnds = 0;
   let skySunViewDirection = directionalSunPlan?.referenceViewDirection ?? null;
@@ -217,6 +222,8 @@ export function createRetainedCubicSkyOrbit({
   const publicationState = () => ({ requestedRevision: requestedPublication, presentedRevision: presentedPublication, presentedWorld });
   const publish = (signal?: AbortSignal) => {
     if (lifetime.disposed) return;
+    // Free-camera input and zoom land on the held orientation; a flight or restore keeps its own until it settles.
+    if (viewMode === 'free' && freeHeld) holdFree();
     // Resolve the active input pivot before an asynchronous frame captures the physical observer.
     preparedFocus?.syncRotation();
     const sceneMatrix = orientation.scene();
@@ -291,10 +298,112 @@ export function createRetainedCubicSkyOrbit({
     try {
       requireWorldPerspective(frame);
       controls.stop();
+      releaseFree();
       preparedFocus!.adopt(world, frame);
       return publish(signal);
     } catch (error) { retireFailure(error); throw error; }
   };
+  // The free camera: the same camera unlocked from the body, holding the world
+  // vertical at a chosen elevation, panned and turned instead of orbited.
+  const freePolicy = runtimePolicy.FREE_CAMERA;
+  const freeAvailable = perspective !== null && worldContext !== undefined && skyTracksScene && freePolicy !== undefined;
+  let elevation = freePolicy?.elevationDegrees ?? 0;
+  // One world vertical for every object, carried into this object's scene frame.
+  const up = freeAvailable ? sceneUp(worldContext!.frame, freePolicy.upReference) : null;
+  const holdFree = () => {
+    const current = rotationFromMatrix3d(orientation.sceneMatrix());
+    const next = heldRotation(current, up!, elevation);
+    if (rotationsDiffer(current, next)) orientation.setSceneRotation(next);
+  };
+  const reportView = () => onViewChange(Object.freeze({ mode: viewMode, elevationDegrees: elevation }));
+  // The body centre in eye space, including the centred dolly's implicit one.
+  const eyeBodyCenter = (): [number, number, number] => {
+    const explicit = perspective!.bodyCenter();
+    if (explicit) return [explicit[0], explicit[1], explicit[2]];
+    const optics = perspective!.viewport(), distance = safeCamera.state.distance;
+    const axis = offAxisFrame(optics.focalPixels, optics.principalOffsetPixels);
+    return [distance * axis.sinTheta * axis.radial[0]!, distance * axis.sinTheta * axis.radial[1]!, -distance * axis.cosTheta];
+  };
+  const panFree = (dxPixels: number, dyPixels: number) => {
+    // A pan leaves the focus a flight arrived at: zoom then follows the screen centre.
+    preparedFocus?.clear();
+    const center = eyeBodyCenter(), perPixel = -center[2] / perspective!.viewport().focalPixels;
+    let x = center[0] + dxPixels * perPixel, y = center[1] + dyPixels * perPixel;
+    // Panning reaches across the mounted system, not into empty space beyond it.
+    const reach = Math.max(perspective!.maximumExtent(), 3 * worldContext!.bodyRadiusUnits), lateral = Math.hypot(x, y);
+    if (lateral > reach) { x *= reach / lateral; y *= reach / lateral; }
+    perspective!.setBodyCenter([x, y, center[2]]);
+    publish();
+  };
+  // Turns and tilts pivot on the screen centre at the body's depth, or on the body itself; an active focus keeps its own pivot.
+  const reorientFree = (next: readonly number[], aroundBody = false) => {
+    const current = rotationFromMatrix3d(orientation.sceneMatrix());
+    if (!aroundBody && !preparedFocus?.current() && perspective!.bodyCenter() !== null) {
+      const center = eyeBodyCenter(), moved = applyRotation(composeRotations(next, transposeRotation(current)), [center[0], center[1], 0]);
+      perspective!.setBodyCenter([moved[0], moved[1], center[2] + moved[2]]);
+    }
+    orientation.setSceneRotation(next);
+    publish();
+  };
+  const turnFree = (degrees: number, aroundBody = false) => {
+    freeHeld = true;
+    const current = rotationFromMatrix3d(orientation.sceneMatrix());
+    reorientFree(composeRotations(turnAboutUp(current, up!, degrees), current), aroundBody);
+  };
+  const setElevation = (degrees: number, aroundBody = false) => {
+    const next = clamp(degrees, 0, 90);
+    if (next === elevation) return;
+    elevation = next;
+    if (viewMode === 'free') { freeHeld = true; reorientFree(heldRotation(rotationFromMatrix3d(orientation.sceneMatrix()), up!, elevation), aroundBody); }
+    reportView();
+  };
+  const tiltFree = (degrees: number, aroundBody = false) => setElevation(elevation + degrees, aroundBody);
+  // A flight, restore or handoff owns the orientation while it moves. Once it has been still briefly, the view eases
+  // back to level about the body. Input that starts meanwhile levels at once.
+  let freeHeld = true, settleTimer: number | null = null;
+  const suspendFree = () => {
+    if (viewMode !== 'free') return;
+    freeHeld = false;
+    if (settleTimer !== null) { stage.ownerDocument.defaultView?.clearTimeout(settleTimer); settleTimer = null; }
+  };
+  const releaseFree = () => {
+    if (viewMode !== 'free' || lifetime.disposed) return;
+    suspendFree();
+    settleTimer = stage.ownerDocument.defaultView!.setTimeout(() => { settleTimer = null; levelFree(); }, 250);
+  };
+  const freeFlight = <T,>(start: () => Promise<T>): Promise<T> => {
+    suspendFree();
+    return start().then(result => { releaseFree(); return result; });
+  };
+  lifetime.onDispose(() => { if (settleTimer !== null) stage.ownerDocument.defaultView?.clearTimeout(settleTimer); });
+  const levelFree = () => {
+    if (viewMode !== 'free' || freeHeld || lifetime.disposed) return;
+    const current = rotationFromMatrix3d(orientation.sceneMatrix());
+    const from = worldQuaternionFromRotation(current), target = worldQuaternionFromRotation(heldRotation(current, up!, elevation));
+    const settle = (progress: number) => {
+      if (freeHeld || lifetime.disposed) return;
+      orientation.setSceneRotation(worldRotationFromQuaternion(blendOrientations(from, target, progress * progress * (3 - 2 * progress))));
+      if (progress >= 1) freeHeld = true;
+      publish();
+    };
+    if (stage.ownerDocument.defaultView?.matchMedia('(prefers-reduced-motion: reduce)').matches) { settle(1); return; }
+    void controls.flyTo({ sample: settle, durationMilliseconds: 450 });
+  };
+  const freeInput = freeAvailable ? bindFreeCameraInput({
+    inputSurface,
+    turnDegreesPerPixel: freePolicy.turnDegreesPerPixel,
+    onStart() { freeHeld = true; interactionStarts += 1; onInteractionStart(); },
+    onEnd() { interactionEnds += 1; onInteractionEnd(); reportView(); },
+    pan: panFree,
+    turn: turnFree,
+    tilt: tiltFree,
+    hitsBody: (clientX, clientY) => surfaceHitTest?.(clientX, clientY) === true,
+    // About a quarter turn across the body's radius, so the surface keeps pace with the pointer.
+    bodyDegreesPerPixel: () => 90 / perspective!.trackball().radius,
+    zoomBy(factor) { safeCamera.update({ zoom: clamp(safeCamera.state.zoom * factor, minimumZoom(), maximumZoom()) }); publish(); },
+    onError: retireFailure,
+  }) : null;
+  if (freeInput) lifetime.onDispose(() => freeInput.destroy());
   const mobileQuery = matchMedia(runtimePolicy.MOBILE_VIEWPORT_QUERY);
   const publishCameraDelta = ({
     controlPitchDelta,
@@ -425,6 +534,42 @@ export function createRetainedCubicSkyOrbit({
       stage.addEventListener("transitionend", onTransitionEnd);
     }
   }
+  function flyToOrientation({ controlPitch, controlYaw, controlRoll = 0, zoom, transition }: CameraAngles & { zoom: number; controlRoll?: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }, { surfaceTarget = false } = {}): Promise<{ completed: boolean }> {
+    try {
+    if (![controlPitch, controlYaw, controlRoll, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
+    controls.stop();
+    preparedFocus?.clear();
+    const start = { ...safeCamera.state };
+    const targetZoom = transition?.preserveZoom ? start.zoom : clamp(zoom, minimumZoom(), maximumZoom());
+    const viewport = perspective?.viewport();
+    const targetRotation = surfaceTarget && perspective && viewport
+      ? prepareSurfaceTargetRotation(perspective.bodyCenter() ??
+        [-viewport.principalOffsetPixels[0], -viewport.principalOffsetPixels[1], -viewport.focalPixels]) : undefined;
+    // CSS parsing quantizes coefficients; numerical camera state must keep
+    // the original doubles so the proper-rotation invariant survives flight.
+    const targetCorrection = targetRotation && new DOMMatrix([
+      targetRotation[0], targetRotation[3], targetRotation[6], 0,
+      targetRotation[1], targetRotation[4], targetRotation[7], 0,
+      targetRotation[2], targetRotation[5], targetRotation[8], 0, 0, 0, 0, 1]);
+    const roll = new DOMMatrix().rotateAxisAngle(0, 0, 1, controlRoll);
+    const correction = targetCorrection ? targetCorrection.multiply(roll) : roll;
+    const flight = orientation.prepareFlight({ controlPitch, controlYaw }, correction);
+    const sample = (progress: number) => {
+      const ease = progress * progress * (3 - 2 * progress);
+      const frame = transition ? { rotation: ease, zoom: start.zoom * (targetZoom / start.zoom) ** ease } : sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
+        overviewZoom: cameraPlan.defaultZoom, angularDistance: flight.angularDistance }, progress);
+      safeCamera.update({ rotX: start.rotX + (controlPitch - start.rotX) * frame.rotation,
+        rotY: start.rotY + (controlYaw - start.rotY) * frame.rotation, zoom: frame.zoom });
+      flight.sample(frame.rotation);
+      publish();
+    };
+    if (transition?.durationMilliseconds === 0 || stage.ownerDocument.defaultView?.matchMedia("(prefers-reduced-motion: reduce)").matches === true) {
+      sample(1);
+      return Promise.resolve({ completed: true });
+    }
+    return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds });
+    } catch (error) { retireFailure(error); throw error; }
+  }
   publish();
   constructing = false;
   return Object.freeze({
@@ -433,11 +578,33 @@ export function createRetainedCubicSkyOrbit({
     initialResponsiveZoom: () => initialResponsiveZoom,
     currentResponsiveZoom: () => responsiveFit.zoom,
     setZoomOutCentering(enabled: boolean) { perspective?.setZoomOutCentering(enabled); },
+    /** Orbit or free, optionally at a chosen elevation. False when this object has no physical world camera to free. */
+    setViewMode(mode: ViewMode, elevationDegrees?: number): boolean {
+      if (lifetime.disposed) return false;
+      if (mode !== 'orbit' && mode !== 'free') throw new TypeError('Unknown view mode.');
+      if (elevationDegrees !== undefined && !Number.isFinite(elevationDegrees)) throw new TypeError('Free camera elevation must be finite.');
+      if (mode === viewMode) { if (elevationDegrees !== undefined) setElevation(elevationDegrees); return true; }
+      if (elevationDegrees !== undefined) elevation = clamp(elevationDegrees, 0, 90);
+      if (!freeAvailable) return false;
+      try {
+        controls.stop();
+        viewMode = mode;
+        const free = mode === 'free';
+        perspective!.setLateralZoom(free);
+        controls.update({ drag: !free });
+        freeInput!.setEnabled(free);
+        if (free) { suspendFree(); publish(); levelFree(); }
+        else { freeHeld = true; if (settleTimer !== null) { windowTarget.clearTimeout(settleTimer); settleTimer = null; } publish(); }
+        reportView();
+        return true;
+      } catch (error) { retireFailure(error); throw error; }
+    },
     preparedFocus: () => preparedFocus?.current() ?? null,
     setPreparedFocus(focus: PreparedNavigationFocus | null, frame: PreparedWorldCameraFrame) {
       if (lifetime.disposed) return;
       requireWorldPerspective(frame);
       controls.stop();
+      releaseFree();
       preparedFocus!.set(focus, frame);
       publish();
     },
@@ -445,8 +612,8 @@ export function createRetainedCubicSkyOrbit({
       viewport: WorldCameraViewport & { framingRadiusPixels: number }, options: PreparedFocusFlightOptions = {}) {
       if (lifetime.disposed) return Promise.resolve({ completed: false });
       requireWorldPerspective(frame);
-      return preparedFocus!.flyTo(focus, frame, viewport, { ...options,
-        reducedMotion: options.reducedMotion ?? windowTarget.matchMedia('(prefers-reduced-motion: reduce)').matches });
+      return freeFlight(() => preparedFocus!.flyTo(focus, frame, viewport, { ...options,
+        reducedMotion: options.reducedMotion ?? windowTarget.matchMedia('(prefers-reduced-motion: reduce)').matches }));
     },
     captureWorldCamera(frame: PreparedWorldCameraFrame): WorldCameraPose {
       const physical = requireWorldPerspective(frame);
@@ -468,42 +635,9 @@ export function createRetainedCubicSkyOrbit({
       try { orientation.rebaseScene(change); publish(); }
       catch (error) { retireFailure(error); throw error; }
     },
-    flyToState({ controlPitch, controlYaw, controlRoll = 0, zoom, transition }: CameraAngles & { zoom: number; controlRoll?: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }, { surfaceTarget = false } = {}) {
+    flyToState(destination: CameraAngles & { zoom: number; controlRoll?: number; transition?: { durationMilliseconds: number; preserveZoom: boolean } }, options: { surfaceTarget?: boolean } = {}) {
       if (lifetime.disposed) return Promise.resolve({ completed: false });
-      try {
-      if (![controlPitch, controlYaw, controlRoll, zoom].every(Number.isFinite)) throw new TypeError("Invalid prepared camera destination.");
-      controls.stop();
-      preparedFocus?.clear();
-      const start = { ...safeCamera.state };
-      const targetZoom = transition?.preserveZoom ? start.zoom : clamp(zoom, minimumZoom(), maximumZoom());
-      const viewport = perspective?.viewport();
-      const targetRotation = surfaceTarget && perspective && viewport
-        ? prepareSurfaceTargetRotation(perspective.bodyCenter() ??
-          [-viewport.principalOffsetPixels[0], -viewport.principalOffsetPixels[1], -viewport.focalPixels]) : undefined;
-      // CSS parsing quantizes coefficients; numerical camera state must keep
-      // the original doubles so the proper-rotation invariant survives flight.
-      const targetCorrection = targetRotation && new DOMMatrix([
-        targetRotation[0], targetRotation[3], targetRotation[6], 0,
-        targetRotation[1], targetRotation[4], targetRotation[7], 0,
-        targetRotation[2], targetRotation[5], targetRotation[8], 0, 0, 0, 0, 1]);
-      const roll = new DOMMatrix().rotateAxisAngle(0, 0, 1, controlRoll);
-      const correction = targetCorrection ? targetCorrection.multiply(roll) : roll;
-      const flight = orientation.prepareFlight({ controlPitch, controlYaw }, correction);
-      const sample = (progress: number) => {
-        const ease = progress * progress * (3 - 2 * progress);
-        const frame = transition ? { rotation: ease, zoom: start.zoom * (targetZoom / start.zoom) ** ease } : sampleDestinationFlight({ startZoom: start.zoom, targetZoom,
-          overviewZoom: cameraPlan.defaultZoom, angularDistance: flight.angularDistance }, progress);
-        safeCamera.update({ rotX: start.rotX + (controlPitch - start.rotX) * frame.rotation,
-          rotY: start.rotY + (controlYaw - start.rotY) * frame.rotation, zoom: frame.zoom });
-        flight.sample(frame.rotation);
-        publish();
-      };
-      if (transition?.durationMilliseconds === 0 || windowTarget.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-        sample(1);
-        return Promise.resolve({ completed: true });
-      }
-      return controls.flyTo({ sample, durationMilliseconds: transition?.durationMilliseconds });
-      } catch (error) { retireFailure(error); throw error; }
+      return freeFlight(() => flyToOrientation(destination, options));
     },
     // Native cache notifications report failures through the same fatal owner.
     invalidate: guardNative(publish),
@@ -543,6 +677,7 @@ export function createRetainedCubicSkyOrbit({
           controlYaw: safeCamera.state.rotY,
         });
       }
+      releaseFree();
       if (bodyCenterKilometers !== undefined && perspective && worldContext) {
         const scale = worldContext.kilometersPerUnit;
         perspective.setBodyCenter([bodyCenterKilometers[0] / scale, bodyCenterKilometers[1] / scale, bodyCenterKilometers[2] / scale]);
@@ -588,6 +723,7 @@ export function createRetainedCubicSkyOrbit({
     stats() {
       return Object.freeze({
         owner: "shared-retained-cubic-sky-orbit",
+        viewMode, freeElevationDegrees: elevation,
         inputMode: "event-driven-unbounded-matrix-drag-wheel-pinch",
         enabledAxes: "unbounded-pitch-and-yaw",
         cameraModel: cameraPlan.cameraModel,

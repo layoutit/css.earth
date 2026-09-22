@@ -472,6 +472,44 @@ body[data-sidebar-collapsed="true"] .planet-sidebar { display: none; }
   background: var(--explorer-header-control-selected);
 }
 .planet-header-action:focus-visible { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+/* Camera choice: Lock and Free share one pill; Free adds its angle slider inside it. */
+.planet-camera-mode {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  height: var(--explorer-category-height);
+  padding: 3px;
+  border-radius: var(--explorer-control-radius);
+  background: var(--explorer-header-control-background);
+}
+.planet-camera-mode-options { display: flex; align-items: center; height: 100%; }
+.planet-camera-mode-option {
+  position: relative;
+  display: inline-grid;
+  place-items: center;
+  height: 100%;
+  padding-inline: 12px;
+  border-radius: var(--explorer-control-radius);
+  color: var(--explorer-control-text);
+  font: var(--shell-font-content);
+  font-size: 14px;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.planet-camera-mode-option:hover { color: var(--shell-text); }
+.planet-camera-mode-option:has(:checked) { color: var(--shell-text); background: var(--explorer-header-control-selected); }
+.planet-camera-mode-option:has(:focus-visible) { outline: 2px solid var(--shell-focus); outline-offset: 2px; }
+.planet-camera-mode-input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: inherit; }
+.planet-camera-angle { display: flex; align-items: center; gap: 6px; padding-inline: 10px 8px; }
+.planet-camera-angle[hidden] { display: none; }
+.planet-camera-angle-value {
+  min-width: 3ch;
+  color: var(--shell-text);
+  font: var(--shell-font-content);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+  text-align: end;
+}
 .planet-header-action:disabled {
   opacity: var(--shell-disabled-opacity);
   cursor: default;

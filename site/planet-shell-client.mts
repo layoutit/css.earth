@@ -12,7 +12,7 @@ import type { OverviewScope } from './overview-context.mts';
 import type { ObjectEntry } from './object-schema.mts';
 import type { createNavigationContent } from './navigation-content.mts';
 export type NavigationContent = Awaited<ReturnType<ReturnType<typeof createNavigationContent>['load']>>;
-export interface ShellOptions { objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; surfaceLabelsEnabled?: boolean; onSurfaceLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; threeDStarsEnabled?: boolean; onThreeDStarsChange?(enabled: boolean): void; onCategoryChange?(classification: string | null): void; }
+export interface ShellOptions { objectId: string; documentTarget?: Document; windowTarget?: BrowserWindow; motionEnabled?: boolean; onMotionChange?(enabled: boolean): void; heliosphereEnabled?: boolean; onHeliosphereChange?(enabled: boolean): void; illustrationModelsEnabled?: boolean; onIllustrationModelsChange?(enabled: boolean): void; surfaceLabelsEnabled?: boolean; onSurfaceLabelsChange?(enabled: boolean): void; minimapEnabled?: boolean; onMinimapChange?(enabled: boolean): void; threeDStarsEnabled?: boolean; onThreeDStarsChange?(enabled: boolean): void; cameraView?: CameraView; onCameraViewChange?(view: CameraView): void; onCategoryChange?(classification: string | null): void; }
 interface SelectionPreview { id: string | null; frame?: PreparedWorldCameraFrame | null; commit?(): void; restore(): void; }
 type Panel = readonly [string, HTMLDetailsElement];
 import { matchesObjectCategory, objectCategoryCount } from "./object-categories.mts";
@@ -32,6 +32,8 @@ import { createViewReadout } from "./view-readout.mts";
 import { createSurfaceMapReader } from "./surface-map-context.mts";
 import { mountDiagnosticRecorder } from './diagnostic-recorder.mts';
 import { bodyCardViewAtCamera, overviewScopeAtCamera } from './overview-context.mts';
+import type { CameraViewState as CameraView } from '../src/renderers/css/navigation/free-camera.js';
+import { FREE_CAMERA } from './runtime-policy.mts';
 import { bindNavigationIntent, navigationFragments } from './navigation-fragments.mts';
 import { loadCatalogueFragment, loadCatalogueIndex, readCatalogueFragmentPin, readCatalogueIndexPin } from './catalogue-fragment-loader.mts';
 import type { CatalogueIndexEntry } from './catalogue-index.mts';
@@ -58,6 +60,8 @@ export function mountPlanetShell({
   onMinimapChange = () => {},
   threeDStarsEnabled = false,
   onThreeDStarsChange = () => {},
+  cameraView = { mode: 'orbit', elevationDegrees: FREE_CAMERA.elevationDegrees },
+  onCameraViewChange = () => {},
   onCategoryChange = () => {},
 }: ShellOptions) {
   const drawer = requiredElement(documentTarget, ".planet-drawer-content");
@@ -76,6 +80,8 @@ export function mountPlanetShell({
   let preparedFocus: PreparedCatalogObject | null = readInitialFocus(documentTarget);
   const focusRoot = drawer.querySelector<HTMLElement>('[data-prepared-focus-card]');
   const focusTabs = createTabsController(focusRoot, lifetime, 'prepared-focus');
+  const cameraMode = createCameraModeController(documentTarget, windowTarget, cameraView, onCameraViewChange);
+  lifetime.onDispose(() => cameraMode.destroy());
   const focusCard = createPreparedFocusCard(focusRoot, id => focusTabs.show(id));
   lifetime.onDispose(() => focusCard.destroy());
   lifetime.onDispose(() => unsubscribeOverview?.());
@@ -260,6 +266,7 @@ export function mountPlanetShell({
       }
     },
     setMotionEnabled(enabled: boolean) { if (!lifetime.disposed) settingsController.setMotionEnabled(enabled); },
+    setCameraView(view: CameraView) { if (!lifetime.disposed) cameraMode.set(view); },
     setPlaybackState(state: PlaybackState) {
       if (!lifetime.disposed) {
         settingsController.setPlaybackState(state);
@@ -373,6 +380,47 @@ function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserW
       selectionObserver.disconnect();
       for (const detail of details) detail.hidden = true;
     },
+  });
+}
+
+/** The header's camera choice: Lock orbits the mounted object; Free unlocks the camera at the angle the slider sets. */
+function createCameraModeController(documentTarget: Document, windowTarget: BrowserWindow, initial: CameraView,
+  onChange: (view: CameraView) => void) {
+  const modes = [...documentTarget.querySelectorAll('.planet-camera-mode-input')];
+  const angle = documentTarget.querySelector('.planet-camera-angle');
+  const slider = documentTarget.querySelector('.planet-camera-angle-input');
+  const readout = documentTarget.querySelector('.planet-camera-angle-value');
+  if (modes.length !== 2 || !modes.every(input => input instanceof windowTarget.HTMLInputElement) ||
+      !(angle instanceof windowTarget.HTMLElement) || !(slider instanceof windowTarget.HTMLInputElement) ||
+      !(readout instanceof windowTarget.HTMLOutputElement)) {
+    throw new Error("Planet shell camera controls are incomplete.");
+  }
+  const inputs = modes as HTMLInputElement[];
+  const events = new AbortController();
+  let view = initial;
+  const render = () => {
+    for (const input of inputs) input.checked = input.value === view.mode;
+    angle.hidden = view.mode !== 'free';
+    const degrees = Math.round(view.elevationDegrees);
+    if (slider.value !== String(degrees)) slider.value = String(degrees);
+    readout.value = `${degrees}°`;
+  };
+  for (const input of inputs) input.addEventListener("change", () => {
+    if (!input.checked) return;
+    view = Object.freeze({ ...view, mode: input.value === 'free' ? 'free' : 'orbit' });
+    render();
+    onChange(view);
+  }, { signal: events.signal });
+  slider.addEventListener("input", () => {
+    view = Object.freeze({ ...view, elevationDegrees: Number(slider.value) });
+    render();
+    onChange(view);
+  }, { signal: events.signal });
+  for (const input of [...inputs, slider]) input.disabled = false;
+  render();
+  return Object.freeze({
+    set(next: CameraView) { view = next; render(); },
+    destroy() { events.abort(); for (const input of [...inputs, slider]) input.disabled = true; },
   });
 }
 
