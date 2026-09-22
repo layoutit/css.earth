@@ -16,7 +16,8 @@ import { createHash } from 'node:crypto';
 import { resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { inferEmission, type InferenceGrid } from '@cssearth/nebula-reconstruction/methods/symmetry/solver';
-import type { EdgeOnReconstruction, EdgeOnSolveInputs } from '../../../../../../../tools/objects/circumstellar/author.mts';
+import { circumstellarAuthor, type EdgeOnReconstruction, type EdgeOnSolveInputs } from '../../adapters/preparation/circumstellar.ts';
+import { densityEncoder } from '../../adapters/preparation/density-encoding.ts';
 
 const sha256 = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 const id = process.argv[2];
@@ -24,8 +25,8 @@ if (!id || !/^[a-z][a-z0-9-]*$/u.test(id) || process.argv.length !== 3) throw ne
 const root = process.cwd(), sourceDirectory = resolve(root, 'src/objects', id, 'source');
 // The lab runner bundles this command; the author and the encoder are loaded from the checkout at run time, unbundled, so the
 // paths they resolve from their own location stay the repository's.
-const { edgeOnSolveInputs, exposureAndOpacity, reconstructionPath } = await import(pathToFileURL(resolve(root, 'tools/objects/circumstellar/author.mts')).href) as typeof import('../../../../../../../tools/objects/circumstellar/author.mts');
-const { encodeDensityKtx2 } = await import(pathToFileURL(resolve(root, 'src/preparation/volume/acquisition.ts')).href) as typeof import('../../../../../../../src/preparation/volume/acquisition.ts');
+const { edgeOnSolveInputs, exposureAndOpacity, reconstructionPath } = await circumstellarAuthor(root);
+const { encodeDensityKtx2 } = await densityEncoder(root);
 const raw = JSON.parse(await readFile(resolve(sourceDirectory, 'circumstellar.json'), 'utf8')) as { lenses: { id: string; reconstruction?: { tau?: unknown; iterations?: unknown } }[] };
 const { recipe, lenses } = await edgeOnSolveInputs(id);
 if (!lenses.length) throw new Error(`${id} has no edge-on lens to reconstruct.`);
