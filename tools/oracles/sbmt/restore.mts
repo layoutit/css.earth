@@ -2,7 +2,7 @@
  * plans. Never acquire a whole body's maps or overwrite changed source bytes. */
 import { readFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import { readOracleFixture, readOracleInput, ORACLE_ROOT } from '../fixture.mts';
+import { acquisitionOperations, readOracleFixture, readOracleInput, ORACLE_ROOT } from '../fixture.mts';
 
 export async function restoreInputs() {
   const fixture=await readOracleFixture('sbmt/projection.json');
@@ -14,7 +14,7 @@ export async function restoreInputs() {
     const match=/^src\/objects\/([a-z0-9-]+)\/source\/(.+)$/.exec(input.path);
     if(!match)throw new Error(`Missing checked-in oracle fixture ${input.path}`);
     const sourceRoot=resolve(ORACLE_ROOT,'src/objects',match[1],'source');
-    const {parseSourceManifest,parseAcquisitionPlan,executeAcquisition}=await import('../../objects/dist/operations.js');
+    const {parseSourceManifest,parseAcquisitionPlan,executeAcquisition}=await acquisitionOperations();
     const manifest=parseSourceManifest(JSON.parse(await readFile(resolve(sourceRoot,'manifest.json'),'utf8')),match[1]);
     const plan=parseAcquisitionPlan(JSON.parse(await readFile(resolve(sourceRoot,'preparation/acquisition.json'),'utf8')));
     const operations=plan.operations.filter(step=>'path' in step&&step.path===match[2]);

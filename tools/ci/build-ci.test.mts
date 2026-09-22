@@ -95,21 +95,9 @@ test('CI-only changes can reuse package and renderer outputs while preparation k
   assert.equal(missing.find(result => result.id === 'packages')?.cached, false);
 });
 
-test('the runtime profile omits only preparation declarations and keeps every native build and generator dependency', t => {
-  const f = fixture(t), typed = ciBuildPlan(f.root, 'full'), runtime = ciBuildPlan(f.root, 'full', false);
-  assert.deepEqual(runtime.filter(task => task.id !== 'preparation'), typed.filter(task => task.id !== 'preparation'));
-  const before = typed.find(task => task.id === 'preparation'), after = runtime.find(task => task.id === 'preparation');
-  assert.ok(before && after);
-  assert.deepEqual(after.args, [...before.args, '--no-dts']);
-  assert.deepEqual(after.after, before.after);
-  assert.deepEqual(after.outputs, [{ path: 'tools/objects/dist', required: ['operations.js', 'prepare-spatial-context.js'] }]);
-  assert.ok(before.outputs?.[0]?.required.includes('operations.d.ts'), 'The default profile must retain declarations.');
-});
-
-test('a runtime preparation hit still proves its JS entrypoints and nested files', async t => {
-  const f = fixture(t), options = { ...f, mode: 'full' as const, digest, preparationDts: false };
+test('a preparation hit still proves its JS entrypoints and nested files', async t => {
+  const f = fixture(t), options = { ...f, mode: 'full' as const, digest };
   await buildCi(options);
-  assert.throws(() => readFileSync(resolve(f.root, 'tools/objects/dist/operations.d.ts')), /ENOENT/);
   const warm = await buildCi({ ...options, cacheHit: true });
   assert.deepEqual(warm.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'preparation', 'renderer']);
   for (const file of ['operations.js', 'prepare-spatial-context.js', 'nested/chunk.js']) {
@@ -117,16 +105,4 @@ test('a runtime preparation hit still proves its JS entrypoints and nested files
     const missing = await buildCi({ ...options, cacheHit: true });
     assert.equal(missing.find(result => result.id === 'preparation')?.cached, false, file);
   }
-});
-
-test('wrong-profile cache receipts rebuild preparation even if stale declarations remain beside JS', async t => {
-  const f = fixture(t);
-  await buildCi({ ...f, mode: 'lint', digest });
-  const runtime = await buildCi({ ...f, mode: 'lint', digest, preparationDts: false, cacheHit: true });
-  assert.equal(runtime.find(result => result.id === 'preparation')?.cached, false);
-  // The fixture intentionally leaves these stale files: checking presence alone would accept the wrong build.
-  assert.ok(readFileSync(resolve(f.root, 'tools/objects/dist/operations.d.ts')).length);
-  const typed = await buildCi({ ...f, mode: 'lint', digest, cacheHit: true });
-  assert.equal(typed.find(result => result.id === 'preparation')?.cached, false);
-  assert.deepEqual(typed.filter(result => result.cached).map(result => result.id).sort(), ['packages', 'renderer']);
 });
