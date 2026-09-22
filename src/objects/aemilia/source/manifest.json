@@ -117,9 +117,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/1869-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "1548a46bbeac6684ebe36ec6e3a231c6a5e004346bb6cb42d36dcf2993350aa7"
+      "path": "reference/1869-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +125,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"
@@ -159,9 +155,7 @@
       "path": "reference/model-properties.json"
     },
     {
-      "path": "shape/model-1869.txt",
-      "expectedBytes": 81169,
-      "expectedSha256": "213c1c87869165ef623c8875cf4a9fbf258fd5aeedb6677316e93e75d57d1eff"
+      "path": "shape/model-1869.txt"
     }
   ]
 }

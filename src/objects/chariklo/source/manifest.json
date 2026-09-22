@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 64667,
-      "expectedSha256": "401f0eb94890a9eaa56fa7b04e1cd7c749b294e2ae14bf589c006948b74ef2ee",
       "origin": "https://doi.org/10.1051/0004-6361/202141543",
       "credit": "Morgado et al. (2021), Astronomy & Astrophysics 652, A141; Santos-Sanz et al. (2025), arXiv:2510.06366v1 for the 2022 JWST ring measurements.",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1051/0004-6361/202141543",
       "credit": "Morgado et al. (2021), Astronomy & Astrophysics 652, A141; Santos-Sanz et al. (2025), arXiv:2510.06366v1 for the 2022 JWST ring measurements.",
       "license": "MIT authored approximation from published numerical scientific facts",

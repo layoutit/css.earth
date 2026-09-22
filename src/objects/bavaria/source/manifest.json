@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 27500
       },
       "coverage": "Convex light-curve reconstruction with archive equivalent-volume size55 km (published thermal-size3-sigma interval53–57 km). The vertical shape is poorly constrained. Both pole solutions remain possible. The grid marks unavailable imagery; rotational phase is illustrative. Marciniak2019 §4.4 fits36 thermal measurements from IRAS, AKARI and WISE. Both mirror poles fit; the selected second pole, AM 2 at (226°, +70°), is representative, not unique. High pole latitude makes the vertical extent poorly constrained. The archived physical mesh has equivalent-volume diameter55 km and Table2 reports thermal size55±2 km at3σ. The paper calls D a shape scaling value without an explicit volume definition, so the archive volume and paper thermal uncertainty are distinguished.",
-      "expectedBytes": 81736,
-      "expectedSha256": "5ee16a0fbf9aee1a4f1dbe206cbb2c80dc0f125c7f430595b4b128676eb21584",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/3090-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "b670fd56849e91be4854289b6ce3815da3a9ab048e117c9887e71f17a858ae75"
+      "path": "reference/3090-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

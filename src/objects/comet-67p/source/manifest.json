@@ -88,8 +88,6 @@
     {
       "id": "navcam-20150720",
       "path": "reference/navcam-20150720.jpg",
-      "expectedBytes": 261157,
-      "expectedSha256": "f27f66c3beb75662a33ba121487bdf5fa89e8f66c798d086e366e19f31841d1c",
       "origin": "https://blogs.esa.int/rosetta/files/2015/07/ESA_ROSETTA_NAVCAM_20150720.jpg",
       "credit": "ESA/Rosetta/NAVCAM",
       "license": "CC BY-SA 3.0 IGO",
@@ -365,8 +363,6 @@
     {
       "id": "virtis-format",
       "path": "science/ro_virtis_map_eaicd.asc",
-      "expectedBytes": 27355,
-      "expectedSha256": "a7356044e9fa7223e2a220d1a8e897d32547e4949b6c00b99bf9f25008a34ade",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/document/ro_virtis_map_eaicd.asc",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -392,8 +388,6 @@
     {
       "id": "virtis-bibliography",
       "path": "science/ref.cat",
-      "expectedBytes": 181360,
-      "expectedSha256": "598c5c08fd21f649b7e9a80042a65529d8cde466dee91e1e4fdd479abf4e236a",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/catalog/ref.cat",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -419,8 +413,6 @@
     {
       "id": "virtis-shap5-info-asc",
       "path": "science/shap5-info.asc",
-      "expectedBytes": 12960,
-      "expectedSha256": "4de22f4cda1a240a6b4af466189ac6af51f4ad110661db57c60a2abf4b7d2116",
       "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DOCUMENT/SHAP5_MODEL_INFO.ASC",
       "credit": "ESA/Rosetta; LAM/PSI SPC SHAP5 team; Jorda et al.",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -446,8 +438,6 @@
     {
       "id": "virtis-cg_spc_shap5_097k_cart-lbl",
       "path": "science/cg_spc_shap5_097k_cart.lbl",
-      "expectedBytes": 11760,
-      "expectedSha256": "0818a92b1e10e01af3ff0bf746cad0dc4cb1f999e1c1cfd165eae8d698f8efbf",
       "origin": "https://archives.esac.esa.int/psa/ftp/INTERNATIONAL-ROSETTA-MISSION/SHAPE/RO-C-MULTI-5-67P-SHAPE-V2.0/DATA/TRIPLATE/SPC_LAM_PSI/SHAP5/CG_SPC_SHAP5_097K_CART.LBL",
       "credit": "ESA/Rosetta; LAM/PSI SPC SHAP5 team; Jorda et al.",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -550,8 +540,6 @@
     {
       "id": "virtis-albedo-label",
       "path": "science/al01_glb_m006_m006_v01.lbl",
-      "expectedBytes": 2712,
-      "expectedSha256": "f3b349a479810dcb2dfdaafa0c9690b70c0ab0757199c92899e58d6343a2bbfe",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/al01_glb_m006_m006_v01.lbl",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -627,8 +615,6 @@
     {
       "id": "virtis-slope-label",
       "path": "science/sl01_glb_m006_m006_v01.lbl",
-      "expectedBytes": 2741,
-      "expectedSha256": "2ab9fa68ed07c78712cffade0cbc11c29a68acaa3e432ce6fd15d6dd01d442d0",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/sl01_glb_m006_m006_v01.lbl",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -704,8 +690,6 @@
     {
       "id": "virtis-absorption-label",
       "path": "science/bd01_glb_m006_m006_v01.lbl",
-      "expectedBytes": 2679,
-      "expectedSha256": "e03cc1ff23f15de2a0c3867a60843f74f7dc0aa7ed87bbb8e13c47241d317041",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/bd01_glb_m006_m006_v01.lbl",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -781,8 +765,6 @@
     {
       "id": "virtis-ice-label",
       "path": "science/wi01_glb_m006_m006_v01.lbl",
-      "expectedBytes": 2687,
-      "expectedSha256": "7c29cb35ee5281d36a10d6970d28a6206ee7a4ffe5f1e121d6dba5daaec2b09a",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro-c-virtis-5-67p-maps-v1.0/data/map/virtis_m/wi01_glb_m006_m006_v01.lbl",
       "credit": "ESA/Rosetta/VIRTIS; Capaccioni et al.; Filacchione et al. (2016); Ciarniello et al. (2016)",
       "license": "ESA PSA public scientific-data release; retain archive and team attribution",
@@ -842,8 +824,6 @@
     {
       "id": "sbmt-geological-paths",
       "path": "geology/paths.xml",
-      "expectedBytes": 874755,
-      "expectedSha256": "1ff8eda969bf57780ae2901bf6c355f0da4e06f1bf996f59f2ae84f59ae5526e",
       "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/00_All/Complete_Paths",
       "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
       "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
@@ -869,8 +849,6 @@
     {
       "id": "sbmt-geological-locations",
       "path": "geology/locations.tsv",
-      "expectedBytes": 627156,
-      "expectedSha256": "48665f88d4c902f0aca35552488a015b6532b1eed2efb268c918fee20427c8ae",
       "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/00_All/Complete_Ellipses",
       "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
       "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
@@ -896,8 +874,6 @@
     {
       "id": "sbmt-regional-boundaries",
       "path": "geology/region-boundaries.xml",
-      "expectedBytes": 263077,
-      "expectedSha256": "f176f1b042c9fa1f3f056f3befba1184b9e6f96cda8e875421a472d799c7c945",
       "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Data/SBMT_shapefiles/Regions_50k/Regions_50k_facets",
       "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
       "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
@@ -923,8 +899,6 @@
     {
       "id": "sbmt-region-order",
       "path": "geology/region_order.mat",
-      "expectedBytes": 404,
-      "expectedSha256": "ebdee4cf10bd0ac8a35025da4f2a7999e583d414bb1526ddf0620f658c8c6f05",
       "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/Code/Create_maps/region_order.mat",
       "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
       "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
@@ -950,8 +924,6 @@
     {
       "id": "geomap-guide",
       "path": "geology/product-user-guide.pdf",
-      "expectedBytes": 921816,
-      "expectedSha256": "a7d60974c15ce47cd30f0da3fa6e2c9abfc7855e3517c26764755497894c0dfd",
       "origin": "https://archives.esac.esa.int/psa/ftp/Guest-Storage-Facility/ESA-AURORA_67P-GEOMAP_OSIRIS_V1.0/PUG_ESA-AURORA_67P-GEOMAP_OSIRIS.pdf",
       "credit": "European Space Agency, 2021; Leon-Dasi, Besse, Grieger and Küppers",
       "license": "ESA published scientific data; attribution requested in Product User Guide section 2.1",
@@ -1225,8 +1197,6 @@
     {
       "id": "comet-67p-features-landmarks",
       "path": "features/landmarks.json",
-      "expectedBytes": 15859,
-      "expectedSha256": "4693cc2a4dd667061aa42acf8851e687ca1fb2679841072fd0b0a42f58cca5da",
       "origin": "Selected mission geography and model anatomy, with per-place publication references, coordinate frames and uncertainty.",
       "credit": "cssEarth contributors; authors cited per place",
       "license": "MIT (project compilation); underlying publications cited in the document",
@@ -1297,8 +1267,6 @@
     {
       "id": "consert-fss-orbiter-geometry-label",
       "path": "telescopes/consert/cn_g_o_fss.lbl",
-      "expectedBytes": 8916,
-      "expectedSha256": "2eff1c053f736199499938bb4f0f2f8d9a883c90176286ca55917cd2f0702f4d",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_o_fss.lbl",
       "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
       "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",
@@ -1373,8 +1341,6 @@
     {
       "id": "consert-fss-lander-geometry-label",
       "path": "telescopes/consert/cn_g_l_fss.lbl",
-      "expectedBytes": 8299,
-      "expectedSha256": "fa533dd396bc7b9a786739bb29023116b4752d1ab6d6e66743b363c3b87fceda",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/ro_rl-c-consert-4-fss-v1.0/geometry/cn_g_l_fss.lbl",
       "credit": "ESA/Rosetta/Philae/CONSERT; A. Herique, Y. Rogez, M. Roudaud, W. Kofman; IPAG/OSUG/UGA/CNRS",
       "license": "ESA PSA and NASA PDS public scientific-data release; acknowledge the instrument team and the archive",

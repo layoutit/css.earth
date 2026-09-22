@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 40695
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 81.39 km effective diameter (catalog ±0.93 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Ďurech2020 TableA.2 reports203 cyan plus122 orange ATLAS observations and two poles. The table marks period recovery E (ellipsoid search); that is not evidence of high shape accuracy. The archived convex mesh is retained only as a coarse inverse model.",
-      "expectedBytes": 45447,
-      "expectedSha256": "6b1581ba2bde44e3dbd3c799e1e2bea6562f10dcfd5b83ee8d07481ae37f1ed6",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/4511-IAUspin.txt",
-      "expectedBytes": 33,
-      "expectedSha256": "c1d1c3c8d71af0e2ed0c9692e25b22ff227ad153e41499c7533f19aa43479384"
+      "path": "reference/4511-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

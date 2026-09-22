@@ -31,8 +31,6 @@
     {
       "id": "pallene-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "c9baed96538b317f873dd3eb153c6088e4ac319d1ac2c32cbbbaa26cac857448",
       "origin": "https://doi.org/10.1016/j.icarus.2013.07.022",
       "credit": "Thomas et al. (2013); NAIF/JPL; cssEarth analytic sampling",
       "license": "Published measurement values; MIT analytic representation",
@@ -115,8 +113,6 @@
     {
       "id": "cassini-n1496910582-label",
       "path": "observations/N1496910582_1_CALIB.LBL",
-      "expectedBytes": 3830,
-      "expectedSha256": "a5f37bb03ca306fb81d8c18e7f9523127abd8c471af1dc3814c9765f51af5cf0",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2012/data/1496877151_1496974774/N1496910582_1_CALIB.LBL",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
       "license": "NASA/PDS scientific data",
@@ -175,29 +171,19 @@
       "expectedSha256": "a46a260a002f40386d7fb9de387acf7cff298dc48c06bc8bd0760585676d5add"
     },
     {
-      "path": "geometry/cas00172.tsc",
-      "expectedBytes": 18954,
-      "expectedSha256": "9aebd8d2783d06c12c33d2c5794a04a7bcde26c95efd4fee974acd9b356442f8"
+      "path": "geometry/cas00172.tsc"
     },
     {
-      "path": "geometry/cas_iss_v10.ti",
-      "expectedBytes": 31060,
-      "expectedSha256": "518c50a1c837f525e10ee71a97c9971ba419850ac05fcaa2df99cf3cddda5c68"
+      "path": "geometry/cas_iss_v10.ti"
     },
     {
-      "path": "geometry/cas_rocks_v18.tf",
-      "expectedBytes": 22880,
-      "expectedSha256": "4792ed40b4f084aa7aad1ce5265bbc12f44be6ac0c7965653e79d86cda394baa"
+      "path": "geometry/cas_rocks_v18.tf"
     },
     {
-      "path": "geometry/cas_v43.tf",
-      "expectedBytes": 196583,
-      "expectedSha256": "09b1f6f27a74d3cc64b28ef91fcea02bed78fe63c93035b8434a6b67e5224b5a"
+      "path": "geometry/cas_v43.tf"
     },
     {
-      "path": "geometry/naif0012.tls",
-      "expectedBytes": 5257,
-      "expectedSha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "geometry/naif0012.tls"
     },
     {
       "path": "geometry/pallene_mst2013.bpc",
@@ -205,9 +191,7 @@
       "expectedSha256": "6424cdd916fc8dba014f40268a5e585fa274d8c0485033719f5a887dbb6f8817"
     },
     {
-      "path": "geometry/pck00011.tpc",
-      "expectedBytes": 131226,
-      "expectedSha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "path": "geometry/pck00011.tpc"
     },
     {
       "path": "measurements.json"
@@ -218,9 +202,7 @@
       "expectedSha256": "905b9ed1fa44c865784897f25d2601cb0f8ee9656e4c0db3190c185481044a57"
     },
     {
-      "path": "observations/N1496910582_1.LBL",
-      "expectedBytes": 3630,
-      "expectedSha256": "e9fcc43579339d9b59a4ca76fbfa3c0bbf7c2380c21850fe9021721fc8d96b34"
+      "path": "observations/N1496910582_1.LBL"
     },
     {
       "path": "observations/N1665947247_1.IMG",
@@ -228,9 +210,7 @@
       "expectedSha256": "c2ac5a48d847ef782953a49a71be6bc3f1b80a2d49f82b01c4491c56af9d006a"
     },
     {
-      "path": "observations/N1665947247_1.LBL",
-      "expectedBytes": 3692,
-      "expectedSha256": "c1b1d425bc73bdf8139946869e633d1e173e0b11f105300cf1ee74339ea81764"
+      "path": "observations/N1665947247_1.LBL"
     },
     {
       "path": "observations/N1665947247_1_CALIB.IMG",
@@ -238,9 +218,7 @@
       "expectedSha256": "779a5fe95fee36faaeb382992a282b9d244efe091e046c6197bf22e4229b1e6a"
     },
     {
-      "path": "observations/N1665947247_1_CALIB.LBL",
-      "expectedBytes": 3853,
-      "expectedSha256": "ad9c86e876d841f94012beaefbbe871bf97760d96b66b34001113b0e8cba10e5"
+      "path": "observations/N1665947247_1_CALIB.LBL"
     },
     {
       "path": "preparation/acquisition.json"

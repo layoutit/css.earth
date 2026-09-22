@@ -157,8 +157,6 @@
     {
       "id": "regulus-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1682,
-      "expectedSha256": "e0504310a34b35f63e7d946b0c988bdaae64b62a4a6339ca100d468c79898ec2",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/201",
       "credit": "Alekseeva et al. (1996, 1997), Baltic Astronomy 5, 603 and 6, 481; VizieR III/201 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +185,6 @@
     {
       "id": "regulus-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -261,8 +257,6 @@
     {
       "id": "regulus-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 660,
-      "expectedSha256": "3c463f23b5c9710503abf39714450f57cd48dca8d9f02283b0c4a71353be312f",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

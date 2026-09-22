@@ -81,8 +81,8 @@
   ],
   "id": "rhodope",
   "displayName": "Rhodope",
-  "lambda": 173.0,
-  "beta": -3.0,
+  "lambda": 173,
+  "beta": -3,
   "periodHours": 4.714799,
   "version": "2013-02-11",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2444/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2442/IAUspin.txt",
-  "shapeSha256": "dae8593e45bf9983934225c5d78355e71944cbfb2c023b762170ca7683b1f441",
   "shapeBytes": 82708,
   "vertices": 1022,
   "faces": 2040,
@@ -142,7 +141,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 1.3023065883655293e-07
+    "minimumTriangleAreaSourceUnitsSquared": 1.3023065883655293e-7
   },
   "anchors": [
     {

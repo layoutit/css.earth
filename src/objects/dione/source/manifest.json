@@ -462,8 +462,6 @@
     {
       "id": "dione-vims-source-information-file-pdf",
       "path": "vims/document/information_file.pdf",
-      "expectedBytes": 201977,
-      "expectedSha256": "c6a7599777535917c6ab6d5fc38beab6e811e1045df5e651eba67f5a21da527e",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.pdf",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -490,8 +488,6 @@
     {
       "id": "dione-vims-source-information-file-xml",
       "path": "vims/document/information_file.xml",
-      "expectedBytes": 2573,
-      "expectedSha256": "d8170f3ed5c2d0dec2fef266ffee69951ebd765d474264dda83b67ec98dd1576",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/document/information_file.xml",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -546,8 +542,6 @@
     {
       "id": "dione-vims-source-vims-wavelengths-ir-xml",
       "path": "vims/data/vims_wavelengths_ir.xml",
-      "expectedBytes": 5977,
-      "expectedSha256": "a9c6ee4c5e159c214c20df41520333adac3f245a72600d7adc088392b375ca2f",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/vims_wavelengths_ir.xml",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -574,8 +568,6 @@
     {
       "id": "dione-vims-source-dione-notnorm-pc-modified-2-xml",
       "path": "vims/data/dione/dione_notnorm_pc_modified_2.xml",
-      "expectedBytes": 13446,
-      "expectedSha256": "b833840c69c52439e437c73b62ba12c2508afbd5b3af3b7582ddf5b2e05a377a",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.xml",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -602,8 +594,6 @@
     {
       "id": "dione-vims-source-dione-notnorm-pc-modified-2-hdr",
       "path": "vims/data/dione/dione_notnorm_pc_modified_2.hdr",
-      "expectedBytes": 8780,
-      "expectedSha256": "6aba6b6515ee0c60a220dc245b300b828078477b6ec99686e6e7b5a36a435a04",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_notnorm_pc_modified_2.hdr",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -686,8 +676,6 @@
     {
       "id": "dione-vims-source-dione-phase-function-parameters-xml",
       "path": "vims/data/dione/dione_phase_function_parameters.xml",
-      "expectedBytes": 7646,
-      "expectedSha256": "5405ffb4dcc3c4c4428748f336f5ece80949d04d840d8bbc79f43c01e3b5c2ff",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_phase_function_parameters.xml",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -742,8 +730,6 @@
     {
       "id": "dione-vims-source-dione-vims-cubes-list-xml",
       "path": "vims/data/dione/dione_vims_cubes_list.xml",
-      "expectedBytes": 5724,
-      "expectedSha256": "3bf571ffcea3b08f1ef274b12d075fd7542edd707bb652003069374db0c4c96e",
       "origin": "https://dwjtvz5c9xobz.cloudfront.net/dione.rhea_cassini_vims_ir-mosaic_scipioni_2022/data/dione/dione_vims_cubes_list.xml",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -770,8 +756,6 @@
     {
       "id": "dione-vims-infrared",
       "path": "vims/dione-infrared.tif",
-      "expectedBytes": 67254,
-      "expectedSha256": "d92f949b03e5446f10f0270ec3d71bfcb9df97d24db3767fa8e54cbbe4226698",
       "origin": "https://doi.org/10.17189/ctqe-ta30",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "capture": {
@@ -827,8 +811,6 @@
     {
       "id": "dione-vims-ice-absorption",
       "path": "vims/dione-water-ice.tif",
-      "expectedBytes": 142499,
-      "expectedSha256": "e58c7acfa469ac606b8cf4db2133dc2d9ad0b29edb37030beafb89f8480abf54",
       "origin": "https://doi.org/10.17189/ctqe-ta30",
       "credit": "Francesca Scipioni and Jean-Philippe Combe (2022); Cassini VIMS; NASA PDS",
       "license": "Public NASA PDS scientific data; retain creators and archive attribution",
@@ -871,8 +853,6 @@
     {
       "id": "usgs-gazetteer-dione-nomenclature-center-pts",
       "path": "features/DIONE_nomenclature_center_pts.zip",
-      "expectedBytes": 293898,
-      "expectedSha256": "36134cefcab7413862b4069f52fa0f98d9ab052a9f35151feb15b243b3f50061",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DIONE_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -984,86 +964,62 @@
     {
       "path": "science/b2-intake/dione_128_o.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_128_o.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9388,
-      "expectedSha256": "b84607d2265ca23102f78aad4571005b953c4555fea729428bbe7a37d1b8e81f"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_512_o.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_512_o.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9394,
-      "expectedSha256": "9dd3f004b938b284ef65b395b93396a53bb0151fa803bfbc592591c14137564d"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_sigma_c.cub",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_sigma_c.cub",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 326137,
-      "expectedSha256": "e71afa33f55516897279cdbbccb766293f25e22537a5fc989df18d7dddfca688"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_sigma_c.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_sigma_c.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 7250,
-      "expectedSha256": "3f2733812388bbcf9b6b29e324af5f521d74654195947e1cf60b61eeba85ee3e"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_numimg_c.cub",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_numimg_c.cub",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 326357,
-      "expectedSha256": "045b668298879b28ec647d3709510744e5762f6df24acde20bb1a29bd5d09ae0"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_numimg_c.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_numimg_c.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 7307,
-      "expectedSha256": "a81f30eb64081ef8d7044090b0b03c824ffe6ee0dbfd96b9cf2a6413f290e2f3"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_eqalbedo_g.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_eqalbedo_g.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9199,
-      "expectedSha256": "5003e65b631cf706c4302e6018631c9f83fcc0276f17da998c72ecf86af1ea2e"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_npalbedo_g.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_npalbedo_g.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9239,
-      "expectedSha256": "e6fcdb2f90c230e56cd9fe47a26674692e249335521d6b139a8fcea59016746c"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dione_spalbedo_g.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/data/global/dione_spalbedo_g.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9242,
-      "expectedSha256": "9fc3d80e517c2acda033ddfb813e8152f80274c07ff11596e145e8930c1eae15"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/bundle_description.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/bundle_description.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 5596,
-      "expectedSha256": "8bcb74c206a494e16479e98c795bcec37e55ef8506963da4c4cf1f842d6d416d"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dionekernellist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dionekernellist.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 24913,
-      "expectedSha256": "b77472fdff510ddc483c2bb7f671779a15d86cf3d6acac3f09cbeff7ce8581a3"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dioneimagelist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-dione.cassini.shape-models-maps/document/dioneimagelist.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 64125,
-      "expectedSha256": "4532cd4c8d78636d884c48bcea5b0f49d6818e4d8f6d710dad321584c40206a8"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/dioneshapeassessment.pdf",

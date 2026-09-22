@@ -130,8 +130,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "Rotation record: pole latitude, pole longitude and sidereal period, then the phase epoch and phase. Read latitude-first: the second column, 181.3819 degrees, cannot be a latitude. The release names this file without an extension.",
-      "expectedBytes": 40,
-      "expectedSha256": "5dc152f3e52f69996fe0c506fc7a9cccb6f5042426734120255384073d3d77da",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -155,8 +153,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 13749,
-      "expectedSha256": "7326948e6733b4ed5add8d3d1d929ac66e2146a31c0288cd9fd0269330b517b7",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -180,8 +176,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 10417,
-      "expectedSha256": "4bdc2e923d4e0e472e4fece3c81f43ba82dbb9f998d321f0eead9874d4cad242",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

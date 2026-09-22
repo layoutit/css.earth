@@ -76,8 +76,8 @@
   ],
   "id": "coelestina",
   "displayName": "Coelestina",
-  "lambda": 230.0,
-  "beta": 30.0,
+  "lambda": 230,
+  "beta": 30,
   "periodHours": 29.1753,
   "version": "2016-01-04",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4405/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/4403/IAUspin.txt",
-  "shapeSha256": "427b7e385d125ecccedc0cbf7129a960bf32bcb5f793e1fb0c8464d464d6a784",
   "shapeBytes": 80926,
   "vertices": 1000,
   "faces": 1996,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 1996,
-    "minDoubleTriangleAreaSourceUnits2": 5.0503188384628714e-08
+    "minDoubleTriangleAreaSourceUnits2": 5.0503188384628714e-8
   },
   "independentAnchors": [
     {
@@ -302,8 +301,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2450875.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2450875,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

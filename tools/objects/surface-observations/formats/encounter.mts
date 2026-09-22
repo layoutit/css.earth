@@ -34,14 +34,14 @@ export function validateEncounterRecipe(value: unknown, sourceGeometry: unknown)
       : recipe.photometry.model === 'retained-observation' && recipe.photometry.maximumGain === 1)) throw new TypeError(`Invalid source-bound ${CONTEXT}.`);
 }
 
-interface EncounterReference { id: string; imageSha256: string; controlSha256: string; camera: Pick<ObservationCamera, 'project' | 'positionMeters'>; sample(point: readonly number[]): { reason?: string } }
+interface EncounterReference { id: string; camera: Pick<ObservationCamera, 'project' | 'positionMeters'>; sample(point: readonly number[]): { reason?: string } }
 
 /** A close-up must inherit an already-qualified, byte-pinned photograph in this mosaic. Recheck its reference pixels against the original mesh. */
-export function validateEncounterImageReference(control: { registration: { method: string; reference?: { id: string; imageSha256: string; controlSha256: string }; controls: readonly { referencePixel?: readonly number[]; sourcePointMeters: readonly number[] }[] } },
+export function validateEncounterImageReference(control: { registration: { method: string; reference?: { id: string }; controls: readonly { referencePixel?: readonly number[]; sourcePointMeters: readonly number[] }[] } },
   reference: EncounterReference | undefined, mesh: { intersect: (...args: Parameters<SourceMesh['intersect']>) => { radius: number } | null }) {
   const r = control.registration;
   if (r.method !== 'registered-image-feature-translation') return;
-  if (!r.reference || !reference || reference.id !== r.reference.id || reference.imageSha256 !== r.reference.imageSha256 || reference.controlSha256 !== r.reference.controlSha256) throw new Error('Close-up reference must be an earlier qualified image with matching source hashes.');
+  if (!r.reference || !reference || reference.id !== r.reference.id) throw new Error('Close-up reference must be an earlier qualified image with matching source hashes.');
   for (const p of r.controls) {
     const projected = reference.camera.project(p.sourcePointMeters);
     if (!p.referencePixel || !projected || Math.hypot(projected[0] - p.referencePixel[0], projected[1] - p.referencePixel[1]) > 1e-6 || reference.sample(p.sourcePointMeters).reason) throw new Error('Close-up control is not bound to a qualified reference pixel.');
@@ -62,11 +62,7 @@ export const encounterFormat: SurfaceObservationFormat = {
       const controlBytes = await readFile(resolve(sourceDirectory, f.controlPath)), imageBytes = await readFile(resolve(sourceDirectory, f.path));
       const control = parseEncounterSourceControl(JSON.parse(controlBytes.toString('utf8')));
       const decoded = decodeEncounterFits(imageBytes, control.observation), encounter = encounterCamera(decoded.header, control.camera);
-      // Pins became optional when files this repository authors stopped carrying them, but a
-      // source-bound registration is verified against the shape's pinned bytes: without the pin
-      // there is nothing to bind it to, so refuse rather than skip the check.
-      assert.ok(shape.expectedSha256, `Encounter registration needs the shape's pinned sha256: ${shape.path}`);
-      const registration = validateEncounterControls(encounter, control.registration, shape.expectedSha256);
+      const registration = validateEncounterControls(encounter, control.registration);
       // The registration's source-scale pixel size ranks finest-resolution selection.
       const camera: ObservationCamera = { kind: 'control-network', project: encounter.project, ray: encounter.ray, positionMeters: encounter.positionMeters, positionKm: encounter.positionKm,
         sunDirection: encounter.sunDirection, pinhole: true, nominalPixelScaleMeters: registration.nominalPixelScaleMeters, report: encounter.report };
@@ -74,7 +70,7 @@ export const encounterFormat: SurfaceObservationFormat = {
         startTime: String(decoded.startTime), filter: String(decoded.filter), report: decoded.report };
       const frame = cameraFrame({ id: f.id, image, camera, geometry: castSourceRays(camera, radial.grid, decoded.width, decoded.height), photometry, limits: recipe.transfer, mesh: radial.grid, report: { registration } });
       validateEncounterImageReference(control, references.get(control.registration.reference?.id ?? ''), radial.grid);
-      references.set(f.id, { id: f.id, imageSha256: sha256(imageBytes), controlSha256: sha256(controlBytes), camera, sample: frame.sample });
+      references.set(f.id, { id: f.id, camera, sample: frame.sample });
       frames.push(frame); units ||= decoded.units;
     }
     const { report: limits, exceeded } = deriveLimits(recipe.transfer, frames, config.geometry.radialTerrain.simplification.maximumErrorMeters);

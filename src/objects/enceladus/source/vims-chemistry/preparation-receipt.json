@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-enceladus-vims-spectral@1",
-  "recipeSha256": "38e6a95373ed32b5d5acacc1fdc2691d735bddc6b5b3c0139eb3cc039999d9e1",
   "preparerSha256": "25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914",
   "sourceLicense": "CC-BY-4.0",
   "policy": {
@@ -12,7 +11,7 @@
   },
   "sourceLicenseUrl": "https://creativecommons.org/licenses/by/4.0",
   "sourceLicenseEvidenceUrl": "https://vims.univ-nantes.fr/about",
-  "sourceCredit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Universit\u00e9",
+  "sourceCredit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
   "sourceProcessingUrl": "https://vims.univ-nantes.fr/info/isis-calibration",
   "observations": [
     {
@@ -674,7 +673,7 @@
         1024,
         512
       ],
-      "noData": -9999.0,
+      "noData": -9999,
       "acceptedDisplayPixels": 94916,
       "missingDisplayPixels": 429372,
       "acceptedSphereAreaEstimateFraction": 0.23774101224513416,
@@ -726,7 +725,7 @@
         1024,
         512
       ],
-      "noData": -9999.0,
+      "noData": -9999,
       "acceptedDisplayPixels": 94916,
       "missingDisplayPixels": 429372,
       "acceptedSphereAreaEstimateFraction": 0.23774101224513416,

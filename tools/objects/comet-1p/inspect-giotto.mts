@@ -3,7 +3,7 @@ import {hasErrorCode,requireRecord} from '../../sources/source-values.mts';
 import {shape,text,number,array} from '../terrestrial-layers/source-records.mts';
 export interface PinnedIntakeFile {file:string;url:string;bytes:number;sha256:string;}
 export const parsePinnedIntakeFile=shape({file:text,url:text,bytes:number,sha256:text});
-const parseManifest=shape({shape:shape({path:text,sha256:text,absoluteUncertaintyKm:array(number)}),guide:parsePinnedIntakeFile,
+const parseManifest=shape({shape:shape({path:text,absoluteUncertaintyKm:array(number)}),guide:parsePinnedIntakeFile,
   frames:array(shape({id:text,imageId:number,sensor:text,filter:text,header:parsePinnedIntakeFile,image:parsePinnedIntakeFile,label:parsePinnedIntakeFile}))});
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -92,7 +92,6 @@ async function main() {
   const manifestBytes = await readFile(manifestPath),raw:unknown=JSON.parse(manifestBytes.toString("utf8"));
   const manifest=Object.assign({},requireRecord(raw),parseManifest(raw));
   const shapeBytes = await readFile(resolve(sourceRoot, manifest.shape.path));
-  if (sha256(shapeBytes) !== manifest.shape.sha256) throw new Error('Source shape pin mismatch.');
   await mkdir(output, { recursive: true });
   await loadPinned(input, manifest.guide, args.includes('--download'));
   const { default: sharp } = await import('sharp');

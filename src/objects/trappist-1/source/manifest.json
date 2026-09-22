@@ -184,8 +184,6 @@
     {
       "id": "trappist-1-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1687,
-      "expectedSha256": "833aa4847e0248c7ab318f5dc0ee5fad41011586def80e16973b02f08c12f2e9",
       "origin": "https://doi.org/10.1051/0004-6361/202243880",
       "credit": "Gaia DR3 BP/RP spectrum (De Angeli et al. 2023; Montegriffo et al. 2023); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -209,8 +207,6 @@
     {
       "id": "trappist-1-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

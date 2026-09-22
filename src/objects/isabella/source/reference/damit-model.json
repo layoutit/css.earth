@@ -76,8 +76,8 @@
   ],
   "id": "isabella",
   "displayName": "Isabella",
-  "lambda": 278.0,
-  "beta": -26.0,
+  "lambda": 278,
+  "beta": -26,
   "periodHours": 6.67191,
   "version": "2016-01-04",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3681/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/3679/IAUspin.txt",
-  "shapeSha256": "80fd70c2bfa59866664269efb052469476bfd35078b8842e6c21cbee4c9b1108",
   "shapeBytes": 82546,
   "vertices": 1020,
   "faces": 2036,
@@ -138,7 +137,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2036,
-    "minDoubleTriangleAreaSourceUnits2": 1.1635226684490128e-09
+    "minDoubleTriangleAreaSourceUnits2": 1.1635226684490128e-9
   },
   "independentAnchors": [
     {
@@ -302,8 +301,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2450875.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2450875,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

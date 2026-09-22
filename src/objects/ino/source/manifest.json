@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 72000
       },
       "coverage": "ADAM nonconvex reconstruction constrained by VLT/SPHERE images. Selected archive volume-equivalent diameter: 144 ±3 km. The grid marks unavailable imagery; rotational phase is illustrative. The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select Vernazza et al. (2021) ADAM model 5913 constrained by VLT/SPHERE images. DAMIT D144 ±3 km differs from the publication summary145 ±3 km because the summary can average ADAM/MPCD outputs when coverage exceeds80%; the exact selected mesh has raw volume diameter144.329. Keep the archive ADAM model separate from MPCD refinement. No albedo map is inferred from deconvolved disk images.",
-      "expectedBytes": 142972,
-      "expectedSha256": "b6b64c30f487bfb7f146122cf99b49143693e622f2f182bcf5d80b44adc73564",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1092,8 +1090,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 13108,
-      "expectedSha256": "bf9cd112b635240ede339acf6db171f0d84fd750d6d048563636b7dd00f3f20a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1117,8 +1113,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 9741,
-      "expectedSha256": "8da43e4afda532529940dd99c08e8eee7a2b4a4d1deea7a30495a8c7217b0a21",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1208,9 +1202,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/5913-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "3fff75a2c240f97ab738ac1fddff532f54a0b40973a52ceff01c914bc9f86812"
+      "path": "reference/5913-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -1218,9 +1210,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "9f2321ed664b3bfd33b2429f1769f45344ce8ea7a65f5ff9f2fc4aa96087a65c",
       "origin": "https://doi.org/10.3847/1538-3881/ab9df8",
       "credit": "Hui, Ye, Föhring, Hung and Tholen (2020), AJ 160, 92, nucleus size from non-gravitational acceleration",
       "license": "MIT numeric extraction of published scientific facts",

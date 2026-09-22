@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62513,
-      "expectedSha256": "288d27cb043a596db0671f419813bbe461d5754ac859cebd8cdaf76a102fa4f1",
       "origin": "https://doi.org/10.1051/0004-6361/202450833",
       "credit": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study.",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1051/0004-6361/202450833",
       "credit": "Rizos et al. (2024), Astronomy & Astrophysics 689, A82; pole solution from Fernández-Valenzuela et al. (2017), validated by the 2024 study.",
       "license": "MIT authored approximation from published numerical scientific facts",

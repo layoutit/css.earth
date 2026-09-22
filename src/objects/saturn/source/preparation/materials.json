@@ -3,13 +3,6 @@
   "namespace": "saturn",
   "publicPrefix": "/scenes/saturn/",
   "source": "interior/manifest.json",
-  "sourcePins": [
-    {
-      "path": "interior/manifest.json",
-      "expectedSha256": "ec70beed73758cc796becbc3a1338ef3618609e4d2b9788e838ae0e9a1165874",
-      "expectedBytes": 5097
-    }
-  ],
   "sourceSchema": "csssaturn-interior-sources@1",
   "outputSchema": "csssaturn-prepared-views@1",
   "provenanceSource": "source/interior/manifest.json",

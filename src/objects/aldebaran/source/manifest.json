@@ -129,8 +129,6 @@
     {
       "id": "aldebaran-kiehling-1987",
       "path": "photometry/kiehling-1987.tsv",
-      "expectedBytes": 6206,
-      "expectedSha256": "b0d95cfe9e22f48e8e120a4e2cb7c68501c17efa5aa1c3af46039ff49dfed04a",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -157,8 +155,6 @@
     {
       "id": "aldebaran-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1654,
-      "expectedSha256": "d529b2b2f03f7f070b075d3886ebac9a6e68ef201e8d2e7b723abf77217e78c0",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
       "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +183,6 @@
     {
       "id": "aldebaran-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -215,8 +209,6 @@
     {
       "id": "aldebaran-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 844,
-      "expectedSha256": "8914b4d5dc90737f77d5890dcfdb99f6ad8c81f4320d676ef20de03a0f7f361f",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

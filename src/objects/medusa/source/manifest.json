@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 10705
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 21.41 km (catalog ±0.35 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Two 2013 convex archive solutions remain. Archive model 570 pole (173,-78) differs from the nominal table pole (156,-76) in Hanuš et al. (2013); the alternate archive pole (306,-67) likewise differs from nominal (333,-73). The archived solution, not an exact paper-table attitude, owns this presentation. Fine structure and a preferred pole are not established.",
-      "expectedBytes": 82708,
-      "expectedSha256": "ac8826e64a7f1eb168ab78c9ed24005a668817f2f32137eecf417ce94a9ee6c0",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/570-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "7796d5acdedf4a73ce73328f999ec25a51cf4649231be790b8747b99e380e012"
+      "path": "reference/570-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

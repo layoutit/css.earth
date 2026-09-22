@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 52000
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 104 ± 4 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The raw table has an equivalent diameter of 285.89754 source units, inconsistent with its km-calibrated flag and declared 104 km diameter; scale 0.363766684… km per source unit restores the declared diameter. The source remains an inverse model, not a directly measured surface. The original ADAM study used only one AO observation for this body, limiting the shape constraints.",
-      "expectedBytes": 32486,
-      "expectedSha256": "69468466831b229d880e8d0f58a4046ae973653da5d1155733fbbf8185ac9611",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

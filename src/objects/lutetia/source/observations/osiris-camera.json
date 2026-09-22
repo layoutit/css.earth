@@ -29,18 +29,18 @@
   ],
   "rayMatrix": [
     [
-      -1.868407024494074e-05,
-      1.9848882819497984e-06,
+      -0.00001868407024494074,
+      0.0000019848882819497984,
       -0.04084295677466686
     ],
     [
-      -2.1528078300186184e-06,
-      -1.8365317198075658e-05,
+      -0.0000021528078300186184,
+      -0.000018365317198075658,
       0.20877067356213383
     ],
     [
-      6.806874688229202e-07,
-      -3.601074926091769e-06,
+      6.806874688229202e-7,
+      -0.000003601074926091769,
       -0.9775155475280307
     ]
   ],
@@ -63,7 +63,7 @@
       221.10168,
       -7.02915
     ],
-    "maximumBoresightResidualDegrees": 1.4424132341872564e-06,
+    "maximumBoresightResidualDegrees": 0.0000014424132341872564,
     "quaternionConvention": "SC scalar-first verified against independent archive boresight; use released camera FK.",
     "archivePointKm": [
       1.1757113758522095,
@@ -145,55 +145,43 @@
       ],
       "offsetPixels": [
         -30.5,
-        92.0
+        92
       ],
       "maximumHoldoutResidualPixels": 7.433034373659253,
       "maximumAcceptedHoldoutResidualPixels": 12,
       "interpretation": "Registration to the pinned source shape; not absolute ground truth. Header pointing checks describe the camera before adjustment."
     }
   },
-  "imageSha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd",
-  "meshSha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52",
   "provenance": [
     {
-      "path": "preparation/camera.json",
-      "sha256": "1f769499fd728829262741e3686092566b21e065af70fba582ca9a3bf2d7ee70"
+      "path": "preparation/camera.json"
     },
     {
-      "path": "observations/n20100710t154047674id4df22.img",
-      "sha256": "c16bb7d695c6cc0cc0324155a710701f96b3a55c17a8844047765dd4da210bcd"
+      "path": "observations/n20100710t154047674id4df22.img"
     },
     {
-      "path": "reference/naif0012.tls",
-      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "reference/naif0012.tls"
     },
     {
-      "path": "reference/ROS_V33.TF",
-      "sha256": "f6101b9c71fbcb8f0805a32b29631e8a20676f860e0eeff4a951649d77753bb1"
+      "path": "reference/ROS_V33.TF"
     },
     {
-      "path": "reference/ROS_OSIRIS_V15.TI",
-      "sha256": "92efe258f66d12b6b4cddfeadab158e8d1e28d838669dc8d8520442cf46e9587"
+      "path": "reference/ROS_OSIRIS_V15.TI"
     },
     {
-      "path": "reference/ROS_LUTETIA_RSOC_V03.TPC",
-      "sha256": "b4d42ae56a08391ff72c7d6ac3a9f6f2c6ecddcdf3f081c862f0919e23ce0b6f"
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TPC"
     },
     {
-      "path": "reference/ROS_LUTETIA_RSOC_V03.TF",
-      "sha256": "88b7ad6e1bc04dd6ebca124c771c2780d6f33c348acd0f8aa914cca428056346"
+      "path": "reference/ROS_LUTETIA_RSOC_V03.TF"
     },
     {
-      "path": "reference/osiris-boresight.pdf",
-      "sha256": "3f3b07c90b8180d0a7212b1679844765cc8672b8b8f50ed4e686f24139ac5318"
+      "path": "reference/osiris-boresight.pdf"
     },
     {
-      "path": "reference/osiris-photometry.pdf",
-      "sha256": "5d7264ac14a57179b7c381c92aab7756993624deb58cf70a6936b0ceb00b9b9b"
+      "path": "reference/osiris-photometry.pdf"
     },
     {
-      "path": "shape/lutetia_025k_cart.wrl",
-      "sha256": "10e35cadd6e5418b15d3e3948e678c7dbd4b7a6a1f6ab819ad06d10080e51c52"
+      "path": "shape/lutetia_025k_cart.wrl"
     }
   ]
 }

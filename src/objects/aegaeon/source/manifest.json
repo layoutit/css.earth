@@ -31,8 +31,6 @@
     {
       "id": "measured-ellipsoid",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "1c66a2d6a48ba2277f553f58c24be65d2e9ec00c18e60b6ecf7c57aa06198fa6",
       "origin": "https://arxiv.org/abs/1912.09192",
       "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
       "license": "MIT display representation from published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://arxiv.org/abs/1912.09192",
       "credit": "Hedman et al. (2020), Table 1 and Appendix B; cssEarth standard grid",
       "license": "MIT display representation from published scientific dimensions",

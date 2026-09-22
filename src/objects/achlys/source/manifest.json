@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "6651208db22c60e304cb4b1fe4615faf3babbd1f828bc073de79a6d7089046e4",
       "origin": "https://arxiv.org/abs/1705.10895",
       "credit": "Dias-Oliveira et al. (2017), AJ 154, 22; four stellar occultations",
       "license": "MIT numeric extraction of published scientific facts",

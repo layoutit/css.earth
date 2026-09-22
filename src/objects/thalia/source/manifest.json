@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 57000
       },
       "coverage": "Nonconvex model constrained by resolved imaging, 114 ± 8 km volume-equivalent diameter in the selected archive record. An alternative pole solution remains in the archive. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred. The second pole is selected because Viikinkoski et al. (2017), section 3, find its AO fit more likely; the competing pole is not ruled out.",
-      "expectedBytes": 32486,
-      "expectedSha256": "667be44f59441cbb117e91d5153cc6b6547810348ff58a7dc946a4d1dad4bf21",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

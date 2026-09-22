@@ -173,7 +173,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     observations.set(entry.lensId, observation);
     surfaces.push(await packSurface(entry.lensId, observation.rgb, observation.missing, {
       label: entry.label, falseColor: entry.falseColor,
-      source: { id: entry.id, sha256: entry.expectedSha256, width: entry.width, height: entry.height },
+      source: { id: entry.id, width: entry.width, height: entry.height },
       projection: {...entry.projection,...recipe.projection}, coverage: entry.coverage,
       ...recipe.metadata,
       ...(recipe.reportComposition?{monochromePixels,withheldSyntheticPixels:observation.withheldSyntheticPixels??0}:{}),
@@ -193,7 +193,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
       appearance: SHAPE_MATERIAL.appearance,
       material: { kind: 'unobserved-neutral', color: SHAPE_MATERIAL.color },
       ...(config.raster.reportMissingPixels ? { missingPixels: width * height } : {}),
-      source: { id: entry.id, sha256: entry.expectedSha256 } }));
+      source: { id: entry.id } }));
   }
   for (const recipe of config.raster.surfaceObservations ?? []) {
     const model = modelForLens(recipe.id), observationRadial = model?.radial ?? radial, observationConfig = model?.config ?? config;
@@ -231,7 +231,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     const additionalSources = (lens.additionalGrids ?? []).map(grid => {
       const input = source.manifest.inputs.find(input => input.path === grid.path && input.consumers.includes(lens.consumer));
       if (!input) throw new Error(`Scientific grid ${grid.path} has no pinned source.`);
-      return {id: input.id, sha256: input.expectedSha256, width: requireRecord(input).width, height: requireRecord(input).height};
+      return {id: input.id, width: requireRecord(input).width, height: requireRecord(input).height};
     });
     const renderedMeshPath = lens.format === 'vtk-cell-categories' ? requireString(lens.surfaceSampling?.renderedMeshPath) : ['facet-scalars', 'obj-uv-fits'].includes(lens.format) ? lens.meshPath : lens.path;
     const terrain = lens.surfaceSampling ? requireRecord(scienceConfig.geometry).radialTerrain : undefined;
@@ -270,7 +270,7 @@ export async function prepareSolidRasters({ sourceDirectory, publicDirectory, ou
     for (let x = 0; x < 256; x++) scale.set(colorForValue(lens.categories ? Math.min(lens.categories.length - 1, Math.floor(x * lens.categories.length / 256)) : lens.minimum + x / 255 * (lens.maximum - lens.minimum), lens), x * 3);
     const legend = await emit(`${config.namespace}-${lens.id}-legend.webp`, sharp(scale, { raw: { width: 256, height: 1, channels: 3 } }).resize(256, 16, { fit: 'fill', kernel: lens.categories ? 'nearest' : 'lanczos3' }));
     surfaces.push(await packSurface(lens.id, rgb, null, { label: lens.label, falseColor: true,
-      source: { id: entry.id, sha256: entry.expectedSha256, width: requireRecord(entry).width, height: requireRecord(entry).height },
+      source: { id: entry.id, width: requireRecord(entry).width, height: requireRecord(entry).height },
       ...(additionalSources.length ? {additionalSources} : {}),
       projection: requireRecord(entry).projection, coverage: requireRecord(entry).coverage, scientific: true, legend,
       ...(lens.previewGrid ? { previewGrid: preview } : {}),

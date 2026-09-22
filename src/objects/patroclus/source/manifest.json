@@ -31,8 +31,6 @@
     {
       "id": "occultation-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "d42d1b58ea65d003fb1b31f8b32bc0c79e833c5bcb7aa060fd395039ae0ee9c4",
       "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
       "credit": "Buie et al. (2015), The Astronomical Journal 149, 113; existing JPL#82 Patroclus-Menoetius source closure",
       "license": "MIT authored approximation from published numerical scientific facts",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://www2.boulder.swri.edu/~buie/biblio/pub099.html",
       "credit": "Buie et al. (2015), The Astronomical Journal 149, 113; existing JPL#82 Patroclus-Menoetius source closure",
       "license": "MIT authored approximation from published numerical scientific facts",

@@ -76,14 +76,14 @@
   ],
   "id": "felicitas",
   "displayName": "Felicitas",
-  "lambda": 77.0,
-  "beta": -26.0,
+  "lambda": 77,
+  "beta": -26,
   "periodHours": 13.19055,
   "version": "2019-06-24",
   "nonconvex": false,
   "calibrated": true,
-  "diameterKm": 85.0,
-  "uncertaintyKm": 6.0,
+  "diameterKm": 85,
+  "uncertaintyKm": 6,
   "akari": {
     "number": 109,
     "name": "Felicitas",
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9814/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/9812/IAUspin.txt",
-  "shapeSha256": "7c4aa5b44d5ef71a8caa8719f647e29ac0d4dc23d64f50ca30c682718df9a9e0",
   "shapeBytes": 79953,
   "vertices": 988,
   "faces": 1972,
@@ -139,9 +138,9 @@
   },
   "declaredDiameterComparison": {
     "sourceVolumeEquivalentDiameter": 85.00000264978912,
-    "declaredDiameterKm": 85.0,
-    "relativeDifference": 3.11739896119434e-08,
-    "scaledDiameterKm": 85.0
+    "declaredDiameterKm": 85,
+    "relativeDifference": 3.11739896119434e-8,
+    "scaledDiameterKm": 85
   },
   "alternatives": [
     {
@@ -248,8 +247,8 @@
   ],
   "calibration": {
     "method": "published-volume-equivalent-size-transfer",
-    "diameterKm": 85.0,
-    "uncertaintyKm": 6.0,
+    "diameterKm": 85,
+    "uncertaintyKm": 6,
     "uncertaintyKind": "Selected archive equivalent-diameter error; not a local shape-accuracy bound or automatically a one-sigma confidence interval.",
     "diameterSemantics": "Selected DAMIT archived solution volume-equivalent diameter, independently checked against raw mesh volume.",
     "sourceUrl": "https://damit.cuni.cz/projects/damit/asteroid_models/view/3097",

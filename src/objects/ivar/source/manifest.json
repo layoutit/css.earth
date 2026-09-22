@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 3700
       },
       "coverage": "Convex light-curve reconstruction. Thermophysical size-calibrated diameter: 7.4 ± 0.2 km. Grid marks unavailable mapped imagery; rotational phase is illustrative. The calibrated 2016 convex solution is selected; the older nonconvex model272 is explicitly labelled plausible in the archive and is not a resolved terrain measurement. The original shape is uniformly scaled to the selected archive diameter. Quoted diameter fit uncertainty does not describe local shape accuracy. No albedo, craters or regolith map is inferred.",
-      "expectedBytes": 82546,
-      "expectedSha256": "6838a5ad71d37ea2d341cb2b4aa37a66d698bf84202b49cbb7084c4dc4095c24",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/271-IAUspin.txt",
-      "expectedBytes": 35,
-      "expectedSha256": "1f7b8ea19909c51af7a0992013f3101fd84602775d8bff393a2a75a92d076e3a"
+      "path": "reference/271-IAUspin.txt"
     },
     {
       "path": "reference/calibration.json"

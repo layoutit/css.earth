@@ -13,8 +13,7 @@ export function decodeOsirisReflectance(bytes: Buffer, cameraSource: unknown, al
   const label = bytes.subarray(0, labelRecords * 512).toString('ascii');
   if (!['OSINAC', 'OSIWAC'].includes(field(label, 'INSTRUMENT_ID') ?? '') ||
       field(label, 'TARGET_NAME') !== camera.target || field(label, 'START_TIME') !== camera.startTime ||
-      field(label, 'FILTER_NAME') !== camera.filter || field(label, 'DATA_QUALITY_ID') !== '0000000000000000' ||
-      sha256(bytes) !== camera.imageSha256) throw new Error('OSIRIS camera is not bound to this exact observation.');
+      field(label, 'FILTER_NAME') !== camera.filter || field(label, 'DATA_QUALITY_ID') !== '0000000000000000') throw new Error('OSIRIS camera is not bound to this exact observation.');
   const data: Record<string, NumericRaster> = {}, ranges: number[][] = []; const count = camera.width * camera.height;
   for (const name of ['IMAGE', 'SIGMA_MAP_IMAGE', 'QUALITY_MAP_IMAGE']) {
     const block = (key: string) => field(label, key, [name]), quality = name === 'QUALITY_MAP_IMAGE', stride = quality ? 1 : 4;

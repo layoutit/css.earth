@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 42670
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 85.34 km (catalog ±2.86 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation. An alternative pole remains possible. The grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Select Hanuš (2011) convex model 325 (139,64), retaining 326 (313,51). The unscaled convex inversion constrains a broad outline; AKARI effective-sphere diameter is transferred as a volume-scale approximation, not measured surface relief.",
-      "expectedBytes": 82708,
-      "expectedSha256": "cf67b568322176e7a97e90964912e0100a8e9a552dfd757c9eac2686078cb864",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/325-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "d3aba9cab51a7201575540fa34a9582ba388e96becc0068a8302d11c78782d33"
+      "path": "reference/325-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

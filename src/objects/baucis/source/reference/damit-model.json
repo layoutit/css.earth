@@ -76,8 +76,8 @@
   ],
   "id": "baucis",
   "displayName": "Baucis",
-  "lambda": 203.0,
-  "beta": -52.0,
+  "lambda": 203,
+  "beta": -52,
   "periodHours": 27.41,
   "version": "2019-10-23",
   "nonconvex": false,
@@ -94,7 +94,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53579/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/53577/IAUspin",
-  "shapeSha256": "f5b9e2aa2266ce412b20de2bddc7242224f042d7aa0aecbb1a579d00ab6d18ba",
   "shapeBytes": 46419,
   "vertices": 574,
   "faces": 1144,
@@ -137,7 +136,7 @@
     "closed": true,
     "consistentWinding": true,
     "degenerateFaces": 0,
-    "minimumTriangleAreaSourceUnitsSquared": 1.0836055601551933e-08
+    "minimumTriangleAreaSourceUnitsSquared": 1.0836055601551933e-8
   },
   "anchors": [
     {

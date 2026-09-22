@@ -49,6 +49,6 @@ export function llorriHeaderCamera(bytes: Buffer, kernels: KernelSet, bodyId: nu
   const terms = (prefix: string) => [2,3].flatMap(d => Array.from({length:d+1}, (_,i) => [i,d-i,h[`${prefix}_${i}_${d-i}`] === undefined ? 0 : number(`${prefix}_${i}_${d-i}`)]));
   return { schema: 'cssearth-archived-camera@1', target: cameraTarget, startTime: text('STARTUTC'), filter: 'PANCHROMATIC', width: image.width, height: image.height,
     matrix, rayMatrix: inverse(matrix.map(row => row.slice(0,3))), positionKm: rotation.map(row => dot(row,eye)), sunDirection: sun.map(n => n/sunLength),
-    sip: { referencePixel, a: terms('A'), b: terms('B'), offsetPixels: [0,0] }, imageSha256: sha256(bytes),
+    sip: { referencePixel, a: terms('A'), b: terms('B'), offsetPixels: [0,0] },
     checks: { status: 'unregistered-header-seed', pointing: 'Original FITS WCS and source body frame. No image-to-surface registration established.' } };
 }

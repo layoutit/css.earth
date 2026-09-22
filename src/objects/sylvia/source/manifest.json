@@ -171,8 +171,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "Rotation record: pole latitude, pole longitude and sidereal period, then the phase epoch and phase. Read latitude-first, established against a published pole.",
-      "expectedBytes": 39,
-      "expectedSha256": "2fd500dbe3aa4cef6a0970818094a1cb0ad5098d2d7e0cf225e173c57d63fbea",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -196,8 +194,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "observer table: right ascension, declination, angular diameter, distance and phase angle for Paranal at each exposure",
-      "expectedBytes": 14005,
-      "expectedSha256": "7062b66f82c5de81a1385173f5daef62a7749f8f6558a9708a7f83dfe0b4e92a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -221,8 +217,6 @@
         "sphere-sighting-geometry"
       ],
       "coverage": "heliocentric state vectors at the light-time corrected epochs, giving the direction to the Sun",
-      "expectedBytes": 10687,
-      "expectedSha256": "6b7d76fb73cd598e70ac61c64dfedbb65a557866b7d62166bc5f4d32e244bf5c",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

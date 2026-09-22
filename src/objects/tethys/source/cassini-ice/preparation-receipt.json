@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-cassini-ice-surfaces@1",
-  "recipeSha256": "946b2641db5a3dee9508d6c0273e6dadb910498a02ff48af10fe6ea3677e44e1",
   "preparerSha256": "b67682f3ea069c0e371bcedc8f440836dc591f95f9b202d39510ef89efabbf3a",
   "transferSha256": "25d2a53eaf5d8373d14a85a373588ad662d1e65af427fb36fc64d4575ae27914",
   "navigationPreparerSha256": "c4a8f2d534b1252cb847b90beff8c8d4a5daac009912fd40cf5e50f4027b1b04",
@@ -45,7 +44,6 @@
           "coreEndByteExclusive": 252928,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
         "calibratedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -169,12 +167,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 7,
-        "minimum": 7.690122931103438e-07,
-        "maximum": 3.2740665227418052e-06,
+        "minimum": 7.690122931103438e-7,
+        "maximum": 0.0000032740665227418052,
         "percentiles": {
-          "5": 9.652075992605844e-07,
-          "50": 2.246233378961478e-06,
-          "95": 3.015799551527909e-06
+          "5": 9.652075992605844e-7,
+          "50": 0.000002246233378961478,
+          "95": 0.000003015799551527909
         }
       },
       "footprintRejections": {},
@@ -289,7 +287,6 @@
           "coreEndByteExclusive": 195584,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
         "calibratedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -462,12 +459,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 64,
-        "minimum": 5.2739329449986156e-08,
-        "maximum": 1.9004915586820774e-06,
+        "minimum": 5.2739329449986156e-8,
+        "maximum": 0.0000019004915586820774,
         "percentiles": {
-          "5": 9.88271638689707e-08,
-          "50": 7.778875994560826e-07,
-          "95": 1.7525021367534073e-06
+          "5": 9.88271638689707e-8,
+          "50": 7.778875994560826e-7,
+          "95": 0.0000017525021367534073
         }
       },
       "footprintRejections": {},
@@ -582,7 +579,6 @@
           "coreEndByteExclusive": 248000,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
         "calibratedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -810,12 +806,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 201,
-        "minimum": 5.652035845017578e-08,
-        "maximum": 3.8038396854035855e-06,
+        "minimum": 5.652035845017578e-8,
+        "maximum": 0.0000038038396854035855,
         "percentiles": {
-          "5": 3.3804396291101607e-07,
-          "50": 1.0169914573215458e-06,
-          "95": 2.366691184471313e-06
+          "5": 3.3804396291101607e-7,
+          "50": 0.0000010169914573215458,
+          "95": 0.000002366691184471313
         }
       },
       "footprintRejections": {},
@@ -930,7 +926,6 @@
           "coreEndByteExclusive": 414976,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
         "calibratedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -1061,12 +1056,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 97,
-        "minimum": 4.778778580090538e-08,
-        "maximum": 3.92031446777086e-06,
+        "minimum": 4.778778580090538e-8,
+        "maximum": 0.00000392031446777086,
         "percentiles": {
-          "5": 1.1639644371763494e-07,
-          "50": 1.523349631082615e-06,
-          "95": 3.278099101043834e-06
+          "5": 1.1639644371763494e-7,
+          "50": 0.000001523349631082615,
+          "95": 0.000003278099101043834
         }
       },
       "footprintRejections": {},
@@ -1181,7 +1176,6 @@
           "coreEndByteExclusive": 325728,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
         "calibratedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -1308,12 +1302,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 184,
-        "minimum": 2.549544702979043e-07,
-        "maximum": 2.2633760645037074e-05,
+        "minimum": 2.549544702979043e-7,
+        "maximum": 0.000022633760645037074,
         "percentiles": {
-          "5": 1.4060017989211777e-06,
-          "50": 1.1261966611987988e-05,
-          "95": 2.127465875572092e-05
+          "5": 0.0000014060017989211777,
+          "50": 0.000011261966611987988,
+          "95": 0.00002127465875572092
         }
       },
       "footprintRejections": {},
@@ -1428,7 +1422,6 @@
           "coreEndByteExclusive": 248000,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
         "calibratedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -1691,12 +1684,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 138,
-        "minimum": 1.918988213220717e-07,
-        "maximum": 5.0940778100915954e-06,
+        "minimum": 1.918988213220717e-7,
+        "maximum": 0.0000050940778100915954,
         "percentiles": {
-          "5": 4.0050863053494094e-07,
-          "50": 2.347311697856888e-06,
-          "95": 4.2445784013232175e-06
+          "5": 4.0050863053494094e-7,
+          "50": 0.000002347311697856888,
+          "95": 0.0000042445784013232175
         }
       },
       "footprintRejections": {},
@@ -1790,7 +1783,6 @@
           "coreEndByteExclusive": 439440,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
         "calibratedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -2705,12 +2697,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 366,
-        "minimum": 8.959048020376377e-08,
-        "maximum": 7.239531316078799e-06,
+        "minimum": 8.959048020376377e-8,
+        "maximum": 0.000007239531316078799,
         "percentiles": {
-          "5": 4.785807516759801e-07,
-          "50": 2.2372538130794117e-06,
-          "95": 5.570861191566941e-06
+          "5": 4.785807516759801e-7,
+          "50": 0.0000022372538130794117,
+          "95": 0.000005570861191566941
         }
       },
       "footprintRejections": {},
@@ -2804,7 +2796,6 @@
           "coreEndByteExclusive": 439440,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
         "calibratedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -2931,12 +2922,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 343,
-        "minimum": 6.264105561032678e-08,
-        "maximum": 7.28714006941848e-06,
+        "minimum": 6.264105561032678e-8,
+        "maximum": 0.00000728714006941848,
         "percentiles": {
-          "5": 4.872148225225543e-07,
-          "50": 2.9736403858009705e-06,
-          "95": 6.316420722131482e-06
+          "5": 4.872148225225543e-7,
+          "50": 0.0000029736403858009705,
+          "95": 0.000006316420722131482
         }
       },
       "footprintRejections": {},
@@ -3051,7 +3042,6 @@
           "coreEndByteExclusive": 360224,
           "declaredMinusActualBytes": 512
         },
-        "rawSha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af",
         "calibratedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
         "pixelOrder": "original sample-fastest, line-next; calibrated IR band k = original band k+96",
         "reconstructedAdc": "signed original core DN + original per-band/per-line BACKGROUND suffix",
@@ -3178,12 +3168,12 @@
       },
       "acceptedCenterReconstructionPixels": {
         "count": 130,
-        "minimum": 1.2339373057154326e-07,
-        "maximum": 2.2809120063376966e-06,
+        "minimum": 1.2339373057154326e-7,
+        "maximum": 0.0000022809120063376966,
         "percentiles": {
-          "5": 2.0940413182736673e-07,
-          "50": 9.719345296681525e-07,
-          "95": 1.909586716809882e-06
+          "5": 2.0940413182736673e-7,
+          "50": 9.719345296681525e-7,
+          "95": 0.000001909586716809882
         }
       },
       "footprintRejections": {},
@@ -3368,8 +3358,8 @@
   "photometricCorrection": "none",
   "aperturePolicy": "rc19-nominal-aperture-unknown-step-order@1",
   "apertureInsetRadians": [
-    1e-06,
-    1e-06
+    0.000001,
+    0.000001
   ],
   "registrationEvidence": {
     "file": "evidence/registration.md",

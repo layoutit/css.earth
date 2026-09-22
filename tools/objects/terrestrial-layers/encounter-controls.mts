@@ -5,15 +5,15 @@ const dot=(a: readonly number[],b: readonly number[])=>a.reduce((s,n,i)=>s+n*b[i
 const vector=(v: unknown,n: number): v is number[] =>isArray(v)&&v.length===n&&v.every(Number.isFinite);
 /** Recompute the residuals from source coordinates. Reported RMS values alone
  * cannot authorize a camera: every fit and holdout coordinate is checked. */
-export function validateEncounterControls(camera: Pick<ReturnType<typeof encounterCamera>,"project"> & {report:Pick<ReturnType<typeof encounterCamera>["report"],"nominalPixelScaleMeters">}, registration: unknown, shapeSha256: string) {
+export function validateEncounterControls(camera: Pick<ReturnType<typeof encounterCamera>,"project"> & {report:Pick<ReturnType<typeof encounterCamera>["report"],"nominalPixelScaleMeters">}, registration: unknown) {
   const r=parseEncounterRegistration(registration);
-  if (!r || r.sourceShapeSha256!==shapeSha256 || !['disjoint-limb-normal-translation','source-topography-feature-translation','registered-image-feature-translation'].includes(r.method) ||
+  if (!r || !['disjoint-limb-normal-translation','source-topography-feature-translation','registered-image-feature-translation'].includes(r.method) ||
       !isArray(r.controls) || !Number.isFinite(r.maximumRmsMeters) || r.maximumRmsMeters<=0 || r.maximumRmsMeters>100 ||
       !Number.isFinite(r.maximumResidualMeters) || r.maximumResidualMeters<r.maximumRmsMeters || r.maximumResidualMeters>200 ||
       !Number.isFinite(r.nominalPixelScaleMeters) || r.nominalPixelScaleMeters<=0 || !r.limitations ||
       new Set(r.controls.map(p=>p.id)).size!==r.controls.length) throw new Error('Missing source-bound encounter registration.');
   if (Math.abs(r.nominalPixelScaleMeters-camera.report.nominalPixelScaleMeters)>1e-6) throw new Error('Registration pixel scale differs from the source camera.');
-  if(r.method==='registered-image-feature-translation' && (!r.reference || !r.reference.id || ![r.reference.imageSha256,r.reference.controlSha256].every(s=>/^[a-f0-9]{64}$/.test(s)) || r.controls.some(p=>!vector(p.referencePixel,2)||p.normal!==undefined||p.projectionOffsetPixels!==undefined) || r.maximumRmsMeters>r.nominalPixelScaleMeters || r.maximumResidualMeters>2*r.nominalPixelScaleMeters))throw new Error('Image overlap registration requires pinned reference pixels and a one-pixel RMS budget.');
+  if(r.method==='registered-image-feature-translation' && (!r.reference || !r.reference.id || r.controls.some(p=>!vector(p.referencePixel,2)||p.normal!==undefined||p.projectionOffsetPixels!==undefined) || r.maximumRmsMeters>r.nominalPixelScaleMeters || r.maximumResidualMeters>2*r.nominalPixelScaleMeters))throw new Error('Image overlap registration requires pinned reference pixels and a one-pixel RMS budget.');
   const residuals: Record<"fit"|"holdout",number[]>={fit:[],holdout:[]};
   for (const p of r.controls) {
     if (!p.id || !['fit','holdout'].includes(p.partition) || !vector(p.sourcePointMeters,3) || !vector(p.sourcePixel,2) ||

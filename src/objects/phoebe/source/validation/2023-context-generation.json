@@ -1,27 +1,5 @@
 {
   "schema": "cssearth-phoebe-2023-context-generation@1",
-  "sourcePins": [
-    {
-      "path": "shape/2023/phoebe_128_o.obj",
-      "bytes": 17787240,
-      "sha256": "4393bd9343a00b03f407bfa4e841178ca07787e176a6b2ebef820ed410ab87b9"
-    },
-    {
-      "path": "science/2023/phoebe_albedo_c.cub",
-      "bytes": 9941545,
-      "sha256": "c5fe7cfccec2250688ad3a95caa2b1efdda5e0132910bef022b5717e8cdf48c3"
-    },
-    {
-      "path": "science/2023/phoebe_numimg_c.cub",
-      "bytes": 326413,
-      "sha256": "8f37aad2212be8f6c0c602b0c66003f376c6986eee57e52d8e488d317120699d"
-    },
-    {
-      "path": "science/2023/phoebe_bestmap_c.cub",
-      "bytes": 326427,
-      "sha256": "3abf6f92075031aa15cec23f4e1462ef460e40475a749c0b4a0246402ff09b15"
-    }
-  ],
   "recipe": {
     "generator": "tools/objects/terrestrial-layers/radial-snapshot.mjs",
     "inputs": [

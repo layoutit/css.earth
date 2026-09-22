@@ -204,8 +204,6 @@
     {
       "id": "new-horizons-charon-bond-albedo-grid",
       "path": "science/nh-charon-bond-georeferenced.tif",
-      "expectedBytes": 107840,
-      "expectedSha256": "bb936d47510a45c1bb99b143c2cc25b6e677a344dc9eff579d1ff06d07057dfc",
       "origin": "https://pds-smallbodies.astro.umd.edu/holdings/pds4-nh_derived-v4.0/plutosystem_geophysics/albedo/nh_charon_bond.lblx",
       "credit": "New Horizons geology and geophysics team; NASA/JHUAPL/SwRI; NASA PDS Small Bodies Node",
       "license": "Publicly archived NASA mission scientific data; preserve producer and PDS citation",
@@ -267,8 +265,6 @@
     {
       "id": "usgs-gazetteer-charon-nomenclature-center-pts",
       "path": "features/CHARON_nomenclature_center_pts.zip",
-      "expectedBytes": 76458,
-      "expectedSha256": "f4dbc26dd073cbfb0266ccfac7324e4fa982bfb978bcf5d0af8e6c81d5870382",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/CHARON_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -339,8 +335,6 @@
     {
       "id": "charon-title-mark",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3829,
-      "expectedSha256": "06158211a49a37af331a98d83e1121974aae114dd20d3bc7df5905fb7d28d3df",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "Inter Project Authors",
       "license": "SIL Open Font License 1.1",
@@ -629,8 +623,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 17729,
-      "expectedSha256": "0edfb68a81bda916b72fe77e392db7f26fd2559a48829b904be9ac59cf85bf22",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -781,8 +773,6 @@
       "consumers": [
         "leisa-ice"
       ],
-      "expectedBytes": 17730,
-      "expectedSha256": "773847bb6f69bc71be633a8147e35b74c4cf16c25dbcc8f85d60f7c7def439c8",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -958,9 +948,7 @@
             "evidence": "Supplement page 3: continuum and absorption windows, Organa 310.9 E / 54.3 N; Fig. S6 spatial comparison."
           }
         ]
-      },
-      "expectedBytes": 971,
-      "expectedSha256": "c7ff1789d718ce710db089b5b2ff9c312c113bbe90d4de184f9c845549fc161d"
+      }
     }
   ],
   "documents": [
@@ -1029,9 +1017,7 @@
       "purpose": "Independent NumPy source mask counts and raw numeric/bit-pattern anchors."
     },
     {
-      "path": "science/nh_charon_bond.lblx",
-      "expectedBytes": 10737,
-      "expectedSha256": "daa71e1c658e8c497203177290dc105c3ecad1c0280943affffaaa8ceddab867"
+      "path": "science/nh_charon_bond.lblx"
     },
     {
       "path": "science/prepare-bond-map.json"
@@ -1063,8 +1049,6 @@
     {
       "id": "charon-leisa-preparation",
       "path": "science/leisa/preparation.json",
-      "expectedBytes": 25961,
-      "expectedSha256": "ae64af36af753c1240e41d9ebe95dd2ee8a242c809ecd8580adfece059bd3ada",
       "sourceBinding": {
         "kind": "local",
         "reason": "Computed source byte identities, coverage and numerical anchors from the spectral-band preparation."

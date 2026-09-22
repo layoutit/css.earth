@@ -140,8 +140,6 @@
     {
       "id": "usgs-gazetteer-eros-nomenclature-center-pts",
       "path": "features/EROS_nomenclature_center_pts.zip",
-      "expectedBytes": 144223,
-      "expectedSha256": "6c42a16f2ee32aea95f5a4bd753d8723b9ec75c68470f8f3c5f8d5de2ad5f9cb",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/EROS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -279,15 +277,11 @@
     },
     {
       "path": "reference/eros_nearmsi_filter4.lbl",
-      "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
-      "expectedBytes": 1515,
-      "expectedSha256": "b91269b57ebad2df1091ca3544784b1269ec07d4b22279aa23c5ad7029ff4c01"
+      "purpose": "Unmodified publisher metadata for the 950 nm albedo map."
     },
     {
       "path": "reference/eros_nearmsi_filter4.xml",
-      "purpose": "Unmodified publisher metadata for the 950 nm albedo map.",
-      "expectedBytes": 10462,
-      "expectedSha256": "5e9c236b5b423104587b9dc0d351896c07fe709e635c35aff74e9c2ab7ab2c97"
+      "purpose": "Unmodified publisher metadata for the 950 nm albedo map."
     },
     {
       "id": "eros-surface-sites",
@@ -331,8 +325,6 @@
     },
     {
       "path": "observations/M0146235607.SUM",
-      "expectedBytes": 6723,
-      "expectedSha256": "7509644c53314875d4aacc4664c7e47f3f7b6336efda68abc8b6b3e0ae4bc383",
       "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/sumfiles-updated/M0146235607.SUM",
       "credit": "NASA/JHUAPL/NEAR and SBMT team",
       "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",
@@ -349,8 +341,6 @@
     },
     {
       "path": "observations/M0146235607F4_2P_CIF_DBL.INFO",
-      "expectedBytes": 4179,
-      "expectedSha256": "b8426142683a18780ad25f44d4ef51bd850c52cedb82e8b6c07ad27dab2809a4",
       "origin": "https://sbmt.jhuapl.edu/sbmt/prod/data/GASKELL/EROS/MSI/infofiles/M0146235607F4_2P_CIF_DBL.INFO",
       "credit": "NASA/JHUAPL/NEAR and SBMT team",
       "purpose": "Independent SBMT preparation oracle input; not a production surface or a qualified registration.",

@@ -1,7 +1,6 @@
 {
   "body": "hyperion",
   "mode": "fixed-camera-validation",
-  "recipeSha256": "16129eb83d09d0bc8f8e0eb575923ef989b1dda226128a7fdd24a67289d2a0a7",
   "referenceCamera": {
     "id": "n1506388840",
     "path": "observations/N1506388840_2_CALIB.IMG",
@@ -18,7 +17,6 @@
     ],
     "pixelAngleMicroradians": 5.9896977199
   },
-  "implementationSha256": "bc99c9c2db422577828e9ba8b0c3d49ac1e49b27f8b2a88ec7d249d774214489",
   "mesh": {
     "path": "shape/hyperion_30k_plt.tab",
     "sha256": "cf90156a297d3078375583a99c2367bfe265bc5175710772e173544a25c37002"

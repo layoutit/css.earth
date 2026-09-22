@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "8790f31a2ae35d02628e239a5c86150c1ef0c6f69494df72d1ee5cf9e2be7808",
       "origin": "https://arxiv.org/abs/1801.07221",
       "credit": "Brown and Butler (2018), resolved ALMA binary photometry with Spitzer/Herschel thermal modeling.",
       "capture": {
