@@ -10,7 +10,7 @@ export interface StarRecord { hipparcosId?: number; rightAscensionDegrees: numbe
   sources: { position: string; distance: string; properMotion: string; radialVelocity: string; binary?: string } }
 
 export interface HostedOrbitRecord { periodDays: number; semiMajorAxisStellarRadii: number; inclinationDegrees: number; eccentricity: number;
-  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction';
+  argumentOfPeriapsisDegrees?: number; epochDefinition?: 'inferior-conjunction' | 'periastron';
   transitTimeBmjdTdb: number; ascendingNodePositionAngleDegrees: number;
   sources: { period: string; shape: string; phase: string; orientation: string; eccentricity?: string; argumentOfPeriapsis?: string } }
 
@@ -77,13 +77,14 @@ export function readHostedOrbitRecord(value: unknown): HostedOrbitRecord {
   const record = objectValue(value), sources = objectValue(record.sources, 'hosted orbit sources');
   const eccentricity = numberValue(record.eccentricity, 'hosted eccentricity');
   if (!(eccentricity >= 0 && eccentricity < 1)) throw new TypeError('Hosted eccentricity must be in [0, 1).');
-  if (record.epochDefinition !== undefined && record.epochDefinition !== 'inferior-conjunction') throw new TypeError('Unsupported hosted orbit epoch definition.');
-  if (eccentricity > 0 && (record.argumentOfPeriapsisDegrees === undefined || record.epochDefinition !== 'inferior-conjunction' ||
-      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs planet-centric periapsis, an inferior-conjunction epoch and sources for both eccentricity and periapsis.');
+  const epochDefinition = record.epochDefinition;
+  if (epochDefinition !== undefined && epochDefinition !== 'inferior-conjunction' && epochDefinition !== 'periastron') throw new TypeError('Unsupported hosted orbit epoch definition.');
+  if (eccentricity > 0 && (record.argumentOfPeriapsisDegrees === undefined || epochDefinition === undefined ||
+      sources.eccentricity === undefined || sources.argumentOfPeriapsis === undefined)) throw new TypeError('An eccentric hosted orbit needs a periapsis argument, an epoch definition (inferior-conjunction or periastron) and sources for both eccentricity and periapsis.');
   const orbit: HostedOrbitRecord = { periodDays: numberValue(record.periodDays), semiMajorAxisStellarRadii: numberValue(record.semiMajorAxisStellarRadii),
     inclinationDegrees: numberValue(record.inclinationDegrees), eccentricity, transitTimeBmjdTdb: numberValue(record.transitTimeBmjdTdb),
     ...(record.argumentOfPeriapsisDegrees === undefined ? {} : { argumentOfPeriapsisDegrees: numberValue(record.argumentOfPeriapsisDegrees) }),
-    ...(record.epochDefinition === undefined ? {} : { epochDefinition: 'inferior-conjunction' }),
+    ...(epochDefinition === undefined ? {} : { epochDefinition }),
     ascendingNodePositionAngleDegrees: numberValue(record.ascendingNodePositionAngleDegrees),
     sources: { period: stringValue(sources.period), shape: stringValue(sources.shape), phase: stringValue(sources.phase), orientation: stringValue(sources.orientation),
       ...(sources.eccentricity === undefined ? {} : { eccentricity: stringValue(sources.eccentricity) }),
