@@ -79,7 +79,7 @@
   },
   "envelope": {
     "path": "src/objects/lmc/source/compact/envelope.json.gz",
-    "bytes": 347745
+    "bytes": 347750
   },
   "neutralSlices": {
     "path": "src/objects/lmc/source/compact/neutral-slices.json.gz",
@@ -87,9 +87,6 @@
   },
   "neutralTextures": "src/objects/lmc/source/compact/neutral",
   "priorCloud": {
-    "identityPin": {
-      "path": "labs/nebula/models/lmc/full-density/source/volume.json"
-    },
     "recipe": {
       "path": "src/objects/lmc/source/compact/prior/volume.json",
       "bytes": 1370
@@ -153,8 +150,8 @@
         "path": "src/objects/lmc/source/lenses/horalek-widefield/provenance.json"
       },
       "presentation": {
-        "label": "Horálek optical",
-        "description": "Visible-light colors from Petr Horálek's NOIRLab wide-field photograph, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
+        "label": "Hor\u00e1lek optical",
+        "description": "Visible-light colors from Petr Hor\u00e1lek's NOIRLab wide-field photograph, painted onto the shared image-fitted LMC emission model. Its broad envelope follows the Garver et al. stellar simulation's shape hypothesis, not measured gas depth.",
         "sourceUrl": "https://noirlab.edu/public/images/iotw2547a/"
       },
       "toneCurve": {
