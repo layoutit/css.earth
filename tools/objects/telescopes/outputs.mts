@@ -21,12 +21,15 @@ export interface OutputRequest {
   readonly hdu:number; readonly structure?:string; readonly plane?:number; readonly pixel?:readonly [number,number];
   readonly band?:readonly number[]; readonly aperture?:readonly number[];
   readonly background?:'none'|readonly number[]; readonly continuum?:readonly number[];
+  /** PNG and SVG figure background; transparent when omitted. */
+  readonly figureBackground?:'transparent'|'opaque';
   readonly uncertainty?:'omit'|'independent';
 }
 export function validateOutputRequest(request:OutputRequest):void {
   const fields:Record<OutputRequest['kind'],readonly string[]>={image:['plane'],spectrum:['pixel'],'band-image':['band','uncertainty'],'aperture-spectrum':['aperture','background','uncertainty'],'feature-map':['band','continuum','uncertainty']};
   if(!Object.hasOwn(fields,request.kind)||!Number.isSafeInteger(request.hdu)||request.hdu<0)throw new TypeError('Choose a supported output and a nonnegative HDU index');
-  for(const key of Object.keys(request))if(!['kind','hdu','structure',...fields[request.kind]].includes(key))throw new TypeError(`${key} is not valid for ${request.kind}`);
+  if(request.figureBackground!==undefined&&request.figureBackground!=='transparent'&&request.figureBackground!=='opaque')throw new TypeError('Figure background takes transparent or opaque');
+  for(const key of Object.keys(request))if(!['kind','hdu','structure','figureBackground',...fields[request.kind]].includes(key))throw new TypeError(`${key} is not valid for ${request.kind}`);
   if(request.structure!==undefined&&(typeof request.structure!=='string'||!request.structure.trim()))throw new TypeError('Native structure must be nonempty');
   const tuple=(value:unknown,count:number,integer=false)=>Array.isArray(value)&&value.length===count&&value.every(n=>typeof n==='number'&&Number.isFinite(n)&&(!integer||Number.isSafeInteger(n)&&n>=0));
   if(request.plane!==undefined&&(!Number.isSafeInteger(request.plane)||request.plane<0))throw new TypeError('Plane must be a nonnegative integer');

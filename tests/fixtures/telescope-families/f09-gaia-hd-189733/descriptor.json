@@ -1,0 +1,167 @@
+{
+  "schema": "cssearth-telescope-product-descriptor@1",
+  "dataset": {
+    "id": "hd-189733-gaia-dr3",
+    "target": "HD 189733 field",
+    "acquisition": {
+      "kind": "repository",
+      "identity": "gaia-dr3-astrometry.csv"
+    },
+    "producingRecord": "manifest.json",
+    "sourceClassifications": [
+      {
+        "term": "astrometry",
+        "vocabulary": "cssEarth observational families",
+        "version": "1",
+        "status": "mapped"
+      }
+    ],
+    "families": [
+      "F09"
+    ],
+    "profiles": [
+      {
+        "handlerId": "f09-astrometry",
+        "profileId": "icrs-astrometry-table@1"
+      }
+    ]
+  },
+  "members": [
+    {
+      "id": "gaia",
+      "path": "gaia-dr3-astrometry.csv",
+      "role": "science",
+      "bytes": 5735,
+      "sha256": "01624247d9a4472a432322ec9265a6d77bfe6b3027843c061e2df045b1b5bd54",
+      "mediaType": "text/csv"
+    }
+  ],
+  "components": [
+    {
+      "id": "astrometry",
+      "name": "astrometric positions",
+      "families": [
+        "F09"
+      ],
+      "locations": [
+        {
+          "memberId": "gaia"
+        }
+      ],
+      "representation": {
+        "kind": "table",
+        "rows": 36
+      },
+      "axes": [],
+      "columns": [
+        {
+          "id": "id",
+          "name": "id",
+          "role": "row-identity",
+          "datatype": "string",
+          "nullable": false,
+          "variableLength": false
+        },
+        {
+          "id": "ra",
+          "name": "ra_deg",
+          "role": "right-ascension",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false,
+          "unit": "deg"
+        },
+        {
+          "id": "dec",
+          "name": "dec_deg",
+          "role": "declination",
+          "datatype": "float64",
+          "nullable": false,
+          "variableLength": false,
+          "unit": "deg"
+        },
+        {
+          "id": "parallax",
+          "name": "parallax_mas",
+          "role": "parallax",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false,
+          "unit": "mas"
+        },
+        {
+          "id": "parallax-error",
+          "name": "parallax_error_mas",
+          "role": "parallax-standard-deviation",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false,
+          "unit": "mas"
+        },
+        {
+          "id": "ra-error",
+          "name": "ra_error_mas",
+          "role": "right-ascension-cos-dec-standard-deviation",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false,
+          "unit": "mas"
+        },
+        {
+          "id": "dec-error",
+          "name": "dec_error_mas",
+          "role": "declination-standard-deviation",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false,
+          "unit": "mas"
+        },
+        {
+          "id": "ra-dec-correlation",
+          "name": "ra_dec_corr",
+          "role": "right-ascension-declination-correlation",
+          "datatype": "float64",
+          "nullable": true,
+          "variableLength": false
+        }
+      ],
+      "quantity": {
+        "name": "celestial position",
+        "semantics": "Source identities and astrometric quantities in their stated reference frame and epoch."
+      },
+      "calibration": {
+        "state": "archive-calibrated",
+        "basis": [
+          "Gaia DR3 gaia_source"
+        ]
+      },
+      "uncertainty": {
+        "form": "unknown",
+        "basis": "Available scalar errors are retained; no complete covariance is supplied."
+      },
+      "flags": [],
+      "frame": {
+        "kind": "celestial",
+        "name": "ICRS",
+        "referencePosition": "barycentric",
+        "epoch": "J2016"
+      },
+      "dependencyIds": []
+    }
+  ],
+  "dependencies": [],
+  "issues": [
+    {
+      "scope": "component",
+      "identity": "astrometry",
+      "state": "missing",
+      "reason": "No complete covariance is supplied."
+    },
+    {
+      "scope": "component",
+      "identity": "astrometry",
+      "state": "missing",
+      "reason": "Both proper-motion components are required for propagation."
+    }
+  ]
+}

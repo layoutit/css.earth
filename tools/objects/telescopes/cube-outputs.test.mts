@@ -117,6 +117,8 @@ test('CLI accepts new selectors and refuses incomplete or silently ignored selec
  assert.throws(()=>parseCli([...args,'--output','aperture-spectrum','--aperture','0,0,2,1']),/background/);
  assert.throws(()=>parseCli([...args,'--output','band-image','--band','2,3','--pixel','1,2']),/not valid/);
  assert.throws(()=>validateOutputRequest({...band,band:[2,2]}),/positive increasing/);
+ const opaque=parseCli([...args,'--output','band-image','--band','2.5,4.5','--figure-background','opaque']);assert.equal(opaque.command==='export'&&opaque.selection.figureBackground,'opaque');
+ assert.throws(()=>parseCli([...args,'--output','band-image','--band','2.5,4.5','--figure-background','white']),/transparent or opaque/);
 });
 
 test('Astropy output retains the source sky grid and records when celestial projection is inapplicable',async()=>{
@@ -131,6 +133,10 @@ test('Astropy output retains the source sky grid and records when celestial proj
   const result=await run,coordinates=requireRecord(requireRecord(result.presentation).coordinates);
   assert.equal(coordinates.kind,file==='sky'?'celestial':'pixel');
   if(file==='coupled'){assert.match(String(coordinates.reason),/beyond/);continue;}
+  const {PNG}=await import('pngjs'),corner=async(path:string)=>[...PNG.sync.read(await readFile(path)).data.subarray(0,4)];
+  assert.equal(requireRecord(requireRecord(result.presentation).png).background,'transparent');assert.equal((await corner(resolve(dir,'figure.png')))[3],0);
+  const solidDir=resolve(root,file+'-opaque');await mkdir(solidDir);const solid=await plotProduct(solidDir,'fixture',data,resolve(root,file+'.fits'),{...band,uncertainty:'omit',figureBackground:'opaque'});
+  assert.equal(requireRecord(requireRecord(solid.presentation).png).background,'opaque');assert.deepEqual(await corner(resolve(solidDir,'figure.png')),[0x18,0x1b,0x1f,255]);assert.match(await readFile(resolve(solidDir,'figure.svg'),'utf8'),/<g id="figure_1">\s*<g id="patch_1">\s*<path[^>]*fill: #181b1f/);
   assert.equal(coordinates.frame,'<ICRS Frame>');
   execFileSync(tc.python,['-c',String.raw`
 import sys

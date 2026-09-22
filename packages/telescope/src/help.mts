@@ -52,6 +52,10 @@ Aggregate outputs:
   Apertures are fixed pixel boxes with exclusive upper bounds; spectra are region means.
   Band images are wavelength-weighted means. Feature maps integrate a continuum residual.
 
+Figures:
+  --figure-background transparent|opaque  PNG and SVG background for export; default transparent
+  Family operations that draw a figure take "figureBackground" in --params the same way.
+
 Explore filters and query options use micrometres, arcseconds and kilometres:
   --from ISO --to ISO                 Time range instead of --any-time
   --icrs-circle RA,DEC,RADIUS          Explicit ICRS cutout, in degrees
