@@ -35,7 +35,7 @@ export async function installAstroquery() {
   for (const value of requireArray(entry.sourcePackages, 'sourcePackages')) {
     const source = requireRecord(value, 'source package');
     if (source.build !== 'installed-numpy') throw new TypeError('A source package must state the installed-numpy build policy.');
-    const requirement = `${requireString(source.name)} @ ${requireString(source.url)}#sha256=${requireString(source.sha256)}`;
+    const requirement = `${requireString(source.name)} @ ${requireString(source.url)}`;
     run(resolve(prefix, 'bin/python'), ['-m', 'pip', 'install', '--no-build-isolation', '--no-deps', '-q', requirement]);
   }
   await rm(resolve(ASTROQUERY_ROOT, 'mamba/pkgs'), { recursive: true, force: true });
@@ -45,7 +45,7 @@ export async function installAstroquery() {
 
 export interface AstroqueryToolchain {
   readonly python: string; readonly digest: string; readonly version: string; readonly pyvoVersion: string;
-  readonly scipyVersion: string; readonly batmanVersion: string; readonly cdflibVersion: string; readonly pyuvdataVersion: string; readonly astropyHealpixVersion:string; readonly env: NodeJS.ProcessEnv;
+  readonly scipyVersion: string; readonly batmanVersion: string; readonly cdflibVersion: string; readonly pyuvdataVersion: string; readonly orbitizeVersion: string; readonly whereIsThePlanetVersion: string; readonly astropyHealpixVersion:string; readonly env: NodeJS.ProcessEnv;
 }
 
 export function astroqueryToolchainSync(): AstroqueryToolchain {
@@ -56,7 +56,7 @@ export function astroqueryToolchainSync(): AstroqueryToolchain {
   if (marker.pinsSha256 !== digest) throw new Error('The astronomy packages were installed from other pins; reinstall them.');
   try { accessSync(python); } catch { throw new Error(`The Astroquery toolchain has no python at ${python}.`); }
   return { python, digest, version: requireString(entry.astroquery), pyvoVersion: requireString(entry.pyvo), scipyVersion: requireString(entry.scipy),
-    batmanVersion: requireString(entry.batman), cdflibVersion: requireString(entry.cdflib), pyuvdataVersion: requireString(entry.pyuvdata), astropyHealpixVersion:requireString(entry.astropyHealpix), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };
+    batmanVersion: requireString(entry.batman), cdflibVersion: requireString(entry.cdflib), pyuvdataVersion: requireString(entry.pyuvdata), orbitizeVersion: requireString(entry.orbitize), whereIsThePlanetVersion: requireString(entry.whereistheplanet), astropyHealpixVersion:requireString(entry.astropyHealpix), env: { PATH: `${bin}:${process.env.PATH ?? ''}`, PYTHONNOUSERSITE: '1' } };
 }
 
 export async function astroqueryToolchain(): Promise<AstroqueryToolchain> { return astroqueryToolchainSync(); }
@@ -66,9 +66,9 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
   if (mode === 'install') console.log(`Astronomy packages are installed at ${await installAstroquery()}`);
   else if (mode === 'verify') {
     const toolchain = await astroqueryToolchain();
-    const code = "import astroquery, astropy_healpix, importlib.metadata, pyvo, scipy, cdflib, pyuvdata; from astroquery import alma, mast, vizier; print(astroquery.__version__, pyvo.__version__, scipy.__version__, importlib.metadata.version('batman-package'), cdflib.__version__, pyuvdata.__version__, astropy_healpix.__version__)";
-    const found = run(toolchain.python, ['-c', code], toolchain.env).trim(), expected = `${toolchain.version} ${toolchain.pyvoVersion} ${toolchain.scipyVersion} ${toolchain.batmanVersion} ${toolchain.cdflibVersion} ${toolchain.pyuvdataVersion} ${toolchain.astropyHealpixVersion}`;
+    const code = "import astroquery, astropy_healpix, importlib.metadata, pyvo, scipy, cdflib, pyuvdata, orbitize, whereistheplanet; from astroquery import alma, mast, vizier; print(astroquery.__version__, pyvo.__version__, scipy.__version__, importlib.metadata.version('batman-package'), importlib.metadata.version('orbitize'), importlib.metadata.version('whereistheplanet'), cdflib.__version__, pyuvdata.__version__, astropy_healpix.__version__)";
+    const found = run(toolchain.python, ['-c', code], toolchain.env).trim(), expected = `${toolchain.version} ${toolchain.pyvoVersion} ${toolchain.scipyVersion} ${toolchain.batmanVersion} ${toolchain.orbitizeVersion} ${toolchain.whereIsThePlanetVersion} ${toolchain.cdflibVersion} ${toolchain.pyuvdataVersion} ${toolchain.astropyHealpixVersion}`;
     if (found !== expected) throw new Error(`Expected ${expected}, found ${found}.`);
-    console.log(`Astronomy packages ready: Astroquery ${toolchain.version}, PyVO ${toolchain.pyvoVersion}, SciPy ${toolchain.scipyVersion}, batman ${toolchain.batmanVersion}, cdflib ${toolchain.cdflibVersion}, pyuvdata ${toolchain.pyuvdataVersion}, astropy-healpix ${toolchain.astropyHealpixVersion}; pins ${toolchain.digest.slice(0, 12)}`);
+    console.log(`Astronomy packages ready: Astroquery ${toolchain.version}, PyVO ${toolchain.pyvoVersion}, SciPy ${toolchain.scipyVersion}, batman ${toolchain.batmanVersion}, orbitize ${toolchain.orbitizeVersion}, whereistheplanet ${toolchain.whereIsThePlanetVersion}, cdflib ${toolchain.cdflibVersion}, pyuvdata ${toolchain.pyuvdataVersion}, astropy-healpix ${toolchain.astropyHealpixVersion}; pins ${toolchain.digest.slice(0, 12)}`);
   } else throw new TypeError('Usage: toolchain <install|verify>');
 }

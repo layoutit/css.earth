@@ -25,4 +25,8 @@ Each row carries `exampleProven: true` and `proposalBaseline.status: "complete"`
 | F17 | [F17.json](../../tests/fixtures/telescope-family-examples/artifacts/F17.json) | `telescope family-run` | Pinned NEAR MSI raw/calibrated/label closure |
 | F18 | [F18.json](../../tests/fixtures/telescope-family-examples/artifacts/F18.json) | `telescope family-run` | Exact compound-member enumeration |
 
+F09 reads a CSV astrometry table by the Gaia archive column names (`source_id`, `ra`, `dec`, `ra_error`, `dec_error`, `ra_dec_corr`, `pmra`, `pmdec`, `parallax`, `parallax_error`, `ref_epoch`), and its export carries those errors and their correlation. To ask which body a measured sky position belongs to, see [sky association](../virtual-telescopes.md#sky-association).
+
+Every figure is transparent by default. Set `"figureBackground": "opaque"` in the parameters of any family operation that draws a figure, or pass `--figure-background opaque` to `telescope export`, to fill the PNG and SVG with the figure's own background colour.
+
 Descriptor member paths are relative to each descriptor, so the examples contain no checkout-specific absolute paths. Runtime `output.product.json` receipts are deliberately not copied here; the manifest points at focused tests that reopen and verify those records.

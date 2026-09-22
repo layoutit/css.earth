@@ -8,6 +8,8 @@ Human entry points:
   telescope family-assess REQUEST.json DESCRIPTOR.json --out DIRECTORY [--json]
   telescope family-run DESCRIPTOR.json OPERATION [--params PARAMS.json] --out DIRECTORY [--json]
   telescope outputs ARTIFACT.json [--structure NAME]
+  telescope candidates STAR --epoch MJD|DATE --out DIRECTORY [--figure-background transparent|opaque]
+  telescope associate MEASUREMENTS.csv --system STAR --out DIRECTORY [--orbit-draws N] [--fit-astrometry] [--fit-orbits]
 
 Explore needs only a target. In a terminal it saves the bounded discovery snapshot, shows actual
 observations and limitations, and asks which exact identity to retrieve. With --json, redirected
@@ -51,6 +53,21 @@ Aggregate outputs:
   --band LO,HI                      Wavelength interval in micrometres
   Apertures are fixed pixel boxes with exclusive upper bounds; spectra are region means.
   Band images are wavelength-weighted means. Feature maps integrate a continuum residual.
+
+Sky association:
+  candidates places every hosted planet of a star at an epoch, as offsets from the star in mas, with
+  1σ/2σ/3σ ephemeris ellipses from the orbit's published posterior where one exists, and its orbit.
+  associate reads relative astrometry in the orbitize! CSV layout (epoch as MJD, raoff, decoff,
+  raoff_err, decoff_err, radec_corr) and tests each row against those candidates: Mahalanobis R,
+  p = exp(-R^2/2) and the one-sided normal σ, a chart per row and one of the whole system.
+  --orbit-draws N traces N posterior draws of each published orbit; --fit-astrometry adds the
+  astrometry the published fit was made from, which the prediction tool ships beside its draws;
+  --fit-orbits fits an orbit to the measurements themselves with orbitize!, one body at a time,
+  and draws that posterior instead. Fitting samples, so it costs about twenty seconds per body.
+
+Figures:
+  --figure-background transparent|opaque  PNG and SVG background for export; default transparent
+  Family operations that draw a figure take "figureBackground" in --params the same way.
 
 Explore filters and query options use micrometres, arcseconds and kilometres:
   --from ISO --to ISO                 Time range instead of --any-time
