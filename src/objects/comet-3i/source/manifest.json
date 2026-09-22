@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 59703,
-      "expectedSha256": "5ce9202b128d16c4847e83c46572be5f02fdd62b0ddb7ca5e939d6a98c4a45da",
       "origin": "https://doi.org/10.3847/2041-8213/ae471c",
       "credit": "Hui, Jewitt, Mutchler, Agarwal and Kim (2026), ApJL, Hubble WFC3 nucleus photometry (arXiv:2601.21569)",
       "license": "MIT numeric extraction of published scientific facts",

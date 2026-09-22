@@ -3,7 +3,6 @@ import { rm } from "node:fs/promises";
 
 import { defineConfig } from "astro/config";
 import { SITE_ORIGIN } from "./site/seo.mts";
-import { wmtsLocalMirror } from "./tools/objects/geographic-pages/operations/wmts-local-server.mts";
 import { performanceSourceMaps } from "./tools/performance/source-maps.mts";
 import { searchServer } from './tools/cli/search-server.mts';
 import { prepareContextAvailability } from "./tools/prepare/prepare-context-availability.mts";
@@ -53,7 +52,7 @@ export default defineConfig({
     },
   } }],
   vite: {
-    plugins: [searchServer(), wmtsLocalMirror({objectId:"earth"}), performanceSourceMaps()],
+    plugins: [searchServer(), performanceSourceMaps()],
     define: {
       __CSSEARTH_VERSION__: JSON.stringify(cssEarthVersion()),
     },

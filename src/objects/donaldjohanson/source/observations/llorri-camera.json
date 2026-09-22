@@ -27,18 +27,18 @@
   ],
   "rayMatrix": [
     [
-      3.95147536078143e-08,
-      -4.471801902946184e-06,
+      3.95147536078143e-8,
+      -0.000004471801902946184,
       -0.42004368276697013
     ],
     [
-      2.87754952741456e-06,
-      -1.6714959549447557e-06,
+      0.00000287754952741456,
+      -0.0000016714959549447557,
       0.7376311329307131
     ],
     [
-      4.0071897324089254e-06,
-      1.2443919251627037e-06,
+      0.0000040071897324089254,
+      0.0000012443919251627037,
       -0.5286552300455633
     ]
   ],
@@ -61,17 +61,17 @@
       [
         0,
         2,
-        1.726418009563e-07
+        1.726418009563e-7
       ],
       [
         1,
         1,
-        8.133468652948e-07
+        8.133468652948e-7
       ],
       [
         2,
         0,
-        1.570530437375e-07
+        1.570530437375e-7
       ],
       [
         0,
@@ -81,7 +81,7 @@
       [
         1,
         2,
-        -4.125795241026e-09
+        -4.125795241026e-9
       ],
       [
         2,
@@ -91,29 +91,29 @@
       [
         3,
         0,
-        -4.28337365037e-09
+        -4.28337365037e-9
       ]
     ],
     "b": [
       [
         0,
         2,
-        1.222464781111e-06
+        0.000001222464781111
       ],
       [
         1,
         1,
-        2.516442536339e-07
+        2.516442536339e-7
       ],
       [
         2,
         0,
-        4.250434534e-07
+        4.250434534e-7
       ],
       [
         0,
         3,
-        -4.1188944949639e-09
+        -4.1188944949639e-9
       ],
       [
         1,
@@ -123,7 +123,7 @@
       [
         2,
         1,
-        -4.735049720216e-09
+        -4.735049720216e-9
       ],
       [
         3,
@@ -397,36 +397,27 @@
     "bodyFrame": "Donaldjohanson v12; valid near the encounter epoch only",
     "pointing": "Two published landmarks constrain translation; third withheld. Original TAN-SIP distortion unchanged."
   },
-  "imageSha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557",
-  "meshSha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7",
   "provenance": [
     {
-      "path": "preparation/camera.json",
-      "sha256": "3d3955788f72b830eeefa708f02243f148cfd7d98e02ec0c54fe46255d603aa4"
+      "path": "preparation/camera.json"
     },
     {
-      "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit",
-      "sha256": "74d897d04b791320f1acd63ab93726936bdea402d7f188201d3942af6f472557"
+      "path": "observations/lor_0798443290_04598_00035_1x1_sci_03.fit"
     },
     {
-      "path": "reference/naif0012.tls",
-      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "path": "reference/naif0012.tls"
     },
     {
-      "path": "reference/donaldjohanson_v12.tpc",
-      "sha256": "c45817cad95c54e2a4c8c59d0b7944418b68e2b52409a1485d128afbc9da1021"
+      "path": "reference/donaldjohanson_v12.tpc"
     },
     {
-      "path": "reference/lor_0798443290_04598_00035_1x1_sci_03.xml",
-      "sha256": "732863d8aca2d3c723ae34de2e5bed1d79641434419a03f2efc68faba8488b9c"
+      "path": "reference/lor_0798443290_04598_00035_1x1_sci_03.xml"
     },
     {
-      "path": "reference/coordinate-system.pdf",
-      "sha256": "744a6482837456a97cd1d59f1eda426660030e72f2a5bd646f6bd4136766c8e0"
+      "path": "reference/coordinate-system.pdf"
     },
     {
-      "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz",
-      "sha256": "783fe0cc28d0aff318fb356fe8eac81671ced86b68af5bd4829827168991aaf7"
+      "path": "shape/lcy_donj_k548_iso20m_v10.obj.gz"
     }
   ]
 }

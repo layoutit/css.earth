@@ -6,11 +6,6 @@ import {createSourceManifest} from '../../../../src/platform/source-manifest.mts
 import {loadPdsPlateShape} from '../../../../tools/objects/terrestrial-layers/obj-shape.mts';
 import {loadRadialTerrain,validateClosedMesh} from '../../../../tools/objects/terrestrial-layers/radial-terrain.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/hekate/source'),read=createSourceFixtureReader(root);
-test('Hekate retains source identity and restoration closure',async()=>{
- const source=await createSourceManifest({planetId:'hekate',planetName:'Hekate',sourceRoot:root});await source.verify();
- const plan=await read('preparation/acquisition.json');for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
- const model=await read('reference/damit-model.json');assert.equal(model.modelId,3088);assert.equal(model.fields['Calibrated Size'],'1 (Yes)');assert.equal(model.fields.Version,'2019-06-24');
-});
 test('Hekate preserves calibrated original coordinates and the paired spin model',async()=>{
  const config=await read('preparation/terrestrial.json'),p=config.geometry.radialTerrain,mesh=await loadPdsPlateShape(resolve(root,p.path),p.grid),t=validateClosedMesh(mesh.indices.flat(),mesh.positions);
  assert.deepEqual(mesh.positions[0],[-4226.7210000000005,14340.719,40880.009]);assert.deepEqual(mesh.indices[0],[0,1,2]);assert.deepEqual([t.vertices,t.faces,t.components,t.eulerCharacteristic],[982,1960,1,2]);

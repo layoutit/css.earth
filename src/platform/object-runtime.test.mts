@@ -1,4 +1,3 @@
-import type { PageLayerStats } from '../renderers/css/runtime/object-runtime-types.js';
 import { loadObjectTestDefinition } from '../../tools/contract/object-test-data.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
@@ -15,17 +14,7 @@ import { createObjectSelectionRuntime } from '../renderers/css/dist/testing.js';
 import { retainedPresentationFixture, fixtureObjectCapabilities } from "./test/object-runtime-package.mts";
 const moonDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("moon"));
 const earthDefinition = parsePreparedObjectRuntime(await loadObjectTestDefinition("earth"));
-import { earthPagingFixture } from '../../tests/objects/unit/earth/paging-fixture.mts';
-const earthPagingDefinition = parsePreparedObjectRuntime(earthPagingFixture);
 // This mount harness records lifecycle calls; no page requests are made here.
-function idlePageStats(): PageLayerStats {
-  return { dataset: 'fixture', qualification: undefined, poolSize: 0, desired: [], activeLoads: 0,
-    pendingSelection: false, retained: [], decodedPageByteBound: 0, reservedDecodedBytes: 0,
-    requests: 0, aborts: 0, evictions: 0, publications: 0, selectionRuns: 0, selectionDiagnostics: null, errors: [],
-    index: { activeLoads: 0, requests: 0, aborts: 0, budgetBlocked: 0, residentDirectories: 0,
-      residentNodes: 0, reservedEncodedBytes: 0, reservedDecodedBytes: 0, maximumBytes: 0, maximumDirectories: 0, errors: [] },
-    apiImages: { requests: 0, retries: 0, sharedAcquisitions: 0, activeRequests: 0, receivedBytes: 0, residentImages: 0, residentEncodedBytes: 0 } };
-}
 const flush = async () => { for (let index = 0; index < 32; index++) await Promise.resolve(); };
 const matrix = "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,0,0,0,1)";
 function publicationForTest(): OrbitPublication {
@@ -44,8 +33,6 @@ type Lifetime = ReturnType<NonNullable<RuntimeServices["createLifetime"]>>;
 type Playback = ReturnType<NonNullable<RuntimeServices["createPlayback"]>>;
 type Orbit = ReturnType<NonNullable<RuntimeServices["createOrbit"]>>;
 type Sky = ReturnType<NonNullable<RuntimeServices["mountSky"]>>;
-type PageOptions = Parameters<NonNullable<ObjectRuntimeCapabilities["mountPages"]>>[0];
-type PageRuntime = ReturnType<NonNullable<ObjectRuntimeCapabilities["mountPages"]>>;
 interface HarnessOptions { definition?: ObjectRuntimeDefinition; failAtElement?: number | null; stageId?: string | null; runtimeFactory?: RuntimeFactory; diagnostics?: boolean; }
 interface DecodeJob { resolve(): void; reject(error: unknown): void; image: ControlledImage; done: boolean; }
 class ControlledImage implements PreparedImage {
@@ -71,7 +58,7 @@ const runtimePolicy: RuntimePolicy = {
   sceneCursor: () => "", isOrbitDragStart: () => true, wheelZoomInputKind: () => "wheel",
   bindResponsiveOrbitPolicy: () => ({ mobile: false, destroy() {} }),
 };
-function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeServices> & { mountPages?: ObjectRuntimeCapabilities["mountPages"] } = {}) {
+function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeServices> = {}) {
   const definition = options.definition ?? moonDefinition, failAtElement = options.failAtElement ?? null;
   const stageId = options.stageId === undefined ? definition.id : options.stageId;
   const runtimeFactory = options.runtimeFactory ?? createObjectRuntime, diagnostics = options.diagnostics ?? false;
@@ -122,7 +109,7 @@ function harness(options: HarnessOptions = {}, overrides: Partial<RuntimeService
       waitDocument: () => Promise.resolve(), waitPaint: () => Promise.resolve(), ...overrides,
     });
     runtime = mount(stage, { diagnostics, inputSurface: stage, runtimePolicy,
-      capabilities: { ...fixtureObjectCapabilities, ...(overrides.mountPages ? { mountPages: overrides.mountPages } : {}) },
+      capabilities: fixtureObjectCapabilities,
       onError: error => errors.push(error) });
   } catch (error) { f.restore(); throw error; }
   async function resolveJobs() {
@@ -247,57 +234,6 @@ test("optional warm decode failure is recoverable while native cleanup failure i
   h.resourceOptions().onWarmError?.(new Error("late warm")); h.resourceOptions().onCleanupError?.(new Error("late cleanup"));
   assert.equal(warnings.length, 1); assert.equal(h.errors.length, 1);
 });
-test("Earth's retained paging fixture joins shared publication, playback and cleanup", async t => {
-  const events: Array<string | boolean | null> = [], plans: unknown[] = [];
-  const h = harness({ definition: earthPagingDefinition }, { mountPages({ own, plan }: PageOptions): PageRuntime {
-    plans.push(plan); own(() => events.push("destroy"));
-    return { publish: () => events.push("frame"), setLens: lens => events.push(lens.id), setPlaying: value => events.push(value), stats: idlePageStats };
-  } }); t.after(h.restore); await h.complete();
-  assert.deepEqual(plans, earthPagingFixture.pageLayers.map(layer => layer.plan));
-  assert.ok(events.includes("frame")); h.runtime.resume(); assert.equal(events.at(-1), true);
-  h.runtime.pause(); assert.equal(events.at(-1), false); h.runtime.destroy(); assert.equal(events.at(-1), "destroy");
-  h.runtime.resume(); assert.equal(events.at(-1), "destroy"); assert.deepEqual(h.errors, []);
-});
-test("partial prepared page construction retires the actual tree and all resources", async t => {
-  let cleaned = false;
-  const h = harness({ definition: earthPagingDefinition }, { mountPages({ own }: PageOptions): PageRuntime { own(() => { cleaned = true; }); throw new Error("page construction"); } });
-  t.after(h.restore); const failure = assert.rejects(h.runtime.ready, /page construction/); await h.resolveJobs(); await failure;
-  assert.equal(cleaned, true); assert.equal(h.stage.children.length, 0); assert.equal(h.resources().stats().images.entries.length, 0);
-});
-
-test("prepared geographic destinations and lens targets use the physical surface flight while reset keeps authored framing", async t => {
-  const h = harness({ definition: earthPagingDefinition }, { mountPages: () => ({
-    publish() {}, setLens() {}, setPlaying() {}, stats: idlePageStats,
-  }) });
-  t.after(h.restore);
-  // This boundary test records camera requests; native conformance measures
-  // the actual geographic point through the complete browser matrix chain.
-  h.document.defaultView.DOMMatrix = class extends globalThis.DOMMatrix { inverse() { return this; } };
-  h.document.defaultView.getComputedStyle = () => ({ transform: matrix });
-  await h.complete();
-  const target = earthPagingDefinition.variants.find(variant => variant.navigation?.camera);
-  assert.ok(target, 'The actual prepared geographic lens has a camera target');
-  assert.ok(target.navigation?.camera);
-  const lensId = target.when.lensId;
-  if (typeof lensId !== "string") throw new TypeError("Prepared lens id must be a string.");
-  const request = h.selection().dispatch({ kind: 'lens', id: lensId });
-  await h.resolveJobs(); assert.equal(await request, true);
-  assert.deepEqual(h.flights.at(-1), [target.navigation.camera, { surfaceTarget: true }]);
-  const place = { camera: target.navigation.camera, coverage: 'detail' };
-  assert.ok(h.runtime.destinations);
-  const destination = h.runtime.destinations.select(place);
-  await h.resolveJobs(); const selected = await destination; assert.ok(selected !== null && typeof selected === "object");
-  const arrival = Reflect.get(selected, "arrival"); assert.ok(arrival instanceof Promise); await arrival;
-  assert.deepEqual(h.flights.at(-1), [place.camera, { surfaceTarget: true }]);
-  await h.runtime.destinations.reset();
-  assert.deepEqual(h.flights.at(-1), [{
-    controlPitch: earthPagingFixture.camera.defaultControlPitchDegrees,
-    controlYaw: earthPagingFixture.camera.defaultControlYawDegrees,
-    zoom: earthPagingFixture.camera.defaultZoom,
-  }]);
-  assert.deepEqual(h.errors, []);
-});
-
 test('mount rejects an uncompiled motion document instead of discovering live CSS animations', () => {
   const { motion, ...uncompiled } = moonDefinition;
   assert.throws(() => createObjectRuntime(uncompiled), /motion bindings must be prepared/);

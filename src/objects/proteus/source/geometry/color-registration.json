@@ -8,78 +8,63 @@
   "provenance": [
     {
       "path": "geometry/naif0012.tls",
-      "bytes": 5257,
-      "sha256": "678e32bdb5a744117a467cd9601cd6b373f0e9bc9bbde1371d5eee39600a039b"
+      "bytes": 5257
     },
     {
       "path": "geometry/vg200051.tsc",
-      "bytes": 108191,
-      "sha256": "bf8ae3b237a4f75362ae4bf5fe133ec4a888877f6183f1705330b9433f81dcac"
+      "bytes": 108191
     },
     {
       "path": "geometry/vg2_v02.tf",
-      "bytes": 12008,
-      "sha256": "aa529b2dbf43b7f925b3e81e86a3d7e74a4d99c392113197e5f6d5bf13c37fcb"
+      "bytes": 12008
     },
     {
       "path": "shape/pck00011.tpc",
-      "bytes": 131226,
-      "sha256": "3dff7b1dbeceaa01f25467767d3fa25816051c85d162d1edf04acb310ee28bb1"
+      "bytes": 131226
     },
     {
       "path": "geometry/vg2_nep_version1_type1_iss_sedr.bc",
-      "bytes": 885760,
-      "sha256": "f181a43f5785867afc81436a202a6ec453c8dd5538172ae916ca979981051f11"
+      "bytes": 885760
     },
     {
       "path": "shape/n8proteus.tab",
-      "bytes": 70226,
-      "sha256": "d079c8eac52d84224d5cb413526ff9415ab33afd48965e7e025544832ddd1868"
+      "bytes": 70226
     },
     {
       "path": "geometry/c1137328-opus.json",
-      "bytes": 11716,
-      "sha256": "55f6021bc89b524cb4c1783d273a651cde563acbd3ddb80e09a1787b58e36b94"
+      "bytes": 11716
     },
     {
       "path": "observations/C1137328_GEOMED.IMG",
-      "bytes": 2002000,
-      "sha256": "963eeafe558de0d75d1afc2de2ca38558a1dfc4e4d1e322755bfe3d8b05e20de"
+      "bytes": 2002000
     },
     {
       "path": "observations/C1137328_GEOMED.LBL",
-      "bytes": 3296,
-      "sha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42"
+      "bytes": 3296
     },
     {
       "path": "geometry/c1137339-opus.json",
-      "bytes": 11743,
-      "sha256": "f3f4271a94c03c1bc26cd1af287cd7926a93c21621065b107d3560cd2b981e16"
+      "bytes": 11743
     },
     {
       "path": "observations/C1137339_GEOMED.IMG",
-      "bytes": 2002000,
-      "sha256": "bdd224a33a5c5f160ef7340b435cd554f0c1103beb1d9b239eaaf3566bc9b758"
+      "bytes": 2002000
     },
     {
       "path": "observations/C1137339_GEOMED.LBL",
-      "bytes": 3310,
-      "sha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497"
+      "bytes": 3310
     },
     {
       "path": "geometry/c1137350-opus.json",
-      "bytes": 11728,
-      "sha256": "fc4cdb9829c78e933f815afde5aea1486f98f6105034680850690483451c8d59"
+      "bytes": 11728
     },
     {
       "path": "observations/C1137350_GEOMED.IMG",
-      "bytes": 2002000,
-      "sha256": "f37a64e7ac1c2e9e141f59cd20fa2f34f517bcf0e657d0540a60b0a424769111"
+      "bytes": 2002000
     },
     {
       "path": "observations/C1137350_GEOMED.LBL",
-      "bytes": 3311,
-      "sha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9"
+      "bytes": 3311
     }
   ],
   "frames": [
@@ -94,7 +79,7 @@
       "northAzimuthDegrees": 13.455111379559261,
       "pixelAngleMicroradians": 7.841764329210524,
       "requestedCkTick": 6317206375.422595,
-      "returnedCkTick": 6317206415.0,
+      "returnedCkTick": 6317206415,
       "center": [
         473.69993148676184,
         499.6632419233105
@@ -827,7 +812,7 @@
         }
       ],
       "seed": [
-        473.0,
+        473,
         499.5
       ],
       "seedOffsets": [
@@ -1659,7 +1644,7 @@
       ],
       "seed": [
         466.5,
-        593.0
+        593
       ],
       "seedOffsets": [
         [
@@ -1756,7 +1741,7 @@
       "northAzimuthDegrees": 12.96074677895093,
       "pixelAngleMicroradians": 7.841764329210524,
       "requestedCkTick": 6317223975.445325,
-      "returnedCkTick": 6317224015.0,
+      "returnedCkTick": 6317224015,
       "center": [
         392.7015186610059,
         375.5350675293314
@@ -2489,7 +2474,7 @@
         }
       ],
       "seed": [
-        392.0,
+        392,
         377.5
       ],
       "seedOffsets": [

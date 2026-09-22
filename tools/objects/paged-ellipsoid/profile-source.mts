@@ -6,7 +6,6 @@ import type {PagedGeometryParameters} from './scene-contract.mts';
 import {DERIVED_CAMERA_ANGLE_FIELDS, recipeCamera} from '../camera-source.mts';
 import {preparedControlPitch} from '@cssearth/engine';
 import {LIT_DEFAULT_VIEW} from '../../../src/platform/default-camera.mts';
-import {parsePageRecipe} from '../geographic-pages/source-records.mts';
 
 const geometry: Guard<PagedGeometryParameters> = object({BODY_LATITUDE_SEGMENTS: number, BODY_LONGITUDE_SEGMENTS: number, EQUATORIAL_RADIUS: number,
   TILE_SIZE: number, SEAM_BLEED: number, PLANET_SEAM_BLEED: number, INTERIOR_PROJECTIVE_TEXTURE_RASTER_SCALE: number,
@@ -46,9 +45,9 @@ const assetConfiguration: Guard<Omit<PagedAssetConfiguration & PagedRasterConfig
       deepOceanFill: optional(deepOceanFill),
       thumbnailRegion: optional(object({longitude: optional(number), latitude: optional(number), spanDegrees: optional(number)})),
       webp: optional(object({quality: optional(number), effort: optional(number)}))}))})});
-const profile = object({textureLevels: optional(object({widths:array(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string, cityPath: string,
+const profile = object({textureLevels: optional(object({widths:array(number),hysteresis:number,texelsPerCssPixel:number})),schema: literal('cssearth-paged-ellipsoid@1'), displayName: string,
   destinations: object({searchLabel: string, descriptionSuffix: string, statuses: object({detail: string, overview: string})}),
-  geographic: object({pages: record, noise: object({poolSize: number})})});
+  geographic: object({places: record})});
 /** Orientation, light and default camera angles are derived at preparation; a recipe that states them is stale. */
 const DERIVED_RECIPE_FIELDS = {geometry: ['OBLIQUITY_DEGREES', 'PRESENTATION_NODE_DEGREES', 'CAMERA_SCENE_PITCH_DEGREES', 'CAMERA_DEFAULT_CONTROL_PITCH_DEGREES'],
   material: ['worldLight'], camera: DERIVED_CAMERA_ANGLE_FIELDS} as const;
@@ -63,15 +62,12 @@ export function parsePagedProfile(value: unknown) {
   const assets = {...parsed, camera: {...parsed.camera, ...LIT_DEFAULT_VIEW, defaultControlPitchDegrees: controlPitch,
     materialReferenceControlPitchDegrees: controlPitch, materialReferenceControlYawDegrees: LIT_DEFAULT_VIEW.defaultControlYawDegrees}};
   const metadata = parse(value, profile, 'paged ellipsoid profile');
-  // The geographic operator owns the complete page schema. Its decoder preserves
-  // all source fields; the profile retains their original JSON values as well.
-  const pages = parsePageRecipe(metadata.geographic.pages);
-  // The profile guard returns the recipe object itself, so the derived camera goes last.
-  return Object.assign({}, assets, metadata, {geographic: {...metadata.geographic, pages}, camera: assets.camera});
+    // The profile guard returns the recipe object itself, so the derived camera goes last.
+  return Object.assign({}, assets, metadata, {camera: assets.camera});
 }
 export const isPagedEllipsoidRecipe = (value: unknown): boolean => record(value) && value.schema === 'cssearth-paged-ellipsoid@1';
 const lens = object({id: string, maximumZoom: number, view: optional(string), surfaceBankId: optional(string), surfaceUrl: optional(string),
-  polesUrl: optional(string), surfacePagePrefix: optional(string), cityZoom: optional(boolean), overlayId: optional(string), interiorTextures: optional(dictionary(string)),
+  polesUrl: optional(string), surfacePagePrefix: optional(string), interiorTextures: optional(dictionary(string)),
   focus: optional(object({longitude: number, latitude: number, zoom: number, northUp: optional(boolean),
     transition: optional(object({durationMilliseconds: number, preserveZoom: boolean}))}))});
 const lenses = object({defaultLens: string, controls: array(lens)});

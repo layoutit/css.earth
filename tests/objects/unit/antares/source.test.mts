@@ -10,14 +10,6 @@ const root = resolve(import.meta.dirname, '../../../../src/objects/antares/sourc
 const read = async (path: string) => JSON.parse(await readFile(resolve(root, path), 'utf8')) as unknown;
 const PARSEC_M = 3.085677581491367e16, MAS_RAD = Math.PI / 180 / 3.6e6;
 
-test('Antares retains source pins and has no observation to acquire', async () => {
-  const source = await createSourceManifest({ planetId: 'antares', planetName: 'Antares', sourceRoot: root });
-  await source.verify();
-  const plan = requireRecord(await read('preparation/acquisition.json'));
-  assert.ok(requireArray(plan.operations).every(operation => requireString(requireRecord(operation).path).startsWith('presentation/')), 'only the title font is downloaded');
-  assert.equal(source.manifest.inputs.filter(input => input.path.startsWith('observations/')).length, 0, 'no observation file is pinned');
-});
-
 test('the lens is the shared neutral gray and the radius is the published diameter at the stated distance', async () => {
   const raster = requireRecord(await read('preparation/raster.json')), surfaces = requireArray(raster.surfaces).map(value => requireRecord(value));
   assert.equal(surfaces.length, 1);

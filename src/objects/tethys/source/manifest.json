@@ -451,8 +451,6 @@
     {
       "id": "tethys-cassini-original-c1807469104_1_ir-cub",
       "path": "cassini-ice/native/C1807469104_1_ir.cub",
-      "expectedBytes": 572731,
-      "expectedSha256": "4b6bee3bfa4f19b51025c326cf7ac207bd4ea48bc35075f5ee83f86400c398ae",
       "origin": "https://vims.univ-nantes.fr/cube/C1807469104_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -480,8 +478,6 @@
     {
       "id": "tethys-cassini-original-n1807469104_1_ir-cub",
       "path": "cassini-ice/native/N1807469104_1_ir.cub",
-      "expectedBytes": 382352,
-      "expectedSha256": "55355c71d5b6c921ff7c5f4564e14ce28a0d787fb3d8963b28736a66cd6146f0",
       "origin": "https://vims.univ-nantes.fr/cube/N1807469104_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -509,8 +505,6 @@
     {
       "id": "tethys-cassini-original-v1807469104_1-qub",
       "path": "cassini-ice/raw/v1807469104_1.qub",
-      "expectedBytes": 252928,
-      "expectedSha256": "be1e54ea809e092370dd8a09f2ed96ee5aa350671241b0e46310c2adf3f4ebdc",
       "origin": "https://vims.univ-nantes.fr/cube/1807469104_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -538,8 +532,6 @@
     {
       "id": "tethys-cassini-original-c1807456038_1_ir-cub",
       "path": "cassini-ice/native/C1807456038_1_ir.cub",
-      "expectedBytes": 454887,
-      "expectedSha256": "4f7935c46b21af2bb0036382658b0e205be274b091f36e76084df6b4096733a6",
       "origin": "https://vims.univ-nantes.fr/cube/C1807456038_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -567,8 +559,6 @@
     {
       "id": "tethys-cassini-original-n1807456038_1_ir-cub",
       "path": "cassini-ice/native/N1807456038_1_ir.cub",
-      "expectedBytes": 312508,
-      "expectedSha256": "0dcf493ccef3b5e016d69d636053bb9934960262e3ded3512425895aea5b065c",
       "origin": "https://vims.univ-nantes.fr/cube/N1807456038_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -596,8 +586,6 @@
     {
       "id": "tethys-cassini-original-v1807456038_1-qub",
       "path": "cassini-ice/raw/v1807456038_1.qub",
-      "expectedBytes": 195584,
-      "expectedSha256": "dc8f4b201a002c900c11314e7c2ad65fdcfab344469f5e14d2f42d0a74d0b732",
       "origin": "https://vims.univ-nantes.fr/cube/1807456038_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -625,8 +613,6 @@
     {
       "id": "tethys-cassini-original-c1807473499_1_ir-cub",
       "path": "cassini-ice/native/C1807473499_1_ir.cub",
-      "expectedBytes": 446797,
-      "expectedSha256": "accd3bed917401cd4ca82558bb2d1f8181e646c27f3272cc18a3f69a1c8c220f",
       "origin": "https://vims.univ-nantes.fr/cube/C1807473499_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -654,8 +640,6 @@
     {
       "id": "tethys-cassini-original-n1807473499_1_ir-cub",
       "path": "cassini-ice/native/N1807473499_1_ir.cub",
-      "expectedBytes": 158730,
-      "expectedSha256": "4b2b82f80a99bf4488e301203d62bbf9b7c7c29aed549526bf2952927398d76b",
       "origin": "https://vims.univ-nantes.fr/cube/N1807473499_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -683,8 +667,6 @@
     {
       "id": "tethys-cassini-original-v1807473499_1-qub",
       "path": "cassini-ice/raw/v1807473499_1.qub",
-      "expectedBytes": 248320,
-      "expectedSha256": "c0e1697c5cc5f72b6fede8ef71a20fb460fe80f083f4587acf2c1f5bd98f62ef",
       "origin": "https://vims.univ-nantes.fr/cube/1807473499_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -712,8 +694,6 @@
     {
       "id": "tethys-cassini-original-c1818547570_1_ir-cub",
       "path": "cassini-ice/native/C1818547570_1_ir.cub",
-      "expectedBytes": 695517,
-      "expectedSha256": "4eeddcbdf2405d627bb186a4bcb5fdd0beae2d5e754ea1081ea16c10fa320795",
       "origin": "https://vims.univ-nantes.fr/cube/C1818547570_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -741,8 +721,6 @@
     {
       "id": "tethys-cassini-original-n1818547570_1_ir-cub",
       "path": "cassini-ice/native/N1818547570_1_ir.cub",
-      "expectedBytes": 183450,
-      "expectedSha256": "2b45033ab5cf0450c13bc05b019dcd0dba34ba7f2f39deb7c9aad012052c4aa6",
       "origin": "https://vims.univ-nantes.fr/cube/N1818547570_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -770,8 +748,6 @@
     {
       "id": "tethys-cassini-original-v1818547570_1-qub",
       "path": "cassini-ice/raw/v1818547570_1.qub",
-      "expectedBytes": 415232,
-      "expectedSha256": "5077a518b0af23d1321cf2d196200793d6d826bade577afe575888d626c72957",
       "origin": "https://vims.univ-nantes.fr/cube/1818547570_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -799,8 +775,6 @@
     {
       "id": "tethys-cassini-original-c1561668191_1_ir-cub",
       "path": "cassini-ice/native/C1561668191_1_ir.cub",
-      "expectedBytes": 562527,
-      "expectedSha256": "918a27b9b76de708dcfb5fb7b8db990b825006b4d71317cbcf87f727da9e3ddb",
       "origin": "https://vims.univ-nantes.fr/cube/C1561668191_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -828,8 +802,6 @@
     {
       "id": "tethys-cassini-original-n1561668191_1_ir-cub",
       "path": "cassini-ice/native/N1561668191_1_ir.cub",
-      "expectedBytes": 170460,
-      "expectedSha256": "be6f1d27fbd977f750fb79ed0d9a0758d279435aedbd57cd6020e4348b2e61e5",
       "origin": "https://vims.univ-nantes.fr/cube/N1561668191_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -857,8 +829,6 @@
     {
       "id": "tethys-cassini-original-v1561668191_1-qub",
       "path": "cassini-ice/raw/v1561668191_1.qub",
-      "expectedBytes": 326144,
-      "expectedSha256": "373d8b8f871879f760a48ba4ca1b3fe405bd93776ac4a6c48383cca952a3599c",
       "origin": "https://vims.univ-nantes.fr/cube/1561668191_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -886,8 +856,6 @@
     {
       "id": "tethys-cassini-original-c1660463972_1_ir-cub",
       "path": "cassini-ice/native/C1660463972_1_ir.cub",
-      "expectedBytes": 456069,
-      "expectedSha256": "d85ed15fae82d390ad395d133615a188ecee84e2aaf9a382a71b99760145b6f9",
       "origin": "https://vims.univ-nantes.fr/cube/C1660463972_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -915,8 +883,6 @@
     {
       "id": "tethys-cassini-original-n1660463972_1_ir-cub",
       "path": "cassini-ice/native/N1660463972_1_ir.cub",
-      "expectedBytes": 168002,
-      "expectedSha256": "2cbf9230387dd49ceb4cf142a72cabb50eb49d9e4cda26479c17335cb62df875",
       "origin": "https://vims.univ-nantes.fr/cube/N1660463972_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -944,8 +910,6 @@
     {
       "id": "tethys-cassini-original-v1660463972_1-qub",
       "path": "cassini-ice/raw/v1660463972_1.qub",
-      "expectedBytes": 248320,
-      "expectedSha256": "8e82a329b1fd42fc243c3f89515466cda86a2f7bd188a61ae74305a207d645a9",
       "origin": "https://vims.univ-nantes.fr/cube/1660463972_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -973,8 +937,6 @@
     {
       "id": "tethys-cassini-original-c1719613772_1_ir-cub",
       "path": "cassini-ice/native/C1719613772_1_ir.cub",
-      "expectedBytes": 735315,
-      "expectedSha256": "7afb633bcb10bfa6def52b2c4fde32d68b7d9c3714c9e70cd922146f922a0042",
       "origin": "https://vims.univ-nantes.fr/cube/C1719613772_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1002,8 +964,6 @@
     {
       "id": "tethys-cassini-original-n1719613772_1_ir-cub",
       "path": "cassini-ice/native/N1719613772_1_ir.cub",
-      "expectedBytes": 191248,
-      "expectedSha256": "0b780aa84669bb56b24ebfa9f79fc583e3f3b853c6bbe45c050e7787024411f6",
       "origin": "https://vims.univ-nantes.fr/cube/N1719613772_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1031,8 +991,6 @@
     {
       "id": "tethys-cassini-original-v1719613772_1-qub",
       "path": "cassini-ice/raw/v1719613772_1.qub",
-      "expectedBytes": 439808,
-      "expectedSha256": "d599c14f6f0ecbcbe253726b04e9b4a0a03e913b69a554fe050f972fa848d032",
       "origin": "https://vims.univ-nantes.fr/cube/1719613772_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1060,8 +1018,6 @@
     {
       "id": "tethys-cassini-original-c1719616836_1_ir-cub",
       "path": "cassini-ice/native/C1719616836_1_ir.cub",
-      "expectedBytes": 730703,
-      "expectedSha256": "f1ab5891ca92a4af956643ff3f05df404dfc5369e82eb1e77c1c2d980323be43",
       "origin": "https://vims.univ-nantes.fr/cube/C1719616836_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1089,8 +1045,6 @@
     {
       "id": "tethys-cassini-original-n1719616836_1_ir-cub",
       "path": "cassini-ice/native/N1719616836_1_ir.cub",
-      "expectedBytes": 186636,
-      "expectedSha256": "94cded98862d5d1ff665d627bae87ae5a97d8a9ff2993e23fd4831cefdf7b002",
       "origin": "https://vims.univ-nantes.fr/cube/N1719616836_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1118,8 +1072,6 @@
     {
       "id": "tethys-cassini-original-v1719616836_1-qub",
       "path": "cassini-ice/raw/v1719616836_1.qub",
-      "expectedBytes": 439808,
-      "expectedSha256": "137bcba59f43f125cc03f8b5a692b8b531ca9915bf67817e4bb68a65ce9d3766",
       "origin": "https://vims.univ-nantes.fr/cube/1719616836_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1147,8 +1099,6 @@
     {
       "id": "tethys-cassini-original-c1606213356_1_ir-cub",
       "path": "cassini-ice/native/C1606213356_1_ir.cub",
-      "expectedBytes": 621243,
-      "expectedSha256": "76e99719ab53c5c500a5a607c8de6457a6a4d2f6018a5345422499a988227d91",
       "origin": "https://vims.univ-nantes.fr/cube/C1606213356_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1176,8 +1126,6 @@
     {
       "id": "tethys-cassini-original-n1606213356_1_ir-cub",
       "path": "cassini-ice/native/N1606213356_1_ir.cub",
-      "expectedBytes": 189176,
-      "expectedSha256": "8af91d04b7a71f66c1fb7053fbad38203255a8f09b0da12271210acaa97cf744",
       "origin": "https://vims.univ-nantes.fr/cube/N1606213356_1_ir.cub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1205,8 +1153,6 @@
     {
       "id": "tethys-cassini-original-v1606213356_1-qub",
       "path": "cassini-ice/raw/v1606213356_1.qub",
-      "expectedBytes": 360448,
-      "expectedSha256": "3aceb080e213415421a130236188f80b02a8bd4e03c1eeea2cca8eb8037c91af",
       "origin": "https://vims.univ-nantes.fr/cube/1606213356_1.qub",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université",
       "license": "CC-BY-4.0",
@@ -1234,8 +1180,6 @@
     {
       "id": "tethys-cassini-ice-absorption",
       "path": "cassini-ice/tethys-ice-absorption.tif",
-      "expectedBytes": 126710,
-      "expectedSha256": "d55c543360d7612d68271dea75721766cf484c560c4f4d4f34cae1d813864d6a",
       "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
@@ -1286,8 +1230,6 @@
     {
       "id": "tethys-cassini-infrared",
       "path": "cassini-ice/tethys-infrared-display.tif",
-      "expectedBytes": 117380,
-      "expectedSha256": "620881bff247aa48f0f98e05d06cbccad6a3e43133794f0621ffb0aa1cb4d7bc",
       "origin": "https://vims.univ-nantes.fr/cube/1807469104_1",
       "credit": "NASA / Caltech-JPL / University of Arizona / Osuna-CNRS-Nantes Université; cssEarth offline detector mapping and display",
       "license": "CC-BY-4.0",
@@ -1338,8 +1280,6 @@
     {
       "id": "usgs-gazetteer-tethys-nomenclature-center-pts",
       "path": "features/TETHYS_nomenclature_center_pts.zip",
-      "expectedBytes": 176019,
-      "expectedSha256": "5592104993c28326db51e3438ad90e98327ab66dbd7ba979f7264561856c9eac",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/TETHYS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -1450,8 +1390,6 @@
     {
       "id": "n1807429484-label",
       "path": "observations/N1807429484_1_CALIB.LBL",
-      "expectedBytes": 3845,
-      "expectedSha256": "7ea4077893d9524e32ec252ba0633605a59770293ea0c2e86e0ad2cd06f991c3",
       "origin": "https://opus.pds-rings.seti.org/holdings/calibrated/COISS_2xxx/COISS_2096/data/1807428770_1807466529/N1807429484_1_CALIB.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail/co-iss-n1807429484",
       "credit": "NASA/JPL-Caltech/Space Science Institute; PDS Ring-Moon Systems Node",
@@ -1529,86 +1467,62 @@
     {
       "path": "science/b2-intake/tethys_128_o.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_128_o.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9398,
-      "expectedSha256": "f4c61f4dc76e12f9b155d7aea41335b462041713a73e5c57309474dd974ff1b7"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_512_o.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_512_o.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9404,
-      "expectedSha256": "953842f282fc399253a7e2dfa8c9cc062c20366180e0081dc536e843f423d575"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_sigma_c.cub",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.cub",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 326142,
-      "expectedSha256": "6c517f07d3db2778022bbf0b67891951b751b7058863a3354c12d61046b7819f"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_sigma_c.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_sigma_c.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 7257,
-      "expectedSha256": "6910aed066e1c31ab523b0e90e3bd648abbc36dc17ef67a5bf4e1c3548ef0359"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_numimg_c.cub",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.cub",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 326361,
-      "expectedSha256": "5b04811cfd5af475721b2259df6c443f85e0c14155510fc32f8c15b6c7a53395"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_numimg_c.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_numimg_c.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 7314,
-      "expectedSha256": "e2769a6341887bf98a6f7f6e0ab3f85683b46dc54989b8e0f2ff5fb90b890108"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_eqalbedo_g.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_eqalbedo_g.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9218,
-      "expectedSha256": "24cb5b3bfac749f6a3f691cad484a0a0a76dac74c738823fdc10f17ae9df2f32"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_npalbedo_g.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_npalbedo_g.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9258,
-      "expectedSha256": "c9201bbc370acd5c0ac2287228f3090a5997cb30ffd4e8a875e908ed7a15d56f"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethys_spalbedo_g.xml",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/data/global/tethys_spalbedo_g.xml",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 9261,
-      "expectedSha256": "67f912f8459cec5504d76d87d7f1232bab88349a9807f5315c752772cc808d3a"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/bundle_description.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/bundle_description.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 5767,
-      "expectedSha256": "d8b44f242e4adec72f9449ef84f5c4c5aeef101e825aa75511c3bf1b566cbd59"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethyskernellist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethyskernellist.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 22949,
-      "expectedSha256": "68c07a665d2211a87965f1c25cea0c8ab449eaed00886a125404fb01528ab697"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethysimagelist.txt",
       "origin": "https://sbnarchive.psi.edu/pds4/cassini/satellite-tethys.cassini.shape-models-maps/document/tethysimagelist.txt",
-      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels.",
-      "expectedBytes": 31070,
-      "expectedSha256": "4120269663e920e577f76403bfb9941ada9129c533ef99d13fd26e9d18ca9abf"
+      "purpose": "PDS label, model assessment, provenance or retained non-rendered research comparison. No unselected raster supplies rendered pixels."
     },
     {
       "path": "science/b2-intake/tethysshapeassessment.pdf",

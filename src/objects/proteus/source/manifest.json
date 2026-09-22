@@ -49,8 +49,6 @@
     {
       "id": "c1137317-label",
       "path": "observations/C1137317_GEOMED.LBL",
-      "expectedBytes": 3310,
-      "expectedSha256": "db382dbdddf392fc4bd259eae704f29d2079a79b0eab16667d3ab564c74f11c2",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137317_GEOMED.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137317",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -132,8 +130,6 @@
     {
       "id": "c1138920-label",
       "path": "observations/C1138920_GEOMED.LBL",
-      "expectedBytes": 3337,
-      "expectedSha256": "647c4c8715e93c784e4fa007640cde04e176a5623507364440edce797abdb257",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11389XX/C1138920_GEOMED.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1138920",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -279,8 +275,6 @@
     {
       "id": "c1137328-color-label",
       "path": "observations/C1137328_GEOMED.LBL",
-      "expectedBytes": 3296,
-      "expectedSha256": "ab9d944237a41b7c3b5d432c0805d863b12538c1339ea13bd244aa2420afea42",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137328_GEOMED.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137328",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -362,8 +356,6 @@
     {
       "id": "c1137339-color-label",
       "path": "observations/C1137339_GEOMED.LBL",
-      "expectedBytes": 3310,
-      "expectedSha256": "baddb97ebd6d2bcfef48e09338dd95d6777744265246c4ba24de75bcf2dbe497",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137339_GEOMED.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137339",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -445,8 +437,6 @@
     {
       "id": "c1137350-color-label",
       "path": "observations/C1137350_GEOMED.LBL",
-      "expectedBytes": 3311,
-      "expectedSha256": "289c5ced3819a5dab6ee26fa1f4b7f0c099d051404b5174fc30d089543f7f9f9",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_8xxx/VGISS_8207/DATA/C11373XX/C1137350_GEOMED.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-n-c1137350",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -571,21 +561,15 @@
     },
     {
       "path": "geometry/c1137328-opus.json",
-      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
-      "expectedBytes": 11716,
-      "expectedSha256": "55f6021bc89b524cb4c1783d273a651cde563acbd3ddb80e09a1787b58e36b94"
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence."
     },
     {
       "path": "geometry/c1137339-opus.json",
-      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
-      "expectedBytes": 11743,
-      "expectedSha256": "f3f4271a94c03c1bc26cd1af287cd7926a93c21621065b107d3560cd2b981e16"
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence."
     },
     {
       "path": "geometry/c1137350-opus.json",
-      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
-      "expectedBytes": 11728,
-      "expectedSha256": "fc4cdb9829c78e933f815afde5aea1486f98f6105034680850690483451c8d59"
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence."
     },
     {
       "path": "geometry/color-background.json",
@@ -593,9 +577,7 @@
     },
     {
       "path": "observations/PROCESSING.TXT",
-      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence.",
-      "expectedBytes": 28054,
-      "expectedSha256": "2b56645227270a0d81bca988a776a8a175211351984d5fdeba225e69f2a6d945"
+      "purpose": "Pinned Voyager color calibration, source geometry or reproducible registration evidence."
     },
     {
       "path": "preparation/register-voyager-color.py",

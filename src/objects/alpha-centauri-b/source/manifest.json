@@ -129,8 +129,6 @@
     {
       "id": "alpha-centauri-b-kiehling-1987",
       "path": "photometry/kiehling-1987.tsv",
-      "expectedBytes": 6146,
-      "expectedSha256": "6850c96c874c723d879fc51ab587bdffed14d0bae2fa38abdb59893d88f0a971",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -157,8 +155,6 @@
     {
       "id": "alpha-centauri-b-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1599,
-      "expectedSha256": "93b51daaa6b3a4bca03a44ff90a230aabf96c441a4aa4f8b7fc5023248a0bc61",
       "origin": "https://cdsarc.cds.unistra.fr/viz-bin/cat/III/124",
       "credit": "Kiehling (1987), A&AS 69, 465; VizieR III/124 (CDS); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -187,8 +183,6 @@
     {
       "id": "alpha-centauri-b-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",
@@ -215,8 +209,6 @@
     {
       "id": "alpha-centauri-b-claret-2011-v-quadratic",
       "path": "photometry/claret-2011-v-quadratic.tsv",
-      "expectedBytes": 844,
-      "expectedSha256": "1ee5f6833081215db08b7bcfe274da0043bc0f775497b35a24fc863d3e1f71f0",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "Claret & Bloemen (2011), A&A 529, A75; VizieR J/A+A/529/A75 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",

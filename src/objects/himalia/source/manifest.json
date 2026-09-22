@@ -31,8 +31,6 @@
     {
       "id": "size-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "4ff1572bad2cc0ff840d4088ad575af66ed0cf5eaba02d8d5d7b13a1db96b8ee",
       "origin": "https://doi.org/10.1126/science.1079462",
       "credit": "Cassini projected elongation and JPL mean radius; cssEarth assumed-depth ellipsoid and standard grid",
       "license": "MIT display representation from published scientific dimensions",
@@ -65,8 +63,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1126/science.1079462",
       "credit": "Cassini projected elongation and JPL mean radius; cssEarth assumed-depth ellipsoid and standard grid",
       "license": "MIT display representation from published scientific dimensions",

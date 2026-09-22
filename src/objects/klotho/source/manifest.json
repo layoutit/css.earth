@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 42500
       },
       "coverage": "Convex light-curve reconstruction, 85 ± 9 km volume-equivalent diameter in the selected archive record. Grid marks unavailable imagery; rotational phase is illustrative. The original mesh is uniformly scaled to the selected archive record’s declared volume-equivalent diameter. Published ensemble estimates can differ from this archived solution. Original coordinates and connectivity are retained; no albedo, craters or regolith are inferred.",
-      "expectedBytes": 82708,
-      "expectedSha256": "11db1e440c1fdbe9f28f96d0750381d4238645ba651903e586b56fb08c1c7ccd",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

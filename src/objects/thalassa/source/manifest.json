@@ -31,8 +31,6 @@
     {
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 14147,
-      "expectedSha256": "f22264ce2d158afd700f19ef0e7dcb56df5cdedac9629d428f069eca2e20101e",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
       "credit": "Karkoschka (2003); cssEarth measured-axes model",
       "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 135,
-      "expectedSha256": "12c97d9d9fc212ec4a087f52efcf7a592cbe5cfb91db738e8f83912c071fef73",
       "origin": "https://doi.org/10.1016/S0019-1035(03)00002-2",
       "credit": "Karkoschka (2003); cssEarth measured-axes model",
       "license": "Scientific measurements attributed to Karkoschka (2003); cssEarth model representation under MIT.",

@@ -7,7 +7,7 @@ import { dirname, join } from 'node:path';
 import { createHash } from 'node:crypto';
 import { preparedAssetWrites, publishPreparedObject, readPreparedJsonOutputs } from '../../tools/objects/publication.mts';
 import { writePreparedSet } from '../../tools/prepared/write-prepared-set.mts';
-const manifest = (values: Record<string,string>) => ({ schema: 'cssfixture-runtime-assets@1', assets: Object.entries(values).map(([filename,text]) => ({filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
+const manifest = (values: Record<string,string>) => ({ schema: 'cssearth-inventory@1', assets: Object.entries(values).map(([filename,text]) => ({location:'public',filename,bytes:Buffer.byteLength(text),sha256:createHash('sha256').update(text).digest('hex')})) });
 test('private material masters stay staged while all consumer JSON is preflighted',async()=>{
  const root=await mkdtemp(join(tmpdir(),'cssearth-publication-json-'));
  try {
@@ -68,8 +68,8 @@ async function publicationFixture() {
   const outputDirectory = join(objectDirectory, 'prepared'), publicDirectory = join(canonical, 'public');
   for (const [name, text] of Object.entries({'one.webp':'old', 'retired.webp':'retired'})) await put(join(publicDirectory, name), text);
   for (const [name, text] of Object.entries({'one.webp':'new', 'two.webp':'two'})) await put(join(stage, 'public', name), text);
-  await put(join(objectDirectory, 'runtime-assets.json'), JSON.stringify(manifest({'one.webp':'old','retired.webp':'retired'})));
-  await put(join(stage, 'prepared/runtime-assets.json'), JSON.stringify(manifest({'one.webp':'new','two.webp':'two'})));
+  await put(join(objectDirectory, 'inventory.json'), JSON.stringify(manifest({'one.webp':'old','retired.webp':'retired'})));
+  await put(join(stage, 'prepared/inventory.json'), JSON.stringify(manifest({'one.webp':'new','two.webp':'two'})));
   for (const name of ['runtime.json', 'page.json', 'provenance.json']) {
     await put(join(outputDirectory, name), '{"version":"old"}');
     await put(join(stage, 'prepared', name), '{"version":"new"}');

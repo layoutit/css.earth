@@ -36,7 +36,7 @@ test('the checked seven clusters reproduce from the pinned independent MCXC-II r
   }
   const bytes = await readFile(resolve(directory, 'prepared/catalogue.json'));
   assert.deepEqual(JSON.parse(bytes.toString()), data);
-  const manifest = JSON.parse(await readFile(resolve(directory, 'prepared-receipt.json'), 'utf8'));
+  const manifest = JSON.parse(await readFile(resolve(directory, 'inventory.json'), 'utf8'));
   assert.equal(manifest.sha256, createHash('sha256').update(bytes).digest('hex'));
   assert.equal(manifest.bytes, bytes.length); assert.equal(manifest.objects, recipe.selection.length);
   assert.throws(() => prepareClusterCatalog(rows.filter(row => row.catalogueId !== recipe.selection[0]!.catalogueId), recipe), /release/);

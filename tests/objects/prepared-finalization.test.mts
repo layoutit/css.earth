@@ -6,7 +6,7 @@ import { resolve } from 'node:path';
 import test from 'node:test';
 import { finalizeObjectJson } from '../../tools/prepare/prepare-object-json.mts';
 import { requireRecord } from '../../tools/sources/source-values.mts';
-import { requirePreparedAssetManifest, verifyPreparedAssetClosure } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory, verifyInventory } from '../../src/platform/runtime-asset-closure.mts';
 const digest = (bytes: Uint8Array) => createHash('sha256').update(bytes).digest('hex');
 async function snapshot(objectDirectory: string) {
   const files = ['object.json', ...(await readdir(resolve(objectDirectory, 'prepared'), { withFileTypes: true }))
@@ -81,16 +81,15 @@ test('finalization inventories every baked prepared file and leaves out what a c
     await copyFile(resolve(objectDirectory, 'prepared/sky.json'), resolve(preparedDirectory, 'sky.json'));
     await finalizeObjectJson('mimas', runtime, { projectRoot: root, objectDirectory, preparedDirectory,
       descriptorPath: resolve(stage, 'object.json') });
-    const manifest = requirePreparedAssetManifest('mimas', JSON.parse(await readFile(resolve(stage, 'prepared-assets.json'), 'utf8')));
-    assert.equal(manifest.schema, 'cssmimas-prepared-assets@1');
-    assert.equal(manifest.resourceRoot, 'prepared');
+    const manifest = requireInventory('mimas', JSON.parse(await readFile(resolve(stage, 'inventory.json'), 'utf8')));
+    assert.equal(manifest.schema, 'cssearth-inventory@1');
     assert.deepEqual(manifest.assets.map(a => a.filename).sort(), ['runtime.json', 'scene.json', 'sky.json', 'world-navigation.json']);
-    assert.equal(await verifyPreparedAssetClosure({ planetId: 'mimas', manifest, root: preparedDirectory, closure: false }), true);
+    assert.equal(await verifyInventory({ planetId: 'mimas', inventory: manifest, preparedRoot: preparedDirectory, closure: false }), true);
     // Mutation check: corrupting an inventoried file must fail verification even though provenance.json (not
     // inventoried) is untouched, proving the writer records real hashes rather than trusting its file list.
     const { writeFile } = await import('node:fs/promises');
     await writeFile(resolve(preparedDirectory, 'scene.json'), 'drifted');
-    await assert.rejects(verifyPreparedAssetClosure({ planetId: 'mimas', manifest, root: preparedDirectory, closure: false }),
+    await assert.rejects(verifyInventory({ planetId: 'mimas', inventory: manifest, preparedRoot: preparedDirectory, closure: false }),
       /prepared asset drifted: scene\.json/);
   } finally { await rm(stage, { recursive: true, force: true }); }
 });

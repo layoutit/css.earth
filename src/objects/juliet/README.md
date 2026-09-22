@@ -22,7 +22,7 @@ Source selections, recorded trials and open questions are in the [investigation 
 
 - [source/shape/rotation.json](source/shape/rotation.json) evaluates the NAIF PCK00011 BODY711 IAU rotation at the prepared epoch, JD2461286.5 TT. Its small U6 pole/meridian corrections are fixed at that epoch while the shared runtime advances the linear meridian. This is a display approximation, not a complete long-term nutation ephemeris.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

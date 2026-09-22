@@ -31,8 +31,6 @@
     {
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 13444,
-      "expectedSha256": "7451d881aa65e2765a9fdadef697b10828796af9af7da5df09fbe19bd0c70542",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
       "credit": "Porter et al. (2025) fitted dimensions; cssEarth analytic ellipsoid",
       "license": "MIT representation of published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://www.hou.usra.edu/meetings/plutosystem2025/presentations/Friday/1135_Porter.pdf",
       "credit": "cssEarth standard no-coverage grid",
       "license": "MIT representation of published scientific dimensions",

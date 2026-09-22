@@ -16,7 +16,7 @@
 
 - The display uses an arbitrary north-aligned ICRF pole, meridian and spin sense. This is not an observed attitude or synchronous rotation; display motion is illustrative.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 

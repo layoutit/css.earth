@@ -157,8 +157,6 @@
     {
       "id": "wasp-43-patel-2022-limb-darkening",
       "path": "photometry/patel-2022-limb-darkening.tsv",
-      "expectedBytes": 133,
-      "expectedSha256": "5593487c66a24ff5341a2c62728aacb6afe702ac30f8416a4f05f2fbe42ddb33",
       "origin": "https://vizier.cds.unistra.fr/viz-bin/asu-tsv",
       "credit": "J. A. Patel and N. Espinoza (2022), AJ 163, 228; VizieR J/AJ/163/228 (CDS)",
       "license": "CDS VizieR catalogue: free use with citation",
@@ -185,8 +183,6 @@
     {
       "id": "wasp-43-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1221,
-      "expectedSha256": "2d27e51797b6ff4168ae069cd5df7ff80fe4cca30cb0d765e76ea825fd32206f",
       "origin": "https://doi.org/10.1051/0004-6361/202243462",
       "credit": "Gaia DR3 GSP-Phot effective temperature (Andrae et al. 2023); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -215,8 +211,6 @@
     {
       "id": "wasp-43-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

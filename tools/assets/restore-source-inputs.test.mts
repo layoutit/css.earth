@@ -7,12 +7,11 @@ import { tmpdir } from 'node:os';
 import { relative, resolve } from 'node:path';
 import test, { type TestContext } from 'node:test';
 import type { AddressInfo } from 'node:net';
-import { setupObjectIds } from './runtime-assets.mts';
+import { SCENE_OBJECTS } from '../../site/objects.mts';
 import { validateObjectPackageFiles } from '../contract/object-package-contract.mts';
-import { compareObjectPackageBacklog, loadObjectPackageBacklog } from '../contract/object-package-backlog.mts';
 import { requireArray, requireRecord, requireString } from '../sources/source-values.mts';
 import { parseAcquisitionPlan } from '../objects/dist/operations.js';
-import { requirePreparedAssetManifest } from '../../src/platform/runtime-asset-closure.mts';
+import { requireInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const project = resolve(import.meta.dirname, '../..');
 const pin = (path: string, bytes: Uint8Array) => ({ path, expectedBytes: bytes.length,
@@ -21,7 +20,7 @@ const json = (path: string, value: unknown): Promise<void> => writeFile(path, JS
 async function fixture(t: TestContext, id = 'titan'): Promise<string> {
   const root = await mkdtemp(resolve(tmpdir(), 'cssearth-restore-'));
   t.after(() => rm(root, { recursive: true, force: true }));
-  for (const dir of ['tools/objects/dist', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
+  for (const dir of ['tools/assets', 'tools/sources', 'tools/objects/dist', 'site', `src/objects/${id}/source/preparation`, `src/objects/${id}/prepared`, `public/scenes/${id}`]) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await copyFile(resolve(project, 'tools/assets/restore-source-inputs.mts'), resolve(root, 'tools/assets/restore-source-inputs.mts'));
@@ -48,7 +47,7 @@ async function run(root: string, args: readonly string[]): Promise<void> {
   });
 }
 
-type Scan = { missingSources: string[]; missingBacklog: string[] };
+type Scan = { missingSources: string[] };
 let scan: Promise<Scan> | undefined;
 const scanPackages = () => scan ??= runScan();
 
@@ -56,25 +55,24 @@ async function runScan(): Promise<Scan> {
   const tracked = new Set(execFileSync('git', ['ls-files', '--cached', '-z'], {
     cwd: project, encoding: 'utf8', maxBuffer: 16 * 1024 * 1024,
   }).split('\0'));
-  const missingSources: string[] = [], missingBacklog: string[] = [];
-  for (const id of setupObjectIds([])) {
-    // prepared/runtime.json is no longer git-tracked for any body; a clean checkout restores it from R2 via
-    // the object's prepared-assets.json inventory instead. Every other required file keeps the original
-    // "must be tracked" proof.
-    const preparedRuntimePath = relative(project, resolve(project, 'src/objects', id, 'prepared/runtime.json'));
-    const paths = await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
+  const missingSources: string[] = [];
+  for (const id of SCENE_OBJECTS.map(object => object.id)) {
+    // Nothing under prepared/ is git-tracked: a clean checkout restores the baked files from R2 via the object's
+    // inventory.json. Every other required file keeps the original "must be tracked" proof.
+    const preparedPrefix = `src/objects/${id}/prepared/`;
+    await validateObjectPackageFiles({ id, name: id }, { projectRoot: project,
       accessFile: async path => {
         if (typeof path !== 'string') throw new TypeError('Fixture access must receive a string path.');
         const relativePath = relative(project, path);
-        if (relativePath === preparedRuntimePath) {
-          const manifest = requirePreparedAssetManifest(id, JSON.parse(
-            await readFile(resolve(project, 'src/objects', id, 'prepared-assets.json'), 'utf8')));
-          assert.ok(manifest.assets.some(asset => asset.filename === 'runtime.json'), path);
+        if (relativePath.startsWith(preparedPrefix)) {
+          const filename = relativePath.slice(preparedPrefix.length);
+          const inventory = requireInventory(id, JSON.parse(
+            await readFile(resolve(project, 'src/objects', id, 'inventory.json'), 'utf8')));
+          assert.ok(inventory.assets.some(asset => asset.location === 'prepared' && asset.filename === filename), path);
           return;
         }
         assert.ok(tracked.has(relativePath), path);
       } });
-    for (const file of paths.missingBacklogFiles) missingBacklog.push(relative(project, file));
     const source = `src/objects/${id}/source`;
     const inputs: unknown[] = await Promise.all(['manifest.json', 'preparation/acquisition.json']
       .map(async path => JSON.parse(await readFile(resolve(project, source, path), 'utf8'))));
@@ -90,22 +88,12 @@ async function runScan(): Promise<Scan> {
       if (!tracked.has(path) && !restored.has(entryPath)) missingSources.push(path);
     }
   }
-  return { missingSources: missingSources.sort(), missingBacklog: missingBacklog.sort() };
+  return { missingSources: missingSources.sort() };
 }
 
 test('every registered body has a complete shipped closure with tracked or restorable sources', async () => {
   const { missingSources } = await scanPackages();
   assert.deepEqual(missingSources, [], 'Required source files must be tracked or have an acquisition operation.');
-});
-
-test('the object package backlog does not grow', async () => {
-  const { missingBacklog } = await scanPackages();
-  const backlog = await loadObjectPackageBacklog(project);
-  const { added, resolved } = compareObjectPackageBacklog(backlog.missingPackageFiles, missingBacklog);
-  console.log(`# object package backlog: ${missingBacklog.length} outstanding, baseline ${backlog.missingPackageFiles.length}`);
-  for (const path of missingBacklog) console.log(`# backlog: ${path}`);
-  assert.deepEqual(added, [], 'A new package file may not be left missing; supply it or it is new blocking debt.');
-  assert.deepEqual(resolved, [], 'Remove entries from tools/contract/object-package-backlog.json in the change that supplies their files.');
 });
 
 test('checkout restores a missing compressed observation without refreshing existing inputs', async t => {
@@ -182,7 +170,7 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
   const root = await fixture(t, 'earth'), source = resolve(root, 'src/objects/earth/source');
   const mosaic = Buffer.from('pinned mosaic'), archive = Buffer.from('pinned archive');
   const restore = resolve(root, 'tools/objects/paged-ellipsoid/mur-imagery.mts');
-  for (const dir of ['src/objects/earth/source/science', 'tools/objects/paged-ellipsoid', 'tools/objects/geographic-pages/operations']) {
+  for (const dir of ['src/objects/earth/source/science', 'tools/objects/paged-ellipsoid']) {
     await mkdir(resolve(root, dir), { recursive: true });
   }
   await writeFile(restore, `
@@ -192,7 +180,6 @@ test('Earth restores a missing MUR mosaic before verification and preserves exis
     assert.equal(process.argv[2], 'restore');
     await writeFile(resolve(process.argv[3], 'mur-gibs.png'), 'pinned mosaic');
   `);
-  await writeFile(resolve(root, 'tools/objects/geographic-pages/operations/acquire-pinned-global-wmts.mts'), '');
   await writeFile(resolve(source, 'science/mur-gibs-tiles.tar.gz'), archive);
   await json(resolve(source, 'manifest.json'), { schema: 'cssearth-authoritative-sources@2', inputs: [{
     ...pin('science/mur-gibs-tiles.tar.gz', archive), id: 'tiles', origin: 'Fixture archive', sourceBinding: {kind: 'local', reason: 'Authored test fixture'}, consumers: ['enso'],
@@ -221,7 +208,7 @@ test('manifest refresh keeps runtime and shell images but excludes preparation m
   await json(resolve(prepared, 'content.json'), { charts: [{ src: url('chart') }] });
   await json(resolve(prepared, 'surfaces.json'), { intermediateMap: url('source-map') });
   await run(root, ['tools/objects/dist/operations.js', 'manifest', 'titan']);
-  const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/runtime-assets.json'), 'utf8'));
+  const manifestInput: unknown = JSON.parse(await readFile(resolve(root, 'src/objects/titan/inventory.json'), 'utf8'));
   const manifest = requireRecord(manifestInput);
   assert.deepEqual(requireArray(manifest.assets).map(asset => requireString(requireRecord(asset).filename)), ['chart.webp', 'surface.webp', 'thumbnail.webp']);
   assert.equal(await readFile(resolve(root, 'public/scenes/titan/source-map.webp'), 'utf8'), 'source-map');

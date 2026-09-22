@@ -31,8 +31,6 @@
     {
       "id": "measured-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 14147,
-      "expectedSha256": "67ff26d49e7921af41e37d85a1f5e9cea7f9235b88a94381b40f4d526d1812da",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
       "credit": "Karkoschka (2001) adopted dimensions; cssEarth analytic prolate spheroid",
       "license": "MIT representation of published scientific dimensions",
@@ -64,8 +62,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1006/icar.2001.6596",
       "credit": "cssEarth standard no-coverage grid",
       "license": "MIT representation of published scientific dimensions",

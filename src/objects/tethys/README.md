@@ -56,7 +56,7 @@ Feature notes: 6 of the labelled names carry a caption note, the lead summary of
 - Photographic seams, coarse inserts, residual shading and local control-network differences remain. Enhanced-color hemisphere differences can reflect real dust/radiation alteration. The display does not inpaint gaps, repeat polar data or synthesize color.
 - The approximately 1.5 km SPC map spacing and the source's one-to-two-grid-spacing error estimate do not provide independently measured per-cell uncertainty. SPC sigma measures internal maplet agreement, not absolute height uncertainty; Tethys used uncalibrated ISS images. Numeric height datums, photographic projection radii and simplified geometry remain separate.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="tethys-sources-and-preparation"></a>
 <a id="photographic-lenses"></a>

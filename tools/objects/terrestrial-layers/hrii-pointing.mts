@@ -5,8 +5,8 @@ import {hriiCamera} from './hrii-camera.mts';
 import type {SourceMesh} from './contracts.mts';
 import type {decodeHriiSpectra} from './hrii-spectra.mts';
 
-const point=array(number),pin=shape({path:text,sha256:text});
-export const parseHriiContext=shape({path:text,sha256:text,reference:pin,offsetPixels:point,
+const point=array(number),pin=shape({path:text});
+export const parseHriiContext=shape({path:text,reference:pin,offsetPixels:point,
   maximumRmsMeters:number,maximumResidualMeters:number,
   controls:array(shape({id:text,partition:choice('fit','holdout'),point,nativeSourcePixel:point,correlation:number,peakMargin:number}))});
 export const parseHriiDenseFit=shape({rowStart:number,rowEnd:number,seedOffsetPixels:point,radiusPixels:number,stepPixels:number,
@@ -17,8 +17,8 @@ const correlation=([n,a,b,aa,bb,ab]:number[])=>n>2?(ab-a*b/n)/Math.sqrt((aa-a*a/
 /** A visible context image anchors the scan in the existing source body frame.
  * Its terrain controls are measured inputs, with a disjoint fitting partition. */
 export async function loadHriiContext(value:unknown,read:(path:string,sha?:string)=>Promise<Buffer>,mesh:SourceMesh,bodyToJ2000:number[][]) {
-  const r=parseHriiContext(value),hdus=readEncounterHdus(await read(r.path,r.sha256)),image=hdus[0];
-  const reference=shape({camera:shape({bodyToJ2000:array(point)})})(JSON.parse((await read(r.reference.path,r.reference.sha256)).toString('utf8')));
+  const r=parseHriiContext(value),hdus=readEncounterHdus(await read(r.path)),image=hdus[0];
+  const reference=shape({camera:shape({bodyToJ2000:array(point)})})(JSON.parse((await read(r.reference.path)).toString('utf8')));
   if(JSON.stringify(reference.camera.bodyToJ2000)!==JSON.stringify(bodyToJ2000)||image.header.INSTRUME!=='HRIVIS')throw new Error('HRII context uses a different source body frame or instrument.');
   const deconvolved=hdus.map(h=>h.name).join(',')==='PRIMARY,RESIDUAL,MASK';
   if(!deconvolved&&hdus.map(h=>h.name).join(',')!=='PRIMARY,FLAGS,SNR,DESTRIPE')throw new Error('Unsupported HRI context image.');
@@ -45,7 +45,7 @@ export async function loadHriiContext(value:unknown,read:(path:string,sha?:strin
     const weights=[(1-x+ix)*(1-y+iy),(x-ix)*(1-y+iy),(1-x+ix)*(y-iy),(x-ix)*(y-iy)];
     return ids.reduce((s,i,j)=>s+image.values[i]*weights[j],0);
   };
-  return {sample,report:{image:r.path,sha256:r.sha256,fitControls:fit.length,holdoutControls:holdout.length,offsetPixels:measured,rmsMeters:rms,maximumMeters:maximum,residuals}};
+  return {sample,report:{image:r.path,fitControls:fit.length,holdoutControls:holdout.length,offsetPixels:measured,rmsMeters:rms,maximumMeters:maximum,residuals}};
 }
 
 /** Fit two slit offsets to native 1.8 µm radiance. The four retained terrain

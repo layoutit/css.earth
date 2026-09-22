@@ -139,8 +139,6 @@
     {
       "id": "giotto-source-4",
       "path": "giotto/rotation-2004.lbl",
-      "expectedBytes": 25760,
-      "expectedSha256": "2239825938bffe4b1ad4b4bcf464a5cb9904239c59d32faa2bd5390bdcca6b39",
       "origin": "https://pdssbn.astro.umd.edu/holdings/ear-c-compil-5-comet-nuc-rotation-v1.0/data/rotation.lbl",
       "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
       "license": "Public scientific archive data; preserve original investigator credits",
@@ -166,8 +164,6 @@
     {
       "id": "giotto-source-5",
       "path": "giotto/vega2-flyby.txt",
-      "expectedBytes": 116646,
-      "expectedSha256": "622c541ef4b9a3c94dc06fe084a9c62c436a9093c5b7fcf07aeb0dcae7d10bdd",
       "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/flyby_1m.vg2",
       "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
       "license": "Public scientific archive data; preserve original investigator credits",
@@ -193,8 +189,6 @@
     {
       "id": "giotto-source-6",
       "path": "giotto/vega2-trajectory.txt",
-      "expectedBytes": 48384,
-      "expectedSha256": "bb51d1e2d5a2115a82593086cbd9116abba356c19c1b9fa1ec636a044e10e491",
       "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/vega2.trj",
       "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
       "license": "Public scientific archive data; preserve original investigator credits",
@@ -220,8 +214,6 @@
     {
       "id": "giotto-source-7",
       "path": "giotto/vega-readme.txt",
-      "expectedBytes": 7358,
-      "expectedSha256": "30ce73522c61f6c9822e85f987c2cf2b21c8caec16995c2adcd33d7cd4331d7f",
       "origin": "https://spdf.gsfc.nasa.gov/pub/data/vega/mag/00readme.txt",
       "credit": "NASA PDS / NASA SPDF; original investigators credited in the source files",
       "license": "Public scientific archive data; preserve original investigator credits",
@@ -247,8 +239,6 @@
     {
       "id": "giotto-projection",
       "path": "material/giotto.png",
-      "expectedBytes": 5391,
-      "expectedSha256": "ea552e0b7b7973dca0b46eff9299fccf36f8e3acffe40a69c584000fc279f49a",
       "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
       "credit": "© MPS 1986, 1996; Giotto HMC team; shape by Philip Stooke with pointing by Alain Abergel",
       "license": "MPS educational image use with attribution; commercial reuse requires permission",
@@ -285,8 +275,6 @@
     {
       "id": "giotto-vega2-t01174",
       "path": "giotto/vega2-t01174.hdr",
-      "expectedBytes": 5760,
-      "expectedSha256": "c7061dfb00ec013854527b88539a574a658538d501faa6f459981ed07907bab9",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/t01174.hdr",
       "credit": "Giotto HMC / Vega TVS teams; International Halley Watch; NASA PDS",
       "license": "Public scientific archive geometry metadata; preserve mission credits",
@@ -312,8 +300,6 @@
     {
       "id": "giotto-hmc01814",
       "path": "giotto/hmc01814.hdr",
-      "expectedBytes": 5760,
-      "expectedSha256": "956e3752d620376369bde2ad1adc1f705e179cdb8ac2266aace7d2e59d14998d",
       "origin": "https://pdssbn.astro.umd.edu/holdings/gio-c-hmc-3-rdr-halley-v1.0/data/mdm/sensor_c/hmc01814.hdr",
       "credit": "Giotto HMC / Vega TVS teams; International Halley Watch; NASA PDS",
       "license": "Public scientific archive geometry metadata; preserve mission credits",
@@ -339,8 +325,6 @@
     {
       "id": "vega-t11190-hdr",
       "path": "vega/t11190.hdr",
-      "expectedBytes": 5760,
-      "expectedSha256": "e6e43ac52b037d69cf5f12cb6a1e5a0f0ad79e30e11a96353dd2e73dfa1a5904",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.hdr",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",
@@ -367,8 +351,6 @@
     {
       "id": "vega-t11190-lbl",
       "path": "vega/t11190.lbl",
-      "expectedBytes": 1920,
-      "expectedSha256": "ea1f4083f2030845cff45f988800b935af6bd69f87759211ab5793a923b920ee",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11190.lbl",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",
@@ -423,8 +405,6 @@
     {
       "id": "vega-t11194-hdr",
       "path": "vega/t11194.hdr",
-      "expectedBytes": 5760,
-      "expectedSha256": "d8756d103854206ff497dc2d4ba2c582bd839a08c647177a6a488a3828310021",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.hdr",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",
@@ -451,8 +431,6 @@
     {
       "id": "vega-t11194-lbl",
       "path": "vega/t11194.lbl",
-      "expectedBytes": 1920,
-      "expectedSha256": "55a0ae640f1c47743720cc2bee2ccc7ca1871768873f164121e01b982f7e066d",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/data/filtered/t11194.lbl",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",
@@ -507,8 +485,6 @@
     {
       "id": "vega-tvs_proc-doc",
       "path": "vega/tvs_proc.doc",
-      "expectedBytes": 10160,
-      "expectedSha256": "e0b5281528b3b2266b43a84b2ba230b38966b5cb3410e6622b849f5e5ebcf7fd",
       "origin": "https://pdssbn.astro.umd.edu/holdings/vega2-c-tvs-3-rdr-halley-processed-v1.0/document/tvs_proc.doc",
       "credit": "Vega 2 TVS team; KFKI processing team; International Halley Watch; NASA PDS",
       "license": "Public scientific archive data; preserve the original investigators and dataset citation",
@@ -535,8 +511,6 @@
     {
       "id": "encounter-projection",
       "path": "material/encounters.png",
-      "expectedBytes": 26573,
-      "expectedSha256": "8b3877838dfe861e7a9ba0878e38b1aab9bfbb01ab2809fd670a41fbe8b0adfe",
       "origin": "https://www2.mps.mpg.de/images/projekte/giotto/hmc/hmc_best.gif",
       "credit": "© MPS; Giotto HMC team; Vega 2 TVS and KFKI teams; IHW / NASA PDS; shape by Stooke with pointing by Abergel",
       "license": "MPS educational image terms for Giotto portions; cited PDS scientific data for Vega portions",

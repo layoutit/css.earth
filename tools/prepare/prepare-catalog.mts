@@ -11,7 +11,7 @@ import { prepareSceneDistance, readPreparedFocusObjects } from './prepare-naviga
 import { prepareObjectDiscovery } from './prepare-object-discovery.mts';
 import { BODIES } from '@cssearth/astronomy';
 import { assetOrigin } from '../../site/asset-origin.mts';
-import { requirePreparedAssetManifest, requireRuntimeAssetManifest } from '../../src/platform/runtime-asset-closure.mts';
+import { readInventory } from '../../src/platform/runtime-asset-closure.mts';
 
 const root = resolve(import.meta.dirname, '../..');
 const byOrder = (a: CatalogEntry, b: CatalogEntry) => (a.order ?? Number.MAX_SAFE_INTEGER) - (b.order ?? Number.MAX_SAFE_INTEGER) || a.id.localeCompare(b.id, 'en');
@@ -76,22 +76,11 @@ export async function contextObjectAssetUrls(contexts: readonly { id: string }[]
   const siteRoot = resolve(projectRoot, 'site'), entries: (readonly [string, string])[] = [];
   for (const { id } of contexts) {
     const directory = resolve(projectRoot, 'src/objects', id);
-    const runtimePath = resolve(directory, 'runtime-assets.json');
-    if (existsSync(runtimePath)) {
-      const manifest = requireRuntimeAssetManifest(id, JSON.parse(await readFile(runtimePath, 'utf8')));
-      if (manifest.resourceRoot === 'prepared') for (const asset of manifest.assets.filter(asset => asset.location !== 'public')) {
-        entries.push([relative(siteRoot, resolve(directory, 'prepared', asset.filename)).split(sep).join('/'),
-          `${origin}/runtime-assets/${asset.sha256}/${asset.filename}`]);
-      }
-    }
-    const preparedPath = resolve(directory, 'prepared-assets.json');
-    if (existsSync(preparedPath)) {
-      const manifest = requirePreparedAssetManifest(id, JSON.parse(await readFile(preparedPath, 'utf8')));
-      for (const asset of manifest.assets) entries.push([
-        relative(siteRoot, resolve(directory, 'prepared', asset.filename)).split(sep).join('/'),
-        `${origin}/runtime-assets/${asset.sha256}/${asset.filename}`,
-      ]);
-    }
+    const inventory = await readInventory(id, directory);
+    for (const asset of inventory?.assets.filter(asset => asset.location === 'prepared') ?? []) entries.push([
+      relative(siteRoot, resolve(directory, 'prepared', asset.filename)).split(sep).join('/'),
+      `${origin}/runtime-assets/${asset.sha256}/${asset.filename}`,
+    ]);
   }
   return Object.fromEntries(entries.sort(([left], [right]) => left.localeCompare(right, 'en')));
 }

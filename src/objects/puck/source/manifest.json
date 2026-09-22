@@ -31,8 +31,6 @@
     {
       "id": "reference-sphere",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 62404,
-      "expectedSha256": "45d0f9b644507f15a1e08ec5cb945382cd5739d7fab74909f12216753446b3fe",
       "origin": "https://pds-rings.seti.org/uranus/uranus_satellites_table.html",
       "credit": "PDS Ring-Moon Systems Node; Karkoschka (2001)",
       "license": "MIT display representation from published scientific dimensions",
@@ -109,8 +107,6 @@
     {
       "id": "c2683716-label",
       "path": "observations/C2683716_GEOMED.LBL",
-      "expectedBytes": 3294,
-      "expectedSha256": "084f2e10d36a1145501a2545a936ed106e52fdd63c33064395d54f02976dda88",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/VGISS_7xxx/VGISS_7206/DATA/C26837XX/C2683716_GEOMED.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=vg-iss-2-u-c2683716",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",

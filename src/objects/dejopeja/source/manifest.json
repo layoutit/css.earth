@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 46500
       },
       "coverage": "Convex light-curve reconstruction. Selected archive volume-equivalent diameter: 93 ±9 km. An alternative pole remains possible. The grid marks unavailable imagery; rotational phase is illustrative. The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select pole1 model175 (200,52). Hanuš et al. (2013), Tables2–3, reports this pole and its mirror (18,54), one Keck AO image, and volume-equivalent diameters93 ±9 and95 ±9 km; neither is marked rejected. The selected93-km archive calibration matches the paper. Convex geometry is still inferred from light curves; the AO silhouette calibrates size, not all local topography.",
-      "expectedBytes": 82708,
-      "expectedSha256": "e455562c300f5594cb401f42d3237cb86e3e415ad7c03f54f2569637b435f9db",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/175-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "220ecdaffea401192bfa474c84bc2b7d1c7b1d68754c8e9c10829f3c67f2259d"
+      "path": "reference/175-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

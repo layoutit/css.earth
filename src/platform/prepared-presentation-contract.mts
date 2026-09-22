@@ -9,7 +9,7 @@ import type { PreparedDirectionalSunPlan } from "./directional-sun-contract.mts"
 import type { EllipsoidProjectionPlan } from "../renderers/css/dist/preparation.js";
 import type { PreparedMaterialAddress, PreparedMaterialFrameMapping } from "../renderers/css/dist/testing.js";
 import type { PreparedMaterialTrack, PreparedMaterialSelection, PreparedMaterialBank } from "../renderers/css/dist/testing.js";
-import type { PreparedVariant, PreparedPageLayer, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";
+import type { PreparedVariant, PreparedPresentationDefinition, PreparedSelectionNavigation } from "./prepared-presentation.mts";
 import type { PreparedDepthOrder } from "../renderers/css/rendering/prepared-depth-partitions.ts";
 type PreparedContractRotation = {
   reference: "prepared" | "initial"; baseDegrees: number; zeroAtPole: boolean;
@@ -29,11 +29,10 @@ export interface PreparedContractVariant extends Omit<PreparedVariant, "navigati
   navigation?: { maximumZoom: number; camera: NonNullable<PreparedSelectionNavigation["camera"]> | null };
   materials: readonly (PreparedMaterialSelection & { frameOverride: number | null })[];
 }
-export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "pageLayers" | "destinations"> & {
+export type PreparedPresentationContract = Omit<ObjectRuntimeDefinition, "schema" | "id" | "controls" | "sky" | "sun" | "materials" | "variants" | "animations" | "destinations"> & {
   schema: string; sky: PreparedCubicSkyPlan; sun: PreparedDirectionalSunPlan | null;
   materials: readonly PreparedContractTrack[]; variants: readonly PreparedContractVariant[];
   animations: readonly (Omit<PreparedPresentationDefinition["animations"][number], "keyframes"> & { keyframes: { offset: number; transform: string }[] })[];
-  pageLayers?: readonly (Omit<PreparedPageLayer, "plan"> & { plan: { schema: string; assetPath: string } })[];
   destinations?: { catalog: { url: string; bytes: number; count: number; sha256: string }; defaultLens: string; statuses: { detail: string; overview: string } };
 };
 import { requireObjectControls } from "../../site/scene-contract.mts";
@@ -79,7 +78,7 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
   const controls = requireObjectControls(options.controls);
   const assets = options.assets ?? plan?.assets;
   requirePreparedData(plan);
-  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "pageLayers", "surfaceHit", "textureLevels", "features"]);
+  record(plan, "plan", ["schema", "camera", "sky", "sun", "assets", "tree", "variants", "materials", "viewBindings", "animations", "motion", "facing", "depthPartitions", "resourceOrder", "destinations", "motionFrame", "surfaceHit", "textureLevels", "features"]);
   if (plan.resourceOrder !== undefined) choice(plan.resourceOrder, new Set(["content-first", "materials-first"]), "resource order");
   if (plan.schema !== PREPARED_PRESENTATION_SCHEMA) fail("schema is incompatible");
   requireObjectControls(controls);
@@ -366,17 +365,6 @@ export function requirePreparedPresentation(input: unknown, options: { controls:
     for (const triangle of triangles) {
       if (!isArray(triangle) || triangle.length !== 3 || triangle.some(point =>
         !isArray(point) || point.length !== 3 || point.some(n => !Number.isFinite(n)))) fail('surface hit requires finite prepared triangles');
-    }
-  }
-  if (plan.pageLayers !== undefined) {
-    const layers=array(plan.pageLayers,"page layers");unique(layers.map(layer=>layer.id),"page layers");
-    for(const layer of layers) {
-      record(layer,"page layer",["id","plan","carrier","system","className","textureClassName","lensIds"]);
-      for(const key of ["id","className","textureClassName"] as const)string(layer[key],`page layer ${key}`);
-      for(const key of ["carrier","system"] as const){node(layer[key]);if(!ancestor(layer[key],tree.scene))fail("page layer must belong to scene");}
-      if(!ancestor(layer.carrier,layer.system))fail("page carrier must belong to its system");
-      if(!array(layer.lensIds,"page lenses").length||layer.lensIds.some(id=>!lensIds.includes(id)))fail("page layer requires declared lenses");
-      if(layer.plan?.schema!=="cssearth-prepared-map-pages@1"||!/^\/scenes\/[a-z][a-z0-9-]*\/$/.test(layer.plan.assetPath??""))fail("page layer requires a prepared map plan and asset scope");
     }
   }
   const variants = array(plan.variants, "selection variants");

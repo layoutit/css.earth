@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 53500
       },
       "coverage": "Nonconvex ADAM reconstruction constrained by adaptive optics and occultation; 107 km volume-equivalent diameter (±3 km). The grid marks unavailable imagery; rotational phase is illustrative. Hanuš2017 ADAM uses13 lightcurves, one adaptive-optics image and one occultation; disk-resolved/occultation data reject the alternate convex pole. The selected archived ADAM mesh has pole(318,+61) and volume-equivalent diameter106.926418 km, matching its rounded archive107±3 km. The paper reports an ensemble106±3 km and pole(316,+58), within the stated model uncertainties. Use the pinned archive solution, not an assertion that the paper’s ensemble is exactly107 km. AO and occultation constrain broad shape; no resolved global reflectance or regolith texture is supplied.",
-      "expectedBytes": 32486,
-      "expectedSha256": "a54cba1bc20a55006d6a113902c2d73b80134391a7dd4489db3a0fecc607310a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -117,9 +115,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "reference/1823-IAUspin.txt",
-      "expectedBytes": 34,
-      "expectedSha256": "73471c9837592c47534a559291076b4b9e04fb557b2e1b4e027d72d1301796c8"
+      "path": "reference/1823-IAUspin.txt"
     },
     {
       "path": "reference/AcuA_V1.txt.gz",
@@ -127,9 +123,7 @@
       "expectedSha256": "e1b162580f362800d82502225b7eeba3db413221945f50e31938bf1f092cfa51"
     },
     {
-      "path": "reference/ReadMe.AcuA.txt",
-      "expectedBytes": 3836,
-      "expectedSha256": "f590ff9ac6c386f00b9cbb1bc7980c28a5d3bbe44adb4776246201e95f39d057"
+      "path": "reference/ReadMe.AcuA.txt"
     },
     {
       "path": "reference/calibration.json"

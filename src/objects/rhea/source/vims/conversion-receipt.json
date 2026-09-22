@@ -1,6 +1,5 @@
 {
   "schema": "cssearth-cassini-vims@1",
-  "recipeSha256": "fb12b66906d104e0debc4cd5c5917565db04185a1d7709df67368fad51ec3e03",
   "preparerSha256": "09354b3cc859b90017582071f39527371a7c71c40ad17af1515d0017b77f8233",
   "source": {
     "target": "rhea",
@@ -9,8 +8,8 @@
     "bands": 256,
     "fileName": "rhea_notnorm_pc_modified_2.img",
     "fileBytes": 66355200,
-    "noData": -999.0,
-    "radiusMeters": 764000.0,
+    "noData": -999,
+    "radiusMeters": 764000,
     "publishedOriginMeters": [
       -2393689.63,
       1193421.24
@@ -45,7 +44,7 @@
     13334.315485236677,
     -13334.315485236677
   ],
-  "referenceRadiusMeters": 764000.0,
+  "referenceRadiusMeters": 764000,
   "rgb": {
     "bands": [
       69,
@@ -109,10 +108,10 @@
     "12": {
       "validPixels": 39073,
       "missingPixels": 25727,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.6236299872398376,
       "percentiles": {
-        "1": 0.0,
+        "1": 0,
         "5": 0.40735599398612976,
         "50": 0.4731700122356415,
         "95": 0.5219040036201478,
@@ -122,7 +121,7 @@
     "43": {
       "validPixels": 61572,
       "missingPixels": 3228,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.42552998661994934,
       "percentiles": {
         "1": 0.06560000032186508,
@@ -135,7 +134,7 @@
     "58": {
       "validPixels": 62555,
       "missingPixels": 2245,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.7182300090789795,
       "percentiles": {
         "1": 0.10999999940395355,
@@ -148,7 +147,7 @@
     "69": {
       "validPixels": 62555,
       "missingPixels": 2245,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.2629700005054474,
       "percentiles": {
         "1": 0.038600001484155655,
@@ -161,7 +160,7 @@
     "70": {
       "validPixels": 62555,
       "missingPixels": 2245,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.2554999887943268,
       "percentiles": {
         "1": 0.03840000182390213,
@@ -174,7 +173,7 @@
     "81": {
       "validPixels": 62555,
       "missingPixels": 2245,
-      "minimum": 0.0,
+      "minimum": 0,
       "maximum": 0.654670000076294,
       "percentiles": {
         "1": 0.09960000216960907,

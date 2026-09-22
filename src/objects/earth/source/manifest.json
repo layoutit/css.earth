@@ -4,8 +4,6 @@
     {
       "id": "geonames-cities15000-zip",
       "path": "places/cities15000.zip",
-      "expectedSha256": "308217930b39218bc8d4eb55937056740c2420d543381e22786031eb521d9875",
-      "expectedBytes": 3315027,
       "origin": "https://download.geonames.org/export/dump/cities15000.zip",
       "credit": "GeoNames",
       "license": "CC-BY-4.0",
@@ -31,8 +29,6 @@
     {
       "id": "geonames-countryinfo-txt",
       "path": "places/countryInfo.txt",
-      "expectedSha256": "93bafc525813f22e4711ff9ed6d626343094ce48c26388dc7c49189b3d7d5512",
-      "expectedBytes": 31678,
       "origin": "https://download.geonames.org/export/dump/countryInfo.txt",
       "credit": "GeoNames",
       "license": "CC-BY-4.0",
@@ -58,8 +54,6 @@
     {
       "id": "geonames-admin1codesascii-txt",
       "path": "places/admin1CodesASCII.txt",
-      "expectedSha256": "590651498043f674accda2b7f46d21286cda0e290b02f8561c5005eee9a5448c",
-      "expectedBytes": 151536,
       "origin": "https://download.geonames.org/export/dump/admin1CodesASCII.txt",
       "credit": "GeoNames",
       "license": "CC-BY-4.0",
@@ -85,8 +79,6 @@
     {
       "id": "geonames-readme-geonames-txt",
       "path": "places/README.geonames.txt",
-      "expectedSha256": "b1957379b6c1242c700c98ac9a8aa0a09f56c3c0a50ee72175527005f48ef2c5",
-      "expectedBytes": 8843,
       "origin": "https://download.geonames.org/export/dump/readme.txt",
       "credit": "GeoNames",
       "license": "CC-BY-4.0",
@@ -319,8 +311,6 @@
     {
       "id": "nasa-earth-editorial-record",
       "path": "editorial/nasa-earth-record.json",
-      "expectedSha256": "3818e2c43d202bffd757e32b0279915c1b2903c97069e591203f200e5467f218",
-      "expectedBytes": 80805,
       "origin": "https://science.nasa.gov/wp-json/wp/v2/topic/48583",
       "credit": "NASA Science",
       "license": "United States government editorial content",
@@ -348,8 +338,6 @@
     {
       "id": "nasa-psg-earth-configuration",
       "path": "atmosphere/psg-earth-20260830.cfg",
-      "expectedSha256": "f658cc3471595caddbe04ae5fbfde6523f3ef160ec0bd5ba3074635f3561834e",
-      "expectedBytes": 27346,
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=cfg, Earth, 2026-08-30 12:00",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
@@ -372,8 +360,6 @@
     {
       "id": "nasa-psg-earth-spectrum",
       "path": "atmosphere/psg-earth-r120-rif.txt",
-      "expectedSha256": "0dab314d53880a46cf05f0a60dc535b386fa57ef5d980dceb20bbcc00a35f08a",
-      "expectedBytes": 6404,
       "origin": "https://psg.gsfc.nasa.gov/api.php, type=rad, pinned Earth configuration, 0.35 to 1.0 um, R=120, I/F",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific model response",
@@ -453,121 +439,9 @@
       }
     },
     {
-      "id": "buenos-aires-noise-source",
-      "path": "noise/buenos-aires-day-2025.geojson.gz",
-      "expectedSha256": "eb58201a66c8c531155035eb57e574a790db4830d6309cc8dff4262ba44c3370",
-      "expectedBytes": 33858376,
-      "origin": "https://cdn.buenosaires.gob.ar/datosabiertos/datasets/agencia-de-proteccion-ambiental/mapa-ruido/medicion_de_ruido_diurno.geojson",
-      "credit": "Buenos Aires APrA",
-      "license": "CC-BY-2.5-AR",
-      "licenseEvidence": [
-        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-        "https://creativecommons.org/licenses/by/2.5/ar/"
-      ],
-      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
-      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
-      "consumers": [
-        "noise-lens"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-buenos-aires-noise-source",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "buenos-aires-noise-pin",
-      "path": "noise/manifest.json",
-      "expectedSha256": "6bbfdee5d1c9213b8916034c98136e69f41b1078839a2452e23a2cb62e86155e",
-      "expectedBytes": 1165,
-      "origin": "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-      "credit": "Buenos Aires APrA",
-      "license": "CC-BY-2.5-AR",
-      "licenseEvidence": [
-        "https://data.buenosaires.gob.ar/dataset/mapa-ruido",
-        "https://creativecommons.org/licenses/by/2.5/ar/"
-      ],
-      "acquisition": "Pinned 2025 daytime noise GeoJSON, retrieved 2026-09-05; archive preserves exact source bytes",
-      "redistribution": "CC-BY-2.5-AR with attribution; prepared transparent raster is modified from source vectors",
-      "consumers": [
-        "noise-lens"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-buenos-aires-noise-pin",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "worldcover-wmts-release",
-      "path": "city/wmts-release.json",
-      "expectedSha256": "779c9cc235f444a14ced20582a340c32921719028995814fa56509294842bf6c",
-      "expectedBytes": 2897443,
-      "origin": "https://esa-worldcover.org/en/data-access",
-      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://esa-worldcover.org/en/data-access"
-      ],
-      "acquisition": "Generated geometry release inventory from the pinned WorldCover source footprints and accepted Earth scene; no imagery copied",
-      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
-      "consumers": [
-        "city-wmts"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-worldcover-wmts-release",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
-      "id": "worldcover-geographic-rebind",
-      "path": "city/geographic-rebind.json",
-      "expectedSha256": "6da869e304c7a969727897017dc52deadafd2d9c65f2d59b1db0e45ae14e9ea4",
-      "expectedBytes": 659,
-      "origin": "https://esa-worldcover.org/en/data-access",
-      "credit": "ESA WorldCover project 2021 / Copernicus Sentinel data",
-      "license": "CC-BY-4.0",
-      "licenseEvidence": [
-        "https://esa-worldcover.org/en/data-access"
-      ],
-      "acquisition": "Verified byte-identical geographic frames when integrating the PR2 affine raster representation; complete pack hashes rechecked",
-      "redistribution": "Prepared geometry and source-derived index; provider images remain on Terrascope",
-      "consumers": [
-        "city-wmts"
-      ],
-      "sourceBinding": {
-        "kind": "catalogued",
-        "references": [
-          {
-            "catalogueId": "source-earth-worldcover-geographic-rebind",
-            "role": "material",
-            "evidence": "Origin and product identifier recorded on this manifest entry."
-          }
-        ]
-      }
-    },
-    {
       "id": "noaa-coraltemp-anomaly",
       "path": "science/coraltemp-latest.nc",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc",
-      "expectedSha256": "d663209d4ded73de5824c47d6ed517f8272ef37cb082790cd71dfcd419f8d183",
-      "expectedBytes": 10739979,
       "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
       "license": "US government public domain",
       "licenseEvidence": [
@@ -593,8 +467,6 @@
       "id": "noaa-coraltemp-checksum",
       "path": "science/coraltemp-latest.nc.md5",
       "origin": "https://www.star.nesdis.noaa.gov/pub/socd/mecb/crw/data/5km/v3.1-clim19912020-v1/nc/v1.0/daily/ssta/2026/ct5km_ssta_v3.1-clim19912020-v1_20260907.nc.md5",
-      "expectedSha256": "4d1c024c5f28f4680f745f1302ec5f45e10011f3e7bdde4df58bde2ffa88f86c",
-      "expectedBytes": 78,
       "credit": "NOAA Coral Reef Watch and NOAA Climate Prediction Center",
       "license": "US government public domain",
       "licenseEvidence": [
@@ -620,8 +492,6 @@
       "id": "nasa-mur-gibs-tiles",
       "path": "science/mur-gibs-tiles.tar.gz",
       "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies/default/2026-09-07/1km/6/{row}/{col}.png",
-      "expectedSha256": "56089aa7cca9172954a471034eee31d6e7ccf0292effd92f6704eeabb8e1d4e7",
-      "expectedBytes": 45833893,
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
@@ -666,8 +536,6 @@
       "id": "nasa-mur-gibs-layer",
       "path": "science/mur-gibs-layer.xml",
       "origin": "https://gibs.earthdata.nasa.gov/wmts/epsg4326/best/1.0.0/WMTSCapabilities.xml",
-      "expectedSha256": "146e5b0fd98cd5e701d70338955dbaaf40148bc1dec500a37f7b03dbb94bc206",
-      "expectedBytes": 6094,
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
@@ -693,8 +561,6 @@
       "id": "nasa-mur-gibs-colormap",
       "path": "science/mur-gibs-colormap.xml",
       "origin": "https://gibs.earthdata.nasa.gov/colormaps/v1.3/GHRSST_Sea_Surface_Temperature_Anomalies.xml",
-      "expectedSha256": "89389ec4066571f3134e85859b9c9e322112837dba3c9d11cdbee8f5dcc76081",
-      "expectedBytes": 12191,
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
@@ -720,8 +586,6 @@
       "id": "nasa-mur-gibs-description",
       "path": "science/mur-gibs-description.md",
       "origin": "https://raw.githubusercontent.com/nasa-gibs/worldview/main/config/default/common/config/metadata/layers/multi-mission/ghrsst/GHRSST_L4_MUR_Sea_Surface_Temperature_Anomalies.md",
-      "expectedSha256": "30391647ed0ff3ed60750b29a638e3d135271473a522c03ac8afcbb8fb55eddd",
-      "expectedBytes": 1096,
       "credit": "NASA JPL MUR project, NASA MEaSUREs, and NASA EOSDIS GIBS",
       "license": "NASA open Earth science imagery with attribution",
       "licenseEvidence": [
@@ -747,8 +611,6 @@
       "id": "gebco-2026-elevation",
       "path": "science/gebco-2026/latitude-00.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4:10:2394][4:10:86394]",
-      "expectedSha256": "ce96440870f7e94a0506dac9c0e7decf160e133831432caee60f0cbefc5028d2",
-      "expectedBytes": 2045075,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -774,8 +636,6 @@
       "id": "gebco-2026-latitude-01",
       "path": "science/gebco-2026/latitude-01.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[2404:10:4794][4:10:86394]",
-      "expectedSha256": "af6343bfe558feade9782bf84d93c8e7ed8bc911ef2fe28a7ea2d9cc6dc1433c",
-      "expectedBytes": 3291078,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -801,8 +661,6 @@
       "id": "gebco-2026-latitude-02",
       "path": "science/gebco-2026/latitude-02.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[4804:10:7194][4:10:86394]",
-      "expectedSha256": "b340d57f622fa36f59c88178e75b1dc62762d5c6c91073775afdbd6ad1bd3735",
-      "expectedBytes": 3635991,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -828,8 +686,6 @@
       "id": "gebco-2026-latitude-03",
       "path": "science/gebco-2026/latitude-03.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[7204:10:9594][4:10:86394]",
-      "expectedSha256": "7ec4e202995fa4f7517c92cfaa1d4f1fd24a202d812c46138b07a0b77c240f71",
-      "expectedBytes": 3761066,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -855,8 +711,6 @@
       "id": "gebco-2026-latitude-04",
       "path": "science/gebco-2026/latitude-04.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[9604:10:11994][4:10:86394]",
-      "expectedSha256": "7439d8d3702937040f8975d9df00815de66bb916f2f02e696bedea401ae10633",
-      "expectedBytes": 3875732,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -882,8 +736,6 @@
       "id": "gebco-2026-latitude-05",
       "path": "science/gebco-2026/latitude-05.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[12004:10:14394][4:10:86394]",
-      "expectedSha256": "22f159007cfcf694b88a7069b0ba52d0f8993a6076b6d4b2358aa1539868db30",
-      "expectedBytes": 3959519,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -909,8 +761,6 @@
       "id": "gebco-2026-latitude-06",
       "path": "science/gebco-2026/latitude-06.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[14404:10:16794][4:10:86394]",
-      "expectedSha256": "adf191d03ff1979207e8be77c994ba2df7c5e4f2b5278143ca0c625fc2c0adb1",
-      "expectedBytes": 4098728,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -936,8 +786,6 @@
       "id": "gebco-2026-latitude-07",
       "path": "science/gebco-2026/latitude-07.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[16804:10:19194][4:10:86394]",
-      "expectedSha256": "38a9ab5b65a6d7f0b1a2228cb6a6a3ba1d573049009b20240f84cb118ab15ae9",
-      "expectedBytes": 4118826,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -963,8 +811,6 @@
       "id": "gebco-2026-latitude-08",
       "path": "science/gebco-2026/latitude-08.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[19204:10:21594][4:10:86394]",
-      "expectedSha256": "a83f8a67b524c5fc5302ed7fb4a7d008b410c7dc9fc8d0c86438faefd8abdaef",
-      "expectedBytes": 4021765,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -990,8 +836,6 @@
       "id": "gebco-2026-latitude-09",
       "path": "science/gebco-2026/latitude-09.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[21604:10:23994][4:10:86394]",
-      "expectedSha256": "3f62c2aaeab8ee15b66f2014f44ccbfdc67a5adb06b71dee91e936c5376f9c40",
-      "expectedBytes": 3983376,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1017,8 +861,6 @@
       "id": "gebco-2026-latitude-10",
       "path": "science/gebco-2026/latitude-10.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[24004:10:26394][4:10:86394]",
-      "expectedSha256": "426544acdd9797e1b51c2cc0764a75b8b162908befb93c6da77cadf15b648015",
-      "expectedBytes": 4037856,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1044,8 +886,6 @@
       "id": "gebco-2026-latitude-11",
       "path": "science/gebco-2026/latitude-11.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[26404:10:28794][4:10:86394]",
-      "expectedSha256": "f422cce8de12d254175b3a6ce8433a0d21a0a85591b06f0460a397b7e9508441",
-      "expectedBytes": 4050768,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1071,8 +911,6 @@
       "id": "gebco-2026-latitude-12",
       "path": "science/gebco-2026/latitude-12.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[28804:10:31194][4:10:86394]",
-      "expectedSha256": "0da9842f6463cd0f5cf7e7bc82cff279c155e46190302ed9b906f768968eb81f",
-      "expectedBytes": 4237876,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1098,8 +936,6 @@
       "id": "gebco-2026-latitude-13",
       "path": "science/gebco-2026/latitude-13.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[31204:10:33594][4:10:86394]",
-      "expectedSha256": "74bce9b863f2fa88b06f25adcca51bf192d89b940f2973349e8f73294f958948",
-      "expectedBytes": 4033216,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1125,8 +961,6 @@
       "id": "gebco-2026-latitude-14",
       "path": "science/gebco-2026/rows-3360.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[33604:10:34794][4:10:86394]",
-      "expectedSha256": "389e187690513bfa6286c222e392f4c7d053ef9fc4ea7d6fb68cce63a5c976e0",
-      "expectedBytes": 1932517,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1152,8 +986,6 @@
       "id": "gebco-2026-latitude-15",
       "path": "science/gebco-2026/rows-3480.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[34804:10:35994][4:10:86394]",
-      "expectedSha256": "75ee477526af4ee4073fa687924756d3158dc119e09b0ea7ae8ec0abe6edae8b",
-      "expectedBytes": 1805120,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1179,8 +1011,6 @@
       "id": "gebco-2026-latitude-16",
       "path": "science/gebco-2026/latitude-15.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[36004:10:38394][4:10:86394]",
-      "expectedSha256": "e7feed36ae4b67e8ef797df29d473690c9ce69fb426097cd2e6f4795e9023e4f",
-      "expectedBytes": 3543843,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1206,8 +1036,6 @@
       "id": "gebco-2026-latitude-17",
       "path": "science/gebco-2026/latitude-16.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[38404:10:40794][4:10:86394]",
-      "expectedSha256": "ef93bb9cc2287914f05516da163ea7a505124628d2358cee50fed4a73501bdc9",
-      "expectedBytes": 3281192,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1233,8 +1061,6 @@
       "id": "gebco-2026-latitude-18",
       "path": "science/gebco-2026/rows-4080.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[40804:10:41994][4:10:86394]",
-      "expectedSha256": "d63d360e180427ce132e8df74f3373ec45f20a9ac9e89da1c1e6f23af8ae18b7",
-      "expectedBytes": 1710509,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1260,8 +1086,6 @@
       "id": "gebco-2026-latitude-19",
       "path": "science/gebco-2026/rows-4200.dods.gz",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.dods?elevation[42004:10:43194][4:10:86394]",
-      "expectedSha256": "7138d3b113a94a2eb77ba0c9f53eb9bc3eddf9b7669e389e38304ce4f80f16e4",
-      "expectedBytes": 1312150,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1287,8 +1111,6 @@
       "id": "gebco-2026-metadata",
       "path": "science/gebco-2026.das",
       "origin": "https://dap.ceda.ac.uk/thredds/dodsC/bodc/gebco/global/gebco_2026/ice_surface_elevation/netcdf/GEBCO_2026.nc.das",
-      "expectedSha256": "5aa6408d05f1c5847058b91a2f71ac6f654d12bca07bbefb3c513ef69a3ac174",
-      "expectedBytes": 4880,
       "credit": "GEBCO Bathymetric Compilation Group 2026; NERC EDS British Oceanographic Data Centre NOC",
       "license": "GEBCO public domain with source acknowledgement",
       "licenseEvidence": [
@@ -1325,8 +1147,6 @@
       "consumers": [
         "interior"
       ],
-      "expectedBytes": 520307,
-      "expectedSha256": "a38404997298e3dbee95035e7125d7cc09586fe32dbce0550012653f97042fcb",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -1533,8 +1353,6 @@
   "generatedIntermediates": [
     {
       "path": "moon/earth-moon.json",
-      "expectedSha256": "3c0097bcf6b166cb0ba2d03c3cc290902983e448baf82eb64e60d25257cd6d4f",
-      "expectedBytes": 745,
       "generator": "src/objects/earth/tools/prepare-source-intermediates.mjs"
     },
     {
@@ -1567,26 +1385,6 @@
       "purpose": "Pinned GeoNames place catalogue snapshot, license and source hashes; not imagery coverage"
     },
     {
-      "path": "city/catalog-pin.json",
-      "purpose": "Observation date, hash and qualification of the complete WorldCover RGBNIR object inventory"
-    },
-    {
-      "path": "city/worldcover-rgbnir-2021.json.gz",
-      "purpose": "Preparation-only global source tile availability and publisher object pins; not pixel or runtime coverage"
-    },
-    {
-      "path": "city/manifest.json",
-      "purpose": "Pinned WorldCover source tiles, extracted-pixel hashes, RGB recipe, delivery origin and representative paging scope"
-    },
-    {
-      "path": "city/r2-cors.json",
-      "purpose": "Read-only cross-origin delivery policy with exact range response headers for the canonical R2 asset bucket"
-    },
-    {
-      "path": "city/provenance.json",
-      "purpose": "Verified source GeoTIFF metadata, geographic extraction windows, nodata counts and pixel hashes"
-    },
-    {
       "path": "interior/earth-interior.json",
       "purpose": "Source-qualified schematic Earth interior presentation specification",
       "kind": "authored-document",
@@ -1598,14 +1396,6 @@
     {
       "path": "presentation/LICENSE.INTER-OFL",
       "purpose": "Exact Inter pinned-commit SIL OFL 1.1 redistribution license"
-    },
-    {
-      "path": "city/published-coverage.json.gz",
-      "purpose": "Verified publication receipts, source-window provenance and immutable index heads for integrated geographic coverage"
-    },
-    {
-      "path": "city/r2-cache-rule.json",
-      "purpose": "Narrow immutable geometry cache rule deployed to the public asset domain"
     },
     {
       "path": "preparation/paged-ellipsoid.json"
@@ -1627,9 +1417,7 @@
       "path": "presentation/title-mark.json"
     },
     {
-      "path": "editorial/earth.json",
-      "expectedBytes": 10001,
-      "expectedSha256": "afd5014507e89812e7ebd6f553324efce7c0dbec55b749dae552d7ba55f0f80d"
+      "path": "editorial/earth.json"
     },
     {
       "path": "preparation/navigation.json",
@@ -1658,8 +1446,6 @@
     },
     {
       "path": "science/night-lights-2025/provenance.json",
-      "expectedSha256": "e6a1704233f77c3721264de924a5b6e14a291ef78fd4d52db034a89ad32fc5a0",
-      "expectedBytes": 3060,
       "purpose": "Actual 2025 public Black Marble archive identity, GeoTIFF metadata, native numerical anchors, display transfer and coverage/QA limitations.",
       "kind": "authored-document",
       "sourceBinding": {

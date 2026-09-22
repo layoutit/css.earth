@@ -1,0 +1,413 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "mercury-features.json",
+      "bytes": 954620,
+      "sha256": "036ac4e31bf6c1045dfd8662ab5008c408f224c398fcb44eba02d562a45f3e28"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-core-poles@2x.webp",
+      "bytes": 73850,
+      "sha256": "32c4c6e8bdf1379fcf8c2429756a4b27ec669655cfecc312e98a73de4022a044"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-core@2x.webp",
+      "bytes": 829036,
+      "sha256": "8b11b07368e500a7d692bd40853480157fc8f68e87ec13bc1921575f4beedb31"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-outer-poles@2x.webp",
+      "bytes": 135208,
+      "sha256": "1d7bc8e12cc76cc1a8497c5ba1ad5dd2bc6d0aec42a8872019e41984f0b4860f"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-outer-unlit-poles@2x.webp",
+      "bytes": 215502,
+      "sha256": "6dd27a1ff01b2d9e37c50880cd3cc4be9109ad2ed8b40ac8920eba220b885141"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-outer-unlit@2x.webp",
+      "bytes": 5494516,
+      "sha256": "270a4fc33db3e3d548b2150043ed605911f5fd1d82eba96ff5ab59699000f60c"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-outer@2x.webp",
+      "bytes": 2927744,
+      "sha256": "84f23efa24ebfa307ef8004362d3015b3d00921f4beb98936cb48b256341523f"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-interior-section@2x.webp",
+      "bytes": 4891588,
+      "sha256": "d6af77295d7ced94c8377972ce824debcdd7b3f327c34ff70c159becb334525a"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lens-enhanced.webp",
+      "bytes": 600,
+      "sha256": "338972a9378dbc04a2d57fe67a45a25f622495f95e4196bc2cd546befd5e8fad"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lens-interior.webp",
+      "bytes": 354,
+      "sha256": "9e57f8e64a36365e0fe88f50407bae8853f70b0ca1c66a433d2f449e0c59fb32"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lens-normal.webp",
+      "bytes": 274,
+      "sha256": "860c1359e7029caa381ff077f753ec72b18ed6f79f5561b5ca2b48ce9ee46a5f"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lens-topography-legend.webp",
+      "bytes": 2072,
+      "sha256": "d952712d2a284fcc06e26afc228d05dc161f3d8af3d422c48eb3daf50e04abdb"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lens-topography.webp",
+      "bytes": 598,
+      "sha256": "68cbcb5681dd7e229eed4275a988fd09c5f81f749e894914752519554acc3c06"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-billboard.webp",
+      "bytes": 115740,
+      "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-00.webp",
+      "bytes": 37672,
+      "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-01.webp",
+      "bytes": 70898,
+      "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-02.webp",
+      "bytes": 92030,
+      "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-03.webp",
+      "bytes": 106840,
+      "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-04.webp",
+      "bytes": 120584,
+      "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-05.webp",
+      "bytes": 132094,
+      "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-06.webp",
+      "bytes": 143228,
+      "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-07.webp",
+      "bytes": 153142,
+      "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-08.webp",
+      "bytes": 163984,
+      "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-09.webp",
+      "bytes": 172632,
+      "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-10.webp",
+      "bytes": 177128,
+      "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-11.webp",
+      "bytes": 179144,
+      "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-12.webp",
+      "bytes": 173518,
+      "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-13.webp",
+      "bytes": 161150,
+      "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-14.webp",
+      "bytes": 132038,
+      "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-15.webp",
+      "bytes": 69930,
+      "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-16.webp",
+      "bytes": 74522,
+      "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-17.webp",
+      "bytes": 143520,
+      "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-18.webp",
+      "bytes": 185628,
+      "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-19.webp",
+      "bytes": 218252,
+      "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-20.webp",
+      "bytes": 245184,
+      "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-21.webp",
+      "bytes": 269836,
+      "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-22.webp",
+      "bytes": 291326,
+      "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-23.webp",
+      "bytes": 312110,
+      "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-24.webp",
+      "bytes": 333302,
+      "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-25.webp",
+      "bytes": 355976,
+      "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-26.webp",
+      "bytes": 377782,
+      "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-27.webp",
+      "bytes": 403282,
+      "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-28.webp",
+      "bytes": 429004,
+      "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-29.webp",
+      "bytes": 456570,
+      "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-30.webp",
+      "bytes": 481914,
+      "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-lighting-2x-row-31.webp",
+      "bytes": 526556,
+      "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-photometric-phase-curve.svg",
+      "bytes": 4396,
+      "sha256": "3a17ef4bfbabff8746f75d096d16a8ce1d8f0457d2beabd3f071f7640e6246bf"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-poles@2x.webp",
+      "bytes": 497292,
+      "sha256": "01405b9c0f75b66ee83be15de391bb186bd3d589919bc275d15f1a7c884ae265"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-albedo.svg",
+      "bytes": 7414,
+      "sha256": "21362de952496658ee100a17c3b4899ed5a4673de314cd6a8b36082978956bdc"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-enhanced@2x.jpg",
+      "bytes": 5266173,
+      "sha256": "03804cecc9859bb03937c70d919a0157bb06d3dcd933a6493958e83dbf779ea3"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-normal@2x.jpg",
+      "bytes": 4257932,
+      "sha256": "5f1dfa427fe1c541a62a6262e5c46851eee3e559e5e534a1ec54e7b7bb6354f7"
+    },
+    {
+      "location": "public",
+      "filename": "mercury-surface-topography@2x.jpg",
+      "bytes": 2993956,
+      "sha256": "bed71a89a90519863d4a031139a0b32826c6ae24a63290c46118cead4636aa81"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 98224,
+      "sha256": "b1e12215aeb2a0a7dc1e5c78ce006d1e2770bbc8695c7dc6b475a1fe2b84abb3"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1686,
+      "sha256": "92337be9243ae5dc59fe80151de3c89fe37fe795967b9dae61ef21cb23cb9862"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 8563,
+      "sha256": "5c861c6392d0d5ca640135c30d6938f45b8dde0e39b8e1c1498105c2d1c2c89f"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 1941,
+      "sha256": "54a7804f3b60838073600a8e2ebbb400607182c2199dc1bc979cdb27d0ee55ff"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 1277,
+      "sha256": "ff9102a28dfcced7a9c48b7354c4f4517374e1ef9dafb23055c13fbd57856f66"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 3746,
+      "sha256": "acac706fc34a86ee4971e43f2d354ff6f1a1ca4f37ecda2809df680f07d59832"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 238,
+      "sha256": "ca4d68d32a958e2dae7aae73c6f75ac539cc50d80ad369208500c5da05964e19"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/enhanced.webp",
+      "bytes": 97746,
+      "sha256": "322aef21b65883405f8d540e8f6ff3f0695008045d30535f4176da860bcaa68f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 52590,
+      "sha256": "c4fc4f711c33701b3a96c643ec2525349f341f4f3e5018c57ad52d246fa6ca72"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/topography.webp",
+      "bytes": 89838,
+      "sha256": "c596e5e35c362733c2847583f51a6658960f49a6c461d1871a6b7e845fa9a531"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 793928,
+      "sha256": "4bff2bdba7027c092a8f427e91a254e8a75646804f0a8d1a56f610315fcdadee"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 696574,
+      "sha256": "53940d6e75dd138d5234f37a9b4822ed43e7de1f6bcb55b821943e1d2305c35d"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1036,
+      "sha256": "e452cf1a89be139b61197fc062d84f0417e6f9a13a1093f4c769bc21555cfeca"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 616,
+      "sha256": "2e7c960b7e43c8ab2069a7d85ce85afaf0643f2ae10378fa20eca02a3c7e59ed"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1375,
+      "sha256": "01b72dc5d105c9b8d58536f5da5af4c0357937dc8b25fb489fccfddc5158c4cf"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1233,
+      "sha256": "c66e94decb1d96e116cea5541881d42cc573ca9bf05c30b1318e9948eacdbb76"
+    }
+  ]
+}

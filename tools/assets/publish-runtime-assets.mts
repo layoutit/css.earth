@@ -4,7 +4,7 @@ import { tmpdir } from "node:os";
 import { spawn } from "node:child_process";
 import { join, resolve } from "node:path";
 import { pathToFileURL } from "node:url";
-import { inventoriedAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from "./runtime-assets.mts";
+import { inventoryAssets, inventoriedObjectIds, RUNTIME_ASSET_ORIGIN } from "./runtime-assets.mts";
 import { verifyPublished, reportVerification, type PublishAsset } from "./publish-verification.mts";
 
 const BUCKET = "cssearth-assets";
@@ -95,8 +95,8 @@ async function findMisses<T extends PublishAsset>(assets: readonly T[], fetcher:
   return misses;
 }
 
-// Maintainer command: publish only the files in the checked-in inventories — both `runtime-assets.json` (public
-// scene textures) and `prepared-assets.json` (baked `prepared/*` output git no longer tracks). Each
+// Maintainer command: publish only the files in the checked-in inventories (`inventory.json`: public scene
+// textures and baked `prepared/*` output git does not hold). Each
 // URL contains its content hash, so existing releases remain usable and re-running this command is cheap: HEAD
 // every key first (concurrently) and bulk-upload only the misses (`wrangler r2 bulk put`, batched by content
 // type since one invocation takes one content type), then run the existing HEAD + byte verification pass, whose
@@ -105,7 +105,7 @@ async function findMisses<T extends PublishAsset>(assets: readonly T[], fetcher:
 // is exactly what that verification pass catches.
 export async function publishRuntimeAssets(objectIds: readonly string[]): Promise<void> {
   const root = resolve(import.meta.dirname, "../..");
-  const assets = await inventoriedAssets(root, inventoriedObjectIds(objectIds, root));
+  const assets = await inventoryAssets(root, inventoriedObjectIds(objectIds, root));
   await publishAssets(assets);
 }
 

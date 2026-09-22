@@ -29,7 +29,7 @@ Adding Dysnomia moved Eris by **92,802 km**. That is 80 Eris radii, but only **6
 
 Run of 2026-09-18 (this version): preparation added the Illustration lens and dropped the 35 unused 1x files. The 36 files kept, including every Color lens image, are byte-identical to the previous pins. Discovery is unchanged: no imagery, not illustration-only. Measured this session, the illustration's area-weighted mean colour is sRGB 201, 192, 190 (#c9c0be) against the measured #fffaea; its linear luminance is about 57% of the measured colour's.
 
-Run of 2026-09-16: `node tools/prepare/prepare-object.mts eris` prepared the package with the Color lens. The prepared surface, pole and thumbnail WebPs decode to 255, 250, 234 on every opaque pixel. `node --test tools/objects/observation/disc-integrated-color.test.mts site/test/object-discovery.test.mts tests/objects/unit/eris/runtime-contract.test.mts tools/contract/object-package-consistency.test.mts tools/investigations/investigation-ledger.test.mts` passes. The page at `/eris/` renders the Color lens with no console errors; the disc centre in the [default-view capture](source/reference/rendered-default-view.png) is 255, 250, 234.
+Run of 2026-09-16: `node tools/prepare/prepare-object.mts eris` prepared the package with the Color lens. The prepared surface, pole and thumbnail WebPs decode to 255, 250, 234 on every opaque pixel. `node --test tools/objects/observation/disc-integrated-color.test.mts site/test/object-discovery.test.mts tests/objects/unit/runtime-package.test.mts tools/contract/object-package-consistency.test.mts tools/investigations/investigation-ledger.test.mts` passes. The page at `/eris/` renders the Color lens with no console errors; the disc centre in the [default-view capture](source/reference/rendered-default-view.png) is 255, 250, 234.
 
 Measured sensitivity, with the same method: B−V − 0.023 gives 255, 250, 237 and V−R − 0.023 gives 253, 249, 235. The MBOSS mean of 64 epochs (B−V 0.805, V−R 0.389, V−I 0.792) gives 255, 250, 236. The albedo's lower bound, 0.92, gives 250, 245, 230.
 
@@ -43,7 +43,7 @@ Measured sensitivity, with the same method: B−V − 0.023 gives 255, 250, 237 
 - A uniform colour hides any albedo pattern; none has been mapped.
 - Rotation content uses the 15.771 ± 0.008-day photometric period of [Bernstein et al. (2023)](https://arxiv.org/abs/2303.13445), consistent with synchronous rotation at Dysnomia's 15.78590-day orbital period. This supersedes the 25.9-hour value still present on NASA's overview. The body has no measured longitude origin or established spin-pole registration. Its display pole and meridian are explicitly arbitrary, and no absolute rotational ephemeris is animated. The existing vendored JPL elements determine orbital position at the shared preparation epoch.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <details>
 <summary>Methods and source notes</summary>

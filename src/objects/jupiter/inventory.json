@@ -1,0 +1,497 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "jupiter-lens-methane-poles.webp",
+      "bytes": 21864,
+      "sha256": "0564d95ef576f6726918b56c80a806ceeeccddb0d9b1ca4030ef3ffed1de5f78"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-methane-poles@2x.webp",
+      "bytes": 31928,
+      "sha256": "092b6bacab59168070ff14858488837ccc6d3c282f43341ccc820bb1cde528c7"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-methane-thumbnail.webp",
+      "bytes": 476,
+      "sha256": "c456babea13e9d7b6d0fe32af64f4ba66394409b333031ddc6c1b4dbae16deee"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-methane.webp",
+      "bytes": 106616,
+      "sha256": "c5851377211c703489ae0b076b82843025902fdb613ee07f02c89d955c9b7576"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-methane@2x.webp",
+      "bytes": 284824,
+      "sha256": "2a80f9f95baaae57f526182413655ac8da988e3eaafee9b8e1d6eea239bc10db"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-normal.webp",
+      "bytes": 1892,
+      "sha256": "7644cad9b7ca876bf4689a8ac54ee9308431bcb3d8f46b8815c29c4580edc2e0"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-ultraviolet-poles.webp",
+      "bytes": 20342,
+      "sha256": "24e2fb16aa2ce4d2e4c9eb34ea209c1ffabf8fa06e6314d2148e25393e19bb0d"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-ultraviolet-poles@2x.webp",
+      "bytes": 22574,
+      "sha256": "4ac9e4328290de6502d7ba23bf9760df138a20def1ddbf3d776f1ea67356990a"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-ultraviolet-thumbnail.webp",
+      "bytes": 762,
+      "sha256": "988f76527c545daf481dde86d10502b7fb6c9ed2f32a86620be726edae3f07de"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-ultraviolet.webp",
+      "bytes": 102970,
+      "sha256": "f37ed73151e3c8ae5582c3a2decd9acd863e2e9a9d651e699243d900ddac8804"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-lens-ultraviolet@2x.webp",
+      "bytes": 319756,
+      "sha256": "42356ee2f74b739cd105b76304a55433bcfd9c3a99e808e94a05a3e0307f4fe8"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-00.webp",
+      "bytes": 23196,
+      "sha256": "1f6bb17929e5b0b1cae908eb84a5f66cabd76754a32fff9b9ab64c9867cf1bc3"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-01.webp",
+      "bytes": 37548,
+      "sha256": "0474df19305bec37ad45730bb5b33c607953f1f02ee02a2abc00e59ac352003d"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-02.webp",
+      "bytes": 48580,
+      "sha256": "c86e85baed0b4dc74f98692fa8799c425f4c997f6f6fd6b5462381c2664d06bd"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-03.webp",
+      "bytes": 57416,
+      "sha256": "17176699fa30ba28ad6eaf1f56d69c1f32b25e9e3fc1d4b15446886315f80bac"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-04.webp",
+      "bytes": 64814,
+      "sha256": "2b5b356c06ab546e1aa0966a81423d2d987297c091a0f6af83cbe585520f9356"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-05.webp",
+      "bytes": 71864,
+      "sha256": "f3898c2b255835f1eaf78734fcd0d873e40bff43387f5457dfede6ae118e17ee"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-06.webp",
+      "bytes": 77500,
+      "sha256": "6c8f38d46694adbb1aedfb75d857a13c52d1f1b92c64bf0ed7b3d3c5c45f642c"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-07.webp",
+      "bytes": 81546,
+      "sha256": "0b61d6cc14364d1b96edcf12c621af365c9d379de8cb6d33d802b53bf13f5975"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-08.webp",
+      "bytes": 86078,
+      "sha256": "06e33c20a7c30b10ce14d7a7deb254179614cc9da3e42ac74a20f8a752a85dae"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-09.webp",
+      "bytes": 86852,
+      "sha256": "d3298918fd03ee3fa9a303a023ab837ed39be16a7fa10e4c2e608afca2f6b31f"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-10.webp",
+      "bytes": 91924,
+      "sha256": "d28e70f65f0bdf9c6adeab4390ace38a9d2927976046977ebcdb03192ce599ee"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-11.webp",
+      "bytes": 91994,
+      "sha256": "9250ccb1f76eed729cbe859efbfc177447962b8481c8e273013928f1a63d08ec"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-12.webp",
+      "bytes": 93870,
+      "sha256": "50f137ac120295ffb6343615255c629c287cdb4dbc6bae0cea8c661b4f29cbc7"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-13.webp",
+      "bytes": 95944,
+      "sha256": "dfec493d417c60cb3e93ce458dd1aa8759c9abd1c7ac627ef27380217daa7816"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-14.webp",
+      "bytes": 98414,
+      "sha256": "c31ccbfa9ef7e1c1ce78201ceeb26bde8338aa5b2a801428997bddb1eac0e1e6"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-15.webp",
+      "bytes": 101568,
+      "sha256": "aa14c80811913dc8f0638308722b8af6153b82ee51afdeab07b1deb689bcba20"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-16.webp",
+      "bytes": 104638,
+      "sha256": "7d1466b5b68c8d75aa01755d94e6e05ef765805d2d110516220b43f5087ab709"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-17.webp",
+      "bytes": 107110,
+      "sha256": "f4eb1ef65e3df658687b9d4fa427aba83960fddca6792a135dbefea10d76d4a7"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-18.webp",
+      "bytes": 109234,
+      "sha256": "64bd97ef6766315312d1785763dd5c90ceaad1f41ecb7880e3bcf6ed5f787322"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-19.webp",
+      "bytes": 112376,
+      "sha256": "e5cba8cb163cf9d825c4e5a7d3d25fd23f03c22429c1fdccb2034dfefc0537ca"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-20.webp",
+      "bytes": 112704,
+      "sha256": "3e17e2527ae390084c8870c4c184e4376a4da6136a4f37b71316de7d34da8963"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-21.webp",
+      "bytes": 120270,
+      "sha256": "5e2d7d0dc43722f6943288b21babe4720408ed7b88463b9d8d754597817080ee"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-22.webp",
+      "bytes": 124174,
+      "sha256": "fdc55ec647454c690a3696eeb5636371ca9160d6e8828e6370f6960c162d8dcb"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-23.webp",
+      "bytes": 127540,
+      "sha256": "856518e7a2d5d210e421e4829c127f6272537dbfc73c2e0a3e781d245c2b7e88"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-24.webp",
+      "bytes": 125624,
+      "sha256": "6778669ef4c8ccca993d6fbb88a5f0aa05b9feac53b97190530212b8d75ef3ad"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-25.webp",
+      "bytes": 129742,
+      "sha256": "8e47562fdb75d6ec6c496f65292523c770a543e9e1f559cf9db3addc669ed8de"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-26.webp",
+      "bytes": 129694,
+      "sha256": "53377a2b78d52fd7576dcdfeae3b23b89ed5b7160fe3d49bfb07c5dffae88377"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-27.webp",
+      "bytes": 130966,
+      "sha256": "5517ee1e1c4c54d496df0defdc01b3c207c0f96972781dafe3ff97ec8510df0b"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-28.webp",
+      "bytes": 131870,
+      "sha256": "29b542dac391f7ba7f68fc2dcf9a8e06da5b6bbbea883d006c03b7298fb58ed3"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-29.webp",
+      "bytes": 133360,
+      "sha256": "7b0c66f57a0e9eb8cbd51e174e97a2b9f77c1594150d6f8559f1b4759af4f387"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-30.webp",
+      "bytes": 135506,
+      "sha256": "c780c468c2f4b5cc6c4ea70412b9a6e51603911dfa2731760166c3aa91117f72"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-31.webp",
+      "bytes": 139078,
+      "sha256": "45a5dbb8961a9bb9ce99d0cc6bef56932ef2397174c631401f0612d09ae879b2"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-32.webp",
+      "bytes": 143236,
+      "sha256": "69669988b10341b75b63637a01198883bdd7df304e3ffc244fbad98b3fbae011"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-33.webp",
+      "bytes": 145604,
+      "sha256": "33a747967cd29e2380adece94503831d18539651a915e9fb41471ad723379767"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-34.webp",
+      "bytes": 148654,
+      "sha256": "072fbebbd6fcb1838e0be6535abe1caee4a7b9f696519ceb879fa216721bf361"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-35.webp",
+      "bytes": 152918,
+      "sha256": "e1cae35a205cd7a2e6d66d2215a2bb978b8e6943326fe02a08c59b35dd0921ad"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-36.webp",
+      "bytes": 155382,
+      "sha256": "68491901688895ef13e30ffd57dcd6e42a9a6eafec9882307334a350c84ea7a5"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-37.webp",
+      "bytes": 161278,
+      "sha256": "2454d50ae9b3da368e9c887412f6ca31400e38857401fe83ff7357f6debadfa0"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-38.webp",
+      "bytes": 166366,
+      "sha256": "28998106d44495e89cc9e62e3037dc4ce0a2a09de0a782bdb1a37f1910062085"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-39.webp",
+      "bytes": 173148,
+      "sha256": "0aea6bdec9c67915f1d05bc79ded6f4d9716277ae7419c7516ae49918ccc0e24"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-40.webp",
+      "bytes": 178608,
+      "sha256": "96e9c0d5c83e354ca6b7e8d9ff8617c5fb5ca5628b71190f394871b0b283bf4d"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-41.webp",
+      "bytes": 186224,
+      "sha256": "1b7ba5afa27c929baac14b5628ff31338c6a0212c16d01637b0b5d20b6ccc290"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-42.webp",
+      "bytes": 193956,
+      "sha256": "678ddd5cbeac6f7aea41527cda913154bc4e953e0925b2426bca9e9d42981610"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-43.webp",
+      "bytes": 202252,
+      "sha256": "c263b9486bdd7c18d229f6bad444a9c7b7fbc8c0cbe4c6fc241bec52ff14a19f"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-44.webp",
+      "bytes": 205434,
+      "sha256": "eff22b51f1400ba652d156ab52a37433ad4e363e74b2f9f14dd6281504555b60"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-row-45.webp",
+      "bytes": 49954,
+      "sha256": "e055c2ffaf07fcceef7236993054c7ff21a4ae2162b18e8766400403c492dbd7"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-material-b18c3cbe6353-shadowless.webp",
+      "bytes": 49148,
+      "sha256": "b11cba81552b55275991ed7abd5a22166a217f9d3cb6c1e13a984692fe2e180e"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-photometric-phase-curve.svg",
+      "bytes": 4528,
+      "sha256": "e270b0df9cba0f4043ac51fa35ab15638592c8e4bc2274811bb01b433d5b4c4b"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-poles.webp",
+      "bytes": 40468,
+      "sha256": "880f40ba2e590f2549521911642e440519130f995107428c296f9bdff313875e"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-poles@2x.webp",
+      "bytes": 65022,
+      "sha256": "9289200493bffc8bf2468e11bc1d2ee0836015310f34a40b0199d26c085f90f3"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-reflectance-spectrum.svg",
+      "bytes": 5872,
+      "sha256": "c9f142878f3b5864846f669b42e26446df71a1a4f8f230b284768ace1eaf116e"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-rings.webp",
+      "bytes": 45252,
+      "sha256": "08e8062e08ee42d1baa2b232cc0fb549aa205142f59bfec5973f512a454c9e3a"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-rings@2x.webp",
+      "bytes": 70254,
+      "sha256": "02461da752c1fa0d20c8d28d5750c2f8f36b025685d7dc622c794beed84b109d"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-surface.webp",
+      "bytes": 438634,
+      "sha256": "348a1e106bed9c842776b2e99b4c884d4294d5b043787697e3e0f94013843130"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-surface@2x.webp",
+      "bytes": 1152216,
+      "sha256": "af40915f0201552826264e6608599e0d72bb732a8cbb5a4ae70ef8101165e02b"
+    },
+    {
+      "location": "public",
+      "filename": "jupiter-temperature-pressure-profile.svg",
+      "bytes": 2341,
+      "sha256": "20a5fe8cad7a2fb189d93bc232dba8e3e7fed4a0a516cf9686ef80c0c63cfab3"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 14971,
+      "sha256": "8b822bdfbc54e60aa6ac99225a23cf406235ede03c0539870ad37fa581bcfae6"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 829,
+      "sha256": "a5ae920d9cbbfde1f4cfa876c000f312624ba5b59be8adafedd8b4964f823154"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 8980,
+      "sha256": "881b5869d04f9b6f0404617f2f1a7c1a48bb1401b2af8e07ac6a912362e91791"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 3378,
+      "sha256": "911a77f3cfc4c05b894e89116378eeccdbd42b835bad71d4f7afc06826319810"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 4251,
+      "sha256": "dc46f608a22f0748fdbc03a92fb86ad0aa94f100a348902c46268ae2170fc1d9"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 238,
+      "sha256": "9ddd3f48c14276681cfb9756b4c9add58f4deac170eb9ad8a0407c806bb023ac"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/methane.webp",
+      "bytes": 11366,
+      "sha256": "52d46f7a1f0352cde6a91c1c2cbc985b23361097a284f679093502a285dec8f4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 44950,
+      "sha256": "bfee3fffcc49389352240d283dcc104f292b2dcd74b944cb1654fd09feb906cf"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/ultraviolet.webp",
+      "bytes": 10180,
+      "sha256": "1ef701719c6a14354bcf6f2243a6d0e3049ac8817e75d595229ba5017fbf82bb"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 596885,
+      "sha256": "9dcc4b30fc98656de3e6790afb0692805c46345f695eee9bc101b838e80f3651"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 489881,
+      "sha256": "1370f130aba529dcb0926f353051c4d638768800551c36d64976e8300cf15994"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1045,
+      "sha256": "ef9a452f1d44f5eabe46e6ab727012824e4281a309b52ab87b3dadfa39dbdafe"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 617,
+      "sha256": "7b9f4fde5144cde026b8834336f79e5074e5ffef9eaf1d86ed0fb4169376dce7"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1206,
+      "sha256": "c830f0e8dd6ca13bd63cc7762d3a8a8471c4463991936456ab3a6d261d4388b9"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1053,
+      "sha256": "f3cf1bffe330a3869085aee861191e0e41c0af99995aa725940e832f4d76c93f"
+    }
+  ]
+}

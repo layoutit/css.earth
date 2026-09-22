@@ -17,22 +17,14 @@
     -4.323182413292763
   ],
   "gravitationalParametersKm3PerS2": {
-    "body": 1.603463467019124e-08,
-    "parent": 6.119735484970955e-07,
-    "combined": 6.280081831672867e-07
+    "body": 1.603463467019124e-8,
+    "parent": 6.119735484970955e-7,
+    "combined": 6.280081831672867e-7
   },
   "source": {
     "path": "source/orbit/published-parameters.json",
     "bytes": 3267,
     "sha256": "c5806510c9b9c2350265ea3207d2cc2c805ffb768a088d57966bb618018c9bc8"
-  },
-  "sourcePins": {
-    "jplSatelliteCatalogue": {
-      "path": "source/orbit/jpl-satellites.txt",
-      "url": "https://ssd-api.jpl.nasa.gov/sb_sat.api?des=153591&orb=1&sigma=1&phys-par=1",
-      "bytes": 1560,
-      "sha256": "11e8f878ff43711088242490f91ab8d63d9828978fa97b88c75d68ebe2ded44b"
-    }
   },
   "parentHeliocentricSource": {
     "path": "source/orbit/parent-heliocentric.txt",
@@ -72,7 +64,7 @@
     },
     "implementation": "Independent Python bisection solve and explicit plane-basis evaluation: packages/astronomy/tools/verify-sn263-orbits.py. The existing JS loader independently evaluates rotation matrices and compares both epochs.",
     "sourceFrameIdentityCheck": "Original Fang et al. Table 4 checked at PDF page 6: equatorial J2000, MJD54509; no ecliptic frame conversion. Orbital angles/epoch agree with the JPL API when matched by orbital size, excluding its mismatched physical fields.",
-    "elapsedDaysFromSource": 6777.0,
+    "elapsedDaysFromSource": 6777,
     "periodUncertaintyLinearPhaseScaleDegrees": 31479.750326607642,
     "phaseSensitivityQualification": "Linear period sensitivity using the paper's adopted 1-sigma range. It spans many complete turns and is not a confidence interval or useful current phase bound; omitted dynamics further limit the result.",
     "sourceEpochClockAmbiguityDegreesUpperScale": 0.04685408299866131,

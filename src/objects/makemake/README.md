@@ -23,7 +23,7 @@ The Illustration lens is not an observation. It shows the base-colour texture of
 
 Run of 2026-09-18 (this version): preparation added the Illustration lens and dropped the 35 unused 1x files. The 36 files kept, including every Color lens image, are byte-identical to the previous pins. Discovery is unchanged: no imagery, not illustration-only. Measured this session, the illustration's area-weighted mean colour is sRGB 160, 119, 103 (#a07767) against the measured #f0e9d3; its linear luminance is about 27% of the measured colour's.
 
-Run of 2026-09-16: `node tools/prepare/prepare-object.mts makemake` prepared the package with the Color lens. `node --test tools/objects/observation/disc-integrated-color.test.mts site/test/object-discovery.test.mts tests/objects/unit/makemake/runtime-contract.test.mts` passes.
+Run of 2026-09-16: `node tools/prepare/prepare-object.mts makemake` prepared the package with the Color lens. `node --test tools/objects/observation/disc-integrated-color.test.mts site/test/object-discovery.test.mts tests/objects/unit/runtime-package.test.mts` passes.
 
 Measured sensitivity, with the same method: each published colour uncertainty moves an sRGB channel by at most 3 of 255 (B−V ± 0.03 moves blue from 211 to 209–214). The older MBOSS colours from Rabinowitz et al. (2007), which have no V−R, move blue to 218. A 10% lower albedo gives 229, 222, 202.
 
@@ -36,7 +36,7 @@ Measured sensitivity, with the same method: each published colour uncertainty mo
 - The Illustration lens is far darker and redder than the measured whole-disc colour (see Evidence). The illustration is shown as NASA published it; no colour is corrected.
 - Display pole and meridian are arbitrary, explicitly recorded as such. The reported rotation period is content only and does not drive an invented ephemeris. Orbital placement uses the existing pinned JPL elements at the shared 2026-09-03 TT epoch.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <details>
 <summary>Methods and source notes</summary>

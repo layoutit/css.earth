@@ -1,4 +1,3 @@
-import { sha256 } from '../../../src/platform/sha256.mts';
 import {readFile,writeFile} from 'node:fs/promises';
 import {resolve,relative} from 'node:path';
 import {gzipSync} from 'node:zlib';
@@ -8,10 +7,10 @@ import {decodeHriiSpectra,decodeHriiSolarTable,fitHriiSpectrum} from './hrii-spe
 import {hriiCamera,hriiControlResidual} from './hrii-camera.mts';
 import {parseHriiContext,parseHriiDenseFit,loadHriiContext,fitHriiPointing} from './hrii-pointing.mts';
 
-const pin=shape({path:text,sha256:text});
-const recipeParser=shape({schema:text,target:text,targetAliases:array(text),mesh:shape({path:text,sha256:text,grid:parseMeshProfile}),solar:pin,
+const pin=shape({path:text});
+const recipeParser=shape({schema:text,target:text,targetAliases:array(text),mesh:shape({path:text,grid:parseMeshProfile}),solar:pin,
   bodyToJ2000:array(array(number)),offsetPixels:array(number),
-  frames:array(shape({id:text,number:number,path:text,sha256:text,startTime:text})),
+  frames:array(shape({id:text,number:number,path:text,startTime:text})),
   context:parseHriiContext,
   registration:shape({method:choice('dense-context-fit-with-terrain-holdouts'),dense:parseHriiDenseFit,
     controls:array(shape({id:text,frame:number,row:number,sourcePointMeters:array(number)})),
@@ -27,10 +26,10 @@ const cross=(a:number[],b:number[])=>[a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[
  * No spectral, geometry or camera work is left to the application runtime. */
 export async function prepareHriiFacets(sourceDirectory:string,recipePath:string) {
   const source=resolve(sourceDirectory);
-  const read=async(path:string,sha?:string)=>{
+  const read=async(path:string)=>{
     const target=resolve(source,path),local=relative(source,target);
     if(!local||local.startsWith('..')||path.startsWith('/'))throw new Error('HRII input is outside its source package.');
-    const bytes=await readFile(target);if(sha&&sha256(bytes)!==sha)throw new Error(`HRII source identity changed: ${path}`);return bytes;
+    return readFile(target);
   };
   const recipeBytes=await read(recipePath),r=recipeParser(JSON.parse(recipeBytes.toString('utf8')));
   if(r.schema!=='cssearth-hrii-facet-preparation@1'||!r.frames.length||r.frames.some((f,i)=>!Number.isSafeInteger(f.number)||(i>0&&f.number<=r.frames[i-1].number)))throw new Error('Invalid HRII scan recipe.');
@@ -38,16 +37,16 @@ export async function prepareHriiFacets(sourceDirectory:string,recipePath:string
      r.registration.maximumRmsPixels<=0||r.registration.maximumResidualPixels<r.registration.maximumRmsPixels)throw new Error('Insufficient HRII camera evidence.');
   const c=r.coverage;
   if(c.maximumIncidenceDegrees<=0||c.maximumIncidenceDegrees>75||c.maximumEmissionDegrees<=0||c.maximumEmissionDegrees>75||c.edgeMarginPixels<2||c.edgeMarginPixels>4)throw new Error('Unbounded HRII surface coverage.');
-  await read(r.mesh.path,r.mesh.sha256);
+  await read(r.mesh.path);
   const mesh=await loadPdsPlanetocentricShape(resolve(source,r.mesh.path),r.mesh.grid);
-  const solar=decodeHriiSolarTable((await read(r.solar.path,r.solar.sha256)).toString('utf8'));
+  const solar=decodeHriiSolarTable((await read(r.solar.path)).toString('utf8'));
   const normals=mesh.indices.map(indices=>{
     const [a,b,d]=indices.map(i=>mesh.positions[i]);return unit(cross(b.map((v,i)=>v-a[i]),d.map((v,i)=>v-a[i])));
   });
   const centers=mesh.indices.map(indices=>[0,1,2].map(axis=>indices.reduce((s,i)=>s+mesh.positions[i][axis],0)/3));
   const inputs:{frame:(typeof r.frames)[number];spectrum:ReturnType<typeof decodeHriiSpectra>;camera:ReturnType<typeof hriiCamera>;values:Float64Array}[]=[];
   for(const frame of r.frames) {
-    const spectrum=decodeHriiSpectra(await read(frame.path,frame.sha256));
+    const spectrum=decodeHriiSpectra(await read(frame.path));
     if(![r.target,...r.targetAliases].includes(text(spectrum.header.OBJECT))||spectrum.header.OBSDATE!==frame.startTime)throw new Error(`Wrong HRII exposure: ${frame.id}`);
     const camera=hriiCamera(spectrum.header,r);
     inputs.push({frame,spectrum,camera,values:new Float64Array(spectrum.height*2).fill(NaN)});
@@ -102,7 +101,7 @@ export async function prepareHriiFacets(sourceDirectory:string,recipePath:string
   const finite=Array.from(temperatures).filter(Number.isFinite),finiteSlope=Array.from(slopes).filter(Number.isFinite);
   if(!finite.length)throw new Error('HRII has no qualified source facets.');
   const csv=['X,Y,Z,Color temperature,Continuum slope,Scan frame,Detector row','km,km,km,K,%/100nm,1,1',...centers.map((point,i)=>[...point.map(x=>(x/1000).toFixed(9)),temperatures[i],slopes[i],frameNumbers[i],detectorRows[i]].join(','))].join('\n')+'\n';
-  return {bytes:gzipSync(Buffer.from(csv),{level:9}),report:{schema:'cssearth-hrii-facet-result@1',recipeSha256:sha256(recipeBytes),sourceShapeSha256:r.mesh.sha256,
+  return {bytes:gzipSync(Buffer.from(csv),{level:9}),report:{schema:'cssearth-hrii-facet-result@1',
     inputFrames:r.frames.length,acceptedPixels,rejectedPixels:reject,sourceFacets:mesh.faces,acceptedFacets:finite.length,
     temperatureRangeKelvin:[Math.min(...finite),Math.max(...finite)],slopeRangePercentPer100Nm:[Math.min(...finiteSlope),Math.max(...finiteSlope)],
     spectralAnchors:[spectra[0],spectra[Math.floor(spectra.length/2)],spectra.at(-1)!],

@@ -171,7 +171,7 @@
           -0.4472135954999579,
           -0.22360679774997896
         ],
-        "normalOffsetPixels": 3.0,
+        "normalOffsetPixels": 3,
         "gradient": 0.8464568257331848,
         "inside": 2.0054852962493896,
         "outside": 0.42357751727104187
@@ -231,7 +231,7 @@
           -0.35355339059327373,
           -0.35355339059327373
         ],
-        "normalOffsetPixels": 2.0,
+        "normalOffsetPixels": 2,
         "gradient": 0.8993547558784485,
         "inside": 1.716809868812561,
         "outside": 0.2619268000125885
@@ -321,7 +321,7 @@
           -0.35355339059327373,
           -0.35355339059327373
         ],
-        "normalOffsetPixels": 1.0,
+        "normalOffsetPixels": 1,
         "gradient": 0.8680789470672607,
         "inside": 1.746691107749939,
         "outside": 0.25452330708503723
@@ -461,7 +461,7 @@
       {
         "bin": 20,
         "reason": "unmeasurable-outward-limb",
-        "offset": -6.0
+        "offset": -6
       },
       {
         "bin": 25,
@@ -471,7 +471,7 @@
       {
         "bin": 26,
         "reason": "unmeasurable-outward-limb",
-        "offset": 2.0
+        "offset": 2
       },
       {
         "bin": 27,
@@ -495,7 +495,6 @@
       }
     ],
     "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain.",
-    "sourceShapeSha256": "0553bcaf1733d520efa30abf3832f6af6ba3c93b4d146fa373e8e81f03e21940",
     "nominalPixelScaleMeters": 4.514,
     "maximumRmsMeters": 20,
     "maximumResidualMeters": 40

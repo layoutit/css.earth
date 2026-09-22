@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "48a4b472da24ef5972097d7dbeace883a0c35c99b167cfa634d1169e0c01b590",
       "origin": "https://arxiv.org/abs/2308.08062",
       "credit": "Rommel et al. (2023), A&A 678, A167; nine stellar-occultation campaigns",
       "license": "MIT numeric extraction of published scientific facts",

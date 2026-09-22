@@ -44,7 +44,7 @@ Limb columns: the position-angle residual between the projected limb and the pho
 
 - **Orientation:** Small optical librations and dynamical phase errors are not represented.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## False color preparation
 
@@ -94,7 +94,7 @@ Every examined source, with its decision and what would reopen it, is in the [in
 
 Cassini frame `N1860792100_1` is not used: its published camera places 99.9% of the lit source shape on the photograph's sky while the photographed body lies elsewhere in the frame, so preparation refuses it. No camera correction is invented, and the frame had supplied no displayed samples.
 
-[NASA’s Pandora overview](https://science.nasa.gov/saturn/moons/pandora/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `runtime-assets.json`.
+[NASA’s Pandora overview](https://science.nasa.gov/saturn/moons/pandora/) supplies editorial context. JPL values in the vendored astronomy package supply the physical radius and orbit used by the shared application. Restore source bytes with the authored acquisition recipe, then run the shared object preparer; prepared runtime files are distributed through `inventory.json`.
 
 The initial camera uses the prepared ecliptic presentation basis and the radial mesh’s CSS X/Y transport to face the source portrait direction; geographic longitude/latitude are not copied into scene yaw/pitch.
 

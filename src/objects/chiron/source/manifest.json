@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 63139,
-      "expectedSha256": "8eff35068959c66f31d5bf148a9274e1d6a5ab946fad2626307773eaf981c884",
       "consumers": [
         "shape"
       ],
@@ -126,8 +124,6 @@
     },
     {
       "path": "reference/sbdb.json",
-      "expectedBytes": 4347,
-      "expectedSha256": "b046ad2dd6a7a01fbb85a0c151036f666972e96f3c9d4338511a0d930ef373f4",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

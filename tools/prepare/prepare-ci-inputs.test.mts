@@ -15,16 +15,20 @@ async function fixture(t: { after: (cleanup: () => Promise<unknown>) => void }) 
     await mkdir(dirname(file), { recursive: true });
     await writeFile(file, JSON.stringify(value));
   };
+  type Asset = { location: string; filename: string; bytes: number; sha256: string };
+  // Adds files to the object's one inventory: `prepared` (or a `runtime` set rooted in prepared/) or public textures.
   const inventory = async (id: string, kind: 'prepared' | 'runtime', filenames: string[], resourceRoot?: 'prepared') => {
+    const location = kind === 'prepared' || resourceRoot === 'prepared' ? 'prepared' : 'public';
     const assets = filenames.map(filename => {
       const bytes = Buffer.from(`${id}/${filename}`);
       const digest = sha256(bytes);
       payloads.set(`runtime-assets/${digest}/${filename}`, bytes);
-      return { filename, bytes: bytes.length, sha256: digest };
+      return { location, filename, bytes: bytes.length, sha256: digest };
     });
-    await json(`src/objects/${id}/${kind}-assets.json`, {
-      schema: `css${id}-${kind}-assets@1`, ...(kind === 'prepared' || resourceRoot ? { resourceRoot: 'prepared' } : {}), assets,
-    });
+    const file = resolve(root, `src/objects/${id}/inventory.json`);
+    const current: Asset[] = await readFile(file, 'utf8').then(text => JSON.parse(text).assets).catch(() => []);
+    const kept = current.filter(asset => !assets.some(next => next.location === asset.location && next.filename === asset.filename));
+    await json(`src/objects/${id}/inventory.json`, { schema: 'cssearth-inventory@1', assets: [...kept, ...assets] });
   };
   await inventory('mimas', 'prepared', ['runtime.json', 'scene.json']);
   await inventory('mimas', 'runtime', ['surface.webp']);
@@ -63,7 +67,7 @@ test('preparation selection retains all prepared packages and real fixture textu
   const assets = await ciPreparationInputs(root);
   assert.deepEqual(assets.map(asset => `${asset.id}/${asset.filename}`).sort(), [
     'helix/lenses.json', 'helix/presentation.json', 'helix/provenance.json', 'helix/slice.webp',
-    'local-group/presentation.json', 'local-group/provenance.json',
+    'local-group/catalogue.json', 'local-group/presentation.json', 'local-group/provenance.json',
     'milky-way/slices/z/one.webp', 'milky-way/volume.json',
     'mimas/runtime.json', 'mimas/scene.json', 'mimas/surface.webp',
     'new-body/runtime.json', 'new-body/scene.json',

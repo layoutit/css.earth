@@ -162,8 +162,6 @@
     {
       "id": "usgs-gazetteer-deimos-nomenclature-center-pts",
       "path": "features/DEIMOS_nomenclature_center_pts.zip",
-      "expectedBytes": 42393,
-      "expectedSha256": "9c81729a25ba60d24b34174d9d578d13f164894dbd88821124cd57dbe57f067c",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/DEIMOS_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

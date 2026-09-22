@@ -20,7 +20,7 @@ The candidate dispositions and their source evidence are recorded in the [invest
 
 - PCK00011 gives only a spherical mean-radius entry for Despina; **it is not the source of the three ellipsoid axes**. The published axes carry measurement uncertainty, and the simple ellipsoid cannot represent local irregularities beyond the fitted dimensions.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

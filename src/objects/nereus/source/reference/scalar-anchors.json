@@ -1,5 +1,4 @@
 {
-  "sourceSha256": "894989269e8cf2db397933247cfe4650408eecde3e59d5966161532b84c88b19",
   "method": "Existing independent NumPy plane/edge projection against every original source triangle; retained face centroids, source extrema and every multiple-ray source centroid.",
   "fullCheckCount": 806,
   "fullWithheldCount": 0,
@@ -13,11 +12,11 @@
       ],
       "point": [
         -253.80700000000002,
-        0.0,
-        0.0
+        0,
+        0
       ],
       "value": 0.088807,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 1085
     },
@@ -30,11 +29,11 @@
       ],
       "point": [
         256.398,
-        0.0,
-        0.0
+        0,
+        0
       ],
       "value": 0.09139800000000001,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 1026
     },
@@ -51,7 +50,7 @@
         -19.526999999999997
       ],
       "value": 0.02085213119574389,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 1243
     },
@@ -63,12 +62,12 @@
         -17.008
       ],
       "point": [
-        0.0,
+        0,
         161.38,
         -17.008
       ],
       "value": -0.0027262298952785147,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 1175
     },
@@ -85,7 +84,7 @@
         -121.684
       ],
       "value": -0.042654994785238584,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 2273
     },
@@ -98,11 +97,11 @@
       ],
       "point": [
         38.737,
-        0.0,
+        0,
         119.535
       ],
       "value": -0.03934503036489165,
-      "distanceMeters": 0.0,
+      "distanceMeters": 0,
       "accepted": true,
       "sourceFace": 24
     },

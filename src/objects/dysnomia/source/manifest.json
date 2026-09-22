@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "d423689f06aabfecbebb6b63a2419ca869b140afce9f20191d0ef74764bfaad1",
       "consumers": [
         "shape"
       ],

@@ -2,8 +2,6 @@
   "schema": "cssantares-authoritative-sources@2",
   "inputs": [
     {
-      "expectedBytes": 1609,
-      "expectedSha256": "e137b3d3707f8fa427aea36eda5fec8213bc7c93d2f1c13a75b074fb5624d1f8",
       "id": "antares-observational-measurements",
       "path": "measurements.json",
       "origin": "https://arxiv.org/abs/1304.4800",

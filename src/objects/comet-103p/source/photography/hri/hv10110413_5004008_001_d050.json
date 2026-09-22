@@ -62,15 +62,15 @@
         "partition": "fit",
         "modelPixel": [
           471.5,
-          294.0
+          294
         ],
         "sourcePixel": [
-          470.0,
-          294.0
+          470,
+          294
         ],
         "normal": [
-          1.0,
-          0.0
+          1,
+          0
         ],
         "sourcePointMeters": [
           -111.8496540451888,
@@ -79,7 +79,7 @@
         ],
         "projectionOffsetPixels": [
           0.5,
-          0.0
+          0
         ],
         "normalOffsetPixels": -1.5,
         "gradient": 0.4259091019630432,
@@ -111,7 +111,7 @@
           -0.4472135954999579,
           -0.22360679774997896
         ],
-        "normalOffsetPixels": 3.0,
+        "normalOffsetPixels": 3,
         "gradient": 0.7296294569969177,
         "inside": 1.6415033340454102,
         "outside": 0.3698659837245941
@@ -231,7 +231,7 @@
           -0.35355339059327373,
           -0.35355339059327373
         ],
-        "normalOffsetPixels": 2.0,
+        "normalOffsetPixels": 2,
         "gradient": 1.2374513149261475,
         "inside": 2.02675461769104,
         "outside": 0.2895928621292114
@@ -261,7 +261,7 @@
           -0.35355339059327373,
           -0.35355339059327373
         ],
-        "normalOffsetPixels": 1.0,
+        "normalOffsetPixels": 1,
         "gradient": 1.0762088298797607,
         "inside": 2.089712381362915,
         "outside": 0.26248884201049805
@@ -321,7 +321,7 @@
           -0.35355339059327373,
           -0.35355339059327373
         ],
-        "normalOffsetPixels": 1.0,
+        "normalOffsetPixels": 1,
         "gradient": 0.8221516013145447,
         "inside": 1.8016835451126099,
         "outside": 0.3028232157230377
@@ -362,15 +362,15 @@
         "partition": "holdout",
         "modelPixel": [
           353.5,
-          196.0
+          196
         ],
         "sourcePixel": [
-          355.0,
-          196.0
+          355,
+          196
         ],
         "normal": [
-          -1.0,
-          0.0
+          -1,
+          0
         ],
         "sourcePointMeters": [
           146.08346222003456,
@@ -379,7 +379,7 @@
         ],
         "projectionOffsetPixels": [
           -0.5,
-          0.0
+          0
         ],
         "normalOffsetPixels": -1.5,
         "gradient": 0.7721480131149292,
@@ -431,7 +431,7 @@
       {
         "bin": 20,
         "reason": "unmeasurable-outward-limb",
-        "offset": -11.0
+        "offset": -11
       },
       {
         "bin": 25,
@@ -471,11 +471,10 @@
       {
         "bin": 40,
         "reason": "unmeasurable-outward-limb",
-        "offset": -5.0
+        "offset": -5
       }
     ],
     "limitations": "Measures pointing consistency at observable limbs; does not establish sub-pixel absolute surface coordinates or validate dark/poorly constrained terrain.",
-    "sourceShapeSha256": "0553bcaf1733d520efa30abf3832f6af6ba3c93b4d146fa373e8e81f03e21940",
     "nominalPixelScaleMeters": 3.872,
     "maximumRmsMeters": 20,
     "maximumResidualMeters": 40

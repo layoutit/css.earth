@@ -24,8 +24,6 @@
         "referenceRadiusMeters": 54895
       },
       "coverage": "Convex light-curve reconstruction with approximate thermal size: 109.79 km effective diameter (catalog ±1.54 km; additional shape and thermal-model uncertainty). Thermal size is used as a volume-scale approximation; the grid marks unavailable imagery. The physical size is approximately calibrated by assigning the AKARI thermal effective diameter to the mesh volume-equivalent diameter. Neither source mesh nor spin is modified. Convex inversion supplies only broad outline; no resolved craters, concavities, reflectance or regolith texture can be inferred. Absolute rotational phase is illustrative. The archived model comment identifies this pole as consistent with the 1993-10-09 occultation.",
-      "expectedBytes": 82708,
-      "expectedSha256": "0805b6f32ecb1e5e05c9c5a2f79c4cfa521a2370860b4930a728613d2e9bbc9a",
       "sourceBinding": {
         "kind": "catalogued",
         "references": [

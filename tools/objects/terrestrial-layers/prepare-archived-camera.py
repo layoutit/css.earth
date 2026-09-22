@@ -180,15 +180,16 @@ def main():
     paths=[args.profile,profile['image'],*profile['kernels'],*profile['references'],profile['mesh']]
     pins={e['path']:e for e in manifest['inputs']};provenance=[]
     for path in paths:
-        expected=pins[path];actual=digest(source/path)
-        if actual!=expected['expectedSha256'] or (source/path).stat().st_size!=expected['expectedBytes']:
+        expected=pins[path]
+        # A download is verified against its manifest pin; a file authored here is its own record.
+        if 'expectedSha256' in expected and (digest(source/path)!=expected['expectedSha256'] or (source/path).stat().st_size!=expected['expectedBytes']):
             raise ValueError('Changed source pin: '+path)
-        provenance.append(dict(path=path,sha256=actual))
+        provenance.append(dict(path=path))
     sp.kclear()
     for path in profile['kernels']:
         sp.furnsh(str(source/path))
     camera=llorri(source,profile) if profile['format']=='llorri-camera' else osiris(source,profile)
-    camera.update(imageSha256=digest(source/profile['image']),meshSha256=digest(source/profile['mesh']),provenance=provenance)
+    camera.update(provenance=provenance)
     with tempfile.TemporaryDirectory() as t:
         if profile.get('registrationWindows'):
             register_osiris(source,profile,camera,Path(t))

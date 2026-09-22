@@ -1,33 +1,10 @@
-import {requireRecord} from '../../../../tools/sources/source-values.mts';
-import {shape,text} from '../../../../tools/objects/geographic-pages/source-records.mts';
 import {required} from '../../../../tools/contract/test-values.mts';
 import assert from "node:assert/strict";
 import test from "node:test";
-import { createHash } from 'node:crypto';
-import { runtimeDefinition, PREPARED_EARTH_CITY_PAGES, preparePagingDiagnostic } from "../../unit/earth/prepared-fixture.mts";
+import { runtimeDefinition } from "../../unit/earth/prepared-fixture.mts";
 import { objectRuntimePackageTests, retainedPresentationFixture } from "../../../../src/platform/test/object-runtime-package.mts";
 import { mountPreparedPresentation } from "../../../../src/renderers/css/dist/testing.js";
 import { initialObjectSelection } from "../../../../src/renderers/css/dist/testing.js";
-import { parsePreparedObjectRuntime } from '../../../../src/renderers/css/dist/index.js';
-import { SCENE_OBJECTS } from "../../../../site/objects.mts";
-import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
-objectRuntimePackageTests(runtimeDefinition);
-test('diagnostic page substitutions preserve the real renderer and verified prepared envelope',async()=>{
-  const plan={...PREPARED_EARTH_CITY_PAGES,qualification:'Test-only prepared page substitution'};
-  const diagnostic=await preparePagingDiagnostic(plan),descriptor=shape({prepared:shape({sha256:text})})(JSON.parse(diagnostic.descriptorJson)),prepared=shape({data:parsePreparedObjectRuntime})(JSON.parse(diagnostic.preparedJson));
-  assert.equal(descriptor.prepared.sha256,createHash('sha256').update(diagnostic.preparedJson).digest('hex'));
-  parsePreparedObjectRuntime(prepared.data);
-  assert.deepEqual(required(required(prepared.data.pageLayers).find(layer=>layer.id==='city')).plan,{...plan,schema:'cssearth-prepared-map-pages@1',assetPath:'/scenes/earth/'});
-  for(const key of Object.keys(runtimeDefinition).filter(key=>key!=='pageLayers'))assert.deepEqual(Reflect.get(prepared.data,key),Reflect.get(runtimeDefinition,key),key);
-});
-test("Earth's actual import closure has only shared runtime owners", async () => {
-  const audit = await auditObjectRuntimeOwnership({ objects: SCENE_OBJECTS.filter(object => object.id === "earth") });
-  assert.equal(audit.complete, true);
-  for (const name of ["runtime/object-runtime", "rendering/prepared-residency", "rendering/object-selection-runtime", "rendering/object-control-binding", "rendering/prepared-playback", "solar-system/cubic-sky-runtime"]) {
-    assert.ok(audit.sharedClosure.includes(`src/renderers/css/${name}.ts`), name);
-  }
-});
-
 test("Earth keeps each held material image and rotation paired until its directional row is decoded", () => {
   const f = retainedPresentationFixture(runtimeDefinition);
   const Matrix = globalThis.DOMMatrix, calls: {projection:string;degrees:number|undefined}[] = [];

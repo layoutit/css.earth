@@ -16,9 +16,10 @@ Source selections, recorded trials and open questions are in the [investigation 
 | Interior | NASA schematic layers; [GLAD-M35 r0.1](https://doi.org/10.1093/gji/ggae270) | Modeled seismic wave speeds above or below the mean at each depth, not temperature. Crust and core are schematic. |
 | ENSO | [NASA MUR v4.1](https://doi.org/10.5067/GHGMR-4FJ04), 7 September 2026, via GIBS | Sea-surface temperature anomaly imagery relative to 2003–2014; published color bins, not a raw numerical field. |
 
-WorldCover imagery, Buenos Aires noise and GeoNames city inputs remain in the
-[source history](#retained-geographic-sources). The current globe does not enable
-geographic paging, city search or the noise lens.
+City search runs on the GeoNames places catalogue in [source/places](source/places/) (see
+[City coordinates](#city-coordinates)). The WorldCover city imagery pages and the Buenos Aires noise lens
+were removed with their preparation machinery in the pull request that enabled this search; their last
+source records are in the repository history before that change.
 
 ## Evidence
 
@@ -78,7 +79,7 @@ Named features run of 2026-09-15 (this version): `node tools/objects/dist/prepar
   ice and unavailable imagery remain gaps; the display does not reconstruct
   continuous temperature measurements from RGB.
 
-[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Object definition](object.json) · [Preparation settings](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -404,88 +405,21 @@ verify registration against the prepared geographic frame.
 
 </details>
 
-<a id="retained-geographic-sources"></a>
-
-<details>
-<summary>Retained geographic imagery, noise and city-coordinate history</summary>
-
-These inputs describe the retired geographic feature. The current `object.json`
-declares neither `recipe.paging` nor `recipe.destinations`; shared preparation
-therefore omits the geographic pages, noise overlay and city catalogue. The
-source data and earlier processing record remain for provenance.
-
-The earlier normal lens loaded the official [ESA WorldCover 2021 RGB composite through Terrascope
-WMTS](https://docs.terrascope.be/Developers/WebServices/OGC/MapProxy.html). Its browser placed
-each unchanged 256-pixel PNG using prepared CSS matrices and rectangular texture crops. It did
-not download COG files or resample imagery.
-
-The imagery remains subject to the provider's availability and
-[terms](https://terrascope.be/en/terms-use); unlimited free production traffic is not
-established.
-
-`source/city/worldcover-rgbnir-2021.json.gz` is the pinned publisher listing observed on
-2026-09-04: 19,359 source objects, with latitude extent 60 degrees south to 83 degrees north.
-It describes source footprints, including water and nodata, rather than a land mask or
-pixel-validity guarantee. It does not supply Antarctica or the far northern gap.
-
-Blue Marble was the fallback outside available imagery.
-
-[The geometry release record](source/city/wmts-release.json) pins `fef1519d5f243617`.
-The archived preparation mapped provider images to Earth's face planes, including seams and
-polar caps. Each image could have several placement pieces, all prepared before runtime.
-
-File installation does not establish that every imagery page is available or contains valid
-pixels.
-
-The [historical global delivery report](https://github.com/layoutit/cssEarth/blob/cc01831f595e0b73ab6699d6235cf7b466f76cfc/docs/global-earth-coverage.md) records pack layout,
-memory limits, serving, preparation and delivery checks. Its dated publication
-result is summarized in Evidence above. Earlier resampled-COG experiments in
-`source/city/manifest.json` describe a different dataset; their publication commands do not
-publish the WMTS release.
-
-#### Noise
-
-The retired noise lens used [Buenos Aires APrA's 2025 daytime noise
-estimates](https://data.buenosaires.gob.ar/dataset/mapa-ruido), licensed under [CC BY 2.5
-Argentina](https://creativecommons.org/licenses/by/2.5/ar/). This is an annual estimated noise
-map, not live sensor readings. The original CRS84 GeoJSON is pinned as
-`source/noise/buenos-aires-day-2025.geojson.gz`; its source URL, compressed and decoded SHA-256
-hashes, year, units and license are recorded beside it.
-
-Its preparation rasterized the 181 source features offline, preserving the
-official 30–95 dBA color bins. Sixteen lossless transparent WebP tiles total 3,659,288 bytes.
-Their prepared CSS transforms aligned them with the same Earth face as the base imagery.
-
-Uncolored locations have no estimate. The lens used a fixed 32-slot retained pool, 16 tiles at
-most, a prepared Buenos Aires camera destination and a source legend. Recorded independent
-point-in-polygon tests compared geographic source samples with the prepared raster colors.
+<a id="city-coordinates"></a>
 
 #### City coordinates
 
-`source/places/` retains the GeoNames cities15000 snapshot and its country, region and
-license records, acquired September 4, 2026. The snapshot contains 34,135 populated-place
-records. Its scope is cities above 15,000 people or capitals; it is not every settlement.
+`source/places/` holds the GeoNames cities15000 snapshot with its country, region and
+license records, acquired September 4, 2026: 34,135 populated places above 15,000 people or
+capitals; it is not every settlement. GeoNames data is CC BY 4.0 and is attributed in the search UI.
 
-GeoNames data is CC BY 4.0 and was attributed in the geographic search UI.
+Preparation verifies the snapshot hashes, normalizes names and aliases, maps each place onto the
+prepared globe faces and writes `earth-places.json` with a hash/size descriptor. The search fetches
+that catalogue on demand, verifies its identity, matches the prepared labels and flies the camera to
+the selected place's prepared controls (angles rounded to hundredths of a degree: city navigation,
+not a survey marker). No geocoder or geometry derivation runs in the browser. Every place opens as an
+overview of the globe at its coordinates; there is no city-level imagery.
 
-The historical catalogue preparation verified source hashes, normalized names and aliases,
-and prepared camera controls against the Earth face projection. It wrote `earth-places.json`
-and a hash/size descriptor. The retired search fetched that catalogue on demand, verified its
-identity, searched prepared labels and applied the selected place's prepared camera settings.
-
-No geocoder or geometry derivation ran in the browser. That camera rounded control angles to
-hundredths of a degree; it was city navigation, not a precision survey marker.
-
-Place coverage and imagery coverage are distinct. Locations within the pinned WorldCover source
-footprints opened at 1024x; other locations opened an overview and reported that detail was
-unavailable. City search did not control which geographic regions were prepared.
-
-The recorded implementation kept animated fly-to and surface lenses after a destination
-selection. Prepared footprint coverage does not certify every source pixel. WorldCover leaves
-Antarctica and the far north uncovered, with coastal and polar source gaps. The old city-search
-notes cite ignored screenshots without a retrievable run report.
-
-</details>
 
 <details>
 <summary>Moon facts, sky image and typography</summary>

@@ -1,0 +1,23 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "prepared",
+      "filename": "point-atlas.png",
+      "bytes": 14017,
+      "sha256": "f14d45575bf61c4cadecc1903827c4fa7ecc1b2c75cfedc20e2084fa3aa8379c"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.bin",
+      "bytes": 2799000,
+      "sha256": "2f1ccb3d398715f50c202dea79f42c06906f6476ebef6b5c3074c3bb858e7233"
+    },
+    {
+      "location": "prepared",
+      "filename": "stars.json",
+      "bytes": 434082,
+      "sha256": "2a2aef1da2a74e8bab3d9ef3a87f57a9788bb391ec2dae049acde0289eb3d332"
+    }
+  ]
+}

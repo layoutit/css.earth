@@ -31,8 +31,6 @@
     {
       "id": "published-shape",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "2a7847815cf9b61e921c7264dd5a3caba5a576b46aadb115207f1c6a1f1c2123",
       "origin": "https://arxiv.org/abs/2607.06450",
       "credit": "Margoti et al. (2026), accepted ApJ; 36 stellar-occultation campaigns",
       "license": "MIT authored numerical extraction of published scientific facts",

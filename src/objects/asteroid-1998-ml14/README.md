@@ -28,7 +28,7 @@ The adopted photometric period and uncertainty are retained in the tracked [nume
 
 No calibrated registered optical mosaic, composition map or independent topographic raster was acquired. This is a bounded source disposition, not proof that no other data exist. No generic regolith texture is substituted. The updated numeric reconstruction remains an explicit future replacement candidate.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="1998-ml14-sources-and-preparation"></a>
 <a id="model-identity-scale-and-orientation"></a>

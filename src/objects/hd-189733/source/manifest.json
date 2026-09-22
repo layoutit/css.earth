@@ -184,8 +184,6 @@
     {
       "id": "hd-189733-stellar-color",
       "path": "photometry/stellar-color.json",
-      "expectedBytes": 1144,
-      "expectedSha256": "7fcf4824e022a748064948d0cec2aba5378774d43df4a195db117fa825ca33ff",
       "origin": "https://doi.org/10.1051/0004-6361/202243880",
       "credit": "Gaia DR3 XP sampled spectrum (Montegriffo et al. 2023); CIE 1931 2° observer",
       "license": "Factual numerical measurements; source attribution retained",
@@ -310,8 +308,6 @@
     {
       "id": "hd-189733-cie-1931-2deg-cmf",
       "path": "reference/CIE_xyz_1931_2deg.csv",
-      "expectedBytes": 24021,
-      "expectedSha256": "fa663e3535a7e0763a745993a1f0a192eb0275ac46ad2d1befd7626841e713c1",
       "origin": "https://files.cie.co.at/Publications-datasets/CIE_xyz_1931_2deg.csv",
       "credit": "International Commission on Illumination (CIE), CIE 1931 2° colour-matching functions",
       "license": "CC BY-SA 4.0",

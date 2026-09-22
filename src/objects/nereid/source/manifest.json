@@ -31,8 +31,6 @@
     {
       "id": "size-approximation",
       "path": "shape/ellipsoid.tab",
-      "expectedBytes": 65105,
-      "expectedSha256": "3d1774b4bcf9df00dea95af8d7d94466bb8cfca7280616fc1eb07b30b53fd7bd",
       "origin": "https://doi.org/10.1093/mnras/stw081",
       "credit": "Kiss et al. (2016) ellipsoid family; JPL nominal size; cssEarth approximation and standard grid",
       "license": "MIT display representation from published scientific dimensions",
@@ -65,8 +63,6 @@
     {
       "id": "model-surface",
       "path": "material/neutral.png",
-      "expectedBytes": 153,
-      "expectedSha256": "e38f851b98b472ba61010287d2acf73af54c4ce28094e9fc92683d7d34d67c63",
       "origin": "https://doi.org/10.1093/mnras/stw081",
       "credit": "Kiss et al. (2016) ellipsoid family; JPL nominal size; cssEarth approximation and standard grid",
       "license": "MIT display representation from published scientific dimensions",

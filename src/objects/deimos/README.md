@@ -36,7 +36,7 @@ Feature notes: 2 of the labelled names carry a caption note, the lead summary of
 
 - Complete atlas transfer qualification remains a separate preparation check.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

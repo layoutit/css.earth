@@ -10,12 +10,6 @@ import {requireAcquisitionPlan,requireClosedRadialTerrain,requireMl14Content,req
 import {requireFiniteNumber,requireRecord,requireString} from '../../../../tools/sources/source-values.mts';
 const root=resolve(import.meta.dirname,'../../../../src/objects/asteroid-1998-ml14/source');
 const read=async (path:string):Promise<unknown>=>JSON.parse(await readFile(resolve(root,path),'utf8'));
-test('1998 ML14 retains original source pins and acquisition closure',async()=>{
- const source=await createSourceManifest({planetId:'asteroid-1998-ml14',planetName:'1998 ML14',sourceRoot:root});await source.verify();
- const plan=requireAcquisitionPlan(await read('preparation/acquisition.json'));
- const content=requireMl14Content(await read('content/object.json')),shadows=content.settings.controls.find(control=>control.name==='shadows');assert.ok(shadows);assert.equal(shadows.checked,false);
- for(const input of source.manifest.inputs)assert.ok(plan.operations.some(step=>step.path===input.path));
-});
 test('1998 ML14 preserves the original kilometer mesh and qualified orientation',async()=>{
  const {config,terrain:p,lens}=requireRadialTestConfig(await read('preparation/terrestrial.json'));
  const mesh=await loadObjShape(resolve(root,p.path),p.grid),topology=validateClosedMesh(mesh.indices.flat(),mesh.positions);

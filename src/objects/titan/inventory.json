@@ -1,0 +1,443 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "titan-coverage-distance@2x.webp",
+      "bytes": 2782608,
+      "sha256": "94fdd4f83358cde0861646f6644b65685f4b16c8e4e99f739f7ae6ed831bcbde"
+    },
+    {
+      "location": "public",
+      "filename": "titan-features.json",
+      "bytes": 2077925,
+      "sha256": "8b6fd87fb0d9875f89ae74605c78fbd79ba45a7ef44733cb9a34fc738fad5b91"
+    },
+    {
+      "location": "public",
+      "filename": "titan-geology@2x.webp",
+      "bytes": 208544,
+      "sha256": "d069dfb5f8c1135e05e26dcbeafe498dee5822eb59c2640477d640865c576b4b"
+    },
+    {
+      "location": "public",
+      "filename": "titan-interpolated@2x.webp",
+      "bytes": 2586200,
+      "sha256": "83ef20208fce6b9cd16f5d9641bbbda18007243d4731de72bcee5f0241a0489b"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-coverage-distance.webp",
+      "bytes": 3370,
+      "sha256": "a686a72884a53b603c1895ed0fb56c9e545fbf58cec368f3cd81ee460cc26e47"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-geology.webp",
+      "bytes": 658,
+      "sha256": "3778e00814ea5d17fd8a7a9d20efdf5d3061c291dc7494cfde40086a564a1a6e"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-interpolated.webp",
+      "bytes": 3154,
+      "sha256": "69bca0e7fba303cef688facd7278fcd3c7a810587213f40bde18433d91f6f881"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-normal.webp",
+      "bytes": 1060,
+      "sha256": "4e9c0e25bfd152607e19a9b4c54eb0e4e8decdcdd841f1da5bbc43810cbba335"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-radar.webp",
+      "bytes": 1572,
+      "sha256": "b7f18cea26c004b33e8a5949fef2873cef0a2ce7a685e0855ecd9e7920eca589"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lens-topography.webp",
+      "bytes": 832,
+      "sha256": "829b0dc4a86440fbc84bc89aca71619dbbb4fba6970fd1387ae1361e6b5fa2ec"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-billboard.webp",
+      "bytes": 115740,
+      "sha256": "de2473d298dfacd0e42f710629536fb7591083c2647f4d4a547602d01b2c1367"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-00.webp",
+      "bytes": 37672,
+      "sha256": "ec6ee915f55a668fc95dacfef1499a42bd118a4aac16f3777b66e819ee31e2f2"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-01.webp",
+      "bytes": 70898,
+      "sha256": "e4b9d197c7d62aecdae0144b33895e7f55dd005c84a96ca6409b0f5869700fbc"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-02.webp",
+      "bytes": 92030,
+      "sha256": "5c752b1be40564aaba7d9ccadc0edba838ecaf4cc8fe5794efe58b404d4f6556"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-03.webp",
+      "bytes": 106840,
+      "sha256": "11824e8fda78b665117d9d40d63495cb36f768377d768b62c383a369ed40758c"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-04.webp",
+      "bytes": 120584,
+      "sha256": "55b22230f6aef465a46c3a66b00ab246dc223b080ca3d97412e2667f37deb66f"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-05.webp",
+      "bytes": 132094,
+      "sha256": "a4cb1a4c54322a74ec9bcecd3b0ed4bb5ef9773db946a3a8d7aed8ef33f34d20"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-06.webp",
+      "bytes": 143228,
+      "sha256": "2586ccfe25f6bbd21d438a5b97551031e9a7b9b6d87f04872aacfc6ffe6cb39c"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-07.webp",
+      "bytes": 153142,
+      "sha256": "65482bb8de64f684ee6587ccc0f7ed0e7f0b3a6494b1dfa6510ed8c9dff79632"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-08.webp",
+      "bytes": 163984,
+      "sha256": "0f13d5d4cf8a8591660f47e32deae93a3006e18b3aa10bc4b96942beadc14600"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-09.webp",
+      "bytes": 172632,
+      "sha256": "b3bdd0776903940bc8c77ce34918ff6a6a0638dfe47ebb1896a3d2050f3ab1a3"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-10.webp",
+      "bytes": 177128,
+      "sha256": "1ad6e95b79025596c3ae11e928658923be4408dbd611f58e22475436812594e2"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-11.webp",
+      "bytes": 179144,
+      "sha256": "4920b80933238f45a83133c2c04c73b9f37f9bfefdf16afca4a1e1af9edcfbab"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-12.webp",
+      "bytes": 173518,
+      "sha256": "c1e8fb56dbb734572cfcace301f7b373cb03743d4245cfad6f3059451d43e3af"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-13.webp",
+      "bytes": 161150,
+      "sha256": "47d37733690f0de2136da2515f561e7f1cb520e5c9eaf8c38e06944ef0b25f91"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-14.webp",
+      "bytes": 132038,
+      "sha256": "07b759240df293f70fba1d761088cbff06844fdbc0cfbb4f50bde670b60ad583"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-15.webp",
+      "bytes": 69930,
+      "sha256": "2990c3e0953a66fbc2f1f7fff4006abbc014742c34d6ccc6f58e1f69750e8bac"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-16.webp",
+      "bytes": 74522,
+      "sha256": "4cd554323a5b4c4d7d302fd75f077ee0829bd995f69028cdeed09cb71430a95d"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-17.webp",
+      "bytes": 143520,
+      "sha256": "2ecca046c7a3ccfc32431f93ca3bfc1da1eed02c8faee885a51d32103ad550d4"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-18.webp",
+      "bytes": 185628,
+      "sha256": "659839c1f5c68b28b73226c72861311cc2e223face47af04284f01c58462da9a"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-19.webp",
+      "bytes": 218252,
+      "sha256": "0032b3cb244f0ef0d03e4176f2cca51a5efc25c6dac0a928fd70073c39a27e01"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-20.webp",
+      "bytes": 245184,
+      "sha256": "dee7965558ba47853e80d02af052eb3d8d96c2cb0f9ea6ece30b8604af899ad6"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-21.webp",
+      "bytes": 269836,
+      "sha256": "160e8c89beb6880cca9d1c4c49c1d7ae8d42be1f1f1bac790bcc1ae098809f41"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-22.webp",
+      "bytes": 291326,
+      "sha256": "64714cc753f56a2a794c09926acd4f589c69ebedc97b7636576aa2e8a8391318"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-23.webp",
+      "bytes": 312110,
+      "sha256": "f1fc46cc87683bce654494f74cb30e03e7490b8fcc50c00a1acda54ce7b014f2"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-24.webp",
+      "bytes": 333302,
+      "sha256": "866d79248222db2db636fade29aa0ca9009fba80fab506c1858e0b515bc23520"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-25.webp",
+      "bytes": 355976,
+      "sha256": "ae19b305ce1eeb00a4a9318a2be187734482bcd93f2d992d236fbf813072766c"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-26.webp",
+      "bytes": 377782,
+      "sha256": "c981f9f2abc41afe63dcacee618425a422b37f88579dc7cb294919bfc03062d1"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-27.webp",
+      "bytes": 403282,
+      "sha256": "cc34f5b92eeb1ae06c753ba286c86b36e5e9b91b06ff7b1d8f8aaa124bfa56e8"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-28.webp",
+      "bytes": 429004,
+      "sha256": "e0dbc0c14c173d8ae855d6cbd9b240ce8e4b43383e01c49701f3628415b1704e"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-29.webp",
+      "bytes": 456570,
+      "sha256": "2859562bb82812c38c6c6adcf748be8d5afc47ce68e6a3091255f24e489016cf"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-30.webp",
+      "bytes": 481914,
+      "sha256": "e82ae2b58ba24928ad234c6aed182dc48c900ac0c04a61509519f93562d8b2b9"
+    },
+    {
+      "location": "public",
+      "filename": "titan-lighting-2x-row-31.webp",
+      "bytes": 526556,
+      "sha256": "76c1894c034234d95fe67d23bc98574e4a1055f9629dd702fa0ae2f3223d0637"
+    },
+    {
+      "location": "public",
+      "filename": "titan-normal@2x.webp",
+      "bytes": 3477388,
+      "sha256": "0b22e5f53ac8ff0f293460bba1a5eebe795690796cf7983b87bb076b942c8655"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-coverage-distance@2x.webp",
+      "bytes": 89272,
+      "sha256": "a0ffe240da5de811a844574cfabd69b53eaf299675aed6a4bce7d154507dfef7"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-geology@2x.webp",
+      "bytes": 16728,
+      "sha256": "2cdabb1e7d2355b546e0cf0258b061957b7c729f33a1d13f4f09117126dc2442"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-interpolated@2x.webp",
+      "bytes": 118052,
+      "sha256": "bdfd3d10e1eb0c67b5320383940fb1c28f2a449e5b17d33146cbd4550a753a47"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-normal@2x.webp",
+      "bytes": 181576,
+      "sha256": "175586539358b4b407f3505365789277faaa3dcfbf190ef3fb6f865710026599"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-radar@2x.webp",
+      "bytes": 286340,
+      "sha256": "f71a2d97094ae55c9c28bfa8910a0385c864dc517c3aa2e0f78ca6520b985855"
+    },
+    {
+      "location": "public",
+      "filename": "titan-poles-topography@2x.webp",
+      "bytes": 66374,
+      "sha256": "67ae1c5bad15c442362428bbbe8b3b243040fbcbfb6049887e804b772dd81123"
+    },
+    {
+      "location": "public",
+      "filename": "titan-radar@2x.webp",
+      "bytes": 13254156,
+      "sha256": "fe7cd89a697af4edfaefebe12907cc7f6db381bf1530f26c44de0d1e29ba74f0"
+    },
+    {
+      "location": "public",
+      "filename": "titan-topography@2x.webp",
+      "bytes": 935566,
+      "sha256": "967933b9a5361088458b98aae2816b3b95370ed6ba17a99064aadc25315ae9f9"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 93233,
+      "sha256": "74a25cee30275fa46d4c750c8632133475a27711a6562c4bf90508ee042b430e"
+    },
+    {
+      "location": "prepared",
+      "filename": "authored-preparation.json",
+      "bytes": 1556,
+      "sha256": "a2cf27af9237b6eae7d4629ba7af2c95605211b8632d54dda1961e3166002d7a"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 5265,
+      "sha256": "8e2f141303d2791b768bcde67b6895bb49c7e1b71c1f2c3d91e160b7dcff76c8"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 5736,
+      "sha256": "ff1a258311ef5c6713e59a823344ac8a10d85cb4972ce4964ef41a5121a96ef0"
+    },
+    {
+      "location": "prepared",
+      "filename": "features.json",
+      "bytes": 799,
+      "sha256": "0bc64e18fbeffa8161c3c0eda25ddf4df96f493ed680a09bddd1bb8d38b0327f"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 7640,
+      "sha256": "b420996ff018840e79fc0c2154336006c702b8aa19ef11ce81ce768c220aae33"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 28529,
+      "sha256": "47ce75ce940edb4e3087374da8297dabd777d1b9e61db4a4cfe87310053ba7e0"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 481,
+      "sha256": "21fac1e5fbbcc0cf36038109b5d0e72b37bb79c8adc5c624f1e791ab2bf2fa32"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/coverage-distance.webp",
+      "bytes": 113364,
+      "sha256": "c6360f58fd99398928dbdfd160e6c139e66f02bbd72c28750ab4ba42081df636"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/geology.webp",
+      "bytes": 17072,
+      "sha256": "6a81435b14fe109d10dab706861c714258efe7197b7c85c84771294fbbbd10c7"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/interpolated.webp",
+      "bytes": 98706,
+      "sha256": "75cb71124e59598dcb7b3ebee497e9162bd16f77bc674dccaee49fc1eb07b48f"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/normal.webp",
+      "bytes": 35334,
+      "sha256": "0be02fc7774ae698454cd63779b105df81b3e4f7867ff6c1a90c2bbcc6b39304"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/radar.webp",
+      "bytes": 62860,
+      "sha256": "c292f6473e5d31b0a791917014488fa255faf69a2f4d6a2f3b73962ca0967657"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/topography.webp",
+      "bytes": 28858,
+      "sha256": "021eacffa56f78c080cc7aea48d34c0208613c2e2bdbe83c8d9ec7c11516a9b0"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 451626,
+      "sha256": "6187c6c67d24eb57bcce1564e5f144a1f57472e1be1c2c62840d14b694f8f0a6"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 334553,
+      "sha256": "a33f0fa9ffaa8a593194cd3046cf00c7846c2d6f01a79c4b7a1317dc9bbfed38"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1030,
+      "sha256": "e77d29a7886a4a779f98e7b961b3ed16e6aa1780491cf229debe7c962caedd6d"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 613,
+      "sha256": "67eee75decb4276c33c13ab161dd612dfb4b233d8f2aa2857ed397703ee79dd6"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 13338,
+      "sha256": "a4e2e623bd5ba3b9333556c09329354893dc00dafbd30ee01d38dd78519dcd39"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1730,
+      "sha256": "4297e00caaf2765944a71b4750715fee4128fcd875845b1c10bbb6089db601f4"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1223,
+      "sha256": "28ebe838364132825cdd9ce0aff389df34c364f788fb788521ab5f1530b1ea70"
+    }
+  ]
+}

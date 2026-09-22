@@ -81,8 +81,8 @@
   ],
   "id": "ambrosia",
   "displayName": "Ambrosia",
-  "lambda": 141.0,
-  "beta": -11.0,
+  "lambda": 141,
+  "beta": -11,
   "periodHours": 6.58167,
   "version": "2013-02-11",
   "nonconvex": false,
@@ -99,7 +99,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2160/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/2158/IAUspin.txt",
-  "shapeSha256": "f448756b26da376283009caf5049d40dc1054ed2370c003ee80fe2cf831ecf49",
   "shapeBytes": 81088,
   "vertices": 1002,
   "faces": 2000,
@@ -143,7 +142,7 @@
     "closed": true,
     "consistentWinding": true,
     "nondegenerateFaces": 2000,
-    "minDoubleTriangleAreaSourceUnits2": 1.0631408642311955e-07
+    "minDoubleTriangleAreaSourceUnits2": 1.0631408642311955e-7
   },
   "independentAnchors": [
     {
@@ -307,8 +306,8 @@
   "coordinateConvention": {
     "frame": "source co-rotating Cartesian coordinates; ecliptic J2000 pole",
     "longitude": "positive X is reference meridian; positive Z is spin axis",
-    "spinEpochJd": 2450941.0,
-    "spinPhaseDegrees": 0.0,
+    "spinEpochJd": 2450941,
+    "spinPhaseDegrees": 0,
     "renderedAbsolutePhase": "illustrative; no absolute epoch attitude claim"
   },
   "sourceUnits": "Dimensionless archive coordinates; measured volume near1 source units cubed, not assumed.",

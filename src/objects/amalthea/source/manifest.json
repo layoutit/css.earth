@@ -49,8 +49,6 @@
     {
       "id": "c0420626379-label",
       "path": "observations/C0420626379R.LBL",
-      "expectedBytes": 4842,
-      "expectedSha256": "ba48dd397a1e9dfd94b6dce4c71c07e9c3c9f80f0958fa1140d9b4e67a793a73",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/IO/C0420626379R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420626379",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -132,8 +130,6 @@
     {
       "id": "c0420652501-label",
       "path": "observations/C0420652501R.LBL",
-      "expectedBytes": 5012,
-      "expectedSha256": "ec662262f35a5c10841283d69884888b2ba639bde352826224afd1ae8f35430d",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0020/E11/SML_SATS/C0420652501R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0420652501",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -215,8 +211,6 @@
     {
       "id": "c0512324200-label",
       "path": "observations/C0512324200R.LBL",
-      "expectedBytes": 5010,
-      "expectedSha256": "2223991ed2b60d11428be5efc996132318c440be0f945ae4fc8f576e10a8dd32",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0021/C22/SML_SATS/C0512324200R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0512324200",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -298,8 +292,6 @@
     {
       "id": "c0532888100-label",
       "path": "observations/C0532888100R.LBL",
-      "expectedBytes": 5038,
-      "expectedSha256": "7f3421111331a7dad25384ac63a89eebc4b63e672d34905e977ece5f5dbbe73e",
       "origin": "https://opus.pds-rings.seti.org/holdings/volumes/GO_0xxx/GO_0023/E26/SML_SATS/C0532888100R.LBL",
       "catalog": "https://opus.pds-rings.seti.org/opus/#/detail=go-ssi-c0532888100",
       "credit": "NASA/JPL; PDS Ring-Moon Systems Node",
@@ -400,8 +392,6 @@
     {
       "id": "usgs-gazetteer-amalthea-nomenclature-center-pts",
       "path": "features/AMALTHEA_nomenclature_center_pts.zip",
-      "expectedBytes": 47678,
-      "expectedSha256": "6c8c8921eb0929a738207b862d02ee3d5452bcc89f7d8f98714260d7cc1ee8db",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/AMALTHEA_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",

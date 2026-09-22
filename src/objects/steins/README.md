@@ -47,7 +47,7 @@ The 18:37:16 candidate needed a 1.56 gain, above the 1.35 limit; later frames ha
 
 **Faithfulness status:** The OSIRIS photographic lens is deferred. The separate Stooke Monochrome map remains source material with its own published control; it does not promote the OSIRIS frames to a registered surface.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="steins-source-record"></a>
 <a id="selected-data-and-bounded-survey"></a>

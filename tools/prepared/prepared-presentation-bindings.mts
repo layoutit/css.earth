@@ -130,7 +130,7 @@ export async function preparePresentationBindings<T extends PresentationSource>(
         depthReason = null;
         const source = definition.surfaceHit;
         if (!source) return rejectDepth('no triangle surface contract');
-        if (definition.pageLayers?.length || definition.motionFrame?.length) return rejectDepth('layered or moving surface');
+        if (definition.motionFrame?.length) return rejectDepth('moving surface');
         const body = nodes[source.target], leaves = [...body.children].map(node => {
           const id = index.get(node); if (id === undefined) throw new TypeError('Surface contains an unprepared child.'); return id;
         });

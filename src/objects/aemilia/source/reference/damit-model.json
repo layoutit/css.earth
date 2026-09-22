@@ -80,8 +80,8 @@
   ],
   "id": "aemilia",
   "displayName": "Aemilia",
-  "lambda": 139.0,
-  "beta": 68.0,
+  "lambda": 139,
+  "beta": 68,
   "periodHours": 24.47869,
   "version": "2018-03-22",
   "nonconvex": false,
@@ -98,7 +98,6 @@
   },
   "shapeUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6142/shape.txt",
   "spinUrl": "https://damit.cuni.cz/projects/damit/stored_files/open/6140/IAUspin.txt",
-  "shapeSha256": "213c1c87869165ef623c8875cf4a9fbf258fd5aeedb6677316e93e75d57d1eff",
   "shapeBytes": 81169,
   "vertices": 1003,
   "faces": 2002,
@@ -246,7 +245,7 @@
   "shapeKind": "Convex light-curve reconstruction",
   "sourceLimitations": "The pinned mesh is an inverse model, not a directly sampled surface. No registered reflectance mosaic is supplied by this release; a neutral grid must mark unavailable imagery. Fine-scale craters, regolith and albedo are unresolved. Absolute rotational phase is illustrative. Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
   "calibrationSelection": "Volume-equivalent diameter from a four-chord 2009-05-02 occultation fit to convex pole1 in Marciniak et al. (2018), Table4. A publication scale is transferred uniformly to the archived mesh of the same nominal pole family. Identity of every vertex with the publication fit is not established. No local topographic or material accuracy follows from the diameter uncertainty. An alternative pole remains possible. Select convex pole 1 (139,68), retaining convex pole 2 (348,59). Marciniak et al. (2018), published Table 4, explicitly reports volume-equivalent occultation diameter 130 ±7 km for this convex pole, whereas archive model 1869 declares 140 ±7 km. Use a named publication-scale override to 130 ±7 km and preserve the raw 140-km mesh bytes. The paper says all four convex/SAGE solutions fit the four-chord occultation and thermal data similarly well; the photometry-only nonconvex SAGE pole1 fit is marginally preferred overall. SAGE does not imply resolved imaging. ISAM release follow-up is recorded separately.",
-  "archiveVolumeDiameterMismatchFraction": 2.1981741094023732e-08,
+  "archiveVolumeDiameterMismatchFraction": 2.1981741094023732e-8,
   "sourceCoordinatePreservation": "Original counted shape bytes, coordinates, vertex order, face order and one-based connectivity are retained unchanged. One preparation-owned uniform scale maps original coordinates to km.",
   "sourceSurvey": [
     {
@@ -279,8 +278,8 @@
     "sourceLabel": "Marciniak et al. (2018), published paper, Table 4",
     "sourceFile": "marciniak-2018-published.pdf",
     "publishedPoleEclipticDegrees": [
-      139.0,
-      68.0
+      139,
+      68
     ],
     "publishedPeriodHours": 24.4787,
     "scaleKmPerSourceUnit": 0.9285714081598123,
@@ -308,8 +307,8 @@
     "sourceLabel": "Marciniak et al. (2018), published paper, Table 4",
     "sourceFile": "marciniak-2018-published.pdf",
     "publishedPoleEclipticDegrees": [
-      139.0,
-      68.0
+      139,
+      68
     ],
     "publishedPeriodHours": 24.4787,
     "scaleKmPerSourceUnit": 0.9285714081598123,

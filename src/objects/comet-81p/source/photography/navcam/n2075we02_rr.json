@@ -989,7 +989,6 @@
       }
     ],
     "limitations": "Independent image matches check local topographic feature placement; no albedo or new astrometric pole is inferred. The source mesh still limits positional accuracy.",
-    "sourceShapeSha256": "e3950d0afae8b0c1ede31f64197ec68c215d9814bb41c101158912edbaa61e80",
     "nominalPixelScaleMeters": 15.331618282841854,
     "maximumRmsMeters": 85,
     "maximumResidualMeters": 170

@@ -19,7 +19,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | enhanced | 17.7 → 23.9 kB |
 | normal | 216.9 → 227.4 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/callisto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/callisto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Lane change (this PR): the terrestrial solid-observation lane was retired for Callisto; the same pinned inputs and the same decoders (`terrestrial-observation` through the raster lane's `science` adapter) now feed the shared raster lane used by Mercury, Venus, Mars, the Moon and Pluto. The sphere is the shared 16 × 32 mesh (450 leaves, 230 units, 50-pixel tile, 0.005 overlap) with the 256-frame Lambert lighting bank and no atmosphere. Surfaces are now painted at one 8192 × 4096 density for every DPR (asset record (`prepared/assets.json`)); native 1 km mosaic 15,146 px wide. Verified with the package, source-closure, minimap and browser conformance checks listed in the pull request; the nomenclature recipe and map edge are unchanged and the labels were re-drawn against the new atlas. No new science review is claimed.
 
@@ -47,7 +47,7 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Infrared:** This is a partial spectral-color view, not natural color or a mineral-abundance map.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -88,7 +88,7 @@ The existing astronomy package supplies JPL parent-relative orbital elements, Ju
 
 ## Checks and source restoration
 
-The original TIFF and font remain reacquirable, ignored inputs. Runtime assets are independently described by `runtime-assets.json`. Publication and isolated installation are separate from local source verification.
+The original TIFF and font remain reacquirable, ignored inputs. Runtime assets are independently described by `inventory.json`. Publication and isolated installation are separate from local source verification.
 
 ## Preparation ownership
 

@@ -217,8 +217,6 @@
     {
       "id": "nasa-mercury-facts-107747",
       "path": "editorial/mercury-facts.json",
-      "expectedBytes": 7537,
-      "expectedSha256": "4c4b1f807240bc9cf70ea042292741a712e76747bc6471f60fbaee65259d0679",
       "origin": "https://science.nasa.gov/wp-json/wp/v2/topic/107747",
       "credit": "NASA Science",
       "license": "United States government work",
@@ -243,8 +241,6 @@
     {
       "id": "nasa-psg-mercury-config",
       "path": "atmosphere/psg-mercury-20260830.cfg",
-      "expectedBytes": 1514,
-      "expectedSha256": "bd6e58116eedcad318322ce6547c8e3b7b3ec1001dde0736517928f701afc66f",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific service output",
@@ -268,8 +264,6 @@
     {
       "id": "dlr-messenger-mascs-global-area-weighted-mean",
       "path": "spectrum/mascs-global-area-weighted-mean.json",
-      "expectedBytes": 13609,
-      "expectedSha256": "b1aaec4f4361318c40d4f4cbc10c798baca0dbfb309cdab41152d6f83925d756",
       "origin": "https://doi.org/10.5281/zenodo.7433033",
       "credit": "M. D'Amore, DLR; NASA MESSENGER MASCS",
       "license": "CC-BY-4.0",
@@ -299,8 +293,6 @@
     {
       "id": "nasa-psg-mercury-r240-rif",
       "path": "atmosphere/psg-mercury-r240-rif.txt",
-      "expectedBytes": 18145,
-      "expectedSha256": "cdfa280505a52188bb445d67689b4413e6ec94a9eae436e35a23f1ec407daa2c",
       "origin": "https://psg.gsfc.nasa.gov/api.php",
       "credit": "NASA GSFC Planetary Spectrum Generator",
       "license": "United States government scientific service output",
@@ -324,8 +316,6 @@
     {
       "id": "nasa-mercury-structure",
       "path": "interior/mercury-structure.json",
-      "expectedBytes": 2092,
-      "expectedSha256": "1a2cf2f0dd8a9636010d5ab9d8f7ed259e4127c17965caee92fa38940de1ea78",
       "origin": "https://science.nasa.gov/mercury/facts/",
       "credit": "NASA Science",
       "license": "United States government work",
@@ -353,8 +343,6 @@
     {
       "id": "inter-mercury-title-vector",
       "path": "presentation/title-mark.json",
-      "expectedBytes": 3993,
-      "expectedSha256": "359cf37a2f6df3358ecc84cd0c7e5bc8dfc316d4137521eba6215f3a2350caaa",
       "origin": "https://raw.githubusercontent.com/rsms/inter/9221beed3/docs/font-files/InterVariable.ttf",
       "credit": "The Inter Project Authors",
       "license": "OFL-1.1",
@@ -531,8 +519,6 @@
     {
       "id": "usgs-gazetteer-mercury-nomenclature-center-pts",
       "path": "features/MERCURY_nomenclature_center_pts.zip",
-      "expectedBytes": 1643245,
-      "expectedSha256": "cd5c44d20ce0a9e167620c7b6799d0adaf228a418539c09e71ac27caa6cdf506",
       "origin": "https://asc-planetarynames-data.s3.us-west-2.amazonaws.com/MERCURY_nomenclature_center_pts.zip",
       "credit": "International Astronomical Union (IAU) and United States Geological Survey (USGS), Gazetteer of Planetary Nomenclature",
       "license": "Public domain (United States Government work); the archived metadata declares the use constraint “Public domain.”",
@@ -593,8 +579,6 @@
     {
       "id": "klimczak-mercury-global-tectonic-map",
       "path": "features/tectonic/global-tectonic-map.zip",
-      "expectedBytes": 6908708,
-      "expectedSha256": "1df40ad95a5e8de90b6add4cb3d849f61697c78f872e3bf0bf46bb67234c2f7e",
       "origin": "https://data.mendeley.com/public-files/datasets/p43b9wttpj/files/cb3689ee-0937-4010-973c-6a79b053341f/file_downloaded",
       "credit": "Christian Klimczak, Paul Byrne and Kelsey Crane, A Global Tectonic Map of Mercury, Mendeley Data, DOI 10.17632/p43b9wttpj.2",
       "license": "CC-BY-4.0",
