@@ -80,8 +80,6 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
-      "expectedBytes": 2454,
-      "expectedSha256": "1c53eb5de62d6bc2465a4f6a85a02204851a1f821ea7d0605bd6c031b9e0cf7f",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -94,8 +92,6 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
-      "expectedBytes": 839,
-      "expectedSha256": "f1bda9eba1032dfa4414729c7d2b7798e95c607400b394a0f24f507ad79bd6b6",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -108,8 +104,6 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored source selection, processing or display configuration; not an external observation.",
-      "expectedBytes": 1235,
-      "expectedSha256": "aab12b142ea281b7bd3faabb6a546b6711340af26b214b9608d7e2c44906578d",
       "sourceBinding": {
         "kind": "local",
         "reason": "Project-authored processing configuration."
@@ -122,8 +116,6 @@
       "origin": "project-authored",
       "credit": "cssEarth contributors",
       "acquisition": "Authored shared navigation frame; only the frame identity and navigation epoch are read. No solar data supplies galaxy positions.",
-      "expectedSha256": "84f7b26c703371a694ef560f80bff255ab81585b3d60756e72037f36af8a81af",
-      "expectedBytes": 3395,
       "sourceBinding": {
         "kind": "local",
         "reason": "Authored application frame identity, not a galaxy measurement."

@@ -11,8 +11,6 @@
       "credit": "ESO",
       "displayCredit": "ESO",
       "acquisition": "publisher publication JPEG. The hash identifies the local JPEG bytes, not a calibrated native scientific array; acquisition details and provider product ID are retained in source/provenance.json.",
-      "expectedSha256": "24b3d51ec8f2d1ad998bb5bb6f83111f251df0b64b21bcaafd1c2213a5d00853",
-      "expectedBytes": 3788911,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -41,8 +39,6 @@
     {
       "id": "recipe",
       "path": "src/objects/m33/source/recipe.json",
-      "expectedSha256": "0ba55895cb5e67e57c894ae9c71a87240ab1448e9cb5b48fdee0915d32d40219",
-      "expectedBytes": 2706,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -56,8 +52,6 @@
     {
       "id": "provenance",
       "path": "src/objects/m33/source/provenance.json",
-      "expectedSha256": "17e205fb26ff54083afb30859f6bec0df62377b1467bc1a8d26a249894434e0d",
-      "expectedBytes": 1387,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."
@@ -71,8 +65,6 @@
     {
       "id": "presentation",
       "path": "src/objects/m33/source/presentation.json",
-      "expectedSha256": "940608d4aa83c03239b7269cf496661f966462c752c318603a996887507760c2",
-      "expectedBytes": 2345,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned processing, source interpretation or presentation record; the published image is separately bound as a material input."

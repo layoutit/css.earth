@@ -96,12 +96,15 @@ function presentation(raw: unknown): Presentation {
       return { ...pin({ path: recipe.path, sha256: recipe.sha256, bytes: recipe.bytes }), id: sourceId(recipe.id) };
     })] };
 }
-function source(raw: unknown): ProvenanceSource {
+/** A manifest input. A download carries its pin; a file authored and tracked here is identified from the bytes the caller read. */
+function source(raw: unknown, identity?: { sha256: string; bytes: number }): ProvenanceSource {
   const value = sourceObject(raw, ['id', 'path', 'origin', 'sourceUrl', 'title', 'credit', 'displayCredit', 'acquisition', 'expectedSha256', 'expectedBytes', 'sourceBinding', 'capture', 'lensId', 'license', 'dependencies']);
+  const pinned = value.expectedSha256 !== undefined;
+  if (!pinned && !identity) throw new TypeError(`Unpinned volume input needs its bytes: ${String(value.path)}`);
   return { id: sourceId(value.id), kind: 'source-input', path: sourcePath(value.path), origin: sourceUrl(value.origin), sourceUrl: sourceUrl(value.sourceUrl),
     title: sourceText(value.title), credit: sourceText(value.credit), acquisition: sourceText(value.acquisition),
-    sha256: sourceDigest(value.expectedSha256), bytes: integer(value.expectedBytes), sourceBinding: parseSourceBinding(value.sourceBinding),
-    dependencies: [...sourceArray(value.dependencies, sourceId)], verification: 'manifest-pin',
+    sha256: pinned ? sourceDigest(value.expectedSha256) : identity!.sha256, bytes: pinned ? integer(value.expectedBytes) : identity!.bytes, sourceBinding: parseSourceBinding(value.sourceBinding),
+    dependencies: [...sourceArray(value.dependencies, sourceId)], verification: pinned ? 'manifest-pin' : 'bytes-verified',
     ...(value.lensId === undefined ? {} : { lensId: sourceId(value.lensId) }),
     ...(value.displayCredit === undefined ? {} : { displayCredit: sourceText(value.displayCredit) }),
     ...(value.license === undefined ? {} : { license: sourceText(value.license) }),
@@ -255,15 +258,19 @@ export async function prepareVolumeProvenance({ root = process.cwd(), objectId, 
     const manifest = sourceObject(json(manifestBytes), ['schema', 'pathBase', 'inputs', 'documents', 'generatedIntermediates']);
     if (manifest.schema !== 'cssearth-volume-source-manifest@1' || manifest.pathBase !== 'repository') throw new TypeError('Invalid volume source manifest.');
     const descriptor = sourceObject(json(await input(`${base}/object.json`)));
-    const sources = [...sourceArray(manifest.inputs, source), ...(descriptor.type === 'image-layer-bank'
+    // Small checked-in evidence records are real compiler inputs, identified from their bytes. Original
+    // rasters/table downloads remain pins, outside source closure.
+    const inputs: ProvenanceSource[] = [];
+    for (const raw of sourceArray(manifest.inputs, sourceObject)) {
+      const path = sourcePath(raw.path);
+      const bytes = path.startsWith('.local/') ? null : await input(path);
+      const entry = source(raw, bytes === null ? undefined : { sha256: sha256(bytes), bytes: bytes.length });
+      if (bytes !== null && (sha256(bytes) !== entry.sha256 || bytes.length !== entry.bytes)) throw new Error(`Changed volume evidence: ${path}`);
+      inputs.push(entry);
+    }
+    const sources = [...inputs, ...(descriptor.type === 'image-layer-bank'
       ? await manifestSources({ documents: manifest.documents, generatedIntermediates: manifest.generatedIntermediates }, root, input) : [])];
     const bySource = new Map(sources.map(source => [source.id, source]));
-    // Small checked-in evidence records are real compiler inputs. Original
-    // rasters/table downloads remain recovered pins, outside source closure.
-    for (const source of sources) if (!source.path.startsWith('.local/')) {
-      const bytes = await input(source.path);
-      if (sha256(bytes) !== source.sha256 || bytes.length !== source.bytes) throw new Error(`Changed volume evidence: ${source.path}`);
-    }
     const prepared = sourceObject(descriptor.prepared);
     if (descriptor.id !== record.objectId || !((descriptor.type === 'volume-lens-bank' && prepared.format === 'cssearth-volume-lenses@1') ||
       (descriptor.type === 'image-layer-bank' && prepared.format === 'cssearth-image-layer-bank@1' && record.lenses.length === 1 && record.defaultLens === 'optical'))) throw new TypeError(`Invalid volume descriptor: ${record.objectId}`);

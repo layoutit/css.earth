@@ -10,8 +10,6 @@
       "title": "Pace (2025), The Local Volume Database, DOI 10.33232/001c.144859; release v1.1.1.",
       "credit": "Andrew B. Pace",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "7d2f231646bfee843e549818f9b3332929afd9c14d5eb450d59e051d07dcebd6",
-      "expectedBytes": 835074,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -33,8 +31,6 @@
       "title": "Unmodified author repository v1.1.1, commit 72dabf7862bf9e9f1cbf6846e8c1a684fdec904c. Original per-object YAML and bibliography.",
       "credit": "Andrew B. Pace",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "d4dfeb5812e357dad6766cf3426805a76511fe48aa4f0bbd52b17b693e2727f4",
-      "expectedBytes": 3949330,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -56,8 +52,6 @@
       "title": "Pace LVDB CC0 1.0 dedication; original scientific papers retain their separate rights.",
       "credit": "Andrew B. Pace",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "a2010f343487d3f7618affe54f789f5487602331c0a8d03f49e9a7c547cf0499",
-      "expectedBytes": 7048,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -79,8 +73,6 @@
       "title": "Original paper references for the catalogue measurements.",
       "credit": "Andrew B. Pace",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "0044298753c9c937c94fc5813e4e6d75479158dae531f7d7dd852d3af4680fce",
-      "expectedBytes": 876966,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -102,8 +94,6 @@
       "title": "McConnachie (2012), AJ 144,4, DOI10.1088/0004-6256/144/1/4; author October2019 Table1 update.",
       "credit": "Alan W. McConnachie; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "4430d15db2b425265a1becd20d0009cbc884b707bc6fd137e71d7505e006ea16",
-      "expectedBytes": 101033,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -125,8 +115,6 @@
       "title": "Text extracted from the first seven pages of the original October2019 Table1 with pypdf5.9.0; numeric membership classifications unchanged.",
       "credit": "Alan W. McConnachie; CDS",
       "acquisition": "First seven PDF pages extracted with pypdf 5.9.0; checked by retained extraction receipt.",
-      "expectedSha256": "0d3a83927f994b6b50fbcb778ace5f4232be13e817920b48c764d5900288afe1",
-      "expectedBytes": 14694,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -148,8 +136,6 @@
       "title": "Author January2021 catalogue: independent audit input, no membership column; astrometry here comes from LVDB.",
       "credit": "Alan W. McConnachie; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "879c15cb0aee9357287fd32268276eff5b36501a11d0b434a5d58c461240502d",
-      "expectedBytes": 60480,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -171,8 +157,6 @@
       "title": "Original 2012 machine-readable membership table; retained for audit, superseded for selection by author October2019 table.",
       "credit": "Alan W. McConnachie; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "26242954e8befa9159a0757cbbcbf0d40f14ffd188ef58fcf1ada0930d17fe39",
-      "expectedBytes": 13027,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -194,8 +178,6 @@
       "title": "Author/CDS original catalogue byte-column descriptions; n_Name meanings G/A/L/N.",
       "credit": "Alan W. McConnachie; CDS",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "b8a381bc6567dbecbfa669edc911d15534033931563f13fa5b9874829c1c18ea",
-      "expectedBytes": 27242,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -217,8 +199,6 @@
       "title": "Graczyk et al. (2020), ApJ904,13; DOI10.3847/1538-4357/abbb2b. Original paper supporting the adopted SMC direct distance and separate statistical/systematic errors.",
       "credit": "Graczyk et al. (2020)",
       "acquisition": "Retained upstream bytes; original URL and byte pins recorded in source/provenance.json.",
-      "expectedSha256": "6e3dd9d45208af0cefaec579deee84f5e6726bfb7e3c7a2257facacbf790711d",
-      "expectedBytes": 3328489,
       "sourceBinding": {
         "kind": "catalogued",
         "references": [
@@ -236,8 +216,6 @@
   "documents": [
     {
       "path": "src/objects/local-group/source/catalogue.json",
-      "expectedBytes": 7398,
-      "expectedSha256": "9e713794c5d86c665845e63cfaf7f2b36ebe34d3c1c5438ee23d69d5e3f6578a",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."
@@ -245,8 +223,6 @@
     },
     {
       "path": "src/objects/local-group/source/presentation.json",
-      "expectedBytes": 2785,
-      "expectedSha256": "164b9c5dbd9636ecada494011a2f1b8e3f915b2d8d5219d30cc8c628dc12e4c8",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."
@@ -254,8 +230,6 @@
     },
     {
       "path": "src/objects/local-group/source/provenance.json",
-      "expectedBytes": 7624,
-      "expectedSha256": "0295fed693904100c581ca1ab610ed86244cc8e96f43138db29da4c7115cb7f3",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."
@@ -263,8 +237,6 @@
     },
     {
       "path": "src/objects/local-group/source/mcconnachie/extract.py",
-      "expectedBytes": 756,
-      "expectedSha256": "d58169afd0c25564ee9075605309152791972651161117cff06fd38d7c0e1d84",
       "sourceBinding": {
         "kind": "local",
         "reason": "Retained authored selection, presentation, provenance or extraction verification; not a separate published source."

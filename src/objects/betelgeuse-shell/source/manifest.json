@@ -193,9 +193,7 @@
       "credit": "Montargès et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL",
       "displayCredit": "Montargès et al. 2026, A&A 711, L12, Fig. B.1; ESO/VLT/SPHERE-ZIMPOL",
       "acquisition": "Publisher figure downloaded unchanged from https://www.aanda.org/articles/aa/full_html/2026/07/aa61023-26/aa61023-26-fig3.jpg; preparation resizes it into this object's dataset preview.",
-      "license": "CC-BY-4.0. Open access under the Creative Commons Attribution 4.0 International licence; retain the citation.",
-      "expectedSha256": "016094a65ecf21a125dc9e4f45625ecf4edf97ddfaa10cd9b955d64bb5cc3292",
-      "expectedBytes": 323819
+      "license": "CC-BY-4.0. Open access under the Creative Commons Attribution 4.0 International licence; retain the citation."
     },
     {
       "id": "preview-veil-2019-12",
@@ -217,9 +215,7 @@
       "credit": "ESO/M. Montargès et al.",
       "displayCredit": "ESO/M. Montargès et al.",
       "acquisition": "Publisher figure downloaded unchanged from https://cdn.eso.org/images/screen/eso2109a.jpg; preparation resizes it into this object's dataset preview.",
-      "license": "CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit.",
-      "expectedSha256": "dc91807cd8b41719cc7e4cc310c99082d9ad02c49a08b51155bb00be2d1fbf17",
-      "expectedBytes": 45713
+      "license": "CC-BY-4.0. ESO images are released under the Creative Commons Attribution 4.0 International licence; retain the credit."
     },
     {
       "id": "veil-2019-12-parameters",
@@ -242,17 +238,13 @@
       "displayCredit": "Montargès et al. (2021)",
       "acquisition": "The published December 2019 clump geometry, density, composition and grain size, transcribed from the paper with its coordinate convention. This record identifies the transcription; the paper is the source.",
       "license": "Published numbers cited under normal scholarly citation; the paper is not redistributed here.",
-      "lensId": "veil-2019-12",
-      "expectedSha256": "a79a54e7124a36cef7a7e4c09e6fbd6b80b70349506700c21d007ef00d547ff3",
-      "expectedBytes": 1155
+      "lensId": "veil-2019-12"
     }
   ],
   "documents": [
     {
       "id": "delivery-json",
       "path": "src/objects/betelgeuse-shell/source/delivery.json",
-      "expectedSha256": "d58cf75f98a181fb39ecc6fe9f62c29d6d4d475ce3a617b304fb5648d417288b",
-      "expectedBytes": 3734,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -261,8 +253,6 @@
     {
       "id": "release-description",
       "path": "src/objects/betelgeuse-shell/source/observations/BETELGEUSE-B-release-description.pdf",
-      "expectedSha256": "66e85b89175b4539a5299f890ed1eee2eda77e9ef128460e165db42289ab01b4",
-      "expectedBytes": 68728,
       "sourceBinding": {
         "kind": "local",
         "reason": "The ESO Phase 3 release description of the collection, retained beside the products it describes."
@@ -271,8 +261,6 @@
     {
       "id": "presentation-json",
       "path": "src/objects/betelgeuse-shell/source/presentation.json",
-      "expectedSha256": "3f1e87debf99ee4d62333eefe44e92a6ee35aa9e8028297041bb8375c71608c4",
-      "expectedBytes": 10768,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -281,8 +269,6 @@
     {
       "id": "previews-emission-2020-off-limb-png",
       "path": "src/objects/betelgeuse-shell/source/previews/emission-2020-off-limb.png",
-      "expectedSha256": "250e938fdd00b7867332e7348ae0805b3cacf6d07d60ca9918d75a3f3856356a",
-      "expectedBytes": 5621,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -291,8 +277,6 @@
     {
       "id": "previews-sio-2023-integrated-line-png",
       "path": "src/objects/betelgeuse-shell/source/previews/sio-2023-integrated-line.png",
-      "expectedSha256": "9c4fcc9406211abccf8c807ef3ef29fbad264fd395606af9f357cd82c9df7ecc",
-      "expectedBytes": 3977,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -301,8 +285,6 @@
     {
       "id": "provenance-json",
       "path": "src/objects/betelgeuse-shell/source/provenance.json",
-      "expectedSha256": "8216524ba8b1b71be31e97f32a8dfe79ca41e9c79d5f7a426230e313a3198b5c",
-      "expectedBytes": 17087,
       "sourceBinding": {
         "kind": "local",
         "reason": "Object-owned delivery, catalogue, provenance or presentation record; the published inputs it cites are bound above."
@@ -313,8 +295,6 @@
     {
       "id": "density-emission-2020-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-emission-2020.ktx2",
-      "expectedSha256": "96262bd61a961228837703d6c0b2491748b61fde062afe871e636d50c3645f2f",
-      "expectedBytes": 50653,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -323,8 +303,6 @@
     {
       "id": "density-sio-2023-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-sio-2023.ktx2",
-      "expectedSha256": "ae5f7f9a70da9a28b1c50f4f8d4064eab830f4efcb095ae9e0df5df004e21fc2",
-      "expectedBytes": 115336,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -333,8 +311,6 @@
     {
       "id": "density-veil-2019-12-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-veil-2019-12.ktx2",
-      "expectedSha256": "15a5d4b31d7d943973d58f148d6de8b2cc0b6badd44895dcafe70ecfef74cd1d",
-      "expectedBytes": 4612,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -343,8 +319,6 @@
     {
       "id": "density-zimpol-v-ktx2",
       "path": "src/objects/betelgeuse-shell/source/density-zimpol-v.ktx2",
-      "expectedSha256": "f1351b9a29e0f29b4ec1a9f2a7e7b0ababce2370ec9426733cc53f2ea5cbf462",
-      "expectedBytes": 283108,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -353,8 +327,6 @@
     {
       "id": "volume-emission-2020-json",
       "path": "src/objects/betelgeuse-shell/source/volume-emission-2020.json",
-      "expectedSha256": "e39e5a0b7a8058aeb285285f562fb7d1d84a1a345a35ac9dd1543e186c31ba5e",
-      "expectedBytes": 1830,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -363,8 +335,6 @@
     {
       "id": "volume-sio-2023-json",
       "path": "src/objects/betelgeuse-shell/source/volume-sio-2023.json",
-      "expectedSha256": "0ec76e2a9bba305a7f2084647edaf044c29bf66bb30a09c880d21e6335c97844",
-      "expectedBytes": 1839,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -373,8 +343,6 @@
     {
       "id": "volume-veil-2019-12-json",
       "path": "src/objects/betelgeuse-shell/source/volume-veil-2019-12.json",
-      "expectedSha256": "aa230dc95509b0fa4f1fe82e70a65d2c87c4dd0d45ac55444bd1be0d67f6a995",
-      "expectedBytes": 1523,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
@@ -383,8 +351,6 @@
     {
       "id": "volume-zimpol-v-json",
       "path": "src/objects/betelgeuse-shell/source/volume-zimpol-v.json",
-      "expectedSha256": "9f4896c3cf7602d3beb49daab887dc2966772a04a8a94ab75da2b7f198293539",
-      "expectedBytes": 1838,
       "sourceBinding": {
         "kind": "local",
         "reason": "Density grid and slab recipe written by tools/objects/source-authoring/betelgeuse-shell/author.mts from the archive products and published parameters bound above."
