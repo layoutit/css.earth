@@ -35,6 +35,11 @@
       "title": "Stereo, shading and limb terrain model",
       "detail": "Shaded relief",
       "summary": "Heights from stereo images, shading and the moon's outline; detail varies."
+    },
+    "voyager-color": {
+      "title": "Voyager color map",
+      "detail": "Green/violet/UV color",
+      "summary": "Voyager's own color frames, 1 to 20 km per pixel, placed by the moon's limb; the unlit north stays unavailable."
     }
   }
 }

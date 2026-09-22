@@ -70,6 +70,9 @@ export interface SurfaceFeatureNavigationRuntime {
   select(id: string): Promise<{ completed: boolean }>;
   selected(): string | null;
   clear(): void;
+  /** A flight into this body is under way (true) or has ended (false). A flight that ends with the body on screen has
+   * landed; one another navigation replaced has not, and drops the loads it held. */
+  setNavigationInFlight?(active: boolean, landed?: boolean): void;
 }
 export interface SurfaceFeatureLayerRuntime extends SurfaceFeatureNavigationRuntime {
   readonly root: HTMLElement;

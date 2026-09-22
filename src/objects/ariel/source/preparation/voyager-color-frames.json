@@ -1,0 +1,330 @@
+{
+  "schema": "cssearth-voyager-color-frames@1",
+  "kernelSet": "voyager",
+  "kernels": [
+    "lsk/naif0012.tls",
+    "pck/pck00010.tpc",
+    "sclk/vg200051.tsc",
+    "fk/vg2_v02.tf",
+    "ik/vg2_issna_v02.ti",
+    "spk/vgr2.ura111.bsp",
+    "spk/ura111.bsp",
+    "ck/vg2_ura_version1_type1_iss_sedr.bc"
+  ],
+  "ckToleranceSeconds": 3,
+  "route": {
+    "observer": -32,
+    "target": 701,
+    "bodyFrame": "IAU_ARIEL",
+    "instrument": -32101,
+    "frame": "VG2_ISSNA",
+    "aberration": "LT+S",
+    "radiusKm": 578.9,
+    "datumShiftDegrees": {
+      "longitude": 0,
+      "latitude": 0
+    },
+    "maximumEmissionDegrees": 60,
+    "maximumIncidenceDegrees": 60
+  },
+  "cellDegrees": 0.1,
+  "wavelengthsMicrometers": {
+    "VIOLET": 0.4,
+    "GREEN": 0.585,
+    "UV": 0.325
+  },
+  "rotation": {
+    "PoleRa": [
+      257.43,
+      0.0,
+      0.0
+    ],
+    "PoleDec": [
+      -15.1,
+      0.0,
+      0.0
+    ],
+    "PrimeMeridian": [
+      156.22,
+      -142.8356681,
+      0.0
+    ],
+    "PoleRaNutPrec": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.29
+    ],
+    "PoleDecNutPrec": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.28
+    ],
+    "PmNutPrec": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.05,
+      0.08
+    ],
+    "SysNutPrec0": [
+      115.75,
+      141.69,
+      135.03,
+      61.77,
+      249.32,
+      43.86,
+      77.66,
+      157.36,
+      101.81,
+      138.64,
+      102.23,
+      316.41,
+      304.01,
+      308.71,
+      340.82,
+      259.14,
+      204.46,
+      632.82
+    ],
+    "SysNutPrec1": [
+      54991.87,
+      41887.66,
+      29927.35,
+      25733.59,
+      24471.46,
+      22278.41,
+      20289.42,
+      16652.76,
+      12872.63,
+      8061.81,
+      -2024.22,
+      2863.96,
+      -51.94,
+      -93.17,
+      -75.32,
+      -504.81,
+      -4048.44,
+      5727.92
+    ]
+  },
+  "output": {
+    "frames": "observations/voyager-color",
+    "labels": "photometry/voyager-color",
+    "report": "reference/voyager-color-placement.json",
+    "oracle": "reference/voyager-color-oracle.json"
+  },
+  "observations": [
+    {
+      "id": "set-19860120-2152",
+      "frames": [
+        {
+          "id": "c2673243",
+          "kind": "geomed",
+          "path": "observations/voyager/C2673243_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2673243_GEOMED.LBL"
+        },
+        {
+          "id": "c2673255",
+          "kind": "geomed",
+          "path": "observations/voyager/C2673255_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2673255_GEOMED.LBL"
+        },
+        {
+          "id": "c2673301",
+          "kind": "geomed",
+          "path": "observations/voyager/C2673301_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2673301_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "set-19860121-2256",
+      "frames": [
+        {
+          "id": "c2676403",
+          "kind": "geomed",
+          "path": "observations/voyager/C2676403_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2676403_GEOMED.LBL"
+        },
+        {
+          "id": "c2676415",
+          "kind": "geomed",
+          "path": "observations/voyager/C2676415_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2676415_GEOMED.LBL"
+        },
+        {
+          "id": "c2676421",
+          "kind": "geomed",
+          "path": "observations/voyager/C2676421_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2676421_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "set-19860122-1235",
+      "frames": [
+        {
+          "id": "c2678106",
+          "kind": "geomed",
+          "path": "observations/voyager/C2678106_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2678106_GEOMED.LBL"
+        },
+        {
+          "id": "c2678112",
+          "kind": "geomed",
+          "path": "observations/voyager/C2678112_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2678112_GEOMED.LBL"
+        },
+        {
+          "id": "c2678118",
+          "kind": "geomed",
+          "path": "observations/voyager/C2678118_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2678118_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "set-19860122-2015",
+      "frames": [
+        {
+          "id": "c2679041",
+          "kind": "geomed",
+          "path": "observations/voyager/C2679041_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2679041_GEOMED.LBL"
+        },
+        {
+          "id": "c2679047",
+          "kind": "geomed",
+          "path": "observations/voyager/C2679047_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2679047_GEOMED.LBL"
+        },
+        {
+          "id": "c2679053",
+          "kind": "geomed",
+          "path": "observations/voyager/C2679053_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2679053_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "set-19860123-0140",
+      "frames": [
+        {
+          "id": "c2679728",
+          "kind": "geomed",
+          "path": "observations/voyager/C2679728_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2679728_GEOMED.LBL"
+        },
+        {
+          "id": "c2679734",
+          "kind": "geomed",
+          "path": "observations/voyager/C2679734_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2679734_GEOMED.LBL"
+        },
+        {
+          "id": "c2679740",
+          "kind": "geomed",
+          "path": "observations/voyager/C2679740_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2679740_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "set-19860124-1438",
+      "frames": [
+        {
+          "id": "c2684340",
+          "kind": "geomed",
+          "path": "observations/voyager/C2684340_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2684340_GEOMED.LBL"
+        },
+        {
+          "id": "c2684342",
+          "kind": "geomed",
+          "path": "observations/voyager/C2684342_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2684342_GEOMED.LBL"
+        },
+        {
+          "id": "c2684344",
+          "kind": "geomed",
+          "path": "observations/voyager/C2684344_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2684344_GEOMED.LBL"
+        }
+      ]
+    },
+    {
+      "id": "set-19860126-1410",
+      "frames": [
+        {
+          "id": "c2690305",
+          "kind": "geomed",
+          "path": "observations/voyager/C2690305_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2690305_GEOMED.LBL"
+        },
+        {
+          "id": "c2690317",
+          "kind": "geomed",
+          "path": "observations/voyager/C2690317_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2690317_GEOMED.LBL"
+        },
+        {
+          "id": "c2690323",
+          "kind": "geomed",
+          "path": "observations/voyager/C2690323_GEOMED.IMG",
+          "labelPath": "observations/voyager/C2690323_GEOMED.LBL"
+        }
+      ]
+    }
+  ],
+  "oracle": {
+    "reference": "mosaic",
+    "path": "observations/aumap-cyl-180180.cub.gz",
+    "grid": {
+      "width": 3652,
+      "height": 1826,
+      "targetName": "Ariel",
+      "centerLongitude": 180,
+      "referenceRadiusMeters": 581100,
+      "polarRadiusMeters": 577700,
+      "origin": [
+        -3652000,
+        913000
+      ],
+      "resolutionMeters": 1000,
+      "specialValueMagnitude": 1e+30,
+      "longitudeRange": [
+        -180,
+        180
+      ]
+    }
+  },
+  "registration": "limb-then-mosaic"
+}

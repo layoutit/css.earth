@@ -1,0 +1,76 @@
+PDS_VERSION_ID                  = PDS3
+RECORD_TYPE                     = FIXED_LENGTH
+RECORD_BYTES                    = 2000
+FILE_RECORDS                    = 1001
+^VICAR_HEADER                   = ("C2657858_GEOMED.IMG", 1)
+^IMAGE                          = ("C2657858_GEOMED.IMG", 2)
+
+DATA_SET_ID                     = "VG2-U-ISS-2/3/4/6-PROCESSED-V1.0"
+PRODUCT_ID                      = "C2657858_GEOMED.IMG"
+PRODUCT_CREATION_TIME           = 2013-09-30T16:00:00
+SOURCE_PRODUCT_ID               = ("C2657858_CALIB.IMG",
+                                   "C2657858_GEOMA.DAT")
+PRODUCT_TYPE                    = GEOMETRICALLY_CORRECTED_IMAGE
+
+/* Image Description  */
+
+INSTRUMENT_HOST_NAME            = "VOYAGER 2"
+INSTRUMENT_HOST_ID              = VG2
+INSTRUMENT_NAME                 = "IMAGING SCIENCE SUBSYSTEM - NARROW ANGLE"
+INSTRUMENT_ID                   = "ISSN"
+MISSION_PHASE_NAME              = "URANUS ENCOUNTER"
+TARGET_NAME                     = "OBERON"
+IMAGE_ID                        = "0066U2-009"
+IMAGE_NUMBER                    = "26578.58"
+IMAGE_TIME                      = 1986-01-15T18:52:46.00
+EARTH_RECEIVED_TIME             = UNK
+SCAN_MODE_ID                    = "5:1"
+SHUTTER_MODE_ID                 = "NAONLY"
+GAIN_MODE_ID                    = "LOW"
+EDIT_MODE_ID                    = "1:1"
+FILTER_NAME                     = "UV"
+FILTER_NUMBER                   = "7"
+EXPOSURE_DURATION               = 15.3600 <SECOND>
+
+START_TIME                      = 1986-01-15T18:52:30.64
+STOP_TIME                       = 1986-01-15T18:52:46.00
+SPACECRAFT_CLOCK_START_COUNT    = "26578:57:544"
+SPACECRAFT_CLOCK_STOP_COUNT     = "26578:58:001"
+
+NOTE                            =
+"MULTI-SPECTRAL ORBITAL LONGITUDE COVERAGE OPTICAL NAVIGATION DAT SET = 6 NA."
+
+DESCRIPTION                     = "This image is the result of geometrically
+correcting the corresponding CALIB image (C2657858_CALIB.IMG). It was created
+using the VICAR software package on a Compaq Alpha running OpenVMS. Routine
+GEOMA was used to remove the intrinsic distortion of the Voyager cameras by
+resampling the image onto a 1000x1000 grid. The routine uses the tabulation of
+reseau marking locations found in the corresponding RESLOC output file
+C2657858_GEOMA.DAT.
+
+See file DOCUMENT/PROCESSING.TXT for more information about the image
+processing history."
+
+OBJECT                          = VICAR_HEADER
+  HEADER_TYPE                   = VICAR
+  BYTES                         = 2000
+  RECORDS                       = 1
+  INTERCHANGE_FORMAT            = ASCII
+  DESCRIPTION                   = "VICAR format label for the image."
+END_OBJECT                      = VICAR_HEADER
+
+OBJECT                          = IMAGE
+  LINES                         = 1000
+  LINE_SAMPLES                  = 1000
+  SAMPLE_TYPE                   = LSB_INTEGER
+  SAMPLE_BITS                   = 16
+  SAMPLE_DISPLAY_DIRECTION      = RIGHT
+  LINE_DISPLAY_DIRECTION        = DOWN
+  HORIZONTAL_PIXEL_FOV          = 4.4930E-04 <DEGREE>
+  VERTICAL_PIXEL_FOV            = 4.4930E-04 <DEGREE>
+  HORIZONTAL_FOV                = 0.4493     <DEGREE>
+  VERTICAL_FOV                  = 0.4493     <DEGREE>
+  REFLECTANCE_SCALING_FACTOR    = 1.0000E-04
+END_OBJECT                      = IMAGE
+
+END

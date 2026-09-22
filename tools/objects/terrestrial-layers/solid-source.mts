@@ -20,7 +20,8 @@ export function parseSolidScience(value: unknown) {
 export const parseColorPhotometry = shape({consumer:text,profile:shape({radiusKm:number,maximumIncidenceDegrees:number,
   maximumEmissionDegrees:number,referenceIncidenceDegrees:number,referenceEmissionDegrees:number,observationWeights:dictionary(number),
   withheld:optional(choice('monochrome','next-observation')),
-  bandLevels:optional(shape({reference:text,cellDegrees:number,minimumOverlapPixels:number}))}),
+  bandLevels:optional(shape({reference:text,cellDegrees:number,minimumOverlapPixels:number})),
+  bandRatios:optional(shape({reference:text,ratios:(value:unknown)=>Object.fromEntries(Object.entries(requireRecord(value)).map(([filter,ratio])=>[filter,number(ratio)])),source:text}))}),
   vectors:shape({sun:text,observer:text}),levels:shape({boundaryPixels:number,luminance:array(number)})});
 export const parseSolidRasterConfig = shape({namespace:text,publicBase:text,
   geometry:optional(shape({radius:number,radiusKm:number,radialTerrain:optional(shape({path:text}))})),

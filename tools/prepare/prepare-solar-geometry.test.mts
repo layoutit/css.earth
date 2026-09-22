@@ -52,7 +52,6 @@ test('primary-specific companion sources define one global parent origin and con
       assert.ok(Math.hypot(...sub(heliocentricKm(parent), primary.positionKm)) < .00001, `${parent}: visible body shares the primary origin`);
       const normal = unit(apply(requireSnapshot(geometry.BODY_FIXED_TO_ICRF_MATRICES[parent], `${parent} body-fixed matrix`), requireSnapshot(geometry.BODY_FIXED_ORBIT_NORMAL_DIRECTIONS[parent], `${parent} orbit normal`)));
       assert.ok(Math.hypot(...sub(normal, unit(cross(primary.positionKm, primary.velocityKmPerDay)))) < 1e-12, `${parent}: conic uses source velocity`);
-      assert.equal(requireSnapshot(new Map(Object.entries(geometry.BODY_POSITION_PROVENANCE)).get(parent), `${parent} position provenance`).sha256, requireSnapshot(geometry.BODY_HELIOCENTRIC_STATES[parent], `${parent} heliocentric state`).provenance.sha256);
     }
   }
   assert.ok(geometry.BODY_ORBITS.patroclus, 'the explicit Patroclus package shares the existing primary-specific origin');

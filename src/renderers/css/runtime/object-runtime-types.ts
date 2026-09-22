@@ -59,6 +59,8 @@ export interface ObjectMountOptions {
   onNavigationReady?(navigation: import('./world-navigation-types.js').ObjectWorldNavigation): void;
   /** Caller keeps the destination coarse until ready; direct/restored views stay atomic. */
   progressiveActivation?: boolean;
+  /** The camera is still flying to this object; its catalogue loads wait for the flight's end (setNavigationInFlight). */
+  arrivingByFlight?: boolean;
   initialProjection?: import('../prepared-data/physical-projection.js').PhysicalProjection;
 }
 export interface PreparedNavigation { maximumZoom: number; camera?: OrbitStateUpdate; }

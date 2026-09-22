@@ -80,6 +80,11 @@
               "id": "normal",
               "source": "content",
               "material": "lighting"
+            },
+            {
+              "id": "voyager-color",
+              "source": "content",
+              "material": "lighting"
             }
           ]
         }
