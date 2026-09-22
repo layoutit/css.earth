@@ -28,7 +28,7 @@ test('independent discovery outcomes retain empty, overflow-unsupported, and fai
   try {
     const eso = await metadata('eso-obscore.xml', SERVICES[0]!.service), alma = await metadata('alma-obscore.xml', SERVICES[1]!.service);
     const empty = snapshot(SERVICES[0]!, { ...eso, rows: [], times: [] }, 'bounded-sample');
-    const unsupported = snapshot(SERVICES[1]!, { ...alma, queryStatus: 'OVERFLOW', rows: [{ ...alma.rows[0]!, dataproduct_type: 'spectrum' }], times: [alma.times[0]!] }, 'overflow');
+    const unsupported = snapshot(SERVICES[1]!, { ...alma, queryStatus: 'OVERFLOW', rows: [{ ...alma.rows[0]!, dataproduct_type: 'spectrum', access_format: 'text/html' }], times: [alma.times[0]!] }, 'overflow');
     const inputs = await loadVoInputs(root, request, catalogue, undefined, async (_root, profile) => {
       if (profile === SERVICES[0]) return empty;
       if (profile === SERVICES[1]) return unsupported;
@@ -36,8 +36,8 @@ test('independent discovery outcomes retain empty, overflow-unsupported, and fai
     });
     assert.deepEqual(inputs.services.map(service => service.state), ['empty-in-scope', 'overflow', 'unavailable']);
     assert.equal(inputs.records.length, 1); assert.equal(inputs.records[0]!.products.length, 0);
-    // Spectra are acquirable since family coverage; this row stops because ALMA truncates its MIME to "applicati".
-    assert.match(inputs.records[0]!.issues.join('\n'), /No supported decoder for applicati\./u);
+    // Spectra are acquirable since family coverage; this row stops at a MIME with no decoder, without any network access.
+    assert.match(inputs.records[0]!.issues.join('\n'), /No supported decoder for text\/html\./u);
   } finally { await rm(root, { recursive: true, force: true }); }
 });
 
