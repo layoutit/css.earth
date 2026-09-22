@@ -58,7 +58,7 @@ test("a prepared sky carries only the orientation its camera reads", () => {
   }
 });
 
-test("every planet package prepares its sky for the shared camera without private imagery", () => {
+test("every object package prepares its sky for the shared camera without private imagery", () => {
   for (const [objectId, sky] of Object.entries(OBJECT_SKIES)) {
     const data = requireRecord(validatePreparedCubicSky(sky));
     for (const field of RETIRED_SKY_FIELDS) assert.equal(field in data, false, `${objectId}: ${field}`);

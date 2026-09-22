@@ -50,7 +50,7 @@ async function rejectGitTrackedAssets(objectId: string, root: string, filenames:
   if (!tracked.size) return;
   const trackedNames = filenames.filter(name => tracked.has(resolve(root, name)));
   if (!trackedNames.length) return;
-  throw new TypeError(`Planet ${objectId} inventory includes git-tracked file(s), which setup:assets would silently overwrite: ${trackedNames.join(", ")}.`);
+  throw new TypeError(`Object ${objectId} inventory includes git-tracked file(s), which setup:assets would silently overwrite: ${trackedNames.join(", ")}.`);
 }
 
 export function normalizeRuntimeAssetUrls({ objectId, urls }: { objectId: string; urls: readonly string[] }) {
@@ -65,11 +65,11 @@ export function normalizeRuntimeAssetUrls({ objectId, urls }: { objectId: string
     if (typeof url !== "string" || !url.startsWith(prefix) ||
         url.slice(prefix.length) !== basename(url) ||
         !SAFE_FILENAME.test(basename(url))) {
-      throw new TypeError(`Planet ${objectId} has an unsafe runtime asset URL.`);
+      throw new TypeError(`Object ${objectId} has an unsafe runtime asset URL.`);
     }
     const filename = basename(url);
     if (seenUrls.has(url) || seenFilenames.has(filename)) {
-      throw new TypeError(`Planet ${objectId} repeats runtime asset ${filename}.`);
+      throw new TypeError(`Object ${objectId} repeats runtime asset ${filename}.`);
     }
     seenUrls.add(url);
     seenFilenames.add(filename);
@@ -90,16 +90,16 @@ export function validateInventory(objectId: string, input: unknown): true {
   const inventory = input as Inventory;
   if (!inventory || typeof inventory !== "object" || isArray(inventory) || inventory.schema !== INVENTORY_SCHEMA ||
       !isArray(inventory.assets) || inventory.assets.length === 0) {
-    throw new TypeError(`Planet ${objectId} inventory is incompatible.`);
+    throw new TypeError(`Object ${objectId} inventory is incompatible.`);
   }
   const seen = new Set<string>();
   for (const asset of inventory.assets) {
     if (!asset || typeof asset !== "object" || !ASSET_LOCATIONS.includes(asset.location) || typeof asset.filename !== "string" ||
         !safeAssetPath(asset.location, asset.filename) || !Number.isSafeInteger(asset.bytes) || asset.bytes <= 0 || !SHA256.test(asset.sha256 ?? "")) {
-      throw new TypeError(`Planet ${objectId} has an invalid inventory entry.`);
+      throw new TypeError(`Object ${objectId} has an invalid inventory entry.`);
     }
     const key = `${asset.location}/${asset.filename}`;
-    if (seen.has(key)) throw new TypeError(`Planet ${objectId} repeats inventory entry ${key}.`);
+    if (seen.has(key)) throw new TypeError(`Object ${objectId} repeats inventory entry ${key}.`);
     seen.add(key);
   }
   return true;
@@ -196,8 +196,8 @@ export async function inventoryPreparedAssets({ objectId, objectDirectory, prepa
   const excluded = new Set(exclude);
   const names = [...(filenames ?? (await bakedPreparedFiles(preparedRoot, objectId)).filter(name => !excluded.has(name)))]
     .sort((left, right) => left.localeCompare(right));
-  for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Planet ${objectId} has an unsafe prepared asset path: ${name}.`);
-  if (new Set(names).size !== names.length) throw new TypeError(`Planet ${objectId} repeats a prepared asset path.`);
+  for (const name of names) if (!safeAssetPath('prepared', name)) throw new TypeError(`Object ${objectId} has an unsafe prepared asset path: ${name}.`);
+  if (new Set(names).size !== names.length) throw new TypeError(`Object ${objectId} repeats a prepared asset path.`);
   await rejectGitTrackedAssets(objectId, preparedRoot, names, gitTrackedPaths);
   return updateInventory({ objectId, objectDirectory, location: 'prepared', assets: await hashedAssets(preparedRoot, names, objectId) });
 }
@@ -231,8 +231,8 @@ export async function verifyInventory({ objectId, inventory, preparedRoot, publi
     if (closure) await assertDirectoryClosure(root, assets.map(({ filename }) => filename), objectId, location === 'prepared', exclude);
     for (const asset of assets) {
       const bytes = await readFile(resolve(root, asset.filename)).catch(() => null);
-      if (!bytes) throw new Error(`Planet ${objectId} inventory closure mismatch. Missing: ${asset.filename}.`);
-      if (bytes.byteLength !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Planet ${objectId} ${location} asset drifted: ${asset.filename}.`);
+      if (!bytes) throw new Error(`Object ${objectId} inventory closure mismatch. Missing: ${asset.filename}.`);
+      if (bytes.byteLength !== asset.bytes || sha256(bytes) !== asset.sha256) throw new Error(`Object ${objectId} ${location} asset drifted: ${asset.filename}.`);
     }
   }
   return true;
@@ -258,6 +258,6 @@ async function assertDirectoryClosure(root: string, filenames: readonly string[]
   if (expected.join("\0") !== actual.join("\0")) {
     const expectedSet = new Set(expected), actualSet = new Set(actual);
     const missing = expected.filter(filename => !actualSet.has(filename)), undeclared = actual.filter(filename => !expectedSet.has(filename));
-    throw new Error(`Planet ${objectId} inventory closure mismatch. Missing: ${missing.join(", ") || "none"}. Undeclared: ${undeclared.join(", ") || "none"}.`);
+    throw new Error(`Object ${objectId} inventory closure mismatch. Missing: ${missing.join(", ") || "none"}. Undeclared: ${undeclared.join(", ") || "none"}.`);
   }
 }

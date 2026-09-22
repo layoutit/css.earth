@@ -6,7 +6,7 @@ import { sourceTest } from '../../tests/objects/source-test.mts';
 const test = sourceTest();
 import { OBJECTS, SCENE_OBJECTS } from "../objects.mts";
 import { authoredObjectFixture } from "./authored-object-fixture.mts";
-import { objectNavigation, SEARCH_OBJECTS, NAVIGATION_OBJECTS } from "../search-objects.mts";
+import { objectNavigation, SEARCH_OBJECTS, PLANET_NAVIGATION_OBJECTS } from "../search-objects.mts";
 import { BODY_MARKER_ATLAS_PAGE_SIZE, loadMarkerDescriptors } from "../../tools/prepare/prepare-navigation.mts";
 import { markerStyle, resolveMarkerStyle, validateMarkerPresentation } from "../../src/navigation/marker-presentation.mts";
 import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs";
@@ -14,14 +14,14 @@ import { PREPARED_NAVIGATION_MARKERS } from "../prepared-navigation-markers.mjs"
 test("search contains every object, including the Sun; only planets enter the scale", () => {
   assert.deepEqual(new Set(SEARCH_OBJECTS), new Set(OBJECTS));
   assert.ok(SEARCH_OBJECTS.some(({ id }) => id === "sun"));
-  assert.ok(NAVIGATION_OBJECTS.every(({ classification }) => classification === "planet"));
+  assert.ok(PLANET_NAVIGATION_OBJECTS.every(({ classification }) => classification === "planet"));
   const unknown = [
     { id: "future-dwarf", classification: "dwarf-planet", distance: { meters: 40 } },
-    { id: "future-object", classification: "planet", distance: { meters: 4 } },
+    { id: "future-planet", classification: "planet", distance: { meters: 4 } },
     { id: "future-star", classification: "star", distance: { meters: 0 } },
   ];
-  assert.deepEqual(objectNavigation(unknown).search.map(({ id }) => id), ["future-star", "future-object", "future-dwarf"]);
-  assert.deepEqual(objectNavigation(unknown).planets.map(({ id }) => id), ["future-object"]);
+  assert.deepEqual(objectNavigation(unknown).search.map(({ id }) => id), ["future-star", "future-planet", "future-dwarf"]);
+  assert.deepEqual(objectNavigation(unknown).planets.map(({ id }) => id), ["future-planet"]);
 });
 
 test("prepared marker atlases and presentation follow packages", async () => {

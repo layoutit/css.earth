@@ -50,7 +50,7 @@ test("restores the previous complete batch when publication fails", async (conte
     rm,
     writeFile,
     async rename(from: PathLike, to: PathLike) {
-      if (String(from).includes(".planets-staging-")) {
+      if (String(from).includes(".object-information-staging-")) {
         const error = Object.assign(new Error("injected publication failure"), {code:"EIO"});
         throw error;
       }
@@ -82,8 +82,8 @@ test("preserves both publication and restoration failures", async (context) => {
     rm,
     writeFile,
     async rename(from: PathLike, to: PathLike) {
-      if (String(from).includes(".planets-staging-")) throw publicationFailure;
-      if (String(from).includes(".planets-backup-")) throw restorationFailure;
+      if (String(from).includes(".object-information-staging-")) throw publicationFailure;
+      if (String(from).includes(".object-information-backup-")) throw restorationFailure;
       await rename(from, to);
     },
   };
@@ -96,7 +96,7 @@ test("preserves both publication and restoration failures", async (context) => {
     (error) => {
       assert.ok(error instanceof Error);
       assert.match(error.message, /previous batch could not be restored/u);
-      assert.match(error.message, /.planets-backup-/u);
+      assert.match(error.message, /.object-information-backup-/u);
       assert.ok(error.cause instanceof AggregateError);
       assert.deepEqual(error.cause.errors, [publicationFailure, restorationFailure]);
       return true;

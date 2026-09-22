@@ -18,4 +18,4 @@ export function objectNavigation<T extends { distance: { meters: number }; class
 
 const navigation = objectNavigation(OBJECTS);
 export const SEARCH_OBJECTS = navigation.search;
-export const NAVIGATION_OBJECTS = navigation.planets;
+export const PLANET_NAVIGATION_OBJECTS = navigation.planets;

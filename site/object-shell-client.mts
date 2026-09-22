@@ -62,7 +62,7 @@ export function mountObjectShell({
 }: ShellOptions) {
   const drawer = requiredElement(documentTarget, ".object-drawer-content");
   if (!(drawer instanceof windowTarget.HTMLElement)) {
-    throw new Error("Planet shell information drawer is missing.");
+    throw new Error("Object shell information drawer is missing.");
   }
   const lifetime = createSceneLifetime();
   const fragments = navigationFragments(windowTarget);
@@ -341,13 +341,13 @@ function createLensBrowserController(drawer: HTMLElement, windowTarget: BrowserW
     requiredElement<HTMLButtonElement>(option, 'button[name="dataset"]'));
   if (options.length === 0 || buttons.some((button) =>
     !(button instanceof windowTarget.HTMLButtonElement))) {
-    throw new Error("Planet shell surface lens browser has no valid lenses.");
+    throw new Error("Object shell surface lens browser has no valid lenses.");
   }
 
   const details = [...information.querySelectorAll<HTMLElement>("[data-lens-details]")];
   const lensIds = new Set(buttons.map((button) => button.value));
   if (details.some((detail) => !lensIds.has(detail.dataset.lensDetails ?? ""))) {
-    throw new Error("Planet shell surface lens details have no matching lens.");
+    throw new Error("Object shell surface lens details have no matching lens.");
   }
 
   const renderSelection = () => {
@@ -385,7 +385,7 @@ function createSettingsController(
   lifetime: SceneLifetime,
 ) {
   if (typeof onMotionChange !== "function") {
-    throw new TypeError("Planet shell motion change handler must be a function.");
+    throw new TypeError("Object shell motion change handler must be a function.");
   }
   const motion = documentTarget.querySelector(".object-motion-setting");
   const heliosphere = documentTarget.querySelector(".object-heliosphere-setting");
@@ -403,7 +403,7 @@ function createSettingsController(
       !(minimap instanceof windowTarget.HTMLInputElement) ||
       !(threeDStars instanceof windowTarget.HTMLInputElement) ||
       (speed !== null && !(speed instanceof windowTarget.HTMLInputElement))) {
-    throw new Error("Planet shell settings controls are incomplete.");
+    throw new Error("Object shell settings controls are incomplete.");
   }
   const events = new AbortController();
   lifetime.onDispose(() => events.abort());
@@ -508,7 +508,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
       !(browser instanceof windowTarget.HTMLElement) ||
       !(selectedContent instanceof windowTarget.HTMLElement) ||
       !(empty instanceof windowTarget.HTMLElement)) {
-    throw new Error("Planet shell object browser is incomplete.");
+    throw new Error("Object shell object browser is incomplete.");
   }
   // Search/navigation and the selection share one sidebar content owner. The
   // selected content stays retained while the browser temporarily replaces it.
@@ -564,7 +564,7 @@ function createObjectBrowserController(documentTarget: Document, windowTarget: B
   const cataloguePin = items.length === 0 ? readCatalogueFragmentPin(resultsPanel) : null;
   const catalogueIndexPin = items.length === 0 ? readCatalogueIndexPin(resultsPanel) : null;
   if (items.length === 0 && !catalogueIndexPin && !cataloguePin) {
-    throw new Error("Planet shell object browser has no objects.");
+    throw new Error("Object shell object browser has no objects.");
   }
   const remoteCatalogue = catalogueIndexPin ?? cataloguePin;
   const catalogueLoading = remoteCatalogue ? resultsPanel.querySelector<HTMLElement>('[data-catalogue-loading]') : null;
@@ -1172,7 +1172,7 @@ function createChartSwitcherController(drawer: HTMLElement, windowTarget: Browse
     return Object.freeze({ destroy() {} });
   }
   if (!(switcher instanceof windowTarget.HTMLElement)) {
-    throw new Error("Planet shell chart switcher is invalid.");
+    throw new Error("Object shell chart switcher is invalid.");
   }
   const previous = switcher.querySelector('.object-chart-step[data-chart-step="-1"]');
   const next = switcher.querySelector('.object-chart-step[data-chart-step="1"]');
@@ -1183,13 +1183,13 @@ function createChartSwitcherController(drawer: HTMLElement, windowTarget: Browse
   if (!(previous instanceof windowTarget.HTMLButtonElement) ||
       !(next instanceof windowTarget.HTMLButtonElement) ||
       slides.length === 0 || labels.length !== slides.length) {
-    throw new Error("Planet shell chart switcher is incomplete.");
+    throw new Error("Object shell chart switcher is incomplete.");
   }
   const chartIds = slides.map((slide) => slide.dataset.chartId ?? "");
   if (chartIds.some((id) => id.length === 0) ||
       new Set(chartIds).size !== chartIds.length ||
       labels.some((label) => !chartIds.includes(label.dataset.chartLabel ?? ""))) {
-    throw new Error("Planet shell chart switcher identities are incomplete.");
+    throw new Error("Object shell chart switcher identities are incomplete.");
   }
 
   const events = new AbortController();
@@ -1242,7 +1242,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
   if (!(sheet instanceof windowTarget.HTMLElement) ||
       !(handle instanceof windowTarget.HTMLInputElement) ||
       !(search instanceof windowTarget.HTMLInputElement)) {
-    throw new Error("Planet shell sheet is incomplete.");
+    throw new Error("Object shell sheet is incomplete.");
   }
   const { body } = documentTarget;
   const { states, dragSlopPixels, flingPixelsPerMillisecond, flingFreshnessMilliseconds,
@@ -1272,7 +1272,7 @@ function createSheetController(documentTarget: Document, windowTarget: BrowserWi
     const peek = Number.parseFloat(style.getPropertyValue("--sheet-peek"));
     const half = Number.parseFloat(style.getPropertyValue("--sheet-half"));
     if (!Number.isFinite(peek) || !Number.isFinite(half)) {
-      throw new Error("Planet shell sheet heights are missing.");
+      throw new Error("Object shell sheet heights are missing.");
     }
     const height = sheet.offsetHeight;
     return { peek: Math.max(0, height - peek), half: Math.max(0, height - half), full: 0 };
@@ -1475,7 +1475,7 @@ function createPanelController(drawer: HTMLElement, objectId: string, windowTarg
   const storageKey = `css.earth:${objectId}:panels`;
   const informationPanel = drawer.querySelector<HTMLElement>(".object-information-panel");
   if (!(informationPanel instanceof windowTarget.HTMLElement)) {
-    throw new Error("Planet shell combined information panel is missing.");
+    throw new Error("Object shell combined information panel is missing.");
   }
   const panels = [...informationPanel.querySelectorAll<HTMLElement>(':scope > details, :scope > [data-information-panel] > details')]
     .filter((element) => element instanceof windowTarget.HTMLDetailsElement)
@@ -1531,6 +1531,6 @@ function restorePanelState(panels: readonly Panel[], objectId: string, windowTar
 }
 
 function panelKey(panel: HTMLDetailsElement) {
-  if (!panel.id) throw new Error("Planet shell panel identity is missing.");
+  if (!panel.id) throw new Error("Object shell panel identity is missing.");
   return panel.id;
 }

@@ -47,7 +47,7 @@ export async function discoverObjectTests(
   const runners = (await readDirectory(shared)).filter(isTest).sort().map((filename) => resolve(shared, filename));
   const tests = [...own, ...runners];
   if (tests.length === 0) {
-    throw new Error(`Implemented planet ${id} has no tests.`);
+    throw new Error(`Implemented object ${id} has no tests.`);
   }
   return tests;
 }
@@ -77,7 +77,7 @@ export async function resolveObjectAssembly(
   try {
     await accessFile(script);
   } catch (cause) {
-    throw new Error(`Implemented planet ${id} assembly script is missing.`, { cause });
+    throw new Error(`Implemented object ${id} assembly script is missing.`, { cause });
   }
   return script;
 }
@@ -103,7 +103,7 @@ export async function resolveObjectCommand(
   try {
     await accessFile(script);
   } catch (cause) {
-    throw new Error(`Implemented planet ${id} ${mode} script is missing.`, {
+    throw new Error(`Implemented object ${id} ${mode} script is missing.`, {
       cause,
     });
   }
@@ -335,7 +335,7 @@ function objectOwnedScript(id: string, path: string, projectRoot: string) {
 function run(command: string, argumentsList: readonly string[], env?: NodeJS.ProcessEnv) {
   return runObjectCommand({ command, argumentsList, env }).then(({ exitCode, signal }) => {
     if (exitCode !== 0 || signal !== null) throw new Error(
-      `Implemented planet command failed with ${signal ?? `exit ${exitCode}`}.`,
+      `Implemented object command failed with ${signal ?? `exit ${exitCode}`}.`,
     );
   });
 }
