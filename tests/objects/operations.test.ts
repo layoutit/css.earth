@@ -1,12 +1,13 @@
-import {test} from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import assert from 'node:assert/strict';
 import {mkdtemp,writeFile,readFile,mkdir,rm,readdir} from 'node:fs/promises';
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {createHash} from 'node:crypto';
-import {containedPath,parseSourceManifest,verifySources,publishPinnedSource,collectRuntimeAssetUrls,prepareRuntimeManifest,assembleRuntimeAssets,restoreMissingSources} from '../../tools/objects/operations.js';
-import type {SourceEntry,SourceManifest} from '../../tools/objects/operations.js';
-import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/operations-acquisition.js';
+import {containedPath,parseSourceManifest,verifySources,publishPinnedSource,collectRuntimeAssetUrls,prepareRuntimeManifest,assembleRuntimeAssets,restoreMissingSources} from '../../tools/objects/dist/operations.js';
+import type {SourceEntry,SourceManifest} from '../../tools/objects/dist/operations.js';
+import {executeAcquisition,parseAcquisitionPlan} from '../../tools/objects/dist/operations.js';
 const sha=(data:Uint8Array)=>createHash('sha256').update(data).digest('hex');
 const entry=(path:string,_data:Uint8Array):SourceEntry=>({path});
 const temporary=async(work:(root:string)=>Promise<void>)=>{const root=await mkdtemp(join(tmpdir(),'object-operations-'));try{await work(root);}finally{await rm(root,{recursive:true,force:true});}};

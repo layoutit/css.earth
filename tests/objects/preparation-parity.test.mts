@@ -2,7 +2,8 @@ import {required} from '../../tools/contract/test-values.mts';
 import assert from 'node:assert/strict';
 import { readdir } from 'node:fs/promises';
 import { resolve } from 'node:path';
-import test from 'node:test';
+import { sourceTest } from './source-test.mts';
+const test = sourceTest();
 import { readPreparedFixture, projectRoot } from './fixtures.mts';
 
 for (const id of ['mercury', 'venus']) {

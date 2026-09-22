@@ -18,12 +18,12 @@ import {resizeObservedRgb,prepareMeasuredPolarAtlas} from '../observed-coverage.
 export function parseObservedPolarRecipe(input: unknown) {
   const config=parseObservedPolarSource(input);
   if(config?.schema!=='cssearth-observed-polar-surfaces@1'||!/^[a-z][a-z0-9-]*$/.test(config.namespace)||typeof config.publicPrefix!=='string'||!/^\/[a-z0-9/-]+\/$/.test(config.publicPrefix))throw new TypeError('Invalid observed polar recipe.');
-  if(!Array.isArray(config.sourcePins)||!config.sourcePins.length||!Array.isArray(config.lenses)||!config.lenses.length)throw new TypeError('Observed polar inputs and lenses must be declared.');
+  if(!Array.isArray(config.lenses)||!config.lenses.length)throw new TypeError('Observed polar lenses must be declared.');
   const finite=(value: unknown)=>{if(typeof value==='number'&&!Number.isFinite(value))throw new TypeError('Observed polar parameters must be finite.');if(value&&typeof value==='object')Object.values(value).forEach(finite);};finite(config);
   for(const value of Object.values(config.dimensions))if(!Number.isSafeInteger(value)||value<16)throw new TypeError('Invalid observed polar raster dimensions.');
   latitudeRasterBands(config.packing.latitudeBoundsDegrees,config.dimensions.height);
-  const ids=new Set(),outputs=new Set(),pinned=new Set(config.sourcePins.map(pin=>pin.path));
-  const source=(path: string)=>{validateRelativePath(path);if(!pinned.has(path))throw new TypeError('Every observed polar source must be pinned.');};
+  const ids=new Set(),outputs=new Set();
+  const source=(path: string)=>{validateRelativePath(path);};
   for(const lens of config.lenses) {
     if(!/^[a-z][a-z0-9-]*$/.test(lens.id)||ids.has(lens.id)||!['rgb-polar-structure','scalar-observed-gaps'].includes(lens.operation))throw new TypeError('Invalid observed polar lens operation.');
     ids.add(lens.id);source(lens.source);

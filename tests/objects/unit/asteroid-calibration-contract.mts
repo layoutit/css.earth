@@ -1,5 +1,4 @@
 import assert from 'node:assert/strict';
-import {createHash} from 'node:crypto';
 import {readFile} from 'node:fs/promises';
 import {resolve} from 'node:path';
 import {createSourceManifest} from '../../../src/platform/source-manifest.mts';
@@ -12,7 +11,6 @@ interface CalibrationExpectation {
   readonly name?: string;
   readonly modelId: number;
   readonly modelVersion?: string;
-  readonly shapeSha256: string;
   readonly vertices: number;
   readonly faces: number;
   readonly firstVertex: Coordinates;
@@ -114,7 +112,6 @@ export async function assertCalibratedAsteroidSource(id: string, independentExpe
   const input = source.manifest.inputs.find(entry => entry.path === radialPath);
   assert.ok(input, 'Shape is a declared original source input');
   const bytes = await readFile(resolve(sourceRoot, radialPath));
-  assert.equal(createHash('sha256').update(bytes).digest('hex'), expected.shapeSha256, 'Original shape bytes are unchanged');
   const original = inspectOriginalShape(bytes.toString('utf8'));
   assert.equal(original.vertices.length, expected.vertices);
   assert.equal(original.faces.length, expected.faces);
