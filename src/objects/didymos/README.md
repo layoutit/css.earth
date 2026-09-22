@@ -76,7 +76,7 @@ Named features run of 2026-09-18 (this version, re-pinned from the 2026-09-12 ru
 
 Smooth regions may lack image coverage; zero sigma can mean one or no images. The release reports about 3.3% volume uncertainty. Shape-specific pole/scale are retained despite later PCK15 revisions and errors in the source coordinate document. Display phase is arbitrary. The heliocentric system-barycentre position approximates the primary, omitting about 10 m of wobble; it is not an exact primary-centre ephemeris.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="didymos-sources-and-interpretation"></a>
 <a id="selected-shape"></a>

@@ -40,7 +40,7 @@ Named features: the IAU/USGS Gazetteer of Planetary Nomenclature centre-point sh
 
 - **Faithfulness status:** The Monochrome lens is retained as a coarse observation, but its two-dimensional center translation and illuminated-outline fit do not establish surface-feature registration. Elevation remains the supported shape-derived view.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md) · [Investigation ledger](investigations.json)
 
 ## Methods and source notes
 

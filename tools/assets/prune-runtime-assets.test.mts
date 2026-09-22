@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { resolve } from 'node:path';
 import test from 'node:test';
 import { computePruneCandidates, currentlyInventoriedKeys, listRuntimeAssetKeys } from './prune-runtime-assets.mts';
-import { preparePreparedAssetManifest } from '../../src/platform/runtime-asset-closure.mts';
+import { inventoryPreparedAssets } from '../../src/platform/runtime-asset-closure.mts';
 
 test('computePruneCandidates keeps only keys absent from the inventory, and totals their bytes', () => {
   const live = [
@@ -32,15 +32,14 @@ test('computePruneCandidates refuses a live key outside runtime-assets/, never s
   assert.throws(() => computePruneCandidates([{ key: 'scenes/earth/tiles/x.webp', bytes: 10 }], new Set()), /Refusing.*runtime-assets\//);
 });
 
-test('currentlyInventoriedKeys reads real runtime-assets.json/prepared-assets.json keys from a fixture object', async t => {
+test('currentlyInventoriedKeys reads real inventory.json keys from a fixture object', async t => {
   const root = await mkdtemp(resolve(tmpdir(), 'prune-inventory-'));
   t.after(() => rm(root, { recursive: true, force: true }));
   const preparedDirectory = resolve(root, 'src/objects/fixture-body/prepared');
   await mkdir(preparedDirectory, { recursive: true });
   await writeFile(resolve(preparedDirectory, 'runtime.json'), 'runtime-bytes');
   await writeFile(resolve(preparedDirectory, 'scene.json'), 'scene-bytes');
-  await preparePreparedAssetManifest({ planetId: 'fixture-body', preparedRoot: preparedDirectory,
-    manifestPath: resolve(preparedDirectory, '..', 'prepared-assets.json'), filenames: ['runtime.json', 'scene.json'] });
+  await inventoryPreparedAssets({ planetId: 'fixture-body', objectDirectory: resolve(preparedDirectory, '..'), preparedRoot: preparedDirectory, filenames: ['runtime.json', 'scene.json'], gitTrackedPaths: async () => new Set() });
   const keys = await currentlyInventoriedKeys(root);
   assert.equal(keys.size, 2);
   for (const key of keys) assert.match(key, /^runtime-assets\/[0-9a-f]{64}\/(runtime|scene)\.json$/);

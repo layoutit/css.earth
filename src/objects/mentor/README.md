@@ -27,7 +27,7 @@ L5 Jupiter Trojan. Source records checked 2026-09-09.
 - Absolute phase is arbitrary; accelerated display spin is illustrative. Orbit context is fixed at 2026-09-03 TT. The archive also lists an alternative pole.
 - Hanuš et al. (2023), [*Shape models and spin states of Jupiter Trojans: Testing the streaming instability formation scenario*](https://arxiv.org/abs/2308.05380v1), Table B.2 revises the shape/spin solution. The recorded public target query did not expose its numerical mesh; this view keeps the older mesh and matching pole.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods
 

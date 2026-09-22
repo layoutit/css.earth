@@ -1,4 +1,5 @@
 import { parseGalaxyDisplaySampling, prepareGalaxyDisplaySample } from '../../src/preparation/galaxy-catalog/display-sample.js';
+import { readInventory, updateInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { mkdir, readFile, rename, writeFile } from 'node:fs/promises';
 import { basename, dirname, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
@@ -53,9 +54,12 @@ export async function prepareGalaxyCatalogObject(options: { objectDirectory: str
     sourceRows: rows.length, objects: data.objects.length, exclusions: data.exclusions.length,
     localGroup: data.objects.filter(row => row.membership.group === 'local-group').length,
     confirmedLocalGroup: data.objects.filter(row => row.membership.group === 'local-group' && row.status === 'confirmed').length };
-  // The receipt is the context's tracked output inventory and lives beside object.json; nothing under prepared/ is tracked.
-  await writeFile(resolve(outputDirectory, '..', 'prepared-receipt.json'), JSON.stringify(receipt, null, 2) + '\n');
   if (outputDirectory === resolve(objectDirectory, 'prepared')) {
+    // The catalogue's outputs are the context's prepared inventory; the provenance step adds its record and presentation.
+    const current = await readInventory(basename(objectDirectory), objectDirectory);
+    const kept = current?.assets.filter(asset => asset.location === 'prepared' && !receipt.outputs.some(output => output.path === asset.filename)) ?? [];
+    await updateInventory({ planetId: basename(objectDirectory), objectDirectory, location: 'prepared',
+      assets: [...kept, ...receipt.outputs.map(output => ({ filename: output.path, bytes: output.bytes, sha256: output.sha256 }))] });
     const descriptor = { schema: 'cssearth-object@1', id: basename(objectDirectory), type: 'galaxy-catalog',
       properties: { preparation: { source: 'source/catalogue.json', sha256: sha256(recipeBytes) } },
       prepared: { format: data.schema, url: 'prepared/catalogue.json', sha256: sha256(bytes) } };

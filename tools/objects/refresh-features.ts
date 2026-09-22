@@ -2,6 +2,7 @@
 // authored source pins, re-run the shared feature attachment against the prepared runtime definition, and rewrite the
 // catalogue, the runtime plan, the content document, the runtime asset manifest, the prepared provenance and the
 // object descriptor. Usage: node tools/objects/dist/refresh-features.js <objectId> [...]
+import { updateInventory } from '../../src/platform/runtime-asset-closure.mts';
 import { sha256 } from '../../src/platform/sha256.mts';
 import { readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
@@ -24,8 +25,7 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   await writeFeatureContent(outputDirectory, attached.features);
   await writeFile(resolve(outputDirectory, 'runtime.json'), `${JSON.stringify(attached.definition)}\n`);
   // Only the feature transport changed among the delivered assets: replace its label catalogue and selection banks.
-  const manifestPath = resolve(objectDirectory, 'runtime-assets.json');
-  const manifest = parseRuntimeManifest(JSON.parse(await readFile(manifestPath, 'utf8')), id);
+  const manifest = parseRuntimeManifest(JSON.parse(await readFile(resolve(objectDirectory, 'inventory.json'), 'utf8')), id);
   const plan = record(record(attached.definition, 'definition').features, 'features plan');
   const catalog = record(plan.catalog, 'catalog');
   const urls = [String(catalog.url)];
@@ -45,8 +45,7 @@ export async function refreshObjectFeatures(id: string): Promise<{ count: number
   const assets = [...manifest.assets.filter(asset => asset.filename !== catalogName &&
     !(asset.filename.startsWith(`${stem}-selection-`) && asset.filename.endsWith('.json'))), ...entries]
     .sort((a, b) => a.filename.localeCompare(b.filename));
-  const manifestText = `${JSON.stringify({ ...manifest, assets }, null, 2)}\n`;
-  await writeFile(manifestPath, manifestText);
+  await updateInventory({ planetId: id, objectDirectory, location: 'public', assets });
   const { prepareObjectProvenance } = await import(pathToFileURL(resolve(process.cwd(), 'tools/objects/provenance.mts')).href) as typeof import('./provenance.mts');
   // Feature preparation verified its own inputs above. The unchanged surfaces are reused from
   // their delivery pins, not rebaked: record recovered lineage instead of claiming a fresh

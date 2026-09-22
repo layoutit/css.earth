@@ -51,10 +51,10 @@ test('a new maintained test import is discovered without adding its body to a li
 test('only imported pinned JSON is restored; an unrelated missing texture never gets requested', async t => {
   const { root, write } = await fixture(t);
   const bytes = Buffer.from('{"actual":"prepared data"}'), sha256 = createHash('sha256').update(bytes).digest('hex');
-  await write('src/objects/body/prepared-assets.json', {
-    schema: 'cssbody-prepared-assets@1', resourceRoot: 'prepared', assets: [
-      { filename: 'runtime.json', bytes: bytes.length, sha256 },
-      { filename: 'unrelated.webp', bytes: 123, sha256: '0'.repeat(64) },
+  await write('src/objects/body/inventory.json', {
+    schema: 'cssearth-inventory@1', assets: [
+      { location: 'prepared', filename: 'runtime.json', bytes: bytes.length, sha256 },
+      { location: 'prepared', filename: 'unrelated.webp', bytes: 123, sha256: '0'.repeat(64) },
     ],
   });
   const path = resolve(root, 'src/objects/body/prepared/runtime.json');
@@ -79,10 +79,10 @@ test('feature-index preparation selects pinned catalogues and banks, rejecting d
   const bank = { url: '/scenes/body/bank-00.json', bytes: 30, sha256: '2'.repeat(64) };
   const descriptor = { schema: 'cssearth-prepared-features@1', ...pin, selection: { banks: [bank] } };
   await write('src/objects/body/prepared/features.json', descriptor);
-  await write('src/objects/body/runtime-assets.json', { schema: 'cssbody-runtime-assets@1', assets: [
-    { filename: 'features.json', bytes: pin.bytes, sha256: pin.sha256 },
-    { filename: 'bank-00.json', bytes: bank.bytes, sha256: bank.sha256 },
-    { filename: 'surface.webp', bytes: 999, sha256: '3'.repeat(64) },
+  await write('src/objects/body/inventory.json', { schema: 'cssearth-inventory@1', assets: [
+    { location: 'public', filename: 'features.json', bytes: pin.bytes, sha256: pin.sha256 },
+    { location: 'public', filename: 'bank-00.json', bytes: bank.bytes, sha256: bank.sha256 },
+    { location: 'public', filename: 'surface.webp', bytes: 999, sha256: '3'.repeat(64) },
   ] });
   const selected = await typecheckFeatureAssets(root, ['body']);
   assert.deepEqual(selected.assets.map(asset => asset.filename), ['bank-00.json', 'features.json']);

@@ -74,7 +74,7 @@ Feature notes: 43 of the labelled names carry a caption note, the lead summary o
 
 - **Corrected-v2 shape:** Qualification status: source intake and recipe proposal. Salih crater at −5° East and other identifiable features provide cross-solution registration checks; actual image-to-v2 alignment and prepared error remain qualification work. Browser limb and feature qualification remains pending.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

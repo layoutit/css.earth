@@ -59,7 +59,7 @@ Stereo constrains about 40% of the body; the unseen side uses the source authors
 
 Source restoration was not fully unattended: Node rejected the SWRI article certificate chain. Curl with normal certificate validation restored the exact pinned bytes on the qualification host; the workaround is retained below.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="donaldjohanson-sources"></a>
 <a id="selection-and-coverage"></a>

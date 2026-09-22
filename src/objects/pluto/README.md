@@ -42,7 +42,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | monochrome | 147.4 → 172.8 kB |
 | surface | 207.2 → 209.6 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/pluto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/3efdf2c9ed9047c72409b2730e879123f8c3b9d2/src/planets/pluto/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Pluto uses the shared raster lane used by Mercury, Venus and Mars. Photographs,
 elevation and composition share the existing geometry, camera and lighting bank.
@@ -81,7 +81,7 @@ lane's rounded 57° display tilt. Lighting is the Mercury-style Lambert bank
 modelled. Sky orientation is contextual, not a New Horizons camera solution.
 All these choices are prepared; the browser only transports state.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="pluto-source-and-presentation-contract"></a>
 <a id="pinned-inputs"></a>

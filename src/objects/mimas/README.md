@@ -39,7 +39,7 @@ Feature notes: 2 of the labelled names carry a caption note, the lead summary of
 
 - The surface is a coarse approximation of the source mesh; it does not reproduce every small crater. Flood and optional directional Shadows are baked from the mesh normals; photographed local shading is not reconstructed.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 

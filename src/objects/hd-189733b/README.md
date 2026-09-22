@@ -45,4 +45,4 @@ Run of 2026-09-17 (this version): `node tools/prepare/prepare-object.mts hd-1897
 - **Other maps of the same planet are not shown.** The deposit's SPARTA-reduction map (`output_S.npy`), earlier Spitzer eclipse maps and this project's map from raw exposures are in the [investigation ledger](investigations.json).
 - **Assumptions of the frame.** Tidal locking and a pole on the orbit normal are assumed. The orbit's position angle on the sky is not measured by transits; it is set at 0 as a display convention. The planet is a sphere.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)

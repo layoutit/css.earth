@@ -61,7 +61,7 @@ specify the actual 0–360° grid. The shared scalar reader validates the actual
 GeoTIFF. The body remains the independently sized 8.42 km Gaskell mesh;
 the 17 km projection radius only converts map coordinates.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="eros-source-record"></a>
 <a id="selected-data-and-survey"></a>

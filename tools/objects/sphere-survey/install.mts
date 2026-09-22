@@ -257,7 +257,7 @@ export async function restorePinnedInputs(objectId: string) {
 
 /** Scene files an earlier preparation left that the body's runtime inventory does not own, moved aside rather than deleted. */
 export async function moveUnownedSceneFiles(objectId: string) {
-  const scenes = resolve(ROOT, 'public/scenes', objectId), owned = await readFile(resolve(ROOT, 'src/objects', objectId, 'runtime-assets.json'), 'utf8').catch(() => null);
+  const scenes = resolve(ROOT, 'public/scenes', objectId), owned = await readFile(resolve(ROOT, 'src/objects', objectId, 'inventory.json'), 'utf8').catch(() => null);
   if (owned === null) return [];
   const files = await readdir(scenes).catch(() => [] as string[]), moved: string[] = [];
   for (const file of files) {

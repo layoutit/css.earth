@@ -110,7 +110,7 @@ BUILD_OUTPUTS = {'prepared/provenance.json', 'prepared/page.json'}
 
 def build_output(path):
     directory = posixpath.dirname(posixpath.dirname(path))
-    return path[len(directory) + 1:] in BUILD_OUTPUTS and f'{directory}/prepared-assets.json' in known
+    return path[len(directory) + 1:] in BUILD_OUTPUTS and f'{directory}/inventory.json' in known
 
 errors, checked = [], 0
 markdown = sorted(path for path in (known if args.all else changed) if path.endswith('.md'))

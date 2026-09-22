@@ -69,8 +69,8 @@ Its [delivery recipe](source/delivery.json) records the failed visual qualificat
   image-stability limit; brightness disagreement between axes stays below 5%.
   [Fixed-camera handoffs](evidence/2026-09-21/element-budget/handoffs.json).
 
-The [descriptor](object.json), [prepared inventory](prepared-assets.json) and
-[runtime inventory](runtime-assets.json) pin the current delivery. Earlier fit
+The [descriptor](object.json), [prepared inventory](inventory.json) and
+[runtime inventory](inventory.json) pin the current delivery. Earlier fit
 metrics below still describe its identical field; older captures, byte counts
 and performance timings describe their explicitly dated earlier banks.
 

@@ -91,7 +91,7 @@ Feature notes: 4 of the labelled names carry a caption note, the lead summary of
 
 The visible Stooke shape differs from the Thomas radii used for Elevation, especially in unseen areas and shadowed craters. Neither product establishes global measured terrain. The JPEG has no authoritative validity mask: a narrow edge-connected gray test estimates exterior fill, so ambiguous pixels can remain. Pole, phase and added directional lighting are illustrative.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="mathilde-sources-and-interpretation"></a>
 <a id="selected-products"></a>

@@ -139,8 +139,8 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
     const asset=requireRecord(assetValue),filename=requireString(asset.url).split('/').at(-1)!;
     newAssets.set(filename,{filename,bytes:requireFiniteNumber(asset.bytes),sha256:requireString(asset.sha256)});
   }
-  const inventory=await json(resolve(context.objectDirectory,'runtime-assets.json')),assets=records(inventory.assets);
-  if([...newAssets.keys()].some(filename=>!assets.some(asset=>asset.filename===filename)))throw new Error('Photographic inventory cannot add resources.');
+  const inventory=await json(resolve(context.objectDirectory,'inventory.json')),assets=records(inventory.assets);
+  if([...newAssets.keys()].some(filename=>!assets.some(asset=>asset.location==='public'&&asset.filename===filename)))throw new Error('Photographic inventory cannot add resources.');
   const documents=new Map<string,Record<string,unknown>>();
   for(const name of ['surfaces.json','material.json']) {
     const path=resolve(context.outputDirectory,name),document=await json(path);
@@ -155,8 +155,8 @@ export async function applyStagedTerrainPhotographs(id:string,ids:readonly strin
   await mkdir(context.publicDirectory,{recursive:true});
   for(const asset of newAssets.values())await copyFile(resolve(context.stage,asset.filename),resolve(context.publicDirectory,asset.filename));
   for(const [path,document] of documents)await save(path,document);
-  inventory.assets=assets.map(asset=>newAssets.get(requireString(asset.filename))??asset);
-  await save(resolve(context.objectDirectory,'runtime-assets.json'),inventory);
+  inventory.assets=assets.map(asset=>asset.location==='public'&&newAssets.has(requireString(asset.filename))?{...asset,...newAssets.get(requireString(asset.filename))}:asset);
+  await save(resolve(context.objectDirectory,'inventory.json'),inventory);
   const recipeBytes=await readFile(resolve(context.sourceDirectory,'preparation/terrestrial.json'));
   for(const entry of records(context.source.documents))if(entry.path==='preparation/terrestrial.json') {
     entry.expectedBytes=recipeBytes.length;entry.expectedSha256=sha256(recipeBytes);

@@ -1,0 +1,137 @@
+{
+  "schema": "cssearth-inventory@1",
+  "assets": [
+    {
+      "location": "public",
+      "filename": "irene-elevation-legend.webp",
+      "bytes": 298,
+      "sha256": "fcf3a0ebb171325b092f81aa23fe6b7e92afb1f7e14f01f6630318370ff74df9"
+    },
+    {
+      "location": "public",
+      "filename": "irene-elevation-shadow@2x.webp",
+      "bytes": 203910,
+      "sha256": "046fe5fe7ece3f849d8cfe6812526de42e63cc72df2abb598862ad0fca7a4fe0"
+    },
+    {
+      "location": "public",
+      "filename": "irene-elevation-surface@2x.webp",
+      "bytes": 331710,
+      "sha256": "669b482205539d3945e74cd66ec247c6009cc7de021f9683bf57388fc674cdeb"
+    },
+    {
+      "location": "public",
+      "filename": "irene-elevation-thumbnail.webp",
+      "bytes": 5744,
+      "sha256": "5ff363a38230a621331a76463eca8bfe3ddb33aac80baa6260a65a1a6b543326"
+    },
+    {
+      "location": "public",
+      "filename": "irene-shape-shadow@2x.webp",
+      "bytes": 86456,
+      "sha256": "01986550c381408c1f3ffd02f2284fab3e70bdfe85a1f00b3e29832b2ce95016"
+    },
+    {
+      "location": "public",
+      "filename": "irene-shape-surface@2x.webp",
+      "bytes": 77178,
+      "sha256": "64fc2d8762f863cd6485d98c49f1485d8c76bf445467895ad8741db598a259ba"
+    },
+    {
+      "location": "public",
+      "filename": "irene-shape-thumbnail.webp",
+      "bytes": 44,
+      "sha256": "0f4d331458e70b865aee37779876a7e0672c01fd4540bbcdc623dcf2508b2862"
+    },
+    {
+      "location": "prepared",
+      "filename": "assets.json",
+      "bytes": 483,
+      "sha256": "a21389aba1f47a7ae22e923dffb24cb0b9b1a1eeafc107f55595f13f33ed6685"
+    },
+    {
+      "location": "prepared",
+      "filename": "content.json",
+      "bytes": 4982,
+      "sha256": "a9f7e3746f4cceb1d73c5556a3a032ecb883d13b9c10bcc1842c12c8533c4b59"
+    },
+    {
+      "location": "prepared",
+      "filename": "controls.json",
+      "bytes": 797,
+      "sha256": "99b4f2fdec1b424e1ebb90bbf0f9deb2582673598d4b7dca25b4970281ebd122"
+    },
+    {
+      "location": "prepared",
+      "filename": "lenses.json",
+      "bytes": 1316,
+      "sha256": "8ff6108a160ea47cb828cecafc589621264aed54210dc59160508d3cc7e2a954"
+    },
+    {
+      "location": "prepared",
+      "filename": "material.json",
+      "bytes": 2823,
+      "sha256": "791b7c19390ea1a27aa022857ca0edb14bb9ecda574ed67f25e9017fe9b4cd8c"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps.json",
+      "bytes": 159,
+      "sha256": "917a4ac8da810126d55a5c04dd073b4678d57abccbd85a8585371517a16a5b65"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/elevation.webp",
+      "bytes": 13064,
+      "sha256": "ace230d3e7c77bd8747f24651d0fad8bea3ff73818e04c7589e160468f6be9e4"
+    },
+    {
+      "location": "prepared",
+      "filename": "minimaps/shape.webp",
+      "bytes": 422,
+      "sha256": "c708cdae5c411d0ba41dde6158f9659ef898650845b0a749acd1a56716d44f62"
+    },
+    {
+      "location": "prepared",
+      "filename": "runtime.json",
+      "bytes": 762651,
+      "sha256": "251bffc03ffa5f49f3b0043f6fa7b4a7e704ab76efd9d2467295300abca584ce"
+    },
+    {
+      "location": "prepared",
+      "filename": "scene.json",
+      "bytes": 619001,
+      "sha256": "debe7871f1e3794f764586ce268f78f6f0f3754c5992d320847c8738ef313212"
+    },
+    {
+      "location": "prepared",
+      "filename": "sky.json",
+      "bytes": 1183,
+      "sha256": "02ffd50f60eb083d37ecfd9cf6bfd731481dab7263a7fdc219ab0ce7674755dd"
+    },
+    {
+      "location": "prepared",
+      "filename": "sun.json",
+      "bytes": 673,
+      "sha256": "00129e32b0e6158e6a4fb2c4e83c48ef1a89fa6d8c94edcd2a51eb483720dd74"
+    },
+    {
+      "location": "prepared",
+      "filename": "surfaces.json",
+      "bytes": 2826,
+      "sha256": "74dfbdc916a424e7d7ae003a778894f9a4913e71572cb2864d7afdd376aeb784"
+    },
+    {
+      "location": "prepared",
+      "filename": "text.json",
+      "bytes": 1450,
+      "sha256": "7c25e19ccb4f3418335a860f779f1d3add2d21aed89e698c7b36aceb47dffeb5"
+    },
+    {
+      "location": "prepared",
+      "filename": "world-navigation.json",
+      "bytes": 1229,
+      "sha256": "dac36f31dfb72df63d972288bf22b146cc00d1841527c170133a609e79dc46b3"
+    }
+  ]
+}

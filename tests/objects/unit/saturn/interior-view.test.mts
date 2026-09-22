@@ -8,7 +8,7 @@ import { readPreparedFixture } from "../../fixtures.mts";
 const PREPARED_PRESENTATION = await readPreparedFixture('saturn', 'runtime');
 const PREPARED_SATURN_SCENE = await readPreparedFixture('saturn', 'scene');
 const PREPARED_SATURN_VIEWS = await readPreparedFixture('saturn', 'views');
-const runtimeAssets = JSON.parse(await readFile(new URL("../../../../src/objects/saturn/runtime-assets.json", import.meta.url), "utf8"));
+const runtimeAssets = JSON.parse(await readFile(new URL("../../../../src/objects/saturn/inventory.json", import.meta.url), "utf8"));
 
 test("publishes a prepared retained Saturn interior view", () => {
   assert.equal(PREPARED_SATURN_VIEWS.schema, "csssaturn-prepared-views@1");

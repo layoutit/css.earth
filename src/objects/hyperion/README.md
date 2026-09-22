@@ -61,7 +61,7 @@ fits on screen; facing and overlap still control display.
 
 - No public release of the newer 2025 mosaic and DEM was located; see the [investigation ledger](investigations.json).
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Filter camera registration
 

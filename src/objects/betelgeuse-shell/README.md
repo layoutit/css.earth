@@ -101,7 +101,7 @@ What this still cannot do is cut a leaf at the limb. The clump covers the whole 
 
 **The 4 micrometre light starts 1.19 stellar radii out.** Within one beam of the disc it cannot be told from the star's own smeared edge. It is one reconstruction of one epoch.
 
-[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Prepared outputs](prepared-assets.json) · [Credits](source/provenance.json)
+[Investigation ledger](investigations.json) · [Inputs](source/manifest.json) · [Prepared outputs](inventory.json) · [Credits](source/provenance.json)
 
 ## What is not verified
 

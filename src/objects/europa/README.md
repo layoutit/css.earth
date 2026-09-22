@@ -42,7 +42,7 @@ Polar sprites now sample the pinned original photographs directly, preserving th
 | --- | --- |
 | normal | 175.2 → 178.0 kB |
 
-These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/europa/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](runtime-assets.json) bind the current preparation. Existing source-resolution and registration limits still apply.
+These download sizes refer only to the polar sprites. Decoded dimensions are unchanged. The scene matches [the previous main version](https://github.com/layoutit/css.earth/tree/c13f3643b53171523dbf59dc92fc7ce49e9c0e24/src/planets/europa/prepared); [the raster recipe](source/preparation/raster.json) and [asset inventory](inventory.json) bind the current preparation. Existing source-resolution and registration limits still apply.
 
 Photographic refresh, 12 September 2026, on base `3efdf2c9`: these matched
 Chrome crops show Pwyll at 1280 × 720, DPR 1. The before atlas was reproduced
@@ -107,7 +107,7 @@ Feature notes: 12 of the labelled names carry a caption note, the lead summary o
 
 - **Reuse:** The Zenodo record is open/`other-open`, but neither the tagged source nor the located record metadata provides explicit terms for reusing the numerical release. Article or preprint licensing does not settle those data rights. The three composition views are therefore withheld: they have no lens, surface recipe or dataset text, and no composition asset is published. The pinned sources, conversion records and evidence stay so the views can return once explicit reuse terms exist.
 
-[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 ## Methods and source notes
 
@@ -149,7 +149,7 @@ The source already contains shadows. The Shadows setting adds approximate spheri
 
 At the pinned preparation epoch, the orbital view uses Europa's parent-relative state and Jupiter's gravitational parameter to prepare an ellipse focused on Jupiter. The Sun retains its separate heliocentric position. The shared solar view approximates planet centres using VSOP87 system barycentres; satellites use the package's JPL mean Kepler elements, not a live high-precision ephemeris. The photographed surface uses IAU body orientation without a manual rotation.
 
-Source hashes, origins, and licenses are pinned in `source/manifest.json`; runtime files are listed in `runtime-assets.json`.
+Source hashes, origins, and licenses are pinned in `source/manifest.json`; runtime files are listed in `inventory.json`.
 
 Original imagery remains unchanged and is excluded from Git. Preparation does not require another body's scene.
 

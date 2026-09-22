@@ -53,7 +53,7 @@ view or qualify its registration.
 
 SPC sigma measures internal maplet agreement, not absolute height uncertainty. Dione used calibrated ISS images.
 
-[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](runtime-assets.json) · [Credits](NOTICE.md)
+[Inputs](source/manifest.json) · [Preparation](source/preparation) · Provenance (`prepared/provenance.json`) · [Delivered files](inventory.json) · [Credits](NOTICE.md)
 
 <a id="dione-sources-and-preparation"></a>
 <a id="photographic-lenses"></a>
