@@ -15,7 +15,7 @@ import { objectRuntimePackageTests, preparedSelectionFixture } from "../../../..
 import { SCENE_OBJECTS } from "../../../../site/objects.mts";
 import { auditObjectRuntimeOwnership } from "../../../../tools/ci/check-object-runtime-ownership.mts";
 
-const LENS_IDS = ["normal","elevation"];
+const LENS_IDS = ["normal","elevation","voyager-color"];
 
 objectRuntimePackageTests(runtimeDefinition);
 

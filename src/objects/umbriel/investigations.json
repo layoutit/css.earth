@@ -137,6 +137,23 @@
           "commit": "65b64105aefbc30658164868ba85e905f030950a"
         }
       ]
+    },
+    {
+      "id": "voyager-iss-color-2026",
+      "subject": "Voyager 2 ISS green/violet/ultraviolet colour frames",
+      "status": "included",
+      "finding": "3 GEOMED frames in 1 complete sets (16.9 km per pixel) placed by limb fit and mosaic registration supply the Voyager color lens. Whole-disc violet/green and ultraviolet/green are tied to Bell and McCord (1991) Fig. 2 (1.0, 1.03); the archive calibration gives 0.948 and 1.010. No phase normalisation; the north stays unavailable.",
+      "evidence": [
+        "https://github.com/layoutit/css.earth/blob/HEAD/src/objects/umbriel/README.md",
+        "https://github.com/layoutit/css.earth/blob/HEAD/src/objects/umbriel/source/reference/voyager-color-placement.json",
+        "https://ui.adsabs.harvard.edu/abs/1991LPSC...21..473B"
+      ],
+      "checked": [
+        {
+          "date": "2026-09-22",
+          "commit": "HEAD"
+        }
+      ]
     }
   ]
 }
